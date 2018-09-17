@@ -1,0 +1,1206 @@
+#site_header {
+    width: 100%;
+    background-clip: padding-box;
+    position: relative;
+    z-index: 10;
+    transition: all 0.2s ease-in-out 0s;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 44px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        height: 50px;
+        left: 0;
+        right: 0;
+        z-index: 12;
+        box-shadow: 0 0 5px rgba(#000, .3);
+        margin: 0 0 25px;
+        background: $white;
+
+        &:before {
+            display: none;
+        }
+    }
+
+    .scroll-top & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            top: -44px;
+        }
+    }
+
+    .dark & {
+        background: $main-color;
+    }
+    &:before {
+        position: fixed;
+        top: 0;
+        height: 0;
+        left: 0;
+        width: 100%;
+        background: rgba($gray, .4);
+        z-index: 9;
+        content: '';
+        opacity: 0;
+        transition: opacity .4s ease, height 0s linear .4s;
+    }
+    .sidebar-shown & {
+        &:before {
+            height: 100%;
+            opacity: 1;
+            transition: opacity .4s ease;
+        }
+    }
+    .make-post-btn:hover {
+        color: $secondary-color-darken;
+        background: none;
+    }
+    .make-post-btn:before {
+        color: $secondary-color;
+    }
+    .btn.make-post-btn {
+        right: 0;
+        top: 0;
+        position: absolute;
+        background: none;
+        &:hover {
+            background: none;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            background: $secondary-color;
+            position: static;
+            height: 30px;
+            padding: 4px 14px;
+            margin: 0 0 0 15px;
+            &:before {
+                margin: 0 5px 0 -5px;
+                color: inherit;
+            }
+            &:hover {
+                color: #fff;
+                background: $secondary-color-darken;
+            }
+        }
+    }
+    .login,
+    .register {
+        
+        @include media-breakpoint-down($desktop-breakpoint) {
+            padding: 0;
+            box-shadow: none;
+            height: auto;
+            margin: 0 5px 0 10px;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            width: 90px;
+            margin-left: 15px;
+        }
+
+        &:hover {
+            background: none;
+            color: $primary-color;
+
+            &.alt {
+                color: $secondary-color;
+            }
+        }
+    }
+
+    .header-search {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            width: 100%;
+            margin-right: 0;
+            align-items: center;
+            align-content: center;
+        }
+    }
+}
+.header-mobile {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+    box-shadow: 0 0 5px rgba(#000, .3);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+        background: var(--white);
+    }
+}
+
+.header_container {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0; right: 0;
+    transition: transform 0.2s ease-in-out 0s;
+    transform: translate3d(0, 0, 0);
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+        background-color: $white;
+        height: 44px;
+    }    
+
+    .scroll-top & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            transform: translate3d(0, -44px, 0);
+        }
+    }
+}
+
+.header-logo {
+    display: flex;
+    height: 44px;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+    @include media-breakpoint-up($desktop-breakpoint) {
+        height: 50px;
+    }
+    a,
+    img,
+    svg {
+        display: block;
+    }
+    img,
+    svg {
+        width: 105px;
+        &.white-logo {
+            display: none;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            width: 125px;
+        }
+    }
+
+    .white-logo {
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    }
+}
+.page-title {
+    font: inherit;
+    font-weight: 500;
+    padding: 0 0 0 54px;
+    letter-spacing: -.4px;
+    margin: 0 auto 0 0;
+    @include ellipsis;
+
+    .user-login {
+        font-weight: 400;
+        opacity: 1;
+        .dark & {
+            color: #fff;
+        }
+    }
+}
+.header-avatar {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 10;
+    transition: transform .4s ease;
+    cursor: pointer;
+    @include media-breakpoint-up($desktop-breakpoint) {
+        position: relative;
+        top: auto;
+        left: auto;
+        font-size: 30px;
+        margin: 0 0 0 15px;
+        z-index: 1;
+        transition: transform .3s ease;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &:before {
+        display: none;
+    }
+
+    &:after {
+        position: absolute;
+        z-index: 10;
+        left: -15px;
+        right: -15px;
+        top: -10px;
+        bottom: -10px;
+        content: '';
+        @include media-breakpoint-up($desktop-breakpoint) {
+            right: auto;
+            bottom: auto;
+            border-bottom: 12px solid $white;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            left: 50%;
+            margin-left: -12px;
+            top: 100%;
+            margin-top: 5px;
+            opacity: 0;
+            transform: translate(0, 20px);
+            transition: opacity .4s ease, transform .4s ease;
+            pointer-events: none;
+        }
+    }
+
+    &:empty {
+
+        &:before {
+            box-shadow: none;
+        }
+    }
+
+    .sidebar & {
+        transform: translate(15px, 10px);
+
+        .sidebar-shown & {
+            transform: translate(33px, 32px) scale(2.083333333);
+        }
+    }
+
+    .sidebar-shown & {
+        transform: translate(18px, 22px) scale(2.083333333);
+        @include media-breakpoint-up($desktop-breakpoint) {
+            transform: none;
+        }
+        &:after {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    }
+    .sidebar & {
+        transition: transform .4s ease;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            display: none;
+        }
+    }
+}
+.header-search {
+    position: relative;
+    @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+        margin: 0 40px;
+        padding: 10px 0;
+        position: static;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        width: 170px;
+        margin-left: 22px;
+    }
+    input {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            height: 24px;
+            padding: 2px 10px;
+
+            &::-moz-placeholder {
+                text-align: center;
+            }
+
+            &:-ms-input-placeholder {
+                text-align: center;
+            }
+
+            &::-webkit-input-placeholder {
+                text-align: center;
+            }
+
+            &:focus {
+
+                &::-moz-placeholder {
+                    text-align: inherit;
+                }
+                &:-ms-input-placeholder {
+                    text-align: inherit;
+                }
+                &::-webkit-input-placeholder {
+                    text-align: inherit;
+                }
+            }
+        }
+        
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding-right: 55px;
+        }
+
+        &::-ms-clear {  display: none; width : 0; height: 0; }
+        &::-ms-reveal {  display: none; width : 0; height: 0; }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration { display: none; }
+    }
+    
+    &-submit {
+        margin-left: 10px;
+        width: 37px;
+        height: 30px;
+        background: none;
+        border: none;
+        padding: 0;
+        color: $secondary-color;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            transition: opacity .3s ease;
+            opacity: .3;
+            right: 0;
+            top: 0;
+            color: $main-color;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-left: 0;
+            &:hover {
+                opacity: 1;
+            }
+        }
+        &:before {
+            @include icon-font;
+            display: block;
+            content: '\E60C';
+            font-size: 24px;
+            line-height: 30px;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                font-size: 18px;
+            }
+            .dark & {
+                color: #fff;
+            }
+        }
+    }
+    .btn-clear-search {
+        position: absolute;
+        border: none;
+        padding: 0;
+        background: none;
+        opacity: .2;
+        font-size: 17px;
+        right: 64px;
+        top: 50%;
+        transform: translate(0, -50%);
+        color: $primary-color;
+        transition: opacity .3s ease;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            right: 32px;
+        }
+        &:hover {
+            opacity: 1;
+        }
+        &:before {
+            @include icon-font;
+            content: '\E600';
+        }
+    }
+    .SearchResultsPopupCollectionView {
+        position: absolute;
+        background: $white;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+        }
+        @include media-breakpoint-down($desktop-breakpoint) {
+            left: 0;
+            right: 0;
+            top: 44px;
+            padding: 17px 15px 22px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            height: calc(100vh - 44px);
+
+            .scroll-top & {
+                height: 100vh;                
+            }
+
+            &:before {
+                left: 15px;
+                right: 15px;
+                height: 1px;
+                background: rgba($gray, .2);
+            }
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            left: -30px;
+            top: 47px;
+            width: 320px;
+            box-shadow: 0 6px 30px rgba(#000, .15);
+            border-radius: 5px;
+            padding: 17px 20px 22px;
+            &:before {
+                border-bottom: 12px solid $white;
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                left: 40px;
+                margin-top: -12px;
+            }
+        }
+        .users {
+            padding: 0 0 2px;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                padding: 0 20px 2px 0;
+            }
+        }
+        .user-login {
+            margin-left: 0;
+        }
+        .SearchResultsPopupView {
+            a {
+                display: block;
+                position: relative;
+                padding: 0 0 0 40px;
+                color: inherit;
+                margin: 0 0 13px;
+                .avatar {
+                    position: absolute;
+                    left: 0;
+                    top: 3px;
+                    font-size: 30px;
+                    transition: transform .3s ease;
+                }
+                &:hover {
+                    .avatar {
+                        transform: scale(1.2);
+                    }
+                }
+
+                .user {
+
+                    &__name {
+                        display: flex;
+                        align-items: center;
+                        align-content: center; 
+                    }
+                }
+            }
+        }
+        .search-all-link {
+            a {
+                span {
+                    color: $main-color;
+                }
+            }
+        }
+        .close {
+            @include media-breakpoint-down($desktop-breakpoint) {
+                display: none;
+            }
+            @include media-breakpoint-up($desktop-breakpoint) {
+                position: absolute;
+                right: 0;
+                top: 0;
+                opacity: .3;
+                color: inherit;
+                padding: 15px 18px;
+                font-size: 24px;
+                background: none;
+                border: none;
+                transition: opacity .3s ease;
+                &:before {
+                    content: '\E605';
+                    @include icon-font;
+                }
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+.btn.make-post-btn {
+    font-size: 0;
+    line-height: 0;
+    padding: 10px 15px;
+    height: auto;
+    @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 15px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 1;
+        &:before {
+            vertical-align: middle;
+        }
+    }
+}
+.make-post-btn {
+    &:before {
+        content: '\E611';
+        @include icon-font;
+        font-size: 24px;
+        line-height: 1;
+    }
+}
+.header-nav {
+    height: 44px;
+    display: flex;
+    z-index: 9;
+    background: $white;
+    @include media-breakpoint-down($desktop-breakpoint) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 44px;
+        box-shadow: 0 0 5px rgba(#000, .3);
+        transition: transform 0.2s ease-in-out 0s;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        height: 50px;
+    }
+
+    .scroll-top & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            transform: translate3d(0, -44px, 0);
+        }    
+    }
+
+    a {
+        width: 25%;
+        text-align: center;
+        padding: 2px 0 0;
+        color: inherit;
+        font-size: 9px;
+        border-bottom: 2px solid transparent;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 5px 0 0;
+            margin: 0 5px 0 0;
+            transition: color .3s ease, border-color .3s ease;
+            width: 80px;
+        }
+
+        &.active {
+            border-color: $secondary-color;
+        }
+            
+        span {
+            opacity: .4;
+            transition: opacity .3s ease;
+        }
+        &:before {
+            opacity: .3;
+            font-size: 24px;
+            line-height: 30px;
+            display: block;
+            margin: 0 0 -2px;
+            @include icon-font;
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                transition: opacity .3s ease;
+            }
+        }
+        &.active,
+        &:hover {
+            color: $primary-color;
+            span,
+            &:before {
+                opacity: 1;
+            }
+        }
+        &.unread {
+            position: relative;
+            &:after {
+                background: $secondary-color;
+                width: 6px;
+                height: 6px;
+                content: '';
+                position: absolute;
+                border-radius: 1000px;
+                left: 50%;
+                margin-left: 16px;
+                top: 7px;
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    margin-left: 13px;
+                    top: 10px;
+                }
+            }
+        }
+    }
+    .menu-item-home {
+        &:before {
+            content: '\E612';
+        }
+    }
+    .menu-item-explore {
+        &:before {
+            content: '\E613';
+        }
+    }
+    .menu-item-notifications {
+        &:before {
+            content: '\E614';
+        }
+    }
+    .menu-item-messages {
+        &:before {
+            content: '\E615';
+        }
+    }
+}
+#site_header .header-nav {
+    background: none;
+}
+
+.sidebar-shown.disable-scroll-page {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        overflow: auto;
+    }    
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+    width: calc(100vw - 55px);
+    max-width: 320px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+
+        @media screen and (orientation: landscape) {
+            max-width: 800px;        
+        }
+    }    
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        right: calc(50% - 460px);
+        left: auto;
+        z-index: 10;
+        bottom: auto;
+        width: 280px;
+        max-width: 100%;
+        top: -10000px;
+        transition: opacity .4s ease, transform .4s ease, top 0s linear .4s;
+        overflow: visible;
+    }
+
+    &:before {
+        content: "";
+        position: fixed;
+        left: 0;
+        top: -70px; bottom: 0;
+        background: $white;
+        box-shadow: 0 0 30px rgba(#000, .4);
+        z-index: -1;
+        width: calc(100vw - 55px);
+        max-width: 320px;
+        transform: translate(-100%, 70px);
+        transition: transform .4s ease;
+        padding-bottom: 70px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                max-width: 800px;        
+            }
+        }    
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            display: none;
+        }    
+
+        .sidebar-shown & {
+            transform: translate(0, 0);
+        }    
+    }
+
+    &__header {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                align-items: center;
+            
+                > div {
+                    flex: 0 0 50%;
+                    margin: 0;
+                    padding-bottom: 20px;
+                    position: relative;
+
+                    &:after {
+                        content: "";
+                        background-color: rgba($gray, .2);
+                        position: absolute;
+                        bottom: 0;
+                        top: 0;
+                        right: 0;
+                        width: 1px;
+                    }
+                }
+            }    
+        }
+    }
+
+    &__scroller {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        position: absolute;
+        left: 0; right: 0;
+        top: 0; bottom: 0;        
+        transition: transform .4s ease;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            max-height: calc(100vh - 70px);
+        }
+
+        .sidebar-shown & {
+            transform: translate(0, 0);
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            box-shadow: 0 6px 30px rgba(#000, .15);
+            overflow-y: auto;
+            transform: translate(0, 20px);
+            bottom: auto;
+            padding: 21px 0 0;
+            border-radius: 4px;
+            width: auto;
+            background: $white;
+        }
+    }
+
+    &__inside {
+        transform: translate(-100%, 0);
+        transition: transform .4s ease;
+        padding: 81px 0 0;
+        flex-direction: column;
+        flex: 0 0 100%;
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                padding-top: 24px;
+            }
+        }    
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 0;
+            width: auto;
+            transform: translate(0, 0);
+        }
+    }
+
+    &-menu {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    } 
+
+    .sidebar-shown & {
+        opacity: 1;
+        pointer-events: auto;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            top: 57px;
+            transition: opacity .4s ease, transform .4s ease, top 0s linear;
+        }
+
+        .sidebar__inside {
+            transform: translate(0, 0);
+        }
+    }
+
+    .dark & {
+        background: $main-color;
+    }
+
+    .header-avatar {
+        position: relative;
+        left: auto;
+        top: auto;
+        flex: 0 0 auto;
+        margin-bottom: -24px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                position: absolute;
+                left: 0;
+                right: 0;
+            }
+        }    
+    }
+}
+
+.user-group-info {
+    margin-bottom: 20px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 12px;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+
+        @media screen and (orientation: landscape) {
+            margin-bottom: 0;
+            padding-left: 85px;
+            primary-color: 20px;
+        }
+    }    
+}
+
+.user-menu {
+    flex: 0 1 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+
+        @media screen and (orientation: landscape) {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+    }    
+
+    &__col {
+        padding-bottom: 9px;
+        margin-bottom: 9px;
+        position: relative;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                flex: 0 0 50%;
+            }
+        }    
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding-bottom: 12px;
+            margin-bottom: 11px;
+        }
+
+        &:after {
+            content: "";
+            height: 1px;
+            background-color: rgba($gray, .2);
+            position: absolute;
+            left: 20px; right: 20px;
+            bottom: 0;
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+
+                @media screen and (orientation: landscape) {
+                    top: 0;
+                    left: auto; right: 0;
+                    height: auto;
+                    width: 1px;              
+                }
+            }    
+        }
+
+        &:last-child {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            &:after {
+                display: none; 
+            }
+        }
+    }
+
+    &-item {
+        display: block;
+        font-size: 17px;
+        padding: 11px 0 12px 62px;
+        position: relative;
+        color: inherit;
+        transition: color .3s ease;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            font-size: inherit;
+            padding-bottom: 10px;
+            &:hover {
+                &:before {
+                    transform: scale(1.3);
+                }
+            }
+        }
+        &:hover {
+            color: $secondary-color;
+        }
+        &:before {
+            @include icon-font;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            line-height: 0;
+            font-size: 24px;
+            opacity: .3;
+            color: $main-color;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                transition: transform .3s ease;
+            }
+        }
+        &__profile {
+            &:before {
+                content: '\E63F';
+            }
+        }
+        &__statistics {
+            &:before {
+                content: '\E639';
+            }
+        }
+        &__payouts {
+            &:before {
+                content: '\E63C';
+            }
+        }
+        &__payments {
+            &:before {
+                content: '\E63B';
+            }
+        }
+        &__privacy {
+            &:before {
+                content: '\E62F';
+            }
+        }
+        &__help {
+            &:before {
+                content: '\E640';
+            }
+        }
+        &__logout {
+            &:before {
+                content: '\E63D';
+            }
+        }
+    }
+    hr {
+        height: 1px;
+        background: rgba($gray, .2);
+        border: none;
+        margin: 9px 20px 9px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            margin: 12px 20px 11px;
+        }
+    }
+    &-name {
+        padding: 0 20px 3px 20px;
+        font-size: 17px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        align-content: center;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }    
+
+        a {
+            color: inherit;
+            font-weight: 400;
+        }
+    }
+    &-login {
+        padding: 0 20px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }    
+
+        &.user-login {
+            margin-left: 0;
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+                min-width: 100%;
+            }
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                flex: 0 0 100%;
+            }
+        }
+    }
+    &-counts {
+        padding: 0 0 12px;
+        margin: 0 20px 9px;
+        border-bottom: 1px solid rgba($gray, .2);
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                border-bottom: none;
+                padding: 0 20px;
+                margin: 0;
+            }
+        }    
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            margin-bottom: 11px;
+        }
+
+        &-item {
+            padding: 0 17px 10px 0;
+            color: inherit;
+            display: inline-block;
+            vertical-align: top;
+            transition: color .3s;
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+
+                @media screen and (orientation: landscape) {
+                    margin-bottom: 0;
+                    margin-top: 10px;
+                }
+            }    
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                padding-right: 25px;
+            }
+            &-count {
+                font-weight: 500;
+            }
+            &-title {
+                opacity: .5;
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+    &-bottom-btns {
+        display: flex;
+        justify-content: space-between;
+        font-size: 24px;
+        flex: 0 0 auto;
+        margin: auto 0 0;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding-top: 10px;
+        }
+    }
+    &-bottom-btn {
+        padding: 16px 20px;
+        color: $primary-color;
+        &:hover {
+            color: $primary-color-darken;
+        }
+        &:before {
+            @include icon-font;
+        }
+        &__skin-toggle {
+            &:before {
+                content: '\E636';
+            }
+            &.night {
+                &:before {
+                    content: '\E637';
+                }
+            }
+        }
+        &__qr {
+            &:before {
+                content: '\E63A';
+            }
+        }
+        &__share {
+            &:before {
+                content: '\E638';
+            }
+        }
+    }
+    &-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 17px 20px;
+        font-size: 24px;
+        transition: transform .3s ease;
+        color: $primary-color;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+
+            @media screen and (orientation: landscape) {
+                top: -14px;
+            }
+        }    
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            display: none;
+        }
+
+        &:hover {
+            color: $primary-color-darken;
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                transform: scale(1.5);
+            }    
+        }
+        &:before {
+            @include icon-font;
+            content: '\E605';
+        }
+    }
+}
+.header-return-btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 44px;
+    width: 54px;
+    z-index: 5;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: $primary-color;
+    &:before {
+        font-size: 24px;
+        content: '\E606';
+        @include icon-font;
+        @include position-center;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+    }
+}
+.header-popup-menu-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 44px;
+    width: 54px;
+    z-index: 5;
+    cursor: pointer;
+    &:before {
+        content: '';
+        @include position-center;
+        height: 4px;
+        width: 16px;
+        background-image: radial-gradient(circle, #fff 50%, transparent 50%);
+        background-size: 6px 4px;
+        background-position: 5px 0;
+    }
+}

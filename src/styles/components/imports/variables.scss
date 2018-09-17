@@ -1,0 +1,81 @@
+$gray: #7c8b96;
+$main-font: 'Roboto', sans-serif;
+$icon-font: team;
+$default-avatar-bg: #e4edf1;
+$default-avatar-color: $gray;
+
+$desktop-breakpoint: lg;
+$tablet-breakpoint: md;
+$mobile-breakpoint: sm;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$colors: (
+  1: rgb(105, 129, 140),
+  2: rgb(242, 82, 210),
+  3: rgb(255, 64, 129),
+  4: rgb(250, 50, 64),
+  5: rgb(255, 113, 5),
+  6: rgb(252, 168, 0),
+  7: rgb(112, 207, 39),
+  8: rgb(0, 200, 100),
+  9: rgb(0, 177, 204),
+  10: rgb(33, 150, 243),
+  11: rgb(121, 83, 245),
+  12: rgb(168, 50, 191),
+);
+
+$stories_colors: (
+  1: rgb(105, 129, 140),
+  2: rgb(242, 82, 210),
+  3: rgb(255, 64, 129),
+  4: rgb(250, 50, 64),
+  5: rgb(255, 113, 5),
+  6: rgb(252, 168, 0),
+  7: rgb(112, 207, 39),
+  8: rgb(0, 200, 100),
+  9: rgb(0, 177, 204),
+  10: rgb(33, 150, 243),
+  11: rgb(121, 83, 245),
+  12: rgb(168, 50, 191),
+  13: rgb(255, 255, 255),
+  14: rgb(0, 0, 0),
+  15: rgb(50, 200, 250),
+);
+
+$red: #ff404d;
+
+$main: rgb(34, 43, 50);
+$default-white: #fff;
+$default-light: rgb(248, 249, 250);
+
+$default-primary-color: map_get($colors, 4) !default;
+$default-secondary-color: map_get($colors, 10) !default;
+
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+
+$primary-color-darken: var(--primary-color-darken);
+$secondary-color-darken: var(--secondary-color-darken);
+
+$primary-color-06: var(--primary-color-06);
+$secondary-color-06: var(--secondary-color-06);
+
+$primary-color-10: var(--primary-color-10);
+$secondary-color-10: var(--secondary-color-10);
+
+$primary-color-12: var(--primary-color-12);
+$secondary-color-12: var(--secondary-color-12);
+
+$primary-color-20: var(--primary-color-20);
+$secondary-color-20: var(--secondary-color-20);
+
+$white: var(--white);
+$light: var(--light);
+$main-color: var(--dark);

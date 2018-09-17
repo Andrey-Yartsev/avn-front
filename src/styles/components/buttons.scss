@@ -1,0 +1,596 @@
+@import "imports/variables";
+
+.btn {
+  border-radius: 1000px;
+  height: 30px;
+  padding: 6px 14px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  font: inherit;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  text-align: center;
+  transition: background-color .3s ease;
+  background: $secondary-color;
+  position: relative;
+  .show-on-hover,
+  .hide-on-hover {
+    transition: opacity .3s ease;
+  }
+  .show-on-hover {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  &:hover {
+    background: $secondary-color-darken;
+  }
+  &.alt {
+    background: $primary-color;
+    &:hover {
+      background: $primary-color-darken;
+    }
+  }
+  &.sm {
+    height: 24px;
+    padding: 3px 16px;
+  }
+  &.lg {
+    height: 40px;
+    padding: 11px 29px;
+  }
+  &.saveChanges {
+    width: 170px;
+    padding: 0;
+  }
+  &.btn-cancel {
+    background: rgba($gray, .5);
+    &:hover {
+      background: darken(rgba($gray, .5), 10%);
+    }
+  }
+  &.block {
+    display: block;
+    width: 100%;
+  }
+  &.border {
+    color: $primary-color;
+    background: none;
+    box-shadow: 0 0 0 2px $primary-color inset;
+
+    &:hover {
+      color: #fff;
+      background: $primary-color;
+    }
+
+    &.connect-twitter {
+      box-shadow: 0 0 0 2px $default-secondary-color inset;
+      color: $default-secondary-color;
+      &:hover {
+        color: #fff;
+        background: $default-secondary-color;
+      }
+    }
+    &.alt {
+      color: $secondary-color;
+      box-shadow: 0 0 0 2px $secondary-color inset;
+      &:hover {
+        color: #fff;
+        background: $secondary-color;
+      }
+    }
+  }
+  &.gray {
+    background-color: rgba($gray, .5);
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
+}
+
+button {
+  font: inherit;
+
+  &[disabled] {
+    opacity: .3;
+    pointer-events: none;
+  }
+}
+
+button,
+[role=button] {
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &:focus {
+    outline: none;
+  }
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+.addPost-btn-float {
+  &,
+  .header-nav & {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 1000px;
+    background: $secondary-color;
+    height: 50px;
+    width: 50px;
+    color: #fff;
+    padding: 0;
+    box-shadow: 0 6px 30px rgba(#000, .15);
+    z-index: 10;
+    &:hover {
+      color: #fff;
+      background: $secondary-color-darken;
+    }
+    &:before {
+      opacity: 1;
+      font-size: 24px;
+      @include icon-font;
+      content: '\E611';
+      @include position-center;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.subscribe-cost,
+.profile-message-btn,
+.profile-tip-btn,
+.more-functions__btn,
+.btn-edit-profile,
+.btn-make-post {
+  text-align: center;
+}
+
+.subscribe-cost,
+.btn-subscribe,
+.profile-message-btn,
+.profile-tip-btn,
+.more-functions__btn,
+.btn-edit-profile,
+.btn-make-post {
+  font-size: 13px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color .3s ease;
+
+  &:before {
+    display: block;
+    margin: 0 auto 4px;
+    font-size: 20px;
+    @include icon-font;
+    width: 22px;
+    height: 22px;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    white-space: nowrap;
+    padding: 10px 0 8px;
+    margin: 0;
+  }
+}
+
+.subscribe-cost,
+.btn-subscribe,
+.profile-message-btn,
+.profile-tip-btn,
+.btn-edit-profile,
+.btn-make-post {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex: 0 0 76px;
+    width: 76px;
+  }
+}
+
+.more-functions {
+  position: relative;
+
+  &:hover,
+  &.open {
+
+    .more-functions {
+
+      &__dropdown {
+        transform: translateY(0);
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__btn {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    opacity: .4;
+
+    &:before {
+      @include settings-dots($main-color, 1);
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        @include settings-dots(#fff, 1);
+        filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 11px auto 9px;
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        transform: translate(0, 0);
+        color: $main-color;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    right: 5px;
+    top: 100%;
+    min-width: 180px;
+    max-width: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: transform .4s;
+    transform: translateY(20px);
+    z-index: 1;
+    padding-top: 8px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: -5px;
+    }
+
+    &-inside {
+      background-color: $white;
+      box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: 15px;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        border-left: 1px solid rgba(124, 139, 150, 0.2);
+        border-top: 1px solid rgba(124, 139, 150, 0.2);
+        transform: rotate(45deg);
+        background-color: $white;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: 34px;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+
+        &:first-child {
+
+          a {
+
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        a {
+          display: block;
+          padding: 16px 20px;
+          text-decoration: none;
+          position: relative;
+          color: var(--dark);
+          opacity: 0.5;
+          transition: opacity .3s;
+
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 20px;
+            top: 0;
+            height: 1px;
+            background-color: rgba(124, 139, 150, 0.2);
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn-subscribe,
+.more-functions__btn,
+.btn-edit-profile {
+  color: $main-color;
+  transition: all .3s;
+
+  &:before {
+    transition: all .3s;
+  }
+
+  &:hover {
+    color: $main-color;
+  }
+}
+
+.btn-subscribe,
+.btn-edit-profile {
+  opacity: .4;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.btn-edit-profile {
+
+  &:before {
+    content: '\E63F';
+    color: $main-color;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 24px;
+    margin-bottom: 2px;
+  }
+}
+
+.btn-make-post {
+  color: $secondary-color;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-left: 10px;
+  }
+
+  &:hover {
+    color: $secondary-color-darken;
+  }
+
+  &:before {
+    content: '\E611';
+  }
+}
+
+.profile-message-btn {
+  color: $secondary-color;
+
+  &:before {
+    content: '\E622';
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 3px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 1px;
+    }
+  }
+
+  &:hover {
+    color: $secondary-color-darken;
+  }
+}
+
+.profile-tip-btn {
+  opacity: .4;
+  color: $main-color;
+
+  &.selected {
+    opacity: 1;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-color-darken;
+    }
+  }
+
+  &:before {
+    content: '\E618';
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 2px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 1px;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.subscribeView {
+
+  .btn-subscribe {
+    background-color: transparent;
+    opacity: 1;
+    min-width: 70px;
+    color: $primary-color;
+    transition: color .3s ease, opacity .3s ease;
+    font-size: 13px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-width: 80px;
+    }
+
+    .userCollectionView & {
+      min-width: auto;
+    }
+
+    &:hover {
+      color: $primary-color-darken;
+    }
+
+    &.disable-state {
+      color: $main-color;
+      opacity: .4;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &.alt {
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.btn-subscribe {
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  position: relative;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex-direction: column;
+    display: flex;
+    padding: 9px 0 8px;
+    align-content: center;
+    align-items: center;
+  }
+
+  &:before {
+    content: '\E630';
+    font-size: 28px;
+    width: 28px;
+    line-height: 28px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    transform: translate(-2px, -4px);
+    transition: none;
+  }
+
+  &__label {
+    position: relative;
+    text-align: center;
+  }
+
+  .show-on-hover {
+    top: 1px;
+    line-height: 13px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.more-functions {
+
+  &__btn {
+
+    &:before {
+      width: 16px;
+      height: 4px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        color: $main-color;
+      }
+    }
+  }
+}
+
+.subscribe-cost {
+  color: $main-color;
+  opacity: .4;
+
+  &.selected {
+    opacity: 1;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-color-darken;
+    }
+  }
+
+  &.disable-state {
+    color: $main-color;
+    opacity: .4;
+  }
+
+  &:before {
+    content: '';
+    display: none;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.subscribe-cost {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 100%;
+  }
+
+  &__value {
+    font-size: 13px;
+    margin-bottom: 4px;
+    margin-top: 2px;
+
+    span {
+      font-size: 21px;
+      line-height: 21px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 19px;
+        line-height: 19px;
+      }
+    }
+  }
+
+  &__label {
+    position: relative;
+
+    .show-on-hover {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+  }
+}

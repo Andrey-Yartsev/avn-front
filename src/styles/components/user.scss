@@ -1,0 +1,113 @@
+.verified-user {
+    margin: 0 0 0 5px;
+    line-height: 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: $secondary-color;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 18px;
+    &:before {
+        @include icon-font;
+        content: '\E61E';
+        vertical-align: top;
+    }
+}
+.name {
+    font-weight: 500;
+    margin: 0;
+    color: inherit;
+    min-width: 0;
+    @include ellipsis;
+    transition: color .3s ease;
+
+    &:hover{
+        color: $primary-color-darken;
+    }
+}
+.user-login {
+    opacity: .5;
+    margin-left: 7px;
+    min-width: 50px;
+    @include ellipsis;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 13px;
+    }
+
+    a &,
+    a,
+    .username {
+        color: $main-color;
+        display: inline-block;
+        max-width: 100%;
+        vertical-align: top;
+        @include ellipsis;
+        
+        &:not(:empty):before {
+            content: '@';
+        }
+    }
+}
+.avatar {
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    z-index: 2;
+    display: block;
+
+    &:empty {
+
+        &:before {
+            @include default-avatar;
+        }
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        position: relative;
+        object-fit: cover;
+    }
+
+    &:before {
+        box-shadow: 0 0 0 3px $white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        border-radius: 50%;
+        background: $white;
+        content: '';
+    }
+
+    &.with-story {
+
+        &:after {
+            z-index: -1;
+            background: linear-gradient(to top, #9466ff 0%, $default-secondary-color 100%) 100% no-repeat, linear-gradient(to bottom, $default-primary-color 0%, #9466ff 100%) 0 no-repeat;
+            background-size: 50% 100%;
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            top: -5px;
+            transform: rotate(60deg);
+            transition: all .3s;
+        }
+    }
+}
+.btn-subscribe {
+    font-size: 14px;
+    &.alt {
+        &:hover {
+            background: $default-primary-color;
+        }
+    }
+}

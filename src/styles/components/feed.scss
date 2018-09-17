@@ -1,0 +1,7 @@
+.feed {
+    .aside-col {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            order: -1;
+        }
+    }
+}
