@@ -12,17 +12,28 @@
                 </nav>
                 <h1 class="header-logo">
                     <router-link to="/">
-                        <img src="/design/img/logo-full.svg">
-                        <img class="white-logo" src="/design/img/logo-full-white.svg">
+                        <img src="https://team2.retloko.com/ver_6667c0c/design/img/logo-full.svg">
+                        <img class="white-logo" src="https://team2.retloko.com/ver_6667c0c/design/img/logo-full-white.svg">
                     </router-link>
                 </h1>
+                <Search></Search>
+                <User></User>
+                <button class="btn make-post-btn hidden-mobile" type="button">Share</button>
+                <a class="btn make-post-btn hidden-desktop" href="/addPost">Share</a>
             </div>
         </div>
     </header>
 </template>
 
 <script>
+	import Search from './Search';
+	import User from './User';
+
     export default {
-        name: 'Header'
+        name: 'Header',
+        components: {
+			'Search': Search,
+			'User': User,
+		}
     }
 </script>
