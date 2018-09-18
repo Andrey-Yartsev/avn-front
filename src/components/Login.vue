@@ -44,7 +44,7 @@
       </div>
       <div class="login-form-col">
         <form>
-          <input class="lg rounded" type="email" name="email" placeholder="Email"  autocomplete="email"/>
+          <input class="lg rounded" type="email" name="email" placeholder="Email" autocomplete="email"/>
           <input class="lg rounded" type="password" name="password" placeholder="Password"
                  autocomplete="current-password"/>
 
