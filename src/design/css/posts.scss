@@ -1,0 +1,517 @@
+@import "components/imports";
+
+.videoplayer {
+    position: relative;
+
+    &.clicked {
+
+        &:after {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &:after {
+        content: "\E661";
+        @include icon-font;
+        position: absolute;
+        left: 15px;
+        bottom: 10px;
+        font-size: 40px;
+        color: #fff;
+        opacity: .8;
+        transition: all .3s;
+    }
+}
+
+.post {
+    .posts & {
+        padding: 0 0 12px;
+        border-bottom: 1px solid rgba($gray, .2);
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &.postPage {
+
+        .media {
+
+            img {
+
+                &.locked {
+                    height: 50vh;
+                }
+            }
+        } 
+    }
+
+    .post-header {
+        display: flex;
+        align-items: center;
+        position: relative;
+        @include media-breakpoint-down($desktop-breakpoint) {
+            margin: 0 15px;
+            padding: 15px 32px 8px 0;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 14px 50px 14px 15px;
+        }
+        .avatar {
+            font-size: 30px;
+            flex: 0 0 30px;
+            margin: 0 10px 0 0;
+        }
+        .user-login {
+            margin-left: 5px;
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                font-size: 15px;
+            }
+        }
+    }
+    .text {
+        padding: 0 15px 4px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 0 15px 2px;
+        }
+
+        &:empty {
+            display: none;
+        }
+    }
+    .media {
+        margin: 7px 0 0;
+        position: relative;
+        overflow: hidden;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            max-height: calc(100vh - 100px);
+
+            .postCollectionView & {
+
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    max-height: calc(100vh - 200px);
+                }
+
+                &.locked {
+                    height: 50vh;                 
+                }
+            }
+        }
+
+        video {
+            width: 100%;
+            max-height: calc(100vh - 100px);
+            display: block;
+
+            .postCollectionView & {
+
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    max-height: calc(100vh - 200px);
+                }    
+            }
+        }
+
+        .media-slider {
+            .media-item {
+                display: none;
+                &.active {
+                    display: block;
+                }
+            }
+        }
+        .media-slider-pagination {
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                bottom: 10px;
+            }
+            .item {
+                width: 6px;
+                height: 6px;
+                margin: 0 3px;
+                border-radius: 1000px;
+                background: #fff;
+                opacity: .5;
+                transition: opacity .3s ease;
+                cursor: pointer;
+                position: relative;
+                box-shadow: 2px 2px 5px rgba(#000,.1);
+                &:before {
+                    position: absolute;
+                    left: -3px;
+                    right: -3px;
+                    top: -3px;
+                    bottom: -3px;
+                    content: '';
+                }
+                &.active,
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+        .media-slider-navigation {
+            @include media-breakpoint-down($desktop-breakpoint) {
+                display: none;
+            }
+            .btn-prev,
+            .btn-next {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 45px;
+                color: #fff;
+                font-size: 36px;
+                cursor: pointer;
+                opacity: .7;
+                transition: opacity .3s ease;
+                filter: drop-shadow(2px 2px 5px rgba(#000,.4));
+                &:before {
+                    @include icon-font;
+                    @include position-center;
+                }
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            .btn-prev {
+                left: 0;
+                &:before {
+                    content: '\E645';
+                }
+            }
+            .btn-next {
+                right: 0;
+                &:before {
+                    content: '\E643';
+                }
+            }
+        }
+        &-item {
+            background: #fff;
+        }
+        .gif-player {
+            position: relative;
+            .gif-img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                background: #fff;
+            }
+        }
+    }
+    .actions {
+        padding: 10px 15px 8px;
+        position: relative;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 13px 15px 8px;
+        }
+        .likes,
+        .comments,
+        .tips,
+        .report {
+            opacity: .3;
+            display: inline-flex;
+            align-items: center;
+            margin: 0 25px 0 0;
+            cursor: pointer;
+            min-width: 54px;
+            transition: color .3s ease, opacity .3s ease;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                min-width: 58px;
+                &:hover {
+                    opacity: 1;
+                    color: $primary-color;
+                }
+            }
+            @include media-breakpoint-down($mobile-breakpoint) {
+                margin: 0 10px 0 0;
+            }
+            &.active {
+                opacity: 1;
+                color: $primary-color;
+            }
+            &:before {
+                display: inline-block;
+                @include icon-font;
+                font-size: 24px;
+                margin: 0 4px 0 0;
+                width: 1.1em;
+                font-weight: 400;
+            }
+        }
+        .likes {
+            &:before {
+                content: '\E616';
+            }
+        }
+        .comments {
+            &:before {
+                content: '\E617';
+            }
+        }
+        .tips {
+            &:before {
+                content: '\E618';
+            }
+        }
+        .report {
+            opacity: .15;
+            &,
+            &:empty {
+                margin: 0 0 0 auto;
+            }
+            &:before {
+                content: '\E619';
+            }
+        }
+
+        .date {
+            margin-left: auto;
+        }
+    }
+
+    .date {
+        padding: 0;
+        opacity: .5;
+        font-size: 13px;
+        display: block;
+        font-weight: 400;
+
+        a {
+            color: inherit;
+            transition: color .3s ease;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .load-more-comments {
+        opacity: .5;
+        display: block;
+        cursor: pointer;
+        margin: 0 15px;
+    }
+    .comment-form {
+        display: flex;
+        padding: 10px 15px 25px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 5px 15px 20px;
+            .comment-btn {
+                width: 80px;
+                flex: 0 0 80px;
+            }
+        }
+        .comment-input {
+            margin: 0 15px 0 0;
+        }
+    }
+    .tip-form {
+        display: flex;
+        padding: 10px 15px 25px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 5px 15px 20px;
+            .btn {
+                width: 100px;
+                flex: 0 0 100px;
+            }
+        }
+        .tip-amount-input {
+            text-align: center;
+        }
+    }
+
+    .tip-amount-field {
+        flex: 1;
+        margin: 0 15px;
+    }
+
+    .post-dropdown-menu-btn {
+        position: absolute;
+        right: -8px;
+        top: 10px;
+        width: 40px;
+        height: 40px;
+        opacity: .5;
+        cursor: pointer;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            right: 7px;
+            top: 9px;
+        }
+        &:before {
+            @include settings-dots($main-color, 0.5);
+        }
+
+        &:hover{
+            &:before{
+                opacity: 1;
+            }
+        }
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        .dropdown-menu {
+            right: 2px;
+            margin-top: 3px;
+            top: 100%;
+        }
+    }
+    .btn-copy-link {
+        animation: copy-link .5s;
+        transition: color .3s ease;
+        &.copied {
+            animation: none;
+        }
+    }
+
+    .report{
+        transition: color .3s ease;
+    }
+}
+
+@keyframes copy-link {
+    0% {
+        color: transparent;
+    }
+    100% {
+        color: inherit;
+    }
+}
+
+.comments-list {
+    padding: 0 15px 9px;
+
+    .postPage & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            padding-bottom: 53px;
+        }
+    }
+
+    .comment {
+        padding: 8px 0 0;
+        .comment-body {
+            padding-right: 35px;
+        }
+        .name {
+            max-width: 55%;
+            padding: 0 4px 0 0;
+            float: left;
+
+            .disable-scroll-page & {
+                max-width: 55%;
+
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    max-width: 40%;
+                }
+            }
+        }
+        .comment-text {
+            display: inline;
+            word-break: break-all;
+        }
+        .comment-footer {
+            font-size: 11px;
+            display: flex;
+            padding: 2px 24px 3px 0;
+            & > * {
+                opacity: .5;
+            }
+            .date {
+                padding: 0;
+                font: inherit;
+                margin-right: 20px;
+            }
+            .likes-count {
+                margin-right: 20px;
+            }
+            .btn-reply {
+                border: none;
+                background: none;
+                padding: 0;
+                color: inherit;
+                transition: color .3s ease, opacity .3s ease;
+
+                &:hover {
+                    opacity: 1;
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+}
+.new-post-toast {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    padding: 12px 0;
+    cursor: pointer;
+    color: $primary-color;
+    background: linear-gradient(30deg, $secondary-color-20 10%, $primary-color-20 90%);
+    position: relative;
+    &:before {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        content: '';
+        background: $light;
+        opacity: .3;
+    }
+    span {
+        position: relative;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 7px 0;
+    }
+}
+
+.guest-comments-form {
+    padding-top: 5px;
+    padding-bottom: 8px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-top: 1px solid rgba($gray, .2);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 15px;
+        padding-bottom: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+    }
+
+    p {
+        padding-bottom: 4px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding-bottom: 0;
+        }
+    }
+
+    .date {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            white-space: nowrap;
+        }
+    }
+}

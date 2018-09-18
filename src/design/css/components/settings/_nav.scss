@@ -1,0 +1,123 @@
+.settings-aside {
+    .white-bg-block {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            overflow: hidden;
+        }
+    }
+    .footer-nav {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+
+    .profile-name {
+        padding: 0;
+
+        .verified-user {
+            margin-left: 6px;
+        }
+    }
+}
+
+.settings-nav {
+
+    a,
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 12px 24px 11px 0;
+        margin: 0 16px 0 15px;
+        border-bottom: 1px solid rgba($gray, .2);
+        position: relative;
+        transition: color .3s ease;
+        color: inherit;
+        font-size: 17px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding-top: 13px;
+            padding-bottom: 13px;
+            margin-right: 20px;
+            font-size: 15px;
+        }
+
+        .value {
+            opacity: .5;
+            letter-spacing: 0;
+            text-align: right;
+            flex: 1;
+            margin-left: 10px;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        &.warning {
+            padding-right: 50px;
+            &:after {
+                border-left-color: $default-primary-color;
+            }
+            &:before {
+                position: absolute;
+                content: '\E619';
+                @include icon-font;
+                color: $default-primary-color;
+                right: 14px;
+                top: 50%;
+                font-size: 24px;
+                transform: translate(0,-50%);
+            }
+        }
+
+        .not-lspacing {
+            letter-spacing: 0;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            margin: 0 20px;
+            span {
+                opacity: .5;
+                transition: opacity .3s ease;
+            }
+            &:hover,
+            &.active {
+                span {
+                    opacity: 1;
+                }
+                &:after {
+                    border-left-color: $main-color;
+                }
+            }
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            border-left: 5px solid;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            transition: border-color .3s ease;
+            transform: translate(0, -50%);
+            border-left-color: $secondary-color;
+        }
+      &.empty {
+        &:after {
+          opacity: .5;
+        }
+      }
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .user-login {
+            margin-left: 0;
+        }
+
+        .name {
+            font-weight: 400;
+        }
+    }
+}

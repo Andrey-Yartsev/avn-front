@@ -1,0 +1,173 @@
+.btn-confirm-email,
+.connect-twitter {
+  max-width: 240px;
+  width: 100%;
+}
+.delete-account {
+  .label {
+    height: auto;
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    text-align: center;
+    p {
+      padding: 16px 0 0;
+      margin: 11px 0 0;
+      border-top: 1px solid rgba($gray, 0.2);
+    }
+  }
+  &-btn {
+    padding: 0;
+    border: none;
+    background: none;
+    color: $red;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      font-weight: 600;
+    }
+
+    .name {
+      
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-weight: 400;
+      }      
+    }
+
+    .user-login {
+      font-size: inherit;
+      opacity: 1;
+      margin-left: 4px;
+
+      .username {
+        color: $red;
+      }
+    }  
+  }
+}
+.btn-logout {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 44px;
+  width: 54px;
+  &:before {
+    content: '\E63D';
+    @include icon-font;
+    color: $secondary-color;
+    @include position-center;
+    font-size: 24px;
+  }
+}
+.twitter-value {
+  a &,
+  a {
+    color: $default-secondary-color;
+    .settings-nav & {
+      opacity: 1;
+    }
+    &:before {
+      content: '@';
+    }
+  }
+}
+.email-block {
+  &.success {
+    .email-confirm-block {
+      display: none;
+    }
+    .for-unverified {
+      display: none;
+    }
+  }
+  &.warning {
+    .for-verified {
+      display: none;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      .for-unverified {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+.EmailView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .password-form,
+    .twitter-block,
+    .delete-account-block {
+      display: none;
+    }
+  }
+}
+.TwitterView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .email-block,
+    .password-form,
+    .delete-account-block {
+      display: none;
+    }
+  }
+}
+.PasswordView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .email-block,
+    .twitter-block,
+    .delete-account-block {
+      display: none;
+    }
+  }
+}
+.twitter-block {
+  .form-group .btn {
+    margin-bottom: 0;
+  }
+}
+.btn.disconnect-twitter {
+  color: $main-color;
+  opacity: 0.5;
+  box-shadow: none;
+  position: relative;
+  &:before {
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    content: '';
+    box-shadow: 0 0 0 2px $main-color inset;
+    border-radius: 1000px;
+    opacity: 0.6;
+    transition: background 0.3s ease;
+    z-index: -1;
+  }
+  &:hover {
+    background: none;
+    &:before {
+      background: $main-color;
+    }
+  }
+  &[disabled] {
+    opacity: 0.15;
+  }
+}
+
+.ManageView {
+
+  .form-group {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-bottom: 18px;
+    }  
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+
+    .form-title {
+
+      .inner {
+        justify-content: center;
+      }
+    }
+  }
+}

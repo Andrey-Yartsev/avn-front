@@ -1,0 +1,95 @@
+.lds-dual-ring {
+  display: inline-block;
+  position: fixed;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+
+  &:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: url("../img/loading.svg") no-repeat 0 0 / cover;
+    /*border: 2px solid #fff;
+    border-color: #fff  #fff transparent;*/
+    animation: lds-dual-ring 1.2s linear infinite;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 66px;
+      height: 66px;
+    }
+  }
+
+  &.with-text {
+
+    &:after {
+      display: none;
+    }
+
+    .loader-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      &.lowered {
+        top: 75%;
+      }
+    }
+  }
+
+  &.not-fullscreen {
+    position: absolute;
+    z-index: 11; //just beneath header
+  }
+
+  .loader-text {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 18px;
+    }
+
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: url("../img/loading.svg") no-repeat 0 0 / cover;
+      animation: lds-dual-ring 1.2s linear infinite;
+      margin-top: -50px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 66px;
+        height: 66px;
+        margin-top: -60px;
+      }
+    }
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.loaderWrap {
+  position: relative;
+}

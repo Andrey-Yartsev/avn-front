@@ -1,0 +1,528 @@
+@import "components/imports";
+
+#content {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  } 
+}
+
+.popup {
+
+  .notifications-popup {
+    display: flex;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      overflow-y: auto;
+      flex-direction: column;
+      justify-content: stretch;
+      position: relative;
+    }
+
+    .NotificationsCollectionView {
+      
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
+    .notifications-container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: calc(100vh - 148px);
+      } 
+    }
+
+    > .content {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 1;
+        margin-right: 30px;
+        padding-left: 30px;
+      }
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      top: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 0;
+      left: 0;
+      transform: none;
+      background: $white
+        linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%)
+        fixed;
+      &:before {
+        background: $light;
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.3;
+      }
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background: none;
+      max-height: calc(100vh - 36px);
+      top: 36px;
+      box-shadow: none;
+      max-width: 680px;
+      border-radius: 5px 5px 0 0;
+      padding: 84px 0 0;
+
+      .close {
+        z-index: 10;
+        right: 30px;
+        top: 29px;
+      }
+    }
+  }
+}
+#site_header {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
+}
+
+.notifications-header {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    background-clip: padding-box;
+    position: relative;
+    z-index: 10;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: none;
+  }
+
+  .scroll-top & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+          top: -44px;
+      }
+  }
+}
+
+.btn-settings {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: color 0.3s ease;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    color: $secondary-color;
+  }
+  &:before {
+    @include icon-font;
+    font-size: 24px;
+    content: "\E62F";
+  }
+}
+
+.NotificationsCollectionView {
+
+    &.no-notifications {
+      
+      .msg-no-content {
+        pointer-events: auto;
+        opacity: 1;
+      }
+
+      .notifications {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }  
+
+        .notifications-popup & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            display: none;
+          }  
+        }
+      }
+
+      .notifications-container {
+
+        .notifications-popup & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            background-color: $white;
+            padding: 35px 0;
+            border-radius: 0 0 5px 5px;
+          }  
+        } 
+      }
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 0 10px;
+        margin: 0 auto 20px;
+        max-width: 642px;
+        position: relative;
+        width: 100%;
+        min-height: calc(100% - 75px);
+
+        .notifications-popup & {
+            padding: 0;
+            margin: 0;
+            position: static;
+            min-height: auto;
+        }
+    }
+
+    .notifications-container {
+      position: relative;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            overflow: hidden;
+            box-shadow: 0 6px 30px rgba(#000, .15);
+            border-radius: 5px;
+            background-color: $white;
+        }    
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            margin-top: 60px;
+            background-color: $white;
+            min-height: calc(100% - 148px);
+        }
+
+        .notifications-popup & {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+                position: static;
+                overflow: visible;
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 620px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: transparent;
+            }
+        }
+    }    
+
+    .notifications-filter {
+        display: flex;
+        position: relative;
+        padding: 0 8px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: -60px;
+        }
+        
+        @include media-breakpoint-up($desktop-breakpoint) {
+            padding: 0 15px;
+            box-shadow: 0 0 5px rgba(#000, .3);
+            background: $white;
+            z-index: 2;
+
+            .notifications-popup & {
+                z-index: 10;
+                border-radius: 5px 5px 0 0;
+            }
+        }
+
+        .notifications-popup & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            z-index: 10;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            left: 30px;
+            right: 30px;
+            top: 24px;
+          }  
+        }
+
+        .notificationsFilterList{
+          display: flex;
+            @include media-breakpoint-down($desktop-breakpoint) {
+                width: 100%;
+            }
+        }
+        a {
+            padding: 15px 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 0;
+            font-weight: 500;
+            color: inherit;
+            @include media-breakpoint-down($desktop-breakpoint) {
+                flex: 1;
+                justify-content: center;
+            }
+            @include media-breakpoint-up($desktop-breakpoint) {
+                margin: 0 10px 0 0;
+            }
+            &:before {
+                font-size: 24px;
+                opacity: .3;
+                font-weight: 400;
+                transition: opacity .3s ease, color .3s ease;
+                @include media-breakpoint-down($desktop-breakpoint) {
+                    color: $secondary-color;
+                }
+            }
+            &.active {
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    font-size: 17px;
+                }
+                &:before {
+                    opacity: 1;
+                    color: $primary-color;
+                    @include media-breakpoint-up($desktop-breakpoint) {
+                        margin: 0 8px 0 0;
+                    }
+                }
+                @include media-breakpoint-up($desktop-breakpoint) {
+                    &:after {
+                        position: absolute;
+                        height: 2px;
+                        background: $secondary-color;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        content: '';
+                    }
+                }
+            }
+            &:hover {
+                &:before {
+                    color: $primary-color;
+                    opacity: 1;
+                }
+            }
+        }
+
+        .btn-settings {
+            position: absolute;
+            right: 5px;
+
+            .notifications-popup & {
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                right: 45px;
+              }  
+            }
+        }
+    }
+
+    .notifications {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+            padding: 1px 0 20px;
+            background-color: $white;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+            overflow-y: auto;
+            height: calc(100vh - 160px);
+        }
+
+        .notifications-popup & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            max-height: calc(100vh - 120px);
+            height: auto;
+          }    
+        }
+
+        .os-content {
+
+            &:after {
+                content: "";
+                height: 60px;
+                clear: both;
+                display: none;
+
+                .notifications-popup & {
+
+                  @include media-breakpoint-up($desktop-breakpoint) {
+                    display: block;
+                  }  
+                }    
+            }
+        }
+
+        &.os-host-resize-disabled.os-host-scrollbar-horizontal-hidden > .os-scrollbar-vertical {
+          bottom: 0;
+
+          .notifications-popup & {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              bottom: 60px;
+            }  
+          }
+        }
+
+        .os-scrollbar {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            display: none;
+          }
+        }
+
+        &.os-host {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            overflow: hidden !important;
+            flex: 1;
+          } 
+        }
+    }
+
+  .NotificationsView {
+    border-bottom: 1px solid rgba($gray, 0.2);
+    background: $white;
+    &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 5px 5px;
+    }
+    & > div {
+      position: relative;
+      padding: 14px 20px 14px 54px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 14px 20px 14px 65px;
+      }
+      &:before {
+        position: absolute;
+        left: 15px;
+        top: 11px;
+        opacity: 0.3;
+        font-size: 24px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          left: 20px;
+        }
+      }
+      &.unread {
+        &:before {
+          opacity: 1;
+          color: $primary-color;
+        }
+        .timestamp {
+          opacity: 1;
+          color: $secondary-color;
+        }
+      }
+    }
+    .avatars-wrapper {
+      display: flex;
+    }
+    .avatar {
+      display: block;
+      font-size: 24px;
+      &:nth-child(n + 2) {
+        margin-left: 10px;
+      }
+    }
+    .content {
+      padding: 9px 0 0;
+
+      a {
+        font-weight: 500;
+        color: $main-color;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+    .timestamp {
+      position: absolute;
+      right: 15px;
+      top: 19px;
+      font-weight: 500;
+      font-size: 13px;
+      opacity: 0.5;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 20px;
+      }
+    }
+  }
+  .notifications-filter a,
+  .NotificationsView > div {
+    &:before {
+      @include icon-font;
+    }
+    &.all {
+      &:before {
+        content: "\E632";
+      }
+    }
+    &.subscribed {
+      &:before {
+        content: "\E630";
+      }
+    }
+    &.favorited {
+      &:before {
+        content: "\E616";
+      }
+    }
+    &.price_changed {
+      &:before {
+        content: "\E62E";
+      }
+    }
+    &.message,
+    &.replied,
+    &.commented {
+      &:before {
+        content: "\E617";
+      }
+    }
+    &.tip {
+      &:before {
+        content: "\E618";
+      }
+    }
+    &.mentioned {
+      &:before {
+        content: "\E631";
+      }
+    }
+    &.system {
+      &:before {
+        content: "\E619";
+      }
+    }
+    &.followed {
+      &:before {
+        content: "\E630";
+      }
+    }
+  }
+}

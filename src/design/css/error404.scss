@@ -1,0 +1,16 @@
+@import "components/imports";
+.error404View,
+.EmailConfirmedView,
+.PasswordConfirmedView
+{
+    text-align: center;
+    @include media-breakpoint-down($desktop-breakpoint) {
+        > .container {
+            max-width: 290px;
+            margin: 0 auto;
+        }
+        p {
+            padding: 0;
+        }
+    }
+}

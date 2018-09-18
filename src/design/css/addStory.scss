@@ -1,0 +1,236 @@
+@import "components/imports";
+@import 'components/videoPlayButton';
+@import "components/headerMediasAdd";
+@import "components/textMode";
+@import 'optionsColors';
+
+@keyframes splash {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+html {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 100%;
+  } 
+}
+
+body {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+  }  
+}
+
+#site_header{
+  display: none; /*fixme*/
+}
+
+
+.storyOptions {
+  display: none; /*remove line when do buttons on add story page*/
+  /*display: flex; */ /*this line uncomment when do buttons on add story page*/
+  z-index: 2;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.addStoryView{
+  background: linear-gradient(30deg, var(--secondary-color-20) 10%, var(--primary-color-20) 90%);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  .storyOverlay{
+    position: absolute;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    
+    &:after {
+
+      .stream_enabled & {
+        content: none;
+      }
+    }
+
+    .storyPlaceholder{
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 21px;
+      color: #FFF;
+      opacity: 0.3;
+
+      > label {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: block;
+
+        > span {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          max-width: 250px;
+          width: 100%;
+        }
+      }
+    }
+
+    .storyBottom{
+      position: absolute;
+      bottom: 1em;
+      width: 100%;
+      text-align: center;
+      > span{
+        max-width: 20em;
+        min-width: 10em;
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  .storyPreview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+
+    > img{
+      max-width: 100%;
+      max-height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      z-index: 2;
+    }
+
+    > video{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+    }
+  }
+}
+
+.story-block-fill {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  filter: opacity(50%) blur(10px);
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+  z-index: 0;
+}
+
+
+.font-style {
+
+  + .options {
+    margin-bottom: 0;
+  }
+
+  &__strong {
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  &__modern {
+    font-size: 21px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  &__type {
+    font-size: 24px;
+    font-family: 'Cutive Mono', monospace;
+  }
+
+  &__soft {
+    font-size: 24px;
+    font-family: 'Courgette', cursive;
+  }
+
+
+  ul {
+    list-style: none;
+    padding: 10px 30px 0;
+    margin: 0;
+
+    li {
+      text-align: center;
+      border-bottom: 1px solid rgba($gray, .2);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        display: block;
+        color: $main-color;
+        opacity: .5;
+        transition: all .3s;
+
+        &.font-style__strong,
+        &.font-style__modern {
+          padding: 12px 0;
+        }
+
+        &.font-style__soft,
+        &.font-style__type {
+          padding: 9px 0;
+        }
+
+        &:hover {
+          animation: splash .3s normal forwards ease-in-out;
+          opacity: .8;
+        }
+      }
+    }
+  }
+}
+
+
+.addStoryButton.btn {
+  background-color: rgba(255, 255, 255, 1);
+  color: $main;
+  opacity: 0.7;
+  font-weight: 400;
+  box-shadow : 0px 2px 3px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &[disabled] {
+    opacity: .3;
+  }
+}

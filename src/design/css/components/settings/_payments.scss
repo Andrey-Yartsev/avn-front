@@ -1,0 +1,146 @@
+.exp-row {
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 0;
+
+  input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .exp-divider {
+    padding: 0 7px;
+  }
+}
+
+.exp-month,
+.exp-year {
+  flex: 1;
+}
+
+.input-cvv-field {
+  flex: 1;
+}
+
+.cards-list {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 10px;
+    margin: -4px 0 21px;
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 40px;
+    background-size: 30px auto;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    border-bottom: 1px solid rgba($gray, 0.2);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    &.visa {
+      background-image: url(../img/card-visa.svg);
+    }
+    &.maestro {
+      background-image: url(../img/card-maestro.svg);
+    }
+    &.mastercard {
+      background-image: url(../img/card-mastercard.svg);
+    }
+    &.american {
+      background-image: url(../img/card-american.svg);
+    }
+    .payment-system {
+      font-weight: 500;
+      width: 28%;
+    }
+    .number {
+      margin: 0 auto 0 10px;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    .update,
+    .delete {
+      border: none;
+      padding: 0;
+      background: none;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-size: 0;
+        &:before {
+          @include icon-font;
+          font-size: 24px;
+        }
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-weight: 500;
+      }
+    }
+    .update {
+      margin-right: 25px;
+      color: $secondary-color;
+    }
+    .delete {
+      color: $primary-color;
+    }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      .update {
+        margin-right: 15px;
+        &:before {
+          content: '\E647';
+        }
+      }
+      .delete {
+        &:before {
+          content: '\E648';
+        }
+      }
+    }
+  }
+}
+
+.paymentsCollectionsView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow: auto;
+  }
+}
+
+.input-cvv {
+  margin-right: 20px;
+
+  &-wrapper {
+    align-items: center;
+  }
+}
+
+
+.btn_next {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: 170px;
+  }
+}
+
+.payments-nocard {
+  min-height: 300px;
+  padding-top: 50px;
+
+  & h1 {
+    text-align: center;
+  }
+
+  &:empty {
+    display: none;
+  }
+}
+
+.paymentsStatementsView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow: auto;
+  }
+}

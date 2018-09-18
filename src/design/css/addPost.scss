@@ -1,0 +1,621 @@
+@import "components/imports";
+@import "components/addMenu";
+
+.addPost {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 100%;
+    background: $white;
+    margin-top: -44px;
+    position: relative;
+    z-index: 20;
+
+    #content > & {
+      transition: none;
+    }
+
+    .feed & {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    .popup &,
+    .feed & {
+      padding: 0;
+      max-width: none;
+      margin: 0;
+    }
+  }
+
+  &-header {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      height: 87px;
+      align-items: center;
+      padding: 0 15px 43px 0;
+      position: relative;
+      z-index: 2;
+      background: inherit;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
+    }
+
+    .go-back {
+
+      &:before {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: '\E605';
+        }
+      }
+    }
+  }
+
+  .add-new-form.expanded {
+
+    .add-new-type {
+
+      .addNewNav {
+
+        > a,
+        > span {
+          font-size: 9px;
+          text-align: center;
+          justify-content: center;
+          align-content: flex-start;
+
+          &:before {
+
+            .popup & {
+              margin-top: 5px;
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                margin-top: 12px;
+              }
+            }
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              margin-top: 3px;
+            }
+          }
+
+          &.active {
+
+            &:before {
+
+              .popup & {
+                width: 54px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tweet-new-post {
+  display: none;
+  margin: 0 15px 0 0;
+
+  .add-new-form.expanded & {
+    display: block;
+  }
+
+  input {
+    display: none;
+  }
+
+  .icon {
+    color: $main-color;
+    opacity: .3;
+    transition: color .3s ease, opacity .3s ease;
+
+    &:before {
+      font-weight: 400;
+      @include icon-font;
+      font-size: 24px;
+      width: 1.6em;
+      content: '\E61F';
+    }
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: absolute;
+    top: 7px;
+    right: 80px;
+    z-index: 2;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover .icon {
+      color: $secondary-color;
+      opacity: 1;
+    }
+  }
+
+  input:checked + .icon {
+    color: $secondary-color;
+    opacity: 1;
+  }
+}
+
+.add-new-form {
+  position: relative;
+  background: $white;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow: hidden;
+    display: flex;
+    padding: 15px 0 15px 60px;
+    border-radius: 5px;
+    box-shadow: 0 8px 30px rgba(#000, 0.1);
+
+    .popup & {
+      overflow: visible;
+    }
+  }
+
+  .feed & {
+    border-radius: 5px 5px 0 0;
+    box-shadow: none;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+
+  .popup & {
+    margin-top: 44px;
+    border-radius: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 60px;
+    }
+
+    .add-new-type {
+
+      .addNewNav {
+
+        > a,
+        > span {
+
+          &:after {
+            display: block;
+            top: auto;
+            bottom: 0;
+            top: auto;
+          }
+
+          &.active {
+
+            .add-new-type__text {
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                opacity: 1;
+              }
+            }  
+          }
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    background: linear-gradient(30deg, $secondary-color-12 10%, $primary-color-12 90%);
+
+    &.expanded {
+      display: block;
+    }
+  }
+
+  .avatar {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 30px;
+      position: absolute;
+      left: 15px;
+      top: 15px;
+    }
+
+    &:before {
+      box-shadow: none;
+    }
+  }
+
+  .addFileCollectionView {
+    margin: 0 8px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 180px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:not(:empty) {
+        border-top: 1px solid rgba($gray, .2);
+      }
+    }
+
+    .addFileView {
+      margin: 12px 8px 15px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 14px 8px 15px;
+      }
+    }
+  }
+
+  .text-media-container {
+    transition: height .3s ease, box-shadow .3s ease;
+    overflow: hidden;
+    flex: 1;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      overflow: visible;
+
+      &:before {
+        position: absolute;
+        bottom: -1px;
+        content: '';
+        height: 1px;
+        left: 15px;
+        right: 15px;
+        background: rgba($gray, .2);
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-radius: 15px;
+      background-color: $white;
+    }
+  }
+
+  textarea {
+    background-color: transparent;
+    caret-color: $secondary-color;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font-size: 17px;
+      padding: 21px 15px;
+      height: 137px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 30px;
+      overflow: hidden;
+    }
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .add-media-input {
+    color: $secondary-color;
+    transition: color .3s ease;
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+      top: 15px;
+      right: 170px;
+    }
+
+    &:before {
+      @include icon-font;
+      font-size: 24px;
+      width: 2em;
+      content: '\E61A';
+      display: block;
+    }
+  }
+
+  .submit {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 21px;
+      padding-right: 21px;
+      display: none;
+    }
+  }
+
+  .voting-block-toggle-btn {
+    display: none;
+    transition: color .3s ease;
+    cursor: pointer;
+    color: $secondary-color;
+
+    &:hover,
+    &.active {
+      color: $secondary-color-darken;
+    }
+
+    &:before {
+      @include icon-font;
+      font-size: 24px;
+      width: 1.5em;
+      display: block;
+      content: '\E624';
+    }
+  }
+
+  &:not(.expanded) {
+
+    .add-new-type {
+      .addNewNav {
+
+        > a,
+        > span {
+          width: 39px;
+
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &.expanded {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 15px 15px 10px 60px;
+
+      .text-media-container {
+        border-radius: 6px;
+        box-shadow: 0 0 0 2px $secondary-color-20;
+      }
+    }
+
+    .popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-bottom: 15px;
+      }
+    }
+
+    textarea {
+      overflow: auto;
+      max-height: 200px;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        height: 137px;
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 80px;
+      }
+    }
+
+    .popup & {
+
+      textarea {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          height: 80px;
+        }
+      }
+    }
+
+    .add-media-input {
+      position: static;
+      margin-right: 7px;
+
+      &:before {
+        width: 1.8em;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 1.1em;
+        }
+      }
+    }
+
+    .add-new-type {
+      margin-left: auto;
+      margin-right: auto;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-top: -3px;
+        transform: translateX(7px);
+      }
+
+      .addNewNav {
+
+        > a,
+        > span {
+
+          &:before {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              width: 1.8em;
+            }
+          }
+
+          &.active {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              margin: 0 8px 0 0;
+
+              .popup & {
+                margin: 0;
+              }
+
+              &:before {
+
+                @include media-breakpoint-up($desktop-breakpoint) {
+                  width: 54px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 0;
+          transform: translateX(0);
+        }
+        .addNewNav {
+
+          > span {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              margin-left: 4px;
+              flex: 0 0 72px;
+            }
+
+            &:before {
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                width: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .tweet-new-post {
+      .popup & {
+        margin-left: auto;
+      }
+    }
+
+    .submit {
+      display: block;
+    }
+
+    .actions {
+      padding: 12px 5px 0;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 15px 0 0;
+      }
+    }
+
+    .voting-block-toggle-btn {
+      display: block;
+    }
+  }
+}
+
+.actions-controls {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.b-check-state {
+  font-size: 13px;
+  line-height: 29px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-left: 8px;
+  }
+
+  .add-new-form:not(.expanded) & {
+    display: none;
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    left: -999em;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+
+    &:checked {
+
+      + .b-check-state__icon {
+        opacity: 1;
+
+        &:before {
+          opacity: 0;
+        }  
+
+        &:after {
+          opacity: 1;
+        }
+
+        + .b-check-state__text {
+          opacity: 1; 
+        }
+      }
+    }
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    position: relative;
+    opacity: .5;
+
+    &:before,
+    &:after {
+      @include icon-font;
+      width: 18px;
+      height: 18px;
+      line-height: 15px;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 24px;
+      transition: opacity .3s;
+    }
+
+    &:before {
+      content: "\E610";
+      opacity: .5;
+      color: $main-color;
+    }
+
+    &:after {
+      content: "\E60F";
+      color: $secondary-color;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+  }
+
+  &__text {
+    margin-top: 1px;
+    opacity: .5;
+    white-space: nowrap;
+  }
+
+  label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+}

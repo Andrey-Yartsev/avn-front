@@ -1,0 +1,384 @@
+@import "components/imports";
+
+#site_header {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
+}
+
+.header-mobile {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    background-color: $white;
+  } 
+}
+
+.popup-container.post-popup {
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  max-width: 100%;
+  width: auto;
+  overflow: visible;
+  box-sizing: border-box;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    background: none;
+    display: flex;
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: flex;
+    border-radius: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*padding-bottom: 46px;*/
+  }
+  .content {
+    overflow: auto;
+    border-radius: 5px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      border-radius: 0;
+      width: 100%;
+      overflow: hidden;
+
+      .post.postPage {
+        width: 100%;
+        overflow-y: scroll;
+      }
+    }
+  }
+  .close {
+    position: fixed;
+    color: #fff;
+    opacity: .7;
+    font-size: 30px;
+    padding: 7px 10px;
+    &:hover {
+      opacity: 1;
+    }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      right: auto;
+      left: 0;
+      width: 54px;
+      height: 44px;
+      padding: 0;
+      z-index: 15;
+      opacity: 0;
+      &:hover {
+        opacity: 0;
+      }
+      &:before {
+        @include position-center;
+      }
+    }
+  }
+
+  .next,
+  .previous {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.post.postPage {
+  background: $white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 940px;
+    margin: 0 auto 20px;
+    border-radius: 5px;
+    min-height: 440px;
+    overflow: hidden;
+
+    .popup-container.post-popup & {
+      max-height: calc(100vh - 120px);
+      min-height: 440px;
+    }
+  }
+
+  .popup-container.post-popup & {
+    margin: 0;
+    max-width: inherit;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: relative;
+    .media {
+      padding: 4px 0 0;
+    }
+  }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: flex;
+
+    .media {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      figure {
+          display: flex;
+          align-items: center;
+      }
+      video,
+      img {
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          display: block;
+          .popup-container.post-popup & {
+              max-height: 440px;
+          }
+      }
+      img.locked {
+          width: 440px;
+      }
+      & + .right-col {
+          &,
+          .popup & {
+          flex: 0 1 360px;
+          width: 360px;
+          }
+          .comments-list {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              padding: 0 15px;
+
+              .comment {
+                  width: 100%;
+              }
+          }
+          .load-more-comments {
+              & + .comments-list {
+                  top: 16px;
+              }
+          }
+      }
+    }
+      
+    .right-col {
+        width: 100%;
+        background: $white;
+        .popup & {
+            width: 620px;
+        }
+    }
+
+    .postComments {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+  }
+
+  .media {
+
+    .media-slider-pagination {
+      bottom: 7px;
+
+      @include media-breakpoint-up($tablet-breakpoint) {
+        bottom: 24px;
+      }
+        
+      .item {
+        width: 6px;
+        height: 6px;
+        margin: 0 3px;
+
+        @include media-breakpoint-up($tablet-breakpoint) {
+          width: 8px;
+          height: 8px;
+          margin: 0 5px;
+        }
+      }
+    }
+    .media-slider-navigation {
+      .btn-prev,
+      .btn-next {
+        width: 56px;
+        font-size: 44px;
+      }
+    }
+  }
+  @media (min-height: 560px) and (min-width: 768px) {
+    .popup-container.post-popup & {
+      .media {
+        video,
+        img {
+          max-height: calc(100vh - 120px);
+        }
+      }
+    }
+  }
+  .right-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .post-header {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 5px;
+      padding-bottom: 16px;
+      &:after {
+        content: '';
+        background: rgba($gray, .2);
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 15px;
+        right: 15px;
+      }
+    }
+  }
+  .actions {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      order: -2;
+      padding-top: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba($gray, .2);
+      margin: 0 0 12px;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 0;
+      padding-bottom: 16px;
+      .likes,
+      .comments,
+      .tips,
+      .report {
+        min-width: 41px;
+      }
+    }
+  }
+  .tip-form {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      order: -1;
+      padding-top: 0;
+      padding-bottom: 10px;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      .btn {
+        width: 80px;
+        flex: 0 0 80px;
+      }
+      .tip-amount-input {
+        min-width: 0;
+      }
+    }
+  }
+  .comment-form {
+    padding-top: 15px;
+    position: relative;
+    padding-bottom: 9px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $white;
+      z-index: 10;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      box-shadow: 0 -3px 2px rgba(#000, 0.05);
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      &:after {
+        content: '';
+        background: rgba($gray, .2);
+        height: 1px;
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+      }
+    }
+    .comment-btn {
+      flex: 0 1 auto;
+      width: auto;
+    }
+  }
+  .load-more-comments {
+    font-size: 13px;
+  }
+  .text {
+    padding-bottom: 7px;
+  }
+
+  .comments-list {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      overflow: hidden;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    .comment {
+      position: relative;
+      padding-left: 40px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 590px;
+      }
+      .comment {
+        margin: 6px 0;
+        width: auto;
+        padding-left: 30px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 0 0 2px;
+        }
+        .avatar {
+          font-size: 20px;
+        }
+      }
+      .avatar {
+        font-size: 30px;
+        position: absolute;
+        left: 0;
+        top: 8px;
+      }
+      .btn-like {
+        position: absolute;
+        right: 2px;
+        top: 13px;
+        font-size: 19px;
+        padding: 0;
+        border: none;
+        background: none;
+        opacity: .15;
+        transition: all .3s ease;
+        color: inherit;
+        &:before {
+          content: '\E616';
+          @include icon-font;
+        }
+        &.active {
+          opacity: 1;
+          color: $primary-color;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+          &:hover {
+            opacity: 1;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

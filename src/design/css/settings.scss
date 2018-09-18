@@ -1,0 +1,349 @@
+@import 'components/imports';
+@import 'components/settings/nav';
+@import 'components/settings/profile';
+@import 'components/settings/payouts';
+@import 'components/settings/payments';
+@import 'components/settings/account';
+@import 'components/settings/referrals';
+@import 'components/settings/security';
+@import "components/table";
+
+#site_header,
+.header-nav {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
+}
+
+.settings {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .aside-col {
+      order: 1;
+    }
+
+    .content-col {
+      order: 2;
+    }
+  }
+
+  &-header {
+    background: $white;
+    width: 100%;
+    background-clip: padding-box;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    box-shadow: 0 0 5px rgba(#000, 0.3);
+    height: 44px;
+    display: flex;
+    align-items: center;
+    .dark & {
+      background: $main-color;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+    .header-apply-btn {
+      margin: 0 15px;
+    }
+
+    .page-title {
+      margin-right: 54px;
+      flex: 1;
+    }
+  }
+}
+
+.subscription {
+  position: relative;
+
+  &-desc{
+    font-size: 13px;
+  }
+
+  .label {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      color: lighten($gray, 20%);
+    }  
+  }
+
+  &__per-month {
+    position: absolute;
+    font-weight: 400;
+    top: 6px;
+    right: 10px;
+    color: lighten($gray, 20%);
+  }
+
+  &__field {
+    position: relative;
+    display: block;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+    }
+
+    &:before {
+      content: '$';
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      color: lighten($gray, 20%);
+    }
+  }
+
+  &__input {
+    padding-right: 90px;
+    padding-left: 23px;
+  }
+}
+
+.TwitterView {
+
+  .AccountAllView {
+
+    .form-title {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+}
+
+.AccountAllView {
+
+  .form-title {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+
+    h1 {
+      font-size: 21px;
+      font-weight: 500;
+      margin: 0 20px 0 0;
+      flex: 1;
+      @include ellipsis;
+      overflow: hidden;
+    }
+
+    .btn-logout {
+      position: relative;
+      left: auto; right: auto;
+      top: auto; bottom: auto;
+      width: auto;
+      height: auto;
+      color: $primary-color;
+      font-weight: 500;
+
+      &:hover {
+        color: $primary-color-darken;
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .password-form {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 9px;
+    }
+
+    .form-title {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 25px;
+      }
+
+      .semi-transparent {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 17px;
+        }
+      }
+    }
+
+    .btn.saveChanges {
+      font-weight: 400;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 274px;
+      }
+    }
+  }
+}
+
+h1.form-title {
+  display: none;
+  font-weight: 500;
+  font-size: 21px;
+  padding: 17px 20px;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: block;
+  }
+  button {
+    right: 20px;
+    position: absolute;
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: $secondary-color;
+  }
+}
+.settings {
+  .aside-col {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      order: 1;
+      padding-left: 10px;
+    }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+    }
+  }
+
+  .content-col {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      order: 2;
+    }
+  }
+}
+.rounded-container {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    .content-col & {
+      height: calc(100% - 20px);
+    }
+  }
+
+  &_fluid-height {
+    
+    @include media-breakpoint-up($desktop-breakpoint) {
+      .content-col & {
+        height: auto;
+      }
+    }
+  }
+}
+
+.SettingsPrivacyView,
+.SettingsStoryView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .blocked-search,
+    .blocked-table-header,
+    .table,
+    .table-wrapper {
+      display: none;
+    }
+    .BlockedView & {
+
+      .blocked-search,
+      .table,
+      .table-wrapper {
+        display: block;
+      }
+      .blocked-table-header {
+        display: flex;
+      }
+      .semi-transparent,
+      .settings-nav,
+      form {
+        display: none;
+      }
+    }
+  }
+}
+
+.SettingsStoryView {
+
+  .form-title {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 19px 15px 10px;
+    }
+  }
+
+  .form-group {
+
+    .saveChanges {
+      margin-top: 3px;
+    }
+  }
+}
+
+.delete-account-block {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-top: 27px;
+    padding-bottom: 4px;
+  }
+}
+
+.EmailView {
+
+  > .AccountAllView {
+
+    > .form-title {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+}
+
+.TwitterBlockView {
+
+  .form-group-title {
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.PasswordView {
+
+  > .AccountAllView {
+
+    > .form-title {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }  
+}
+
+.option-earn-money {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-bottom: 20px;
+  }
+
+  .semi-transparent {
+    opacity: .5;
+    font-weight: 500;
+  }
+}
+
+
+.empty-table-info {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 16px;
+  display: none;
+
+  span {
+    opacity: .5;
+  }
+}

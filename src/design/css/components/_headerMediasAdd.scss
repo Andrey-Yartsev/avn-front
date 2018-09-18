@@ -1,0 +1,318 @@
+@import "addMenu";
+
+.stream,
+.storyOverlay {
+
+  .add-new-type {
+
+    &:after {
+      position: absolute;
+      pointer-events: none;
+      bottom: 0;
+      height: 1px;
+      background: #fff;
+      opacity: .2;
+      content: '';
+      left: 0;
+      right: 0;
+      z-index: 1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
+    .stream_enabled & {
+      display: none;
+    }
+
+    .addNewNav {
+
+      > span {
+        opacity: .7;
+        color: #fff;
+        width: 100%;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 0 0 0 5px;
+          width: 70px;
+        }
+
+        &:before {
+          color: #fff;
+          opacity: 1;
+        }
+
+        &:after {
+          left: -1px;
+          right: -1px;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.active {
+          opacity: 1;
+
+          &:after {
+            background-color: #fff;
+          }
+        }
+        span {
+          color: inherit;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .category-name {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    margin-top: -2px;
+    transition: all .3s;
+  }
+
+}
+
+.mediasTop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 0 4em 0 1em;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &:before {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+    opacity: .2;
+    content: '';
+    z-index: 1;
+  }
+
+  &:after {
+    position: absolute;
+    pointer-events: none;
+    bottom: 0;
+    height: 1px;
+    background: #fff;
+    opacity: .2;
+    content: '';
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: none;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 2px;
+      display: block;
+    }
+  }
+
+  .add-new-type {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      left: auto; right: auto;
+      top: auto;
+    }
+  }
+
+  &__header {
+    padding: 10px 15px 12px;
+    overflow: auto;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+
+    .close {
+      position: fixed;
+      top: 0;
+      border: none;
+      background: none;
+      color: #fff;
+      z-index: 3;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        left: 0;
+        padding: 7px 15px;
+        font-size: 24px;
+        .stream_enabled & {
+          left: auto;
+          right: 0;
+        }
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 0;
+        padding: 12px 15px;
+        font-size: 30px;
+      }
+      &:before {
+        content: '\E605';
+        @include icon-font;
+      }
+    }
+
+    .addStoryButton.btn {
+      height: 25px;
+      padding: 4px 23px;
+      box-shadow: none;
+      z-index: 100;
+    }
+
+    .addTextButton.btn {
+      background-color: transparent;
+      color: #fff;
+      width: auto;
+      height: auto;
+      padding: 3px 5px;
+      display: none;
+    }
+  }
+
+  > .close {
+    position: fixed;
+    top: 0;
+    border: none;
+    background: none;
+    color: #fff;
+    z-index: 3;
+    display: block;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      left: 0;
+      padding: 7px 15px;
+      font-size: 24px;
+
+      .stream_enabled & {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: 0;
+      padding: 12px 15px;
+      font-size: 30px;
+    }
+
+    &:before {
+      content: '\E605';
+      @include icon-font;
+    }
+  }
+}
+
+.mediasHeaderControls {
+  float: right;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    float: none;
+  }
+
+  #stop {
+    display: none;
+  }
+}
+
+.texteditor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 104px 20px;
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 162px 40px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    color: #fff;
+    font-weight: 500;
+    font-size: 21px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    caret-color: $secondary-color;
+
+    &:focus {
+      outline: none;
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  .mediasBottom {
+    display: none;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: block;
+    }
+
+    .addTextButton.btn {
+      width: 162px;
+      color: $main;
+      background-color: rgba(255, 255, 255, 1);
+      opacity: .7;
+    }
+  }
+}
+
+.mediasBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3.3em;
+  z-index: 2;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    bottom: 4em;
+  }
+
+  .btn {
+    margin: 0 auto;
+    width: 240px;
+    height: 40px;
+    font-weight: 400;
+    display: block;
+    transition: all .3s;
+  }
+}
