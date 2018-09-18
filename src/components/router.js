@@ -21,7 +21,7 @@ const routes = [
     { path: '/explore/videos', component: ExploreVideosPage },
     { path: '/chat', component: MessagesPage },
     { path: '/notifications', component: NatificationsPage },
-]
+];
 
 export default new VueRouter({
     mode: 'history',
