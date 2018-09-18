@@ -13,6 +13,9 @@ export default {
   name: 'app',
   components: {
     Login
+  },
+  mounted () {
+    console.log(process.env)
   }
 }
 </script>

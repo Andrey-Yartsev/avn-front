@@ -44,12 +44,20 @@
       </div>
       <div class="login-form-col">
         <form>
-          <input class="lg rounded" type="email" name="email" placeholder="Email" required autocomplete="email"/>
-          <input class="lg rounded" type="password" name="password" placeholder="Password" required
+          <input class="lg rounded" type="email" name="email" placeholder="Email"  autocomplete="email"/>
+          <input class="lg rounded" type="password" name="password" placeholder="Password"
                  autocomplete="current-password"/>
-          <div class="g-recaptcha" id="captcha"></div>
+
+          <vue-recaptcha
+            ref="recaptcha"
+            @verify="onCaptchaVerified"
+            @expired="onCaptchaExpired"
+
+            sitekey="6LeeX1IUAAAAAAFOfsT_ZL72M_6AXCdHejfQgTdn"
+          />
+
           <div class="hidden error">Email or password incorrect</div>
-          <button type="submit" class="btn lg alt block">Login</button>
+          <button type="submit" class="btn lg alt block" @click.prevent="login">Login</button>
         </form>
         <div class="login-or"><span>or</span></div>
         <button class="btn lg block twitter">Sign in with Twitter</button>
@@ -73,8 +81,36 @@
 </template>
 
 <script>
+  import auth from '@/api/auth'
+  import VueRecaptcha from 'vue-recaptcha';
+
   export default {
-    name: 'Login'
+    name: 'Login',
+
+    components: { VueRecaptcha },
+
+    data () {
+      return {
+        captcha: ''
+      }
+    },
+
+    methods: {
+      async login () {
+        const response = await auth.login({
+          email: 'andrey.yartsev.g@gmail.com',
+          password: 'otherpass',
+          captcha: this.captcha
+        })
+        console.log(await response.json())
+      },
+      onCaptchaVerified (recaptchaToken) {
+        this.captcha = recaptchaToken
+      },
+      onCaptchaExpired: function () {
+        this.$refs.recaptcha.reset();
+      }
+    }
   }
 </script>
 
