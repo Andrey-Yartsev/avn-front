@@ -1,0 +1,258 @@
+@import "components/imports";
+.addChatMessage {
+  position: relative;
+  border-top: 1px solid rgba(124, 139, 150, 0.2);
+  padding: 0.6em 0;
+  margin: auto 14px 0;
+  transition: transform .4s;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 1em 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 61px;
+  }
+}
+
+.chatForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  color: $main-color;
+
+  > * {
+
+    margin: 0 0 0 0.6em;
+    flex-grow: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 1em;
+    }
+  }
+  > *:first-child{
+    margin: 0;
+  }
+  .add-media-input {
+    color: $secondary-color;
+    transition: color .3s ease;
+    background-color: transparent;
+    border: none;
+    margin: 0 0.6em 0 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1em;
+    }
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
+    &:before {
+      @include icon-font;
+      font-size: 24px;
+      content: '\E61A';
+      display: block;
+    }
+  }
+  .tips {
+    color: $main-color;
+    opacity: .3;
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    transition: color .3s ease, opacity .3s ease;
+    margin: 0 0.6em 0 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1.1em;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      &:hover {
+        opacity: 1;
+        color: $primary-color;
+      }
+    }
+    &.active {
+      opacity: 1;
+      color: $primary-color;
+    }
+    &:before {
+      display: inline-block;
+      @include icon-font;
+      font-size: 24px;
+      margin: 0;
+      width: 1.1em;
+      font-weight: 400;
+      content: '\E618';
+    }
+  }
+  .submit{
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    color: $secondary-color;
+    transition: color .3s ease;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
+    &:before {
+      display: inline-block;
+      @include icon-font;
+      font-size: 24px;
+      margin: 0;
+      width: 1.1em;
+      font-weight: 400;
+      content: '\E62D';
+    }
+  }
+  .getPaid{
+    color: $main-color;
+    opacity: .3;
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    transition: color .3s ease, opacity .3s ease;
+    background-color: transparent;
+    border: none;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 15px;
+
+      &:hover {
+        opacity: 1;
+        color: $primary-color;
+      }
+    }
+    &.active {
+      opacity: 1;
+      color: $primary-color;
+    }
+    &:before {
+      display: inline-block;
+      @include icon-font;
+      font-size: 24px;
+      margin: 0;
+      width: 1.1em;
+      font-weight: 400;
+      content: '\E62E';
+    }
+  }
+  .text-media-container {
+    display: flex;
+    background-color: rgba(124, 139, 150, 0.08);
+    padding: 8px 0.55em 7px;
+    border-radius: 1em; 
+    border: none;
+    color: $main-color;
+    outline: none;
+    word-break: break-all;
+    width: 100%;
+    transition: all .3s ease;
+    box-sizing: border-box;
+    flex: 1;
+    height: auto;
+    position: relative;
+    margin-left: 0;
+    max-height: 200px;
+    -ms-overflow-style: none;
+    overflow: hidden;
+    line-height: 15px;
+    min-height: 30px;
+
+    &:focus {
+      background-color: $secondary-color-10;
+    }
+
+    &.hidden {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block !important;
+      }
+    }
+  }
+
+  .getPaidForm {
+    margin-left: 0;
+  }
+
+  .chatTip, .getPaidForm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 0 0 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      order: 5;
+      margin-left: 0;
+      margin-top: 15px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+    }
+
+    &__field {
+      flex: 1;
+      margin: 0 1em;
+    }
+  }
+
+  .tipAmount, .getPaidAmountPlaceholder {            
+    text-align: center;
+    border-radius: 1em;
+    background-color: rgba(124, 139, 150, 0.08);
+    padding-left: 0.55em;
+    padding-right: 0.55em;
+  }
+
+  .btn-el {
+
+    &.disabled,
+    &[disabled] {
+        opacity: 1;
+        pointer-events: none;
+        color: rgba(124, 139, 150, 0.18);
+    }
+  }
+}
+
+.field-text-message {
+  flex: 1;
+  position: relative;
+  margin-left: 0;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    /*margin-left: 1.1em;*/
+  }
+
+  &.disabled {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+
+    textarea {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}
+
+.price-message {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  opacity: .3;
+
+  &:empty {
+    display: none;
+  }
+}

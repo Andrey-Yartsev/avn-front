@@ -1,0 +1,184 @@
+@import "components/imports";
+.lives {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -3px;
+
+	@include media-breakpoint-up($desktop-breakpoint) {
+		margin-left: -30px;
+	}
+}
+.liveView {
+	width: calc(33.33% - 3px);
+	margin: 0 0 3px 3px;
+	position: relative;
+	cursor: pointer;
+	@include media-breakpoint-up($desktop-breakpoint) {
+		width: calc(25% - 30px);
+		margin: 0 0 30px 30px;
+	}
+	.live {
+		padding-top: 178%;
+		position: relative;
+		overflow: hidden;
+		height: 0;
+		@include media-breakpoint-up($desktop-breakpoint) {
+			padding-top: 166.6666667%;
+		}
+		> .views {
+			position: absolute;
+			z-index: 3;
+			bottom: 46px;
+			left: 0;
+			right: 0;
+			color: #fff;
+			pointer-events: none;
+			font-weight: 500;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			transition: opacity .3s ease;
+			@include media-breakpoint-down($desktop-breakpoint) {
+				font-size: 13px;
+				bottom: 30px;
+			}
+			&:before {
+				content: '\E633';
+				@include icon-font;
+				font-size: 1.2em;
+				line-height: 0;
+				vertical-align: middle;
+				font-weight: 400;
+				margin-right: 5px;
+			}
+		}
+	}
+	img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		opacity: 0;
+		transform: scale(5);
+		transition: opacity .3s ease, transform .3s ease;
+		pointer-events: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		color: #fff;
+		font-weight: 500;
+		padding: 0 18%;
+		z-index: 3;
+		.likes,
+		.views {
+			display: inline-flex;
+			align-items: center;
+			&:before {
+				@include icon-font;
+				font-size: 24px;
+				line-height: 0;
+				vertical-align: middle;
+				font-weight: 400;
+				margin-right: 5px;
+			}
+		}
+		.likes {
+			&:before {
+				content: '\E616';
+			}
+		}
+		.views {
+			&:before {
+				content: '\E633';
+			}
+		}
+	}
+	&:before {
+		pointer-events: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		background: rgba(#000, .4);
+		opacity: 0;
+		transform: scale(0);
+		content: '';
+		transition: opacity .3s ease, transform .3s ease;
+		z-index: 2;
+	}
+	.duration {
+		position: absolute;
+		right: 5px;
+		top: 3px;
+		color: #fff;
+		opacity: .7;
+		pointer-events: none;
+		display: inline-flex;
+		align-items: center;
+		z-index: 4;
+		@include media-breakpoint-up($desktop-breakpoint) {
+			right: 15px;
+			top: 12px;
+		}
+		.value {
+			font-weight: 500;
+			margin-right: 5px;
+			opacity: 0;
+			transition: opacity .3s ease;
+		}
+		&:after {
+			content: '\E621';
+			font-size: 18px;
+			@include icon-font;
+			@include media-breakpoint-up($desktop-breakpoint) {
+				font-size: 24px;
+			}
+		}
+	}
+	.name {
+		position: absolute;
+		z-index: 3;
+		bottom: 20px;
+		left: 0;
+		right: 0;
+		text-align: center;
+		color: #fff;
+		pointer-events: none;
+		font-weight: 500;
+		@include media-breakpoint-down($desktop-breakpoint) {
+			font-size: 11px;
+			bottom: 9px;
+		}
+		.verified-user {
+			color: inherit;
+		}
+	}
+	@include media-breakpoint-up($desktop-breakpoint) {
+		&:hover {
+			&:before,
+			.overlay {
+				opacity: 1;
+				transform: scale(1);
+			}
+			.duration {
+				.value {
+					opacity: 1;
+				}
+			}
+			.live > .views {
+				opacity: 0;
+			}
+		}
+	}
+}

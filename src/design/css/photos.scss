@@ -1,0 +1,168 @@
+@import "components/imports";
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -3px;
+    align-content: flex-start;
+    align-items: flex-start;
+    
+    @include media-breakpoint-down($desktop-breakpoint) {
+        overflow: hidden;
+        
+        .posts-container & {
+            box-shadow: none;
+        }
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: -30px;
+    }
+}
+.photoCollectionView {
+    .container > & {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            margin: 0 -15px;
+        }
+    }
+}
+.photoView {
+    width: calc(33.33% - 3px);
+    margin: 0 0 3px 3px;
+    @include media-breakpoint-up($desktop-breakpoint) {
+        width: calc(33.33% - 30px);
+        margin: 0 0 30px 30px;
+    }
+    figure {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        &:after {
+            pointer-events: none;
+            content: '';
+            display: block;
+            padding-top: 100%;
+            height: 0;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            &:before {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                background: rgba(#000, .4);
+                opacity: 0;
+                transform: scale(0);
+                z-index: 1;
+                content: '';
+                transition: opacity .3s ease, transform .3s ease;
+            }
+            &:hover {
+                &:before,
+                .overlay {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                .count {
+                    .value {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    .postLink {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+    }
+    .overlay {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            display: none;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            transform: scale(5);
+            transition: opacity .3s ease, transform .3s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: #fff;
+            font-weight: 500;
+            padding: 0 18%;
+            z-index: 1;
+            .likes,
+            .comments {
+                &:before {
+                    @include icon-font;
+                    font-size: 24px;
+                    line-height: 0;
+                    vertical-align: middle;
+                    font-weight: 400;
+                    margin-right: 5px;
+                }
+            }
+            .likes {
+                &:before {
+                    content: '\E616';
+                }
+            }
+            .comments {
+                &:before {
+                    content: '\E617';
+                }
+            }
+        }
+    }
+    .count {
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        color: #fff;
+        opacity: .7;
+        pointer-events: none;
+        display: inline-flex;
+        align-items: center;
+        z-index: 2;
+        @include media-breakpoint-up($desktop-breakpoint) {
+            right: 15px;
+            top: 12px;
+        }
+        .value {
+            font-weight: 500;
+            margin-right: 5px;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+        &:after {
+            content: '\E634';
+            font-size: 18px;
+            @include icon-font;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                font-size: 24px;
+            }
+        }
+    }
+
+    .locked-picture {
+        position: absolute;
+        left: 0; right: 0;
+        top: 0; bottom: 0;
+    }
+}

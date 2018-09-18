@@ -1,0 +1,260 @@
+.add-new-type {
+  font-size: 0;
+  padding: 0 8px;
+  position: relative;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+
+  .mediasTop & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      box-shadow: none;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      z-index: 2;
+    }
+  }
+
+  .popup & {
+
+    &:not(.chat-new-type) {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 0 13px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -60px;
+      }
+    }
+  }
+
+  &__text {
+    opacity: .5;
+    line-height: 11px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      opacity: .4;
+    }
+  }
+  .addNewNav {
+    display: flex;
+    position: relative;
+
+    > a,
+    > span {
+      font-weight: 500;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: $main-color;
+      position: relative;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .mediasTop & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          height: 60px;
+        }
+      }
+
+      .popup & {
+        white-space: nowrap;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          height: 60px;
+        }
+      }
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        height: 44px;
+      }
+
+      &:before {
+        font-weight: 400;
+        opacity: .3;
+        transition: color .3s ease, opacity .3s ease;
+        @include icon-font;
+        font-size: 24px;
+        width: 39px;
+        color: $main-color;
+        display: block;
+        flex: 0 0 100%;
+        line-height: 26px;
+      }
+
+      &.new-post {
+
+        &:before {
+          content: '\E623';
+        }
+      }
+
+      &.new-story {
+
+        &:before {
+          content: '\E620';
+        }
+      }
+
+      &.new-live {
+
+        &:before {
+          content: '\E621';
+        }
+      }
+
+      &.new-message {
+
+        &:before {
+          content: '\E622';
+        }
+      }
+
+      &.active {
+        cursor: default;
+      }
+
+      &.active,
+      &:hover {
+
+        &:before {
+          color: $primary-color;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &_underline-items {
+
+    a,
+    span {
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 1px; right: 1px;
+        height: 2px;
+        background-color: $secondary-color;
+        transition: opacity .3s ease;
+        opacity: 0;
+      }
+
+      &:before {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: 4px;
+        }
+      }
+
+      &.active {
+
+        &:after {
+          opacity: 1;
+        }
+
+        .add-new-type__text {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            opacity: 1;
+            color: $primary-color;
+          }
+        }
+      }
+
+    }
+
+    &.line-top {
+
+      a,
+      span {
+
+        &:after {
+          top: -12px;
+          @include media-breakpoint-down($desktop-breakpoint) {
+            top: auto;
+            bottom: 0;
+          }
+        }
+
+        &:before {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-top: 4px;
+          }
+        }
+
+        &.active {
+
+          .add-new-type__text {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              opacity: 1;
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+
+    &.line-bottom {
+
+      a,
+      span {
+
+        &:after {
+          bottom: 0;
+        }
+      }
+    }
+  }
+
+  &_b-with-text {
+    font-size: 9px;
+
+    a,
+    span {
+      align-content: flex-start;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: center;
+        justify-content: center;
+      }
+
+      &:before {
+        display: block;
+        flex: 0 0 100%;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 10px;
+        }
+      }
+
+      .mediasTop & {
+
+        &:before {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-top: 13px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+@import 'components/imports';
+
+.footer-nav {
+  display: flex;
+  font-size: 13px;
+  padding: 23px 0 17px;
+  justify-content: center;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 3px 0 15px;
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    justify-content: space-between;
+  }
+
+  &.second-footer-nav {
+    padding-top: 0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-right: auto;
+  }
+
+  a {
+    color: inherit;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.aside {
+    flex-wrap: wrap;
+  }
+
+  .FooterNavView {
+    margin: 0 14px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 8px;
+      margin-left: 8px;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin: 0 14px;
+    }
+
+    &.settings-onmyteam-link {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin: 10px auto;
+        flex: 0 0 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.staticPage,
+.error404View {
+  .footer-nav {
+    flex-wrap: wrap;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 0;
+    }
+
+    .FooterNavView {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin: 0;
+      }
+
+      &.settings-onmyteam-link {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin: 10px auto;
+          flex: 0 0 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.aside-col {
+
+  .footer-nav {
+
+    .FooterNavView {
+
+      &.settings-onmyteam-link {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 10px auto 0;
+        }
+      }
+    }
+  }
+
+  
+    &_with-footer {
+
+      .FooterNavCollectionView {
+          display: none;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+              margin-top: 83px;
+              padding-top: 20px;
+              position: sticky;
+              display: block;
+          }
+
+          &:before {
+              content: '';
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 1px;
+              position: absolute;
+              background: linear-gradient(to right, rgba($gray, .2) 0%, transparent 100%);
+              display: none;
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                  display: block;
+              }
+          }
+      }
+  }
+}

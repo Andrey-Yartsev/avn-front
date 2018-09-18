@@ -1,0 +1,102 @@
+.referrals {
+  &-form-title {
+    .inner {
+      .referrals-text {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  &-search {
+    position: relative;
+    width: 100%;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 16px;
+      input {
+        height: 24px;
+        padding: 3px 10px;
+      }
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 220px;
+      .form-title .inner & {
+        margin: -5px 0 0;
+      }
+    }
+    button {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      font-size: 18px;
+      right: 0;
+      width: 34px;
+      border: none;
+      background: none;
+      padding: 0;
+      opacity: 0.3;
+      color: inherit;
+      transition: opacity 0.3s ease;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: 2px;
+      }
+      &:before {
+        @include position-center;
+        @include icon-font;
+        content: '\E60C';
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+.ReferralsBlockCollectionView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow: auto;
+  }
+}
+
+.referrals-link {
+  padding: 14px 20px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 20px 20px 24px 113px;
+  }
+  .referral-desc {
+    display: flex;
+    padding: 10px 0 0;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-top: 1px solid rgba($gray, 0.2);
+      margin-top: 13px;
+      padding: 14px 0 0;
+    }
+    .subtext {
+      flex: 1;
+      padding: 0 20px 0 0;
+      font-size: 13px;
+      opacity: 0.5;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 0 40px 0 0;
+      }
+    }
+
+    .btn-copy-url {
+      width: 120px;
+    }
+  }
+}
+.btn-copy-url {
+  animation: copy-url 0.5s;
+  &.copied {
+    animation: none;
+  }
+}
+@keyframes copy-url {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: $secondary-color;
+  }
+}

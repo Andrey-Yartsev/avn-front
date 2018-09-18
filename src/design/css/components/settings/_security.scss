@@ -1,0 +1,265 @@
+.otp-block {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 0 0 11px;
+    .shadow-block {
+      padding: 14px 20px;
+      margin: 0 0 25px;
+    }
+  }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 0 25px 30px;
+  }
+  ol {
+    font-size: 13px;
+    padding: 13px 10px 7px 0;
+    list-style: none;
+    counter-reset: list;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 13px 0 25px 0;
+    }
+    li {
+      padding: 0 0 0 20px;
+      position: relative;
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        counter-increment: list;
+        content: counter(list) '.';
+        opacity: 0.5;
+      }
+      p {
+        padding: 0 0 4px;
+      }
+      a {
+        color: $secondary-color;
+      }
+      input[name='otpCode'] {
+        margin: 5px 0 0 -5px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 360px;
+        }
+      }
+    }
+  }
+  .code-wrapper {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      align-items: center;
+    }
+    .code-text {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        text-align: center;
+        padding: 19px 0 0;
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        order: 2;
+        padding: 0 0 5px 50px;
+      }
+      .code {
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 21px;
+          margin: 0 0 24px;
+        }
+      }
+      .copy-code {
+        &,
+        &:hover {
+          @include media-breakpoint-down($desktop-breakpoint) {
+            box-shadow: none;
+            padding: 0;
+            height: auto;
+            font-size: 15px;
+            background: none;
+            color: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+  .qr-code {
+    img {
+      width: 145px;
+      height: 145px;
+      box-shadow: 0 2px 5px rgba(#000, 0.2);
+      border-radius: 5px;
+      border: 5px solid #fff;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+        margin: 18px auto 26px;
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 22px 0 24px 10px;
+      }
+    }
+  }
+  .saveChanges {
+    margin: 0 auto;
+    display: block;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0 0 0 15px;
+    }
+  }
+  &.otp-enabled {
+    .saveChanges {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 5px 0 0;
+      }
+    }
+    .form-group.full {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding: 0;
+        .input-help {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+.form-title .inner > .close-all-sessions-btn {
+  color: $default-primary-color;
+  &:after {
+    @include icon-font;
+    content: '\E605';
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 10px;
+  }
+}
+
+.SessionsCollectionView {
+
+  .otp-block.hidden + & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+        height: 1px;
+        background: $gray;
+        opacity: 0.2;
+      }
+    }
+  }
+
+  .content {
+    padding: 18px 20px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 25px;
+      margin: -4px 0 0;
+    }
+  }
+}
+
+.session-content {
+
+  .content {
+    padding: 18px 20px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 25px;
+      margin: -4px 0 0;
+    }
+
+    &.shadow-block {
+
+      &:empty {
+        display: none;
+
+        + .empty-table-info {
+          display: block;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            border-top: 1px solid rgba($gray, .2);
+            margin-left: 20px;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.SessionsView {
+  position: relative;
+  padding: 0 100px 16px 0;
+  border-bottom: 1px solid rgba($gray, 0.2);
+  margin: 0 0 12px;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 0 100px 11px 0;
+  }
+
+  p {
+    padding: 0;
+  }
+
+  .browser {
+    font-weight: 500;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: block;
+      margin: 0 0 4px;
+    }
+  }
+  .os {
+    font-size: 13px;
+  }
+  .ip-country {
+    font-size: 13px;
+    opacity: 0.5;
+    margin: 5px 0 0;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 3px 0 0;
+    }
+  }
+  .status {
+    position: absolute;
+    right: 29px;
+    top: 2px;
+    font-size: 13px;
+    .online {
+      color: $secondary-color;
+    }
+  }
+  .delete {
+    padding: 0;
+    border: none;
+    background: none;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    opacity: 0.3;
+    color: inherit;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    &:hover {
+      opacity: 1;
+      color: $default-primary-color;
+    }
+    &:before {
+      @include icon-font;
+      content: '\E605';
+      font-size: 24px;
+    }
+  }
+
+  &:last-child {
+    border: none;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-bottom: 0;
+      padding-bottom: 16px;
+    }
+  }
+}
+
+.two-step-text {
+  padding-bottom: 0;
+}

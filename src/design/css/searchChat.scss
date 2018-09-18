@@ -1,0 +1,172 @@
+@import "components/imports";
+.searchChatContacts{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  padding: 15px 13px;
+  overflow-y: auto;
+  align-items: flex-start;
+  align-content: flex-start;
+  -webkit-overflow-scrolling: touch;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    border-right: 1px solid rgba(124, 139, 150, 0.2);
+    padding: 15px 20px 0;
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    overflow-y: auto !important;
+    .os-content-glue,
+    .os-scrollbar {
+      display: none;
+    }
+    .os-viewport,
+    .os-padding {
+      position: static;
+    }
+    .os-content {
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  > * {
+    flex: 0 0 100%;
+  }
+}
+
+.searchResult{
+  max-width: 100%;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    &:after {
+      content: '';
+      display: block;
+      height: 60px;
+    }
+  }
+
+  .chatView__header {
+    justify-content: flex-start;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 1px;
+    }
+  }
+    
+  .searchChatContactsView{
+    max-width: 100%;
+    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+    padding: 11px 0 11px 40px;
+    position: relative;
+    cursor: pointer;
+
+    &:first-child {
+      border-top: 1px solid rgba(124, 139, 150, 0.2);
+    }
+
+    .avatar{
+      position: absolute;
+      top: 1em;
+      left: 0;
+      margin: 0;
+      border: none;
+      width: 30px;
+      height: 30px;
+
+      &:empty {
+
+        &:before {
+          font-size: 29px;
+        }
+      }
+    }
+
+    .user-login {
+      margin-left: 0;
+
+      font-size: 13px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 15px;
+      }
+    }
+
+    .check{
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      position: absolute;
+      height: 2em;
+      width: 2em;
+      right: 0;
+      top: 1em;
+      color: $secondary-color;
+      text-align: right;
+
+      &:before{
+        display: inline-block;
+        @include icon-font;
+        font-size: 24px;
+        margin: 0 4px 0 0;
+        width: 1.1em;
+        font-weight: 400;
+        content: '\E604';
+      }
+      /*TODO add check mark*/
+    }
+
+    &.active{
+
+      .check{
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .name, .user-login{
+        max-width: 80%;
+      }
+    }
+
+    &:hover{
+      .name{
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.searchContact{
+  margin-bottom: 14px;
+}
+
+.searchWrapper {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  padding-left: 5px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 0;
+  }
+
+  .sendTo{
+    font-weight: 500;
+  }
+
+  input {
+    flex: 1;
+    border-radius: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &:focus {
+      border: none;
+      outline: none;      
+    }
+  }
+}
