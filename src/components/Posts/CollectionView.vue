@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import Post from './Post';
+    import Post from './Post/Index';
 
     export default {
         name: 'CollectionView',

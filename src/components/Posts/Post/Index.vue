@@ -8,14 +8,10 @@
                 <a class="name" href="/alexeionline">alexeionline</a>
                 <span class="verified-user"></span>
                 <span class="user-login">
-                        <a href="/alexeionline">alexeionline</a>
-                    </span>
-                <span class="post-dropdown-menu-btn"></span>
-                <div class="dropdown-menu hidden">
-                    <button class="report" type="button">Report post</button>
-                    <button class="btn-copy-link" type="button">Copy link to post</button>
-                    <button class="deletePost" type="button">Delete post</button>
-                </div>
+                    <a href="/alexeionline">alexeionline</a>
+                </span>
+                <span class="post-dropdown-menu-btn" v-on:click="isShowPostDropdawn = !isShowPostDropdawn"></span>
+                <PostDropdawn v-bind:class="{ hidden: !isShowPostDropdawn }"></PostDropdawn>
             </div>
             <p class="text"> </p>
             <div class="media">
@@ -25,45 +21,42 @@
                     </a>
                 </figure>
             </div>
-            <div class="actions">
-                <span class="likes ">5</span>
-                <span class="comments">8</span>
-                <time class="date" datetime="2017-12-29T10:22:23+00:00"><a class="postLink" href="/post/242403">Dec 29, 2017 1:22 PM</a></time>
-                <!-- <span class="report"></span>-->
-            </div>
+            <Actions></Actions>
         </div>
-        <form class="comment-form hidden"><input class="comment-input rounded" placeholder="Add a comment">
-            <button type="submit" class="btn comment-btn" disabled="">Post</button>
-        </form>
+        <AddComment></AddComment>
         <div class="postComments">
-            <span class="load-more-comments">Show More Comments</span>
+            <ShowMore></ShowMore>
             <div class="comments-list">
-                <div class="comment">
-                    <div class="comment-body">
-                        <a href="/id467429" class="comment-author-name name">stompeg</a>
-                        <div class="comment-text">Alex Pavlov, труляля</div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="comment-body">
-                        <a href="/alehandro" class="comment-author-name name"></a>
-                        <div class="comment-text">very long comment about all my life and life of my dog and cat</div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="comment-body">
-                        <a href="/tracer" class="comment-author-name name">Tracer</a>
-                        <div class="comment-text">пиу пиу</div>
-                    </div>
-                </div>
+                <Comment></Comment>
+                <Comment></Comment>
+                <Comment></Comment>
+                <Comment></Comment>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import AddComment from './Comments/AddComment';
+    import ShowMore from './Comments/ShowMore';
+    import Comment from './Comments/Comment';
+    import PostDropdawn from './PostDropdawn';
+    import Actions from './Actions';
+
     export default {
-        name: 'Post'
+        name: 'Post',
+        data: function() {
+            return {
+                isShowPostDropdawn: false,
+            }
+        },
+        components: {
+            'Comment': Comment,
+            'AddComment': AddComment,
+            'ShowMore': ShowMore,
+            'Actions': Actions,
+            'PostDropdawn': PostDropdawn,
+        }
     }
 </script>
 

@@ -16,8 +16,8 @@
             <div class="actions">
                 <div class="actions-controls">
                     <label class="add-media-input">
-                            <input multiple="" accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi" type="file">
-                        </label>
+                        <input multiple="" accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi" type="file">
+                    </label>
                     <!--<span class="voting-block-toggle-btn"></span> TODO votiong block-->
                 </div>
                 <div class="add-new-type add-new-type_underline-items line-top">
