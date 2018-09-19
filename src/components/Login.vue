@@ -49,10 +49,10 @@
                  autocomplete="current-password"/>
 
           <vue-recaptcha
+            class="g-recaptcha"
             ref="recaptcha"
             @verify="onCaptchaVerified"
             @expired="onCaptchaExpired"
-
             sitekey="6LeeX1IUAAAAAAFOfsT_ZL72M_6AXCdHejfQgTdn"
           />
 
@@ -99,7 +99,7 @@
       async login () {
         const response = await auth.login({
           email: 'andrey.yartsev.g@gmail.com',
-          password: 'otherpass',
+          password: 'hjI8713f$2',
           captcha: this.captcha
         })
         console.log(await response.json())
