@@ -2,7 +2,6 @@
 
 import BrowserStore from 'store'
 import AuthApi from '@/api/auth'
-import Types from '@/store/types'
 import Router from '@/router'
 
 const state = {
@@ -37,7 +36,7 @@ const actions = {
       })
   },
 
-  [ Types.AUTH_LOGOUT ] ({commit}) {
+  [ 'AUTH_LOGOUT' ] ({commit}) {
     commit('AUTH_LOGOUT_SUCCESS')
     Router.push('/login')
   },

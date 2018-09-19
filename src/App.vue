@@ -1,20 +1,25 @@
 <template>
-	<div>
-		<Header v-if="user" />
-		<main id="content">
-			<router-view></router-view>
-		</main>
-	</div>
+  <div>
+    <Header v-if="user"/>
+    <main id="content">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
-	import Header from './components/Header/Index';
+  import Header from './components/Header/Index'
 
-	export default {
-		components: {
-			'Header': Header,
-		}
-	}
+  export default {
+    components: {
+      'Header': Header,
+    },
+    computed: {
+      user() {
+        return true
+      }
+    }
+  }
 </script>
 
 <style lang="scss" src="@/design/css/main.scss"></style>
