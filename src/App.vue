@@ -4,15 +4,18 @@
 		<main id="content">
 			<router-view></router-view>
 		</main>
+		<Sidebar></Sidebar>
 	</div>
 </template>
 
 <script>
 	import Header from './components/Header/Index';
+	import Sidebar from './components/Sidebar';
 
 	export default {
 		components: {
 			'Header': Header,
+			'Sidebar': Sidebar,
 		}
 	}
 </script>
