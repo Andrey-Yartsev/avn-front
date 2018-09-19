@@ -26,7 +26,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .videoplayer {
         position: relative;
     }

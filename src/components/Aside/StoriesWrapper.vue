@@ -32,7 +32,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .create-story-button {
         cursor: pointer;
     }

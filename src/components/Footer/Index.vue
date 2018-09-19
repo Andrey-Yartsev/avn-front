@@ -21,7 +21,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .footer-nav {
         display: flex;
         font-size: 13px;

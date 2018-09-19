@@ -45,7 +45,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .add-new-type {
         font-size: 0;
         padding: 0 8px;
