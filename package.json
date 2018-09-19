@@ -17,8 +17,10 @@
     "@vue/cli-service": "^3.0.3",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
+    "store": "^2.0.12",
     "vue-recaptcha": "^1.1.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1"
   },
   "eslintConfig": {
     "root": true,
