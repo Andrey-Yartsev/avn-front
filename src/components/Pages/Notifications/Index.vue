@@ -4,6 +4,6 @@
 
 <script>
     export default {
-        name: 'Natifications'
+        name: 'Notifications'
     }
 </script>

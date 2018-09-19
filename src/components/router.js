@@ -8,7 +8,7 @@ import ExploreVideosPage from './Pages/Explore/Videos';
 import ExplorePhotosPage from './Pages/Explore/Photos';
 import ExploreLivePage from './Pages/Explore/Live';
 import MessagesPage from './Pages/Messages/Index';
-import NatificationsPage from './Pages/Natifications/Index';
+import NotificationsPage from './Pages/Notifications/Index';
 import LoginPage from './Login';
 
 Vue.use(VueRouter);
@@ -21,7 +21,7 @@ const routes = [
     { path: '/explore/live', component: ExploreLivePage },
     { path: '/explore/videos', component: ExploreVideosPage },
     { path: '/chat', component: MessagesPage },
-    { path: '/notifications', component: NatificationsPage },
+    { path: '/notifications', component: NotificationsPage },
     { path: '/login', component: LoginPage },
 ];
 
