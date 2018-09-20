@@ -1,24 +1,13 @@
 <template>
     <div class="post">
         <div class="post-details">
-            <div class="post-header" id="post242996">
-                <a class="avatar" href="/alexeionline">
-                    <img src="https://media.team2.retloko.com/files/f/fu/fuv/fuvehoth2zqjgua11c8akpdcxgr3dvvw1537170622/2afff3a23099780908097f84bc5da2fd_normal.jpeg">
-                </a>
-                <a class="name" href="/alexeionline">alexeionline</a>
-                <span class="verified-user"></span>
-                <span class="user-login">
-                    <a href="/alexeionline">alexeionline</a>
-                </span>
-                <span class="post-dropdown-menu-btn" v-on:click="isShowPostDropdawn = !isShowPostDropdawn"></span>
-                <PostDropdawn v-bind:class="{ hidden: !isShowPostDropdawn }"></PostDropdawn>
-            </div>
-            <p class="text"> </p>
+            <PostHeader :id="item.id" :user="item.author"></PostHeader>
+            <p class="text">{{ item.text }}</p>
             <div class="media">
                 <figure class="media-item active" data-index="0">
-                    <a class="postLink" href="/post/242996">
-                        <img src="https://media.team2.retloko.com/files/o/os/osr/osrkjkqyd98lu2fgbizdqpd0gwwrumth1537186131/preview.jpg">
-                    </a>
+                    <router-link class="postLink" :to="'/post/' + item.id">
+                        <img :src="imgUrl">
+                    </router-link>
                 </figure>
             </div>
             <Actions></Actions>
@@ -40,7 +29,7 @@
 import AddComment from "./Comments/AddComment";
 import ShowMore from "./Comments/ShowMore";
 import Comment from "./Comments/Comment";
-import PostDropdawn from "./PostDropdawn";
+import PostHeader from "./PostHeader";
 import Actions from "./Actions";
 
 export default {
@@ -55,7 +44,19 @@ export default {
     AddComment: AddComment,
     ShowMore: ShowMore,
     Actions: Actions,
-    PostDropdawn: PostDropdawn
+    PostHeader: PostHeader
+  },
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    imgUrl() {
+      return "";
+      //return this.item.media ? `data:image/jpeg;base64,${this.item.media[0].locked}` : '';
+    }
   }
 };
 </script>

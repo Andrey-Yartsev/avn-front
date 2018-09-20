@@ -27,13 +27,16 @@ import AddPost from "../AddPost/Index";
 import StoriesWrapper from "../Aside/StoriesWrapper";
 
 export default {
-  name: "Explore",
+  name: "Home",
   components: {
     MobileHeader: MobileHeader,
     Footer: Footer,
     StoriesWrapper: StoriesWrapper,
     AddPost: AddPost,
     CollectionView: CollectionView
+  },
+  created() {
+    this.$store.dispatch("home/getPosts");
   }
 };
 </script>
