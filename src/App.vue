@@ -14,14 +14,13 @@
 
 	export default {
 		components: {
-			Header,
-      Sidebar
-    },
-    computed: {
-      user() {
-        return true
-      }
-    }
+						Header, Sidebar
+					},
+					computed: {
+						user() {
+							return true
+						}
+					}
 	}
 </script>
 
