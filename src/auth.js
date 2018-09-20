@@ -1,55 +1,54 @@
-'use strict'
+"use strict";
 
-import Store from '@/store'
-import BrowserStore from 'store'
+import Store from "@/store";
+import BrowserStore from "store";
 
 const Auth = {
-  get loggedIn () {
-    return Store.state.auth.user
+  get loggedIn() {
+    return Store.state.auth.user;
   },
 
-  logout (to, from, next) {
+  logout(to, from, next) {
     if (!Auth.loggedIn) {
-      return next('/login')
+      return next("/login");
     }
 
-    Store.dispatch('AUTH_LOGOUT', {
+    Store.dispatch("AUTH_LOGOUT", {
       next
-    })
+    });
   },
 
-  authenticate (data = null) {
-    Store.dispatch('AUTH_REQUEST', data)
+  authenticate(data = null) {
+    Store.dispatch("AUTH_REQUEST", data);
   },
 
-  requireAuth (to, from, next) {
+  requireAuth(to, from, next) {
     if (Auth.loggedIn) {
-      return next()
+      return next();
     }
 
-    const data = BrowserStore.get('user')
+    const data = BrowserStore.get("user");
 
     if (!data) {
       return next({
-        path: '/login'
-      })
+        path: "/login"
+      });
     }
 
-    Store.dispatch('AUTH_SET_USER', {
+    Store.dispatch("AUTH_SET_USER", {
       next,
       user: data
-    })
+    });
   },
 
-  requireNonAuth (to, from, next) {
+  requireNonAuth(to, from, next) {
     if (Auth.loggedIn) {
       return next({
-        path: '/'
-      })
+        path: "/"
+      });
     }
-    next()
+    next();
   }
+};
 
-}
-
-export default Auth
+export default Auth;

@@ -20,20 +20,20 @@
 </template>
 
 <script>
-    import CollectionView from '../Posts/CollectionView';
-    import MobileHeader from '../Header/Mobile';
-    import Footer from '../Footer/Index';
-    import AddPost from '../AddPost/Index';
-    import StoriesWrapper from '../Aside/StoriesWrapper';
-    
-    export default {
-        name: 'Explore',
-        components: {
-            'MobileHeader': MobileHeader,
-            'Footer': Footer,
-            'StoriesWrapper': StoriesWrapper,
-            'AddPost': AddPost,
-            'CollectionView': CollectionView,
-        },
-    }
+import CollectionView from "../Posts/CollectionView";
+import MobileHeader from "../Header/Mobile";
+import Footer from "../Footer/Index";
+import AddPost from "../AddPost/Index";
+import StoriesWrapper from "../Aside/StoriesWrapper";
+
+export default {
+  name: "Explore",
+  components: {
+    MobileHeader: MobileHeader,
+    Footer: Footer,
+    StoriesWrapper: StoriesWrapper,
+    AddPost: AddPost,
+    CollectionView: CollectionView
+  }
+};
 </script>

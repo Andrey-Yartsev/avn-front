@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'Notifications'
-    }
+export default {
+  name: "Notifications"
+};
 </script>

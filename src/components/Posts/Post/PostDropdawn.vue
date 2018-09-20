@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'PostDropdawn',
-    }
+export default {
+  name: "PostDropdawn"
+};
 </script>

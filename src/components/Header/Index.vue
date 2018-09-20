@@ -26,14 +26,14 @@
 </template>
 
 <script>
-	import Search from './Search';
-	import User from './User';
+import Search from "./Search";
+import User from "./User";
 
-    export default {
-        name: 'Header',
-        components: {
-			'Search': Search,
-			'User': User,
-		}
-    }
+export default {
+  name: "Header",
+  components: {
+    Search: Search,
+    User: User
+  }
+};
 </script>

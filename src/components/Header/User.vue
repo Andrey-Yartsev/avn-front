@@ -5,37 +5,37 @@
 </template>
 
 <script>
-    import ClickOutside from 'vue-click-outside';
+import ClickOutside from "vue-click-outside";
 
-    export default {
-        name: 'User',
-        data() {
-            return {
-                opened: false,
-            }
-        },
-    
-        methods: {
-            open(e) {
-                if (!this.opened) {
-                    e.preventDefault();
-                    document.body.classList.add('sidebar-shown', 'disable-scroll-page');
-                    this.opened = true;
-                }
-            },
-    
-            hide() {
-                this.opened = false;
-                document.body.classList.remove('sidebar-shown', 'disable-scroll-page');
-            }
-        },
-    
-        mounted() {
-            this.popupItem = this.$el
-        },
-    
-        directives: {
-            ClickOutside
-        }
+export default {
+  name: "User",
+  data() {
+    return {
+      opened: false
+    };
+  },
+
+  methods: {
+    open(e) {
+      if (!this.opened) {
+        e.preventDefault();
+        document.body.classList.add("sidebar-shown", "disable-scroll-page");
+        this.opened = true;
+      }
+    },
+
+    hide() {
+      this.opened = false;
+      document.body.classList.remove("sidebar-shown", "disable-scroll-page");
     }
+  },
+
+  mounted() {
+    this.popupItem = this.$el;
+  },
+
+  directives: {
+    ClickOutside
+  }
+};
 </script>

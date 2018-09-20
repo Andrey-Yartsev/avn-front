@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'Search'
-    }
+export default {
+  name: "Search"
+};
 </script>
