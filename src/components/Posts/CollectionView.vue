@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .videoplayer {
   position: relative;
 }
