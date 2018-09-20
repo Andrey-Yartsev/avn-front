@@ -44,19 +44,25 @@
       </div>
       <div class="login-form-col">
         <form>
-          <input class="lg rounded" type="email" name="email" placeholder="Email" autocomplete="email"/>
-          <input class="lg rounded" type="password" name="password" placeholder="Password"
-                 autocomplete="current-password"/>
-
-          <vue-recaptcha
+          <input
+            class="lg rounded"
+            type="email" name="email" placeholder="Email" autocomplete="email"
+            v-model="email"
+          />
+          <input
+            class="lg rounded" type="password" name="password" placeholder="Password"
+            autocomplete="current-password"
+            v-model="password"
+          />
+          <recaptcha
+            v-if="showCaptcha"
             class="g-recaptcha"
             ref="recaptcha"
             @verify="onCaptchaVerified"
             @expired="onCaptchaExpired"
-            sitekey="6LeeX1IUAAAAAAFOfsT_ZL72M_6AXCdHejfQgTdn"
+            :sitekey="recaptchaSiteKey"
           />
-
-          <div class="hidden error">Email or password incorrect</div>
+          <div class="error" v-if="error">{{ error }}</div>
           <button type="submit" class="btn lg alt block" @click.prevent="login">Login</button>
         </form>
         <div class="login-or"><span>or</span></div>
@@ -81,28 +87,41 @@
 </template>
 
 <script>
-import auth from "@/api/auth";
-import VueRecaptcha from "vue-recaptcha";
+import Recaptcha from "vue-recaptcha";
+import Auth from "@/auth";
 
 export default {
   name: "Login",
 
-  components: { VueRecaptcha },
+  components: { Recaptcha },
 
   data() {
     return {
+      email: "",
+      password: "",
       captcha: ""
     };
   },
 
+  computed: {
+    error() {
+      return this.$store.state.auth.error;
+    },
+    recaptchaSiteKey() {
+      return process.env.VUE_APP_RECAPTCHA_SITE_KEY;
+    },
+    showCaptcha() {
+      return this.$store.state.auth.showCaptcha;
+    }
+  },
+
   methods: {
-    async login() {
-      await auth.login({
-        email: "andrey.yartsev.g@gmail.com",
-        password: "hjI8713f$2",
+    login() {
+      Auth.authenticate({
+        email: this.email,
+        password: this.password,
         captcha: this.captcha
       });
-      // console.log(await response.json());
     },
     onCaptchaVerified(recaptchaToken) {
       this.captcha = recaptchaToken;

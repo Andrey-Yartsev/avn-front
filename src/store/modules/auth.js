@@ -7,71 +7,75 @@ import Router from "@/router";
 const state = {
   loading: false,
   error: null,
-  credentials: null
-  // user: null,
-  // clientInfo: BrowserStore.get('user') || {}
+  showCaptcha: false,
+  user: null
 };
 
 const actions = {
-  ["AUTH_SET_USER"]({ commit }, data) {
-    commit("AUTH_SET_USER", data.user);
-    commit("AUTH_SUCCESS", data.user);
-    data.next();
+  setUser({ commit }, user) {
+    commit("setUser", user);
   },
 
-  ["AUTH_REQUEST"]({ commit }, data) {
-    commit("AUTH_REQUEST");
-
-    if (!data.next) {
-      data.next = function() {};
-    }
+  login({ commit }, data) {
+    commit("request");
 
     AuthApi.login(data)
       .then(user => {
-        commit("AUTH_SET_USER", user);
+        commit("setUser", user);
+        commit("showCaptcha", false);
+        BrowserStore.set("user", user);
       })
-      .catch(err => {
-        commit("AUTH_FAILURE", err);
-        data.next("/login");
+      .then(() => Router.push("/"))
+      .catch(error => {
+        if (error.code === 101) {
+          commit("showCaptcha", true);
+        }
+        commit("requestFailure", error.message);
+        Router.push("/login");
       });
   },
 
-  ["AUTH_LOGOUT"]({ commit }) {
-    commit("AUTH_LOGOUT_SUCCESS");
+  logout({ commit }) {
+    commit("logout");
     Router.push("/login");
   }
 };
 
 const mutations = {
-  ["AUTH_SET_USER"](state, user) {
+  setUser(state, user) {
     state.user = user;
   },
 
-  ["AUTH_REQUEST"](state) {
+  request(state) {
+    state.error = null;
     state.loading = true;
   },
 
-  ["AUTH_SUCCESS"](state) {
-    // state.user.email = email
-    BrowserStore.set("user", state.tempUser);
+  requestSuccess(state) {
+    state.loading = false;
   },
 
-  ["AUTH_FAILURE"](state, error) {
+  requestFailure(state, error) {
     state.error = error;
     state.user = null;
     state.loading = false;
     BrowserStore.remove("user");
   },
 
-  ["AUTH_LOGOUT_SUCCESS"](state) {
+  logout(state) {
     state.user = null;
     state.error = null;
     state.loading = false;
     BrowserStore.remove("user");
+  },
+
+  showCaptcha(state, show) {
+    state.showCaptcha = show;
   }
 };
 
 export default {
+  namespaced: true,
   state,
   actions,
   mutations

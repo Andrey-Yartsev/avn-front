@@ -30,14 +30,46 @@ const routes = [
     path: "/",
     component: IndexPage
   },
-  { path: "/explore", component: ExplorePage },
-  { path: "/explore/stories", component: ExploreStoriesPage },
-  { path: "/explore/photos", component: ExplorePhotosPage },
-  { path: "/explore/live", component: ExploreLivePage },
-  { path: "/explore/videos", component: ExploreVideosPage },
-  { path: "/chat", component: MessagesPage },
-  { path: "/notifications", component: NotificationsPage },
-  { path: "/login", component: LoginPage }
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/explore",
+    component: ExplorePage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/explore/stories",
+    component: ExploreStoriesPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/explore/photos",
+    component: ExplorePhotosPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/explore/live",
+    component: ExploreLivePage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/explore/videos",
+    component: ExploreVideosPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/chat",
+    component: MessagesPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/notifications",
+    component: NotificationsPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/login",
+    component: LoginPage
+  }
 ];
 
 export default new Router({

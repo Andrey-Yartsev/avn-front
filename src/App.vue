@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     user() {
-      return true;
+      return this.$store.state.auth.user;
     }
   }
 };

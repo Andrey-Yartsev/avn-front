@@ -13,13 +13,13 @@ const Auth = {
       return next("/login");
     }
 
-    Store.dispatch("AUTH_LOGOUT", {
+    Store.dispatch("auth/logout", {
       next
     });
   },
 
-  authenticate(data = null) {
-    Store.dispatch("AUTH_REQUEST", data);
+  authenticate(data) {
+    Store.dispatch("auth/login", data);
   },
 
   requireAuth(to, from, next) {
@@ -27,18 +27,15 @@ const Auth = {
       return next();
     }
 
-    const data = BrowserStore.get("user");
+    const user = BrowserStore.get("user");
 
-    if (!data) {
+    if (!user) {
       return next({
         path: "/login"
       });
     }
 
-    Store.dispatch("AUTH_SET_USER", {
-      next,
-      user: data
-    });
+    Store.dispatch("auth/setUser", user).then(() => next());
   },
 
   requireNonAuth(to, from, next) {
