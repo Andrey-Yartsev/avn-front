@@ -28,7 +28,13 @@ const actions = {
 
 const mutations = {
   ["postsRequestSuccess"](state, posts) {
-    state.posts = posts;
+    state.posts = posts.filter(post => {
+      return (
+        post.media.length > 0 &&
+        post.media[0].type === "video" &&
+        post.media[0].canView === true
+      );
+    });
     state.loading = false;
   },
 

@@ -4,11 +4,48 @@
             <PostHeader :id="item.id" :user="item.author"></PostHeader>
             <p class="text">{{ item.text }}</p>
             <div class="media">
-                <figure class="media-item active" data-index="0">
-                    <router-link class="postLink" :to="'/post/' + item.id">
-                        <img :src="imgUrl">
-                    </router-link>
-                </figure>
+                <!-- <%if(1 < length){%> -->
+                <div class="media-slider">
+                <!-- <%}%> -->
+                  <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                    <template v-if="value.canView === false">
+                      <LockedPicture :base64="value.locked" ></LockedPicture>
+                    </template>
+                    <template v-if="value.type === 'video'">
+                      <video disableremoteplayback webkit-playsinline playsinline controls poster="<%=media[i].preview%>">
+                          <%for(var type in media[i].video){%>
+                          <source v-for="(value, key) in item.media" src="<%=media[i].video[type]%>" type="video/<%=type%>">
+                          <%}%>
+                      </video>
+                    </template>
+                      
+                            <%}else if(media[i].type === 'gif'){%>
+                            <a class="postLink" href="/post/<%=id%>">
+                                <div class="gif-player">
+                                    <img src="<%=media[i].preview%>">
+                                </div>
+                            </a>
+                            <%}else{%>
+                            <a class="postLink" href="/post/<%=id%>">
+                                <img src="<%=media[i].preview%>">
+                            </a>
+                            <%}%>
+                        <%}%> -->
+                    </figure>
+                <!-- <%}%>
+                </div>
+                <%if(1 < length){%>
+                <div class="media-slider-pagination">
+                    <%for(var i = 0; i < length; i++){%>
+                    <span class="item <%if(0===i){%>active<%}%>" data-index="<%=i%>"></span>
+                    <%}%>
+                </div>
+                <div class="media-slider-navigation">
+                    <span class="btn-prev hidden"></span>
+                    <span class="btn-next"></span>
+                </div>
+                <%}%> -->
+              </div>
             </div>
             <Actions></Actions>
         </div>
@@ -31,6 +68,7 @@ import ShowMore from "./Comments/ShowMore";
 import Comment from "./Comments/Comment";
 import PostHeader from "./PostHeader";
 import Actions from "./Actions";
+import LockedPicture from "./MediaContent/LockedPicture";
 
 export default {
   name: "Post",
@@ -40,11 +78,12 @@ export default {
     };
   },
   components: {
-    Comment: Comment,
-    AddComment: AddComment,
-    ShowMore: ShowMore,
-    Actions: Actions,
-    PostHeader: PostHeader
+    Comment,
+    AddComment,
+    ShowMore,
+    Actions,
+    PostHeader,
+    LockedPicture
   },
   props: {
     item: {
