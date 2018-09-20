@@ -1,22 +1,27 @@
 <template>
 	<div>
-		<Header></Header>
+    <Header v-if="user"/>
 		<main id="content">
 			<router-view></router-view>
 		</main>
-		<Sidebar></Sidebar>
+    <Sidebar></Sidebar>
 	</div>
 </template>
 
 <script>
 	import Header from './components/Header/Index';
-	import Sidebar from './components/Sidebar';
+  import Sidebar from './components/Sidebar';
 
 	export default {
 		components: {
-			'Header': Header,
-			'Sidebar': Sidebar,
-		}
+			Header,
+      Sidebar
+    },
+    computed: {
+      user() {
+        return true
+      }
+    }
 	}
 </script>
 

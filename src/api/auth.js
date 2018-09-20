@@ -1,5 +1,11 @@
+import request from '@/utils/request'
+
 export default {
-  login (creds) {
-    /api2/v2/users/login
+  login(creds) {
+    return request('users/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(creds)
+    })
   }
 }
