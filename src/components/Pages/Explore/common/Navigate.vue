@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'ExploreNavigate',
-    }
+export default {
+  name: "ExploreNavigate"
+};
 </script>

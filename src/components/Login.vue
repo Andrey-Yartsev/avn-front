@@ -81,63 +81,66 @@
 </template>
 
 <script>
-  import auth from '@/api/auth'
-  import VueRecaptcha from 'vue-recaptcha';
+import auth from "@/api/auth";
+import VueRecaptcha from "vue-recaptcha";
 
-  export default {
-    name: 'Login',
+export default {
+  name: "Login",
 
-    components: { VueRecaptcha },
+  components: { VueRecaptcha },
 
-    data () {
-      return {
-        captcha: ''
-      }
+  data() {
+    return {
+      captcha: ""
+    };
+  },
+
+  methods: {
+    async login() {
+      const response = await auth.login({
+        email: "andrey.yartsev.g@gmail.com",
+        password: "hjI8713f$2",
+        captcha: this.captcha
+      });
+      console.log(await response.json());
     },
-
-    methods: {
-      async login () {
-        const response = await auth.login({
-          email: 'andrey.yartsev.g@gmail.com',
-          password: 'hjI8713f$2',
-          captcha: this.captcha
-        })
-        console.log(await response.json())
-      },
-      onCaptchaVerified (recaptchaToken) {
-        this.captcha = recaptchaToken
-      },
-      onCaptchaExpired: function () {
-        this.$refs.recaptcha.reset();
-      }
+    onCaptchaVerified(recaptchaToken) {
+      this.captcha = recaptchaToken;
+    },
+    onCaptchaExpired: function() {
+      this.$refs.recaptcha.reset();
     }
   }
+};
 </script>
 
 <style scoped>
-  .a {
-    fill: none;
-  }
+.a {
+  fill: none;
+}
 
-  .b, .e, .f {
-    fill: #ff4081;
-  }
+.b,
+.e,
+.f {
+  fill: #ff4081;
+}
 
-  .c {
-    fill: #9466ff;
-  }
+.c {
+  fill: #9466ff;
+}
 
-  .d {
-    fill: #2196f3;
-  }
+.d {
+  fill: #2196f3;
+}
 
-  .e {
-    opacity: 0.5;
-  }
+.e {
+  opacity: 0.5;
+}
 
-  .f {
-    opacity: 0.2;
-  }
+.f {
+  opacity: 0.2;
+}
 </style>
 
-<style lang="scss" scoped src="@/design/css/login.scss"></style>
+<style lang="scss" scoped src="@/design/css/login.scss">
+</style>

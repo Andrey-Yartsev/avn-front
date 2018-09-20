@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'AddComment',
-    }
+export default {
+  name: "AddComment"
+};
 </script>

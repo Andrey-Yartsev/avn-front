@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'Actions',
-    }
+export default {
+  name: "Actions"
+};
 </script>

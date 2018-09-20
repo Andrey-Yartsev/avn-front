@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'HeaderMobile',
-    }
+export default {
+  name: "HeaderMobile"
+};
 </script>
