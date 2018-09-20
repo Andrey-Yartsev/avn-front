@@ -19,7 +19,7 @@ const actions = {
     data.next();
   },
 
-  ["AUTH_REQUEST"]({ commit, dispatch }, data) {
+  ["AUTH_REQUEST"]({ commit }, data) {
     commit("AUTH_REQUEST");
 
     if (!data.next) {

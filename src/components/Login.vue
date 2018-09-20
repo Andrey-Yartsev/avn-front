@@ -97,12 +97,12 @@ export default {
 
   methods: {
     async login() {
-      const response = await auth.login({
+      await auth.login({
         email: "andrey.yartsev.g@gmail.com",
         password: "hjI8713f$2",
         captcha: this.captcha
       });
-      console.log(await response.json());
+      // console.log(await response.json());
     },
     onCaptchaVerified(recaptchaToken) {
       this.captcha = recaptchaToken;
