@@ -2,9 +2,7 @@
     <div class="feed">
         <div class="postCollectionView">
             <div class="posts">
-                <Post></Post>
-                <Post></Post>
-                <Post></Post>
+                <Post v-for="post in posts" v-bind:item="post" :key="post.id"></Post>
             </div>
             <div class="no-results-search">
                 <div class="no-results-search__message">
@@ -22,6 +20,11 @@ export default {
   name: "CollectionView",
   components: {
     Post: Post
+  },
+  computed: {
+    posts() {
+      return this.$store.state.home.posts;
+    }
   }
 };
 </script>

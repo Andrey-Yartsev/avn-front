@@ -1,25 +1,30 @@
 <template>
     <div class="post">
         <div class="post-details">
-            <div class="post-header" id="post242996">
-                <a class="avatar" href="/alexeionline">
-                    <img src="https://media.team2.retloko.com/files/f/fu/fuv/fuvehoth2zqjgua11c8akpdcxgr3dvvw1537170622/2afff3a23099780908097f84bc5da2fd_normal.jpeg">
-                </a>
-                <a class="name" href="/alexeionline">alexeionline</a>
-                <span class="verified-user"></span>
-                <span class="user-login">
-                    <a href="/alexeionline">alexeionline</a>
-                </span>
-                <span class="post-dropdown-menu-btn" v-on:click="isShowPostDropdawn = !isShowPostDropdawn"></span>
-                <PostDropdawn v-bind:class="{ hidden: !isShowPostDropdawn }"></PostDropdawn>
-            </div>
-            <p class="text"> </p>
+            <PostHeader :id="item.id" :user="item.author"></PostHeader>
+            <p class="text">{{ item.text }}</p>
             <div class="media">
-                <figure class="media-item active" data-index="0">
-                    <a class="postLink" href="/post/242996">
-                        <img src="https://media.team2.retloko.com/files/o/os/osr/osrkjkqyd98lu2fgbizdqpd0gwwrumth1537186131/preview.jpg">
-                    </a>
-                </figure>
+                <template v-if="item.media.length > 1">
+                  <div class="media-slider">
+                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                      <component :is="getMediaViewType(value)" :media="value"></component>
+                    </figure>
+                  </div>
+                </template>
+                <template v-else >
+                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                      <component :is="getMediaViewType(value)" :media="value"></component>
+                    </figure>
+                </template>
+                <template v-if="item.media.length > 1">
+                  <div class="media-slider-pagination">
+                    <span :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'item']" :data-index="key"></span>
+                  </div>
+                  <div class="media-slider-navigation">
+                    <span class="btn-prev hidden"></span>
+                    <span class="btn-next"></span>
+                  </div>
+                </template>
             </div>
             <Actions></Actions>
         </div>
@@ -40,22 +45,51 @@
 import AddComment from "./Comments/AddComment";
 import ShowMore from "./Comments/ShowMore";
 import Comment from "./Comments/Comment";
-import PostDropdawn from "./PostDropdawn";
+import PostHeader from "./PostHeader";
 import Actions from "./Actions";
+import LockedPicture from "./MediaContent/LockedPicture";
+import Video from "./MediaContent/Video";
+import Gif from "./MediaContent/Gif";
+import Simple from "./MediaContent/Simple";
 
 export default {
   name: "Post",
   data: function() {
     return {
-      isShowPostDropdawn: false
+      isShowPostDropdawn: false,
+      currentComponent: "Gif"
     };
   },
   components: {
-    Comment: Comment,
-    AddComment: AddComment,
-    ShowMore: ShowMore,
-    Actions: Actions,
-    PostDropdawn: PostDropdawn
+    Comment,
+    AddComment,
+    ShowMore,
+    Actions,
+    PostHeader,
+    LockedPicture,
+    Video,
+    Gif,
+    Simple
+  },
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    getMediaViewType(media) {
+      switch (true) {
+        case !media.canView:
+          return "LockedPicture";
+        case media.type === "video":
+          return "Video";
+        case media.type === "gif":
+          return "Gif";
+        default:
+          return "Simple";
+      }
+    }
   }
 };
 </script>
