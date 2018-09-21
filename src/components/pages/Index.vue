@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import CollectionView from "../Posts/CollectionView";
-import MobileHeader from "../Header/Mobile";
-import Footer from "../Footer/Index";
-import AddPost from "../AddPost/Index";
-import StoriesWrapper from "../Aside/StoriesWrapper";
+import CollectionView from "../posts/CollectionView";
+import MobileHeader from "../header/Mobile";
+import Footer from "../footer/Index";
+import AddPost from "../addPost/Index";
+import StoriesWrapper from "../aside/StoriesWrapper";
 
 export default {
   name: "Explore",

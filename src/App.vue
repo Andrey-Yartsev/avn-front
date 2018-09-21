@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Header from "./components/Header/Index";
+import Header from "./components/header/Index";
 import Sidebar from "./components/Sidebar";
 
 export default {
