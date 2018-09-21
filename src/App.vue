@@ -4,7 +4,7 @@
 		<main id="content">
 			<router-view></router-view>
 		</main>
-    <Sidebar></Sidebar>
+    <Sidebar v-if="user"/>
 	</div>
 </template>
 
