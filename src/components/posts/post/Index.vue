@@ -6,23 +6,23 @@
             <div class="media">
                 <template v-if="item.media.length > 1">
                   <div class="media-slider">
-                    <figure :key="key" v-for="(value, key) in item.media" :class="[{ active: key === 0 }, 'media-item']" :data-index="key">
+                    <figure :key="key" v-for="(value, key) in item.media" :class="[{ active: currentSlide === key }, 'media-item']" :data-index="key">
                       <component :is="getMediaViewType(value)" :media="value"></component>
                     </figure>
                   </div>
                 </template>
                 <template v-else >
-                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                    <figure :key="key" v-for="(value, key) in item.media" class="media-item active">
                       <component :is="getMediaViewType(value)" :media="value"></component>
                     </figure>
                 </template>
                 <template v-if="item.media.length > 1">
                   <div class="media-slider-pagination">
-                    <span :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'item']" :data-index="key"></span>
+                    <span :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === currentSlide }, 'item']" @click="currentSlide = key"></span>
                   </div>
                   <div class="media-slider-navigation">
-                    <span class="btn-prev hidden"></span>
-                    <span class="btn-next"></span>
+                    <span :class="[{hidden: currentSlide === 0}, 'btn-prev']" @click="currentSlide -= 1"></span>
+                    <span :class="[{hidden: currentSlide === item.media.length - 1}, 'btn-next']" class="" @click="currentSlide += 1"></span>
                   </div>
                 </template>
             </div>
@@ -57,7 +57,7 @@ export default {
   data: function() {
     return {
       isShowPostDropdawn: false,
-      currentComponent: "Gif"
+      currentSlide: 0
     };
   },
   components: {
