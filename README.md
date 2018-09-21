@@ -19,3 +19,8 @@ npm run build
 ```
 npm run lint
 ```
+
+### Deploy
+```
+sudo su -c 'cd /var/www && ./renew_team3.sh' -s /bin/bash www-data
+```

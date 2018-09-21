@@ -66,7 +66,7 @@
           <button type="submit" class="btn lg alt block" @click.prevent="login">Login</button>
         </form>
         <div class="login-or"><span>or</span></div>
-        <button class="btn lg block twitter">Sign in with Twitter</button>
+        <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
         <div class="signUp">
           <h3>Don't have an account yet?</h3>
           <p><a href="/register" class="register">Sign up for OnMyTeam.com</a></p>
@@ -89,6 +89,7 @@
 <script>
 import Recaptcha from "vue-recaptcha";
 import Auth from "@/auth";
+import Twitter from "@/utils/twitter";
 
 export default {
   name: "Login",
@@ -128,7 +129,14 @@ export default {
     },
     onCaptchaExpired: function() {
       this.$refs.recaptcha.reset();
+    },
+    twitter() {
+      window.location.href = Twitter.getLoginUrl();
     }
+  },
+
+  beforeMount() {
+    this.$store.dispatch("auth/tryTwitterLogin");
   }
 };
 </script>

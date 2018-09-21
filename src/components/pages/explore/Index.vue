@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import MobileHeader from "../../Header/Mobile";
+import MobileHeader from "../../header/Mobile";
 import Navigate from "./common/Navigate";
 
 export default {
