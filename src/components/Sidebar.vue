@@ -16,11 +16,11 @@
           </div>
           <div class="user-menu-counts">
             <router-link to="/following" class="user-menu-counts-item">
-              <span class="user-menu-counts-item-count" id="sidebarFollowing">0</span>
+              <span class="user-menu-counts-item-count" id="sidebarFollowing">{{ user.followingCount }}</span>&nbsp;
               <span class="user-menu-counts-item-title">Following</span>
             </router-link>
             <router-link to="/followers" class="user-menu-counts-item">
-              <span class="user-menu-counts-item-count" id="sidebarFollowers">1</span>
+              <span class="user-menu-counts-item-count" id="sidebarFollowers">{{ user.followersCount }}</span>&nbsp;
               <span class="user-menu-counts-item-title">Followers</span>
             </router-link>
           </div>

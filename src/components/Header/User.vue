@@ -1,5 +1,5 @@
 <template>
-    <a :href="'/' + user.username" class="avatar header-avatar" v-click-outside="hide" @click="open">
+    <a :href="'/' + user.username" class="avatar header-avatar" v-click-outside="hide" @click.prevent="open">
         <img :src="user.avatar" />
     </a>
 </template>
@@ -23,9 +23,8 @@ export default {
   },
 
   methods: {
-    open(e) {
+    open() {
       if (!this.opened) {
-        e.preventDefault();
         document.body.classList.add("sidebar-shown", "disable-scroll-page");
         this.opened = true;
       }

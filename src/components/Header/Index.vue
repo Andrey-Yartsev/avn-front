@@ -16,8 +16,9 @@
                         <img class="white-logo" src="https://team2.retloko.com/ver_6667c0c/design/img/logo-full-white.svg">
                     </router-link>
                 </h1>
-                <Search></Search>
-                <User></User>
+                <Search />
+                <User />
+
                 <button class="btn make-post-btn hidden-mobile" type="button">Share</button>
                 <a class="btn make-post-btn hidden-desktop" href="/addPost">Share</a>
             </div>
@@ -32,8 +33,8 @@ import User from "./User";
 export default {
   name: "Header",
   components: {
-    Search: Search,
-    User: User
+    Search,
+    User
   }
 };
 </script>
