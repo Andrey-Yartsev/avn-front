@@ -3,6 +3,7 @@
 import BrowserStore from "store";
 import AuthApi from "@/api/auth";
 import Router from "@/router";
+import Twitter from "@/utils/twitter";
 
 const state = {
   loading: false,
@@ -14,16 +15,16 @@ const state = {
 const actions = {
   setUser({ commit }, user) {
     commit("setUser", user);
+    BrowserStore.set("user", user);
   },
 
-  login({ commit }, data) {
+  login({ commit, dispatch }, data) {
     commit("request");
 
     AuthApi.login(data)
       .then(user => {
-        commit("setUser", user);
+        dispatch("setUser", user);
         commit("showCaptcha", false);
-        BrowserStore.set("user", user);
       })
       .then(() => Router.push("/"))
       .catch(error => {
@@ -38,6 +39,19 @@ const actions = {
   logout({ commit }) {
     commit("logout");
     Router.push("/login");
+  },
+
+  tryTwitterLogin({ dispatch }) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    const secret = urlParams.get("secret");
+    if (token && secret) {
+      Twitter.getAuthToken(token, secret).then(user => {
+        dispatch("setUser", user).then(() => {
+          Router.push("/");
+        });
+      });
+    }
   }
 };
 

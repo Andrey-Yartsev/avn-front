@@ -12,7 +12,6 @@ export default {
     return new Promise(async (resolve, reject) => {
       const response = await request("users/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(creds)
       });
       const data = await response.json();
