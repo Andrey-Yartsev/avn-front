@@ -4,29 +4,27 @@
             <PostHeader :id="item.id" :user="item.author"></PostHeader>
             <p class="text">{{ item.text }}</p>
             <div class="media">
-                <!-- <%if(1 < length){%> -->
-                <div class="media-slider">
-                <!-- <%}%> -->
-                  <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
-                    <component :is="getMediaViewType(value)" :media="value"></component>
-                  </figure>
-
-
-                  
-                <!-- <%}%>
-                </div>
-                <%if(1 < length){%>
-                <div class="media-slider-pagination">
-                    <%for(var i = 0; i < length; i++){%>
-                    <span class="item <%if(0===i){%>active<%}%>" data-index="<%=i%>"></span>
-                    <%}%>
-                </div>
-                <div class="media-slider-navigation">
+                <template v-if="item.media.length > 1">
+                  <div class="media-slider">
+                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                      <component :is="getMediaViewType(value)" :media="value"></component>
+                    </figure>
+                  </div>
+                </template>
+                <template v-else >
+                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                      <component :is="getMediaViewType(value)" :media="value"></component>
+                    </figure>
+                </template>
+                <template v-if="item.media.length > 1">
+                  <div class="media-slider-pagination">
+                    <span :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'item']" :data-index="key"></span>
+                  </div>
+                  <div class="media-slider-navigation">
                     <span class="btn-prev hidden"></span>
                     <span class="btn-next"></span>
-                </div>
-                <%}%> -->
-              </div>
+                  </div>
+                </template>
             </div>
             <Actions></Actions>
         </div>

@@ -31,7 +31,8 @@ const mutations = {
     state.posts = posts;
     // .filter(post => {
     //   return (
-    //     post.media.length > 0 && post.media[0].type === "gif"
+    //     post.media.length > 1
+    //     // && post.media[0].type === "gif"
     //     // post.media[0].canView === true
     //   );
     // });
