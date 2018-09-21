@@ -28,13 +28,13 @@ const actions = {
 
 const mutations = {
   ["postsRequestSuccess"](state, posts) {
-    state.posts = posts.filter(post => {
-      return (
-        post.media.length > 0 &&
-        post.media[0].type === "video" &&
-        post.media[0].canView === true
-      );
-    });
+    state.posts = posts;
+    // .filter(post => {
+    //   return (
+    //     post.media.length > 0 && post.media[0].type === "gif"
+    //     // post.media[0].canView === true
+    //   );
+    // });
     state.loading = false;
   },
 
@@ -46,10 +46,6 @@ const mutations = {
   ["postsRequest"](state) {
     state.loading = true;
   }
-  //   ["AUTH_SUCCESS"](state) {
-  //     // state.user.email = email
-  //     BrowserStore.set("user", state.tempUser);
-  //   },
 };
 
 export default {

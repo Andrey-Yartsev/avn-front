@@ -8,14 +8,14 @@
 export default {
   name: "LockedPicture",
   props: {
-    base64: {
-      type: String,
+    media: {
+      type: Object,
       required: true
     }
   },
   computed: {
     image() {
-      return `data:image/jpeg;base64,${this.base64}`;
+      return `data:image/jpeg;base64,${this.media.locked}`;
     }
   }
 };

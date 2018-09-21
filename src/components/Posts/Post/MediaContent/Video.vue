@@ -1,23 +1,16 @@
 <template>
-<video disableremoteplayback webkit-playsinline playsinline controls poster="<%=media[i].preview%>">
-    <%for(var type in media[i].video){%>
-    <source v-for="type in video" src="type>" type="video/<%=type%>">
-    <%}%>
-</video>
+  <video disableremoteplayback webkit-playsinline playsinline controls :poster="media.preview.source">
+      <source v-for="(videoSrc, videoType) in media.video" :src="videoSrc" :type="`video/${videoType}`" :key="videoType">
+  </video>
 </template>
 
 <script>
 export default {
-  name: "LockedPicture",
+  name: "Video",
   props: {
-    base64: {
-      type: String,
+    media: {
+      type: Object,
       required: true
-    }
-  },
-  computed: {
-    image() {
-      return `data:image/jpeg;base64,${this.base64}`;
     }
   }
 };

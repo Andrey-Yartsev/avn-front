@@ -8,30 +8,11 @@
                 <div class="media-slider">
                 <!-- <%}%> -->
                   <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
-                    <template v-if="value.canView === false">
-                      <LockedPicture :base64="value.locked" ></LockedPicture>
-                    </template>
-                    <template v-if="value.type === 'video'">
-                      <video disableremoteplayback webkit-playsinline playsinline controls poster="<%=media[i].preview%>">
-                          <%for(var type in media[i].video){%>
-                          <source v-for="(value, key) in item.media" src="<%=media[i].video[type]%>" type="video/<%=type%>">
-                          <%}%>
-                      </video>
-                    </template>
-                      
-                            <%}else if(media[i].type === 'gif'){%>
-                            <a class="postLink" href="/post/<%=id%>">
-                                <div class="gif-player">
-                                    <img src="<%=media[i].preview%>">
-                                </div>
-                            </a>
-                            <%}else{%>
-                            <a class="postLink" href="/post/<%=id%>">
-                                <img src="<%=media[i].preview%>">
-                            </a>
-                            <%}%>
-                        <%}%> -->
-                    </figure>
+                    <component :is="getMediaViewType(value)" :media="value"></component>
+                  </figure>
+
+
+                  
                 <!-- <%}%>
                 </div>
                 <%if(1 < length){%>
@@ -69,12 +50,16 @@ import Comment from "./Comments/Comment";
 import PostHeader from "./PostHeader";
 import Actions from "./Actions";
 import LockedPicture from "./MediaContent/LockedPicture";
+import Video from "./MediaContent/Video";
+import Gif from "./MediaContent/Gif";
+import Simple from "./MediaContent/Simple";
 
 export default {
   name: "Post",
   data: function() {
     return {
-      isShowPostDropdawn: false
+      isShowPostDropdawn: false,
+      currentComponent: "Gif"
     };
   },
   components: {
@@ -83,7 +68,10 @@ export default {
     ShowMore,
     Actions,
     PostHeader,
-    LockedPicture
+    LockedPicture,
+    Video,
+    Gif,
+    Simple
   },
   props: {
     item: {
@@ -91,10 +79,18 @@ export default {
       required: true
     }
   },
-  computed: {
-    imgUrl() {
-      return "";
-      //return this.item.media ? `data:image/jpeg;base64,${this.item.media[0].locked}` : '';
+  methods: {
+    getMediaViewType(media) {
+      switch (true) {
+        case !media.canView:
+          return "LockedPicture";
+        case media.type === "video":
+          return "Video";
+        case media.type === "gif":
+          return "Gif";
+        default:
+          return "Simple";
+      }
     }
   }
 };
