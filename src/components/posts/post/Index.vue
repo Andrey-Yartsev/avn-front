@@ -6,7 +6,7 @@
             <div class="media">
                 <template v-if="item.media.length > 1">
                   <div class="media-slider">
-                    <figure :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === 0 }, 'media-item']" :data-index="key">
+                    <figure :key="key" v-for="(value, key) in item.media" :class="[{ active: key === 0 }, 'media-item']" :data-index="key">
                       <component :is="getMediaViewType(value)" :media="value"></component>
                     </figure>
                   </div>
@@ -26,7 +26,7 @@
                   </div>
                 </template>
             </div>
-            <Actions></Actions>
+            <Actions :post="item"></Actions>
         </div>
         <AddComment></AddComment>
         <div class="postComments">
