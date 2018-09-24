@@ -12,10 +12,20 @@ const state = {
   user: null
 };
 
+const defaultUser = {
+  userSettings: {
+    nightMode: false
+  }
+};
+
 const actions = {
   setUser({ commit }, user) {
     commit("setUser", user);
     BrowserStore.set("user", user);
+  },
+
+  extendUser({ state, dispatch }, user) {
+    dispatch("setUser", Object.assign({}, state.user, user));
   },
 
   login({ commit, dispatch }, data) {
@@ -57,7 +67,7 @@ const actions = {
 
 const mutations = {
   setUser(state, user) {
-    state.user = user;
+    state.user = Object.assign({}, defaultUser, user);
   },
 
   request(state) {

@@ -10,6 +10,7 @@ import ExploreLivePage from "./components/pages/explore/Live";
 import MessagesPage from "./components/pages/messages/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
 import LoginPage from "./components/Login";
+import SettingsDefaultPage from "./components/pages/settings/Index";
 
 import Auth from "@/auth.js";
 
@@ -67,8 +68,25 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/login",
-    component: LoginPage
+    path: "/settings",
+    component: SettingsDefaultPage,
+    name: "settings"
+    // children: [
+    //   {
+    //     path: "",
+    //     redirect: () => ({
+    //       path: "/settings/default"
+    //     }),
+    //     component: SettingsDefaultPage,
+    //     name: "settings",
+    //   }
+    // ]
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/profile",
+    component: SettingsDefaultPage,
+    name: "SettingsProfile"
   }
 ];
 

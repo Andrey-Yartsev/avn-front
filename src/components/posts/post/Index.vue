@@ -42,15 +42,15 @@
 </template>
 
 <script>
-import AddComment from "./Comments/AddComment";
-import ShowMore from "./Comments/ShowMore";
-import Comment from "./Comments/Comment";
+import AddComment from "./comments/AddComment";
+import ShowMore from "./comments/ShowMore";
+import Comment from "./comments/Comment";
 import PostHeader from "./PostHeader";
 import Actions from "./Actions";
-import LockedPicture from "./MediaContent/LockedPicture";
-import Video from "./MediaContent/Video";
-import Gif from "./MediaContent/Gif";
-import Simple from "./MediaContent/Simple";
+import LockedPicture from "./mediaContent/LockedPicture";
+import Video from "./mediaContent/Video";
+import Gif from "./mediaContent/Gif";
+import Simple from "./mediaContent/Simple";
 
 export default {
   name: "Post",
