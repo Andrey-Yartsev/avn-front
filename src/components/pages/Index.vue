@@ -25,6 +25,7 @@ import MobileHeader from "../header/Mobile";
 import Footer from "../footer/Index";
 import AddPost from "../addPost/Index";
 import StoriesWrapper from "../aside/StoriesWrapper";
+import { getBottom } from "../../helpers/page";
 
 export default {
   name: "Home",
@@ -37,6 +38,21 @@ export default {
   },
   created() {
     this.$store.dispatch("home/getPosts");
+  },
+  mounted() {
+    window.addEventListener("scroll", this.onScrollHandler, true);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScrollHandler, true);
+  },
+  methods: {
+    onScrollHandler: function() {
+      const { loading, allDataReceived } = this.$store.state.home;
+      const isOnBottom = getBottom();
+      if (isOnBottom && !loading && !allDataReceived) {
+        this.$store.dispatch("home/getPosts");
+      }
+    }
   }
 };
 </script>
