@@ -1,14 +1,33 @@
 <template>
     <div class="actions">
-        <span class="likes ">5</span>
-        <span class="comments">8</span>
-        <time class="date" datetime="2017-12-29T10:22:23+00:00"><a class="postLink" href="/post/242403">Dec 29, 2017 1:22 PM</a></time>
-        <!-- <span class="report"></span>-->
+        <span :class="[{ active: post.isFavorite }, 'likes']">{{ post.favoritesCount }}</span>
+        <span class="comments">{{ post.commentsCount }}</span>
+        <template v-if="!isOwner(post.id) && post.author.canEarn">
+          <span class="tips"></span>
+        </template>
+        <time class="date" :datetime="post.postedAt">
+          <router-link class="postLink" to="`/post/${post.id}`">{{ dateTime }}</router-link>
+        </time>
     </div>
 </template>
 
 <script>
+import datetimeHelper from "../../../helpers/datetime";
+import userMixin from "../../../mixins/user";
+
 export default {
-  name: "Actions"
+  name: "Actions",
+  mixins: [userMixin],
+  props: {
+    post: {
+      type: Object,
+      isRequired: true
+    }
+  },
+  computed: {
+    dateTime: function() {
+      return datetimeHelper(this.post.postedAt);
+    }
+  }
 };
 </script>

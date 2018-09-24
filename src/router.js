@@ -27,7 +27,7 @@ const routes = [
     beforeEnter: Auth.logout
   },
   {
-    // beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAuth,
     path: "/",
     component: IndexPage
   },
