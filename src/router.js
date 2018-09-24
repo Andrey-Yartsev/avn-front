@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import IndexPage from "./components/pages/Index";
+import HomePage from "./components/pages/home/Index";
 import ExplorePage from "./components/pages/explore/Index";
 import ExploreStoriesPage from "./components/pages/explore/Stories";
 import ExploreVideosPage from "./components/pages/explore/Videos";
@@ -29,7 +29,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/",
-    component: IndexPage
+    component: HomePage
   },
   {
     beforeEnter: Auth.requireAuth,

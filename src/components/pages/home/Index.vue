@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import CollectionView from "../posts/CollectionView";
-import MobileHeader from "../header/Mobile";
-import Footer from "../footer/Index";
-import AddPost from "../addPost/Index";
-import StoriesWrapper from "../aside/StoriesWrapper";
-import { getBottom } from "../../helpers/page";
+import CollectionView from "./posts/CollectionView";
+import MobileHeader from "../../header/Mobile";
+import Footer from "../../footer/Index";
+import AddPost from "../../addPost/Index";
+import StoriesWrapper from "../../aside/StoriesWrapper";
+import { getBottom } from "../../../helpers/page";
 
 export default {
   name: "Home",

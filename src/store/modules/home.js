@@ -21,13 +21,6 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
-    // .filter(post => {
-    //   return (
-    //     post.media.length > 1
-    //     // && post.media[0].type === "gif"
-    //     // post.media[0].canView === true
-    //   );
-    // });
     state.loading = false;
   },
 
@@ -43,7 +36,11 @@ const mutations = {
   ["postCommentsRequest"](data) {
     state.posts = state.posts.map(post => {
       if (data.postId === post.id) {
-        post.comments = post.comments || { loading: true, list: [] };
+        return {
+          ...post,
+          comments: post.comments || [],
+          commentsLoading: true
+        };
       }
 
       return post;
@@ -58,11 +55,8 @@ const mutations = {
 
       return {
         ...post,
-        comments: {
-          ...post.comments,
-          list: [...post.comments.list, data],
-          loading: false
-        }
+        comments: [...post.comments, ...data.list],
+        commentsLoading: false
       };
     });
   },
@@ -97,7 +91,7 @@ const actions = {
           response.json().then(function(res) {
             commit("postCommentsRequestSuccess", {
               postId: data.postId,
-              data: res.list
+              list: res.list
             });
           });
         }
