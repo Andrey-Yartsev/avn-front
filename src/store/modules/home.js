@@ -33,9 +33,9 @@ const mutations = {
     state.loading = true;
   },
 
-  ["postCommentsRequest"](data) {
+  ["postCommentsRequest"](state, { postId }) {
     state.posts = state.posts.map(post => {
-      if (data.postId === post.id) {
+      if (postId === post.id) {
         return {
           ...post,
           comments: post.comments || [],
@@ -83,15 +83,15 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
-  getPostComments({ commit }, data) {
-    commit("postCommentsRequest", data);
-    return HomeApi.getPostComments(data)
+  getPostComments({ commit }, { postId }) {
+    commit("postCommentsRequest", { postId });
+    return HomeApi.getPostComments({ postId })
       .then(response => {
         if (response.status === 200) {
-          response.json().then(function(res) {
+          response.json().then(function(list) {
             commit("postCommentsRequestSuccess", {
-              postId: data.postId,
-              list: res.list
+              postId,
+              list
             });
           });
         }

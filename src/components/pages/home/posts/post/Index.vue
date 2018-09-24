@@ -29,22 +29,13 @@
             <Actions :post="item"></Actions>
         </div>
         <AddComment></AddComment>
-        <div class="postComments">
-            <ShowMore></ShowMore>
-            <div class="comments-list">
-                <Comment></Comment>
-                <Comment></Comment>
-                <Comment></Comment>
-                <Comment></Comment>
-            </div>
-        </div>
+        <CommentsList :comments="item.comments || []"></CommentsList>
     </div>
 </template>
 
 <script>
 import AddComment from "./comments/AddComment";
-import ShowMore from "./comments/ShowMore";
-import Comment from "./comments/Comment";
+import CommentsList from "./comments/CommentsList";
 import PostHeader from "./PostHeader";
 import Actions from "./Actions";
 import LockedPicture from "./mediaContent/LockedPicture";
@@ -61,9 +52,8 @@ export default {
     };
   },
   components: {
-    Comment,
+    CommentsList,
     AddComment,
-    ShowMore,
     Actions,
     PostHeader,
     LockedPicture,
@@ -89,7 +79,17 @@ export default {
         default:
           return "Simple";
       }
+    },
+    getComments() {
+      const { id, commentsCount } = this.item;
+
+      if (commentsCount) {
+        this.$store.dispatch("home/getPostComments", { postId: id });
+      }
     }
+  },
+  created() {
+    this.getComments();
   }
 };
 </script>
