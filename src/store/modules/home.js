@@ -38,6 +38,37 @@ const mutations = {
 
   ["postsRequest"](state) {
     state.loading = true;
+  },
+
+  ["postCommentsRequest"](data) {
+    state.posts = state.posts.map(post => {
+      if (data.postId === post.id) {
+        post.comments = post.comments || { loading: true, list: [] };
+      }
+
+      return post;
+    });
+  },
+
+  ["postCommentsRequestSuccess"](state, data) {
+    state.posts = state.posts.map(post => {
+      if (data.postId !== post.id) {
+        return post;
+      }
+
+      return {
+        ...post,
+        comments: {
+          ...post.comments,
+          list: [...post.comments.list, data],
+          loading: false
+        }
+      };
+    });
+  },
+
+  ["commentsRequestFail"](/* state, err */) {
+    // TODO;
   }
 };
 
@@ -56,6 +87,23 @@ const actions = {
       })
       .catch(err => {
         commit("postsRequestFail", err);
+      });
+  },
+  getPostComments({ commit }, data) {
+    commit("postCommentsRequest", data);
+    return HomeApi.getPostComments(data)
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("postCommentsRequestSuccess", {
+              postId: data.postId,
+              data: res.list
+            });
+          });
+        }
+      })
+      .catch(err => {
+        commit("commentsRequestFail", err);
       });
   }
 };

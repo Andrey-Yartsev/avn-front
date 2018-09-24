@@ -6,5 +6,11 @@ export default {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
+  },
+  getPostComments(data) {
+    return request(`posts/${data.postId}/comments`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
   }
 };
