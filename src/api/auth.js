@@ -1,4 +1,5 @@
 import request from "@/utils/request";
+import tokenRequest from "@/utils/tokenRequest";
 
 export default {
   _login() {
@@ -19,6 +20,12 @@ export default {
         reject(data.error);
       }
       resolve(data);
+    });
+  },
+  update(user) {
+    return tokenRequest("users/me", {
+      method: "PUT",
+      data: user
     });
   }
 };

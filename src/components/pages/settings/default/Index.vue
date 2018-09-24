@@ -1,0 +1,205 @@
+<template>
+  <div class="profile-wrapper">
+    <h1 class="form-title">Edit Profile</h1>
+    <form class="settings-form" v-on:submit.stop.prevent="save">
+      <div class="border-top shadow-block">
+        <div class="container">
+          <div class="form-group">
+            <label class="form-group-inner">
+              <span class="label">Name</span>
+              <input name="name" v-model="user.name">
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-group-inner">
+              <span class="label">Username</span>
+              <input
+                type="text" name="username" id="profileUsername"
+                v-model="localUser.username" required
+                autocomplete="off" min="5" max="20"
+                pattern="[a-zA-Z0-9-_]{5,20}"
+                title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters.">
+            </label>
+
+          </div>
+          <div class="form-group">
+            <label class="form-group-inner">
+              <span class="label">Website</span>
+              <input
+                type="text"
+                name="website"
+                v-model="localUser.website"
+                pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)">
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-group-inner">
+              <span class="label">About</span>
+              <textarea
+                rows="3"
+                name="about"
+                v-model="localUser.about"
+              ></textarea>
+            </label>
+          </div>
+          <div class="form-group color-schemes-wrapper">
+            <div class="form-group-inner">
+              <span class="label">Theme color</span>
+              <div class="row">
+                <div class="col-1-2">
+                  <ColorSelect
+                    name="primaryColor"
+                    label="Primary"
+                    text="Select your primary color"
+                    wrapperClass="primary"
+                    v-model="localUser.primaryColor"
+                    @input="colorsChanged"
+                  />
+                </div>
+                <div class="col-1-2">
+                  <ColorSelect
+                    name="secondColor"
+                    label="Secondary"
+                    text="Select your secondary color"
+                    wrapperClass="secondary"
+                    v-model="localUser.secondColor"
+                    @input="colorsChanged"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="toggle-wrapper border-top option-earn-money">
+        <label class="toggle-label semi-transparent" for="is_paid_subscription">I want to earn money using
+          OnMyTeam</label>
+        <label class="toggle-element">
+          <input
+            type="checkbox" id="is_paid_subscription" name="isWantEarn"
+            v-model="localUser.isWantEarn"
+          >
+          <span></span>
+        </label>
+      </div>
+      <div class="shadow-block" id="is_paid_subscription__wrapper" v-if="localUser.isWantEarn">
+        <div class="container">
+          <div class="form-group">
+            <label class="form-group-inner subscription">
+              <span class="label">Subscription</span>
+              <span class="subscription__field">
+                <span class="subscription__per-month">per month</span>
+                <input
+                  class="subscription__input"
+                  type="number" min="0" step="0.01" name="subscribePrice"
+                  value="0"
+                  :disabled="!user.canEarn"
+                >
+              </span>
+            </label>
+
+            <label class="form-group-inner subscription" v-if="!user.canEarn">
+              <span class="label"></span>
+              <span class="subscription-desc">
+                Before setting your monthly subscription price (or to be able to accept tips), you must first
+                <router-link to="/settings/payouts">add a bank account</router-link>
+              </span>
+            </label>
+
+          </div>
+        </div>
+      </div>
+      <div class="form-title border-top">
+        <div class="inner"><span class="semi-transparent">
+			Private Information
+			<p class="subtext">This information will not be publicly displayed</p>
+		</span></div>
+      </div>
+      <div class="shadow-block">
+        <div class="container">
+          <div class="form-group gender-options">
+            <label class="form-group-inner">
+              <span class="label">Gender</span>
+              <div class="row">
+                <div class="col-1-2">
+                  <div class="select-wrapper">
+                    <select name="gender" class="default-disabled" v-model="localUser.gender">
+                      <option value="0">Not specified</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="form-group hidden-mobile">
+            <div class="form-group-inner">
+              <span class="label"></span>
+              <button
+                type="submit" class="btn lg saveChanges"
+                :disabled="loading || !changed"
+              >Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+import ColorSelect from "./ColorSelect";
+
+export default {
+  name: "SettingsProfile",
+
+  components: {
+    ColorSelect
+  },
+
+  data() {
+    return {
+      localUser: null
+    };
+  },
+
+  created: function() {
+    this.localUser = this._clone(this.$store.state.auth.user);
+  },
+
+  watch: {
+    user(user) {
+      this.localUser = this._clone(user);
+    }
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
+    },
+    changed() {
+      return JSON.stringify(this.user) !== JSON.stringify(this.localUser);
+    },
+    loading() {
+      return this.$store.state.profile.loading;
+    }
+  },
+
+  methods: {
+    save() {
+      this.$store.dispatch("profile/update", this.localUser);
+    },
+    _clone(o) {
+      return JSON.parse(JSON.stringify(o));
+    },
+    colorsChanged() {
+      this.$store.dispatch("auth/extendUser", {
+        primaryColor: this.localUser.primaryColor,
+        secondColor: this.localUser.secondColor
+      });
+      this.$store.dispatch("profile/update", this.localUser);
+    }
+  }
+};
+</script>

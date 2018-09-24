@@ -4,22 +4,40 @@
 		<main id="content">
 			<router-view></router-view>
 		</main>
-    <Sidebar v-if="user"/>
+    <Sidebar/>
+    <Toast v-if="showToast" @hide="showToast = false" />
 	</div>
 </template>
 
 <script>
 import Header from "./components/header/Index";
 import Sidebar from "./components/Sidebar";
+import Toast from "./components/common/Toast";
+import ColorScheme from "@/mixins/colorScheme";
 
 export default {
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    Toast
+  },
+  mixins: [ColorScheme],
+  data() {
+    return {
+      showToast: false
+    };
   },
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    toastShowTrigger() {
+      return this.$store.state.global.toastShowTrigger;
+    }
+  },
+  watch: {
+    toastShowTrigger() {
+      this.showToast = true;
     }
   }
 };
