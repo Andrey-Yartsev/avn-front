@@ -13,6 +13,15 @@ const state = {
 };
 
 const mutations = {
+  ["resetPageState"]() {
+    state.loading = false;
+    state.error = null;
+    state.posts = [];
+    state.allDataReceived = false;
+    state.limit = 10;
+    state.offset = 0;
+  },
+
   ["postsRequestSuccess"](state, posts) {
     state.posts = [...state.posts, ...posts];
 
@@ -39,7 +48,8 @@ const mutations = {
         return {
           ...post,
           comments: post.comments || [],
-          commentsLoading: true
+          commentsLoading: true,
+          shownCommentsCount: 3
         };
       }
 
@@ -60,6 +70,19 @@ const mutations = {
       };
     });
   },
+  ["postSendCommentsRequestSuccess"](state, data) {
+    state.posts = state.posts.map(post => {
+      if (data.postId !== post.id) {
+        return post;
+      }
+
+      return {
+        ...post,
+        comments: [data.comment, ...post.comments],
+        shownCommentsCount: post.shownCommentsCount + 1
+      };
+    });
+  },
 
   ["commentsRequestFail"](/* state, err */) {
     // TODO;
@@ -67,6 +90,10 @@ const mutations = {
 };
 
 const actions = {
+  resetPage({ commit }) {
+    commit("resetPageState");
+  },
+
   getPosts({ commit }) {
     const { limit, offset } = state;
     commit("postsRequest");
@@ -98,6 +125,23 @@ const actions = {
       })
       .catch(err => {
         commit("commentsRequestFail", err);
+      });
+  },
+
+  sendPostComment({ commit }, { postId, text }) {
+    return HomeApi.sendPostComment({ postId, text })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(comment) {
+            commit("postSendCommentsRequestSuccess", {
+              postId,
+              comment
+            });
+          });
+        }
+      })
+      .catch(err => {
+        commit("sendPostCommentFail", err);
       });
   }
 };

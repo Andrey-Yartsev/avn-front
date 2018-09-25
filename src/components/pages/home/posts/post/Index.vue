@@ -26,10 +26,10 @@
                   </div>
                 </template>
             </div>
-            <Actions :post="item"></Actions>
+            <Actions :post="item" v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"></Actions>
         </div>
-        <AddComment></AddComment>
-        <CommentsList :comments="item.comments || []"></CommentsList>
+        <AddComment :class="{hidden: !showAddCommentForm}" v-on:postAddComment="sendNewComment"></AddComment>
+        <CommentsList :comments="item.comments || []" :shownCommentsCount="item.shownCommentsCount"></CommentsList>
     </div>
 </template>
 
@@ -48,7 +48,8 @@ export default {
   data: function() {
     return {
       isShowPostDropdawn: false,
-      currentSlide: 0
+      currentSlide: 0,
+      showAddCommentForm: false
     };
   },
   components: {
@@ -86,6 +87,12 @@ export default {
       if (commentsCount) {
         this.$store.dispatch("home/getPostComments", { postId: id });
       }
+    },
+    sendNewComment(msg) {
+      this.$store.dispatch("home/sendPostComment", {
+        postId: this.item.id,
+        text: msg
+      });
     }
   },
   created() {

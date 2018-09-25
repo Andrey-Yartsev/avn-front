@@ -37,6 +37,7 @@ export default {
     CollectionView: CollectionView
   },
   created() {
+    this.$store.dispatch("home/resetPage");
     this.$store.dispatch("home/getPosts");
   },
   mounted() {
