@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <span :class="[{ active: post.isFavorite }, 'likes']">{{ post.favoritesCount }}</span>
+        <span :class="[{ active: post.isFavorite }, 'likes']" @click="$emit('postLike')">{{ post.favoritesCount }}</span>
         <span class="comments" @click="$emit('postShowCommentForm')">{{ post.commentsCount }}</span>
         <template v-if="!isOwner(post.id) && post.author.canEarn">
           <span class="tips"></span>

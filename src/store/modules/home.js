@@ -42,6 +42,20 @@ const mutations = {
     state.loading = true;
   },
 
+  ["postLikeSuccess"](state, { postId, isFavorite }) {
+    state.posts = state.posts.map(post => {
+      if (postId === post.id) {
+        return {
+          ...post,
+          isFavorite,
+          favoritesCount: post.favoritesCount + (isFavorite ? 1 : -1)
+        };
+      }
+
+      return post;
+    });
+  },
+
   ["postCommentsRequest"](state, { postId }) {
     state.posts = state.posts.map(post => {
       if (postId === post.id) {
@@ -70,6 +84,7 @@ const mutations = {
       };
     });
   },
+
   ["postSendCommentsRequestSuccess"](state, data) {
     state.posts = state.posts.map(post => {
       if (data.postId !== post.id) {
@@ -126,6 +141,21 @@ const actions = {
       .catch(err => {
         commit("commentsRequestFail", err);
       });
+  },
+
+  likePost({ commit }, { postId, addLike }) {
+    return HomeApi.likePost({ postId, addLike })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function({ isFavorite }) {
+            commit("postLikeSuccess", {
+              postId,
+              isFavorite
+            });
+          });
+        }
+      })
+      .catch(() => {});
   },
 
   sendPostComment({ commit }, { postId, text }) {

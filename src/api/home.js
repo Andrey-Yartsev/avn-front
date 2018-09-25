@@ -1,15 +1,18 @@
 import tokenRequest from "@/utils/tokenRequest";
-import request from "@/utils/request";
 
 export default {
-  getPosts(data) {
-    return request(`posts/feed?offset=${data.offset}&limit=${data.limit}`, {
+  getPosts({ offset, limit }) {
+    return tokenRequest(`posts/feed`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      query: {
+        offset,
+        limit
+      }
     });
   },
   getPostComments(data) {
-    return request(`posts/${data.postId}/comments`, {
+    return tokenRequest(`posts/${data.postId}/comments`, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -22,6 +25,15 @@ export default {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ text })
+    });
+  },
+  likePost({ postId, addLike }) {
+    return tokenRequest(`posts/${postId}/favorites`, {
+      method: addLike ? "POST" : "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
   }
 };

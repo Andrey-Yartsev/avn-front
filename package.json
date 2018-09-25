@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "query-string": "^6.1.0",
     "vue": "^2.5.17",
     "vue-click-outside": "^1.0.7",
     "vue-router": "^3.0.1"

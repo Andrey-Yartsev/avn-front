@@ -26,7 +26,11 @@
                   </div>
                 </template>
             </div>
-            <Actions :post="item" v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"></Actions>
+            <Actions 
+              :post="item" 
+              v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+              v-on:postLike="likePost"
+            ></Actions>
         </div>
         <AddComment :class="{hidden: !showAddCommentForm}" v-on:postAddComment="sendNewComment"></AddComment>
         <CommentsList :comments="item.comments || []" :shownCommentsCount="item.shownCommentsCount"></CommentsList>
@@ -92,6 +96,12 @@ export default {
       this.$store.dispatch("home/sendPostComment", {
         postId: this.item.id,
         text: msg
+      });
+    },
+    likePost() {
+      this.$store.dispatch("home/likePost", {
+        postId: this.item.id,
+        addLike: !this.item.isFavorite
       });
     }
   },
