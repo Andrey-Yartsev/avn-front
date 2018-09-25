@@ -1,14 +1,20 @@
 <template>
     <div class="comment">
         <div class="comment-body">
-            <a href="/alehandro" class="comment-author-name name">Tracer</a>
-            <div class="comment-text">very long comment about all my</div>
+            <router-link :to="comment.author.publicUrl" class="comment-author-name name">{{ comment.author.username }}</router-link>
+            <div class="comment-text">{{ comment.text }}</div>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: "Comment"
+  name: "Comment",
+  props: {
+    comment: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>
