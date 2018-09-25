@@ -4,7 +4,9 @@
             <img :src="user.avatar" />
         </router-link>
         <router-link class="name" :to="user.publicUrl">{{ user.username }}</router-link>
-        <span class="verified-user"></span>
+        <template v-if="user.isVerified">
+          <span class="verified-user"></span>
+        </template>
         <span class="user-login">
                 <router-link :to="user.publicUrl">{{ user.username }}</router-link>
             </span>
