@@ -9,7 +9,8 @@ const state = {
   posts: [],
   allDataReceived: false,
   limit: 10,
-  offset: 0
+  offset: 0,
+  marker: ""
 };
 
 const mutations = {
@@ -20,9 +21,10 @@ const mutations = {
     state.allDataReceived = false;
     state.limit = 10;
     state.offset = 0;
+    state.marker = "";
   },
 
-  ["postsRequestSuccess"](state, posts) {
+  ["postsRequestSuccess"](state, { list: posts, marker }) {
     state.posts = [...state.posts, ...posts];
 
     if (posts.length < state.limit) {
@@ -31,6 +33,7 @@ const mutations = {
       state.offset = state.offset + state.limit;
     }
     state.loading = false;
+    state.marker = state.marker.length ? state.marker : marker;
   },
 
   ["postsRequestFail"](state, err) {
@@ -110,14 +113,14 @@ const actions = {
   },
 
   getPosts({ commit }) {
-    const { limit, offset } = state;
+    const { limit, offset, marker } = state;
     commit("postsRequest");
 
-    return HomeApi.getPosts({ limit, offset })
+    return HomeApi.getPosts({ limit, offset, marker })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
-            commit("postsRequestSuccess", res.list);
+            commit("postsRequestSuccess", res);
           });
         }
       })

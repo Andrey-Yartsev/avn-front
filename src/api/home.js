@@ -1,13 +1,14 @@
 import tokenRequest from "@/utils/tokenRequest";
 
 export default {
-  getPosts({ offset, limit }) {
+  getPosts({ offset, limit, marker }) {
     return tokenRequest(`posts/feed`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       query: {
         offset,
-        limit
+        limit,
+        marker
       }
     });
   },
