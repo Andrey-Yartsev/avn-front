@@ -45,13 +45,13 @@ const mutations = {
     state.loading = true;
   },
 
-  ["postLikeSuccess"](state, { postId, isFavorite }) {
+  ["postLikeSuccess"](state, { postId, isFavorite, favoritesCount }) {
     state.posts = state.posts.map(post => {
       if (postId === post.id) {
         return {
           ...post,
           isFavorite,
-          favoritesCount: post.favoritesCount + (isFavorite ? 1 : -1)
+          favoritesCount
         };
       }
 
@@ -150,10 +150,11 @@ const actions = {
     return HomeApi.likePost({ postId, addLike })
       .then(response => {
         if (response.status === 200) {
-          response.json().then(function({ isFavorite }) {
+          response.json().then(function({ isFavorite, favoritesCount }) {
             commit("postLikeSuccess", {
               postId,
-              isFavorite
+              isFavorite,
+              favoritesCount
             });
           });
         }
