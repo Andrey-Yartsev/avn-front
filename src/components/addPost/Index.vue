@@ -22,11 +22,15 @@
           maxlength="500"
           v-model="postMsg"
         ></textarea>
-        <div class="addFileCollectionView"></div>
+        <div class="addFileCollectionView">
+          <MediaPreview v-for="media in preloadedMediaFiles" :media="media" :key="media.userFileName" />
+        </div>
       </div>
       <div class="actions">
         <div class="actions-controls">
-          <label class="add-media-input"><input type="file" multiple></label>
+          <label class="add-media-input">
+            <input type="file" multiple @change="addMediaFiles">
+          </label>
           <!--<span class="voting-block-toggle-btn"></span> TODO votiong block-->
           <template v-if="hasSubscribePrice">
             <div class="b-check-state">
@@ -66,6 +70,8 @@
 
 <script>
 import Loader from "@/components/loader/Index";
+import MediaPreview from "./MediaPreview";
+import mediaFilePreviewHepler from "@/helpers/mediaFilePreview";
 
 export default {
   name: "AddPost",
@@ -74,10 +80,12 @@ export default {
     tweetSend: false,
     postMsg: "",
     isSaving: false,
-    isFree: false
+    isFree: false,
+    preloadedMediaFiles: []
   }),
   components: {
-    Loader
+    Loader,
+    MediaPreview
   },
   computed: {
     user() {
@@ -142,6 +150,44 @@ export default {
       //     }
       //   });
       // }); /*TODO error handling*/
+    },
+
+    addMediaFiles: async function(e) {
+      const files = e.target.files;
+
+      if (!files.length) return;
+
+      for (let i = 0; i < files.length; i += 1) {
+        this.preloadedMediaFiles.push({
+          file: files[i],
+          userFileName: files[i].name,
+          preview: await mediaFilePreviewHepler(files[i])
+        });
+      }
+
+      // return Promise.all(uploaded_files);
+
+      // var callback = function(addedFiles) {
+      //   this.mediaCount += addedFiles.length;
+      //   this.validate();
+      //   files.value = "";
+      // }.bind(this);
+
+      // this.addFileCollection
+      //   .addFiles(files)
+      //   .then(callback)
+      //   .catch(
+      //     function() {
+      //       //manual cancel during upload gets here too
+      //       callback([]);
+      //     }.bind(this)
+      //   );
+
+      /**
+       * Array of jqXHR objects, which implement Promise interface
+       */
+
+      // return Promise.all(uploaded_files);
     }
   }
 };
