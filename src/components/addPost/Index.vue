@@ -7,7 +7,7 @@
         <button
           type="submit"
           class="btn submit sm"
-          :disabled="disableShareBtn"
+          :disabled="notEhoughData"
           @click="addNewPost"
         >Share</button>
       </div>
@@ -31,7 +31,7 @@
           <template v-if="hasSubscribePrice">
             <div class="b-check-state">
               <label>
-                <input class="is-free-post" type="checkbox">
+                <input class="is-free-post" type="checkbox" v-model="isFree">
                 <span class="b-check-state__icon"></span>
                 <span class="b-check-state__text">Free Post</span>
               </label>
@@ -55,7 +55,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="disableShareBtn"
+          :disabled="notEhoughData"
           @click="addNewPost"
         >Share</button>
       </div>
@@ -73,7 +73,8 @@ export default {
     expanded: false,
     tweetSend: false,
     postMsg: "",
-    isSaving: false
+    isSaving: false,
+    isFree: false
   }),
   components: {
     Loader
@@ -85,37 +86,39 @@ export default {
     hasSubscribePrice() {
       return this.$store.state.auth.user.subscribePrice > 0;
     },
-    disableShareBtn() {
+    notEhoughData() {
       return !this.postMsg.length;
     }
   },
   methods: {
     addNewPost: function(e) {
       e.preventDefault();
-      this.isSaving = true;
-      // если нет текста или медий не ничего не делаем
 
-      // var block = this.formModel.get("block");
-      // if (block) {
-      //   return;
-      // }
-      // this.formModel.set("block", true);
+      // если нет текста или медий не ничего не делаем
+      if (this.notEhoughData) {
+        return;
+      }
 
       // Запускаем какой-то лоудер
-      // app.isSaving(this.el);
+      this.isSaving = true;
+
+      // подготавливаем данные для сохранения на сервере
+      const newPostData = {
+        text: this.postMsg,
+        tweetSend: this.tweetSend,
+        mediaFiles: [] //this.addFileCollection.getFiles()
+      };
+
+      if (this.hasSubscribePrice) {
+        newPostData.isFree = this.isFree;
+      }
+
+      this.$store.dispatch("home/savePost", newPostData);
 
       // // сохраняем файлы
       // this.addFileCollection.saveFiles().then(function() {
-      //   // подготавливаем данные для сохранения на сервере
-      //   var data = {
-      //     text: this.el.querySelector("textarea").value,
-      //     tweetSend: this.el.querySelector(".tweetSend").checked,
-      //     mediaFiles: this.addFileCollection.getFiles()
-      //   };
-
-      //   if (app.userModel.get("subscribePrice") > 0) {
-      //     data.isFree = this.el.querySelector(".is-free-post").checked;
-      //   }
+      //
+      //
       //   // сохраняем пост
       //   this.model.save(data).then(function(data) {
       //     // очищаем модель

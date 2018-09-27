@@ -36,5 +36,15 @@ export default {
         "Content-Type": "application/json"
       }
     });
+  },
+  savePost(data) {
+    return tokenRequest(`posts`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
   }
 };
