@@ -1,5 +1,5 @@
 <template>
-  <div class="addPost">
+  <div :class="['addPost', {loaderWrap: isSaving}]">
     <form :class="['add-new-form', { expanded: expanded }]">
       <div class="addPost-header">
         <button type="button" class="header-return-btn go-back"></button>
@@ -8,6 +8,7 @@
           type="submit"
           class="btn submit sm"
           :disabled="disableShareBtn"
+          @click="addNewPost"
         >Share</button>
       </div>
       <span class="avatar">
@@ -55,20 +56,28 @@
           type="submit"
           class="btn submit hidden-mobile"
           :disabled="disableShareBtn"
+          @click="addNewPost"
         >Share</button>
       </div>
     </form>
+    <Loader v-if="isSaving" :fullscreen="false"></Loader>
   </div>
 </template>
 
 <script>
+import Loader from "@/components/loader/Index";
+
 export default {
   name: "AddPost",
   data: () => ({
     expanded: false,
     tweetSend: false,
-    postMsg: ""
+    postMsg: "",
+    isSaving: false
   }),
+  components: {
+    Loader
+  },
   computed: {
     user() {
       return this.$store.state.auth.user;
@@ -78,6 +87,58 @@ export default {
     },
     disableShareBtn() {
       return !this.postMsg.length;
+    }
+  },
+  methods: {
+    addNewPost: function(e) {
+      e.preventDefault();
+      this.isSaving = true;
+      // если нет текста или медий не ничего не делаем
+
+      // var block = this.formModel.get("block");
+      // if (block) {
+      //   return;
+      // }
+      // this.formModel.set("block", true);
+
+      // Запускаем какой-то лоудер
+      // app.isSaving(this.el);
+
+      // // сохраняем файлы
+      // this.addFileCollection.saveFiles().then(function() {
+      //   // подготавливаем данные для сохранения на сервере
+      //   var data = {
+      //     text: this.el.querySelector("textarea").value,
+      //     tweetSend: this.el.querySelector(".tweetSend").checked,
+      //     mediaFiles: this.addFileCollection.getFiles()
+      //   };
+
+      //   if (app.userModel.get("subscribePrice") > 0) {
+      //     data.isFree = this.el.querySelector(".is-free-post").checked;
+      //   }
+      //   // сохраняем пост
+      //   this.model.save(data).then(function(data) {
+      //     // очищаем модель
+      //     this.formModel.set("block", false);
+      //     this.model.clear();
+      //     this.addFileCollection.reset();
+
+      //     // перерисовываем
+      //     this.render();
+
+      //     if (window.location.pathname === "/") {
+      //       // скрывает попапы
+      //       app.popups.hide();
+      //       // тригерим событие что новый пост добавлен
+      //       Backbone.trigger("postModelAdded", data);
+      //       // скрываем лоудер
+      //       app.hideLoader(this.el);
+      //     } else {
+      //       // делаем переход
+      //       app.router.navigate("/", { trigger: true });
+      //     }
+      //   });
+      // }); /*TODO error handling*/
     }
   }
 };
