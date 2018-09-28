@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-if="user">
     <div class="sidebar__scroller">
       <router-link :to="'/' + user.username" class="avatar header-avatar"><img :src="user.avatar"/></router-link>
       <div class="sidebar__inside">

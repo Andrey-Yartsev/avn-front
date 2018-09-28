@@ -1,18 +1,20 @@
 "use strict";
 
 const state = {
-  toastShowTrigger: false
+  toastShowTrigger: false,
+  toastText: ""
 };
 
 const actions = {
-  flashToast({ commit }) {
-    commit("toastShowTrigger");
+  flashToast({ commit }, text) {
+    commit("toastShowTrigger", text);
   }
 };
 
 const mutations = {
-  toastShowTrigger(state) {
+  toastShowTrigger(state, text) {
     state.toastShowTrigger = state.toastShowTrigger ? false : true;
+    state.toastText = text;
   }
 };
 

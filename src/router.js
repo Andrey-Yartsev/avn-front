@@ -10,7 +10,8 @@ import ExploreLivePage from "./components/pages/explore/Live";
 import MessagesPage from "./components/pages/messages/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
 import LoginPage from "./components/Login";
-import SettingsDefaultPage from "./components/pages/settings/Index";
+import SettingsDefaultPage from "./components/pages/settings/default/Index";
+import SettingsSecurityPage from "./components/pages/settings/security/Index";
 
 import Auth from "@/auth.js";
 
@@ -25,6 +26,10 @@ const routes = [
   {
     path: "/logout",
     beforeEnter: Auth.logout
+  },
+  {
+    beforeEnter: Auth.twitterAuth,
+    path: "/twitter"
   },
   {
     beforeEnter: Auth.requireAuth,
@@ -69,24 +74,17 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings",
-    component: SettingsDefaultPage,
-    name: "settings"
-    // children: [
-    //   {
-    //     path: "",
-    //     redirect: () => ({
-    //       path: "/settings/default"
-    //     }),
-    //     component: SettingsDefaultPage,
-    //     name: "settings",
-    //   }
-    // ]
+    component: SettingsDefaultPage
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/profile",
-    component: SettingsDefaultPage,
-    name: "SettingsProfile"
+    component: SettingsDefaultPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/security",
+    component: SettingsSecurityPage
   }
 ];
 

@@ -2,11 +2,9 @@ import request from "@/utils/request";
 import tokenRequest from "@/utils/tokenRequest";
 
 export default {
-  _login() {
-    // for debug
-    return new Promise(resolve => {
-      const mockUser = require("@/mock/user.json");
-      return resolve(mockUser);
+  fetch() {
+    return tokenRequest("users/me", {
+      method: "GET"
     });
   },
   login(creds) {
