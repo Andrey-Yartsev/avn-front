@@ -1,74 +1,76 @@
 @import "components/imports";
 
-.explore-nav {
-    @include media-breakpoint-down($desktop-breakpoint) {
-        background: $white;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 44px;
-        box-shadow: 0 0 5px rgba(#000, .3);
-        line-height: 3em;
-        font-weight: 500;
-        z-index: 9;
-        transition: all 0.2s ease-in-out 0s;
+.searchView {
 
-        .scroll-top & {
-            transform: translate3d(0, -44px, 0);
-        }
+    .explore-nav {
+        @include media-breakpoint-down($desktop-breakpoint) {
+            background: $white;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 44px;
+            box-shadow: 0 0 5px rgba(#000, .3);
+            line-height: 3em;
+            font-weight: 500;
+            z-index: 9;
+            transition: all 0.2s ease-in-out 0s;
 
-        a {
-            width: 100%;
-            text-align: center;
-            position: relative;
-            font-weight: 400;
-            
-            &.active {
-                &:after {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    height: 2px;
-                    background: $secondary-color;
-                    content: '';
+            .scroll-top & {
+                transform: translate3d(0, -44px, 0);
+            }
+
+            a {
+                width: 100%;
+                text-align: center;
+                position: relative;
+                font-weight: 400;
+
+                &.active {
+                    &:after {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        height: 2px;
+                        background: $secondary-color;
+                        content: '';
+                    }
+                }
+
+                &.active {
+                    font-weight: 500;
                 }
             }
-
-            &.active {
-                font-weight: 500;
-            }
         }
     }
-}
-.posts {
-    @include media-breakpoint-up($desktop-breakpoint) {
-        column-gap: 30px;
-        column-count: 2;
-        padding: 30px 0 0;
-        margin-top: -30px;
-    }
-    .post {
-        background: $white;
+    .posts {
         @include media-breakpoint-up($desktop-breakpoint) {
-            overflow: hidden;
-            width: 100%;
-            display: inline-block;
-            vertical-align: top;
-            box-shadow: 0 8px 30px rgba(#000, .1);
-            break-inside: avoid;
-            margin: 0 0 30px;
-            position: relative;
-            transform: translateZ(0);
-            .postComments,
-            .tip-form,
-            .comment-form,
-            .actions .report {
-                display: none;
+            column-gap: 30px;
+            column-count: 2;
+            padding: 30px 0 0;
+            margin-top: -30px;
+        }
+        .post {
+            background: $white;
+            @include media-breakpoint-up($desktop-breakpoint) {
+                overflow: hidden;
+                width: 100%;
+                display: inline-block;
+                vertical-align: top;
+                box-shadow: 0 8px 30px rgba(#000, .1);
+                break-inside: avoid;
+                margin: 0 0 30px;
+                position: relative;
+                transform: translateZ(0);
+                .postComments,
+                .tip-form,
+                .comment-form,
+                .actions .report {
+                    display: none;
+                }
             }
         }
     }
 }
-
 
 .searchView {
 

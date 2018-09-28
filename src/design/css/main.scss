@@ -13,9 +13,11 @@
 @import "components/loader";
 @import "overlayscrollbars/OverlayScrollbars.scss";
 
+@import "jquery-toast-plugin/jquery-toast";
+
 @import "addChatMessage";
 @import "addPost";
-@import "addStory";
+@import "addStory"; // Hide header style
 @import "blocked";
 @import "chat";
 @import "chatCreateNew";
@@ -28,22 +30,22 @@
 @import "footer-nav";
 @import "forgot";
 @import "lives";
-@import "login";
+@import "login"; // Hide header style
 @import "notifications";
 @import "optionsColors";
-@import "otp";
+@import "otp"; // Hide header style
 @import "photos";
 @import "post";
 @import "posts";
-@import "profile";
+@import "profile"; // Hide header style + styles for profile header
 @import "search";
 @import "searchChat";
 @import "settings";
-@import "static-page";
+@import "static-page"; // Hide header style + styles for profile header
 @import "stories";
 @import "story-page";
 @import "stream";
-@import "support";
+@import "support"; // Hide header style
 @import "toast";
 @import "users";
 @import "videos";

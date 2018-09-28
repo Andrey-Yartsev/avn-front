@@ -2,24 +2,24 @@
 html {
     background: $white;
 }
-#site_header {
-    box-shadow: none;
-    position: relative;
-    .header-nav,
-    .header-search {
-        display: none;
-    }
-    .header-logo {
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 0;
-        }
-    }
-    .guest {
-        .header-logo {
-            margin-left: 0;
-        }
-    }
-}
+//#site_header {
+//    box-shadow: none;
+//    position: relative;
+//    .header-nav,
+//    .header-search {
+//        display: none;
+//    }
+//    .header-logo {
+//        @include media-breakpoint-up($desktop-breakpoint) {
+//            margin-left: 0;
+//        }
+//    }
+//    .guest {
+//        .header-logo {
+//            margin-left: 0;
+//        }
+//    }
+//}
 .text {
     padding: 25px 0 70px;
     font-size: 13px;
