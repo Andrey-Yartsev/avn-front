@@ -1,5 +1,5 @@
-@import 'components/imports';
-@import 'components/table';
+@import "components/imports";
+@import "components/table";
 
 .blocked-search {
   position: relative;
@@ -32,7 +32,7 @@
     &:before {
       @include position-center;
       @include icon-font;
-      content: '\E60C';
+      content: "\E60C";
     }
     &:hover {
       opacity: 1;
@@ -41,47 +41,39 @@
 }
 
 .BlockedView {
+  .BlockedUsersCollectionView {
+    .table-header-title {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 19px;
+      }
+    }
 
-  .BlockedUsersCollectionView {  
-
-      .table-header-title {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          padding-top: 19px;
-        }
+    .table-header {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 14px;
       }
 
-      .table-header {
-
+      &_reset-pt {
         @include media-breakpoint-down($desktop-breakpoint) {
-          padding-top: 14px;
-        }
-
-        &_reset-pt {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            padding-top: 0;
-          }  
+          padding-top: 0;
         }
       }
-  } 
+    }
+  }
 }
 
 .BlockedUsersCollectionView {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     overflow: auto;
-  }  
-  
-  .settings-nav__wrapper {
+  }
 
+  .settings-nav__wrapper {
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-top: 11px;
     }
   }
 
   .semi-transparent {
-
     .subtext {
       margin-top: 6px;
 
@@ -91,7 +83,6 @@
     }
   }
 }
-
 
 .private-story {
   @include media-breakpoint-down($desktop-breakpoint) {

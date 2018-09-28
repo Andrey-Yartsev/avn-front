@@ -1,157 +1,185 @@
 @import "components/imports";
 
-.searchView {
+.explore-nav {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    background: $white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 44px;
+    box-shadow: 0 0 5px rgba(#000, 0.3);
+    line-height: 3em;
+    font-weight: 500;
+    z-index: 9;
+    transition: all 0.2s ease-in-out 0s;
 
-    .explore-nav {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            background: $white;
-            position: -webkit-sticky;
-            position: sticky;
-            top: 44px;
-            box-shadow: 0 0 5px rgba(#000, .3);
-            line-height: 3em;
-            font-weight: 500;
-            z-index: 9;
-            transition: all 0.2s ease-in-out 0s;
-
-            .scroll-top & {
-                transform: translate3d(0, -44px, 0);
-            }
-
-            a {
-                width: 100%;
-                text-align: center;
-                position: relative;
-                font-weight: 400;
-
-                &.active {
-                    &:after {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        height: 2px;
-                        background: $secondary-color;
-                        content: '';
-                    }
-                }
-
-                &.active {
-                    font-weight: 500;
-                }
-            }
-        }
+    .scroll-top & {
+      transform: translate3d(0, -44px, 0);
     }
-    .posts {
-        @include media-breakpoint-up($desktop-breakpoint) {
-            column-gap: 30px;
-            column-count: 2;
-            padding: 30px 0 0;
-            margin-top: -30px;
+
+    a {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      font-weight: 400;
+
+      &.active {
+        &:after {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: $secondary-color;
+          content: "";
         }
-        .post {
-            background: $white;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                overflow: hidden;
-                width: 100%;
-                display: inline-block;
-                vertical-align: top;
-                box-shadow: 0 8px 30px rgba(#000, .1);
-                break-inside: avoid;
-                margin: 0 0 30px;
-                position: relative;
-                transform: translateZ(0);
-                .postComments,
-                .tip-form,
-                .comment-form,
-                .actions .report {
-                    display: none;
-                }
-            }
-        }
+      }
+
+      &.active {
+        font-weight: 500;
+      }
     }
+  }
 }
 
 .searchView {
+  .posts {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      column-gap: 30px;
+      column-count: 2;
+      padding: 30px 0 0;
+      margin-top: -30px;
+      column-fill: auto;
+    }
+    .post {
+      background: $white;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: 100%;
+      .postCollectionView & {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         width: 100%;
+        display: inline-block;
+        vertical-align: top;
+        break-inside: avoid;
+        margin: 0 0 30px;
+
+        .postComments,
+        .tip-form,
+        .comment-form,
+        .actions .report {
+          display: none;
+        }
+      }
+
+      &-details {
+        transform: translateZ(0);
+        background-color: $white;
+        position: relative;
+
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          box-shadow: 0 8px 30px rgba(#000, 0.1);
+          z-index: 0;
+        }
+
+        .post-dropdown-menu-btn {
+          &:before {
+            transform: none;
+            left: 12px;
+          }
+        }
+      }
+
+      &-header,
+      .actions {
+        z-index: 2;
+      }
+
+      .text {
+        transform: rotateX(0);
+      }
+    }
+  }
+}
+
+.searchView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .explore {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      width: 100%;
+    }
+
+    > div {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 1;
+
         display: flex;
-        align-items: stretch;
+        flex-direction: column;
         align-content: stretch;
+        align-items: stretch;
+        justify-content: stretch;
+      }
     }
+  }
 
-    .explore {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            position: relative;
-            width: 100%;
-        }
-
-        > div {
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-                flex: 1;
-
-                display: flex;
-                flex-direction: column;
-                align-content: stretch;
-                align-items: stretch;
-                justify-content: stretch;
-            }
-        }
+  .container,
+  .over-container {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
     }
+  }
 
-    .container,
-    .over-container {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-        }
+  .container {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex: 0 0 100%;
+      align-items: stretch;
+      align-content: stretch;
+      max-width: 100%;
+      padding: 0;
     }
+  }
 
-    .container {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            flex: 0 0 100%;
-            align-items: stretch;
-            align-content: stretch;
-            max-width: 100%;
-            padding: 0;
-        }
+  .over-container {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex: 1;
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
     }
+  }
 
-    .over-container {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            flex: 1;
-            max-width: 100%;
-            width: 100%;
-            margin: 0;
-        }
+  .explore-nav {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: 100%;
     }
+  }
 
-    .explore-nav {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            width: 100%;
-        }
+  .posts,
+  .users,
+  .photos,
+  .videos {
+    &:empty {
+      + .no-results-search {
+        opacity: 1;
+        pointer-events: none;
+      }
     }
-
-    .posts,
-    .users,
-    .photos,
-    .videos {
-
-        &:empty {
-
-            + .no-results-search {
-                opacity: 1;
-                pointer-events: none;
-            }
-        }
-    }
+  }
 }

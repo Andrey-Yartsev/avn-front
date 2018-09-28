@@ -25,7 +25,7 @@
         left: 0;
         top: 0;
         counter-increment: list;
-        content: counter(list) '.';
+        content: counter(list) ".";
         opacity: 0.5;
       }
       p {
@@ -34,7 +34,7 @@
       a {
         color: $secondary-color;
       }
-      input[name='otpCode'] {
+      input[name="otpCode"] {
         margin: 5px 0 0 -5px;
         @include media-breakpoint-up($desktop-breakpoint) {
           width: 360px;
@@ -123,7 +123,7 @@
   color: $default-primary-color;
   &:after {
     @include icon-font;
-    content: '\E605';
+    content: "\E605";
     font-size: 24px;
     display: inline-block;
     vertical-align: middle;
@@ -132,14 +132,12 @@
 }
 
 .SessionsCollectionView {
-
   .otp-block.hidden + & {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       position: relative;
 
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 15px;
@@ -162,17 +160,15 @@
 }
 
 .session-content {
-
   .content {
     padding: 18px 20px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 25px;
+      padding: 0 25px 0 20px;
       margin: -4px 0 0;
     }
 
     &.shadow-block {
-
       &:empty {
         display: none;
 
@@ -180,7 +176,7 @@
           display: block;
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            border-top: 1px solid rgba($gray, .2);
+            border-top: 1px solid rgba($gray, 0.2);
             margin-left: 20px;
             margin-right: 20px;
           }
@@ -246,7 +242,7 @@
     }
     &:before {
       @include icon-font;
-      content: '\E605';
+      content: "\E605";
       font-size: 24px;
     }
   }

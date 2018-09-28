@@ -1,59 +1,59 @@
 @mixin icon-font {
-	font-family: $icon-font;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
+  font-family: $icon-font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
 }
 
 @mixin default-avatar {
-	content: '\E642';
-	@include icon-font;
-	position: absolute;
-	left: 0; right: 0;
-	top: 0; bottom: 0;
-	background: $default-avatar-bg;
-	color: $default-avatar-color;
-	text-align: center;
-	z-index: 5;
-	display: flex;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-	border-radius: 50%;
+  content: "\E642";
+  @include icon-font;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $default-avatar-bg;
+  color: $default-avatar-color;
+  text-align: center;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 @mixin settings-dots($color, $opacity) {
-	content: '';
-    @include position-center;
-    height: 4px;
-    width: 16px;
-    background-image: radial-gradient(circle, $color 50%, transparent 50%);
-    background-size: 6px 4px;
-    background-position: 5px 0;
-    opacity: $opacity;
-    transition: all .3s;
+  content: "";
+  @include position-center;
+  height: 4px;
+  width: 16px;
+  background-image: radial-gradient(circle, $color 50%, transparent 50%);
+  background-size: 6px 4px;
+  background-position: 5px 0;
+  opacity: $opacity;
+  transition: all 0.3s;
 }
 
-
 @mixin position-center {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @mixin ellipsis {
-	white-space: nowrap;
-	overflow-x: hidden;
-	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @mixin container {
-
-	padding: 0 15px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 0 10px;
-    }
+  padding: 0 15px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
 }

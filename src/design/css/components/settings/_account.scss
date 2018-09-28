@@ -27,10 +27,9 @@
     }
 
     .name {
-      
       @include media-breakpoint-down($desktop-breakpoint) {
         font-weight: 400;
-      }      
+      }
     }
 
     .user-login {
@@ -41,7 +40,7 @@
       .username {
         color: $red;
       }
-    }  
+    }
   }
 }
 .btn-logout {
@@ -51,7 +50,7 @@
   height: 44px;
   width: 54px;
   &:before {
-    content: '\E63D';
+    content: "\E63D";
     @include icon-font;
     color: $secondary-color;
     @include position-center;
@@ -66,7 +65,7 @@
       opacity: 1;
     }
     &:before {
-      content: '@';
+      content: "@";
     }
   }
 }
@@ -134,7 +133,7 @@
     right: 0;
     bottom: 0;
     top: 0;
-    content: '';
+    content: "";
     box-shadow: 0 0 0 2px $main-color inset;
     border-radius: 1000px;
     opacity: 0.6;
@@ -153,18 +152,14 @@
 }
 
 .ManageView {
-
   .form-group {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-bottom: 18px;
-    }  
+    }
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
-
     .form-title {
-
       .inner {
         justify-content: center;
       }

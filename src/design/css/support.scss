@@ -1,4 +1,4 @@
-@import 'components/imports';
+@import "components/imports";
 
 //#site_header {
 //  display: none;
@@ -166,7 +166,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
 }
 
 .support-header {
-  background-image: url('https://view.me/theme/project/main/images/background-viewme.jpg');
+  background-image: url("https://view.me/theme/project/main/images/background-viewme.jpg");
   background-position: 50%;
   background-size: cover;
   color: #fff;
@@ -180,7 +180,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     margin: 0 0 17px;
     &:before {
       position: relative;
-      content: '\e656';
+      content: "\e656";
       font-family: team;
       display: inline-block;
       margin-right: 12px;
@@ -245,22 +245,22 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     }
     &.menu-item-1 {
       &:before {
-        content: '\e638';
+        content: "\e638";
       }
     }
     &.menu-item-2 {
       &:before {
-        content: '\e551';
+        content: "\e551";
       }
     }
     &.menu-item-3 {
       &:before {
-        content: '\e654';
+        content: "\e654";
       }
     }
     &.menu-item-4 {
       &:before {
-        content: '\e650';
+        content: "\e650";
       }
     }
   }
@@ -291,7 +291,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
       display: none;
     }
     &:before {
-      content: '\e653';
+      content: "\e653";
       font-family: team;
     }
     &-close {
@@ -301,13 +301,13 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
       font-size: 25px;
       padding: 25px 24px;
       &:before {
-        content: '\e605';
+        content: "\e605";
         font-family: team;
       }
     }
   }
   &-title {
-    background-image: url('https://view.me/theme/project/main/images/background-viewme.jpg');
+    background-image: url("https://view.me/theme/project/main/images/background-viewme.jpg");
     background-position: 50%;
     background-size: cover;
     font-weight: 300;
@@ -342,12 +342,12 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
 
       &.back-to-site {
         &:before {
-          content: '\E656';
+          content: "\E656";
         }
       }
       &.login {
         &:before {
-          content: '\E655';
+          content: "\E655";
         }
       }
     }
@@ -424,7 +424,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     border: none;
     width: 62px;
     &:before {
-      content: '\e652';
+      content: "\e652";
       font-family: team;
       position: absolute;
       top: 50%;
@@ -447,11 +447,11 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
       display: none;
     }
     &:before {
-      content: '\E60c';
+      content: "\E60c";
       font-family: team;
     }
     &:after {
-      content: '\E605';
+      content: "\E605";
       font-family: team;
     }
   }
@@ -513,22 +513,22 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     &#support-card- {
       &1 {
         &:before {
-          content: '\e656';
+          content: "\e656";
         }
       }
       &2 {
         &:before {
-          content: '\e551';
+          content: "\e551";
         }
       }
       &3 {
         &:before {
-          content: '\e654';
+          content: "\e654";
         }
       }
       &4 {
         &:before {
-          content: '\e650';
+          content: "\e650";
         }
       }
     }
@@ -563,7 +563,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     font-weight: 300;
     color: #000;
     &:before {
-      content: '\2022';
+      content: "\2022";
       position: absolute;
       left: -7px;
       top: 5px;
@@ -616,7 +616,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
   .icon-logo {
     color: #fff;
     &:before {
-      content: '\e656';
+      content: "\e656";
       font-family: team;
     }
   }
@@ -652,7 +652,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
   }
 }
 
-[class*='support-sidebar-level-'] {
+[class*="support-sidebar-level-"] {
   list-style: none;
   li.support-sidebar-return {
     > a,
@@ -661,7 +661,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
       &:after {
         left: 16px;
         right: auto;
-        content: '\e612';
+        content: "\e612";
         display: block;
         transform: translate(0, -50%);
       }
@@ -684,7 +684,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
         position: relative;
         padding: 10px 34px 10px 14px;
         &:after {
-          content: '\e613';
+          content: "\e613";
           position: absolute;
           right: 16px;
           font-size: 10px;
@@ -864,7 +864,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
           font-family: team;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          content: '\e656';
+          content: "\e656";
           display: inline-block;
           margin-right: 12px;
           font-size: 32px;
@@ -904,7 +904,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
           position: absolute;
           left: 5px;
           top: 8px;
-          content: '';
+          content: "";
           width: 4px;
           height: 4px;
           border-radius: 1000px;
@@ -1096,7 +1096,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     left: 50%;
     top: 0;
     height: 1px;
-    content: '';
+    content: "";
     background: rgba($main-color, 0.2);
     width: 240px;
     transform: translate(-50%, 0);
@@ -1131,12 +1131,12 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
     }
     &.like {
       &:before {
-        content: '\e658';
+        content: "\e658";
       }
     }
     &.unlike {
       &:before {
-        content: '\e657';
+        content: "\e657";
       }
     }
   }
@@ -1193,7 +1193,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
       position: relative;
       &:before {
         font-family: team;
-        content: '\e643';
+        content: "\e643";
         pointer-events: none;
         position: absolute;
         left: -20px;
@@ -1206,7 +1206,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
   .support-breadcrumbs__home {
     &:before {
       font-size: 21px;
-      content: '\e660';
+      content: "\e660";
       font-family: team;
       margin-right: 10px;
     }
@@ -1221,7 +1221,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
 }
 
 .supportView {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 
   .support {
     &-header {
@@ -1285,7 +1285,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
           position: absolute;
           left: 5px;
           top: 17px;
-          content: '';
+          content: "";
           width: 4px;
           height: 4px;
           border-radius: 1000px;

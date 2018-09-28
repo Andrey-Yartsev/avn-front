@@ -10,439 +10,453 @@
 .profile .white-bg-block > .bg,
 .profile .post-types-tabs,
 .profile:before {
-    @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-    }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
 }
 .myProfile .header-return-btn,
 .profile .header-return-btn {
-    color: $primary-color;
+  color: $primary-color;
 }
 .userCollectionView {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  p {
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    a {
+      font-size: 13px;
+    }
+  }
+
+  .users {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -30px;
+    }
+
+    &:empty {
+      + .msg-no-content {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  .userView {
+    background: $white;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 0 0 11px;
+      & + .userView {
+        border-top: 1px solid rgba($gray, 0.2);
+      }
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-        padding-left: 4px;
-        padding-right: 4px;
+      padding: 0 0 15px;
+      box-shadow: 0 3px 8px rgba(#000, 0.1);
+      width: calc(33.33% - 30px);
+      margin: 0 0 30px 30px;
+    }
+    .bg {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 33%;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        &:empty {
+          background: linear-gradient(
+            30deg,
+            $secondary-color-12 10%,
+            $primary-color-12 90%
+          );
+        }
+      }
+    }
+  }
+
+  .avatar {
+    font-size: 40px;
+    position: absolute;
+    top: 13px;
+    left: 0;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 80px;
+      top: -40px;
+    }
+    &:before {
+      box-shadow: 0 0 0 3px $white;
+    }
+    &:not(:empty) {
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        border-radius: 1000px;
+        background: $white;
+      }
+    }
+    &.with-story {
+      &:after {
+        left: -5px;
+        top: -5px;
+        right: -5px;
+        bottom: -5px;
+      }
+    }
+  }
+
+  .user-container {
+    position: relative;
+    margin: 0 15px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-left: 55px;
     }
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0 16px;
+    }
+  }
+
+  .names-actions-wrapper {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 0 9px;
+    }
+
+    &.fix-columns {
+      .user-names {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          max-width: 45%;
+        }
+      }
+
+      .user-actions {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          max-width: 55%;
+          flex: 1;
+        }
+      }
+    }
+  }
+  .user-names {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-right: auto;
+      min-width: 0;
+      flex: 1;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 8px 0 13px 95px;
+    }
+  }
+
+  .user-login {
+    display: block;
+    font-size: 13px;
+    margin-left: 0;
+    opacity: 1;
+
+    > a {
+      opacity: 0.5;
+    }
+  }
+
+  .wrap-name {
+    font-size: 15px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 2px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font-size: 13px;
+    }
+
+    a {
+      display: inline-block;
+      color: inherit;
+      min-width: 0;
+      max-width: 150px;
+    }
+  }
+  .followme {
+    font-size: 9px;
+    line-height: 12px;
+    padding: 0 5px;
+    margin-top: 2px;
+    display: inline-block;
+    vertical-align: top;
+    color: $secondary-color;
+    position: relative;
+
+    &__txt {
+      opacity: 0.5;
+    }
+
+    &:after {
+      content: "";
+      background-color: $secondary-color;
+      opacity: 0.16;
+      border-radius: 1000px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+  .about {
+    word-wrap: break-word;
+    margin-top: 4px;
+    max-width: 100%;
+    display: block;
+    display: -webkit-box;
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 0 5px;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
 
     p {
+      padding: 0;
+    }
+  }
 
-        &:last-child {
-            padding-bottom: 0;
-        }
+  .subscribeView {
+    min-width: 62px;
+    margin-left: 13px;
 
-        a {
-            font-size: 13px;
-        }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 0;
     }
 
-    .users {
+    &:empty {
+      display: none;
+    }
+  }
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: -30px;
-        }
+  .subscribePaidView {
+    &:empty {
+      display: none;
+    }
+  }
+
+  .twitter-link {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 13px;
+      color: $default-secondary-color;
+      &:hover {
+        color: darken($default-secondary-color, 10%);
+      }
+    }
+  }
+  .user-actions {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: none;
+    padding: 0;
+    margin: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      justify-content: space-between;
+    }
+  }
+  .names-actions-wrapper {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 14px 0 0;
+    }
+  }
+  .dropdown-menu-btn {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background: none;
+      padding: 0;
+      border: none;
+      opacity: 0.3;
+      cursor: pointer;
+      position: relative;
+      width: 23px;
+      height: 30px;
+      margin-left: 13px;
+    }
+    &:before {
+      content: "";
+      @include position-center;
+      height: 4px;
+      width: 16px;
+      background-image: radial-gradient(
+        circle,
+        $main-color 50%,
+        transparent 50%
+      );
+      background-size: 6px 4px;
+      background-position: 5px 0;
+    }
+  }
+
+  .posts-container & {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: 100vh;
+      background: $white;
+    }
+  }
+
+  .follow-counter {
+    font-size: 0;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
     }
 
-    .userView {
-        background: $white;
+    a {
+      font-size: 17px;
+      color: $main-color;
+      margin-right: 40px;
+      transition: color 0.3s ease;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding: 0 0 11px;
-            & + .userView {
-                border-top: 1px solid rgba($gray, .2);
-            }
-        }
+      &:last-child {
+        margin-right: 0;
+      }
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 0 15px;
-            box-shadow: 0 3px 8px rgba(#000, .1);
-            width: calc(33.33% - 30px);
-            margin: 0 0 30px 30px;
-        }
-        .bg {
+      &:hover {
+        color: $secondary-color;
+      }
 
-            @include media-breakpoint-down($desktop-breakpoint) {
-                display: none;
-            }
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                padding-top: 33%;
-                position: relative;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-
-                }
-                &:empty {
-                    background: linear-gradient(30deg, $secondary-color-12 10%, $primary-color-12 90%);
-                }
-            }
-        }
+      &.active {
+        color: $secondary-color;
+      }
     }
+  }
 
-    .avatar {
-        font-size: 40px;
-        position: absolute;
-        top: 13px;
-        left: 0;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 80px;
-            top: -40px;
-        }
-        &:before {
-            box-shadow: 0 0 0 3px $white;
-        }
-        &:not(:empty) {
-            &:before {
-                content: '';
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                top: 0;
-                border-radius: 1000px;
-                background: $white;
-            }
-        }
-        &.with-story {
-            &:after {
-                left: -5px;
-                top: -5px;
-                right: -5px;
-                bottom: -5px;
-            }
-        }
-    }
-
-    .user-container {
-        position: relative;
-        margin: 0 15px;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding-left: 55px;
-        }
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin: 0 16px;
-        }
-    }
-
-    .names-actions-wrapper {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 0 9px;
-        }
-
-        &.fix-columns {
-            
-            .user-names {
-
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    max-width: 45%;
-                }
-            }
-
-            .user-actions {
-
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    max-width: 55%;
-                    flex: 1;
-                }
-            }
-        }
-    }
-    .user-names {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            margin-right: auto;
-            min-width: 0;
-            flex: 1;
-        }
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 8px 0 13px 95px;
-        }
-    }
-
-    .user-login {
-        display: block;
-        font-size: 13px;
-        margin-left: 0;
-    }
-
-    .wrap-name {
-        font-size: 15px;
-        display: flex;
-        align-content: center;
-        align-items: center;
-        margin-bottom: 2px;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            font-size: 13px;
-        }
-
-        a {
-            display: inline-block;
-            color: inherit;
-            min-width: 0;
-            max-width: 150px;
-        }
-    }
-    .followme {
-        background: rgba($gray, .16);
-        border-radius: 1000px;
-        opacity: .5;
-        font-size: 9px;
-        line-height: 12px;
-        padding: 0 5px;
-        margin-top: 2px;
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    .about {
-        word-wrap: break-word;
-        margin-top: 4px;
-        max-width: 100%;
-        display: block;
-        display: -webkit-box;
-        font-size: 13px;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        max-height: 32px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 0 5px;
-        }
-
-        &:last-child {
-            padding-bottom: 0;
-        }
-
-        p {
-            padding: 0;
-        }
-    }
-
-    .subscribeView {
-        min-width: 62px;
-        margin-left: 13px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 0;
-        }
-
-        &:empty {
-            display: none;
-        }
-    }
-
-    .subscribePaidView {
-
-        &:empty {
-            display: none;
-        }   
-    }
-
-    .twitter-link {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            display: none;
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 13px;
-            color: $default-secondary-color;
-            &:hover {
-                color: darken($default-secondary-color, 10%);
-            }
-        }
-    }
-    .user-actions {
-        display: flex;
-        justify-content: flex-end;
-        border-bottom: none;
-        padding: 0;
-        margin: 0;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            justify-content: space-between;
-        }
-    }
-    .names-actions-wrapper {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            display: flex;
-            flex-wrap: nowrap;
-            padding: 14px 0 0;
-
-        }
-    }
-    .dropdown-menu-btn {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            display: none;
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            background: none;
-            padding: 0;
-            border: none;
-            opacity: .3;
-            cursor: pointer;
-            position: relative;
-            width: 23px;
-            height: 30px;
-            margin-left: 13px;
-        }
-        &:before {
-            content: '';
-            @include position-center;
-            height: 4px;
-            width: 16px;
-            background-image: radial-gradient(circle, $main-color 50%, transparent 50%);
-            background-size: 6px 4px;
-            background-position: 5px 0;
-        }
-    }
-
-    .posts-container & {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            min-height: 100vh;
-            background: $white;
-        }
-    }
-
-    .follow-counter{
-        font-size: 0;
-        padding-bottom: 12px;
-        margin-bottom: 25px;
-        border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-        
-        @include media-breakpoint-down($desktop-breakpoint) {
-            display: none;
-        }
-
-        a{
-            font-size: 17px;
-            color: $main-color;
-            margin-right: 40px;
-            transition: color .3s ease;
-
-            &:last-child{
-                margin-right: 0;
-            }
-
-            &:hover{
-                color: $secondary-color;
-            }
-
-            &.active{
-                color: $secondary-color;
-            }
-        }
-    }
-
-    .more-functions__btn {
-        opacity: .4;
-    }
+  .more-functions__btn {
+    opacity: 0.4;
+  }
 }
 
 .user-actions {
+  &:before,
+  &:after {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      content: "";
+    }
+  }
 
-    &:before,
-    &:after {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            content: "";
-        }
+  .btn-subscribe {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0;
     }
 
-    .btn-subscribe {
+    &:not(.active) {
+      color: $secondary-color;
+      opacity: 1;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0;
-        }
-
-        &:not(.active) {
-            color: $secondary-color;
-            opacity: 1;
-
-            &:hover{
-                color: $secondary-color-darken;
-            }
-        }
-
-        &:before {
-            margin-top: 0;
-            margin-bottom: 1px;
-            transform: translate(-2px, -7px);
-        }
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
 
-    .subscribe-cost {
-        color: $primary-color;
-        opacity: 1;
-        margin-top: -4px;
-        flex: 1;
+    &:before {
+      margin-top: 0;
+      margin-bottom: 1px;
+      transform: translate(-2px, -7px);
+    }
+  }
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0;
-            margin-top: -2px;
-            flex: 0 0 46%;
-        }
+  .subscribe-cost {
+    color: $primary-color;
+    opacity: 1;
+    margin-top: -4px;
+    flex: 1;
 
-        &.disable-state {
-            color: $main-color;
-            opacity: .4;
-        }
-
-        &__value {
-            margin-bottom: 3px;
-        }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0;
+      margin-top: -2px;
+      flex: 0 0 46%;
     }
 
-    .subscribeView {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            flex: 0 0 27%;
-        }
+    &.disable-state {
+      color: $main-color;
+      opacity: 0.4;
     }
 
-    .more-functions {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            flex: 0 0 27%;
-        }
-
-        &__btn {
-            padding: 0;
-
-            &:before {
-                margin-top: 6px;
-                margin-bottom: 13px;
-            }
-        }
+    &__value {
+      margin-bottom: 3px;
     }
+  }
+
+  .subscribeView {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 27%;
+    }
+  }
+
+  .more-functions {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 27%;
+    }
+
+    &__btn {
+      padding: 0;
+
+      &:before {
+        margin-top: 6px;
+        margin-bottom: 13px;
+      }
+    }
+  }
 }
 
 .sticky-header-controls {
-
   @include media-breakpoint-down($desktop-breakpoint) {
     background-color: $white;
   }
 
   .profile-name__header {
-    
     @include media-breakpoint-down($desktop-breakpoint) {
-        opacity: 1;
-        color: $main-color;
-    }    
-  } 
+      opacity: 1;
+      color: $main-color;
+    }
+  }
 }
