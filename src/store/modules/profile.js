@@ -49,6 +49,9 @@ const actions = {
   },
   extend({ rootState, dispatch }, data) {
     dispatch("update", Object.assign({}, rootState.auth.user, data));
+  },
+  setFetchLoading({ commit }, flag) {
+    commit("setFetchLoading", flag);
   }
 };
 
@@ -60,8 +63,6 @@ const mutations = {
     state.loading = loading;
   },
   setFetchLoading(state, loading) {
-    // console.log("setFetchLoading", loading);
-    // console.trace();
     state.fetchLoading = loading;
   },
   setFetchError(state, error) {

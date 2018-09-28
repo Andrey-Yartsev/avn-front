@@ -39,6 +39,7 @@ const routes = [
     component: SignUpPage
   },
   {
+    beforeEnter: Auth.dummy,
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {

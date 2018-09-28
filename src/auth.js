@@ -69,6 +69,11 @@ const Auth = {
         next("/");
       });
     }
+  },
+
+  dummy(to, from, next) {
+    Store.dispatch("profile/setFetchLoading", false);
+    next();
   }
 };
 
