@@ -8,7 +8,7 @@
         class="jq-toast-loader"
         :class="{'jq-toast-loaded': loaded}"
         style=""></span>
-      <span class="close-jq-toast-single">×</span>Changes saved successfully
+      <span class="close-jq-toast-single">×</span>{{ text }}
     </div>
   </div>
 </template>
@@ -21,6 +21,11 @@ export default {
       loaded: false,
       hide: false
     };
+  },
+  computed: {
+    text() {
+      return this.$store.state.global.toastText;
+    }
   },
   mounted() {
     this.hide = false;

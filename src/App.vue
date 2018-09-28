@@ -1,15 +1,19 @@
 <template>
 	<div>
-    <Header v-if="user"/>
-		<main id="content">
-			<router-view></router-view>
-		</main>
-    <Sidebar/>
-    <Toast v-if="showToast" @hide="showToast = false" />
+		<Loader v-if="loading"/>
+		<template v-else>
+			<Header v-if="user"/>
+			<main id="content">
+				<router-view></router-view>
+			</main>
+			<Sidebar v-if="user"/>
+			<Toast v-if="showToast" @hide="showToast = false" />
+		</template>
 	</div>
 </template>
 
 <script>
+import Loader from "./components/common/Loader";
 import Header from "./components/header/Index";
 import Sidebar from "./components/Sidebar";
 import Toast from "./components/common/Toast";
@@ -17,6 +21,7 @@ import ColorScheme from "@/mixins/colorScheme";
 
 export default {
   components: {
+    Loader,
     Header,
     Sidebar,
     Toast
@@ -33,6 +38,9 @@ export default {
     },
     toastShowTrigger() {
       return this.$store.state.global.toastShowTrigger;
+    },
+    loading() {
+      return this.$store.state.profile.fetchLoading;
     }
   },
   watch: {

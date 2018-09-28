@@ -42,12 +42,12 @@
         </div>
         <div class="shadow-block no-padding">
           <div class="settings-nav">
-            <a :href="'/settings/' + v.name" :class="navClass(v.name)"
+            <router-link :to="'/settings/' + v.name" :class="navClass(v.name)"
                v-for="v in navigation"
                v-bind:key="v.name"
             >
               <span>{{ v.title }}</span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
