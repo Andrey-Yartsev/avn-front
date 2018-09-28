@@ -2,7 +2,7 @@
 	<div>
 		<Loader v-if="loading"/>
 		<template v-else>
-			<Header v-if="user"/>
+			<Header/>
 			<main id="content">
 				<router-view></router-view>
 			</main>

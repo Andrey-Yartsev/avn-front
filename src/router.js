@@ -11,6 +11,7 @@ import MessagesPage from "./components/pages/messages/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
 import LoginPage from "./components/pages/noAuth/Login";
 import SignUpPage from "./components/pages/noAuth/SignUp";
+import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
 
@@ -36,6 +37,13 @@ const routes = [
     beforeEnter: Auth.requireNonAuth,
     path: "/register",
     component: SignUpPage
+  },
+  {
+    path: "/forgot",
+    component: ForgotPasswordPage,
+    meta: {
+      noAuthHeader: true
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
