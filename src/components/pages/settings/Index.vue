@@ -35,6 +35,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" src="@/design/css/settings.scss">
-</style>

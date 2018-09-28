@@ -28,6 +28,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" src="@/design/css/posts.scss">
-</style>

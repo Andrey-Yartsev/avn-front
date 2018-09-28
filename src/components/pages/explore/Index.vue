@@ -87,6 +87,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" src="@/design/css/explore.scss">
-</style>

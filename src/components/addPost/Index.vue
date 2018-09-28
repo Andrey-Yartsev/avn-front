@@ -82,6 +82,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped src="@/design/css/addPost.scss">
-</style>

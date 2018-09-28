@@ -168,6 +168,3 @@ export default {
   opacity: 0.2;
 }
 </style>
-
-<style lang="scss" scoped src="@/design/css/login.scss">
-</style>
