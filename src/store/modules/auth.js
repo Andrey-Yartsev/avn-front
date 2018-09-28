@@ -1,7 +1,7 @@
 "use strict";
 
 import BrowserStore from "store";
-import AuthApi from "@/api/auth";
+import UserApi from "@/api/user";
 import Router from "@/router";
 
 const state = {
@@ -39,7 +39,7 @@ const actions = {
 
   login({ commit, dispatch }, data) {
     commit("request");
-    AuthApi.login(data)
+    UserApi.login(data)
       .then(user => {
         if (user.isOtpNeeded) {
           dispatch("setToken", user.accessToken);

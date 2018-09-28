@@ -2,22 +2,28 @@ import request from "@/utils/request";
 import tokenRequest from "@/utils/tokenRequest";
 
 export default {
+  signUp(data) {
+    return request("users/register", {
+      method: "POST",
+      data
+    });
+  },
   fetch() {
     return tokenRequest("users/me", {
       method: "GET"
     });
   },
-  login(creds) {
+  login(data) {
     return new Promise(async (resolve, reject) => {
-      const response = await request("users/login", {
+      let response = await request("users/login", {
         method: "POST",
-        body: JSON.stringify(creds)
+        data
       });
-      const data = await response.json();
-      if (data.error) {
-        reject(data.error);
+      response = await response.json();
+      if (response.error) {
+        reject(response.error);
       }
-      resolve(data);
+      resolve(response);
     });
   },
   update(user) {

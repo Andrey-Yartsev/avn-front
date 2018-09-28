@@ -9,7 +9,8 @@ import ExplorePhotosPage from "./components/pages/explore/Photos";
 import ExploreLivePage from "./components/pages/explore/Live";
 import MessagesPage from "./components/pages/messages/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
-import LoginPage from "./components/Login";
+import LoginPage from "./components/pages/noAuth/Login";
+import SignUpPage from "./components/pages/noAuth/SignUp";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
 
@@ -30,6 +31,11 @@ const routes = [
   {
     beforeEnter: Auth.twitterAuth,
     path: "/twitter"
+  },
+  {
+    beforeEnter: Auth.requireNonAuth,
+    path: "/register",
+    component: SignUpPage
   },
   {
     beforeEnter: Auth.requireAuth,

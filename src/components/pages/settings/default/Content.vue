@@ -14,6 +14,7 @@
             <label class="form-group-inner">
               <span class="label">Username</span>
               <input
+                ref="username"
                 type="text" name="username" id="profileUsername"
                 v-model="localUser.username" required
                 autocomplete="off" min="5" max="20"
@@ -168,6 +169,16 @@ export default {
         secondColor: this.localUser.secondColor
       });
       this.$store.dispatch("profile/update", this.localUser);
+    }
+  },
+
+  mounted() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const signup = urlParams.get("signup");
+    if (signup) {
+      setTimeout(() => {
+        this.$refs.username.focus();
+      }, 500);
     }
   }
 };
