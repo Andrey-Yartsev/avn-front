@@ -43,52 +43,7 @@
         </div>
       </div>
       <div class="login-form-col">
-
-        <template v-if="otpAuth">
-          <h2>Hi</h2>
-          <form v-on:submit.stop.prevent="sendOtp">
-            <input
-              class="lg rounded otpCode" type="text" placeholder="Code"
-              v-model="otpCode">
-            <div class="hidden error">Email or password incorrect</div>
-            <button type="submit" class="btn lg alt block" :disabled="!otpCode">Send</button>
-            <div class="signUp"><router-link to="/logout">Reset session</router-link></div>
-          </form>
-        </template>
-
-        <template v-else>
-          <form v-on:submit.stop.prevent="login">
-            <input
-              class="lg rounded"
-              type="email" name="email" placeholder="Email" autocomplete="email"
-              v-model="email"
-            />
-            <input
-              class="lg rounded" type="password" name="password" placeholder="Password"
-              autocomplete="current-password"
-              v-model="password"
-            />
-            <recaptcha
-              v-if="showCaptcha"
-              class="g-recaptcha"
-              ref="recaptcha"
-              @verify="onCaptchaVerified"
-              @expired="onCaptchaExpired"
-              :sitekey="recaptchaSiteKey"
-            />
-            <div class="error" v-if="error">{{ error }}</div>
-            <button type="submit" class="btn lg alt block">Login</button>
-          </form>
-
-          <div class="login-or"><span>or</span></div>
-          <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
-          <div class="signUp">
-            <h3>Don't have an account yet?</h3>
-            <p><a href="/register" class="register">Sign up for OnMyTeam.com</a></p>
-            <p class="forgot"><a href="/forgot" class="forgot">Forgot your password?</a></p>
-          </div>
-        </template>
-
+        <slot name="content" />
         <div class="login-footer hidden-desktop">
           <a href="/terms">Terms</a>
           <a href="/privacy">Privacy</a>
@@ -104,62 +59,13 @@
 </template>
 
 <script>
-import Recaptcha from "vue-recaptcha";
-import Twitter from "@/utils/twitter";
-
 export default {
-  name: "Login",
+  name: "NoAuthLayout",
 
-  components: { Recaptcha },
-
-  data() {
-    return {
-      email: "",
-      password: "",
-      captcha: "",
-      otpCode: ""
-    };
-  },
-
-  computed: {
-    error() {
-      return this.$store.state.auth.error;
-    },
-    recaptchaSiteKey() {
-      return process.env.VUE_APP_RECAPTCHA_SITE_KEY;
-    },
-    showCaptcha() {
-      return this.$store.state.auth.showCaptcha;
-    },
-    otpAuth() {
-      return this.$store.state.auth.otpAuth;
-    },
-    mainClass() {
-      return this.otpAuth ? "OtpView" : "login";
-    }
-  },
-
-  methods: {
-    login() {
-      this.$store.dispatch("auth/login", {
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
-      });
-    },
-    sendOtp() {
-      this.$store.dispatch("otp/login", this.otpCode).then(() => {
-        this.$router.push("/");
-      });
-    },
-    onCaptchaVerified(recaptchaToken) {
-      this.captcha = recaptchaToken;
-    },
-    onCaptchaExpired: function() {
-      this.$refs.recaptcha.reset();
-    },
-    twitter() {
-      window.location.href = Twitter.getLoginUrl();
+  props: {
+    mainClass: {
+      type: String,
+      default: "login"
     }
   }
 };

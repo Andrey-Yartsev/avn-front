@@ -1,6 +1,6 @@
 "use strict";
 
-import AuthApi from "@/api/auth";
+import UserApi from "@/api/user";
 
 const state = {
   loading: false,
@@ -14,7 +14,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       if (!options) options = {};
       commit("setFetchLoading", true);
-      AuthApi.fetch().then(async response => {
+      UserApi.fetch().then(async response => {
         response = await response.json();
         commit("setFetchLoading", false);
         if (response.error) {
@@ -33,7 +33,7 @@ const actions = {
   update({ commit, dispatch }, user) {
     commit("setError", null);
     commit("setLoading", true);
-    AuthApi.update(user)
+    UserApi.update(user)
       .then(async response => {
         const r = await response.json();
         dispatch("auth/extendUser", r, { root: true });
@@ -49,6 +49,9 @@ const actions = {
   },
   extend({ rootState, dispatch }, data) {
     dispatch("update", Object.assign({}, rootState.auth.user, data));
+  },
+  setFetchLoading({ commit }, flag) {
+    commit("setFetchLoading", flag);
   }
 };
 
@@ -60,8 +63,6 @@ const mutations = {
     state.loading = loading;
   },
   setFetchLoading(state, loading) {
-    // console.log("setFetchLoading", loading);
-    // console.trace();
     state.fetchLoading = loading;
   },
   setFetchError(state, error) {
