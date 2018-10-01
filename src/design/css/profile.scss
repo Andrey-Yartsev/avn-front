@@ -1,91 +1,95 @@
-@import 'components/imports';
+@import "components/imports";
 
 body {
-  #site_header {
-    display: none;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
-      background: none;
-      box-shadow: none;
-      position: fixed;
-      height: 0;
-      margin: 0;
-
-      .header-logo {
-        img,
-        svg {
-          display: none;
-          &.white-logo {
-            display: block;
-          }
-        }
-      }
-      .header-nav {
-
-        a {
-          color: #fff;
-
-          span {
-            opacity: 0.7;
-            color: #fff;
-          }
-
-          &:before {
-            opacity: 0.6;
-            filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
-          }
-
-          &:hover {
-            span,
-            &:before {
-              opacity: 1;
-            }
-          }
-          &.unread:after {
-            background-color: #fff;
-          }
-
-          &.active {
-            border-color: rgba(255, 255, 255, 0.6);
-
-            &:hover {
-              border-color: rgba(255, 255, 255, 1);              
-            }
-          }
-        }  
-      }
-      .header-search-submit {
-        color: $main;
-      }
-      .header-search-input {
-        background-color: rgba(#fff, 0.3);
-        box-shadow: 0 2px 10px rgba(#000, 0.06);
-        &:hover,
-        &:focus {
-          background-color: #fff;
-          box-shadow: 0 2px 10px rgba(#000, 0.2);
-          color: $main;
-        }
-      }
-      .btn.make-post-btn {
-        background-color: #fff;
-        color: $main;
-        box-shadow: 0 2px 10px rgba(#000, 0.2);
-        &:hover {
-          background-color: $main;
-          color: #fff;
-        }
-      }
-      .header-avatar {
-        box-shadow: 0 2px 10px rgba(#000, 0.2);
-      }
-    }
-  }
+  //#site_header {
+  //  display: none;
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //    display: block;
+  //    background: none;
+  //    box-shadow: none;
+  //    position: fixed;
+  //    height: 0;
+  //    margin: 0;
+  //
+  //    .header-logo {
+  //      img,
+  //      svg {
+  //        display: none;
+  //        &.white-logo {
+  //          display: block;
+  //        }
+  //      }
+  //    }
+  //
+  //    .header-wrapper {
+  //      box-shadow: none;
+  //      background-color: transparent;
+  //    }
+  //
+  //    .header-nav {
+  //      a {
+  //        color: #fff;
+  //
+  //        span {
+  //          opacity: 0.7;
+  //          color: #fff;
+  //        }
+  //
+  //        &:before {
+  //          opacity: 0.6;
+  //          filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+  //        }
+  //
+  //        &:hover {
+  //          span,
+  //          &:before {
+  //            opacity: 1;
+  //          }
+  //        }
+  //        &.unread:after {
+  //          background-color: #fff;
+  //        }
+  //
+  //        &.active {
+  //          border-color: rgba(255, 255, 255, 0.6);
+  //
+  //          &:hover {
+  //            border-color: rgba(255, 255, 255, 1);
+  //          }
+  //        }
+  //      }
+  //    }
+  //    .header-search-submit {
+  //      color: $main;
+  //    }
+  //    .header-search-input {
+  //      background-color: rgba(#fff, 0.3);
+  //      box-shadow: 0 2px 10px rgba(#000, 0.06);
+  //      &:hover,
+  //      &:focus {
+  //        background-color: #fff;
+  //        box-shadow: 0 2px 10px rgba(#000, 0.2);
+  //        color: $main;
+  //      }
+  //    }
+  //    .btn.make-post-btn {
+  //      background-color: #fff;
+  //      color: $main;
+  //      box-shadow: 0 2px 10px rgba(#000, 0.2);
+  //      &:hover {
+  //        background-color: $main;
+  //        color: #fff;
+  //      }
+  //    }
+  //    .header-avatar {
+  //      box-shadow: 0 2px 10px rgba(#000, 0.2);
+  //    }
+  //  }
+  //}
 }
 
 .more-functions__btn {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     flex: 0 0 72px;
     width: 72px;
@@ -143,15 +147,15 @@ body {
     left: 0;
     right: 0;
     pointer-events: none;
-    content: '';
+    content: "";
     top: 0;
     height: 44px;
     background: linear-gradient(
-                    to bottom,
-                    rgba(#000, 0.2) 0%,
-                    rgba(#000, 0.2) 33.33%,
-                    rgba(#000, 0.1) 66.67%,
-                    transparent 100%
+      to bottom,
+      rgba(#000, 0.2) 0%,
+      rgba(#000, 0.2) 33.33%,
+      rgba(#000, 0.1) 66.67%,
+      transparent 100%
     );
     z-index: 7;
 
@@ -161,7 +165,6 @@ body {
   }
 
   .white-bg-block {
-
     .bg-wrap {
       position: absolute;
       left: 0;
@@ -185,9 +188,9 @@ body {
       position: sticky;
       background-color: $white;
       background-image: linear-gradient(
-                      30deg,
-                      $secondary-color-20 10%,
-                      $primary-color-20 90%
+        30deg,
+        $secondary-color-20 10%,
+        $primary-color-20 90%
       );
       z-index: 5;
       height: 32vw;
@@ -211,9 +214,8 @@ body {
       }
 
       &:empty {
-
         &:before {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           right: 0;
@@ -233,26 +235,26 @@ body {
         left: 0;
         right: 0;
         pointer-events: none;
-        content: '';
+        content: "";
         bottom: 0;
         z-index: 1;
         height: 12px;
         background: linear-gradient(
-                        to top,
-                        rgba(#000, 0.05) 0%,
-                        transparent 100%
+          to top,
+          rgba(#000, 0.05) 0%,
+          transparent 100%
         );
 
         @include media-breakpoint-up($desktop-breakpoint) {
           background: linear-gradient(
-                          to top,
-                          rgba(#000, 0.1) 0%,
-                          transparent 100%
+            to top,
+            rgba(#000, 0.1) 0%,
+            transparent 100%
           );
           bottom: 0;
           height: 80px;
           .header-scrolled & {
-            background: rgba($main, .1);
+            background: rgba($main, 0.1);
           }
         }
       }
@@ -347,12 +349,11 @@ body {
         height: 100%;
         top: 50%;
         border-radius: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         box-sizing: unset;
       }
 
       &.with-story {
-
         &:after {
           left: calc(-0.045em - (200px - 1em) * 0.02);
           right: calc(-0.045em - (200px - 1em) * 0.02);
@@ -373,7 +374,7 @@ body {
   display: none;
   font-size: 13px;
   right: 15px;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 
   .header-scrolled & {
     opacity: 0;
@@ -392,7 +393,7 @@ body {
     &:before {
       font-size: 34px;
       @include icon-font;
-      content: '\E61A';
+      content: "\E61A";
       display: block;
       transition: transform 0.2s ease;
     }
@@ -409,7 +410,7 @@ body {
     font-size: 24px;
     margin: 0 0 0 5px;
     @include icon-font;
-    content: '\E61A';
+    content: "\E61A";
     vertical-align: sub;
     @include media-breakpoint-up($desktop-breakpoint) {
       content: none;
@@ -419,7 +420,7 @@ body {
 
 .profile-name {
   padding: 16px 10px 15px 140px;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     position: absolute;
@@ -467,7 +468,7 @@ body {
     color: #fff;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
     white-space: nowrap;
     display: flex;
     max-width: 100%;
@@ -519,7 +520,7 @@ body {
     cursor: pointer;
     a {
       color: inherit;
-      transition: color .3s ease;
+      transition: color 0.3s ease;
     }
     .value {
       font-weight: 500;
@@ -529,7 +530,7 @@ body {
       opacity: 0.5;
       font-size: 13px;
       font-weight: 400;
-      transition: color .3s ease, opacity .3s ease;
+      transition: color 0.3s ease, opacity 0.3s ease;
     }
 
     &:hover {
@@ -565,14 +566,12 @@ body {
 
   &:before,
   &:after {
-    
     @include media-breakpoint-down($desktop-breakpoint) {
       content: "";
     }
   }
 
   &__btn {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 60px;
 
@@ -583,7 +582,6 @@ body {
   }
 
   .subscribePaidView {
-
     &:empty {
       display: none;
     }
@@ -591,7 +589,6 @@ body {
 }
 
 .subscribeView {
-
   &:empty {
     display: none;
   }
@@ -609,7 +606,6 @@ body {
   }
 
   &.selected {
-
     .btn-subscribe {
       color: $primary-color;
       opacity: 1;
@@ -661,7 +657,7 @@ body {
 
 .profile-twitter-link {
   color: $secondary-color;
-  transition: color .3s ease;
+  transition: color 0.3s ease;
 }
 
 .feed.make-post-btn {
@@ -675,7 +671,7 @@ body {
   text-align: center;
   width: 70px;
   color: $secondary-color;
-  transition: color .3s ease;
+  transition: color 0.3s ease;
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: 12px auto 0;
     width: auto;
@@ -708,7 +704,7 @@ body {
   border-bottom: none;
   z-index: 5;
   background-color: $white;
-  transition: opacity .4s;
+  transition: opacity 0.4s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     bottom: 0;
@@ -762,14 +758,13 @@ body {
   display: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .4s;
+  transition: opacity 0.4s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: flex;
   }
 
   &.show {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       opacity: 1;
       visibility: visible;
@@ -788,7 +783,7 @@ body {
   border-radius: 50%;
   border: none;
   background-color: rgba(124, 139, 150, 0.5);
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   margin-right: 14px;
 
   &:hover {
@@ -796,7 +791,7 @@ body {
   }
 
   &:after {
-    content: '\E64F';
+    content: "\E64F";
     font-size: 24px;
     color: #fff;
     @include icon-font;
@@ -805,9 +800,7 @@ body {
 
 .profile,
 .myProfile {
-
   .controls-select-picture {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
       left: auto;
@@ -826,7 +819,7 @@ body {
     }
 
     .select-user-image {
-      transition: opacity .3s;
+      transition: opacity 0.3s;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         position: relative;
@@ -855,7 +848,6 @@ body {
     }
 
     &:before {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-left: 11px;
         order: 2;
@@ -868,7 +860,6 @@ body {
   }
 
   .profile-name {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       position: relative;
       left: auto;
@@ -888,16 +879,13 @@ body {
   }
 
   .row {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       width: calc(100% + 20px);
     }
   }
 
   .post-types-tabs {
-
     .content-col {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 67%;
         margin-right: 0;
@@ -931,6 +919,8 @@ body {
           position: relative;
           padding-right: 20px;
           max-width: 100%;
+          margin-bottom: 3px;
+
           .verified-user {
             margin-left: 6px;
             position: absolute;
@@ -943,6 +933,8 @@ body {
         }
         .user-login {
           max-width: 100%;
+          font-size: 15px;
+
           a {
             font-size: inherit;
           }
@@ -988,7 +980,6 @@ body {
     }
 
     &.more-functions {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 72px;
         width: 72px;
@@ -997,7 +988,6 @@ body {
 
     &:hover,
     &.active {
-
       .value {
         opacity: 1;
       }
@@ -1025,7 +1015,7 @@ body {
       opacity: 0.5;
       font-size: 17px;
       margin-bottom: 4px;
-      transition: opacity .3s ease;
+      transition: opacity 0.3s ease;
     }
   }
 
@@ -1035,12 +1025,11 @@ body {
     line-height: 1;
     display: block;
     font-weight: 400;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
   }
 }
 
 .subscribe-coast {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 100%;
   }
@@ -1074,11 +1063,8 @@ body {
 }
 
 .profile {
-
   .btns-user-activity {
-
     a {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 12px 0 8px;
       }
@@ -1086,7 +1072,6 @@ body {
   }
 
   .profile-message-btn {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: -10px;
     }
@@ -1096,7 +1081,7 @@ body {
     opacity: 1;
     min-width: 90px;
     color: $primary-color;
-    transition: color .3s ease, opacity .3s ease;
+    transition: color 0.3s ease, opacity 0.3s ease;
 
     &:hover {
       color: $primary-color-darken;
@@ -1104,7 +1089,7 @@ body {
 
     &.disable-state {
       color: $main-color;
-      opacity: .4;
+      opacity: 0.4;
 
       &:hover {
         opacity: 1;
@@ -1119,30 +1104,25 @@ body {
   }
 
   .profile-tip-btn {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       width: auto;
     }
   }
 
   .profile-actions {
-
     .profile-message-btn,
     .profile-tip-btn,
     .more-functions__btn,
     .btn-edit-profile,
     .subscribeView,
     .btn-make-post {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         margin: 0 1.2em;
       }
     }
 
     .more-functions {
-
       &__btn {
-
         &:before {
           margin: 11px auto;
         }
@@ -1152,11 +1132,8 @@ body {
 }
 
 .myProfile {
-
   .btns-user-activity {
-
     a {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 12px 0 3px;
       }
@@ -1164,7 +1141,6 @@ body {
   }
 
   .profile-actions {
-
     .profile-message-btn,
     .profile-tip-btn,
     .more-functions__btn,
@@ -1178,11 +1154,8 @@ body {
     }
 
     .more-functions {
-
       &__btn {
-
         &:before {
-
           @include media-breakpoint-up($desktop-breakpoint) {
             margin: 9px auto 13px;
           }
@@ -1193,17 +1166,19 @@ body {
 }
 
 .aside-col {
-
   .profile-desc {
     margin-bottom: 20px;
   }
 
   &_sticky {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       position: -webkit-sticky;
       position: sticky;
       top: 110px;
     }
   }
+}
+
+.no-results-search {
+  display: none;
 }

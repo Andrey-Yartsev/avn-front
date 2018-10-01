@@ -1,28 +1,28 @@
 h1 {
-    font-size: 30px;
-    font-weight: 400;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 0 9px;
-    }
+  font-size: 30px;
+  font-weight: 400;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 0 0 9px;
+  }
 }
 h2 {
-    font-size: 17px;
-    font-weight: 500;
-    margin: 0 0 11px;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 11px;
 }
 h3 {
-    font-size: 21px;
-    font-weight: 400;
-    margin: 0 0 22px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 0 42px;
-    }
+  font-size: 21px;
+  font-weight: 400;
+  margin: 0 0 22px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 0 0 42px;
+  }
 }
 h4 {
-    font-size: 13px;
-    font-weight: 500;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 p {
-    padding: 0 0 10px;
+  padding: 0 0 10px;
 }

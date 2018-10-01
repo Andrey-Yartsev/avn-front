@@ -1,82 +1,72 @@
-
 .text-mode {
+  .add-new-type {
+    transition: transform 0.4s;
+    opacity: 0;
+    pointer-events: none;
+  }
 
-	.add-new-type {
-		transition: transform .4s;
-		opacity: 0;
-		pointer-events: none;
-	}
+  .addStoryButtonWrapper {
+    .addStoryButton {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
 
-	.addStoryButtonWrapper {
+  .category-name {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 
-		.addStoryButton {
+  .group-controls {
+    .btn-media-event {
+      transition: all 0.4s;
 
-			@include media-breakpoint-down($desktop-breakpoint) {
-				display: none;
-			}
-		}	
-	}
+      @include media-breakpoint-down($desktop-breakpoint) {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-	.category-name {
-		
-		@include media-breakpoint-down($desktop-breakpoint) {
-			opacity: 0;
-			pointer-events: none;
-		}		
-	}
+      &:not(:last-child) {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
 
-	.group-controls {
+      &:last-child {
+        &.letters-bg {
+          @include media-breakpoint-up($desktop-breakpoint) {
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
 
-		.btn-media-event {
-			transition: all .4s;
+      &.letters-bg {
+        .root-btn__text {
+          margin-left: 4px;
+          width: 100%;
+        }
+      }
+    }
+  }
 
-			@include media-breakpoint-down($desktop-breakpoint) {
-				opacity: 0;
-				pointer-events: none;
-			}
+  > .mediasBottom {
+    transition: opacity 0.4s;
+    opacity: 0;
+    pointer-events: none;
+  }
 
-			&:not(:last-child) {
+  .texteditor {
+    opacity: 1;
+    pointer-events: inherit;
+  }
 
-				@include media-breakpoint-up($desktop-breakpoint) {
-					opacity: 0;
-					pointer-events: none;
-				}
-			}
-
-			&:last-child {
-
-				&.letters-bg {
-
-					@include media-breakpoint-up($desktop-breakpoint) {
-						position: absolute;
-						left: 0;
-						top: 0;
-					}
-				}
-			}
-
-			&.letters-bg {
-
-				.root-btn__text {
-					margin-left: 4px;
-					width: 100%;	
-				}
-			}
-		}
-	}
-
-	> .mediasBottom {
-		transition: opacity .4s;
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	.texteditor {
-		opacity: 1;
-		pointer-events: inherit;
-	}
-
-	.addTextButton.btn {
-		display: inline-block;
-	}
+  .addTextButton.btn {
+    display: inline-block;
+  }
 }

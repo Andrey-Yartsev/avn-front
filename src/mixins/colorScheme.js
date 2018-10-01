@@ -23,6 +23,9 @@ export default {
 
   methods: {
     appendColorsCss() {
+      if (!this.user) {
+        return;
+      }
       const head = document.head || document.getElementsByTagName("head")[0];
       if (this.styleElement) {
         head.removeChild(this.styleElement);

@@ -1,11 +1,11 @@
-@import 'components/imports';
-@import 'components/settings/nav';
-@import 'components/settings/profile';
-@import 'components/settings/payouts';
-@import 'components/settings/payments';
-@import 'components/settings/account';
-@import 'components/settings/referrals';
-@import 'components/settings/security';
+@import "components/imports";
+@import "components/settings/nav";
+@import "components/settings/profile";
+@import "components/settings/payouts";
+@import "components/settings/payments";
+@import "components/settings/account";
+@import "components/settings/referrals";
+@import "components/settings/security";
 @import "components/table";
 
 #site_header,
@@ -58,14 +58,14 @@
 .subscription {
   position: relative;
 
-  &-desc{
+  &-desc {
     font-size: 13px;
   }
 
   .label {
     @include media-breakpoint-down($desktop-breakpoint) {
       color: lighten($gray, 20%);
-    }  
+    }
   }
 
   &__per-month {
@@ -85,7 +85,7 @@
     }
 
     &:before {
-      content: '$';
+      content: "$";
       position: absolute;
       left: 10px;
       top: 6px;
@@ -100,11 +100,8 @@
 }
 
 .TwitterView {
-
   .AccountAllView {
-
     .form-title {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
@@ -113,36 +110,8 @@
 }
 
 .AccountAllView {
-
   .form-title {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    padding: 17px 20px;
-
-    h1 {
-      font-size: 21px;
-      font-weight: 500;
-      margin: 0 20px 0 0;
-      flex: 1;
-      @include ellipsis;
-      overflow: hidden;
-    }
-
     .btn-logout {
-      position: relative;
-      left: auto; right: auto;
-      top: auto; bottom: auto;
-      width: auto;
-      height: auto;
-      color: $primary-color;
-      font-weight: 500;
-
-      &:hover {
-        color: $primary-color-darken;
-      }
-
       &:before {
         display: none;
       }
@@ -150,19 +119,16 @@
   }
 
   .password-form {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 9px;
     }
 
     .form-title {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-top: 25px;
       }
 
       .semi-transparent {
-
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 17px;
         }
@@ -226,7 +192,6 @@ h1.form-title {
   }
 
   &_fluid-height {
-    
     @include media-breakpoint-up($desktop-breakpoint) {
       .content-col & {
         height: auto;
@@ -245,7 +210,6 @@ h1.form-title {
       display: none;
     }
     .BlockedView & {
-
       .blocked-search,
       .table,
       .table-wrapper {
@@ -264,16 +228,13 @@ h1.form-title {
 }
 
 .SettingsStoryView {
-
   .form-title {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 19px 15px 10px;
     }
   }
 
   .form-group {
-
     .saveChanges {
       margin-top: 3px;
     }
@@ -281,7 +242,6 @@ h1.form-title {
 }
 
 .delete-account-block {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-top: 27px;
     padding-bottom: 4px;
@@ -289,11 +249,8 @@ h1.form-title {
 }
 
 .EmailView {
-
   > .AccountAllView {
-
     > .form-title {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
@@ -302,9 +259,7 @@ h1.form-title {
 }
 
 .TwitterBlockView {
-
   .form-group-title {
-
     &:last-child {
       margin-bottom: 0;
     }
@@ -312,30 +267,25 @@ h1.form-title {
 }
 
 .PasswordView {
-
   > .AccountAllView {
-
     > .form-title {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
     }
-  }  
+  }
 }
 
 .option-earn-money {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-bottom: 20px;
   }
 
   .semi-transparent {
-    opacity: .5;
+    opacity: 0.5;
     font-weight: 500;
   }
 }
-
 
 .empty-table-info {
   text-align: center;
@@ -344,6 +294,6 @@ h1.form-title {
   display: none;
 
   span {
-    opacity: .5;
+    opacity: 0.5;
   }
 }

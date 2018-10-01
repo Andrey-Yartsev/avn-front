@@ -1,630 +1,662 @@
 input,
 textarea {
-    border-radius: 5px;
-    border: none;
-    background-color: rgba($gray, .1);
-    color: inherit;
-    font: inherit;
-    font-size: 1rem;
-    font-weight: 400;
-    display: block;
-    width: 100%;
-    padding: 6px 10px;
-    transition: background-color .3s ease;
-    &.rounded {
-        border-radius: 15px;
-    }
-    &.sm {
-        padding: 6px 12px;
-    }
-    &:focus {
-        outline: none;
-        background-color: $secondary-color-10;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba($gray, 0.1);
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  transition: background-color 0.3s ease;
+  &.rounded {
+    border-radius: 15px;
+  }
+  &.sm {
+    padding: 6px 12px;
+  }
+  &:focus {
+    outline: none;
+    background-color: $secondary-color-10;
 
-        &::-moz-placeholder,
-        &:-ms-input-placeholder,
-        &::-webkit-input-placeholder {
-            opacity: 0;
-        }
-    }
-    &::-moz-placeholder {
-        color: inherit;
-        opacity: .5;
-    }
-    &:-ms-input-placeholder {
-        color: inherit;
-        opacity: .5;
-    }
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
     &::-webkit-input-placeholder {
-        color: inherit;
-        opacity: .5;
+      opacity: 0;
     }
-    &[disabled] {
-        opacity: .3;
-        background-color: rgba($gray, .333333333);
-    }
+  }
+  &::-moz-placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+  &:-ms-input-placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+  &::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+  &[disabled] {
+    opacity: 0.3;
+    background-color: rgba($gray, 0.333333333);
+  }
 }
 input {
-    height: 30px;
-    &.lg {
-        height: 40px;
-        padding: 10px 20px;
+  height: 30px;
+  &.lg {
+    height: 40px;
+    padding: 10px 20px;
+  }
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
-    &[type=number] {
-        -moz-appearance: textfield;
-        &::-webkit-inner-spin-button,
-        &::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    }
-    &[type=checkbox],
-    &[type=radio] {
-        width: auto;
-        height: auto;
-        display: inline-block;
-    }
-    &[type=file] {
-        display: none;
-    }
-    &.twitter-input {
-        color: $default-secondary-color;
-    }
+  }
+  &[type="checkbox"],
+  &[type="radio"] {
+    width: auto;
+    height: auto;
+    display: inline-block;
+  }
+  &[type="file"] {
+    display: none;
+  }
+  &.twitter-input {
+    color: $default-secondary-color;
+  }
 }
 textarea {
-    resize: none;
+  resize: none;
 }
 label {
-    cursor: pointer;
+  cursor: pointer;
 }
 label span {
   display: inline-block;
 }
 .label {
-    font-weight: 500;
-    cursor: pointer;
-    .form-group-inner > &,
-    .form-group [class*=col-] > & {
-        padding: 0 5px 6px;
-        display: block;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            text-align: right;
-            flex: 0 0 29.5%;
-            margin-right: 3%;
-            padding: 0 7px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            height: 30px;
-        }
-
-        &:empty {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                height: auto;
-            }
-        }
-
-        &.btn {
-            padding: 6px 14px;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                text-align: center;
-                flex: 1;
-            }
-            &.border {
-                padding: 4px 14px;
-            }
-        }
+  font-weight: 500;
+  cursor: pointer;
+  .form-group-inner > &,
+  .form-group [class*="col-"] > & {
+    padding: 0 5px 6px;
+    display: block;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      text-align: right;
+      flex: 0 0 29.5%;
+      margin-right: 3%;
+      padding: 0 7px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 30px;
     }
+
+    &:empty {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: auto;
+      }
+    }
+
+    &.btn {
+      padding: 6px 14px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: center;
+        flex: 1;
+      }
+      &.border {
+        padding: 4px 14px;
+      }
+    }
+  }
 }
 .form-group {
-    position: relative;
+  position: relative;
+  display: block;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-bottom: 13px;
+  }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 11.5% 17px 0;
+  }
+  &-inner {
+    margin: 0 0 8px;
     display: block;
-    @include media-breakpoint-down($desktop-breakpoint) {
-        padding-bottom: 13px;
-    }
     @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 11.5% 17px 0;
+      display: flex;
     }
-    &-inner {
-        margin: 0 0 8px;
-        display: block;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            display: flex;
-        }
-        input + button {
-            margin-left: 10px;
-        }
+    input + button {
+      margin-left: 10px;
     }
-    .warning &:first-child .form-group-inner,
-    .success &:first-child .form-group-inner,
-    &-inner.warning,
-    &-inner.success {
-        position: relative;
-        &:after {
-            position: absolute;
-            @include icon-font;
-            font-size: 24px;
-            width: 1.2em;
-            pointer-events: none;
-            right: 0;
-            @include media-breakpoint-down($desktop-breakpoint) {
-                bottom: 0;
-            }
-            @include media-breakpoint-up($desktop-breakpoint) {
-                top: 0;
-            }
-        }
-        input {
-            padding-right: 30px;
-        }
-    }
-    .warning &:first-child .form-group-inner,
-    &-inner.warning {
-        &:after {
-            content: '\E619';
-            color: $default-primary-color;
-            right: 4px;
-        }
-    }
-    .success &:first-child .form-group-inner,
-    &-inner.success {
-        &:after {
-            content: '\E604';
-            color: $default-secondary-color;
-        }
-    }
-    @include media-breakpoint-down($desktop-breakpoint) {
-        &-title {
-            display: flex;
-            justify-content: space-between;
-            margin: 0;
-            .label {
-                padding: 0;
-            }
-        }
-    }
-    .input-help {
-        font-size: 13px;
-        padding: 0 0 4px;
-        &.semi-transparent {
-            opacity: .5;
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 32%;
-        }
-    }
-    .row {
-        margin: 0 -7.5px;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            flex: 1 1 100%;
-        }
-        [class*=col-] {
-            padding: 0 7.5px;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                display: flex;
-            }
-        }
-    }
-    &.disabled {
-        pointer-events: none;
-        label {
-            opacity: .3;
-        }
-        .input-notice {
-            opacity: .5;
-        }
-    }
-    .btn {
-        margin: 0 0 13px 20px;
-    }
-    .label + .btn {
-        margin: 0;
-    }
-    &-btn {
-        margin-right: 12%;
-        padding: 0 0 21px;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 0 25px;
-        }
-        .btn {
-            margin: 0;
-            &:first-child {
-                margin-left: 33%;
-            }
-        }
-    }
-    &-checkbox {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            .form-group-inner {
-                padding-left: 30px;
-                position: relative;
-                .label {
-                    padding: 0;
-                }
-                .checkbox-label {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                }
-            }
-        }
-    }
-    &.radio-group {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding-bottom: 0;
-            overflow: hidden;
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 22px;
-        }
-        .radio-wrapper {
-            padding-bottom: 11px;
-        }
-        .form-group-inner {
-            @include media-breakpoint-down($desktop-breakpoint) {
-                border-bottom: 1px solid rgba($gray, .2);
-                margin-bottom: 12px;
-            }
-            &:last-child {
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    border-bottom: none;
-                }
-                .radio-wrapper {
-                    padding-bottom: 0;
-                }
-            }
-        }
-    }
-    &.checkbox-group {
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding-bottom: 0;
-            overflow: hidden;
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 20px;
-        }
-        .checkbox-wrapper {
-            padding-bottom: 13px;
-        }
-        .form-group-inner {
-            @include media-breakpoint-down($desktop-breakpoint) {
-                border-bottom: 1px solid rgba($gray, .2);
-                margin-bottom: 12px;
-            }
-            &:last-child {
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    border-bottom: none;
-                }
-                .checkbox-wrapper {
-                    padding-bottom: 0;
-                }
-            }
-        }
-        .label {
-            font-weight: 500;
-        }
-    }
-    &.full {
-        .form-group-inner {
-            display: block;
-            .label {
-                margin: 0 0 9px;
-                justify-content: flex-start;
-                height: auto;
-                padding: 0;
-            }
-            input {
-                @include media-breakpoint-up($desktop-breakpoint) {
-                    width: 360px;
-                }
-            }
-        }
-        .input-help {
-            margin: 0;
-        }
-    }
-}
-.toggle-element {
-    display: block;
-    height: 24px;
-    width: 48px;
-    overflow: hidden;
-    border-radius: 1000px;
-    box-shadow: 0 0 0 2px rgba($gray, .5) inset;
+  }
+  .warning &:first-child .form-group-inner,
+  .success &:first-child .form-group-inner,
+  &-inner.warning,
+  &-inner.success {
     position: relative;
-
-    span {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
+    &:after {
+      position: absolute;
+      @include icon-font;
+      font-size: 24px;
+      width: 1.2em;
+      pointer-events: none;
+      right: 0;
+      @include media-breakpoint-down($desktop-breakpoint) {
         bottom: 0;
-        border-radius: 1000px;
-        background-color: transparent;
-        transition: background .3s ease;
-
-        &:before {
-            position: absolute;
-            border-radius: 1000px;
-            width: 16px;
-            height: 16px;
-            top: 50%;
-            left: 4px;
-            background-color: $gray;
-            transform: translate(0, -50%);
-            content: '';
-            transition: all .3s ease;
-        }
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: 0;
+      }
     }
     input {
-        display: none;
-        &:checked {
-            & + span {
-                background-color: $secondary-color;
-                &:before {
-                    transform: translate(24px, -50%);
-                    background-color: $white;
-                }
-            }
+      padding-right: 30px;
+    }
+  }
+  .warning &:first-child .form-group-inner,
+  &-inner.warning {
+    &:after {
+      content: "\E619";
+      color: $default-primary-color;
+      right: 4px;
+    }
+  }
+  .success &:first-child .form-group-inner,
+  &-inner.success {
+    &:after {
+      content: "\E604";
+      color: $default-secondary-color;
+    }
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      .label {
+        padding: 0;
+      }
+    }
+  }
+  .input-help {
+    font-size: 13px;
+    padding: 0 0 4px;
+    &.semi-transparent {
+      opacity: 0.5;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 32.5%;
+    }
+  }
+  .row {
+    margin: 0 -7.5px;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1 1 100%;
+    }
+    [class*="col-"] {
+      padding: 0 7.5px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+      }
+    }
+  }
+  &.disabled {
+    pointer-events: none;
+    label {
+      opacity: 0.3;
+    }
+    .input-notice {
+      opacity: 0.5;
+    }
+  }
+  .btn {
+    margin: 0 0 13px 20px;
+  }
+  .label + .btn {
+    margin: 0;
+  }
+  &-btn {
+    margin-right: 12%;
+    padding: 0 0 21px;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 0 25px;
+    }
+    .btn {
+      margin: 0;
+      &:first-child {
+        margin-left: 33%;
+      }
+    }
+  }
+  &-checkbox {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      .form-group-inner {
+        padding-left: 30px;
+        position: relative;
+        .label {
+          padding: 0;
         }
+        .checkbox-label {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
     }
-    .form-title & {
-        position: absolute;
-        right: 0;
-        top: 0;
+  }
+  &.radio-group {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-bottom: 0;
+      overflow: hidden;
     }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 22px;
+    }
+    .radio-wrapper {
+      padding-bottom: 11px;
+    }
+    .form-group-inner {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-bottom: 1px solid rgba($gray, 0.2);
+        margin-bottom: 12px;
+      }
+      &:last-child {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          border-bottom: none;
+        }
+        .radio-wrapper {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  &.checkbox-group {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 20px;
+    }
+    .checkbox-wrapper {
+      padding-bottom: 13px;
+    }
+    .form-group-inner {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-bottom: 1px solid rgba($gray, 0.2);
+        margin-bottom: 12px;
+      }
+      &:last-child {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          border-bottom: none;
+        }
+        .checkbox-wrapper {
+          padding-bottom: 0;
+        }
+      }
+    }
+    .label {
+      font-weight: 500;
+    }
+  }
+  &.full {
+    .form-group-inner {
+      display: block;
+      .label {
+        margin: 0 0 9px;
+        justify-content: flex-start;
+        height: auto;
+        padding: 0;
+      }
+      input {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 360px;
+        }
+      }
+    }
+    .input-help {
+      margin: 0;
+    }
+  }
+}
+.toggle-element {
+  display: block;
+  height: 24px;
+  width: 48px;
+  overflow: hidden;
+  border-radius: 1000px;
+  box-shadow: 0 0 0 2px rgba($gray, 0.5) inset;
+  position: relative;
+
+  span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 1000px;
+    background-color: transparent;
+    transition: background 0.3s ease;
+
+    &:before {
+      position: absolute;
+      border-radius: 1000px;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 4px;
+      background-color: $gray;
+      transform: translate(0, -50%);
+      content: "";
+      transition: all 0.3s ease;
+    }
+  }
+  input {
+    display: none;
+    &:checked {
+      & + span {
+        background-color: $secondary-color;
+        &:before {
+          transform: translate(24px, -50%);
+          background-color: $white;
+        }
+      }
+    }
+  }
+  .form-title & {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 .toggle-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba($gray, .2);
-    margin: 0 15px -1px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 24px 20px;
-        border-bottom: none;
-        margin: 0;
-        font-size: 17px;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba($gray, 0.2);
+  margin: 0 15px -1px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 24px 20px;
+    border-bottom: none;
+    margin: 0;
+    font-size: 17px;
+  }
 }
 .form-title {
-    position: relative;
-    overflow: hidden;
-    padding: 19px 15px;
+  position: relative;
+  overflow: hidden;
+  padding: 19px 15px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 26px 20px 23px;
-    }
-    
-    &.disabled {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 26px 20px 23px;
+  }
 
-        .inner {
-            pointer-events: none;
-            opacity: .5;
-        }    
-    }
+  &.disabled {
     .inner {
-        position: relative;
-        font-size: 17px;
-        font-weight: 500;
-        display: flex;
-        justify-content: space-between;
-        flex: 1;
-        .semi-transparent {
-            opacity: .5;
-            display: block;
-        }
-        form {
-            @include media-breakpoint-up($desktop-breakpoint) {
-                margin: 6px 0 0;
-            }
-        }
-        & > button {
-            border: none;
-            background: none;
-            padding: 0;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translate(0, -50%);
-            font: inherit;
-            font-size: 15px;
-            font-weight: 500;
-            color: $secondary-color;
-        }
+      pointer-events: none;
+      opacity: 0.5;
     }
-    .subtext {
-        font-size: 13px;
-        font-weight: 400;
-        padding: 0;
-        margin-top: 2px;
-        padding: 0;
-        
-        @include media-breakpoint-down($desktop-breakpoint) {
-            margin-top: 8px;
-        }
+  }
+  .inner {
+    position: relative;
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    .semi-transparent {
+      opacity: 0.5;
+      display: block;
     }
-    &.table-header-title {
-        margin: 0;
-        padding-bottom: 0;
+    form {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 6px 0 0;
+      }
     }
-    &.warning {
-        .inner {
-            &:after {
-                position: absolute;
-                @include icon-font;
-                font-size: 24px;
-                width: 1.2em;
-                pointer-events: none;
-                right: 0;
-                top: 50%;
-                transform: translate(0, -50%);
-                content: '\E619';
-                color: $default-primary-color;
-            }
-        }
+    & > button {
+      border: none;
+      background: none;
+      padding: 0;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      color: $secondary-color;
     }
+  }
+  .subtext {
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0;
+    margin-top: 2px;
+    padding: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-top: 8px;
+    }
+  }
+  &.table-header-title {
+    margin: 0;
+    padding-bottom: 0;
+  }
+  &.warning {
+    .inner {
+      &:after {
+        position: absolute;
+        @include icon-font;
+        font-size: 24px;
+        width: 1.2em;
+        pointer-events: none;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        content: "\E619";
+        color: $default-primary-color;
+      }
+    }
+  }
+
+  &_cols {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    padding: 17px 20px;
+
+    h1 {
+      font-size: 21px;
+      font-weight: 500;
+      margin: 0 20px 0 0;
+      flex: 1;
+      @include ellipsis;
+    }
+
+    .link-title {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      width: auto;
+      height: auto;
+      color: $primary-color;
+      font-weight: 500;
+
+      &:hover {
+        color: $primary-color-darken;
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+  }
 }
 select {
-    border: none;
-    display: block;
-    border-radius: 5px;
-    width: 100%;
-    font: inherit;
-    background: rgba($gray, .1);
-    color: $main-color;
-    height: 30px;
-    padding: 0 6px;
-    &:focus {
-        outline: none;
-    }
+  border: none;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  font: inherit;
+  background: rgba($gray, 0.1);
+  color: $main-color;
+  height: 30px;
+  padding: 0 6px;
+  &:focus {
+    outline: none;
+  }
 }
 .radio-wrapper,
 .checkbox-wrapper {
-    display: flex;
-    align-items: flex-start;
-    padding: 1px 0 0;
-    .label {
-        font-weight: 400;
-        a {
-            font-weight: 500;
-            color: $secondary-color;
-        }
+  display: flex;
+  align-items: flex-start;
+  padding: 1px 0 0;
+  .label {
+    font-weight: 400;
+    a {
+      font-weight: 500;
+      color: $secondary-color;
     }
-    @include media-breakpoint-down($desktop-breakpoint) {
-        .input-desc {
-            font-size: 13px;
-            opacity: .5;
-        }
+  }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .input-desc {
+      font-size: 13px;
+      opacity: 0.5;
     }
+  }
 }
 .checkbox-label {
-    margin: 0 9px 0 3px;
-    width: 18px;
-    height: 18px;
-    flex: 0 0 18px;
-    position: relative;
-    &,
-    .form-group & {
-        padding: 0;
+  margin: 0 9px 0 3px;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  position: relative;
+  &,
+  .form-group & {
+    padding: 0;
+  }
+  span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 2px;
+    opacity: 0.3;
+    box-shadow: 0 0 0 2px $main-color inset;
+    cursor: pointer;
+    &:before {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      content: "\E604";
+      @include icon-font;
+      @include position-center;
     }
-    span {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        transition: background .3s ease, box-shadow .3s ease, opacity .3s ease;
-        color: #fff;
-        font-size: 18px;
-        border-radius: 2px;
-        opacity: .3;
-        box-shadow: 0 0 0 2px $main-color inset;
-        cursor: pointer;
+  }
+  input {
+    display: none;
+    &:checked {
+      & + span {
+        background: $primary-color;
+        box-shadow: none;
+        opacity: 1;
         &:before {
-            opacity: 0;
-            transition: opacity .3s ease;
-            content: '\E604';
-            @include icon-font;
-            @include position-center;
+          opacity: 1;
         }
+      }
     }
-    input {
-        display: none;
-        &:checked {
-            & + span {
-                background: $primary-color;
-                box-shadow: none;
-                opacity: 1;
-                &:before {
-                    opacity: 1;
-                }
-            }
-        }
-    }
+  }
 }
 .radio-wrapper {
-    .radio {
-        margin: 0 9px 0 0;
-        width: 20px;
-        height: 20px;
-        flex: 0 0 20px;
-        transition: border-color .3s ease, opacity .3s ease;
-        border-radius: 1000px;
-        opacity: .3;
-        border: 2px solid $main-color;
-        cursor: pointer;
-        position: relative;
+  .radio {
+    margin: 0 9px 0 0;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    transition: border-color 0.3s ease, opacity 0.3s ease;
+    border-radius: 1000px;
+    opacity: 0.3;
+    border: 2px solid $main-color;
+    cursor: pointer;
+    position: relative;
+    &:before {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: $primary-color;
+      border-radius: 1000px;
+      @include position-center;
+    }
+  }
+  input {
+    display: none;
+    &:checked {
+      & + .radio {
+        border-color: $primary-color;
+        opacity: 1;
         &:before {
-            opacity: 0;
-            transition: opacity .3s ease;
-            content: '';
-            width: 10px;
-            height: 10px;
-            background: $primary-color;
-            border-radius: 1000px;
-            @include position-center;
+          opacity: 1;
         }
+      }
+      & ~ .label {
+        font-weight: 500;
+      }
     }
-    input {
-        display: none;
-        &:checked {
-            & + .radio {
-                border-color: $primary-color;
-                opacity: 1;
-                &:before {
-                    opacity: 1;
-                }
-            }
-            & ~ .label {
-                font-weight: 500;
-            }
-        }
-    }
+  }
 }
 .input-notice {
-    padding: 7px 5px 0;
-    font-size: 13px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 7px 0 0;
-    }
+  padding: 7px 5px 0;
+  font-size: 13px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 7px 0 0;
+  }
 }
 .input-status {
-    text-align: center;
-    padding: 6px 0;
-    opacity: .5;
-    flex: 1;
+  text-align: center;
+  padding: 6px 0;
+  opacity: 0.5;
+  flex: 1;
 }
 .select-wrapper {
-    width: 100%;
+  width: 100%;
 }
 .col-form-lg {
-    flex: 0 1 71%;
-    width: 71%;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 1 63%;
-        width: 63%;
-    }
+  flex: 0 1 71%;
+  width: 71%;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex: 0 1 63%;
+    width: 63%;
+  }
 }
 .col-form-sm {
-    flex: 0 1 29%;
-    width: 29%;
+  flex: 0 1 29%;
+  width: 29%;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex: 0 1 37%;
+    width: 37%;
+  }
+
+  .input-cvv.label {
     @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 1 37%;
-        width: 37%;
+      margin-right: 16px;
     }
 
-    .input-cvv.label {
-
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            margin-right: 16px;
-        }
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding-left: 10px;
-        }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-left: 10px;
     }
+  }
 }

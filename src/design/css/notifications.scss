@@ -1,43 +1,50 @@
 @import "components/imports";
 
 #content {
-
   @include media-breakpoint-down($desktop-breakpoint) {
     height: auto;
     min-height: 100%;
     display: flex;
     flex-direction: column;
-  } 
+  }
+}
+
+.header_container {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .scroll-top & {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transform: translateY(-100%);
+    }
+  }
 }
 
 .popup {
-
   .notifications-popup {
     display: flex;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      overflow-y: auto;
+      overflow-y: scroll;
       flex-direction: column;
       justify-content: stretch;
       position: relative;
     }
 
     .NotificationsCollectionView {
-      
       @include media-breakpoint-down($desktop-breakpoint) {
         display: block;
       }
     }
 
     .notifications-container {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         min-height: calc(100vh - 148px);
-      } 
+      }
     }
 
     > .content {
-
       @include media-breakpoint-down($desktop-breakpoint) {
         min-height: 100%;
         display: flex;
@@ -97,7 +104,6 @@
 }
 
 .notifications-header {
-
   @include media-breakpoint-down($desktop-breakpoint) {
     background-clip: padding-box;
     position: relative;
@@ -115,10 +121,9 @@
   }
 
   .scroll-top & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-          top: -44px;
-      }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      top: -44px;
+    }
   }
 }
 
@@ -139,269 +144,254 @@
 }
 
 .NotificationsCollectionView {
-
-    &.no-notifications {
-      
-      .msg-no-content {
-        pointer-events: auto;
-        opacity: 1;
-      }
-
-      .notifications {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: none;
-        }  
-
-        .notifications-popup & {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            display: none;
-          }  
-        }
-      }
-
-      .notifications-container {
-
-        .notifications-popup & {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            background-color: $white;
-            padding: 35px 0;
-            border-radius: 0 0 5px 5px;
-          }  
-        } 
-      }
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      height: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 10px;
-        margin: 0 auto 20px;
-        max-width: 642px;
-        position: relative;
-        width: 100%;
-        min-height: calc(100% - 75px);
-
-        .notifications-popup & {
-            padding: 0;
-            margin: 0;
-            position: static;
-            min-height: auto;
-        }
-    }
-
-    .notifications-container {
-      position: relative;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            overflow: hidden;
-            box-shadow: 0 6px 30px rgba(#000, .15);
-            border-radius: 5px;
-            background-color: $white;
-        }    
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-            margin-top: 60px;
-            background-color: $white;
-            min-height: calc(100% - 148px);
-        }
-
-        .notifications-popup & {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                position: static;
-                overflow: visible;
-                box-shadow: none;
-                border-radius: 0;
-                max-width: 620px;
-                margin-left: auto;
-                margin-right: auto;
-                background-color: transparent;
-            }
-        }
-    }    
-
-    .notifications-filter {
-        display: flex;
-        position: relative;
-        padding: 0 8px;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          margin-top: -60px;
-        }
-        
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 15px;
-            box-shadow: 0 0 5px rgba(#000, .3);
-            background: $white;
-            z-index: 2;
-
-            .notifications-popup & {
-                z-index: 10;
-                border-radius: 5px 5px 0 0;
-            }
-        }
-
-        .notifications-popup & {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            z-index: 10;
-            border-radius: 5px 5px 0 0;
-            position: absolute;
-            left: 30px;
-            right: 30px;
-            top: 24px;
-          }  
-        }
-
-        .notificationsFilterList{
-          display: flex;
-            @include media-breakpoint-down($desktop-breakpoint) {
-                width: 100%;
-            }
-        }
-        a {
-            padding: 15px 5px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            font-size: 0;
-            font-weight: 500;
-            color: inherit;
-            @include media-breakpoint-down($desktop-breakpoint) {
-                flex: 1;
-                justify-content: center;
-            }
-            @include media-breakpoint-up($desktop-breakpoint) {
-                margin: 0 10px 0 0;
-            }
-            &:before {
-                font-size: 24px;
-                opacity: .3;
-                font-weight: 400;
-                transition: opacity .3s ease, color .3s ease;
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    color: $secondary-color;
-                }
-            }
-            &.active {
-                @include media-breakpoint-up($desktop-breakpoint) {
-                    font-size: 17px;
-                }
-                &:before {
-                    opacity: 1;
-                    color: $primary-color;
-                    @include media-breakpoint-up($desktop-breakpoint) {
-                        margin: 0 8px 0 0;
-                    }
-                }
-                @include media-breakpoint-up($desktop-breakpoint) {
-                    &:after {
-                        position: absolute;
-                        height: 2px;
-                        background: $secondary-color;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        content: '';
-                    }
-                }
-            }
-            &:hover {
-                &:before {
-                    color: $primary-color;
-                    opacity: 1;
-                }
-            }
-        }
-
-        .btn-settings {
-            position: absolute;
-            right: 5px;
-
-            .notifications-popup & {
-
-              @include media-breakpoint-up($desktop-breakpoint) {
-                right: 45px;
-              }  
-            }
-        }
+  &.no-notifications {
+    .msg-no-content {
+      pointer-events: auto;
+      opacity: 1;
     }
 
     .notifications {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding: 1px 0 20px;
-            background-color: $white;
-        }
-
+      .notifications-popup & {
         @include media-breakpoint-up($desktop-breakpoint) {
-            overflow-y: auto;
-            height: calc(100vh - 160px);
+          display: none;
         }
+      }
+    }
+
+    .notifications-container {
+      .notifications-popup & {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          background-color: $white;
+          padding: 35px 0;
+          border-radius: 0 0 5px 5px;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 10px;
+    margin: 0 auto 20px;
+    max-width: 642px;
+    position: relative;
+    width: 100%;
+    min-height: calc(100% - 75px);
+
+    .notifications-popup & {
+      padding: 0;
+      margin: 0;
+      position: static;
+      min-height: auto;
+    }
+  }
+
+  .notifications-container {
+    position: relative;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(#000, 0.15);
+      border-radius: 5px;
+      background-color: $white;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      margin-top: 60px;
+      background-color: $white;
+      min-height: calc(100% - 148px);
+    }
+
+    .notifications-popup & {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: static;
+        overflow: visible;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .notifications-filter {
+    display: flex;
+    position: relative;
+    padding: 0 8px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-top: -60px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 15px;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
+      background: $white;
+      z-index: 2;
+
+      .notifications-popup & {
+        z-index: 10;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+
+    .notifications-popup & {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        z-index: 10;
+        border-radius: 5px 5px 0 0;
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 24px;
+      }
+    }
+
+    .notificationsFilterList {
+      display: flex;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 100%;
+      }
+    }
+    a {
+      padding: 15px 5px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      font-size: 0;
+      font-weight: 500;
+      color: inherit;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 1;
+        justify-content: center;
+      }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 0 10px 0 0;
+      }
+      &:before {
+        font-size: 24px;
+        opacity: 0.3;
+        font-weight: 400;
+        transition: opacity 0.3s ease, color 0.3s ease;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          color: $secondary-color;
+        }
+      }
+      &.active {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 17px;
+        }
+        &:before {
+          opacity: 1;
+          color: $primary-color;
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin: 0 8px 0 0;
+          }
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+          &:after {
+            position: absolute;
+            height: 2px;
+            background: $secondary-color;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: "";
+          }
+        }
+      }
+      &:hover {
+        &:before {
+          color: $primary-color;
+          opacity: 1;
+        }
+      }
+    }
+
+    .btn-settings {
+      position: absolute;
+      right: 5px;
+
+      .notifications-popup & {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: 45px;
+        }
+      }
+    }
+  }
+
+  .notifications {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 1px 0 20px;
+      background-color: $white;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow-y: auto;
+      height: calc(100vh - 160px);
+    }
+
+    .notifications-popup & {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 120px);
+        height: auto;
+      }
+    }
+
+    .os-content {
+      &:after {
+        content: "";
+        height: 60px;
+        clear: both;
+        display: none;
 
         .notifications-popup & {
-
           @include media-breakpoint-up($desktop-breakpoint) {
-            max-height: calc(100vh - 120px);
-            height: auto;
-          }    
-        }
-
-        .os-content {
-
-            &:after {
-                content: "";
-                height: 60px;
-                clear: both;
-                display: none;
-
-                .notifications-popup & {
-
-                  @include media-breakpoint-up($desktop-breakpoint) {
-                    display: block;
-                  }  
-                }    
-            }
-        }
-
-        &.os-host-resize-disabled.os-host-scrollbar-horizontal-hidden > .os-scrollbar-vertical {
-          bottom: 0;
-
-          .notifications-popup & {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              bottom: 60px;
-            }  
+            display: block;
           }
         }
-
-        .os-scrollbar {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            display: none;
-          }
-        }
-
-        &.os-host {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            overflow: hidden !important;
-            flex: 1;
-          } 
-        }
+      }
     }
+
+    &.os-host-resize-disabled.os-host-scrollbar-horizontal-hidden
+      > .os-scrollbar-vertical {
+      bottom: 0;
+
+      .notifications-popup & {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          bottom: 60px;
+        }
+      }
+    }
+
+    .os-scrollbar {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
+    &.os-host {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        overflow: hidden !important;
+        flex: 1;
+      }
+    }
+  }
 
   .NotificationsView {
     border-bottom: 1px solid rgba($gray, 0.2);

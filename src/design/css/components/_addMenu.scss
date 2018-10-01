@@ -14,7 +14,6 @@
   }
 
   .mediasTop & {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       box-shadow: none;
     }
@@ -25,9 +24,7 @@
   }
 
   .popup & {
-
     &:not(.chat-new-type) {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 0 13px;
         position: absolute;
@@ -39,11 +36,11 @@
   }
 
   &__text {
-    opacity: .5;
+    opacity: 0.5;
     line-height: 11px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      opacity: .4;
+      opacity: 0.4;
     }
   }
   .addNewNav {
@@ -67,7 +64,6 @@
       }
 
       .mediasTop & {
-
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 60px;
         }
@@ -87,8 +83,8 @@
 
       &:before {
         font-weight: 400;
-        opacity: .3;
-        transition: color .3s ease, opacity .3s ease;
+        opacity: 0.3;
+        transition: color 0.3s ease, opacity 0.3s ease;
         @include icon-font;
         font-size: 24px;
         width: 39px;
@@ -99,30 +95,26 @@
       }
 
       &.new-post {
-
         &:before {
-          content: '\E623';
+          content: "\E623";
         }
       }
 
       &.new-story {
-
         &:before {
-          content: '\E620';
+          content: "\E620";
         }
       }
 
       &.new-live {
-
         &:before {
-          content: '\E621';
+          content: "\E621";
         }
       }
 
       &.new-message {
-
         &:before {
-          content: '\E622';
+          content: "\E622";
         }
       }
 
@@ -132,7 +124,6 @@
 
       &.active,
       &:hover {
-
         &:before {
           color: $primary-color;
           opacity: 1;
@@ -142,49 +133,42 @@
   }
 
   &_underline-items {
-
     a,
     span {
-
       &:after {
         content: "";
         position: absolute;
-        left: 1px; right: 1px;
+        left: 1px;
+        right: 1px;
         height: 2px;
         background-color: $secondary-color;
-        transition: opacity .3s ease;
+        transition: opacity 0.3s ease;
         opacity: 0;
       }
 
       &:before {
-
         @include media-breakpoint-down($desktop-breakpoint) {
           margin-top: 4px;
         }
       }
 
       &.active {
-
         &:after {
           opacity: 1;
         }
 
         .add-new-type__text {
-
           @include media-breakpoint-down($desktop-breakpoint) {
             opacity: 1;
             color: $primary-color;
           }
         }
       }
-
     }
 
     &.line-top {
-
       a,
       span {
-
         &:after {
           top: -12px;
           @include media-breakpoint-down($desktop-breakpoint) {
@@ -194,16 +178,13 @@
         }
 
         &:before {
-
           @include media-breakpoint-down($desktop-breakpoint) {
             margin-top: 4px;
           }
         }
 
         &.active {
-
           .add-new-type__text {
-
             @include media-breakpoint-down($desktop-breakpoint) {
               opacity: 1;
               color: $primary-color;
@@ -214,10 +195,8 @@
     }
 
     &.line-bottom {
-
       a,
       span {
-
         &:after {
           bottom: 0;
         }
@@ -247,9 +226,7 @@
       }
 
       .mediasTop & {
-
         &:before {
-
           @include media-breakpoint-up($desktop-breakpoint) {
             margin-top: 13px;
           }

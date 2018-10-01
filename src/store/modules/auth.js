@@ -1,15 +1,16 @@
 "use strict";
 
 import BrowserStore from "store";
-import AuthApi from "@/api/auth";
+import UserApi from "@/api/user";
 import Router from "@/router";
-import Twitter from "@/utils/twitter";
 
 const state = {
   loading: false,
   error: null,
   showCaptcha: false,
-  user: null
+  token: "",
+  user: null,
+  otpAuth: false
 };
 
 const defaultUser = {
@@ -19,9 +20,17 @@ const defaultUser = {
 };
 
 const actions = {
+  setToken({ commit }, token) {
+    BrowserStore.set("token", token);
+    commit("setToken", token);
+  },
+
+  resetUser({ commit }) {
+    commit("resetUser");
+  },
+
   setUser({ commit }, user) {
     commit("setUser", user);
-    BrowserStore.set("user", user);
   },
 
   extendUser({ state, dispatch }, user) {
@@ -30,9 +39,14 @@ const actions = {
 
   login({ commit, dispatch }, data) {
     commit("request");
-
-    AuthApi.login(data)
+    UserApi.login(data)
       .then(user => {
+        if (user.isOtpNeeded) {
+          dispatch("setToken", user.accessToken);
+          dispatch("setOtpAuth", true);
+          Router.push("/login");
+          return;
+        }
         dispatch("setUser", user);
         commit("showCaptcha", false);
       })
@@ -48,26 +62,25 @@ const actions = {
 
   logout({ commit }) {
     commit("logout");
-    Router.push("/login");
+    // Router.push("/login");
   },
 
-  tryTwitterLogin({ dispatch }) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-    const secret = urlParams.get("secret");
-    if (token && secret) {
-      Twitter.getAuthToken(token, secret).then(user => {
-        dispatch("setUser", user).then(() => {
-          Router.push("/");
-        });
-      });
-    }
+  setOtpAuth({ commit }, flag) {
+    commit("setOtpAuth", flag);
   }
 };
 
 const mutations = {
+  setToken(state, token) {
+    state.token = token;
+  },
+
   setUser(state, user) {
     state.user = Object.assign({}, defaultUser, user);
+  },
+
+  resetUser() {
+    state.user = null;
   },
 
   request(state) {
@@ -88,13 +101,19 @@ const mutations = {
 
   logout(state) {
     state.user = null;
+    state.token = "";
     state.error = null;
     state.loading = false;
-    BrowserStore.remove("user");
+    state.otpAuth = false;
+    BrowserStore.remove("token");
   },
 
   showCaptcha(state, show) {
     state.showCaptcha = show;
+  },
+
+  setOtpAuth(state, flag) {
+    state.otpAuth = flag;
   }
 };
 

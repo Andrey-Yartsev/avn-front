@@ -1,23 +1,22 @@
 @import "components/imports";
 :root {
-
   --primary-color: #{$default-primary-color};
   --secondary-color: #{$default-secondary-color};
 
   --primary-color-darken: #{darken($default-primary-color, 10%)};
   --secondary-color-darken: #{darken($default-secondary-color, 10%)};
 
-  --primary-color-06: #{rgba($default-primary-color, .06)};
-  --secondary-color-06: #{rgba($default-secondary-color, .06)};
+  --primary-color-06: #{rgba($default-primary-color, 0.06)};
+  --secondary-color-06: #{rgba($default-secondary-color, 0.06)};
 
-  --primary-color-10: #{rgba($default-primary-color, .10)};
-  --secondary-color-10: #{rgba($default-secondary-color, .10)};
+  --primary-color-10: #{rgba($default-primary-color, 0.1)};
+  --secondary-color-10: #{rgba($default-secondary-color, 0.1)};
 
-  --primary-color-12: #{rgba($default-primary-color, .12)};
-  --secondary-color-12: #{rgba($default-secondary-color, .12)};
+  --primary-color-12: #{rgba($default-primary-color, 0.12)};
+  --secondary-color-12: #{rgba($default-secondary-color, 0.12)};
 
-  --primary-color-20: #{rgba($default-primary-color, .2)};
-  --secondary-color-20: #{rgba($default-secondary-color, .2)};
+  --primary-color-20: #{rgba($default-primary-color, 0.2)};
+  --secondary-color-20: #{rgba($default-secondary-color, 0.2)};
 
   --white: #{$default-white};
   --dark: #{$main};
@@ -25,12 +24,12 @@
 }
 
 :root {
-    @for $i from 1 through length($colors) {
-        --color-#{$i}: #{map_get($colors, $i)};
-        --color-darken-#{$i}: #{darken(map_get($colors, $i), 10%)};
-        --color-06-#{$i}: #{rgba(map_get($colors, $i), .06)};
-        --color-10-#{$i}: #{rgba(map_get($colors, $i), .1)};
-        --color-12-#{$i}: #{rgba(map_get($colors, $i), .12)};
-        --color-20-#{$i}: #{rgba(map_get($colors, $i), .2)};
-    }
+  @for $i from 1 through length($colors) {
+    --color-#{$i}: #{map_get($colors, $i)};
+    --color-darken-#{$i}: #{darken(map_get($colors, $i), 10%)};
+    --color-06-#{$i}: #{rgba(map_get($colors, $i), 0.06)};
+    --color-10-#{$i}: #{rgba(map_get($colors, $i), 0.1)};
+    --color-12-#{$i}: #{rgba(map_get($colors, $i), 0.12)};
+    --color-20-#{$i}: #{rgba(map_get($colors, $i), 0.2)};
+  }
 }

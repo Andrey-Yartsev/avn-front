@@ -13,15 +13,21 @@
     width: 100%;
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-left: 16px;
-      input {
-        height: 24px;
-        padding: 3px 10px;
-      }
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 220px;
       .form-title .inner & {
-        margin: -5px 0 0;
+        margin: -2px 0 0;
+      }
+    }
+
+    input {
+      padding-right: 30px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        height: 24px;
+        padding: 3px 30px 3px 10px;
       }
     }
     button {
@@ -43,7 +49,7 @@
       &:before {
         @include position-center;
         @include icon-font;
-        content: '\E60C';
+        content: "\E60C";
       }
       &:hover {
         opacity: 1;
@@ -52,7 +58,6 @@
   }
 }
 .ReferralsBlockCollectionView {
-
   @include media-breakpoint-up($desktop-breakpoint) {
     overflow: auto;
   }
@@ -61,7 +66,7 @@
 .referrals-link {
   padding: 14px 20px;
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 20px 20px 24px 113px;
+    padding: 20px 20px 24px;
   }
   .referral-desc {
     display: flex;

@@ -2,7 +2,6 @@
 @import "components/addMenu";
 
 .addPost {
-
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 100%;
     background: $white;
@@ -33,7 +32,6 @@
   }
 
   &-header {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
@@ -50,22 +48,17 @@
     }
 
     .go-back {
-
       &:before {
-
         @include media-breakpoint-down($desktop-breakpoint) {
-          content: '\E605';
+          content: "\E605";
         }
       }
     }
   }
 
   .add-new-form.expanded {
-
     .add-new-type {
-
       .addNewNav {
-
         > a,
         > span {
           font-size: 9px;
@@ -74,7 +67,6 @@
           align-content: flex-start;
 
           &:before {
-
             .popup & {
               margin-top: 5px;
 
@@ -89,12 +81,14 @@
           }
 
           &.active {
-
             &:before {
-
               .popup & {
                 width: 54px;
               }
+            }
+
+            .popup & {
+              color: $primary-color;
             }
           }
         }
@@ -117,15 +111,15 @@
 
   .icon {
     color: $main-color;
-    opacity: .3;
-    transition: color .3s ease, opacity .3s ease;
+    opacity: 0.3;
+    transition: color 0.3s ease, opacity 0.3s ease;
 
     &:before {
       font-weight: 400;
       @include icon-font;
       font-size: 24px;
       width: 1.6em;
-      content: '\E61F';
+      content: "\E61F";
     }
   }
 
@@ -137,7 +131,6 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-
     &:hover .icon {
       color: $secondary-color;
       opacity: 1;
@@ -152,9 +145,9 @@
 
 .add-new-form {
   position: relative;
-  background: $white;
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    background: $white;
     overflow: hidden;
     display: flex;
     padding: 15px 0 15px 60px;
@@ -184,12 +177,9 @@
     }
 
     .add-new-type {
-
       .addNewNav {
-
         > a,
         > span {
-
           &:after {
             display: block;
             top: auto;
@@ -198,13 +188,11 @@
           }
 
           &.active {
-
             .add-new-type__text {
-
               @include media-breakpoint-up($desktop-breakpoint) {
                 opacity: 1;
               }
-            }  
+            }
           }
         }
       }
@@ -212,7 +200,11 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    background: linear-gradient(30deg, $secondary-color-12 10%, $primary-color-12 90%);
+    background: linear-gradient(
+      30deg,
+      $secondary-color-12 10%,
+      $primary-color-12 90%
+    );
 
     &.expanded {
       display: block;
@@ -220,7 +212,6 @@
   }
 
   .avatar {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
     }
@@ -248,9 +239,8 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-
       &:not(:empty) {
-        border-top: 1px solid rgba($gray, .2);
+        border-top: 1px solid rgba($gray, 0.2);
       }
     }
 
@@ -264,7 +254,7 @@
   }
 
   .text-media-container {
-    transition: height .3s ease, box-shadow .3s ease;
+    transition: height 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     flex: 1;
 
@@ -275,11 +265,11 @@
       &:before {
         position: absolute;
         bottom: -1px;
-        content: '';
+        content: "";
         height: 1px;
         left: 15px;
         right: 15px;
-        background: rgba($gray, .2);
+        background: rgba($gray, 0.2);
       }
     }
 
@@ -301,11 +291,19 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 30px;
+      min-height: 30px;
       overflow: hidden;
     }
 
     &:focus {
       background-color: transparent;
+    }
+  }
+
+  &:not(.expanded) {
+    .actions {
+      align-items: center;
+      align-content: center;
     }
   }
 
@@ -316,7 +314,7 @@
 
   .add-media-input {
     color: $secondary-color;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
 
     &:hover {
       color: $secondary-color-darken;
@@ -332,13 +330,12 @@
       @include icon-font;
       font-size: 24px;
       width: 2em;
-      content: '\E61A';
+      content: "\E61A";
       display: block;
     }
   }
 
   .submit {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 21px;
       padding-right: 21px;
@@ -348,7 +345,7 @@
 
   .voting-block-toggle-btn {
     display: none;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     cursor: pointer;
     color: $secondary-color;
 
@@ -362,15 +359,13 @@
       font-size: 24px;
       width: 1.5em;
       display: block;
-      content: '\E624';
+      content: "\E624";
     }
   }
 
   &:not(.expanded) {
-
     .add-new-type {
       .addNewNav {
-
         > a,
         > span {
           width: 39px;
@@ -384,7 +379,6 @@
   }
 
   &.expanded {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 15px 15px 10px 60px;
 
@@ -395,7 +389,6 @@
     }
 
     .popup & {
-
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-bottom: 15px;
       }
@@ -409,13 +402,12 @@
       }
       @include media-breakpoint-up($desktop-breakpoint) {
         height: 80px;
+        min-height: 80px;
       }
     }
 
     .popup & {
-
       textarea {
-
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 80px;
         }
@@ -445,19 +437,15 @@
       }
 
       .addNewNav {
-
         > a,
         > span {
-
           &:before {
-
             @include media-breakpoint-up($desktop-breakpoint) {
               width: 1.8em;
             }
           }
 
           &.active {
-
             @include media-breakpoint-up($desktop-breakpoint) {
               margin: 0 8px 0 0;
 
@@ -466,7 +454,6 @@
               }
 
               &:before {
-
                 @include media-breakpoint-up($desktop-breakpoint) {
                   width: 54px;
                 }
@@ -477,22 +464,18 @@
       }
 
       .popup & {
-
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-top: 0;
           transform: translateX(0);
         }
         .addNewNav {
-
           > span {
-
             @include media-breakpoint-up($desktop-breakpoint) {
               margin-left: 4px;
               flex: 0 0 72px;
             }
 
             &:before {
-
               @include media-breakpoint-up($desktop-breakpoint) {
                 width: auto;
               }
@@ -552,20 +535,19 @@
     opacity: 0;
 
     &:checked {
-
       + .b-check-state__icon {
         opacity: 1;
 
         &:before {
           opacity: 0;
-        }  
+        }
 
         &:after {
           opacity: 1;
         }
 
         + .b-check-state__text {
-          opacity: 1; 
+          opacity: 1;
         }
       }
     }
@@ -576,7 +558,7 @@
     height: 18px;
     margin-right: 12px;
     position: relative;
-    opacity: .5;
+    opacity: 0.5;
 
     &:before,
     &:after {
@@ -589,12 +571,12 @@
       left: 0;
       top: 2px;
       font-size: 24px;
-      transition: opacity .3s;
+      transition: opacity 0.3s;
     }
 
     &:before {
       content: "\E610";
-      opacity: .5;
+      opacity: 0.5;
       color: $main-color;
     }
 
@@ -602,13 +584,13 @@
       content: "\E60F";
       color: $secondary-color;
       opacity: 0;
-      transition: opacity .3s;
+      transition: opacity 0.3s;
     }
   }
 
   &__text {
     margin-top: 1px;
-    opacity: .5;
+    opacity: 0.5;
     white-space: nowrap;
   }
 

@@ -1,0 +1,14 @@
+@import "components/imports";
+
+.sticky-header-controls {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  &:not(.header-mobile) {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}

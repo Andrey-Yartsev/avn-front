@@ -12,7 +12,7 @@ export default {
   getLoginUrl: () => {
     return (
       `${process.env.VUE_APP_API_URL}/proxy/twitter` +
-      `?return_url=${window.location.origin}/login` +
+      `?return_url=${window.location.origin}/twitter` +
       `&callback=${process.env.VUE_APP_API_URL}/proxy/twitter` +
       "&response_type=token"
     );
