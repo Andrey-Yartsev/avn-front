@@ -104,35 +104,32 @@ export default {
     }
   },
   methods: {
-    addNewPost: function(e) {
+    addNewPost: async function(e) {
       e.preventDefault();
 
-      // если нет текста или медий не ничего не делаем
-      // if (this.notEhoughData) {
-      //   return;
-      // }
+      if (this.notEhoughData) {
+        return;
+      }
 
-      // // Запускаем какой-то лоудер
-      // this.isSaving = true;
+      this.isSaving = true;
 
-      // подготавливаем данные для сохранения на сервере
+      const promises = this.preloadedMedias.map(({ id, file }) =>
+        fileUpload({ id, file }, this.setUploadProgress)
+      );
+
+      const mediaFiles = await Promise.all(promises);
+
       const newPostData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
-        mediaFiles: [] //this.addFileCollection.getFiles()
+        mediaFiles
       };
 
       if (this.hasSubscribePrice) {
         newPostData.isFree = this.isFree;
       }
 
-      const promises = this.preloadedMedias.map(m =>
-        fileUpload(m.id, m.file, this.uploadProgress)
-      );
-
-      Promise.all(promises).then(() => {
-        //console.log("all files uploaded");
-      });
+      this.$store.dispatch("home/savePost", newPostData);
     },
 
     addMediaFiles: async function(e) {
@@ -157,7 +154,7 @@ export default {
       this.preloadedMedias = this.preloadedMedias.filter(m => m.id !== id);
     },
 
-    uploadProgress(id, loaded, total) {
+    setUploadProgress(id, loaded, total) {
       this.preloadedMedias = this.preloadedMedias.map(
         m => (m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m)
       );
