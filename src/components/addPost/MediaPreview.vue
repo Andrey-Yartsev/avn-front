@@ -1,12 +1,14 @@
 <template>
-    <div class="addFileView">
+    <div :class="['addFileView', {uploading: isSaving }]">
         <span class="filename">
             <template v-if="media.preview">
                 <img :src="media.preview" :title="media.userFileName" />
             </template>
         </span>
         <div class="progress" :style="{'width': `${media.loaded}%` }"></div>
-        <span class="remove centered icon-i006" @click="$emit('removePostMedia', media.id)"></span>
+        <span class="remove centered" @click="$emit('removePostMedia', media.id)">
+          <svg aria-hidden="true" class="icn icn-remove"><use xlink:href="#icon-remove"></use></svg>
+        </span>
     </div>
 </template>
 
@@ -16,6 +18,10 @@ export default {
   props: {
     media: {
       type: Object,
+      required: true
+    },
+    isSaving: {
+      type: Boolean,
       required: true
     }
   }

@@ -28,6 +28,7 @@
             :media="media"
             :key="media.id"
             v-on:removePostMedia="removePostMedia"
+            :isSaving="isSaving"
           />
         </div>
       </div>
@@ -57,7 +58,7 @@
                   accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"/>
           </div>
         </div>
-        <label :class="['tweet-new-post', {hidden: !user.isTwitterConnected}]">
+        <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
           <span class="icon" @click="tweetSend = !tweetSend"></span>
         </label>
@@ -76,7 +77,7 @@
 <script>
 import Loader from "@/components/loader/Index";
 import MediaPreview from "./MediaPreview";
-import { getMediaFilePreview, fileUpload, uniqId } from "@/helpers/mediaFiles";
+import { getMediaFilePreview, fileUpload, uniqId } from "@/utils/mediaFiles";
 
 export default {
   name: "AddPost",
@@ -100,16 +101,14 @@ export default {
       return this.$store.state.auth.user.subscribePrice > 0;
     },
     notEhoughData() {
-      return !this.postMsg.length;
+      return !this.postMsg.length && !this.preloadedMedias.length;
     }
   },
   methods: {
     addNewPost: async function(e) {
       e.preventDefault();
 
-      if (this.notEhoughData) {
-        return;
-      }
+      if (this.notEhoughData) return;
 
       this.isSaving = true;
 
@@ -129,7 +128,7 @@ export default {
         newPostData.isFree = this.isFree;
       }
 
-      this.$store.dispatch("home/savePost", newPostData);
+      this.$store.dispatch("post/savePost", newPostData);
     },
 
     addMediaFiles: async function(e) {

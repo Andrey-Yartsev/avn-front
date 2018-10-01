@@ -177,17 +177,6 @@ const actions = {
       .catch(err => {
         commit("sendPostCommentFail", err);
       });
-  },
-  savePost({ commit }, data) {
-    return HomeApi.savePost(data)
-      .then(response => {
-        if (response.status === 200) {
-          window.location.href = "/";
-        }
-      })
-      .catch(err => {
-        commit("sendPostCommentFail", err);
-      });
   }
 };
 
