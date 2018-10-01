@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import datetimeHelper from "../../../../../helpers/datetime";
-import userMixin from "../../../../../mixins/user";
+import datetimeHelper from "@/helpers/datetime";
+import userMixin from "@/mixins/user";
 
 export default {
   name: "Actions",

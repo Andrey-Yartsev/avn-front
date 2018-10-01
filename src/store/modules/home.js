@@ -10,7 +10,8 @@ const state = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: ""
+  marker: "",
+  postReportReasons: []
 };
 
 const mutations = {
@@ -22,6 +23,7 @@ const mutations = {
     state.limit = 10;
     state.offset = 0;
     state.marker = "";
+    state.postReportReasons = [];
   },
 
   ["postsRequestSuccess"](state, { list: posts, marker }) {
@@ -102,6 +104,14 @@ const mutations = {
     });
   },
 
+  ["deletePost"](state, data) {
+    state.posts = state.posts.filter(post => data.postId !== post.id);
+  },
+
+  ["getPostReportReasonsSuccess"](state, data) {
+    state.postReportReasons = data;
+  },
+
   ["commentsRequestFail"](/* state, err */) {
     // TODO;
   }
@@ -177,6 +187,29 @@ const actions = {
       .catch(err => {
         commit("sendPostCommentFail", err);
       });
+  },
+
+  deletePost({ commit }, { postId }) {
+    return HomeApi.deletePost({ postId })
+      .then(response => {
+        if (response.status === 200) {
+          commit("deletePost", {
+            postId
+          });
+        }
+      })
+      .catch(() => {});
+  },
+  getPostReportReasons({ commit }, { type }) {
+    return HomeApi.getPostReportReasons({ type })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("getPostReportReasonsSuccess", res);
+          });
+        }
+      })
+      .catch(() => {});
   }
 };
 

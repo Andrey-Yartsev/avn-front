@@ -38,5 +38,16 @@ export default {
       },
       body: JSON.stringify(data)
     });
+  },
+  deletePost({ postId }) {
+    return tokenRequest(`posts/${postId}`, {
+      method: "DELETE",
+      mode: "cors"
+    });
+  },
+  getPostReportReasons({ type }) {
+    return tokenRequest(`reports/reasons&type=${type}`, {
+      method: "GET"
+    });
   }
 };
