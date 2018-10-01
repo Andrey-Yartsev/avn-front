@@ -28,5 +28,15 @@ export default {
       method: addLike ? "POST" : "DELETE",
       mode: "cors"
     });
+  },
+  savePost(data) {
+    return tokenRequest(`posts`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
   }
 };
