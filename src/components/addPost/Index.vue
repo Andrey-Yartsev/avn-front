@@ -23,7 +23,12 @@
           v-model="postMsg"
         ></textarea>
         <div class="addFileCollectionView">
-          <MediaPreview v-for="media in preloadedMediaFiles" :media="media" :key="media.userFileName" />
+          <MediaPreview
+            v-for="media in preloadedMedias"
+            :media="media"
+            :key="media.id"
+            v-on:removePostMedia="removePostMedia"
+          />
         </div>
       </div>
       <div class="actions">
@@ -71,7 +76,7 @@
 <script>
 import Loader from "@/components/loader/Index";
 import MediaPreview from "./MediaPreview";
-import mediaFilePreviewHepler from "@/helpers/mediaFilePreview";
+import { getMediaFilePreview, fileUpload, uniqId } from "@/helpers/mediaFiles";
 
 export default {
   name: "AddPost",
@@ -81,7 +86,7 @@ export default {
     postMsg: "",
     isSaving: false,
     isFree: false,
-    preloadedMediaFiles: []
+    preloadedMedias: []
   }),
   components: {
     Loader,
@@ -103,12 +108,12 @@ export default {
       e.preventDefault();
 
       // если нет текста или медий не ничего не делаем
-      if (this.notEhoughData) {
-        return;
-      }
+      // if (this.notEhoughData) {
+      //   return;
+      // }
 
-      // Запускаем какой-то лоудер
-      this.isSaving = true;
+      // // Запускаем какой-то лоудер
+      // this.isSaving = true;
 
       // подготавливаем данные для сохранения на сервере
       const newPostData = {
@@ -121,73 +126,41 @@ export default {
         newPostData.isFree = this.isFree;
       }
 
-      this.$store.dispatch("home/savePost", newPostData);
+      const promises = this.preloadedMedias.map(m =>
+        fileUpload(m.id, m.file, this.uploadProgress)
+      );
 
-      // // сохраняем файлы
-      // this.addFileCollection.saveFiles().then(function() {
-      //
-      //
-      //   // сохраняем пост
-      //   this.model.save(data).then(function(data) {
-      //     // очищаем модель
-      //     this.formModel.set("block", false);
-      //     this.model.clear();
-      //     this.addFileCollection.reset();
-
-      //     // перерисовываем
-      //     this.render();
-
-      //     if (window.location.pathname === "/") {
-      //       // скрывает попапы
-      //       app.popups.hide();
-      //       // тригерим событие что новый пост добавлен
-      //       Backbone.trigger("postModelAdded", data);
-      //       // скрываем лоудер
-      //       app.hideLoader(this.el);
-      //     } else {
-      //       // делаем переход
-      //       app.router.navigate("/", { trigger: true });
-      //     }
-      //   });
-      // }); /*TODO error handling*/
+      Promise.all(promises).then(() => {
+        //console.log("all files uploaded");
+      });
     },
 
     addMediaFiles: async function(e) {
       const files = e.target.files;
-
       if (!files.length) return;
 
       for (let i = 0; i < files.length; i += 1) {
-        this.preloadedMediaFiles.push({
+        const preview = await getMediaFilePreview(files[i]);
+
+        this.preloadedMedias.push({
           file: files[i],
           userFileName: files[i].name,
-          preview: await mediaFilePreviewHepler(files[i])
+          preview: preview.preview,
+          id: uniqId(),
+          loaded: 0
         });
       }
 
-      // return Promise.all(uploaded_files);
+      e.target.value = "";
+    },
+    removePostMedia(id) {
+      this.preloadedMedias = this.preloadedMedias.filter(m => m.id !== id);
+    },
 
-      // var callback = function(addedFiles) {
-      //   this.mediaCount += addedFiles.length;
-      //   this.validate();
-      //   files.value = "";
-      // }.bind(this);
-
-      // this.addFileCollection
-      //   .addFiles(files)
-      //   .then(callback)
-      //   .catch(
-      //     function() {
-      //       //manual cancel during upload gets here too
-      //       callback([]);
-      //     }.bind(this)
-      //   );
-
-      /**
-       * Array of jqXHR objects, which implement Promise interface
-       */
-
-      // return Promise.all(uploaded_files);
+    uploadProgress(id, loaded, total) {
+      this.preloadedMedias = this.preloadedMedias.map(
+        m => (m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m)
+      );
     }
   }
 };

@@ -2,16 +2,11 @@
     <div class="addFileView">
         <span class="filename">
             <template v-if="media.preview">
-                <img :src="media.preview.preview" title="media.userFileName" />
-            </template>
-            <template v-else>
-                <span>{{ media.userFileName }}</span>
+                <img :src="media.preview" :title="media.userFileName" />
             </template>
         </span>
-        <div class="loader centered"></div>
-        <div class="progress"></div>
-        <span class="cancel hidden centered icon-i006"></span>
-        <span class="remove centered icon-i006"></span>
+        <div class="progress" :style="{'width': `${media.loaded}%` }"></div>
+        <span class="remove centered icon-i006" @click="$emit('removePostMedia', media.id)"></span>
     </div>
 </template>
 
