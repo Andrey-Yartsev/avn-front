@@ -1,74 +1,87 @@
 .container {
-    @include container;
+  @include container;
 }
 .row {
-    display: flex;
-    margin: 0 -15px;
-    @include media-breakpoint-down($desktop-breakpoint) {
-		flex-wrap: wrap;
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 -10px;
-    }
-    .col-1-2 {
-        padding: 0 10px;
-        flex: 0 1 50%;
-        width: 50%;
-    }
-    .col-3-4 {
-        padding: 0 10px;
-        flex: 0 1 75%;
-        width: 75%;
-    }
-    .col-1-4 {
-        padding: 0 10px;
-        flex: 0 1 25%;
-        width: 25%;
-    }
-    .col-7-10 {
-        padding: 0 10px;
-        flex: 0 1 70%;
-        width: 70%;
-    }
-    .col-3-10 {
-        padding: 0 10px;
-        flex: 0 1 30%;
-        width: 30%;
-    }
+  display: flex;
+  margin: 0 -15px;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex-wrap: wrap;
+  }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 0 -10px;
+  }
+  .col-1-2 {
+    padding: 0 10px;
+    flex: 0 1 50%;
+    width: 50%;
+  }
+  .col-3-4 {
+    padding: 0 10px;
+    flex: 0 1 75%;
+    width: 75%;
+  }
+  .col-1-4 {
+    padding: 0 10px;
+    flex: 0 1 25%;
+    width: 25%;
+  }
+  .col-7-10 {
+    padding: 0 10px;
+    flex: 0 1 70%;
+    width: 70%;
+  }
+  .col-3-10 {
+    padding: 0 10px;
+    flex: 0 1 30%;
+    width: 30%;
+  }
 }
 .content-col {
-    width: 100%;
-    flex: 0 1 100%;
+  width: 100%;
+  flex: 0 1 100%;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 10px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  + .aside-col {
     @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 10px;
-        flex: 1 1 auto;
-        min-width: 0;
+      padding-left: 25px;
     }
-
-    + .aside-col {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding-left: 25px;
-        }    
-    }
+  }
 }
 .aside-col {
-    width: 100%;
-    flex: 0 1 100%;
+  width: 100%;
+  flex: 0 1 100%;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 10px;
+    flex: 0 0 33.35%;
+    max-width: 33.35%;
+    align-self: flex-start;
+  }
+
+  &_sticky {
     @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 10px;
-        flex: 0 0 33.35%;
-        max-width: 33.35%;
-        align-self: flex-start;
+      @media screen and (min-height: 600px) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 75px;
+        height: calc(100vh - 100px);
+        min-height: 294px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+      }
     }
 
-    &_sticky {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 75px;
+    &-al-bottom {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        @media screen and (min-height: 600px) {
+          justify-content: flex-end;
         }
+      }
     }
+  }
 }
-

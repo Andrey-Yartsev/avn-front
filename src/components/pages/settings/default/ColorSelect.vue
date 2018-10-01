@@ -88,6 +88,3 @@ export default {
   }
 }
 </style>
-
-<style lang="scss" src="@/design/css/optionsColors.scss">
-</style>

@@ -110,6 +110,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss" src="@/design/css/post.scss">
-</style>

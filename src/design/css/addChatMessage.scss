@@ -4,7 +4,7 @@
   border-top: 1px solid rgba(124, 139, 150, 0.2);
   padding: 0.6em 0;
   margin: auto 14px 0;
-  transition: transform .4s;
+  transition: transform 0.4s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 1em 0;
@@ -23,8 +23,12 @@
   align-content: center;
   color: $main-color;
 
-  > * {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    align-items: flex-end;
+    align-content: flex-end;
+  }
 
+  > * {
     margin: 0 0 0 0.6em;
     flex-grow: 0;
 
@@ -32,12 +36,12 @@
       margin-left: 1em;
     }
   }
-  > *:first-child{
+  > *:first-child {
     margin: 0;
   }
   .add-media-input {
     color: $secondary-color;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     background-color: transparent;
     border: none;
     margin: 0 0.6em 0 0;
@@ -52,19 +56,19 @@
     &:before {
       @include icon-font;
       font-size: 24px;
-      content: '\E61A';
+      content: "\E61A";
       display: block;
     }
   }
   .tips {
     color: $main-color;
-    opacity: .3;
+    opacity: 0.3;
     display: inline-block;
     align-items: center;
     cursor: pointer;
     background-color: transparent;
     border: none;
-    transition: color .3s ease, opacity .3s ease;
+    transition: color 0.3s ease, opacity 0.3s ease;
     margin: 0 0.6em 0 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -88,15 +92,15 @@
       margin: 0;
       width: 1.1em;
       font-weight: 400;
-      content: '\E618';
+      content: "\E618";
     }
   }
-  .submit{
+  .submit {
     display: inline-block;
     align-items: center;
     cursor: pointer;
     color: $secondary-color;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
     background-color: transparent;
     border: none;
 
@@ -110,16 +114,16 @@
       margin: 0;
       width: 1.1em;
       font-weight: 400;
-      content: '\E62D';
+      content: "\E62D";
     }
   }
-  .getPaid{
+  .getPaid {
     color: $main-color;
-    opacity: .3;
+    opacity: 0.3;
     display: inline-block;
     align-items: center;
     cursor: pointer;
-    transition: color .3s ease, opacity .3s ease;
+    transition: color 0.3s ease, opacity 0.3s ease;
     background-color: transparent;
     border: none;
 
@@ -142,20 +146,20 @@
       margin: 0;
       width: 1.1em;
       font-weight: 400;
-      content: '\E62E';
+      content: "\E62E";
     }
   }
   .text-media-container {
     display: flex;
     background-color: rgba(124, 139, 150, 0.08);
     padding: 8px 0.55em 7px;
-    border-radius: 1em; 
+    border-radius: 1em;
     border: none;
     color: $main-color;
     outline: none;
     word-break: break-all;
     width: 100%;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
     box-sizing: border-box;
     flex: 1;
     height: auto;
@@ -171,8 +175,11 @@
       background-color: $secondary-color-10;
     }
 
-    &.hidden {
+    &.has-price {
+      padding-top: 26px;
+    }
 
+    &.hidden {
       @include media-breakpoint-down($desktop-breakpoint) {
         display: block !important;
       }
@@ -183,7 +190,8 @@
     margin-left: 0;
   }
 
-  .chatTip, .getPaidForm{
+  .chatTip,
+  .getPaidForm {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -205,7 +213,8 @@
     }
   }
 
-  .tipAmount, .getPaidAmountPlaceholder {            
+  .tipAmount,
+  .getPaidAmountPlaceholder {
     text-align: center;
     border-radius: 1em;
     background-color: rgba(124, 139, 150, 0.08);
@@ -214,12 +223,11 @@
   }
 
   .btn-el {
-
     &.disabled,
     &[disabled] {
-        opacity: 1;
-        pointer-events: none;
-        color: rgba(124, 139, 150, 0.18);
+      opacity: 1;
+      pointer-events: none;
+      color: rgba(124, 139, 150, 0.18);
     }
   }
 }
@@ -229,12 +237,7 @@
   position: relative;
   margin-left: 0;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    /*margin-left: 1.1em;*/
-  }
-
   &.disabled {
-
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
@@ -247,12 +250,40 @@
 }
 
 .price-message {
-  position: absolute;
-  right: 8px;
-  top: 6px;
-  opacity: .3;
+  opacity: 0.3;
+
+  &-wrapper {
+    position: absolute;
+    right: 8px;
+    top: 6px;
+  }
 
   &:empty {
     display: none;
+
+    + .btn-clear-price {
+      display: none;
+    }
+  }
+}
+
+.btn-clear-price {
+  border: none;
+  padding: 0;
+  background: none;
+  opacity: 0.2;
+  font-size: 17px;
+  margin-left: 5px;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+    opacity: 1;
+  }
+
+  &:before {
+    @include icon-font;
+    text-align: center;
+    content: "\E600";
   }
 }

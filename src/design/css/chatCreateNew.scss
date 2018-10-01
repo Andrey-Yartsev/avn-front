@@ -1,9 +1,8 @@
 @import "components/imports";
 @import "components/addMenu";
 
-.chatCreateNewView{
-
-  .nextStep{
+.chatCreateNewView {
+  .nextStep {
     width: auto !important;
     height: auto;
     padding: 4px 18px;
@@ -12,14 +11,13 @@
   }
 }
 
-.searchContact{
-    
-  .selectedContacts{
+.searchContact {
+  .selectedContacts {
     padding-right: 40px;
   }
 }
 
-.chatSelectedView{
+.chatSelectedView {
   margin: 0 0.4em 0.6em 0;
   padding: 0.5em 0.9em;
   display: inline-block;
@@ -31,8 +29,10 @@
   &:after {
     content: "";
     position: absolute;
-    left: 0; right: 0;
-    top: 0; bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     border: 2px solid $primary-color;
     border-radius: 999px;
     opacity: 0.3;
@@ -41,18 +41,17 @@
   }
 
   &:hover {
-
     &:after {
       opacity: 1;
     }
   }
 
-  .chatSelectedName{
+  .chatSelectedName {
     max-width: 10em;
     @include ellipsis;
   }
 
-  .remove{
+  .remove {
     cursor: pointer;
     opacity: 0.3;
     transition: opacity 0.3s ease;
@@ -63,10 +62,10 @@
       font-size: 1.3em;
       margin: -2px 0 0;
       font-weight: 400;
-      content: '\E600';
+      content: "\E600";
       color: $primary-color;
     }
-    &:hover{
+    &:hover {
       opacity: 1;
     }
   }
@@ -79,39 +78,38 @@
 }
 
 .btn-selected-all {
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    right: 0;
-    top: 0;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
 
-    &:before{
-      display: inline-block;
-      @include icon-font;
-      font-size: 24px;
-      margin: 0 4px 0 0;
-      width: 1.1em;
-      font-weight: 400;
-      content: '\E603';
-    }
+  &:before {
+    display: inline-block;
+    @include icon-font;
+    font-size: 24px;
+    margin: 0 4px 0 0;
+    width: 1.1em;
+    font-weight: 400;
+    content: "\E603";
+  }
 
-    &.visible {
-      visibility: visible;
-      opacity: .3;
-    }
+  &.visible {
+    visibility: visible;
+    opacity: 0.3;
+  }
 
-    &.active {
-      color: $secondary-color;
-      opacity: 1;
-    }
+  &.active {
+    color: $secondary-color;
+    opacity: 1;
+  }
 
-    &:hover {
-      color: $secondary-color;
-      opacity: 1; 
-    }
+  &:hover {
+    color: $secondary-color;
+    opacity: 1;
+  }
 }
-

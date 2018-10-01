@@ -1,213 +1,238 @@
+#content {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: relative;
+  }
+}
+
 #payouts-step-1 {
-    @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: calc(100vh - 44px);
-    }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: calc(100vh - 44px);
+  }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 100%;
+  }
+  display: flex;
+  flex-direction: column;
+  > * {
+    width: 100%;
+  }
+  .settings-form {
+    flex: 0;
+  }
+  .payouts-bg {
+    flex: 1 1 100%;
+    position: relative;
+    overflow: hidden;
+    background: url(../img/globe.svg) 50% 55px no-repeat;
+    background-size: 112% auto;
     @include media-breakpoint-up($desktop-breakpoint) {
-        height: 100%;
+      background-position: 129% 9px;
+      background-size: 78% auto;
     }
-    display: flex;
-    flex-direction: column;
-    > * {
-        width: 100%;
-    }
-    .settings-form {
-        flex: 0;
-    }
-    .payouts-bg {
-        flex: 1 1 100%;
-        position: relative;
-        overflow: hidden;
-        background: url(../img/globe.svg) 50% 55px no-repeat;
-        background-size: 112% auto;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            background-position: 129% 9px;
-            background-size: 78% auto;
-        }
-    }
+  }
 }
 .payouts-personal-info {
-    overflow: hidden;
+  overflow: hidden;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: -13px 0 21px;
+  }
+
+  .payouts-legal & {
     @include media-breakpoint-up($desktop-breakpoint) {
-        margin: -13px 0 21px;
+      margin: 0;
     }
-    .item {
-        display: flex;
-        justify-content: space-between;
-        @include media-breakpoint-down($desktop-breakpoint) {
-            border-bottom: 1px solid rgba($gray, .2);
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 12% 0 0;
-        }
-        .title {
-            font-weight: 500;
-            padding: 9px 5px;
+  }
 
-            @include media-breakpoint-down($desktop-breakpoint) {
-                font-size: 15px;
-            }    
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                text-align: right;
-                flex: 0 1 29.5%;
-            }
-        }
-        .value {
-            text-align: right;
-            padding: 9px 5px;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                text-align: left;
-                flex: 0 1 68%;
-                border-bottom: 1px solid rgba($gray, .2);
-            }
-
-            &__text {
-                opacity: .5;
-
-                @include media-breakpoint-up($desktop-breakpoint) {
-                    line-height: 19px;
-                }
-            }
-        }
-        &:last-child {
-            border: none;
-            .value {
-                border: none;
-            }
-        }
-    }
-}
-
-.payouts-legal-done {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin-bottom: 20px;
-    }
-}
-
-.payouts-bank-info {
-    overflow: hidden;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin: -13px 0 17px;
-    }
-    .item {
-        display: flex;
-        justify-content: space-between;
-        @include media-breakpoint-down($desktop-breakpoint) {
-            border-bottom: 1px solid rgba($gray, .2);
-        }
-        @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 12% 0 0;
-        }
-        .title {
-            font-weight: 500;
-            padding: 9px 5px;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                text-align: right;
-                flex: 0 1 29%;
-            }
-        }
-        .value {
-            text-align: right;
-            padding: 9px 5px;
-            @include media-breakpoint-up($desktop-breakpoint) {
-                text-align: left;
-                flex: 0 1 68%;
-                border-bottom: 1px solid rgba($gray, .2);
-            }
-        }
-        &:last-child {
-            border: none;
-            .value {
-                border: none;
-            }
-        }
-    }
-}
-
-
-.PayoutsLegalView, .PayoutsBankView {
-  .error {
-    color: red;
+  .item {
+    display: flex;
+    justify-content: space-between;
     @include media-breakpoint-down($desktop-breakpoint) {
-        padding-left: 15px;
+      border-bottom: 1px solid rgba($gray, 0.2);
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 12% 0 0;
+    }
+    .title {
+      font-weight: 500;
+      padding: 9px 5px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-size: 15px;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: right;
+        flex: 0 1 29.5%;
+      }
+    }
+    .value {
+      text-align: right;
+      padding: 9px 5px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: left;
+        flex: 0 1 68%;
+        border-bottom: 1px solid rgba($gray, 0.2);
+      }
+
+      &__text {
+        opacity: 0.5;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          line-height: 19px;
+        }
+      }
+    }
+    &:last-child {
+      border: none;
+      .value {
+        border: none;
+      }
     }
   }
 }
 
-.photo{
-    &-form-group-inner{
-        align-items: center;
-
-        &.success{
-            .photo-unverified{
-                display: none;
-            }
-        }
-
-        .btn{
-            margin: 0;
-        }
-    }
-
-    &-label-wrapper{
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
-
-    &-btn{
-        display: block;
-        background-color: transparent;
-        border: 2px solid $primary-color;
-        color: $primary-color;
-        max-width: 170px;
-        &.btn{
-            height: 30px;
-            padding: 5px 60px;
-        }
-
-        &:hover{
-            background-color: $primary-color-darken;
-            border-color: $primary-color-darken;
-            color: #fff;
-        }
-    }
-
-    &-unverified{
-        margin: 0 auto;
-        color: lighten($gray, 20%);
-        padding: 0;
-    }
+.payouts-legal-done {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-bottom: 20px;
+  }
 }
 
-.checkbox-wrapper{
-    .payouts{
-        &-desc{
-            opacity: 1;
-        }
+.payouts-bank-info {
+  overflow: hidden;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: -13px 0 17px;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-bottom: 1px solid rgba($gray, 0.2);
     }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 12% 0 0;
+    }
+    .title {
+      font-weight: 500;
+      padding: 9px 5px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: right;
+        flex: 0 1 29%;
+      }
+    }
+    .value {
+      text-align: right;
+      padding: 9px 5px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: left;
+        flex: 0 1 68%;
+        border-bottom: 1px solid rgba($gray, 0.2);
+      }
+    }
+    &:last-child {
+      border: none;
+      .value {
+        border: none;
+      }
+    }
+  }
+}
+
+.PayoutsLegalView,
+.PayoutsBankView {
+  .error {
+    color: red;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-left: 15px;
+    }
+  }
+}
+
+.photo {
+  &-form-group-inner {
+    align-items: center;
+
+    &.success {
+      .photo-unverified {
+        display: none;
+      }
+    }
+
+    .btn {
+      margin: 0;
+    }
+  }
+
+  &-label-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-btn {
+    display: block;
+    background-color: transparent;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    max-width: 170px;
+    &.btn {
+      height: 30px;
+      padding: 4px 60px;
+    }
+
+    &:hover {
+      background-color: $primary-color-darken;
+      border-color: $primary-color-darken;
+      color: #fff;
+    }
+  }
+
+  &-unverified {
+    margin: 0 auto;
+    color: lighten($gray, 20%);
+    padding: 0;
+  }
+}
+
+.checkbox-wrapper {
+  .payouts {
+    &-desc {
+      opacity: 1;
+    }
+  }
 }
 
 .payouts,
 .payouts-accounts,
 .PayoutsAccountView,
-.payouts-account-form{
-    height: 100%;
+.payouts-account-form {
+  height: 100%;
 }
 
-.payouts-account-form .payouts-account-form-wrap {
-  z-index: 4;
-}.payouts-account-form .wrapper-payouts-bg {
-  z-index: 2;
+.payouts-account-form {
+  .payouts-account-form-wrap {
+    z-index: 4;
+  }
+
+  .wrapper-payouts-bg {
+    z-index: 2;
+  }
 }
 
-.payouts{
+.text-waiting {
+  opacity: 0.5;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.payouts {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    min-height: 506px;
     position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-        min-height: 506px;
-    }
+  }
 
   @include media-breakpoint-down($desktop-breakpoint) {
     background-position: 200% 460px;
@@ -217,103 +242,107 @@
   @include media-breakpoint-down($tablet-breakpoint) {
     background-position: 100px 460px;
   }
-    &-legal-form{
-        select{
-            color: $main-color;
-            font-weight: 400;
-        }
+  &-legal-form {
+    select {
+      color: $main-color;
+      font-weight: 400;
     }
-    &-terms{
-        color: $secondary-color;
-        &:hover{
-            color: $secondary-color-darken;
-        }
+  }
+  &-terms {
+    color: $secondary-color;
+    &:hover {
+      color: $secondary-color-darken;
+    }
+  }
+
+  .border-bottom {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-bottom: 0;
+      .inner {
+        align-items: center;
+        padding-bottom: 19px;
+        border-bottom: 1px solid rgba($gray, 0.2);
+      }
     }
 
-    .border-bottom {
+    .toggle-element {
+      position: relative;
+    }
+
+    .form-title-text {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-size: 15px;
+      }
+    }
+  }
+
+  &-account {
+    &-form {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        height: calc(100vh - 44px);
+      }
+
+      .inner {
         @include media-breakpoint-down($desktop-breakpoint) {
-            padding-bottom: 0;
-            .inner {
-                align-items: center;
-                padding-bottom: 19px;
-                border-bottom: 1px solid rgba($gray, 0.2);
-            }
+          border-bottom: 1px solid rgba($gray, 0.2);
+          padding-bottom: 19px;
         }
-
-        .toggle-element{
-            position: relative;
-        }
-
-        .form-title-text{
-            @include media-breakpoint-down($desktop-breakpoint) {
-                font-size: 15px;
-            }
-        }
+      }
     }
-
-    &-account{
-        &-form{
-            @include media-breakpoint-down($desktop-breakpoint) {
-                height: calc(100vh - 44px);
-            }
-            
-            .inner{
-                @include media-breakpoint-down($desktop-breakpoint) {
-                    border-bottom: 1px solid rgba($gray, .2);
-                    padding-bottom: 19px;
-                }
-            }
-        }
-        &-country{
-            @include media-breakpoint-down($desktop-breakpoint) {
-                position: relative;
-                background: $white;
-                padding: 20px 15px 7px;
-                margin-top: -1px;
-            }
-        }
+    &-country {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: relative;
+        background: $white;
+        padding: 20px 15px 7px;
+        margin-top: -1px;
+      }
     }
+  }
 }
 
 .wrapper-payouts-bg {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-        position: relative;
-    }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: relative;
+  }
 }
 
 .payouts-image-bg {
-    overflow: hidden;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: calc(-416px - 55px);
+    transform: translateX(-50%);
+  }
+
+  svg {
     position: absolute;
-    left: 0; right: 0;
-    top: 0; bottom: 0;
+    bottom: -280px;
+    right: -46px;
+    stroke: rgba($gray, 0.1);
+    width: 490px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-        left: 50%; right: auto;
-        top: auto; bottom: calc(-416px - 55px);
-        transform: translateX(-50%);
+      position: relative;
+      display: block;
+      width: 416px;
+      right: auto;
+      bottom: auto;
+      margin: 0 auto;
     }
-
-    svg {
-        position: absolute;
-        bottom: -280px;
-        right: -46px;
-        stroke: rgba($gray, .1);
-        width: 490px;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            position: relative;
-            display: block;
-            width: 416px;
-            right: auto; bottom: auto;
-            margin: 0 auto;
-        }
-    }
+  }
 }
 
-.country-select{
+.country-select {
   padding-bottom: 0;
-    opacity: .3;
+  opacity: 0.3;
 }
 .PayoutsLegalView {
   .birthDateWrapper {
@@ -321,21 +350,21 @@
     flex-grow: 1;
 
     .month {
-        margin: 0 20px;
+      margin: 0 20px;
     }
   }
 }
 
-.help-text{
+.help-text {
   padding-bottom: 0;
 }
 
-.city-zip-form-group{
-  .exp-row{
+.city-zip-form-group {
+  .exp-row {
     padding: 0;
     width: 100%;
 
-    input{
+    input {
       flex: 1;
       text-align: left;
     }
@@ -343,81 +372,85 @@
 }
 
 .PayoutsLegalDoneView {
-
-    .shadow-block {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding: 9px 0 12px;
-        }
+  .shadow-block {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 9px 0 12px;
     }
-    .set-price {
-        text-align: center;
-    }
+  }
+  .set-price {
+    text-align: center;
+  }
 }
 
 .PayoutsBankDoneView {
+  .shadow-block {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 8px 0 6px;
+    }
+  }
 
-    .shadow-block {
+  .PayoutsBankView {
+    h1.form-title {
+      opacity: 0.5;
+      font-size: 17px;
+      display: none;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-            padding: 8px 0 6px;
-        }
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+        padding: 19px 14px;
+      }
     }
 
-    .PayoutsBankView {
+    .payouts-bank-form {
+      .shadow-block {
+        padding: 17px 0 0;
 
-        h1.form-title {
-            opacity: .5;
-            font-size: 17px;
+        .form-title {
+          @include media-breakpoint-down($desktop-breakpoint) {
             display: none;
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-                display: block;
-                padding: 19px 14px;
-            }   
+          }
         }
+      }
 
-        .payouts-bank-form {
-
-            .shadow-block {
-                padding: 17px 0 0;
-
-                .form-title {
-
-                    @include media-breakpoint-down($desktop-breakpoint) {
-                        display: none;
-                    }  
-                }
-            }
-
-            .form-title {
-
-                @include media-breakpoint-up($desktop-breakpoint) {
-                    padding: 7px 10px 21px;
-                } 
-            }
+      .form-title {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          padding: 7px 10px 21px;
         }
+      }
     }
+  }
 }
 
 .payouts-account-country {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 .payout-type {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .payout-user {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
 
-    .user-login {
-        margin-left: 5px;
-        text-align: left;
-    }
+  .user-login {
+    margin-left: 5px;
+    text-align: left;
+  }
+}
+
+.payouts-account,
+.payouts-legal,
+.payouts-bank,
+.payouts-legal-done,
+.payouts-bank-done,
+.payouts-requests,
+.payouts-transactions {
+  &:empty {
+    display: none;
+  }
 }

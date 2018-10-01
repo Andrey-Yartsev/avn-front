@@ -45,7 +45,8 @@
         border-radius: 0 20px 20px 0;
       }
 
-      img, video {
+      img,
+      video {
         border-radius: 20px;
         max-height: 60vh;
         max-width: 100%;
@@ -60,7 +61,7 @@
       }
     }
 
-    a{
+    a {
       display: inline-block;
     }
 
@@ -88,11 +89,11 @@
         margin: 0 3px;
         border-radius: 1000px;
         background: #fff;
-        opacity: .5;
-        transition: opacity .3s ease;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
         cursor: pointer;
         position: relative;
-        box-shadow: 2px 2px 5px rgba(#000,.1);
+        box-shadow: 2px 2px 5px rgba(#000, 0.1);
         &:before {
           position: absolute;
           left: -3px;
@@ -120,9 +121,9 @@
         color: #fff;
         font-size: 36px;
         cursor: pointer;
-        opacity: .7;
-        transition: opacity .3s ease;
-        filter: drop-shadow(2px 2px 5px rgba(#000,.4));
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        filter: drop-shadow(2px 2px 5px rgba(#000, 0.4));
         &:before {
           @include icon-font;
           @include position-center;
@@ -176,11 +177,10 @@
   }
 
   > .chatContent {
-    
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-top: auto;
       margin-bottom: 0;
-    }    
+    }
   }
 }
 
@@ -191,10 +191,10 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 20px;
-    height: 100%;
+    height: calc(100% - 4px);
     position: absolute;
     left: 0;
-    top: 0;
+    top: 4px;
     right: 0;
     bottom: 0;
     margin: 0;
@@ -202,7 +202,7 @@
       display: flex;
       flex-direction: column;
       &:before {
-        content: '';
+        content: "";
         margin-bottom: auto;
       }
     }
@@ -214,7 +214,6 @@
   max-width: 83%;
 
   &:not(:first-child) {
-
     .chatMessageWrapper,
     .message,
     .messageWrapper {
@@ -229,9 +228,7 @@
   }
 
   + .chatMessage {
-
     &.withTime {
-
       .chatMessageWrapper {
         margin-top: 0;
       }
@@ -279,9 +276,7 @@
   }
 
   &.notAuthorMessage {
-
-    .messageWrapper{
-
+    .messageWrapper {
       .message {
         background-color: rgba(124, 139, 150, 0.2);
         border-radius: 0 20px 20px 0;
@@ -289,9 +284,7 @@
     }
 
     &.firstMessageInGroup {
-
-      .messageWrapper{
-
+      .messageWrapper {
         .message {
           border-radius: 20px 20px 20px 0;
         }
@@ -301,19 +294,17 @@
     .tipsMessage,
     .unlockedMessage,
     .lockedMessage {
-
       .message {
-
         &:before {
-          top: 0;
+          top: 50%;
           right: -30px;
           color: $secondary-color;
+          transform: translateY(-50%);
         }
       }
     }
 
     &.withTime {
-
       .avatar {
         opacity: 1;
         pointer-events: visible;
@@ -328,10 +319,9 @@
     }
 
     .media {
-
       &-item {
-
-        img, video {
+        img,
+        video {
           border-radius: 0 20px 20px 0;
         }
       }
@@ -344,6 +334,9 @@
     margin-right: 0;
 
     .messageWrapper {
+      &.lockedMessage {
+        opacity: 0.5;
+      }
 
       .message {
         color: white;
@@ -355,10 +348,9 @@
         }
 
         + .media {
-
           &-item {
-
-            img, video {
+            img,
+            video {
               border-radius: 20px 0 0 20px;
             }
           }
@@ -369,9 +361,7 @@
     .tipsMessage,
     .unlockedMessage,
     .lockedMessage {
-
       .message {
-
         &:before {
           left: -30px;
           right: auto;
@@ -381,9 +371,7 @@
     }
 
     &.firstMessageInGroup {
-
       .messageWrapper {
-
         .message {
           border-radius: 20px 20px 0 20px;
         }
@@ -403,10 +391,9 @@
     }
 
     .media {
-
       &-item {
-
-        img, video {
+        img,
+        video {
           border-radius: 20px 0 0 20px;
         }
 
@@ -427,7 +414,6 @@
 }
 
 .messageWrapper {
-
   .message {
     position: relative;
     display: inline-block;
@@ -438,14 +424,115 @@
   }
 
   &.lockedMessage {
-    opacity: 0.5;
+    .message {
+      color: $secondary-color;
+    }
+
+    &.messageTypeText {
+      .message {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        max-height: 200px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-height: 400px;
+        }
+      }
+    }
+
+    &.messageTypePhoto,
+    &.messageTypeVideo {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      min-width: 140px;
+      min-height: 32px;
+
+      .message {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      .media {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+        border-radius: 0 20px 20px 0;
+        opacity: 0.5;
+
+        &-item {
+          flex: 1;
+          height: 100%;
+          display: flex;
+        }
+      }
+
+      .locked-picture {
+        flex: 1;
+        width: 100%;
+
+        .locked {
+          width: 100%;
+          height: 100%;
+          opacity: 1;
+        }
+      }
+
+      .condition-unlock {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 8px 16px;
+        border-radius: 1000px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+      }
+    }
+
+    &.messageTypePhoto {
+      .locked-picture {
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    &.messageTypeVideo {
+      .locked-picture {
+        &:after {
+          content: "\E661";
+          @include icon-font;
+          position: absolute;
+          left: 15px;
+          bottom: 10px;
+          font-size: 40px;
+          color: #fff;
+          opacity: 0.8;
+          transition: all 0.3s;
+          top: auto;
+          transform: translate(0, 0);
+        }
+      }
+    }
   }
 }
 
 .tipsMessage {
-
   .message {
-
     &:before {
       @include icon-font;
       font-size: 24px;
@@ -459,9 +546,7 @@
 }
 
 .unlockedMessage {
-
   .message {
-
     &:before {
       @include icon-font;
       font-size: 24px;
@@ -475,7 +560,6 @@
 }
 
 .lockedMessage {
-
   .message {
     cursor: pointer;
 

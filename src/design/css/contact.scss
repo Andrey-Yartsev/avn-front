@@ -1,44 +1,44 @@
 @import "components/imports";
 h1 {
-    margin: 0 0 20px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 0 34px;
-    }
+  margin: 0 0 20px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 0 0 34px;
+  }
 }
 h2 {
-    font-weight: 400;
-    margin: 0 0 42px;
-    @include media-breakpoint-down($desktop-breakpoint) {
-        font: inherit;
-        margin: 0 0 23px;
-    }
+  font-weight: 400;
+  margin: 0 0 42px;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    font: inherit;
+    margin: 0 0 23px;
+  }
 }
 .form-group {
-    @include media-breakpoint-up($desktop-breakpoint) {
-        padding-right: 18%;
-        &-inner {
-            & > .label {
-                flex: 0 0 19%;
-            }
-        }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-right: 18%;
+    &-inner {
+      & > .label {
+        flex: 0 0 19%;
+      }
     }
+  }
 }
 .staticPage {
-    form {
-        padding: 0 0 68px;
-        @include media-breakpoint-down($desktop-breakpoint) {
-            margin: 0 -5px;
-            .form-group .label + .btn {
-                display: block;
-                margin: 17px auto 0;
-            }
-        }
+  form {
+    padding: 0 0 68px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin: 0 -5px;
+      .form-group .label + .btn {
+        display: block;
+        margin: 17px auto 0;
+      }
     }
+  }
 
-    .contact-page{
-        .btn{
-            max-width: 190px;
-            width: 100%;
-        }
+  .contact-page {
+    .btn {
+      max-width: 190px;
+      width: 100%;
     }
+  }
 }

@@ -1,361 +1,317 @@
 @import "components/imports";
 
 .group-controls {
-	display: flex;
+  display: flex;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-        justify-content: space-around;
-        width: 100%;
-    }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    justify-content: space-around;
+    width: 100%;
+  }
 }
 
 .btn-media-event {
+  @include media-breakpoint-up($tablet-breakpoint) {
+    position: relative;
+  }
 
-    @include media-breakpoint-up($tablet-breakpoint) {
-	   position: relative;
+  &:last-child {
+    .menu {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: auto;
+        transform: translate(0, 0);
+        right: -20px;
+      }
     }
+  }
 
-    &:last-child {
-
-        .menu {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-               left: auto;
-               transform: translate(0, 0);
-               right: -20px;
-            }
+  &.has-dropdown {
+    .root-btn {
+      &:empty {
+        &:before {
+          margin-right: 5px;
         }
-    }
+      }
 
-	&.has-dropdown {
-
-		.root-btn {
-
-			&:empty {
-
-	            &:before {
-	                margin-right: 5px;
-	            }
-	        }
-
-            &__inside {
-
-                &:after {
-                    display: inline-block;
-                }
-            }
-		}	
-	}
-
-	&.shown {
-
-        .menu {
-            display: block;
+      &__inside {
+        &:after {
+          display: inline-block;
         }
+      }
+    }
+  }
 
-        &.has-dropdown {
-
-            .root-btn {
-
-                &:after {
-                    display: inline-block;
-                }
-            }
-        }    
+  &.shown {
+    .menu {
+      display: block;
     }
 
-	.root-btn {
-		background: none;
-        border: none;
-        color: #fff;
-        font-weight: 500;
-        position: relative;
+    &.has-dropdown {
+      .root-btn {
+        &:after {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .root-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: "";
+      border-bottom: 12px solid #fff;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      bottom: -1px;
+      left: 50%;
+      margin-left: -12px;
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: -6px;
+      }
+    }
+
+    &__inside {
+      padding: 13px 15px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      align-content: center;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 13px 23.5px;
+      }
+
+      &:before {
+        @include icon-font;
+        font-size: 24px;
+        vertical-align: middle;
+        display: inline-block;
+        font-weight: 400;
+      }
+
+      &:after {
+        border-top: 5px solid #fff;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        content: "";
+        vertical-align: middle;
+        display: inline-block;
+        margin-left: 7px;
+        display: none;
+      }
+    }
+
+    &:empty {
+      .root-btn__inside {
+        &:before {
+          margin-right: 2px;
+        }
 
         &:after {
-            position: absolute;
-            content: '';
-            border-bottom: 12px solid #fff;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            bottom: -1px;
-            left: 50%;
-            margin-left: -12px;
-            display: none;
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                bottom: -6px;
-            }
+          margin-left: 0;
         }
-
-        &__inside {
-            padding: 13px 15px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            align-content: center;
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-                padding: 13px 23.5px;
-            }
-
-            &:before {
-                @include icon-font;
-                font-size: 24px;
-                vertical-align: middle;
-                display: inline-block;
-                font-weight: 400;
-            }
-
-            &:after {
-                border-top: 5px solid #fff;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                content: '';
-                vertical-align: middle;
-                display: inline-block;
-                margin-left: 7px;
-                display: none;
-            }
-        }
-
-        &:empty {
-
-            .root-btn__inside {
-
-                &:before {
-                    margin-right: 2px;
-                }
-
-                &:after {
-                    margin-left: 0;
-                }
-            }    
-        }
-
-        &__text {
-            overflow: hidden;
-            width: 0;
-            white-space: nowrap;
-        }
-	}
-
-	.menu {
-        position: absolute;
-        display: none;
-        background: #fff;
-        left: 18px; right: 18px;
-        top: 100%;
-        margin-top: 0;
-        border-radius: 5px;
-        padding: 4px 0 6px;
-
-        @include media-breakpoint-up($mobile-breakpoint) {
-            left: 68px; right: 68px;
-            margin-top: 5px;
-        }
-
-        @include media-breakpoint-up($tablet-breakpoint) {
-           left: 50%;
-           width: 240px;
-           transform: translate(-50%, 0);
-        }
-
-        .options-wrapper {
-            margin: -4px 0 -6px;
-            color: $main;
-        }
-
-        .item {
-            border: none;
-            padding: 16px 45px 16px 20px;
-            background: none;
-            font-weight: 500;
-            display: block;
-            width: 100%;
-            text-align: left;
-            position: relative;
-
-            .value {
-                opacity: .5;
-                transition: opacity .3s ease;
-            }
-
-            &.active,
-            &:hover {
-
-                .value {
-                    opacity: 1;
-                }
-            }
-
-            & + .item {
-
-                &:before {
-                    content: '';
-                    height: 1px;
-                    background: $gray;
-                    opacity: .2;
-                    left: 20px;
-                    right: 20px;
-                    top: 0;
-                    position: absolute;
-                }
-            }
-
-            &.active {
-
-                &:after {
-                    position: absolute;
-                    content: '\E604';
-                    @include icon-font;
-                    right: 20px;
-                    font-size: 24px;
-                    top: 50%;
-                    line-height: 0;
-                    color: $secondary-color;
-                }
-            }
-        }
+      }
     }
 
+    &__text {
+      overflow: hidden;
+      width: 0;
+      white-space: nowrap;
+    }
+  }
 
+  .menu {
+    position: absolute;
+    display: none;
+    background: #fff;
+    left: 18px;
+    right: 18px;
+    top: 100%;
+    margin-top: 0;
+    border-radius: 5px;
+    padding: 4px 0 6px;
 
-	&.picture {
-        
-        .root-btn__inside {
-
-            &:before {
-                content: '\E61A';
-            }
-        }
-	}
-
-    &.fullscreen {
-        
-        .root-btn__inside {
-        	
-            &:before {
-                content: '\E662';
-            }
-        }
+    @include media-breakpoint-up($mobile-breakpoint) {
+      left: 68px;
+      right: 68px;
+      margin-top: 5px;
     }
 
-    &.layers {
-        
-        .root-btn__inside {
-        	
-            &:before {
-                content: '\E64D';
-            }
-        }
-
-        .options-wrapper {
-
-            .options-wrap {
-                padding-bottom: 7px;
-            }
-        }
+    @include media-breakpoint-up($tablet-breakpoint) {
+      left: 50%;
+      width: 240px;
+      transform: translate(-50%, 0);
     }
 
-    &.letters-color {
-        
-        .root-btn__inside {
-        	
-            &:before {
-                content: '\E664';
-            }
-        }
+    .options-wrapper {
+      margin: -4px 0 -6px;
+      color: $main;
     }
 
-    &.letters-bg {
-        
-        .root-btn__inside {
-        	
-            &:before {
-                content: '\E663';
-            }
+    .item {
+      border: none;
+      padding: 16px 45px 16px 20px;
+      background: none;
+      font-weight: 500;
+      display: block;
+      width: 100%;
+      text-align: left;
+      position: relative;
+
+      .value {
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+
+      &.active,
+      &:hover {
+        .value {
+          opacity: 1;
         }
+      }
+
+      & + .item {
+        &:before {
+          content: "";
+          height: 1px;
+          background: $gray;
+          opacity: 0.2;
+          left: 20px;
+          right: 20px;
+          top: 0;
+          position: absolute;
+        }
+      }
+
+      &.active {
+        &:after {
+          position: absolute;
+          content: "\E604";
+          @include icon-font;
+          right: 20px;
+          font-size: 24px;
+          top: 50%;
+          line-height: 0;
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+
+  &.picture {
+    .root-btn__inside {
+      &:before {
+        content: "\E61A";
+      }
+    }
+  }
+
+  &.fullscreen {
+    .root-btn__inside {
+      &:before {
+        content: "\E662";
+      }
+    }
+  }
+
+  &.layers {
+    .root-btn__inside {
+      &:before {
+        content: "\E64D";
+      }
     }
 
+    .options-wrapper {
+      .options-wrap {
+        padding-bottom: 7px;
+      }
+    }
+  }
 
-    &.camera {
+  &.letters-color {
+    .root-btn__inside {
+      &:before {
+        content: "\E664";
+      }
+    }
+  }
 
-        .root-btn__inside {
+  &.letters-bg {
+    .root-btn__inside {
+      &:before {
+        content: "\E663";
+      }
+    }
+  }
 
-            &:before {
-                content: '\E627';
-            }
-        }
-
-        &.device-disabled {
-
-            .root-btn__inside {
-
-                &:before {
-                    content: '\E628';
-                }
-            }
-        }
+  &.camera {
+    .root-btn__inside {
+      &:before {
+        content: "\E627";
+      }
     }
 
-    &.microphone {
-
-        .root-btn__inside {
-
-            &:before {
-                content: '\E629';
-            }
+    &.device-disabled {
+      .root-btn__inside {
+        &:before {
+          content: "\E628";
         }
+      }
+    }
+  }
 
-        &.device-disabled {
-
-            .root-btn__inside {
-
-                &:before {
-                    content: '\E62A';
-                }
-            }
-        }
+  &.microphone {
+    .root-btn__inside {
+      &:before {
+        content: "\E629";
+      }
     }
 
-
-    &.stream-visibility {
-
-        .root-btn__inside {
-
-            &:before {
-                margin-right: 10px;
-            }    
+    &.device-disabled {
+      .root-btn__inside {
+        &:before {
+          content: "\E62A";
         }
-
-        &.public {
-
-            .root-btn__inside {
-
-                &:before {
-                    content: '\E626';
-                }
-            }
-        }
-
-        &.followers {
-
-            .root-btn__inside {
-
-                &:before {
-                    content: '\e63f';
-                }
-            }
-        }
-
-        &.subscribers {
-
-            .root-btn__inside {
-
-                &:before {
-                    content: '\E625';
-                }
-            }
-        }
+      }
     }
+  }
+
+  &.stream-visibility {
+    .root-btn__inside {
+      &:before {
+        margin-right: 10px;
+      }
+    }
+
+    &.public {
+      .root-btn__inside {
+        &:before {
+          content: "\E626";
+        }
+      }
+    }
+
+    &.followers {
+      .root-btn__inside {
+        &:before {
+          content: "\e63f";
+        }
+      }
+    }
+
+    &.subscribers {
+      .root-btn__inside {
+        &:before {
+          content: "\E625";
+        }
+      }
+    }
+  }
 }

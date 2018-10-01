@@ -1,5 +1,5 @@
 $gray: #7c8b96;
-$main-font: 'Roboto', sans-serif;
+$main-font: "Roboto", sans-serif;
 $icon-font: team;
 $default-avatar-bg: #e4edf1;
 $default-avatar-color: $gray;
@@ -13,7 +13,7 @@ $grid-breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px,
+  xl: 1200px
 );
 
 $colors: (
@@ -28,7 +28,7 @@ $colors: (
   9: rgb(0, 177, 204),
   10: rgb(33, 150, 243),
   11: rgb(121, 83, 245),
-  12: rgb(168, 50, 191),
+  12: rgb(168, 50, 191)
 );
 
 $stories_colors: (
@@ -46,7 +46,7 @@ $stories_colors: (
   12: rgb(168, 50, 191),
   13: rgb(255, 255, 255),
   14: rgb(0, 0, 0),
-  15: rgb(50, 200, 250),
+  15: rgb(50, 200, 250)
 );
 
 $red: #ff404d;

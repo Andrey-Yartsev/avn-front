@@ -31,6 +31,3 @@ export default {
   name: "StoriesWrapper"
 };
 </script>
-
-<style lang="scss" scoped src="@/design/css/stories.scss">
-</style>

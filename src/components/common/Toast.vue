@@ -42,11 +42,6 @@ export default {
 };
 </script>
 
-<style lang="scss" src="@//design/css/jquery-toast-plugin/jquery-toast.scss">
-</style>
-<style lang="scss" src="@//design/css/toast.scss">
-</style>
-
 <style lang="scss">
 .jq-toast-loader {
   transition: width 2.5s ease-in;

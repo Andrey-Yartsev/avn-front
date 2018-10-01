@@ -1,5 +1,5 @@
 @import "components/imports";
-.searchChatContacts{
+.searchChatContacts {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -36,11 +36,11 @@
   }
 }
 
-.searchResult{
+.searchResult {
   max-width: 100%;
   @include media-breakpoint-up($desktop-breakpoint) {
     &:after {
-      content: '';
+      content: "";
       display: block;
       height: 60px;
     }
@@ -53,8 +53,8 @@
       margin-bottom: 1px;
     }
   }
-    
-  .searchChatContactsView{
+
+  .searchChatContactsView {
     max-width: 100%;
     border-bottom: 1px solid rgba(124, 139, 150, 0.2);
     padding: 11px 0 11px 40px;
@@ -65,7 +65,7 @@
       border-top: 1px solid rgba(124, 139, 150, 0.2);
     }
 
-    .avatar{
+    .avatar {
       position: absolute;
       top: 1em;
       left: 0;
@@ -75,7 +75,6 @@
       height: 30px;
 
       &:empty {
-
         &:before {
           font-size: 29px;
         }
@@ -92,7 +91,7 @@
       }
     }
 
-    .check{
+    .check {
       visibility: hidden;
       opacity: 0;
       transition: all 0.3s ease;
@@ -104,39 +103,39 @@
       color: $secondary-color;
       text-align: right;
 
-      &:before{
+      &:before {
         display: inline-block;
         @include icon-font;
         font-size: 24px;
         margin: 0 4px 0 0;
         width: 1.1em;
         font-weight: 400;
-        content: '\E604';
+        content: "\E604";
       }
       /*TODO add check mark*/
     }
 
-    &.active{
-
-      .check{
+    &.active {
+      .check {
         visibility: visible;
         opacity: 1;
       }
 
-      .name, .user-login{
+      .name,
+      .user-login {
         max-width: 80%;
       }
     }
 
-    &:hover{
-      .name{
+    &:hover {
+      .name {
         color: $primary-color;
       }
     }
   }
 }
 
-.searchContact{
+.searchContact {
   margin-bottom: 14px;
 }
 
@@ -153,7 +152,7 @@
     padding-left: 0;
   }
 
-  .sendTo{
+  .sendTo {
     font-weight: 500;
   }
 
@@ -166,7 +165,7 @@
 
     &:focus {
       border: none;
-      outline: none;      
+      outline: none;
     }
   }
 }

@@ -31,6 +31,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss" src="@/design/css/footer-nav.scss">
-</style>
