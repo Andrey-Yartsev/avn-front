@@ -1,25 +1,30 @@
 "use strict";
 
 const state = {
-  postReport: false
+  postReport: {
+    show: false,
+    data: {}
+  }
 };
 
 const mutations = {
-  ["show"](state, name) {
-    state[name] = true;
+  ["show"](state, { name, data }) {
+    state[name].show = true;
+    state[name].data = data;
   },
-  ["hide"](state, name) {
-    state[name] = false;
+  ["hide"](state, { name }) {
+    state[name].show = false;
+    state[name].data = {};
   }
 };
 
 const actions = {
-  show({ commit }, name) {
-    commit("show", name);
+  show({ commit }, { name, data }) {
+    commit("show", { name, data });
   },
 
-  hide({ commit }, name) {
-    commit("hide", name);
+  hide({ commit }, { name, data }) {
+    commit("hide", { name, data });
   }
 };
 

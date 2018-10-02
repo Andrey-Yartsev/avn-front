@@ -1,6 +1,8 @@
 <template>
     <div class="dropdown-menu">
-        <button class="report" type="button" @click="reportUser">Report post</button>
+       <template v-if="!isOwner(userId)">
+          <button class="report" type="button" @click="reportUser">Report post</button>
+        </template>
         <button v-if="copied" class="btn-copy-link copied" type="button">Copied!</button>
         <button v-else  class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
         <template v-if="isOwner(userId)">
@@ -47,7 +49,12 @@ export default {
     },
 
     reportUser() {
-      this.$store.dispatch("modal/show", "postReport");
+      this.$store.dispatch("modal/show", {
+        name: "postReport",
+        data: {
+          postId: this.postId
+        }
+      });
     }
   }
 };
