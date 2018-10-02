@@ -5,7 +5,11 @@ import HomeApi from "@/api/home";
 import router from "@/router";
 
 const state = {};
-const mutations = {};
+const mutations = {
+  ["sendPostReportSuccess"](state, { postId, reasonId }) {
+    state.reportedPost = { postId, reasonId };
+  }
+};
 
 const actions = {
   savePost({ commit }, data) {
@@ -21,6 +25,15 @@ const actions = {
       .catch(err => {
         commit("sendPostCommentFail", err);
       });
+  },
+  sendReport({ commit }, { postId, reasonId }) {
+    return HomeApi.sendPostReport({ postId, reasonId })
+      .then(response => {
+        if (response.status === 200) {
+          commit("sendPostReportSuccess", { postId, reasonId });
+        }
+      })
+      .catch(() => {});
   }
 };
 

@@ -1,7 +1,7 @@
 <template>
   <header id="site_header" v-if="show">
     <div class="header-wrapper">
-      <div class="container header_container">
+      <div :class="['container', 'header_container', {guest: noAuthHeader}]">
         <nav class="header-nav hidden-mobile">
           <template v-if="!noAuthHeader">
             <router-link class="menu-item-home" to="/" exact><span>Home</span></router-link>
