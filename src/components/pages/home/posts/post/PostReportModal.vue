@@ -1,12 +1,10 @@
 <template>
-    <div class="popup">
-        <div class="overlay"></div>
-        <div class="popup-container">
-            <div class="previous hidden"></div>
+    <Modal>
+        <template slot="content">
             <div class="content">
                 <div class="reasonsView">
                     <div class="reasons">
-                        <button type="button" class="close"></button>
+                        <button type="button" class="close" @click="this.close"></button>
                         <form>
                             <h1 class="form-title">Choose reason</h1>
                             <div class="shadow-block">
@@ -36,11 +34,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </Modal>
 </template>
 
 <script>
+import Modal from "@/components/modal/Index";
+
 export default {
   name: "PostReportModal",
   created() {
@@ -49,6 +49,14 @@ export default {
   computed: {
     reasons() {
       return this.$store.state.home.postReportReasons;
+    }
+  },
+  components: {
+    Modal
+  },
+  methods: {
+    close() {
+      this.$store.dispatch("modal/hide", "postReport");
     }
   }
 };

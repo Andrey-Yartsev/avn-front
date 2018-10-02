@@ -6,21 +6,18 @@
         <template v-if="isOwner(userId)">
           <button class="deletePost" type="button" @click="deletePost">Delete post</button>
         </template>
-        <PostReportModal v-if="showReportModal" />
     </div>
 </template>
 
 <script>
 import userMixin from "@/mixins/user";
 import { execCopy } from "@/helpers/page";
-import PostReportModal from "./PostReportModal";
 
 export default {
   name: "PostDropdawn",
   mixins: [userMixin],
   data: () => ({
-    copied: false,
-    showReportModal: false
+    copied: false
   }),
   computed: {
     href() {
@@ -38,9 +35,6 @@ export default {
       required: true
     }
   },
-  components: {
-    PostReportModal
-  },
   methods: {
     copyHref() {
       execCopy(this.href);
@@ -53,7 +47,7 @@ export default {
     },
 
     reportUser() {
-      this.showReportModal = true;
+      this.$store.dispatch("modal/show", "postReport");
     }
   }
 };
