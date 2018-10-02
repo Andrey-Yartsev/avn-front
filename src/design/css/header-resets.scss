@@ -52,6 +52,7 @@ body {
     .dark & {
       background: $main-color;
     }
+
     &:before {
       position: fixed;
       top: 0;
@@ -64,7 +65,9 @@ body {
       opacity: 0;
       transition: opacity 0.4s ease, height 0s linear 0.4s;
     }
+
     .sidebar-shown & {
+
       &:before {
         height: 100%;
         opacity: 1;
@@ -112,6 +115,8 @@ body {
 
     .login,
     .register {
+      min-height: auto;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         padding: 0;
         box-shadow: none;
