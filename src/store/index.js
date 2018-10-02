@@ -10,6 +10,7 @@ import signUp from "@/store/modules/signUp";
 import otp from "@/store/modules/otp";
 import sessions from "@/store/modules/sessions";
 import common from "@/store/modules/common";
+import modal from "@/store/modules/modal";
 
 Vue.use(Vuex);
 
@@ -25,7 +26,8 @@ const store = new Vuex.Store({
     common,
     otp,
     sessions,
-    post
+    post,
+    modal
   }
 });
 

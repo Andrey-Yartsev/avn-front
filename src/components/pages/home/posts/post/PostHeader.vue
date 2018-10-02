@@ -8,10 +8,10 @@
           <span class="verified-user"></span>
         </template>
         <span class="user-login">
-                <router-link :to="user.publicUrl">{{ user.username }}</router-link>
-            </span>
+          <router-link :to="user.publicUrl">{{ user.username }}</router-link>
+        </span>
         <span class="post-dropdown-menu-btn" v-on:click="isShowDropdawn = !isShowDropdawn"></span>
-        <PostDropdawn v-bind:class="{ hidden: !isShowDropdawn }"></PostDropdawn>
+        <PostDropdawn v-bind:class="{ hidden: !isShowDropdawn }" :postId="id" :userId="user.id" ></PostDropdawn>
     </div>
 </template>
 
