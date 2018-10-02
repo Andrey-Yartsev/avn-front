@@ -15,6 +15,8 @@ import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
 
+import PostPage from "./components/pages/post/Index";
+
 import Auth from "@/auth.js";
 
 Vue.use(Router);
@@ -53,31 +55,6 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/explore",
-    component: ExplorePage
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/explore/stories",
-    component: ExploreStoriesPage
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/explore/photos",
-    component: ExplorePhotosPage
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/explore/live",
-    component: ExploreLivePage
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/explore/videos",
-    component: ExploreVideosPage
-  },
-  {
-    beforeEnter: Auth.requireAuth,
     path: "/chat",
     component: MessagesPage
   },
@@ -100,6 +77,35 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: SettingsSecurityPage
+  },
+  // PUBLIC ZONE
+  {
+    beforeEnter: Auth.dummy,
+    path: "/post/:postId",
+    component: PostPage,
+    meta: {
+      noAuthHeader: true
+    }
+  },
+  {
+    path: "/explore",
+    component: ExplorePage
+  },
+  {
+    path: "/explore/stories",
+    component: ExploreStoriesPage
+  },
+  {
+    path: "/explore/photos",
+    component: ExplorePhotosPage
+  },
+  {
+    path: "/explore/live",
+    component: ExploreLivePage
+  },
+  {
+    path: "/explore/videos",
+    component: ExploreVideosPage
   }
 ];
 

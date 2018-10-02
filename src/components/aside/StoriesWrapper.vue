@@ -7,9 +7,13 @@
                     <div class="story">
                         <div class="story-avatar">
                             <a class="avatar new-story">
-                                <img src="https://media.team2.retloko.com/files/f/fu/fuv/fuvehoth2zqjgua11c8akpdcxgr3dvvw1537170622/2afff3a23099780908097f84bc5da2fd_normal.jpeg">
+                                <img v-if="user.avatar" :src="user.avatar">
                             </a>
-                            <span class="btn-add"></span>
+                            <span class="btn-add">
+                                <svg aria-hidden="true" class="icn icn-plus">
+                                    <use xlink:href="#icon-plus-in-circle"></use>
+                                </svg>
+                            </span>
                         </div>
                         <div class="story-info">
                             <div class="name">Your story</div>
@@ -28,6 +32,11 @@
 
 <script>
 export default {
-  name: "StoriesWrapper"
+  name: "StoriesWrapper",
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
+    }
+  }
 };
 </script>
