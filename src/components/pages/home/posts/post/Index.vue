@@ -1,31 +1,14 @@
 <template>
     <div class="post">
         <div class="post-details">
-            <PostHeader :id="item.id" :user="item.author"></PostHeader>
+            <Header :postId="item.id" :user="item.author" />
             <p class="text">{{ item.text }}</p>
-            <div class="media">
-                <template v-if="item.media.length > 1">
-                  <div class="media-slider">
-                    <figure :key="key" v-for="(value, key) in item.media" :class="[{ active: currentSlide === key }, 'media-item']" :data-index="key">
-                      <component :is="getMediaViewType(value)" :media="value"></component>
-                    </figure>
-                  </div>
-                </template>
-                <template v-else >
-                    <figure :key="key" v-for="(value, key) in item.media" class="media-item active">
-                      <component :is="getMediaViewType(value)" :media="value"></component>
-                    </figure>
-                </template>
-                <template v-if="item.media.length > 1">
-                  <div class="media-slider-pagination">
-                    <span :key="key" v-for="(value, key) in item.media" :class=" [{ active: key === currentSlide }, 'item']" @click="currentSlide = key"></span>
-                  </div>
-                  <div class="media-slider-navigation">
-                    <span :class="[{hidden: currentSlide === 0}, 'btn-prev']" @click="currentSlide -= 1"></span>
-                    <span :class="[{hidden: currentSlide === item.media.length - 1}, 'btn-next']" class="" @click="currentSlide += 1"></span>
-                  </div>
-                </template>
-            </div>
+            <Media
+              :medias="item.media"
+              :showSlider="item.canViewMedia"
+              :shouldHasLink="true"
+              :postId="item.id"
+            />
             <Actions 
               :post="item" 
               v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
@@ -40,19 +23,14 @@
 <script>
 import AddComment from "./comments/AddComment";
 import CommentsList from "./comments/CommentsList";
-import PostHeader from "./PostHeader";
-import Actions from "./Actions";
-import LockedPicture from "./mediaContent/LockedPicture";
-import Video from "./mediaContent/Video";
-import Gif from "./mediaContent/Gif";
-import Simple from "./mediaContent/Simple";
+import Header from "@/components/pages/post/Header/Index";
+import Media from "@/components/pages/post/Media/Index";
+import Actions from "@/components/pages/post/Actions/Index";
 
 export default {
   name: "Post",
   data: function() {
     return {
-      isShowPostDropdawn: false,
-      currentSlide: 0,
       showAddCommentForm: false
     };
   },
@@ -60,11 +38,8 @@ export default {
     CommentsList,
     AddComment,
     Actions,
-    PostHeader,
-    LockedPicture,
-    Video,
-    Gif,
-    Simple
+    Header,
+    Media
   },
   props: {
     item: {
@@ -73,18 +48,6 @@ export default {
     }
   },
   methods: {
-    getMediaViewType(media) {
-      switch (true) {
-        case !media.canView:
-          return "LockedPicture";
-        case media.type === "video":
-          return "Video";
-        case media.type === "gif":
-          return "Gif";
-        default:
-          return "Simple";
-      }
-    },
     getComments() {
       const { id, commentsCount } = this.item;
 

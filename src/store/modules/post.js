@@ -1,19 +1,39 @@
 "use strict";
 
 // import BrowserStore from "store";
-import HomeApi from "@/api/home";
+import PostApi from "@/api/post";
 import router from "@/router";
 
-const state = {};
+const state = {
+  currentPost: undefined,
+  reportedPost: undefined
+};
 const mutations = {
   ["sendPostReportSuccess"](state, { postId, reasonId }) {
     state.reportedPost = { postId, reasonId };
+  },
+
+  ["setCurrentPost"](state, { postData }) {
+    state.currentPost = postData;
   }
 };
 
 const actions = {
+  getPost({ commit }, { postId }) {
+    return PostApi.getPost({ postId })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(postData) {
+            commit("setCurrentPost", {
+              postData
+            });
+          });
+        }
+      })
+      .catch(() => {});
+  },
   savePost({ commit }, data) {
-    return HomeApi.savePost(data)
+    return PostApi.savePost(data)
       .then(response => {
         if (response.status === 200) {
           router.go({
@@ -27,7 +47,7 @@ const actions = {
       });
   },
   sendReport({ commit }, { postId, reasonId }) {
-    return HomeApi.sendPostReport({ postId, reasonId })
+    return PostApi.sendPostReport({ postId, reasonId })
       .then(response => {
         if (response.status === 200) {
           commit("sendPostReportSuccess", { postId, reasonId });

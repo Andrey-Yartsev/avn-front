@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown-menu">
-       <template v-if="!isOwner(userId)">
+       <template v-if="!isOwner(userId) && isAuth()">
           <button class="report" type="button" @click="reportUser">Report post</button>
         </template>
         <button v-if="copied" class="btn-copy-link copied" type="button">Copied!</button>

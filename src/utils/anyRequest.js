@@ -4,8 +4,7 @@ import request from "./request";
 
 export default async (apiPath, options) => {
   const query = {
-    ...options.query,
-    "access-token": Store.state.auth.token
+    ...options.query
   };
 
   if (Store.state.auth.token) {
