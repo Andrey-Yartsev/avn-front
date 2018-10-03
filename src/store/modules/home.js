@@ -1,7 +1,7 @@
 "use strict";
 
-// import BrowserStore from "store";
 import HomeApi from "@/api/home";
+import PostComments from "../mixins/postComments";
 
 const state = {
   loading: false,
@@ -61,49 +61,6 @@ const mutations = {
     });
   },
 
-  ["postCommentsRequest"](state, { postId }) {
-    state.posts = state.posts.map(post => {
-      if (postId === post.id) {
-        return {
-          ...post,
-          comments: post.comments || [],
-          commentsLoading: true,
-          shownCommentsCount: 3
-        };
-      }
-
-      return post;
-    });
-  },
-
-  ["postCommentsRequestSuccess"](state, data) {
-    state.posts = state.posts.map(post => {
-      if (data.postId !== post.id) {
-        return post;
-      }
-
-      return {
-        ...post,
-        comments: [...post.comments, ...data.list],
-        commentsLoading: false
-      };
-    });
-  },
-
-  ["postSendCommentsRequestSuccess"](state, data) {
-    state.posts = state.posts.map(post => {
-      if (data.postId !== post.id) {
-        return post;
-      }
-
-      return {
-        ...post,
-        comments: [data.comment, ...post.comments],
-        shownCommentsCount: post.shownCommentsCount + 1
-      };
-    });
-  },
-
   ["deletePost"](state, data) {
     state.posts = state.posts.filter(post => data.postId !== post.id);
   },
@@ -136,23 +93,6 @@ const actions = {
       })
       .catch(err => {
         commit("postsRequestFail", err);
-      });
-  },
-  getPostComments({ commit }, { postId }) {
-    commit("postCommentsRequest", { postId });
-    return HomeApi.getPostComments({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(list) {
-            commit("postCommentsRequestSuccess", {
-              postId,
-              list
-            });
-          });
-        }
-      })
-      .catch(err => {
-        commit("commentsRequestFail", err);
       });
   },
 
@@ -200,6 +140,7 @@ const actions = {
       })
       .catch(() => {});
   },
+
   getPostReportReasons({ commit }, { type }) {
     return HomeApi.getPostReportReasons({ type })
       .then(response => {
@@ -216,6 +157,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  actions,
-  mutations
+  actions: { ...actions, ...PostComments.actions },
+  mutations: { ...mutations, ...PostComments.mutations }
 };
