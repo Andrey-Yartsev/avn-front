@@ -34,7 +34,7 @@ const actions = {
   },
 
   extendUser({ state, dispatch }, user) {
-    dispatch("setUser", Object.assign({}, state.user, user));
+    dispatch("setUser", { ...state.user, ...user });
   },
 
   login({ commit, dispatch }, data) {

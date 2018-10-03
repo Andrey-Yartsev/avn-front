@@ -1,6 +1,7 @@
 "use strict";
 
 import UserApi from "@/api/user";
+import home from "./profile/home.js";
 
 const state = {
   loading: false,
@@ -48,7 +49,7 @@ const actions = {
       });
   },
   extend({ rootState, dispatch }, data) {
-    dispatch("update", Object.assign({}, rootState.auth.user, data));
+    dispatch("update", { ...rootState.auth.user, ...data });
   },
   setFetchLoading({ commit }, flag) {
     commit("setFetchLoading", flag);
@@ -74,5 +75,8 @@ export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    home
+  }
 };
