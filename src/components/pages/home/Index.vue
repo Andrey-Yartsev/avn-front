@@ -7,7 +7,7 @@
                 <div class="content-col">
                     <div class="rounded-container shadow-block no-padding">
                         <AddPost></AddPost>
-                        <CollectionView></CollectionView>
+                        <CollectionView :posts="posts"/>
                     </div>
                 </div>
                 <div class="aside-col aside-col_with-footer">
@@ -45,6 +45,11 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScrollHandler, true);
+  },
+  computed: {
+    posts() {
+      return this.$store.state.home.posts;
+    }
   },
   methods: {
     onScrollHandler: function() {

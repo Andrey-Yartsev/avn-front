@@ -14,8 +14,10 @@ import SignUpPage from "./components/pages/noAuth/SignUp";
 import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
+import ProfilePage from "./components/pages/profile/Index";
 
-import Auth from "@/auth.js";
+import Auth from "./auth";
+import Profile from "./profile";
 
 Vue.use(Router);
 
@@ -100,6 +102,11 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: SettingsSecurityPage
+  },
+  {
+    beforeEnter: Profile.init,
+    path: "*",
+    component: ProfilePage
   }
 ];
 
