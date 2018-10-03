@@ -21,6 +21,19 @@
     }
   }
 
+  &.guest {
+
+    .header-logo {
+      margin-left: 0;
+      margin-right: auto;
+      display: flex;
+    }
+
+    .login {
+      filter: none;
+    }
+  }
+
   .scroll-top & {
     @include media-breakpoint-down($desktop-breakpoint) {
       top: -44px;
@@ -82,6 +95,8 @@
   }
   .login,
   .register {
+    position: relative;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 0;
       box-shadow: none;
@@ -90,7 +105,6 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      width: 90px;
       margin-left: 15px;
     }
 
@@ -102,6 +116,30 @@
         color: $secondary-color;
       }
     }
+  }
+
+  .login {
+    padding: 3px 32px 3px 18px;
+    filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 90px;
+      padding: 6px 32px 6px 13px;
+    }
+
+    &:after {
+      content: "\E608";
+      @include icon-font;
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+    }
+
+  }
+
+  .register {
   }
 
   .header-search {

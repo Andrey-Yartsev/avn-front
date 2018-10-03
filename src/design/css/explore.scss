@@ -19,16 +19,6 @@
     }
   }
 
-  .guest {
-    .header-logo {
-      margin-left: 0;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: flex;
-      }
-    }
-  }
-
   .header-search {
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;

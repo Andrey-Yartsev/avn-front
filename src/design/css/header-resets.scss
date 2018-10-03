@@ -218,6 +218,33 @@ body {
     .header-avatar {
       box-shadow: none;
     }
+
+    &.guest {
+
+      .header-logo {
+        filter: none;
+        margin-left: 0;
+        margin-right: auto;
+
+        img,
+        svg {
+          display: block;
+
+          &.white-logo {
+            display: none;
+          }
+        }
+      }
+
+      .register {
+        color: $primary-color;
+      }
+
+      .login {
+        color: $secondary-color;
+        box-shadow: 0 0 0 2px $secondary-color inset;
+      }
+    }
   }
 }
 
