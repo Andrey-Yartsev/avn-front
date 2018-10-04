@@ -20,7 +20,7 @@ import Sidebar from "./components/Sidebar";
 import Toast from "./components/common/Toast";
 import ColorScheme from "@/mixins/colorScheme";
 
-import PostReportModal from "@/components/pages/post/ReportModal/Index";
+import PostReportModal from "@/components/pages/post/reportModal/Index";
 
 export default {
   components: {

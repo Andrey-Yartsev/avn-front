@@ -16,9 +16,15 @@ export default {
   data: () => ({
     message: ""
   }),
+  props: {
+    sendNewComment: {
+      type: Function,
+      required: true
+    }
+  },
   methods: {
     sendComment() {
-      this.$emit("postAddComment", this.message);
+      this.sendNewComment(this.message);
       this.message = "";
     }
   }

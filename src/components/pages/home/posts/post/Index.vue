@@ -15,17 +15,17 @@
               v-on:postLike="likePost"
             ></Actions>
         </div>
-        <AddComment :class="{hidden: !showAddCommentForm}" v-on:postAddComment="sendNewComment"></AddComment>
+        <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
         <CommentsList :comments="item.comments || []" :shownCommentsCount="item.shownCommentsCount"></CommentsList>
     </div>
 </template>
 
 <script>
-import AddComment from "./comments/AddComment";
-import CommentsList from "./comments/CommentsList";
-import Header from "@/components/pages/post/Header/Index";
-import Media from "@/components/pages/post/Media/Index";
-import Actions from "@/components/pages/post/Actions/Index";
+import AddComment from "@/components/pages/post/addNewComment/Index";
+import CommentsList from "@/components/pages/post/commentsList/Index";
+import Header from "@/components/pages/post/header/Index";
+import Media from "@/components/pages/post/media/Index";
+import Actions from "@/components/pages/post/actions/Index";
 
 export default {
   name: "Post",

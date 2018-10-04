@@ -138,6 +138,7 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
+
   getPostComments({ commit }, { postId }) {
     commit("postCommentsRequest", { postId });
     return PostApi.getPostComments({ postId })
