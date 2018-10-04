@@ -8,6 +8,7 @@
 			</main>
 			<Sidebar v-if="user"/>
 			<Toast v-if="showToast" @hide="showToast = false" />
+
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
 		</template>
 	</div>

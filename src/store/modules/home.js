@@ -1,7 +1,7 @@
 "use strict";
 
 import HomeApi from "@/api/home";
-import PostComments from "../mixins/postComments";
+import PostComments from "../mixins/posts";
 
 const state = {
   loading: false,
@@ -47,30 +47,8 @@ const mutations = {
     state.loading = true;
   },
 
-  ["postLikeSuccess"](state, { postId, isFavorite, favoritesCount }) {
-    state.posts = state.posts.map(post => {
-      if (postId === post.id) {
-        return {
-          ...post,
-          isFavorite,
-          favoritesCount
-        };
-      }
-
-      return post;
-    });
-  },
-
-  ["deletePost"](state, data) {
-    state.posts = state.posts.filter(post => data.postId !== post.id);
-  },
-
   ["getPostReportReasonsSuccess"](state, data) {
     state.postReportReasons = data;
-  },
-
-  ["commentsRequestFail"](/* state, err */) {
-    // TODO;
   }
 };
 
@@ -94,51 +72,6 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
-  },
-
-  likePost({ commit }, { postId, addLike }) {
-    return HomeApi.likePost({ postId, addLike })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function({ isFavorite, favoritesCount }) {
-            commit("postLikeSuccess", {
-              postId,
-              isFavorite,
-              favoritesCount
-            });
-          });
-        }
-      })
-      .catch(() => {});
-  },
-
-  sendPostComment({ commit }, { postId, text }) {
-    return HomeApi.sendPostComment({ postId, text })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(comment) {
-            commit("postSendCommentsRequestSuccess", {
-              postId,
-              comment
-            });
-          });
-        }
-      })
-      .catch(err => {
-        commit("sendPostCommentFail", err);
-      });
-  },
-
-  deletePost({ commit }, { postId }) {
-    return HomeApi.deletePost({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          commit("deletePost", {
-            postId
-          });
-        }
-      })
-      .catch(() => {});
   },
 
   getPostReportReasons({ commit }, { type }) {
