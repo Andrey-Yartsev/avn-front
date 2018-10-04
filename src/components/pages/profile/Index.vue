@@ -185,10 +185,13 @@
               <span>Nothing here yet</span>
               <button type="button" class="make-post-btn feed">Create new post</button>
             </p>
-            <PostCollection
-              :posts="posts" 
-              store="profile/home"
-            />
+            <div class="posts-container">
+              <PostCollection
+                :class="'rounded-container'"
+                :posts="posts" 
+                store="profile/home"
+              />
+            </div>
           </div>
         </div>
       </div>

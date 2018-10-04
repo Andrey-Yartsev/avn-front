@@ -1,18 +1,16 @@
 <template>
-  <div class="feed">
-    <div class="postCollectionView">
-      <div class="posts">
-        <Post
-          v-for="post in posts"
-          v-bind:post="post"
-          :key="post.id"
-          :store="store"
-        ></Post>
-      </div>
-      <div class="no-results-search">
-        <div class="no-results-search__message">
-          <span class="no-results-search__text">Nothing found for</span> <span class="searchAllTag">""</span>
-        </div>
+  <div class="postCollectionView">
+    <div class="posts">
+      <Post
+        v-for="post in posts"
+        v-bind:post="post"
+        :key="post.id"
+        :store="store"
+      ></Post>
+    </div>
+    <div class="no-results-search">
+      <div class="no-results-search__message">
+        <span class="no-results-search__text">Nothing found for</span> <span class="searchAllTag">""</span>
       </div>
     </div>
   </div>

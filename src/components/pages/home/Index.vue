@@ -7,10 +7,12 @@
                 <div class="content-col">
                     <div class="rounded-container shadow-block no-padding">
                         <AddPost></AddPost>
-                        <PostCollection
-                          :posts="posts"
-                          store="home"
-                        />
+                        <div class="feed">
+                          <PostCollection
+                            :posts="posts"
+                            store="home"
+                          />
+                        </div>
                     </div>
                 </div>
                 <div class="aside-col aside-col_with-footer">
