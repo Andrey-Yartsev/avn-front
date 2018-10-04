@@ -370,25 +370,6 @@
   padding-bottom: 12px;
 }
 
-.profile-name {
-  display: none;
-  padding: 8px 10px 10px 110px;
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: block;
-    min-height: 54px;
-  }
-
-  &__main {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    margin-bottom: 6px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 5px;
-    }
-  }
-}
 .profile-wrapper {
   .aside-col.white-bg-block {
     position: relative;
@@ -407,6 +388,30 @@
 }
 
 .settings-aside {
+
+  .profile-name {
+    display: none;
+    padding: 8px 10px 10px 110px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: block;
+      min-height: 54px;
+      padding: 0;
+    }
+
+    &__main {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      margin-bottom: 6px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+
   .profile-identifier {
     margin: 8px 10px 10px 110px;
   }

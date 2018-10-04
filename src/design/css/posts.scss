@@ -189,6 +189,12 @@
     }
     &-item {
       background: #fff;
+      text-align: center;
+
+      .postLink {
+        display: inline-block;
+        position: relative;
+      }
     }
     .gif-player {
       position: relative;
@@ -503,6 +509,38 @@
   .date {
     @include media-breakpoint-up($desktop-breakpoint) {
       white-space: nowrap;
+    }
+  }
+}
+
+.video-placeholder {
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+
+    &:after {
+     opacity: 1;
+    }
+  }
+
+  &:after {
+    content: "\E61D";
+    @include icon-font;
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    color: $white;
+    font-size: 40px;
+    width: 40px;
+    line-height: 40px;
+    opacity: .7;
+    transition: opacity .3s;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 60px;
+      width: 60px;
+      line-height: 60px;
     }
   }
 }

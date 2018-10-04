@@ -2,10 +2,26 @@
 
 body {
 
+  &.header-scrolled {
+
+    #site_header.guest {
+
+      .header_container {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          top: -44px;
+        }
+      }
+    }
+  }
+
   #site_header {
 
     &:not(.guest) {
-      display: none;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -118,7 +134,19 @@ body {
     + #content {
 
       .sticky-header-controls {
-        display: none;
+
+        .header-return-btn,
+        .more-functions{
+          display: none;
+        }
+
+        .profile-name__header {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            padding-left: 15px;
+            padding-right: 15px;
+          }
+        }
       }
     }
 

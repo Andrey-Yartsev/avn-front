@@ -75,6 +75,29 @@
     display: block;
     width: 100%;
     height: 100%;
+
+    &.video-post {
+      position: relative;
+
+      &:after {
+        content: "\E635";
+        @include icon-font;
+        opacity: .7;
+        top: 6px;
+        right: 6px;
+        font-size: 18px;
+        line-height: 18px;
+        position: absolute;
+        color: $white;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          top: 15px;
+          right: 15px;
+          font-size: 24px;
+          line-height: 24px;
+        }
+      }
+    }
   }
   img {
     display: block;
