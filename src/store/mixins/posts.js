@@ -1,10 +1,10 @@
-import HomeApi from "@/api/home";
+import PostApi from "@/api/post";
 
 export default {
   actions: {
     getPostComments({ commit }, { postId }) {
       commit("postCommentsRequest", { postId });
-      return HomeApi.getPostComments({ postId })
+      return PostApi.getPostComments({ postId })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(list) {
@@ -21,7 +21,7 @@ export default {
     },
 
     sendPostComment({ commit }, { postId, text }) {
-      return HomeApi.sendPostComment({ postId, text })
+      return PostApi.sendPostComment({ postId, text })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(comment) {
@@ -38,7 +38,7 @@ export default {
     },
 
     likePost({ commit }, { postId, addLike }) {
-      return HomeApi.likePost({ postId, addLike })
+      return PostApi.likePost({ postId, addLike })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function({ isFavorite, favoritesCount }) {
@@ -54,7 +54,7 @@ export default {
     },
 
     deletePost({ commit }, { postId }) {
-      return HomeApi.deletePost({ postId })
+      return PostApi.deletePost({ postId })
         .then(response => {
           if (response.status === 200) {
             commit("deletePost", {

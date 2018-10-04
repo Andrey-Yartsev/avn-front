@@ -1,5 +1,5 @@
 <template>
-  <div class="post-header" :id="id">
+  <div class="post-header">
     <router-link class="avatar" :to="'/' + user.username">
       <img :src="user.avatar"/>
     </router-link>
@@ -11,12 +11,12 @@
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
     <span class="post-dropdown-menu-btn" v-on:click="isShowDropdown = !isShowDropdown"></span>
-    <PostDropdown
+    <Dropdown
       v-bind:class="{ hidden: !isShowDropdown }"
-      :postId="id"
+      :postId="postId"
       :userId="user.id"
       :isProfilePost="isProfilePost"
-    ></PostDropdown>
+    ></Dropdown>
   </div>
 </template>
 

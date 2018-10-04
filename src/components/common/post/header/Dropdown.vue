@@ -16,7 +16,7 @@ import userMixin from "@/mixins/user";
 import { execCopy } from "@/helpers/page";
 
 export default {
-  name: "PostDropdawn",
+  name: "PostDropdown",
   mixins: [userMixin],
   data: () => ({
     copied: false
