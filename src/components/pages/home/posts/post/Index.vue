@@ -45,6 +45,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    isProfilePost: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -52,7 +56,15 @@ export default {
       const { id, commentsCount } = this.item;
 
       if (commentsCount) {
-        this.$store.dispatch("home/getPostComments", { postId: id });
+        if (this.isProfilePost) {
+          this.$store.dispatch("profile/home/getPostComments", {
+            postId: id
+          });
+        } else {
+          this.$store.dispatch("home/getPostComments", {
+            postId: id
+          });
+        }
       }
     },
     sendNewComment(msg) {
