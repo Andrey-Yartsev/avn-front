@@ -1,4 +1,4 @@
-import HomeApi from "@/api/home";
+import HomeApi from "@/api/post";
 
 export default {
   mutations: {
