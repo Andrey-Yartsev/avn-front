@@ -221,7 +221,22 @@ export default {
     }
   },
 
+  watch: {
+    username() {
+      this.init();
+    }
+  },
+
   methods: {
+    init() {
+      this.$store.commit("profile/home/resetPageState");
+      this.$store.commit("profile/home/resetPosts");
+      this.$store
+        .dispatch("profile/home/fetchProfile", this.username)
+        .then(() => {
+          this.$store.dispatch("profile/home/getPosts", this.profile.id);
+        });
+    },
     follow() {
       if (this.user) {
         this.$store.dispatch("profile/home/follow", this.profile.id);
@@ -236,8 +251,7 @@ export default {
   },
 
   created() {
-    this.$store.commit("profile/home/resetPosts");
-    this.$store.dispatch("profile/home/getPosts", this.profile.id);
+    this.init();
   }
 };
 </script>

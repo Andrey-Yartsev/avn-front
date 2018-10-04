@@ -51,30 +51,29 @@ export default {
       default: false
     }
   },
+  computed: {
+    actionPrefix() {
+      return this.isProfilePost ? "profile/home" : "home";
+    }
+  },
   methods: {
     getComments() {
       const { id, commentsCount } = this.item;
 
       if (commentsCount) {
-        if (this.isProfilePost) {
-          this.$store.dispatch("profile/home/getPostComments", {
-            postId: id
-          });
-        } else {
-          this.$store.dispatch("home/getPostComments", {
-            postId: id
-          });
-        }
+        this.$store.dispatch(this.actionPrefix + "/getPostComments", {
+          postId: id
+        });
       }
     },
     sendNewComment(msg) {
-      this.$store.dispatch("home/sendPostComment", {
+      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         postId: this.item.id,
         text: msg
       });
     },
     likePost() {
-      this.$store.dispatch("home/likePost", {
+      this.$store.dispatch(this.actionPrefix + "/likePost", {
         postId: this.item.id,
         addLike: !this.item.isFavorite
       });

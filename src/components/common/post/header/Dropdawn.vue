@@ -25,6 +25,9 @@ export default {
     href() {
       const { protocol, hostname } = window.location;
       return `${protocol}//${hostname}/post/${this.postId}`;
+    },
+    actionPrefix() {
+      return this.isProfilePost ? "profile/home" : "home";
     }
   },
   props: {
@@ -35,6 +38,10 @@ export default {
     postId: {
       type: Number,
       required: true
+    },
+    isProfilePost: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

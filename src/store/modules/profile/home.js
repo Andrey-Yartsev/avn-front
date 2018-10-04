@@ -2,7 +2,7 @@
 
 import UserApi from "@/api/user";
 import SubscriptionsApi from "@/api/subscriptions";
-import PostComments from "../../mixins/postComments";
+import PostComments from "../../mixins/posts";
 
 const initState = {
   loading: false,
@@ -20,6 +20,12 @@ const initState = {
 const state = Object.assign({}, initState);
 
 const mutations = {
+  resetPageState(state) {
+    for (let k of Object.keys(initState)) {
+      state[k] = initState[k];
+    }
+  },
+
   resetPosts(state) {
     state.posts = [];
   },

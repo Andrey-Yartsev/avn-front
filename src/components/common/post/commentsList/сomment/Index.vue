@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment-body">
-            <router-link :to="comment.author.publicUrl" class="comment-author-name name">{{ comment.author.username }}</router-link>
+            <router-link :to="'/' + comment.author.username" class="comment-author-name name">{{ comment.author.username }}</router-link>
             <div class="comment-text">{{ comment.text }}</div>
         </div>
     </div>

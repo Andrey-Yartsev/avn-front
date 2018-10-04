@@ -4,7 +4,8 @@ const state = {
   postReport: {
     show: false,
     data: {}
-  }
+  },
+  addPost: { show: false }
 };
 
 const mutations = {
