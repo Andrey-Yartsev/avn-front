@@ -2,6 +2,7 @@
 
 import UserApi from "@/api/user";
 import SubscriptionsApi from "@/api/subscriptions";
+import PostComments from "../../mixins/postComments";
 
 const initState = {
   loading: false,
@@ -16,12 +17,12 @@ const initState = {
   marker: ""
 };
 
-const state = { ...initState };
+const state = Object.assign({}, initState);
 
 const mutations = {
-  // resetPageState(state) {
-  //   state = { ...initState };
-  // },
+  resetPosts(state) {
+    state.posts = [];
+  },
 
   fetchProfile(state) {
     state.profileLoading = true;
@@ -35,8 +36,6 @@ const mutations = {
     state.profileLoading = false;
     state.profileError = error;
   },
-
-  // follow() {},
 
   postsRequestSuccess(state, { list: posts, marker }) {
     state.posts = [...state.posts, ...posts];
@@ -66,6 +65,7 @@ const actions = {
   },
 
   fetchProfile({ commit }, username) {
+    commit("resetPageState");
     return new Promise((accept, reject) => {
       UserApi.fetchProfile(username).then(async response => {
         if (response.status === 200) {
@@ -81,11 +81,11 @@ const actions = {
     });
   },
 
-  getPosts({ commit }) {
+  getPosts({ commit }, userId) {
     const { limit, offset, marker } = state;
     commit("postsRequest");
 
-    return UserApi.getPosts({ limit, offset, marker })
+    return UserApi.getPosts({ userId, limit, offset, marker })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -134,6 +134,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  actions,
-  mutations
+  actions: { ...actions, ...PostComments.actions },
+  mutations: { ...mutations, ...PostComments.mutations }
 };

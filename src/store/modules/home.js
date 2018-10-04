@@ -1,7 +1,7 @@
 "use strict";
 
 // import BrowserStore from "store";
-import HomeApi from "@/api/home";
+import PostApi from "@/api/post";
 
 const state = {
   loading: false,
@@ -72,7 +72,11 @@ const mutations = {
         };
       }
 
-      return post;
+      return {
+        ...post,
+        comments: post.comments || [],
+        shownCommentsCount: post.shownCommentsCount || 3
+      };
     });
   },
 
@@ -90,16 +94,16 @@ const mutations = {
     });
   },
 
-  ["postSendCommentsRequestSuccess"](state, data) {
+  ["postSendCommentsRequestSuccess"](state, { postId, comment }) {
     state.posts = state.posts.map(post => {
-      if (data.postId !== post.id) {
+      if (postId !== post.id) {
         return post;
       }
-
       return {
         ...post,
-        comments: [data.comment, ...post.comments],
-        shownCommentsCount: post.shownCommentsCount + 1
+        comments: [...(post.comments || []), comment],
+        shownCommentsCount: post.shownCommentsCount + 1,
+        commentsCount: post.commentsCount + 1
       };
     });
   },
@@ -126,7 +130,7 @@ const actions = {
     const { limit, offset, marker } = state;
     commit("postsRequest");
 
-    return HomeApi.getPosts({ limit, offset, marker })
+    return PostApi.getPosts({ limit, offset, marker })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -138,9 +142,10 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
+
   getPostComments({ commit }, { postId }) {
     commit("postCommentsRequest", { postId });
-    return HomeApi.getPostComments({ postId })
+    return PostApi.getPostComments({ postId })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(list) {
@@ -157,7 +162,7 @@ const actions = {
   },
 
   likePost({ commit }, { postId, addLike }) {
-    return HomeApi.likePost({ postId, addLike })
+    return PostApi.likePost({ postId, addLike })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function({ isFavorite, favoritesCount }) {
@@ -173,7 +178,7 @@ const actions = {
   },
 
   sendPostComment({ commit }, { postId, text }) {
-    return HomeApi.sendPostComment({ postId, text })
+    return PostApi.sendPostComment({ postId, text })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(comment) {
@@ -190,7 +195,7 @@ const actions = {
   },
 
   deletePost({ commit }, { postId }) {
-    return HomeApi.deletePost({ postId })
+    return PostApi.deletePost({ postId })
       .then(response => {
         if (response.status === 200) {
           commit("deletePost", {
@@ -201,7 +206,7 @@ const actions = {
       .catch(() => {});
   },
   getPostReportReasons({ commit }, { type }) {
-    return HomeApi.getPostReportReasons({ type })
+    return PostApi.getPostReportReasons({ type })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {

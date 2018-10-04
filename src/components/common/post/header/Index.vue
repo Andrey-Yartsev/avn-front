@@ -1,35 +1,31 @@
 <template>
-    <div class="post-header" :id="id">
+    <div class="post-header">
         <router-link class="avatar" :to="user.publicUrl">
             <img :src="user.avatar" />
         </router-link>
         <router-link class="name" :to="user.publicUrl">{{ user.username }}</router-link>
-        <template v-if="user.isVerified">
-          <span class="verified-user"></span>
-        </template>
+        <span v-if="user.isVerified" class="verified-user"></span>
         <span class="user-login">
           <router-link :to="user.publicUrl">{{ user.username }}</router-link>
         </span>
-        <span class="post-dropdown-menu-btn" v-on:click="isShowDropdawn = !isShowDropdawn"></span>
-        <PostDropdawn v-bind:class="{ hidden: !isShowDropdawn }" :postId="id" :userId="user.id" ></PostDropdawn>
+        <span class="post-dropdown-menu-btn" @click="isShowDropdawn = !isShowDropdawn"></span>
+        <Dropdawn v-bind:class="{ hidden: !isShowDropdawn }" :postId="postId" :userId="user.id" />
     </div>
 </template>
 
 <script>
-import PostDropdawn from "./PostDropdawn";
+import Dropdawn from "./Dropdawn";
 
 export default {
-  name: "PostHeader",
+  name: "Header",
   components: {
-    PostDropdawn: PostDropdawn
+    Dropdawn: Dropdawn
   },
-  data: function() {
-    return {
-      isShowDropdawn: false
-    };
-  },
+  data: () => ({
+    isShowDropdawn: false
+  }),
   props: {
-    id: {
+    postId: {
       type: Number,
       required: true
     },
