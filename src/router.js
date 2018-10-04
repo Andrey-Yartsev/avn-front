@@ -16,6 +16,7 @@ import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
+import NotFoundPage from "./components/pages/notFound/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -80,6 +81,14 @@ const routes = [
     component: SettingsSecurityPage
   },
   // PUBLIC ZONE
+  {
+    beforeEnter: Auth.dummy,
+    path: "/not-found",
+    component: NotFoundPage,
+    meta: {
+      noAuthHeader: true
+    }
+  },
   {
     beforeEnter: Auth.dummy,
     path: "/post/:postId",
