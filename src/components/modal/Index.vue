@@ -1,10 +1,8 @@
 <template>
-    <div class="popup">
-        <div class="overlay"></div>
-        <div class="popup-container">
-            <slot name="content"></slot>
-        </div>
-    </div>
+  <div class="popup">
+    <div class="overlay"></div>
+    <slot name="content"></slot>
+  </div>
 </template>
 
 <script>

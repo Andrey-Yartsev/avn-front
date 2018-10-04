@@ -9,6 +9,7 @@
 			<Sidebar v-if="user"/>
 			<Toast v-if="showToast" @hide="showToast = false" />
 
+      <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
 		</template>
 	</div>
@@ -21,6 +22,7 @@ import Sidebar from "./components/Sidebar";
 import Toast from "./components/common/Toast";
 import ColorScheme from "@/mixins/colorScheme";
 
+import PostModal from "@/components/common/postModal/Index";
 import PostReportModal from "@/components/common/post/reportModal/Index";
 
 export default {
@@ -29,7 +31,8 @@ export default {
     Header,
     Sidebar,
     Toast,
-    PostReportModal
+    PostReportModal,
+    PostModal
   },
   mixins: [ColorScheme],
   data() {

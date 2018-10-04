@@ -7,7 +7,12 @@
                 <div class="content-col">
                     <div class="rounded-container shadow-block no-padding">
                         <AddPost></AddPost>
-                        <CollectionView :posts="posts"/>
+                        <div class="feed">
+                          <PostCollection
+                            :posts="posts"
+                            store="home"
+                          />
+                        </div>
                     </div>
                 </div>
                 <div class="aside-col aside-col_with-footer">
@@ -20,7 +25,7 @@
 </template>
 
 <script>
-import CollectionView from "./posts/CollectionView";
+import PostCollection from "@/components/common/postCollection/Index";
 import MobileHeader from "../../header/Mobile";
 import Footer from "../../footer/Index";
 import AddPost from "../../addPost/Index";
@@ -28,13 +33,13 @@ import StoriesWrapper from "../../aside/StoriesWrapper";
 import { getBottom } from "../../../helpers/page";
 
 export default {
-  name: "Home",
+  name: "HomePage",
   components: {
-    MobileHeader: MobileHeader,
-    Footer: Footer,
-    StoriesWrapper: StoriesWrapper,
-    AddPost: AddPost,
-    CollectionView: CollectionView
+    MobileHeader,
+    Footer,
+    StoriesWrapper,
+    AddPost,
+    PostCollection
   },
   created() {
     this.$store.dispatch("home/resetPage");
