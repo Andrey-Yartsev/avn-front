@@ -54,9 +54,9 @@
 <script>
 import dateFns from "date-fns";
 import userMixin from "@/mixins/user";
-import Header from "./header/Index";
-import Media from "./media/Index";
-import Actions from "./actions/Index";
+import Header from "@/components/common/post/header/Index";
+import Actions from "@/components/common/post/actions/Index";
+import Media from "@/components/common/post/media/Index";
 
 export default {
   name: "PostPage",

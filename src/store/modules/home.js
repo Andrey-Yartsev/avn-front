@@ -72,7 +72,11 @@ const mutations = {
         };
       }
 
-      return post;
+      return {
+        ...post,
+        comments: post.comments || [],
+        shownCommentsCount: post.shownCommentsCount || 3
+      };
     });
   },
 
@@ -90,16 +94,16 @@ const mutations = {
     });
   },
 
-  ["postSendCommentsRequestSuccess"](state, data) {
+  ["postSendCommentsRequestSuccess"](state, { postId, comment }) {
     state.posts = state.posts.map(post => {
-      if (data.postId !== post.id) {
+      if (postId !== post.id) {
         return post;
       }
-
       return {
         ...post,
-        comments: [data.comment, ...post.comments],
-        shownCommentsCount: post.shownCommentsCount + 1
+        comments: [...(post.comments || []), comment],
+        shownCommentsCount: post.shownCommentsCount + 1,
+        commentsCount: post.commentsCount + 1
       };
     });
   },

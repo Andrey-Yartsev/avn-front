@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import AddComment from "@/components/pages/post/addNewComment/Index";
-import CommentsList from "@/components/pages/post/commentsList/Index";
-import Header from "@/components/pages/post/header/Index";
-import Media from "@/components/pages/post/media/Index";
-import Actions from "@/components/pages/post/actions/Index";
+import AddComment from "@/components/common/post/addNewComment/Index";
+import CommentsList from "@/components/common/post/commentsList/Index";
+import Header from "@/components/common/post/header/Index";
+import Media from "@/components/common/post/media/Index";
+import Actions from "@/components/common/post/actions/Index";
 
 export default {
   name: "Post",
