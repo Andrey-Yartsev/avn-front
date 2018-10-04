@@ -1,16 +1,20 @@
 <template>
-    <router-link class="postLink" :to="`/post/${media.id}`">
+    <router-link class="postLink" :to="`/post/${postId}`">
        <img :src="media.preview.source">
     </router-link>
 </template>
 
 <script>
 export default {
-  name: "Simple",
+  name: "LinkedPhoto",
   props: {
     media: {
       type: Object,
       required: true
+    },
+    postId: {
+      type: Number,
+      default: undefined
     }
   }
 };

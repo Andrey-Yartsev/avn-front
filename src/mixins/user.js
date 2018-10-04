@@ -6,6 +6,9 @@ export default {
       }
 
       return false;
+    },
+    isAuth: function() {
+      return !!this.$store.state.auth.user;
     }
   }
 };

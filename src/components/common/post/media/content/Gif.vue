@@ -1,5 +1,5 @@
 <template>
-    <router-link class="postLink" :to="`/post/${media.id}`">
+    <router-link class="postLink" :to="`/post/${postId}`">
         <div class="gif-player">
             <img :src="media.preview.source">
         </div>
@@ -13,6 +13,10 @@ export default {
     media: {
       type: Object,
       required: true
+    },
+    postId: {
+      type: Number,
+      default: undefined
     }
   }
 };

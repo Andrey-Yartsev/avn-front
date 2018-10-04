@@ -185,7 +185,7 @@
               <span>Nothing here yet</span>
               <button type="button" class="make-post-btn feed">Create new post</button>
             </p>
-            <CollectionView :posts="posts"/>
+            <CollectionView :posts="posts" :isProfilePosts="true"/>
           </div>
         </div>
       </div>
@@ -221,7 +221,22 @@ export default {
     }
   },
 
+  watch: {
+    username() {
+      this.init();
+    }
+  },
+
   methods: {
+    init() {
+      this.$store.commit("profile/home/resetPageState");
+      this.$store.commit("profile/home/resetPosts");
+      this.$store
+        .dispatch("profile/home/fetchProfile", this.username)
+        .then(() => {
+          this.$store.dispatch("profile/home/getPosts", this.profile.id);
+        });
+    },
     follow() {
       if (this.user) {
         this.$store.dispatch("profile/home/follow", this.profile.id);
@@ -236,9 +251,7 @@ export default {
   },
 
   created() {
-    // this.$store.dispatch("profile/home/fetchProfile", this.username);
-    // this.$store.dispatch("profile/home/resetPage");
-    // this.$store.dispatch("profile/home/getPosts");
+    this.init();
   }
 };
 </script>

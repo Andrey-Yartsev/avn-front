@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Comment from "./Comment";
+import Comment from "./сomment/Index";
 
 export default {
   name: "CommentsList",

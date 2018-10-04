@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown-menu">
-       <template v-if="!isOwner(userId)">
+       <template v-if="!isOwner(userId) && isAuth()">
           <button class="report" type="button" @click="reportUser">Report post</button>
         </template>
         <button v-if="copied" class="btn-copy-link copied" type="button">Copied!</button>
@@ -16,7 +16,7 @@ import userMixin from "@/mixins/user";
 import { execCopy } from "@/helpers/page";
 
 export default {
-  name: "PostDropdawn",
+  name: "PostDropdown",
   mixins: [userMixin],
   data: () => ({
     copied: false
@@ -25,6 +25,9 @@ export default {
     href() {
       const { protocol, hostname } = window.location;
       return `${protocol}//${hostname}/post/${this.postId}`;
+    },
+    actionPrefix() {
+      return this.isProfilePost ? "profile/home" : "home";
     }
   },
   props: {
@@ -35,6 +38,10 @@ export default {
     postId: {
       type: Number,
       required: true
+    },
+    isProfilePost: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

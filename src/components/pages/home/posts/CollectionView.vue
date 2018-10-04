@@ -2,7 +2,12 @@
   <div class="feed">
     <div class="postCollectionView">
       <div class="posts">
-        <Post v-for="post in posts" v-bind:item="post" :key="post.id"></Post>
+        <Post
+          v-for="post in posts"
+          v-bind:item="post"
+          :key="post.id"
+          :isProfilePost="isProfilePosts"
+        ></Post>
       </div>
       <div class="no-results-search">
         <div class="no-results-search__message">
@@ -25,6 +30,10 @@ export default {
     posts: {
       type: Array,
       required: true
+    },
+    isProfilePosts: {
+      type: Boolean,
+      default: false
     }
   }
 };

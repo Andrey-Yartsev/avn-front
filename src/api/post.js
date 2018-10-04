@@ -1,4 +1,5 @@
 import tokenRequest from "@/utils/tokenRequest";
+import anyRequest from "@/utils/anyRequest";
 
 export default {
   getPosts({ offset, limit, marker }) {
@@ -9,6 +10,11 @@ export default {
         limit,
         marker
       }
+    });
+  },
+  getPost({ postId }) {
+    return anyRequest(`posts/${postId}`, {
+      method: "GET"
     });
   },
   getPostComments(data) {
