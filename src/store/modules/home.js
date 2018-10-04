@@ -1,7 +1,7 @@
 "use strict";
 
-// import BrowserStore from "store";
 import PostApi from "@/api/post";
+import PostComments from "../mixins/posts";
 
 const state = {
   loading: false,
@@ -47,77 +47,8 @@ const mutations = {
     state.loading = true;
   },
 
-  ["postLikeSuccess"](state, { postId, isFavorite, favoritesCount }) {
-    state.posts = state.posts.map(post => {
-      if (postId === post.id) {
-        return {
-          ...post,
-          isFavorite,
-          favoritesCount
-        };
-      }
-
-      return post;
-    });
-  },
-
-  ["postCommentsRequest"](state, { postId }) {
-    state.posts = state.posts.map(post => {
-      if (postId === post.id) {
-        return {
-          ...post,
-          comments: post.comments || [],
-          commentsLoading: true,
-          shownCommentsCount: 3
-        };
-      }
-
-      return {
-        ...post,
-        comments: post.comments || [],
-        shownCommentsCount: post.shownCommentsCount || 3
-      };
-    });
-  },
-
-  ["postCommentsRequestSuccess"](state, data) {
-    state.posts = state.posts.map(post => {
-      if (data.postId !== post.id) {
-        return post;
-      }
-
-      return {
-        ...post,
-        comments: [...post.comments, ...data.list],
-        commentsLoading: false
-      };
-    });
-  },
-
-  ["postSendCommentsRequestSuccess"](state, { postId, comment }) {
-    state.posts = state.posts.map(post => {
-      if (postId !== post.id) {
-        return post;
-      }
-      return {
-        ...post,
-        comments: [...(post.comments || []), comment],
-        shownCommentsCount: post.shownCommentsCount + 1,
-        commentsCount: post.commentsCount + 1
-      };
-    });
-  },
-
-  ["deletePost"](state, data) {
-    state.posts = state.posts.filter(post => data.postId !== post.id);
-  },
-
   ["getPostReportReasonsSuccess"](state, data) {
     state.postReportReasons = data;
-  },
-
-  ["commentsRequestFail"](/* state, err */) {
-    // TODO;
   }
 };
 
@@ -143,68 +74,6 @@ const actions = {
       });
   },
 
-  getPostComments({ commit }, { postId }) {
-    commit("postCommentsRequest", { postId });
-    return PostApi.getPostComments({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(list) {
-            commit("postCommentsRequestSuccess", {
-              postId,
-              list
-            });
-          });
-        }
-      })
-      .catch(err => {
-        commit("commentsRequestFail", err);
-      });
-  },
-
-  likePost({ commit }, { postId, addLike }) {
-    return PostApi.likePost({ postId, addLike })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function({ isFavorite, favoritesCount }) {
-            commit("postLikeSuccess", {
-              postId,
-              isFavorite,
-              favoritesCount
-            });
-          });
-        }
-      })
-      .catch(() => {});
-  },
-
-  sendPostComment({ commit }, { postId, text }) {
-    return PostApi.sendPostComment({ postId, text })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(comment) {
-            commit("postSendCommentsRequestSuccess", {
-              postId,
-              comment
-            });
-          });
-        }
-      })
-      .catch(err => {
-        commit("sendPostCommentFail", err);
-      });
-  },
-
-  deletePost({ commit }, { postId }) {
-    return PostApi.deletePost({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          commit("deletePost", {
-            postId
-          });
-        }
-      })
-      .catch(() => {});
-  },
   getPostReportReasons({ commit }, { type }) {
     return PostApi.getPostReportReasons({ type })
       .then(response => {
@@ -221,6 +90,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  actions,
-  mutations
+  actions: { ...actions, ...PostComments.actions },
+  mutations: { ...mutations, ...PostComments.mutations }
 };

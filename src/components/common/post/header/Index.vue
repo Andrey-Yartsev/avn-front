@@ -1,28 +1,35 @@
 <template>
-    <div class="post-header">
-        <router-link class="avatar" :to="user.publicUrl">
-            <img :src="user.avatar" />
-        </router-link>
-        <router-link class="name" :to="user.publicUrl">{{ user.username }}</router-link>
-        <span v-if="user.isVerified" class="verified-user"></span>
-        <span class="user-login">
-          <router-link :to="user.publicUrl">{{ user.username }}</router-link>
-        </span>
-        <span class="post-dropdown-menu-btn" @click="isShowDropdawn = !isShowDropdawn"></span>
-        <Dropdawn v-bind:class="{ hidden: !isShowDropdawn }" :postId="postId" :userId="user.id" />
-    </div>
+  <div class="post-header">
+    <router-link class="avatar" :to="'/' + user.username">
+      <img :src="user.avatar"/>
+    </router-link>
+    <router-link class="name" :to="'/' + user.username">{{ user.username }}</router-link>
+    <template v-if="user.isVerified">
+      <span class="verified-user"></span>
+    </template>
+    <span class="user-login">
+      <router-link :to="'/' + user.username">{{ user.username }}</router-link>
+    </span>
+    <span class="post-dropdown-menu-btn" v-on:click="isShowDropdown = !isShowDropdown"></span>
+    <Dropdown
+      v-bind:class="{ hidden: !isShowDropdown }"
+      :postId="postId"
+      :userId="user.id"
+      :isProfilePost="isProfilePost"
+    ></Dropdown>
+  </div>
 </template>
 
 <script>
-import Dropdawn from "./Dropdawn";
+import Dropdown from "./Dropdown";
 
 export default {
   name: "Header",
   components: {
-    Dropdawn: Dropdawn
+    Dropdown
   },
   data: () => ({
-    isShowDropdawn: false
+    isShowDropdown: false
   }),
   props: {
     postId: {
@@ -32,6 +39,10 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    isProfilePost: {
+      type: Boolean,
+      default: false
     }
   }
 };
