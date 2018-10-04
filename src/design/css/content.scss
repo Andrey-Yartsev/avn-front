@@ -1,0 +1,19 @@
+
+.main-container {
+  min-height: 100%;
+}
+
+#content {
+
+  .profile-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: calc(100% - 44px);
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-content: stretch;
+      align-items: stretch;
+    }
+  }
+}

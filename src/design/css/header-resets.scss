@@ -259,6 +259,10 @@ body {
       left: 0; right: 0;
       top: 0;
 
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+
       .header-wrapper {
         background-color: transparent;
         box-shadow: none;
@@ -280,7 +284,7 @@ body {
         img,
         svg {
           display: none;
-          
+
           &.white-logo {
             display: block;
           }

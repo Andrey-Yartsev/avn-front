@@ -1,19 +1,27 @@
 @import "components/imports";
 @import "components/buttons";
 
-.profile-header,
-.myProfile .profile-images,
-.myProfile .white-bg-block > .bg,
-.myProfile .post-types-tabs,
-.myProfile:before,
-.profile .profile-images,
-.profile .white-bg-block > .bg,
-.profile .post-types-tabs,
-.profile:before {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    display: none;
+body {
+
+  &:not(.profile-page) {
+
+    .profile-header,
+    .myProfile .profile-images,
+    .myProfile .white-bg-block > .bg,
+    .myProfile .post-types-tabs,
+    .myProfile:before,
+    .profile .profile-images,
+    .profile .white-bg-block > .bg,
+    .profile .post-types-tabs,
+    .profile:before {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 }
+
 .myProfile .header-return-btn,
 .profile .header-return-btn {
   color: $primary-color;
