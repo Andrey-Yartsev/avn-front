@@ -4,9 +4,9 @@
       <div class="posts">
         <Post
           v-for="post in posts"
-          v-bind:item="post"
+          v-bind:post="post"
           :key="post.id"
-          :isProfilePost="isProfilePosts"
+          :store="store"
         ></Post>
       </div>
       <div class="no-results-search">
@@ -22,7 +22,7 @@
 import Post from "./post/Index";
 
 export default {
-  name: "CollectionView",
+  name: "PostCollection",
   components: {
     Post: Post
   },
@@ -31,9 +31,9 @@ export default {
       type: Array,
       required: true
     },
-    isProfilePosts: {
-      type: Boolean,
-      default: false
+    store: {
+      type: String,
+      required: true
     }
   }
 };

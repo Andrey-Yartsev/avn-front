@@ -5,6 +5,10 @@ const state = {
     show: false,
     data: {}
   },
+  post: {
+    show: false,
+    data: {}
+  },
   addPost: { show: false }
 };
 

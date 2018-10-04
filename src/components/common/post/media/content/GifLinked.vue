@@ -1,6 +1,6 @@
 <template>
     <router-link class="postLink" :to="`/post/${postId}`">
-        <div class="gif-player">
+        <div class="gif-player" @click.prevent.stop="openModal">
             <img :src="media.preview.source">
         </div>
     </router-link>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "Gif",
+  name: "GifLinked",
   props: {
     media: {
       type: Object,
@@ -16,6 +16,10 @@ export default {
     },
     postId: {
       type: Number,
+      default: undefined
+    },
+    openModal: {
+      type: Function,
       default: undefined
     }
   }

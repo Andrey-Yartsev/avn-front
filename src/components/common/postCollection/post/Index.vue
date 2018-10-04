@@ -1,22 +1,23 @@
 <template>
     <div class="post">
         <div class="post-details">
-            <Header :postId="item.id" :user="item.author" />
-            <p class="text">{{ item.text }}</p>
+            <Header :postId="post.id" :user="post.author" />
+            <p class="text">{{ post.text }}</p>
             <Media
-              :medias="item.media"
-              :showSlider="item.canViewMedia"
+              :medias="post.media"
+              :showSlider="post.canViewMedia"
               :shouldHasLink="true"
-              :postId="item.id"
+              :postId="post.id"
+              :openModal="openModal"
             />
             <Actions 
-              :post="item" 
+              :post="post" 
               v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
               v-on:postLike="likePost"
             ></Actions>
         </div>
         <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
-        <CommentsList :comments="item.comments || []" :shownCommentsCount="item.shownCommentsCount"></CommentsList>
+        <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCount"></CommentsList>
     </div>
 </template>
 
@@ -42,23 +43,33 @@ export default {
     Media
   },
   props: {
-    item: {
+    post: {
       type: Object,
       required: true
     },
-    isProfilePost: {
-      type: Boolean,
-      default: false
+    store: {
+      type: String,
+      required: true
     }
   },
   computed: {
     actionPrefix() {
-      return this.isProfilePost ? "profile/home" : "home";
+      return this.store;
     }
   },
   methods: {
+    openModal() {
+      window.history.replaceState({}, "post", `/post/${this.post.id}`);
+      this.$store.dispatch("modal/show", {
+        name: "post",
+        data: {
+          postId: this.post.id,
+          store: this.store
+        }
+      });
+    },
     getComments() {
-      const { id, commentsCount } = this.item;
+      const { id, commentsCount } = this.post;
 
       if (commentsCount) {
         this.$store.dispatch(this.actionPrefix + "/getPostComments", {
@@ -68,14 +79,14 @@ export default {
     },
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
-        postId: this.item.id,
+        postId: this.post.id,
         text: msg
       });
     },
     likePost() {
       this.$store.dispatch(this.actionPrefix + "/likePost", {
-        postId: this.item.id,
-        addLike: !this.item.isFavorite
+        postId: this.post.id,
+        addLike: !this.post.isFavorite
       });
     }
   },

@@ -1,6 +1,6 @@
 <template>
     <router-link class="postLink" :to="`/post/${postId}`">
-       <img :src="media.preview.source">
+       <img :src="media.preview.source" @click.prevent.stop="openModal">
     </router-link>
 </template>
 
@@ -14,6 +14,10 @@ export default {
     },
     postId: {
       type: Number,
+      default: undefined
+    },
+    openModal: {
+      type: Function,
       default: undefined
     }
   }

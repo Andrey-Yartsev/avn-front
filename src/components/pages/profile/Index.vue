@@ -185,7 +185,10 @@
               <span>Nothing here yet</span>
               <button type="button" class="make-post-btn feed">Create new post</button>
             </p>
-            <CollectionView :posts="posts" :isProfilePosts="true"/>
+            <PostCollection
+              :posts="posts" 
+              store="profile/home"
+            />
           </div>
         </div>
       </div>
@@ -194,13 +197,13 @@
 </template>
 
 <script>
-import CollectionView from "@/components/pages/home/posts/CollectionView";
+import PostCollection from "@/components/common/postCollection/Index";
 
 export default {
   name: "ProfileHome",
 
   components: {
-    CollectionView
+    PostCollection
   },
 
   computed: {
