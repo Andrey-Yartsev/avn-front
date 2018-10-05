@@ -1,6 +1,19 @@
 <template>
-  <div v-if="!profile">404</div>
+  <div v-if="!profile">Loading</div>
   <div v-else class="myProfile">
+    <router-link class="addPost-btn-float" href="/addPost"/>
+    <div class="sticky-header-controls">
+      <a class="header-return-btn"></a>
+      <div class="profile-name__header">
+        <span class="name">
+          {{ profile.name }}
+        </span>
+        <span class="verified-user"></span>
+        <span class="user-login">
+          <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
+        </span>
+      </div>
+    </div>
     <div class="white-bg-block">
       <div class="bg">
         <div class="bg-wrap"></div>
