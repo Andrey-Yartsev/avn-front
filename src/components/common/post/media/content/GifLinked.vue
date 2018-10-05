@@ -2,6 +2,7 @@
     <router-link class="postLink" :to="`/post/${postId}`">
         <div class="gif-player" @click.prevent.stop="openModal">
             <img :src="media.preview.source">
+            <img class="gif-img" :src="media.src.source">
         </div>
     </router-link>
 </template>

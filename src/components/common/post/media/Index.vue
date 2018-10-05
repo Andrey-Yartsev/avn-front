@@ -37,6 +37,8 @@
 <script>
 import Locked from "./content/Locked";
 import Video from "./content/Video";
+import VideoLinked from "./content/VideoLinked";
+import Gif from "./content/GifLinked";
 import GifLinked from "./content/GifLinked";
 import Photo from "./content/Photo";
 import PhotoLinked from "./content/PhotoLinked";
@@ -46,6 +48,8 @@ export default {
   components: {
     Locked,
     Video,
+    VideoLinked,
+    Gif,
     GifLinked,
     Photo,
     PhotoLinked
@@ -77,14 +81,14 @@ export default {
   },
   methods: {
     getMediaViewType({ canView, type }) {
+      const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
+      
       if (!canView) return "Locked";
-      if (type === "video") return "Video";
-      if (type === "gif" && this.shouldHasLink) return "GifLinked";
-      if (type === "gif" && !this.shouldHasLink) return "Photo";
-      if (type === "photo" && this.shouldHasLink) return "PhotoLinked";
-      if (type === "photo" && !this.shouldHasLink) return "Photo";
-
-      return "Image";
+      if (type === "gif") return `Gif${LinkedPrefix}`;
+      if (type === "photo") return `Photo${LinkedPrefix}`;
+      if (type === "video") return `Video${LinkedPrefix}`;
+    
+      throw new Error("Invalid media format");
     }
   }
 };

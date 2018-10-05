@@ -1,12 +1,12 @@
 <template>
-  <div class="postLink">
-    <img :src="media.preview.source">
+  <div src="postLink">
+    <img :src="media.src.source">
   </div>
 </template>
 
 <script>
 export default {
-  name: "Photo",
+  name: "Gif",
   props: {
     media: {
       type: Object,
