@@ -1,5 +1,5 @@
 <template>
-  <Modal>
+  <Modal :onClose="close">
     <template slot="content">
       <div class="popup-container">
         <div class="content">

@@ -10,7 +10,7 @@
                         <div class="feed">
                           <PostCollection
                             :posts="posts"
-                            store="home"
+                            from="home"
                           />
                         </div>
                     </div>

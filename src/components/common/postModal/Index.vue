@@ -1,5 +1,5 @@
 <template>
-  <Modal> 
+  <Modal :onClose="close"> 
     <template slot="content">
       <div class="popup-container post post-popup">
         <div class="previous"></div>
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <button type="button" class="close"></button>
+        <button type="button" class="close" @click="close"></button>
         <div class="next"></div>
       </div>
     </template>
@@ -74,15 +74,18 @@ export default {
   name: "PostModal",
   mixins: [userMixin],
   computed: {
+    backUrl() {
+      return this.$store.state.modal.post.data.backUrl;
+    },
     post() {
-      const { postId, store } = this.$store.state.modal.post.data;
+      const { postId, from } = this.$store.state.modal.post.data;
       let dataSrc;
 
-      if (store === "profile/home") {
+      if (from === "profile/home") {
         dataSrc = this.$store.state.profile.home;
       }
 
-      if (store === "home") {
+      if (from === "home") {
         dataSrc = this.$store.state.home;
       }
 
@@ -113,7 +116,17 @@ export default {
         postId: this.post.id,
         addLike: !this.post.isFavorite
       });
+    },
+    close() {
+      window.history.replaceState({}, "post", this.backUrl);
+
+      this.$store.dispatch("modal/hide", {
+        name: "post"
+      });
     }
+  },
+  created() {
+    window.history.replaceState({}, "post", `/post/${this.post.id}`);
   }
 };
 </script>

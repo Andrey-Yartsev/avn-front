@@ -1,7 +1,7 @@
 <template>
   <div v-if="!profile">Loading</div>
   <div v-else class="myProfile">
-    <router-link class="addPost-btn-float" href="/addPost"/>
+    <router-link class="addPost-btn-float" to="/addPost"/>
     <div class="sticky-header-controls">
       <a class="header-return-btn"></a>
       <div class="profile-name__header">
@@ -202,7 +202,7 @@
               <PostCollection
                 :class="'rounded-container'"
                 :posts="posts" 
-                store="profile/home"
+                from="profile/home"
               />
             </div>
           </div>

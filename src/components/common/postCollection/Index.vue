@@ -5,7 +5,7 @@
         v-for="post in posts"
         v-bind:post="post"
         :key="post.id"
-        :store="store"
+        :from="from"
       ></Post>
     </div>
     <div class="no-results-search">
@@ -29,7 +29,7 @@ export default {
       type: Array,
       required: true
     },
-    store: {
+    from: {
       type: String,
       required: true
     }

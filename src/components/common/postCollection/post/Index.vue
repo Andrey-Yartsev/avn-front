@@ -48,24 +48,24 @@ export default {
       type: Object,
       required: true
     },
-    store: {
+    from: {
       type: String,
       required: true
     }
   },
   computed: {
     actionPrefix() {
-      return this.store;
+      return this.from;
     }
   },
   methods: {
     openModal() {
-      window.history.replaceState({}, "post", `/post/${this.post.id}`);
       this.$store.dispatch("modal/show", {
         name: "post",
         data: {
           postId: this.post.id,
-          store: this.store
+          from: this.from,
+          backUrl: this.$route.path
         }
       });
     },
