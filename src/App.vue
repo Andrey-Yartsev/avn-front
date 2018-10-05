@@ -54,6 +54,9 @@ export default {
   watch: {
     toastShowTrigger() {
       this.showToast = true;
+    },
+    $route() {
+      return this.$store.dispatch("modal/hideAll");
     }
   }
 };
