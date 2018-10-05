@@ -1,25 +1,14 @@
 <template>
-    <router-link class="postLink" :to="`/post/${postId}`">
-       <img :src="media.preview.source" @click.prevent.stop="openModal">
-    </router-link>
+    <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
+       <img :src="media.preview.source" >
+    </a>
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "LinkedPhoto",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    },
-    postId: {
-      type: Number,
-      default: undefined
-    },
-    openModal: {
-      type: Function,
-      default: undefined
-    }
-  }
+  mixins: [PostMediaPropsMixin]
 };
 </script>

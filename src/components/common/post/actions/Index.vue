@@ -6,7 +6,9 @@
           <span class="tips"></span>
         </template>
         <time class="date" :datetime="post.postedAt">
-          <router-link class="postLink" to="`/post/${post.id}`">{{ dateTime }}</router-link>
+          <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
+            {{ dateTime }}
+          </a>
         </time>
     </div>
 </template>
@@ -22,6 +24,10 @@ export default {
     post: {
       type: Object,
       isRequired: true
+    },
+    openModal: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {

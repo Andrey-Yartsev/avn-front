@@ -1,28 +1,17 @@
 <template>
-    <router-link class="postLink" :to="`/post/${postId}`">
-        <div class="gif-player" @click.prevent.stop="openModal">
+    <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
+        <div class="gif-player">
             <img :src="media.preview.source">
             <img class="gif-img" :src="media.src.source">
         </div>
-    </router-link>
+    </a>
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "GifLinked",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    },
-    postId: {
-      type: Number,
-      default: undefined
-    },
-    openModal: {
-      type: Function,
-      default: undefined
-    }
-  }
+  mixins: [PostMediaPropsMixin]
 };
 </script>

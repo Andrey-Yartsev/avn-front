@@ -1,27 +1,16 @@
 <template>
-  <router-link class="postLink" :to="`/post/${postId}`">
+  <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
     <span class="video-placeholder">
-      <img :src="media.thumb.source" @click.prevent.stop="openModal">
+      <img :src="media.thumb.source" >
     </span>
-  </router-link>
+  </a>
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "VideoLinked",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    },
-    postId: {
-      type: Number,
-      default: undefined
-    },
-    openModal: {
-      type: Function,
-      default: undefined
-    }
-  }
+  mixins: [PostMediaPropsMixin]
 };
 </script>

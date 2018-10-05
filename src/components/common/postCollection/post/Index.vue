@@ -14,6 +14,7 @@
               :post="post" 
               v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
               v-on:postLike="likePost"
+              :openModal="openModal"
             ></Actions>
         </div>
         <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>

@@ -82,12 +82,12 @@ export default {
   methods: {
     getMediaViewType({ canView, type }) {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
-      
+
       if (!canView) return "Locked";
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
-    
+
       throw new Error("Invalid media format");
     }
   }

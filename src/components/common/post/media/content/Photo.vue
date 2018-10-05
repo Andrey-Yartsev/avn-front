@@ -5,13 +5,10 @@
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "Photo",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    }
-  }
+  mixins: [PostMediaPropsMixin]
 };
 </script>
