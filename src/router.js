@@ -7,7 +7,6 @@ import ExploreStoriesPage from "./components/pages/explore/Stories";
 import ExploreVideosPage from "./components/pages/explore/Videos";
 import ExplorePhotosPage from "./components/pages/explore/Photos";
 import ExploreLivePage from "./components/pages/explore/Live";
-import MessagesPage from "./components/pages/messages/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
 import LoginPage from "./components/pages/noAuth/Login";
 import SignUpPage from "./components/pages/noAuth/SignUp";
@@ -17,6 +16,9 @@ import SettingsSecurityPage from "./components/pages/settings/security/Index";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
+import Chat from "./components/chat/Chat";
+import ChatWithUser from "./components/chat/ChatWithUser";
+import ChatNewMessage from "./components/chat/ChatNewMessage";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -58,7 +60,22 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat",
-    component: MessagesPage
+    component: Chat
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/chat/no-messages",
+    component: Chat
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/chat/new",
+    component: ChatNewMessage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/chat/:userId",
+    component: ChatWithUser
   },
   {
     beforeEnter: Auth.requireAuth,

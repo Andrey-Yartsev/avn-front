@@ -9,7 +9,9 @@ const state = {
     show: false,
     data: {}
   },
-  addPost: { show: false }
+  messages: {
+    show: false
+  }
 };
 
 const mutations = {

@@ -1,14 +1,19 @@
 export default {
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
+    }
+  },
   methods: {
     isOwner: function(id) {
-      if (this.$store.state.auth.user) {
-        return this.$store.state.auth.user.id === id;
+      if (this.user) {
+        return this.user.id === id;
       }
 
       return false;
     },
     isAuth: function() {
-      return !!this.$store.state.auth.user;
+      return !!this.user;
     }
   }
 };

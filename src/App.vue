@@ -9,8 +9,10 @@
 			<Sidebar v-if="user"/>
 			<Toast v-if="showToast" @hide="showToast = false" />
 
+      <ErrorModal v-if="error" />
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
+      <ChatModal v-if="this.$store.state.modal.messages.show" />
 		</template>
 	</div>
 </template>
@@ -22,8 +24,10 @@ import Sidebar from "./components/Sidebar";
 import Toast from "./components/common/Toast";
 import ColorScheme from "@/mixins/colorScheme";
 
+import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/common/postModal/Index";
 import PostReportModal from "@/components/common/post/reportModal/Index";
+import ChatModal from "@/components/chat/Modal";
 
 export default {
   components: {
@@ -31,8 +35,10 @@ export default {
     Header,
     Sidebar,
     Toast,
+    ErrorModal,
     PostReportModal,
-    PostModal
+    PostModal,
+    ChatModal
   },
   mixins: [ColorScheme],
   data() {
@@ -49,6 +55,9 @@ export default {
     },
     loading() {
       return this.$store.state.profile.fetchLoading;
+    },
+    error() {
+      return !!this.$store.state.global.error;
     }
   },
   watch: {
