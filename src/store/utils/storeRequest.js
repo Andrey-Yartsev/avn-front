@@ -52,11 +52,11 @@ const storeRequest = (
   });
 };
 
-const buildInitState = (prefix, state, resultKey) => {
+const buildInitState = (prefix, state, resultKey, defaultResultValue) => {
   state[prefix + "Error"] = null;
   state[prefix + "Loading"] = false;
   state[prefix + "Success"] = null;
-  state[resultKey] = null;
+  state[resultKey] = defaultResultValue;
 };
 
 const buildMutations = (prefix, mutations, resultKey) => {
@@ -88,20 +88,33 @@ const createRequestAction = ({
   actions,
   options,
   localError,
-  resultKey
+  resultKey,
+  defaultResultValue,
+  paramsToOptions,
+  paramsToPath
 }) => {
   if (!resultKey) {
     resultKey = prefix + "Result";
   }
 
-  actions[prefix] = ({ commit, dispatch }) => {
+  actions[prefix] = function({ commit, dispatch }, params) {
+    if (params !== undefined && paramsToOptions) {
+      options = paramsToOptions(params, options);
+    }
+    if (params !== undefined && paramsToPath) {
+      apiPath = paramsToPath(params, apiPath);
+    }
     return storeRequest("token", prefix, commit, dispatch, apiPath, options, {
       localError,
       resultKey
     });
   };
 
-  buildInitState(prefix, state, resultKey);
+  if (!defaultResultValue) {
+    defaultResultValue = null;
+  }
+
+  buildInitState(prefix, state, resultKey, defaultResultValue);
   buildMutations(prefix, mutations, resultKey);
 };
 

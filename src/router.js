@@ -17,8 +17,7 @@ import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
 import Chat from "./components/chat/Chat";
-import ChatWithUser from "./components/chat/ChatWithUser";
-import ChatNewMessage from "./components/chat/ChatNewMessage";
+import ChatNewMessage from "./components/chat/NewMessage";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -75,7 +74,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/:userId",
-    component: ChatWithUser
+    component: Chat
   },
   {
     beforeEnter: Auth.requireAuth,

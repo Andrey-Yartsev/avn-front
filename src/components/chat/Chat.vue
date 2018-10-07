@@ -1,5 +1,5 @@
 <template>
-  <ChatWrapper>
+  <Wrapper>
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
@@ -26,7 +26,7 @@
           class="menu-item-home homePage asd"
           active-class="dummy"
           exact-active-class="active"
-          to="/"><span>Home1</span></router-link>
+          to="/"><span>Home</span></router-link>
         <router-link
           class="menu-item-explore"
           exact-active-class="active"
@@ -65,13 +65,14 @@
             <div class="os-padding">
               <div class="os-viewport os-viewport-native-scrollbars-invisible" style="">
                 <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
-                  <div class="chatView active">
+
+                  <div class="chatView" v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}">
                     <div class="avatar"></div>
                     <div class="chatViewContent">
                       <div class="chatView__header">
-                        <span class="name">Tester</span>
-                        <span class="user-login"><span class="username">tester</span></span>
-                        <div class="time">56 minutes</div>
+                        <span class="name">{{ v.withUser.name }}</span>
+                        <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
+                        <div class="time">{{ messageTime(v.lastMessage) }}</div>
                       </div>
                       <div class="chatView__body">
                         <p class="typing">
@@ -81,6 +82,7 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -111,27 +113,22 @@
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView">
+          <Messages v-if="messages" :_messages="messages"/>
+          <AddMessage/>
         </div>
       </div>
     </template>
-    <div
-      slot="extra"
-      class="msg-no-chat visible"
-      v-if="noMessages"
-    >
-      <div class="msg-no-chat__msg">You have no active conversations</div>
-      <router-link
-        tag="div"
-        to="/chat/new"
-        class="btn-start newMessageEvent"
-      >New message</router-link>
-    </div>
-  </ChatWrapper>
+    <NoConversations v-if="noMessages"/>
+  </Wrapper>
 </template>
 
 <script>
+import dateFns from "date-fns";
 import userMixin from "@/mixins/user";
-import ChatWrapper from "./ChatWrapper";
+import Wrapper from "./Wrapper";
+import Messages from "./Messages";
+import AddMessage from "./AddMessage";
+import NoConversations from "./NoConversations";
 
 export default {
   name: "Chat",
@@ -139,17 +136,46 @@ export default {
   mixins: [userMixin],
 
   components: {
-    ChatWrapper
+    Wrapper,
+    Messages,
+    AddMessage,
+    NoConversations
   },
 
   computed: {
     noMessages() {
       return this.$route.path === "/chat/no-messages";
+    },
+    chats() {
+      return this.$store.state.chat.chats.map(v => {
+        if (this.activeUserId === v.withUser.id) {
+          v.active = true;
+        }
+        return v;
+      });
+    },
+    messages() {
+      return this.$store.state.chat.messages;
+    },
+    activeUserId() {
+      return parseInt(this.$route.params.userId);
+    }
+  },
+
+  methods: {
+    messageTime(message) {
+      return dateFns.distanceInWordsStrict(new Date(), message.changedAt);
     }
   },
 
   created() {
-    this.$store.dispatch("chat/fetchChats");
+    this.$store.dispatch("chat/fetchChats").then(() => {
+      if (!this.activeUserId) {
+        this.$router.push("/chat/" + this.chats[0].withUser.id);
+      } else {
+        this.$store.dispatch("chat/fetchMessages", this.activeUserId);
+      }
+    });
   }
 };
 </script>
