@@ -41,13 +41,13 @@ const actions = {
     commit("request");
     UserApi.login(data)
       .then(user => {
+        dispatch("setToken", user.accessToken);
         if (user.isOtpNeeded) {
-          dispatch("setToken", user.accessToken);
           dispatch("setOtpAuth", true);
           Router.push("/login");
           return;
         }
-        dispatch("setUser", user);
+        dispatch("profile/fetch", null, { root: true });
         commit("showCaptcha", false);
       })
       .then(() => Router.push("/"))
@@ -62,7 +62,6 @@ const actions = {
 
   logout({ commit }) {
     commit("logout");
-    // Router.push("/login");
   },
 
   setOtpAuth({ commit }, flag) {
