@@ -75,5 +75,5 @@ export default {
 </style>
 <style lang="scss" src="@/design/css/colorScheme.scss">
 </style>
-<style lang="scss" src="@/design/fonts/team/team.scss">
+<style lang="scss" src="@/design/css/team.scss">
 </style>
