@@ -17,3 +17,20 @@
     }
   }
 }
+
+.sticky-header-controls {
+
+  .profile-page & {
+    background-color: transparent;
+  }
+}
+
+.myProfile {
+
+  .sticky-header-controls {
+
+    .profile-name__header {
+      display: none;
+    }
+  }
+}
