@@ -30,7 +30,7 @@ import MobileHeader from "../../header/Mobile";
 import Footer from "../../footer/Index";
 import AddPost from "../../addPost/Index";
 import StoriesWrapper from "../../aside/StoriesWrapper";
-import { getBottom } from "../../../helpers/page";
+import InfinityScrollMixin from "@/mixins/infinityScroll";
 
 export default {
   name: "HomePage",
@@ -41,28 +41,22 @@ export default {
     AddPost,
     PostCollection
   },
+  mixins: [InfinityScrollMixin],
   created() {
     this.$store.dispatch("home/resetPage");
     this.$store.dispatch("home/getPosts");
   },
-  mounted() {
-    window.addEventListener("scroll", this.onScrollHandler, true);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScrollHandler, true);
-  },
   computed: {
     posts() {
       return this.$store.state.home.posts;
+    },
+    store() {
+      return this.$store.state.home;
     }
   },
   methods: {
-    onScrollHandler: function() {
-      const { loading, allDataReceived } = this.$store.state.home;
-      const isOnBottom = getBottom();
-      if (isOnBottom && !loading && !allDataReceived) {
-        this.$store.dispatch("home/getPosts");
-      }
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("home/getPosts");
     }
   }
 };
