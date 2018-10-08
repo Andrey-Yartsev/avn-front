@@ -1,5 +1,5 @@
 <template>
-    <div class="post">
+    <div class="post" :data-id="post.id">
         <div class="post-details">
             <Header :postId="post.id" :user="post.author" />
             <p class="text">{{ post.text }}</p>

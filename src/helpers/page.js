@@ -1,6 +1,6 @@
 export const getBottom = () =>
   window.innerHeight + window.scrollY >=
-  document.getElementById("content").offsetHeight;
+  document.getElementById("content").offsetHeight - 600;
 
 export const execCopy = val => {
   if (navigator.share) {
