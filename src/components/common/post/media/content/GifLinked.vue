@@ -1,6 +1,9 @@
 <template>
     <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
-       <img :src="media.preview.source" >
+        <div class="gif-player">
+            <img :src="media.preview.source">
+            <img class="gif-img" :src="media.src.source">
+        </div>
     </a>
 </template>
 
@@ -8,7 +11,7 @@
 import PostMediaPropsMixin from "@/mixins/postMedia";
 
 export default {
-  name: "LinkedPhoto",
+  name: "GifLinked",
   mixins: [PostMediaPropsMixin]
 };
 </script>

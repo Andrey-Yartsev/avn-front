@@ -1,0 +1,41 @@
+<template>
+  <Modal>
+    <div class="popup-container" slot="content">
+      <div class="previous"></div>
+      <div class="content">
+        <h3>Error</h3>
+        {{ error.message }}
+      </div>
+      <button type="button" class="close" @click="close"></button>
+    </div>
+  </Modal>
+</template>
+
+<script>
+import Modal from "@/components/modal/Index";
+
+export default {
+  components: {
+    Modal
+  },
+
+  computed: {
+    error() {
+      return this.$store.state.global.error;
+    }
+  },
+
+  methods: {
+    close() {
+      this.$store.dispatch("global/setError", null);
+    }
+  }
+};
+</script>
+
+<style>
+.content {
+  padding: 50px;
+  text-align: center;
+}
+</style>

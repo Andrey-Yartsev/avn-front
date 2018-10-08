@@ -5,14 +5,11 @@
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "LockedPicture",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    }
-  },
+  mixins: [PostMediaPropsMixin],
   computed: {
     image() {
       return `data:image/jpeg;base64,${this.media.locked}`;

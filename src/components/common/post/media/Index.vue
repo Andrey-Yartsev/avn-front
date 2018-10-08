@@ -3,13 +3,23 @@
         <template v-if="medias.length > 1 && showSlider">
             <div class="media-slider">
                 <figure :key="key" v-for="(media, key) in medias" :class="[{ active: currentSlide === key }, 'media-item']">
-                    <component :is="getMediaViewType(media)" :media="media" :postId="postId"></component>
+                    <component
+                      :is="getMediaViewType(media)"
+                      :media="media"
+                      :postId="postId" 
+                      :openModal="openModal" 
+                    />
                 </figure>
             </div>
         </template>
         <template v-else >
             <figure :key="key" v-for="(media, key) in medias" class="media-item active">
-                <component :is="getMediaViewType(media)" :media="media" :postId="postId"></component>
+                <component
+                  :is="getMediaViewType(media)"
+                  :media="media"
+                  :postId="postId" 
+                  :openModal="openModal" 
+                />
             </figure>
         </template>
         <template v-if="medias.length > 1 && showSlider">
@@ -27,7 +37,9 @@
 <script>
 import Locked from "./content/Locked";
 import Video from "./content/Video";
-import Gif from "./content/Gif";
+import VideoLinked from "./content/VideoLinked";
+import Gif from "./content/GifLinked";
+import GifLinked from "./content/GifLinked";
 import Photo from "./content/Photo";
 import PhotoLinked from "./content/PhotoLinked";
 
@@ -36,7 +48,9 @@ export default {
   components: {
     Locked,
     Video,
+    VideoLinked,
     Gif,
+    GifLinked,
     Photo,
     PhotoLinked
   },
@@ -59,18 +73,22 @@ export default {
     postId: {
       type: Number,
       required: true
+    },
+    openModal: {
+      type: Function,
+      default: undefined
     }
   },
   methods: {
     getMediaViewType({ canView, type }) {
-      if (!canView) return "Locked";
-      if (type === "video") return "Video";
-      if (type === "gif" && this.shouldHasLink) return "Gif";
-      if (type === "gif" && !this.shouldHasLink) return "Photo";
-      if (type === "photo" && this.shouldHasLink) return "PhotoLinked";
-      if (type === "photo" && !this.shouldHasLink) return "Photo";
+      const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
 
-      return "Image";
+      if (!canView) return "Locked";
+      if (type === "gif") return `Gif${LinkedPrefix}`;
+      if (type === "photo") return `Photo${LinkedPrefix}`;
+      if (type === "video") return `Video${LinkedPrefix}`;
+
+      throw new Error("Invalid media format");
     }
   }
 };

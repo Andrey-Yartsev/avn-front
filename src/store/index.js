@@ -11,6 +11,7 @@ import otp from "@/store/modules/otp";
 import sessions from "@/store/modules/sessions";
 import common from "@/store/modules/common";
 import modal from "@/store/modules/modal";
+import chat from "@/store/modules/chat";
 
 Vue.use(Vuex);
 
@@ -27,7 +28,8 @@ const store = new Vuex.Store({
     otp,
     sessions,
     post,
-    modal
+    modal,
+    chat
   }
 });
 

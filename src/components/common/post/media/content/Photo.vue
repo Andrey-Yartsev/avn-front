@@ -1,17 +1,14 @@
 <template>
-  <div>
+  <div class="postLink">
     <img :src="media.preview.source">
   </div>
 </template>
 
 <script>
+import PostMediaPropsMixin from "@/mixins/postMedia";
+
 export default {
   name: "Photo",
-  props: {
-    media: {
-      type: Object,
-      required: true
-    }
-  }
+  mixins: [PostMediaPropsMixin]
 };
 </script>

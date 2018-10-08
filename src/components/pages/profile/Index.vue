@@ -1,6 +1,19 @@
 <template>
-  <div v-if="!profile">404</div>
+  <div v-if="!profile">Loading</div>
   <div v-else class="myProfile">
+    <router-link class="addPost-btn-float" to="/addPost"/>
+    <div class="sticky-header-controls">
+      <a class="header-return-btn"></a>
+      <div class="profile-name__header">
+        <span class="name">
+          {{ profile.name }}
+        </span>
+        <span class="verified-user"></span>
+        <span class="user-login">
+          <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
+        </span>
+      </div>
+    </div>
     <div class="white-bg-block">
       <div class="bg">
         <div class="bg-wrap"></div>
@@ -185,7 +198,13 @@
               <span>Nothing here yet</span>
               <button type="button" class="make-post-btn feed">Create new post</button>
             </p>
-            <CollectionView :posts="posts" :isProfilePosts="true"/>
+            <div class="posts-container">
+              <PostCollection
+                :class="'rounded-container'"
+                :posts="posts" 
+                from="profile/home"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -194,13 +213,13 @@
 </template>
 
 <script>
-import CollectionView from "@/components/pages/home/posts/CollectionView";
+import PostCollection from "@/components/common/postCollection/Index";
 
 export default {
   name: "ProfileHome",
 
   components: {
-    CollectionView
+    PostCollection
   },
 
   computed: {
@@ -252,6 +271,10 @@ export default {
 
   created() {
     this.init();
+  },
+
+  mounted() {
+    document.getElementsByTagName("body")[0].className = "profile-page";
   }
 };
 </script>
