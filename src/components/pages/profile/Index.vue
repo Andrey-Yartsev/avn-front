@@ -214,14 +214,14 @@
 
 <script>
 import PostCollection from "@/components/common/postCollection/Index";
+import InfinityScrollMixin from "@/mixins/infinityScroll";
 
 export default {
   name: "ProfileHome",
-
+  mixins: [InfinityScrollMixin],
   components: {
     PostCollection
   },
-
   computed: {
     username() {
       return this.$route.params[0].replace(/\/(.*)/, "$1");
@@ -237,6 +237,9 @@ export default {
     },
     isOwner() {
       return this.user && this.user.id === this.profile.id;
+    },
+    store() {
+      return this.$store.state.profile.home;
     }
   },
 
@@ -253,7 +256,7 @@ export default {
       this.$store
         .dispatch("profile/home/fetchProfile", this.username)
         .then(() => {
-          this.$store.dispatch("profile/home/getPosts", this.profile.id);
+          this.infinityScrollGetDataMethod();
         });
     },
     follow() {
@@ -266,7 +269,10 @@ export default {
     unfollow() {
       this.$store.dispatch("profile/home/unfollow", this.profile.id);
     },
-    sendMessage() {}
+    sendMessage() {},
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+    }
   },
 
   created() {

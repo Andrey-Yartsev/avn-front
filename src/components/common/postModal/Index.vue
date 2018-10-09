@@ -2,7 +2,7 @@
   <Modal :onClose="close"> 
     <template slot="content">
       <div class="popup-container post post-popup">
-        <div class="previous"></div>
+        <div class="previous" @click="index -= 1" v-if="index > 0"></div>
         <div class="content">
           <div class="post postPage">
             <div class="header-mobile">
@@ -56,7 +56,7 @@
           </div>
         </div>
         <button type="button" class="close" @click="close"></button>
-        <div class="next"></div>
+        <div class="next" @click="index += 1" v-if="index + 1 < length"></div>
       </div>
     </template>
   </Modal>
@@ -74,22 +74,11 @@ export default {
   name: "PostModal",
   mixins: [userMixin],
   computed: {
-    backUrl() {
-      return this.$store.state.modal.post.data.backUrl;
-    },
     post() {
-      const { postId, from } = this.$store.state.modal.post.data;
-      let dataSrc;
-
-      if (from === "profile/home") {
-        dataSrc = this.$store.state.profile.home;
-      }
-
-      if (from === "home") {
-        dataSrc = this.$store.state.home;
-      }
-
-      return dataSrc.posts.filter(({ id }) => id === postId)[0];
+      return this.dataSrc.posts[this.index];
+    },
+    length() {
+      return this.dataSrc.posts.length;
     },
     timePassed() {
       return dateFns.distanceInWordsStrict(new Date(), this.post.postedAt);
@@ -102,7 +91,11 @@ export default {
     }
   },
   data: () => ({
-    showAddCommentForm: false
+    showAddCommentForm: false,
+    postId: undefined,
+    dataSrc: undefined,
+    backUrl: undefined,
+    index: 0
   }),
   components: {
     Modal,
@@ -123,10 +116,31 @@ export default {
       this.$store.dispatch("modal/hide", {
         name: "post"
       });
+    },
+    scroll() {
+      this.$scrollTo(`[data-id="${this.post.id}"]`);
     }
   },
   created() {
-    window.history.replaceState({}, "post", `/post/${this.post.id}`);
+    const { postId, from, backUrl } = this.$store.state.modal.post.data;
+    if (from === "profile/home") {
+      this.dataSrc = this.$store.state.profile.home;
+    }
+    if (from === "home") {
+      this.dataSrc = this.$store.state.home;
+    }
+
+    const post = this.dataSrc.posts.filter(({ id }) => id === postId)[0];
+
+    this.postId = postId;
+    this.backUrl = backUrl;
+    this.index = this.dataSrc.posts.indexOf(post);
+    window.history.replaceState({}, "post", `/post/${this.postId}`);
+  },
+  watch: {
+    index: function() {
+      this.scroll();
+    }
   }
 };
 </script>
