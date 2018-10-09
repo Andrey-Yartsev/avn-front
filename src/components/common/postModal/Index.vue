@@ -24,34 +24,33 @@
               <p class="text hidden-mobile">
               {{ post.text }}
               </p>
-              <div class="postComments">
-                <template v-if="isAuth()" >
-                  <form class="comment-form"></form>
-                  <template v-if="!isOwner() && post.author.canEarn">
-                    <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
-                      <input type="hidden" name="type" value="tip" />
-                      <input type="hidden" name="id" :value="post.author.id" />
-                      <input type="hidden" name="access-token" :value="accessToken" />
-                      <span role="button" class="btn btn-cancel">Cancel</span>
-                      <div class="tip-amount-field">
-                        <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
-                      </div>
-                      <button type="submit" class="btn" disabled>Send tip</button>
-                    </form>
-                  </template>
-                  <Actions 
-                    :post="post" 
-                    v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
-                    v-on:postLike="likePost"
-                  />
+              <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCount"></CommentsList>
+              <template v-if="isAuth()" >
+                <form class="comment-form"></form>
+                <template v-if="!isOwner() && post.author.canEarn">
+                  <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
+                    <input type="hidden" name="type" value="tip" />
+                    <input type="hidden" name="id" :value="post.author.id" />
+                    <input type="hidden" name="access-token" :value="accessToken" />
+                    <span role="button" class="btn btn-cancel">Cancel</span>
+                    <div class="tip-amount-field">
+                      <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
+                    </div>
+                    <button type="submit" class="btn" disabled>Send tip</button>
+                  </form>
                 </template>
-                <template v-else>
-                  <div class="guest-comments-form">
-                    <p>Please login to leave comments or tips</p>
-                    <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
-                  </div>
-                </template>
-              </div> 
+                <Actions 
+                  :post="post" 
+                  v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+                  v-on:postLike="likePost"
+                />
+              </template>
+              <template v-else>
+                <div class="guest-comments-form">
+                  <p>Please login to leave comments or tips</p>
+                  <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -69,6 +68,7 @@ import userMixin from "@/mixins/user";
 import Header from "@/components/common/post/header/Index";
 import Actions from "@/components/common/post/actions/Index";
 import Media from "@/components/common/post/media/Index";
+import CommentsList from "@/components/common/post/commentsListFull/Index";
 
 export default {
   name: "PostModal",
@@ -101,6 +101,7 @@ export default {
     Modal,
     Header,
     Media,
+    CommentsList,
     Actions
   },
   methods: {
