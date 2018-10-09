@@ -10,7 +10,7 @@
           <div class="hidden error">Email or password incorrect</div>
           <button type="submit" class="btn lg alt block" :disabled="!otpCode">Send</button>
           <div class="signUp">
-            <router-link to="/logout">Reset session</router-link>
+            <router-link to="/logout">Switch user</router-link>
           </div>
         </form>
       </template>
