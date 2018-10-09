@@ -3,7 +3,7 @@
 import PostApi from "@/api/post";
 import PostComments from "../mixins/posts";
 
-const state = {
+const initState = {
   loading: false,
   error: null,
   posts: [],
@@ -14,49 +14,20 @@ const state = {
   postReportReasons: []
 };
 
+const state = { ...initState };
+
 const mutations = {
-  ["resetPageState"]() {
-    state.loading = false;
-    state.error = null;
-    state.posts = [];
-    state.allDataReceived = false;
-    state.limit = 10;
-    state.offset = 0;
-    state.marker = "";
-    state.postReportReasons = [];
-  },
-
-  ["postsRequestSuccess"](state, { list: posts, marker }) {
-    state.posts = [...state.posts, ...posts];
-
-    if (posts.length < state.limit) {
-      state.allDataReceived = true;
-    } else {
-      state.offset = state.offset + state.limit;
-    }
-    state.loading = false;
-    state.marker = state.marker.length ? state.marker : marker;
-  },
-
-  ["postsRequestFail"](state, err) {
-    state.error = err;
-    state.loading = false;
-  },
-
-  ["postsRequest"](state) {
-    state.loading = true;
-  },
-
-  ["getPostReportReasonsSuccess"](state, data) {
+  getPostReportReasonsSuccess(state, data) {
     state.postReportReasons = data;
+  },
+  resetPageState(state) {
+    for (let k of Object.keys(initState)) {
+      state[k] = initState[k];
+    }
   }
 };
 
 const actions = {
-  resetPage({ commit }) {
-    commit("resetPageState");
-  },
-
   getPosts({ commit }) {
     const { limit, offset, marker } = state;
     commit("postsRequest");

@@ -17,17 +17,13 @@ const initState = {
   marker: ""
 };
 
-const state = Object.assign({}, initState);
+const state = { ...initState };
 
 const mutations = {
   resetPageState(state) {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
-  },
-
-  resetPosts(state) {
-    state.posts = [];
   },
 
   fetchProfile(state) {
@@ -41,35 +37,10 @@ const mutations = {
   fetchProfileFail(state, error) {
     state.profileLoading = false;
     state.profileError = error;
-  },
-
-  postsRequestSuccess(state, { list: posts, marker }) {
-    state.posts = [...state.posts, ...posts];
-
-    if (posts.length < state.limit) {
-      state.allDataReceived = true;
-    } else {
-      state.offset = state.offset + state.limit;
-    }
-    state.loading = false;
-    state.marker = state.marker.length ? state.marker : marker;
-  },
-
-  postsRequestFail(state, err) {
-    state.error = err;
-    state.loading = false;
-  },
-
-  postsRequest(state) {
-    state.loading = true;
   }
 };
 
 const actions = {
-  resetPage({ commit }) {
-    commit("resetPageState");
-  },
-
   fetchProfile({ commit }, username) {
     commit("resetPageState");
     return new Promise((accept, reject) => {

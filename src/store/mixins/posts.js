@@ -2,6 +2,10 @@ import PostApi from "@/api/post";
 
 export default {
   actions: {
+    resetPageState({ commit }) {
+      commit("resetPageState");
+    },
+
     getPostComments({ commit }, { postId }) {
       commit("postCommentsRequest", { postId });
       return PostApi.getPostComments({ postId })
@@ -67,6 +71,27 @@ export default {
   },
 
   mutations: {
+    postsRequestSuccess(state, { list: posts, marker }) {
+      state.posts = [...state.posts, ...posts];
+
+      if (posts.length < state.limit) {
+        state.allDataReceived = true;
+      } else {
+        state.offset = state.offset + state.limit;
+      }
+      state.loading = false;
+      state.marker = state.marker.length ? state.marker : marker;
+    },
+
+    postsRequestFail(state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    postsRequest(state) {
+      state.loading = true;
+    },
+
     postCommentsRequest(state, { postId }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {

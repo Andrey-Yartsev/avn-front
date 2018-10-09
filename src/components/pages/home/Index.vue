@@ -43,7 +43,7 @@ export default {
   },
   mixins: [InfinityScrollMixin],
   created() {
-    this.$store.dispatch("home/resetPage");
+    this.$store.dispatch("home/resetPageState");
     this.$store.dispatch("home/getPosts");
   },
   computed: {

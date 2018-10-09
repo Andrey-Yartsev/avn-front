@@ -18,7 +18,7 @@
       <div class="bg">
         <div class="bg-wrap"></div>
         <div class="container">
-          <div class="controls-select-picture" v-if="isOwner">
+          <div class="controls-select-picture" v-if="isOwner(this.profile.id)">
             <label for="bg" class="select-user-image">Add Background Picture</label>
             <input type="file" id="bg" accept=".jpg,.jpeg,.gif,.png">
             <div class="profile-picture-btns">
@@ -99,7 +99,7 @@
                   </router-link>
                 </div>
 
-                <div class="profile-actions" v-if="isOwner">
+                <div class="profile-actions" v-if="isOwner(this.profile.id)">
                   <router-link to="/settings/profile" class="btn-edit-profile">Edit profile</router-link>
                   <button class="btn-make-post make-post-btn">New post</button>
                 </div>
@@ -215,10 +215,11 @@
 <script>
 import PostCollection from "@/components/common/postCollection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import UserMixin from "@/mixins/user";
 
 export default {
   name: "ProfileHome",
-  mixins: [InfinityScrollMixin],
+  mixins: [InfinityScrollMixin, UserMixin],
   components: {
     PostCollection
   },
@@ -231,12 +232,6 @@ export default {
     },
     posts() {
       return this.$store.state.profile.home.posts;
-    },
-    user() {
-      return this.$store.state.auth.user;
-    },
-    isOwner() {
-      return this.user && this.user.id === this.profile.id;
     },
     store() {
       return this.$store.state.profile.home;
@@ -252,11 +247,10 @@ export default {
   methods: {
     init() {
       this.$store.commit("profile/home/resetPageState");
-      this.$store.commit("profile/home/resetPosts");
       this.$store
         .dispatch("profile/home/fetchProfile", this.username)
         .then(() => {
-          this.infinityScrollGetDataMethod();
+          this.$store.dispatch("profile/home/getPosts", this.profile.id);
         });
     },
     follow() {
@@ -271,7 +265,9 @@ export default {
     },
     sendMessage() {},
     infinityScrollGetDataMethod() {
-      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+      if (this.profile) {
+        this.$store.dispatch("profile/home/getPosts", this.profile.id);
+      }
     }
   },
 
