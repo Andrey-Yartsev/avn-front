@@ -41,3 +41,22 @@
     }
   }
 }
+
+.comments-list {
+
+  .scrolly-viewport {
+    width: auto;
+    left: 15px;
+    right: 15px;
+  }
+}
+
+.post {
+
+  &.postPage {
+
+    .comments-list {
+      overflow-y: hidden;
+    }
+  }
+}

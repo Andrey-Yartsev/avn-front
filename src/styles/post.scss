@@ -38,6 +38,9 @@
   .content {
     overflow: auto;
     border-radius: 5px;
+    padding: 0;
+    text-align: left;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
       border-radius: 0;
