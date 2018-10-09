@@ -11,7 +11,7 @@
 @import "components/feed";
 @import "components/popup";
 @import "components/loader";
-@import "overlayscrollbars/OverlayScrollbars.scss";
+@import "overlayscrollbars/OverlayScrollbars";
 
 @import "jquery-toast-plugin/jquery-toast";
 
@@ -52,7 +52,7 @@
 
 @import "header-resets";
 @import "content";
-@import "components/_icons";
+@import "components/icons";
 
 // @import "jquery-toast-plugin/jquery-toast";
 // @import "toast";

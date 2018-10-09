@@ -71,9 +71,9 @@ export default {
 };
 </script>
 
-<style lang="scss" src="@/design/css/main.scss">
+<style lang="scss" src="@/styles/main.scss">
 </style>
-<style lang="scss" src="@/design/css/colorScheme.scss">
+<style lang="scss" src="@/styles/colorScheme.scss">
 </style>
-<style lang="scss" src="@/design/css/team.scss">
+<style lang="scss" src="@/styles/team.scss">
 </style>
