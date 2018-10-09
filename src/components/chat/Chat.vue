@@ -65,14 +65,17 @@
             <div class="os-padding">
               <div class="os-viewport os-viewport-native-scrollbars-invisible" style="">
                 <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
-
-                  <div class="chatView" v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}">
+                  <div
+                    @click="openChat(v.withUser.id)"
+                    class="chatView"
+                    v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
+                  >
                     <div class="avatar"></div>
                     <div class="chatViewContent">
                       <div class="chatView__header">
                         <span class="name">{{ v.withUser.name }}</span>
                         <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
-                        <div class="time">{{ messageTime(v.lastMessage) }}</div>
+                        <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
                       </div>
                       <div class="chatView__body">
                         <p class="typing">
@@ -82,7 +85,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -102,21 +104,45 @@
       </div>
     </template>
     <template slot="col2">
-      <div class="chatHeader chatHeader_add-shadow no-nav">
+      <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
         <div class="selectedChatHeader">
           <span class="back hidden-desktop"></span>
           <router-link :to="'/' + activeUser.name" class="avatar">
             <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
           </router-link>
-          <router-link :to="'/' + activeUser.name" class="name">
+          <router-link :to="'/' + activeUser.username" class="name">
             {{ activeUser.name }}
           </router-link>
-          <span class="user-verified-user" v-if="activeUser.isVerified"></span>
+          <span class="verified-user" v-if="activeUser.isVerified"></span>
+          <span class="user-login">
+            <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
+          </span>
+
+          <span class="user-login" v-if="blockLoading">...</span>
+          <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
+
+          <span class="chatOptions" :class="{open: chatOptionsOpened}">
+            <span class="chatExpand" @click="chatOptionsOpened = !chatOptionsOpened"></span>
+              <div class="chatOptions__dropdown">
+                <ul class="chatOptions__list">
+                  <li><router-link class="profile-url" :to="'/' + activeUser.name">View profile</router-link></li>
+                  <li v-if="activeUser.isBlocked"><a class="menu-block" @click="unblockActiveUser">Unblock user</a></li>
+                  <li v-else><a class="menu-block" @click="blockActiveUser">Block user</a></li>
+                  <li v-if="deleteInProgress"><a>Deleting...</a></li>
+                  <li v-else><a class="menu-delete" @click="deleteConversation">Delete conversation</a></li>
+                  <li><a class="menu-report" @click="report">Report</a></li>
+                  <li><a class="menu-cancel" @click="chatOptionsOpened = false">Cancel</a></li>
+                </ul>
+              </div>
+            </span>
         </div>
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView">
-          <Messages v-if="messages" :_messages="messages"/>
+          <div class="chat-section" v-if="messagesLoading">
+            <Loader :fullscreen="false" text="" class="transparent small"/>
+          </div>
+          <Messages v-else-if="messages" :_messages="messages"/>
           <AddMessage :withUser="{id: activeUserId}"/>
         </div>
       </div>
@@ -132,6 +158,7 @@ import Wrapper from "./Wrapper";
 import Messages from "./Messages";
 import AddMessage from "./AddMessage";
 import NoConversations from "./NoConversations";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Chat",
@@ -142,13 +169,15 @@ export default {
     Wrapper,
     Messages,
     AddMessage,
-    NoConversations
+    NoConversations,
+    Loader
   },
 
   data() {
     return {
       chatOptionsOpened: false,
-      isTyping: false
+      isTyping: false,
+      deleteInProgress: false
     };
   },
 
@@ -158,11 +187,21 @@ export default {
     },
     chats() {
       return this.$store.state.chat.chats.map(v => {
-        if (this.activeUserId === v.withUser.id) {
-          v.active = true;
+        const copy = { ...v };
+        if (Object.keys(copy.lastMessage).length === 0) {
+          copy.lastMessage = null;
         }
-        return v;
+        if (this.activeUserId === copy.withUser.id) {
+          copy.active = true;
+        }
+        return copy;
       });
+    },
+    hasActiveChats() {
+      return this.$store.state.chat.chats.some(v => v.hasHistory);
+    },
+    firstActiveChat() {
+      return this.$store.state.chat.chats.find(v => v.hasHistory);
     },
     messages() {
       return this.$store.state.chat.messages;
@@ -177,29 +216,72 @@ export default {
     },
     activeUser() {
       return this.activeChat.withUser;
+    },
+    messagesLoading() {
+      return this.$store.state.chat.fetchMessagesLoading;
+    },
+    blockLoading() {
+      return (
+        this.$store.state.user.blockLoading ||
+        this.$store.state.user.unblockLoading
+      );
+    }
+  },
+
+  watch: {
+    activeUserId(activeUserId) {
+      this.$store.commit("chat/messages", []);
+      if (!activeUserId) {
+        this.$router.push("/chat/new");
+        return;
+      }
+      this.fetchMessages();
     }
   },
 
   methods: {
+    openChat(id) {
+      this.$router.push("/chat/" + id);
+    },
     messageTime(message) {
       return dateFns.distanceInWordsStrict(new Date(), message.changedAt);
+    },
+    blockActiveUser() {
+      this.$store.dispatch("chat/blockUser", this.activeUserId);
+      this.chatOptionsOpened = false;
+    },
+    unblockActiveUser() {
+      this.$store.dispatch("chat/unblockUser", this.activeUserId);
+      this.chatOptionsOpened = false;
+    },
+    deleteConversation() {
+      this.deleteInProgress = true;
+      this.$store.dispatch("chat/delete", this.activeUserId).then(() => {
+        this.deleteInProgress = false;
+        this.chatOptionsOpened = false;
+        this.$router.push("/chat");
+      });
+    },
+    report() {
+      this.$store.dispatch("modal/show", {
+        name: "userReport",
+        data: this.activeUserId
+      });
+      this.chatOptionsOpened = false;
+    },
+    fetchMessages() {
+      this.$store.dispatch("chat/fetchMessages", this.activeUserId);
     }
-    // reportUser() {
-    //   this.$store.dispatch("modal/show", {
-    //     name: "postReport",
-    //     data: {
-    //       postId: this.postId
-    //     }
-    //   });
-    // }
   },
 
   created() {
     this.$store.dispatch("chat/fetchChats").then(() => {
-      if (!this.activeUserId) {
-        this.$router.push("/chat/" + this.chats[0].withUser.id);
+      if (!this.hasActiveChats) {
+        this.$router.push("/chat/new");
+      } else if (!this.activeUserId) {
+        this.$router.push("/chat/" + this.firstActiveChat.withUser.id);
       } else {
-        this.$store.dispatch("chat/fetchMessages", this.activeUserId);
+        this.fetchMessages();
       }
     });
   }

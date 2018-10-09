@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import Loader from "@/components/loader/Index";
+import Loader from "@/components/common/Loader";
 import MediaPreview from "./MediaPreview";
 import { getMediaFilePreview, fileUpload, uniqId } from "@/utils/mediaFiles";
 

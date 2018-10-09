@@ -13,6 +13,7 @@ import sessions from "@/store/modules/sessions";
 import common from "@/store/modules/common";
 import modal from "@/store/modules/modal";
 import chat from "@/store/modules/chat";
+import user from "@/store/modules/user";
 
 Vue.use(Vuex);
 
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
     post,
     modal,
     chat,
+    user,
     postPage
   }
 });

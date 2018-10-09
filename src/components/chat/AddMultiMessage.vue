@@ -6,25 +6,28 @@
 import AddMessageBox from "./AddMessageBox";
 
 export default {
-  name: "ChatAddMessage",
+  name: "ChatAddMultiMessage",
 
   components: {
     AddMessageBox
   },
 
   props: {
-    withUser: {
-      type: Object,
+    userIds: {
+      type: Array,
       required: true
     }
   },
 
   methods: {
     sendMessage(message) {
-      this.$store.dispatch("chat/sendMessage", {
-        userId: this.withUser.id,
-        message
+      this.userIds.forEach(userId => {
+        this.$store.dispatch("chat/sendMessage", {
+          userId,
+          message
+        });
       });
+      this.$emit("sent");
     }
   }
 };

@@ -13,6 +13,7 @@
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
+			<UserReportModal v-if="this.$store.state.modal.userReport.show" />
 		</template>
 	</div>
 </template>
@@ -22,12 +23,13 @@ import Loader from "./components/common/Loader";
 import Header from "./components/header/Index";
 import Sidebar from "./components/Sidebar";
 import Toast from "./components/common/Toast";
-import ColorScheme from "@/mixins/colorScheme";
-
 import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
-import PostReportModal from "@/components/common/post/reportModal/Index";
+import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
+import ColorScheme from "@/mixins/colorScheme";
+import ws from "@/ws";
+import UserReportModal from "./components/common/UserReportModal";
 
 export default {
   components: {
@@ -38,7 +40,8 @@ export default {
     ErrorModal,
     PostReportModal,
     PostModal,
-    ChatModal
+    ChatModal,
+    UserReportModal
   },
   mixins: [ColorScheme],
   data() {
@@ -76,6 +79,9 @@ export default {
       }
       return this.$store.dispatch("modal/hideAll");
     }
+  },
+  created() {
+    ws();
   }
 };
 </script>

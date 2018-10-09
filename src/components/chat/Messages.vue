@@ -1,7 +1,7 @@
 <template>
   <div class="chat-section">
-    <scrolly class="chat-wrapper">
-      <scrolly-viewport>
+    <scrolly class="chat-wrapper" ref="a1">
+      <scrolly-viewport ref="messages">
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -21,15 +21,14 @@
                 <span class="message">{{ v.text }}</span>
               </div>
               <div class="time" v-if="v.lastMessageInGroup">
-                <span class="status">-</span>
-                <span class="timeValue">{{ v.changedAt }}</span>
+                <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
+                <span class="timeValue"> {{ time(v.changedAt) }}</span>
               </div>
             </div>
           </div>
         </div>
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>
-      <scrolly-bar axis="x"></scrolly-bar>
     </scrolly>
   </div>
 </template>
@@ -37,6 +36,8 @@
 <script>
 import userMixin from "@/mixins/user";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import Loader from "@/components/common/Loader";
+import dateFns from "date-fns";
 
 export default {
   name: "ChatMessages",
@@ -44,7 +45,8 @@ export default {
   components: {
     Scrolly,
     ScrollyViewport,
-    ScrollyBar
+    ScrollyBar,
+    Loader
   },
 
   mixins: [userMixin],
@@ -63,6 +65,14 @@ export default {
       }
       const messages = JSON.parse(JSON.stringify(this._messages));
       return this.addGrouping(messages);
+    }
+  },
+
+  watch: {
+    messages() {
+      setTimeout(() => {
+        this.scrollToLast();
+      }, 100);
     }
   },
 
@@ -130,7 +140,24 @@ export default {
 
     checkAuthor(user) {
       return user.id === this.user.id;
+    },
+
+    scrollToLast() {
+      if (!this.$refs.messages) {
+        return;
+      }
+      this.$refs.messages.$el.scrollTop = this.$refs.messages.$el.scrollHeight;
+    },
+
+    time(date) {
+      return dateFns.distanceInWordsStrict(new Date(), date);
     }
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.scrollToLast();
+    }, 100);
   }
 };
 </script>

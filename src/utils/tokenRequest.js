@@ -7,13 +7,15 @@ export default async (apiPath, options) => {
     throw new Error("Method is allowed only for authorized users");
   }
 
+  const _options = { ...options };
+
   const query = {
     ...options.query,
     "access-token": Store.state.auth.token
   };
 
   const params = queryString.stringify(query);
-  delete options.query;
+  delete _options.query;
 
-  return request(`${apiPath}?${params}`, options);
+  return request(`${apiPath}?${params}`, _options);
 };

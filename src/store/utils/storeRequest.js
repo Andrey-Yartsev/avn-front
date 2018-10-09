@@ -15,6 +15,7 @@ const storeRequest = (
     commit(prefix + "ResetError");
     commit(prefix + "Request");
     commit(prefix + "Success", false);
+    commit(prefix + "Success", false);
     const requests = {
       any: anyRequest,
       token: tokenRequest,
@@ -59,7 +60,9 @@ const buildInitState = (prefix, state, resultKey, defaultResultValue) => {
   state[prefix + "Error"] = null;
   state[prefix + "Loading"] = false;
   state[prefix + "Success"] = null;
-  state[resultKey] = defaultResultValue;
+  if (resultKey && !state[resultKey]) {
+    state[resultKey] = defaultResultValue;
+  }
 };
 
 const buildMutations = (prefix, mutations, resultKey) => {
@@ -78,9 +81,11 @@ const buildMutations = (prefix, mutations, resultKey) => {
   mutations[prefix + "Success"] = (state, value) => {
     state[prefix + "Success"] = value;
   };
-  mutations[resultKey] = (state, value) => {
-    state[resultKey] = value;
-  };
+  if (resultKey) {
+    mutations[resultKey] = (state, value) => {
+      state[resultKey] = value;
+    };
+  }
 };
 
 const createRequestAction = ({
@@ -105,15 +110,24 @@ const createRequestAction = ({
     if (params !== undefined && paramsToOptions) {
       options = paramsToOptions(params, options);
     }
+    let _apiPath = null;
     if (params !== undefined && paramsToPath) {
-      apiPath = paramsToPath(params, apiPath);
+      _apiPath = paramsToPath(params, apiPath);
     }
-    return storeRequest("token", prefix, commit, dispatch, apiPath, options, {
-      state,
-      localError,
-      resultKey,
-      resultConvert
-    });
+    return storeRequest(
+      "token",
+      prefix,
+      commit,
+      dispatch,
+      _apiPath || apiPath,
+      options,
+      {
+        state,
+        localError,
+        resultKey,
+        resultConvert
+      }
+    );
   };
 
   if (!defaultResultValue) {

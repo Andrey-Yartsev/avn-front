@@ -11,6 +11,10 @@ const state = {
   },
   messages: {
     show: false
+  },
+  userReport: {
+    show: false,
+    data: {}
   }
 };
 

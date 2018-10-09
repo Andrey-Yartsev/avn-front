@@ -138,7 +138,6 @@
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView" :class="{'no-selected-conversation': !selected.length}">
-
           <div class="chat-section">
             <div class="chatContent"></div>
             <div class="msg-no-chat">
@@ -146,8 +145,7 @@
               <div class="btn-start btn-selected-all" @click="toggleSelectAll">Select all</div>
             </div>
           </div>
-          <ChatAddMessage />
-
+          <ChatAddMessage :userIds="selected" @sent="gotoFirstSelected"/>
         </div>
       </div>
     </template>
@@ -157,7 +155,7 @@
 <script>
 import userMixin from "@/mixins/user";
 import ChatWrapper from "./Wrapper";
-import ChatAddMessage from "./AddMessage";
+import ChatAddMessage from "./AddMultiMessage";
 
 export default {
   name: "Chat",
@@ -242,6 +240,10 @@ export default {
     },
     back() {
       this.$router.push("/chat");
+    },
+    gotoFirstSelected() {
+      this.$router.push("/chat/" + this.selected[0]);
+      this.selected = [];
     }
   },
 
