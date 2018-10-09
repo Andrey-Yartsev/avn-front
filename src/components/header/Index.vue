@@ -17,8 +17,8 @@
         </nav>
         <h1 class="header-logo">
           <router-link to="/">
-            <img src="https://team2.retloko.com/ver_6667c0c/design/img/logo-full.svg">
-            <img class="white-logo" src="https://team2.retloko.com/ver_6667c0c/design/img/logo-full-white.svg">
+            <img src="/static/img/logo-full.svg">
+            <img class="white-logo" src="/static/img/logo-full-white.svg">
           </router-link>
         </h1>
         <template v-if="!noAuthHeader">

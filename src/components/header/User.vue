@@ -1,7 +1,7 @@
 <template>
-    <a :href="'/' + user.username" class="avatar header-avatar" v-click-outside="hide" @click.prevent="open">
-        <img :src="user.avatar" />
-    </a>
+    <router-link :to="'/' + user.username" class="avatar header-avatar" v-click-outside="hide" @click.prevent="open">
+        <img v-if="user.avatar" :src="user.avatar" />
+    </router-link>
 </template>
 
 <script>

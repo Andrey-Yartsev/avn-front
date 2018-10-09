@@ -1,7 +1,9 @@
 <template>
   <div class="sidebar" v-if="user">
     <div class="sidebar__scroller">
-      <router-link :to="'/' + user.username" class="avatar header-avatar"><img :src="user.avatar"/></router-link>
+      <router-link :to="'/' + user.username" class="avatar header-avatar">
+        <img v-if="user.avatar" :src="user.avatar"/>
+      </router-link>
       <div class="sidebar__inside">
         <span role="button" class="user-menu-close"></span>
         <div class="sidebar__header">

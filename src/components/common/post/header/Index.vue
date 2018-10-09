@@ -1,7 +1,7 @@
 <template>
   <div class="post-header">
     <router-link class="avatar" :to="'/' + user.username">
-      <img :src="user.avatar"/>
+      <img v-if="user.avatar" :src="user.avatar"/>
     </router-link>
     <router-link class="name" :to="'/' + user.username">{{ user.username }}</router-link>
     <template v-if="user.isVerified">

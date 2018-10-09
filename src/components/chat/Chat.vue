@@ -4,8 +4,7 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <router-link :to="'/' + user.name" class="avatar header-avatar">
-            <img
-              :src="user.avatar">
+            <img v-if="user.avatar" :src="user.avatar">
           </router-link>
           <h3>Messages</h3>
           <div class="newMessage-link">

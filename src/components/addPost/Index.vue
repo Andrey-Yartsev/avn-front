@@ -12,7 +12,7 @@
         >Share</button>
       </div>
       <span class="avatar">
-        <img :src="user.avatar" />
+        <img v-if="user.avatar" :src="user.avatar" />
       </span>
       <div class="text-media-container">
         <textarea
