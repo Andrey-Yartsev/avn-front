@@ -1,7 +1,7 @@
 <template>
   <div class="addChatMessage">
     <div class="addFileCollectionView"></div>
-    <form class="chatForm">
+    <form class="chatForm" v-on:submit.stop.prevent="sendMessage">
       <label class="add-media-input btn-el">
         <input type="file" accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi">
       </label>
@@ -44,10 +44,27 @@
 export default {
   name: "ChatAddMessage",
 
+  props: {
+    withUser: {
+      type: Object,
+      required: true
+    }
+  },
+
   data() {
     return {
       message: ""
     };
+  },
+
+  methods: {
+    sendMessage() {
+      this.$store.dispatch("chat/sendMessage", {
+        userId: this.withUser.id,
+        message: this.message
+      });
+      this.message = "";
+    }
   }
 };
 </script>

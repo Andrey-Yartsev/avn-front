@@ -4,7 +4,8 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <router-link :to="'/' + user.name" class="avatar header-avatar">
-            <img v-if="user.avatar" :src="user.avatar">
+            <img
+              :src="user.avatar">
           </router-link>
           <h3>Messages</h3>
           <div class="newMessage-link">
@@ -104,16 +105,19 @@
       <div class="chatHeader chatHeader_add-shadow no-nav">
         <div class="selectedChatHeader">
           <span class="back hidden-desktop"></span>
-          <a class="name"></a>
-          <span class="user-login"><a class="username"></a></span>
-          <span class="chatOptions"></span>
-          <span class="isTyping">is typing...</span>
+          <router-link :to="'/' + activeUser.name" class="avatar">
+            <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
+          </router-link>
+          <router-link :to="'/' + activeUser.name" class="name">
+            {{ activeUser.name }}
+          </router-link>
+          <span class="user-verified-user" v-if="activeUser.isVerified"></span>
         </div>
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView">
           <Messages v-if="messages" :_messages="messages"/>
-          <AddMessage/>
+          <AddMessage :withUser="{id: activeUserId}"/>
         </div>
       </div>
     </template>
@@ -141,6 +145,13 @@ export default {
     NoConversations
   },
 
+  data() {
+    return {
+      chatOptionsOpened: false,
+      isTyping: false
+    };
+  },
+
   computed: {
     noMessages() {
       return this.$route.path === "/chat/no-messages";
@@ -158,6 +169,14 @@ export default {
     },
     activeUserId() {
       return parseInt(this.$route.params.userId);
+    },
+    activeChat() {
+      return this.$store.state.chat.chats.find(
+        v => v.withUser.id === this.activeUserId
+      );
+    },
+    activeUser() {
+      return this.activeChat.withUser;
     }
   },
 
@@ -165,6 +184,14 @@ export default {
     messageTime(message) {
       return dateFns.distanceInWordsStrict(new Date(), message.changedAt);
     }
+    // reportUser() {
+    //   this.$store.dispatch("modal/show", {
+    //     name: "postReport",
+    //     data: {
+    //       postId: this.postId
+    //     }
+    //   });
+    // }
   },
 
   created() {

@@ -58,6 +58,33 @@ createRequestAction({
   resultKey: "messages",
   paramsToPath: function(params, path) {
     return path.replace(/{userId}/, params);
+  },
+  resultConvert: function(messages) {
+    return Object.values(messages).reverse();
+  }
+});
+
+createRequestAction({
+  prefix: "sendMessage",
+  apiPath: "chats/{userId}/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  resultKey: "messages",
+  paramsToOptions: function(params, options) {
+    options.data = {
+      text: params.message
+    };
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  },
+  resultConvert: function(message, state) {
+    return [...state.messages, message];
   }
 });
 

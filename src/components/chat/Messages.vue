@@ -1,69 +1,51 @@
 <template>
   <div class="chat-section">
-    <div
-      class="chatContent os-host os-theme-dark os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">
-      <div class="os-resize-observer-host">
-        <div class="os-resize-observer observed" style="left: 0px; right: auto;"></div>
-      </div>
-      <div class="os-size-auto-observer" style="height: calc(100% + 1px); float: left;">
-        <div class="os-resize-observer observed"></div>
-      </div>
-      <div class="os-content-glue" style="width: 540px; margin: 0px -20px; height: 788px;"></div>
-      <div class="os-padding">
-        <div class="os-viewport os-viewport-native-scrollbars-invisible" style="">
-          <div class="os-content" style="padding: 0px 20px; height: 100%; width: 100%;">
-
-            <div
-              v-for="v in messages"
-              v-bind:key="v.id"
-              class="chatMessage notAuthorMessage withTime"
-              :class="{
+    <scrolly class="chat-wrapper">
+      <scrolly-viewport>
+        <div
+          v-for="v in messages"
+          v-bind:key="v.id"
+          class="chatMessage notAuthorMessage"
+          :class="{
               authorMessage: isAuthorMessage(v),
-              firstMessageInGroup: v.firstMessageInGroup
+              firstMessageInGroup: v.firstMessageInGroup,
+              withTime: v.lastMessageInGroup
               }"
-            >
-              <div class="chatMessageWrapper">
-                <div class="avatar">
-                  <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
-                </div>
-                <div class="messageContent">
-                  <div class="messageWrapper ">
-                    <span class="message">{{ v.text }}</span>
-                  </div>
-                  <div class="time">
-                    <span class="status">-</span>
-                    <span class="timeValue">{{ v.changedAt }}</span>
-                  </div>
-                </div>
+        >
+          <div class="chatMessageWrapper">
+            <div class="avatar">
+              <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
+            </div>
+            <div class="messageContent">
+              <div class="messageWrapper ">
+                <span class="message">{{ v.text }}</span>
+              </div>
+              <div class="time" v-if="v.lastMessageInGroup">
+                <span class="status">-</span>
+                <span class="timeValue">{{ v.changedAt }}</span>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
-
-      <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable">
-        <div class="os-scrollbar-track os-scrollbar-track-off">
-          <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0%, 0px);"></div>
-        </div>
-      </div>
-      <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable">
-        <div class="os-scrollbar-track os-scrollbar-track-off">
-          <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0%);">
-          </div>
-        </div>
-      </div>
-      <div class="os-scrollbar-corner"></div>
-
-    </div>
+      </scrolly-viewport>
+      <scrolly-bar axis="y"></scrolly-bar>
+      <scrolly-bar axis="x"></scrolly-bar>
+    </scrolly>
   </div>
 </template>
 
 <script>
 import userMixin from "@/mixins/user";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
 export default {
   name: "ChatMessages",
+
+  components: {
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar
+  },
 
   mixins: [userMixin],
 
@@ -76,11 +58,11 @@ export default {
 
   computed: {
     messages() {
-      return this._messages;
-      // if (!this._messages.length) {
-      //   return [];
-      // }
-      // return this.addGrouping(this._messages);
+      if (!this._messages.length) {
+        return [];
+      }
+      const messages = JSON.parse(JSON.stringify(this._messages));
+      return this.addGrouping(messages);
     }
   },
 
@@ -90,7 +72,7 @@ export default {
     },
 
     addGrouping(messages) {
-      return this.setFirstInGroup(messages);
+      return this.setFirstInGroup(this.setLastInGroup(messages));
     },
 
     setFirstInGroup(messages) {
@@ -129,7 +111,7 @@ export default {
           // if very last message
           if (i === messages.length - 1) {
             messages[i].lastMessageInGroup = true;
-            return;
+            return messages;
           }
 
           let currentMine = this.checkAuthor(messages[i].fromUser);
@@ -143,6 +125,7 @@ export default {
           }
         }
       }
+      return messages;
     },
 
     checkAuthor(user) {
@@ -151,3 +134,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.chat-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.scrolly-viewport {
+  padding: 20px;
+}
+</style>
