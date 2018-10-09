@@ -277,10 +277,6 @@ export default {
 
   created() {
     this.init();
-  },
-
-  mounted() {
-    document.getElementsByTagName("body")[0].className = "profile-page";
   }
 };
 </script>

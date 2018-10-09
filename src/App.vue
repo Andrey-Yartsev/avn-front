@@ -65,6 +65,15 @@ export default {
       this.showToast = true;
     },
     $route() {
+      if (this.$route.name === "profile") {
+        if (
+          document.getElementsByTagName("body")[0].className !== "profile-page"
+        ) {
+          document.getElementsByTagName("body")[0].className = "profile-page";
+        }
+      } else if (document.getElementsByTagName("body")[0].className != "") {
+        document.getElementsByTagName("body")[0].className = "";
+      }
       return this.$store.dispatch("modal/hideAll");
     }
   }

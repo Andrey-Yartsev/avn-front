@@ -137,6 +137,7 @@ const routes = [
   {
     beforeEnter: Profile.init,
     path: "*",
+    name: "profile",
     component: ProfilePage
   }
 ];
