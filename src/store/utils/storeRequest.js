@@ -9,7 +9,7 @@ const storeRequest = (
   dispatch,
   apiPath,
   options,
-  { resultKey, localError }
+  { state, localError, resultKey, resultConvert }
 ) => {
   return new Promise(accept => {
     commit(prefix + "ResetError");
@@ -29,7 +29,10 @@ const storeRequest = (
           setTimeout(() => {
             commit(prefix + "Success", null);
           }, 5000);
-          const r = await response.json();
+          let r = await response.json();
+          if (resultConvert) {
+            r = resultConvert(r, state);
+          }
           commit(resultKey, r);
           accept(r);
         } else {
@@ -89,6 +92,7 @@ const createRequestAction = ({
   options,
   localError,
   resultKey,
+  resultConvert,
   defaultResultValue,
   paramsToOptions,
   paramsToPath
@@ -97,7 +101,7 @@ const createRequestAction = ({
     resultKey = prefix + "Result";
   }
 
-  actions[prefix] = function({ commit, dispatch }, params) {
+  actions[prefix] = function({ commit, dispatch, state }, params) {
     if (params !== undefined && paramsToOptions) {
       options = paramsToOptions(params, options);
     }
@@ -105,8 +109,10 @@ const createRequestAction = ({
       apiPath = paramsToPath(params, apiPath);
     }
     return storeRequest("token", prefix, commit, dispatch, apiPath, options, {
+      state,
       localError,
-      resultKey
+      resultKey,
+      resultConvert
     });
   };
 
