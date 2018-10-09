@@ -18,6 +18,13 @@
   }
 }
 
+.header-return-btn {
+
+  .profile-page & {
+    color: $white;
+  }
+}
+
 .sticky-header-controls {
 
   .profile-page & {
