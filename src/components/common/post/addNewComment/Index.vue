@@ -1,6 +1,6 @@
 <template>
     <form class="comment-form">
-        <input class="comment-input rounded" placeholder="Add a comment" v-model="message">
+        <textarea class="comment-input rounded" placeholder="Add a comment" rows="1" v-model="message"></textarea>
         <button 
             type="submit"
             class="btn comment-btn"

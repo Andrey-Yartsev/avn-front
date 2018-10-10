@@ -2,7 +2,7 @@
   <div class="postComments">
     <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
     <scrolly class="comments-list">
-      <scrolly-viewport>
+      <scrolly-viewport id="vue-comments-list" >
         <Comment v-for="comment in visibleComments" :key="comment.id" :comment="comment"></Comment>
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>
@@ -44,6 +44,13 @@ export default {
         ? [...this.comments]
         : this.comments.slice(0, this.shownCommentsCount);
       return copy.reverse();
+    }
+  },
+  watch: {
+    shownCommentsCount: function() {
+      this.$scrollTo("#vue-comments-list .comment:last-child", {
+        container: "#vue-comments-list"
+      });
     }
   }
 };

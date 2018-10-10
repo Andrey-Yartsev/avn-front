@@ -24,9 +24,9 @@
               <p class="text hidden-mobile">
               {{ post.text }}
               </p>
-              <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCount"></CommentsList>
+              <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCountFull"></CommentsList>
               <template v-if="isAuth()" >
-                <form class="comment-form"></form>
+                <AddComment :sendNewComment="sendNewComment" />
                 <template v-if="!isOwner() && post.author.canEarn">
                   <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
                     <input type="hidden" name="type" value="tip" />
@@ -69,11 +69,15 @@ import Header from "@/components/common/post/header/Index";
 import Actions from "@/components/common/post/actions/Index";
 import Media from "@/components/common/post/media/Index";
 import CommentsList from "@/components/common/post/commentsListFull/Index";
+import AddComment from "@/components/common/post/addNewComment/Index";
 
 export default {
   name: "PostModal",
   mixins: [userMixin],
   computed: {
+    actionPrefix() {
+      return this.from;
+    },
     post() {
       return this.dataSrc.posts[this.index];
     },
@@ -102,11 +106,12 @@ export default {
     Header,
     Media,
     CommentsList,
-    Actions
+    Actions,
+    AddComment
   },
   methods: {
     likePost() {
-      this.$store.dispatch("home/likePost", {
+      this.$store.dispatch(this.actionPrefix + "/likePost", {
         postId: this.post.id,
         addLike: !this.post.isFavorite
       });
@@ -120,6 +125,12 @@ export default {
     },
     scroll() {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
+    },
+    sendNewComment(msg) {
+      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
+        postId: this.post.id,
+        text: msg
+      });
     }
   },
   created() {
@@ -133,6 +144,7 @@ export default {
 
     const post = this.dataSrc.posts.filter(({ id }) => id === postId)[0];
 
+    this.from = from;
     this.postId = postId;
     this.backUrl = backUrl;
     this.index = this.dataSrc.posts.indexOf(post);

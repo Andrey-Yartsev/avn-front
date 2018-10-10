@@ -99,7 +99,8 @@ export default {
             ...post,
             comments: post.comments || [],
             commentsLoading: true,
-            shownCommentsCount: 3
+            shownCommentsCount: 3,
+            shownCommentsCountFull: 10
           };
         }
 
@@ -131,6 +132,7 @@ export default {
           ...post,
           comments: [data.comment, ...post.comments],
           shownCommentsCount: post.shownCommentsCount + 1,
+          shownCommentsCountFull: post.shownCommentsCountFull + 1,
           commentsCount: post.commentsCount + 1
         };
       });
