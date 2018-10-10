@@ -20,12 +20,21 @@ export default {
     sendNewComment: {
       type: Function,
       required: true
+    },
+    userName: {
+      type: String,
+      default: ""
     }
   },
   methods: {
     sendComment() {
       this.sendNewComment(this.message);
       this.message = "";
+    }
+  },
+  watch: {
+    userName: function() {
+      this.message = `@${this.userName}, `;
     }
   }
 };

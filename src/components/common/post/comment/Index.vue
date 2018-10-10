@@ -10,7 +10,7 @@
     <div class="comment-footer" v-if="type">
       <time class="date">{{ dateTime }}</time>
       <span v-if="comment.likesCount" class="likes-count">{{ comment.likesCount }} likes</span>
-      <button type="button" class="btn-reply">Reply</button>
+      <button type="button" class="btn-reply" @click="$emit('commentReply', comment.author.username)">Reply</button>
     </div>
     <button :class="['btn-like', {active: comment.isLiked}]" v-if="type"></button>
   </div>

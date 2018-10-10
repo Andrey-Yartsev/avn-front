@@ -8,6 +8,7 @@
           :key="comment.id"
           :comment="comment"
           :type="true"
+          v-on:commentReply="userName => $emit('commentReply', userName)"
         />
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>

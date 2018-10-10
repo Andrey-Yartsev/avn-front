@@ -27,9 +27,10 @@
               <CommentsList
                 :comments="post.comments || []"
                 :shownCommentsCount="post.shownCommentsCountFull"
+                v-on:commentReply="commentReply"
               />
               <template v-if="isAuth()" >
-                <AddComment :sendNewComment="sendNewComment" />
+                <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
                 <template v-if="!isOwner() && post.author.canEarn">
                   <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
                     <input type="hidden" name="type" value="tip" />
@@ -102,7 +103,8 @@ export default {
     postId: undefined,
     dataSrc: undefined,
     backUrl: undefined,
-    index: 0
+    index: 0,
+    commentReplyUserName: ""
   }),
   components: {
     Modal,
@@ -133,6 +135,12 @@ export default {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         postId: this.post.id,
         text: msg
+      });
+    },
+    commentReply(userName) {
+      this.commentReplyUserName = "";
+      setTimeout(() => {
+        this.commentReplyUserName = userName;
       });
     }
   },
