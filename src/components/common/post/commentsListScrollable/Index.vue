@@ -3,7 +3,12 @@
     <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
     <scrolly class="comments-list">
       <scrolly-viewport id="vue-comments-list" >
-        <Comment v-for="comment in visibleComments" :key="comment.id" :comment="comment"></Comment>
+        <Comment
+          v-for="comment in visibleComments"
+          :key="comment.id"
+          :comment="comment"
+          :type="true"
+        />
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>
       <scrolly-bar axis="x"></scrolly-bar>
@@ -12,7 +17,7 @@
 </template>
 
 <script>
-import Comment from "./comment/Index";
+import Comment from "@/components/common/post/comment/Index";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
 export default {

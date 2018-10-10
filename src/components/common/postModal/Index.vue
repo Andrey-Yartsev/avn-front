@@ -24,7 +24,10 @@
               <p class="text hidden-mobile">
               {{ post.text }}
               </p>
-              <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCountFull"></CommentsList>
+              <CommentsList
+                :comments="post.comments || []"
+                :shownCommentsCount="post.shownCommentsCountFull"
+              />
               <template v-if="isAuth()" >
                 <AddComment :sendNewComment="sendNewComment" />
                 <template v-if="!isOwner() && post.author.canEarn">
@@ -68,7 +71,7 @@ import userMixin from "@/mixins/user";
 import Header from "@/components/common/post/header/Index";
 import Actions from "@/components/common/post/actions/Index";
 import Media from "@/components/common/post/media/Index";
-import CommentsList from "@/components/common/post/commentsListFull/Index";
+import CommentsList from "@/components/common/post/commentsListScrollable/Index";
 import AddComment from "@/components/common/post/addNewComment/Index";
 
 export default {
