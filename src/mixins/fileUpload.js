@@ -1,4 +1,4 @@
-import { getMediaFilePreview, uniqId } from "@/utils/mediaFiles";
+import { getMediaFilePreview, fileUpload, uniqId } from "@/utils/mediaFiles";
 
 export default {
   data() {
@@ -27,7 +27,7 @@ export default {
       e.target.value = "";
     },
 
-    removePostMedia(id) {
+    removeMedia(id) {
       this.preloadedMedias = this.preloadedMedias.filter(m => m.id !== id);
     },
 
@@ -35,6 +35,14 @@ export default {
       this.preloadedMedias = this.preloadedMedias.map(
         m => (m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m)
       );
+    },
+
+    async getMediaFiles() {
+      const promises = this.preloadedMedias.map(({ id, file }) =>
+        fileUpload({ id, file }, this.setUploadProgress)
+      );
+
+      return await Promise.all(promises);
     }
   }
 };

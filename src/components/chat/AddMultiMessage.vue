@@ -24,7 +24,9 @@ export default {
       this.userIds.forEach(userId => {
         this.$store.dispatch("chat/sendMessage", {
           userId,
-          message
+          data: {
+            message
+          }
         });
       });
       this.$emit("sent");

@@ -20,10 +20,10 @@ export default {
   },
 
   methods: {
-    sendMessage(message) {
+    sendMessage(data) {
       this.$store.dispatch("chat/sendMessage", {
         userId: this.withUser.id,
-        message
+        data
       });
     }
   }

@@ -99,9 +99,7 @@ createRequestAction({
     method: "POST"
   },
   paramsToOptions: function(params, options) {
-    options.data = {
-      text: params.message
-    };
+    options.data = params.data;
     return options;
   },
   paramsToPath: function(params, path) {

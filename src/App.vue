@@ -28,8 +28,8 @@ import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 import ColorScheme from "@/mixins/colorScheme";
-import ws from "@/ws";
 import UserReportModal from "./components/common/UserReportModal";
+import ws from "@/ws";
 
 export default {
   components: {

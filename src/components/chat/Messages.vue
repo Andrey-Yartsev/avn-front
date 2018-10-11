@@ -19,6 +19,13 @@
             <div class="messageContent">
               <div class="messageWrapper ">
                 <span class="message">{{ v.text }}</span>
+                <div class="media" v-if="v.media.length">
+                  <figure class="media-item active media-item_photo" data-index="0">
+                    <a class="postLink" :href="v.media[0].src.source" target="_blank">
+                      <img :src="v.media[0].src.source" width="760" height="428">
+                    </a>
+                  </figure>
+                </div>
               </div>
               <div class="time" v-if="v.lastMessageInGroup">
                 <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>

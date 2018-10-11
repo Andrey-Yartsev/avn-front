@@ -27,7 +27,7 @@
             v-for="media in preloadedMedias"
             :media="media"
             :key="media.id"
-            v-on:removePostMedia="removePostMedia"
+            v-on:removeMedia="removeMedia"
             :isSaving="isSaving"
           />
         </div>
@@ -77,17 +77,17 @@
 <script>
 import Loader from "@/components/common/Loader";
 import MediaPreview from "./MediaPreview";
-import { getMediaFilePreview, fileUpload, uniqId } from "@/utils/mediaFiles";
+import FileUpload from "@/mixins/fileUpload";
 
 export default {
   name: "AddPost",
+  mixins: [FileUpload],
   data: () => ({
     expanded: false,
     tweetSend: false,
     postMsg: "",
     isSaving: false,
-    isFree: false,
-    preloadedMedias: []
+    isFree: false
   }),
   components: {
     Loader,
@@ -112,11 +112,7 @@ export default {
 
       this.isSaving = true;
 
-      const promises = this.preloadedMedias.map(({ id, file }) =>
-        fileUpload({ id, file }, this.setUploadProgress)
-      );
-
-      const mediaFiles = await Promise.all(promises);
+      const mediaFiles = await this.getMediaFiles();
 
       const newPostData = {
         text: this.postMsg,
@@ -129,34 +125,6 @@ export default {
       }
 
       this.$store.dispatch("post/savePost", newPostData);
-    },
-
-    addMediaFiles: async function(e) {
-      const files = e.target.files;
-      if (!files.length) return;
-
-      for (let i = 0; i < files.length; i += 1) {
-        const preview = await getMediaFilePreview(files[i]);
-
-        this.preloadedMedias.push({
-          file: files[i],
-          userFileName: files[i].name,
-          preview: preview.preview,
-          id: uniqId(),
-          loaded: 0
-        });
-      }
-
-      e.target.value = "";
-    },
-    removePostMedia(id) {
-      this.preloadedMedias = this.preloadedMedias.filter(m => m.id !== id);
-    },
-
-    setUploadProgress(id, loaded, total) {
-      this.preloadedMedias = this.preloadedMedias.map(
-        m => (m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m)
-      );
     }
   }
 };

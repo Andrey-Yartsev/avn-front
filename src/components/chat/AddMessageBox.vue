@@ -5,7 +5,7 @@
         v-for="media in preloadedMedias"
         :media="media"
         :key="media.id"
-        v-on:removePostMedia="removePostMedia"
+        v-on:removePostMedia="removeMedia"
         :isSaving="isSaving"
       />
     </div>
@@ -46,7 +46,7 @@
         <button class="setPrice btn">Set Price</button>
       </div>
       <button class="getPaid btn-el hidden"></button>
-      <button type="submit" class="submit btn-el" :disabled="!message"></button>
+      <button type="submit" class="submit btn-el" :disabled="!canSend"></button>
     </form>
   </div>
 </template>
@@ -66,13 +66,27 @@ export default {
 
   data() {
     return {
-      message: ""
+      message: "",
+      isSaving: false
     };
   },
 
   methods: {
-    sendMessage() {
-      this.$emit("send", this.message);
+    canSend() {
+      return this.message || this.preloadedMedias.length;
+    },
+    async sendMessage() {
+      this.isSaving = true;
+      const mediaFiles = await this.getMediaFiles();
+      this.preloadedMedias = [];
+      const opt = {
+        price: 0,
+        text: this.message
+      };
+      if (mediaFiles.length) {
+        opt.mediaFile = mediaFiles[0];
+      }
+      this.$emit("send", opt);
       this.message = "";
     }
   }
