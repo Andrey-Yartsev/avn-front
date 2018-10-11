@@ -24,34 +24,38 @@
               <p class="text hidden-mobile">
               {{ post.text }}
               </p>
-              <div class="postComments">
-                <template v-if="isAuth()" >
-                  <form class="comment-form"></form>
-                  <template v-if="!isOwner() && post.author.canEarn">
-                    <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
-                      <input type="hidden" name="type" value="tip" />
-                      <input type="hidden" name="id" :value="post.author.id" />
-                      <input type="hidden" name="access-token" :value="accessToken" />
-                      <span role="button" class="btn btn-cancel">Cancel</span>
-                      <div class="tip-amount-field">
-                        <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
-                      </div>
-                      <button type="submit" class="btn" disabled>Send tip</button>
-                    </form>
-                  </template>
-                  <Actions 
-                    :post="post" 
-                    v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
-                    v-on:postLike="likePost"
-                  />
+              <CommentsList
+                :comments="post.comments || []"
+                :shownCommentsCount="post.shownCommentsCountFull"
+                v-on:commentReply="commentReply"
+                v-on:likeComment="likeComment"
+              />
+              <template v-if="isAuth()" >
+                <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
+                <template v-if="!isOwner() && post.author.canEarn">
+                  <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
+                    <input type="hidden" name="type" value="tip" />
+                    <input type="hidden" name="id" :value="post.author.id" />
+                    <input type="hidden" name="access-token" :value="accessToken" />
+                    <span role="button" class="btn btn-cancel">Cancel</span>
+                    <div class="tip-amount-field">
+                      <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
+                    </div>
+                    <button type="submit" class="btn" disabled>Send tip</button>
+                  </form>
                 </template>
-                <template v-else>
-                  <div class="guest-comments-form">
-                    <p>Please login to leave comments or tips</p>
-                    <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
-                  </div>
-                </template>
-              </div> 
+                <Actions 
+                  :post="post" 
+                  v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+                  v-on:postLike="likePost"
+                />
+              </template>
+              <template v-else>
+                <div class="guest-comments-form">
+                  <p>Please login to leave comments or tips</p>
+                  <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -69,11 +73,16 @@ import userMixin from "@/mixins/user";
 import Header from "@/components/common/post/header/Index";
 import Actions from "@/components/common/post/actions/Index";
 import Media from "@/components/common/post/media/Index";
+import CommentsList from "@/components/common/post/commentsListScrollable/Index";
+import AddComment from "@/components/common/post/addNewComment/Index";
 
 export default {
   name: "PostModal",
   mixins: [userMixin],
   computed: {
+    actionPrefix() {
+      return this.from;
+    },
     post() {
       return this.dataSrc.posts[this.index];
     },
@@ -95,17 +104,20 @@ export default {
     postId: undefined,
     dataSrc: undefined,
     backUrl: undefined,
-    index: 0
+    index: 0,
+    commentReplyUserName: ""
   }),
   components: {
     Modal,
     Header,
     Media,
-    Actions
+    CommentsList,
+    Actions,
+    AddComment
   },
   methods: {
     likePost() {
-      this.$store.dispatch("home/likePost", {
+      this.$store.dispatch(this.actionPrefix + "/likePost", {
         postId: this.post.id,
         addLike: !this.post.isFavorite
       });
@@ -119,6 +131,25 @@ export default {
     },
     scroll() {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
+    },
+    sendNewComment(msg) {
+      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
+        postId: this.post.id,
+        text: msg
+      });
+    },
+    commentReply(userName) {
+      this.commentReplyUserName = "";
+      setTimeout(() => {
+        this.commentReplyUserName = userName;
+      });
+    },
+    likeComment(data) {
+      this.$store.dispatch(this.actionPrefix + "/likeComment", {
+        postId: this.post.id,
+        addLike: !data.isLiked,
+        commentId: data.commentId
+      });
     }
   },
   created() {
@@ -132,6 +163,7 @@ export default {
 
     const post = this.dataSrc.posts.filter(({ id }) => id === postId)[0];
 
+    this.from = from;
     this.postId = postId;
     this.backUrl = backUrl;
     this.index = this.dataSrc.posts.indexOf(post);

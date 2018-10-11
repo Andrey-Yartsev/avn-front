@@ -67,6 +67,22 @@ export default {
           }
         })
         .catch(() => {});
+    },
+    likeComment({ commit }, { postId, commentId, addLike }) {
+      return PostApi.likeComment({ commentId, addLike })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(function({ isLiked, likesCount }) {
+              commit("postCommentLikeSuccess", {
+                postId,
+                commentId,
+                isLiked,
+                likesCount
+              });
+            });
+          }
+        })
+        .catch(() => {});
     }
   },
 
@@ -94,16 +110,13 @@ export default {
 
     postCommentsRequest(state, { postId }) {
       state.posts = state.posts.map(post => {
-        if (postId === post.id) {
-          return {
-            ...post,
-            comments: post.comments || [],
-            commentsLoading: true,
-            shownCommentsCount: 3
-          };
-        }
-
-        return post;
+        return {
+          ...post,
+          comments: [],
+          commentsLoading: postId === post.id,
+          shownCommentsCount: 3,
+          shownCommentsCountFull: 10
+        };
       });
     },
 
@@ -131,6 +144,7 @@ export default {
           ...post,
           comments: [data.comment, ...post.comments],
           shownCommentsCount: post.shownCommentsCount + 1,
+          shownCommentsCountFull: post.shownCommentsCountFull + 1,
           commentsCount: post.commentsCount + 1
         };
       });
@@ -147,6 +161,28 @@ export default {
             ...post,
             isFavorite,
             favoritesCount
+          };
+        }
+
+        return post;
+      });
+    },
+
+    postCommentLikeSuccess(state, { postId, commentId, isLiked, likesCount }) {
+      state.posts = state.posts.map(post => {
+        if (postId === post.id) {
+          return {
+            ...post,
+            comments: post.comments.map(comment => {
+              if (comment.id === commentId) {
+                return {
+                  ...comment,
+                  isLiked,
+                  likesCount
+                };
+              }
+              return comment;
+            })
           };
         }
 

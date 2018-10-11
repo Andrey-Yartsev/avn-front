@@ -35,6 +35,12 @@ export default {
       mode: "cors"
     });
   },
+  likeComment({ commentId, addLike }) {
+    return tokenRequest(`comments/${commentId}/like`, {
+      method: addLike ? "POST" : "DELETE",
+      mode: "cors"
+    });
+  },
   savePost(data) {
     return tokenRequest(`posts`, {
       method: "POST",
