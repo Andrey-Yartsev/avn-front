@@ -25,7 +25,7 @@ import Toast from "./components/common/Toast";
 import ColorScheme from "@/mixins/colorScheme";
 
 import ErrorModal from "@/components/modal/Error";
-import PostModal from "@/components/common/postModal/Index";
+import PostModal from "@/components/postModal/Index";
 import PostReportModal from "@/components/common/post/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 
