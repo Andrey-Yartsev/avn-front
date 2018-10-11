@@ -23,7 +23,7 @@
     flex: 1 1 100%;
     position: relative;
     overflow: hidden;
-    background: url(#{$assetPath}/static/img/globe.svg) 50% 55px no-repeat;
+    background: url(#{$assetPath}/img/globe.svg) 50% 55px no-repeat;
     background-size: 112% auto;
     @include media-breakpoint-up($desktop-breakpoint) {
       background-position: 129% 9px;

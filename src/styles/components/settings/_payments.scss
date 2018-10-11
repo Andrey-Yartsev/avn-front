@@ -42,16 +42,16 @@
     }
 
     &.visa {
-      background-image: url(#{$assetPath}/static/img/card-visa.svg);
+      background-image: url(#{$assetPath}/img/card-visa.svg);
     }
     &.maestro {
-      background-image: url(#{$assetPath}/static/img/card-maestro.svg);
+      background-image: url(#{$assetPath}/img/card-maestro.svg);
     }
     &.mastercard {
-      background-image: url(#{$assetPath}/static/img/card-mastercard.svg);
+      background-image: url(#{$assetPath}/img/card-mastercard.svg);
     }
     &.american {
-      background-image: url(#{$assetPath}/static/img/card-american.svg);
+      background-image: url(#{$assetPath}/img/card-american.svg);
     }
     .payment-system {
       font-weight: 500;

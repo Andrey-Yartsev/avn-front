@@ -39,7 +39,7 @@
 
       &:after {
         content: "";
-        background: url("#{$assetPath}/static/img/loading.svg") no-repeat 0 0 / cover;
+        background: url("#{$assetPath}/img/loading.svg") no-repeat 0 0 / cover;
         animation: lds-dual-ring 1.2s linear infinite;
         position: absolute;
         left: 50%;
