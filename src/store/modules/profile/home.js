@@ -2,7 +2,7 @@
 
 import UserApi from "@/api/user";
 import SubscriptionsApi from "@/api/subscriptions";
-import PostComments from "../../mixins/posts";
+import PostMixin from "@/store/mixins/posts";
 
 const initState = {
   loading: false,
@@ -111,6 +111,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  actions: { ...actions, ...PostComments.actions },
-  mutations: { ...mutations, ...PostComments.mutations }
+  actions: { ...actions, ...PostMixin.actions },
+  mutations: { ...mutations, ...PostMixin.mutations }
 };

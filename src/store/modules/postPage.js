@@ -10,16 +10,12 @@ const initState = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: "",
-  postReportReasons: []
+  marker: ""
 };
 
 const state = { ...initState };
 
 const mutations = {
-  getPostReportReasonsSuccess(state, data) {
-    state.postReportReasons = data;
-  },
   resetPageState(state) {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
@@ -28,33 +24,19 @@ const mutations = {
 };
 
 const actions = {
-  getPosts({ commit }) {
-    const { limit, offset, marker } = state;
+  getPost({ commit }, { postId }) {
     commit("postsRequest");
-
-    return PostApi.getPosts({ limit, offset, marker })
+    return PostApi.getPost({ postId })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
-            commit("postsRequestSuccess", res);
+            commit("postsRequestSuccess", { list: [res] });
           });
         }
       })
       .catch(err => {
         commit("postsRequestFail", err);
       });
-  },
-
-  getPostReportReasons({ commit }, { type }) {
-    return PostApi.getPostReportReasons({ type })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("getPostReportReasonsSuccess", res);
-          });
-        }
-      })
-      .catch(() => {});
   }
 };
 

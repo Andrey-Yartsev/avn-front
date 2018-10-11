@@ -106,12 +106,9 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.dummy,
+    beforeEnter: Auth.requireAny,
     path: "/post/:postId",
-    component: PostPage,
-    meta: {
-      noAuthHeader: true
-    }
+    component: PostPage
   },
   {
     path: "/explore",

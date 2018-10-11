@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Comment from "@/components/common/post/comment/Index";
+import Comment from "@/components/common/postParts/comment/Index";
 
 export default {
   name: "CommentsList",

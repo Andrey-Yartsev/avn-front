@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Post from "./post/Index";
+import Post from "@/components/post/MediumView";
 
 export default {
   name: "PostCollection",

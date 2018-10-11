@@ -19,19 +19,6 @@ const mutations = {
 };
 
 const actions = {
-  getPost({ commit }, { postId }) {
-    return PostApi.getPost({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(postData) {
-            commit("setCurrentPost", {
-              postData
-            });
-          });
-        }
-      })
-      .catch(() => {});
-  },
   savePost({ commit }, data) {
     return PostApi.savePost(data)
       .then(response => {

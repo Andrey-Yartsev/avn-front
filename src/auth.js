@@ -76,6 +76,30 @@ const Auth = {
     }
   },
 
+  requireAny(to, from, next) {
+    if (Auth.loggedIn) {
+      return next();
+    }
+    const token = BrowserStore.get("token");
+    if (!token) {
+      return next();
+    }
+    Store.dispatch("auth/setToken", token);
+    Store.dispatch("profile/fetch")
+      .then(() => next())
+      .catch(error => {
+        if (error.code === 102) {
+          Store.dispatch("auth/resetUser").then(() => {
+            Store.dispatch("auth/setOtpAuth", true).then(() => next());
+          });
+        } else {
+          Store.dispatch("auth/logout").then(() => {
+            next();
+          });
+        }
+      });
+  },
+
   twitterAuth(to, from, next) {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");

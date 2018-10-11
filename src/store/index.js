@@ -5,6 +5,7 @@ import global from "@/store/modules/global";
 import auth from "@/store/modules/auth";
 import home from "@/store/modules/home";
 import post from "@/store/modules/post";
+import postPage from "@/store/modules/postPage";
 import profile from "@/store/modules/profile";
 import signUp from "@/store/modules/signUp";
 import otp from "@/store/modules/otp";
@@ -29,7 +30,8 @@ const store = new Vuex.Store({
     sessions,
     post,
     modal,
-    chat
+    chat,
+    postPage
   }
 });
 

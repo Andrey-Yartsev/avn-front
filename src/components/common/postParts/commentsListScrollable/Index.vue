@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Comment from "@/components/common/post/comment/Index";
+import Comment from "@/components/common/postParts/comment/Index";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
 export default {
