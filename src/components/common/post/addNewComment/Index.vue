@@ -1,6 +1,13 @@
 <template>
     <form class="comment-form">
-        <textarea class="comment-input rounded" placeholder="Add a comment" rows="1" v-model="message"></textarea>
+        <textarea
+          class="comment-input rounded"
+          placeholder="Add a comment"
+          rows="1"
+          v-model="message"
+          ref="message"
+          @keypress.enter.prevent="sendComment"
+        ></textarea>
         <button 
             type="submit"
             class="btn comment-btn"
@@ -35,6 +42,7 @@ export default {
   watch: {
     userName: function() {
       this.message = `@${this.userName}, `;
+      this.$refs.message.focus();
     }
   }
 };
