@@ -12,7 +12,7 @@
       <span v-if="comment.likesCount" class="likes-count">{{ comment.likesCount }} likes</span>
       <button type="button" class="btn-reply" @click="$emit('commentReply', comment.author.username)">Reply</button>
     </div>
-    <button :class="['btn-like', {active: comment.isLiked}]" v-if="type"></button>
+    <button :class="['btn-like', {active: comment.isLiked}]" v-if="type"  @click="$emit('likeComment', { commentId: comment.id, isLiked: comment.isLiked })"></button>
   </div>
 </template>
 

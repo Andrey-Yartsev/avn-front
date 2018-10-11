@@ -28,6 +28,7 @@
                 :comments="post.comments || []"
                 :shownCommentsCount="post.shownCommentsCountFull"
                 v-on:commentReply="commentReply"
+                v-on:likeComment="likeComment"
               />
               <template v-if="isAuth()" >
                 <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
@@ -141,6 +142,13 @@ export default {
       this.commentReplyUserName = "";
       setTimeout(() => {
         this.commentReplyUserName = userName;
+      });
+    },
+    likeComment(data) {
+      this.$store.dispatch(this.actionPrefix + "/likeComment", {
+        postId: this.post.id,
+        addLike: !data.isLiked,
+        commentId: data.commentId
       });
     }
   },

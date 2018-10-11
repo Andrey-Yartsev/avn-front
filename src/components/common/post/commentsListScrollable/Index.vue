@@ -9,6 +9,7 @@
           :comment="comment"
           :type="true"
           v-on:commentReply="userName => $emit('commentReply', userName)"
+          v-on:likeComment="data => $emit('likeComment', data)"
         />
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>

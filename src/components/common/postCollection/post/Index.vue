@@ -18,7 +18,10 @@
             ></Actions>
         </div>
         <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
-        <CommentsList :comments="post.comments || []" :shownCommentsCount="post.shownCommentsCount"></CommentsList>
+        <CommentsList
+          :comments="post.comments || []"
+          :shownCommentsCount="post.shownCommentsCount"
+        />
     </div>
 </template>
 

@@ -67,6 +67,22 @@ export default {
           }
         })
         .catch(() => {});
+    },
+    likeComment({ commit }, { postId, commentId, addLike }) {
+      return PostApi.likeComment({ commentId, addLike })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(function({ isLiked, likesCount }) {
+              commit("postCommentLikeSuccess", {
+                postId,
+                commentId,
+                isLiked,
+                likesCount
+              });
+            });
+          }
+        })
+        .catch(() => {});
     }
   },
 
@@ -145,6 +161,28 @@ export default {
             ...post,
             isFavorite,
             favoritesCount
+          };
+        }
+
+        return post;
+      });
+    },
+
+    postCommentLikeSuccess(state, { postId, commentId, isLiked, likesCount }) {
+      state.posts = state.posts.map(post => {
+        if (postId === post.id) {
+          return {
+            ...post,
+            comments: post.comments.map(comment => {
+              if (comment.id === commentId) {
+                return {
+                  ...comment,
+                  isLiked,
+                  likesCount
+                };
+              }
+              return comment;
+            })
           };
         }
 
