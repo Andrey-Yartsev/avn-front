@@ -94,17 +94,13 @@ export default {
 
     postCommentsRequest(state, { postId }) {
       state.posts = state.posts.map(post => {
-        if (postId === post.id) {
-          return {
-            ...post,
-            comments: post.comments || [],
-            commentsLoading: true,
-            shownCommentsCount: 3,
-            shownCommentsCountFull: 10
-          };
-        }
-
-        return post;
+        return {
+          ...post,
+          comments: [],
+          commentsLoading: postId === post.id,
+          shownCommentsCount: 3,
+          shownCommentsCountFull: 10
+        };
       });
     },
 
