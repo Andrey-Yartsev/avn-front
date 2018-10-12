@@ -10,7 +10,7 @@
       />
     </div>
     <form class="chatForm" v-on:submit.stop.prevent="sendMessage">
-      <label class="add-media-input btn-el">
+      <label class="add-media-input btn-el" v-if="!preloadedMedias.length">
         <input
           @change="addMediaFiles"
           type="file"
