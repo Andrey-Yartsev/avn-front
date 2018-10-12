@@ -1,7 +1,7 @@
 <template>
   <div class="chat-section">
-    <scrolly class="chat-wrapper" ref="a1">
-      <scrolly-viewport ref="messages">
+    <scrolly class="chat-wrapper">
+      <scrolly-viewport ref="messagesContainer">
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -33,6 +33,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="chatMessageSending" v-if="sending">
+          Sending...
         </div>
       </scrolly-viewport>
       <scrolly-bar axis="y"></scrolly-bar>
@@ -72,6 +75,9 @@ export default {
       }
       const messages = JSON.parse(JSON.stringify(this._messages));
       return this.addGrouping(messages);
+    },
+    sending() {
+      return this.$store.state.chat.sendMessageLoading;
     }
   },
 
@@ -97,16 +103,16 @@ export default {
       if (messages.length === 1) {
         messages[messages.length - 1].firstMessageInGroup = true;
       } else {
-        for (var i = 0; i < messages.length; i++) {
-          var currentModel = messages[i];
+        for (let i = 0; i < messages.length; i++) {
+          let currentModel = messages[i];
           // if very first message
           if (i === 0) {
             currentModel.firstMessageInGroup = true;
             continue;
           }
 
-          var currentMine = this.checkAuthor(currentModel.fromUser);
-          var isPrevNotMine = !this.checkAuthor(messages[i - 1].fromUser);
+          let currentMine = this.checkAuthor(currentModel.fromUser);
+          let isPrevNotMine = !this.checkAuthor(messages[i - 1].fromUser);
           //If current message is mine but not previous message set firstMessageInGroup flag
           if (
             (currentMine && isPrevNotMine) ||
@@ -150,10 +156,10 @@ export default {
     },
 
     scrollToLast() {
-      if (!this.$refs.messages) {
+      if (!this.$refs.messagesContainer) {
         return;
       }
-      this.$refs.messages.$el.scrollTop = this.$refs.messages.$el.scrollHeight;
+      this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
     },
 
     time(date) {
@@ -177,5 +183,10 @@ export default {
 
 .scrolly-viewport {
   padding: 20px;
+}
+
+.chatMessageSending {
+  margin: 5px 5px 40px 5px;
+  text-align: right;
 }
 </style>

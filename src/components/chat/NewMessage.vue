@@ -13,12 +13,12 @@
                      accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
           </div>
           <div class="back-popup-btn">
-            <span class="back backEvent hidden-mobile" @click="back"></span>
-            <a href="/chat" class="back hidden-desktop">
+            <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
+            <router-link to="/chat/home" class="back hidden-desktop">
               <span class="hidden-desktop">New message</span>
-            </a>
+            </router-link>
           </div>
-          <button class="nextStep btn hidden-desktop" disabled="">Next</button>
+          <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
         </div>
       </div>
       <div class="add-new-type add-new-type_underline-items line-bottom add-new-type_b-with-text hidden-desktop">
@@ -100,26 +100,20 @@
           <div class="os-scrollbar-corner"></div>
         </div>
       </div>
-
     </template>
     <template slot="col2">
       <div class="chatHeader chatHeader_add-shadow no-nav">
-
-
         <div class="selectedChatHeader">
           <div class="back-popup-btn hidden-desktop">
             <span class="back backEvent" @click="back"></span>
           </div>
-
           <template v-if="selectedUser">
             <router-link class="avatar" :to="'/' + selectedUser.username"></router-link>
-            <router-link class="name" :to="'/' + selectedUser.name">{{ selectedUser.name }}</router-link>
+            <router-link class="name" :to="'/' + selectedUser.username">{{ selectedUser.name }}</router-link>
             <span class="user-login">
-              <router-link class="username" :to="'/' + selectedUser.name">{{ selectedUser.name }}</router-link></span>
+              <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>
           </template>
-
           <span v-else-if="selected.length" class="mass-message">Mass message</span>
-
           <span
             class="chatOptions"
             v-if="selectedUser"
@@ -130,7 +124,7 @@
               <div class="chatOptions__dropdown">
                 <ul class="chatOptions__list">
                   <li><router-link class="profile-url" :to="'/' + selectedUser.username">View profile</router-link></li>
-                  <li><a class="menu-cancel" @click="chatOptionsOpened = false">Cancel</a></li>
+                  <li><a class="menu-cancel" >Cancel</a></li>
                 </ul>
               </div>
             </span>
@@ -239,17 +233,27 @@ export default {
       }, 300);
     },
     back() {
+      this.$store.commit("chat/setSecondScreen", false);
+    },
+    backDesktop() {
       this.$router.push("/chat");
     },
     gotoFirstSelected() {
       this.$router.push("/chat/" + this.selected[0]);
       this.selected = [];
+    },
+    next() {
+      this.$store.commit("chat/setSecondScreen", true);
     }
   },
 
   created() {
     this.$store.dispatch("chat/fetchChats");
     this.search();
+  },
+
+  beforeDestroy() {
+    this.$store.commit("chat/setSecondScreen", false);
   }
 };
 </script>

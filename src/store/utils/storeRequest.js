@@ -31,11 +31,11 @@ const storeRequest = (
             commit(prefix + "Success", null);
           }, 5000);
           let r = await response.json();
+          accept(r);
           if (resultConvert) {
             r = resultConvert(r, state);
           }
           commit(resultKey, r);
-          accept(r);
         } else {
           const r = await response.json();
           commit(prefix + "Error", r.error);

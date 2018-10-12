@@ -4,8 +4,7 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <router-link :to="'/' + user.name" class="avatar header-avatar">
-            <img
-              :src="user.avatar">
+            <img v-if="user.avatar" :src="user.avatar">
           </router-link>
           <h3>Messages</h3>
           <div class="newMessage-link">
@@ -13,11 +12,13 @@
               tag="span"
               to="/chat/new"
               class="newMessage newMessageEvent hidden-mobile"
-            >New message</router-link>
+            >New message
+            </router-link>
             <router-link
               to="/chat/new"
               class="newMessage hidden-desktop"
-            >New message</router-link>
+            >New message
+            </router-link>
           </div>
         </div>
       </div>
@@ -53,75 +54,61 @@
         v-if="!noMessages"
       >
         <div class="contactsList">
-          <div
-            class="contactsListContent os-host os-theme-dark os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">
-            <div class="os-resize-observer-host">
-              <div class="os-resize-observer observed" style="left: 0px; right: auto;"></div>
-            </div>
-            <div class="os-size-auto-observer" style="height: calc(100% + 1px); float: left;">
-              <div class="os-resize-observer observed"></div>
-            </div>
-            <div class="os-content-glue" style="width: 379px; margin: 0px; height: 792px;"></div>
-            <div class="os-padding">
-              <div class="os-viewport os-viewport-native-scrollbars-invisible" style="">
-                <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
-                  <div
-                    @click="openChat(v.withUser.id)"
-                    class="chatView"
-                    v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
-                  >
-                    <div class="avatar"></div>
-                    <div class="chatViewContent">
-                      <div class="chatView__header">
-                        <span class="name">{{ v.withUser.name }}</span>
-                        <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
-                        <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
-                      </div>
-                      <div class="chatView__body">
-                        <p class="typing">
-                          <span class="message">ererferf</span>
-                          <span class="isTyping">tester is typing...</span>
-                        </p>
-                      </div>
-                    </div>
+          <scrolly class="contactsListContent">
+            <scrolly-viewport ref="messages">
+              <div
+                @click="openChat(v.withUser.id)"
+                class="chatView"
+                v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
+              >
+                <div class="avatar"></div>
+                <div class="chatViewContent">
+                  <div class="chatView__header">
+                    <span class="name">{{ v.withUser.name }}</span>
+                    <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
+                    <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
+                  </div>
+                  <div class="chatView__body">
+                    <p class="typing">
+                      <template v-if="v.lastMessage">
+                        <span v-if="v.lastMessage.media.length" class="type-msg-icn type-msg-icn_media">x</span>
+                        <span v-else class="message">{{ v.lastMessage.text }}</span>
+                      </template>
+                      <span class="isTyping">tester is typing...</span>
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable">
-              <div class="os-scrollbar-track os-scrollbar-track-off">
-                <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0%, 0px);"></div>
-              </div>
-            </div>
-            <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable">
-              <div class="os-scrollbar-track os-scrollbar-track-off">
-                <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0%);"></div>
-              </div>
-            </div>
-            <div class="os-scrollbar-corner"></div>
-          </div>
+            </scrolly-viewport>
+            <scrolly-bar axis="y"></scrolly-bar>
+          </scrolly>
         </div>
       </div>
     </template>
+
     <template slot="col2">
-      <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
-        <div class="selectedChatHeader">
-          <span class="back hidden-desktop"></span>
-          <router-link :to="'/' + activeUser.name" class="avatar">
-            <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
-          </router-link>
-          <router-link :to="'/' + activeUser.username" class="name">
-            {{ activeUser.name }}
-          </router-link>
-          <span class="verified-user" v-if="activeUser.isVerified"></span>
-          <span class="user-login">
+      <div v-if="isHome" class="home-message">
+        Select user for conversation
+      </div>
+      <template v-else>
+        <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
+          <div class="selectedChatHeader">
+            <span class="back hidden-desktop" @click="mobileBack"></span>
+            <router-link :to="'/' + activeUser.name" class="avatar">
+              <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
+            </router-link>
+            <router-link :to="'/' + activeUser.username" class="name">
+              {{ activeUser.name }}
+            </router-link>
+            <span class="verified-user" v-if="activeUser.isVerified"></span>
+            <span class="user-login">
             <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
           </span>
 
-          <span class="user-login" v-if="blockLoading">...</span>
-          <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
+            <span class="user-login" v-if="blockLoading">...</span>
+            <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
 
-          <span class="chatOptions" :class="{open: chatOptionsOpened}">
+            <span class="chatOptions" :class="{open: chatOptionsOpened}">
             <span class="chatExpand" @click="chatOptionsOpened = !chatOptionsOpened"></span>
               <div class="chatOptions__dropdown">
                 <ul class="chatOptions__list">
@@ -135,17 +122,18 @@
                 </ul>
               </div>
             </span>
-        </div>
-      </div>
-      <div class="chatCollectionContentWrapper">
-        <div class="chatMessagesCollectionView">
-          <div class="chat-section" v-if="messagesLoading">
-            <Loader :fullscreen="false" text="" class="transparent small"/>
           </div>
-          <Messages v-else-if="messages" :_messages="messages"/>
-          <AddMessage :withUser="{id: activeUserId}"/>
         </div>
-      </div>
+        <div class="chatCollectionContentWrapper">
+          <div class="chatMessagesCollectionView">
+            <div class="chat-section" v-if="messagesLoading">
+              <Loader :fullscreen="false" text="" class="transparent small"/>
+            </div>
+            <Messages v-else-if="messages" :_messages="messages"/>
+            <AddMessage :withUser="{id: activeUserId}"/>
+          </div>
+        </div>
+      </template>
     </template>
     <NoConversations v-if="noMessages"/>
   </Wrapper>
@@ -154,6 +142,7 @@
 <script>
 import dateFns from "date-fns";
 import userMixin from "@/mixins/user";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import Wrapper from "./Wrapper";
 import Messages from "./Messages";
 import AddMessage from "./AddMessage";
@@ -166,6 +155,9 @@ export default {
   mixins: [userMixin],
 
   components: {
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar,
     Wrapper,
     Messages,
     AddMessage,
@@ -182,6 +174,9 @@ export default {
   },
 
   computed: {
+    isHome() {
+      return this.$route.name === "ChatHome";
+    },
     noMessages() {
       return this.$route.path === "/chat/no-messages";
     },
@@ -232,7 +227,9 @@ export default {
     activeUserId(activeUserId) {
       this.$store.commit("chat/messages", []);
       if (!activeUserId) {
-        this.$router.push("/chat/new");
+        if (!this.isHome) {
+          this.$router.push("/chat/new");
+        }
         return;
       }
       this.fetchMessages();
@@ -271,12 +268,17 @@ export default {
     },
     fetchMessages() {
       this.$store.dispatch("chat/fetchMessages", this.activeUserId);
+    },
+    mobileBack() {
+      this.$router.push("/chat/home");
     }
   },
 
   created() {
     this.$store.dispatch("chat/fetchChats").then(() => {
-      if (!this.hasActiveChats) {
+      if (this.isHome) {
+        // nothing
+      } else if (!this.hasActiveChats) {
         this.$router.push("/chat/new");
       } else if (!this.activeUserId) {
         this.$router.push("/chat/" + this.firstActiveChat.withUser.id);
@@ -287,3 +289,23 @@ export default {
   }
 };
 </script>
+
+<style>
+.contactsListContent .scrolly-bar {
+  border-width: 3px;
+  width: 10px;
+}
+.home-message {
+  padding: 20px;
+  text-align: center;
+}
+.chatCollectionContentWrapper_mob-height {
+  height: 100% !important;
+}
+#content {
+  height: 100vh !important;
+}
+.chat-container {
+  height: 100%;
+}
+</style>

@@ -2,6 +2,10 @@
   min-height: 100%;
 }
 
+.modal-opened {
+  overflow: hidden;
+}
+
 #content {
 
   .profile-page & {

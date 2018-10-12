@@ -1,6 +1,8 @@
 import { createRequestAction } from "../utils/storeRequest";
 
-const state = {};
+const state = {
+  isSecondScreen: false
+};
 
 const actions = {
   blockUser({ commit, dispatch }, userId) {
@@ -16,6 +18,14 @@ const actions = {
         commit("extendChatUser", { id: userId, isBlocked: false });
       }
     });
+  },
+  sendMessage({ commit, dispatch }, params) {
+    dispatch("_sendMessage", params).then(message => {
+      commit("updateChatLastMessage", {
+        message,
+        toUserId: params.userId
+      });
+    });
   }
 };
 
@@ -29,6 +39,17 @@ const mutations = {
         v.withUser = { ...v.withUser, ...user };
       }
       return v;
+    });
+  },
+  setSecondScreen(state, isSecondScreen) {
+    state.isSecondScreen = isSecondScreen;
+  },
+  updateChatLastMessage(state, { message, toUserId }) {
+    state.chats = state.chats.map(chat => {
+      if (chat.withUser.id === toUserId) {
+        chat.lastMessage = message;
+      }
+      return chat;
     });
   }
 };
@@ -89,7 +110,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "sendMessage",
+  prefix: "_sendMessage",
   apiPath: "chats/{userId}/messages",
   state,
   mutations,

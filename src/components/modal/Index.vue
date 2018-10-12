@@ -23,9 +23,11 @@ export default {
   },
   mounted() {
     document.addEventListener("keyup", this.keyUp);
+    document.getElementsByTagName("body")[0].classList.add("modal-opened");
   },
   beforeDestroy() {
     document.removeEventListener("keyup", this.keyUp);
+    document.getElementsByTagName("body")[0].classList.remove("modal-opened");
   }
 };
 </script>

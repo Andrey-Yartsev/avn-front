@@ -73,6 +73,12 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/chat/home",
+    name: "ChatHome",
+    component: Chat
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/chat/:userId",
     component: Chat
   },

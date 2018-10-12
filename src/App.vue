@@ -68,19 +68,22 @@ export default {
       this.showToast = true;
     },
     $route() {
+      this.initBodyClass();
+      this.$store.dispatch("modal/hideAll");
+    }
+  },
+  methods: {
+    initBodyClass() {
+      const bodyClassList = document.getElementsByTagName("body")[0].classList;
       if (this.$route.name === "profile") {
-        if (
-          document.getElementsByTagName("body")[0].className !== "profile-page"
-        ) {
-          document.getElementsByTagName("body")[0].className = "profile-page";
-        }
-      } else if (document.getElementsByTagName("body")[0].className != "") {
-        document.getElementsByTagName("body")[0].className = "";
+        bodyClassList.add("profile-page");
+      } else {
+        bodyClassList.remove("profile-page");
       }
-      return this.$store.dispatch("modal/hideAll");
     }
   },
   created() {
+    this.initBodyClass();
     ws();
   }
 };

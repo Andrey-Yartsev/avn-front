@@ -263,7 +263,9 @@ export default {
     unfollow() {
       this.$store.dispatch("profile/home/unfollow", this.profile.id);
     },
-    sendMessage() {},
+    sendMessage() {
+      this.$router.push("/chat/" + this.profile.id);
+    },
     infinityScrollGetDataMethod() {
       if (this.profile) {
         this.$store.dispatch("profile/home/getPosts", this.profile.id);
