@@ -110,13 +110,17 @@ export default {
 
     postCommentsRequest(state, { postId }) {
       state.posts = state.posts.map(post => {
-        return {
-          ...post,
-          comments: [],
-          commentsLoading: postId === post.id,
-          shownCommentsCount: 3,
-          shownCommentsCountFull: 10
-        };
+        if (postId === post.id) {
+          return {
+            ...post,
+            comments: [],
+            commentsLoading: true,
+            shownCommentsCount: 3,
+            shownCommentsCountFull: 10
+          };
+        }
+
+        return post;
       });
     },
 
@@ -142,9 +146,9 @@ export default {
 
         return {
           ...post,
-          comments: [data.comment, ...post.comments],
-          shownCommentsCount: post.shownCommentsCount + 1,
-          shownCommentsCountFull: post.shownCommentsCountFull + 1,
+          comments: [data.comment, ...(post.comments || [])],
+          shownCommentsCount: (post.shownCommentsCount || 0) + 1,
+          shownCommentsCountFull: (post.shownCommentsCountFull || 0) + 1,
           commentsCount: post.commentsCount + 1
         };
       });
