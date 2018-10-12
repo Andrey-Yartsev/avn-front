@@ -1,7 +1,11 @@
 <template>
     <div class="post" :data-id="post.id">
         <div class="post-details">
-            <Header :postId="post.id" :user="post.author" />
+            <Header
+              :postId="post.id"
+              :user="post.author"
+              :from="from"
+            />
             <p class="text">{{ post.text }}</p>
             <Media
               :medias="post.media"

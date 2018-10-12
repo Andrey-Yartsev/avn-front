@@ -4,7 +4,12 @@
       <button class="header-return-btn"></button>
       <h1 class="page-title">Post</h1>
     </div>
-    <Header :class="'hidden-desktop'" :postId="post.id" :user="post.author" />
+    <Header
+      :class="'hidden-desktop'"
+      :postId="post.id"
+      :user="post.author" 
+      :from="from"
+    />
     <p class="text hidden-desktop">
       {{ post.text }}
     </p>
@@ -15,7 +20,12 @@
       :postId="post.id"
     />
     <div class="right-col">
-      <Header :class="'hidden-mobile'" :postId="post.id" :user="post.author" />
+      <Header
+        :class="'hidden-mobile'"
+        :postId="post.id"
+        :user="post.author"
+        :from="from"
+      />
       <p class="text hidden-mobile">
       {{ post.text }}
       </p>

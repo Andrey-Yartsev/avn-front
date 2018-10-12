@@ -27,7 +27,10 @@ export default {
       return `${protocol}//${hostname}/post/${this.postId}`;
     },
     actionPrefix() {
-      return this.isProfilePost ? "profile/home" : "home";
+      return this.from;
+    },
+    isOnPostPage() {
+      return this.from === "postPage";
     }
   },
   props: {
@@ -39,9 +42,9 @@ export default {
       type: Number,
       required: true
     },
-    isProfilePost: {
-      type: Boolean,
-      default: false
+    from: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -52,7 +55,15 @@ export default {
     },
 
     deletePost() {
-      this.$store.dispatch("home/deletePost", { postId: this.postId });
+      this.$store.dispatch(this.actionPrefix + "/deletePost", {
+        postId: this.postId
+      });
+
+      if (this.isOnPostPage) {
+        return this.$router.push("/");
+      }
+
+      this.$store.dispatch("modal/hide", { name: "post" });
     },
 
     reportUser() {

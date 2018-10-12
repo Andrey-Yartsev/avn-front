@@ -15,7 +15,7 @@
       v-bind:class="{ hidden: !isShowDropdown }"
       :postId="postId"
       :userId="user.id"
-      :isProfilePost="isProfilePost"
+      :from="from"
     ></Dropdown>
   </div>
 </template>
@@ -40,9 +40,9 @@ export default {
       type: Object,
       required: true
     },
-    isProfilePost: {
-      type: Boolean,
-      default: false
+    from: {
+      type: String,
+      required: true
     }
   }
 };
