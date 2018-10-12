@@ -109,7 +109,9 @@
 
                   <template v-if="profile.subscribedBy">
                     <span class="subscribeView"></span>
-                    <button type="button" class="profile-actions__btn profile-message-btn">Message</button>
+                    <button
+                      @click="sendMessage"
+                      type="button" class="profile-actions__btn profile-message-btn">Message</button>
                   </template>
                   <template v-else>
                     <div class="subscribeView">

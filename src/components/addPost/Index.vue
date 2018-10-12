@@ -76,7 +76,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import MediaPreview from "./MediaPreview";
+import MediaPreview from "../common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 
 export default {

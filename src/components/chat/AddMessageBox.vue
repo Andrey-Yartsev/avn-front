@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import MediaPreview from "@/components/addPost/MediaPreview";
+import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 
 export default {

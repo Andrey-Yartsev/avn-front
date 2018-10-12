@@ -286,6 +286,10 @@ export default {
         this.fetchMessages();
       }
     });
+  },
+
+  beforeDestroy() {
+    this.$store.commit("chat/messages", []);
   }
 };
 </script>
@@ -299,6 +303,7 @@ export default {
   padding: 20px;
   text-align: center;
 }
+/*
 .chatCollectionContentWrapper_mob-height {
   height: 100% !important;
 }
@@ -308,4 +313,5 @@ export default {
 .chat-container {
   height: 100%;
 }
+*/
 </style>
