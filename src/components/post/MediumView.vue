@@ -66,7 +66,7 @@ export default {
     }
   },
   methods: {
-    openModal() {
+    openModal_() {
       this.$store.dispatch("modal/show", {
         name: "post",
         data: {
@@ -75,6 +75,9 @@ export default {
           backUrl: this.$route.path
         }
       });
+    },
+    openModal() {
+      this.$store.dispatch("modalRouter/updatePath", `post/${this.post.id}/${this.from}`);
     },
     getComments() {
       const { id, commentsCount } = this.post;

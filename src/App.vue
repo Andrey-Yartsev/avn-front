@@ -1,21 +1,26 @@
 <template>
-	<div class="main-container">
-		<Loader v-if="loading"/>
-		<template v-else>
-			<Header/>
-			<main id="content">
-				<router-view></router-view>
-			</main>
-			<Sidebar v-if="user"/>
-			<Toast v-if="showToast" @hide="showToast = false" />
+  <div class="main-container">
+
+
+    <Loader v-if="loading"/>
+    <template v-else>
+
+      <Header/>
+      <main id="content">
+        <router-view></router-view>
+      </main>
+      <Sidebar v-if="user"/>
+      <Toast v-if="showToast" @hide="showToast = false" />
 
       <ErrorModal v-if="error" />
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
-			<UserReportModal v-if="this.$store.state.modal.userReport.show" />
-		</template>
-	</div>
+      <UserReportModal v-if="this.$store.state.modal.userReport.show" />
+
+      <modal-router/>
+    </template>
+  </div>
 </template>
 
 <script>
@@ -29,6 +34,7 @@ import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 import ColorScheme from "@/mixins/colorScheme";
 import UserReportModal from "./components/common/UserReportModal";
+import ModalRouter from "./components/modal/Router";
 import ws from "@/ws";
 
 export default {
@@ -41,7 +47,8 @@ export default {
     PostReportModal,
     PostModal,
     ChatModal,
-    UserReportModal
+    UserReportModal,
+    ModalRouter
   },
   mixins: [ColorScheme],
   data() {
@@ -85,6 +92,7 @@ export default {
   created() {
     this.initBodyClass();
     ws();
+
   }
 };
 </script>
