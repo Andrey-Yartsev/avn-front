@@ -77,7 +77,10 @@ export default {
       });
     },
     openModal() {
-      this.$store.dispatch("modalRouter/updatePath", `post/${this.post.id}/${this.from}`);
+      this.$store.dispatch(
+        "modalRouter/updatePath",
+        `post/${this.post.id}/${this.from}`
+      );
     },
     getComments() {
       const { id, commentsCount } = this.post;
