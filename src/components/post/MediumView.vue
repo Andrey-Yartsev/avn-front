@@ -66,16 +66,6 @@ export default {
     }
   },
   methods: {
-    openModal_() {
-      this.$store.dispatch("modal/show", {
-        name: "post",
-        data: {
-          postId: this.post.id,
-          from: this.from,
-          backUrl: this.$route.path
-        }
-      });
-    },
     openModal() {
       this.$store.dispatch(
         "modalRouter/updatePath",
