@@ -1,6 +1,5 @@
 "use strict";
 
-import PostApi from "@/api/post";
 import PostMixin from "@/store/mixins/posts";
 
 const initState = {
@@ -11,15 +10,12 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  postReportReasons: []
+  source: "feed"
 };
 
 const state = { ...initState };
 
 const mutations = {
-  getPostReportReasonsSuccess(state, data) {
-    state.postReportReasons = data;
-  },
   resetPageState(state) {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
@@ -27,40 +23,11 @@ const mutations = {
   }
 };
 
-const actions = {
-  getPosts({ commit }) {
-    const { limit, offset, marker } = state;
-    commit("postsRequest");
-
-    return PostApi.getPosts({ limit, offset, marker })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("postsRequestSuccess", res);
-          });
-        }
-      })
-      .catch(err => {
-        commit("postsRequestFail", err);
-      });
-  },
-
-  getPostReportReasons({ commit }, { type }) {
-    return PostApi.getPostReportReasons({ type })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("getPostReportReasonsSuccess", res);
-          });
-        }
-      })
-      .catch(() => {});
-  }
-};
+const actions = {};
 
 export default {
   namespaced: true,
   state,
-  actions: { ...actions, ...PostMixin.actions },
-  mutations: { ...mutations, ...PostMixin.mutations }
+  actions: { ...PostMixin.actions, ...actions },
+  mutations: { ...PostMixin.mutations, ...mutations }
 };

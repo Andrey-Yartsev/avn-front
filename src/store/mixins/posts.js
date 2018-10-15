@@ -2,6 +2,23 @@ import PostApi from "@/api/post";
 
 export default {
   actions: {
+    getPosts({ commit, state }) {
+      const { limit, offset, marker, source } = state;
+      commit("postsRequest");
+
+      return PostApi.getPosts({ limit, offset, marker, source })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(function(res) {
+              commit("postsRequestSuccess", res);
+            });
+          }
+        })
+        .catch(err => {
+          commit("postsRequestFail", err);
+        });
+    },
+
     resetPageState({ commit }) {
       commit("resetPageState");
     },
@@ -68,6 +85,7 @@ export default {
         })
         .catch(() => {});
     },
+
     likeComment({ commit }, { postId, commentId, addLike }) {
       return PostApi.likeComment({ commentId, addLike })
         .then(response => {

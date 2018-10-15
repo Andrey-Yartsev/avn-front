@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .content {
   padding: 50px;
   text-align: center;

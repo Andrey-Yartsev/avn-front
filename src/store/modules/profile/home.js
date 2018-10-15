@@ -111,6 +111,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  actions: { ...actions, ...PostMixin.actions },
-  mutations: { ...mutations, ...PostMixin.mutations }
+  actions: { ...PostMixin.actions, ...actions },
+  mutations: { ...PostMixin.mutations, ...mutations }
 };

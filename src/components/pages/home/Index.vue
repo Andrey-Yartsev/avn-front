@@ -26,10 +26,10 @@
 
 <script>
 import PostCollection from "@/components/common/postCollection/Index";
-import MobileHeader from "../../header/Mobile";
-import Footer from "../../footer/Index";
-import AddPost from "../../addPost/Index";
-import StoriesWrapper from "../../aside/StoriesWrapper";
+import MobileHeader from "@/components/header/Mobile";
+import Footer from "@/components/footer/Index";
+import AddPost from "@/components/addPost/Index";
+import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 
 export default {
@@ -51,11 +51,13 @@ export default {
       return this.$store.state.home.posts;
     },
     store() {
+      // uses into InfinityScrollMixin
       return this.$store.state.home;
     }
   },
   methods: {
     infinityScrollGetDataMethod() {
+      // uses into InfinityScrollMixin
       this.$store.dispatch("home/getPosts");
     }
   }

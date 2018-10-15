@@ -6,15 +6,20 @@ import router from "@/router";
 
 const state = {
   currentPost: undefined,
-  reportedPost: undefined
+  reportedPost: undefined,
+  postReportReasons: []
 };
 const mutations = {
-  ["sendPostReportSuccess"](state, { postId, reasonId }) {
+  sendPostReportSuccess(state, { postId, reasonId }) {
     state.reportedPost = { postId, reasonId };
   },
 
-  ["setCurrentPost"](state, { postData }) {
+  setCurrentPost(state, { postData }) {
     state.currentPost = postData;
+  },
+
+  getPostReportReasonsSuccess(state, data) {
+    state.postReportReasons = data;
   }
 };
 
@@ -33,11 +38,24 @@ const actions = {
         commit("sendPostCommentFail", err);
       });
   },
+
   sendReport({ commit }, { postId, reasonId }) {
     return PostApi.sendPostReport({ postId, reasonId })
       .then(response => {
         if (response.status === 200) {
           commit("sendPostReportSuccess", { postId, reasonId });
+        }
+      })
+      .catch(() => {});
+  },
+
+  getPostReportReasons({ commit }, { type }) {
+    return PostApi.getPostReportReasons({ type })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("getPostReportReasonsSuccess", res);
+          });
         }
       })
       .catch(() => {});

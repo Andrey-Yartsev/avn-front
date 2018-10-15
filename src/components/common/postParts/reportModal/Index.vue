@@ -54,14 +54,14 @@ import Modal from "@/components/modal/Index";
 export default {
   name: "PostReportModal",
   created() {
-    this.$store.dispatch("home/getPostReportReasons", { type: "post" });
+    this.$store.dispatch("post/getPostReportReasons", { type: "post" });
   },
   data: () => ({
     reasonId: undefined
   }),
   computed: {
     reasons() {
-      return this.$store.state.home.postReportReasons;
+      return this.$store.state.post.postReportReasons;
     }
   },
   components: {

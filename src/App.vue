@@ -10,13 +10,13 @@
       <Sidebar v-if="user"/>
       <Toast v-if="showToast" @hide="showToast = false" />
 
+      <modal-router />
+
       <ErrorModal v-if="error" />
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
-
-      <modal-router/>
     </template>
   </div>
 </template>

@@ -2,8 +2,8 @@ import tokenRequest from "@/utils/tokenRequest";
 import anyRequest from "@/utils/anyRequest";
 
 export default {
-  getPosts({ offset, limit, marker }) {
-    return tokenRequest(`posts/feed`, {
+  getPosts({ offset, limit, marker, source }) {
+    return tokenRequest(`posts/${source}`, {
       method: "GET",
       query: {
         offset,
