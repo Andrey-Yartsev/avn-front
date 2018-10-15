@@ -14,6 +14,7 @@ import common from "@/store/modules/common";
 import modal from "@/store/modules/modal";
 import chat from "@/store/modules/chat";
 import user from "@/store/modules/user";
+import modalRouter from "@/store/modules/modalRouter";
 
 Vue.use(Vuex);
 
@@ -33,7 +34,8 @@ const store = new Vuex.Store({
     modal,
     chat,
     user,
-    postPage
+    postPage,
+    modalRouter
   }
 });
 

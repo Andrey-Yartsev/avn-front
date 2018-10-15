@@ -5,7 +5,7 @@
         <div class="settings-profile-images">
           <div class="bg"></div>
           <div class="avatar-block">
-            <span class="avatar" v-if="user.avatar"><img :src="user.avatar"/></span>
+            <span class="avatar"><img :src="user.avatar" v-if="user.avatar"/></span>
             <label for="avatar" class="select-user-image"></label>
             <input type="file" id="avatar">
             <span class="reset-user-image reset-avatar"></span>
@@ -19,7 +19,7 @@
           <input type="file" id="bg">
         </div>
         <div class="profile-identifier">
-          <div class="profile-name">
+          <div class="profile-name profile-name-settings">
             <div class="profile-name__main">
               <span class="name">{{ user.name }}</span>
               <span class="verified-user" v-if="user.isVerified"></span>

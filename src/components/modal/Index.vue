@@ -19,6 +19,9 @@ export default {
     onClose: {
       type: Function,
       default: () => {}
+    },
+    path: {
+      type: String
     }
   },
   mounted() {

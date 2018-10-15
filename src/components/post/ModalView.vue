@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close"> 
+  <Modal :onClose="close" :path="path">
     <template slot="content">
       <div class="popup-container post post-popup">
         <div class="previous" @click="index -= 1" v-if="index > 0"></div>
@@ -25,12 +25,15 @@ export default {
     },
     length() {
       return this.dataSrc.posts.length;
+    },
+    path() {
+      return `post/${this.postId}`;
     }
   },
   data: () => ({
+    from: undefined,
     postId: undefined,
     dataSrc: undefined,
-    backUrl: undefined,
     index: 0
   }),
   components: {
@@ -39,32 +42,30 @@ export default {
   },
   methods: {
     close() {
-      window.history.replaceState({}, "post", this.backUrl);
-
-      this.$store.dispatch("modal/hide", {
-        name: "post"
-      });
+      window.location.hash = "";
     },
     scroll() {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
     }
   },
   created() {
-    const { postId, from, backUrl } = this.$store.state.modal.post.data;
-    if (from === "profile/home") {
+    let { postId, from } = this.$store.state.modalRouter.params;
+    postId = parseInt(postId);
+
+    if (from === "profile") {
       this.dataSrc = this.$store.state.profile.home;
     }
     if (from === "home") {
       this.dataSrc = this.$store.state.home;
     }
 
-    const post = this.dataSrc.posts.filter(({ id }) => id === postId)[0];
+    const post = this.dataSrc.posts.find(({ id }) => {
+      return id === postId;
+    });
 
     this.from = from;
     this.postId = postId;
-    this.backUrl = backUrl;
     this.index = this.dataSrc.posts.indexOf(post);
-    window.history.replaceState({}, "post", `/post/${this.postId}`);
   },
   watch: {
     index: function() {

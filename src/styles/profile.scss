@@ -505,7 +505,7 @@ body {
   }
 }
 
-.profile-name {
+.profile-name:not(.profile-name-settings) {
   padding: 16px 10px 15px 140px;
   transition: opacity 0.3s;
 
