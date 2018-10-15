@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import Loader from "./components/common/Loader";
-import Header from "./components/header/Index";
-import Sidebar from "./components/Sidebar";
-import Toast from "./components/common/Toast";
+import Loader from "@/components/common/Loader";
+import Header from "@/components/header/Index";
+import Sidebar from "@/components/Sidebar";
+import Toast from "@/components/common/Toast";
 import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 import ColorScheme from "@/mixins/colorScheme";
-import UserReportModal from "./components/common/UserReportModal";
-import ModalRouter from "./components/modal/Router";
+import UserReportModal from "@/components/common/UserReportModal";
+import ModalRouter from "@/components/modal/Router";
 import ws from "@/ws";
 
 export default {
@@ -92,7 +92,6 @@ export default {
   created() {
     this.initBodyClass();
     ws();
-
   }
 };
 </script>

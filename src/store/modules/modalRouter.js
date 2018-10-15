@@ -15,13 +15,8 @@ const mutations = {
 };
 
 const actions = {
-  updatePath({ commit }, path) {
-    if (path) {
-      window.location.hash = path;
-    } else {
-      window.location.hash = "";
-      path = "";
-    }
+  updatePath({ commit }, path = "") {
+    window.location.hash = path;
     commit("updatePath", path);
   }
 };

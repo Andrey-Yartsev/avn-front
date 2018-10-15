@@ -31,6 +31,7 @@ export default {
     }
   },
   data: () => ({
+    from: undefined,
     postId: undefined,
     dataSrc: undefined,
     index: 0
@@ -53,7 +54,8 @@ export default {
 
     if (from === "profile") {
       this.dataSrc = this.$store.state.profile.home;
-    } else {
+    }
+    if (from === "home") {
       this.dataSrc = this.$store.state.home;
     }
 
