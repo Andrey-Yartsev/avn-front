@@ -36,11 +36,13 @@ export default {
     if (!route) {
       return;
     }
+    this.$store.commit("modalRouter/updateLoading", true);
     if (route.component.enterRedirect) {
       window.location = route.component.enterRedirect(route.params);
       return;
     }
     this.setComponent(route);
+    this.$store.commit("modalRouter/updateLoading", false);
   },
   watch: {
     ["$route"](route) {
@@ -73,7 +75,7 @@ export default {
       }
     },
     matchRoute() {
-      const hash = window.location.hash.replace(/#(.*)/, "$1");
+      const hash = window.location.hash.replace(/#m\/(.*)/, "$1");
       const r = Object.entries(routes).map(v => {
         const pattern = v[0];
         const parts = pattern.split("/");

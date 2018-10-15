@@ -1,7 +1,5 @@
 <template>
   <div class="main-container">
-
-
     <Loader v-if="loading"/>
     <template v-else>
 
@@ -64,6 +62,9 @@ export default {
       return this.$store.state.global.toastShowTrigger;
     },
     loading() {
+      if (this.$store.state.modalRouter.loading) {
+        return true;
+      }
       return this.$store.state.profile.fetchLoading;
     },
     error() {

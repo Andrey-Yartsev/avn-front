@@ -2,7 +2,8 @@
 
 const state = {
   path: "",
-  params: null
+  params: null,
+  loading: false
 };
 
 const mutations = {
@@ -11,12 +12,15 @@ const mutations = {
   },
   updateParams(state, params) {
     state.params = params;
+  },
+  updateLoading(state, loading) {
+    state.loading = loading;
   }
 };
 
 const actions = {
   updatePath({ commit }, path = "") {
-    window.location.hash = path;
+    window.location.hash = "m/" + path;
     commit("updatePath", path);
   }
 };
