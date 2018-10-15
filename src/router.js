@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import HomePage from "./components/pages/home/Index";
-import ExplorePage from "./components/pages/explore/Index";
+import ExplorePage from "./components/pages/explore/All";
 import ExploreStoriesPage from "./components/pages/explore/Stories";
 import ExploreVideosPage from "./components/pages/explore/Videos";
 import ExplorePhotosPage from "./components/pages/explore/Photos";
@@ -117,22 +117,27 @@ const routes = [
     component: PostPage
   },
   {
+    beforeEnter: Auth.requireAny,
     path: "/explore",
     component: ExplorePage
   },
   {
+    beforeEnter: Auth.requireAny,
     path: "/explore/stories",
     component: ExploreStoriesPage
   },
   {
+    beforeEnter: Auth.requireAny,
     path: "/explore/photos",
     component: ExplorePhotosPage
   },
   {
+    beforeEnter: Auth.requireAny,
     path: "/explore/live",
     component: ExploreLivePage
   },
   {
+    beforeEnter: Auth.requireAny,
     path: "/explore/videos",
     component: ExploreVideosPage
   },

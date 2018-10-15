@@ -54,10 +54,14 @@ export default {
     }
   },
   watch: {
-    shownCommentsCount: function() {
-      this.$scrollTo("#vue-comments-list .comment:last-child", {
-        container: "#vue-comments-list"
-      });
+    visibleComments: function() {
+      if (!this.visibleComments.length) return;
+
+      setTimeout(() => {
+        this.$scrollTo("#vue-comments-list .comment:last-child", {
+          container: "#vue-comments-list"
+        });
+      }, 100);
     }
   }
 };

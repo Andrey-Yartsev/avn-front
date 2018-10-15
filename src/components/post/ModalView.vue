@@ -58,6 +58,9 @@ export default {
     if (from === "home") {
       this.dataSrc = this.$store.state.home;
     }
+    if (from === "explore") {
+      this.dataSrc = this.$store.state.explore;
+    }
 
     const post = this.dataSrc.posts.find(({ id }) => {
       return id === postId;
