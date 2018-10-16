@@ -68,15 +68,15 @@ export default {
     },
     store() {
       // uses into InfinityScrollMixin
-      if (["all", "videos", "photos"].indexOf(this.page) !== -1) {
+      if (this.type === "media") {
         return this.$store.state.explore;
       }
 
-      if (["stories"].indexOf(this.page) !== -1) {
+      if (this.type === "story") {
         return this.$store.state.stories;
       }
 
-      if (["lives"].indexOf(this.page) !== -1) {
+      if (this.type === "live") {
         return this.$store.state.lives;
       }
     },
@@ -86,6 +86,9 @@ export default {
     },
     page() {
       return this.$route.meta.page;
+    },
+    type() {
+      return this.$route.meta.type;
     },
     source() {
       if (this.page === "all") {
@@ -98,15 +101,15 @@ export default {
   methods: {
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
-      if (["all", "videos", "photos"].indexOf(this.page) !== -1) {
+      if (this.type === "media") {
         this.$store.dispatch("explore/getPosts");
       }
 
-      if (["stories"].indexOf(this.page) !== -1) {
+      if (this.type === "story") {
         this.$store.dispatch("stories/getPosts");
       }
 
-      if (["lives"].indexOf(this.page) !== -1) {
+      if (this.type === "live") {
         this.$store.dispatch("lives/getPosts");
       }
     },
@@ -115,7 +118,7 @@ export default {
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("lives/resetPageState");
 
-      if (["all", "videos", "photos"].indexOf(this.page) !== -1) {
+      if (this.type === "media") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         this.$store.dispatch("explore/getPosts");
       }
@@ -124,7 +127,7 @@ export default {
         this.$store.dispatch("stories/getPosts");
       }
 
-      if (["lives"].indexOf(this.page) !== -1) {
+      if (this.type === "live") {
         this.$store.dispatch("lives/getPosts");
       }
     }

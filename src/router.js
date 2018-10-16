@@ -117,7 +117,8 @@ const routes = [
     path: "/explore",
     component: ExplorePage,
     meta: {
-      page: "all"
+      page: "all",
+      type: "media"
     }
   },
   {
@@ -125,7 +126,8 @@ const routes = [
     path: "/explore/stories",
     component: ExplorePage,
     meta: {
-      page: "stories"
+      page: "stories",
+      type: "story"
     }
   },
   {
@@ -133,7 +135,8 @@ const routes = [
     path: "/explore/photos",
     component: ExplorePage,
     meta: {
-      page: "photos"
+      page: "photos",
+      type: "media"
     }
   },
   {
@@ -141,7 +144,8 @@ const routes = [
     path: "/explore/live",
     component: ExplorePage,
     meta: {
-      page: "lives"
+      page: "lives",
+      type: "live"
     }
   },
   {
@@ -149,7 +153,8 @@ const routes = [
     path: "/explore/videos",
     component: ExplorePage,
     meta: {
-      page: "videos"
+      page: "videos",
+      type: "media"
     }
   },
   // PROFILE ZONE
