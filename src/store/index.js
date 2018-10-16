@@ -14,8 +14,10 @@ import common from "@/store/modules/common";
 import modal from "@/store/modules/modal";
 import chat from "@/store/modules/chat";
 import user from "@/store/modules/user";
-import modalRouter from "@/store/modules/modalRouter";
 import explore from "@/store/modules/explore/index";
+import lives from "@/store/modules/lives";
+import stories from "@/store/modules/stories";
+import modalRouter from "@/store/modules/modalRouter";
 import notif from "@/store/modules/notif";
 
 Vue.use(Vuex);
@@ -39,6 +41,8 @@ const store = new Vuex.Store({
     postPage,
     modalRouter,
     explore,
+    stories,
+    lives,
     notif
   }
 });

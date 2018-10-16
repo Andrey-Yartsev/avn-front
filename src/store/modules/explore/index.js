@@ -20,10 +20,17 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+  setSource(state, { source }) {
+    state.source = source;
   }
 };
 
-const actions = {};
+const actions = {
+  setSource({ commit }, { source }) {
+    commit("setSource", { source });
+  }
+};
 
 export default {
   namespaced: true,
