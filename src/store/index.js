@@ -14,8 +14,10 @@ import common from "@/store/modules/common";
 import modal from "@/store/modules/modal";
 import chat from "@/store/modules/chat";
 import user from "@/store/modules/user";
-
 import explore from "@/store/modules/explore/index";
+import lives from "@/store/modules/lives";
+import stories from "@/store/modules/stories";
+
 import modalRouter from "@/store/modules/modalRouter";
 
 Vue.use(Vuex);
@@ -38,7 +40,9 @@ const store = new Vuex.Store({
     user,
     postPage,
     modalRouter,
-    explore
+    explore,
+    stories,
+    lives
   }
 });
 

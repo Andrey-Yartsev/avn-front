@@ -2,11 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import HomePage from "./components/pages/home/Index";
-import ExplorePage from "./components/pages/explore/All";
-import ExploreStoriesPage from "./components/pages/explore/Stories";
-import ExploreVideosPage from "./components/pages/explore/Videos";
-import ExplorePhotosPage from "./components/pages/explore/Photos";
-import ExploreLivePage from "./components/pages/explore/Live";
+import ExplorePage from "./components/pages/explore/Index";
 import NotificationsPage from "./components/pages/notifications/Index";
 import LoginPage from "./components/pages/noAuth/Login";
 import SignUpPage from "./components/pages/noAuth/SignUp";
@@ -119,27 +115,42 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/explore",
-    component: ExplorePage
+    component: ExplorePage,
+    meta: {
+      page: "all"
+    }
   },
   {
     beforeEnter: Auth.requireAny,
     path: "/explore/stories",
-    component: ExploreStoriesPage
+    component: ExplorePage,
+    meta: {
+      page: "stories"
+    }
   },
   {
     beforeEnter: Auth.requireAny,
     path: "/explore/photos",
-    component: ExplorePhotosPage
+    component: ExplorePage,
+    meta: {
+      page: "photos"
+    }
   },
   {
     beforeEnter: Auth.requireAny,
     path: "/explore/live",
-    component: ExploreLivePage
+    component: ExplorePage,
+    meta: {
+      page: "lives"
+    }
   },
   {
     beforeEnter: Auth.requireAny,
     path: "/explore/videos",
-    component: ExploreVideosPage
+    component: ExplorePage,
+    meta: {
+      page: "videos"
+    }
   },
   // PROFILE ZONE
   {
