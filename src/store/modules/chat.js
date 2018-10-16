@@ -1,3 +1,5 @@
+"use strict";
+
 import { createRequestAction } from "../utils/storeRequest";
 
 const state = {

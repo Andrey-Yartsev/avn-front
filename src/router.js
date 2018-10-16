@@ -84,7 +84,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/notifications",
+    path: "/notifications/:type?",
     component: NotificationsPage
   },
   {

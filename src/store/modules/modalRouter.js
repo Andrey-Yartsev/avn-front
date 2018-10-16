@@ -1,12 +1,16 @@
 "use strict";
 
 const state = {
+  route: null,
   path: "",
   params: null,
   loading: false
 };
 
 const mutations = {
+  updateRoute(state, route) {
+    state.route = route;
+  },
   updatePath(state, path) {
     state.path = path;
   },

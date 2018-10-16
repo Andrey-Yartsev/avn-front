@@ -1,7 +1,7 @@
 <template>
   <div class="popup" >
     <div class="overlay" @click="onClose"></div>
-    <slot name="content" ></slot>
+    <slot name="content"></slot>
   </div>
 </template>
 
