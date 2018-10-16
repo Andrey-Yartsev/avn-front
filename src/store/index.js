@@ -17,8 +17,8 @@ import user from "@/store/modules/user";
 import explore from "@/store/modules/explore/index";
 import lives from "@/store/modules/lives";
 import stories from "@/store/modules/stories";
-
 import modalRouter from "@/store/modules/modalRouter";
+import notif from "@/store/modules/notif";
 
 Vue.use(Vuex);
 
@@ -42,7 +42,8 @@ const store = new Vuex.Store({
     modalRouter,
     explore,
     stories,
-    lives
+    lives,
+    notif
   }
 });
 

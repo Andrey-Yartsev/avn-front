@@ -3,16 +3,7 @@
 </template>
 
 <script>
-import PostModal from "@/components/post/ModalView";
-
-const routes = {
-  "post/:postId/:from": {
-    component: PostModal,
-    enterRedirect: params => {
-      return "/post/" + params.postId;
-    }
-  }
-};
+import routes from "./routes";
 
 export default {
   data() {
@@ -41,7 +32,6 @@ export default {
       window.location = route.component.enterRedirect(route.params);
       return;
     }
-    this.setComponent(route);
     this.$store.commit("modalRouter/updateLoading", false);
   },
   watch: {
@@ -67,6 +57,15 @@ export default {
       this.setComponent(route);
     },
     setComponent(route) {
+      const routeData = {
+        path: route.path,
+        params: route.params
+      };
+      if (route.component._name) {
+        routeData.name = route.component._name;
+      }
+      this.$store.commit("modalRouter/updateRoute", routeData);
+      this.$store.commit("modalRouter/updatePath", route.path);
       this.$store.commit("modalRouter/updateParams", route.params);
       if (route.component.component) {
         this.routedComponent = route.component.component;
@@ -75,7 +74,7 @@ export default {
       }
     },
     matchRoute() {
-      const hash = window.location.hash.replace(/#m\/(.*)/, "$1");
+      const hash = window.location.hash.replace(/^#m\/(.*)/, "$1");
       const r = Object.entries(routes).map(v => {
         const pattern = v[0];
         const parts = pattern.split("/");
@@ -99,19 +98,21 @@ export default {
       });
       let found = null;
       r.forEach(v => {
-        const match = hash.match(new RegExp(v.regexp));
+        if (found) {
+          return;
+        }
+        const match = hash.match(new RegExp("^" + v.regexp + "$"));
         if (!match) {
           return;
         }
         const values = match.slice(1);
-        if (match) {
-          const params = {};
-          v.params.forEach((p, i) => {
-            params[p] = values[i];
-          });
-          v.params = params;
-          found = v;
-        }
+        const params = {};
+        v.params.forEach((p, i) => {
+          params[p] = values[i];
+        });
+        v.path = hash;
+        v.params = params;
+        found = v;
       });
       return found;
     }

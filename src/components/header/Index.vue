@@ -6,8 +6,11 @@
           <template v-if="!noAuthHeader">
             <router-link class="menu-item-home" to="/" exact><span>Home</span></router-link>
             <router-link class="menu-item-explore" to="/explore"><span>Explore</span></router-link>
-            <router-link class="menu-item-notifications hidden-mobile btn-notifications" to="/notifications"><span>Notifications</span>
-            </router-link>
+            <a
+              href="/notifications"
+              class="menu-item-notifications hidden-mobile btn-notifications"
+              @click.prevent="goToModalRoute('/notifications')"
+            ><span>Notifications</span></a>
             <router-link class="menu-item-notifications hidden-desktop" to="/notifications"><span>Notifications</span>
             </router-link>
             <router-link class="menu-item-messages showChat hidden-mobile" to="/chat"><span>Messages</span>
@@ -39,9 +42,11 @@
 <script>
 import Search from "./Search";
 import User from "./User";
+import ModalRouter from "@/mixins/modalRouter";
 
 export default {
   name: "Header",
+  mixins: [ModalRouter],
   components: {
     Search,
     User
