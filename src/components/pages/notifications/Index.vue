@@ -1,5 +1,5 @@
 <template>
-  <div class="NotificationsCollectionView">
+  <div class="NotificationsCollectionView" :class="{'no-notifications':!items.length}">
 
     <div class="notifications-header">
       <div class="header_container">
@@ -52,8 +52,11 @@
       </div>
 
       <div class="msg-no-content">
-        <div class="msg-no-content__text">Nothing happened yet</div>
+        <div class="msg-no-content__text">
+          {{ loading ? "Loading..." : "Nothing happened yet" }}
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -88,6 +91,9 @@ export default {
   computed: {
     type() {
       return this._route.params.type || "all";
+    },
+    loading() {
+      return this.$store.state.notif.fetchLoading;
     },
     items() {
       let n = 0;
