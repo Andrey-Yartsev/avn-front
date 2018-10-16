@@ -26,7 +26,7 @@
             v-for="v in menu"
             v-bind:key="v.name"
             :class="{[v.name]: true, 'active': v.active}"
-            :href="'/notifications/' + v.name"
+            :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
           >{{ v.title }}</a>
@@ -127,7 +127,9 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("notif/fetch", this.type);
+    this.$store.dispatch("notif/fetch", this.type).then(() => {
+      this.$store.dispatch("auth/extendUser", { hasNotifications: false });
+    });
   }
 };
 </script>

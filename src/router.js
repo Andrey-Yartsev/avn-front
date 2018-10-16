@@ -3,12 +3,13 @@ import Router from "vue-router";
 
 import HomePage from "./components/pages/home/Index";
 import ExplorePage from "./components/pages/explore/Index";
-import NotificationsPage from "./components/pages/notifications/Index";
+import NotificationsPage from "./components/pages/notification/Index";
 import LoginPage from "./components/pages/noAuth/Login";
 import SignUpPage from "./components/pages/noAuth/SignUp";
 import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
+import SettingsNotificationPage from "./components/pages/settings/notification/Index";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
@@ -97,6 +98,11 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: SettingsSecurityPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/notifications",
+    component: SettingsNotificationPage
   },
   // PUBLIC ZONE
   {

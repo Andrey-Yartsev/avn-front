@@ -3,9 +3,11 @@ import Fingerprint from "fingerprintjs2";
 import moment from "moment";
 
 import chats from "./actions/chats";
+import new_notification from "./actions/new_notification";
 
 const actions = {
-  chats
+  chats,
+  new_notification
 };
 
 export default () => {
