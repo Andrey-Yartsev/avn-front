@@ -56,6 +56,40 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "follow",
+  apiPath: "subscriptions/follow",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      userId: params
+    };
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "unfollow",
+  apiPath: "subscriptions/unfollow",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      userId: params
+    };
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,

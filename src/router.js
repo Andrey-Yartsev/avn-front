@@ -15,6 +15,7 @@ import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
 import Chat from "./components/chat/Chat";
 import ChatNewMessage from "./components/chat/NewMessage";
+import SearchPage from "./components/pages/search/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -83,6 +84,16 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/notifications/:type?",
     component: NotificationsPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/search/:type/:query",
+    component: SearchPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/notifications",
+    component: SettingsNotificationPage
   },
   {
     beforeEnter: Auth.requireAuth,
