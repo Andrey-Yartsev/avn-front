@@ -1,5 +1,5 @@
 <template>
-  <div class="NotificationsCollectionView">
+  <div class="NotificationsCollectionView" :class="{'no-notifications':!items.length}">
 
     <div class="notifications-header">
       <div class="header_container">
@@ -26,7 +26,7 @@
             v-for="v in menu"
             v-bind:key="v.name"
             :class="{[v.name]: true, 'active': v.active}"
-            :href="'/notifications/' + v.name"
+            :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
           >{{ v.title }}</a>
@@ -52,8 +52,11 @@
       </div>
 
       <div class="msg-no-content">
-        <div class="msg-no-content__text">Nothing happened yet</div>
+        <div class="msg-no-content__text">
+          {{ loading ? "Loading..." : "Nothing happened yet" }}
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -89,6 +92,9 @@ export default {
     type() {
       return this._route.params.type || "all";
     },
+    loading() {
+      return this.$store.state.notif.fetchLoading;
+    },
     items() {
       let n = 0;
       return this.$store.state.notif.items.map(v => {
@@ -121,7 +127,9 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("notif/fetch", this.type);
+    this.$store.dispatch("notif/fetch", this.type).then(() => {
+      this.$store.dispatch("auth/extendUser", { hasNotifications: false });
+    });
   }
 };
 </script>

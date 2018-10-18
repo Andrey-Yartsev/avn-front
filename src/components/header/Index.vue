@@ -9,6 +9,7 @@
             <a
               href="/notifications"
               class="menu-item-notifications hidden-mobile btn-notifications"
+              :class="{unread: user.hasNotifications}"
               @click.prevent="goToModalRoute('/notifications')"
             ><span>Notifications</span></a>
             <router-link class="menu-item-notifications hidden-desktop" to="/notifications"><span>Notifications</span>

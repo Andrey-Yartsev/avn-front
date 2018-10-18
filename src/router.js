@@ -1,20 +1,21 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import HomePage from "@/components/pages/home/Index";
-import ExplorePage from "@/components/pages/explore/Index";
-import NotificationsPage from "@/components/pages/notifications/Index";
-import LoginPage from "@/components/pages/noAuth/Login";
-import SignUpPage from "@/components/pages/noAuth/SignUp";
-import ForgotPasswordPage from "@/components/pages/noAuth/ForgotPassword";
-import SettingsDefaultPage from "@/components/pages/settings/default/Index";
-import SettingsSecurityPage from "@/components/pages/settings/security/Index";
-import ProfilePage from "@/components/pages/profile/Index";
-import PostPage from "@/components/pages/post/Index";
-import NotFoundPage from "@/components/pages/notFound/Index";
-import Chat from "@/components/chat/Chat";
-import ChatNewMessage from "@/components/chat/NewMessage";
-import StoryPage from "@/components/pages/story/Index";
+import HomePage from "./components/pages/home/Index";
+import ExplorePage from "./components/pages/explore/Index";
+import NotificationsPage from "./components/pages/notification/Index";
+import LoginPage from "./components/pages/noAuth/Login";
+import SignUpPage from "./components/pages/noAuth/SignUp";
+import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
+import SettingsDefaultPage from "./components/pages/settings/default/Index";
+import SettingsSecurityPage from "./components/pages/settings/security/Index";
+import SettingsNotificationPage from "./components/pages/settings/notification/Index";
+import ProfilePage from "./components/pages/profile/Index";
+import PostPage from "./components/pages/post/Index";
+import NotFoundPage from "./components/pages/notFound/Index";
+import Chat from "./components/chat/Chat";
+import ChatNewMessage from "./components/chat/NewMessage";
+import SearchPage from "./components/pages/search/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -86,6 +87,16 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/search/:type/:query",
+    component: SearchPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/notifications",
+    component: SettingsNotificationPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/settings",
     component: SettingsDefaultPage
   },
@@ -98,6 +109,11 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: SettingsSecurityPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/notifications",
+    component: SettingsNotificationPage
   },
   // PUBLIC ZONE
   {
@@ -157,11 +173,6 @@ const routes = [
       page: "videos",
       type: "media"
     }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/stories/:userId",
-    component: StoryPage
   },
   // PROFILE ZONE
   {

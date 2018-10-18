@@ -1,6 +1,6 @@
 import PostModal from "@/components/post/ModalView";
 // import ChatModal from "@/components/chat/modal/Chat";
-import NotifModal from "@/components/pages/notifications/Modal";
+import NotifModal from "@/components/pages/notification/Modal";
 
 export default {
   "post/:postId/:from": {
