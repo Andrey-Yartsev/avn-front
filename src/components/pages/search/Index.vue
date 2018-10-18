@@ -27,6 +27,7 @@
 import Users from "./Users";
 import Posts from "./Posts";
 import Videos from "./Videos";
+import Photos from "./Photos";
 
 const types = {
   users: "People",
@@ -41,7 +42,8 @@ export default {
   components: {
     Users,
     Posts,
-    Videos
+    Videos,
+    Photos
   },
 
   computed: {
@@ -118,4 +120,3 @@ export default {
   }
 };
 </script>
-

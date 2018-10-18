@@ -5,7 +5,7 @@
         v-for="post in items"
         v-bind:key="post.id"
         :post="post"
-        from="home"
+        from="search"
       />
     </div>
     <NoResults :query="query" :loading="loading" />

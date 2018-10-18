@@ -1,11 +1,11 @@
 <template>
-  <div class="postCollectionView">
-    <div class="posts">
+  <div class="photoCollectionView">
+    <div class="explore-wrapper photos">
       <Video
         v-for="post in items"
         v-bind:key="post.id"
         :post="post"
-        from="home"
+        from="search"
       />
     </div>
     <NoResults :query="query" :loading="loading" />
