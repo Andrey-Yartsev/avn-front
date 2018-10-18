@@ -10,5 +10,10 @@ export default {
         marker
       }
     });
+  },
+  getUserStory({ userId }) {
+    return anyRequest(`users/${userId}/stories/`, {
+      method: "GET"
+    });
   }
 };

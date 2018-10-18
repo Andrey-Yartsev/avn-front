@@ -1,5 +1,5 @@
 <template>
-  <div class="StoryPageCollectionView">
+  <div class="StoryPageCollectionView" v-if="!loading">
     <div class="stories-slideshow">
       <div class="StoryPageView active">
         <template v-if="post.mediaType === 'photo'">
@@ -26,12 +26,12 @@
     <div class="head-story">
       <div class="story-avatar">
           <a 
-            :href="isOwner(post.user.id) ? `/${post.user.username}` : ''"
-            :class="['avatar', {'new-story': isOwner(post.user.id)}]"
+            :href="isOwner(user.id) ? `/${user.username}` : ''"
+            :class="['avatar', {'new-story': isOwner(user.id)}]"
           >
-            <img v-if="post.user.avatar" :src="post.user.avatar">
+            <img v-if="user.avatar" :src="user.avatar">
           </a>
-          <template v-if="isOwner(post.user.id)">
+          <template v-if="isOwner(user.id)">
             <span class="btn-add">
               <svg aria-hidden="true" class="icn icn-plus"><use xlink:href="#icon-plus-in-circle"></use></svg>
             </span>
@@ -44,17 +44,17 @@
       </div>
       <div class="user-name">
         <a 
-          :href="isOwner(post.user.id) ? `/${post.user.username}` : ''"
-          :class="{'new-story': isOwner(post.user.id)}"
+          :href="isOwner(user.id) ? `/${user.username}` : ''"
+          :class="{'new-story': isOwner(user.id)}"
         >
-          {{ isOwner(post.user.id) ? 'Your story' : post.user.name || post.user.username }}
+          {{ isOwner(user.id) ? 'Your story' : user.name || user.username }}
         </a>
         <span class="time"></span>
       </div>
     </div>    
     <span class="story-dropdown-menu-btn"></span>
     <div class="dropdown-menu hidden">
-      <template v-if="isOwner(post.user.id)">
+      <template v-if="isOwner(user.id)">
         <button class="deleteStory" type="button">Delete</button>
         <button class="saveFile" type="button">Save</button>
         <button class="storySettings" type="button">Story Settings</button>
@@ -62,7 +62,7 @@
       <button class="cancelDropdown" type="button">Cancel</button>
     </div>
     <div class="bottom-btns">
-      <template v-if="!isOwner(post.user.id) && post.user.canEarn">
+      <template v-if="!isOwner(user.id) && user.canEarn">
         <button type="button" class="btn-tip"></button>
         <form class="tip-form hidden">
             <button type="button" role="button" class="btn btn-cancel">Cancel</button>
@@ -84,84 +84,31 @@
 
 <script>
 export default {
-  name: "StorySmall",
+  name: "StoryPage",
   computed: {
-    length: () => 2,
-    post: () => ({
-      id: 1117,
-      isExpired: false,
-      createDate: "2018-10-16T14:14:13+00:00",
-      expireDate: "2018-10-17T14:14:13+00:00",
-      mediaType: "photo",
-      mediaSrc:
-        "https://media.team2.retloko.com/files/o/os/osq/osqjrysqlqh9q7jycc8lioyzkh9vechh1539699253/XuayQXzmdzGrSPjkDGWHlIVXxnc2nb5j.jpg.ready.jpg",
-      mediaPreview:
-        "https://media.team2.retloko.com/files/7/7l/7ll/7llkzwlpapwpjdlbxcfc8w8kzg5q3bfb1539699253/preview.jpg",
-      mediaThumb:
-        "https://media.team2.retloko.com/files/t/tw/twk/twkrcluedioimxflamipeb6iohvtqas21539699253/thumb.jpg",
-      fitType: "fit",
-      isReady: true,
-      isPinned: true,
-      viewers: [
-        {
-          id: 467609,
-          name: "\u041f\u0430\u0432\u0435\u043b",
-          username: "grafed_spam",
-          avatar:
-            "https://media.team2.retloko.com/files/q/qk/qkn/qkncdkv0bv9r3mpfh7mbi5pimphvgicb1539281965/MJ1UOU_h_normal.jpeg",
-          canEarn: false,
-          publicUrl: "https://team2.retloko.com/grafed_spam",
-          hasNotViewedStory: true,
-          isVerified: true,
-          isBlocked: false
-        }
-      ],
-      user: {
-        id: 467582,
-        name: "alexeionline",
-        username: "alexeionline",
-        avatar:
-          "https://media.team2.retloko.com/files/f/fn/fne/fneo363qy2iufb5gllzh4p0nk48neug71537786526/2afff3a23099780908097f84bc5da2fd_normal.jpeg",
-        canEarn: false,
-        publicUrl: "https://team2.retloko.com/alexeionline",
-        hasNotViewedStory: false,
-        isVerified: true,
-        isBlocked: false,
-        subscribePrice: 0,
-        tipsEnabled: false,
-        gender: 0,
-        twitterUsername: "alexeionline",
-        canWrite: false,
-        subscribedBy: false,
-        subscribedOn: false,
-        followedBy: false,
-        followedOn: false,
-        joinDate: "2018-09-24T00:00:00+00:00",
-        isPrivate: false,
-        slogan: "",
-        about: "web",
-        website: "",
-        location: "",
-        header: null,
-        defaultHeader:
-          "https://team2.retloko.com/theme/project/images/background-viewme-1-grey.jpg",
-        postsCount: 13,
-        photosCount: 12,
-        videosCount: 2,
-        subscribersCount: 0,
-        subscribesCount: 1,
-        followersCount: 1,
-        followingCount: 4,
-        favoritesCount: 3,
-        primaryColor: 3,
-        secondColor: 10
-      },
-      canComment: false,
-      isLook: true
-    })
+    length() {
+      return this.$store.state.stories.posts.length;
+    },
+    stories() {
+      return this.$store.state.stories.posts;
+    },
+    user() {
+      return this.$store.state.stories.user;
+    },
+    post() {
+      return this.$store.state.stories.posts[0];
+    },
+    loading() {
+      return this.$store.state.stories.loading;
+    }
   },
   methods: {
     isOwner: () => true
+  },
+  created() {
+    const userId = this.$route.params.userId;
+    this.$store.dispatch("stories/resetPageState");
+    this.$store.dispatch("stories/getUserPosts", { userId });
   }
 };
 </script>

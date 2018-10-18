@@ -13,7 +13,8 @@ const initState = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: ""
+  marker: "",
+  user: {}
 };
 
 const state = { ...initState };
@@ -23,19 +24,46 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+  userPostsRequestSuccess(state, { list: posts, marker, user }) {
+    state.posts = [...state.posts, ...posts];
+
+    if (posts.length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + state.limit;
+    }
+    state.loading = false;
+    state.marker = state.marker.length ? state.marker : marker;
+    state.user = user;
   }
 };
 
 const actions = {
-  getPosts({ commit }, userId) {
+  getPosts({ commit }) {
     const { limit, offset, marker } = state;
     commit("postsRequest");
 
-    return StoriesApi.getPosts({ userId, limit, offset, marker })
+    return StoriesApi.getPosts({ limit, offset, marker })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
             commit("postsRequestSuccess", res);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
+      });
+  },
+  getUserPosts({ commit }, { userId }) {
+    commit("postsRequest");
+
+    return StoriesApi.getUserStory({ userId })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("userPostsRequestSuccess", res);
           });
         }
       })
