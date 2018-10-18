@@ -14,24 +14,24 @@ const actions = {};
 
 createRequestAction({
   prefix: "search",
-  apiPath: "search/users",
+  apiPath: "search/{type}",
   state,
   mutations,
   actions,
   options: {
-    method: "GET"
+    method: "GET",
+    query: {}
   },
   resultKey: "items",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
-    if (!params.offset) {
-      params.offset = 0;
-    }
-    if (!params.limit) {
-      params.limit = 5;
-    }
-    options.query = params;
+    options.query.query = params.query;
+    options.query.offset = params.offset || 0;
+    options.query.limit = params.limit || 5;
     return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{type}/, params.type);
   },
   resultConvert: function(result) {
     return result.list;

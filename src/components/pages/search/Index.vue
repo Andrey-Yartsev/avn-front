@@ -11,82 +11,12 @@
           >{{ v.title }}</router-link>
         </nav>
         <div class="explore">
-          <div class="userCollectionView">
-            <div class="users">
-              <div class="userView" v-for="v in items" v-bind:key="v.id">
-                <div class="bg"><img v-if="v.header" :src="v.header" /></div>
-                <div class="user-container">
-                  <div class="avatar"><img v-if="v.avatar" :src="v.avatar" /></div>
-                  <div class="names-actions-wrapper">
-                    <div class="user-names">
-                      <div class="wrap-name">
-                        <router-link :to="'/' + v.username" class="name">{{ v.name }}</router-link>
-                      </div>
-                      <span class="user-login">
-                        <router-link :to="'/' + v.username">{{ v.username }}</router-link>
-                      </span>
-                    </div>
-                    <div class="user-actions">
-
-
-                      <div class="subscribePaidView" v-if="v.subscribePrice">
-                        <div class="subscribe-cost " id="subscribe-paid">
-                          <div class="subscribe-cost__value">
-                            $<span>{{ v.subscribePrice }}</span>/mo.
-                          </div>
-                          <div class="subscribe-cost__label">
-                            Subscribe
-                          </div>
-                        </div>
-                      </div>
-
-                      <span class="subscribeView" v-if="!v.subscribedBy">
-                        <div
-                          class="profile-actions__btn btn-subscribe"
-                          @click="v.followedBy ? unfollow(v.id) : follow(v.id)"
-                        >
-                          <div class="btn-subscribe__label">
-                            {{ v.followedBy ? "Unfollow" : "Follow" }}
-                          </div>
-                        </div>
-                      </span>
-                      <div class="more-functions hidden-mobile">
-                        <div class="more-functions__btn more-functions__btn_with-text">
-                          <div class="more-functions__btn-text">
-                            More
-                          </div>
-                        </div>
-                        <div class="more-functions__dropdown">
-                          <div class="more-functions__dropdown-inside">
-                            <ul>
-                              <li><a href="#" @click.prevent="report(v.id)">Report</a></li>
-                              <li v-if="v.isBlocked"><a href="#" @click.prevent="unblock(v.id)">Unblock</a></li>
-                              <li v-else><a href="#" @click.prevent="block(v.id)">Block</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="no-results-search" v-if="loading">
-              <div class="no-results-search__message">
-                <span class="no-results-search__text">Loading</span>
-              </div>
-            </div>
-
-            <div class="no-results-search" v-else>
-              <div class="no-results-search__message">
-                <span class="no-results-search__text">Nothing found for</span>
-                <span class="searchAllTag">"{{ query }}"</span>
-              </div>
-            </div>
-
-          </div>
+          <component
+            :is="component"
+            :items="items"
+            :loading="loading"
+            :query="query"
+          />
         </div>
       </div>
     </div>
@@ -94,6 +24,10 @@
 </template>
 
 <script>
+import Users from "./Users";
+import Posts from "./Posts";
+import Videos from "./Videos";
+
 const types = {
   users: "People",
   posts: "Posts",
@@ -104,7 +38,16 @@ const types = {
 export default {
   name: "Search",
 
+  components: {
+    Users,
+    Posts,
+    Videos
+  },
+
   computed: {
+    component() {
+      return this.type.charAt(0).toUpperCase() + this.type.slice(1);
+    },
     query() {
       return this.$route.params.query;
     },
@@ -131,6 +74,7 @@ export default {
   methods: {
     search() {
       this.$store.dispatch("search/page/search", {
+        type: this.type,
         query: this.query,
         offset: 0,
         limit: 10
@@ -164,10 +108,7 @@ export default {
       this.search();
     },
     type() {
-      if (this.type !== "users") {
-        this.$store.commit("search/page/reset");
-        return;
-      }
+      this.$store.commit("search/page/reset");
       this.search();
     }
   },
@@ -178,8 +119,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.no-results-search {
-  display: block;
-}
-</style>
