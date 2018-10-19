@@ -124,7 +124,7 @@ export default {
     videoProgress: {},
     showDropdawnMenu: false,
     showLoader: false,
-    showVideoPlay: true
+    showVideoPlay: false
   }),
   computed: {
     length() {
