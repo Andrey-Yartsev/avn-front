@@ -19,23 +19,40 @@ import PostLargeView from "@/components/post/LargeView";
 
 export default {
   name: "PostModal",
+  data() {
+    return {
+      index: null
+    };
+  },
   computed: {
+    from() {
+      return this.$store.state.modalRouter.params.from;
+    },
+    postId() {
+      return parseInt(this.$store.state.modalRouter.params.postId);
+    },
     post() {
-      return this.dataSrc.posts[this.index];
+      return this.posts[this.index];
     },
     length() {
-      return this.dataSrc.posts.length;
+      return this.posts.length;
     },
     path() {
       return `post/${this.postId}`;
+    },
+    posts() {
+      if (this.from === "profile") {
+        return this.$store.state.profile.home.posts;
+      } else if (this.from === "home") {
+        return this.$store.state.home.posts;
+      } else if (this.from === "explore") {
+        return this.$store.state.explore.posts;
+      } else if (this.from === "search") {
+        return this.$store.state.search.page.items;
+      }
+      throw new Error(`from "${this.from}" does not exists`);
     }
   },
-  data: () => ({
-    from: undefined,
-    postId: undefined,
-    dataSrc: undefined,
-    index: 0
-  }),
   components: {
     Modal,
     PostLargeView
@@ -48,32 +65,16 @@ export default {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
     }
   },
-  created() {
-    let { postId, from } = this.$store.state.modalRouter.params;
-    postId = parseInt(postId);
-
-    if (from === "profile") {
-      this.dataSrc = this.$store.state.profile.home;
-    }
-    if (from === "home") {
-      this.dataSrc = this.$store.state.home;
-    }
-    if (from === "explore") {
-      this.dataSrc = this.$store.state.explore;
-    }
-
-    const post = this.dataSrc.posts.find(({ id }) => {
-      return id === postId;
-    });
-
-    this.from = from;
-    this.postId = postId;
-    this.index = this.dataSrc.posts.indexOf(post);
-  },
   watch: {
     index: function() {
       this.scroll();
     }
+  },
+  created() {
+    const post = this.posts.find(({ id }) => {
+      return id === this.postId;
+    });
+    this.index = this.posts.indexOf(post);
   }
 };
 </script>

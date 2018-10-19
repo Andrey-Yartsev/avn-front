@@ -5,12 +5,12 @@
             'photo-post': post.mediaType === 'image', 
             'video-post': post.mediaType === 'video'
           }]"
-          :to="`/post/${post.id}`"
+          :href="`/post/${post.id}`"
           @click.prevent="openModal"
         >
-            <figure class="{'locked-wrapper': media.canView}">
+            <figure :class="{'locked-wrapper': media.locked}">
                 <div v-if="!media.canView" class="locked-picture">
-                    <img class="locked" src="`data:image/jpeg;base64,${media.locked}`">
+                    <img class="locked" :src="'data:image/jpeg;base64,' + media.locked">
                 </div>
                 <template v-else>
                     <img  :src="media.thumb.source">
@@ -50,6 +50,9 @@ export default {
   },
   methods: {
     openModal() {
+      if (this.media.locked) {
+        return;
+      }
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
