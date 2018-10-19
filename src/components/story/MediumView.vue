@@ -1,6 +1,6 @@
 <template>
-  <div class="storyView" :data-id="post.id">
-    <a :href="`/stories/${post.id}`" class="story">
+  <div class="storyView" :data-id="post.user.id">
+    <router-link :to="`/stories/${post.user.id}`" class="story">
       <div class="story-preview">
         <img :src="image">
         <div :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
@@ -14,7 +14,7 @@
       <div class="user-login">
         {{ post.user.name }}
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -39,14 +39,6 @@ export default {
         : post.mediaPreview
           ? post.mediaPreview
           : post.mediaSrc;
-    }
-  },
-  methods: {
-    openModal() {
-      this.$store.dispatch(
-        "modalRouter/updatePath",
-        `post/${this.post.id}/${this.from}`
-      );
     }
   }
 };

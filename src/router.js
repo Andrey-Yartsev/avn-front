@@ -16,6 +16,7 @@ import NotFoundPage from "./components/pages/notFound/Index";
 import Chat from "./components/chat/Chat";
 import ChatNewMessage from "./components/chat/NewMessage";
 import SearchPage from "./components/pages/search/Index";
+import StoryPage from "./components/pages/story/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -173,6 +174,11 @@ const routes = [
       page: "videos",
       type: "media"
     }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/stories/:userId",
+    component: StoryPage
   },
   // PROFILE ZONE
   {

@@ -5,7 +5,7 @@
 
       <Header/>
       <main id="content">
-        <router-view></router-view>
+        <router-view />
       </main>
       <Sidebar v-if="user"/>
       <Toast v-if="showToast" @hide="showToast = false" />
@@ -33,6 +33,7 @@ import ChatModal from "@/components/chat/Modal";
 import ColorScheme from "@/mixins/colorScheme";
 import UserReportModal from "@/components/common/UserReportModal";
 import ModalRouter from "@/components/modal/Router";
+
 import ws from "@/ws";
 
 export default {
