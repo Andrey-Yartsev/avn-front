@@ -2,13 +2,13 @@
   <div class="StoryPageCollectionView" v-if="!loading && length">
     <div class="stories-slideshow">
       <div class="StoryPageView active">
-        <template v-if="post.mediaType === 'photo'">
-          <img class="bg" :src="post.mediaSrc" alt>
-          <img class="storyItem" :src="post.mediaSrc" ref="storyItem" alt>
+        <template v-if="currentStory.mediaType === 'photo'">
+          <img class="bg" :src="currentStory.mediaSrc" alt>
+          <img class="storyItem" :src="currentStory.mediaSrc" ref="storyItem" alt>
         </template>
-        <video v-if="post.mediaType === 'video'"
+        <video v-if="currentStory.mediaType === 'video'"
           class="story-video-element storyItem" 
-          :src="post.mediaSrc"
+          :src="currentStory.mediaSrc"
           ref="storyItem"
         ></video>
       </div>
@@ -31,8 +31,8 @@
       <div
         v-for="(value, key) in stories"
         :class="['item', {
-          active: key === currIndex,
-          fullActive: key < currIndex,
+          active: key === currActiveIndex,
+          fullActive: key < currActiveIndex,
           video: value.mediaType === 'video'
         }]"
         :key="key"
@@ -118,7 +118,8 @@ export default {
     Loader
   },
   data: () => ({
-    currIndex: undefined,
+    currIndex: 0,
+    currActiveIndex: -1,
     timer: undefined,
     videos: [],
     videoProgress: {},
@@ -136,9 +137,6 @@ export default {
     author() {
       return this.$store.state.stories.user;
     },
-    post() {
-      return this.$store.state.stories.posts[this.currIndex || 0];
-    },
     loading() {
       return this.$store.state.stories.loading;
     },
@@ -150,28 +148,20 @@ export default {
     }
   },
   methods: {
-    run: function() {
-      const firstStoryItem = this.$refs.storyItem;
-      const { complete, tagName } = firstStoryItem;
-
-      if (complete || tagName === "VIDEO") {
-        this.next();
-      } else {
-        firstStoryItem.onload = () => {
-          this.next();
-        };
-      }
-    },
     next: function() {
       if (this.currIndex === this.length - 1) {
         this.close();
         return;
       }
 
-      this.currIndex = this.currIndex === undefined ? 0 : this.currIndex + 1;
+      this.currIndex += 1;
     },
 
     runProgress: function() {
+      setTimeout(() => {
+        this.currActiveIndex = this.currIndex;
+      }, 99);
+
       return this.currentStory.mediaType === "video"
         ? this.launchVideo()
         : this.launchImage();
@@ -214,7 +204,7 @@ export default {
         videoTag.addEventListener("ended", this.videoEventEnded);
         videoTag.addEventListener("waiting", this.videoEventWaiting);
         videoTag.addEventListener("playing", this.videoEventPlaying);
-        // // one
+        // once
         videoTag.addEventListener("play", this.videoEventPlay);
       }
     },
@@ -228,7 +218,7 @@ export default {
           videoTag.removeEventListener("ended", this.videoEventEnded);
           videoTag.removeEventListener("waiting", this.videoEventWaiting);
           videoTag.removeEventListener("playing", this.videoEventPlaying);
-          // // one
+          // once
           videoTag.removeEventListener("play", this.videoEventPlay);
         }
       }
@@ -251,12 +241,12 @@ export default {
     },
 
     resetState: function() {
-      this.deactivateVideoEvents();
-
       if (this.timer) {
         clearInterval(this.timer.get());
+        delete this.timer;
       }
 
+      this.deactivateVideoEvents();
       this.videos = {};
       this.showLoader = false;
       // app.resetNextStoryList();
@@ -324,7 +314,7 @@ export default {
     },
 
     saveFile: function() {
-      window.open(this.post.mediaSrc, "_blank");
+      window.open(this.currentStory.mediaSrc, "_blank");
       this.toggleDropdawnMenu();
     },
 
@@ -349,16 +339,11 @@ export default {
     this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
   },
   watch: {
-    length() {
-      this.$nextTick(() => {
-        if (this.length) {
-          this.run();
-        }
-      });
-    },
     currentStory() {
+      if (!this.currentStory) return;
+
+      this.resetState();
       this.$nextTick(() => {
-        this.resetState();
         this.runProgress();
       });
     }
