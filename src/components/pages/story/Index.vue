@@ -30,13 +30,17 @@
     <div class="progress-pagination">
       <div
         v-for="(value, key) in stories"
-        :class="['item', { active: key === currIndex, fullActive: key < currIndex, video: value.mediaType === 'video' }]"
+        :class="['item', {
+          active: key === currIndex,
+          fullActive: key < currIndex,
+          video: value.mediaType === 'video'
+        }]"
         :key="key"
         @click="() => currIndex = key"
       >
         <div
           class="item-filler"
-          :style="value.mediaType === 'video' ? { width: `${videoProgress}%` } : {}"
+          :style="value.mediaType === 'video' ? { width: `${videoProgress[value.id]}%` } : {}"
         />
       </div>
     </div>
@@ -50,7 +54,9 @@
           </a>
           <template v-if="isOwner(author.id)">
             <span class="btn-add">
-              <svg aria-hidden="true" class="icn icn-plus"><use xlink:href="#icon-plus-in-circle"></use></svg>
+              <svg aria-hidden="true" class="icn icn-plus">
+                <use xlink:href="#icon-plus-in-circle"></use>
+              </svg>
             </span>
             <input
               type="file"
@@ -69,14 +75,14 @@
         <span class="time"></span>
       </div>
     </div>    
-    <span class="story-dropdown-menu-btn"></span>
-    <div class="dropdown-menu hidden">
+    <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
+    <div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">
       <template v-if="isOwner(author.id)">
-        <button class="deleteStory" type="button">Delete</button>
-        <button class="saveFile" type="button">Save</button>
-        <button class="storySettings" type="button">Story Settings</button>
+        <button class="deleteStory" type="button" @click="deleteStory">Delete</button>
+        <button class="saveFile" type="button" @click="saveFile">Save</button>
+        <button class="storySettings" type="button" @click="storySettings">Story Settings</button>
       </template>
-      <button class="cancelDropdown" type="button">Cancel</button>
+      <button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>
     </div>
     <div class="bottom-btns">
       <template v-if="!isOwner(author.id) && author.canEarn">
@@ -90,27 +96,35 @@
         </form>
       </template>
     </div>
-    <button type="button" class="close"></button>
-    <div class="play-button-wrapper hidden" id="video-play-button">
+    <button type="button" class="close" @click="close"></button>
+    <div :class="['play-button-wrapper', { hidden: !showVideoPlay }]" ref="videoPlayButton">
       <div class="play-button-outer">
         <div class="play-button"></div>
       </div>
     </div>
+    <Loader v-if="showLoader" :fullscreen="false"></Loader>
   </div>
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
 import userMixin from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
 
 export default {
   name: "StoryPage",
   mixins: [userMixin],
+  components: {
+    Loader
+  },
   data: () => ({
     currIndex: undefined,
     timer: undefined,
     videos: [],
-    videoProgress: 0
+    videoProgress: {},
+    showDropdawnMenu: false,
+    showLoader: false,
+    showVideoPlay: true
   }),
   computed: {
     length() {
@@ -150,32 +164,31 @@ export default {
     },
     next: function() {
       if (this.currIndex === this.length - 1) {
-        this.allStoryWatched();
+        this.close();
         return;
       }
 
       this.currIndex = this.currIndex === undefined ? 0 : this.currIndex + 1;
     },
 
-    runProgress: function(callback) {
+    runProgress: function() {
       return this.currentStory.mediaType === "video"
         ? this.launchVideo()
         : this.launchImage();
     },
 
     launchImage: function() {
-      console.log("launchImage");
+      // console.log("launchImage");
       this.timer = new StoryTimer(() => this.next(), 4000);
     },
 
     launchVideo: function() {
-      console.log("launchVideo");
+      // console.log("launchVideo");
       const videoId = this.currentStory.id;
-      const videoTag = this.$refs.storyItem ;
+      const videoTag = this.$refs.storyItem;
 
       if (!this.videos[videoId]) {
-        console.log(4444)
-        this.videos[videoId] = videoTag; 
+        this.videos[videoId] = videoTag;
       }
 
       this.activateVideoEvents();
@@ -183,12 +196,12 @@ export default {
       videoTag
         .play()
         .then(function() {})
-        .catch(error => {
-          // The user interaction is required on mobile devices
-          // to trigger play via a click event.
-          // const videoPlayButton = this.$el.find("#video-play-button");
-          // videoPlayButton.removeClass("hidden");
-          // videoPlayButton.one("click", this.launchVideo.bind(this));
+        .catch(() => {
+          this.showVideoPlay = true;
+          this.$refs.videoPlayButton.addEventListener(
+            "click",
+            this.launchVideo
+          );
         });
     },
 
@@ -197,29 +210,26 @@ export default {
       const videoTag = this.videos[videoId];
 
       if (videoTag) {
-        console.log('addEventListener');
         videoTag.addEventListener("timeupdate", this.videoEventTimeupdate);
-        // videoTag.addEventListener("waiting", this.videoEventWaiting);
-        // videoTag.addEventListener("playing", this.videoEventPlaying);
         videoTag.addEventListener("ended", this.videoEventEnded);
+        videoTag.addEventListener("waiting", this.videoEventWaiting);
+        videoTag.addEventListener("playing", this.videoEventPlaying);
         // // one
-        // videoTag.addEventListener("play", this.videoEventPlay);
+        videoTag.addEventListener("play", this.videoEventPlay);
       }
     },
 
     deactivateVideoEvents: function() {
-      console.log('deacti');
-      this.videoProgress = 0;
       for (let videoId in this.videos) {
         if (this.videos.hasOwnProperty(videoId)) {
+          this.videoProgress[videoId] = 0;
           let videoTag = this.videos[videoId];
-          // videoTag.stop();
           videoTag.removeEventListener("timeupdate", this.videoEventTimeupdate);
-          // videoTag.removeEventListener("waiting", this.videoEventWaiting);
-          // videoTag.removeEventListener("playing", this.videoEventPlaying);
           videoTag.removeEventListener("ended", this.videoEventEnded);
+          videoTag.removeEventListener("waiting", this.videoEventWaiting);
+          videoTag.removeEventListener("playing", this.videoEventPlaying);
           // // one
-          // videoTag.removeEventListener("play", this.videoEventPlay);
+          videoTag.removeEventListener("play", this.videoEventPlay);
         }
       }
     },
@@ -228,15 +238,13 @@ export default {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
 
-      console.log(12)
-      
       if (videoTag) {
-        this.videoProgress = (videoTag.currentTime * 100) / videoTag.duration;
+        this.videoProgress = {
+          [videoId]: (videoTag.currentTime * 100) / videoTag.duration
+        };
       }
     },
-    // videoEventPlay: function() {
-    //   this.videos[this.collection.activeIndex].video.muted = false;
-    // },
+
     videoEventEnded: function() {
       this.deactivateVideoEvents();
       this.next();
@@ -250,45 +258,91 @@ export default {
       }
 
       this.videos = {};
+      this.showLoader = false;
       // app.resetNextStoryList();
     },
 
-    // videoEventWaiting: function() {
-    //   this.showLoader();
-    // },
-    // videoEventPlaying: function() {
-    //   var videoPlayButton = this.$el.find("#video-play-button");
-    //   videoPlayButton.addClass("hidden");
+    close: function() {
+      this.resetState();
+      this.$router.go(-1);
+    },
 
-    //   this.hideLoader();
-    // },
+    toggleDropdawnMenu: function() {
+      this.showDropdawnMenu = !this.showDropdawnMenu;
+      if (this.showDropdawnMenu) {
+        this.pause();
+      } else {
+        this.resume();
+      }
+    },
 
-    allStoryWatched: function() {
-      console.log("all done");
+    pause: function() {
+      if (this.timer) {
+        this.timer.pause();
+      }
+
+      if (this.currentStory.mediaType === "video") {
+        const videoTag = this.videos[this.currentStory.id];
+        videoTag.pause();
+      }
+    },
+
+    resume: function() {
+      if (this.timer) {
+        this.timer.resume();
+      }
+
+      if (this.currentStory.mediaType === "video") {
+        const videoTag = this.videos[this.currentStory.id];
+        videoTag.play();
+      }
+    },
+
+    deleteStory: function() {
+      // var currentModel = this.collection.at(this.collection.activeIndex);
+      // currentModel.destroy().then(
+      //   function() {
+      //     $.toast({
+      //       text: "Story deleted",
+      //       position: "top-center",
+      //       icon: "success"
+      //     });
+      //   }.bind(this),
+      //   function() {
+      //     $.toast({
+      //       text: "Story deletion failed",
+      //       position: "top-center",
+      //       icon: "error"
+      //     });
+      //   }.bind(this)
+      // );
+    },
+
+    storySettings: function() {
+      this.$router.push("/settings/story");
+      this.toggleDropdawnMenu();
+    },
+
+    saveFile: function() {
+      window.open(this.post.mediaSrc, "_blank");
+      this.toggleDropdawnMenu();
+    },
+
+    videoEventPlay: function() {
+      if (this.currentStory.mediaType === "video") {
+        const videoTag = this.videos[this.currentStory.id];
+        videoTag.muted = false;
+      }
+    },
+
+    videoEventWaiting: function() {
+      this.showLoader = true;
+    },
+
+    videoEventPlaying: function() {
+      this.showVideoPlay = false;
+      this.showLoader = false;
     }
-
-    // hideLoader: function() {
-    //   // if (this.loader) {
-    //   //   this.loader.parentNode.removeChild(this.loader);
-    //   //   this.loader = null;
-    //   // }
-    // },
-    // next: function() {
-    //   this.hideLoader();
-    //   this.resetTimer();
-    //   // this.collection.next();
-    // },
-    // resetTimer: function() {
-    //   // window.clearTimeout(this.timer.getId());
-    //   // this.timer = null;
-    //   // if (
-    //   //   this.videos[this.collection.activeIndex] &&
-    //   //   this.videos[this.collection.activeIndex].video
-    //   // ) {
-    //   //   this.videos[this.collection.activeIndex].video.pause();
-    //   //   this.videos[this.collection.activeIndex].video.currentTime = 0;
-    //   // }
-    // },
   },
   created() {
     this.$store.dispatch("stories/resetPageState");
@@ -297,8 +351,9 @@ export default {
   watch: {
     length() {
       this.$nextTick(() => {
-        if (!this.length) return;
-        this.run();
+        if (this.length) {
+          this.run();
+        }
       });
     },
     currentStory() {
