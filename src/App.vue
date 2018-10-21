@@ -17,6 +17,9 @@
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
+      <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
+      <PaymentModal v-if="this.$store.state.modal.payment.show" />
+
     </template>
   </div>
 </template>
@@ -26,12 +29,14 @@ import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
 import Sidebar from "@/components/Sidebar";
 import Toast from "@/components/common/Toast";
+import ColorScheme from "@/mixins/colorScheme";
 import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
-import ColorScheme from "@/mixins/colorScheme";
 import UserReportModal from "@/components/common/UserReportModal";
+import SubscribeModal from "@/components/subscription/Modal";
+import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 
 import ws from "@/ws";
@@ -47,6 +52,8 @@ export default {
     PostModal,
     ChatModal,
     UserReportModal,
+    SubscribeModal,
+    PaymentModal,
     ModalRouter
   },
   mixins: [ColorScheme],

@@ -105,7 +105,29 @@
                 </div>
 
                 <div class="profile-actions" v-else>
-                  <div class="subscribePaidView"></div>
+
+                  <button
+                    v-if="profile.canEarn"
+                    type="button" class="profile-actions__btn profile-tip-btn selected">Fund</button>
+
+                  <div
+                    v-if="profile.canEarn"
+                    class="subscribePaidView"
+                    @click="subscription"
+                  >
+                    <div
+                      class="subscribe-cost"
+                      :class="{'disable-state': subsAction === 'unsubscribe'}"
+                      id="subscribe-paid"
+                    >
+                      <div class="subscribe-cost__value">
+                        $<span>{{ profile.subscribePrice }}</span>/mo.
+                      </div>
+                      <div class="subscribe-cost__label">
+                        {{ ucFirst(subsAction) }}
+                      </div>
+                    </div>
+                  </div>
 
                   <template v-if="profile.subscribedBy">
                     <span class="subscribeView"></span>
@@ -221,10 +243,13 @@ import UserMixin from "@/mixins/user";
 
 export default {
   name: "ProfileHome",
+
   mixins: [InfinityScrollMixin, UserMixin],
+
   components: {
     PostCollection
   },
+
   computed: {
     username() {
       return this.$route.params[0].replace(/\/(.*)/, "$1");
@@ -237,6 +262,18 @@ export default {
     },
     store() {
       return this.$store.state.profile.home;
+    },
+    subsAction() {
+      if (!this.profile.subscribedBy) {
+        return "subscribe";
+      } else if (
+        this.profile.subscribedBy &&
+        !this.profile.subscribedByExpire
+      ) {
+        return "unsubscribe";
+      } else if (this.profile.subscribedBy && this.profile.subscribedByExpire) {
+        return "resubscribe";
+      }
     }
   },
 
@@ -272,6 +309,28 @@ export default {
       if (this.profile) {
         this.$store.dispatch("profile/home/getPosts", this.profile.id);
       }
+    },
+    ucFirst(name) {
+      return name.charAt(0).toUpperCase() + name.slice(1);
+    },
+    subscribe() {
+      this.$store.dispatch("modal/show", {
+        name: "subscribe",
+        data: this.profile
+      });
+    },
+    unsubscribe() {
+      this.$store.dispatch("subscription/unsubscribe", {
+        userId: this.profile.id
+      });
+    },
+    resubscribe() {
+      this.$store.dispatch("subscription/resubscribe", {
+        userId: this.profile.id
+      });
+    },
+    subscription() {
+      this[this.subsAction]();
     }
   },
 

@@ -15,6 +15,14 @@ const state = {
   userReport: {
     show: false,
     data: {}
+  },
+  subscribe: {
+    show: false,
+    data: {}
+  },
+  payment: {
+    show: false,
+    data: {}
   }
 };
 
@@ -26,6 +34,9 @@ const mutations = {
   hide(state, { name }) {
     state[name].show = false;
     state[name].data = {};
+  },
+  hideSafe(state, { name }) {
+    state[name].show = false;
   },
   hideAll(state) {
     for (let name in state) {

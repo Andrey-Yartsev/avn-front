@@ -8,7 +8,7 @@
             />
             <p class="text">{{ post.text }}</p>
             <Media
-              :medias="post.media"
+              :medias="medias"
               :showSlider="post.canViewMedia"
               :shouldHasLink="true"
               :postId="post.id"
@@ -63,6 +63,15 @@ export default {
   computed: {
     actionPrefix() {
       return this.from;
+    },
+    medias() {
+      if (!this.post.media.length) {
+        return [];
+      }
+      if (this.post.media[0].locked) {
+        return [this.post.media[0]];
+      }
+      return this.post.media;
     }
   },
   methods: {

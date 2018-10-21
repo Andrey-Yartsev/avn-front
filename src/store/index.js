@@ -20,6 +20,7 @@ import stories from "@/store/modules/stories";
 import modalRouter from "@/store/modules/modalRouter";
 import notif from "@/store/modules/notif";
 import search from "@/store/modules/search";
+import subscription from "@/store/modules/subscription";
 
 Vue.use(Vuex);
 
@@ -45,7 +46,8 @@ const store = new Vuex.Store({
     stories,
     lives,
     notif,
-    search
+    search,
+    subscription
   }
 });
 
