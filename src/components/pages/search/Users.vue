@@ -15,7 +15,7 @@
               </span>
             </div>
             <div class="user-actions">
-              <SubscribeButton :profile="v" @requested="data => subsRequested(v, data)"/>
+              <SubscribeButton :profile="v" @requested="data => subsRequested(v.id, data)"/>
               <span class="subscribeView" v-if="!v.subscribedBy">
                 <div
                   class="profile-actions__btn btn-subscribe"
@@ -26,8 +26,13 @@
                   </div>
                 </div>
               </span>
-              <div class="more-functions hidden-mobile">
-                <div class="more-functions__btn more-functions__btn_with-text">
+              <div
+                class="more-functions hidden-mobile"
+                :class="{open: isOptionsOpened(v.id)}"
+              >
+                <div
+                  class="more-functions__btn more-functions__btn_with-text"
+                  @click="toggleOptions(v.id)">
                   <div class="more-functions__btn-text">
                     More
                   </div>
@@ -65,22 +70,28 @@ export default {
     SubscribeButton
   },
 
+  data() {
+    return {
+      openedOptions: []
+    }
+  },
+
   methods: {
-    subsRequested(profile, data) {
+    subsRequested(userId, data) {
       if (data.action === "unsubscribe") {
-        this.unsubscribed(profile, data.result);
+        this.unsubscribed(userId, data.result);
       } else if (data.action === "resubscribe") {
-        this.resubscribed(profile, data.result);
+        this.resubscribed(userId, data.result);
       } else {
         throw new Error("Wrong action");
       }
     },
-    unsubscribed(profile, result) {
+    unsubscribed(userId, result) {
       if (!result.success) {
         return;
       }
       this.$store.commit("search/page/extendUser", {
-        userId: profile.id,
+        userId,
         data: { subscribedByExpire: true }
       });
       this.$store.dispatch(
@@ -88,18 +99,46 @@ export default {
         "You have unsubscribed successfully"
       );
     },
-    resubscribed(profile, result) {
+    resubscribed(userId, result) {
       if (!result.success) {
         return;
       }
       this.$store.commit("search/page/extendUser", {
-        userId: profile.id,
+        userId,
         data: { subscribedByExpire: false }
       });
       this.$store.dispatch(
         "global/flashToast",
         "You have resubscribed successfully"
       );
+    },
+    follow(userId) {
+      this.$store.dispatch("search/page/follow", userId);
+    },
+    unfollow(userId) {
+      this.$store.dispatch("search/page/unfollow", userId);
+    },
+    report(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "userReport",
+        data: userId
+      });
+    },
+    block(userId) {
+      this.$store.dispatch("search/page/block", userId);
+    },
+    unblock(userId) {
+      this.$store.dispatch("search/page/unblock", userId);
+    },
+    isOptionsOpened(userId) {
+      return this.openedOptions.indexOf(userId) !== -1;
+    },
+    toggleOptions(userId) {
+      if (this.isOptionsOpened(userId)) {
+        this.openedOptions = this.openedOptions.filter(id => id !== userId);
+      } else {
+        this.openedOptions.push(userId);
+      }
     }
   }
 };

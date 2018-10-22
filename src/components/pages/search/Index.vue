@@ -82,24 +82,6 @@ export default {
         limit: 10
       });
     },
-    follow(userId) {
-      this.$store.dispatch("search/page/follow", userId);
-    },
-    unfollow(userId) {
-      this.$store.dispatch("search/page/unfollow", userId);
-    },
-    report(userId) {
-      this.$store.dispatch("modal/show", {
-        name: "userReport",
-        data: userId
-      });
-    },
-    block(userId) {
-      this.$store.dispatch("search/page/block", userId);
-    },
-    unblock(userId) {
-      this.$store.dispatch("search/page/unblock", userId);
-    },
     changeType(type) {
       this.$router.push(`/search/${type}/${this.query}`);
     }
