@@ -1,11 +1,13 @@
 <template>
-  <div class="explore-all-story" :data-id="post.user.id">
-    <router-link :to="`/stories/${post.user.id}`" :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
-      <img v-if="post.user.avatar" :src="post.user.avatar" />
-    </router-link>
-    <a :href="`/${post.user.username}`" class="name">
-      {{ post.user.name || post.user.username }}
-    </a>
+  <div class="exploreAllStoriesView">
+    <div class="explore-all-story" :data-id="post.user.id">
+      <router-link :to="`/stories/${post.user.id}`" :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
+        <img v-if="post.user.avatar" :src="post.user.avatar" />
+      </router-link>
+      <a :href="`/${post.user.username}`" class="name">
+        {{ post.user.name || post.user.username }}
+      </a>
+    </div>
   </div>
 </template>
 

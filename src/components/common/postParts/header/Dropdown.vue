@@ -1,14 +1,24 @@
 <template>
-    <div class="dropdown-menu">
-       <template v-if="!isOwner(userId) && isAuth()">
+  <div class="more-functions__dropdown-inside">
+    <ul>
+      <template v-if="!isOwner(userId) && isAuth()">
+        <li>
           <button class="report" type="button" @click="reportUser">Report post</button>
-        </template>
-        <button v-if="copied" class="btn-copy-link copied" type="button">Copied!</button>
-        <button v-else  class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
-        <template v-if="isOwner(userId)">
+        </li>
+      </template>
+      <li v-if="copied" >
+        <button class="btn-copy-link copied" type="button">Copied!</button>
+      </li>
+      <li v-else>
+        <button class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
+      </li>
+      <template v-if="isOwner(userId)">
+        <li>
           <button class="deletePost" type="button" @click="deletePost">Delete post</button>
-        </template>
-    </div>
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>

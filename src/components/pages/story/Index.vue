@@ -162,6 +162,10 @@ export default {
         this.currActiveIndex = this.currIndex;
       }, 99);
 
+      if (this.isAuth() && !this.currentStory.isLook) {
+        this.$store.dispatch("stories/watch", { postId: this.currentStory.id });
+      }
+
       return this.currentStory.mediaType === "video"
         ? this.launchVideo()
         : this.launchImage();

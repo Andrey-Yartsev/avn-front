@@ -15,5 +15,10 @@ export default {
     return anyRequest(`users/${userId}/stories/`, {
       method: "GET"
     });
+  },
+  watchStory({ postId }) {
+    return anyRequest(`stories/${postId}/watched`, {
+      method: "PUT"
+    });
   }
 };
