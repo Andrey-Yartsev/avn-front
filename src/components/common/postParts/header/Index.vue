@@ -10,18 +10,25 @@
     <span class="user-login">
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
-    <span class="post-dropdown-menu-btn" v-on:click="isShowDropdown = !isShowDropdown"></span>
-    <Dropdown
-      v-bind:class="{ hidden: !isShowDropdown }"
-      :postId="postId"
-      :userId="user.id"
-      :from="from"
-    ></Dropdown>
+    <div :class="['more-functions', {open: opened}]"  v-click-outside="hide">
+      <div class="more-functions__overlay"></div>
+      <div class="more-functions__btn" @click="opened = true">
+        <div class="more-functions__btn-text"></div>
+      </div>
+      <div class="more-functions__dropdown">
+        <Dropdown
+          :postId="postId"
+          :userId="user.id"
+          :from="from"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Dropdown from "./Dropdown";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "Header",
@@ -29,7 +36,7 @@ export default {
     Dropdown
   },
   data: () => ({
-    isShowDropdown: false
+    opened: false
   }),
   props: {
     postId: {
@@ -44,6 +51,17 @@ export default {
       type: String,
       required: true
     }
+  },
+  methods: {
+    hide() {
+      this.opened = false;
+    }
+  },
+  mounted() {
+    this.popupItem = this.$el.querySelector(".more-functions");
+  },
+  directives: {
+    ClickOutside
   }
 };
 </script>

@@ -70,6 +70,9 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
+  },
+  watch(opt, { postId }) {
+    return StoriesApi.watchStory({ postId });
   }
 };
 

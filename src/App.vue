@@ -94,7 +94,8 @@ export default {
       const html = document.getElementsByTagName("html")[0];
       html.className = "";
       const bodyClassList = html.classList;
-      for (let cls of rootClasses[cssName]) {
+      const classList = rootClasses[cssName] || [];
+      for (let cls of classList) {
         bodyClassList.add(cls);
       }
     }

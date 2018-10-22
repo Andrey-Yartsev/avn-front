@@ -16,9 +16,7 @@
                         <div class="stories-all" v-if="page === 'all'">
                             <div class="exploreAllStoriesCollectionView">
                                 <div class="explore-stories">
-                                    <div class="exploreAllStoriesView">
-                                        <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
-                                    </div>
+                                  <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
                                 </div>
                             </div>
                         </div>
