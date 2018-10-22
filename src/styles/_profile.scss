@@ -556,16 +556,16 @@
         flex: 0 0 100px;
       }
     }
-
-    .tip-amount-input {
-      text-align: center;
-    }
   }
 }
 
 .tip-amount-field {
   flex: 1;
   margin: 0 15px;
+
+  input {
+    text-align: center;
+  }
 }
 
 .profile-picture-btns {
@@ -604,6 +604,7 @@
 .btn-cancel-changes {
   width: 30px;
   height: 30px;
+  flex: 0 0 30px;
   border-radius: 50%;
   border: none;
   background-color: rgba(124, 139, 150, 0.5);

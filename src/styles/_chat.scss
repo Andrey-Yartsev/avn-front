@@ -30,6 +30,17 @@
   }
 }
 
+
+.chatCollectionView {
+
+  &.chat-wrapper {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100%;
+    }
+  }
+}
+
 .chatCollectionView,
 .chatCreateNewView {
   height: 100%;
@@ -38,6 +49,10 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     background-color: transparent;
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex-direction: column;
   }
 
   .avatar {
@@ -71,7 +86,52 @@
     width: 100%;
   }
 
+  .chatCollectionView &,
+  .chatCreateNewView & {
+
+    .selectedChatHeader {
+
+      .avatar {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none !important;
+        }
+      }
+    }
+
+    .contactsList {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  }
+
   &.chat {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100%;
+    }
+
+    .chatCollectionView &,
+    .chatCreateNewView & {
+
+      .chatMessagesCollectionView {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: flex !important;
+        }
+
+        .chat-section {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            flex: 1;
+          }
+        }
+      }
+    }
+
     .chatCollectionContent__col {
       &_narrow {
         @include media-breakpoint-down($desktop-breakpoint) {
@@ -904,40 +964,6 @@
       padding-bottom: 0;
       @include ellipsis;
       overflow: hidden;
-    }
-  }
-}
-
-@include media-breakpoint-down($desktop-breakpoint) {
-
-  .chatCollectionContent.chat,
-  .chatCollectionView.chat-wrapper {
-    height: 100%;
-  }
-
-  .chatCollectionView,
-  .chatCreateNewView {
-    flex-direction: column;
-    .chatCollectionContent {
-      .selectedChatHeader {
-        .avatar {
-          display: none !important;
-        }
-      }
-
-      .contactsList {
-        display: block !important;
-        width: 100% !important;
-      }
-    }
-    .chatCollectionContent.chat {
-      .chatMessagesCollectionView {
-        display: flex !important;
-
-        .chat-section {
-          flex: 1;
-        }
-      }
     }
   }
 }

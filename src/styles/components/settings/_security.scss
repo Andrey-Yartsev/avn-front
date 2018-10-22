@@ -160,15 +160,18 @@
 }
 
 .session-content {
+
   .content {
     padding: 18px 20px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 25px 0 20px;
+      padding-right: 25px;
+      padding-top: 0;
       margin: -4px 0 0;
     }
 
     &.shadow-block {
+
       &:empty {
         display: none;
 

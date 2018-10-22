@@ -4,12 +4,6 @@
       overflow: hidden;
     }
   }
-  .footer-nav {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: flex;
-      justify-content: center;
-    }
-  }
 
   .profile-name {
     padding: 0;

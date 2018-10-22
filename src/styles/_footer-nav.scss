@@ -5,9 +5,11 @@
   font-size: 13px;
   padding: 23px 0 17px;
   justify-content: center;
+  text-align: center;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 3px 0 15px;
+    margin-right: auto;
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -16,25 +18,20 @@
 
   &.second-footer-nav {
     padding-top: 0;
-    text-align: center;
-    justify-content: center;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin-right: auto;
+  &.aside {
+    flex-wrap: wrap;
   }
 
   a {
     color: inherit;
     opacity: 0.3;
     transition: opacity 0.3s ease;
+
     &:hover {
       opacity: 1;
     }
-  }
-
-  &.aside {
-    flex-wrap: wrap;
   }
 
   .FooterNavView {
@@ -61,6 +58,7 @@
 
 .staticPage,
 .error404View {
+
   .footer-nav {
     flex-wrap: wrap;
     @include media-breakpoint-down($desktop-breakpoint) {
