@@ -1,6 +1,6 @@
 <template>
   <div v-if="!profile">Loading</div>
-  <div v-else class="myProfile">
+  <div v-else class="profile">
     <router-link class="addPost-btn-float" to="/addPost"/>
     <div class="sticky-header-controls">
       <a class="header-return-btn"></a>
