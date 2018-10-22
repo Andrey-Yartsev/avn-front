@@ -108,10 +108,12 @@
             <span class="user-login" v-if="blockLoading">...</span>
             <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
 
-            <span class="chatOptions" :class="{open: chatOptionsOpened}">
-            <span class="chatExpand" @click="chatOptionsOpened = !chatOptionsOpened"></span>
-              <div class="chatOptions__dropdown">
-                <ul class="chatOptions__list">
+            <span class="more-functions" :class="{open: chatOptionsOpened}">
+              <div class="more-functions__overlay"></div>
+              <div class="more-functions__btn" @click="chatOptionsOpened = !chatOptionsOpened"></div>
+              <div class="more-functions__dropdown">
+                <div class="more-functions__dropdown-inside">
+                  <ul>
                   <li><router-link class="profile-url" :to="'/' + activeUser.name">View profile</router-link></li>
                   <li v-if="activeUser.isBlocked"><a class="menu-block" @click="unblockActiveUser">Unblock user</a></li>
                   <li v-else><a class="menu-block" @click="blockActiveUser">Block user</a></li>
@@ -119,9 +121,11 @@
                   <li v-else><a class="menu-delete" @click="deleteConversation">Delete conversation</a></li>
                   <li><a class="menu-report" @click="report">Report</a></li>
                   <li><a class="menu-cancel" @click="chatOptionsOpened = false">Cancel</a></li>
-                </ul>
+                  </ul>
+                </div>
               </div>
             </span>
+
           </div>
         </div>
         <div class="chatCollectionContentWrapper">
