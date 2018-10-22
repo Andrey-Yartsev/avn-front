@@ -1,66 +1,68 @@
 <template>
   <div class="post postPage">
-    <div class="header-mobile">
-      <button class="header-return-btn"></button>
-      <h1 class="page-title">Post</h1>
-    </div>
-    <Header
-      :class="'hidden-desktop'"
-      :postId="post.id"
-      :user="post.author" 
-      :from="from"
-    />
-    <p class="text hidden-desktop">
-      {{ post.text }}
-    </p>
-    <Media
-      :medias="post.media"
-      :showSlider="post.canViewMedia"
-      :shouldHasLink="false"
-      :postId="post.id"
-    />
-    <div class="right-col">
+    <div class="postPage-content">
+      <div class="header-mobile">
+        <button class="header-return-btn"></button>
+        <h1 class="page-title">Post</h1>
+      </div>
       <Header
-        :class="'hidden-mobile'"
+        :class="'hidden-desktop'"
         :postId="post.id"
         :user="post.author"
         :from="from"
       />
-      <p class="text hidden-mobile">
-      {{ post.text }}
+      <p class="text hidden-desktop">
+        {{ post.text }}
       </p>
-      <CommentsList
-        :comments="post.comments || []"
-        :shownCommentsCount="post.shownCommentsCountFull"
-        v-on:commentReply="commentReply"
-        v-on:likeComment="likeComment"
+      <Media
+        :medias="post.media"
+        :showSlider="post.canViewMedia"
+        :shouldHasLink="false"
+        :postId="post.id"
       />
-      <template v-if="isAuth()" >
-        <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
-        <template v-if="!isOwner() && post.author.canEarn">
-          <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
-            <input type="hidden" name="type" value="tip" />
-            <input type="hidden" name="id" :value="post.author.id" />
-            <input type="hidden" name="access-token" :value="accessToken" />
-            <span role="button" class="btn btn-cancel">Cancel</span>
-            <div class="tip-amount-field">
-              <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
-            </div>
-            <button type="submit" class="btn" disabled>Send tip</button>
-          </form>
-        </template>
-        <Actions 
-          :post="post" 
-          v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
-          v-on:postLike="likePost"
+      <div class="right-col">
+        <Header
+          :class="'hidden-mobile'"
+          :postId="post.id"
+          :user="post.author"
+          :from="from"
         />
-      </template>
-      <template v-else>
-        <div class="guest-comments-form">
-          <p>Please login to leave comments or tips</p>
-          <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
-        </div>
-      </template>
+        <p class="text hidden-mobile">
+        {{ post.text }}
+        </p>
+        <CommentsList
+          :comments="post.comments || []"
+          :shownCommentsCount="post.shownCommentsCountFull"
+          v-on:commentReply="commentReply"
+          v-on:likeComment="likeComment"
+        />
+        <template v-if="isAuth()" >
+          <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
+          <template v-if="!isOwner() && post.author.canEarn">
+            <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
+              <input type="hidden" name="type" value="tip" />
+              <input type="hidden" name="id" :value="post.author.id" />
+              <input type="hidden" name="access-token" :value="accessToken" />
+              <span role="button" class="btn btn-cancel">Cancel</span>
+              <div class="tip-amount-field">
+                <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
+              </div>
+              <button type="submit" class="btn" disabled>Send tip</button>
+            </form>
+          </template>
+          <Actions
+            :post="post"
+            v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+            v-on:postLike="likePost"
+          />
+        </template>
+        <template v-else>
+          <div class="guest-comments-form">
+            <p>Please login to leave comments or tips</p>
+            <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
