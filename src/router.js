@@ -47,6 +47,7 @@ const routes = [
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {
+      cssName: "forgot",
       noAuthHeader: true
     }
   },
@@ -58,28 +59,43 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat",
-    component: Chat
+    component: Chat,
+    meta: {
+      cssName: "chat"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/no-messages",
-    component: Chat
+    component: Chat,
+    meta: {
+      cssName: "chat"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/new",
-    component: ChatNewMessage
+    component: ChatNewMessage,
+    meta: {
+      cssName: "chat"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/home",
     name: "ChatHome",
-    component: Chat
+    component: Chat,
+    meta: {
+      cssName: "chat"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/:userId",
-    component: Chat
+    component: Chat,
+    meta: {
+      cssName: "chat"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
@@ -94,27 +110,42 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/notifications",
-    component: SettingsNotificationPage
+    component: SettingsNotificationPage,
+    meta: {
+      cssName: "settings"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings",
-    component: SettingsDefaultPage
+    component: SettingsDefaultPage,
+    meta: {
+      cssName: "settings"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/profile",
-    component: SettingsDefaultPage
+    component: SettingsDefaultPage,
+    meta: {
+      cssName: "settings"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
-    component: SettingsSecurityPage
+    component: SettingsSecurityPage,
+    meta: {
+      cssName: "settings"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/notifications",
-    component: SettingsNotificationPage
+    component: SettingsNotificationPage,
+    meta: {
+      cssName: "settings"
+    }
   },
   // PUBLIC ZONE
   {
@@ -136,7 +167,8 @@ const routes = [
     component: ExplorePage,
     meta: {
       page: "all",
-      type: "media"
+      type: "media",
+      cssName: "explore"
     }
   },
   {
@@ -184,8 +216,10 @@ const routes = [
   {
     beforeEnter: Profile.init,
     path: "*",
-    name: "profile",
-    component: ProfilePage
+    component: ProfilePage,
+    meta: {
+      cssName: "userProfile"
+    }
   }
 ];
 

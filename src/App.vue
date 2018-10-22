@@ -39,6 +39,7 @@ import SubscribeModal from "@/components/subscription/Modal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 
+import rootClasses from "@/rootClasses";
 import ws from "@/ws";
 
 export default {
@@ -77,6 +78,9 @@ export default {
     },
     error() {
       return !!this.$store.state.global.error;
+    },
+    cssName() {
+      return this.$route.meta.cssName;
     }
   },
   watch: {
@@ -84,22 +88,18 @@ export default {
       this.showToast = true;
     },
     $route() {
-      this.initBodyClass();
       this.$store.dispatch("modal/hideAll");
-    }
-  },
-  methods: {
-    initBodyClass() {
-      const bodyClassList = document.getElementsByTagName("body")[0].classList;
-      if (this.$route.name === "profile") {
-        bodyClassList.add("profile-page");
-      } else {
-        bodyClassList.remove("profile-page");
+    },
+    cssName(cssName) {
+      const html = document.getElementsByTagName("html")[0];
+      html.className = "";
+      const bodyClassList = html.classList;
+      for (let cls of rootClasses[cssName]) {
+        bodyClassList.add(cls);
       }
     }
   },
   created() {
-    this.initBodyClass();
     ws();
   }
 };

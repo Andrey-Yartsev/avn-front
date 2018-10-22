@@ -112,49 +112,47 @@
 
                   <SubscribeButton :profile="profile" @requested="subsRequested"/>
 
-                  <template v-if="profile.subscribedBy">
-                    <span class="subscribeView"></span>
-                    <button
-                      @click="sendMessage"
-                      type="button" class="profile-actions__btn profile-message-btn">Message</button>
-                  </template>
-                  <template v-else>
-                    <div class="subscribeView">
-                      <div
-                        v-if="profile.followedBy"
-                        @click="unfollow"
-                        class="profile-actions__btn btn-subscribe disable-state">
-                        <div class="btn-subscribe__label">
-                          Unfollow
-                        </div>
-                      </div>
-                      <div
-                        v-else
-                        @click="follow"
-                        class="profile-actions__btn btn-subscribe">
-                        <div class="btn-subscribe__label">
-                          Follow
-                        </div>
+                  <div class="subscribeView">
+                    <div
+                      v-if="profile.followedBy"
+                      @click="unfollow"
+                      class="profile-actions__btn btn-subscribe disable-state">
+                      <div class="btn-subscribe__label">
+                        Unfollow
                       </div>
                     </div>
-                    <button
-                      v-if="profile.followedBy"
-                      @click="sendMessage"
-                      class="profile-actions__btn profile-message-btn">Message</button>
-                  </template>
+                    <div
+                      v-else
+                      @click="follow"
+                      class="profile-actions__btn btn-subscribe">
+                      <div class="btn-subscribe__label">
+                        Follow
+                      </div>
+                    </div>
+                  </div>
 
-                  <div class="profile-actions__btn more-functions hidden-mobile">
+                  <button
+                    v-if="profile.followedBy"
+                    @click="sendMessage"
+                    type="button" class="profile-actions__btn profile-message-btn">Message</button>
+
+                  <div class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile">
+                    <div class="more-functions__overlay"></div>
                     <div class="more-functions__btn">
-                      More
+                      <div class="more-functions__btn-text">
+                        More
+                      </div>
                     </div>
                     <div class="more-functions__dropdown">
                       <div class="more-functions__dropdown-inside">
                         <ul>
                           <li><a class="menu-report" href="#">Report</a></li>
+                          <li><a class="menu-block" href="#">Block</a></li>
                         </ul>
                       </div>
                     </div>
                   </div>
+
                 </div>
 
               </div>
