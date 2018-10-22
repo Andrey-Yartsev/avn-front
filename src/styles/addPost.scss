@@ -1,5 +1,4 @@
 @import "components/imports";
-@import "components/addMenu";
 
 .addPost {
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -15,6 +14,31 @@
 
     .feed & {
       display: none;
+    }
+  }
+
+  &.loaderWrap {
+
+    .popup & {
+
+      .lds-dual-ring {
+        top: -60px;
+      }
+    }
+
+    .loader-text {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 44px;
+      }
+
+      &:after {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 0;
+          top: 0;
+        }
+      }
     }
   }
 
@@ -424,6 +448,10 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           width: 1.1em;
         }
+      }
+      &.disabled {
+        opacity: .5;
+        pointer-events: none;
       }
     }
 

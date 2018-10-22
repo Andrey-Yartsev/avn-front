@@ -1,42 +1,57 @@
 @import "components/imports";
-html {
+
+.static-page {
   background: $white;
-}
-#site_header {
-  box-shadow: none;
-  position: relative;
-  .header-nav,
-  .header-search {
-    display: none;
-  }
-  .header-logo {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-left: 0;
+
+  #site_header {
+    box-shadow: none;
+    position: relative;
+
+    .header-wrapper {
+      box-shadow: none;
+      position: relative;
     }
-  }
-  &.guest {
+
+    .header-nav,
+    .header-search {
+      display: none;
+    }
     .header-logo {
-      margin-left: 0;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 0;
+      }
+    }
+    &.guest {
+      .header-logo {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .header-wrapper {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .text {
+    padding: 25px 0 70px;
+    font-size: 13px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      text-align: justify;
+      padding: 25px 0 45px;
+    }
+    p + h2 {
+      padding-top: 24px;
+    }
+    ol {
+      margin: 0 0 0 14px;
+      li {
+        padding: 0 0 9px 3px;
+      }
     }
   }
 }
-.text {
-  padding: 25px 0 70px;
-  font-size: 13px;
-  @include media-breakpoint-down($desktop-breakpoint) {
-    text-align: justify;
-    padding: 25px 0 45px;
-  }
-  p + h2 {
-    padding-top: 24px;
-  }
-  ol {
-    margin: 0 0 0 14px;
-    li {
-      padding: 0 0 9px 3px;
-    }
-  }
-}
+
 .error404View,
 .staticPage,
 .EmailConfirmedView,
@@ -50,31 +65,7 @@ html {
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: calc(100vh - 75px);
   }
-  .site-footer {
-    margin-top: auto;
-    .FooterNavCollectionView {
-      padding: 22px 0;
-      position: relative;
-      &:before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        position: absolute;
-        background: rgba($gray, 0.2);
-        @include media-breakpoint-up($desktop-breakpoint) {
-          background: linear-gradient(
-            to right,
-            rgba($gray, 0.2) 0%,
-            transparent 30%,
-            transparent 70%,
-            rgba($gray, 0.2) 100%
-          );
-        }
-      }
-    }
-  }
+
   > .container {
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: 640px;

@@ -5,8 +5,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
 
   &.transparent {
     background-color: transparent;
@@ -22,7 +22,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: url("#{$assetPath}/img/loading.svg") no-repeat 0 0 / cover;
+    background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
     /*border: 2px solid #fff;
     border-color: #fff  #fff transparent;*/
     animation: lds-dual-ring 1.2s linear infinite;
@@ -96,6 +96,7 @@
       }
     }
   }
+
 }
 
 @keyframes lds-dual-ring {

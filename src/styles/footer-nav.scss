@@ -84,43 +84,15 @@
 }
 
 .aside-col {
+
   .footer-nav {
+
     .FooterNavView {
+
       &.settings-onmyteam-link {
+
         @include media-breakpoint-up($desktop-breakpoint) {
           margin: 10px auto 0;
-        }
-      }
-    }
-  }
-
-  &_with-footer {
-    .site-footer {
-      display: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: 73px;
-        padding-top: 20px;
-        position: relative;
-        display: block;
-      }
-
-      &:before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        position: absolute;
-        background: linear-gradient(
-          to right,
-          rgba($gray, 0.2) 0%,
-          transparent 100%
-        );
-        display: none;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          display: block;
         }
       }
     }

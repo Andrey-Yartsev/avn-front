@@ -1,14 +1,16 @@
 @import "components/imports";
-body {
-  overflow-y: auto;
+
+.login-page {
+
+  body {
+    overflow-y: auto;
+  }
 }
 
-#site_header {
-  display: none;
-}
 .login,
 .OtpView {
   position: relative;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 100vh;
     background-color: $white;
@@ -23,16 +25,21 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    &:before {
-      position: absolute;
-      right: 0;
-      width: 43.4%;
-      top: 0;
-      bottom: 0;
-      background: $light;
-      opacity: 0.3;
-      content: "";
+
+    &:not(.btn) {
+
+      &:before {
+        position: absolute;
+        right: 0;
+        width: 43.4%;
+        top: 0;
+        bottom: 0;
+        background: $light;
+        opacity: 0.3;
+        content: "";
+      }
     }
+
     #content > & {
       transition: none;
     }

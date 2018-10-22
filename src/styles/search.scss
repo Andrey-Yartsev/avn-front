@@ -1,46 +1,5 @@
 @import "components/imports";
 
-.explore-nav {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    background: $white;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 44px;
-    box-shadow: 0 0 5px rgba(#000, 0.3);
-    line-height: 3em;
-    font-weight: 500;
-    z-index: 9;
-    transition: all 0.2s ease-in-out 0s;
-
-    .scroll-top & {
-      transform: translate3d(0, -44px, 0);
-    }
-
-    a {
-      width: 100%;
-      text-align: center;
-      position: relative;
-      font-weight: 400;
-
-      &.active {
-        &:after {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: $secondary-color;
-          content: "";
-        }
-      }
-
-      &.active {
-        font-weight: 500;
-      }
-    }
-  }
-}
-
 .searchView {
   .posts {
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -89,12 +48,6 @@
           z-index: 0;
         }
 
-        .post-dropdown-menu-btn {
-          &:before {
-            transform: none;
-            left: 12px;
-          }
-        }
       }
 
       &-header,

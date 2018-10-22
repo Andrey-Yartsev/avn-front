@@ -1,8 +1,25 @@
 @import "components/imports";
+
+.error404View {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 26px 0 0;
+  }
+
+  h1 {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-bottom: 2px;
+    }
+  }
+}
+
+
 .error404View,
 .EmailConfirmedView,
 .PasswordConfirmedView {
   text-align: center;
+
   @include media-breakpoint-down($desktop-breakpoint) {
     > .container {
       max-width: 290px;

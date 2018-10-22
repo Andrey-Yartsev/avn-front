@@ -4,6 +4,7 @@
 @import "components/grid";
 @import "components/typography";
 @import "components/buttons";
+@import "components/icons";
 @import "components/forms";
 @import "components/user";
 @import "components/header";
@@ -11,48 +12,66 @@
 @import "components/feed";
 @import "components/popup";
 @import "components/loader";
-@import "overlayscrollbars/OverlayScrollbars";
-
 @import "jquery-toast-plugin/jquery-toast";
-
+@import "toast";
+@import "overlayscrollbars/OverlayScrollbars.scss";
+@import "components/dropdown";
+@import "components/headerMediasAdd";
 @import "addChatMessage";
 @import "addPost";
-@import "addStory"; // Hide header style
+@import "addStory";
 @import "blocked";
 @import "chat";
 @import "chatCreateNew";
 @import "chatMessages";
+@import "colorScheme";
 @import "contact";
 @import "error404";
 @import "eventsControlsMedia";
 @import "explore";
 @import "explore-stories";
+@import "followers";
+@import "footer";
 @import "footer-nav";
 @import "forgot";
 @import "lives";
-@import "login"; // Hide header style
+@import "login";
 @import "notifications";
 @import "optionsColors";
-@import "otp"; // Hide header style
+@import "otp";
 @import "photos";
 @import "post";
 @import "posts";
-@import "profile"; // Hide header style + styles for profile header
+@import "profile";
 @import "search";
 @import "searchChat";
 @import "settings";
-@import "static-page"; // Hide header style + styles for profile header
+@import "static-page";
 @import "stories";
 @import "story-page";
 @import "stream";
-@import "support"; // Hide header style
+@import "subscribe";
+@import "support";
 @import "toast";
 @import "users";
 @import "videos";
 
-@import "header-resets";
-@import "content";
-@import "components/icons";
 
-// @import "jquery-toast-plugin/jquery-toast";
-// @import "toast";
+@import "components/settings/nav";
+@import "components/settings/profile";
+@import "components/settings/payouts";
+@import "components/settings/payments";
+@import "components/settings/account";
+@import "components/settings/referrals";
+@import "components/settings/security";
+@import "components/table";
+
+@import "components/addMenu";
+
+@import "components/videoPlayButton";
+@import "components/headerMediasAdd";
+@import "components/textMode";
+@import "optionsColors";
+
+@import "components/videoPlayButton";
+@import "stories";

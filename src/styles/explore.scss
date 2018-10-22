@@ -1,30 +1,48 @@
 @import "components/imports";
 
-#content {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    min-height: calc(100% - 44px);
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
-    align-items: stretch;
-  }
-}
+.explore-page {
 
-#site_header {
-  .header-logo,
-  .make-post-btn {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
-    }
-  }
+  #content {
 
-  .header-search {
     @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: calc(100% - 44px);
+      height: auto;
       display: flex;
+      flex-direction: row;
+      align-content: stretch;
+      align-items: stretch;
+    }
+  }
+
+  #site_header {
+
+    .header-logo,
+    .make-post-btn {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
+    .header-search {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: flex;
+      }
+    }
+  }
+
+  .btn {
+
+    &.make-post-btn {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
 }
+
 .explore-nav {
   @include media-breakpoint-down($desktop-breakpoint) {
     line-height: 4em;
@@ -37,13 +55,41 @@
     padding: 0 5px 8px;
     border-bottom: 1px solid rgba($gray, 0.2);
   }
+
+  .searchView & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background: $white;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 44px;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
+      line-height: 3em;
+      font-weight: 500;
+      z-index: 9;
+      transition: all 0.2s ease-in-out 0s;
+    }
+
+    .scroll-top & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, -44px, 0);
+      }
+    }
+  }
+
   > a {
     color: $secondary-color;
     display: inline-block;
     margin: 0 1.5em 0 0;
     transition: color 0.3s ease;
+    position: relative;
+    text-align: center;
+    font-weight: 400;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       margin: 0;
+      width: 100%;
     }
 
     &.active,
@@ -53,40 +99,60 @@
 
     &.active {
       font-weight: 500;
+
+      &:after {
+
+        .searchView {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: $secondary-color;
+            content: "";
+          }
+        }
+      }
     }
   }
 }
-.all {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -3px;
-  align-items: flex-start;
-  align-content: flex-start;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    background: $light;
-    overflow: hidden;
-    padding: 3px 0 0;
-    box-shadow: 0 0 5px rgba(#000, 0.3);
-  }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin-left: -30px;
-  }
-  .exploreAllView {
-    width: calc(33.33% - 3px);
-    margin: 0 0 3px 3px;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: calc(33.33% - 30px);
-      margin: 0 0 30px 30px;
+.explore-wrapper {
+
+  &.all {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -3px;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background: $light;
+      overflow: hidden;
+      padding: 3px 0 0;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
     }
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: -30px;
+    }
+    .exploreAllView {
+      width: calc(33.33% - 3px);
+      margin: 0 0 3px 3px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: calc(33.33% - 30px);
+        margin: 0 0 30px 30px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }

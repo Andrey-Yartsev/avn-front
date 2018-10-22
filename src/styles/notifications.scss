@@ -1,11 +1,16 @@
 @import "components/imports";
 
-#content {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    height: auto;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+
+.notifications-page {
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: auto;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
@@ -95,11 +100,6 @@
         top: 29px;
       }
     }
-  }
-}
-#site_header {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    display: none;
   }
 }
 
@@ -214,6 +214,23 @@
       margin-top: 60px;
       background-color: $white;
       min-height: calc(100% - 148px);
+    }
+
+    .msg-no-content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      .notifications-popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          position: relative;
+          left: auto;
+          top: auto;
+          transform: translate(0, 0);
+        }
+      }
     }
 
     .notifications-popup & {

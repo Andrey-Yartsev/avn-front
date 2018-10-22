@@ -1,11 +1,30 @@
 @import "components/imports";
-body {
-  overflow-y: auto;
-}
 
-#content {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    height: auto;
+.forgot {
+
+  h1 {
+    margin: 0 0 20px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0 0 34px;
+    }
+  }
+
+  h2 {
+    font-weight: 400;
+    margin: 0 0 42px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font: inherit;
+      margin: 0 0 23px;
+    }
+  }
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: auto;
+    }
   }
 }
 
@@ -118,10 +137,15 @@ body {
     }
     .error {
       color: red;
+      text-align: left;
     }
-    .error,
+
     .info {
       text-align: center;
+    }
+
+    .error,
+    .info {
       margin-bottom: 1.4em;
       line-height: 1;
       font-size: 0.86em;
@@ -169,6 +193,7 @@ body {
     }
     a.register {
       color: $default-secondary-color;
+
       &:hover {
         color: $default-primary-color;
       }

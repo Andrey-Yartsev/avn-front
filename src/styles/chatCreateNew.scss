@@ -1,13 +1,12 @@
 @import "components/imports";
-@import "components/addMenu";
 
 .chatCreateNewView {
+
   .nextStep {
     width: auto !important;
-    height: auto;
-    padding: 4px 18px;
+    padding: 3px 18px;
     font-weight: 400;
-    line-height: 15px;
+    height: 24px;
   }
 }
 

@@ -1,14 +1,50 @@
 @import "components/imports";
 
-.sticky-header-controls {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    position: -webkit-sticky;
-    position: sticky;
+.following-page {
+
+  .sticky-header-controls {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+
+    &:not(.header-mobile) {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 
-  &:not(.header-mobile) {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
+  .profile,
+  .myProfile {
+
+    &:before {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
+    .white-bg-block {
+
+      > .bg,
+      .profile-images,
+      .profile-header,
+      .post-types-tabs {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .white-bg-block {
+
+    > .container {
+      position: relative;
     }
   }
 }

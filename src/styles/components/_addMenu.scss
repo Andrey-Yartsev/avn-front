@@ -148,7 +148,7 @@
 
       &:before {
         @include media-breakpoint-down($desktop-breakpoint) {
-          margin-top: 4px;
+          margin-top: 3px;
         }
       }
 

@@ -147,7 +147,6 @@ button,
 .subscribe-cost,
 .profile-message-btn,
 .profile-tip-btn,
-.more-functions__btn,
 .btn-edit-profile,
 .btn-make-post {
   text-align: center;
@@ -157,7 +156,6 @@ button,
 .btn-subscribe,
 .profile-message-btn,
 .profile-tip-btn,
-.more-functions__btn,
 .btn-edit-profile,
 .btn-make-post {
   font-size: 13px;
@@ -195,132 +193,9 @@ button,
   }
 }
 
-.more-functions {
-  position: relative;
 
-  &:hover,
-  &.open {
-    .more-functions {
-      &__dropdown {
-        transform: translateY(0);
-        visibility: visible;
-        opacity: 1;
-      }
-    }
-  }
-
-  &__btn {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    opacity: 0.4;
-
-    &:before {
-      @include settings-dots($main-color, 1);
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        @include settings-dots(#fff, 1);
-        filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 11px auto 9px;
-        position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        transform: translate(0, 0);
-        color: $main-color;
-      }
-    }
-  }
-
-  &__dropdown {
-    position: absolute;
-    right: 5px;
-    top: 100%;
-    min-width: 180px;
-    max-width: none;
-    visibility: hidden;
-    opacity: 0;
-    transition: transform 0.4s;
-    transform: translateY(20px);
-    z-index: 1;
-    padding-top: 8px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      right: -5px;
-    }
-
-    &-inside {
-      background-color: $white;
-      box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2),
-        0 10px 30px rgba(0, 0, 0, 0.15);
-      border-radius: 6px;
-
-      &:after {
-        content: "";
-        position: absolute;
-        right: 15px;
-        top: 0;
-        width: 16px;
-        height: 16px;
-        border-left: 1px solid rgba(124, 139, 150, 0.2);
-        border-top: 1px solid rgba(124, 139, 150, 0.2);
-        transform: rotate(45deg);
-        background-color: $white;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          right: 34px;
-        }
-      }
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        &:first-child {
-          a {
-            &:before {
-              display: none;
-            }
-          }
-        }
-
-        a {
-          display: block;
-          padding: 16px 20px;
-          text-decoration: none;
-          position: relative;
-          color: var(--dark);
-          opacity: 0.5;
-          transition: opacity 0.3s;
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 20px;
-            top: 0;
-            height: 1px;
-            background-color: rgba(124, 139, 150, 0.2);
-          }
-
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
-    }
-  }
-}
 
 .btn-subscribe,
-.more-functions__btn,
 .btn-edit-profile {
   color: $main-color;
   transition: all 0.3s;
@@ -503,19 +378,6 @@ button,
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-  }
-}
-
-.more-functions {
-  &__btn {
-    &:before {
-      width: 16px;
-      height: 4px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        color: $main-color;
-      }
-    }
   }
 }
 

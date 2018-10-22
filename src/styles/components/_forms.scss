@@ -87,15 +87,22 @@ label span {
   .form-group [class*="col-"] > & {
     padding: 0 5px 6px;
     display: block;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       text-align: right;
-      flex: 0 0 29.5%;
       margin-right: 3%;
       padding: 0 7px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       height: 30px;
+    }
+
+    .settings-page & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 29.5%;
+      }
     }
 
     &:empty {
@@ -122,9 +129,16 @@ label span {
   @include media-breakpoint-down($desktop-breakpoint) {
     padding-bottom: 13px;
   }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 11.5% 17px 0;
+
+  .reasonsView &,
+  .contact-page &,
+  .settings-page & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 11.5% 17px 0;
+    }
   }
+
   &-inner {
     margin: 0 0 8px;
     display: block;

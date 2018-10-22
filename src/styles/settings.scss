@@ -1,17 +1,28 @@
 @import "components/imports";
-@import "components/settings/nav";
-@import "components/settings/profile";
-@import "components/settings/payouts";
-@import "components/settings/payments";
-@import "components/settings/account";
-@import "components/settings/referrals";
-@import "components/settings/security";
-@import "components/table";
 
-#site_header,
-.header-nav {
-  @include media-breakpoint-down($desktop-breakpoint) {
+.settings-page {
+
+  h1.form-title {
     display: none;
+    font-weight: 500;
+    font-size: 21px;
+    padding: 17px 20px;
+    margin-bottom: 0;
+    flex: 0 0 auto;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: block;
+    }
+    button {
+      right: 20px;
+      position: absolute;
+      border: none;
+      padding: 0;
+      background: none;
+      font-size: 15px;
+      top: 50%;
+      transform: translate(0, -50%);
+      color: $secondary-color;
+    }
   }
 }
 
@@ -145,28 +156,6 @@
   }
 }
 
-h1.form-title {
-  display: none;
-  font-weight: 500;
-  font-size: 21px;
-  padding: 17px 20px;
-  margin-bottom: 0;
-  flex: 0 0 auto;
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: block;
-  }
-  button {
-    right: 20px;
-    position: absolute;
-    border: none;
-    padding: 0;
-    background: none;
-    font-size: 15px;
-    top: 50%;
-    transform: translate(0, -50%);
-    color: $secondary-color;
-  }
-}
 .settings {
   .aside-col {
     @include media-breakpoint-up($desktop-breakpoint) {

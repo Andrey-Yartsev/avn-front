@@ -1,5 +1,34 @@
 @import "components/imports";
-@import "components/addMenu";
+
+.chat-page {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 100%;
+  }
+
+  body,
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100%;
+    }
+  }
+
+  body {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: auto;
+    }
+  }
+
+  #site_header,
+  .addPost-btn-float {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
 
 .chatCollectionView,
 .chatCreateNewView {
@@ -215,9 +244,11 @@
     margin: 0;
     display: inline-block;
     font-size: 0;
+    margin-left: -15px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       opacity: 0.3;
+      margin-left: 0;
     }
 
     &:before {
@@ -226,12 +257,13 @@
       @include icon-font;
       font-size: 24px;
       margin: 0;
-      width: 1.1em;
+      width: 54px;
       font-weight: 400;
       content: "\E605";
 
       @include media-breakpoint-up($desktop-breakpoint) {
         content: "\E606";
+        width: 1.1em;
       }
     }
 
@@ -247,10 +279,13 @@
     span {
       display: inline-block;
       vertical-align: middle;
-      margin-left: 15px;
       font-size: 15px;
       color: $main-color;
       font-weight: 500;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 15px;
+      }
     }
 
     &:hover {
@@ -445,9 +480,10 @@
 
   > span {
     display: inline-block;
-  }
-  > span:first-child {
-    padding: 0;
+
+    &:first-child {
+      padding: 0;
+    }
   }
 
   > .avatar {
@@ -467,6 +503,7 @@
   .isTyping {
     display: none;
   }
+
   &.active {
     .isTyping {
       display: inline;
@@ -474,14 +511,51 @@
   }
 
   .back {
+
     @include media-breakpoint-down($desktop-breakpoint) {
-      margin-right: 8px;
       color: $primary-color;
     }
 
     &:before {
       @include media-breakpoint-down($desktop-breakpoint) {
         content: "\E606";
+      }
+    }
+  }
+
+  .more-functions {
+    margin: auto 0.4em auto auto;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-right: -6px;
+    }
+
+    &__btn {
+      padding: 0;
+      width: 40px;
+      height: 30px;
+    }
+
+    &__dropdown {
+
+      #content & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: -10px;
+        }
+      }
+
+      &-inside {
+
+        &:after {
+
+          #content & {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              right: 22px;
+            }
+          }
+        }
       }
     }
   }
@@ -835,20 +909,6 @@
 }
 
 @include media-breakpoint-down($desktop-breakpoint) {
-  #site_header,
-  .addPost-btn-float {
-    display: none !important;
-  }
-
-  body {
-    min-height: auto;
-  }
-
-  html,
-  body,
-  #content {
-    height: 100%;
-  }
 
   .chatCollectionContent.chat,
   .chatCollectionView.chat-wrapper {
@@ -889,118 +949,6 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-  }
-}
-
-.chatOptions {
-  position: relative;
-  margin: auto 0.4em auto auto;
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    margin-right: -6px;
-  }
-
-  &.open {
-    .chatOptions__dropdown {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  &__dropdown {
-    position: absolute;
-    right: -5px;
-    top: 100%;
-    background-color: $white;
-    box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2),
-      0 10px 30px rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-    min-width: 180px;
-    max-width: none;
-    visibility: hidden;
-    opacity: 0;
-    transition: transform 0.4s;
-    transform: translateY(20px);
-
-    &:before {
-      content: "";
-      position: absolute;
-      right: 18px;
-      top: -8px;
-      width: 16px;
-      height: 16px;
-      background: inherit;
-      border-left: 1px solid rgba(124, 139, 150, 0.2);
-      border-top: 1px solid rgba(124, 139, 150, 0.2);
-      transform: rotate(45deg);
-    }
-  }
-
-  &__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      &:first-child {
-        a {
-          &:before {
-            display: none;
-          }
-        }
-      }
-
-      a {
-        display: block;
-        padding: 16px 20px;
-        text-decoration: none;
-        position: relative;
-        color: $main-color;
-        opacity: 0.5;
-        transition: opacity 0.3s;
-        cursor: pointer;
-
-        &:hover {
-          opacity: 1;
-        }
-
-        &:before {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 20px;
-          top: 0;
-          height: 1px;
-          background-color: rgba(124, 139, 150, 0.2);
-        }
-      }
-    }
-  }
-}
-
-.chatExpand {
-  position: relative;
-  width: 40px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &:hover {
-    &:before {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        opacity: 0.8;
-      }
-    }
-  }
-
-  &:before {
-    @include settings-dots($main-color, 0.5);
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      @include settings-dots($secondary-color, 0.5);
-    }
   }
 }
 

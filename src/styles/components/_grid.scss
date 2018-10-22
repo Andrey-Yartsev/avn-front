@@ -62,7 +62,9 @@
   }
 
   &_sticky {
+
     @include media-breakpoint-up($desktop-breakpoint) {
+
       @media screen and (min-height: 600px) {
         position: -webkit-sticky;
         position: sticky;

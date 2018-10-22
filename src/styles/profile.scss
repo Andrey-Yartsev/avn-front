@@ -1,177 +1,27 @@
 @import "components/imports";
 
-body {
+.profile-page {
 
-  &.header-scrolled {
+  .profile,
+  .myProfile {
 
-    #site_header.guest {
-
-      .header_container {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          top: -44px;
-        }
-      }
-    }
-  }
-
-  #site_header {
-
-    &:not(.guest) {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
-      background: none;
-      box-shadow: none;
+    .sticky-header-controls {
       position: fixed;
-      height: 0;
-      margin: 0;
-
-      .header-logo {
-        img,
-        svg {
-          display: none;
-          &.white-logo {
-            display: block;
-          }
-        }
-      }
-
-      .header-wrapper {
-        box-shadow: none;
-        background-color: transparent;
-      }
-
-      .header-nav {
-        a {
-          color: #fff;
-
-          span {
-            opacity: 0.7;
-            color: #fff;
-          }
-
-          &:before {
-            opacity: 0.6;
-            filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
-          }
-
-          &:hover {
-            span,
-            &:before {
-              opacity: 1;
-            }
-          }
-          &.unread:after {
-            background-color: #fff;
-          }
-
-          &.active {
-            border-color: rgba(255, 255, 255, 0.6);
-
-            &:hover {
-              border-color: rgba(255, 255, 255, 1);
-            }
-          }
-        }
-      }
-      .header-search-submit {
-        color: $main;
-      }
-      .header-search-input {
-        background-color: rgba(#fff, 0.3);
-        box-shadow: 0 2px 10px rgba(#000, 0.06);
-        &:hover,
-        &:focus {
-          background-color: #fff;
-          box-shadow: 0 2px 10px rgba(#000, 0.2);
-          color: $main;
-        }
-      }
-      .btn.make-post-btn {
-        background-color: #fff;
-        color: $main;
-        box-shadow: 0 2px 10px rgba(#000, 0.2);
-        &:hover {
-          background-color: $main;
-          color: #fff;
-        }
-      }
-      .header-avatar {
-        box-shadow: 0 2px 10px rgba(#000, 0.2);
-      }
     }
-  }
-}
 
-#site_header {
+    .header-return-btn {
+      color: #fff;
+    }
 
-  &.guest {
-    position: fixed;
-
-    .header_container {
+    .sticky-header-controls {
       background-color: transparent;
     }
+  }
 
-    .header-logo {
-      filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+  .white-bg-block {
 
-      img,
-      svg {
-        display: none;
-        
-        &.white-logo {
-          display: block;
-        }
-      }
-    }
-
-    + #content {
-
-      .sticky-header-controls {
-
-        .header-return-btn,
-        .more-functions{
-          display: none;
-        }
-
-        .profile-name__header {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            padding-left: 15px;
-            padding-right: 15px;
-          }
-        }
-      }
-    }
-
-    .register,
-    .login {
-      color: $white;
-
-      &:hover {
-        color: $white;
-      }
-    }
-
-    .register {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-    }
-
-    .login {
-      box-shadow: 0 0 0 2px $white inset;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        margin: 0;
-      }
+    .bg {
+      display: block;
     }
   }
 }
@@ -183,178 +33,30 @@ body {
   }
 }
 
-.sticky-header-controls {
-  position: fixed;
-  z-index: 7;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 44px;
-  display: flex;
-  align-items: center;
+.profile-header-page {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -150px;
+    z-index: 3;
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
-    display: none;
-  }
-  .header-return-btn {
-    color: #fff;
-
-    &:before {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      }
-    }
+    z-index: 5;
+    display: block;
+    padding: 0;
+    margin: 0 0 25px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
   }
 
-  .more-functions {
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    &__btn {
-      font-size: 0;
-      width: 56px;
-      height: 30px;
-      position: relative;
-      margin-top: 8px;
-
-      &:before {
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      }
-    }
-  }
-}
-
-.profile,
-.myProfile {
-  width: 100%;
-
-  &:before {
-    position: fixed;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    content: "";
-    top: 0;
-    height: 44px;
-    background: linear-gradient(
-      to bottom,
-      rgba(#000, 0.2) 0%,
-      rgba(#000, 0.2) 33.33%,
-      rgba(#000, 0.1) 66.67%,
-      transparent 100%
-    );
-    z-index: 7;
+  .name {
+    font-size: 17px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: 80px;
-    }
-  }
-
-  .white-bg-block {
-    .bg-wrap {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      height: 32vw;
-      overflow: hidden;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        height: 320px;
-      }
-    }
-
-    > .bg {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      position: -webkit-sticky;
-      position: sticky;
-      background-color: $white;
-      background-image: linear-gradient(
-        30deg,
-        $secondary-color-20 10%,
-        $primary-color-20 90%
-      );
-      z-index: 5;
-      height: 32vw;
-      top: -240px;
-      .header-scrolled & {
-        z-index: 6;
-      }
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        top: calc(44px - 32vw);
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        height: 320px;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      &:empty {
-        &:before {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          opacity: 0.4;
-          background-color: $light;
-        }
-
-        & ~ .select-user-image {
-          display: block;
-        }
-      }
-
-      &:after {
-        position: absolute;
-        left: 0;
-        right: 0;
-        pointer-events: none;
-        content: "";
-        bottom: 0;
-        z-index: 1;
-        height: 12px;
-        background: linear-gradient(
-          to top,
-          rgba(#000, 0.05) 0%,
-          transparent 100%
-        );
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          background: linear-gradient(
-            to top,
-            rgba(#000, 0.1) 0%,
-            transparent 100%
-          );
-          bottom: 0;
-          height: 80px;
-          .header-scrolled & {
-            background: rgba($main, 0.1);
-          }
-        }
-      }
-
-      .container {
-        height: 32vw;
-        width: 100%;
-        position: relative;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          height: 320px;
-        }
-      }
+      font-size: 21px;
     }
   }
 }
@@ -362,7 +64,7 @@ body {
 .profile-header {
   background: $white;
   position: relative;
-  z-index: 4;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     box-shadow: none;
     position: -webkit-sticky;
@@ -371,6 +73,7 @@ body {
     top: 130px;
   }
   .header-popup-menu-btn {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       top: 295px;
       right: 50%;
@@ -381,14 +84,20 @@ body {
       background-color: rgba($gray, 0.5);
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 2px 10px rgba(#000, 0.1);
-      &:hover {
+    }
+
+    &:hover {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         background-color: $gray;
         box-shadow: 0 2px 10px rgba(#000, 0.2);
       }
     }
   }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    .dropdown-menu {
+
+  .dropdown-menu {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
       left: 50%;
       top: 100%;
       margin-top: -72px;
@@ -401,14 +110,17 @@ body {
   position: relative;
   background: $white;
   z-index: 5;
+
   &__inner {
     position: relative;
   }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     position: -webkit-sticky;
     position: sticky;
     top: 90px;
   }
+
   .avatar {
     position: absolute;
     bottom: -60px;
@@ -418,16 +130,18 @@ body {
     background-color: $white;
     z-index: 3;
     overflow: visible;
-    &:before {
-      box-shadow: 0 0 0 3px $white;
-    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
       left: 13px;
       bottom: -39px;
       transform: translate(-2%, 2.5%);
-      &:before {
+    }
+
+    &:before {
+      box-shadow: 0 0 0 3px $white;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         border: calc(0.025em + (200px - 1em) * 0.0125) solid $white;
         box-shadow: none;
         position: absolute;
@@ -439,9 +153,12 @@ body {
         transform: translate(-50%, -50%);
         box-sizing: unset;
       }
+    }
 
-      &.with-story {
-        &:after {
+    &.with-story {
+      &:after {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
           left: calc(-0.045em - (200px - 1em) * 0.02);
           right: calc(-0.045em - (200px - 1em) * 0.02);
           bottom: calc(-0.045em - (200px - 1em) * 0.02);
@@ -457,7 +174,7 @@ body {
   color: #fff;
   bottom: 12px;
   align-items: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  text-shadow: $shadow-light;
   display: none;
   font-size: 13px;
   right: 15px;
@@ -477,49 +194,52 @@ body {
     margin-top: -8px;
     transform: translate(-50%, -50%);
 
-    &:before {
-      font-size: 34px;
-      @include icon-font;
-      content: "\E61A";
-      display: block;
-      transition: transform 0.2s ease;
+    .profile-page & {
+
+      &:before {
+        font-size: 34px;
+        @include icon-font;
+        content: "\E61A";
+        display: block;
+        transition: transform 0.2s ease;
+      }
     }
 
     &:hover {
+
       &:before {
         transform: scale(1.2);
       }
     }
   }
 
-  &:after {
-    font-weight: 400;
-    font-size: 24px;
-    margin: 0 0 0 5px;
-    @include icon-font;
-    content: "\E61A";
-    vertical-align: sub;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      content: none;
+  .avatar-block & {
+
+    &:after {
+      font-weight: 400;
+      font-size: 24px;
+      @include icon-font;
+      content: "\E61A";
+      vertical-align: sub;
+      margin: 0;
     }
   }
 }
 
-.profile-name:not(.profile-name-settings) {
+.profile-name {
   padding: 16px 10px 15px 140px;
   transition: opacity 0.3s;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    margin-left: -230px;
-    color: #fff;
-    padding: 0;
-    filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+  .aside-col & {
+    .profile-page & {
 
-    .user-login {
-      font-size: 17px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 0;
+
+        .user-login {
+          font-size: 17px;
+        }
+      }
     }
   }
 
@@ -543,12 +263,19 @@ body {
   }
 
   .name {
-    font-size: 17px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 21px;
+    .aside-col & {
+
+      .profile-page & {
+        font-size: 17px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 21px;
+        }
+      }
     }
   }
+
   &__header {
     font: inherit;
     padding: 0 54px;
@@ -604,27 +331,35 @@ body {
 
   .item {
     padding: 0 20px 10px 0;
-    cursor: pointer;
+
     a {
       color: inherit;
       transition: color 0.3s ease;
+      
+      .label {
+        cursor: pointer;
+      }
+
+      &:hover {
+
+        .label {
+          color: $primary-color-darken;
+          opacity: 1;
+        }
+      }
     }
+
     .value {
       font-weight: 500;
       margin: 0 4px 0 0;
     }
+
     .label {
+      cursor: text;
       opacity: 0.5;
       font-size: 13px;
       font-weight: 400;
       transition: color 0.3s ease, opacity 0.3s ease;
-    }
-
-    &:hover {
-      .label {
-        color: $primary-color-darken;
-        opacity: 1;
-      }
     }
   }
 }
@@ -707,9 +442,10 @@ body {
   background: $white;
   top: -22px;
   box-shadow: 0 2px 1px rgba(#000, 0.1);
-  z-index: 3;
+  z-index: 5;
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    z-index: 3;
     display: block;
     padding: 0;
     margin: 0 0 25px;
@@ -806,21 +542,21 @@ body {
     display: flex;
     align-items: center;
     align-content: center;
-  }
-
-  .tip-form {
-    display: flex;
     padding: 10px 0;
     margin: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 5px 15px 5px;
+    }
 
-      .btn {
+    .btn {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         width: 100px;
         flex: 0 0 100px;
       }
     }
+
     .tip-amount-input {
       text-align: center;
     }
@@ -852,6 +588,7 @@ body {
   }
 
   &.show {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       opacity: 1;
       visibility: visible;
@@ -887,7 +624,198 @@ body {
 
 .profile,
 .myProfile {
+  width: 100%;
+
+  .sticky-header-controls {
+    z-index: 7;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+
+    .profile-name__header {
+      color: $white;
+      opacity: 0;
+
+      .header-scrolled & {
+        opacity: 1;
+      }
+    }
+
+    .header-return-btn {
+
+      &:before {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          text-shadow: $shadow-light;
+        }
+      }
+    }
+
+    .more-functions {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      &__btn {
+        font-size: 0;
+        width: 56px;
+        height: 30px;
+        position: relative;
+        margin-top: 8px;
+
+        &:before {
+          text-shadow: $shadow-light;
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            @include settings-dots(#fff, 1);
+            filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
+          }
+        }
+      }
+    }
+  }
+
+  .white-bg-block {
+
+    .bg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: -webkit-sticky;
+      position: sticky;
+      background-color: $white;
+      background-image: linear-gradient(
+        30deg,
+        $secondary-color-20 10%,
+        $primary-color-20 90%
+      );
+      z-index: 5;
+      height: 32vw;
+      top: -240px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        z-index: 1;
+        top: calc(44px - 32vw);
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 320px;
+      }
+
+      .header-scrolled & {
+        z-index: 6;
+      }
+
+      &:before {
+        position: fixed;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        content: "";
+        top: 0;
+        height: 44px;
+        background: linear-gradient(
+          to bottom,
+          rgba(#000, 0.2) 0%,
+          rgba(#000, 0.2) 33.33%,
+          rgba(#000, 0.1) 66.67%,
+          transparent 100%
+        );
+        z-index: 7;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          height: 80px;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &:empty {
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          opacity: 0.4;
+          background-color: $light;
+        }
+
+        & ~ .select-user-image {
+          display: block;
+        }
+      }
+
+      &:after {
+        position: absolute;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        content: "";
+        bottom: 0;
+        z-index: 1;
+        height: 12px;
+        background: linear-gradient(
+                        to top,
+                        rgba(#000, 0.05) 0%,
+                        transparent 100%
+        );
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          background: linear-gradient(
+                          to top,
+                          rgba(#000, 0.1) 0%,
+                          transparent 100%
+          );
+          bottom: 0;
+          height: 80px;
+          .header-scrolled & {
+            background: rgba($main, 0.1);
+          }
+        }
+      }
+
+      .container {
+        height: 32vw;
+        width: 100%;
+        position: relative;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          height: 320px;
+        }
+      }
+    }
+
+    .bg-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      height: 32vw;
+      overflow: hidden;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 320px;
+      }
+    }
+  }
+
   .controls-select-picture {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
       left: auto;
@@ -997,6 +925,7 @@ body {
         .header-scrolled & {
           opacity: 1;
           pointer-events: unset;
+          padding: 0;
         }
         .name {
           font-size: 17px;
@@ -1117,6 +1046,7 @@ body {
 }
 
 .subscribe-coast {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 100%;
   }
@@ -1150,8 +1080,11 @@ body {
 }
 
 .profile {
+
   .btns-user-activity {
+
     a {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 12px 0 8px;
       }
@@ -1197,12 +1130,14 @@ body {
   }
 
   .profile-actions {
+
     .profile-message-btn,
     .profile-tip-btn,
     .more-functions__btn,
     .btn-edit-profile,
     .subscribeView,
     .btn-make-post {
+
       @include media-breakpoint-down($desktop-breakpoint) {
         margin: 0 1.2em;
       }
@@ -1228,6 +1163,7 @@ body {
   }
 
   .profile-actions {
+
     .profile-message-btn,
     .profile-tip-btn,
     .more-functions__btn,
@@ -1250,22 +1186,24 @@ body {
       }
     }
   }
-}
 
-.aside-col {
-  .profile-desc {
-    margin-bottom: 20px;
-  }
+  .aside-col {
 
-  &_sticky {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 110px;
+    .profile-desc {
+      margin-bottom: 20px;
+    }
+
+    &_sticky {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 110px;
+      }
     }
   }
-}
 
-.no-results-search {
-  display: none;
+  .no-results-search {
+    display: none;
+  }
 }

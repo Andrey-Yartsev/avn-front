@@ -265,7 +265,7 @@ video {
     transform: translate(-50%, -50%);
     opacity: 0.7;
     color: #fff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    text-shadow: $shadow-light;
   }
 }
 

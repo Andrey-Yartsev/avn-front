@@ -1,17 +1,5 @@
 @import "components/imports";
 
-#site_header {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    display: none;
-  }
-}
-
-.header-mobile {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    background-color: $white;
-  }
-}
-
 .popup-container.post-popup {
   position: relative;
   top: 0;
@@ -33,7 +21,6 @@
     right: 0;
     top: 0;
     bottom: 0;
-    /*padding-bottom: 46px;*/
   }
   .content {
     overflow: auto;
@@ -49,7 +36,6 @@
 
       .post.postPage {
         width: 100%;
-        overflow-y: scroll;
       }
     }
   }
@@ -87,22 +73,83 @@
   }
 }
 
+.postPage-content {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    background: $white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    min-height: 440px;
+  }
+
+  .post-popup & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow-y: auto;
+    }
+  }
+
+  .header-mobile {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex: 0 0 44px;
+    }
+  }
+}
+
 .post.postPage {
-  background: $white;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
+    position: relative;
+    background: $white;
+    display: flex;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 940px;
-    margin: 0 auto 20px;
-    border-radius: 5px;
-    min-height: 440px;
-    overflow: hidden;
+    margin: 0 auto;
+    min-height: calc(100vh - 75px);
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .popup-container.post-popup & {
+  .more-functions {
+
+    &__dropdown {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: -5px;
+      }
+
+      &-inside {
+
+        &:after {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            right: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  .popup-container.post-popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
       max-height: calc(100vh - 120px);
       min-height: 440px;
     }
@@ -115,84 +162,16 @@
     background: none;
     box-shadow: none;
   }
-  @include media-breakpoint-down($desktop-breakpoint) {
-    position: relative;
-    .media {
+
+  .media {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
       padding: 4px 0 0;
-    }
-  }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: flex;
-
-    .media {
-      flex: 1;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      figure {
-        display: flex;
-        align-items: center;
-      }
-      video,
-      img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        display: block;
-        .popup-container.post-popup & {
-          max-height: 440px;
-        }
-      }
-      img.locked {
-        width: 440px;
-      }
-      & + .right-col {
-        &,
-        .popup & {
-          flex: 0 1 360px;
-          width: 360px;
-        }
-        .comments-list {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          padding: 0 15px;
-
-          .comment {
-            width: 100%;
-          }
-        }
-        .load-more-comments {
-          & + .comments-list {
-            top: 16px;
-          }
-        }
-      }
-    }
-
-    .right-col {
-      width: 100%;
-      background: $white;
-      .popup & {
-        width: 620px;
-      }
-    }
-
-    .postComments {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
   }
 
   .media {
+
     .media-slider-pagination {
       bottom: 7px;
 
@@ -212,29 +191,168 @@
         }
       }
     }
+
     .media-slider-navigation {
+
       .btn-prev,
       .btn-next {
         width: 56px;
         font-size: 44px;
       }
     }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    figure {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        font-size: 0;
+      }
+    }
+
+    video,
+    img {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        display: block;
+      }
+
+      .popup-container.post-popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-height: 440px;
+        }
+      }
+    }
+
+    img.locked {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 440px;
+      }
+    }
+
+    & + .right-col {
+      &,
+      .popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 0 1 360px;
+          width: 360px;
+        }
+      }
+      .comments-list {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          padding: 0 15px;
+        }
+
+        .comment {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            width: 100%;
+          }
+        }
+      }
+      .load-more-comments {
+        & + .comments-list {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            top: 16px;
+          }
+        }
+      }
+    }
   }
-  @media (min-height: 560px) and (min-width: 768px) {
-    .popup-container.post-popup & {
-      .media {
-        video,
-        img {
+
+  .right-col {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex: 1;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 100%;
+      background: $white;
+    }
+
+    .popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 620px;
+      }
+    }
+  }
+
+  .post-no-comments {
+    margin-bottom: 56px;
+    min-height: 80px;
+    height: calc(100% - 56px);
+    position: relative;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 0;
+      height: 100%;
+    }
+  }
+
+  .postComments {
+    flex: 1;
+    position: relative;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .msg-no-content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+
+  .popup-container.post-popup & {
+    .media {
+
+      video,
+      img {
+
+        @media (min-height: 560px) and (min-width: 768px) {
           max-height: calc(100vh - 120px);
         }
       }
     }
   }
+
   .right-col {
     display: flex;
     flex-direction: column;
   }
+
   .post-header {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 5px;
       padding-bottom: 16px;
@@ -256,6 +374,7 @@
       padding-bottom: 18px;
       border-bottom: 1px solid rgba($gray, 0.2);
       margin: 0 0 12px;
+      min-height: 59px;
     }
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 0;
@@ -378,6 +497,17 @@
           }
         }
       }
+    }
+  }
+
+  .site-footer {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+
+    .popup & {
+      display: none;
     }
   }
 }

@@ -1,0 +1,205 @@
+
+.more-functions {
+  position: relative;
+
+  &__overlay {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgba(#000, 0.4);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .4s;
+    z-index: 40;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background: transparent;
+    }
+  }
+
+  &.open {
+    color: $main-color;
+
+    .more-functions {
+
+      &__overlay {
+        pointer-events: auto;
+        opacity: 1;
+      }
+
+      &__dropdown {
+        transform: translateY(0);
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__btn {
+    position: relative;
+    height: 100%;
+    opacity: 0.4;
+    text-align: center;
+    font-size: 13px;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      z-index: 42;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      white-space: nowrap;
+      padding: 10px 0 8px;
+      margin: 0;
+    }
+
+    &_with-text {
+
+      &:before {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-bottom: 9px;
+        }
+      }
+    }
+
+    &-text {
+      flex: 0 0 100%;
+    }
+
+    &:before {
+      @include settings-dots($main-color, 1);
+      width: 16px;
+      height: 4px;
+      display: block;
+      margin: 0 auto 4px;
+      font-size: 20px;
+      @include icon-font;
+      transition: all 0.3s;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 11px auto;
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        transform: translate(0, 0);
+        color: $main-color;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: fixed;
+    right: 10px; left: 10px;
+    bottom: 10px;
+    max-width: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.4s;
+    transform: translateY(20px);
+    z-index: 42;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 8px;
+      position: absolute;
+      right: -5px; left: auto;
+      top: 100%; bottom: auto;
+      min-width: 180px;
+    }
+
+    &-inside {
+      background-color: $white;
+      box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2),
+      0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 15px;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        border-left: 1px solid rgba(124, 139, 150, 0.2);
+        border-top: 1px solid rgba(124, 139, 150, 0.2);
+        transform: rotate(45deg);
+        background-color: $white;
+        display: none;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: 34px;
+          display: block;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+
+        &:first-child {
+
+          a, button {
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        a, button {
+          display: block;
+          padding: 16px 20px;
+          text-decoration: none;
+          position: relative;
+          color: var(--dark);
+          opacity: 0.5;
+          transition: opacity 0.3s;
+          background-color: transparent;
+          border: none;
+          width: 100%;
+          text-align: left;
+          font-weight: 400;
+          cursor: pointer;
+
+          &.deletePost,
+          &.report,
+          &.menu-block {
+            color: $primary-color;
+            opacity: 1;
+          }
+
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 20px;
+            top: 0;
+            height: 1px;
+            background-color: rgba(124, 139, 150, 0.2);
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

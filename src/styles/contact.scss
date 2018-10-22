@@ -1,18 +1,30 @@
 @import "components/imports";
-h1 {
-  margin: 0 0 20px;
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 0 0 34px;
+
+.contact-page {
+  background: $white;
+
+  .staticPage & {
+
+    h1 {
+      margin: 0 0 20px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 0 0 34px;
+      }
+    }
+
+    h2 {
+      font-weight: 400;
+      margin: 0 0 42px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font: inherit;
+        margin: 0 0 23px;
+      }
+    }
   }
 }
-h2 {
-  font-weight: 400;
-  margin: 0 0 42px;
-  @include media-breakpoint-down($desktop-breakpoint) {
-    font: inherit;
-    margin: 0 0 23px;
-  }
-}
+
 .form-group {
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-right: 18%;
