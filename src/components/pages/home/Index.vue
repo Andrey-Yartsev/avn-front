@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="aside-col aside-col_with-footer">
+                <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
                     <StoriesWrapper></StoriesWrapper>
                     <Footer></Footer>
                 </div>

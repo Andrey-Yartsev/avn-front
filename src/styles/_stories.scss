@@ -38,6 +38,7 @@
 }
 
 .stories-group {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 5px;
     @media screen and (min-height: 600px) {
