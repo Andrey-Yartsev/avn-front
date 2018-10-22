@@ -15,16 +15,7 @@
               </span>
             </div>
             <div class="user-actions">
-              <div class="subscribePaidView" v-if="v.subscribePrice">
-                <div class="subscribe-cost " id="subscribe-paid">
-                  <div class="subscribe-cost__value">
-                    $<span>{{ v.subscribePrice }}</span>/mo.
-                  </div>
-                  <div class="subscribe-cost__label">
-                    Subscribe
-                  </div>
-                </div>
-              </div>
+              <SubscribeButton :profile="v" @requested="data => subsRequested(v, data)"/>
               <span class="subscribeView" v-if="!v.subscribedBy">
                 <div
                   class="profile-actions__btn btn-subscribe"
@@ -62,12 +53,54 @@
 
 <script>
 import NoResults from "./NoResults";
+import SubscribeButton from "@/components/subscription/Button";
 
 export default {
   name: "SearchUsers",
 
   props: ["items", "query", "loading"],
 
-  components: { NoResults }
+  components: {
+    NoResults,
+    SubscribeButton
+  },
+
+  methods: {
+    subsRequested(profile, data) {
+      if (data.action === "unsubscribe") {
+        this.unsubscribed(profile, data.result);
+      } else if (data.action === "resubscribe") {
+        this.resubscribed(profile, data.result);
+      } else {
+        throw new Error("Wrong action");
+      }
+    },
+    unsubscribed(profile, result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.commit("search/page/extendUser", {
+        userId: profile.id,
+        data: { subscribedByExpire: true }
+      });
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have unsubscribed successfully"
+      );
+    },
+    resubscribed(profile, result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.commit("search/page/extendUser", {
+        userId: profile.id,
+        data: { subscribedByExpire: false }
+      });
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have resubscribed successfully"
+      );
+    }
+  }
 };
 </script>

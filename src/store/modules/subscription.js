@@ -18,38 +18,6 @@ const actions = {
         { root: true }
       );
     });
-  },
-  unsubscribe({ dispatch }, data) {
-    dispatch("unsubscribeRequest", data).then(r => {
-      if (r.success) {
-        dispatch(
-          "profile/home/extend",
-          {
-            subscribedByExpire: true
-          },
-          { root: true }
-        );
-        dispatch("global/flashToast", "You have unsubscribed successfully", {
-          root: true
-        });
-      }
-    });
-  },
-  resubscribe({ dispatch }, data) {
-    dispatch("resubscribeRequest", data).then(r => {
-      if (r.success) {
-        dispatch(
-          "profile/home/extend",
-          {
-            subscribedByExpire: false
-          },
-          { root: true }
-        );
-        dispatch("global/flashToast", "You have resubscribed successfully", {
-          root: true
-        });
-      }
-    });
   }
 };
 
@@ -75,7 +43,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "unsubscribeRequest",
+  prefix: "unsubscribe",
   apiPath: "subscriptions/unsubscribe",
   state,
   mutations,
@@ -90,7 +58,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "resubscribeRequest",
+  prefix: "resubscribe",
   apiPath: "subscriptions/resubscribe",
   state,
   mutations,

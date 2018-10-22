@@ -4,12 +4,12 @@
       <div class="content">
         <div class="subscribePopupView">
           <div class="subscribe-popup__header bg">
-            <img v-if="profile.avatar" :src="profile.avatar">
+            <img v-if="profile.header" :src="profile.header">
           </div>
 
           <div class="subscribe-popup__info">
-            <div class="subscribe-popup__info-avatar">
-              <span class="avatar"></span>
+            <div class="subscribe-popup__info-avatar" v-if="profile.avatar">
+              <span class="avatar"><img :src="profile.avatar"></span>
             </div>
 
             <div class="subscribe-popup__info-user">

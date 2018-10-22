@@ -9,6 +9,7 @@
           </div>
         </div>
       </div>
+      <button type="button" class="close" @click="close"></button>
     </div>
   </Modal>
 </template>

@@ -110,24 +110,7 @@
                     v-if="profile.canEarn"
                     type="button" class="profile-actions__btn profile-tip-btn selected">Fund</button>
 
-                  <div
-                    v-if="profile.canEarn"
-                    class="subscribePaidView"
-                    @click="subscription"
-                  >
-                    <div
-                      class="subscribe-cost"
-                      :class="{'disable-state': subsAction === 'unsubscribe'}"
-                      id="subscribe-paid"
-                    >
-                      <div class="subscribe-cost__value">
-                        $<span>{{ profile.subscribePrice }}</span>/mo.
-                      </div>
-                      <div class="subscribe-cost__label">
-                        {{ ucFirst(subsAction) }}
-                      </div>
-                    </div>
-                  </div>
+                  <SubscribeButton :profile="profile" @requested="subsRequested"/>
 
                   <template v-if="profile.subscribedBy">
                     <span class="subscribeView"></span>
@@ -240,6 +223,7 @@
 import PostCollection from "@/components/common/postCollection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
+import SubscribeButton from "@/components/subscription/Button";
 
 export default {
   name: "ProfileHome",
@@ -247,7 +231,8 @@ export default {
   mixins: [InfinityScrollMixin, UserMixin],
 
   components: {
-    PostCollection
+    PostCollection,
+    SubscribeButton
   },
 
   computed: {
@@ -262,18 +247,6 @@ export default {
     },
     store() {
       return this.$store.state.profile.home;
-    },
-    subsAction() {
-      if (!this.profile.subscribedBy) {
-        return "subscribe";
-      } else if (
-        this.profile.subscribedBy &&
-        !this.profile.subscribedByExpire
-      ) {
-        return "unsubscribe";
-      } else if (this.profile.subscribedBy && this.profile.subscribedByExpire) {
-        return "resubscribe";
-      }
     }
   },
 
@@ -310,27 +283,38 @@ export default {
         this.$store.dispatch("profile/home/getPosts", this.profile.id);
       }
     },
-    ucFirst(name) {
-      return name.charAt(0).toUpperCase() + name.slice(1);
+    subsRequested(data) {
+      if (data.action === "unsubscribe") {
+        this.unsubscribed(data.result);
+      } else if (data.action === "resubscribe") {
+        this.resubscribed(data.result);
+      } else {
+        throw new Error("Wrong action");
+      }
     },
-    subscribe() {
-      this.$store.dispatch("modal/show", {
-        name: "subscribe",
-        data: this.profile
+    unsubscribed(result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.dispatch("profile/home/extend", {
+        subscribedByExpire: true
       });
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have unsubscribed successfully"
+      );
     },
-    unsubscribe() {
-      this.$store.dispatch("subscription/unsubscribe", {
-        userId: this.profile.id
+    resubscribed(result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.dispatch("profile/home/extend", {
+        subscribedByExpire: false
       });
-    },
-    resubscribe() {
-      this.$store.dispatch("subscription/resubscribe", {
-        userId: this.profile.id
-      });
-    },
-    subscription() {
-      this[this.subsAction]();
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have resubscribed successfully"
+      );
     }
   },
 

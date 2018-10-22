@@ -33,6 +33,7 @@
                 <div class="name">{{ v.name }}</div>
               </div>
               <span class="user-login">{{ v.username }}</span>
+              <span v-if="v.isVerified" class="verified-user"></span>
             </a>
           </div>
         </div>
