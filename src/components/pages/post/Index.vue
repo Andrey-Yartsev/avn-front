@@ -1,9 +1,15 @@
 <template>
-  <Post v-if="post" :post="post" from="postPage" />
+  <div>
+    <div class="postPage-content">
+      <Post v-if="post" :post="post" from="postPage" />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
 import Post from "@/components/post/LargeView";
+import Footer from "@/components/footer/Index";
 
 export default {
   name: "PostPage",
@@ -13,7 +19,8 @@ export default {
     }
   },
   components: {
-    Post
+    Post,
+    Footer
   },
   created() {
     const postId = +this.$route.params.postId;
