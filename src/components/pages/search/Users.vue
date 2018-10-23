@@ -15,38 +15,9 @@
               </span>
             </div>
             <div class="user-actions">
-              <SubscribeButton :profile="v" @requested="data => subsRequested(v.id, data)"/>
-              <span class="subscribeView" v-if="!v.subscribedBy">
-                <div
-                  class="profile-actions__btn btn-subscribe"
-                  @click="v.followedBy ? unfollow(v.id) : follow(v.id)"
-                >
-                  <div class="btn-subscribe__label">
-                    {{ v.followedBy ? "Unfollow" : "Follow" }}
-                  </div>
-                </div>
-              </span>
-              <div
-                class="more-functions hidden-mobile"
-                :class="{open: isOptionsOpened(v.id)}"
-              >
-                <div
-                  class="more-functions__btn more-functions__btn_with-text"
-                  @click="toggleOptions(v.id)">
-                  <div class="more-functions__btn-text">
-                    More
-                  </div>
-                </div>
-                <div class="more-functions__dropdown">
-                  <div class="more-functions__dropdown-inside">
-                    <ul>
-                      <li><a href="#" @click.prevent="report(v.id)">Report</a></li>
-                      <li v-if="v.isBlocked"><a href="#" @click.prevent="unblock(v.id)">Unblock</a></li>
-                      <li v-else><a href="#" @click.prevent="block(v.id)">Block</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <SubscribeButton :profile="v" />
+              <FollowButton :profile="v" />
+              <UserDropdown :profile="v" />
             </div>
           </div>
         </div>
@@ -58,7 +29,9 @@
 
 <script>
 import NoResults from "./NoResults";
-import SubscribeButton from "@/components/subscription/Button";
+import SubscribeButton from "./SubscribeButton";
+import FollowButton from "./FollowButton";
+import UserDropdown from "./UserDropdown";
 
 export default {
   name: "SearchUsers",
@@ -67,79 +40,9 @@ export default {
 
   components: {
     NoResults,
-    SubscribeButton
-  },
-
-  data() {
-    return {
-      openedOptions: []
-    };
-  },
-
-  methods: {
-    subsRequested(userId, data) {
-      if (data.action === "unsubscribe") {
-        this.unsubscribed(userId, data.result);
-      } else if (data.action === "resubscribe") {
-        this.resubscribed(userId, data.result);
-      } else {
-        throw new Error("Wrong action");
-      }
-    },
-    unsubscribed(userId, result) {
-      if (!result.success) {
-        return;
-      }
-      this.$store.commit("search/page/extendUser", {
-        userId,
-        data: { subscribedByExpire: true }
-      });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have unsubscribed successfully"
-      );
-    },
-    resubscribed(userId, result) {
-      if (!result.success) {
-        return;
-      }
-      this.$store.commit("search/page/extendUser", {
-        userId,
-        data: { subscribedByExpire: false }
-      });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have resubscribed successfully"
-      );
-    },
-    follow(userId) {
-      this.$store.dispatch("search/page/follow", userId);
-    },
-    unfollow(userId) {
-      this.$store.dispatch("search/page/unfollow", userId);
-    },
-    report(userId) {
-      this.$store.dispatch("modal/show", {
-        name: "userReport",
-        data: userId
-      });
-    },
-    block(userId) {
-      this.$store.dispatch("search/page/block", userId);
-    },
-    unblock(userId) {
-      this.$store.dispatch("search/page/unblock", userId);
-    },
-    isOptionsOpened(userId) {
-      return this.openedOptions.indexOf(userId) !== -1;
-    },
-    toggleOptions(userId) {
-      if (this.isOptionsOpened(userId)) {
-        this.openedOptions = this.openedOptions.filter(id => id !== userId);
-      } else {
-        this.openedOptions.push(userId);
-      }
-    }
+    SubscribeButton,
+    FollowButton,
+    UserDropdown
   }
 };
 </script>
