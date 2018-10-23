@@ -204,7 +204,10 @@ export default {
         mediaFiles: [mediaFiles]
       };
 
-      this.$store.dispatch("stories/savePost", { data: newStoryData, userId: this.user.id });
+      this.$store.dispatch("stories/savePost", {
+        data: newStoryData,
+        userId: this.user.id
+      });
     },
 
     playPreviewVideo: function() {
