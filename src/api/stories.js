@@ -1,4 +1,5 @@
 import anyRequest from "@/utils/anyRequest";
+import tokenRequest from "@/utils/tokenRequest";
 
 export default {
   getPosts({ offset, limit, marker }) {
@@ -17,8 +18,18 @@ export default {
     });
   },
   watchStory({ postId }) {
-    return anyRequest(`stories/${postId}/watched`, {
+    return tokenRequest(`stories/${postId}/watched`, {
       method: "PUT"
+    });
+  },
+  savePost(data) {
+    return tokenRequest(`stories`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     });
   }
 };

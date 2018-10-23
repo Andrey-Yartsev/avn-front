@@ -2,6 +2,7 @@
 
 import StoriesApi from "@/api/stories";
 import PostMixin from "@/store/mixins/posts";
+import router from "@/router";
 
 const initState = {
   loading: false,
@@ -73,6 +74,15 @@ const actions = {
   },
   watch(opt, { postId }) {
     return StoriesApi.watchStory({ postId });
+  },
+  savePost(opt, { data, userId }) {
+    return StoriesApi.savePost(data)
+      .then(response => {
+        if (response.status === 200) {
+          router.push(`/stories/${userId}`);
+        }
+      })
+      .catch(() => {});
   }
 };
 

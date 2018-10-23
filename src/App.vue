@@ -9,6 +9,7 @@
       </main>
       <Sidebar v-if="user"/>
       <Toast v-if="showToast" @hide="showToast = false" />
+      <StoryInput />
 
       <modal-router />
 
@@ -40,6 +41,7 @@ import UserReportModal from "@/components/common/UserReportModal";
 import SubscribeModal from "@/components/subscription/Modal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
+import StoryInput from "@/components/story/Input";
 
 import rootClasses from "@/rootClasses";
 import ws from "@/ws";
@@ -58,7 +60,8 @@ export default {
     SubscribeModal,
     PaymentModal,
     ModalRouter,
-    CreateStoryModal
+    CreateStoryModal,
+    StoryInput
   },
   mixins: [ColorScheme],
   data() {

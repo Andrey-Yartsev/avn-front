@@ -14,27 +14,7 @@
                   </div>
                 </div>
                 <div class="chat-new-type add-new-type add-new-type_b-with-text add-new-type_underline-items line-bottom">
-                  <div class="addNewNav">
-                    <span class="new-post">
-                      <span class="add-new-type__text">Post</span>
-                    </span>
-                    <span class="new-story active" @click="addStoryFile">
-                      <span class="add-new-type__text">Story</span>
-                    </span>
-                    <span class="new-live">
-                      <span class="add-new-type__text">Go live</span>
-                    </span>
-                    <span class="new-message">
-                      <span class="add-new-type__text">Message</span>
-                    </span>
-                    <input
-                      ref="storyFileSelect"
-                      type="file"
-                      class="hidden storyFileSelect"
-                      accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-                      @change="chooseFileEvent"
-                    />
-                  </div>
+                  <AddNewNav active="story" />
                 </div>
                 <div class="group-controls">
                   <div class="storyOptions">
@@ -115,12 +95,6 @@
               <div class="storyPlaceholder">
                 <label>
                   <span>Tap here to add picture or video to your story</span>
-                  <input
-                    type="file"
-                    lass="storyImage"
-                    accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-                    @change="chooseFileEvent"
-                  />
                 </label>
               </div>
               <div class="texteditor">
@@ -130,7 +104,7 @@
                 </div>
               </div>
               <div class="mediasBottom">
-                <button type="submit" class="addStoryButton btn" :disabled="!readyToUpload">
+                <button type="submit" class="addStoryButton btn" :disabled="!readyToUpload" @click.prevent="createNewStory">
                   Post your story
                 </button>
               </div>
@@ -170,12 +144,16 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
+import AddNewNav from "@/components/addNewNav/Index";
+import userMixin from "@/mixins/user";
 import {
-  getMediaFilePreview /*, fileUpload, uniqId */
+  getMediaFilePreview,
+  fileUpload /*, uniqId */
 } from "@/utils/mediaFiles";
 
 export default {
   name: "CreateModal",
+  mixins: [userMixin],
   data: () => ({
     showPreview: false,
     preview: {},
@@ -185,20 +163,23 @@ export default {
   }),
   components: {
     Modal,
-    Loader
+    Loader,
+    AddNewNav
+  },
+  computed: {
+    file: function() {
+      return this.$store.state.modal.createStory.data.file;
+    }
   },
   methods: {
-    addStoryFile: function() {
-      this.$refs.storyFileSelect.click();
-    },
     close(e) {
       e.preventDefault();
       this.$store.dispatch("modal/hide", { name: "createStory" });
     },
-    chooseFileEvent: async function(e) {
-      const file = e.target.files[0];
+    chooseFileEvent: async function() {
       this.showLoader = true;
-      this.preview = await getMediaFilePreview(file);
+      this.preview = await getMediaFilePreview(this.file);
+
       this.showLoader = false;
       this.showPreview = true;
 
@@ -209,8 +190,21 @@ export default {
       if (this.preview.mediaType === "video") {
         this.playPreviewVideo();
       }
+    },
 
-      e.target.value = "";
+    createNewStory: async function() {
+      this.showLoader = true;
+      const mediaFiles = await fileUpload(
+        { id: "story", file: this.file },
+        () => {}
+      );
+
+      const newStoryData = {
+        fitTypes: [],
+        mediaFiles: [mediaFiles]
+      };
+
+      this.$store.dispatch("stories/savePost", { data: newStoryData, userId: this.user.id });
     },
 
     playPreviewVideo: function() {
@@ -227,10 +221,13 @@ export default {
       });
     }
   },
+  watch: {
+    file: function() {
+      this.chooseFileEvent();
+    }
+  },
   mounted() {
-    setTimeout(() => {
-      this.addStoryFile();
-    }, 3000);
+    this.chooseFileEvent();
   }
 };
 </script>
