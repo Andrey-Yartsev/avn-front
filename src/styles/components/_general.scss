@@ -42,7 +42,8 @@ strong {
   font-weight: 500;
 }
 
-.disable-scroll-page {
+.disable-scroll-page,
+.modal-opened {
   @include media-breakpoint-up($desktop-breakpoint) {
     overflow: hidden;
   }
@@ -340,5 +341,25 @@ video {
         left: auto;
       }
     }
+  }
+}
+
+.main-container {
+  height: 100%;
+  min-height: 100%;
+}
+
+.scrolly-viewport {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-right: 10px;
+  }
+}
+
+.scrolly-bar {
+
+  &.axis-y {
+    right: -7px;
+    width: 20px;
   }
 }

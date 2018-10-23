@@ -100,7 +100,10 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/notifications/:type?",
-    component: NotificationsPage
+    component: NotificationsPage,
+    meta: {
+      cssName: "notifications"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,
@@ -159,7 +162,10 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/post/:postId",
-    component: PostPage
+    component: PostPage,
+    meta: {
+      cssName: "post"
+    }
   },
   {
     beforeEnter: Auth.requireAny,
@@ -177,7 +183,8 @@ const routes = [
     component: ExplorePage,
     meta: {
       page: "stories",
-      type: "story"
+      type: "story",
+      cssName: "explore"
     }
   },
   {
@@ -186,7 +193,8 @@ const routes = [
     component: ExplorePage,
     meta: {
       page: "photos",
-      type: "media"
+      type: "media",
+      cssName: "explore"
     }
   },
   {
@@ -195,7 +203,8 @@ const routes = [
     component: ExplorePage,
     meta: {
       page: "lives",
-      type: "live"
+      type: "live",
+      cssName: "explore"
     }
   },
   {
@@ -204,7 +213,8 @@ const routes = [
     component: ExplorePage,
     meta: {
       page: "videos",
-      type: "media"
+      type: "media",
+      cssName: "explore"
     }
   },
   {
