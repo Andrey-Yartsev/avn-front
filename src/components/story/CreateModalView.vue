@@ -170,7 +170,9 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
-import { getMediaFilePreview /*, fileUpload, uniqId */} from "@/utils/mediaFiles";
+import {
+  getMediaFilePreview /*, fileUpload, uniqId */
+} from "@/utils/mediaFiles";
 
 export default {
   name: "CreateModal",
