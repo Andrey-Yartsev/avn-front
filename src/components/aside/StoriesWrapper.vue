@@ -12,7 +12,7 @@
                                     <a class="avatar new-story">
                                         <img v-if="user.avatar" :src="user.avatar">
                                     </a>
-                                    <span class="btn-add">
+                                    <span class="btn-add" @click.prevent="addNewStory">
                                         <svg aria-hidden="true" class="icn icn-plus">
                                             <use xlink:href="#icon-plus-in-circle"></use>
                                         </svg>
@@ -26,7 +26,6 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="hidden storyFileSelect" accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi" type="file">
                         <div class="stories"></div>
                     </div>
                 </div>
@@ -41,6 +40,11 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    }
+  },
+  methods: {
+    addNewStory: function() {
+      document.getElementById("storyFileSelect").click();
     }
   }
 };

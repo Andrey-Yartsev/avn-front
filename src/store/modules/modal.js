@@ -23,6 +23,10 @@ const state = {
   payment: {
     show: false,
     data: {}
+  },
+  createStory: {
+    show: false,
+    data: {}
   }
 };
 

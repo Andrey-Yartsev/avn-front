@@ -49,14 +49,7 @@
           </template>
         </div>
         <div class="add-new-type add-new-type_underline-items line-top">
-          <div class="addNewNav">
-            <span class="new-post active"><span class="add-new-type__text">Post</span></span>
-            <span class="new-story"><span class="add-new-type__text">Story</span></span>
-            <span class="new-live"><span class="add-new-type__text">Go live</span></span>
-            <span class="new-message"><span class="add-new-type__text">Message</span></span>
-            <input type="file" class="hidden storyFileSelect"
-                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"/>
-          </div>
+          <AddNewNav active="post" />
         </div>
         <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
@@ -78,6 +71,7 @@
 import Loader from "@/components/common/Loader";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
+import AddNewNav from "@/components/addNewNav/Index";
 
 export default {
   name: "AddPost",
@@ -91,7 +85,8 @@ export default {
   }),
   components: {
     Loader,
-    MediaPreview
+    MediaPreview,
+    AddNewNav
   },
   computed: {
     user() {
