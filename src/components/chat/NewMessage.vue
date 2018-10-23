@@ -114,20 +114,23 @@
               <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>
           </template>
           <span v-else-if="selected.length" class="mass-message">Mass message</span>
-          <span
-            class="chatOptions"
+          <div
+            class="more-functions"
             v-if="selectedUser"
             :class="{open: chatOptionsOpened}"
             @click="chatOptionsOpened = !chatOptionsOpened"
           >
-            <span class="chatExpand"></span>
-              <div class="chatOptions__dropdown">
-                <ul class="chatOptions__list">
+            <div class="more-functions__overlay"></div>
+            <div class="more-functions__btn"></div>
+            <div class="more-functions__dropdown">
+              <div class="more-functions__dropdown-inside">
+                <ul>
                   <li><router-link class="profile-url" :to="'/' + selectedUser.username">View profile</router-link></li>
                   <li><a class="menu-cancel" >Cancel</a></li>
                 </ul>
               </div>
-            </span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="chatCollectionContentWrapper">

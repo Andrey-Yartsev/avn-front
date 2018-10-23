@@ -727,6 +727,11 @@
           padding: 0 !important;
         }
       }
+
+      .scrolly-viewport {
+        padding-right: 0;
+      }
+
       .chatView {
         padding: 1em 1em 0.75em 0.8em;
         border-bottom: 1px solid rgba(124, 139, 150, 0.2);
