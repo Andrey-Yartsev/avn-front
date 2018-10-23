@@ -6,6 +6,11 @@
 
   .aside-col_with-footer & {
     flex: 0 0 auto;
+
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .FooterNavCollectionView {

@@ -11,7 +11,7 @@
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
     <div :class="['more-functions', {open: opened}]"  v-click-outside="hide">
-      <div class="more-functions__overlay"></div>
+      <div class="more-functions__overlay" @click="opened = false"></div>
       <div class="more-functions__btn" @click="opened = true">
         <div class="more-functions__btn-text"></div>
       </div>
