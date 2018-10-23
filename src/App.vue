@@ -19,6 +19,7 @@
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
       <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
+      <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
 
     </template>
   </div>
@@ -34,6 +35,7 @@ import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
+import CreateStoryModal from "@/components/story/CreateModalView";
 import UserReportModal from "@/components/common/UserReportModal";
 import SubscribeModal from "@/components/subscription/Modal";
 import PaymentModal from "@/components/subscription/PaymentModal";
@@ -55,7 +57,8 @@ export default {
     UserReportModal,
     SubscribeModal,
     PaymentModal,
-    ModalRouter
+    ModalRouter,
+    CreateStoryModal
   },
   mixins: [ColorScheme],
   data() {
