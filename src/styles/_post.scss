@@ -484,9 +484,10 @@
   }
 
   .comments-list {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
-      overflow: hidden;
+      //overflow: hidden;
     }
 
     &.scrolly {

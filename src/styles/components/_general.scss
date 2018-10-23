@@ -358,8 +358,19 @@ video {
 
 .scrolly-bar {
 
+  &:before {
+    width: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   &.axis-y {
     right: -7px;
-    width: 20px;
+    width: 10px;
+    border: none;
+
+    .chatCollectionView & {
+      right: 0;
+    }
   }
 }
