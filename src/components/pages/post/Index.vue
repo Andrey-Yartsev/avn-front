@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="postPage-content">
-      <Post v-if="post" :post="post" from="postPage" />
-    </div>
+  <div class="postPageWrapper">
+    <Post v-if="post" :post="post" from="postPage" />
     <Footer />
   </div>
 </template>
