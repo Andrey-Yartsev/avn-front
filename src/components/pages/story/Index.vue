@@ -53,16 +53,11 @@
             <img v-if="author.avatar" :src="author.avatar">
           </a>
           <template v-if="isOwner(author.id)">
-            <span class="btn-add">
+            <span class="btn-add" @click="addNewStory">
               <svg aria-hidden="true" class="icn icn-plus">
                 <use xlink:href="#icon-plus-in-circle"></use>
               </svg>
             </span>
-            <input
-              type="file"
-              class="hidden storyFileSelect"
-              accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-            />
           </template>
       </div>
       <div class="user-name">
@@ -172,12 +167,10 @@ export default {
     },
 
     launchImage: function() {
-      // console.log("launchImage");
       this.timer = new StoryTimer(() => this.next(), 4000);
     },
 
     launchVideo: function() {
-      // console.log("launchVideo");
       const videoId = this.currentStory.id;
       const videoTag = this.$refs.storyItem;
 
@@ -336,6 +329,9 @@ export default {
     videoEventPlaying: function() {
       this.showVideoPlay = false;
       this.showLoader = false;
+    },
+    addNewStory: function() {
+      document.getElementById("storyFileSelect").click();
     }
   },
   created() {
@@ -343,6 +339,12 @@ export default {
     this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
   },
   watch: {
+    stories() {
+      const index = this.stories.findIndex(element => element.isLook === false);
+      if (index !== -1) {
+        this.currIndex = index;
+      }
+    },
     currentStory() {
       if (!this.currentStory) return;
 

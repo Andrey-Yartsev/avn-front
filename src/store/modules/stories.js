@@ -79,7 +79,12 @@ const actions = {
     return StoriesApi.savePost(data)
       .then(response => {
         if (response.status === 200) {
-          router.push(`/stories/${userId}`);
+          const url = `/stories/${userId}`;
+          if (router.history.current.fullPath !== url) {
+            router.push(url);
+          } else {
+            window.location.reload();
+          }
         }
       })
       .catch(() => {});
