@@ -27,7 +27,10 @@ const routes = [
   {
     beforeEnter: Auth.requireNonAuth,
     path: "/login",
-    component: LoginPage
+    component: LoginPage,
+    meta: {
+      cssName: "login"
+    }
   },
   {
     path: "/logout",
@@ -47,7 +50,7 @@ const routes = [
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {
-      cssName: "forgot",
+      cssName: "staticPage",
       noAuthHeader: true
     }
   },
@@ -156,7 +159,8 @@ const routes = [
     path: "/not-found",
     component: NotFoundPage,
     meta: {
-      noAuthHeader: true
+      noAuthHeader: true,
+      cssName: "staticPage"
     }
   },
   {

@@ -14,7 +14,6 @@ export default {
   myProfile: ["profile-page"],
   staticPage: ["static-page"],
   contact: ["static-page", "contact-page"],
-  forgot: ["static-page"],
   notifications: ["notifications-page", "no-site-header_mob"],
   newChat: ["chat-page"]
 };
