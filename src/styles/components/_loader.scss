@@ -91,7 +91,7 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           width: 40px;
           height: 40px;
-          margin-top: -40px;
+          margin-top: 0px;
         }
       }
     }

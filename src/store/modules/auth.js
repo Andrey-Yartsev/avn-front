@@ -60,8 +60,9 @@ const actions = {
       });
   },
 
-  logout({ commit }) {
+  logout({ commit, dispatch }) {
     commit("logout");
+    dispatch("payouts/reset", null, { root: true });
   },
 
   setOtpAuth({ commit }, flag) {
