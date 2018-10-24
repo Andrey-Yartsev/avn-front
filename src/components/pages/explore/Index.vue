@@ -122,6 +122,7 @@ export default {
       }
 
       if (["all", "stories"].indexOf(this.page) !== -1) {
+        this.$store.dispatch("stories/setSource", { source: "" });
         this.$store.dispatch("stories/getPosts");
       }
 

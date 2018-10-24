@@ -2,8 +2,8 @@ import anyRequest from "@/utils/anyRequest";
 import tokenRequest from "@/utils/tokenRequest";
 
 export default {
-  getPosts({ offset, limit, marker }) {
-    return anyRequest(`stories`, {
+  getPosts({ offset, limit, marker, source }) {
+    return anyRequest(`stories/${source}`, {
       method: "GET",
       query: {
         offset,

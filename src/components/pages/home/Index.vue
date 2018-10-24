@@ -45,6 +45,9 @@ export default {
   created() {
     this.$store.dispatch("home/resetPageState");
     this.$store.dispatch("home/getPosts");
+    this.$store.dispatch("stories/resetPageState");
+    this.$store.dispatch("stories/setSource", { source: "feed" });
+    this.$store.dispatch("stories/getPosts");
   },
   computed: {
     posts() {

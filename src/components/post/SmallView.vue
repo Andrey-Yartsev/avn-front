@@ -59,9 +59,9 @@ export default {
       );
     },
     getComments() {
-      const { id, commentsCount } = this.post;
+      const { id, commentsCount, canComment } = this.post;
 
-      if (commentsCount) {
+      if (commentsCount && canComment) {
         this.$store.dispatch(this.actionPrefix + "/getPostComments", {
           postId: id
         });

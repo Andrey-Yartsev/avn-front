@@ -1,103 +1,105 @@
 <template>
-  <div class="StoryPageCollectionView" v-if="!loading && length">
-    <div class="stories-slideshow">
-      <div class="StoryPageView active">
-        <template v-if="!currentStory.isReady || currentStory.mediaType === 'photo'">
-          <img class="bg" :src="currentStory.mediaSrc || currentStory.mediaPreview" alt>
-          <img class="storyItem" :src="currentStory.mediaSrc || currentStory.mediaPreview" ref="storyItem" alt>
-        </template>
-        <video v-if="currentStory.mediaType === 'video' && currentStory.isReady"
-          class="story-video-element storyItem" 
-          :src="currentStory.mediaSrc"
-          ref="storyItem"
-        ></video>
+  <div class="StoryPageCollectionView">
+    <template v-if="!loading && length && currentStory">
+      <div class="stories-slideshow">
+        <div class="StoryPageView active">
+          <template v-if="!currentStory.isReady || currentStory.mediaType === 'photo'">
+            <img class="bg" :src="currentStory.mediaSrc || currentStory.mediaPreview" alt>
+            <img class="storyItem" :src="currentStory.mediaSrc || currentStory.mediaPreview" ref="storyItem" alt>
+          </template>
+          <video v-if="currentStory.mediaType === 'video' && currentStory.isReady"
+            class="story-video-element storyItem" 
+            :src="currentStory.mediaSrc"
+            ref="storyItem"
+          ></video>
+        </div>
       </div>
-    </div>
-    <template v-if="length > 1">
-      <button
-        type="button"
-        class="btn-prev"
-        v-if="currIndex > 0"
-        @click="currIndex = currIndex - 1"
-      />
-      <button
-        type="button"
-        class="btn-next"
-        v-if="currIndex < length - 1"
-        @click="currIndex = currIndex + 1"
-      />
-    </template>
-    <div class="progress-pagination">
-      <div
-        v-for="(value, key) in stories"
-        :class="['item', {
-          active: key === currActiveIndex,
-          fullActive: key < currActiveIndex,
-          video: value.mediaType === 'video' && value.isReady
-        }]"
-        :key="key"
-        @click="() => currIndex = key"
-      >
-        <div
-          class="item-filler"
-          :style="value.mediaType === 'video' ? { width: `${videoProgress[value.id]}%` } : {}"
+      <template v-if="length > 1">
+        <button
+          type="button"
+          class="btn-prev"
+          v-if="currIndex > 0"
+          @click="currIndex = currIndex - 1"
         />
+        <button
+          type="button"
+          class="btn-next"
+          v-if="currIndex < length - 1"
+          @click="currIndex = currIndex + 1"
+        />
+      </template>
+      <div class="progress-pagination">
+        <div
+          v-for="(value, key) in stories"
+          :class="['item', {
+            active: key === currActiveIndex,
+            fullActive: key < currActiveIndex,
+            video: value.mediaType === 'video' && value.isReady
+          }]"
+          :key="key"
+          @click="() => currIndex = key"
+        >
+          <div
+            class="item-filler"
+            :style="value.mediaType === 'video' ? { width: `${videoProgress[value.id]}%` } : {}"
+          />
+        </div>
       </div>
-    </div>
-    <div class="head-story">
-      <div class="story-avatar">
+      <div class="head-story">
+        <div class="story-avatar">
+            <a 
+              :href="isOwner(author.id) ? `/${author.username}` : ''"
+              :class="['avatar', {'new-story': isOwner(author.id)}]"
+            >
+              <img v-if="author.avatar" :src="author.avatar">
+            </a>
+            <template v-if="isOwner(author.id)">
+              <span class="btn-add" @click="addNewStory">
+                <svg aria-hidden="true" class="icn icn-plus">
+                  <use xlink:href="#icon-plus-in-circle"></use>
+                </svg>
+              </span>
+            </template>
+        </div>
+        <div class="user-name">
           <a 
             :href="isOwner(author.id) ? `/${author.username}` : ''"
-            :class="['avatar', {'new-story': isOwner(author.id)}]"
+            :class="{'new-story': isOwner(author.id)}"
           >
-            <img v-if="author.avatar" :src="author.avatar">
+            {{ isOwner(author.id) ? 'Your story' : author.name || author.username }}
           </a>
-          <template v-if="isOwner(author.id)">
-            <span class="btn-add" @click="addNewStory">
-              <svg aria-hidden="true" class="icn icn-plus">
-                <use xlink:href="#icon-plus-in-circle"></use>
-              </svg>
-            </span>
-          </template>
+          <span class="time"></span>
+        </div>
+      </div>    
+      <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
+      <div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">
+        <template v-if="isOwner(author.id)">
+          <button class="deleteStory" type="button" @click="deleteStory">Delete</button>
+          <button class="saveFile" type="button" @click="saveFile">Save</button>
+          <button class="storySettings" type="button" @click="storySettings">Story Settings</button>
+        </template>
+        <button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>
       </div>
-      <div class="user-name">
-        <a 
-          :href="isOwner(author.id) ? `/${author.username}` : ''"
-          :class="{'new-story': isOwner(author.id)}"
-        >
-          {{ isOwner(author.id) ? 'Your story' : author.name || author.username }}
-        </a>
-        <span class="time"></span>
+      <div class="bottom-btns">
+        <template v-if="!isOwner(author.id) && author.canEarn">
+          <button type="button" class="btn-tip"></button>
+          <form class="tip-form hidden">
+            <button type="button" role="button" class="btn btn-cancel">Cancel</button>
+            <div class="tip-amount-field">
+              <input class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter tip amount">
+            </div>    
+            <button type="submit" class="btn btn-send" disabled>Send tip</button>
+          </form>
+        </template>
       </div>
-    </div>    
-    <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
-    <div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">
-      <template v-if="isOwner(author.id)">
-        <button class="deleteStory" type="button" @click="deleteStory">Delete</button>
-        <button class="saveFile" type="button" @click="saveFile">Save</button>
-        <button class="storySettings" type="button" @click="storySettings">Story Settings</button>
-      </template>
-      <button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>
-    </div>
-    <div class="bottom-btns">
-      <template v-if="!isOwner(author.id) && author.canEarn">
-        <button type="button" class="btn-tip"></button>
-        <form class="tip-form hidden">
-          <button type="button" role="button" class="btn btn-cancel">Cancel</button>
-          <div class="tip-amount-field">
-            <input class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter tip amount">
-          </div>    
-          <button type="submit" class="btn btn-send" disabled>Send tip</button>
-        </form>
-      </template>
-    </div>
-    <button type="button" class="close" @click="close"></button>
-    <div :class="['play-button-wrapper', { hidden: !showVideoPlay }]" ref="videoPlayButton">
-      <div class="play-button-outer">
-        <div class="play-button"></div>
+      <button type="button" class="close" @click="close"></button>
+      <div :class="['play-button-wrapper', { hidden: !showVideoPlay }]" ref="videoPlayButton">
+        <div class="play-button-outer">
+          <div class="play-button"></div>
+        </div>
       </div>
-    </div>
-    <Loader v-if="showLoader || !currentStory.isReady" :fullscreen="false"></Loader>
+    </template>
+    <Loader v-if="loading || showLoader || !currentStory.isReady" :fullscreen="false"></Loader>
   </div>
 </template>
 
@@ -145,7 +147,7 @@ export default {
   methods: {
     next: function() {
       if (this.currIndex === this.length - 1) {
-        this.close();
+        this.findNextUserStory();
         return;
       }
 
@@ -253,8 +255,24 @@ export default {
       // app.resetNextStoryList();
     },
 
+    findNextUserStory: function() {
+      const userIds = [...this.$store.state.common.storyList];
+      const userId = userIds.shift();
+
+      if (userId) {
+        this.$store.dispatch("common/setStoryList", {
+          storyList: userIds
+        });
+
+        this.$router.replace(`/stories/${userId}`);
+      } else {
+        this.close();
+      }
+    },
+
     close: function() {
       this.resetState();
+      this.$store.dispatch("common/resetStoryList");
       this.$router.go(-1);
     },
 
@@ -349,6 +367,8 @@ export default {
       const index = this.stories.findIndex(element => element.isLook === false);
       if (index !== -1) {
         this.currIndex = index;
+      } else {
+        this.currIndex = 0;
       }
     },
     currentStory() {
@@ -358,6 +378,11 @@ export default {
       this.$nextTick(() => {
         this.runProgress();
       });
+    },
+    $route() {
+      this.resetState();
+      this.$store.dispatch("stories/resetPageState");
+      this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
     }
   }
 };

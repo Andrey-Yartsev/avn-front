@@ -3,12 +3,16 @@
 import CommonApi from "@/api/common";
 
 const state = {
-  pages: []
+  pages: [],
+  storyList: []
 };
 
 const mutations = {
-  ["pagesRequestSuccess"](state, pages) {
+  pagesRequestSuccess(state, pages) {
     state.pages = pages;
+  },
+  setStoryList(state, { storyList }) {
+    state.storyList = storyList;
   }
 };
 
@@ -26,6 +30,13 @@ const actions = {
         // TODO
         .catch(() => {})
     );
+  },
+  setStoryList({ commit }, { storyList }) {
+    commit("setStoryList", { storyList });
+  },
+
+  resetStoryList({ commit }) {
+    commit("setStoryList", { storyList: [] });
   }
 };
 

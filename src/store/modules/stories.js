@@ -15,7 +15,8 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  user: {}
+  user: {},
+  source: "feed"
 };
 
 const state = { ...initState };
@@ -37,15 +38,18 @@ const mutations = {
     state.loading = false;
     state.marker = state.marker.length ? state.marker : marker;
     state.user = user;
+  },
+  setSource(state, { source }) {
+    state.source = source;
   }
 };
 
 const actions = {
   getPosts({ commit }) {
-    const { limit, offset, marker } = state;
+    const { limit, offset, marker, source } = state;
     commit("postsRequest");
 
-    return StoriesApi.getPosts({ limit, offset, marker })
+    return StoriesApi.getPosts({ limit, offset, marker, source })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -88,6 +92,9 @@ const actions = {
         }
       })
       .catch(() => {});
+  },
+  setSource({ commit }, { source }) {
+    commit("setSource", { source });
   }
 };
 
