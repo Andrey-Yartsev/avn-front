@@ -1,6 +1,7 @@
 @import "components/imports";
 
 .addPost {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 100%;
     background: $white;
@@ -14,6 +15,19 @@
 
     .feed & {
       display: none;
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    .popup &,
+    .feed & {
+      padding: 0;
+      max-width: none;
+      margin: 0;
     }
   }
 
@@ -39,19 +53,6 @@
           top: 0;
         }
       }
-    }
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    max-width: 940px;
-    margin: 0 auto;
-    padding: 0 10px;
-
-    .popup &,
-    .feed & {
-      padding: 0;
-      max-width: none;
-      margin: 0;
     }
   }
 
@@ -125,12 +126,38 @@
   display: none;
   margin: 0 15px 0 0;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: absolute;
+    top: 7px;
+    right: 80px;
+    z-index: 2;
+  }
+
+  &:hover {
+
+    .icon {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        color: $secondary-color;
+        opacity: 1;
+      }
+    }
+  }
+
   .add-new-form.expanded & {
     display: block;
   }
 
   input {
     display: none;
+
+    &:checked {
+
+      + .icon {
+        color: $secondary-color;
+        opacity: 1;
+      }
+    }
   }
 
   .icon {
@@ -146,25 +173,6 @@
       content: "\E61F";
     }
   }
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    position: absolute;
-    top: 7px;
-    right: 80px;
-    z-index: 2;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    &:hover .icon {
-      color: $secondary-color;
-      opacity: 1;
-    }
-  }
-
-  input:checked + .icon {
-    color: $secondary-color;
-    opacity: 1;
-  }
 }
 
 .add-new-form {
@@ -177,9 +185,46 @@
     padding: 15px 0 15px 60px;
     border-radius: 5px;
     box-shadow: 0 8px 30px rgba(#000, 0.1);
+    background: linear-gradient(
+                    30deg,
+                    $secondary-color-12 10%,
+                    $primary-color-12 90%
+    );
+  }
 
-    .popup & {
+  .popup & {
+    margin-top: 44px;
+    border-radius: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
       overflow: visible;
+      margin-top: 60px;
+    }
+
+    .add-new-type {
+
+      .addNewNav {
+
+        > a,
+        > span {
+
+          &:after {
+            display: block;
+            top: auto;
+            bottom: 0;
+          }
+
+          &.active {
+
+            .add-new-type__text {
+
+              @include media-breakpoint-up($desktop-breakpoint) {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -192,50 +237,8 @@
     }
   }
 
-  .popup & {
-    margin-top: 44px;
-    border-radius: 0;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-top: 60px;
-    }
-
-    .add-new-type {
-      .addNewNav {
-        > a,
-        > span {
-          &:after {
-            display: block;
-            top: auto;
-            bottom: 0;
-            top: auto;
-          }
-
-          &.active {
-            .add-new-type__text {
-              @include media-breakpoint-up($desktop-breakpoint) {
-                opacity: 1;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    background: linear-gradient(
-      30deg,
-      $secondary-color-12 10%,
-      $primary-color-12 90%
-    );
-
-    &.expanded {
-      display: block;
-    }
-  }
-
   .avatar {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
     }
@@ -325,9 +328,25 @@
   }
 
   &:not(.expanded) {
+
     .actions {
       align-items: center;
       align-content: center;
+    }
+
+    .add-new-type {
+
+      .addNewNav {
+
+        > a,
+        > span {
+          width: 39px;
+
+          &:after {
+            display: none;
+          }
+        }
+      }
     }
   }
 
@@ -340,14 +359,14 @@
     color: $secondary-color;
     transition: color 0.3s ease;
 
-    &:hover {
-      color: $secondary-color-darken;
-    }
-
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
       top: 15px;
       right: 170px;
+    }
+
+    &:hover {
+      color: $secondary-color-darken;
     }
 
     &:before {
@@ -360,6 +379,7 @@
   }
 
   .submit {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 21px;
       padding-right: 21px;
@@ -387,24 +407,11 @@
     }
   }
 
-  &:not(.expanded) {
-    .add-new-type {
-      .addNewNav {
-        > a,
-        > span {
-          width: 39px;
-
-          &:after {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-
   &.expanded {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 15px 15px 10px 60px;
+      display: block;
 
       .text-media-container {
         border-radius: 6px;
@@ -413,6 +420,7 @@
     }
 
     .popup & {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-bottom: 15px;
       }
@@ -421,17 +429,18 @@
     textarea {
       overflow: auto;
       max-height: 200px;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         height: 137px;
       }
+
       @include media-breakpoint-up($desktop-breakpoint) {
         height: 80px;
         min-height: 80px;
       }
-    }
 
-    .popup & {
-      textarea {
+      .popup & {
+
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 80px;
         }

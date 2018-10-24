@@ -6,6 +6,32 @@
 
   .aside-col_with-footer & {
     flex: 0 0 auto;
+    display: none;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 73px;
+      position: relative;
+      display: block;
+    }
+
+    &:before {
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      position: absolute;
+      background: linear-gradient(
+                      to right,
+                      rgba($gray, 0.2) 0%,
+                      transparent 100%
+      );
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
 
     .container {
       padding-left: 0;
@@ -32,41 +58,12 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-          to right,
-          rgba($gray, 0.2) 0%,
-          transparent 30%,
-          transparent 70%,
-          rgba($gray, 0.2) 100%
+                        to right,
+                        rgba($gray, 0.2) 0%,
+                        transparent 30%,
+                        transparent 70%,
+                        rgba($gray, 0.2) 100%
         );
-      }
-    }
-  }
-
-  .aside-col_with-footer & {
-    display: none;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-top: 73px;
-      position: relative;
-      display: block;
-    }
-
-    &:before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      position: absolute;
-      background: linear-gradient(
-        to right,
-        rgba($gray, 0.2) 0%,
-        transparent 100%
-      );
-      display: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
       }
     }
   }

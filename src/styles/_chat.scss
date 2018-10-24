@@ -235,14 +235,15 @@
       }
 
       .chatHeader {
+
         @include media-breakpoint-down($desktop-breakpoint) {
           width: 100%;
           background-color: transparent;
         }
-      }
 
-      .chatHeader_add-shadow {
-        box-shadow: none;
+        &_add-shadow {
+          box-shadow: none;
+        }
       }
     }
 
@@ -275,6 +276,7 @@
       }
 
       .chatCollectionContentWrapper {
+
         .avatar {
           margin-top: 5px;
         }
@@ -286,6 +288,7 @@
     flex: 1;
 
     &.no-selected-conversation {
+
       .msg-no-chat {
         opacity: 1;
         pointer-events: auto;
@@ -301,10 +304,9 @@
     opacity: 1;
     transition: 0.3s opacity ease;
     cursor: pointer;
-    margin: 0;
     display: inline-block;
     font-size: 0;
-    margin-left: -15px;
+    margin: 0 0 0 -15px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       opacity: 0.3;
@@ -390,7 +392,6 @@
     top: auto;
     bottom: auto;
     visibility: visible;
-    opacity: 1;
     width: auto;
     height: auto;
     border: 2px solid $secondary-color;
@@ -501,12 +502,14 @@
     padding: 0;
     flex: 1;
     margin-right: 26px;
+
     .addNewNav {
       height: 100%;
       justify-content: space-between;
 
       > a,
       > span {
+
         &:before {
           @include media-breakpoint-up($desktop-breakpoint) {
             margin-top: 12px;
@@ -656,6 +659,7 @@
   }
 
   &_mob-height {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       height: auto;
       max-width: 100vw;
@@ -695,9 +699,9 @@
       bottom: 0;
       z-index: -1;
       background: linear-gradient(
-        30deg,
-        rgba(33, 150, 243, 1) 10%,
-        rgba(255, 64, 129, 1) 90%
+                      30deg,
+                      rgba(33, 150, 243, 1) 10%,
+                      rgba(255, 64, 129, 1) 90%
       );
       opacity: 0.06;
       display: none;
@@ -712,6 +716,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       height: 100%;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         overflow-y: auto !important;
         .os-content-glue,
@@ -750,10 +755,12 @@
 
         > div {
           padding: 0 0 0 1em;
+
+          &:first-child {
+            padding: 0;
+          }
         }
-        > div:first-child {
-          padding: 0;
-        }
+
         .chatViewContent {
           display: flex;
           flex-direction: column;
@@ -763,14 +770,15 @@
         }
 
         .avatar {
+
           &:empty {
             font-size: 35px;
             height: 40px;
-          }
 
-          &:empty:before {
-            height: 100%;
-            width: 100%;
+            &:before {
+              height: 100%;
+              width: 100%;
+            }
           }
         }
 
@@ -782,13 +790,17 @@
         }
 
         .typing {
+
           .isTyping {
             display: none;
           }
+
           &.active {
+
             .message {
               display: none;
             }
+
             .isTyping {
               display: inline;
             }
@@ -808,9 +820,9 @@
             top: 0;
             bottom: 0;
             background: linear-gradient(
-              30deg,
-              rgba(33, 150, 243, 1) 10%,
-              rgba(255, 64, 129, 1) 90%
+                            30deg,
+                            rgba(33, 150, 243, 1) 10%,
+                            rgba(255, 64, 129, 1) 90%
             );
             opacity: 0.2;
             display: none;
@@ -830,9 +842,9 @@
             bottom: 0;
             z-index: -1;
             background: linear-gradient(
-              30deg,
-              rgba(33, 150, 243, 1) 10%,
-              rgba(255, 64, 129, 1) 90%
+                            30deg,
+                            rgba(33, 150, 243, 1) 10%,
+                            rgba(255, 64, 129, 1) 90%
             );
             opacity: 0.06;
 
@@ -918,6 +930,7 @@
 
 .back-popup-btn,
 .newMessage-link {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: auto 0 auto auto;
   }

@@ -41,9 +41,9 @@
 
 .addStoryView {
   background: linear-gradient(
-    30deg,
-    var(--secondary-color-20) 10%,
-    var(--primary-color-20) 90%
+                  30deg,
+                  var(--secondary-color-20) 10%,
+                  var(--primary-color-20) 90%
   );
   height: 100%;
   position: absolute;
@@ -221,7 +221,7 @@
   color: $main;
   opacity: 0.7;
   font-weight: 400;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 
   &:hover {
     opacity: 1;
