@@ -10,6 +10,7 @@ import ForgotPasswordPage from "./components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "./components/pages/settings/default/Index";
 import SettingsSecurityPage from "./components/pages/settings/security/Index";
 import SettingsNotificationPage from "./components/pages/settings/notification/Index";
+import SettingsPaymentsPage from "./components/pages/settings/payments/Index";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
@@ -146,6 +147,14 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/notifications",
     component: SettingsNotificationPage,
+    meta: {
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/payments",
+    component: SettingsPaymentsPage,
     meta: {
       cssName: "settings"
     }
