@@ -21,6 +21,8 @@ import modalRouter from "@/store/modules/modalRouter";
 import notif from "@/store/modules/notif";
 import search from "@/store/modules/search";
 import subscription from "@/store/modules/subscription";
+import card from "@/store/modules/card";
+import transactions from "@/store/modules/transactions";
 
 Vue.use(Vuex);
 
@@ -47,7 +49,9 @@ const store = new Vuex.Store({
     lives,
     notif,
     search,
-    subscription
+    subscription,
+    card,
+    transactions
   }
 });
 

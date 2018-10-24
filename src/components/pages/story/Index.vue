@@ -2,11 +2,11 @@
   <div class="StoryPageCollectionView" v-if="!loading && length">
     <div class="stories-slideshow">
       <div class="StoryPageView active">
-        <template v-if="currentStory.mediaType === 'photo'">
-          <img class="bg" :src="currentStory.mediaSrc" alt>
-          <img class="storyItem" :src="currentStory.mediaSrc" ref="storyItem" alt>
+        <template v-if="!currentStory.isReady || currentStory.mediaType === 'photo'">
+          <img class="bg" :src="currentStory.mediaSrc || currentStory.mediaPreview" alt>
+          <img class="storyItem" :src="currentStory.mediaSrc || currentStory.mediaPreview" ref="storyItem" alt>
         </template>
-        <video v-if="currentStory.mediaType === 'video'"
+        <video v-if="currentStory.mediaType === 'video' && currentStory.isReady"
           class="story-video-element storyItem" 
           :src="currentStory.mediaSrc"
           ref="storyItem"
@@ -33,7 +33,7 @@
         :class="['item', {
           active: key === currActiveIndex,
           fullActive: key < currActiveIndex,
-          video: value.mediaType === 'video'
+          video: value.mediaType === 'video' && value.isReady
         }]"
         :key="key"
         @click="() => currIndex = key"
@@ -97,7 +97,7 @@
         <div class="play-button"></div>
       </div>
     </div>
-    <Loader v-if="showLoader" :fullscreen="false"></Loader>
+    <Loader v-if="showLoader || !currentStory.isReady" :fullscreen="false"></Loader>
   </div>
 </template>
 
@@ -153,17 +153,21 @@ export default {
     },
 
     runProgress: function() {
+      const { isLook, mediaType, isReady, id } = this.currentStory;
+
+      if (this.isAuth() && !isLook) {
+        this.$store.dispatch("stories/watch", { postId: id });
+      }
+
+      if (mediaType === "video" && isReady) {
+        this.launchVideo();
+      } else {
+        this.launchImage();
+      }
+
       setTimeout(() => {
         this.currActiveIndex = this.currIndex;
       }, 99);
-
-      if (this.isAuth() && !this.currentStory.isLook) {
-        this.$store.dispatch("stories/watch", { postId: this.currentStory.id });
-      }
-
-      return this.currentStory.mediaType === "video"
-        ? this.launchVideo()
-        : this.launchImage();
     },
 
     launchImage: function() {
@@ -264,12 +268,14 @@ export default {
     },
 
     pause: function() {
+      const { mediaType, isReady, id } = this.currentStory;
+
       if (this.timer) {
         this.timer.pause();
       }
 
-      if (this.currentStory.mediaType === "video") {
-        const videoTag = this.videos[this.currentStory.id];
+      if (mediaType === "video" && isReady) {
+        const videoTag = this.videos[id];
         videoTag.pause();
       }
     },

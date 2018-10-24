@@ -96,13 +96,16 @@ export default {
     $route() {
       this.$store.dispatch("modal/hideAll");
     },
-    cssName(cssName) {
-      const html = document.getElementsByTagName("html")[0];
-      html.className = "";
-      const bodyClassList = html.classList;
-      const classList = rootClasses[cssName] || [];
-      for (let cls of classList) {
-        bodyClassList.add(cls);
+    cssName: {
+      immediate: true,
+      handler(cssName) {
+        const html = document.getElementsByTagName("html")[0];
+        html.className = "";
+        const bodyClassList = html.classList;
+        const classList = rootClasses[cssName] || [];
+        for (let cls of classList) {
+          bodyClassList.add(cls);
+        }
       }
     }
   },

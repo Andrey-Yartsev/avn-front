@@ -33,6 +33,7 @@ export default {
   methods: {
     close() {
       this.$store.dispatch("modal/hide", { name: "payment" });
+      window.location.reload();
     }
   }
 };
