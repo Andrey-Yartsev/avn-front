@@ -33,9 +33,9 @@
     min-height: 100vh;
     background-color: $white;
     background-image: linear-gradient(
-      30deg,
-      rgba($default-secondary-color, 0.06) 10%,
-      rgba($default-primary-color, 0.06) 90%
+                    30deg,
+                    rgba($default-secondary-color, 0.06) 10%,
+                    rgba($default-primary-color, 0.06) 90%
     );
     background-position: right top;
     background-repeat: no-repeat;
@@ -132,9 +132,6 @@
     }
   }
   form {
-    > input {
-      margin-bottom: 1.7em;
-    }
     .error {
       color: red;
       text-align: left;
@@ -245,9 +242,9 @@
           height: 1px;
           position: absolute;
           background: linear-gradient(
-            to right,
-            rgba($gray, 0.2) 0%,
-            transparent 100%
+                          to right,
+                          rgba($gray, 0.2) 0%,
+                          transparent 100%
           );
         }
       }
@@ -275,10 +272,6 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 64.7%;
-  }
-
-  > input {
-    margin-bottom: 1.7em;
   }
 
   .btn.lg {

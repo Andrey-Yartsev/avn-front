@@ -44,14 +44,17 @@ const routes = [
   {
     beforeEnter: Auth.requireNonAuth,
     path: "/register",
-    component: SignUpPage
+    component: SignUpPage,
+    meta: {
+      cssName: "forgot"
+    }
   },
   {
     beforeEnter: Auth.dummy,
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {
-      cssName: "staticPage",
+      cssName: "forgot",
       noAuthHeader: true
     }
   },
