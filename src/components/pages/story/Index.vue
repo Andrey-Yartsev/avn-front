@@ -365,8 +365,10 @@ export default {
       this.pause();
     },
     hideDropdawn() {
-      this.showDropdawnMenu = false;
-      this.resume();
+      if (this.showDropdawnMenu) {
+        this.showDropdawnMenu = false;
+        this.resume();
+      }
     }
   },
   created() {
