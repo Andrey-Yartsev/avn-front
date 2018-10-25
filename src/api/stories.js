@@ -31,5 +31,11 @@ export default {
       },
       body: JSON.stringify(data)
     });
+  },
+  deletePost({ postId }) {
+    return tokenRequest(`stories/${postId}`, {
+      method: "DELETE",
+      mode: "cors"
+    });
   }
 };

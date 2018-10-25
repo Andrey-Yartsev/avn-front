@@ -20,6 +20,7 @@ export default {
           file
         }
       });
+      e.target.value = "";
     }
   }
 };

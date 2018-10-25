@@ -41,6 +41,9 @@ const mutations = {
   },
   setSource(state, { source }) {
     state.source = source;
+  },
+  deletePost(state, data) {
+    state.posts = state.posts.filter(post => data.postId !== post.id);
   }
 };
 
@@ -95,6 +98,17 @@ const actions = {
   },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
+  },
+  deletePost({ commit }, { postId }) {
+    return StoriesApi.deletePost({ postId })
+      .then(response => {
+        if (response.status === 200) {
+          commit("deletePost", {
+            postId
+          });
+        }
+      })
+      .catch(() => {});
   }
 };
 
