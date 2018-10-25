@@ -1,8 +1,8 @@
-import tokenRequest from "@/utils/tokenRequest";
+import anyRequest from "@/utils/anyRequest";
 
 export default {
   getPages() {
-    return tokenRequest("pages", {
+    return anyRequest("pages", {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
