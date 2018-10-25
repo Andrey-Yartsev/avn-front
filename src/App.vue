@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" class="page-loader"/>
     <template v-else>
 
       <Header/>

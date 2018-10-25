@@ -46,9 +46,7 @@
     opacity: 0.7;
     font-size: 30px;
     padding: 7px 10px;
-    &:hover {
-      opacity: 1;
-    }
+
     @include media-breakpoint-down($desktop-breakpoint) {
       right: auto;
       left: 0;
@@ -57,10 +55,20 @@
       padding: 0;
       z-index: 15;
       opacity: 0;
-      &:hover {
+    }
+
+    &:hover {
+      opacity: 1;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
         opacity: 0;
       }
-      &:before {
+    }
+
+    &:before {
+      opacity: 1;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
         @include position-center;
       }
     }
