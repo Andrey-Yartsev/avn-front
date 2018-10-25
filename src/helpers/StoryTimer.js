@@ -4,6 +4,7 @@ function Timer(callback, delay) {
   this.timer = undefined;
   this.start = undefined;
   this.remaining = delay;
+  this.status = undefined;
 
   this.resume();
 }
@@ -14,7 +15,13 @@ Timer.prototype.get = function() {
 
 Timer.prototype.pause = function() {
   clearTimeout(this.timer);
+  this.status = "hold";
   this.remaining -= new Date() - this.start;
+};
+
+Timer.prototype.kill = function() {
+  clearTimeout(this.timer);
+  this.status = "killed";
 };
 
 Timer.prototype.resume = function() {
@@ -24,6 +31,7 @@ Timer.prototype.resume = function() {
     // this.resume();
     this.callback();
   }, this.remaining);
+  this.status = "run";
 };
 
 export default Timer;

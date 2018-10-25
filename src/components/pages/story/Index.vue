@@ -71,19 +71,15 @@
           <span class="time"></span>
         </div>
       </div>
-      <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
-      <div :class="['more-functions', { open: showDropdawnMenu }]">
-        <div class="more-functions__overlay"></div>
-        <div class="more-functions__btn"></div>
+      <div  v-if="isOwner(author.id)" :class="['more-functions', { open: showDropdawnMenu }]" v-click-outside="hideDropdawn">
+        <div class="more-functions__overlay" @click.prevent="hideDropdawn"></div>
+        <div class="more-functions__btn" @click.prevent="openDropdawn"></div>
         <div class="more-functions__dropdown">
           <div class="more-functions__dropdown-inside">
             <ul>
-              <template v-if="isOwner(author.id)">
-                <li><button class="deleteStory" type="button" @click="deleteStory">Delete</button></li>
-                <li><button class="saveFile" type="button" @click="saveFile">Save</button></li>
-                <li><button class="storySettings" type="button" @click="storySettings">Story Settings</button></li>
-              </template>
-              <li><button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button></li>
+              <li><button class="deleteStory" type="button" @click="deleteStory">Delete</button></li>
+              <li><button class="saveFile" type="button" @click="saveFile">Save</button></li>
+              <li><button class="storySettings" type="button" @click="storySettings">Story Settings</button></li>
             </ul>
           </div>
         </div>
@@ -116,6 +112,7 @@
 import Loader from "@/components/common/Loader";
 import userMixin from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "StoryPage",
@@ -179,6 +176,7 @@ export default {
 
     launchImage: function() {
       this.showLoader = true;
+
       this.$refs.storyItem.onload = () => {
         this.timer = new StoryTimer(() => this.next(), 4000);
         this.showLoader = false;
@@ -196,6 +194,10 @@ export default {
       if (!this.videos[videoId]) {
         this.videos[videoId] = videoTag;
       }
+
+      setTimeout(() => {
+        this.currActiveIndex = this.currIndex;
+      }, 99);
 
       this.activateVideoEvents();
 
@@ -220,7 +222,6 @@ export default {
         videoTag.addEventListener("ended", this.videoEventEnded);
         videoTag.addEventListener("waiting", this.videoEventWaiting);
         videoTag.addEventListener("playing", this.videoEventPlaying);
-        // once
         videoTag.addEventListener("play", this.videoEventPlay);
       }
     },
@@ -234,7 +235,6 @@ export default {
           videoTag.removeEventListener("ended", this.videoEventEnded);
           videoTag.removeEventListener("waiting", this.videoEventWaiting);
           videoTag.removeEventListener("playing", this.videoEventPlaying);
-          // once
           videoTag.removeEventListener("play", this.videoEventPlay);
         }
       }
@@ -258,8 +258,7 @@ export default {
 
     resetState: function() {
       if (this.timer) {
-        clearInterval(this.timer.get());
-        delete this.timer;
+        this.timer.kill();
       }
 
       this.deactivateVideoEvents();
@@ -286,15 +285,6 @@ export default {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
       this.$router.go(-1);
-    },
-
-    toggleDropdawnMenu: function() {
-      this.showDropdawnMenu = !this.showDropdawnMenu;
-      if (this.showDropdawnMenu) {
-        this.pause();
-      } else {
-        this.resume();
-      }
     },
 
     pause: function() {
@@ -330,14 +320,14 @@ export default {
       //       position: "top-center",
       //       icon: "success"
       //     });
-      //   }.bind(this),
+      //   },
       //   function() {
       //     $.toast({
       //       text: "Story deletion failed",
       //       position: "top-center",
       //       icon: "error"
       //     });
-      //   }.bind(this)
+      //   }
       // );
     },
 
@@ -369,11 +359,25 @@ export default {
     addNewStory: function() {
       this.pause();
       document.getElementById("storyFileSelect").click();
+    },
+    openDropdawn: function() {
+      this.showDropdawnMenu = true;
+      this.pause();
+    },
+    hideDropdawn() {
+      this.showDropdawnMenu = false;
+      this.resume();
     }
   },
   created() {
     this.$store.dispatch("stories/resetPageState");
     this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+  },
+  mounted() {
+    this.popupItem = this.$el.querySelector(".more-functions");
+  },
+  directives: {
+    ClickOutside
   },
   watch: {
     stories() {
