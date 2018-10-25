@@ -70,7 +70,7 @@
           </a>
           <span class="time"></span>
         </div>
-      </div>    
+      </div>
       <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
       <div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">
         <template v-if="isOwner(author.id)">
@@ -80,6 +80,7 @@
         </template>
         <button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>
       </div>
+
       <div class="bottom-btns">
         <template v-if="!isOwner(author.id) && author.canEarn">
           <button type="button" class="btn-tip"></button>
