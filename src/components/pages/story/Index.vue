@@ -71,31 +71,15 @@
           <span class="time"></span>
         </div>
       </div>
-      <div class="more-functions">
-        <div class="more-functions__overlay"></div>
-        <div class="more-functions__btn" @click="toggleDropdawnMenu"></div>
-        <div class="more-functions__dropdown">
-          <div class="more-functions__dropdown-inside">
-            <ul>
-              <template v-if="isOwner(author.id)">
-                <li><button class="deleteStory" type="button" @click="deleteStory">Delete</button></li>
-                <li><button class="saveFile" type="button" @click="saveFile">Save</button></li>
-                <li><button class="storySettings" type="button" @click="storySettings">Story Settings</button></li>
-              </template>
-              <li><button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button></li>
-            </ul>
-          </div>
-        </div>
+      <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
+      <div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">
+        <template v-if="isOwner(author.id)">
+          <button class="deleteStory" type="button" @click="deleteStory">Delete</button>
+          <button class="saveFile" type="button" @click="saveFile">Save</button>
+          <button class="storySettings" type="button" @click="storySettings">Story Settings</button>
+        </template>
+        <button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>
       </div>
-      <!--<span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>-->
-      <!--<div :class="['dropdown-menu', { hidden: !showDropdawnMenu }]">-->
-        <!--<template v-if="isOwner(author.id)">-->
-          <!--<button class="deleteStory" type="button" @click="deleteStory">Delete</button>-->
-          <!--<button class="saveFile" type="button" @click="saveFile">Save</button>-->
-          <!--<button class="storySettings" type="button" @click="storySettings">Story Settings</button>-->
-        <!--</template>-->
-        <!--<button class="cancelDropdown" type="button" @click="toggleDropdawnMenu">Cancel</button>-->
-      <!--</div>-->
 
       <div class="bottom-btns">
         <template v-if="!isOwner(author.id) && author.canEarn">
