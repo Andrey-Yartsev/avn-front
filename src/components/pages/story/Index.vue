@@ -259,6 +259,7 @@ export default {
     resetState: function() {
       if (this.timer) {
         this.timer.kill();
+        delete this.timer;
       }
 
       this.deactivateVideoEvents();
