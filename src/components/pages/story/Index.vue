@@ -312,23 +312,15 @@ export default {
     },
 
     deleteStory: function() {
-      // var currentModel = this.collection.at(this.collection.activeIndex);
-      // currentModel.destroy().then(
-      //   function() {
-      //     $.toast({
-      //       text: "Story deleted",
-      //       position: "top-center",
-      //       icon: "success"
-      //     });
-      //   },
-      //   function() {
-      //     $.toast({
-      //       text: "Story deletion failed",
-      //       position: "top-center",
-      //       icon: "error"
-      //     });
-      //   }
-      // );
+      this.$store.dispatch("stories/deletePost", {
+        postId: this.currentStory.id
+      });
+
+      this.close();
+
+      this.$store.dispatch("global/flashToast", "Story deleted", {
+        root: true
+      });
     },
 
     storySettings: function() {
