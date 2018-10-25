@@ -177,19 +177,33 @@
 
 .add-new-form {
   position: relative;
+  z-index: 1;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    background: $white;
     overflow: hidden;
     display: flex;
     padding: 15px 0 15px 60px;
     border-radius: 5px;
     box-shadow: 0 8px 30px rgba(#000, 0.1);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -2px; right: -2px;
+    top: -2px;
+    bottom: -2px;
+    display: none;
+    z-index: -1;
     background: linear-gradient(
                     30deg,
                     $secondary-color-12 10%,
                     $primary-color-12 90%
     );
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: block;
+    }
   }
 
   .popup & {

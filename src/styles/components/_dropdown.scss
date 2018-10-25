@@ -78,6 +78,10 @@
 
     &-text {
       flex: 0 0 100%;
+
+      &:empty {
+        display: none;
+      }
     }
 
     &:before {
@@ -181,7 +185,8 @@
 
           &.deletePost,
           &.report,
-          &.menu-block {
+          &.menu-block,
+          &.deleteStory {
             color: $primary-color;
             opacity: 1;
           }

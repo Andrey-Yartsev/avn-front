@@ -70,7 +70,7 @@
           </a>
           <span class="time"></span>
         </div>
-      </div>    
+      </div>
       <span class="story-dropdown-menu-btn" @click="toggleDropdawnMenu"></span>
       <div :class="['more-functions', { open: showDropdawnMenu }]">
         <div class="more-functions__overlay"></div>
@@ -88,6 +88,7 @@
           </div>
         </div>
       </div>
+
       <div class="bottom-btns">
         <template v-if="!isOwner(author.id) && author.canEarn">
           <button type="button" class="btn-tip"></button>

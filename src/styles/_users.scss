@@ -74,9 +74,9 @@
         }
         &:empty {
           background: linear-gradient(
-            30deg,
-            $secondary-color-12 10%,
-            $primary-color-12 90%
+                          30deg,
+                          $secondary-color-12 10%,
+                          $primary-color-12 90%
           );
         }
       }
@@ -131,6 +131,7 @@
   }
 
   .names-actions-wrapper {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0 0 9px;
     }
@@ -262,6 +263,7 @@
   }
 
   .subscribePaidView {
+
     &:empty {
       display: none;
     }
@@ -295,35 +297,6 @@
       display: flex;
       flex-wrap: nowrap;
       padding: 14px 0 0;
-    }
-  }
-  .dropdown-menu-btn {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background: none;
-      padding: 0;
-      border: none;
-      opacity: 0.3;
-      cursor: pointer;
-      position: relative;
-      width: 23px;
-      height: 30px;
-      margin-left: 13px;
-    }
-    &:before {
-      content: "";
-      @include position-center;
-      height: 4px;
-      width: 16px;
-      background-image: radial-gradient(
-        circle,
-        $main-color 50%,
-        transparent 50%
-      );
-      background-size: 6px 4px;
-      background-position: 5px 0;
     }
   }
 

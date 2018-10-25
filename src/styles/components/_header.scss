@@ -45,7 +45,7 @@
         position: fixed;
         left: 0; right: 0;
         top: 0;
-        
+
         .login,
         .register {
           color: #fff;
@@ -678,115 +678,137 @@
       content: "\E600";
     }
   }
-  .SearchResultsPopupCollectionView {
+}
+
+.SearchResultsPopupCollectionView {
+  position: absolute;
+  background: $white;
+
+  &:before {
+    content: "";
     position: absolute;
-    background: $white;
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-    }
+    top: 0;
+
     @include media-breakpoint-down($desktop-breakpoint) {
-      left: 0;
-      right: 0;
-      top: 44px;
-      padding: 17px 15px 22px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      height: calc(100vh - 44px);
-
-      .scroll-top & {
-        height: 100vh;
-      }
-
-      &:before {
-        left: 15px;
-        right: 15px;
-        height: 1px;
-        background: rgba($gray, 0.2);
-      }
+      left: 15px;
+      right: 15px;
+      height: 1px;
+      background: rgba($gray, 0.2);
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      left: -30px;
-      top: 47px;
-      width: 320px;
-      box-shadow: 0 6px 30px rgba(#000, 0.15);
-      border-radius: 5px;
-      padding: 17px 20px 22px;
-      &:before {
-        border-bottom: 12px solid $white;
-        border-left: 12px solid transparent;
-        border-right: 12px solid transparent;
-        left: 40px;
-        margin-top: -12px;
-      }
+      border-bottom: 12px solid $white;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      left: 40px;
+      margin-top: -12px;
     }
-    .users {
-      padding: 0 0 2px;
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 20px 2px 0;
-      }
-    }
-    .user-login {
-      margin-left: 0;
-    }
-    .SearchResultsPopupView {
-      a {
-        display: block;
-        position: relative;
-        padding: 0 0 0 40px;
-        color: inherit;
-        margin: 0 0 13px;
-        .avatar {
-          position: absolute;
-          left: 0;
-          top: 3px;
-          font-size: 30px;
-          transition: transform 0.3s ease;
-        }
-        &:hover {
-          .avatar {
-            transform: scale(1.2);
-          }
-        }
+  }
 
-        .user {
-          &__name {
-            display: flex;
-            align-items: center;
-            align-content: center;
-          }
-        }
-      }
+  @include media-breakpoint-down($desktop-breakpoint) {
+    left: 0;
+    right: 0;
+    top: 44px;
+    padding: 17px 15px 22px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    height: calc(100vh - 44px);
+
+    .scroll-top & {
+      height: 100vh;
     }
-    .search-all-link {
-      a {
-        span {
-          color: $main-color;
-        }
-      }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    left: -30px;
+    top: 47px;
+    width: 320px;
+    box-shadow: 0 6px 30px rgba(#000, 0.15);
+    border-radius: 5px;
+    padding: 17px 20px 22px;
+  }
+
+  .users {
+    padding: 0 0 2px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 20px 2px 0;
     }
-    .close {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-      @include media-breakpoint-up($desktop-breakpoint) {
+  }
+
+  .user-login {
+    margin-left: 0;
+  }
+
+  .SearchResultsPopupView {
+
+    a {
+      display: block;
+      position: relative;
+      padding: 0 0 0 40px;
+      color: inherit;
+      margin: 0 0 13px;
+
+      .avatar {
         position: absolute;
-        right: 0;
-        top: 0;
-        opacity: 0.3;
-        color: inherit;
-        padding: 15px 18px;
-        font-size: 24px;
-        background: none;
-        border: none;
-        transition: opacity 0.3s ease;
-        &:before {
-          content: "\E605";
-          @include icon-font;
+        left: 0;
+        top: 3px;
+        font-size: 30px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+
+        .avatar {
+          transform: scale(1.2);
         }
-        &:hover {
-          opacity: 1;
+      }
+
+      .user {
+
+        &__name {
+          display: flex;
+          align-items: center;
+          align-content: center;
         }
+      }
+    }
+  }
+
+  .search-all-link {
+
+    a {
+
+      span {
+        color: $main-color;
+      }
+    }
+  }
+
+  .close {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: 0.3;
+      color: inherit;
+      padding: 15px 18px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      transition: opacity 0.3s ease;
+
+      &:before {
+        content: "\E605";
+        @include icon-font;
+      }
+
+      &:hover {
+        opacity: 1;
       }
     }
   }
@@ -856,10 +878,6 @@
       width: 80px;
     }
 
-    &.active {
-      border-color: $secondary-color;
-    }
-
     span {
       opacity: 0.4;
       transition: opacity 0.3s ease;
@@ -876,6 +894,11 @@
         transition: opacity 0.3s ease;
       }
     }
+
+    &.active {
+      border-color: $secondary-color;
+    }
+
     &.active,
     &:hover {
       color: $primary-color;
@@ -1029,10 +1052,6 @@
     bottom: 0;
     transition: transform 0.4s ease;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 70px);
-    }
-
     .sidebar-shown & {
       transform: translate(0, 0);
     }
@@ -1042,6 +1061,7 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: calc(100vh - 70px);
       box-shadow: 0 6px 30px rgba(#000, 0.15);
       overflow-y: auto;
       transform: translate(0, 20px);

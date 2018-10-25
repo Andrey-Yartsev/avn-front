@@ -49,9 +49,9 @@
   &:before {
     top: 0;
     background: linear-gradient(
-      to bottom,
-      rgba(#000, 0.2) 0%,
-      transparent 100%
+                    to bottom,
+                    rgba(#000, 0.2) 0%,
+                    transparent 100%
     );
   }
   &:after {
@@ -280,51 +280,61 @@
       font-weight: 500;
     }
   }
-  .story-dropdown-menu-btn {
+
+  .more-functions {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 55px;
-    height: 55px;
-    opacity: 0.7;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    background: none;
-    padding: 0;
-    border: none;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 60px;
-      height: 60px;
-    }
-    &:before {
-      content: "";
-      @include position-center;
-      height: 4px;
-      width: 16px;
-      background-image: radial-gradient(circle, #fff 50%, transparent 50%);
-      background-size: 6px 4px;
-      background-position: 5px 0;
+
+    &__btn {
+      width: 55px;
+      height: 55px;
+      opacity: .7;
+
       @include media-breakpoint-up($desktop-breakpoint) {
-        height: 6px;
-        width: 20px;
-        background-size: 7px 6px;
-        background-position: 7px 0;
+        width: 60px;
+        height: 60px;
       }
-    }
-  }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    .dropdown-menu {
-      right: 3px;
-      margin-top: 3px;
-      bottom: 70px;
+
       &:before {
-        border-bottom: none;
-        border-top: 12px solid $white;
-        bottom: -12px;
-        top: inherit;
+        @include settings-dots(#fff, 1);
+        background-size: 7px 6px;
+        background-position: 6px 0;
+        margin: 0;
+        width: 20px;
+        height: 6px;
+      }
+    }
+
+    &__dropdown {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 5px;
+        top: auto;
+        bottom: 100%;
+        transform: translateY(-20px);
+        padding-top: 0;
+        padding-bottom: 8px;
+      }
+
+      &-inside {
+
+        &:after {
+          top: auto;
+          bottom: 0;
+          border-left-color: transparent;
+          border-top-color: transparent;
+          border-right: 1px solid rgba(124, 139, 150, 0.2);
+          border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            right: 19px;
+          }
+        }
       }
     }
   }
+
   .btn-copy-link {
     animation: copy-link 0.5s;
     &.copied {
