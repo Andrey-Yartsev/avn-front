@@ -81,6 +81,14 @@ const buildMutations = (prefix, mutations, resultKey) => {
   mutations[prefix + "Success"] = (state, value) => {
     state[prefix + "Success"] = value;
   };
+  mutations[prefix + "Reset"] = (state, value) => {
+    state[prefix + "Error"] = null;
+    state[prefix + "Loading"] = false;
+    state[prefix + "Success"] = null;
+    if (resultKey) {
+      state[resultKey] = value;
+    }
+  };
   if (resultKey) {
     mutations[resultKey] = (state, value) => {
       state[resultKey] = value;
@@ -128,6 +136,10 @@ const createRequestAction = ({
         resultConvert
       }
     );
+  };
+
+  actions[prefix + "Reset"] = function({ commit }) {
+    commit(prefix + "Reset");
   };
 
   if (!defaultResultValue) {

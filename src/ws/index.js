@@ -4,10 +4,12 @@ import moment from "moment";
 
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
+import payoutsApproved from "./actions/payoutsApproved";
 
 const actions = {
   chats,
-  new_notification
+  new_notification,
+  payoutsApproved
 };
 
 export default () => {
@@ -27,6 +29,7 @@ export default () => {
   };
   ws.onmessage = r => {
     const data = JSON.parse(r.data);
+    // console.log(data);
     const keys = Object.keys(data);
     for (let key of keys) {
       if (actions[key]) {
