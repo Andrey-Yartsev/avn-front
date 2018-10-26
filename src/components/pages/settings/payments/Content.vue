@@ -19,7 +19,7 @@
               <Loader :fullscreen="false" text="" class="transparent small" />
             </div>
 
-            <div class="shadow-block border-top no-padding" v-else>
+            <div class="shadow-block border-top no-padding" v-else-if="card">
               <div class="container">
                 <div class="cards-list">
                   <div class="item visa" :class="getCardType(card)">
@@ -126,22 +126,22 @@ export default {
       return this.user.isPaymentCardConnected;
     },
     cardLoading() {
-      return this.$store.state.card.fetchLoading;
+      return this.$store.state.payment.card.fetchLoading;
     },
     cardDeleting() {
-      return this.$store.state.card.deleteRequestLoading;
+      return this.$store.state.payment.card.deleteRequestLoading;
     },
     card() {
-      return this.$store.state.card.card;
+      return this.$store.state.payment.card.card;
     },
     transactions() {
-      if (!this.$store.state.transactions.fetchResult) {
+      if (!this.$store.state.payment.transactions.fetchResult) {
         return [];
       }
-      return this.$store.state.transactions.fetchResult.list;
+      return this.$store.state.payment.transactions.fetchResult.list;
     },
     transactionsLoading() {
-      return this.$store.state.transactions.fetchLoading;
+      return this.$store.state.payment.transactions.fetchLoading;
     }
   },
 
@@ -150,7 +150,7 @@ export default {
       return name.charAt(0).toUpperCase() + name.slice(1);
     },
     deleteCard() {
-      this.$store.dispatch("card/delete");
+      this.$store.dispatch("payment/card/delete");
     },
     dt(date) {
       return dateFns.format(new Date(date), "DD MMM");
@@ -216,9 +216,9 @@ export default {
 
   created() {
     if (this.cardConnected) {
-      this.$store.dispatch("card/fetch");
+      this.$store.dispatch("payment/card/fetch");
     }
-    this.$store.dispatch("transactions/fetch");
+    this.$store.dispatch("payment/transactions/fetch");
   }
 };
 </script>
