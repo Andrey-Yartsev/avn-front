@@ -29,6 +29,9 @@
 }
 
 .stories-wrapper {
+  position: relative;
+  z-index: 0;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     display: flex;
     flex: 1;
@@ -407,7 +410,7 @@
   flex: 0 0 100%;
   max-width: 100%;
   background: $white
-    linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+  linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
   position: relative;
   overflow: hidden;
   display: none;
@@ -485,22 +488,22 @@
 .stories {
 
   &.explore-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -3px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -3px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        background: $light;
-        overflow: hidden;
-        padding: 3px 0 0;
-        box-shadow: 0 -3px 5px rgba(#000, 0.08);
-        min-height: calc(100vh - 148px);
-        align-items: flex-start;
-        align-content: flex-start;
-      }
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background: $light;
+      overflow: hidden;
+      padding: 3px 0 0;
+      box-shadow: 0 -3px 5px rgba(#000, 0.08);
+      min-height: calc(100vh - 148px);
+      align-items: flex-start;
+      align-content: flex-start;
+    }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 -10px;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0 -10px;
+    }
   }
 }

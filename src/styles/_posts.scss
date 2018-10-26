@@ -27,6 +27,14 @@
   .posts & {
     padding: 0 0 12px;
     border-bottom: 1px solid rgba($gray, 0.2);
+    position: relative;
+    z-index: 0;
+
+    &.open-dropdown-inside {
+      z-index: 2;
+      position: inherit;
+    }
+
     &:last-child {
       border-bottom: none;
     }
@@ -256,16 +264,7 @@
         font-weight: 400;
       }
     }
-    .likes {
-      &:before {
-        content: "\E616";
-      }
-    }
-    .comments {
-      &:before {
-        content: "\E617";
-      }
-    }
+
     .tips {
       &:before {
         content: "\E618";
@@ -464,9 +463,9 @@
   cursor: pointer;
   color: $primary-color;
   background: linear-gradient(
-    30deg,
-    $secondary-color-20 10%,
-    $primary-color-20 90%
+                  30deg,
+                  $secondary-color-20 10%,
+                  $primary-color-20 90%
   );
   position: relative;
   &:before {
@@ -525,7 +524,7 @@
   &:hover {
 
     &:after {
-     opacity: 1;
+      opacity: 1;
     }
   }
 

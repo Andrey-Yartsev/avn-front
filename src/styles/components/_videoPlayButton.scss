@@ -1,20 +1,3 @@
-.play-button-wrapper {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 3;
-}
-
-.play-button-outer {
-  margin: 50% auto;
-  width: 10em;
-  height: 10em;
-  background-color: rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  padding-left: 10px;
-  border-radius: 100px;
-}
-
 .play-button {
   margin: 0 auto;
   top: 25%;
@@ -25,12 +8,29 @@
   border-width: 2.5em 0 2.5em 5em;
   border-color: transparent transparent transparent #fff;
   opacity: 0.75;
-}
 
-.play-button-outer:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+  }
 
-.play-button-outer:hover .play-button {
-  opacity: 1;
+  &-outer {
+    margin: 50% auto;
+    width: 10em;
+    height: 10em;
+    background-color: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    padding-left: 10px;
+    border-radius: 100px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+
+      .play-button {
+        opacity: 1;
+      }
+    }
+  }
 }

@@ -1,12 +1,16 @@
 @import "components/imports";
+
 .videos {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     display: flex;
     flex-wrap: wrap;
     margin-left: -30px;
   }
 }
+
 .videoCollectionView {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 4px;
   }
@@ -34,6 +38,20 @@
     cursor: pointer;
     width: calc(33.33% - 30px);
     margin: 0 0 30px 30px;
+  }
+
+  .videoplayer {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+
+  .postLink {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: block;
+    }
   }
 
   figure {
@@ -157,27 +175,6 @@
         font-weight: 500;
         padding: 0 18%;
         z-index: 1;
-        .likes,
-        .comments {
-          &:before {
-            @include icon-font;
-            font-size: 24px;
-            line-height: 0;
-            vertical-align: middle;
-            font-weight: 400;
-            margin-right: 5px;
-          }
-        }
-        .likes {
-          &:before {
-            content: "\E616";
-          }
-        }
-        .comments {
-          &:before {
-            content: "\E617";
-          }
-        }
       }
     }
   }

@@ -79,10 +79,15 @@
     font-weight: 500;
     padding: 0 18%;
     z-index: 3;
+
     .likes,
     .views {
       display: inline-flex;
       align-items: center;
+    }
+
+    .views {
+
       &:before {
         @include icon-font;
         font-size: 24px;
@@ -90,16 +95,6 @@
         vertical-align: middle;
         font-weight: 400;
         margin-right: 5px;
-      }
-    }
-    .likes {
-      &:before {
-        content: "\E616";
-      }
-    }
-    .views {
-      &:before {
-        content: "\E633";
       }
     }
   }

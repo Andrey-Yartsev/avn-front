@@ -1,6 +1,5 @@
 .verified-user {
   margin: 0 0 0 5px;
-  line-height: 0;
   display: inline-block;
   vertical-align: middle;
   color: $secondary-color;
@@ -90,13 +89,13 @@
     &:after {
       z-index: -1;
       background: linear-gradient(
-            to top,
-            #9466ff 0%,
-            $default-secondary-color 100%
-          )
-          100% no-repeat,
-        linear-gradient(to bottom, $default-primary-color 0%, #9466ff 100%) 0
-          no-repeat;
+                      to top,
+                      #9466ff 0%,
+                      $default-secondary-color 100%
+      )
+      100% no-repeat,
+      linear-gradient(to bottom, $default-primary-color 0%, #9466ff 100%) 0
+      no-repeat;
       background-size: 50% 100%;
       content: "";
       position: absolute;

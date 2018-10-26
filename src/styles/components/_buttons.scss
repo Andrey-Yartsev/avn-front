@@ -441,3 +441,30 @@ button,
     }
   }
 }
+
+.likes,
+.comments {
+  display: inline-block;
+
+  &:before {
+    @include icon-font;
+    font-size: 24px;
+    line-height: 0;
+    vertical-align: middle;
+    font-weight: 400;
+    margin-right: 5px;
+  }
+}
+
+.likes {
+
+  &:before {
+    content: "\E616";
+  }
+}
+.comments {
+
+  &:before {
+    content: "\E617";
+  }
+}
