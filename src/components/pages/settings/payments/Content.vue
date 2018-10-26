@@ -19,7 +19,7 @@
               <Loader :fullscreen="false" text="" class="transparent small" />
             </div>
 
-            <div class="shadow-block border-top no-padding" v-else>
+            <div class="shadow-block border-top no-padding" v-else-if="card">
               <div class="container">
                 <div class="cards-list">
                   <div class="item visa" :class="getCardType(card)">
