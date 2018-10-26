@@ -286,6 +286,17 @@
     right: 0;
     bottom: 0;
 
+    &.open {
+
+      .more-functions__btn {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
     &__btn {
       width: 55px;
       height: 55px;
