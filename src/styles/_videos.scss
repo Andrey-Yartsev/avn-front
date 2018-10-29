@@ -1,5 +1,28 @@
 @import "components/imports";
 
+.videoplayer {
+  position: relative;
+
+  &.clicked {
+    &:after {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &:after {
+    content: "\E661";
+    @include icon-font;
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    font-size: 40px;
+    color: #fff;
+    opacity: 0.8;
+    transition: all 0.3s;
+  }
+}
+
 .videos {
 
   @include media-breakpoint-up($desktop-breakpoint) {

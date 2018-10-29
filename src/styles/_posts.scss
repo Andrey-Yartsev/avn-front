@@ -1,29 +1,16 @@
 @import "components/imports";
 
-.videoplayer {
-  position: relative;
-
-  &.clicked {
-    &:after {
-      opacity: 0;
-      visibility: hidden;
-    }
+@keyframes copy-link {
+  0% {
+    color: transparent;
   }
-
-  &:after {
-    content: "\E661";
-    @include icon-font;
-    position: absolute;
-    left: 15px;
-    bottom: 10px;
-    font-size: 40px;
-    color: #fff;
-    opacity: 0.8;
-    transition: all 0.3s;
+  100% {
+    color: inherit;
   }
 }
 
 .post {
+
   .posts & {
     padding: 0 0 12px;
     border-bottom: 1px solid rgba($gray, 0.2);
@@ -40,17 +27,7 @@
     }
   }
 
-  &.postPage {
-    .media {
-      img {
-        &.locked {
-          height: 50vh;
-        }
-      }
-    }
-  }
-
-  .post-header {
+  &-header {
     display: flex;
     align-items: center;
     position: relative;
@@ -64,11 +41,31 @@
       padding: 14px 50px 14px 15px;
       z-index: 2;
     }
+
+    .postPage & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 5px;
+        padding-bottom: 16px;
+
+        &:after {
+          content: "";
+          background: rgba($gray, 0.2);
+          height: 1px;
+          position: absolute;
+          bottom: 0;
+          left: 15px;
+          right: 15px;
+        }
+      }
+    }
+
     .avatar {
       font-size: 30px;
       flex: 0 0 30px;
       margin: 0 10px 0 0;
     }
+
     .user-login {
       margin-left: 5px;
 
@@ -77,150 +74,23 @@
       }
     }
   }
+
   .text {
     padding: 0 15px 4px;
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 15px 2px;
+      padding-bottom: 2px;
+    }
+
+    .postPageWrapper & {
+      padding-bottom: 7px;
     }
 
     &:empty {
       display: none;
     }
   }
-  .media {
-    margin: 7px 0 0;
-    position: relative;
-    overflow: hidden;
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      background: #fff;
-
-      .postCollectionView & {
-        &.locked {
-          height: 50vh;
-        }
-      }
-    }
-
-    video {
-      width: 100%;
-      max-height: calc(100vh - 100px);
-      display: block;
-
-      .postCollectionView & {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-height: calc(100vh - 200px);
-        }
-      }
-    }
-
-    .media-slider {
-      .media-item {
-        display: none;
-        &.active {
-          display: block;
-        }
-      }
-    }
-    .media-slider-pagination {
-      position: absolute;
-      bottom: 6px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      @include media-breakpoint-up($desktop-breakpoint) {
-        bottom: 10px;
-      }
-      .item {
-        width: 6px;
-        height: 6px;
-        margin: 0 3px;
-        border-radius: 1000px;
-        background: #fff;
-        opacity: 0.5;
-        transition: opacity 0.3s ease;
-        cursor: pointer;
-        position: relative;
-        box-shadow: 2px 2px 5px rgba(#000, 0.1);
-        &:before {
-          position: absolute;
-          left: -3px;
-          right: -3px;
-          top: -3px;
-          bottom: -3px;
-          content: "";
-        }
-        &.active,
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
-    .media-slider-navigation {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-      .btn-prev,
-      .btn-next {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 45px;
-        color: #fff;
-        font-size: 36px;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-        filter: drop-shadow(2px 2px 5px rgba(#000, 0.4));
-        &:before {
-          @include icon-font;
-          @include position-center;
-        }
-        &:hover {
-          opacity: 1;
-        }
-      }
-      .btn-prev {
-        left: 0;
-        &:before {
-          content: "\E645";
-        }
-      }
-      .btn-next {
-        right: 0;
-        &:before {
-          content: "\E643";
-        }
-      }
-    }
-    &-item {
-      background: #fff;
-      text-align: center;
-
-      .postLink {
-        display: inline-block;
-        position: relative;
-        vertical-align: top;
-      }
-    }
-    .gif-player {
-      position: relative;
-      .gif-img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background: #fff;
-      }
-    }
-  }
   .actions {
     padding: 10px 15px 8px;
     position: relative;
@@ -308,16 +178,42 @@
     cursor: pointer;
     margin: 0 15px;
   }
+
   .comment-form {
     display: flex;
     padding: 10px 15px 25px;
+    position: relative;
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 5px 15px 20px;
-      .comment-btn {
+      padding-top: 5px;
+      padding-bottom: 20px;
+    }
+
+    .postPageWrapper & {
+      padding-top: 15px;
+      padding-bottom: 9px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: $white;
+        z-index: 10;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        box-shadow: 0 -3px 2px rgba(#000, 0.05);
+      }
+    }
+
+    .comment-btn {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         width: 80px;
         flex: 0 0 80px;
       }
     }
+
     .comment-input {
       margin: 0 15px 0 0;
       height: 30px;
@@ -385,12 +281,274 @@
   }
 }
 
-@keyframes copy-link {
-  0% {
-    color: transparent;
+.media {
+  margin: 7px 0 0;
+  position: relative;
+  overflow: hidden;
+
+  .postPage & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 4px 0 0;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
   }
-  100% {
-    color: inherit;
+
+  video,
+  img {
+
+    .postPage & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        display: block;
+      }
+
+      @media (min-height: 560px) and (min-width: 768px) {
+        max-height: calc(100vh - 120px);
+      }
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    background: #fff;
+
+    &.locked {
+
+      .postCollectionView & {
+        height: 50vh;
+      }
+
+      .postPage & {
+        height: 50vh;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 440px;
+        }
+      }
+    }
+  }
+
+  video {
+    width: 100%;
+    max-height: calc(100vh - 100px);
+    display: block;
+
+    .postCollectionView & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 200px);
+      }
+    }
+  }
+
+  &-item {
+    display: none;
+
+    &.active {
+      display: block;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;
+      }
+    }
+  }
+
+  &-slider {
+
+    &-pagination {
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: 10px;
+      }
+
+      .postPage & {
+        bottom: 7px;
+
+        @include media-breakpoint-up($tablet-breakpoint) {
+          bottom: 24px;
+        }
+      }
+
+      .item {
+        width: 6px;
+        height: 6px;
+        margin: 0 3px;
+        border-radius: 1000px;
+        background: #fff;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 2px 2px 5px rgba(#000, 0.1);
+
+        .postPage & {
+          width: 6px;
+          height: 6px;
+          margin: 0 3px;
+
+          @include media-breakpoint-up($tablet-breakpoint) {
+            width: 8px;
+            height: 8px;
+            margin: 0 5px;
+          }
+        }
+
+        &:before {
+          position: absolute;
+          left: -3px;
+          right: -3px;
+          top: -3px;
+          bottom: -3px;
+          content: "";
+        }
+
+        &.active,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    &-navigation {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+
+      .btn-prev,
+      .btn-next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 45px;
+        color: #fff;
+        font-size: 36px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        filter: drop-shadow(2px 2px 5px rgba(#000, 0.4));
+
+        .postPage & {
+          width: 56px;
+          font-size: 44px;
+        }
+
+        &:before {
+          @include icon-font;
+          @include position-center;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .btn-prev {
+        left: 0;
+        &:before {
+          content: "\E645";
+        }
+      }
+      .btn-next {
+        right: 0;
+        &:before {
+          content: "\E643";
+        }
+      }
+    }
+  }
+
+  &-item {
+    background: #fff;
+    text-align: center;
+
+    .postLink {
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
+    }
+  }
+  .gif-player {
+    position: relative;
+    .gif-img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+  }
+
+
+  & + .right-col {
+    &,
+    .popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 1 360px;
+        width: 360px;
+      }
+    }
+
+    .comments-list {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        top: 0;
+        bottom: 0;
+        padding: 0;
+      }
+
+      .comment {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 100%;
+        }
+
+        .postPage & {
+          position: relative;
+          padding-left: 40px;
+        }
+      }
+    }
+
+    .load-more-comments {
+      & + .comments-list {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          top: 16px;
+        }
+      }
+    }
   }
 }
 
@@ -398,16 +556,55 @@
   padding: 0 15px 9px;
 
   .postPage & {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-bottom: 53px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+    }
+  }
+
+  &.scrolly {
+
+    .scrolly-viewport {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: relative;
+        height: auto;
+      }
     }
   }
 
   .comment {
     padding: 8px 0 0;
-    .comment-body {
+
+    &-body {
       padding-right: 35px;
     }
+
+    &-text {
+      display: inline;
+      word-break: break-all;
+    }
+
+    &-footer {
+      font-size: 11px;
+      display: flex;
+      padding: 2px 24px 3px 0;
+
+      .date {
+        font: inherit;
+        margin-right: 20px;
+      }
+
+      .likes-count {
+        opacity: .5;
+        margin-right: 20px;
+      }
+    }
+
     .name {
       max-width: 55%;
       padding: 0 4px 0 0;
@@ -421,40 +618,36 @@
         }
       }
     }
-    .comment-text {
-      display: inline;
-      word-break: break-all;
-    }
-    .comment-footer {
-      font-size: 11px;
-      display: flex;
-      padding: 2px 24px 3px 0;
-      & > * {
-        opacity: 0.5;
-      }
-      .date {
-        padding: 0;
-        font: inherit;
-        margin-right: 20px;
-      }
-      .likes-count {
-        margin-right: 20px;
-      }
-      .btn-reply {
-        border: none;
-        background: none;
-        padding: 0;
-        color: inherit;
-        transition: color 0.3s ease, opacity 0.3s ease;
 
-        &:hover {
-          opacity: 1;
-          color: $secondary-color;
+    .postPage & {
+
+      .comment {
+        margin: 6px 0;
+        width: auto;
+        padding-left: 30px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 0 0 2px;
+        }
+
+        .avatar {
+          font-size: 20px;
         }
       }
     }
   }
+
+  .avatar {
+
+    .postPage & {
+      font-size: 30px;
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+  }
 }
+
 .new-post-toast {
   display: block;
   text-align: center;
@@ -468,6 +661,11 @@
                   $primary-color-20 90%
   );
   position: relative;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 7px 0;
+  }
+
   &:before {
     position: absolute;
     left: 0;
@@ -478,12 +676,11 @@
     background: $light;
     opacity: 0.3;
   }
+
   span {
     position: relative;
   }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 7px 0;
-  }
+
 }
 
 .guest-comments-form {
