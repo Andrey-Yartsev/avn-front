@@ -1,10 +1,12 @@
 <template>
-    <div class="post" :data-id="post.id">
+    <div :class="['post', {'open-dropdown-inside': showDropdawn}]" :data-id="post.id">
         <div class="post-details">
             <Header
               :postId="post.id"
               :user="post.author"
               :from="from"
+              @openDropdawn="showDropdawn = true"
+              @hideDropdawn="showDropdawn = false"
             />
             <p class="text">{{ post.text }}</p>
             <Media
@@ -40,7 +42,8 @@ export default {
   name: "Post",
   data: function() {
     return {
-      showAddCommentForm: false
+      showAddCommentForm: false,
+      showDropdawn: false
     };
   },
   components: {

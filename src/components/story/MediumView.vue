@@ -33,12 +33,10 @@ export default {
   },
   computed: {
     image() {
-      const { post } = this;
-      return post.mediaThumb
-        ? post.mediaThumb
-        : post.mediaPreview
-          ? post.mediaPreview
-          : post.mediaSrc;
+      const {
+        post: { mediaThumb, mediaPreview, mediaSrc }
+      } = this;
+      return mediaThumb || mediaPreview || mediaSrc;
     }
   }
 };

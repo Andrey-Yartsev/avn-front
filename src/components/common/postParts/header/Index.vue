@@ -11,8 +11,8 @@
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
     <div :class="['more-functions', {open: opened}]"  v-click-outside="hide">
-      <div class="more-functions__overlay" @click="opened = false"></div>
-      <div class="more-functions__btn" @click="opened = true">
+      <div class="more-functions__overlay" @click="hide"></div>
+      <div class="more-functions__btn" @click="open">
         <div class="more-functions__btn-text"></div>
       </div>
       <div class="more-functions__dropdown">
@@ -53,8 +53,13 @@ export default {
     }
   },
   methods: {
+    open() {
+      this.opened = true;
+      this.$emit("openDropdawn");
+    },
     hide() {
       this.opened = false;
+      this.$emit("hideDropdawn");
     }
   },
   mounted() {
