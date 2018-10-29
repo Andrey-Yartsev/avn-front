@@ -1,6 +1,6 @@
 <template>
   <div :class="['addPost', {loaderWrap: isSaving}]">
-    <form :class="['add-new-form', { expanded: expanded }]">
+    <form :class="['add-new-form', { expanded: expanded || initialExpanded }]">
       <div class="addPost-header">
         <button type="button" class="header-return-btn go-back"></button>
         <h1 class="page-title">New Post</h1>
@@ -87,6 +87,12 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav
+  },
+  props: {
+    initialExpanded: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     user() {

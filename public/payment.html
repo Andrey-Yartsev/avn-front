@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OnMyTeam</title>
+    <script type="text/javascript">
+      if (window.self !== window.top) {
+        var params = new URLSearchParams(window.location.search);
+        window.parent.postMessage({
+          status: params.get('success') === '1' ? 'success' : 'fail',
+          code: params.get('code'),
+          message: params.get('message')
+        }, window.location.protocol + '//' + window.location.host);
+      } else {
+        window.location = '/';
+      }
+    </script>
+</head>
+<body>
+</body>
+</html>
