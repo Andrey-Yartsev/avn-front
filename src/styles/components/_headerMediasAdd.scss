@@ -50,6 +50,10 @@
         &.active {
           opacity: 1;
 
+          &:before {
+            color: #fff;
+          }
+
           &:after {
             background-color: #fff;
           }
