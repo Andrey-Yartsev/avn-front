@@ -1,5 +1,10 @@
 <template>
   <div class="postComments">
+    <div class="post-no-comments" v-if="loading === false && !comments.length">
+      <div class="msg-no-content">
+        <div class="msg-no-content__text">No one left a comment yet</div>
+      </div>
+    </div>
     <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
     <scrolly class="comments-list">
       <scrolly-viewport id="vue-comments-list" >
@@ -7,7 +12,7 @@
           v-for="comment in visibleComments"
           :key="comment.id"
           :comment="comment"
-          :type="true"
+          :full="true"
           v-on:commentReply="userName => $emit('commentReply', userName)"
           v-on:likeComment="data => $emit('likeComment', data)"
         />
@@ -43,6 +48,10 @@ export default {
     shownCommentsCount: {
       type: Number,
       default: 0
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

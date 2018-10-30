@@ -36,6 +36,7 @@
           :shownCommentsCount="post.shownCommentsCountFull"
           v-on:commentReply="commentReply"
           v-on:likeComment="likeComment"
+          :loading="commentsLoading"
         />
         <template v-if="isAuth()" >
           <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
@@ -92,6 +93,9 @@ export default {
     },
     accessToken() {
       return "accessToken";
+    },
+    commentsLoading() {
+      return this.post.commentsLoading;
     }
   },
   data: () => ({
