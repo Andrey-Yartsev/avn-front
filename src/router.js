@@ -15,6 +15,7 @@ import SettingsPaymentsPage from "./components/pages/settings/payments/Index";
 import SettingsAccountPage from "./components/pages/settings/account/Index.vue";
 import SettingsStoryPage from "./components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "./components/pages/settings/privacy/Index.vue";
+import SettingsReferralsPage from "./components/pages/settings/referrals/Index.vue";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
@@ -206,6 +207,14 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/privacy",
     component: SettingsPrivacyPage,
+    meta: {
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/referrals",
+    component: SettingsReferralsPage,
     meta: {
       cssName: "settings"
     }

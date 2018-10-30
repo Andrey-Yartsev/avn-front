@@ -1,0 +1,90 @@
+<template>
+  <div class="ReferralsView"><h1 class="form-title">Referral URL
+    <!-- QR temporary hidden -->
+    <!--<button type="button">Show QR</button>-->
+  </h1>
+    <div class="form-title hidden-desktop">
+      <div class="inner">
+        <span class="semi-transparent">
+            Referral URL
+        </span>
+        <!-- QR temporary hidden -->
+        <!-- <button type="button">Show QR</button> -->
+      </div>
+    </div>
+    <div class="border-top shadow-block referrals-link">
+      <a :href="url">{{ url }}</a>
+      <div class="referral-desc">
+        <p class="subtext">Refer creators to OnMyTeam.com and receive 5% of their earnings as a bonus!</p>
+        <button
+          type="button" class="btn border alt btn-copy-url"
+          @click="copyToClipboard"
+        ><span class="hidden-mobile">Copy link</span><span
+          class="hidden-desktop"
+          @click="copyToClipboard"
+        >Copy</span></button>
+      </div>
+    </div>
+    <div class="ReferralsBlockCollectionView">
+      <div class="form-title border-top table-header-title referrals-form-title">
+        <div class="inner">
+        <span class="semi-transparent referrals-text">
+            Referrals
+        </span>
+          <form class="referrals-search">
+            <input type="text" class="rounded sm" placeholder="Search">
+            <button type="submit" disabled=""></button>
+          </form>
+        </div>
+        <div class="table-header referrals-table-header">
+          <div class="user table__cell">
+            User
+          </div>
+          <div class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected">
+            Amount
+          </div>
+          <div class="joined table__cell table__cell_align table__cell_align-hor-c">
+            Joined
+          </div>
+        </div>
+      </div>
+      <div class="shadow-block no-padding">
+        <div class="table-wrapper">
+          <div class="table referrals-table"></div>
+          <div class="empty-table-info shadow-block"><span>Empty here for now</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Common from "../common";
+import execCopy from "@/utils/execCopy";
+
+export default {
+  name: "ReferralsSettingsContent",
+
+  mixins: [Common],
+
+  components: {},
+
+  computed: {
+    url() {
+      return (
+        window.location.origin +
+        "/" +
+        this.user.username +
+        "/?code=" +
+        this.user.referralUrl
+      );
+    }
+  },
+
+  methods: {
+    copyToClipboard() {
+      execCopy(this.url);
+    }
+  }
+};
+</script>

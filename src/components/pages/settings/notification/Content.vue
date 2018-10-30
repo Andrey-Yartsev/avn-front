@@ -138,7 +138,7 @@
 import Common from "../common";
 
 export default {
-  name: "SecuritySettingsContent",
+  name: "NotificationSettingsContent",
 
   mixins: [Common]
 };

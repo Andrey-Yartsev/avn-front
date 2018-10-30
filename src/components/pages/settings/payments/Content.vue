@@ -112,7 +112,7 @@ import Loader from "@/components/common/Loader";
 import dateFns from "date-fns";
 
 export default {
-  name: "PaymentsSettings",
+  name: "PaymentsSettingsContent",
 
   components: {
     Loader

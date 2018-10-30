@@ -73,7 +73,7 @@ import BlockedUsers from "../BlockedUsers";
 import ConnectTwitter from "../ConnectTwitter";
 
 export default {
-  name: "StorySettingsContent",
+  name: "PrivacySettingsContent",
 
   mixins: [Common],
 

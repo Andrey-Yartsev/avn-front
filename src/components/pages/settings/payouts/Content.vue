@@ -22,7 +22,7 @@ import Summery from "./Summery";
 import Unexpected from "./Unexpected";
 
 export default {
-  name: "PayoutsSettings",
+  name: "PayoutsSettingsContent",
 
   mixins: [User],
 
