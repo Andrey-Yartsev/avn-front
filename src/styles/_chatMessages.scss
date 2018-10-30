@@ -287,15 +287,30 @@
   }
 
   &.notAuthorMessage {
+
     .messageWrapper {
+
       .message {
         background-color: rgba(124, 139, 150, 0.2);
         border-radius: 0 20px 20px 0;
+
+        + .media {
+
+          .media-item {
+
+            img,
+            video {
+              border-radius: 0 20px 20px 0;
+            }
+          }
+        }
       }
     }
 
     &.firstMessageInGroup {
+
       .messageWrapper {
+
         .message {
           border-radius: 20px 20px 20px 0;
         }
@@ -305,7 +320,9 @@
     .tipsMessage,
     .unlockedMessage,
     .lockedMessage {
+
       .message {
+
         &:before {
           top: 50%;
           right: -30px;
@@ -316,6 +333,7 @@
     }
 
     &.withTime {
+
       .avatar {
         opacity: 1;
         pointer-events: visible;
@@ -328,15 +346,6 @@
       pointer-events: none;
       margin-top: auto;
     }
-
-    .media {
-      &-item {
-        img,
-        video {
-          border-radius: 0 20px 20px 0;
-        }
-      }
-    }
   }
 
   &.authorMessage {
@@ -345,6 +354,7 @@
     margin-right: 0;
 
     .messageWrapper {
+
       &.lockedMessage {
         opacity: 0.5;
       }
@@ -359,7 +369,10 @@
         }
 
         + .media {
-          &-item {
+
+          .media-item {
+            justify-content: flex-end;
+
             img,
             video {
               border-radius: 20px 0 0 20px;

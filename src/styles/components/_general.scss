@@ -234,6 +234,7 @@ video {
     flex: 0 0 100%;
     margin-bottom: 10px;
     opacity: 0.3;
+    white-space: nowrap;
 
     &:last-child {
       margin-bottom: 0;

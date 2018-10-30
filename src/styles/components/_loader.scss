@@ -1,3 +1,13 @@
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 .lds-dual-ring {
   display: inline-block;
   position: fixed;
@@ -17,27 +27,6 @@
 
     .loader-text {
       color: $main-color;
-    }
-  }
-
-  &:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
-    /*border: 2px solid #fff;
-    border-color: #fff  #fff transparent;*/
-    animation: lds-dual-ring 1.2s linear infinite;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 66px;
-      height: 66px;
     }
   }
 
@@ -64,6 +53,21 @@
     z-index: 11; //just beneath header
   }
 
+  &.small {
+
+    .loader-text {
+
+      &:after {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 40px;
+          height: 40px;
+          margin-top: -40px;
+        }
+      }
+    }
+  }
+
   .loader-text {
     color: #fff;
     font-size: 13px;
@@ -74,50 +78,38 @@
     }
 
     &:after {
-      content: " ";
-      display: block;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
-      animation: lds-dual-ring 1.2s linear infinite;
       margin-top: -50px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        width: 66px;
-        height: 66px;
         margin-top: -60px;
       }
     }
-  }
-
-  &.small {
-    .loader-text {
-      &:after {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 40px;
-          height: 40px;
-          margin-top: 0px;
-        }
-      }
-    }
-  }
-
-}
-
-@keyframes lds-dual-ring {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 .loaderWrap {
   position: relative;
+}
+
+.lds-dual-ring,
+.loader-text {
+
+  &:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
+    animation: lds-dual-ring 1.2s linear infinite;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 66px;
+      height: 66px;
+    }
+  }
 }

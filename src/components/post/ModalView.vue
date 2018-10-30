@@ -4,7 +4,9 @@
       <div class="popup-container post post-popup">
         <div class="previous" @click="index -= 1" v-if="index > 0"></div>
         <div class="content">
-          <PostLargeView :post="post" :from="from" />
+          <div class="postPageWrapper">
+            <PostLargeView :post="post" :from="from" />
+          </div>
         </div>
         <button type="button" class="close" @click="close"></button>
         <div class="next" @click="index += 1" v-if="index + 1 < length"></div>

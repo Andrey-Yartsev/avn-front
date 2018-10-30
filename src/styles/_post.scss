@@ -12,6 +12,7 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     background: none;
     position: relative;
+    max-width: 100%;
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -168,6 +169,7 @@
   margin: 0 auto;
 
   @include media-breakpoint-down($desktop-breakpoint) {
+    width: 100%;
     min-height: 100%;
     position: relative;
     background: $white;

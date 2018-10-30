@@ -366,21 +366,34 @@
   }
 }
 
-.PayoutsLegalDoneView {
-  .shadow-block {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      padding: 9px 0 12px;
-    }
+.shadow-block {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 9px 0 12px;
   }
+
   .set-price {
     text-align: center;
   }
 }
 
 .PayoutsBankDoneView {
+
   .shadow-block {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 8px 0 6px;
+    }
+  }
+
+  .settings-form {
+
+    .shadow-block {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        box-shadow: none;
+        border-top: 1px solid rgba($gray, 0.2);
+      }
     }
   }
 
