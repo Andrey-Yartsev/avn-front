@@ -15,6 +15,7 @@
               :shouldHasLink="true"
               :postId="post.id"
               :openModal="openModal"
+              mediaSize="preview"
             />
             <Actions 
               :post="post" 

@@ -1,6 +1,6 @@
 <template>
   <div src="postLink">
-    <img :src="media.src.source">
+    <img :src="src">
   </div>
 </template>
 

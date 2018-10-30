@@ -8,6 +8,7 @@
                       :media="media"
                       :postId="postId" 
                       :openModal="openModal" 
+                      :mediaSize="mediaSize"
                     />
                 </figure>
             </div>
@@ -18,7 +19,8 @@
                   :is="getMediaViewType(media)"
                   :media="media"
                   :postId="postId" 
-                  :openModal="openModal" 
+                  :openModal="openModal"
+                  :mediaSize="mediaSize"
                 />
             </figure>
         </template>
@@ -77,6 +79,10 @@ export default {
     openModal: {
       type: Function,
       default: undefined
+    },
+    mediaSize: {
+      type: String,
+      required: true
     }
   },
   methods: {

@@ -1,8 +1,8 @@
 <template>
     <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
         <div class="gif-player">
-            <img :src="media.preview.source">
-            <img class="gif-img" :src="media.src.source">
+            <img :src="src">
+            <img class="gif-img" :src="src">
         </div>
     </a>
 </template>

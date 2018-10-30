@@ -19,6 +19,7 @@
         :showSlider="post.canViewMedia"
         :shouldHasLink="false"
         :postId="post.id"
+        mediaSize="full"
       />
       <div class="right-col">
         <Header
