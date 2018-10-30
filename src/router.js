@@ -13,6 +13,7 @@ import SettingsNotificationPage from "./components/pages/settings/notification/I
 import SettingsPayoutsPage from "./components/pages/settings/payouts/Index";
 import SettingsPaymentsPage from "./components/pages/settings/payments/Index";
 import SettingsAccountPage from "./components/pages/settings/account/Index.vue";
+import SettingsStoryPage from "./components/pages/settings/story/Index.vue";
 import ProfilePage from "./components/pages/profile/Index";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
@@ -188,6 +189,14 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/account",
     component: SettingsAccountPage,
+    meta: {
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/story",
+    component: SettingsStoryPage,
     meta: {
       cssName: "settings"
     }
