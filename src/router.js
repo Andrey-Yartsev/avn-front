@@ -68,7 +68,10 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/addPost",
-    component: AddPostPage
+    component: AddPostPage,
+    meta: {
+      cssName: "addPost"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,

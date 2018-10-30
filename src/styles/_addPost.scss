@@ -1,5 +1,36 @@
 @import "components/imports";
 
+.addPost-page {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    background: $white;
+  }
+
+  &:before {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+
+  .site-footer {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.addPostPage {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
 .addPost {
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -19,6 +50,7 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    width: 100%;
     max-width: 940px;
     margin: 0 auto;
     padding: 0 10px;
