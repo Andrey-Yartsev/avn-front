@@ -71,7 +71,7 @@
 import dateFns from "date-fns";
 
 export default {
-  name: "blockedUsers",
+  name: "BlockedUsers",
 
   computed: {
     items() {
@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .empty-table-info {
   display: block;
 }
