@@ -3,12 +3,12 @@
 .icn {
   width: 1em;
   height: 1em;
-}
 
-.icn-plus {
-  fill: $secondary-color;
-}
+  &-plus {
+    fill: $secondary-color;
+  }
 
-.icn-remove {
-  fill: $gray;
+  &-remove {
+    fill: $gray;
+  }
 }

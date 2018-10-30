@@ -73,9 +73,6 @@
 
     .actions {
       z-index: 2;
-    }
-
-    .actions {
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-bottom: 16px;
@@ -89,6 +86,7 @@
 }
 
 .searchView {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     width: 100%;
@@ -98,6 +96,7 @@
   }
 
   .explore {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       position: relative;
       width: 100%;
@@ -106,6 +105,7 @@
 
   .container,
   .over-container {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
       flex-wrap: wrap;
@@ -114,6 +114,7 @@
   }
 
   .container {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 0 0 100%;
       align-items: stretch;
@@ -124,6 +125,7 @@
   }
 
   .over-container {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
       max-width: 100%;
@@ -133,6 +135,7 @@
   }
 
   .explore-nav {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       width: 100%;
     }
@@ -142,6 +145,7 @@
   .users,
   .photos,
   .videos {
+
     &:empty {
       + .no-results-search {
         opacity: 1;

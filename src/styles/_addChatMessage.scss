@@ -35,10 +35,12 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 1em;
     }
+
+    &:first-child {
+      margin: 0;
+    }
   }
-  > *:first-child {
-    margin: 0;
-  }
+
   .add-media-input {
     color: $secondary-color;
     transition: color 0.3s ease;
@@ -53,6 +55,7 @@
     &:hover {
       color: $secondary-color-darken;
     }
+
     &:before {
       @include icon-font;
       font-size: 24px;
@@ -60,6 +63,7 @@
       display: block;
     }
   }
+
   .tips {
     color: $main-color;
     opacity: 0.3;
