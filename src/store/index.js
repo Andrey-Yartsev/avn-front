@@ -23,6 +23,8 @@ import search from "@/store/modules/search";
 import subscription from "@/store/modules/subscription";
 import payment from "@/store/modules/payment";
 import payouts from "@/store/modules/payouts";
+import twitter from "@/store/modules/twitter";
+import emails from "@/store/modules/emails";
 
 Vue.use(Vuex);
 
@@ -51,7 +53,9 @@ const store = new Vuex.Store({
     search,
     subscription,
     payment,
-    payouts
+    payouts,
+    twitter,
+    emails
   }
 });
 

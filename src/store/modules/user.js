@@ -90,6 +90,36 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "changePassword",
+  apiPath: "users/change-password",
+  state,
+  mutations,
+  actions,
+  localError: true,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "deleteAccount",
+  apiPath: `users/me`,
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{token}/, params);
+  }
+});
+
 export default {
   namespaced: true,
   state,

@@ -16,5 +16,19 @@ export default {
       `&callback=${process.env.VUE_APP_API_URL}/proxy/twitter` +
       "&response_type=token"
     );
+  },
+
+  getConnectUrl: function(returnUrl) {
+    return (
+      process.env.VUE_APP_API_URL +
+      "/proxy/twitter" +
+      "?return_url=" +
+      window.location.origin +
+      returnUrl +
+      "&callback=" +
+      process.env.VUE_APP_API_URL +
+      "/proxy/twitter" +
+      "&response_type=token"
+    );
   }
 };

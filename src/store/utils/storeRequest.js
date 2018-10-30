@@ -38,8 +38,11 @@ const storeRequest = (
           commit(resultKey, r);
         } else {
           const r = await response.json();
-          commit(prefix + "Error", r.error);
-          dispatch("global/setError", r.error, { root: true });
+          if (localError) {
+            commit(prefix + "Error", r.error);
+          } else {
+            dispatch("global/setError", r.error, { root: true });
+          }
           commit(prefix + "Success", false);
         }
       })
