@@ -1,5 +1,3 @@
-import Store from "@/store";
-
 export const uniqId = () => {
   let ts = String(new Date().getTime()),
     i = 0,
@@ -84,25 +82,22 @@ export const fileUpload = ({ id, file }, onProgress) =>
   new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    const token = Store.state.auth.token;
 
     formData.append("file", file);
+    formData.append("preset", "team");
+    formData.append("isDelay", true);
 
     xhr.upload.onprogress = ({ loaded, total }) => {
       onProgress(id, loaded, total);
     };
     xhr.onload = xhr.onerror = () => {
       if (xhr.status == 200) {
-        const fileName = JSON.parse(xhr.response)[0].fileName;
-        resolve(fileName);
+        const processId = JSON.parse(xhr.response).processId;
+        resolve(processId);
       } else {
         reject();
       }
     };
-    xhr.open(
-      "POST",
-      `https://team2.retloko.com/api2/v2/upload?access-token=${token}`,
-      true
-    );
+    xhr.open("POST", `https://converter.retloko.com/file/upload`, true);
     xhr.send(formData);
   });
