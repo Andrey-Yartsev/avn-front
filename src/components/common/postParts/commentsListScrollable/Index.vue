@@ -6,7 +6,7 @@
       </div>
     </div>
     <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
-    <scrolly class="comments-list">
+    <scrolly class="comments-list" v-if="comments.length">
       <scrolly-viewport id="vue-comments-list" >
         <Comment
           v-for="comment in visibleComments"
