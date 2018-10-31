@@ -73,15 +73,19 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
 
+const InitialState = {
+  expanded: false,
+  tweetSend: false,
+  postMsg: "",
+  isSaving: false,
+  isFree: false
+};
+
 export default {
   name: "AddPost",
   mixins: [FileUpload],
   data: () => ({
-    expanded: false,
-    tweetSend: false,
-    postMsg: "",
-    isSaving: false,
-    isFree: false
+    ...InitialState
   }),
   components: {
     Loader,
@@ -103,9 +107,20 @@ export default {
     },
     notEhoughData() {
       return !this.postMsg.length && !this.preloadedMedias.length;
+    },
+    newPost() {
+      return this.$store.state.post.newPost;
     }
   },
   methods: {
+    reset() {
+      this.expanded = InitialState.expanded;
+      this.tweetSend = InitialState.tweetSend;
+      this.postMsg = InitialState.postMsg;
+      this.isSaving = InitialState.isSaving;
+      this.isFree = InitialState.isFree;
+      this.preloadedMedias = [];
+    },
     addNewPost: async function(e) {
       e.preventDefault();
 
@@ -126,6 +141,11 @@ export default {
       }
 
       this.$store.dispatch("post/savePost", newPostData);
+    }
+  },
+  watch: {
+    newPost() {
+      this.reset();
     }
   }
 };
