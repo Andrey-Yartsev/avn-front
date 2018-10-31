@@ -298,9 +298,17 @@ video {
     width: 4px;
     left: 50%;
     transform: translateX(-50%);
+    box-sizing: content-box;
 
+    .comments-list &,
     .chatCollectionView & {
       right: 0;
+      left: auto;
+      transform: translateX(0);
+    }
+
+    .comments-list & {
+      border: none;
     }
   }
 }

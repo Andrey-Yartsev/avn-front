@@ -19,6 +19,21 @@
       display: none;
     }
   }
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      z-index: 11;
+    }
+  }
+
+  .addPost {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: inherit;
+    }
+  }
 }
 
 .addPostPage {
