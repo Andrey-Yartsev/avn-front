@@ -84,7 +84,6 @@
           </div>
         </div>
       </div>
-
       <div class="bottom-btns">
         <template v-if="!isOwner(author.id) && author.canEarn">
           <button type="button" class="btn-tip"></button>
@@ -104,7 +103,10 @@
         </div>
       </div>
     </template>
-    <Loader v-if="loading || showLoader || !currentStory.isReady" :fullscreen="false"></Loader>
+    <Loader
+      v-if="loading || showLoader || !currentStory || !currentStory.isReady" 
+      :fullscreen="false"
+    />
   </div>
 </template>
 
@@ -148,6 +150,12 @@ export default {
     },
     currentStory() {
       return this.stories[this.currIndex];
+    },
+    newPost() {
+      return this.$store.state.post.newPost;
+    },
+    deletedPost() {
+      return this.$store.state.post.deletedPost;
     }
   },
   methods: {
@@ -164,7 +172,7 @@ export default {
       const { isLook, mediaType, isReady, id } = this.currentStory;
 
       if (this.isAuth() && !isLook) {
-        this.$store.dispatch("stories/watch", { postId: id });
+        this.$store.dispatch("story/watch", { postId: id });
       }
 
       if (mediaType === "video" && isReady) {
@@ -313,11 +321,11 @@ export default {
     },
 
     deleteStory: function() {
-      this.$store.dispatch("stories/deletePost", {
+      this.$store.dispatch("story/deletePost", {
         postId: this.currentStory.id
       });
 
-      this.close();
+      // this.close();
 
       this.$store.dispatch("global/flashToast", "Story deleted", {
         root: true
@@ -362,11 +370,15 @@ export default {
         this.showDropdawnMenu = false;
         this.resume();
       }
+    },
+    init() {
+      this.resetState();
+      this.$store.dispatch("stories/resetPageState");
+      this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
     }
   },
   created() {
-    this.$store.dispatch("stories/resetPageState");
-    this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+    this.init();
   },
   mounted() {
     this.popupItem = this.$el.querySelector(".more-functions");
@@ -392,9 +404,13 @@ export default {
       });
     },
     $route() {
-      this.resetState();
-      this.$store.dispatch("stories/resetPageState");
-      this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+      this.init();
+    },
+    newPost() {
+      this.init();
+    },
+    deletedPost() {
+      this.init();
     }
   }
 };

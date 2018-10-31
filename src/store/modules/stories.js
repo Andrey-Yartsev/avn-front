@@ -2,7 +2,6 @@
 
 import StoriesApi from "@/api/stories";
 import PostMixin from "@/store/mixins/posts";
-import router from "@/router";
 
 const initState = {
   loading: false,
@@ -41,9 +40,6 @@ const mutations = {
   },
   setSource(state, { source }) {
     state.source = source;
-  },
-  deletePost(state, data) {
-    state.posts = state.posts.filter(post => data.postId !== post.id);
   }
 };
 
@@ -79,36 +75,8 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
-  watch(opt, { postId }) {
-    return StoriesApi.watchStory({ postId });
-  },
-  savePost(opt, { data, userId }) {
-    return StoriesApi.savePost(data)
-      .then(response => {
-        if (response.status === 200) {
-          const url = `/stories/${userId}`;
-          if (router.history.current.fullPath !== url) {
-            router.push(url);
-          } else {
-            window.location.reload();
-          }
-        }
-      })
-      .catch(() => {});
-  },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
-  },
-  deletePost({ commit }, { postId }) {
-    return StoriesApi.deletePost({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          commit("deletePost", {
-            postId
-          });
-        }
-      })
-      .catch(() => {});
   }
 };
 

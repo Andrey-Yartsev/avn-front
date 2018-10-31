@@ -43,11 +43,7 @@ export default {
   },
   mixins: [InfinityScrollMixin],
   created() {
-    this.$store.dispatch("home/resetPageState");
-    this.$store.dispatch("home/getPosts");
-    this.$store.dispatch("stories/resetPageState");
-    this.$store.dispatch("stories/setSource", { source: "feed" });
-    this.$store.dispatch("stories/getPosts");
+    this.init();
   },
   computed: {
     posts() {
@@ -56,12 +52,27 @@ export default {
     store() {
       // uses into InfinityScrollMixin
       return this.$store.state.home;
+    },
+    newPost() {
+      return this.$store.state.post.newPost;
     }
   },
   methods: {
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
       this.$store.dispatch("home/getPosts");
+    },
+    init() {
+      this.$store.dispatch("home/resetPageState");
+      this.$store.dispatch("home/getPosts");
+      this.$store.dispatch("stories/resetPageState");
+      this.$store.dispatch("stories/setSource", { source: "feed" });
+      this.$store.dispatch("stories/getPosts");
+    }
+  },
+  watch: {
+    newPost() {
+      this.init();
     }
   }
 };

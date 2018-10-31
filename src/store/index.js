@@ -17,6 +17,7 @@ import user from "@/store/modules/user";
 import explore from "@/store/modules/explore/index";
 import lives from "@/store/modules/lives";
 import stories from "@/store/modules/stories";
+import story from "@/store/modules/story";
 import modalRouter from "@/store/modules/modalRouter";
 import notif from "@/store/modules/notif";
 import search from "@/store/modules/search";
@@ -49,6 +50,7 @@ const store = new Vuex.Store({
     modalRouter,
     explore,
     stories,
+    story,
     lives,
     notif,
     search,

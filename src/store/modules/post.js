@@ -7,7 +7,8 @@ import router from "@/router";
 const state = {
   currentPost: undefined,
   reportedPost: undefined,
-  postReportReasons: []
+  postReportReasons: [],
+  newPost: undefined
 };
 const mutations = {
   sendPostReportSuccess(state, { postId, reasonId }) {
@@ -20,18 +21,23 @@ const mutations = {
 
   getPostReportReasonsSuccess(state, data) {
     state.postReportReasons = data;
+  },
+
+  savePostSuccess(state, data) {
+    state.newPost = data;
   }
 };
 
 const actions = {
   savePost({ commit }, data) {
     return PostApi.savePost(data)
-      .then(response => {
+      .then(async response => {
         if (response.status === 200) {
-          router.go({
-            path: "/",
-            force: true
-          });
+          const newPost = await response.json();
+          commit("savePostSuccess", newPost);
+          if (router.history.current.fullPath !== "/") {
+            router.push("/");
+          }
         }
       })
       .catch(err => {
