@@ -294,6 +294,15 @@ video {
 
 .scrolly-bar {
 
+  &.axis-x {
+    height: 4px;
+
+    .addFileCollectionView & {
+      border: none;
+      bottom: 5px;
+    }
+  }
+
   &.axis-y {
     width: 4px;
     left: 50%;
