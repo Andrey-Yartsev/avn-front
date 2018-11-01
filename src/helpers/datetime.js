@@ -1,3 +1,17 @@
+export const toHumanDuration = duration => {
+  let hours, minutes, result;
+  if (3600 <= duration) {
+    hours = Math.floor(duration / 3600);
+    result = hours + " h";
+  } else if (60 <= duration) {
+    minutes = Math.ceil(duration / 60);
+    result = minutes + " min";
+  } else {
+    result = duration + " sec";
+  }
+  return result;
+};
+
 export default time => {
   var date = new Date(time),
     locale = "en-us",
