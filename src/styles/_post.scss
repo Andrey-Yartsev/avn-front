@@ -177,6 +177,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 940px;
+    width: 100%;
     flex: 1;
   }
 
@@ -222,14 +223,14 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      //width: 100%;
+      width: 100%;
       background: $white;
     }
 
     .popup & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //width: 620px;
+        width: 620px;
       }
     }
   }

@@ -528,18 +528,6 @@
         bottom: 0;
         padding: 0;
       }
-
-      .comment {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 100%;
-        }
-
-        .postPage & {
-          position: relative;
-          padding-left: 40px;
-        }
-      }
     }
 
     .load-more-comments {
@@ -579,7 +567,8 @@
   }
 
   .comment {
-    padding: 8px 0 0;
+    padding: 8px 0 0 40px;
+    position: relative;
 
     &-body {
       padding-right: 35px;
@@ -636,15 +625,28 @@
         }
       }
     }
+
+    &_reply {
+      padding-left: 30px;
+      margin-left: 40px;
+
+      .avatar {
+        font-size: 20px;
+      }
+    }
   }
 
   .avatar {
+    font-size: 30px;
+    position: absolute;
+    left: 0;
+    top: 8px;
 
     .postPage & {
-      font-size: 30px;
-      position: absolute;
-      left: 0;
-      top: 8px;
+      //font-size: 30px;
+      //position: absolute;
+      //left: 0;
+      //top: 8px;
     }
   }
 }
