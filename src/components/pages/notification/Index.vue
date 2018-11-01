@@ -67,7 +67,7 @@ import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import ModalRouter from "@/mixins/modalRouter";
 
 const typeTitles = {
-  all: "All",
+  all: "Notifications",
   favorited: "Favorited",
   commented: "Comments",
   mentioned: "Mentions",
