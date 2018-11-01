@@ -45,6 +45,9 @@ import StoryInput from "@/components/story/Input";
 
 import rootClasses from "@/rootClasses";
 import ws from "@/ws";
+import Cookie from "@/utils/cookie";
+
+const queryString = require("query-string");
 
 export default {
   components: {
@@ -111,6 +114,13 @@ export default {
   },
   created() {
     ws();
+
+    const params = queryString.parse(location.search);
+    if (params.code) {
+      Cookie.set("code", params.code, {
+        path: "/"
+      });
+    }
   }
 };
 </script>
