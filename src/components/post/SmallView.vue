@@ -17,6 +17,7 @@
                     <span v-if="post.media.length > 1" class="count">
                         <span class="value">{{ post.media.length }}</span>
                     </span>
+                    <span class="duration hidden-mobile"><span class="value"></span></span>
                     <span class="overlay">
                         <span class="likes">{{ post.favoritesCount }}</span>
                         <span class="comments">{{ post.commentsCount }}</span>
