@@ -28,7 +28,7 @@
               v-for="media in preloadedMedias"
               :media="media"
               :key="media.id"
-              v-on:removeMedia="removeMedia"
+              @removeMedia="removeMedia"
               :isSaving="isSaving"
             />
           </scrolly-viewport>
