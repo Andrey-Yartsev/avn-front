@@ -489,6 +489,7 @@
         content: "\E632";
       }
     }
+    &.connected,
     &.subscribed {
       &:before {
         content: "\E630";
