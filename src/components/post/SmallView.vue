@@ -1,5 +1,5 @@
 <template>
-    <div class="photoView" :data-id="post.id">
+    <div class="explore-item" :data-id="post.id">
         <a
           :class="['postLink', {
             'photo-post': post.mediaType === 'image', 
@@ -8,16 +8,16 @@
           :href="`/post/${post.id}`"
           @click.prevent="openModal"
         >
-            <figure :class="{'locked-wrapper': media.locked}">
+            <figure class="explore-media" :class="{'locked-wrapper': media.locked}">
                 <div v-if="!media.canView" class="locked-picture">
                     <img class="locked" :src="'data:image/jpeg;base64,' + media.locked">
                 </div>
                 <template v-else>
                   <img  :src="media.thumb.source">
-                  <span v-if="post.media.length > 1" class="count">
+                  <span v-if="post.media.length > 1" class="item-length item-length_photo">
                       <span class="value">{{ post.media.length }}</span>
                   </span>
-                  <span v-if="media.duration" class="duration hidden-mobile">
+                  <span v-if="media.duration" class="item-length item-length_video hidden-mobile">
                     <span class="value">{{ mediaDuration }}</span>
                   </span>
                   <span class="overlay">
