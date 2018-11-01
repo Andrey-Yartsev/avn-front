@@ -11,10 +11,9 @@
         :user="post.author"
         :from="from"
       />
-      <p class="text hidden-desktop">
-        {{ post.text }}
-      </p>
+      <p class="text hidden-desktop">{{ post.text }}</p>
       <Media
+        v-if="post.media.length"
         :medias="post.media"
         :showSlider="post.canViewMedia"
         :shouldHasLink="false"
@@ -28,9 +27,7 @@
           :user="post.author"
           :from="from"
         />
-        <p class="text hidden-mobile">
-        {{ post.text }}
-        </p>
+        <p class="text hidden-mobile">{{ post.text }}</p>
         <CommentsList
           :comments="post.comments || []"
           :shownCommentsCount="post.shownCommentsCountFull"
