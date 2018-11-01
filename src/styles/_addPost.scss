@@ -326,12 +326,23 @@
       top: 180px;
     }
 
+    &.scrolly {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        height: 117px;
+      }
+    }
+
     .scrolly-viewport {
       display: flex;
       position: relative;
 
+      @include media-breakpoint-down($desktop-breakpoint) {
+        overflow-x: auto;
+      }
+
       &:not(:empty) {
-        
+
         @include media-breakpoint-up($desktop-breakpoint) {
           border-top: 1px solid rgba($gray, 0.2);
         }
