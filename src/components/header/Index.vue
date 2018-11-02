@@ -2,6 +2,8 @@
   <header id="site_header" v-if="show" :class="{guest: noAuthHeader}">
     <div class="header-wrapper">
       <div :class="['container', 'header_container']">
+        <DesktopHeader />
+        <!--
         <nav class="header-nav hidden-mobile">
           <template v-if="!noAuthHeader">
             <router-link class="menu-item-home" to="/" exact><span>Home</span></router-link>
@@ -19,6 +21,7 @@
             <router-link class="menu-item-messages hidden-desktop" to="/chat"><span>Messages</span></router-link>
           </template>
         </nav>
+        -->
         <h1 class="header-logo">
           <router-link to="/">
             <img src="/static/img/logo-full.svg">
@@ -44,13 +47,15 @@
 import Search from "./Search";
 import User from "./User";
 import ModalRouter from "@/mixins/modalRouter";
+import DesktopHeader from "./Desktop";
 
 export default {
   name: "Header",
   mixins: [ModalRouter],
   components: {
     Search,
-    User
+    User,
+    DesktopHeader
   },
   computed: {
     user() {
