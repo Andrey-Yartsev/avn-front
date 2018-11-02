@@ -17,7 +17,7 @@
 import ModalRouter from "@/mixins/modalRouter";
 
 export default {
-  name: "HeaderMobile",
+  name: "MobileHeader",
 
   mixins: [ModalRouter],
 
