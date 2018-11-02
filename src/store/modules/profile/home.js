@@ -14,7 +14,8 @@ const initState = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: ""
+  marker: "",
+  source: ""
 };
 
 const state = { ...initState };
@@ -24,6 +25,10 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+
+  setSource(state, source) {
+    state.source = source;
   },
 
   fetchProfile(state) {
@@ -59,10 +64,10 @@ const actions = {
   },
 
   getPosts({ commit }, userId) {
-    const { limit, offset, marker } = state;
+    const { limit, offset, marker, source } = state;
     commit("postsRequest");
 
-    return UserApi.getPosts({ userId, limit, offset, marker })
+    return UserApi.getPosts({ userId, limit, offset, marker, source })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -73,6 +78,10 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
+  },
+
+  setSource({ commit }, source) {
+    commit("setSource", source);
   },
 
   follow({ dispatch }, userId) {
