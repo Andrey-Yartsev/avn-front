@@ -321,11 +321,11 @@ export default {
     },
 
     deleteStory: function() {
+      this.hideDropdawn();
+
       this.$store.dispatch("story/deletePost", {
         postId: this.currentStory.id
       });
-
-      // this.close();
 
       this.$store.dispatch("global/flashToast", "Story deleted", {
         root: true
@@ -334,12 +334,12 @@ export default {
 
     storySettings: function() {
       this.$router.push("/settings/story");
-      this.toggleDropdawnMenu();
+      this.hideDropdawn();
     },
 
     saveFile: function() {
       window.open(this.currentStory.mediaSrc, "_blank");
-      this.toggleDropdawnMenu();
+      this.hideDropdawn();
     },
 
     videoEventPlay: function() {
