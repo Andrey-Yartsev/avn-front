@@ -749,6 +749,10 @@
 
       .scrolly-viewport {
         padding-right: 0;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          position: relative;
+        }
       }
 
       .chatView {

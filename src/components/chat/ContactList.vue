@@ -61,9 +61,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.contactsList {
-  height: calc(100vh - 88px);
-}
-</style>

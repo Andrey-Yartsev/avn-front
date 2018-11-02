@@ -89,7 +89,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       margin: 0;
-      width: 100%;
     }
 
     &.active,
