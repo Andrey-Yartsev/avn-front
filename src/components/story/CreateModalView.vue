@@ -164,6 +164,9 @@ export default {
   computed: {
     file: function() {
       return this.$store.state.modal.createStory.data.file;
+    },
+    newPost() {
+      return this.$store.state.story.newPost;
     }
   },
   methods: {
@@ -220,6 +223,9 @@ export default {
     }
   },
   watch: {
+    newPost() {
+      this.$store.dispatch("modal/hide", { name: "createStory" });
+    },
     file: function() {
       this.chooseFileEvent();
     }

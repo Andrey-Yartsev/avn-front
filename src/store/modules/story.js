@@ -33,9 +33,7 @@ const actions = {
         if (response.status === 200) {
           const url = `/stories/${userId}`;
           const newPost = await response.json();
-
           commit("savePostSuccess", newPost);
-
           if (router.history.current.fullPath !== url) {
             router.push(url);
           }

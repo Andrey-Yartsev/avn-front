@@ -152,10 +152,10 @@ export default {
       return this.stories[this.currIndex];
     },
     newPost() {
-      return this.$store.state.post.newPost;
+      return this.$store.state.story.newPost;
     },
     deletedPost() {
-      return this.$store.state.post.deletedPost;
+      return this.$store.state.story.deletedPost;
     }
   },
   methods: {
