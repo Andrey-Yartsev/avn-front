@@ -295,7 +295,7 @@ const routes = [
   // PROFILE ZONE
   {
     beforeEnter: Profile.init,
-    path: "*",
+    path: "/:username/:page?",
     component: ProfilePage,
     meta: {
       cssName: "userProfile"

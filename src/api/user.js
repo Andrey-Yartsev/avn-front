@@ -38,8 +38,8 @@ export default {
       method: "GET"
     });
   },
-  getPosts({ userId, offset, limit, marker }) {
-    return tokenRequest(`users/${userId}/posts`, {
+  getPosts({ userId, offset, limit, marker, source }) {
+    return tokenRequest(`users/${userId}/posts/${source}`, {
       method: "GET",
       query: {
         offset,

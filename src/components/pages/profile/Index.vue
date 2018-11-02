@@ -85,15 +85,15 @@
             <div class="content-col">
               <div class="profile-btns-group">
                 <div class="btns-user-activity">
-                  <router-link class="active" :to="'/' + profile.username + '/posts'">
+                  <router-link :class="!pageName ? 'active' : ''" :to="`/${profile.username}/posts`">
                     <span class="value">{{ profile.postsCount }}</span>
                     <span class="label">Posts</span>
                   </router-link>
-                  <router-link :to="'/' + profile.username + '/posts'">
+                  <router-link :to="`/${profile.username}/photos`">
                     <span class="value">{{ profile.photosCount }}</span>
                     <span class="label">Photos</span>
                   </router-link>
-                  <router-link :to="'/' + profile.username + '/videos'">
+                  <router-link :to="`/${profile.username}/videos`">
                     <span class="value">{{ profile.videosCount }}</span>
                     <span class="label">Videos</span>
                   </router-link>
@@ -235,7 +235,17 @@ export default {
 
   computed: {
     username() {
-      return this.$route.params[0].replace(/\/(.*)/, "$1");
+      return this.$route.params.username;
+    },
+    pageName() {
+      return this.$route.params.page;
+    },
+    source() {
+      if (!this.pageName || this.pageName === "posts") {
+        return "";
+      }
+
+      return this.pageName;
     },
     profile() {
       return this.$store.state.profile.home.profile;
@@ -251,6 +261,9 @@ export default {
   watch: {
     username() {
       this.init();
+    },
+    pageName() {
+      this.init();
     }
   },
 
@@ -260,7 +273,8 @@ export default {
       this.$store
         .dispatch("profile/home/fetchProfile", this.username)
         .then(() => {
-          this.$store.dispatch("profile/home/getPosts", this.profile.id);
+          this.$store.dispatch("profile/home/setSource", this.source);
+          this.getPosts();
         });
     },
     follow() {
@@ -278,7 +292,7 @@ export default {
     },
     infinityScrollGetDataMethod() {
       if (this.profile) {
-        this.$store.dispatch("profile/home/getPosts", this.profile.id);
+        this.getPosts();
       }
     },
     subsRequested(data) {
@@ -313,6 +327,9 @@ export default {
         "global/flashToast",
         "You have resubscribed successfully"
       );
+    },
+    getPosts() {
+      this.$store.dispatch("profile/home/getPosts", this.profile.id);
     }
   },
 
