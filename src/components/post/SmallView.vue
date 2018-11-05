@@ -1,5 +1,5 @@
 <template>
-    <div class="explore-item" :data-id="post.id">
+    <div class="explore-item explore-item_col" :data-id="post.id">
         <a
           :class="['postLink', {
             'photo-post': post.mediaType === 'image', 
@@ -24,6 +24,11 @@
                       <span class="likes">{{ post.favoritesCount }}</span>
                       <span class="comments">{{ post.commentsCount }}</span>
                   </span>
+                  <div class="video-placeholder">
+                    <span class="video-recommendations-text">
+                      Watch<br>videos you might like
+                    </span>
+                  </div>
                 </template>
             </figure>
         </a>
