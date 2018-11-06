@@ -49,23 +49,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 70px;
       }
-
-      &:before {
-        box-shadow: 0 0 0 3px $white;
-      }
-
-      &:not(:empty) {
-        &:before {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          top: 0;
-          border-radius: 1000px;
-          background: $white;
-        }
-      }
     }
     .name {
       text-align: center;
