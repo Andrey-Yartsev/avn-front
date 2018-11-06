@@ -304,6 +304,13 @@
     }
   }
 
+  .searchView & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      z-index: 1;
+    }
+  }
+
   video,
   img {
 
