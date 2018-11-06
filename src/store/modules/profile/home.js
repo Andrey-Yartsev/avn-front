@@ -1,5 +1,7 @@
 "use strict";
 
+import { createRequestAction } from "@/store/utils/storeRequest";
+
 import UserApi from "@/api/user";
 import SubscriptionsApi from "@/api/subscriptions";
 import PostMixin from "@/store/mixins/posts";
@@ -7,8 +9,6 @@ import PostMixin from "@/store/mixins/posts";
 const initState = {
   loading: false,
   error: null,
-  profileLoading: false,
-  profileError: null,
   profile: null,
   posts: [],
   allDataReceived: false,
@@ -29,40 +29,10 @@ const mutations = {
 
   setSource(state, source) {
     state.source = source;
-  },
-
-  fetchProfile(state) {
-    state.profileLoading = true;
-  },
-
-  fetchProfileSuccess(state, profile) {
-    state.profile = profile;
-  },
-
-  fetchProfileFail(state, error) {
-    state.profileLoading = false;
-    state.profileError = error;
   }
 };
 
 const actions = {
-  fetchProfile({ commit }, username) {
-    commit("resetPageState");
-    return new Promise((accept, reject) => {
-      UserApi.fetchProfile(username).then(async response => {
-        if (response.status === 200) {
-          response = await response.json();
-          commit("fetchProfileSuccess", response);
-          accept(response);
-          return;
-        }
-        response = await response.json();
-        commit("fetchProfileFail", response);
-        reject(response);
-      });
-    });
-  },
-
   getPosts({ commit }, userId) {
     const { limit, offset, marker, source } = state;
     commit("postsRequest");
@@ -116,6 +86,19 @@ const actions = {
     commit("fetchProfileSuccess", { ...state.profile, ...data });
   }
 };
+
+createRequestAction({
+  requestType: "any",
+  prefix: "fetchProfile",
+  apiPath: "users/me",
+  state,
+  mutations,
+  actions,
+  resultKey: "profile",
+  options: {
+    method: "GET"
+  }
+});
 
 export default {
   namespaced: true,
