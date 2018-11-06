@@ -273,6 +273,7 @@ export default {
       this.deactivateVideoEvents();
       this.videos = {};
       this.showLoader = false;
+      this.currActiveIndex = -1;
     },
 
     findNextUserStory: function() {
@@ -330,6 +331,10 @@ export default {
       this.$store.dispatch("global/flashToast", "Story deleted", {
         root: true
       });
+
+      if (this.currIndex === this.length - 1) {
+        this.close();
+      }
     },
 
     storySettings: function() {
