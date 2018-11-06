@@ -31,7 +31,12 @@
       <div class="profile-images">
         <div class="container">
           <div class="profile-images__inner">
-            <span class="avatar" :class="{'with-story': profile.hasNotViewedStory}">
+            <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory">
+              <span class="avatar with-story">
+                <img :src="profile.avatar" v-if="profile.avatar">
+              </span>
+            </router-link>
+            <span v-else class="avatar">
               <img :src="profile.avatar" v-if="profile.avatar">
             </span>
           </div>
