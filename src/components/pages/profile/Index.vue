@@ -1,6 +1,8 @@
 <template>
-  <div v-if="!profile">Loading</div>
-  <div v-else class="profile">
+  <div class="loader-container" v-if="loading">
+    <Loader :fullscreen="false" text="" class="transparent small" />
+  </div>
+  <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
     <div class="sticky-header-controls">
       <a class="header-return-btn"></a>
@@ -209,6 +211,7 @@
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
 import PostCollection from "@/components/common/postCollection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
@@ -220,11 +223,15 @@ export default {
   mixins: [InfinityScrollMixin, UserMixin],
 
   components: {
+    Loader,
     PostCollection,
     SubscribeButton
   },
 
   computed: {
+    loading() {
+      return this.$store.state.profile.home.fetchProfileLoading;
+    },
     username() {
       return this.$route.params.username;
     },
@@ -332,3 +339,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.loader-container {
+  position: relative;
+  height: 300px;
+}
+</style>

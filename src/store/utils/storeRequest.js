@@ -24,18 +24,15 @@ const storeRequest = (
     const Request = requests[requestType];
     Request(apiPath, options)
       .then(async response => {
-        commit(prefix + "Requested");
         if (response.status === 200) {
           commit(prefix + "Success", true);
-          setTimeout(() => {
-            commit(prefix + "Success", null);
-          }, 5000);
           let r = await response.json();
           accept(r);
           if (resultConvert) {
             r = resultConvert(r, state);
           }
           commit(resultKey, r);
+          commit(prefix + "Requested");
         } else {
           const r = await response.json();
           if (localError) {
@@ -44,6 +41,7 @@ const storeRequest = (
             dispatch("global/setError", r.error, { root: true });
           }
           commit(prefix + "Success", false);
+          commit(prefix + "Requested");
         }
       })
       .catch(error => {
@@ -100,6 +98,7 @@ const buildMutations = (prefix, mutations, resultKey) => {
 };
 
 const createRequestAction = ({
+  requestType,
   prefix,
   apiPath,
   state,
@@ -125,8 +124,11 @@ const createRequestAction = ({
     if (params !== undefined && paramsToPath) {
       _apiPath = paramsToPath(params, apiPath);
     }
+    if (!requestType) {
+      requestType = "token";
+    }
     return storeRequest(
-      "token",
+      requestType,
       prefix,
       commit,
       dispatch,
