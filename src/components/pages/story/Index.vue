@@ -334,7 +334,6 @@ export default {
 
     storySettings: function() {
       this.$router.push("/settings/story");
-      this.hideDropdawn();
     },
 
     saveFile: function() {
