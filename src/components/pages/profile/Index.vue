@@ -51,8 +51,8 @@
             v-if="profile.twitterUsername"
             :href="'https://twitter.com/' + profile.twitterUsername"
             class="profile-twitter-link" target="_blank"
-            rel="nofollow">twitter.com/{{ profile.twitterUsername }}</a>
-
+            rel="nofollow"
+          >twitter.com/{{ profile.twitterUsername }}</a>
           <div class="profile-data">
             <div class="item">
               <router-link to="/following">
@@ -98,20 +98,16 @@
                     <span class="label">Videos</span>
                   </router-link>
                 </div>
-
                 <div class="profile-actions" v-if="isOwner(this.profile.id)">
                   <router-link to="/settings/profile" class="btn-edit-profile">Edit profile</router-link>
-                  <button class="btn-make-post make-post-btn">New post</button>
+                  <button class="btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
                 </div>
-
                 <div class="profile-actions" v-else>
-
                   <button
                     v-if="profile.canEarn"
-                    type="button" class="profile-actions__btn profile-tip-btn selected">Fund</button>
-
+                    type="button" class="profile-actions__btn profile-tip-btn selected"
+                  >Fund</button>
                   <SubscribeButton :profile="profile" @requested="subsRequested"/>
-
                   <div class="subscribeView">
                     <div
                       v-if="profile.followedBy"
@@ -130,12 +126,11 @@
                       </div>
                     </div>
                   </div>
-
                   <button
                     v-if="profile.followedBy"
                     @click="sendMessage"
-                    type="button" class="profile-actions__btn profile-message-btn">Message</button>
-
+                    type="button" class="profile-actions__btn profile-message-btn"
+                  >Message</button>
                   <div class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile">
                     <div class="more-functions__overlay"></div>
                     <div class="more-functions__btn">
@@ -152,15 +147,12 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <div class="container">
         <div class="row">
           <div class="aside-col hidden-mobile">
@@ -175,13 +167,12 @@
             </div>
             <div class="profile-desc">
               <p class="profile-text"></p>
-
               <a
                 v-if="profile.twitterUsername"
                 :href="'https://twitter.com/' + profile.twitterUsername"
                 class="profile-twitter-link" target="_blank"
-                rel="nofollow">twitter.com/{{ profile.twitterUsername }}</a>
-
+                rel="nofollow"
+              >twitter.com/{{ profile.twitterUsername }}</a>
               <div class="profile-data">
                 <div class="item">
                   <router-link to="/following">
@@ -257,7 +248,6 @@ export default {
       return this.$store.state.profile.home;
     }
   },
-
   watch: {
     username() {
       this.init();
@@ -266,7 +256,6 @@ export default {
       this.init();
     }
   },
-
   methods: {
     init() {
       this.$store.commit("profile/home/resetPageState");
@@ -330,6 +319,11 @@ export default {
     },
     getPosts() {
       this.$store.dispatch("profile/home/getPosts", this.profile.id);
+    },
+    openAddPostModal() {
+      this.$store.dispatch("modal/show", {
+        name: "addPost"
+      });
     }
   },
 

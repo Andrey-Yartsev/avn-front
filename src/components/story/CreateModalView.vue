@@ -231,6 +231,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch("modal/hide", { name: "addPost" });
     this.chooseFileEvent();
   }
 };

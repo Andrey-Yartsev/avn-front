@@ -27,6 +27,10 @@ const state = {
   createStory: {
     show: false,
     data: {}
+  },
+  addPost: {
+    show: false,
+    data: {}
   }
 };
 

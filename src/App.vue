@@ -21,6 +21,7 @@
       <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
+      <AddPostModal v-if="this.$store.state.modal.addPost.show" />
 
     </template>
   </div>
@@ -42,6 +43,7 @@ import SubscribeModal from "@/components/subscription/Modal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 import StoryInput from "@/components/story/Input";
+import AddPostModal from "@/components/addPost/Modal";
 
 import rootClasses from "@/rootClasses";
 import ws from "@/ws";
@@ -64,7 +66,8 @@ export default {
     PaymentModal,
     ModalRouter,
     CreateStoryModal,
-    StoryInput
+    StoryInput,
+    AddPostModal
   },
   mixins: [ColorScheme],
   data() {
