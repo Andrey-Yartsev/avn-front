@@ -75,15 +75,20 @@ export default {
     },
     matchRoute() {
       const hash = window.location.hash.replace(/^#m\/(.*)/, "$1");
-      const r = Object.entries(routes).map(v => {
+      const _routes = Object.entries(routes).map(v => {
         const pattern = v[0];
         const parts = pattern.split("/");
         const params = [];
         const regexp = parts
-          .map(param => {
+          .map((param, i) => {
             const match = param.match(/:([^/]+)/);
             if (match) {
-              param = "([^/]+)";
+              if (i === parts.length - 1) {
+                // last param can contain "/"
+                param = "(.+)";
+              } else {
+                param = "([^/]+)";
+              }
               params.push(match[1]);
             }
             return param;
@@ -97,7 +102,7 @@ export default {
         };
       });
       let found = null;
-      r.forEach(v => {
+      _routes.forEach(v => {
         if (found) {
           return;
         }
