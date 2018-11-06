@@ -1,6 +1,5 @@
 import request from "@/utils/request";
 import tokenRequest from "@/utils/tokenRequest";
-import anyRequest from "@/utils/anyRequest";
 
 export default {
   signUp(data) {
@@ -31,11 +30,6 @@ export default {
     return tokenRequest("users/me", {
       method: "PUT",
       data: user
-    });
-  },
-  fetchProfile(username) {
-    return anyRequest(`users/${username}`, {
-      method: "GET"
     });
   },
   getPosts({ userId, offset, limit, marker, source }) {

@@ -90,13 +90,16 @@ const actions = {
 createRequestAction({
   requestType: "any",
   prefix: "fetchProfile",
-  apiPath: "users/me",
+  apiPath: "users/{username}",
   state,
   mutations,
   actions,
   resultKey: "profile",
   options: {
     method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{username}/, params);
   }
 });
 
