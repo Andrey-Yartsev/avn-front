@@ -1,44 +1,51 @@
 <template>
-    <div class="exploreView">
-        <MobileHeader></MobileHeader>
-        <a class="addPost-btn-float hidden-desktop" href="/addPost"></a>
-        <div class="container">
-            <div class="over-container">
-                <Navigate></Navigate>
-                <div class="explore">
-                    <div :class="{
-                      exploreAllCollectionView: page === 'all',
-                      photoCollectionView: page === 'photos',
-                      videoCollectionView: page === 'videos',
-                      storyCollectionView: page === 'stories',
-                      liveCollectionView: page === 'lives',
-                    }">  
-                        <div class="stories-all" v-if="page === 'all'">
-                            <div class="exploreAllStoriesCollectionView">
-                                <div class="explore-stories">
-                                  <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
-                                </div>
-                            </div>
-                        </div>
-                        <div :class="['explore-wrapper', page]">
-                            <Post v-for="post in posts" :post="post" :key="post.id" from="explore" />
-                            <template v-if="page === 'stories'">
-                              <StoryMedium v-for="post in stories" :post="post" :key="post.id" from="explore" />
-                            </template>
-                        </div>
-                        <div class="msg-no-content" v-if="shouldShowNoPosts">
-                            <div class="msg-no-content__text">No posts here yet</div>
-                        </div>
-                    </div>
+  <div class="exploreView">
+    <MobileHeader></MobileHeader>
+    <a class="addPost-btn-float hidden-desktop" href="/addPost"></a>
+    <div class="container">
+      <div class="over-container">
+        <Navigate />
+        <div class="explore">
+          <div :class="{
+            exploreAllCollectionView: page === 'all',
+            photoCollectionView: page === 'photos',
+            videoCollectionView: page === 'videos',
+            storyCollectionView: page === 'stories',
+            liveCollectionView: page === 'lives',
+          }">  
+            <div class="stories-all" v-if="page === 'all'">
+              <div class="exploreAllStoriesCollectionView">
+                <div class="explore-stories">
+                  <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
                 </div>
+              </div>
             </div>
+            <div :class="['explore-wrapper', page]">
+              <component
+                :is="postComponent"
+                v-for="post in posts"
+                :post="post"
+                :key="post.id" 
+                from="explore"
+              />
+              <template v-if="page === 'stories'">
+                <StoryMedium v-for="post in stories" :post="post" :key="post.id" from="explore" />
+              </template>
+            </div>
+            <div class="msg-no-content" v-if="shouldShowNoPosts">
+              <div class="msg-no-content__text">No posts here yet</div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import MobileHeader from "@/components/header/Mobile";
-import Post from "@/components/post/SmallView";
+import PostSmall from "@/components/post/SmallView";
+import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
 import Navigate from "./navigate/Index";
@@ -49,7 +56,8 @@ export default {
   components: {
     MobileHeader,
     Navigate,
-    Post,
+    PostSmall,
+    PostMedium,
     StoryMedium,
     StorySmall
   },
@@ -94,6 +102,13 @@ export default {
       }
 
       return this.page;
+    },
+    postComponent() {
+      if (this.$mq === "mobile") {
+        return PostMedium;
+      }
+
+      return PostSmall;
     }
   },
   methods: {
