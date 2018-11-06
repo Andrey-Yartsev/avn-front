@@ -551,6 +551,11 @@
 .comments-list {
   padding: 0 15px 9px;
 
+  &:empty {
+    padding: 0;
+    display: none;
+  }
+
   .postPage & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
