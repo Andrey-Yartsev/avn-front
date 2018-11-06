@@ -29,18 +29,16 @@
       </div>
 
       <div class="notifications">
-          <div class="NotificationsView" v-for="v in items" v-bind:key="v.id">
-            <div :class="v.type">
-              <div class="avatars-wrapper">
-                <router-link :to="'/' + v.user.username" class="avatar">
-                  <img :src="v.user.avatar" v-if="v.user.avatar"/>
-                </router-link>
-              </div>
+          <div class="NotificationsView" :class="v.type" v-for="v in items" v-bind:key="v.id">
+            <div class="avatars-wrapper">
+              <router-link :to="'/' + v.user.username" class="avatar">
+                <img :src="v.user.avatar" v-if="v.user.avatar"/>
+              </router-link>
               <span class="timestamp">{{ time(v.createdAt) }}</span>
-              <div class="content">
-                <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
-                {{ v.type }} your post
-              </div>
+            </div>
+            <div class="content">
+              <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
+              {{ v.type }} your post
             </div>
           </div>
       </div>
