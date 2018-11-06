@@ -104,7 +104,7 @@ export default {
       return this.page;
     },
     postComponent() {
-      if (this.$mq === "mobile") {
+      if (this.$mq === "mobile" && this.page === "videos") {
         return PostMedium;
       }
 
