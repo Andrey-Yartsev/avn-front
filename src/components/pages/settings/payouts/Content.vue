@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-container rounded-container_fluid-height">
+  <div class="rounded-container rounded-container_fluid-height" id="payouts-container">
     <div class="payouts">
       <div class="border-top loader-container" v-if="loading">
         <Loader :fullscreen="false" text="" class="transparent small" />
@@ -20,6 +20,14 @@ import LegalPending from "./LegalPending";
 import Bank from "./Bank";
 import Summery from "./Summery";
 import Unexpected from "./Unexpected";
+
+/*
+1. Account
+2. Legal
+3. Legal Pending
+4. Bank
+5. Summery
+*/
 
 export default {
   name: "PayoutsSettingsContent",

@@ -2,7 +2,7 @@
   <div class="settings">
     <div class="container">
       <div class="row">
-        <div class="content-col" :class="{'hidden-mobile': hideContentOnMobile}">
+        <div class="content-col" :class="{'hidden-mobile': isHome}">
           <div class="rounded-container rounded-container_fluid-height">
             <DefaultSection />
           </div>
@@ -19,19 +19,16 @@
 <script>
 import Aside from "./Aside";
 import DefaultSection from "./default/Index";
+import Mobile from "./mobile";
 
 export default {
   name: "Settings",
 
+  mixins: [Mobile],
+
   components: {
     Aside,
     DefaultSection
-  },
-
-  computed: {
-    hideContentOnMobile() {
-      return this.$route.name === "Settings";
-    }
   }
 };
 </script>

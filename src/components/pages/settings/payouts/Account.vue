@@ -37,7 +37,7 @@
               </label>
               <label class="form-group-inner">
                 <span class="label"></span>
-                <button type="submit" class="btn lg saveChanges hidden-mobile">
+                <button type="submit" class="btn lg saveChanges">
                   Next
                 </button>
               </label>

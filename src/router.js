@@ -133,17 +133,11 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/notifications",
-    component: SettingsNotificationPage,
-    meta: {
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
     path: "/settings",
     component: SettingsDefaultPage,
+    name: "Settings",
     meta: {
+      title: "Settings",
       cssName: "settings"
     }
   },
@@ -151,6 +145,7 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/profile",
     component: SettingsDefaultPage,
+    name: "SettingsProfile",
     meta: {
       cssName: "settings"
     }
@@ -159,7 +154,9 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: SettingsSecurityPage,
+    name: "SettingsSecurity",
     meta: {
+      title: "Security",
       cssName: "settings"
     }
   },
@@ -167,7 +164,9 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/notifications",
     component: SettingsNotificationPage,
+    name: "SettingsNotifications",
     meta: {
+      title: "Notifications Settings",
       cssName: "settings"
     }
   },
@@ -176,6 +175,7 @@ const routes = [
     path: "/settings/payments",
     component: SettingsPaymentsPage,
     meta: {
+      title: "Payments",
       cssName: "settings"
     }
   },
@@ -183,14 +183,17 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/payouts",
     component: SettingsPayoutsPage,
+    name: "SettingsPayouts",
     meta: {
+      title: "Payouts",
       cssName: "settings"
     }
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/account",
+    path: "/settings/account/:view?",
     component: SettingsAccountPage,
+    name: "SettingsAccount",
     meta: {
       cssName: "settings"
     }
@@ -199,15 +202,19 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/story",
     component: SettingsStoryPage,
+    name: "SettingsStory",
     meta: {
-      cssName: "settings"
+      cssName: "settings",
+      title: "Story Settings"
     }
   },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/privacy",
     component: SettingsPrivacyPage,
+    name: "SettingsPrivacy",
     meta: {
+      title: "Privacy",
       cssName: "settings"
     }
   },
@@ -216,6 +223,7 @@ const routes = [
     path: "/settings/referrals",
     component: SettingsReferralsPage,
     meta: {
+      title: "Referrals",
       cssName: "settings"
     }
   },
