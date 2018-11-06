@@ -266,45 +266,6 @@
         height: auto;
       }
     }
-
-    .os-content {
-      &:after {
-        content: "";
-        height: 60px;
-        clear: both;
-        display: none;
-
-        .notifications-popup & {
-          @include media-breakpoint-up($desktop-breakpoint) {
-            display: block;
-          }
-        }
-      }
-    }
-
-    &.os-host-resize-disabled.os-host-scrollbar-horizontal-hidden
-      > .os-scrollbar-vertical {
-      bottom: 0;
-
-      .notifications-popup & {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          bottom: 60px;
-        }
-      }
-    }
-
-    .os-scrollbar {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-    }
-
-    &.os-host {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        overflow: hidden !important;
-        flex: 1;
-      }
-    }
   }
 }
 
