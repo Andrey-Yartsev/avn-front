@@ -10,8 +10,11 @@ export default {
   methods: {
     onScrollHandler: function() {
       const { loading, allDataReceived } = this.store;
+      const isLoading = this.loadingName
+        ? this.store[this.loadingName]
+        : loading;
       const isOnBottom = getBottom();
-      if (isOnBottom && !loading && !allDataReceived) {
+      if (isOnBottom && !isLoading && !allDataReceived) {
         this.infinityScrollGetDataMethod();
       }
     }

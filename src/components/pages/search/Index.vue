@@ -2,6 +2,21 @@
   <div class="searchView">
     <div class="container">
       <div class="over-container">
+
+        <div class="header-search-page hidden-mobile">
+          <div class="field">
+            <form v-on:submit.stop.prevent="searchChange">
+              <input
+                type="text"
+                placeholder="Search"
+                v-model="localQuery"
+              >
+              <span role="button" tabindex="-1" id="header-search-clear"></span>
+              <button type="submit" class="header-search-submit"></button>
+            </form>
+          </div>
+        </div>
+
         <nav class="explore-nav">
           <router-link
             v-for="v in types"
@@ -10,13 +25,26 @@
             :class="{active: v.active}"
           >{{ v.title }}</router-link>
         </nav>
+
         <div class="explore">
-          <component
-            :is="component"
-            :items="items"
-            :loading="loading"
-            :query="query"
-          />
+          <div :class="wrapperClass">
+            <div class="search-bar hidden-desktop">
+              <form v-on:submit.stop.prevent="searchChange">
+                <input
+                  placeholder="Search"
+                  type="text"
+                  v-model="localQuery"
+                />
+              </form>
+            </div>
+            <component
+              :is="component"
+              :items="items"
+              :loading="loading"
+              :query="query"
+            />
+            <NoResults :query="query" :loading="loading" />
+          </div>
         </div>
       </div>
     </div>
@@ -24,10 +52,12 @@
 </template>
 
 <script>
-import Users from "./Users";
-import Posts from "./Posts";
-import Videos from "./Videos";
-import Photos from "./Photos";
+import Users from "./types/Users";
+import Posts from "./types/Posts";
+import Videos from "./types/Videos";
+import Photos from "./types/Photos";
+import InfinityScroll from "@/mixins/infinityScroll";
+import NoResults from "./NoResults";
 
 const types = {
   users: "People",
@@ -36,15 +66,30 @@ const types = {
   photos: "Photos"
 };
 
+const wrapperClasses = {
+  posts: "postCollectionView",
+  users: "userCollectionView",
+  video: "videoCollectionView",
+  photo: "photoCollectionView"
+};
+
 export default {
   name: "Search",
+
+  mixins: [InfinityScroll],
 
   components: {
     Users,
     Posts,
     Videos,
-    Photos
+    Photos,
+    NoResults
   },
+
+  data: () => ({
+    loadingName: "searchRequestLoading",
+    localQuery: ""
+  }),
 
   computed: {
     component() {
@@ -56,8 +101,11 @@ export default {
     type() {
       return this.$route.params.type;
     },
+    wrapperClass() {
+      return wrapperClasses[this.type];
+    },
     items() {
-      return this.$store.state.search.page.items;
+      return this.$store.state.search.page.posts;
     },
     types() {
       return Object.entries(types).map(v => {
@@ -69,36 +117,55 @@ export default {
       });
     },
     loading() {
-      return this.$store.state.search.page.searchLoading;
+      return this.$store.state.search.page.searchRequestLoading;
+    },
+    store() {
+      return this.$store.state.search.page;
     }
   },
 
   methods: {
     search() {
+      this.$store.commit("search/page/reset");
       this.$store.dispatch("search/page/search", {
         type: this.type,
-        query: this.query,
-        offset: 0,
-        limit: 10
+        query: this.query
       });
+    },
+    searchNext() {
+      this.$store.dispatch("search/page/searchNext", {
+        type: this.type,
+        query: this.query
+      });
+    },
+    searchChange() {
+      this.$router.push(`/search/${this.type}/${this.localQuery}`);
     },
     changeType(type) {
       this.$router.push(`/search/${type}/${this.query}`);
+    },
+    infinityScrollGetDataMethod() {
+      this.searchNext();
     }
   },
 
   watch: {
     query() {
       this.search();
+      this.localQuery = this.query;
     },
     type() {
       this.$store.commit("search/page/reset");
+      this.$router.push(`/search/${this.type}/${this.localQuery}`);
       this.search();
     }
   },
 
   created() {
     this.search();
+    if (this.query) {
+      this.localQuery = this.query;
+    }
   }
 };
 </script>

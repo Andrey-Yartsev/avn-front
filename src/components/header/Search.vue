@@ -1,23 +1,32 @@
 <template>
-  <form class="header-search" method="get" v-on:submit.stop.prevent="goTo('/search/users/' + query)">
+  <div
+    class="header-search"
+  >
     <input
-      @keyup="search"
+      @keyup="keyup"
       v-model="query"
       class="header-search-input rounded sm"
       name="query" maxlength="13" autocomplete="off"
       placeholder="Search" type="text"/>
     <span role="button" tabindex="-1" id="header-search-clear"></span>
-    <button type="submit" class="header-search-submit"></button>
+
+    <button
+      type="button" class="header-search-submit"
+      @click="toToSearchPage"
+    ></button>
+
     <button
       type="button"
       class="btn-clear-search"
       :class="{hidden: !opened}"
       @click="reset"
     ></button>
+
     <div class="header-search-results">
       <div
         class="SearchResultsPopupCollectionView"
         :class="{hidden: !opened}"
+        v-click-outside="reset"
       >
         <div class="users">
           <div class="SearchResultsPopupView">
@@ -50,12 +59,18 @@
         <button type="button" class="close" @click="reset"></button>
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
+import ClickOutside from "vue-click-outside";
+
 export default {
   name: "SearchBubble",
+
+  directives: {
+    ClickOutside
+  },
 
   data() {
     return {
@@ -73,7 +88,22 @@ export default {
     }
   },
 
+  watch: {
+    query() {
+      this.search();
+    }
+  },
+
   methods: {
+    keyup(e) {
+      if (e.key === "Enter") {
+        this.toToSearchPage();
+      }
+    },
+    toToSearchPage() {
+      this.$router.push("/search/users/" + this.query);
+      this.reset();
+    },
     search() {
       if (!this.query) {
         this.$store.commit("search/bubble/reset");
@@ -90,16 +120,12 @@ export default {
           .then(() => {
             this.opened2 = true;
           });
-      }, 500);
+      }, 200);
     },
     reset() {
       this.query = "";
       this.opened2 = false;
       this.$store.commit("search/bubble/reset");
-    },
-    goTo(path) {
-      this.reset();
-      this.$router.push(path);
     }
   }
 };

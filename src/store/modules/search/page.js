@@ -1,19 +1,56 @@
 "use strict";
 
 import { createRequestAction } from "../../utils/storeRequest";
+import PostMixin from "@/store/mixins/posts";
 
-const state = {};
+const limit = 10;
+
+const state = {
+  loading: false,
+  marker: null,
+  offset: 0,
+  allDataReceived: false,
+  limit
+};
 
 const mutations = {
   reset(state) {
-    state.items = [];
+    state.posts = [];
+    state.loading = false;
+    state.marker = null;
+    state.offset = 0;
+    state.allDataReceived = false;
+    state.limit = limit;
+  },
+  searchSetNextState(state, { list: posts, marker }) {
+    if (posts.length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + limit;
+    }
+    state.marker = marker;
   }
 };
 
-const actions = {};
+const actions = {
+  search({ dispatch, commit }, params) {
+    params.limit = limit;
+    dispatch("searchRequest", params).then(r => {
+      commit("searchSetNextState", r);
+    });
+  },
+  searchNext({ dispatch, commit, state }, params) {
+    params.offset = state.offset;
+    params.marker = state.marker || "";
+    params.limit = limit;
+    dispatch("searchRequest", params).then(r => {
+      commit("searchSetNextState", r);
+    });
+  }
+};
 
 createRequestAction({
-  prefix: "search",
+  prefix: "searchRequest",
   apiPath: "search/{type}",
   state,
   mutations,
@@ -22,19 +59,20 @@ createRequestAction({
     method: "GET",
     query: {}
   },
-  resultKey: "items",
+  resultKey: "posts",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
+    options.query.marker = params.marker || "";
     return options;
   },
   paramsToPath: function(params, path) {
     return path.replace(/{type}/, params.type);
   },
-  resultConvert: function(result) {
-    return result.list;
+  resultConvert: function(result, state) {
+    return [...state.posts, ...result.list];
   }
 });
 
@@ -78,7 +116,7 @@ actions.unblock = ({ commit, dispatch }, userId) => {
 };
 
 mutations.extendUser = (state, { userId, data }) => {
-  state.items = state.items.map(user => {
+  state.posts = state.posts.map(user => {
     if (user.id === userId) {
       user = { ...user, ...data };
     }
@@ -89,6 +127,6 @@ mutations.extendUser = (state, { userId, data }) => {
 export default {
   namespaced: true,
   state,
-  actions,
-  mutations
+  actions: { ...PostMixin.actions, ...actions },
+  mutations: { ...PostMixin.mutations, ...mutations }
 };

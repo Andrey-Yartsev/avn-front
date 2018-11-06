@@ -1,6 +1,5 @@
 <template>
-  <div class="userCollectionView">
-    <div class="users">
+  <div class="users">
       <div class="userView" v-for="v in items" v-bind:key="v.id">
         <div class="bg"><img v-if="v.header" :src="v.header"/></div>
         <div class="user-container">
@@ -23,15 +22,12 @@
         </div>
       </div>
     </div>
-    <NoResults :query="query" :loading="loading" />
-  </div>
 </template>
 
 <script>
-import NoResults from "./NoResults";
-import SubscribeButton from "./SubscribeButton";
-import FollowButton from "./FollowButton";
-import UserDropdown from "./UserDropdown";
+import SubscribeButton from "../SubscribeButton";
+import FollowButton from "../FollowButton";
+import UserDropdown from "../UserDropdown";
 
 export default {
   name: "SearchUsers",
@@ -39,7 +35,6 @@ export default {
   props: ["items", "query", "loading"],
 
   components: {
-    NoResults,
     SubscribeButton,
     FollowButton,
     UserDropdown

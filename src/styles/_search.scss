@@ -1,7 +1,6 @@
 @import "components/imports";
 
 .searchView {
-
   .posts {
     @include media-breakpoint-up($desktop-breakpoint) {
       column-gap: 30px;
@@ -10,84 +9,58 @@
       margin-top: -30px;
       column-fill: auto;
     }
-  }
+    .post {
+      background: $white;
 
-  .post {
-
-    &:not(.videoView) {
-      background-color: $white;
+      .postCollectionView & {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        background-color: transparent;
         width: 100%;
         display: inline-block;
         vertical-align: top;
         break-inside: avoid;
         margin: 0 0 30px;
-        padding-bottom: 0;
-        border-bottom: none;
-
-        .postComments,
-        .tip-form,
-        .comment-form,
-        .actions .report {
-          display: none;
-        }
       }
 
-      .more-functions {
-        z-index: 10;
-      }
-    }
-
-    .postCollectionView & {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    &-details {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
+      &-details {
+        transform: translateZ(0);
         background-color: $white;
         position: relative;
-        transform: translateZ(0);
+
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 0;
+        }
+
       }
 
-      &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        box-shadow: 0 8px 30px rgba(#000, 0.1);
-        z-index: 0;
-        display: none;
+      box-shadow: 0 8px 30px rgba(#000, 0.1);
+
+      .actions {
+        z-index: 2;
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          display: block;
+          padding-bottom: 16px;
+          z-index: 1;
         }
       }
 
-    }
-
-    .actions {
-      z-index: 2;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 16px;
-        z-index: 1;
+      .text {
+        transform: rotateX(0);
       }
-    }
-
-    .text {
-      transform: rotateX(0);
     }
   }
 }
 
 .searchView {
-
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     width: 100%;
@@ -97,7 +70,6 @@
   }
 
   .explore {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       position: relative;
       width: 100%;
@@ -106,7 +78,6 @@
 
   .container,
   .over-container {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
       flex-wrap: wrap;
@@ -115,7 +86,6 @@
   }
 
   .container {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 0 0 100%;
       align-items: stretch;
@@ -126,7 +96,7 @@
   }
 
   .over-container {
-
+    position: relative;
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
       max-width: 100%;
@@ -136,17 +106,31 @@
   }
 
   .explore-nav {
-
     @include media-breakpoint-down($desktop-breakpoint) {
       width: 100%;
     }
+  }
+
+  .header-search-page {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: flex;
+    padding-bottom: 10px;
+  }
+
+  .search-bar {
+    input {
+      background-color: $white;
+      padding: 20px 20px;
+    }
+    border-bottom: 1px solid rgba($gray, 0.2);
   }
 
   .posts,
   .users,
   .photos,
   .videos {
-
     &:empty {
       + .no-results-search {
         opacity: 1;
