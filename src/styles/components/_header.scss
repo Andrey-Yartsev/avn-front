@@ -98,11 +98,6 @@
     .header-wrapper {
       background-color: transparent;
       box-shadow: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //box-shadow: none;
-        //background-color: transparent;
-      }
     }
 
     .btn.make-post-btn {
@@ -118,13 +113,16 @@
 
     .header-logo {
 
-      img,
       svg {
-        display: none;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+      }
 
-        &.white-logo {
-          display: block;
-        }
+      .b, .e, .f, .c, .d {
+        fill: #fff;
+      }
+
+      .e, .f {
+        opacity: 1;
       }
     }
 
@@ -435,28 +433,48 @@
   align-items: center;
   margin: 0 auto;
   text-align: center;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
   }
+
   a,
-  img,
   svg {
     display: block;
   }
-  img,
+
   svg {
     width: 105px;
-    &.white-logo {
-      display: none;
-    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 125px;
     }
   }
 
-  .white-logo {
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+  .a {
+    fill: none;
   }
+
+  .b, .e, .f {
+    fill: #ff4081;
+  }
+
+  .c {
+    fill: #9466ff;
+  }
+
+  .d {
+    fill: #2196f3;
+  }
+
+  .e {
+    opacity: 0.5;
+  }
+
+  .f {
+    opacity: 0.2;
+  }
+
 }
 .page-title {
   font: inherit;

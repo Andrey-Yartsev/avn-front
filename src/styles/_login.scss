@@ -123,7 +123,6 @@
         display: block;
       }
 
-      img,
       svg {
         height: 3.2em;
         @include media-breakpoint-up($desktop-breakpoint) {
