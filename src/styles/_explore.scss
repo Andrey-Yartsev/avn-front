@@ -229,6 +229,17 @@
         display: none;
       }
     }
+
+    &.videos {
+
+      .post {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          border-bottom: 1px solid rgba($gray, 0.2);
+          padding-bottom: 8px;
+        }
+      }
+    }
   }
 
   .all,
