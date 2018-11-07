@@ -20,10 +20,10 @@
             />
             <Actions 
               :post="post" 
-              v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+              v-on:postShowCommentForm="showForm"
               v-on:postLike="likePost"
               :openModal="openModal"
-            ></Actions>
+            />
         </div>
         <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
         <CommentsList
@@ -81,6 +81,11 @@ export default {
   },
   methods: {
     openModal() {
+      if (!this.post.canViewMedia) {
+        this.showSubcribeModal();
+        return;
+      }
+
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
@@ -102,9 +107,29 @@ export default {
       });
     },
     likePost() {
+      if (!this.post.canViewMedia) {
+        this.showSubcribeModal();
+        return;
+      }
+
       this.$store.dispatch(this.actionPrefix + "/likePost", {
         postId: this.post.id,
         addLike: !this.post.isFavorite
+      });
+    },
+    showForm() {
+      if (!this.post.canViewMedia) {
+        this.showSubcribeModal();
+        return;
+      }
+
+      this.showAddCommentForm = !this.showAddCommentForm;
+    },
+
+    showSubcribeModal() {
+      this.$store.dispatch("modal/show", {
+        name: "subscribe",
+        data: this.post.author
       });
     }
   },

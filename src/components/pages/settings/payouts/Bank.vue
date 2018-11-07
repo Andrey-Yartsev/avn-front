@@ -36,7 +36,7 @@
             </label>
           </div>
 
-          <div class="form-group-btn hidden-mobile">
+          <div class="form-group-btn">
             <button type="submit" class="btn lg saveChanges">Next</button>
           </div>
 
@@ -82,7 +82,8 @@ export default {
   },
 
   created: function() {
-    this.localBank = this._clone(this.bank);
+    this.localBank = {};
+    // this.localBank = this._clone(this.bank);
   }
 };
 </script>
