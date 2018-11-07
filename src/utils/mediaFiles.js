@@ -8,29 +8,26 @@ export const uniqId = () => {
   return "d" + out;
 };
 
-export const hashCode = str => {
-  let hash = 0;
-  let i;
-  let chr;
-
-  if (str.length === 0) return hash;
-  for (i = 0; i < str.length; i++) {
-    chr = str.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0;
-  }
-  return hash;
-};
-
 export const getMediaFilePreview = file => {
   return new Promise(resolve => {
     let reader = new FileReader();
 
     reader.onload = function(resFileData) {
       const fileContent = resFileData.target.result;
-      const mediaType =
-        fileContent.substr(0, 10) === "data:video" ? "video" : "photo";
       const preview = fileContent;
+      let mediaType;
+
+      switch (true) {
+        case fileContent.startsWith("data:video"):
+          mediaType = "video";
+          break;
+        case fileContent.startsWith("data:image/gif"):
+          mediaType = "gif";
+          break;
+        case fileContent.startsWith("data:image"):
+          mediaType = "photo";
+          break;
+      }
 
       let video = document.createElement("video");
 
@@ -41,18 +38,15 @@ export const getMediaFilePreview = file => {
 
           canvas.setAttribute("width", videoWidth);
           canvas.setAttribute("height", videoHeight);
-
           canvas
             .getContext("2d")
             .drawImage(video, 0, 0, videoWidth, videoHeight);
 
           const preview = canvas.toDataURL("image/jpeg");
-
           resolve({
             preview,
             mediaType,
             raw: fileContent
-            // hash: hashCode(preview)
           });
 
           video = null;
@@ -66,7 +60,6 @@ export const getMediaFilePreview = file => {
             preview,
             mediaType,
             raw: preview
-            // hash: hashCode(preview)
           });
         }, 100);
       }

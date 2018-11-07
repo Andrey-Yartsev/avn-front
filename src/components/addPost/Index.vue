@@ -38,10 +38,14 @@
       </div>
       <div class="actions">
         <div class="actions-controls">
-          <label class="add-media-input">
-            <input type="file" multiple @change="addMediaFiles">
+          <label :class="['add-media-input', {disabled: cantAddMoreMedia}]">
+            <input
+              type="file"
+              multiple
+              :accept="inputAccepts"
+              @change="addMediaFiles"
+            />
           </label>
-          <!--<span class="voting-block-toggle-btn"></span> TODO votiong block-->
           <template v-if="hasSubscribePrice">
             <div class="b-check-state">
               <label>
@@ -83,7 +87,8 @@ const InitialState = {
   tweetSend: false,
   postMsg: "",
   isSaving: false,
-  isFree: false
+  isFree: false,
+  mediaType: "all"
 };
 
 export default {
@@ -118,6 +123,24 @@ export default {
     },
     newPost() {
       return this.$store.state.post.newPost;
+    },
+    allMediaTypes() {
+      const { photo, video, gif } = this.inputAcceptTypes;
+      return [...photo, ...video, ...gif];
+    },
+    inputAccepts() {
+      const accepts =
+        this.mediaType === "all"
+          ? this.allMediaTypes
+          : this.inputAcceptTypes[this.mediaType];
+
+      return accepts.map(i => `.${i}`).join();
+    },
+    cantAddMoreMedia() {
+      return (
+        this.mediaType &&
+        this.preloadedMedias.length >= this.limits[this.mediaType]
+      );
     }
   },
   methods: {
@@ -127,6 +150,7 @@ export default {
       this.postMsg = InitialState.postMsg;
       this.isSaving = InitialState.isSaving;
       this.isFree = InitialState.isFree;
+      this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
     },
     addNewPost: async function(e) {
@@ -149,6 +173,9 @@ export default {
       }
 
       this.$store.dispatch("post/savePost", newPostData);
+    },
+    toast(text) {
+      this.$store.dispatch("global/flashToast", text, { root: true });
     }
   },
   watch: {
