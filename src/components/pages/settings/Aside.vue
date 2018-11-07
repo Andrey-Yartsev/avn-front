@@ -49,6 +49,7 @@
             <router-link :to="'/settings/' + v.name" :class="navClass(v.name)"
                v-for="v in navigation"
                v-bind:key="v.name"
+               class="settings-nav__item"
             >
               <span>{{ v.title }}</span>
             </router-link>
