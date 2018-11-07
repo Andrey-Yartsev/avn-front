@@ -82,8 +82,9 @@
   &__per-month {
     position: absolute;
     font-weight: 400;
-    top: 6px;
+    top: 50%;
     right: 10px;
+    transform: translateY(-50%);
     color: lighten($gray, 20%);
   }
 
