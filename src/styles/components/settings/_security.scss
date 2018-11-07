@@ -1,14 +1,21 @@
 .otp-block {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    padding: 0 0 11px;
-    .shadow-block {
-      padding: 14px 20px;
+
+  .shadow-block {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 14px 20px 25px;
       margin: 0 0 25px;
     }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 0 25px 30px;
+    }
+
+    &:empty {
+      display: none;
+    }
   }
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 0 25px 30px;
-  }
+
   ol {
     font-size: 13px;
     padding: 13px 10px 7px 0;
@@ -117,17 +124,6 @@
         }
       }
     }
-  }
-}
-.form-title .inner > .close-all-sessions-btn {
-  color: $default-primary-color;
-  &:after {
-    @include icon-font;
-    content: "\E605";
-    font-size: 24px;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 0 0 10px;
   }
 }
 
@@ -239,6 +235,7 @@
     opacity: 0.3;
     color: inherit;
     transition: opacity 0.3s ease, color 0.3s ease;
+
     &:hover {
       opacity: 1;
       color: $default-primary-color;

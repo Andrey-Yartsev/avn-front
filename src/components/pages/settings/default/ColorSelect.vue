@@ -72,19 +72,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.user-color-select {
-  width: 100%;
-
-  &-visible {
-    .options-wrapper {
-      display: block !important;
-    }
-    .user-color-select-wrapper .select:before {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
-}
-</style>

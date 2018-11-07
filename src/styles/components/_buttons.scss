@@ -534,3 +534,16 @@ button,
     color: $secondary-color-darken;
   }
 }
+
+.close-all-sessions-btn {
+  color: $default-primary-color;
+
+  &:after {
+    @include icon-font;
+    content: "\E605";
+    font-size: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 10px;
+  }
+}

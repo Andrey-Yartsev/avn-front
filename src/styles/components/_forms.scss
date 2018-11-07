@@ -440,14 +440,14 @@ label {
       border: none;
       background: none;
       padding: 0;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -50%);
       font: inherit;
       font-size: 15px;
       font-weight: 500;
-      color: $secondary-color;
+      //position: absolute;
+      //right: 0;
+      //top: 50%;
+      //transform: translate(0, -50%);
+      //color: $secondary-color;
     }
   }
   .subtext {

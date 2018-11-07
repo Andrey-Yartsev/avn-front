@@ -215,6 +215,10 @@
   }
 }
 
+.user-color-select {
+  width: 100%;
+}
+
 .user-color-select-wrapper {
   width: 100%;
 
@@ -233,6 +237,15 @@
     z-index: 100;
     visibility: hidden;
     opacity: 0;
+    transition: opacity .4s;
+
+    .user-color-select-visible & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
   }
 
   .select {
@@ -244,40 +257,11 @@
     cursor: pointer;
     font-weight: 500;
 
-    &:before {
-      position: absolute;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-bottom: 12px solid $white;
-      content: "";
-      left: 50%;
-      margin-left: -12px;
-      top: 100%;
-      z-index: 11;
-      margin-top: -5px;
-      visibility: hidden;
-      opacity: 0;
-      z-index: 2;
-    }
-
     &__text {
       display: block;
       padding: 6px 15px;
       position: relative;
       z-index: 0;
-
-      &:before {
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        content: "";
-        background: rgba(#000, 0.4);
-        z-index: 100;
-        visibility: hidden;
-        opacity: 0;
-      }
 
       &:after {
         content: "";
@@ -291,17 +275,22 @@
       }
     }
   }
+
   .options-wrapper {
     position: absolute;
-    display: none;
     top: 100%;
     background: $white;
     left: 30px;
     right: 30px;
     border-radius: 5px;
     box-shadow: 0 5px 28px rgba(#000, 0.21);
-    margin: -14px 0 0;
+    margin: -10px 0 0;
     z-index: 110;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform .4s, opacity .2s;
+    transition-delay: .15s;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin: -18px 0 0;
@@ -309,15 +298,57 @@
       left: -55px;
       top: calc(100% + 25px);
     }
+
+    .user-color-select-visible & {
+      pointer-events: auto;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &:after {
+      position: absolute;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 12px solid $white;
+      content: "";
+      left: 50%;
+      margin-left: -12px;
+      bottom: 100%;
+      margin-top: -5px;
+      z-index: 2;
+    }
   }
+
   &.primary {
     .select {
       background: $primary-color;
     }
+
+    .options-wrapper {
+
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          right: calc(50% + (50% / 2) + 15px);
+          left: auto;
+        }
+      }
+    }
   }
+
   &.secondary {
     .select {
       background: $secondary-color;
+    }
+
+    .options-wrapper {
+
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          left: calc(50% + (50% / 2) + 15px);
+        }
+      }
     }
   }
 
