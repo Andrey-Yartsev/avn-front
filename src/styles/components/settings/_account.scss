@@ -9,7 +9,7 @@
   }
   @include media-breakpoint-down($desktop-breakpoint) {
     text-align: center;
-    p {
+    .input-help {
       padding: 16px 0 0;
       margin: 11px 0 0;
       border-top: 1px solid rgba($gray, 0.2);
@@ -112,6 +112,21 @@
     .email-block,
     .twitter-block,
     .delete-account-block {
+      display: none;
+    }
+    .form-title_cols {
+      display: none;
+    }
+  }
+}
+.ManageView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .email-block,
+    .twitter-block,
+    .password-form {
+      display: none;
+    }
+    .form-title_cols {
       display: none;
     }
   }

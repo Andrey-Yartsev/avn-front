@@ -7,7 +7,7 @@
           <div class="form-group">
             <label class="form-group-inner">
               <span class="label">Name</span>
-              <input name="name" v-model="user.name">
+              <input name="name" v-model="localUser.name">
             </label>
           </div>
           <div class="form-group">

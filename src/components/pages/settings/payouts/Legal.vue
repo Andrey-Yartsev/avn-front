@@ -141,7 +141,9 @@
                 <span class="label"></span>
                 <div class="checkbox-wrapper">
                   <label class="checkbox-label">
-                    <input type="checkbox" name="tos" value="1">
+                    <input type="checkbox" name="tos" value="1"
+                           v-model="tos"
+                    >
                     <span></span>
                   </label>
                   <div class="input-desc payouts-desc">
@@ -161,7 +163,7 @@
             </label>
           </div>
 
-          <div class="form-group-btn hidden-mobile">
+          <div class="form-group-btn">
             <button type="submit" class="btn lg saveChanges">Next
             </button>
           </div>
@@ -198,7 +200,8 @@ export default {
       postalCode: "",
       city: "",
       state: "",
-      country: "United States of America"
+      country: "United States of America",
+      tos: false
     };
   },
 
@@ -210,6 +213,10 @@ export default {
 
   methods: {
     save() {
+      if (!this.tos) {
+        alert("You need to agree with the terms of service");
+        return;
+      }
       const fields = [
         "firstName",
         "lastName",

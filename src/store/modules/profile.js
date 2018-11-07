@@ -7,7 +7,9 @@ const state = {
   loading: false,
   error: null,
   fetchLoading: true,
-  fetchError: true
+  fetchError: true,
+  changed: false,
+  changeTrigger: false
 };
 
 const actions = {
@@ -68,6 +70,9 @@ const mutations = {
   },
   setFetchError(state, error) {
     state.fetchError = error;
+  },
+  setChanged(state, changed) {
+    state.changed = changed;
   }
 };
 

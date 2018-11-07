@@ -1,7 +1,11 @@
 <template>
   <div class="aside-col aside-col_sticky">
     <div class="settings-aside">
-      <div id="avatarBgAside" class="rounded-container white-bg-block" :class="{'hidden-mobile': hideBgOnMobile}">
+      <div
+        id="avatarBgAside"
+        class="rounded-container white-bg-block"
+        :class="{'hidden-mobile': !showAvatarBlock}"
+      >
         <div class="settings-profile-images">
           <div class="bg"></div>
           <div class="avatar-block">
@@ -32,11 +36,11 @@
           </div>
         </div>
       </div>
-      <div class="rounded-container">
+      <div class="rounded-container" :class="{'hidden-mobile': !isHome}">
         <div class="form-title hidden-desktop">
           <div class="inner">
             <span class="semi-transparent">
-              NAME
+              {{ user.name }}
             </span>
           </div>
         </div>
@@ -52,24 +56,30 @@
         </div>
       </div>
 
-      <div class="site-footer"></div>
+      <Footer v-if="isHome" />
     </div>
   </div>
 </template>
 
 <script>
+import Mobile from "./mobile";
+import Footer from "@/components/footer/Index";
+
 export default {
   name: "SettingsAside",
+
+  mixins: [Mobile],
+
+  components: {
+    Footer
+  },
 
   computed: {
     user() {
       return this.$store.state.auth.user;
     },
-    hideBgOnMobile() {
+    showAvatarBlock() {
       return this.$route.name === "SettingsProfile";
-    },
-    hideFooterOnMobile() {
-      return this.$route.name === "Settings";
     },
     navigation() {
       return [

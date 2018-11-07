@@ -6,12 +6,25 @@ export default {
   },
 
   created: function() {
+    this.saveHandler = this.save.bind(this);
     this.localUser = this._clone(this.$store.state.auth.user);
+
+    window.addEventListener("saveProfile", this.saveHandler);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("saveProfile", this.saveHandler);
   },
 
   watch: {
     user(user) {
       this.localUser = this._clone(user);
+    },
+    changed: {
+      immediate: true,
+      handler(changed) {
+        this.$store.commit("profile/setChanged", changed);
+      }
     }
   },
 
