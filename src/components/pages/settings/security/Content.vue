@@ -90,14 +90,20 @@
         <div class="session-content">
           <div class="content shadow-block" v-if="sessions.length">
             <div class="SessionsView" v-for="v in sessions" v-bind:key="v.id">
-              <p><span class="browser">{{ v.client }}</span>
-                <span class="os">{{ v.os }}</span></p>
-              <p class="ip-country">{{ v.ipAddress }} - {{ v.countryName }}</p>
-              <span class="status">
-                <span class="last-activity" v-if="!v.isCurrent">{{ v.lastActivity }}</span>
-                <span class="online" v-else>Online</span>
-              </span>
-              <button type="button" class="delete" @click="deleteSession(v.id)"></button>
+              <div class="session-info-header">
+                <p>
+                  <span class="browser">{{ v.client }}</span>
+                  <span class="os">{{ v.os }}</span>
+                </p>
+                <span class="status">
+                  <span class="last-activity" v-if="!v.isCurrent">{{ v.lastActivity }}</span>
+                  <span class="online" v-else>Online</span>
+                </span>
+                <button type="button" class="delete" @click="deleteSession(v.id)"></button>
+              </div>
+              <div class="session-info-details">
+                <p class="ip-country">{{ v.ipAddress }} - {{ v.countryName }}</p>
+              </div>
             </div>
           </div>
           <div class="empty-table-info shadow-block" v-else>
