@@ -119,7 +119,7 @@
               <video
                 ref="videoTag"
                 v-if="preview.mediaType === 'video'"
-                :src="preview.raw"
+                :src="preview.fileContent"
                 loop="true"
               ></video>
             </div>
