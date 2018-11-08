@@ -55,6 +55,10 @@ export default {
     from: {
       type: String,
       required: true
+    },
+    hide: {
+      type: Function,
+      required: true
     }
   },
   methods: {
@@ -69,14 +73,16 @@ export default {
         postId: this.postId
       });
 
+      this.hide();
+
       if (this.isOnPostPage) {
         return this.$router.push("/");
       }
-
-      this.$store.dispatch("modal/hide", { name: "post" });
     },
 
     reportUser() {
+      this.hide();
+
       this.$store.dispatch("modal/show", {
         name: "postReport",
         data: {

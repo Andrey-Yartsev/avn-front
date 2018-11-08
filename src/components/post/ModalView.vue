@@ -70,6 +70,10 @@ export default {
   watch: {
     index: function() {
       this.scroll();
+      this.$store.dispatch(
+        "modalRouter/updatePath",
+        `post/${this.post.id}/${this.from}`
+      );
     }
   },
   created() {

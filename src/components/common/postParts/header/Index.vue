@@ -20,6 +20,7 @@
           :postId="postId"
           :userId="user.id"
           :from="from"
+          :hide="hide"
         />
       </div>
     </div>
