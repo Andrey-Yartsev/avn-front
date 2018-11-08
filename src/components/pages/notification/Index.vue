@@ -3,15 +3,15 @@
 
     <div class="notifications-header">
       <div class="header_container">
-        <a href="/ddddd" class="avatar header-avatar"></a>
+        <router-link :to="'/' + user.username" class="avatar header-avatar"></router-link>
         <h1 class="page-title">Notifications</h1>
-        <a class="btn-settings" href="/settings/notifications"></a>
+        <router-link class="btn-settings" to="/settings/notifications"></router-link>
       </div>
     </div>
 
     <MobileHeader />
 
-    <a class="addPost-btn-float hidden-desktop" href="/addPost"></a>
+    <router-link class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
 
     <div class="notifications-container">
       <div class="notifications-filter">
@@ -25,22 +25,22 @@
             @click.prevent="goTo('/notifications/' + v.name)"
           >{{ v.title }}</a>
         </div>
-        <a class="btn-settings hidden-mobile" href="/settings/notifications"></a>
+        <router-link class="btn-settings hidden-mobile" to="/settings/notifications"></router-link>
       </div>
 
       <div class="notifications">
-          <div class="NotificationsView" :class="v.type" v-for="v in items" v-bind:key="v.id">
-            <div class="avatars-wrapper">
-              <router-link :to="'/' + v.user.username" class="avatar">
-                <img :src="v.user.avatar" v-if="v.user.avatar"/>
-              </router-link>
-              <span class="timestamp">{{ time(v.createdAt) }}</span>
-            </div>
-            <div class="content">
-              <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
-              {{ v.type }} your post
-            </div>
+        <div class="NotificationsView" :class="v.type" v-for="v in items" v-bind:key="v.id">
+          <div class="avatars-wrapper">
+            <router-link :to="'/' + v.user.username" class="avatar">
+              <img :src="v.user.avatar" v-if="v.user.avatar"/>
+            </router-link>
+            <span class="timestamp">{{ time(v.createdAt) }}</span>
           </div>
+          <div class="content">
+            <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
+            {{ v.type }} your post
+          </div>
+        </div>
       </div>
 
       <div class="msg-no-content">
@@ -58,6 +58,7 @@ import dateFns from "date-fns";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import ModalRouter from "@/mixins/modalRouter";
 import MobileHeader from "@/components/header/Mobile";
+import User from "@/mixins/user";
 
 const typeTitles = {
   all: "Notifications",
@@ -73,7 +74,7 @@ const typeTitles = {
 export default {
   name: "Notifications",
 
-  mixins: [ModalRouter],
+  mixins: [ModalRouter, User],
 
   components: {
     Scrolly,
