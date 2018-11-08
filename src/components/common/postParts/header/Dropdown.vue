@@ -78,6 +78,8 @@ export default {
       if (this.isOnPostPage) {
         return this.$router.push("/");
       }
+
+      window.location.hash = "";
     },
 
     reportUser() {
