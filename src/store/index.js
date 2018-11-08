@@ -27,6 +27,7 @@ import payouts from "@/store/modules/payouts";
 import twitter from "@/store/modules/twitter";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
+import tip from "@/store/modules/tip";
 
 Vue.use(Vuex);
 
@@ -59,7 +60,8 @@ const store = new Vuex.Store({
     payouts,
     twitter,
     emails,
-    blocked
+    blocked,
+    tip
   }
 });
 

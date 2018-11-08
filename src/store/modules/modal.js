@@ -31,6 +31,10 @@ const state = {
   addPost: {
     show: false,
     data: {}
+  },
+  iframe: {
+    show: false,
+    data: {}
   }
 };
 

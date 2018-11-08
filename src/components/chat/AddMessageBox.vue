@@ -10,14 +10,28 @@
       />
     </div>
     <form class="chatForm" v-on:submit.stop.prevent="sendMessage">
-      <label class="add-media-input btn-el" v-if="!preloadedMedias.length">
+      <label
+        class="add-media-input btn-el"
+        :class="{disabled: showTip}"
+        v-if="!preloadedMedias.length"
+      >
         <input
           @change="addMediaFiles"
           type="file"
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi">
       </label>
-      <button class="tips btn-el hidden"></button>
-      <div class="field-text-message">
+
+      <button
+        v-if="user"
+        class="tips btn-el"
+        @click.prevent="showTip = !showTip"
+        :class="{active: showTip}"
+      ></button>
+
+      <div
+        class="field-text-message"
+        :class="{hidden: showTip}"
+      >
         <textarea
           v-model="message"
           class="text-media-container" rows="1" cols="60" placeholder="Message" maxlength="500"
@@ -26,15 +40,15 @@
           <button type="button" class="btn-clear-price"></button>
         </div>
       </div>
-      <div class="chatTip hidden">
-        <button class="cancel btn btn-cancel">Cancel</button>
-        <div class="chatTip__field">
-          <input
-            type="text" pattern="\d{1,3}(?:\.\d{0,2})?" maxlength="6" name="tipAmount" class="tipAmount"
-            placeholder="Enter tip amount">
-        </div>
-        <button class="sendTip btn">Send tip</button>
-      </div>
+
+      <Tip
+        v-if="user"
+        :user="user"
+        ref="tip"
+        @cancel="closeTip"
+        :class="{chatTip: true, hidden: !showTip}"
+      />
+
       <div class="getPaidForm hidden">
         <button class="cancelPaid btn btn-cancel">Cancel</button>
         <input type="hidden" name="priceAmount" class="getPaidAmount">
@@ -54,6 +68,7 @@
 <script>
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
+import Tip from "@/components/common/tip/User";
 
 export default {
   name: "ChatAddMesssageBox",
@@ -61,20 +76,43 @@ export default {
   mixins: [FileUpload],
 
   components: {
-    MediaPreview
+    MediaPreview,
+    Tip
+  },
+
+  props: {
+    user: {
+      type: Object
+    }
   },
 
   data() {
     return {
       message: "",
-      isSaving: false
+      isSaving: false,
+      showTip: false
     };
   },
 
-  methods: {
+  computed: {
     canSend() {
+      if (this.showTip) {
+        return false;
+      }
       return this.message || this.preloadedMedias.length;
     },
+    funded() {
+      return this.$store.state.tip.funded;
+    }
+  },
+
+  watch: {
+    funded() {
+      this.closeTip();
+    }
+  },
+
+  methods: {
     async sendMessage() {
       this.isSaving = true;
       const mediaFiles = await this.getMediaFiles();
@@ -88,6 +126,10 @@ export default {
       }
       this.$emit("send", opt);
       this.message = "";
+    },
+    closeTip() {
+      this.showTip = false;
+      this.$refs.tip.reset();
     }
   }
 };

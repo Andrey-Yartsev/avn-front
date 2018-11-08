@@ -22,6 +22,7 @@
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
+      <IframeModal v-if="this.$store.state.modal.iframe.show" />
 
     </template>
   </div>
@@ -44,10 +45,12 @@ import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
+import IframeModal from "@/components/modal/Iframe";
 
 import rootClasses from "@/rootClasses";
 import ws from "@/ws";
 import Cookie from "@/utils/cookie";
+import postMessageHandler from "@/postMessage";
 
 const queryString = require("query-string");
 
@@ -67,7 +70,8 @@ export default {
     ModalRouter,
     CreateStoryModal,
     StoryInput,
-    AddPostModal
+    AddPostModal,
+    IframeModal
   },
   mixins: [ColorScheme],
   data() {
@@ -124,6 +128,12 @@ export default {
         path: "/"
       });
     }
+
+    window.addEventListener("message", postMessageHandler);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("message", postMessageHandler);
   }
 };
 </script>

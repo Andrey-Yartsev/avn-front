@@ -7,7 +7,7 @@
           v-bind:key="v.id"
           class="chatMessage notAuthorMessage"
           :class="{
-              authorMessage: isAuthorMessage(v),
+              authorMessage: isAuthor(v),
               firstMessageInGroup: v.firstMessageInGroup,
               withTime: v.lastMessageInGroup
               }"
@@ -17,8 +17,11 @@
               <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
             </div>
             <div class="messageContent">
-              <div class="messageWrapper ">
-                <span class="message">{{ v.text }}</span>
+              <div
+                class="messageWrapper"
+                :class="{'tipsMessage': v.isTips}"
+              >
+                <span class="message">{{ text(v) }}</span>
                 <div class="media" v-if="v.media.length">
                   <figure class="media-item active media-item_photo" data-index="0">
                     <a class="postLink" :href="v.media[0].src.source" target="_blank">
@@ -65,6 +68,10 @@ export default {
     _messages: {
       type: Array,
       required: true
+    },
+    withUser: {
+      type: Object,
+      required: true
     }
   },
 
@@ -90,8 +97,22 @@ export default {
   },
 
   methods: {
-    isAuthorMessage(message) {
+    isAuthor(message) {
       return message.fromUser.id === this.user.id;
+    },
+
+    text(message) {
+      if (!message.isTips) {
+        return message.text;
+      } else {
+        if (this.isAuthor(message)) {
+          return (
+            "You have funded " + this.withUser.name + " for " + message.text
+          );
+        } else {
+          return "You have been funded for " + message.text;
+        }
+      }
     },
 
     addGrouping(messages) {
