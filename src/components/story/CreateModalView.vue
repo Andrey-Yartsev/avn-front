@@ -144,7 +144,7 @@ import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
 import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
-import { getMediaFilePreview, fileUpload } from "@/utils/mediaFiles";
+import { getMediaFileMeta, fileUpload } from "@/utils/mediaFiles";
 
 export default {
   name: "CreateModal",
@@ -176,7 +176,7 @@ export default {
     },
     chooseFileEvent: async function() {
       this.showLoader = true;
-      this.preview = await getMediaFilePreview(this.file);
+      this.preview = await getMediaFileMeta(this.file);
 
       this.showLoader = false;
       this.showPreview = true;
