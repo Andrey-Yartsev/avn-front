@@ -100,6 +100,10 @@ export default {
         this.toToSearchPage();
       }
     },
+    goTo(path) {
+      this.$router.push(path);
+      this.reset();
+    },
     toToSearchPage() {
       this.$router.push("/search/users/" + this.query);
       this.reset();
