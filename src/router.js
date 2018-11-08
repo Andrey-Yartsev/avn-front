@@ -24,6 +24,7 @@ import ChatNewMessage from "./components/chat/NewMessage";
 import SearchPage from "./components/pages/search/Index";
 import StoryPage from "./components/pages/story/Index";
 import AddPostPage from "./components/pages/addPost/Index";
+import StreamPage from "./components/pages/stream/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -226,6 +227,11 @@ const routes = [
       title: "Referrals",
       cssName: "settings"
     }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/stream",
+    component: StreamPage
   },
   // PUBLIC ZONE
   {
