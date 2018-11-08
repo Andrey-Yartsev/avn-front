@@ -11,6 +11,7 @@
           <div class="chatViewContent">
             <div class="chatView__header">
               <span class="name">{{ v.withUser.name }}</span>
+              <span class="verified-user" v-if="v.withUser.isVerified"></span>
               <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
               <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
             </div>

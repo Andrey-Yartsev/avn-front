@@ -76,6 +76,7 @@
                     </span>
                     <div class="chatView__header">
                       <span class="name">{{ v.withUser.name }}</span>
+                      <span class="verified-user" v-if="v.withUser.isVerified"></span>
                     </div>
                     <div class="user-login">
                       <span class="username">{{ v.withUser.username }}</span>
