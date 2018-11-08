@@ -212,8 +212,9 @@ export default {
       });
     },
 
-    deletePost(state, data) {
-      state.posts = state.posts.filter(post => data.postId !== post.id);
+    deletePost(state, { postId }) {
+      state.deletedPost = postId;
+      state.posts = state.posts.filter(post => postId !== post.id);
     }
   }
 };

@@ -10,7 +10,8 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  source: "feed"
+  source: "feed",
+  deletedPost: undefined
 };
 
 const state = { ...initState };

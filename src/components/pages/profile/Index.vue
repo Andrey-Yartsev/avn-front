@@ -266,6 +266,9 @@ export default {
     },
     store() {
       return this.$store.state.profile.home;
+    },
+    deletedPost() {
+      return this.$store.state.profile.home.deletedPost;
     }
   },
   watch: {
@@ -274,6 +277,9 @@ export default {
     },
     pageName() {
       this.init();
+    },
+    deletedPost() {
+      this.$store.dispatch("profile/home/fetchProfile", this.username);
     }
   },
   methods: {

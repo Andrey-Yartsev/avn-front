@@ -10,7 +10,8 @@ const initState = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: ""
+  marker: "",
+  deletedPost: undefined
 };
 
 const state = { ...initState };

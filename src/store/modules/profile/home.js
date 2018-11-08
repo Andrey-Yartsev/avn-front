@@ -15,7 +15,8 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  source: ""
+  source: "",
+  deletedPost: undefined
 };
 
 const state = { ...initState };
