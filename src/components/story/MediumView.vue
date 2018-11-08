@@ -34,9 +34,13 @@ export default {
   computed: {
     image() {
       const {
-        post: { mediaThumb, mediaPreview, mediaSrc }
+        post: { src, preview, thumb }
       } = this;
-      return mediaThumb || mediaPreview || mediaSrc;
+      return (
+        (thumb && thumb.source) ||
+        (preview && preview.source) ||
+        (src && src.source)
+      );
     }
   }
 };
