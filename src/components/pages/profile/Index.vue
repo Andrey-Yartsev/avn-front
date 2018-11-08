@@ -197,9 +197,14 @@
             </div>
           </div>
           <div class="content-col">
-            <p class="empty-feed hidden">
+            <p :class="['empty-feed', { hidden: postLoading || posts.length }]">
               <span>Nothing here yet</span>
-              <button type="button" class="make-post-btn feed">Create new post</button>
+              <button
+                v-if="isOwner(this.profile.id)"
+                @click="openAddPostModal"
+                type="button"
+                class="make-post-btn feed"
+              >Create new post</button>
             </p>
             <div class="posts-container">
               <PostCollection
@@ -255,6 +260,9 @@ export default {
     },
     posts() {
       return this.$store.state.profile.home.posts;
+    },
+    postLoading() {
+      return this.$store.state.profile.home.loading;
     },
     store() {
       return this.$store.state.profile.home;
