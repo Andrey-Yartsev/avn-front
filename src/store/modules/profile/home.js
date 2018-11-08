@@ -83,7 +83,7 @@ const actions = {
   },
 
   extend({ commit, state }, data) {
-    commit("fetchProfileSuccess", { ...state.profile, ...data });
+    commit("profile", { ...state.profile, ...data });
   }
 };
 
