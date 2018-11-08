@@ -89,6 +89,14 @@ export default {
     }
   },
 
+  watch: {
+    error(text) {
+      if (text) {
+        this.$refs.recaptcha.reset();
+      }
+    }
+  },
+
   methods: {
     login() {
       this.$store.dispatch("auth/login", {

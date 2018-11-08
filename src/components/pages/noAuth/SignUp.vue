@@ -65,6 +65,14 @@ export default {
     }
   },
 
+  watch: {
+    error(text) {
+      if (text) {
+        this.$refs.recaptcha.reset();
+      }
+    }
+  },
+
   methods: {
     signUp() {
       this.$store.dispatch("signUp/signUp", {
