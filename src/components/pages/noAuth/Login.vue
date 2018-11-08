@@ -31,7 +31,7 @@
             v-if="showCaptcha"
             class="g-recaptcha"
             ref="recaptcha"
-            @verify="onCaptchaVerified"
+            @verify="captchaVerified"
             @expired="onCaptchaExpired"
             :sitekey="recaptchaSiteKey"
           />
@@ -91,7 +91,7 @@ export default {
 
   watch: {
     error(text) {
-      if (text) {
+      if (text && this.$refs.recaptcha) {
         this.$refs.recaptcha.reset();
       }
     }
@@ -109,6 +109,10 @@ export default {
       this.$store.dispatch("otp/login", this.otpCode).then(() => {
         this.$router.push("/");
       });
+    },
+    captchaVerified(recaptchaToken) {
+      this.onCaptchaVerified(recaptchaToken);
+      this.login();
     }
   }
 };

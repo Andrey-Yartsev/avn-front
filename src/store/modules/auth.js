@@ -54,8 +54,9 @@ const actions = {
       .catch(error => {
         if (error.code === 101) {
           commit("showCaptcha", true);
+        } else {
+          commit("requestFailure", error.message);
         }
-        commit("requestFailure", error.message);
         Router.push("/login");
       });
   },
