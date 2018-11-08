@@ -128,11 +128,16 @@
           </button>
         </div>
       </form>
+      <div class="form-title hidden-desktop">
+        <div class="inner text-centered">
+          <span class="semi-transparent">{{ user.username }}</span>
+        </div>
+      </div>
       <div class="border-top shadow-block delete-account-block">
         <div class="container">
           <div class="form-group delete-account">
             <label class="form-group-inner">
-              <span class="label"></span>
+              <span class="label hidden-mobile"></span>
               <button
                 type="button" class="delete-account-btn"
                 @click="deleteAccount"

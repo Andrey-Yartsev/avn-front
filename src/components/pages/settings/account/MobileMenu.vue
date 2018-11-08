@@ -7,10 +7,10 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/email" class="warning">
+        <router-link to="/settings/account/email" class="settings-nav__item warning">
           <span>Email</span>
           <span class="value">{{ user.email }}</span></router-link>
-        <router-link to="/settings/account/twitter">
+        <router-link to="/settings/account/twitter" class="settings-nav__item">
           <span>Twitter</span>
           <span class="value">Connect</span>
         </router-link>
@@ -23,7 +23,7 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/password" class=""><span>Change or reset your password</span></router-link>
+        <router-link to="/settings/account/password" class="settings-nav__item"><span>Change or reset your password</span></router-link>
       </div>
     </div>
     <div class="form-title">
@@ -33,7 +33,7 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/manage">
+        <router-link to="/settings/account/manage" class="settings-nav__item">
           <span class="user-login">{{ user.name }}</span>
         </router-link>
       </div>

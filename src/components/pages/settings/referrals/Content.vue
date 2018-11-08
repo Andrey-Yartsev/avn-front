@@ -19,8 +19,7 @@
         <button
           type="button" class="btn border alt btn-copy-url"
           @click="copyToClipboard"
-        >Copy<span class="hidden-mobile"> link</span>
-        </button>
+        >Copy<span class="hidden-mobile"> link</span></button>
       </div>
     </div>
     <div class="ReferralsBlockCollectionView">

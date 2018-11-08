@@ -4,9 +4,7 @@
   width: 100%;
 }
 .delete-account {
-  .label {
-    height: auto;
-  }
+
   @include media-breakpoint-down($desktop-breakpoint) {
     text-align: center;
     .input-help {
@@ -15,6 +13,11 @@
       border-top: 1px solid rgba($gray, 0.2);
     }
   }
+
+  .label {
+    height: auto;
+  }
+  
   &-btn {
     padding: 0;
     border: none;
@@ -36,6 +39,7 @@
       font-size: inherit;
       opacity: 1;
       margin-left: 4px;
+      display: inline;
 
       .username {
         color: $red;
