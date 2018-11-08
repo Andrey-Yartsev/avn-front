@@ -4,6 +4,10 @@
       <template v-if="media.preview">
         <img :src="media.preview" :title="media.userFileName"/>
       </template>
+      <template v-else>
+        <span>{{ media.userFileName }}</span>
+        <div class="loader centered" v-if="!media.previewError"></div>
+      </template>
     </span>
     <div class="progress" :style="{'width': `${media.loaded}%` }"></div>
     <span class="remove centered" @mousedown.prevent.stop="() => {}" @click="remove">

@@ -1,4 +1,9 @@
-import { getMediaFilePreview, fileUpload, uniqId } from "@/utils/mediaFiles";
+import {
+  getMediaFilePreview,
+  getMediaFileMeta,
+  fileUpload,
+  uniqId
+} from "@/utils/mediaFiles";
 
 const messages = {
   photo: "Photo limit is reached",
@@ -45,12 +50,15 @@ export default {
 
       for (let i = 0; i < validLength; i += 1) {
         const file = validFiles[i];
-        const preview = await getMediaFilePreview(file);
+        const { mediaType, preview, fileContent } = await getMediaFileMeta(
+          file
+        );
         addedFiles.push({
           file,
+          mediaType,
+          fileContent,
           userFileName: file.name,
-          preview: preview.preview,
-          mediaType: preview.mediaType,
+          preview,
           id: uniqId(),
           loaded: 0
         });
@@ -75,6 +83,18 @@ export default {
       this.preloadedMedias = [
         ...filtered[this.mediaType].splice(0, this.limits[this.mediaType])
       ];
+
+      for (let i = 0; i < this.preloadedMedias.length; i += 1) {
+        const media = this.preloadedMedias[i];
+
+        if (media.mediaType === "video" && !media.preview) {
+          getMediaFilePreview(media, newMedia => {
+            this.preloadedMedias = this.preloadedMedias.map(
+              oldMedia => (oldMedia.id === newMedia.id ? newMedia : oldMedia)
+            );
+          });
+        }
+      }
     },
 
     removeMedia(id) {
@@ -108,7 +128,7 @@ export default {
       const fileExt = name
         .split(".")
         .pop()
-        .toUpperCase();
+        .toLowerCase();
 
       return this.allMediaTypes.indexOf(fileExt) !== -1;
     }
