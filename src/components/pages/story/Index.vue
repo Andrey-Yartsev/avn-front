@@ -4,12 +4,12 @@
       <div class="stories-slideshow">
         <div class="StoryPageView active">
           <template v-if="!currentStory.isReady || currentStory.mediaType === 'photo'">
-            <img class="bg" :src="currentStory.mediaSrc || currentStory.mediaPreview" alt>
-            <img class="storyItem" :src="currentStory.mediaSrc || currentStory.mediaPreview" ref="storyItem" alt>
+            <img class="bg" :src="currentStory.src.source || currentStory.preview.source" alt>
+            <img class="storyItem" :src="currentStory.src.source || currentStory.preview.source" ref="storyItem" alt>
           </template>
           <video v-if="currentStory.mediaType === 'video' && currentStory.isReady"
             class="story-video-element storyItem" 
-            :src="currentStory.mediaSrc"
+            :src="currentStory.src.source"
             ref="storyItem"
           ></video>
         </div>
@@ -342,7 +342,7 @@ export default {
     },
 
     saveFile: function() {
-      window.open(this.currentStory.mediaSrc, "_blank");
+      window.open(this.currentStory.src.source, "_blank");
       this.hideDropdawn();
     },
 
