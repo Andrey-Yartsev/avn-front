@@ -105,7 +105,11 @@ export default {
     },
 
     isValidMediaType(name) {
-      const fileExt = name.split(".").pop();
+      const fileExt = name
+        .split(".")
+        .pop()
+        .toUpperCase();
+
       return this.allMediaTypes.indexOf(fileExt) !== -1;
     }
   }
