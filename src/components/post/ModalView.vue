@@ -43,7 +43,7 @@ export default {
       return `post/${this.postId}`;
     },
     posts() {
-      if (this.from === "profile") {
+      if (this.from === "profile/home") {
         return this.$store.state.profile.home.posts;
       } else if (this.from === "home") {
         return this.$store.state.home.posts;
