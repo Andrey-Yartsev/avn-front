@@ -29,7 +29,10 @@
       </div>
 
       <div class="notifications">
-        <div class="NotificationsView" :class="v.type" v-for="v in items" v-bind:key="v.id">
+        <div
+          class="NotificationsView"
+          :class="{[v.type]: true, unread: !v.isRead}" v-for="v in items" v-bind:key="v.id"
+        >
           <div class="avatars-wrapper">
             <router-link :to="'/' + v.user.username" class="avatar">
               <img :src="v.user.avatar" v-if="v.user.avatar"/>
