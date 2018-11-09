@@ -120,6 +120,7 @@
             v-if="selectedUser"
             :class="{open: chatOptionsOpened}"
             @click="chatOptionsOpened = !chatOptionsOpened"
+            v-click-outside="() => {chatOptionsOpened = false}"
           >
             <div class="more-functions__overlay"></div>
             <div class="more-functions__btn"></div>
@@ -154,11 +155,16 @@
 import userMixin from "@/mixins/user";
 import ChatWrapper from "./Wrapper";
 import ChatAddMessage from "./AddMultiMessage";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "Chat",
 
   mixins: [userMixin],
+
+  directives: {
+    ClickOutside
+  },
 
   components: {
     ChatAddMessage,

@@ -55,7 +55,10 @@
             <span class="user-login" v-if="blockLoading">...</span>
             <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
 
-            <span class="more-functions" :class="{open: chatOptionsOpened}">
+            <span
+              class="more-functions" :class="{open: chatOptionsOpened}"
+              v-click-outside="() => {chatOptionsOpened = false}"
+            >
               <div class="more-functions__overlay"></div>
               <div class="more-functions__btn" @click="chatOptionsOpened = !chatOptionsOpened"></div>
               <div class="more-functions__dropdown">
@@ -101,11 +104,16 @@ import AddMessage from "./AddMessage";
 import NoConversations from "./NoConversations";
 import Loader from "@/components/common/Loader";
 import MobileHeader from "@/components/header/Mobile";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "Chat",
 
   mixins: [userMixin],
+
+  directives: {
+    ClickOutside
+  },
 
   components: {
     Wrapper,
