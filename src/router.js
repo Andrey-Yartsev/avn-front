@@ -148,6 +148,7 @@ const routes = [
     component: SettingsDefaultPage,
     name: "SettingsProfile",
     meta: {
+      title: "Edit Profile",
       cssName: "settings"
     }
   },
