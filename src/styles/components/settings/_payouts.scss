@@ -394,6 +394,13 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 9px 0 12px;
     }
+
+    &#is_paid_subscription__wrapper {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-bottom: 0;
+      }
+    }
   }
 
   .settings-form {

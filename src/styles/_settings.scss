@@ -309,13 +309,3 @@
     }
   }
 }
-
-.settings-form {
-
-  .form-group {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      padding-bottom: 0;
-    }
-  }
-}
