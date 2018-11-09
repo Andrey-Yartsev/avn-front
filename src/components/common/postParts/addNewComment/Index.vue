@@ -11,7 +11,7 @@
         <button 
             type="submit"
             class="btn comment-btn"
-            v-bind:disabled="!message.length"
+            v-bind:disabled="!message.trim().length"
             @click.prevent="sendComment"
         >Post</button>
     </form>
