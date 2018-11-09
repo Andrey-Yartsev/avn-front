@@ -65,38 +65,10 @@
   }
 
   .tips {
-    color: $main-color;
-    opacity: 0.3;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    transition: color 0.3s ease, opacity 0.3s ease;
     margin: 0 0.6em 0 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1.1em;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      &:hover {
-        opacity: 1;
-        color: $primary-color;
-      }
-    }
-    &.active {
-      opacity: 1;
-      color: $primary-color;
-    }
-    &:before {
-      display: inline-block;
-      @include icon-font;
-      font-size: 24px;
-      margin: 0;
-      width: 1.1em;
-      font-weight: 400;
-      content: "\E618";
     }
   }
   .submit {

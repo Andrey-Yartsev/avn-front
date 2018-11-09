@@ -104,10 +104,8 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 13px 15px 8px;
     }
-    .likes,
-    .comments,
-    .tips,
-    .report {
+
+    &__btn {
       opacity: 0.3;
       display: inline-flex;
       align-items: center;
@@ -115,6 +113,7 @@
       cursor: pointer;
       min-width: 54px;
       transition: color 0.3s ease, opacity 0.3s ease;
+
       @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 58px;
         &:hover {
@@ -122,28 +121,26 @@
           color: $primary-color;
         }
       }
+
       @include media-breakpoint-down($mobile-breakpoint) {
         margin: 0 10px 0 0;
       }
+
       &.active {
         opacity: 1;
         color: $primary-color;
       }
+
       &:before {
-        display: inline-block;
-        @include icon-font;
-        font-size: 24px;
-        margin: 0 4px 0 0;
-        width: 1.1em;
-        font-weight: 400;
+        //display: inline-block;
+        //@include icon-font;
+        //font-size: 24px;
+        //margin: 0 4px 0 0;
+        //width: 1.1em;
+        //font-weight: 400;
       }
     }
 
-    .tips {
-      &:before {
-        content: "\E618";
-      }
-    }
     .report {
       opacity: 0.15;
       &,
@@ -232,9 +229,6 @@
         width: 100px;
         flex: 0 0 100px;
       }
-    }
-    .tip-amount-input {
-      text-align: center;
     }
   }
 

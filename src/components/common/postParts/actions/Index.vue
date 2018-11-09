@@ -1,9 +1,9 @@
 <template>
     <div class="actions">
-        <span :class="[{ active: post.isFavorite }, 'likes']" @click="$emit('postLike')">{{ post.favoritesCount }}</span>
-        <span class="comments" @click="$emit('postShowCommentForm')">{{ post.commentsCount }}</span>
+        <span :class="[{ active: post.isFavorite }, 'likes actions__btn']" @click="$emit('postLike')">{{ post.favoritesCount }}</span>
+        <span class="comments actions__btn" @click="$emit('postShowCommentForm')">{{ post.commentsCount }}</span>
         <template v-if="!isOwner(post.id) && post.author.canEarn">
-          <span class="tips" @click="$emit('toggleTip')"></span>
+          <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
         </template>
         <time class="date" :datetime="post.postedAt">
           <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">

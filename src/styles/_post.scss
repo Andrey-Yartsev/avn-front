@@ -248,6 +248,7 @@
   }
 
   .actions {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       order: -2;
       padding-top: 10px;
@@ -256,13 +257,15 @@
       margin: 0 0 12px;
       min-height: 59px;
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 0;
       padding-bottom: 16px;
-      .likes,
-      .comments,
-      .tips,
-      .report {
+    }
+
+    &__btn {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 41px;
       }
     }
