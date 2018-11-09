@@ -19,7 +19,10 @@
               <p class="typing">
                 <template v-if="v.lastMessage">
                   <span v-if="v.lastMessage.media.length" class="type-msg-icn type-msg-icn_media">x</span>
-                  <span v-else class="message">{{ v.lastMessage.text }}</span>
+                  <span v-else class="message">
+                    <span v-if="v.lastMessage.isTips" class="type-msg-icn type-msg-icn_tips">x</span>
+                    <template v-else>{{ v.lastMessage.text }}</template>
+                  </span>
                 </template>
                 <span class="isTyping">tester is typing...</span>
               </p>
