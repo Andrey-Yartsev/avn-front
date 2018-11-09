@@ -46,7 +46,7 @@
       </div>
       <div class="shadow-block no-padding hidden-desktop">
         <div class="settings-nav">
-          <a href="/settings/privacy/twitter"><span>Twitter</span><span class="value">Connect</span></a>
+          <a href="/settings/privacy/twitter" class="settings-nav__item"><span>Twitter</span><span class="value">Connect</span></a>
         </div>
       </div>
 
