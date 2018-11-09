@@ -110,10 +110,21 @@
                   <button class="btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
                 </div>
                 <div class="profile-actions" v-else>
+
+                  <div class="profile-actions-tip-form" :class="{show: showTip}">
+                    <Tip
+                      :user="profile"
+                      ref="tip"
+                      @cancel="closeTip"
+                    />
+                  </div>
+
                   <button
                     v-if="profile.canEarn"
                     type="button" class="profile-actions__btn profile-tip-btn selected"
+                    @click="showTip = true"
                   >Fund</button>
+
                   <SubscribeButton :profile="profile" @requested="subsRequested"/>
                   <div class="subscribeView">
                     <div
@@ -226,6 +237,7 @@ import PostCollection from "@/components/common/postCollection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
+import Tip from "@/components/common/tip/User";
 
 export default {
   name: "ProfileHome",
@@ -235,7 +247,14 @@ export default {
   components: {
     Loader,
     PostCollection,
-    SubscribeButton
+    SubscribeButton,
+    Tip
+  },
+
+  data() {
+    return {
+      showTip: false
+    };
   },
 
   computed: {
@@ -269,6 +288,9 @@ export default {
     },
     deletedPost() {
       return this.$store.state.profile.home.deletedPost;
+    },
+    funded() {
+      return this.$store.state.tip.funded;
     }
   },
   watch: {
@@ -280,6 +302,9 @@ export default {
     },
     deletedPost() {
       this.$store.dispatch("profile/home/fetchProfile", this.username);
+    },
+    funded() {
+      this.closeTip();
     }
   },
   methods: {
@@ -350,6 +375,10 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });
+    },
+    closeTip() {
+      this.showTip = false;
+      this.$refs.tip.reset();
     }
   },
 

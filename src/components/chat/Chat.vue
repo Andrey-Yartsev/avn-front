@@ -80,8 +80,10 @@
             <div class="chat-section" v-if="messagesLoading">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
-            <Messages v-else-if="messages" :_messages="messages"/>
-            <AddMessage :withUser="{id: activeUserId}"/>
+            <template v-if="activeChat">
+              <Messages v-if="messages" :_messages="messages" :withUser="activeUser" />
+              <AddMessage :withUser="activeUser"/>
+            </template>
           </div>
         </div>
       </template>
