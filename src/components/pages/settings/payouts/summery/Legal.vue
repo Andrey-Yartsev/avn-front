@@ -61,7 +61,7 @@
                   </span>
               </label>
             </div>
-            <div class="form-group">
+            <div class="form-group row-btn-save">
               <div class="form-group-inner">
                 <span class="label"></span>
                 <button type="submit" class="btn lg saveChanges" :disabled="!changed">Save changes</button>

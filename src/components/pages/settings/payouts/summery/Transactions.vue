@@ -17,33 +17,32 @@
           <div class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c">Amount</div>
           <div class="expected table__cell table__cell_align table__cell_align-hor-c">Item</div>
         </div>
-
-        <div class="shadow-block no-padding" v-if="!loading">
-          <div class="table-wrapper">
-            <div class="table transactions-table">
-              <div class="PayoutsTransactionsView" v-for="v in items" v-bind:key="v.n">
-                <div class="item">
-                  <div class="date table__cell">{{ dt(v.createdAt) }}</div>
-                  <div
-                    class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
-                  >${{ v.amount }}
-                  </div>
-                  <div class="expected table__cell">
-                    <div class="type payout-type">Monthly subscription from</div>
-                    <div class="payout-user">
-                      <router-link :to="'/' + v.userFrom.username" class="name">
-                        {{ v.userFrom.name }}
-                      </router-link>
-                      <span class="user-login">
+      </div>
+      <div class="shadow-block no-padding" v-if="!loading">
+        <div class="table-wrapper">
+          <div class="table transactions-table">
+            <div class="PayoutsTransactionsView" v-for="v in items" v-bind:key="v.n">
+              <div class="item">
+                <div class="date table__cell">{{ dt(v.createdAt) }}</div>
+                <div
+                        class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+                >${{ v.amount }}
+                </div>
+                <div class="expected table__cell">
+                  <div class="type payout-type">Monthly subscription from</div>
+                  <div class="payout-user">
+                    <router-link :to="'/' + v.userFrom.username" class="name">
+                      {{ v.userFrom.name }}
+                    </router-link>
+                    <span class="user-login">
                       <router-link :to="'/' + v.userFrom.username">{{ v.userFrom.username }}</router-link>
                     </span>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="empty-table-info shadow-block"><span>Empty here for now</span></div>
           </div>
+          <div class="empty-table-info shadow-block"><span>Empty here for now</span></div>
         </div>
       </div>
     </div>
