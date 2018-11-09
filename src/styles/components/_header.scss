@@ -433,9 +433,18 @@
   align-items: center;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  text-indent: -999em;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
+  }
+
+  &__text {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: -999em;
   }
 
   a,
