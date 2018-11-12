@@ -128,7 +128,7 @@
 
     .header-nav {
 
-      a {
+      &__item {
         color: #fff;
 
         span {
@@ -890,7 +890,7 @@
     }
   }
 
-  a {
+  &__item {
     width: 25%;
     text-align: center;
     padding: 2px 0 0;
