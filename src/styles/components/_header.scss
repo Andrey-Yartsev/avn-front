@@ -682,28 +682,29 @@
       }
     }
   }
-  .btn-clear-search {
-    position: absolute;
-    border: none;
-    padding: 0;
-    background: none;
-    opacity: 0.2;
-    font-size: 17px;
-    right: 64px;
-    top: 50%;
-    transform: translate(0, -50%);
-    color: $primary-color;
-    transition: opacity 0.3s ease;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      right: 32px;
-    }
-    &:hover {
-      opacity: 1;
-    }
-    &:before {
-      @include icon-font;
-      content: "\E600";
-    }
+}
+
+.btn-clear-search {
+  position: absolute;
+  border: none;
+  padding: 0;
+  background: none;
+  opacity: 0.2;
+  font-size: 17px;
+  right: 64px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: $primary-color;
+  transition: opacity 0.3s ease;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    right: 32px;
+  }
+  &:hover {
+    opacity: 1;
+  }
+  &:before {
+    @include icon-font;
+    content: "\E600";
   }
 }
 

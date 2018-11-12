@@ -20,7 +20,7 @@
                 placeholder="Search"
                 v-model="localQuery"
               >
-              <span role="button" tabindex="-1" id="header-search-clear"></span>
+              <span role="button" tabindex="-1" class="btn-clear-search hidden" id="header-search-clear"></span>
               <button type="submit" class="header-search-submit"></button>
             </form>
           </div>
