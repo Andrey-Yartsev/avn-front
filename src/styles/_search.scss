@@ -21,6 +21,7 @@
       column-fill: auto;
     }
     .post {
+      background-color: $white;
 
       .postCollectionView & {
         padding-bottom: 0;
@@ -28,7 +29,6 @@
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        background: $white;
         box-shadow: 0 8px 30px rgba(#000, 0.1);
         width: 100%;
         display: inline-block;
