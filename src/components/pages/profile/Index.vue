@@ -18,14 +18,32 @@
     </div>
     <div class="white-bg-block">
       <div class="bg">
-        <div class="bg-wrap"></div>
+        <div class="bg-wrap">
+          <img v-if="bgPreview" :src="bgPreview" />
+          <img v-else-if="profile.header" :src="profile.header" />
+        </div>
         <div class="container">
-          <div class="controls-select-picture" v-if="isOwner(this.profile.id)">
-            <label for="bg" class="select-user-image">Add Background Picture</label>
-            <input type="file" id="bg" accept=".jpg,.jpeg,.gif,.png">
-            <div class="profile-picture-btns">
-              <button class="btn-cancel-changes cancel-changes"></button>
-              <button class="btn save-changes">Save changes</button>
+          <div class="controls-select-picture" v-if="isOwner(profile.id)">
+            <label
+              for="bg" class="select-user-image"
+              :class="{hide: !showBgAdd}"
+            >Add Background Picture</label>
+            <input
+              type="file"
+              id="bg"
+              ref="bg"
+              accept=".jpg,.jpeg,.gif,.png"
+              @change="setBgPreview"
+            >
+            <div class="profile-picture-btns" :class="{show: showBgSave}">
+              <button
+                class="btn-cancel-changes cancel-changes"
+                @click="resetBgPreview"
+              ></button>
+              <button
+                class="btn save-changes"
+                @click="saveBg"
+              >Save changes</button>
             </div>
           </div>
         </div>
@@ -238,11 +256,13 @@ import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
 import Tip from "@/components/common/tip/User";
+import FileUpload from "@/mixins/fileUpload";
+import ProfileBg from "@/mixins/profileBg";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [InfinityScrollMixin, UserMixin, FileUpload, ProfileBg],
 
   components: {
     Loader,
@@ -291,6 +311,9 @@ export default {
     },
     funded() {
       return this.$store.state.tip.funded;
+    },
+    allMediaTypes() {
+      return [...this.inputAcceptTypes.photo];
     }
   },
   watch: {
