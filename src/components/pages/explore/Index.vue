@@ -5,7 +5,7 @@
     <div class="container">
       <div class="over-container">
         <Navigate />
-        <div class="stories-all" v-if="page === 'all'">
+        <div class="stories-all" v-if="page === 'all' && stories.length">
           <div class="exploreAllStoriesCollectionView">
             <div class="explore-stories">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
