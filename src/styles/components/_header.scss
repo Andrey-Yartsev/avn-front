@@ -789,15 +789,6 @@
           transform: scale(1.2);
         }
       }
-
-      .user {
-
-        &__name {
-          display: flex;
-          align-items: center;
-          align-content: center;
-        }
-      }
     }
   }
 
@@ -838,6 +829,15 @@
         opacity: 1;
       }
     }
+  }
+}
+
+.user {
+
+  &__name {
+    display: flex;
+    align-items: center;
+    align-content: center;
   }
 }
 
