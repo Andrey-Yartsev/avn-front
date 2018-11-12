@@ -7,20 +7,40 @@
         :class="{'hidden-mobile': !showAvatarBlock}"
       >
         <div class="settings-profile-images">
-          <div class="bg"></div>
+          <div class="bg">
+            <template v-if="!bgRemoved">
+              <img v-if="bgPreview" :src="bgPreview" />
+              <img v-else-if="user.header" :src="user.header" />
+            </template>
+          </div>
           <div class="avatar-block">
             <span class="avatar"><img :src="user.avatar" v-if="user.avatar"/></span>
             <label for="avatar" class="select-user-image"></label>
             <input type="file" id="avatar">
-            <span class="reset-user-image reset-avatar"></span>
+            <span
+              class="reset-user-image reset-avatar"
+            ></span>
           </div>
-          <span class="reset-user-image reset-bg"></span>
-          <label for="bg" class="select-user-image">
+          <span
+            v-show="showBgAdd"
+            class="reset-user-image reset-bg"
+            @click="removeBg"
+          ></span>
+          <label
+            for="bg" class="select-user-image"
+            v-show="showBgAdd"
+          >
             <span class="select-user-image__text">
-                Add Background Picture
+              Add Background Picture
             </span>
           </label>
-          <input type="file" id="bg">
+          <input
+            type="file"
+            id="bg"
+            ref="bg"
+            accept=".jpg,.jpeg,.gif,.png"
+            @change="setBgPreview"
+          >
         </div>
         <div class="profile-identifier">
           <div class="profile-name profile-name-settings">
@@ -30,9 +50,15 @@
             </div>
             <span class="user-login"><a :href="'/' + user.username">{{ user.username }}</a></span>
           </div>
-          <div class="profile-picture-btns">
-            <button class="btn-cancel-changes cancel-changes"></button>
-            <button class="btn save-changes">Save changes</button>
+          <div class="profile-picture-btns" :class="{show: showBgSave}">
+            <button
+              class="btn-cancel-changes cancel-changes"
+              @click="resetBgPreview"
+            ></button>
+            <button
+              class="btn save-changes"
+              @click="saveBg"
+            >Save changes</button>
           </div>
         </div>
       </div>
@@ -65,11 +91,12 @@
 <script>
 import Mobile from "./mobile";
 import Footer from "@/components/footer/Index";
+import ProfileBg from "@/mixins/profileBg";
 
 export default {
   name: "SettingsAside",
 
-  mixins: [Mobile],
+  mixins: [Mobile, ProfileBg],
 
   components: {
     Footer

@@ -36,22 +36,27 @@ const actions = {
   update({ commit, dispatch }, user) {
     commit("setError", null);
     commit("setLoading", true);
-    UserApi.update(user)
-      .then(async response => {
-        const r = await response.json();
-        dispatch("auth/extendUser", r, { root: true });
-        dispatch("global/flashToast", "Changes saved successfully", {
-          root: true
+    return new Promise((accept, reject) => {
+      UserApi.update(user)
+        .then(async response => {
+          const r = await response.json();
+          dispatch("auth/extendUser", r, { root: true });
+          dispatch("profile/home/extend", r, { root: true });
+          dispatch("global/flashToast", "Changes saved successfully", {
+            root: true
+          });
+          commit("setLoading", false);
+          accept(r);
+        })
+        .catch(error => {
+          commit("setError", error);
+          commit("setLoading", false);
+          reject(error);
         });
-        commit("setLoading", false);
-      })
-      .catch(error => {
-        commit("setError", error);
-        commit("setLoading", false);
-      });
+    });
   },
   extend({ rootState, dispatch }, data) {
-    dispatch("update", { ...rootState.auth.user, ...data });
+    return dispatch("update", { ...rootState.auth.user, ...data });
   },
   setFetchLoading({ commit }, flag) {
     commit("setFetchLoading", flag);
