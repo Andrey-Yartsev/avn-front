@@ -496,6 +496,10 @@
 
 .stories-all {
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    margin-top: -2px;
+  }
+
   + .explore {
 
     @include media-breakpoint-down($desktop-breakpoint) {
