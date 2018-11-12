@@ -25,6 +25,7 @@ import SearchPage from "./components/pages/search/Index";
 import StoryPage from "./components/pages/story/Index";
 import AddPostPage from "./components/pages/addPost/Index";
 import StreamPage from "./components/pages/stream/Index";
+import FollowersPage from "./components/pages/followers/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -236,6 +237,22 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/stream",
     component: StreamPage
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/followers",
+    component: FollowersPage,
+    meta: {
+      title: "followers"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/following",
+    component: FollowersPage,
+    meta: {
+      title: "following"
+    }
   },
   // PUBLIC ZONE
   {

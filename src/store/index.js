@@ -28,6 +28,7 @@ import twitter from "@/store/modules/twitter";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
 import tip from "@/store/modules/tip";
+import followers from "@/store/modules/followers";
 
 Vue.use(Vuex);
 
@@ -61,7 +62,8 @@ const store = new Vuex.Store({
     twitter,
     emails,
     blocked,
-    tip
+    tip,
+    followers
   }
 });
 
