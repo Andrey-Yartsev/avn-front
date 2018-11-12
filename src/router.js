@@ -130,7 +130,10 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/search/:type/:query",
-    component: SearchPage
+    component: SearchPage,
+    meta: {
+      cssName: "search"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,

@@ -3,7 +3,16 @@
     <div class="container">
       <div class="over-container">
 
-        <div class="header-search-page hidden-mobile">
+        <nav class="explore-nav">
+          <router-link
+            v-for="v in types"
+            v-bind:key="v.name"
+            :to="'/search/' + v.name + '/' + query"
+            :class="{active: v.active}"
+            class="explore-nav__item"
+          >{{ v.title }}</router-link>
+        </nav>
+        <div class="header-search-page">
           <div class="field">
             <form v-on:submit.stop.prevent="searchChange">
               <input
@@ -17,27 +26,8 @@
           </div>
         </div>
 
-        <nav class="explore-nav">
-          <router-link
-            v-for="v in types"
-            v-bind:key="v.name"
-            :to="'/search/' + v.name + '/' + query"
-            :class="{active: v.active}"
-            class="explore-nav__item"
-          >{{ v.title }}</router-link>
-        </nav>
-
         <div class="explore">
           <div :class="wrapperClass">
-            <div class="search-bar hidden-desktop">
-              <form v-on:submit.stop.prevent="searchChange">
-                <input
-                  placeholder="Search"
-                  type="text"
-                  v-model="localQuery"
-                />
-              </form>
-            </div>
             <component
               :is="component"
               :items="items"

@@ -17,5 +17,6 @@ export default {
   forgot: ["login-page", "static-page"],
   notifications: ["notifications-page", "no-site-header_mob"],
   newChat: ["chat-page"],
-  addPost: ["addPost-page"]
+  addPost: ["addPost-page"],
+  search: ["search-page"]
 };

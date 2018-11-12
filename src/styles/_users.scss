@@ -56,6 +56,8 @@
       margin: 0 0 30px 30px;
     }
     .bg {
+      overflow: hidden;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
@@ -72,13 +74,20 @@
           top: 0;
           left: 0;
         }
-        &:empty {
-          background: linear-gradient(
-                          30deg,
-                          $secondary-color-12 10%,
-                          $primary-color-12 90%
-          );
-        }
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        top: -1px;
+        bottom: -1px;
+        background: linear-gradient(
+          30deg,
+          $secondary-color-12 10%,
+          $primary-color-12 90%
+        );
       }
     }
   }

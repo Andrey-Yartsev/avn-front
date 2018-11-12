@@ -1,5 +1,15 @@
 @import "components/imports";
 
+.search-page {
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: calc(100% - 44px);
+    }
+  }
+}
+
 .searchView {
   .posts {
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -70,9 +80,11 @@
   }
 
   .explore {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       position: relative;
       width: 100%;
+      min-height: calc(100% - 152px);
     }
   }
 
@@ -111,22 +123,6 @@
     }
   }
 
-  .header-search-page {
-    position: absolute;
-    top: -10px;
-    right: 0;
-    display: flex;
-    padding-bottom: 10px;
-  }
-
-  .search-bar {
-    input {
-      background-color: $white;
-      padding: 20px 20px;
-    }
-    border-bottom: 1px solid rgba($gray, 0.2);
-  }
-
   .posts,
   .users,
   .photos,
@@ -136,6 +132,35 @@
         opacity: 1;
         pointer-events: none;
       }
+    }
+  }
+}
+
+.header-search-page {
+  border-bottom: 1px solid rgba($gray, 0.2);
+  position: relative;
+  background-color: $white;
+  padding: 16px;
+  width: 100%;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    border-bottom: none;
+    background-color: transparent;
+    padding: 0;
+    width: 170px;
+    margin-top: -10px;
+  }
+
+  form {
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+
+  input[type="text"] {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-radius: 15px;
     }
   }
 }
