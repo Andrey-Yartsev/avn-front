@@ -23,6 +23,7 @@
             v-bind:key="v.name"
             :to="'/search/' + v.name + '/' + query"
             :class="{active: v.active}"
+            class="explore-nav__item"
           >{{ v.title }}</router-link>
         </nav>
 
