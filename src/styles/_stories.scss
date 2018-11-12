@@ -480,17 +480,26 @@
     margin-left: -3px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      background: $light;
-      overflow: hidden;
-      padding: 3px 0 0;
-      box-shadow: 0 -3px 5px rgba(#000, 0.08);
-      min-height: calc(100vh - 148px);
+      //background: $light;
+      //overflow: hidden;
+      //padding: 3px 0 0;
+      //min-height: calc(100vh - 148px);
       align-items: flex-start;
       align-content: flex-start;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin: 0 -10px;
+    }
+  }
+}
+
+.stories-all {
+
+  + .explore {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: calc(100% - 160px);
     }
   }
 }

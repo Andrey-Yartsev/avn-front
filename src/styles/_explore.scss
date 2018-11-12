@@ -152,6 +152,7 @@
 }
 
 .explore {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: calc(100% - 60px);
     flex: 1;
@@ -159,6 +160,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: stretch;
+    box-shadow: 0 0 5px rgba(#000, 0.3);
   }
 
   > div {
@@ -181,7 +183,6 @@
       background: $light;
       overflow: hidden;
       padding: 3px 0 0;
-      box-shadow: 0 0 5px rgba(#000, 0.3);
       position: relative;
       flex: 1;
     }
@@ -200,7 +201,6 @@
         background: $light;
         overflow: hidden;
         padding: 3px 0 0;
-        box-shadow: 0 0 5px rgba(#000, 0.3);
       }
 
       .exploreAllView {

@@ -11,6 +11,7 @@
 }
 
 .searchView {
+
   .posts {
     @include media-breakpoint-up($desktop-breakpoint) {
       column-gap: 30px;
@@ -20,7 +21,6 @@
       column-fill: auto;
     }
     .post {
-      background: $white;
 
       .postCollectionView & {
         padding-bottom: 0;
@@ -28,6 +28,8 @@
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
+        background: $white;
+        box-shadow: 0 8px 30px rgba(#000, 0.1);
         width: 100%;
         display: inline-block;
         vertical-align: top;
@@ -51,8 +53,6 @@
         }
 
       }
-
-      box-shadow: 0 8px 30px rgba(#000, 0.1);
 
       .actions {
         z-index: 2;
@@ -137,7 +137,6 @@
 }
 
 .header-search-page {
-  border-bottom: 1px solid rgba($gray, 0.2);
   position: relative;
   background-color: $white;
   padding: 16px;

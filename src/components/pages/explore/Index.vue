@@ -5,6 +5,13 @@
     <div class="container">
       <div class="over-container">
         <Navigate />
+        <div class="stories-all" v-if="page === 'all'">
+          <div class="exploreAllStoriesCollectionView">
+            <div class="explore-stories">
+              <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
+            </div>
+          </div>
+        </div>
         <div class="explore">
           <div :class="{
             exploreAllCollectionView: page === 'all',
@@ -12,14 +19,7 @@
             videoCollectionView: page === 'videos',
             storyCollectionView: page === 'stories',
             liveCollectionView: page === 'lives',
-          }">  
-            <div class="stories-all" v-if="page === 'all'">
-              <div class="exploreAllStoriesCollectionView">
-                <div class="explore-stories">
-                  <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
-                </div>
-              </div>
-            </div>
+          }">
             <div :class="['explore-wrapper', page]">
               <component
                 :is="postComponent"
