@@ -45,6 +45,10 @@
 
     > .container {
       position: relative;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        z-index: 0;
+      }
     }
   }
 }

@@ -43,7 +43,7 @@
     background: $white;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      
+
       & + .userView {
         border-top: 1px solid rgba($gray, 0.2);
       }

@@ -159,63 +159,6 @@
   }
 }
 
-.select-user-image {
-  position: absolute;
-  color: #fff;
-  bottom: 12px;
-  align-items: center;
-  text-shadow: $shadow-light;
-  display: none;
-  font-size: 13px;
-  right: 15px;
-  transition: opacity 0.3s;
-
-  .header-scrolled & {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    right: auto;
-    bottom: auto;
-    top: 50%;
-    left: 50%;
-    font-size: 17px;
-    margin-top: -8px;
-    transform: translate(-50%, -50%);
-
-    .profile-page & {
-
-      &:before {
-        font-size: 34px;
-        @include icon-font;
-        content: "\E61A";
-        display: block;
-        transition: transform 0.2s ease;
-      }
-    }
-
-    &:hover {
-
-      &:before {
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  .avatar-block & {
-
-    &:after {
-      font-weight: 400;
-      font-size: 24px;
-      @include icon-font;
-      content: "\E61A";
-      vertical-align: sub;
-      margin: 0;
-    }
-  }
-}
-
 .profile-name {
   padding: 16px 10px 15px 140px;
   transition: opacity 0.3s;
@@ -809,66 +752,6 @@
     }
   }
 
-  .controls-select-picture {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: absolute;
-      left: auto;
-      right: 21px;
-      top: auto;
-      bottom: 17px;
-      transform: translate(0, 0);
-      margin: 0;
-    }
-
-    .profile-picture-btns {
-      background-color: transparent;
-      text-align: right;
-      justify-content: flex-end;
-      padding-top: 0;
-    }
-
-    .select-user-image {
-      transition: opacity 0.3s;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        transform: translate(0, 0);
-      }
-
-      &.hide {
-        visibility: hidden;
-        opacity: 0;
-      }
-    }
-  }
-
-  .select-user-image {
-    display: block;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: flex;
-      align-items: center;
-      align-content: center;
-      flex-direction: row;
-    }
-
-    &:before {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-left: 11px;
-        order: 2;
-      }
-    }
-
-    &:after {
-      margin-left: 11px;
-    }
-  }
-
   .profile-name {
     @include media-breakpoint-up($desktop-breakpoint) {
       position: relative;
@@ -1200,5 +1083,186 @@
 
   .no-results-search {
     display: none;
+  }
+}
+
+
+
+.select-user-image {
+  position: absolute;
+  color: #fff;
+  bottom: 12px;
+  align-items: center;
+  text-shadow: $shadow-light;
+  display: none;
+  font-size: 13px;
+  right: 15px;
+  transition: opacity 0.3s;
+  font-weight: 500;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    font-size: 17px;
+    margin-top: -8px;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+
+    &:before {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  &__text {
+    font-size: 0;
+    position: absolute;
+    text-shadow: $shadow-light;
+
+    &:after {
+      font-weight: 400;
+      font-size: 24px;
+      @include icon-font;
+      content: "\E61A";
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &[for="avatar"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    transform: translate(0, 0);
+    display: block;
+
+    &:after {
+      font-weight: 400;
+      font-size: 24px;
+      text-shadow: $shadow-light;
+      @include icon-font;
+      content: "\E61A";
+      position: absolute;
+      bottom: 10px;
+      left: 19px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 18px;
+      }
+
+      .avatar-block & {
+        vertical-align: sub;
+      }
+    }
+  }
+
+  &[for="bg"] {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 5px 30px rgba(#000, 0.2);
+    transform: translate(0, 0);
+    z-index: 3;
+
+    .select-user-image__text {
+      right: 53px;
+      bottom: 12px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 43px;
+      }
+
+      &:after {
+        margin: 0 0 0 5px;
+        vertical-align: middle;
+      }
+    }
+
+    .controls-select-picture & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        transform: translate(0, 0);
+      }
+    }
+  }
+
+  .header-scrolled & {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .controls-select-picture & {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    bottom: 12px;
+    right: 15px;
+    left: auto;
+    top: auto;
+    text-shadow: 0 2px 8px rgba(#000, 0.25);
+
+    &:after {
+      margin-left: 11px;
+    }
+
+    &:before {
+      @include icon-font;
+      content: "\E61A";
+      display: block;
+      transition: transform 0.2s ease;
+      margin-left: 11px;
+      order: 2;
+      font-size: 24px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 34px;
+      }
+    }
+  }
+
+  &.hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+
+.controls-select-picture {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    position: absolute;
+    left: auto;
+    right: 21px;
+    top: auto;
+    bottom: 17px;
+    transform: translate(0, 0);
+    margin: 0;
+  }
+
+  .profile-picture-btns {
+    background-color: transparent;
+    text-align: right;
+    justify-content: flex-end;
+    padding-top: 0;
   }
 }

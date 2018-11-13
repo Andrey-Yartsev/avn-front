@@ -43,7 +43,7 @@
             v-show="showBgAdd"
           >
             <span class="select-user-image__text">
-              Add Background Picture
+              Add background picture
             </span>
           </label>
           <input

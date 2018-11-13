@@ -27,7 +27,7 @@
             <label
               for="bg" class="select-user-image"
               :class="{hide: !showBgAdd}"
-            >Add Background Picture</label>
+            >Add background picture</label>
             <input
               type="file"
               id="bg"
