@@ -226,12 +226,6 @@ video {
     width: auto;
   }
 
-  .profile & {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
-    }
-  }
-
   &__text {
     flex: 0 0 100%;
     margin-bottom: 10px;

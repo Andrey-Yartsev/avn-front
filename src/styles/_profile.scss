@@ -24,12 +24,13 @@
       display: block;
     }
   }
-}
 
-.more-functions__btn {
-  @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 0 0 72px;
-    width: 72px;
+  .more-functions__btn {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 72px;
+      width: 72px;
+    }
   }
 }
 
@@ -341,6 +342,7 @@
   }
 
   .subscribePaidView {
+
     &:empty {
       display: none;
     }
@@ -348,6 +350,7 @@
 }
 
 .subscribeView {
+
   &:empty {
     display: none;
   }
@@ -387,16 +390,18 @@
     padding: 0;
     margin: 0 0 25px;
     top: 80px;
-    .container {
-      display: flex;
-      justify-content: flex-end;
-    }
   }
 
   .container {
     position: relative;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       width: 100%;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 
@@ -536,6 +541,13 @@
     padding-left: 19px;
     padding-right: 19px;
   }
+
+  .controls-select-picture & {
+    background-color: transparent;
+    text-align: right;
+    justify-content: flex-end;
+    padding-top: 0;
+  }
 }
 
 .btn-cancel-changes {
@@ -631,9 +643,9 @@
       position: sticky;
       background-color: $white;
       background-image: linear-gradient(
-                      30deg,
-                      $secondary-color-20 10%,
-                      $primary-color-20 90%
+        30deg,
+        $secondary-color-20 10%,
+        $primary-color-20 90%
       );
       z-index: 5;
       height: 32vw;
@@ -661,11 +673,11 @@
         top: 0;
         height: 44px;
         background: linear-gradient(
-                        to bottom,
-                        rgba(#000, 0.2) 0%,
-                        rgba(#000, 0.2) 33.33%,
-                        rgba(#000, 0.1) 66.67%,
-                        transparent 100%
+          to bottom,
+          rgba(#000, 0.2) 0%,
+          rgba(#000, 0.2) 33.33%,
+          rgba(#000, 0.1) 66.67%,
+          transparent 100%
         );
         z-index: 7;
 
@@ -681,6 +693,7 @@
       }
 
       &:empty {
+
         &:before {
           content: "";
           position: absolute;
@@ -707,19 +720,20 @@
         z-index: 1;
         height: 12px;
         background: linear-gradient(
-                        to top,
-                        rgba(#000, 0.05) 0%,
-                        transparent 100%
+          to top,
+          rgba(#000, 0.05) 0%,
+          transparent 100%
         );
 
         @include media-breakpoint-up($desktop-breakpoint) {
           background: linear-gradient(
-                          to top,
-                          rgba(#000, 0.1) 0%,
-                          transparent 100%
+            to top,
+            rgba(#000, 0.1) 0%,
+            transparent 100%
           );
           bottom: 0;
           height: 80px;
+
           .header-scrolled & {
             background: rgba($main, 0.1);
           }
@@ -753,6 +767,7 @@
   }
 
   .profile-name {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       position: relative;
       left: auto;
@@ -894,10 +909,6 @@
 
     &.active {
       border-color: $secondary-color;
-
-      .value {
-        opacity: 1;
-      }
     }
   }
 
@@ -1093,7 +1104,7 @@
   color: #fff;
   bottom: 12px;
   align-items: center;
-  text-shadow: $shadow-light;
+  text-shadow: 0 2px 8px rgba(#000, 0.25);
   display: none;
   font-size: 13px;
   right: 15px;
@@ -1123,13 +1134,12 @@
   &__text {
     font-size: 0;
     position: absolute;
-    text-shadow: $shadow-light;
 
     &:after {
       font-weight: 400;
       font-size: 24px;
-      @include icon-font;
       content: "\E61A";
+      @include icon-font;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 18px;
@@ -1150,7 +1160,6 @@
     &:after {
       font-weight: 400;
       font-size: 24px;
-      text-shadow: $shadow-light;
       @include icon-font;
       content: "\E61A";
       position: absolute;
@@ -1174,7 +1183,6 @@
     right: 0;
     display: flex;
     align-items: center;
-    text-shadow: 0 5px 30px rgba(#000, 0.2);
     transform: translate(0, 0);
     z-index: 3;
 
@@ -1219,7 +1227,6 @@
     right: 15px;
     left: auto;
     top: auto;
-    text-shadow: 0 2px 8px rgba(#000, 0.25);
 
     &:after {
       margin-left: 11px;
@@ -1257,12 +1264,5 @@
     bottom: 17px;
     transform: translate(0, 0);
     margin: 0;
-  }
-
-  .profile-picture-btns {
-    background-color: transparent;
-    text-align: right;
-    justify-content: flex-end;
-    padding-top: 0;
   }
 }
