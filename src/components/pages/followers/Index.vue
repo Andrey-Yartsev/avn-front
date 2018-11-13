@@ -124,7 +124,6 @@
                     type="button" class="profile-actions__btn profile-tip-btn selected"
                     @click="showTip = true"
                   >Fund</button>
-
                   <SubscribeButton :profile="profile" @requested="subsRequested"/>
                   <div class="subscribeView">
                     <div
@@ -147,7 +146,8 @@
                   <button
                     v-if="profile.followedBy"
                     @click="sendMessage"
-                    type="button" class="profile-actions__btn profile-message-btn"
+                    type="button"
+                    class="profile-actions__btn profile-message-btn"
                   >Message</button>
                   <div class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile">
                     <div class="more-functions__overlay"></div>
@@ -188,7 +188,8 @@
               <a
                 v-if="profile.twitterUsername"
                 :href="'https://twitter.com/' + profile.twitterUsername"
-                class="profile-twitter-link" target="_blank"
+                class="profile-twitter-link"
+                target="_blank"
                 rel="nofollow"
               >twitter.com/{{ profile.twitterUsername }}</a>
               <div class="profile-data">
@@ -199,7 +200,8 @@
                 </div>
                 <div class="item">
                   <router-link class="" to="/followers">
-                    <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span></router-link>
+                    <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span>
+                  </router-link>
                 </div>
                 <div class="item">
                   <span class="value">{{ profile.favoritesCount }}</span><span class="label">Likes</span>
@@ -223,8 +225,9 @@
                     :loading="false"
                     :query="page"
                   />
-                  <div class="msg-no-content">
-                    <div class="msg-no-content__text">Start following people to see them here || No one follows you yet</div>
+                  <div class="msg-no-content" v-if="!loading && !user.length">
+                    <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
+                    <div class="msg-no-content__text" v-else>No one follows you yet</div>
                   </div>
               </div>
             </div>
@@ -260,7 +263,7 @@ export default {
   }),
   computed: {
     loading() {
-      return this.$store.state.profile.home.fetchProfileLoading;
+      return this.$store.state.followers.followersRequestLoading;
     },
     page() {
       return this.$route.meta.title;

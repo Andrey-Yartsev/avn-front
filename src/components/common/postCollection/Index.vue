@@ -8,11 +8,6 @@
         :from="from"
       ></Post>
     </div>
-    <div class="no-results-search">
-      <div class="no-results-search__message">
-        <span class="no-results-search__text">Nothing found for</span> <span class="searchAllTag">""</span>
-      </div>
-    </div>
   </div>
 </template>
 
