@@ -50,16 +50,7 @@
       </div>
       <div class="profile-images">
         <div class="container">
-          <div class="profile-images__inner">
-            <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory">
-              <span class="avatar with-story">
-                <img :src="profile.avatar" v-if="profile.avatar">
-              </span>
-            </router-link>
-            <span v-else class="avatar">
-              <img :src="profile.avatar" v-if="profile.avatar">
-            </span>
-          </div>
+          <ProfileAvatar :profile="profile" />
         </div>
       </div>
       <div class="profile-header hidden-desktop">
@@ -102,9 +93,7 @@
               {{ profile.name }}
               <span class="verified-user" v-if="profile.isVerified"></span>
             </span>
-            <span class="user-login">
-              <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
-            </span>
+            <span class="user-login"><a>{{ profile.username }}</a></span>
           </div>
           <div class="row">
             <div class="content-col">
@@ -252,6 +241,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import PostCollection from "@/components/common/postCollection/Index";
+import ProfileAvatar from "@/components/common/profileAvatar/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
@@ -268,7 +258,8 @@ export default {
     Loader,
     PostCollection,
     SubscribeButton,
-    Tip
+    Tip,
+    ProfileAvatar
   },
 
   data() {
