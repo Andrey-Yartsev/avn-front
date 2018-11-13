@@ -253,11 +253,11 @@ export default {
     SubscribeButton,
     ProfileAvatar
   },
-  data() {
-    return {
-      showTip: false
-    };
-  },
+
+  data: () => ({
+    loadingName: "followersRequestLoading",
+    showTip: false
+  }),
   computed: {
     loading() {
       return this.$store.state.profile.home.fetchProfileLoading;
@@ -271,11 +271,8 @@ export default {
     users() {
       return this.$store.state.followers.posts;
     },
-    postLoading() {
-      return this.$store.state.followers.loading;
-    },
     store() {
-      return this.$store.state.profile.home;
+      return this.$store.state.followers;
     },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
@@ -301,7 +298,7 @@ export default {
     },
     infinityScrollGetDataMethod() {
       if (this.profile) {
-        // this.getPosts();
+        this.getPosts();
       }
     },
     subsRequested(data) {
