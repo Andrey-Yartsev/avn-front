@@ -3,7 +3,7 @@
     <div class="settings-aside">
       <div
         id="avatarBgAside"
-        class="rounded-container white-bg-block"
+        class="rounded-container white-bg-block loadWrap"
         :class="{'hidden-mobile': !showAvatarBlock}"
       >
         <div class="settings-profile-images">
@@ -13,14 +13,26 @@
               <img v-else-if="user.header" :src="user.header" />
             </template>
           </div>
+
           <div class="avatar-block">
-            <span class="avatar"><img :src="user.avatar" v-if="user.avatar"/></span>
+            <span class="avatar">
+              <img v-if="avatarPreview" :src="avatarPreview" />
+              <img v-else-if="user.avatar" :src="user.avatar" />
+            </span>
             <label for="avatar" class="select-user-image"></label>
-            <input type="file" id="avatar">
+            <input
+              type="file"
+              id="avatar"
+              ref="avatar"
+              accept=".jpg,.jpeg,.gif,.png"
+              @change="setAvatarPreview"
+            >
             <span
               class="reset-user-image reset-avatar"
+              @click="removeAvatar"
             ></span>
           </div>
+
           <span
             v-show="showBgAdd"
             class="reset-user-image reset-bg"
@@ -50,17 +62,24 @@
             </div>
             <span class="user-login"><a :href="'/' + user.username">{{ user.username }}</a></span>
           </div>
-          <div class="profile-picture-btns" :class="{show: showBgSave}">
+
+          <div class="profile-picture-btns" :class="{show: showSave}">
             <button
               class="btn-cancel-changes cancel-changes"
               @click="resetBgPreview"
             ></button>
             <button
               class="btn save-changes"
-              @click="saveBg"
+              @click="save"
             >Save changes</button>
           </div>
+
         </div>
+
+        <div class="lds-dual-ring with-text not-fullscreen" v-if="loading">
+          <div class="loader-text lowered">Loading</div>
+        </div>
+
       </div>
       <div class="rounded-container" :class="{'hidden-mobile': !isHome}">
         <div class="form-title hidden-desktop">
@@ -92,11 +111,12 @@
 import Mobile from "./mobile";
 import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
+import Avatar from "@/mixins/avatar";
 
 export default {
   name: "SettingsAside",
 
-  mixins: [Mobile, ProfileBg],
+  mixins: [Mobile, ProfileBg, Avatar],
 
   components: {
     Footer
@@ -148,6 +168,15 @@ export default {
           title: "Notifications"
         }
       ];
+    },
+    showAvatarSave() {
+      return this.avatarPreview && !this.avatarUploading;
+    },
+    showSave() {
+      return this.showAvatarSave || this.showBgSave;
+    },
+    loading() {
+      return this.bgUploading || this.avatarUploading;
     }
   },
 
@@ -171,6 +200,14 @@ export default {
         return { active: true };
       } else {
         return {};
+      }
+    },
+    async save() {
+      if (this.$refs.bg.files.length) {
+        await this.saveBg();
+      }
+      if (this.$refs.avatar.files.length) {
+        await this.saveAvatar();
       }
     }
   }
