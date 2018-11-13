@@ -43,7 +43,7 @@
     background: $white;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      padding: 0 0 11px;
+      
       & + .userView {
         border-top: 1px solid rgba($gray, 0.2);
       }
@@ -65,14 +65,17 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-top: 33%;
         position: relative;
+        height: auto;
+        top: 0;
 
         img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
           position: absolute;
           top: 0;
           left: 0;
+        }
+
+        &:before {
+          position: absolute;
         }
       }
 
@@ -129,9 +132,10 @@
   .user-container {
     position: relative;
     margin: 0 15px;
+    z-index: 6;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      padding-left: 55px;
+      padding: 14px 0 14px 55px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -145,6 +149,11 @@
       padding: 0 0 9px;
     }
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
     &.fix-columns {
 
       .user-actions {
@@ -155,6 +164,7 @@
       }
     }
   }
+
   .user-names {
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-right: auto;
@@ -301,13 +311,6 @@
       justify-content: space-between;
     }
   }
-  .names-actions-wrapper {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
-      flex-wrap: nowrap;
-      padding: 14px 0 0;
-    }
-  }
 
   .posts-container & {
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -315,43 +318,10 @@
       background: $white;
     }
   }
-
-  .follow-counter {
-    font-size: 0;
-    padding-bottom: 12px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
-    }
-
-    a {
-      font-size: 17px;
-      color: $main-color;
-      margin-right: 40px;
-      transition: color 0.3s ease;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
-      &:hover {
-        color: $secondary-color;
-      }
-
-      &.active {
-        color: $secondary-color;
-      }
-    }
-  }
-
-  .more-functions__btn {
-    opacity: 0.4;
-  }
 }
 
 .user-actions {
+
   &:before,
   &:after {
     @include media-breakpoint-up($desktop-breakpoint) {

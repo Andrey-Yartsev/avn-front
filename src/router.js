@@ -243,7 +243,8 @@ const routes = [
     path: "/followers",
     component: FollowersPage,
     meta: {
-      title: "followers"
+      title: "followers",
+      cssName: "following"
     }
   },
   {
@@ -251,7 +252,8 @@ const routes = [
     path: "/following",
     component: FollowersPage,
     meta: {
-      title: "following"
+      title: "following",
+      cssName: "following"
     }
   },
   // PUBLIC ZONE

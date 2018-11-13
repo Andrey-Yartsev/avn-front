@@ -216,12 +216,14 @@ video {
   pointer-events: none;
   opacity: 0;
   justify-content: center;
+  width: 80%;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     position: relative;
     left: auto;
     top: auto;
     transform: translate(0, 0);
+    width: auto;
   }
 
   .profile & {
@@ -234,7 +236,10 @@ video {
     flex: 0 0 100%;
     margin-bottom: 10px;
     opacity: 0.3;
-    white-space: nowrap;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      white-space: nowrap;
+    }
 
     &:last-child {
       margin-bottom: 0;

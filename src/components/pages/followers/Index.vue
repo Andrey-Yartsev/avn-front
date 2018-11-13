@@ -219,9 +219,9 @@
           <div class="content-col">
             <div class="posts-container">
               <div class="userCollectionView">
-                  <div class="follow-counter">
-                    <router-link to="/following">Following {{ profile.followingCount }}</router-link>
-                    <router-link to="/followers">Followers {{ profile.followersCount }}</router-link>
+                  <div class="content-nav hidden-mobile">
+                    <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
+                    <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
                   </div>
                   <div class="sticky-header-controls header-mobile">
                     <a class="header-return-btn"></a>

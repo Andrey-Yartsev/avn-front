@@ -3,13 +3,13 @@
     <div class="container">
       <div class="over-container">
 
-        <nav class="explore-nav">
+        <nav class="content-nav">
           <router-link
             v-for="v in types"
             v-bind:key="v.name"
             :to="'/search/' + v.name + '/' + query"
             :class="{active: v.active}"
-            class="explore-nav__item"
+            class="content-nav__item"
           >{{ v.title }}</router-link>
         </nav>
         <div class="header-search-page">
