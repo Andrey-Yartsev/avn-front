@@ -8,18 +8,18 @@
           </div>
 
           <div class="subscribe-popup__info">
-            <div class="subscribe-popup__info-avatar" v-if="profile.avatar">
-              <span class="avatar"><img :src="profile.avatar"></span>
+            <div class="subscribe-popup__info-avatar">
+              <span class="avatar"><img  v-if="profile.avatar" :src="profile.avatar"></span>
             </div>
 
             <div class="subscribe-popup__info-user">
-              <p class="subscribe-popup__info-name">
-                <router-link :to="'/' + profile.username">{{ profile.name }}</router-link>
+              <div class="subscribe-popup__info-name">
+                <router-link :to="'/' + profile.username" class="name">{{ profile.name }}</router-link>
                 <span v-if="profile.isVerified" class="verified-user"></span>
-              </p>
-              <p class="subscribe-popup__info-login">
+              </div>
+              <div class="user-login">
                 <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
-              </p>
+              </div>
             </div>
           </div>
 

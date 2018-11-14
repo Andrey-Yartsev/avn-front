@@ -15,6 +15,18 @@
           <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
         </span>
       </div>
+      <div class="more-functions profile-more-functions hidden-desktop">
+        <div class="more-functions__overlay"></div>
+        <div class="more-functions__btn"></div>
+        <div class="more-functions__dropdown">
+          <div class="more-functions__dropdown-inside">
+            <ul>
+              <li><a class="menu-report" href="#">Report</a></li>
+              <li><a class="menu-block" href="#">Block</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="white-bg-block">
       <div class="bg">
