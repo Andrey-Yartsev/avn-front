@@ -3,7 +3,7 @@
     <router-link class="avatar" :to="'/' + user.username">
       <img v-if="user.avatar" :src="user.avatar"/>
     </router-link>
-    <router-link class="name" :to="'/' + user.username">{{ user.username }}</router-link>
+    <router-link class="name" :to="'/' + user.username">{{ user.name }}</router-link>
     <template v-if="user.isVerified">
       <span class="verified-user"></span>
     </template>

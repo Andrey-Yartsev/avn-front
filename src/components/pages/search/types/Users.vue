@@ -27,7 +27,7 @@
 <script>
 import SubscribeButton from "../SubscribeButton";
 import FollowButton from "../FollowButton";
-import UserDropdown from "../UserDropdown";
+import UserDropdown from "@/components/common/userDropdawn/Index";
 
 export default {
   name: "SearchUsers",

@@ -15,18 +15,7 @@
           <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
         </span>
       </div>
-      <div class="more-functions profile-more-functions hidden-desktop">
-        <div class="more-functions__overlay"></div>
-        <div class="more-functions__btn"></div>
-        <div class="more-functions__dropdown">
-          <div class="more-functions__dropdown-inside">
-            <ul>
-              <li><a class="menu-report" href="#">Report</a></li>
-              <li><a class="menu-block" href="#">Block</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <UserDropdown class="more-functions profile-more-functions hidden-desktop" :profile="profile" />
     </div>
     <div class="white-bg-block">
       <div class="bg">
@@ -168,22 +157,7 @@
                     @click="sendMessage"
                     type="button" class="profile-actions__btn profile-message-btn"
                   >Message</button>
-                  <div class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile">
-                    <div class="more-functions__overlay"></div>
-                    <div class="more-functions__btn">
-                      <div class="more-functions__btn-text">
-                        More
-                      </div>
-                    </div>
-                    <div class="more-functions__dropdown">
-                      <div class="more-functions__dropdown-inside">
-                        <ul>
-                          <li><a class="menu-report" href="#">Report</a></li>
-                          <li><a class="menu-block" href="#">Block</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  <UserDropdown class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile" :profile="profile" />
                 </div>
               </div>
             </div>
@@ -260,6 +234,7 @@ import SubscribeButton from "@/components/subscription/Button";
 import Tip from "@/components/common/tip/User";
 import FileUpload from "@/mixins/fileUpload";
 import ProfileBg from "@/mixins/profileBg";
+import UserDropdown from "@/components/common/userDropdawn/Index";
 
 export default {
   name: "ProfileHome",
@@ -271,7 +246,8 @@ export default {
     PostCollection,
     SubscribeButton,
     Tip,
-    ProfileAvatar
+    ProfileAvatar,
+    UserDropdown
   },
 
   data() {
