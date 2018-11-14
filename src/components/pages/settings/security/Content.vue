@@ -56,6 +56,11 @@
                 <input type="text" name="otpCode" v-model="otpCode">
               </li>
             </ol>
+            <button
+              v-if="(otpEnable && !user.otpEnable) || (!otpEnable && user.otpEnable)"
+              type="submit"
+              class="btn lg saveChanges hidden-mobile"
+              :disabled="!otpCode">Confirm</button>
           </template>
           <div v-if="!otpEnable && user.otpEnable" class="form-group full">
             <label class="form-group-inner">
@@ -69,11 +74,6 @@
             </div>
           </div>
         </div>
-        <button
-          v-if="(otpEnable && !user.otpEnable) || (!otpEnable && user.otpEnable)"
-          type="submit"
-          class="btn lg saveChanges hidden-mobile"
-          :disabled="!otpCode">Confirm</button>
       </div>
 
       <div class="SessionsCollectionView">
