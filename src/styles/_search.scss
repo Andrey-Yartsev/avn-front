@@ -152,12 +152,6 @@
     top: -10px;
   }
 
-  form {
-    display: flex;
-    align-content: center;
-    align-items: center;
-  }
-
   input[type="text"] {
 
     @include media-breakpoint-down($desktop-breakpoint) {

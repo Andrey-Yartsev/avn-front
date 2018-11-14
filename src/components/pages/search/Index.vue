@@ -14,14 +14,15 @@
         </nav>
         <div class="header-search-page">
           <div class="field">
-            <form v-on:submit.stop.prevent="searchChange">
+            <form v-on:submit.stop.prevent="searchChange" class="b-search-form b-search-form_flex-align">
               <input
                 type="text"
                 placeholder="Search"
                 v-model="localQuery"
+                class="sm"
               >
               <span role="button" tabindex="-1" class="btn-clear-search hidden" id="header-search-clear"></span>
-              <button type="submit" class="header-search-submit"></button>
+              <button type="submit" class="b-search-form__btn b-search-form__btn_mob"></button>
             </form>
           </div>
         </div>

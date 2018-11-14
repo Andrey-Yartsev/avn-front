@@ -23,13 +23,6 @@
         display: none;
       }
     }
-
-    .header-search {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: flex;
-      }
-    }
   }
 
   .btn {
@@ -39,6 +32,13 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
+    }
+  }
+
+  .b-search-form_flex-align {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="header-search"
+    class="b-search-form b-search-form_flex-align header-search"
   >
     <input
       @keyup="keyup"
@@ -11,7 +11,7 @@
     <span role="button" tabindex="-1" id="header-search-clear"></span>
 
     <button
-      type="button" class="header-search-submit"
+      type="button" class="b-search-form__btn b-search-form__btn_mob header-search-submit"
       @click="toToSearchPage"
     ></button>
 

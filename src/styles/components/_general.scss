@@ -321,3 +321,140 @@ video {
     }
   }
 }
+
+.b-search-form {
+  position: relative;
+  width: 100%;
+
+  &_flex-align {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      align-content: center;
+      align-items: center;
+    }
+  }
+
+  input.sm {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 24px;
+      padding: 2px 10px;
+
+      &:focus {
+        &::-moz-placeholder {
+          text-align: inherit;
+        }
+        &:-ms-input-placeholder {
+          text-align: inherit;
+        }
+        &::-webkit-input-placeholder {
+          text-align: inherit;
+        }
+      }
+    }
+
+    #site_header & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+
+        &::-moz-placeholder {
+          text-align: center;
+        }
+
+        &:-ms-input-placeholder {
+          text-align: center;
+        }
+
+        &::-webkit-input-placeholder {
+          text-align: center;
+        }
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-right: 40px;
+    }
+
+    &::-ms-clear {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    &::-ms-reveal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+  }
+
+  &__btn {
+    width: 34px;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: opacity 0.3s ease;
+    opacity: 0.3;
+    right: 0;
+    top: 0;
+    color: $main-color;
+    position: absolute;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 37px;
+      height: 30px;
+    }
+
+    &:hover {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        opacity: 1;
+      }
+    }
+
+    &_mob {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        color: $secondary-color;
+        margin-left: 10px;
+        position: relative;
+        width: 37px;
+        opacity: 1;
+      }
+
+      &:before {
+
+        .b-search-form & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            font-size: 24px;
+            line-height: 30px;
+          }
+        }
+      }
+    }
+
+    &:before {
+      @include icon-font;
+      display: block;
+      content: "\E60C";
+      font-size: 18px;
+      line-height: 24px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        line-height: 30px;
+      }
+
+      .dark & {
+        color: #fff;
+      }
+    }
+  }
+}

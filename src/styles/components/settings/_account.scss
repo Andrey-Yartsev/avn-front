@@ -74,6 +74,7 @@
   }
 }
 .email-block {
+
   &.success {
     .email-confirm-block {
       display: none;
@@ -82,6 +83,7 @@
       display: none;
     }
   }
+  
   &.warning {
     .for-verified {
       display: none;

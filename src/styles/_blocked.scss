@@ -1,41 +1,9 @@
 @import "components/imports";
 
 .blocked-search {
-  position: relative;
-  width: 100%;
-  @include media-breakpoint-down($desktop-breakpoint) {
-    input {
-      height: 24px;
-      padding: 3px 10px;
-    }
-  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 220px;
-  }
-  button {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    font-size: 18px;
-    right: 0;
-    width: 34px;
-    border: none;
-    background: none;
-    padding: 0;
-    opacity: 0.3;
-    color: inherit;
-    transition: opacity 0.3s ease;
-    height: auto;
-    max-height: 30px;
-
-    &:before {
-      @include position-center;
-      @include icon-font;
-      content: "\E60C";
-    }
-    &:hover {
-      opacity: 1;
-    }
   }
 }
 

@@ -9,9 +9,9 @@
           </p>
         </span>
 
-        <form class="blocked-search">
+        <form class="blocked-search b-search-form">
           <input type="text" class="rounded sm" placeholder="Search">
-          <button type="submit" disabled=""></button>
+          <button type="submit" disabled="" class="b-search-form__btn"></button>
         </form>
       </div>
       <div class="table-header blocked-table-header ">

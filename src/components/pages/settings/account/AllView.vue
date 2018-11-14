@@ -9,7 +9,7 @@
 
       <div
         class="border-top email-block"
-        :class="{'success': user.emailChecked, 'warnging': !user.emailChecked}"
+        :class="{'success': user.emailChecked, 'warning': !user.emailChecked}"
       >
         <div class="shadow-block">
           <div class="container">

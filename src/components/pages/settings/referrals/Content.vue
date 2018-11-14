@@ -28,9 +28,9 @@
         <span class="semi-transparent referrals-text">
             Referrals
         </span>
-          <form class="referrals-search">
+          <form class="referrals-search b-search-form">
             <input type="text" class="rounded sm" placeholder="Search">
-            <button type="submit" disabled=""></button>
+            <button type="submit" disabled="" class="b-search-form__btn"></button>
           </form>
         </div>
         <div class="table-header referrals-table-header">
