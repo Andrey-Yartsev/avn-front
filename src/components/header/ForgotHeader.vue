@@ -5,7 +5,7 @@
         <nav class="header-nav hidden-mobile">
         </nav>
         <h1 class="header-logo">
-          <a href="/">
+          <router-link to="/">
             <span class="header-logo__text">OnMyTeam</span>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 24">
               <g>
@@ -17,10 +17,10 @@
               <path class="e" d="M10,4.5A7.5,7.5,0,1,0,17.5,12,7.5,7.5,0,0,0,10,4.5ZM9.44,17.72c-3,0-5-3.9-5-6.58,0-1.41.66-4.07,3.12-4.07,3.06,0,5,3.9,5,6.58C12.56,15.06,11.91,17.72,9.44,17.72Zm7.45-4.12c-1.17.16-1.19.17-1.34,1.35a.42.42,0,0,1-.84,0c-.15-1.18-.16-1.19-1.34-1.35a.41.41,0,0,1-.37-.42.41.41,0,0,1,.37-.42c1.18-.15,1.19-.16,1.34-1.34a.42.42,0,0,1,.84,0c.15,1.18.17,1.19,1.34,1.34a.41.41,0,0,1,.37.42A.41.41,0,0,1,16.89,13.6Z"/>
               <path class="f" d="M10,4.5A7.5,7.5,0,1,0,17.5,12,7.5,7.5,0,0,0,10,4.5Zm6.89,9.1c-1.17.16-1.19.17-1.34,1.35a.42.42,0,0,1-.84,0c0-.2-.05-.36-.07-.5a6.65,6.65,0,0,1-5.13,3.27A2.69,2.69,0,0,1,6.7,14.86c0-2.93,3.17-6.16,6.05-6.16a2.68,2.68,0,0,1,2.81,2.76c.14,1.13.17,1.15,1.33,1.3a.41.41,0,0,1,.37.42A.41.41,0,0,1,16.89,13.6Z"/>
             </svg>
-          </a>
+          </router-link>
         </h1>
-        <a href="/register" class="btn border register">Sign up</a>
-        <a href="/login" class="btn border alt login">Log in</a>
+        <router-link to="/register" class="btn border register">Sign up</router-link>
+        <router-link href="/login" class="btn border alt login">Log in</router-link>
       </div>
     </div>
   </header>

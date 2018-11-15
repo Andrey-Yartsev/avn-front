@@ -11,7 +11,7 @@
           verify the content; assure he/she is 18 years of age; certify that he/she keeps records of the models in the
           content and that they were over 18 years of age at the time the content was created.</p>
         <p>OnMyTeam.com - Custodian of Records<br>501 Silverside Road St 87, Wilmington, DE 19809</p>
-        <p>If you require additional assistance please <router-link href="/contact">contact us</router-link>.</p>
+        <p>If you require additional assistance please <router-link to="/contact">contact us</router-link>.</p>
       </div>
     </div>
     <Footer />

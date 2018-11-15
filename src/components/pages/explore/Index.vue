@@ -1,7 +1,7 @@
 <template>
   <div class="exploreView">
     <MobileHeader></MobileHeader>
-    <a class="addPost-btn-float hidden-desktop" href="/addPost"></a>
+    <router-link class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
     <div class="container">
       <div class="over-container">
         <Navigate />
