@@ -40,6 +40,9 @@ const mutations = {
   },
   setSource(state, { source }) {
     state.source = source;
+  },
+  setLimit(state, { limit }) {
+    state.limit = limit;
   }
 };
 
@@ -75,8 +78,11 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
-  setSource({ commit }, { source }) {
-    commit("setSource", { source });
+  setSource({ commit }, { source, limit }) {
+    commit("setSource", { source, limit });
+  },
+  setLimit({ commit }, { limit }) {
+    commit("setLimit", { limit });
   }
 };
 

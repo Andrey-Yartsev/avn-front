@@ -6,12 +6,11 @@
       <div class="over-container">
         <Navigate />
         <div class="stories-all" v-if="page === 'all' && stories.length">
-          <scrolly class="exploreAllStoriesCollectionView">
+          <scrolly class="exploreAllStoriesCollectionView" @scrollchange="scrollFunction">
             <scrolly-viewport class="explore-stories">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
             </scrolly-viewport>
             <scrolly-bar axis="x"></scrolly-bar>
-            <scrolly-bar axis="y"></scrolly-bar>
           </scrolly>
         </div>
         <div class="explore">
@@ -78,6 +77,12 @@ export default {
     stories() {
       return this.$store.state.stories.posts;
     },
+    storiesLoading() {
+      return this.$store.state.stories.loading;
+    },
+    storiesAllDataReceived() {
+      return this.$store.state.stories.allDataReceived;
+    },
     store() {
       // uses into InfinityScrollMixin
       if (this.type === "media") {
@@ -118,6 +123,17 @@ export default {
     }
   },
   methods: {
+    scrollFunction(e) {
+      const { viewportWidth, scrollLeft, scrollWidth } = e.x;
+      const scrolledEnought = scrollWidth - (viewportWidth + scrollLeft) < 600;
+      if (
+        scrolledEnought &&
+        !this.storiesLoading &&
+        !this.storiesAllDataReceived
+      ) {
+        this.$store.dispatch("stories/getPosts");
+      }
+    },
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
       if (this.type === "media") {
@@ -140,6 +156,10 @@ export default {
       if (this.type === "media") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         this.$store.dispatch("explore/getPosts");
+      }
+
+      if (["all"].indexOf(this.page) !== -1) {
+        this.$store.dispatch("stories/setLimit", { limit: 20 });
       }
 
       if (["all", "stories"].indexOf(this.page) !== -1) {
