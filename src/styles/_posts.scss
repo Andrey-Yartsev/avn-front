@@ -571,7 +571,7 @@
   }
 
   .comment {
-    padding: 8px 0 0 40px;
+    padding: 8px 0 0 0;
     position: relative;
 
     &-body {
@@ -655,6 +655,14 @@
       //position: absolute;
       //left: 0;
       //top: 8px;
+    }
+
+    + .comment-body {
+      padding-left: 40px;
+
+      + .comment-footer {
+        padding-left: 40px;
+      }
     }
   }
 }
