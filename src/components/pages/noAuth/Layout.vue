@@ -20,21 +20,21 @@
           <p class="promotion">Share and check what others have going on right now</p>
         </div>
         <div class="login-footer hidden-mobile">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/contact">Contact</a>
+          <router-link to="/terms">Terms</router-link>
+          <router-link to="/privacy">Privacy</router-link>
+          <router-link to="/contact">Contact</router-link>
           <a href="https://epoch.com/" target="_blank">Billing Support</a>
         </div>
         <div class="login-footer second-footer hidden-mobile">
-          <a href="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</a>
+          <router-link to="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</router-link>
         </div>
       </div>
       <div class="login-form-col">
         <slot name="content" />
         <div class="login-footer hidden-desktop">
-          <a href="/terms">Terms</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/contact">Contact</a>
+          <router-link to="/terms">Terms</router-link>
+          <router-link to="/privacy">Privacy</router-link>
+          <router-link to="/contact">Contact</router-link>
           <a href="https://epoch.com/" target="_blank">Billing Support</a>
         </div>
         <div class="login-footer second-footer hidden-desktop">

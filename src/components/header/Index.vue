@@ -21,12 +21,16 @@
         <template v-if="!noAuthHeader">
           <Search/>
           <User/>
-          <button class="btn make-post-btn hidden-mobile" type="button">Share</button>
-          <router-link class="btn make-post-btn hidden-desktop" to="/addPost">Share</router-link>
-        </template>
-        <template v-else>
-          <router-link to="/register" class="btn border register">Sign up</router-link>
-          <router-link to="/login" class="btn border alt login">Log in</router-link>
+          <button
+            class="btn make-post-btn hidden-mobile"
+            type="button"
+            @click="openAddPostModal"
+          >Share</button>
+          <a
+            href="/addPost"
+            class="btn make-post-btn hidden-desktop"
+            @click.prevent="openAddPostModal"
+          >Share</a>
         </template>
       </div>
     </div>
@@ -56,6 +60,13 @@ export default {
     },
     show() {
       return this.noAuthHeader || this.user;
+    }
+  },
+  methods: {
+    openAddPostModal() {
+      this.$store.dispatch("modal/show", {
+        name: "addPost"
+      });
     }
   }
 };

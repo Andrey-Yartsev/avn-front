@@ -26,6 +26,10 @@ import StoryPage from "./components/pages/story/Index";
 import AddPostPage from "./components/pages/addPost/Index";
 import StreamPage from "./components/pages/stream/Index";
 import FollowersPage from "./components/pages/followers/Index";
+import TermsPage from "./components/pages/static/Terms";
+import PrivacyPage from "./components/pages/static/Privacy";
+import ContactsPage from "./components/pages/static/Contacts";
+import Record2257Page from "./components/pages/static/Record2257";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -328,6 +332,43 @@ const routes = [
     beforeEnter: Auth.requireAny,
     path: "/stories/:userId",
     component: StoryPage
+  },
+  // STATIC PAGES
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/terms",
+    component: TermsPage,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/privacy",
+    component: PrivacyPage,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/contact",
+    component: ContactsPage,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/2257",
+    component: Record2257Page,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
   },
   // PROFILE ZONE
   {

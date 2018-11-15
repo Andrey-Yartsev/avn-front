@@ -29,6 +29,7 @@ import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
 import tip from "@/store/modules/tip";
 import followers from "@/store/modules/followers";
+import contacts from "@/store/modules/contacts";
 
 Vue.use(Vuex);
 
@@ -63,7 +64,8 @@ const store = new Vuex.Store({
     emails,
     blocked,
     tip,
-    followers
+    followers,
+    contacts
   }
 });
 
