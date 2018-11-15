@@ -29,6 +29,10 @@
     &:empty {
       display: none;
     }
+
+    .scrolly-viewport {
+      position: relative;
+    }
   }
 
   .exploreAllStoriesView {
