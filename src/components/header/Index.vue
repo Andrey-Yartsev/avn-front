@@ -32,6 +32,10 @@
             @click.prevent="openAddPostModal"
           >Share</a>
         </template>
+        <template v-if="gotoAuthSection">
+          <router-link to="/register" class="register">Have an account?</router-link>
+          <router-link to="/login" class="btn border alt login">Log in</router-link>
+        </template>
       </div>
     </div>
   </header>
@@ -57,6 +61,9 @@ export default {
     },
     noAuthHeader() {
       return this.$route.meta && this.$route.meta.noAuthHeader;
+    },
+    gotoAuthSection() {
+      return this.$route.meta && this.$route.meta.gotoAuthSection;
     },
     show() {
       return this.noAuthHeader || this.user;
