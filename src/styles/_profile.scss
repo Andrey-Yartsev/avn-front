@@ -860,8 +860,9 @@
 
       & ~ .container {
 
-        .controls-select-picture {
-          display: none;
+        .select-user-image {
+          opacity: 0;
+          pointer-events: none;
         }
       }
     }
