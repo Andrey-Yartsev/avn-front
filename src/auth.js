@@ -105,12 +105,15 @@ const Auth = {
     const token = urlParams.get("token");
     const secret = urlParams.get("secret");
     if (token && secret) {
-      Twitter.getAuthToken(token, secret).then(user => {
-        if (!user.accessToken) {
+      Twitter.getAuthToken(token, secret).then(r => {
+        if (r.error.message) {
+          return next("/login?error=" + encodeURIComponent(r.error.message));
+        }
+        if (!r.accessToken) {
           throw new Error("Twitter login error");
         }
-        Store.dispatch("auth/setToken", user.accessToken);
-        if (user.otpEnable) {
+        Store.dispatch("auth/setToken", r.accessToken);
+        if (r.otpEnable) {
           Store.dispatch("auth/setOtpAuth", true);
           return next("/login");
         }

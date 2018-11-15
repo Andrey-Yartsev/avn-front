@@ -36,6 +36,7 @@
             :sitekey="recaptchaSiteKey"
           />
           <div class="error" v-if="error">{{ error }}</div>
+          <div class="error" v-if="error2">{{ error2 }}</div>
           <button type="submit" class="btn lg alt block">Login</button>
         </form>
 
@@ -68,9 +69,10 @@ export default {
 
   data() {
     return {
-      email: "",
-      password: "",
-      otpCode: ""
+      email: "andrey.yartsev.g+9@yandex.ru",
+      password: "sdqSqd1d1d12d",
+      otpCode: "",
+      error2: null
     };
   },
 
@@ -113,6 +115,17 @@ export default {
     captchaVerified(recaptchaToken) {
       this.onCaptchaVerified(recaptchaToken);
       this.login();
+    }
+  },
+
+  mounted() {
+    const errors = ["User banned."];
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get("error");
+    if (error) {
+      if (errors.indexOf(error) !== -1) {
+        this.error2 = error;
+      }
     }
   }
 };
