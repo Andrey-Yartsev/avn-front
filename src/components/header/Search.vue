@@ -13,6 +13,7 @@
     <button
       type="button" class="b-search-form__btn b-search-form__btn_mob header-search-submit"
       @click="toToSearchPage"
+      :disabled="!query"
     ></button>
 
     <button

@@ -22,7 +22,11 @@
                 class="sm"
               >
               <span role="button" tabindex="-1" class="btn-clear-search hidden" id="header-search-clear"></span>
-              <button type="submit" class="b-search-form__btn b-search-form__btn_mob"></button>
+              <button
+                type="submit"
+                class="b-search-form__btn b-search-form__btn_mob"
+                :disabled="!query"
+              ></button>
             </form>
           </div>
         </div>
