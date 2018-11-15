@@ -1,5 +1,5 @@
 <template>
-  <header id="site_header" v-if="show" :class="{guest: noAuthHeader}">
+  <header id="site_header" :class="{guest: noAuthHeader}">
     <div class="header-wrapper">
       <div :class="['container', 'header_container']">
         <DesktopHeader />
@@ -18,7 +18,7 @@
             </svg>
           </router-link>
         </h1>
-        <template v-if="!noAuthHeader">
+        <template v-if="!noAuthHeader && !authSection">
           <Search/>
           <User/>
           <button
@@ -32,7 +32,7 @@
             @click.prevent="openAddPostModal"
           >Share</a>
         </template>
-        <template v-if="gotoAuthSection">
+        <template v-if="authSection">
           <router-link to="/register" class="register">Have an account?</router-link>
           <router-link to="/login" class="btn border alt login">Log in</router-link>
         </template>
@@ -62,11 +62,11 @@ export default {
     noAuthHeader() {
       return this.$route.meta && this.$route.meta.noAuthHeader;
     },
-    gotoAuthSection() {
-      return this.$route.meta && this.$route.meta.gotoAuthSection;
-    },
-    show() {
-      return this.noAuthHeader || this.user;
+    authSection() {
+      if (!this.user) {
+        return true;
+      }
+      return this.$route.meta && this.$route.meta.authSection;
     }
   },
   methods: {
