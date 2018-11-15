@@ -44,8 +44,12 @@
         <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
         <div class="signUp">
           <h3>Don't have an account yet?</h3>
-          <p><router-link to="/register" class="register">Sign up for OnMyTeam.com</router-link></p>
-          <p class="forgot"><router-link to="/forgot" class="forgot">Forgot your password?</router-link></p>
+          <p>
+            <router-link to="/register" class="register">Sign up for OnMyTeam.com</router-link>
+          </p>
+          <p class="forgot">
+            <router-link to="/forgot" class="forgot">Forgot your password?</router-link>
+          </p>
         </div>
       </template>
     </template>
@@ -119,7 +123,10 @@ export default {
   },
 
   mounted() {
-    const errors = ["User banned."];
+    const errors = [
+      "User banned.",
+      "This Twitter is already used by another account."
+    ];
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get("error");
     if (error) {
