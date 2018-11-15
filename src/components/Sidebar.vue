@@ -49,8 +49,13 @@
             <span role="button" class="user-menu-bottom-btn user-menu-bottom-btn__skin-toggle "></span>
             <!-- QR temporary hidden -->
             <!--<span role="button" class="user-menu-bottom-btn user-menu-bottom-btn__qr"></span>-->
-            <span role="button" :data-clipboard-text="'/' + user.username" :data-title="user.username"
-                  class="user-menu-bottom-btn user-menu-bottom-btn__share"></span>
+            <span
+              role="button"
+              :data-clipboard-text="'/' + user.username"
+              :data-title="user.username"
+              class="user-menu-bottom-btn user-menu-bottom-btn__share"
+              @click="copyToClipboard"
+            ></span>
           </div>
         </div>
       </div>
@@ -59,12 +64,21 @@
 </template>
 
 <script>
+import execCopy from "@/utils/execCopy";
+
 export default {
   name: "Sidebar",
 
   computed: {
     user() {
       return this.$store.state.auth.user;
+    }
+  },
+
+  methods: {
+    copyToClipboard() {
+      execCopy(window.location.origin + "/" + this.user.username);
+      this.$store.dispatch("global/flashToast", "Profile link copied!");
     }
   }
 };
