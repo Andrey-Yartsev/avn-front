@@ -398,9 +398,6 @@
         box-shadow: 2px 2px 5px rgba(#000, 0.1);
 
         .postPage & {
-          width: 6px;
-          height: 6px;
-          margin: 0 3px;
 
           @include media-breakpoint-up($tablet-breakpoint) {
             width: 8px;
