@@ -107,7 +107,7 @@ const Auth = {
     const secret = urlParams.get("secret");
     if (token && secret) {
       Twitter.getAuthToken(token, secret).then(r => {
-        if (r.error.message) {
+        if (r.error && r.error.message) {
           return next("/login?error=" + encodeURIComponent(r.error.message));
         }
         if (!r.accessToken) {
