@@ -1342,7 +1342,7 @@
       &:before {
         content: "\E636";
       }
-      &.night {
+      .dark-theme & {
         &:before {
           content: "\E637";
         }
