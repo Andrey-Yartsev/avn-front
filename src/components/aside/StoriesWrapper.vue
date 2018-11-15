@@ -9,8 +9,8 @@
         @click="watchAll"
       >Watch All</button>
       <div class="stories-group__outer">
-        <div class="stories-group">
-          <div class="stories-group__inner" >
+        <scrolly class="stories-group" @scrollchange="scrollFunction">
+          <scrolly-viewport class="stories-group__inner">
             <div v-if="!hasMine" class="storyView create-story-button" @click.prevent="addNewStory">
               <div class="story">
                 <div class="story-avatar">
@@ -32,8 +32,9 @@
               </div>
             </div>
             <StoryCollection :stories="stories" />
-          </div>
-        </div>
+          </scrolly-viewport>
+          <scrolly-bar axis="y"></scrolly-bar>
+        </scrolly>
       </div>
     </div>
   </div>
@@ -41,15 +42,14 @@
 
 <script>
 import StoryCollection from "@/components/common/storyCollection/Index";
-// import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
 export default {
   name: "StoriesWrapper",
   components: {
-    // Story,
-    // Scrolly,
-    // ScrollyViewport,
-    // ScrollyBar,
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar,
     StoryCollection
   },
   computed: {
@@ -70,10 +70,13 @@ export default {
     }
   },
   methods: {
-    addNewStory: function() {
+    scrollFunction() {
+      
+    },
+    addNewStory() {
       document.getElementById("storyFileSelect").click();
     },
-    watchAll: function() {
+    watchAll() {
       const userIds = [...this.userIds];
       const userId = userIds.shift();
 
