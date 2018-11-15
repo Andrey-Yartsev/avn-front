@@ -81,6 +81,7 @@ export default {
   methods: {
     copyToClipboard() {
       execCopy(this.url);
+      this.$store.dispatch("global/flashToast", "Referral URL copied!");
     }
   }
 };
