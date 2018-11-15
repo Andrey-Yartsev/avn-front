@@ -363,21 +363,6 @@
     }
   }
 
-  &-item {
-    display: none;
-
-    &.active {
-      display: block;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0;
-      }
-    }
-  }
-
   &-slider {
 
     &-pagination {
@@ -490,13 +475,25 @@
   }
 
   &-item {
-    background: #fff;
+    display: none;
+    background: $white;
     text-align: center;
 
     .postLink {
       display: inline-block;
       position: relative;
       vertical-align: top;
+    }
+
+    &.active {
+      display: block;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0;
+      }
     }
   }
   .gif-player {
