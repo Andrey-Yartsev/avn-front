@@ -27,9 +27,9 @@ export default {
     },
     resetBgPreview() {
       this.bgPreview = null;
+      this.$refs.bg.value = "";
     },
     saveBg() {
-      // console.log("save bg");
       return new Promise(accept => {
         this.bgUploading = true;
         upload(this.$refs.bg.files[0]).then(fileName => {

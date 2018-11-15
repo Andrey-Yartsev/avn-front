@@ -66,7 +66,7 @@
           <div class="profile-picture-btns" :class="{show: showSave}">
             <button
               class="btn-cancel-changes cancel-changes"
-              @click="resetBgPreview"
+              @click="reset"
             ></button>
             <button
               class="btn save-changes"
@@ -209,6 +209,14 @@ export default {
       if (this.$refs.avatar.files.length) {
         await this.saveAvatar();
       }
+    },
+    resetAvatarPreview() {
+      this.avatarPreview = "";
+      this.$refs.avatar.value = "";
+    },
+    reset() {
+      this.resetAvatarPreview();
+      this.resetBgPreview();
     }
   }
 };
