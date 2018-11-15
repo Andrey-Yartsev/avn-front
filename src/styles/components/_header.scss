@@ -165,21 +165,21 @@
       box-shadow: 0 2px 10px rgba(#000, 0.2);
     }
 
-    //.header-search-submit {
-    //  color: $main;
-    //}
-    //
-    //.header-search-input {
-    //  background-color: rgba(#fff, 0.3);
-    //  box-shadow: 0 2px 10px rgba(#000, 0.06);
-    //
-    //  &:hover,
-    //  &:focus {
-    //    background-color: #fff;
-    //    box-shadow: 0 2px 10px rgba(#000, 0.2);
-    //    color: $main;
-    //  }
-    //}
+    .header-search-submit {
+      color: $main;
+    }
+
+    .header-search-input {
+      background-color: rgba(#fff, 0.3);
+      box-shadow: 0 2px 10px rgba(#000, 0.06);
+
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(#000, 0.2);
+        color: $main;
+      }
+    }
   }
 }
 
