@@ -52,7 +52,7 @@ export default {
       this.avatarRemoved = true;
       this.avatarPreview = "";
       this.$store.dispatch("profile/extend", {
-        header: ""
+        avatar: ""
       });
     }
   }
