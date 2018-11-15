@@ -31,74 +31,49 @@
       </div>
       <div class="chatCollectionContentWrapper">
         <div
-          class="searchChatContacts os-host os-theme-dark os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">
-          <div class="os-resize-observer-host">
-            <div class="os-resize-observer observed" style="left: 0px; right: auto;"></div>
-          </div>
-          <div class="os-size-auto-observer" style="height: calc(100% + 1px); float: left;">
-            <div class="os-resize-observer observed"></div>
-          </div>
-          <div class="os-content-glue" style="margin: -15px -13px; width: 735px; height: 165px;"></div>
-          <div class="os-padding">
-            <div class="os-viewport os-viewport-native-scrollbars-invisible" style="">
-              <div class="os-content" style="padding: 15px 13px; height: auto; width: 100%;">
-                <div class="searchContact">
-                  <div class="all-contacts-found">
-                    <div class="selectedContacts" v-if="selected.length">
-                      <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
-                        <span class="chatSelectedName">{{ v.withUser.name }}</span>
-                        <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
-                      </div>
-                    </div>
-                    <div
-                      class="btn-selected-all visible"
-                      @click="toggleSelectAll"
-                      :class="{active: isAllSelected}"
-                    ></div>
-                  </div>
-                  <div class="searchWrapper">
-                    <span class="sendTo">To</span>
-                    <input
-                      @keyup="search"
-                      v-model="searchQuery"
-                      type="text" class="searchInput" placeholder="Search">
-                  </div>
-                </div>
-                <div class="searchResult">
-                  <div
-                    v-for="v in chats" v-bind:key="v.withUser.id"
-                    class="searchChatContactsView"
-                    @click="toggleSelect(v.withUser.id)"
-                    :class="{active: isSelected(v.withUser.id)}"
-                  >
-                    <span class="avatar">
-                      <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
-                    </span>
-                    <div class="chatView__header">
-                      <span class="name">{{ v.withUser.name }}</span>
-                      <span class="verified-user" v-if="v.withUser.isVerified"></span>
-                    </div>
-                    <div class="user-login">
-                      <span class="username">{{ v.withUser.username }}</span>
-                    </div>
-                    <span class="check"></span>
-                  </div>
-
+          class="searchChatContacts">
+          <div class="searchContact">
+            <div class="all-contacts-found">
+              <div class="selectedContacts" v-if="selected.length">
+                <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
+                  <span class="chatSelectedName">{{ v.withUser.name }}</span>
+                  <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
                 </div>
               </div>
+              <div class="btn-selected-all visible"
+                   @click="toggleSelectAll"
+                   :class="{active: isAllSelected}"
+              ></div>
+            </div>
+            <div class="searchWrapper">
+              <span class="sendTo">To</span>
+              <input
+                @keyup="search"
+                v-model="searchQuery"
+                type="text" class="searchInput" placeholder="Search">
             </div>
           </div>
-          <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable">
-            <div class="os-scrollbar-track os-scrollbar-track-off">
-              <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0%, 0px);"></div>
+          <div class="searchResult">
+            <div
+              v-for="v in chats" v-bind:key="v.withUser.id"
+              class="searchChatContactsView"
+              @click="toggleSelect(v.withUser.id)"
+              :class="{active: isSelected(v.withUser.id)}"
+            >
+              <span class="avatar">
+                <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+              </span>
+              <div class="chatView__header">
+                <span class="name">{{ v.withUser.name }}</span>
+                <span class="verified-user" v-if="v.withUser.isVerified"></span>
+              </div>
+              <div class="user-login">
+                <span class="username">{{ v.withUser.username }}</span>
+              </div>
+              <span class="check"></span>
             </div>
+
           </div>
-          <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable">
-            <div class="os-scrollbar-track os-scrollbar-track-off">
-              <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0%);"></div>
-            </div>
-          </div>
-          <div class="os-scrollbar-corner"></div>
         </div>
       </div>
     </template>
