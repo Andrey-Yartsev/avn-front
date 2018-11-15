@@ -46,7 +46,11 @@
             </div>
           </nav>
           <div class="user-menu-bottom-btns">
-            <span role="button" class="user-menu-bottom-btn user-menu-bottom-btn__skin-toggle "></span>
+            <span
+              role="button"
+              class="user-menu-bottom-btn user-menu-bottom-btn__skin-toggle"
+              @click="toggleDarkTheme"
+            ></span>
             <!-- QR temporary hidden -->
             <!--<span role="button" class="user-menu-bottom-btn user-menu-bottom-btn__qr"></span>-->
             <span
@@ -79,6 +83,9 @@ export default {
     copyToClipboard() {
       execCopy(window.location.origin + "/" + this.user.username);
       this.$store.dispatch("global/flashToast", "Profile link copied!");
+    },
+    toggleDarkTheme() {
+      this.$store.dispatch("global/toggleDarkTheme");
     }
   }
 };

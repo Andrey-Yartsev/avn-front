@@ -97,6 +97,9 @@ export default {
     },
     cssName() {
       return this.$route.meta.cssName;
+    },
+    darkTheme() {
+      return this.$store.state.global.darkTheme;
     }
   },
   watch: {
@@ -111,11 +114,22 @@ export default {
       handler(cssName) {
         const html = document.getElementsByTagName("html")[0];
         html.className = "";
-        const bodyClassList = html.classList;
+        const rootClassList = html.classList;
         const classList = rootClasses[cssName] || [];
         for (let cls of classList) {
-          bodyClassList.add(cls);
+          rootClassList.add(cls);
         }
+        if (this.darkTheme) {
+          rootClassList.add("dark-theme");
+        }
+      }
+    },
+    darkTheme(darkTheme) {
+      const rootClassList = document.getElementsByTagName("html")[0].classList;
+      if (darkTheme) {
+        rootClassList.add("dark-theme");
+      } else {
+        rootClassList.remove("dark-theme");
       }
     }
   },
