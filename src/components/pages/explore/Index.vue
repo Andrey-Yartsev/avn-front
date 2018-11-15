@@ -6,11 +6,13 @@
       <div class="over-container">
         <Navigate />
         <div class="stories-all" v-if="page === 'all' && stories.length">
-          <div class="exploreAllStoriesCollectionView">
-            <div class="explore-stories">
+          <scrolly class="exploreAllStoriesCollectionView">
+            <scrolly-viewport class="explore-stories">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
-            </div>
-          </div>
+            </scrolly-viewport>
+            <scrolly-bar axis="x"></scrolly-bar>
+            <scrolly-bar axis="y"></scrolly-bar>
+          </scrolly>
         </div>
         <div class="explore">
           <div :class="{
@@ -50,6 +52,7 @@ import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
 export default {
   name: "Explore",
@@ -59,7 +62,10 @@ export default {
     PostSmall,
     PostMedium,
     StoryMedium,
-    StorySmall
+    StorySmall,
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar
   },
   mixins: [InfinityScrollMixin],
   created() {
