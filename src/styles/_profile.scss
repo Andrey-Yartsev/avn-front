@@ -527,21 +527,14 @@
   background-color: $white;
   z-index: 2;
   padding-top: 4px;
-  display: none;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: flex;
-  }
+  display: flex;
 
   &.show {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      opacity: 1;
-      visibility: visible;
-    }
+    opacity: 1;
+    visibility: visible;
   }
 
   .btn {
@@ -1252,6 +1245,15 @@
     left: auto;
     top: auto;
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      white-space: nowrap;
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+    }
+
     &:after {
       margin-left: 11px;
     }
@@ -1279,14 +1281,11 @@
 
 
 .controls-select-picture {
+  position: absolute;
+  right: 21px;
+  bottom: 17px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    position: absolute;
-    left: auto;
-    right: 21px;
-    top: auto;
-    bottom: 17px;
-    transform: translate(0, 0);
-    margin: 0;
+
   }
 }
