@@ -82,6 +82,7 @@ const Auth = {
     }
     const token = BrowserStore.get("token");
     if (!token) {
+      Store.dispatch("profile/setFetchLoading", false);
       return next();
     }
     Store.dispatch("auth/setToken", token);
