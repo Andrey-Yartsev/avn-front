@@ -4,6 +4,7 @@
       <router-link class="menu-item-home header-nav__item" to="/" exact><span>Home</span></router-link>
       <router-link class="menu-item-explore header-nav__item" to="/explore"><span>Explore</span></router-link>
       <a
+        v-if="user"
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
         :class="{unread: user.hasNotifications}"
