@@ -4,7 +4,7 @@
       <div
         id="avatarBgAside"
         class="rounded-container white-bg-block loadWrap"
-        :class="{'hidden-mobile': !showAvatarBlock}"
+        :class="{'hidden-mobile': !showAvatarBlock, loaderWrap: loading}"
       >
         <div class="settings-profile-images">
           <div class="bg">
