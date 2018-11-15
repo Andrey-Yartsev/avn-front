@@ -738,6 +738,28 @@
       z-index: 6;
     }
 
+    &:before {
+      position: fixed;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      content: "";
+      top: 0;
+      height: 44px;
+      background: linear-gradient(
+        to bottom,
+        rgba(#000, 0.2) 0%,
+        rgba(#000, 0.2) 33.33%,
+        rgba(#000, 0.1) 66.67%,
+        transparent 100%
+      );
+      z-index: 7;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 80px;
+      }
+    }
+
     &:after {
       position: absolute;
       left: 0;
@@ -748,16 +770,16 @@
       z-index: 1;
       height: 12px;
       background: linear-gradient(
-                      to top,
-                      rgba(#000, 0.05) 0%,
-                      transparent 100%
+        to top,
+        rgba(#000, 0.05) 0%,
+        transparent 100%
       );
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-                        to top,
-                        rgba(#000, 0.1) 0%,
-                        transparent 100%
+          to top,
+          rgba(#000, 0.1) 0%,
+          transparent 100%
         );
         bottom: 0;
         height: 80px;
@@ -784,28 +806,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       z-index: 1;
-    }
-
-    &:before {
-      position: fixed;
-      left: 0;
-      right: 0;
-      pointer-events: none;
-      content: "";
-      top: 0;
-      height: 44px;
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0.2) 0%,
-        rgba(#000, 0.2) 33.33%,
-        rgba(#000, 0.1) 66.67%,
-        transparent 100%
-      );
-      z-index: 7;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        height: 80px;
-      }
     }
 
     img {
