@@ -3,13 +3,68 @@
     <div class="container">
       <h1>Reset Password</h1>
       <h2>Please fill out your email. A link to reset password will be sent there.</h2>
-      <form class="forgot-password-form">
-        <input class="lg rounded" type="text" name="email" placeholder="Your Email">
+      <form class="forgot-password-form" v-on:submit.stop.prevent="send">
+        <input
+          v-model="email"
+          class="lg rounded" type="text" name="email" placeholder="Your Email"
+          :disabled="loading || sendSuccess"
+        >
         <div class="g-recaptcha" id="captcha"></div>
-        <div class="hidden error">There is some error</div>
-        <div class="hidden info">Please check your mailbox for further instructions to recover your password.</div>
-        <button type="submit" class="btn lg alt">Reset password</button>
+        <div class="error" v-if="error">
+          {{ error }}
+        </div>
+        <div class="info" v-else-if="sendSuccess">
+          Please check your mailbox for further instructions to recover your password.
+        </div>
+        <button
+          type="submit" class="btn lg alt"
+          v-if="!sendSuccess"
+        >Reset password</button>
       </form>
     </div>
+    <Footer />
   </div>
 </template>
+
+<script>
+import Footer from "../static/Footer";
+
+export default {
+  name: "ForgotPasswordPage",
+
+  components: {
+    Footer
+  },
+
+  data() {
+    return {
+      email: ""
+    };
+  },
+
+  computed: {
+    sendSuccess() {
+      return this.$store.state.forgot.sendSuccess;
+    },
+    loading() {
+      return this.$store.state.forgot.sendLoading;
+    },
+    error() {
+      if (this.$store.state.forgot.sendError) {
+        return this.$store.state.forgot.sendError.message;
+      }
+      return null;
+    }
+  },
+
+  methods: {
+    send() {
+      this.$store.dispatch("forgot/send", { email: this.email });
+    }
+  },
+
+  beforeDestroy() {
+    this.$store.dispatch("forgot/sendReset");
+  }
+};
+</script>
