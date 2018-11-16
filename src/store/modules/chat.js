@@ -3,7 +3,8 @@
 import { createRequestAction } from "../utils/storeRequest";
 
 const state = {
-  isSecondScreen: false
+  isSecondScreen: false,
+  activeUserId: null
 };
 
 const actions = {
@@ -25,13 +26,35 @@ const actions = {
     dispatch("_sendMessage", params).then(message => {
       commit("updateChatLastMessage", {
         message,
-        toUserId: params.userId
+        fromUserId: params.userId
       });
     });
+  },
+  newMessage({ state, commit }, message) {
+    const found = state.messages.find(v => v.id === message.id);
+    if (found) {
+      commit("replaceMessage", message);
+    } else {
+      if (state.activeUserId === message.fromUser.id) {
+        commit("addMessage", message);
+        commit("updateChatLastMessage", {
+          message,
+          fromUserId: message.fromUser.id
+        });
+      } else {
+        commit("updateChatLastMessage", {
+          message,
+          fromUserId: message.fromUser.id
+        });
+      }
+    }
   }
 };
 
 const mutations = {
+  setActiveUserId(state, activeUserId) {
+    state.activeUserId = activeUserId;
+  },
   resetSearchUsers(state) {
     state.chatUsers = null;
   },
@@ -46,13 +69,24 @@ const mutations = {
   setSecondScreen(state, isSecondScreen) {
     state.isSecondScreen = isSecondScreen;
   },
-  updateChatLastMessage(state, { message, toUserId }) {
+  updateChatLastMessage(state, { message, fromUserId }) {
     state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === toUserId) {
+      if (chat.withUser.id === fromUserId) {
         chat.lastMessage = message;
       }
       return chat;
     });
+  },
+  replaceMessage(state, message) {
+    state.messages = state.messages.map(v => {
+      if (v.id === message.id) {
+        v = message;
+      }
+      return v;
+    });
+  },
+  addMessage(state, message) {
+    state.messages = [...state.messages, message];
   }
 };
 
@@ -162,20 +196,6 @@ createRequestAction({
     return [];
   }
 });
-
-mutations.replaceMessage = (state, message) => {
-  let found = false;
-  state.messages.map(v => {
-    if (v.id === message.id) {
-      v = message;
-      found = true;
-    }
-    return v;
-  });
-  if (!found) {
-    state.messages = [...state.messages, message];
-  }
-};
 
 export default {
   namespaced: true,

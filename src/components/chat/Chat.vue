@@ -193,6 +193,7 @@ export default {
         }
         return;
       }
+      this.$store.commit("chat/setActiveUserId", activeUserId);
       this.fetchMessages();
     }
   },
@@ -238,6 +239,7 @@ export default {
       } else if (!this.activeUserId) {
         this.goTo("/chat/" + this.firstActiveChat.withUser.id);
       } else {
+        this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
       }
     });
