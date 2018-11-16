@@ -30,7 +30,7 @@
 
       <div
         class="field-text-message"
-        :class="{hidden: showTip}"
+        :class="{disabled: showTip}"
       >
         <textarea
           v-model="message"
