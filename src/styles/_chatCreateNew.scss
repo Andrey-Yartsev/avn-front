@@ -99,11 +99,15 @@
   height: 30px;
   width: 30px;
   right: 0;
-  top: 0;
+  top: 6px;
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease;
   cursor: pointer;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    right: -4px;
+  }
 
   &:before {
     display: inline-block;
