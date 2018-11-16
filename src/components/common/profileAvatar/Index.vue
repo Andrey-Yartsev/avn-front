@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     updateParams() {
-      if (this.$mq === "mobile") {
+      if (this.$mq !== "desktop") {
         this.avatarSize = 100;
         this.avatarSizeScrolled = 50;
         this.coverScrollHeight =
@@ -68,6 +68,21 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScrollHandler);
+  },
+  watch: {
+    ["$mq"]() {
+      this.updateParams();
+      let event;
+
+      if (window.CustomEvent) {
+        event = new CustomEvent("scroll", { detail: {} });
+      } else {
+        event = document.createEvent("CustomEvent");
+        event.initCustomEvent("scroll", true, true, {});
+      }
+
+      window.dispatchEvent(event);
+    }
   }
 };
 </script>
