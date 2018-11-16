@@ -176,8 +176,6 @@
   position: relative;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
   }
