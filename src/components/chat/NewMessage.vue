@@ -31,19 +31,22 @@
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="searchContact">
-          <div class="all-contacts-found">
-            <div class="selectedContacts" v-if="selected.length">
-              <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
-                <span class="chatSelectedName">{{ v.withUser.name }}</span>
-                <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
+          <scrolly class="all-contacts-found">
+            <scrolly-viewport>
+              <div class="selectedContacts" v-if="selected.length">
+                <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
+                  <span class="chatSelectedName">{{ v.withUser.name }}</span>
+                  <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
+                </div>
               </div>
-            </div>
-            <div
-              class="btn-selected-all visible"
-              @click="toggleSelectAll"
-              :class="{active: isAllSelected}"
-            ></div>
-          </div>
+              <div
+                class="btn-selected-all visible"
+                @click="toggleSelectAll"
+                :class="{active: isAllSelected}"
+              ></div>
+            </scrolly-viewport>
+            <scrolly-bar axis="y"></scrolly-bar>
+          </scrolly>
           <div class="searchWrapper">
             <span class="sendTo">To</span>
             <input
