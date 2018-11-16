@@ -42,8 +42,8 @@
 
 .stories-group {
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding-left: 5px;
-    @media screen and (min-height: 600px) {
+
+    @media screen and (min-height: 400px) {
       position: absolute;
       left: 0;
       right: 0;
@@ -52,23 +52,6 @@
     }
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    overflow: visible !important;
-    .os-content-glue,
-    .os-scrollbar {
-      display: none;
-    }
-    .os-viewport,
-    .os-padding {
-      position: static;
-      overflow: visible !important;
-    }
-    .os-content {
-      border: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-  }
   &__outer {
     position: relative;
 
@@ -80,13 +63,17 @@
     }
   }
   &__inner {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 5px;
+    }
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
-      overflow: hidden !important;
       padding: 9px 20px 6px;
       margin: 0 -15px;
-      overflow-x: scroll !important;
-      -webkit-overflow-scrolling: touch;
+      position: relative;
+      width: auto;
     }
   }
 }

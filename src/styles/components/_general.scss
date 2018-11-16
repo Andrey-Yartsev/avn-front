@@ -310,10 +310,15 @@ video {
     box-sizing: content-box;
 
     .comments-list &,
-    .chatCollectionView & {
+    .chatCollectionView &,
+    .storyCollectionView & {
       right: 0;
       left: auto;
       transform: translateX(0);
+    }
+
+    .storyCollectionView & {
+      border: none;
     }
 
     .comments-list & {

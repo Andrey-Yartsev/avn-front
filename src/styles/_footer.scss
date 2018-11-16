@@ -12,6 +12,10 @@
       margin-top: 73px;
       position: relative;
       display: block;
+
+      @media screen and (min-height: 400px) and (max-height: 600px) {
+        margin-top: 23px;
+      }
     }
 
     &:before {
@@ -22,9 +26,9 @@
       height: 1px;
       position: absolute;
       background: linear-gradient(
-                      to right,
-                      rgba($gray, 0.2) 0%,
-                      transparent 100%
+        to right,
+        rgba($gray, 0.2) 0%,
+        transparent 100%
       );
       display: none;
 
