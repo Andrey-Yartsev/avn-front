@@ -749,25 +749,7 @@
 
     .contactsListContent {
       position: relative;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
       height: 100%;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        overflow-y: auto !important;
-        .os-content-glue,
-        .os-scrollbar {
-          display: none;
-        }
-        .os-viewport,
-        .os-padding {
-          position: static;
-        }
-        .os-content {
-          border: none !important;
-          padding: 0 !important;
-        }
-      }
 
       .scrolly-viewport {
         padding-right: 0;
