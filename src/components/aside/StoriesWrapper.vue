@@ -33,6 +33,7 @@
             </div>
             <StoryCollection :stories="stories" />
           </scrolly-viewport>
+          <scrolly-bar axis="x"></scrolly-bar>
           <scrolly-bar axis="y"></scrolly-bar>
         </scrolly>
       </div>
@@ -59,6 +60,12 @@ export default {
     stories() {
       return this.$store.state.stories.posts;
     },
+    storiesLoading() {
+      return this.$store.state.stories.loading;
+    },
+    storiesAllDataReceived() {
+      return this.$store.state.stories.allDataReceived;
+    },
     hasMine() {
       if (this.stories[0]) {
         return this.stories[0].user.id === this.user.id;
@@ -70,8 +77,27 @@ export default {
     }
   },
   methods: {
-    scrollFunction() {
-      
+    scrolledEnought(e) {
+      if (e.y.visible) {
+        const { viewportHeight, scrollTop, scrollHeight } = e.y;
+        return scrollHeight - (viewportHeight + scrollTop) < 450;
+      }
+
+      if (e.x.visible) {
+        const { viewportWidth, scrollLeft, scrollWidth } = e.x;
+        return scrollWidth - (viewportWidth + scrollLeft) < 450;
+      }
+
+      return false;
+    },
+    scrollFunction(e) {
+      if (
+        this.scrolledEnought(e) &&
+        !this.storiesLoading &&
+        !this.storiesAllDataReceived
+      ) {
+        this.$store.dispatch("stories/getPosts");
+      }
     },
     addNewStory() {
       document.getElementById("storyFileSelect").click();

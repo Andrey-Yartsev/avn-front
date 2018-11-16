@@ -16,7 +16,7 @@ Vue.use(VueScrollTo);
 Vue.use(VueMq, {
   breakpoints: {
     mobile: 576,
-    tablet: 768,
+    tablet: 990,
     desktop: Infinity
   }
 });
