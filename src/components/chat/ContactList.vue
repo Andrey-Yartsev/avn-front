@@ -38,9 +38,12 @@
 <script>
 import dateFns from "date-fns";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import ModalRouter from "@/mixins/modalRouter";
 
 export default {
   name: "ChatContactList",
+
+  mixins: [ModalRouter],
 
   components: {
     Scrolly,
@@ -57,7 +60,7 @@ export default {
 
   methods: {
     openChat(id) {
-      this.$router.push("/chat/" + id);
+      this.goTo("/chat/" + id);
     },
     messageTime(message) {
       return dateFns.distanceInWordsStrict(new Date(), message.changedAt);

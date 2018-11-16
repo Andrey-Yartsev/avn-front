@@ -29,7 +29,7 @@
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
         v-if="!noMessages"
       >
-        <ContactList :chats="chats"/>
+        <ContactList :chats="chats" :mode="mode" />
       </div>
     </template>
 
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import userMixin from "@/mixins/user";
+import User from "@/mixins/user";
 import Wrapper from "./Wrapper";
 import ContactList from "./ContactList";
 import Messages from "./Messages";
@@ -105,11 +105,12 @@ import NoConversations from "./NoConversations";
 import Loader from "@/components/common/Loader";
 import MobileHeader from "@/components/header/Mobile";
 import ClickOutside from "vue-click-outside";
+import ModalRouter from "@/mixins/modalRouter";
 
 export default {
   name: "Chat",
 
-  mixins: [userMixin],
+  mixins: [User, ModalRouter],
 
   directives: {
     ClickOutside
@@ -135,10 +136,10 @@ export default {
 
   computed: {
     isHome() {
-      return this.$route.name === "ChatHome";
+      return this.routeName === "ChatHome";
     },
     noMessages() {
-      return this.$route.path === "/chat/no-messages";
+      return this.routePath === "/chat/no-messages";
     },
     chats() {
       return this.$store.state.chat.chats.map(v => {
@@ -162,7 +163,7 @@ export default {
       return this.$store.state.chat.messages;
     },
     activeUserId() {
-      return parseInt(this.$route.params.userId);
+      return parseInt(this.routeParams.userId);
     },
     activeChat() {
       return this.$store.state.chat.chats.find(
@@ -188,7 +189,7 @@ export default {
       this.$store.commit("chat/messages", []);
       if (!activeUserId) {
         if (!this.isHome) {
-          this.$router.push("/chat/new");
+          this.goTo("/chat/new");
         }
         return;
       }
@@ -210,7 +211,7 @@ export default {
       this.$store.dispatch("chat/delete", this.activeUserId).then(() => {
         this.deleteInProgress = false;
         this.chatOptionsOpened = false;
-        this.$router.push("/chat");
+        this.goTo("/chat");
       });
     },
     report() {
@@ -224,7 +225,7 @@ export default {
       this.$store.dispatch("chat/fetchMessages", this.activeUserId);
     },
     mobileBack() {
-      this.$router.push("/chat/home");
+      this.goTo("/chat/home");
     }
   },
 
@@ -233,9 +234,9 @@ export default {
       if (this.isHome) {
         // nothing
       } else if (!this.hasActiveChats) {
-        this.$router.push("/chat/new");
+        this.goTo("/chat/new");
       } else if (!this.activeUserId) {
-        this.$router.push("/chat/" + this.firstActiveChat.withUser.id);
+        this.goTo("/chat/" + this.firstActiveChat.withUser.id);
       } else {
         this.fetchMessages();
       }
@@ -257,15 +258,4 @@ export default {
   padding: 20px;
   text-align: center;
 }
-/*
-.chatCollectionContentWrapper_mob-height {
-  height: 100% !important;
-}
-#content {
-  height: 100vh !important;
-}
-.chat-container {
-  height: 100%;
-}
-*/
 </style>
