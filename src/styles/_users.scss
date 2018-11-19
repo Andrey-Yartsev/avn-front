@@ -54,7 +54,17 @@
       box-shadow: 0 3px 8px rgba(#000, 0.1);
       width: calc(33.33% - 30px);
       margin: 0 0 30px 30px;
+      position: relative;
+      z-index: 0;
     }
+
+    &.open-dropdown-inside {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        z-index: 2;
+      }
+    }
+
     .bg {
       overflow: hidden;
 

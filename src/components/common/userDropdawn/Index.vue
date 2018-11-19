@@ -2,11 +2,11 @@
   <div
     class="more-functions hidden-mobile"
     :class="{open: opened}"
-    v-click-outside="() => {opened = false}"
+    v-click-outside="hide"
   >
     <div
       class="more-functions__btn more-functions__btn_with-text"
-      @click="opened = true"
+      @click="open"
     >
       <div class="more-functions__btn-text">
         More
@@ -59,6 +59,14 @@ export default {
     },
     unblock() {
       this.$store.dispatch("search/page/unblock", this.profile.id);
+    },
+    open() {
+      this.opened = true;
+      this.$emit("openDropdawn");
+    },
+    hide() {
+      this.opened = false;
+      this.$emit("hideDropdawn");
     }
   }
 };
