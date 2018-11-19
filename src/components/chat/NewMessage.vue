@@ -29,7 +29,7 @@
           <input type="file" class="hidden storyFileSelect"
                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
       </div>
-      <div class="chatCollectionContentWrapper">
+      <div class="chatCollectionContentWrapper" :class="{'contacts-top': contactsScrollTop}">
         <div class="searchContact">
           <scrolly class="all-contacts-found">
             <scrolly-viewport>
@@ -55,7 +55,7 @@
               type="text" class="searchInput" placeholder="Search">
           </div>
         </div>
-        <scrolly class="searchChatContacts">
+        <scrolly class="searchChatContacts" @scrollchange="contactsScrollChange">
           <scrolly-viewport ref="contacts">
             <div class="searchResult">
               <div
@@ -161,7 +161,8 @@ export default {
     return {
       selected: [],
       searchQuery: "",
-      chatOptionsOpened: false
+      chatOptionsOpened: false,
+      contactsScrollTop: true
     };
   },
 
@@ -240,6 +241,17 @@ export default {
     },
     next() {
       this.$store.commit("chat/setSecondScreen", true);
+    },
+    contactsScrollChange() {
+      if (this.$refs.contacts.$el.scrollTop) {
+        if (this.contactsScrollTop) {
+          this.contactsScrollTop = false;
+        }
+      } else {
+        if (!this.contactsScrollTop) {
+          this.contactsScrollTop = true;
+        }
+      }
     }
   },
 
