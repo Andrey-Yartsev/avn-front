@@ -4,13 +4,9 @@
     :class="{open: opened}"
     v-click-outside="hide"
   >
-    <div
-      class="more-functions__btn more-functions__btn_with-text"
-      @click="open"
-    >
-      <div class="more-functions__btn-text">
-        More
-      </div>
+    <div class="more-functions__overlay" />
+    <div class="more-functions__btn more-functions__btn_with-text" @click="open">
+      <div class="more-functions__btn-text">More</div>
     </div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">

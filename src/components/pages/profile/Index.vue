@@ -73,21 +73,7 @@
             class="profile-twitter-link" target="_blank"
             rel="nofollow"
           >twitter.com/{{ profile.twitterUsername }}</a>
-          <div class="profile-data">
-            <div class="item">
-              <router-link to="/following">
-                <span class="value">{{ profile.followingCount }}</span><span class="label">Following</span>
-              </router-link>
-            </div>
-            <div class="item">
-              <router-link to="/followers">
-                <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span>
-              </router-link>
-            </div>
-            <div class="item">
-              <a><span class="value">{{ profile.favoritesCount }}</span><span class="label">Likes</span></a>
-            </div>
-          </div>
+          <FollowersCounter :profile="profile" />
         </div>
       </div>
       <div class="post-types-tabs">
@@ -190,20 +176,7 @@
                 class="profile-twitter-link" target="_blank"
                 rel="nofollow"
               >twitter.com/{{ profile.twitterUsername }}</a>
-              <div class="profile-data">
-                <div class="item">
-                  <router-link to="/following">
-                    <span class="value">{{ profile.followingCount }}</span><span class="label">Following</span>
-                  </router-link>
-                </div>
-                <div class="item">
-                  <router-link class="" to="/followers">
-                    <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span></router-link>
-                </div>
-                <div class="item">
-                  <span class="value">{{ profile.favoritesCount }}</span><span class="label">Likes</span>
-                </div>
-              </div>
+              <FollowersCounter :profile="profile" />
             </div>
           </div>
           <div class="content-col">
@@ -241,6 +214,7 @@ import Tip from "@/components/common/tip/User";
 import FileUpload from "@/mixins/fileUpload";
 import ProfileBg from "@/mixins/profileBg";
 import UserDropdown from "@/components/common/userDropdawn/Index";
+import FollowersCounter from "@/components/pages/profile/followersCounter/Index";
 
 export default {
   name: "ProfileHome",
@@ -253,7 +227,8 @@ export default {
     SubscribeButton,
     Tip,
     ProfileAvatar,
-    UserDropdown
+    UserDropdown,
+    FollowersCounter
   },
 
   data() {
