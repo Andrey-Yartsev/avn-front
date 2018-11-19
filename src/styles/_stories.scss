@@ -59,13 +59,13 @@
       padding-bottom: 5px;
       margin-top: 10px;
       flex: 1;
-      overflow: hidden !important;
     }
   }
   &__inner {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 5px;
+      min-height: 70px;
     }
 
     @include media-breakpoint-down($desktop-breakpoint) {
