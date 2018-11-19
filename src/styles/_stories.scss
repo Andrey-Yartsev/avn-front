@@ -41,12 +41,13 @@
 }
 
 .stories-group {
+
   @include media-breakpoint-up($desktop-breakpoint) {
 
     @media screen and (min-height: 400px) {
       position: absolute;
       left: 0;
-      right: 0;
+      right: -10px;
       top: 0;
       bottom: 0;
     }
