@@ -116,11 +116,13 @@ strong {
   color: $main-color;
   padding: 33px 0;
   font-size: 13px;
-  background: $white
-  linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+  //background: $white
+  //linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     font: inherit;
   }
+
   span {
     opacity: 0.3;
   }
