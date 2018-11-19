@@ -134,122 +134,122 @@
 </template>
 
 <script>
-  import User from "@/mixins/user";
-  import ChatWrapper from "./Wrapper";
-  import ChatAddMessage from "./AddMultiMessage";
-  import ClickOutside from "vue-click-outside";
-  import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import User from "@/mixins/user";
+import ChatWrapper from "./Wrapper";
+import ChatAddMessage from "./AddMultiMessage";
+import ClickOutside from "vue-click-outside";
+import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
-  export default {
-    name: "Chat",
+export default {
+  name: "Chat",
 
-    mixins: [User],
+  mixins: [User],
 
-    directives: {
-      ClickOutside
+  directives: {
+    ClickOutside
+  },
+
+  components: {
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar,
+    ChatAddMessage,
+    ChatWrapper
+  },
+
+  data() {
+    return {
+      selected: [],
+      searchQuery: "",
+      chatOptionsOpened: false
+    };
+  },
+
+  computed: {
+    noMessages() {
+      return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
-
-    components: {
-      Scrolly,
-      ScrollyViewport,
-      ScrollyBar,
-      ChatAddMessage,
-      ChatWrapper
-    },
-
-    data() {
-      return {
-        selected: [],
-        searchQuery: "",
-        chatOptionsOpened: false
-      };
-    },
-
-    computed: {
-      noMessages() {
-        return this.$route.params[1] && this.$route.params[1] === "no-messages";
-      },
-      chats() {
-        let chats = this.$store.state.chat.chats.map(v => {
-          v.selected = this.selected.indexOf(v.withUser.id) !== -1;
-          return v;
-        });
-        if (this.foundUsers) {
-          const foundUserIds = this.foundUsers.map(v => v.id);
-          chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
-        }
-        return chats;
-      },
-      selectedChats() {
-        return this.chats.filter(v => v.selected);
-      },
-      isAllSelected() {
-        return this.chats.length === this.selected.length;
-      },
-      foundUsers() {
-        return this.$store.state.chat.chatUsers;
-      },
-      selectedUser() {
-        if (this.selected.length !== 1) {
-          return null;
-        }
-        const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
-        return chat.withUser;
+    chats() {
+      let chats = this.$store.state.chat.chats.map(v => {
+        v.selected = this.selected.indexOf(v.withUser.id) !== -1;
+        return v;
+      });
+      if (this.foundUsers) {
+        const foundUserIds = this.foundUsers.map(v => v.id);
+        chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
       }
+      return chats;
     },
-
-    methods: {
-      toggleSelect(id) {
-        if (this.selected.indexOf(id) !== -1) {
-          this.selected = this.selected.filter(_id => _id !== id);
-        } else {
-          this.selected.push(id);
-        }
-      },
-      isSelected(id) {
-        return this.selected.indexOf(id) !== -1;
-      },
-      toggleSelectAll() {
-        if (!this.selected.length) {
-          this.selected = this.chats.map(v => v.withUser.id);
-        } else {
-          this.selected = [];
-        }
-      },
-      search() {
-        if (!this.searchQuery) {
-          this.$store.commit("chat/resetSearchUsers");
-          return;
-        }
-        if (this.searchId) {
-          clearTimeout(this.searchId);
-        }
-        this.searchId = setTimeout(() => {
-          this.$store.dispatch("chat/searchUsers", this.searchQuery);
-        }, 300);
-      },
-      back() {
-        this.$store.commit("chat/setSecondScreen", false);
-      },
-      backDesktop() {
-        this.$router.push("/chat");
-      },
-      gotoFirstSelected() {
-        this.$router.push("/chat/" + this.selected[0]);
-        this.selected = [];
-      },
-      next() {
-        this.$store.commit("chat/setSecondScreen", true);
+    selectedChats() {
+      return this.chats.filter(v => v.selected);
+    },
+    isAllSelected() {
+      return this.chats.length === this.selected.length;
+    },
+    foundUsers() {
+      return this.$store.state.chat.chatUsers;
+    },
+    selectedUser() {
+      if (this.selected.length !== 1) {
+        return null;
       }
-    },
-
-    created() {
-      this.$store.dispatch("chat/fetchChats");
-      this.search();
-    },
-
-    beforeDestroy() {
-      this.$store.commit("chat/setSecondScreen", false);
+      const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
+      return chat.withUser;
     }
-  };
+  },
+
+  methods: {
+    toggleSelect(id) {
+      if (this.selected.indexOf(id) !== -1) {
+        this.selected = this.selected.filter(_id => _id !== id);
+      } else {
+        this.selected.push(id);
+      }
+    },
+    isSelected(id) {
+      return this.selected.indexOf(id) !== -1;
+    },
+    toggleSelectAll() {
+      if (!this.selected.length) {
+        this.selected = this.chats.map(v => v.withUser.id);
+      } else {
+        this.selected = [];
+      }
+    },
+    search() {
+      if (!this.searchQuery) {
+        this.$store.commit("chat/resetSearchUsers");
+        return;
+      }
+      if (this.searchId) {
+        clearTimeout(this.searchId);
+      }
+      this.searchId = setTimeout(() => {
+        this.$store.dispatch("chat/searchUsers", this.searchQuery);
+      }, 300);
+    },
+    back() {
+      this.$store.commit("chat/setSecondScreen", false);
+    },
+    backDesktop() {
+      this.$router.push("/chat");
+    },
+    gotoFirstSelected() {
+      this.$router.push("/chat/" + this.selected[0]);
+      this.selected = [];
+    },
+    next() {
+      this.$store.commit("chat/setSecondScreen", true);
+    }
+  },
+
+  created() {
+    this.$store.dispatch("chat/fetchChats");
+    this.search();
+  },
+
+  beforeDestroy() {
+    this.$store.commit("chat/setSecondScreen", false);
+  }
+};
 </script>
