@@ -30,51 +30,56 @@
                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
       </div>
       <div class="chatCollectionContentWrapper">
-        <div
-          class="searchChatContacts">
-          <div class="searchContact">
-            <div class="all-contacts-found">
+        <div class="searchContact">
+          <scrolly class="all-contacts-found">
+            <scrolly-viewport>
               <div class="selectedContacts" v-if="selected.length">
                 <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
                   <span class="chatSelectedName">{{ v.withUser.name }}</span>
                   <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
                 </div>
               </div>
-              <div class="btn-selected-all visible"
-                   @click="toggleSelectAll"
-                   :class="{active: isAllSelected}"
+              <div
+                class="btn-selected-all visible"
+                @click="toggleSelectAll"
+                :class="{active: isAllSelected}"
               ></div>
-            </div>
-            <div class="searchWrapper">
-              <span class="sendTo">To</span>
-              <input
-                @keyup="search"
-                v-model="searchQuery"
-                type="text" class="searchInput" placeholder="Search">
-            </div>
-          </div>
-          <div class="searchResult">
-            <div
-              v-for="v in chats" v-bind:key="v.withUser.id"
-              class="searchChatContactsView"
-              @click="toggleSelect(v.withUser.id)"
-              :class="{active: isSelected(v.withUser.id)}"
-            >
-              <span class="avatar">
-                <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
-              </span>
-              <div class="chatView__header">
-                <span class="name">{{ v.withUser.name }}</span>
-                <span class="verified-user" v-if="v.withUser.isVerified"></span>
-              </div>
-              <div class="user-login">
-                <span class="username">{{ v.withUser.username }}</span>
-              </div>
-              <span class="check"></span>
-            </div>
-
+            </scrolly-viewport>
+            <scrolly-bar axis="y"></scrolly-bar>
+          </scrolly>
+          <div class="searchWrapper">
+            <span class="sendTo">To</span>
+            <input
+              @keyup="search"
+              v-model="searchQuery"
+              type="text" class="searchInput" placeholder="Search">
           </div>
         </div>
+        <scrolly class="searchChatContacts">
+          <scrolly-viewport ref="contacts">
+            <div class="searchResult">
+              <div
+                v-for="v in chats" v-bind:key="v.withUser.id"
+                class="searchChatContactsView"
+                @click="toggleSelect(v.withUser.id)"
+                :class="{active: isSelected(v.withUser.id)}"
+              >
+                    <span class="avatar">
+                      <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                    </span>
+                <div class="chatView__header">
+                  <span class="name">{{ v.withUser.name }}</span>
+                  <span class="verified-user" v-if="v.withUser.isVerified"></span>
+                </div>
+                <div class="user-login">
+                  <span class="username">{{ v.withUser.username }}</span>
+                </div>
+                <span class="check"></span>
+              </div>
+            </div>
+          </scrolly-viewport>
+          <scrolly-bar axis="y"></scrolly-bar>
+        </scrolly>
       </div>
     </template>
     <template slot="col2">
@@ -102,8 +107,10 @@
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
                 <ul>
-                  <li><router-link class="profile-url" :to="'/' + selectedUser.username">View profile</router-link></li>
-                  <li><a class="menu-cancel" >Cancel</a></li>
+                  <li>
+                    <router-link class="profile-url" :to="'/' + selectedUser.username">View profile</router-link>
+                  </li>
+                  <li><a class="menu-cancel">Cancel</a></li>
                 </ul>
               </div>
             </div>
@@ -127,118 +134,122 @@
 </template>
 
 <script>
-import userMixin from "@/mixins/user";
-import ChatWrapper from "./Wrapper";
-import ChatAddMessage from "./AddMultiMessage";
-import ClickOutside from "vue-click-outside";
+  import User from "@/mixins/user";
+  import ChatWrapper from "./Wrapper";
+  import ChatAddMessage from "./AddMultiMessage";
+  import ClickOutside from "vue-click-outside";
+  import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 
-export default {
-  name: "Chat",
+  export default {
+    name: "Chat",
 
-  mixins: [userMixin],
+    mixins: [User],
 
-  directives: {
-    ClickOutside
-  },
-
-  components: {
-    ChatAddMessage,
-    ChatWrapper
-  },
-
-  data() {
-    return {
-      selected: [],
-      searchQuery: "",
-      chatOptionsOpened: false
-    };
-  },
-
-  computed: {
-    noMessages() {
-      return this.$route.params[1] && this.$route.params[1] === "no-messages";
+    directives: {
+      ClickOutside
     },
-    chats() {
-      let chats = this.$store.state.chat.chats.map(v => {
-        v.selected = this.selected.indexOf(v.withUser.id) !== -1;
-        return v;
-      });
-      if (this.foundUsers) {
-        const foundUserIds = this.foundUsers.map(v => v.id);
-        chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
-      }
-      return chats;
-    },
-    selectedChats() {
-      return this.chats.filter(v => v.selected);
-    },
-    isAllSelected() {
-      return this.chats.length === this.selected.length;
-    },
-    foundUsers() {
-      return this.$store.state.chat.chatUsers;
-    },
-    selectedUser() {
-      if (this.selected.length !== 1) {
-        return null;
-      }
-      const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
-      return chat.withUser;
-    }
-  },
 
-  methods: {
-    toggleSelect(id) {
-      if (this.selected.indexOf(id) !== -1) {
-        this.selected = this.selected.filter(_id => _id !== id);
-      } else {
-        this.selected.push(id);
+    components: {
+      Scrolly,
+      ScrollyViewport,
+      ScrollyBar,
+      ChatAddMessage,
+      ChatWrapper
+    },
+
+    data() {
+      return {
+        selected: [],
+        searchQuery: "",
+        chatOptionsOpened: false
+      };
+    },
+
+    computed: {
+      noMessages() {
+        return this.$route.params[1] && this.$route.params[1] === "no-messages";
+      },
+      chats() {
+        let chats = this.$store.state.chat.chats.map(v => {
+          v.selected = this.selected.indexOf(v.withUser.id) !== -1;
+          return v;
+        });
+        if (this.foundUsers) {
+          const foundUserIds = this.foundUsers.map(v => v.id);
+          chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
+        }
+        return chats;
+      },
+      selectedChats() {
+        return this.chats.filter(v => v.selected);
+      },
+      isAllSelected() {
+        return this.chats.length === this.selected.length;
+      },
+      foundUsers() {
+        return this.$store.state.chat.chatUsers;
+      },
+      selectedUser() {
+        if (this.selected.length !== 1) {
+          return null;
+        }
+        const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
+        return chat.withUser;
       }
     },
-    isSelected(id) {
-      return this.selected.indexOf(id) !== -1;
-    },
-    toggleSelectAll() {
-      if (!this.selected.length) {
-        this.selected = this.chats.map(v => v.withUser.id);
-      } else {
+
+    methods: {
+      toggleSelect(id) {
+        if (this.selected.indexOf(id) !== -1) {
+          this.selected = this.selected.filter(_id => _id !== id);
+        } else {
+          this.selected.push(id);
+        }
+      },
+      isSelected(id) {
+        return this.selected.indexOf(id) !== -1;
+      },
+      toggleSelectAll() {
+        if (!this.selected.length) {
+          this.selected = this.chats.map(v => v.withUser.id);
+        } else {
+          this.selected = [];
+        }
+      },
+      search() {
+        if (!this.searchQuery) {
+          this.$store.commit("chat/resetSearchUsers");
+          return;
+        }
+        if (this.searchId) {
+          clearTimeout(this.searchId);
+        }
+        this.searchId = setTimeout(() => {
+          this.$store.dispatch("chat/searchUsers", this.searchQuery);
+        }, 300);
+      },
+      back() {
+        this.$store.commit("chat/setSecondScreen", false);
+      },
+      backDesktop() {
+        this.$router.push("/chat");
+      },
+      gotoFirstSelected() {
+        this.$router.push("/chat/" + this.selected[0]);
         this.selected = [];
+      },
+      next() {
+        this.$store.commit("chat/setSecondScreen", true);
       }
     },
-    search() {
-      if (!this.searchQuery) {
-        this.$store.commit("chat/resetSearchUsers");
-        return;
-      }
-      if (this.searchId) {
-        clearTimeout(this.searchId);
-      }
-      this.searchId = setTimeout(() => {
-        this.$store.dispatch("chat/searchUsers", this.searchQuery);
-      }, 300);
+
+    created() {
+      this.$store.dispatch("chat/fetchChats");
+      this.search();
     },
-    back() {
+
+    beforeDestroy() {
       this.$store.commit("chat/setSecondScreen", false);
-    },
-    backDesktop() {
-      this.$router.push("/chat");
-    },
-    gotoFirstSelected() {
-      this.$router.push("/chat/" + this.selected[0]);
-      this.selected = [];
-    },
-    next() {
-      this.$store.commit("chat/setSecondScreen", true);
     }
-  },
-
-  created() {
-    this.$store.dispatch("chat/fetchChats");
-    this.search();
-  },
-
-  beforeDestroy() {
-    this.$store.commit("chat/setSecondScreen", false);
-  }
-};
+  };
 </script>
