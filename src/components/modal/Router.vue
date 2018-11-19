@@ -23,6 +23,7 @@ export default {
         this.setComponent(route);
       }
     };
+
     const route = this.matchRoute();
     if (!route) {
       return;

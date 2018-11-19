@@ -5,34 +5,36 @@
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  padding: 15px 13px;
-  overflow-y: auto;
+  padding: 0 16px 15px;
   align-items: flex-start;
   align-content: flex-start;
-  -webkit-overflow-scrolling: touch;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     border-right: 1px solid rgba(124, 139, 150, 0.2);
-    padding: 15px 20px 0;
-  }
-  @include media-breakpoint-down($desktop-breakpoint) {
-    overflow-y: auto !important;
-    .os-content-glue,
-    .os-scrollbar {
-      display: none;
-    }
-    .os-viewport,
-    .os-padding {
-      position: static;
-    }
-    .os-content {
-      border: none !important;
-      padding: 0 !important;
-    }
+    padding: 0 20px;
+    flex: 1;
   }
 
   > * {
     flex: 0 0 100%;
+    width: auto;
+    height: auto;
+    padding-right: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      left: 20px;
+      right: 20px;
+      top: 0;
+      bottom: 0;
+    }
   }
 }
 
@@ -40,9 +42,9 @@
   max-width: 100%;
   @include media-breakpoint-up($desktop-breakpoint) {
     &:after {
-      content: "";
-      display: block;
-      height: 60px;
+      //content: "";
+      //display: block;
+      //height: 60px;
     }
   }
 
@@ -60,10 +62,6 @@
     padding: 11px 0 11px 40px;
     position: relative;
     cursor: pointer;
-
-    &:first-child {
-      border-top: 1px solid rgba(124, 139, 150, 0.2);
-    }
 
     .avatar {
       position: absolute;
@@ -103,6 +101,10 @@
       color: $secondary-color;
       text-align: right;
 
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: -4px;
+      }
+
       &:before {
         display: inline-block;
         @include icon-font;
@@ -136,7 +138,24 @@
 }
 
 .searchContact {
-  margin-bottom: 14px;
+  padding: 9px 16px 17px;
+  width: 100%;
+  position: relative;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  &:after {
+    content: "";
+    background-color: rgba(124, 139, 150, 0.2);
+    height: 1px;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    position: absolute;
+  }
 }
 
 .searchWrapper {

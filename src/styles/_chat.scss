@@ -542,6 +542,14 @@
       }
     }
   }
+
+  .btn {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 24px;
+      padding: 3px 16px;
+    }
+  }
 }
 
 .selectedChatHeader {
@@ -643,6 +651,7 @@
 .chatCollectionContentWrapper {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
   flex: 1;
   position: relative;
@@ -655,7 +664,15 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     flex: 1;
     max-height: calc(100% - 60px);
-    display: flex;
+  }
+
+  .chatCollectionContent__col_narrow & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex-direction: column;
+      align-items: flex-start;
+      align-content: flex-start;
+    }
   }
 
   &:after {
@@ -669,8 +686,11 @@
     z-index: 0;
     display: none;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
+    .chatCollectionContent__col_narrow & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
     }
   }
 
@@ -729,25 +749,7 @@
 
     .contactsListContent {
       position: relative;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
       height: 100%;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        overflow-y: auto !important;
-        .os-content-glue,
-        .os-scrollbar {
-          display: none;
-        }
-        .os-viewport,
-        .os-padding {
-          position: static;
-        }
-        .os-content {
-          border: none !important;
-          padding: 0 !important;
-        }
-      }
 
       .scrolly-viewport {
         padding-right: 0;

@@ -89,6 +89,7 @@ const routes = [
     path: "/chat",
     component: Chat,
     meta: {
+      chat: true,
       cssName: "chat"
     }
   },
@@ -97,6 +98,7 @@ const routes = [
     path: "/chat/no-messages",
     component: Chat,
     meta: {
+      chat: true,
       cssName: "chat"
     }
   },
@@ -105,6 +107,7 @@ const routes = [
     path: "/chat/new",
     component: ChatNewMessage,
     meta: {
+      chat: true,
       cssName: "chat"
     }
   },
@@ -114,6 +117,7 @@ const routes = [
     name: "ChatHome",
     component: Chat,
     meta: {
+      chat: true,
       cssName: "chat"
     }
   },
@@ -122,6 +126,7 @@ const routes = [
     path: "/chat/:userId",
     component: Chat,
     meta: {
+      chat: true,
       cssName: "chat"
     }
   },

@@ -1,6 +1,6 @@
 import PostModal from "@/components/post/ModalView";
-// import ChatModal from "@/components/chat/modal/Chat";
 import NotifModal from "@/components/pages/notification/Modal";
+import ChatModal from "@/components/chat/Modal";
 
 export default {
   "post/:postId/:from": {
@@ -10,12 +10,13 @@ export default {
     }
   },
   notifications: NotifModal,
-  "notifications/:type": NotifModal
-  // chat: ChatModal,
-  // "chat/home": {
-  //   component: ChatModal,
-  //   _name: "ChatHome"
-  // },
-  // "chat/new": ChatModal,
-  // "chat/:userId": ChatModal
+  "notifications/:type": NotifModal,
+
+  chat: ChatModal,
+  "chat/home": {
+    component: ChatModal,
+    _name: "ChatHome"
+  },
+  "chat/new": ChatModal,
+  "chat/:userId": ChatModal
 };

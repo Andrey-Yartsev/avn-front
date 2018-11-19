@@ -204,7 +204,7 @@
     cursor: pointer;
     width: 54px;
     height: 50px;
-    transition: transform .3s;
+    transition: font-size .3s;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
@@ -221,7 +221,7 @@
     }
 
     &:hover {
-      transform: scale(1.2);
+      font-size: 30px;
 
       &:before {
         opacity: 1;

@@ -9,7 +9,7 @@
         :isSaving="isSaving"
       />
     </div>
-    <form class="chatForm" v-on:submit.stop.prevent="sendMessage">
+    <div class="chatForm">
       <label
         class="add-media-input btn-el"
         :class="{disabled: showTip}"
@@ -30,12 +30,14 @@
 
       <div
         class="field-text-message"
-        :class="{hidden: showTip}"
+        :class="{disabled: showTip}"
       >
         <textarea
           v-model="message"
           class="text-media-container" rows="1" cols="60" placeholder="Message" maxlength="500"
-          style="overflow: hidden; overflow-wrap: break-word; height: 30px;"></textarea>
+          style="overflow: hidden; overflow-wrap: break-word; height: 30px;"
+          @keyup.enter="sendMessage"
+        ></textarea>
         <div class="price-message-wrapper"><span class="price-message"></span>
           <button type="button" class="btn-clear-price"></button>
         </div>
@@ -61,7 +63,7 @@
       </div>
       <button class="getPaid btn-el hidden"></button>
       <button type="submit" class="submit btn-el" :disabled="!canSend"></button>
-    </form>
+    </div>
   </div>
 </template>
 

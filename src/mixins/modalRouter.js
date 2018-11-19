@@ -18,6 +18,13 @@ export default {
     },
     routePath() {
       return this._route.path;
+    },
+    routeName() {
+      if (this.mode === "default") {
+        return this.$route.name;
+      } else {
+        return this.$store.state.modalRouter.route._name;
+      }
     }
   },
   methods: {
