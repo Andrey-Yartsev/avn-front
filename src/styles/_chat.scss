@@ -192,17 +192,9 @@
         flex: 0 0 41%;
       }
 
-      .chatCollectionContentWrapper {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          //flex: 1;
-        }
-      }
-
       .add-new-type,
       .header-nav {
         width: 100%;
-        //flex: 0 0 100%;
 
         @include media-breakpoint-down($desktop-breakpoint) {
           position: -webkit-sticky;

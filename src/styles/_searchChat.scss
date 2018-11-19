@@ -17,18 +17,8 @@
 
   > * {
     flex: 0 0 100%;
-    //width: auto;
-    //height: auto;
     width: calc(100% - 32px);
     padding-right: 0;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //position: relative;
-      //left: auto;
-      //right: auto;
-      //top: auto;
-      //bottom: auto;
-    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       left: 20px;
@@ -41,13 +31,6 @@
 
 .searchResult {
   max-width: 100%;
-  @include media-breakpoint-up($desktop-breakpoint) {
-    &:after {
-      //content: "";
-      //display: block;
-      //height: 60px;
-    }
-  }
 
   .chatView__header {
     justify-content: flex-start;
@@ -140,10 +123,15 @@
 
 .searchContact {
   width: 100%;
-  max-height: calc(50% - 30px);
+  max-height: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: max-height .3s;
+
+  .contacts-top & {
+    max-height: calc(50% - 30px);
+  }
 }
 
 .searchWrapper {
