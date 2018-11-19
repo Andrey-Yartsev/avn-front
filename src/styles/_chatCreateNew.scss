@@ -91,22 +91,40 @@
   flex: 1;
   position: relative;
   z-index: 2;
-  margin-bottom: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .scrolly-viewport {
+    position: relative;
+    padding: 9px 16px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    &:empty {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .btn-selected-all {
   position: absolute;
   height: 30px;
   width: 30px;
-  right: 0;
-  top: 6px;
+  right: 14px;
+  top: 15px;
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease;
   cursor: pointer;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    right: -4px;
+    top: 14px;
+    right: 16px;
   }
 
   &:before {
@@ -130,7 +148,10 @@
   }
 
   &:hover {
-    color: $secondary-color;
-    opacity: 1;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      color: $secondary-color;
+      opacity: 1;
+    }
   }
 }

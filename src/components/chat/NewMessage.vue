@@ -39,21 +39,21 @@
                   <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
                 </div>
               </div>
-              <div
-                class="btn-selected-all visible"
-                @click="toggleSelectAll"
-                :class="{active: isAllSelected}"
-              ></div>
             </scrolly-viewport>
             <scrolly-bar axis="y"></scrolly-bar>
           </scrolly>
-          <div class="searchWrapper">
-            <span class="sendTo">To</span>
-            <input
-              @keyup="search"
-              v-model="searchQuery"
-              type="text" class="searchInput" placeholder="Search">
-          </div>
+        </div>
+        <div class="searchWrapper">
+          <span class="sendTo">To</span>
+          <input
+            @keyup="search"
+            v-model="searchQuery"
+            type="text" class="searchInput" placeholder="Search">
+          <div
+            class="btn-selected-all visible"
+            @click="toggleSelectAll"
+            :class="{active: isAllSelected}"
+          ></div>
         </div>
         <scrolly class="searchChatContacts">
           <scrolly-viewport ref="contacts">
