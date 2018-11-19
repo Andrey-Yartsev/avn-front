@@ -1,6 +1,6 @@
 <template>
   <div class="users">
-    <User class="userView" v-for="v in items" v-bind:key="v.id" :v="v" />
+    <User class="userView" v-for="item in items" v-bind:key="item.id" :profile="item" />
   </div>
 </template>
 

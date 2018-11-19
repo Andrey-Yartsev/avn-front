@@ -1,25 +1,32 @@
 <template>
-    <div class="userView" :class="[{'open-dropdown-inside': showDropdawn}]">
-        <div class="bg"><img v-if="v.header" :src="v.header"/></div>
-        <div class="user-container">
-            <div class="avatar"><img v-if="v.avatar" :src="v.avatar"/></div>
-            <div class="names-actions-wrapper">
-                <div class="user-names">
-                    <div class="wrap-name">
-                        <router-link :to="'/' + v.username" class="name">{{ v.name }}</router-link>
-                    </div>
-                    <span class="user-login">
-              <router-link :to="'/' + v.username">{{ v.username }}</router-link>
-            </span>
-                </div>
-                <div class="user-actions">
-                    <SubscribeButton :profile="v" />
-                    <FollowButton :profile="v" />
-                    <UserDropdown :profile="v" @openDropdawn="showDropdawn = true" @hideDropdawn="showDropdawn = false" />
-                </div>
-            </div>
-        </div>
+  <div class="userView" :class="[{'open-dropdown-inside': showDropdawn}]">
+    <div class="bg">
+      <img v-if="profile.header" :src="profile.header"/>
     </div>
+    <div class="user-container">
+      <div class="avatar"><img v-if="profile.avatar" :src="profile.avatar"/></div>
+      <div class="names-actions-wrapper">
+        <div class="user-names">
+          <div class="wrap-name">
+            <router-link :to="'/' + profile.username" class="name">{{ profile.name }}</router-link>
+          </div>
+          <span class="user-login">
+            <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+          </span>
+          </div>
+          <div class="user-actions">
+            <SubscribeButton :profile="profile" />
+            <FollowButton :profile="profile" />
+            <UserDropdown
+              :profile="profile"
+              @openDropdawn="showDropdawn = true"
+              @hideDropdawn="showDropdawn = false"
+              class="hidden-mobile"
+            />
+          </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -34,7 +41,7 @@ export default {
       showDropdawn: false
     };
   },
-  props: ["v"],
+  props: ["profile"],
 
   components: {
     SubscribeButton,

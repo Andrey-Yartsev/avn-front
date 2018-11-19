@@ -1,6 +1,6 @@
 <template>
   <div
-    class="more-functions hidden-mobile"
+    class="more-functions"
     :class="{open: opened}"
     v-click-outside="hide"
   >

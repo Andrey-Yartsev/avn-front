@@ -15,7 +15,10 @@
           <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
         </span>
       </div>
-      <UserDropdown class="more-functions profile-more-functions hidden-desktop" :profile="profile" />
+      <UserDropdown
+        class="profile-more-functions hidden-desktop"
+        :profile="profile"
+      />
     </div>
     <div class="white-bg-block">
       <div class="bg">
@@ -157,7 +160,10 @@
                     @click="sendMessage"
                     type="button" class="profile-actions__btn profile-message-btn"
                   >Message</button>
-                  <UserDropdown class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile" :profile="profile" />
+                  <UserDropdown
+                    class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
+                    :profile="profile"
+                  />
                 </div>
               </div>
             </div>
