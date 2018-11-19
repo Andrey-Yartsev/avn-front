@@ -73,8 +73,8 @@ export default {
 
   data() {
     return {
-      email: "andrey.yartsev.g+9@yandex.ru",
-      password: "sdqSqd1d1d12d",
+      email: "",
+      password: "",
       otpCode: "",
       error2: null
     };

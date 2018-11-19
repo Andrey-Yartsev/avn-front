@@ -192,16 +192,10 @@
         flex: 0 0 41%;
       }
 
-      .chatCollectionContentWrapper {
-        @include media-breakpoint-down($desktop-breakpoint) {
-          flex: 1;
-        }
-      }
-
       .add-new-type,
       .header-nav {
         width: 100%;
-        flex: 0 0 100%;
+
         @include media-breakpoint-down($desktop-breakpoint) {
           position: -webkit-sticky;
           position: sticky;
@@ -360,6 +354,7 @@
       font-size: 15px;
       color: $main-color;
       font-weight: 500;
+      text-transform: capitalize;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-left: 15px;
@@ -663,16 +658,13 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     flex: 1;
-    max-height: calc(100% - 60px);
   }
 
   .chatCollectionContent__col_narrow & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex-direction: column;
-      align-items: flex-start;
-      align-content: flex-start;
-    }
+    max-height: calc(100% - 60px);
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
   }
 
   &:after {
@@ -1011,12 +1003,9 @@
 
 .chat-container {
   width: 100%;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .mass-message {
