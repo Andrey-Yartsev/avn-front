@@ -20,6 +20,7 @@
       margin-top: -30px;
       column-fill: auto;
     }
+
     .post {
       background-color: $white;
 
@@ -38,10 +39,17 @@
         margin: 0 0 30px;
       }
 
+      &-header {
+        z-index: 3;
+      }
+
       &-details {
-        transform: translateZ(0);
-        background-color: $white;
-        position: relative;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          transform: translateZ(0);
+          background-color: $white;
+          position: relative;
+        }
 
         &:after {
           content: "";
@@ -72,6 +80,7 @@
 }
 
 .searchView {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     width: 100%;
@@ -86,6 +95,7 @@
       position: relative;
       width: 100%;
       min-height: calc(100% - 152px);
+      z-index: 10;
     }
   }
 
