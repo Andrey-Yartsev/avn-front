@@ -1,5 +1,6 @@
 import request from "@/utils/request";
 import tokenRequest from "@/utils/tokenRequest";
+import Store from "@/store";
 
 export default {
   signUp(data) {
@@ -24,6 +25,11 @@ export default {
         reject(response.error);
       }
       resolve(response);
+    });
+  },
+  async logout() {
+    await tokenRequest("sessions/" + Store.state.auth.token, {
+      method: "DELETE"
     });
   },
   update(user) {
