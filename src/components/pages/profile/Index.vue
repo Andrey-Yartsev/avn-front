@@ -4,22 +4,7 @@
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
-    <div class="sticky-header-controls">
-      <a class="header-return-btn"></a>
-      <div class="profile-name__header">
-        <span class="name">
-          {{ profile.name }}
-        </span>
-        <span class="verified-user"></span>
-        <span class="user-login">
-          <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
-        </span>
-      </div>
-      <UserDropdown
-        class="profile-more-functions hidden-desktop"
-        :profile="profile"
-      />
-    </div>
+    <HeaderControl :profile="profile" />
     <div class="white-bg-block">
       <div class="bg">
         <div class="bg-wrap">
@@ -214,7 +199,8 @@ import Tip from "@/components/common/tip/User";
 import FileUpload from "@/mixins/fileUpload";
 import ProfileBg from "@/mixins/profileBg";
 import UserDropdown from "@/components/common/userDropdawn/Index";
-import FollowersCounter from "@/components/pages/profile/followersCounter/Index";
+import HeaderControl from "@/components/common/profile/headerControl/Index";
+import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 
 export default {
   name: "ProfileHome",
@@ -228,7 +214,8 @@ export default {
     Tip,
     ProfileAvatar,
     UserDropdown,
-    FollowersCounter
+    FollowersCounter,
+    HeaderControl
   },
 
   data() {

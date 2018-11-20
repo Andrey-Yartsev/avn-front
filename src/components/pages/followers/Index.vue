@@ -4,18 +4,7 @@
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
-    <div class="sticky-header-controls">
-      <a class="header-return-btn"></a>
-      <div class="profile-name__header">
-        <span class="name">
-          {{ profile.name }}
-        </span>
-        <span class="verified-user"></span>
-        <span class="user-login">
-          <router-link :to="'/' + profile.name">{{ profile.username }}</router-link>
-        </span>
-      </div>
-    </div>
+    <HeaderControl :profile="profile" />
     <div class="white-bg-block">
       <div class="bg">
         <div class="bg-wrap">
@@ -217,7 +206,7 @@
                     <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
                   </div>
                   <div class="sticky-header-controls header-mobile">
-                    <a class="header-return-btn"></a>
+                    <router-link class="header-return-btn" :to="`/${profile.username}`" />
                     <h1 class="page-title">Following</h1>
                   </div>
                   <Users 
@@ -246,6 +235,7 @@ import SubscribeButton from "@/components/subscription/Button";
 import Users from "@/components/pages/search/types/Users.vue";
 import ProfileBg from "@/mixins/profileBg";
 import ProfileAvatar from "@/components/common/profileAvatar/Index";
+import HeaderControl from "@/components/common/profile/headerControl/Index";
 
 export default {
   name: "Followers",
@@ -254,7 +244,8 @@ export default {
     Loader,
     Users,
     SubscribeButton,
-    ProfileAvatar
+    ProfileAvatar,
+    HeaderControl
   },
 
   data: () => ({
