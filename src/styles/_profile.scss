@@ -1145,6 +1145,20 @@
 
 #avatarBgAside {
   overflow: hidden;
+
+  .lds-dual-ring.not-fullscreen {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: fixed;
+    }
+
+    .loader-text.lowered {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        top: 50%;
+      }
+    }
+  }
 }
 
 .select-user-image {
