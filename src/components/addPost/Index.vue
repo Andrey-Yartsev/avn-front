@@ -119,7 +119,13 @@ export default {
       return this.$store.state.auth.user.subscribePrice > 0;
     },
     notEhoughData() {
-      return !this.postMsg.length && !this.preloadedMedias.length;
+      if (this.preloadedMedias.length) {
+        return false;
+      }
+      if (!this.postMsg.trim()) {
+        return true;
+      }
+      return false;
     },
     newPost() {
       return this.$store.state.post.newPost;
