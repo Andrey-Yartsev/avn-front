@@ -12,6 +12,7 @@
     "fingerprintjs2": "^1.8.1",
     "moment": "^2.22.2",
     "query-string": "^6.1.0",
+    "streaming-module": "git+https://git.retloko.com/alien.pavlov/streaming-module.git",
     "vue": "^2.5.17",
     "vue-click-outside": "^1.0.7",
     "vue-mq": "^0.2.1",

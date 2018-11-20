@@ -106,6 +106,7 @@
 import Loader from "@/components/common/Loader";
 import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
+import Streams from "streaming-module";
 
 export default {
   name: "CreateModal",
@@ -120,6 +121,37 @@ export default {
       e.preventDefault();
       this.$store.dispatch("modal/hide", { name: "createStory" });
     }
+  },
+  mounted() {
+    Streams.init({
+      thumbEnabled: true,
+      videoSave: true,
+      getApiUrl: "https://gpu3.view.me/webrtc-api",
+      clientGetApiUrl: "https://gpu3.view.me/webrtc-api",
+      videoElId: "myvideo",
+      token: (+new Date()).toString(36),
+      streamSource: "client",
+      showLikes: false,
+      showMessagemessage() {
+        // alert(message);
+      },
+      onLocalStreamInit() {},
+      onRemoteStreamInit() {},
+      onStreamError(/* error*/) {
+        // alert(error);
+        Streams.config.onStreamEnd();
+      },
+      onStreamTick(/* start */) {},
+      onStreamStart(/* roomName) {},
+      onStreamEnd() {},
+      onCleanUp() {},
+      onViewersCountGet(/* count */) {},
+      onCustomDataGet(/* message */) {},
+      onDevicesReadyCallback() {
+        // const devices = Streams.getDevices();
+        // console.log(devices);
+      }
+    });
   }
 };
 </script>
