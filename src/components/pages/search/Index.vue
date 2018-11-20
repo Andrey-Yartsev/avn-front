@@ -2,7 +2,6 @@
   <div class="searchView">
     <div class="container">
       <div class="over-container">
-
         <nav class="content-nav">
           <router-link
             v-for="v in types"
@@ -25,7 +24,7 @@
               <button
                 type="submit"
                 class="b-search-form__btn b-search-form__btn_mob"
-                :disabled="!query"
+                :disabled="!canSearch"
               ></button>
             </form>
           </div>
@@ -117,11 +116,17 @@ export default {
     },
     store() {
       return this.$store.state.search.page;
+    },
+    canSearch() {
+      return !!this.localQuery.trim();
     }
   },
 
   methods: {
     search() {
+      if (!this.canSearch) {
+        return;
+      }
       this.$store.commit("search/page/reset");
       this.$store.dispatch("search/page/search", {
         type: this.type,
