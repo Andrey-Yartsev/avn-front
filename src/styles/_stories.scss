@@ -70,12 +70,15 @@
       min-height: 70px;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
-      padding: 9px 10px 6px;
-      margin: 0 -15px;
-      position: relative;
-      width: auto;
+    &.scrolly-viewport {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: flex;
+        padding: 9px 15px 6px;
+        margin: 0 -15px;
+        position: relative;
+        width: auto;
+      }
     }
   }
 }
