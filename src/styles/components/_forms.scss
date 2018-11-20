@@ -362,7 +362,7 @@ label {
 
     &:before {
       position: absolute;
-      border-radius: 1000px;
+      border-radius: 50%;
       width: 16px;
       height: 16px;
       top: 50%;
@@ -375,9 +375,12 @@ label {
   }
   input {
     display: none;
+
     &:checked {
+
       & + span {
         background-color: $secondary-color;
+
         &:before {
           transform: translate(24px, -50%);
           background-color: $white;

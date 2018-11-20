@@ -30,13 +30,17 @@
         padding: 0 20px 0 0;
         font-size: 13px;
         opacity: 0.5;
+
         @include media-breakpoint-up($desktop-breakpoint) {
           padding: 0 40px 0 0;
         }
       }
 
       .btn-copy-url {
-        width: 120px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 120px;
+        }
       }
     }
   }
@@ -65,10 +69,16 @@
 .btn-copy-url {
   animation: copy-url 0.5s;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
   &.copied {
     animation: none;
   }
 }
+
 @keyframes copy-url {
   0% {
     color: transparent;
