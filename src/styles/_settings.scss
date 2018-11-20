@@ -60,8 +60,12 @@
     }
 
     .page-title {
-      margin-right: 54px;
+      margin-right: 14px;
       flex: 1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-right: 54px;
+      }
     }
   }
 }
