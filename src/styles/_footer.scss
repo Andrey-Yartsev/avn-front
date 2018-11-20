@@ -44,8 +44,14 @@
   }
 
   .FooterNavCollectionView {
-    padding: 22px 0;
     position: relative;
+
+    .settings-aside & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 22px 0;
+      }
+    }
 
     &:before {
       content: "";
@@ -55,6 +61,13 @@
       height: 1px;
       position: absolute;
       background: rgba($gray, 0.2);
+
+      .settings-aside & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
 
       .aside-col_with-footer & {
         display: none;
