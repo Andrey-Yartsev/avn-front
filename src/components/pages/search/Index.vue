@@ -163,10 +163,10 @@ export default {
   },
 
   created() {
-    this.search();
     if (this.query) {
       this.localQuery = this.query;
     }
+    this.search();
   }
 };
 </script>

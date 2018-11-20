@@ -44,6 +44,15 @@ const actions = {
     params.marker = state.marker || "";
     params.limit = limit;
     dispatch("searchRequest", params).then(r => {
+      // const ids = state.posts.map(v => v.id);
+      // const names = state.posts.map(v => v.name);
+      // r.list.map(v => {
+      //   if (ids.indexOf(v.id) !== -1) {
+      //     console.log("User " + v.name + " id=" + v.id + " in list");
+      //     console.log(names);
+      //   }
+      // });
+      // return;
       commit("searchSetNextState", r);
     });
   }
