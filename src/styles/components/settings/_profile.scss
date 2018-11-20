@@ -374,18 +374,21 @@
       }
     }
   }
-
-
-  .profile-identifier {
-    margin: 8px 10px 10px 110px;
-  }
 }
 
 .profile-identifier {
   position: relative;
 
+  .settings-aside & {
+    margin: 8px 10px 10px 110px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin: 0 0 0 130px;
+    }
+  }
+
   .profile-name {
-    min-height: 46px;
+    min-height: 38px;
 
     .name {
       position: relative;

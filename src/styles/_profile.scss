@@ -553,6 +553,13 @@
   transition: opacity 0.4s;
   display: flex;
 
+  .settings-aside & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      top: auto;
+    }
+  }
+
   &.show {
     opacity: 1;
     visibility: visible;
@@ -1136,6 +1143,9 @@
 }
 
 
+#avatarBgAside {
+  overflow: hidden;
+}
 
 .select-user-image {
   position: absolute;
@@ -1157,6 +1167,13 @@
     font-size: 17px;
     margin-top: -8px;
     transform: translate(-50%, -50%);
+  }
+
+  .settings-aside & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 0;
+    }
   }
 
   &:hover {
