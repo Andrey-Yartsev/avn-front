@@ -13,7 +13,7 @@
     <button
       type="button" class="b-search-form__btn b-search-form__btn_mob header-search-submit"
       @click="toToSearchPage"
-      :disabled="!query"
+      :disabled="!canSearch"
     ></button>
 
     <button
@@ -86,6 +86,9 @@ export default {
     },
     items() {
       return this.$store.state.search.bubble.items;
+    },
+    canSearch() {
+      return !!this.query.trim();
     }
   },
 
@@ -106,11 +109,14 @@ export default {
       this.reset();
     },
     toToSearchPage() {
+      if (!this.canSearch) {
+        return;
+      }
       this.$router.push("/search/users/" + this.query);
       this.reset();
     },
     search() {
-      if (!this.query) {
+      if (!this.query.trim()) {
         this.$store.commit("search/bubble/reset");
         return;
       }
