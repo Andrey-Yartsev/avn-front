@@ -26,6 +26,7 @@
     right: 0;
     bottom: 0;
   }
+
   & &-container {
     width: 100%;
     overflow: hidden;
@@ -47,6 +48,13 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       max-width: 100%;
+    }
+
+    &.popup-addPost {
+
+      .close {
+        top: 6px;
+      }
     }
 
     &.lightbox-container {

@@ -192,8 +192,8 @@
         flex: 0 0 41%;
       }
 
-      .add-new-type,
-      .header-nav {
+      //.header-nav,
+      .add-new-type {
         width: 100%;
 
         @include media-breakpoint-down($desktop-breakpoint) {
@@ -209,6 +209,7 @@
         }
 
         .scroll-top & {
+
           @include media-breakpoint-down($desktop-breakpoint) {
             transform: translate3d(0, -44px, 0);
           }
@@ -661,7 +662,7 @@
   }
 
   .chatCollectionContent__col_narrow & {
-    max-height: calc(100% - 60px);
+    max-height: calc(100% - 88px);
     flex-direction: column;
     align-items: flex-start;
     align-content: flex-start;
