@@ -21,7 +21,7 @@
                 class="messageWrapper"
                 :class="{'tipsMessage': v.isTips}"
               >
-                <span class="message">{{ text(v) }}</span>
+                <span class="message" v-html="text(v)"></span>
                 <div class="media" v-if="v.media.length">
                   <figure class="media-item active media-item_photo" data-index="0">
                     <a class="postLink" :href="v.media[0].src.source" target="_blank">
