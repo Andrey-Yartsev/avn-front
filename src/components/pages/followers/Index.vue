@@ -1,6 +1,6 @@
 <template>
-  <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="false" text="" class="transparent small" />
+  <div class="loader-container" v-if="!profile">
+    <Loadr :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
