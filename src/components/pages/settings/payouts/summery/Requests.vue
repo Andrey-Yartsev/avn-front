@@ -77,10 +77,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.loader-container {
-  position: relative;
-  min-height: 80px;
-}
-</style>

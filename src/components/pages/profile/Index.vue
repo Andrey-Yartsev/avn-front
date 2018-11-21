@@ -360,7 +360,6 @@ export default {
 
 <style scoped>
 .loader-container {
-  position: relative;
   height: 300px;
 }
 </style>

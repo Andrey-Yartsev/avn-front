@@ -54,16 +54,11 @@
   }
 
   &.small {
-
     .loader-text {
-
       &:after {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
           width: 40px;
           height: 40px;
           margin-top: -40px;
-        }
       }
     }
   }
@@ -112,4 +107,35 @@
       height: 66px;
     }
   }
+}
+
+.loader-container {
+  position: relative;
+
+  .settings-page & {
+    min-height: 80px;
+  }
+
+  .payments & {
+    .lds-dual-ring {
+      top: 79px;
+    }
+  }
+
+  .payouts & {
+    .lds-dual-ring {
+      top: 100px;
+    }
+  }
+
+  .payments .payment-card & {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: 20px;
+
+      .lds-dual-ring {
+        top: 40px;
+      }
+    }
+  }
+
 }
