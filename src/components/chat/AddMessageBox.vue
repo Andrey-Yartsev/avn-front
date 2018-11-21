@@ -43,8 +43,9 @@
           :maxHeight="100"
           @enter="sendMessage"
         ></TextareaAutosize>
-        <div class="price-message-wrapper"><span class="price-message"></span>
-          <button type="button" class="btn-clear-price"></button>
+        <div class="price-message-wrapper">
+          <span class="price-message"></span>
+          <button type="submit" class="btn-clear-price"></button>
         </div>
       </div>
 
@@ -67,7 +68,7 @@
         <button class="setPrice btn">Set Price</button>
       </div>
       <button class="getPaid btn-el hidden"></button>
-      <button type="submit" class="submit btn-el" :disabled="!canSend"></button>
+      <button @click="sendMessage" class="submit btn-el" :disabled="!canSend"></button>
     </div>
   </div>
 </template>
