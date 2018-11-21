@@ -131,7 +131,6 @@
           </div>
         </div>
       </div>
-      <button type="button" class="close" @click="close"></button>
       <div class="next hidden"></div>
       <Loader v-if="showLoader" :fullscreen="false"></Loader>
     </div>

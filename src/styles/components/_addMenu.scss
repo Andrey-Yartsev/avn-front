@@ -14,16 +14,18 @@
   }
 
   .mediasTop & {
+
     @include media-breakpoint-down($desktop-breakpoint) {
-      box-shadow: none;
+      //box-shadow: none;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      z-index: 2;
+      //z-index: 2;
     }
   }
 
   .popup & {
+
     &:not(.chat-new-type) {
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 0 13px;
@@ -35,67 +37,39 @@
     }
   }
 
+  .stream_enabled & {
+    display: none;
+  }
+
+  &:after {
+
+    .mediasTop & {
+
+      position: absolute;
+      pointer-events: none;
+      bottom: 0;
+      height: 1px;
+      background: #fff;
+      opacity: 0.2;
+      content: "";
+      left: 0;
+      right: 0;
+      z-index: 1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
   &__text {
     opacity: 0.4;
     //opacity: 0.5;
     line-height: 11px;
-  }
 
-  &_underline-items {
-    a,
-    span {
-
-      &:after {
-        content: "";
-        position: absolute;
-        left: 1px;
-        right: 1px;
-        height: 2px;
-        background-color: $secondary-color;
-        transition: opacity 0.3s ease;
-        opacity: 0;
-      }
-
-    }
-
-    &.line-bottom {
-      a,
-      span {
-        &:after {
-          bottom: 0;
-        }
-      }
-    }
-  }
-
-  &_b-with-text {
-    font-size: 9px;
-
-    a,
-    span {
-      align-content: flex-start;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        text-align: center;
-        justify-content: center;
-      }
-
-      &:before {
-        display: block;
-        flex: 0 0 100%;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin-top: 10px;
-        }
-      }
-
-      .mediasTop & {
-        &:before {
-          @include media-breakpoint-up($desktop-breakpoint) {
-            margin-top: 13px;
-          }
-        }
-      }
+    .stream &,
+    .storyOverlay & {
+      opacity: 1;
     }
   }
 }
@@ -153,6 +127,27 @@
       }
     }
 
+    .add-new-type_b-with-text & {
+      align-content: flex-start;
+      font-size: 9px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    .mediasTop & {
+      opacity: 0.7;
+      color: #fff;
+      width: 100%;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 0 0 0 5px;
+        width: 70px;
+      }
+    }
+
     &:before {
       font-weight: 400;
       opacity: 0.3;
@@ -178,6 +173,27 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         margin-top: 3px;
       }
+
+      .add-new-type_b-with-text & {
+        display: block;
+        flex: 0 0 100%;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 10px;
+        }
+
+        .mediasTop & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-top: 13px;
+          }
+        }
+      }
+
+      .mediasTop & {
+        color: #fff;
+        opacity: 1;
+      }
     }
 
     &:after {
@@ -202,6 +218,15 @@
           top: auto;
           bottom: 0;
         }
+      }
+
+      .add-new-type_underline-items.line-bottom & {
+        bottom: 0;
+      }
+
+      .mediasTop & {
+        left: -1px;
+        right: -1px;
       }
     }
 
@@ -250,6 +275,10 @@
         }
       }
 
+      .mediasTop & {
+        opacity: 1;
+      }
+
       &:before {
 
         .add-new-form.expanded & {
@@ -261,12 +290,20 @@
             }
           }
         }
+
+        .mediasTop & {
+          color: #fff;
+        }
       }
 
       &:after {
 
         .add-new-type_underline-items & {
           opacity: 1;
+        }
+
+        .mediasTop & {
+          background-color: #fff;
         }
 
         .add-new-type__text {
@@ -282,7 +319,23 @@
       }
 
       .add-new-type__text {
-        opacity: 1;
+
+        .add-new-form.expanded & {
+
+          .popup & {
+            opacity: 1;
+            color: $primary-color;
+          }
+        }
+
+        .chatCollectionView & {
+          opacity: 1;
+          color: $primary-color;
+        }
+
+        .mediasTop & {
+          color: #fff;
+        }
       }
     }
 
@@ -292,6 +345,20 @@
       &:before {
         color: $primary-color;
         opacity: 1;
+      }
+    }
+
+    &:hover {
+
+      .mediasTop & {
+        opacity: 1;
+      }
+
+      &:before {
+
+        .mediasTop & {
+          color: #fff;
+        }
       }
     }
   }
