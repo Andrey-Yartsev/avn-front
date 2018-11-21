@@ -44,7 +44,7 @@
           @enter="sendMessage"
         ></TextareaAutosize>
         <div class="price-message-wrapper"><span class="price-message"></span>
-          <button type="submit" class="btn-clear-price"></button>
+          <button type="button" class="btn-clear-price"></button>
         </div>
       </div>
 
