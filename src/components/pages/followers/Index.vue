@@ -1,6 +1,6 @@
 <template>
-  <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="false" text="" class="transparent small" />
+  <div class="loader-container" v-if="!profile">
+    <Loadr :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
@@ -42,66 +42,10 @@
               <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
             </span>
           </div>
-          <div class="row">
-            <div class="content-col">
-              <div class="profile-btns-group">
-                <div class="btns-user-activity">
-                  <router-link :to="`/${profile.username}/posts`">
-                    <span class="value">{{ profile.postsCount }}</span>
-                    <span class="label">Posts</span>
-                  </router-link>
-                  <router-link :to="`/${profile.username}/photos`">
-                    <span class="value">{{ profile.photosCount }}</span>
-                    <span class="label">Photos</span>
-                  </router-link>
-                  <router-link :to="`/${profile.username}/videos`">
-                    <span class="value">{{ profile.videosCount }}</span>
-                    <span class="label">Videos</span>
-                  </router-link>
-                </div>
-                <div class="profile-actions" v-if="isOwner(this.profile.id)">
-                  <router-link to="/settings/profile" class="btn-edit-profile">Edit profile</router-link>
-                  <button class="btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
-                </div>
-                <div class="profile-actions" v-else>
-                  <button
-                    v-if="profile.canEarn"
-                    type="button" class="profile-actions__btn profile-tip-btn selected"
-                    @click="showTip = true"
-                  >Fund</button>
-                  <SubscribeButton :profile="profile" @requested="subsRequested"/>
-                  <div class="subscribeView">
-                    <div
-                      v-if="profile.followedBy"
-                      @click="unfollow"
-                      class="profile-actions__btn btn-subscribe disable-state">
-                      <div class="btn-subscribe__label">
-                        Unfollow
-                      </div>
-                    </div>
-                    <div
-                      v-else
-                      @click="follow"
-                      class="profile-actions__btn btn-subscribe">
-                      <div class="btn-subscribe__label">
-                        Follow
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    v-if="profile.followedBy"
-                    @click="sendMessage"
-                    type="button"
-                    class="profile-actions__btn profile-message-btn"
-                  >Message</button>
-                  <UserDropdown
-                    class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
-                    :profile="profile"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProfileActions
+            :profile="profile"
+            :page="page"
+          />
         </div>
       </div>
       <div class="container">
@@ -168,6 +112,7 @@ import HeaderControl from "@/components/common/profile/headerControl/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import UserDropdown from "@/components/common/userDropdawn/Index";
+import ProfileActions from "@/components/common/profile/actions/Index";
 
 export default {
   name: "Followers",
@@ -180,7 +125,8 @@ export default {
     HeaderControl,
     ProfileBackground,
     FollowersCounter,
-    UserDropdown
+    UserDropdown,
+    ProfileActions
   },
 
   data: () => ({
