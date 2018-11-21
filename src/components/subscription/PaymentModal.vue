@@ -4,7 +4,9 @@
       <div class="content">
         <div class="paymentView">
           <div class="iframe-container">
+            <Loader :fullscreen="false" text="" class="transparent" v-if="loading" />
             <iframe
+              ref="iframe"
               :src="link" frameborder="0" width="100%" height="100%"></iframe>
           </div>
         </div>
@@ -16,12 +18,20 @@
 
 <script>
 import Modal from "@/components/modal/Index";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "PaymentModal",
 
   components: {
-    Modal
+    Modal,
+    Loader
+  },
+
+  data() {
+    return {
+      loading: true
+    };
   },
 
   computed: {
@@ -33,8 +43,13 @@ export default {
   methods: {
     close() {
       this.$store.dispatch("modal/hide", { name: "payment" });
-      window.location.reload();
     }
+  },
+
+  mounted() {
+    this.$refs.iframe.onload = () => {
+      this.loading = false;
+    };
   }
 };
 </script>
