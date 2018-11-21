@@ -99,7 +99,8 @@
                   <button
                     v-if="profile.followedBy"
                     @click="sendMessage"
-                    type="button" class="profile-actions__btn profile-message-btn"
+                    type="button" 
+                    class="profile-actions__btn profile-message-btn"
                   >Message</button>
                   <UserDropdown
                     class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
