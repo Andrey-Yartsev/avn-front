@@ -6,37 +6,7 @@
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile" />
     <div class="white-bg-block">
-      <div class="bg">
-        <div class="bg-wrap">
-          <img v-if="bgPreview" :src="bgPreview" />
-          <img v-else-if="profile.header" :src="profile.header" />
-        </div>
-        <div class="container">
-          <div class="controls-select-picture" v-if="isOwner(profile.id)">
-            <label
-              for="bg" class="select-user-image"
-              :class="{hide: !showBgAdd}"
-            >Add background picture</label>
-            <input
-              type="file"
-              id="bg"
-              ref="bg"
-              accept=".jpg,.jpeg,.gif,.png"
-              @change="setBgPreview"
-            >
-            <div class="profile-picture-btns" :class="{show: showBgSave}">
-              <button
-                class="btn-cancel-changes cancel-changes"
-                @click="resetBgPreview"
-              ></button>
-              <button
-                class="btn save-changes"
-                @click="saveBg"
-              >Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProfileBackground  :profile="profile" />
       <div class="profile-images">
         <div class="container">
           <ProfileAvatar :profile="profile" />
@@ -233,19 +203,20 @@ import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
 import Users from "@/components/pages/search/types/Users.vue";
-import ProfileBg from "@/mixins/profileBg";
-import ProfileAvatar from "@/components/common/profileAvatar/Index";
+import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
+import ProfileBackground from "@/components/common/profile/background/Index";
 
 export default {
   name: "Followers",
-  mixins: [InfinityScrollMixin, UserMixin, ProfileBg],
+  mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
     Users,
     SubscribeButton,
     ProfileAvatar,
-    HeaderControl
+    HeaderControl,
+    ProfileBackground
   },
 
   data: () => ({
