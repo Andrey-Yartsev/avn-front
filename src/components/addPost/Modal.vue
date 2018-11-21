@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container">
+      <div class="popup-container popup-addPost">
         <div class="previous hidden"></div>
         <div class="content">
           <AddPost :initialExpanded="true" />
