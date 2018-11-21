@@ -142,7 +142,7 @@
         .chat-section {
 
           @include media-breakpoint-down($desktop-breakpoint) {
-            flex: 1;
+            //flex: 1;
           }
         }
       }

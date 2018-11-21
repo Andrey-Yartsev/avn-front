@@ -80,7 +80,7 @@
         </div>
         <div class="chatCollectionContentWrapper">
           <div class="chatMessagesCollectionView">
-            <div class="chat-section" v-if="messagesLoading">
+            <div class="chat-section chat-section_loading" v-if="messagesLoading">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
             <template v-if="activeChat">

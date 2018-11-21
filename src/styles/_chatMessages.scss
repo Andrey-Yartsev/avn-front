@@ -174,15 +174,20 @@
 
 .chat-section {
   position: relative;
+  flex: 1;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     display: flex;
     flex-direction: column;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    position: relative;
+  &_loading {
     flex: 1;
+
+    + .chat-section {
+      flex: 0 0 auto;
+      opacity: 0;
+    }
   }
 
   > .chatContent {
