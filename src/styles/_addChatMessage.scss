@@ -138,14 +138,11 @@
     transition: all 0.3s ease;
     box-sizing: border-box;
     flex: 1;
-    height: auto;
     position: relative;
     margin-left: 0;
-    max-height: 200px;
     -ms-overflow-style: none;
     overflow: hidden;
     line-height: 15px;
-    min-height: 30px;
 
     &:focus {
       background-color: $secondary-color-10;

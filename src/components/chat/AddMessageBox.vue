@@ -32,14 +32,20 @@
         class="field-text-message"
         :class="{disabled: showTip}"
       >
-        <textarea
+        <TextareaAutosize
           v-model="message"
-          class="text-media-container" rows="1" cols="60" placeholder="Message" maxlength="500"
-          style="overflow: hidden; overflow-wrap: break-word; height: 30px;"
-          @keyup.enter="sendMessage"
-        ></textarea>
-        <div class="price-message-wrapper"><span class="price-message"></span>
-          <button type="button" class="btn-clear-price"></button>
+          class="text-media-container"
+          rows="1"
+          cols="60"
+          placeholder="Message"
+          maxlength="500"
+          :minHeight="30"
+          :maxHeight="100"
+          @enter="sendMessage"
+        ></TextareaAutosize>
+        <div class="price-message-wrapper">
+          <span class="price-message"></span>
+          <button type="submit" class="btn-clear-price"></button>
         </div>
       </div>
 
@@ -62,7 +68,7 @@
         <button class="setPrice btn">Set Price</button>
       </div>
       <button class="getPaid btn-el hidden"></button>
-      <button type="submit" class="submit btn-el" :disabled="!canSend"></button>
+      <button @click="sendMessage" class="submit btn-el" :disabled="!canSend"></button>
     </div>
   </div>
 </template>
@@ -71,6 +77,7 @@
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
+import TextareaAutosize from "@/components/common/TextareaAutosize";
 
 export default {
   name: "ChatAddMesssageBox",
@@ -79,7 +86,8 @@ export default {
 
   components: {
     MediaPreview,
-    Tip
+    Tip,
+    TextareaAutosize
   },
 
   props: {
@@ -101,7 +109,7 @@ export default {
       if (this.showTip) {
         return false;
       }
-      return this.message || this.preloadedMedias.length;
+      return this.message.trim() || this.preloadedMedias.length;
     },
     funded() {
       return this.$store.state.tip.funded;
@@ -115,19 +123,34 @@ export default {
   },
 
   methods: {
-    async sendMessage() {
+    async sendMessage(e) {
+      e.preventDefault();
+      if (e.ctrlKey || e.shiftKey) {
+        this.message += "\n";
+        return;
+      }
+      if (!this.canSend) {
+        // console.log(this.message.trim());
+        if (!this.message.trim()) {
+          setTimeout(() => {
+            this.message = "";
+          }, 1);
+        }
+        return;
+      }
+      const message = this.message;
+      this.message = "";
       this.isSaving = true;
       const mediaFiles = await this.getMediaFiles();
       this.preloadedMedias = [];
       const opt = {
         price: 0,
-        text: this.message
+        text: message
       };
       if (mediaFiles.length) {
         opt.mediaFile = mediaFiles[0];
       }
       this.$emit("send", opt);
-      this.message = "";
     },
     closeTip() {
       this.showTip = false;
@@ -136,3 +159,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.text-media-container {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  min-height: 30px;
+  border: 10px solid #f00;
+}
+</style>

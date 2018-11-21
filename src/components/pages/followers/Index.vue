@@ -6,37 +6,7 @@
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile" />
     <div class="white-bg-block">
-      <div class="bg">
-        <div class="bg-wrap">
-          <img v-if="bgPreview" :src="bgPreview" />
-          <img v-else-if="profile.header" :src="profile.header" />
-        </div>
-        <div class="container">
-          <div class="controls-select-picture" v-if="isOwner(profile.id)">
-            <label
-              for="bg" class="select-user-image"
-              :class="{hide: !showBgAdd}"
-            >Add background picture</label>
-            <input
-              type="file"
-              id="bg"
-              ref="bg"
-              accept=".jpg,.jpeg,.gif,.png"
-              @change="setBgPreview"
-            >
-            <div class="profile-picture-btns" :class="{show: showBgSave}">
-              <button
-                class="btn-cancel-changes cancel-changes"
-                @click="resetBgPreview"
-              ></button>
-              <button
-                class="btn save-changes"
-                @click="saveBg"
-              >Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProfileBackground  :profile="profile" />
       <div class="profile-images">
         <div class="container">
           <ProfileAvatar :profile="profile" />
@@ -58,21 +28,7 @@
             class="profile-twitter-link" target="_blank"
             rel="nofollow"
           >twitter.com/{{ profile.twitterUsername }}</a>
-          <div class="profile-data">
-            <div class="item">
-              <router-link to="/following">
-                <span class="value">{{ profile.followingCount }}</span><span class="label">Following</span>
-              </router-link>
-            </div>
-            <div class="item">
-              <router-link to="/followers">
-                <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span>
-              </router-link>
-            </div>
-            <div class="item">
-              <a><span class="value">{{ profile.favoritesCount }}</span><span class="label">Likes</span></a>
-            </div>
-          </div>
+          <FollowersCounter :profile="profile" />
         </div>
       </div>
       <div class="post-types-tabs">
@@ -138,22 +94,10 @@
                     type="button"
                     class="profile-actions__btn profile-message-btn"
                   >Message</button>
-                  <div class="profile-actions__btn more-functions profile-more-functions more-functions_with-text hidden-mobile">
-                    <div class="more-functions__overlay"></div>
-                    <div class="more-functions__btn">
-                      <div class="more-functions__btn-text">
-                        More
-                      </div>
-                    </div>
-                    <div class="more-functions__dropdown">
-                      <div class="more-functions__dropdown-inside">
-                        <ul>
-                          <li><a class="menu-report" href="#">Report</a></li>
-                          <li><a class="menu-block" href="#">Block</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  <UserDropdown
+                    class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
+                    :profile="profile"
+                  />
                 </div>
               </div>
             </div>
@@ -181,21 +125,7 @@
                 target="_blank"
                 rel="nofollow"
               >twitter.com/{{ profile.twitterUsername }}</a>
-              <div class="profile-data">
-                <div class="item">
-                  <router-link to="/following">
-                    <span class="value">{{ profile.followingCount }}</span><span class="label">Following</span>
-                  </router-link>
-                </div>
-                <div class="item">
-                  <router-link class="" to="/followers">
-                    <span class="value">{{ profile.followersCount }}</span><span class="label">Followers</span>
-                  </router-link>
-                </div>
-                <div class="item">
-                  <span class="value">{{ profile.favoritesCount }}</span><span class="label">Likes</span>
-                </div>
-              </div>
+              <FollowersCounter :profile="profile" />
             </div>
           </div>
           <div class="content-col">
@@ -233,19 +163,24 @@ import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
 import Users from "@/components/pages/search/types/Users.vue";
-import ProfileBg from "@/mixins/profileBg";
-import ProfileAvatar from "@/components/common/profileAvatar/Index";
+import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
+import ProfileBackground from "@/components/common/profile/background/Index";
+import FollowersCounter from "@/components/common/profile/followersCounter/Index";
+import UserDropdown from "@/components/common/userDropdawn/Index";
 
 export default {
   name: "Followers",
-  mixins: [InfinityScrollMixin, UserMixin, ProfileBg],
+  mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
     Users,
     SubscribeButton,
     ProfileAvatar,
-    HeaderControl
+    HeaderControl,
+    ProfileBackground,
+    FollowersCounter,
+    UserDropdown
   },
 
   data: () => ({
