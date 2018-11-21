@@ -5,10 +5,11 @@
         <div class="contactsListHeader">
           <div
             class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile">
-            <div class="addNewNav"><span class="new-post"><span class="add-new-type__text">Post</span></span>
-              <span class="new-story"><span class="add-new-type__text">Story</span></span>
-              <span class="new-live"><span class="add-new-type__text">Go live</span></span>
-              <span class="new-message active"><span class="add-new-type__text">Message</span></span>
+            <div class="addNewNav">
+              <span class="new-post addNewNav__item"><span class="add-new-type__text">Post</span></span>
+              <span class="new-story addNewNav__item"><span class="add-new-type__text">Story</span></span>
+              <span class="new-live addNewNav__item"><span class="add-new-type__text">Go live</span></span>
+              <span class="new-message addNewNav__item active"><span class="add-new-type__text">Message</span></span>
               <input type="file" class="hidden storyFileSelect"
                      accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
           </div>
@@ -22,10 +23,11 @@
         </div>
       </div>
       <div class="add-new-type add-new-type_underline-items line-bottom add-new-type_b-with-text hidden-desktop">
-        <div class="addNewNav"><span class="new-post"><span class="add-new-type__text">Post</span></span>
-          <span class="new-story"><span class="add-new-type__text">Story</span></span>
-          <span class="new-live"><span class="add-new-type__text">Go live</span></span>
-          <span class="new-message active"><span class="add-new-type__text">Message</span></span>
+        <div class="addNewNav">
+          <span class="new-post addNewNav__item"><span class="add-new-type__text">Post</span></span>
+          <span class="new-story addNewNav__item"><span class="add-new-type__text">Story</span></span>
+          <span class="new-live addNewNav__item"><span class="add-new-type__text">Go live</span></span>
+          <span class="new-message addNewNav__item active"><span class="add-new-type__text">Message</span></span>
           <input type="file" class="hidden storyFileSelect"
                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
       </div>

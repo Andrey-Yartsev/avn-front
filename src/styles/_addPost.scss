@@ -127,46 +127,6 @@
       }
     }
   }
-
-  .add-new-form.expanded {
-    .add-new-type {
-      .addNewNav {
-        > a,
-        > span {
-          font-size: 9px;
-          text-align: center;
-          justify-content: center;
-          align-content: flex-start;
-
-          &:before {
-            .popup & {
-              margin-top: 5px;
-
-              @include media-breakpoint-up($desktop-breakpoint) {
-                margin-top: 14px;
-              }
-            }
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-              margin-top: 3px;
-            }
-          }
-
-          &.active {
-            &:before {
-              .popup & {
-                width: 54px;
-              }
-            }
-
-            .popup & {
-              color: $primary-color;
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 .tweet-new-post {
@@ -260,32 +220,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: visible;
       margin-top: 63px;
-    }
-
-    .add-new-type {
-
-      .addNewNav {
-
-        > a,
-        > span {
-
-          &:after {
-            display: block;
-            top: auto;
-            bottom: 0;
-          }
-
-          &.active {
-
-            .add-new-type__text {
-
-              @include media-breakpoint-up($desktop-breakpoint) {
-                opacity: 1;
-              }
-            }
-          }
-        }
-      }
     }
   }
 
@@ -416,9 +350,7 @@
 
       .addNewNav {
 
-        > a,
-        > span {
-          width: 39px;
+        &__item {
 
           &:after {
             display: none;
@@ -552,8 +484,9 @@
       }
 
       .addNewNav {
-        > a,
-        > span {
+
+        &__item {
+
           &:before {
             @include media-breakpoint-up($desktop-breakpoint) {
               width: 1.8em;
@@ -561,12 +494,8 @@
           }
 
           &.active {
-            @include media-breakpoint-up($desktop-breakpoint) {
-              margin: 0 8px 0 0;
 
-              .popup & {
-                margin: 0;
-              }
+            @include media-breakpoint-up($desktop-breakpoint) {
 
               &:before {
                 @include media-breakpoint-up($desktop-breakpoint) {
@@ -584,11 +513,8 @@
           transform: translateX(0);
         }
         .addNewNav {
-          > span {
-            @include media-breakpoint-up($desktop-breakpoint) {
-              margin-left: 4px;
-              flex: 0 0 72px;
-            }
+
+          &__item {
 
             &:before {
               @include media-breakpoint-up($desktop-breakpoint) {
