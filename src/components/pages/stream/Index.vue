@@ -102,7 +102,13 @@
       </div>
       <div id="videos">
         <div class="stream-video-container" id="videoleft">
-          <video class="rounded centered" id="myvideo" width="320" height="240" autoplay="" muted="" playsinline="" />
+          <video
+            class="rounded centered"
+            id="myvideo"
+            autoplay=""
+            muted=""
+            playsinline=""
+          />
         </div>
         <div id="stream-timer"></div>
         <div class="stream-online-label">live</div>
@@ -147,13 +153,13 @@
       <div>
         Bitrate
         <select id="bitrateset">
-            <option value="0">No limit</option>
-            <option value="128">Cap to 128kbit</option>
-            <option value="256">Cap to 256kbit</option>
-            <option value="512">Cap to 512kbit</option>
-            <option value="1024">Cap to 1mbit</option>
-            <option value="1500">Cap to 1.5mbit</option>
-            <option value="2000">Cap to 2mbit</option>
+          <option value="0">No limit</option>
+          <option value="128">Cap to 128kbit</option>
+          <option value="256">Cap to 256kbit</option>
+          <option value="512">Cap to 512kbit</option>
+          <option value="1024">Cap to 1mbit</option>
+          <option value="1500">Cap to 1.5mbit</option>
+          <option value="2000">Cap to 2mbit</option>
         </select>
       </div>
       <div class="mediasBottom">
@@ -296,13 +302,24 @@ export default {
         Streams.config.onStreamEnd();
       },
       onStreamTick(/* start */) {},
-      onStreamStart(/* roomName) {},
+      onStreamStart(/* roomName */) {},
       onStreamEnd() {},
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
       onCustomDataGet(/* message */) {},
       onDevicesReadyCallback
     });
+  },
+  beforeDestroy() {
+    if (Streams.localStream) {
+      var tracks = Streams.localStream.getTracks();
+      if (tracks.length > 0) {
+        for (var i = tracks.length - 1; i >= 0; i--) {
+          tracks[i].stop();
+        }
+      }
+      Streams.localStream = null;
+    }
   }
 };
 </script>
