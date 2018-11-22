@@ -69,13 +69,6 @@
     }
 
     &.top {
-      width: auto;
-      left: auto;
-      right: auto;
-      position: relative;
-      bottom: auto;
-      top: auto;
-      transform: none;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;

@@ -488,10 +488,10 @@
 .page-title {
   font: inherit;
   font-weight: 500;
-  padding: 0 0 0 54px;
-  letter-spacing: -0.4px;
+  padding: 0 0 0 56px;
   margin: 0 auto 0 0;
   @include ellipsis;
+  font-size: 15px;
 
   .user-login {
     font-weight: 400;
@@ -1396,20 +1396,61 @@
   left: 0;
   top: 0;
   height: 44px;
-  width: 54px;
+  min-width: 54px;
   z-index: 5;
   cursor: pointer;
   border: none;
   background: none;
   color: $primary-color;
+
   &:before {
     font-size: 24px;
     content: "\E606";
     @include icon-font;
-    @include position-center;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
   }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
+  }
+
+  &:hover {
+    color: $primary-color;
+  }
+  
+  &.go-back {
+    padding: 7px 15px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    
+    &:before {
+      position: relative;
+      transform: translateY(0);
+      left: auto;
+      top: auto;
+      display: inline-block;
+      vertical-align: middle;
+      width: 1.1em;
+    }
+
+    &_arrow {
+
+      &:before {
+        content: "\E606";
+      }
+    }
+
+    &_times {
+
+      &:before {
+        content: "\E605";
+      }
+    }
   }
 }
 .header-popup-menu-btn {

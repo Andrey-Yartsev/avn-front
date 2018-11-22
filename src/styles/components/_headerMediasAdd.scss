@@ -2,15 +2,21 @@
 .storyOverlay {
 
   .category-name {
-    font-size: 16px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 16px;
-    transition: all 0.3s;
+    color: #fff;
+  }
+}
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-left: 38px;
-    }
+.category-name {
+  font-size: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
+  transition: all 0.3s;
+  color: $main-color;
+  font-weight: 500;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-left: 38px;
   }
 }
 
@@ -72,7 +78,7 @@
   }
 
   &__header {
-    padding: 10px 15px 12px;
+    padding: 10px 15px;
     overflow: auto;
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -107,7 +113,7 @@
     }
 
     .addStoryButton.btn {
-      height: 25px;
+      height: 24px;
       padding: 4px 23px;
       box-shadow: none;
       z-index: 100;
@@ -187,6 +193,13 @@
 
   #stop {
     display: none;
+  }
+
+  .btn {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: 72px;
+    }
   }
 }
 

@@ -104,6 +104,7 @@
   }
 
   &-header {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
@@ -117,14 +118,6 @@
       z-index: 2;
       background: inherit;
       box-shadow: 0 0 5px rgba(#000, 0.3);
-    }
-
-    .go-back {
-      &:before {
-        @include media-breakpoint-down($desktop-breakpoint) {
-          content: "\E605";
-        }
-      }
     }
   }
 }
@@ -534,6 +527,10 @@
 
     .submit {
       display: block;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin: auto 0 auto auto;
+      }
     }
 
     .actions {

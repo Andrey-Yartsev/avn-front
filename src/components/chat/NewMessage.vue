@@ -15,8 +15,8 @@
           </div>
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
-            <router-link to="/chat" class="back hidden-desktop">
-              <span class="hidden-desktop">New message</span>
+            <router-link to="/chat" class="header-return-btn go-back go-back_times hidden-desktop">
+              <span class="category-name">New message</span>
             </router-link>
           </div>
           <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>

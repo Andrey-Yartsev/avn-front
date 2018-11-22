@@ -2,8 +2,9 @@
   <div :class="['addPost', {loaderWrap: isSaving}]">
     <form :class="['add-new-form', { expanded: expanded || initialExpanded }]">
       <div class="addPost-header">
-        <button type="button" class="header-return-btn go-back"></button>
-        <h1 class="page-title">New Post</h1>
+        <button type="button" class="header-return-btn go-back go-back_times">
+          <h1 class="category-name">New Post</h1>
+        </button>
         <button
           type="submit"
           class="btn submit sm"

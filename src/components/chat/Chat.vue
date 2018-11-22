@@ -54,7 +54,9 @@
       <template v-else>
         <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
           <div class="selectedChatHeader">
-            <span class="back hidden-desktop" @click="mobileBack"></span>
+            <div class="back-popup-btn hidden-desktop">
+              <span class="back" @click="mobileBack"></span>
+            </div>
             <router-link :to="'/' + activeUser.name" class="avatar">
               <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
             </router-link>

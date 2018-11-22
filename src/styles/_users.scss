@@ -1,12 +1,5 @@
 @import "components/imports";
 
-.myProfile,
-.profile {
-
-  .header-return-btn {
-    color: $primary-color;
-  }
-}
 .userCollectionView {
 
   @include media-breakpoint-up($desktop-breakpoint) {
