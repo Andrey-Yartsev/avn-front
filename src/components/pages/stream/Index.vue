@@ -96,7 +96,7 @@
             </div>
           </div>
         </div>
-        <button class="close">
+        <button class="close" @click="close">
           <span class="category-name hidden-desktop">Live Video</span>
         </button>
       </div>
@@ -263,12 +263,11 @@ export default {
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
-    }
+    },
 
-    // close(e) {
-    //   e.preventDefault();
-    //   this.$store.dispatch("modal/hide", { name: "createStory" });
-    // }
+    close() {
+      this.$router.push("/");
+    }
   },
   mounted() {
     this.streamVisibility =
