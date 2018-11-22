@@ -11,7 +11,7 @@
         :user="post.author"
         :from="from"
       />
-      <p class="text hidden-desktop">{{ post.text }}</p>
+      <p class="text hidden-desktop" v-html="post.text"></p>
       <Media
         v-if="post.media.length"
         :medias="post.media"
@@ -27,7 +27,7 @@
           :user="post.author"
           :from="from"
         />
-        <p class="text hidden-mobile">{{ post.text }}</p>
+        <p class="text hidden-mobile" v-html="post.text"></p>
         <CommentsList
           :comments="post.comments || []"
           :shownCommentsCount="post.shownCommentsCountFull"
@@ -36,7 +36,16 @@
           :loading="commentsLoading"
         />
         <template v-if="isAuth()" >
-          <AddComment :sendNewComment="sendNewComment" :userName="commentReplyUserName"/>
+          <AddComment
+            :sendNewComment="sendNewComment"
+            :userName="commentReplyUserName"
+          />
+          <Tip
+            v-if="showTip"
+            :user="post.author"
+            ref="tip"
+            @cancel="closeTip"
+          />
           <template v-if="!isOwner() && post.author.canEarn">
             <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
               <input type="hidden" name="type" value="tip" />
@@ -49,11 +58,14 @@
               <button type="submit" class="btn" disabled>Send tip</button>
             </form>
           </template>
+
           <Actions
             :post="post"
             v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
             v-on:postLike="likePost"
+            @toggleTip="showTip = !showTip"
           />
+
         </template>
         <template v-else>
           <div class="guest-comments-form">
@@ -74,6 +86,7 @@ import Actions from "@/components/common/postParts/actions/Index";
 import Media from "@/components/common/postParts/media/Index";
 import CommentsList from "@/components/common/postParts/commentsListScrollable/Index";
 import AddComment from "@/components/common/postParts/addNewComment/Index";
+import Tip from "@/components/common/tip/User";
 
 export default {
   name: "PostLastView",
@@ -97,7 +110,8 @@ export default {
   },
   data: () => ({
     showAddCommentForm: false,
-    commentReplyUserName: ""
+    commentReplyUserName: "",
+    showTip: false
   }),
   props: {
     post: {
@@ -114,7 +128,8 @@ export default {
     Media,
     CommentsList,
     Actions,
-    AddComment
+    AddComment,
+    Tip
   },
   methods: {
     likePost() {

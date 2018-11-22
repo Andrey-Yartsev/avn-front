@@ -13,36 +13,86 @@
         </div>
         <div class="group-controls">
           <div id="devices">
-            <input type="hidden" id="videoinput" value="4fff4847beac7971a37b6bb4bbada33bdee0bb47acf95b07c41fe6f1759119bd">
+            <input type="hidden" id="videoinput" :value="streamVideo ? streamVideo.deviceId : ''">
             <input type="hidden" id="audioinput" value="default">
-            <div class="btn-media-event has-dropdown stream-visibility subscribers">
-              <button type="button" class="root-btn"><span class="root-btn__inside">Subscribers only</span></button>
+            <div 
+              v-click-outside="hideStreamVisibilityMenu"
+              :class="[
+                'btn-media-event has-dropdown stream-visibility',
+                streamVisibility, {
+                  shown: shownStreamVisibilityMenu
+                }
+              ]">
+              <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
+                <span class="root-btn__inside">{{ streamVisibilities[streamVisibility] }}</span>
+              </button>
               <div class="menu">
-                <button type="button" class="item active" data-type="subscribers"><span class="value">Subscribers only</span></button>
-                <button type="button" class="item " data-type="followers"><span class="value">Followers only</span></button>
-                <button type="button" class="item" data-type="public"><span class="value">Everyone</span></button>
+                <button
+                  type="button"
+                  :data-type="key"
+                  v-for="(value, key) in streamVisibilities"
+                  v-bind:key="key"
+                  :class="['item', { active: streamVisibility === key }]"
+                  @click="() => setStreamVisibility(key)"
+                >
+                  <span class="value">{{ value }}</span>
+                </button>
               </div>
             </div>
-            <div class="btn-media-event has-dropdown camera">
-              <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
+            <div
+              class=""
+              v-if="streamVideo"
+              v-click-outside="hideStreamVideoMenu"
+              :class="[
+                'btn-media-event has-dropdown camera',
+                {
+                  shown: shownStreamVideoMenu,
+                  'device-disabled': streamVideo.deviceId === 'disabled'
+                }
+              ]">
+            >
+              <button type="button" class="root-btn" @click="showStreamVideoMenu">
+                <span class="root-btn__inside">{{ streamVideo.lavel }}</span>
+              </button>
               <div class="menu">
-                <button type="button" class="item" data-id=""><span class="value">Disable Camera</span></button>
-              <button type="button" class="item active" data-id="4fff4847beac7971a37b6bb4bbada33bdee0bb47acf95b07c41fe6f1759119bd"><span class="value">FaceTime HD Camera</span></button></div>
+                <button
+                  v-for="video in streamVideos"
+                  v-bind:key="video.deviceId"
+                  type="button"
+                  :data-type="video.deviceId"
+                  :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
+                  @click="() => setStreamVideo(video)"
+                >
+                  <span class="value">{{ video.label }}</span>
+                </button>
+              </div>
             </div>
             <div class="btn-media-event has-dropdown microphone">
-              <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
+              <button type="button" class="root-btn">
+                <span class="root-btn__inside"></span>
+              </button>
               <div class="menu">
-                <button type="button" class="item" data-id=""><span class="value">Disable Microphone</span></button>
-              <button type="button" class="item active" data-id="default"><span class="value">Default - Internal Microphone</span></button><button type="button" class="item" data-id="328cc36431a3812ace6359787ba194973764650af10e9e596cf735c11fc333a0"><span class="value">Internal Microphone</span></button></div>
+                <button type="button" class="item" data-id="">
+                  <span class="value">Disable Microphone</span>
+                </button>
+                <button type="button" class="item active" data-id="default">
+                  <span class="value">Default - Internal Microphone</span>
+                </button>
+                <button type="button" class="item" data-id="328cc36431a3812ace6359787ba194973764650af10e9e596cf735c11fc333a0">
+                  <span class="value">Internal Microphone</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <button class="close" @click="close">
+        <button class="close">
           <span class="category-name hidden-desktop">Live Video</span>
         </button>
       </div>
       <div id="videos">
-        <div class="stream-video-container" id="videoleft"><video class="rounded centered" id="myvideo" width="320" height="240" autoplay="" muted="" playsinline=""></video></div>
+        <div class="stream-video-container" id="videoleft">
+          <video class="rounded centered" id="myvideo" width="320" height="240" autoplay="" muted="" playsinline="" />
+        </div>
         <div id="stream-timer"></div>
         <div class="stream-online-label">live</div>
         <div class="stream-comments-wrapper">
@@ -107,22 +157,94 @@ import Loader from "@/components/common/Loader";
 import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
 import Streams from "streaming-module";
+import ClickOutside from "vue-click-outside";
 
 export default {
-  name: "CreateModal",
+  name: "StreamPage",
+  directives: {
+    ClickOutside
+  },
   mixins: [userMixin],
-  data: () => ({}),
+  data: () => ({
+    streamVisibilities: {
+      subscribers: "Subscribers only",
+      followers: "Followers only",
+      public: "Everyone"
+    },
+    streamVisibility: "subscribers",
+    shownStreamVisibilityMenu: false,
+
+    streamVideos: undefined,
+    streamVideo: undefined,
+    shownStreamVideoMenu: false,
+
+    streamAudios: undefined,
+    streamAudio: undefined,
+    shownStreamAudioMenu: false
+  }),
   components: {
     Loader,
     AddNewNav
   },
   methods: {
-    close(e) {
-      e.preventDefault();
-      this.$store.dispatch("modal/hide", { name: "createStory" });
+    showStreamVisibilityMenu() {
+      this.shownStreamVisibilityMenu = true;
+    },
+    hideStreamVisibilityMenu() {
+      this.shownStreamVisibilityMenu = false;
+    },
+    setStreamVisibility(value) {
+      this.streamVisibility = value;
+      this.shownStreamVisibilityMenu = false;
+    },
+
+    showStreamVideoMenu() {
+      this.shownStreamVideoMenu = true;
+    },
+    hideStreamVideoMenu() {
+      this.shownStreamVideoMenu = false;
+    },
+    setStreamVideo(value) {
+      this.streamVideo = value;
+      this.shownStreamVideoMenu = false;
+    },
+
+    showStreamAudioMenu() {
+      this.shownStreamAudioMenu = true;
+    },
+    hideStreamAudioMenu() {
+      this.shownStreamAudioMenu = false;
+    },
+    setStreamAudio(value) {
+      this.streamAudio = value;
+      this.shownStreamAudioMenu = false;
+    },
+
+    onDevicesReadyCallback() {
+      const {
+        audioDevices,
+        defaultAudioDevice,
+        videoDevices,
+        defaultVideoDevice
+      } = Streams.getDevices();
+
+      this.streamVideos = [
+        { label: "Disable video", deviceId: "disabled" },
+        ...videoDevices
+      ];
+      this.streamVideo = defaultVideoDevice;
+      this.streamAudios = audioDevices;
+      this.streamAudio = defaultAudioDevice;
     }
+
+    // close(e) {
+    //   e.preventDefault();
+    //   this.$store.dispatch("modal/hide", { name: "createStory" });
+    // }
   },
   mounted() {
+    const { onDevicesReadyCallback } = this;
+
     Streams.init({
       thumbEnabled: true,
       videoSave: true,
@@ -147,10 +269,7 @@ export default {
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
       onCustomDataGet(/* message */) {},
-      onDevicesReadyCallback() {
-        // const devices = Streams.getDevices();
-        // console.log(devices);
-      }
+      onDevicesReadyCallback
     });
   }
 };

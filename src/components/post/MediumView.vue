@@ -8,7 +8,7 @@
               @openDropdawn="showDropdawn = true"
               @hideDropdawn="showDropdawn = false"
             />
-            <p class="text">{{post.text}}</p>
+            <p class="text" v-html="post.text"></p>
             <Media
               v-if="medias.length"
               :medias="medias"
