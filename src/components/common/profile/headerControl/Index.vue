@@ -1,6 +1,6 @@
 <template>
   <div class="sticky-header-controls">
-    <a class="header-return-btn" />
+    <router-link to="/" class="header-return-btn"></router-link>
     <div class="profile-name__header">
       <span class="name">
         {{ profile.name }}
