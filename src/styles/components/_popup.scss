@@ -11,7 +11,7 @@
   -webkit-overflow-scrolling: touch;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    overflow-y: scroll;
+    //overflow-y: scroll;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
