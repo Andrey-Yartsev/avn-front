@@ -1,6 +1,6 @@
 <template>
   <div :class="['addPost', {loaderWrap: isSaving}]">
-    <form :class="['add-new-form', { expanded: expanded || initialExpanded }]">
+    <form :class="['add-new-form', { expanded: expanded || initialExpanded || preloadedMedias.length }]">
       <div class="addPost-header">
         <button type="button" class="header-return-btn go-back"></button>
         <h1 class="page-title">New Post</h1>
