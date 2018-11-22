@@ -36,11 +36,12 @@
           <div class="form-group">
             <label class="form-group-inner">
               <span class="label">About</span>
-              <textarea
+              <TextareaAutosize
                 rows="3"
                 name="about"
+                :maxHeight="200"
                 v-model="localUser.about"
-              ></textarea>
+              ></TextareaAutosize>
             </label>
           </div>
           <div class="form-group color-schemes-wrapper">
@@ -152,6 +153,7 @@
 <script>
 import ColorSelect from "./ColorSelect";
 import Common from "../common";
+import TextareaAutosize from "@/components/common/TextareaAutosize";
 
 export default {
   name: "ProfileSettingsContent",
@@ -159,7 +161,8 @@ export default {
   mixins: [Common],
 
   components: {
-    ColorSelect
+    ColorSelect,
+    TextareaAutosize
   },
 
   methods: {
@@ -172,6 +175,24 @@ export default {
     }
   },
 
+  computed: {
+    about() {
+      if (!this.localUser) {
+        return null;
+      }
+      return this.localUser.about;
+    }
+  },
+
+  watch: {
+    about() {
+      this.localUser.about = this.localUser.about.replace(
+        new RegExp("<br />", "g"),
+        ""
+      );
+    }
+  },
+
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     const signup = urlParams.get("signup");
@@ -180,6 +201,11 @@ export default {
         this.$refs.username.focus();
       }, 500);
     }
+
+    this.localUser.about = this.localUser.about.replace(
+      new RegExp("<br />", "g"),
+      ""
+    );
   }
 };
 </script>

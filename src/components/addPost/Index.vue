@@ -1,8 +1,8 @@
 <template>
   <div :class="['addPost', {loaderWrap: isSaving}]">
-    <form :class="['add-new-form', { expanded: expanded || initialExpanded }]">
+    <form :class="['add-new-form', { expanded: expanded || initialExpanded || preloadedMedias.length }]">
       <div class="addPost-header">
-        <button type="button" class="header-return-btn go-back go-back_times">
+        <button type="button" class="header-return-btn go-back go-back_times" @click="close">
           <h1 class="category-name">New Post</h1>
         </button>
         <button
@@ -110,6 +110,10 @@ export default {
     initialExpanded: {
       type: Boolean,
       default: false
+    },
+    close: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {

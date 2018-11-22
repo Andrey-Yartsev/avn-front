@@ -68,8 +68,6 @@ export default {
       }
       this.$store.commit("modalRouter/updateRoute", routeData);
       this.$store.commit("modalRouter/updatePath", route.path);
-      // console.log("twice");
-      // console.trace();
       this.$store.commit("modalRouter/updateParams", route.params);
       if (route.component.component) {
         this.routedComponent = route.component.component;

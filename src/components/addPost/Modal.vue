@@ -4,7 +4,7 @@
       <div class="popup-container popup-addPost">
         <div class="previous hidden"></div>
         <div class="content">
-          <AddPost :initialExpanded="true" />
+          <AddPost :initialExpanded="true" :close="close" />
         </div>
         <button type="button" class="close" @click="close"></button>
         <div class="next hidden"></div>

@@ -13,10 +13,6 @@ export default {
   "notifications/:type": NotifModal,
 
   chat: ChatModal,
-  "chat/home": {
-    component: ChatModal,
-    _name: "ChatHome"
-  },
   "chat/new": {
     component: ChatModal,
     _name: "ChatNew"

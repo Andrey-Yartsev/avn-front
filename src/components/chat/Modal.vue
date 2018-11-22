@@ -2,7 +2,7 @@
   <Modal>
     <div class="popup-container chat-popup" slot="content">
       <div class="content">
-        <Chat mode="modal" />
+        <component :is="component" mode="modal" />
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>
@@ -12,6 +12,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Chat from "./Chat";
+import NewMessage from "./NewMessage";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
@@ -22,6 +23,14 @@ export default {
   components: {
     Modal,
     Chat
+  },
+
+  computed: {
+    component() {
+      return this.$store.state.modalRouter.path === "chat/new"
+        ? NewMessage
+        : Chat;
+    }
   }
 };
 </script>

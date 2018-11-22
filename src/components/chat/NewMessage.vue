@@ -4,29 +4,52 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <div
-            class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile">
+            class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile"
+          >
             <div class="addNewNav">
-              <span class="new-post addNewNav__item"><span class="addNewNav__text">Post</span></span>
-              <span class="new-story addNewNav__item"><span class="addNewNav__text">Story</span></span>
-              <span class="new-live addNewNav__item"><span class="addNewNav__text">Go live</span></span>
+              <router-link
+                tag="span"
+                to="/addPost"
+                active-class="dummy"
+                class="new-post addNewNav__item"
+              ><span class="addNewNav__text">Post</span></router-link>
+              <span
+                class="new-story addNewNav__item"
+                @click="addNewStory"
+              ><span class="addNewNav__text">Story</span></span>
+              <span
+                class="new-live addNewNav__item"
+                @click="goToStream"
+              ><span class="addNewNav__text">Go live</span></span>
               <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
               <input type="file" class="hidden storyFileSelect"
                      accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
           </div>
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
-            <router-link to="/chat" class="header-return-btn go-back go-back_times hidden-desktop">
+            <a href="/chat" @click.prevent="goTo('/chat')" class="header-return-btn go-back go-back_times hidden-desktop">
               <span class="category-name">New message</span>
-            </router-link>
+            </a>
           </div>
           <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
         </div>
       </div>
       <div class="add-new-type add-new-type_underline-items line-bottom add-new-type_b-with-text hidden-desktop">
         <div class="addNewNav">
-          <span class="new-post addNewNav__item"><span class="addNewNav__text">Post</span></span>
-          <span class="new-story addNewNav__item"><span class="addNewNav__text">Story</span></span>
-          <span class="new-live addNewNav__item"><span class="addNewNav__text">Go live</span></span>
+          <router-link
+            tag="span"
+            to="/addPost"
+            active-class="dummy"
+            class="new-post addNewNav__item"
+          ><span class="addNewNav__text">Post</span></router-link>
+          <span
+            class="new-story addNewNav__item"
+            @click="addNewStory"
+          ><span class="addNewNav__text">Story</span></span>
+          <span
+            class="new-live addNewNav__item"
+            @click="goToStream"
+          ><span class="addNewNav__text">Go live</span></span>
           <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
           <input type="file" class="hidden storyFileSelect"
                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
@@ -141,11 +164,12 @@ import ChatWrapper from "./Wrapper";
 import ChatAddMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "Chat",
 
-  mixins: [User],
+  mixins: [User, ModalRouterGoto],
 
   directives: {
     ClickOutside
@@ -170,7 +194,8 @@ export default {
 
   computed: {
     noMessages() {
-      return this.$route.params[1] && this.$route.params[1] === "no-messages";
+      return false;
+      // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
     chats() {
       let chats = this.$store.state.chat.chats.map(v => {
@@ -235,10 +260,10 @@ export default {
       this.$store.commit("chat/setSecondScreen", false);
     },
     backDesktop() {
-      this.$router.push("/chat");
+      this.goTo("/chat");
     },
     gotoFirstSelected() {
-      this.$router.push("/chat/" + this.selected[0]);
+      this.goTo("/chat/" + this.selected[0]);
       this.selected = [];
     },
     next() {
@@ -254,6 +279,12 @@ export default {
           this.contactsScrollTop = true;
         }
       }
+    },
+    addNewStory() {
+      document.getElementById("storyFileSelect").click();
+    },
+    goToStream() {
+      window.location = "/stream";
     }
   },
 

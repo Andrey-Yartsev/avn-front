@@ -3,22 +3,22 @@
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
-          <router-link :to="'/' + user.name" class="avatar header-avatar">
+          <router-link :to="'/' + user.username" class="avatar header-avatar">
             <img v-if="user.avatar" :src="user.avatar">
           </router-link>
           <h3>Messages</h3>
           <div class="newMessage-link">
-            <router-link
-              tag="span"
-              to="/chat/new"
+            <span
+              @click="goTo('/chat/new')"
               class="newMessage newMessageEvent hidden-mobile"
             >New message
-            </router-link>
-            <router-link
-              to="/chat/new"
+            </span>
+            <a
+              href="/chat/new"
+              @click.prevent="goTo('/chat/new')"
               class="newMessage hidden-desktop"
             >New message
-            </router-link>
+            </a>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default {
       this.$store.commit("chat/messages", []);
       if (!activeUserId) {
         if (!this.isHome) {
-          this.goTo("/chat");
+          // this.goTo("/chat");
         }
         return;
       }

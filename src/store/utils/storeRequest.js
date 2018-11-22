@@ -46,6 +46,7 @@ const storeRequest = (
       })
       .catch(error => {
         if (error.name === "TypeError") {
+          // console.error(error);
           error = { message: "Internal Server Error" };
         }
         if (localError) {
