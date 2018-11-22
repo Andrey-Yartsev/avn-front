@@ -17,6 +17,9 @@ export default {
     component: ChatModal,
     _name: "ChatHome"
   },
-  "chat/new": ChatModal,
+  "chat/new": {
+    component: ChatModal,
+    _name: "ChatNew"
+  },
   "chat/:userId": ChatModal
 };

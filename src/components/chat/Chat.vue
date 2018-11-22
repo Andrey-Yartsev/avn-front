@@ -1,5 +1,5 @@
 <template>
-  <Wrapper>
+  <Wrapper :mode="mode">
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
@@ -36,6 +36,8 @@
     <template slot="col2">
       <div v-if="isHome" class="home-message">
         Select user for conversation
+        <p>or</p>
+        <span class="newMessage" @click="goTo('/chat/new')">Send new message</span>
       </div>
       <template v-else>
         <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
@@ -105,12 +107,12 @@ import NoConversations from "./NoConversations";
 import Loader from "@/components/common/Loader";
 import MobileHeader from "@/components/header/Mobile";
 import ClickOutside from "vue-click-outside";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "Chat",
 
-  mixins: [User, ModalRouter],
+  mixins: [User, ModalRouterParams],
 
   directives: {
     ClickOutside
@@ -136,7 +138,10 @@ export default {
 
   computed: {
     isHome() {
-      return this.routeName === "ChatHome";
+      return this.routePath === "/chat";
+    },
+    isNew() {
+      return this.routePath === "/chat/new";
     },
     noMessages() {
       return this.routePath === "/chat/no-messages";
@@ -189,7 +194,7 @@ export default {
       this.$store.commit("chat/messages", []);
       if (!activeUserId) {
         if (!this.isHome) {
-          this.goTo("/chat/new");
+          this.goTo("/chat");
         }
         return;
       }
@@ -226,19 +231,17 @@ export default {
       this.$store.dispatch("chat/fetchMessages", this.activeUserId);
     },
     mobileBack() {
-      this.goTo("/chat/home");
+      this.goTo("/chat");
     }
   },
 
   created() {
     this.$store.dispatch("chat/fetchChats").then(() => {
       if (this.isHome) {
-        // nothing
-      } else if (!this.hasActiveChats) {
-        this.goTo("/chat/new");
-      } else if (!this.activeUserId) {
-        this.goTo("/chat/" + this.firstActiveChat.withUser.id);
-      } else {
+        //
+      } else if (this.isNew) {
+        //
+      } else if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
       }

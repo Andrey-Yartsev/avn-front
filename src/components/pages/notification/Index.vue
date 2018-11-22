@@ -59,7 +59,7 @@
 <script>
 import dateFns from "date-fns";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
 
@@ -77,7 +77,7 @@ const typeTitles = {
 export default {
   name: "Notifications",
 
-  mixins: [ModalRouter, User],
+  mixins: [ModalRouterParams, User],
 
   components: {
     Scrolly,
@@ -88,7 +88,7 @@ export default {
 
   computed: {
     type() {
-      return this._route.params.type || "all";
+      return this.routeParams.type || "all";
     },
     loading() {
       return this.$store.state.notif.fetchLoading;

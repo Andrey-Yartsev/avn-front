@@ -44,12 +44,12 @@
 <script>
 import Search from "./Search";
 import User from "./User";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import DesktopHeader from "./Desktop";
 
 export default {
   name: "Header",
-  mixins: [ModalRouter],
+  mixins: [ModalRouterGoto],
   components: {
     Search,
     User,

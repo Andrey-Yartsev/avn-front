@@ -12,12 +12,12 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Chat from "./Chat";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "ChatModal",
 
-  mixins: [ModalRouter],
+  mixins: [ModalRouterGoto],
 
   components: {
     Modal,

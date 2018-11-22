@@ -38,12 +38,12 @@
 <script>
 import dateFns from "date-fns";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouter],
+  mixins: [ModalRouterGoto],
 
   components: {
     Scrolly,

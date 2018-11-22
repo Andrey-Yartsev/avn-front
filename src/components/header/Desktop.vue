@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "HeaderDesktop",
 
-  mixins: [ModalRouter],
+  mixins: [ModalRouterGoto],
 
   computed: {
     user() {

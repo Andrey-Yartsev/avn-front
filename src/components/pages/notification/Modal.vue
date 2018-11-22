@@ -12,12 +12,12 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Content from "./Index";
-import ModalRouter from "@/mixins/modalRouter";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "NotifModal",
 
-  mixins: [ModalRouter],
+  mixins: [ModalRouterGoto],
 
   components: {
     Modal,

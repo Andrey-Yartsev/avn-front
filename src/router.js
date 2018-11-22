@@ -87,6 +87,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat",
+    name: "ChatHome",
     component: Chat,
     meta: {
       chat: true,
@@ -105,17 +106,8 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/chat/new",
+    name: "ChatNew",
     component: ChatNewMessage,
-    meta: {
-      chat: true,
-      cssName: "chat"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/chat/home",
-    name: "ChatHome",
-    component: Chat,
     meta: {
       chat: true,
       cssName: "chat"

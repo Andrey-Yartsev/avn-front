@@ -15,16 +15,19 @@
 </template>
 
 <script>
+import ModalRouterParams from "@/mixins/modalRouter/params";
+
 export default {
+  name: "ChatWrapper",
+
+  mixins: [ModalRouterParams],
+
   computed: {
     isSecondScreen() {
       if (this.$store.state.chat.isSecondScreen) {
         return true;
       }
-      if (parseInt(this.$route.params.userId)) {
-        return true;
-      }
-      return false;
+      return !!parseInt(this.routeParams.userId);
     }
   }
 };

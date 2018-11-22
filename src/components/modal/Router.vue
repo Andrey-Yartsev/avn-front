@@ -12,17 +12,18 @@ export default {
     };
   },
   created() {
-    window.onhashchange = () => {
-      if (!window.location.hash) {
-        this.reset();
-      } else {
-        const route = this.matchRoute();
-        if (!route) {
-          return;
-        }
-        this.setComponent(route);
-      }
-    };
+    // window.onhashchange = () => {
+    //   console.log("onhashchange");
+    //   if (!window.location.hash) {
+    //     this.reset();
+    //   } else {
+    //     const route = this.matchRoute();
+    //     if (!route) {
+    //       return;
+    //     }
+    //     this.setComponent(route);
+    //   }
+    // };
 
     const route = this.matchRoute();
     if (!route) {
@@ -67,6 +68,8 @@ export default {
       }
       this.$store.commit("modalRouter/updateRoute", routeData);
       this.$store.commit("modalRouter/updatePath", route.path);
+      // console.log("twice");
+      // console.trace();
       this.$store.commit("modalRouter/updateParams", route.params);
       if (route.component.component) {
         this.routedComponent = route.component.component;
