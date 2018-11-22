@@ -3,7 +3,7 @@
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
-          <router-link :to="'/' + user.name" class="avatar header-avatar">
+          <router-link :to="'/' + user.username" class="avatar header-avatar">
             <img v-if="user.avatar" :src="user.avatar">
           </router-link>
           <h3>Messages</h3>
