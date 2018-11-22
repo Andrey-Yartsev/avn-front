@@ -57,6 +57,13 @@
       }
     }
 
+    &.popup-payment {
+
+      .close {
+        color: $main;
+      }
+    }
+
     &.lightbox-container {
       width: auto;
       top: 50%;
