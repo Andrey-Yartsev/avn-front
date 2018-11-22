@@ -15,9 +15,9 @@
           </div>
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
-            <router-link to="/chat" class="back hidden-desktop">
+            <a href="/chat" @click.prevent="goTo('/chat')" class="back hidden-desktop">
               <span class="hidden-desktop">New message</span>
-            </router-link>
+            </a>
           </div>
           <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
         </div>
@@ -141,11 +141,12 @@ import ChatWrapper from "./Wrapper";
 import ChatAddMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "Chat",
 
-  mixins: [User],
+  mixins: [User, ModalRouterGoto],
 
   directives: {
     ClickOutside
@@ -170,7 +171,8 @@ export default {
 
   computed: {
     noMessages() {
-      return this.$route.params[1] && this.$route.params[1] === "no-messages";
+      return false;
+      // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
     chats() {
       let chats = this.$store.state.chat.chats.map(v => {
@@ -235,10 +237,10 @@ export default {
       this.$store.commit("chat/setSecondScreen", false);
     },
     backDesktop() {
-      this.$router.push("/chat");
+      this.goTo("/chat");
     },
     gotoFirstSelected() {
-      this.$router.push("/chat/" + this.selected[0]);
+      this.goTo("/chat/" + this.selected[0]);
       this.selected = [];
     },
     next() {
