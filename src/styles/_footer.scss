@@ -46,7 +46,7 @@
   .FooterNavCollectionView {
     position: relative;
 
-    .settings-aside & {
+    .aside-col & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 22px 0;
