@@ -4,11 +4,23 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <div
-            class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile">
+            class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile"
+          >
             <div class="addNewNav">
-              <span class="new-post addNewNav__item"><span class="addNewNav__text">Post</span></span>
-              <span class="new-story addNewNav__item"><span class="addNewNav__text">Story</span></span>
-              <span class="new-live addNewNav__item"><span class="addNewNav__text">Go live</span></span>
+              <router-link
+                tag="span"
+                to="/addPost"
+                active-class="dummy"
+                class="new-post addNewNav__item"
+              ><span class="addNewNav__text">Post</span></router-link>
+              <span
+                class="new-story addNewNav__item"
+                @click="addNewStory"
+              ><span class="addNewNav__text">Story</span></span>
+              <span
+                class="new-live addNewNav__item"
+                @click="goToStream"
+              ><span class="addNewNav__text">Go live</span></span>
               <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
               <input type="file" class="hidden storyFileSelect"
                      accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
@@ -24,9 +36,20 @@
       </div>
       <div class="add-new-type add-new-type_underline-items line-bottom add-new-type_b-with-text hidden-desktop">
         <div class="addNewNav">
-          <span class="new-post addNewNav__item"><span class="addNewNav__text">Post</span></span>
-          <span class="new-story addNewNav__item"><span class="addNewNav__text">Story</span></span>
-          <span class="new-live addNewNav__item"><span class="addNewNav__text">Go live</span></span>
+          <router-link
+            tag="span"
+            to="/addPost"
+            active-class="dummy"
+            class="new-post addNewNav__item"
+          ><span class="addNewNav__text">Post</span></router-link>
+          <span
+            class="new-story addNewNav__item"
+            @click="addNewStory"
+          ><span class="addNewNav__text">Story</span></span>
+          <span
+            class="new-live addNewNav__item"
+            @click="goToStream"
+          ><span class="addNewNav__text">Go live</span></span>
           <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
           <input type="file" class="hidden storyFileSelect"
                  accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
@@ -256,6 +279,12 @@ export default {
           this.contactsScrollTop = true;
         }
       }
+    },
+    addNewStory() {
+      document.getElementById("storyFileSelect").click();
+    },
+    goToStream() {
+      window.location = "/stream";
     }
   },
 
