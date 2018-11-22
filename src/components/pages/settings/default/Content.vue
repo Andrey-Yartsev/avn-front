@@ -175,6 +175,24 @@ export default {
     }
   },
 
+  computed: {
+    about() {
+      if (!this.localUser) {
+        return null;
+      }
+      return this.localUser.about;
+    }
+  },
+
+  watch: {
+    about() {
+      this.localUser.about = this.localUser.about.replace(
+        new RegExp("<br />", "g"),
+        ""
+      );
+    }
+  },
+
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
     const signup = urlParams.get("signup");
