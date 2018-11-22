@@ -73,6 +73,7 @@ export default {
   },
   watch: {
     newPost() {
+      this.$store.dispatch("modal/hide", { name: "addPost" });
       this.init();
     }
   }
