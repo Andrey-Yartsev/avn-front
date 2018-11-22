@@ -13,17 +13,6 @@
     z-index: 2;
   }
 
-  .mediasTop & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //box-shadow: none;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //z-index: 2;
-    }
-  }
-
   .popup & {
 
     &:not(.chat-new-type) {
@@ -61,22 +50,20 @@
       }
     }
   }
-
-  &__text {
-    opacity: 0.4;
-    //opacity: 0.5;
-    line-height: 11px;
-
-    .stream &,
-    .storyOverlay & {
-      opacity: 1;
-    }
-  }
 }
 
 .addNewNav {
   display: flex;
   position: relative;
+
+  &__text {
+    opacity: 0.4;
+    line-height: 11px;
+
+    .mediasTop & {
+      opacity: 1;
+    }
+  }
 
   &__item {
     font-weight: 500;
@@ -160,6 +147,10 @@
       flex: 0 0 100%;
       line-height: 26px;
 
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-top: 3px;
+      }
+      
       .add-new-form.expanded & {
 
         .popup & {
@@ -168,10 +159,6 @@
             margin-top: 14px;
           }
         }
-      }
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        margin-top: 3px;
       }
 
       .add-new-type_b-with-text & {
@@ -306,7 +293,7 @@
           background-color: #fff;
         }
 
-        .add-new-type__text {
+        .addNewNav__text {
 
           .add-new-type_underline-items & {
 
@@ -318,7 +305,7 @@
         }
       }
 
-      .add-new-type__text {
+      .addNewNav__text {
 
         .add-new-form.expanded & {
 
