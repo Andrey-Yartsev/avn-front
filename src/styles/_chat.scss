@@ -1060,3 +1060,19 @@
     }
   }
 }
+
+.start-chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .selectedChatHeader {
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  .msg-no-chat {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

@@ -124,7 +124,7 @@
           <div class="chat-section">
             <div class="chatContent"></div>
             <div class="msg-no-chat">
-              <div class="msg-no-chat__msg">Select people from your contacts</div>
+              <div class="msg-no-chat__msg">Select people to send them a message</div>
               <div class="btn-start btn-selected-all" @click="toggleSelectAll">Select all</div>
             </div>
           </div>

@@ -34,10 +34,22 @@
     </template>
 
     <template slot="col2">
-      <div v-if="isHome" class="home-message">
-        Select user for conversation
-        <p>or</p>
-        <span class="newMessage" @click="goTo('/chat/new')">Send new message</span>
+      <div v-if="isHome" class="start-chat-wrapper">
+          <div class="chatHeader chatHeader_add-shadow no-nav">
+            <div class="selectedChatHeader">
+              You don't have any messages selected.
+            </div>
+          </div>
+          <div class="chatCollectionContentWrapper">
+            <div class="chatMessagesCollectionView">
+              <div class="msg-no-chat">
+                <div class="msg-no-chat__msg">
+                  Chose one from your existing messages,<br>or start
+                </div>
+                <span class="btn-start" @click="goTo('/chat/new')">New message</span>
+              </div>
+            </div>
+          </div>
       </div>
       <template v-else>
         <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
@@ -259,8 +271,5 @@ export default {
   border-width: 3px;
   width: 10px;
 }
-.home-message {
-  padding: 20px;
-  text-align: center;
-}
+
 </style>
