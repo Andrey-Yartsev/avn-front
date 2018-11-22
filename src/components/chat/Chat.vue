@@ -271,5 +271,4 @@ export default {
   border-width: 3px;
   width: 10px;
 }
-
 </style>
