@@ -173,6 +173,16 @@
       background-color: rgba(#fff, 0.3);
       box-shadow: 0 2px 10px rgba(#000, 0.06);
 
+      &::-moz-placeholder {
+        color: $main;
+      }
+      &:-ms-input-placeholder {
+        color: $main;
+      }
+      &::-webkit-input-placeholder {
+        color: $main;
+      }
+
       &:hover,
       &:focus {
         background-color: #fff;
