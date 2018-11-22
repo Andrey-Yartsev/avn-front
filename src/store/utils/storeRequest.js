@@ -28,9 +28,31 @@ const storeRequest = (
           commit(prefix + "Success", true);
           let r = await response.json();
           accept(r);
+
+          // console.log(r);
+
+          if (prefix === "searchRequest") {
+            const ids = state.posts.map(v => v.id);
+            // const names = state.posts.map(v => v.name);
+            // console.log(r.length.list);
+            r.list.map(v => {
+              const index = ids.indexOf(v.id);
+              if (index !== -1) {
+                // const u = state.posts[index];
+                // console.log(
+                //   `User ${u.name}(${u.id}) === ${v.name}(${
+                //     v.id
+                //   }) from ${apiPath}`,
+                //   JSON.stringify(options.query)
+                // );
+              }
+            });
+          }
+
           if (resultConvert) {
             r = resultConvert(r, state);
           }
+
           commit(resultKey, r);
           commit(prefix + "Requested");
         } else {
@@ -46,6 +68,7 @@ const storeRequest = (
       })
       .catch(error => {
         if (error.name === "TypeError") {
+          // console.error(error);
           error = { message: "Internal Server Error" };
         }
         if (localError) {

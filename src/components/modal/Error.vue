@@ -1,7 +1,6 @@
 <template>
   <Modal>
     <div class="popup-container" slot="content">
-      <div class="previous"></div>
       <div class="content">
         <h3>Error</h3>
         {{ error.message }}

@@ -175,6 +175,7 @@ export default {
   watch: {
     page() {
       this.getPageData();
+      this.lastYOffset = 0;
     }
   }
 };
