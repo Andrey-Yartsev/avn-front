@@ -13,34 +13,34 @@
         </div>
         <div class="group-controls">
           <div id="devices">
-            <input type="hidden" id="videoinput" :value="streamVideo ? streamVideo.deviceId : ''">
-            <input type="hidden" id="audioinput" value="default">
             <div 
               v-click-outside="hideStreamVisibilityMenu"
               :class="[
                 'btn-media-event has-dropdown stream-visibility',
-                streamVisibility, {
+                streamVisibility.key, 
+                {
                   shown: shownStreamVisibilityMenu
                 }
-              ]">
+              ]"
+              v-if="user"
+            >
               <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
-                <span class="root-btn__inside">{{ streamVisibilities[streamVisibility] }}</span>
+                <span class="root-btn__inside">{{ streamVisibility.label }}</span>
               </button>
               <div class="menu">
                 <button
                   type="button"
-                  :data-type="key"
-                  v-for="(value, key) in streamVisibilities"
-                  v-bind:key="key"
-                  :class="['item', { active: streamVisibility === key }]"
-                  @click="() => setStreamVisibility(key)"
+                  v-for="streamVisib in streamVisibilities"
+                  v-bind:key="streamVisib.key"
+                  :class="['item', { active: streamVisibility.key === streamVisib.key }]"
+                  @click="() => setStreamVisibility(streamVisib)"
+                  :disabled="streamVisib.disabled"
                 >
-                  <span class="value">{{ value }}</span>
+                  <span class="value">{{ streamVisib.label }}</span>
                 </button>
               </div>
             </div>
             <div
-              class=""
               v-if="streamVideo"
               v-click-outside="hideStreamVideoMenu"
               :class="[
@@ -52,7 +52,7 @@
               ]">
             >
               <button type="button" class="root-btn" @click="showStreamVideoMenu">
-                <span class="root-btn__inside">{{ streamVideo.lavel }}</span>
+                <span class="root-btn__inside" />
               </button>
               <div class="menu">
                 <button
@@ -67,19 +67,30 @@
                 </button>
               </div>
             </div>
-            <div class="btn-media-event has-dropdown microphone">
-              <button type="button" class="root-btn">
-                <span class="root-btn__inside"></span>
+            <div
+              v-if="streamAudio"
+              v-click-outside="hideStreamAudioMenu"
+              :class="[
+                'btn-media-event has-dropdown microphone',
+                {
+                  shown: shownStreamAudioMenu,
+                  'device-disabled': streamAudio.deviceId === undefined
+                }
+              ]">
+            >
+              <button type="button" class="root-btn" @click="showStreamAudioMenu">
+                <span class="root-btn__inside" />
               </button>
               <div class="menu">
-                <button type="button" class="item" data-id="">
-                  <span class="value">Disable Microphone</span>
-                </button>
-                <button type="button" class="item active" data-id="default">
-                  <span class="value">Default - Internal Microphone</span>
-                </button>
-                <button type="button" class="item" data-id="328cc36431a3812ace6359787ba194973764650af10e9e596cf735c11fc333a0">
-                  <span class="value">Internal Microphone</span>
+                <button
+                  v-for="audio in streamAudios"
+                  v-bind:key="audio.deviceId"
+                  type="button"
+                  :data-type="audio.deviceId"
+                  :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
+                  @click="() => setStreamAudio(audio)"
+                >
+                  <span class="value">{{ audio.label || "Disable Microphone" }}</span>
                 </button>
               </div>
             </div>
@@ -165,26 +176,44 @@ export default {
     ClickOutside
   },
   mixins: [userMixin],
-  data: () => ({
-    streamVisibilities: {
-      subscribers: "Subscribers only",
-      followers: "Followers only",
-      public: "Everyone"
-    },
-    streamVisibility: "subscribers",
-    shownStreamVisibilityMenu: false,
+  data() {
+    return {
+      streamVisibility: {},
+      shownStreamVisibilityMenu: false,
 
-    streamVideos: undefined,
-    streamVideo: undefined,
-    shownStreamVideoMenu: false,
+      streamVideos: undefined,
+      streamVideo: undefined,
+      shownStreamVideoMenu: false,
 
-    streamAudios: undefined,
-    streamAudio: undefined,
-    shownStreamAudioMenu: false
-  }),
+      streamAudios: undefined,
+      streamAudio: undefined,
+      shownStreamAudioMenu: false
+    };
+  },
   components: {
     Loader,
     AddNewNav
+  },
+  computed: {
+    streamVisibilities() {
+      return [
+        {
+          key: "subscribers",
+          label: "Subscribers only",
+          disabled: !this.canEarnMoney
+        },
+        {
+          key: "followers",
+          label: "Followers only",
+          disabled: false
+        },
+        {
+          key: "public",
+          label: "Everyone",
+          disabled: false
+        }
+      ];
+    }
   },
   methods: {
     showStreamVisibilityMenu() {
@@ -205,6 +234,7 @@ export default {
       this.shownStreamVideoMenu = false;
     },
     setStreamVideo(value) {
+      Streams.switchDevices(false, value.deviceId);
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
     },
@@ -216,6 +246,7 @@ export default {
       this.shownStreamAudioMenu = false;
     },
     setStreamAudio(value) {
+      Streams.switchDevices(value.deviceId, false);
       this.streamAudio = value;
       this.shownStreamAudioMenu = false;
     },
@@ -223,18 +254,15 @@ export default {
     onDevicesReadyCallback() {
       const {
         audioDevices,
-        defaultAudioDevice,
+        /* defaultAudioDevice, */
         videoDevices,
         defaultVideoDevice
       } = Streams.getDevices();
 
-      this.streamVideos = [
-        { label: "Disable video", deviceId: "disabled" },
-        ...videoDevices
-      ];
+      this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
-      this.streamAudio = defaultAudioDevice;
+      this.streamAudio = audioDevices[1];
     }
 
     // close(e) {
@@ -243,6 +271,11 @@ export default {
     // }
   },
   mounted() {
+    this.streamVisibility =
+      this.user.subscribePrice > 0
+        ? this.streamVisibilities[0]
+        : this.streamVisibilities[1];
+
     const { onDevicesReadyCallback } = this;
 
     Streams.init({
