@@ -2,7 +2,7 @@
   <div :class="['addPost', {loaderWrap: isSaving}]">
     <form :class="['add-new-form', { expanded: expanded || initialExpanded || preloadedMedias.length }]">
       <div class="addPost-header">
-        <button type="button" class="header-return-btn go-back"></button>
+        <button type="button" class="header-return-btn go-back" @click="close"></button>
         <h1 class="page-title">New Post</h1>
         <button
           type="submit"
@@ -109,6 +109,10 @@ export default {
     initialExpanded: {
       type: Boolean,
       default: false
+    },
+    close: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {
