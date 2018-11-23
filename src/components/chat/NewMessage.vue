@@ -144,14 +144,22 @@
       </div>
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView" :class="{'no-selected-conversation': !selected.length}">
-          <div class="chat-section">
+          <div class="chat-section chat-section_loading" v-if="sending">
+            <Loader :fullscreen="false" text="Sending..." class="transparent small"/>
+          </div>
+          <div class="chat-section" v-else>
             <div class="chatContent"></div>
             <div class="msg-no-chat">
               <div class="msg-no-chat__msg">Select people to send them a message</div>
               <div class="btn-start btn-selected-all" @click="toggleSelectAll">Select all</div>
             </div>
           </div>
-          <ChatAddMessage :userIds="selected" @sent="gotoFirstSelected"/>
+          <ChatAddMultiMessage
+            :userIds="selected"
+            :disable="sending"
+            @startSending="startSending"
+            @sent="sent"
+          />
         </div>
       </div>
     </template>
@@ -161,10 +169,11 @@
 <script>
 import User from "@/mixins/user";
 import ChatWrapper from "./Wrapper";
-import ChatAddMessage from "./AddMultiMessage";
+import ChatAddMultiMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Chat",
@@ -179,8 +188,9 @@ export default {
     Scrolly,
     ScrollyViewport,
     ScrollyBar,
-    ChatAddMessage,
-    ChatWrapper
+    ChatAddMultiMessage,
+    ChatWrapper,
+    Loader
   },
 
   data() {
@@ -188,7 +198,8 @@ export default {
       selected: [],
       searchQuery: "",
       chatOptionsOpened: false,
-      contactsScrollTop: true
+      contactsScrollTop: true,
+      sending: false
     };
   },
 
@@ -285,6 +296,13 @@ export default {
     },
     goToStream() {
       window.location = "/stream";
+    },
+    startSending() {
+      this.sending = true;
+    },
+    sent() {
+      this.sending = false;
+      this.gotoFirstSelected();
     }
   },
 

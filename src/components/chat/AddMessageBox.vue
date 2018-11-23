@@ -13,6 +13,7 @@
       <label
         class="add-media-input btn-el"
         :class="{disabled: showTip}"
+        :disabled="disable"
         v-if="!preloadedMedias.length"
       >
         <input
@@ -42,6 +43,7 @@
           :minHeight="30"
           :maxHeight="100"
           @enter="sendMessage"
+          :disabled="disable"
         ></TextareaAutosize>
         <div class="price-message-wrapper">
           <span class="price-message"></span>
@@ -68,7 +70,11 @@
         <button class="setPrice btn">Set Price</button>
       </div>
       <button class="getPaid btn-el hidden"></button>
-      <button @click="sendMessage" class="submit btn-el" :disabled="!canSend"></button>
+      <button
+        @click="sendMessage"
+        class="submit btn-el"
+        :disabled="!canSend || disable"
+      ></button>
     </div>
   </div>
 </template>
@@ -93,6 +99,10 @@ export default {
   props: {
     user: {
       type: Object
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
 

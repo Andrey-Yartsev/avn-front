@@ -20,6 +20,10 @@
 
   &.transparent {
     background-color: transparent;
+
+    .loader-text {
+      color: $main-color;
+    }
   }
 
   &.page-loader {
@@ -55,6 +59,8 @@
 
   &.small {
     .loader-text {
+      font-size: 13px;
+
       &:after {
           width: 40px;
           height: 40px;
