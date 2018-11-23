@@ -158,13 +158,13 @@ export default {
 
   computed: {
     isHome() {
-      return this.routePath === "/chat";
+      return this.routePath === "chat";
     },
     isNew() {
-      return this.routePath === "/chat/new";
+      return this.routePath === "chat/new";
     },
     noMessages() {
-      return this.routePath === "/chat/no-messages";
+      return this.routePath === "chat/no-messages";
     },
     chats() {
       return this.$store.state.chat.chats.map(v => {

@@ -46,7 +46,7 @@ export default {
     },
     routePath() {
       if (this.mode === "default") {
-        return this.$route.path;
+        return this.$route.path.replace(/\/(.*)/, "$1");
       } else {
         return this.$store.state.modalRouter.route.path;
       }
