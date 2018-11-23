@@ -8,7 +8,9 @@ const state = {
   toastShowTrigger: false,
   toastText: "",
   error: null,
-  darkTheme
+  darkTheme,
+  showUserMobileBar: false,
+  userMobileBarOpening: false
 };
 
 const actions = {
@@ -27,6 +29,21 @@ const actions = {
   setDarkTheme({ commit }, darkTheme) {
     commit("setDarkTheme", darkTheme);
     BrowserStore.set("darkTheme", darkTheme);
+  },
+
+  openUserMobileBar({ commit }) {
+    commit("setUserMobileBarOpening", true);
+    setTimeout(() => {
+      commit("setUserMobileBarOpening", false);
+    }, 1000);
+    commit("showUserMobileBar", true);
+  },
+
+  hideUserMobileBar({ commit, state }) {
+    if (state.userMobileBarOpening) {
+      return;
+    }
+    commit("showUserMobileBar", false);
   }
 };
 
@@ -42,6 +59,14 @@ const mutations = {
 
   setDarkTheme(state, darkTheme) {
     state.darkTheme = darkTheme;
+  },
+
+  showUserMobileBar(state, show) {
+    state.showUserMobileBar = show;
+  },
+
+  setUserMobileBarOpening(state, opening) {
+    state.userMobileBarOpening = opening;
   }
 };
 

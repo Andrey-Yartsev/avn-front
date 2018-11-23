@@ -21,7 +21,7 @@
           <span class="user-login"><a>{{ profile.username }}</a></span>
         </div>
         <div class="profile-desc hidden-desktop">
-          <p class="profile-text" v-if="profile.about">{{ profile.about }}</p>
+          <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
           <a
             v-if="profile.twitterUsername"
             :href="'https://twitter.com/' + profile.twitterUsername"
@@ -59,7 +59,7 @@
               <span class="user-login"><a>{{ profile.username }}</a></span>
             </div>
             <div class="profile-desc">
-              <p class="profile-text"></p>
+              <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
               <a
                 v-if="profile.twitterUsername"
                 :href="'https://twitter.com/' + profile.twitterUsername"

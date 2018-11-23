@@ -3,9 +3,13 @@
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
-          <router-link :to="'/' + user.username" class="avatar header-avatar">
+          <a
+            :href="'/' + user.username"
+            class="avatar header-avatar"
+            @click.prevent="openUserMobileBar"
+          >
             <img v-if="user.avatar" :src="user.avatar">
-          </router-link>
+          </a>
           <h3>Messages</h3>
           <div class="newMessage-link">
             <span
@@ -122,6 +126,7 @@ import Loader from "@/components/common/Loader";
 import MobileHeader from "@/components/header/Mobile";
 import ClickOutside from "vue-click-outside";
 import ModalRouterParams from "@/mixins/modalRouter/params";
+import UserHeader from "@/components/header/User";
 
 export default {
   name: "Chat",
@@ -139,7 +144,8 @@ export default {
     NoConversations,
     Loader,
     MobileHeader,
-    ContactList
+    ContactList,
+    UserHeader
   },
 
   data() {
@@ -246,6 +252,9 @@ export default {
     },
     mobileBack() {
       this.goTo("/chat");
+    },
+    openUserMobileBar() {
+      this.$store.dispatch("global/openUserMobileBar");
     }
   },
 

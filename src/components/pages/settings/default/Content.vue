@@ -41,6 +41,7 @@
                 name="about"
                 :maxHeight="200"
                 v-model="localUser.about"
+                maxlength="500"
               ></TextareaAutosize>
             </label>
           </div>
