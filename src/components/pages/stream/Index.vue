@@ -163,7 +163,10 @@
         </select>
       </div>
       <div class="mediasBottom">
-        <button class="btn alt lg change-devices">Start live video</button>
+        <button
+          class="btn alt lg change-devices"
+          @click="startStream"
+        >Start live video</button>
       </div>
     </div>
   </div>
@@ -174,6 +177,7 @@ import Loader from "@/components/common/Loader";
 import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
 import Streams from "streaming-module";
+import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 
 export default {
@@ -270,7 +274,9 @@ export default {
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
     },
-
+    startStream() {
+      Streams.startStream();
+    },
     close() {
       this.$router.push("/");
     }
@@ -282,11 +288,12 @@ export default {
         : this.streamVisibilities[1];
 
     const { onDevicesReadyCallback } = this;
+    const token = this.$store.state.auth.token;
 
     Streams.init({
       thumbEnabled: true,
       videoSave: true,
-      getApiUrl: "https://gpu3.view.me/webrtc-api",
+      getApiUrl: StreamApi.getStreamPath(token),
       clientGetApiUrl: "https://gpu3.view.me/webrtc-api",
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
@@ -299,10 +306,23 @@ export default {
       onRemoteStreamInit() {},
       onStreamError(/* error*/) {
         // alert(error);
-        Streams.config.onStreamEnd();
+        // Streams.config.onStreamEnd();
       },
       onStreamTick(/* start */) {},
-      onStreamStart(/* roomName */) {},
+      onStreamStart: (room, resolve) => {
+        const type = this.streamVisibility.key;
+        StreamApi.runStream({
+          room,
+          type
+        })
+          .then(res => {
+            return res.json();
+          })
+          .then(({ id }) => {
+            Streams.config.clientGetApiUrl = `https://team2.retloko.com/api2/v2/streams/${id}/url?access-token=${token}`;
+            resolve();
+          });
+      },
       onStreamEnd() {},
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
@@ -311,15 +331,7 @@ export default {
     });
   },
   beforeDestroy() {
-    if (Streams.localStream) {
-      var tracks = Streams.localStream.getTracks();
-      if (tracks.length > 0) {
-        for (var i = tracks.length - 1; i >= 0; i--) {
-          tracks[i].stop();
-        }
-      }
-      Streams.localStream = null;
-    }
+    Streams.stopAllTracks(Streams.localStream);
   }
 };
 </script>
