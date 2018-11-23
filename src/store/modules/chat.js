@@ -47,6 +47,7 @@ const actions = {
           fromUserId: message.fromUser.id
         });
       }
+      commit("reorderChats", message.fromUser.id);
     }
   }
 };
@@ -87,6 +88,15 @@ const mutations = {
   },
   addMessage(state, message) {
     state.messages = [...state.messages, message];
+  },
+  reorderChats(state, lastMessageUserId) {
+    const lastMessageChat = state.chats.find(
+      chat => chat.withUser.id === lastMessageUserId
+    );
+    const filteredChats = state.chats.filter(
+      chat => chat.withUser.id !== lastMessageUserId
+    );
+    state.chats = [lastMessageChat].concat(filteredChats);
   }
 };
 
