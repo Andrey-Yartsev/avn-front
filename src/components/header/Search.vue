@@ -53,8 +53,8 @@
             @click.prevent="goTo('/search/users/' + query)"
             class="searchAllLink"
           >
-            Search all for&nbsp;{{ query }}
-            <span class="searchAllTag"></span>
+            Search all for&nbsp;
+            <span class="searchAllTag">{{ query }}</span>
           </a>
         </div>
         <button type="button" class="close" @click="reset"></button>

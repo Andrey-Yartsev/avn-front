@@ -126,6 +126,8 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     display: flex;
+    width: 100%;
+    flex: 1;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
