@@ -35,7 +35,7 @@ const actions = {
     commit("setUserMobileBarOpening", true);
     setTimeout(() => {
       commit("setUserMobileBarOpening", false);
-    }, 1000);
+    }, 100);
     commit("showUserMobileBar", true);
   },
 

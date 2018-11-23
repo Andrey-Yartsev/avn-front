@@ -15,12 +15,6 @@ import ClickOutside from "vue-click-outside";
 export default {
   name: "User",
 
-  data() {
-    return {
-      opening: false
-    };
-  },
-
   computed: {
     user() {
       return this.$store.state.auth.user;
