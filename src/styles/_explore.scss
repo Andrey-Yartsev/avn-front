@@ -92,6 +92,14 @@
       margin: 0;
     }
 
+    .searchView & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 1;
+        height: 44px;
+      }
+    }
+
     &.active,
     &:hover {
       color: $main-color;
@@ -102,7 +110,7 @@
 
       &:after {
 
-        .searchView {
+        .searchView & {
 
           @include media-breakpoint-down($desktop-breakpoint) {
             position: absolute;
