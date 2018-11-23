@@ -12,15 +12,10 @@
           </a>
           <h3>Messages</h3>
           <div class="newMessage-link">
-            <span
-              @click="goTo('/chat/new')"
-              class="newMessage newMessageEvent hidden-mobile"
-            >New message
-            </span>
             <a
               href="/chat/new"
               @click.prevent="goTo('/chat/new')"
-              class="newMessage hidden-desktop"
+              class="newMessage"
             >New message
             </a>
           </div>

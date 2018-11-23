@@ -876,22 +876,21 @@
   color: $secondary-color;
   display: inline-block;
   position: relative;
+  font-size: 0;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 1.25rem;
   text-indent: -999em;
-  width: 38px;
   cursor: pointer;
   transition: color 0.3s ease;
 
-  &:hover {
-    color: $secondary-color-darken;
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding-right: 2.1em;
+    padding-right: 29px;
     width: auto;
     text-indent: 0;
+    font-size: 15px;
+  }
+
+  &:hover {
+    color: $secondary-color-darken;
   }
 
   &:after {
@@ -899,19 +898,15 @@
     font-weight: 400;
     @include icon-font;
     font-size: 24px;
-    width: 1.6em;
     display: block;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    text-indent: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: auto;
+      position: absolute;
+      top: 50%;
       left: auto;
       right: 0;
-      transform: translate(0, 0);
+      transform: translate(0, -50%);
     }
   }
 }
@@ -938,12 +933,12 @@
 }
 
 .newMessage-link {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
-    margin: 2px -3px 0 0;
   }
 }
 
