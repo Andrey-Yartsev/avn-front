@@ -25,11 +25,14 @@ export default {
   },
 
   watch: {
-    showUserMobileBar(show) {
-      if (show) {
-        this._open();
-      } else {
-        this._hide();
+    showUserMobileBar: {
+      immediate: true,
+      handler(show) {
+        if (show) {
+          this._open();
+        } else {
+          this._hide();
+        }
       }
     }
   },
