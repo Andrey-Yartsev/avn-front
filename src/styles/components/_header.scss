@@ -800,6 +800,7 @@
   display: flex;
   z-index: 9;
   background: $white;
+
   @include media-breakpoint-down($desktop-breakpoint) {
     position: -webkit-sticky;
     position: sticky;
@@ -807,6 +808,7 @@
     box-shadow: 0 0 5px rgba(#000, 0.3);
     transition: transform 0.2s ease-in-out 0s;
   }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
   }
@@ -824,6 +826,11 @@
     color: inherit;
     font-size: 9px;
     border-bottom: 2px solid transparent;
+    font-weight: 500;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      line-height: 11px;
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 5px 0 0;
