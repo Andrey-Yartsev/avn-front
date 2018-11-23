@@ -87,8 +87,10 @@
                   <li><router-link class="profile-url" :to="'/' + activeUser.name">View profile</router-link></li>
                   <li v-if="activeUser.isBlocked"><a class="menu-block" @click="unblockActiveUser">Unblock user</a></li>
                   <li v-else><a class="menu-block" @click="blockActiveUser">Block user</a></li>
-                  <li v-if="deleteInProgress"><a>Deleting...</a></li>
-                  <li v-else><a class="menu-delete" @click="deleteConversation">Delete conversation</a></li>
+                  <template v-if="messages.length">
+                    <li v-if="deleteInProgress"><a>Deleting...</a></li>
+                    <li v-else><a class="menu-delete" @click="deleteConversation">Delete conversation</a></li>
+                  </template>
                   <li><a class="menu-report" @click="report">Report</a></li>
                   <li><a class="menu-cancel" @click="chatOptionsOpened = false">Cancel</a></li>
                   </ul>
