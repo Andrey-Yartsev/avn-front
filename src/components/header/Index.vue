@@ -26,11 +26,12 @@
             type="button"
             @click="openAddPostModal"
           >Share</button>
-          <a
-            href="/addPost"
+          <router-link
+            to="/addPost"
             class="btn make-post-btn hidden-desktop"
-            @click.prevent="openAddPostModal"
-          >Share</a>
+          >
+            Share
+          </router-link>
         </template>
         <template v-if="authSection">
           <router-link to="/register" class="register">Have an account?</router-link>

@@ -9,8 +9,8 @@
         @click="watchAll"
       >Watch All</button>
       <div class="stories-group__outer">
-        <scrolly class="stories-group" @scrollchange="scrollFunction">
-          <scrolly-viewport class="stories-group__inner">
+        <div class="stories-group">
+          <VuePerfectScrollbar class="stories-group__inner" @ps-scroll-x="scrollFunction" @ps-scroll-y="scrollFunction">
             <div v-if="!hasMine" class="storyView create-story-button" @click.prevent="addNewStory">
               <div class="story">
                 <div class="story-avatar">
@@ -32,10 +32,8 @@
               </div>
             </div>
             <StoryCollection :stories="stories" />
-          </scrolly-viewport>
-          <scrolly-bar axis="x"></scrolly-bar>
-          <scrolly-bar axis="y"></scrolly-bar>
-        </scrolly>
+          </VuePerfectScrollbar>
+        </div>
       </div>
     </div>
   </div>
@@ -43,14 +41,12 @@
 
 <script>
 import StoryCollection from "@/components/common/storyCollection/Index";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "StoriesWrapper",
   components: {
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar,
+    VuePerfectScrollbar,
     StoryCollection
   },
   computed: {
@@ -78,14 +74,14 @@ export default {
   },
   methods: {
     scrolledEnought(e) {
-      if (e.y.visible) {
-        const { viewportHeight, scrollTop, scrollHeight } = e.y;
-        return scrollHeight - (viewportHeight + scrollTop) < 450;
+      if (e.type === "ps-scroll-y") {
+        const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
+        return scrollHeight - (offsetHeight + scrollTop) < 450;
       }
 
-      if (e.x.visible) {
-        const { viewportWidth, scrollLeft, scrollWidth } = e.x;
-        return scrollWidth - (viewportWidth + scrollLeft) < 450;
+      if (e.type === "ps-scroll-x") {
+        const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
+        return scrollWidth - (offsetWidth + scrollLeft) < 450;
       }
 
       return false;

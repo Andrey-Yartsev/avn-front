@@ -6,12 +6,11 @@
       <div class="over-container">
         <Navigate />
         <div class="stories-all" v-if="page === 'all' && stories.length">
-          <scrolly class="exploreAllStoriesCollectionView" @scrollchange="scrollFunction">
-            <scrolly-viewport class="explore-stories">
+          <div class="exploreAllStoriesCollectionView">
+            <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
-            </scrolly-viewport>
-            <scrolly-bar axis="x"></scrolly-bar>
-          </scrolly>
+            </VuePerfectScrollbar>
+          </div>
         </div>
         <div class="explore">
           <div :class="{
@@ -51,7 +50,7 @@ import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "Explore",
@@ -62,9 +61,7 @@ export default {
     PostMedium,
     StoryMedium,
     StorySmall,
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar
+    VuePerfectScrollbar
   },
   mixins: [InfinityScrollMixin],
   created() {
@@ -124,8 +121,8 @@ export default {
   },
   methods: {
     scrollFunction(e) {
-      const { viewportWidth, scrollLeft, scrollWidth } = e.x;
-      const scrolledEnought = scrollWidth - (viewportWidth + scrollLeft) < 600;
+      const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
+      const scrolledEnought = scrollWidth - (offsetWidth + scrollLeft) < 600;
       if (
         scrolledEnought &&
         !this.storiesLoading &&
