@@ -1,6 +1,9 @@
 <template>
   <div class="addPostPage">
-    <AddPost :initialExpanded="true" />
+    <AddPost
+      :initialExpanded="true"
+      :close="close"
+    />
     <Footer />
   </div>
 </template>
@@ -14,6 +17,11 @@ export default {
   components: {
     Footer,
     AddPost
+  },
+  methods: {
+    close() {
+      this.$router.push("/");
+    }
   }
 };
 </script>
