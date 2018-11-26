@@ -327,6 +327,34 @@ video {
   }
 }
 
+.ps {
+
+  &:hover {
+
+    > .ps__scrollbar-y-rail {
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  > .ps__scrollbar-y-rail {
+
+    > .ps__scrollbar-y {
+      width: 4px;
+    }
+
+    &:hover,
+    &:active {
+
+      > .ps__scrollbar-y {
+        width: 4px;
+      }
+    }
+  }
+}
+
 .b-search-form {
   position: relative;
   width: 100%;
