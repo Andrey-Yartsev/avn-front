@@ -62,7 +62,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireNonAuth,
+    beforeEnter: Auth.requireAny,
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {
