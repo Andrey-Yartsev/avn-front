@@ -22,8 +22,11 @@
                 @click="goToStream"
               ><span class="addNewNav__text">Go live</span></span>
               <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
-              <input type="file" class="hidden storyFileSelect"
-                     accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
+              <input
+                type="file"
+                class="hidden storyFileSelect"
+                accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+              ></div>
           </div>
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
@@ -51,22 +54,22 @@
             @click="goToStream"
           ><span class="addNewNav__text">Go live</span></span>
           <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
-          <input type="file" class="hidden storyFileSelect"
-                 accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"></div>
+          <input
+            type="file"
+            class="hidden storyFileSelect"
+            accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+          ></div>
       </div>
       <div class="chatCollectionContentWrapper" :class="{'contacts-top': contactsScrollTop}">
         <div class="searchContact">
-          <scrolly class="all-contacts-found">
-            <scrolly-viewport>
-              <div class="selectedContacts" v-if="selected.length">
-                <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
-                  <span class="chatSelectedName">{{ v.withUser.name }}</span>
-                  <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
-                </div>
+          <VuePerfectScrollbar class="all-contacts-found">
+            <div class="selectedContacts" v-if="selected.length">
+              <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
+                <span class="chatSelectedName">{{ v.withUser.name }}</span>
+                <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
               </div>
-            </scrolly-viewport>
-            <scrolly-bar axis="y"></scrolly-bar>
-          </scrolly>
+            </div>
+          </VuePerfectScrollbar>
         </div>
         <div class="searchWrapper">
           <span class="sendTo">To</span>
@@ -80,31 +83,28 @@
             :class="{active: isAllSelected}"
           ></div>
         </div>
-        <scrolly class="searchChatContacts" @scrollchange="contactsScrollChange">
-          <scrolly-viewport ref="contacts">
-            <div class="searchResult">
-              <div
-                v-for="v in chats" v-bind:key="v.withUser.id"
-                class="searchChatContactsView"
-                @click="toggleSelect(v.withUser.id)"
-                :class="{active: isSelected(v.withUser.id)}"
-              >
-                    <span class="avatar">
-                      <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
-                    </span>
-                <div class="chatView__header">
-                  <span class="name">{{ v.withUser.name }}</span>
-                  <span class="verified-user" v-if="v.withUser.isVerified"></span>
-                </div>
-                <div class="user-login">
-                  <span class="username">{{ v.withUser.username }}</span>
-                </div>
-                <span class="check"></span>
+        <VuePerfectScrollbar class="searchChatContacts" @ps-scroll-y="contactsScrollChange" ref="contacts">
+          <div class="searchResult">
+            <div
+              v-for="v in chats" v-bind:key="v.withUser.id"
+              class="searchChatContactsView"
+              @click="toggleSelect(v.withUser.id)"
+              :class="{active: isSelected(v.withUser.id)}"
+            >
+                  <span class="avatar">
+                    <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                  </span>
+              <div class="chatView__header">
+                <span class="name">{{ v.withUser.name }}</span>
+                <span class="verified-user" v-if="v.withUser.isVerified"></span>
               </div>
+              <div class="user-login">
+                <span class="username">{{ v.withUser.username }}</span>
+              </div>
+              <span class="check"></span>
             </div>
-          </scrolly-viewport>
-          <scrolly-bar axis="y"></scrolly-bar>
-        </scrolly>
+          </div>
+        </VuePerfectScrollbar>
       </div>
     </template>
     <template slot="col2">
@@ -171,9 +171,9 @@ import User from "@/mixins/user";
 import ChatWrapper from "./Wrapper";
 import ChatAddMultiMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import Loader from "@/components/common/Loader";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "Chat",
@@ -185,9 +185,7 @@ export default {
   },
 
   components: {
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar,
+    VuePerfectScrollbar,
     ChatAddMultiMessage,
     ChatWrapper,
     Loader
