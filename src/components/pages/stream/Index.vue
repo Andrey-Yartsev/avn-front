@@ -1,5 +1,8 @@
 <template>
-  <div class="stream">
+  <div class="loader-container" v-if="!user">
+    <Loader :fullscreen="false" text="" class="transparent small" />
+  </div>
+  <div class="stream" v-else>
     <div class="main-container">
       <div class="mediasTop">
         <div class="mediasTop__header">
@@ -12,7 +15,7 @@
           <AddNewNav active="live" />
         </div>
         <div class="group-controls">
-          <div id="devices">
+          <div id="devices" v-if="isReadyToStart && !isStarted">
             <div 
               v-click-outside="hideStreamVisibilityMenu"
               :class="[
@@ -164,6 +167,7 @@
       </div>
       <div class="mediasBottom">
         <button
+          v-if="isReadyToStart && !isStarted"
           class="btn alt lg change-devices"
           @click="startStream"
         >Start live video</button>
@@ -197,7 +201,10 @@ export default {
 
       streamAudios: undefined,
       streamAudio: undefined,
-      shownStreamAudioMenu: false
+      shownStreamAudioMenu: false,
+
+      isReadyToStart: false,
+      isStarted: false
     };
   },
   components: {
@@ -269,6 +276,8 @@ export default {
         defaultVideoDevice
       } = Streams.getDevices();
 
+      this.isReadyToStart = true;
+
       this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
@@ -278,7 +287,11 @@ export default {
       Streams.startStream();
     },
     close() {
-      this.$router.push("/");
+      if (this.isStarted) {
+        Streams.stopStreaming();
+      } else {
+        this.$router.push("/");
+      }
     }
   },
   mounted() {
@@ -311,6 +324,8 @@ export default {
       onStreamTick(/* start */) {},
       onStreamStart: (room, resolve) => {
         const type = this.streamVisibility.key;
+        this.isStarted = true;
+
         StreamApi.runStream({
           room,
           type
