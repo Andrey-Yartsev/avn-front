@@ -10,7 +10,10 @@
         </span>
 
         <form class="blocked-search b-search-form">
-          <input type="text" class="rounded sm" placeholder="Search">
+          <input
+            type="text" class="rounded sm" placeholder="Search"
+            v-model="query"
+          >
           <button type="submit" disabled="" class="b-search-form__btn"></button>
         </form>
       </div>
@@ -89,9 +92,20 @@ export default {
     }
   },
 
+  data() {
+    return {
+      query: ""
+    };
+  },
+
   computed: {
     items() {
-      return this.$store.state.blocked.users;
+      let users = this.$store.state.blocked.users;
+      const query = this.query.trim();
+      if (query) {
+        users = users.filter(v => v.name.match(new RegExp(query)));
+      }
+      return users;
     }
   },
 
