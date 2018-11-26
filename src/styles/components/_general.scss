@@ -340,9 +340,11 @@ video {
   }
 
   > .ps__scrollbar-y-rail {
+    width: 4px;
 
     > .ps__scrollbar-y {
       width: 4px;
+      right: 0;
     }
 
     &:hover,
