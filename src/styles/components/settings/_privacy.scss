@@ -1,0 +1,32 @@
+@include media-breakpoint-down($desktop-breakpoint) {
+  .SettingsPrivacyView {
+    .TwitterBlockView {
+      display: none;
+    }
+  }
+}
+
+.TwitterView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .BlockedUsersCollectionView,
+    .private-profile-block,
+    .tweet-posts-block,
+    .go-twitter-block
+    {
+      display: none;
+    }
+  }
+}
+.BlockedView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .private-profile-block,
+    .tweet-posts-block,
+    .TwitterBlockView,
+    .go-twitter-block,
+    .go-blocked,
+    .form-title .inner .semi-transparent
+    {
+      display: none;
+    }
+  }
+}

@@ -14,9 +14,9 @@
 
 <script>
 import MobileMenu from "./MobileMenu";
-import MobileEmail from "./MobileEmail";
 import AllView from "./AllView";
 import User from "@/mixins/user";
+import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "AccountSettingsContent",
@@ -25,7 +25,6 @@ export default {
 
   components: {
     MobileMenu,
-    MobileEmail,
     AllView
   },
 
@@ -34,13 +33,7 @@ export default {
       return this.$route.params.view || "account";
     },
     viewClass() {
-      return this.ucFirst(this.view) + "View";
-    }
-  },
-
-  methods: {
-    ucFirst(name) {
-      return name.charAt(0).toUpperCase() + name.slice(1);
+      return ucFirst(this.view) + "View";
     }
   }
 };

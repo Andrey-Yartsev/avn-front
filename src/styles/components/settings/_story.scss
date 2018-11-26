@@ -1,0 +1,7 @@
+.BlockedView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .story-form {
+      display: none;
+    }
+  }
+}

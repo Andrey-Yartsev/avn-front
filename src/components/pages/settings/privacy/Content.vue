@@ -1,8 +1,16 @@
 <template>
-  <div class="SettingsPrivacyView">
-    <form id="SettingsPrivacyView" v-on:submit.stop.prevent="save">
+  <div :class="viewClass">
+    <div class="hidden-desktop" v-if="view === 'twitter'">
+      <div class="form-title">
+        <div class="inner">
+          <span class="semi-transparent">{{ user.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <form v-on:submit.stop.prevent="save">
       <h1 class="form-title">Privacy Settings</h1>
-      <div class="form-title border-top">
+      <div class="form-title private-profile-block border-top">
         <div class="inner">
             <span class="semi-transparent">
               Private Profile
@@ -32,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="form-title border-top disabled border-top-mobile">
+      <div class="form-title tweet-posts-block border-top disabled border-top-mobile">
         <div class="inner">
           <span class="semi-transparent">
             Tweet my posts
@@ -44,7 +52,7 @@
           </label>
         </div>
       </div>
-      <div class="shadow-block no-padding hidden-desktop">
+      <div class="go-twitter-block shadow-block no-padding hidden-desktop">
         <div class="settings-nav">
           <router-link
             to="/settings/privacy/twitter" class="settings-nav__item"
@@ -52,9 +60,9 @@
         </div>
       </div>
 
-      <div class="twitter-block hidden-mobile">
-        <ConnectTwitter @connected="twitterConnected"/>
-      </div>
+
+      <ConnectTwitter @connected="twitterConnected"/>
+
 
       <div class="container hidden-mobile">
         <div class="form-group">
@@ -65,7 +73,7 @@
         </div>
       </div>
     </form>
-    <BlockedUsers />
+    <BlockedUsers mobileBlockedRoute="/settings/privacy/blocked" />
   </div>
 </template>
 
@@ -73,15 +81,26 @@
 import Common from "../common";
 import BlockedUsers from "../BlockedUsers";
 import ConnectTwitter from "../ConnectTwitter";
+import User from "@/mixins/user";
+import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "PrivacySettingsContent",
 
-  mixins: [Common],
+  mixins: [Common, User],
 
   components: {
     BlockedUsers,
     ConnectTwitter
+  },
+
+  computed: {
+    view() {
+      return this.$route.params.view || "settingsPrivacy";
+    },
+    viewClass() {
+      return ucFirst(this.view) + "View";
+    }
   },
 
   methods: {

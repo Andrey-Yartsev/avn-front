@@ -24,7 +24,7 @@
       <button
         class="btn sm header-apply-btn"
         :disabled="!changed"
-        v-if="hasSaveButton"
+        v-if="showSaveButton"
         @click="save"
       >Save</button>
 
@@ -50,6 +50,7 @@ import Aside from "./Aside";
 import DefaultSection from "./default/Content";
 import Mobile from "./mobile";
 import User from "@/mixins/user";
+import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "Settings",
@@ -65,9 +66,11 @@ export default {
     isAccountPage() {
       return this.$route.name === "SettingsAccount";
     },
+    isPrivacyPage() {
+      return this.$route.name === "SettingsPrivacy";
+    },
     showLogoutButton() {
-      // todo: team2 has another logic
-      return this.isAccountPage;
+      return this.isAccountPage && !this.showSaveButton;
     },
     showUsernameAsTitle() {
       if (this.isAccountPage && !this.$route.params.view) {
@@ -76,12 +79,22 @@ export default {
       return false;
     },
     title() {
+      if (this.$route.params.view && this.$route.params.view === "blocked") {
+        return "Blocked Users";
+      }
       if (this.isAccountPage) {
         return this.accountViewToTitle(this.$route.params.view);
+      } else if (this.isPrivacyPage) {
+        if (this.$route.params.view) {
+          return ucFirst(this.$route.params.view);
+        }
       }
       return this.$route.meta.title;
     },
-    hasSaveButton() {
+    showSaveButton() {
+      if (this.isAccountPage && this.$route.params.view) {
+        return true;
+      }
       return (
         [
           "SettingsProfile",
@@ -99,6 +112,18 @@ export default {
       if (this.isAccountPage) {
         if (this.$route.params.view) {
           return "/settings/account";
+        } else {
+          return "/settings";
+        }
+      } else if (this.isPrivacyPage) {
+        if (this.$route.params.view) {
+          return "/settings/privacy";
+        } else {
+          return "/settings";
+        }
+      } else if (this.$route.name === "SettingsStory") {
+        if (this.$route.params.view) {
+          return "/settings/story";
         } else {
           return "/settings";
         }

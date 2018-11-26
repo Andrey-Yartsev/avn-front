@@ -1,18 +1,19 @@
 <template>
-  <div class="SettingsStoryView"><h1 class="form-title">
-    Story Settings
-  </h1>
-    <div class="form-title border-top">
-      <div class="inner">
+  <div :class="viewClass">
+    <form class="story-form" v-on:submit.stop.prevent="save">
+      <h1 class="form-title">
+        Story Settings
+      </h1>
+      <div class="form-title border-top">
+        <div class="inner">
         <span class="semi-transparent">
             Messages
             <p class="subtext">
               Choose who can reply to your story
             </p>
         </span>
+        </div>
       </div>
-    </div>
-    <form class="story-form" v-on:submit.stop.prevent="save">
       <div class="shadow-block">
         <div class="container">
           <div class="form-group radio-group">
@@ -80,13 +81,14 @@
         </div>
       </div>
     </form>
-    <BlockedUsers />
+    <BlockedUsers mobileBlockedRoute="/settings/story/blocked" />
   </div>
 </template>
 
 <script>
 import Common from "../common";
 import BlockedUsers from "../BlockedUsers";
+import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "StorySettingsContent",
@@ -95,6 +97,15 @@ export default {
 
   components: {
     BlockedUsers
+  },
+
+  computed: {
+    view() {
+      return this.$route.params.view || "settingsStory";
+    },
+    viewClass() {
+      return ucFirst(this.view) + "View";
+    }
   }
 };
 </script>

@@ -208,7 +208,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/story",
+    path: "/settings/story/:view?",
     component: SettingsStoryPage,
     name: "SettingsStory",
     meta: {
@@ -218,7 +218,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/privacy",
+    path: "/settings/privacy/:view?",
     component: SettingsPrivacyPage,
     name: "SettingsPrivacy",
     meta: {

@@ -50,21 +50,30 @@
         <div class="empty-table-info shadow-block" v-else><span>No one blocked yet</span></div>
       </div>
     </div>
-    <div class="shadow-block no-padding hidden-desktop settings-nav__wrapper">
+    <div class="go-blocked shadow-block no-padding hidden-desktop settings-nav__wrapper">
       <div class="settings-nav">
-        <div class="settings-nav__item empty">
-          <span class="not-lspacing">
-            Blocked
-          </span>
-          <span class="value">
-            <span class="count">0</span>
-            people
-          </span>
+        <div class="settings-nav__item empty" v-if="!items.length">
+            <span class="not-lspacing">
+              Blocked
+            </span>
+            <span class="value">
+              <span class="count">0</span>
+              people
+            </span>
         </div>
-
+        <router-link :to="mobileBlockedRoute" v-else class="settings-nav__item">
+            <span class="not-lspacing">
+              Blocked
+            </span>
+            <span class="value">
+              <span class="count">{{ items.length }}</span>
+              people
+            </span>
+         </router-link>
+        </div>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -72,6 +81,13 @@ import dateFns from "date-fns";
 
 export default {
   name: "BlockedUsers",
+
+  props: {
+    mobileBlockedRoute: {
+      type: String,
+      required: true
+    }
+  },
 
   computed: {
     items() {
