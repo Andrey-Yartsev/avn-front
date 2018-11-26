@@ -27,11 +27,12 @@
         </div>
         <router-link class="btn-settings hidden-mobile" to="/settings/notifications"></router-link>
       </div>
-
-      <div class="notifications">
+      <VuePerfectScrollbar class="notifications">
         <div
           class="NotificationsView"
-          :class="{[v.type]: true, unread: !v.isRead}" v-for="v in items" v-bind:key="v.id"
+          :class="{[v.type]: true, unread: !v.isRead}"
+          v-for="v in items"
+          v-bind:key="v.id"
         >
           <div class="avatars-wrapper">
             <router-link :to="'/' + v.user.username" class="avatar">
@@ -44,8 +45,7 @@
             {{ v.type }} your post
           </div>
         </div>
-      </div>
-
+      </VuePerfectScrollbar>
       <div class="msg-no-content">
         <div class="msg-no-content__text">
           {{ loading ? "Loading..." : "Nothing happened yet" }}
@@ -58,10 +58,10 @@
 
 <script>
 import dateFns from "date-fns";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 const typeTitles = {
   all: "Notifications",
@@ -80,9 +80,7 @@ export default {
   mixins: [ModalRouterParams, User],
 
   components: {
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar,
+    VuePerfectScrollbar,
     MobileHeader
   },
 
