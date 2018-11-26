@@ -6,19 +6,19 @@
         <div class="container">
             <div class="row">
                 <div class="content-col">
-                    <div class="rounded-container shadow-block no-padding">
-                        <AddPost></AddPost>
-                        <div class="feed">
-                          <PostCollection
-                            :posts="posts"
-                            from="home"
-                          />
-                        </div>
+                  <div class="rounded-container shadow-block no-padding">
+                    <AddPost></AddPost>
+                    <div class="feed">
+                      <PostCollection
+                        :posts="posts"
+                        from="home"
+                      />
                     </div>
+                  </div>
                 </div>
                 <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
-                    <StoriesWrapper></StoriesWrapper>
-                    <Footer></Footer>
+                  <StoriesWrapper></StoriesWrapper>
+                  <Footer></Footer>
                 </div>
             </div>
         </div>
