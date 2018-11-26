@@ -138,13 +138,6 @@
         @include media-breakpoint-down($desktop-breakpoint) {
           display: flex !important;
         }
-
-        .chat-section {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            //flex: 1;
-          }
-        }
       }
     }
 
@@ -190,7 +183,6 @@
         flex: 0 0 41%;
       }
 
-      //.header-nav,
       .add-new-type {
         width: 100%;
 

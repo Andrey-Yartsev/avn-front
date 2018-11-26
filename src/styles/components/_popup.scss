@@ -10,10 +10,6 @@
   justify-content: center;
   -webkit-overflow-scrolling: touch;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //overflow-y: scroll;
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 60px 80px;
     align-items: center;
@@ -292,10 +288,6 @@
         display: flex;
         align-content: center;
         align-items: center;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //display: none;
       }
 
       &:before {

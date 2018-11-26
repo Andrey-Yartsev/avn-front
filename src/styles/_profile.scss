@@ -55,34 +55,6 @@
   }
 }
 
-//.profile-header-page {
-//
-//  @include media-breakpoint-down($desktop-breakpoint) {
-//    position: -webkit-sticky;
-//    position: sticky;
-//    top: -150px;
-//    z-index: 3;
-//  }
-//
-//  @include media-breakpoint-up($desktop-breakpoint) {
-//    z-index: 5;
-//    display: block;
-//    padding: 0;
-//    margin: 0 0 25px;
-//    position: -webkit-sticky;
-//    position: sticky;
-//    top: 80px;
-//  }
-//
-//  .name {
-//    font-size: 17px;
-//
-//    @include media-breakpoint-up($desktop-breakpoint) {
-//      font-size: 21px;
-//    }
-//  }
-//}
-
 .profile-header {
   background: $white;
   position: relative;
@@ -842,24 +814,6 @@
       height: 100%;
       object-fit: cover;
     }
-
-    //&:empty {
-    //
-    //  &:before {
-    //    content: "";
-    //    position: absolute;
-    //    left: 0;
-    //    right: 0;
-    //    top: 0;
-    //    bottom: 0;
-    //    opacity: 0.4;
-    //    background-color: $light;
-    //  }
-    //
-    //  & ~ .select-user-image {
-    //    display: block;
-    //  }
-    //}
 
     .container {
       height: 32vw;
