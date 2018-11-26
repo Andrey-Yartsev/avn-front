@@ -46,11 +46,14 @@
     }
   }
 
-  .more-functions__btn {
+  .post-types-tabs {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 72px;
-      width: 72px;
+    .more-functions__btn {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 72px;
+        width: 72px;
+      }
     }
   }
 }
@@ -885,13 +888,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 0 0 76px;
       width: 76px;
-    }
-
-    &.more-functions {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 72px;
-        width: 72px;
-      }
+      padding-top: 12px;
     }
 
     &:hover,
@@ -974,7 +971,7 @@
     a {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 12px 0 8px;
+        padding-bottom: 8px;
       }
     }
   }
@@ -1045,7 +1042,7 @@
   .btns-user-activity {
     a {
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 12px 0 3px;
+        padding-bottom: 3px;
       }
     }
   }

@@ -173,7 +173,7 @@
 
   .comment-form {
     display: flex;
-    padding: 10px 15px 25px;
+    padding: 10px 15px;
     position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {

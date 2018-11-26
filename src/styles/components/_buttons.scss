@@ -199,6 +199,7 @@ button,
 .btn-edit-profile {
   color: $main-color;
   transition: all 0.3s;
+  opacity: 0.4;
 
   &:before {
     transition: all 0.3s;
@@ -206,19 +207,12 @@ button,
 
   &:hover {
     color: $main-color;
-  }
-}
-
-.btn-subscribe,
-.btn-edit-profile {
-  opacity: 0.4;
-
-  &:hover {
     opacity: 1;
   }
 }
 
 .btn-edit-profile {
+
   &:before {
     content: "\E63F";
     color: $main-color;
@@ -385,31 +379,6 @@ button,
   color: $main-color;
   opacity: 0.4;
 
-  &.selected {
-    opacity: 1;
-    color: $primary-color;
-
-    &:hover {
-      color: $primary-color-darken;
-    }
-  }
-
-  &.disable-state {
-    color: $main-color;
-    opacity: 0.4;
-  }
-
-  &:before {
-    content: "";
-    display: none;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.subscribe-cost {
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 100%;
   }
@@ -439,6 +408,29 @@ button,
       top: 0;
       transform: translateX(-50%);
     }
+  }
+
+  &.selected {
+    opacity: 1;
+    color: $primary-color;
+
+    &:hover {
+      color: $primary-color-darken;
+    }
+  }
+
+  &.disable-state {
+    color: $main-color;
+    opacity: 0.4;
+  }
+
+  &:before {
+    content: "";
+    display: none;
+  }
+
+  &:hover {
+    opacity: 1;
   }
 }
 
