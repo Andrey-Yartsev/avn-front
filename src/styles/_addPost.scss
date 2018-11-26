@@ -13,6 +13,13 @@
     }
   }
 
+  #site_header {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -51,7 +58,6 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 100%;
     background: $white;
-    margin-top: -44px;
     position: relative;
     z-index: 20;
 
@@ -207,7 +213,6 @@
   }
 
   .popup & {
-    margin-top: 44px;
     border-radius: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
