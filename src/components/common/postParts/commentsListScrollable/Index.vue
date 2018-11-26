@@ -6,8 +6,8 @@
       </div>
     </div>
     <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
-    <scrolly class="comments-list" v-if="comments.length">
-      <scrolly-viewport id="vue-comments-list" >
+    <div class="comments-list" v-if="comments.length">
+      <VuePerfectScrollbar id="vue-comments-list" >
         <Comment
           v-for="comment in visibleComments"
           :key="comment.id"
@@ -16,24 +16,20 @@
           v-on:commentReply="userName => $emit('commentReply', userName)"
           v-on:likeComment="data => $emit('likeComment', data)"
         />
-      </scrolly-viewport>
-      <scrolly-bar axis="y"></scrolly-bar>
-      <scrolly-bar axis="x"></scrolly-bar>
-    </scrolly>
+      </VuePerfectScrollbar>
+    </div>
   </div>
 </template>
 
 <script>
 import Comment from "@/components/common/postParts/comment/Index";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CommentsListFull",
   components: {
     Comment,
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar
+    VuePerfectScrollbar
   },
   data: function() {
     return {

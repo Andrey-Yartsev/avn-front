@@ -23,19 +23,15 @@
           maxlength="500"
           v-model="postMsg"
         ></textarea>
-        <scrolly class="addFileCollectionView">
-          <scrolly-viewport>
-            <MediaPreview
-              v-for="media in preloadedMedias"
-              :media="media"
-              :key="media.id"
-              @removeMedia="removeMedia"
-              :isSaving="isSaving"
-            />
-          </scrolly-viewport>
-          <scrolly-bar axis="x"></scrolly-bar>
-          <scrolly-bar axis="y"></scrolly-bar>
-        </scrolly>
+        <VuePerfectScrollbar class="addFileCollectionView">
+          <MediaPreview
+            v-for="media in preloadedMedias"
+            :media="media"
+            :key="media.id"
+            @removeMedia="removeMedia"
+            :isSaving="isSaving"
+          />
+        </VuePerfectScrollbar>
       </div>
       <div class="actions">
         <div class="actions-controls">
@@ -77,7 +73,7 @@
 </template>
 
 <script>
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
@@ -102,9 +98,7 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav,
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar
+    VuePerfectScrollbar
   },
   props: {
     initialExpanded: {
