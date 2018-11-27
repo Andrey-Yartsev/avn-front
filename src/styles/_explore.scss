@@ -64,11 +64,25 @@
       position: -webkit-sticky;
       position: sticky;
       top: 44px;
-      box-shadow: 0 0 5px rgba(#000, 0.3);
       line-height: 3em;
       font-weight: 500;
-      z-index: 9;
+      //z-index: 9;
       transition: all 0.2s ease-in-out 0s;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 10px;
+      bottom: 0;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
+      z-index: -1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
     }
 
     .scroll-top & {
@@ -97,6 +111,7 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         flex: 1;
         height: 44px;
+        background-color: $white;
       }
     }
 
@@ -172,6 +187,7 @@
   }
 
   > div {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
       display: flex;

@@ -90,6 +90,9 @@ export default {
       if (this.$store.state.modalRouter.loading) {
         return true;
       }
+      if (this.$store.state.auth.loginInProgress) {
+        return true;
+      }
       return this.$store.state.profile.fetchLoading;
     },
     error() {
@@ -148,6 +151,18 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("message", postMessageHandler);
+  },
+
+  mounted() {
+    let currentScroll = window.pageYOffset;
+    document.body.onscroll = function() {
+      if (currentScroll < window.pageYOffset) {
+        document.body.classList.add("scroll-top");
+      } else {
+        document.body.classList.remove("scroll-top");
+      }
+      currentScroll = window.pageYOffset;
+    };
   }
 };
 </script>

@@ -1,72 +1,52 @@
 <template>
-    <div class="photoView" :data-id="post.id">
-        <a
-          :class="['postLink', {
-            'photo-post': post.mediaType === 'image', 
-            'video-post': post.mediaType === 'video'
-          }]"
-          :to="`/post/${post.id}`"
-          @click.prevent="openModal"
-        >
-            <figure class="{'locked-wrapper': media.canView}">
-                <div v-if="!media.canView" class="locked-picture">
-                    <img class="locked" src="`data:image/jpeg;base64,${media.locked}`">
-                </div>
-                <template v-else>
-                    <img  :src="media.thumb.source">
-                    <span v-if="post.media.length > 1" class="count">
-                        <span class="value">{{ post.media.length }}</span>
-                    </span>
-                    <span class="overlay">
-                        <span class="likes">{{ post.favoritesCount }}</span>
-                        <span class="comments">{{ post.commentsCount }}</span>
-                    </span>
-                </template>
-            </figure>
-        </a>
+  <div class="liveView">
+    <div class="live">
+      <div v-if="duraion" class="duration hidden-mobile">
+        <span class="value">{{ duraion }}</span>
+      </div>
+      <span class="name">{{ user.name }}
+        <span v-if="user.isVerified" class="verified-user" />
+      </span>
+      <div class="overlay">
+        <span class="likes">{{ post.likesCount }}</span>
+        <span class="views">{{ post.viewsCount }}</span>
+      </div>
+      <span class="views">{{ post.viewsCount }}</span>
+      <img :src="post.thumbUrl">
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Post",
+  name: "Live",
   props: {
     post: {
       type: Object,
       required: true
-    },
-    from: {
-      type: String,
-      required: true
     }
   },
   computed: {
-    actionPrefix() {
-      return this.from;
+    user() {
+      return this.post.user;
     },
-    media() {
-      return this.post.media[0];
-    }
-  },
-  methods: {
-    openModal() {
-      this.$store.dispatch(
-        "modalRouter/updatePath",
-        `post/${this.post.id}/${this.from}`
-      );
-    },
-    getComments() {
-      const { id, commentsCount } = this.post;
-
-      if (commentsCount) {
-        this.$store.dispatch(this.actionPrefix + "/getPostComments", {
-          postId: id
-        });
+    duraion() {
+      const time = this.post.startedAt;
+      const date = Math.round(new Date(time).getTime() / 1000);
+      const today = Math.round(Date.now() / 1000);
+      const diff = today - date;
+      let hours;
+      let minutes;
+      let result = "";
+      if (3600 <= diff) {
+        hours = Math.floor(diff / 3600);
+        result = hours + " h";
+      } else if (60 <= diff) {
+        minutes = Math.ceil(diff / 300) * 5;
+        result = minutes + " min";
       }
+      return result;
     }
-  },
-  created() {
-    this.getComments();
   }
 };
 </script>

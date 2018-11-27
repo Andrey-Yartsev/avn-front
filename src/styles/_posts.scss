@@ -24,6 +24,11 @@
     &.open-dropdown-inside {
       z-index: 2;
       position: inherit;
+
+      .search-page & {
+        //z-index: 20;
+        //position: relative;
+      }
     }
 
     &:last-child {
@@ -515,6 +520,25 @@
         bottom: 0;
         padding: 0;
       }
+
+      .ps__scrollbar-x-rail,
+      .ps__scrollbar-y-rail {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+
+      .ps-container {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+      }
     }
 
     .load-more-comments {
@@ -544,17 +568,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
-    }
-  }
-
-  &.scrolly {
-
-    .scrolly-viewport {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        position: relative;
-        height: auto;
-      }
     }
   }
 

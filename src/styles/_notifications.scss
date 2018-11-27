@@ -266,6 +266,30 @@
         height: auto;
       }
     }
+
+    &:after {
+      content: "";
+      height: 60px;
+      clear: both;
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
+    &.ps {
+
+      &:hover {
+
+        > .ps__scrollbar-y-rail {
+
+          &:hover {
+            opacity: 0;
+          }
+        }
+      }
+    }
   }
 }
 
