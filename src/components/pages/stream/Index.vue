@@ -180,7 +180,7 @@
 import Loader from "@/components/common/Loader";
 import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
-import Streams from "streaming-module";
+import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 
@@ -284,11 +284,16 @@ export default {
       this.streamAudio = audioDevices[1];
     },
     startStream() {
+      this.isReadyToStart = false;
+      this.isStarted = true;
       Streams.startStream();
+    },
+    stopStream() {
+      Streams.stopStreaming();
     },
     close() {
       if (this.isStarted) {
-        Streams.stopStreaming();
+        this.stopStream();
       } else {
         this.$router.push("/");
       }
@@ -312,19 +317,19 @@ export default {
       token: (+new Date()).toString(36),
       streamSource: "client",
       showLikes: false,
-      showMessagemessage() {
+      showMessage(/* message */) {
         // alert(message);
       },
       onLocalStreamInit() {},
       onRemoteStreamInit() {},
-      onStreamError(/* error*/) {
-        // alert(error);
-        // Streams.config.onStreamEnd();
+      onStreamError(error) {
+        // eslint-disable-next-line
+        console.error(error);
+        Streams.config.onStreamEnd();
       },
       onStreamTick(/* start */) {},
-      onStreamStart: (room, resolve) => {
+      onStreamStart: room => {
         const type = this.streamVisibility.key;
-        this.isStarted = true;
 
         StreamApi.runStream({
           room,
@@ -335,10 +340,12 @@ export default {
           })
           .then(({ id }) => {
             Streams.config.clientGetApiUrl = `https://team2.retloko.com/api2/v2/streams/${id}/url?access-token=${token}`;
-            resolve();
           });
       },
-      onStreamEnd() {},
+      onStreamEnd: () => {
+        this.isReadyToStart = true;
+        this.isStarted = false;
+      },
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
       onCustomDataGet(/* message */) {},
