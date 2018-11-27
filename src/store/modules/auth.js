@@ -54,14 +54,16 @@ const actions = {
       .then(() => {
         commit("requestSuccess");
         Router.push("/", () => {
-          commit("loginSuccess");
+          commit("loginFinished");
         });
       })
       .catch(error => {
         if (error.code === 101) {
           commit("showCaptcha", true);
+          commit("loginFinished");
         } else {
           commit("requestFailure", error.message);
+          commit("loginFinished");
         }
         Router.push("/login");
       });
@@ -104,11 +106,10 @@ const mutations = {
     state.error = error;
     state.user = null;
     state.loading = false;
-    state.loginInProgress = false;
     BrowserStore.remove("user");
   },
 
-  loginSuccess(state) {
+  loginFinished(state) {
     state.loginInProgress = false;
   },
 
