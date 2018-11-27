@@ -285,48 +285,6 @@ video {
   min-height: 100%;
 }
 
-.scrolly-viewport {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding-right: 10px;
-  }
-}
-
-.scrolly-bar {
-
-  &.axis-x {
-    height: 4px;
-
-    .addFileCollectionView & {
-      border: none;
-      bottom: 5px;
-    }
-  }
-
-  &.axis-y {
-    width: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-sizing: content-box;
-
-    .comments-list &,
-    .chatCollectionView &,
-    .storyCollectionView & {
-      right: 0;
-      left: auto;
-      transform: translateX(0);
-    }
-
-    .storyCollectionView & {
-      border: none;
-    }
-
-    .comments-list & {
-      border: none;
-    }
-  }
-}
-
 .ps {
 
   &:hover {

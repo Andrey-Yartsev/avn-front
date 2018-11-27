@@ -65,7 +65,7 @@
   position: absolute;
   left: 16px;
   right: 16px;
-  top: 0;
+  max-height: 100%;
   bottom: 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -725,14 +725,6 @@
     .contactsListContent {
       position: relative;
       height: 100%;
-
-      .scrolly-viewport {
-        padding-right: 0;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          position: relative;
-        }
-      }
 
       .chatView {
         padding: 1em 1em 0.75em 0.8em;

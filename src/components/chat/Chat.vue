@@ -273,10 +273,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.contactsListContent .scrolly-bar {
-  border-width: 3px;
-  width: 10px;
-}
-</style>
