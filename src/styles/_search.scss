@@ -39,6 +39,13 @@
         margin: 0 0 30px;
       }
 
+      &.open-dropdown-inside {
+
+        .post-header {
+          z-index: auto;
+        }
+      }
+
       &-header {
         z-index: 3;
       }
@@ -95,7 +102,7 @@
       position: relative;
       width: 100%;
       min-height: calc(100% - 152px);
-      z-index: 10;
+      //z-index: 10;
     }
   }
 
@@ -120,17 +127,21 @@
 
   .over-container {
     position: relative;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
       max-width: 100%;
       width: 100%;
       margin: 0;
+      //z-index: 9;
     }
   }
 
   .content-nav {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       width: 100%;
+      z-index: 3;
     }
   }
 
@@ -148,8 +159,8 @@
 }
 
 .header-search-page {
-  position: relative;
-  background-color: $white;
+  //position: relative;
+  //background-color: $white;
   padding: 16px;
   width: 100%;
 
@@ -167,8 +178,12 @@
     transition: margin .2s;
   }
 
-  .scroll-top & {
-    margin-top: -44px;
+  .field {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      z-index: 1;
+    }
   }
 
   input[type="text"] {

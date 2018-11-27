@@ -24,6 +24,11 @@
     &.open-dropdown-inside {
       z-index: 2;
       position: inherit;
+
+      .search-page & {
+        //z-index: 20;
+        //position: relative;
+      }
     }
 
     &:last-child {
