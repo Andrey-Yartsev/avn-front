@@ -13,30 +13,32 @@
 .searchView {
 
   .posts {
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      column-gap: 30px;
-      column-count: 2;
-      padding: 30px 0 0;
-      margin-top: -30px;
-      column-fill: auto;
+      display: flex;
+      justify-content: space-between;
     }
 
     .post {
       background-color: $white;
 
-      .postCollectionView & {
-        padding-bottom: 0;
-        border-bottom: none;
-      }
-
       @include media-breakpoint-up($desktop-breakpoint) {
         box-shadow: 0 8px 30px rgba(#000, 0.1);
         border-bottom: none;
         width: 100%;
-        display: inline-block;
-        vertical-align: top;
-        break-inside: avoid;
         margin: 0 0 30px;
+      }
+
+      &:last-child {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          border-bottom: 1px solid rgba($gray, 0.2);
+        }
+      }
+
+      .postCollectionView & {
+        padding-bottom: 0;
+        border-bottom: none;
       }
 
       &.open-dropdown-inside {
@@ -46,30 +48,15 @@
         }
       }
 
-      &-header {
-        z-index: 3;
-      }
-
-      &-details {
+      &-column {
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          transform: translateZ(0);
-          background-color: $white;
-          position: relative;
+          flex: 0 0 calc(50% - 15px);
         }
+      }
 
-        /*
-        &:after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          z-index: 0;
-        }
-        */
-
+      &-header {
+        z-index: 3;
       }
 
       .actions {
@@ -79,10 +66,6 @@
           padding-bottom: 16px;
           z-index: 1;
         }
-      }
-
-      .text {
-        transform: rotateX(0);
       }
     }
   }
