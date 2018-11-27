@@ -341,7 +341,8 @@ video {
 
   > .ps__scrollbar-x-rail {
     height: 4px;
-
+    z-index: 2;
+    
     > .ps__scrollbar-x {
       height: 4px;
       bottom: 0;
@@ -358,6 +359,7 @@ video {
 
   > .ps__scrollbar-y-rail {
     width: 4px;
+    z-index: 2;
 
     > .ps__scrollbar-y {
       width: 4px;
