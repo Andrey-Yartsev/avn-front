@@ -151,6 +151,18 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("message", postMessageHandler);
+  },
+
+  mounted() {
+    let currentScroll = window.pageYOffset;
+    document.body.onscroll = function() {
+      if (currentScroll < window.pageYOffset) {
+        document.body.classList.add("scroll-top");
+      } else {
+        document.body.classList.remove("scroll-top");
+      }
+      currentScroll = window.pageYOffset;
+    };
   }
 };
 </script>
