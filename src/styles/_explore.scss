@@ -75,6 +75,7 @@
 
       @include media-breakpoint-down($desktop-breakpoint) {
         transform: translate3d(0, -44px, 0);
+        z-index: 12;
       }
     }
   }

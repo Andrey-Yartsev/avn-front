@@ -72,6 +72,24 @@
       }
     }
   }
+
+  &.hidden + .SessionsCollectionView {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+        height: 1px;
+        background: $gray;
+        opacity: 0.2;
+      }
+    }
+  }
 }
 
 .qr-code {
@@ -142,24 +160,6 @@
 }
 
 .SessionsCollectionView {
-
-  .otp-block.hidden + & {
-    
-    @include media-breakpoint-down($desktop-breakpoint) {
-      position: relative;
-
-      &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 15px;
-        right: 15px;
-        height: 1px;
-        background: $gray;
-        opacity: 0.2;
-      }
-    }
-  }
   
   .form-title {
     
@@ -238,7 +238,10 @@
   }
   .os {
     font-size: 13px;
-    margin-left: 5px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 10px;
+    }
   }
   .ip-country {
     font-size: 13px;

@@ -163,6 +163,14 @@
     top: -10px;
   }
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    transition: margin .2s;
+  }
+
+  .scroll-top & {
+    margin-top: -44px;
+  }
+
   input[type="text"] {
 
     @include media-breakpoint-down($desktop-breakpoint) {
