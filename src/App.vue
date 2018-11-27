@@ -90,6 +90,9 @@ export default {
       if (this.$store.state.modalRouter.loading) {
         return true;
       }
+      if (this.$store.state.auth.loginInProgress) {
+        return true;
+      }
       return this.$store.state.profile.fetchLoading;
     },
     error() {
