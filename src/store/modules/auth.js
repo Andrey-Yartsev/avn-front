@@ -6,6 +6,7 @@ import Router from "@/router";
 
 const state = {
   loading: false,
+  loginInProgress: false,
   error: null,
   showCaptcha: false,
   token: "",
@@ -50,7 +51,12 @@ const actions = {
         dispatch("profile/fetch", null, { root: true });
         commit("showCaptcha", false);
       })
-      .then(() => Router.push("/"))
+      .then(() => {
+        commit("requestSuccess");
+        Router.push("/", () => {
+          commit("loginSuccess");
+        });
+      })
       .catch(error => {
         if (error.code === 101) {
           commit("showCaptcha", true);
@@ -87,6 +93,7 @@ const mutations = {
   request(state) {
     state.error = null;
     state.loading = true;
+    state.loginInProgress = true;
   },
 
   requestSuccess(state) {
@@ -97,7 +104,12 @@ const mutations = {
     state.error = error;
     state.user = null;
     state.loading = false;
+    state.loginInProgress = false;
     BrowserStore.remove("user");
+  },
+
+  loginSuccess(state) {
+    state.loginInProgress = false;
   },
 
   logout(state) {
