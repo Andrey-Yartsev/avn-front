@@ -2,7 +2,7 @@
   <div class="post postPage">
     <div class="postPage-content">
       <div class="header-mobile">
-        <button class="header-return-btn"></button>
+        <button class="header-return-btn" @click="back"></button>
         <h1 class="page-title">Post</h1>
       </div>
       <Header
@@ -156,6 +156,13 @@ export default {
         addLike: !data.isLiked,
         commentId: data.commentId
       });
+    },
+    back() {
+      if (window.location.hash) {
+        window.location.hash = "";
+        return;
+      }
+      this.$router.push("/");
     }
   }
 };
