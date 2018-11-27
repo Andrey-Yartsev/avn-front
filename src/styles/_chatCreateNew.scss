@@ -95,18 +95,17 @@
   display: flex;
   flex-direction: column;
 
-  .scrolly-viewport {
+  &.ps {
     position: relative;
-    padding: 9px 16px 0;
+    padding: 0 16px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 20px;
       padding-right: 20px;
     }
 
-    &:empty {
-      padding-top: 0;
-      padding-bottom: 0;
+    &.ps--active-y {
+      padding-top: 9px;
     }
   }
 }

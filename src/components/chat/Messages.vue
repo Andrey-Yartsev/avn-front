@@ -1,54 +1,53 @@
 <template>
   <div class="chat-section">
-    <scrolly class="chat-wrapper">
-      <scrolly-viewport ref="messagesContainer">
-        <div
-          v-for="v in messages"
-          v-bind:key="v.id"
-          class="chatMessage notAuthorMessage"
-          :class="{
+    <VuePerfectScrollbar class="chat-wrapper" ref="messagesContainer">
+      <div class="chat-scrollbar">
+          <div
+            v-for="v in messages"
+            v-bind:key="v.id"
+            class="chatMessage notAuthorMessage"
+            :class="{
               authorMessage: isAuthor(v),
               firstMessageInGroup: v.firstMessageInGroup,
               withTime: v.lastMessageInGroup
-              }"
-        >
-          <div class="chatMessageWrapper">
-            <div class="avatar">
-              <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
-            </div>
-            <div class="messageContent">
-              <div
-                class="messageWrapper"
-                :class="{'tipsMessage': v.isTips}"
-              >
-                <span class="message" v-html="text(v)"></span>
-                <div class="media" v-if="v.media.length">
-                  <figure class="media-item active media-item_photo" data-index="0">
-                    <a class="postLink" :href="v.media[0].src.source" target="_blank">
-                      <img :src="v.media[0].src.source" width="760" height="428">
-                    </a>
-                  </figure>
-                </div>
+            }"
+          >
+            <div class="chatMessageWrapper">
+              <div class="avatar">
+                <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
               </div>
-              <div class="time" v-if="v.lastMessageInGroup">
-                <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
-                <span class="timeValue"> {{ time(v.changedAt) }}</span>
+              <div class="messageContent">
+                <div
+                  class="messageWrapper"
+                  :class="{'tipsMessage': v.isTips}"
+                >
+                  <span class="message" v-html="text(v)"></span>
+                  <div class="media" v-if="v.media.length">
+                    <figure class="media-item active media-item_photo" data-index="0">
+                      <a class="postLink" :href="v.media[0].src.source" target="_blank">
+                        <img :src="v.media[0].src.source" width="760" height="428">
+                      </a>
+                    </figure>
+                  </div>
+                </div>
+                <div class="time" v-if="v.lastMessageInGroup">
+                  <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
+                  <span class="timeValue"> {{ time(v.changedAt) }}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="chatMessageSending" v-if="sending">
-          Sending...
-        </div>
-      </scrolly-viewport>
-      <scrolly-bar axis="y"></scrolly-bar>
-    </scrolly>
+          <div class="chatMessageSending" v-if="sending">
+            Sending...
+          </div>
+      </div>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import userMixin from "@/mixins/user";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import dateFns from "date-fns";
 
@@ -56,9 +55,7 @@ export default {
   name: "ChatMessages",
 
   components: {
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar,
+    VuePerfectScrollbar,
     Loader
   },
 
@@ -197,15 +194,6 @@ export default {
 </script>
 
 <style scoped>
-.chat-wrapper {
-  width: 100%;
-  height: 100%;
-}
-
-.scrolly-viewport {
-  padding: 20px;
-}
-
 .chatMessageSending {
   margin: 5px 5px 40px 5px;
   text-align: right;

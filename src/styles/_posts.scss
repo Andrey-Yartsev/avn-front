@@ -568,6 +568,19 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ps {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        top: 0;
+        bottom: 9px;
+      }
     }
   }
 

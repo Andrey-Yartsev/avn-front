@@ -1,43 +1,40 @@
 <template>
   <div class="contactsList">
-    <scrolly class="contactsListContent">
-      <scrolly-viewport ref="messages">
-        <div
-          @click="openChat(v.withUser.id)"
-          class="chatView"
-          v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
-        >
-          <div class="avatar"></div>
-          <div class="chatViewContent">
-            <div class="chatView__header">
-              <span class="name">{{ v.withUser.name }}</span>
-              <span class="verified-user" v-if="v.withUser.isVerified"></span>
-              <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
-              <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
-            </div>
-            <div class="chatView__body">
-              <p class="typing">
-                <template v-if="v.lastMessage">
-                  <span v-if="v.lastMessage.media.length" class="type-msg-icn type-msg-icn_media">x</span>
-                  <span v-else class="message">
-                    <span v-if="v.lastMessage.isTips" class="type-msg-icn type-msg-icn_tips">x</span>
-                    <template v-else>{{ stripHtml(v.lastMessage.text) }}</template>
-                  </span>
-                </template>
-                <span class="isTyping">tester is typing...</span>
-              </p>
-            </div>
+    <VuePerfectScrollbar class="contactsListContent" ref="messages">
+      <div
+        @click="openChat(v.withUser.id)"
+        class="chatView"
+        v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
+      >
+        <div class="avatar"></div>
+        <div class="chatViewContent">
+          <div class="chatView__header">
+            <span class="name">{{ v.withUser.name }}</span>
+            <span class="verified-user" v-if="v.withUser.isVerified"></span>
+            <span class="user-login"><span class="username">{{ v.withUser.username }}</span></span>
+            <div class="time" v-if="v.lastMessage">{{ messageTime(v.lastMessage) }}</div>
+          </div>
+          <div class="chatView__body">
+            <p class="typing">
+              <template v-if="v.lastMessage">
+                <span v-if="v.lastMessage.media.length" class="type-msg-icn type-msg-icn_media">x</span>
+                <span v-else class="message">
+                  <span v-if="v.lastMessage.isTips" class="type-msg-icn type-msg-icn_tips">x</span>
+                  <template v-else>{{ stripHtml(v.lastMessage.text) }}</template>
+                </span>
+              </template>
+              <span class="isTyping">tester is typing...</span>
+            </p>
           </div>
         </div>
-      </scrolly-viewport>
-      <scrolly-bar axis="y"></scrolly-bar>
-    </scrolly>
+      </div>
+    </VuePerfectScrollbar>
   </div>
 </template>
 
 <script>
 import dateFns from "date-fns";
-import { Scrolly, ScrollyViewport, ScrollyBar } from "vue-scrolly";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
@@ -46,9 +43,7 @@ export default {
   mixins: [ModalRouterGoto],
 
   components: {
-    Scrolly,
-    ScrollyViewport,
-    ScrollyBar
+    VuePerfectScrollbar
   },
 
   props: {
