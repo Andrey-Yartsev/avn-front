@@ -31,6 +31,9 @@
               <template v-if="page === 'stories'">
                 <StoryMedium v-for="post in stories" :post="post" :key="post.id" from="explore" />
               </template>
+              <template v-if="page === 'lives'">
+                <Live v-for="post in lives" :post="post" :key="post.id" from="explore" />
+              </template>
             </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">
               <div class="msg-no-content__text">No posts here yet</div>
@@ -48,6 +51,7 @@ import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
+import Live from "@/components/live/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
@@ -61,6 +65,7 @@ export default {
     PostMedium,
     StoryMedium,
     StorySmall,
+    Live,
     VuePerfectScrollbar
   },
   mixins: [InfinityScrollMixin],
@@ -73,6 +78,9 @@ export default {
     },
     stories() {
       return this.$store.state.stories.posts;
+    },
+    lives() {
+      return this.$store.state.lives.posts;
     },
     storiesLoading() {
       return this.$store.state.stories.loading;
@@ -95,7 +103,7 @@ export default {
       }
     },
     shouldShowNoPosts() {
-      const { loading, posts } = this.$store.state.explore;
+      const { loading, posts } = this.store;
       return !loading && !posts.length;
     },
     page() {
