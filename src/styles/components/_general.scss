@@ -339,6 +339,23 @@ video {
     }
   }
 
+  > .ps__scrollbar-x-rail {
+    height: 4px;
+
+    > .ps__scrollbar-x {
+      height: 4px;
+      bottom: 0;
+    }
+
+    &:hover,
+    &:active {
+
+      > .ps__scrollbar-x {
+        height: 4px;
+      }
+    }
+  }
+
   > .ps__scrollbar-y-rail {
     width: 4px;
 
