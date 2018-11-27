@@ -61,6 +61,19 @@
   }
 }
 
+.chat-scrollbar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  bottom: 0;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    left: 20px;
+    right: 20px;
+  }
+}
+
 .chatCollectionView,
 .chatCreateNewView {
   height: 100%;
