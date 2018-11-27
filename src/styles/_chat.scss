@@ -42,18 +42,22 @@
 }
 
 .chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 16px;
 
-  &.scrolly {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-    .scrolly-viewport {
-      height: auto;
-      max-height: 100%;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
+  &.ps {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 }
 

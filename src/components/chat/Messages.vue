@@ -192,12 +192,6 @@ export default {
 </script>
 
 <style scoped>
-.chat-wrapper {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-}
-
 .chatMessageSending {
   margin: 5px 5px 40px 5px;
   text-align: right;
