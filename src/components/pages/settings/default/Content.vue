@@ -187,6 +187,9 @@ export default {
 
   watch: {
     about() {
+      if (!this.localUser.about) {
+        return "";
+      }
       this.localUser.about = this.localUser.about.replace(
         new RegExp("<br />", "g"),
         ""
