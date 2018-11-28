@@ -295,6 +295,29 @@ video {
         background-color: transparent;
       }
     }
+
+    &.ps--in-scrolling {
+
+      &.ps--y {
+
+        > .ps__scrollbar-y-rail {
+
+          >.ps__scrollbar-y {
+            width: 4px;
+          }
+        }
+      }
+
+      &.ps--x {
+
+        > .ps__scrollbar-x-rail {
+
+          >.ps__scrollbar-x {
+            height: 4px;
+          }
+        }
+      }
+    }
   }
 
   > .ps__scrollbar-x-rail {
@@ -329,6 +352,29 @@ video {
 
       > .ps__scrollbar-y {
         width: 4px;
+      }
+    }
+  }
+
+  &.ps--in-scrolling {
+
+    &.ps--y {
+
+      > .ps__scrollbar-y-rail {
+
+        >.ps__scrollbar-y {
+          width: 4px;
+        }
+      }
+    }
+
+    &.ps--x {
+
+      > .ps__scrollbar-x-rail {
+
+        >.ps__scrollbar-x {
+          height: 4px;
+        }
       }
     }
   }
