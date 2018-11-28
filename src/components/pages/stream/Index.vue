@@ -54,7 +54,6 @@
                     'device-disabled': streamVideo.deviceId === 'disabled'
                   }
                 ]">
-              >
                 <button type="button" class="root-btn" @click="showStreamVideoMenu">
                   <span class="root-btn__inside" />
                 </button>
@@ -81,7 +80,6 @@
                     'device-disabled': streamAudio.deviceId === undefined
                   }
                 ]">
-              >
                 <button type="button" class="root-btn" @click="showStreamAudioMenu">
                   <span class="root-btn__inside" />
                 </button>
