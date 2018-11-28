@@ -453,7 +453,7 @@ button,
 
 .btn-like {
   position: absolute;
-  right: 2px;
+  right: 0;
   top: 13px;
   font-size: 19px;
   padding: 0;
@@ -462,6 +462,15 @@ button,
   opacity: 0.15;
   transition: all 0.3s ease;
   color: inherit;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    right: 2px;
+
+    &:hover {
+      opacity: 1;
+      color: $primary-color;
+    }
+  }
 
   &:before {
     content: "\E616";
@@ -472,18 +481,11 @@ button,
     opacity: 1;
     color: $primary-color;
   }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-
-    &:hover {
-      opacity: 1;
-      color: $primary-color;
-    }
-  }
 }
 
 .likes,
-.comments {
+.comments,
+.looking {
   display: inline-block;
   height: 30px;
 
@@ -503,10 +505,18 @@ button,
     content: "\E616";
   }
 }
+
 .comments {
 
   &:before {
     content: "\E617";
+  }
+}
+
+.looking {
+
+  &:before {
+    content: "\E633";
   }
 }
 

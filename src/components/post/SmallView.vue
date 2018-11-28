@@ -1,5 +1,5 @@
 <template>
-    <div class="explore-item explore-item_col" :data-id="post.id">
+    <div class="explore-item explore-item_col explore-item_col-3" :data-id="post.id">
         <a
           :class="['postLink', {
             'photo-post': post.mediaType === 'image', 

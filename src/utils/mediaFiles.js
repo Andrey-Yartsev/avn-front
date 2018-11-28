@@ -94,6 +94,6 @@ export const fileUpload = ({ id, file }, onProgress) =>
         reject();
       }
     };
-    xhr.open("POST", `https://converter.retloko.com/file/upload`, true);
+    xhr.open("POST", `${process.env.VUE_APP_CONVERTER_URL}/file/upload`, true);
     xhr.send(formData);
   });

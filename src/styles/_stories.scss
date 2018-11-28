@@ -123,11 +123,9 @@
 
   .stories {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
-      min-height: auto;
+    .story {
 
-      .story {
+      @include media-breakpoint-down($desktop-breakpoint) {
         margin-right: 23px;
         width: 56px;
       }
@@ -137,17 +135,13 @@
 
       .storyView {
         background: $white;
-        margin: 0 0 2px 3px;
         position: relative;
         cursor: pointer;
         text-align: center;
         box-shadow: none;
         transition: box-shadow 0.3s ease;
-        width: calc(33.3% - 3px);
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          width: calc(25% - 30px);
-          margin: 0 15px 33px;
           box-shadow: 0 3px 6px rgba(#000, 0.1);
         }
 
@@ -193,8 +187,6 @@
 
           .name {
             max-width: 80%;
-            font-weight: 500;
-            @include ellipsis;
 
             @include media-breakpoint-down($desktop-breakpoint) {
               font-size: 11px;
@@ -475,24 +467,6 @@
 .amount-items {
   opacity: 0.5;
   font-size: 13px;
-}
-
-.stories {
-
-  &.explore-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -3px;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      align-items: flex-start;
-      align-content: flex-start;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 -10px;
-    }
-  }
 }
 
 .stories-all {

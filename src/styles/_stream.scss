@@ -1,5 +1,46 @@
 @import "components/imports";
 
+.stream_enabled {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99;
+
+  &:before {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+    opacity: 0.2;
+    content: "";
+    z-index: 100;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 75px;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    pointer-events: none;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+    opacity: 0.2;
+    content: "";
+    z-index: 100;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 80px;
+    }
+  }
+}
+
 .stream-video-container {
   position: fixed;
   left: 0;
@@ -29,16 +70,16 @@
   bottom: 0;
 
   &:before {
-    position: fixed;
-    pointer-events: none;
-    top: 0;
-    height: 70px;
-    background: linear-gradient(to bottom, #000 0%, transparent 100%);
-    opacity: 0.2;
-    content: "";
-    left: 0;
-    right: 0;
-    z-index: 1;
+    //position: fixed;
+    //pointer-events: none;
+    //top: 0;
+    //height: 70px;
+    //background: linear-gradient(to bottom, #000 0%, transparent 100%);
+    //opacity: 0.2;
+    //content: "";
+    //left: 0;
+    //right: 0;
+    //z-index: 1;
   }
 
   &:after {
@@ -152,7 +193,7 @@
 
 .stream-comments-wrapper {
   position: absolute;
-  left: 15px;
+  left: 12px;
   bottom: 108px;
   z-index: 3;
   color: #fff;
@@ -170,7 +211,7 @@
   );
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    left: 20px;
+    left: 17px;
     bottom: 111px;
     height: 184px;
   }
@@ -186,22 +227,22 @@
   .item {
     display: flex;
     align-items: center;
-    margin: 11px 0 0;
+    margin: 5px 0 0;
     width: 100%;
+    padding: 3px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 16px 0 0;
+      margin: 8px 0 0;
     }
 
     .avatar {
       font-size: 24px;
       margin-right: 10px;
     }
+  }
 
-    .name {
-      font-weight: 500;
-      margin-right: 6px;
-    }
+  .name {
+    margin-right: 6px;
   }
 }
 
@@ -243,6 +284,8 @@
   .stream-comment-input {
     background: rgba(#000, 0.2);
     color: #fff;
+    border-radius: 22px;
+    padding-left: 17px;
   }
 
   .stream-comment-send-btn {

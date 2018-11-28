@@ -1,18 +1,22 @@
 <template>
-  <div class="liveView">
-    <div class="live">
-      <div v-if="duraion" class="duration hidden-mobile">
-        <span class="value">{{ duraion }}</span>
-      </div>
-      <span class="name">{{ user.name }}
-        <span v-if="user.isVerified" class="verified-user" />
-      </span>
-      <div class="overlay">
-        <span class="likes">{{ post.likesCount }}</span>
-        <span class="views">{{ post.viewsCount }}</span>
-      </div>
-      <span class="views">{{ post.viewsCount }}</span>
-      <img :src="post.thumbUrl">
+  <div class="explore-item explore-item_col explore-item_col-4 liveView">
+    <div class="postLink live">
+      <figure class="explore-media">
+        <img :src="post.thumbUrl">
+        <div v-if="duraion" class="item-length item-length_live hidden-mobile">
+          <span class="value">{{ duraion }}</span>
+        </div>
+        <div class="overlay">
+          <span class="likes">{{ post.likesCount }}</span>
+          <span class="looking">{{ post.viewsCount }}</span>
+        </div>
+        <div class="live-short-info">
+          <span class="looking">{{ post.viewsCount }}</span>
+            <span class="name">{{ user.name }}
+            <span v-if="user.isVerified" class="verified-user" />
+          </span>
+        </div>
+      </figure>
     </div>
   </div>
 </template>
