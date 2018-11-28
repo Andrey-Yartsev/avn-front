@@ -32,7 +32,7 @@ export const getMediaFileMeta = file => {
       resolve({
         mediaType,
         preview: mediaType !== "video" ? preview : undefined,
-        fileContent
+        file
       });
 
       reader = null;
@@ -43,35 +43,48 @@ export const getMediaFileMeta = file => {
 };
 
 export const getMediaFilePreview = (media, callback) => {
-  let video = document.createElement("video");
-
-  video.addEventListener("loadeddata", () => {
-    let canvas = document.createElement("canvas");
-    const { videoWidth, videoHeight } = video;
-
-    canvas.setAttribute("width", videoWidth);
-    canvas.setAttribute("height", videoHeight);
-    canvas.getContext("2d").drawImage(video, 0, 0, videoWidth, videoHeight);
-
-    const preview = canvas.toDataURL("image/jpeg");
-
-    video = null;
-    canvas = null;
-
-    callback({
-      ...media,
-      preview
+  const { file } = media;
+  const fileReader = new FileReader();
+  fileReader.onload = function() {
+    const blob = new Blob([fileReader.result], { type: file.type });
+    const url = URL.createObjectURL(blob);
+    const video = document.createElement("video");
+    const timeupdate = function() {
+      if (snapImage()) {
+        video.removeEventListener("timeupdate", timeupdate);
+        video.pause();
+      }
+    };
+    video.addEventListener("loadeddata", function() {
+      if (snapImage()) {
+        video.removeEventListener("timeupdate", timeupdate);
+      }
     });
-  });
-
-  video.addEventListener("error", () => {
-    callback({
-      ...media,
-      previewError: true
-    });
-  });
-
-  video.setAttribute("src", media.fileContent);
+    const snapImage = function() {
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas
+        .getContext("2d")
+        .drawImage(video, 0, 0, canvas.width, canvas.height);
+      const image = canvas.toDataURL();
+      const success = image.length > 100000;
+      if (success) {
+        callback({
+          ...media,
+          preview: image
+        });
+      }
+      return success;
+    };
+    video.addEventListener("timeupdate", timeupdate);
+    video.preload = "metadata";
+    video.src = url;
+    video.muted = true;
+    video.playsInline = true;
+    video.play();
+  };
+  fileReader.readAsArrayBuffer(file);
 };
 
 export const fileUpload = ({ id, file }, onProgress) =>
