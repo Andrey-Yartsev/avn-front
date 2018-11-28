@@ -1,10 +1,10 @@
 @import "components/imports";
 .photos {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -3px;
-  align-content: flex-start;
-  align-items: flex-start;
+  //display: flex;
+  //flex-wrap: wrap;
+  //margin-left: -3px;
+  //align-content: flex-start;
+  //align-items: flex-start;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     overflow: hidden;
@@ -14,7 +14,7 @@
     }
   }
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin-left: -30px;
+    //margin-left: -30px;
   }
 }
 .photoCollectionView {
@@ -26,24 +26,34 @@
 }
 
 .explore-item {
-  margin: 0 0 3px 3px;
+  //margin: 0 0 3px 3px;
   position: relative;
   overflow: hidden;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 0 0 30px 30px;
+    //margin: 0 0 30px 30px;
   }
 
   &_col {
-    width: calc(33.33% - 3px);
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: calc(33.33% - 30px);
-    }
+    //width: calc(33.33% - 3px);
+    //
+    //&-3 {
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    width: calc(33.33% - 30px);
+    //  }
+    //}
+    //
+    //&-4 {
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    width: calc(25% - 30px);
+    //  }
+    //}
 
     .all & {
-      width: auto;
-      margin: 0;
+      //width: auto;
+      //margin: 0;
     }
 
     &:after {
@@ -210,6 +220,13 @@
 
       &:after {
         content: "\E635";
+      }
+    }
+
+    &_live {
+
+      &:after {
+        content: "\E621";
       }
     }
 

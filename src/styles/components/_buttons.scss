@@ -483,7 +483,8 @@ button,
 }
 
 .likes,
-.comments {
+.comments,
+.looking {
   display: inline-block;
   height: 30px;
 
@@ -503,10 +504,18 @@ button,
     content: "\E616";
   }
 }
+
 .comments {
 
   &:before {
     content: "\E617";
+  }
+}
+
+.looking {
+
+  &:before {
+    content: "\E633";
   }
 }
 
