@@ -114,7 +114,7 @@
               playsinline=""
             />
           </div>
-          <div id="stream-timer"></div>
+          <div id="stream-timer">{{ time }}</div>
           <div class="stream-online-label">live</div>
           <div class="stream-comments-wrapper">
               <div class="item">
@@ -205,7 +205,9 @@ export default {
       shownStreamAudioMenu: false,
 
       isReadyToStart: false,
-      isStarted: false
+      isStarted: false,
+      time: undefined,
+      startedStreamId: undefined
     };
   },
   components: {
@@ -284,6 +286,18 @@ export default {
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
     },
+    tick(start) {
+      const diff = Math.round(new Date().getTime() / 1000) - start;
+      const date = new Date(diff * 1000);
+      let hours = date.getHours();
+      let mins = date.getMinutes();
+      let secs = date.getSeconds();
+      hours = hours < 10 ? `0${hours}` : `${hours}`;
+      mins = mins < 10 ? `0${mins}` : `${mins}`;
+      secs = secs < 10 ? `0${secs}` : `${secs}`;
+      this.time =
+        diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
+    },
     startStream() {
       this.isReadyToStart = false;
       this.isStarted = true;
@@ -308,7 +322,7 @@ export default {
 
     const { onDevicesReadyCallback } = this;
     const token = this.$store.state.auth.token;
-
+    window.Streams = Streams;
     Streams.init({
       thumbEnabled: true,
       videoSave: true,
@@ -318,8 +332,9 @@ export default {
       token: (+new Date()).toString(36),
       streamSource: "client",
       showLikes: false,
-      showMessage(/* message */) {
-        // alert(message);
+      showMessage(message) {
+        // eslint-disable-next-line
+        console.log(message);
       },
       onLocalStreamInit() {},
       onRemoteStreamInit() {},
@@ -328,7 +343,9 @@ export default {
         console.error(error);
         Streams.config.onStreamEnd();
       },
-      onStreamTick(/* start */) {},
+      onStreamTick: start => {
+        this.tick(start);
+      },
       onStreamStart: room => {
         const type = this.streamVisibility.key;
 
@@ -340,12 +357,16 @@ export default {
             return res.json();
           })
           .then(({ id }) => {
+            this.startedStreamId = id;
             Streams.config.clientGetApiUrl = `https://team2.retloko.com/api2/v2/streams/${id}/url?access-token=${token}`;
           });
       },
       onStreamEnd: () => {
+        this.time = undefined;
         this.isReadyToStart = true;
         this.isStarted = false;
+        StreamApi.deleteStream(this.startedStreamId);
+        this.startedStreamId = undefined;
       },
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
