@@ -1,21 +1,23 @@
 <template>
   <div class="posts">
-    <div class="post-column">
-      <Post
-        v-for="post in posts1"
-        v-bind:key="post.id"
-        :post="post"
-        from="search/page"
-      />
-    </div>
-    <div class="post-column">
-      <Post
-        v-for="post in posts2"
-        v-bind:key="post.id"
-        :post="post"
-        from="search/page"
-      />
-    </div>
+    <template v-if="items.length">
+      <div class="post-column">
+        <Post
+          v-for="post in posts1"
+          v-bind:key="post.id"
+          :post="post"
+          from="search/page"
+        />
+      </div>
+      <div class="post-column">
+        <Post
+          v-for="post in posts2"
+          v-bind:key="post.id"
+          :post="post"
+          from="search/page"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
