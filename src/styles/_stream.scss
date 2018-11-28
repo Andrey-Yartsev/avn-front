@@ -152,7 +152,7 @@
 
 .stream-comments-wrapper {
   position: absolute;
-  left: 15px;
+  left: 12px;
   bottom: 108px;
   z-index: 3;
   color: #fff;
@@ -170,7 +170,7 @@
   );
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    left: 20px;
+    left: 17px;
     bottom: 111px;
     height: 184px;
   }
@@ -186,22 +186,22 @@
   .item {
     display: flex;
     align-items: center;
-    margin: 11px 0 0;
+    margin: 5px 0 0;
     width: 100%;
+    padding: 3px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 16px 0 0;
+      margin: 10px 0 0;
     }
 
     .avatar {
       font-size: 24px;
       margin-right: 10px;
     }
+  }
 
-    .name {
-      font-weight: 500;
-      margin-right: 6px;
-    }
+  .name {
+    margin-right: 6px;
   }
 }
 
@@ -243,6 +243,11 @@
   .stream-comment-input {
     background: rgba(#000, 0.2);
     color: #fff;
+
+    &:hover,
+    &:focus {
+      background: rgba(#fff, 0.2);
+    }
   }
 
   .stream-comment-send-btn {
