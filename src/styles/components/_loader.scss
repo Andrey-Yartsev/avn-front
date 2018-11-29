@@ -58,8 +58,13 @@
   }
 
   &.small {
+
     .loader-text {
       font-size: 13px;
+
+      span {
+        opacity: .5;
+      }
 
       &:after {
           width: 40px;

@@ -34,6 +34,17 @@
     &:last-child {
       border-bottom: none;
     }
+
+    &_preparation {
+
+      .lds-dual-ring {
+        pointer-events: none;
+      }
+
+      .media-slider {
+        opacity: .3;
+      }
+    }
   }
 
   &-header {
@@ -304,6 +315,14 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       z-index: 1;
     }
+  }
+
+  &-info-laoder {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
   }
 
   video,
