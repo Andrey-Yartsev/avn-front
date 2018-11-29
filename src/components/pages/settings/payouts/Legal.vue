@@ -208,6 +208,9 @@ export default {
   computed: {
     states() {
       return states;
+    },
+    allMediaTypes() {
+      return this.inputAcceptTypes.photo;
     }
   },
 
