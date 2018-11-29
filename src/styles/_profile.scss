@@ -63,19 +63,68 @@
       background-color: $white;
     }
   }
+
+  .content-col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 calc(100% - 33.35%);
+      margin-left: auto;
+    }
+  }
+
+  .aside-col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+  }
 }
 
-.profile-header {
+.profile-header-container {
   background: $white;
   position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    box-shadow: none;
-    position: -webkit-sticky;
-    position: sticky;
-    z-index: 10;
-    top: 130px;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 405px;
   }
+}
+
+.profile-header {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    box-shadow: none;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  .profile-name,
+  .profile-desc {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 33.35%;
+      width: 100%;
+    }
+  }
+
+  .profile-name {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0;
+    }
+  }
+
+  .user-login {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 17px;
+    }
+  }
+
   .header-popup-menu-btn {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -110,8 +159,12 @@
 
 .profile-images {
   position: relative;
-  background: $white;
   z-index: 5;
+  width: 37.5%;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: auto;
+  }
 
   &__inner {
     position: relative;
@@ -121,12 +174,15 @@
     position: -webkit-sticky;
     position: sticky;
     top: 90px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
   }
 
   .avatar {
     position: absolute;
     bottom: -60px;
-    left: 55px;
+    left: 50%;
     transform: translate(-50%, 0);
     font-size: 100px;
     background-color: $white;
@@ -176,6 +232,7 @@
   transition: opacity 0.3s;
 
   .aside-col & {
+
     .profile-page & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -682,20 +739,20 @@
         display: none;
       }
       @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        left: 62px;
-        top: 20px;
         opacity: 0;
         width: 240px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         pointer-events: none;
+        margin: 0;
+        padding: 8px 10px 8px 74px;
+
         .header-scrolled & {
           opacity: 1;
           pointer-events: unset;
-          padding: 0;
         }
+
         .name {
           font-size: 17px;
           white-space: nowrap;
@@ -743,6 +800,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 320px;
+      display: none;
     }
 
     .header-scrolled & {
@@ -803,9 +861,6 @@
   }
 
   .bg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
     background-color: $white;
     background-image: linear-gradient(
@@ -813,10 +868,11 @@
       $secondary-color-20 10%,
       $primary-color-20 90%
     );
-    z-index: 5;
+    z-index: 2;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       z-index: 1;
+
     }
 
     img {
@@ -1294,8 +1350,19 @@
   position: absolute;
   right: 21px;
   bottom: 17px;
+}
 
-  @include media-breakpoint-up($desktop-breakpoint) {
+.profile-user-details {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
+
+  .header-scrolled & {
+    bottom: 4px;
+    left: 3px;
   }
 }
