@@ -8,7 +8,8 @@ const state = {
   currentPost: undefined,
   reportedPost: undefined,
   postReportReasons: [],
-  newPost: undefined
+  newPost: undefined,
+  updatedPost: undefined
 };
 const mutations = {
   sendPostReportSuccess(state, { postId, reasonId }) {
@@ -25,6 +26,10 @@ const mutations = {
 
   savePostSuccess(state, data) {
     state.newPost = data;
+  },
+
+  updatePostSuccess(state, data) {
+    state.updatedPost = data;
   }
 };
 
@@ -42,6 +47,20 @@ const actions = {
       })
       .catch(err => {
         commit("sendPostCommentFail", err);
+      });
+  },
+
+  updatePost({ commit }, { postId }) {
+    return PostApi.getPost({ postId })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(post) {
+            commit("updatePostSuccess", post);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
       });
   },
 

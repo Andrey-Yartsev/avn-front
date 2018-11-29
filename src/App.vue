@@ -49,7 +49,6 @@ import IframeModal from "@/components/modal/Iframe";
 
 import rootClasses from "@/rootClasses";
 import ws from "@/ws";
-import wsp from "@/ws/wsp";
 import Cookie from "@/utils/cookie";
 import postMessageHandler from "@/postMessage";
 
@@ -139,7 +138,6 @@ export default {
   },
   created() {
     ws();
-    wsp();
 
     const params = queryString.parse(location.search);
     if (params.code) {

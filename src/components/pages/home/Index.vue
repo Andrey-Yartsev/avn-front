@@ -32,6 +32,7 @@ import Footer from "@/components/footer/Index";
 import AddPost from "@/components/addPost/Index";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import Wsp from "@/mixins/wsp";
 
 export default {
   name: "HomePage",
@@ -42,7 +43,7 @@ export default {
     AddPost,
     PostCollection
   },
-  mixins: [InfinityScrollMixin],
+  mixins: [InfinityScrollMixin, Wsp],
   created() {
     this.init();
   },
@@ -56,6 +57,9 @@ export default {
     },
     newPost() {
       return this.$store.state.post.newPost;
+    },
+    updatedPost() {
+      return this.$store.state.post.updatedPost;
     }
   },
   methods: {
@@ -75,6 +79,9 @@ export default {
     newPost() {
       this.$store.dispatch("modal/hide", { name: "addPost" });
       this.init();
+    },
+    updatedPost() {
+      this.$store.dispatch("home/updatePost", this.updatedPost);
     }
   }
 };

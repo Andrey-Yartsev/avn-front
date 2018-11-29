@@ -1,38 +1,41 @@
 <template>
     <div class="media">
-        <template v-if="medias.length > 1 && showSlider">
-            <div class="media-slider">
-                <figure :key="key" v-for="(media, key) in medias" :class="[{ active: currentSlide === key }, 'media-item']">
-                    <component
-                      :is="getMediaViewType(media)"
-                      :media="media"
-                      :postId="postId" 
-                      :openModal="openModal" 
-                      :mediaSize="mediaSize"
-                    />
-                </figure>
-            </div>
-        </template>
-        <template v-else >
-            <figure :key="key" v-for="(media, key) in medias" class="media-item active">
-                <component
-                  :is="getMediaViewType(media)"
-                  :media="media"
-                  :postId="postId" 
-                  :openModal="openModal"
-                  :mediaSize="mediaSize"
-                />
-            </figure>
-        </template>
-        <template v-if="medias.length > 1 && showSlider">
-            <div class="media-slider-pagination">
-                <span :key="key" v-for="(media, key) in medias" :class=" [{ active: key === currentSlide }, 'item']" @click="currentSlide = key"></span>
-            </div>
-            <div class="media-slider-navigation">
-                <span :class="[{hidden: currentSlide === 0}, 'btn-prev']" @click="currentSlide -= 1"></span>
-                <span :class="[{hidden: currentSlide === medias.length - 1}, 'btn-next']" class="" @click="currentSlide += 1"></span>
-            </div>
-        </template>
+      <div class="lds-dual-ring transparent small with-text not-fullscreen">
+        <div class="loader-text">Media is currently processing</div>
+      </div>
+      <template v-if="medias.length > 1 && showSlider">
+          <div class="media-slider">
+              <figure :key="key" v-for="(media, key) in medias" :class="[{ active: currentSlide === key }, 'media-item']">
+                  <component
+                    :is="getMediaViewType(media)"
+                    :media="media"
+                    :postId="postId" 
+                    :openModal="openModal" 
+                    :mediaSize="mediaSize"
+                  />
+              </figure>
+          </div>
+      </template>
+      <template v-else >
+          <figure :key="key" v-for="(media, key) in medias" class="media-item active">
+              <component
+                :is="getMediaViewType(media)"
+                :media="media"
+                :postId="postId" 
+                :openModal="openModal"
+                :mediaSize="mediaSize"
+              />
+          </figure>
+      </template>
+      <template v-if="medias.length > 1 && showSlider">
+          <div class="media-slider-pagination">
+              <span :key="key" v-for="(media, key) in medias" :class=" [{ active: key === currentSlide }, 'item']" @click="currentSlide = key"></span>
+          </div>
+          <div class="media-slider-navigation">
+              <span :class="[{hidden: currentSlide === 0}, 'btn-prev']" @click="currentSlide -= 1"></span>
+              <span :class="[{hidden: currentSlide === medias.length - 1}, 'btn-next']" class="" @click="currentSlide += 1"></span>
+          </div>
+      </template>
     </div>
 </template>
 

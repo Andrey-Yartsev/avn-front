@@ -1,43 +1,47 @@
 <template>
-    <div :class="['post', {'open-dropdown-inside': showDropdawn}]" :data-id="post.id">
-        <div class="post-details">
-            <Header
-              :postId="post.id"
-              :user="post.author"
-              :from="from"
-              @openDropdawn="showDropdawn = true"
-              @hideDropdawn="showDropdawn = false"
-            />
-            <p class="text" v-html="post.text"></p>
-            <Media
-              v-if="medias.length"
-              :medias="medias"
-              :showSlider="post.canViewMedia"
-              :shouldHasLink="true"
-              :postId="post.id"
-              :openModal="openModal"
-              mediaSize="preview"
-            />
-            <Actions 
-              :post="post" 
-              v-on:postShowCommentForm="showForm"
-              v-on:postLike="likePost"
-              @toggleTip="showTip = !showTip"
-              :openModal="openModal"
-            />
-            <Tip
-              :user="post.author"
-              v-if="showTip"
-              ref="tip"
-              @cancel="closeTip"
-            />
-        </div>
-        <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
-        <CommentsList
-          :comments="post.comments || []"
-          :shownCommentsCount="post.shownCommentsCount"
-        />
+  <div :class="['post', {
+      'open-dropdown-inside': showDropdawn,
+      'post_preparation': !post.isMediaReady
+      }]"
+      :data-id="post.id">
+    <div class="post-details">
+      <Header
+        :postId="post.id"
+        :user="post.author"
+        :from="from"
+        @openDropdawn="showDropdawn = true"
+        @hideDropdawn="showDropdawn = false"
+      />
+      <p class="text" v-html="post.text"></p>
+      <Media
+        v-if="medias.length"
+        :medias="medias"
+        :showSlider="post.canViewMedia"
+        :shouldHasLink="true"
+        :postId="post.id"
+        :openModal="openModal"
+        mediaSize="preview"
+      />
+      <Actions 
+        :post="post" 
+        v-on:postShowCommentForm="showForm"
+        v-on:postLike="likePost"
+        @toggleTip="showTip = !showTip"
+        :openModal="openModal"
+      />
+      <Tip
+        :user="post.author"
+        v-if="showTip"
+        ref="tip"
+        @cancel="closeTip"
+      />
     </div>
+    <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
+    <CommentsList
+      :comments="post.comments || []"
+      :shownCommentsCount="post.shownCommentsCount"
+    />
+  </div>
 </template>
 
 <script>

@@ -21,10 +21,23 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+  updatePost(state, updatedPost) {
+    state.posts = state.posts.map(post => {
+      if (post.id === updatedPost.id) {
+        return updatedPost;
+      }
+
+      return post;
+    });
   }
 };
 
-const actions = {};
+const actions = {
+  updatePost({ commit }, updatedPost) {
+    commit("updatePost", updatedPost);
+  }
+};
 
 export default {
   namespaced: true,
