@@ -250,12 +250,28 @@
 
   .addFileCollectionView {
     margin: 0 8px;
+    position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       position: absolute;
       left: 0;
       right: 0;
       top: 180px;
+    }
+
+    &:before {
+      position: absolute;
+      top: 0;
+      content: "";
+      height: 1px;
+      left: 8px;
+      right: 8px;
+      background: rgba($gray, 0.2);
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
     }
 
     .addFileView {
