@@ -125,7 +125,8 @@ export default {
   mounted() {
     const errors = [
       "User banned.",
-      "This Twitter is already used by another account."
+      "This Twitter is already used by another account.",
+      "This account already used Twitter."
     ];
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get("error");

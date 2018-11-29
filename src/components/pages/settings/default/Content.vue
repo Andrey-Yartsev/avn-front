@@ -95,7 +95,7 @@
                 <input
                   class="subscription__input"
                   type="number" min="0" step="0.01" name="subscribePrice"
-                  value="0"
+                  v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
                 >
               </span>

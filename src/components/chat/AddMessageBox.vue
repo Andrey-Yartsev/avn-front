@@ -123,6 +123,9 @@ export default {
     },
     funded() {
       return this.$store.state.tip.funded;
+    },
+    allMediaTypes() {
+      return this.inputAcceptTypes.photo;
     }
   },
 
