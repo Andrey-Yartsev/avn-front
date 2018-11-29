@@ -30,6 +30,16 @@ const mutations = {
 
   setSource(state, source) {
     state.source = source;
+  },
+
+  updatePost(state, updatedPost) {
+    state.posts = state.posts.map(post => {
+      if (post.id === updatedPost.id) {
+        return updatedPost;
+      }
+
+      return post;
+    });
   }
 };
 
@@ -49,6 +59,10 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
+  },
+
+  updatePost({ commit }, updatedPost) {
+    commit("updatePost", updatedPost);
   },
 
   setSource({ commit }, source) {

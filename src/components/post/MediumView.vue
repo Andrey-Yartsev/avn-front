@@ -1,7 +1,8 @@
 <template>
-  <div :class="['post', {
-      'open-dropdown-inside': showDropdawn,
-      'post_preparation': !post.isMediaReady
+  <div 
+      :class="['post', {
+        'open-dropdown-inside': showDropdawn,
+        'post_preparation': !post.isMediaReady
       }]"
       :data-id="post.id">
     <div class="post-details">

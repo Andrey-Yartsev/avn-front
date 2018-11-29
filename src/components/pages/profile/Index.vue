@@ -35,8 +35,8 @@
         <div class="container">
           <div class="profile-name">
             <span class="name">
-             {{ profile.name }}
-             <span class="verified-user" v-if="profile.isVerified"></span>
+              {{ profile.name }}
+            <span class="verified-user" v-if="profile.isVerified"></span>
             </span>
             <span class="user-login"><a>{{ profile.username }}</a></span>
           </div>
@@ -83,11 +83,12 @@ import HeaderControl from "@/components/common/profile/headerControl/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
+import Wsp from "@/mixins/wsp";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin, FileUpload],
+  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp],
 
   components: {
     Loader,
@@ -139,6 +140,9 @@ export default {
     },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
+    },
+    updatedPost() {
+      return this.$store.state.post.updatedPost;
     }
   },
   watch: {
@@ -150,6 +154,9 @@ export default {
     },
     deletedPost() {
       this.$store.dispatch("profile/home/fetchProfile", this.username);
+    },
+    updatedPost() {
+      this.$store.dispatch("profile/home/updatePost", this.updatedPost);
     }
   },
   methods: {

@@ -1,5 +1,9 @@
 <template>
-  <div class="post postPage">
+  <div 
+      :class="['post postPage', {
+        'post_preparation': !post.isMediaReady
+      }]"
+    >
     <div class="postPage-content">
       <div class="header-mobile">
         <button class="header-return-btn" @click="back"></button>
