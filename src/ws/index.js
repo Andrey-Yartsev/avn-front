@@ -5,11 +5,13 @@ import moment from "moment";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
+import subscription from "./actions/subscription";
 
 const actions = {
   chats,
   new_notification,
-  payoutsApproved
+  payoutsApproved,
+  subscription
 };
 
 export default () => {
