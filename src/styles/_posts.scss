@@ -35,18 +35,18 @@
       border-bottom: none;
     }
 
-    &_preparation {
-
-      .lds-dual-ring {
-        pointer-events: none;
-        display: block;
-
-        .loader-text {
-          color: #fff;
-        }
-      }
+    &_preparation.post {
 
       .media {
+
+        .lds-dual-ring {
+          display: block;
+          pointer-events: none;
+
+          .loader-text {
+            color: #fff;
+          }
+        }
 
         &:after {
           content: "";
@@ -64,7 +64,7 @@
     }
 
     .media {
-      
+
       .lds-dual-ring {
         display: none;
       }
