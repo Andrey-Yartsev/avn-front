@@ -74,7 +74,7 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 14px 50px 14px 15px;
+      padding: 14px 50px 10px 15px;
       z-index: 2;
     }
 
