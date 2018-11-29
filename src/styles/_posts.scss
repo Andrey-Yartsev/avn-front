@@ -39,6 +39,7 @@
 
       .lds-dual-ring {
         pointer-events: none;
+        display: block;
 
         .loader-text {
           color: #fff;
@@ -59,6 +60,13 @@
           z-index: 0;
           pointer-events: none;
         }
+      }
+    }
+
+    .media {
+      
+      .lds-dual-ring {
+        display: none;
       }
     }
   }
