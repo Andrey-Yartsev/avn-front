@@ -38,7 +38,13 @@ export default {
       this.shouldMaintainConnection = false;
     },
     sendObservedIds() {
+      if (this.wsp.ws.readyState !== 1) {
+        setTimeout(() => this.sendObservedIds(), 1000);
+        return;
+      }
+
       const ids = this.getObservedIds();
+
       if (!this.wsp || !ids.length) return;
       this.alreadySended = !this.alreadySended
         ? ids
