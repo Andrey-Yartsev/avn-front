@@ -8,7 +8,7 @@
         class="jq-toast-loader"
         :class="{'jq-toast-loaded': loaded}"
         style=""></span>
-      <span class="close-jq-toast-single">×</span>{{ text }}
+      <span class="close-jq-toast-single">×</span><span v-html="text"></span>
     </div>
   </div>
 </template>

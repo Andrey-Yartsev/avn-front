@@ -5,14 +5,19 @@ import { createRequestAction } from "../utils/storeRequest";
 const state = {};
 
 const actions = {
-  openPaymentModal({ dispatch }, data) {
-    dispatch("fetchPaymentLink", data).then(() => {
+  openPaymentModal({ dispatch }, user) {
+    dispatch("fetchPaymentLink", {
+      type: "subscription",
+      amount: user.subscribePrice,
+      id: user.id
+    }).then(() => {
       dispatch(
         "modal/show",
         {
+          type: "subscription",
           name: "payment",
           data: {
-            userId: data.id
+            user
           }
         },
         { root: true }

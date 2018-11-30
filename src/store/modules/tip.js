@@ -20,6 +20,7 @@ const actions = {
         {
           name: "payment",
           data: {
+            type: "tip",
             amount,
             user
           }

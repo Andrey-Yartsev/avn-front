@@ -19,6 +19,7 @@
         href="/chat"
         class="menu-item-messages header-nav__item hidden-mobile btn-notifications"
         @click.prevent="goToChat"
+        :class="{unread: user.hasMessages}"
       ><span>Messages</span></a>
       <router-link class="menu-item-messages header-nav__item hidden-desktop" to="/chat"><span>Messages</span></router-link>
     </template>
