@@ -52,15 +52,8 @@
               </label>
             </div>
           </template>
-
-            <div class="b-check-state b-check-state_live">
-                <label>
-                    <input type="checkbox">
-                    <span class="b-check-state__icon"></span>
-                    <span class="b-check-state__text">Go live</span>
-                </label>
-            </div>
         </div>
+        <router-link class="" to="/stream"></router-link>
         <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
           <span class="icon" @click="tweetSend = !tweetSend"></span>
