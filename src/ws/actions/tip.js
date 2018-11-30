@@ -6,9 +6,10 @@ export default data => {
   if (data.success) {
     Store.dispatch(
       "global/flashToast",
-      `Subscription to ${payment.user.name} is successful`
+      `Tip for ${payment.user.name} of ${payment.amount}$ is successful`
     );
+    Store.commit("tip/funded");
   } else {
-    Store.dispatch("global/flashToast", "Subscription failed");
+    Store.dispatch("global/flashToast", "Fund failed");
   }
 };
