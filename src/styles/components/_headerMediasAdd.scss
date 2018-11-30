@@ -25,7 +25,7 @@
   left: 0;
   right: 0;
   top: 0;
-  z-index: 2;
+  z-index: 3;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: flex;
@@ -78,13 +78,14 @@
 
   &__header {
     padding: 10px 15px;
-    overflow: auto;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: space-between;
     width: 100%;
+    flex-wrap: wrap;
+    position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       //display: none;
@@ -100,6 +101,8 @@
       color: #fff;
       z-index: 3;
       margin: 0 auto 0 0;
+      width: 50px;
+      height: 54px;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         //left: 0;
@@ -109,6 +112,10 @@
         //padding: 7px 15px;
         padding: 0;
         height: auto;
+        width: auto;
+        display: flex;
+        align-content: center;
+        align-items: center;
         font-size: 24px;
 
         .stream_enabled & {
@@ -122,6 +129,7 @@
         font-size: 30px;
         top: 4px;
         right: 4px;
+        position: absolute;
       }
 
       &:before {
@@ -129,6 +137,23 @@
         @include icon-font;
         height: 24px;
         line-height: 24px;
+        opacity: .5;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          position: relative;
+          left: auto;
+          right: auto;
+          top: auto;
+          bottom: auto;
+          opacity: 1;
+          transform: translate(0, 0);
+          display: inline-block;
+          vertical-align: middle;
+        }
       }
     }
 
@@ -155,6 +180,7 @@
         padding: 3px 16px;
         min-width: 72px;
         background-color: white;
+        color: #000;
       }
     }
 
@@ -168,7 +194,6 @@
       }
 
       &:before {
-        content: "\E620";
         @include icon-font;
         font-size: 24px;
         position: absolute;
@@ -179,6 +204,25 @@
 
         @include media-breakpoint-up($desktop-breakpoint) {
           display: block;
+        }
+      }
+
+      &_live {
+
+        .stream_enabled & {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        &:before {
+          content: "\E621";
+        }
+      }
+
+      &_story {
+
+        &:before {
+          content: "\E620";
         }
       }
     }
@@ -249,6 +293,13 @@
 
   #stop {
     display: none;
+
+    .stream_enabled & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+      }
+    }
   }
 
   .btn {

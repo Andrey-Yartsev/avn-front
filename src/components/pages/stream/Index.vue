@@ -7,97 +7,98 @@
       <div class="main-container">
         <div class="mediasTop">
           <div class="mediasTop__header">
+            <span class="category-name category-name_live hidden-mobile">Live video</span>
+            <button class="close" @click="close">
+              <span class="category-name category-name_live hidden-desktop">Live Video</span>
+            </button>
             <div class="mediasHeaderControls">
               <button class="btn alt sm change-devices top">Start</button>
-              <button id="stop">Stop</button>
+              <button id="stop" class="btn alt sm change-devices top">Stop</button>
             </div>
-          </div>
-          <div class="group-controls">
-            <div id="devices">
-              <div 
-                v-click-outside="hideStreamVisibilityMenu"
-                :class="[
+              <div class="group-controls">
+                  <div id="devices">
+                      <div
+                              v-click-outside="hideStreamVisibilityMenu"
+                              :class="[
                   'btn-media-event has-dropdown stream-visibility',
-                  streamVisibility.key, 
+                  streamVisibility.key,
                   {
                     shown: shownStreamVisibilityMenu
                   }
                 ]"
-                v-if="user"
-              >
-                <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
-                  <span class="root-btn__inside">{{ streamVisibility.label }}</span>
-                </button>
-                <div class="menu">
-                  <button
-                    type="button"
-                    v-for="streamVisib in streamVisibilities"
-                    v-bind:key="streamVisib.key"
-                    :class="['item', { active: streamVisibility.key === streamVisib.key }]"
-                    @click="() => setStreamVisibility(streamVisib)"
-                    :disabled="streamVisib.disabled"
-                  >
-                    <span class="value">{{ streamVisib.label }}</span>
-                  </button>
-                </div>
-              </div>
-              <div
-                v-if="streamVideo"
-                v-click-outside="hideStreamVideoMenu"
-                :class="[
+                              v-if="user"
+                      >
+                          <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
+                              <span class="root-btn__inside">{{ streamVisibility.label }}</span>
+                          </button>
+                          <div class="menu">
+                              <button
+                                      type="button"
+                                      v-for="streamVisib in streamVisibilities"
+                                      v-bind:key="streamVisib.key"
+                                      :class="['item', { active: streamVisibility.key === streamVisib.key }]"
+                                      @click="() => setStreamVisibility(streamVisib)"
+                                      :disabled="streamVisib.disabled"
+                              >
+                                  <span class="value">{{ streamVisib.label }}</span>
+                              </button>
+                          </div>
+                      </div>
+                      <div
+                              v-if="streamVideo"
+                              v-click-outside="hideStreamVideoMenu"
+                              :class="[
                   'btn-media-event has-dropdown camera',
                   {
                     shown: shownStreamVideoMenu,
                     'device-disabled': streamVideo.deviceId === 'disabled'
                   }
                 ]">
-                <button type="button" class="root-btn" @click="showStreamVideoMenu">
-                  <span class="root-btn__inside" />
-                </button>
-                <div class="menu">
-                  <button
-                    v-for="video in streamVideos"
-                    v-bind:key="video.deviceId"
-                    type="button"
-                    :data-type="video.deviceId"
-                    :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
-                    @click="() => setStreamVideo(video)"
-                  >
-                    <span class="value">{{ video.label }}</span>
-                  </button>
-                </div>
-              </div>
-              <div
-                v-if="streamAudio"
-                v-click-outside="hideStreamAudioMenu"
-                :class="[
+                          <button type="button" class="root-btn" @click="showStreamVideoMenu">
+                              <span class="root-btn__inside" />
+                          </button>
+                          <div class="menu">
+                              <button
+                                      v-for="video in streamVideos"
+                                      v-bind:key="video.deviceId"
+                                      type="button"
+                                      :data-type="video.deviceId"
+                                      :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
+                                      @click="() => setStreamVideo(video)"
+                              >
+                                  <span class="value">{{ video.label }}</span>
+                              </button>
+                          </div>
+                      </div>
+                      <div
+                              v-if="streamAudio"
+                              v-click-outside="hideStreamAudioMenu"
+                              :class="[
                   'btn-media-event has-dropdown microphone',
                   {
                     shown: shownStreamAudioMenu,
                     'device-disabled': streamAudio.deviceId === undefined
                   }
                 ]">
-                <button type="button" class="root-btn" @click="showStreamAudioMenu">
-                  <span class="root-btn__inside" />
-                </button>
-                <div class="menu">
-                  <button
-                    v-for="audio in streamAudios"
-                    v-bind:key="audio.deviceId"
-                    type="button"
-                    :data-type="audio.deviceId"
-                    :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
-                    @click="() => setStreamAudio(audio)"
-                  >
-                    <span class="value">{{ audio.label || "Disable Microphone" }}</span>
-                  </button>
-                </div>
+                          <button type="button" class="root-btn" @click="showStreamAudioMenu">
+                              <span class="root-btn__inside" />
+                          </button>
+                          <div class="menu">
+                              <button
+                                      v-for="audio in streamAudios"
+                                      v-bind:key="audio.deviceId"
+                                      type="button"
+                                      :data-type="audio.deviceId"
+                                      :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
+                                      @click="() => setStreamAudio(audio)"
+                              >
+                                  <span class="value">{{ audio.label || "Disable Microphone" }}</span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
-          <button class="close" @click="close">
-            <span class="category-name hidden-desktop">Live Video</span>
-          </button>
         </div>
         <div id="videos">
           <div class="stream-video-container" id="videoleft">

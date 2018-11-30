@@ -279,32 +279,6 @@
     max-width: 100%;
     top: 0;
     border-radius: 0;
-
-    .close {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        width: auto;
-        //height: 44px;
-        display: flex;
-        align-content: center;
-        align-items: center;
-      }
-
-      &:before {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          position: relative;
-          left: auto;
-          right: auto;
-          top: auto;
-          bottom: auto;
-          opacity: 1;
-          transform: translate(0, 0);
-          display: inline-block;
-          vertical-align: middle;
-        }
-      }
-    }
   }
 }
 
