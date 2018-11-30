@@ -223,6 +223,13 @@
       padding: 3px 0 0;
     }
 
+    .searchView & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: 100%;
+      }
+    }
+
     &.all {
       grid-template-columns: 1fr 1fr 1fr;
     }
@@ -260,6 +267,14 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+    }
+
+    &.users {
+      grid-template-columns: 1fr;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
 

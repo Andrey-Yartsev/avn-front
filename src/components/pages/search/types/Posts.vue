@@ -1,5 +1,5 @@
 <template>
-  <div class="posts">
+  <div class="explore-wrapper posts">
     <template v-if="items.length">
       <div class="post-column">
         <Post

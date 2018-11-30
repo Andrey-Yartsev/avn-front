@@ -12,6 +12,14 @@
 
 .searchView {
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
   .posts {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -52,8 +60,22 @@
       &-column {
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          flex: 0 0 calc(50% - 30px);
+          flex: 0 0 calc(50% - 15px);
           margin: 0 15px;
+        }
+
+        &:first-child {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-left: 0;
+          }
+        }
+
+        &:last-child {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-right: 0;
+          }
         }
       }
 
@@ -71,17 +93,6 @@
       }
     }
   }
-}
-
-.searchView {
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    min-height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: stretch;
-    align-content: stretch;
-  }
 
   .explore {
 
@@ -89,7 +100,6 @@
       position: relative;
       width: 100%;
       min-height: calc(100% - 152px);
-      background-color: $white;
       //z-index: 10;
     }
   }
@@ -137,6 +147,7 @@
   .users,
   .photos,
   .videos {
+
     &:empty {
       + .no-results-search {
         opacity: 1;

@@ -1,5 +1,5 @@
 <template>
-  <div class="users">
+  <div class="explore-wrapper users">
     <User class="userView" v-for="item in items" v-bind:key="item.id" :profile="item" />
   </div>
 </template>

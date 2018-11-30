@@ -3,8 +3,8 @@
 .userCollectionView {
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding-left: 4px;
-    padding-right: 4px;
+    //padding-left: 4px;
+    //padding-right: 4px;
   }
 
   p {
@@ -18,13 +18,9 @@
   }
 
   .users {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -30px;
-    }
 
     &:empty {
+
       + .msg-no-content {
         opacity: 1;
         pointer-events: auto;
@@ -45,8 +41,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0 0 15px;
       box-shadow: 0 3px 8px rgba(#000, 0.1);
-      width: calc(33.33% - 30px);
-      margin: 0 0 30px 30px;
       position: relative;
       z-index: 0;
     }
