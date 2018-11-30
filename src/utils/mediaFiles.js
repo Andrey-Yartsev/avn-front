@@ -32,7 +32,8 @@ export const getMediaFileMeta = file => {
       resolve({
         mediaType,
         preview: mediaType !== "video" ? preview : undefined,
-        file
+        file,
+        fileContent
       });
 
       reader = null;

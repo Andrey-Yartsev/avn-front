@@ -3,11 +3,11 @@
     <template v-if="!loading && length && currentStory">
       <div class="stories-slideshow">
         <div class="StoryPageView active">
-          <template v-if="!currentStory.isReady || currentStory.mediaType === 'photo'">
+          <template v-if="currentStory.mediaType === 'photo'">
             <img class="bg" :src="currentStory.src.source || currentStory.preview.source" alt>
             <img class="storyItem" :src="currentStory.src.source || currentStory.preview.source" ref="storyItem" alt>
           </template>
-          <video v-if="currentStory.mediaType === 'video' && currentStory.isReady"
+          <video v-if="currentStory.mediaType === 'video'"
             class="story-video-element storyItem" 
             :src="currentStory.src.source"
             ref="storyItem"
@@ -34,7 +34,7 @@
           :class="['item', {
             active: key === currActiveIndex,
             fullActive: key < currActiveIndex,
-            video: value.mediaType === 'video' && value.isReady
+            video: value.mediaType === 'video'
           }]"
           :key="key"
           @click="() => currIndex = key"
@@ -169,13 +169,13 @@ export default {
     },
 
     runProgress: function() {
-      const { isLook, mediaType, isReady, id } = this.currentStory;
+      const { isLook, mediaType, id } = this.currentStory;
 
       if (this.isAuth() && !isLook) {
         this.$store.dispatch("story/watch", { postId: id });
       }
 
-      if (mediaType === "video" && isReady) {
+      if (mediaType === "video") {
         this.launchVideo();
       } else {
         this.launchImage();
@@ -298,13 +298,13 @@ export default {
     },
 
     pause: function() {
-      const { mediaType, isReady, id } = this.currentStory;
+      const { mediaType, id } = this.currentStory;
 
       if (this.timer) {
         this.timer.pause();
       }
 
-      if (mediaType === "video" && isReady) {
+      if (mediaType === "video") {
         const videoTag = this.videos[id];
         videoTag.pause();
       }
