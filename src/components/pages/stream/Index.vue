@@ -12,9 +12,6 @@
               <button id="stop">Stop</button>
             </div>
           </div>
-          <div class="chat-new-type add-new-type add-new-type_b-with-text add-new-type_underline-items line-bottom">
-            <AddNewNav active="live" />
-          </div>
           <div class="group-controls">
             <div id="devices">
               <div 
@@ -177,7 +174,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
 import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
@@ -209,8 +205,7 @@ export default {
     };
   },
   components: {
-    Loader,
-    AddNewNav
+    Loader
   },
   computed: {
     streamVisibilities() {

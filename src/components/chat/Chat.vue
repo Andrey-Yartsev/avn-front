@@ -209,12 +209,6 @@ export default {
   watch: {
     activeUserId(activeUserId) {
       this.$store.commit("chat/messages", []);
-      if (!activeUserId) {
-        if (!this.isHome) {
-          // this.goTo("/chat");
-        }
-        return;
-      }
       this.$store.commit("chat/setActiveUserId", activeUserId);
       this.fetchMessages();
     }
@@ -256,12 +250,9 @@ export default {
   },
 
   created() {
+    this.$store.commit("chat/messages", []);
     this.$store.dispatch("chat/fetchChats").then(() => {
-      if (this.isHome) {
-        //
-      } else if (this.isNew) {
-        //
-      } else if (this.activeUserId) {
+      if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
       }
