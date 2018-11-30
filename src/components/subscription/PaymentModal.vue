@@ -42,7 +42,7 @@ export default {
 
   methods: {
     close() {
-      this.$store.dispatch("modal/hide", { name: "payment" });
+      this.$store.commit("modal/hideSafe", { name: "payment" });
     }
   },
 

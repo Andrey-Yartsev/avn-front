@@ -89,11 +89,7 @@ export default {
     },
     subscribe() {
       this.close();
-      this.$store.dispatch("subscription/openPaymentModal", {
-        type: "subscription",
-        amount: this.profile.subscribePrice,
-        id: this.profile.id
-      });
+      this.$store.dispatch("subscription/openPaymentModal", this.profile);
     }
   }
 };
