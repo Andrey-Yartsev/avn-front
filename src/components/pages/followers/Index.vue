@@ -8,9 +8,7 @@
     <div class="white-bg-block">
       <ProfileBackground  :profile="profile" />
       <div class="profile-images">
-        <div class="container">
-          <ProfileAvatar :profile="profile" />
-        </div>
+        <ProfileAvatar :profile="profile" />
       </div>
       <!--<div class="profile-header-container hidden-desktop">-->
         <!--<div class="profile-header">-->
