@@ -9,12 +9,7 @@
             <div class="mediasTop">
               <div class="mediasTop__header">
                 <div class="mediasHeaderControls addStoryButtonWrapper hidden-desktop">
-                  <button type="submit" class="addStoryButton btn" disabled>Add</button>
-                  <button type="submit" class="addTextButton btn">Done</button>
                 </div>
-              </div>
-              <div class="chat-new-type add-new-type add-new-type_b-with-text add-new-type_underline-items line-bottom">
-                <AddNewNav active="story" />
               </div>
               <div class="group-controls">
                 <div class="storyOptions">
@@ -141,7 +136,6 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
-import AddNewNav from "@/components/addNewNav/Index";
 import userMixin from "@/mixins/user";
 import { getMediaFileMeta, fileUpload } from "@/utils/mediaFiles";
 
@@ -157,8 +151,7 @@ export default {
   }),
   components: {
     Modal,
-    Loader,
-    AddNewNav
+    Loader
   },
   computed: {
     file: function() {
