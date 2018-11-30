@@ -95,11 +95,11 @@ const mutations = {
   request(state) {
     state.error = null;
     state.loading = true;
-    state.loginInProgress = true;
   },
 
   requestSuccess(state) {
     state.loading = false;
+    state.loginInProgress = true;
   },
 
   requestFailure(state, error) {
