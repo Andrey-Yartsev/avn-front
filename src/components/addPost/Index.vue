@@ -52,7 +52,11 @@
               </label>
             </div>
           </template>
-          <router-link class="b-check-state b-check-state_live" to="/stream">Go live</router-link>
+          <router-link
+            class="b-check-state b-check-state_live"
+            :class="{disabled: preloadedMedias.length || postMsg.length}"
+            to="/stream"
+          >Go live</router-link>
         </div>
         <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
