@@ -94,8 +94,6 @@
     }
 
     .close {
-      //position: fixed;
-      //top: 0;
       border: none;
       background: none;
       color: #fff;
@@ -105,11 +103,9 @@
       height: 54px;
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        //left: 0;
         left: auto;
         right: auto;
         position: relative;
-        //padding: 7px 15px;
         padding: 0;
         height: auto;
         width: auto;
@@ -130,6 +126,13 @@
         top: 4px;
         right: 4px;
         position: absolute;
+      }
+
+      &:hover {
+
+        &:before {
+          opacity: 1;
+        }
       }
 
       &:before {
@@ -229,8 +232,6 @@
   }
 
   > .close {
-    //position: fixed;
-    //top: 4px;
     border: none;
     background: none;
     color: #fff;
@@ -239,8 +240,6 @@
     transition: all .3s;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //left: 0;
-      //top: 0;
       padding: 7px 15px;
       font-size: 24px;
 

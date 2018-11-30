@@ -619,10 +619,6 @@
       .b-check-state_post & {
         content: "\E610";
       }
-
-      .b-check-state_live & {
-        content: "\E621";
-      }
     }
 
     .b-check-state_post & {
@@ -682,20 +678,20 @@
 
   &_live {
     margin-right: auto;
-    color: $main-color;
-    opacity: .5;
+    color: $secondary-color;
     position: relative;
     display: flex;
     align-content: center;
     align-items: center;
     font-size: 15px;
 
-    &:hover {
-      opacity: 1;
-      color: $secondary-color;
+    &.disabled {
+      color: $main-color;
+      opacity: .5;
+      pointer-events: none;
 
       &:before {
-        opacity: 1;
+        opacity: .5;
       }
     }
 
@@ -708,7 +704,6 @@
       text-align: center;
       font-size: 24px;
       transition: opacity 0.3s, color 0.3s;
-      opacity: .5;
       margin-right: 11px;
     }
   }
