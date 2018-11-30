@@ -44,14 +44,22 @@
             />
           </label>
           <template v-if="hasSubscribePrice">
-            <div class="b-check-state">
+            <div class="b-check-state b-check-state_post">
               <label>
                 <input class="is-free-post" type="checkbox" v-model="isFree">
                 <span class="b-check-state__icon"></span>
-                <span class="b-check-state__text">Go live</span>
+                <span class="b-check-state__text">Free post</span>
               </label>
             </div>
           </template>
+
+            <div class="b-check-state b-check-state_live">
+                <label>
+                    <input type="checkbox">
+                    <span class="b-check-state__icon"></span>
+                    <span class="b-check-state__text">Go live</span>
+                </label>
+            </div>
         </div>
         <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
