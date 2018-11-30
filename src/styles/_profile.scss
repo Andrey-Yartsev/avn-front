@@ -485,6 +485,8 @@
       flex: 0 0 76px;
     }
   }
+
+
 }
 
 .profile-twitter-link {
@@ -726,9 +728,10 @@
   }
 
   .post-types-tabs {
+    
     .content-col {
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 67%;
+        flex: 0 0 100%;
         margin-right: 0;
         margin-left: auto;
       }
@@ -740,7 +743,8 @@
       }
       @include media-breakpoint-up($desktop-breakpoint) {
         opacity: 0;
-        width: 240px;
+        width: 100%;
+        max-width: 33.35%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
