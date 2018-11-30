@@ -19,7 +19,7 @@
               <div class="messageContent">
                 <div
                   class="messageWrapper"
-                  :class="{'tipsMessage': v.isTips}"
+                  :class="{'tipsMessage': v.isTips, lockedMessage: !v.isFree}"
                 >
                   <span class="message" v-html="text(v)"></span>
                   <div class="media" v-if="v.media.length">
