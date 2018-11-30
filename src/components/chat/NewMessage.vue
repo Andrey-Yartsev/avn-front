@@ -271,8 +271,8 @@ export default {
     backDesktop() {
       this.goTo("/chat");
     },
-    gotoFirstSelected() {
-      this.goTo("/chat/" + this.selected[0]);
+    gotoLastSelected() {
+      this.goTo("/chat/" + this.selected[this.selected.length - 1]);
       this.selected = [];
     },
     next() {
@@ -300,7 +300,7 @@ export default {
     },
     sent() {
       this.sending = false;
-      this.gotoFirstSelected();
+      this.gotoLastSelected();
     }
   },
 
