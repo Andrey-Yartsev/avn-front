@@ -112,6 +112,10 @@ export default {
         return;
       }
 
+      if (!this.post.isMediaReady) {
+        return;
+      }
+
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
