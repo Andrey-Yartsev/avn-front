@@ -79,7 +79,7 @@
               <div class="more-functions__dropdown">
                 <div class="more-functions__dropdown-inside">
                   <ul>
-                  <li><router-link class="profile-url" :to="'/' + activeUser.name">View profile</router-link></li>
+                  <li><router-link class="profile-url" :to="'/' + activeUser.username">View profile</router-link></li>
                   <li v-if="activeUser.isBlocked"><a class="menu-block" @click="unblockActiveUser">Unblock user</a></li>
                   <li v-else><a class="menu-block" @click="blockActiveUser">Block user</a></li>
                   <template v-if="messages.length">
