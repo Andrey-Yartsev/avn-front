@@ -3,6 +3,7 @@
     <template slot="content">
       <div class="popup-container popup-addPost">
         <div class="previous hidden"></div>
+        <div class="popup-addPost__header">New post</div>
         <div class="content">
           <AddPost :initialExpanded="true" :close="close" />
         </div>

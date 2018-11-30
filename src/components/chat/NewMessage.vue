@@ -5,11 +5,11 @@
         <div class="contactsListHeader">
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
-            <span class="hidden-mobile new-message-title">New message</span>
             <a href="/chat" @click.prevent="goTo('/chat')" class="header-return-btn go-back go-back_times hidden-desktop">
               <span class="category-name">New message</span>
             </a>
           </div>
+          <h3 class="hidden-mobile new-message-title">New message</h3>
           <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
         </div>
       </div>

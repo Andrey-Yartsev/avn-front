@@ -31,7 +31,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0 4em 0 1em;
     width: 100%;
     justify-content: space-between;
   }
@@ -64,7 +63,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 2px;
-      display: block;
+      //display: block;
     }
   }
 
@@ -80,35 +79,56 @@
   &__header {
     padding: 10px 15px;
     overflow: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
+      //display: none;
+      border-bottom-width: 2px;
+      padding: 5px 4em 3px 1em;
     }
 
     .close {
-      position: fixed;
-      top: 0;
+      //position: fixed;
+      //top: 0;
       border: none;
       background: none;
       color: #fff;
       z-index: 3;
+      margin: 0 auto 0 0;
+
       @include media-breakpoint-down($desktop-breakpoint) {
-        left: 0;
-        padding: 7px 15px;
+        //left: 0;
+        left: auto;
+        right: auto;
+        position: relative;
+        //padding: 7px 15px;
+        padding: 0;
+        height: auto;
         font-size: 24px;
+
         .stream_enabled & {
           left: auto;
           right: 0;
         }
       }
+
       @include media-breakpoint-up($desktop-breakpoint) {
-        right: 0;
         padding: 12px 15px;
         font-size: 30px;
+        top: 4px;
+        right: 4px;
       }
+
       &:before {
         content: "\E605";
         @include icon-font;
+        height: 24px;
+        line-height: 24px;
       }
     }
 
@@ -127,11 +147,46 @@
       padding: 3px 5px;
       display: none;
     }
+
+    .btn {
+
+      &.newStory {
+        height: 24px;
+        padding: 3px 16px;
+        min-width: 72px;
+        background-color: white;
+      }
+    }
+
+    .category-name {
+      position: relative;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 6px;
+        padding: 15px 0 15px 30px;
+        font-size: 17px;
+      }
+
+      &:before {
+        content: "\E620";
+        @include icon-font;
+        font-size: 24px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: none;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          display: block;
+        }
+      }
+    }
   }
 
   > .close {
-    position: fixed;
-    top: 4px;
+    //position: fixed;
+    //top: 4px;
     border: none;
     background: none;
     color: #fff;
@@ -140,8 +195,8 @@
     transition: all .3s;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      left: 0;
-      top: 0;
+      //left: 0;
+      //top: 0;
       padding: 7px 15px;
       font-size: 24px;
 

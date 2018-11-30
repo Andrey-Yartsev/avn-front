@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="content-col">
                   <div class="rounded-container shadow-block no-padding">
-                    <AddPost></AddPost>
+                    <AddPost :initialExpanded="true"></AddPost>
                     <div class="feed">
                       <PostCollection
                         :posts="posts"

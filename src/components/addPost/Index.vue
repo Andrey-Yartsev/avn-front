@@ -48,7 +48,7 @@
               <label>
                 <input class="is-free-post" type="checkbox" v-model="isFree">
                 <span class="b-check-state__icon"></span>
-                <span class="b-check-state__text">Free Post</span>
+                <span class="b-check-state__text">Go live</span>
               </label>
             </div>
           </template>

@@ -10,6 +10,14 @@
               <div class="mediasTop__header">
                 <div class="mediasHeaderControls addStoryButtonWrapper hidden-desktop">
                 </div>
+
+                <span class="category-name hidden-mobile">Story</span>
+
+                <button class="close" @click="close">
+                  <span class="category-name hidden-desktop">Story</span>
+                </button>
+
+                <button disabled="disabled" class="newStory btn hidden-desktop">Add</button>
               </div>
               <div class="group-controls">
                 <div class="storyOptions">
@@ -83,9 +91,6 @@
                   </div>
                 </div>
               </div>
-              <button class="close" @click="close">
-                <span class="category-name hidden-desktop">Story</span>
-              </button>
             </div>
             <div class="storyPlaceholder">
               <label>
@@ -100,7 +105,7 @@
             </div>
             <div class="mediasBottom">
               <button type="submit" class="addStoryButton btn" :disabled="!readyToUpload" @click.prevent="createNewStory">
-                Post your story
+                Add to your story
               </button>
             </div>
             <div class="storyPreview" v-if="showPreview">

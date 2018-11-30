@@ -260,7 +260,7 @@
         }
 
         &_add-shadow {
-          box-shadow: none;
+          //box-shadow: none;
         }
       }
     }
@@ -630,7 +630,7 @@
   }
 
   .chatCollectionContent__col_narrow & {
-    max-height: calc(100% - 88px);
+    max-height: calc(100% - 44px);
     flex-direction: column;
     align-items: flex-start;
     align-content: flex-start;
@@ -925,7 +925,10 @@
   }
 }
 
-.back-popup-btn,
+.back-popup-btn {
+  margin: 0 15px 0 0;
+}
+
 .newMessage-link {
 
   @include media-breakpoint-up($desktop-breakpoint) {
