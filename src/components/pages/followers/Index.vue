@@ -12,25 +12,27 @@
           <ProfileAvatar :profile="profile" />
         </div>
       </div>
-      <div class="profile-header hidden-desktop">
-        <div class="profile-name">
-          <div class="profile-name__main">
-            <span class="name">{{ profile.name }}</span>
-            <span class="verified-user" v-if="profile.isVerified"></span>
-          </div>
-          <span class="user-login"><a>{{ profile.username }}</a></span>
-        </div>
-        <div class="profile-desc hidden-desktop">
-          <p class="profile-text" v-if="profile.about">{{ profile.about }}</p>
-          <a
-            v-if="profile.twitterUsername"
-            :href="'https://twitter.com/' + profile.twitterUsername"
-            class="profile-twitter-link" target="_blank"
-            rel="nofollow"
-          >twitter.com/{{ profile.twitterUsername }}</a>
-          <FollowersCounter :profile="profile" />
-        </div>
-      </div>
+      <!--<div class="profile-header-container hidden-desktop">-->
+        <!--<div class="profile-header">-->
+          <!--<div class="profile-name">-->
+            <!--<div class="profile-name__main">-->
+              <!--<span class="name">{{ profile.name }}</span>-->
+              <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
+            <!--</div>-->
+            <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
+          <!--</div>-->
+          <!--<div class="profile-desc hidden-desktop">-->
+            <!--<p class="profile-text" v-if="profile.about">{{ profile.about }}</p>-->
+            <!--<a-->
+              <!--v-if="profile.twitterUsername"-->
+              <!--:href="'https://twitter.com/' + profile.twitterUsername"-->
+              <!--class="profile-twitter-link" target="_blank"-->
+              <!--rel="nofollow"-->
+            <!--&gt;twitter.com/{{ profile.twitterUsername }}</a>-->
+            <!--<FollowersCounter :profile="profile" />-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <div class="post-types-tabs">
         <div class="container">
           <div class="profile-name">
@@ -50,28 +52,28 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="aside-col hidden-mobile hidden">
-            <div class="profile-name">
-              <div class="profile-name__main">
-                <span class="name">
-                  {{ profile.name }}
-                </span>
-                <span class="verified-user" v-if="profile.isVerified"></span>
-              </div>
-              <span class="user-login"><a>{{ profile.username }}</a></span>
-            </div>
-            <div class="profile-desc">
-              <p class="profile-text"></p>
-              <a
-                v-if="profile.twitterUsername"
-                :href="'https://twitter.com/' + profile.twitterUsername"
-                class="profile-twitter-link"
-                target="_blank"
-                rel="nofollow"
-              >twitter.com/{{ profile.twitterUsername }}</a>
-              <FollowersCounter :profile="profile" />
-            </div>
-          </div>
+          <!--<div class="aside-col hidden-mobile hidden">-->
+            <!--<div class="profile-name">-->
+              <!--<div class="profile-name__main">-->
+                <!--<span class="name">-->
+                  <!--{{ profile.name }}-->
+                <!--</span>-->
+                <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
+              <!--</div>-->
+              <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
+            <!--</div>-->
+            <!--<div class="profile-desc">-->
+              <!--<p class="profile-text"></p>-->
+              <!--<a-->
+                <!--v-if="profile.twitterUsername"-->
+                <!--:href="'https://twitter.com/' + profile.twitterUsername"-->
+                <!--class="profile-twitter-link"-->
+                <!--target="_blank"-->
+                <!--rel="nofollow"-->
+              <!--&gt;twitter.com/{{ profile.twitterUsername }}</a>-->
+              <!--<FollowersCounter :profile="profile" />-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="content-col">
             <div class="posts-container">
               <div class="userCollectionView">
@@ -83,11 +85,15 @@
                     <router-link class="header-return-btn" :to="`/${profile.username}`" />
                     <h1 class="page-title">Following</h1>
                   </div>
-                  <Users 
-                    :items="users"
-                    :loading="false"
-                    :query="page"
-                  />
+                  <div class="explore">
+                    <div class="userCollectionView">
+                      <Users
+                        :items="users"
+                        :loading="false"
+                        :query="page"
+                      />
+                    </div>
+                  </div>
                   <div class="msg-no-content" v-if="!loading && !user.length">
                     <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
                     <div class="msg-no-content__text" v-else>No one follows you yet</div>

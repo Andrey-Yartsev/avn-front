@@ -750,7 +750,7 @@
         align-items: flex-start;
         pointer-events: none;
         margin: 0;
-        padding: 10px 10px 10px 74px;
+        padding: 10px 10px 10px 66px;
 
         .header-scrolled & {
           opacity: 1;
@@ -804,7 +804,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 320px;
-      display: none;
+      //display: none;
     }
 
     .header-scrolled & {
