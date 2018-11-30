@@ -3,62 +3,15 @@
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
-          <div
-            class="add-new-type add-new-type_underline-items add-new-type_b-with-text line-bottom chat-new-type hidden-mobile"
-          >
-            <div class="addNewNav">
-              <router-link
-                tag="span"
-                to="/addPost"
-                active-class="dummy"
-                class="new-post addNewNav__item"
-              ><span class="addNewNav__text">Post</span></router-link>
-              <span
-                class="new-story addNewNav__item"
-                @click="addNewStory"
-              ><span class="addNewNav__text">Story</span></span>
-              <span
-                class="new-live addNewNav__item"
-                @click="goToStream"
-              ><span class="addNewNav__text">Go live</span></span>
-              <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
-              <input
-                type="file"
-                class="hidden storyFileSelect"
-                accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-              ></div>
-          </div>
           <div class="back-popup-btn">
             <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
+            <span class="hidden-mobile new-message-title">New message</span>
             <a href="/chat" @click.prevent="goTo('/chat')" class="header-return-btn go-back go-back_times hidden-desktop">
               <span class="category-name">New message</span>
             </a>
           </div>
           <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
         </div>
-      </div>
-      <div class="add-new-type add-new-type_underline-items line-bottom add-new-type_b-with-text hidden-desktop">
-        <div class="addNewNav">
-          <router-link
-            tag="span"
-            to="/addPost"
-            active-class="dummy"
-            class="new-post addNewNav__item"
-          ><span class="addNewNav__text">Post</span></router-link>
-          <span
-            class="new-story addNewNav__item"
-            @click="addNewStory"
-          ><span class="addNewNav__text">Story</span></span>
-          <span
-            class="new-live addNewNav__item"
-            @click="goToStream"
-          ><span class="addNewNav__text">Go live</span></span>
-          <span class="new-message addNewNav__item active"><span class="addNewNav__text">Message</span></span>
-          <input
-            type="file"
-            class="hidden storyFileSelect"
-            accept=".jpg,.jpeg,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-          ></div>
       </div>
       <div class="chatCollectionContentWrapper" :class="{'contacts-top': contactsScrollTop}">
         <div class="searchContact">
