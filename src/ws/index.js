@@ -9,6 +9,7 @@ import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
 import subscription from "./actions/subscription";
 import tip from "./actions/tip";
+import message from "./actions/message";
 
 const actions = {
   chats,
@@ -17,7 +18,8 @@ const actions = {
   subscription,
   tip,
   stream,
-  stream_stop
+  stream_stop,
+  message
 };
 
 export default class {

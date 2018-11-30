@@ -31,6 +31,7 @@ import tip from "@/store/modules/tip";
 import followers from "@/store/modules/followers";
 import contacts from "@/store/modules/contacts";
 import forgot from "@/store/modules/forgot";
+import paidMessage from "@/store/modules/paidMessage";
 
 Vue.use(Vuex);
 
@@ -67,7 +68,8 @@ const store = new Vuex.Store({
     tip,
     followers,
     contacts,
-    forgot
+    forgot,
+    paidMessage
   }
 });
 

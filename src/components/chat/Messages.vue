@@ -19,7 +19,8 @@
               <div class="messageContent">
                 <div
                   class="messageWrapper"
-                  :class="{'tipsMessage': v.isTips, lockedMessage: !v.isFree}"
+                  :class="{'tipsMessage': v.isTips, lockedMessage: isLocked(v)}"
+                  @click="messageClick(v)"
                 >
                   <span class="message" v-html="text(v)"></span>
                   <div class="media" v-if="v.media.length">
@@ -182,6 +183,21 @@ export default {
 
     time(date) {
       return dateFns.distanceInWordsStrict(new Date(), date);
+    },
+
+    messageClick(message) {
+      if (message.isFree) {
+        return;
+      }
+      this.$store.dispatch("paidMessage/openPaymentModal", {
+        user: this.withUser,
+        amount: parseInt(message.price.replace(/\$/, "")),
+        messageId: message.id
+      });
+    },
+
+    isLocked(message) {
+      return !message.isOpened && !message.isFree;
     }
   },
 
