@@ -12,7 +12,7 @@
     <div class="chatForm">
       <label
         class="add-media-input btn-el"
-        :class="{disabled: showTip}"
+        :class="{disabled: showTip || showPaid}"
         :disabled="disable"
         v-if="!preloadedMedias.length"
       >
@@ -23,7 +23,7 @@
       </label>
 
       <button
-        v-if="user"
+        v-if="withUser && !user.canEarn"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{active: showTip}"
@@ -31,7 +31,7 @@
 
       <div
         class="field-text-message"
-        :class="{disabled: showTip}"
+        :class="{disabled: showTip || showPaid}"
       >
         <TextareaAutosize
           v-model="message"
@@ -49,27 +49,43 @@
           <span class="price-message"></span>
           <button type="submit" class="btn-clear-price"></button>
         </div>
+
+        <div class="price-message-wrapper" v-if="priceIsSet">
+          <span class="price-message">${{price}}</span>
+          <button type="button" class="btn-clear-price" @click="resetPrice"></button>
+        </div>
       </div>
 
       <Tip
-        v-if="user"
-        :user="user"
+        v-if="withUser && !user.canEarn"
+        :user="withUser"
         ref="tip"
         @cancel="closeTip"
         :class="{chatTip: true, hidden: !showTip}"
       />
 
-      <div class="getPaidForm hidden">
+      <div class="getPaidForm" v-if="showPaid">
         <button class="cancelPaid btn btn-cancel">Cancel</button>
         <input type="hidden" name="priceAmount" class="getPaidAmount">
         <div class="getPaidForm__field">
           <input
-            type="text" pattern="\d{1,3}(?:\.\d{0,2})?" maxlength="6" class="getPaidAmountPlaceholder"
-            placeholder="Enter price">
+            type="text"
+            pattern="\d{1,3}(?:\.\d{0,2})?"
+            maxlength="6"
+            class="getPaidAmountPlaceholder"
+            placeholder="Enter price"
+            v-model="price"
+          >
         </div>
-        <button class="setPrice btn">Set Price</button>
+        <button class="setPrice btn" @click="setPrice" :disabled="!price">Set Price</button>
       </div>
-      <button class="getPaid btn-el hidden"></button>
+
+      <button
+        class="getPaid btn-el"
+        v-if="withUser && user.canEarn"
+        @click="showPaid = !showPaid"
+      ></button>
+
       <button
         @click="sendMessage"
         class="submit btn-el"
@@ -84,11 +100,12 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
+import User from "@/mixins/user";
 
 export default {
   name: "ChatAddMesssageBox",
 
-  mixins: [FileUpload],
+  mixins: [FileUpload, User],
 
   components: {
     MediaPreview,
@@ -97,7 +114,7 @@ export default {
   },
 
   props: {
-    user: {
+    withUser: {
       type: Object
     },
     disable: {
@@ -110,7 +127,10 @@ export default {
     return {
       message: "",
       isSaving: false,
-      showTip: false
+      showTip: false,
+      showPaid: false,
+      price: "",
+      priceIsSet: false
     };
   },
 
@@ -157,7 +177,7 @@ export default {
       const mediaFiles = await this.getMediaFiles();
       this.preloadedMedias = [];
       const opt = {
-        price: 0,
+        price: this.price ? this.price : 0,
         text: message
       };
       if (mediaFiles.length) {
@@ -168,6 +188,24 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    setPrice() {
+      const p = parseFloat(this.price);
+      if (!p) {
+        alert("Use correct number");
+        return;
+      }
+      if (p < 2) {
+        alert("Minimum price is 2$");
+        return;
+      }
+      this.price = p;
+      this.priceIsSet = true;
+      this.showPaid = false;
+    },
+    resetPrice() {
+      this.priceIsSet = false;
+      this.price = "";
     }
   }
 };

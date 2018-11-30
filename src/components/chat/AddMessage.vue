@@ -1,5 +1,5 @@
 <template>
-  <AddMessageBox @send="sendMessage" :user="withUser" />
+  <AddMessageBox @send="sendMessage" :withUser="withUser" />
 </template>
 
 <script>
