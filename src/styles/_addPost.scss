@@ -681,23 +681,35 @@
   }
 
   &_live {
+    margin-right: auto;
+    color: $main-color;
+    opacity: .5;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    font-size: 15px;
 
-    input[type="checkbox"] {
+    &:hover {
+      opacity: 1;
+      color: $secondary-color;
 
-      &:checked {
-
-        + .b-check-state__icon {
-
-          &:before {
-            opacity: 1;
-            color: $secondary-color;
-          }
-
-          + .b-check-state__text {
-            color: $secondary-color;
-          }
-        }
+      &:before {
+        opacity: 1;
       }
+    }
+
+    &:before {
+      content: "\E621";
+      @include icon-font;
+      width: 18px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      font-size: 24px;
+      transition: opacity 0.3s, color 0.3s;
+      opacity: .5;
+      margin-right: 11px;
     }
   }
 }
