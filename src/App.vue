@@ -23,6 +23,7 @@
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
+      <StreamModal v-if="this.$store.state.modal.stream.show" />
 
     </template>
   </div>
@@ -45,6 +46,7 @@ import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
+import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
 
 import rootClasses from "@/rootClasses";
@@ -71,7 +73,8 @@ export default {
     CreateStoryModal,
     StoryInput,
     AddPostModal,
-    IframeModal
+    IframeModal,
+    StreamModal
   },
   mixins: [ColorScheme],
   data() {

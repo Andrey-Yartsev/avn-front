@@ -35,6 +35,10 @@ const state = {
   iframe: {
     show: false,
     data: {}
+  },
+  stream: {
+    show: false,
+    data: {}
   }
 };
 
