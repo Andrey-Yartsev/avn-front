@@ -1,7 +1,7 @@
 <template>
   <Wrapper :mode="mode">
     <template slot="col1">
-      <div class="chatHeader chatHeader_add-shadow">
+      <div class="chatHeader">
         <div class="contactsListHeader">
           <a
             :href="'/' + user.username"
