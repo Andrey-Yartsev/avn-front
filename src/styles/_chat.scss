@@ -6,19 +6,9 @@
     height: 100%;
   }
 
-  body,
-  #content {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //height: 100%;
-    }
-  }
-
   body {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //min-height: auto;
-      //height: auto;
       min-height: 100%;
     }
   }
@@ -32,8 +22,6 @@
   }
 }
 
-
-//.chatCollectionView,
 .chatCollectionContent {
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -41,14 +29,33 @@
     padding-top: 88px;
   }
 
+  .chat-popup_new-msg & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+    }
+  }
+
+  .chat-popup_new-msg &,
   .chat-page_new & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       max-height: 100%;
       padding-top: 0;
+      flex-direction: column;
     }
 
-    .chatHeader {
+    > .chatHeader {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
+  .chatHeader {
+
+    .chat-page_new & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
         position: -webkit-sticky;
@@ -75,10 +82,24 @@
       top: 0;
     }
 
+    .chat-page_new & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
         right: 0;
+      }
+
+      .modal-opened & {
+
+        &:after {
+          display: none;
+        }
       }
     }
   }
@@ -117,10 +138,8 @@
   }
 }
 
-//.chatCollectionView,
 .chatCollectionContent,
 .chatCreateNewView {
-  //height: 100%; important role
   background-color: $white;
   display: flex;
 
@@ -153,6 +172,8 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     flex: 1;
+    align-items: flex-start;
+    align-content: flex-start;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -192,7 +213,6 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       height: 100%;
       flex: 1;
-      padding-top: 0;
     }
 
     .chatCollectionView &,
@@ -210,9 +230,6 @@
       &_narrow {
         @include media-breakpoint-down($desktop-breakpoint) {
           transform: translate(-100%, 0);
-          position: absolute;
-          top: 0;
-          bottom: 0;
         }
       }
 
@@ -226,7 +243,7 @@
     > .chatHeader {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
+        transform: translateX(-100%);
       }
     }
   }
@@ -237,7 +254,7 @@
     overflow: hidden;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      transition: all 0.4s;
+      transition: all .3s;
     }
 
     &_narrow {
@@ -256,6 +273,14 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         max-width: 380px;
         flex: 0 0 41%;
+      }
+
+      .chat-popup_new-msg &,
+      .chat-page_new & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          flex: 1;
+        }
       }
 
       .add-new-type {
@@ -309,30 +334,6 @@
           }
         }
       }
-
-      .chatHeader {
-        //
-        //@include media-breakpoint-down($desktop-breakpoint) {
-        //  width: 100%;
-        //  background-color: transparent;
-        //  flex-wrap: wrap;
-        //  height: auto;
-        //  flex: 0 0 auto;
-        //}
-        //
-        //.contactsListHeader {
-        //
-        //  @include media-breakpoint-down($desktop-breakpoint) {
-        //    background-color: $white;
-        //    position: relative;
-        //    z-index: 10;
-        //  }
-        //}
-
-        &_add-shadow {
-          //box-shadow: none;
-        }
-      }
     }
 
     &_wide {
@@ -345,7 +346,8 @@
         left: 100vw;
         top: 0;
         bottom: 0;
-        z-index: 0;
+        z-index: 12;
+        background-color: $white;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -502,7 +504,7 @@
   .contactsListHeader {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      background-color: $white;
+      //background-color: $white;
       position: relative;
       z-index: 10;
     }
@@ -525,6 +527,14 @@
     }
   }
 
+  .chat-popup_new-msg & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 60px;
     padding: 0;
@@ -533,15 +543,15 @@
   }
 
   &:after {
-    content: "";
-    position: absolute;
-    left: -3px;
-    right: -3px;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
 
     @include media-breakpoint-up($desktop-breakpoint) {
+      content: "";
+      position: absolute;
+      left: -3px;
+      right: -3px;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
       box-shadow: 0 2px 1px 0 rgba(#000, 0.1);
     }
   }
@@ -740,25 +750,20 @@
   position: relative;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    height: auto;
-    max-height: none;
+    //height: auto;
+    //max-height: none;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 1;
+    //flex: 1;
   }
 
   .chatCollectionContent__col_narrow & {
-    //max-height: calc(100% - 44px);
     flex-direction: column;
     align-items: flex-start;
     align-content: flex-start;
     overflow-y: hidden;
     position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //max-height: calc(100% - 60px);
-    }
   }
 
   &:after {
@@ -1037,12 +1042,11 @@
 .back-popup-btn {
   padding-right: 15px;
   padding-left: 15px;
-  margin-left: -15px;
+  margin-right: 15px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-right: 0;
     padding-left: 0;
-    margin-left: 0;
     height: 100%;
   }
 
@@ -1052,18 +1056,11 @@
   }
 }
 
-.back-popup-btn {
-  margin: 0 15px 0 0;
-}
-
 .newMessage-link {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: 0 0 0 auto;
   }
-}
-
-.newMessage-link {
 
   @include media-breakpoint-down($desktop-breakpoint) {
     display: flex;
@@ -1119,11 +1116,28 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-
   flex: 1;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 1;
+  > .chatHeader {
+
+    &:after {
+
+      .modal-opened & {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .chat-popup_new-msg &,
+  .chat-page_new & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
   }
 }
 

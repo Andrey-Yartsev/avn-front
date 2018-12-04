@@ -67,7 +67,7 @@
             <span class="back backEvent" @click="back"></span>
           </div>
           <template v-if="selectedUser">
-            <router-link class="avatar" :to="'/' + selectedUser.username"></router-link>
+            <router-link class="avatar hidden-mobile" :to="'/' + selectedUser.username"></router-link>
             <router-link class="name" :to="'/' + selectedUser.username">{{ selectedUser.name }}</router-link>
             <span class="user-login">
               <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>
