@@ -16,11 +16,16 @@ const actions = {
   tip
 };
 
-export default () => {
-  const start = () => {
-    // console.log("connected");
+export default class {
+  start(reconnect) {
+    if (reconnect) {
+      // console.log("ws reconnected");
+    } else {
+      // console.log("ws connected");
+    }
     const tz = moment().format("ZZ");
     const ws = new WebSocket(process.env.VUE_APP_WS_URL);
+    this.ws = ws;
     ws.onopen = () => {
       new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
         ws.send(
@@ -43,9 +48,21 @@ export default () => {
         }
       }
     };
-    ws.onclose = function() {
-      setTimeout(start, 5000);
+    ws.onclose = () => {
+      setTimeout(() => {
+        if (!this.doNotReconnect) {
+          this.start(true);
+        }
+      }, 5000);
     };
-  };
-  start();
-};
+  }
+  connect() {
+    this.doNotReconnect = false;
+    this.start();
+  }
+  close() {
+    this.doNotReconnect = true;
+    // console.log("ws disconnected");
+    this.ws.close();
+  }
+}

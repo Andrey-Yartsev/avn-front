@@ -15,7 +15,7 @@
           </span>
           </div>
           <div class="user-actions">
-            <SubscribeButton :profile="profile" />
+            <SubscribeButton :profile="profile" v-if="profile.id !== user.id" />
             <FollowButton :profile="profile" />
             <UserDropdown
               :profile="profile"
@@ -33,20 +33,25 @@
 import SubscribeButton from "@/components/pages/search/SubscribeButton";
 import FollowButton from "@/components/pages/search/FollowButton";
 import UserDropdown from "@/components/common/userDropdawn/Index";
+import User from "@/mixins/user";
 
 export default {
   name: "User",
-  data: function() {
-    return {
-      showDropdawn: false
-    };
-  },
-  props: ["profile"],
+
+  mixins: [User],
 
   components: {
     SubscribeButton,
     FollowButton,
     UserDropdown
-  }
+  },
+
+  data: function() {
+    return {
+      showDropdawn: false
+    };
+  },
+
+  props: ["profile"]
 };
 </script>
