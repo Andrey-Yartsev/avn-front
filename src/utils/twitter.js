@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 export default {
   getAuthToken: async (token, secret) => {
-    const response = await request("users/social/twitter", {
+    const response = await request("auth/social/twitter", {
       method: "POST",
       data: { token, secret }
     });

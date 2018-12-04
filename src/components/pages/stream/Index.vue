@@ -12,92 +12,92 @@
               <span class="category-name category-name_live hidden-desktop">Live Video</span>
             </button>
             <div class="mediasHeaderControls">
-              <button class="btn alt sm change-devices top">Start</button>
-              <button id="stop" class="btn alt sm change-devices top">Stop</button>
+              <button class="btn alt sm change-devices top" @click="startStream">Start</button>
+              <button id="stop" class="btn alt sm change-devices top" @click="close">Stop</button>
             </div>
               <div class="group-controls">
-                  <div id="devices">
-                      <div
-                              v-click-outside="hideStreamVisibilityMenu"
-                              :class="[
-                  'btn-media-event has-dropdown stream-visibility',
-                  streamVisibility.key,
-                  {
-                    shown: shownStreamVisibilityMenu
-                  }
-                ]"
-                              v-if="user"
-                      >
-                          <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
-                              <span class="root-btn__inside">{{ streamVisibility.label }}</span>
-                          </button>
-                          <div class="menu">
-                              <button
-                                      type="button"
-                                      v-for="streamVisib in streamVisibilities"
-                                      v-bind:key="streamVisib.key"
-                                      :class="['item', { active: streamVisibility.key === streamVisib.key }]"
-                                      @click="() => setStreamVisibility(streamVisib)"
-                                      :disabled="streamVisib.disabled"
-                              >
-                                  <span class="value">{{ streamVisib.label }}</span>
-                              </button>
-                          </div>
+                <div id="devices">
+                    <div
+                      v-click-outside="hideStreamVisibilityMenu"
+                      :class="[
+                        'btn-media-event has-dropdown stream-visibility',
+                        streamVisibility.key,
+                        {
+                          shown: shownStreamVisibilityMenu
+                        }
+                      ]"
+                      v-if="user"
+                    >
+                      <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
+                        <span class="root-btn__inside">{{ streamVisibility.label }}</span>
+                      </button>
+                      <div class="menu">
+                        <button
+                          type="button"
+                          v-for="streamVisib in streamVisibilities"
+                          v-bind:key="streamVisib.key"
+                          :class="['item', { active: streamVisibility.key === streamVisib.key }]"
+                          @click="() => setStreamVisibility(streamVisib)"
+                          :disabled="streamVisib.disabled"
+                        >
+                          <span class="value">{{ streamVisib.label }}</span>
+                        </button>
                       </div>
-                      <div
-                              v-if="streamVideo"
-                              v-click-outside="hideStreamVideoMenu"
-                              :class="[
-                  'btn-media-event has-dropdown camera',
-                  {
-                    shown: shownStreamVideoMenu,
-                    'device-disabled': streamVideo.deviceId === 'disabled'
-                  }
-                ]">
-                          <button type="button" class="root-btn" @click="showStreamVideoMenu">
-                              <span class="root-btn__inside" />
-                          </button>
-                          <div class="menu">
-                              <button
-                                      v-for="video in streamVideos"
-                                      v-bind:key="video.deviceId"
-                                      type="button"
-                                      :data-type="video.deviceId"
-                                      :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
-                                      @click="() => setStreamVideo(video)"
-                              >
-                                  <span class="value">{{ video.label }}</span>
-                              </button>
-                          </div>
+                    </div>
+                    <div
+                      v-if="streamVideo"
+                      v-click-outside="hideStreamVideoMenu"
+                      :class="[
+                        'btn-media-event has-dropdown camera',
+                        {
+                          shown: shownStreamVideoMenu,
+                          'device-disabled': streamVideo.deviceId === 'disabled'
+                        }
+                    ]">
+                      <button type="button" class="root-btn" @click="showStreamVideoMenu">
+                        <span class="root-btn__inside" />
+                      </button>
+                      <div class="menu">
+                        <button
+                          v-for="video in streamVideos"
+                          v-bind:key="video.deviceId"
+                          type="button"
+                          :data-type="video.deviceId"
+                          :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
+                          @click="() => setStreamVideo(video)"
+                        >
+                          <span class="value">{{ video.label }}</span>
+                        </button>
                       </div>
-                      <div
-                              v-if="streamAudio"
-                              v-click-outside="hideStreamAudioMenu"
-                              :class="[
-                  'btn-media-event has-dropdown microphone',
-                  {
-                    shown: shownStreamAudioMenu,
-                    'device-disabled': streamAudio.deviceId === undefined
-                  }
-                ]">
-                          <button type="button" class="root-btn" @click="showStreamAudioMenu">
-                              <span class="root-btn__inside" />
-                          </button>
-                          <div class="menu">
-                              <button
-                                      v-for="audio in streamAudios"
-                                      v-bind:key="audio.deviceId"
-                                      type="button"
-                                      :data-type="audio.deviceId"
-                                      :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
-                                      @click="() => setStreamAudio(audio)"
-                              >
-                                  <span class="value">{{ audio.label || "Disable Microphone" }}</span>
-                              </button>
-                          </div>
-                      </div>
-                  </div>
+                    </div>
+                    <div
+                      v-if="streamAudio"
+                      v-click-outside="hideStreamAudioMenu"
+                      :class="[
+                        'btn-media-event has-dropdown microphone',
+                        {
+                          shown: shownStreamAudioMenu,
+                          'device-disabled': streamAudio.deviceId === undefined
+                        }
+                      ]">
+                      <button type="button" class="root-btn" @click="showStreamAudioMenu">
+                        <span class="root-btn__inside" />
+                      </button>
+                      <div class="menu">
+                        <button
+                          v-for="audio in streamAudios"
+                          v-bind:key="audio.deviceId"
+                          type="button"
+                          :data-type="audio.deviceId"
+                          :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
+                          @click="() => setStreamAudio(audio)"
+                        >
+                          <span class="value">{{ audio.label || "Disable Microphone" }}</span>
+                        </button>
+                </div>
+                </div>
               </div>
+            </div>
           </div>
         </div>
         <div id="videos">
@@ -112,32 +112,32 @@
           </div>
           <div id="stream-timer">{{ time }}</div>
           <div class="stream-online-label">live</div>
-          <div class="stream-comments-wrapper">
-              <div class="item">
-                  <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-                  <span class="name">Glance Shifter</span>
-                  <span class="text">Hi, my friends</span>
-              </div>
-              <div class="item">
-                  <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-                  <span class="name">Glance Shifter</span>
-                  <span class="text">Hi, my friends</span>
-              </div>
-              <div class="item">
-                  <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-                  <span class="name">Glance Shifter</span>
-                  <span class="text">Hi, my friends</span>
-              </div>
-              <div class="item">
-                  <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-                  <span class="name">Glance Shifter</span>
-                  <span class="text">Hi, my friends</span>
-              </div>
-              <div class="item">
-                  <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-                  <span class="name">Glance Shifter</span>
-                  <span class="text">Hi, my friends</span>
-              </div>
+          <div class="stream-comments-wrapper" v-if="false">
+            <div class="item">
+              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+              <span class="name">Glance Shifter</span>
+              <span class="text">Hi, my friends</span>
+            </div>
+            <div class="item">
+              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+              <span class="name">Glance Shifter</span>
+              <span class="text">Hi, my friends</span>
+            </div>
+            <div class="item">
+              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+              <span class="name">Glance Shifter</span>
+              <span class="text">Hi, my friends</span>
+            </div>
+            <div class="item">
+              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+              <span class="name">Glance Shifter</span>
+              <span class="text">Hi, my friends</span>
+            </div>
+            <div class="item">
+              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+              <span class="name">Glance Shifter</span>
+              <span class="text">Hi, my friends</span>
+            </div>
           </div>
           <form class="stream-comment-form">
               <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
