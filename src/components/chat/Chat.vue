@@ -1,26 +1,6 @@
 <template>
   <Wrapper :mode="mode">
     <template slot="col1">
-      <div class="contactsListHeader">
-        <a
-          :href="'/' + user.username"
-          class="avatar header-avatar"
-          @click.prevent="openUserMobileBar"
-        >
-          <img v-if="user.avatar" :src="user.avatar">
-        </a>
-        <h3>Messages</h3>
-        <div class="newMessage-link">
-          <a
-            href="/chat/new"
-            @click.prevent="goTo('/chat/new')"
-            class="newMessage"
-          >New message
-          </a>
-        </div>
-        <MobileHeader />
-      </div>
-
       <div
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
         v-if="!noMessages"

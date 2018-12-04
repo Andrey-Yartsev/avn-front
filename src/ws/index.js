@@ -34,6 +34,7 @@ export default () => {
     };
     ws.onmessage = r => {
       const data = JSON.parse(r.data);
+      // console.log(data);
       const keys = Object.keys(data);
       for (let key of keys) {
         if (actions[key]) {
