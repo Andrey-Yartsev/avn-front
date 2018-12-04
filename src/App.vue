@@ -50,7 +50,7 @@ import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
 
 import rootClasses from "@/rootClasses";
-import ws from "@/ws";
+import Ws from "@/ws";
 import Cookie from "@/utils/cookie";
 import postMessageHandler from "@/postMessage";
 
@@ -79,7 +79,8 @@ export default {
   mixins: [ColorScheme],
   data() {
     return {
-      showToast: false
+      showToast: false,
+      wasLogout: false
     };
   },
   computed: {
@@ -106,6 +107,12 @@ export default {
     },
     darkTheme() {
       return this.$store.state.global.darkTheme;
+    },
+    loggedIn() {
+      if (!this.user) {
+        return false;
+      }
+      return true;
     }
   },
   watch: {
@@ -137,10 +144,21 @@ export default {
       } else {
         rootClassList.remove("dark-theme");
       }
+    },
+    loggedIn(loggedIn) {
+      if (!loggedIn) {
+        this.webSocket.close();
+        this.wasLogout = true;
+      } else {
+        if (this.wasLogout) {
+          this.webSocket.connect();
+        }
+      }
     }
   },
   created() {
-    ws();
+    this.webSocket = new Ws();
+    this.webSocket.connect();
 
     const params = queryString.parse(location.search);
     if (params.code) {
