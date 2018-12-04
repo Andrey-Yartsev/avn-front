@@ -51,7 +51,7 @@ import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
-import Live from "@/components/live/MediumView";
+import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";

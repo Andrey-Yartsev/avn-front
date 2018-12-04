@@ -1,5 +1,5 @@
 <template>
-  <div class="explore-item explore-item_col explore-item_col-4 liveView">
+  <div class="explore-item explore-item_col explore-item_col-4 liveView" @click="run">
     <div class="postLink live">
       <figure class="explore-media">
         <img :src="post.thumbUrl">
@@ -50,6 +50,16 @@ export default {
         result = minutes + " min";
       }
       return result;
+    }
+  },
+  methods: {
+    run() {
+      this.$store.dispatch("modal/show", {
+        name: "stream",
+        data: {
+          id: this.post.id
+        }
+      });
     }
   }
 };
