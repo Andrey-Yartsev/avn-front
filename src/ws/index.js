@@ -18,6 +18,7 @@ const actions = {
 
 export default () => {
   const start = () => {
+    // console.log("connected");
     const tz = moment().format("ZZ");
     const ws = new WebSocket(process.env.VUE_APP_WS_URL);
     ws.onopen = () => {
