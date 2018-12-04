@@ -22,7 +22,7 @@
               </a>
             </div>
           </div>
-          <MobileHeader />
+          <MobileHeader activeName="chat" />
         </div>
       </template>
 

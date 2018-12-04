@@ -8,8 +8,14 @@
       :class="{unread: user.hasNotifications}"
       @click.prevent="goToModalRoute('/notifications')"
     ><span>Notifications</span></router-link>
-    <router-link class="menu-item-messages header-nav__item showChat hidden-mobile" to="/chat"><span>Messages</span></router-link>
-    <router-link class="menu-item-messages header-nav__item hidden-desktop" to="/chat"><span>Messages</span></router-link>
+    <router-link
+      class="menu-item-messages header-nav__item showChat hidden-mobile" to="/chat"
+    ><span>Messages</span></router-link>
+    <router-link
+      class="menu-item-messages header-nav__item hidden-desktop"
+      to="/chat"
+      :class="{active: activeName === 'chat'}"
+    ><span>Messages</span></router-link>
   </nav>
 </template>
 
@@ -20,6 +26,13 @@ export default {
   name: "MobileHeader",
 
   mixins: [ModalRouterGoto],
+
+  props: {
+    activeName: {
+      default: null,
+      type: String
+    }
+  },
 
   computed: {
     user() {

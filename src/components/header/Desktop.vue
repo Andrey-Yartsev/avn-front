@@ -8,7 +8,7 @@
         v-if="user"
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
-        :class="{unread: user.hasNotifications}"
+        :class="{unread: user.hasNotifications, active: !!$route.meta.notifications}"
         @click.prevent="goToModalRoute('/notifications')"
       ><span>Notifications</span></a>
       <router-link class="menu-item-notifications header-nav__item hidden-desktop" to="/notifications"><span>Notifications</span>
@@ -19,7 +19,7 @@
         href="/chat"
         class="menu-item-messages header-nav__item hidden-mobile btn-notifications"
         @click.prevent="goToChat"
-        :class="{unread: user.hasMessages}"
+        :class="{unread: user.hasMessages, active: !!$route.meta.chat}"
       ><span>Messages</span></a>
       <router-link class="menu-item-messages header-nav__item hidden-desktop" to="/chat"><span>Messages</span></router-link>
     </template>

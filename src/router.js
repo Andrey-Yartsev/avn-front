@@ -127,7 +127,8 @@ const routes = [
     path: "/notifications/:type?",
     component: NotificationsPage,
     meta: {
-      cssName: "notifications"
+      cssName: "notifications",
+      notifications: true
     }
   },
   {
