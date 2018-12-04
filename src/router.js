@@ -110,7 +110,7 @@ const routes = [
     component: ChatNewMessage,
     meta: {
       chat: true,
-      cssName: "chat"
+      cssName: "newChat"
     }
   },
   {

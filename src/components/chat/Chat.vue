@@ -20,9 +20,8 @@
             </a>
           </div>
         </div>
+        <MobileHeader />
       </div>
-
-      <MobileHeader />
 
       <div
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"

@@ -678,12 +678,16 @@
 
   &_live {
     margin-right: auto;
-    color: $secondary-color;
+    color: $primary-color;
     position: relative;
     display: flex;
     align-content: center;
     align-items: center;
     font-size: 15px;
+
+    &:hover {
+      color: $primary-color-darken;
+    }
 
     &.disabled {
       color: $main-color;

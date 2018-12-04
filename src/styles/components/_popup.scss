@@ -125,6 +125,10 @@
 
       .content {
         height: 100%;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          overflow-y: auto;
+        }
       }
 
       .selectedChatHeader {

@@ -1,5 +1,5 @@
 <template>
-  <div class="chatCollectionView">
+  <!--<div class="chatCollectionView">-->
     <div class="chatCollectionContent" :class="{chat: isSecondScreen}">
       <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
         <div class="chat-container">
@@ -11,7 +11,7 @@
       </div>
       <slot name="extra"></slot>
     </div>
-  </div>
+  <!--</div>-->
 </template>
 
 <script>

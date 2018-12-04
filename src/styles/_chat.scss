@@ -10,14 +10,16 @@
   #content {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      height: 100%;
+      //height: 100%;
     }
   }
 
   body {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      min-height: auto;
+      //min-height: auto;
+      //height: auto;
+      min-height: 100%;
     }
   }
 
@@ -31,12 +33,53 @@
 }
 
 
-.chatCollectionView {
+//.chatCollectionView,
+.chatCollectionContent {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+    padding-top: 88px;
+  }
+
+  .chat-page_new & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      max-height: 100%;
+      padding-top: 0;
+    }
+
+    .chatHeader {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+      }
+    }
+  }
 
   &.chat-wrapper {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       height: 100%;
+    }
+  }
+
+  > .chatHeader {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 380px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 0;
+      }
     }
   }
 }
@@ -56,7 +99,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 3px;
     bottom: 0;
   }
 }
@@ -74,14 +117,16 @@
   }
 }
 
-.chatCollectionView,
+//.chatCollectionView,
+.chatCollectionContent,
 .chatCreateNewView {
-  height: 100%;
+  //height: 100%; important role
   background-color: $white;
   display: flex;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     background-color: transparent;
+    height: 100%;
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -107,6 +152,7 @@
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
+    flex: 1;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -145,6 +191,8 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       height: 100%;
+      flex: 1;
+      padding-top: 0;
     }
 
     .chatCollectionView &,
@@ -162,6 +210,7 @@
       &_narrow {
         @include media-breakpoint-down($desktop-breakpoint) {
           transform: translate(-100%, 0);
+          position: absolute;
         }
       }
 
@@ -169,6 +218,13 @@
         @include media-breakpoint-down($desktop-breakpoint) {
           left: 0;
         }
+      }
+    }
+
+    > .chatHeader {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
       }
     }
   }
@@ -253,11 +309,23 @@
       }
 
       .chatHeader {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          width: 100%;
-          background-color: transparent;
-        }
+        //
+        //@include media-breakpoint-down($desktop-breakpoint) {
+        //  width: 100%;
+        //  background-color: transparent;
+        //  flex-wrap: wrap;
+        //  height: auto;
+        //  flex: 0 0 auto;
+        //}
+        //
+        //.contactsListHeader {
+        //
+        //  @include media-breakpoint-down($desktop-breakpoint) {
+        //    background-color: $white;
+        //    position: relative;
+        //    z-index: 10;
+        //  }
+        //}
 
         &_add-shadow {
           //box-shadow: none;
@@ -410,18 +478,46 @@
   flex-direction: row;
   height: 44px;
   flex: 0 0 44px;
-  position: relative;
   z-index: 11;
   background-color: $white;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    width: 100%;
+    background-color: transparent;
+    flex-wrap: wrap;
+    height: auto;
+    flex: 0 0 auto;
+    transition: all .3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .contactsListHeader {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background-color: $white;
+      position: relative;
+      z-index: 10;
+    }
+  }
+
   &.no-nav {
     padding: 0;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       min-height: 44px;
+    }
+  }
+
+  .scroll-top & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      top: -44px;
     }
   }
 
@@ -447,8 +543,33 @@
   }
 
   &_add-shadow {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       box-shadow: 0 2px 1px 0 rgba(#000, 0.1);
+    }
+  }
+
+  .header-nav {
+    width: 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: static;
+      top: auto;
+    }
+
+    .scroll-top & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  .header-avatar {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 30px;
+      margin-left: 0;
     }
   }
 }
@@ -466,12 +587,6 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 44px;
     transition: transform 0.2s ease-in-out 0s;
-  }
-
-  .scroll-top & {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      transform: translate3d(0, -44px, 0);
-    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -630,7 +745,7 @@
   }
 
   .chatCollectionContent__col_narrow & {
-    max-height: calc(100% - 44px);
+    //max-height: calc(100% - 44px);
     flex-direction: column;
     align-items: flex-start;
     align-content: flex-start;
@@ -638,7 +753,7 @@
     position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100% - 60px);
+      //max-height: calc(100% - 60px);
     }
   }
 
@@ -677,11 +792,14 @@
     z-index: 1;
 
     .chatCollectionContent__col_narrow & {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 60px;
+        bottom: 0;
+      }
     }
 
     &:before {
@@ -923,6 +1041,11 @@
     margin-left: 0;
     height: 100%;
   }
+
+  .chatCollectionContent & {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 .back-popup-btn {
@@ -989,9 +1112,15 @@
 
 .chat-container {
   width: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+
   flex: 1;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex: 1;
+  }
 }
 
 .mass-message {
@@ -1038,6 +1167,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    display: none;
+  }
 
   .selectedChatHeader {
     justify-content: center;
