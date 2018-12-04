@@ -186,6 +186,10 @@ export default {
   watch: {
     activeUserId(activeUserId) {
       this.$store.commit("chat/messages", []);
+      if (!activeUserId) {
+        this.$store.commit("chat/setActiveUserId", null);
+        return;
+      }
       this.$store.commit("chat/setActiveUserId", activeUserId);
       this.fetchMessages();
     }

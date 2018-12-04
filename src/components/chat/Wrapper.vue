@@ -2,7 +2,7 @@
   <!--<div class="chatCollectionView">-->
     <div class="chatCollectionContent" :class="{chat: isSecondScreen}">
 
-      <template v-if="!isNew">
+      <template>
         <div class="chatHeader">
           <div class="contactsListHeader">
             <a
@@ -62,6 +62,9 @@ export default {
     },
     isNew() {
       return this.routePath === "chat/new";
+    },
+    routePath() {
+      return this.$store.state.modalRouter.path;
     }
   },
 

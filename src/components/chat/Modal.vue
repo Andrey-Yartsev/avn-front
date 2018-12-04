@@ -1,6 +1,9 @@
 <template>
   <Modal>
-    <div class="popup-container chat-popup" slot="content">
+    <div
+      class="popup-container chat-popup" slot="content"
+      :class="{'chat-popup_new-msg': isNew}"
+    >
       <div class="content">
         <component :is="component" mode="modal" />
       </div>
@@ -30,6 +33,12 @@ export default {
       return this.$store.state.modalRouter.path === "chat/new"
         ? NewMessage
         : Chat;
+    },
+    routePath() {
+      return this.$store.state.modalRouter.path;
+    },
+    isNew() {
+      return this.routePath === "chat/new";
     }
   }
 };
