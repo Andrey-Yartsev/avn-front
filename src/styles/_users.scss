@@ -30,6 +30,7 @@
 
   .userView {
     background: $white;
+    overflow: hidden;
 
     @include media-breakpoint-down($desktop-breakpoint) {
 
@@ -200,6 +201,7 @@
       display: inline-block;
       color: inherit;
       min-width: 0;
+      max-width: 100%;
     }
   }
   .subscribed,
