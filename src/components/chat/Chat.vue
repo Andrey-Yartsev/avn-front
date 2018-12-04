@@ -1,24 +1,22 @@
 <template>
   <Wrapper :mode="mode">
     <template slot="col1">
-      <div class="chatHeader">
-        <div class="contactsListHeader">
+      <div class="contactsListHeader">
+        <a
+          :href="'/' + user.username"
+          class="avatar header-avatar"
+          @click.prevent="openUserMobileBar"
+        >
+          <img v-if="user.avatar" :src="user.avatar">
+        </a>
+        <h3>Messages</h3>
+        <div class="newMessage-link">
           <a
-            :href="'/' + user.username"
-            class="avatar header-avatar"
-            @click.prevent="openUserMobileBar"
-          >
-            <img v-if="user.avatar" :src="user.avatar">
+            href="/chat/new"
+            @click.prevent="goTo('/chat/new')"
+            class="newMessage"
+          >New message
           </a>
-          <h3>Messages</h3>
-          <div class="newMessage-link">
-            <a
-              href="/chat/new"
-              @click.prevent="goTo('/chat/new')"
-              class="newMessage"
-            >New message
-            </a>
-          </div>
         </div>
         <MobileHeader />
       </div>
