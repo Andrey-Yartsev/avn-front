@@ -57,7 +57,7 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "stream",
         data: {
-          id: this.post.id
+          stream: this.post
         }
       });
     }
