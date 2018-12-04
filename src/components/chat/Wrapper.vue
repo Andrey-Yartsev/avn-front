@@ -22,9 +22,8 @@
               </a>
             </div>
           </div>
+          <MobileHeader />
         </div>
-
-        <MobileHeader />
       </template>
 
       <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
