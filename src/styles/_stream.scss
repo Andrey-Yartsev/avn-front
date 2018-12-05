@@ -464,18 +464,6 @@
   z-index: 100;
   color: #fff;
 
-  @include media-breakpoint-down($tablet-breakpoint) {
-    @media screen and (orientation: landscape) {
-      -webkit-mask-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, transparent),
-        color-stop(0.2, #000)
-      );
-    }
-  }
-
   @include media-breakpoint-down($desktop-breakpoint) {
     @media screen and (orientation: landscape) {
       padding-top: 20px;
