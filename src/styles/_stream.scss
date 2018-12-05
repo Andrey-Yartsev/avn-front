@@ -1,5 +1,29 @@
 @import "components/imports";
 
+.stream-page {
+
+  &,
+  body {
+    height: 100%;
+  }
+
+  .main-container {
+    position: relative;
+  }
+
+  #content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.stream-container {
+  height: 100%;
+}
+
 .stream_enabled {
   position: fixed;
   left: 0;
@@ -424,5 +448,318 @@
   &:before {
     content: "\E605";
     @include icon-font;
+  }
+}
+
+
+.stream-summary-container {
+  width: 100%;
+  padding: 60px 20px 20px;
+  max-height: 100%;
+  overflow: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 100;
+  color: #fff;
+
+  @include media-breakpoint-down($tablet-breakpoint) {
+    @media screen and (orientation: landscape) {
+      -webkit-mask-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, transparent),
+        color-stop(0.2, #000)
+      );
+    }
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    @media screen and (orientation: landscape) {
+      padding-top: 20px;
+      top: 50px;
+      bottom: 20px;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 520px;
+  }
+
+  .mediasBottom {
+    padding-top: 20px;
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+}
+
+.stream-chart-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 10px;
+
+  &-item {
+
+    &-label {
+      font-size: 13px;
+      display: block;
+      padding: 0 0 3px;
+    }
+
+    &-value {
+      font-size: 21px;
+      display: block;
+    }
+
+    &__viewers {
+
+      .stream-chart-legend-item-value {
+        color: map_get($colors, 3);
+      }
+    }
+
+    &__likes {
+
+      .stream-chart-legend-item-value {
+        color: map_get($colors, 9);
+      }
+    }
+
+    &__tips {
+
+      .stream-chart-legend-item-value {
+        color: map_get($colors, 8);
+      }
+    }
+
+    &__comments {
+
+      .stream-chart-legend-item-value {
+        color: map_get($colors, 6);
+      }
+    }
+  }
+}
+
+
+.stream-chart-scale {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0 20px;
+  opacity: .5;
+}
+
+.stream-summary-data {
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 8px 0;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      @media screen and (orientation: landscape) {
+        padding: 8px 0;
+      }
+    }
+
+    &__duration {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 8px 0 11px;
+      }
+
+      .stream-summary-data-item__value {
+        font-size: 18px;
+      }
+    }
+
+    .stream-summary-data-item {
+
+      &__value {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 21px;
+        }
+      }
+
+      &__label {
+
+        &:before {
+          @include icon-font;
+          text-align: center;
+          display: inline-block;
+          width: 43px;
+          font-size: 20px;
+        }
+      }
+    }
+
+    &__viewers {
+
+      .stream-summary-data-item {
+
+        &__value {
+          color: map_get($colors, 3);
+        }
+
+        &__label {
+
+          &:before {
+            content: '\E633';
+            color: map_get($colors, 3);
+          }
+        }
+      }
+    }
+
+    &__likes {
+
+      .stream-summary-data-item {
+
+        &__value {
+          color: map_get($colors, 9);
+        }
+
+        &__label {
+
+          &:before {
+            content: "\E616";
+            color: map_get($colors, 9);
+          }
+        }
+      }
+    }
+
+    &__tips {
+
+      .stream-summary-data-item {
+
+        &__value {
+          color: map_get($colors, 8);
+        }
+
+        &__label {
+
+          &:before {
+            content: "\E618";
+            color: map_get($colors, 8);
+          }
+        }
+      }
+    }
+
+    &__comments {
+
+      .stream-summary-data-item {
+
+        &__value {
+          color: map_get($colors, 6);
+        }
+
+        &__label {
+
+          &:before {
+            content: "\E617";
+            color: map_get($colors, 6);
+          }
+        }
+      }
+    }
+
+    &:not(:first-child) {
+      max-width: none;
+      margin: 0 0 0 -10px;
+    }
+  }
+}
+
+.share-stream-label {
+  font-size: 13px;
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 0 62px;
+  }
+
+  .toggle-element {
+    flex: 0 0 48px;
+    margin-left: 20px;
+  }
+}
+
+.stream-details {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0 0 14px;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+
+    @media screen and (orientation: landscape) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-bottom: 24px;
+    display: block;
+  }
+  
+  > * {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+
+      @media screen and (orientation: landscape) {
+        flex: 0 0 48%;
+      }
+    }
+  }
+}
+
+#stream-chart {
+  overflow: hidden;
+  text-align: left;
+}
+
+.amcharts-main-div {
+  position: relative;
+}
+
+.amcharts-chart-div {
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  height: 164px;
+  padding: 0;
+  touch-action: auto;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 520px;
+  }
+
+  svg {
+    position: absolute;
+    width: 100%;
+    height: 164px;
+    top: -0.5px;
+    left: 0;
   }
 }
