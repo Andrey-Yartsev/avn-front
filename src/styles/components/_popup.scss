@@ -61,13 +61,13 @@
     }
 
     &.popup-alert {
+      top: 50%;
+      transform: translate(-50%, -50%);
 
       @include media-breakpoint-down($tablet-breakpoint) {
         position: fixed;
         left: 50%;
         right: auto;
-        top: 60px;
-        transform: translate(-50%, 0);
         box-shadow: 0 2px 2px rgba(#000, 0.1);
         border-radius: 6px;
         max-width: 300px;
