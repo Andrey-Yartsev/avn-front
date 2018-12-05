@@ -310,7 +310,7 @@ export default {
       Streams.startStream();
     },
     stopStream() {
-      Streams.stopStreaming();
+      Streams.stopStream();
     },
     close() {
       if (this.isStarted) {
