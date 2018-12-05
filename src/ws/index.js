@@ -2,6 +2,7 @@ import Store from "@/store";
 import Fingerprint from "fingerprintjs2";
 import moment from "moment";
 
+import stream from "./actions/stream";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
@@ -13,7 +14,8 @@ const actions = {
   new_notification,
   payoutsApproved,
   subscription,
-  tip
+  tip,
+  stream
 };
 
 export default class {
