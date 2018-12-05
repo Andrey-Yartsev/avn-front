@@ -6,10 +6,6 @@
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile" />
     <div class="white-bg-block">
-      <ProfileBackground  :profile="profile" />
-      <div class="profile-images">
-        <ProfileAvatar :profile="profile" />
-      </div>
       <div class="profile-header-container">
         <div class="profile-header">
           <div class="profile-name">
@@ -32,6 +28,10 @@
         </div>
       </div>
       <div class="post-types-tabs">
+        <ProfileBackground  :profile="profile" />
+        <div class="profile-images">
+          <ProfileAvatar :profile="profile" />
+        </div>
         <div class="container">
           <div class="profile-name">
             <span class="name">

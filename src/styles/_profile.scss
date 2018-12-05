@@ -168,15 +168,19 @@
 
   &__inner {
     position: relative;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 90px;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .avatar {
@@ -191,9 +195,9 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
-      left: 13px;
-      bottom: -39px;
-      transform: translate(-2%, 2.5%);
+      left: 23px;
+      bottom: 10px;
+      transform: translate(-2%, -2.4%);
     }
 
     &:before {
@@ -456,7 +460,7 @@
     display: block;
     padding: 0;
     margin: 0 0 25px;
-    top: 80px;
+    top: -240px;
   }
 
   .container {
@@ -929,7 +933,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     justify-content: space-between;
-    margin-left: 2px;
+    margin-left: 7px;
   }
 }
 
