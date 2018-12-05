@@ -60,6 +60,24 @@
       }
     }
 
+    &.popup-alert {
+
+      @include media-breakpoint-down($tablet-breakpoint) {
+        position: fixed;
+        left: 50%;
+        right: auto;
+        top: 60px;
+        transform: translate(-50%, 0);
+        box-shadow: 0 2px 2px rgba(#000, 0.1);
+        border-radius: 6px;
+        max-width: 300px;
+      }
+
+      @include media-breakpoint-up($tablet-breakpoint) {
+        max-width: 320px;
+      }
+    }
+
     &.lightbox-container {
       width: auto;
       top: 50%;
@@ -318,4 +336,19 @@
 .chatSelectedView,
 .ps-container {
   will-change: opacity;
+}
+
+.popup-alert {
+  text-align: center;
+
+  &__msg {
+    font-weight: 500;
+    padding: 20px;
+    font-size: 17px;
+  }
+
+  &__btn {
+    padding: 20px;
+    border-top: 1px solid rgba($gray, 0.2);
+  }
 }

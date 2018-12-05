@@ -170,6 +170,18 @@
         </div>
       </div>
     </div>
+
+    <div class="popup" style="display: none;">
+      <div class="overlay"></div>
+      <div class="popup-container popup-alert">
+        <div class="popup-alert__msg">
+            Live video has ended
+        </div>
+        <div class="popup-alert__btn">
+          <button class="btn lg">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
