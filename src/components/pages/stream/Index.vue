@@ -512,7 +512,7 @@ export default {
       Streams.startStream();
     },
     stopStream() {
-      Streams.stopStreaming();
+      Streams.stopStream();
     },
     close() {
       if (this.isStarted) {
@@ -566,7 +566,10 @@ export default {
           })
           .then(({ id }) => {
             this.startedStreamId = id;
-            Streams.config.clientGetApiUrl = `https://team2.retloko.com/api2/v2/streams/${id}/url?access-token=${token}`;
+            Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
+              id,
+              token
+            );
           });
       },
       onStreamEnd: () => {
