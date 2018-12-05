@@ -2,32 +2,10 @@
   <Modal :onClose="close">
     <template slot="content">
       <div id="stream">
-        <div id="stream-timer">0:34</div>
+        <div id="stream-timer">{{ time }}</div>
         <div class="stream-online-label">live</div>
-        <span role="button" id="close-stream-window" />
-        <div class="global-preloader" style="display: none;">
-          <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle></svg>
-        </div>
-        <span role="button" class="popup-menu-btn" data-toggle="stream-popup-menu-viewer" id="stream-popup-menu-btn" data-placement-v="bottom" data-placement-h="right">
-          <span></span>
-        </span>
-        <div id="stream-popup-menu-viewer" class="popup-menu">
-          <div role="button" id="stream-disable-likes" class="popup-menu-item">Hide likes</div>
-          <div role="button" id="stream-disable-comments" class="popup-menu-item selected">Hide comments</div>
-          <div role="button" class="popup-menu-item popup-menu-item__cancel">Cancel</div>
-        </div>
-        <div class="stream-comments-wrapper"></div>
-        <div class="stream-viewer-btns">
-          <span role="button" class="stream-comment-btn"></span>
-          <form class="stream-comment-form">
-            <input type="text" placeholder="Comment" class="stream-comment-input" maxlength="140">
-            <button type="button" class="stream-comment-send-btn" disabled=""></button>
-          </form>
-          <span role="button" class="stream-like-btn"></span>
-          <span class="stream-online-count"></span>
-        </div>
-        <video class="" id="remotevideo" width="320" height="240" playsinline="" autoplay=""></video>
+        <span role="button" id="close-stream-window" @click="stopWatching" />
+        <video id="remotevideo" width="320" height="240" playsinline="" autoplay=""></video>
       </div>
     </template>
   </Modal>
@@ -45,16 +23,47 @@ export default {
     Loader
   },
   data: () => ({
-    loading: true
+    loading: true,
+    time: undefined,
+    shouldUpdateTimer: false
   }),
   methods: {
+    stopWatching() {
+      Streams.stopStream(false, true);
+      // Послать веб сокет что я перестал смотреть
+      this.close();
+    },
+    updateTimer() {
+      const start = new Date(
+        this.$store.state.modal.stream.data.stream.startedAt
+      );
+      const diff = Date.now() - start;
+      const date = new Date(diff);
+      let hours = date.getHours();
+      let mins = date.getMinutes();
+      let secs = date.getSeconds();
+      hours = hours < 10 ? `0${hours}` : `${hours}`;
+      mins = mins < 10 ? `0${mins}` : `${mins}`;
+      secs = secs < 10 ? `0${secs}` : `${secs}`;
+      this.time =
+        diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
+
+      if (!this.shouldUpdateTimer) return;
+
+      setTimeout(() => {
+        this.updateTimer();
+      }, 1000);
+    },
     close() {
-      // console.log("close");
+      this.$store.dispatch("modal/hide", {
+        name: "stream"
+      });
+      location.reload();
     }
   },
   mounted() {
     const token = this.$store.state.auth.token;
-    const id = this.$store.state.modal.stream.data.id;
+    const id = this.$store.state.modal.stream.data.stream.id;
     Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     Streams.config.remoteVideo = document.getElementById("remotevideo");
     Streams.viewStream();
@@ -67,15 +76,19 @@ export default {
       showMessage: function(message) {
         alert(message);
       },
-      onStreamEnd: function(/* isError, isClient */) {
-        // Streams.config.remoteVideo.classList.add("hidden");
-        // document.getElementById("view-stream").classList.remove("hidden");
-        // document.getElementById("close-stream").classList.add("hidden");
-        // document.getElementById("video-controls").classList.add("hidden");
-        // document.getElementById("streamer-status").classList.add("hidden");
-        // if (!isClient) {
-        //   alert("Live video has ended");
-        // }
+      onStreamEnd: (isError, isClient) => {
+        this.shouldUpdateTimer = false;
+        this.time = undefined;
+
+        if (!isClient) {
+          alert("Live video has ended");
+        }
+
+        if (isError) {
+          alert("An error was happened");
+        }
+
+        this.close();
       },
 
       onStreamInit: function() {
@@ -198,7 +211,6 @@ export default {
         // document.getElementById("close-stream").classList.add("hidden");
         // document.getElementById("streamer-status").classList.add("hidden");
         // document.getElementById("video-controls").classList.add("hidden");
-
         alert(error);
       },
 
@@ -277,7 +289,9 @@ export default {
         // }
       },
 
-      onVideoPlaying: function() {
+      onVideoPlaying: () => {
+        this.shouldUpdateTimer = true;
+        this.updateTimer();
         // document.getElementById("waitingvideo") &&
         //   document.getElementById("waitingvideo").remove();
         // if (viewModule.config.remoteVideo.videoWidth) {
@@ -311,6 +325,9 @@ export default {
         // }
       }
     });
+  },
+  beforeDestroy() {
+    this.shouldUpdateTimer = false;
   }
 };
 </script>

@@ -139,18 +139,18 @@
               <span class="text">Hi, my friends</span>
             </div>
           </div>
-          <form class="stream-comment-form">
+          <form class="stream-comment-form" v-if="false">
               <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
               <button type="button" class="stream-comment-send-btn" disabled=""></button>
           </form>
-          <div class="stream-btns stream-viewer-btns">
+          <div class="stream-btns stream-viewer-btns" v-if="false">
               <span role="button" class="stream-comment-btn"></span>
               <span class="stream-like-btn"></span>
               <span class="stream-tip-btn"></span>
               <span class="stream-online-count">176</span>
           </div>
         </div>
-        <div>
+        <div v-if="false">
           Bitrate
           <select id="bitrateset">
             <option value="0">No limit</option>
