@@ -3,6 +3,7 @@ import Fingerprint from "fingerprintjs2";
 import moment from "moment";
 
 import stream from "./actions/stream";
+import stream_stop from "./actions/stream_stop";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
@@ -15,7 +16,8 @@ const actions = {
   payoutsApproved,
   subscription,
   tip,
-  stream
+  stream,
+  stream_stop
 };
 
 export default class {

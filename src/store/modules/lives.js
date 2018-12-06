@@ -20,8 +20,14 @@ const initState = {
 const state = { ...initState };
 
 const mutations = {
-  addNewOne(state, newLive) {
-    state.posts = [newLive, ...state.posts];
+  addNewOne(state, live) {
+    state.posts = [live, ...state.posts];
+  },
+
+  removeStream(state, live) {
+    state.posts = state.posts.filter(post => {
+      return post.id !== live.id;
+    });
   },
 
   resetPageState(state) {
