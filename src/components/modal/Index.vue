@@ -6,6 +6,10 @@
 </template>
 
 <script>
+const getScrollbarWidth = () => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
 export default {
   name: "Modal",
   methods: {
@@ -24,11 +28,16 @@ export default {
       type: String
     }
   },
+  created() {
+    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
+  },
   mounted() {
+    this.$store.commit("global/setModalOpened", true);
     document.addEventListener("keyup", this.keyUp);
     document.getElementsByTagName("body")[0].classList.add("modal-opened");
   },
   beforeDestroy() {
+    this.$store.commit("global/setModalOpened", false);
     document.removeEventListener("keyup", this.keyUp);
     document.getElementsByTagName("body")[0].classList.remove("modal-opened");
   }

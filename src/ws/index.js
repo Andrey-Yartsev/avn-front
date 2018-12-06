@@ -2,6 +2,7 @@ import Store from "@/store";
 import Fingerprint from "fingerprintjs2";
 import moment from "moment";
 
+import stream from "./actions/stream";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
@@ -13,15 +14,16 @@ const actions = {
   new_notification,
   payoutsApproved,
   subscription,
-  tip
+  tip,
+  stream
 };
 
 export default class {
   start(reconnect) {
     if (reconnect) {
-      // console.log("ws reconnected");
+      console.log("ws reconnected");
     } else {
-      // console.log("ws connected");
+      console.log("ws connected");
     }
     const tz = moment().format("ZZ");
     const ws = new WebSocket(process.env.VUE_APP_WS_URL);
@@ -40,7 +42,7 @@ export default class {
     };
     ws.onmessage = r => {
       const data = JSON.parse(r.data);
-      // console.log(data);
+      console.log("ws:", data);
       const keys = Object.keys(data);
       for (let key of keys) {
         if (actions[key]) {

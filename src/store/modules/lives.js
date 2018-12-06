@@ -20,6 +20,10 @@ const initState = {
 const state = { ...initState };
 
 const mutations = {
+  addNewOne(state, newLive) {
+    state.posts = [newLive, ...state.posts];
+  },
+
   resetPageState(state) {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];

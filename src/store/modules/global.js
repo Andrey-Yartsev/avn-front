@@ -10,7 +10,9 @@ const state = {
   error: null,
   darkTheme,
   showUserMobileBar: false,
-  userMobileBarOpening: false
+  userMobileBarOpening: false,
+  scrollBarWidth: 0,
+  modalOpened: false
 };
 
 const actions = {
@@ -67,6 +69,13 @@ const mutations = {
 
   setUserMobileBarOpening(state, opening) {
     state.userMobileBarOpening = opening;
+  },
+
+  setScrollBarWidth(state, width) {
+    state.scrollBarWidth = width;
+  },
+  setModalOpened(state, opened) {
+    state.modalOpened = opened;
   }
 };
 
