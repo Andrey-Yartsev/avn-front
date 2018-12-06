@@ -450,7 +450,6 @@
   top: -22px;
   box-shadow: 0 2px 1px rgba(#000, 0.1);
   z-index: 5;
-  opacity: 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     z-index: 3;
@@ -819,7 +818,13 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       z-index: 1;
+    }
 
+    .header-scrolled & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        z-index: 6;
+      }
     }
 
     img {

@@ -73,124 +73,124 @@
 </template>
 
 <script>
-    import Loader from "@/components/common/Loader";
-    import PostCollection from "@/components/common/postCollection/Index";
-    import ProfileAvatar from "@/components/common/profile/avatar/Index";
-    import InfinityScrollMixin from "@/mixins/infinityScroll";
-    import UserMixin from "@/mixins/user";
-    import FileUpload from "@/mixins/fileUpload";
-    import HeaderControl from "@/components/common/profile/headerControl/Index";
-    import FollowersCounter from "@/components/common/profile/followersCounter/Index";
-    import ProfileBackground from "@/components/common/profile/background/Index";
-    import ProfileActions from "@/components/common/profile/actions/Index";
-    import Wsp from "@/mixins/wsp";
+import Loader from "@/components/common/Loader";
+import PostCollection from "@/components/common/postCollection/Index";
+import ProfileAvatar from "@/components/common/profile/avatar/Index";
+import InfinityScrollMixin from "@/mixins/infinityScroll";
+import UserMixin from "@/mixins/user";
+import FileUpload from "@/mixins/fileUpload";
+import HeaderControl from "@/components/common/profile/headerControl/Index";
+import FollowersCounter from "@/components/common/profile/followersCounter/Index";
+import ProfileBackground from "@/components/common/profile/background/Index";
+import ProfileActions from "@/components/common/profile/actions/Index";
+import Wsp from "@/mixins/wsp";
 
-    export default {
-        name: "ProfileHome",
+export default {
+  name: "ProfileHome",
 
-        mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp],
+  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp],
 
-        components: {
-            Loader,
-            PostCollection,
-            ProfileAvatar,
-            FollowersCounter,
-            HeaderControl,
-            ProfileBackground,
-            ProfileActions
-        },
+  components: {
+    Loader,
+    PostCollection,
+    ProfileAvatar,
+    FollowersCounter,
+    HeaderControl,
+    ProfileBackground,
+    ProfileActions
+  },
 
-        data() {
-            return {
-                showTip: false
-            };
-        },
-
-        computed: {
-            loading() {
-                return this.$store.state.profile.home.fetchProfileLoading;
-            },
-            username() {
-                return this.$route.params.username;
-            },
-            pageName() {
-                return this.$route.params.page;
-            },
-            source() {
-                if (!this.pageName || this.pageName === "posts") {
-                    return "";
-                }
-
-                return this.pageName;
-            },
-            profile() {
-                return this.$store.state.profile.home.profile;
-            },
-            posts() {
-                return this.$store.state.profile.home.posts;
-            },
-            postLoading() {
-                return this.$store.state.profile.home.loading;
-            },
-            store() {
-                return this.$store.state.profile.home;
-            },
-            deletedPost() {
-                return this.$store.state.profile.home.deletedPost;
-            },
-            allMediaTypes() {
-                return [...this.inputAcceptTypes.photo];
-            },
-            updatedPost() {
-                return this.$store.state.post.updatedPost;
-            }
-        },
-        watch: {
-            username() {
-                this.init();
-            },
-            pageName() {
-                this.init();
-            },
-            deletedPost() {
-                this.$store.dispatch("profile/home/fetchProfile", this.username);
-            },
-            updatedPost() {
-                this.$store.dispatch("profile/home/updatePost", this.updatedPost);
-            }
-        },
-        methods: {
-            init() {
-                this.$store.commit("profile/home/resetPageState");
-                this.$store
-                    .dispatch("profile/home/fetchProfile", this.username)
-                    .then(() => {
-                        this.$store.dispatch("profile/home/setSource", this.source);
-                        this.getPosts();
-                    });
-            },
-            openAddPostModal() {
-                this.$store.dispatch("modal/show", {
-                    name: "addPost"
-                });
-            },
-            infinityScrollGetDataMethod() {
-                if (this.profile) {
-                    this.getPosts();
-                }
-            },
-            getPosts() {
-                this.$store.dispatch("profile/home/getPosts", this.profile.id);
-            }
-        },
-        created() {
-            this.init();
-        }
+  data() {
+    return {
+      showTip: false
     };
+  },
+
+  computed: {
+    loading() {
+      return this.$store.state.profile.home.fetchProfileLoading;
+    },
+    username() {
+      return this.$route.params.username;
+    },
+    pageName() {
+      return this.$route.params.page;
+    },
+    source() {
+      if (!this.pageName || this.pageName === "posts") {
+        return "";
+      }
+
+      return this.pageName;
+    },
+    profile() {
+      return this.$store.state.profile.home.profile;
+    },
+    posts() {
+      return this.$store.state.profile.home.posts;
+    },
+    postLoading() {
+      return this.$store.state.profile.home.loading;
+    },
+    store() {
+      return this.$store.state.profile.home;
+    },
+    deletedPost() {
+      return this.$store.state.profile.home.deletedPost;
+    },
+    allMediaTypes() {
+      return [...this.inputAcceptTypes.photo];
+    },
+    updatedPost() {
+      return this.$store.state.post.updatedPost;
+    }
+  },
+  watch: {
+    username() {
+      this.init();
+    },
+    pageName() {
+      this.init();
+    },
+    deletedPost() {
+      this.$store.dispatch("profile/home/fetchProfile", this.username);
+    },
+    updatedPost() {
+      this.$store.dispatch("profile/home/updatePost", this.updatedPost);
+    }
+  },
+  methods: {
+    init() {
+      this.$store.commit("profile/home/resetPageState");
+      this.$store
+        .dispatch("profile/home/fetchProfile", this.username)
+        .then(() => {
+          this.$store.dispatch("profile/home/setSource", this.source);
+          this.getPosts();
+        });
+    },
+    openAddPostModal() {
+      this.$store.dispatch("modal/show", {
+        name: "addPost"
+      });
+    },
+    infinityScrollGetDataMethod() {
+      if (this.profile) {
+        this.getPosts();
+      }
+    },
+    getPosts() {
+      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+    }
+  },
+  created() {
+    this.init();
+  }
+};
 </script>
 
 <style scoped>
-  .loader-container {
-    height: 300px;
-  }
+.loader-container {
+  height: 300px;
+}
 </style>
