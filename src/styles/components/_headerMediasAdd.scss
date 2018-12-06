@@ -390,4 +390,11 @@
     display: block;
     transition: all 0.3s;
   }
+
+  .stream & {
+
+    .stream_stop & {
+      display: none;
+    }
+  }
 }
