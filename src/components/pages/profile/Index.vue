@@ -1,75 +1,75 @@
 <template>
-  <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="false" text="" class="transparent small" />
-  </div>
-  <div class="profile" v-else>
-    <router-link class="addPost-btn-float" to="/addPost"/>
-    <HeaderControl :profile="profile" />
-    <div class="white-bg-block">
-      <ProfileBackground  :profile="profile" />
-      <div class="profile-images">
-        <ProfileAvatar :profile="profile" />
-      </div>
-      <div class="profile-header-container">
-        <div class="profile-header">
-          <div class="profile-name">
-            <div class="profile-name__main">
-              <span class="name">{{ profile.name }}</span>
-              <span class="verified-user" v-if="profile.isVerified"></span>
+    <div class="loader-container" v-if="loading">
+        <Loader :fullscreen="false" text="" class="transparent small" />
+    </div>
+    <div class="profile" v-else>
+        <router-link class="addPost-btn-float" to="/addPost"/>
+        <HeaderControl :profile="profile" />
+        <div class="white-bg-block">
+            <ProfileBackground  :profile="profile" />
+            <div class="profile-images">
+                <ProfileAvatar :profile="profile" />
             </div>
-            <span class="user-login"><a>{{ profile.username }}</a></span>
-          </div>
-          <div class="profile-desc">
-            <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
-            <a
-                v-if="profile.twitterUsername"
-                :href="'https://twitter.com/' + profile.twitterUsername"
-                class="profile-twitter-link" target="_blank"
-                rel="nofollow"
-            >twitter.com/{{ profile.twitterUsername }}</a>
-            <FollowersCounter :profile="profile" />
-          </div>
-        </div>
-      </div>
-      <div class="post-types-tabs">
-        <div class="container">
-          <div class="profile-name">
+            <div class="profile-header-container">
+                <div class="profile-header">
+                    <div class="profile-name">
+                        <div class="profile-name__main">
+                            <span class="name">{{ profile.name }}</span>
+                            <span class="verified-user" v-if="profile.isVerified"></span>
+                        </div>
+                        <span class="user-login"><a>{{ profile.username }}</a></span>
+                    </div>
+                    <div class="profile-desc">
+                        <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
+                        <a
+                                v-if="profile.twitterUsername"
+                                :href="'https://twitter.com/' + profile.twitterUsername"
+                                class="profile-twitter-link" target="_blank"
+                                rel="nofollow"
+                        >twitter.com/{{ profile.twitterUsername }}</a>
+                        <FollowersCounter :profile="profile" />
+                    </div>
+                </div>
+            </div>
+            <div class="post-types-tabs">
+                <div class="container">
+                    <div class="profile-name">
             <span class="name">
               {{ profile.name }}
             <span class="verified-user" v-if="profile.isVerified"></span>
             </span>
-            <span class="user-login"><a>{{ profile.username }}</a></span>
-          </div>
-          <ProfileActions
-            :profile="profile"
-            :page="pageName"
-          />
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="content-col">
-            <p :class="['empty-feed', { hidden: postLoading || posts.length }]">
-              <span>Nothing here yet</span>
-              <button
-                v-if="isOwner(this.profile.id)"
-                @click="openAddPostModal"
-                type="button"
-                class="make-post-btn feed"
-              >Create new post</button>
-            </p>
-            <div class="posts-container">
-              <PostCollection
-                :class="'rounded-container'"
-                :posts="posts" 
-                from="profile/home"
-              />
+                        <span class="user-login"><a>{{ profile.username }}</a></span>
+                    </div>
+                    <ProfileActions
+                            :profile="profile"
+                            :page="pageName"
+                    />
+                </div>
             </div>
-          </div>
+            <div class="container">
+                <div class="row">
+                    <div class="content-col">
+                        <p :class="['empty-feed', { hidden: postLoading || posts.length }]">
+                            <span>Nothing here yet</span>
+                            <button
+                                    v-if="isOwner(this.profile.id)"
+                                    @click="openAddPostModal"
+                                    type="button"
+                                    class="make-post-btn feed"
+                            >Create new post</button>
+                        </p>
+                        <div class="posts-container">
+                            <PostCollection
+                                    :class="'rounded-container'"
+                                    :posts="posts"
+                                    from="profile/home"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>

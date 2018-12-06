@@ -796,19 +796,78 @@
     position: -webkit-sticky;
     position: sticky;
     height: 32vw;
-    top: -240px;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      top: calc(44px - 32vw);
-    }
+    top: calc(44px - 32vw);
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: 320px;
-      //display: none;
+      //height: 320px;
+      height: 80px;
+      margin-bottom: 240px;
+      top: -240px;
+    }
+  }
+
+  .bg {
+    //overflow: hidden;
+    background-color: $white;
+    background-image: linear-gradient(
+      30deg,
+      $secondary-color-20 10%,
+      $primary-color-20 90%
+    );
+    z-index: 2;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      z-index: 1;
     }
 
     .header-scrolled & {
-      z-index: 6;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        z-index: 6;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      height: 32vw;
+      width: 100%;
+      position: relative;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 320px;
+      }
+    }
+  }
+
+  .bg-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 32vw;
+    overflow: hidden;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 320px;
+      top: auto;
+      bottom: -240px;
+    }
+
+    &:not(:empty) {
+
+      & ~ .container {
+
+        .select-user-image {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
     }
 
     &:before {
@@ -863,63 +922,6 @@
       }
     }
   }
-
-  .bg {
-    overflow: hidden;
-    background-color: $white;
-    background-image: linear-gradient(
-      30deg,
-      $secondary-color-20 10%,
-      $primary-color-20 90%
-    );
-    z-index: 2;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      z-index: 1;
-
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .container {
-      height: 32vw;
-      width: 100%;
-      position: relative;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        height: 320px;
-      }
-    }
-  }
-
-  .bg-wrap {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 32vw;
-    overflow: hidden;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 320px;
-    }
-
-    &:not(:empty) {
-
-      & ~ .container {
-
-        .select-user-image {
-          opacity: 0;
-          pointer-events: none;
-        }
-      }
-    }
-  }
 }
 
 .profile-btns-group {
@@ -929,7 +931,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     justify-content: space-between;
-    margin-left: 2px;
+    margin-left: 8px;
   }
 }
 
