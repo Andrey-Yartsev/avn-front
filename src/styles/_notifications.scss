@@ -304,8 +304,8 @@
     padding: 14px 20px 14px 65px;
   }
 
-  &.last-of-child,
-  &:last-of-child {
+  &.last-child,
+  &:last-child {
     border-bottom: none;
     border-radius: 0 0 5px 5px;
   }
