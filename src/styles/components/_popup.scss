@@ -24,26 +24,44 @@
   }
 
   & &-container {
+    max-width: 100%;
     width: 100%;
     overflow: hidden;
     background: $white;
     z-index: 100;
     min-height: 100px;
     max-height: 100%;
+    box-sizing: border-box;
+    position: relative;
 
     @include media-breakpoint-up($tablet-breakpoint) {
-      position: fixed;
-      left: 50%;
-      right: auto;
-      top: 60px;
-      transform: translate(-50%, 0);
       box-shadow: 0 2px 2px rgba(#000, 0.1);
       border-radius: 6px;
       max-width: 620px;
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      max-width: 100%;
+    .content {
+      width: 100%;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        overflow-y: auto;
+      }
+    }
+
+    &.notifications-popup {
+      display: block;
+
+      @include media-breakpoint-up($tablet-breakpoint) {
+        position: fixed;
+        left: 50%;
+        right: auto;
+        top: 36px;
+        transform: translate(-50%, 0);
+      }
     }
 
     &.popup-addPost {
@@ -57,12 +75,17 @@
 
       .close {
         color: $main;
+
+        @include media-breakpoint-down($tablet-breakpoint) {
+          display: block;
+        }
       }
     }
 
     &.popup-alert {
       top: 50%;
       transform: translate(-50%, -50%);
+      max-width: 300px;
 
       @include media-breakpoint-down($tablet-breakpoint) {
         position: fixed;
@@ -70,59 +93,56 @@
         right: auto;
         box-shadow: 0 2px 2px rgba(#000, 0.1);
         border-radius: 6px;
-        max-width: 300px;
-      }
-
-      @include media-breakpoint-up($tablet-breakpoint) {
-        max-width: 320px;
       }
     }
 
-    &.lightbox-container {
-      width: auto;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 30px;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        position: absolute;
-        left: 50%;
-        border-radius: 6px;
-        max-width: calc(100% - 60px);
-        max-height: calc(100% - 60px);
-        background-color: transparent;
-        padding: 0;
-      }
-
-      img {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          border: 30px solid $white;
-          max-width: calc(100vw - 60px);
-          max-height: calc(100vh - 60px);
-        }
-      }
-
-      .close {
-        padding: 2px 4px;
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: block;
-        }
-      }
-    }
+    //&.lightbox-container {
+    //  width: auto;
+    //  top: 50%;
+    //  transform: translate(-50%, -50%);
+    //  padding: 30px;
+    //
+    //  @include media-breakpoint-down($desktop-breakpoint) {
+    //    position: absolute;
+    //    left: 50%;
+    //    border-radius: 6px;
+    //    max-width: calc(100% - 60px);
+    //    max-height: calc(100% - 60px);
+    //    background-color: transparent;
+    //    padding: 0;
+    //  }
+    //
+    //  img {
+    //    display: block;
+    //    max-width: 100%;
+    //    max-height: 100%;
+    //    width: auto;
+    //    height: auto;
+    //
+    //    @include media-breakpoint-down($desktop-breakpoint) {
+    //      border: 30px solid $white;
+    //      max-width: calc(100vw - 60px);
+    //      max-height: calc(100vh - 60px);
+    //    }
+    //  }
+    //
+    //  .close {
+    //    padding: 2px 4px;
+    //
+    //    @include media-breakpoint-down($desktop-breakpoint) {
+    //      display: block;
+    //    }
+    //  }
+    //}
 
     &.chat-popup {
-      width: 100%;
+      //width: 100%;
       max-width: 956px;
       transform: translate(-50%, -50%);
+      left: 50%;
       top: 50%;
       height: 81%;
+      position: fixed;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         max-width: 100%;
@@ -146,6 +166,7 @@
       }
 
       .header-nav {
+
         @include media-breakpoint-up($desktop-breakpoint) {
           display: none;
         }
@@ -155,7 +176,7 @@
         height: 100%;
 
         @include media-breakpoint-down($desktop-breakpoint) {
-          overflow-y: auto;
+          //overflow-y: auto;
         }
       }
 
@@ -209,9 +230,11 @@
       }
     }
   }
+
   & &-payment {
     width: 100%;
     max-width: 800px;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       &,
       .content,
@@ -233,6 +256,7 @@
     font-weight: 600;
     padding: 21px 60px 21px 20px;
   }
+
   .close {
     position: absolute;
     right: 0;
@@ -288,18 +312,20 @@
     &:hover {
       opacity: 1;
     }
+
+    &:before {
+      @include icon-font;
+    }
   }
   .next {
     bottom: 0;
     &:before {
-      @include icon-font;
       content: "\E646";
     }
   }
   .previous {
     top: 0;
     &:before {
-      @include icon-font;
       content: "\E644";
     }
   }
@@ -350,5 +376,20 @@
   &__btn {
     padding: 20px;
     border-top: 1px solid rgba($gray, 0.2);
+  }
+}
+
+.popup-stream-details {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+
+.stream_stop {
+
+  + .popup-stream-details {
+    pointer-events: auto;
+    opacity: 1;
   }
 }

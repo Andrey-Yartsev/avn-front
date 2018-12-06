@@ -169,7 +169,7 @@
         </div>
     </div>
 
-    <div class="popup">
+    <div class="popup popup-stream-details">
       <div class="overlay"></div>
       <div class="stream-summary-container">
         <div class="stream-chart-legend">
