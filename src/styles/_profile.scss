@@ -168,19 +168,15 @@
 
   &__inner {
     position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
   }
 
   .avatar {
@@ -195,9 +191,9 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
-      left: 23px;
-      bottom: 10px;
-      transform: translate(-2%, -2.4%);
+      left: 13px;
+      bottom: -39px;
+      transform: translate(-2%, 2.5%);
     }
 
     &:before {
@@ -460,7 +456,7 @@
     display: block;
     padding: 0;
     margin: 0 0 25px;
-    top: -240px;
+    top: 80px;
   }
 
   .container {
@@ -824,11 +820,11 @@
       top: 0;
       height: 44px;
       background: linear-gradient(
-        to bottom,
-        rgba(#000, 0.2) 0%,
-        rgba(#000, 0.2) 33.33%,
-        rgba(#000, 0.1) 66.67%,
-        transparent 100%
+                      to bottom,
+                      rgba(#000, 0.2) 0%,
+                      rgba(#000, 0.2) 33.33%,
+                      rgba(#000, 0.1) 66.67%,
+                      transparent 100%
       );
       z-index: 7;
 
@@ -847,16 +843,16 @@
       z-index: 1;
       height: 12px;
       background: linear-gradient(
-        to top,
-        rgba(#000, 0.05) 0%,
-        transparent 100%
+                      to top,
+                      rgba(#000, 0.05) 0%,
+                      transparent 100%
       );
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-          to top,
-          rgba(#000, 0.1) 0%,
-          transparent 100%
+                        to top,
+                        rgba(#000, 0.1) 0%,
+                        transparent 100%
         );
         bottom: 0;
         height: 80px;
@@ -872,9 +868,9 @@
     overflow: hidden;
     background-color: $white;
     background-image: linear-gradient(
-      30deg,
-      $secondary-color-20 10%,
-      $primary-color-20 90%
+                    30deg,
+                    $secondary-color-20 10%,
+                    $primary-color-20 90%
     );
     z-index: 2;
 
@@ -933,7 +929,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     justify-content: space-between;
-    margin-left: 7px;
+    margin-left: 2px;
   }
 }
 
