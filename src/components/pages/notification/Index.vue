@@ -30,8 +30,8 @@
       <VuePerfectScrollbar class="notifications">
         <div
           class="NotificationsView"
-          :class="{[v.type]: true, unread: !v.isRead}"
-          v-for="v in items"
+          :class="{[v.type]: true, unread: !v.isRead, 'last-child': key === items.length - 1}"
+          v-for="(v, key) in items"
           v-bind:key="v.id"
         >
           <div class="avatars-wrapper">
