@@ -2,7 +2,7 @@
   <div class="explore-item explore-item_col explore-item_col-4 liveView" @click="run">
     <div class="postLink live">
       <figure class="explore-media">
-        <img :src="post.thumbUrl">
+        <img :src="imageSrc">
         <div v-if="duraion" class="item-length item-length_live hidden-mobile">
           <span class="value">{{ duraion }}</span>
         </div>
@@ -30,6 +30,10 @@ export default {
       required: true
     }
   },
+  data: () => ({
+    interval: undefined,
+    imageSrc: undefined
+  }),
   computed: {
     user() {
       return this.post.user;
@@ -60,7 +64,20 @@ export default {
           stream: this.post
         }
       });
+    },
+    updateMediaSrc() {
+      const random = Math.random().toFixed(3) * 1000;
+      this.imageSrc = `${this.post.thumbUrl}?v=${random}`;
     }
+  },
+  mounted() {
+    this.imageSrc = this.post.user.avatar;
+    this.interval = setInterval(() => {
+      this.updateMediaSrc();
+    }, 5000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   }
 };
 </script>

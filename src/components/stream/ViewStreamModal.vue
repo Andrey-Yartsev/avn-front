@@ -6,6 +6,18 @@
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
         <video id="remotevideo" width="320" height="240" playsinline="" autoplay=""></video>
+
+        <div class="popup">
+          <div class="overlay"></div>
+          <div class="popup-container popup-alert">
+            <div class="popup-alert__msg">
+              Live video has ended
+            </div>
+            <div class="popup-alert__btn">
+              <button class="btn lg">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
   </Modal>

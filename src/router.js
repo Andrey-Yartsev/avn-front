@@ -239,7 +239,10 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/stream",
-    component: StreamPage
+    component: StreamPage,
+    meta: {
+      cssName: "stream"
+    }
   },
   {
     beforeEnter: Auth.requireAuth,

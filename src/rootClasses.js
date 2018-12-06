@@ -18,5 +18,6 @@ export default {
   notifications: ["notifications-page", "no-site-header_mob"],
   newChat: ["chat-page", "chat-page_new"],
   addPost: ["addPost-page"],
-  search: ["search-page"]
+  search: ["search-page"],
+  stream: ["stream-page"]
 };
