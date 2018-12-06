@@ -21,9 +21,9 @@ const actions = {
 export default class {
   start(reconnect) {
     if (reconnect) {
-      // console.log("ws reconnected");
+      console.log("ws reconnected");
     } else {
-      // console.log("ws connected");
+      console.log("ws connected");
     }
     const tz = moment().format("ZZ");
     const ws = new WebSocket(process.env.VUE_APP_WS_URL);
@@ -42,7 +42,7 @@ export default class {
     };
     ws.onmessage = r => {
       const data = JSON.parse(r.data);
-      // console.log(data);
+      console.log("ws:", data);
       const keys = Object.keys(data);
       for (let key of keys) {
         if (actions[key]) {
