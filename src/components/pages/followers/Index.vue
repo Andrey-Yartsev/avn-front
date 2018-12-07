@@ -31,7 +31,7 @@
           <!--</div>-->
         <!--</div>-->
       <!--</div>-->
-      <div class="post-types-tabs">
+      <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
         <div class="container">
           <div class="profile-name">
             <span class="name">
@@ -155,6 +155,12 @@ export default {
     },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
+    },
+    scrollBarWidth() {
+      if (!this.$store.state.global.modalOpened) {
+        return 0;
+      }
+      return this.$store.state.global.scrollBarWidth;
     }
   },
   methods: {

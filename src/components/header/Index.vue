@@ -1,7 +1,7 @@
 <template>
   <header id="site_header" :class="{guest: noAuthHeader}">
     <div class="header-wrapper">
-      <div :class="['container', 'header_container']">
+      <div :class="['container', 'header_container']" v-bind:style="{ 'right': scrollBarWidth + 'px' }">
         <DesktopHeader />
         <h1 class="header-logo">
           <router-link to="/">
@@ -68,6 +68,12 @@ export default {
         return true;
       }
       return this.$route.meta && this.$route.meta.authSection;
+    },
+    scrollBarWidth() {
+      if (!this.$store.state.global.modalOpened) {
+        return 0;
+      }
+      return this.$store.state.global.scrollBarWidth;
     }
   },
   methods: {
