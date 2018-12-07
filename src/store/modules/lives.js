@@ -14,7 +14,11 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  deletedPost: undefined
+  deletedPost: undefined,
+  currentLive: {
+    likesCount: 0,
+    looksCount: 0
+  }
 };
 
 const state = { ...initState };
@@ -24,10 +28,28 @@ const mutations = {
     state.posts = [live, ...state.posts];
   },
 
+  addLike(state) {
+    state.currentLive.likesCount += 1;
+  },
+
+  look(state) {
+    state.currentLive.looksCount += 1;
+  },
+
+  unlook(state) {
+    state.currentLive.looksCount -= 1;
+  },
+
   removeStream(state, live) {
     state.posts = state.posts.filter(post => {
       return post.id !== live.id;
     });
+  },
+
+  resetCurrentLive() {
+    state.currentLive = {
+      ...initState.currentLive
+    };
   },
 
   resetPageState(state) {
