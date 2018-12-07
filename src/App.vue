@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="main-container" v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }">
     <Loader v-if="loading" class="page-loader"/>
     <template v-else>
 
@@ -113,6 +113,12 @@ export default {
         return false;
       }
       return true;
+    },
+    scrollBarWidth() {
+      if (!this.$store.state.global.modalOpened) {
+        return 0;
+      }
+      return this.$store.state.global.scrollBarWidth;
     }
   },
   watch: {
