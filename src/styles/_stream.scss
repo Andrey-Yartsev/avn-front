@@ -454,7 +454,7 @@
 
 .stream-summary-container {
   width: 100%;
-  padding: 60px 20px 20px;
+  padding: 20px 20px 20px;
   max-height: 100%;
   overflow: auto;
   top: 50%;
@@ -466,8 +466,7 @@
 
   @include media-breakpoint-down($desktop-breakpoint) {
     @media screen and (orientation: landscape) {
-      padding-top: 20px;
-      top: 50px;
+      top: 20px;
       bottom: 20px;
       transform: translate(-50%, 0);
     }
