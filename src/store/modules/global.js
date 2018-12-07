@@ -11,6 +11,7 @@ const state = {
   darkTheme,
   showUserMobileBar: false,
   userMobileBarOpening: false,
+  scrollBarInitWidth: 0,
   scrollBarWidth: 0,
   modalOpened: false
 };
@@ -74,6 +75,11 @@ const mutations = {
   setScrollBarWidth(state, width) {
     state.scrollBarWidth = width;
   },
+
+  setScrollBarInitWidth(state, width) {
+    state.scrollBarInitWidth = width;
+  },
+
   setModalOpened(state, opened) {
     state.modalOpened = opened;
   }
