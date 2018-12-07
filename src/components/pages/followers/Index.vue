@@ -161,6 +161,9 @@ export default {
         return 0;
       }
       return this.$store.state.global.scrollBarWidth;
+    },
+    scrollBarInitWidth() {
+      return this.$store.state.global.scrollBarInitWidth;
     }
   },
   methods: {

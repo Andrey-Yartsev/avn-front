@@ -4,10 +4,13 @@
 
   body {
 
-    &:not(.modal-opened) {
+    &.modal-opened {
 
-      .profile, .myProfile {
-        overflow: hidden;
+      .white-bg-block .bg {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          overflow: visible;
+        }
       }
     }
   }

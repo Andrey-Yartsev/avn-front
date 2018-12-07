@@ -10,7 +10,7 @@
             <div class="profile-images">
                 <ProfileAvatar :profile="profile" />
             </div>
-            <div class="profile-header-container">
+            <div class="profile-header-container" v-bind:style="{ 'left': -scrollBarWidth + 'px' }">
                 <div class="profile-header">
                     <div class="profile-name">
                         <div class="profile-name__main">
