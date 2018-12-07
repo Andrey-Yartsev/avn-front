@@ -1,6 +1,6 @@
 <template>
-  <div class="bg" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
-    <div class="bg-wrap">
+  <div class="bg">
+    <div class="bg-wrap" v-bind:style="{ 'right': -scrollBarWidth + 'px' }">
       <img v-if="bgPreview" :src="bgPreview" />
       <img v-else-if="profile.header" :src="profile.header" />
     </div>

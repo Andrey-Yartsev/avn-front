@@ -792,6 +792,16 @@
 
 .white-bg-block {
 
+  > .container {
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-top: 348px;
+      }
+    }
+  }
+
   > .bg {
     position: -webkit-sticky;
     position: sticky;
@@ -803,6 +813,17 @@
       height: 80px;
       margin-bottom: 240px;
       top: -240px;
+    }
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+      }
     }
   }
 
@@ -857,6 +878,13 @@
       height: 320px;
       top: auto;
       bottom: -240px;
+    }
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: 0;
+      }
     }
 
     &:not(:empty) {
