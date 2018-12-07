@@ -6,7 +6,7 @@
     <div class="stream " v-else>
         <div class="mediasTop">
           <div class="mediasTop__header">
-            <span class="category-name category-name_live hidden-mobile">Live video</span>
+            <span class="category-name category-name_live hidden-mobile" @click="close">Live video</span>
             <button class="close" @click="close">
               <span class="category-name category-name_live hidden-desktop">Live Video</span>
             </button>
@@ -107,6 +107,7 @@
               autoplay=""
               muted=""
               playsinline=""
+              v-if="!isStopped"
             />
           </div>
           <div id="stream-timer">{{ time }}</div>
@@ -367,7 +368,7 @@
             <span></span>
           </div>
         </label>
-        <div class="mediasBottom">
+        <div class="mediasBottom" @click="close">
             <button class="btn alt lg change-devices">Done</button>
         </div>
       </div>
