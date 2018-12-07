@@ -48,9 +48,9 @@ export default {
   computed: {
     scrollBarWidth() {
       if (!this.$store.state.global.modalOpened) {
-        return 0;
+        return this.$store.state.global.scrollBarWidth;
       }
-      return this.$store.state.global.scrollBarWidth;
+      return 0;
     }
   }
 };
