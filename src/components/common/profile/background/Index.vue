@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <div class="bg-wrap" v-bind:style="{ 'right': -scrollBarWidth + 'px' }">
+    <div class="bg-wrap" v-bind:style="{ 'right': -scrollBarInitWidth + 'px' }">
       <img v-if="bgPreview" :src="bgPreview" />
       <img v-else-if="profile.header" :src="profile.header" />
     </div>
@@ -46,11 +46,8 @@ export default {
     }
   },
   computed: {
-    scrollBarWidth() {
-      if (!this.$store.state.global.modalOpened) {
-        return this.$store.state.global.scrollBarWidth;
-      }
-      return 0;
+    scrollBarInitWidth() {
+      return this.$store.state.global.scrollBarInitWidth;
     }
   }
 };

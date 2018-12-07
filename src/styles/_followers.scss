@@ -2,6 +2,16 @@
 
 .following-page {
 
+  body {
+
+    &:not(.modal-opened) {
+
+      .profile, .myProfile {
+        overflow: hidden;
+      }
+    }
+  }
+
   .sticky-header-controls {
 
     @include media-breakpoint-down($desktop-breakpoint) {

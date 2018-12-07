@@ -2,6 +2,16 @@
 
 .profile-page {
 
+  body {
+
+    &:not(.modal-opened) {
+
+      .profile, .myProfile {
+        overflow: hidden;
+      }
+    }
+  }
+
   .profile,
   .myProfile {
 
