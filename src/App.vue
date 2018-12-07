@@ -56,6 +56,10 @@ import postMessageHandler from "@/postMessage";
 
 const queryString = require("query-string");
 
+const getScrollbarWidth = () => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
 export default {
   components: {
     Loader,
@@ -182,6 +186,10 @@ export default {
   },
 
   mounted() {
+    setTimeout(() => {
+      this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
+    }, 1000);
+
     let currentScroll = window.pageYOffset;
     document.body.onscroll = function() {
       if (currentScroll < window.pageYOffset) {

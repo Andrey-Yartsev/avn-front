@@ -12,6 +12,7 @@ import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
 import subscription from "./actions/subscription";
 import tip from "./actions/tip";
+import message from "./actions/message";
 
 const actions = {
   chats,
@@ -23,7 +24,8 @@ const actions = {
   stream_stop,
   stream_like,
   stream_look,
-  stream_unlook
+  stream_unlook,
+  message
 };
 
 export default class {
