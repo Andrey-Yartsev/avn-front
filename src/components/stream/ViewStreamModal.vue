@@ -6,7 +6,6 @@
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
         <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
-
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-alert">
@@ -17,6 +16,12 @@
               <button class="btn lg" @click="close">Close</button>
             </div>
           </div>
+        </div>
+        <div class="stream-btns stream-viewer-btns">
+          <span role="button" class="stream-comment-btn" v-if="false"></span>
+          <span class="stream-like-btn" @click="sendLike"></span>
+          <span class="stream-tip-btn" v-if="false"></span>
+          <span class="stream-online-count" v-if="false"></span>
         </div>
       </div>
     </template>
@@ -40,6 +45,12 @@ export default {
     shouldUpdateTimer: false,
     streamIsFinished: false
   }),
+  // computed: {
+  //   likeCount() {
+  //     console.log(this.$store.state.modal.stream.data.stream);
+  //     return this.$store.state.modal.stream.data.stream.id;
+  //   }
+  // },
   methods: {
     stopWatching() {
       Streams.stopStream(false, true);
@@ -84,7 +95,7 @@ export default {
         name: "stream"
       });
     },
-    click() {
+    sendLike() {
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
@@ -97,6 +108,9 @@ export default {
           sess: token
         })
       );
+    },
+    click() {
+      this.sendLike();
     }
   },
   mounted() {

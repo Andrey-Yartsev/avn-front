@@ -143,11 +143,11 @@
               <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
               <button type="button" class="stream-comment-send-btn" disabled=""></button>
           </form>
-          <div class="stream-btns stream-viewer-btns" v-if="false">
-              <span role="button" class="stream-comment-btn"></span>
-              <span class="stream-like-btn"></span>
-              <span class="stream-tip-btn"></span>
-              <span class="stream-online-count">176</span>
+          <div class="stream-btns stream-viewer-btns">
+              <span role="button" class="stream-comment-btn"  v-if="false"></span>
+              <span class="stream-like-btn">{{ likesCount }}</span>
+              <span class="stream-tip-btn" v-if="false"></span>
+              <span class="stream-online-count">{{ looksCount }}</span>
           </div>
         </div>
         <div v-if="false">
@@ -413,6 +413,12 @@ export default {
     Loader
   },
   computed: {
+    likesCount() {
+      return this.$store.state.lives.currentLive.likesCount;
+    },
+    looksCount() {
+      return this.$store.state.lives.currentLive.looksCount;
+    },
     streamVisibilities() {
       return [
         {
@@ -513,6 +519,8 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit("lives/resetCurrentLive");
+
     this.streamVisibility =
       this.user.subscribePrice > 0
         ? this.streamVisibilities[0]
@@ -567,15 +575,6 @@ export default {
               })
             );
 
-            this.$root.ws.ws.send(
-              JSON.stringify({
-                act: "stream_look",
-                stream_id: id,
-                stream_user_id: userId,
-                sess: token
-              })
-            );
-
             this.startedStreamId = id;
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
@@ -590,15 +589,6 @@ export default {
         this.$root.ws.ws.send(
           JSON.stringify({
             act: "stream_stop",
-            stream_id: this.startedStreamId,
-            stream_user_id: userId,
-            sess: token
-          })
-        );
-
-        this.$root.ws.ws.send(
-          JSON.stringify({
-            act: "stream_unlook",
             stream_id: this.startedStreamId,
             stream_user_id: userId,
             sess: token
