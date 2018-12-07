@@ -393,4 +393,15 @@
     pointer-events: auto;
     opacity: 1;
   }
+
+  .stream-video-container {
+
+    video {
+      opacity: 0;
+    }
+  }
+
+  .mediasHeaderControls {
+    opacity: 0;
+  }
 }
