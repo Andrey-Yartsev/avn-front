@@ -566,6 +566,15 @@ export default {
               })
             );
 
+            this.$root.ws.ws.send(
+              JSON.stringify({
+                act: "stream_look",
+                stream_id: id,
+                stream_user_id: userId,
+                sess: token
+              })
+            );
+
             this.startedStreamId = id;
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
@@ -580,6 +589,15 @@ export default {
         this.$root.ws.ws.send(
           JSON.stringify({
             act: "stream_stop",
+            stream_id: this.startedStreamId,
+            stream_user_id: userId,
+            sess: token
+          })
+        );
+
+        this.$root.ws.ws.send(
+          JSON.stringify({
+            act: "stream_unlook",
             stream_id: this.startedStreamId,
             stream_user_id: userId,
             sess: token

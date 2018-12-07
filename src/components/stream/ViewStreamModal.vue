@@ -38,7 +38,7 @@ export default {
     loading: true,
     time: undefined,
     shouldUpdateTimer: false,
-    streamIsFinished: false,
+    streamIsFinished: false
   }),
   methods: {
     stopWatching() {
@@ -46,7 +46,7 @@ export default {
 
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
-      const userId = this.$store.state.auth.user.id;
+      const userId = this.$store.state.modal.stream.data.stream.user.id;
 
       this.$root.ws.ws.send(
         JSON.stringify({
@@ -87,8 +87,8 @@ export default {
     click() {
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
-      const userId = this.$store.state.auth.user.id;
-      
+      const userId = this.$store.state.modal.stream.data.stream.user.id;
+
       this.$root.ws.ws.send(
         JSON.stringify({
           act: "stream_like",
@@ -131,7 +131,7 @@ export default {
       onStreamInit: () => {
         const token = this.$store.state.auth.token;
         const id = this.$store.state.modal.stream.data.stream.id;
-        const userId = this.$store.state.auth.user.id;
+        const userId = this.$store.state.modal.stream.data.stream.user.id;
 
         this.$root.ws.ws.send(
           JSON.stringify({
