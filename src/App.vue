@@ -188,7 +188,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.commit("global/setScrollBarInitWidth", getScrollbarWidth());
-    }, 1000);
+    }, 3000);
 
     let currentScroll = window.pageYOffset;
     document.body.onscroll = function() {
