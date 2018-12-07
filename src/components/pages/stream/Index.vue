@@ -1,5 +1,5 @@
 <template>
-  <div class="stream-container" :class="{stream_enabled: isStarted}">
+  <div class="stream-container" :class="{stream_enabled: isStarted, stream_stop: isStopped}">
     <div class="loader-container" v-if="!user">
       <Loader :fullscreen="false" text="" class="transparent small" />
     </div>
@@ -403,6 +403,7 @@ export default {
 
       isReadyToStart: false,
       isStarted: false,
+      isStopped: false,
       time: undefined,
       startedStreamId: undefined
     };
@@ -553,6 +554,18 @@ export default {
             return res.json();
           })
           .then(({ id }) => {
+            const token = this.$store.state.auth.token;
+            const userId = this.$store.state.auth.user.id;
+
+            this.$root.ws.ws.send(
+              JSON.stringify({
+                act: "stream_start",
+                stream_id: id,
+                stream_user_id: userId,
+                sess: token
+              })
+            );
+
             this.startedStreamId = id;
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
@@ -561,9 +574,22 @@ export default {
           });
       },
       onStreamEnd: () => {
+        const token = this.$store.state.auth.token;
+        const userId = this.$store.state.auth.user.id;
+
+        this.$root.ws.ws.send(
+          JSON.stringify({
+            act: "stream_stop",
+            stream_id: this.startedStreamId,
+            stream_user_id: userId,
+            sess: token
+          })
+        );
+
         this.time = undefined;
         this.isReadyToStart = true;
         this.isStarted = false;
+        this.isStopped = true;
         StreamApi.deleteStream(this.startedStreamId);
         this.startedStreamId = undefined;
       },

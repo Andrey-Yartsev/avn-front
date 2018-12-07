@@ -165,6 +165,7 @@ export default {
   created() {
     this.webSocket = new Ws();
     this.webSocket.connect();
+    this.$root.ws = this.webSocket;
 
     const params = queryString.parse(location.search);
     if (params.code) {

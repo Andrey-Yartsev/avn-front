@@ -5,16 +5,16 @@
         <div id="stream-timer">{{ time }}</div>
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
-        <video id="remotevideo" width="320" height="240" playsinline="" autoplay=""></video>
+        <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
 
-        <div class="popup">
+        <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-alert">
             <div class="popup-alert__msg">
               Live video has ended
             </div>
             <div class="popup-alert__btn">
-              <button class="btn lg">Close</button>
+              <button class="btn lg" @click="close">Close</button>
             </div>
           </div>
         </div>
@@ -37,12 +37,25 @@ export default {
   data: () => ({
     loading: true,
     time: undefined,
-    shouldUpdateTimer: false
+    shouldUpdateTimer: false,
+    streamIsFinished: false,
   }),
   methods: {
     stopWatching() {
       Streams.stopStream(false, true);
-      // Послать веб сокет что я перестал смотреть
+
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      const userId = this.$store.state.auth.user.id;
+
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_unlook",
+          stream_id: id,
+          stream_user_id: userId,
+          sess: token
+        })
+      );
       this.close();
     },
     updateTimer() {
@@ -70,7 +83,20 @@ export default {
       this.$store.dispatch("modal/hide", {
         name: "stream"
       });
-      location.reload();
+    },
+    click() {
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      const userId = this.$store.state.auth.user.id;
+      
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_like",
+          stream_id: id,
+          stream_user_id: userId,
+          sess: token
+        })
+      );
     }
   },
   mounted() {
@@ -93,18 +119,28 @@ export default {
         this.time = undefined;
 
         if (!isClient) {
-          alert("Live video has ended");
+          this.streamIsFinished = true;
         }
 
         if (isError) {
           alert("An error was happened");
+          this.close();
         }
-
-        this.close();
       },
 
-      onStreamInit: function() {
-        // document.getElementById("view-stream").classList.add("hidden");
+      onStreamInit: () => {
+        const token = this.$store.state.auth.token;
+        const id = this.$store.state.modal.stream.data.stream.id;
+        const userId = this.$store.state.auth.user.id;
+
+        this.$root.ws.ws.send(
+          JSON.stringify({
+            act: "stream_look",
+            stream_id: id,
+            stream_user_id: userId,
+            sess: token
+          })
+        );
       },
 
       onSetupStreamingSession: function() {
