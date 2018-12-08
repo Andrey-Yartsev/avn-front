@@ -28,6 +28,13 @@ const mutations = {
     }
   },
 
+  resetPosts(state) {
+    state.posts = [];
+    state.offset = 0;
+    state.marker = "";
+    state.allDataReceived = false;
+  },
+
   setSource(state, source) {
     state.source = source;
   },
