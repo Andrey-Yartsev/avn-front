@@ -5,7 +5,16 @@
         <div id="stream-timer">{{ time }}</div>
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
-        <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
+        <div id="videowrap">
+          <div class="likesContainer">
+            <div id="" class="like" style="top: 30%; left: 20%;">
+              <div class='like-icon'>
+                <div class='like-icon__symbol' />
+              </div>
+            </div>
+          </div>
+          <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
+        </div>
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-alert">
@@ -43,14 +52,9 @@ export default {
     loading: true,
     time: undefined,
     shouldUpdateTimer: false,
-    streamIsFinished: false
+    streamIsFinished: false,
+    likes: []
   }),
-  // computed: {
-  //   likeCount() {
-  //     console.log(this.$store.state.modal.stream.data.stream);
-  //     return this.$store.state.modal.stream.data.stream.id;
-  //   }
-  // },
   methods: {
     stopWatching() {
       Streams.stopStream(false, true);
@@ -109,8 +113,65 @@ export default {
         })
       );
     },
-    click() {
-      this.sendLike();
+    getLikePosition(event) {
+      const video = Streams.config.remoteVideo;
+      let video_width = video.videoWidth;
+      let video_height = video.videoHeight;
+      const video_ratio = video_height / video_width;
+      const window_width = window.innerWidth;
+      const window_height = window.innerHeight;
+      const window_ratio = window_height / window_width;
+
+      let pos_x = event.clientX;
+      let pos_y = event.clientY;
+
+      if (video_ratio > window_ratio) {
+        video_height = window_height;
+        video_width = video_height / video_ratio;
+        pos_x = pos_x - (window_width - video_width) / 2;
+        if (0 >= pos_x || pos_x >= video_width) {
+          pos_x = 0;
+          pos_y = 0;
+        }
+      } else {
+        video_width = window_width;
+        video_height = video_width * video_ratio;
+        pos_y = pos_y - (window_height - video_height) / 2;
+        if (0 >= pos_y || pos_y >= video_height) {
+          pos_x = 0;
+          pos_y = 0;
+        }
+      }
+
+      const x = pos_x / video_width;
+      const y = pos_y / video_height;
+
+      return { x, y };
+    },
+    // drawLike(x, y) {
+      // const id = Math.random().toFixed(8) * 10000000;
+      // document
+      //   .getElementById("videowrap")
+      //   .insertAdjacentHTML("beforeend", like);
+      // setTimeout(() => {
+      //   document.getElementById(id).remove();
+      // }, 5000);
+    // },
+    click(event) {
+      const position = this.getLikePosition(event);
+
+      Streams.sendCustomMessage({
+        msgtype: "data.custom",
+        to: ["streamer"],
+        data: {
+          type: "click.position",
+          position
+        }
+      });
+
+      // this.drawLike(100, 100);
+
+      // this.sendLike();
     }
   },
   mounted() {
