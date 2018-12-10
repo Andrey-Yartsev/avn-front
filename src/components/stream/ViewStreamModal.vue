@@ -5,16 +5,12 @@
         <div id="stream-timer">{{ time }}</div>
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
-        <div id="videowrap">
-          <div class="likesContainer">
-            <div id="" class="like" style="top: 30%; left: 20%;">
-              <div class='like-icon'>
-                <div class='like-icon__symbol' />
-              </div>
-            </div>
+        <div class="likesContainer">
+          <div v-for="like in likes" :id="like.date" :key="like.date" class="like" :style="{ top: `${like.y}px`, left: `${like.x}px`}">
+            <div class='like-icon'><div class='like-icon__symbol' /></div>
           </div>
-          <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
         </div>
+        <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-alert">
@@ -28,7 +24,7 @@
         </div>
         <div class="stream-btns stream-viewer-btns">
           <span role="button" class="stream-comment-btn" v-if="false"></span>
-          <span class="stream-like-btn" @click="sendLike"></span>
+          <span class="stream-like-btn" @click="throttledLike"></span>
           <span class="stream-tip-btn" v-if="false"></span>
           <span class="stream-online-count" v-if="false"></span>
         </div>
@@ -37,6 +33,7 @@
   </Modal>
 </template>
 <script>
+import { throttle } from "throttle-debounce";
 import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
 import Streams from "streaming-module/view_module";
@@ -55,7 +52,19 @@ export default {
     streamIsFinished: false,
     likes: []
   }),
+  computed: {
+    throttledLike() {
+      return throttle(300, this.like);
+    }
+  },
   methods: {
+    updateLikes() {
+      const now = Date.now();
+
+      this.likesInterval = setInterval(() => {
+        this.likes = this.likes.filter(item => item.date + 5000 < now);
+      }, 5000);
+    },
     stopWatching() {
       Streams.stopStream(false, true);
 
@@ -74,6 +83,8 @@ export default {
       this.close();
     },
     updateTimer() {
+      if (!this.shouldUpdateTimer) return;
+
       const start = new Date(
         this.$store.state.modal.stream.data.stream.startedAt
       );
@@ -88,8 +99,6 @@ export default {
       this.time =
         diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
 
-      if (!this.shouldUpdateTimer) return;
-
       setTimeout(() => {
         this.updateTimer();
       }, 1000);
@@ -98,20 +107,6 @@ export default {
       this.$store.dispatch("modal/hide", {
         name: "stream"
       });
-    },
-    sendLike() {
-      const token = this.$store.state.auth.token;
-      const id = this.$store.state.modal.stream.data.stream.id;
-      const userId = this.$store.state.modal.stream.data.stream.user.id;
-
-      this.$root.ws.ws.send(
-        JSON.stringify({
-          act: "stream_like",
-          stream_id: id,
-          stream_user_id: userId,
-          sess: token
-        })
-      );
     },
     getLikePosition(event) {
       const video = Streams.config.remoteVideo;
@@ -148,17 +143,15 @@ export default {
 
       return { x, y };
     },
-    // drawLike(x, y) {
-    // const id = Math.random().toFixed(8) * 10000000;
-    // document
-    //   .getElementById("videowrap")
-    //   .insertAdjacentHTML("beforeend", like);
-    // setTimeout(() => {
-    //   document.getElementById(id).remove();
-    // }, 5000);
-    // },
     click(event) {
       const position = this.getLikePosition(event);
+      this.throttledLike(event, position);
+    },
+    like: function(event, position = "btn") {
+      const date = Date.now();
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      const userId = this.$store.state.modal.stream.data.stream.user.id;
 
       Streams.sendCustomMessage({
         msgtype: "data.custom",
@@ -169,9 +162,20 @@ export default {
         }
       });
 
-      // this.drawLike(100, 100);
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_like",
+          stream_id: id,
+          stream_user_id: userId,
+          sess: token
+        })
+      );
 
-      // this.sendLike();
+      this.likes.push({
+        date,
+        x: event.clientX,
+        y: event.clientY
+      });
     }
   },
   mounted() {
@@ -180,6 +184,7 @@ export default {
     Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     Streams.config.remoteVideo = document.getElementById("remotevideo");
     Streams.viewStream();
+    this.updateLikes();
   },
   created() {
     Streams.init({
@@ -451,6 +456,7 @@ export default {
   },
   beforeDestroy() {
     this.shouldUpdateTimer = false;
+    window.clearInterval(this.likesInterval);
   }
 };
 </script>

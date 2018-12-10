@@ -101,6 +101,11 @@
       </div>
       <div id="videos">
         <div id="videowrap" class="stream-video-container">
+          <div class="likesContainer">
+            <div v-for="like in likes" :id="like.date" :key="like.date" class="like" :style="{ top: `${like.y}px`, left: `${like.x}px`}">
+              <div class='like-icon'><div class='like-icon__symbol' /></div>
+            </div>
+          </div>
           <video
             class="rounded centered"
             id="myvideo"
@@ -129,8 +134,8 @@
             <button type="button" class="stream-comment-send-btn" disabled=""></button>
         </form>
         <div class="stream-btns stream-viewer-btns">
-            <span role="button" class="stream-comment-btn"  v-if="false"></span>
-            <span class="stream-like-btn">{{ likesCount }}</span>
+            <span role="button" class="stream-comment-btn" v-if="false"></span>
+            <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
             <span class="stream-tip-btn" v-if="false"></span>
             <span class="stream-online-count">{{ looksCount }}</span>
         </div>
@@ -390,7 +395,8 @@ export default {
       isStarted: false,
       isStopped: false,
       time: undefined,
-      startedStreamId: undefined
+      startedStreamId: undefined,
+      likes: []
     };
   },
   components: {
@@ -456,7 +462,6 @@ export default {
       this.streamAudio = value;
       this.shownStreamAudioMenu = false;
     },
-
     onDevicesReadyCallback() {
       const {
         audioDevices,
@@ -492,16 +497,6 @@ export default {
     stopStream() {
       Streams.stopStream();
     },
-    drawLike(x, y) {
-      const id = Math.random().toFixed(8) * 10000000;
-      const like = `<div id="${id}" class='like' style='top: ${y}%;left: ${x}%;'><div class='like-icon'><div class='like-icon__symbol'></div></div></div></div>`;
-      document
-        .getElementById("videowrap")
-        .insertAdjacentHTML("beforeend", like);
-      setTimeout(() => {
-        document.getElementById(id).remove();
-      }, 5000);
-    },
     getLikePosition(data) {
       const video = document.getElementById(Streams.config.videoElId);
       let video_width = video.videoWidth;
@@ -525,11 +520,18 @@ export default {
       let pos_y = data.y * video_height;
 
       if (pos_x) {
-        left = pos_x - 25 + (window_width - video_width) / 2;
-        top = pos_y + 40 + (window_height - video_height) / 2;
+        left = pos_x + (window_width - video_width) / 2;
+        top = pos_y + (window_height - video_height) / 2;
       }
 
       return { x: left, y: top };
+    },
+    updateLikes() {
+      const now = Date.now();
+
+      this.likesInterval = setInterval(() => {
+        this.likes = this.likes.filter(item => item.date + 5000 < now);
+      }, 5000);
     },
     close() {
       if (this.isStarted) {
@@ -574,6 +576,7 @@ export default {
         this.tick(start);
       },
       onStreamStart: room => {
+        this.updateLikes();
         const type = this.streamVisibility.key;
 
         StreamApi.runStream({
@@ -627,8 +630,20 @@ export default {
       onViewersCountGet(/* count */) {},
       onCustomDataGet: message => {
         if (message.type === "click.position") {
-          const { x, y } = this.getLikePosition(message.position);
-          this.drawLike(x, y);
+          const date = Date.now();
+          this.$store.commit("lives/addLike");
+          let pos =
+            message.position !== "btn"
+              ? this.getLikePosition(message.position)
+              : {
+                  x: this.$refs.likeBtn.getBoundingClientRect().left + 25,
+                  y: this.$refs.likeBtn.getBoundingClientRect().top + 25
+                };
+
+          this.likes.push({
+            date,
+            ...pos
+          });
         }
       },
       onDevicesReadyCallback
@@ -636,6 +651,7 @@ export default {
   },
   beforeDestroy() {
     Streams.stopAllTracks(Streams.localStream);
+    window.clearInterval(this.likesInterval);
   }
 };
 </script>

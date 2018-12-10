@@ -13,6 +13,7 @@
     "moment": "^2.22.2",
     "query-string": "^6.2.0",
     "streaming-module": "git+ssh://gogs@git.retloko.com:44468/alien.pavlov/streaming-module.git",
+    "throttle-debounce": "^2.0.1",
     "vue": "^2.5.17",
     "vue-click-outside": "^1.0.7",
     "vue-mq": "^0.2.1",

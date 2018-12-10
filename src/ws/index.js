@@ -4,7 +4,6 @@ import moment from "moment";
 
 import stream from "./actions/stream";
 import stream_stop from "./actions/stream_stop";
-import stream_like from "./actions/stream_like";
 import stream_look from "./actions/stream_look";
 import stream_unlook from "./actions/stream_unlook";
 import chats from "./actions/chats";
@@ -22,7 +21,6 @@ const actions = {
   tip,
   stream,
   stream_stop,
-  stream_like,
   stream_look,
   stream_unlook,
   message
