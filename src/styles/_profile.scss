@@ -472,16 +472,6 @@
     top: 80px;
   }
 
-  .header-scrolled & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //position: fixed;
-      //top: 80px;
-      //left: 0;
-      //right: 0;
-    }
-  }
-
   .container {
     position: relative;
 
@@ -820,33 +810,33 @@
     .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //margin-top: 384px;
-        //margin-top: 407px;
+        margin-top: 346px;
       }
     }
   }
 
   > .bg {
-    position: -webkit-sticky;
-    position: sticky;
-    height: 32vw;
-    top: calc(44px - 32vw);
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: -webkit-sticky;
+      position: sticky;
+      height: 32vw;
+      top: calc(44px - 32vw);
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 320px;
-      //height: 80px;
-      //margin-bottom: 240px;
-      top: -240px;
+      position: relative;
     }
 
     .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //margin-bottom: 0;
-        //top: 0;
-        //left: 0;
-        //right: 0;
-        //position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+        height: 80px;
       }
     }
   }
@@ -902,13 +892,12 @@
       height: 320px;
       top: auto;
       right: -20px;
-      //bottom: -240px;
     }
 
     .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //bottom: 0;
+        top: -240px;
       }
     }
 

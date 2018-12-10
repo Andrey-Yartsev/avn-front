@@ -4,8 +4,8 @@
       <img v-if="bgPreview" :src="bgPreview" />
       <img v-else-if="profile.header" :src="profile.header" />
     </div>
-    <div class="container">
-      <div class="controls-select-picture" v-if="isOwner(profile.id)">
+    <div class="container" v-if="isOwner(profile.id)">
+      <div class="controls-select-picture">
         <label
           for="bg" class="select-user-image"
           :class="{hide: !showBgAdd}"
