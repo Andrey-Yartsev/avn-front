@@ -149,13 +149,13 @@ export default {
       return { x, y };
     },
     // drawLike(x, y) {
-      // const id = Math.random().toFixed(8) * 10000000;
-      // document
-      //   .getElementById("videowrap")
-      //   .insertAdjacentHTML("beforeend", like);
-      // setTimeout(() => {
-      //   document.getElementById(id).remove();
-      // }, 5000);
+    // const id = Math.random().toFixed(8) * 10000000;
+    // document
+    //   .getElementById("videowrap")
+    //   .insertAdjacentHTML("beforeend", like);
+    // setTimeout(() => {
+    //   document.getElementById(id).remove();
+    // }, 5000);
     // },
     click(event) {
       const position = this.getLikePosition(event);
