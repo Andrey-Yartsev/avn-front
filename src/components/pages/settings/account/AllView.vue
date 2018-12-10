@@ -80,7 +80,7 @@
         <div class="shadow-block">
           <div class="container">
 
-            <div class="form-group">
+            <div class="form-group" v-if="user.hasPassword">
               <label class="form-group-inner">
                 <span class="label">Old password</span>
                 <input
