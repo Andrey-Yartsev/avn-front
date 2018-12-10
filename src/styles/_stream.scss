@@ -1,5 +1,48 @@
 @import "components/imports";
 
+@keyframes splash {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  30% {
+    transform: translate(-10px, -20px);
+  }
+
+  40% {
+    transform: translate(0, -30px);
+  }
+
+  50% {
+    transform: translate(10px, -40px);
+  }
+
+  60% {
+    transform: translate(0, -50px);
+  }
+
+  70% {
+    transform: translate(-10px, -60px);
+  }
+
+  80% {
+    transform: translate(0, -70px);
+  }
+
+  90% {
+    transform: translate(10px, -80px);
+  }
+
+  100% {
+    transform: translate(0, -90px);
+    opacity: 0;
+  }
+}
+
 .stream-page {
 
   &,
@@ -748,5 +791,51 @@
     height: 164px;
     top: -0.5px;
     left: 0;
+  }
+}
+
+.like {
+  position: absolute;
+  animation: splash 1.3s normal forwards ease-out;
+  transform-origin: center;
+  opacity: 0;
+
+  &-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+
+    &__symbol {
+      width: 24px;
+      height: 24px;
+      transform: rotate(-45deg);
+      background-color: #fff;
+      position: absolute;
+      bottom: 5px;
+      left: 8px;
+
+      &:before,
+      &:after {
+        content: "";
+        background-color: #fff;
+        border-radius: 50%;
+        height: 24px;
+        position: absolute;
+        width: 24px;
+      }
+
+      &:before {
+        top: -13px;
+        left: 0;
+      }
+
+      &:after {
+        top: 0px;
+        right: -13px;
+      }
+    }
   }
 }

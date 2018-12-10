@@ -34,7 +34,7 @@
             @click="showTip = true"
           >Fund</button>
           <SubscribeButton :profile="profile" @requested="subsRequested"/>
-          <div class="subscribeView">
+          <div class="subscribeView" v-if="!profile.subscribedBy">
             <div
               v-if="profile.followedBy"
               @click="unfollow"
