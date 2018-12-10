@@ -116,7 +116,7 @@ const mutations = {
 
 createRequestAction({
   prefix: "fetchChats",
-  apiPath: "chats/users",
+  apiPath: "chats",
   state,
   mutations,
   actions,
