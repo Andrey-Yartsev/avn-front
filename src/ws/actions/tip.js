@@ -6,7 +6,7 @@ export default data => {
   if (data.success) {
     Store.dispatch(
       "global/flashToast",
-      `Tip for ${payment.user.name} of ${payment.amount}$ is successful`
+      `Fund for ${payment.user.name} of ${payment.amount}$ is successful`
     );
     Store.commit("tip/funded");
   } else {

@@ -69,7 +69,7 @@ const typeTitles = {
   commented: "Comments",
   mentioned: "Mentions",
   connected: "Followers",
-  tip: "Tips",
+  tip: "Funds",
   price_changed: "Price changes",
   system: "System"
 };
