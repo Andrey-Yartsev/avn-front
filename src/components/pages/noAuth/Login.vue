@@ -126,7 +126,8 @@ export default {
     const errors = [
       "User banned.",
       "This Twitter is already used by another account.",
-      "This account already used Twitter."
+      "This account already used Twitter.",
+      "Email in twitter account is required."
     ];
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get("error");

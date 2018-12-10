@@ -90,9 +90,14 @@
           <form class="tip-form hidden">
             <button type="button" role="button" class="btn btn-cancel">Cancel</button>
             <div class="tip-amount-field">
-              <input class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter tip amount">
+              <input
+                class="tip-amount-input rounded"
+                type="text"
+                pattern="\d{1,5}(?:\.\d{0,2})?"
+                maxlength="8"
+                placeholder="Enter fund amount">
             </div>    
-            <button type="submit" class="btn btn-send" disabled>Send tip</button>
+            <button type="submit" class="btn btn-send" disabled>Send fund</button>
           </form>
         </template>
       </div>

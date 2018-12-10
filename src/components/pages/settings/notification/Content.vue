@@ -63,7 +63,7 @@
                   >
                   <span></span>
                 </span>
-                <span class="label">Tip received</span>
+                <span class="label">Fund was received</span>
               </div>
             </label>
           </div>

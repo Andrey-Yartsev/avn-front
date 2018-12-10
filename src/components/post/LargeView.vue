@@ -73,7 +73,7 @@
         </template>
         <template v-else>
           <div class="guest-comments-form">
-            <p>Please login to leave comments or tips</p>
+            <p>Please login to leave comments or funds</p>
             <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
           </div>
         </template>

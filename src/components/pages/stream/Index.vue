@@ -183,7 +183,7 @@
             <span class="stream-chart-legend-item-value">0</span>
           </div>
           <div class="stream-chart-legend-item stream-chart-legend-item__tips">
-            <span class="stream-chart-legend-item-label">Tips</span>
+            <span class="stream-chart-legend-item-label">Funds</span>
             <span class="stream-chart-legend-item-value">0</span>
           </div>
           <div class="stream-chart-legend-item stream-chart-legend-item__comments">
@@ -352,7 +352,7 @@
                 <div class="stream-summary-data-item__value">0</div>
               </div>
               <div class="stream-summary-data-item stream-summary-data-item__tips">
-                <div class="stream-summary-data-item__label">Tips</div>
+                <div class="stream-summary-data-item__label">Funds</div>
                 <div class="stream-summary-data-item__value">0</div>
               </div>
               <div class="stream-summary-data-item stream-summary-data-item__comments">

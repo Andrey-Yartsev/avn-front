@@ -5,7 +5,7 @@
     v-click-outside="hide"
   >
     <div class="more-functions__overlay" @click="hide" />
-    <div class="more-functions__btn more-functions__btn_with-text" @click="open">
+    <div class="more-functions__btn more-functions__btn_with-text" @click="toggle">
       <div class="more-functions__btn-text">More</div>
     </div>
     <div class="more-functions__dropdown">
@@ -55,6 +55,13 @@ export default {
     },
     unblock() {
       this.$store.dispatch("search/page/unblock", this.profile.id);
+    },
+    toggle() {
+      if (this.opened) {
+        this.hide();
+      } else {
+        this.open();
+      }
     },
     open() {
       this.opened = true;

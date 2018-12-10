@@ -13,7 +13,7 @@
         v-model="amount"
       >
     </div>
-    <button type="submit" class="btn" :disabled="!amount">Send tip</button>
+    <button type="submit" class="btn" :disabled="!amount">Send fund</button>
   </form>
 </template>
 
