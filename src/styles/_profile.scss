@@ -901,6 +901,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 320px;
       top: auto;
+      right: -20px;
       //bottom: -240px;
     }
 

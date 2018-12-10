@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <div class="bg-wrap" v-bind:style="{ 'right': -scrollBarInitWidth + 'px' }">
+    <div class="bg-wrap">
       <img v-if="bgPreview" :src="bgPreview" />
       <img v-else-if="profile.header" :src="profile.header" />
     </div>
@@ -43,11 +43,6 @@ export default {
     profile: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    scrollBarInitWidth() {
-      return this.$store.state.global.scrollBarInitWidth;
     }
   }
 };
