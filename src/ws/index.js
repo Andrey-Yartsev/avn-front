@@ -6,6 +6,7 @@ import stream from "./actions/stream";
 import stream_stop from "./actions/stream_stop";
 import stream_look from "./actions/stream_look";
 import stream_unlook from "./actions/stream_unlook";
+import stream_comment from "./actions/stream_comment";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsApproved from "./actions/payoutsApproved";
@@ -23,7 +24,8 @@ const actions = {
   stream_stop,
   stream_look,
   stream_unlook,
-  message
+  message,
+  stream_comment
 };
 
 export default class {

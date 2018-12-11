@@ -17,7 +17,8 @@ const initState = {
   deletedPost: undefined,
   currentLive: {
     likesCount: 0,
-    looksCount: 0
+    looksCount: 0,
+    comments: []
   }
 };
 
@@ -38,6 +39,10 @@ const mutations = {
 
   unlook(state) {
     state.currentLive.looksCount -= 1;
+  },
+
+  comment(state, comment) {
+    state.currentLive.comments = [...state.currentLive.comments, comment];
   },
 
   removeStream(state, live) {

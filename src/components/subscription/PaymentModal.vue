@@ -6,6 +6,7 @@
           <div class="iframe-container">
             <Loader :fullscreen="false" text="" class="transparent" v-if="loading" />
             <iframe
+              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
               ref="iframe"
               :src="link" frameborder="0" width="100%" height="100%"></iframe>
           </div>

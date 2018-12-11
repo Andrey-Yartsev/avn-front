@@ -117,27 +117,35 @@
         </div>
         <div id="stream-timer">{{ time }}</div>
         <div class="stream-online-label">live</div>
-        <div class="stream-comments-wrapper" v-if="false">
-          <div class="item">
-            <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-            <span class="name">Glance Shifter</span>
-            <span class="text">Hi, my friends</span>
-          </div>
-          <div class="item">
-            <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-            <span class="name">Glance Shifter</span>
-            <span class="text">Hi, my friends</span>
+        <div class="stream-comments-wrapper">
+          <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
+            <span class="avatar">
+              <img :src="comment.user.avatar" />
+            </span>
+            <span class="name">{{ comment.user.name }}</span>
+            <span class="text">{{ comment.comment }}</span>
           </div>
         </div>
-        <form class="stream-comment-form" v-if="false">
-            <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
-            <button type="button" class="stream-comment-send-btn" disabled=""></button>
+        <form class="stream-comment-form">
+            <input
+              type="text"
+              placeholder="Comment"
+              class="stream-comment-input rounded lg"
+              maxlength="24"
+              v-model="newComment"
+            >
+            <button
+              @click="sendComment"
+              type="button"
+              class="stream-comment-send-btn"
+              :disabled="!newComment.length"
+            ></button>
         </form>
         <div class="stream-btns stream-viewer-btns">
-            <span role="button" class="stream-comment-btn" v-if="false"></span>
-            <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
-            <span class="stream-tip-btn" v-if="false"></span>
-            <span class="stream-online-count">{{ looksCount }}</span>
+          <span role="button" class="stream-comment-btn" v-if="false"></span>
+          <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
+          <span class="stream-tip-btn" v-if="false"></span>
+          <span class="stream-online-count">{{ looksCount }}</span>
         </div>
       </div>
       <div v-if="false">
@@ -396,7 +404,8 @@ export default {
       isStopped: false,
       time: undefined,
       startedStreamId: undefined,
-      likes: []
+      likes: [],
+      newComment: ""
     };
   },
   components: {
@@ -408,6 +417,9 @@ export default {
     },
     looksCount() {
       return this.$store.state.lives.currentLive.looksCount;
+    },
+    comments() {
+      return this.$store.state.lives.currentLive.comments;
     },
     streamVisibilities() {
       return [
@@ -539,6 +551,18 @@ export default {
       } else {
         this.$router.push("/");
       }
+    },
+    sendComment() {
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_comment",
+          stream_user_id: this.user.id,
+          stream_id: this.startedStreamId,
+          comment: this.newComment,
+          sess: this.$store.state.auth.token
+        })
+      );
+      this.newComment = "";
     }
   },
   mounted() {

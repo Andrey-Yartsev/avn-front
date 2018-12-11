@@ -22,11 +22,35 @@
             </div>
           </div>
         </div>
+        <div class="stream-comments-wrapper">
+          <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
+            <span class="avatar">
+              <img :src="comment.user.avatar" />
+            </span>
+            <span class="name">{{ comment.user.name }}</span>
+            <span class="text">{{ comment.comment }}</span>
+          </div>
+        </div>
+        <form class="stream-comment-form">
+          <input
+            type="text"
+            placeholder="Comment"
+            class="stream-comment-input rounded lg"
+            maxlength="24"
+            v-model="newComment"
+          >
+          <button
+            @click="sendComment"
+            type="button"
+            class="stream-comment-send-btn"
+            :disabled="!newComment.length"
+          ></button>
+        </form>
         <div class="stream-btns stream-viewer-btns">
-          <span role="button" class="stream-comment-btn" v-if="false"></span>
+          <span role="button" class="stream-comment-btn"></span>
           <span class="stream-like-btn" @click="throttledLike"></span>
           <span class="stream-tip-btn" v-if="false"></span>
-          <span class="stream-online-count" v-if="false"></span>
+          <span class="stream-online-count"></span>
         </div>
       </div>
     </template>
@@ -50,11 +74,15 @@ export default {
     time: undefined,
     shouldUpdateTimer: false,
     streamIsFinished: false,
-    likes: []
+    likes: [],
+    newComment: ""
   }),
   computed: {
     throttledLike() {
       return throttle(300, this.like);
+    },
+    comments() {
+      return this.$store.state.lives.currentLive.comments;
     }
   },
   methods: {
@@ -176,6 +204,22 @@ export default {
         x: event.clientX,
         y: event.clientY
       });
+    },
+    sendComment() {
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      const userId = this.$store.state.modal.stream.data.stream.user.id;
+
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_comment",
+          stream_user_id: userId,
+          stream_id: id,
+          comment: this.newComment,
+          sess: token
+        })
+      );
+      this.newComment = "";
     }
   },
   mounted() {
