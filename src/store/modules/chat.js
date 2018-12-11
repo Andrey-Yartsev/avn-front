@@ -121,12 +121,25 @@ createRequestAction({
   mutations,
   actions,
   options: {
+    method: "GET"
+  },
+  resultKey: "chats",
+  defaultResultValue: []
+});
+
+createRequestAction({
+  prefix: "fetchAnyChats",
+  apiPath: "chats",
+  state,
+  mutations,
+  actions,
+  options: {
     method: "GET",
     query: {
       withoutHistory: true
     }
   },
-  resultKey: "chats",
+  resultKey: "anyChats",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query = { query: params };

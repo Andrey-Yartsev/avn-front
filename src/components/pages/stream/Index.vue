@@ -4,172 +4,161 @@
       <Loader :fullscreen="false" text="" class="transparent small" />
     </div>
     <div class="stream " v-else>
-        <div class="mediasTop">
-          <div class="mediasTop__header">
-            <span class="category-name category-name_live hidden-mobile" @click="close">Live video</span>
-            <button class="close" @click="close">
-              <span class="category-name category-name_live hidden-desktop">Live Video</span>
-            </button>
-            <div class="mediasHeaderControls">
-              <button class="btn alt sm change-devices top" @click="startStream">Start</button>
-              <button id="stop" class="btn alt sm change-devices top" @click="close">Stop</button>
-            </div>
-              <div class="group-controls">
-                <div id="devices">
-                    <div
-                      v-click-outside="hideStreamVisibilityMenu"
-                      :class="[
-                        'btn-media-event has-dropdown stream-visibility',
-                        streamVisibility.key,
-                        {
-                          shown: shownStreamVisibilityMenu
-                        }
-                      ]"
-                      v-if="user"
+      <div class="mediasTop">
+        <div class="mediasTop__header">
+          <span class="category-name category-name_live hidden-mobile" @click="close">Live video</span>
+          <button class="close" @click="close">
+            <span class="category-name category-name_live hidden-desktop">Live Video</span>
+          </button>
+          <div class="mediasHeaderControls">
+            <button class="btn alt sm change-devices top" @click="startStream">Start</button>
+            <button id="stop" class="btn alt sm change-devices top" @click="close">Stop</button>
+          </div>
+            <div class="group-controls">
+              <div id="devices">
+                <div
+                  v-click-outside="hideStreamVisibilityMenu"
+                  :class="[
+                    'btn-media-event has-dropdown stream-visibility',
+                    streamVisibility.key,
+                    {
+                      shown: shownStreamVisibilityMenu
+                    }
+                  ]"
+                  v-if="user"
+                >
+                  <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
+                    <span class="root-btn__inside">{{ streamVisibility.label }}</span>
+                  </button>
+                  <div class="menu">
+                    <button
+                      type="button"
+                      v-for="streamVisib in streamVisibilities"
+                      v-bind:key="streamVisib.key"
+                      :class="['item', { active: streamVisibility.key === streamVisib.key }]"
+                      @click="() => setStreamVisibility(streamVisib)"
+                      :disabled="streamVisib.disabled"
                     >
-                      <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
-                        <span class="root-btn__inside">{{ streamVisibility.label }}</span>
-                      </button>
-                      <div class="menu">
-                        <button
-                          type="button"
-                          v-for="streamVisib in streamVisibilities"
-                          v-bind:key="streamVisib.key"
-                          :class="['item', { active: streamVisibility.key === streamVisib.key }]"
-                          @click="() => setStreamVisibility(streamVisib)"
-                          :disabled="streamVisib.disabled"
-                        >
-                          <span class="value">{{ streamVisib.label }}</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      v-if="streamVideo"
-                      v-click-outside="hideStreamVideoMenu"
-                      :class="[
-                        'btn-media-event has-dropdown camera',
-                        {
-                          shown: shownStreamVideoMenu,
-                          'device-disabled': streamVideo.deviceId === 'disabled'
-                        }
-                    ]">
-                      <button type="button" class="root-btn" @click="showStreamVideoMenu">
-                        <span class="root-btn__inside" />
-                      </button>
-                      <div class="menu">
-                        <button
-                          v-for="video in streamVideos"
-                          v-bind:key="video.deviceId"
-                          type="button"
-                          :data-type="video.deviceId"
-                          :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
-                          @click="() => setStreamVideo(video)"
-                        >
-                          <span class="value">{{ video.label }}</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      v-if="streamAudio"
-                      v-click-outside="hideStreamAudioMenu"
-                      :class="[
-                        'btn-media-event has-dropdown microphone',
-                        {
-                          shown: shownStreamAudioMenu,
-                          'device-disabled': streamAudio.deviceId === undefined
-                        }
-                      ]">
-                      <button type="button" class="root-btn" @click="showStreamAudioMenu">
-                        <span class="root-btn__inside" />
-                      </button>
-                      <div class="menu">
-                        <button
-                          v-for="audio in streamAudios"
-                          v-bind:key="audio.deviceId"
-                          type="button"
-                          :data-type="audio.deviceId"
-                          :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
-                          @click="() => setStreamAudio(audio)"
-                        >
-                          <span class="value">{{ audio.label || "Disable Microphone" }}</span>
-                        </button>
+                      <span class="value">{{ streamVisib.label }}</span>
+                    </button>
+                  </div>
                 </div>
+                <div
+                  v-if="streamVideo"
+                  v-click-outside="hideStreamVideoMenu"
+                  :class="[
+                    'btn-media-event has-dropdown camera',
+                    {
+                      shown: shownStreamVideoMenu,
+                      'device-disabled': streamVideo.deviceId === 'disabled'
+                    }
+                ]">
+                  <button type="button" class="root-btn" @click="showStreamVideoMenu">
+                    <span class="root-btn__inside" />
+                  </button>
+                  <div class="menu">
+                    <button
+                      v-for="video in streamVideos"
+                      v-bind:key="video.deviceId"
+                      type="button"
+                      :data-type="video.deviceId"
+                      :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
+                      @click="() => setStreamVideo(video)"
+                    >
+                      <span class="value">{{ video.label }}</span>
+                    </button>
+                  </div>
+                </div>
+              <div
+                v-if="streamAudio"
+                v-click-outside="hideStreamAudioMenu"
+                :class="[
+                  'btn-media-event has-dropdown microphone',
+                  {
+                    shown: shownStreamAudioMenu,
+                    'device-disabled': streamAudio.deviceId === undefined
+                  }
+                ]">
+                <button type="button" class="root-btn" @click="showStreamAudioMenu">
+                  <span class="root-btn__inside" />
+                </button>
+                <div class="menu">
+                  <button
+                    v-for="audio in streamAudios"
+                    v-bind:key="audio.deviceId"
+                    type="button"
+                    :data-type="audio.deviceId"
+                    :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
+                    @click="() => setStreamAudio(audio)"
+                  >
+                    <span class="value">{{ audio.label || "Disable Microphone" }}</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="videos">
-          <div class="stream-video-container" id="videoleft">
-            <video
-              class="rounded centered"
-              id="myvideo"
-              autoplay=""
-              muted=""
-              playsinline=""
-              v-if="!isStopped"
-            />
-          </div>
-          <div id="stream-timer">{{ time }}</div>
-          <div class="stream-online-label">live</div>
-          <div class="stream-comments-wrapper" v-if="false">
-            <div class="item">
-              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-              <span class="name">Glance Shifter</span>
-              <span class="text">Hi, my friends</span>
-            </div>
-            <div class="item">
-              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-              <span class="name">Glance Shifter</span>
-              <span class="text">Hi, my friends</span>
-            </div>
-            <div class="item">
-              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-              <span class="name">Glance Shifter</span>
-              <span class="text">Hi, my friends</span>
-            </div>
-            <div class="item">
-              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-              <span class="name">Glance Shifter</span>
-              <span class="text">Hi, my friends</span>
-            </div>
-            <div class="item">
-              <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
-              <span class="name">Glance Shifter</span>
-              <span class="text">Hi, my friends</span>
+      </div>
+      <div id="videos">
+        <div id="videowrap" class="stream-video-container">
+          <div class="likesContainer">
+            <div v-for="like in likes" :id="like.date" :key="like.date" class="like" :style="{ top: `${like.y}px`, left: `${like.x}px`}">
+              <div class='like-icon'><div class='like-icon__symbol' /></div>
             </div>
           </div>
-          <form class="stream-comment-form" v-if="false">
-              <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
-              <button type="button" class="stream-comment-send-btn" disabled=""></button>
-          </form>
-          <div class="stream-btns stream-viewer-btns">
-              <span role="button" class="stream-comment-btn"  v-if="false"></span>
-              <span class="stream-like-btn">{{ likesCount }}</span>
-              <span class="stream-tip-btn" v-if="false"></span>
-              <span class="stream-online-count">{{ looksCount }}</span>
+          <video
+            class="rounded centered"
+            id="myvideo"
+            autoplay=""
+            muted=""
+            playsinline=""
+            v-if="!isStopped"
+          />
+        </div>
+        <div id="stream-timer">{{ time }}</div>
+        <div class="stream-online-label">live</div>
+        <div class="stream-comments-wrapper" v-if="false">
+          <div class="item">
+            <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+            <span class="name">Glance Shifter</span>
+            <span class="text">Hi, my friends</span>
+          </div>
+          <div class="item">
+            <span class="avatar"><img src="https://storage.view.me/get/dev/files/8/8r/8rc/8rctzurtogg0ypfdvse0pskohyt1ukem1516938484/c320.jpg"></span>
+            <span class="name">Glance Shifter</span>
+            <span class="text">Hi, my friends</span>
           </div>
         </div>
-        <div v-if="false">
-          Bitrate
-          <select id="bitrateset">
-            <option value="0">No limit</option>
-            <option value="128">Cap to 128kbit</option>
-            <option value="256">Cap to 256kbit</option>
-            <option value="512">Cap to 512kbit</option>
-            <option value="1024">Cap to 1mbit</option>
-            <option value="1500">Cap to 1.5mbit</option>
-            <option value="2000">Cap to 2mbit</option>
-          </select>
+        <form class="stream-comment-form" v-if="false">
+            <input type="text" placeholder="Comment" class="stream-comment-input rounded lg" maxlength="24">
+            <button type="button" class="stream-comment-send-btn" disabled=""></button>
+        </form>
+        <div class="stream-btns stream-viewer-btns">
+            <span role="button" class="stream-comment-btn" v-if="false"></span>
+            <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
+            <span class="stream-tip-btn" v-if="false"></span>
+            <span class="stream-online-count">{{ looksCount }}</span>
         </div>
-        <div class="mediasBottom">
-          <button
-            class="btn alt lg change-devices"
-            @click="startStream"
-          >Start live video</button>
-        </div>
+      </div>
+      <div v-if="false">
+        Bitrate
+        <select id="bitrateset">
+          <option value="0">No limit</option>
+          <option value="128">Cap to 128kbit</option>
+          <option value="256">Cap to 256kbit</option>
+          <option value="512">Cap to 512kbit</option>
+          <option value="1024">Cap to 1mbit</option>
+          <option value="1500">Cap to 1.5mbit</option>
+          <option value="2000">Cap to 2mbit</option>
+        </select>
+      </div>
+      <div class="mediasBottom">
+        <button
+          class="btn alt lg change-devices"
+          @click="startStream"
+        >Start live video</button>
+      </div>
     </div>
-
     <div class="popup popup-stream-details">
       <div class="overlay"></div>
       <div class="stream-summary-container">
@@ -406,7 +395,8 @@ export default {
       isStarted: false,
       isStopped: false,
       time: undefined,
-      startedStreamId: undefined
+      startedStreamId: undefined,
+      likes: []
     };
   },
   components: {
@@ -450,7 +440,6 @@ export default {
       this.streamVisibility = value;
       this.shownStreamVisibilityMenu = false;
     },
-
     showStreamVideoMenu() {
       this.shownStreamVideoMenu = true;
     },
@@ -462,7 +451,6 @@ export default {
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
     },
-
     showStreamAudioMenu() {
       this.shownStreamAudioMenu = true;
     },
@@ -474,7 +462,6 @@ export default {
       this.streamAudio = value;
       this.shownStreamAudioMenu = false;
     },
-
     onDevicesReadyCallback() {
       const {
         audioDevices,
@@ -509,6 +496,42 @@ export default {
     },
     stopStream() {
       Streams.stopStream();
+    },
+    getLikePosition(data) {
+      const video = document.getElementById(Streams.config.videoElId);
+      let video_width = video.videoWidth;
+      let video_height = video.videoHeight;
+      let video_ratio = video_height / video_width;
+      const window_width = window.innerWidth;
+      const window_height = window.innerHeight;
+      const window_ratio = window_height / window_width;
+      let left = "0%"; //$( '.stream-like-btn' ).offset().left;
+      let top = "100%";
+
+      if (video_ratio > window_ratio) {
+        video_height = window_height;
+        video_width = video_height / video_ratio;
+      } else {
+        video_width = window_width;
+        video_height = video_width * video_ratio;
+      }
+
+      let pos_x = data.x * video_width;
+      let pos_y = data.y * video_height;
+
+      if (pos_x) {
+        left = pos_x + (window_width - video_width) / 2;
+        top = pos_y + (window_height - video_height) / 2;
+      }
+
+      return { x: left, y: top };
+    },
+    updateLikes() {
+      const now = Date.now();
+
+      this.likesInterval = setInterval(() => {
+        this.likes = this.likes.filter(item => item.date + 5000 < now);
+      }, 5000);
     },
     close() {
       if (this.isStarted) {
@@ -553,6 +576,7 @@ export default {
         this.tick(start);
       },
       onStreamStart: room => {
+        this.updateLikes();
         const type = this.streamVisibility.key;
 
         StreamApi.runStream({
@@ -604,12 +628,30 @@ export default {
       },
       onCleanUp() {},
       onViewersCountGet(/* count */) {},
-      onCustomDataGet(/* message */) {},
+      onCustomDataGet: message => {
+        if (message.type === "click.position") {
+          const date = Date.now();
+          this.$store.commit("lives/addLike");
+          let pos =
+            message.position !== "btn"
+              ? this.getLikePosition(message.position)
+              : {
+                  x: this.$refs.likeBtn.getBoundingClientRect().left + 25,
+                  y: this.$refs.likeBtn.getBoundingClientRect().top + 25
+                };
+
+          this.likes.push({
+            date,
+            ...pos
+          });
+        }
+      },
       onDevicesReadyCallback
     });
   },
   beforeDestroy() {
     Streams.stopAllTracks(Streams.localStream);
+    window.clearInterval(this.likesInterval);
   }
 };
 </script>

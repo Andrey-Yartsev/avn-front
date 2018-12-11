@@ -143,6 +143,8 @@ export default {
         "global/flashToast",
         "You have unsubscribed successfully"
       );
+      this.$store.commit("profile/home/resetPosts");
+      this.$store.dispatch("profile/home/getPosts", this.profile.id);
     },
     resubscribed(result) {
       if (!result.success) {
@@ -155,6 +157,8 @@ export default {
         "global/flashToast",
         "You have resubscribed successfully"
       );
+      this.$store.commit("profile/home/resetPosts");
+      this.$store.dispatch("profile/home/getPosts", this.profile.id);
     },
     closeTip() {
       this.showTip = false;

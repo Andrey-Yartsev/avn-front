@@ -160,7 +160,7 @@ export default {
       // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
     chats() {
-      let chats = this.$store.state.chat.chats.map(v => {
+      let chats = this.$store.state.chat.anyChats.map(v => {
         v.selected = this.selected.indexOf(v.withUser.id) !== -1;
         return v;
       });
@@ -258,7 +258,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("chat/fetchChats");
+    this.$store.dispatch("chat/fetchAnyChats");
     this.search();
   },
 
