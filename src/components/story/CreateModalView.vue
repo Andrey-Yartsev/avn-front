@@ -8,12 +8,10 @@
           <form class="storyOverlay">
             <div class="mediasTop">
                 <div class="mediasTop__header">
-                    <div class="mediasHeaderControls addStoryButtonWrapper hidden-desktop">
-                    </div>
-                    <span class="category-name category-name_story hidden-mobile">Story</span>
-                    <button class="close" @click="close">
-                  <span class="category-name hidden-desktop">Story</span>
-                </button>
+                  <span class="category-name category-name_story hidden-mobile">Story</span>
+                  <button class="close" @click="close">
+                    <span class="category-name hidden-desktop">Story</span>
+                  </button>
                     <div class="group-controls">
                         <div class="storyOptions">
                             <div class="btn-media-event picture">
