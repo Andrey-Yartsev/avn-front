@@ -48,6 +48,7 @@
       <div class="head-story">
         <div class="story-avatar">
             <a 
+              @click.prevent="addNewStory"
               :href="isOwner(author.id) ? `/${author.username}` : ''"
               :class="['avatar', {'new-story': isOwner(author.id)}]"
             >

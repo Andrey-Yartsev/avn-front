@@ -114,13 +114,15 @@ export default {
     updateTimer() {
       if (!this.shouldUpdateTimer) return;
 
-      var ms = moment().diff(moment(this.$store.state.modal.stream.data.stream.startedAt));
+      var ms = moment().diff(
+        moment(this.$store.state.modal.stream.data.stream.startedAt)
+      );
       var delta = moment.duration(ms);
 
       this.time =
-        delta > 60 * 60 * 1000 
-        ? moment(delta, 'ss.SSS').format("hh:mm:ss")
-        : moment(delta, 'ss.SSS').format("mm:ss");
+        delta > 60 * 60 * 1000
+          ? moment(delta, "ss.SSS").format("hh:mm:ss")
+          : moment(delta, "ss.SSS").format("mm:ss");
 
       setTimeout(() => {
         this.updateTimer();
