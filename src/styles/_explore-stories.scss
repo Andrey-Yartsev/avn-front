@@ -1,6 +1,7 @@
 @import "components/imports";
 
 .exploreAllStoriesCollectionView {
+  display: flex;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     margin: 0 15px;
@@ -14,7 +15,6 @@
   .explore-stories {
     display: flex;
     overflow: hidden;
-    padding: 15px 0 0;
     position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -26,7 +26,7 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 5px 5px 0;
+      padding: 0 5px;
     }
 
     .ps__scrollbar-y-rail {
@@ -43,11 +43,20 @@
     width: 60px;
     min-width: 60px;
     margin-right: 23px;
+    margin-top: 15px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 82px;
       min-width: 82px;
       margin-right: 24px;
+      margin-top: 5px;
+    }
+
+    + .explore-stories {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 0;
+      }
     }
 
     .avatar {
