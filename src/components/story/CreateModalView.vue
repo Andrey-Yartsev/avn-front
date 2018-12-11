@@ -6,7 +6,7 @@
       <div class="content">
         <div class="addStoryView">
           <form class="storyOverlay">
-            <div class="mediasTopE">
+            <div class="mediasTop">
               <div class="mediasTop__header">
                 <span class="category-name category-name_story hidden-mobile">Story</span>
                 <button class="close" @click="close">
