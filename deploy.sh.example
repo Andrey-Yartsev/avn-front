@@ -8,11 +8,12 @@ else
 fi
 
 cd /home/ubuntu/team3/deploy
+git reset --hard origin/$BRANCH
 git fetch origin
 git checkout $BRANCH
 git pull origin $BRANCH
-cp /home/ubuntu/team3/.env /home/ubuntu/team3/deploy/.env
 npm i
+npm update streaming-module
 npm run build
 git log -1 --pretty="%h %B %ad" > ./dist/version.txt
 echo " $BRANCH" >> ./dist/version.txt
