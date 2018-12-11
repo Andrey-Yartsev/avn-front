@@ -6,89 +6,13 @@
       <div class="content">
         <div class="addStoryView">
           <form class="storyOverlay">
-            <div class="mediasTop">
-                <div class="mediasTop__header">
-                    <div class="mediasHeaderControls addStoryButtonWrapper hidden-desktop">
-                    </div>
-                    <span class="category-name category-name_story hidden-mobile">Story</span>
-                    <button class="close" @click="close">
+            <div class="mediasTopE">
+              <div class="mediasTop__header">
+                <div class="mediasHeaderControls addStoryButtonWrapper hidden-desktop" />
+                <span class="category-name category-name_story hidden-mobile">Story</span>
+                <button class="close" @click="close">
                   <span class="category-name hidden-desktop">Story</span>
                 </button>
-                    <div class="group-controls">
-                        <div class="storyOptions">
-                            <div class="btn-media-event picture">
-                                <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
-                            </div>
-                            <div class="btn-media-event fullscreen">
-                                <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
-                            </div>
-                            <div class="btn-media-event has-dropdown layers">
-                                <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
-                                <div class="menu">
-                                    <div class="options-color-definition primary">
-                                        <div class="options-wrapper">
-                                            <span class="close"></span>
-                                            <p>Overlay color</p>
-                                            <div class="options-wrap">
-                                                <div class="options" data-type="primary">
-                                                    <span role="button" class="option option_col-5 option_gradient option_gradient-1 active" data-color="1"></span>
-                                                    <span role="button" class="option option_col-5 option_gradient option_gradient-2" data-color="2"></span>
-                                                    <span role="button" class="option option_col-5 option_gradient option_gradient-3" data-color="3"></span>
-                                                    <span role="button" class="option option_col-5 option_gradient option_gradient-4" data-color="4"></span>
-                                                    <span role="button" class="option option_col-5 option_gradient option_gradient-5" data-color="5"></span>
-                                                </div>
-                                            </div>
-                                            <div class="slider-colors-nuances">
-                                                <button type="button" class="clear-color-slider"></button>
-                                                <div class="slider-colors">
-                                                    <input type="range">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-media-event has-dropdown letters-color shown">
-                                <button type="button" class="root-btn"><span class="root-btn__inside"></span></button>
-                                <div class="menu">
-                                    <div class="options-color-definition options-color-definition_bgs primary">
-                                        <div class="options-wrapper">
-                                            <span class="close"></span>
-                                            <p>Text style</p>
-                                            <div class="font-style">
-                                                <ul>
-                                                    <li><a href="#" class="font-style__strong">Strong</a></li>
-                                                    <li><a href="#" class="font-style__modern">Modern</a></li>
-                                                    <li><a href="#" class="font-style__type">Type</a></li>
-                                                    <li><a href="#" class="font-style__soft">Soft</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="options-wrap">
-                                                <div class="options" data-type="primary">
-                                                    <span role="button" class="option option_col-5 option-13 active" data-color="11"></span>
-                                                    <span role="button" class="option option_col-5 option-14" data-color="12"></span>
-                                                    <span role="button" class="option option_col-5 option-2" data-color="2"></span>
-                                                    <span role="button" class="option option_col-5 option-3" data-color="3"></span>
-                                                    <span role="button" class="option option_col-5 option-4" data-color="4"></span>
-                                                    <span role="button" class="option option_col-5 option-5" data-color="5"></span>
-                                                    <span role="button" class="option option_col-5 option-6" data-color="6"></span>
-                                                    <span role="button" class="option option_col-5 option-7" data-color="7"></span>
-                                                    <span role="button" class="option option_col-5 option-15" data-color="15"></span>
-                                                    <span role="button" class="option option_col-5 option-11" data-color="11"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-media-event letters-bg">
-                                <button type="button" class="root-btn"><span class="root-btn__inside"><span class="root-btn__text">Add text</span></span></button>
-                            </div>
-                        </div>
-
-
-
-                </div>
                 <button disabled="disabled" class="newStory btn hidden-desktop">Add</button>
               </div>
             </div>
