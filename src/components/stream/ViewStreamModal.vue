@@ -62,6 +62,7 @@ import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
 import Streams from "streaming-module/view_module";
 import StreamApi from "@/api/stream";
+import moment from "moment";
 
 export default {
   name: "ViewStremModal",
@@ -113,19 +114,13 @@ export default {
     updateTimer() {
       if (!this.shouldUpdateTimer) return;
 
-      const start = new Date(
-        this.$store.state.modal.stream.data.stream.startedAt
-      );
-      const diff = Date.now() - start;
-      const date = new Date(diff);
-      let hours = date.getHours();
-      let mins = date.getMinutes();
-      let secs = date.getSeconds();
-      hours = hours < 10 ? `0${hours}` : `${hours}`;
-      mins = mins < 10 ? `0${mins}` : `${mins}`;
-      secs = secs < 10 ? `0${secs}` : `${secs}`;
+      var ms = moment().diff(moment(this.$store.state.modal.stream.data.stream.startedAt));
+      var delta = moment.duration(ms);
+
       this.time =
-        diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
+        delta > 60 * 60 * 1000 
+        ? moment(delta, 'ss.SSS').format("hh:mm:ss")
+        : moment(delta, 'ss.SSS').format("mm:ss");
 
       setTimeout(() => {
         this.updateTimer();
