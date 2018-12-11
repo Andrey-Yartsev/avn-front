@@ -1135,7 +1135,8 @@
     .btn-make-post {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        margin: 0 1.2em;
+        //margin: 0 1.2em;
+        margin: 0 0.6em;
       }
     }
 
