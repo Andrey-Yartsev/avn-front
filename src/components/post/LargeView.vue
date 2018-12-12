@@ -167,6 +167,10 @@ export default {
         return;
       }
       this.$router.push("/");
+    },
+    closeTip() {
+      this.showTip = false;
+      this.$refs.tip.reset();
     }
   }
 };
