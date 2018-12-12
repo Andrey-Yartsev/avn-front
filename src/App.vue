@@ -109,6 +109,9 @@ export default {
       return !!this.$store.state.global.error;
     },
     cssName() {
+      if (this.notFound) {
+        return "staticPage";
+      }
       return this.$route.meta.cssName;
     },
     darkTheme() {
@@ -125,6 +128,12 @@ export default {
         return 0;
       }
       return this.$store.state.global.scrollBarWidth;
+    },
+    notFound() {
+      if (!this.$route.meta.profile) {
+        return false;
+      }
+      return !!this.$store.state.profile.home.fetchProfileError;
     }
   },
   watch: {

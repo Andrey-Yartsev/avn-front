@@ -20,7 +20,8 @@ const Profile = {
           next();
         })
         .catch(() => {
-          next("/not-found");
+          Store.dispatch("profile/setFetchLoading", false);
+          next();
         });
     });
   }

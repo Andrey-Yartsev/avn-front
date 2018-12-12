@@ -16,7 +16,7 @@ import SettingsAccountPage from "./components/pages/settings/account/Index.vue";
 import SettingsStoryPage from "./components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "./components/pages/settings/privacy/Index.vue";
 import SettingsReferralsPage from "./components/pages/settings/referrals/Index.vue";
-import ProfilePage from "./components/pages/profile/Index";
+import ProfilePage from "./components/pages/profile/NotFoundWrapper";
 import PostPage from "./components/pages/post/Index";
 import NotFoundPage from "./components/pages/notFound/Index";
 import Chat from "./components/chat/Chat";
@@ -378,7 +378,8 @@ const routes = [
     path: "/:username/:page?",
     component: ProfilePage,
     meta: {
-      cssName: "userProfile"
+      cssName: "userProfile",
+      profile: true
     }
   }
 ];

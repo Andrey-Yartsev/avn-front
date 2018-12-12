@@ -11,7 +11,7 @@ const storeRequest = (
   options,
   { state, localError, resultKey, resultConvert }
 ) => {
-  return new Promise(accept => {
+  return new Promise((accept, reject) => {
     commit(prefix + "ResetError");
     commit(prefix + "Request");
     commit(prefix + "Success", false);
@@ -42,6 +42,7 @@ const storeRequest = (
           }
           commit(prefix + "Success", false);
           commit(prefix + "Requested");
+          reject(r.error);
         }
       })
       .catch(error => {
@@ -54,6 +55,7 @@ const storeRequest = (
         } else {
           dispatch("global/setError", error, { root: true });
         }
+        reject(error);
       });
   });
 };

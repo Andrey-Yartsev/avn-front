@@ -122,7 +122,8 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{username}/, params);
-  }
+  },
+  localError: true
 });
 
 export default {
