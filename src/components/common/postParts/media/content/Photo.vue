@@ -1,5 +1,5 @@
 <template>
-  <div class="postLink">
+  <div class="postLink" @click="$emit('click')">
     <img :src="src">
   </div>
 </template>
