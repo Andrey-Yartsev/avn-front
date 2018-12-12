@@ -165,6 +165,9 @@ export default {
     confirmOtp() {
       if (this.user.otpEnable) {
         this.$store.dispatch("otp/deleteCode", this.otpCode);
+        setTimeout(() => {
+          this.$store.dispatch("otp/fetchInitCodes");
+        }, 3000);
       } else {
         this.$store.dispatch("otp/updateProfile", this.otpCode);
       }
