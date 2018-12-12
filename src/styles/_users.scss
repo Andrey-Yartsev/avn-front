@@ -30,7 +30,7 @@
 
   .userView {
     background: $white;
-    overflow: hidden;
+    min-width: 0;
 
     @include media-breakpoint-down($desktop-breakpoint) {
 
