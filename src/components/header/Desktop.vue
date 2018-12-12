@@ -9,7 +9,7 @@
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
         :class="{unread: user.hasNotifications, active: !!$route.meta.notifications}"
-        @click.prevent="goToModalRoute('/notifications')"
+        @click.prevent="goToNotifications"
       ><span>Notifications</span></a>
       <router-link class="menu-item-notifications header-nav__item hidden-desktop" to="/notifications"><span>Notifications</span>
       </router-link>
@@ -48,6 +48,13 @@ export default {
         this.$router.push("/chat");
       } else {
         this.goToModalRoute("/chat");
+      }
+    },
+    goToNotifications() {
+      if (this.$route.meta.notifications) {
+        this.$router.push("/notifications");
+      } else {
+        this.goToModalRoute("/notifications");
       }
     }
   }
