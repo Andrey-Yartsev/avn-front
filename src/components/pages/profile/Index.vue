@@ -1,5 +1,8 @@
 <template>
-  <div class="profile">
+  <div class="loader-container" v-if="loading">
+    <Loader :fullscreen="false" text="" class="transparent small"/>
+  </div>
+  <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile"/>
     <div class="white-bg-block">
@@ -57,7 +60,7 @@
             <div class="loader-container" v-if="postLoading">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
-            <template>
+            <template v-else>
               <p :class="['empty-feed', { hidden: posts.length }]">
                 <span>Nothing here yet</span>
                 <button
@@ -164,10 +167,15 @@ export default {
   },
   watch: {
     username() {
-      this.init();
+      this.$store.commit("profile/home/resetPageState");
+      this.$store
+        .dispatch("profile/home/fetchProfile", this.username)
+        .then(() => {
+          this.initPosts();
+        });
     },
     pageName() {
-      this.init();
+      this.initPosts();
     },
     deletedPost() {
       this.$store.dispatch("profile/home/fetchProfile", this.username);
@@ -177,14 +185,10 @@ export default {
     }
   },
   methods: {
-    init() {
-      this.$store.commit("profile/home/resetPageState");
-      this.$store
-        .dispatch("profile/home/fetchProfile", this.username)
-        .then(() => {
-          this.$store.dispatch("profile/home/setSource", this.source);
-          this.getPosts();
-        });
+    initPosts() {
+      this.$store.commit("profile/home/resetPosts");
+      this.$store.dispatch("profile/home/setSource", this.source);
+      this.getPosts();
     },
     openAddPostModal() {
       this.$store.dispatch("modal/show", {
@@ -201,7 +205,7 @@ export default {
     }
   },
   created() {
-    this.init();
+    this.initPosts();
   }
 };
 </script>
