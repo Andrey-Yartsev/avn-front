@@ -53,10 +53,8 @@
     }
 
     + .explore-stories {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-left: 0;
-      }
+      margin-left: 0;
+      padding-left: 0;
     }
 
     .avatar {
