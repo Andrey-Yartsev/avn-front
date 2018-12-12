@@ -1,6 +1,6 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container notifications-popup" slot="content">
+    <div ref="container" class="popup-container notifications-popup" slot="content">
       <div class="content">
         <Content mode="modal"/>
       </div>
@@ -22,6 +22,22 @@ export default {
   components: {
     Modal,
     Content
+  },
+
+  mounted() {
+    let currentScroll = this.$refs.container.scrollTop;
+    this.$refs.container.onscroll = () => {
+      if (currentScroll < this.$refs.container.scrollTop) {
+        document.body.classList.add("scroll-top");
+      } else {
+        document.body.classList.remove("scroll-top");
+      }
+      currentScroll = this.$refs.container.scrollTop;
+    };
+  },
+
+  beforeDestroy() {
+    // document.body.classList.remove("scroll-top");
   }
 };
 </script>
