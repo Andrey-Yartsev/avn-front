@@ -9,7 +9,7 @@
         name="amount"
         class="tip-amount-input rounded" type="text"
         pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8"
-        placeholder="Enter amount"
+        placeholder="Amount"
         v-model="amount"
       >
     </div>
