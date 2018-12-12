@@ -141,6 +141,7 @@ strong {
   transition: all 0.2s ease-in-out 0s;
 }
 #content {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 100%;
   }

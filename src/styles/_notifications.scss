@@ -21,7 +21,7 @@
 
   .scroll-top & {
     @include media-breakpoint-down($desktop-breakpoint) {
-      transform: translateY(-100%);
+      //transform: translateY(-100%);
     }
   }
 }
@@ -107,6 +107,7 @@
 }
 
 .notifications-header {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     background-clip: padding-box;
     position: relative;
@@ -116,6 +117,7 @@
     align-items: center;
     position: -webkit-sticky;
     position: sticky;
+    transition: all 0.2s ease-in-out 0s;
     top: 0;
   }
 
@@ -124,8 +126,20 @@
   }
 
   .scroll-top & {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       top: -44px;
+    }
+  }
+
+  .header_container {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
     }
   }
 }
@@ -149,6 +163,24 @@
 }
 
 .NotificationsCollectionView {
+
+
+  .header-nav {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      top: 44px;
+      transition: all 0.2s ease-in-out 0s;
+    }
+
+    .scroll-top & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, 0, 0);
+        top: 0;
+      }
+    }
+  }
+
   &.no-notifications {
     .msg-no-content {
       pointer-events: auto;
