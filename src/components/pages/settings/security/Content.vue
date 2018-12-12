@@ -46,7 +46,9 @@
 
                   <div class="code-text" v-if="otp.code">
                     <span class="code">{{ otp.code }}</span>
-                    <button type="button" class="btn border alt copy-code">Copy key</button>
+                    <button
+                      @click="copyKey"
+                      type="button" class="btn border alt copy-code">Copy key</button>
                   </div>
                   <span class="qr-code" v-if="otp.qrUrl"><img :src="otp.qrUrl"></span>
                 </div>
@@ -117,6 +119,7 @@
 
 <script>
 import Common from "../common";
+import execCopy from "@/utils/execCopy";
 
 export default {
   name: "SecuritySettingsContent",
@@ -177,6 +180,9 @@ export default {
     },
     deleteAllSessions() {
       this.$store.dispatch("sessions/deleteAll");
+    },
+    copyKey() {
+      execCopy(this.otp.code);
     }
   },
 
