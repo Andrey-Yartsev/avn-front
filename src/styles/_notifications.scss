@@ -16,7 +16,7 @@
 
 .header_container {
   @include media-breakpoint-down($desktop-breakpoint) {
-    transition: transform 0.2s ease-in-out;
+    //transition: transform 0.2s ease-in-out;
   }
 
   .scroll-top & {
