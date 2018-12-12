@@ -58,6 +58,9 @@
             to="/stream"
           >Go live</router-link>
         </div>
+        <div class="add-new-type add-new-type_underline-items line-top">
+          <AddNewNav active="post" />
+        </div>
         <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
           <input class="tweetSend" type="checkbox" :checked="tweetSend">
           <span class="icon" @click="tweetSend = !tweetSend"></span>
@@ -79,6 +82,7 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
+import AddNewNav from "@/components/addNewNav/Index";
 
 const InitialState = {
   expanded: false,
@@ -98,6 +102,7 @@ export default {
   components: {
     Loader,
     MediaPreview,
+    AddNewNav,
     VuePerfectScrollbar
   },
   props: {

@@ -3,7 +3,7 @@
     <div class="loader-container" v-if="!user">
       <Loader :fullscreen="false" text="" class="transparent small" />
     </div>
-    <div class="stream " v-else>
+    <div class="stream " v-else>asd
       <div class="mediasTop">
         <div class="mediasTop__header">
           <span class="category-name category-name_live hidden-mobile" @click="close">Live video</span>
@@ -13,6 +13,9 @@
           <div class="mediasHeaderControls">
             <button class="btn alt sm change-devices top" @click="startStream">Start</button>
             <button id="stop" class="btn alt sm change-devices top" @click="close">Stop</button>
+          </div>
+          <div class="chat-new-type add-new-type add-new-type_b-with-text add-new-type_underline-items line-bottom">
+            <AddNewNav active="live" />
           </div>
             <div class="group-controls">
               <div id="devices">
@@ -371,6 +374,7 @@ import userMixin from "@/mixins/user";
 import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
+import AddNewNav from "@/components/addNewNav/Index";
 
 export default {
   name: "StreamPage",
@@ -400,7 +404,8 @@ export default {
     };
   },
   components: {
-    Loader
+    Loader,
+    AddNewNav
   },
   computed: {
     likesCount() {
