@@ -106,6 +106,9 @@ export default {
       );
     },
     changed() {
+      if (this.$route.name === "SettingsSecurity") {
+        return !!this.$store.state.otp.currentCode;
+      }
       return this.$store.state.profile.changed;
     },
     returnRoute() {

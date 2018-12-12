@@ -3,7 +3,8 @@ import OtpApi from "@/api/otp";
 const state = {
   initCodesError: null,
   qrUrl: "",
-  code: ""
+  code: "",
+  currentCode: ""
 };
 
 const actions = {
@@ -65,6 +66,9 @@ const mutations = {
   },
   setInitCodesError(state, error) {
     state.initCodesError = error;
+  },
+  setCurrentCode(state, currentCode) {
+    state.currentCode = currentCode;
   }
 };
 

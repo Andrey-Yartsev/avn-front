@@ -125,8 +125,7 @@ export default {
 
   data() {
     return {
-      otpEnable: false,
-      otpCode: ""
+      otpEnable: false
     };
   },
 
@@ -136,6 +135,14 @@ export default {
     },
     otp() {
       return this.$store.state.otp;
+    },
+    otpCode: {
+      set(code) {
+        this.$store.commit("otp/setCurrentCode", code);
+      },
+      get() {
+        return this.$store.state.otp.currentCode;
+      }
     }
   },
 
@@ -152,6 +159,9 @@ export default {
   },
 
   methods: {
+    otpSaveHandler() {
+      this.confirmOtp();
+    },
     confirmOtp() {
       if (this.user.otpEnable) {
         this.$store.dispatch("otp/deleteCode", this.otpCode);
@@ -159,15 +169,20 @@ export default {
         this.$store.dispatch("otp/updateProfile", this.otpCode);
       }
     },
-    deleteOtpCode() {
-      this.$store.dispatch("otp/deleteCode");
-    },
     deleteSession(id) {
       this.$store.dispatch("sessions/delete", id);
     },
     deleteAllSessions() {
       this.$store.dispatch("sessions/deleteAll");
     }
+  },
+
+  created: function() {
+    window.addEventListener("saveProfile", this.otpSaveHandler);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("saveProfile", this.otpSaveHandler);
   }
 };
 </script>

@@ -42,6 +42,9 @@ export default {
 
   methods: {
     save() {
+      if (!this.changed) {
+        return;
+      }
       this.$store.dispatch("profile/update", this.localUser);
     },
     _clone(o) {
