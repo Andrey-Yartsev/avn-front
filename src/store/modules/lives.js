@@ -18,7 +18,21 @@ const initState = {
   currentLive: {
     likesCount: 0,
     looksCount: 0,
-    comments: []
+    comments: [],
+    statistic: {
+      stream_comment_search_all: {
+        data: []
+      },
+      stream_tip_search_all: {
+        data: []
+      },
+      stream_like_search_all: {
+        data: []
+      },
+      stream_look_search_all: {
+        data: []
+      }
+    }
   }
 };
 
@@ -43,6 +57,10 @@ const mutations = {
 
   comment(state, comment) {
     state.currentLive.comments = [...state.currentLive.comments, comment];
+  },
+
+  statistic(state, data) {
+    state.currentLive.statistic[data.code] = data;
   },
 
   removeStream(state, live) {
