@@ -115,7 +115,9 @@
             v-if="!isStopped"
           />
         </div>
-        <div id="stream-timer">{{ time }}</div>
+        <div id="stream-timer"
+          v-if="!isStopped"
+        >{{ time }}</div>
         <div class="stream-online-label">live</div>
         <div class="stream-comments-wrapper">
           <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
@@ -157,6 +159,8 @@
     </div>
     <StreamStatistic
       :close="() => close()"
+      :duration="time"
+      v-if="isStopped"
     />
   </div>
 </template>
@@ -460,7 +464,6 @@ export default {
 
         StreamApi.deleteStream(this.startedStreamId);
 
-        this.time = undefined;
         this.isReadyToStart = true;
         this.isStarted = false;
         this.isStopped = true;
