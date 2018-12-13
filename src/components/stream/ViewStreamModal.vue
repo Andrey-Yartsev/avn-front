@@ -31,13 +31,14 @@
             <span class="text">{{ comment.comment }}</span>
           </div>
         </div>
-        <form class="stream-comment-form">
+        <form class="stream-comment-form" v-if="showCommentForm">
           <input
             type="text"
             placeholder="Comment"
             class="stream-comment-input rounded lg"
             maxlength="24"
             v-model="newComment"
+            @keypress.enter.prevent="sendComment"
           >
           <button
             @click="sendComment"
@@ -47,10 +48,10 @@
           ></button>
         </form>
         <div class="stream-btns stream-viewer-btns">
-          <span role="button" class="stream-comment-btn"></span>
+          <span role="button" class="stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
           <span class="stream-like-btn" @click="throttledLike"></span>
           <span class="stream-tip-btn" v-if="false"></span>
-          <span class="stream-online-count"></span>
+          <span class="stream-online-count" v-if="false"></span>
         </div>
       </div>
     </template>
@@ -76,7 +77,8 @@ export default {
     shouldUpdateTimer: false,
     streamIsFinished: false,
     likes: [],
-    newComment: ""
+    newComment: "",
+    showCommentForm: false
   }),
   computed: {
     throttledLike() {
