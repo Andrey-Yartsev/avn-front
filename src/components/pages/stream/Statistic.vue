@@ -215,16 +215,20 @@ export default {
   },
   computed: {
     comments() {
-      return this.$store.state.lives.currentLive.statistic.stream_comment_search_all.data;
+      return this.$store.state.lives.currentLive.statistic
+        .stream_comment_search_all.data;
     },
     tips() {
-      return this.$store.state.lives.currentLive.statistic.stream_tip_search_all.data;
+      return this.$store.state.lives.currentLive.statistic.stream_tip_search_all
+        .data;
     },
     likes() {
-      return this.$store.state.lives.currentLive.statistic.stream_like_search_all.data;
+      return this.$store.state.lives.currentLive.statistic
+        .stream_like_search_all.data;
     },
     looks() {
-      return this.$store.state.lives.currentLive.statistic.stream_look_search_all.data;
+      return this.$store.state.lives.currentLive.statistic
+        .stream_look_search_all.data;
     }
   }
 };
