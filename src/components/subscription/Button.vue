@@ -77,7 +77,10 @@ export default {
       });
     },
     unsubscribe() {
-      this.$store.dispatch("modal/show", { name: "confirm" });
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: this.profile
+      });
     },
     resubscribe() {
       this.$store

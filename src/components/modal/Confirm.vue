@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-alert" slot="content">
       <div class="content">
-        <div class="popup-alert__title">You are about to unsubscribe from John Doe.</div>
+        <div class="popup-alert__title">You are about to unsubscribe from {{ data.name }}.</div>
         <div class="popup-alert__footer">
           <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
           <a href="#" class="btn" @click.prevent="yes">Unsubscribe</a>
@@ -19,6 +19,12 @@ import Modal from "@/components/modal/Index";
 export default {
   components: {
     Modal
+  },
+
+  computed: {
+    data() {
+      return this.$store.state.modal.confirm.data;
+    }
   },
 
   methods: {
