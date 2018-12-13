@@ -78,8 +78,8 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
-  setSource({ commit }, { source, limit }) {
-    commit("setSource", { source, limit });
+  setSource({ commit }, { source }) {
+    commit("setSource", { source });
   },
   setLimit({ commit }, { limit }) {
     commit("setLimit", { limit });

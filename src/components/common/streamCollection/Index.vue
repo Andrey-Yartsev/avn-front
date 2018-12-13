@@ -1,20 +1,19 @@
 <template>
   <div class="stories">
-    <Story
-      v-for="post in stories"
-      :key="post.id"
-      :post="post"
-    />
+		<Stream />
+		<Stream />
+		<Stream />
+		<Stream />
   </div>
 </template>
 
 <script>
-import Story from "@/components/story/SmallHorizontalView";
+import Stream from "@/components/stream/SmallHorizontalView";
 
 export default {
-  name: "StoryCollection",
+  name: "StreamCollection",
   components: {
-    Story
+    Stream
   },
   props: {
     stories: {
