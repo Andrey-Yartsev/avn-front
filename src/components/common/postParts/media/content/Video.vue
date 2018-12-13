@@ -1,6 +1,18 @@
 <template>
-  <video disableremoteplayback webkit-playsinline playsinline controls :poster="media.preview.source">
-      <source v-for="(videoSrc, videoType) in media.video" :src="videoSrc" :type="`video/${videoType}`" :key="videoType">
+  <video
+    disableremoteplayback
+    webkit-playsinline
+    playsinline
+    controls
+    autoplay
+    :poster="media.preview.source"
+  >
+    <source
+      v-for="(videoSrc, videoType) in media.video"
+      :src="videoSrc"
+      :type="`video/${videoType}`"
+      :key="videoType"
+    >
   </video>
 </template>
 
