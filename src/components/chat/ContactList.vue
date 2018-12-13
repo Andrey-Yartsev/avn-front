@@ -1,6 +1,11 @@
 <template>
   <div class="contactsList">
-    <VuePerfectScrollbar class="contactsListContent" ref="messages">
+    <VuePerfectScrollbar
+      class="contactsListContent"
+      ref="messages"
+      @ps-scroll-down="scrollDown"
+      @ps-scroll-up="scrollUp"
+    >
       <div
         @click="openChat(v.withUser.id)"
         class="chatView"
@@ -64,6 +69,12 @@ export default {
       const tmp = document.createElement("DIV");
       tmp.innerHTML = html;
       return tmp.textContent || tmp.innerText || "";
+    },
+    scrollDown() {
+      document.body.classList.add("scroll-top");
+    },
+    scrollUp() {
+      document.body.classList.remove("scroll-top");
     }
   }
 };
