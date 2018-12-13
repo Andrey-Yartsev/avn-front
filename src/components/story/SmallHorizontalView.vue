@@ -1,19 +1,23 @@
 <template>
   <div class="storyView">
     <div class="story">
-      <router-link :to="`/stories/${post.user.id}`" :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
+      <a
+        :href="`/stories/${post.user.id}`"
+        :class="['avatar', {'with-story': post.user.hasNotViewedStory}]"
+        @click.prevent="() => watchAll(post.user.id)"
+      >
         <img v-if="post.user.avatar" :src="post.user.avatar" />
-      </router-link>
+      </a>
       <div class="story-info">
         <div class="story-header">
-          <router-link :to="`/${post.user.username}`" class="name">
+          <a :href="`/${post.user.username}`" class="name" @click.prevent="() => watchAll(post.user.id)">
             {{ post.user.name || post.user.username }}
-          </router-link>
+          </a>
           <span v-if="post.user.isVerified" class="verified-user"></span>
           <div class="story-timestamp">{{ dateTime }}</div>
         </div>
         <div class="user-login">
-          <router-link :to="`/${post.user.username}`">{{ post.user.name || post.user.username }}</router-link>
+          <a :href="`/${post.user.username}`">{{ post.user.name || post.user.username }}</a>
           <span class="followme" v-if="post.user.subscribedOn">
             <span class="followme__txt">Follows you</span>
           </span>
@@ -32,11 +36,30 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    stories: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {
     dateTime: function() {
       return dateFns.distanceInWordsStrict(new Date(), this.post.createDate);
+    },
+    userIds() {
+      return this.stories.map(s => s.user.id);
+    }
+  },
+  methods: {
+    watchAll(id) {
+      const userIds = [...this.userIds];
+      const index = userIds.indexOf(id);
+
+      this.$store.dispatch("common/setStoryList", {
+        storyList: userIds.slice(index + 1, userIds.length)
+      });
+
+      this.$router.push(`/stories/${id}`);
     }
   }
 };

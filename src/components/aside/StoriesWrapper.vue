@@ -2,12 +2,6 @@
   <div class="stories-wrapper">
     <div class="storyCollectionView">
       <h4>Stories</h4>
-      <button
-        v-if="stories.length"
-        class="btn-watch-all"
-        type="button"
-        @click="watchAll"
-      >Watch All</button>
       <div class="stories-group__outer">
         <div class="stories-group">
           <VuePerfectScrollbar class="stories-group__inner">
@@ -67,24 +61,11 @@ export default {
         return this.stories[0].user.id === this.user.id;
       }
       return false;
-    },
-    userIds() {
-      return this.stories.map(s => s.user.id);
     }
   },
   methods: {
     addNewStory() {
       document.getElementById("storyFileSelect").click();
-    },
-    watchAll() {
-      const userIds = [...this.userIds];
-      const userId = userIds.shift();
-
-      this.$store.dispatch("common/setStoryList", {
-        storyList: userIds
-      });
-
-      this.$router.push(`/stories/${userId}`);
     }
   }
 };

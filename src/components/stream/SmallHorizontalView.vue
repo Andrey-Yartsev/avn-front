@@ -1,13 +1,13 @@
 <template>
   <div class="storyView">
     <div class="story">
-      <router-link :to="`/${post.user.username}`" class="avatar">
+      <a :to="`/${post.user.username}`" class="avatar" @click.prevent="run">
         <img :src="post.user.avatar">
         <div class="stream-online-label">live</div>
-      </router-link>
+      </a>
       <div class="story-info">
         <div class="story-header">
-          <router-link :to="`/${post.user.username}`" class="name">{{ post.user.name }}</router-link>
+          <a :to="`/${post.user.username}`" class="name" @click.prevent="run">{{ post.user.name }}</a>
           <div class="story-timestamp">{{ dateTime }}</div>
         </div>
         <div class="user-login">
@@ -32,6 +32,16 @@ export default {
   computed: {
     dateTime: function() {
       return dateFns.distanceInWordsStrict(new Date(), this.post.startedAt);
+    }
+  },
+  methods: {
+    run() {
+      this.$store.dispatch("modal/show", {
+        name: "stream",
+        data: {
+          stream: this.post
+        }
+      });
     }
   }
 };
