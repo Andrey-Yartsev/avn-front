@@ -32,6 +32,7 @@ import followers from "@/store/modules/followers";
 import contacts from "@/store/modules/contacts";
 import forgot from "@/store/modules/forgot";
 import paidMessage from "@/store/modules/paidMessage";
+import confirm from "@/store/modules/confirm";
 
 Vue.use(Vuex);
 
@@ -69,7 +70,8 @@ const store = new Vuex.Store({
     followers,
     contacts,
     forgot,
-    paidMessage
+    paidMessage,
+    confirm
   }
 });
 

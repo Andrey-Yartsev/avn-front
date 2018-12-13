@@ -39,6 +39,10 @@ const state = {
   stream: {
     show: false,
     data: {}
+  },
+  confirm: {
+    show: false,
+    data: {}
   }
 };
 
@@ -67,8 +71,8 @@ const actions = {
     commit("show", { name, data });
   },
 
-  hide({ commit }, { name, data }) {
-    commit("hide", { name, data });
+  hide({ commit }, { name }) {
+    commit("hide", { name });
   },
 
   hideAll({ commit }) {
