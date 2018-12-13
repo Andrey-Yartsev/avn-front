@@ -265,7 +265,7 @@
     + #content {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        margin-top: -44px;
+        //margin-top: -44px;
       }
     }
   }
