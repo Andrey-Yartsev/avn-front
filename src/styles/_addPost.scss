@@ -554,7 +554,7 @@
 
 .b-check-state {
   font-size: 13px;
-  line-height: 29px;
+  line-height: 30px;
   margin-right: 7px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -642,7 +642,6 @@
   }
 
   &__text {
-    margin-top: 1px;
     opacity: 0.5;
     white-space: nowrap;
     transition: opacity .3s, color .3s;
@@ -656,6 +655,16 @@
   }
 
   &_post {
+
+    .b-check-state__icon {
+
+      &:before,
+      &:after {
+        top: 0;
+        left: -3px;
+        line-height: 18px;
+      }
+    }
 
     input[type="checkbox"] {
 
@@ -685,6 +694,7 @@
     align-content: center;
     align-items: center;
     font-size: 15px;
+    margin-left: 8px;
 
     &:hover {
       color: $primary-color-darken;
