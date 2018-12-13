@@ -1,10 +1,12 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container" slot="content">
+    <div class="popup-container popup-alert" slot="content">
       <div class="content">
-        <h3>Are you sure?</h3>
-        <button @click="yes" class="btn large yes">Yes</button>
-        <button @click="no" class="btn large">No</button>
+        <div class="popup-alert__title">You are about to unsubscribe from John Doe.</div>
+        <div class="popup-alert__footer">
+          <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
+          <a href="#" class="btn" @click.prevent="yes">Unsubscribe</a>
+        </div>
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>

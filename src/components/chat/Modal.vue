@@ -40,18 +40,6 @@ export default {
     isNew() {
       return this.routePath === "chat/new";
     }
-  },
-
-  mounted() {
-    let currentScroll = this.$refs.content.scrollTop;
-    this.$refs.content.onscroll = () => {
-      if (currentScroll < this.$refs.content.scrollTop) {
-        document.body.classList.add("scroll-top");
-      } else {
-        document.body.classList.remove("scroll-top");
-      }
-      currentScroll = this.$refs.content.scrollTop;
-    };
   }
 };
 </script>

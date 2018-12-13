@@ -90,11 +90,11 @@ const mutations = {
 };
 
 const actions = {
-  getPosts({ commit }, userId) {
+  getPosts({ commit }) {
     const { limit, offset, marker, source } = state;
     commit("postsRequest");
 
-    return LivesApi.getPosts({ userId, limit, offset, marker, source })
+    return LivesApi.getPosts({ limit, offset, marker, source })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
