@@ -219,7 +219,7 @@ export default {
     duration: {
       type: String,
       isRequired: true
-    },
+    }
   },
   computed: {
     comments() {
