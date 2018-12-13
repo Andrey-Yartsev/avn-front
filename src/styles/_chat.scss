@@ -121,7 +121,7 @@
     left: 0;
     right: 0;
     top: 3px;
-    bottom: 0;
+    bottom: 14px;
   }
 }
 
@@ -184,6 +184,13 @@
     margin: 0 auto 20px;
     height: calc(100vh - 100px);
     width: 100%;
+  }
+
+  .popup & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-direction: column;
+    }
   }
 
   .chatCollectionView &,
@@ -258,6 +265,7 @@
     }
 
     &_narrow {
+
       @include media-breakpoint-down($desktop-breakpoint) {
         width: 100vw;
         flex-direction: column;
@@ -273,6 +281,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         max-width: 380px;
         flex: 0 0 41%;
+      }
+
+      .popup & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          flex: 1;
+        }
       }
 
       .chat-popup_new-msg &,
@@ -714,6 +729,11 @@
       padding: 0;
       width: 40px;
       height: 30px;
+      opacity: 1;
+
+      &:before {
+        @include settings-dots($secondary-color, 1);
+      }
     }
 
     &__dropdown {
@@ -852,6 +872,17 @@
     .contactsListContent {
       position: relative;
       height: 100%;
+
+      &.ps {
+
+        .popup & {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
 
       .chatView {
         padding: 1em 1em 0.75em 0.8em;
