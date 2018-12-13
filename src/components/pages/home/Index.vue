@@ -70,9 +70,16 @@ export default {
     init() {
       this.$store.dispatch("home/resetPageState");
       this.$store.dispatch("home/getPosts");
+
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("stories/setSource", { source: "feed" });
+      this.$store.dispatch("stories/setLimit", { limit: 100 });
       this.$store.dispatch("stories/getPosts");
+
+      this.$store.dispatch("lives/resetPageState");
+      this.$store.dispatch("lives/setSource", { source: "feed" });
+      this.$store.dispatch("lives/setLimit", { limit: 100 });
+      this.$store.dispatch("lives/getPosts");
     }
   },
   watch: {
