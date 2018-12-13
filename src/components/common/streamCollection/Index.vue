@@ -1,9 +1,9 @@
 <template>
   <div class="stories">
-		<Stream />
-		<Stream />
-		<Stream />
-		<Stream />
+	<Stream />
+	<Stream />
+	<Stream />
+	<Stream />
   </div>
 </template>
 

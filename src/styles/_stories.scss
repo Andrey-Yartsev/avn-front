@@ -211,7 +211,7 @@
   .storyView {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
+      display: inline-flex;
       margin-top: 0;
     }
 
@@ -374,6 +374,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 8px;
+      justify-content: flex-start;
     }
 
     .verified-user {
