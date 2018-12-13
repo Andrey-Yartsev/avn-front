@@ -195,6 +195,26 @@
         }
       }
     }
+
+    &.popup-login {
+      max-width: 344px;
+      padding: 52px 20px 23px;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        position: fixed;
+        border-radius: 6px;
+      }
+      
+      .close {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: block;
+        }
+      }
+    }
   }
 
   & &-payment {

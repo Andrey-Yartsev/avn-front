@@ -5,11 +5,6 @@
   body {
     overflow-y: auto;
   }
-
-  input {
-    margin-bottom: 20px;
-    border-radius: 24px;
-  }
 }
 
 .login,
@@ -144,75 +139,7 @@
       }
     }
   }
-  form {
 
-    .error {
-      color: red;
-      margin-bottom: 1.4em;
-      line-height: 1;
-      font-size: 0.86em;
-    }
-    .g-recaptcha {
-      margin: 0 0 1.4em;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      height: 78px;
-
-      > div {
-        position: absolute;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
-      }
-
-      &:empty {
-        margin: 0;
-        height: auto;
-      }
-    }
-  }
-  .login-or {
-    margin: 0.4em 1.4em;
-    position: relative;
-    text-align: center;
-    color: $main-color;
-    opacity: 0.3;
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: calc(50% - 17px);
-      height: 1px;
-      background: rgba($gray, 0.666666667);
-    }
-    &:before {
-      left: 0;
-    }
-    &:after {
-      right: 0;
-    }
-  }
-  .signUp {
-    text-align: center;
-    margin-top: 51px;
-    font-weight: 500;
-    h3 {
-      font-weight: 300;
-      font-size: 21px;
-      margin: 0 0 6px;
-    }
-    a.register {
-      color: $default-secondary-color;
-      &:hover {
-        color: $default-primary-color;
-      }
-    }
-    .forgot {
-      margin: 31px 0 0;
-    }
-  }
   .twitter {
     background: #1da1f3;
     &:before {
@@ -284,5 +211,127 @@
   .text {
     max-width: 960px;
     margin: 0 auto;
+  }
+}
+
+
+.auth-block {
+
+  .login-or {
+    margin: 0.4em 1.4em;
+    position: relative;
+    text-align: center;
+    color: $main-color;
+    opacity: 0.3;
+
+    .popup & {
+      font-size: 11px;
+      padding-top: 0.4em;
+      padding-bottom: 0.4em;
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: calc(50% - 17px);
+      height: 1px;
+      background: rgba($gray, 0.666666667);
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+  }
+
+  .signUp {
+    text-align: center;
+    margin-top: 51px;
+    font-weight: 500;
+
+    .popup & {
+      margin-top: 22px;
+    }
+
+    h3 {
+      font-weight: 300;
+      font-size: 21px;
+      margin: 0 0 6px;
+
+      .popup & {
+        font-size: 17px;
+        margin-bottom: 2px;
+      }
+    }
+    a.register {
+      color: $default-secondary-color;
+
+      .popup & {
+        font-size: 13px;
+      }
+
+      &:hover {
+        color: $default-primary-color;
+      }
+    }
+
+    .forgot {
+      margin: 31px 0 0;
+
+      .popup & {
+        margin-top: 10px;
+        font-size: 13px;
+      }
+    }
+  }
+
+  form {
+
+    .error {
+      color: red;
+      margin-bottom: 1.4em;
+      line-height: 1;
+      font-size: 0.86em;
+    }
+  }
+
+  .g-recaptcha {
+    margin: 0 0 1.4em;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 78px;
+
+    > div {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    &:empty {
+      margin: 0;
+      height: auto;
+    }
+  }
+
+  .btn {
+
+    .popup & {
+      font-weight: 400;
+      font-size: 13px;
+    }
+  }
+
+  input {
+    margin-bottom: 20px;
+    border-radius: 24px;
+
+    .popup & {
+      font-size: 13px;
+    }
   }
 }

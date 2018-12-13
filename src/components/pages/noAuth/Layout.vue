@@ -29,7 +29,7 @@
           <router-link to="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</router-link>
         </div>
       </div>
-      <div class="login-form-col">
+      <div class="login-form-col auth-block">
         <slot name="content" />
         <div class="login-footer hidden-desktop">
           <router-link to="/terms">Terms</router-link>
