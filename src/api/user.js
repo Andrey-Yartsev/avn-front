@@ -1,5 +1,6 @@
 import request from "@/utils/request";
 import tokenRequest from "@/utils/tokenRequest";
+import anyRequest from "@/utils/anyRequest";
 import Store from "@/store";
 
 export default {
@@ -39,7 +40,7 @@ export default {
     });
   },
   getPosts({ userId, offset, limit, marker, source }) {
-    return tokenRequest(`users/${userId}/posts/${source}`, {
+    return anyRequest(`users/${userId}/posts/${source}`, {
       method: "GET",
       query: {
         offset,

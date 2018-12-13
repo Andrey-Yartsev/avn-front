@@ -1,5 +1,5 @@
 <template>
-  <Modal>
+  <Modal :onClose="close">
     <div class="popup-container" slot="content">
       <div class="content">
         <h3>Error</h3>

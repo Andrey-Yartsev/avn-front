@@ -14,23 +14,24 @@
             <div v-if="!hasMine" class="storyView create-story-button" @click.prevent="addNewStory">
               <div class="story">
                 <div class="story-avatar">
-                    <a class="avatar new-story">
-                        <img v-if="user.avatar" :src="user.avatar">
-                    </a>
-                    <span class="btn-add">
-                        <svg aria-hidden="true" class="icn icn-plus">
-                            <use xlink:href="#icon-plus-in-circle"></use>
-                        </svg>
-                    </span>
+                  <a class="avatar new-story">
+                    <img v-if="user.avatar" :src="user.avatar">
+                  </a>
+                  <span class="btn-add">
+                    <svg aria-hidden="true" class="icn icn-plus">
+                      <use xlink:href="#icon-plus-in-circle"></use>
+                    </svg>
+                  </span>
                 </div>
                 <div class="story-info">
-                    <div class="name">Your story</div>
-                    <div class="user-login">
-                        <a class="new-story">Create new story</a>
-                    </div>
+                  <div class="name">Your story</div>
+                  <div class="user-login">
+                    <a class="new-story">Create new story</a>
+                  </div>
                 </div>
               </div>
             </div>
+            <StreamCollection :stories="stories" />
             <StoryCollection :stories="stories" />
           </VuePerfectScrollbar>
         </div>
@@ -41,13 +42,15 @@
 
 <script>
 import StoryCollection from "@/components/common/storyCollection/Index";
+import StreamCollection from "@/components/common/streamCollection/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "StoriesWrapper",
   components: {
     VuePerfectScrollbar,
-    StoryCollection
+    StoryCollection,
+    StreamCollection
   },
   computed: {
     user() {

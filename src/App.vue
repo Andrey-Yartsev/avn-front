@@ -24,6 +24,7 @@
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
+      <ConfirmModal v-if="this.$store.state.modal.confirm.show" />
 
     </template>
   </div>
@@ -48,6 +49,7 @@ import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
+import ConfirmModal from "@/components/modal/Confirm";
 
 import rootClasses from "@/rootClasses";
 import Ws from "@/ws";
@@ -80,7 +82,8 @@ export default {
     StoryInput,
     AddPostModal,
     IframeModal,
-    StreamModal
+    StreamModal,
+    ConfirmModal
   },
   mixins: [ColorScheme],
   data() {

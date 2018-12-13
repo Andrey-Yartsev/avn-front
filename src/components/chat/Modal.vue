@@ -1,10 +1,10 @@
 <template>
-  <Modal>
+  <Modal :onClose="close">
     <div
       class="popup-container chat-popup" slot="content"
       :class="{'chat-popup_new-msg': isNew}"
     >
-      <div class="content">
+      <div class="content" ref="content">
         <component :is="component" mode="modal" />
       </div>
       <button type="button" class="close" @click="close"></button>
@@ -40,6 +40,18 @@ export default {
     isNew() {
       return this.routePath === "chat/new";
     }
+  },
+
+  mounted() {
+    let currentScroll = this.$refs.content.scrollTop;
+    this.$refs.content.onscroll = () => {
+      if (currentScroll < this.$refs.content.scrollTop) {
+        document.body.classList.add("scroll-top");
+      } else {
+        document.body.classList.remove("scroll-top");
+      }
+      currentScroll = this.$refs.content.scrollTop;
+    };
   }
 };
 </script>

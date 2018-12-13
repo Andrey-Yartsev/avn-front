@@ -15,6 +15,7 @@ const initState = {
   offset: 0,
   marker: "",
   deletedPost: undefined,
+  source: "",
   currentLive: {
     likesCount: 0,
     looksCount: 0,
@@ -79,15 +80,21 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+  setSource(state, { source }) {
+    state.source = source;
+  },
+  setLimit(state, { limit }) {
+    state.limit = limit;
   }
 };
 
 const actions = {
   getPosts({ commit }, userId) {
-    const { limit, offset, marker } = state;
+    const { limit, offset, marker, source } = state;
     commit("postsRequest");
 
-    return LivesApi.getPosts({ userId, limit, offset, marker })
+    return LivesApi.getPosts({ userId, limit, offset, marker, source })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -98,6 +105,12 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
+  },
+  setSource({ commit }, { source }) {
+    commit("setSource", { source });
+  },
+  setLimit({ commit }, { limit }) {
+    commit("setLimit", { limit });
   }
 };
 
