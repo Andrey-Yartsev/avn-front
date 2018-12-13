@@ -29,6 +29,16 @@
     padding-top: 88px;
   }
 
+  .popup & {
+
+    .scroll-top & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 44px;
+      }
+    }
+  }
+
   .chat-popup_new-msg & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
