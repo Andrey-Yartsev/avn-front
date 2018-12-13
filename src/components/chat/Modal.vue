@@ -1,5 +1,5 @@
 <template>
-  <Modal>
+  <Modal :onClose="close">
     <div
       class="popup-container chat-popup" slot="content"
       :class="{'chat-popup_new-msg': isNew}"
