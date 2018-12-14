@@ -39,6 +39,12 @@ const mutations = {
     state.source = source;
   },
 
+  setLive(state, { id, currentStream }) {
+    if (state.profile && state.profile.id === id) {
+      state.profile.currentStream = currentStream;
+    }
+  },
+
   updatePost(state, updatedPost) {
     state.posts = state.posts.map(post => {
       if (post.id === updatedPost.id) {
