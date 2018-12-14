@@ -870,6 +870,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         height: 320px;
       }
+
+      .header-scrolled & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          transform: translateY(-240px);
+        }
+      }
     }
   }
 
@@ -904,11 +911,13 @@
     &:not(:empty) {
 
       & ~ .container {
+        opacity: 0;
+        pointer-events: none;
 
-        .select-user-image {
-          opacity: 0;
-          pointer-events: none;
-        }
+        //.select-user-image {
+        //  opacity: 0;
+        //  pointer-events: none;
+        //}
       }
     }
 
