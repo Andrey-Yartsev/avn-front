@@ -7,6 +7,7 @@
     </router-link>
     <span v-else class="avatar" :style="{ fontSize: fontSize}">
         <img :src="profile.avatar" v-if="profile.avatar">
+        <div class="stream-online-label">live</div>
     </span>
   </div>
 </template>

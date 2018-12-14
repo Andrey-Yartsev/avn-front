@@ -237,6 +237,16 @@
         }
       }
     }
+
+    .stream-online-label {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: -0.7em;
+        line-height: 1.42em;
+        width: 3.8em;
+        font-size: calc(0.055em + 7px);
+      }
+    }
   }
 }
 
