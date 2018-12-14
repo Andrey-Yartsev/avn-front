@@ -2,15 +2,9 @@
   <div class="stories-wrapper">
     <div class="storyCollectionView">
       <h4>Stories</h4>
-      <button
-        v-if="stories.length"
-        class="btn-watch-all"
-        type="button"
-        @click="watchAll"
-      >Watch All</button>
       <div class="stories-group__outer">
         <div class="stories-group">
-          <VuePerfectScrollbar class="stories-group__inner" @ps-scroll-x="scrollFunction" @ps-scroll-y="scrollFunction">
+          <VuePerfectScrollbar class="stories-group__inner">
             <div v-if="!hasMine" class="storyView create-story-button" @click.prevent="addNewStory">
               <div class="story">
                 <div class="story-avatar">
@@ -31,7 +25,7 @@
                 </div>
               </div>
             </div>
-            <StreamCollection :stories="stories" />
+            <StreamCollection :stories="streams" />
             <StoryCollection :stories="stories" />
           </VuePerfectScrollbar>
         </div>
@@ -59,57 +53,19 @@ export default {
     stories() {
       return this.$store.state.stories.posts;
     },
-    storiesLoading() {
-      return this.$store.state.stories.loading;
-    },
-    storiesAllDataReceived() {
-      return this.$store.state.stories.allDataReceived;
+    streams() {
+      return this.$store.state.lives.posts;
     },
     hasMine() {
       if (this.stories[0]) {
         return this.stories[0].user.id === this.user.id;
       }
       return false;
-    },
-    userIds() {
-      return this.stories.map(s => s.user.id);
     }
   },
   methods: {
-    scrolledEnought(e) {
-      if (e.type === "ps-scroll-y") {
-        const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
-        return scrollHeight - (offsetHeight + scrollTop) < 450;
-      }
-
-      if (e.type === "ps-scroll-x") {
-        const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
-        return scrollWidth - (offsetWidth + scrollLeft) < 450;
-      }
-
-      return false;
-    },
-    scrollFunction(e) {
-      if (
-        this.scrolledEnought(e) &&
-        !this.storiesLoading &&
-        !this.storiesAllDataReceived
-      ) {
-        this.$store.dispatch("stories/getPosts");
-      }
-    },
     addNewStory() {
       document.getElementById("storyFileSelect").click();
-    },
-    watchAll() {
-      const userIds = [...this.userIds];
-      const userId = userIds.shift();
-
-      this.$store.dispatch("common/setStoryList", {
-        storyList: userIds
-      });
-
-      this.$router.push(`/stories/${userId}`);
     }
   }
 };

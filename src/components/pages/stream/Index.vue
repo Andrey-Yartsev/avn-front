@@ -128,23 +128,24 @@
             <span class="text">{{ comment.comment }}</span>
           </div>
         </div>
-        <form class="stream-comment-form">
-            <input
-              type="text"
-              placeholder="Comment"
-              class="stream-comment-input rounded lg"
-              maxlength="24"
-              v-model="newComment"
-            >
-            <button
-              @click="sendComment"
-              type="button"
-              class="stream-comment-send-btn"
-              :disabled="!newComment.length"
-            ></button>
+        <form class="stream-comment-form" v-if="showCommentForm">
+          <input
+            type="text"
+            placeholder="Comment"
+            class="stream-comment-input rounded lg"
+            maxlength="24"
+            v-model="newComment"
+            @keypress.enter.prevent="sendComment"
+          >
+          <button
+            @click="sendComment"
+            type="button"
+            class="stream-comment-send-btn"
+            :disabled="!newComment.length"
+          ></button>
         </form>
         <div class="stream-btns stream-viewer-btns">
-          <span role="button" class="stream-comment-btn" v-if="false"></span>
+          <span role="button" class="stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
           <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
           <span class="stream-tip-btn" v-if="false"></span>
           <span class="stream-online-count">{{ looksCount }}</span>
@@ -198,7 +199,9 @@ export default {
       time: undefined,
       startedStreamId: undefined,
       likes: [],
-      newComment: ""
+      newComment: "",
+      looksCount: 0,
+      showCommentForm: false
     };
   },
   components: {
@@ -208,9 +211,6 @@ export default {
   computed: {
     likesCount() {
       return this.$store.state.lives.currentLive.likesCount;
-    },
-    looksCount() {
-      return this.$store.state.lives.currentLive.looksCount;
     },
     comments() {
       return this.$store.state.lives.currentLive.comments;
@@ -470,7 +470,9 @@ export default {
         this.startedStreamId = undefined;
       },
       onCleanUp() {},
-      onViewersCountGet(/* count */) {},
+      onViewersCountGet: looks => {
+        this.looksCount = looks - 1;
+      },
       onCustomDataGet: message => {
         if (message.type === "click.position") {
           const date = Date.now();

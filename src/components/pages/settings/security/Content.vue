@@ -101,7 +101,7 @@
                   <span class="last-activity" v-if="!v.isCurrent">{{ v.lastActivity }}</span>
                   <span class="online" v-else>Online</span>
                 </span>
-                <button type="button" class="delete" @click="deleteSession(v.id)"></button>
+                <button type="button" class="delete" @click="deleteSession(v)"></button>
               </div>
               <div class="session-info-details">
                 <p class="ip-country">{{ v.ipAddress }} - {{ v.countryName }}</p>
@@ -119,6 +119,7 @@
 
 <script>
 import Common from "../common";
+import Auth from "@/utils/auth";
 import execCopy from "@/utils/execCopy";
 
 export default {
@@ -175,11 +176,17 @@ export default {
         this.$store.dispatch("otp/updateProfile", this.otpCode);
       }
     },
-    deleteSession(id) {
-      this.$store.dispatch("sessions/delete", id);
+    deleteSession(session) {
+      this.$store.dispatch("sessions/delete", session.id).then(() => {
+        if (session.isCurrent) {
+          Auth.logout();
+        }
+      });
     },
     deleteAllSessions() {
-      this.$store.dispatch("sessions/deleteAll");
+      this.$store.dispatch("sessions/deleteAll").then(() => {
+        Auth.logout();
+      });
     },
     copyKey() {
       execCopy(this.otp.code);

@@ -4,6 +4,7 @@
       v-for="post in stories"
       :key="post.id"
       :post="post"
+      :stories="stories"
     />
   </div>
 </template>

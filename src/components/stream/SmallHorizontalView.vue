@@ -1,17 +1,17 @@
 <template>
   <div class="storyView">
     <div class="story">
-      <a href="/stories/467587" class="avatar">
-        <img src="https://media.team2.retloko.com/files/a/az/azt/aztty2rojxzegbzmm68exdlrff9f2naq1542984029/c320.jpg">
+      <a :to="`/${post.user.username}`" class="avatar" @click.prevent="run">
+        <img :src="post.user.avatar">
         <div class="stream-online-label">live</div>
       </a>
       <div class="story-info">
         <div class="story-header">
-          <a href="/johndoe" class="name">John Doe</a>
-          <div class="story-timestamp">31 minutes</div>
+          <a :to="`/${post.user.username}`" class="name" @click.prevent="run">{{ post.user.name }}</a>
+          <div class="story-timestamp">{{ dateTime }}</div>
         </div>
         <div class="user-login">
-          <a href="/johndoe" class="">John Doe</a>
+          <router-link :to="`/${post.user.username}`" class="">{{ post.user.username }}</router-link>
         </div>
       </div>
     </div>
@@ -19,7 +19,30 @@
 </template>
 
 <script>
+import dateFns from "date-fns";
+
 export default {
-  name: "StreamSmallView"
+  name: "StreamSmallView",
+  props: {
+    post: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    dateTime: function() {
+      return dateFns.distanceInWordsStrict(new Date(), this.post.startedAt);
+    }
+  },
+  methods: {
+    run() {
+      this.$store.dispatch("modal/show", {
+        name: "stream",
+        data: {
+          stream: this.post
+        }
+      });
+    }
+  }
 };
 </script>

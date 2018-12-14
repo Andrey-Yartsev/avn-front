@@ -49,6 +49,7 @@ const actions = {
           accept(r);
         })
         .catch(error => {
+          dispatch("global/setError", error, { root: true });
           commit("setError", error);
           commit("setLoading", false);
           reject(error);
