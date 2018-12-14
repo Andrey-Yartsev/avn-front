@@ -6,9 +6,34 @@
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile" />
     <div class="white-bg-block">
-      <ProfileBackground  :profile="profile" />
-      <div class="profile-images">
-        <ProfileAvatar :profile="profile" />
+      <div class="profile-sticky-header">
+        <ProfileBackground  :profile="profile" />
+        <div class="profile-header-container">
+          <div class="profile-images">
+            <ProfileAvatar :profile="profile" />
+          </div>
+        </div>
+        <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
+          <div class="container">
+            <div class="profile-name profile-name_immobilized">
+              <div class="profile-name__main">
+                <span class="name">
+                  {{ profile.name }}
+                </span>
+                <span class="verified-user" v-if="profile.isVerified"></span>
+              </div>
+              <span class="user-login">
+                <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+              </span>
+            </div>
+            <div class="content-col">
+              <ProfileActions
+                :profile="profile"
+                :page="page"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <!--<div class="profile-header-container hidden-desktop">-->
         <!--<div class="profile-header">-->
@@ -31,23 +56,6 @@
           <!--</div>-->
         <!--</div>-->
       <!--</div>-->
-      <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
-        <div class="container">
-          <div class="profile-name">
-            <span class="name">
-              {{ profile.name }}
-              <span class="verified-user" v-if="profile.isVerified"></span>
-            </span>
-            <span class="user-login">
-              <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
-            </span>
-          </div>
-          <ProfileActions
-            :profile="profile"
-            :page="page"
-          />
-        </div>
-      </div>
       <div class="container">
         <div class="row">
           <!--<div class="aside-col hidden-mobile hidden">-->

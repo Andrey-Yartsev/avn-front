@@ -5,8 +5,9 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: 0;
   }
+
   .bg {
-    height: 32vw;
+    //height: 32vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -354,12 +355,12 @@
   .profile-name {
     display: none;
     padding: 8px 10px 10px 110px;
+    opacity: 1;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
       min-height: 54px;
       padding: 0;
-
     }
 
     &__main {
@@ -379,7 +380,7 @@
   position: relative;
 
   .settings-aside & {
-    margin: 8px 10px 10px 110px;
+    margin: 8px 10px 8px 110px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       margin: 0 0 0 130px;

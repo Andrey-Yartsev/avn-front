@@ -30,8 +30,7 @@
     }
   }
 
-  .profile,
-  .myProfile {
+  .profile {
 
     &:before {
 
@@ -42,10 +41,7 @@
 
     .white-bg-block {
 
-      > .bg,
-      .profile-images,
-      .profile-header,
-      .post-types-tabs {
+      .profile-sticky-header {
 
         @include media-breakpoint-down($desktop-breakpoint) {
           display: none;

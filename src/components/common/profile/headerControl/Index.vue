@@ -1,5 +1,6 @@
 <template>
   <div class="sticky-header-controls">
+    <ProfileBackground :profile="profile"/>
     <router-link to="/" class="header-return-btn"></router-link>
     <div class="profile-name__header">
       <span class="name">
@@ -21,12 +22,14 @@
 <script>
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import UserMixin from "@/mixins/user";
+import ProfileBackground from "@/components/common/profile/background/Index";
 
 export default {
   name: "HeaderControl",
   mixins: [UserMixin],
   components: {
-    UserDropdown
+    UserDropdown,
+    ProfileBackground
   },
   props: {
     profile: {

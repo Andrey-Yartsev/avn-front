@@ -8,10 +8,7 @@
     <div class="white-bg-block">
       <div class="profile-sticky-header">
         <ProfileBackground :profile="profile"/>
-        <div
-          class="profile-header-container"
-          v-bind:style="{ 'left': -scrollBarWidth + 'px' }"
-        >
+        <div class="profile-header-container">
           <div class="profile-images">
             <ProfileAvatar :profile="profile"/>
           </div>
@@ -57,6 +54,12 @@
             />
           </div>
         </div>
+      </div>
+      <div class="profile-actions-mob">
+        <ProfileActions
+          :profile="profile"
+          :page="pageName"
+        />
       </div>
       <div class="container">
         <div class="row">

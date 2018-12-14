@@ -15,8 +15,7 @@
     }
   }
 
-  .profile,
-  .myProfile {
+  .profile {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       min-height: 100%;
@@ -84,13 +83,13 @@
       margin-left: auto;
     }
   }
-
-  .aside-col {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
-    }
-  }
+  //
+  //.aside-col {
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //    display: none;
+  //  }
+  //}
 }
 
 .profile-header-container {
@@ -115,19 +114,11 @@
     padding: 0 10px;
   }
 
-  .profile-name,
   .profile-desc {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: 33.35%;
       width: 100%;
-    }
-  }
-
-  .profile-name {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0;
     }
   }
 
@@ -191,20 +182,18 @@
     transform: translate(-50%, 0);
     font-size: 100px;
     background-color: $white;
-    z-index: 3;
-    overflow: visible;
+    //z-index: 3;
+    //overflow: visible;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
       left: 13px;
-      //bottom: -39px;
-      //transform: translate(-2%, 2.5%);
       bottom: 34px;
       transform: translate(-2%, -3.5%);
     }
 
     &:before {
-      box-shadow: 0 0 0 3px $white;
+      //box-shadow: 0 0 0 3px $white;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         border: calc(0.025em + (200px - 1em) * 0.0125) solid $white;
@@ -238,16 +227,45 @@
   padding: 16px 10px 15px 139px;
   transition: all 0.3s;
 
-  .aside-col & {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 10px 10px 6px 66px;
+    opacity: 0;
+  }
 
-    .profile-page & {
+  .profile-header & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: calc(33.35% - 30px);
+      width: 100%;
+      padding: 0;
+      opacity: 1;
+    }
+
+    .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0;
+        max-width: calc(33.35% - 80px);
+      }
+    }
+  }
 
-        .user-login {
-          font-size: 17px;
-        }
+  .header-scrolled & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      opacity: 1;
+    }
+  }
+
+  .profile-sticky-header & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: -8px 15px 13px;
+    }
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: -75px 15px 30px 66px;
       }
     }
   }
@@ -257,15 +275,21 @@
     align-content: center;
     align-items: center;
     margin-bottom: 6px;
-    font-size: 17px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 3px;
-      font-size: 21px;
     }
 
-    .header-scrolled & {
+    .profile-sticky-header & {
       font-size: 17px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 21px;
+      }
+
+      .header-scrolled & {
+        font-size: 17px;
+      }
     }
   }
 
@@ -273,31 +297,17 @@
     margin-top: 1px;
     margin-left: 5px;
   }
-  .header-scrolled & {
-    //opacity: 0;
-  }
-
-  .name {
-
-    .aside-col & {
-
-      .profile-page & {
-        font-size: 17px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 21px;
-        }
-      }
-    }
-  }
 
   .user-login {
     max-width: 100%;
 
-    .header-scrolled & {
+    .profile-sticky-header & {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 15px;
+      .header-scrolled & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 15px;
+        }
       }
     }
 
@@ -323,21 +333,18 @@
     display: flex;
     max-width: 100%;
     align-items: center;
-    .name {
-      font-weight: 500;
-      min-width: 20%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+
     .verified-user {
       color: inherit;
     }
+
     .user-login {
-      min-width: 20%;
+
       a {
         color: inherit;
       }
     }
+
     .header-scrolled & {
       opacity: 1;
       pointer-events: unset;
@@ -493,7 +500,6 @@
     display: block;
     padding: 0;
     margin: 0 0 25px;
-    //top: 80px;
   }
 
   .container {
@@ -501,6 +507,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       width: 100%;
+      display: none;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -523,6 +530,24 @@
     }
   }
 
+}
+
+.profile-actions-mob {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -22px;
+  z-index: 1;
+  background-color: $white;
+  box-shadow: 0 2px 1px rgba(#000, 0.1);
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: none;
+  }
+
+  > .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .profile-twitter-link {
@@ -677,8 +702,7 @@
   }
 }
 
-.profile,
-.myProfile {
+.profile {
   width: 100%;
 
   .sticky-header-controls {
@@ -735,6 +759,25 @@
         }
       }
     }
+
+    .bg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      opacity: 0;
+      height: auto;
+
+      .header-scrolled & {
+        opacity: 1;
+        z-index: -1;
+      }
+
+      .bg-wrap {
+        height: auto;
+      }
+    }
   }
 
   .row {
@@ -753,122 +796,37 @@
       }
     }
 
-    .profile-name {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-      @include media-breakpoint-up($desktop-breakpoint) {
-        opacity: 0;
-        width: 100%;
-        max-width: 33.35%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        pointer-events: none;
-        margin: 0;
-        padding: 10px 10px 10px 66px;
-
-        .header-scrolled & {
-          opacity: 1;
-          pointer-events: unset;
-        }
-
-        .name {
-          //white-space: nowrap;
-          //overflow: hidden;
-          //text-overflow: ellipsis;
-          //position: relative;
-          //padding-right: 20px;
-          //max-width: 100%;
-          //margin-bottom: 3px;
-
-          .verified-user {
-            //margin-left: 6px;
-            //position: absolute;
-            //right: 0;
-            //top: 50%;
-            //transform: translate(0, -50%);
-            //width: auto;
-            //height: auto;
-          }
-        }
-        .user-login {
-          max-width: 100%;
-          font-size: 15px;
-
-          a {
-            font-size: inherit;
-          }
-        }
-      }
-    }
+    //.profile-name {
+    //  @include media-breakpoint-down($desktop-breakpoint) {
+    //    display: none;
+    //  }
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    opacity: 0;
+    //    width: 100%;
+    //    max-width: 33.35%;
+    //    display: flex;
+    //    flex-direction: column;
+    //    align-items: flex-start;
+    //    pointer-events: none;
+    //    margin: 0;
+    //    padding: 8px 10px 8px 66px;
+    //
+    //    .header-scrolled & {
+    //      opacity: 1;
+    //      pointer-events: unset;
+    //    }
+    //
+    //    .user-login {
+    //      max-width: 100%;
+    //      font-size: 15px;
+    //
+    //      a {
+    //        font-size: inherit;
+    //      }
+    //    }
+    //  }
+    //}
   }
-}
-
-.white-bg-block {
-
-  //> .container {
-  //
-  //  .header-scrolled & {
-  //
-  //    @include media-breakpoint-up($desktop-breakpoint) {
-  //      margin-top: 346px;
-  //    }
-  //  }
-  //}
-
-  .profile-name {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      bottom: auto;
-      filter: none;
-      color: $main-color;
-      margin: -8px 15px 13px;
-    }
-
-    .header-scrolled & {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin: -75px 15px 30px 66px;
-        }
-      }
-
-    .user-login {
-      display: block;
-      margin-top: -4px;
-      margin-left: 0;
-    }
-  }
-
-  //> .bg {
-  //
-  //  @include media-breakpoint-down($desktop-breakpoint) {
-  //    position: -webkit-sticky;
-  //    position: sticky;
-  //    height: 32vw;
-  //    top: calc(44px - 32vw);
-  //  }
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    height: 320px;
-  //    position: relative;
-  //  }
-  //
-  //  .header-scrolled & {
-  //
-  //    @include media-breakpoint-up($desktop-breakpoint) {
-  //      top: 0;
-  //      left: 0;
-  //      right: 0;
-  //      position: fixed;
-  //      height: 80px;
-  //    }
-  //  }
-  //}
 
   .bg {
     overflow: hidden;
@@ -880,10 +838,11 @@
       position: sticky;
       height: 32vw;
       top: calc(44px - 32vw);
+      z-index: 1;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      z-index: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 320px;
     }
 
     .header-scrolled & {
@@ -927,9 +886,9 @@
     overflow: hidden;
     background-color: $white;
     background-image: linear-gradient(
-      30deg,
-      $secondary-color-20 10%,
-      $primary-color-20 90%
+                    30deg,
+                    $secondary-color-20 10%,
+                    $primary-color-20 90%
     );
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -967,11 +926,11 @@
       top: 0;
       height: 44px;
       background: linear-gradient(
-        to bottom,
-        rgba(#000, 0.2) 0%,
-        rgba(#000, 0.2) 33.33%,
-        rgba(#000, 0.1) 66.67%,
-        transparent 100%
+                      to bottom,
+                      rgba(#000, 0.2) 0%,
+                      rgba(#000, 0.2) 33.33%,
+                      rgba(#000, 0.1) 66.67%,
+                      transparent 100%
       );
       z-index: 7;
 
@@ -990,22 +949,46 @@
       z-index: 1;
       height: 12px;
       background: linear-gradient(
-        to top,
-        rgba(#000, 0.05) 0%,
-        transparent 100%
+                      to top,
+                      rgba(#000, 0.05) 0%,
+                      transparent 100%
       );
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-          to top,
-          rgba(#000, 0.1) 0%,
-          transparent 100%
+                        to top,
+                        rgba(#000, 0.1) 0%,
+                        transparent 100%
         );
         bottom: 0;
         height: 80px;
 
         .header-scrolled & {
           background: rgba($main, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.white-bg-block {
+
+  .profile-name {
+
+    .user-login {
+      display: block;
+      margin-top: -4px;
+      margin-left: 0;
+    }
+
+    &_immobilized {
+      margin: 0;
+      flex: 1;
+
+      .header-scrolled & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 0;
         }
       }
     }
@@ -1019,7 +1002,6 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     justify-content: space-between;
-    //margin-left: 8px;
   }
 }
 
@@ -1193,61 +1175,6 @@
         }
       }
     }
-  }
-}
-
-.myProfile {
-  .btns-user-activity {
-    a {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 3px;
-      }
-    }
-  }
-
-  .profile-actions {
-
-    .profile-message-btn,
-    .profile-tip-btn,
-    .more-functions__btn,
-    .btn-edit-profile,
-    .btn-make-post {
-      margin: 0 1.6em;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 0 0 11px;
-      }
-    }
-
-    .more-functions {
-      &__btn {
-        &:before {
-          @include media-breakpoint-up($desktop-breakpoint) {
-            margin: 9px auto 13px;
-          }
-        }
-      }
-    }
-  }
-
-  .aside-col {
-
-    .profile-desc {
-      margin-bottom: 20px;
-    }
-
-    &_sticky {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 110px;
-      }
-    }
-  }
-
-  .no-results-search {
-    display: none;
   }
 }
 
