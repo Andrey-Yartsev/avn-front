@@ -6,52 +6,56 @@
     <router-link class="addPost-btn-float" to="/addPost"/>
     <HeaderControl :profile="profile"/>
     <div class="white-bg-block">
-      <ProfileBackground :profile="profile"/>
-      <div class="profile-images">
-        <ProfileAvatar :profile="profile"/>
-      </div>
-      <div
-        class="profile-header-container"
-        v-bind:style="{ 'left': -scrollBarWidth + 'px' }"
-      >
-        <div class="profile-header">
-          <div class="profile-name">
-            <div class="profile-name__main">
-              <span class="name">{{ profile.name }}</span>
-              <span class="verified-user" v-if="profile.isVerified"></span>
-            </div>
-            <span class="user-login"><a>{{ profile.username }}</a></span>
+      <div class="profile-sticky-header">
+        <ProfileBackground :profile="profile"/>
+        <div
+          class="profile-header-container"
+          v-bind:style="{ 'left': -scrollBarWidth + 'px' }"
+        >
+          <div class="profile-images">
+            <ProfileAvatar :profile="profile"/>
           </div>
-          <div class="profile-desc">
-            <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
-            <a
-              v-if="profile.twitterUsername"
-              :href="'https://twitter.com/' + profile.twitterUsername"
-              class="profile-twitter-link" target="_blank"
-              rel="nofollow"
-            >twitter.com/{{ profile.twitterUsername }}</a>
-            <FollowersCounter :profile="profile"/>
+          <div class="profile-header">
+            <div class="profile-name">
+              <div class="profile-name__main">
+                <span class="name">{{ profile.name }}</span>
+                <span class="verified-user" v-if="profile.isVerified"></span>
+              </div>
+              <span class="user-login"><a>{{ profile.username }}</a></span>
+            </div>
+            <div class="profile-desc">
+              <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
+              <a
+                v-if="profile.twitterUsername"
+                :href="'https://twitter.com/' + profile.twitterUsername"
+                class="profile-twitter-link" target="_blank"
+                rel="nofollow"
+              >twitter.com/{{ profile.twitterUsername }}</a>
+              <FollowersCounter :profile="profile"/>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="post-types-tabs"
-        v-bind:style="{
-          'margin-right': -scrollBarWidth + 'px',
-          'padding-right': scrollBarWidth + 'px'
-        }">
-        <div class="container">
-          <div class="profile-name">
-            <span class="name">
-              {{ profile.name }}
-            <span class="verified-user" v-if="profile.isVerified"></span>
-            </span>
-            <span class="user-login"><a>{{ profile.username }}</a></span>
+        <div
+          class="post-types-tabs"
+          v-bind:style="{
+            'margin-right': -scrollBarWidth + 'px',
+            'padding-right': scrollBarWidth + 'px'
+          }">
+          <div class="container">
+            <!--<div class="profile-name">-->
+              <!--<div class="profile-name__main">-->
+                <!--<span class="name">-->
+                  <!--{{ profile.name }}-->
+                <!--</span>-->
+                  <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
+              <!--</div>-->
+              <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
+            <!--</div>-->
+            <ProfileActions
+              :profile="profile"
+              :page="pageName"
+            />
           </div>
-          <ProfileActions
-            :profile="profile"
-            :page="pageName"
-          />
         </div>
       </div>
       <div class="container">

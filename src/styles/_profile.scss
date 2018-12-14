@@ -160,14 +160,6 @@
       }
     }
   }
-
-  .name {
-    font-size: 17px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 21px;
-    }
-  }
 }
 
 .profile-images {
@@ -205,8 +197,10 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
       left: 13px;
-      bottom: -39px;
-      transform: translate(-2%, 2.5%);
+      //bottom: -39px;
+      //transform: translate(-2%, 2.5%);
+      bottom: 34px;
+      transform: translate(-2%, -3.5%);
     }
 
     &:before {
@@ -242,7 +236,7 @@
 
 .profile-name {
   padding: 16px 10px 15px 139px;
-  transition: opacity 0.3s;
+  transition: all 0.3s;
 
   .aside-col & {
 
@@ -263,9 +257,15 @@
     align-content: center;
     align-items: center;
     margin-bottom: 6px;
+    font-size: 17px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 3px;
+      font-size: 21px;
+    }
+
+    .header-scrolled & {
+      font-size: 17px;
     }
   }
 
@@ -274,7 +274,7 @@
     margin-left: 5px;
   }
   .header-scrolled & {
-    opacity: 0;
+    //opacity: 0;
   }
 
   .name {
@@ -286,6 +286,27 @@
 
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 21px;
+        }
+      }
+    }
+  }
+
+  .user-login {
+    max-width: 100%;
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 15px;
+      }
+    }
+
+    a {
+
+      .header-scrolled & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: inherit;
         }
       }
     }
@@ -457,19 +478,22 @@
 
 .post-types-tabs {
   display: flex;
-  position: -webkit-sticky;
-  position: sticky;
   background: $white;
-  top: -22px;
   box-shadow: 0 2px 1px rgba(#000, 0.1);
   z-index: 5;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -22px;
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     z-index: 3;
     display: block;
     padding: 0;
     margin: 0 0 25px;
-    top: 80px;
+    //top: 80px;
   }
 
   .container {
@@ -498,7 +522,6 @@
       flex: 0 0 76px;
     }
   }
-
 
 }
 
@@ -714,26 +737,6 @@
     }
   }
 
-  .profile-name {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      bottom: auto;
-      filter: none;
-      color: $main-color;
-      margin: -8px 15px 13px;
-    }
-
-    .user-login {
-      display: block;
-      margin-top: -4px;
-      margin-left: 0;
-    }
-  }
-
   .row {
     @include media-breakpoint-up($desktop-breakpoint) {
       width: calc(100% + 20px);
@@ -744,7 +747,7 @@
 
     .content-col {
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 100%;
+        flex: 0 0 calc(100% - 33.35%);
         margin-right: 0;
         margin-left: auto;
       }
@@ -771,23 +774,22 @@
         }
 
         .name {
-          font-size: 17px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          position: relative;
-          padding-right: 20px;
-          max-width: 100%;
-          margin-bottom: 3px;
+          //white-space: nowrap;
+          //overflow: hidden;
+          //text-overflow: ellipsis;
+          //position: relative;
+          //padding-right: 20px;
+          //max-width: 100%;
+          //margin-bottom: 3px;
 
           .verified-user {
-            margin-left: 6px;
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translate(0, -50%);
-            width: auto;
-            height: auto;
+            //margin-left: 6px;
+            //position: absolute;
+            //right: 0;
+            //top: 50%;
+            //transform: translate(0, -50%);
+            //width: auto;
+            //height: auto;
           }
         }
         .user-login {
@@ -805,17 +807,73 @@
 
 .white-bg-block {
 
-  > .container {
+  //> .container {
+  //
+  //  .header-scrolled & {
+  //
+  //    @include media-breakpoint-up($desktop-breakpoint) {
+  //      margin-top: 346px;
+  //    }
+  //  }
+  //}
+
+  .profile-name {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      filter: none;
+      color: $main-color;
+      margin: -8px 15px 13px;
+    }
 
     .header-scrolled & {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: 346px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: -75px 15px 30px 66px;
+        }
       }
+
+    .user-login {
+      display: block;
+      margin-top: -4px;
+      margin-left: 0;
     }
   }
 
-  > .bg {
+  //> .bg {
+  //
+  //  @include media-breakpoint-down($desktop-breakpoint) {
+  //    position: -webkit-sticky;
+  //    position: sticky;
+  //    height: 32vw;
+  //    top: calc(44px - 32vw);
+  //  }
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //    height: 320px;
+  //    position: relative;
+  //  }
+  //
+  //  .header-scrolled & {
+  //
+  //    @include media-breakpoint-up($desktop-breakpoint) {
+  //      top: 0;
+  //      left: 0;
+  //      right: 0;
+  //      position: fixed;
+  //      height: 80px;
+  //    }
+  //  }
+  //}
+
+  .bg {
+    overflow: hidden;
+    z-index: 2;
+    position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       position: -webkit-sticky;
@@ -823,27 +881,6 @@
       height: 32vw;
       top: calc(44px - 32vw);
     }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 320px;
-      position: relative;
-    }
-
-    .header-scrolled & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        top: 0;
-        left: 0;
-        right: 0;
-        position: fixed;
-        height: 80px;
-      }
-    }
-  }
-
-  .bg {
-    overflow: hidden;
-    z-index: 2;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       z-index: 1;
@@ -901,12 +938,12 @@
       right: -20px;
     }
 
-    .header-scrolled & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        top: -240px;
-      }
-    }
+    //.header-scrolled & {
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    top: -240px;
+    //  }
+    //}
 
     &:not(:empty) {
 
@@ -982,7 +1019,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     justify-content: space-between;
-    margin-left: 8px;
+    //margin-left: 8px;
   }
 }
 
@@ -1422,5 +1459,15 @@
   .header-scrolled & {
     bottom: 4px;
     left: 3px;
+  }
+}
+
+.profile-sticky-header {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -240px;
+    z-index: 3;
   }
 }
