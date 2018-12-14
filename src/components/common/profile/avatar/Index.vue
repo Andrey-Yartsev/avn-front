@@ -1,12 +1,13 @@
 <template>
   <div class="profile-images__inner">
-    <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory">
-        <span class="avatar with-story" :style="{ fontSize: fontSize}">
-          <img :src="profile.avatar" v-if="profile.avatar">
-        </span>
-    </router-link>
-    <span v-else class="avatar" :style="{ fontSize: fontSize}">
+    <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory && !showLiveLabel">
+      <span class="avatar with-story" :style="{ fontSize: fontSize}">
         <img :src="profile.avatar" v-if="profile.avatar">
+      </span>
+    </router-link>
+    <span v-else class="avatar" :style="{ fontSize: fontSize}" @click="click">
+      <img :src="profile.avatar" v-if="profile.avatar">
+      <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
   </div>
 </template>
@@ -29,7 +30,22 @@ export default {
       coverScrollHeight: 0
     };
   },
+  computed: {
+    showLiveLabel() {
+      return !!this.profile.currentStream;
+    }
+  },
   methods: {
+    click() {
+      if (this.profile.currentStream) {
+        this.$store.dispatch("modal/show", {
+          name: "stream",
+          data: {
+            stream: this.profile.currentStream
+          }
+        });
+      }
+    },
     updateParams() {
       if (this.$mq !== "desktop") {
         this.avatarSize = 100;
