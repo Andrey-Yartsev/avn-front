@@ -15,7 +15,7 @@ const actions = {
     });
   },
   delete({ commit }, id) {
-    SessionsApi.delete(id).then(() => {
+    return SessionsApi.delete(id).then(() => {
       commit("delete", id);
     });
   },
