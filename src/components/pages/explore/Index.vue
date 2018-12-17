@@ -5,11 +5,11 @@
     <div class="container">
       <div class="over-container">
         <Navigate />
-        <div class="stories-all" v-if="page === 'all' && stories.length">
+        <div class="stories-all" v-if="page === 'all' && (stories.length || lives.length)">
           <div class="exploreAllStoriesCollectionView">
-            <div class="exploreAllStoriesView">
+            <div class="exploreAllStoriesView" v-if="lives.length">
               <div class="explore-all-story">
-                <a href="/stories/467582" class="avatar with-story">
+                <router-link to="explore/live" class="avatar with-story">
                   <span class="avatar__slider">
                     <span class="avatar__slide">
                       <img src="https://media.team2.retloko.com/files/j/jf/jfk/jfkhlzooltscjljhniiux6tyx4v9ifpy1541781654/c160.jpg">
@@ -20,7 +20,7 @@
                   <span class="live-explore-title">
                     Top Live
                   </span>
-                </a>
+                </router-link>
               </div>
             </div>
             <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">
@@ -181,6 +181,7 @@ export default {
 
       if (["all"].indexOf(this.page) !== -1) {
         this.$store.dispatch("stories/setLimit", { limit: 20 });
+        this.$store.dispatch("lives/getPosts");
       }
 
       if (["all", "stories"].indexOf(this.page) !== -1) {
