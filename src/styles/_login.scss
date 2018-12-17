@@ -42,14 +42,6 @@
       }
     }
   }
-
-  form {
-
-    .error {
-      color: red;
-      text-align: center;
-    }
-  }
 }
 
 .forgot,
@@ -291,10 +283,7 @@
   form {
 
     .error {
-      color: red;
-      margin-bottom: 1.4em;
-      line-height: 1;
-      font-size: 0.86em;
+      text-align: center;
     }
   }
 

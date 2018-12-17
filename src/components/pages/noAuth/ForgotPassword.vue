@@ -4,22 +4,26 @@
       <h1>Reset Password</h1>
       <h2>Please fill out your email. A link to reset password will be sent there.</h2>
       <form class="forgot-password-form" v-on:submit.stop.prevent="send">
-        <input
-          v-model="email"
-          class="lg rounded" type="text" name="email" placeholder="Your Email"
-          :disabled="loading || sendSuccess"
-        >
+        <div class="form-group form-group_row">
+          <input
+            v-model="email"
+            class="lg rounded" type="text" name="email" placeholder="Your Email"
+            :disabled="loading || sendSuccess"
+          >
+          <div class="error" v-if="error">
+            {{ error }}
+          </div>
+          <div class="info" v-else-if="sendSuccess">
+            Please check your mailbox for further instructions to recover your password.
+          </div>
+        </div>
         <div class="g-recaptcha" id="captcha"></div>
-        <div class="error" v-if="error">
-          {{ error }}
+        <div class="form-group form-group_row">
+          <button
+            type="submit" class="btn lg alt"
+            v-if="!sendSuccess"
+          >Reset password</button>
         </div>
-        <div class="info" v-else-if="sendSuccess">
-          Please check your mailbox for further instructions to recover your password.
-        </div>
-        <button
-          type="submit" class="btn lg alt"
-          v-if="!sendSuccess"
-        >Reset password</button>
       </form>
     </div>
     <Footer />

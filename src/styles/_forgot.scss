@@ -67,16 +67,21 @@
   margin: 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    max-width: 64.7%;
+    max-width: 78.7%;
   }
 
   .btn.lg {
     padding-left: 39px;
     padding-right: 39px;
+    margin: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 41px;
       padding-right: 41px;
     }
+  }
+
+  input.rounded {
+    border-radius: 20px;
   }
 }

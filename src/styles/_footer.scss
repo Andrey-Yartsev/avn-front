@@ -45,11 +45,12 @@
 
   .FooterNavCollectionView {
     position: relative;
+    padding: 22px 0;
 
     .aside-col & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 22px 0;
+        //padding: 22px 0;
       }
     }
 
@@ -75,11 +76,11 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-                        to right,
-                        rgba($gray, 0.2) 0%,
-                        transparent 30%,
-                        transparent 70%,
-                        rgba($gray, 0.2) 100%
+          to right,
+          rgba($gray, 0.2) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba($gray, 0.2) 100%
         );
       }
     }
