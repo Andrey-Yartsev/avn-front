@@ -83,13 +83,6 @@
       margin-left: auto;
     }
   }
-  //
-  //.aside-col {
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    display: none;
-  //  }
-  //}
 }
 
 .profile-header-container {
@@ -167,9 +160,6 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 90px;
     max-width: 960px;
     margin: 0 auto;
     padding: 0 10px;
@@ -182,8 +172,6 @@
     transform: translate(-50%, 0);
     font-size: 100px;
     background-color: $white;
-    //z-index: 3;
-    //overflow: visible;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 200px;
@@ -193,7 +181,6 @@
     }
 
     &:before {
-      //box-shadow: 0 0 0 3px $white;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         border: calc(0.025em + (200px - 1em) * 0.0125) solid $white;
@@ -805,37 +792,6 @@
         margin-left: auto;
       }
     }
-
-    //.profile-name {
-    //  @include media-breakpoint-down($desktop-breakpoint) {
-    //    display: none;
-    //  }
-    //  @include media-breakpoint-up($desktop-breakpoint) {
-    //    opacity: 0;
-    //    width: 100%;
-    //    max-width: 33.35%;
-    //    display: flex;
-    //    flex-direction: column;
-    //    align-items: flex-start;
-    //    pointer-events: none;
-    //    margin: 0;
-    //    padding: 8px 10px 8px 66px;
-    //
-    //    .header-scrolled & {
-    //      opacity: 1;
-    //      pointer-events: unset;
-    //    }
-    //
-    //    .user-login {
-    //      max-width: 100%;
-    //      font-size: 15px;
-    //
-    //      a {
-    //        font-size: inherit;
-    //      }
-    //    }
-    //  }
-    //}
   }
 
   .bg {
@@ -896,9 +852,9 @@
     overflow: hidden;
     background-color: $white;
     background-image: linear-gradient(
-                    30deg,
-                    $secondary-color-20 10%,
-                    $primary-color-20 90%
+      30deg,
+      $secondary-color-20 10%,
+      $primary-color-20 90%
     );
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -907,23 +863,11 @@
       right: -20px;
     }
 
-    //.header-scrolled & {
-    //
-    //  @include media-breakpoint-up($desktop-breakpoint) {
-    //    top: -240px;
-    //  }
-    //}
-
     &:not(:empty) {
 
       & ~ .container {
         opacity: 0;
         pointer-events: none;
-
-        //.select-user-image {
-        //  opacity: 0;
-        //  pointer-events: none;
-        //}
       }
     }
 
@@ -936,11 +880,11 @@
       top: 0;
       height: 44px;
       background: linear-gradient(
-                      to bottom,
-                      rgba(#000, 0.2) 0%,
-                      rgba(#000, 0.2) 33.33%,
-                      rgba(#000, 0.1) 66.67%,
-                      transparent 100%
+        to bottom,
+        rgba(#000, 0.2) 0%,
+        rgba(#000, 0.2) 33.33%,
+        rgba(#000, 0.1) 66.67%,
+        transparent 100%
       );
       z-index: 7;
 
@@ -959,29 +903,33 @@
       z-index: 1;
       height: 12px;
       background: linear-gradient(
-                      to top,
-                      rgba(#000, 0.05) 0%,
-                      transparent 100%
+        to top,
+        rgba(#000, 0.05) 0%,
+        transparent 100%
       );
 
       @include media-breakpoint-up($desktop-breakpoint) {
         background: linear-gradient(
-                        to top,
-                        rgba(#000, 0.1) 0%,
-                        transparent 100%
+          to top,
+          rgba(#000, 0.1) 0%,
+          transparent 100%
         );
         bottom: 0;
         height: 80px;
-
-        .header-scrolled & {
-          background: rgba($main, 0.1);
-        }
       }
     }
   }
 }
 
 .white-bg-block {
+
+  > .container {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+      z-index: 0;
+    }
+  }
 
   .profile-name {
 
@@ -1405,6 +1353,9 @@
     position: -webkit-sticky;
     position: sticky;
     top: -240px;
+    left: 0;
+    right: 0;
     z-index: 3;
+    background-color: $white;
   }
 }
