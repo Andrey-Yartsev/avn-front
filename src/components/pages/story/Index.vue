@@ -145,6 +145,9 @@ export default {
     stories() {
       return this.$store.state.stories.posts;
     },
+    error() {
+      return this.$store.state.stories.error;
+    },
     author() {
       return this.$store.state.stories.user;
     },
@@ -397,6 +400,11 @@ export default {
     ClickOutside
   },
   watch: {
+    error() {
+      if (this.error) {
+        this.$router.push("/");
+      }
+    },
     stories() {
       const index = this.stories.findIndex(element => element.isLook === false);
       if (index !== -1) {
