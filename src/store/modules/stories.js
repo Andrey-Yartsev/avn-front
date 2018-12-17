@@ -71,6 +71,15 @@ const actions = {
         if (response.status === 200) {
           response.json().then(function(res) {
             commit("userPostsRequestSuccess", res);
+            if (!res.list.length) {
+              commit("postsRequestFail", "User has no stories");
+            }
+          });
+        }
+
+        if (response.status === 404) {
+          response.json().then(function(res) {
+            commit("postsRequestFail", res.error.message);
           });
         }
       })
