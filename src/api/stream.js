@@ -23,5 +23,13 @@ export default {
     return tokenRequest(`streams/${streamId}`, {
       method: "DELETE"
     });
+  },
+  saveStream(streamId) {
+    return tokenRequest(`posts/stream/${streamId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
   }
 };

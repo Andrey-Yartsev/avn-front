@@ -159,7 +159,7 @@
       </div>
     </div>
     <StreamStatistic
-      :close="() => close()"
+      :close="(haveToSave) => close(haveToSave)"
       :duration="time"
       v-if="isStopped"
     />
@@ -340,11 +340,23 @@ export default {
         this.likes = this.likes.filter(item => item.date + 5000 < now);
       }, 5000);
     },
-    close() {
+    close(haveToSave) {
       if (this.isStarted) {
         this.stopStream();
       } else {
-        this.$router.push("/");
+        if (haveToSave) {
+          StreamApi.saveStream(this.startedStreamId)
+            .then(() => {
+              this.$router.push("/");
+            })
+            .catch(() => {
+              this.$router.push("/");
+            });
+        } else {
+          this.$router.push("/");
+        }
+
+        this.startedStreamId = undefined;
       }
     },
     sendComment() {
@@ -467,7 +479,6 @@ export default {
         this.isReadyToStart = true;
         this.isStarted = false;
         this.isStopped = true;
-        this.startedStreamId = undefined;
       },
       onCleanUp() {},
       onViewersCountGet: looks => {

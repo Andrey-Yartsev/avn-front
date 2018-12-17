@@ -222,6 +222,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
     Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);

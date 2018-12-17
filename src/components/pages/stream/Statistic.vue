@@ -193,11 +193,11 @@
       <label class="share-stream-label toggle-wrapper">
         Share your video for the next 24 hours so that more people can watch it.
         <div class="toggle-element">
-          <input type="checkbox" class="share-stream">
+          <input type="checkbox" class="share-stream" v-model="haveToSave">
           <span></span>
         </div>
       </label>
-      <div class="mediasBottom" @click="close">
+      <div class="mediasBottom" @click="() => this.close(this.haveToSave)">
         <button class="btn alt lg change-devices">Done</button>
       </div>
     </div>
@@ -211,6 +211,11 @@
 
 export default {
   name: "Statistic",
+  data() {
+    return {
+      haveToSave: false
+    };
+  },
   props: {
     close: {
       type: Function,
