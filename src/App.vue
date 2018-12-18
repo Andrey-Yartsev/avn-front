@@ -19,7 +19,6 @@
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
       <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
-      <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
@@ -27,7 +26,7 @@
       <ConfirmModal v-if="this.$store.state.modal.confirm.show" />
       <LoginModal v-if="this.$store.state.modal.login.show" />
       <SignupModal v-if="this.$store.state.modal.signup.show" />
-
+      <PaymentModal v-if="this.$store.state.modal.payment.show" />
     </template>
   </div>
 </template>

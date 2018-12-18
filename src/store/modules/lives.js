@@ -17,6 +17,7 @@ const initState = {
   deletedPost: undefined,
   source: "",
   currentLive: {
+    amount: 0,
     likesCount: 0,
     looksCount: 0,
     comments: [],
@@ -58,6 +59,10 @@ const mutations = {
 
   comment(state, comment) {
     state.currentLive.comments = [...state.currentLive.comments, comment];
+  },
+
+  tip(state, tip) {
+    state.currentLive.amount += tip.amount;
   },
 
   statistic(state, data) {

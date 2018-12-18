@@ -13,7 +13,7 @@
         </div>
         <div class="stream-chart-legend-item stream-chart-legend-item__tips">
           <span class="stream-chart-legend-item-label">Funds</span>
-          <span class="stream-chart-legend-item-value">{{ this.tips.length }}</span>
+          <span class="stream-chart-legend-item-value">{{ this.tips }}</span>
         </div>
         <div class="stream-chart-legend-item stream-chart-legend-item__comments">
           <span class="stream-chart-legend-item-label">Comments</span>
@@ -182,7 +182,7 @@
             </div>
             <div class="stream-summary-data-item stream-summary-data-item__tips">
               <div class="stream-summary-data-item__label">Funds</div>
-              <div class="stream-summary-data-item__value">{{ this.tips.length }}</div>
+              <div class="stream-summary-data-item__value">{{ this.tips }}</div>
             </div>
             <div class="stream-summary-data-item stream-summary-data-item__comments">
               <div class="stream-summary-data-item__label">Comments</div>
@@ -232,8 +232,11 @@ export default {
         .stream_comment_search_all.data;
     },
     tips() {
-      return this.$store.state.lives.currentLive.statistic.stream_tip_search_all
-        .data;
+      return this.$store.state.lives.currentLive.statistic.stream_tip_search_all.data
+        .reduce((m, i) => {
+          return m + +i.message.data_tips_amount;
+        }, 0)
+        .toFixed(2);
     },
     likes() {
       return this.$store.state.lives.currentLive.statistic

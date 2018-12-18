@@ -11,7 +11,6 @@
             <span class="category-name category-name_live hidden-desktop">Live Video</span>
           </button>
           <div class="mediasHeaderControls">
-            <button class="btn alt sm change-devices top" @click="startStream">Start</button>
             <button id="stop" class="btn alt sm change-devices top" @click="close">Stop</button>
           </div>
             <div class="group-controls">
@@ -30,7 +29,7 @@
                   <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
                     <span class="root-btn__inside">{{ streamVisibility.label }}</span>
                   </button>
-                  <div class="menu-overlay"></div>
+                  <div class="menu-overlay" @click="hideStreamVisibilityMenu"></div>
                   <div class="menu">
                     <button
                       type="button"
@@ -58,7 +57,7 @@
                     <span class="root-btn__inside" />
                   </button>
                   <div class="menu-overlay"></div>
-                  <div class="menu">
+                  <div class="menu" @click="hideStreamVideoMenu">
                     <button
                       v-for="video in streamVideos"
                       v-bind:key="video.deviceId"
@@ -84,7 +83,7 @@
                 <button type="button" class="root-btn" @click="showStreamAudioMenu">
                   <span class="root-btn__inside" />
                 </button>
-                <div class="menu-overlay"></div>
+                <div class="menu-overlay" @click="hideStreamAudioMenu"></div>
                 <div class="menu">
                   <button
                     v-for="audio in streamAudios"
@@ -148,10 +147,10 @@
           ></button>
         </form>
         <div class="stream-btns stream-viewer-btns">
-          <span role="button" class="stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
-          <span class="stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
-          <span class="stream-tip-btn" v-if="false"></span>
-          <span class="stream-online-count">{{ looksCount }}</span>
+          <span role="button" class="stream-btn stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
+          <span class="stream-btn stream-like-btn" ref="likeBtn">{{ likesCount }}</span>
+          <span class="stream-btn stream-tip-btn">{{ amount.toFixed(2) }} $</span>
+          <span class="stream-btn stream-online-count">{{ looksCount }}</span>
         </div>
       </div>
       <div class="mediasBottom">
@@ -214,6 +213,9 @@ export default {
   computed: {
     likesCount() {
       return this.$store.state.lives.currentLive.likesCount;
+    },
+    amount() {
+      return this.$store.state.lives.currentLive.amount;
     },
     comments() {
       return this.$store.state.lives.currentLive.comments;

@@ -60,8 +60,8 @@
           <span class="stream-btn stream-like-btn" @click="throttledLike"></span>
           <span class="stream-btn stream-tip-btn"
             type="button"
-            v-if="true"
-            @click="showTip = true"
+            v-if="streamer.canEarn"
+            @click="showTip = !showTip"
           ></span>
           <span class="stream-online-count" v-if="false"></span>
         </div>
@@ -529,6 +529,22 @@ export default {
   },
   watch: {
     funded() {
+      const token = this.$store.state.auth.token;
+      const id = this.$store.state.modal.stream.data.stream.id;
+      const userId = this.$store.state.modal.stream.data.stream.user.id;
+      const amount = 10.01;
+
+      this.$root.ws.ws.send(
+        JSON.stringify({
+          act: "stream_tip",
+          stream_id: id,
+          stream_user_id: userId,
+          amount: amount,
+          owner: userId,
+          sess: token
+        })
+      );
+
       this.closeTip();
     }
   }
