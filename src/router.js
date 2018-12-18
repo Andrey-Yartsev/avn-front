@@ -66,9 +66,7 @@ const routes = [
     path: "/forgot",
     component: ForgotPasswordPage,
     meta: {
-      cssName: "forgot",
-      authSection: true,
-      noAuthHeader: true
+      cssName: "forgot"
     }
   },
   {
