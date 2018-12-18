@@ -220,7 +220,7 @@ export default {
         {
           key: "subscribers",
           label: "Subscribers only",
-          disabled: !this.canEarnMoney
+          disabled: !this.user.canEarn
         },
         {
           key: "followers",

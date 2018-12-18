@@ -47,10 +47,20 @@
             :disabled="!newComment.length"
           ></button>
         </form>
+        <Tip
+          :class="{show: showTip}"
+          :user="streamer"
+          ref="tip"
+          @cancel="closeTip"
+        />
         <div class="stream-btns stream-viewer-btns">
           <span role="button" class="stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
           <span class="stream-like-btn" @click="throttledLike"></span>
-          <span class="stream-tip-btn" v-if="false"></span>
+          <span class="stream-tip-btn"
+            type="button"
+            v-if="true"
+            @click="showTip = true"
+          ></span>
           <span class="stream-online-count" v-if="false"></span>
         </div>
       </div>
@@ -64,12 +74,14 @@ import Modal from "@/components/modal/Index";
 import Streams from "streaming-module/view_module";
 import StreamApi from "@/api/stream";
 import moment from "moment";
+import Tip from "@/components/common/tip/User";
 
 export default {
   name: "ViewStremModal",
   components: {
     Modal,
-    Loader
+    Loader,
+    Tip
   },
   data: () => ({
     loading: true,
@@ -78,7 +90,8 @@ export default {
     streamIsFinished: false,
     likes: [],
     newComment: "",
-    showCommentForm: false
+    showCommentForm: false,
+    showTip: false
   }),
   computed: {
     throttledLike() {
@@ -86,6 +99,12 @@ export default {
     },
     comments() {
       return this.$store.state.lives.currentLive.comments;
+    },
+    streamer() {
+      return this.$store.state.modal.stream.data.stream.user;
+    },
+    funded() {
+      return this.$store.state.tip.funded;
     }
   },
   methods: {
@@ -219,6 +238,10 @@ export default {
         })
       );
       this.newComment = "";
+    },
+    closeTip() {
+      this.showTip = false;
+      this.$refs.tip.reset();
     }
   },
   mounted() {
@@ -501,6 +524,11 @@ export default {
   beforeDestroy() {
     this.shouldUpdateTimer = false;
     window.clearInterval(this.likesInterval);
+  },
+  watch: {
+    funded() {
+      this.closeTip();
+    }
   }
 };
 </script>
