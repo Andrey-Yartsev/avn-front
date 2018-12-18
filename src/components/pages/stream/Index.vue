@@ -30,6 +30,7 @@
                   <button type="button" class="root-btn" @click="showStreamVisibilityMenu">
                     <span class="root-btn__inside">{{ streamVisibility.label }}</span>
                   </button>
+                  <div class="menu-overlay"></div>
                   <div class="menu">
                     <button
                       type="button"
@@ -56,6 +57,7 @@
                   <button type="button" class="root-btn" @click="showStreamVideoMenu">
                     <span class="root-btn__inside" />
                   </button>
+                  <div class="menu-overlay"></div>
                   <div class="menu">
                     <button
                       v-for="video in streamVideos"
@@ -82,6 +84,7 @@
                 <button type="button" class="root-btn" @click="showStreamAudioMenu">
                   <span class="root-btn__inside" />
                 </button>
+                <div class="menu-overlay"></div>
                 <div class="menu">
                   <button
                     v-for="audio in streamAudios"
