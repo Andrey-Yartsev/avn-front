@@ -31,9 +31,13 @@
           <button
             v-if="profile.canEarn"
             type="button" class="profile-actions__btn profile-tip-btn selected"
-            @click="showTip = true"
+            @click="openTip"
           >Fund</button>
-          <SubscribeButton :profile="profile" @requested="subsRequested"/>
+          <SubscribeButton
+            :profile="profile"
+            @requested="subsRequested"
+            ref="subscribeButton"
+          />
           <div class="subscribeView" v-if="!profile.subscribedBy">
             <div
               v-if="profile.followedBy"
@@ -61,6 +65,7 @@
             Message
           </button>
           <UserDropdown
+            v-if="user"
             class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
             :profile="profile"
           />
@@ -111,11 +116,16 @@ export default {
       });
     },
     follow() {
-      if (this.user) {
-        this.$store.dispatch("profile/home/follow", this.profile.id);
-      } else {
-        this.$router.push("/login");
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            profilePageAction: "follow"
+          }
+        });
+        return;
       }
+      this.$store.dispatch("profile/home/follow", this.profile.id);
     },
     unfollow() {
       this.$store.dispatch("profile/home/unfollow", this.profile.id);
@@ -163,11 +173,33 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    openTip() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            profilePageAction: "openTip"
+          }
+        });
+        return;
+      }
+      this.showTip = true;
     }
   },
   watch: {
     funded() {
       this.closeTip();
+    }
+  },
+  mounted() {
+    const action = this.$store.state.modal.login.data.profilePageAction;
+    if (action) {
+      if (action === "subscribe") {
+        this.$refs.subscribeButton.subscription();
+        return;
+      }
+      this[action]();
     }
   }
 };

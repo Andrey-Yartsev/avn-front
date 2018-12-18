@@ -69,6 +69,37 @@ const actions = {
       });
   },
 
+  loginFromModal({ commit, dispatch }, data) {
+    commit("request");
+    UserApi.login(data)
+      .then(user => {
+        dispatch("setToken", user.accessToken);
+        if (user.isOtpNeeded) {
+          dispatch("setOtpAuth", true);
+          Router.push("/login");
+          return;
+        }
+        dispatch("profile/fetch", null, { root: true });
+        commit("showCaptcha", false);
+      })
+      .then(() => {
+        commit("requestSuccess");
+        commit("modal/hideSafe", { name: "login" }, { root: true });
+        dispatch("profile/home/reload", null, { root: true });
+        commit("loginFinished");
+      })
+      .catch(error => {
+        if (error.code === 101) {
+          commit("showCaptcha", true);
+          commit("loginFinished");
+        } else {
+          commit("requestFailure", error.message);
+          commit("loginFinished");
+        }
+        Router.push("/login");
+      });
+  },
+
   logout({ commit, dispatch }) {
     commit("logout");
     dispatch("payouts/reset", null, { root: true });

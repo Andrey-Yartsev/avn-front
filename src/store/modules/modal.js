@@ -43,6 +43,14 @@ const state = {
   confirm: {
     show: false,
     data: {}
+  },
+  login: {
+    show: false,
+    data: {}
+  },
+  signup: {
+    show: false,
+    data: {}
   }
 };
 

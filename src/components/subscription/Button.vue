@@ -20,8 +20,12 @@
 </template>
 
 <script>
+import User from "@/mixins/user";
+
 export default {
   name: "SubscribeButton",
+
+  mixins: [User],
 
   props: {
     profile: {
@@ -95,6 +99,15 @@ export default {
         );
     },
     subscription() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            profilePageAction: "subscribe"
+          }
+        });
+        return;
+      }
       this[this.subsAction]();
     }
   }

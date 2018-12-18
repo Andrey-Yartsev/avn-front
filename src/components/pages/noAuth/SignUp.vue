@@ -36,56 +36,17 @@
 <script>
 import Recaptcha from "vue-recaptcha";
 import Layout from "./Layout";
-import Common from "./common";
+import Common from "@/components/auth/common";
+import Signup from "@/components/auth/signup";
 
 export default {
   name: "SignUp",
 
-  mixins: [Common],
+  mixins: [Common, Signup],
 
   components: {
     Layout,
     Recaptcha
-  },
-
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: ""
-    };
-  },
-
-  computed: {
-    error() {
-      return this.$store.state.signUp.signUpError;
-    },
-    showCaptcha() {
-      return this.$store.state.signUp.showCaptcha;
-    }
-  },
-
-  watch: {
-    error(text) {
-      if (text) {
-        this.$refs.recaptcha.reset();
-      }
-    }
-  },
-
-  methods: {
-    signUp() {
-      this.$store.dispatch("signUp/signUp", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
-      });
-    }
-  },
-
-  created() {
-    this.$store.dispatch("signUp/init");
   }
 };
 </script>

@@ -112,6 +112,12 @@ const actions = {
 
   extend({ commit, state }, data) {
     commit("profile", { ...state.profile, ...data });
+  },
+
+  reload({ dispatch, state }) {
+    dispatch("fetchProfile", state.profile.username).then(() => {
+      // dispatch("profile/setFetchLoading", false, { root: true });
+    });
   }
 };
 
