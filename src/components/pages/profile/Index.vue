@@ -208,7 +208,7 @@ export default {
       }
     },
     getPosts() {
-      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+      this.$store.dispatch("profile/home/getPosts");
     }
   },
   created() {

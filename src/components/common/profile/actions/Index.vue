@@ -154,7 +154,7 @@ export default {
         "You have unsubscribed successfully"
       );
       this.$store.commit("profile/home/resetPosts");
-      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+      this.$store.dispatch("profile/home/getPosts");
     },
     resubscribed(result) {
       if (!result.success) {
@@ -168,7 +168,7 @@ export default {
         "You have resubscribed successfully"
       );
       this.$store.commit("profile/home/resetPosts");
-      this.$store.dispatch("profile/home/getPosts", this.profile.id);
+      this.$store.dispatch("profile/home/getPosts");
     },
     closeTip() {
       this.showTip = false;

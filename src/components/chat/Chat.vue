@@ -28,7 +28,11 @@
           </div>
       </div>
       <template v-else>
-        <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeChat">
+        <div class="chatCollectionContentWrapper"  v-if="activeUserLoading">
+          <Loader :fullscreen="false" text="" class="transparent small" />
+        </div>
+        <template v-else>
+          <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeUser">
           <div class="selectedChatHeader">
             <div class="back-popup-btn hidden-desktop">
               <span class="back" @click="mobileBack"></span>
@@ -72,17 +76,18 @@
 
           </div>
         </div>
-        <div class="chatCollectionContentWrapper">
+          <div class="chatCollectionContentWrapper">
           <div class="chatMessagesCollectionView">
             <div class="chat-section chat-section_loading" v-if="messagesLoading">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
-            <template v-if="activeChat">
+            <template v-if="activeUser">
               <Messages v-if="messages" :_messages="messages" :withUser="activeUser" />
               <AddMessage :withUser="activeUser"/>
             </template>
           </div>
         </div>
+        </template>
       </template>
     </template>
     <NoConversations v-if="noMessages"/>
@@ -170,6 +175,9 @@ export default {
       );
     },
     activeUser() {
+      if (!this.activeChat) {
+        return this.$store.state.chat.fetchActiveUserResult;
+      }
       return this.activeChat.withUser;
     },
     messagesLoading() {
@@ -180,6 +188,9 @@ export default {
         this.$store.state.user.blockLoading ||
         this.$store.state.user.unblockLoading
       );
+    },
+    activeUserLoading() {
+      return this.$store.state.chat.fetchActiveUserLoading;
     }
   },
 
@@ -236,6 +247,9 @@ export default {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
+        if (!this.activeChat) {
+          this.$store.dispatch("chat/fetchActiveUser", this.activeUserId);
+        }
       }
     });
   },

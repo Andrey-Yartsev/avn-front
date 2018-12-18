@@ -8,7 +8,7 @@
           :href="`/post/${post.id}`"
           @click.prevent="openModal"
         >
-            <figure class="explore-media" :class="{'locked-wrapper': media.locked}">
+            <figure v-if="media" class="explore-media" :class="{'locked-wrapper': media.locked}">
                 <div v-if="!media.canView" class="locked-picture">
                     <img class="locked" :src="'data:image/jpeg;base64,' + media.locked">
                 </div>
@@ -37,9 +37,11 @@
 
 <script>
 import { toHumanDuration } from "@/helpers/datetime";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "Post",
+  mixins: [ModalRouterGoto],
   props: {
     post: {
       type: Object,
@@ -66,10 +68,7 @@ export default {
       if (this.media.locked) {
         return;
       }
-      this.$store.dispatch(
-        "modalRouter/updatePath",
-        `post/${this.post.id}/${this.from}`
-      );
+      this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     },
     getComments() {
       const { id, commentsCount, canComment } = this.post;

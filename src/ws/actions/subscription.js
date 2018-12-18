@@ -14,7 +14,7 @@ export default data => {
           subscribedBy: true
         });
         Store.commit("profile/home/resetPosts");
-        Store.dispatch("profile/home/getPosts", payment.user.id);
+        Store.dispatch("profile/home/getPosts");
       }
     }
     Store.commit("search/page/extendUser", {

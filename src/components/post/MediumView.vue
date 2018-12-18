@@ -52,9 +52,11 @@ import Header from "@/components/common/postParts/header/Index";
 import Media from "@/components/common/postParts/media/Index";
 import Actions from "@/components/common/postParts/actions/Index";
 import Tip from "@/components/common/tip/User";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "Post",
+  mixins: [ModalRouterGoto],
   data: function() {
     return {
       showAddCommentForm: false,
@@ -88,7 +90,7 @@ export default {
       if (!this.post.media.length) {
         return [];
       }
-      if (this.post.media[0].locked) {
+      if (this.post.media[0] && this.post.media[0].locked) {
         return [this.post.media[0]];
       }
       return this.post.media;
@@ -116,10 +118,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch(
-        "modalRouter/updatePath",
-        `post/${this.post.id}/${this.from}`
-      );
+      this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     },
     getComments() {
       const { id, commentsCount, canComment } = this.post;
