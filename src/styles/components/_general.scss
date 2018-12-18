@@ -251,12 +251,13 @@ video {
 }
 
 .reasons {
+
   .form-title {
     @include media-breakpoint-down($desktop-breakpoint) {
-      font: inherit;
+      font-size: 16px;
       font-weight: 500;
-      padding: 16px 20px 10px 54px;
-      letter-spacing: -0.4px;
+      padding-top: 16px;
+      padding-bottom: 10px;
     }
   }
 
@@ -268,14 +269,12 @@ video {
     }
   }
 
-  .close {
-    display: none;
+  .form-group {
 
-    .popup & {
+    .btn {
+
       @include media-breakpoint-down($desktop-breakpoint) {
-        display: block;
-        right: auto;
-        left: auto;
+        margin-left: 0;
       }
     }
   }
