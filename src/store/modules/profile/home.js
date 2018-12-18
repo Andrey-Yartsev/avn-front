@@ -57,7 +57,8 @@ const mutations = {
 };
 
 const actions = {
-  getPosts({ commit }, userId) {
+  getPosts({ commit, state }) {
+    const userId = state.profile.id;
     const { limit, offset, marker, source } = state;
     commit("postsRequest");
 

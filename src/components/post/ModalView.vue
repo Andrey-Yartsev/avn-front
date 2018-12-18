@@ -9,7 +9,7 @@
           </div>
         </div>
         <button type="button" class="close" @click="close"></button>
-        <div class="next" @click="index += 1" v-if="index + 1 < length"></div>
+        <div class="next" @click="next" v-if="index + 1 < length"></div>
       </div>
     </template>
   </Modal>
@@ -18,9 +18,11 @@
 <script>
 import Modal from "@/components/modal/Index";
 import PostLargeView from "@/components/post/LargeView";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "PostModal",
+  mixins: [ModalRouterGoto],
   data() {
     return {
       index: null
@@ -42,17 +44,20 @@ export default {
     path() {
       return `post/${this.postId}`;
     },
-    posts() {
+    postsState() {
       if (this.from === "profile/home") {
-        return this.$store.state.profile.home.posts;
+        return this.$store.state.profile.home;
       } else if (this.from === "home") {
-        return this.$store.state.home.posts;
+        return this.$store.state.home;
       } else if (this.from === "explore") {
-        return this.$store.state.explore.posts;
+        return this.$store.state.explore;
       } else if (this.from === "search/page") {
-        return this.$store.state.search.page.posts;
+        return this.$store.state.search.page;
       }
       throw new Error(`from "${this.from}" does not exists`);
+    },
+    posts() {
+      return this.postsState.posts;
     }
   },
   components: {
@@ -60,16 +65,22 @@ export default {
     PostLargeView
   },
   methods: {
-    close() {
-      window.location.hash = "";
-    },
     scroll() {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
+    },
+    next() {
+      if (this.index >= this.postsState.posts.length - 3) {
+        if (!this.$store.state.home.allDataReceived) {
+          console.log("load more");
+          this.$store.dispatch(`${this.from}/getPosts`);
+        }
+      }
+      this.index++;
     }
   },
   watch: {
     index: function() {
-      this.scroll();
+      // this.scroll();
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
