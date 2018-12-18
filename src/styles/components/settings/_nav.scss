@@ -35,6 +35,13 @@
       font-size: 15px;
     }
 
+    &:hover {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        color: $main-color;
+      }
+    }
+
     .value {
       opacity: 0.5;
       letter-spacing: 0;
