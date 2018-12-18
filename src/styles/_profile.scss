@@ -25,9 +25,6 @@
 
     .sticky-header-controls {
       position: fixed;
-    }
-
-    .sticky-header-controls {
       background-color: transparent;
     }
 
@@ -748,10 +745,9 @@
         margin-top: 8px;
 
         &:before {
-          text-shadow: $shadow-light;
 
           @include media-breakpoint-down($desktop-breakpoint) {
-            @include settings-dots(#fff, 1);
+            @include color-settings-dots(#fff, 1);
             filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
           }
         }

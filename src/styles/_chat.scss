@@ -742,7 +742,7 @@
       opacity: 1;
 
       &:before {
-        @include settings-dots($secondary-color, 1);
+        @include color-settings-dots($secondary-color, 1);
       }
     }
 

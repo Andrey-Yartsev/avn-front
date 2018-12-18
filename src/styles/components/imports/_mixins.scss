@@ -24,15 +24,18 @@
   border-radius: 50%;
 }
 
-@mixin settings-dots($color, $opacity) {
+@mixin color-settings-dots($color, $opacity) {
+  background-image: radial-gradient(circle, $color 50%, transparent 50%);
+  opacity: $opacity;
+}
+
+@mixin settings-dots {
   content: "";
   @include position-center;
   height: 4px;
   width: 16px;
-  background-image: radial-gradient(circle, $color 50%, transparent 50%);
   background-size: 6px 4px;
   background-position: 5px 0;
-  opacity: $opacity;
   transition: all 0.3s;
 }
 

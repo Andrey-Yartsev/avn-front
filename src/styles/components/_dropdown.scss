@@ -85,7 +85,8 @@
     }
 
     &:before {
-      @include settings-dots($main-color, 1);
+      @include settings-dots;
+      @include color-settings-dots($main-color, 1);
       width: 16px;
       height: 4px;
       display: block;

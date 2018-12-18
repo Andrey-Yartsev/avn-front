@@ -323,7 +323,7 @@
       }
 
       &:before {
-        @include settings-dots(#fff, 1);
+        @include color-settings-dots(#fff, 1);
         background-size: 7px 6px;
         background-position: 6px 0;
         margin: 0;
