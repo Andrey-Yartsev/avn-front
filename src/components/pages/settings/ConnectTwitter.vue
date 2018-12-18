@@ -2,7 +2,7 @@
   <div class="TwitterBlockView">
     <div class="shadow-block">
       <div class="container">
-        <div class="form-group">
+        <div class="form-group form-group_with-label">
           <div class="form-group-inner form-group-title">
             <span class="label">Your Twitter</span>
 

@@ -1,7 +1,11 @@
 @import "components/imports";
 
 .static-page {
-  background: $white;
+
+  &:not(.login-page),
+  &.reset-page {
+    background: $white;
+  }
 
   #site_header {
     box-shadow: none;

@@ -16,7 +16,7 @@
       </div>
       <div class="shadow-block">
         <div class="container">
-          <div class="form-group radio-group">
+          <div class="form-group form-group_with-label radio-group">
             <label class="form-group-inner">
               <div class="radio-wrapper">
                 <input
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="container hidden-mobile">
-        <div class="form-group">
+        <div class="form-group form-group_with-label">
           <button
             type="submit" class="btn lg saveChanges"
             :disabled="!changed"

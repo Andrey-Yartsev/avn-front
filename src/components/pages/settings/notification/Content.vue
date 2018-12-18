@@ -21,7 +21,7 @@
       <div class="shadow-block">
         <div class="container">
           <div
-            class="form-group checkbox-group emailNotificationsTypes"
+            class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
             :class="{disabled: !localUser.isEmailNotificationsEnabled}"
           >
             <label class="form-group-inner">
@@ -81,7 +81,7 @@
         <div class="container">
           <div
             :class="{disabled: !localUser.isEmailNotificationsEnabled}"
-            class="form-group radio-group emailNotificationsFrequency"
+            class="form-group form-group_with-label radio-group emailNotificationsFrequency"
           >
             <label class="form-group-inner">
               <div class="radio-wrapper">
@@ -123,7 +123,7 @@
         </div>
       </div>
       <div class="container hidden-mobile">
-        <div class="form-group">
+        <div class="form-group form-group_with-label">
           <button
             :disabled="loading || !changed"
             type="submit" class="btn lg saveChanges"

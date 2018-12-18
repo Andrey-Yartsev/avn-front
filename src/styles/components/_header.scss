@@ -363,7 +363,7 @@
 
   .login {
     padding: 3px 32px 3px 18px;
-    filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+    //filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 90px;
@@ -470,6 +470,10 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
+  }
+
+  .static-page & {
+    margin-left: 0;
   }
 
   &__text {

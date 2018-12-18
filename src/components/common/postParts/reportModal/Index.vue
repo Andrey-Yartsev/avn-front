@@ -10,7 +10,7 @@
                         <h1 class="form-title">Choose reason</h1>
                         <div class="shadow-block">
                             <div class="container">
-                                <div class="form-group radio-group">
+                                <div class="form-group form-group_with-label radio-group">
                                     <label class="form-group-inner" v-for="reason in reasons" :key="reason.id">
                                       <div class="radio-wrapper">
                                           <input
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="container">
-                            <div class="form-group">
+                            <div class="form-group form-group_with-label">
                                 <button
                                   type="submit"
                                   id="send-report"

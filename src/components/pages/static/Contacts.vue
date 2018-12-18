@@ -9,7 +9,7 @@
       <h2>If you have business inquiries or other questions, please fill out the following form to contact us. Thank
         you.</h2>
       <form v-on:submit.stop.prevent="send">
-        <label class="form-group">
+        <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Name</span>
             <input
@@ -17,7 +17,7 @@
               type="text" name="name" required>
           </div>
         </label>
-        <label class="form-group">
+        <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Email</span>
             <input
@@ -25,7 +25,7 @@
               type="email" name="email" required>
           </div>
         </label>
-        <label class="form-group">
+        <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Subject</span>
             <input
@@ -33,7 +33,7 @@
               type="text" name="subject" required>
           </div>
         </label>
-        <label class="form-group">
+        <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Message</span>
             <textarea
@@ -41,7 +41,7 @@
               name="message" rows="6" required></textarea>
           </div>
         </label>
-        <label class="form-group">
+        <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label"></span>
             <button type="submit" class="btn lg">Submit</button>

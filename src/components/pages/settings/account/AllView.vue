@@ -13,7 +13,7 @@
       >
         <div class="shadow-block">
           <div class="container">
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                   <span class="label">
                     <span class="for-verified">Your email</span>
@@ -25,7 +25,7 @@
                 >
               </label>
             </div>
-            <div class="form-group hidden-mobile email-confirm-block" id="confirm-email-block">
+            <div class="form-group form-group_with-label hidden-mobile email-confirm-block" id="confirm-email-block">
               <div class="form-group-inner">
                 <span class="label"></span>
                 <button
@@ -80,7 +80,7 @@
         <div class="shadow-block">
           <div class="container">
 
-            <div class="form-group" v-if="user.hasPassword">
+            <div class="form-group form-group_with-label" v-if="user.hasPassword">
               <label class="form-group-inner">
                 <span class="label">Old password</span>
                 <input
@@ -92,7 +92,7 @@
                 <router-link to="/forgot">Forgot your password?</router-link>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">New password</span>
                 <input
@@ -102,7 +102,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Confirm new password</span>
                 <input
@@ -135,7 +135,7 @@
       </div>
       <div class="border-top shadow-block delete-account-block">
         <div class="container">
-          <div class="form-group delete-account">
+          <div class="form-group form-group_with-label delete-account">
             <label class="form-group-inner">
               <span class="label hidden-mobile"></span>
               <button

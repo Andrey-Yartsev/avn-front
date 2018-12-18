@@ -4,13 +4,13 @@
     <form class="settings-form" v-on:submit.stop.prevent="save">
       <div class="border-top shadow-block">
         <div class="container">
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Name</span>
               <input name="name" v-model="localUser.name">
             </label>
           </div>
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Username</span>
               <input
@@ -23,7 +23,7 @@
             </label>
 
           </div>
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Website</span>
               <input
@@ -33,7 +33,7 @@
                 pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)">
             </label>
           </div>
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">About</span>
               <TextareaAutosize
@@ -46,7 +46,7 @@
               ></TextareaAutosize>
             </label>
           </div>
-          <div class="form-group color-schemes-wrapper">
+          <div class="form-group form-group_with-label color-schemes-wrapper">
             <div class="form-group-inner">
               <span class="label">Theme color</span>
               <div class="row">
@@ -88,7 +88,7 @@
       </div>
       <div class="shadow-block" id="is_paid_subscription__wrapper" v-if="localUser.isWantEarn">
         <div class="container">
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner subscription">
               <span class="label">Subscription</span>
               <span class="subscription__field">
@@ -121,7 +121,7 @@
       </div>
       <div class="shadow-block">
         <div class="container">
-          <div class="form-group gender-options">
+          <div class="form-group form-group_with-label gender-options">
             <label class="form-group-inner">
               <span class="label">Gender</span>
               <div class="row">
@@ -137,7 +137,7 @@
               </div>
             </label>
           </div>
-          <div class="form-group hidden-mobile">
+          <div class="form-group form-group_with-label hidden-mobile">
             <div class="form-group-inner">
               <span class="label"></span>
               <button

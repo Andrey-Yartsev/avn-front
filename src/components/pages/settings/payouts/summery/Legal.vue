@@ -49,7 +49,7 @@
       <form action="" class="settings-form" v-on:submit.stop.prevent="save">
         <div class="shadow-block border-top" id="is_paid_subscription__wrapper">
           <div class="container">
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner subscription">
                 <span class="label">Subscription</span>
                 <span class="subscription__field">
@@ -61,7 +61,7 @@
                   </span>
               </label>
             </div>
-            <div class="form-group row-btn-save">
+            <div class="form-group form-group_with-label row-btn-save">
               <div class="form-group-inner">
                 <span class="label"></span>
                 <button type="submit" class="btn lg saveChanges" :disabled="!changed">Save changes</button>

@@ -167,12 +167,22 @@ label {
     }
   }
 
+  &_with-label {
+
+    &.form-group {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 0 11.5% 17px 0;
+      }
+    }
+  }
+
   .reasonsView &,
   .contact-page &,
   .settings-page & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 11.5% 17px 0;
+      //padding: 0 11.5% 17px 0;
     }
   }
 

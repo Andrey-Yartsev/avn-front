@@ -16,14 +16,14 @@
               >Cancel</button>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Routing Number</span>
               <input name="routingNumber" v-model="localBank.routingNumber">
             </label>
           </div>
 
-          <div class="form-group">
+          <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Account Number</span>
               <input name="accountNumber" v-model="localBank.accountNumber">
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="form-group hidden" id="payouts-bank-form-error">
+        <div class="form-group form-group_with-label hidden" id="payouts-bank-form-error">
           <label class="form-group-inner">
             <span class="label"></span>
             <div class="error"></div>
