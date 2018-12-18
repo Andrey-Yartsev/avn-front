@@ -67,7 +67,7 @@
       <div class="getPaidForm" v-if="showPaid">
         <button class="cancelPaid btn btn-cancel">Cancel</button>
         <input type="hidden" name="priceAmount" class="getPaidAmount">
-        <div class="getPaidForm__field">
+        <div class="price-amount-field getPaidForm__field">
           <input
             type="text"
             pattern="\d{1,3}(?:\.\d{0,2})?"
