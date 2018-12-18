@@ -58,7 +58,7 @@ const routes = [
     path: "/register",
     component: SignUpPage,
     meta: {
-      cssName: "forgot"
+      cssName: "login"
     }
   },
   {
