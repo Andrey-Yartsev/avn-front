@@ -313,10 +313,10 @@
   }
 }
 
-.stream-comment-form {
+.form-stream {
   position: absolute;
   left: 15px;
-  bottom: 54px;
+  bottom: 40px;
   z-index: 2;
   right: 15px;
 
@@ -324,8 +324,45 @@
     left: 20px;
     width: 340px;
     right: auto;
-    bottom: 57px;
   }
+
+  .stream-comment-form,
+  .tip-form {
+    margin-bottom: 14px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 17px;
+    }
+  }
+
+  .tip-form {
+    display: none;
+
+    &.show {
+      display: flex;
+    }
+
+    .btn {
+      background-color: #fff;
+      color: #000;
+      height: 40px;
+      padding: 11px 9px;
+      min-width: 80px;
+    }
+  }
+
+  .tip-amount-field {
+
+    input {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.2);
+      height: 40px;
+    }
+  }
+}
+
+.stream-comment-form {
+  position: relative;
 
   &:before {
     position: fixed;
@@ -379,6 +416,36 @@
   }
 }
 
+.stream-btn {
+  padding: 12px 8px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  opacity: 0.7;
+  cursor: pointer;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 15px 10px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:before {
+    @include icon-font;
+    font-size: 24px;
+  }
+
+  &:not(:empty) {
+
+    &:before {
+      margin-right: 6px;
+    }
+  }
+}
+
 .stream-btns {
   position: absolute;
   left: 7px;
@@ -395,38 +462,6 @@
 
     .stream_enabled & {
       display: flex;
-    }
-  }
-
-  & > span {
-    padding: 12px 8px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    transition: opacity 0.3s ease;
-    opacity: 0.7;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 15px 10px;
-    }
-
-    &[role="button"] {
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    &:before {
-      @include icon-font;
-      font-size: 24px;
-    }
-
-    &:not(:empty) {
-
-      &:before {
-        margin-right: 6px;
-      }
     }
   }
 }

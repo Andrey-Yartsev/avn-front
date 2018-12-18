@@ -31,32 +31,34 @@
             <span class="text">{{ comment.comment }}</span>
           </div>
         </div>
-        <form class="stream-comment-form" v-if="showCommentForm">
-          <input
-            type="text"
-            placeholder="Comment"
-            class="stream-comment-input rounded lg"
-            maxlength="24"
-            v-model="newComment"
-            @keypress.enter.prevent="sendComment"
-          >
-          <button
-            @click="sendComment"
-            type="button"
-            class="stream-comment-send-btn"
-            :disabled="!newComment.length"
-          ></button>
-        </form>
-        <Tip
-          :class="{show: showTip}"
-          :user="streamer"
-          ref="tip"
-          @cancel="closeTip"
-        />
+        <div class="form-stream">
+          <form class="stream-comment-form" v-if="showCommentForm">
+            <input
+              type="text"
+              placeholder="Comment"
+              class="stream-comment-input rounded lg"
+              maxlength="24"
+              v-model="newComment"
+              @keypress.enter.prevent="sendComment"
+            >
+            <button
+              @click="sendComment"
+              type="button"
+              class="stream-comment-send-btn"
+              :disabled="!newComment.length"
+            ></button>
+          </form>
+          <Tip
+            :class="{show: showTip}"
+            :user="streamer"
+            ref="tip"
+            @cancel="closeTip"
+          />
+        </div>
         <div class="stream-btns stream-viewer-btns">
-          <span role="button" class="stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
-          <span class="stream-like-btn" @click="throttledLike"></span>
-          <span class="stream-tip-btn"
+          <span role="button" class="stream-btn stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
+          <span class="stream-btn stream-like-btn" @click="throttledLike"></span>
+          <span class="stream-btn stream-tip-btn"
             type="button"
             v-if="true"
             @click="showTip = true"
