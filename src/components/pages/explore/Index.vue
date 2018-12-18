@@ -17,10 +17,10 @@
                     <span class="avatar__slide active"></span>
                   </span>
                   <div class="stream-online-label">live</div>
-                  <span class="live-explore-title">
-                    Top Live
-                  </span>
                 </router-link>
+                <span class="live-explore-title">
+                  Top Live
+                </span>
               </div>
             </div>
             <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">

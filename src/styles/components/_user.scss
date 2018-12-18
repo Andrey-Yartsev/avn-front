@@ -171,14 +171,12 @@
   font-weight: 500;
   color: $main-color;
   font-size: 13px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -26px;
   text-align: center;
+  display: block;
+  margin-top: 10px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    bottom: -29px;
+    margin-top: 13px;
   }
 }
 
