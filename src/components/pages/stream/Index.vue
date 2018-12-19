@@ -56,8 +56,8 @@
                   <button type="button" class="root-btn" @click="showStreamVideoMenu">
                     <span class="root-btn__inside" />
                   </button>
-                  <div class="menu-overlay"></div>
-                  <div class="menu" @click="hideStreamVideoMenu">
+                  <div class="menu-overlay" @click="hideStreamVideoMenu"></div>
+                  <div class="menu">
                     <button
                       v-for="video in streamVideos"
                       v-bind:key="video.deviceId"
