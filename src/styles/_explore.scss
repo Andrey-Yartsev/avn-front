@@ -2,6 +2,30 @@
 
 .explore-page {
 
+  &:not(.not-authorized) {
+
+    #site_header {
+
+      .header-logo,
+      .make-post-btn {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.not-authorized {
+
+    #site_header {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        box-shadow: 0 0 5px rgba(#000, 0.3);
+      }
+    }
+  }
+
   #content {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -11,17 +35,6 @@
       flex-direction: row;
       align-content: stretch;
       align-items: stretch;
-    }
-  }
-
-  #site_header {
-
-    .header-logo,
-    .make-post-btn {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
     }
   }
 

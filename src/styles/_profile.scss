@@ -163,7 +163,7 @@
     transform: translate(-50%, 0);
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      left: 13px;
+      left: 23px;
       bottom: 34px;
       transform: translate(-2%, -3.5%);
       font-size: 200px;
@@ -765,7 +765,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      top: auto;
+      top: 0;
       opacity: 0;
       height: auto;
 

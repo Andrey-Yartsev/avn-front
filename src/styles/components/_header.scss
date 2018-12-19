@@ -33,63 +33,6 @@
 
 .special-site-header {
 
-  &.profile-page {
-
-    .header-scrolled {
-
-      #site_header {
-
-        &.guest {
-
-          .header-wrapper {
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-              top: -44px;
-            }
-          }
-        }
-      }
-    }
-
-    #site_header {
-
-      &.guest {
-        display: block;
-        position: fixed;
-        left: 0; right: 0;
-        top: 0;
-
-        .login,
-        .register {
-          color: #fff;
-        }
-
-        .login {
-          box-shadow: 0 0 0 2px #fff inset;
-        }
-
-        + #content {
-
-          .sticky-header-controls {
-
-            .header-return-btn,
-            .profile-more-functions {
-              display: none;
-            }
-
-            .profile-name__header {
-              padding: 0 20px;
-            }
-          }
-        }
-
-        .header_container {
-          background: transparent;
-        }
-      }
-    }
-  }
-
   #site_header {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -102,10 +45,6 @@
       top: 0;
       height: 0;
       margin: 0;
-    }
-
-    &.guest {
-      display: none;
     }
 
     .header-wrapper {
@@ -123,84 +62,89 @@
         color: #fff;
       }
     }
+  }
 
-    .header-logo {
+  .header-avatar {
+    box-shadow: 0 2px 10px rgba(#000, 0.2);
+  }
 
-      svg {
-        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-      }
+  .header-search-submit {
+    color: $main;
+  }
 
-      .b, .e, .f, .c, .d {
-        fill: #fff;
-      }
+  .header-search-input {
+    background-color: rgba(#fff, 0.3);
+    box-shadow: 0 2px 10px rgba(#000, 0.06);
 
-      .e, .f {
-        opacity: 1;
-      }
-    }
-
-    .header-nav {
-
-      &__item {
-        color: #fff;
-
-        span {
-          opacity: 0.7;
-          color: #fff;
-        }
-
-        &:before {
-          opacity: 0.6;
-          filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
-        }
-
-        &:hover {
-          span,
-          &:before {
-            opacity: 1;
-          }
-        }
-        &.unread:after {
-          background-color: #fff;
-        }
-
-        &.active {
-          border-color: rgba(255, 255, 255, 0.6);
-
-          &:hover {
-            border-color: rgba(255, 255, 255, 1);
-          }
-        }
-      }
-    }
-
-    .header-avatar {
-      box-shadow: 0 2px 10px rgba(#000, 0.2);
-    }
-
-    .header-search-submit {
+    &::-moz-placeholder {
       color: $main;
     }
 
-    .header-search-input {
-      background-color: rgba(#fff, 0.3);
-      box-shadow: 0 2px 10px rgba(#000, 0.06);
+    &:-ms-input-placeholder {
+      color: $main;
+    }
 
-      &::-moz-placeholder {
-        color: $main;
-      }
-      &:-ms-input-placeholder {
-        color: $main;
-      }
-      &::-webkit-input-placeholder {
-        color: $main;
+    &::-webkit-input-placeholder {
+      color: $main;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(#000, 0.2);
+      color: $main;
+    }
+  }
+
+  .header-logo {
+
+    svg {
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    }
+
+    .b, .e, .f, .c, .d {
+      fill: #fff;
+    }
+
+    .e, .f {
+      opacity: 1;
+    }
+  }
+
+  .header-nav {
+
+    &__item {
+      color: #fff;
+
+      span {
+        opacity: 0.7;
+        color: #fff;
       }
 
-      &:hover,
-      &:focus {
+      &:before {
+        opacity: 0.6;
+        filter: drop-shadow(0 2px 2px rgba(#000, 0.2));
+      }
+
+      &:hover {
+        color: #fff;
+
+        span,
+        &:before {
+          opacity: 1;
+        }
+      }
+
+      &.unread:after {
         background-color: #fff;
-        box-shadow: 0 2px 10px rgba(#000, 0.2);
-        color: $main;
+      }
+
+      &.active {
+        border-color: rgba(255, 255, 255, 0.6);
+
+        &:hover {
+          border-color: rgba(255, 255, 255, 1);
+        }
       }
     }
   }
@@ -239,19 +183,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
-    }
-  }
-
-  &.guest {
-
-    .header-logo {
-      margin-left: 0;
-      margin-right: auto;
-      display: flex;
-    }
-
-    .login {
-      filter: none;
     }
   }
 
@@ -479,6 +410,10 @@
     }
   }
 
+  .special-site-header & {
+    margin-left: 0;
+  }
+
   &__text {
     pointer-events: none;
     position: absolute;
@@ -633,6 +568,13 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 170px;
     margin-left: 22px;
+  }
+
+  .special-site-header & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: auto;
+    }
   }
 }
 
@@ -846,6 +788,19 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       transform: translate3d(0, -44px, 0);
+    }
+  }
+
+  + .header-logo {
+
+    .special-site-header & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 
@@ -1520,4 +1475,78 @@
     background-size: 6px 4px;
     background-position: 5px 0;
   }
+}
+
+.not-authorized {
+
+  &.special-site-header {
+
+    &.profile-page {
+
+      #site_header {
+        display: block;
+        position: fixed;
+        left: 0; right: 0;
+        top: 0;
+
+        .header_container {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            background-color: transparent;
+          }
+        }
+
+        .login,
+        .register {
+          --primary-color: #fff;
+          --secondary-color: #fff;
+        }
+
+        .header-wrapper {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .header-scrolled {
+
+        #site_header {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            transform: translate3d(0, -44px, 0);
+          }
+        }
+      }
+
+      .sticky-header-controls {
+
+        .header-return-btn,
+        .profile-more-functions {
+          display: none;
+        }
+
+        .profile-name__header {
+          padding: 0 20px;
+        }
+      }
+    }
+
+    #site_header {
+      display: none;
+    }
+  }
+
+  #site_header {
+
+    .login {
+      filter: none;
+    }
+  }
+}
+
+.btns-login-user {
+  margin-right: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
 }

@@ -57,8 +57,10 @@
             </router-link>
           </template>
           <template v-if="authSection">
-            <router-link to="/register" class="register">Have an account?</router-link>
-            <router-link to="/login" class="btn border alt login">Log in</router-link>
+            <div class="btns-login-user">
+              <router-link to="/register" class="register">Have an account?</router-link>
+              <router-link to="/login" class="btn border alt login">Log in</router-link>
+            </div>
           </template>
         </template>
       </div>
