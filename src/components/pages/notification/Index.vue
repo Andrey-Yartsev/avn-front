@@ -42,7 +42,7 @@
           </div>
           <div class="content">
             <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
-            {{ v.type }} your post
+            {{ v.text }}
           </div>
         </div>
       </VuePerfectScrollbar>

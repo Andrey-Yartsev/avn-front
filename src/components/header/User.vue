@@ -56,6 +56,10 @@ export default {
     this.popupItem = this.$el;
   },
 
+  beforeDestroy() {
+    document.body.classList.remove("sidebar-shown", "disable-scroll-page");
+  },
+
   directives: {
     ClickOutside
   }
