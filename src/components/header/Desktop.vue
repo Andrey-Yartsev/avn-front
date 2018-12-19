@@ -1,7 +1,12 @@
 <template>
   <nav class="header-nav hidden-mobile">
     <template v-if="!noAuthHeader">
-      <router-link class="menu-item-home header-nav__item" to="/" exact><span>Home</span></router-link>
+      <router-link
+        v-if="user"
+        class="menu-item-home header-nav__item"
+        to="/"
+        exact
+      ><span>Home</span></router-link>
       <router-link class="menu-item-explore header-nav__item" to="/explore"><span>Explore</span></router-link>
 
       <a
