@@ -67,6 +67,8 @@ const getScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
 };
 
+const htmlElement = document.getElementsByTagName("html")[0];
+
 export default {
   components: {
     Loader,
@@ -154,24 +156,22 @@ export default {
     cssName: {
       immediate: true,
       handler(cssName) {
-        const html = document.getElementsByTagName("html")[0];
-        html.className = "";
-        const rootClassList = html.classList;
+        htmlElement.className = "";
         const classList = rootClasses[cssName] || [];
         for (let cls of classList) {
-          rootClassList.add(cls);
+          htmlElement.classList.add(cls);
         }
         if (this.darkTheme) {
-          rootClassList.add("dark-theme");
+          htmlElement.classList.add("dark-theme");
         }
+        this.initLoggedInClass();
       }
     },
     darkTheme(darkTheme) {
-      const rootClassList = document.getElementsByTagName("html")[0].classList;
       if (darkTheme) {
-        rootClassList.add("dark-theme");
+        htmlElement.classList.add("dark-theme");
       } else {
-        rootClassList.remove("dark-theme");
+        htmlElement.classList.remove("dark-theme");
       }
     },
     loggedIn(loggedIn) {
@@ -182,6 +182,16 @@ export default {
         if (this.wasLogout) {
           this.webSocket.connect();
         }
+      }
+      this.initLoggedInClass();
+    }
+  },
+  methods: {
+    initLoggedInClass() {
+      if (this.loggedIn) {
+        htmlElement.classList.remove("not-authorized");
+      } else {
+        htmlElement.classList.add("not-authorized");
       }
     }
   },
@@ -218,6 +228,8 @@ export default {
       }
       currentScroll = window.pageYOffset;
     };
+
+    this.initLoggedInClass();
   }
 };
 </script>
