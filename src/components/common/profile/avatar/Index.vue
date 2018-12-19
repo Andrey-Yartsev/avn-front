@@ -1,11 +1,11 @@
 <template>
-  <div class="profile-images__inner">
+  <div class="profile-images__inner" :style="{ fontSize: fontSize}">
     <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory && !showLiveLabel">
       <span class="avatar with-story" :style="{ fontSize: fontSize}">
         <img :src="profile.avatar" v-if="profile.avatar">
       </span>
     </router-link>
-    <span v-else class="avatar" :style="{ fontSize: fontSize}" @click="click">
+    <span v-else class="avatar" @click="click">
       <img :src="profile.avatar" v-if="profile.avatar">
       <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>

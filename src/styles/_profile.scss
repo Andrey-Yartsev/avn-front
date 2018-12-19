@@ -154,7 +154,20 @@
   }
 
   &__inner {
-    position: relative;
+    //position: relative;
+
+    font-size: 100px;
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      left: 13px;
+      bottom: 34px;
+      transform: translate(-2%, -3.5%);
+      font-size: 200px;
+    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -164,19 +177,8 @@
   }
 
   .avatar {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    font-size: 100px;
     background-color: $white;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 200px;
-      left: 13px;
-      bottom: 34px;
-      transform: translate(-2%, -3.5%);
-    }
+    font-size: inherit;
 
     &:before {
 
@@ -205,15 +207,18 @@
         }
       }
     }
+  }
 
-    .stream-online-label {
+  .stream-online-label {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        bottom: -0.7em;
-        line-height: 1.42em;
-        width: 3.8em;
-        font-size: calc(0.055em + 7px);
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      bottom: -0.6em;
+      line-height: 1.42em;
+      width: 3.5em;
+      font-size: calc(0.055em + 7px);
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }
