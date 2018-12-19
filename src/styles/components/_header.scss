@@ -473,7 +473,10 @@
   }
 
   .not-authorized & {
-    margin-left: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 0;
+    }
   }
 
   &__text {
