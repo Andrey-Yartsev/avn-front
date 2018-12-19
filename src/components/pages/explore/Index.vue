@@ -5,9 +5,9 @@
     <div class="container">
       <div class="over-container">
         <Navigate />
-        <div class="stories-all" v-if="page === 'all' && (true || stories.length || lives.length)">
+        <div class="stories-all" v-if="page === 'all' && (stories.length || lives.length)">
           <div class="exploreAllStoriesCollectionView">
-            <TopLives :lives="undefined" v-if="true || lives.length" />
+            <TopLives :lives="lives" v-if="lives.length" />
             <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
             </VuePerfectScrollbar>
