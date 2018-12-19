@@ -59,14 +59,14 @@
                   <div class="menu-overlay" @click="hideStreamVideoMenu"></div>
                   <div class="menu">
                     <button
-                      v-for="video in streamVideos"
+                      v-for="(video, key) in streamVideos"
                       v-bind:key="video.deviceId"
                       type="button"
                       :data-type="video.deviceId"
                       :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
                       @click="() => setStreamVideo(video)"
                     >
-                      <span class="value">{{ video.label }}</span>
+                      <span class="value">{{ video.label || `Camera ${key}` }}</span>
                     </button>
                   </div>
                 </div>
@@ -86,14 +86,14 @@
                 <div class="menu-overlay" @click="hideStreamAudioMenu"></div>
                 <div class="menu">
                   <button
-                    v-for="audio in streamAudios"
+                    v-for="(audio, key) in streamAudios"
                     v-bind:key="audio.deviceId"
                     type="button"
                     :data-type="audio.deviceId"
                     :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
                     @click="() => setStreamAudio(audio)"
                   >
-                    <span class="value">{{ audio.label || "Disable Microphone" }}</span>
+                    <span class="value">{{ !audio.deviceId ? "Disable Microphone" : audio.label || `Microphone ${key}` }}</span>
                   </button>
                 </div>
               </div>

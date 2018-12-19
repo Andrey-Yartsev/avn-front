@@ -31,16 +31,38 @@ export default {
   props: {
     lives: {
       type: Array,
-      required: true
+      defaults: []
+    }
+  },
+  computed: {
+    length() {
+      return this.lives.length;
+    }
+  },
+  methods: {
+    setData() {
+      this.current = 0;
+      this.nextItem = 1;
+    },
+    run() {
+      setInterval(() => {
+        this.current = this.current < this.length - 1 ? this.current + 1 : 0;
+        this.nextItem = this.nextItem < this.length - 1 ? this.nextItem + 1 : 0;
+        console.log(this.current, this.nextItem);
+      }, 2000);
+    },
+    init() {
+      this.setData();
+      this.run();
     }
   },
   mounted() {
-    setInterval(() => {
-      this.current =
-        this.current < this.lives.length - 1 ? this.current + 1 : 0;
-      this.nextItem =
-        this.nextItem < this.lives.length - 1 ? this.nextItem + 1 : 0;
-    }, 2000);
+    this.init();
+  },
+  watch: {
+    lives() {
+      this.init();
+    }
   }
 };
 </script>
