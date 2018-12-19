@@ -182,15 +182,6 @@
     }
   }
 
-  .getPaidAmountPlaceholder {
-    text-align: center;
-    border-radius: 1em;
-    background-color: rgba(124, 139, 150, 0.08);
-    padding-left: 0.55em;
-    padding-right: 0.55em;
-    height: 31px;
-  }
-
   .btn-el {
     &.disabled,
     &[disabled] {
@@ -199,6 +190,15 @@
       color: rgba(124, 139, 150, 0.18);
     }
   }
+}
+
+.getPaidAmountPlaceholder {
+  text-align: center;
+  border-radius: 1em;
+  background-color: rgba(124, 139, 150, 0.08);
+  padding-left: 0.55em;
+  padding-right: 0.55em;
+  height: 31px;
 }
 
 .field-text-message {
