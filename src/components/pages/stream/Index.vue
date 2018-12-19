@@ -161,7 +161,7 @@
       </div>
     </div>
     <StreamStatistic
-      :close="(haveToSave) => close(haveToSave)"
+      :close="(haveToSave) => close({}, haveToSave)"
       :duration="time"
       v-if="isStopped"
     />
@@ -345,7 +345,7 @@ export default {
         this.likes = this.likes.filter(item => item.date + 5000 < now);
       }, 5000);
     },
-    close(haveToSave) {
+    close(e, haveToSave) {
       if (this.isStarted) {
         this.stopStream();
       } else {
