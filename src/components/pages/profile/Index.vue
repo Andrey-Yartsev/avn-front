@@ -51,6 +51,7 @@
             <ProfileActions
               :profile="profile"
               :page="pageName"
+              ref="actionsDesktop"
             />
           </div>
         </div>
@@ -59,6 +60,7 @@
         <ProfileActions
           :profile="profile"
           :page="pageName"
+          ref="actionsMobile"
         />
       </div>
       <div class="container">
@@ -170,6 +172,9 @@ export default {
         return 0;
       }
       return this.$store.state.global.scrollBarWidth;
+    },
+    subscriptionUpdate() {
+      return this.$store.state.subscription.updated;
     }
   },
   watch: {
@@ -189,6 +194,9 @@ export default {
     },
     updatedPost() {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
+    },
+    subscriptionUpdate(data) {
+      this.$refs.actionsDesktop.subsRequested(data);
     }
   },
   methods: {

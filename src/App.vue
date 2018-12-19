@@ -23,7 +23,7 @@
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
-      <ConfirmModal v-if="this.$store.state.modal.confirm.show" />
+      <SubscriptionConfirmModal v-if="this.$store.state.modal.subscriptionConfirm.show" />
       <LoginModal v-if="this.$store.state.modal.login.show" />
       <SignupModal v-if="this.$store.state.modal.signup.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
@@ -50,7 +50,7 @@ import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
-import ConfirmModal from "@/components/modal/Confirm";
+import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 
@@ -86,7 +86,7 @@ export default {
     AddPostModal,
     IframeModal,
     StreamModal,
-    ConfirmModal,
+    SubscriptionConfirmModal,
     LoginModal,
     SignupModal
   },

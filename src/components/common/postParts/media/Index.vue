@@ -110,7 +110,6 @@ export default {
     },
 
     nextSlide() {
-      console.log("nextSlide");
       if (this.medias.length - 1 === this.currentSlide) {
         this.currentSlide = 0;
       } else {

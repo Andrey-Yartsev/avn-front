@@ -71,7 +71,6 @@ export default {
     next() {
       if (this.index >= this.postsState.posts.length - 3) {
         if (!this.$store.state.home.allDataReceived) {
-          console.log("load more");
           this.$store.dispatch(`${this.from}/getPosts`);
         }
       }

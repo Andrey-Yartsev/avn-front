@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-alert" slot="content">
       <div class="content">
-        <div class="popup-alert__title">You are about to unsubscribe from {{ data.name }}?</div>
+        <div class="popup-alert__title">You are about to unsubscribe from {{ user.name }}?</div>
         <div class="popup-alert__body">
           You will be able to resubscribe during current billing period without any additional costs.
         </div>
@@ -20,33 +20,38 @@
 import Modal from "@/components/modal/Index";
 
 export default {
+  name: "SubscriptionConfirmModal",
+
   components: {
     Modal
   },
 
   computed: {
-    data() {
-      return this.$store.state.modal.confirm.data;
+    user() {
+      return this.$store.state.modal.subscriptionConfirm.data;
     }
   },
 
   methods: {
     yes() {
-      this.$store.commit("confirm/yes");
-      this.$store.dispatch("modal/hide", { name: "confirm" });
+      this.$store.dispatch("subscription/unsubscribe", {
+        userId: this.user.id
+      });
+      this.$store.commit("subscription/confirm/yes", this.user.id);
+      this.$store.commit("modal/hideSafe", { name: "subscriptionConfirm" });
     },
     no() {
-      this.$store.commit("confirm/no");
-      this.$store.dispatch("modal/hide", { name: "confirm" });
+      this.$store.commit("subscription/confirm/no");
+      this.$store.dispatch("modal/hide", { name: "subscriptionConfirm" });
     },
     close() {
-      this.$store.commit("confirm/no");
-      this.$store.dispatch("modal/hide", { name: "confirm" });
+      this.$store.commit("subscription/confirm/no");
+      this.$store.dispatch("modal/hide", { name: "subscriptionConfirm" });
     }
   },
 
   mounted() {
-    this.$store.commit("confirm/reset");
+    this.$store.commit("subscription/confirm/reset");
   }
 };
 </script>

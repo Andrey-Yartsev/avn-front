@@ -46,27 +46,6 @@ export default {
       } else if (this.profile.subscribedBy && this.profile.subscribedByExpire) {
         return "resubscribe";
       }
-    },
-    isSubscribeConfirmed() {
-      return this.$store.state.confirm.yes;
-    }
-  },
-
-  watch: {
-    isSubscribeConfirmed(confirmed) {
-      if (!confirmed) {
-        return;
-      }
-      this.$store
-        .dispatch("subscription/unsubscribe", {
-          userId: this.profile.id
-        })
-        .then(result =>
-          this.$emit("requested", {
-            action: "unsubscribe",
-            result
-          })
-        );
     }
   },
 
@@ -82,7 +61,7 @@ export default {
     },
     unsubscribe() {
       this.$store.dispatch("modal/show", {
-        name: "confirm",
+        name: "subscriptionConfirm",
         data: this.profile
       });
     },

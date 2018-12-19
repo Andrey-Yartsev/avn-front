@@ -40,7 +40,7 @@ const state = {
     show: false,
     data: {}
   },
-  confirm: {
+  subscriptionConfirm: {
     show: false,
     data: {}
   },

@@ -1,7 +1,7 @@
 <template>
   <SubscribeButton
     :profile="profile"
-    @requested="data => subsRequested(data)"
+    @requested="subsRequested"
   />
 </template>
 

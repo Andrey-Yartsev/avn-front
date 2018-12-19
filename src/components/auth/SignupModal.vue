@@ -65,7 +65,6 @@ export default {
 
   methods: {
     signUp() {
-      console.log("signUp");
       this.$store.dispatch("signUp/signUpFromModal", {
         name: this.name,
         email: this.email,

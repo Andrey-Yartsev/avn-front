@@ -134,18 +134,18 @@ export default {
       this.$router.push("/chat/" + this.profile.id);
     },
     subsRequested(data) {
+      if (!data.result.success) {
+        return;
+      }
       if (data.action === "unsubscribe") {
-        this.unsubscribed(data.result);
+        this.unsubscribed();
       } else if (data.action === "resubscribe") {
-        this.resubscribed(data.result);
+        this.resubscribed();
       } else {
         throw new Error("Wrong action");
       }
     },
-    unsubscribed(result) {
-      if (!result.success) {
-        return;
-      }
+    unsubscribed() {
       this.$store.dispatch("profile/home/extend", {
         subscribedByExpire: true
       });
@@ -156,10 +156,7 @@ export default {
       this.$store.commit("profile/home/resetPosts");
       this.$store.dispatch("profile/home/getPosts");
     },
-    resubscribed(result) {
-      if (!result.success) {
-        return;
-      }
+    resubscribed() {
       this.$store.dispatch("profile/home/extend", {
         subscribedByExpire: false
       });

@@ -1,8 +1,11 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
+import confirm from "./subscription/confirm";
 
-const state = {};
+const state = {
+  updated: null
+};
 
 const actions = {
   openPaymentModal({ dispatch }, user) {
@@ -23,10 +26,23 @@ const actions = {
         { root: true }
       );
     });
+  },
+  unsubscribe({ commit, dispatch }, data) {
+    dispatch("_unsubscribe", data).then(result => {
+      commit("statusUpdate", {
+        action: "unsubscribe",
+        result,
+        data
+      });
+    });
   }
 };
 
-const mutations = {};
+const mutations = {
+  statusUpdate(state, data) {
+    state.updated = data;
+  }
+};
 
 createRequestAction({
   prefix: "fetchPaymentLink",
@@ -48,7 +64,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "unsubscribe",
+  prefix: "_unsubscribe",
   apiPath: "subscriptions/unsubscribe",
   state,
   mutations,
@@ -81,5 +97,8 @@ export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    confirm
+  }
 };
