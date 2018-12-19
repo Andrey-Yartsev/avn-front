@@ -174,7 +174,7 @@
       z-index: 0;
       pointer-events: none;
 
-      @include media-breakpoint-down($tablet-breakpoint) {
+      @include media-breakpoint-up($tablet-breakpoint) {
         display: none;
       }
     }
