@@ -25,22 +25,46 @@ export default {
   data() {
     return {
       current: 0,
-      nextItem: 1
+      nextItem: 0
     };
   },
   props: {
     lives: {
       type: Array,
-      required: true
+      defaults: []
+    }
+  },
+  computed: {
+    length() {
+      return this.lives.length;
+    }
+  },
+  methods: {
+    setData() {
+      this.current = 0;
+      this.nextItem = this.lives.length > 1 ? 1 : 0;
+    },
+    run() {
+      this.interval = setInterval(() => {
+        this.current = this.current < this.length - 1 ? this.current + 1 : 0;
+        this.nextItem = this.nextItem < this.length - 1 ? this.nextItem + 1 : 0;
+      }, 2500);
+    },
+    init() {
+      this.setData();
+      this.run();
     }
   },
   mounted() {
-    setInterval(() => {
-      this.current =
-        this.current < this.lives.length - 1 ? this.current + 1 : 0;
-      this.nextItem =
-        this.nextItem < this.lives.length - 1 ? this.nextItem + 1 : 0;
-    }, 2000);
+    this.init();
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  watch: {
+    lives() {
+      this.init();
+    }
   }
 };
 </script>

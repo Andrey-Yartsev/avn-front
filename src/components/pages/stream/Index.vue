@@ -59,14 +59,14 @@
                   <div class="menu-overlay" @click="hideStreamVideoMenu"></div>
                   <div class="menu">
                     <button
-                      v-for="video in streamVideos"
+                      v-for="(video, key) in streamVideos"
                       v-bind:key="video.deviceId"
                       type="button"
                       :data-type="video.deviceId"
                       :class="['item', { active: streamVideo.deviceId === video.deviceId }]"
                       @click="() => setStreamVideo(video)"
                     >
-                      <span class="value">{{ video.label }}</span>
+                      <span class="value">{{ video.label || `Camera ${key}` }}</span>
                     </button>
                   </div>
                 </div>
@@ -86,14 +86,14 @@
                 <div class="menu-overlay" @click="hideStreamAudioMenu"></div>
                 <div class="menu">
                   <button
-                    v-for="audio in streamAudios"
+                    v-for="(audio, key) in streamAudios"
                     v-bind:key="audio.deviceId"
                     type="button"
                     :data-type="audio.deviceId"
                     :class="['item', { active: streamAudio.deviceId === audio.deviceId }]"
                     @click="() => setStreamAudio(audio)"
                   >
-                    <span class="value">{{ audio.label || "Disable Microphone" }}</span>
+                    <span class="value">{{ !audio.deviceId ? "Disable Microphone" : audio.label || `Microphone ${key}` }}</span>
                   </button>
                 </div>
               </div>
@@ -153,7 +153,7 @@
           <span class="stream-btn stream-online-count">{{ looksCount }}</span>
         </div>
       </div>
-      <div class="mediasBottom">
+      <div class="mediasBottom" v-if="isReadyToStart">
         <button
           class="btn alt lg change-devices"
           @click="startStream"
@@ -161,7 +161,7 @@
       </div>
     </div>
     <StreamStatistic
-      :close="(haveToSave) => close(haveToSave)"
+      :close="(haveToSave) => close({}, haveToSave)"
       :duration="time"
       v-if="isStopped"
     />
@@ -345,7 +345,7 @@ export default {
         this.likes = this.likes.filter(item => item.date + 5000 < now);
       }, 5000);
     },
-    close(haveToSave) {
+    close(e, haveToSave) {
       if (this.isStarted) {
         this.stopStream();
       } else {
