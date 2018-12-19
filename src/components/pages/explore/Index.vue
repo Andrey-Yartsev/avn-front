@@ -5,24 +5,9 @@
     <div class="container">
       <div class="over-container">
         <Navigate />
-        <div class="stories-all" v-if="page === 'all' && (stories.length || lives.length)">
+        <div class="stories-all" v-if="page === 'all' && (true || stories.length || lives.length)">
           <div class="exploreAllStoriesCollectionView">
-            <div class="exploreAllStoriesView" v-if="lives.length">
-              <div class="explore-all-story">
-                <router-link to="explore/live" class="avatar with-story">
-                  <span class="avatar__slider">
-                    <span class="avatar__slide">
-                      <img src="https://media.team2.retloko.com/files/j/jf/jfk/jfkhlzooltscjljhniiux6tyx4v9ifpy1541781654/c160.jpg">
-                    </span>
-                    <span class="avatar__slide active"></span>
-                  </span>
-                  <div class="stream-online-label">live</div>
-                </router-link>
-                <span class="live-explore-title">
-                  Top Live
-                </span>
-              </div>
-            </div>
+            <TopLives :lives="undefined" v-if="true || lives.length" />
             <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">
               <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
             </VuePerfectScrollbar>
@@ -63,6 +48,7 @@
 
 <script>
 import MobileHeader from "@/components/header/Mobile";
+import TopLives from "@/components/common/topLives/Index";
 import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
@@ -76,6 +62,7 @@ export default {
   name: "Explore",
   components: {
     MobileHeader,
+    TopLives,
     Navigate,
     PostSmall,
     PostMedium,
