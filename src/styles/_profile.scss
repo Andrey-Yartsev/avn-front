@@ -147,7 +147,7 @@
 .profile-images {
   position: relative;
   z-index: 5;
-  width: 37.5%;
+  width: 139px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: auto;
