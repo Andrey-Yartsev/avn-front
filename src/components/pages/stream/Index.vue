@@ -153,7 +153,7 @@
           <span class="stream-btn stream-online-count">{{ looksCount }}</span>
         </div>
       </div>
-      <div class="mediasBottom">
+      <div class="mediasBottom" v-if="isReadyToStart">
         <button
           class="btn alt lg change-devices"
           @click="startStream"
