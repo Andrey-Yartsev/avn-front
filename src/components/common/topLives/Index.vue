@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       current: 0,
-      nextItem: 1
+      nextItem: 0
     };
   },
   props: {
@@ -42,14 +42,13 @@ export default {
   methods: {
     setData() {
       this.current = 0;
-      this.nextItem = 1;
+      this.nextItem = this.lives.length > 1 ? 1 : 0;
     },
     run() {
-      setInterval(() => {
+      this.interval = setInterval(() => {
         this.current = this.current < this.length - 1 ? this.current + 1 : 0;
         this.nextItem = this.nextItem < this.length - 1 ? this.nextItem + 1 : 0;
-        console.log(this.current, this.nextItem);
-      }, 2000);
+      }, 2500);
     },
     init() {
       this.setData();
@@ -58,6 +57,9 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   },
   watch: {
     lives() {
