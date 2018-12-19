@@ -5,7 +5,11 @@
     </router-link>
     <div class="comment-body">
       <router-link v-if="comment.author" :to="'/' + comment.author.username" class="comment-author-name name">{{ comment.author.name }}</router-link>
-      <div class="comment-text" v-html="comment.text" />
+      <div v-if="comment.text.length > collapseLimit" class="comment-text">
+        <span v-html="trunc(comment.text)"></span>&nbsp;
+        <a href="#" @click.prevent="collapsed = !collapsed">{{ collapsed ? "Read more" : "Collapse" }}</a>
+      </div>
+      <div v-else class="comment-text" v-html="comment.text" />
     </div>
     <div class="comment-footer" v-if="full">
       <time class="date">{{ dateTime }}</time>
@@ -31,9 +35,24 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      collapseLimit: 250,
+      collapsed: true
+    };
+  },
   computed: {
     dateTime: function() {
       return datetimeHelper(this.comment.postedAt);
+    }
+  },
+  methods: {
+    trunc(html) {
+      if (this.collapsed) {
+        return html.substring(0, this.collapseLimit) + "…";
+      } else {
+        return html;
+      }
     }
   }
 };
