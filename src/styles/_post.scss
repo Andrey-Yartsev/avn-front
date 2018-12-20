@@ -223,7 +223,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
-      padding-bottom: 54px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {

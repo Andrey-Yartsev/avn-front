@@ -603,7 +603,7 @@
   .postPage & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //padding-bottom: 53px;
+      padding-bottom: 53px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
