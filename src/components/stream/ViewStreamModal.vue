@@ -139,8 +139,11 @@ export default {
     updateTimer() {
       if (!this.shouldUpdateTimer) return;
 
-      const start = moment(this.$store.state.modal.stream.data.stream.startedAt, "YYYY-MM-DDTHH:mm:ssZ");
-      const now = moment()
+      const start = moment(
+        this.$store.state.modal.stream.data.stream.startedAt,
+        "YYYY-MM-DDTHH:mm:ssZ"
+      );
+      const now = moment();
 
       const delta = moment.duration(now - start);
       const h = delta.hours();
@@ -151,10 +154,7 @@ export default {
       const MM = m > 10 ? m : `0${m}`;
       const SS = s > 10 ? s : `0${s}`;
 
-      this.time = h > 0 
-        ? `${HH}:${MM}:${SS}`
-        : `${MM}:${SS}`
-
+      this.time = h > 0 ? `${HH}:${MM}:${SS}` : `${MM}:${SS}`;
 
       setTimeout(() => {
         this.updateTimer();
