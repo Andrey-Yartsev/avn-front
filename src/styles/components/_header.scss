@@ -798,7 +798,7 @@
 
   + .header-logo {
 
-    .special-site-header & {
+    .special-site-header:not(.not-authorized) & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
         position: absolute;
@@ -1484,6 +1484,19 @@
 
 .not-authorized {
 
+  &:not(.static-page) {
+
+    .header-logo {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
   &.special-site-header {
 
     &.profile-page {
@@ -1546,6 +1559,8 @@
       filter: none;
     }
   }
+
+
 }
 
 .btns-login-user {

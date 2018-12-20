@@ -96,7 +96,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     border-radius: 5px;
-    margin-bottom: 20px;
     min-height: 440px;
   }
 
@@ -169,6 +168,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  position: relative;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
@@ -181,6 +181,7 @@
     max-width: 940px;
     width: 100%;
     flex: 1;
+    margin-bottom: 20px;
   }
 
   .more-functions {
@@ -222,6 +223,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
+      padding-bottom: 54px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -232,7 +234,7 @@
     .popup & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        width: 620px;
+        //width: 620px;
       }
     }
   }
@@ -270,6 +272,10 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 41px;
       }
+
+      &.tips {
+        margin-right: 10px;
+      }
     }
   }
   .tip-form {
@@ -291,17 +297,6 @@
 
   .comment-form {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      &:after {
-        content: "";
-        background: rgba($gray, 0.2);
-        height: 1px;
-        position: absolute;
-        top: 0;
-        left: 15px;
-        right: 15px;
-      }
-    }
     .comment-btn {
       flex: 0 1 auto;
       width: auto;
@@ -331,6 +326,13 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+
+  .popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 54px;
+    }
   }
 
   .msg-no-content {
