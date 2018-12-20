@@ -38,6 +38,13 @@
     }
   }
 
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: auto;
+    }
+  }
+
   .header-wrapper {
     background-color: transparent;
     box-shadow: none;
