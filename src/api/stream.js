@@ -25,8 +25,8 @@ export default {
     });
   },
   saveStream(streamId) {
-    return tokenRequest(`posts/stream/${streamId}`, {
-      method: "POST",
+    return tokenRequest(`streams/${streamId}/save-video`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       }

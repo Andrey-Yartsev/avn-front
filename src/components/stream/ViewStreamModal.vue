@@ -109,6 +109,9 @@ export default {
     },
     funded() {
       return this.$store.state.tip.funded;
+    },
+    tipData() {
+      return this.$store.state.tip.tipData;
     }
   },
   methods: {
@@ -150,9 +153,9 @@ export default {
       const m = delta.minutes();
       const s = delta.seconds();
 
-      const HH = h > 10 ? h : `0${h}`;
-      const MM = m > 10 ? m : `0${m}`;
-      const SS = s > 10 ? s : `0${s}`;
+      const HH = h >= 10 ? h : `0${h}`;
+      const MM = m >= 10 ? m : `0${m}`;
+      const SS = s >= 10 ? s : `0${s}`;
 
       this.time = h > 0 ? `${HH}:${MM}:${SS}` : `${MM}:${SS}`;
 
@@ -346,18 +349,20 @@ export default {
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
-      const amount = 10.01;
+      const { success, toUserId, amount, tipId } = this.tipData;
 
-      this.$root.ws.ws.send(
-        JSON.stringify({
-          act: "stream_tip",
-          stream_id: id,
-          stream_user_id: userId,
-          amount: amount,
-          owner: userId,
-          sess: token
-        })
-      );
+      if (success && `${toUserId}` === `${userId}` && `${tipId}` === `s${id}`) {
+        this.$root.ws.ws.send(
+          JSON.stringify({
+            act: "stream_tip",
+            stream_id: id,
+            stream_user_id: userId,
+            amount,
+            owner: userId,
+            sess: token
+          })
+        );
+      }
 
       this.closeTip();
     }

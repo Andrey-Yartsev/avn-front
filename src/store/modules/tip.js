@@ -1,7 +1,8 @@
 "use strict";
 
 const state = {
-  funded: 0
+  funded: 0,
+  tipData: null
 };
 
 const actions = {
@@ -33,8 +34,9 @@ const actions = {
 };
 
 const mutations = {
-  funded(state) {
+  funded(state, data) {
     state.funded = state.funded + 1;
+    state.tipData = data;
   }
 };
 

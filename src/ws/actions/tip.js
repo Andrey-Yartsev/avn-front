@@ -8,7 +8,7 @@ export default data => {
       "global/flashToast",
       `Fund for ${payment.user.name} of ${payment.amount}$ is successful`
     );
-    Store.commit("tip/funded");
+    Store.commit("tip/funded", data);
   } else {
     Store.dispatch("global/flashToast", "Fund failed");
   }
