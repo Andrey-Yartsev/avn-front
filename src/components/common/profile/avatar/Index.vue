@@ -7,8 +7,8 @@
     </router-link>
     <span v-else class="avatar" @click="click">
       <img :src="profile.avatar" v-if="profile.avatar">
-      <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
+    <div class="stream-online-label" v-if="showLiveLabel">live</div>
   </div>
 </template>
 
