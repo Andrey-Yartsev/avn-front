@@ -7,6 +7,17 @@
     background: $white;
   }
 
+  .scroll-top {
+
+    #site_header {
+      top: 0;
+    }
+
+    .header-wrapper {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   #site_header {
     box-shadow: none;
     position: relative;
@@ -14,10 +25,6 @@
     .header-wrapper {
       box-shadow: none;
       position: relative;
-
-      .scroll-top & {
-        transform: translate3d(0, 0, 0);
-      }
     }
 
     .header-nav,
@@ -28,10 +35,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-left: 0;
       }
-    }
-
-    .scroll-top & {
-      top: 0;
     }
   }
 
