@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container">
+      <div class="popup-container popup-reasons">
         <div class="content">
           <div class="reasonsView">
             <div class="reasons">
