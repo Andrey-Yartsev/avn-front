@@ -5,12 +5,13 @@ const state = {
 };
 
 const actions = {
-  openPaymentModal({ dispatch }, { user, amount }) {
+  openPaymentModal({ dispatch }, { user, amount, tipId }) {
     dispatch(
       "subscription/fetchPaymentLink",
       {
         type: "tip",
         amount,
+        tipId,
         id: user.id
       },
       { root: true }

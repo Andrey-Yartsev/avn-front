@@ -24,6 +24,10 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    tipId: {
+      type: String,
+      default: undefined
     }
   },
   data() {
@@ -35,7 +39,8 @@ export default {
     send() {
       this.$store.dispatch("tip/openPaymentModal", {
         user: this.user,
-        amount: this.amount
+        amount: this.amount,
+        tipId: this.tipId
       });
     },
     reset() {

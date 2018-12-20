@@ -12,8 +12,7 @@
       <StoryInput />
 
       <modal-router />
-
-      <ErrorModal v-if="error" />
+      
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
@@ -27,6 +26,7 @@
       <LoginModal v-if="this.$store.state.modal.login.show" />
       <SignupModal v-if="this.$store.state.modal.signup.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
+      <ErrorModal v-if="error" />
     </template>
   </div>
 </template>

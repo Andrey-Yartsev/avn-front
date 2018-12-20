@@ -53,9 +53,10 @@
             :user="streamer"
             ref="tip"
             @cancel="closeTip"
+            :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
           />
         </div>
-        <div class="stream-btns stream-viewer-btns">
+        <div class="stream-btns stream-viewer-btns" v-if="connected">
           <span role="button" class="stream-btn stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
           <span class="stream-btn stream-like-btn" @click="throttledLike"></span>
           <span class="stream-btn stream-tip-btn"
@@ -93,7 +94,8 @@ export default {
     likes: [],
     newComment: "",
     showCommentForm: false,
-    showTip: false
+    showTip: false,
+    connected: false
   }),
   computed: {
     throttledLike() {
@@ -137,15 +139,22 @@ export default {
     updateTimer() {
       if (!this.shouldUpdateTimer) return;
 
-      var ms = moment().diff(
-        moment(this.$store.state.modal.stream.data.stream.startedAt)
-      );
-      var delta = moment.duration(ms);
+      const start = moment(this.$store.state.modal.stream.data.stream.startedAt, "YYYY-MM-DDTHH:mm:ssZ");
+      const now = moment()
 
-      this.time =
-        delta > 60 * 60 * 1000
-          ? moment(delta, "ss.SSS").format("hh:mm:ss")
-          : moment(delta, "ss.SSS").format("mm:ss");
+      const delta = moment.duration(now - start);
+      const h = delta.hours();
+      const m = delta.minutes();
+      const s = delta.seconds();
+
+      const HH = h > 10 ? h : `0${h}`;
+      const MM = m > 10 ? m : `0${m}`;
+      const SS = s > 10 ? s : `0${s}`;
+
+      this.time = h > 0 
+        ? `${HH}:${MM}:${SS}`
+        : `${MM}:${SS}`
+
 
       setTimeout(() => {
         this.updateTimer();
@@ -266,6 +275,7 @@ export default {
       onStreamEnd: (isError, isClient) => {
         this.shouldUpdateTimer = false;
         this.time = undefined;
+        this.connected = false;
 
         if (!isClient) {
           this.streamIsFinished = true;
@@ -292,223 +302,26 @@ export default {
         );
       },
 
-      onSetupStreamingSession: function() {
-        // var videoControls = document.getElementById("video-controls");
-        // document.getElementById("close-stream").classList.remove("hidden");
-        // document.getElementById("streamer-status").classList.remove("hidden");
-        // videoControls.classList.remove("hidden");
-        // var stream = document.getElementById("videowrap");
-        // stream.classList.remove("hidden");
-        // // No remote video yet
-        // stream.insertAdjacentHTML(
-        //   "beforeend",
-        //   "<video id=waitingvideo width=320 height=240 />"
-        // );
-        // var video = Streams.config.remoteVideo;
-        // if (video.canPlayType) {
-        //   var videoContainer = document.getElementById("videoContainer");
-        //   if (Streams.isMobile) {
-        //     video.controls = true;
-        //     videoControls.classList.add("hidden");
-        //   }
-        //   var playpause = document.getElementById("playpause");
-        //   var fullscreen = document.getElementById("fs");
-        //   //Play/pause
-        //   playpause.addEventListener("click", function(e) {
-        //     if (video.paused || video.ended) video.play();
-        //     else video.pause();
-        //   });
-        //   //Volume
-        //   var volume = document.getElementById("volume");
-        //   volume.oninput = function() {
-        //     video.volume = this.value;
-        //   };
-        //   //Fullscreen
-        //   fs.addEventListener("click", function(e) {
-        //     handleFullscreen();
-        //   });
-        //   // Check if the browser supports the Fullscreen API
-        //   var fullScreenEnabled = !!(
-        //     document.fullscreenEnabled ||
-        //     document.mozFullScreenEnabled ||
-        //     document.msFullscreenEnabled ||
-        //     document.webkitSupportsFullscreen ||
-        //     document.webkitFullscreenEnabled ||
-        //     document.createElement("video").webkitRequestFullScreen
-        //   );
-        //   // If the browser doesn't support the Fulscreen API then hide the fullscreen button
-        //   if (!fullScreenEnabled) {
-        //     fullscreen.style.display = "none";
-        //   }
-        //   // Set the video container's fullscreen state
-        //   var setFullscreenData = function(state) {
-        //     videoContainer.setAttribute("data-fullscreen", !!state);
-        //   };
-        //   // Checks if the document is currently in fullscreen mode
-        //   var isFullScreen = function() {
-        //     return !!(
-        //       document.fullScreen ||
-        //       document.webkitIsFullScreen ||
-        //       document.mozFullScreen ||
-        //       document.msFullscreenElement ||
-        //       document.fullscreenElement
-        //     );
-        //   };
-        //   var handleFullscreen = function() {
-        //     // If fullscreen mode is active...
-        //     if (isFullScreen()) {
-        //       // ...exit fullscreen mode
-        //       // (Note: this can only be called on document)
-        //       if (document.exitFullscreen) document.exitFullscreen();
-        //       else if (document.mozCancelFullScreen)
-        //         document.mozCancelFullScreen();
-        //       else if (document.webkitCancelFullScreen)
-        //         document.webkitCancelFullScreen();
-        //       else if (document.msExitFullscreen) document.msExitFullscreen();
-        //       setFullscreenData(false);
-        //     } else {
-        //       // ...otherwise enter fullscreen mode
-        //       // (Note: can be called on document, but here the specific element is used as it will also ensure that the element's children, e.g. the custom controls, go fullscreen also)
-        //       if (videoContainer.requestFullscreen)
-        //         videoContainer.requestFullscreen();
-        //       else if (videoContainer.mozRequestFullScreen)
-        //         videoContainer.mozRequestFullScreen();
-        //       else if (videoContainer.webkitRequestFullScreen) {
-        //         // Safari 5.1 only allows proper fullscreen on the video element. This also works fine on other WebKit browsers as the following CSS (set in styles.css) hides the default controls that appear again, and
-        //         // ensures that our custom controls are visible:
-        //         // figure[data-fullscreen=true] video::-webkit-media-controls { display:none !important; }
-        //         // figure[data-fullscreen=true] .controls { z-index:2147483647; }
-        //         video.webkitRequestFullScreen();
-        //       } else if (videoContainer.msRequestFullscreen)
-        //         videoContainer.msRequestFullscreen();
-        //       setFullscreenData(true);
-        //     }
-        //     // Listen for fullscreen change events (from other controls, e.g. right clicking on the video itself)
-        //     document.addEventListener("fullscreenchange", function(e) {
-        //       setFullscreenData(
-        //         !!(document.fullScreen || document.fullscreenElement)
-        //       );
-        //     });
-        //     document.addEventListener("webkitfullscreenchange", function() {
-        //       setFullscreenData(!!document.webkitIsFullScreen);
-        //     });
-        //     document.addEventListener("mozfullscreenchange", function() {
-        //       setFullscreenData(!!document.mozFullScreen);
-        //     });
-        //     document.addEventListener("msfullscreenchange", function() {
-        //       setFullscreenData(!!document.msFullscreenElement);
-        //     });
-        //  };
-        // }
-      },
+      onSetupStreamingSession: function() {},
 
       onStreamError: function(error) {
-        // viewModule.config.remoteVideo.classList.add("hidden");
-        // document.getElementById("view-stream").classList.remove("hidden");
-        // document.getElementById("close-stream").classList.add("hidden");
-        // document.getElementById("streamer-status").classList.add("hidden");
-        // document.getElementById("video-controls").classList.add("hidden");
         alert(error);
       },
 
       onRemoteVideoUnavailable: function() {
-        // viewModule.config.remoteVideo.classList.add("hidden");
+        this.connected = false;
         alert("No remote video available");
       },
 
-      onInit: function() {
-        // document
-        //   .getElementById("view-stream")
-        //   .addEventListener("click", function() {
-        //     viewModule.viewStream();
-        //   });
-        // document
-        //   .getElementById("close-stream")
-        //   .addEventListener("click", function() {
-        //     viewModule.stopStream(false, true);
-        //     viewModule.config.remoteVideo.classList.add("hidden");
-        //   });
-        // document
-        //   .getElementById("mute-audio")
-        //   .addEventListener("click", function() {
-        //     viewModule.muteAudio();
-        //   });
-        // document
-        //   .getElementById("unmute-audio")
-        //   .addEventListener("click", function() {
-        //     viewModule.unmuteAudio();
-        //   });
-        // if (viewModule.config.showLikes) {
-        //   viewModule.config.remoteVideo.addEventListener(
-        //     viewModule.isMobile ? "touchstart" : "click",
-        //     function(event) {
-        //       var videoSize = event.currentTarget.getBoundingClientRect();
-        //       var xPos = event.clientX;
-        //       var yPos = event.clientY;
-        //       if (viewModule.isMobile) {
-        //         xPos = event.pageX;
-        //         yPos = event.pageY;
-        //       }
-        //       var x = xPos - videoSize.left;
-        //       var y = yPos - videoSize.top;
-        //       var width = videoSize.width;
-        //       var height = videoSize.height;
-        //       var percentHorizontally = (100 * x) / width;
-        //       var percentVertical = (100 * y) / height;
-        //       viewModule.sendCustomMessage({
-        //         msgtype: "data.custom",
-        //         to: ["streamer", "transcoder"],
-        //         data: {
-        //           type: "click.position",
-        //           position: {
-        //             x: percentHorizontally,
-        //             y: percentVertical
-        //           }
-        //         }
-        //       });
-        //       var id = (+new Date()).toString(36);
-        //       var div =
-        //         "<div id='" +
-        //         id +
-        //         "' class='like' style='top: " +
-        //         percentVertical +
-        //         "%;left: " +
-        //         percentHorizontally +
-        //         "%;'><div class='like-icon'><div class='like-icon__symbol'></div></div></div>";
-        //       document
-        //         .getElementById("videowrap")
-        //         .insertAdjacentHTML("beforeend", div);
-        //       setTimeout(function() {
-        //         document.getElementById(id).remove();
-        //       }, 5000);
-        //     }
-        //   );
-        // }
-      },
+      onInit: function() {},
 
       onVideoPlaying: () => {
+        this.connected = true;
         this.shouldUpdateTimer = true;
         this.updateTimer();
-        // document.getElementById("waitingvideo") &&
-        //   document.getElementById("waitingvideo").remove();
-        // if (viewModule.config.remoteVideo.videoWidth) {
-        //   document.getElementById("videowrap").classList.remove("hidden");
-        //   viewModule.config.remoteVideo.classList.remove("hidden");
-        //   var viewport_meta = document.querySelector("meta[name='keywords']");
-        //   if (viewport_meta) {
-        //     var content = viewport_meta.getAttribute("content");
-        //     viewport_meta.setAttribute(
-        //       "content",
-        //       content + ", user-scalable=no"
-        //     );
-        //     viewport_meta.setAttribute("data-content", content);
-        //   }
-        // }
       },
 
-      onCleanUp: function() {
-        // document.getElementById("videowrap").classList.add("hidden");
-      },
+      onCleanUp: function() {},
 
       onCustomDataGet: function(/* message */) {
         // if (message.type === "video") {
@@ -524,6 +337,7 @@ export default {
     });
   },
   beforeDestroy() {
+    this.connected = false;
     this.shouldUpdateTimer = false;
     window.clearInterval(this.likesInterval);
   },
