@@ -47,6 +47,13 @@
     position: relative;
     padding: 22px 0;
 
+    .settings-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding: 0;
+      }
+    }
+
     .aside-col & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
