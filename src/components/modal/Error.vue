@@ -1,9 +1,11 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container" slot="content">
+    <div class="popup-container popup-alert popup-alert_show-close" slot="content">
       <div class="content">
-        <h3>Error</h3>
-        {{ error.message }}
+        <div class="popup-alert__title">Error</div>
+        <div class="popup-alert__body">
+          {{ error.message }}
+        </div>
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>
