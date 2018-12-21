@@ -52,7 +52,9 @@
               :href="isOwner(author.id) ? `/${author.username}` : ''"
               :class="['avatar', {'new-story': isOwner(author.id)}]"
             >
-              <img v-if="author.avatar" :src="author.avatar">
+              <span class="avatar__img">
+                <img v-if="author.avatar" :src="author.avatar">
+              </span>
             </a>
             <template v-if="isOwner(author.id)">
               <span class="btn-add" @click="addNewStory">
