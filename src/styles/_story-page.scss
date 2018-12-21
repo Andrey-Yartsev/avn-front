@@ -316,6 +316,7 @@
       width: 55px;
       height: 55px;
       opacity: .7;
+      justify-content: center;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 60px;
