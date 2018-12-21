@@ -190,7 +190,7 @@
             </div>
           </div>
       </div>
-      <label class="share-stream-label toggle-wrapper">
+      <label class="share-stream-label toggle-wrapper" v-if="canBeSaved">
         Share your video for the next 24 hours so that more people can watch it.
         <div class="toggle-element">
           <input type="checkbox" class="share-stream" v-model="haveToSave">
@@ -223,6 +223,10 @@ export default {
     },
     duration: {
       type: String,
+      isRequired: true
+    },
+    canBeSaved: {
+      type: Boolean,
       isRequired: true
     }
   },

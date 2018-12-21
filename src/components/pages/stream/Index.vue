@@ -168,6 +168,7 @@
       :close="(haveToSave) => close({}, haveToSave)"
       :duration="time"
       v-if="isStopped"
+      :canBeSaved="canBeSaved"
     />
   </div>
 </template>
@@ -207,7 +208,8 @@ export default {
       likes: [],
       newComment: "",
       looksCount: 0,
-      showCommentForm: false
+      showCommentForm: false,
+      canBeSaved: false
     };
   },
   components: {
@@ -303,6 +305,9 @@ export default {
       secs = secs < 10 ? `0${secs}` : `${secs}`;
       this.time =
         diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
+      if (diff > 5) {
+        this.canBeSaved = true;
+      }
     },
     startStream() {
       this.isReadyToStart = false;
