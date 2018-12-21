@@ -8,11 +8,6 @@
 @mixin default-avatar {
   content: "\E642";
   @include icon-font;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   background: $default-avatar-bg;
   color: $default-avatar-color;
   text-align: center;
@@ -21,7 +16,6 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  border-radius: 50%;
 }
 
 @mixin color-settings-dots($color, $opacity) {

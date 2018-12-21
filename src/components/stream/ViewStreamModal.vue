@@ -25,7 +25,9 @@
         <div class="stream-comments-wrapper">
           <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
             <span class="avatar">
-              <img :src="comment.user.avatar" />
+              <span class="avatar__img">
+                <img :src="comment.user.avatar" />
+              </span>
             </span>
             <span class="name">{{ comment.user.name }}</span>
             <span class="text">{{ comment.comment }}</span>

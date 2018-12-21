@@ -45,7 +45,9 @@
               :class="{active: isSelected(v.withUser.id)}"
             >
                   <span class="avatar">
-                    <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                    <span class="avatar__img">
+                      <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                    </span>
                   </span>
               <div class="chatView__header">
                 <span class="name">{{ v.withUser.name }}</span>
@@ -67,7 +69,7 @@
             <span class="back backEvent" @click="back"></span>
           </div>
           <template v-if="selectedUser">
-            <router-link class="avatar hidden-mobile" :to="'/' + selectedUser.username"></router-link>
+            <router-link class="avatar hidden-mobile" :to="'/' + selectedUser.username"><span class="avatar__img"></span></router-link>
             <router-link class="name" :to="'/' + selectedUser.username">{{ selectedUser.name }}</router-link>
             <span class="user-login">
               <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>

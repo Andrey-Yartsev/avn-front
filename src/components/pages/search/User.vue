@@ -4,7 +4,7 @@
       <img v-if="profile.header" :src="profile.header"/>
     </div>
     <div class="user-container">
-      <div class="avatar"><img v-if="profile.avatar" :src="profile.avatar"/></div>
+      <div class="avatar"><span class="avatar__img"><img v-if="profile.avatar" :src="profile.avatar"/></span></div>
       <div class="names-actions-wrapper">
         <div class="user-names">
           <div class="wrap-name">

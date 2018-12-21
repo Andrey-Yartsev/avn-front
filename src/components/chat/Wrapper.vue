@@ -9,7 +9,9 @@
               class="avatar header-avatar"
               @click.prevent="openUserMobileBar"
             >
-              <img v-if="user.avatar" :src="user.avatar">
+              <span class="avatar__img">
+                <img v-if="user.avatar" :src="user.avatar">
+              </span>
             </a>
             <h3>Messages</h3>
             <div class="newMessage-link">

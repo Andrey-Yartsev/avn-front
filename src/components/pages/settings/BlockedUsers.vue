@@ -36,7 +36,9 @@
             <div class="table__cell">
               <router-link :to="'/' + v.username" class="userview-block">
               <span class="avatar">
-                <img :src="v.avatar" v-if="v.avatar">
+                <span class="avatar__img">
+                  <img :src="v.avatar" v-if="v.avatar">
+                </span>
               </span>
               <div class="name">{{ v.name }}</div>
               <span class="user-login">{{ v.username }}</span>

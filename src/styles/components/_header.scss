@@ -488,6 +488,7 @@
   z-index: 10;
   transition: transform 0.4s ease;
   cursor: pointer;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     position: relative;
     top: auto;
@@ -496,13 +497,10 @@
     margin: 0 0 0 15px;
     z-index: 1;
     transition: transform 0.3s ease;
+
     &:hover {
       transform: scale(1.1);
     }
-  }
-
-  &:before {
-    display: none;
   }
 
   &:after {
@@ -513,6 +511,7 @@
     top: -10px;
     bottom: -10px;
     content: "";
+
     @include media-breakpoint-up($desktop-breakpoint) {
       right: auto;
       bottom: auto;
@@ -530,9 +529,18 @@
     }
   }
 
-  &:empty {
+  .avatar__img {
+
     &:before {
-      box-shadow: none;
+      display: none;
+    }
+
+    &:empty {
+
+      &:before {
+        display: flex;
+        box-shadow: none;
+      }
     }
   }
 

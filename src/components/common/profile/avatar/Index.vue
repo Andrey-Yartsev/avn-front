@@ -6,9 +6,11 @@
       </span>
     </router-link>
     <span v-else class="avatar" @click="click">
-      <img :src="profile.avatar" v-if="profile.avatar">
+      <span class="avatar__img">
+        <img :src="profile.avatar" v-if="profile.avatar">
+      </span>
+      <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
-    <div class="stream-online-label" v-if="showLiveLabel">live</div>
   </div>
 </template>
 

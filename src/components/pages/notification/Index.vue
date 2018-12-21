@@ -36,7 +36,9 @@
         >
           <div class="avatars-wrapper">
             <router-link :to="'/' + v.user.username" class="avatar">
-              <img :src="v.user.avatar" v-if="v.user.avatar"/>
+              <span class="avatar__img">
+                <img :src="v.user.avatar" v-if="v.user.avatar"/>
+              </span>
             </router-link>
             <span class="timestamp">{{ time(v.createdAt) }}</span>
           </div>

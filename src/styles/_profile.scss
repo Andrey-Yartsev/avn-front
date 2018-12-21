@@ -180,30 +180,37 @@
     background-color: $white;
     font-size: inherit;
 
-    &:before {
+    &__img {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        border: calc(0.025em + (200px - 1em) * 0.0125) solid $white;
-        box-shadow: none;
-        position: absolute;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        top: 50%;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        box-sizing: unset;
+      &:before {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          border: calc(0.025em + (200px - 1em) * 0.0125) solid $white;
+          box-shadow: none;
+          position: absolute;
+          left: 50%;
+          width: 100%;
+          height: 100%;
+          top: 50%;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          box-sizing: unset;
+        }
       }
     }
 
     &.with-story {
-      &:after {
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          left: calc(-0.045em - (200px - 1em) * 0.02);
-          right: calc(-0.045em - (200px - 1em) * 0.02);
-          bottom: calc(-0.045em - (200px - 1em) * 0.02);
-          top: calc(-0.045em - (200px - 1em) * 0.02);
+      .avatar__img {
+
+        &:after {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            left: calc(-0.045em - (200px - 1em) * 0.02);
+            right: calc(-0.045em - (200px - 1em) * 0.02);
+            bottom: calc(-0.045em - (200px - 1em) * 0.02);
+            top: calc(-0.045em - (200px - 1em) * 0.02);
+          }
         }
       }
     }
@@ -219,6 +226,7 @@
       top: auto;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 2;
     }
   }
 }

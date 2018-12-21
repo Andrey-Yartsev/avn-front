@@ -2,7 +2,9 @@
   <div class="sidebar" v-if="user">
     <div class="sidebar__scroller">
       <router-link :to="'/' + user.username" class="avatar header-avatar">
-        <img v-if="user.avatar" :src="user.avatar"/>
+        <span class="avatar__img">
+          <img v-if="user.avatar" :src="user.avatar"/>
+        </span>
       </router-link>
       <div class="sidebar__inside">
         <span role="button" class="user-menu-close"></span>

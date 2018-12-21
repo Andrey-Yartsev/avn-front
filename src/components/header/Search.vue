@@ -38,7 +38,7 @@
               v-for="v in items"
               v-bind:key="v.id"
             >
-              <span class="avatar"></span>
+              <span class="avatar"><span class="avatar__img"></span></span>
               <div class="user__name">
                 <div class="name">{{ v.name }}</div>
               </div>

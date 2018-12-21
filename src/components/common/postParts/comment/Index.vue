@@ -1,7 +1,9 @@
 <template>
   <div class="comment">
     <router-link v-if="comment.author && full" :to="'/' + comment.author.username" class="avatar">
-      <img v-if="comment.author.avatar" :src="comment.author.avatar"/>
+      <span class="avatar__img">
+        <img v-if="comment.author.avatar" :src="comment.author.avatar"/>
+      </span>
     </router-link>
     <div class="comment-body">
       <router-link v-if="comment.author" :to="'/' + comment.author.username" class="comment-author-name name">{{ comment.author.name }}</router-link>

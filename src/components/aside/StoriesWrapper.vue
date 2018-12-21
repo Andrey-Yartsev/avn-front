@@ -9,7 +9,9 @@
               <div class="story">
                 <div class="story-avatar">
                   <a class="avatar new-story">
-                    <img v-if="user.avatar" :src="user.avatar">
+                    <span class="avatar__img">
+                      <img v-if="user.avatar" :src="user.avatar">
+                    </span>
                   </a>
                   <span class="btn-add">
                     <svg aria-hidden="true" class="icn icn-plus">

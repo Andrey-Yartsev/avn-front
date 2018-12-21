@@ -5,7 +5,9 @@
     v-click-outside="hide"
     @click.prevent="open"
   >
-    <img v-if="user.avatar" :src="user.avatar" />
+    <span class="avatar__img">
+      <img v-if="user.avatar" :src="user.avatar" />
+    </span>
   </a>
 </template>
 

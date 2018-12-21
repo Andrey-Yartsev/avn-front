@@ -6,7 +6,9 @@
         :class="['avatar', {'with-story': post.user.hasNotViewedStory}]"
         @click.prevent="() => watchAll(post.user.id)"
       >
-        <img v-if="post.user.avatar" :src="post.user.avatar" />
+        <span class="avatar__img">
+          <img v-if="post.user.avatar" :src="post.user.avatar" />
+        </span>
       </a>
       <div class="story-info">
         <div class="story-header">

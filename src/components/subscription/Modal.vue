@@ -9,7 +9,7 @@
 
           <div class="subscribe-popup__info">
             <div class="subscribe-popup__info-avatar">
-              <span class="avatar"><img  v-if="profile.avatar" :src="profile.avatar"></span>
+              <span class="avatar"><span class="avatar__img"><img  v-if="profile.avatar" :src="profile.avatar"></span></span>
             </div>
 
             <div class="subscribe-popup__info-user">

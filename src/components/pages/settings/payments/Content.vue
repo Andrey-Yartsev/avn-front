@@ -82,7 +82,9 @@
                         <router-link :to="'/' + v.userTo.username" target="_blank"
                            class="userview-block payment-user-wrapper">
                           <span class="avatar">
-                            <img :src="v.userTo.avatar" v-if="v.userTo.avatar" />
+                            <span class="avatar__img">
+                              <img :src="v.userTo.avatar" v-if="v.userTo.avatar" />
+                            </span>
                           </span>
                           <span class="name">{{ v.userTo.name }}</span>
                           <span class="user-login">{{ v.userTo.username }}</span>

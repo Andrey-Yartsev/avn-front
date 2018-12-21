@@ -16,8 +16,10 @@
 
           <div class="avatar-block">
             <span class="avatar">
-              <img v-if="avatarPreview" :src="avatarPreview" />
-              <img v-else-if="user.avatar" :src="user.avatar" />
+              <span class="avatar__img">
+                <img v-if="avatarPreview" :src="avatarPreview" />
+                <img v-else-if="user.avatar" :src="user.avatar" />
+              </span>
             </span>
             <label for="avatar" class="select-user-image"></label>
             <input

@@ -14,7 +14,9 @@
           >
             <div class="chatMessageWrapper">
               <div class="avatar">
-                <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
+                <span class="avatar__img">
+                  <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
+                </span>
               </div>
               <div class="messageContent">
                 <div

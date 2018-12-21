@@ -38,7 +38,9 @@
               <span class="back" @click="mobileBack"></span>
             </div>
             <router-link :to="'/' + activeUser.name" class="avatar hidden-mobile">
-              <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
+              <span class="avatar__img">
+                <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
+              </span>
             </router-link>
             <router-link :to="'/' + activeUser.username" class="name">
               {{ activeUser.name }}
