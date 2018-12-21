@@ -256,8 +256,12 @@
   }
   .story-avatar {
     .avatar {
-      &:before {
-        box-shadow: none;
+
+      &__img {
+
+        &:before {
+          box-shadow: none;
+        }
       }
     }
   }
