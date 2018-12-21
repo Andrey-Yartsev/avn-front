@@ -164,7 +164,10 @@
 
   .avatar {
     flex: 0 0 40px;
-    margin-right: 14px;
+    width: 40px;
+    height: 40px;
+    margin-right: 17px;
+    margin-left: 3px;
   }
 
   .verified-user {
@@ -336,28 +339,28 @@
       }
 
       .avatar {
-        width: 40px;
-        height: 40px;
-        border: 3px solid $white;
-        box-sizing: content-box;
-        margin-top: -3px;
+        //width: 40px;
+        //height: 40px;
+        //border: 3px solid $white;
+        //box-sizing: content-box;
+        //margin-top: -3px;
 
-        &.header-avatar {
-          border: none;
-          width: 24px;
-          height: 24px;
-          flex: 0 0 24px;
-          margin: 0;
-          font-size: 24px;
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            display: none;
-          }
-
-          &:empty {
-            border: none;
-          }
-        }
+        //&.header-avatar {
+        //  border: none;
+        //  width: 24px;
+        //  height: 24px;
+        //  flex: 0 0 24px;
+        //  margin: 0;
+        //  font-size: 24px;
+        //
+        //  @include media-breakpoint-up($desktop-breakpoint) {
+        //    display: none;
+        //  }
+        //
+        //  &:empty {
+        //    border: none;
+        //  }
+        //}
       }
     }
 
@@ -388,6 +391,8 @@
         height: 30px;
         flex: 0 0 30px;
         font-size: 2em;
+        margin-left: 0;
+        margin-right: 14px;
       }
 
       .chatCollectionContentWrapper {
@@ -588,12 +593,24 @@
     }
   }
 
-  .header-nav {
-    width: 100%;
+  .header-avatar {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      position: static;
       top: auto;
+      border: none;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      margin: 0;
+      font-size: 24px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+
+    &:empty {
+      border: none;
     }
 
     .scroll-top & {
@@ -609,6 +626,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 0 0 30px;
       margin-left: 0;
+      display: none;
     }
   }
 }
@@ -740,6 +758,10 @@
       width: 40px;
       height: 30px;
       opacity: 1;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        z-index: 0;
+      }
 
       &:before {
         @include color-settings-dots($secondary-color, 1);
@@ -928,13 +950,16 @@
 
         .avatar {
 
-          &:empty {
-            font-size: 35px;
-            height: 40px;
+          &__img {
 
-            &:before {
-              height: 100%;
-              width: 100%;
+            &:empty {
+              font-size: 35px;
+              //height: 40px;
+
+              &:before {
+                //height: 100%;
+                //width: 100%;
+              }
             }
           }
         }

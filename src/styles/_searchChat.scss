@@ -55,9 +55,12 @@
       width: 30px;
       height: 30px;
 
-      &:empty {
-        &:before {
-          font-size: 29px;
+      &__img {
+
+        &:empty {
+          &:before {
+            font-size: 29px;
+          }
         }
       }
     }

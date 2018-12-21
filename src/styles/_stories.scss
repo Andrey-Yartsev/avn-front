@@ -249,6 +249,10 @@
 
     &-header {
 
+      .explore & {
+        justify-content: center;
+      }
+
       .aside-col & {
         display: flex;
         align-items: center;

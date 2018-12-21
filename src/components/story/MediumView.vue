@@ -4,7 +4,9 @@
       <div class="story-preview">
         <img :src="image">
         <div :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
-          <img v-if="post.user.avatar" :src="post.user.avatar" />
+          <span class="avatar__img">
+            <img v-if="post.user.avatar" :src="post.user.avatar" />
+          </span>
         </div>
       </div>
       <div class="story-header">

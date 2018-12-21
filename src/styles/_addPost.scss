@@ -243,8 +243,11 @@
       top: 15px;
     }
 
-    &:before {
-      box-shadow: none;
+    &__img {
+
+      &:before {
+        box-shadow: none;
+      }
     }
   }
 

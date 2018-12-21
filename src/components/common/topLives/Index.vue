@@ -7,7 +7,9 @@
             active: key === current,
             'active-next': key === nextItem
           }]" v-for="(item, key) in lives" v-bind:key="key">
-            <img :src="item.user.avatar" v-if="item.user.avatar">
+             <span class="avatar__img">
+              <img :src="item.user.avatar" v-if="item.user.avatar">
+             </span>
           </span>
         </span>
         <div class="stream-online-label">live</div>
