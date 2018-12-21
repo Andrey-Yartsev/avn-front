@@ -3,7 +3,7 @@
     <div class="story">
       <a :to="`/${post.user.username}`" class="avatar" @click.prevent="run">
         <span class="avatar__img">
-          <img :src="post.user.avatar">
+          <img :src="post.user.avatar" v-if="post.user.avatar">
         </span>
         <div class="stream-online-label">live</div>
       </a>

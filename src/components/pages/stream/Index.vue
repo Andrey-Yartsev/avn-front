@@ -125,7 +125,7 @@
           <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
             <span class="avatar">
               <span class="avatar__img">
-                <img :src="comment.user.avatar" />
+                <img :src="comment.user.avatar" v-if="comment.user.avatar" />
               </span>
             </span>
             <span class="name">{{ comment.user.name }}</span>
