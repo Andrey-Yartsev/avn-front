@@ -98,11 +98,11 @@
                         :loading="false"
                         :query="page"
                       />
+                      <div class="msg-no-content" v-if="!loading && !user.length">
+                        <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
+                        <div class="msg-no-content__text" v-else>No one follows you yet</div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="msg-no-content" v-if="!loading && !user.length">
-                    <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
-                    <div class="msg-no-content__text" v-else>No one follows you yet</div>
                   </div>
               </div>
             </div>

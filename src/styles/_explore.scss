@@ -291,6 +291,14 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr;
       }
+
+      &:empty {
+
+        + .msg-no-content {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
     }
 
     .profile & {
