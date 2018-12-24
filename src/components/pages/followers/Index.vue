@@ -49,17 +49,6 @@
         </div>
       </div>
       <div class="content-nav hidden-mobile">
-        <div class="profile-name profile-name_base profile-name_immobilized">
-          <div class="profile-name__main">
-              <span class="name">
-                {{ profile.name }}
-              </span>
-            <span class="verified-user" v-if="profile.isVerified"></span>
-          </div>
-          <span class="user-login">
-               <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
-            </span>
-        </div>
         <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
         <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
       </div>

@@ -74,11 +74,21 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    &__item {
+
+      &:first-child {
+        margin-left: calc(33% + 15px);
+      }
+    }
   }
 
   .profile-name {
-    margin-right: 30px;
     padding: 0;
+
+    .user-login {
+      opacity: 0;
+    }
   }
 
   .explore {
@@ -94,6 +104,16 @@
 
       @include media-breakpoint-down($desktop-breakpoint) {
         position: static;
+      }
+    }
+  }
+
+  .header-scrolled {
+
+    .profile-name {
+
+      .user-login {
+        opacity: .5;
       }
     }
   }

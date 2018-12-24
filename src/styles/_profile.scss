@@ -954,23 +954,6 @@
       z-index: 0;
     }
   }
-
-  .profile-name {
-
-    &_immobilized {
-
-      .header-scrolled & {
-        opacity: 0;
-      }
-
-      .profile-name__main {
-
-        .header-scrolled & {
-          font-size: 21px;
-        }
-      }
-    }
-  }
 }
 
 .profile-name-sticky {
@@ -985,7 +968,7 @@
   z-index: 4;
 
   .profile-name {
-    margin: 21px 0 0 5px;
+    margin: 18px 0 0 5px;
     opacity: 1;
 
     .header-scrolled & {
