@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div class="bg-profile">
     <div class="bg-wrap">
       <img v-if="bgPreview" :src="bgPreview" />
       <img v-else-if="profile.header" :src="profile.header" />
