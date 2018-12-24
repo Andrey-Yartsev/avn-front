@@ -3,7 +3,7 @@
 
     <div class="notifications-header">
       <div class="header_container">
-        <router-link :to="'/' + user.username" class="avatar header-avatar"></router-link>
+        <router-link :to="'/' + user.username" class="avatar header-avatar"><span class="avatar__img"></span></router-link>
         <h1 class="page-title">Notifications</h1>
         <router-link class="btn-settings" to="/settings/notifications"></router-link>
       </div>
