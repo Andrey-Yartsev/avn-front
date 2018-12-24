@@ -30,14 +30,22 @@
             class="btn make-post-btn hidden-mobile"
             type="button"
             @click="openAddPostModal"
+            v-if="user"
           >Share
           </button>
           <router-link
             to="/addPost"
             class="btn make-post-btn hidden-desktop"
+            v-if="user"
           >
             Share
           </router-link>
+          <template v-if="authSection">
+            <div class="btns-login-user">
+              <router-link to="/register" class="register">Have an account?</router-link>
+              <router-link to="/login" class="btn border alt login">Log in</router-link>
+            </div>
+          </template>
         </template>
         <template v-else>
           <template v-if="!noAuthHeader && !authSection">

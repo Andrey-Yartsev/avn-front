@@ -4,11 +4,15 @@
       <router-link
         v-if="user"
         class="menu-item-home header-nav__item"
+        :class="{'router-link-exact-active active': isModalOnHomePage}"
         to="/"
         exact
-      ><span>Home</span></router-link>
-      <router-link class="menu-item-explore header-nav__item" to="/explore"><span>Explore</span></router-link>
-
+      >
+        <span>Home</span>
+      </router-link>
+      <router-link class="menu-item-explore header-nav__item" to="/explore">
+        <span>Explore</span>
+      </router-link>
       <a
         v-if="user"
         href="/notifications"
@@ -37,6 +41,12 @@ import ModalRouterGoto from "@/mixins/modalRouter/goto";
 export default {
   name: "HeaderDesktop",
 
+  data() {
+    return {
+      isModalOnHomePage: false
+    };
+  },
+
   mixins: [ModalRouterGoto],
 
   computed: {
@@ -61,6 +71,11 @@ export default {
       } else {
         this.goToModalRoute("/notifications");
       }
+    }
+  },
+  watch: {
+    ["$route"](route) {
+      this.isModalOnHomePage = route.path === "/" && route.hash !== "";
     }
   }
 };
