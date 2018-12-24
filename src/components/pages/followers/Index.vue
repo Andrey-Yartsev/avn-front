@@ -15,7 +15,26 @@
         </div>
         <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
           <div class="container">
-            <div class="profile-name profile-name_immobilized">
+            <!--<div class="profile-name profile-name_immobilized">-->
+              <!--<div class="profile-name__main">-->
+                <!--<span class="name">-->
+                  <!--{{ profile.name }}-->
+                <!--</span>-->
+                <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
+              <!--</div>-->
+              <!--<span class="user-login">-->
+                <!--<router-link :to="'/' + profile.username">{{ profile.username }}</router-link>-->
+              <!--</span>-->
+            <!--</div>-->
+            <div class="content-col">
+              <ProfileActions
+                :profile="profile"
+                :page="page"
+              />
+            </div>
+          </div>
+          <div class="profile-name-sticky hidden-mobile">
+            <div class="profile-name profile-name_base">
               <div class="profile-name__main">
                 <span class="name">
                   {{ profile.name }}
@@ -26,15 +45,25 @@
                 <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
               </span>
             </div>
-            <div class="content-col">
-              <ProfileActions
-                :profile="profile"
-                :page="page"
-              />
-            </div>
           </div>
         </div>
       </div>
+      <div class="content-nav hidden-mobile">
+        <div class="profile-name profile-name_base profile-name_immobilized">
+          <div class="profile-name__main">
+              <span class="name">
+                {{ profile.name }}
+              </span>
+            <span class="verified-user" v-if="profile.isVerified"></span>
+          </div>
+          <span class="user-login">
+               <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+            </span>
+        </div>
+        <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
+        <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
+      </div>
+
       <!--<div class="profile-header-container hidden-desktop">-->
         <!--<div class="profile-header">-->
           <!--<div class="profile-name">-->
@@ -82,29 +111,25 @@
           <!--</div>-->
           <div class="content-col">
             <div class="posts-container">
-              <div class="userCollectionView">
-                  <div class="content-nav hidden-mobile">
-                    <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
-                    <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
-                  </div>
-                  <div class="sticky-header-controls header-mobile">
-                    <router-link class="header-return-btn" :to="`/${profile.username}`" />
-                    <h1 class="page-title">Following</h1>
-                  </div>
-                  <div class="explore">
-                    <div class="userCollectionView">
-                      <Users
-                        :items="users"
-                        :loading="false"
-                        :query="page"
-                      />
-                      <div class="msg-no-content" v-if="!loading && !user.length">
-                        <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
-                        <div class="msg-no-content__text" v-else>No one follows you yet</div>
-                      </div>
-                    </div>
-                  </div>
+              <!--<div class="userCollectionView">-->
+              <div class="sticky-header-controls header-mobile">
+                <router-link class="header-return-btn" :to="`/${profile.username}`" />
+                <h1 class="page-title">Following</h1>
               </div>
+              <div class="explore">
+                <div class="userCollectionView">
+                  <Users
+                    :items="users"
+                    :loading="false"
+                    :query="page"
+                  />
+                  <div class="msg-no-content" v-if="!loading && !user.length">
+                    <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
+                    <div class="msg-no-content__text" v-else>No one follows you yet</div>
+                  </div>
+                </div>
+              </div>
+              <!--</div>-->
             </div>
           </div>
         </div>

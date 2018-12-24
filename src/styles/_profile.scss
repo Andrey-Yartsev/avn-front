@@ -92,6 +92,7 @@
     left: 0;
     right: 0;
     top: 405px;
+    z-index: 4;
   }
 }
 
@@ -278,6 +279,38 @@
     }
   }
 
+  &_base {
+
+    .profile-name {
+
+      &__main {
+        font-size: 17px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 21px;
+        }
+
+        .header-scrolled & {
+          font-size: 17px;
+        }
+      }
+    }
+
+    .user-login {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 17px;
+      }
+
+      .header-scrolled & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
   &__main {
     display: flex;
     align-content: center;
@@ -286,18 +319,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 3px;
-    }
-
-    .profile-sticky-header & {
-      font-size: 17px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 21px;
-      }
-
-      .header-scrolled & {
-        font-size: 17px;
-      }
     }
   }
 
@@ -308,16 +329,9 @@
 
   .user-login {
     max-width: 100%;
-
-    .profile-sticky-header & {
-
-      .header-scrolled & {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 15px;
-        }
-      }
-    }
+    display: block;
+    margin-top: -4px;
+    margin-left: 0;
 
     a {
 
@@ -537,7 +551,6 @@
       flex: 0 0 76px;
     }
   }
-
 }
 
 .profile-actions-mob {
@@ -944,22 +957,40 @@
 
   .profile-name {
 
-    .user-login {
-      display: block;
-      margin-top: -4px;
-      margin-left: 0;
-    }
-
     &_immobilized {
-      margin: 0;
-      flex: 1;
 
       .header-scrolled & {
+        opacity: 0;
+      }
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin: 0;
+      .profile-name__main {
+
+        .header-scrolled & {
+          font-size: 21px;
         }
       }
+    }
+  }
+}
+
+.profile-name-sticky {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 158px;
+  display: flex;
+  height: 0;
+  z-index: 4;
+
+  .profile-name {
+    margin: 21px 0 0 5px;
+    opacity: 1;
+
+    .header-scrolled & {
+      margin-left: 76px;
+      margin-top: -50px;
     }
   }
 }
@@ -1367,10 +1398,5 @@
     left: 0;
     right: 0;
     z-index: 3;
-    background-color: $white;
-  }
-
-  &_short {
-    top: 0;
   }
 }

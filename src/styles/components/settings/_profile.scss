@@ -2,18 +2,20 @@
 .settings-profile-images {
   position: relative;
   margin: 0 0 51px;
+
   @include media-breakpoint-up($desktop-breakpoint) {
     margin: 0;
   }
 
-  .bg {
-    //height: 32vw;
+  .bg-profile {
+    height: 32vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
     z-index: 2;
+    top: auto;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 96px;
@@ -57,14 +59,8 @@
   }
 
   .avatar {
-    position: relative;
-    bottom: auto;
-    top: auto;
-    left: auto;
-    right: auto;
-    box-shadow: 0 0 0 3px $white;
     font-size: 100px;
-    background-color: $white;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 80px;
     }
@@ -406,11 +402,5 @@
         right: 2px;
       }
     }
-  }
-
-  .user-login {
-    display: block;
-    margin-top: -4px;
-    margin-left: 0;
   }
 }

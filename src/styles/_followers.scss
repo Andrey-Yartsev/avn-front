@@ -32,6 +32,12 @@
 
   .profile {
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background-color: $white;
+      min-height: 100%;
+      position: relative;
+    }
+
     &:before {
 
       @include media-breakpoint-down($desktop-breakpoint) {
@@ -53,10 +59,41 @@
   .white-bg-block {
 
     > .container {
-      position: relative;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         z-index: 0;
+        position: relative;
+      }
+    }
+  }
+
+  .content-nav {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .profile-name {
+    margin-right: 30px;
+    padding: 0;
+  }
+
+  .explore {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      box-shadow: none;
+    }
+  }
+
+  .posts-container {
+
+    .userCollectionView {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: static;
       }
     }
   }

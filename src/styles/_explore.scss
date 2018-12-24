@@ -57,17 +57,21 @@
 }
 
 .content-nav {
+  display: flex;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     line-height: 4em;
-    display: flex;
     justify-content: space-around;
   }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     font-size: 17px;
     margin: -4px 0 24px;
     padding: 0 5px 8px;
     border-bottom: 1px solid rgba($gray, 0.2);
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: flex-start;
   }
 
   .searchView & {
