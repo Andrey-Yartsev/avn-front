@@ -14,6 +14,12 @@
           <li><a href="#" @click.prevent="report">Report</a></li>
           <li v-if="profile.isBlocked"><a href="#" @click.prevent="unblock">Unblock</a></li>
           <li v-else><a href="#" @click.prevent="block">Block</a></li>
+          <li v-if="copied" >
+            <button class="btn-copy-link copied" type="button">Copied!</button>
+          </li>
+          <li v-else>
+            <button class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
+          </li>
         </ul>
       </div>
     </div>
@@ -22,6 +28,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import { execCopy } from "@/helpers/page";
 
 export default {
   name: "SearchUserDropdown",
@@ -39,8 +46,16 @@ export default {
 
   data() {
     return {
-      opened: false
+      opened: false,
+      copied: false
     };
+  },
+
+  computed: {
+    href() {
+      const { protocol, hostname } = window.location;
+      return `${protocol}//${hostname}/${this.profile.username}`;
+    }
   },
 
   methods: {
@@ -70,6 +85,11 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdawn");
+    },
+    copyHref() {
+      execCopy(this.href);
+      this.copied = true;
+      setTimeout(() => (this.copied = false), 1000);
     }
   }
 };
