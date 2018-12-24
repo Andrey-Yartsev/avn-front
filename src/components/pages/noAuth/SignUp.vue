@@ -10,7 +10,7 @@
           class="rounded lg" type="email" name="email" placeholder="Email" required autocomplete="email"/>
         <input
           v-model="password"
-          class="rounded lg" type="password" name="password" placeholder="Password" required
+          class="rounded lg" type="password" name="password" minlength="6" placeholder="Password" required
           autocomplete="new-password"/>
         <recaptcha
           v-if="showCaptcha"
