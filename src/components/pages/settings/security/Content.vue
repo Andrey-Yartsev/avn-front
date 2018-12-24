@@ -32,9 +32,9 @@
               <li>
                 <p>Download and install Google Authenticator app from
                   <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
-                     rel="nofollow" target="_blank">Google Play</a> or
+                    rel="nofollow" target="_blank">Google Play</a> or
                   <a href="https://itunes.apple.com/ru/app/google-authenticator/id388497605" rel="nofollow"
-                     target="_blank">App Store</a>
+                    target="_blank">App Store</a>
                 </p>
               </li>
               <li>
@@ -98,7 +98,7 @@
                   <span class="os">{{ v.os }}</span>
                 </p>
                 <span class="status">
-                  <span class="last-activity" v-if="!v.isCurrent">{{ v.lastActivity }}</span>
+                  <span class="last-activity" v-if="!v.isCurrent">{{ getActivityTime(v.lastActivity) }}</span>
                   <span class="online" v-else>Online</span>
                 </span>
                 <button type="button" class="delete" @click="deleteSession(v)"></button>
@@ -121,6 +121,7 @@
 import Common from "../common";
 import Auth from "@/utils/auth";
 import execCopy from "@/utils/execCopy";
+import datetimeHelper from "@/helpers/datetime";
 
 export default {
   name: "SecuritySettingsContent",
@@ -190,6 +191,9 @@ export default {
     },
     copyKey() {
       execCopy(this.otp.code);
+    },
+    getActivityTime(time) {
+      return datetimeHelper(time);
     }
   },
 
