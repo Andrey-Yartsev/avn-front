@@ -26,12 +26,10 @@
                 <!--<router-link :to="'/' + profile.username">{{ profile.username }}</router-link>-->
               <!--</span>-->
             <!--</div>-->
-            <div class="content-col">
-              <ProfileActions
-                :profile="profile"
-                :page="page"
-              />
-            </div>
+            <ProfileActions
+              :profile="profile"
+              :page="page"
+            />
           </div>
           <div class="profile-name-sticky hidden-mobile">
             <div class="profile-name profile-name_base">
