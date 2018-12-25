@@ -36,6 +36,9 @@
                 <Live v-for="post in lives" :post="post" :key="post.id" from="explore" />
               </template>
             </div>
+            <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+              <Loader :fullscreen="false" />
+            </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">
               <div class="msg-no-content__text">No posts here yet</div>
             </div>
@@ -59,6 +62,7 @@ import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Explore",
@@ -72,6 +76,7 @@ export default {
     StoryMedium,
     StorySmall,
     Live,
+    Loader,
     VuePerfectScrollbar
   },
   mixins: [InfinityScrollMixin],

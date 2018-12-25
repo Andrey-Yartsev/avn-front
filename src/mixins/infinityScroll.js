@@ -7,6 +7,19 @@ export default {
       lastYOffset: 0
     };
   },
+  computed: {
+    infinityScrollLoading() {
+      const { loading } = this.store;
+      const isLoading = this.loadingName
+        ? this.store[this.loadingName]
+        : loading;
+
+      return isLoading;
+    },
+    allDataReceived() {
+      return this.store.allDataReceived;
+    }
+  },
   mounted() {
     window.addEventListener("scroll", this.onScrollHandler, true);
   },
@@ -25,13 +38,13 @@ export default {
         }
         this.lastYOffset = window.pageYOffset;
 
-        const { loading, allDataReceived } = this.store;
-        const isLoading = this.loadingName
-          ? this.store[this.loadingName]
-          : loading;
-
         const isOnBottom = getBottom();
-        if (isOnBottom && !isLoading && !allDataReceived) {
+
+        if (
+          isOnBottom &&
+          !this.infinityScrollLoading &&
+          !this.allDataReceived
+        ) {
           this.infinityScrollGetDataMethod();
         }
       }, 100);
