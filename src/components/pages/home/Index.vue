@@ -14,9 +14,9 @@
                         from="home"
                       />
                     </div>
-                    <div class="loaderWrap loader-content">
-                      <Loader v-if="true" :fullscreen="false"></Loader>
-                    </div>
+                  </div>
+                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+                    <Loader :fullscreen="false" />
                   </div>
                 </div>
                 <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">

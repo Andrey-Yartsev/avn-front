@@ -15,17 +15,6 @@
         </div>
         <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
           <div class="container">
-            <!--<div class="profile-name profile-name_immobilized">-->
-              <!--<div class="profile-name__main">-->
-                <!--<span class="name">-->
-                  <!--{{ profile.name }}-->
-                <!--</span>-->
-                <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
-              <!--</div>-->
-              <!--<span class="user-login">-->
-                <!--<router-link :to="'/' + profile.username">{{ profile.username }}</router-link>-->
-              <!--</span>-->
-            <!--</div>-->
             <ProfileActions
               :profile="profile"
               :page="page"
@@ -50,55 +39,10 @@
         <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
         <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
       </div>
-
-      <!--<div class="profile-header-container hidden-desktop">-->
-        <!--<div class="profile-header">-->
-          <!--<div class="profile-name">-->
-            <!--<div class="profile-name__main">-->
-              <!--<span class="name">{{ profile.name }}</span>-->
-              <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
-            <!--</div>-->
-            <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
-          <!--</div>-->
-          <!--<div class="profile-desc hidden-desktop">-->
-            <!--<p class="profile-text" v-if="profile.about">{{ profile.about }}</p>-->
-            <!--<a-->
-              <!--v-if="profile.twitterUsername"-->
-              <!--:href="'https://twitter.com/' + profile.twitterUsername"-->
-              <!--class="profile-twitter-link" target="_blank"-->
-              <!--rel="nofollow"-->
-            <!--&gt;twitter.com/{{ profile.twitterUsername }}</a>-->
-            <!--<FollowersCounter :profile="profile" />-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
       <div class="container">
         <div class="row">
-          <!--<div class="aside-col hidden-mobile hidden">-->
-            <!--<div class="profile-name">-->
-              <!--<div class="profile-name__main">-->
-                <!--<span class="name">-->
-                  <!--{{ profile.name }}-->
-                <!--</span>-->
-                <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
-              <!--</div>-->
-              <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
-            <!--</div>-->
-            <!--<div class="profile-desc">-->
-              <!--<p class="profile-text"></p>-->
-              <!--<a-->
-                <!--v-if="profile.twitterUsername"-->
-                <!--:href="'https://twitter.com/' + profile.twitterUsername"-->
-                <!--class="profile-twitter-link"-->
-                <!--target="_blank"-->
-                <!--rel="nofollow"-->
-              <!--&gt;twitter.com/{{ profile.twitterUsername }}</a>-->
-              <!--<FollowersCounter :profile="profile" />-->
-            <!--</div>-->
-          <!--</div>-->
           <div class="content-col">
             <div class="posts-container">
-              <!--<div class="userCollectionView">-->
               <div class="sticky-header-controls header-mobile">
                 <router-link class="header-return-btn" :to="`/${profile.username}`" />
                 <h1 class="page-title">Following</h1>
@@ -110,13 +54,15 @@
                     :loading="false"
                     :query="page"
                   />
+                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+                    <Loader :fullscreen="false" />
+                  </div>
                   <div class="msg-no-content" v-if="!loading && !user.length">
                     <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
                     <div class="msg-no-content__text" v-else>No one follows you yet</div>
                   </div>
                 </div>
               </div>
-              <!--</div>-->
             </div>
           </div>
         </div>

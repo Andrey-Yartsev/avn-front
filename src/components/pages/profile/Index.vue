@@ -39,15 +39,6 @@
             'padding-right': scrollBarWidth + 'px'
           }">
           <div class="container">
-            <!--<div class="profile-name">-->
-              <!--<div class="profile-name__main">-->
-                <!--<span class="name">-->
-                  <!--{{ profile.name }}-->
-                <!--</span>-->
-                  <!--<span class="verified-user" v-if="profile.isVerified"></span>-->
-              <!--</div>-->
-              <!--<span class="user-login"><a>{{ profile.username }}</a></span>-->
-            <!--</div>-->
             <ProfileActions
               :profile="profile"
               :page="pageName"
@@ -86,6 +77,9 @@
                   :posts="posts"
                   from="profile/home"
                 />
+                <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+                  <Loader :fullscreen="false" />
+                </div>
               </div>
             </template>
           </div>
