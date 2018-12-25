@@ -2,19 +2,6 @@
 
 .following-page {
 
-  body {
-
-    &.modal-opened {
-
-      .white-bg-block .bg {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          overflow: visible;
-        }
-      }
-    }
-  }
-
   .sticky-header-controls {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -33,9 +20,11 @@
   .profile {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      background-color: $white;
-      min-height: 100%;
-      position: relative;
+      //background-color: $white;
+      //min-height: 100%;
+      //position: relative;
+      //display: flex;
+      //flex-direction: column;
     }
 
     &:before {
@@ -57,6 +46,10 @@
   }
 
   .white-bg-block {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      box-shadow: 0 0 5px rgba(#000, 0.3);
+    }
 
     > .container {
 
@@ -115,6 +108,33 @@
       .user-login {
         opacity: .5;
       }
+    }
+  }
+
+  .main-container {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  #content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .profile {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

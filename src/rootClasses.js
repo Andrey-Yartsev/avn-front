@@ -4,10 +4,11 @@ export default {
     // , followers
     "following-page",
     "no-site-header_mob",
-    "special-site-header"
+    "special-site-header",
+    "has-page-footer"
   ],
   settings: ["settings-page", "no-site-header_mob"],
-  explore: ["explore-page"],
+  explore: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob"],
   chat: ["chat-page"],
   userProfile: ["profile-page", "no-site-header_mob", "special-site-header"],
@@ -18,6 +19,6 @@ export default {
   notifications: ["notifications-page", "no-site-header_mob"],
   newChat: ["chat-page", "chat-page_new"],
   addPost: ["addPost-page"],
-  search: ["search-page"],
+  search: ["search-page", "has-page-footer"],
   stream: ["stream-page"]
 };

@@ -193,15 +193,6 @@
       justify-content: stretch;
     }
   }
-
-  .site-footer {
-    flex: 0 0 auto;
-    width: 100%;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      margin-top: 22px;
-    }
-  }
 }
 
 .explore {
@@ -257,12 +248,15 @@
       padding: 3px 0 0;
     }
 
-    .searchView & {
+    &:not(.photos) {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: 100%;
-        padding: 0;
-        grid-gap: 0;
+      .searchView & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          min-height: 100%;
+          padding: 0;
+          grid-gap: 0;
+        }
       }
     }
 

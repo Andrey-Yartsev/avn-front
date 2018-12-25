@@ -2,19 +2,6 @@
 
 .profile-page {
 
-  body {
-
-    &.modal-opened {
-
-      .white-bg-block .bg {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          overflow: visible;
-        }
-      }
-    }
-  }
-
   .profile {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -41,7 +28,7 @@
       flex-direction: column;
     }
 
-    .bg {
+    .bg-profile {
       display: block;
     }
 
@@ -781,7 +768,7 @@
       }
     }
 
-    .bg {
+    .bg-profile {
       position: absolute;
       left: 0;
       right: 0;
@@ -946,6 +933,16 @@
 }
 
 .white-bg-block {
+  position: relative;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex: 1;
+    background-color: $white;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    z-index: 1;
+  }
 
   > .container {
 
@@ -1381,5 +1378,39 @@
     left: 0;
     right: 0;
     z-index: 3;
+  }
+}
+
+
+.has-page-footer {
+  height: 100%;
+
+  body {
+    height: 100%;
+  }
+
+  .site-footer {
+    flex: 0 0 auto;
+    width: 100%;
+
+    .container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-top: 22px;
+      }
+    }
+  }
+
+  #content {
+
+    > div {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 }

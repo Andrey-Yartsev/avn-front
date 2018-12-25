@@ -8,16 +8,31 @@
       height: calc(100% - 44px);
     }
   }
+
+  #content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: calc(100% - 75px);
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .searchView {
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    min-height: 100%;
-    width: 100%;
+    //min-height: 100%;
+    //width: 100%;
+    //align-items: stretch;
+    //align-content: stretch;
+    //flex-wrap: wrap;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex: 1;
     display: flex;
-    align-items: stretch;
-    align-content: stretch;
+    flex-direction: column;
   }
 
   .posts {
@@ -98,9 +113,16 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       position: relative;
+      z-index: 1;
       width: 100%;
       min-height: calc(100% - 152px);
-      //z-index: 10;
+    }
+
+    > div {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background-color: $white;
+      }
     }
   }
 
@@ -113,9 +135,10 @@
     }
   }
 
-  .container {
+  > .container {
+
     @include media-breakpoint-down($desktop-breakpoint) {
-      flex: 0 0 100%;
+      flex: 1;
       align-items: stretch;
       align-content: stretch;
       max-width: 100%;
@@ -131,6 +154,7 @@
       max-width: 100%;
       width: 100%;
       margin: 0;
+      flex-wrap: nowrap;
       //z-index: 9;
     }
   }

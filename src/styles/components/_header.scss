@@ -33,6 +33,19 @@
 
 .special-site-header {
 
+  body {
+
+    &.modal-opened {
+
+      .white-bg-block .bg-profile {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          overflow: visible;
+        }
+      }
+    }
+  }
+
   #site_header {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -155,7 +168,7 @@
   background-clip: padding-box;
   position: relative;
   z-index: 10;
-  //transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -189,7 +202,7 @@
   .scroll-top & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      top: -44px;
+      //top: -44px;
       //transform: translate3d(0, -44px, 0);
     }
 
@@ -342,7 +355,7 @@
   left: 0;
   right: 0;
   height: 44px;
-  //transition: transform 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
   transform: translate3d(0, 0, 0);
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -791,7 +804,7 @@
     top: 44px;
     box-shadow: 0 0 5px rgba(#000, 0.3);
     width: 100%;
-    //transition: transform 0.2s ease-in-out 0s;
+    transition: transform 0.2s ease-in-out 0s;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {

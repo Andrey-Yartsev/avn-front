@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -53,6 +54,7 @@ import Videos from "./types/Videos";
 import Photos from "./types/Photos";
 import InfinityScroll from "@/mixins/infinityScroll";
 import NoResults from "./NoResults";
+import Footer from "@/components/pages/static/Footer";
 
 const types = {
   users: "People",
@@ -78,7 +80,8 @@ export default {
     Posts,
     Videos,
     Photos,
-    NoResults
+    NoResults,
+    Footer
   },
 
   data: () => ({

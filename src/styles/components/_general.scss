@@ -87,11 +87,7 @@ strong {
     margin: 0 0 20px;
   }
 }
-.white-bg-block {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    background: $white;
-  }
-}
+
 .shadow-block {
   @include media-breakpoint-down($desktop-breakpoint) {
     background: $white;

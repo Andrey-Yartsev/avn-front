@@ -68,6 +68,7 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -83,6 +84,7 @@ import ProfileBackground from "@/components/common/profile/background/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
+import Footer from "@/components/pages/static/Footer";
 
 export default {
   name: "Followers",
@@ -96,7 +98,8 @@ export default {
     ProfileBackground,
     FollowersCounter,
     UserDropdown,
-    ProfileActions
+    ProfileActions,
+    Footer
   },
 
   data: () => ({
