@@ -14,8 +14,9 @@
     <router-link
       class="menu-item-messages header-nav__item hidden-desktop"
       to="/chat"
-      :class="{active: activeName === 'chat'}"
-    ><span>Messages</span></router-link>
+    >
+      <span>Messages</span>
+    </router-link>
   </nav>
 </template>
 
