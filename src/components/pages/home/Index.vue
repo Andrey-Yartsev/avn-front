@@ -14,7 +14,7 @@
                         from="home"
                       />
                     </div>
-                    <div class="loaderWrap" :style="{height: '100px'}"> 
+                    <div class="loaderWrap loader-content">
                       <Loader v-if="true" :fullscreen="false"></Loader>
                     </div>
                   </div>

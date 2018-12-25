@@ -8,6 +8,10 @@
   }
 }
 
+.loader-content {
+  height: 120px;
+}
+
 .lds-dual-ring {
   display: inline-block;
   position: fixed;
@@ -17,6 +21,10 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 100;
+
+  .loader-content & {
+    background-color: transparent;
+  }
 
   &.transparent {
     background-color: transparent;
@@ -45,6 +53,12 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+
+      .loader-content & {
+        top: auto;
+        bottom: 10px;
+        transform: translate(-50%, 0);
+      }
 
       &.lowered {
         top: 75%;
@@ -77,6 +91,10 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 18px;
+    }
+
+    .loader-content & {
+      color: $main-color;
     }
 
     &:after {
