@@ -14,6 +14,9 @@
                         from="home"
                       />
                     </div>
+                    <div class="loaderWrap" :style="{height: '100px'}"> 
+                      <Loader v-if="true" :fullscreen="false"></Loader>
+                    </div>
                   </div>
                 </div>
                 <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
@@ -33,6 +36,7 @@ import AddPost from "@/components/addPost/Index";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Wsp from "@/mixins/wsp";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "HomePage",
@@ -41,7 +45,8 @@ export default {
     Footer,
     StoriesWrapper,
     AddPost,
-    PostCollection
+    PostCollection,
+    Loader
   },
   mixins: [InfinityScrollMixin, Wsp],
   created() {
