@@ -54,13 +54,6 @@
       }
     }
 
-    .aside-col & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //padding: 22px 0;
-      }
-    }
-
     &:before {
       content: "";
       top: 0;
@@ -71,6 +64,13 @@
       background: rgba($gray, 0.2);
 
       .settings-aside & {
+        background: linear-gradient(
+          to right,
+          rgba($gray, 0.2) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba($gray, 0.2) 100%
+        );
 
         @include media-breakpoint-down($desktop-breakpoint) {
           display: none;
@@ -79,16 +79,6 @@
 
       .aside-col_with-footer & {
         display: none;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        background: linear-gradient(
-          to right,
-          rgba($gray, 0.2) 0%,
-          transparent 30%,
-          transparent 70%,
-          rgba($gray, 0.2) 100%
-        );
       }
     }
   }

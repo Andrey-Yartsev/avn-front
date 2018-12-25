@@ -43,11 +43,13 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import MobileHeader from "@/components/header/Mobile";
+import Footer from "@/components/pages/static/Footer";
 import TopLives from "@/components/common/topLives/Index";
 import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
@@ -62,6 +64,7 @@ export default {
   name: "Explore",
   components: {
     MobileHeader,
+    Footer,
     TopLives,
     Navigate,
     PostSmall,

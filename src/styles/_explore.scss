@@ -160,11 +160,15 @@
 }
 
 .exploreView {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    min-height: calc(100vh - 75px);
+  }
 
   @include media-breakpoint-down($desktop-breakpoint) {
     width: 100%;
-    display: flex;
-    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: stretch;
   }
@@ -189,9 +193,22 @@
       justify-content: stretch;
     }
   }
+
+  .site-footer {
+    flex: 0 0 auto;
+    width: 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-top: 22px;
+    }
+  }
 }
 
 .explore {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-bottom: 14px;
+  }
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: calc(100% - 60px);

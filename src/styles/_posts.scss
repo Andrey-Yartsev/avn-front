@@ -328,6 +328,14 @@
       background: #000;
       min-width: 360px;
     }
+
+    .popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 calc(100% - 360px);
+        width: calc(100% - 360px);
+      }
+    }
   }
 
   .searchView & {
@@ -546,6 +554,7 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 1 360px;
         width: 360px;
+        margin-left: auto;
       }
     }
 

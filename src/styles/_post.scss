@@ -1,16 +1,12 @@
 @import "components/imports";
 
 .popup-container.post-popup {
-  //top: 0;
-  //left: 0;
-  //transform: none;
-  //width: auto;
   overflow: visible;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    //background: none;
-    //position: relative;
     max-width: 100%;
+    box-shadow: none;
+    background-color: transparent;
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -22,10 +18,10 @@
   }
 
   .content {
-    //overflow: auto;
     border-radius: 5px;
     padding: 0;
     text-align: left;
+    width: auto;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
