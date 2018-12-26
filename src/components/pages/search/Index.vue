@@ -54,7 +54,7 @@ import Videos from "./types/Videos";
 import Photos from "./types/Photos";
 import InfinityScroll from "@/mixins/infinityScroll";
 import NoResults from "./NoResults";
-import Footer from "@/components/pages/static/Footer";
+import Footer from "@/components/footer/Index";
 
 const types = {
   users: "People",

@@ -71,7 +71,7 @@ import ProfileBackground from "@/components/common/profile/background/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
-import Footer from "@/components/pages/static/Footer";
+import Footer from "@/components/footer/Index";
 
 export default {
   name: "Followers",
