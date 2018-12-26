@@ -1136,9 +1136,12 @@
 
   .subscribe-cost {
     opacity: 1;
-    //min-width: 90px;
     color: $primary-color;
     transition: color 0.3s ease, opacity 0.3s ease;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-width: 90px;
+    }
 
     &:hover {
       color: $primary-color-darken;
@@ -1154,9 +1157,13 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
+      padding-bottom: 3px;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
       //width: 90px;
       //flex: 0 0 90px;
-      padding-bottom: 3px;
+      min-width: auto;
     }
   }
 
@@ -1173,7 +1180,8 @@
     .more-functions__btn,
     .btn-edit-profile,
     .subscribeView,
-    .btn-make-post {
+    .btn-make-post,
+    .subscribePaidView {
 
       @include media-breakpoint-down($desktop-breakpoint) {
         //margin: 0 1.2em;

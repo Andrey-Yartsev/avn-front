@@ -328,6 +328,13 @@ button,
       min-width: 70px;
     }
 
+    .profile-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-width: auto;
+      }
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       //min-width: 80px;
     }
