@@ -13,16 +13,15 @@
             :openModal="openModal"
             :mediaSize="mediaSize"
             @click="nextSlide"
-
           />
         </figure>
       </div>
     </template>
     <template v-else>
-      <figure :key="key" v-for="(media, key) in medias" class="media-item active">
+      <figure v-if="medias.length" class="media-item active">
         <component
-          :is="getMediaViewType(media)"
-          :media="media"
+          :is="getMediaViewType(medias[0])"
+          :media="medias[0]"
           :postId="postId"
           :openModal="openModal"
           :mediaSize="mediaSize"

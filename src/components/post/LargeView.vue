@@ -38,8 +38,9 @@
           v-on:commentReply="commentReply"
           v-on:likeComment="likeComment"
           :loading="commentsLoading"
+          v-if="this.post.canComment"
         />
-        <template v-if="isAuth()" >
+        <template v-if="isAuth() && this.post.canFavorite" >
           <Actions
             :post="post"
             v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
@@ -49,7 +50,7 @@
         </template>
       </div>
     </div>
-    <div class="comment-form-wrapper">
+    <div class="comment-form-wrapper" v-if="this.post.canComment">
       <template v-if="isAuth()" >
         <AddComment
           :sendNewComment="sendNewComment"

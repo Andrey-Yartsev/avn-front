@@ -26,7 +26,7 @@ export default {
   },
   watch: {
     post: function() {
-      if (!this.post.comments) {
+      if (!this.post.comments && this.post.canComment) {
         this.$store.dispatch("postPage/getPostComments", {
           postId: this.post.id
         });
