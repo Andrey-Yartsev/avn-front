@@ -30,6 +30,7 @@
               >twitter.com/{{ profile.twitterUsername }}</a>
               <FollowersCounter :profile="profile"/>
             </div>
+            <Footer class="site-footer_sidebar hidden-mobile" />
           </div>
         </div>
         <div
@@ -86,6 +87,7 @@
         </div>
       </div>
     </div>
+      <Footer class="site-footer_main hidden-desktop" />
   </div>
 </template>
 
@@ -101,6 +103,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Wsp from "@/mixins/wsp";
+import Footer from "@/components/footer/Index.vue";
 
 export default {
   name: "ProfileHome",
@@ -114,7 +117,8 @@ export default {
     FollowersCounter,
     HeaderControl,
     ProfileBackground,
-    ProfileActions
+    ProfileActions,
+    Footer
   },
 
   data() {

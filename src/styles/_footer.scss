@@ -43,6 +43,36 @@
     }
   }
 
+  &_sidebar {
+
+    .FooterNavCollectionView {
+
+      &:before {
+        background: linear-gradient(
+          to right,
+          rgba($gray, 0.2) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba($gray, 0.2) 100%
+        );
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &_main {
+
+    .FooterNavCollectionView {
+
+      &:before {
+        background: rgba($gray, 0.2);
+      }
+    }
+  }
+
   .FooterNavCollectionView {
     position: relative;
     padding: 22px 0;
@@ -61,21 +91,6 @@
       right: 0;
       height: 1px;
       position: absolute;
-      background: rgba($gray, 0.2);
-
-      .settings-aside & {
-        background: linear-gradient(
-          to right,
-          rgba($gray, 0.2) 0%,
-          transparent 30%,
-          transparent 70%,
-          rgba($gray, 0.2) 100%
-        );
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: none;
-        }
-      }
 
       .aside-col_with-footer & {
         display: none;

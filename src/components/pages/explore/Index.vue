@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <Footer class="site-footer_main" />
   </div>
 </template>
 

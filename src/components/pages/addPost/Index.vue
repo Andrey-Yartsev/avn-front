@@ -4,7 +4,7 @@
       :initialExpanded="true"
       :close="close"
     />
-    <Footer />
+    <Footer class="site-footer_main" />
   </div>
 </template>
 

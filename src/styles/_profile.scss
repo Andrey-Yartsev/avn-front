@@ -67,6 +67,32 @@
       margin-left: auto;
     }
   }
+
+  .site-footer {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      //position: fixed;
+      //bottom: 0;
+      //left: 0;
+      //right: 0;
+    }
+
+    .container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-top: 22px;
+      }
+    }
+
+    .FooterNavCollectionView {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-width: calc(33.35% - 30px);
+        width: 100%;
+        margin-left: 15px;
+      }
+    }
+  }
 }
 
 .profile-header-container {
@@ -949,6 +975,13 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       position: relative;
       z-index: 0;
+    }
+
+    .posts-container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        box-shadow: 0 0 5px rgba(#000, 0.3);
+      }
     }
   }
 }

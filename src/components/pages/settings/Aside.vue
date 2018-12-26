@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <Footer v-if="isHome" />
+      <Footer class="site-footer_sidebar" />
     </div>
   </div>
 </template>

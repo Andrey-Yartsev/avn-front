@@ -1,7 +1,7 @@
 <template>
   <div class="postPageWrapper">
     <Post v-if="post" :post="post" from="postPage" />
-    <Footer />
+    <Footer class="site-footer_main" />
   </div>
 </template>
 

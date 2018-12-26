@@ -14,7 +14,7 @@
         <p>If you require additional assistance please <router-link to="/contact">contact us</router-link>.</p>
       </div>
     </div>
-    <Footer />
+    <Footer class="site-footer_main" />
   </div>
 </template>
 

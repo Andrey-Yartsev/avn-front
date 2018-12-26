@@ -95,7 +95,7 @@
           we will not be liable for any loss or damage of any nature.</p>
       </div>
     </div>
-    <Footer />
+    <Footer class="site-footer_main" />
   </div>
 </template>
 
