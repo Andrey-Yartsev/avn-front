@@ -202,7 +202,7 @@ export default {
       return this.selected.indexOf(id) !== -1;
     },
     toggleSelectAll() {
-      if (!this.selected.length) {
+      if (this.selected.length !== this.chats.length) {
         this.selected = this.chats.map(v => v.withUser.id);
       } else {
         this.selected = [];

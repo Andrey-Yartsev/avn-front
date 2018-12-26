@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import Footer from "./Footer";
+import Footer from "@/components/footer/Index.vue";
 
 export default {
   name: "ContactsPage",

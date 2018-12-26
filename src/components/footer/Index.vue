@@ -4,7 +4,10 @@
       <div class="FooterNavCollectionView">
         <div id="footer-nav" class="footer-nav aside">
           <div :class="['FooterNavView', {'settings-onmyteam-link': key === pages.length - 1}]"
-               v-for="(page, key) in pages" :key="page.name">
+            v-for="(page, key) in pages"
+            :key="page.name"
+            v-if="shouldShowLink(page.url)"
+          >
             <template v-if="isExternal(page.url)">
               <a :href="page.url" target="_blank">{{ page.name }}</a>
             </template>
@@ -39,6 +42,9 @@ export default {
   methods: {
     isExternal(url) {
       return url.match(/^http.*/);
+    },
+    shouldShowLink(link) {
+      return window.location.pathname !== link;
     }
   },
   created() {

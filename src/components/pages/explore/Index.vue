@@ -52,7 +52,7 @@
 
 <script>
 import MobileHeader from "@/components/header/Mobile";
-import Footer from "@/components/pages/static/Footer";
+import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
 import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
