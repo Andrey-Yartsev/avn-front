@@ -325,7 +325,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000;
+      background-color: #000;
+      background-repeat: no-repeat;
+      background-size: cover;
       min-width: 360px;
     }
 
