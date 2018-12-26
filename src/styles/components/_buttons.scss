@@ -201,9 +201,19 @@ button,
 .profile-tip-btn,
 .btn-edit-profile,
 .btn-make-post {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     flex: 0 0 76px;
     width: 76px;
+  }
+
+  .profile-page & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 auto;
+      width: auto;
+      margin-left: 30px;
+    }
   }
 }
 
@@ -310,13 +320,16 @@ button,
   .btn-subscribe {
     background-color: transparent;
     opacity: 1;
-    min-width: 70px;
     color: $primary-color;
     transition: color 0.3s ease, opacity 0.3s ease;
     font-size: 13px;
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-width: 70px;
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      min-width: 80px;
+      //min-width: 80px;
     }
 
     .userCollectionView & {
