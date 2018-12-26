@@ -1,5 +1,5 @@
 <template>
-  <div class="media">
+  <div class="media" :style="mediaStyle">
     <div class="lds-dual-ring transparent small with-text not-fullscreen">
       <div class="loader-text">Media is currently processing</div>
     </div>
@@ -71,6 +71,19 @@ export default {
   data: () => ({
     currentSlide: 0
   }),
+  computed: {
+    mediaStyle() {
+      return this.mediaSize === "full" &&
+        this.medias.length &&
+        this.medias[this.currentSlide].background
+        ? {
+            "background-image": `url(data:image/jpeg;base64,${
+              this.medias[this.currentSlide].background
+            })`
+          }
+        : {};
+    }
+  },
   props: {
     medias: {
       type: Array,
