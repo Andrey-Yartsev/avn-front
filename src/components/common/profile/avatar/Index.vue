@@ -13,6 +13,20 @@
       </span>
       <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
+
+    <div class="profile-name-sticky hidden-mobile">
+      <div class="profile-name profile-name_base">
+        <div class="profile-name__main">
+          <span class="name">
+            {{ profile.name }}
+          </span>
+          <span class="verified-user" v-if="profile.isVerified"></span>
+        </div>
+        <span class="user-login">
+          <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 

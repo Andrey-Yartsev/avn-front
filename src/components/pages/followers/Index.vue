@@ -1,6 +1,6 @@
 <template>
   <div class="loader-container" v-if="!profile">
-    <Loadr :fullscreen="false" text="" class="transparent small" />
+    <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
@@ -20,26 +20,13 @@
               :page="page"
             />
           </div>
-          <div class="profile-name-sticky hidden-mobile">
-            <div class="profile-name profile-name_base">
-              <div class="profile-name__main">
-                <span class="name">
-                  {{ profile.name }}
-                </span>
-                <span class="verified-user" v-if="profile.isVerified"></span>
-              </div>
-              <span class="user-login">
-                <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
-              </span>
-            </div>
-          </div>
         </div>
       </div>
-      <div class="content-nav hidden-mobile">
-        <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
-        <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
-      </div>
       <div class="container">
+        <div class="content-nav hidden-mobile">
+          <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
+          <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
+        </div>
         <div class="row">
           <div class="content-col">
             <div class="posts-container">

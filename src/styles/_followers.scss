@@ -60,30 +60,6 @@
     }
   }
 
-  .content-nav {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: 960px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    &__item {
-
-      &:first-child {
-        margin-left: calc(33% + 15px);
-      }
-    }
-  }
-
-  .profile-name {
-    padding: 0;
-
-    .user-login {
-      opacity: 0;
-    }
-  }
-
   .explore {
 
     @include media-breakpoint-down($desktop-breakpoint) {
