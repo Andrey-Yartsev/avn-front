@@ -93,21 +93,6 @@
       }
     }
   }
-
-  .profile-name-sticky {
-    transform: translate(66px, -21px);
-    bottom: -.5em;
-    left: -.3em;
-
-    .profile-name {
-
-      &__main,
-      .user-login a {
-        text-shadow: none;
-        color: $main-color;
-      }
-    }
-  }
 }
 
 .profile-header-container {
@@ -1018,6 +1003,21 @@
   transform: translate(7px, 13px);
   transition: transform .3s;
 
+  &.profile-position {
+    transform: translate(66px, -21px);
+    bottom: -.5em;
+    left: -.3em;
+
+    .profile-name {
+
+      &__main,
+      .user-login a {
+        text-shadow: none;
+        color: $main-color;
+      }
+    }
+  }
+
   .header-scrolled & {
 
     .profile-name {
@@ -1464,6 +1464,16 @@
 
   body {
     height: 100%;
+  }
+
+  &.chat-page_new {
+
+    .site-footer {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 
   .site-footer {

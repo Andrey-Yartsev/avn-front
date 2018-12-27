@@ -10,7 +10,7 @@ export default {
   settings: ["settings-page", "no-site-header_mob"],
   explore: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob"],
-  chat: ["chat-page"],
+  chat: ["chat-page", "has-page-footer"],
   userProfile: ["profile-page", "no-site-header_mob", "special-site-header"],
   myProfile: ["profile-page"],
   staticPage: ["static-page"],
@@ -21,7 +21,7 @@ export default {
     "no-site-header_mob",
     "has-page-footer"
   ],
-  newChat: ["chat-page", "chat-page_new"],
+  newChat: ["chat-page", "chat-page_new", "has-page-footer"],
   addPost: ["addPost-page"],
   search: ["search-page", "has-page-footer"],
   stream: ["stream-page"]
