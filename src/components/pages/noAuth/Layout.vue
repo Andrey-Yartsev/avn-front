@@ -26,7 +26,7 @@
           <a href="https://epoch.com/" target="_blank">Billing Support</a>
         </div>
         <div class="login-footer second-footer hidden-mobile">
-          <router-link to="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</router-link>
+          <router-link to="/2257">USC2257</router-link>
         </div>
       </div>
       <div class="login-form-col auth-block">
@@ -38,7 +38,7 @@
           <a href="https://epoch.com/" target="_blank">Billing Support</a>
         </div>
         <div class="login-footer second-footer hidden-desktop">
-          <a href="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</a>
+          <a href="/2257">USC2257</a>
         </div>
       </div>
     </div>

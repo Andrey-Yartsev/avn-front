@@ -18,7 +18,7 @@
         </div>
         <div id="second-footer-nav" class="footer-nav second-footer-nav">
           <div class="FooterNavView">
-            <router-link to="/2257">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</router-link>
+            <router-link to="/2257">USC2257</router-link>
           </div>
         </div>
       </div>
