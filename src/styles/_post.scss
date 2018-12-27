@@ -23,6 +23,10 @@
     text-align: left;
     width: auto;
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-width: 620px;
+    }
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
       flex-direction: column;
@@ -225,13 +229,6 @@
       width: 100%;
       background: $white;
     }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //width: 620px;
-      }
-    }
   }
 
   .post-no-comments {
@@ -300,16 +297,6 @@
 
   .load-more-comments {
     font-size: 13px;
-  }
-
-  .comments-list {
-
-    .comment {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //width: 590px;
-      }
-    }
   }
 }
 
