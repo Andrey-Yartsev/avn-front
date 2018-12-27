@@ -6,17 +6,18 @@
         <div class="container">
             <div class="row">
                 <div class="content-col">
-                  <div class="rounded-container shadow-block no-padding">
+                  <div class="no-padding">
                     <AddPost></AddPost>
-                    <div class="feed">
+                    <div class="feed rounded-container shadow-block reset-btr">
                       <PostCollection
                         :posts="posts"
                         from="home"
                       />
                     </div>
-                    <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
-                      <Loader :fullscreen="false" />
-                    </div>
+                  </div>
+                  <!--<div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">-->
+                  <div class="loaderWrap loader-content" v-if="true">
+                    <Loader :fullscreen="false" />
                   </div>
                 </div>
                 <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">

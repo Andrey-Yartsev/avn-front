@@ -86,6 +86,14 @@ strong {
     background: $white;
     margin: 0 0 20px;
   }
+
+  &.reset-btr {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
 }
 
 .shadow-block {
