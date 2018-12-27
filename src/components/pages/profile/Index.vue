@@ -74,10 +74,22 @@
               </p>
               <div class="posts-container">
                 <PostCollection
+                  v-if="showSimplePostView"
                   :class="'rounded-container'"
                   :posts="posts"
                   from="profile/home"
                 />
+                <div class="exploreAllCollectionView" v-else>
+                  <div class="explore-wrapper all">
+                    <component
+                      :is="postComponent"
+                      v-for="post in posts"
+                      :post="post"
+                      :key="post.id" 
+                      from="profile/home"
+                    />
+                  </div>
+                </div>
                 <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
                   <Loader :fullscreen="false" />
                 </div>
@@ -94,6 +106,8 @@
 <script>
 import Loader from "@/components/common/Loader";
 import PostCollection from "@/components/common/postCollection/Index";
+import PostSmall from "@/components/post/SmallView";
+import PostMedium from "@/components/post/MediumView";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
@@ -118,7 +132,9 @@ export default {
     HeaderControl,
     ProfileBackground,
     ProfileActions,
-    Footer
+    Footer,
+    PostSmall,
+    PostMedium
   },
 
   data() {
@@ -173,6 +189,18 @@ export default {
     },
     subscriptionUpdate() {
       return this.$store.state.subscription.updated;
+    },
+    showSimplePostView() {
+      return this.pageName === undefined || this.pageName === "posts";
+    },
+    postComponent() {
+      if (this.$mq === "mobile" && this.pageName === "videos") {
+        return PostMedium;
+      }
+
+      console.log(1);
+
+      return PostSmall;
     }
   },
   watch: {
