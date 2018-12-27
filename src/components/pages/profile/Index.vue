@@ -10,7 +10,7 @@
         <ProfileBackground :profile="profile"/>
         <div class="profile-header-container">
           <div class="profile-images">
-            <ProfileAvatar :profile="profile"/>
+            <ProfileAvatar :profile="profile" :pageName="pageName" />
           </div>
           <div class="profile-header">
             <div class="profile-name profile-name_base hidden-desktop">

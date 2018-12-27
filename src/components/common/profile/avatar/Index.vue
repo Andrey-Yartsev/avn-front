@@ -13,8 +13,7 @@
       </span>
       <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
-
-    <div class="profile-name-sticky hidden-mobile">
+    <div :class="['profile-name-sticky', 'hidden-mobile', {'profile-position': profileExtraClass }]">
       <div class="profile-name profile-name_base">
         <div class="profile-name__main">
           <span class="name">
@@ -34,6 +33,10 @@
 export default {
   name: "ProfileAvatar",
   props: {
+    pageName: {
+      type: String,
+      default: ""
+    },
     profile: {
       type: Object,
       required: true
@@ -51,6 +54,9 @@ export default {
   computed: {
     showLiveLabel() {
       return !!this.profile.currentStream;
+    },
+    profileExtraClass() {
+      return ["posts", ""].indexOf(this.pageName) !== -1;
     }
   },
   methods: {

@@ -10,7 +10,7 @@
         <ProfileBackground  :profile="profile" />
         <div class="profile-header-container">
           <div class="profile-images">
-            <ProfileAvatar :profile="profile" />
+            <ProfileAvatar :profile="profile" :pageName="page" />
           </div>
         </div>
         <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
