@@ -62,9 +62,12 @@
 
   .content-col {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 calc(100% - 33.35%);
-      margin-left: auto;
+    &:not(.single-col) {
+      
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 calc(100% - 33.35%);
+        margin-left: auto;
+      }
     }
   }
 
