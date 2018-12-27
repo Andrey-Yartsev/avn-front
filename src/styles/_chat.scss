@@ -187,6 +187,7 @@
     flex: 1;
     align-items: flex-start;
     align-content: flex-start;
+    flex-wrap: wrap;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -554,6 +555,13 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       top: -44px;
+    }
+
+    .header-nav {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, 0, 0);
+      }
     }
   }
 

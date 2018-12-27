@@ -1466,6 +1466,16 @@
     height: 100%;
   }
 
+  &.chat-page_new {
+
+    .site-footer {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
   .site-footer {
     flex: 0 0 auto;
     width: 100%;

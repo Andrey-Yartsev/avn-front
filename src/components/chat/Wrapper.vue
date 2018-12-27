@@ -1,6 +1,5 @@
 <template>
     <div class="chatCollectionContent" :class="{chat: isSecondScreen}">
-
       <template>
         <div class="chatHeader">
           <div class="contactsListHeader">
@@ -36,6 +35,8 @@
         <slot name="col2"></slot>
       </div>
       <slot name="extra"></slot>
+
+      <Footer class="hidden-desktop" />
     </div>
 </template>
 
@@ -43,6 +44,7 @@
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import User from "@/mixins/user";
 import MobileHeader from "@/components/header/Mobile";
+import Footer from "@/components/footer/Index.vue";
 
 export default {
   name: "ChatWrapper",
@@ -50,7 +52,8 @@ export default {
   mixins: [ModalRouterParams, User],
 
   components: {
-    MobileHeader
+    MobileHeader,
+    Footer
   },
 
   computed: {
