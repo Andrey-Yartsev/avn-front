@@ -99,7 +99,7 @@
         </div>
       </div>
     </div>
-    <Footer class="site-footer_main hidden-desktop" />
+    <Footer :class="['site-footer_main hidden-footer', {'page-width': !useMediumPostView}]" />
   </div>
 </template>
 

@@ -2,7 +2,33 @@
 
 .profile-page {
 
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 100%;
+  }
+
+  body {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 100%;
+    }
+  }
+
+  #content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   .profile {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint) {
       min-height: 100%;
@@ -63,11 +89,15 @@
   .content-col {
 
     &:not(.single-col) {
-      
+
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 calc(100% - 33.35%);
         margin-left: auto;
       }
+    }
+
+    &.single-col {
+      margin-bottom: 20px;
     }
   }
 
@@ -80,19 +110,20 @@
       //right: 0;
     }
 
+    &.hidden-footer {
+
+      &:not(.page-width) {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+
     .container {
 
       @include media-breakpoint-down($desktop-breakpoint) {
         margin-top: 22px;
-      }
-    }
-
-    .FooterNavCollectionView {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: calc(33.35% - 30px);
-        width: 100%;
-        margin-left: 15px;
       }
     }
   }
@@ -166,6 +197,18 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         background-color: $gray;
         box-shadow: 0 2px 10px rgba(#000, 0.2);
+      }
+    }
+  }
+
+  .site-footer {
+
+    .FooterNavCollectionView {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-width: calc(33.35% - 30px);
+        width: 100%;
+        margin-left: 15px;
       }
     }
   }
