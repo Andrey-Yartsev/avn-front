@@ -93,21 +93,6 @@
       }
     }
   }
-
-  .profile-name-sticky {
-    transform: translate(66px, -21px);
-    bottom: -.5em;
-    left: -.3em;
-
-    .profile-name {
-
-      &__main,
-      .user-login a {
-        text-shadow: none;
-        color: $main-color;
-      }
-    }
-  }
 }
 
 .profile-header-container {
@@ -1017,6 +1002,21 @@
   bottom: .4em;
   transform: translate(7px, 13px);
   transition: transform .3s;
+
+  &.profile-position {
+    transform: translate(66px, -21px);
+    bottom: -.5em;
+    left: -.3em;
+
+    .profile-name {
+
+      &__main,
+      .user-login a {
+        text-shadow: none;
+        color: $main-color;
+      }
+    }
+  }
 
   .header-scrolled & {
 
