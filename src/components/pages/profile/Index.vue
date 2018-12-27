@@ -12,7 +12,7 @@
           <div class="profile-images">
             <ProfileAvatar :profile="profile" :pageName="pageName" />
           </div>
-          <div class="profile-header" v-if="useMediumPostView">
+          <div class="profile-header" v-if="useMediumPostView || $mq==='mobile'">
             <div class="profile-name profile-name_base hidden-desktop">
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
@@ -77,14 +77,18 @@
                 from="profile/home"
               />
               <div class="exploreAllCollectionView" v-else>
-                <div class="explore-wrapper all">
-                  <component
-                    :is="postComponent"
-                    v-for="post in posts"
-                    :post="post"
-                    :key="post.id" 
-                    from="profile/home"
-                  />
+                <div class="explore">
+                  <div class="explore__inside">
+                    <div :class="['explore-wrapper', pageName]">
+                      <component
+                        :is="postComponent"
+                        v-for="post in posts"
+                        :post="post"
+                        :key="post.id"
+                        from="profile/home"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
