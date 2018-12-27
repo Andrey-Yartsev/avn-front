@@ -27,7 +27,7 @@
       <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
       <div class="signUp">
         <h3>Already have an account?</h3>
-        <p><router-link to="/login" class="register">Login to OnMyTeam.com</router-link></p>
+        <p class="register"><router-link to="/login" class="register">Login to OnMyTeam.com</router-link></p>
       </div>
     </template>
   </Layout>

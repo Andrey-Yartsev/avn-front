@@ -24,10 +24,11 @@
           <router-link to="/privacy">Privacy</router-link>
           <router-link to="/contact">Contact</router-link>
           <a href="https://epoch.com/" target="_blank">Billing Support</a>
-        </div>
-        <div class="login-footer second-footer hidden-mobile">
           <router-link to="/2257">USC2257</router-link>
         </div>
+        <!--<div class="login-footer second-footer hidden-mobile">-->
+          <!--<router-link to="/2257">USC2257</router-link>-->
+        <!--</div>-->
       </div>
       <div class="login-form-col auth-block">
         <slot name="content" />

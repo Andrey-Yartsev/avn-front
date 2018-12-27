@@ -2,7 +2,7 @@
   <div class="site-footer">
     <div class="container">
       <div class="FooterNavCollectionView">
-        <div id="footer-nav" class="footer-nav aside">
+        <div class="footer-nav">
           <div :class="['FooterNavView', {'settings-onmyteam-link': key === pages.length - 1}]"
             v-for="(page, key) in pages"
             :key="page.name"
@@ -15,8 +15,6 @@
               <router-link :to="page.url">{{ page.name }}</router-link>
             </template>
           </div>
-        </div>
-        <div id="second-footer-nav" class="footer-nav second-footer-nav">
           <div class="FooterNavView">
             <router-link to="/2257">USC2257</router-link>
           </div>

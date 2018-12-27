@@ -16,7 +16,7 @@
       </template>
 
       <template v-else>
-        <form v-on:submit.stop.prevent="login">
+        <form v-on:submit.stop.prevent="login" class="login-form">
           <input
             class="lg rounded"
             type="email" name="email" placeholder="Email" autocomplete="email"
@@ -43,10 +43,12 @@
         <div class="login-or"><span>or</span></div>
         <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
         <div class="signUp">
-          <h3>Don't have an account yet?</h3>
-          <p>
-            <router-link to="/register" class="register">Sign up for OnMyTeam.com</router-link>
-          </p>
+          <div class="signUp__body">
+            <h3>Don't have an account yet?</h3>
+            <p>
+              <router-link to="/register" class="register">Sign up for OnMyTeam.com</router-link>
+            </p>
+          </div>
           <p class="forgot">
             <router-link to="/forgot" class="forgot">Forgot your password?</router-link>
           </p>
