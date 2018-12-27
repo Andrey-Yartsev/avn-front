@@ -12,7 +12,7 @@
           <div class="profile-images">
             <ProfileAvatar :profile="profile" :pageName="pageName" />
           </div>
-          <div class="profile-header">
+          <div class="profile-header" v-if="useMediumPostView">
             <div class="profile-name profile-name_base hidden-desktop">
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
@@ -58,9 +58,6 @@
       <div class="container">
         <div class="row">
           <div :class="['content-col', {'single-col': !useMediumPostView}]">
-            <div class="loader-container" v-if="postLoading && posts.length === 0">
-              <Loader :fullscreen="false" text="" class="transparent small"/>
-            </div>
             <p :class="['empty-feed', { hidden: posts.length }]">
               <span>Nothing here yet</span>
               <button
@@ -90,7 +87,7 @@
                   />
                 </div>
               </div>
-              <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+              <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
                 <Loader :fullscreen="false" />
               </div>
             </div>
@@ -210,6 +207,7 @@ export default {
         });
     },
     pageName() {
+      this.lastYOffset = 0;
       this.initPosts();
     },
     deletedPost() {
