@@ -15,7 +15,7 @@
                       />
                     </div>
                   </div>
-                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
                     <Loader :fullscreen="false" />
                   </div>
                 </div>

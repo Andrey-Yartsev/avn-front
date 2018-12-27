@@ -36,7 +36,7 @@
                 <Live v-for="post in lives" :post="post" :key="post.id" from="explore" />
               </template>
             </div>
-            <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+            <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
               <Loader :fullscreen="false" />
             </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">

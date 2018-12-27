@@ -1,14 +1,14 @@
 <template>
-    <nav class="content-nav">
-        <router-link to="/explore" data-type="all" exact class="content-nav__item">
-            <span class="hidden-mobile">Explore all</span>
-            <span class="hidden-desktop">All</span>
-        </router-link>
-        <router-link to="/explore/stories" class="content-nav__item" data-type="stories">Stories</router-link>
-        <router-link to="/explore/videos" class="content-nav__item" data-type="videos">Videos</router-link>
-        <router-link to="/explore/photos" class="content-nav__item" data-type="photos">Photos</router-link>
-        <router-link to="/explore/live" class="content-nav__item" data-type="live">Live</router-link>
-    </nav>
+  <nav class="content-nav">
+    <router-link to="/explore" data-type="all" exact class="content-nav__item">
+      <span class="hidden-mobile">Explore all</span>
+      <span class="hidden-desktop">All</span>
+    </router-link>
+    <router-link to="/explore/stories" class="content-nav__item" data-type="stories">Stories</router-link>
+    <router-link to="/explore/videos" class="content-nav__item" data-type="videos">Videos</router-link>
+    <router-link to="/explore/photos" class="content-nav__item" data-type="photos">Photos</router-link>
+    <router-link to="/explore/live" class="content-nav__item" data-type="live">Live</router-link>
+  </nav>
 </template>
 
 <script>
