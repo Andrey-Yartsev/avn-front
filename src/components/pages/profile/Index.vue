@@ -58,43 +58,42 @@
       <div class="container">
         <div class="row">
           <div :class="['content-col', {'single-col': !useMediumPostView}]">
-            <div class="loader-container" v-if="postLoading">
+            <div class="loader-container" v-if="postLoading && posts.length === 0">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
-            <template v-else>
-              <p :class="['empty-feed', { hidden: posts.length }]">
-                <span>Nothing here yet</span>
-                <button
-                  v-if="isOwner(this.profile.id)"
-                  @click="openAddPostModal"
-                  type="button"
-                  class="make-post-btn feed"
-                >Create new post
-                </button>
-              </p>
-              <div class="posts-container">
-                <PostCollection
-                  v-if="useMediumPostView"
-                  :class="'rounded-container'"
-                  :posts="posts"
-                  from="profile/home"
-                />
-                <div class="exploreAllCollectionView" v-else>
-                  <div class="explore-wrapper all">
-                    <component
-                      :is="postComponent"
-                      v-for="post in posts"
-                      :post="post"
-                      :key="post.id" 
-                      from="profile/home"
-                    />
-                  </div>
-                </div>
-                <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
-                  <Loader :fullscreen="false" />
+            <p :class="['empty-feed', { hidden: posts.length }]">
+              <span>Nothing here yet</span>
+              <button
+                v-if="isOwner(this.profile.id)"
+                @click="openAddPostModal"
+                type="button"
+                class="make-post-btn feed"
+              >
+                Create new post
+              </button>
+            </p>
+            <div class="posts-container">
+              <PostCollection
+                v-if="useMediumPostView"
+                :class="'rounded-container'"
+                :posts="posts"
+                from="profile/home"
+              />
+              <div class="exploreAllCollectionView" v-else>
+                <div class="explore-wrapper all">
+                  <component
+                    :is="postComponent"
+                    v-for="post in posts"
+                    :post="post"
+                    :key="post.id" 
+                    from="profile/home"
+                  />
                 </div>
               </div>
-            </template>
+              <div class="loaderWrap loader-content" v-if="infinityScrollLoading || !allDataReceived">
+                <Loader :fullscreen="false" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
