@@ -53,8 +53,8 @@
           {{ loading ? "Loading..." : "Nothing happened yet" }}
         </div>
       </div>
-
     </div>
+    <Footer class="site-footer_main" />
   </div>
 </template>
 
@@ -64,6 +64,7 @@ import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Footer from "@/components/footer/Index.vue";
 
 const typeTitles = {
   all: "Notifications",
@@ -83,7 +84,8 @@ export default {
 
   components: {
     VuePerfectScrollbar,
-    MobileHeader
+    MobileHeader,
+    Footer
   },
 
   computed: {

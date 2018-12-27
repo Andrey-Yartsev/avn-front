@@ -16,7 +16,11 @@ export default {
   staticPage: ["static-page"],
   contact: ["static-page", "contact-page"],
   forgot: ["login-page", "reset-page", "static-page"],
-  notifications: ["notifications-page", "no-site-header_mob"],
+  notifications: [
+    "notifications-page",
+    "no-site-header_mob",
+    "has-page-footer"
+  ],
   newChat: ["chat-page", "chat-page_new"],
   addPost: ["addPost-page"],
   search: ["search-page", "has-page-footer"],

@@ -293,7 +293,14 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow-y: auto;
-      height: calc(100vh - 160px);
+      height: calc(100vh - 286px);
+    }
+
+    + .site-footer {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-top: 22px;
+      }
     }
 
     .notifications-popup & {
