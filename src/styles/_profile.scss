@@ -71,10 +71,10 @@
   .site-footer {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      //position: fixed;
+      //bottom: 0;
+      //left: 0;
+      //right: 0;
     }
 
     .container {
@@ -90,6 +90,21 @@
         max-width: calc(33.35% - 30px);
         width: 100%;
         margin-left: 15px;
+      }
+    }
+  }
+
+  .profile-name-sticky {
+    transform: translate(66px, -21px);
+    bottom: -.5em;
+    left: -.3em;
+
+    .profile-name {
+
+      &__main,
+      .user-login a {
+        text-shadow: none;
+        color: $main-color;
       }
     }
   }
@@ -124,6 +139,16 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: 33.35%;
       width: 100%;
+
+      padding-top: 51px;
+      transition: all .3s;
+    }
+
+    .header-scrolled & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 0;
+      }
     }
   }
 

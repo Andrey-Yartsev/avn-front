@@ -13,7 +13,7 @@
             <ProfileAvatar :profile="profile"/>
           </div>
           <div class="profile-header">
-            <div class="profile-name profile-name_base">
+            <div class="profile-name profile-name_base hidden-desktop">
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
                 <span class="verified-user" v-if="profile.isVerified"></span>
