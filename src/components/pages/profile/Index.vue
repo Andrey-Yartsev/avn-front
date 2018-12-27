@@ -57,7 +57,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="content-col">
+          <div :class="['content-col', {'single-col': !useMediumPostView}]">
             <div class="loader-container" v-if="postLoading">
               <Loader :fullscreen="false" text="" class="transparent small"/>
             </div>
@@ -74,7 +74,7 @@
               </p>
               <div class="posts-container">
                 <PostCollection
-                  v-if="showSimplePostView"
+                  v-if="useMediumPostView"
                   :class="'rounded-container'"
                   :posts="posts"
                   from="profile/home"
@@ -190,7 +190,7 @@ export default {
     subscriptionUpdate() {
       return this.$store.state.subscription.updated;
     },
-    showSimplePostView() {
+    useMediumPostView() {
       return this.pageName === undefined || this.pageName === "posts";
     },
     postComponent() {
