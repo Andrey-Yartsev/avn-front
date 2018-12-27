@@ -198,8 +198,6 @@ export default {
         return PostMedium;
       }
 
-      console.log(1);
-
       return PostSmall;
     }
   },
