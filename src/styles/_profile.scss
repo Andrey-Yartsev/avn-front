@@ -475,11 +475,6 @@
   display: flex;
   padding: 12px 0;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding-top: 13px;
-    padding-bottom: 13px;
-  }
-
   .item {
     padding: 0 20px 10px 0;
 
