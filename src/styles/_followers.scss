@@ -19,14 +19,6 @@
 
   .profile {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //background-color: $white;
-      //min-height: 100%;
-      //position: relative;
-      //display: flex;
-      //flex-direction: column;
-    }
-
     &:before {
 
       @include media-breakpoint-down($desktop-breakpoint) {
@@ -56,6 +48,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         z-index: 0;
         position: relative;
+      }
+
+      .posts-container {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          box-shadow: none;
+        }
       }
     }
   }

@@ -303,6 +303,10 @@
     &.users {
       grid-template-columns: 1fr;
 
+      @include media-breakpoint-down($desktop-breakpoint) {
+        grid-gap: 0;
+      }
+
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr;
       }
