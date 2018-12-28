@@ -58,7 +58,7 @@
       <div class="container">
         <div class="row">
           <div :class="['content-col', {'single-col': !useMediumPostView}]">
-            <p :class="['empty-feed', { hidden: posts.length }]">
+            <p :class="['empty-feed']" v-if="!posts.length && !infinityScrollLoading">
               <span>Nothing here yet</span>
               <button
                 v-if="isOwner(this.profile.id)"
