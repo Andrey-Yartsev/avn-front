@@ -69,13 +69,14 @@
                 Create new post
               </button>
             </p>
-            <div class="posts-container">
-              <PostCollection
-                v-if="useMediumPostView"
-                :class="'rounded-container'"
-                :posts="posts"
-                from="profile/home"
-              />
+            <div class="profile-content">
+              <div class="posts-container" v-if="useMediumPostView">
+                <PostCollection
+                  :class="'rounded-container'"
+                  :posts="posts"
+                  from="profile/home"
+                />
+              </div>
               <div class="exploreAllCollectionView" v-else>
                 <div class="explore">
                   <div class="explore__inside">
