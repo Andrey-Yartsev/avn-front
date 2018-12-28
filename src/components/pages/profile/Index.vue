@@ -161,6 +161,9 @@ export default {
 
       return this.pageName;
     },
+    footerPages() {
+      return this.$store.state.common.pages;
+    },
     profile() {
       return this.$store.state.profile.home.profile;
     },
@@ -203,6 +206,9 @@ export default {
     }
   },
   watch: {
+    footerPages() {
+      this.footerListenScroll();
+    },
     username() {
       this.$store.commit("profile/home/resetPageState");
       this.$store
@@ -262,11 +268,12 @@ export default {
       const footer = document.querySelector(".site-footer");
       const footerHeight = footer.getBoundingClientRect().height;
 
-      if (window.innerHeight - ftTop - ftHeight > footerHeight) {
-        footer.classList.add("site-footer_sticky-bottom");
-      } else {
-        footer.classList.remove("site-footer_sticky-bottom");
-      }
+      const methodName =
+        window.innerHeight - ftTop - ftHeight - 20 > footerHeight
+          ? "add"
+          : "remove";
+
+      footer.classList[methodName]("site-footer_sticky-bottom");
     }
   },
   created() {
