@@ -3,7 +3,6 @@
 .footer-nav {
   display: flex;
   font-size: 13px;
-  padding: 23px 0 17px;
   justify-content: center;
   text-align: center;
   flex-wrap: wrap;
@@ -17,11 +16,10 @@
     //justify-content: space-between;
   }
 
-  .FooterNavCollectionView & {
+  .settings-aside & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //padding-top: 0;
-      //padding-bottom: 0;
+      padding: 23px 0 17px;
     }
   }
 
