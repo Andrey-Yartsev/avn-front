@@ -295,8 +295,7 @@
     background-size: cover;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      padding: 4px 0 0;
-      margin-top: 0;
+      margin-top: 4px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
