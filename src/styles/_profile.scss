@@ -97,7 +97,10 @@
     }
 
     &.single-col {
-      margin-bottom: 20px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 20px;
+      }
     }
   }
 
