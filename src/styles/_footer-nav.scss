@@ -53,27 +53,6 @@
   }
 }
 
-.staticPage,
-.error404View {
-
-  .footer-nav {
-
-    .FooterNavView {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        //margin: 0;
-      }
-
-      &.settings-onmyteam-link {
-        @include media-breakpoint-down($desktop-breakpoint) {
-          //margin: 10px auto;
-          //flex: 0 0 100%;
-          //text-align: center;
-        }
-      }
-    }
-  }
-}
-
 .aside-col {
 
   .footer-nav {
