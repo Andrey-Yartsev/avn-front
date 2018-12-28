@@ -38,87 +38,87 @@
       margin-bottom: 1px;
     }
   }
+}
 
-  .searchChatContactsView {
-    max-width: 100%;
-    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-    padding: 11px 0 11px 40px;
-    position: relative;
-    cursor: pointer;
+.searchChatContactsView {
+  max-width: 100%;
+  border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+  padding: 11px 0 11px 40px;
+  position: relative;
+  cursor: pointer;
 
-    .avatar {
-      position: absolute;
-      top: 1em;
-      left: 0;
-      margin: 0;
-      border: none;
-      width: 30px;
-      height: 30px;
+  .avatar {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    margin: 0;
+    border: none;
+    width: 30px;
+    height: 30px;
 
-      &__img {
+    &__img {
 
-        &:empty {
-          &:before {
-            font-size: 29px;
-          }
+      &:empty {
+        &:before {
+          font-size: 29px;
         }
       }
     }
+  }
 
-    .user-login {
-      margin-left: 0;
+  .user-login {
+    margin-left: 0;
 
-      font-size: 13px;
+    font-size: 13px;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 15px;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 15px;
+    }
+  }
+
+  .check {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    right: 0;
+    top: 1em;
+    color: $secondary-color;
+    text-align: right;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: -4px;
     }
 
+    &:before {
+      display: inline-block;
+      @include icon-font;
+      font-size: 24px;
+      margin: 0 4px 0 0;
+      width: 1.1em;
+      font-weight: 400;
+      content: "\E604";
+    }
+    /*TODO add check mark*/
+  }
+
+  &.active {
     .check {
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease;
-      position: absolute;
-      height: 2em;
-      width: 2em;
-      right: 0;
-      top: 1em;
-      color: $secondary-color;
-      text-align: right;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        right: -4px;
-      }
-
-      &:before {
-        display: inline-block;
-        @include icon-font;
-        font-size: 24px;
-        margin: 0 4px 0 0;
-        width: 1.1em;
-        font-weight: 400;
-        content: "\E604";
-      }
-      /*TODO add check mark*/
+      visibility: visible;
+      opacity: 1;
     }
 
-    &.active {
-      .check {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .name,
-      .user-login {
-        max-width: 80%;
-      }
+    .name,
+    .user-login {
+      max-width: 80%;
     }
+  }
 
-    &:hover {
-      .name {
-        color: $primary-color;
-      }
+  &:hover {
+    .name {
+      color: $primary-color;
     }
   }
 }

@@ -923,155 +923,149 @@
           right: 0;
         }
       }
+    }
+  }
+}
 
-      .chatView {
-        padding: 1em 1em 0.75em 0.8em;
-        border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-        transition: all 0.3s ease;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        border-right: 1px solid transparent;
-        width: 100%;
-        position: relative;
-        z-index: 1;
+.chatView {
+  padding: 1em 1em 0.75em 0.8em;
+  border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  border-right: 1px solid transparent;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding: 1em 1em 0.75em 0.8em;
-        }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 1em 1em 0.75em 0.8em;
+  }
 
-        > div {
-          padding: 0 0 0 1em;
+  > div {
+    padding: 0 0 0 1em;
 
-          &:first-child {
-            padding: 0;
-          }
-        }
+    &:first-child {
+      padding: 0;
+    }
+  }
 
-        .chatViewContent {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          max-width: calc(100% - 54px);
-          padding: 0;
-        }
+  .chatViewContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: calc(100% - 54px);
+    padding: 0;
+  }
 
-        .avatar {
+  .avatar {
 
-          &__img {
+    &__img {
 
-            &:empty {
-              font-size: 35px;
-              //height: 40px;
-
-              &:before {
-                //height: 100%;
-                //width: 100%;
-              }
-            }
-          }
-        }
-
-        .username,
-        .message,
-        .time {
-          color: $main-color;
-          opacity: 0.5;
-        }
-
-        .typing {
-
-          .isTyping {
-            display: none;
-          }
-
-          &.active {
-
-            .message {
-              display: none;
-            }
-
-            .isTyping {
-              display: inline;
-            }
-          }
-        }
-
-        &.unread {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            background-color: #fff;
-            border-right-color: rgba(124, 139, 150, 0.2);
-          }
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            background: linear-gradient(
-              30deg,
-              rgba(33, 150, 243, 1) 10%,
-              rgba(255, 64, 129, 1) 90%
-            );
-            opacity: 0.2;
-            display: none;
-            z-index: -1;
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              display: block;
-            }
-          }
-
-          &:after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: -1;
-            background: linear-gradient(
-              30deg,
-              rgba(33, 150, 243, 1) 10%,
-              rgba(255, 64, 129, 1) 90%
-            );
-            opacity: 0.06;
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              background: rgba(248, 249, 250, 0.3);
-              z-index: 0;
-            }
-          }
-
-          .name {
-            color: $primary-color;
-          }
-
-          .username {
-            font-weight: 500;
-            opacity: 1;
-          }
-
-          .time {
-            color: $secondary-color;
-            opacity: 1;
-          }
-
-          .message {
-            opacity: 1;
-          }
-        }
-
-        &.active {
-          @include media-breakpoint-up($desktop-breakpoint) {
-            background-color: $white;
-            border-right-color: $white;
-          }
-        }
+      &:empty {
+        font-size: 35px;
       }
+    }
+  }
+
+  .username,
+  .message,
+  .time {
+    color: $main-color;
+    opacity: 0.5;
+  }
+
+  .typing {
+
+    .isTyping {
+      display: none;
+    }
+
+    &.active {
+
+      .message {
+        display: none;
+      }
+
+      .isTyping {
+        display: inline;
+      }
+    }
+  }
+
+  &.unread {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: #fff;
+      border-right-color: rgba(124, 139, 150, 0.2);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(
+                      30deg,
+                      rgba(33, 150, 243, 1) 10%,
+                      rgba(255, 64, 129, 1) 90%
+      );
+      opacity: 0.2;
+      display: none;
+      z-index: -1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      background: linear-gradient(
+                      30deg,
+                      rgba(33, 150, 243, 1) 10%,
+                      rgba(255, 64, 129, 1) 90%
+      );
+      opacity: 0.06;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background: rgba(248, 249, 250, 0.3);
+        z-index: 0;
+      }
+    }
+
+    .name {
+      color: $primary-color;
+    }
+
+    .username {
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .time {
+      color: $secondary-color;
+      opacity: 1;
+    }
+
+    .message {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: $white;
+      border-right-color: $white;
     }
   }
 }
