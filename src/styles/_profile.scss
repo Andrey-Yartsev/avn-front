@@ -106,13 +106,6 @@
 
   .site-footer {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //position: fixed;
-      //bottom: 0;
-      //left: 0;
-      //right: 0;
-    }
-
     &.hidden-footer {
 
       &:not(.page-width) {
@@ -212,6 +205,7 @@
         max-width: calc(33.35% - 30px);
         width: 100%;
         margin-left: 5px;
+        min-height: 120px;
       }
     }
 
