@@ -208,10 +208,12 @@ export default {
       this.$store
         .dispatch("profile/home/fetchProfile", this.username)
         .then(() => {
+          this.footerListenScroll();
           this.initPosts();
         });
     },
     pageName() {
+      this.footerListenScroll();
       this.lastYOffset = 0;
       this.initPosts();
     },
@@ -245,9 +247,18 @@ export default {
       this.$store.dispatch("profile/home/getPosts");
     },
     footerListenScroll() {
-      const { top: ftTop, height: ftHeight } = document
-        .querySelector(".profile-desc .profile-data")
-        .getBoundingClientRect();
+      const profileDataText = document.querySelector(
+        ".profile-desc .profile-data"
+      );
+
+      if (!profileDataText) {
+        return;
+      }
+
+      const {
+        top: ftTop,
+        height: ftHeight
+      } = profileDataText.getBoundingClientRect();
       const footer = document.querySelector(".site-footer");
       const footerHeight = footer.getBoundingClientRect().height;
 
