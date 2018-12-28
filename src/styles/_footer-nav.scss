@@ -12,10 +12,6 @@
     margin-right: auto;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //justify-content: space-between;
-  }
-
   .settings-aside & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -39,15 +35,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 8px;
       margin-left: 8px;
-    }
-
-    &.settings-onmyteam-link {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        margin: 10px auto;
-        flex: 0 0 100%;
-        text-align: center;
-      }
     }
   }
 }
