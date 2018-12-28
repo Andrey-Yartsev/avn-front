@@ -1270,3 +1270,13 @@
     pointer-events: auto;
   }
 }
+
+.chat-popup {
+
+  .site-footer {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
