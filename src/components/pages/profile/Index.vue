@@ -243,10 +243,30 @@ export default {
     },
     getPosts() {
       this.$store.dispatch("profile/home/getPosts");
+    },
+    footerListenScroll() {
+      const { top: ftTop, height: ftHeight } = document
+        .querySelector(".profile-desc .profile-data")
+        .getBoundingClientRect();
+      const footer = document.querySelector(".site-footer");
+      const footerHeight = footer.getBoundingClientRect().height;
+
+      if (window.innerHeight - ftTop - ftHeight > footerHeight) {
+        footer.classList.add("site-footer_sticky-bottom");
+      } else {
+        footer.classList.remove("site-footer_sticky-bottom");
+      }
     }
   },
   created() {
     this.initPosts();
+  },
+  mounted() {
+    this.footerListenScroll();
+    window.addEventListener("scroll", this.footerListenScroll, true);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.footerListenScroll, true);
   }
 };
 </script>
