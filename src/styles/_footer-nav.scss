@@ -9,7 +9,7 @@
   flex-wrap: wrap;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 3px 0 15px;
+    padding: 0;
     margin-right: auto;
   }
 
