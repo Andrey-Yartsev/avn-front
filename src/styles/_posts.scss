@@ -290,6 +290,9 @@
   overflow: hidden;
 
   .postPage & {
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 4px 0 0;
@@ -303,9 +306,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #000;
-      background-repeat: no-repeat;
-      background-size: cover;
       min-width: 360px;
     }
 
@@ -494,10 +494,6 @@
   &-item {
     display: none;
     text-align: center;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      background-color: $white;
-    }
 
     .postLink {
       display: inline-block;
