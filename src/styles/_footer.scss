@@ -97,4 +97,14 @@
       }
     }
   }
+
+  &_sticky-bottom {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
 }
