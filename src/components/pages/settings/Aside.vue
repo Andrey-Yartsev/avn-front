@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <Footer class="site-footer_sidebar" />
+      <Footer class="site-footer_sidebar" v-if="isHome || $mq==='desktop'" />
     </div>
   </div>
 </template>
