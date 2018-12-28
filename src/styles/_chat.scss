@@ -604,7 +604,6 @@
   .header-avatar {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      top: auto;
       border: none;
       width: 24px;
       height: 24px;
