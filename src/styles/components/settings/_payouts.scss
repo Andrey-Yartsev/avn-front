@@ -410,6 +410,21 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         box-shadow: none;
         border-top: 1px solid rgba($gray, 0.2);
+        position: relative;
+      }
+
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: "";
+          box-shadow: 0 1px 7px rgba(#000, 0.15);
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 10px;
+          z-index: -1;
+        }
       }
     }
   }
