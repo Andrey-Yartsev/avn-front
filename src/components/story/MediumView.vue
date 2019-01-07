@@ -13,9 +13,7 @@
         <div class="name">{{ post.user.name }}</div>
         <span v-if="post.user.isVerified" class="verified-user"></span>
       </div>
-      <div class="user-login">
-        {{ post.user.name }}
-      </div>
+      <div class="user-login">{{ post.user.username }}</div>
     </router-link>
   </div>
 </template>
