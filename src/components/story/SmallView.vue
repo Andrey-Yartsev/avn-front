@@ -1,7 +1,7 @@
 <template>
   <div class="exploreAllStoriesView">
     <div class="explore-all-story" :data-id="post.user.id">
-      <router-link :to="`/stories/${post.user.id}`" :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
+      <router-link :to="`/stories/${post.user.id}`" :class="['avatar avatar_lg avatar_lg-desk', {'with-story': post.user.hasNotViewedStory}]">
         <span class="avatar__img">
           <img v-if="post.user.avatar" :src="post.user.avatar" />
         </span>

@@ -35,7 +35,7 @@
           <div class="item" v-for="v in items" v-bind:key="v.id">
             <div class="table__cell">
               <router-link :to="'/' + v.username" class="userview-block">
-              <span class="avatar">
+              <span class="avatar avatar_sm">
                 <span class="avatar__img">
                   <img :src="v.avatar" v-if="v.avatar">
                 </span>

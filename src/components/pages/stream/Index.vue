@@ -123,7 +123,7 @@
         <div class="stream-online-label">live</div>
         <div class="stream-comments-wrapper">
           <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
-            <span class="avatar">
+            <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
               <span class="avatar__img">
                 <img :src="comment.user.avatar" v-if="comment.user.avatar" />
               </span>

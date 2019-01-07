@@ -50,7 +50,7 @@
             <a 
               @click.prevent="addNewStory"
               :href="isOwner(author.id) ? `/${author.username}` : ''"
-              :class="['avatar', {'new-story': isOwner(author.id)}]"
+              :class="['avatar avatar_not-shadow', {'new-story': isOwner(author.id)}]"
             >
               <span class="avatar__img">
                 <img v-if="author.avatar" :src="author.avatar">

@@ -12,7 +12,7 @@
           @click="addNewPost"
         >Share</button>
       </div>
-      <span class="avatar">
+      <span class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile">
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
         </span>

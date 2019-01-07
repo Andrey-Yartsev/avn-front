@@ -77,6 +77,13 @@
     position: relative;
     padding: 22px 0;
 
+    .chat-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 0;
+      }
+    }
+
     .settings-page & {
 
       @include media-breakpoint-down($desktop-breakpoint) {

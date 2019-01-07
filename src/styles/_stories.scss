@@ -160,28 +160,13 @@
         .story {
 
           .avatar {
-            font-size: 18.67vw;
             position: absolute;
             left: 50%;
             bottom: 0;
             transform: translate(-50%, 50%);
 
             @include media-breakpoint-up($desktop-breakpoint) {
-              font-size: 100px;
               bottom: -2px;
-            }
-
-            &:not(:empty) {
-              &:before {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                top: 0;
-                border-radius: 1000px;
-                background: $white;
-              }
             }
           }
 
@@ -274,15 +259,8 @@
       position: relative;
     }
 
-    .avatar {
-      position: relative;
-      font-size: 50px;
-      flex: none;
-    }
-
     &-info {
       width: 100%;
-      margin-left: 15px;
       @include ellipsis;
 
       @include media-breakpoint-down($desktop-breakpoint) {

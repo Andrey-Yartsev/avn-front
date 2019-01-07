@@ -188,7 +188,8 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     overflow: hidden;
     display: flex;
-    padding: 15px 0 15px 60px;
+    flex-wrap: wrap;
+    padding: 15px;
     border-radius: 5px;
     box-shadow: 0 8px 30px rgba(#000, 0.1);
   }
@@ -227,27 +228,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
-    }
-  }
-
-  .avatar {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 30px;
-      position: absolute;
-      left: 15px;
-      top: 15px;
-    }
-
-    &__img {
-
-      &:before {
-        box-shadow: none;
-      }
     }
   }
 
@@ -338,6 +318,7 @@
     .actions {
       align-items: center;
       align-content: center;
+      margin-right: -15px;
     }
 
     .add-new-type {
@@ -414,12 +395,11 @@
   &.expanded {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 13px 15px 10px 60px;
-      display: block;
 
       .text-media-container {
         border-radius: 6px;
         box-shadow: 0 0 0 2px $secondary-color-20;
+        flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
       }
     }
 
@@ -540,6 +520,8 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 15px 0 0;
+        flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
+        margin-left: auto;
       }
     }
 

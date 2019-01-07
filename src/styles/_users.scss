@@ -94,36 +94,12 @@
   }
 
   .avatar {
-    font-size: 40px;
     position: absolute;
     top: 13px;
     left: 0;
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 80px;
       top: -40px;
-    }
-    &:before {
-      box-shadow: 0 0 0 3px $white;
-    }
-    &:not(:empty) {
-      &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        border-radius: 1000px;
-        background: $white;
-      }
-    }
-    &.with-story {
-      &:after {
-        left: -5px;
-        top: -5px;
-        right: -5px;
-        bottom: -5px;
-      }
     }
   }
 

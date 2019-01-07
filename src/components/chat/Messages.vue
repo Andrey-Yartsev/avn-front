@@ -13,7 +13,7 @@
             }"
           >
             <div class="chatMessageWrapper">
-              <div class="avatar">
+              <div class="avatar avatar_gap-r-md avatar_sm">
                 <span class="avatar__img">
                   <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
                 </span>

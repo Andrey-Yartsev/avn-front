@@ -1,6 +1,6 @@
 <template>
   <div class="post-header">
-    <router-link class="avatar" :to="'/' + user.username">
+    <router-link class="avatar avatar_gap-r-sm avatar_sm" :to="'/' + user.username">
       <span class="avatar__img">
         <img v-if="user.avatar" :src="user.avatar"/>
       </span>

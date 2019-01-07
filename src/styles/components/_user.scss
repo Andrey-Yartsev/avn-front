@@ -59,6 +59,99 @@
   z-index: 2;
   display: block;
 
+  &_ex-sm {
+    font-size: 24px;
+  }
+
+  &_sm {
+    font-size: 30px;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+
+    .avatar__img {
+
+      &:empty {
+
+        &:before {
+          //font-size: 29px;
+        }
+      }
+    }
+  }
+
+  &_md {
+    font-size: 40px;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+
+    &-desk {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 80px;
+        flex: 0 0 80px;
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+
+  &_lg {
+    font-size: 50px;
+    flex: 0 0 50px;
+    width: 50px;
+    height: 50px;
+
+    &-desk {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 70px;
+        flex: 0 0 70px;
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+
+  &_ex-lg {
+    font-size: 18.67vw;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 100px;
+    }
+  }
+
+  &_mex-lg {
+    font-size: 100px;
+    width: 108px;
+    height: 108px;
+  }
+
+  &_gap {
+
+    &-r {
+
+      &-sm {
+        margin-right: 10px;
+      }
+
+      &-md {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  &_not-shadow {
+
+    .avatar__img {
+
+      &:before {
+        box-shadow: none;
+      }
+    }
+  }
+
   .stream-online-label {
     top: auto;
     bottom: -9px;

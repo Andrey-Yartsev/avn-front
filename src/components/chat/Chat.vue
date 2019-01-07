@@ -37,7 +37,7 @@
             <div class="back-popup-btn hidden-desktop">
               <span class="back" @click="mobileBack"></span>
             </div>
-            <router-link :to="'/' + activeUser.name" class="avatar hidden-mobile">
+            <router-link :to="'/' + activeUser.name" class="avatar avatar_gap-r-md avatar_sm hidden-mobile">
               <span class="avatar__img">
                 <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
               </span>

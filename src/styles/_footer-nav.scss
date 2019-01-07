@@ -39,20 +39,6 @@
   }
 }
 
-.site-footer {
-
-  &:not(.site-footer_main) {
-
-    .FooterNavView {
-
-      &:last-child {
-        flex: 0 0 100%;
-        margin-top: 15px;
-      }
-    }
-  }
-}
-
 .aside-col {
 
   .footer-nav {

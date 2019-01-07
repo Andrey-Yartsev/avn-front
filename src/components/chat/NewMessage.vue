@@ -44,17 +44,19 @@
               @click="toggleSelect(v.withUser.id)"
               :class="{active: isSelected(v.withUser.id)}"
             >
-                  <span class="avatar">
-                    <span class="avatar__img">
-                      <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
-                    </span>
-                  </span>
-              <div class="chatView__header">
-                <span class="name">{{ v.withUser.name }}</span>
-                <span class="verified-user" v-if="v.withUser.isVerified"></span>
-              </div>
-              <div class="user-login">
-                <span class="username">{{ v.withUser.username }}</span>
+              <span class="avatar avatar_gap-r-sm avatar_sm">
+                <span class="avatar__img">
+                  <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                </span>
+              </span>
+              <div class="username-group">
+                <div class="chatView__header">
+                  <span class="name">{{ v.withUser.name }}</span>
+                  <span class="verified-user" v-if="v.withUser.isVerified"></span>
+                </div>
+                <div class="user-login">
+                  <span class="username">{{ v.withUser.username }}</span>
+                </div>
               </div>
               <span class="check"></span>
             </div>
@@ -69,7 +71,7 @@
             <span class="back backEvent" @click="back"></span>
           </div>
           <template v-if="selectedUser">
-            <router-link class="avatar hidden-mobile" :to="'/' + selectedUser.username"><span class="avatar__img"></span></router-link>
+            <router-link class="avatar avatar_gap-r-md avatar_sm hidden-mobile" :to="'/' + selectedUser.username"><span class="avatar__img"></span></router-link>
             <router-link class="name" :to="'/' + selectedUser.username">{{ selectedUser.name }}</router-link>
             <span class="user-login">
               <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>

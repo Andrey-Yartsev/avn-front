@@ -3,7 +3,7 @@
     <router-link :to="`/stories/${post.user.id}`" class="story">
       <div class="story-preview">
         <img :src="image">
-        <div :class="['avatar', {'with-story': post.user.hasNotViewedStory}]">
+        <div :class="['avatar avatar_ex-lg', {'with-story': post.user.hasNotViewedStory}]">
           <span class="avatar__img">
             <img v-if="post.user.avatar" :src="post.user.avatar" />
           </span>

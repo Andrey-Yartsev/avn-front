@@ -3,7 +3,7 @@
     <div class="story">
       <a
         :href="`/stories/${post.user.id}`"
-        :class="['avatar', {'with-story': post.user.hasNotViewedStory}]"
+        :class="['avatar avatar_gap-r-md avatar_lg', {'with-story': post.user.hasNotViewedStory}]"
         @click.prevent="() => watchAll(post.user.id)"
       >
         <span class="avatar__img">

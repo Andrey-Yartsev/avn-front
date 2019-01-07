@@ -100,12 +100,6 @@
       }
     }
 
-    .avatar {
-      font-size: 30px;
-      flex: 0 0 30px;
-      margin: 0 10px 0 0;
-    }
-
     .user-login {
       margin-left: 5px;
 
@@ -620,9 +614,15 @@
   .comment {
     padding: 8px 0 0 0;
     position: relative;
+    display: flex;
 
-    &-body {
-      padding-right: 35px;
+    &-content {
+      padding-right: 24px;
+      flex: 1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-right: 35px;
+      }
     }
 
     &-text {
@@ -633,11 +633,8 @@
     &-footer {
       font-size: 11px;
       display: flex;
-      padding: 2px 24px 3px 0;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-right: 35px;
-      }
+      padding-top: 2px;
+      padding-bottom: 3px;
 
       .date {
         font: inherit;
@@ -676,7 +673,7 @@
         }
 
         .avatar {
-          font-size: 20px;
+          //font-size: 20px;
         }
       }
     }
@@ -686,22 +683,7 @@
       margin-left: 40px;
 
       .avatar {
-        font-size: 20px;
-      }
-    }
-  }
-
-  .avatar {
-    font-size: 30px;
-    position: absolute;
-    left: 0;
-    top: 8px;
-
-    + .comment-body {
-      padding-left: 40px;
-
-      + .comment-footer {
-        padding-left: 40px;
+        //font-size: 20px;
       }
     }
   }
@@ -715,9 +697,9 @@
   cursor: pointer;
   color: $primary-color;
   background: linear-gradient(
-                  30deg,
-                  $secondary-color-20 10%,
-                  $primary-color-20 90%
+    30deg,
+    $secondary-color-20 10%,
+    $primary-color-20 90%
   );
   position: relative;
 

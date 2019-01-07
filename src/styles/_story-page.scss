@@ -254,17 +254,6 @@
       @include icon-font;
     }
   }
-  .story-avatar {
-    .avatar {
-
-      &__img {
-
-        &:before {
-          box-shadow: none;
-        }
-      }
-    }
-  }
 
   .add-story-icon {
     position: absolute;

@@ -35,7 +35,7 @@
           v-bind:key="v.id"
         >
           <div class="avatars-wrapper">
-            <router-link :to="'/' + v.user.username" class="avatar">
+            <router-link :to="'/' + v.user.username" class="avatar avatar_ex-sm">
               <span class="avatar__img">
                 <img :src="v.user.avatar" v-if="v.user.avatar"/>
               </span>

@@ -59,12 +59,8 @@
 
     .avatar {
       margin: 0 auto;
-      font-size: 50px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 70px;
-      }
     }
+
     .name {
       text-align: center;
       font-size: 13px;

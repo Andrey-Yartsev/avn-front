@@ -43,28 +43,10 @@
 .searchChatContactsView {
   max-width: 100%;
   border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-  padding: 11px 0 11px 40px;
+  padding: 11px 0;
   position: relative;
   cursor: pointer;
-
-  .avatar {
-    position: absolute;
-    top: 1em;
-    left: 0;
-    margin: 0;
-    border: none;
-    width: 30px;
-    height: 30px;
-
-    &__img {
-
-      &:empty {
-        &:before {
-          font-size: 29px;
-        }
-      }
-    }
-  }
+  display: flex;
 
   .user-login {
     margin-left: 0;
@@ -182,4 +164,8 @@
       outline: none;
     }
   }
+}
+
+.username-group {
+  flex: 1;
 }

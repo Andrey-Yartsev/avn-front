@@ -162,14 +162,6 @@
     flex-direction: column;
   }
 
-  .avatar {
-    flex: 0 0 40px;
-    width: 40px;
-    height: 40px;
-    margin-right: 17px;
-    margin-left: 3px;
-  }
-
   .verified-user {
     margin-left: 7px;
   }
@@ -334,35 +326,6 @@
           }
         }
       }
-
-      .time {
-        font-size: 13px;
-      }
-
-      .avatar {
-        //width: 40px;
-        //height: 40px;
-        //border: 3px solid $white;
-        //box-sizing: content-box;
-        //margin-top: -3px;
-
-        //&.header-avatar {
-        //  border: none;
-        //  width: 24px;
-        //  height: 24px;
-        //  flex: 0 0 24px;
-        //  margin: 0;
-        //  font-size: 24px;
-        //
-        //  @include media-breakpoint-up($desktop-breakpoint) {
-        //    display: none;
-        //  }
-        //
-        //  &:empty {
-        //    border: none;
-        //  }
-        //}
-      }
     }
 
     &_wide {
@@ -383,23 +346,11 @@
         flex: 1;
       }
 
-      .time {
-        font-size: 0.76em;
-      }
-
-      .avatar {
-        width: 30px;
-        height: 30px;
-        flex: 0 0 30px;
-        font-size: 2em;
-        margin-left: 0;
-        margin-right: 14px;
-      }
 
       .chatCollectionContentWrapper {
 
         .avatar {
-          margin-top: 5px;
+          //margin-top: 5px;
         }
       }
     }
@@ -535,7 +486,6 @@
   .contactsListHeader {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //background-color: $white;
       position: relative;
       z-index: 10;
     }
@@ -730,9 +680,9 @@
   }
 
   > .avatar {
-    padding: 0;
 
     &:hover {
+
       + .name {
         color: $primary-color-darken;
       }
@@ -807,15 +757,6 @@
   width: 100%;
   flex: 1;
   position: relative;
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //height: auto;
-    //max-height: none;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    //flex: 1;
-  }
 
   .chatCollectionContent__col_narrow & {
     flex-direction: column;
@@ -927,144 +868,12 @@
 }
 
 .chatView {
-  padding: 1em 1em 0.75em 0.8em;
-  border-bottom: 1px solid rgba(124, 139, 150, 0.2);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  border-right: 1px solid transparent;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 1em 1em 0.75em 0.8em;
-  }
 
   > div {
-    padding: 0 0 0 1em;
+    //padding: 0 0 0 1em;
 
     &:first-child {
-      padding: 0;
-    }
-  }
-
-  .chatViewContent {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    max-width: calc(100% - 54px);
-    padding: 0;
-  }
-
-  .avatar {
-
-    &__img {
-
-      &:empty {
-        font-size: 35px;
-      }
-    }
-  }
-
-  .username,
-  .message,
-  .time {
-    color: $main-color;
-    opacity: 0.5;
-  }
-
-  .typing {
-
-    .isTyping {
-      display: none;
-    }
-
-    &.active {
-
-      .message {
-        display: none;
-      }
-
-      .isTyping {
-        display: inline;
-      }
-    }
-  }
-
-  &.unread {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: #fff;
-      border-right-color: rgba(124, 139, 150, 0.2);
-    }
-
-    &:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: linear-gradient(
-                      30deg,
-                      rgba(33, 150, 243, 1) 10%,
-                      rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.2;
-      display: none;
-      z-index: -1;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
-      }
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: -1;
-      background: linear-gradient(
-                      30deg,
-                      rgba(33, 150, 243, 1) 10%,
-                      rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.06;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        background: rgba(248, 249, 250, 0.3);
-        z-index: 0;
-      }
-    }
-
-    .name {
-      color: $primary-color;
-    }
-
-    .username {
-      font-weight: 500;
-      opacity: 1;
-    }
-
-    .time {
-      color: $secondary-color;
-      opacity: 1;
-    }
-
-    .message {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: $white;
-      border-right-color: $white;
+      //padding: 0;
     }
   }
 }
@@ -1140,7 +949,21 @@
 }
 
 .chatView {
+  padding: 1em 1em 0.75em 0.8em;
+  border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  border-right: 1px solid transparent;
+  width: 100%;
   max-width: 100%;
+  position: relative;
+  z-index: 1;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 1em 1em 0.75em 0.8em;
+  }
 
   &__header {
     display: flex;
@@ -1156,6 +979,7 @@
       margin-right: 0;
       margin-left: auto;
       padding-left: 5px;
+      font-size: 13px;
     }
 
     .name,
@@ -1178,6 +1002,120 @@
       overflow: hidden;
     }
   }
+
+
+  .avatar {
+    margin-right: 17px;
+    margin-left: 3px;
+  }
+
+  .username,
+  .message,
+  .time {
+    color: $main-color;
+    opacity: 0.5;
+  }
+
+  .typing {
+
+    .isTyping {
+      display: none;
+    }
+
+    &.active {
+
+      .message {
+        display: none;
+      }
+
+      .isTyping {
+        display: inline;
+      }
+    }
+  }
+
+  &.unread {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: #fff;
+      border-right-color: rgba(124, 139, 150, 0.2);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(
+        30deg,
+        rgba(33, 150, 243, 1) 10%,
+        rgba(255, 64, 129, 1) 90%
+      );
+      opacity: 0.2;
+      display: none;
+      z-index: -1;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      background: linear-gradient(
+        30deg,
+        rgba(33, 150, 243, 1) 10%,
+        rgba(255, 64, 129, 1) 90%
+      );
+      opacity: 0.06;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background: rgba(248, 249, 250, 0.3);
+        z-index: 0;
+      }
+    }
+
+    .name {
+      color: $primary-color;
+    }
+
+    .username {
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .time {
+      color: $secondary-color;
+      opacity: 1;
+    }
+
+    .message {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: $white;
+      border-right-color: $white;
+    }
+  }
+}
+
+.chatViewContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: calc(100% - 54px);
+  padding: 0;
 }
 
 .chat-container {
