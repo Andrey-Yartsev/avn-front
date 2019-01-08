@@ -79,8 +79,11 @@
 
     .chat-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        padding-top: 0;
+      .chatCollectionContent:not(.no-chats) {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          padding-top: 0;
+        }
       }
     }
 
@@ -101,6 +104,13 @@
 
       .aside-col_with-footer & {
         display: none;
+      }
+
+      .chatCollectionContent.no-chats & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          background-color: rgba($gray, 0.2);
+        }
       }
     }
   }

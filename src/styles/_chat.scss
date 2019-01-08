@@ -102,7 +102,7 @@
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        right: 0;
+        //right: 0;
       }
 
       .modal-opened & {
@@ -268,6 +268,10 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       transition: all .3s;
+    }
+
+    .no-chats & {
+      overflow: visible;
     }
 
     &_narrow {
@@ -535,8 +539,10 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       content: "";
       position: absolute;
-      left: -3px;
-      right: -3px;
+      //left: -3px;
+      //right: -3px;
+      left: 0;
+      right: 0;
       top: 0;
       bottom: 0;
       z-index: -1;
@@ -766,6 +772,14 @@
     position: relative;
   }
 
+  .no-chats & {
+    position: static;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transform: translateX(-100vw);
+    }
+  }
+
   &:after {
     content: "";
     position: absolute;
@@ -782,6 +796,10 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         display: block;
       }
+    }
+
+    .no-chats & {
+      opacity: 0;
     }
   }
 
@@ -837,9 +855,9 @@
       bottom: 0;
       z-index: -1;
       background: linear-gradient(
-                      30deg,
-                      rgba(33, 150, 243, 1) 10%,
-                      rgba(255, 64, 129, 1) 90%
+        30deg,
+        rgba(33, 150, 243, 1) 10%,
+        rgba(255, 64, 129, 1) 90%
       );
       opacity: 0.06;
       display: none;
@@ -863,6 +881,10 @@
           right: 0;
         }
       }
+    }
+
+    .no-chats & {
+      display: none;
     }
   }
 }
@@ -1194,7 +1216,7 @@
   flex-direction: column;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    display: none;
+    //display: none;
   }
 
   .selectedChatHeader {
