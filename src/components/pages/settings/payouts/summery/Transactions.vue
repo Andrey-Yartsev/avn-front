@@ -42,7 +42,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info shadow-block"><span>Empty here for now</span></div>
+          <div class="empty-table-info"><span>Empty here for now</span></div>
         </div>
       </div>
     </div>

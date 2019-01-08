@@ -48,7 +48,7 @@
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
           <div class="table referrals-table"></div>
-          <div class="empty-table-info shadow-block"><span>Empty here for now</span></div>
+          <div class="empty-table-info"><span>Empty here for now</span></div>
         </div>
       </div>
     </div>
