@@ -1,6 +1,5 @@
 @import "components/imports";
 
-
 .notifications-page {
 
   #content {
@@ -164,7 +163,6 @@
 
 .NotificationsCollectionView {
 
-
   .header-nav {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -200,12 +198,15 @@
     }
 
     .notifications-container {
+
       .notifications-popup & {
+
         @include media-breakpoint-up($desktop-breakpoint) {
           background-color: $white;
           padding: 35px 0;
           border-radius: 0 0 5px 5px;
           min-height: calc(100vh - 170px);
+          margin-bottom: 0;
         }
       }
     }
@@ -272,6 +273,7 @@
     }
 
     .notifications-popup & {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         position: static;
         overflow: visible;
@@ -281,6 +283,17 @@
         margin-left: auto;
         margin-right: auto;
         background-color: transparent;
+      }
+
+      + .site-footer {
+        margin-top: 22px;
+      }
+    }
+
+    + .site-footer {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-top: 22px;
       }
     }
   }
@@ -293,31 +306,25 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow-y: auto;
-      height: calc(100vh - 286px);
-    }
-
-    + .site-footer {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: 22px;
-      }
+      //height: calc(100vh - 286px);
     }
 
     .notifications-popup & {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         max-height: calc(100vh - 120px);
         height: auto;
       }
-    }
 
-    &:after {
-      content: "";
-      height: 60px;
-      clear: both;
-      display: none;
+      &:after {
+        content: "";
+        height: 60px;
+        clear: both;
+        display: none;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
+        @include media-breakpoint-up($desktop-breakpoint) {
+          display: block;
+        }
       }
     }
 
@@ -347,8 +354,7 @@
     padding: 14px 20px 14px 65px;
   }
 
-  &.last-child,
-  &:last-child {
+  &.last-child {
     border-bottom: none;
     border-radius: 0 0 5px 5px;
   }
@@ -427,14 +433,10 @@
     box-shadow: 0 0 5px rgba(#000, 0.3);
     background: $white;
     z-index: 2;
-
-    .notifications-popup & {
-      z-index: 10;
-      border-radius: 5px 5px 0 0;
-    }
   }
 
   .notifications-popup & {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       z-index: 10;
       border-radius: 5px 5px 0 0;
@@ -445,13 +447,7 @@
     }
   }
 
-  .notificationsFilterList {
-    display: flex;
-    @include media-breakpoint-down($desktop-breakpoint) {
-      width: 100%;
-    }
-  }
-  a {
+  &__btn {
     padding: 15px 5px;
     position: relative;
     display: flex;
@@ -459,13 +455,16 @@
     font-size: 0;
     font-weight: 500;
     color: inherit;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 1;
       justify-content: center;
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       margin: 0 10px 0 0;
     }
+
     &:before {
       font-size: 24px;
       opacity: 0.3;
@@ -475,18 +474,12 @@
         color: $secondary-color;
       }
     }
+
     &.active {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 17px;
-      }
-      &:before {
-        opacity: 1;
-        color: $primary-color;
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin: 0 8px 0 0;
-        }
-      }
-      @include media-breakpoint-up($desktop-breakpoint) {
+
         &:after {
           position: absolute;
           height: 2px;
@@ -497,8 +490,19 @@
           content: "";
         }
       }
+
+      &:before {
+        opacity: 1;
+        color: $primary-color;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: 0 8px 0 0;
+        }
+      }
     }
+
     &:hover {
+
       &:before {
         color: $primary-color;
         opacity: 1;
@@ -511,6 +515,7 @@
     right: 5px;
 
     .notifications-popup & {
+
       @include media-breakpoint-up($desktop-breakpoint) {
         right: 45px;
       }
@@ -518,7 +523,15 @@
   }
 }
 
-.notifications-filter a,
+.notificationsFilterList {
+  display: flex;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    width: 100%;
+  }
+}
+
+.notifications-filter__btn,
 .NotificationsView {
 
   &:before {

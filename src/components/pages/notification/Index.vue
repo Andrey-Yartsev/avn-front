@@ -23,9 +23,10 @@
             :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
+            class="notifications-filter__btn"
           >{{ v.title }}</a>
         </div>
-        <router-link class="btn-settings hidden-mobile" to="/settings/notifications"></router-link>
+        <router-link class="notifications-filter__btn btn-settings hidden-mobile" to="/settings/notifications"></router-link>
       </div>
       <VuePerfectScrollbar class="notifications">
         <div
