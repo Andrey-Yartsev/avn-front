@@ -1,6 +1,7 @@
 .payouts {
   @include media-breakpoint-down($desktop-breakpoint) {
-    button[type=submit] {
+
+    .saveChanges {
       position: fixed;
       top: 10px;
       right: 15px;
@@ -9,13 +10,11 @@
       padding: 3px 16px;
       width: auto;
     }
+    
     .form-group,
     .payouts-account-country,
     .wrapper-payouts-bg {
       position: static;
-    }
-    .payouts-image-bg {
-      display: none;
     }
   }
 }
@@ -245,6 +244,7 @@
 }
 
 .payouts {
+
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 506px;
     position: relative;
@@ -253,6 +253,7 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     background-position: 200% 460px;
     overflow: hidden;
+    position: relative;
   }
 
   @include media-breakpoint-down($tablet-breakpoint) {
@@ -293,6 +294,7 @@
   }
 
   &-account {
+
     &-form {
       @include media-breakpoint-down($desktop-breakpoint) {
         height: calc(100vh - 44px);
@@ -334,7 +336,8 @@
     left: 50%;
     right: auto;
     top: auto;
-    bottom: calc(-416px - 55px);
+    //bottom: calc(-416px - 55px);
+    bottom: -140px;
     transform: translateX(-50%);
   }
 
@@ -476,6 +479,21 @@
 .payouts-account-country {
   position: relative;
   z-index: 2;
+
+  .form-group {
+    padding-bottom: 0;
+  }
+
+  .form-group-inner {
+
+    &:last-child {
+      margin-bottom: 0;
+
+      .label {
+        padding-bottom: 0;
+      }
+    }
+  }
 }
 
 .payout-type {

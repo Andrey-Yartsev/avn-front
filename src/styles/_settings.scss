@@ -29,13 +29,14 @@
 .settings {
 
   @include media-breakpoint-down($desktop-breakpoint) {
+    min-height: 100%;
+
     .aside-col {
       order: 1;
     }
 
     .content-col {
       order: 2;
-      margin-bottom: 20px;
     }
   }
 
