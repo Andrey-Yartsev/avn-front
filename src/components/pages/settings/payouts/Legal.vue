@@ -10,28 +10,28 @@
         <div class="border-top shadow-block">
           <div class="container">
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">First Name</span>
                 <input name="firstName" required v-model="firstName">
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Last Name</span>
                 <input name="lastName" required v-model="lastName">
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Date of Birth</span>
                 <BirthDateSelect class="birthDateWrapper" v-model="birthDate"/>
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Legal Type</span>
                 <select name="type" id="legal-type" required v-model="type">
@@ -42,21 +42,21 @@
               </label>
             </div>
 
-            <div class="form-group" v-if="type === 'company'">
+            <div class="form-group form-group_with-label" v-if="type === 'company'">
               <label class="form-group-inner">
                 <span class="label">Company Name</span>
                 <input name="companyName" v-model="companyName">
               </label>
             </div>
 
-            <div class="form-group" v-if="type === 'company'">
+            <div class="form-group form-group_with-label" v-if="type === 'company'">
               <label class="form-group-inner">
                 <span class="label">EIN</span>
                 <input name="companyTaxId" v-model="companyTaxId">
               </label>
             </div>
 
-            <div class="form-group photo-form-group">
+            <div class="form-group form-group_with-label photo-form-group">
               <label
                 class="form-group-inner photo-form-group-inner"
                 :class="{success: !!preloadedMedias.length}"
@@ -73,14 +73,14 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Address</span>
                 <input name="address" v-model="address" required>
               </label>
             </div>
 
-            <div class="form-group city-zip-form-group">
+            <div class="form-group form-group_with-label city-zip-form-group">
               <label class="form-group-inner">
                 <span class="label hidden-mobile">
                   City
@@ -106,7 +106,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner" for="state">
                 <span class="label">State</span>
                 <select id="state" name="state" required v-model="state">
@@ -116,7 +116,7 @@
               </label>
             </div>
 
-            <div class="form-group country-select">
+            <div class="form-group form-group_with-label country-select">
               <label class="form-group-inner">
                 <span class="label country-select__label">Country</span>
                 <select name="country" disabled v-model="country">
@@ -128,7 +128,7 @@
               </label>
             </div>
 
-            <div class="form-group help-text">
+            <div class="form-group form-group_with-label help-text">
               <label class="form-group-inner">
                 <span class="input-help semi-transparent">Please
                   <router-link to="/support" target="_blank">contact our support</router-link>
@@ -136,7 +136,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label"></span>
                 <div class="checkbox-wrapper">
@@ -156,7 +156,7 @@
 
           </div>
 
-          <div class="form-group hidden" id="payouts-legal-form-error">
+          <div class="form-group form-group_with-label hidden" id="payouts-legal-form-error">
             <label class="form-group-inner">
               <span class="label"></span>
               <div class="error"></div>
