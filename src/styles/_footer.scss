@@ -77,13 +77,10 @@
     position: relative;
     padding: 22px 0;
 
-    .chat-page & {
+    .chat-page .chatCollectionContent:not(.no-chats) & {
 
-      .chatCollectionContent:not(.no-chats) {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          padding-top: 0;
-        }
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 0;
       }
     }
 

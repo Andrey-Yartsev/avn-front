@@ -1,6 +1,7 @@
 <template>
   <div class="postCollectionView">
-    <div class="posts">
+      <div class="new-post-toast"><span>See 1 new post</span></div>
+      <div class="posts">
       <Post
         v-for="post in posts"
         v-bind:post="post"

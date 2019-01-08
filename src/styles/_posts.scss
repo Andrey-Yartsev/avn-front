@@ -693,33 +693,52 @@
   display: block;
   text-align: center;
   font-size: 13px;
-  padding: 12px 0;
   cursor: pointer;
   color: $primary-color;
-  background: linear-gradient(
-    30deg,
+  background: #fff linear-gradient(
+    60deg,
     $secondary-color-20 10%,
     $primary-color-20 90%
   );
-  position: relative;
+  position: sticky;
+  z-index: 10;
+  overflow: hidden;
+  transition: all .2s;
+  top: 88px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 7px 0;
+    top: 50px;
   }
 
-  &:before {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    content: "";
-    background: $light;
-    opacity: 0.3;
+  .profile-page & {
+    top: 94px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: 140px;
+    }
+  }
+
+  html:not(.profile-page) .scroll-top & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transform: translateY(-44px);
+    }
+  }
+
+  &:not(.show) {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 
   span {
     position: relative;
+    display: block;
+    padding: 12px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 7px 0;
+    }
   }
 
 }

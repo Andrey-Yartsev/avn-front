@@ -194,6 +194,18 @@
     box-shadow: 0 8px 30px rgba(#000, 0.1);
   }
 
+  &:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: "";
+    background: $light;
+    opacity: 0.3;
+    z-index: 0;
+  }
+
   &:after {
     content: "";
     position: absolute;
@@ -203,7 +215,7 @@
     display: none;
     z-index: -1;
     background: linear-gradient(
-      30deg,
+      60deg,
       $secondary-color-12 10%,
       $primary-color-12 90%
     );
@@ -211,6 +223,11 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
     }
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
   }
 
   .popup & {
@@ -346,7 +363,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
-      top: 15px;
+      top: 0;
       right: 170px;
     }
 
