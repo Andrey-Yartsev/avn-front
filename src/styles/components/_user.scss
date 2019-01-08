@@ -138,6 +138,16 @@
 
       &-md {
         margin-right: 15px;
+
+        &_reset {
+
+          &-mob {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              margin-right: 0;
+            }
+          }
+        }
       }
     }
   }
