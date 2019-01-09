@@ -28,45 +28,12 @@
 .popup {
 
   .notifications-popup {
-    display: flex;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       overflow-y: scroll;
       flex-direction: column;
       justify-content: stretch;
       position: relative;
-    }
-
-    .NotificationsCollectionView {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: block;
-      }
-    }
-
-    .notifications-container {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: calc(100vh - 148px);
-      }
-    }
-
-    > .content {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        overflow: visible;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 1;
-        //margin-right: 30px;
-        //padding-left: 30px;
-      }
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint) {
       top: 0;
       height: 100%;
       width: 100%;
@@ -74,8 +41,21 @@
       left: 0;
       transform: none;
       background: $white
-        linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%)
-        fixed;
+      linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%)
+      fixed;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background: none;
+      max-height: calc(100vh - 36px);
+      top: 36px;
+      box-shadow: none;
+      max-width: 680px;
+      border-radius: 5px 5px 0 0;
+      padding: 84px 0 0;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
       &:before {
         background: $light;
         content: "";
@@ -87,19 +67,24 @@
         opacity: 0.3;
       }
     }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background: none;
-      max-height: calc(100vh - 36px);
-      top: 36px;
-      box-shadow: none;
-      max-width: 680px;
-      border-radius: 5px 5px 0 0;
-      padding: 84px 0 0;
 
-      .close {
+    .close {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         z-index: 10;
         right: 30px;
         top: 29px;
+      }
+    }
+
+    > .content {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        overflow: visible;
       }
     }
   }
@@ -163,6 +148,29 @@
 
 .NotificationsCollectionView {
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 0 10px;
+    margin: 0 auto;
+    max-width: 642px;
+    position: relative;
+    width: 100%;
+    min-height: calc(100% - 75px);
+  }
+
+  .notifications-popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 20px;
+    }
+  }
+
   .header-nav {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -180,169 +188,176 @@
   }
 
   &.no-notifications {
+
     .msg-no-content {
       pointer-events: auto;
       opacity: 1;
     }
-
-    .notifications {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-
-      .notifications-popup & {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          display: none;
-        }
-      }
-    }
-
-    .notifications-container {
-
-      .notifications-popup & {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          background-color: $white;
-          padding: 35px 0;
-          border-radius: 0 0 5px 5px;
-          min-height: calc(100vh - 170px);
-          margin-bottom: 0;
-        }
-      }
-    }
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    height: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+  .notifications-popup & {
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 10px;
-    margin: 0 auto 20px;
-    max-width: 642px;
-    position: relative;
-    width: 100%;
-    min-height: calc(100% - 75px);
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: block;
+    }
 
-    .notifications-popup & {
+    @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0;
       margin: 0 auto;
       position: static;
       min-height: auto;
     }
-  }
 
-  .notifications-container {
-    position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(#000, 0.15);
-      border-radius: 5px;
-      background-color: $white;
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-top: 60px;
-      background-color: $white;
-      min-height: calc(100% - 148px);
-    }
-
-    .msg-no-content {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-
-      .notifications-popup & {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          position: relative;
-          left: auto;
-          top: auto;
-          transform: translate(0, 0);
-        }
-      }
-    }
-
-    .notifications-popup & {
+    .site-footer {
+      margin-top: 22px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        position: static;
-        overflow: visible;
-        box-shadow: none;
-        border-radius: 0;
-        max-width: 620px;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: transparent;
-      }
-
-      + .site-footer {
-        margin-top: 22px;
-      }
-    }
-
-    + .site-footer {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: 22px;
-      }
-    }
-  }
-
-  .notifications {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      padding: 1px 0 20px;
-      background-color: $white;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      overflow-y: auto;
-      //height: calc(100vh - 286px);
-    }
-
-    .notifications-popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 120px);
-        height: auto;
-      }
-
-      &:after {
-        content: "";
-        height: 60px;
-        clear: both;
         display: none;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          display: block;
-        }
       }
     }
+  }
+}
 
-    &.ps {
 
-      &:hover {
 
-        > .ps__scrollbar-y-rail {
+.notifications-container {
+  position: relative;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    background-color: $white;
+    min-height: calc(100% - 148px);
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(#000, 0.15);
+    border-radius: 5px;
+    background-color: $white;
+    min-height: calc(100vh - 162px);
+  }
+
+  .notifications-popup & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      min-height: calc(100vh - 254px);
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: static;
+      overflow: visible;
+      box-shadow: none;
+      border-radius: 0;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: transparent;
+    }
+  }
+
+  .no-notifications & {
+
+    .notifications-popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background-color: $white;
+        padding: 35px 0;
+        border-radius: 0 0 5px 5px;
+        min-height: calc(100vh - 170px);
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .msg-no-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .notifications-popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: translate(0, 0);
+      }
+    }
+  }
+
+  + .site-footer {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 22px;
+    }
+  }
+}
+
+.notifications {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 1px 0 20px;
+    background-color: $white;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    overflow-y: auto;
+  }
+
+  .notifications-popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: calc(100vh - 120px);
+      height: auto;
+    }
+
+    &:after {
+      content: "";
+      height: 60px;
+      clear: both;
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
+  }
+
+  .no-notifications & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+
+    .notifications-popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
+  &.ps {
+
+    &:hover {
+
+      > .ps__scrollbar-y-rail {
+        opacity: 0;
+
+        &:hover {
           opacity: 0;
-
-          &:hover {
-            opacity: 0;
-          }
         }
       }
     }
   }
 }
+
+
 
 .NotificationsView {
   border-bottom: 1px solid rgba($gray, 0.2);
@@ -351,7 +366,7 @@
   padding: 14px 20px 14px 54px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 14px 20px 14px 65px;
+    padding-left: 65px;
   }
 
   &.last-child {
@@ -384,13 +399,6 @@
     }
   }
 
-  .avatars-wrapper {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-  }
-
   .avatar {
 
     &:nth-child(n + 2) {
@@ -417,6 +425,13 @@
     font-size: 13px;
     opacity: 0.5;
   }
+}
+
+.avatars-wrapper {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
 }
 
 .notifications-filter {
@@ -470,6 +485,7 @@
       opacity: 0.3;
       font-weight: 400;
       transition: opacity 0.3s ease, color 0.3s ease;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         color: $secondary-color;
       }
