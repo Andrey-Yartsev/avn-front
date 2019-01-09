@@ -138,12 +138,13 @@
   position: relative;
 
   .settings-page & {
-    min-height: 80px;
+    min-height: 60px;
   }
 
   .payments & {
+
     .lds-dual-ring {
-      top: 79px;
+      top: 70px;
     }
   }
 

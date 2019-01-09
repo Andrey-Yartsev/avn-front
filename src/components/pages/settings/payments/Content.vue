@@ -57,7 +57,7 @@
               </div>
             </div>
 
-            <div class="border-top loader-container" v-if="transactionsLoading">
+            <div class="border-top shadow-block loader-container" v-if="transactionsLoading">
               <Loader :fullscreen="false" text="" class="transparent small" />
             </div>
 
