@@ -45,10 +45,12 @@
 
     .FooterNavView {
 
+      &:last-child,
       &.settings-onmyteam-link {
 
         @include media-breakpoint-up($desktop-breakpoint) {
           margin: 10px auto 0;
+          flex: 0 0 100%;
         }
       }
     }
