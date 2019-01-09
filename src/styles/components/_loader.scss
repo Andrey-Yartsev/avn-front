@@ -137,20 +137,19 @@
 .loader-container {
   position: relative;
 
+  &_payouts {
+    margin-bottom: 20px;
+  }
+
   .settings-page & {
     min-height: 60px;
   }
 
-  .payments & {
+  .payments &,
+  .payouts & {
 
     .lds-dual-ring {
       top: 70px;
-    }
-  }
-
-  .payouts & {
-    .lds-dual-ring {
-      top: 100px;
     }
   }
 
