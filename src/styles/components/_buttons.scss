@@ -610,8 +610,9 @@ button,
     content: "\E605";
     font-size: 24px;
     display: inline-block;
-    vertical-align: middle;
-    margin: 0 0 0 6px;
+    vertical-align: top;
+    margin: -1px 0 0 6px;
+    line-height: 21px;
   }
 }
 
