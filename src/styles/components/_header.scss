@@ -210,13 +210,14 @@
   transition: all 0.2s ease-in-out 0s;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: -44px;
   height: 44px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
     left: 0;
     right: 0;
+    top: 0;
     z-index: 12;
     margin: 0 0 25px;
   }
