@@ -15,8 +15,11 @@
   </div>
 </template>
 <script>
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
+
 export default {
   name: "AddNewNav",
+  mixins: [ModalRouterGoto],
   props: {
     active: {
       type: String,
@@ -34,7 +37,7 @@ export default {
       this.$router.push("/stream");
     },
     addMessage: function() {
-      this.$router.push("/chat");
+      this.goToModalRoute("/chat");
     }
   }
 };

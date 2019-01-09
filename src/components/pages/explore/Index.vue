@@ -28,6 +28,7 @@
                 :post="post"
                 :key="post.id" 
                 from="explore"
+                :shouldBePoster="page === 'all' && post.id === firstVideoId"
               />
               <template v-if="page === 'stories'">
                 <StoryMedium v-for="post in stories" :post="post" :key="post.id" from="explore" />
@@ -84,6 +85,10 @@ export default {
     this.getPageData();
   },
   computed: {
+    firstVideoId() {
+      const videos = this.posts.filter(item => item.mediaType === "video");
+      return !!videos.length && videos[0].id;
+    },
     posts() {
       return this.$store.state.explore.posts;
     },
