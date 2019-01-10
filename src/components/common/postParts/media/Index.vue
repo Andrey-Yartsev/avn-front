@@ -4,7 +4,7 @@
       <div class="loader-text">Media is currently processing</div>
     </div>
     <template v-if="medias.length > 1 && showSlider">
-      <swiper ref="mySwiper" class="media-slider" :options="swiperOption">
+      <swiper ref="mySwiper" class="media-slider" :options="swiperOption" :key="Math.random()">
         <swiperSlide :key="key" v-for="(media, key) in medias" >
           <component
             :is="getMediaViewType(medias[key])"
@@ -28,10 +28,10 @@
       </figure>
     </template>
     <template v-if="medias.length > 1 && showSlider">
-      <div class="media-slider-pagination" :style="{ zIndex: 999 }" />
-      <div class="media-slider-navigation" v-if="$mq === 'desktop'">
-        <span class="btn-prev" :style="{ zIndex: 999 }"/>
-        <span class="btn-next" :style="{ zIndex: 999 }"/>
+      <div :class="`media-slider-pagination pagination-${uniqId}`" :style="{ zIndex: 999 }" />
+      <div :class="`media-slider-navigation navigation-${uniqId}`" v-if="$mq === 'desktop'">
+        <span :class="`btn-prev btn-prev-${uniqId}`" :style="{ zIndex: 999 }"/>
+        <span :class="`btn-next btn-next-${uniqId}`" :style="{ zIndex: 999 }"/>
       </div>
     </template>
   </div>
@@ -61,21 +61,26 @@ export default {
     swiperSlide
   },
   data() {
+    const uniqId = Math.random()
+      .toString(36)
+      .substr(2, 9);
+
     const self = this;
     return {
+      uniqId,
       activeSlide: 0,
       swiperOption: {
         autoHeight: true,
         spaceBetween: 30,
         pagination: {
-          el: ".media-slider-pagination",
+          el: `.pagination-${uniqId}`,
           clickable: true,
           bulletClass: "item",
           bulletActiveClass: "active"
         },
         navigation: {
-          nextEl: ".btn-next",
-          prevEl: ".btn-prev",
+          nextEl: `.btn-next.btn-next-${uniqId}`,
+          prevEl: `.btn-prev.btn-prev-${uniqId}`,
           hiddenClass: "hidden",
           disabledClass: "hidden"
         },
