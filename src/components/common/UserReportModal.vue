@@ -10,7 +10,7 @@
                 <h1 class="form-title">Choose reason</h1>
                 <div class="shadow-block">
                   <div class="container">
-                    <div class="form-group radio-group">
+                    <div class="form-group form-group_with-label radio-group">
                       <label class="form-group-inner">
                         <div class="radio-wrapper">
                           <input type="radio" name="reason" value="4" v-model="reason">
@@ -36,7 +36,7 @@
                   </div>
                 </div>
                 <div class="container">
-                  <div class="form-group">
+                  <div class="form-group form-group_with-label">
                     <button
                       :disabled="!reason"
                       type="submit" id="send-report" class="btn lg saveChanges">Report
