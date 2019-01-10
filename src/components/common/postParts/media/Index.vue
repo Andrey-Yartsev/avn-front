@@ -4,7 +4,7 @@
       <div class="loader-text">Media is currently processing</div>
     </div>
     <template v-if="medias.length > 1 && showSlider">
-      <swiper ref="mySwiper" class="media-slider" :options="swiperOption" :key="Math.random()">
+      <swiper ref="mySwiper" class="media-slider" :options="swiperOption" :key="uniqId">
         <swiperSlide :key="key" v-for="(media, key) in medias" >
           <component
             :is="getMediaViewType(medias[key])"
