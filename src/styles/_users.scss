@@ -141,7 +141,7 @@
 
   .user-names {
     @include media-breakpoint-down($desktop-breakpoint) {
-      margin-right: auto;
+      margin: 1px auto auto 0;
       min-width: 0;
       flex: 1;
     }
@@ -171,6 +171,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       font-size: 13px;
+      margin-bottom: 3px;
     }
 
     a {
@@ -246,9 +247,11 @@
   .subscribeView {
     min-width: 62px;
     margin-left: 13px;
+    margin-top: -10px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 0;
+      margin-top: 0;
     }
 
     &:empty {
@@ -321,6 +324,14 @@
       margin-top: 0;
       margin-bottom: 1px;
       transform: translate(-2px, -7px);
+
+      .searchView & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          transform: translate(-2px, 0);
+          margin-bottom: 8px;
+        }
+      }
     }
   }
 
@@ -342,6 +353,7 @@
     }
 
     &__value {
+      margin-top: 0;
       margin-bottom: 3px;
     }
   }

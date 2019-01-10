@@ -460,6 +460,16 @@
   margin-bottom: 7px;
   word-break: break-all;
 
+  .searchView & {
+    font-size: 13px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   &:empty {
     display: none;
   }
@@ -646,6 +656,10 @@
 .profile-twitter-link {
   color: $secondary-color;
   transition: color 0.3s ease;
+
+  .searchView & {
+    font-size: 13px;
+  }
 }
 
 .feed.make-post-btn {
