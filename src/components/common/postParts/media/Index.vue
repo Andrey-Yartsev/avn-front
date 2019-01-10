@@ -4,18 +4,17 @@
       <div class="loader-text">Media is currently processing</div>
     </div>
     <template v-if="medias.length > 1 && showSlider">
-      <div class="media-slider">
-        <figure :key="key" v-for="(media, key) in medias" :class="[{ active: currentSlide === key }, 'media-item']">
+      <swiper ref="mySwiper" class="media-slider" :options="swiperOption">
+        <swiperSlide :key="key" v-for="(media, key) in medias" >
           <component
-            :is="getMediaViewType(media)"
-            :media="media"
+            :is="getMediaViewType(medias[key])"
+            :media="medias[key]"
             :postId="postId"
             :openModal="openModal"
             :mediaSize="mediaSize"
-            @click="nextSlide"
           />
-        </figure>
-      </div>
+        </swiperSlide>
+      </swiper>
     </template>
     <template v-else>
       <figure v-if="medias.length" class="media-item active">
@@ -29,25 +28,17 @@
       </figure>
     </template>
     <template v-if="medias.length > 1 && showSlider">
-      <div class="media-slider-pagination">
-        <span
-          :key="key" v-for="(media, key) in medias"
-          :class=" [{ active: key === currentSlide }, 'item']"
-          @click="currentSlide = key"
-        ></span>
-      </div>
-      <div class="media-slider-navigation">
-        <span :class="[{hidden: currentSlide === 0}, 'btn-prev']" @click="currentSlide -= 1"></span>
-        <span
-          :class="[{hidden: currentSlide === medias.length - 1}, 'btn-next']" class=""
-          @click="currentSlide += 1"
-        ></span>
+      <div class="media-slider-pagination" :style="{ zIndex: 999 }" />
+      <div class="media-slider-navigation" v-if="$mq === 'desktop'">
+        <span class="btn-prev" :style="{ zIndex: 999 }"/>
+        <span class="btn-next" :style="{ zIndex: 999 }"/>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Locked from "./content/Locked";
 import Video from "./content/Video";
 import VideoLinked from "./content/VideoLinked";
@@ -65,19 +56,45 @@ export default {
     Gif,
     GifLinked,
     Photo,
-    PhotoLinked
+    PhotoLinked,
+    swiper,
+    swiperSlide
   },
-  data: () => ({
-    currentSlide: 0
-  }),
+  data() {
+    const self = this;
+    return {
+      activeSlide: 0,
+      swiperOption: {
+        autoHeight: true,
+        spaceBetween: 30,
+        pagination: {
+          el: ".media-slider-pagination",
+          clickable: true,
+          bulletClass: "item",
+          bulletActiveClass: "active"
+        },
+        navigation: {
+          nextEl: ".btn-next",
+          prevEl: ".btn-prev",
+          hiddenClass: "hidden",
+          disabledClass: "hidden"
+        },
+        on: {
+          slideChange() {
+            self.activeSlide = this.activeIndex;
+          }
+        }
+      }
+    };
+  },
   computed: {
     mediaStyle() {
       return this.mediaSize === "full" &&
         this.medias.length &&
-        this.medias[this.currentSlide].background
+        this.medias[this.activeSlide].background
         ? {
             "background-image": `url(data:image/jpeg;base64,${
-              this.medias[this.currentSlide].background
+              this.medias[this.activeSlide].background
             })`
           }
         : {};
@@ -119,14 +136,6 @@ export default {
       if (type === "video") return `Video${LinkedPrefix}`;
 
       throw new Error("Invalid media format");
-    },
-
-    nextSlide() {
-      if (this.medias.length - 1 === this.currentSlide) {
-        this.currentSlide = 0;
-      } else {
-        this.currentSlide++;
-      }
     }
   }
 };
