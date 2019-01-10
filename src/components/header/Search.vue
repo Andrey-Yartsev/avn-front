@@ -38,12 +38,14 @@
               v-for="v in items"
               v-bind:key="v.id"
             >
-              <span class="avatar"><span class="avatar__img"></span></span>
-              <div class="user__name">
-                <div class="name">{{ v.name }}</div>
+              <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
+              <div class="username-group">
+                <div class="user__name">
+                  <div class="name">{{ v.name }}</div>
+                  <span v-if="v.isVerified" class="verified-user"></span>
+                </div>
+                <span class="user-login">{{ v.username }}</span>
               </div>
-              <span class="user-login">{{ v.username }}</span>
-              <span v-if="v.isVerified" class="verified-user"></span>
             </a>
           </div>
         </div>
