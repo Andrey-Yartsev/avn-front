@@ -239,7 +239,7 @@
     padding: 0 10px 10px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      min-height: calc(100% - 60px);
+      //min-height: calc(100% - 60px);
       position: relative;
       align-items: start;
       align-content: start;
