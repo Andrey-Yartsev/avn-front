@@ -310,10 +310,11 @@
     flex-direction: column;
   }
 
-  .popup & {
+  .popup &,
+  .postPage & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 54px;
+      margin-bottom: 58px;
     }
   }
 
