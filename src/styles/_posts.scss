@@ -82,6 +82,16 @@
       z-index: 2;
     }
 
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 100%;
+        color: #fff;
+        padding-top: 0;
+        position: static;
+      }
+    }
+
     .postPage & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -106,6 +116,63 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 15px;
       }
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          font-size: 13px;
+          display: none;
+        }
+      }
+      
+      a {
+        
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .avatar {
+
+      &_sm {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            flex: 0 0 24px;
+          }
+        }
+      }
+
+      &__img {
+
+        &:before {
+
+          .explore-page & {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+
+    .name {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          font-size: 13px;
+        }
+      }
     }
   }
 
@@ -118,6 +185,13 @@
 
     .postPageWrapper & {
       padding-bottom: 7px;
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
     }
 
     &:empty {
@@ -131,6 +205,7 @@
     font-weight: 500;
     display: flex;
     align-items: center;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 13px 15px 8px;
     }
@@ -156,6 +231,14 @@
         margin: 0 10px 0 0;
       }
 
+      .explore-page & {
+
+        @include media-breakpoint-down($mobile-breakpoint) {
+          opacity: .7;
+          flex: 0 0 28%;
+        }
+      }
+
       &.active {
         opacity: 1;
         color: $primary-color;
@@ -175,6 +258,16 @@
 
     .date {
       margin-left: auto;
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          position: absolute;
+          right: 15px;
+          top: 4px;
+          opacity: 1;
+        }
+      }
     }
   }
 
@@ -245,6 +338,15 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       right: 7px;
       top: 9px;
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        right: 7px;
+        top: auto;
+        bottom: -5px;
+      }
     }
 
     &.open {
@@ -840,6 +942,13 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     box-shadow: 0 -3px 2px rgba(#000, 0.05);
     position: fixed;
+  }
+
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
   }
 
   &:after {

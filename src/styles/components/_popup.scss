@@ -15,6 +15,13 @@
     align-items: center;
   }
 
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background: rgba(#000, 0.85);
+    }
+  }
+
   .overlay {
     position: absolute;
     top: 0;
@@ -318,6 +325,15 @@
     font-size: 48px;
     transition: opacity 0.3s ease;
     right: 0;
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-size: 24px;
+        line-height: 44px;
+      }
+    }
+
     &:hover {
       opacity: 1;
     }

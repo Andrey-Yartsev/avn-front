@@ -15,6 +15,14 @@
     right: 0;
     bottom: 0;
     top: 0;
+    max-width: 100%;
+  }
+
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background-color: transparent;
+    }
   }
 
   .content {
@@ -34,9 +42,20 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+    }
+  }
 
-      .post.postPage {
-        width: 100%;
+  .post.postPage {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: 100%;
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        justify-content: center;
+        flex-direction: column;
       }
     }
   }
@@ -58,6 +77,16 @@
       opacity: 0;
     }
 
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        right: 0;
+        left: auto;
+        opacity: 1;
+        display: block;
+      }
+    }
+
     &:hover {
       opacity: 1;
 
@@ -77,8 +106,17 @@
 
   .next,
   .previous {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+        z-index: 3;
+      }
     }
   }
 }
@@ -110,12 +148,31 @@
       bottom: 0;
       overflow-y: auto;
     }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        overflow: hidden;
+      }
+    }
   }
 
   .header-mobile {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       flex: 0 0 44px;
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
 }
@@ -229,6 +286,14 @@
       width: 100%;
       background: $white;
     }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($mobile-breakpoint) {
+        flex: 0 0 auto;
+        width: 100%;
+      }
+    }
   }
 
   .post-no-comments {
@@ -257,6 +322,18 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 0;
       padding-bottom: 16px;
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-bottom: none;
+        margin-bottom: 0;
+        color: #fff;
+        padding-bottom: 0;
+        min-height: auto;
+        position: static;
+      }
     }
 
     &__btn {
@@ -315,6 +392,13 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 58px;
+    }
+  }
+
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
     }
   }
 
