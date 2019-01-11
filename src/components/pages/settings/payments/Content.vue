@@ -81,7 +81,7 @@
                       <div class="user table__cell">
                         <router-link :to="'/' + v.userTo.username" target="_blank"
                            class="userview-block payment-user-wrapper">
-                          <span class="avatar">
+                          <span class="avatar avatar_sm">
                             <span class="avatar__img">
                               <img :src="v.userTo.avatar" v-if="v.userTo.avatar" />
                             </span>
