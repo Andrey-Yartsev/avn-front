@@ -91,7 +91,7 @@
     &:not(.single-col) {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 calc(100% - 33.35%);
+        flex: 0 0 calc(100% - 320px);
         margin-left: auto;
       }
     }
@@ -136,6 +136,8 @@
     right: 0;
     top: 405px;
     z-index: 4;
+    max-width: 960px;
+    margin: 0 auto;
   }
 }
 
@@ -143,16 +145,14 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     box-shadow: none;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 10px;
     height: 0;
+    max-width: 320px;
+    position: relative;
   }
 
   .profile-desc {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: 33.35%;
       width: 100%;
 
       padding-top: 51px;
@@ -202,21 +202,8 @@
     .FooterNavCollectionView {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: calc(33.35% - 30px);
-        width: 100%;
         margin-left: 5px;
         min-height: 120px;
-      }
-    }
-
-    &.site-footer_sticky-bottom {
-
-      .FooterNavCollectionView {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin-left: 15px;
-          max-width: calc(33.35% - 37px);
-        }
       }
     }
   }
@@ -232,8 +219,6 @@
   }
 
   &__inner {
-    //position: relative;
-
     font-size: 100px;
     position: absolute;
     bottom: -60px;
@@ -897,7 +882,7 @@
 
     .content-col {
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 calc(100% - 33.35%);
+        flex: 0 0 calc(100% - 320px);
         margin-right: 0;
         margin-left: auto;
       }
@@ -1227,12 +1212,6 @@
     }
   }
 
-  .profile-message-btn {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //margin-right: -10px;
-    }
-  }
-
   .subscribe-cost {
     opacity: 1;
     color: $primary-color;
@@ -1260,8 +1239,6 @@
     }
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //width: 90px;
-      //flex: 0 0 90px;
       min-width: auto;
     }
   }
@@ -1283,7 +1260,6 @@
     .subscribePaidView {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        //margin: 0 1.2em;
         margin: 0 0.6em;
       }
     }

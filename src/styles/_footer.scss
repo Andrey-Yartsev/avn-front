@@ -116,9 +116,17 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       position: fixed;
-      left: 0;
-      right: 0;
       bottom: 0;
+      width: inherit;
+      max-width: inherit;
+    }
+
+    .container {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: inherit;
+        max-width: none;
+      }
     }
   }
 }
