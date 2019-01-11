@@ -30,6 +30,7 @@ import TermsPage from "./components/pages/static/Terms";
 import PrivacyPage from "./components/pages/static/Privacy";
 import ContactsPage from "./components/pages/static/Contacts";
 import Record2257Page from "./components/pages/static/Record2257";
+import StatPage from "./components/statistics/Page";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -365,6 +366,15 @@ const routes = [
     beforeEnter: Auth.requireAny,
     path: "/2257",
     component: Record2257Page,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/statistics",
+    component: StatPage,
     meta: {
       staticPage: true,
       cssName: "staticPage"
