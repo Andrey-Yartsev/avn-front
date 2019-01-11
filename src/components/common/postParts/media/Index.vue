@@ -71,7 +71,8 @@ export default {
       activeSlide: 0,
       swiperOption: {
         autoHeight: true,
-        spaceBetween: 30,
+        spaceBetween: 10,
+        preloadImages: true,
         pagination: {
           el: `.pagination-${uniqId}`,
           clickable: true,
