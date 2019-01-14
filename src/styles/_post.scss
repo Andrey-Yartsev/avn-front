@@ -51,7 +51,7 @@
       width: 100%;
     }
 
-    &.lightbox-post {
+    .lightbox-post & {
 
       .explore-page & {
 
@@ -80,13 +80,16 @@
       opacity: 0;
     }
 
-    .explore-page & {
+    .lightbox-post & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        right: 0;
-        left: auto;
-        opacity: 1;
-        display: block;
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          right: 0;
+          left: auto;
+          opacity: 1;
+          display: block;
+        }
       }
     }
 
@@ -344,7 +347,7 @@
     }
   }
 
-  &.lightbox-post {
+  .lightbox-post & {
 
     .actions {
 
