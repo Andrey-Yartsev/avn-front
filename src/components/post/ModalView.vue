@@ -1,11 +1,11 @@
 <template>
-  <Modal :onClose="close" :path="path">
+  <Modal :onClose="close" :path="path" :extraClassName="extraClassName">
     <template slot="content">
       <div class="popup-container post post-popup">
         <div class="previous" @click="index -= 1" v-if="index > 0"></div>
         <div class="content">
           <div class="postPageWrapper">
-            <PostLargeView :post="post" :from="from" />
+            <PostLargeView :post="post" :from="from" v-on:addExtraClassName="addExtraClassName" />
           </div>
         </div>
         <button type="button" class="close" @click="close"></button>
@@ -25,7 +25,8 @@ export default {
   mixins: [ModalRouterGoto],
   data() {
     return {
-      index: null
+      index: null,
+      extraClassName: ""
     };
   },
   computed: {
@@ -65,6 +66,9 @@ export default {
     PostLargeView
   },
   methods: {
+    addExtraClassName(className) {
+      this.extraClassName = className;
+    },
     scroll() {
       this.$scrollTo(`[data-id="${this.post.id}"]`);
     },

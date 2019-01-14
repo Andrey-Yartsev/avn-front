@@ -1,8 +1,7 @@
 <template>
   <div 
       :class="['post postPage', {
-        'post_preparation': !post.isMediaReady,
-        'lightbox-post': !showAddCommentForm
+        'post_preparation': !post.isMediaReady
       }]"
     >
     <div class="postPage-content">
@@ -44,7 +43,7 @@
         <template v-if="isAuth() && this.post.canFavorite" >
           <Actions
             :post="post"
-            v-on:postShowCommentForm="showAddCommentForm = !showAddCommentForm"
+            v-on:postShowCommentForm="clickOnCommentForm"
             v-on:postLike="likePost"
             @toggleTip="showTip = !showTip"
           />
@@ -141,6 +140,11 @@ export default {
     Tip
   },
   methods: {
+    clickOnCommentForm() {
+      this.showAddCommentForm = !this.showAddCommentForm;
+      const className = this.showAddCommentForm ? "lightbox-post" : "";
+      this.$emit("addExtraClassName", className);
+    },
     likePost() {
       this.$store.dispatch(this.actionPrefix + "/likePost", {
         postId: this.post.id,

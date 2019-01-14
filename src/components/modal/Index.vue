@@ -1,5 +1,5 @@
 <template>
-  <div class="popup" >
+  <div :class="['popup', extraClassName]">
     <div class="overlay" @click="onClose"></div>
     <slot name="content"></slot>
   </div>
@@ -20,6 +20,10 @@ export default {
     }
   },
   props: {
+    extraClassName: {
+      type: String,
+      default: ""
+    },
     onClose: {
       type: Function,
       default: () => {}
