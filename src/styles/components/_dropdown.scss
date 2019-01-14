@@ -219,4 +219,38 @@
       }
     }
   }
+  
+  &__details {
+    display: none;
+
+    + li {
+
+      a, button {
+
+        &:before {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            display: none;
+          }
+
+          .lightbox-post & {
+
+            .explore-page & {
+
+              @include media-breakpoint-down($desktop-breakpoint) {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .lightbox-post & {
+
+      .explore-page & {
+        display: block;
+      }
+    }
+  }
 }
