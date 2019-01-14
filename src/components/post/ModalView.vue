@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       index: null,
-      extraClassName: ""
+      extraClassName: "lightbox-post"
     };
   },
   computed: {

@@ -142,7 +142,7 @@ export default {
   methods: {
     clickOnCommentForm() {
       this.showAddCommentForm = !this.showAddCommentForm;
-      const className = this.showAddCommentForm ? "lightbox-post" : "";
+      const className = this.showAddCommentForm ? "" : "lightbox-post";
       this.$emit("addExtraClassName", className);
     },
     likePost() {
