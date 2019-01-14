@@ -15,6 +15,7 @@ import payoutsApproved from "./actions/payoutsApproved";
 import subscription from "./actions/subscription";
 import tip from "./actions/tip";
 import message from "./actions/message";
+import new_feed_post from "./actions/new_feed_post";
 
 const actions = {
   chats,
@@ -29,7 +30,8 @@ const actions = {
   stream_tip,
   message,
   stream_comment,
-  statistics
+  statistics,
+  new_feed_post
 };
 
 export default class {

@@ -11,7 +11,8 @@ const initState = {
   offset: 0,
   marker: "",
   source: "feed",
-  deletedPost: undefined
+  deletedPost: undefined,
+  newFeedPosts: 0
 };
 
 const state = { ...initState };
@@ -30,6 +31,9 @@ const mutations = {
 
       return post;
     });
+  },
+  newFeedPost(state) {
+    state.newFeedPosts += 1;
   }
 };
 

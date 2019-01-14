@@ -4,32 +4,37 @@
         <router-link
           class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
         <div class="container">
-            <div class="row">
-                <div class="content-col">
-                  <div class="no-padding">
-                    <AddPost></AddPost>
-                    <div class="feed rounded-container shadow-block reset-btr">
-                      <PostCollection
-                        :posts="posts"
-                        from="home"
-                      />
-                    </div>
-                  </div>
-                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
-                    <Loader :fullscreen="false" />
-                  </div>
+          <div class="row">
+            <div class="content-col">
+              <div class="no-padding">
+                <AddPost></AddPost>
+                <NewFeedPostToast
+                  :init="init"
+                  :newPosts="newPosts"
+                />
+                <div class="feed rounded-container shadow-block reset-btr">
+                  <PostCollection
+                    :posts="posts"
+                    from="home"
+                  />
                 </div>
-                <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
-                  <StoriesWrapper></StoriesWrapper>
-                  <Footer></Footer>
-                </div>
+              </div>
+              <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+                <Loader :fullscreen="false" />
+              </div>
             </div>
+            <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
+              <StoriesWrapper></StoriesWrapper>
+              <Footer></Footer>
+            </div>
+          </div>
         </div>
     </div>
 </template>
 
 <script>
 import PostCollection from "@/components/common/postCollection/Index";
+import NewFeedPostToast from "@/components/common/newFeedPostToast/Index";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index";
 import AddPost from "@/components/addPost/Index";
@@ -46,6 +51,7 @@ export default {
     StoriesWrapper,
     AddPost,
     PostCollection,
+    NewFeedPostToast,
     Loader
   },
   mixins: [InfinityScrollMixin, Wsp],
@@ -53,6 +59,9 @@ export default {
     this.init();
   },
   computed: {
+    newPosts() {
+      return this.$store.state.home.newFeedPosts;
+    },
     posts() {
       return this.$store.state.home.posts;
     },
