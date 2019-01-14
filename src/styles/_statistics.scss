@@ -1,0 +1,213 @@
+
+.boxes {
+  width: 100%;
+  max-width: 940px;
+  margin: 20px auto;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    overflow: hidden;
+  }
+
+  .cols {
+    display: flex;
+    margin: 0 -10px;
+    max-width: none;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 0;
+      margin-right: 0;
+      flex-wrap: wrap;
+    }
+
+    > .col {
+      display: flex;
+    }
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2) inset;
+    border-radius: 6px;
+    margin: 0 0 18px;
+    position: relative;
+    width: 100%;
+  }
+
+  .box-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: inherit;
+    padding: 13px 0;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+  }
+
+  .chart_period {
+    position: absolute;
+    right: 0;
+    top: 14px;
+    font-weight: 400;
+    font-size: 11px;
+    color: #7c8b96;
+  }
+}
+
+.charts-data {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 15px 12px;
+  font-size: 10px;
+
+  > span {
+
+    &:before {
+      display: none;
+    }
+
+    &.comments,
+    &.followers,
+    &.earn_referral {
+
+      span {
+        color: #3abfd3;
+      }
+    }
+
+    &.likes,
+    &.subscribed,
+    &.paid_chat_messages {
+
+      span {
+        color: #67cc2e;
+      }
+    }
+
+    &.posts,
+    &.uploaded,
+    &.unsubscribed,
+    &.paid_subscriptions {
+
+      span {
+        color: #FF335A;
+      }
+    }
+
+    span {
+      display: block;
+      font-size: 21px;
+    }
+  }
+}
+
+.charts-wrapper-outer {
+
+  &__visitors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.visitors-donuts-wrapper-outer {
+  padding: 20px 0 7px 25px;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 10px;
+    flex: 0 0 100%;
+    display: flex;
+  }
+}
+
+.visitors-donuts-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #7c8b96;
+  white-space: nowrap;
+  margin: 0 0 23px;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding: 10px;
+    flex: 0 0 33%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  .visitors_data {
+    padding: 0 0 0 19px;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding: 10px 0 0;
+    }
+
+    div {
+      padding: 1px 0;
+    }
+  }
+}
+
+.visitors_data {
+
+  .visitors_today,
+  .visitors_mobile {
+
+    span {
+      color: #FF335A;
+    }
+  }
+
+  .visitors_week,
+  .visitors_last_week {
+
+    span {
+      color: #3dbdd6;
+    }
+  }
+
+  .visitors_total,
+  .visitors_all,
+  .visitors_desktop {
+
+    span {
+      color: #67cc2e;
+    }
+  }
+
+  .visitors_users {
+
+    span {
+      color: #ff9501;
+    }
+  }
+
+  .visitors_guests {
+
+    span {
+      color: #3bbdd3;
+    }
+  }
+}
+
+[id*=visitors_donut],
+[id*=visitors_platform_donut],
+[id*=visitors_users_donut] {
+  width: 60px;
+  height: 60px;
+}
+
+.amcharts-chart-div {
+  cursor: inherit !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box-body {
+  padding: 13px 15px;
+}
