@@ -23,6 +23,7 @@
           :userId="user.id"
           :from="from"
           :hide="hide"
+          v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
         />
       </div>
     </div>

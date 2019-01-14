@@ -14,6 +14,7 @@
         :postId="post.id"
         :user="post.author"
         :from="from"
+        v-on:clickOnDetailsView="clickOnCommentForm"
       />
       <p class="text hidden-desktop" v-html="post.text"></p>
       <Media

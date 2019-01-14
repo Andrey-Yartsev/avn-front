@@ -1,11 +1,15 @@
 <template>
   <div class="more-functions__dropdown-inside">
     <ul>
-      <template v-if="!isOwner(userId) && isAuth()">
-        <li>
-          <button class="report" type="button" @click="reportUser">Report post</button>
-        </li>
-      </template>
+      <li
+        v-if="$mq === 'mobile'"
+        class="more-functions__details"
+      >
+        <a href="#" @click.prevent="detailView">Details</a>
+      </li>
+      <li v-if="!isOwner(userId) && isAuth()">
+        <button class="report" type="button" @click="reportUser">Report post</button>
+      </li>
       <li v-if="copied" >
         <button class="btn-copy-link copied" type="button">Copied!</button>
       </li>
@@ -62,6 +66,10 @@ export default {
     }
   },
   methods: {
+    detailView() {
+      this.hide();
+      this.$emit("clickOnDetailsView");
+    },
     copyHref() {
       execCopy(this.href);
       this.copied = true;
