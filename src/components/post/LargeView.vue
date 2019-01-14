@@ -1,7 +1,8 @@
 <template>
   <div 
       :class="['post postPage', {
-        'post_preparation': !post.isMediaReady
+        'post_preparation': !post.isMediaReady,
+        'lightbox-post': !showAddCommentForm
       }]"
     >
     <div class="postPage-content">
@@ -72,7 +73,7 @@
                 <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
               </div>
               <button type="submit" class="btn" disabled>Send tip</button>
-             </form>
+            </form>
             </template>
           </template>
           <template v-else>
