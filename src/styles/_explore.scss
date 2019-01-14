@@ -388,6 +388,13 @@
       .overlay {
         display: none;
       }
+
+      .video-placeholder {
+        
+        &:after {
+          color: #fff;
+        }
+      }
     }
 
     &:after {
