@@ -51,11 +51,14 @@
       width: 100%;
     }
 
-    .explore-page & {
+    &.lightbox-post {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        justify-content: center;
-        flex-direction: column;
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          justify-content: center;
+          flex-direction: column;
+        }
       }
     }
   }
@@ -148,6 +151,9 @@
       bottom: 0;
       overflow-y: auto;
     }
+  }
+
+  .lightbox-post & {
 
     .explore-page & {
 
@@ -168,10 +174,13 @@
       flex: 0 0 44px;
     }
 
-    .explore-page & {
+    .lightbox-post & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
       }
     }
   }
@@ -272,6 +281,13 @@
       max-height: calc(100vh - 120px);
       min-height: 440px;
     }
+
+    &:not(.lightbox-post) {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background-color: $white;
+      }
+    }
   }
 
   .right-col {
@@ -285,14 +301,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 100%;
       background: $white;
-    }
-
-    .explore-page & {
-
-      @include media-breakpoint-down($mobile-breakpoint) {
-        flex: 0 0 auto;
-        width: 100%;
-      }
     }
   }
 
@@ -324,18 +332,6 @@
       padding-bottom: 16px;
     }
 
-    .explore-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        border-bottom: none;
-        margin-bottom: 0;
-        color: #fff;
-        padding-bottom: 0;
-        min-height: auto;
-        position: static;
-      }
-    }
-
     &__btn {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -347,6 +343,82 @@
       }
     }
   }
+
+  &.lightbox-post {
+
+    .actions {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          border-bottom: none;
+          margin-bottom: 0;
+          color: #fff;
+          padding-bottom: 0;
+          min-height: auto;
+          position: static;
+        }
+      }
+
+      &__btn {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($mobile-breakpoint) {
+            opacity: .7;
+            flex: 0 0 28%;
+          }
+        }
+      }
+
+      .date {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            position: absolute;
+            right: 15px;
+            top: 4px;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .text {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+
+    .more-functions {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          right: 7px;
+          top: auto;
+          bottom: -5px;
+        }
+      }
+    }
+
+    .right-col {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($mobile-breakpoint) {
+          flex: 0 0 auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+
   .tip-form {
     @include media-breakpoint-down($desktop-breakpoint) {
       order: -1;
@@ -395,10 +467,13 @@
     }
   }
 
-  .explore-page & {
+  .lightbox-post & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
 

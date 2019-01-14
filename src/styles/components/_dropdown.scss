@@ -106,10 +106,13 @@
         color: $main-color;
       }
 
-      .explore-page & {
+      .lightbox-post & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          @include color-settings-dots(#fff, 1);
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            @include color-settings-dots(#fff, 1);
+          }
         }
       }
     }

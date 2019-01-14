@@ -82,13 +82,16 @@
       z-index: 2;
     }
 
-    .explore-page & {
+    .lightbox-post & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        width: 100%;
-        color: #fff;
-        padding-top: 0;
-        position: static;
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          width: 100%;
+          color: #fff;
+          padding-top: 0;
+          position: static;
+        }
       }
     }
 
@@ -117,20 +120,26 @@
         font-size: 15px;
       }
 
-      .explore-page & {
+      .lightbox-post & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          font-size: 13px;
-          display: none;
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            font-size: 13px;
+            display: none;
+          }
         }
       }
       
       a {
-        
-        .explore-page & {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
-            color: #fff;
+        .lightbox-post & {
+
+          .explore-page & {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              color: #fff;
+            }
           }
         }
       }
@@ -140,13 +149,16 @@
 
       &_sm {
 
-        .explore-page & {
+        .lightbox-post & {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
-            width: 24px;
-            height: 24px;
-            font-size: 24px;
-            flex: 0 0 24px;
+          .explore-page & {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              width: 24px;
+              height: 24px;
+              font-size: 24px;
+              flex: 0 0 24px;
+            }
           }
         }
       }
@@ -155,10 +167,13 @@
 
         &:before {
 
-          .explore-page & {
+          .lightbox-post & {
 
-            @include media-breakpoint-down($desktop-breakpoint) {
-              box-shadow: none;
+            .explore-page & {
+
+              @include media-breakpoint-down($desktop-breakpoint) {
+                box-shadow: none;
+              }
             }
           }
         }
@@ -167,10 +182,13 @@
 
     .name {
 
-      .explore-page & {
+      .lightbox-post & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          font-size: 13px;
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            font-size: 13px;
+          }
         }
       }
     }
@@ -185,13 +203,6 @@
 
     .postPageWrapper & {
       padding-bottom: 7px;
-
-      .explore-page & {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: none;
-        }
-      }
     }
 
     &:empty {
@@ -231,14 +242,6 @@
         margin: 0 10px 0 0;
       }
 
-      .explore-page & {
-
-        @include media-breakpoint-down($mobile-breakpoint) {
-          opacity: .7;
-          flex: 0 0 28%;
-        }
-      }
-
       &.active {
         opacity: 1;
         color: $primary-color;
@@ -258,16 +261,6 @@
 
     .date {
       margin-left: auto;
-
-      .explore-page & {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          position: absolute;
-          right: 15px;
-          top: 4px;
-          opacity: 1;
-        }
-      }
     }
   }
 
@@ -338,15 +331,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       right: 7px;
       top: 9px;
-    }
-
-    .explore-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        right: 7px;
-        top: auto;
-        bottom: -5px;
-      }
     }
 
     &.open {
@@ -944,10 +928,13 @@
     position: fixed;
   }
 
-  .explore-page & {
+  .lightbox-post & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
 
