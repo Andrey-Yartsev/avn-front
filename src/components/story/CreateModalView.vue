@@ -12,7 +12,7 @@
                 <button class="close" @click="close">
                   <span class="category-name hidden-desktop">Story</span>
                 </button>
-                <button disabled="disabled" class="newStory btn hidden-desktop">Add</button>
+                <button class="newStory btn hidden-desktop">Add</button>
               </div>
             </div>
             <div class="storyPlaceholder">
