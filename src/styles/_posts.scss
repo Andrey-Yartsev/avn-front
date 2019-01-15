@@ -591,7 +591,22 @@
         font-size: 0;
       }
     }
+
+    .video-placeholder {
+      display: block;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
   }
+  
   .gif-player {
     position: relative;
     .gif-img {
@@ -895,6 +910,7 @@
     line-height: 40px;
     opacity: .7;
     transition: opacity .3s;
+    filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
 
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 60px;
