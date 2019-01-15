@@ -132,7 +132,7 @@ export default {
     },
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
-        postId: this.post.id,
+        post: this.post,
         text: msg
       });
     },

@@ -42,7 +42,8 @@ export default {
         });
     },
 
-    sendPostComment({ commit }, { postId, text }) {
+    sendPostComment({ commit }, { post, text }) {
+      const postId = post.id;
       return PostApi.sendPostComment({ postId, text })
         .then(response => {
           if (response.status === 200) {
@@ -59,7 +60,7 @@ export default {
                   post_id: postId,
                   post_user_id: comment.author.id,
                   comment_id: comment.id,
-                  owner: comment.author.id
+                  owner: post.author.id
                 }
               });
             });
@@ -74,7 +75,6 @@ export default {
       const postId = post.id;
       return PostApi.likePost({ postId, addLike })
         .then(response => {
-          console.log(response.status);
           if (response.status === 200) {
             response.json().then(function(r) {
               const { isFavorite, favoritesCount } = r;

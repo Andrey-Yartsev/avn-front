@@ -6,8 +6,6 @@ import Store from "@/store";
 
 export default class Ws extends EventEmitter {
   constructor(actions) {
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^");
-
     super();
     this.actions = actions;
     this.doNotReconnect = false;
