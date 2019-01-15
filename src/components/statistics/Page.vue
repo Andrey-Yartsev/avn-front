@@ -1,7 +1,7 @@
 <template>
   <div class=boxes>
     <div class=cols>
-      <div class=col>
+      <div class="col col-1-3">
         <div class=box id=followers-box>
           <h3 class=box-title>
             Followers
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class=col>
+      <div class="col col-1-3">
         <div class="box" id="posts-box">
           <h3 class="box-title">
             Posts
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class=col>
+      <div class="col col-1-3">
         <div class=box id=stories-box>
           <h3 class=box-title>
             Stories
