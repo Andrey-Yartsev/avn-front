@@ -102,7 +102,7 @@
       <div class="chatCollectionContentWrapper">
         <div class="chatMessagesCollectionView" :class="{'no-selected-conversation': !selected.length}">
           <div class="chat-section chat-section_loading" v-if="sending">
-            <Loader :fullscreen="false" text="Sending..." class="transparent small"/>
+            <Loader :fullscreen="false" text="Sending..." class="semitransparent small"/>
           </div>
           <div class="chat-section" v-else>
             <div class="chatContent"></div>

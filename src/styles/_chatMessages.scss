@@ -185,13 +185,26 @@
   &_loading {
     flex: 1;
 
+    .chat-page_new & {
+      position: static;
+    }
+
     + .chat-section {
       flex: 0 0 auto;
       opacity: 0;
     }
+
+    .lds-dual-ring {
+      bottom: 0;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        top: -44px;
+      }
+    }
   }
 
   > .chatContent {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-top: auto;
       margin-bottom: 0;

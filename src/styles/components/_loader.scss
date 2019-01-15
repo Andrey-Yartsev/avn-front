@@ -34,6 +34,25 @@
     }
   }
 
+  &.semitransparent {
+    background-color: transparent;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: $white;
+      opacity: .4;
+    }
+
+    .loader-text {
+      color: $main-color;
+    }
+  }
+
   &.page-loader {
     background-color: $white;
 
