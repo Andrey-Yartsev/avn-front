@@ -1,6 +1,4 @@
-import Store from "@/store";
-import Fingerprint from "fingerprintjs2";
-import moment from "moment";
+import Ws from "./lib/Ws";
 
 import stream from "./actions/stream";
 import stream_stop from "./actions/stream_stop";
@@ -34,64 +32,6 @@ const actions = {
   new_feed_post
 };
 
-const EventEmitter = require("events");
+const ws = new Ws(actions);
 
-export default class extends EventEmitter {
-  start(reconnect) {
-    if (reconnect) {
-      console.log("ws reconnected");
-    } else {
-      console.log("ws connected");
-    }
-    const tz = moment().format("ZZ");
-    const ws = new WebSocket(process.env.VUE_APP_WS_URL);
-    this.ws = ws;
-    console.log("!!!!!!");
-
-    ws.onopen = () => {
-      new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
-        console.log(Store.state.auth.token);
-        ws.send(
-          JSON.stringify({
-            sess: Store.state.auth.token,
-            act: "connect",
-            fp,
-            tz
-          })
-        );
-        this.emit("open");
-      });
-    };
-    ws.onmessage = r => {
-      const data = JSON.parse(r.data);
-      this.emit("message", data);
-      console.log("ws:", data);
-      const keys = Object.keys(data);
-      for (let key of keys) {
-        if (actions[key]) {
-          actions[key](data[key]);
-        }
-      }
-    };
-    ws.onclose = () => {
-      setTimeout(() => {
-        if (!this.doNotReconnect) {
-          this.start(true);
-        }
-      }, 5000);
-    };
-  }
-  connect() {
-    this.doNotReconnect = false;
-    this.start();
-  }
-  close() {
-    this.doNotReconnect = true;
-    console.log("ws disconnected");
-    this.ws.close();
-  }
-  send(data) {
-    data.sess = Store.state.auth.token;
-    this.ws.send(JSON.stringify(data));
-  }
-}
+export default ws;
