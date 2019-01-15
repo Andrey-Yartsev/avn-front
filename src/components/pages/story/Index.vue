@@ -81,7 +81,9 @@
           <div class="more-functions__dropdown-inside">
             <ul>
               <li><button class="deleteStory" type="button" @click="deleteStory">Delete</button></li>
-              <li><button class="saveFile" type="button" @click="saveFile">Save</button></li>
+              <li>
+                <a :href="currentStory.src.source" download>Save</a>
+              </li>
               <li><button class="storySettings" type="button" @click="storySettings">Story Settings</button></li>
             </ul>
           </div>
@@ -352,10 +354,10 @@ export default {
       this.$router.push("/settings/story");
     },
 
-    saveFile: function() {
-      window.open(this.currentStory.src.source, "_blank");
-      this.hideDropdawn();
-    },
+    // saveFile: function() {
+    //   window.open(this.currentStory.src.source, "_blank");
+    //   this.hideDropdawn();
+    // },
 
     videoEventPlay: function() {
       if (this.currentStory.mediaType === "video") {
