@@ -1253,8 +1253,10 @@
   }
 
   .profile-tip-btn {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       width: auto;
+      margin-left: 0;
     }
   }
 
