@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
       :class="['post', {
         'open-dropdown-inside': showDropdawn,
         'post_preparation': !post.isMediaReady
@@ -23,8 +23,8 @@
         :openModal="openModal"
         mediaSize="preview"
       />
-      <Actions 
-        :post="post" 
+      <Actions
+        :post="post"
         v-on:postShowCommentForm="showForm"
         v-on:postLike="likePost"
         @toggleTip="showTip = !showTip"
@@ -53,10 +53,11 @@ import Media from "@/components/common/postParts/media/Index";
 import Actions from "@/components/common/postParts/actions/Index";
 import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import User from "@/mixins/user";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, User],
   data: function() {
     return {
       showAddCommentForm: false,
@@ -142,7 +143,7 @@ export default {
       }
 
       this.$store.dispatch(this.actionPrefix + "/likePost", {
-        postId: this.post.id,
+        post: this.post,
         addLike: !this.post.isFavorite
       });
     },
@@ -167,6 +168,15 @@ export default {
   },
   created() {
     this.getComments();
+    this.$root.ws.send({
+      act: "collect",
+      message: "view_post_in_feed",
+      data: {
+        post_id: this.post.id,
+        owner: this.post.author.id,
+        duration: 1
+      }
+    });
   }
 };
 </script>

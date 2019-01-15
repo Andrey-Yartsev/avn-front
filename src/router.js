@@ -376,8 +376,7 @@ const routes = [
     path: "/statistics",
     component: StatPage,
     meta: {
-      staticPage: true,
-      cssName: "staticPage"
+      cssName: "settings"
     }
   },
   // PROFILE ZONE

@@ -89,7 +89,7 @@
 
 <script>
 import dateFns from "date-fns";
-import userMixin from "@/mixins/user";
+import User from "@/mixins/user";
 import Header from "@/components/common/postParts/header/Index";
 import Actions from "@/components/common/postParts/actions/Index";
 import Media from "@/components/common/postParts/media/Index";
@@ -99,7 +99,7 @@ import Tip from "@/components/common/tip/User";
 
 export default {
   name: "PostLastView",
-  mixins: [userMixin],
+  mixins: [User],
   computed: {
     actionPrefix() {
       return this.from;
@@ -148,7 +148,7 @@ export default {
     },
     likePost() {
       this.$store.dispatch(this.actionPrefix + "/likePost", {
-        postId: this.post.id,
+        post: this.post,
         addLike: !this.post.isFavorite
       });
     },
@@ -182,6 +182,19 @@ export default {
       this.showTip = false;
       this.$refs.tip.reset();
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.$root.ws.send({
+        act: "collect",
+        message: "view_post",
+        data: {
+          post_id: this.post.id,
+          owner: this.post.author.id,
+          duration: 1
+        }
+      });
+    }, 2000);
   }
 };
 </script>

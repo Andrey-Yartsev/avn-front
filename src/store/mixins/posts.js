@@ -1,4 +1,5 @@
 import PostApi from "@/api/post";
+import ws from "@/ws";
 
 export default {
   actions: {
@@ -50,6 +51,17 @@ export default {
                 postId,
                 comment
               });
+
+              ws.send({
+                act: "collect",
+                message: "comment_added",
+                data: {
+                  post_id: postId,
+                  post_user_id: comment.author.id,
+                  comment_id: comment.id,
+                  owner: comment.author.id
+                }
+              });
             });
           }
         })
@@ -58,15 +70,29 @@ export default {
         });
     },
 
-    likePost({ commit }, { postId, addLike }) {
+    likePost({ commit }, { post, addLike }) {
+      const postId = post.id;
       return PostApi.likePost({ postId, addLike })
         .then(response => {
+          console.log(response.status);
           if (response.status === 200) {
-            response.json().then(function({ isFavorite, favoritesCount }) {
+            response.json().then(function(r) {
+              const { isFavorite, favoritesCount } = r;
               commit("postLikeSuccess", {
                 postId,
                 isFavorite,
                 favoritesCount
+              });
+
+              ws.send({
+                act: "collect",
+                message: addLike ? "post_like" : "post_unlike",
+                data: {
+                  post_id: post.id,
+                  post_user_id: post.author.id,
+                  weight: addLike ? 1 : -1,
+                  owner: post.author.id
+                }
               });
             });
           }

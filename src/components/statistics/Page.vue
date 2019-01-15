@@ -161,9 +161,10 @@ export default {
     };
   },
   created() {
-    this.webSocket = new Ws();
+    this.webSocket = Ws;
     this.webSocket.connect();
-    this.webSocket.on("open", () => {
+    this.webSocket.on("connect", () => {
+      console.log("stat: ws connected");
       this.sendWsRequests();
     });
     this.webSocket.on("message", data => {
@@ -193,6 +194,8 @@ export default {
       this.getUserStatistics("post_comment_added_count_last_week");
       //
       this.getUserStatistics("new_post_detailed_histogram_last_week");
+      this.getUserStatistics("view_post_detailed_histogram_last_week");
+      this.getUserStatistics("post_comment_added_detailed_histogram_last_week");
     },
     setCounter(ref, title, value) {
       if (title) {
@@ -202,7 +205,8 @@ export default {
       }
       this.$refs[ref].innerHTML = title + "<span>" + value + "</span>";
     },
-    updateChart(chart, statData, dataProviderKey) {
+    updateChart(chart, statData, dataProviderKey, statDataSubKey) {
+      console.log(dataProviderKey, statData);
       const approx = {};
       for (let index in statData) {
         if (statData.hasOwnProperty(index)) {
@@ -219,7 +223,13 @@ export default {
             "undefined" !== typeof approx[currIndex]
               ? parseInt(approx[currIndex], 10)
               : 0;
-          approx[currIndex] = val + statData[index];
+          let v;
+          if (statDataSubKey) {
+            v = statData[index][statDataSubKey];
+          } else {
+            v = statData[index];
+          }
+          approx[currIndex] = val + v;
         }
       }
       for (let i in approx) {
@@ -387,7 +397,19 @@ export default {
           this.updateChart(this.posts_charts, statData, "posts");
           break;
 
-        // case "view_post_detailed_histogram_last_week":
+        case "view_post_detailed_histogram_last_week":
+          this.updateChart(this.posts_charts, statData, "views");
+          break;
+
+        case "post_comment_added_detailed_histogram_last_week":
+          this.updateChart(this.posts_charts, statData, "comments");
+          break;
+
+        case "post_like_detailed_histogram_last_week":
+          this.updateChart(this.posts_charts, statData, "likes", "total");
+          break;
+
+        // case "":
         //   var approx_arr = {};
         //   for (var index in statData) {
         //     if (statData.hasOwnProperty(index)) {
@@ -405,10 +427,11 @@ export default {
         //     }
         //   }
         //   for (var i in approx_arr) {
-        //     posts_charts.dataProvider[i].views = approx_arr[i];
+        //     posts_charts.dataProvider[i].comments = approx_arr[i];
         //   }
         //   posts_charts.validateData();
         //   break;
+
         //
         // case "post_like_detailed_histogram_last_week":
         //   var approx_arr = {};
@@ -433,28 +456,6 @@ export default {
         //   posts_charts.validateData();
         //   break;
         //
-        // case "post_comment_added_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(posts_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     posts_charts.dataProvider[i].comments = approx_arr[i];
-        //   }
-        //   posts_charts.validateData();
-        //   break;
         //
         // case "story_added_detailed_histogram_last_week":
         //   var approx_arr = {};

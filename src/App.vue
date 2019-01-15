@@ -54,10 +54,10 @@ import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 
-import rootClasses from "@/rootClasses";
-import Ws from "@/ws";
 import Cookie from "@/utils/cookie";
+import rootClasses from "@/rootClasses";
 import postMessageHandler from "@/postMessage";
+import ws from "@/ws";
 
 // iterate
 
@@ -196,7 +196,7 @@ export default {
     }
   },
   created() {
-    this.webSocket = new Ws();
+    this.webSocket = ws;
     this.webSocket.connect();
     this.$root.ws = this.webSocket;
 
