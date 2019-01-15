@@ -431,11 +431,11 @@
   }
 
   img {
-    max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
     background: #fff;
+    width: 100%;
 
     &.locked {
 
@@ -575,9 +575,10 @@
     text-align: center;
 
     .postLink {
-      display: inline-block;
+      display: block;
       position: relative;
       vertical-align: top;
+      flex: 0 0 100%;
     }
 
     &.active {

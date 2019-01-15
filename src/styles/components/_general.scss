@@ -195,6 +195,7 @@ video {
 .locked-picture {
   overflow: hidden;
   position: relative;
+  flex: 0 0 100%;
 
   &:after {
     content: "\E61B";
