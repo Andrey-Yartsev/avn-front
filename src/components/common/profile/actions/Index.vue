@@ -17,8 +17,8 @@
           </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
-          <router-link to="/settings/profile" class="btn-edit-profile">Edit profile</router-link>
-          <button class="btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
+          <router-link to="/settings/profile" class="profile-actions__btn btn-with-icon btn-edit-profile">Edit profile</router-link>
+          <button class="profile-actions__btn btn-with-icon btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
         </div>
         <div class="profile-actions" v-else>
           <div class="profile-actions-tip-form" :class="{show: showTip}">
@@ -30,7 +30,7 @@
           </div>
           <button
             v-if="profile.canEarn"
-            type="button" class="profile-actions__btn profile-tip-btn selected"
+            type="button" class="profile-actions__btn btn-with-icon profile-tip-btn selected"
             @click="openTip"
           >Fund</button>
           <SubscribeButton
@@ -38,11 +38,11 @@
             @requested="subsRequested"
             ref="subscribeButton"
           />
-          <div class="subscribeView" v-if="!profile.subscribedBy">
+          <div class="subscribeView profile-actions__btn" v-if="!profile.subscribedBy">
             <div
               v-if="profile.followedBy"
               @click="unfollow"
-              class="profile-actions__btn btn-subscribe disable-state">
+              class="btn-with-icon btn-subscribe disable-state">
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
@@ -50,7 +50,7 @@
             <div
               v-else
               @click="follow"
-              class="profile-actions__btn btn-subscribe">
+              class="btn-with-icon btn-subscribe">
               <div class="btn-subscribe__label">
                 Follow
               </div>
@@ -60,7 +60,7 @@
             v-if="profile.followedBy"
             @click="sendMessage"
             type="button" 
-            class="profile-actions__btn profile-message-btn"
+            class="profile-actions__btn btn-with-icon profile-message-btn"
           >
             Message
           </button>
