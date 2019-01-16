@@ -1,7 +1,7 @@
 <template>
   <span class="subscribeView" v-if="!profile.subscribedBy">
     <div
-      class="profile-actions__btn btn-subscribe"
+      class="btn-with-icon btn-with-icon btn-subscribe"
       @click="profile.followedBy ? unfollow() : follow()"
     >
       <div class="btn-subscribe__label">

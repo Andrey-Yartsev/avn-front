@@ -158,26 +158,20 @@ button,
   }
 }
 
-.subscribe-cost,
-.profile-message-btn,
-.profile-tip-btn,
-.btn-edit-profile,
-.btn-make-post {
-  text-align: center;
-}
-
-.subscribe-cost,
-.btn-subscribe,
-.profile-message-btn,
-.profile-tip-btn,
-.btn-edit-profile,
-.btn-make-post {
+.profile-actions__btn {
   font-size: 13px;
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
   transition: color 0.3s ease;
+  text-align: center;
+}
+
+.btn-with-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   &:before {
     display: block;
@@ -186,48 +180,15 @@ button,
     @include icon-font;
     width: 22px;
     height: 22px;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    white-space: nowrap;
-    padding: 10px 0 8px;
-    margin: 0;
+    transition: all 0.3s;
   }
 }
-
-.subscribe-cost,
-.btn-subscribe,
-.profile-message-btn,
-.profile-tip-btn,
-.btn-edit-profile,
-.btn-make-post {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 0 0 76px;
-    width: 76px;
-  }
-
-  .profile-page & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 auto;
-      width: auto;
-      margin-left: 25px;
-    }
-  }
-}
-
-
 
 .btn-subscribe,
 .btn-edit-profile {
   color: $main-color;
   transition: all 0.3s;
   opacity: 0.4;
-
-  &:before {
-    transition: all 0.3s;
-  }
 
   &:hover {
     color: $main-color;
@@ -257,10 +218,6 @@ button,
 
   &:hover {
     color: $secondary-color-darken;
-  }
-
-  &:before {
-    content: "\E611";
   }
 }
 
@@ -305,10 +262,6 @@ button,
     font-size: 24px;
     line-height: 24px;
     margin-bottom: 2px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 1px;
-    }
   }
 
   &:hover {
@@ -317,6 +270,7 @@ button,
 }
 
 .subscribeView {
+
   .btn-subscribe {
     background-color: transparent;
     opacity: 1;
@@ -324,36 +278,19 @@ button,
     transition: color 0.3s ease, opacity 0.3s ease;
     font-size: 13px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      min-width: 70px;
-    }
-
-    .profile-page & {
+    .searchView & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        min-width: auto;
+        min-width: 70px;
       }
     }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //min-width: 80px;
-    }
-
     .userCollectionView & {
-      min-width: auto;
+      //min-width: auto;
     }
 
     &:hover {
       color: $primary-color-darken;
-    }
-
-    &.disable-state {
-      color: $main-color;
-      opacity: 0.4;
-
-      &:hover {
-        opacity: 1;
-      }
     }
 
     &.alt {
@@ -379,7 +316,6 @@ button,
   @include media-breakpoint-up($desktop-breakpoint) {
     flex-direction: column;
     display: flex;
-    padding: 9px 0 8px;
     align-content: center;
     align-items: center;
   }
@@ -389,10 +325,18 @@ button,
     font-size: 28px;
     width: 28px;
     line-height: 28px;
-    margin-top: 3px;
-    margin-bottom: 2px;
-    transform: translate(-2px, -4px);
+    margin-bottom: 5px;
+    transform: translate(-2px, 0);
     transition: none;
+  }
+
+  &.disable-state {
+    color: $main-color;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__label {
@@ -410,17 +354,11 @@ button,
 }
 
 .subscribe-cost {
-  color: $main-color;
-  opacity: 0.4;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    height: 100%;
-  }
+  opacity: 1;
+  color: $primary-color;
 
   &__value {
     font-size: 13px;
-    margin-bottom: 4px;
-    margin-top: 2px;
 
     span {
       font-size: 21px;
@@ -435,6 +373,7 @@ button,
 
   &__label {
     position: relative;
+    margin-top: 4px;
 
     .show-on-hover {
       position: absolute;
@@ -444,18 +383,13 @@ button,
     }
   }
 
-  &.selected {
-    opacity: 1;
-    color: $primary-color;
-
-    &:hover {
-      color: $primary-color-darken;
-    }
-  }
-
   &.disable-state {
     color: $main-color;
     opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &:before {
@@ -464,7 +398,7 @@ button,
   }
 
   &:hover {
-    opacity: 1;
+    color: $primary-color-darken;
   }
 }
 

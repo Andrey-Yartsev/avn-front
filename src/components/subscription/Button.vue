@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="profile.canEarn"
-    class="subscribePaidView"
+    class="subscribePaidView profile-actions__btn"
     @click="subscription"
   >
     <div

@@ -247,7 +247,7 @@
   .subscribeView {
     min-width: 62px;
     margin-left: 13px;
-    margin-top: -10px;
+    //margin-top: -10px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 0;
@@ -281,14 +281,15 @@
   .user-actions {
     display: flex;
     justify-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
     border-bottom: none;
     padding: 0;
-    margin: 0;
+    margin: -5px 0 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       justify-content: space-between;
-      align-items: flex-end;
-      align-content: flex-end;
+      margin-top: 0;
     }
   }
 
@@ -300,6 +301,7 @@
 }
 
 .user-actions {
+  font-weight: 500;
 
   &:before,
   &:after {
@@ -322,53 +324,60 @@
       }
     }
 
+    &.active {
+      //color: $main-color;
+      //opacity: 0.4;
+    }
+
     &:before {
-      margin-top: 0;
-      margin-bottom: 1px;
-      transform: translate(-2px, -7px);
+      //margin-top: 0;
+      //margin-bottom: 1px;
+      //transform: translate(-2px, -7px);
 
       .searchView & {
 
         @include media-breakpoint-down($desktop-breakpoint) {
-          transform: translate(-2px, 0);
-          margin-bottom: 8px;
+          //transform: translate(-2px, 0);
+          //margin-bottom: 8px;
         }
       }
     }
   }
 
   .subscribe-cost {
-    color: $primary-color;
-    opacity: 1;
-    margin-top: -4px;
-    flex: 1;
+    //color: $primary-color;
+    //opacity: 1;
+    //margin-top: -4px;
+    //flex: 1;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0;
-      margin-top: -2px;
-      flex: 0 0 46%;
+      //padding: 0;
+      //margin-top: -2px;
+      //flex: 0 0 46%;
     }
 
     &.disable-state {
-      color: $main-color;
-      opacity: 0.4;
+      //color: $main-color;
+      //opacity: 0.4;
     }
 
     &__value {
-      margin-top: 0;
-      margin-bottom: 3px;
+      //margin-top: 0;
+      //margin-bottom: 3px;
     }
   }
 
   .subscribeView {
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 27%;
+      //flex: 0 0 27%;
     }
   }
 
   .more-functions {
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 27%;
+      //flex: 0 0 27%;
     }
 
     &__btn {
@@ -377,6 +386,14 @@
       &:before {
         margin-top: 6px;
         margin-bottom: 13px;
+      }
+    }
+
+    &.open {
+
+      .more-functions__dropdown {
+        right: -18px;
+        transform: translateY(5px);
       }
     }
   }

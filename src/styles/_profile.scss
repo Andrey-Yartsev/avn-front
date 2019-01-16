@@ -72,8 +72,9 @@
     .more-functions__btn {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 72px;
+        flex: 0 0 60px;
         width: 72px;
+        padding: 0;
       }
     }
   }
@@ -532,16 +533,6 @@
     }
   }
 
-  &__btn {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 60px;
-
-      &.more-functions {
-        padding-left: 8px;
-      }
-    }
-  }
-
   .subscribePaidView {
 
     &:empty {
@@ -556,11 +547,6 @@
     display: none;
   }
 
-  form,
-  .btn-subscribe {
-    height: 100%;
-  }
-
   button {
     background-color: transparent;
     padding: 0;
@@ -569,6 +555,7 @@
   }
 
   &.selected {
+
     .btn-subscribe {
       color: $primary-color;
       opacity: 1;
@@ -1056,9 +1043,6 @@
   transition: transform .3s;
 
   &.profile-position {
-    //transform: translate(66px, -21px);
-    //bottom: -.5em;
-    //left: -.3em;
     transform: translate(0, 0);
     left: -5px;
     bottom: -80px;
@@ -1185,6 +1169,11 @@
     height: 100%;
   }
 
+  &.disable-state {
+    color: $main-color;
+    opacity: 0.4;
+  }
+
   &__value {
     font-size: 13px;
     margin-bottom: 4px;
@@ -1226,34 +1215,11 @@
   }
 
   .subscribe-cost {
-    opacity: 1;
-    color: $primary-color;
     transition: color 0.3s ease, opacity 0.3s ease;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      min-width: 90px;
-    }
-
-    &:hover {
-      color: $primary-color-darken;
-    }
-
-    &.disable-state {
-      color: $main-color;
-      opacity: 0.4;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 3px;
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      min-width: auto;
-    }
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .profile-tip-btn {
@@ -1266,21 +1232,10 @@
 
   .profile-actions {
 
-    .profile-message-btn,
-    .profile-tip-btn,
-    .more-functions__btn,
-    .btn-edit-profile,
-    .subscribeView,
-    .btn-make-post,
-    .subscribePaidView {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        margin: 0 0.6em;
-      }
-    }
-
     .more-functions {
+
       &__btn {
+
         &:before {
           margin: 9px auto 12px;
         }
