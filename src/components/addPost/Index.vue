@@ -20,6 +20,7 @@
       <div class="text-media-container">
         <textarea
           @focus="expanded = true"
+          @blur="expanded = false"
           class="sm"
           placeholder="What is going on?"
           maxlength="500"
