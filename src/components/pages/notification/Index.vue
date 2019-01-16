@@ -45,7 +45,7 @@
           </div>
           <div class="content">
             <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
-            {{ v.text }}
+            <span class="notification-summary" v-html="v.text" />
           </div>
         </div>
       </VuePerfectScrollbar>
