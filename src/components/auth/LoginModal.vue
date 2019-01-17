@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-login" slot="content">
       <div class="content">
-        <div class="auth-block">
+        <div class="auth-block auth-block_sm-size">
           <form v-on:submit.stop.prevent="login">
             <input
               class="rounded"

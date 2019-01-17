@@ -1600,10 +1600,13 @@
           }
         }
 
-        .login,
-        .register {
-          --primary-color: #fff;
-          --secondary-color: #fff;
+        .btns-login-user {
+
+          .login,
+          > .register {
+            --primary-color: #fff;
+            --secondary-color: #fff;
+          }
         }
 
         .header-wrapper {

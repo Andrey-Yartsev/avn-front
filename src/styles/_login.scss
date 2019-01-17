@@ -224,7 +224,47 @@
   }
 }
 
+.auth-header-block {
+  position: relative;
+}
+
+.auth-block-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 290px;
+  transition: all 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+
+  &:after {
+    position: absolute;
+    content: "";
+    z-index: 10;
+    top: 4px;
+    right: 32px;
+    border-bottom: 12px solid $white;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+  }
+
+    .show-block & {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
 .auth-block {
+
+  .auth-header-block & {
+    background-color: $white;
+    padding: 30px 20px;
+    border-radius: 6px;
+    margin: 16px 10px 0 0;
+    box-shadow: 0 6px 30px rgba(#000, 0.15);
+  }
 
   .login-or {
     margin: 0.5em 1.4em;
@@ -233,12 +273,6 @@
     color: $main-color;
     opacity: 0.3;
     font-size: 13px;
-
-    .popup & {
-      font-size: 11px;
-      padding-top: 0.4em;
-      padding-bottom: 0.4em;
-    }
 
     &:before,
     &:after {
@@ -270,26 +304,14 @@
       margin: auto;
     }
 
-    .popup & {
-      margin-top: 22px;
-    }
-
     h3 {
       font-weight: 300;
       font-size: 21px;
       margin: 0 0 6px;
-
-      .popup & {
-        font-size: 17px;
-        margin-bottom: 2px;
-      }
     }
+
     a.register {
       color: $default-secondary-color;
-
-      .popup & {
-        font-size: 13px;
-      }
 
       &:hover {
         color: $default-primary-color;
@@ -302,11 +324,6 @@
 
     p.forgot {
       padding: 31px 0 0;
-
-      .popup & {
-        margin-top: 10px;
-        font-size: 13px;
-      }
     }
   }
 
@@ -337,19 +354,43 @@
     }
   }
 
-  .btn {
-
-    .popup & {
-      font-weight: 400;
-      font-size: 13px;
-    }
-  }
-
   input {
     margin-bottom: 20px;
     border-radius: 24px;
+  }
 
-    .popup & {
+  &_sm-size {
+
+    .signUp {
+      margin-top: 22px;
+
+      h3 {
+        font-size: 17px;
+        margin-bottom: 2px;
+      }
+
+      a.register {
+        font-size: 13px;
+      }
+
+      p.forgot {
+        margin-top: 10px;
+        font-size: 13px;
+      }
+    }
+
+    .login-or {
+      font-size: 11px;
+      padding-top: 0.4em;
+      padding-bottom: 0.4em;
+    }
+
+    .btn {
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    input {
       font-size: 13px;
     }
   }
