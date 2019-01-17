@@ -241,3 +241,15 @@
 .box-body {
   padding: 13px 15px;
 }
+
+.user-statistics {
+  margin-top: 13px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  color: $main-color;
+
+  .user-login {
+    margin-left: 0;
+  }
+}

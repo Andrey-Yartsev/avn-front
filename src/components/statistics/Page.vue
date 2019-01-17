@@ -104,11 +104,11 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <h4>Followers</h4>
-                  <div class="users SearchResultsPopupView" v-if="topFollowers">
+                  <div class="users-statistics" v-if="topFollowers">
                     <router-link
                       v-for="v in topFollowers"
                       v-bind:key="v.id"
-                      class="user"
+                      class="user-statistics"
                       :to="'/' + v.username"
                     >
                       <span class="avatar avatar_gap-r-sm avatar_sm">
