@@ -278,6 +278,18 @@ export default {
   },
   created() {
     this.initPosts();
+
+    setTimeout(() => {
+      this.$root.ws.send({
+        act: "collect",
+        message: "view_profile",
+        data: {
+          profile_id: this.profile.id,
+          owner: this.profile.id,
+          duration: 1
+        }
+      });
+    }, 2000);
   },
   mounted() {
     this.footerListenScroll();
