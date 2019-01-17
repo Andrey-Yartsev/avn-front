@@ -33,9 +33,7 @@
           <nav class="user-menu">
             <div class="user-menu__col">
               <router-link class="user-menu-item user-menu-item__profile" :to="'/' + user.username">Profile</router-link>
-              <!--
               <router-link class="user-menu-item user-menu-item__statistics" to="/statistics">Statistics</router-link>
-              -->
               <router-link class="user-menu-item user-menu-item__payouts" to="/settings/payouts">Payouts</router-link>
               <router-link class="user-menu-item user-menu-item__payments" to="/settings/payments">Payments
               </router-link>

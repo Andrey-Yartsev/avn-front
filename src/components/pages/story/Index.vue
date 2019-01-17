@@ -403,6 +403,17 @@ export default {
       this.resetState();
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+    },
+    saveStat() {
+      this.$root.ws.send({
+        act: "collect",
+        message: "look_story",
+        data: {
+          story_user_id: this.author.id,
+          story_id: this.currentStory.id,
+          owner: this.author.id
+        }
+      });
     }
   },
   created() {
@@ -435,6 +446,8 @@ export default {
       this.$nextTick(() => {
         this.runProgress();
       });
+
+      this.saveStat();
     },
     $route() {
       this.init();
