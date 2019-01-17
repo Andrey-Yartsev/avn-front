@@ -803,6 +803,11 @@
 
 .amcharts-main-div {
   position: relative;
+
+  a {
+    // remove copyright
+    display:none !important;
+  }
 }
 
 .amcharts-chart-div {

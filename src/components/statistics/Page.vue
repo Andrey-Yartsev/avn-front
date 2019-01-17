@@ -1,6 +1,7 @@
 <template>
   <div class="boxes">
     <div class="cols">
+      <!--
       <div class="col col-1-3">
         <div class="box" id="followers-box">
           <h3 class="box-title">
@@ -19,7 +20,8 @@
           </div>
         </div>
       </div>
-      <div class="col col-1-3">
+      -->
+      <div class="col col-1-2">
         <div class="box" id="posts-box">
           <h3 class="box-title">
             Posts
@@ -37,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="col col-1-3">
+      <div class="col col-1-2">
         <div class="box" id="stories-box">
           <h3 class="box-title">
             Stories
@@ -425,21 +427,21 @@ export default {
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
 
       switch (data.statistics.code) {
-        case "current_subscribers_latest_now":
-          this.setCounter(
-            "chartsDataFollowersFollowers",
-            "Followers",
-            statData.length ? statData[0].message.data_count : 0
-          );
-          break;
-
-        case "user_subscribe_count_last_week":
-          this.setCounter("chartsDataFollowersSubscribed", false, statData);
-          break;
-
-        case "user_unsubscribe_count_last_week":
-          this.setCounter("chartsDataFollowersUnsubscribed", false, statData);
-          break;
+        // case "current_subscribers_latest_now":
+        //   this.setCounter(
+        //     "chartsDataFollowersFollowers",
+        //     "Followers",
+        //     statData.length ? statData[0].message.data_count : 0
+        //   );
+        //   break;
+        //
+        // case "user_subscribe_count_last_week":
+        //   this.setCounter("chartsDataFollowersSubscribed", false, statData);
+        //   break;
+        //
+        // case "user_unsubscribe_count_last_week":
+        //   this.setCounter("chartsDataFollowersUnsubscribed", false, statData);
+        //   break;
 
         case "new_post_count_last_week":
           this.setCounter("chartsDataPostsPosts", "Post", statData);
@@ -1500,7 +1502,7 @@ export default {
       const weekAgoDay = moment()
         .subtract(1, "week")
         .format("D MMMM");
-      this.$refs.chartPeriod1.innerHTML = weekAgoDay;
+      // this.$refs.chartPeriod1.innerHTML = weekAgoDay;
       this.$refs.chartPeriod2.innerHTML = weekAgoDay;
       this.$refs.chartPeriod3.innerHTML = weekAgoDay;
     }
