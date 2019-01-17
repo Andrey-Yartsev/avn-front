@@ -1,7 +1,7 @@
 <template>
   <div class="exploreAllStoriesView">
     <div class="explore-all-story">
-      <router-link to="explore/live" class="avatar with-story">
+      <router-link to="explore/live" class="avatar avatar_lg avatar_lg-desk with-story">
         <span class="avatar__slider">
           <span :class="['avatar__slide', {
             active: key === current,
