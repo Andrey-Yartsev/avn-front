@@ -542,6 +542,7 @@
 }
 
 .subscribeView {
+  cursor: pointer;
 
   &:empty {
     display: none;
