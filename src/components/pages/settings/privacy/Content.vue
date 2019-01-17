@@ -24,9 +24,9 @@
       </div>
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">
-          <div class="form-group form-group-checkbox">
+          <div class="form-group form-group_with-label form-group-checkbox">
             <label class="form-group-inner">
-              <span class="label">Blur posts content</span>
+              <span class="label label_align-start">Blur posts content</span>
               <div class="checkbox-wrapper">
                 <label class="checkbox-label">
                   <input type="checkbox" name="isPrivateHidePosts" value="true" v-model="localUser.isPrivateHidePosts">

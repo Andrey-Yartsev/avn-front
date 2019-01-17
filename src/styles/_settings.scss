@@ -326,6 +326,10 @@
 
 .add-options-blur {
 
+  @include media-breakpoint-up($desktop-breakpoint) {
+    border-bottom: 1px solid rgba($gray, 0.2);
+  }
+
   + .border-top-mobile {
     border-top: none;
   }

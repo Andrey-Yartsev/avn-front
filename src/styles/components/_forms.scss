@@ -138,6 +138,11 @@ label {
       height: 30px;
     }
 
+    &_align-start {
+      height: auto;
+      align-self: flex-start;
+    }
+
     .settings-page & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
