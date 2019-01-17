@@ -1,7 +1,7 @@
 
 .boxes {
   width: 100%;
-  max-width: 940px;
+  max-width: $width-wrapper;
   margin: 20px auto;
 
   @include media-breakpoint-down($desktop-breakpoint) {

@@ -260,7 +260,7 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    max-width: 940px;
+    max-width: $width-wrapper;
     width: 100%;
     flex: 1;
     margin-bottom: 20px;

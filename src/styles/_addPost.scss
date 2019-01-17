@@ -72,7 +72,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100%;
-    max-width: 940px;
+    max-width: $width-wrapper;
     margin: 0 auto;
     padding: 0 10px;
 

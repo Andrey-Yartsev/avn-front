@@ -621,7 +621,7 @@ $gradient-vert: linear-gradient(to top, $color2 0%, $color3 100%);
 .support-login-btns {
   position: absolute;
   top: 20px;
-  max-width: 940px;
+  max-width: $width-wrapper;
   width: 100%;
   text-align: right;
   left: 50%;
