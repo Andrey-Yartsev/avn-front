@@ -104,13 +104,41 @@
   }
 }
 
-.charts-wrapper-outer {
+.charts-wrapper {
 
-  &__visitors {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+  &_followers {
+    height: 75px;
   }
+
+  &_subscribed {
+    height: 60px;
+    margin-top: 15px;
+    margin-bottom: 2px;
+  }
+
+  &_posts,
+  &_stories {
+    height: 152px;
+  }
+
+  &-outer {
+
+    &__visitors {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex-direction: column;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+#visitors_map {
+  flex: 1;
+  height: 230px;
 }
 
 .visitors-donuts-wrapper-outer {
@@ -120,6 +148,7 @@
     padding: 10px;
     flex: 0 0 100%;
     display: flex;
+    justify-content: center;
   }
 }
 
@@ -137,6 +166,7 @@
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: flex-start;
+    justify-content: center;
     margin-bottom: 0;
   }
 
