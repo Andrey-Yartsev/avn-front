@@ -165,7 +165,7 @@ export default {
         if (!this.isSaving) {
           this.expanded = false;
         }
-      }, 100);
+      }, 300);
     },
     reset() {
       this.expanded = InitialState.expanded;
