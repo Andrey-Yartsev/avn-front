@@ -2,6 +2,7 @@
 
 import StoriesApi from "@/api/stories";
 import router from "@/router";
+import ws from "@/ws";
 
 const initState = {
   newPost: undefined,
@@ -34,6 +35,17 @@ const actions = {
           const url = `/stories/${userId}`;
           const newPost = await response.json();
           commit("savePostSuccess", newPost);
+
+          ws.send({
+            act: "collect",
+            message: "story_added",
+            data: {
+              story_id: newPost[0].id,
+              story_user_id: newPost[0].user.id,
+              owner: newPost[0].user.id
+            }
+          });
+
           if (router.history.current.fullPath !== url) {
             router.push(url);
           }

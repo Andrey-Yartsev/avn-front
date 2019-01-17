@@ -43,20 +43,11 @@
             Stories
             <span class="chart_period"><span ref="chartPeriod3"></span> - Today</span>
           </h3>
-          <div class="charts-wrapper-outer">
-            <div class="charts-data" id="charts-data-stories">
-				<span class="uploaded">
-					Uploaded
-					<span>0</span>
-				</span>
-              <span class="views">
-					Views
-					<span>0</span>
-				</span>
-              <span class="comments">
-					Comments
-					<span>0</span>
-				</span>
+          <div class=charts-wrapper-outer>
+            <div class=charts-data>
+              <span class=uploaded ref="chartsDataStoriesUploaded">Uploaded<span>0</span></span>
+              <span class=views ref="chartsDataStoriesViews">Views<span>0</span></span>
+              <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
             </div>
             <div id="stories_charts" class="charts-wrapper charts-wrapper_stories"></div>
             <div class="statistics-chart-scale"></div>
@@ -130,9 +121,10 @@
 </template>
 
 <script>
-import Ws from "@/ws";
+import ws from "@/ws";
 import moment from "moment";
 import pluralize from "pluralize";
+import tokenRequest from "@/utils/tokenRequest";
 
 const colorSchemes = [
   "#FF5979",
@@ -156,19 +148,23 @@ export default {
   name: "app",
   data() {
     return {
-      showedStats: {}
+      showedStats: {},
+      profileMapData: []
     };
   },
   created() {
-    this.webSocket = Ws;
-    this.webSocket.connect();
-    this.webSocket.on("connect", () => {
-      console.log("stat: ws connected");
+    if (!ws.connected) {
+      ws.connect();
+      ws.on("connect", () => {
+        this.sendWsRequests();
+      });
+    } else {
       this.sendWsRequests();
-    });
-    this.webSocket.on("message", data => {
-      this.onData(data);
-    });
+    }
+    ws.on("message", this.onData);
+  },
+  beforeDestroy() {
+    ws.removeListener("message", this.onData);
   },
   methods: {
     getUserStatistics(code, params) {
@@ -179,7 +175,7 @@ export default {
       if ("undefined" !== typeof params) {
         data = Object.assign(data, params);
       }
-      this.webSocket.send(data);
+      ws.send(data);
     },
     sendWsRequests() {
       // followers block
@@ -195,6 +191,23 @@ export default {
       this.getUserStatistics("new_post_detailed_histogram_last_week");
       this.getUserStatistics("view_post_detailed_histogram_last_week");
       this.getUserStatistics("post_comment_added_detailed_histogram_last_week");
+      //
+      this.getUserStatistics("story_added_count_last_week");
+      this.getUserStatistics("story_view_count_last_week");
+      this.getUserStatistics("story_comment_added_count_last_week");
+      this.getUserStatistics("story_added_detailed_histogram_last_week");
+      this.getUserStatistics("story_view_detailed_histogram_last_week");
+      this.getUserStatistics("story_comment_detailed_histogram_last_week");
+      //
+      this.getUserStatistics("view_profile_by_country_count_today");
+      this.getUserStatistics("view_profile_count_today");
+      this.getUserStatistics("view_profile_user_count_today");
+      this.getUserStatistics("view_profile_guest_count_today");
+      this.getUserStatistics("view_profile_count_last_week");
+      this.getUserStatistics("view_profile_count_all");
+      this.getUserStatistics("view_profile_by_device_count_today");
+      //
+      this.getUserStatistics("top_followers_count_today");
     },
     setCounter(ref, title, value) {
       if (title) {
@@ -205,7 +218,6 @@ export default {
       this.$refs[ref].innerHTML = title + "<span>" + value + "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
-      console.log(dataProviderKey, statData);
       const approx = {};
       for (let index in statData) {
         if (statData.hasOwnProperty(index)) {
@@ -235,6 +247,167 @@ export default {
         chart.dataProvider[i][dataProviderKey] = approx[i];
       }
       chart.validateData();
+    },
+    updateMap(statData) {
+      const sortable = [];
+      for (let index in statData) {
+        if (statData.hasOwnProperty(index)) {
+          sortable.push([index, statData[index]]);
+        }
+      }
+      sortable.sort((a, b) => {
+        return b[1] - a[1];
+      });
+      if (sortable.length) {
+        var alpha = sortable[0][1];
+        sortable.forEach((item, i) => {
+          this.profileMapData[i] = {
+            id: item[0],
+            alpha: 0.3 + (item[1] * 0.7) / alpha,
+            value: item[1]
+          };
+        });
+      }
+      if (this.profileMapData.length) {
+        this.mapChart.dataProvider.areas = this.profileMapData;
+        this.mapChart.validateData();
+      }
+    },
+    updateProfileDonut(donut, statData, refKey, color) {
+      if (!statData) {
+        return;
+      }
+      if ("#7c8b96" === donut.dataProvider[0].color) {
+        donut.dataProvider = [];
+        donut.outlineThickness = "1.5";
+        donut.alpha = 1;
+      }
+      donut.dataProvider[0] = {
+        value: statData,
+        color: color
+      };
+      donut.validateData();
+      this.$refs[refKey].innerHTML = statData;
+    },
+    updateProfileDonutCount(donut, statData, refKey, color, hasThird) {
+      if (!statData) {
+        return;
+      }
+      if ("#7c8b96" === donut.dataProvider[0].color) {
+        donut.dataProvider = [];
+        donut.outlineThickness = "1.5";
+        donut.alpha = 1;
+      }
+      if ("undefined" === typeof donut.dataProvider[0]) {
+        donut.dataProvider[0] = {
+          value: 0,
+          color: color
+        };
+      }
+      if (hasThird) {
+        if ("undefined" === typeof donut.dataProvider[1]) {
+          donut.dataProvider[1] = {
+            value: statData,
+            color: "#3dbdd6"
+          };
+        }
+        donut.dataProvider[2] = {
+          value: statData,
+          color: "#67cc2e"
+        };
+      } else {
+        donut.dataProvider[1] = {
+          value: statData,
+          color: "#3bbdd3"
+        };
+      }
+      donut.validateData();
+      this.$refs[refKey].innerHTML = statData;
+    },
+    updateProfileDeviceDonutCount(donut, statData) {
+      if ("undefined" !== typeof statData.mobile) {
+        if ("#7c8b96" === donut.dataProvider[0].color) {
+          donut.dataProvider = [];
+          donut.outlineThickness = "1.5";
+          donut.alpha = 1;
+        }
+        donut.dataProvider[0] = {
+          value: statData.mobile,
+          color: "#FF335A"
+        };
+
+        this.$refs.visitorsMobile.innerHTML = statData.mobile;
+      }
+      if ("undefined" !== typeof statData.desktop) {
+        if ("#7c8b96" === donut.dataProvider[0].color) {
+          donut.dataProvider = [];
+          donut.outlineThickness = "1.5";
+          donut.alpha = 1;
+        }
+        if ("undefined" === typeof donut.dataProvider[0]) {
+          donut.dataProvider[0] = {
+            value: 0,
+            color: "#FF335A"
+          };
+        }
+        donut.dataProvider[1] = {
+          value: statData.desktop,
+          color: "#67cc2e"
+        };
+        this.$refs.visitorsDesktop.innerHTML = statData.desktop;
+      }
+      donut.validateData();
+    },
+    async updateTopFollowers(statData) {
+      if (!statData || !statData.length) {
+        return;
+      }
+      const ids = statData.map(item => item.key_field);
+
+      const query = {};
+      query["ids[]"] = ids.join(",");
+
+      const response = await tokenRequest(`followers/check`, {
+        method: "GET",
+        query
+      });
+      const result = await response.json();
+      console.log(result);
+      // $.ajax({
+      //   url: "/followers/check",
+      //   type: "GET",
+      //   dataType: "json",
+      //   data: { ids: uids },
+      //   success: function(data) {
+      //     var list = $(".followers-list"),
+      //       html = "";
+      //     for (var i in data.users) {
+      //       if (data.users.hasOwnProperty(i)) {
+      //         html +=
+      //           '<a class=followers-item href="https://' +
+      //           data.users[i].username +
+      //           "." +
+      //           DOMAIN +
+      //           '">';
+      //         if (null === data.users[i].avatar) {
+      //           html += "<span class=followers-avatar></span>";
+      //         } else {
+      //           html +=
+      //             '<span class=followers-avatar style="background-image:url(' +
+      //             data.users[i].avatar +
+      //             ')"></span>';
+      //         }
+      //         html +=
+      //           "<span class=followers-name>" + data.users[i].name + "</span>";
+      //         html +=
+      //           "<span class=followers-username>@" +
+      //           data.users[i].username +
+      //           "</span></a>";
+      //       }
+      //     }
+      //     list.html(html);
+      //   }
+      // });
     },
     onData(data) {
       if (!data.statistics) {
@@ -284,10 +457,16 @@ export default {
           this.setCounter("chartsDataPostsComments", "Comment", statData);
           break;
 
-        // case 'story_added_count_last_week':
-        //   // $('#charts-data-stories .uploaded span').text(statData);
-        //   break;
-        //
+        case "story_added_count_last_week":
+          this.setCounter("chartsDataStoriesUploaded", "Uploaded", statData);
+          break;
+        case "story_view_count_last_week":
+          this.setCounter("chartsDataStoriesViews", "Views", statData);
+          break;
+        case "story_comment_count_last_week":
+          // this.setCounter("chartsDataStoriesComments", "Comment", statData);
+          break;
+
         // case 'story_view_count_last_week':
         //   // $('#charts-data-stories .views').html(pluralize('View', statData) + ' <span>' + statData + '</span>');
         //   break;
@@ -393,137 +572,33 @@ export default {
         //   break;
 
         case "new_post_detailed_histogram_last_week":
-          this.updateChart(this.posts_charts, statData, "posts");
+          this.updateChart(this.postsChart, statData, "posts");
           break;
 
         case "view_post_detailed_histogram_last_week":
-          this.updateChart(this.posts_charts, statData, "views");
+          this.updateChart(this.postsChart, statData, "views");
           break;
 
         case "post_comment_added_detailed_histogram_last_week":
-          this.updateChart(this.posts_charts, statData, "comments");
+          this.updateChart(this.postsChart, statData, "comments");
           break;
 
         case "post_like_detailed_histogram_last_week":
-          this.updateChart(this.posts_charts, statData, "likes", "total");
+          this.updateChart(this.postsChart, statData, "likes", "total");
           break;
 
-        // case "":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(posts_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     posts_charts.dataProvider[i].comments = approx_arr[i];
-        //   }
-        //   posts_charts.validateData();
-        //   break;
+        case "story_added_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "uploads");
+          break;
 
-        //
-        // case "post_like_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(posts_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].total;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     posts_charts.dataProvider[i].likes = approx_arr[i];
-        //   }
-        //   posts_charts.validateData();
-        //   break;
-        //
-        //
-        // case "story_added_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(stories_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     stories_charts.dataProvider[i].uploads = approx_arr[i];
-        //   }
-        //   stories_charts.validateData();
-        //   break;
-        //
-        // case "story_view_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(stories_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     stories_charts.dataProvider[i].views = approx_arr[i];
-        //   }
-        //   stories_charts.validateData();
-        //   break;
-        //
-        // case "story_comment_added_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(stories_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     stories_charts.dataProvider[i].comments = approx_arr[i];
-        //   }
-        //   stories_charts.validateData();
-        //   break;
+        case "story_view_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "views");
+          break;
+
+        case "story_comment_added_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "comments");
+          break;
+
         //
         // case "paid_subscriptions_detailed_histogram_last_week":
         //   var approx_arr = {};
@@ -617,204 +692,69 @@ export default {
         //   earnings_charts.validateData();
         //   break;
         //
-        // case "view_profile_count_today":
-        //   if (statData) {
-        //     if ("#7c8b96" === visitors_count_donut.dataProvider[0].color) {
-        //       visitors_count_donut.dataProvider = [];
-        //       visitors_count_donut.outlineThickness = "1.5";
-        //       visitors_count_donut.alpha = 1;
-        //     }
-        //     visitors_count_donut.dataProvider[0] = {
-        //       "value": statData,
-        //       "color": "#FF335A"
-        //     };
-        //     visitors_count_donut.validateData();
-        //     this.$refs.visitorsToday.innerHTML = statData;
-        //   }
-        //   break;
-        //
-        // case "view_profile_user_count_today":
-        //   if (statData) {
-        //     if ("#7c8b96" === visitors_users_count_donut.dataProvider[0].color) {
-        //       visitors_users_count_donut.dataProvider = [];
-        //       visitors_users_count_donut.outlineThickness = "1.5";
-        //       visitors_users_count_donut.alpha = 1;
-        //     }
-        //     visitors_users_count_donut.dataProvider[0] = {
-        //       "value": statData,
-        //       "color": "#ff9501"
-        //     };
-        //     visitors_users_count_donut.validateData();
-        //     this.$refs.visitorsUsers.innerHTML = statData;
-        //   }
-        //   break;
-        //
-        // case "view_profile_guest_count_today":
-        //   if (statData) {
-        //     if ("#7c8b96" === visitors_users_count_donut.dataProvider[0].color) {
-        //       visitors_users_count_donut.dataProvider = [];
-        //       visitors_users_count_donut.outlineThickness = "1.5";
-        //       visitors_users_count_donut.alpha = 1;
-        //     }
-        //     if ("undefined" === typeof visitors_users_count_donut.dataProvider[0]) {
-        //       visitors_users_count_donut.dataProvider[0] = {
-        //         "value": 0,
-        //         "color": "#ff9501"
-        //       };
-        //     }
-        //     visitors_users_count_donut.dataProvider[1] = {
-        //       "value": statData,
-        //       "color": "#3bbdd3"
-        //     };
-        //     visitors_users_count_donut.validateData();
-        //     this.$refs.visitorsGuests.innerHTML = statData;
-        //   }
-        //   break;
-        //
-        // case "view_profile_count_last_week":
-        //   if (statData) {
-        //     if ("#7c8b96" === visitors_count_donut.dataProvider[0].color) {
-        //       visitors_count_donut.dataProvider = [];
-        //       visitors_count_donut.outlineThickness = "1.5";
-        //       visitors_count_donut.alpha = 1;
-        //     }
-        //     if ("undefined" === typeof visitors_count_donut.dataProvider[0]) {
-        //       visitors_count_donut.dataProvider[0] = {
-        //         "value": 0,
-        //         "color": "#FF335A"
-        //       };
-        //     }
-        //     visitors_count_donut.dataProvider[1] = {
-        //       "value": statData,
-        //       "color": "#3dbdd6"
-        //     };
-        //     visitors_count_donut.validateData();
-        //     this.$refs.visitorsWeek.innerHTML = statData;
-        //   }
-        //   break;
-        //
-        // case "view_profile_count_all":
-        //   if (statData) {
-        //     if ("#7c8b96" === visitors_count_donut.dataProvider[0].color) {
-        //       visitors_count_donut.dataProvider = [];
-        //       visitors_count_donut.outlineThickness = "1.5";
-        //       visitors_count_donut.alpha = 1;
-        //     }
-        //     if ("undefined" === typeof visitors_count_donut.dataProvider[0]) {
-        //       visitors_count_donut.dataProvider[0] = {
-        //         "value": 0,
-        //         "color": "#FF335A"
-        //       };
-        //     }
-        //     if ("undefined" === typeof visitors_count_donut.dataProvider[1]) {
-        //       visitors_count_donut.dataProvider[1] = {
-        //         "value": 0,
-        //         "color": "#3dbdd6"
-        //       };
-        //     }
-        //     visitors_count_donut.dataProvider[2] = {
-        //       "value": statData,
-        //       "color": "#67cc2e"
-        //     };
-        //     visitors_count_donut.validateData();
-        //     this.$refs.visitorsTotal.innerHTML = statData;
-        //   }
-        //   break;
-        //
-        // case "view_profile_by_device_count_today":
-        //   if ("undefined" !== typeof statData.mobile) {
-        //     if ("#7c8b96" === visitors_platform_donut.dataProvider[0].color) {
-        //       visitors_platform_donut.dataProvider = [];
-        //       visitors_platform_donut.outlineThickness = "1.5";
-        //       visitors_platform_donut.alpha = 1;
-        //     }
-        //     visitors_platform_donut.dataProvider[0] = {
-        //       "value": statData.mobile,
-        //       "color": "#FF335A"
-        //     };
-        //
-        //     this.$refs.visitorsMobile.innerHTML = statData.mobile;
-        //   }
-        //   if ("undefined" !== typeof statData.desktop) {
-        //     if ("#7c8b96" === visitors_platform_donut.dataProvider[0].color) {
-        //       visitors_platform_donut.dataProvider = [];
-        //       visitors_platform_donut.outlineThickness = "1.5";
-        //       visitors_platform_donut.alpha = 1;
-        //     }
-        //     if ("undefined" === typeof visitors_platform_donut.dataProvider[0]) {
-        //       visitors_platform_donut.dataProvider[0] = {
-        //         "value": 0,
-        //         "color": "#FF335A"
-        //       };
-        //     }
-        //     visitors_platform_donut.dataProvider[1] = {
-        //       "value": statData.desktop,
-        //       "color": "#67cc2e"
-        //     };
-        //     this.$refs.visitorsDesktop.innerHTML = statData.desktop;
-        //   }
-        //   visitors_platform_donut.validateData();
-        //   break;
-        //
-        // case "view_profile_by_country_count_today":
-        //   var sortable = [];
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       sortable.push([index, statData[index]]);
-        //     }
-        //   }
-        //   sortable.sort(function (a, b) {
-        //     return b[1] - a[1];
-        //   });
-        //   if (sortable.length) {
-        //     var alpha = sortable[0][1];
-        //     sortable.forEach(function (item, i) {
-        //       profile_map_data[i] = {
-        //         "id": item[0],
-        //         "alpha": .3 + (item[1] * .7 / alpha),
-        //         "value": item[1]
-        //       };
-        //     });
-        //   }
-        //   if (profile_map_data.length) {
-        //     map_chart.dataProvider.areas = profile_map_data;
-        //     map_chart.validateData();
-        //   }
-        //   break;
-        // case 'top_followers_count_today':
-        //   var uids = [];
-        //   statData.forEach(function (item) {
-        //     uids.push(item.key_field);
-        //   });
-        //   if (uids.length) {
-        //     $.ajax({
-        //       url: '/followers/check',
-        //       type: 'GET',
-        //       dataType: 'json',
-        //       data: { ids: uids },
-        //       success: function (data) {
-        //         var list = $('.followers-list'),
-        //           html = '';
-        //         for (var i in data.users) {
-        //           if (data.users.hasOwnProperty(i)) {
-        //             html += '<a class=followers-item href="https://' + data.users[i].username + '.' + DOMAIN + '">';
-        //             if (null === data.users[i].avatar) {
-        //               html += '<span class=followers-avatar></span>';
-        //             } else {
-        //               html += '<span class=followers-avatar style="background-image:url(' + data.users[i].avatar + ')"></span>';
-        //             }
-        //             html += '<span class=followers-name>' + data.users[i].name + '</span>';
-        //             html += '<span class=followers-username>@' + data.users[i].username + '</span></a>';
-        //           }
-        //         }
-        //         list.html(html);
-        //       }
-        //     });
-        //   }
-        //   break;
+        case "view_profile_count_today":
+          this.updateProfileDonut(
+            this.visitorsCountDonut,
+            statData,
+            "visitorsToday",
+            "#FF335A"
+          );
+          break;
+
+        case "view_profile_user_count_today":
+          this.updateProfileDonut(
+            this.visitorsUsersCountDonut,
+            statData,
+            "visitorsUsers",
+            "#ff9501"
+          );
+          break;
+
+        case "view_profile_guest_count_today":
+          this.updateProfileDonutCount(
+            this.visitorsUsersCountDonut,
+            statData,
+            "visitorsGuests",
+            "#ff9501"
+          );
+          break;
+
+        case "view_profile_count_last_week":
+          this.updateProfileDonutCount(
+            this.visitorsUsersCountDonut,
+            statData,
+            "visitorsWeek",
+            "#FF335A"
+          );
+          break;
+
+        case "view_profile_count_all":
+          this.updateProfileDonutCount(
+            this.visitorsCountDonut,
+            statData,
+            "visitorsTotal",
+            "#FF335A",
+            true
+          );
+          break;
+
+        case "view_profile_by_device_count_today":
+          this.updateProfileDeviceDonutCount(
+            this.visitorsPlatformDonut,
+            statData
+          );
+          break;
+
+        case "view_profile_by_country_count_today":
+          this.updateMap(statData);
+          break;
+
+        case "top_followers_count_today":
+          this.updateTopFollowers(statData);
+          break;
       }
 
-      // if ("undefined" !== typeof data.users_data) {
+      // if (data.users_data) {
       //   let html = "";
       //   for (let i in data.users_data) {
       //     if (data.users_data.hasOwnProperty(i)) {
@@ -925,7 +865,7 @@ export default {
         ],
         dataProvider: []
       });
-      this.posts_charts = window.AmCharts.makeChart("posts_charts", {
+      this.postsChart = window.AmCharts.makeChart("posts_charts", {
         type: "serial",
         categoryField: "date",
         theme: "default",
@@ -1154,115 +1094,116 @@ export default {
       //   }
       // );
       // const profile_map_data = [];
-      // var stories_charts = window.AmCharts.makeChart("stories_charts",
-      //   {
-      //     "type": "serial",
-      //     "categoryField": "date",
-      //     "theme": "default",
-      //     "fontFamily": "Open Sans",
-      //     "color": "#7c8b96",
-      //     "autoDisplay": false,
-      //     "autoMargins": false,
-      //     "marginBottom": 0,
-      //     "marginTop": 0,
-      //     "marginLeft": 0,
-      //     "marginRight": 0,
-      //     "chartCursor": {
-      //       "cursorAlpha": 0.1,
-      //       "cursorColor": "#7C8B96",
-      //       "tabIndex": -1,
-      //       "valueLineAlpha": 0,
-      //       "zoomable": false,
-      //       "balloonPointerOrientation": "vertical",
-      //       "bulletsEnabled": true,
-      //       "bulletSize": 10,
-      //       "categoryBalloonEnabled": false,
-      //       "fullWidth": true,
-      //       "leaveAfterTouch": false,
-      //       "oneBalloonOnly": true
-      //     },
-      //     "balloon": {
-      //       "animationDuration": 0,
-      //       "borderThickness": 0,
-      //       "fadeOutDuration": 0,
-      //       "fillAlpha": 1,
-      //       "fillColor": alt_color,
-      //       "offsetX": 0,
-      //       "fontSize": 15,
-      //       "horizontalPadding": 8,
-      //       "verticalPadding": 3,
-      //       "shadowAlpha": 0
-      //     },
-      //     "categoryAxis": {
-      //       "labelsEnabled": false,
-      //       "axisAlpha": 0,
-      //       "startOnAxis": true,
-      //       "gridAlpha": 0,
-      //       "tickLength": 0
-      //     },
-      //     "valueAxes": [
-      //       {
-      //         "labelsEnabled": false,
-      //         "autoGridCount": false,
-      //         "gridCount": 5,
-      //         "axisThickness": 0,
-      //         "dashLength": 6,
-      //         "tickLength": 0,
-      //         "gridAlpha": 0.1,
-      //         "gridColor": "#7c8b96",
-      //         "zeroGridAlpha": 0.1
-      //       }
-      //     ],
-      //     "graphs": [
-      //       {
-      //         "animationPlayed": true,
-      //         "bulletSize": 0,
-      //         "bullet": "round",
-      //         "bulletBorderThickness": 0,
-      //         "minBulletSize": 0,
-      //         "fillAlphas": 0.1,
-      //         "lineColor": "#FF335A",
-      //         "fillColors": ["#FF335A", main_color],
-      //         "type": "smoothedLine",
-      //         "valueField": "uploads",
-      //         "lineThickness": 1.5,
-      //         "balloon": {
-      //           "color": "#FF335A"
-      //         }
-      //       }, {
-      //         "animationPlayed": true,
-      //         "bulletSize": 0,
-      //         "bullet": "round",
-      //         "bulletBorderThickness": 0,
-      //         "minBulletSize": 0,
-      //         "fillAlphas": 0.1,
-      //         "lineColor": "#ff9500",
-      //         "fillColors": ["#ff9500", main_color],
-      //         "type": "smoothedLine",
-      //         "valueField": "views",
-      //         "lineThickness": 1.5,
-      //         "balloon": {
-      //           "color": "#ff9500"
-      //         }
-      //       }, {
-      //         "animationPlayed": true,
-      //         "bulletSize": 0,
-      //         "bullet": "round",
-      //         "bulletBorderThickness": 0,
-      //         "minBulletSize": 0,
-      //         "fillAlphas": 0.1,
-      //         "lineColor": "#3abfd3",
-      //         "fillColors": ["#3abfd3", main_color],
-      //         "type": "smoothedLine",
-      //         "valueField": "comments",
-      //         "lineThickness": 1.5,
-      //         "balloon": {
-      //           "color": "#3abfd3"
-      //         }
-      //       }],
-      //     "dataProvider": []
-      //   }
-      //   ),
+      this.storiesChart = window.AmCharts.makeChart("stories_charts", {
+        type: "serial",
+        categoryField: "date",
+        theme: "default",
+        fontFamily: "Open Sans",
+        color: "#7c8b96",
+        autoDisplay: false,
+        autoMargins: false,
+        marginBottom: 0,
+        marginTop: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        chartCursor: {
+          cursorAlpha: 0.1,
+          cursorColor: "#7C8B96",
+          tabIndex: -1,
+          valueLineAlpha: 0,
+          zoomable: false,
+          balloonPointerOrientation: "vertical",
+          bulletsEnabled: true,
+          bulletSize: 10,
+          categoryBalloonEnabled: false,
+          fullWidth: true,
+          leaveAfterTouch: false,
+          oneBalloonOnly: true
+        },
+        balloon: {
+          animationDuration: 0,
+          borderThickness: 0,
+          fadeOutDuration: 0,
+          fillAlpha: 1,
+          fillColor: altColor,
+          offsetX: 0,
+          fontSize: 15,
+          horizontalPadding: 8,
+          verticalPadding: 3,
+          shadowAlpha: 0
+        },
+        categoryAxis: {
+          labelsEnabled: false,
+          axisAlpha: 0,
+          startOnAxis: true,
+          gridAlpha: 0,
+          tickLength: 0
+        },
+        valueAxes: [
+          {
+            labelsEnabled: false,
+            autoGridCount: false,
+            gridCount: 5,
+            axisThickness: 0,
+            dashLength: 6,
+            tickLength: 0,
+            gridAlpha: 0.1,
+            gridColor: "#7c8b96",
+            zeroGridAlpha: 0.1
+          }
+        ],
+        graphs: [
+          {
+            animationPlayed: true,
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            fillAlphas: 0.1,
+            lineColor: "#FF335A",
+            fillColors: ["#FF335A", mainColor],
+            type: "smoothedLine",
+            valueField: "uploads",
+            lineThickness: 1.5,
+            balloon: {
+              color: "#FF335A"
+            }
+          },
+          {
+            animationPlayed: true,
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            fillAlphas: 0.1,
+            lineColor: "#ff9500",
+            fillColors: ["#ff9500", mainColor],
+            type: "smoothedLine",
+            valueField: "views",
+            lineThickness: 1.5,
+            balloon: {
+              color: "#ff9500"
+            }
+          },
+          {
+            animationPlayed: true,
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            fillAlphas: 0.1,
+            lineColor: "#3abfd3",
+            fillColors: ["#3abfd3", mainColor],
+            type: "smoothedLine",
+            valueField: "comments",
+            lineThickness: 1.5,
+            balloon: {
+              color: "#3abfd3"
+            }
+          }
+        ],
+        dataProvider: []
+      });
       //   earnings_charts = window.AmCharts.makeChart("earnings_charts",
       //     {
       //       "type": "serial",
@@ -1414,7 +1355,7 @@ export default {
           date: currDate,
           followers: 0
         });
-        this.posts_charts.dataProvider.push({
+        this.postsChart.dataProvider.push({
           date: currDate,
           posts: 0,
           views: 0,
@@ -1433,60 +1374,16 @@ export default {
         //   "paid_chat_messages": 0,
         //   "earn_referral": 0
         // });
-        // stories_charts.dataProvider.push({
-        //   "date": curr_date,
-        //   "uploads": 0,
-        //   "views": 0,
-        //   "comments": 0
-        // });
+        this.storiesChart.dataProvider.push({
+          date: currDate,
+          uploads: 0,
+          views: 0,
+          comments: 0
+        });
       }
     },
-    initProfileCharts() {
-      window.AmCharts.makeChart("visitors_donut", {
-        type: "pie",
-        valueField: "value",
-        radius: "50%",
-        innerRadius: "66%",
-        pullOutRadius: "0%",
-        startDuration: 0,
-        pullOutDuration: 0,
-        balloonText: "",
-        labelsEnabled: false,
-        colorField: "color",
-        outlineAlpha: 1,
-        outlineThickness: "0",
-        outlineColor: mainColor,
-        alpha: 0.2,
-        dataProvider: [
-          {
-            value: 1,
-            color: "#7c8b96"
-          }
-        ]
-      }),
-        window.AmCharts.makeChart("visitors_users_donut", {
-          type: "pie",
-          valueField: "value",
-          radius: "50%",
-          innerRadius: "66%",
-          pullOutRadius: "0%",
-          startDuration: 0,
-          pullOutDuration: 0,
-          balloonText: "",
-          labelsEnabled: false,
-          colorField: "color",
-          outlineAlpha: 1,
-          outlineThickness: "0",
-          outlineColor: mainColor,
-          alpha: 0.2,
-          dataProvider: [
-            {
-              value: 1,
-              color: "#7c8b96"
-            }
-          ]
-        });
-      window.AmCharts.makeChart("visitors_platform_donut", {
+    initMapCharts() {
+      this.visitorsCountDonut = window.AmCharts.makeChart("visitors_donut", {
         type: "pie",
         valueField: "value",
         radius: "50%",
@@ -1508,7 +1405,57 @@ export default {
           }
         ]
       });
-      window.AmCharts.makeChart("visitors_map", {
+      this.visitorsUsersCountDonut = window.AmCharts.makeChart(
+        "visitors_users_donut",
+        {
+          type: "pie",
+          valueField: "value",
+          radius: "50%",
+          innerRadius: "66%",
+          pullOutRadius: "0%",
+          startDuration: 0,
+          pullOutDuration: 0,
+          balloonText: "",
+          labelsEnabled: false,
+          colorField: "color",
+          outlineAlpha: 1,
+          outlineThickness: "0",
+          outlineColor: mainColor,
+          alpha: 0.2,
+          dataProvider: [
+            {
+              value: 1,
+              color: "#7c8b96"
+            }
+          ]
+        }
+      );
+      this.visitorsPlatformDonut = window.AmCharts.makeChart(
+        "visitors_platform_donut",
+        {
+          type: "pie",
+          valueField: "value",
+          radius: "50%",
+          innerRadius: "66%",
+          pullOutRadius: "0%",
+          startDuration: 0,
+          pullOutDuration: 0,
+          balloonText: "",
+          labelsEnabled: false,
+          colorField: "color",
+          outlineAlpha: 1,
+          outlineThickness: "0",
+          outlineColor: mainColor,
+          alpha: 0.2,
+          dataProvider: [
+            {
+              value: 1,
+              color: "#7c8b96"
+            }
+          ]
+        }
+      );
+      this.mapChart = window.AmCharts.makeChart("visitors_map", {
         type: "map",
         fontFamily: "Open Sans",
         dragMap: false,
@@ -1561,7 +1508,7 @@ export default {
   mounted() {
     this.initLineCharts();
     this.fillLineChartsByEmptyPoints();
-    this.initProfileCharts();
+    this.initMapCharts();
     this.initTitles();
   }
 };
