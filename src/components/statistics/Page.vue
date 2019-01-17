@@ -104,7 +104,26 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <h4>Followers</h4>
-                  <div class="followers-list" ref="followersList"></div>
+                  <div class="users SearchResultsPopupView" v-if="topFollowers">
+                    <router-link
+                      v-for="v in topFollowers"
+                      v-bind:key="v.id"
+                      class="user"
+                      :to="'/' + v.username"
+                    >
+                      <span class="avatar avatar_gap-r-sm avatar_sm">
+                        <span class="avatar__img">
+                          <img :src="v.avatar" v-if="v.avatar" />
+                        </span>
+                      </span>
+                      <div class="username-group">
+                        <div class="user__name">
+                          <div class="name">{{ v.name }}</div>
+                        </div>
+                        <span class="user-login">{{ v.username }}</span>
+                      </div>
+                    </router-link>
+                  </div>
                 </div>
                 <!--<div class=swiper-slide>
 								<h4>Tab 2</h4>
@@ -126,7 +145,7 @@
 import ws from "@/ws";
 import moment from "moment";
 import pluralize from "pluralize";
-import tokenRequest from "@/utils/tokenRequest";
+import request from "@/utils/request";
 
 const colorSchemes = [
   "#FF5979",
@@ -151,7 +170,8 @@ export default {
   data() {
     return {
       showedStats: {},
-      profileMapData: []
+      profileMapData: [],
+      topFollowers: null
     };
   },
   created() {
@@ -364,52 +384,17 @@ export default {
       if (!statData || !statData.length) {
         return;
       }
-      const ids = statData.map(item => item.key_field);
-
-      const query = {};
-      query["ids[]"] = ids.join(",");
-
-      const response = await tokenRequest(`followers/check`, {
-        method: "GET",
-        query
-      });
-      const result = await response.json();
-      console.log(result);
-      // $.ajax({
-      //   url: "/followers/check",
-      //   type: "GET",
-      //   dataType: "json",
-      //   data: { ids: uids },
-      //   success: function(data) {
-      //     var list = $(".followers-list"),
-      //       html = "";
-      //     for (var i in data.users) {
-      //       if (data.users.hasOwnProperty(i)) {
-      //         html +=
-      //           '<a class=followers-item href="https://' +
-      //           data.users[i].username +
-      //           "." +
-      //           DOMAIN +
-      //           '">';
-      //         if (null === data.users[i].avatar) {
-      //           html += "<span class=followers-avatar></span>";
-      //         } else {
-      //           html +=
-      //             '<span class=followers-avatar style="background-image:url(' +
-      //             data.users[i].avatar +
-      //             ')"></span>';
-      //         }
-      //         html +=
-      //           "<span class=followers-name>" + data.users[i].name + "</span>";
-      //         html +=
-      //           "<span class=followers-username>@" +
-      //           data.users[i].username +
-      //           "</span></a>";
-      //       }
-      //     }
-      //     list.html(html);
-      //   }
-      // });
+      const ids = statData.map(item => "ids[]=" + item.key_field);
+      const response = await request(
+        `users?access-token=` +
+          this.$store.state.auth.token +
+          "&" +
+          ids.join("&"),
+        {
+          method: "GET"
+        }
+      );
+      this.topFollowers = await response.json();
     },
     onData(data) {
       if (!data.statistics) {
