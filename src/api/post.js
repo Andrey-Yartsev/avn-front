@@ -17,10 +17,16 @@ export default {
       method: "GET"
     });
   },
-  getPostComments(data) {
-    return tokenRequest(`posts/${data.postId}/comments`, {
-      method: "GET"
-    });
+  getPostComments({ postId, page, marker }) {
+    const limit = 5;
+    const offset = (page - 1) * limit;
+
+    return tokenRequest(
+      `posts/${postId}/comments?limit=${limit}&offset=${offset}&marker=${marker}`,
+      {
+        method: "GET"
+      }
+    );
   },
   sendPostComment({ postId, text }) {
     return tokenRequest(`posts/${postId}/comments`, {

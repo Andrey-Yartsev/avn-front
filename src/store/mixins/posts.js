@@ -24,15 +24,17 @@ export default {
       commit("resetPageState");
     },
 
-    getPostComments({ commit }, { postId }) {
+    getPostComments({ commit }, { postId, page }) {
       commit("postCommentsRequest", { postId });
-      return PostApi.getPostComments({ postId })
+      return PostApi.getPostComments({ postId, page })
         .then(response => {
           if (response.status === 200) {
-            response.json().then(function(list) {
+            response.json().then(function({ list, marker }) {
               commit("postCommentsRequestSuccess", {
                 postId,
-                list
+                marker,
+                list,
+                page
               });
             });
           }
@@ -157,28 +159,11 @@ export default {
         if (postId === post.id) {
           return {
             ...post,
-            comments: [],
-            commentsLoading: true,
-            shownCommentsCount: 3,
-            shownCommentsCountFull: 10
+            commentsLoading: true
           };
         }
 
         return post;
-      });
-    },
-
-    postCommentsRequestSuccess(state, data) {
-      state.posts = state.posts.map(post => {
-        if (data.postId !== post.id) {
-          return post;
-        }
-
-        return {
-          ...post,
-          comments: [...post.comments, ...data.list],
-          commentsLoading: false
-        };
       });
     },
 
@@ -190,9 +175,8 @@ export default {
 
         return {
           ...post,
-          comments: [data.comment, ...(post.comments || [])],
-          shownCommentsCount: (post.shownCommentsCount || 0) + 1,
-          shownCommentsCountFull: (post.shownCommentsCountFull || 0) + 1,
+          comments: [...(post.comments || []), data.comment],
+          fullComments: [data.comment, ...(post.fullComments || [])],
           commentsCount: post.commentsCount + 1
         };
       });
@@ -241,6 +225,36 @@ export default {
     deletePost(state, { postId }) {
       state.deletedPost = postId;
       state.posts = state.posts.filter(post => postId !== post.id);
+    },
+
+    resetComments(state, { postId }) {
+      console.log(postId);
+      state.posts = state.posts.map(post => {
+        if (postId === post.id) {
+          return {
+            ...post,
+            fullComments: []
+          };
+        }
+
+        return post;
+      });
+    },
+
+    postCommentsRequestSuccess(state, { postId, list, page, marker }) {
+      state.posts = state.posts.map(post => {
+        if (postId !== post.id) {
+          return post;
+        }
+
+        return {
+          ...post,
+          fullComments: [...post.fullComments, ...list],
+          comments: page === 1 ? list : post.comments,
+          commentsLoading: false,
+          commentMarker: marker
+        };
+      });
     }
   }
 };

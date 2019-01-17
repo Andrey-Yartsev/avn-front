@@ -34,12 +34,13 @@
         />
         <p class="text hidden-mobile" v-html="post.text"></p>
         <CommentsList
-          :comments="post.comments || []"
-          :shownCommentsCount="post.shownCommentsCountFull"
+          v-if="this.post.canComment"
+          :comments="post.fullComments"
+          :totalComments="post.commentsCount"
+          :loading="commentsLoading"
+          :getComments="getComments"
           v-on:commentReply="commentReply"
           v-on:likeComment="likeComment"
-          :loading="commentsLoading"
-          v-if="this.post.canComment"
         />
         <template v-if="isAuth() && this.post.canFavorite" >
           <Actions
@@ -101,6 +102,9 @@ export default {
   name: "PostLastView",
   mixins: [User],
   computed: {
+    postId() {
+      return this.post.id;
+    },
     actionPrefix() {
       return this.from;
     },
@@ -118,6 +122,7 @@ export default {
     }
   },
   data: () => ({
+    commentPage: 0,
     showAddCommentForm: false,
     commentReplyUserName: "",
     showTip: false
@@ -181,9 +186,25 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    getComments() {
+      this.commentPage += 1;
+      this.$store.dispatch(this.actionPrefix + "/getPostComments", {
+        postId: this.post.id,
+        page: this.commentPage,
+        marker: this.post.commentMarker
+      });
+    },
+    init() {
+      this.$store.commit(this.actionPrefix + "/resetComments", {
+        postId: this.post.id
+      });
+
+      this.getComments();
     }
   },
   created() {
+    this.init();
     setTimeout(() => {
       this.$root.ws.send({
         act: "collect",
@@ -195,6 +216,11 @@ export default {
         }
       });
     }, 2000);
+  },
+  watch: {
+    postId() {
+      this.init();
+    }
   }
 };
 </script>

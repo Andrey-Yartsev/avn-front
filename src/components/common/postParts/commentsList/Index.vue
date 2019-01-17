@@ -1,14 +1,14 @@
 <template>
-   <div class="postComments">
-        <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
-        <div class="comments-list">
-            <Comment
-              v-for="comment in visibleComments"
-              :key="comment.id"
-              :comment="comment"
-            ></Comment>
-        </div>
+  <div class="postComments">
+    <div class="comments-list">
+      <span v-if="commentsCount > 3" v-on:click="clickOnShowMore" class="load-more-comments">Show all comments</span>
+      <Comment
+        v-for="comment in visibleComments"
+        :key="comment.id"
+        :comment="comment"
+      />
     </div>
+  </div>
 </template>
 
 <script>
@@ -19,27 +19,23 @@ export default {
   components: {
     Comment
   },
-  data: function() {
-    return {
-      showAllComments: false
-    };
-  },
   props: {
     comments: {
       type: Array,
       required: true
     },
-    shownCommentsCount: {
+    commentsCount: {
       type: Number,
-      default: 0
+      required: true
+    },
+    clickOnShowMore: {
+      type: Function,
+      required: true
     }
   },
   computed: {
     visibleComments: function() {
-      const copy = this.showAllComments
-        ? [...this.comments]
-        : this.comments.slice(0, this.shownCommentsCount);
-      return copy.reverse();
+      return this.comments.slice(-3);
     }
   }
 };

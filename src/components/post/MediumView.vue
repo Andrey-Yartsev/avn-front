@@ -40,7 +40,8 @@
     <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
     <CommentsList
       :comments="post.comments || []"
-      :shownCommentsCount="post.shownCommentsCount"
+      :commentsCount="post.commentsCount || 0"
+      :clickOnShowMore="openModal"
     />
   </div>
 </template>
@@ -121,15 +122,15 @@ export default {
 
       this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     },
-    getComments() {
-      const { id, commentsCount, canComment } = this.post;
+    // getComments() {
+    //   const { id, commentsCount, canComment } = this.post;
 
-      if (commentsCount && canComment) {
-        this.$store.dispatch(this.actionPrefix + "/getPostComments", {
-          postId: id
-        });
-      }
-    },
+    //   if (commentsCount && canComment) {
+    //     this.$store.dispatch(this.actionPrefix + "/getPostComments", {
+    //       postId: id
+    //     });
+    //   }
+    // },
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         post: this.post,
@@ -167,7 +168,7 @@ export default {
     }
   },
   created() {
-    this.getComments();
+    // this.getComments();
     this.$root.ws.send({
       act: "collect",
       message: "view_post_in_feed",

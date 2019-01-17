@@ -1,15 +1,19 @@
 <template>
   <div class="postComments">
-    <div class="post-no-comments" v-if="loading === false && !comments.length">
+    <div class="post-no-comments" v-if="!loading && !comments.length">
       <div class="msg-no-content">
         <div class="msg-no-content__text">No one left a comment yet</div>
       </div>
     </div>
-    <span v-if="!showAllComments && comments.length > shownCommentsCount" v-on:click="showAllComments = true" class="load-more-comments">Show More Comments</span>
+    <span
+      class="load-more-comments"
+      @click="getComments"
+      v-if="!loading && comments.length < totalComments"
+    >Show previous comments ({{ totalComments - comments.length }})</span>
     <div class="comments-list" v-if="comments.length">
       <VuePerfectScrollbar id="vue-comments-list" >
         <Comment
-          v-for="comment in visibleComments"
+          v-for="comment in reversed"
           :key="comment.id"
           :comment="comment"
           :full="true"
@@ -31,43 +35,37 @@ export default {
     Comment,
     VuePerfectScrollbar
   },
-  data: function() {
-    return {
-      showAllComments: false
-    };
+  computed: {
+    reversed() {
+      return [...this.comments].reverse();
+    }
   },
   props: {
     comments: {
       type: Array,
-      required: true
+      default: () => []
     },
-    shownCommentsCount: {
+    totalComments: {
       type: Number,
       default: 0
     },
     loading: {
       type: Boolean,
       default: false
-    }
-  },
-  computed: {
-    visibleComments: function() {
-      const copy = this.showAllComments
-        ? [...this.comments]
-        : this.comments.slice(0, this.shownCommentsCount);
-      return copy.reverse();
+    },
+    getComments: {
+      type: Function,
+      required: true
     }
   },
   watch: {
-    visibleComments: function() {
-      if (!this.visibleComments.length) return;
-
-      setTimeout(() => {
-        this.$scrollTo("#vue-comments-list .comment:last-child", {
-          container: "#vue-comments-list"
-        });
-      }, 100);
-    }
+    // comments: function() {
+    //   setTimeout(() => {
+    //     this.$scrollTo("#vue-comments-list .comment:last-child", {
+    //       container: "#vue-comments-list"
+    //     });
+    //   }, 100);
+    // }
   }
 };
 </script>
