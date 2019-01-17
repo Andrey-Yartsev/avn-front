@@ -1,7 +1,11 @@
 <template>
   <div class="postComments">
+    <span
+      v-if="commentsCount > 3"
+      v-on:click="clickOnShowMore"
+      class="load-more-comments"
+    >Show all comments</span>
     <div class="comments-list">
-      <span v-if="commentsCount > 3" v-on:click="clickOnShowMore" class="load-more-comments">Show all comments</span>
       <Comment
         v-for="comment in visibleComments"
         :key="comment.id"

@@ -42,6 +42,11 @@ export default {
   computed: {
     reversed() {
       return [...this.comments].reverse();
+    },
+    lastCommentId() {
+      return this.reversed.length
+        ? this.reversed[this.reversed.length - 1].id
+        : 0;
     }
   },
   props: {
@@ -63,13 +68,13 @@ export default {
     }
   },
   watch: {
-    // comments: function() {
-    //   setTimeout(() => {
-    //     this.$scrollTo("#vue-comments-list .comment:last-child", {
-    //       container: "#vue-comments-list"
-    //     });
-    //   }, 100);
-    // }
+    lastCommentId: function() {
+      setTimeout(() => {
+        this.$scrollTo("#vue-comments-list .comment:last-child", {
+          container: "#vue-comments-list"
+        });
+      }, 100);
+    }
   }
 };
 </script>
