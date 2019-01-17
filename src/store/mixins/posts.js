@@ -24,9 +24,9 @@ export default {
       commit("resetPageState");
     },
 
-    getPostComments({ commit }, { postId, page }) {
+    getPostComments({ commit }, { postId, page, marker }) {
       commit("postCommentsRequest", { postId });
-      return PostApi.getPostComments({ postId, page })
+      return PostApi.getPostComments({ postId, page, marker })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function({ list, marker }) {
@@ -205,7 +205,7 @@ export default {
         if (postId === post.id) {
           return {
             ...post,
-            comments: post.comments.map(comment => {
+            fullComments: (post.fullComments || []).map(comment => {
               if (comment.id === commentId) {
                 return {
                   ...comment,
@@ -233,7 +233,8 @@ export default {
         if (postId === post.id) {
           return {
             ...post,
-            fullComments: []
+            fullComments: [],
+            commentMarker: ""
           };
         }
 
