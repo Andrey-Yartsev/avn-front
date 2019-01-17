@@ -123,6 +123,12 @@
 
   &-outer {
 
+    .charts-wrapper {
+      height: 66px;
+      overflow: hidden;
+      text-align: left;
+    }
+
     &__visitors {
       display: flex;
       flex-wrap: wrap;
@@ -133,6 +139,145 @@
         overflow: hidden;
       }
     }
+
+    &__story_added,
+    &__new_post,
+    &__paid_subscriptions {
+
+      .charts-counter {
+
+        .count {
+          color: #FF335A;
+        }
+      }
+
+      input[type="checkbox"]:checked {
+
+        + span {
+          background: linear-gradient(to top, #FF3E33 0%, #FE3F8C 100%);
+        }
+      }
+    }
+
+    &__story_view,
+    &__view_post,
+    &__tips {
+
+      .charts-counter {
+
+        .count {
+          color: #ff9500;
+        }
+      }
+
+      input[type="checkbox"]:checked {
+
+        + span {
+          background: linear-gradient(to top, #ff9500 0%, #ffcc00 100%);
+        }
+      }
+    }
+
+    &__post_like,
+    &__paid_chat_messages {
+
+      .charts-counter {
+
+        .count {
+          color: #67cc2e;
+        }
+      }
+
+      input[type="checkbox"]:checked {
+
+        + span {
+          background: linear-gradient(to top, #67cc2e 0%, #b3f43a 100%);
+        }
+      }
+    }
+
+    &__story_comment_added,
+    &__post_comment_added,
+    &__earn_referral {
+
+      .charts-counter {
+
+        .count {
+          color: #3abfd3;
+        }
+      }
+
+      input[type="checkbox"]:checked {
+
+        + span {
+          background: linear-gradient(to top, #3abfd3 0%, #49eeca 100%);
+        }
+      }
+    }
+  }
+}
+
+.statistics-chart-scale {
+  display: flex;
+  font-size: 10px;
+  color: #7c8b96;
+  //padding: 13px 0 19px;
+  padding: 11px 30px 19px 53px;
+
+  &__item {
+    flex: 0 1 100%;
+    text-align: center;
+  }
+}
+
+.amcharts-main-div {
+  position: relative;
+}
+
+.statistics-view-toggle-label {
+  position: absolute;
+  right: 30px;
+  top: 11px;
+  cursor: pointer;
+  padding: 0;
+
+  input[type="checkbox"] {
+
+    &:checked {
+
+      + span {
+        border: none;
+      }
+    }
+
+    + span {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border-radius: 3px;
+      border: 1px solid #7c8b96;
+      position: relative;
+      color: #fff;
+      font-size: 9px;
+      display: block;
+
+      &:before {
+        content: '\e62f';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.charts-counter {
+  padding-left: 3px;
+
+  .count {
+    font-size: 21px;
+    padding-right: 4px;
   }
 }
 
