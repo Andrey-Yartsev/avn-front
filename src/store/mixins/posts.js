@@ -228,7 +228,6 @@ export default {
     },
 
     resetComments(state, { postId }) {
-      console.log(postId);
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
           return {

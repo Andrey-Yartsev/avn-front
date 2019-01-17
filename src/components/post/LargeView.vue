@@ -188,6 +188,7 @@ export default {
       this.$refs.tip.reset();
     },
     getComments() {
+      if (!this.post.canComment) return;
       this.commentPage += 1;
       this.$store.dispatch(this.actionPrefix + "/getPostComments", {
         postId: this.post.id,
@@ -196,6 +197,8 @@ export default {
       });
     },
     init() {
+      this.commentPage = 0;
+
       this.$store.commit(this.actionPrefix + "/resetComments", {
         postId: this.post.id
       });
