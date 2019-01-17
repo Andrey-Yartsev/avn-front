@@ -1,7 +1,7 @@
 <template>
   <div class="storyView">
     <div class="story">
-      <a :to="`/${post.user.username}`" class="avatar avatar_not-shadow avatar_lg new-story" @click.prevent="run">
+      <a :to="`/${post.user.username}`" class="avatar avatar_not-shadow avatar_lg avatar_gap-r-md new-story" @click.prevent="run">
         <span class="avatar__img">
           <img :src="post.user.avatar" v-if="post.user.avatar">
         </span>
