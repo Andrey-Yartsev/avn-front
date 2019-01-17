@@ -1,5 +1,5 @@
 <template>
-  <div :class="['addPost', {loaderWrap: isSaving}]">
+  <div :class="['addPost', {loaderWrap: isSaving}]" v-click-outside="() => expanded = false">
     <form :class="['add-new-form', { expanded: expanded || initialExpanded || preloadedMedias.length }]">
       <div class="addPost-header">
         <button type="button" class="header-return-btn go-back go-back_times" @click="close">
@@ -19,8 +19,7 @@
       </span>
       <div class="text-media-container">
         <textarea
-          @focus="focus"
-          @blur="blur"
+          @focus="() => expanded = true"
           class="sm"
           placeholder="What is going on?"
           maxlength="500"
@@ -86,6 +85,7 @@ import Loader from "@/components/common/Loader";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
+import ClickOutside from "vue-click-outside";
 
 const InitialState = {
   expanded: false,
@@ -157,16 +157,6 @@ export default {
     }
   },
   methods: {
-    focus() {
-      this.expanded = true;
-    },
-    blur() {
-      setTimeout(() => {
-        if (!this.isSaving) {
-          this.expanded = false;
-        }
-      }, 300);
-    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = InitialState.tweetSend;
@@ -205,6 +195,12 @@ export default {
     newPost() {
       this.reset();
     }
+  },
+  mounted() {
+    this.popupItem = this.$el;
+  },
+  directives: {
+    ClickOutside
   }
 };
 </script>
