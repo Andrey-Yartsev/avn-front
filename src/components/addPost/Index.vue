@@ -19,8 +19,8 @@
       </span>
       <div class="text-media-container">
         <textarea
-          @focus="expanded = true"
-          @blur="expanded = false"
+          @focus="focus"
+          @blur="blur"
           class="sm"
           placeholder="What is going on?"
           maxlength="500"
@@ -157,6 +157,16 @@ export default {
     }
   },
   methods: {
+    focus() {
+      this.expanded = true;
+    },
+    blur() {
+      setTimeout(() => {
+        if (!this.isSaving) {
+          this.expanded = false;
+        }
+      }, 100);
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = InitialState.tweetSend;

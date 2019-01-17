@@ -6,6 +6,13 @@ export default {
     alreadySended: ""
   }),
   methods: {
+    checkNonReadyPosts() {
+      this.posts.map(post => {
+        if (!post.isMediaReady) {
+          this.wsp.reloadAction(post.id);
+        }
+      });
+    },
     getObservedIds() {
       const allIds = this.posts.map(p => p.id);
       const sended = this.alreadySended.split(",");
@@ -18,6 +25,11 @@ export default {
       this.wsp.connect(
         // onOpen
         () => {
+          if (this.posts.length) {
+            this.alreadySended = "";
+            this.sendObservedIds();
+            this.checkNonReadyPosts();
+          }
           this.maintainСonnection();
         },
         // onClose
