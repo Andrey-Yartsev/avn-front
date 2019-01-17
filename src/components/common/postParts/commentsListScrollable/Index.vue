@@ -10,6 +10,10 @@
       @click="getComments"
       v-if="!loading && comments.length < totalComments"
     >Show previous comments ({{ totalComments - comments.length }})</span>
+    <span
+      class="load-more-comments"
+      v-if="loading"
+    >Loading...</span>
     <div class="comments-list" v-if="comments.length">
       <VuePerfectScrollbar id="vue-comments-list" >
         <Comment
