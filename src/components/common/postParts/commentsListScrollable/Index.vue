@@ -44,9 +44,12 @@ export default {
       return [...this.comments].reverse();
     },
     lastCommentId() {
-      return this.reversed.length
+      return this.reversed.length > 1
         ? this.reversed[this.reversed.length - 1].id
         : 0;
+    },
+    firstCommentId() {
+      return this.reversed.length > 1 ? this.reversed[0].id : 0;
     }
   },
   props: {
@@ -71,6 +74,13 @@ export default {
     lastCommentId: function() {
       setTimeout(() => {
         this.$scrollTo("#vue-comments-list .comment:last-child", {
+          container: "#vue-comments-list"
+        });
+      }, 100);
+    },
+    firstCommentId: function() {
+      setTimeout(() => {
+        this.$scrollTo("#vue-comments-list .comment:first-child", {
           container: "#vue-comments-list"
         });
       }, 100);
