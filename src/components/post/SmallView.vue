@@ -80,19 +80,7 @@ export default {
         return;
       }
       this.goToModalRoute(`post/${this.post.id}/${this.from}`);
-    },
-    getComments() {
-      const { id, commentsCount, canComment } = this.post;
-
-      if (commentsCount && canComment) {
-        this.$store.dispatch(this.actionPrefix + "/getPostComments", {
-          postId: id
-        });
-      }
     }
-  },
-  created() {
-    this.getComments();
   }
 };
 </script>
