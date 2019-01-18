@@ -175,7 +175,7 @@ export default {
 
         return {
           ...post,
-          comments: [...(post.comments || []), data.comment],
+          comments: [data.comment, ...(post.comments || [])],
           fullComments: [data.comment, ...(post.fullComments || [])],
           commentsCount: post.commentsCount + 1
         };
@@ -233,7 +233,7 @@ export default {
           return {
             ...post,
             fullComments: [],
-            commentMarker: ""
+            commentMarker: undefined
           };
         }
 
