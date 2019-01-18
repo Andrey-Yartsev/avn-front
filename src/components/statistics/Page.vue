@@ -1,5 +1,7 @@
 <template>
   <div class="boxes">
+    <PostsModal :data="tempDataQueue" />
+
     <div class="cols">
       <!--
       <div class="col col-1-3">
@@ -147,6 +149,8 @@ import moment from "moment";
 import pluralize from "pluralize";
 import request from "@/utils/request";
 
+import PostsModal from "./PostsModal";
+
 const colorSchemes = [
   "#FF5979",
   "#FF335A",
@@ -167,11 +171,15 @@ const altColor = "#16181A";
 
 export default {
   name: "app",
+  components: {
+    PostsModal
+  },
   data() {
     return {
       showedStats: {},
       profileMapData: [],
-      topFollowers: null
+      topFollowers: null,
+      tempDataQueue: []
     };
   },
   created() {
@@ -213,6 +221,7 @@ export default {
       this.getUserStatistics("new_post_detailed_histogram_last_week");
       this.getUserStatistics("view_post_detailed_histogram_last_week");
       this.getUserStatistics("post_comment_added_detailed_histogram_last_week");
+      this.getUserStatistics("post_like_detailed_histogram_last_week");
       //
       this.getUserStatistics("story_added_count_last_week");
       this.getUserStatistics("story_view_count_last_week");
@@ -407,6 +416,8 @@ export default {
         return;
       }
 
+      this.tempDataQueue.push(data);
+
       this.showedStats[data.statistics.code] = data.statistics.time;
       const statData =
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
@@ -454,6 +465,34 @@ export default {
           // this.setCounter("chartsDataStoriesComments", "Comment", statData);
           break;
 
+        case "new_post_detailed_histogram_last_week":
+          this.updateChart(this.postsChart, statData, "posts");
+          break;
+
+        case "view_post_detailed_histogram_last_week":
+          this.updateChart(this.postsChart, statData, "views");
+          break;
+
+        case "post_comment_added_detailed_histogram_last_week":
+          this.updateChart(this.postsChart, statData, "comments");
+          break;
+
+        case "post_like_detailed_histogram_last_week":
+          this.updateChart(this.postsChart, statData, "likes", "total");
+          break;
+
+        case "story_added_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "uploads");
+          break;
+
+        case "story_view_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "views");
+          break;
+
+        case "story_comment_added_detailed_histogram_last_week":
+          this.updateChart(this.storiesChart, statData, "comments");
+          break;
+
         // case 'story_view_count_last_week':
         //   // $('#charts-data-stories .views').html(pluralize('View', statData) + ' <span>' + statData + '</span>');
         //   break;
@@ -485,7 +524,6 @@ export default {
         //     this.followers_charts.dataProvider[i].followers = start_value;
         //   }
         //   break;
-
         // case 'current_subscribers_list_last_week':
         //   var approx_arr = {};
         //   for (var index in statData) {
@@ -557,35 +595,6 @@ export default {
         //   }
         //   subscribed_charts.validateData();
         //   break;
-
-        case "new_post_detailed_histogram_last_week":
-          this.updateChart(this.postsChart, statData, "posts");
-          break;
-
-        case "view_post_detailed_histogram_last_week":
-          this.updateChart(this.postsChart, statData, "views");
-          break;
-
-        case "post_comment_added_detailed_histogram_last_week":
-          this.updateChart(this.postsChart, statData, "comments");
-          break;
-
-        case "post_like_detailed_histogram_last_week":
-          this.updateChart(this.postsChart, statData, "likes", "total");
-          break;
-
-        case "story_added_detailed_histogram_last_week":
-          this.updateChart(this.storiesChart, statData, "uploads");
-          break;
-
-        case "story_view_detailed_histogram_last_week":
-          this.updateChart(this.storiesChart, statData, "views");
-          break;
-
-        case "story_comment_added_detailed_histogram_last_week":
-          this.updateChart(this.storiesChart, statData, "comments");
-          break;
-
         //
         // case "paid_subscriptions_detailed_histogram_last_week":
         //   var approx_arr = {};
@@ -679,6 +688,7 @@ export default {
         //   earnings_charts.validateData();
         //   break;
         //
+
         case "view_profile_count_today":
           this.updateProfileDonut(
             this.visitorsCountDonut,
