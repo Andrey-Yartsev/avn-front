@@ -1,6 +1,10 @@
 <template>
   <div class="boxes">
-    <PostsModal :data="tempDataQueue" />
+    <PostsModal
+      v-if="$store.state.modal.statPosts.show"
+      :data="tempDataQueue"
+      @periodChange="postsPeriodChange"
+    />
 
     <div class="cols">
       <!--
@@ -24,7 +28,7 @@
       </div>
       -->
       <div class="col col-1-2">
-        <div class="box" id="posts-box">
+        <div class="box" id="posts-box" @click="openPostsModal">
           <h3 class="box-title">
             Posts
             <span class="chart_period"><span ref="chartPeriod2"></span> - Today</span>
@@ -179,7 +183,8 @@ export default {
       showedStats: {},
       profileMapData: [],
       topFollowers: null,
-      tempDataQueue: []
+      tempDataQueue: [],
+      subscribedWsCodes: []
     };
   },
   created() {
@@ -197,7 +202,16 @@ export default {
     ws.removeListener("message", this.onData);
   },
   methods: {
-    getUserStatistics(code, params) {
+    openPostsModal() {
+      this.$store.dispatch("modal/show", { name: "statPosts" });
+    },
+    postsPeriodChange(period) {
+      this.sendPostsWsRequests(period);
+    },
+    subscribeUserStatistics(code, params) {
+      if (this.subscribedWsCodes.indexOf(code) !== -1) {
+        return;
+      }
       let data = {
         act: "get_statistics",
         code: code
@@ -206,39 +220,47 @@ export default {
         data = Object.assign(data, params);
       }
       ws.send(data);
+      this.subscribedWsCodes.push(code);
     },
     sendWsRequests() {
       // followers block
-      this.getUserStatistics("current_subscribers_latest_now");
-      this.getUserStatistics("user_subscribe_count_last_week");
-      this.getUserStatistics("user_unsubscribe_count_last_week");
+      this.subscribeUserStatistics("current_subscribers_latest_now");
+      this.subscribeUserStatistics("user_subscribe_count_last_week");
+      this.subscribeUserStatistics("user_unsubscribe_count_last_week");
       //
-      this.getUserStatistics("new_post_count_last_week");
-      this.getUserStatistics("view_post_count_last_week");
-      this.getUserStatistics("post_like_count_last_week");
-      this.getUserStatistics("post_comment_added_count_last_week");
+      this.sendPostsWsRequests("last_week");
       //
-      this.getUserStatistics("new_post_detailed_histogram_last_week");
-      this.getUserStatistics("view_post_detailed_histogram_last_week");
-      this.getUserStatistics("post_comment_added_detailed_histogram_last_week");
-      this.getUserStatistics("post_like_detailed_histogram_last_week");
+      this.subscribeUserStatistics("story_added_count_last_week");
+      this.subscribeUserStatistics("story_view_count_last_week");
+      this.subscribeUserStatistics("story_comment_added_count_last_week");
+      this.subscribeUserStatistics("story_added_detailed_histogram_last_week");
+      this.subscribeUserStatistics("story_view_detailed_histogram_last_week");
+      this.subscribeUserStatistics(
+        "story_comment_detailed_histogram_last_week"
+      );
       //
-      this.getUserStatistics("story_added_count_last_week");
-      this.getUserStatistics("story_view_count_last_week");
-      this.getUserStatistics("story_comment_added_count_last_week");
-      this.getUserStatistics("story_added_detailed_histogram_last_week");
-      this.getUserStatistics("story_view_detailed_histogram_last_week");
-      this.getUserStatistics("story_comment_detailed_histogram_last_week");
+      this.subscribeUserStatistics("view_profile_by_country_count_today");
+      this.subscribeUserStatistics("view_profile_count_today");
+      this.subscribeUserStatistics("view_profile_user_count_today");
+      this.subscribeUserStatistics("view_profile_guest_count_today");
+      this.subscribeUserStatistics("view_profile_count_last_week");
+      this.subscribeUserStatistics("view_profile_count_all");
+      this.subscribeUserStatistics("view_profile_by_device_count_today");
       //
-      this.getUserStatistics("view_profile_by_country_count_today");
-      this.getUserStatistics("view_profile_count_today");
-      this.getUserStatistics("view_profile_user_count_today");
-      this.getUserStatistics("view_profile_guest_count_today");
-      this.getUserStatistics("view_profile_count_last_week");
-      this.getUserStatistics("view_profile_count_all");
-      this.getUserStatistics("view_profile_by_device_count_today");
+      this.subscribeUserStatistics("top_followers_count_today");
+    },
+    sendPostsWsRequests(period) {
+      this.subscribeUserStatistics("new_post_count_" + period);
+      this.subscribeUserStatistics("view_post_count_" + period);
+      this.subscribeUserStatistics("post_like_count_" + period);
+      this.subscribeUserStatistics("post_comment_added_count_" + period);
       //
-      this.getUserStatistics("top_followers_count_today");
+      this.subscribeUserStatistics("new_post_detailed_histogram_" + period);
+      this.subscribeUserStatistics("view_post_detailed_histogram_" + period);
+      this.subscribeUserStatistics(
+        "post_comment_added_detailed_histogram_" + period
+      );
+      this.subscribeUserStatistics("post_like_detailed_histogram_" + period);
     },
     setCounter(ref, title, value) {
       if (title) {
@@ -290,7 +312,7 @@ export default {
         return b[1] - a[1];
       });
       if (sortable.length) {
-        var alpha = sortable[0][1];
+        let alpha = sortable[0][1];
         sortable.forEach((item, i) => {
           this.profileMapData[i] = {
             id: item[0],
@@ -1510,3 +1532,9 @@ export default {
   }
 };
 </script>
+
+<style>
+#posts-box {
+  cursor: pointer;
+}
+</style>
