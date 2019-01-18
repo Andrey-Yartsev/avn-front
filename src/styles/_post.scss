@@ -452,10 +452,6 @@
       width: auto;
     }
   }
-
-  .load-more-comments {
-    font-size: 13px;
-  }
 }
 
 .postComments {
@@ -472,7 +468,7 @@
   .postPage & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 58px;
+      margin-bottom: 54px;
     }
   }
 

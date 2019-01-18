@@ -14,7 +14,7 @@
       class="load-more-comments"
       v-if="loading"
     >Loading...</span>
-    <div class="comments-list" v-if="comments.length">
+    <div class="comments-list comments-list_in-col" v-if="comments.length">
       <VuePerfectScrollbar id="vue-comments-list" >
         <Comment
           v-for="comment in reversed"

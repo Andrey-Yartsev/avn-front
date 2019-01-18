@@ -80,6 +80,16 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 14px 50px 10px 15px;
       z-index: 2;
+
+      &:after {
+        content: "";
+        background: rgba($gray, 0.2);
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 15px;
+        right: 15px;
+      }
     }
 
     .lightbox-post & {
@@ -100,16 +110,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-bottom: 5px;
         padding-bottom: 16px;
-
-        &:after {
-          content: "";
-          background: rgba($gray, 0.2);
-          height: 1px;
-          position: absolute;
-          bottom: 0;
-          left: 15px;
-          right: 15px;
-        }
       }
     }
 
@@ -130,7 +130,7 @@
           }
         }
       }
-      
+
       a {
 
         .lightbox-post & {
@@ -280,37 +280,6 @@
     }
   }
 
-  .load-more-comments {
-    opacity: 0.5;
-    display: block;
-    cursor: pointer;
-    margin: 0 15px;
-  }
-
-  .comment-form {
-    display: flex;
-    padding: 10px 15px;
-    position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-top: 5px;
-      padding-bottom: 20px;
-    }
-  }
-
-  .comment-btn {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 80px;
-      flex: 0 0 80px;
-    }
-  }
-
-  .comment-input {
-    margin: 0 15px 0 0;
-    height: 30px;
-  }
-  
   .tip-form {
     display: flex;
     padding: 10px 15px 25px;
@@ -362,6 +331,24 @@
 
   .report {
     transition: color 0.3s ease;
+  }
+}
+
+.load-more-comments {
+  opacity: 0.5;
+  display: block;
+  cursor: pointer;
+  margin: 0 15px 8px;
+
+  .postPage & {
+    font-size: 13px;
+  }
+
+  & + .comments-list_in-col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: 24px;
+    }
   }
 }
 
@@ -607,7 +594,7 @@
       }
     }
   }
-  
+
   .gif-player {
     position: relative;
     .gif-img {
@@ -622,6 +609,7 @@
   }
 
   & + .right-col {
+
     &,
     .popup & {
 
@@ -638,47 +626,6 @@
         width: 360px;
       }
     }
-
-    .comments-list {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        left: 15px;
-        right: 10px;
-        top: 0;
-        bottom: 0;
-        padding: 0;
-      }
-
-      .ps__scrollbar-x-rail,
-      .ps__scrollbar-y-rail {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: none;
-        }
-      }
-
-      .ps-container {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          padding-right: 5px;
-        }
-      }
-    }
-
-    .load-more-comments {
-      & + .comments-list {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          top: 16px;
-        }
-      }
-    }
   }
 }
 
@@ -690,11 +637,42 @@
     display: none;
   }
 
-  .postPage & {
+  &_in-col {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-bottom: 53px;
     }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+      left: 15px;
+      right: 10px;
+      top: 0;
+      bottom: 0;
+      padding: 0;
+    }
+
+    .ps {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding-right: 5px;
+      }
+
+      > .ps__scrollbar-x-rail,
+      > .ps__scrollbar-y-rail {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &_main {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
@@ -705,7 +683,6 @@
     .ps {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
         left: 15px;
         right: 15px;
         top: 0;
@@ -714,81 +691,111 @@
     }
   }
 
-  .comment {
-    padding: 8px 0 0 0;
-    position: relative;
-    display: flex;
+  .ps {
 
-    &-content {
-      padding-right: 24px;
-      flex: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+    }
+  }
+
+  .name {
+    max-width: 55%;
+    padding: 0 4px 0 0;
+
+    .disable-scroll-page & {
+      max-width: 55%;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding-right: 35px;
+        max-width: 40%;
       }
     }
+  }
+}
 
-    &-text {
-      display: inline;
-      word-break: break-all;
+.comment {
+  padding: 8px 0 0;
+  position: relative;
+  display: flex;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &-content {
+    padding-right: 24px;
+    flex: 1;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-right: 35px;
+    }
+  }
+
+  &-text {
+    display: inline;
+    word-break: break-all;
+  }
+
+  &-body {
+    display: flex;
+  }
+
+  &-footer {
+    font-size: 11px;
+    display: flex;
+    padding-top: 2px;
+    padding-bottom: 3px;
+
+    .date {
+      font: inherit;
+      margin-right: 20px;
     }
 
-    &-footer {
-      font-size: 11px;
-      display: flex;
-      padding-top: 2px;
-      padding-bottom: 3px;
-
-      .date {
-        font: inherit;
-        margin-right: 20px;
-      }
-
-      .likes-count {
-        opacity: .5;
-        margin-right: 20px;
-      }
+    .likes-count {
+      opacity: .5;
+      margin-right: 20px;
     }
+  }
 
-    .name {
-      max-width: 55%;
-      padding: 0 4px 0 0;
-      float: left;
+  &-form {
+    display: flex;
+    padding: 10px 15px;
+    position: relative;
 
-      .disable-scroll-page & {
-        max-width: 55%;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-width: 40%;
-        }
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 5px;
+      padding-bottom: 20px;
     }
+  }
 
-    .postPage & {
+  &-btn {
 
-      .comment {
-        margin: 6px 0;
-        width: auto;
-        padding-left: 30px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin: 0 0 2px;
-        }
-
-        .avatar {
-          //font-size: 20px;
-        }
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 80px;
+      flex: 0 0 80px;
     }
+  }
 
-    &_reply {
+  &-input {
+    margin: 0 15px 0 0;
+    height: 30px;
+  }
+
+  .postPage & {
+
+    .comment {
+      margin: 6px 0;
+      width: auto;
       padding-left: 30px;
-      margin-left: 40px;
 
-      .avatar {
-        //font-size: 20px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin: 0 0 2px;
       }
     }
+  }
+
+  &_reply {
+    padding-left: 30px;
+    margin-left: 40px;
   }
 }
 
@@ -799,9 +806,9 @@
   cursor: pointer;
   color: $primary-color;
   background: $white linear-gradient(
-    60deg,
-    $secondary-color-20 10%,
-    $primary-color-20 90%
+                  60deg,
+                  $secondary-color-20 10%,
+                  $primary-color-20 90%
   );
   position: sticky;
   z-index: 10;

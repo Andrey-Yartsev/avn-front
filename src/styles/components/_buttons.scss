@@ -422,8 +422,10 @@ button,
 .btn-like {
   position: absolute;
   right: 0;
-  top: 13px;
+  //top: 13px;
+  top: 5px;
   font-size: 19px;
+  line-height: 19px;
   padding: 0;
   border: none;
   background: none;

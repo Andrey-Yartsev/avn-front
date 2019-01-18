@@ -5,7 +5,7 @@
       v-on:click="clickOnShowMore"
       class="load-more-comments"
     >Show all comments</span>
-    <div class="comments-list">
+    <div class="comments-list comments-list_main">
       <Comment
         v-for="comment in visibleComments"
         :key="comment.id"
