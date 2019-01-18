@@ -84,6 +84,22 @@
       }
     }
 
+    .more-functions_select & {
+      font-size: 15px;
+      font-weight: 400;
+      padding: 0 24px 0 0;
+
+      &:after {
+        content: "\E646";
+        @include icon-font;
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 20px;
+        line-height: 20px;
+      }
+    }
+
     &:before {
       @include settings-dots;
       @include color-settings-dots($main-color, 1);
@@ -115,6 +131,10 @@
           }
         }
       }
+
+      .more-functions_select & {
+        display: none;
+      }
     }
   }
 
@@ -135,6 +155,14 @@
       right: -5px; left: auto;
       top: 100%; bottom: auto;
       min-width: 180px;
+    }
+
+    .more-functions_select & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: -32px;
+        top: calc(100% + 5px);
+      }
     }
 
     &-inside {

@@ -245,6 +245,18 @@
         }
       }
     }
+
+    &.statistics-popup {
+      max-width: 100%;
+
+      .close {
+        top: 5px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: block;
+        }
+      }
+    }
   }
 
   & &-payment {
@@ -271,6 +283,24 @@
     font: inherit;
     font-weight: 600;
     padding: 21px 60px 21px 20px;
+
+    &_underlined {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      position: relative;
+
+      &:after {
+        content: "";
+        background: rgba($gray, 0.2);
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 15px;
+        right: 15px;
+      }
+    }
   }
 
   .close {
