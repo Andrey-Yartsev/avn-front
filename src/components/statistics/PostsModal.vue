@@ -5,32 +5,28 @@
         <div class="popup-title popup-title_underlined">
           Posts
 
-          <div class="more-functions more-functions_select">
+          <div
+            class="more-functions more-functions_select"
+            :class="{ open: showDropdown }"
+            v-click-outside="() => {showDropdown = false}"
+
+          >
             <div class="more-functions__overlay"></div>
-            <div class="more-functions__btn">
-              <div class="more-functions__btn-text">Today</div>
+            <div class="more-functions__btn" @click="showDropdown = !showDropdown">
+              <div class="more-functions__btn-text">{{ periodTitle }}</div>
             </div>
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
                 <ul>
-                  <li>
-                    <button type="button">Today</button>
-                  </li>
-                  <li>
-                    <button type="button">Last week</button>
-                  </li>
-                  <li>
-                    <button type="button">Last month</button>
-                  </li>
-                  <li>
-                    <button type="button">Last year</button>
+                  <li v-for="v in periodOptions" v-bind:key="v.value">
+                    <button type="button" @click="selectPeriod(v.value)">{{ v.title }}</button>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <Posts :data="data" />
+        <Posts :data="data" :period="period" />
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>
@@ -40,6 +36,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Posts from "./Posts";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "StatisticsPostsModal",
@@ -49,6 +46,10 @@ export default {
     Posts
   },
 
+  directives: {
+    ClickOutside
+  },
+
   props: {
     data: {
       type: Array,
@@ -56,8 +57,53 @@ export default {
     }
   },
 
+  data() {
+    return {
+      period: "last_week",
+      showDropdown: false
+    };
+  },
+
+  created() {
+    this.periodTitles = {
+      today: "Today",
+      last_week: "Last week"
+      // last_month: "Last month",
+      // last_year: "Last year"
+    };
+  },
+
+  computed: {
+    periodTitle() {
+      return this.periodTitles[this.period];
+    },
+    periodOptions() {
+      return Object.entries(this.periodTitles).map(v => {
+        return {
+          value: v[0],
+          title: v[1]
+        };
+      });
+    }
+  },
+
   methods: {
-    close() {}
+    selectPeriod(period) {
+      this.period = period;
+      this.showDropdown = false;
+      this.$emit("periodChange", period);
+    },
+    close() {
+      this.$store.dispatch("modal/hide", { name: "statPosts" });
+    }
   }
 };
 </script>
+
+<style>
+@media (min-width: 768px) {
+  .popup .popup-container {
+    max-width: 100%;
+  }
+}
+</style>

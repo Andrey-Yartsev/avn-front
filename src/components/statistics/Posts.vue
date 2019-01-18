@@ -6,6 +6,7 @@
 
 <script>
 import moment from "moment";
+import BrowserStore from "store";
 // import pluralize from "pluralize";
 
 const altColor = "#16181A";
@@ -17,6 +18,10 @@ export default {
     data: {
       type: Array,
       required: true
+    },
+    period: {
+      type: String,
+      required: true
     }
   },
 
@@ -27,7 +32,7 @@ export default {
   },
 
   mounted() {
-    this.initPosts();
+    this.init();
   },
 
   watch: {
@@ -36,10 +41,43 @@ export default {
         this.loading = false;
       }
       this.setData();
+    },
+    period() {
+      this.init();
     }
   },
 
   methods: {
+    init() {
+      this.typeTitles = {
+        new_post: "Posts",
+        view_post: "Views",
+        post_like: "Likes",
+        post_comment_added: "Comments"
+      };
+      this.chartTypes = {
+        new_post: ["#FF3E33", "#FE3F8C"],
+        view_post: ["#ff9500", "#ffcc00"],
+        post_like: ["#67cc2e", "#b3f43a"],
+        post_comment_added: ["#3abfd3", "#49eeca"]
+      };
+
+      this.buildContainers();
+      this.initCharts();
+      this.setData();
+    },
+    buildContainers() {
+      let html = "";
+      Object.keys(this.chartTypes).forEach(type => {
+        html += this.wrapperHtml(type);
+      });
+      this.$refs.container.innerHTML = html;
+      // this.initCheckboxes();
+      Object.keys(this.chartTypes).forEach(type => {
+        this.buildChartContainer(type, this.period);
+      });
+      this.buildChartScaleContainer(this.$refs.container, this.period);
+    },
     buildChartContainer(type, period) {
       const parent = document.getElementById("pmwr_" + type);
       const chartWrapper = document.createElement("div");
@@ -56,54 +94,106 @@ export default {
       return scaleWrapper;
     },
     wrapperHtml(type) {
-      return `<div class="charts-wrapper-outer charts-wrapper-outer__new_post" id="pmwr_${type}">
-         <div class="charts-counter" id="${type}_charts_today_counter">
+      return `<div class="charts-wrapper-outer charts-wrapper-outer__${type}" id="pmwr_${type}">
+         <div class="charts-counter" id="${type}_charts_counter">
            <span class="count">0</span>
-           <span class="plural">Posts</span>
+           <span class="plural">${this.typeTitles[type]}</span>
          </div>
+         <!--
          <label class="statistics-view-toggle-label">
-           <input type="checkbox" class="statistics-view-toggle" checked="">
+           <input type="checkbox" class="statistics-view-toggle" checked="" data-type="${type}">
            <span></span>
          </label>
+         -->
        </div>
       `;
     },
-    buildContainers() {
-      let html = "";
-      Object.keys(this.charts_types).forEach(type => {
-        html += this.wrapperHtml(type);
-      });
-      this.$refs.container.innerHTML = html;
-      Object.keys(this.charts_types).forEach(type => {
-        this.buildChartContainer(type, "last_week");
-      });
-      this.buildChartScaleContainer(this.$refs.container, "last_week");
+    initCheckboxes() {
+      this.sectionsState = BrowserStore.get("statPostsModalSections");
+      if (!this.sectionsState) {
+        this.sectionsState = {};
+        Object.keys(this.chartTypes).forEach(type => {
+          this.sectionsState[type] = true;
+        });
+      }
+      const checkboxes = this.$refs.container.getElementsByTagName("input");
+      for (let i = 0; i < checkboxes.length; i++) {
+        let type = checkboxes[i].getAttribute("data-type");
+        checkboxes[i].checked = this.sectionsState[type];
+        checkboxes[i].addEventListener("change", e => {
+          const el = e.target;
+          const type = el.getAttribute("data-type");
+          this.sectionsState[type] = el.checked;
+          BrowserStore.set("statPostsModalSections", this.sectionsState);
+        });
+      }
     },
-    initPosts() {
-      this.charts_types = {
-        new_post: ["#FF3E33", "#FE3F8C"],
-        view_post: ["#ff9500", "#ffcc00"],
-        post_like: ["#67cc2e", "#b3f43a"],
-        post_comment_added: ["#3abfd3", "#49eeca"]
+    initCharts() {
+      this.charts = {
+        today: {},
+        last_week: {},
+        last_month: {},
+        last_year: {}
       };
+      this.barCount = 108;
+      const now = moment()
+        .utc()
+        .unix();
 
-      this.buildContainers();
-      this.init();
-      // this.setData();
-    },
-    createDropdown() {
-      // <div class="stat-period-select">
-      //   <span role="button" class="popup-menu-btn" data-toggle="stat-period-select"
-      //     data-placement-h="right">Today</span>
-      //   <div class="popup-menu" id="stat-period-select">
-      //     <span role="button" data-period="today" class="popup-menu-item">Today</span>
-      //     <span role="button" data-period="last_week" class="popup-menu-item">Last week</span>
-      // <span role="button" data-period="last_month" class="popup-menu-item">Last Month</span>
-      //     <span role="button" data-period="last_year" class="popup-menu-item">Last Year</span></div>
-      //   </div>
-    },
-    setData() {
-      this.data.forEach(this.processDataItem);
+      let period = this.period;
+
+      let periodType, count;
+      let startDate = now;
+
+      switch (period) {
+        case "today":
+          count = 1439;
+          periodType = "minutes";
+          // format = "YYYY-MM-DD HH:mm";
+          startDate = moment(
+            moment
+              .unix(now)
+              .add(1, "d")
+              .format("YYYY-MM-DD")
+          ).unix();
+          break;
+        case "last_week":
+          count = 167;
+          periodType = "hours";
+          // format = "YYYY-MM-DD HH";
+          break;
+        case "last_month":
+          count = 719;
+          periodType = "hours";
+          // format = "YYYY-MM-DD HH";
+          break;
+        case "last_year":
+          count = 364;
+          periodType = "days";
+          // format = "YYYY-MM-DD";
+          break;
+      }
+
+      for (let type in this.chartTypes) {
+        if (!this.chartTypes.hasOwnProperty(type)) {
+          continue;
+        }
+
+        this.createChart(type, period);
+
+        // fill chart by null points
+        let y = 0;
+        for (let j = this.barCount; j >= 1; j--) {
+          let currDate = moment
+            .unix(startDate)
+            .subtract((j * count) / this.barCount, periodType)
+            .unix();
+          this.charts[period][type].dataProvider[y] = {};
+          this.charts[period][type].dataProvider[y].date = currDate;
+          y++;
+        }
+      }
+      this.buildScale(period, now);
     },
     createChart(type, period) {
       this.charts[period][type] = window.AmCharts.makeChart(
@@ -155,7 +245,7 @@ export default {
             tickLength: 2,
             offset: 1,
             gridThickness: 2,
-            gridCount: this.bar_count
+            gridCount: this.barCount
           },
           valueAxes: [
             {
@@ -175,7 +265,7 @@ export default {
           graphs: [
             {
               animationPlayed: true,
-              fillColors: this.charts_types[type],
+              fillColors: this.chartTypes[type],
               type: "column",
               cornerRadiusTop: 1,
               valueField: type,
@@ -183,7 +273,7 @@ export default {
               lineAlpha: 0,
               fixedColumnWidth: 2,
               balloon: {
-                color: this.charts_types[type][0]
+                color: this.chartTypes[type][0]
               }
             }
           ],
@@ -191,77 +281,10 @@ export default {
         }
       );
     },
-    init() {
-      this.charts = {
-        // today: {},
-        last_week: {}
-        // last_month: {},
-        // last_year: {}
-      };
-      this.bar_count = 108;
-      const now = moment()
-        .utc()
-        .unix();
-
-      for (let period in this.charts) {
-        if (this.charts.hasOwnProperty(period)) {
-          var periodType, count;
-          var start_date = now;
-
-          switch (period) {
-            case "today":
-              count = 1439;
-              periodType = "minutes";
-              // format = "YYYY-MM-DD HH:mm";
-              start_date = moment(
-                moment
-                  .unix(now)
-                  .add(1, "d")
-                  .format("YYYY-MM-DD")
-              ).unix();
-              break;
-            case "last_week":
-              count = 167;
-              periodType = "hours";
-              // format = "YYYY-MM-DD HH";
-              break;
-            case "last_month":
-              count = 719;
-              periodType = "hours";
-              // format = "YYYY-MM-DD HH";
-              break;
-            case "last_year":
-              count = 364;
-              periodType = "days";
-              // format = "YYYY-MM-DD";
-              break;
-          }
-
-          for (let type in this.charts_types) {
-            if (!this.charts_types.hasOwnProperty(type)) {
-              continue;
-            }
-
-            // this.buildChartContainer(index + "_charts_" + i);
-            this.createChart(type, period);
-
-            let y = 0;
-            for (let ii = this.bar_count; ii >= 1; ii--) {
-              let curr_date = moment
-                .unix(start_date)
-                .subtract((ii * count) / this.bar_count, periodType)
-                .unix();
-              this.charts[period][type].dataProvider[y] = {};
-              this.charts[period][type].dataProvider[y].date = curr_date;
-              // charts[i][index].dataProvider[y][index] = 0;
-              y++;
-            }
-          }
-          this.buildScale(period, now);
-        }
-      }
-    },
     buildScale(period, now) {
+      const container = document.getElementById(
+        "statistics-chart-scale_" + period
+      );
       if ("today" !== period) {
         let scaleCount = 5,
           scaleHtml = "",
@@ -272,12 +295,10 @@ export default {
 
         switch (period) {
           case "last_week":
-            // momentSubstractUnits = "days";
             scaleCount = 6;
             displayFormat = "ddd";
             break;
           case "last_month":
-            // momentSubstractUnits = "months";
             periodCount = 5;
             displayFormat = "D.MM";
             break;
@@ -289,107 +310,89 @@ export default {
             break;
         }
         for (let j = scaleCount; j >= 0; j--) {
-          console.log(periodCount, period);
           let currLabel = moment
             .unix(moment.utc(moment.unix(now).format(format)).unix())
             .subtract(j * periodCount, "days")
             .format(displayFormat);
           scaleHtml +=
-            "<span class=statistics-chart-scale__item>" +
-            currLabel +
-            ", </span>";
+            "<span class=statistics-chart-scale__item>" + currLabel + "</span>";
         }
-        let container = document.getElementById(
-          "statistics-chart-scale_" + period
-        );
         container.innerHTML = scaleHtml;
+      } else {
+        container.innerHTML = `
+          <span class="statistics-chart-scale__item">0:00</span>
+          <span class="statistics-chart-scale__item">4:00</span>
+          <span class="statistics-chart-scale__item">8:00</span>
+          <span class="statistics-chart-scale__item">12:00</span>
+          <span class="statistics-chart-scale__item">16:00</span>
+          <span class="statistics-chart-scale__item">20:00</span>
+          <span class="statistics-chart-scale__item">24:00</span>
+        `;
       }
     },
+    setData() {
+      this.data.forEach(this.processDataItem);
+    },
     processDataItem(data) {
-      const charts_types = this.charts_types;
-      const charts = this.charts;
-
-      for (var i in charts) {
-        if (charts.hasOwnProperty(i)) {
-          for (var index in charts_types) {
-            if (charts_types.hasOwnProperty(index)) {
-              switch (data.statistics.code) {
-                case index + "_detailed_histogram_" + i:
-                  var arr_values = {},
-                    y = 0;
-                  for (let ii = this.bar_count; ii >= 1; ii--) {
-                    charts[i][index].dataProvider[y][index] = 0;
-                    y++;
+      const period = this.period;
+      for (let type in this.chartTypes) {
+        if (!this.chartTypes.hasOwnProperty(type)) {
+          continue;
+        }
+        let arrValues = {};
+        let y;
+        switch (data.statistics.code) {
+          case type + "_detailed_histogram_" + period:
+            arrValues = {};
+            y = 0;
+            for (let j = this.barCount; j >= 1; j--) {
+              this.charts[period][type].dataProvider[y][type] = 0;
+              y++;
+            }
+            for (let index in data.statistics.data) {
+              if (
+                data.statistics.data.hasOwnProperty(index) &&
+                (("undefined" !== typeof data.statistics.data[index].total &&
+                  data.statistics.data[index].total) ||
+                  ("undefined" === typeof data.statistics.data[index].total &&
+                    data.statistics.data[index]))
+              ) {
+                let currIndex = 0,
+                  diff = 0;
+                for (let j = 0; j < this.barCount; j++) {
+                  let momentDiff = Math.abs(
+                    this.charts[period][type].dataProvider[j].date - index
+                  );
+                  if (0 === j || diff > momentDiff) {
+                    diff = momentDiff;
+                    currIndex = j;
                   }
-                  for (var index1 in data.statistics.data) {
-                    if (
-                      data.statistics.data.hasOwnProperty(index1) &&
-                      (("undefined" !==
-                        typeof data.statistics.data[index1].total &&
-                        data.statistics.data[index1].total) ||
-                        ("undefined" ===
-                          typeof data.statistics.data[index1].total &&
-                          data.statistics.data[index1]))
-                    ) {
-                      var curr_index = 0,
-                        diff = 0;
-                      for (let ii = 0; ii < this.bar_count; ii++) {
-                        var moment_diff = Math.abs(
-                          charts[i][index].dataProvider[ii].date - index1
-                        );
-                        if (0 === ii || diff > moment_diff) {
-                          diff = moment_diff;
-                          curr_index = ii;
-                        }
-                      }
-                      var val = parseFloat(
-                          charts[i][index].dataProvider[curr_index][index]
-                        ),
-                        ws_val =
-                          "undefined" !==
-                          typeof data.statistics.data[index1].total
-                            ? data.statistics.data[index1].total
-                            : data.statistics.data[index1];
-                      arr_values[curr_index] = val + ws_val;
-                    }
-                  }
-                  for (var arr_index in arr_values) {
-                    if (arr_values.hasOwnProperty(arr_index)) {
-                      charts[i][index].dataProvider[arr_index][index] =
-                        arr_values[arr_index];
-                    }
-                  }
-                  charts[i][index].validateData();
-                  break;
-                case index + "_count_" + i:
-                  if ("NaN" !== data.statistics.data) {
-                    // if (
-                    //   $("#" + index + "_charts_" + i + "_counter .plural")
-                    //     .length
-                    // ) {
-                    //   $("#" + index + "_charts_" + i + "_counter").html(
-                    //     "<span class=count>" +
-                    //       data.statistics.data +
-                    //       "</span> <span class=plural>" +
-                    //       pluralize(
-                    //         $(
-                    //           "#" + index + "_charts_" + i + "_counter .plural"
-                    //         ).text(),
-                    //         data.statistics.data,
-                    //         false
-                    //       ) +
-                    //       "</span>"
-                    //   );
-                    // } else {
-                    //   $("#" + index + "_charts_" + i + "_counter .count").html(
-                    //     data.statistics.data
-                    //   );
-                    // }
-                  }
-                  break;
+                }
+                var val = parseFloat(
+                    this.charts[period][type].dataProvider[currIndex][type]
+                  ),
+                  ws_val =
+                    "undefined" !== typeof data.statistics.data[index].total
+                      ? data.statistics.data[index].total
+                      : data.statistics.data[index];
+                arrValues[currIndex] = val + ws_val;
               }
             }
-          }
+            for (let arrIndex in arrValues) {
+              if (arrValues.hasOwnProperty(arrIndex)) {
+                this.charts[period][type].dataProvider[arrIndex][type] =
+                  arrValues[arrIndex];
+              }
+            }
+            this.charts[period][type].validateData();
+            break;
+          case type + "_count_" + period:
+            if ("NaN" !== data.statistics.data) {
+              let counter = document.getElementById(type + "_charts_counter");
+              let count = counter.getElementsByClassName("count")[0];
+              count.innerHTML = data.statistics.data;
+            }
+            break;
         }
       }
     }

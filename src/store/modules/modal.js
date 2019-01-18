@@ -51,6 +51,10 @@ const state = {
   signup: {
     show: false,
     data: {}
+  },
+  statPosts: {
+    show: false,
+    data: {}
   }
 };
 
