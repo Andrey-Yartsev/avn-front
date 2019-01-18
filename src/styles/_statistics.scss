@@ -421,24 +421,3 @@
     margin-left: 0;
   }
 }
-
-.stat-period-select {
-  position: absolute;
-  right: 73px;
-  top: 15px;
-  color: #7c8b96;
-
-  .popup-menu-btn {
-    padding-right: 17px;
-
-    &:after {
-      content: '\E646';
-      position: absolute;
-      right: 0;
-      top: 60%;
-      transform: translate(0, -50%);
-      @include icon-font;
-      font-size: 6px;
-    }
-  }
-}
