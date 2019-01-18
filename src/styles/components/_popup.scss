@@ -249,6 +249,15 @@
     &.statistics-popup {
       max-width: 100%;
 
+      @include media-breakpoint-up($tablet-breakpoint) {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          box-shadow: none;
+          border-radius: 0;
+          display: block;
+        }
+      }
+
       .close {
         top: 5px;
 
