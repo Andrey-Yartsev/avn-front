@@ -53,10 +53,6 @@
       flex-direction: column;
     }
 
-    .bg-profile {
-      display: block;
-    }
-
     > .container {
 
       @include media-breakpoint-down($desktop-breakpoint) {
