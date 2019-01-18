@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container" slot="content">
       <div class="content" ref="content">
-        <h2>Posts</h2>
+        <div class="popup-title">Posts</div>
         <Posts :data="data" />
       </div>
       <button type="button" class="close" @click="close"></button>
