@@ -200,7 +200,7 @@ export default {
       this.commentPage = 0;
 
       this.$store.commit(this.actionPrefix + "/resetComments", {
-        postId: this.post.id
+        postId: this.postId
       });
 
       this.getComments();
@@ -219,6 +219,11 @@ export default {
         }
       });
     }, 2000);
+  },
+  beforeDestroy() {
+    this.$store.commit(this.actionPrefix + "/resetComments", {
+      postId: this.postId
+    });
   },
   watch: {
     postId() {

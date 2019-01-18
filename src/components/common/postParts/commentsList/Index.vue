@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     visibleComments: function() {
-      return this.comments.slice(-3);
+      return [...this.comments.slice(0, 3)].reverse();
     }
   }
 };
