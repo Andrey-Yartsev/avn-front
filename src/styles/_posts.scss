@@ -218,12 +218,12 @@
     align-items: center;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 13px 15px 8px;
+      padding-top: 13px;
     }
 
     &__btn {
       opacity: 0.3;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       margin: 0 25px 0 0;
       cursor: pointer;
