@@ -4,7 +4,6 @@
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost"/>
-    <HeaderControl :profile="profile" />
     <div class="white-bg-block">
       <div class="profile-sticky-header">
         <ProfileBackground  :profile="profile" />
