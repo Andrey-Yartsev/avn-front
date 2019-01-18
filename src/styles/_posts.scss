@@ -80,16 +80,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 14px 50px 10px 15px;
       z-index: 2;
-
-      &:after {
-        content: "";
-        background: rgba($gray, 0.2);
-        height: 1px;
-        position: absolute;
-        bottom: 0;
-        left: 15px;
-        right: 15px;
-      }
     }
 
     .lightbox-post & {
@@ -110,6 +100,16 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-bottom: 5px;
         padding-bottom: 16px;
+
+        &:after {
+          content: "";
+          background: rgba($gray, 0.2);
+          height: 1px;
+          position: absolute;
+          bottom: 0;
+          left: 15px;
+          right: 15px;
+        }
       }
     }
 
