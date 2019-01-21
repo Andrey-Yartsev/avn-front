@@ -1,11 +1,19 @@
 <template>
   <span class="subscribeView" v-if="!profile.subscribedBy">
     <div
-      class="btn-with-icon btn-with-icon btn-subscribe"
-      @click="profile.followedBy ? unfollow() : follow()"
-    >
+      v-if="profile.followedBy"
+      @click="unfollow"
+      class="btn-with-icon btn-subscribe disable-state">
       <div class="btn-subscribe__label">
-        {{ profile.followedBy ? "Unfollow" : "Follow" }}
+        Unfollow
+      </div>
+    </div>
+    <div
+      v-else
+      @click="follow"
+      class="btn-with-icon btn-subscribe">
+      <div class="btn-subscribe__label">
+        Follow
       </div>
     </div>
   </span>
