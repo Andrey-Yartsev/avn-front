@@ -1087,6 +1087,14 @@
         color: $main-color;
         text-shadow: none;
       }
+
+      .verified-user {
+        color: $secondary-color;
+      }
+
+      .icn-block {
+        color: red;
+      }
     }
   }
 
@@ -1099,6 +1107,11 @@
     .user-login a {
       color: #fff;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .verified-user,
+    .icn-block {
+      color: #fff;
     }
   }
 }
