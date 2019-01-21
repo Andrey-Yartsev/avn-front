@@ -23,15 +23,6 @@ export default {
   created() {
     const postId = +this.$route.params.postId;
     this.$store.dispatch("postPage/getPost", { postId });
-  },
-  watch: {
-    post: function() {
-      if (!this.post.comments && this.post.canComment) {
-        this.$store.dispatch("postPage/getPostComments", {
-          postId: this.post.id
-        });
-      }
-    }
   }
 };
 </script>
