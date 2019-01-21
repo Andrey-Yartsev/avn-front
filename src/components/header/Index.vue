@@ -68,8 +68,8 @@
             <div class="btns-login-user">
               <router-link to="/register" class="register">Have an account?</router-link>
               <router-link to="/login" class="btn border alt login hidden-desktop">Log in</router-link>
-              <div class="auth-header-block hidden-mobile">
-                <div class="btn border alt login">Log in</div>
+              <div :class="['auth-header-block hidden-mobile', {show: opened}]" v-click-outside="hide">
+                <div class="btn border alt login" @click="show">Log in</div>
                 <div class="auth-block-dropdown">
                   <div class="auth-block auth-block_sm-size">
                     <form v-on:submit.stop.prevent="login">
@@ -126,13 +126,15 @@ import User from "./User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import DesktopHeader from "./Desktop";
 import Login from "@/components/auth/login";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "Header",
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      opened: false
     };
   },
   mixins: [ModalRouterGoto, Login],
@@ -173,7 +175,16 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });
+    },
+    show() {
+      this.opened = true;
+    },
+    hide() {
+      this.opened = false;
     }
+  },
+  directives: {
+    ClickOutside
   }
 };
 </script>
