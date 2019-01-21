@@ -18,14 +18,16 @@
                 <span class="label">
                   Your Country
                 </span>
-                <select name="country" id="account-country" v-model="countryId">
-                  <option
-                    v-for="v in countries"
-                    v-bind:key="v.id"
-                    :value="v.id"
-                    :selected="v.selected">{{ v.title }}
-                  </option>
-                </select>
+                <span class="select-wrapper">
+                  <select name="country" id="account-country" v-model="countryId">
+                    <option
+                      v-for="v in countries"
+                      v-bind:key="v.id"
+                      :value="v.id"
+                      :selected="v.selected">{{ v.title }}
+                    </option>
+                  </select>
+                </span>
               </label>
               <label class="form-group-inner">
                 <span></span>

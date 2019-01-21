@@ -34,11 +34,13 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Legal Type</span>
-                <select name="type" id="legal-type" required v-model="type">
-                  <option value="">Select</option>
-                  <option value="company">Company</option>
-                  <option value="individual">Individual</option>
-                </select>
+                <span class="select-wrapper">
+                  <select name="type" id="legal-type" required v-model="type">
+                    <option value="">Select</option>
+                    <option value="company">Company</option>
+                    <option value="individual">Individual</option>
+                  </select>
+                </span>
               </label>
             </div>
 
@@ -109,22 +111,26 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner" for="state">
                 <span class="label">State</span>
-                <select id="state" name="state" required v-model="state">
-                  <option value="">Select State</option>
-                  <option :value="v" v-for="v in states" v-bind:key="v">{{ v }}</option>
-                </select>
+                <span class="select-wrapper">
+                  <select id="state" name="state" required v-model="state">
+                    <option value="">Select State</option>
+                    <option :value="v" v-for="v in states" v-bind:key="v">{{ v }}</option>
+                  </select>
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label country-select">
               <label class="form-group-inner">
                 <span class="label country-select__label">Country</span>
-                <select name="country" disabled v-model="country">
-                  <option
-                    class="country-select__option"
-                    value="United States of America"
-                  >United States of America</option>
-                </select>
+                <span class="select-wrapper">
+                  <select name="country" disabled v-model="country">
+                    <option
+                      class="country-select__option"
+                      value="United States of America"
+                    >United States of America</option>
+                  </select>
+                </span>
               </label>
             </div>
 
