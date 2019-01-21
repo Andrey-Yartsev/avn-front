@@ -435,6 +435,23 @@
       pointer-events: unset;
     }
   }
+
+  .icn-block {
+
+    .header-scrolled & {
+      height: 20px;
+      line-height: 20px;
+    }
+
+    &:after {
+
+      .header-scrolled & {
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+      }
+    }
+  }
 }
 
 .profile-desc {
@@ -1505,5 +1522,28 @@
         flex-direction: column;
       }
     }
+  }
+}
+
+.block-indicator {
+  margin-left: 7px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.icn-block {
+  display: inline-block;
+  vertical-align: middle;
+  color: red;
+  height: 22px;
+  line-height: 22px;
+
+  &:after {
+    content: "\E668";
+    @include icon-font;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 }

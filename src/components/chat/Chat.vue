@@ -50,8 +50,10 @@
             <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
           </span>
 
+          <div class="block-indicator">
             <span class="user-login" v-if="blockLoading">...</span>
-            <span class="user-login" v-else-if="activeUser.isBlocked">[blocked]</span>
+            <span class="icn-block" v-else-if="activeUser.isBlocked"></span>
+          </div>
 
             <span
               class="more-functions" :class="{open: chatOptionsOpened}"

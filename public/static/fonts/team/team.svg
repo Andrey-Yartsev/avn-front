@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
-<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
 <defs>
 <font id="team" horiz-adv-x="1000" >
 <font-face font-family="team" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
@@ -195,6 +195,10 @@
 <glyph glyph-name="i044-(2)" unicode="&#xe663;" d="M792 725h-584a83 83 0 0 1-83-83v-584a83 83 0 0 1 83-83h584a83 83 0 0 1 83 83v584a83 83 0 0 1-83 83z m-202-522h-180l-35-103h-109l186 500h95l187-500h-109z m-152 83h125l-63 189z" horiz-adv-x="1000" />
 
 <glyph glyph-name="i081" unicode="&#xe664;" d="M708 517h125v-500h42v-42h-167v42h42v125h-167l-62-125h62v-42h-166v42h41l250 500m42-42l-146-292h146v292m-542 250h209a83 83 0 0 0 83-83v-459h-125v209h-125v-209h-125v459a83 83 0 0 0 83 83m42-83v-167h125v167z" horiz-adv-x="1000" />
+
+<glyph glyph-name="i082" unicode="&#xe667;" d="M375 433h-83v-83h83z m167 0h-84v-83h84z m166 0h-83v-83h83z m84 292h-42v83h-83v-83h-334v83h-83v-83h-42a83 83 0 0 1-83-83v-584a83 83 0 0 1 83-83h584a83 83 0 0 1 83 83v584a83 83 0 0 1-83 83z m0-667h-584v459h584z" horiz-adv-x="1000" />
+
+<glyph glyph-name="i074-1" unicode="&#xe668;" d="M500 767a417 417 0 1 1 417-417 417 417 0 0 1-417 417z m0-84a330 330 0 0 0 204-70l-467-467a330 330 0 0 0-70 204 333 333 0 0 0 333 333z m0-666a330 330 0 0 0-204 70l467 467a330 330 0 0 0 70-204 333 333 0 0 0-333-333z" horiz-adv-x="1000" />
 </font>
 </defs>
 </svg>
