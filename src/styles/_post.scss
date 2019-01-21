@@ -130,11 +130,15 @@
       display: none;
     }
 
-    .explore-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: block;
-        z-index: 3;
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: block;
+          z-index: 3;
+        }
       }
     }
   }
