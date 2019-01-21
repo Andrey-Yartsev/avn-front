@@ -1130,6 +1130,13 @@
       border-right-color: $white;
     }
   }
+
+  &:last-child {
+
+    .ps--active-y & {
+      border-bottom: none;
+    }
+  }
 }
 
 .chatViewContent {
