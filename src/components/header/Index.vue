@@ -120,15 +120,24 @@
 </template>
 
 <script>
+import Recaptcha from "vue-recaptcha";
 import Search from "./Search";
 import User from "./User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import DesktopHeader from "./Desktop";
+import Login from "@/components/auth/login";
 
 export default {
   name: "Header",
-  mixins: [ModalRouterGoto],
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  mixins: [ModalRouterGoto, Login],
   components: {
+    Recaptcha,
     Search,
     User,
     DesktopHeader
