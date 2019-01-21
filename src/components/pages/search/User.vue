@@ -24,6 +24,7 @@
               :profile="profile"
               @openDropdawn="showDropdawn = true"
               @hideDropdawn="showDropdawn = false"
+              actionPrefix="search/page"
               class="hidden-mobile"
             />
           </div>

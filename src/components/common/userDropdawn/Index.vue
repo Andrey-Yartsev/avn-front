@@ -41,6 +41,10 @@ export default {
     profile: {
       type: Object,
       required: true
+    },
+    actionPrefix: {
+      type: String,
+      default: "profile/home"
     }
   },
 
@@ -66,10 +70,10 @@ export default {
       });
     },
     block() {
-      this.$store.dispatch("search/page/block", this.profile.id);
+      this.$store.dispatch(this.actionPrefix + "/block", this.profile.id);
     },
     unblock() {
-      this.$store.dispatch("search/page/unblock", this.profile.id);
+      this.$store.dispatch(this.actionPrefix + "/unblock", this.profile.id);
     },
     toggle() {
       if (this.opened) {

@@ -121,6 +121,20 @@ const actions = {
     dispatch("fetchProfile", state.profile.username).then(() => {
       // dispatch("profile/setFetchLoading", false, { root: true });
     });
+  },
+  block({ commit, dispatch }, userId) {
+    dispatch("user/block", userId, { root: true }).then(r => {
+      if (r.success) {
+        commit("profile", { ...state.profile, isBlocked: true });
+      }
+    });
+  },
+  unblock({ commit, dispatch }, userId) {
+    dispatch("user/unblock", userId, { root: true }).then(r => {
+      if (r.success) {
+        commit("profile", { ...state.profile, isBlocked: false });
+      }
+    });
   }
 };
 
