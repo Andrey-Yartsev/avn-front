@@ -9,7 +9,7 @@
       <div class="settings-nav">
         <router-link to="/settings/account/email" class="settings-nav__item warning">
           <span>Email</span>
-          <span class="value">{{ user.email }}</span></router-link>
+          <span class="value"><span class="user-email">{{ user.email }}</span></span></router-link>
         <router-link to="/settings/account/twitter" class="settings-nav__item">
           <span>Twitter</span>
           <span class="value">Connect</span>
