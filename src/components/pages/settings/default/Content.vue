@@ -17,7 +17,7 @@
                 ref="username"
                 type="text" name="username" id="profileUsername"
                 v-model="localUser.username" required
-                autocomplete="off" min="5" max="20"
+                autocomplete="off" minlength="5" maxlength="20"
                 pattern="[a-zA-Z0-9-_]{5,20}"
                 title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters.">
             </label>
