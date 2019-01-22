@@ -17,6 +17,9 @@
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
                 <span class="verified-user" v-if="profile.isVerified"></span>
+                <div class="block-indicator" v-if="profile.isBlocked">
+                  <span class="icn-block"></span>
+                </div>
               </div>
               <span class="user-login"><a>{{ profile.username }}</a></span>
             </div>

@@ -20,7 +20,9 @@
             {{ profile.name }}
           </span>
           <span class="verified-user" v-if="profile.isVerified"></span>
-          <div class="block-indicator"><span class="icn-block"></span></div>
+          <div class="block-indicator" v-if="profile.isBlocked">
+            <span class="icn-block"></span>
+          </div>
         </div>
         <span class="user-login">
           <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>

@@ -299,11 +299,6 @@
   padding: 16px 10px 15px 139px;
   transition: all 0.3s;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 10px 10px 6px 66px;
-    opacity: 0;
-  }
-
   .profile-header & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -325,20 +320,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       opacity: 1;
-    }
-  }
-
-  .profile-sticky-header & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin: -8px 15px 13px;
-    }
-
-    .header-scrolled & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin: -75px 15px 30px 66px;
-      }
     }
   }
 
@@ -463,6 +444,7 @@
   margin-bottom: 7px;
   word-break: break-all;
 
+  .userCollectionView &,
   .searchView & {
     font-size: 13px;
     margin-bottom: 4px;
@@ -1058,7 +1040,7 @@
 
   &.profile-position {
     transform: translate(0, 0);
-    left: -5px;
+    left: -4px;
     bottom: -80px;
     transition: all .3s;
 
@@ -1075,6 +1057,29 @@
         color: $main-color;
       }
     }
+  }
+
+  &:not(.profile-position) {
+
+    .profile-name {
+
+      &__main,
+      .user-login a {
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      }
+
+      .verified-user,
+      .icn-block {
+        color: #fff;
+      }
+    }
+  }
+
+  .profile-name {
+    opacity: 1;
+    padding: 0;
+    margin: 0;
   }
 
   .header-scrolled & {
@@ -1095,23 +1100,6 @@
       .icn-block {
         color: red;
       }
-    }
-  }
-
-  .profile-name {
-    opacity: 1;
-    padding: 0;
-    margin: 0;
-
-    &__main,
-    .user-login a {
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    }
-
-    .verified-user,
-    .icn-block {
-      color: #fff;
     }
   }
 }
