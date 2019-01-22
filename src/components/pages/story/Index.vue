@@ -88,6 +88,13 @@
         </div>
       </div>
       <div class="bottom-btns">
+        <div class="story-details-info">
+            <a href="#" class="btn-story-details"></a>
+            <div class="story-viewer">
+                Johnny Mnemonic, Johm Smith and 24 others
+            </div>
+        </div>
+        
         <template v-if="!isOwner(author.id) && author.canEarn">
           <button type="button" class="btn-tip"></button>
           <form class="tip-form hidden">
