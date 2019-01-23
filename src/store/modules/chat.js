@@ -54,6 +54,11 @@ const actions = {
         });
       }
     }
+  },
+  fetchMessages({ dispatch, commit }, activeUserId) {
+    dispatch("_fetchMessages", activeUserId).then(() => {
+      commit("markChatAsViewed", activeUserId);
+    });
   }
 };
 
@@ -79,6 +84,15 @@ const mutations = {
     state.chats = state.chats.map(chat => {
       if (chat.withUser.id === fromUserId) {
         chat.lastMessage = message;
+        chat.unreadMessagesCount++;
+      }
+      return chat;
+    });
+  },
+  markChatAsViewed(state, userId) {
+    state.chats = state.chats.map(chat => {
+      if (chat.withUser.id === userId) {
+        chat.unreadMessagesCount = 0;
       }
       return chat;
     });
@@ -146,7 +160,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "fetchMessages",
+  prefix: "_fetchMessages",
   apiPath: "chats/{userId}/messages",
   state,
   mutations,
