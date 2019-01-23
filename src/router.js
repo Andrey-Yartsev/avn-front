@@ -331,7 +331,10 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: (to, from, next) => {
+      global.storyFirstEnter = !from.matched.length;
+      return Auth.requireAny(to, from, next);
+    },
     path: "/stories/:userId",
     component: StoryPage
   },
