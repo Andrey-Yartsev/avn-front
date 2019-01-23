@@ -9,7 +9,7 @@
       <div
         @click="openChat(v.withUser.id)"
         class="chatView"
-        v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
+        v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active, unread: !!v.unreadMessagesCount}"
       >
         <div class="avatar avatar_md">
           <span class="avatar__img">
