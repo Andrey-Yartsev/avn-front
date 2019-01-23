@@ -156,11 +156,6 @@ import request from "@/utils/request";
 
 import PostsModal from "./PostsModal";
 
-import Debug from "debug";
-
-Debug.enable("stat");
-// const debug = Debug("stat");
-
 const colorSchemes = [
   "#FF5979",
   "#FF335A",
