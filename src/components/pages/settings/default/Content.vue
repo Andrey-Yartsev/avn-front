@@ -39,7 +39,7 @@
               <TextareaAutosize
                 rows="3"
                 name="about"
-                :minHeight="30"
+                :minHeight="50"
                 :maxHeight="200"
                 v-model="localUser.about"
                 maxlength="500"
