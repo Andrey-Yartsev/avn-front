@@ -1,5 +1,6 @@
 <template>
   <Wrapper :mode="mode">
+
     <template slot="col1">
       <div
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
@@ -47,13 +48,13 @@
             </router-link>
             <span class="verified-user" v-if="activeUser.isVerified"></span>
             <span class="user-login">
-            <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
-          </span>
+              <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
+            </span>
 
-          <div class="block-indicator">
-            <span class="user-login" v-if="blockLoading">...</span>
-            <span class="icn-block" v-else-if="activeUser.isBlocked"></span>
-          </div>
+            <div class="block-indicator">
+              <span class="user-login" v-if="blockLoading">...</span>
+              <span class="icn-block" v-else-if="activeUser.isBlocked"></span>
+            </div>
 
             <span
               class="more-functions" :class="{open: chatOptionsOpened}"
@@ -135,7 +136,8 @@ export default {
     return {
       chatOptionsOpened: false,
       isTyping: false,
-      deleteInProgress: false
+      deleteInProgress: false,
+      virtualChat: null
     };
   },
 
@@ -150,7 +152,7 @@ export default {
       return this.routePath === "chat/no-messages";
     },
     chats() {
-      return this.$store.state.chat.chats.map(v => {
+      let chats = this.$store.state.chat.chats.map(v => {
         const copy = { ...v };
         if (Object.keys(copy.lastMessage).length === 0) {
           copy.lastMessage = null;
@@ -160,6 +162,32 @@ export default {
         }
         return copy;
       });
+      if (this.virtualChat) {
+        if (chats.find(v => v.withUser.id === this.virtualChat.withUser.id)) {
+          return chats;
+        }
+        let virtualChat = Object.assign({}, this.virtualChat);
+        virtualChat.active = !this.activeChat;
+        chats.push(virtualChat);
+      }
+      chats = chats.sort((a, b) => {
+        let d1, d2;
+        if (a.lastMessage) {
+          d1 = new Date(a.lastMessage.changedAt);
+        } else if (a.changedAt) {
+          d1 = a.changedAt;
+        }
+        if (b.lastMessage) {
+          d2 = new Date(b.lastMessage.changedAt);
+        } else if (b.changedAt) {
+          d2 = b.changedAt;
+        }
+        if (!d1 || !d2) {
+          return -1;
+        }
+        return d2 - d1;
+      });
+      return chats;
     },
     hasActiveChats() {
       return this.$store.state.chat.chats.some(v => v.hasHistory);
@@ -202,6 +230,7 @@ export default {
     activeUserId(activeUserId) {
       this.$store.commit("chat/messages", []);
       if (!activeUserId) {
+        this.virtualChat = null;
         this.$store.commit("chat/setActiveUserId", null);
         return;
       }
@@ -242,6 +271,19 @@ export default {
     },
     openUserMobileBar() {
       this.$store.dispatch("global/openUserMobileBar");
+    },
+    initVirtualChat() {
+      if (!this.activeChat) {
+        this.$store
+          .dispatch("chat/fetchActiveUser", this.activeUserId)
+          .then(user => {
+            this.virtualChat = {
+              lastMessage: null,
+              withUser: user,
+              changedAt: new Date()
+            };
+          });
+      }
     }
   },
 
@@ -251,9 +293,7 @@ export default {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
-        if (!this.activeChat) {
-          this.$store.dispatch("chat/fetchActiveUser", this.activeUserId);
-        }
+        this.initVirtualChat();
       }
     });
   },

@@ -167,6 +167,8 @@
     <StreamStatistic
       :close="(haveToSave) => close({}, haveToSave)"
       :duration="time"
+      :streamDuration="streamDuration"
+      :streamStartTime="streamStartTime"
       v-if="isStopped"
       :canBeSaved="canBeSaved"
     />
@@ -209,7 +211,10 @@ export default {
       newComment: "",
       looksCount: 0,
       showCommentForm: false,
-      canBeSaved: false
+      canBeSaved: false,
+
+      streamDuration: 0,
+      streamStartTime: 0
     };
   },
   components: {
@@ -295,6 +300,7 @@ export default {
       this.streamAudio = audioDevices[1];
     },
     tick(start) {
+      this.streamStartTime = start;
       const diff = Math.round(new Date().getTime() / 1000) - start;
       const date = new Date(diff * 1000);
       let hours = date.getHours();
@@ -303,6 +309,7 @@ export default {
       hours = hours < 10 ? `0${hours}` : `${hours}`;
       mins = mins < 10 ? `0${mins}` : `${mins}`;
       secs = secs < 10 ? `0${secs}` : `${secs}`;
+      this.streamDuration = diff;
       this.time =
         diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
       if (diff > 5) {

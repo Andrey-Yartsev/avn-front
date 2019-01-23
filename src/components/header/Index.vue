@@ -121,7 +121,7 @@
 
 <script>
 import Recaptcha from "vue-recaptcha";
-import Search from "./Search";
+import Search from "../pages/search/bubble/Index";
 import User from "./User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import DesktopHeader from "./Desktop";

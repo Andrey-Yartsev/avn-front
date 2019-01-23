@@ -87,11 +87,11 @@
           </div>
         </div>
       </div>
-      <div class="bottom-btns">
+      <div class="bottom-btns" v-if="currentStory">
         <div class="story-details-info">
-            <a href="#" class="btn-story-details"></a>
-            <div class="story-viewer">
-                Johnny Mnemonic, Johm Smith and 24 others
+            <a href="#" class="btn-story-details" />
+            <div class="story-viewer" v-if="currentStory.viewersCount">
+                {{ viewersText }}
             </div>
         </div>
         
@@ -174,6 +174,19 @@ export default {
     },
     deletedPost() {
       return this.$store.state.story.deletedPost;
+    },
+    viewersText() {
+      if (!this.currentStory) return;
+
+      const { viewersCount, viewers } = this.currentStory;
+      const othersCount = viewersCount - 2;
+      const othersText = othersCount > 0 ? ` and ${othersCount} others` : "";
+      const firstTwo = viewers
+        .slice(0, 2)
+        .map(el => el.name)
+        .join(", ");
+
+      return `${firstTwo}${othersText}`;
     }
   },
   methods: {

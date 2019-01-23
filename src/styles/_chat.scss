@@ -1129,6 +1129,14 @@
       background-color: $white;
       border-right-color: $white;
     }
+
+    &:before {
+      background: none;
+    }
+
+    &:after {
+      background: none;
+    }
   }
 
   &:last-child {

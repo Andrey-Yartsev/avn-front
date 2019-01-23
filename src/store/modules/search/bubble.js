@@ -7,6 +7,9 @@ const state = {};
 const mutations = {
   reset(state) {
     state.items = [];
+  },
+  setItems(state, items) {
+    state.items = items;
   }
 };
 
@@ -14,7 +17,7 @@ const actions = {};
 
 createRequestAction({
   prefix: "search",
-  apiPath: "search/users",
+  apiPath: "search/{type}",
   state,
   mutations,
   actions,
@@ -32,6 +35,9 @@ createRequestAction({
     }
     options.query = params;
     return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{type}/, params.type);
   },
   resultConvert: function(result) {
     return result.list;

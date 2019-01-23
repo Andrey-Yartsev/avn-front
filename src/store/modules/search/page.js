@@ -36,6 +36,7 @@ const actions = {
   search({ dispatch, commit }, params) {
     params.limit = limit;
     dispatch("searchRequest", params).then(r => {
+      commit("search/bubble/setItems", r.list.slice(0, 5), { root: true });
       commit("searchSetNextState", r);
     });
   },
@@ -44,6 +45,7 @@ const actions = {
     params.marker = state.marker || "";
     params.limit = limit;
     dispatch("searchRequest", params).then(r => {
+      commit("search/bubble/setItems", r.list, { root: true });
       commit("searchSetNextState", r);
     });
   }

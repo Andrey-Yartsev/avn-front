@@ -15,7 +15,7 @@ export default {
   name: "StatisticsPosts",
 
   props: {
-    data: {
+    dataSet: {
       type: Array,
       required: true
     },
@@ -27,7 +27,8 @@ export default {
 
   data() {
     return {
-      loading: true
+      loading: true,
+      chartUpdateTimeoutId: null
     };
   },
 
@@ -36,12 +37,6 @@ export default {
   },
 
   watch: {
-    data() {
-      if (this.loading) {
-        this.loading = false;
-      }
-      this.setData();
-    },
     period() {
       this.init();
     }
@@ -64,8 +59,84 @@ export default {
 
       this.buildContainers();
       this.initCharts();
-      this.setData();
+      this.processDataSet();
     },
+    updateChartData(data, period, type) {
+      const arrValues = {};
+      let y = 0;
+      for (let j = this.barCount; j >= 1; j--) {
+        this.charts[period][type].dataProvider[y][type] = 0;
+        y++;
+      }
+      for (let index in data.statistics.data) {
+        if (
+          data.statistics.data.hasOwnProperty(index) &&
+          (("undefined" !== typeof data.statistics.data[index].total &&
+            data.statistics.data[index].total) ||
+            ("undefined" === typeof data.statistics.data[index].total &&
+              data.statistics.data[index]))
+        ) {
+          let currIndex = 0,
+            diff = 0;
+          for (let j = 0; j < this.barCount; j++) {
+            let momentDiff = Math.abs(
+              this.charts[period][type].dataProvider[j].date - index
+            );
+            if (0 === j || diff > momentDiff) {
+              diff = momentDiff;
+              currIndex = j;
+            }
+          }
+          let val = parseFloat(
+              this.charts[period][type].dataProvider[currIndex][type]
+            ),
+            wsVal =
+              "undefined" !== typeof data.statistics.data[index].total
+                ? data.statistics.data[index].total
+                : data.statistics.data[index];
+          arrValues[currIndex] = val + wsVal;
+        }
+      }
+      for (let arrIndex in arrValues) {
+        if (arrValues.hasOwnProperty(arrIndex)) {
+          this.charts[period][type].dataProvider[arrIndex][type] =
+            arrValues[arrIndex];
+        }
+      }
+    },
+    // updateChart(period, type) {
+    //   // if (this.chartUpdateTimeoutId) {
+    //   //   clearTimeout(this.chartUpdateTimeoutId);
+    //   // }
+    //   // this.chartUpdateTimeoutId = setTimeout(() => {
+    //   //  this._updateChart(period, type);
+    //   // }, 500);
+    // },
+    updateChart(period, type) {
+      this.charts[period][type].validateData();
+    },
+    processData(data) {
+      const period = this.period;
+      for (let type of Object.keys(this.chartTypes)) {
+        switch (data.statistics.code) {
+          case type + "_detailed_histogram_" + period:
+            this.updateChartData(data, period, type);
+            this.updateChart(period, type);
+            break;
+          case type + "_count_" + period:
+            if ("NaN" !== data.statistics.data) {
+              let counter = document.getElementById(type + "_charts_counter");
+              let count = counter.getElementsByClassName("count")[0];
+              count.innerHTML = data.statistics.data;
+            }
+            break;
+        }
+      }
+    },
+    processDataSet() {
+      this.dataSet.forEach(this.processData);
+    },
+    //
     buildContainers() {
       let html = "";
       Object.keys(this.chartTypes).forEach(type => {
@@ -328,72 +399,6 @@ export default {
           <span class="statistics-chart-scale__item">20:00</span>
           <span class="statistics-chart-scale__item">24:00</span>
         `;
-      }
-    },
-    setData() {
-      this.data.forEach(this.processDataItem);
-    },
-    processDataItem(data) {
-      const period = this.period;
-      for (let type in this.chartTypes) {
-        if (!this.chartTypes.hasOwnProperty(type)) {
-          continue;
-        }
-        let arrValues = {};
-        let y;
-        switch (data.statistics.code) {
-          case type + "_detailed_histogram_" + period:
-            arrValues = {};
-            y = 0;
-            for (let j = this.barCount; j >= 1; j--) {
-              this.charts[period][type].dataProvider[y][type] = 0;
-              y++;
-            }
-            for (let index in data.statistics.data) {
-              if (
-                data.statistics.data.hasOwnProperty(index) &&
-                (("undefined" !== typeof data.statistics.data[index].total &&
-                  data.statistics.data[index].total) ||
-                  ("undefined" === typeof data.statistics.data[index].total &&
-                    data.statistics.data[index]))
-              ) {
-                let currIndex = 0,
-                  diff = 0;
-                for (let j = 0; j < this.barCount; j++) {
-                  let momentDiff = Math.abs(
-                    this.charts[period][type].dataProvider[j].date - index
-                  );
-                  if (0 === j || diff > momentDiff) {
-                    diff = momentDiff;
-                    currIndex = j;
-                  }
-                }
-                var val = parseFloat(
-                    this.charts[period][type].dataProvider[currIndex][type]
-                  ),
-                  ws_val =
-                    "undefined" !== typeof data.statistics.data[index].total
-                      ? data.statistics.data[index].total
-                      : data.statistics.data[index];
-                arrValues[currIndex] = val + ws_val;
-              }
-            }
-            for (let arrIndex in arrValues) {
-              if (arrValues.hasOwnProperty(arrIndex)) {
-                this.charts[period][type].dataProvider[arrIndex][type] =
-                  arrValues[arrIndex];
-              }
-            }
-            this.charts[period][type].validateData();
-            break;
-          case type + "_count_" + period:
-            if ("NaN" !== data.statistics.data) {
-              let counter = document.getElementById(type + "_charts_counter");
-              let count = counter.getElementsByClassName("count")[0];
-              count.innerHTML = data.statistics.data;
-            }
-            break;
-        }
       }
     }
   }

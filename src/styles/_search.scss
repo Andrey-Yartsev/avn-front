@@ -181,37 +181,3 @@
     }
   }
 }
-
-.header-search-page {
-  padding: 16px;
-  width: 100%;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    border-bottom: none;
-    background-color: transparent;
-    padding: 0;
-    width: 170px;
-    position: absolute;
-    right: 0;
-    top: -10px;
-  }
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    transition: margin .2s;
-  }
-
-  .field {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      position: relative;
-      z-index: 1;
-    }
-  }
-
-  input[type="text"] {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      border-radius: 15px;
-    }
-  }
-}

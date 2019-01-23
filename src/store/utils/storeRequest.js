@@ -47,8 +47,8 @@ const storeRequest = (
       })
       .catch(error => {
         if (error.name === "TypeError") {
-          // console.error(error);
-          error = { message: "Internal Server Error" };
+          console.error(error);
+          error = { message: error.toString() };
         }
         if (localError) {
           commit(prefix + "Error", error);

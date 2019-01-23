@@ -2,8 +2,9 @@
   <div class="boxes">
     <PostsModal
       v-if="$store.state.modal.statPosts.show"
-      :data="tempDataQueue"
+      :dataSet="tempDataSet"
       @periodChange="postsPeriodChange"
+      ref="postsModal"
     />
 
     <div class="cols">
@@ -40,7 +41,7 @@
               <span class="likes" ref="chartsDataPostsLikes">Likes <span>0</span></span>
               <span class="comments" ref="chartsDataPostsComments">Comments	<span>0</span></span>
             </div>
-            <div id="posts_charts" class="charts-wrapper charts-wrapper_posts"></div>
+            <div id="posts_chart" class="charts-wrapper charts-wrapper_posts"></div>
             <div class="statistics-chart-scale"></div>
           </div>
         </div>
@@ -57,7 +58,7 @@
               <span class=views ref="chartsDataStoriesViews">Views<span>0</span></span>
               <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
             </div>
-            <div id="stories_charts" class="charts-wrapper charts-wrapper_stories"></div>
+            <div id="stories_chart" class="charts-wrapper charts-wrapper_stories"></div>
             <div class="statistics-chart-scale"></div>
           </div>
         </div>
@@ -183,25 +184,41 @@ export default {
       showedStats: {},
       profileMapData: [],
       topFollowers: null,
-      tempDataQueue: [],
-      subscribedWsCodes: []
+      tempDataSet: [],
+      subscribedWsCodes: [],
+      //
+      chartDataSets: {
+        posts_chart: {},
+        stories_chart: {}
+      },
+      updateDataTimeoutIds: {},
+      updateChartTimeoutIds: {}
     };
   },
-  created() {
-    if (!ws.connected) {
-      ws.connect();
-      ws.on("connect", () => {
-        this.sendWsRequests();
-      });
-    } else {
-      this.sendWsRequests();
-    }
-    ws.on("message", this.onData);
+  mounted() {
+    this.initWs();
+    this.initLineCharts();
+    this.fillLineChartsByEmptyPoints();
+    this.initMapCharts();
+    this.initTitles();
+    //
+    this.openPostsModal();
   },
   beforeDestroy() {
     ws.removeListener("message", this.onData);
   },
   methods: {
+    initWs() {
+      if (!ws.connected) {
+        ws.connect();
+        ws.on("connect", () => {
+          this.sendWsRequests();
+        });
+      } else {
+        this.sendWsRequests();
+      }
+      ws.on("message", this.onData);
+    },
     openPostsModal() {
       this.$store.dispatch("modal/show", { name: "statPosts" });
     },
@@ -271,35 +288,64 @@ export default {
       this.$refs[ref].innerHTML = title + "<span>" + value + "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
+      const chartId = chart.div.id;
+      const dataId = chart.div.id + "-" + dataProviderKey;
+
+      // updating data
+      if (this.updateDataTimeoutIds[dataId]) {
+        clearTimeout(this.updateDataTimeoutIds[dataId]);
+      }
+      this.updateDataTimeoutIds[dataId] = setTimeout(() => {
+        this.chartDataSets[chartId][dataProviderKey] = {};
+        this.chartDataSets[chartId][dataProviderKey].statData = statData;
+        this.chartDataSets[chartId][dataProviderKey].statDataSubKey =
+          statDataSubKey || null;
+        Object.entries(this.chartDataSets[chartId]).forEach(v => {
+          this._updateChartDataProvider(
+            chart,
+            v[1].statData,
+            v[0],
+            v[1].statDataSubKey
+          );
+        });
+      }, 500);
+
+      // updating chart
+      if (this.updateChartTimeoutIds[chartId]) {
+        clearTimeout(this.updateChartTimeoutIds[chartId]);
+      }
+      this.updateChartTimeoutIds[chartId] = setTimeout(() => {
+        chart.validateData();
+        // debug("updated " + chartId);
+      }, 1000);
+    },
+    _updateChartDataProvider(chart, statData, dataProviderKey, statDataSubKey) {
       const approx = {};
-      for (let index in statData) {
-        if (statData.hasOwnProperty(index)) {
-          let currIndex = 0;
-          let diff = 0;
-          for (let j = 0; j < barCount; j++) {
-            let momentDiff = Math.abs(chart.dataProvider[j].date - index);
-            if (0 === j || diff > momentDiff) {
-              diff = momentDiff;
-              currIndex = j;
-            }
+      for (let index of Object.keys(statData)) {
+        let currIndex = 0;
+        let diff = 0;
+        for (let j = 0; j < barCount; j++) {
+          let momentDiff = Math.abs(chart.dataProvider[j].date - index);
+          if (0 === j || diff > momentDiff) {
+            diff = momentDiff;
+            currIndex = j;
           }
-          let val =
-            "undefined" !== typeof approx[currIndex]
-              ? parseInt(approx[currIndex], 10)
-              : 0;
-          let v;
-          if (statDataSubKey) {
-            v = statData[index][statDataSubKey];
-          } else {
-            v = statData[index];
-          }
-          approx[currIndex] = val + v;
         }
+        let val =
+          "undefined" !== typeof approx[currIndex]
+            ? parseInt(approx[currIndex], 10)
+            : 0;
+        let v;
+        if (statDataSubKey) {
+          v = statData[index][statDataSubKey];
+        } else {
+          v = statData[index];
+        }
+        approx[currIndex] = val + v;
       }
       for (let i in approx) {
         chart.dataProvider[i][dataProviderKey] = approx[i];
       }
-      chart.validateData();
     },
     updateMap(statData) {
       const sortable = [];
@@ -438,8 +484,15 @@ export default {
         return;
       }
 
-      this.tempDataQueue.push(data);
+      this.tempDataSet.push(data);
 
+      if (this.$store.state.modal.statPosts.show) {
+        this.$refs.postsModal.$refs.posts.processData(data);
+      }
+
+      this.processData(data);
+    },
+    processData(data) {
       this.showedStats[data.statistics.code] = data.statistics.time;
       const statData =
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
@@ -884,7 +937,7 @@ export default {
         ],
         dataProvider: []
       });
-      this.postsChart = window.AmCharts.makeChart("posts_charts", {
+      this.postsChart = window.AmCharts.makeChart("posts_chart", {
         type: "serial",
         categoryField: "date",
         theme: "default",
@@ -1113,7 +1166,7 @@ export default {
       //   }
       // );
       // const profile_map_data = [];
-      this.storiesChart = window.AmCharts.makeChart("stories_charts", {
+      this.storiesChart = window.AmCharts.makeChart("stories_chart", {
         type: "serial",
         categoryField: "date",
         theme: "default",
@@ -1523,12 +1576,6 @@ export default {
       this.$refs.chartPeriod2.innerHTML = weekAgoDay;
       this.$refs.chartPeriod3.innerHTML = weekAgoDay;
     }
-  },
-  mounted() {
-    this.initLineCharts();
-    this.fillLineChartsByEmptyPoints();
-    this.initMapCharts();
-    this.initTitles();
   }
 };
 </script>
