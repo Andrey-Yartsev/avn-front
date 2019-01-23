@@ -201,11 +201,12 @@ export default {
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
     this.initTitles();
-    //
-    this.openPostsModal();
   },
   beforeDestroy() {
     ws.removeListener("message", this.onData);
+    ws.send({
+      act: "clear_statistics"
+    });
   },
   methods: {
     initWs() {
@@ -270,6 +271,7 @@ export default {
       this.subscribeUserStatistics("new_post_count_" + period);
       this.subscribeUserStatistics("view_post_count_" + period);
       this.subscribeUserStatistics("post_like_count_" + period);
+      console.log("post_comment_added_count_" + period);
       this.subscribeUserStatistics("post_comment_added_count_" + period);
       //
       this.subscribeUserStatistics("new_post_detailed_histogram_" + period);
@@ -527,6 +529,7 @@ export default {
           break;
 
         case "post_comment_added_count_last_week":
+          console.log("OOOK");
           this.setCounter("chartsDataPostsComments", "Comment", statData);
           break;
 
