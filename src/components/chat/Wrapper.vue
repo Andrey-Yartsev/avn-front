@@ -1,7 +1,7 @@
 <template>
     <div
       class="chatCollectionContent"
-      :class="{chat: isSecondScreen, 'no-chats': !!$store.state.chat.chats}"
+      :class="{chat: isSecondScreen, 'no-chats': !$store.state.chat.chats.length}"
     >
       <template>
         <div class="chatHeader">
