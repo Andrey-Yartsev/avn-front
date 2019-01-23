@@ -11,7 +11,11 @@
         class="chatView"
         v-for="v in chats" v-bind:key="v.withUser.id" :class="{active: v.active}"
       >
-        <div class="avatar avatar_md"><span class="avatar__img"></span></div>
+        <div class="avatar avatar_md">
+          <span class="avatar__img">
+            <img :src="v.withUser.avatar" v-if="v.withUser.avatar">
+          </span>
+        </div>
         <div class="chatViewContent">
           <div class="chatView__header">
             <span class="name">{{ v.withUser.name }}</span>

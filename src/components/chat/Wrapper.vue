@@ -1,5 +1,6 @@
 <template>
     <div class="chatCollectionContent" :class="{chat: isSecondScreen}">
+
       <template>
         <div class="chatHeader">
           <div class="contactsListHeader">

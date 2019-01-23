@@ -28,9 +28,15 @@ const actions = {
         message,
         fromUserId: params.userId
       });
+      const chatExists = state.chats.find(
+        chat => chat.withUser.id === params.userId
+      );
+      if (!chatExists) {
+        dispatch("fetchChats");
+      }
     });
   },
-  newMessage({ state, commit, dispatch }, message) {
+  newMessage({ state, commit }, message) {
     const found = state.messages.find(v => v.id === message.id);
     if (found) {
       commit("replaceMessage", message);
@@ -47,19 +53,7 @@ const actions = {
           fromUserId: message.fromUser.id
         });
       }
-      dispatch("reorderChats", message);
     }
-  },
-  reorderChats({ commit, state, dispatch }, message) {
-    const lastMessageUserId = message.fromUser.id;
-    const lastMessageChat = state.chats.find(chat => {
-      return chat.withUser.id === lastMessageUserId;
-    });
-    if (!lastMessageChat) {
-      dispatch("fetchChats");
-      return;
-    }
-    commit("reorderChats", lastMessageUserId);
   }
 };
 
@@ -99,18 +93,6 @@ const mutations = {
   },
   addMessage(state, message) {
     state.messages = [...state.messages, message];
-  },
-  reorderChats(state, lastMessageUserId) {
-    const lastMessageChat = state.chats.find(chat => {
-      return chat.withUser.id === lastMessageUserId;
-    });
-    if (!lastMessageChat) {
-      return;
-    }
-    const filteredChats = state.chats.filter(chat => {
-      return chat.withUser.id !== lastMessageUserId;
-    });
-    state.chats = [lastMessageChat].concat(filteredChats);
   }
 };
 

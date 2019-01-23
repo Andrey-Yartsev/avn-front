@@ -82,6 +82,7 @@
 
       <button
         class="getPaid btn-el"
+        :class="{active: showPaid}"
         v-if="withUser && user.canEarn"
         @click="showPaid = !showPaid"
       ></button>
