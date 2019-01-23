@@ -4,10 +4,13 @@
   >
     <input
       @keyup="keyup"
-      v-model="query"
+      v-model="localQuery"
       class="header-search-input rounded sm"
       name="query" maxlength="13" autocomplete="off"
-      placeholder="Search" type="text"/>
+      placeholder="Search" type="text"
+      @focus="open"
+      v-click-outside="close"
+    />
     <span role="button" tabindex="-1" id="header-search-clear"></span>
 
     <button
@@ -16,47 +19,36 @@
       :disabled="!canSearch"
     ></button>
 
+    <!--
     <button
       type="button"
       class="btn-clear-search"
       :class="{hidden: !opened}"
       @click="reset"
     ></button>
+    -->
 
     <div class="header-search-results">
       <div
         class="SearchResultsPopupCollectionView"
         :class="{hidden: !opened}"
-        v-click-outside="reset"
+
       >
         <div class="users">
-          <div class="SearchResultsPopupView">
-            <a
-              :href="'/' + v.username"
-              @click.prevent="goTo('/' + v.username)"
-              class="user"
-              v-for="v in items"
-              v-bind:key="v.id"
-            >
-              <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
-              <div class="username-group">
-                <div class="user__name">
-                  <div class="name">{{ v.name }}</div>
-                  <span v-if="v.isVerified" class="verified-user"></span>
-                </div>
-                <span class="user-login">{{ v.username }}</span>
-              </div>
-            </a>
-          </div>
+          <component
+            :is="resultsComponent"
+            :items="items"
+            @away="reset"
+          />
         </div>
         <div class="search-all-link">
           <a
             :href="'/search/users/' + query"
-            @click.prevent="goTo('/search/users/' + query)"
+            @click.prevent="goTo('/search/users/' + localQuery)"
             class="searchAllLink"
           >
             Search all for&nbsp;
-            <span class="searchAllTag">{{ query }}</span>
+            <span class="searchAllTag">{{ localQuery }}</span>
           </a>
         </div>
         <button type="button" class="close" @click="reset"></button>
@@ -67,6 +59,8 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import Users from "./types/Users";
+import Posts from "./types/Posts";
 
 export default {
   name: "SearchBubble",
@@ -75,28 +69,53 @@ export default {
     ClickOutside
   },
 
+  components: {
+    Users,
+    Posts
+  },
+
   data() {
     return {
       opened2: false,
-      query: ""
+      localQuery: "",
+      cursorInField: false
     };
   },
 
   computed: {
+    loading() {
+      return this.$store.state.search.bubble.searchLoading;
+    },
     opened() {
-      return this.opened2 && this.query;
+      return this.opened2 && this.localQuery;
     },
     items() {
       return this.$store.state.search.bubble.items;
     },
     canSearch() {
-      return !!this.query.trim();
+      if (!this.localQuery) {
+        return false;
+      }
+      return !!this.localQuery.trim();
+    },
+    query() {
+      return this.$route.params.query;
+    },
+    type() {
+      return this.$route.params.type || "users";
+    },
+    resultsComponent() {
+      if (this.type === "users") {
+        return "Users";
+      } else {
+        return "Posts";
+      }
     }
   },
 
   watch: {
-    query() {
-      this.search();
+    query(query) {
+      this.localQuery = query;
     }
   },
 
@@ -104,21 +123,39 @@ export default {
     keyup(e) {
       if (e.key === "Enter") {
         this.toToSearchPage();
+        this.close();
+      } else {
+        this.search();
       }
+    },
+    open() {
+      if (this.localQuery) {
+        this.opened2 = true;
+      }
+    },
+    close() {
+      this.opened2 = false;
     },
     goTo(path) {
       this.$router.push(path);
-      this.reset();
     },
     toToSearchPage() {
       if (!this.canSearch) {
         return;
       }
-      this.$router.push("/search/users/" + this.query);
-      this.reset();
+      this.$router.push("/search/" + this.type + "/" + this.localQuery);
+      this.close();
+    },
+    searchSilent() {
+      this._search();
     },
     search() {
-      if (!this.query.trim()) {
+      console.log("XXXX");
+      this._search();
+      this.open();
+    },
+    _search() {
+      if (!this.localQuery.trim()) {
         this.$store.commit("search/bubble/reset");
         return;
       }
@@ -126,20 +163,25 @@ export default {
         clearTimeout(this.searchId);
       }
       this.searchId = setTimeout(() => {
-        this.$store
-          .dispatch("search/bubble/search", {
-            query: this.query
-          })
-          .then(() => {
-            this.opened2 = true;
-          });
+        this.$store.dispatch("search/bubble/search", {
+          type: this.type,
+          query: this.localQuery
+        });
       }, 200);
     },
     reset() {
-      this.query = "";
+      this.localQuery = "";
       this.opened2 = false;
       this.$store.commit("search/bubble/reset");
     }
+  },
+
+  mounted() {
+    setTimeout(() => {
+      if (this.query) {
+        this.localQuery = this.query;
+      }
+    }, 1);
   }
 };
 </script>
