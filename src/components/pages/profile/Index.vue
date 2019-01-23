@@ -32,8 +32,91 @@
                 rel="nofollow"
               >twitter.com/{{ profile.twitterUsername }}</a>
               <FollowersCounter :profile="profile"/>
+              <div class="stories-wrapper stories-collection" v-if="$mq==='desktop'">
+                <div class="storyCollectionView">
+                  <div class="stories-collection__header">
+                    <h4>Highlights</h4>
+                    <button class="btn-watch-all hidden-desktop" type="button">Watch All</button>
+                  </div>
+                  <div class="stories-group">
+                    <div class="stories">
+                      <div class="story">
+                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Lorem
+                            </a>
+                            <div class="story-timestamp">15 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Ipsum
+                            </a>
+                            <div class="story-timestamp">16 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Lorem
+                            </a>
+                            <div class="story-timestamp">15 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Ipsum
+                            </a>
+                            <div class="story-timestamp">16 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Ipsum
+                            </a>
+                            <div class="story-timestamp">16 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Footer class="site-footer_sidebar" v-if="$mq==='desktop'" />
             </div>
-            <Footer class="site-footer_sidebar hidden-mobile" />
           </div>
         </div>
         <div
@@ -57,6 +140,88 @@
           :page="pageName"
           ref="actionsMobile"
         />
+      </div>
+      <div class="stories-wrapper stories-collection" v-if="$mq==='mobile'">
+        <div class="storyCollectionView">
+          <div class="stories-collection__header">
+            <h4>Highlights</h4>
+            <button class="btn-watch-all hidden-desktop" type="button">Watch All</button>
+          </div>
+          <div class="stories-group">
+            <div class="stories">
+              <div class="story">
+                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a href="#" class="name">
+                      Lorem
+                    </a>
+                    <div class="story-timestamp">15 Jan</div>
+                  </div>
+                  <div class="amount-items">
+                    4 items
+                  </div>
+                </div>
+              </div>
+              <div class="story">
+                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a href="#" class="name">
+                      Ipsum
+                    </a>
+                    <div class="story-timestamp">16 Jan</div>
+                  </div>
+                  <div class="amount-items">
+                    4 items
+                  </div>
+                </div>
+              </div>
+              <div class="story">
+                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a href="#" class="name">
+                      Lorem
+                    </a>
+                    <div class="story-timestamp">15 Jan</div>
+                  </div>
+                  <div class="amount-items">
+                    4 items
+                  </div>
+                </div>
+              </div>
+              <div class="story">
+                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a href="#" class="name">
+                      Ipsum
+                    </a>
+                    <div class="story-timestamp">16 Jan</div>
+                  </div>
+                  <div class="amount-items">
+                    4 items
+                  </div>
+                </div>
+              </div>
+              <div class="story">
+                <a class="avatar avatar_lg-tab avatar_gap-r-m avatar_gap-r-md_reset-mobd" href="#"><span class="avatar__img"></span></a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a href="#" class="name">
+                      Ipsum
+                    </a>
+                    <div class="story-timestamp">16 Jan</div>
+                  </div>
+                  <div class="amount-items">
+                    4 items
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="container">
         <div class="row">

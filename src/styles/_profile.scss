@@ -53,12 +53,24 @@
       flex-direction: column;
     }
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
     > .container {
 
       @include media-breakpoint-down($desktop-breakpoint) {
         flex: 1;
         background: $white
         linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
     }
   }
@@ -124,6 +136,19 @@
       }
     }
   }
+
+  .header-scrolled {
+
+    .white-bg-block {
+
+      > .container {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          min-height: calc(100vh - 152px);
+        }
+      }
+    }
+  }
 }
 
 .profile-header-container {
@@ -154,16 +179,15 @@
   .profile-desc {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      width: 100%;
-
-      padding-top: 51px;
-      transition: all .3s;
+      //width: 100%;
+      //position: relative;
+      //transition: all .3s;
     }
 
     .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding-top: 0;
+        //padding-top: 0;
       }
     }
   }
@@ -437,6 +461,58 @@
 
 .profile-desc {
   padding: 0 15px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-top: 51px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 152px);
+    transition: all .3s;
+    position: relative;
+  }
+
+  .header-scrolled & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: fixed;
+      padding-top: 0;
+      top: 152px;
+      bottom: 0;
+      max-width: 320px;
+    }
+  }
+
+  .site-footer {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 0 0 auto;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .container {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  .stories-collection {
+
+    + .site-footer {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        left: 13px;
+        right: 15px;
+        bottom: 0;
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
 }
 
 .profile-text {
@@ -860,8 +936,10 @@
   }
 
   .row {
+
     @include media-breakpoint-up($desktop-breakpoint) {
       width: calc(100% + 20px);
+      flex: 1;
     }
   }
 

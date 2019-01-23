@@ -114,18 +114,12 @@
 
   &_sticky-bottom {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: fixed;
-      bottom: 0;
-      width: inherit;
-      max-width: inherit;
-    }
-
-    .container {
+    .profile-header & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        width: inherit;
-        max-width: none;
+        position: fixed;
+        bottom: 0;
+        max-width: 290px;
       }
     }
   }
