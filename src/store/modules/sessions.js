@@ -1,6 +1,6 @@
 "use strict";
 
-import SessionsApi from "@/api/sessions";
+import { createRequestAction } from "../utils/storeRequest";
 
 const state = {
   loading: false,
@@ -9,21 +9,11 @@ const state = {
 };
 
 const actions = {
-  fetch({ commit }) {
-    SessionsApi.fetch().then(async sessions => {
-      commit("setSessions", await sessions.json());
-    });
-  },
-  delete({ commit }, id) {
-    return SessionsApi.delete(id).then(() => {
-      commit("delete", id);
-    });
-  },
-  deleteAll({ commit, state }) {
+  deleteAll({ dispatch, commit, state }) {
     Promise.all(
       state.sessions.map(session => {
         return new Promise(resolve => {
-          SessionsApi.delete(session.id).then(resolve);
+          dispatch("delete", session.id).then(resolve);
         });
       })
     );
@@ -42,6 +32,32 @@ const mutations = {
     state.sessions = [];
   }
 };
+
+createRequestAction({
+  prefix: "fetch",
+  apiPath: "sessions",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  resultKey: "sessions"
+});
+
+createRequestAction({
+  prefix: "delete",
+  apiPath: "sessions/{id}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params);
+  }
+});
 
 export default {
   namespaced: true,

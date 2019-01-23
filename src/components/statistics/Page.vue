@@ -271,7 +271,6 @@ export default {
       this.subscribeUserStatistics("new_post_count_" + period);
       this.subscribeUserStatistics("view_post_count_" + period);
       this.subscribeUserStatistics("post_like_count_" + period);
-      console.log("post_comment_added_count_" + period);
       this.subscribeUserStatistics("post_comment_added_count_" + period);
       //
       this.subscribeUserStatistics("new_post_detailed_histogram_" + period);

@@ -90,6 +90,11 @@
           </div>
         </div>
         <div class="session-content">
+          <div class="loader-container" v-if="loading">
+            <Loader :fullscreen="false" text="" class="transparent small"/>
+          </div>
+
+
           <div class="content shadow-block" v-if="sessions.length">
             <div class="SessionsView" v-for="v in sessions" v-bind:key="v.id">
               <div class="session-info-header">
@@ -119,6 +124,7 @@
 
 <script>
 import Common from "../common";
+import Loader from "@/components/common/Loader";
 import Auth from "@/utils/auth";
 import execCopy from "@/utils/execCopy";
 import datetimeHelper from "@/helpers/datetime";
@@ -127,6 +133,10 @@ export default {
   name: "SecuritySettingsContent",
 
   mixins: [Common],
+
+  components: {
+    Loader
+  },
 
   data() {
     return {
@@ -148,6 +158,9 @@ export default {
       get() {
         return this.$store.state.otp.currentCode;
       }
+    },
+    loading() {
+      return this.$store.state.sessions.fetchLoading;
     }
   },
 
@@ -185,6 +198,9 @@ export default {
       });
     },
     deleteAllSessions() {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
       this.$store.dispatch("sessions/deleteAll").then(() => {
         Auth.logout();
       });
