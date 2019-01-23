@@ -80,10 +80,11 @@ import UserMixin from "@/mixins/user";
 import Tip from "@/components/common/tip/User";
 import SubscribeButton from "@/components/subscription/Button";
 import UserDropdown from "@/components/common/userDropdawn/Index";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
   name: "ProfileActions",
-  mixins: [UserMixin],
+  mixins: [UserMixin, ModalRouterGoto],
   data() {
     return {
       showTip: false
@@ -131,7 +132,7 @@ export default {
       this.$store.dispatch("profile/home/unfollow", this.profile.id);
     },
     sendMessage() {
-      this.$router.push("/chat/" + this.profile.id);
+      this.goToModalRoute("chat/" + this.profile.id);
     },
     subsRequested(data) {
       if (!data.result.success) {
