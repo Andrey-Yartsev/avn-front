@@ -59,6 +59,11 @@ const actions = {
     dispatch("_fetchMessages", activeUserId).then(() => {
       commit("markChatAsViewed", activeUserId);
     });
+  },
+  delete({ dispatch, commit }, userId) {
+    dispatch("_delete", userId).then(() => {
+      commit("removeChat", userId);
+    });
   }
 };
 
@@ -75,6 +80,11 @@ const mutations = {
         v.withUser = { ...v.withUser, ...user };
       }
       return v;
+    });
+  },
+  removeChat(state, userId) {
+    state.chats = state.chats.filter(chat => {
+      return chat.withUser.id !== userId;
     });
   },
   setSecondScreen(state, isSecondScreen) {
@@ -213,7 +223,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "delete",
+  prefix: "_delete",
   apiPath: "chats/{userId}",
   state,
   mutations,
