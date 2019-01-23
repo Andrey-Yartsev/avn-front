@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <Posts :data="data" :period="period" />
+        <Posts :dataSet="dataSet" :period="period" ref="posts" />
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>
@@ -51,7 +51,7 @@ export default {
   },
 
   props: {
-    data: {
+    dataSet: {
       type: Array,
       required: true
     }
