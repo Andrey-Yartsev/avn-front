@@ -1,6 +1,8 @@
 <template>
-    <div class="chatCollectionContent" :class="{chat: isSecondScreen}">
-
+    <div
+      class="chatCollectionContent"
+      :class="{chat: isSecondScreen, 'no-chats': !!$store.state.chat.chats}"
+    >
       <template>
         <div class="chatHeader">
           <div class="contactsListHeader">
