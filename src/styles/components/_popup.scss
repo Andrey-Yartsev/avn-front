@@ -270,7 +270,6 @@
     &.storyviewers-popup {
       max-width: 100%;
       box-shadow: none;
-      background-color: transparent;
       border-radius: 0;
       position: fixed;
       left: 0;
@@ -278,10 +277,34 @@
       top: 0;
       bottom: 0;
 
+      &:after {
+        content: "";
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        top: -1px;
+        bottom: -1px;
+        background: linear-gradient(
+          30deg,
+          $secondary-color-12 10%,
+          $primary-color-12 90%
+        );
+      }
+
       .content {
         height: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
+        z-index: 1;
+      }
+
+      .close {
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+
+        &:before {
+          opacity: 1;
+        }
       }
     }
   }

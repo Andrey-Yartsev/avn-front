@@ -1635,9 +1635,15 @@
   &:after {
     content: "\E668";
     @include icon-font;
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
@@ -1648,9 +1654,9 @@
   &:after {
     content: "\E633";
     @include icon-font;
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
   }
 }
 
@@ -1661,8 +1667,34 @@
   &:after {
     content: "\E648";
     @include icon-font;
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
+    font-size: 23px;
+    width: 23px;
+    height: 23px;
+  }
+}
+
+.icn-share {
+  display: inline-block;
+  vertical-align: middle;
+
+  &:after {
+    content: "\E638";
+    @include icon-font;
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.icn-download {
+  display: inline-block;
+  vertical-align: middle;
+
+  &:after {
+    content: "\E64C";
+    @include icon-font;
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
   }
 }

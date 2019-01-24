@@ -1,19 +1,49 @@
 <template>
   <div class="StoryPageCollectionView">
-    <img src="http://placehold.it/300x300" />
 
     <div class="popup">
       <div class="overlay"></div>
       <div class="popup-container storyviewers-popup">
         <div class="content">
-
+          <div class="storyviewers-controls">
+            <button class="header-return-btn"></button>
+            <a href="#" class="btn-story-details hidden-mobile"></a>
+            <a href="#" class="btn-settings"></a>
+          </div>
+          <div class="stories-list-preview">
+              <div class="story-preview current">
+                <img src="http://placehold.it/300x300" />
+              </div>
+              <div class="story-preview">
+                  <img src="http://placehold.it/300x300" />
+              </div>
+              <div class="story-preview">
+                  <img src="http://placehold.it/300x300" />
+              </div>
+              <div class="story-preview">
+                  <img src="http://placehold.it/300x300" />
+              </div>
+          </div>
           <div class="container-story-details">
             <div class="header-story-details">
+              <div class="amount-viewers">
                 <span class="icn-viewer"></span>
                 4
+              </div>
+              <div class="story-time-created">
                 2 hours
-
-                <span class="icn-remove"></span>
+              </div>
+              <div class="controls-story">
+                <a href="#" class="controls-story__btn">
+                  <span class="icn-download"></span>
+                </a>
+                <a href="#" class="controls-story__btn">
+                  <span class="icn-share"></span>
+                </a>
+                <a href="#" class="controls-story__btn controls-story__btn_remove">
+                  <span class="icn-remove"></span>
+                </a>
+              </div>
             </div>
             <div class="body-story-details">
               <div class="list-viewers">
@@ -101,6 +131,7 @@
             </div>
           </div>
         </div>
+        <button type="button" class="close"></button>
       </div>
     </div>
   </div>
