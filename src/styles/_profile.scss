@@ -1620,9 +1620,46 @@
   color: red;
   height: 22px;
   line-height: 22px;
+  transition: all .3s;
+
+  .btn-block & {
+    color: $main-color;
+    opacity: .3;
+
+    &:hover {
+      color: red;
+      opacity: 1;
+    }
+  }
 
   &:after {
     content: "\E668";
+    @include icon-font;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.icn-viewer {
+  display: inline-block;
+  vertical-align: middle;
+
+  &:after {
+    content: "\E633";
+    @include icon-font;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.icn-remove {
+  display: inline-block;
+  vertical-align: middle;
+
+  &:after {
+    content: "\E648";
     @include icon-font;
     font-size: 20px;
     width: 20px;
