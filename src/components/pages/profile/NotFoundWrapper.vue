@@ -27,6 +27,11 @@ export default {
     error() {
       return this.$store.state.profile.home.fetchProfileError;
     }
+  },
+  watch: {
+    $route() {
+      this.$router.go();
+    }
   }
 };
 </script>
