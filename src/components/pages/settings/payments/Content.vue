@@ -68,7 +68,7 @@
                     <div
                       class="PaymentsStatementsCollectionItemView"
                       v-for="v in transactions"
-                      v-bind:key="v.createdAt"
+                      v-bind:key="v.createdAt + v.userTo.username"
                     >
                     <div class="item">
                       <div
@@ -80,7 +80,7 @@
                       </div>
                       <div class="user table__cell">
                         <router-link :to="'/' + v.userTo.username" target="_blank"
-                           class="userview-block payment-user-wrapper">
+                          class="userview-block payment-user-wrapper">
                           <span class="avatar avatar_sm">
                             <span class="avatar__img">
                               <img :src="v.userTo.avatar" v-if="v.userTo.avatar" />
