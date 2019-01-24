@@ -777,12 +777,12 @@
     .chat-page:not(.chat-page_new) &,
     .popup-container:not(.chat-popup_new-msg) & {
       position: static;
-    }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      transform: translateX(-100vw);
-      margin-top: 44px;
-      margin-bottom: 84px;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translateX(-100vw);
+        margin-top: 44px;
+        margin-bottom: 84px;
+      }
     }
   }
 

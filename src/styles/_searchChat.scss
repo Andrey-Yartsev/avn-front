@@ -137,6 +137,10 @@
         left: 20px;
         right: 20px;
       }
+
+      .chatCollectionContentWrapper:not(.contacts-top) & {
+        display: none;
+      }
     }
   }
 }
