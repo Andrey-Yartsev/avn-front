@@ -773,10 +773,16 @@
   }
 
   .no-chats & {
-    position: static;
+
+    .chat-page:not(.chat-page_new) &,
+    .popup-container:not(.chat-popup_new-msg) & {
+      position: static;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint) {
       transform: translateX(-100vw);
+      margin-top: 44px;
+      margin-bottom: 84px;
     }
   }
 
@@ -799,7 +805,11 @@
     }
 
     .no-chats & {
-      opacity: 0;
+
+      .popup-container:not(.chat-popup_new-msg) &,
+      .chat-page:not(.chat-page_new) & {
+        opacity: 0;
+      }
     }
   }
 
