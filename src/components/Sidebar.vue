@@ -68,8 +68,6 @@
 </template>
 
 <script>
-import execCopy from "@/utils/execCopy";
-
 export default {
   name: "Sidebar",
 
@@ -81,8 +79,11 @@ export default {
 
   methods: {
     copyToClipboard() {
-      execCopy(window.location.origin + "/" + this.user.username);
-      this.$store.dispatch("global/flashToast", "Profile link copied!");
+      this.$copyText(window.location.origin + "/" + this.user.username).then(
+        () => {
+          this.$store.dispatch("global/flashToast", "Profile link copied!");
+        }
+      );
     },
     toggleDarkTheme() {
       this.$store.dispatch("global/toggleDarkTheme");

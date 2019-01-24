@@ -126,7 +126,6 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import Auth from "@/utils/auth";
-import execCopy from "@/utils/execCopy";
 import datetimeHelper from "@/helpers/datetime";
 
 export default {
@@ -206,7 +205,7 @@ export default {
       });
     },
     copyKey() {
-      execCopy(this.otp.code);
+      this.$copyText(this.otp.code);
     },
     getActivityTime(time) {
       return datetimeHelper(time);

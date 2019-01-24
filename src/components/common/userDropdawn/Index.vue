@@ -28,7 +28,6 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
-import { execCopy } from "@/helpers/page";
 
 export default {
   name: "SearchUserDropdown",
@@ -91,9 +90,10 @@ export default {
       this.$emit("hideDropdawn");
     },
     copyHref() {
-      execCopy(this.href);
-      this.copied = true;
-      setTimeout(() => (this.copied = false), 1000);
+      this.$copyText(this.href).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
     }
   }
 };

@@ -27,7 +27,6 @@
 
 <script>
 import userMixin from "@/mixins/user";
-import { execCopy } from "@/helpers/page";
 
 export default {
   name: "PostDropdown",
@@ -71,9 +70,10 @@ export default {
       this.$emit("clickOnDetailsView");
     },
     copyHref() {
-      execCopy(this.href);
-      this.copied = true;
-      setTimeout(() => (this.copied = false), 1000);
+      this.$copyText(this.href).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
     },
 
     deletePost() {

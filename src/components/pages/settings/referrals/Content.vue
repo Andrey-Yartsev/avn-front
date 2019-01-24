@@ -57,7 +57,6 @@
 
 <script>
 import Common from "../common";
-import execCopy from "@/utils/execCopy";
 
 export default {
   name: "ReferralsSettingsContent",
@@ -80,8 +79,9 @@ export default {
 
   methods: {
     copyToClipboard() {
-      execCopy(this.url);
-      this.$store.dispatch("global/flashToast", "Referral URL copied!");
+      this.$copyText(this.url).then(() => {
+        this.$store.dispatch("global/flashToast", "Referral URL copied!");
+      });
     }
   }
 };
