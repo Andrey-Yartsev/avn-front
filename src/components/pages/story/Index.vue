@@ -325,7 +325,11 @@ export default {
     close: function() {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
-      this.$router.go(-1);
+      if (global.storyFirstEnter) {
+        this.$router.push("/");
+      } else {
+        this.$router.go(-1);
+      }
     },
 
     pause: function() {

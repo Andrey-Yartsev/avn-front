@@ -22,6 +22,7 @@
           </label>
         </div>
       </div>
+      <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">
           <div class="form-group form-group_with-label form-group-checkbox">
@@ -40,6 +41,7 @@
           </div>
         </div>
       </div>
+      -->
       <div class="form-title tweet-posts-block border-top disabled border-top-mobile">
         <div class="inner">
           <span class="semi-transparent">

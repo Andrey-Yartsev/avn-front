@@ -70,15 +70,13 @@
 
 <script>
 import moment from "moment";
+import ChartSettings from "./ChartSettings.js";
 
 export default {
   name: "Statistic",
   data() {
     return {
-      stream_scale_unit: 0,
-      scale_count: 0,
-      haveToSave: false,
-      scale_format: ""
+      haveToSave: false
     };
   },
   props: {
@@ -94,7 +92,7 @@ export default {
       type: Number,
       isRequired: true
     },
-    streamTimeStart: {
+    streamStartTime: {
       type: Number,
       isRequired: true
     },
@@ -125,306 +123,86 @@ export default {
     },
     chartScaleUnits() {
       const arr = [];
-      for (let i = 0; i <= this.scale_count; i++) {
+      for (let i = 0; i <= this.scale; i++) {
         let item = moment
-          .unix(Math.round(i * this.stream_scale_unit))
-          .format(this.scale_format);
+          .unix(Math.round(i * this.streamScaleUnit))
+          .format(this.format);
 
         arr.push(item);
       }
-
-      console.log(arr);
 
       return arr;
     }
   },
   methods: {
     buildChart() {
-      this.removeChart();
-      const scale_format = this.streamDuration < 3600 ? "m:ss" : "HH:mm:ss";
-      const bar_count =
-        this.streamDuration < bar_count ? this.streamDuration : 47;
-      const scale_count =
-        this.streamDuration < scale_count ? this.streamDuration : 4;
-      const stream_scale_unit = this.streamDuration / scale_count;
+      this.format = this.streamDuration < 3600 ? "m:ss" : "HH:mm:ss";
+      this.barCount = this.streamDuration < 47 ? this.streamDuration : 47;
+      this.scale = this.streamDuration < 4 ? this.streamDuration : 4;
+      this.streamScaleUnit = this.streamDuration / this.scale;
+      this.streamUnitTime = this.streamDuration / this.barCount;
+      this.CHART = global.AmCharts.makeChart("stream-chart", ChartSettings);
 
-      this.scale_count = scale_count;
-      this.stream_scale_unit = stream_scale_unit;
-      this.scale_format = scale_format;
-
-      const stream_unit_time = this.streamDuration / bar_count;
-      const stream_chart = global.AmCharts.makeChart("stream-chart", {
-        type: "serial",
-        categoryField: "date",
-        theme: "default",
-        fontFamily: "Open Sans",
-        color: "#7c8b96",
-        autoDisplay: false,
-        autoMargins: false,
-        marginBottom: 0,
-        marginTop: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        categoryAxis: {
-          labelsEnabled: false,
-          axisColor: "#fff",
-          axisAlpha: 0.2,
-          startOnAxis: true,
-          gridAlpha: 0,
-          tickLength: 0
-        },
-        valueAxes: [
-          {
-            labelsEnabled: false,
-            axisThickness: 0,
-            dashLength: 6,
-            tickLength: 0,
-            gridAlpha: 0.1,
-            gridColor: "#7c8b96",
-            zeroGridAlpha: 0,
-            autoGridCount: false,
-            gridCount: 4
-          }
-        ],
-        graphs: [
-          {
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#FF335A",
-            type: "smoothedLine",
-            fillColors: ["#FF335A", "rgba(0,0,0,0)"],
-            valueField: "viewers",
-            lineThickness: 1.5
-          },
-          {
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#ff9500",
-            fillColors: ["#ff9500", "rgba(0,0,0,0)"],
-            type: "smoothedLine",
-            valueField: "likes",
-            lineThickness: 1.5
-          },
-          {
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#67cc2e",
-            fillColors: ["#67cc2e", "rgba(0,0,0,0)"],
-            type: "smoothedLine",
-            valueField: "tips",
-            lineThickness: 1.5
-          },
-          {
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#3abfd3",
-            fillColors: ["#3abfd3", "rgba(0,0,0,0)"],
-            type: "smoothedLine",
-            valueField: "comments",
-            lineThickness: 1.5
-          }
-        ],
-        dataProvider: []
-      });
-
-      for (var i = 0; i < bar_count; i++) {
-        stream_chart.dataProvider.push({
-          date: Math.round(this.streamTimeStart + i * stream_unit_time),
-          viewers: 0,
-          likes: 0,
-          tips: 0,
-          comments: 0
+      for (let i = 0; i < this.barCount; i += 1) {
+        this.CHART.dataProvider.push({
+          date: Math.round(this.streamStartTime + i * this.streamUnitTime),
+          look: 0,
+          like: 0,
+          tip: 0,
+          comment: 0
         });
       }
 
-      stream_chart.validateData();
-
-      // onPing(function(data) {
-      //   if ("undefined" !== typeof data.statistics) {
-      //     if (
-      //       "undefined" !== typeof SHOWED_STATISTICS[data.statistics.code] &&
-      //       SHOWED_STATISTICS[data.statistics.code] > data.statistics.time
-      //     ) {
-      //       return;
-      //     }
-      //     SHOWED_STATISTICS[data.statistics.code] = data.statistics.time;
-      //     switch (data.statistics.code) {
-      //       case "stream_look_search_all":
-      //         var approx_arr = {};
-      //         data.statistics.data.forEach(function(item) {
-      //           var timestamp = moment(item.message.timestamp).format("X");
-      //           var curr_index = 0,
-      //             diff = 0;
-      //           for (var ii = 0; ii < bar_count; ii++) {
-      //             var moment_diff = Math.abs(
-      //               stream_chart.dataProvider[ii].date - timestamp
-      //             );
-      //             if (0 === ii || diff > moment_diff) {
-      //               diff = moment_diff;
-      //               curr_index = ii;
-      //             }
-      //           }
-      //           var val =
-      //             "undefined" !== typeof approx_arr[curr_index]
-      //               ? approx_arr[curr_index]
-      //               : 0;
-      //           approx_arr[curr_index] = val + 1;
-      //         });
-      //         for (var i in approx_arr) {
-      //           stream_chart.dataProvider[i].viewers = approx_arr[i];
-      //         }
-      //         stream_chart.validateData();
-      //         break;
-      //       case "stream_like_search_all":
-      //         var approx_arr = {};
-      //         data.statistics.data.forEach(function(item) {
-      //           var timestamp = moment(item.message.timestamp).format("X");
-      //           var curr_index = 0,
-      //             diff = 0;
-      //           for (var ii = 0; ii < bar_count; ii++) {
-      //             var moment_diff = Math.abs(
-      //               stream_chart.dataProvider[ii].date - timestamp
-      //             );
-      //             if (0 === ii || diff > moment_diff) {
-      //               diff = moment_diff;
-      //               curr_index = ii;
-      //             }
-      //           }
-      //           var val =
-      //             "undefined" !== typeof approx_arr[curr_index]
-      //               ? approx_arr[curr_index]
-      //               : 0;
-      //           approx_arr[curr_index] = val + 1;
-      //         });
-      //         for (var i in approx_arr) {
-      //           stream_chart.dataProvider[i].likes = approx_arr[i];
-      //         }
-      //         stream_chart.validateData();
-      //         break;
-      //       case "stream_comment_search_all":
-      //         var approx_arr = {};
-      //         data.statistics.data.forEach(function(item) {
-      //           var timestamp = moment(item.message.timestamp).format("X");
-      //           var curr_index = 0,
-      //             diff = 0;
-      //           for (var ii = 0; ii < bar_count; ii++) {
-      //             var moment_diff = Math.abs(
-      //               stream_chart.dataProvider[ii].date - timestamp
-      //             );
-      //             if (0 === ii || diff > moment_diff) {
-      //               diff = moment_diff;
-      //               curr_index = ii;
-      //             }
-      //           }
-      //           var val =
-      //             "undefined" !== typeof approx_arr[curr_index]
-      //               ? approx_arr[curr_index]
-      //               : 0;
-      //           approx_arr[curr_index] = val + 1;
-      //         });
-      //         for (var i in approx_arr) {
-      //           stream_chart.dataProvider[i].comments = approx_arr[i];
-      //         }
-      //         stream_chart.validateData();
-      //         break;
-      //       case "stream_tip_search_all":
-      //         var approx_arr = {};
-      //         data.statistics.data.forEach(function(item) {
-      //           var timestamp = moment(item.message.timestamp).format("X");
-      //           var curr_index = 0,
-      //             diff = 0;
-      //           for (var ii = 0; ii < bar_count; ii++) {
-      //             var moment_diff = Math.abs(
-      //               stream_chart.dataProvider[ii].date - timestamp
-      //             );
-      //             if (0 === ii || diff > moment_diff) {
-      //               diff = moment_diff;
-      //               curr_index = ii;
-      //             }
-      //           }
-      //           var val =
-      //             "undefined" !== typeof approx_arr[curr_index]
-      //               ? approx_arr[curr_index]
-      //               : 0;
-      //           approx_arr[curr_index] = val + 1;
-      //         });
-      //         for (var i in approx_arr) {
-      //           stream_chart.dataProvider[i].tips = approx_arr[i];
-      //         }
-      //         stream_chart.validateData();
-      //         break;
-      //     }
-      //   }
-      // });
-      // getUserStatistics("stream_look_search_all", {
-      //   stream_id: streamId
-      // });
-      // getUserStatistics("stream_like_search_all", {
-      //   stream_id: streamId
-      // });
-
-      // if (ENABLE_CHAT_SERVICE) {
-      //   StreamComments.getStats(function(response) {
-      //     var approx_arr = {};
-      //     response.messages.forEach(function(item) {
-      //       var timestamp = moment(item.date).format("X");
-      //       var curr_index = 0;
-      //       var diff = 0;
-      //       for (var ii = 0; ii < bar_count; ii++) {
-      //         var moment_diff = Math.abs(
-      //           stream_chart.dataProvider[ii].date - timestamp
-      //         );
-      //         if (0 === ii || diff > moment_diff) {
-      //           diff = moment_diff;
-      //           curr_index = ii;
-      //         }
-      //       }
-      //       var val =
-      //         "undefined" !== typeof approx_arr[curr_index]
-      //           ? approx_arr[curr_index]
-      //           : 0;
-      //       approx_arr[curr_index] = val + item.count;
-      //     });
-
-      //     for (var i in approx_arr) {
-      //       stream_chart.dataProvider[i].comments = approx_arr[i];
-      //     }
-      //     stream_chart.validateData();
-      //   });
-      // } else {
-      //   // getUserStatistics("stream_comment_search_all", {
-      //   //   stream_id: streamId
-      //   // });
-      // }
-
-      // getUserStatistics("stream_tip_search_all", {
-      //   stream_id: streamId
-      // });
+      setTimeout(() => {
+        this.CHART.validateData();
+      }, 1000);
     },
-    removeChart() {
-      if (this.chart) {
-        this.chart.dispose();
+    prepareData(code) {
+      const statCode = `stream_${code}_search_all`;
+      const { data } = this.$store.state.lives.currentLive.statistic[statCode];
+      const approx = {};
+
+      data.forEach(item => {
+        const timestamp = moment(item.message.timestamp).format("X");
+        let diff = 0;
+        let currIndex = 0;
+
+        for (let index = 0; index < this.barCount; index += 1) {
+          let momentDiff = Math.abs(
+            this.CHART.dataProvider[index].date - timestamp
+          );
+
+          if (index === 0 || diff > momentDiff) {
+            diff = momentDiff;
+            currIndex = index;
+          }
+        }
+
+        approx[currIndex] = (approx[currIndex] || 0) + 1;
+      });
+
+      for (let i in approx) {
+        this.CHART.dataProvider[i][code] = approx[i];
       }
+
+      this.CHART.validateData();
     }
   },
   mounted() {
     this.buildChart();
   },
-  beforeDestroy() {
-    this.removeChart();
-  },
   watch: {
     comments() {
-      this.buildChart();
+      this.prepareData("comment");
     },
     tips() {
-      this.buildChart();
+      this.prepareData("tip");
     },
     likes() {
-      this.buildChart();
+      this.prepareData("like");
     },
     looks() {
-      this.buildChart();
+      this.prepareData("look");
     }
   }
 };

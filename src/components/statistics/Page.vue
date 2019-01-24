@@ -201,11 +201,12 @@ export default {
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
     this.initTitles();
-    //
-    this.openPostsModal();
   },
   beforeDestroy() {
     ws.removeListener("message", this.onData);
+    ws.send({
+      act: "clear_statistics"
+    });
   },
   methods: {
     initWs() {
@@ -527,6 +528,7 @@ export default {
           break;
 
         case "post_comment_added_count_last_week":
+          console.log("OOOK");
           this.setCounter("chartsDataPostsComments", "Comment", statData);
           break;
 

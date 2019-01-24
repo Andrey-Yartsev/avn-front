@@ -206,6 +206,10 @@ export default {
       return { x, y };
     },
     click(event) {
+      if (!this.connected) {
+        return;
+      }
+
       const position = this.getLikePosition(event);
       this.throttledLike(event, position);
     },

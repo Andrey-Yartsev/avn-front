@@ -31,26 +31,29 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="table-wrapper">
-        <div class="table blocked-table" v-if="items.length">
-          <div class="item" v-for="v in items" v-bind:key="v.id">
-            <div class="table__cell">
-              <router-link :to="'/' + v.username" class="userview-block">
-              <span class="avatar avatar_sm">
-                <span class="avatar__img">
-                  <img :src="v.avatar" v-if="v.avatar">
+        <div class="table blocked-table" v-if="initItems.length">
+          <template v-if="items.length">
+            <div class="item" v-for="v in items" v-bind:key="v.id">
+              <div class="table__cell">
+                <router-link :to="'/' + v.username" class="userview-block">
+                <span class="avatar avatar_sm">
+                  <span class="avatar__img">
+                    <img :src="v.avatar" v-if="v.avatar">
+                  </span>
                 </span>
-              </span>
-              <div class="name">{{ v.name }}</div>
-              <span class="user-login">{{ v.username }}</span>
-            </router-link>
-          </div>
-            <div class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected">
-              <time datetime="">{{ dt(v.blockedAt) }}</time>
+                <div class="name">{{ v.name }}</div>
+                <span class="user-login">{{ v.username }}</span>
+              </router-link>
             </div>
-            <div class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions">
-              <button type="button" class="btn-unblock" @click="unblock(v.id)"></button>
+              <div class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected">
+                <time datetime="">{{ dt(v.blockedAt) }}</time>
+              </div>
+              <div class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions">
+                <button type="button" class="btn-unblock" @click="unblock(v.id)"></button>
+              </div>
             </div>
-          </div>
+          </template>
+          <div v-else class="empty-table-info shadow-block"><span>Nothing found</span></div>
         </div>
         <div class="empty-table-info shadow-block" v-else><span>No one blocked yet</span></div>
       </div>
@@ -101,6 +104,9 @@ export default {
   },
 
   computed: {
+    initItems() {
+      return this.$store.state.blocked.users;
+    },
     items() {
       let users = this.$store.state.blocked.users;
       const query = this.query.trim();

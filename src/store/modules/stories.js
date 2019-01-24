@@ -82,6 +82,12 @@ const actions = {
             commit("postsRequestFail", res.error.message);
           });
         }
+
+        if (response.status === 401) {
+          response.json().then(function(res) {
+            commit("postsRequestFail", res.error.message);
+          });
+        }
       })
       .catch(err => {
         commit("postsRequestFail", err);

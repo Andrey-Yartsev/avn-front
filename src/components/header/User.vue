@@ -1,5 +1,6 @@
 <template>
   <a
+    v-if="user"
     :href="'/' + user.username"
     class="avatar header-avatar"
     v-click-outside="hide"
