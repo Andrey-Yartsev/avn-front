@@ -263,6 +263,7 @@ export default {
 
   created() {
     this.$store.dispatch("chat/fetchAnyChats");
+    this.$store.dispatch("chat/fetchChats");
     this.search();
   },
 

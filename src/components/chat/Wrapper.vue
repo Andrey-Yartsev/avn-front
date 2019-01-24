@@ -1,7 +1,7 @@
 <template>
     <div
       class="chatCollectionContent"
-      :class="{chat: isSecondScreen, 'no-chats': !$store.state.chat.chats.length}"
+      :class="{chat: isSecondScreen, 'no-chats': noActiveChats}"
     >
       <template>
         <div class="chatHeader">
@@ -71,6 +71,14 @@ export default {
     },
     routePath() {
       return this.$store.state.modalRouter.path;
+    },
+    noActiveChats() {
+      if (this.$store.state.chat.chats.length) {
+        return false;
+      } else if (this.$store.state.chat.activeUserId) {
+        return false;
+      }
+      return true;
     }
   },
 
