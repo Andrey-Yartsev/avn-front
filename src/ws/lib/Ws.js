@@ -5,8 +5,9 @@ import Fingerprint from "fingerprintjs2";
 import Store from "@/store";
 
 export default class Ws extends EventEmitter {
-  constructor(actions) {
+  constructor(actions, type) {
     super();
+    this.type = type;
     this.actions = actions;
     this.doNotReconnect = false;
   }
@@ -18,7 +19,12 @@ export default class Ws extends EventEmitter {
       console.log("ws connected");
     }
     const tz = moment().format("ZZ");
-    const ws = new WebSocket(process.env.VUE_APP_WS_URL);
+    let ws;
+    if (this.type && this.type === "wsg") {
+      ws = new WebSocket(process.env.VUE_APP_WSG_URL);
+    } else {
+      ws = new WebSocket(process.env.VUE_APP_WS_URL);
+    }
     this.ws = ws;
 
     ws.onopen = () => {

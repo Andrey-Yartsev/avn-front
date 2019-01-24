@@ -58,6 +58,7 @@ import Cookie from "@/utils/cookie";
 import rootClasses from "@/rootClasses";
 import postMessageHandler from "@/postMessage";
 import ws from "@/ws";
+import wsg from "@/ws/wsg";
 
 // iterate
 
@@ -196,7 +197,12 @@ export default {
     }
   },
   created() {
-    this.webSocket = ws;
+    if (this.loggedIn) {
+      this.webSocket = ws;
+    } else {
+      console.log("@@@");
+      this.webSocket = wsg;
+    }
     this.webSocket.connect();
     this.$root.ws = this.webSocket;
 
