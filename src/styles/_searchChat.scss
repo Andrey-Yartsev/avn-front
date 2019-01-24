@@ -116,6 +116,24 @@
   .contacts-top & {
     max-height: calc(50% - 30px);
   }
+
+  &.user-selected + .searchWrapper {
+
+    &:before {
+      content: "";
+      background-color: rgba(124, 139, 150, 0.2);
+      height: 1px;
+      top: 0;
+      left: 16px;
+      right: 16px;
+      position: absolute;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: 20px;
+        right: 20px;
+      }
+    }
+  }
 }
 
 .searchWrapper {
@@ -145,24 +163,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       left: 20px;
       right: 20px;
-    }
-  }
-
-  .contacts-top & {
-
-    &:before {
-      content: "";
-      background-color: rgba(124, 139, 150, 0.2);
-      height: 1px;
-      top: 0;
-      left: 16px;
-      right: 16px;
-      position: absolute;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        left: 20px;
-        right: 20px;
-      }
     }
   }
 
