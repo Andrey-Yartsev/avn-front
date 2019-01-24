@@ -248,14 +248,8 @@ export default {
       //
       this.sendPostsWsRequests("last_week");
       //
-      this.subscribeUserStatistics("story_added_count_last_week");
-      this.subscribeUserStatistics("story_view_count_last_week");
-      this.subscribeUserStatistics("story_comment_added_count_last_week");
       this.subscribeUserStatistics("story_added_detailed_histogram_last_week");
       this.subscribeUserStatistics("story_view_detailed_histogram_last_week");
-      this.subscribeUserStatistics(
-        "story_comment_detailed_histogram_last_week"
-      );
       //
       this.subscribeUserStatistics("view_profile_by_country_count_today");
       this.subscribeUserStatistics("view_profile_count_today");
@@ -268,11 +262,6 @@ export default {
       this.subscribeUserStatistics("top_followers_count_today");
     },
     sendPostsWsRequests(period) {
-      this.subscribeUserStatistics("new_post_count_" + period);
-      this.subscribeUserStatistics("view_post_count_" + period);
-      this.subscribeUserStatistics("post_like_count_" + period);
-      this.subscribeUserStatistics("post_comment_added_count_" + period);
-      //
       this.subscribeUserStatistics("new_post_detailed_histogram_" + period);
       this.subscribeUserStatistics("view_post_detailed_histogram_" + period);
       this.subscribeUserStatistics(
@@ -281,6 +270,7 @@ export default {
       this.subscribeUserStatistics("post_like_detailed_histogram_" + period);
     },
     setCounter(ref, title, value) {
+      // console.log(value);
       if (title) {
         title = pluralize(title, value) + " ";
       } else {
@@ -493,6 +483,12 @@ export default {
 
       this.processData(data);
     },
+    add(a, b) {
+      return a + b;
+    },
+    calcCount(statData) {
+      return Object.values(statData).reduce(this.add, 0);
+    },
     processData(data) {
       this.showedStats[data.statistics.code] = data.statistics.time;
       const statData =
@@ -515,69 +511,60 @@ export default {
         //   this.setCounter("chartsDataFollowersUnsubscribed", false, statData);
         //   break;
 
-        case "new_post_count_last_week":
-          this.setCounter("chartsDataPostsPosts", "Post", statData);
-          break;
-
-        case "view_post_count_last_week":
-          this.setCounter("chartsDataPostsViews", "View", statData);
-          break;
-
-        case "post_like_count_last_week":
-          this.setCounter("chartsDataPostsLikes", "Like", statData);
-          break;
-
-        case "post_comment_added_count_last_week":
-          console.log("OOOK");
-          this.setCounter("chartsDataPostsComments", "Comment", statData);
-          break;
-
-        case "story_added_count_last_week":
-          this.setCounter("chartsDataStoriesUploaded", "Uploaded", statData);
-          break;
-        case "story_view_count_last_week":
-          this.setCounter("chartsDataStoriesViews", "Views", statData);
-          break;
-        case "story_comment_count_last_week":
-          // this.setCounter("chartsDataStoriesComments", "Comment", statData);
-          break;
-
         case "new_post_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataPostsPosts",
+            "Post",
+            this.calcCount(statData)
+          );
           this.updateChart(this.postsChart, statData, "posts");
           break;
 
         case "view_post_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataPostsViews",
+            "View",
+            this.calcCount(statData)
+          );
           this.updateChart(this.postsChart, statData, "views");
           break;
 
         case "post_comment_added_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataPostsComments",
+            "Comment",
+            this.calcCount(statData)
+          );
           this.updateChart(this.postsChart, statData, "comments");
           break;
 
         case "post_like_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataPostsLikes",
+            "Like",
+            this.calcCount(statData)
+          );
           this.updateChart(this.postsChart, statData, "likes", "total");
           break;
 
         case "story_added_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataStoriesUploaded",
+            "Uploaded",
+            this.calcCount(statData)
+          );
           this.updateChart(this.storiesChart, statData, "uploads");
           break;
 
         case "story_view_detailed_histogram_last_week":
+          this.setCounter(
+            "chartsDataStoriesViews",
+            "Views",
+            this.calcCount(statData)
+          );
           this.updateChart(this.storiesChart, statData, "views");
           break;
 
-        case "story_comment_added_detailed_histogram_last_week":
-          this.updateChart(this.storiesChart, statData, "comments");
-          break;
-
-        // case 'story_view_count_last_week':
-        //   // $('#charts-data-stories .views').html(pluralize('View', statData) + ' <span>' + statData + '</span>');
-        //   break;
-        //
-        // case 'story_comment_added_count_last_week':
-        //   // $('#charts-data-stories .comments').html(pluralize('Comment', statData) + ' <span>' + statData + '</span>');
-        //   break;
-        //
         // case 'paid_subscriptions_count_last_week':
         //   // $('#charts-data-earnings .paid_subscriptions span').html(statData);
         //   break;
