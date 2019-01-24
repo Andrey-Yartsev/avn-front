@@ -542,7 +542,7 @@ export default {
           this.setCounter(
             "chartsDataPostsLikes",
             "Like",
-            this.calcCount(statData)
+            this.calcCount(statData.total)
           );
           this.updateChart(this.postsChart, statData, "likes", "total");
           break;
