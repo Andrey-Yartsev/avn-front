@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="chatCollectionContentWrapper" :class="{'contacts-top': contactsScrollTop}">
-        <div class="searchContact">
+        <div class="searchContact" :class="{'user-selected':!!selected.length}">
           <VuePerfectScrollbar class="all-contacts-found">
             <div class="selectedContacts" v-if="selected.length">
               <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
