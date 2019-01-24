@@ -227,8 +227,8 @@
     .FooterNavCollectionView {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        margin-left: 5px;
-        min-height: 120px;
+        //margin-left: 5px;
+        //min-height: 120px;
       }
     }
   }
@@ -463,10 +463,11 @@
   padding: 0 15px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding-top: 51px;
+    margin-top: 51px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 152px);
+    min-height: calc(100vh - 456px);
+    max-height: calc(100vh - 152px);
     transition: all .3s;
     position: relative;
   }
@@ -475,10 +476,10 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       position: fixed;
-      padding-top: 0;
-      top: 152px;
+      margin-top: 0;
       bottom: 0;
       max-width: 320px;
+      width: 100%;
     }
   }
 
@@ -486,8 +487,9 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 0 0 auto;
-      margin-top: 0;
-      width: 100%;
+      margin-top: auto;
+      width: auto;
+      margin-right: 14px;
     }
 
     .container {
@@ -504,12 +506,12 @@
     + .site-footer {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        left: 13px;
-        right: 15px;
-        bottom: 0;
-        width: auto;
-        max-width: none;
+        //position: absolute;
+        //left: 13px;
+        //right: 15px;
+        //bottom: 0;
+        //width: auto;
+        //max-width: none;
       }
     }
   }
