@@ -10,7 +10,7 @@
           <div class="wrap-name">
             <router-link :to="'/' + profile.username" class="name">{{ profile.name }}</router-link>
           </div>
-          <span class="user-login">
+          <span class="user-login reset-ml">
             <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
           </span>
           </div>

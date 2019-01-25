@@ -24,7 +24,7 @@
             <span class="icn-block"></span>
           </div>
         </div>
-        <span class="user-login">
+        <span class="user-login reset-ml">
           <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
         </span>
       </div>

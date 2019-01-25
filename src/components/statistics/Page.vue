@@ -127,7 +127,7 @@
                         <div class="user__name">
                           <div class="name">{{ v.name }}</div>
                         </div>
-                        <span class="user-login">{{ v.username }}</span>
+                        <span class="user-login reset-ml">{{ v.username }}</span>
                       </div>
                     </router-link>
                   </div>

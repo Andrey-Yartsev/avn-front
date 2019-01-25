@@ -62,7 +62,7 @@
               <span class="name">{{ user.name }}</span>
               <span class="verified-user" v-if="user.isVerified"></span>
             </div>
-            <span class="user-login"><a :href="'/' + user.username">{{ user.username }}</a></span>
+            <span class="user-login reset-ml"><a :href="'/' + user.username">{{ user.username }}</a></span>
           </div>
 
           <div class="profile-picture-btns" :class="{show: showSave}">

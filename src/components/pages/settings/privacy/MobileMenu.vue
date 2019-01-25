@@ -34,7 +34,7 @@
     <div class="shadow-block no-padding">
       <div class="settings-nav">
         <router-link to="/settings/account/manage" class="settings-nav__item">
-          <span class="user-login">{{ user.name }}</span>
+          <span class="user-login reset-ml">{{ user.name }}</span>
         </router-link>
       </div>
     </div>

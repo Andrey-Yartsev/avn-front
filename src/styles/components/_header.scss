@@ -735,10 +735,6 @@
     padding-bottom: 17px;
   }
 
-  .user-login {
-    margin-left: 0;
-  }
-
   .search-all-link {
 
     a {
@@ -1349,7 +1345,6 @@
     }
 
     &.user-login {
-      margin-left: 0;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         min-width: 100%;

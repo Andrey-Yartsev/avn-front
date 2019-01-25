@@ -42,7 +42,7 @@
                   </span>
                 </span>
                 <div class="name">{{ v.name }}</div>
-                <span class="user-login">{{ v.username }}</span>
+                <span class="user-login reset-ml">{{ v.username }}</span>
               </router-link>
             </div>
               <div class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected">

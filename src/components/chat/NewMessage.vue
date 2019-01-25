@@ -54,7 +54,7 @@
                   <span class="name">{{ v.withUser.name }}</span>
                   <span class="verified-user" v-if="v.withUser.isVerified"></span>
                 </div>
-                <div class="user-login">
+                <div class="user-login reset-ml">
                   <span class="username">{{ v.withUser.username }}</span>
                 </div>
               </div>

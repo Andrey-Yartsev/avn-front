@@ -17,7 +17,7 @@
           <div class="name">{{ v.name }}</div>
           <span v-if="v.isVerified" class="verified-user"></span>
         </div>
-        <span class="user-login">{{ v.username }}</span>
+        <span class="user-login reset-ml">{{ v.username }}</span>
       </div>
     </a>
   </div>

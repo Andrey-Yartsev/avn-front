@@ -87,7 +87,7 @@
                             </span>
                           </span>
                           <span class="name">{{ v.userTo.name }}</span>
-                          <span class="user-login">{{ v.userTo.username }}</span>
+                          <span class="user-login reset-ml">{{ v.userTo.username }}</span>
                         </router-link>
                       </div>
                       <div class="status table__cell table__cell_align table__cell_align-vert-c">

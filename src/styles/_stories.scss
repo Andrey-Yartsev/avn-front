@@ -185,7 +185,6 @@
             display: block;
             padding: 0 6px;
             font-size: 15px;
-            margin-left: 0;
 
             @include media-breakpoint-down($desktop-breakpoint) {
               font-size: 11px;
@@ -305,7 +304,6 @@
       display: flex;
       align-content: center;
       align-items: center;
-      margin-left: 0;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
@@ -589,10 +587,6 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-top: 11px;
     padding-bottom: 11px;
-  }
-
-  .user-login {
-    margin-left: 0;
   }
 
   .name {

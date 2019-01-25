@@ -67,7 +67,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -77,7 +77,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -87,7 +87,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -97,7 +97,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -107,7 +107,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -127,7 +127,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>
@@ -137,7 +137,7 @@
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
                   <div class="username-group">
                     <span class="name">OnMyTeam.com Support</span>
-                    <div class="user-login">
+                    <div class="user-login reset-ml">
                       <span class="username">support</span>
                     </div>
                   </div>

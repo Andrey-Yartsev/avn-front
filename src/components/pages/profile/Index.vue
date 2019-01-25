@@ -21,7 +21,7 @@
                   <span class="icn-block"></span>
                 </div>
               </div>
-              <span class="user-login"><a>{{ profile.username }}</a></span>
+              <span class="user-login reset-ml"><a>{{ profile.username }}</a></span>
             </div>
             <div class="profile-desc">
               <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>

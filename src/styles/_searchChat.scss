@@ -49,8 +49,6 @@
   display: flex;
 
   .user-login {
-    margin-left: 0;
-
     font-size: 13px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
