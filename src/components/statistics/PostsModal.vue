@@ -67,9 +67,9 @@ export default {
   created() {
     this.periodTitles = {
       today: "Today",
-      last_week: "Last week"
-      // last_month: "Last month",
-      // last_year: "Last year"
+      last_week: "Last week",
+      last_month: "Last month",
+      last_year: "Last year"
     };
   },
 

@@ -486,8 +486,12 @@ export default {
     add(a, b) {
       return a + b;
     },
-    calcCount(statData) {
-      return Object.values(statData).reduce(this.add, 0);
+    calcCount(statData, subKey) {
+      let values = Object.values(statData);
+      if (subKey) {
+        values = values.map(v => v[subKey]);
+      }
+      return values.reduce(this.add, 0);
     },
     processData(data) {
       this.showedStats[data.statistics.code] = data.statistics.time;
@@ -542,7 +546,7 @@ export default {
           this.setCounter(
             "chartsDataPostsLikes",
             "Like",
-            this.calcCount(statData.total)
+            this.calcCount(statData, "total")
           );
           this.updateChart(this.postsChart, statData, "likes", "total");
           break;

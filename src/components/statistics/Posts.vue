@@ -360,11 +360,10 @@ export default {
         let scaleCount = 5,
           scaleHtml = "",
           periodCount = 1,
-          period = "last_week",
           format = "YYYY-MM-DD",
           displayFormat;
 
-        switch (period) {
+        switch (this.period) {
           case "last_week":
             scaleCount = 6;
             displayFormat = "ddd";
@@ -380,6 +379,7 @@ export default {
             displayFormat = "MMM";
             break;
         }
+
         for (let j = scaleCount; j >= 0; j--) {
           let currLabel = moment
             .unix(moment.utc(moment.unix(now).format(format)).unix())
