@@ -8,13 +8,11 @@
       </div>
 
       <div
-        class="border-top email-block"
-        :class="{'success': user.emailChecked, 'warning': !user.emailChecked}"
-      >
+        class="border-top email-block">
         <div class="shadow-block">
           <div class="container">
             <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
+              <label class="form-group-inner" :class="{'field-valid': user.emailChecked, 'field-invalid no-border': !user.emailChecked}">
                   <span class="label">
                     <span class="for-verified">Your email</span>
                     <span class="for-unverified">Please confirm your email</span>

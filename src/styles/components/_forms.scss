@@ -68,7 +68,7 @@ textarea {
     background-color: rgba($gray, 0.333333333);
   }
 
-  .field-invalid & {
+  .field-invalid:not(.no-border) & {
     box-shadow: 0 0 0 1px red inset;
   }
 
@@ -86,24 +86,56 @@ textarea {
   }
 }
 
-.field-invalid {
+.field-invalid,
+.field-valid {
 
   &:after {
-    content: "\E619";
     @include icon-font;
     position: absolute;
-    top: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 6px;
-    color: red;
     font-size: 24px;
     width: 1.2em;
   }
 
-  &.form-group_sm-field {
+  input, textarea {
+    padding-right: 40px;
+  }
+}
+
+.field-invalid {
+
+  &:after {
+    content: "\E619";
+    color: red;
+  }
+
+  &.no-border {
 
     &:after {
-      top: 0;
+      color: $default-primary-color;
     }
+  }
+
+  .for-verified {
+    display: none;
+  }
+
+  .for-unverified {
+    max-width: 90%;
+  }
+}
+
+.field-valid {
+
+  &:after {
+    content: "\E604";
+    color: $default-secondary-color;
+  }
+
+  .for-unverified {
+    display: none;
   }
 }
 
@@ -224,6 +256,8 @@ label {
   &-inner {
     margin: 0 0 8px;
     display: block;
+    position: relative;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
     }
@@ -803,6 +837,7 @@ select {
   text-align: center;
   color: #fff;
   width: 230px;
+  pointer-events: none;
 
   &:after {
     top: calc(100% - 3px);

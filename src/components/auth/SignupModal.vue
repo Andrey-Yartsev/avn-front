@@ -5,7 +5,7 @@
         <div class="auth-block auth-block_sm-size">
           <form v-on:submit.stop.prevent="signUp">
             <div
-              class="form-group form-group_clear-gaps form-group_sm-field"
+              class="form-group form-group_clear-gaps"
               :class="{'field-invalid':fieldError('name')}"
             >
               <input
@@ -16,7 +16,7 @@
               <div class="tooltip-info" v-if="fieldError('name')">{{ fieldError('name') }}</div>
             </div>
             <div
-              class="form-group form-group_clear-gaps form-group_sm-field"
+              class="form-group form-group_clear-gaps"
               :class="{'field-invalid':fieldError('email')}"
             >
               <input
@@ -28,7 +28,7 @@
               <div class="tooltip-info" v-if="fieldError('email')">{{ fieldError('email') }}</div>
             </div>
             <div
-              class="form-group form-group_clear-gaps form-group_sm-field"
+              class="form-group form-group_clear-gaps"
               :class="{'field-invalid':fieldError('password')}"
             >
               <input
