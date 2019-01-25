@@ -1418,7 +1418,9 @@
   }
   &-bottom-btn {
     padding: 16px 20px;
+    line-height: 26px;
     color: $primary-color;
+
     &:hover {
       color: $primary-color-darken;
     }
@@ -1438,11 +1440,6 @@
     &__qr {
       &:before {
         content: "\E63A";
-      }
-    }
-    &__share {
-      &:before {
-        content: "\E638";
       }
     }
   }

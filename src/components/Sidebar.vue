@@ -59,7 +59,7 @@
               :data-title="user.username"
               class="user-menu-bottom-btn user-menu-bottom-btn__share"
               @click="copyToClipboard"
-            ></span>
+            ><span class="icn-share icn-item"></span></span>
           </div>
         </div>
       </div>

@@ -14,28 +14,28 @@
               <div class="story-preview current">
                 <img src="http://placehold.it/300x300" />
                 <div class="amount-viewers">
-                  <span class="icn-viewer"></span>
+                  <span class="icn-viewer icn-item"></span>
                   4
                 </div>
               </div>
               <div class="story-preview">
                 <img src="http://placehold.it/300x300" />
                 <div class="amount-viewers">
-                  <span class="icn-viewer"></span>
+                  <span class="icn-viewer icn-item"></span>
                   4
                 </div>
               </div>
               <div class="story-preview">
                 <img src="http://placehold.it/300x300" />
                 <div class="amount-viewers">
-                  <span class="icn-viewer"></span>
+                  <span class="icn-viewer icn-item"></span>
                   4
                 </div>
               </div>
               <div class="story-preview">
                 <img src="http://placehold.it/300x300" />
                 <div class="amount-viewers">
-                  <span class="icn-viewer"></span>
+                  <span class="icn-viewer icn-item"></span>
                   4
                 </div>
               </div>
@@ -43,7 +43,7 @@
           <div class="container-story-details">
             <div class="header-story-details">
               <div class="amount-viewers">
-                <span class="icn-viewer"></span>
+                <span class="icn-viewer icn-item"></span>
                 4
               </div>
               <div class="story-time-created">
@@ -51,13 +51,13 @@
               </div>
               <div class="controls-story">
                 <a href="#" class="controls-story__btn">
-                  <span class="icn-download"></span>
+                  <span class="icn-download icn-item"></span>
                 </a>
                 <a href="#" class="controls-story__btn">
-                  <span class="icn-share"></span>
+                  <span class="icn-share icn-item"></span>
                 </a>
                 <a href="#" class="controls-story__btn controls-story__btn_remove">
-                  <span class="icn-remove"></span>
+                  <span class="icn-remove icn-item"></span>
                 </a>
               </div>
             </div>
@@ -71,7 +71,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -81,7 +81,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -91,7 +91,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -101,7 +101,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -111,7 +111,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -121,7 +121,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -131,7 +131,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
                 <div class="viewer-row">
                   <span class="avatar avatar_gap-r-sm avatar_sm"><span class="avatar__img"></span></span>
@@ -141,7 +141,7 @@
                       <span class="username">support</span>
                     </div>
                   </div>
-                  <a href="#" class="btn-block"><span class="icn-block"></span></a>
+                  <a href="#" class="btn-block"><span class="icn-block icn-item"></span></a>
                 </div>
               </div>
             </div>
