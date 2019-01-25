@@ -30,7 +30,9 @@ export default {
   },
   watch: {
     $route() {
-      this.$router.go();
+      if (this.error) {
+        this.$router.go();
+      }
     }
   }
 };
