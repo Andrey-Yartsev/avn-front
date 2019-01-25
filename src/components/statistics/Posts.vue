@@ -273,7 +273,7 @@ export default {
           type: "serial",
           categoryField: "date",
           theme: "default",
-          fontFamily: "Open Sans",
+          fontFamily: "arial, sans-serif",
           color: "#7c8b96",
           autoDisplay: true,
           autoMarginOffset: 5,
