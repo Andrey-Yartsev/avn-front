@@ -237,6 +237,12 @@
         position: fixed;
         border-radius: 6px;
       }
+
+      .content {
+        overflow: visible;
+        position: relative;
+        z-index: 667;
+      }
       
       .close {
 
