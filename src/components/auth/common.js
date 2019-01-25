@@ -22,6 +22,9 @@ export default {
     },
     onCaptchaExpired: function() {
       this.$refs.recaptcha.reset();
+    },
+    fieldError(name) {
+      return this.errors.first(name);
     }
   }
 };

@@ -4,21 +4,29 @@
       <div class="content">
         <div class="auth-block auth-block_sm-size">
           <form v-on:submit.stop.prevent="login">
-            <div class="form-group form-group_clear-gaps">
+            <div
+              class="form-group form-group_clear-gaps"
+              :class="{'field-invalid':fieldError('email')}"
+            >
               <input
                 class="rounded"
                 type="email" name="email" placeholder="Email" autocomplete="email"
                 v-model="email"
                 v-validate="'required|email'"
               >
+              <div class="tooltip-info" v-if="fieldError('email')">{{ fieldError('email') }}</div>
             </div>
-            <div class="form-group form-group_clear-gaps">
+            <div
+              class="form-group form-group_clear-gaps"
+              :class="{'field-invalid':fieldError('password')}"
+            >
               <input
                 type="password" name="password" placeholder="Password" autocomplete="current-password"
                 class="rounded"
                 v-model="password"
                 v-validate="'required'"
               >
+              <div class="tooltip-info" v-if="fieldError('password')">{{ fieldError('password') }}</div>
             </div>
             <recaptcha
               v-if="showCaptcha"

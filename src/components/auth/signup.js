@@ -13,16 +13,6 @@ export default {
     },
     showCaptcha() {
       return this.$store.state.signUp.showCaptcha;
-    },
-    err() {
-      if (this.error) {
-        return this.error;
-      }
-      const errors = this.errors.all();
-      if (errors.length) {
-        return errors[0];
-      }
-      return null;
     }
   },
 

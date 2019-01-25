@@ -28,10 +28,6 @@ export default {
       if (this.error2) {
         return this.error2;
       }
-      const errors = this.errors.all();
-      if (errors.length) {
-        return errors[0];
-      }
       return null;
     }
   },
