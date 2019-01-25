@@ -193,14 +193,9 @@ label {
         padding: 0 11.5% 17px 0;
       }
     }
-  }
 
-  .reasonsView &,
-  .contact-page &,
-  .settings-page & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //padding: 0 11.5% 17px 0;
+    .form-group-inner {
+      margin-bottom: 0;
     }
   }
 
