@@ -136,7 +136,8 @@
 }
 
 .paymentsStatementsView {
+
   @include media-breakpoint-up($desktop-breakpoint) {
-    overflow: auto;
+    //overflow: auto;
   }
 }
