@@ -11,11 +11,12 @@
         <input
           v-model="email"
           v-validate="'required|email'"
-          class="rounded lg" type="email" name="email" placeholder="Email" required autocomplete="email"/>
+          class="rounded lg" type="email" name="email" placeholder="Email" autocomplete="email"
+        />
         <input
           v-model="password"
           v-validate="'required'"
-          class="rounded lg" type="password" name="password" minlength="6" placeholder="Password" required
+          class="rounded lg" type="password" name="password" minlength="6" placeholder="Password"
           autocomplete="new-password"/>
         <recaptcha
           v-if="showCaptcha"
