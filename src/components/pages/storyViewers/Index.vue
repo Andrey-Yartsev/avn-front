@@ -13,15 +13,31 @@
           <div class="stories-list-preview">
               <div class="story-preview current">
                 <img src="http://placehold.it/300x300" />
+                <div class="amount-viewers">
+                  <span class="icn-viewer"></span>
+                  4
+                </div>
               </div>
               <div class="story-preview">
-                  <img src="http://placehold.it/300x300" />
+                <img src="http://placehold.it/300x300" />
+                <div class="amount-viewers">
+                  <span class="icn-viewer"></span>
+                  4
+                </div>
               </div>
               <div class="story-preview">
-                  <img src="http://placehold.it/300x300" />
+                <img src="http://placehold.it/300x300" />
+                <div class="amount-viewers">
+                  <span class="icn-viewer"></span>
+                  4
+                </div>
               </div>
               <div class="story-preview">
-                  <img src="http://placehold.it/300x300" />
+                <img src="http://placehold.it/300x300" />
+                <div class="amount-viewers">
+                  <span class="icn-viewer"></span>
+                  4
+                </div>
               </div>
           </div>
           <div class="container-story-details">
