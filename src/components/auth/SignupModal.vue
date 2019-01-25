@@ -4,21 +4,27 @@
       <div class="content">
         <div class="auth-block">
           <form v-on:submit.stop.prevent="signUp">
-            <input
-              v-model="name"
-              type="text" name="name" placeholder="Name" autocomplete="name" class="rounded"
-              v-validate="'required'"
-            >
-            <input
-              v-model="email"
-              type="email" name="email" placeholder="Email" autocomplete="email"
-              v-validate="'required|email'"
-              class="rounded">
-            <input
-              v-model="password"
-              type="password" name="password" placeholder="Password"
-              v-validate="'required'"
-              autocomplete="new-password" class="rounded">
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="name"
+                type="text" name="name" placeholder="Name" autocomplete="name" class="rounded"
+                v-validate="'required'"
+              >
+            </div>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="email"
+                type="email" name="email" placeholder="Email" autocomplete="email"
+                v-validate="'required|email'"
+                class="rounded">
+            </div>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="password"
+                type="password" name="password" placeholder="Password"
+                v-validate="'required'"
+                autocomplete="new-password" class="rounded">
+            </div>
             <recaptcha
               v-if="showCaptcha"
               class="g-recaptcha"

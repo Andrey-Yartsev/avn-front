@@ -68,6 +68,10 @@ textarea {
     background-color: rgba($gray, 0.333333333);
   }
 
+  .field-invalid & {
+    box-shadow: 0 0 0 1px red inset;
+  }
+
   &:-webkit-autofill {
     -webkit-text-fill-color: $main-color;
     -webkit-box-shadow: 0 0 0 1000px rgba($gray, 0.1) inset;
@@ -81,6 +85,21 @@ textarea {
     }
   }
 }
+
+.field-invalid {
+
+  &:after {
+    content: "\E619";
+    @include icon-font;
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    color: red;
+    font-size: 24px;
+    width: 1.2em;
+  }
+}
+
 input {
   height: 30px;
   &.lg {
@@ -768,5 +787,31 @@ select {
     &::-ms-expand {
       display: none;
     }
+  }
+}
+
+.tooltip-info {
+  background-color: red;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 6px 14px;
+  position: absolute;
+  right: 7px;
+  bottom: calc(100% + 7px);
+  text-align: center;
+  color: #fff;
+  width: 230px;
+
+  &:after {
+    top: calc(100% - 3px);
+    right: 6px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: red;
+    border-width: 8px;
   }
 }

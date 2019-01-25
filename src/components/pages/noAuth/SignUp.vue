@@ -2,22 +2,28 @@
   <Layout>
     <template slot="content">
       <form v-on:submit.stop.prevent="signUp">
-        <input
-          v-model="name"
-          v-validate="'required'"
-          class="rounded lg" type="text" name="name" placeholder="Name"
-          autocomplete="name"
-        />
-        <input
-          v-model="email"
-          v-validate="'required|email'"
-          class="rounded lg" type="email" name="email" placeholder="Email" autocomplete="email"
-        />
-        <input
-          v-model="password"
-          v-validate="'required'"
-          class="rounded lg" type="password" name="password" minlength="6" placeholder="Password"
-          autocomplete="new-password"/>
+        <div class="form-group form-group_clear-gaps">
+          <input
+            v-model="name"
+            v-validate="'required'"
+            class="rounded lg" type="text" name="name" placeholder="Name"
+            autocomplete="name"
+          />
+        </div>
+        <div class="form-group form-group_clear-gaps">
+          <input
+            v-model="email"
+            v-validate="'required|email'"
+            class="rounded lg" type="email" name="email" placeholder="Email" autocomplete="email"
+          />
+        </div>
+        <div class="form-group form-group_clear-gaps">
+          <input
+            v-model="password"
+            v-validate="'required'"
+            class="rounded lg" type="password" name="password" minlength="6" placeholder="Password"
+            autocomplete="new-password"/>
+        </div>
         <recaptcha
           v-if="showCaptcha"
           class="g-recaptcha"

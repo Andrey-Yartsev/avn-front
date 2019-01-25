@@ -4,18 +4,22 @@
       <div class="content">
         <div class="auth-block auth-block_sm-size">
           <form v-on:submit.stop.prevent="login">
-            <input
-              class="rounded"
-              type="email" name="email" placeholder="Email" autocomplete="email"
-              v-model="email"
-              v-validate="'required|email'"
-            >
-            <input
-              type="password" name="password" placeholder="Password" autocomplete="current-password"
-              class="rounded"
-              v-model="password"
-              v-validate="'required'"
-            >
+            <div class="form-group form-group_clear-gaps">
+              <input
+                class="rounded"
+                type="email" name="email" placeholder="Email" autocomplete="email"
+                v-model="email"
+                v-validate="'required|email'"
+              >
+            </div>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                type="password" name="password" placeholder="Password" autocomplete="current-password"
+                class="rounded"
+                v-model="password"
+                v-validate="'required'"
+              >
+            </div>
             <recaptcha
               v-if="showCaptcha"
               class="g-recaptcha"

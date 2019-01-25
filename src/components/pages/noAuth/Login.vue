@@ -17,18 +17,22 @@
 
       <template v-else>
         <form v-on:submit.stop.prevent="login" class="login-form">
-          <input
-            class="lg rounded"
-            type="email" name="email" placeholder="Email" autocomplete="email"
-            v-model="email"
-            v-validate="'required|email'"
-          />
-          <input
-            class="lg rounded" type="password" name="password" placeholder="Password"
-            autocomplete="current-password"
-            v-model="password"
-            v-validate="'required'"
-          />
+          <div class="form-group form-group_clear-gaps">
+            <input
+              class="lg rounded"
+              type="email" name="email" placeholder="Email" autocomplete="email"
+              v-model="email"
+              v-validate="'required|email'"
+            />
+          </div>
+          <div class="form-group form-group_clear-gaps">
+            <input
+              class="lg rounded" type="password" name="password" placeholder="Password"
+              autocomplete="current-password"
+              v-model="password"
+              v-validate="'required'"
+            />
+          </div>
           <recaptcha
             v-if="showCaptcha"
             class="g-recaptcha"
