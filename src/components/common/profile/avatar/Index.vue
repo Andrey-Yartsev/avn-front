@@ -21,7 +21,7 @@
           </span>
           <span class="verified-user" v-if="profile.isVerified"></span>
           <div class="block-indicator" v-if="profile.isBlocked">
-            <span class="icn-block"></span>
+            <span class="icn-block icn-item"></span>
           </div>
         </div>
         <span class="user-login reset-ml">

@@ -53,7 +53,7 @@
 
             <div class="block-indicator">
               <span class="user-login" v-if="blockLoading">...</span>
-              <span class="icn-block" v-else-if="activeUser.isBlocked"></span>
+              <span class="icn-block icn-item" v-else-if="activeUser.isBlocked"></span>
             </div>
 
             <span
