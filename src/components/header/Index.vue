@@ -67,50 +67,7 @@
           <template v-if="authSection">
             <div class="btns-login-user">
               <router-link to="/register" class="register">Have an account?</router-link>
-              <router-link to="/login" class="btn border alt login hidden-desktop">Log in</router-link>
-              <div :class="['auth-header-block hidden-mobile', {show: opened}]" v-click-outside="hide">
-                <div class="btn border alt login" @click="show">Log in</div>
-                <div class="auth-block-dropdown">
-                  <div class="auth-block auth-block_sm-size">
-                    <form v-on:submit.stop.prevent="login">
-                      <input
-                        class="rounded"
-                        type="email" name="email" placeholder="Email" autocomplete="email"
-                        v-model="email"
-                      >
-                      <input
-                        type="password" name="password" placeholder="Password" autocomplete="current-password"
-                        class="rounded"
-                        v-model="password"
-                      >
-                      <recaptcha
-                        v-if="showCaptcha"
-                        class="g-recaptcha"
-                        ref="recaptcha"
-                        @verify="captchaVerified"
-                        @expired="onCaptchaExpired"
-                        :sitekey="recaptchaSiteKey"
-                      />
-                      <div class="error" v-if="error">{{ error }}</div>
-                      <div class="error" v-if="error2">{{ error2 }}</div>
-                      <button type="submit" class="btn alt block">Login</button>
-                    </form>
-                    <div class="login-or">
-                      <span>or</span>
-                    </div>
-                    <button class="btn block twitter">Sign in with Twitter</button>
-                    <div class="signUp">
-                      <h3>Don't have an account yet?</h3>
-                      <p>
-                        <a href="/register" class="register" @click.prevent="openSignup">Sign up for OnMyTeam.com</a>
-                      </p>
-                      <p class="forgot">
-                        <router-link to="/forgot" class="forgot">Forgot your password?</router-link>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <router-link to="/login" class="btn border alt login">Log in</router-link>
             </div>
           </template>
         </template>
