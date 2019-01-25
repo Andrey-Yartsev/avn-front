@@ -96,7 +96,7 @@ const actions = {
           commit("requestFailure", error.message);
           commit("loginFinished");
         }
-        Router.push("/login");
+        // Router.push("/login");
       });
   },
 

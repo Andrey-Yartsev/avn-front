@@ -4,7 +4,8 @@ import CommonApi from "@/api/common";
 
 const state = {
   pages: [],
-  storyList: []
+  storyList: [],
+  headerSignup: false
 };
 
 const mutations = {
@@ -13,6 +14,9 @@ const mutations = {
   },
   setStoryList(state, { storyList }) {
     state.storyList = storyList;
+  },
+  headerSignup(state, headerSignup) {
+    state.headerSignup = headerSignup;
   }
 };
 

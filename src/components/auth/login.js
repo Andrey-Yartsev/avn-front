@@ -18,9 +18,6 @@ export default {
     otpAuth() {
       return this.$store.state.auth.otpAuth;
     },
-    mainClass() {
-      return this.otpAuth ? "OtpView" : "login";
-    },
     err() {
       if (this.error) {
         return this.error;

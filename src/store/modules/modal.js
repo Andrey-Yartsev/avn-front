@@ -61,7 +61,9 @@ const state = {
 const mutations = {
   show(state, { name, data }) {
     state[name].show = true;
-    state[name].data = data;
+    if (data) {
+      state[name].data = data;
+    }
   },
   hide(state, { name }) {
     state[name].show = false;
