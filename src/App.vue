@@ -2,7 +2,6 @@
   <div class="main-container" v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }">
     <Loader v-if="loading" class="page-loader"/>
     <template v-else>
-
       <Header/>
       <main id="content">
         <router-view />
@@ -200,7 +199,6 @@ export default {
     if (this.loggedIn) {
       this.webSocket = ws;
     } else {
-      console.log("@@@");
       this.webSocket = wsg;
     }
     this.webSocket.connect();

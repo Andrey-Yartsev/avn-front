@@ -20,6 +20,19 @@ export default {
     },
     mainClass() {
       return this.otpAuth ? "OtpView" : "login";
+    },
+    err() {
+      if (this.error) {
+        return this.error;
+      }
+      if (this.error2) {
+        return this.error2;
+      }
+      const errors = this.errors.all();
+      if (errors.length) {
+        return errors[0];
+      }
+      return null;
     }
   },
 
@@ -33,10 +46,14 @@ export default {
 
   methods: {
     login() {
-      this.$store.dispatch("auth/login", {
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$store.dispatch("auth/login", {
+            email: this.email,
+            password: this.password,
+            captcha: this.captcha
+          });
+        }
       });
     },
     sendOtp() {

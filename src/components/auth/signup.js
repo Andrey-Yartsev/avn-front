@@ -13,6 +13,16 @@ export default {
     },
     showCaptcha() {
       return this.$store.state.signUp.showCaptcha;
+    },
+    err() {
+      if (this.error) {
+        return this.error;
+      }
+      const errors = this.errors.all();
+      if (errors.length) {
+        return errors[0];
+      }
+      return null;
     }
   },
 
@@ -26,11 +36,15 @@ export default {
 
   methods: {
     signUp() {
-      this.$store.dispatch("signUp/signUp", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$store.dispatch("signUp/signUp", {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            captcha: this.captcha
+          });
+        }
       });
     }
   },

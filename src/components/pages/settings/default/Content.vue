@@ -207,10 +207,12 @@ export default {
       }, 500);
     }
 
-    this.localUser.about = this.localUser.about.replace(
-      new RegExp("<br />", "g"),
-      ""
-    );
+    if (this.localUser.about) {
+      this.localUser.about = this.localUser.about.replace(
+        new RegExp("<br />", "g"),
+        ""
+      );
+    }
   }
 };
 </script>

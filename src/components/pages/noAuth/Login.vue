@@ -21,11 +21,13 @@
             class="lg rounded"
             type="email" name="email" placeholder="Email" autocomplete="email"
             v-model="email"
+            v-validate="'required|email'"
           />
           <input
             class="lg rounded" type="password" name="password" placeholder="Password"
             autocomplete="current-password"
             v-model="password"
+            v-validate="'required'"
           />
           <recaptcha
             v-if="showCaptcha"
@@ -35,8 +37,7 @@
             @expired="onCaptchaExpired"
             :sitekey="recaptchaSiteKey"
           />
-          <div class="error" v-if="error">{{ error }}</div>
-          <div class="error" v-if="error2">{{ error2 }}</div>
+          <div class="error" v-if="err">{{ err }}</div>
           <button type="submit" class="btn lg alt block">Login</button>
         </form>
 

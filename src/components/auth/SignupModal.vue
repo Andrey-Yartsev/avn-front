@@ -6,14 +6,18 @@
           <form v-on:submit.stop.prevent="signUp">
             <input
               v-model="name"
-              type="text" name="name" placeholder="Name" required="required" autocomplete="name" class="rounded">
+              type="text" name="name" placeholder="Name" autocomplete="name" class="rounded"
+              v-validate="'required'"
+            >
             <input
               v-model="email"
-              type="email" name="email" placeholder="Email" required="required" autocomplete="email"
+              type="email" name="email" placeholder="Email" autocomplete="email"
+              v-validate="'required|email'"
               class="rounded">
             <input
               v-model="password"
-              type="password" name="password" placeholder="Password" required="required"
+              type="password" name="password" placeholder="Password"
+              v-validate="'required'"
               autocomplete="new-password" class="rounded">
             <recaptcha
               v-if="showCaptcha"
@@ -23,7 +27,7 @@
               @expired="onCaptchaExpired"
               :sitekey="recaptchaSiteKey"
             />
-            <div class="error" v-if="error">{{ error }}</div>
+            <div class="error" v-if="err">{{ err }}</div>
             <button type="submit" class="btn block alt">Sign up</button>
           </form>
 
@@ -65,11 +69,15 @@ export default {
 
   methods: {
     signUp() {
-      this.$store.dispatch("signUp/signUpFromModal", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$store.dispatch("signUp/signUpFromModal", {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            captcha: this.captcha
+          });
+        }
       });
     },
     close() {

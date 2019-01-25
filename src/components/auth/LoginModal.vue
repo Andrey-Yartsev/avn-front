@@ -8,11 +8,13 @@
               class="rounded"
               type="email" name="email" placeholder="Email" autocomplete="email"
               v-model="email"
+              v-validate="'required|email'"
             >
             <input
               type="password" name="password" placeholder="Password" autocomplete="current-password"
               class="rounded"
               v-model="password"
+              v-validate="'required'"
             >
             <recaptcha
               v-if="showCaptcha"
@@ -22,8 +24,7 @@
               @expired="onCaptchaExpired"
               :sitekey="recaptchaSiteKey"
             />
-            <div class="error" v-if="error">{{ error }}</div>
-            <div class="error" v-if="error2">{{ error2 }}</div>
+            <div class="error" v-if="err">{{ err }}</div>
             <button type="submit" class="btn alt block">Login</button>
           </form>
           <div class="login-or">
@@ -64,10 +65,14 @@ export default {
 
   methods: {
     login() {
-      this.$store.dispatch("auth/loginFromModal", {
-        email: this.email,
-        password: this.password,
-        captcha: this.captcha
+      this.$validator.validate().then(result => {
+        if (result) {
+          this.$store.dispatch("auth/loginFromModal", {
+            email: this.email,
+            password: this.password,
+            captcha: this.captcha
+          });
+        }
       });
     },
     close() {

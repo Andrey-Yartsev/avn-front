@@ -1,15 +1,20 @@
 <template>
-  <Layout >
+  <Layout>
     <template slot="content">
       <form v-on:submit.stop.prevent="signUp">
         <input
           v-model="name"
-          class="rounded lg" type="text" name="name" placeholder="Name" required autocomplete="name"/>
+          v-validate="'required'"
+          class="rounded lg" type="text" name="name" placeholder="Name"
+          autocomplete="name"
+        />
         <input
           v-model="email"
+          v-validate="'required|email'"
           class="rounded lg" type="email" name="email" placeholder="Email" required autocomplete="email"/>
         <input
           v-model="password"
+          v-validate="'required'"
           class="rounded lg" type="password" name="password" minlength="6" placeholder="Password" required
           autocomplete="new-password"/>
         <recaptcha
@@ -20,7 +25,7 @@
           @expired="onCaptchaExpired"
           :sitekey="recaptchaSiteKey"
         />
-        <div class="error" v-if="error">{{ error }}</div>
+        <div class="error" v-if="err">{{ err }}</div>
         <button type="submit" class="btn lg block alt">Sign up</button>
       </form>
       <div class="login-or"><span>or</span></div>
