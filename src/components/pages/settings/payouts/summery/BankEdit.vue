@@ -11,27 +11,30 @@
               <div class="semi-transparent">
                 Edit Bank
               </div>
-              <button
-                class="btn-edit-bank" @click.stop.prevent="cancel"
-              >Cancel</button>
+              <button class="btn-edit-bank" @click.stop.prevent="cancel">
+                Cancel
+              </button>
             </div>
           </div>
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Routing Number</span>
-              <input name="routingNumber" v-model="localBank.routingNumber">
+              <input name="routingNumber" v-model="localBank.routingNumber" />
             </label>
           </div>
 
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Account Number</span>
-              <input name="accountNumber" v-model="localBank.accountNumber">
+              <input name="accountNumber" v-model="localBank.accountNumber" />
             </label>
           </div>
         </div>
 
-        <div class="form-group form-group_with-label hidden" id="payouts-bank-form-error">
+        <div
+          class="form-group form-group_with-label hidden"
+          id="payouts-bank-form-error"
+        >
           <label class="form-group-inner">
             <span class="label"></span>
             <div class="error"></div>
@@ -40,11 +43,13 @@
 
         <div class="form-group-btn hidden-mobile">
           <button
-            type="submit" class="btn lg saveChanges"
+            type="submit"
+            class="btn lg saveChanges"
             :disabled="!changed || !valid"
-          >Save</button>
+          >
+            Save
+          </button>
         </div>
-
       </div>
     </form>
   </div>

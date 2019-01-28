@@ -5,10 +5,15 @@
         <h2>Hi</h2>
         <form v-on:submit.stop.prevent="sendOtp">
           <input
-            class="lg rounded otpCode" type="text" placeholder="Code"
-            v-model="otpCode">
+            class="lg rounded otpCode"
+            type="text"
+            placeholder="Code"
+            v-model="otpCode"
+          />
           <div class="hidden error">Email or password incorrect</div>
-          <button type="submit" class="btn lg alt block" :disabled="!otpCode">Send</button>
+          <button type="submit" class="btn lg alt block" :disabled="!otpCode">
+            Send
+          </button>
           <div class="signUp">
             <router-link to="/logout">Switch user</router-link>
           </div>
@@ -19,27 +24,37 @@
         <form v-on:submit.stop.prevent="login" class="login-form">
           <div
             class="form-group form-group_clear-gaps"
-            :class="{'field-invalid':fieldError('email')}"
+            :class="{ 'field-invalid': fieldError('email') }"
           >
             <input
               class="lg rounded"
-              type="email" name="email" placeholder="Email" autocomplete="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              autocomplete="email"
               v-model="email"
               v-validate="'required|email'"
             />
-            <div class="tooltip-info" v-if="fieldError('email')">{{ fieldError('email') }}</div>
+            <div class="tooltip-info" v-if="fieldError('email')">
+              {{ fieldError("email") }}
+            </div>
           </div>
           <div
             class="form-group form-group_clear-gaps"
-            :class="{'field-invalid':fieldError('password')}"
+            :class="{ 'field-invalid': fieldError('password') }"
           >
             <input
-              class="lg rounded" type="password" name="password" placeholder="Password"
+              class="lg rounded"
+              type="password"
+              name="password"
+              placeholder="Password"
               autocomplete="current-password"
               v-model="password"
               v-validate="'required'"
             />
-            <div class="tooltip-info" v-if="fieldError('password')">{{ fieldError('password') }}</div>
+            <div class="tooltip-info" v-if="fieldError('password')">
+              {{ fieldError("password") }}
+            </div>
           </div>
           <recaptcha
             v-if="showCaptcha"
@@ -54,16 +69,22 @@
         </form>
 
         <div class="login-or"><span>or</span></div>
-        <button class="btn lg block twitter" @click.prevent="twitter">Sign in with Twitter</button>
+        <button class="btn lg block twitter" @click.prevent="twitter">
+          Sign in with Twitter
+        </button>
         <div class="signUp">
           <div class="signUp__body">
             <h3>Don't have an account yet?</h3>
             <p>
-              <router-link to="/register" class="register">Sign up for OnMyTeam.com</router-link>
+              <router-link to="/register" class="register"
+                >Sign up for OnMyTeam.com</router-link
+              >
             </p>
           </div>
           <p class="forgot">
-            <router-link to="/forgot" class="forgot">Forgot your password?</router-link>
+            <router-link to="/forgot" class="forgot"
+              >Forgot your password?</router-link
+            >
           </p>
         </div>
       </template>

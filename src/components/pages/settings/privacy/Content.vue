@@ -12,12 +12,17 @@
       <h1 class="form-title">Privacy Settings</h1>
       <div class="form-title private-profile-block border-top">
         <div class="inner">
-            <span class="semi-transparent">
-              Private Profile
-              <p class="subtext">Only subscribers will see your posts</p>
-            </span>
+          <span class="semi-transparent">
+            Private Profile
+            <p class="subtext">Only subscribers will see your posts</p>
+          </span>
           <label class="toggle-element">
-            <input type="checkbox" name="isPrivate" value="true" v-model="localUser.isPrivate">
+            <input
+              type="checkbox"
+              name="isPrivate"
+              value="true"
+              v-model="localUser.isPrivate"
+            />
             <span></span>
           </label>
         </div>
@@ -42,35 +47,48 @@
         </div>
       </div>
       -->
-      <div class="form-title tweet-posts-block border-top disabled border-top-mobile">
+      <div
+        class="form-title tweet-posts-block border-top disabled border-top-mobile"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Tweet my posts
-            <p class="subtext">This can be changed for each individual post later</p>
+            <p class="subtext">
+              This can be changed for each individual post later
+            </p>
           </span>
           <label class="toggle-element">
-            <input type="checkbox" name="isPostsTweets" value="true" v-model="localUser.isPostsTweets">
+            <input
+              type="checkbox"
+              name="isPostsTweets"
+              value="true"
+              v-model="localUser.isPostsTweets"
+            />
             <span></span>
           </label>
         </div>
       </div>
       <div class="go-twitter-block shadow-block no-padding hidden-desktop">
         <div class="settings-nav">
-          <router-link
-            to="/settings/privacy/twitter" class="settings-nav__item"
-          ><span>Twitter</span><span class="value">Connect</span></router-link>
+          <router-link to="/settings/privacy/twitter" class="settings-nav__item"
+            ><span>Twitter</span><span class="value">Connect</span></router-link
+          >
         </div>
       </div>
 
-
-      <ConnectTwitter @connected="twitterConnected"/>
-
+      <ConnectTwitter @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
         <div class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label"></span>
-            <button type="submit" class="btn lg saveChanges" :disabled="!changed">Save changes</button>
+            <button
+              type="submit"
+              class="btn lg saveChanges"
+              :disabled="!changed"
+            >
+              Save changes
+            </button>
           </div>
         </div>
       </div>

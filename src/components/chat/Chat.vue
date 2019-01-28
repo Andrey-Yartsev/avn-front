@@ -1,6 +1,5 @@
 <template>
   <Wrapper :mode="mode">
-
     <template slot="col1">
       <div
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
@@ -12,90 +11,141 @@
 
     <template slot="col2">
       <div v-if="isHome" class="start-chat-wrapper">
-          <div class="chatHeader chatHeader_add-shadow no-nav">
+        <div class="chatHeader chatHeader_add-shadow no-nav">
+          <div class="selectedChatHeader">
+            You don't have any messages selected.
+          </div>
+        </div>
+        <div class="chatCollectionContentWrapper">
+          <div class="chatMessagesCollectionView">
+            <div class="msg-no-chat">
+              <div class="msg-no-chat__msg">
+                Chose one from your existing messages,<br />or start
+              </div>
+              <span class="btn-start" @click="goTo('/chat/new')"
+                >New message</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <template v-else>
+        <div class="chatCollectionContentWrapper" v-if="activeUserLoading">
+          <Loader :fullscreen="false" text="" class="transparent small" />
+        </div>
+        <template v-else>
+          <div
+            class="chatHeader chatHeader_add-shadow no-nav"
+            v-if="activeUser"
+          >
             <div class="selectedChatHeader">
-              You don't have any messages selected.
+              <div class="back-popup-btn hidden-desktop">
+                <span class="back" @click="mobileBack"></span>
+              </div>
+              <router-link
+                :to="'/' + activeUser.name"
+                class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
+              >
+                <span class="avatar__img">
+                  <img :src="activeUser.avatar" v-if="activeUser.avatar" />
+                </span>
+              </router-link>
+              <router-link :to="'/' + activeUser.username" class="name">
+                {{ activeUser.name }}
+              </router-link>
+              <span class="verified-user" v-if="activeUser.isVerified"></span>
+              <span class="user-login">
+                <router-link class="username" :to="'/' + activeUser.username">{{
+                  activeUser.username
+                }}</router-link>
+              </span>
+
+              <div class="block-indicator">
+                <span class="user-login" v-if="blockLoading">...</span>
+                <span
+                  class="icn-block icn-item"
+                  v-else-if="activeUser.isBlocked"
+                ></span>
+              </div>
+
+              <span
+                class="more-functions"
+                :class="{ open: chatOptionsOpened }"
+                v-click-outside="
+                  () => {
+                    chatOptionsOpened = false;
+                  }
+                "
+              >
+                <div class="more-functions__overlay"></div>
+                <div
+                  class="more-functions__btn"
+                  @click="chatOptionsOpened = !chatOptionsOpened"
+                ></div>
+                <div class="more-functions__dropdown">
+                  <div class="more-functions__dropdown-inside">
+                    <ul>
+                      <li>
+                        <router-link
+                          class="profile-url"
+                          :to="'/' + activeUser.username"
+                          >View profile</router-link
+                        >
+                      </li>
+                      <li v-if="activeUser.isBlocked">
+                        <a class="menu-block" @click="unblockActiveUser"
+                          >Unblock user</a
+                        >
+                      </li>
+                      <li v-else>
+                        <a class="menu-block" @click="blockActiveUser"
+                          >Block user</a
+                        >
+                      </li>
+                      <template v-if="messages.length">
+                        <li v-if="deleteInProgress"><a>Deleting...</a></li>
+                        <li v-else>
+                          <a class="menu-delete" @click="deleteConversation"
+                            >Delete conversation</a
+                          >
+                        </li>
+                      </template>
+                      <li><a class="menu-report" @click="report">Report</a></li>
+                      <li>
+                        <a
+                          class="menu-cancel"
+                          @click="chatOptionsOpened = false"
+                          >Cancel</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </span>
             </div>
           </div>
           <div class="chatCollectionContentWrapper">
             <div class="chatMessagesCollectionView">
-              <div class="msg-no-chat">
-                <div class="msg-no-chat__msg">
-                  Chose one from your existing messages,<br>or start
-                </div>
-                <span class="btn-start" @click="goTo('/chat/new')">New message</span>
+              <div
+                class="chat-section chat-section_loading"
+                v-if="messagesLoading"
+              >
+                <Loader :fullscreen="false" text="" class="transparent small" />
               </div>
+              <template v-if="activeUser">
+                <Messages
+                  v-if="messages"
+                  :_messages="messages"
+                  :withUser="activeUser"
+                />
+                <AddMessage :withUser="activeUser" />
+              </template>
             </div>
           </div>
-      </div>
-      <template v-else>
-        <div class="chatCollectionContentWrapper"  v-if="activeUserLoading">
-          <Loader :fullscreen="false" text="" class="transparent small" />
-        </div>
-        <template v-else>
-          <div class="chatHeader chatHeader_add-shadow no-nav" v-if="activeUser">
-          <div class="selectedChatHeader">
-            <div class="back-popup-btn hidden-desktop">
-              <span class="back" @click="mobileBack"></span>
-            </div>
-            <router-link :to="'/' + activeUser.name" class="avatar avatar_gap-r-md avatar_sm hidden-mobile">
-              <span class="avatar__img">
-                <img :src="activeUser.avatar" v-if="activeUser.avatar"/>
-              </span>
-            </router-link>
-            <router-link :to="'/' + activeUser.username" class="name">
-              {{ activeUser.name }}
-            </router-link>
-            <span class="verified-user" v-if="activeUser.isVerified"></span>
-            <span class="user-login">
-              <router-link class="username" :to="'/' + activeUser.username">{{ activeUser.username }}</router-link>
-            </span>
-
-            <div class="block-indicator">
-              <span class="user-login" v-if="blockLoading">...</span>
-              <span class="icn-block icn-item" v-else-if="activeUser.isBlocked"></span>
-            </div>
-
-            <span
-              class="more-functions" :class="{open: chatOptionsOpened}"
-              v-click-outside="() => {chatOptionsOpened = false}"
-            >
-              <div class="more-functions__overlay"></div>
-              <div class="more-functions__btn" @click="chatOptionsOpened = !chatOptionsOpened"></div>
-              <div class="more-functions__dropdown">
-                <div class="more-functions__dropdown-inside">
-                  <ul>
-                  <li><router-link class="profile-url" :to="'/' + activeUser.username">View profile</router-link></li>
-                  <li v-if="activeUser.isBlocked"><a class="menu-block" @click="unblockActiveUser">Unblock user</a></li>
-                  <li v-else><a class="menu-block" @click="blockActiveUser">Block user</a></li>
-                  <template v-if="messages.length">
-                    <li v-if="deleteInProgress"><a>Deleting...</a></li>
-                    <li v-else><a class="menu-delete" @click="deleteConversation">Delete conversation</a></li>
-                  </template>
-                  <li><a class="menu-report" @click="report">Report</a></li>
-                  <li><a class="menu-cancel" @click="chatOptionsOpened = false">Cancel</a></li>
-                  </ul>
-                </div>
-              </div>
-            </span>
-
-          </div>
-        </div>
-          <div class="chatCollectionContentWrapper">
-          <div class="chatMessagesCollectionView">
-            <div class="chat-section chat-section_loading" v-if="messagesLoading">
-              <Loader :fullscreen="false" text="" class="transparent small"/>
-            </div>
-            <template v-if="activeUser">
-              <Messages v-if="messages" :_messages="messages" :withUser="activeUser" />
-              <AddMessage :withUser="activeUser"/>
-            </template>
-          </div>
-        </div>
         </template>
       </template>
     </template>
-    <NoConversations v-if="noMessages"/>
+    <NoConversations v-if="noMessages" />
   </Wrapper>
 </template>
 

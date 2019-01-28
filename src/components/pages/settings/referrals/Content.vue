@@ -1,12 +1,14 @@
 <template>
-  <div class="ReferralsView"><h1 class="form-title">Referral URL
-    <!-- QR temporary hidden -->
-    <!--<button type="button">Show QR</button>-->
-  </h1>
+  <div class="ReferralsView">
+    <h1 class="form-title">
+      Referral URL
+      <!-- QR temporary hidden -->
+      <!--<button type="button">Show QR</button>-->
+    </h1>
     <div class="form-title hidden-desktop">
       <div class="inner">
         <span class="semi-transparent">
-            Referral URL
+          Referral URL
         </span>
         <!-- QR temporary hidden -->
         <!-- <button type="button">Show QR</button> -->
@@ -15,32 +17,48 @@
     <div class="border-top shadow-block referrals-link">
       <a :href="url">{{ url }}</a>
       <div class="referral-desc">
-        <p class="subtext">Refer creators to OnMyTeam.com and receive 5% of their earnings as a bonus!</p>
+        <p class="subtext">
+          Refer creators to OnMyTeam.com and receive 5% of their earnings as a
+          bonus!
+        </p>
         <button
-          type="button" class="btn border alt btn-copy-url"
+          type="button"
+          class="btn border alt btn-copy-url"
           @click="copyToClipboard"
-        >Copy<span class="hidden-mobile"> link</span></button>
+        >
+          Copy<span class="hidden-mobile"> link</span>
+        </button>
       </div>
     </div>
     <div class="ReferralsBlockCollectionView">
-      <div class="form-title border-top table-header-title referrals-form-title">
+      <div
+        class="form-title border-top table-header-title referrals-form-title"
+      >
         <div class="inner">
-        <span class="semi-transparent referrals-text">
+          <span class="semi-transparent referrals-text">
             Referrals
-        </span>
+          </span>
           <form class="referrals-search b-search-form">
-            <input type="text" class="rounded sm" placeholder="Search">
-            <button type="submit" disabled="" class="b-search-form__btn"></button>
+            <input type="text" class="rounded sm" placeholder="Search" />
+            <button
+              type="submit"
+              disabled=""
+              class="b-search-form__btn"
+            ></button>
           </form>
         </div>
         <div class="table-header referrals-table-header">
           <div class="user table__cell">
             User
           </div>
-          <div class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected">
+          <div
+            class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
+          >
             Amount
           </div>
-          <div class="joined table__cell table__cell_align table__cell_align-hor-c">
+          <div
+            class="joined table__cell table__cell_align table__cell_align-hor-c"
+          >
             Joined
           </div>
         </div>

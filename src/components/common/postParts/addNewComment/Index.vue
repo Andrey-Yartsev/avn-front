@@ -1,20 +1,22 @@
 <template>
-    <form class="comment-form">
-        <textarea
-          class="comment-input rounded"
-          placeholder="Add a comment"
-          rows="1"
-          v-model="message"
-          ref="message"
-          @keypress.enter.prevent="sendComment"
-        ></textarea>
-        <button 
-            type="submit"
-            class="btn comment-btn"
-            v-bind:disabled="!message.trim().length"
-            @click.prevent="sendComment"
-        >Post</button>
-    </form>
+  <form class="comment-form">
+    <textarea
+      class="comment-input rounded"
+      placeholder="Add a comment"
+      rows="1"
+      v-model="message"
+      ref="message"
+      @keypress.enter.prevent="sendComment"
+    ></textarea>
+    <button
+      type="submit"
+      class="btn comment-btn"
+      v-bind:disabled="!message.trim().length"
+      @click.prevent="sendComment"
+    >
+      Post
+    </button>
+  </form>
 </template>
 
 <script>

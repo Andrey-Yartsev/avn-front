@@ -17,14 +17,14 @@
             <div class="form-group">
               <label class="form-group-inner">
                 <span class="label">Routing Number</span>
-                <input name="routingNumber" v-model="localBank.routingNumber">
+                <input name="routingNumber" v-model="localBank.routingNumber" />
               </label>
             </div>
 
             <div class="form-group">
               <label class="form-group-inner">
                 <span class="label">Account Number</span>
-                <input name="accountNumber" v-model="localBank.accountNumber">
+                <input name="accountNumber" v-model="localBank.accountNumber" />
               </label>
             </div>
           </div>
@@ -39,7 +39,6 @@
           <div class="form-group-btn">
             <button type="submit" class="btn lg saveChanges">Next</button>
           </div>
-
         </div>
       </form>
     </div>

@@ -13,23 +13,46 @@
                     <div class="form-group form-group_with-label radio-group">
                       <label class="form-group-inner">
                         <div class="radio-wrapper">
-                          <input type="radio" name="reason" value="4" v-model="reason">
+                          <input
+                            type="radio"
+                            name="reason"
+                            value="4"
+                            v-model="reason"
+                          />
                           <span class="radio"></span>
-                          <span class="label">This profile posts violent or offensive content</span>
+                          <span class="label"
+                            >This profile posts violent or offensive
+                            content</span
+                          >
                         </div>
                       </label>
                       <label class="form-group-inner">
                         <div class="radio-wrapper">
-                          <input type="radio" name="reason" value="5" v-model="reason">
+                          <input
+                            type="radio"
+                            name="reason"
+                            value="5"
+                            v-model="reason"
+                          />
                           <span class="radio"></span>
-                          <span class="label">This profile uses my personal data</span>
+                          <span class="label"
+                            >This profile uses my personal data</span
+                          >
                         </div>
                       </label>
                       <label class="form-group-inner">
                         <div class="radio-wrapper">
-                          <input type="radio" name="reason" value="6" v-model="reason">
+                          <input
+                            type="radio"
+                            name="reason"
+                            value="6"
+                            v-model="reason"
+                          />
                           <span class="radio"></span>
-                          <span class="label">This profile uses personal data from someone I know</span>
+                          <span class="label"
+                            >This profile uses personal data from someone I
+                            know</span
+                          >
                         </div>
                       </label>
                     </div>
@@ -39,7 +62,11 @@
                   <div class="form-group form-group_with-label">
                     <button
                       :disabled="!reason"
-                      type="submit" id="send-report" class="btn lg saveChanges">Report
+                      type="submit"
+                      id="send-report"
+                      class="btn lg saveChanges"
+                    >
+                      Report
                     </button>
                   </div>
                 </div>

@@ -5,7 +5,11 @@
         <div class="previous" @click="index -= 1" v-if="index > 0"></div>
         <div class="content">
           <div class="postPageWrapper">
-            <PostLargeView :post="post" :from="from" v-on:addExtraClassName="addExtraClassName" />
+            <PostLargeView
+              :post="post"
+              :from="from"
+              v-on:addExtraClassName="addExtraClassName"
+            />
           </div>
         </div>
         <button type="button" class="close" @click="close"></button>

@@ -2,9 +2,12 @@
   <Modal :onClose="close">
     <div class="popup-container popup-alert" slot="content">
       <div class="content">
-        <div class="popup-alert__title">You are about to unsubscribe from {{ user.name }}?</div>
+        <div class="popup-alert__title">
+          You are about to unsubscribe from {{ user.name }}?
+        </div>
         <div class="popup-alert__body">
-          You will be able to resubscribe during current billing period without any additional costs.
+          You will be able to resubscribe during current billing period without
+          any additional costs.
         </div>
         <div class="popup-alert__footer">
           <a href="#" class="btn alt" @click.prevent="no">Cancel</a>

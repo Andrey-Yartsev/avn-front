@@ -2,12 +2,14 @@
   <div class="jq-toast-wrap">
     <div
       class="jq-toast-single jq-has-icon jq-icon-success"
-      :class="{'jq-toast-hide': hide}"
-      style="text-align: left;">
+      :class="{ 'jq-toast-hide': hide }"
+      style="text-align: left;"
+    >
       <span
         class="jq-toast-loader"
-        :class="{'jq-toast-loaded': loaded}"
-        style=""></span>
+        :class="{ 'jq-toast-loaded': loaded }"
+        style=""
+      ></span>
       <span class="close-jq-toast-single">×</span><span v-html="text"></span>
     </div>
   </div>

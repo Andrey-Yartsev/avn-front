@@ -4,22 +4,48 @@
       <div class="chatHeader chatHeader_add-shadow">
         <div class="contactsListHeader">
           <div class="back-popup-btn">
-            <span class="back backEvent hidden-mobile" @click="backDesktop"></span>
-            <a href="/chat" @click.prevent="goTo('/chat')" class="header-return-btn go-back go-back_times hidden-desktop">
+            <span
+              class="back backEvent hidden-mobile"
+              @click="backDesktop"
+            ></span>
+            <a
+              href="/chat"
+              @click.prevent="goTo('/chat')"
+              class="header-return-btn go-back go-back_times hidden-desktop"
+            >
               <span class="category-name">New message</span>
             </a>
           </div>
           <h3 class="hidden-mobile new-message-title">New message</h3>
-          <button class="nextStep btn hidden-desktop" :disabled="!selected.length" @click="next">Next</button>
+          <button
+            class="nextStep btn hidden-desktop"
+            :disabled="!selected.length"
+            @click="next"
+          >
+            Next
+          </button>
         </div>
       </div>
-      <div class="chatCollectionContentWrapper" :class="{'contacts-top': contactsScrollTop}">
-        <div class="searchContact" :class="{'user-selected':!!selected.length}">
+      <div
+        class="chatCollectionContentWrapper"
+        :class="{ 'contacts-top': contactsScrollTop }"
+      >
+        <div
+          class="searchContact"
+          :class="{ 'user-selected': !!selected.length }"
+        >
           <VuePerfectScrollbar class="all-contacts-found">
             <div class="selectedContacts" v-if="selected.length">
-              <div class="chatSelectedView" v-for="v in selectedChats" v-bind:key="v.withUser.id">
+              <div
+                class="chatSelectedView"
+                v-for="v in selectedChats"
+                v-bind:key="v.withUser.id"
+              >
                 <span class="chatSelectedName">{{ v.withUser.name }}</span>
-                <span class="remove" @click="toggleSelect(v.withUser.id)"></span>
+                <span
+                  class="remove"
+                  @click="toggleSelect(v.withUser.id)"
+                ></span>
               </div>
             </div>
           </VuePerfectScrollbar>
@@ -29,30 +55,41 @@
           <input
             @keyup="search"
             v-model="searchQuery"
-            type="text" class="searchInput" placeholder="Search">
+            type="text"
+            class="searchInput"
+            placeholder="Search"
+          />
           <div
             class="btn-selected-all visible"
             @click="toggleSelectAll"
-            :class="{active: isAllSelected}"
+            :class="{ active: isAllSelected }"
           ></div>
         </div>
-        <VuePerfectScrollbar class="searchChatContacts" @ps-scroll-y="contactsScrollChange" ref="contacts">
+        <VuePerfectScrollbar
+          class="searchChatContacts"
+          @ps-scroll-y="contactsScrollChange"
+          ref="contacts"
+        >
           <div class="searchResult">
             <div
-              v-for="v in chats" v-bind:key="v.withUser.id"
+              v-for="v in chats"
+              v-bind:key="v.withUser.id"
               class="searchChatContactsView"
               @click="toggleSelect(v.withUser.id)"
-              :class="{active: isSelected(v.withUser.id)}"
+              :class="{ active: isSelected(v.withUser.id) }"
             >
               <span class="avatar avatar_gap-r-sm avatar_sm">
                 <span class="avatar__img">
-                  <img v-if="v.withUser.avatar" :src="v.withUser.avatar"/>
+                  <img v-if="v.withUser.avatar" :src="v.withUser.avatar" />
                 </span>
               </span>
               <div class="username-group">
                 <div class="chatView__header">
                   <span class="name">{{ v.withUser.name }}</span>
-                  <span class="verified-user" v-if="v.withUser.isVerified"></span>
+                  <span
+                    class="verified-user"
+                    v-if="v.withUser.isVerified"
+                  ></span>
                 </div>
                 <div class="user-login reset-ml">
                   <span class="username">{{ v.withUser.username }}</span>
@@ -71,18 +108,33 @@
             <span class="back backEvent" @click="back"></span>
           </div>
           <template v-if="selectedUser">
-            <router-link class="avatar avatar_gap-r-md avatar_sm hidden-mobile" :to="'/' + selectedUser.username"><span class="avatar__img"></span></router-link>
-            <router-link class="name" :to="'/' + selectedUser.username">{{ selectedUser.name }}</router-link>
+            <router-link
+              class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
+              :to="'/' + selectedUser.username"
+              ><span class="avatar__img"></span
+            ></router-link>
+            <router-link class="name" :to="'/' + selectedUser.username">{{
+              selectedUser.name
+            }}</router-link>
             <span class="user-login">
-              <router-link class="username" :to="'/' + selectedUser.username">{{ selectedUser.username }}</router-link></span>
+              <router-link class="username" :to="'/' + selectedUser.username">{{
+                selectedUser.username
+              }}</router-link></span
+            >
           </template>
-          <span v-else-if="selected.length" class="mass-message">Mass message</span>
+          <span v-else-if="selected.length" class="mass-message"
+            >Mass message</span
+          >
           <div
             class="more-functions"
             v-if="selectedUser"
-            :class="{open: chatOptionsOpened}"
+            :class="{ open: chatOptionsOpened }"
             @click="chatOptionsOpened = !chatOptionsOpened"
-            v-click-outside="() => {chatOptionsOpened = false}"
+            v-click-outside="
+              () => {
+                chatOptionsOpened = false;
+              }
+            "
           >
             <div class="more-functions__overlay"></div>
             <div class="more-functions__btn"></div>
@@ -90,7 +142,11 @@
               <div class="more-functions__dropdown-inside">
                 <ul>
                   <li>
-                    <router-link class="profile-url" :to="'/' + selectedUser.username">View profile</router-link>
+                    <router-link
+                      class="profile-url"
+                      :to="'/' + selectedUser.username"
+                      >View profile</router-link
+                    >
                   </li>
                   <li><a class="menu-cancel">Cancel</a></li>
                 </ul>
@@ -100,15 +156,26 @@
         </div>
       </div>
       <div class="chatCollectionContentWrapper">
-        <div class="chatMessagesCollectionView" :class="{'no-selected-conversation': !selected.length}">
+        <div
+          class="chatMessagesCollectionView"
+          :class="{ 'no-selected-conversation': !selected.length }"
+        >
           <div class="chat-section chat-section_loading" v-if="sending">
-            <Loader :fullscreen="false" text="Sending..." class="semitransparent small"/>
+            <Loader
+              :fullscreen="false"
+              text="Sending..."
+              class="semitransparent small"
+            />
           </div>
           <div class="chat-section" v-else>
             <div class="chatContent"></div>
             <div class="msg-no-chat">
-              <div class="msg-no-chat__msg">Select people to send them a message</div>
-              <div class="btn-start btn-selected-all" @click="toggleSelectAll">Select all</div>
+              <div class="msg-no-chat__msg">
+                Select people to send them a message
+              </div>
+              <div class="btn-start btn-selected-all" @click="toggleSelectAll">
+                Select all
+              </div>
             </div>
           </div>
           <ChatAddMultiMessage

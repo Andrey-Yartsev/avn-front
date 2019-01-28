@@ -6,11 +6,12 @@
   >
     <div
       class="subscribe-cost"
-      :class="{'disable-state': subsAction === 'unsubscribe'}"
+      :class="{ 'disable-state': subsAction === 'unsubscribe' }"
       id="subscribe-paid"
     >
       <div class="subscribe-cost__value">
-        $<span>{{ profile.subscribePrice }}</span>/mo.
+        $<span>{{ profile.subscribePrice }}</span
+        >/mo.
       </div>
       <div class="subscribe-cost__label">
         {{ ucFirst(subsAction) }}

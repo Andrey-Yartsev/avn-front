@@ -11,25 +11,33 @@
               type="button"
               class="btn border connect-twitter hidden-mobile"
               @click="twitterConnect"
-            >Connect Twitter account</button>
+            >
+              Connect Twitter account
+            </button>
 
             <template v-else>
               <span class="value twitter-value hidden-desktop">
                 <a
-                  :href="'https://twitter.com/' + user.twitterUsername" target="_blank" rel="nofollow"
-                >{{ user.twitterUsername }}</a>
-                </span>
+                  :href="'https://twitter.com/' + user.twitterUsername"
+                  target="_blank"
+                  rel="nofollow"
+                  >{{ user.twitterUsername }}</a
+                >
+              </span>
               <input
-                class="rounded twitter-input hidden-mobile" type="text" readonly=""
+                class="rounded twitter-input hidden-mobile"
+                type="text"
+                readonly=""
                 :value="'@' + user.twitterUsername"
-              >
+              />
               <button
                 type="button"
                 class="btn border disconnect-twitter hidden-mobile"
                 @click="twitterDisconnect"
-              >Disconnect</button>
+              >
+                Disconnect
+              </button>
             </template>
-
           </div>
         </div>
       </div>
@@ -40,7 +48,9 @@
         type="button"
         class="btn lg border connect-twitter"
         @click="twitterConnect"
-      >Connect Twitter account</button>
+      >
+        Connect Twitter account
+      </button>
     </div>
   </div>
 </template>

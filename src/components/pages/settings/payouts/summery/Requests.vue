@@ -5,7 +5,7 @@
         <div class="inner">
           <span class="semi-transparent">
             Payouts Statements
-           </span>
+          </span>
         </div>
 
         <div class="border-top loader-container" v-if="loading">
@@ -13,20 +13,38 @@
         </div>
 
         <div class="table-header payouts-table-header" v-if="!loading">
-          <div class="date table__cell table__cell_align table__cell_align-hor-c">Date</div>
-          <div class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c">Amount</div>
-          <div class="expected table__cell table__cell_align table__cell_align-hor-c">Expected</div>
+          <div
+            class="date table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Date
+          </div>
+          <div
+            class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+          >
+            Amount
+          </div>
+          <div
+            class="expected table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Expected
+          </div>
         </div>
       </div>
       <div class="shadow-block no-padding" v-if="!loading && !items.length">
         <div class="table-wrapper">
           <div class="table payouts-table">
-            <div class="PayoutsRequestsView" v-for="v in items" v-bind:key="v.n">
+            <div
+              class="PayoutsRequestsView"
+              v-for="v in items"
+              v-bind:key="v.n"
+            >
               <div class="item">
                 <div class="date table__cell">{{ dt(v.createdAt) }}</div>
                 <div
-                        class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
-                >{{ v.amount }}</div>
+                  class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+                >
+                  {{ v.amount }}
+                </div>
                 <div class="expected table__cell">{{ v.state }}</div>
               </div>
             </div>

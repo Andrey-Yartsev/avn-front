@@ -11,12 +11,9 @@
             <p class="subtext two-step-text">
               Turn on to make your account more secure
             </p>
-            </span>
+          </span>
           <label class="toggle-element">
-            <input
-              type="checkbox" class="otpEnable"
-              v-model="otpEnable"
-            >
+            <input type="checkbox" class="otpEnable" v-model="otpEnable" />
             <span></span>
           </label>
         </div>
@@ -30,49 +27,73 @@
             </div>
             <ol>
               <li>
-                <p>Download and install Google Authenticator app from
-                  <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
-                    rel="nofollow" target="_blank">Google Play</a> or
-                  <a href="https://itunes.apple.com/ru/app/google-authenticator/id388497605" rel="nofollow"
-                    target="_blank">App Store</a>
+                <p>
+                  Download and install Google Authenticator app from
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+                    rel="nofollow"
+                    target="_blank"
+                    >Google Play</a
+                  >
+                  or
+                  <a
+                    href="https://itunes.apple.com/ru/app/google-authenticator/id388497605"
+                    rel="nofollow"
+                    target="_blank"
+                    >App Store</a
+                  >
                 </p>
               </li>
               <li>
-                <p>In Google Authenticator app open “Settings“ and select “Set up account“</p>
+                <p>
+                  In Google Authenticator app open “Settings“ and select “Set up
+                  account“
+                </p>
               </li>
               <li>
                 <p>Select “Scan a barcode“ or “Enter provided key“</p>
                 <div class="code-wrapper">
-
                   <div class="code-text" v-if="otp.code">
                     <span class="code">{{ otp.code }}</span>
                     <button
                       @click="copyKey"
-                      type="button" class="btn border alt copy-code">Copy key</button>
+                      type="button"
+                      class="btn border alt copy-code"
+                    >
+                      Copy key
+                    </button>
                   </div>
-                  <span class="qr-code" v-if="otp.qrUrl"><img :src="otp.qrUrl"></span>
+                  <span class="qr-code" v-if="otp.qrUrl"
+                    ><img :src="otp.qrUrl"
+                  /></span>
                 </div>
               </li>
               <li>
                 <p>Enter code from your Google Authenticator</p>
-                <input type="text" name="otpCode" v-model="otpCode">
+                <input type="text" name="otpCode" v-model="otpCode" />
               </li>
             </ol>
             <button
-              v-if="(otpEnable && !user.otpEnable) || (!otpEnable && user.otpEnable)"
+              v-if="
+                (otpEnable && !user.otpEnable) || (!otpEnable && user.otpEnable)
+              "
               type="submit"
               class="btn lg saveChanges hidden-mobile"
-              :disabled="!otpCode">Confirm</button>
+              :disabled="!otpCode"
+            >
+              Confirm
+            </button>
           </template>
           <div v-if="!otpEnable && user.otpEnable" class="form-group full">
             <label class="form-group-inner">
               <span class="label">
                 Enter code from your Google Authenticator
               </span>
-              <input type="text" name="otpCode" v-model="otpCode">
+              <input type="text" name="otpCode" v-model="otpCode" />
             </label>
             <div class="input-help semi-transparent">
-              Turning off two factor verification will make your account less secure
+              Turning off two factor verification will make your account less
+              secure
             </div>
           </div>
         </div>
@@ -84,16 +105,18 @@
             <span class="semi-transparent">Sessions</span>
             <button
               v-if="sessions.length"
-              type="button" class="close-all-sessions-btn"
-              @click="deleteAllSessions">Close all
+              type="button"
+              class="close-all-sessions-btn"
+              @click="deleteAllSessions"
+            >
+              Close all
             </button>
           </div>
         </div>
         <div class="session-content">
           <div class="loader-container" v-if="loading">
-            <Loader :fullscreen="false" text="" class="transparent small"/>
+            <Loader :fullscreen="false" text="" class="transparent small" />
           </div>
-
 
           <div class="content shadow-block" v-if="sessions.length">
             <div class="SessionsView" v-for="v in sessions" v-bind:key="v.id">
@@ -103,13 +126,21 @@
                   <span class="os">{{ v.os }}</span>
                 </p>
                 <span class="status">
-                  <span class="last-activity" v-if="!v.isCurrent">{{ getActivityTime(v.lastActivity) }}</span>
+                  <span class="last-activity" v-if="!v.isCurrent">{{
+                    getActivityTime(v.lastActivity)
+                  }}</span>
                   <span class="online" v-else>Online</span>
                 </span>
-                <button type="button" class="delete" @click="deleteSession(v)"></button>
+                <button
+                  type="button"
+                  class="delete"
+                  @click="deleteSession(v)"
+                ></button>
               </div>
               <div class="session-info-details">
-                <p class="ip-country">{{ v.ipAddress }} - {{ v.countryName }}</p>
+                <p class="ip-country">
+                  {{ v.ipAddress }} - {{ v.countryName }}
+                </p>
               </div>
             </div>
           </div>

@@ -4,11 +4,21 @@
       <div class="stories-slideshow">
         <div class="StoryPageView active">
           <template v-if="currentStory.mediaType === 'photo'">
-            <img class="bg" :src="currentStory.src.source || currentStory.preview.source" alt>
-            <img class="storyItem" :src="currentStory.src.source || currentStory.preview.source" ref="storyItem" alt>
+            <img
+              class="bg"
+              :src="currentStory.src.source || currentStory.preview.source"
+              alt
+            />
+            <img
+              class="storyItem"
+              :src="currentStory.src.source || currentStory.preview.source"
+              ref="storyItem"
+              alt
+            />
           </template>
-          <video v-if="currentStory.mediaType === 'video'"
-            class="story-video-element storyItem" 
+          <video
+            v-if="currentStory.mediaType === 'video'"
+            class="story-video-element storyItem"
             :src="currentStory.src.source"
             ref="storyItem"
           ></video>
@@ -31,95 +41,138 @@
       <div class="progress-pagination">
         <div
           v-for="(value, key) in stories"
-          :class="['item', {
-            active: key === currActiveIndex,
-            fullActive: key < currActiveIndex,
-            video: value.mediaType === 'video'
-          }]"
+          :class="[
+            'item',
+            {
+              active: key === currActiveIndex,
+              fullActive: key < currActiveIndex,
+              video: value.mediaType === 'video'
+            }
+          ]"
           :key="key"
-          @click="() => currIndex = key"
+          @click="() => (currIndex = key)"
         >
           <div
             class="item-filler"
-            :style="value.mediaType === 'video' ? { width: `${videoProgress[value.id]}%` } : {}"
+            :style="
+              value.mediaType === 'video'
+                ? { width: `${videoProgress[value.id]}%` }
+                : {}
+            "
           />
         </div>
       </div>
       <div class="head-story">
         <div class="story-avatar">
-            <a 
-              @click.prevent="addNewStory"
-              :href="isOwner(author.id) ? `/${author.username}` : ''"
-              :class="['avatar avatar_not-shadow', {'new-story': isOwner(author.id)}]"
-            >
-              <span class="avatar__img">
-                <img v-if="author.avatar" :src="author.avatar">
-              </span>
-            </a>
-            <template v-if="isOwner(author.id)">
-              <span class="btn-add" @click="addNewStory">
-                <svg aria-hidden="true" class="icn icn-plus">
-                  <use xlink:href="#icon-plus-in-circle"></use>
-                </svg>
-              </span>
-            </template>
+          <a
+            @click.prevent="addNewStory"
+            :href="isOwner(author.id) ? `/${author.username}` : ''"
+            :class="[
+              'avatar avatar_not-shadow',
+              { 'new-story': isOwner(author.id) }
+            ]"
+          >
+            <span class="avatar__img">
+              <img v-if="author.avatar" :src="author.avatar" />
+            </span>
+          </a>
+          <template v-if="isOwner(author.id)">
+            <span class="btn-add" @click="addNewStory">
+              <svg aria-hidden="true" class="icn icn-plus">
+                <use xlink:href="#icon-plus-in-circle"></use>
+              </svg>
+            </span>
+          </template>
         </div>
         <div class="user-name">
-          <a 
+          <a
             :href="isOwner(author.id) ? `/${author.username}` : ''"
-            :class="{'new-story': isOwner(author.id)}"
+            :class="{ 'new-story': isOwner(author.id) }"
           >
-            {{ isOwner(author.id) ? 'Your story' : author.name || author.username }}
+            {{
+              isOwner(author.id) ? "Your story" : author.name || author.username
+            }}
           </a>
           <span class="time"></span>
         </div>
       </div>
-      <div  v-if="isOwner(author.id)" :class="['more-functions', { open: showDropdawnMenu }]" v-click-outside="hideDropdawn">
-        <div class="more-functions__overlay" @click.prevent="hideDropdawn"></div>
+      <div
+        v-if="isOwner(author.id)"
+        :class="['more-functions', { open: showDropdawnMenu }]"
+        v-click-outside="hideDropdawn"
+      >
+        <div
+          class="more-functions__overlay"
+          @click.prevent="hideDropdawn"
+        ></div>
         <div class="more-functions__btn" @click.prevent="openDropdawn"></div>
         <div class="more-functions__dropdown">
           <div class="more-functions__dropdown-inside">
             <ul>
-              <li><button class="deleteStory" type="button" @click="deleteStory">Delete</button></li>
-              <li><button class="saveFile" type="button" @click="saveFile">Save</button></li>
-              <li><button class="storySettings" type="button" @click="storySettings">Story Settings</button></li>
+              <li>
+                <button class="deleteStory" type="button" @click="deleteStory">
+                  Delete
+                </button>
+              </li>
+              <li>
+                <button class="saveFile" type="button" @click="saveFile">
+                  Save
+                </button>
+              </li>
+              <li>
+                <button
+                  class="storySettings"
+                  type="button"
+                  @click="storySettings"
+                >
+                  Story Settings
+                </button>
+              </li>
             </ul>
           </div>
         </div>
       </div>
       <div class="bottom-btns" v-if="currentStory">
         <div class="story-details-info">
-            <a href="#" class="btn-story-details" />
-            <div class="story-viewer" v-if="currentStory.viewersCount">
-                {{ viewersText }}
-            </div>
+          <a href="#" class="btn-story-details" />
+          <div class="story-viewer" v-if="currentStory.viewersCount">
+            {{ viewersText }}
+          </div>
         </div>
-        
+
         <template v-if="!isOwner(author.id) && author.canEarn">
           <button type="button" class="btn-tip"></button>
           <form class="tip-form hidden">
-            <button type="button" role="button" class="btn btn-cancel">Cancel</button>
+            <button type="button" role="button" class="btn btn-cancel">
+              Cancel
+            </button>
             <div class="tip-amount-field">
               <input
                 class="tip-amount-input rounded"
                 type="text"
                 pattern="\d{1,5}(?:\.\d{0,2})?"
                 maxlength="8"
-                placeholder="Enter fund amount">
-            </div>    
-            <button type="submit" class="btn btn-send" disabled>Send fund</button>
+                placeholder="Enter fund amount"
+              />
+            </div>
+            <button type="submit" class="btn btn-send" disabled>
+              Send fund
+            </button>
           </form>
         </template>
       </div>
       <button type="button" class="close" @click="close"></button>
-      <div :class="['play-button-wrapper', { hidden: !showVideoPlay }]" ref="videoPlayButton">
+      <div
+        :class="['play-button-wrapper', { hidden: !showVideoPlay }]"
+        ref="videoPlayButton"
+      >
         <div class="play-button-outer">
           <div class="play-button"></div>
         </div>
       </div>
     </template>
     <Loader
-      v-if="loading || showLoader || !currentStory || !currentStory.isReady" 
+      v-if="loading || showLoader || !currentStory || !currentStory.isReady"
       :fullscreen="false"
     />
   </div>

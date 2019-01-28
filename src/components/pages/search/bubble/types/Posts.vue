@@ -1,15 +1,11 @@
 <template>
   <div class="SearchResultsPopupView">
-    <a
-      class="user"
-      v-for="v in items"
-      v-bind:key="v.id"
-    >
+    <a class="user" v-for="v in items" v-bind:key="v.id">
       <div class="username-group">
         <div class="user__name">
-          <a
-            @click.prevent="goTo(v.id)"
-            :href="'/post/' + v.id" class="name">{{ cut(v) }}</a>
+          <a @click.prevent="goTo(v.id)" :href="'/post/' + v.id" class="name">{{
+            cut(v)
+          }}</a>
         </div>
       </div>
     </a>

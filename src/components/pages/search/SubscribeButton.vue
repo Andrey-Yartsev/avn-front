@@ -1,8 +1,5 @@
 <template>
-  <SubscribeButton
-    :profile="profile"
-    @requested="subsRequested"
-  />
+  <SubscribeButton :profile="profile" @requested="subsRequested" />
 </template>
 
 <script>

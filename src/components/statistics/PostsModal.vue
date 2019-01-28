@@ -8,18 +8,26 @@
           <div
             class="more-functions more-functions_select"
             :class="{ open: showDropdown }"
-            v-click-outside="() => {showDropdown = false}"
-
+            v-click-outside="
+              () => {
+                showDropdown = false;
+              }
+            "
           >
             <div class="more-functions__overlay"></div>
-            <div class="more-functions__btn" @click="showDropdown = !showDropdown">
+            <div
+              class="more-functions__btn"
+              @click="showDropdown = !showDropdown"
+            >
               <div class="more-functions__btn-text">{{ periodTitle }}</div>
             </div>
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
                 <ul>
                   <li v-for="v in periodOptions" v-bind:key="v.value">
-                    <button type="button" @click="selectPeriod(v.value)">{{ v.title }}</button>
+                    <button type="button" @click="selectPeriod(v.value)">
+                      {{ v.title }}
+                    </button>
                   </li>
                 </ul>
               </div>

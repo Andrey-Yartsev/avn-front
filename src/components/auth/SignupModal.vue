@@ -6,38 +6,54 @@
           <form v-on:submit.stop.prevent="signUp">
             <div
               class="form-group form-group_clear-gaps"
-              :class="{'field-invalid':fieldError('name')}"
+              :class="{ 'field-invalid': fieldError('name') }"
             >
               <input
                 v-model="name"
-                type="text" name="name" placeholder="Name" autocomplete="name" class="rounded"
+                type="text"
+                name="name"
+                placeholder="Name"
+                autocomplete="name"
+                class="rounded"
                 v-validate="'required'"
-              >
-              <div class="tooltip-info" v-if="fieldError('name')">{{ fieldError('name') }}</div>
+              />
+              <div class="tooltip-info" v-if="fieldError('name')">
+                {{ fieldError("name") }}
+              </div>
             </div>
             <div
               class="form-group form-group_clear-gaps"
-              :class="{'field-invalid':fieldError('email')}"
+              :class="{ 'field-invalid': fieldError('email') }"
             >
               <input
                 v-model="email"
-                type="email" name="email" placeholder="Email" autocomplete="email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                autocomplete="email"
                 v-validate="'required|email'"
                 class="rounded"
               />
-              <div class="tooltip-info" v-if="fieldError('email')">{{ fieldError('email') }}</div>
+              <div class="tooltip-info" v-if="fieldError('email')">
+                {{ fieldError("email") }}
+              </div>
             </div>
             <div
               class="form-group form-group_clear-gaps"
-              :class="{'field-invalid':fieldError('password')}"
+              :class="{ 'field-invalid': fieldError('password') }"
             >
               <input
                 v-model="password"
-                type="password" name="password" placeholder="Password"
+                type="password"
+                name="password"
+                placeholder="Password"
                 v-validate="'required'"
-                autocomplete="new-password" class="rounded"
+                autocomplete="new-password"
+                class="rounded"
               />
-              <div class="tooltip-info" v-if="fieldError('password')">{{ fieldError('password') }}</div>
+              <div class="tooltip-info" v-if="fieldError('password')">
+                {{ fieldError("password") }}
+              </div>
             </div>
             <recaptcha
               v-if="showCaptcha"
@@ -60,10 +76,11 @@
           <div class="signUp">
             <h3>Already have an account?</h3>
             <p>
-              <a href="/login" class="register" @click.prevent="openLogin">Login to OnMyTeam.com</a>
+              <a href="/login" class="register" @click.prevent="openLogin"
+                >Login to OnMyTeam.com</a
+              >
             </p>
           </div>
-
         </div>
       </div>
       <button type="button" class="close" @click="close"></button>

@@ -1,17 +1,27 @@
 <template>
-  <div class="NotificationsCollectionView" :class="{'no-notifications':!items.length}">
-
+  <div
+    class="NotificationsCollectionView"
+    :class="{ 'no-notifications': !items.length }"
+  >
     <div class="notifications-header">
       <div class="header_container">
-        <router-link :to="'/' + user.username" class="avatar header-avatar"><span class="avatar__img"></span></router-link>
+        <router-link :to="'/' + user.username" class="avatar header-avatar"
+          ><span class="avatar__img"></span
+        ></router-link>
         <h1 class="page-title">Notifications</h1>
-        <router-link class="btn-settings" to="/settings/notifications"></router-link>
+        <router-link
+          class="btn-settings"
+          to="/settings/notifications"
+        ></router-link>
       </div>
     </div>
 
     <MobileHeader />
 
-    <router-link class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
+    <router-link
+      class="addPost-btn-float hidden-desktop"
+      to="/addPost"
+    ></router-link>
 
     <div class="notifications-container">
       <div class="notifications-filter">
@@ -19,32 +29,45 @@
           <a
             v-for="v in menu"
             v-bind:key="v.name"
-            :class="{[v.name]: true, 'active': v.active}"
+            :class="{ [v.name]: true, active: v.active }"
             :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
             class="notifications-filter__btn"
-          >{{ v.title }}</a>
+            >{{ v.title }}</a
+          >
         </div>
-        <router-link class="notifications-filter__btn btn-settings hidden-mobile" to="/settings/notifications"></router-link>
+        <router-link
+          class="notifications-filter__btn btn-settings hidden-mobile"
+          to="/settings/notifications"
+        ></router-link>
       </div>
       <VuePerfectScrollbar class="notifications">
         <div
           class="NotificationsView"
-          :class="{[v.type]: true, unread: !v.isRead, 'last-child': key === items.length - 1}"
+          :class="{
+            [v.type]: true,
+            unread: !v.isRead,
+            'last-child': key === items.length - 1
+          }"
           v-for="(v, key) in items"
           v-bind:key="v.id"
         >
           <div class="avatars-wrapper">
-            <router-link :to="'/' + v.user.username" class="avatar avatar_ex-sm">
+            <router-link
+              :to="'/' + v.user.username"
+              class="avatar avatar_ex-sm"
+            >
               <span class="avatar__img">
-                <img :src="v.user.avatar" v-if="v.user.avatar"/>
+                <img :src="v.user.avatar" v-if="v.user.avatar" />
               </span>
             </router-link>
             <span class="timestamp">{{ time(v.createdAt) }}</span>
           </div>
           <div class="content">
-            <router-link :to="'/' + v.user.username" class="name">{{ v.user.name }}</router-link>
+            <router-link :to="'/' + v.user.username" class="name">{{
+              v.user.name
+            }}</router-link>
             <span class="notification-summary" v-html="v.text" />
           </div>
         </div>

@@ -1,40 +1,66 @@
 <template>
   <div class="exploreView">
     <MobileHeader></MobileHeader>
-    <router-link class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
+    <router-link
+      class="addPost-btn-float hidden-desktop"
+      to="/addPost"
+    ></router-link>
     <div class="container">
       <div class="over-container">
         <Navigate />
-        <div class="stories-all" v-if="page === 'all' && (stories.length || lives.length)">
+        <div
+          class="stories-all"
+          v-if="page === 'all' && (stories.length || lives.length)"
+        >
           <div class="exploreAllStoriesCollectionView">
             <TopLives :lives="lives" v-if="lives.length" />
-            <VuePerfectScrollbar class="explore-stories" @ps-scroll-x="scrollFunction">
-              <StorySmall v-for="post in stories" :post="post" :key="post.id" from="explore" />
+            <VuePerfectScrollbar
+              class="explore-stories"
+              @ps-scroll-x="scrollFunction"
+            >
+              <StorySmall
+                v-for="post in stories"
+                :post="post"
+                :key="post.id"
+                from="explore"
+              />
             </VuePerfectScrollbar>
           </div>
         </div>
         <div class="explore">
-          <div :class="{
-            exploreAllCollectionView: page === 'all',
-            photoCollectionView: page === 'photos',
-            videoCollectionView: page === 'videos',
-            storyCollectionView: page === 'stories',
-            liveCollectionView: page === 'lives',
-          }">
+          <div
+            :class="{
+              exploreAllCollectionView: page === 'all',
+              photoCollectionView: page === 'photos',
+              videoCollectionView: page === 'videos',
+              storyCollectionView: page === 'stories',
+              liveCollectionView: page === 'lives'
+            }"
+          >
             <div :class="['explore-wrapper', page]">
               <component
                 :is="postComponent"
                 v-for="post in posts"
                 :post="post"
-                :key="post.id" 
+                :key="post.id"
                 from="explore"
                 :shouldBePoster="page === 'all' && post.id === firstVideoId"
               />
               <template v-if="page === 'stories'">
-                <StoryMedium v-for="post in stories" :post="post" :key="post.id" from="explore" />
+                <StoryMedium
+                  v-for="post in stories"
+                  :post="post"
+                  :key="post.id"
+                  from="explore"
+                />
               </template>
               <template v-if="page === 'lives'">
-                <Live v-for="post in lives" :post="post" :key="post.id" from="explore" />
+                <Live
+                  v-for="post in lives"
+                  :post="post"
+                  :key="post.id"
+                  from="explore"
+                />
               </template>
             </div>
             <div class="loaderWrap loader-content" v-if="infinityScrollLoading">

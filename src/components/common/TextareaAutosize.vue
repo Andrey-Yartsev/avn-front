@@ -21,40 +21,40 @@ export default {
 
   props: {
     /*
-       * Property to accept value from parent
-       */
+     * Property to accept value from parent
+     */
     value: {
       type: [String, Number],
       default: ""
     },
 
     /*
-       * Allow to enable/disable auto resizing dynamically
-       */
+     * Allow to enable/disable auto resizing dynamically
+     */
     autosize: {
       type: Boolean,
       default: true
     },
 
     /*
-       * Min textarea height
-       */
+     * Min textarea height
+     */
     minHeight: {
       type: [Number],
       default: null
     },
 
     /*
-       * Max textarea height
-       */
+     * Max textarea height
+     */
     maxHeight: {
       type: [Number],
       default: null
     },
 
     /*
-       * Force !important for style properties
-       */
+     * Force !important for style properties
+     */
     important: {
       type: [Boolean, Array],
       default: false
@@ -104,15 +104,15 @@ export default {
 
   methods: {
     /*
-       * Update local val with prop value
-       */
+     * Update local val with prop value
+     */
     updateVal() {
       this.val = this.value;
     },
 
     /*
-       * Auto resize textarea by height
-       */
+     * Auto resize textarea by height
+     */
     resize: function() {
       const important = this.isHeightImportant ? "important" : undefined;
 
@@ -146,15 +146,15 @@ export default {
 
   watch: {
     /*
-       * Update val from prop when changed in parent
-       */
+     * Update val from prop when changed in parent
+     */
     value() {
       this.updateVal();
     },
 
     /*
-       * Emit input event as in https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
-       */
+     * Emit input event as in https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
+     */
     val(val) {
       this.$nextTick(this.resize);
       this.$emit("input", val);

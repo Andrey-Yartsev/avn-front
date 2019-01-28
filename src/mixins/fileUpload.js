@@ -89,8 +89,8 @@ export default {
 
         if (media.mediaType === "video" && !media.preview) {
           getMediaFilePreview(media, newMedia => {
-            this.preloadedMedias = this.preloadedMedias.map(
-              oldMedia => (oldMedia.id === newMedia.id ? newMedia : oldMedia)
+            this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
+              oldMedia.id === newMedia.id ? newMedia : oldMedia
             );
           });
         }
@@ -105,8 +105,8 @@ export default {
     },
 
     setUploadProgress(id, loaded, total) {
-      this.preloadedMedias = this.preloadedMedias.map(
-        m => (m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m)
+      this.preloadedMedias = this.preloadedMedias.map(m =>
+        m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m
       );
     },
 

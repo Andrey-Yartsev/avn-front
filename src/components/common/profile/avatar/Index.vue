@@ -1,19 +1,28 @@
 <template>
-  <div class="profile-images__inner" :style="{ fontSize: fontSize}">
-    <router-link :to="`/stories/${profile.id}`" v-if="profile.hasNotViewedStory && !showLiveLabel">
-      <span class="avatar with-story" :style="{ fontSize: fontSize}">
+  <div class="profile-images__inner" :style="{ fontSize: fontSize }">
+    <router-link
+      :to="`/stories/${profile.id}`"
+      v-if="profile.hasNotViewedStory && !showLiveLabel"
+    >
+      <span class="avatar with-story" :style="{ fontSize: fontSize }">
         <span class="avatar__img">
-          <img :src="profile.avatar" v-if="profile.avatar">
+          <img :src="profile.avatar" v-if="profile.avatar" />
         </span>
       </span>
     </router-link>
     <span v-else class="avatar" @click="click">
       <span class="avatar__img">
-        <img :src="profile.avatar" v-if="profile.avatar">
+        <img :src="profile.avatar" v-if="profile.avatar" />
       </span>
       <div class="stream-online-label" v-if="showLiveLabel">live</div>
     </span>
-    <div :class="['profile-name-sticky', 'hidden-mobile', {'profile-position': profileExtraClass }]">
+    <div
+      :class="[
+        'profile-name-sticky',
+        'hidden-mobile',
+        { 'profile-position': profileExtraClass }
+      ]"
+    >
       <div class="profile-name profile-name_base">
         <div class="profile-name__main">
           <span class="name">
@@ -25,7 +34,9 @@
           </div>
         </div>
         <span class="user-login reset-ml">
-          <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+          <router-link :to="'/' + profile.username">{{
+            profile.username
+          }}</router-link>
         </span>
       </div>
     </div>

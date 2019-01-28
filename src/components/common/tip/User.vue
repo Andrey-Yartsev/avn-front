@@ -1,17 +1,18 @@
 <template>
-  <form
-    class="tip-form"
-    v-on:submit.stop.prevent="send"
-  >
-    <span role="button" class="btn btn-cancel" @click="$emit('cancel')">Cancel</span>
+  <form class="tip-form" v-on:submit.stop.prevent="send">
+    <span role="button" class="btn btn-cancel" @click="$emit('cancel')"
+      >Cancel</span
+    >
     <div class="tip-amount-field">
       <input
         name="amount"
-        class="tip-amount-input rounded" type="text"
-        pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8"
+        class="tip-amount-input rounded"
+        type="text"
+        pattern="\d{1,5}(?:\.\d{0,2})?"
+        maxlength="8"
         placeholder="Amount"
         v-model="amount"
-      >
+      />
     </div>
     <button type="submit" class="btn" :disabled="!amount">Send fund</button>
   </form>

@@ -6,56 +6,65 @@
         Your request has been sent. Thank you for conversation.
       </template>
       <template v-else>
-      <h2>If you have business inquiries or other questions, please fill out the following form to contact us. Thank
-        you.</h2>
-      <form v-on:submit.stop.prevent="send">
-        <label class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label">Name</span>
-            <div class="form-group form-group_clear-gaps">
-              <input
-                v-model="model.name"
-                type="text" name="name" required>
+        <h2>
+          If you have business inquiries or other questions, please fill out the
+          following form to contact us. Thank you.
+        </h2>
+        <form v-on:submit.stop.prevent="send">
+          <label class="form-group form-group_with-label">
+            <div class="form-group-inner">
+              <span class="label">Name</span>
+              <div class="form-group form-group_clear-gaps">
+                <input v-model="model.name" type="text" name="name" required />
+              </div>
             </div>
-          </div>
-        </label>
-        <label class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label">Email</span>
-            <div class="form-group form-group_clear-gaps">
-              <input
-                v-model="model.email"
-                type="email" name="email" required>
+          </label>
+          <label class="form-group form-group_with-label">
+            <div class="form-group-inner">
+              <span class="label">Email</span>
+              <div class="form-group form-group_clear-gaps">
+                <input
+                  v-model="model.email"
+                  type="email"
+                  name="email"
+                  required
+                />
+              </div>
             </div>
-          </div>
-        </label>
-        <label class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label">Subject</span>
-            <div class="form-group form-group_clear-gaps">
-              <input
-                v-model="model.subject"
-                type="text" name="subject" required>
+          </label>
+          <label class="form-group form-group_with-label">
+            <div class="form-group-inner">
+              <span class="label">Subject</span>
+              <div class="form-group form-group_clear-gaps">
+                <input
+                  v-model="model.subject"
+                  type="text"
+                  name="subject"
+                  required
+                />
+              </div>
             </div>
-          </div>
-        </label>
-        <label class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label">Message</span>
-            <div class="form-group form-group_clear-gaps">
-              <textarea
-                v-model="model.message"
-                name="message" rows="6" required></textarea>
+          </label>
+          <label class="form-group form-group_with-label">
+            <div class="form-group-inner">
+              <span class="label">Message</span>
+              <div class="form-group form-group_clear-gaps">
+                <textarea
+                  v-model="model.message"
+                  name="message"
+                  rows="6"
+                  required
+                ></textarea>
+              </div>
             </div>
-          </div>
-        </label>
-        <label class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label"></span>
-            <button type="submit" class="btn lg">Submit</button>
-          </div>
-        </label>
-      </form>
+          </label>
+          <label class="form-group form-group_with-label">
+            <div class="form-group-inner">
+              <span class="label"></span>
+              <button type="submit" class="btn lg">Submit</button>
+            </div>
+          </label>
+        </form>
       </template>
     </div>
     <Footer class="site-footer_main" />

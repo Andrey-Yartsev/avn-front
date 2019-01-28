@@ -12,26 +12,27 @@
     <div class="chatForm">
       <label
         class="add-media-input btn-el"
-        :class="{disabled: showTip || showPaid}"
+        :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"
       >
         <input
           @change="addMediaFiles"
           type="file"
-          accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi">
+          accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+        />
       </label>
 
       <button
         v-if="withUser && !user.canEarn"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
-        :class="{active: showTip}"
+        :class="{ active: showTip }"
       ></button>
 
       <div
         class="field-text-message"
-        :class="{disabled: showTip || showPaid}"
+        :class="{ disabled: showTip || showPaid }"
       >
         <TextareaAutosize
           v-model="message"
@@ -51,8 +52,12 @@
         </div>
 
         <div class="price-message-wrapper" v-if="priceIsSet">
-          <span class="price-message">${{price}}</span>
-          <button type="button" class="btn-clear-price" @click="resetPrice"></button>
+          <span class="price-message">${{ price }}</span>
+          <button
+            type="button"
+            class="btn-clear-price"
+            @click="resetPrice"
+          ></button>
         </div>
       </div>
 
@@ -61,12 +66,12 @@
         :user="withUser"
         ref="tip"
         @cancel="closeTip"
-        :class="{chatTip: true, hidden: !showTip}"
+        :class="{ chatTip: true, hidden: !showTip }"
       />
 
       <div class="getPaidForm" v-if="showPaid">
         <button class="cancelPaid btn btn-cancel">Cancel</button>
-        <input type="hidden" name="priceAmount" class="getPaidAmount">
+        <input type="hidden" name="priceAmount" class="getPaidAmount" />
         <div class="price-amount-field getPaidForm__field">
           <input
             type="text"
@@ -75,14 +80,16 @@
             class="getPaidAmountPlaceholder"
             placeholder="Enter price"
             v-model="price"
-          >
+          />
         </div>
-        <button class="setPrice btn" @click="setPrice" :disabled="!price">Set Price</button>
+        <button class="setPrice btn" @click="setPrice" :disabled="!price">
+          Set Price
+        </button>
       </div>
 
       <button
         class="getPaid btn-el"
-        :class="{active: showPaid}"
+        :class="{ active: showPaid }"
         v-if="withUser && user.canEarn"
         @click="showPaid = !showPaid"
       ></button>

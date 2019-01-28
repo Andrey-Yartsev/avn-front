@@ -2,47 +2,58 @@
   <div class="chat-section">
     <VuePerfectScrollbar class="chat-wrapper" ref="messagesContainer">
       <div class="chat-scrollbar">
-          <div
-            v-for="v in messages"
-            v-bind:key="v.id"
-            class="chatMessage notAuthorMessage"
-            :class="{
-              authorMessage: isAuthor(v),
-              firstMessageInGroup: v.firstMessageInGroup,
-              withTime: v.lastMessageInGroup
-            }"
-          >
-            <div class="chatMessageWrapper">
-              <div class="avatar avatar_gap-r-md avatar_sm">
-                <span class="avatar__img">
-                  <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar">
-                </span>
+        <div
+          v-for="v in messages"
+          v-bind:key="v.id"
+          class="chatMessage notAuthorMessage"
+          :class="{
+            authorMessage: isAuthor(v),
+            firstMessageInGroup: v.firstMessageInGroup,
+            withTime: v.lastMessageInGroup
+          }"
+        >
+          <div class="chatMessageWrapper">
+            <div class="avatar avatar_gap-r-md avatar_sm">
+              <span class="avatar__img">
+                <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar" />
+              </span>
+            </div>
+            <div class="messageContent">
+              <div
+                class="messageWrapper"
+                :class="{ tipsMessage: v.isTips, lockedMessage: isLocked(v) }"
+                @click="messageClick(v)"
+              >
+                <span class="message" v-html="text(v)"></span>
+                <div class="media" v-if="v.media.length">
+                  <figure
+                    class="media-item active media-item_photo"
+                    data-index="0"
+                  >
+                    <a
+                      class="postLink"
+                      :href="v.media[0].src.source"
+                      target="_blank"
+                    >
+                      <img
+                        :src="v.media[0].src.source"
+                        width="760"
+                        height="428"
+                      />
+                    </a>
+                  </figure>
+                </div>
               </div>
-              <div class="messageContent">
-                <div
-                  class="messageWrapper"
-                  :class="{'tipsMessage': v.isTips, lockedMessage: isLocked(v)}"
-                  @click="messageClick(v)"
-                >
-                  <span class="message" v-html="text(v)"></span>
-                  <div class="media" v-if="v.media.length">
-                    <figure class="media-item active media-item_photo" data-index="0">
-                      <a class="postLink" :href="v.media[0].src.source" target="_blank">
-                        <img :src="v.media[0].src.source" width="760" height="428">
-                      </a>
-                    </figure>
-                  </div>
-                </div>
-                <div class="time" v-if="v.lastMessageInGroup">
-                  <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
-                  <span class="timeValue"> {{ time(v.changedAt) }}</span>
-                </div>
+              <div class="time" v-if="v.lastMessageInGroup">
+                <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
+                <span class="timeValue"> {{ time(v.changedAt) }}</span>
               </div>
             </div>
           </div>
-          <div class="chatMessageSending" v-if="sending">
-            Sending...
-          </div>
+        </div>
+        <div class="chatMessageSending" v-if="sending">
+          Sending...
+        </div>
       </div>
     </VuePerfectScrollbar>
   </div>

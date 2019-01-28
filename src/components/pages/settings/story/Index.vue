@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Content slot="content"/>
+    <Content slot="content" />
   </Layout>
 </template>
 

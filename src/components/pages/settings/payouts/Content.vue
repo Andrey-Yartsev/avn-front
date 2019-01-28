@@ -1,7 +1,13 @@
 <template>
-  <div class="rounded-container rounded-container_fluid-height" id="payouts-container">
+  <div
+    class="rounded-container rounded-container_fluid-height"
+    id="payouts-container"
+  >
     <div class="payouts">
-      <div class="border-top shadow-block loader-container loader-container_payouts" v-if="loading">
+      <div
+        class="border-top shadow-block loader-container loader-container_payouts"
+        v-if="loading"
+      >
         <Loader :fullscreen="false" text="" class="transparent small" />
       </div>
       <template v-else>

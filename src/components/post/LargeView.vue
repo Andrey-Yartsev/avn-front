@@ -1,9 +1,12 @@
 <template>
-  <div 
-      :class="['post postPage', {
-        'post_preparation': !post.isMediaReady
-      }]"
-    >
+  <div
+    :class="[
+      'post postPage',
+      {
+        post_preparation: !post.isMediaReady
+      }
+    ]"
+  >
     <div class="postPage-content">
       <div class="header-mobile">
         <button class="header-return-btn" @click="back"></button>
@@ -42,7 +45,7 @@
           v-on:commentReply="commentReply"
           v-on:likeComment="likeComment"
         />
-        <template v-if="isAuth() && this.post.canFavorite" >
+        <template v-if="isAuth() && this.post.canFavorite">
           <Actions
             :post="post"
             v-on:postShowCommentForm="clickOnCommentForm"
@@ -50,10 +53,9 @@
             @toggleTip="showTip = !showTip"
           />
         </template>
-
       </div>
       <div class="comment-form-wrapper" v-if="this.post.canComment">
-        <template v-if="isAuth()" >
+        <template v-if="isAuth()">
           <AddComment
             :sendNewComment="sendNewComment"
             :userName="commentReplyUserName"
@@ -65,23 +67,36 @@
             @cancel="closeTip"
           />
           <template v-if="!isOwner() && post.author.canEarn">
-            <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
+            <form
+              class="tip-form hidden"
+              :action="tipActionUrl"
+              target="_blank"
+            >
               <input type="hidden" name="type" value="tip" />
               <input type="hidden" name="id" :value="post.author.id" />
               <input type="hidden" name="access-token" :value="accessToken" />
               <span role="button" class="btn btn-cancel">Cancel</span>
               <div class="tip-amount-field">
-                <input name="amount" class="tip-amount-input rounded" type="text" pattern="\d{1,5}(?:\.\d{0,2})?" maxlength="8" placeholder="Enter amount">
+                <input
+                  name="amount"
+                  class="tip-amount-input rounded"
+                  type="text"
+                  pattern="\d{1,5}(?:\.\d{0,2})?"
+                  maxlength="8"
+                  placeholder="Enter amount"
+                />
               </div>
               <button type="submit" class="btn" disabled>Send tip</button>
             </form>
-            </template>
           </template>
-          <template v-else>
-            <div class="guest-comments-form">
-              <p>Please login to leave comments or funds</p>
-              <time class="date" :datetime="post.postedAt">{{ timePassed }} ago</time>
-            </div>
+        </template>
+        <template v-else>
+          <div class="guest-comments-form">
+            <p>Please login to leave comments or funds</p>
+            <time class="date" :datetime="post.postedAt"
+              >{{ timePassed }} ago</time
+            >
+          </div>
         </template>
       </div>
     </div>

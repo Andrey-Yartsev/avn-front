@@ -1,8 +1,11 @@
 <template>
-  <div class="explore-item explore-item_col explore-item_col-4 liveView" @click="run">
+  <div
+    class="explore-item explore-item_col explore-item_col-4 liveView"
+    @click="run"
+  >
     <div class="postLink live">
       <figure class="explore-media">
-        <img :src="imageSrc">
+        <img :src="imageSrc" />
         <div v-if="duraion" class="item-length item-length_live hidden-mobile">
           <span class="value">{{ duraion }}</span>
         </div>
@@ -12,7 +15,8 @@
         </div>
         <div class="live-short-info">
           <span class="looking">{{ post.viewsCount }}</span>
-            <span class="name">{{ user.name }}
+          <span class="name"
+            >{{ user.name }}
             <span v-if="user.isVerified" class="verified-user" />
           </span>
         </div>

@@ -1,16 +1,20 @@
 <template>
-  <div :class="['addFileView', {uploading: isSaving }]" >
+  <div :class="['addFileView', { uploading: isSaving }]">
     <span class="filename">
       <template v-if="media.preview">
-        <img :src="media.preview" :title="media.userFileName"/>
+        <img :src="media.preview" :title="media.userFileName" />
       </template>
       <template v-else>
         <span>{{ media.userFileName }}</span>
         <div class="loader centered" v-if="!media.previewError"></div>
       </template>
     </span>
-    <div class="progress" :style="{'width': `${media.loaded}%` }"></div>
-    <span class="remove centered" @mousedown.prevent.stop="() => {}" @click="remove">
+    <div class="progress" :style="{ width: `${media.loaded}%` }"></div>
+    <span
+      class="remove centered"
+      @mousedown.prevent.stop="() => {}"
+      @click="remove"
+    >
       <svg aria-hidden="true" class="icn icn-remove">
         <use xlink:href="#icon-remove"></use>
       </svg>

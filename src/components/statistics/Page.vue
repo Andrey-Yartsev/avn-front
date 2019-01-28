@@ -32,16 +32,29 @@
         <div class="box" id="posts-box" @click="openPostsModal">
           <h3 class="box-title">
             Posts
-            <span class="chart_period"><span ref="chartPeriod2"></span> - Today</span>
+            <span class="chart_period"
+              ><span ref="chartPeriod2"></span> - Today</span
+            >
           </h3>
           <div class="charts-wrapper-outer">
             <div class="charts-data">
-              <span class="posts" ref="chartsDataPostsPosts">Posts <span>0</span></span>
-              <span class="views" ref="chartsDataPostsViews">Views <span>0</span></span>
-              <span class="likes" ref="chartsDataPostsLikes">Likes <span>0</span></span>
-              <span class="comments" ref="chartsDataPostsComments">Comments	<span>0</span></span>
+              <span class="posts" ref="chartsDataPostsPosts"
+                >Posts <span>0</span></span
+              >
+              <span class="views" ref="chartsDataPostsViews"
+                >Views <span>0</span></span
+              >
+              <span class="likes" ref="chartsDataPostsLikes"
+                >Likes <span>0</span></span
+              >
+              <span class="comments" ref="chartsDataPostsComments"
+                >Comments <span>0</span></span
+              >
             </div>
-            <div id="posts_chart" class="charts-wrapper charts-wrapper_posts"></div>
+            <div
+              id="posts_chart"
+              class="charts-wrapper charts-wrapper_posts"
+            ></div>
             <div class="statistics-chart-scale"></div>
           </div>
         </div>
@@ -50,15 +63,24 @@
         <div class="box" id="stories-box">
           <h3 class="box-title">
             Stories
-            <span class="chart_period"><span ref="chartPeriod3"></span> - Today</span>
+            <span class="chart_period"
+              ><span ref="chartPeriod3"></span> - Today</span
+            >
           </h3>
-          <div class=charts-wrapper-outer>
-            <div class=charts-data>
-              <span class=uploaded ref="chartsDataStoriesUploaded">Uploaded<span>0</span></span>
-              <span class=views ref="chartsDataStoriesViews">Views<span>0</span></span>
+          <div class="charts-wrapper-outer">
+            <div class="charts-data">
+              <span class="uploaded" ref="chartsDataStoriesUploaded"
+                >Uploaded<span>0</span></span
+              >
+              <span class="views" ref="chartsDataStoriesViews"
+                >Views<span>0</span></span
+              >
               <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
             </div>
-            <div id="stories_chart" class="charts-wrapper charts-wrapper_stories"></div>
+            <div
+              id="stories_chart"
+              class="charts-wrapper charts-wrapper_stories"
+            ></div>
             <div class="statistics-chart-scale"></div>
           </div>
         </div>
@@ -76,23 +98,37 @@
               <div class="visitors-donuts-wrapper">
                 <div id="visitors_donut"></div>
                 <div class="visitors_data">
-                  <div class="visitors_today">Today <span ref="visitorsToday">0</span></div>
-                  <div class="visitors_week">Week <span ref="visitorsWeek">0</span></div>
-                  <div class="visitors_total">Total <span ref="visitorsTotal">0</span></div>
+                  <div class="visitors_today">
+                    Today <span ref="visitorsToday">0</span>
+                  </div>
+                  <div class="visitors_week">
+                    Week <span ref="visitorsWeek">0</span>
+                  </div>
+                  <div class="visitors_total">
+                    Total <span ref="visitorsTotal">0</span>
+                  </div>
                 </div>
               </div>
               <div class="visitors-donuts-wrapper">
                 <div id="visitors_users_donut"></div>
                 <div class="visitors_data">
-                  <div class="visitors_users">Followers <span ref="visitorsUsers">0</span></div>
-                  <div class="visitors_guests">Guests <span ref="visitorsGuests">0</span></div>
+                  <div class="visitors_users">
+                    Followers <span ref="visitorsUsers">0</span>
+                  </div>
+                  <div class="visitors_guests">
+                    Guests <span ref="visitorsGuests">0</span>
+                  </div>
                 </div>
               </div>
               <div class="visitors-donuts-wrapper">
                 <div id="visitors_platform_donut"></div>
                 <div class="visitors_data">
-                  <div class="visitors_mobile">Mobile <span ref="visitorsMobile">0</span></div>
-                  <div class="visitors_desktop">Desktop <span ref="visitorsDesktop">0</span></div>
+                  <div class="visitors_mobile">
+                    Mobile <span ref="visitorsMobile">0</span>
+                  </div>
+                  <div class="visitors_desktop">
+                    Desktop <span ref="visitorsDesktop">0</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -127,7 +163,9 @@
                         <div class="user__name">
                           <div class="name">{{ v.name }}</div>
                         </div>
-                        <span class="user-login reset-ml">{{ v.username }}</span>
+                        <span class="user-login reset-ml">{{
+                          v.username
+                        }}</span>
                       </div>
                     </router-link>
                   </div>

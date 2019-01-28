@@ -4,8 +4,13 @@
       <div class="loader-text">Media is currently processing</div>
     </div>
     <template v-if="medias.length > 1 && showSlider">
-      <swiper ref="mySwiper" class="media-slider" :options="swiperOption" :key="uniqId">
-        <swiperSlide :key="key" v-for="(media, key) in medias" >
+      <swiper
+        ref="mySwiper"
+        class="media-slider"
+        :options="swiperOption"
+        :key="uniqId"
+      >
+        <swiperSlide :key="key" v-for="(media, key) in medias">
           <component
             :is="getMediaViewType(medias[key])"
             :media="medias[key]"
@@ -28,10 +33,16 @@
       </figure>
     </template>
     <template v-if="medias.length > 1 && showSlider">
-      <div :class="`media-slider-pagination pagination-${uniqId}`" :style="{ zIndex: 20 }" />
-      <div :class="`media-slider-navigation navigation-${uniqId}`" v-if="$mq === 'desktop'">
-        <span :class="`btn-prev btn-prev-${uniqId}`" :style="{ zIndex: 999 }"/>
-        <span :class="`btn-next btn-next-${uniqId}`" :style="{ zIndex: 999 }"/>
+      <div
+        :class="`media-slider-pagination pagination-${uniqId}`"
+        :style="{ zIndex: 20 }"
+      />
+      <div
+        :class="`media-slider-navigation navigation-${uniqId}`"
+        v-if="$mq === 'desktop'"
+      >
+        <span :class="`btn-prev btn-prev-${uniqId}`" :style="{ zIndex: 999 }" />
+        <span :class="`btn-next btn-next-${uniqId}`" :style="{ zIndex: 999 }" />
       </div>
     </template>
   </div>

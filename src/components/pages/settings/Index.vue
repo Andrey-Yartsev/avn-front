@@ -2,7 +2,7 @@
   <div class="settings">
     <div class="container">
       <div class="row">
-        <div class="content-col" :class="{'hidden-mobile': isHome}">
+        <div class="content-col" :class="{ 'hidden-mobile': isHome }">
           <div class="rounded-container rounded-container_fluid-height">
             <DefaultSection />
           </div>

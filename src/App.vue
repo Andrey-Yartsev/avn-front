@@ -1,17 +1,20 @@
 <template>
-  <div class="main-container" v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }">
-    <Loader v-if="loading" class="page-loader"/>
+  <div
+    class="main-container"
+    v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
+  >
+    <Loader v-if="loading" class="page-loader" />
     <template v-else>
-      <Header/>
+      <Header />
       <main id="content">
         <router-view />
       </main>
-      <Sidebar v-if="user"/>
+      <Sidebar v-if="user" />
       <Toast v-if="showToast" @hide="showToast = false" />
       <StoryInput />
 
       <modal-router />
-      
+
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
@@ -21,7 +24,9 @@
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
-      <SubscriptionConfirmModal v-if="this.$store.state.modal.subscriptionConfirm.show" />
+      <SubscriptionConfirmModal
+        v-if="this.$store.state.modal.subscriptionConfirm.show"
+      />
       <LoginModal v-if="this.$store.state.modal.login.show" />
       <SignupModal v-if="this.$store.state.modal.signup.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
@@ -238,9 +243,6 @@ export default {
 };
 </script>
 
-<style lang="scss" src="@/styles/main.scss">
-</style>
-<style lang="scss" src="@/styles/colorScheme.scss">
-</style>
-<style lang="scss" src="@/styles/team.scss">
-</style>
+<style lang="scss" src="@/styles/main.scss"></style>
+<style lang="scss" src="@/styles/colorScheme.scss"></style>
+<style lang="scss" src="@/styles/team.scss"></style>

@@ -3,7 +3,10 @@
     <div class="story">
       <a
         :href="`/stories/${post.user.id}`"
-        :class="['avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg', {'with-story': post.user.hasNotViewedStory}]"
+        :class="[
+          'avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg',
+          { 'with-story': post.user.hasNotViewedStory }
+        ]"
         @click.prevent="() => watchAll(post.user.id)"
       >
         <span class="avatar__img">
@@ -12,14 +15,20 @@
       </a>
       <div class="story-info">
         <div class="story-header">
-          <a :href="`/${post.user.username}`" class="name" @click.prevent="() => watchAll(post.user.id)">
+          <a
+            :href="`/${post.user.username}`"
+            class="name"
+            @click.prevent="() => watchAll(post.user.id)"
+          >
             {{ post.user.name || post.user.username }}
           </a>
           <span v-if="post.user.isVerified" class="verified-user"></span>
           <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
         <div class="user-login reset-ml">
-          <a :href="`/${post.user.username}`">{{ post.user.name || post.user.username }}</a>
+          <a :href="`/${post.user.username}`">{{
+            post.user.name || post.user.username
+          }}</a>
           <span class="followme" v-if="post.user.subscribedOn">
             <span class="followme__txt">Follows you</span>
           </span>

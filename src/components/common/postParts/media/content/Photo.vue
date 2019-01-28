@@ -1,6 +1,6 @@
 <template>
   <div class="postLink" @click="$emit('click')">
-    <img :src="src" :style="style" @load="() => loaded=true">
+    <img :src="src" :style="style" @load="() => (loaded = true)" />
   </div>
 </template>
 

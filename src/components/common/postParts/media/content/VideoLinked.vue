@@ -1,7 +1,7 @@
 <template>
   <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
     <span class="video-placeholder">
-      <img :src="src" >
+      <img :src="src" />
     </span>
   </a>
 </template>

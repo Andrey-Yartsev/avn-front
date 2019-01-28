@@ -13,7 +13,7 @@
       :src="videoSrc"
       :type="`video/${videoType}`"
       :key="videoType"
-    >
+    />
   </video>
 </template>
 

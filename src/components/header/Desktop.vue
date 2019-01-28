@@ -4,7 +4,7 @@
       <router-link
         v-if="user"
         class="menu-item-home header-nav__item"
-        :class="{'router-link-exact-active active': isModalOnHomePage}"
+        :class="{ 'router-link-exact-active active': isModalOnHomePage }"
         to="/"
         exact
       >
@@ -17,10 +17,17 @@
         v-if="user"
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
-        :class="{unread: user.hasNotifications, active: !!$route.meta.notifications}"
+        :class="{
+          unread: user.hasNotifications,
+          active: !!$route.meta.notifications
+        }"
         @click.prevent="goToNotifications"
-      ><span>Notifications</span></a>
-      <router-link class="menu-item-notifications header-nav__item hidden-desktop" to="/notifications"><span>Notifications</span>
+        ><span>Notifications</span></a
+      >
+      <router-link
+        class="menu-item-notifications header-nav__item hidden-desktop"
+        to="/notifications"
+        ><span>Notifications</span>
       </router-link>
 
       <a
@@ -28,9 +35,14 @@
         href="/chat"
         class="menu-item-messages header-nav__item hidden-mobile btn-notifications"
         @click.prevent="goToChat"
-        :class="{unread: user.hasMessages, active: !!$route.meta.chat}"
-      ><span>Messages</span></a>
-      <router-link class="menu-item-messages header-nav__item hidden-desktop" to="/chat"><span>Messages</span></router-link>
+        :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
+        ><span>Messages</span></a
+      >
+      <router-link
+        class="menu-item-messages header-nav__item hidden-desktop"
+        to="/chat"
+        ><span>Messages</span></router-link
+      >
     </template>
   </nav>
 </template>

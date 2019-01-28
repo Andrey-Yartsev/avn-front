@@ -8,7 +8,7 @@
             <label class="form-group-inner">
               <span class="label">Name</span>
               <span class="form-group form-group_clear-gaps">
-                <input name="name" v-model="localUser.name" maxlength="70">
+                <input name="name" v-model="localUser.name" maxlength="70" />
               </span>
             </label>
           </div>
@@ -18,14 +18,19 @@
               <span class="form-group form-group_clear-gaps">
                 <input
                   ref="username"
-                  type="text" name="username" id="profileUsername"
-                  v-model="localUser.username" required
-                  autocomplete="off" minlength="5" maxlength="20"
+                  type="text"
+                  name="username"
+                  id="profileUsername"
+                  v-model="localUser.username"
+                  required
+                  autocomplete="off"
+                  minlength="5"
+                  maxlength="20"
                   pattern="[a-zA-Z0-9-_]{5,20}"
-                  title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters.">
+                  title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters."
+                />
               </span>
             </label>
-
           </div>
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
@@ -35,7 +40,8 @@
                   type="text"
                   name="website"
                   v-model="localUser.website"
-                  pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)">
+                  pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)"
+                />
               </span>
             </label>
           </div>
@@ -84,17 +90,24 @@
         </div>
       </div>
       <div class="toggle-wrapper border-top option-earn-money">
-        <label class="toggle-label semi-transparent" for="is_paid_subscription">I want to earn money using
-          OnMyTeam</label>
+        <label class="toggle-label semi-transparent" for="is_paid_subscription"
+          >I want to earn money using OnMyTeam</label
+        >
         <label class="toggle-element">
           <input
-            type="checkbox" id="is_paid_subscription" name="isWantEarn"
+            type="checkbox"
+            id="is_paid_subscription"
+            name="isWantEarn"
             v-model="localUser.isWantEarn"
-          >
+          />
           <span></span>
         </label>
       </div>
-      <div class="shadow-block" id="is_paid_subscription__wrapper" v-if="localUser.isWantEarn">
+      <div
+        class="shadow-block"
+        id="is_paid_subscription__wrapper"
+        v-if="localUser.isWantEarn"
+      >
         <div class="container">
           <div class="form-group form-group_with-label">
             <label class="form-group-inner subscription">
@@ -103,29 +116,38 @@
                 <span class="subscription__per-month">per month</span>
                 <input
                   class="subscription__input"
-                  type="number" min="0" step="0.01" name="subscribePrice"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  name="subscribePrice"
                   v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
-                >
+                />
               </span>
             </label>
 
             <label class="form-group-inner subscription" v-if="!user.canEarn">
               <span class="label"></span>
               <span class="subscription-desc">
-                Before setting your monthly subscription price (or to be able to accept tips), you must first
-                <router-link to="/settings/payouts">add a bank account</router-link>
+                Before setting your monthly subscription price (or to be able to
+                accept tips), you must first
+                <router-link to="/settings/payouts"
+                  >add a bank account</router-link
+                >
               </span>
             </label>
-
           </div>
         </div>
       </div>
       <div class="form-title border-top">
-        <div class="inner"><span class="semi-transparent">
-			Private Information
-			<p class="subtext">This information will not be publicly displayed</p>
-		</span></div>
+        <div class="inner">
+          <span class="semi-transparent">
+            Private Information
+            <p class="subtext">
+              This information will not be publicly displayed
+            </p>
+          </span>
+        </div>
       </div>
       <div class="shadow-block">
         <div class="container">
@@ -135,7 +157,11 @@
               <div class="row">
                 <div class="col-1-2">
                   <div class="select-wrapper">
-                    <select name="gender" class="default-disabled" v-model="localUser.gender">
+                    <select
+                      name="gender"
+                      class="default-disabled"
+                      v-model="localUser.gender"
+                    >
                       <option value="0">Not specified</option>
                       <option value="1">Male</option>
                       <option value="2">Female</option>
@@ -149,9 +175,12 @@
             <div class="form-group-inner">
               <span class="label"></span>
               <button
-                type="submit" class="btn lg saveChanges"
+                type="submit"
+                class="btn lg saveChanges"
                 :disabled="loading || !changed"
-              >Save changes</button>
+              >
+                Save changes
+              </button>
             </div>
           </div>
         </div>

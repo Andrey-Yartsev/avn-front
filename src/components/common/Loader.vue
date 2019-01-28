@@ -1,6 +1,6 @@
 <template>
-  <div :class="['lds-dual-ring with-text', { 'not-fullscreen': !fullscreen}]">
-    <div :class="['loader-text', { 'lowered': lowered}]">{{ text }}</div>
+  <div :class="['lds-dual-ring with-text', { 'not-fullscreen': !fullscreen }]">
+    <div :class="['loader-text', { lowered: lowered }]">{{ text }}</div>
   </div>
 </template>
 

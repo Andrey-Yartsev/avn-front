@@ -1,20 +1,22 @@
 <template>
-  <div
-    class="b-search-form b-search-form_flex-align header-search"
-  >
+  <div class="b-search-form b-search-form_flex-align header-search">
     <input
       @keyup="keyup"
       v-model="localQuery"
       class="header-search-input rounded sm"
-      name="query" maxlength="13" autocomplete="off"
-      placeholder="Search" type="text"
+      name="query"
+      maxlength="13"
+      autocomplete="off"
+      placeholder="Search"
+      type="text"
       @focus="open"
       v-click-outside="close"
     />
     <span role="button" tabindex="-1" id="header-search-clear"></span>
 
     <button
-      type="button" class="b-search-form__btn b-search-form__btn_mob header-search-submit"
+      type="button"
+      class="b-search-form__btn b-search-form__btn_mob header-search-submit"
       @click="toToSearchPage"
       :disabled="!canSearch"
     ></button>
@@ -31,15 +33,10 @@
     <div class="header-search-results">
       <div
         class="SearchResultsPopupCollectionView"
-        :class="{hidden: !opened}"
-
+        :class="{ hidden: !opened }"
       >
         <div class="users">
-          <component
-            :is="resultsComponent"
-            :items="items"
-            @away="reset"
-          />
+          <component :is="resultsComponent" :items="items" @away="reset" />
         </div>
         <div class="search-all-link">
           <a

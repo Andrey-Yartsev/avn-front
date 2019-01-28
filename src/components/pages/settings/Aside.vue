@@ -4,7 +4,7 @@
       <div
         id="avatarBgAside"
         class="rounded-container white-bg-block loadWrap"
-        :class="{'hidden-mobile': !showAvatarBlock, loaderWrap: loading}"
+        :class="{ 'hidden-mobile': !showAvatarBlock, loaderWrap: loading }"
       >
         <div class="settings-profile-images">
           <div class="bg-profile">
@@ -28,7 +28,7 @@
               ref="avatar"
               accept=".jpg,.jpeg,.gif,.png"
               @change="setAvatarPreview"
-            >
+            />
             <span
               class="reset-user-image reset-avatar"
               @click="removeAvatar"
@@ -40,10 +40,7 @@
             class="reset-user-image reset-bg"
             @click="removeBg"
           ></span>
-          <label
-            for="bg" class="select-user-image"
-            v-show="showBgAdd"
-          >
+          <label for="bg" class="select-user-image" v-show="showBgAdd">
             <span class="select-user-image__text">
               Add background picture
             </span>
@@ -54,7 +51,7 @@
             ref="bg"
             accept=".jpg,.jpeg,.gif,.png"
             @change="setBgPreview"
-          >
+          />
         </div>
         <div class="profile-identifier">
           <div class="profile-name profile-name-settings">
@@ -62,28 +59,25 @@
               <span class="name">{{ user.name }}</span>
               <span class="verified-user" v-if="user.isVerified"></span>
             </div>
-            <span class="user-login reset-ml"><a :href="'/' + user.username">{{ user.username }}</a></span>
+            <span class="user-login reset-ml"
+              ><a :href="'/' + user.username">{{ user.username }}</a></span
+            >
           </div>
 
-          <div class="profile-picture-btns" :class="{show: showSave}">
+          <div class="profile-picture-btns" :class="{ show: showSave }">
             <button
               class="btn-cancel-changes cancel-changes"
               @click="reset"
             ></button>
-            <button
-              class="btn save-changes"
-              @click="save"
-            >Save changes</button>
+            <button class="btn save-changes" @click="save">Save changes</button>
           </div>
-
         </div>
 
         <div class="lds-dual-ring with-text not-fullscreen" v-if="loading">
           <div class="loader-text lowered">Loading</div>
         </div>
-
       </div>
-      <div class="rounded-container" :class="{'hidden-mobile': !isHome}">
+      <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">
         <div class="form-title hidden-desktop">
           <div class="inner">
             <span class="semi-transparent">
@@ -93,10 +87,12 @@
         </div>
         <div class="shadow-block no-padding">
           <div class="settings-nav">
-            <router-link :to="'/settings/' + v.name" :class="navClass(v.name)"
-               v-for="v in navigation"
-               v-bind:key="v.name"
-               class="settings-nav__item"
+            <router-link
+              :to="'/settings/' + v.name"
+              :class="navClass(v.name)"
+              v-for="v in navigation"
+              v-bind:key="v.name"
+              class="settings-nav__item"
             >
               <span>{{ v.title }}</span>
             </router-link>
@@ -104,7 +100,7 @@
         </div>
       </div>
 
-      <Footer class="site-footer_sidebar" v-if="isHome || $mq==='desktop'" />
+      <Footer class="site-footer_sidebar" v-if="isHome || $mq === 'desktop'" />
     </div>
   </div>
 </template>

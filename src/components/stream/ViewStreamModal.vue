@@ -6,11 +6,24 @@
         <div class="stream-online-label">live</div>
         <span role="button" id="close-stream-window" @click="stopWatching" />
         <div class="likesContainer">
-          <div v-for="like in likes" :id="like.date" :key="like.date" class="like" :style="{ top: `${like.y}px`, left: `${like.x}px`}">
-            <div class='like-icon'><div class='like-icon__symbol' /></div>
+          <div
+            v-for="like in likes"
+            :id="like.date"
+            :key="like.date"
+            class="like"
+            :style="{ top: `${like.y}px`, left: `${like.x}px` }"
+          >
+            <div class="like-icon"><div class="like-icon__symbol" /></div>
           </div>
         </div>
-        <video id="remotevideo" width="320" height="240" playsinline="" autoplay="" @click="click"></video>
+        <video
+          id="remotevideo"
+          width="320"
+          height="240"
+          playsinline=""
+          autoplay=""
+          @click="click"
+        ></video>
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-alert">
@@ -23,7 +36,11 @@
           </div>
         </div>
         <div class="stream-comments-wrapper">
-          <div class="item" v-for="comment in comments" v-bind:key="comment.comment">
+          <div
+            class="item"
+            v-for="comment in comments"
+            v-bind:key="comment.comment"
+          >
             <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
               <span class="avatar__img">
                 <img :src="comment.user.avatar" />
@@ -42,7 +59,7 @@
               maxlength="24"
               v-model="newComment"
               @keypress.enter.prevent="sendComment"
-            >
+            />
             <button
               @click="sendComment"
               type="button"
@@ -51,7 +68,7 @@
             ></button>
           </form>
           <Tip
-            :class="{show: showTip}"
+            :class="{ show: showTip }"
             :user="streamer"
             ref="tip"
             @cancel="closeTip"
@@ -59,9 +76,17 @@
           />
         </div>
         <div class="stream-btns stream-viewer-btns" v-if="connected">
-          <span role="button" class="stream-btn stream-comment-btn" @click="showCommentForm = !showCommentForm"></span>
-          <span class="stream-btn stream-like-btn" @click="throttledLike"></span>
-          <span class="stream-btn stream-tip-btn"
+          <span
+            role="button"
+            class="stream-btn stream-comment-btn"
+            @click="showCommentForm = !showCommentForm"
+          ></span>
+          <span
+            class="stream-btn stream-like-btn"
+            @click="throttledLike"
+          ></span>
+          <span
+            class="stream-btn stream-tip-btn"
             type="button"
             v-if="streamer.canEarn"
             @click="showTip = !showTip"

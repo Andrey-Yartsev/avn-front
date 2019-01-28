@@ -2,7 +2,8 @@
   <div class="explore-wrapper users">
     <User
       class="userView"
-      v-for="item in items" v-bind:key="item.id"
+      v-for="item in items"
+      v-bind:key="item.id"
       :profile="item"
       :ref="'user' + item.id"
     />

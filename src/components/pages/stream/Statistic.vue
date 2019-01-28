@@ -5,19 +5,27 @@
       <div class="stream-chart-legend">
         <div class="stream-chart-legend-item stream-chart-legend-item__viewers">
           <span class="stream-chart-legend-item-label">Viewers</span>
-          <span class="stream-chart-legend-item-value">{{ this.looks.length }}</span>
+          <span class="stream-chart-legend-item-value">{{
+            this.looks.length
+          }}</span>
         </div>
         <div class="stream-chart-legend-item stream-chart-legend-item__likes">
           <span class="stream-chart-legend-item-label">Likes</span>
-          <span class="stream-chart-legend-item-value">{{ this.likes.length }}</span>
+          <span class="stream-chart-legend-item-value">{{
+            this.likes.length
+          }}</span>
         </div>
         <div class="stream-chart-legend-item stream-chart-legend-item__tips">
           <span class="stream-chart-legend-item-label">Funds</span>
           <span class="stream-chart-legend-item-value">{{ this.tips }}</span>
         </div>
-        <div class="stream-chart-legend-item stream-chart-legend-item__comments">
+        <div
+          class="stream-chart-legend-item stream-chart-legend-item__comments"
+        >
           <span class="stream-chart-legend-item-label">Comments</span>
-          <span class="stream-chart-legend-item-value">{{ this.comments.length }}</span>
+          <span class="stream-chart-legend-item-value">{{
+            this.comments.length
+          }}</span>
         </div>
       </div>
       <div class="stream-details">
@@ -28,36 +36,51 @@
               class="stream-chart-scale__item"
               v-for="item in chartScaleUnits"
               :key="item"
-            >{{ item }}</span>
+              >{{ item }}</span
+            >
           </div>
         </div>
         <div class="stream-summary-data-wrapper">
-          <div class="stream-summary-data-item stream-summary-data-item__duration">
+          <div
+            class="stream-summary-data-item stream-summary-data-item__duration"
+          >
             <div class="stream-summary-data-item__label">Duration</div>
-            <div class="stream-summary-data-item__value">{{ this.duration }}</div>
+            <div class="stream-summary-data-item__value">
+              {{ this.duration }}
+            </div>
           </div>
-          <div class="stream-summary-data-item stream-summary-data-item__viewers">
+          <div
+            class="stream-summary-data-item stream-summary-data-item__viewers"
+          >
             <div class="stream-summary-data-item__label">Viewers</div>
-            <div class="stream-summary-data-item__value">{{ this.looks.length }}</div>
+            <div class="stream-summary-data-item__value">
+              {{ this.looks.length }}
+            </div>
           </div>
           <div class="stream-summary-data-item stream-summary-data-item__likes">
             <div class="stream-summary-data-item__label">Likes</div>
-            <div class="stream-summary-data-item__value">{{ this.likes.length }}</div>
+            <div class="stream-summary-data-item__value">
+              {{ this.likes.length }}
+            </div>
           </div>
           <div class="stream-summary-data-item stream-summary-data-item__tips">
             <div class="stream-summary-data-item__label">Funds</div>
             <div class="stream-summary-data-item__value">{{ this.tips }}</div>
           </div>
-          <div class="stream-summary-data-item stream-summary-data-item__comments">
+          <div
+            class="stream-summary-data-item stream-summary-data-item__comments"
+          >
             <div class="stream-summary-data-item__label">Comments</div>
-            <div class="stream-summary-data-item__value">{{ this.comments.length }}</div>
+            <div class="stream-summary-data-item__value">
+              {{ this.comments.length }}
+            </div>
           </div>
         </div>
       </div>
       <label class="share-stream-label toggle-wrapper" v-if="canBeSaved">
         Share your video for the next 24 hours so that more people can watch it.
         <div class="toggle-element">
-          <input type="checkbox" class="share-stream" v-model="haveToSave">
+          <input type="checkbox" class="share-stream" v-model="haveToSave" />
           <span></span>
         </div>
       </label>

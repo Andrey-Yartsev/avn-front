@@ -6,27 +6,37 @@
           <form v-on:submit.stop.prevent="login">
             <div
               class="form-group form-group_clear-gaps"
-              :class="{'field-invalid':fieldError('email')}"
+              :class="{ 'field-invalid': fieldError('email') }"
             >
               <input
                 class="rounded"
-                type="email" name="email" placeholder="Email" autocomplete="email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                autocomplete="email"
                 v-model="email"
                 v-validate="'required|email'"
-              >
-              <div class="tooltip-info" v-if="fieldError('email')">{{ fieldError('email') }}</div>
+              />
+              <div class="tooltip-info" v-if="fieldError('email')">
+                {{ fieldError("email") }}
+              </div>
             </div>
             <div
               class="form-group form-group_clear-gaps"
-              :class="{'field-invalid':fieldError('password')}"
+              :class="{ 'field-invalid': fieldError('password') }"
             >
               <input
-                type="password" name="password" placeholder="Password" autocomplete="current-password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                autocomplete="current-password"
                 class="rounded"
                 v-model="password"
                 v-validate="'required'"
-              >
-              <div class="tooltip-info" v-if="fieldError('password')">{{ fieldError('password') }}</div>
+              />
+              <div class="tooltip-info" v-if="fieldError('password')">
+                {{ fieldError("password") }}
+              </div>
             </div>
             <recaptcha
               v-if="showCaptcha"
@@ -46,10 +56,14 @@
           <div class="signUp">
             <h3>Don't have an account yet?</h3>
             <p>
-              <a href="/register" class="register" @click.prevent="openSignup">Sign up for OnMyTeam.com</a>
+              <a href="/register" class="register" @click.prevent="openSignup"
+                >Sign up for OnMyTeam.com</a
+              >
             </p>
             <p class="forgot">
-              <router-link to="/forgot" class="forgot">Forgot your password?</router-link>
+              <router-link to="/forgot" class="forgot"
+                >Forgot your password?</router-link
+              >
             </p>
           </div>
         </div>

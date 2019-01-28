@@ -2,9 +2,11 @@
   <div class="payouts-legal-done">
     <div class="PayoutsLegalDoneView">
       <div class="form-title hidden-desktop">
-        <div class="inner"><span class="semi-transparent">
-          Personal Information
-        </span></div>
+        <div class="inner">
+          <span class="semi-transparent">
+            Personal Information
+          </span>
+        </div>
       </div>
       <h1 class="form-title hidden-mobile">Personal Information</h1>
       <div class="shadow-block border-top">
@@ -38,7 +40,8 @@
               <span class="title">Address</span>
               <span class="value">
                 <span class="value__text">
-                  {{ legal.address }}, {{ legal.city }}, {{ legal.postalCode }}, {{ legal.state }}
+                  {{ legal.address }}, {{ legal.city }}, {{ legal.postalCode }},
+                  {{ legal.state }}
                 </span>
               </span>
             </div>
@@ -54,17 +57,26 @@
                 <span class="label">Subscription</span>
                 <span class="subscription__field">
                   <span class="subscription__per-month">per month</span>
-                    <input
-                      class="subscription__input" type="number" min="0" name="subscribePrice"
-                      v-model="localUser.subscribePrice"
-                    >
-                  </span>
+                  <input
+                    class="subscription__input"
+                    type="number"
+                    min="0"
+                    name="subscribePrice"
+                    v-model="localUser.subscribePrice"
+                  />
+                </span>
               </label>
             </div>
             <div class="form-group form-group_with-label row-btn-save">
               <div class="form-group-inner">
                 <span class="label"></span>
-                <button type="submit" class="btn lg saveChanges" :disabled="!changed">Save changes</button>
+                <button
+                  type="submit"
+                  class="btn lg saveChanges"
+                  :disabled="!changed"
+                >
+                  Save changes
+                </button>
               </div>
             </div>
           </div>

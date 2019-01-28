@@ -4,7 +4,8 @@
       v-if="commentsCount > 3"
       v-on:click="clickOnShowMore"
       class="load-more-comments"
-    >Show all comments</span>
+      >Show all comments</span
+    >
     <div class="comments-list comments-list_main">
       <Comment
         v-for="comment in visibleComments"

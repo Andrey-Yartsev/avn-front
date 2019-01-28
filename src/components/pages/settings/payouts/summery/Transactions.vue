@@ -9,24 +9,41 @@
         </div>
 
         <div class="border-top loader-container" v-if="loading">
-          <Loader :fullscreen="false" text="" class="transparent small"/>
+          <Loader :fullscreen="false" text="" class="transparent small" />
         </div>
 
         <div class="table-header transactions-table-header" v-if="!loading">
-          <div class="date table__cell table__cell_align table__cell_align-hor-c">Date</div>
-          <div class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c">Amount</div>
-          <div class="expected table__cell table__cell_align table__cell_align-hor-c">Item</div>
+          <div
+            class="date table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Date
+          </div>
+          <div
+            class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+          >
+            Amount
+          </div>
+          <div
+            class="expected table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Item
+          </div>
         </div>
       </div>
       <div class="shadow-block no-padding" v-if="!loading">
         <div class="table-wrapper">
           <div class="table transactions-table">
-            <div class="PayoutsTransactionsView" v-for="v in items" v-bind:key="v.n">
+            <div
+              class="PayoutsTransactionsView"
+              v-for="v in items"
+              v-bind:key="v.n"
+            >
               <div class="item">
                 <div class="date table__cell">{{ dt(v.createdAt) }}</div>
                 <div
-                        class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
-                >${{ v.amount }}
+                  class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+                >
+                  ${{ v.amount }}
                 </div>
                 <div class="expected table__cell">
                   <div class="type payout-type">Monthly subscription from</div>
@@ -35,7 +52,9 @@
                       {{ v.userFrom.name }}
                     </router-link>
                     <span class="user-login">
-                      <router-link :to="'/' + v.userFrom.username">{{ v.userFrom.username }}</router-link>
+                      <router-link :to="'/' + v.userFrom.username">{{
+                        v.userFrom.username
+                      }}</router-link>
                     </span>
                   </div>
                 </div>

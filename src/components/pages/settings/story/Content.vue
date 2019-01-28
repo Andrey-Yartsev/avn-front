@@ -6,12 +6,12 @@
       </h1>
       <div class="form-title border-top">
         <div class="inner">
-        <span class="semi-transparent">
+          <span class="semi-transparent">
             Messages
             <p class="subtext">
               Choose who can reply to your story
             </p>
-        </span>
+          </span>
         </div>
       </div>
       <div class="shadow-block">
@@ -20,9 +20,11 @@
             <label class="form-group-inner">
               <div class="radio-wrapper">
                 <input
-                  type="radio" name="storyAnswerType" value="all"
+                  type="radio"
+                  name="storyAnswerType"
+                  value="all"
                   v-model="localUser.storyAnswerType"
-                >
+                />
                 <span class="radio"></span>
                 <span class="label">
                   Everyone
@@ -32,9 +34,11 @@
             <label class="form-group-inner">
               <div class="radio-wrapper">
                 <input
-                  type="radio" name="storyAnswerType" value="following"
+                  type="radio"
+                  name="storyAnswerType"
+                  value="following"
                   v-model="localUser.storyAnswerType"
-                >
+                />
                 <span class="radio"></span>
                 <span class="label">
                   People you follow
@@ -44,9 +48,11 @@
             <label class="form-group-inner">
               <div class="radio-wrapper">
                 <input
-                  type="radio" name="storyAnswerType" value="off"
+                  type="radio"
+                  name="storyAnswerType"
+                  value="off"
                   v-model="localUser.storyAnswerType"
-                >
+                />
                 <span class="radio"></span>
                 <span class="label">
                   Off
@@ -58,24 +64,25 @@
       </div>
       <div class="form-title border-top private-story">
         <div class="inner private-story__inner">
-            <span class="semi-transparent">
-                Private Story
-                <p class="subtext">
-                    Story visible only to subscribers
-                </p>
-            </span>
+          <span class="semi-transparent">
+            Private Story
+            <p class="subtext">
+              Story visible only to subscribers
+            </p>
+          </span>
           <label class="toggle-element">
-            <input type="checkbox" name="isPrivateStories" v-model="localUser.isPrivateStories">
+            <input
+              type="checkbox"
+              name="isPrivateStories"
+              v-model="localUser.isPrivateStories"
+            />
             <span></span>
           </label>
         </div>
       </div>
       <div class="container hidden-mobile">
         <div class="form-group form-group_with-label">
-          <button
-            type="submit" class="btn lg saveChanges"
-            :disabled="!changed"
-          >
+          <button type="submit" class="btn lg saveChanges" :disabled="!changed">
             Save changes
           </button>
         </div>

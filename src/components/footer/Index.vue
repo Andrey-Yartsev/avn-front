@@ -3,7 +3,11 @@
     <div class="container">
       <div class="FooterNavCollectionView">
         <div class="footer-nav">
-          <div :class="['FooterNavView', {'settings-onmyteam-link': key === pages.length - 1}]"
+          <div
+            :class="[
+              'FooterNavView',
+              { 'settings-onmyteam-link': key === pages.length - 1 }
+            ]"
             v-for="(page, key) in pages"
             :key="page.name"
             v-if="shouldShowLink(page.url)"

@@ -1,46 +1,46 @@
 <template>
-    <div
-      class="chatCollectionContent"
-      :class="{chat: isSecondScreen, 'no-chats': noActiveChats}"
-    >
-      <template>
-        <div class="chatHeader">
-          <div class="contactsListHeader">
+  <div
+    class="chatCollectionContent"
+    :class="{ chat: isSecondScreen, 'no-chats': noActiveChats }"
+  >
+    <template>
+      <div class="chatHeader">
+        <div class="contactsListHeader">
+          <a
+            :href="'/' + user.username"
+            class="avatar header-avatar"
+            @click.prevent="openUserMobileBar"
+          >
+            <span class="avatar__img">
+              <img v-if="user.avatar" :src="user.avatar" />
+            </span>
+          </a>
+          <h3>Messages</h3>
+          <div class="newMessage-link">
             <a
-              :href="'/' + user.username"
-              class="avatar header-avatar"
-              @click.prevent="openUserMobileBar"
-            >
-              <span class="avatar__img">
-                <img v-if="user.avatar" :src="user.avatar">
-              </span>
-            </a>
-            <h3>Messages</h3>
-            <div class="newMessage-link">
-              <a
-                href="/chat/new"
-                @click.prevent="goTo('/chat/new')"
-                class="newMessage"
+              href="/chat/new"
+              @click.prevent="goTo('/chat/new')"
+              class="newMessage"
               >New message
-              </a>
-            </div>
+            </a>
           </div>
-          <MobileHeader activeName="chat" />
         </div>
-      </template>
-
-      <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
-        <div class="chat-container">
-          <slot name="col1"></slot>
-        </div>
+        <MobileHeader activeName="chat" />
       </div>
-      <div class="chatCollectionContent__col chatCollectionContent__col_wide">
-        <slot name="col2"></slot>
-      </div>
-      <slot name="extra"></slot>
+    </template>
 
-      <Footer class="hidden-desktop" />
+    <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
+      <div class="chat-container">
+        <slot name="col1"></slot>
+      </div>
     </div>
+    <div class="chatCollectionContent__col chatCollectionContent__col_wide">
+      <slot name="col2"></slot>
+    </div>
+    <slot name="extra"></slot>
+
+    <Footer class="hidden-desktop" />
+  </div>
 </template>
 
 <script>

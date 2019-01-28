@@ -1,24 +1,27 @@
 <template>
   <div class="more-functions__dropdown-inside">
     <ul>
-      <li
-        v-if="$mq === 'mobile'"
-        class="more-functions__details"
-      >
+      <li v-if="$mq === 'mobile'" class="more-functions__details">
         <a href="#" @click.prevent="detailView">Details</a>
       </li>
       <li v-if="!isOwner(userId) && isAuth()">
-        <button class="report" type="button" @click="reportUser">Report post</button>
+        <button class="report" type="button" @click="reportUser">
+          Report post
+        </button>
       </li>
-      <li v-if="copied" >
+      <li v-if="copied">
         <button class="btn-copy-link copied" type="button">Copied!</button>
       </li>
       <li v-else>
-        <button class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
+        <button class="btn-copy-link" type="button" @click="copyHref">
+          Copy link to post
+        </button>
       </li>
       <template v-if="isOwner(userId)">
         <li>
-          <button class="deletePost" type="button" @click="deletePost">Delete post</button>
+          <button class="deletePost" type="button" @click="deletePost">
+            Delete post
+          </button>
         </li>
       </template>
     </ul>

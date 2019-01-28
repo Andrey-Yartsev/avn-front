@@ -3,7 +3,10 @@
     <div class="content-col">
       <div class="profile-btns-group">
         <div class="btns-user-activity">
-          <router-link :class="!page ? 'active' : ''" :to="`/${profile.username}/posts`">
+          <router-link
+            :class="!page ? 'active' : ''"
+            :to="`/${profile.username}/posts`"
+          >
             <span class="value">{{ profile.postsCount }}</span>
             <span class="label">Posts</span>
           </router-link>
@@ -17,40 +20,49 @@
           </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
-          <router-link to="/settings/profile" class="profile-actions__btn btn-with-icon btn-edit-profile">Edit profile</router-link>
-          <button class="profile-actions__btn btn-with-icon btn-make-post make-post-btn" @click="openAddPostModal">New post</button>
+          <router-link
+            to="/settings/profile"
+            class="profile-actions__btn btn-with-icon btn-edit-profile"
+            >Edit profile</router-link
+          >
+          <button
+            class="profile-actions__btn btn-with-icon btn-make-post make-post-btn"
+            @click="openAddPostModal"
+          >
+            New post
+          </button>
         </div>
         <div class="profile-actions" v-else>
-          <div class="profile-actions-tip-form" :class="{show: showTip}">
-            <Tip
-              :user="profile"
-              ref="tip"
-              @cancel="closeTip"
-            />
+          <div class="profile-actions-tip-form" :class="{ show: showTip }">
+            <Tip :user="profile" ref="tip" @cancel="closeTip" />
           </div>
           <button
             v-if="profile.canEarn"
-            type="button" class="profile-actions__btn btn-with-icon profile-tip-btn selected"
+            type="button"
+            class="profile-actions__btn btn-with-icon profile-tip-btn selected"
             @click="openTip"
-          >Fund</button>
+          >
+            Fund
+          </button>
           <SubscribeButton
             :profile="profile"
             @requested="subsRequested"
             ref="subscribeButton"
           />
-          <div class="subscribeView profile-actions__btn" v-if="!profile.subscribedBy">
+          <div
+            class="subscribeView profile-actions__btn"
+            v-if="!profile.subscribedBy"
+          >
             <div
               v-if="profile.followedBy"
               @click="unfollow"
-              class="btn-with-icon btn-subscribe disable-state">
+              class="btn-with-icon btn-subscribe disable-state"
+            >
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
             </div>
-            <div
-              v-else
-              @click="follow"
-              class="btn-with-icon btn-subscribe">
+            <div v-else @click="follow" class="btn-with-icon btn-subscribe">
               <div class="btn-subscribe__label">
                 Follow
               </div>
@@ -59,7 +71,7 @@
           <button
             v-if="profile.followedBy"
             @click="sendMessage"
-            type="button" 
+            type="button"
             class="profile-actions__btn btn-with-icon profile-message-btn"
           >
             Message

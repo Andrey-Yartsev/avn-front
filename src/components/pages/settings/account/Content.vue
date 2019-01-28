@@ -8,7 +8,7 @@
       </div>
     </div>
     <MobileMenu v-if="view === 'account'" />
-    <AllView :class="{'hidden-mobile': view === 'account'}" />
+    <AllView :class="{ 'hidden-mobile': view === 'account' }" />
   </div>
 </template>
 

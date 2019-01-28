@@ -1,19 +1,25 @@
 <template>
   <div>
-    <input name="birthDate" value="" id="birthDate" type="hidden">
+    <input name="birthDate" value="" id="birthDate" type="hidden" />
     <div class="select-wrapper day">
       <select name="day" v-model="day" required="required">
-        <option :value="v.value" v-for="v in days" v-bind:key="v.value">{{ v.title }}</option>
+        <option :value="v.value" v-for="v in days" v-bind:key="v.value">{{
+          v.title
+        }}</option>
       </select>
     </div>
     <div class="select-wrapper month">
       <select name="month" v-model="month" required="required">
-        <option :value="v.value" v-for="v in months" v-bind:key="v.value">{{ v.title }}</option>
+        <option :value="v.value" v-for="v in months" v-bind:key="v.value">{{
+          v.title
+        }}</option>
       </select>
     </div>
     <div class="select-wrapper year">
       <select name="year" v-model="year" required="required">
-        <option :value="v.value" v-for="v in years" v-bind:key="v.value">{{ v.title }}</option>
+        <option :value="v.value" v-for="v in years" v-bind:key="v.value">{{
+          v.title
+        }}</option>
       </select>
     </div>
   </div>

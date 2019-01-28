@@ -19,12 +19,17 @@
                   Your Country
                 </span>
                 <span class="select-wrapper">
-                  <select name="country" id="account-country" v-model="countryId">
+                  <select
+                    name="country"
+                    id="account-country"
+                    v-model="countryId"
+                  >
                     <option
                       v-for="v in countries"
                       v-bind:key="v.id"
                       :value="v.id"
-                      :selected="v.selected">{{ v.title }}
+                      :selected="v.selected"
+                      >{{ v.title }}
                     </option>
                   </select>
                 </span>
@@ -33,7 +38,9 @@
                 <span></span>
                 <span class="input-help">
                   Please notice that you will have to
-                  <router-link to="/support" target="_blank">contact our support</router-link>
+                  <router-link to="/support" target="_blank"
+                    >contact our support</router-link
+                  >
                   to change it later
                 </span>
               </label>

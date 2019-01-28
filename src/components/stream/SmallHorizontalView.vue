@@ -1,19 +1,30 @@
 <template>
   <div class="storyView">
     <div class="story">
-      <a :href="`/${post.user.username}`" class="avatar avatar_not-shadow avatar_lg avatar_gap-r-md avatar_gap-r-md_reset-mob new-story" @click.prevent="run">
+      <a
+        :href="`/${post.user.username}`"
+        class="avatar avatar_not-shadow avatar_lg avatar_gap-r-md avatar_gap-r-md_reset-mob new-story"
+        @click.prevent="run"
+      >
         <span class="avatar__img">
-          <img :src="post.user.avatar" v-if="post.user.avatar">
+          <img :src="post.user.avatar" v-if="post.user.avatar" />
         </span>
         <div class="stream-online-label">live</div>
       </a>
       <div class="story-info">
         <div class="story-header">
-          <a :href="`/${post.user.username}`" class="name" @click.prevent="run">{{ post.user.name }}</a>
+          <a
+            :href="`/${post.user.username}`"
+            class="name"
+            @click.prevent="run"
+            >{{ post.user.name }}</a
+          >
           <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
         <div class="user-login">
-          <router-link :to="`/${post.user.username}`" class="">{{ post.user.username }}</router-link>
+          <router-link :to="`/${post.user.username}`" class="">{{
+            post.user.username
+          }}</router-link>
         </div>
       </div>
     </div>

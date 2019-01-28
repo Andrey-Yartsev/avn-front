@@ -1,8 +1,9 @@
 <template>
   <Modal :onClose="close">
     <div
-      class="popup-container chat-popup" slot="content"
-      :class="{'chat-popup_new-msg': isNew}"
+      class="popup-container chat-popup"
+      slot="content"
+      :class="{ 'chat-popup_new-msg': isNew }"
     >
       <div class="content" ref="content">
         <component :is="component" mode="modal" />

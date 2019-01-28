@@ -1,7 +1,12 @@
 <template>
-    <div class="locked-picture">
-        <img class="locked" :src="image" :width="`${size.width}px`" :height="`${size.height}px`" />
-    </div>
+  <div class="locked-picture">
+    <img
+      class="locked"
+      :src="image"
+      :width="`${size.width}px`"
+      :height="`${size.height}px`"
+    />
+  </div>
 </template>
 
 <script>

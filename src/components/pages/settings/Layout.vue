@@ -17,7 +17,8 @@
       </h1>
 
       <router-link
-        to="/logout" class="link-title btn-logout"
+        to="/logout"
+        class="link-title btn-logout"
         v-if="showLogoutButton"
       ></router-link>
 
@@ -26,12 +27,13 @@
         :disabled="!changed"
         v-if="showSaveButton"
         @click="save"
-      >Save</button>
-
+      >
+        Save
+      </button>
     </div>
     <div class="container">
       <div class="row">
-        <div class="content-col" :class="{'hidden-mobile': isHome}">
+        <div class="content-col" :class="{ 'hidden-mobile': isHome }">
           <div class="rounded-container rounded-container_fluid-height">
             <slot name="content" />
           </div>

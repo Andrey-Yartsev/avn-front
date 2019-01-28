@@ -3,49 +3,65 @@
     <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="profile" v-else>
-    <router-link class="addPost-btn-float" to="/addPost"/>
+    <router-link class="addPost-btn-float" to="/addPost" />
     <div class="white-bg-block">
       <div class="profile-sticky-header">
-        <ProfileBackground  :profile="profile" />
+        <ProfileBackground :profile="profile" />
         <div class="profile-header-container">
           <div class="profile-images">
             <ProfileAvatar :profile="profile" :pageName="page" />
           </div>
         </div>
-        <div class="post-types-tabs" v-bind:style="{ 'margin-right': -scrollBarWidth + 'px', 'padding-right': scrollBarWidth + 'px' }">
+        <div
+          class="post-types-tabs"
+          v-bind:style="{
+            'margin-right': -scrollBarWidth + 'px',
+            'padding-right': scrollBarWidth + 'px'
+          }"
+        >
           <div class="container">
-            <ProfileActions
-              :profile="profile"
-              :page="page"
-            />
+            <ProfileActions :profile="profile" :page="page" />
           </div>
         </div>
       </div>
       <div class="container">
         <div class="content-nav hidden-mobile">
-          <router-link to="/following" class="content-nav__item">Following {{ profile.followingCount }}</router-link>
-          <router-link to="/followers" class="content-nav__item">Followers {{ profile.followersCount }}</router-link>
+          <router-link to="/following" class="content-nav__item"
+            >Following {{ profile.followingCount }}</router-link
+          >
+          <router-link to="/followers" class="content-nav__item"
+            >Followers {{ profile.followersCount }}</router-link
+          >
         </div>
         <div class="row">
           <div class="content-col">
             <div class="posts-container">
               <div class="sticky-header-controls header-mobile">
-                <router-link class="header-return-btn" :to="`/${profile.username}`" />
+                <router-link
+                  class="header-return-btn"
+                  :to="`/${profile.username}`"
+                />
                 <h1 class="page-title">Following</h1>
               </div>
               <div class="explore">
                 <div class="userCollectionView">
-                  <Users
-                    :items="users"
-                    :loading="false"
-                    :query="page"
-                  />
-                  <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+                  <Users :items="users" :loading="false" :query="page" />
+                  <div
+                    class="loaderWrap loader-content"
+                    v-if="infinityScrollLoading"
+                  >
                     <Loader :fullscreen="false" />
                   </div>
                   <div class="msg-no-content" v-if="!loading && !user.length">
-                    <div class="msg-no-content__text" v-if="page === 'following'">Start following people to see them here</div>
-                    <div class="msg-no-content__text" v-else>No one follows you yet</div>
+                    <div
+                      class="msg-no-content__text"
+                      v-if="page === 'following'"
+                    >
+                      Start following people to see them here
+                    </div>
+                    <div class="msg-no-content__text" v-else>
+                      No one follows you yet
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,18 +1,21 @@
 <template>
   <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="false" text="" class="transparent small"/>
+    <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="profile" v-else>
-    <router-link class="addPost-btn-float" to="/addPost"/>
-    <HeaderControl :profile="profile"/>
+    <router-link class="addPost-btn-float" to="/addPost" />
+    <HeaderControl :profile="profile" />
     <div class="white-bg-block">
       <div class="profile-sticky-header">
-        <ProfileBackground :profile="profile"/>
+        <ProfileBackground :profile="profile" />
         <div class="profile-header-container">
           <div class="profile-images">
             <ProfileAvatar :profile="profile" :pageName="pageName" />
           </div>
-          <div class="profile-header" v-if="useMediumPostView || $mq==='mobile'">
+          <div
+            class="profile-header"
+            v-if="useMediumPostView || $mq === 'mobile'"
+          >
             <div class="profile-name profile-name_base hidden-desktop">
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
@@ -21,27 +24,44 @@
                   <span class="icn-item icn-block"></span>
                 </div>
               </div>
-              <span class="user-login reset-ml"><a>{{ profile.username }}</a></span>
+              <span class="user-login reset-ml"
+                ><a>{{ profile.username }}</a></span
+              >
             </div>
             <div class="profile-desc">
-              <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
+              <p
+                class="profile-text"
+                v-if="profile.about"
+                v-html="profile.about"
+              ></p>
               <a
                 v-if="profile.twitterUsername"
                 :href="'https://twitter.com/' + profile.twitterUsername"
-                class="profile-twitter-link" target="_blank"
+                class="profile-twitter-link"
+                target="_blank"
                 rel="nofollow"
-              >twitter.com/{{ profile.twitterUsername }}</a>
-              <FollowersCounter :profile="profile"/>
-              <div class="stories-wrapper stories-collection" v-if="$mq==='desktop'">
+                >twitter.com/{{ profile.twitterUsername }}</a
+              >
+              <FollowersCounter :profile="profile" />
+              <div
+                class="stories-wrapper stories-collection"
+                v-if="$mq === 'desktop'"
+              >
                 <div class="storyCollectionView">
                   <div class="stories-collection__header">
                     <h4>Highlights</h4>
-                    <button class="btn-watch-all hidden-desktop" type="button">Watch All</button>
+                    <button class="btn-watch-all hidden-desktop" type="button">
+                      Watch All
+                    </button>
                   </div>
                   <div class="stories-group">
                     <div class="stories">
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                          ><span class="avatar__img"></span
+                        ></a>
                         <div class="story-info">
                           <div class="story-header">
                             <a href="#" class="name">
@@ -55,7 +75,11 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                          ><span class="avatar__img"></span
+                        ></a>
                         <div class="story-info">
                           <div class="story-header">
                             <a href="#" class="name">
@@ -69,7 +93,11 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                          ><span class="avatar__img"></span
+                        ></a>
                         <div class="story-info">
                           <div class="story-header">
                             <a href="#" class="name">
@@ -83,7 +111,11 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                          ><span class="avatar__img"></span
+                        ></a>
                         <div class="story-info">
                           <div class="story-header">
                             <a href="#" class="name">
@@ -97,7 +129,11 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                          ><span class="avatar__img"></span
+                        ></a>
                         <div class="story-info">
                           <div class="story-header">
                             <a href="#" class="name">
@@ -115,7 +151,7 @@
                 </div>
               </div>
 
-              <Footer class="site-footer_sidebar" v-if="$mq==='desktop'" />
+              <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </div>
           </div>
         </div>
@@ -124,7 +160,8 @@
           v-bind:style="{
             'margin-right': -scrollBarWidth + 'px',
             'padding-right': scrollBarWidth + 'px'
-          }">
+          }"
+        >
           <div class="container">
             <ProfileActions
               :profile="profile"
@@ -141,16 +178,22 @@
           ref="actionsMobile"
         />
       </div>
-      <div class="stories-wrapper stories-collection" v-if="$mq==='mobile'">
+      <div class="stories-wrapper stories-collection" v-if="$mq === 'mobile'">
         <div class="storyCollectionView">
           <div class="stories-collection__header">
             <h4>Highlights</h4>
-            <button class="btn-watch-all hidden-desktop" type="button">Watch All</button>
+            <button class="btn-watch-all hidden-desktop" type="button">
+              Watch All
+            </button>
           </div>
           <div class="stories-group">
             <div class="stories">
               <div class="story">
-                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <a
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  href="#"
+                  ><span class="avatar__img"></span
+                ></a>
                 <div class="story-info">
                   <div class="story-header">
                     <a href="#" class="name">
@@ -164,7 +207,11 @@
                 </div>
               </div>
               <div class="story">
-                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <a
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  href="#"
+                  ><span class="avatar__img"></span
+                ></a>
                 <div class="story-info">
                   <div class="story-header">
                     <a href="#" class="name">
@@ -178,7 +225,11 @@
                 </div>
               </div>
               <div class="story">
-                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <a
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  href="#"
+                  ><span class="avatar__img"></span
+                ></a>
                 <div class="story-info">
                   <div class="story-header">
                     <a href="#" class="name">
@@ -192,7 +243,11 @@
                 </div>
               </div>
               <div class="story">
-                <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#"><span class="avatar__img"></span></a>
+                <a
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  href="#"
+                  ><span class="avatar__img"></span
+                ></a>
                 <div class="story-info">
                   <div class="story-header">
                     <a href="#" class="name">
@@ -206,7 +261,11 @@
                 </div>
               </div>
               <div class="story">
-                <a class="avatar avatar_lg-tab avatar_gap-r-m avatar_gap-r-md_reset-mobd" href="#"><span class="avatar__img"></span></a>
+                <a
+                  class="avatar avatar_lg-tab avatar_gap-r-m avatar_gap-r-md_reset-mobd"
+                  href="#"
+                  ><span class="avatar__img"></span
+                ></a>
                 <div class="story-info">
                   <div class="story-header">
                     <a href="#" class="name">
@@ -225,8 +284,11 @@
       </div>
       <div class="container">
         <div class="row">
-          <div :class="['content-col', {'single-col': !useMediumPostView}]">
-            <p :class="['empty-feed']" v-if="!posts.length && !infinityScrollLoading">
+          <div :class="['content-col', { 'single-col': !useMediumPostView }]">
+            <p
+              :class="['empty-feed']"
+              v-if="!posts.length && !infinityScrollLoading"
+            >
               <span>Nothing here yet</span>
               <button
                 v-if="isOwner(this.profile.id)"
@@ -260,7 +322,10 @@
                   </div>
                 </div>
               </div>
-              <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+              <div
+                class="loaderWrap loader-content"
+                v-if="infinityScrollLoading"
+              >
                 <Loader :fullscreen="false" />
               </div>
             </div>
@@ -268,7 +333,12 @@
         </div>
       </div>
     </div>
-    <Footer :class="['site-footer_main hidden-footer', {'page-width': !useMediumPostView}]" />
+    <Footer
+      :class="[
+        'site-footer_main hidden-footer',
+        { 'page-width': !useMediumPostView }
+      ]"
+    />
   </div>
 </template>
 

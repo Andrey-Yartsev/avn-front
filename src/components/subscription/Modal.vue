@@ -4,21 +4,28 @@
       <div class="content">
         <div class="subscribePopupView">
           <div class="subscribe-popup__header bg">
-            <img v-if="profile.header" :src="profile.header">
+            <img v-if="profile.header" :src="profile.header" />
           </div>
 
           <div class="subscribe-popup__info">
             <div class="subscribe-popup__info-avatar">
-              <span class="avatar avatar_mex-lg"><span class="avatar__img"><img  v-if="profile.avatar" :src="profile.avatar"></span></span>
+              <span class="avatar avatar_mex-lg"
+                ><span class="avatar__img"
+                  ><img v-if="profile.avatar" :src="profile.avatar"/></span
+              ></span>
             </div>
 
             <div class="subscribe-popup__info-user">
               <div class="subscribe-popup__info-name">
-                <router-link :to="'/' + profile.username" class="name">{{ profile.name }}</router-link>
+                <router-link :to="'/' + profile.username" class="name">{{
+                  profile.name
+                }}</router-link>
                 <span v-if="profile.isVerified" class="verified-user"></span>
               </div>
               <div class="user-login reset-ml">
-                <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
+                <router-link :to="'/' + profile.username">{{
+                  profile.username
+                }}</router-link>
               </div>
             </div>
           </div>
@@ -51,11 +58,12 @@
               @click="subscribe"
               type="submit"
               class="btn lg primary-color"
-              id="subscribe-proceed">
-              Subscribe for
-              ${{ profile.subscribePrice }} / month
+              id="subscribe-proceed"
+            >
+              Subscribe for ${{ profile.subscribePrice }} / month
             </button>
-            <p class="subscribe-popup__footer-text">You will be charged
+            <p class="subscribe-popup__footer-text">
+              You will be charged
               <a>${{ profile.subscribePrice }} monthly</a>
               until you cancel your subscription
             </p>

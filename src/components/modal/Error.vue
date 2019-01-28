@@ -1,6 +1,9 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container popup-alert popup-alert_show-close" slot="content">
+    <div
+      class="popup-container popup-alert popup-alert_show-close"
+      slot="content"
+    >
       <div class="content">
         <div class="popup-alert__title">Error</div>
         <div class="popup-alert__body">

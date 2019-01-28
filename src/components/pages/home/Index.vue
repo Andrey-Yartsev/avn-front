@@ -1,35 +1,33 @@
 <template>
-    <div class="feed">
-        <MobileHeader></MobileHeader>
-        <router-link
-          class="addPost-btn-float hidden-desktop" to="/addPost"></router-link>
-        <div class="container">
-          <div class="row">
-            <div class="content-col">
-              <div class="no-padding">
-                <AddPost></AddPost>
-                <NewFeedPostToast
-                  :init="init"
-                  :newPosts="newPosts"
-                />
-                <div class="feed rounded-container shadow-block reset-btr">
-                  <PostCollection
-                    :posts="posts"
-                    from="home"
-                  />
-                </div>
-              </div>
-              <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
-                <Loader :fullscreen="false" />
-              </div>
-            </div>
-            <div class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer">
-              <StoriesWrapper></StoriesWrapper>
-              <Footer></Footer>
+  <div class="feed">
+    <MobileHeader></MobileHeader>
+    <router-link
+      class="addPost-btn-float hidden-desktop"
+      to="/addPost"
+    ></router-link>
+    <div class="container">
+      <div class="row">
+        <div class="content-col">
+          <div class="no-padding">
+            <AddPost></AddPost>
+            <NewFeedPostToast :init="init" :newPosts="newPosts" />
+            <div class="feed rounded-container shadow-block reset-btr">
+              <PostCollection :posts="posts" from="home" />
             </div>
           </div>
+          <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+            <Loader :fullscreen="false" />
+          </div>
         </div>
+        <div
+          class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer"
+        >
+          <StoriesWrapper></StoriesWrapper>
+          <Footer></Footer>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

@@ -1,10 +1,14 @@
 <template>
   <div
-      :class="['post', {
+    :class="[
+      'post',
+      {
         'open-dropdown-inside': showDropdawn,
-        'post_preparation': !post.isMediaReady
-      }]"
-      :data-id="post.id">
+        post_preparation: !post.isMediaReady
+      }
+    ]"
+    :data-id="post.id"
+  >
     <div class="post-details">
       <Header
         :postId="post.id"
@@ -30,14 +34,12 @@
         @toggleTip="showTip = !showTip"
         :openModal="openModal"
       />
-      <Tip
-        :user="post.author"
-        v-if="showTip"
-        ref="tip"
-        @cancel="closeTip"
-      />
+      <Tip :user="post.author" v-if="showTip" ref="tip" @cancel="closeTip" />
     </div>
-    <AddComment :class="{hidden: !showAddCommentForm}" :sendNewComment="sendNewComment"></AddComment>
+    <AddComment
+      :class="{ hidden: !showAddCommentForm }"
+      :sendNewComment="sendNewComment"
+    ></AddComment>
     <CommentsList
       :comments="post.comments || []"
       :commentsCount="post.commentsCount || 0"

@@ -8,19 +8,26 @@
             <div class="item">
               <span class="title">Name</span>
               <span class="value">
-                <span class="value__text">{{ legal.firstName }} {{ legal.lastName }}</span>
+                <span class="value__text"
+                  >{{ legal.firstName }} {{ legal.lastName }}</span
+                >
               </span>
             </div>
             <div class="item">
               <span class="title">Address</span>
               <span class="value">
-                <span class="value__text">{{ legal.address }}, {{ legal.city }}, {{ legal.postalCode }}, {{ legal.state }}</span>
+                <span class="value__text"
+                  >{{ legal.address }}, {{ legal.city }},
+                  {{ legal.postalCode }}, {{ legal.state }}</span
+                >
               </span>
             </div>
           </div>
         </div>
       </div>
-      <h2 class="form-title text-waiting">Account verification in progress, please allow 24 - 48 hours</h2>
+      <h2 class="form-title text-waiting">
+        Account verification in progress, please allow 24 - 48 hours
+      </h2>
     </div>
   </div>
 </template>

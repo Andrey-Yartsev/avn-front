@@ -27,14 +27,20 @@
                       {{ ucFirst(getCardType(card)) }}
                     </span>
                     <span class="number">{{ card }}</span>
-                    <button v-if="cardDeleting" class="delete">In progress</button>
-                    <button v-else class="delete" id="deleteCard" @click="deleteCard">
+                    <button v-if="cardDeleting" class="delete">
+                      In progress
+                    </button>
+                    <button
+                      v-else
+                      class="delete"
+                      id="deleteCard"
+                      @click="deleteCard"
+                    >
                       Delete
                     </button>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -44,20 +50,30 @@
           <div class="payments-wrapper">
             <div class="form-title border-top table-header-title">
               <div class="inner">
-            <span class="semi-transparent">
-                Payments Statements
-            </span>
+                <span class="semi-transparent">
+                  Payments Statements
+                </span>
               </div>
               <div class="table-header payments-table-header">
                 <div class="date table__cell">Date</div>
-                <div class="amount table__cell table__cell_selected  table__cell_align table__cell_align-hor-c">Amount
+                <div
+                  class="amount table__cell table__cell_selected  table__cell_align table__cell_align-hor-c"
+                >
+                  Amount
                 </div>
                 <div class="user table__cell">User</div>
-                <div class="status table__cell table__cell_align table__cell_align-hor-c">Status</div>
+                <div
+                  class="status table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  Status
+                </div>
               </div>
             </div>
 
-            <div class="border-top shadow-block loader-container" v-if="transactionsLoading">
+            <div
+              class="border-top shadow-block loader-container"
+              v-if="transactionsLoading"
+            >
               <Loader :fullscreen="false" text="" class="transparent small" />
             </div>
 
@@ -70,35 +86,49 @@
                       v-for="v in transactions"
                       v-bind:key="v.createdAt + v.userTo.username"
                     >
-                    <div class="item">
-                      <div
-                        class="date table__cell table__cell_align table__cell_align-vert-c"
-                      >{{ dt(v.createdAt) }}</div>
-                      <div
-                        class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c table__cell_align-vert-c">
-                        ${{ v.amount }}
-                      </div>
-                      <div class="user table__cell">
-                        <router-link :to="'/' + v.userTo.username" target="_blank"
-                          class="userview-block payment-user-wrapper">
-                          <span class="avatar avatar_sm">
-                            <span class="avatar__img">
-                              <img :src="v.userTo.avatar" v-if="v.userTo.avatar" />
+                      <div class="item">
+                        <div
+                          class="date table__cell table__cell_align table__cell_align-vert-c"
+                        >
+                          {{ dt(v.createdAt) }}
+                        </div>
+                        <div
+                          class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c table__cell_align-vert-c"
+                        >
+                          ${{ v.amount }}
+                        </div>
+                        <div class="user table__cell">
+                          <router-link
+                            :to="'/' + v.userTo.username"
+                            target="_blank"
+                            class="userview-block payment-user-wrapper"
+                          >
+                            <span class="avatar avatar_sm">
+                              <span class="avatar__img">
+                                <img
+                                  :src="v.userTo.avatar"
+                                  v-if="v.userTo.avatar"
+                                />
+                              </span>
                             </span>
-                          </span>
-                          <span class="name">{{ v.userTo.name }}</span>
-                          <span class="user-login reset-ml">{{ v.userTo.username }}</span>
-                        </router-link>
-                      </div>
-                      <div class="status table__cell table__cell_align table__cell_align-vert-c">
-                        <span class="success" v-if="v.isSuccess"></span>
+                            <span class="name">{{ v.userTo.name }}</span>
+                            <span class="user-login reset-ml">{{
+                              v.userTo.username
+                            }}</span>
+                          </router-link>
+                        </div>
+                        <div
+                          class="status table__cell table__cell_align table__cell_align-vert-c"
+                        >
+                          <span class="success" v-if="v.isSuccess"></span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
                   </template>
                 </div>
-                <div class="empty-table-info"><span>Empty here for now</span></div>
+                <div class="empty-table-info">
+                  <span>Empty here for now</span>
+                </div>
               </div>
             </div>
           </div>

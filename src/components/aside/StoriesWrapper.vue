@@ -5,12 +5,18 @@
       <div class="stories-group__outer">
         <div class="stories-group">
           <VuePerfectScrollbar class="stories-group__inner">
-            <div v-if="!hasMine" class="storyView create-story-button" @click.prevent="addNewStory">
+            <div
+              v-if="!hasMine"
+              class="storyView create-story-button"
+              @click.prevent="addNewStory"
+            >
               <div class="story">
-                <div class="story-avatar avatar_gap-r-md avatar_gap-r-md_reset-mob">
+                <div
+                  class="story-avatar avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                >
                   <a class="avatar avatar_not-shadow avatar_lg new-story">
                     <span class="avatar__img">
-                      <img v-if="user.avatar" :src="user.avatar">
+                      <img v-if="user.avatar" :src="user.avatar" />
                     </span>
                   </a>
                   <span class="btn-add">

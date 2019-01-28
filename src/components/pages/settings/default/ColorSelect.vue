@@ -1,11 +1,14 @@
 <template>
   <div
     class="user-color-select"
-    :class="{'user-color-select-visible': visible}"
+    :class="{ 'user-color-select-visible': visible }"
     v-click-outside="hide"
   >
-    <input type="hidden" :name="name" :value="value">
-    <div class="user-color-select-wrapper options-color-definition" :class="wrapperClass">
+    <input type="hidden" :name="name" :value="value" />
+    <div
+      class="user-color-select-wrapper options-color-definition"
+      :class="wrapperClass"
+    >
       <div class="select" @click="toggle">
         <span class="select__text">{{ label }}</span>
       </div>
@@ -17,7 +20,7 @@
             <span
               role="button"
               class="option option_col-6"
-              :class="{['option-' + v]: true, active: isActive(v)}"
+              :class="{ ['option-' + v]: true, active: isActive(v) }"
               :data-color="v"
               v-bind:key="v"
               v-for="v in options"

@@ -7,9 +7,10 @@
             v-for="v in types"
             v-bind:key="v.name"
             :to="'/search/' + v.name + '/' + query"
-            :class="{active: v.active}"
+            :class="{ active: v.active }"
             class="content-nav__item"
-          >{{ v.title }}</router-link>
+            >{{ v.title }}</router-link
+          >
         </nav>
 
         <div class="explore">

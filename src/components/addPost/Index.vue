@@ -1,8 +1,20 @@
 <template>
-  <div :class="['addPost', {loaderWrap: isSaving}]" v-click-outside="() => expanded = false">
-    <form :class="['add-new-form', { expanded: expanded || initialExpanded || preloadedMedias.length }]">
+  <div
+    :class="['addPost', { loaderWrap: isSaving }]"
+    v-click-outside="() => (expanded = false)"
+  >
+    <form
+      :class="[
+        'add-new-form',
+        { expanded: expanded || initialExpanded || preloadedMedias.length }
+      ]"
+    >
       <div class="addPost-header">
-        <button type="button" class="header-return-btn go-back go-back_times" @click="close">
+        <button
+          type="button"
+          class="header-return-btn go-back go-back_times"
+          @click="close"
+        >
           <h1 class="category-name">New Post</h1>
         </button>
         <button
@@ -10,16 +22,20 @@
           class="btn submit sm"
           :disabled="notEhoughData"
           @click="addNewPost"
-        >Share</button>
+        >
+          Share
+        </button>
       </div>
-      <span class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile">
+      <span
+        class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
+      >
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
         </span>
       </span>
       <div class="text-media-container">
         <textarea
-          @focus="() => expanded = true"
+          @focus="() => (expanded = true)"
           class="sm"
           placeholder="What is going on?"
           maxlength="500"
@@ -37,7 +53,7 @@
       </div>
       <div class="actions">
         <div class="actions-controls">
-          <label :class="['add-media-input', {disabled: cantAddMoreMedia}]">
+          <label :class="['add-media-input', { disabled: cantAddMoreMedia }]">
             <input
               type="file"
               multiple
@@ -48,7 +64,7 @@
           <template v-if="hasSubscribePrice">
             <div class="b-check-state b-check-state_post">
               <label>
-                <input class="is-free-post" type="checkbox" v-model="isFree">
+                <input class="is-free-post" type="checkbox" v-model="isFree" />
                 <span class="b-check-state__icon"></span>
                 <span class="b-check-state__text">Free post</span>
               </label>
@@ -56,15 +72,16 @@
           </template>
           <router-link
             class="b-check-state b-check-state_live"
-            :class="{disabled: preloadedMedias.length || postMsg.length}"
+            :class="{ disabled: preloadedMedias.length || postMsg.length }"
             to="/stream"
-          >Go live</router-link>
+            >Go live</router-link
+          >
         </div>
         <div class="add-new-type add-new-type_underline-items line-top">
           <AddNewNav active="post" />
         </div>
-        <label :class="['tweet-new-post', {hidden: !user.isAllowTweets}]">
-          <input class="tweetSend" type="checkbox" :checked="tweetSend">
+        <label :class="['tweet-new-post', { hidden: !user.isAllowTweets }]">
+          <input class="tweetSend" type="checkbox" :checked="tweetSend" />
           <span class="icon" @click="tweetSend = !tweetSend"></span>
         </label>
         <button
@@ -72,7 +89,9 @@
           class="btn submit hidden-mobile"
           :disabled="notEhoughData"
           @click="addNewPost"
-        >Share</button>
+        >
+          Share
+        </button>
       </div>
     </form>
     <Loader v-if="isSaving" :fullscreen="false"></Loader>

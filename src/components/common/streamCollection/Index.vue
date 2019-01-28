@@ -1,10 +1,6 @@
 <template>
   <div class="stories">
-    <Stream
-      v-for="post in stories"
-      :key="post.id"
-      :post="post"
-    />
+    <Stream v-for="post in stories" :key="post.id" :post="post" />
   </div>
 </template>
 

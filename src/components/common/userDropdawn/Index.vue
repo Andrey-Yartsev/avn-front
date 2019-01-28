@@ -1,24 +1,27 @@
 <template>
-  <div
-    class="more-functions"
-    :class="{open: opened}"
-    v-click-outside="hide"
-  >
+  <div class="more-functions" :class="{ open: opened }" v-click-outside="hide">
     <div class="more-functions__overlay" @click="hide" />
-    <div class="more-functions__btn more-functions__btn_with-text" @click="toggle">
+    <div
+      class="more-functions__btn more-functions__btn_with-text"
+      @click="toggle"
+    >
       <div class="more-functions__btn-text">More</div>
     </div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul>
           <li><a href="#" @click.prevent="report">Report</a></li>
-          <li v-if="profile.isBlocked"><a href="#" @click.prevent="unblock">Unblock</a></li>
+          <li v-if="profile.isBlocked">
+            <a href="#" @click.prevent="unblock">Unblock</a>
+          </li>
           <li v-else><a href="#" @click.prevent="block">Block</a></li>
-          <li v-if="copied" >
+          <li v-if="copied">
             <button class="btn-copy-link copied" type="button">Copied!</button>
           </li>
           <li v-else>
-            <button class="btn-copy-link" type="button" @click="copyHref">Copy link to post</button>
+            <button class="btn-copy-link" type="button" @click="copyHref">
+              Copy link to post
+            </button>
           </li>
         </ul>
       </div>
