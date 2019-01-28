@@ -233,6 +233,10 @@
   .popup & {
     border-radius: 0;
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100vh;
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: visible;
       margin-top: 63px;
