@@ -8,7 +8,7 @@
             <label class="form-group-inner">
               <span class="label">Name</span>
               <span class="form-group form-group_clear-gaps">
-                <input name="name" v-model="localUser.name">
+                <input name="name" v-model="localUser.name" maxlength="70">
               </span>
             </label>
           </div>
