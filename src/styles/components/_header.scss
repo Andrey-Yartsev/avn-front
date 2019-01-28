@@ -465,7 +465,7 @@
     width: 100%;
   }
 
-  .dark-theme & {
+  .static-page.dark-theme & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       background: transparent;
