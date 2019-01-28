@@ -12,33 +12,41 @@
         <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Name</span>
-            <input
-              v-model="model.name"
-              type="text" name="name" required>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="model.name"
+                type="text" name="name" required>
+            </div>
           </div>
         </label>
         <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Email</span>
-            <input
-              v-model="model.email"
-              type="email" name="email" required>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="model.email"
+                type="email" name="email" required>
+            </div>
           </div>
         </label>
         <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Subject</span>
-            <input
-              v-model="model.subject"
-              type="text" name="subject" required>
+            <div class="form-group form-group_clear-gaps">
+              <input
+                v-model="model.subject"
+                type="text" name="subject" required>
+            </div>
           </div>
         </label>
         <label class="form-group form-group_with-label">
           <div class="form-group-inner">
             <span class="label">Message</span>
-            <textarea
-              v-model="model.message"
-              name="message" rows="6" required></textarea>
+            <div class="form-group form-group_clear-gaps">
+              <textarea
+                v-model="model.message"
+                name="message" rows="6" required></textarea>
+            </div>
           </div>
         </label>
         <label class="form-group form-group_with-label">
