@@ -7,43 +7,51 @@
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Name</span>
-              <input name="name" v-model="localUser.name">
+              <span class="form-group form-group_clear-gaps">
+                <input name="name" v-model="localUser.name">
+              </span>
             </label>
           </div>
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Username</span>
-              <input
-                ref="username"
-                type="text" name="username" id="profileUsername"
-                v-model="localUser.username" required
-                autocomplete="off" minlength="5" maxlength="20"
-                pattern="[a-zA-Z0-9-_]{5,20}"
-                title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters.">
+              <span class="form-group form-group_clear-gaps">
+                <input
+                  ref="username"
+                  type="text" name="username" id="profileUsername"
+                  v-model="localUser.username" required
+                  autocomplete="off" minlength="5" maxlength="20"
+                  pattern="[a-zA-Z0-9-_]{5,20}"
+                  title="Only letters, digits and '_', '-' allowed. From 5 to 20 characters.">
+              </span>
             </label>
 
           </div>
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">Website</span>
-              <input
-                type="text"
-                name="website"
-                v-model="localUser.website"
-                pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)">
+              <span class="form-group form-group_clear-gaps">
+                <input
+                  type="text"
+                  name="website"
+                  v-model="localUser.website"
+                  pattern="(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)">
+              </span>
             </label>
           </div>
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">
               <span class="label">About</span>
-              <TextareaAutosize
-                rows="3"
-                name="about"
-                :minHeight="50"
-                :maxHeight="200"
-                v-model="localUser.about"
-                maxlength="500"
-              ></TextareaAutosize>
+              <span class="form-group form-group_clear-gaps">
+                <TextareaAutosize
+                  rows="3"
+                  name="about"
+                  :minHeight="50"
+                  :maxHeight="200"
+                  v-model="localUser.about"
+                  maxlength="500"
+                ></TextareaAutosize>
+              </span>
             </label>
           </div>
           <div class="form-group form-group_with-label color-schemes-wrapper">

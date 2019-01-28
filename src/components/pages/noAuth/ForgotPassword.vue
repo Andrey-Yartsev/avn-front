@@ -5,17 +5,19 @@
       <h2>Please fill out your email. A link to reset password will be sent there.</h2>
       <form class="forgot-password-form" v-on:submit.stop.prevent="send">
         <div class="form-group form-group_row">
-          <input
-            v-model="email"
-            class="lg rounded" type="text" name="email" placeholder="Your Email"
-            :disabled="loading || sendSuccess"
-          >
-          <div class="error" v-if="error">
-            {{ error }}
-          </div>
-          <div class="info" v-else-if="sendSuccess">
-            Please check your mailbox for further instructions to recover your password.
-          </div>
+          <span class="form-group form-group_clear-gaps">
+            <input
+              v-model="email"
+              class="lg rounded" type="text" name="email" placeholder="Your Email"
+              :disabled="loading || sendSuccess"
+            >
+            <div class="error" v-if="error">
+              {{ error }}
+            </div>
+            <div class="info" v-else-if="sendSuccess">
+              Please check your mailbox for further instructions to recover your password.
+            </div>
+          </span>
         </div>
         <div class="g-recaptcha" id="captcha"></div>
         <div class="form-group form-group_row">

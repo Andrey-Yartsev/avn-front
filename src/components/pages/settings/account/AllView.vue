@@ -81,10 +81,12 @@
             <div class="form-group form-group_with-label" v-if="user.hasPassword">
               <label class="form-group-inner">
                 <span class="label">Old password</span>
-                <input
-                  type="password" class="checkPass" name="oldPassword"
-                  v-model="oldPassword"
-                >
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    type="password" class="checkPass" name="oldPassword"
+                    v-model="oldPassword"
+                  >
+                </span>
               </label>
               <div class="input-help">
                 <router-link to="/forgot">Forgot your password?</router-link>
@@ -93,20 +95,24 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">New password</span>
-                <input
-                  type="password" class="checkPass" name="newPassword"
-                  v-model="newPassword"
-                >
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    type="password" class="checkPass" name="newPassword"
+                    v-model="newPassword"
+                  >
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Confirm new password</span>
-                <input
-                  type="password" class="checkPass" name="checkPassword"
-                  v-model="checkPassword"
-                >
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    type="password" class="checkPass" name="checkPassword"
+                    v-model="checkPassword"
+                  >
+                </span>
               </label>
             </div>
             <div class="form-group-btn hidden-mobile">
