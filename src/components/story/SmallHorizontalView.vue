@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     dateTime: function() {
-      return dateFns.distanceInWordsStrict(new Date(), this.post.createDate);
+      return dateFns.distanceInWordsStrict(new Date(), this.post.createdAt);
     },
     userIds() {
       return this.stories.map(s => s.user.id);
