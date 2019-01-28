@@ -15,7 +15,7 @@
         <div v-else class="comment-text" v-html="comment.text" />
       </div>
       <div class="comment-footer" v-if="full">
-        <time class="date">{{ dateTime }}</time>
+        <time class="timestamp">{{ dateTime }}</time>
         <span v-if="comment.likesCount" class="likes-count">{{ comment.likesCount }} likes</span>
         <button type="button" class="btn-reply" @click="$emit('commentReply', comment.author.username)">Reply</button>
       </div>

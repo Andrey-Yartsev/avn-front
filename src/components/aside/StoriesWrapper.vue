@@ -21,7 +21,7 @@
                 </div>
                 <div class="story-info">
                   <div class="name">Your story</div>
-                  <div class="user-login">
+                  <div class="user-login reset-ml">
                     <a class="new-story">Create new story</a>
                   </div>
                 </div>

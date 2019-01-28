@@ -289,17 +289,6 @@
       }
     }
 
-    &-timestamp {
-      font-size: 13px;
-      opacity: 0.5;
-      padding-left: 20px;
-      margin-left: auto;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
-      }
-    }
-
     .user-login {
       display: flex;
       align-content: center;
@@ -313,6 +302,11 @@
         font-size: 12px;
       }
     }
+  }
+
+  .timestamp {
+    padding-left: 20px;
+    margin-left: auto;
   }
 
   .followme {

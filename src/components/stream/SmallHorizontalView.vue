@@ -10,7 +10,7 @@
       <div class="story-info">
         <div class="story-header">
           <a :href="`/${post.user.username}`" class="name" @click.prevent="run">{{ post.user.name }}</a>
-          <div class="story-timestamp">{{ dateTime }}</div>
+          <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
         <div class="user-login">
           <router-link :to="`/${post.user.username}`" class="">{{ post.user.username }}</router-link>

@@ -259,24 +259,8 @@
       }
     }
 
-    .date {
+    .timestamp {
       margin-left: auto;
-    }
-  }
-
-  .date {
-    padding: 0;
-    opacity: 0.5;
-    font-size: 13px;
-    display: block;
-    font-weight: 400;
-
-    a {
-      color: inherit;
-      transition: color 0.3s ease;
-      &:hover {
-        color: $primary-color;
-      }
     }
   }
 
@@ -745,7 +729,7 @@
     padding-top: 2px;
     padding-bottom: 3px;
 
-    .date {
+    .timestamp {
       font: inherit;
       margin-right: 20px;
     }

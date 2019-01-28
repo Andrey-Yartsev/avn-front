@@ -5,7 +5,7 @@
         <template v-if="!isOwner(post.id) && post.author.canEarn">
           <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
         </template>
-        <time class="date" :datetime="post.postedAt">
+        <time class="timestamp" :datetime="post.postedAt">
           <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
             {{ dateTime }}
           </a>

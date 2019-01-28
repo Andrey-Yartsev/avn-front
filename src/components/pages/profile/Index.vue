@@ -47,7 +47,7 @@
                             <a href="#" class="name">
                               Lorem
                             </a>
-                            <div class="story-timestamp">15 Jan</div>
+                            <div class="timestamp hidden-mobile">15 Jan</div>
                           </div>
                           <div class="amount-items">
                             4 items
@@ -61,7 +61,7 @@
                             <a href="#" class="name">
                               Ipsum
                             </a>
-                            <div class="story-timestamp">16 Jan</div>
+                            <div class="timestamp hidden-mobile">16 Jan</div>
                           </div>
                           <div class="amount-items">
                             4 items
@@ -75,7 +75,7 @@
                             <a href="#" class="name">
                               Lorem
                             </a>
-                            <div class="story-timestamp">15 Jan</div>
+                            <div class="timestamp hidden-mobile">15 Jan</div>
                           </div>
                           <div class="amount-items">
                             4 items
@@ -89,7 +89,7 @@
                             <a href="#" class="name">
                               Ipsum
                             </a>
-                            <div class="story-timestamp">16 Jan</div>
+                            <div class="timestamp hidden-mobile">16 Jan</div>
                           </div>
                           <div class="amount-items">
                             4 items
@@ -103,7 +103,7 @@
                             <a href="#" class="name">
                               Ipsum
                             </a>
-                            <div class="story-timestamp">16 Jan</div>
+                            <div class="timestamp hidden-mobile">16 Jan</div>
                           </div>
                           <div class="amount-items">
                             4 items
@@ -156,7 +156,7 @@
                     <a href="#" class="name">
                       Lorem
                     </a>
-                    <div class="story-timestamp">15 Jan</div>
+                    <div class="timestamp hidden-mobile">15 Jan</div>
                   </div>
                   <div class="amount-items">
                     4 items
@@ -170,7 +170,7 @@
                     <a href="#" class="name">
                       Ipsum
                     </a>
-                    <div class="story-timestamp">16 Jan</div>
+                    <div class="timestamp hidden-mobile">16 Jan</div>
                   </div>
                   <div class="amount-items">
                     4 items
@@ -184,7 +184,7 @@
                     <a href="#" class="name">
                       Lorem
                     </a>
-                    <div class="story-timestamp">15 Jan</div>
+                    <div class="timestamp hidden-mobile">15 Jan</div>
                   </div>
                   <div class="amount-items">
                     4 items
@@ -198,7 +198,7 @@
                     <a href="#" class="name">
                       Ipsum
                     </a>
-                    <div class="story-timestamp">16 Jan</div>
+                    <div class="timestamp hidden-mobile">16 Jan</div>
                   </div>
                   <div class="amount-items">
                     4 items
@@ -212,7 +212,7 @@
                     <a href="#" class="name">
                       Ipsum
                     </a>
-                    <div class="story-timestamp">16 Jan</div>
+                    <div class="timestamp hidden-mobile">16 Jan</div>
                   </div>
                   <div class="amount-items">
                     4 items
