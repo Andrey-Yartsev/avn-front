@@ -7,7 +7,7 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/email" class="settings-nav__item warning">
+        <router-link to="/settings/account/email" class="settings-nav__item field-invalid">
           <span>Email</span>
           <span class="value user-email">{{ user.email }}</span></router-link>
         <router-link to="/settings/account/twitter" class="settings-nav__item">

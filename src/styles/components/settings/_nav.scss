@@ -52,20 +52,10 @@
       word-break: break-all;
     }
 
-    &.warning {
-      padding-right: 50px;
-      &:after {
-        border-left-color: $default-primary-color;
-      }
+    &.field-invalid {
+
       &:before {
-        position: absolute;
-        content: "\E619";
-        @include icon-font;
-        color: $default-primary-color;
-        right: 14px;
-        top: 50%;
-        font-size: 24px;
-        transform: translate(0, -50%);
+        right: 12px;
       }
     }
 
@@ -120,4 +110,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  position: relative;
+
+  .field-invalid & {
+    padding-right: 18px;
+  }
 }

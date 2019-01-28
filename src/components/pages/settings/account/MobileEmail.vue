@@ -1,5 +1,5 @@
 <template>
-  <div class="border-top email-block warning">
+  <div class="border-top email-block field-invalid">
     Mobile emiol
     <div class="shadow-block">
       <div class="container">
