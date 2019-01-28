@@ -1069,7 +1069,7 @@
   &.unread {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: #fff;
+      background-color: $white;
       border-right-color: rgba(124, 139, 150, 0.2);
     }
 
