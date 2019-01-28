@@ -437,7 +437,11 @@ export default {
       token: (+new Date()).toString(36),
       streamSource: "client",
       showLikes: false,
-      showMessage(message) {
+      showErrorMessage(message) {
+        // eslint-disable-next-line
+        console.log(message);
+      },
+      showInfoMessage(message) {
         // eslint-disable-next-line
         console.log(message);
       },

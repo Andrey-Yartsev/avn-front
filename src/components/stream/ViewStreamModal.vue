@@ -278,7 +278,10 @@ export default {
       getApiUrl: undefined,
       remoteVideo: document.getElementById("remotevideo"),
       showLikes: false,
-      showMessage: function(message) {
+      showErrorMessage: function(message) {
+        alert(message);
+      },
+      showInfoMessage: function(message) {
         alert(message);
       },
       onStreamEnd: (isError, isClient) => {
