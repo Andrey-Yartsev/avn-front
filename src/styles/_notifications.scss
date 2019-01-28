@@ -216,6 +216,73 @@
       }
     }
   }
+
+
+  .all {
+
+    &:before {
+      content: "\E632";
+    }
+  }
+
+  .connected,
+  .subscribed {
+
+    &:before {
+      content: "\E630";
+    }
+  }
+
+  .favorited {
+
+    &:before {
+      content: "\E616";
+    }
+  }
+
+  .price_changed {
+
+    &:before {
+      content: "\E62E";
+    }
+  }
+
+  .message,
+  .replied,
+  .commented {
+
+    &:before {
+      content: "\E617";
+    }
+  }
+
+  .tip {
+
+    &:before {
+      content: "\E618";
+    }
+  }
+
+  .mentioned {
+
+    &:before {
+      content: "\E631";
+    }
+  }
+
+  .system {
+
+    &:before {
+      content: "\E619";
+    }
+  }
+
+  .followed {
+
+    &:before {
+      content: "\E630";
+    }
+  }
 }
 
 
@@ -378,8 +445,6 @@
     position: absolute;
     left: 15px;
     top: 11px;
-    opacity: 0.3;
-    font-size: 24px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       left: 20px;
@@ -471,8 +536,6 @@
     }
 
     &:before {
-      font-size: 24px;
-      opacity: 0.3;
       font-weight: 400;
       transition: opacity 0.3s ease, color 0.3s ease;
 
@@ -542,72 +605,8 @@
 
   &:before {
     @include icon-font;
-  }
-
-  &.all {
-
-    &:before {
-      content: "\E632";
-    }
-  }
-
-  &.connected,
-  &.subscribed {
-
-    &:before {
-      content: "\E630";
-    }
-  }
-
-  &.favorited {
-
-    &:before {
-      content: "\E616";
-    }
-  }
-
-  &.price_changed {
-
-    &:before {
-      content: "\E62E";
-    }
-  }
-
-  &.message,
-  &.replied,
-  &.commented {
-
-    &:before {
-      content: "\E617";
-    }
-  }
-
-  &.tip {
-
-    &:before {
-      content: "\E618";
-    }
-  }
-
-  &.mentioned {
-
-    &:before {
-      content: "\E631";
-    }
-  }
-
-  &.system {
-
-    &:before {
-      content: "\E619";
-    }
-  }
-
-  &.followed {
-
-    &:before {
-      content: "\E630";
-    }
+    font-size: 24px;
+    opacity: 0.3;
   }
 }
 
