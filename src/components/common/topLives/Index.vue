@@ -1,6 +1,6 @@
 <template>
-  <div class="exploreAllStoriesView">
-    <div class="explore-all-story">
+  <div class="storyView storyView_top-live">
+    <div class="story">
       <router-link
         to="explore/live"
         class="avatar avatar_lg avatar_lg-desk with-story"
@@ -24,9 +24,13 @@
         </span>
         <div class="stream-online-label">live</div>
       </router-link>
-      <span class="live-explore-title">
-        Top Live
-      </span>
+      <div class="story-info">
+        <div class="story-header">
+          <div class="name">
+            Top Live
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

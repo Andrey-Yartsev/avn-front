@@ -1,6 +1,6 @@
 <template>
   <div class="stories-wrapper">
-    <div class="storyCollectionView">
+    <div class="storyCollectionView storyCollectionView_col storyCollectionView_tape">
       <h4>Stories</h4>
       <div class="stories-group__outer">
         <div class="stories-group">
@@ -26,8 +26,10 @@
                   </span>
                 </div>
                 <div class="story-info">
-                  <div class="name">Your story</div>
-                  <div class="user-login reset-ml">
+                  <div class="story-header">
+                    <div class="name">Your story</div>
+                  </div>
+                  <div class="user-login reset-ml hidden-mobile">
                     <a class="new-story">Create new story</a>
                   </div>
                 </div>

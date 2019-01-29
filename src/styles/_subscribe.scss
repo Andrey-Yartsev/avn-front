@@ -104,15 +104,8 @@
       }
     }
 
-    &-user {
-      margin: 0 auto 0 10px;
-      padding-top: 17px;
-    }
-
-    &-name {
-      display: flex;
-      align-items: center;
-      padding-bottom: 4px;
+    .wrap-name {
+      margin-bottom: 4px;
     }
 
     .name {
@@ -126,6 +119,11 @@
         color: inherit;
       }
     }
+  }
+
+  .user-names {
+    margin: 0 auto 0 10px;
+    padding-top: 17px;
   }
 
   &__body {

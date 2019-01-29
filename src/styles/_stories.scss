@@ -42,6 +42,10 @@
 
 .stories-group {
 
+  .stories-all & {
+    display: flex;
+  }
+
   .stories-collection & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -57,35 +61,41 @@
   &__outer {
     position: relative;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 5px;
-      margin-top: 10px;
-      flex: 1;
-      min-height: 70px;
+    .storyCollectionView_col & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-bottom: 5px;
+        margin-top: 11px;
+        flex: 1;
+        min-height: 70px;
+      }
     }
   }
+
   &__inner {
+    display: flex;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
-      //padding: 9px 15px 6px;
       padding: 9px 0 6px;
-      margin: 0 -12px;
+      margin: 0 -8px;
       position: relative;
       width: auto;
       height: 96px;
     }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-left: 5px;
-      padding-right: 5px;
-      min-height: 70px;
+    .storyCollectionView_col & {
 
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 5px;
+        padding-right: 5px;
+        min-height: 70px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
+      }
     }
 
     .stories {
@@ -103,25 +113,34 @@
   margin: 8px 15px 5px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 0 15px 0 0;
-    max-height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
     padding: 0;
+    margin: 0;
   }
 
-  //.explore & {
-  //  padding: 0;
-  //  margin: 0;
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    margin: 0;
-  //    max-height: none;
-  //    display: block;
-  //  }
-  //}
+  .stories-all & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-top: 1px solid rgba($gray, 0.2);
+      padding-top: 6px;
+      margin-bottom: 0;
+    }
+  }
+
+  .explore & {
+    padding: 0;
+    margin: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0;
+      max-height: none;
+      display: block;
+    }
+  }
 
   .stories {
 
@@ -143,6 +162,7 @@
         text-align: center;
         box-shadow: none;
         transition: box-shadow 0.3s ease;
+        min-width: 0;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           box-shadow: 0 3px 6px rgba(#000, 0.1);
@@ -173,21 +193,10 @@
             }
           }
 
-          .name {
-            max-width: 80%;
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-              font-size: 11px;
-            }
-          }
-
           .user-login {
-            display: block;
-            padding: 0 6px;
-            font-size: 15px;
 
-            @include media-breakpoint-down($desktop-breakpoint) {
-              font-size: 11px;
+            @include media-breakpoint-up($desktop-breakpoint) {
+              font-size: 15px;
             }
           }
         }
@@ -200,6 +209,29 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       display: inline-flex;
       margin-top: 0;
+    }
+
+    &_top-live {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding: 9px 0 6px;
+        margin-left: -10px;
+        margin-right: 12px;
+      }
+
+      .name {
+        font-weight: 500;
+      }
+    }
+
+    .stories-all & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 82px;
+        min-width: 82px;
+        margin-right: 24px;
+        margin-top: 5px;
+      }
     }
 
     &.create-story-button {
@@ -222,40 +254,24 @@
   .story {
     display: flex;
     align-items: center;
+    flex-direction: column;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       margin: 0 12px;
-      flex-direction: column;
       padding: 0;
     }
 
-    .aside-col & {
+    &-header {
+      margin: 10px 0 0;
+      @include ellipsis;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        line-height: 13px;
+      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 10px 20px 10px 0;
-      }
-    }
-
-    &-header {
-
-      .explore & {
-        justify-content: center;
-      }
-
-      .aside-col & {
-        display: flex;
-        align-items: center;
-        margin: 0 0 3px;
-      }
-
-      .verified-user {
-
-        .aside-col & {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            display: none;
-          }
-        }
+        margin-bottom: 2px;
+        text-align: center;
       }
     }
 
@@ -265,42 +281,45 @@
 
     &-info {
       width: 100%;
-      @include ellipsis;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         margin-left: 0;
-        max-width: 65px;
+        max-width: 50px;
         text-align: center;
       }
     }
+  }
 
-    .name {
+  .name {
 
-      .aside-col & {
-        font-size: 13px;
-        line-height: 18px;
-        font-weight: 400;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font-size: 11px;
+    }
+  }
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          width: 100%;
-          font-size: 11px;
-          margin-top: 10px;
-        }
-      }
+  .user-login {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font-size: 11px;
     }
 
-    .user-login {
-      display: flex;
-      align-content: center;
-      align-items: center;
+    a {
+      font-size: 12px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        display: none;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 13px;
       }
+    }
+  }
 
-      a {
-        font-size: 12px;
-      }
+  .verified-user {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
     }
   }
 
@@ -344,16 +363,14 @@
     }
   }
 
-  .story-header {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-bottom: 4px;
+  .user-names {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      justify-content: flex-start;
-    }
+  .wrap-name {
+    justify-content: center;
 
     .verified-user {
 
@@ -364,6 +381,79 @@
         font-size: 12px;
         margin-top: -1px;
         margin-left: 3px;
+      }
+    }
+  }
+
+  &_col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .story {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 10px 10px 10px 0;
+        flex-direction: row;
+      }
+
+      &-header {
+        display: flex;
+        align-items: center;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 0;
+          text-align: left;
+        }
+      }
+    }
+
+    .storyView {
+      width: auto;
+      min-width: auto;
+      margin: 0;
+    }
+  }
+
+  &_tape {
+
+    h4 {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 5px;
+      }
+    }
+
+    .name {
+      width: 100%;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        font-weight: 400;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 13px;
+        line-height: 18px;
+        width: auto;
+      }
+
+      .stories-all & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-weight: 400;
+        }
+      }
+    }
+
+    .user-login {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        justify-content: flex-start;
       }
     }
   }
@@ -493,15 +583,17 @@
 }
 
 .stories-all {
+  margin-top: -8px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    margin-top: -2px;
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-top: -5px;
+    margin-bottom: 16px;
   }
 
   + .explore {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      min-height: calc(100% - 160px);
+      min-height: calc(100% - 173px);
     }
   }
 }

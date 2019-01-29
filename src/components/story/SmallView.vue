@@ -1,6 +1,6 @@
 <template>
-  <div class="exploreAllStoriesView">
-    <div class="explore-all-story" :data-id="post.user.id">
+  <div class="storyView">
+    <div class="story" :data-id="post.user.id">
       <router-link
         :to="`/stories/${post.user.id}`"
         :class="[
@@ -12,9 +12,13 @@
           <img v-if="post.user.avatar" :src="post.user.avatar" />
         </span>
       </router-link>
-      <router-link :to="`/${post.user.username}`" class="name">
-        {{ post.user.name || post.user.username }}
-      </router-link>
+      <div class="story-info">
+        <div class="story-header">
+          <router-link :to="`/${post.user.username}`" class="name">
+            {{ post.user.name || post.user.username }}
+          </router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>

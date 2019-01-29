@@ -9,22 +9,26 @@
       <div class="over-container">
         <Navigate />
         <div
-          class="stories-all"
+          class="stories-wrapper stories-all"
           v-if="page === 'all' && (stories.length || lives.length)"
         >
-          <div class="exploreAllStoriesCollectionView">
-            <TopLives :lives="lives" v-if="lives.length" />
-            <VuePerfectScrollbar
-              class="explore-stories"
-              @ps-scroll-x="scrollFunction"
-            >
-              <StorySmall
-                v-for="post in stories"
-                :post="post"
-                :key="post.id"
-                from="explore"
-              />
-            </VuePerfectScrollbar>
+          <div class="storyCollectionView storyCollectionView_tape">
+            <div class="stories-group__outer">
+              <div class="stories-group">
+                <TopLives :lives="lives" v-if="lives.length" />
+                <VuePerfectScrollbar
+                  class="stories-group__inner"
+                  @ps-scroll-x="scrollFunction"
+                >
+                  <StorySmall
+                    v-for="post in stories"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                  />
+                </VuePerfectScrollbar>
+              </div>
+            </div>
           </div>
         </div>
         <div class="explore">

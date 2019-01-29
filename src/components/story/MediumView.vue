@@ -14,11 +14,13 @@
           </span>
         </div>
       </div>
-      <div class="story-header">
-        <div class="name">{{ post.user.name }}</div>
-        <span v-if="post.user.isVerified" class="verified-user"></span>
+      <div class="user-names">
+        <div class="wrap-name">
+          <div class="name">{{ post.user.name }}</div>
+          <span v-if="post.user.isVerified" class="verified-user"></span>
+        </div>
+        <div class="user-login reset-ml">{{ post.user.username }}</div>
       </div>
-      <div class="user-login reset-ml">{{ post.user.username }}</div>
     </router-link>
   </div>
 </template>

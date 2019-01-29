@@ -15,8 +15,8 @@
               ></span>
             </div>
 
-            <div class="subscribe-popup__info-user">
-              <div class="subscribe-popup__info-name">
+            <div class="user-names">
+              <div class="wrap-name">
                 <router-link :to="'/' + profile.username" class="name">{{
                   profile.name
                 }}</router-link>

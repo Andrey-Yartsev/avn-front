@@ -21,7 +21,7 @@
           >
           <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
-        <div class="user-login">
+        <div class="user-login reset-ml hidden-mobile">
           <router-link :to="`/${post.user.username}`" class="">{{
             post.user.username
           }}</router-link>

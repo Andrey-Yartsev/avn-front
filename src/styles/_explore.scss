@@ -113,7 +113,7 @@
   &__item {
     color: $secondary-color;
     display: inline-block;
-    margin: 0 1.5em 0 0;
+    margin: 0 1.7em 0 0;
     transition: color 0.3s ease;
     position: relative;
     text-align: center;
@@ -269,6 +269,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin: 0 -10px;
       }
     }
 

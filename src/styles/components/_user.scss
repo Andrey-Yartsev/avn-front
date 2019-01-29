@@ -296,18 +296,18 @@
   }
 }
 
-.live-explore-title {
-  font-weight: 500;
-  color: $main-color;
-  font-size: 13px;
-  text-align: center;
-  display: block;
-  margin-top: 10px;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin-top: 13px;
-  }
-}
+//.live-explore-title {
+//  font-weight: 500;
+//  color: $main-color;
+//  font-size: 13px;
+//  text-align: center;
+//  display: block;
+//  margin-top: 10px;
+//
+//  @include media-breakpoint-up($desktop-breakpoint) {
+//    margin-top: 13px;
+//  }
+//}
 
 .btn-subscribe {
   //font-size: 14px;

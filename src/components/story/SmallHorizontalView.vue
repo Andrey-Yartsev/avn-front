@@ -25,7 +25,7 @@
           <span v-if="post.user.isVerified" class="verified-user"></span>
           <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
-        <div class="user-login reset-ml">
+        <div class="user-login reset-ml hidden-mobile">
           <a :href="`/${post.user.username}`">{{
             post.user.name || post.user.username
           }}</a>
