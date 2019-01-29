@@ -351,6 +351,7 @@ export default {
 
   beforeDestroy() {
     this.$store.commit("chat/messages", []);
+    this.$store.commit("chat/resetChats");
   }
 };
 </script>

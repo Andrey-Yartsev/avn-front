@@ -74,6 +74,9 @@ const mutations = {
   resetSearchUsers(state) {
     state.chatUsers = null;
   },
+  resetChats() {
+    state.chats = [];
+  },
   extendChatUser(state, user) {
     state.chats = state.chats.map(v => {
       if (v.withUser.id === user.id) {
