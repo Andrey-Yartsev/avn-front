@@ -85,7 +85,7 @@
       <h3>Already have an account?</h3>
       <p class="register">
         <a href="/login" class="register" @click.prevent="openLogin"
-          >Login to OnM1yTeam.com</a
+          >Login to OnMyTeam.com</a
         >
       </p>
     </div>

@@ -232,7 +232,7 @@
   position: absolute;
   top: 30px;
   right: 0;
-  width: 290px;
+  width: 352px;
   transition: all 0.4s ease;
   opacity: 0;
   pointer-events: none;
@@ -241,15 +241,23 @@
   &:after {
     position: absolute;
     content: "";
-    z-index: 10;
-    top: 4px;
-    right: 32px;
-    border-bottom: 12px solid $white;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
+    top: 8px;
+    right: 31px;
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    width: 17px;
+    height: 17px;
+    transform: rotate(45deg);
+    z-index: 1;
   }
 
-    .show & {
+  &__inside {
+    margin: 16px 10px 0 0;
+    box-shadow: 0 6px 30px rgba(#000, 0.15);
+    border-radius: 6px;
+  }
+
+  .show & {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
@@ -262,8 +270,8 @@
     background-color: $white;
     padding: 30px 20px;
     border-radius: 6px;
-    margin: 16px 10px 0 0;
-    box-shadow: 0 6px 30px rgba(#000, 0.15);
+    position: relative;
+    z-index: 11;
   }
 
   .login-or {

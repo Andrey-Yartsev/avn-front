@@ -47,7 +47,9 @@
                 class="stories-wrapper stories-collection"
                 v-if="$mq === 'desktop'"
               >
-                <div class="storyCollectionView storyCollectionView_col storyCollectionView_tape">
+                <div
+                  class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
+                >
                   <div class="stories-collection__header">
                     <h4>Highlights</h4>
                     <button class="btn-watch-all hidden-desktop" type="button">
@@ -179,7 +181,9 @@
         />
       </div>
       <div class="stories-wrapper stories-collection" v-if="$mq === 'mobile'">
-        <div class="storyCollectionView storyCollectionView_col storyCollectionView_tape">
+        <div
+          class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
+        >
           <div class="stories-collection__header">
             <h4>Highlights</h4>
             <button class="btn-watch-all hidden-desktop" type="button">

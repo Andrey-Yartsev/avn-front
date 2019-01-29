@@ -102,16 +102,18 @@
               >
                 <div class="btn border alt login" @click="show">Log in</div>
                 <div class="auth-block-dropdown">
-                  <SignupForm type="dropdown" v-if="showSignup" />
-                  <LoginForm
-                    v-else
-                    @goToForgot="
-                      () => {
-                        opened = false;
-                      }
-                    "
-                    type="dropdown"
-                  />
+                  <div class="auth-block-dropdown__inside">
+                    <SignupForm type="dropdown" v-if="showSignup" />
+                    <LoginForm
+                      v-else
+                      @goToForgot="
+                        () => {
+                          opened = false;
+                        }
+                      "
+                      type="dropdown"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
