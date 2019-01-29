@@ -8,16 +8,10 @@
             <a @click.prevent="close" class="btn-story-details hidden-mobile" />
             <router-link to="/settings/story" class="btn-settings" />
           </div>
-          <div
-            class="stories-list-preview"
-            :style="{ height: '300px', width: '100%' }"
-          >
+          <div class="stories-list-preview">
             <swiper :options="swiperOption">
               <swiper-slide v-for="(story, key) in stories" :key="key">
-                <img
-                  :src="story.thumb.source"
-                  :style="{ 'max-width': '100%' }"
-                />
+                <img :src="story.thumb.source" />
               </swiper-slide>
             </swiper>
           </div>
@@ -71,7 +65,7 @@
             </div>
           </div>
         </div>
-        <button type="button" class="close"></button>
+        <button type="button" class="close" @click="close"></button>
       </div>
     </template>
   </Modal>
@@ -88,17 +82,21 @@ export default {
   },
   data() {
     const self = this;
-    const { stories, currIndex } = this.$store.state.modal.storyViewers.data;
+    const {
+      /* stories, */ currIndex
+    } = this.$store.state.modal.storyViewers.data;
 
     return {
       currIndex,
       swiperOption: {
-        autoHeight: true,
         initialSlide: 0,
-        slidesPerView: stories.length > 4 ? 4 : stories.length,
+        // autoHeight: true,
+        // slidesPerView: stories.length > 4 ? 4 : stories.length,
+        slidesPerView: "auto",
         spaceBetween: 30,
         centeredSlides: true,
         slideToClickedSlide: true,
+        slideActiveClass: "active",
         // centerInsufficientSlides: true,
         on: {
           slideChange() {
@@ -164,3 +162,20 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.swiper-slide img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.swiper-slide {
+  width: 60%;
+}
+.swiper-slide:nth-child(2n) {
+  width: 40%;
+}
+.swiper-slide:nth-child(3n) {
+  width: 20%;
+}
+</style>
