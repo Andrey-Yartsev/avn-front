@@ -24,6 +24,7 @@
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
+      <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
       <SubscriptionConfirmModal
         v-if="this.$store.state.modal.subscriptionConfirm.show"
       />
@@ -46,6 +47,7 @@ import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 import CreateStoryModal from "@/components/story/CreateModalView";
+import StoryViewerModal from "@/components/story/ViewersModalView";
 import UserReportModal from "@/components/common/UserReportModal";
 import SubscribeModal from "@/components/subscription/Modal";
 import PaymentModal from "@/components/subscription/PaymentModal";
@@ -95,7 +97,8 @@ export default {
     StreamModal,
     SubscriptionConfirmModal,
     LoginModal,
-    SignupModal
+    SignupModal,
+    StoryViewerModal
   },
   mixins: [ColorScheme],
   data() {

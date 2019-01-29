@@ -1,0 +1,166 @@
+<template>
+  <Modal :onClose="close">
+    <template slot="content">
+      <div class="popup-container storyviewers-popup">
+        <div class="content">
+          <div class="storyviewers-controls">
+            <button class="header-return-btn"></button>
+            <a @click.prevent="close" class="btn-story-details hidden-mobile" />
+            <router-link to="/settings/story" class="btn-settings" />
+          </div>
+          <div
+            class="stories-list-preview"
+            :style="{ height: '300px', width: '100%' }"
+          >
+            <swiper :options="swiperOption">
+              <swiper-slide v-for="(story, key) in stories" :key="key">
+                <img
+                  :src="story.thumb.source"
+                  :style="{ 'max-width': '100%' }"
+                />
+              </swiper-slide>
+            </swiper>
+          </div>
+          <div class="container-story-details">
+            <div class="header-story-details">
+              <div class="amount-viewers">
+                <span class="icn-viewer icn-item" />{{ current.viewersCount }}
+              </div>
+              <div class="story-time-created">
+                {{ dateTime }}
+              </div>
+              <div class="controls-story">
+                <a
+                  href="#"
+                  class="controls-story__btn"
+                  @click.prevent="saveFile"
+                >
+                  <span class="icn-download icn-item" />
+                </a>
+                <a href="#" class="controls-story__btn" @click.prevent="share">
+                  <span class="icn-share icn-item" />
+                </a>
+                <a
+                  href="#"
+                  class="controls-story__btn controls-story__btn_remove"
+                  @click.prevent="deleteStory"
+                >
+                  <span class="icn-remove icn-item" />
+                </a>
+              </div>
+            </div>
+            <div class="body-story-details">
+              <div class="list-viewers">
+                <div class="viewer-row" v-for="user in viewers" :key="user.id">
+                  <span class="avatar avatar_gap-r-sm avatar_sm">
+                    <span class="avatar__img">
+                      <img v-if="user.avatar" :src="user.avatar" />
+                    </span>
+                  </span>
+                  <div class="username-group">
+                    <span class="name">{{ user.name }}</span>
+                    <div class="user-login reset-ml">
+                      <span class="username">{{ user.username }}</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn-block">
+                    <span class="icn-block icn-item"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="close"></button>
+      </div>
+    </template>
+  </Modal>
+</template>
+
+<script>
+import dateFns from "date-fns";
+import Modal from "@/components/modal/Index";
+
+export default {
+  name: "StoryViewers",
+  components: {
+    Modal
+  },
+  data() {
+    const self = this;
+    const { stories, currIndex } = this.$store.state.modal.storyViewers.data;
+
+    return {
+      currIndex,
+      swiperOption: {
+        autoHeight: true,
+        initialSlide: 0,
+        slidesPerView: stories.length > 4 ? 4 : stories.length,
+        spaceBetween: 30,
+        centeredSlides: true,
+        slideToClickedSlide: true,
+        // centerInsufficientSlides: true,
+        on: {
+          slideChange() {
+            self.currIndex = this.activeIndex;
+          }
+        }
+      }
+    };
+  },
+  computed: {
+    stories() {
+      return this.$store.state.modal.storyViewers.data.stories;
+    },
+    current() {
+      return this.stories[this.currIndex];
+    },
+    viewers() {
+      return this.current.viewers;
+    },
+    dateTime: function() {
+      return dateFns.distanceInWordsStrict(new Date(), this.current.createdAt);
+    }
+  },
+  methods: {
+    close(e) {
+      e.preventDefault();
+      this.$store.dispatch("modal/hide", { name: "storyViewers" });
+    },
+    saveFile() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", this.current.src.source, true);
+      xhr.responseType = "blob";
+      xhr.onload = function() {
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL(this.response);
+        const tag = document.createElement("a");
+        tag.href = imageUrl;
+        tag.download = "story";
+        document.body.appendChild(tag);
+        tag.click();
+        document.body.removeChild(tag);
+      };
+      xhr.send();
+    },
+    share() {
+      alert();
+    },
+    deleteStory() {
+      this.$store.dispatch("story/deletePost", {
+        postId: this.currentStory.id
+      });
+
+      this.$store.dispatch("global/flashToast", "Story deleted", {
+        root: true
+      });
+
+      if (!this.stories.length) {
+        this.close();
+      }
+
+      this.currIndex = 0;
+    }
+  }
+};
+</script>

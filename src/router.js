@@ -31,7 +31,6 @@ import PrivacyPage from "./components/pages/static/Privacy";
 import ContactsPage from "./components/pages/static/Contacts";
 import Record2257Page from "./components/pages/static/Record2257";
 import StatPage from "./components/statistics/Page";
-import StoryViewersPage from "./components/pages/storyViewers/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -330,11 +329,6 @@ const routes = [
       type: "media",
       cssName: "explore"
     }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/storyviewers",
-    component: StoryViewersPage
   },
   {
     beforeEnter: (to, from, next) => {

@@ -135,7 +135,11 @@
       <div class="bottom-btns" v-if="currentStory">
         <div class="story-details-info">
           <a href="#" class="btn-story-details" />
-          <div class="story-viewer" v-if="currentStory.viewersCount">
+          <div
+            class="story-viewer"
+            v-if="currentStory.viewersCount"
+            @click="openViewersModal"
+          >
             {{ viewersText }}
           </div>
         </div>
@@ -480,6 +484,16 @@ export default {
       this.resetState();
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+    },
+    openViewersModal() {
+      this.pause();
+      this.$store.dispatch("modal/show", {
+        name: "storyViewers",
+        data: {
+          stories: this.stories,
+          currIndex: this.currIndex
+        }
+      });
     },
     saveStat() {
       this.$root.ws.send({

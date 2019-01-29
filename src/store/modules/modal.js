@@ -55,6 +55,10 @@ const state = {
   statPosts: {
     show: false,
     data: {}
+  },
+  storyViewers: {
+    show: false,
+    data: {}
   }
 };
 
