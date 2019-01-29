@@ -1,6 +1,5 @@
 <template>
   <Wrapper :mode="mode">
-
     <template slot="col1">
       <div
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
@@ -11,7 +10,11 @@
     </template>
 
     <template slot="col2">
-      <div v-if="isHome" class="start-chat-wrapper" :class="{hidden: hasActiveChats}">
+      <div
+        v-if="isHome"
+        class="start-chat-wrapper"
+        :class="{ hidden: hasActiveChats }"
+      >
         <div class="chatHeader chatHeader_add-shadow no-nav">
           <div class="selectedChatHeader">
             You don't have any messages selected.
