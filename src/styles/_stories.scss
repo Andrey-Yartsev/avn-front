@@ -550,14 +550,6 @@
     }
   }
 
-  .story {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-  }
-
   .stories-group {
 
     @include media-breakpoint-down($desktop-breakpoint) {
