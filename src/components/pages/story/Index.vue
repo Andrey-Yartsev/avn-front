@@ -244,6 +244,9 @@ export default {
         .join(", ");
 
       return `${firstTwo}${othersText}`;
+    },
+    viewersPage() {
+      return this.$store.state.modal.storyViewers.show;
     }
   },
   methods: {
@@ -466,27 +469,31 @@ export default {
       this.showVideoPlay = false;
       this.showLoader = false;
     },
+
     addNewStory: function() {
       this.pause();
       document.getElementById("storyFileSelect").click();
     },
+
     openDropdawn: function() {
       this.showDropdawnMenu = true;
       this.pause();
     },
+
     hideDropdawn() {
       if (this.showDropdawnMenu) {
         this.showDropdawnMenu = false;
         this.resume();
       }
     },
+
     init() {
       this.resetState();
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
     },
+
     openViewersModal() {
-      this.pause();
       this.$store.dispatch("modal/show", {
         name: "storyViewers",
         data: {
@@ -495,6 +502,7 @@ export default {
         }
       });
     },
+
     saveStat() {
       this.$root.ws.send({
         act: "collect",
@@ -517,6 +525,13 @@ export default {
     ClickOutside
   },
   watch: {
+    viewersPage() {
+      if (this.viewersPage) {
+        this.pause();
+      } else {
+        this.resume();
+      }
+    },
     error() {
       if (this.error) {
         this.$router.push("/");
