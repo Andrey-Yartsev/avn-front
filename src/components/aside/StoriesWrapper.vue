@@ -1,6 +1,8 @@
 <template>
   <div class="stories-wrapper">
-    <div class="storyCollectionView storyCollectionView_col storyCollectionView_tape">
+    <div
+      class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
+    >
       <h4>Stories</h4>
       <div class="stories-group__outer">
         <div class="stories-group">
