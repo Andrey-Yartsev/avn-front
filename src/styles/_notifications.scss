@@ -225,7 +225,7 @@
     }
   }
 
-  .connected,
+  .followed,
   .subscribed {
 
     &:before {
@@ -240,7 +240,7 @@
     }
   }
 
-  .price_changed {
+  .subscribed {
 
     &:before {
       content: "\E62E";

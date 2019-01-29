@@ -95,9 +95,9 @@ const typeTitles = {
   favorited: "Favorited",
   commented: "Comments",
   mentioned: "Mentions",
-  connected: "Followers",
+  followed: "Followers",
   tip: "Funds",
-  price_changed: "Price changes",
+  subscribed: "Subscriptions",
   system: "System"
 };
 
