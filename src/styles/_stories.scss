@@ -402,6 +402,14 @@
         flex-direction: row;
       }
 
+      .stories-collection & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+      }
+
       &-header {
         display: flex;
         align-items: center;
@@ -467,8 +475,8 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     background: none;
-    //margin-bottom: 130px;
     margin-bottom: 10px;
+    margin-left: -4px;
     overflow: visible;
   }
 
@@ -512,18 +520,24 @@
     justify-content: space-between;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      //position: absolute;
-      //left: 0;
-      //right: 0;
-      //top: 22px;
       padding-top: 22px;
-      margin-bottom: 22px;
+      margin-bottom: 6px;
+      min-height: 40px;
     }
   }
 
   .storyCollectionView {
-    position: static;
-    z-index: 2;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-bottom: 10px;
+    }
+
+    .story-header {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-top: 7px;
+      }
+    }
   }
 
   .stories {
@@ -535,18 +549,10 @@
     }
 
     .name {
-      font-size: 12px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 13px;
       }
-    }
-  }
-
-  .avatar {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      margin-bottom: 7px;
     }
   }
 

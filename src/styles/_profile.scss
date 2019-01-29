@@ -469,6 +469,7 @@
     max-height: calc(100vh - 152px);
     transition: all .3s;
     position: relative;
+    padding-left: 24px;
   }
 
   .header-scrolled & {
@@ -497,21 +498,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-left: 0;
         padding-right: 0;
-      }
-    }
-  }
-
-  .stories-collection {
-
-    + .site-footer {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //position: absolute;
-        //left: 13px;
-        //right: 15px;
-        //bottom: 0;
-        //width: auto;
-        //max-width: none;
       }
     }
   }
@@ -1120,10 +1106,10 @@
 
   &.profile-position {
     transform: translate(0, 0);
-    left: -4px;
+    left: 4px;
     bottom: -80px;
     transition: all .3s;
-    width: 290px;
+    width: 286px;
 
     .header-scrolled & {
       left: 54px;
