@@ -45,13 +45,12 @@ const actions = {
         dispatch("setToken", user.accessToken);
         if (user.isOtpNeeded) {
           dispatch("setOtpAuth", true);
+          commit("loginFinished");
           Router.push("/login");
           return;
         }
         dispatch("profile/fetch", null, { root: true });
         commit("showCaptcha", false);
-      })
-      .then(() => {
         commit("requestSuccess");
         Router.push("/", () => {
           commit("loginFinished");
@@ -76,13 +75,11 @@ const actions = {
         dispatch("setToken", user.accessToken);
         if (user.isOtpNeeded) {
           dispatch("setOtpAuth", true);
-          Router.push("/login");
+          commit("loginFinished");
           return;
         }
         dispatch("profile/fetch", null, { root: true });
         commit("showCaptcha", false);
-      })
-      .then(() => {
         commit("requestSuccess");
         commit("modal/hideSafe", { name: "login" }, { root: true });
         dispatch("profile/home/reload", null, { root: true });
