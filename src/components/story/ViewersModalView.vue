@@ -17,9 +17,7 @@
                 <div class="story-preview">
                   <img :src="story.preview.source" />
                   <div class="amount-viewers">
-                    <span class="icn-viewer icn-item" />{{
-                      story.viewersCount
-                    }}
+                    <span class="icn-viewer icn-item" />{{ story.viewersCount }}
                   </div>
                 </div>
               </swiper-slide>
@@ -76,7 +74,11 @@
                         <span class="username">{{ user.username }}</span>
                       </div>
                     </div>
-                    <a href="#" class="btn-block">
+                    <a
+                      href="#"
+                      class="btn-block"
+                      @click.prevent="blockStoryFromUser"
+                    >
                       <span class="icn-block icn-item"></span>
                     </a>
                   </div>
@@ -107,7 +109,7 @@ export default {
     return {
       currIndex,
       swiperOption: {
-        initialSlide: 0,
+        initialSlide: currIndex,
         slidesPerView: "auto",
         spaceBetween: 10,
         centeredSlides: true,
@@ -140,6 +142,9 @@ export default {
     close(e) {
       e.preventDefault();
       this.$store.dispatch("modal/hide", { name: "storyViewers" });
+    },
+    blockStoryFromUser() {
+      alert("Block story from user");
     },
     saveFile() {
       const xhr = new XMLHttpRequest();
@@ -176,7 +181,7 @@ export default {
       this.currIndex = 0;
     },
     addToHighlights() {
-      alert("добавить в highlights")
+      alert("добавить в highlights");
     }
   }
 };

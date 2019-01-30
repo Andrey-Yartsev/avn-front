@@ -115,7 +115,11 @@
                 </button>
               </li>
               <li>
-                <button class="saveFile" type="button" @click="saveToHighlights">
+                <button
+                  class="saveFile"
+                  type="button"
+                  @click="saveToHighlights"
+                >
                   Save
                 </button>
               </li>
@@ -134,7 +138,11 @@
       </div>
       <div class="bottom-btns" v-if="currentStory">
         <div class="story-details-info">
-          <a href="#" class="btn-story-details" @click.prevent="saveToHighlights" />
+          <a
+            href="#"
+            class="btn-story-details"
+            @click.prevent="saveToHighlights"
+          />
           <div
             class="story-viewer"
             v-if="currentStory.viewersCount"
