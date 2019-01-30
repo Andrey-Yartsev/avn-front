@@ -20,15 +20,13 @@
             class="name"
             @click.prevent="() => watchAll(post.user.id)"
           >
-            {{ post.user.name || post.user.username }}
+            {{ post.user.name }}
           </a>
           <span v-if="post.user.isVerified" class="verified-user"></span>
           <div class="timestamp hidden-mobile">{{ dateTime }}</div>
         </div>
         <div class="user-login reset-ml hidden-mobile">
-          <a :href="`/${post.user.username}`">{{
-            post.user.name || post.user.username
-          }}</a>
+          <a :href="`/${post.user.username}`">{{ post.user.username }}</a>
           <span class="followme" v-if="post.user.subscribedOn">
             <span class="followme__txt">Follows you</span>
           </span>
