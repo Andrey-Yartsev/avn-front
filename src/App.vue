@@ -39,7 +39,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/header/Sidebar";
 import Toast from "@/components/common/Toast";
 import ColorScheme from "@/mixins/colorScheme";
 import ErrorModal from "@/components/modal/Error";
