@@ -164,6 +164,7 @@
     z-index: 4;
     max-width: 960px;
     margin: 0 auto;
+    height: 0;
   }
 }
 
@@ -182,7 +183,7 @@
       //width: 100%;
       //position: relative;
       //transition: all .3s;
-    }
+    }.profile-header-container
 
     .header-scrolled & {
 
