@@ -20,6 +20,7 @@
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
       <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
+      <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
@@ -49,7 +50,8 @@ import ChatModal from "@/components/chat/Modal";
 import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import UserReportModal from "@/components/common/UserReportModal";
-import SubscribeModal from "@/components/subscription/Modal";
+import SubscribeModal from "@/components/subscription/SubscribeModal";
+import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
 import StoryInput from "@/components/story/Input";
@@ -88,6 +90,7 @@ export default {
     ChatModal,
     UserReportModal,
     SubscribeModal,
+    ResubscribeModal,
     PaymentModal,
     ModalRouter,
     CreateStoryModal,

@@ -67,16 +67,10 @@ export default {
       });
     },
     resubscribe() {
-      this.$store
-        .dispatch("subscription/resubscribe", {
-          userId: this.profile.id
-        })
-        .then(result =>
-          this.$emit("requested", {
-            action: "resubscribe",
-            result
-          })
-        );
+      this.$store.dispatch("modal/show", {
+        name: "resubscribe",
+        data: this.profile
+      });
     },
     subscription() {
       if (!this.user) {

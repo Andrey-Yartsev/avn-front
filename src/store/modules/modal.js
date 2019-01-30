@@ -20,6 +20,10 @@ const state = {
     show: false,
     data: {}
   },
+  resubscribe: {
+    show: false,
+    data: {}
+  },
   payment: {
     show: false,
     data: {}
