@@ -466,7 +466,7 @@ export default {
       this.initPosts();
     },
     deletedPost() {
-      this.$store.dispatch("profile/home/fetchProfile", this.username);
+      this.initPosts();
     },
     updatedPost() {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
