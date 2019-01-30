@@ -1,8 +1,6 @@
 "use strict";
 
-// import BrowserStore from "store";
 import PostApi from "@/api/post";
-import router from "@/router";
 
 const state = {
   currentPost: undefined,
@@ -40,9 +38,7 @@ const actions = {
         if (response.status === 200) {
           const newPost = await response.json();
           commit("savePostSuccess", newPost);
-          if (router.history.current.fullPath !== "/") {
-            router.push("/");
-          }
+          commit("modal/hide", { name: "addPost" }, { root: true });
         }
       })
       .catch(err => {

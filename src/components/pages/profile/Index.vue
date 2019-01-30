@@ -418,14 +418,17 @@ export default {
     store() {
       return this.$store.state.profile.home;
     },
-    deletedPost() {
-      return this.$store.state.profile.home.deletedPost;
-    },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
     },
+    newPost() {
+      return this.$store.state.post.newPost;
+    },
     updatedPost() {
       return this.$store.state.post.updatedPost;
+    },
+    deletedPost() {
+      return this.$store.state.profile.home.deletedPost;
     },
     scrollBarWidth() {
       if (!this.$store.state.global.modalOpened) {
@@ -465,11 +468,14 @@ export default {
       this.lastYOffset = 0;
       this.initPosts();
     },
-    deletedPost() {
+    newPost() {
       this.initPosts();
     },
     updatedPost() {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
+    },
+    deletedPost() {
+      this.initPosts();
     },
     subscriptionUpdate(data) {
       this.$refs.actionsDesktop.subsRequested(data);
