@@ -4,8 +4,11 @@
       <div class="popup-container storyviewers-popup">
         <div class="content">
           <div class="storyviewers-controls">
-            <button class="header-return-btn"></button>
-            <a @click.prevent="close" class="btn-story-details hidden-mobile" />
+            <button class="header-return-btn" @click.prevent="close"></button>
+            <a
+              @click.prevent="addToHighlights"
+              class="btn-story-details hidden-mobile"
+            />
             <router-link to="/settings/story" class="btn-settings" />
           </div>
           <div class="stories-list-preview">
@@ -15,7 +18,7 @@
                   <img :src="story.preview.source" />
                   <div class="amount-viewers">
                     <span class="icn-viewer icn-item" />{{
-                      current.viewersCount
+                      story.viewersCount
                     }}
                   </div>
                 </div>
@@ -105,7 +108,6 @@ export default {
       currIndex,
       swiperOption: {
         initialSlide: 0,
-        // slidesPerView: stories.length > 4 ? 4 : stories.length,
         slidesPerView: "auto",
         spaceBetween: 10,
         centeredSlides: true,
@@ -172,6 +174,9 @@ export default {
       }
 
       this.currIndex = 0;
+    },
+    addToHighlights() {
+      alert("добавить в highlights")
     }
   }
 };

@@ -115,7 +115,7 @@
                 </button>
               </li>
               <li>
-                <button class="saveFile" type="button" @click="saveFile">
+                <button class="saveFile" type="button" @click="saveToHighlights">
                   Save
                 </button>
               </li>
@@ -134,7 +134,7 @@
       </div>
       <div class="bottom-btns" v-if="currentStory">
         <div class="story-details-info">
-          <a href="#" class="btn-story-details" />
+          <a href="#" class="btn-story-details" @click.prevent="saveToHighlights" />
           <div
             class="story-viewer"
             v-if="currentStory.viewersCount"
@@ -250,7 +250,7 @@ export default {
     }
   },
   methods: {
-    next: function() {
+    next() {
       if (this.currIndex === this.length - 1) {
         this.findNextUserStory();
         return;
@@ -259,7 +259,7 @@ export default {
       this.currIndex += 1;
     },
 
-    runProgress: function() {
+    runProgress() {
       const { isLook, mediaType, id } = this.currentStory;
 
       if (this.isAuth() && !isLook) {
@@ -273,7 +273,7 @@ export default {
       }
     },
 
-    launchImage: function() {
+    launchImage() {
       this.showLoader = true;
 
       this.$refs.storyItem.onload = () => {
@@ -286,7 +286,7 @@ export default {
       };
     },
 
-    launchVideo: function() {
+    launchVideo() {
       const videoId = this.currentStory.id;
       const videoTag = this.$refs.storyItem;
 
@@ -312,7 +312,7 @@ export default {
         });
     },
 
-    activateVideoEvents: function() {
+    activateVideoEvents() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
 
@@ -325,7 +325,7 @@ export default {
       }
     },
 
-    deactivateVideoEvents: function() {
+    deactivateVideoEvents() {
       for (let videoId in this.videos) {
         if (this.videos.hasOwnProperty(videoId)) {
           this.videoProgress[videoId] = 0;
@@ -339,7 +339,7 @@ export default {
       }
     },
 
-    videoEventTimeupdate: function() {
+    videoEventTimeupdate() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
 
@@ -350,12 +350,12 @@ export default {
       }
     },
 
-    videoEventEnded: function() {
+    videoEventEnded() {
       this.deactivateVideoEvents();
       this.next();
     },
 
-    resetState: function() {
+    resetState() {
       if (this.timer) {
         this.timer.kill();
         delete this.timer;
@@ -367,7 +367,7 @@ export default {
       this.currActiveIndex = -1;
     },
 
-    findNextUserStory: function() {
+    findNextUserStory() {
       const userIds = [...this.$store.state.common.storyList];
       const userId = userIds.shift();
 
@@ -382,7 +382,7 @@ export default {
       }
     },
 
-    close: function() {
+    close() {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
       if (global.storyFirstEnter) {
@@ -392,7 +392,7 @@ export default {
       }
     },
 
-    pause: function() {
+    pause() {
       const { mediaType, id } = this.currentStory;
 
       if (this.timer) {
@@ -405,7 +405,7 @@ export default {
       }
     },
 
-    resume: function() {
+    resume() {
       if (this.timer) {
         this.timer.resume();
       }
@@ -416,7 +416,7 @@ export default {
       }
     },
 
-    deleteStory: function() {
+    deleteStory() {
       this.hideDropdawn();
 
       this.$store.dispatch("story/deletePost", {
@@ -432,50 +432,36 @@ export default {
       }
     },
 
-    storySettings: function() {
+    storySettings() {
       this.$router.push("/settings/story");
     },
 
-    saveFile: function() {
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", this.currentStory.src.source, true);
-      xhr.responseType = "blob";
-      xhr.onload = function() {
-        const urlCreator = window.URL || window.webkitURL;
-        const imageUrl = urlCreator.createObjectURL(this.response);
-        const tag = document.createElement("a");
-        tag.href = imageUrl;
-        tag.download = "story";
-        document.body.appendChild(tag);
-        tag.click();
-        document.body.removeChild(tag);
-      };
-      xhr.send();
-      this.hideDropdawn();
+    saveToHighlights() {
+      alert("save to highlights");
     },
 
-    videoEventPlay: function() {
+    videoEventPlay() {
       if (this.currentStory.mediaType === "video") {
         const videoTag = this.videos[this.currentStory.id];
         videoTag.muted = false;
       }
     },
 
-    videoEventWaiting: function() {
+    videoEventWaiting() {
       this.showLoader = true;
     },
 
-    videoEventPlaying: function() {
+    videoEventPlaying() {
       this.showVideoPlay = false;
       this.showLoader = false;
     },
 
-    addNewStory: function() {
+    addNewStory() {
       this.pause();
       document.getElementById("storyFileSelect").click();
     },
 
-    openDropdawn: function() {
+    openDropdawn() {
       this.showDropdawnMenu = true;
       this.pause();
     },
