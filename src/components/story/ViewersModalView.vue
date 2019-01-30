@@ -58,30 +58,32 @@
               </div>
               <div class="body-story-details">
                 <div class="list-viewers">
-                  <div
-                    class="viewer-row"
-                    v-for="user in viewers"
-                    :key="user.id"
-                  >
-                    <span class="avatar avatar_gap-r-sm avatar_sm">
-                      <span class="avatar__img">
-                        <img v-if="user.avatar" :src="user.avatar" />
-                      </span>
-                    </span>
-                    <div class="username-group">
-                      <span class="name">{{ user.name }}</span>
-                      <div class="user-login reset-ml">
-                        <span class="username">{{ user.username }}</span>
-                      </div>
-                    </div>
-                    <a
-                      href="#"
-                      class="btn-block"
-                      @click.prevent="blockStoryFromUser"
+                  <VuePerfectScrollbar>
+                    <div
+                      class="viewer-row"
+                      v-for="user in viewers"
+                      :key="user.id"
                     >
-                      <span class="icn-block icn-item"></span>
-                    </a>
-                  </div>
+                      <span class="avatar avatar_gap-r-sm avatar_sm">
+                        <span class="avatar__img">
+                          <img v-if="user.avatar" :src="user.avatar" />
+                        </span>
+                      </span>
+                      <div class="username-group">
+                        <span class="name">{{ user.name }}</span>
+                        <div class="user-login reset-ml">
+                          <span class="username">{{ user.username }}</span>
+                        </div>
+                      </div>
+                      <a
+                        href="#"
+                        class="btn-block"
+                        @click.prevent="blockStoryFromUser"
+                      >
+                        <span class="icn-block icn-item"></span>
+                      </a>
+                    </div>
+                  </VuePerfectScrollbar>
                 </div>
               </div>
             </div>
@@ -96,11 +98,13 @@
 <script>
 import dateFns from "date-fns";
 import Modal from "@/components/modal/Index";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "StoryViewers",
   components: {
-    Modal
+    Modal,
+    VuePerfectScrollbar
   },
   data() {
     const self = this;
