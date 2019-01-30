@@ -171,15 +171,17 @@ export default {
   },
   created() {
     // this.getComments();
-    this.$root.ws.send({
-      act: "collect",
-      message: "view_post_in_feed",
-      data: {
-        post_id: this.post.id,
-        owner: this.post.author.id,
-        duration: 1
-      }
-    });
+    setTimeout(() => {
+      this.$root.ws.send({
+        act: "collect",
+        message: "view_post_in_feed",
+        data: {
+          post_id: this.post.id,
+          owner: this.post.author.id,
+          duration: 1
+        }
+      });
+    }, 1000);
   }
 };
 </script>
