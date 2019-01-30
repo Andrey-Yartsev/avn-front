@@ -143,8 +143,7 @@ export default {
     }
   },
   methods: {
-    close(e) {
-      e.preventDefault();
+    close() {
       this.$store.dispatch("modal/hide", { name: "storyViewers" });
     },
     blockStoryFromUser() {
@@ -171,18 +170,14 @@ export default {
     },
     deleteStory() {
       this.$store.dispatch("story/deletePost", {
-        postId: this.currentStory.id
+        postId: this.current.id
       });
 
       this.$store.dispatch("global/flashToast", "Story deleted", {
         root: true
       });
 
-      if (!this.stories.length) {
-        this.close();
-      }
-
-      this.currIndex = 0;
+      this.close();
     },
     addToHighlights() {
       alert("добавить в highlights");
