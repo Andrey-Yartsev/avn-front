@@ -11,7 +11,9 @@
           <div class="stories-list-preview">
             <swiper :options="swiperOption">
               <swiper-slide v-for="(story, key) in stories" :key="key">
-                <img :src="story.thumb.source" />
+                <div :style="{'width': '100%', 'height': '100%', 'margin': 'auto'}">
+                  <img :src="story.thumb.source" />
+                </div>
               </swiper-slide>
             </swiper>
           </div>
@@ -83,7 +85,7 @@ export default {
   data() {
     const self = this;
     const {
-      /* stories, */ currIndex
+      stories, currIndex
     } = this.$store.state.modal.storyViewers.data;
 
     return {
@@ -91,8 +93,8 @@ export default {
       swiperOption: {
         initialSlide: 0,
         // autoHeight: true,
-        // slidesPerView: stories.length > 4 ? 4 : stories.length,
-        slidesPerView: "auto",
+        slidesPerView: stories.length > 4 ? 4 : stories.length,
+        // slidesPerView: "auto",
         spaceBetween: 30,
         centeredSlides: true,
         slideToClickedSlide: true,
@@ -166,16 +168,5 @@ export default {
 <style scoped>
 .swiper-slide img {
   max-width: 100%;
-  vertical-align: middle;
-}
-
-.swiper-slide {
-  width: 60%;
-}
-.swiper-slide:nth-child(2n) {
-  width: 40%;
-}
-.swiper-slide:nth-child(3n) {
-  width: 20%;
 }
 </style>
