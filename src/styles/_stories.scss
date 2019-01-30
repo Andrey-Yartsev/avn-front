@@ -605,13 +605,36 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  background-color: $white;
+  position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     border-radius: 6px 6px 0 0;
     flex: 0 0 62.9%;
     height: 62.9%;
     max-width: 620px;
+  }
+
+  &__inside {
+    background-color: $white;
+    position: relative;
+    height: 100%;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-radius: 6px 6px 0 0;
+    }
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: -7px;
+      left: calc(50% - 9px);
+      background-color: $white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      width: 17px;
+      height: 17px;
+      transform: rotate(45deg);
+      z-index: 0;
+    }
   }
 }
 
@@ -623,9 +646,15 @@
   align-content: center;
   align-items: center;
   padding: 11px 13px 7px;
+  height: 44px;
+  flex: 0 0 44px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 16px 20px;
+    height: 60px;
+    flex: 0 0 60px;
+    border-radius: 6px 6px 0 0;
+    background-color: $white;
   }
 
   &:before {
@@ -637,17 +666,6 @@
     bottom: 0;
     z-index: -1;
     box-shadow: 0 2px 1px 0 rgba(#000, 0.1);
-  }
-
-  &:after {
-    position: absolute;
-    content: "";
-    border-bottom: 12px solid $white;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    left: 50%;
-    margin-left: -12px;
-    bottom: 100%;
   }
 }
 
@@ -736,18 +754,37 @@
 }
 
 .stories-list-preview {
-  padding: 3vw 0 3.2vw;
+  height: 37.1%;
+  flex: 0 0 37.1%;
+
+  .swiper-container {
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+    height: calc(100% - 6vw);
+    padding: 3px;
+  }
+
+  .swiper-slide {
+    width: auto;
+
+    &.active {
+
+      .story-preview {
+        //height: 100%;
+        //margin-top: 0;
+        //margin-bottom: 0;
+      }
+    }
+  }
 }
 
 .story-preview {
   position: relative;
-  margin: 20px 10px 20px 0;
   transition: all .3s;
-
-  &.current {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+  height: 100%;
+  //height: calc(100% - 40px);
+  //margin-top: 20px;
+  //margin-bottom: 20px;
 
   &:after {
     content: "";
@@ -765,13 +802,11 @@
     }
   }
 
-
   img {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
-    position: relative;
+    height: 100%;
     z-index: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   }
 
   .amount-viewers {

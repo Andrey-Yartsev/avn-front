@@ -11,57 +11,72 @@
           <div class="stories-list-preview">
             <swiper :options="swiperOption">
               <swiper-slide v-for="(story, key) in stories" :key="key">
-                <div :style="{'width': '100%', 'height': '100%', 'margin': 'auto'}">
-                  <img :src="story.thumb.source" />
+                <div class="story-preview">
+                  <img :src="story.preview.source" />
+                  <div class="amount-viewers">
+                    <span class="icn-viewer icn-item" />{{
+                      current.viewersCount
+                    }}
+                  </div>
                 </div>
               </swiper-slide>
             </swiper>
           </div>
           <div class="container-story-details">
-            <div class="header-story-details">
-              <div class="amount-viewers">
-                <span class="icn-viewer icn-item" />{{ current.viewersCount }}
-              </div>
-              <div class="story-time-created">
-                {{ dateTime }}
-              </div>
-              <div class="controls-story">
-                <a
-                  href="#"
-                  class="controls-story__btn"
-                  @click.prevent="saveFile"
-                >
-                  <span class="icn-download icn-item" />
-                </a>
-                <a href="#" class="controls-story__btn" @click.prevent="share">
-                  <span class="icn-share icn-item" />
-                </a>
-                <a
-                  href="#"
-                  class="controls-story__btn controls-story__btn_remove"
-                  @click.prevent="deleteStory"
-                >
-                  <span class="icn-remove icn-item" />
-                </a>
-              </div>
-            </div>
-            <div class="body-story-details">
-              <div class="list-viewers">
-                <div class="viewer-row" v-for="user in viewers" :key="user.id">
-                  <span class="avatar avatar_gap-r-sm avatar_sm">
-                    <span class="avatar__img">
-                      <img v-if="user.avatar" :src="user.avatar" />
-                    </span>
-                  </span>
-                  <div class="username-group">
-                    <span class="name">{{ user.name }}</span>
-                    <div class="user-login reset-ml">
-                      <span class="username">{{ user.username }}</span>
-                    </div>
-                  </div>
-                  <a href="#" class="btn-block">
-                    <span class="icn-block icn-item"></span>
+            <div class="container-story-details__inside">
+              <div class="header-story-details">
+                <div class="amount-viewers">
+                  <span class="icn-viewer icn-item" />{{ current.viewersCount }}
+                </div>
+                <div class="story-time-created">
+                  {{ dateTime }}
+                </div>
+                <div class="controls-story">
+                  <a
+                    href="#"
+                    class="controls-story__btn"
+                    @click.prevent="saveFile"
+                  >
+                    <span class="icn-download icn-item" />
                   </a>
+                  <a
+                    href="#"
+                    class="controls-story__btn"
+                    @click.prevent="share"
+                  >
+                    <span class="icn-share icn-item" />
+                  </a>
+                  <a
+                    href="#"
+                    class="controls-story__btn controls-story__btn_remove"
+                    @click.prevent="deleteStory"
+                  >
+                    <span class="icn-remove icn-item" />
+                  </a>
+                </div>
+              </div>
+              <div class="body-story-details">
+                <div class="list-viewers">
+                  <div
+                    class="viewer-row"
+                    v-for="user in viewers"
+                    :key="user.id"
+                  >
+                    <span class="avatar avatar_gap-r-sm avatar_sm">
+                      <span class="avatar__img">
+                        <img v-if="user.avatar" :src="user.avatar" />
+                      </span>
+                    </span>
+                    <div class="username-group">
+                      <span class="name">{{ user.name }}</span>
+                      <div class="user-login reset-ml">
+                        <span class="username">{{ user.username }}</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn-block">
+                      <span class="icn-block icn-item"></span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,22 +99,19 @@ export default {
   },
   data() {
     const self = this;
-    const {
-      stories, currIndex
-    } = this.$store.state.modal.storyViewers.data;
+    const { currIndex } = this.$store.state.modal.storyViewers.data;
 
     return {
       currIndex,
       swiperOption: {
         initialSlide: 0,
-        // autoHeight: true,
-        slidesPerView: stories.length > 4 ? 4 : stories.length,
-        // slidesPerView: "auto",
-        spaceBetween: 30,
+        // slidesPerView: stories.length > 4 ? 4 : stories.length,
+        slidesPerView: "auto",
+        spaceBetween: 10,
         centeredSlides: true,
         slideToClickedSlide: true,
         slideActiveClass: "active",
-        // centerInsufficientSlides: true,
+        grabCursor: true,
         on: {
           slideChange() {
             self.currIndex = this.activeIndex;
@@ -164,9 +176,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.swiper-slide img {
-  max-width: 100%;
-}
-</style>
