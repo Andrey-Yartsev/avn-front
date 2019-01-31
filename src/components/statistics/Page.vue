@@ -1,14 +1,16 @@
 <template>
-  <div class="boxes">
-    <PostsModal
-      v-if="$store.state.modal.statPosts.show"
-      :dataSet="tempDataSet"
-      @periodChange="postsPeriodChange"
-      ref="postsModal"
-    />
+  <div>
+    <MobileHeader />
+    <div class="boxes">
+      <PostsModal
+        v-if="$store.state.modal.statPosts.show"
+        :dataSet="tempDataSet"
+        @periodChange="postsPeriodChange"
+        ref="postsModal"
+      />
 
-    <div class="cols">
-      <!--
+      <div class="cols">
+        <!--
       <div class="col col-1-3">
         <div class="box" id="followers-box">
           <h3 class="box-title">
@@ -28,156 +30,157 @@
         </div>
       </div>
       -->
-      <div class="col col-1-2">
-        <div class="box" id="posts-box" @click="openPostsModal">
-          <h3 class="box-title">
-            Posts
-            <span class="chart_period"
-              ><span ref="chartPeriod2"></span> - Today</span
-            >
-          </h3>
-          <div class="charts-wrapper-outer">
-            <div class="charts-data">
-              <span class="posts" ref="chartsDataPostsPosts"
-                >Posts <span>0</span></span
+        <div class="col col-1-2">
+          <div class="box" id="posts-box" @click="openPostsModal">
+            <h3 class="box-title">
+              Posts
+              <span class="chart_period"
+                ><span ref="chartPeriod2"></span> - Today</span
               >
-              <span class="views" ref="chartsDataPostsViews"
-                >Views <span>0</span></span
-              >
-              <span class="likes" ref="chartsDataPostsLikes"
-                >Likes <span>0</span></span
-              >
-              <span class="comments" ref="chartsDataPostsComments"
-                >Comments <span>0</span></span
-              >
+            </h3>
+            <div class="charts-wrapper-outer">
+              <div class="charts-data">
+                <span class="posts" ref="chartsDataPostsPosts"
+                  >Posts <span>0</span></span
+                >
+                <span class="views" ref="chartsDataPostsViews"
+                  >Views <span>0</span></span
+                >
+                <span class="likes" ref="chartsDataPostsLikes"
+                  >Likes <span>0</span></span
+                >
+                <span class="comments" ref="chartsDataPostsComments"
+                  >Comments <span>0</span></span
+                >
+              </div>
+              <div
+                id="posts_chart"
+                class="charts-wrapper charts-wrapper_posts"
+              ></div>
+              <div class="statistics-chart-scale"></div>
             </div>
-            <div
-              id="posts_chart"
-              class="charts-wrapper charts-wrapper_posts"
-            ></div>
-            <div class="statistics-chart-scale"></div>
+          </div>
+        </div>
+        <div class="col col-1-2">
+          <div class="box" id="stories-box">
+            <h3 class="box-title">
+              Stories
+              <span class="chart_period"
+                ><span ref="chartPeriod3"></span> - Today</span
+              >
+            </h3>
+            <div class="charts-wrapper-outer">
+              <div class="charts-data">
+                <span class="uploaded" ref="chartsDataStoriesUploaded"
+                  >Uploaded<span>0</span></span
+                >
+                <span class="views" ref="chartsDataStoriesViews"
+                  >Views<span>0</span></span
+                >
+                <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
+              </div>
+              <div
+                id="stories_chart"
+                class="charts-wrapper charts-wrapper_stories"
+              ></div>
+              <div class="statistics-chart-scale"></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col col-1-2">
-        <div class="box" id="stories-box">
-          <h3 class="box-title">
-            Stories
-            <span class="chart_period"
-              ><span ref="chartPeriod3"></span> - Today</span
-            >
-          </h3>
-          <div class="charts-wrapper-outer">
-            <div class="charts-data">
-              <span class="uploaded" ref="chartsDataStoriesUploaded"
-                >Uploaded<span>0</span></span
-              >
-              <span class="views" ref="chartsDataStoriesViews"
-                >Views<span>0</span></span
-              >
-              <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
+      <div class="cols">
+        <div class="col col-2-3">
+          <div class="box" id="visitors-box">
+            <h3 class="box-title">
+              Profile visitors
+              <span class="chart_period">Today</span>
+            </h3>
+            <div class="charts-wrapper-outer charts-wrapper-outer__visitors">
+              <div class="visitors-donuts-wrapper-outer">
+                <div class="visitors-donuts-wrapper">
+                  <div id="visitors_donut"></div>
+                  <div class="visitors_data">
+                    <div class="visitors_today">
+                      Today <span ref="visitorsToday">0</span>
+                    </div>
+                    <div class="visitors_week">
+                      Week <span ref="visitorsWeek">0</span>
+                    </div>
+                    <div class="visitors_total">
+                      Total <span ref="visitorsTotal">0</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="visitors-donuts-wrapper">
+                  <div id="visitors_users_donut"></div>
+                  <div class="visitors_data">
+                    <div class="visitors_users">
+                      Followers <span ref="visitorsUsers">0</span>
+                    </div>
+                    <div class="visitors_guests">
+                      Guests <span ref="visitorsGuests">0</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="visitors-donuts-wrapper">
+                  <div id="visitors_platform_donut"></div>
+                  <div class="visitors_data">
+                    <div class="visitors_mobile">
+                      Mobile <span ref="visitorsMobile">0</span>
+                    </div>
+                    <div class="visitors_desktop">
+                      Desktop <span ref="visitorsDesktop">0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="visitors_map"></div>
             </div>
-            <div
-              id="stories_chart"
-              class="charts-wrapper charts-wrapper_stories"
-            ></div>
-            <div class="statistics-chart-scale"></div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="cols">
-      <div class="col col-2-3">
-        <div class="box" id="visitors-box">
-          <h3 class="box-title">
-            Profile visitors
-            <span class="chart_period">Today</span>
-          </h3>
-          <div class="charts-wrapper-outer charts-wrapper-outer__visitors">
-            <div class="visitors-donuts-wrapper-outer">
-              <div class="visitors-donuts-wrapper">
-                <div id="visitors_donut"></div>
-                <div class="visitors_data">
-                  <div class="visitors_today">
-                    Today <span ref="visitorsToday">0</span>
-                  </div>
-                  <div class="visitors_week">
-                    Week <span ref="visitorsWeek">0</span>
-                  </div>
-                  <div class="visitors_total">
-                    Total <span ref="visitorsTotal">0</span>
-                  </div>
-                </div>
-              </div>
-              <div class="visitors-donuts-wrapper">
-                <div id="visitors_users_donut"></div>
-                <div class="visitors_data">
-                  <div class="visitors_users">
-                    Followers <span ref="visitorsUsers">0</span>
-                  </div>
-                  <div class="visitors_guests">
-                    Guests <span ref="visitorsGuests">0</span>
-                  </div>
-                </div>
-              </div>
-              <div class="visitors-donuts-wrapper">
-                <div id="visitors_platform_donut"></div>
-                <div class="visitors_data">
-                  <div class="visitors_mobile">
-                    Mobile <span ref="visitorsMobile">0</span>
-                  </div>
-                  <div class="visitors_desktop">
-                    Desktop <span ref="visitorsDesktop">0</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="visitors_map"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col col-1-3">
-        <div class="box">
-          <h3 class="box-title">
-            Top 5
-            <span class="chart_period">Today</span>
-          </h3>
-          <div class="box-body">
-            <div class="swiper-container" id="statistics-top-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <h4>Followers</h4>
-                  <div class="users-statistics" v-if="topFollowers">
-                    <router-link
-                      v-for="v in topFollowers"
-                      v-bind:key="v.id"
-                      class="user-statistics"
-                      :to="'/' + v.username"
-                    >
-                      <span class="avatar avatar_gap-r-sm avatar_sm">
-                        <span class="avatar__img">
-                          <img :src="v.avatar" v-if="v.avatar" />
+        <div class="col col-1-3">
+          <div class="box">
+            <h3 class="box-title">
+              Top 5
+              <span class="chart_period">Today</span>
+            </h3>
+            <div class="box-body">
+              <div class="swiper-container" id="statistics-top-swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <h4>Followers</h4>
+                    <div class="users-statistics" v-if="topFollowers">
+                      <router-link
+                        v-for="v in topFollowers"
+                        v-bind:key="v.id"
+                        class="user-statistics"
+                        :to="'/' + v.username"
+                      >
+                        <span class="avatar avatar_gap-r-sm avatar_sm">
+                          <span class="avatar__img">
+                            <img :src="v.avatar" v-if="v.avatar" />
+                          </span>
                         </span>
-                      </span>
-                      <div class="username-group">
-                        <div class="user__name">
-                          <div class="name">{{ v.name }}</div>
+                        <div class="username-group">
+                          <div class="user__name">
+                            <div class="name">{{ v.name }}</div>
+                          </div>
+                          <span class="user-login reset-ml">{{
+                            v.username
+                          }}</span>
                         </div>
-                        <span class="user-login reset-ml">{{
-                          v.username
-                        }}</span>
-                      </div>
-                    </router-link>
+                      </router-link>
+                    </div>
                   </div>
-                </div>
-                <!--<div class=swiper-slide>
+                  <!--<div class=swiper-slide>
 								<h4>Tab 2</h4>
 							</div>
 							<div class=swiper-slide>
 								<h4>Tab 3</h4>
 							</div>-->
+                </div>
+                <!--<div class=swiper-pagination></div>-->
               </div>
-              <!--<div class=swiper-pagination></div>-->
             </div>
           </div>
         </div>
@@ -193,6 +196,7 @@ import pluralize from "pluralize";
 import request from "@/utils/request";
 
 import PostsModal from "./PostsModal";
+import MobileHeader from "@/components/header/Mobile";
 
 const colorSchemes = [
   "#FF5979",
@@ -215,7 +219,8 @@ const altColor = "#16181A";
 export default {
   name: "app",
   components: {
-    PostsModal
+    PostsModal,
+    MobileHeader
   },
   data() {
     return {

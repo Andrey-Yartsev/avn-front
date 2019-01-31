@@ -378,10 +378,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/statistics",
-    component: StatPage,
-    meta: {
-      cssName: "settings"
-    }
+    component: StatPage
   },
   // PROFILE ZONE
   {
