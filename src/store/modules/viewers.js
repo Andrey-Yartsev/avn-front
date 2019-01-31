@@ -10,7 +10,8 @@ const initState = {
   allDataReceived: false,
   limit: 10,
   offset: 0,
-  marker: ""
+  marker: "",
+  source: ""
 };
 
 const state = { ...initState };
@@ -20,6 +21,9 @@ const mutations = {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }
+  },
+  setSource(state, { source }) {
+    state.source = source;
   }
 };
 
@@ -39,6 +43,9 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
+  },
+  setSource({ commit }, { source }) {
+    commit("setSource", { source });
   }
 };
 

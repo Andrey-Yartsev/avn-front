@@ -12,7 +12,7 @@
             <router-link to="/settings/story" class="btn-settings" />
           </div>
           <div class="stories-list-preview">
-            <swiper :options="swiperOption">
+            <swiper :options="swiperOption" key="viewerModalView" ref="swiper">
               <swiper-slide v-for="(story, key) in stories" :key="key">
                 <div class="story-preview">
                   <img :src="story.preview.source" />
@@ -58,7 +58,7 @@
               </div>
               <div class="body-story-details">
                 <div class="list-viewers">
-                  <VuePerfectScrollbar>
+                  <VuePerfectScrollbar @ps-scroll-y="scrollFunction">
                     <div
                       class="viewer-row"
                       v-for="user in viewers"
@@ -134,6 +134,9 @@ export default {
     };
   },
   computed: {
+    swiper() {
+      return this.$refs.swiper.swiper;
+    },
     stories() {
       return this.$store.state.modal.storyViewers.data.stories;
     },
@@ -141,10 +144,16 @@ export default {
       return this.stories[this.currIndex];
     },
     viewers() {
-      return this.current.viewers;
+      return this.$store.state.viewers.posts;
     },
-    dateTime: function() {
+    dateTime() {
       return dateFns.distanceInWordsStrict(new Date(), this.current.createdAt);
+    },
+    loading() {
+      return this.$store.state.viewers.loading;
+    },
+    allDataReceived() {
+      return this.$store.state.viewers.allDataReceived;
     }
   },
   methods: {
@@ -186,6 +195,29 @@ export default {
     },
     addToHighlights() {
       alert("добавить в highlights");
+    },
+    scrollFunction(e) {
+      const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
+      const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
+
+      if (scrolledEnought && !this.loading && !this.allDataReceived) {
+        this.$store.dispatch("viewers/getPosts");
+      }
+    }
+  },
+  mounted() {
+    this.swiper.slideTo(this.currIndex);
+  },
+  created() {
+    this.$store.dispatch("viewers/resetPageState");
+    this.$store.dispatch("viewers/setSource", { source: this.current.id });
+    this.$store.dispatch("viewers/getPosts");
+  },
+  watch: {
+    current() {
+      this.$store.dispatch("viewers/resetPageState");
+      this.$store.dispatch("viewers/setSource", { source: this.current.id });
+      this.$store.dispatch("viewers/getPosts");
     }
   }
 };
