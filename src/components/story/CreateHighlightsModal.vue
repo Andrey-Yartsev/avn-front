@@ -11,23 +11,27 @@
               <div class="popup-container-scroll">
                 <div class="popup-content-scroll">
                   <div class="explore-wrapper highlights">
-                    <div
-                      v-for="story in stories"
-                      :key="story.id"
-                      class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
-                    >
-                      <div class="timestamp timestamp_unit">
-                        <div class="timestamp__date">
-                          30
+                    <VuePerfectScrollbar>
+                      <div
+                        v-for="story in stories"
+                        :key="story.id"
+                        class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
+                        :class="{selected: !!checked[story.id]}"
+                        @click="check(story.id)"
+                      >
+                        <div class="timestamp timestamp_unit">
+                          <div class="timestamp__date">
+                            30
+                          </div>
+                          sep
                         </div>
-                        sep
+                        <div class="postLink">
+                          <figure class="explore-media">
+                            <img :src="story.thumb.source" />
+                          </figure>
+                        </div>
                       </div>
-                      <div class="postLink">
-                        <figure class="explore-media">
-                          <img :src="story.thumb.source" />
-                        </figure>
-                      </div>
-                    </div>
+                    </VuePerfectScrollbar>
                   </div>
                 </div>
               </div>
@@ -43,13 +47,18 @@
 <script>
 // import dateFns from "date-fns";
 import Modal from "@/components/modal/Index";
-// import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CreateHighlightsModal",
   components: {
-    Modal
-    // VuePerfectScrollbar
+    Modal,
+    VuePerfectScrollbar
+  },
+  data() {
+    return {
+      checked: {}
+    };
   },
   computed: {
     stories() {
@@ -57,6 +66,13 @@ export default {
     }
   },
   methods: {
+    check(id) {
+      if (this.checked[id]) {
+        this.checked = { ...this.checked, [id]: false };
+      } else {
+        this.checked = { ...this.checked, [id]: true };
+      }
+    },
     close() {
       this.$store.dispatch("modal/hide", { name: "createHighlights" });
     }
