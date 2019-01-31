@@ -126,8 +126,8 @@ export default {
         slideActiveClass: "active",
         grabCursor: true,
         on: {
-          slideChange() {
-            self.currIndex = this.activeIndex;
+          transitionEnd() {
+              self.currIndex = this.activeIndex;
           }
         }
       }
