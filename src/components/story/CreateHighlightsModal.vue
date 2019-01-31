@@ -3,7 +3,9 @@
     <template slot="content">
       <div class="popup-container storyviewers-popup">
         <div class="content">
-          CONTENT
+          <div v-for="story in stories" :key="story.id">
+            <img :src="story.thumb.source" />
+          </div>
         </div>
         <button type="button" class="close" @click="close"></button>
       </div>
@@ -22,10 +24,19 @@ export default {
     Modal
     // VuePerfectScrollbar
   },
+  computed: {
+    stories() {
+      return this.$store.state.stories.posts;
+    }
+  },
   methods: {
     close() {
       this.$store.dispatch("modal/hide", { name: "createHighlights" });
     }
+  },
+  created() {
+    this.$store.dispatch("stories/setSource", { source: "archive" });
+    this.$store.dispatch("stories/getPosts");
   }
 };
 </script>
