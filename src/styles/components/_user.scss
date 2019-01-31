@@ -296,6 +296,27 @@
   }
 }
 
+.round-add {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  border-radius: 50%;
+  border: 1px solid $main-color;
+  opacity: .4;
+  color: $main-color;
+  font-size: 36px;
+  line-height: 36px;
+
+  &:after {
+    content: "\E601";
+    @include icon-font;
+    margin: auto;
+  }
+}
+
 //.live-explore-title {
 //  font-weight: 500;
 //  color: $main-color;
