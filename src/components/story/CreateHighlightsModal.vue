@@ -1,10 +1,33 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container storyviewers-popup">
-        <div class="content">
-          <div v-for="story in stories" :key="story.id">
-            <img :src="story.thumb.source" />
+      <div class="popup-container popup-container_hfluid highlights-popup">
+        <div class="container-popup">
+          <div class="content">
+            <div class="popup-title">
+              Highlight
+            </div>
+            <div class="popup-body">
+              <div class="popup-container-scroll">
+                <div class="popup-content-scroll">
+                  <div class="explore-wrapper highlights">
+                    <div v-for="story in stories" :key="story.id" class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView">
+                      <div class="timestamp timestamp_unit">
+                        <div class="timestamp__date">
+                          30
+                        </div>
+                        sep
+                      </div>
+                      <div class="postLink">
+                        <figure class="explore-media">
+                          <img :src="story.thumb.source" />
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <button type="button" class="close" @click="close"></button>

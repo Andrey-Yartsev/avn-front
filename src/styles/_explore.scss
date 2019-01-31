@@ -313,7 +313,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 3px;
-        padding: 20px 16px;
+      }
+
+      .popup-container_hfluid & {
+        background-color: $white;
+        border-radius: 0 0 5px 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
     }
 
@@ -463,6 +469,7 @@
         line-height: 24px;
         color: #fff;
         filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+        padding-top: 0;
       }
 
       &.selected {

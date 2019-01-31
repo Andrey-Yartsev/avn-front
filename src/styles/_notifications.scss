@@ -25,71 +25,6 @@
   }
 }
 
-.popup {
-
-  .notifications-popup {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      overflow-y: scroll;
-      flex-direction: column;
-      justify-content: stretch;
-      position: relative;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      border-radius: 0;
-      left: 0;
-      transform: none;
-      background: $white
-      linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%)
-      fixed;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background: none;
-      max-height: calc(100vh - 36px);
-      top: 36px;
-      box-shadow: none;
-      max-width: 680px;
-      border-radius: 5px 5px 0 0;
-      padding: 84px 0 0;
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      &:before {
-        background: $light;
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.3;
-      }
-    }
-
-    .close {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        z-index: 10;
-        right: 30px;
-        top: 29px;
-      }
-    }
-
-    > .content {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        overflow: visible;
-      }
-    }
-  }
-}
-
 .notifications-header {
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -148,29 +83,6 @@
 
 .NotificationsCollectionView {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    height: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 10px;
-    margin: 0 auto;
-    max-width: 642px;
-    position: relative;
-    width: 100%;
-    min-height: calc(100% - 75px);
-  }
-
-  .notifications-popup & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 20px;
-    }
-  }
-
   .header-nav {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -192,28 +104,6 @@
     .msg-no-content {
       pointer-events: auto;
       opacity: 1;
-    }
-  }
-
-  .notifications-popup & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: block;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0;
-      margin: 0 auto;
-      position: static;
-      min-height: auto;
-    }
-
-    .site-footer {
-      margin-top: 22px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: none;
-      }
     }
   }
 
@@ -308,24 +198,6 @@
     min-height: calc(100vh - 162px);
   }
 
-  .notifications-popup & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      min-height: calc(100vh - 254px);
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: static;
-      overflow: visible;
-      box-shadow: none;
-      border-radius: 0;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
-      background-color: transparent;
-    }
-  }
-
   .no-notifications & {
 
     .notifications-popup & {
@@ -367,34 +239,6 @@
 
 .notifications {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    padding: 1px 0 20px;
-    background-color: $white;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    overflow-y: auto;
-  }
-
-  .notifications-popup & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 120px);
-      height: auto;
-    }
-
-    &:after {
-      content: "";
-      height: 60px;
-      clear: both;
-      display: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
-      }
-    }
-  }
-
   .no-notifications & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -405,20 +249,6 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;
-      }
-    }
-  }
-
-  &.ps {
-
-    &:hover {
-
-      > .ps__scrollbar-y-rail {
-        opacity: 0;
-
-        &:hover {
-          opacity: 0;
-        }
       }
     }
   }

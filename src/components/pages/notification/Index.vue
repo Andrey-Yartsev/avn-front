@@ -1,6 +1,6 @@
 <template>
   <div
-    class="NotificationsCollectionView"
+    class="container-popup NotificationsCollectionView"
     :class="{ 'no-notifications': !items.length }"
   >
     <div class="notifications-header">
@@ -23,7 +23,7 @@
       to="/addPost"
     ></router-link>
 
-    <div class="notifications-container">
+    <div class="popup-container-scroll notifications-container">
       <div class="notifications-filter">
         <div class="notificationsFilterList">
           <a
@@ -42,7 +42,7 @@
           to="/settings/notifications"
         ></router-link>
       </div>
-      <VuePerfectScrollbar class="notifications">
+      <VuePerfectScrollbar class="popup-content-scroll notifications">
         <div
           class="NotificationsView"
           :class="{

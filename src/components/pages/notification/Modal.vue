@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div
       ref="container"
-      class="popup-container notifications-popup"
+      class="popup-container popup-container_hfluid notifications-popup"
       slot="content"
     >
       <div class="content">
