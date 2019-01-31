@@ -957,3 +957,44 @@
     margin: -4px 0 0 -17px;
   }
 }
+
+.stories-collection-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  opacity: 0;
+  transition: opacity .5s;
+  padding: 20px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding: 60px 80px;
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.stories-collection-name {
+  margin: auto;
+  color: #fff;
+  font-size: 38px;
+  position: relative;
+  z-index: 2;
+}

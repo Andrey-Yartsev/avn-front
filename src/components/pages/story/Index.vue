@@ -187,6 +187,12 @@
       v-if="loading || showLoader || !currentStory || !currentStory.isReady"
       :fullscreen="false"
     />
+
+    <div class="stories-collection-overlay">
+        <div class="stories-collection-name">
+            Highlights name
+        </div>
+    </div>
   </div>
 </template>
 
