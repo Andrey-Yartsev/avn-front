@@ -24,5 +24,6 @@ export default {
   newChat: ["chat-page", "chat-page_new", "has-page-footer"],
   addPost: ["addPost-page"],
   search: ["search-page", "has-page-footer"],
-  stream: ["stream-page"]
+  stream: ["stream-page"],
+  storiesPage: ["story-page"]
 };

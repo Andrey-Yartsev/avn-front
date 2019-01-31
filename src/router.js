@@ -336,7 +336,11 @@ const routes = [
       return Auth.requireAny(to, from, next);
     },
     path: "/stories/:userId",
-    component: StoryPage
+    component: StoryPage,
+    meta: {
+      staticPage: true,
+      cssName: "storiesPage"
+    }
   },
   // STATIC PAGES
   {
