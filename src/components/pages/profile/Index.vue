@@ -43,135 +43,7 @@
                 >twitter.com/{{ profile.twitterUsername }}</a
               >
               <FollowersCounter :profile="profile" />
-              <div
-                class="stories-wrapper stories-collection"
-                v-if="$mq === 'desktop'"
-              >
-                <div
-                  class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
-                >
-                  <div class="stories-collection__header">
-                    <h4>Highlights</h4>
-                    <button class="btn-watch-all hidden-desktop" type="button">
-                      Watch All
-                    </button>
-                  </div>
-                  <div class="stories-group">
-                    <div class="stories">
-                      <a href="#" class="story">
-                        <div
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                        >
-                          <div class="round-add"></div>
-                        </div>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <div class="name">
-                              Add new
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                      <div class="story">
-                        <a
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                          href="#"
-                        >
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Lorem
-                            </a>
-                            <div class="timestamp hidden-mobile">15 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                          href="#"
-                        >
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Ipsum
-                            </a>
-                            <div class="timestamp hidden-mobile">16 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                          href="#"
-                        >
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Lorem
-                            </a>
-                            <div class="timestamp hidden-mobile">15 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                          href="#"
-                        >
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Ipsum
-                            </a>
-                            <div class="timestamp hidden-mobile">16 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a
-                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                          href="#"
-                        >
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Ipsum
-                            </a>
-                            <div class="timestamp hidden-mobile">16 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <Highlights mqSize="desktop" />
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </div>
           </div>
@@ -199,90 +71,7 @@
           ref="actionsMobile"
         />
       </div>
-      <div class="stories-wrapper stories-collection" v-if="$mq === 'mobile'">
-        <div
-          class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
-        >
-          <div class="stories-collection__header">
-            <h4>Highlights</h4>
-            <button class="btn-watch-all hidden-desktop" type="button">
-              Watch All
-            </button>
-          </div>
-          <div class="stories-group">
-            <div class="stories">
-              <a href="#" class="story">
-                <div
-                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                >
-                  <div class="round-add"></div>
-                </div>
-                <div class="story-info">
-                  <div class="story-header">
-                    <div class="name">
-                      Add new
-                    </div>
-                  </div>
-                </div>
-              </a>
-              <div class="story">
-                <a
-                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                  href="#"
-                  ><span class="avatar__img"></span
-                ></a>
-                <div class="story-info">
-                  <div class="story-header">
-                    <a href="#" class="name">
-                      Lorem
-                    </a>
-                    <div class="timestamp hidden-mobile">15 Jan</div>
-                  </div>
-                  <div class="amount-items">
-                    4 items
-                  </div>
-                </div>
-              </div>
-              <div class="story">
-                <a
-                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                  href="#"
-                  ><span class="avatar__img"></span
-                ></a>
-                <div class="story-info">
-                  <div class="story-header">
-                    <a href="#" class="name">
-                      Ipsum
-                    </a>
-                    <div class="timestamp hidden-mobile">16 Jan</div>
-                  </div>
-                  <div class="amount-items">
-                    4 items
-                  </div>
-                </div>
-              </div>
-              <div class="story">
-                <a
-                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                  href="#"
-                  ><span class="avatar__img"></span
-                ></a>
-                <div class="story-info">
-                  <div class="story-header">
-                    <a href="#" class="name">
-                      Lorem
-                    </a>
-                    <div class="timestamp hidden-mobile">15 Jan</div>
-                  </div>
-                  <div class="amount-items">
-                    4 items
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Highlights mqSize="mobile" />
       <div class="container">
         <div class="row">
           <div :class="['content-col', { 'single-col': !useMediumPostView }]">
@@ -356,6 +145,7 @@ import HeaderControl from "@/components/common/profile/headerControl/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
+import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
 
@@ -374,7 +164,8 @@ export default {
     ProfileActions,
     Footer,
     PostSmall,
-    PostMedium
+    PostMedium,
+    Highlights
   },
 
   data() {

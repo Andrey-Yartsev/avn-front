@@ -127,7 +127,7 @@ export default {
         grabCursor: true,
         on: {
           transitionEnd() {
-              self.currIndex = this.activeIndex;
+            self.currIndex = this.activeIndex;
           }
         }
       }

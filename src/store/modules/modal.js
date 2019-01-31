@@ -63,6 +63,10 @@ const state = {
   storyViewers: {
     show: false,
     data: {}
+  },
+  createHighlights: {
+    show: false,
+    data: {}
   }
 };
 
