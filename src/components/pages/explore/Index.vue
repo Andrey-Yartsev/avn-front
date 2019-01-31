@@ -94,6 +94,7 @@ import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
+import PostStat from "@/mixins/postStat";
 
 export default {
   name: "Explore",
@@ -110,7 +111,7 @@ export default {
     Loader,
     VuePerfectScrollbar
   },
-  mixins: [InfinityScrollMixin],
+  mixins: [InfinityScrollMixin, PostStat],
   created() {
     this.getPageData();
   },

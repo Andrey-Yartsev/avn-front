@@ -8,6 +8,7 @@
       }
     ]"
     :data-id="post.id"
+    :id="'p' + post.id"
   >
     <a
       :class="[

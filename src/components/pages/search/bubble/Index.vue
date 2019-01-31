@@ -147,7 +147,6 @@ export default {
       this._search();
     },
     search() {
-      console.log("XXXX");
       this._search();
       this.open();
     },

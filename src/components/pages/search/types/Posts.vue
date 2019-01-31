@@ -23,11 +23,14 @@
 
 <script>
 import Post from "@/components/post/MediumView";
+import PostStat from "@/mixins/postStat";
 
 export default {
   name: "SearchPosts",
 
   props: ["items", "query", "loading"],
+
+  mixins: [PostStat],
 
   components: {
     Post
@@ -39,6 +42,9 @@ export default {
     },
     posts2() {
       return this.items.filter((v, i) => i % 2);
+    },
+    posts() {
+      return this.items;
     }
   }
 };

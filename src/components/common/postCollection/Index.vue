@@ -13,9 +13,11 @@
 
 <script>
 import Post from "@/components/post/MediumView";
+import PostStat from "@/mixins/postStat";
 
 export default {
   name: "PostCollection",
+  mixins: [PostStat],
   components: {
     Post: Post
   },

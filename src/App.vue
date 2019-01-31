@@ -195,6 +195,7 @@ export default {
         }
       }
       this.initLoggedInClass();
+      this.initWs();
     }
   },
   methods: {
@@ -204,17 +205,18 @@ export default {
       } else {
         htmlElement.classList.add("not-authorized");
       }
+    },
+    initWs() {
+      if (this.loggedIn) {
+        this.webSocket = ws;
+      } else {
+        this.webSocket = wsg;
+      }
+      this.webSocket.connect();
+      this.$root.ws = this.webSocket;
     }
   },
   created() {
-    if (this.loggedIn) {
-      this.webSocket = ws;
-    } else {
-      this.webSocket = wsg;
-    }
-    this.webSocket.connect();
-    this.$root.ws = this.webSocket;
-
     const params = queryString.parse(location.search);
     if (params.code) {
       Cookie.set("code", params.code, {

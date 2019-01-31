@@ -452,7 +452,7 @@ export default {
   },
   watch: {
     footerPages() {
-      this.footerListenScroll();
+      this.footerScrollAction();
     },
     username() {
       this.$store.commit("profile/home/resetPageState");
@@ -500,7 +500,10 @@ export default {
     getPosts() {
       this.$store.dispatch("profile/home/getPosts");
     },
-    footerListenScroll() {
+    scrollAction() {
+      this.footerScrollAction();
+    },
+    footerScrollAction() {
       const profileDataText = document.querySelector(
         ".profile-desc .profile-data"
       );
@@ -540,11 +543,11 @@ export default {
     }, 2000);
   },
   mounted() {
-    this.footerListenScroll();
-    window.addEventListener("scroll", this.footerListenScroll, true);
+    this.scrollAction();
+    window.addEventListener("scroll", this.scrollAction, true);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.footerListenScroll, true);
+    window.removeEventListener("scroll", this.scrollAction, true);
   }
 };
 </script>
