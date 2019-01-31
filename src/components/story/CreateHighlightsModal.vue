@@ -11,7 +11,11 @@
               <div class="popup-container-scroll">
                 <div class="popup-content-scroll">
                   <div class="explore-wrapper highlights">
-                    <div v-for="story in stories" :key="story.id" class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView">
+                    <div
+                      v-for="story in stories"
+                      :key="story.id"
+                      class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
+                    >
                       <div class="timestamp timestamp_unit">
                         <div class="timestamp__date">
                           30
