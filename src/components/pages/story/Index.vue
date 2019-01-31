@@ -189,9 +189,9 @@
     />
 
     <div class="stories-collection-overlay">
-        <div class="stories-collection-name">
-            Highlights name
-        </div>
+      <div class="stories-collection-name">
+        Highlights name
+      </div>
     </div>
   </div>
 </template>
