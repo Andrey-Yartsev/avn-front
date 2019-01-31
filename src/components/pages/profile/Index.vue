@@ -59,7 +59,9 @@
                   <div class="stories-group">
                     <div class="stories">
                       <a href="#" class="story">
-                        <div class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob">
+                        <div
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                        >
                           <div class="round-add"></div>
                         </div>
                         <div class="story-info">
@@ -71,39 +73,10 @@
                         </div>
                       </a>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#">
-                            <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Lorem
-                            </a>
-                            <div class="timestamp hidden-mobile">15 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#">
-                          <span class="avatar__img"></span>
-                        </a>
-                        <div class="story-info">
-                          <div class="story-header">
-                            <a href="#" class="name">
-                              Ipsum
-                            </a>
-                            <div class="timestamp hidden-mobile">16 Jan</div>
-                          </div>
-                          <div class="amount-items">
-                            4 items
-                          </div>
-                        </div>
-                      </div>
-                      <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#">
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                        >
                           <span class="avatar__img"></span>
                         </a>
                         <div class="story-info">
@@ -119,7 +92,10 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#">
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                        >
                           <span class="avatar__img"></span>
                         </a>
                         <div class="story-info">
@@ -135,7 +111,48 @@
                         </div>
                       </div>
                       <div class="story">
-                        <a class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob" href="#">
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                        >
+                          <span class="avatar__img"></span>
+                        </a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Lorem
+                            </a>
+                            <div class="timestamp hidden-mobile">15 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                        >
+                          <span class="avatar__img"></span>
+                        </a>
+                        <div class="story-info">
+                          <div class="story-header">
+                            <a href="#" class="name">
+                              Ipsum
+                            </a>
+                            <div class="timestamp hidden-mobile">16 Jan</div>
+                          </div>
+                          <div class="amount-items">
+                            4 items
+                          </div>
+                        </div>
+                      </div>
+                      <div class="story">
+                        <a
+                          class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                          href="#"
+                        >
                           <span class="avatar__img"></span>
                         </a>
                         <div class="story-info">
@@ -195,7 +212,9 @@
           <div class="stories-group">
             <div class="stories">
               <a href="#" class="story">
-                <div class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob">
+                <div
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                >
                   <div class="round-add"></div>
                 </div>
                 <div class="story-info">
