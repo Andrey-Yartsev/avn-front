@@ -43,7 +43,7 @@
                 >twitter.com/{{ profile.twitterUsername }}</a
               >
               <FollowersCounter :profile="profile" />
-              <Highlights mqSize="desktop" />
+              <Highlights :userId="profile.id" mqSize="desktop" />
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </div>
           </div>
@@ -71,7 +71,7 @@
           ref="actionsMobile"
         />
       </div>
-      <Highlights mqSize="mobile" />
+      <Highlights :userId="profile.id" mqSize="mobile" />
       <div class="container">
         <div class="row">
           <div :class="['content-col', { 'single-col': !useMediumPostView }]">
