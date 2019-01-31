@@ -547,6 +547,24 @@ video {
       color: $primary-color;
     }
   }
+
+  &_unit {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border-radius: 4px;
+    background-color: $main-color;
+    color: $white;
+    width: 40px;
+    padding: 5px 7px;
+    line-height: 12px;
+    z-index: 1;
+  }
+
+  &__date {
+    font-size: 19px;
+    line-height: 19px;
+  }
 }
 
 .wrap-name {

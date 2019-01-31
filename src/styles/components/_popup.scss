@@ -330,6 +330,13 @@
         }
       }
     }
+
+    &.highlights-popup {
+
+      .close {
+        top: 5px;
+      }
+    }
   }
 
   & &-payment {
@@ -419,7 +426,7 @@
   }
   .next,
   .previous {
-    color: #ffffff;
+    color: #fff;
     cursor: pointer;
     position: fixed;
     opacity: 0.7;

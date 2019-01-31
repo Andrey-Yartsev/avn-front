@@ -307,6 +307,16 @@
       }
     }
 
+    &.highlights {
+      grid-template-columns: 1fr 1fr 1fr;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 3px;
+        padding: 20px 16px;
+      }
+    }
+
     &.users {
       grid-template-columns: 1fr;
 
@@ -419,6 +429,7 @@
       right: 0;
       top: 0;
       bottom: 0;
+      z-index: 0;
     }
 
     img {
@@ -438,6 +449,28 @@
       right: 0;
       top: 0;
       bottom: 0;
+    }
+
+    &_radio {
+
+      &:after {
+        content: "\E60E";
+        @include icon-font;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 24px;
+        line-height: 24px;
+        color: #fff;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+      }
+
+      &.selected {
+
+        &:after {
+          content: "\E60D";
+        }
+      }
     }
   }
 
