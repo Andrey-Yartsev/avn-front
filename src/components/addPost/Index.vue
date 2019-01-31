@@ -176,6 +176,15 @@ export default {
     }
   },
   methods: {
+    reset() {
+      this.expanded = InitialState.expanded;
+      this.tweetSend = InitialState.tweetSend;
+      this.postMsg = InitialState.postMsg;
+      this.isSaving = InitialState.isSaving;
+      this.isFree = InitialState.isFree;
+      this.mediaType = InitialState.mediaType;
+      this.preloadedMedias = [];
+    },
     addNewPost: async function(e) {
       e.preventDefault();
 
@@ -203,6 +212,7 @@ export default {
   },
   watch: {
     newPost() {
+      this.reset();
       this.$router.push("/");
     }
   },
