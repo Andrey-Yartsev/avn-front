@@ -16,7 +16,7 @@
                         v-for="story in stories"
                         :key="story.id"
                         class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
-                        :class="{selected: !!checked[story.id]}"
+                        :class="{ selected: !!checked[story.id] }"
                         @click="check(story.id)"
                       >
                         <div class="timestamp timestamp_unit">
