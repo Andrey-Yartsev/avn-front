@@ -85,6 +85,11 @@
                     </div>
                   </VuePerfectScrollbar>
                 </div>
+                <div class="msg-no-content">
+                  <div class="msg-no-content__text">
+                    No one has seen this yet.
+                  </div>
+                </div>
               </div>
             </div>
           </div>

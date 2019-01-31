@@ -687,12 +687,13 @@
 
 .body-story-details {
   overflow: hidden;
-  //padding: 4px 18px 4px 15px;
   position: relative;
   flex: 1;
+  display: flex;
+  flex-direction: row;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    //padding: 7px 20px;
+  .msg-no-content {
+    margin: auto;
   }
 }
 
