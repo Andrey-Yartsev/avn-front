@@ -197,6 +197,7 @@ import request from "@/utils/request";
 
 import PostsModal from "./PostsModal";
 import MobileHeader from "@/components/header/Mobile";
+import CalcCount from "./calcCount";
 
 const colorSchemes = [
   "#FF5979",
@@ -218,6 +219,7 @@ const altColor = "#16181A";
 
 export default {
   name: "app",
+  mixins: [CalcCount],
   components: {
     PostsModal,
     MobileHeader
@@ -525,16 +527,6 @@ export default {
       }
 
       this.processData(data);
-    },
-    add(a, b) {
-      return a + b;
-    },
-    calcCount(statData, subKey) {
-      let values = Object.values(statData);
-      if (subKey) {
-        values = values.map(v => v[subKey]);
-      }
-      return values.reduce(this.add, 0);
     },
     processData(data) {
       this.showedStats[data.statistics.code] = data.statistics.time;

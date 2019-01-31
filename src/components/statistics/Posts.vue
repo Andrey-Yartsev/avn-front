@@ -9,11 +9,13 @@ import moment from "moment";
 import BrowserStore from "store";
 // import pluralize from "pluralize";
 
+import CalcCount from "./calcCount";
+
 const altColor = "#16181A";
 
 export default {
   name: "StatisticsPosts",
-
+  mixins: [CalcCount],
   props: {
     dataSet: {
       type: Array,
@@ -24,24 +26,20 @@ export default {
       required: true
     }
   },
-
   data() {
     return {
       loading: true,
       chartUpdateTimeoutId: null
     };
   },
-
   mounted() {
     this.init();
   },
-
   watch: {
     period() {
       this.init();
     }
   },
-
   methods: {
     init() {
       this.typeTitles = {
@@ -115,6 +113,15 @@ export default {
     updateChart(period, type) {
       this.charts[period][type].validateData();
     },
+    updateCount(data, type) {
+      const n = this.calcCount(
+        data.statistics.data,
+        type === "post_like" ? "total" : null
+      );
+      let counter = document.getElementById(type + "_charts_counter");
+      let count = counter.getElementsByClassName("count")[0];
+      count.innerHTML = n;
+    },
     processData(data) {
       const period = this.period;
       for (let type of Object.keys(this.chartTypes)) {
@@ -122,13 +129,7 @@ export default {
           case type + "_detailed_histogram_" + period:
             this.updateChartData(data, period, type);
             this.updateChart(period, type);
-            break;
-          case type + "_count_" + period:
-            if ("NaN" !== data.statistics.data) {
-              let counter = document.getElementById(type + "_charts_counter");
-              let count = counter.getElementsByClassName("count")[0];
-              count.innerHTML = data.statistics.data;
-            }
+            this.updateCount(data, type);
             break;
         }
       }
