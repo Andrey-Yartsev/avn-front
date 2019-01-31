@@ -496,6 +496,10 @@
     line-height: 23px;
     margin-right: 3px;
   }
+
+  &_clickable {
+    cursor: pointer;
+  }
 }
 
 .story-details-info {

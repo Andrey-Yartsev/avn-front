@@ -144,7 +144,7 @@
             @click.prevent="saveToHighlights"
           />
           <div
-            class="story-viewer"
+            class="story-viewer story-viewer_clickable"
             v-if="currentStory.viewersCount"
             @click="openViewersModal"
           >
