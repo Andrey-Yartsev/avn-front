@@ -31,11 +31,11 @@
   .btn-block & {
     color: $main-color;
     opacity: .3;
+  }
 
-    &:hover {
-      color: red;
-      opacity: 1;
-    }
+  .btn-block.active & {
+    color: red;
+    opacity: 1;
   }
 
   &:after {
