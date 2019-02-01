@@ -9,12 +9,32 @@
               <div class="page-title page-title_reset-gl">
                 Highlight
               </div>
-              <button disabled="disabled" class="btn sm">
-                Next
-              </button>
+              <div class="btns-highlights">
+                <button disabled="disabled" class="btn sm">
+                  Next
+                </button>
+                <button class="btn alt sm">
+                  Add
+                </button>
+              </div>
             </div>
             <div class="popup-body">
               <div class="popup-container-scroll">
+                <div class="highlights-form">
+                  <div class="avatar-block">
+                    <span class="avatar">
+                      <span class="avatar__img"></span>
+                    </span>
+                    <label for="avatar" class="select-user-image"></label>
+                    <input type="file" id="avatar" accept=".jpg,.jpeg,.gif,.png">
+                    <span class="reset-user-image reset-avatar"></span>
+                  </div>
+
+                  <div class="form-group form-group_clear-gaps">
+                      <input name="name" maxlength="100" placeholder="Highlights" class="text-centered">
+                  </div>
+                </div>
+
                 <VuePerfectScrollbar class="popup-content-scroll">
                   <div class="explore-wrapper highlights">
                     <div

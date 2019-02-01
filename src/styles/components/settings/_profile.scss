@@ -81,42 +81,7 @@
     }
   }
   .reset-user-image {
-    position: absolute;
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
-    text-shadow: 0 5px 30px rgba(#000, 0.2);
     z-index: 3;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 18px;
-    }
-    &:before {
-      @include icon-font;
-      content: "\E600";
-      @include position-center;
-      text-shadow: $shadow-light;
-    }
-    &.reset-bg {
-      bottom: 27px;
-      right: 27px;
-      z-index: 4;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        bottom: 23px;
-        right: 24px;
-      }
-    }
-    &.reset-avatar {
-      bottom: 24px;
-      left: 69px;
-      z-index: 4;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        bottom: 22px;
-        left: 55px;
-      }
-    }
   }
 
   &:before {
@@ -134,6 +99,47 @@
         transparent 100%
       );
     }
+  }
+}
+
+.reset-user-image {
+  position: absolute;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 0 5px 30px rgba(#000, 0.2);
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    font-size: 18px;
+  }
+
+  &.reset-bg {
+    bottom: 27px;
+    right: 27px;
+    z-index: 4;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      bottom: 23px;
+      right: 24px;
+    }
+  }
+
+  &.reset-avatar {
+    bottom: 24px;
+    left: 69px;
+    z-index: 4;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      bottom: 22px;
+      left: 55px;
+    }
+  }
+
+  &:before {
+    @include icon-font;
+    content: "\E600";
+    @include position-center;
+    text-shadow: $shadow-light;
   }
 }
 

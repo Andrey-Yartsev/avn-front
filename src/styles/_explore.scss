@@ -661,3 +661,48 @@
     }
   }
 }
+
+.highlights-form {
+  background-color: $white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+  .select-user-image {
+
+    .header-scrolled & {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .avatar-block {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    font-size: 100px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 80px;
+    }
+  }
+
+  .form-group {
+    width: 80%;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 50%;
+    }
+  }
+}
+
+.btns-highlights {
+
+  .btn {
+    width: 66px;
+  }
+}
