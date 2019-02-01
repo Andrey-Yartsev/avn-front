@@ -115,7 +115,7 @@
                   <div id="visitors_users_donut"></div>
                   <div class="visitors_data">
                     <div class="visitors_users">
-                      Followers <span ref="visitorsUsers">0</span>
+                      Users <span ref="visitorsUsers">0</span>
                     </div>
                     <div class="visitors_guests">
                       Guests <span ref="visitorsGuests">0</span>
@@ -408,7 +408,7 @@ export default {
         this.mapChart.validateData();
       }
     },
-    updateProfileDonut(donut, statData, refKey, color) {
+    updateProfileDonut2(donut, statData, refKey, color) {
       if (!statData) {
         return;
       }
@@ -424,7 +424,7 @@ export default {
       donut.validateData();
       this.$refs[refKey].innerHTML = statData;
     },
-    updateProfileDonutCount(donut, statData, refKey, color, hasThird) {
+    updateProfileDonut3(donut, statData, refKey, color, hasThird) {
       if (!statData) {
         return;
       }
@@ -459,7 +459,7 @@ export default {
       donut.validateData();
       this.$refs[refKey].innerHTML = statData;
     },
-    updateProfileDeviceDonutCount(donut, statData) {
+    updateProfileDeviceDonut(donut, statData) {
       if ("undefined" !== typeof statData.mobile) {
         if ("#7c8b96" === donut.dataProvider[0].color) {
           donut.dataProvider = [];
@@ -792,44 +792,25 @@ export default {
         //   break;
         //
 
+        // visitors
         case "view_profile_count_today":
-          this.updateProfileDonut(
+          this.updateProfileDonut2(
             this.visitorsCountDonut,
             statData,
             "visitorsToday",
             "#FF335A"
           );
           break;
-
-        case "view_profile_user_count_today":
-          this.updateProfileDonut(
-            this.visitorsUsersCountDonut,
-            statData,
-            "visitorsUsers",
-            "#ff9501"
-          );
-          break;
-
-        case "view_profile_guest_count_today":
-          this.updateProfileDonutCount(
-            this.visitorsUsersCountDonut,
-            statData,
-            "visitorsGuests",
-            "#ff9501"
-          );
-          break;
-
         case "view_profile_count_last_week":
-          this.updateProfileDonutCount(
-            this.visitorsUsersCountDonut,
+          this.updateProfileDonut3(
+            this.visitorsCountDonut,
             statData,
             "visitorsWeek",
             "#FF335A"
           );
           break;
-
         case "view_profile_count_all":
-          this.updateProfileDonutCount(
+          this.updateProfileDonut3(
             this.visitorsCountDonut,
             statData,
             "visitorsTotal",
@@ -838,11 +819,26 @@ export default {
           );
           break;
 
-        case "view_profile_by_device_count_today":
-          this.updateProfileDeviceDonutCount(
-            this.visitorsPlatformDonut,
-            statData
+        // users/guests
+        case "view_profile_user_count_today":
+          this.updateProfileDonut2(
+            this.visitorsUsersCountDonut,
+            statData,
+            "visitorsUsers",
+            "#ff9501"
           );
+          break;
+        case "view_profile_guest_count_last_week":
+          this.updateProfileDonut3(
+            this.visitorsUsersCountDonut,
+            statData,
+            "visitorsGuests",
+            "#ff9501"
+          );
+          break;
+
+        case "view_profile_by_device_count_today":
+          this.updateProfileDeviceDonut(this.visitorsPlatformDonut, statData);
           break;
 
         case "view_profile_by_country_count_today":
