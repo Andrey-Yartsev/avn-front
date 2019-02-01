@@ -10,8 +10,8 @@
         </button>
       </div>
       <div class="stories-group">
-        <div class="stories">
-          <VuePerfectScrollbar>
+        <VuePerfectScrollbar>
+          <div class="stories">
             <a href="#" class="story" v-if="isOwner(userId)">
               <div
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
@@ -122,8 +122,8 @@
                 </div>
               </div>
             </div>
-          </VuePerfectScrollbar>
-        </div>
+          </div>
+        </VuePerfectScrollbar>
       </div>
     </div>
   </div>
