@@ -31,25 +31,39 @@
             <div class="popup-body">
               <div class="popup-container-scroll">
                 <div class="highlights-form" v-if="step === 2">
-                  <div class="avatar-block">
-                    <span class="avatar">
-                      <span class="avatar__img"></span>
-                    </span>
-                    <label for="avatar" class="select-user-image"></label>
-                    <input
-                      type="file"
-                      id="avatar"
-                      accept=".jpg,.jpeg,.gif,.png"
-                    />
-                    <span class="reset-user-image reset-avatar"></span>
-                  </div>
+                  <!--<div class="avatar-block">-->
+                    <!--<span class="avatar">-->
+                      <!--<span class="avatar__img"></span>-->
+                    <!--</span>-->
+                    <!--<label for="avatar" class="select-user-image"></label>-->
+                    <!--<input-->
+                      <!--type="file"-->
+                      <!--id="avatar"-->
+                      <!--accept=".jpg,.jpeg,.gif,.png"-->
+                    <!--/>-->
+                    <!--<span class="reset-user-image reset-avatar"></span>-->
+                  <!--</div>-->
 
+                  <div class="title-block text-centered">
+                    Choose cover picture
+                  </div>
+                  <div class="list-cover-variation">
+                    <div class="cover-highlight selected">
+                        <img src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg" alt="">
+                    </div>
+                    <div class="cover-highlight">
+                      <img src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg" alt="">
+                    </div>
+                    <div class="cover-highlight">
+                      <img src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg" alt="">
+                    </div>
+                  </div>
                   <div class="form-group form-group_clear-gaps">
                     <input
                       name="name"
                       maxlength="100"
                       placeholder="Highlights"
-                      class="text-centered"
+                      class="text-centered lg"
                       v-model="title"
                     />
                   </div>
