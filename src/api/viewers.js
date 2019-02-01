@@ -10,5 +10,15 @@ export default {
         marker
       }
     });
+  },
+  blockUser({ userId, storyId }) {
+    return tokenRequest(`stories/${storyId}/block/${userId}`, {
+      method: "PUT"
+    });
+  },
+  unblockUser({ userId, storyId }) {
+    return tokenRequest(`stories/${storyId}/unblock/${userId}`, {
+      method: "PUT"
+    });
   }
 };

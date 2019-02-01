@@ -24,6 +24,24 @@ const mutations = {
   },
   setSource(state, { source }) {
     state.source = source;
+  },
+  userBlockSuccess(state, { userId }) {
+    state.posts = state.posts.map(viewer => {
+      if (viewer.id === userId) {
+        return { ...viewer, blocked: true };
+      }
+
+      return viewer;
+    });
+  },
+  userUnblockSuccess(state, { userId }) {
+    state.posts = state.posts.map(viewer => {
+      if (viewer.id === userId) {
+        return { ...viewer, blocked: false };
+      }
+
+      return viewer;
+    });
   }
 };
 
@@ -46,6 +64,32 @@ const actions = {
   },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
+  },
+  blockUser({ commit }, { storyId, userId }) {
+    return ViewersApi.blockUser({ storyId, userId })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function() {
+            commit("userBlockSuccess", { storyId, userId });
+          });
+        }
+      })
+      .catch(err => {
+        commit("userBlockFail", err);
+      });
+  },
+  unblockUser({ commit }, { storyId, userId }) {
+    return ViewersApi.unblockUser({ storyId, userId })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function() {
+            commit("userUnblockSuccess", { storyId, userId });
+          });
+        }
+      })
+      .catch(err => {
+        commit("userUnblockFail", err);
+      });
   }
 };
 
