@@ -10,17 +10,27 @@
                 Highlight
               </div>
               <div class="btns-highlights">
-                <button disabled="disabled" class="btn sm">
+                <button
+                  class="btn sm"
+                  v-if="step === 1"
+                  :disabled="!hasChecked"
+                  @click="step = 2"
+                >
                   Next
                 </button>
-                <button class="btn alt sm">
+                <button
+                  class="btn alt sm"
+                  v-if="step === 2"
+                  :disabled="!title"
+                  @click="save"
+                >
                   Add
                 </button>
               </div>
             </div>
             <div class="popup-body">
               <div class="popup-container-scroll">
-                <div class="highlights-form">
+                <div class="highlights-form" v-if="step === 2">
                   <div class="avatar-block">
                     <span class="avatar">
                       <span class="avatar__img"></span>
@@ -40,11 +50,12 @@
                       maxlength="100"
                       placeholder="Highlights"
                       class="text-centered"
+                      v-model="title"
                     />
                   </div>
                 </div>
 
-                <VuePerfectScrollbar class="popup-content-scroll">
+                <VuePerfectScrollbar class="popup-content-scroll" v-if="step === 1">
                   <div class="explore-wrapper highlights">
                     <div
                       v-for="story in stories"
@@ -90,12 +101,17 @@ export default {
   },
   data() {
     return {
-      checked: {}
+      checked: {},
+      step: 1,
+      title: ""
     };
   },
   computed: {
     stories() {
       return this.$store.state.stories.posts;
+    },
+    hasChecked() {
+      return !!Object.keys(this.checked).length;
     }
   },
   methods: {
