@@ -78,9 +78,9 @@
                       <a
                         href="#"
                         class="btn-block"
-                        :class="{ active: user.isBlocked }"
+                        :class="{ active: user.isBlockedStory }"
                         @click.prevent="
-                          user.isBlocked
+                          user.isBlockedStory
                             ? unblockUser(user.id)
                             : blockUser(user.id)
                         "
