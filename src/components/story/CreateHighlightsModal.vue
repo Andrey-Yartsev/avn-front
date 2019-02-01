@@ -26,12 +26,21 @@
                       <span class="avatar__img"></span>
                     </span>
                     <label for="avatar" class="select-user-image"></label>
-                    <input type="file" id="avatar" accept=".jpg,.jpeg,.gif,.png">
+                    <input
+                      type="file"
+                      id="avatar"
+                      accept=".jpg,.jpeg,.gif,.png"
+                    />
                     <span class="reset-user-image reset-avatar"></span>
                   </div>
 
                   <div class="form-group form-group_clear-gaps">
-                      <input name="name" maxlength="100" placeholder="Highlights" class="text-centered">
+                    <input
+                      name="name"
+                      maxlength="100"
+                      placeholder="Highlights"
+                      class="text-centered"
+                    />
                   </div>
                 </div>
 
