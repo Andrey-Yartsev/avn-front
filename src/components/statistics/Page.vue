@@ -249,9 +249,11 @@ export default {
   },
   beforeDestroy() {
     ws.removeListener("message", this.onData);
-    ws.send({
-      act: "clear_statistics"
-    });
+    if (ws.connected) {
+      ws.send({
+        act: "clear_statistics"
+      });
+    }
   },
   methods: {
     initWs() {
