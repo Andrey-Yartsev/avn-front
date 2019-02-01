@@ -1,21 +1,31 @@
 <template>
   <div v-if="otpAuth">
-    <h2>Hi</h2>
-    <form v-on:submit.stop.prevent="sendOtp">
-      <input
-        class="lg rounded otpCode"
-        type="text"
-        placeholder="Code"
-        v-model="otpCode"
-      />
-      <div class="hidden error">Email or password incorrect</div>
-      <button type="submit" class="btn lg alt block" :disabled="!otpCode">
-        Send
-      </button>
-      <div class="signUp">
-        <router-link to="/logout">Switch user</router-link>
-      </div>
-    </form>
+    <div class="auth-block auth-block_sm-size">
+      <h2>Hi</h2>
+      <form v-on:submit.stop.prevent="sendOtp">
+        <input
+          class="rounded otpCode"
+          :class="{ lg: largeControls }"
+          type="text"
+          placeholder="Code"
+          v-model="otpCode"
+        />
+        <div class="hidden error">Email or password incorrect</div>
+        <button
+          type="submit"
+          class="btn lalt block"
+          :disabled="!otpCode"
+          :class="{ lg: largeControls }"
+        >
+          Send
+        </button>
+        <div class="signUp">
+          <router-link to="/logout" class="switch-link"
+            >Switch user</router-link
+          >
+        </div>
+      </form>
+    </div>
   </div>
   <div v-else>
     <div :class="containerClass">
