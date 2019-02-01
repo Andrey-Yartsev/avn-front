@@ -38,7 +38,7 @@
           @focus="() => (expanded = true)"
           class="sm"
           placeholder="What is going on?"
-          maxlength="500"
+          maxlength="1000"
           v-model="postMsg"
         ></textarea>
         <VuePerfectScrollbar class="addFileCollectionView">

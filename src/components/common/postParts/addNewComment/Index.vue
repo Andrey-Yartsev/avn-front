@@ -6,6 +6,7 @@
       rows="1"
       v-model="message"
       ref="message"
+      maxlength="200"
       @keypress.enter.prevent="sendComment"
     ></textarea>
     <button
