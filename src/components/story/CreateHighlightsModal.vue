@@ -9,31 +9,29 @@
             </div>
             <div class="popup-body">
               <div class="popup-container-scroll">
-                <div class="popup-content-scroll">
+                <VuePerfectScrollbar class="popup-content-scroll">
                   <div class="explore-wrapper highlights">
-                    <VuePerfectScrollbar>
-                      <div
-                        v-for="story in stories"
-                        :key="story.id"
-                        class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
-                        :class="{ selected: !!checked[story.id] }"
-                        @click="check(story.id)"
-                      >
-                        <div class="timestamp timestamp_unit">
-                          <div class="timestamp__date">
-                            30
-                          </div>
-                          sep
+                    <div
+                      v-for="story in stories"
+                      :key="story.id"
+                      class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
+                      :class="{ selected: !!checked[story.id] }"
+                      @click="check(story.id)"
+                    >
+                      <div class="timestamp timestamp_unit">
+                        <div class="timestamp__date">
+                          30
                         </div>
-                        <div class="postLink">
-                          <figure class="explore-media">
-                            <img :src="story.thumb.source" />
-                          </figure>
-                        </div>
+                        sep
                       </div>
-                    </VuePerfectScrollbar>
+                      <div class="postLink">
+                        <figure class="explore-media">
+                          <img :src="story.thumb.source" />
+                        </figure>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </VuePerfectScrollbar>
               </div>
             </div>
           </div>
