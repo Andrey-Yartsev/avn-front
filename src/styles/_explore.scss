@@ -721,6 +721,7 @@
   width: 80px;
   height: 80px;
   flex: 0 0 80px;
+  cursor: pointer;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100px;
