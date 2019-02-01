@@ -45,7 +45,12 @@
               </div>
               <div class="explore">
                 <div class="userCollectionView">
-                  <Users :items="users" :loading="false" :query="page" />
+                  <Users
+                    :items="users"
+                    :loading="false"
+                    :query="page"
+                    actionPrefix="followers"
+                  />
                   <div
                     class="loaderWrap loader-content"
                     v-if="infinityScrollLoading"
@@ -79,7 +84,7 @@ import Loader from "@/components/common/Loader";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
-import Users from "@/components/pages/search/types/Users.vue";
+import Users from "@/components/users/Users.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";

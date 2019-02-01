@@ -16,6 +16,15 @@
         <div class="explore">
           <div :class="wrapperClass">
             <component
+              v-if="component === 'Users'"
+              :is="component"
+              :items="items"
+              :loading="loading"
+              :query="query"
+              actionPrefix="search/page"
+            />
+            <component
+              v-else
               :is="component"
               :items="items"
               :loading="loading"
@@ -31,7 +40,7 @@
 </template>
 
 <script>
-import Users from "./types/Users";
+import Users from "@/components/users/Users";
 import Posts from "./types/Posts";
 import Videos from "./types/Videos";
 import Photos from "./types/Photos";

@@ -34,7 +34,7 @@
             :profile="profile"
             @openDropdawn="showDropdawn = true"
             @hideDropdawn="showDropdawn = false"
-            actionPrefix="search/page"
+            :actionPrefix="actionPrefix"
             class="hidden-mobile"
           />
         </div>
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import SubscribeButton from "./SubscribeButton";
-import FollowButton from "./FollowButton";
+import SubscribeButton from "../pages/search/SubscribeButton";
+import FollowButton from "../pages/search/FollowButton";
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import User from "@/mixins/user";
 
@@ -75,6 +75,15 @@ export default {
     };
   },
 
-  props: ["profile"]
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    },
+    actionPrefix: {
+      type: String,
+      required: true
+    }
+  }
 };
 </script>
