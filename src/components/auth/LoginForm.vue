@@ -36,6 +36,7 @@
             :class="{ lg: largeControls }"
             v-model="email"
             v-validate="'required|email'"
+            data-vv-validate-on="blur"
           />
           <div class="tooltip-info" v-if="fieldError('email')">
             {{ fieldError("email") }}
@@ -54,6 +55,7 @@
             :class="{ lg: largeControls }"
             v-model="password"
             v-validate="'required'"
+            data-vv-validate-on="blur"
           />
           <div class="tooltip-info" v-if="fieldError('password')">
             {{ fieldError("password") }}

@@ -14,6 +14,7 @@
           name="name"
           placeholder="Name"
           autocomplete="name"
+          data-vv-validate-on="blur"
         />
         <div class="tooltip-info" v-if="fieldError('name')">
           {{ fieldError("name") }}
@@ -32,6 +33,7 @@
           name="email"
           placeholder="Email"
           autocomplete="email"
+          data-vv-validate-on="blur"
         />
         <div class="tooltip-info" v-if="fieldError('email')">
           {{ fieldError("email") }}
@@ -51,6 +53,7 @@
           minlength="6"
           placeholder="Password"
           autocomplete="new-password"
+          data-vv-validate-on="blur"
         />
         <div class="tooltip-info" v-if="fieldError('password')">
           {{ fieldError("password") }}
