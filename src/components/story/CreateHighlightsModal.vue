@@ -50,15 +50,12 @@
                   <div class="list-cover-variation">
                     <div
                       class="cover-highlight"
-                      :class="{selected: choosenCover == thumb.id}"
+                      :class="{ selected: choosenCover == thumb.id }"
                       v-for="thumb in thumbs"
                       :key="thumb.id"
                       @click="choosenCover = thumb.id"
                     >
-                      <img
-                        :src="thumb.thumb.source"
-                        alt=""
-                      />
+                      <img :src="thumb.thumb.source" alt="" />
                     </div>
                   </div>
                   <div class="form-group form-group_clear-gaps">
@@ -137,7 +134,7 @@ export default {
     thumbs() {
       return this.$store.state.stories.posts.filter(post => {
         return !!this.checked[post.id];
-      })
+      });
     }
   },
   methods: {
