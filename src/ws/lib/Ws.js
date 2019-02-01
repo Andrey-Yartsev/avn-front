@@ -73,6 +73,7 @@ export default class Ws extends EventEmitter {
   close() {
     this.doNotReconnect = true;
     this.ws.close();
+    console.log(this.type + " disconnected");
   }
   send(data) {
     data.sess = Store.state.auth.token;

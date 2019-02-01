@@ -195,7 +195,7 @@ export default {
     },
     loggedIn(loggedIn) {
       if (!loggedIn) {
-        this.webSocket.close();
+        this.initWs();
         this.wasLogout = true;
       } else {
         if (this.wasLogout) {
