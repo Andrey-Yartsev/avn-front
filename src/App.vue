@@ -204,8 +204,10 @@ export default {
       }
       this.initLoggedInClass();
     },
-    loading() {
-      this.initWs();
+    loading(loading) {
+      if (!loading) {
+        this.initWs();
+      }
     }
   },
   methods: {

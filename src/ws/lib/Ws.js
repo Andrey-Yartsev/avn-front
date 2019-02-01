@@ -71,6 +71,7 @@ export default class Ws extends EventEmitter {
     this.start();
   }
   close() {
+    this.connected = false;
     this.doNotReconnect = true;
     this.ws.close();
     console.log(this.type + " disconnected");
