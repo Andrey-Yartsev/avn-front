@@ -28,7 +28,7 @@ const mutations = {
   userBlockSuccess(state, { userId }) {
     state.posts = state.posts.map(viewer => {
       if (viewer.id === userId) {
-        return { ...viewer, blocked: true };
+        return { ...viewer, isBlocked: true };
       }
 
       return viewer;
@@ -37,7 +37,7 @@ const mutations = {
   userUnblockSuccess(state, { userId }) {
     state.posts = state.posts.map(viewer => {
       if (viewer.id === userId) {
-        return { ...viewer, blocked: false };
+        return { ...viewer, isBlocked: false };
       }
 
       return viewer;

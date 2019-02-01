@@ -78,7 +78,12 @@
                       <a
                         href="#"
                         class="btn-block"
-                        @click.prevent="blockStoryFromUser"
+                        :class="{ active: user.isBlocked }"
+                        @click.prevent="
+                          user.isBlocked
+                            ? unblockUser(user.id)
+                            : blockUser(user.id)
+                        "
                       >
                         <span class="icn-block icn-item"></span>
                       </a>
@@ -160,8 +165,17 @@ export default {
     close() {
       this.$store.dispatch("modal/hide", { name: "storyViewers" });
     },
-    blockStoryFromUser() {
-      alert("Block story from user");
+    blockUser(userId) {
+      this.$store.dispatch("viewers/blockUser", {
+        storyId: this.current.id,
+        userId
+      });
+    },
+    unblockUser(userId) {
+      this.$store.dispatch("viewers/unblockUser", {
+        storyId: this.current.id,
+        userId
+      });
     },
     saveFile() {
       const xhr = new XMLHttpRequest();

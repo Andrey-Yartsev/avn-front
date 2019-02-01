@@ -55,7 +55,10 @@
                   </div>
                 </div>
 
-                <VuePerfectScrollbar class="popup-content-scroll" v-if="step === 1">
+                <VuePerfectScrollbar
+                  class="popup-content-scroll"
+                  v-if="step === 1"
+                >
                   <div class="explore-wrapper highlights">
                     <div
                       v-for="story in stories"
@@ -103,7 +106,8 @@ export default {
     return {
       checked: {},
       step: 1,
-      title: ""
+      title: "",
+      choosenCover: undefined
     };
   },
   computed: {
@@ -124,11 +128,21 @@ export default {
     },
     close() {
       this.$store.dispatch("modal/hide", { name: "createHighlights" });
+    },
+    save() {
+      alert(" SAVE ");
     }
   },
   created() {
     this.$store.dispatch("stories/setSource", { source: "archive" });
     this.$store.dispatch("stories/getPosts");
+  },
+  watch: {
+    step() {
+      if (this.step === 2) {
+        this.choosenCover = Object.keys(this.checked)[0];
+      }
+    }
   }
 };
 </script>
