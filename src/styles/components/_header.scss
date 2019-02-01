@@ -985,6 +985,13 @@
       content: "\E615";
     }
   }
+
+  + .page-header-title {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-top: 20px;
+    }
+  }
 }
 
 .sidebar-shown.disable-scroll-page {

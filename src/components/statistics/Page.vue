@@ -1,6 +1,31 @@
 <template>
   <div>
     <MobileHeader />
+    <div class="page-header-title">
+      <div class="page-name">Statistics</div>
+      <div class="more-functions">
+        <div class="more-functions__overlay"></div>
+        <div class="more-functions__btn more-functions__btn_arrow">
+          <div class="more-functions__btn-text"></div>
+        </div>
+        <div class="more-functions__dropdown">
+          <div class="more-functions__dropdown-inside">
+            <ul>
+              <li>
+                <button type="button" class="report">
+                  Report post
+                </button>
+              </li>
+              <li>
+                <button type="button" class="btn-copy-link">
+                  Copy link to post
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="boxes">
       <PostsModal
         v-if="$store.state.modal.statPosts.show"

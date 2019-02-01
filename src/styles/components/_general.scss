@@ -592,3 +592,32 @@ video {
   font-weight: 500;
   font-size: 18px;
 }
+
+.page-header-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: -7px;
+
+  .more-functions {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 10px;
+    }
+
+    &__btn {
+      padding: 0;
+    }
+  }
+}
+
+.page-name {
+  opacity: .5;
+  font-size: 17px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    font-size: 21px;
+  }
+}

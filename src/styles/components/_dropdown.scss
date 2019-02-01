@@ -136,6 +136,34 @@
         display: none;
       }
     }
+
+    &_arrow {
+
+      &:before {
+        content: "\E646";
+        background-image: none;
+        font-size: 24px;
+        line-height: 12px;
+        width: 24px;
+        height: 12px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          position: relative;
+          left: auto;
+          top: auto;
+          transform: translate(0, 0);
+        }
+      }
+
+      + .more-functions__dropdown {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: -30px;
+        }
+      }
+    }
   }
 
   &__dropdown {
