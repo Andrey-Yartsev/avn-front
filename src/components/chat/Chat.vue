@@ -13,7 +13,7 @@
       <div
         v-if="isHome"
         class="start-chat-wrapper"
-        :class="{ hidden: hasActiveChats }"
+        :class="{ 'hidden-mobile': hasActiveChats }"
       >
         <div class="chatHeader chatHeader_add-shadow no-nav">
           <div class="selectedChatHeader">
