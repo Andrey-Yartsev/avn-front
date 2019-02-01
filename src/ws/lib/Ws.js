@@ -7,16 +7,16 @@ import Store from "@/store";
 export default class Ws extends EventEmitter {
   constructor(actions, type) {
     super();
-    this.type = type;
+    this.type = type || "ws";
     this.actions = actions;
     this.doNotReconnect = false;
   }
   start(reconnect) {
     this.connecting = true;
     if (reconnect) {
-      console.log("ws reconnected");
+      console.log(this.type + " reconnected");
     } else {
-      console.log("ws connected");
+      console.log(this.type + " connected");
     }
     const tz = moment().format("ZZ");
     let ws;
@@ -72,7 +72,6 @@ export default class Ws extends EventEmitter {
   }
   close() {
     this.doNotReconnect = true;
-    console.log("ws disconnected");
     this.ws.close();
   }
   send(data) {

@@ -160,6 +160,9 @@ export default {
         return false;
       }
       return !!this.$store.state.profile.home.fetchProfileError;
+    },
+    loginInProgress() {
+      return this.$store.state.auth.loginInProgress;
     }
   },
   watch: {
@@ -200,6 +203,8 @@ export default {
         }
       }
       this.initLoggedInClass();
+    },
+    loading() {
       this.initWs();
     }
   },
@@ -212,6 +217,9 @@ export default {
       }
     },
     initWs() {
+      if (this.webSocket && this.webSocket.connected) {
+        this.webSocket.close();
+      }
       if (this.loggedIn) {
         this.webSocket = ws;
       } else {
