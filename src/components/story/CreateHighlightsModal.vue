@@ -2,10 +2,16 @@
   <Modal :onClose="close">
     <template slot="content">
       <div class="popup-container popup-container_hfluid highlights-popup">
-        <div class="container-popup">
-          <div class="content">
-            <div class="popup-title">
-              Highlight
+        <div class="content">
+          <div class="container-popup">
+            <div class="popup-title popup-title_sticky-mob">
+              <button class="header-return-btn"></button>
+              <div class="page-title page-title_reset-gl">
+                Highlight
+              </div>
+              <button disabled="disabled" class="btn sm">
+                Next
+              </button>
             </div>
             <div class="popup-body">
               <div class="popup-container-scroll">

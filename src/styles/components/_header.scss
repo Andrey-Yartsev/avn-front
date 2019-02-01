@@ -550,6 +550,13 @@
   @include ellipsis;
   font-size: 15px;
 
+  &_reset-gl {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 0;
+    }
+  }
+
   .user-login {
     font-weight: 400;
     opacity: 1;
@@ -558,6 +565,7 @@
     }
   }
 }
+
 .header-avatar {
   font-size: 24px;
   position: absolute;

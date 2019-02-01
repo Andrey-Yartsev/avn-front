@@ -317,9 +317,12 @@
 
       .popup-container_hfluid & {
         background-color: $white;
-        border-radius: 0 0 5px 5px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 0 0 5px 5px;
+        }
       }
     }
 
@@ -476,6 +479,14 @@
 
         &:after {
           content: "\E60D";
+        }
+
+        .explore-media {
+
+          &:before {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
       }
     }
