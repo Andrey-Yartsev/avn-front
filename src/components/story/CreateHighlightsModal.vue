@@ -48,21 +48,15 @@
                     Choose cover picture
                   </div>
                   <div class="list-cover-variation">
-                    <div class="cover-highlight selected">
+                    <div
+                      class="cover-highlight"
+                      :class="{selected: choosenCover == thumb.id}"
+                      v-for="thumb in thumbs"
+                      :key="thumb.id"
+                      @click="choosenCover = thumb.id"
+                    >
                       <img
-                        src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="cover-highlight">
-                      <img
-                        src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="cover-highlight">
-                      <img
-                        src="https://storage.onmyteam.com/get/dev/files/9/96/96246c6396a462709066ae052895f93c/298x168_2d5c6a4c7698b3021ecbc73b0eb7bacc525083.jpg"
+                        :src="thumb.thumb.source"
                         alt=""
                       />
                     </div>
@@ -139,6 +133,11 @@ export default {
     },
     hasChecked() {
       return !!Object.keys(this.checked).length;
+    },
+    thumbs() {
+      return this.$store.state.stories.posts.filter(post => {
+        return !!this.checked[post.id];
+      })
     }
   },
   methods: {
