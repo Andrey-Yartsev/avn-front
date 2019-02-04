@@ -67,6 +67,10 @@ const state = {
   createHighlights: {
     show: false,
     data: {}
+  },
+  chooseHighlight: {
+    show: false,
+    data: {}
   }
 };
 

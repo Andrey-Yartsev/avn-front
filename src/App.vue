@@ -29,6 +29,9 @@
       <CreateHighlightsModal
         v-if="this.$store.state.modal.createHighlights.show"
       />
+      <ChooseHighlightModal
+        v-if="this.$store.state.modal.chooseHighlight.show"
+      />
       <SubscriptionConfirmModal
         v-if="this.$store.state.modal.subscriptionConfirm.show"
       />
@@ -53,6 +56,7 @@ import ChatModal from "@/components/chat/Modal";
 import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
+import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
 import UserReportModal from "@/components/common/UserReportModal";
 import SubscribeModal from "@/components/subscription/SubscribeModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
@@ -106,7 +110,8 @@ export default {
     LoginModal,
     SignupModal,
     StoryViewerModal,
-    CreateHighlightsModal
+    CreateHighlightsModal,
+    ChooseHighlightModal
   },
   mixins: [ColorScheme],
   data() {

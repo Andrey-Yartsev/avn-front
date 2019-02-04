@@ -6,7 +6,8 @@ import ws from "@/ws";
 
 const initState = {
   newPost: undefined,
-  deletedPost: undefined
+  deletedPost: undefined,
+  newCollection: undefined
 };
 
 const state = { ...initState };
@@ -24,6 +25,10 @@ const mutations = {
 
   savePostSuccess(state, data) {
     state.newPost = data;
+  },
+
+  saveCollectionSuccess(state, data) {
+    state.newCollection = data;
   }
 };
 
@@ -66,6 +71,16 @@ const actions = {
   },
   watch(opt, { postId }) {
     return StoriesApi.watchStory({ postId });
+  },
+  saveCollection({ commit }, { data }) {
+    return StoriesApi.saveCollection(data)
+      .then(async response => {
+        if (response.status === 200) {
+          const newPost = await response.json();
+          commit("saveCollectionSuccess", newPost);
+        }
+      })
+      .catch(() => {});
   }
 };
 

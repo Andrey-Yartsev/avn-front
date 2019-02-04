@@ -33,6 +33,7 @@ import contacts from "@/store/modules/contacts";
 import forgot from "@/store/modules/forgot";
 import paidMessage from "@/store/modules/paidMessage";
 import viewers from "@/store/modules/viewers";
+import highlights from "@/store/modules/highlights";
 
 Vue.use(Vuex);
 
@@ -71,7 +72,8 @@ const store = new Vuex.Store({
     contacts,
     forgot,
     paidMessage,
-    viewers
+    viewers,
+    highlights
   }
 });
 

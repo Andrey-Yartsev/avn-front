@@ -451,7 +451,11 @@ export default {
     },
 
     saveToHighlights() {
-      alert("save to highlights");
+      this.pause();
+      this.$store.dispatch("modal/show", {
+        name: "chooseHighlight",
+        data: {}
+      });
     },
 
     videoEventPlay() {

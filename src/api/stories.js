@@ -32,6 +32,16 @@ export default {
       body: JSON.stringify(data)
     });
   },
+  saveCollection(data) {
+    return tokenRequest(`stories/collections`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  },
   deletePost({ postId }) {
     return tokenRequest(`stories/${postId}`, {
       method: "DELETE",
