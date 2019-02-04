@@ -601,15 +601,15 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       right: auto;
       bottom: auto;
-      border-bottom: 12px solid $white;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      left: 50%;
-      margin-left: -12px;
-      top: 100%;
-      margin-top: 5px;
+      top: 39px;
+      left: calc(50% - 9px);
+      background-color: $white;
+      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+      width: 17px;
+      height: 17px;
+      transform: translate(0, 20px) rotate(45deg);
+      z-index: 0;
       opacity: 0;
-      transform: translate(0, 20px);
       transition: opacity 0.4s ease, transform 0.4s ease;
       pointer-events: none;
     }
@@ -645,7 +645,8 @@
     }
     &:after {
       opacity: 1;
-      transform: translate(0, 0);
+      //transform: translate(0, 0);
+      transform: translate(0, 0) rotate(45deg);
     }
   }
   .sidebar & {
@@ -719,11 +720,19 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      border-bottom: 12px solid $white;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      left: 40px;
-      margin-top: -12px;
+      position: absolute;
+      content: "";
+      right: auto;
+      bottom: auto;
+      top: -9px;
+      left: 38px;
+      background-color: $white;
+      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+      width: 17px;
+      height: 17px;
+      transform: translate(0, 0) rotate(45deg);
+      z-index: 0;
+      pointer-events: none;
     }
   }
 
