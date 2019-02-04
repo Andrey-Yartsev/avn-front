@@ -615,6 +615,18 @@
   }
 }
 
+.popup-container-scroll {
+
+  .loaderWrap {
+    margin-top: -5px;
+    background-color: $white;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}
+
 .popup-addPost {
 
   &__header {

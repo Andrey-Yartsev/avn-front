@@ -93,7 +93,9 @@
                       </div>
                     </div>
                   </div>
-                  <Loader :fullscreen="false" v-if="loading" />
+                  <div class="loaderWrap loader-content" v-if="loading">
+                    <Loader :fullscreen="false" />
+                  </div>
                 </VuePerfectScrollbar>
               </div>
             </div>
