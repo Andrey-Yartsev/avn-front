@@ -89,7 +89,7 @@
                 id="posts_chart"
                 class="charts-wrapper charts-wrapper_posts"
               ></div>
-              <div class="statistics-chart-scale"></div>
+              <div class="statistics-chart-scale" id="posts_scale"></div>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@
                 id="stories_chart"
                 class="charts-wrapper charts-wrapper_stories"
               ></div>
-              <div class="statistics-chart-scale"></div>
+              <div class="statistics-chart-scale" id="stories_scale"></div>
             </div>
           </div>
         </div>
@@ -230,6 +230,7 @@ import request from "@/utils/request";
 import PostsModal from "./PostsModal";
 import MobileHeader from "@/components/header/Mobile";
 import CalcCount from "./calcCount";
+import BuildScale from "./buildScale";
 
 const colorSchemes = [
   "#FF5979",
@@ -251,7 +252,7 @@ const altColor = "#16181A";
 
 export default {
   name: "app",
-  mixins: [CalcCount],
+  mixins: [CalcCount, BuildScale],
   components: {
     PostsModal,
     MobileHeader
@@ -274,6 +275,7 @@ export default {
   },
   mounted() {
     this.initWs();
+    this.initScales();
     this.initLineCharts();
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
@@ -349,7 +351,6 @@ export default {
       this.subscribeUserStatistics("post_like_detailed_histogram_" + period);
     },
     setCounter(ref, title, value) {
-      // console.log(value);
       if (title) {
         title = pluralize(title, value) + " ";
       } else {
@@ -915,6 +916,18 @@ export default {
       //   }
       //   this.$refs.followersList.innerHTML = html;
       // }
+    },
+    initScales() {
+      const now = moment()
+        .utc()
+        .unix();
+
+      this.buildScale(document.getElementById("posts_scale"), "last_week", now);
+      this.buildScale(
+        document.getElementById("stories_scale"),
+        "last_week",
+        now
+      );
     },
     initLineCharts() {
       this.followers_charts = window.AmCharts.makeChart("followers_charts", {

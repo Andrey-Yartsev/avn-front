@@ -200,9 +200,6 @@ export default {
     posts() {
       return this.$store.state.profile.home.posts;
     },
-    postLoading() {
-      return this.$store.state.profile.home.loading;
-    },
     store() {
       return this.$store.state.profile.home;
     },
@@ -247,13 +244,12 @@ export default {
       this.$store
         .dispatch("profile/home/fetchProfile", this.username)
         .then(() => {
-          this.footerListenScroll();
+          this.footerScrollAction();
           this.initPosts();
         });
     },
     pageName() {
-      this.footerListenScroll();
-      this.lastYOffset = 0;
+      this.footerScrollAction();
       this.initPosts();
     },
     newPost() {
@@ -287,9 +283,6 @@ export default {
     },
     getPosts() {
       this.$store.dispatch("profile/home/getPosts");
-    },
-    scrollAction() {
-      this.footerScrollAction();
     },
     footerScrollAction() {
       const profileDataText = document.querySelector(
@@ -331,7 +324,7 @@ export default {
     }, 2000);
   },
   mounted() {
-    this.scrollAction();
+    this.footerScrollAction();
     window.addEventListener("scroll", this.scrollAction, true);
   },
   beforeDestroy() {
