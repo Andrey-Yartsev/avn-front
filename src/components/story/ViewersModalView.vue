@@ -129,10 +129,16 @@ export default {
         centeredSlides: true,
         slideToClickedSlide: true,
         slideActiveClass: "active",
+        preloadImages: true,
         grabCursor: true,
         on: {
           transitionEnd() {
             self.currIndex = this.activeIndex;
+          },
+          imagesReady() {
+            if (self.swiper) {
+              self.swiper.slideTo(this.currIndex);
+            }
           }
         }
       }
@@ -210,6 +216,11 @@ export default {
     addToHighlights() {
       alert("добавить в highlights");
     },
+    init() {
+      this.$store.dispatch("viewers/resetPageState");
+      this.$store.dispatch("viewers/setSource", { source: this.current.id });
+      this.$store.dispatch("viewers/getPosts");
+    },
     scrollFunction(e) {
       const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
       const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
@@ -219,19 +230,12 @@ export default {
       }
     }
   },
-  mounted() {
-    this.swiper.slideTo(this.currIndex);
-  },
   created() {
-    this.$store.dispatch("viewers/resetPageState");
-    this.$store.dispatch("viewers/setSource", { source: this.current.id });
-    this.$store.dispatch("viewers/getPosts");
+    this.init();
   },
   watch: {
-    current() {
-      this.$store.dispatch("viewers/resetPageState");
-      this.$store.dispatch("viewers/setSource", { source: this.current.id });
-      this.$store.dispatch("viewers/getPosts");
+    currIndex() {
+      this.init();
     }
   }
 };
