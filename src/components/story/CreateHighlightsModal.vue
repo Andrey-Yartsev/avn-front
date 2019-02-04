@@ -13,7 +13,7 @@
                 <button
                   class="btn sm"
                   v-if="step === 1"
-                  :disabled="!hasChecked"
+                  :disabled="!checked.length"
                   @click="step = 2"
                 >
                   Next
@@ -77,14 +77,14 @@
                       v-for="story in stories"
                       :key="story.id"
                       class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
-                      :class="{ selected: !!checked[story.id] }"
+                      :class="{ selected: checked.indexOf(story.id) !== -1 }"
                       @click="check(story.id)"
                     >
                       <div class="timestamp timestamp_unit">
                         <div class="timestamp__date">
-                          30
+                          {{ formatDate(new Date(story.createdAt), "DD") }}
                         </div>
-                        sep
+                        {{ formatDate(new Date(story.createdAt), "MMM") }}
                       </div>
                       <div class="postLink">
                         <figure class="explore-media">
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-// import dateFns from "date-fns";
+import dateFns from "date-fns";
 import Modal from "@/components/modal/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
@@ -122,7 +122,7 @@ export default {
   },
   data() {
     return {
-      checked: {},
+      checked: [],
       step: 1,
       title: "",
       choosenCover: undefined
@@ -130,27 +130,24 @@ export default {
   },
   computed: {
     loading() {
-      console.log(this.$store.state.stories.loading);
       return this.$store.state.stories.loading;
     },
     stories() {
       return this.$store.state.stories.posts;
     },
-    hasChecked() {
-      return !!Object.keys(this.checked).length;
-    },
     thumbs() {
       return this.$store.state.stories.posts.filter(post => {
-        return !!this.checked[post.id];
+        return this.checked.indexOf(post.id) !== -1;
       });
     }
   },
   methods: {
+    formatDate: dateFns.format,
     check(id) {
-      if (this.checked[id]) {
-        this.checked = { ...this.checked, [id]: false };
+      if (this.checked.indexOf(id) !== -1) {
+        this.checked = this.checked.filter(el => el !== id);
       } else {
-        this.checked = { ...this.checked, [id]: true };
+        this.checked = [...this.checked, id];
       }
     },
     close() {
@@ -167,7 +164,7 @@ export default {
   watch: {
     step() {
       if (this.step === 2) {
-        this.choosenCover = Object.keys(this.checked)[0];
+        this.choosenCover = this.checked[0];
       }
     }
   }
