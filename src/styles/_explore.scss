@@ -798,12 +798,7 @@
   }
 
   .avatar {
-    font-size: 80px;
     margin: 0 auto 10px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 100px;
-    }
   }
 
   .btn-add {

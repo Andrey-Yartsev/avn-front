@@ -70,7 +70,7 @@
                 </div>
                 <div class="offer-create-story">
                   <div class="avatar-block">
-                    <span class="avatar">
+                    <span class="avatar avatar_ex-lg">
                       <span class="avatar__img"></span>
                     </span>
                     <span class="btn-add">
