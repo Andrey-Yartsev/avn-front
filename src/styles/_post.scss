@@ -315,6 +315,13 @@
       width: 100%;
       background: $white;
     }
+
+    .popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-width: 620px;
+      }
+    }
   }
 
   .post-no-comments {
