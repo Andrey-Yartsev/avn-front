@@ -68,6 +68,21 @@
                     />
                   </div>
                 </div>
+                <div class="offer-create-story">
+                  <div class="avatar-block">
+                    <span class="avatar">
+                      <span class="avatar__img"></span>
+                    </span>
+                    <span class="btn-add">
+                      <svg aria-hidden="true" class="icn icn-plus">
+                        <use xlink:href="#icon-plus-in-circle"></use>
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="text-create-story">
+                    Create new story
+                  </div>
+                </div>
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
                   v-if="step === 1"
