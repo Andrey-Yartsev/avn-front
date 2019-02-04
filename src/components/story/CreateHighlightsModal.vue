@@ -71,6 +71,7 @@
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
                   v-if="step === 1"
+                  @ps-scroll-y="scrollFunction"
                 >
                   <div class="explore-wrapper highlights">
                     <div
@@ -88,7 +89,7 @@
                       </div>
                       <div class="postLink">
                         <figure class="explore-media">
-                          <img :src="story.thumb.source" />
+                          <img v-if="story.thumb" :src="story.thumb.source" />
                         </figure>
                       </div>
                     </div>
@@ -132,6 +133,9 @@ export default {
     loading() {
       return this.$store.state.stories.loading;
     },
+    allDataReceived() {
+      return this.$store.state.stories.allDataReceived;
+    },
     stories() {
       return this.$store.state.stories.posts;
     },
@@ -155,10 +159,20 @@ export default {
     },
     save() {
       alert(" SAVE ");
+    },
+    scrollFunction(e) {
+      const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
+      const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
+
+      if (scrolledEnought && !this.loading && !this.allDataReceived) {
+        this.$store.dispatch("stories/getPosts");
+      }
     }
   },
   created() {
+    this.$store.dispatch("stories/resetPageState");
     this.$store.dispatch("stories/setSource", { source: "archive" });
+    this.$store.dispatch("stories/setLimit", { limit: 20 });
     this.$store.dispatch("stories/getPosts");
   },
   watch: {
