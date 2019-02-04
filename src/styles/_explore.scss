@@ -713,14 +713,26 @@
   overflow-x: auto;
 }
 
-.cover-highlight {
+.highlight-unit {
   margin: 0 10px 20px;
+  width: 80px;
+  flex: 0 0 80px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: 100px;
+    flex: 0 0 100px;
+  }
+}
+
+.cover-highlight {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
   width: 80px;
   height: 80px;
   flex: 0 0 80px;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -772,6 +784,13 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+.name-highlight {
+  opacity: .5;
+  @include ellipsis;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .btns-highlights {
