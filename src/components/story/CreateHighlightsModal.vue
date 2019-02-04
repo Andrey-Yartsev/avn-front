@@ -77,7 +77,7 @@
                       v-for="story in stories"
                       :key="story.id"
                       class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
-                      :class="{ selected: (checked.indexOf(story.id) !== -1)}"
+                      :class="{ selected: checked.indexOf(story.id) !== -1 }"
                       @click="check(story.id)"
                     >
                       <div class="timestamp timestamp_unit">
@@ -147,7 +147,7 @@ export default {
       if (this.checked.indexOf(id) !== -1) {
         this.checked = this.checked.filter(el => el !== id);
       } else {
-        this.checked = [ ...this.checked, id];
+        this.checked = [...this.checked, id];
       }
     },
     close() {
