@@ -68,7 +68,6 @@
                     />
                   </div>
                 </div>
-
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
                   v-if="step === 1"
@@ -94,6 +93,7 @@
                       </div>
                     </div>
                   </div>
+                  <Loader :fullscreen="false" v-if="loading" />
                 </VuePerfectScrollbar>
               </div>
             </div>
@@ -109,12 +109,14 @@
 // import dateFns from "date-fns";
 import Modal from "@/components/modal/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "CreateHighlightsModal",
   components: {
     Modal,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    Loader
   },
   data() {
     return {
@@ -125,6 +127,10 @@ export default {
     };
   },
   computed: {
+    loading() {
+      console.log(this.$store.state.stories.loading);
+      return this.$store.state.stories.loading;
+    },
     stories() {
       return this.$store.state.stories.posts;
     },
