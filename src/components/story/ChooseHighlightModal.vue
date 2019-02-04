@@ -16,7 +16,10 @@
                   <div class="list-cover-variation">
                     <div class="highlight-unit">
                       <div class="cover-highlight">
-                        <img src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg" alt="">
+                        <img
+                          src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg"
+                          alt=""
+                        />
                       </div>
                       <div class="name-highlight">
                         My first group name
@@ -24,7 +27,10 @@
                     </div>
                     <div class="highlight-unit">
                       <div class="cover-highlight">
-                        <img src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg" alt="">
+                        <img
+                          src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg"
+                          alt=""
+                        />
                       </div>
                       <div class="name-highlight">
                         My first group name
