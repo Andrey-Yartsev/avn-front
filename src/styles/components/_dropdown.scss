@@ -138,6 +138,9 @@
     }
 
     &_arrow {
+      flex-wrap: nowrap;
+      color: $secondary-color;
+      opacity: 1;
 
       &:before {
         content: "\E646";
@@ -148,13 +151,21 @@
         height: 12px;
         margin-top: 4px;
         margin-bottom: 4px;
+        order: 2;
+        transform: translate(0, 1px);
+        color: $secondary-color;
 
         @include media-breakpoint-down($desktop-breakpoint) {
           position: relative;
           left: auto;
           top: auto;
-          transform: translate(0, 0);
         }
+      }
+
+      .more-functions__btn-text {
+        flex: 1;
+        font-size: 15px;
+        font-weight: 500;
       }
 
       + .more-functions__dropdown {

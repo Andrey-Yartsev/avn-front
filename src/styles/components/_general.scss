@@ -601,6 +601,11 @@ video {
   align-content: center;
   margin-top: -7px;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .more-functions {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -610,6 +615,11 @@ video {
     &__btn {
       padding: 0;
     }
+  }
+
+  .col {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

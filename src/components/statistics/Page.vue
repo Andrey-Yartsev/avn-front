@@ -1,27 +1,34 @@
 <template>
   <div>
     <MobileHeader />
-    <div class="page-header-title">
-      <div class="page-name">Statistics</div>
-      <div class="more-functions">
-        <div class="more-functions__overlay"></div>
-        <div class="more-functions__btn more-functions__btn_arrow">
-          <div class="more-functions__btn-text"></div>
-        </div>
-        <div class="more-functions__dropdown">
-          <div class="more-functions__dropdown-inside">
-            <ul>
-              <li>
-                <button type="button" class="report">
-                  Report post
-                </button>
-              </li>
-              <li>
-                <button type="button" class="btn-copy-link">
-                  Copy link to post
-                </button>
-              </li>
-            </ul>
+    <div class="page-header-title cols">
+      <div class="col col-1-2">
+        <div class="page-name">Statistics</div>
+        <div class="more-functions">
+          <div class="more-functions__overlay"></div>
+          <div class="more-functions__btn more-functions__btn_arrow">
+            <div class="more-functions__btn-text">Today</div>
+          </div>
+          <div class="more-functions__dropdown">
+            <div class="more-functions__dropdown-inside">
+              <ul>
+                <li>
+                  <button type="button">
+                    Today
+                  </button>
+                </li>
+                <li>
+                  <button type="button">
+                    Last week
+                  </button>
+                </li>
+                <li>
+                  <button type="button">
+                    Last month
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -82,7 +89,7 @@
                 id="posts_chart"
                 class="charts-wrapper charts-wrapper_posts"
               ></div>
-              <div class="statistics-chart-scale"></div>
+              <div class="statistics-chart-scale" id="posts_scale"></div>
             </div>
           </div>
         </div>
@@ -108,7 +115,7 @@
                 id="stories_chart"
                 class="charts-wrapper charts-wrapper_stories"
               ></div>
-              <div class="statistics-chart-scale"></div>
+              <div class="statistics-chart-scale" id="stories_scale"></div>
             </div>
           </div>
         </div>
@@ -223,6 +230,7 @@ import request from "@/utils/request";
 import PostsModal from "./PostsModal";
 import MobileHeader from "@/components/header/Mobile";
 import CalcCount from "./calcCount";
+import BuildScale from "./buildScale";
 
 const colorSchemes = [
   "#FF5979",
@@ -244,7 +252,7 @@ const altColor = "#16181A";
 
 export default {
   name: "app",
-  mixins: [CalcCount],
+  mixins: [CalcCount, BuildScale],
   components: {
     PostsModal,
     MobileHeader
@@ -267,6 +275,7 @@ export default {
   },
   mounted() {
     this.initWs();
+    this.initScales();
     this.initLineCharts();
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
@@ -342,7 +351,6 @@ export default {
       this.subscribeUserStatistics("post_like_detailed_histogram_" + period);
     },
     setCounter(ref, title, value) {
-      // console.log(value);
       if (title) {
         title = pluralize(title, value) + " ";
       } else {
@@ -908,6 +916,18 @@ export default {
       //   }
       //   this.$refs.followersList.innerHTML = html;
       // }
+    },
+    initScales() {
+      const now = moment()
+        .utc()
+        .unix();
+
+      this.buildScale(document.getElementById("posts_scale"), "last_week", now);
+      this.buildScale(
+        document.getElementById("stories_scale"),
+        "last_week",
+        now
+      );
     },
     initLineCharts() {
       this.followers_charts = window.AmCharts.makeChart("followers_charts", {
