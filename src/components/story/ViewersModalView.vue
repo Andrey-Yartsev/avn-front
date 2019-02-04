@@ -90,7 +90,10 @@
                     </div>
                   </VuePerfectScrollbar>
                 </div>
-                <div class="msg-no-content" :class="{ show: !loading && !viewers.length }">
+                <div
+                  class="msg-no-content"
+                  :class="{ show: !loading && !viewers.length }"
+                >
                   <div class="msg-no-content__text">
                     No one has seen this yet.
                   </div>
