@@ -1,5 +1,5 @@
 <template>
-  <div class="stories-wrapper stories-collection" v-if="$mq === mqSize">
+  <div class="stories-wrapper stories-collection">
     <div
       class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
     >
@@ -27,98 +27,26 @@
                 </div>
               </div>
             </a>
-            <div class="story">
+            <div class="story" v-for="post in posts" :key="post.id">
               <a
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
                 href="#"
               >
-                <span class="avatar__img"></span>
+                <span class="avatar__img">
+                  <img :src="post.cover" />
+                </span>
               </a>
               <div class="story-info">
                 <div class="story-header">
                   <a href="#" class="name">
-                    Lorem
+                    {{ post.title }}
                   </a>
-                  <div class="timestamp hidden-mobile">15 Jan</div>
+                  <div class="timestamp hidden-mobile">
+                    {{ post.createdAt }}
+                  </div>
                 </div>
                 <div class="amount-items">
-                  4 items
-                </div>
-              </div>
-            </div>
-            <div class="story">
-              <a
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                href="#"
-              >
-                <span class="avatar__img"></span>
-              </a>
-              <div class="story-info">
-                <div class="story-header">
-                  <a href="#" class="name">
-                    Ipsum
-                  </a>
-                  <div class="timestamp hidden-mobile">16 Jan</div>
-                </div>
-                <div class="amount-items">
-                  4 items
-                </div>
-              </div>
-            </div>
-            <div class="story">
-              <a
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                href="#"
-              >
-                <span class="avatar__img"></span>
-              </a>
-              <div class="story-info">
-                <div class="story-header">
-                  <a href="#" class="name">
-                    Lorem
-                  </a>
-                  <div class="timestamp hidden-mobile">15 Jan</div>
-                </div>
-                <div class="amount-items">
-                  4 items
-                </div>
-              </div>
-            </div>
-            <div class="story">
-              <a
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                href="#"
-              >
-                <span class="avatar__img"></span>
-              </a>
-              <div class="story-info">
-                <div class="story-header">
-                  <a href="#" class="name">
-                    Ipsum
-                  </a>
-                  <div class="timestamp hidden-mobile">16 Jan</div>
-                </div>
-                <div class="amount-items">
-                  4 items
-                </div>
-              </div>
-            </div>
-            <div class="story">
-              <a
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                href="#"
-              >
-                <span class="avatar__img"></span>
-              </a>
-              <div class="story-info">
-                <div class="story-header">
-                  <a href="#" class="name">
-                    Ipsum
-                  </a>
-                  <div class="timestamp hidden-mobile">16 Jan</div>
-                </div>
-                <div class="amount-items">
-                  4 items
+                  {{ post.storiesCount }} items
                 </div>
               </div>
             </div>
@@ -140,13 +68,14 @@ export default {
     VuePerfectScrollbar
   },
   props: {
-    mqSize: {
-      type: String,
-      required: true
-    },
     userId: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    posts() {
+      return this.$store.state.highlights.posts;
     }
   },
   methods: {
@@ -156,7 +85,11 @@ export default {
       });
     }
   },
-  created() {},
+  created() {
+    this.$store.commit("highlights/resetPageState");
+    this.$store.dispatch("highlights/setSource", { source: this.userId });
+    this.$store.dispatch("highlights/getPosts");
+  },
   beforeDestroy() {}
 };
 </script>

@@ -68,8 +68,15 @@
                     />
                   </div>
                 </div>
-                <div class="offer-create-story">
-                  <a href="#" class="link-create-story">
+                <div
+                  class="offer-create-story"
+                  v-if="step === 1 && !loading && !stories.length"
+                >
+                  <a
+                    href="#"
+                    class="link-create-story"
+                    @click.prevent="createNewStory"
+                  >
                     <div class="avatar-block">
                       <span class="avatar avatar_ex-lg">
                         <span class="avatar__img"></span>
@@ -175,7 +182,12 @@ export default {
       this.$store.dispatch("modal/hide", { name: "createHighlights" });
     },
     save() {
-      alert(" SAVE ");
+      this.close();
+      this.$store.dispatch("story/saveCollection", {
+        title: this.title,
+        storyIds: this.checked,
+        coverStoryId: this.choosenCover
+      });
     },
     scrollFunction(e) {
       const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
@@ -184,6 +196,10 @@ export default {
       if (scrolledEnought && !this.loading && !this.allDataReceived) {
         this.$store.dispatch("stories/getPosts");
       }
+    },
+    createNewStory() {
+      this.close();
+      document.getElementById("storyFileSelect").click();
     }
   },
   created() {

@@ -72,7 +72,7 @@ const actions = {
   watch(opt, { postId }) {
     return StoriesApi.watchStory({ postId });
   },
-  saveCollection({ commit }, { data }) {
+  saveCollection({ commit }, data) {
     return StoriesApi.saveCollection(data)
       .then(async response => {
         if (response.status === 200) {

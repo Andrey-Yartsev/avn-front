@@ -1,6 +1,6 @@
 "use strict";
 
-import StoriesApi from "@/api/stories";
+import HighlightsApi from "@/api/highlights";
 import PostMixin from "@/store/mixins/posts";
 
 const initState = {
@@ -11,7 +11,7 @@ const initState = {
   limit: 10,
   offset: 0,
   marker: "",
-  source: "feed"
+  source: ""
 };
 
 const state = { ...initState };
@@ -35,7 +35,7 @@ const actions = {
     const { limit, offset, marker, source } = state;
     commit("postsRequest");
 
-    return StoriesApi.getPosts({ limit, offset, marker, source })
+    return HighlightsApi.getUserCollections({ limit, offset, marker, source })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
