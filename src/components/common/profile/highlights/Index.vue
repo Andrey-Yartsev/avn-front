@@ -45,9 +45,7 @@
                     {{ post.createdAt }}
                   </div>
                 </div>
-                <div class="amount-items">
-                  {{ post.storiesCount }} items
-                </div>
+                <div class="amount-items">{{ post.storiesCount }} items</div>
               </div>
             </div>
           </div>
