@@ -512,8 +512,11 @@
   .userCollectionView &,
   .searchView & {
     font-size: 13px;
-    margin-bottom: 4px;
-    margin-top: 4px;
+    margin-bottom: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 4px;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -696,6 +699,12 @@
 
   .searchView & {
     font-size: 13px;
+    display: block;
+    margin-top: 4px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: auto;
+    }
   }
 }
 

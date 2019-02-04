@@ -44,6 +44,8 @@
       box-shadow: 0 3px 8px rgba(#000, 0.1);
       position: relative;
       z-index: 0;
+      display: flex;
+      flex-direction: column;
     }
 
     &.open-dropdown-inside {
@@ -114,6 +116,9 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin: 0 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 
@@ -126,6 +131,7 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       display: flex;
       flex-wrap: nowrap;
+      margin-bottom: 4px;
     }
 
     &.fix-columns {
