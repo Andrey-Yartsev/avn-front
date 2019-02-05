@@ -208,16 +208,19 @@ export default {
   components: {
     Loader
   },
-  data: () => ({
-    currIndex: 0,
-    currActiveIndex: -1,
-    timer: undefined,
-    videos: [],
-    videoProgress: {},
-    showDropdawnMenu: false,
-    showLoader: false,
-    showVideoPlay: false
-  }),
+  data() {
+    return {
+      isCollections: this.$route.meta.collections,
+      currIndex: 0,
+      currActiveIndex: -1,
+      timer: undefined,
+      videos: [],
+      videoProgress: {},
+      showDropdawnMenu: false,
+      showLoader: false,
+      showVideoPlay: false
+    };
+  },
   computed: {
     length() {
       return this.$store.state.stories.posts.length;
@@ -498,8 +501,13 @@ export default {
 
     init() {
       this.resetState();
-      this.$store.dispatch("stories/resetPageState");
-      this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+      if (this.isCollections) {
+        this.$store.dispatch("stories/resetPageState");
+        this.$store.dispatch("stories/getCollection", { id: this.userId });
+      } else {
+        this.$store.dispatch("stories/resetPageState");
+        this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+      }
     },
 
     openViewersModal() {

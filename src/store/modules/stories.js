@@ -1,6 +1,7 @@
 "use strict";
 
 import StoriesApi from "@/api/stories";
+import HighlightsApi from "@/api/highlights";
 import PostMixin from "@/store/mixins/posts";
 
 const initState = {
@@ -73,6 +74,36 @@ const actions = {
             commit("userPostsRequestSuccess", res);
             if (!res.list.length) {
               commit("postsRequestFail", "User has no stories");
+            }
+          });
+        }
+
+        if (response.status === 404) {
+          response.json().then(function(res) {
+            commit("postsRequestFail", res.error.message);
+          });
+        }
+
+        if (response.status === 401) {
+          response.json().then(function(res) {
+            commit("postsRequestFail", res.error.message);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
+      });
+  },
+  getCollection({ commit }, { id }) {
+    commit("postsRequest");
+
+    return HighlightsApi.getCollection({ collectionId: id })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("userPostsRequestSuccess", { ...res, list: res.stories });
+            if (!res.stories.length) {
+              commit("postsRequestFail", "Collection is empty");
             }
           });
         }

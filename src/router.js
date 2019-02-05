@@ -342,6 +342,19 @@ const routes = [
       cssName: "storiesPage"
     }
   },
+  {
+    beforeEnter: (to, from, next) => {
+      global.storyFirstEnter = !from.matched.length;
+      return Auth.requireAny(to, from, next);
+    },
+    path: "/collections/:userId",
+    component: StoryPage,
+    meta: {
+      staticPage: true,
+      cssName: "storiesPage collectionsPage",
+      collections: true
+    }
+  },
   // STATIC PAGES
   {
     beforeEnter: Auth.requireAny,

@@ -31,19 +31,19 @@
               </div>
             </a>
             <div class="story" v-for="post in posts" :key="post.id">
-              <a
+              <router-link
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                href="#"
+                :to="`collections/${post.id}`"
               >
                 <span class="avatar__img">
                   <img :src="post.cover" />
                 </span>
-              </a>
+              </router-link>
               <div class="story-info">
                 <div class="story-header">
-                  <a href="#" class="name">
+                  <router-link :to="`collections/${post.id}`" class="name">
                     {{ post.title }}
-                  </a>
+                  </router-link>
                   <div class="timestamp hidden-mobile">
                     {{ post.createdAt }}
                   </div>
