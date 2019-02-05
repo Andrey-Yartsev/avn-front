@@ -184,7 +184,7 @@
     max-width: none;
     visibility: hidden;
     opacity: 0;
-    transition: transform 0.4s;
+    transition: all 0.4s ease, opacity 0.3s ease;
     transform: translateY(20px);
     z-index: 42;
 
