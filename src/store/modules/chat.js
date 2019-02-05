@@ -22,6 +22,20 @@ const actions = {
       }
     });
   },
+  muteUser({ commit, dispatch }, userId) {
+    dispatch("user/mute", userId, { root: true }).then(r => {
+      if (r.success) {
+        commit("extendChatUser", { id: userId, isMuted: true });
+      }
+    });
+  },
+  unmuteUser({ commit, dispatch }, userId) {
+    dispatch("user/unmute", userId, { root: true }).then(r => {
+      if (r.success) {
+        commit("extendChatUser", { id: userId, isMuted: false });
+      }
+    });
+  },
   sendMessage({ commit, dispatch }, params) {
     dispatch("_sendMessage", params).then(message => {
       commit("updateChatLastMessage", {

@@ -37,6 +37,36 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "mute",
+  apiPath: "subscriptions/follower/{userId}/mute",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  resultKey: "mute",
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "unmute",
+  apiPath: "subscriptions/follower/{userId}/unmute",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  resultKey: "unmute",
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
   prefix: "report",
   apiPath: "users/{userId}/report",
   state,

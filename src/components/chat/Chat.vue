@@ -106,6 +106,12 @@
                           >Block user</a
                         >
                       </li>
+                      <li v-if="activeUser.isMuted">
+                        <a @click="unmuteActiveUser">Unmute user</a>
+                      </li>
+                      <li v-else>
+                        <a @click="muteActiveUser">Mute user</a>
+                      </li>
                       <template v-if="messages.length">
                         <li v-if="deleteInProgress"><a>Deleting...</a></li>
                         <li v-else>
@@ -300,6 +306,14 @@ export default {
     },
     unblockActiveUser() {
       this.$store.dispatch("chat/unblockUser", this.activeUserId);
+      this.chatOptionsOpened = false;
+    },
+    muteActiveUser() {
+      this.$store.dispatch("chat/muteUser", this.activeUserId);
+      this.chatOptionsOpened = false;
+    },
+    unmuteActiveUser() {
+      this.$store.dispatch("chat/unmuteUser", this.activeUserId);
       this.chatOptionsOpened = false;
     },
     deleteConversation() {

@@ -2,6 +2,7 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
+import * as deepMerge from "deepmerge";
 
 const limit = 10;
 
@@ -109,10 +110,39 @@ actions.unblock = ({ commit, dispatch }, userId) => {
   });
 };
 
+actions.mute = ({ commit, dispatch }, userId) => {
+  dispatch("user/mute", userId, { root: true }).then(r => {
+    if (r.success) {
+      commit("extendUser", {
+        userId,
+        data: {
+          followedOn: {
+            isMuted: true
+          }
+        }
+      });
+    }
+  });
+};
+actions.unmute = ({ commit, dispatch }, userId) => {
+  dispatch("user/unmute", userId, { root: true }).then(r => {
+    if (r.success) {
+      commit("extendUser", {
+        userId,
+        data: {
+          followedOn: {
+            isMuted: false
+          }
+        }
+      });
+    }
+  });
+};
+
 mutations.extendUser = (state, { userId, data }) => {
   state.posts = state.posts.map(user => {
     if (user.id === userId) {
-      user = { ...user, ...data };
+      user = deepMerge(user, data);
     }
     return user;
   });

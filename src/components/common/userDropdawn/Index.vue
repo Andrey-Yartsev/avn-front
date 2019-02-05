@@ -1,6 +1,6 @@
 <template>
   <div class="more-functions" :class="{ open: opened }" v-click-outside="hide">
-    <div class="more-functions__overlay" @click="hide" />
+    <div class="more-functions__overlay" @click="hide"></div>
     <div
       class="more-functions__btn more-functions__btn_with-text"
       @click="toggle"
@@ -15,6 +15,14 @@
             <a href="#" @click.prevent="unblock">Unblock</a>
           </li>
           <li v-else><a href="#" @click.prevent="block">Block</a></li>
+
+          <template v-if="hasMute">
+            <li v-if="isMuted">
+              <a href="#" @click.prevent="unmute">Unmute</a>
+            </li>
+            <li v-else><a href="#" @click.prevent="mute">Mute</a></li>
+          </template>
+
           <li v-if="copied">
             <button class="btn-copy-link copied" type="button">Copied!</button>
           </li>
@@ -61,6 +69,12 @@ export default {
     href() {
       const { protocol, hostname } = window.location;
       return `${protocol}//${hostname}/${this.profile.username}`;
+    },
+    hasMute() {
+      return this.actionPrefix === "followers";
+    },
+    isMuted() {
+      return this.profile.followedOn.isMuted;
     }
   },
 
@@ -76,6 +90,12 @@ export default {
     },
     unblock() {
       this.$store.dispatch(this.actionPrefix + "/unblock", this.profile.id);
+    },
+    mute() {
+      this.$store.dispatch(this.actionPrefix + "/mute", this.profile.id);
+    },
+    unmute() {
+      this.$store.dispatch(this.actionPrefix + "/unmute", this.profile.id);
     },
     toggle() {
       if (this.opened) {
