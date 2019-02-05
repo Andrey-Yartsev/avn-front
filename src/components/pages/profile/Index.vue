@@ -228,6 +228,9 @@ export default {
     useMediumPostView() {
       return this.pageName === undefined || this.pageName === "posts";
     },
+    highlights() {
+      return this.$store.state.highlights.posts;
+    },
     postComponent() {
       if (this.$mq === "mobile" && this.pageName === "videos") {
         return PostMedium;
@@ -258,6 +261,9 @@ export default {
     },
     subscriptionUpdate(data) {
       this.$refs.actionsDesktop.subsRequested(data);
+    },
+    highlights() {
+      this.footerScrollAction();
     }
   },
   methods: {
@@ -288,9 +294,7 @@ export default {
       this.$store.dispatch("profile/home/getPosts");
     },
     footerScrollAction() {
-      const profileDataText = document.querySelector(
-        ".mark-line"
-      );
+      const profileDataText = document.querySelector(".mark-line");
 
       if (!profileDataText) {
         return;
