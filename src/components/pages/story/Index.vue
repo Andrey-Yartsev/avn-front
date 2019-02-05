@@ -100,7 +100,7 @@
         </div>
       </div>
       <div
-        v-if="isOwner(author.id) && !isCollections"
+        v-if="isOwner(author.id)"
         :class="['more-functions', { open: showDropdawnMenu }]"
         v-click-outside="hideDropdawn"
       >
@@ -111,7 +111,7 @@
         <div class="more-functions__btn" @click.prevent="openDropdawn"></div>
         <div class="more-functions__dropdown">
           <div class="more-functions__dropdown-inside">
-            <ul>
+            <ul v-if="!isCollections">
               <li>
                 <button class="deleteStory" type="button" @click="deleteStory">
                   Delete
@@ -133,6 +133,53 @@
                   @click="storySettings"
                 >
                   Story Settings
+                </button>
+              </li>
+            </ul>
+            <ul v-esle>
+              <li>
+                <button
+                  class="storySettings"
+                  type="button"
+                  @click="editHighlight"
+                >
+                  Edit highlight
+                </button>
+              </li>
+              <li>
+                <button
+                  class="saveFile"
+                  type="button"
+                  @click="removeFromHighlight"
+                >
+                  Remove from highlight
+                </button>
+              </li>
+              <li>
+                <button
+                  class="storySettings"
+                  type="button"
+                  @click="sendHighlightTo"
+                >
+                  Send to ...
+                </button>
+              </li>
+              <li>
+                <button
+                  class="storySettings"
+                  type="button"
+                  @click="copyHighlightLink"
+                >
+                  Copy link
+                </button>
+              </li>
+              <li>
+                <button
+                  class="deleteStory"
+                  type="button"
+                  @click="removeHighlight"
+                >
+                  Remove highlight
                 </button>
               </li>
             </ul>
@@ -538,7 +585,12 @@ export default {
           owner: this.author.id
         }
       });
-    }
+    },
+    editHighlight() {},
+    removeFromHighlight() {},
+    sendHighlightTo() {},
+    copyHighlightLink() {},
+    removeHighlight() {}
   },
   created() {
     this.init();
