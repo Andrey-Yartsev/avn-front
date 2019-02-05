@@ -177,22 +177,6 @@
     position: relative;
   }
 
-  .profile-desc {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //width: 100%;
-      //position: relative;
-      //transition: all .3s;
-    }.profile-header-container
-
-    .header-scrolled & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //padding-top: 0;
-      }
-    }
-  }
-
   .user-login {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -471,6 +455,7 @@
     transition: all .3s;
     position: relative;
     padding-left: 24px;
+    overflow-y: auto;
   }
 
   .header-scrolled & {
