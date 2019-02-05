@@ -351,7 +351,7 @@ const routes = [
     component: StoryPage,
     meta: {
       staticPage: true,
-      cssName: "storiesPage collectionsPage",
+      cssName: "storiesPage",
       collections: true
     }
   },

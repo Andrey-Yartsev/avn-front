@@ -16,7 +16,8 @@ const initState = {
   offset: 0,
   marker: "",
   user: {},
-  source: "feed"
+  source: "feed",
+  collectionTitle: null
 };
 
 const state = { ...initState };
@@ -27,7 +28,7 @@ const mutations = {
       state[k] = initState[k];
     }
   },
-  userPostsRequestSuccess(state, { list: posts, marker, user }) {
+  userPostsRequestSuccess(state, { list: posts, marker, user, title }) {
     state.posts = [...state.posts, ...posts];
 
     if (posts.length < state.limit) {
@@ -35,6 +36,7 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
+    state.collectionTitle = title;
     state.loading = false;
     state.marker = state.marker.length ? state.marker : marker;
     state.user = user;

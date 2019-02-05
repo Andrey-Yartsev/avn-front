@@ -76,7 +76,7 @@
               <img v-if="author.avatar" :src="author.avatar" />
             </span>
           </a>
-          <template v-if="isOwner(author.id)">
+          <template v-if="isOwner(author.id) && !isCollections">
             <span class="btn-add" @click="addNewStory">
               <svg aria-hidden="true" class="icn icn-plus">
                 <use xlink:href="#icon-plus-in-circle"></use>
@@ -89,15 +89,18 @@
             :href="isOwner(author.id) ? `/${author.username}` : ''"
             :class="{ 'new-story': isOwner(author.id) }"
           >
-            {{
-              isOwner(author.id) ? "Your story" : author.name || author.username
-            }}
+            <template v-if="isCollections">
+              {{ collectionTitle }}
+            </template>
+            <template v-else>
+              {{ isOwner(author.id) ? "Your story" : author.name || author.username }}
+            </template>
           </a>
           <span class="time"></span>
         </div>
       </div>
       <div
-        v-if="isOwner(author.id)"
+        v-if="isOwner(author.id) && !isCollections"
         :class="['more-functions', { open: showDropdawnMenu }]"
         v-click-outside="hideDropdawn"
       >
@@ -136,16 +139,17 @@
           </div>
         </div>
       </div>
-      <div class="bottom-btns" v-if="currentStory">
+      <div class="bottom-btns">
         <div class="story-details-info">
           <a
             href="#"
+            v-if="isOwner(author.id) && !isCollections"
             class="btn-story-details"
             @click.prevent="saveToHighlights"
           />
           <div
             class="story-viewer story-viewer_clickable"
-            v-if="currentStory.viewersCount"
+            v-if="isOwner(author.id) && currentStory.viewersCount"
             @click="openViewersModal"
           >
             {{ viewersText }}
@@ -188,9 +192,9 @@
       :fullscreen="false"
     />
 
-    <div class="stories-collection-overlay">
+    <div class="stories-collection-overlay" :class="{ show: showTitle }" v-if="isCollections">
       <div class="stories-collection-name">
-        Highlights name
+        {{ collectionTitle }}
       </div>
     </div>
   </div>
@@ -210,6 +214,7 @@ export default {
   },
   data() {
     return {
+      showTitle: this.$route.meta.collections,
       isCollections: this.$route.meta.collections,
       currIndex: 0,
       currActiveIndex: -1,
@@ -261,6 +266,9 @@ export default {
         .join(", ");
 
       return `${firstTwo}${othersText}`;
+    },
+    collectionTitle() {
+      return this.$store.state.stories.collectionTitle;
     },
     viewersPage() {
       return this.$store.state.modal.storyViewers.show;
@@ -537,6 +545,9 @@ export default {
   },
   mounted() {
     this.popupItem = this.$el.querySelector(".more-functions");
+    setTimeout(() => {
+      this.showTitle = false;
+    }, 3000)
   },
   directives: {
     ClickOutside
