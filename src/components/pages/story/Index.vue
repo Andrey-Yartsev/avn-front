@@ -93,7 +93,11 @@
               {{ collectionTitle }}
             </template>
             <template v-else>
-              {{ isOwner(author.id) ? "Your story" : author.name || author.username }}
+              {{
+                isOwner(author.id)
+                  ? "Your story"
+                  : author.name || author.username
+              }}
             </template>
           </a>
           <span class="time"></span>
@@ -239,7 +243,11 @@
       :fullscreen="false"
     />
 
-    <div class="stories-collection-overlay" :class="{ show: showTitle }" v-if="isCollections">
+    <div
+      class="stories-collection-overlay"
+      :class="{ show: showTitle }"
+      v-if="isCollections"
+    >
       <div class="stories-collection-name">
         {{ collectionTitle }}
       </div>
@@ -599,7 +607,7 @@ export default {
     this.popupItem = this.$el.querySelector(".more-functions");
     setTimeout(() => {
       this.showTitle = false;
-    }, 3000)
+    }, 3000);
   },
   directives: {
     ClickOutside

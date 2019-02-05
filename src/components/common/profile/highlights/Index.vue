@@ -44,9 +44,6 @@
                   <router-link :to="`collections/${post.id}`" class="name">
                     {{ post.title }}
                   </router-link>
-                  <div class="timestamp hidden-mobile">
-                    {{ post.createdAt }}
-                  </div>
                 </div>
                 <div class="amount-items">{{ post.storiesCount }} items</div>
               </div>
