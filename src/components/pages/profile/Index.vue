@@ -43,8 +43,7 @@
                 >twitter.com/{{ profile.twitterUsername }}</a
               >
               <FollowersCounter :profile="profile" />
-              <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
-              <div class="mark-line"></div>
+              <Highlights :userId="profile.id" mqSize="desktop" />
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </div>
           </div>
@@ -72,7 +71,7 @@
           ref="actionsMobile"
         />
       </div>
-      <Highlights :userId="profile.id" v-if="$mq === 'mobile'" />
+      <Highlights :userId="profile.id" mqSize="mobile" />
       <div class="container">
         <div class="row">
           <div :class="['content-col', { 'single-col': !useMediumPostView }]">
@@ -241,13 +240,7 @@ export default {
       this.footerScrollAction();
     },
     username() {
-      this.$store.commit("profile/home/resetPageState");
-      this.$store
-        .dispatch("profile/home/fetchProfile", this.username)
-        .then(() => {
-          this.footerScrollAction();
-          this.initPosts();
-        });
+      this.initProfile();
     },
     pageName() {
       this.footerScrollAction();
@@ -267,6 +260,14 @@ export default {
     }
   },
   methods: {
+    initProfile() {
+      this.$store.commit("profile/home/resetPageState");
+      this.$store.dispatch("profile/home/fetchProfile", this.username);
+    },
+    initContent() {
+      this.footerScrollAction();
+      this.initPosts();
+    },
     initPosts() {
       this.$store.commit("profile/home/resetPosts");
       this.$store.dispatch("profile/home/setSource", this.source);
@@ -310,7 +311,7 @@ export default {
     }
   },
   created() {
-    this.initPosts();
+    this.initContent();
 
     setTimeout(() => {
       this.$root.ws.send({
