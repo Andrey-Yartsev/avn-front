@@ -52,6 +52,27 @@ const actions = {
   },
   setLimit({ commit }, { limit }) {
     commit("setLimit", { limit });
+  },
+  addNewStoryToCollection({ commit }, { collectionId, storyId }) {
+    return HighlightsApi.getCollection({ collectionId })
+      .then(response => {
+        if (response.status === 200) {
+          return response.json().then(function(res) {
+            const storyIds = res.stories.map(el => el.id);
+            return HighlightsApi.updateCollection({
+              collectionId,
+              data: {
+                title: res.title,
+                storyIds: [...storyIds, storyId]
+              }
+            });
+            // commit("postsRequestSuccess", res);
+          });
+        }
+      })
+      .catch(err => {
+        commit("addNewStoryToCollectionFail", err);
+      });
   }
 };
 

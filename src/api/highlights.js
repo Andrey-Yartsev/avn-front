@@ -10,5 +10,20 @@ export default {
         marker
       }
     });
+  },
+  getCollection({ collectionId }) {
+    return anyRequest(`stories/collections/${collectionId}`, {
+      method: "GET"
+    });
+  },
+  updateCollection({ collectionId, data }) {
+    return anyRequest(`stories/collections/${collectionId}`, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
   }
 };

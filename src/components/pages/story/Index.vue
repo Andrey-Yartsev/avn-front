@@ -261,6 +261,9 @@ export default {
     },
     viewersPage() {
       return this.$store.state.modal.storyViewers.show;
+    },
+    chooseHighlightPage() {
+      return this.$store.state.modal.chooseHighlight.show;
     }
   },
   methods: {
@@ -454,7 +457,9 @@ export default {
       this.pause();
       this.$store.dispatch("modal/show", {
         name: "chooseHighlight",
-        data: {}
+        data: {
+          storyId: this.currentStory.id
+        }
       });
     },
 
@@ -529,6 +534,13 @@ export default {
     ClickOutside
   },
   watch: {
+    chooseHighlightPage() {
+      if (this.chooseHighlightPage) {
+        this.pause();
+      } else {
+        this.resume();
+      }
+    },
     viewersPage() {
       if (this.viewersPage) {
         this.pause();

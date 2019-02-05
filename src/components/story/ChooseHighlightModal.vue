@@ -14,26 +14,21 @@
               <div class="popup-container-scroll">
                 <div class="highlights-form">
                   <div class="list-cover-variation">
-                    <div class="highlight-unit">
+                    <Loader :fullscreen="false" v-if="loading" />
+                    <div
+                      class="highlight-unit"
+                      v-for="post in posts"
+                      :key="post.id"
+                      @click="addNewStoryToCollection(post.id)"
+                    >
                       <div class="cover-highlight">
                         <img
-                          src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg"
+                          :src="post.cover"
                           alt=""
                         />
                       </div>
                       <div class="name-highlight">
-                        My first group name
-                      </div>
-                    </div>
-                    <div class="highlight-unit">
-                      <div class="cover-highlight">
-                        <img
-                          src="https://storage.onmyteam.com/get/dev/files/9/9b/9b6f0ba0a9f41dabd8519c9442ade2a1/440x440_9971fc8719b7d4d218e158f6abf1f278924305.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="name-highlight">
-                        My first group name
+                        {{ post.title }}
                       </div>
                     </div>
                   </div>
@@ -50,31 +45,50 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-// import VuePerfectScrollbar from "vue-perfect-scrollbar";
-// import Loader from "@/components/common/Loader";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Loader from "@/components/common/Loader";
+import User from "@/mixins/user";
 
 export default {
   name: "ChooseHighlights",
+  mixins: [User],
   components: {
-    Modal // ,
-    // VuePerfectScrollbar,
-    // Loader
+    Modal,
+    VuePerfectScrollbar,
+    Loader
   },
   data() {
     return {};
   },
   computed: {
-    // loading() {
-    //   return this.$store.state.stories.loading;
-    // },
-    // allDataReceived() {
-    //   return this.$store.state.stories.allDataReceived;
-    // },
-    // stories() {
-    //   return this.$store.state.stories.posts;
-    // },
+    storyId() {
+      return this.$store.state.modal.chooseHighlight.data.storyId;
+    },
+    loading() {
+      return this.$store.state.highlights.loading;
+    },
+    allDataReceived() {
+      return this.$store.state.highlights.allDataReceived;
+    },
+    posts() {
+      return this.$store.state.highlights.posts;
+    }
   },
   methods: {
+    addNewStoryToCollection(id) {
+      this.$store.dispatch("highlights/addNewStoryToCollection", {
+        collectionId: id,
+        storyId: this.storyId
+      }).then(() => {
+        this.$store.dispatch("global/flashToast", "Story added to collection", {
+          root: true
+        });
+
+        this.close();
+      });
+
+      
+    },
     close() {
       this.$store.dispatch("modal/hide", { name: "chooseHighlight" });
     }
@@ -88,10 +102,10 @@ export default {
     // }
   },
   created() {
-    // this.$store.dispatch("stories/resetPageState");
-    // this.$store.dispatch("stories/setSource", { source: "archive" });
-    // this.$store.dispatch("stories/setLimit", { limit: 20 });
-    // this.$store.dispatch("stories/getPosts");
+    this.$store.dispatch("highlights/resetPageState");
+    this.$store.dispatch("highlights/setSource", { source: this.user.id });
+    // this.$store.dispatch("highlights/setLimit", { limit: 10 });
+    this.$store.dispatch("highlights/getPosts");
   }
 };
 </script>
