@@ -345,6 +345,13 @@
     max-height: calc(100vh - 130px);
   }
 
+  .special-site-header & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: calc(100vh - 180px);
+    }
+  }
+
   .postPage & {
     background-color: #000;
     background-repeat: no-repeat;
