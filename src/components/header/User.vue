@@ -9,6 +9,7 @@
     <span class="avatar__img">
       <img v-if="user.avatar" :src="user.avatar" />
     </span>
+    <span class="triangle-arrow"></span>
   </a>
 </template>
 
