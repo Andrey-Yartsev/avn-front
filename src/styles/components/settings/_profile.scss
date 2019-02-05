@@ -224,7 +224,7 @@
       margin: -18px 0 0;
       width: 280px;
       left: -55px;
-      top: calc(100% + 25px);
+      top: calc(100% + 23px);
     }
 
     .user-color-select-visible & {
@@ -235,9 +235,9 @@
 
     &:after {
       position: absolute;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-bottom: 12px solid $white;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid $white;
       content: "";
       left: 50%;
       margin-left: -12px;
