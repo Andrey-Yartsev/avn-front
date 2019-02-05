@@ -690,6 +690,8 @@
   .name {
     max-width: 55%;
     padding: 0 4px 0 0;
+    display: inline-block;
+    vertical-align: top;
 
     .disable-scroll-page & {
       max-width: 55%;
@@ -720,12 +722,11 @@
   }
 
   &-text {
-    flex: 1;
+    display: inline;
     word-break: break-all;
   }
 
   &-body {
-    display: flex;
     margin-bottom: 3px;
   }
 
