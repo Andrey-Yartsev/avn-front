@@ -289,7 +289,7 @@ export default {
     },
     footerScrollAction() {
       const profileDataText = document.querySelector(
-        ".profile-desc .profile-data"
+        ".mark-line"
       );
 
       if (!profileDataText) {
