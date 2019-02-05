@@ -4,6 +4,7 @@
       :href="'/' + v.username"
       @click.prevent="goTo('/' + v.username)"
       class="user"
+      tabindex="2"
       v-for="v in items"
       v-bind:key="v.id"
     >
