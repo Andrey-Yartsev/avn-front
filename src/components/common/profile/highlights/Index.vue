@@ -1,5 +1,8 @@
 <template>
-  <div class="stories-wrapper stories-collection" v-if="posts.length || isOwner(userId)">
+  <div
+    class="stories-wrapper stories-collection"
+    v-if="posts.length || isOwner(userId)"
+  >
     <div
       class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
     >

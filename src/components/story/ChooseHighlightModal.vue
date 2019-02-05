@@ -22,10 +22,7 @@
                       @click="addNewStoryToCollection(post.id)"
                     >
                       <div class="cover-highlight">
-                        <img
-                          :src="post.cover"
-                          alt=""
-                        />
+                        <img :src="post.cover" alt="" />
                       </div>
                       <div class="name-highlight">
                         {{ post.title }}
@@ -76,18 +73,22 @@ export default {
   },
   methods: {
     addNewStoryToCollection(id) {
-      this.$store.dispatch("highlights/addNewStoryToCollection", {
-        collectionId: id,
-        storyId: this.storyId
-      }).then(() => {
-        this.$store.dispatch("global/flashToast", "Story added to collection", {
-          root: true
+      this.$store
+        .dispatch("highlights/addNewStoryToCollection", {
+          collectionId: id,
+          storyId: this.storyId
+        })
+        .then(() => {
+          this.$store.dispatch(
+            "global/flashToast",
+            "Story added to collection",
+            {
+              root: true
+            }
+          );
+
+          this.close();
         });
-
-        this.close();
-      });
-
-      
     },
     close() {
       this.$store.dispatch("modal/hide", { name: "chooseHighlight" });
