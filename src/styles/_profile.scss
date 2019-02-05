@@ -696,9 +696,9 @@
 .profile-twitter-link {
   color: $secondary-color;
   transition: color 0.3s ease;
+  font-size: 13px;
 
   .searchView & {
-    font-size: 13px;
     display: block;
     margin-top: 4px;
 
