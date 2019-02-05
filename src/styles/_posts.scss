@@ -341,6 +341,10 @@
   position: relative;
   overflow: hidden;
 
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-height: calc(100vh - 130px);
+  }
+
   .postPage & {
     background-color: #000;
     background-repeat: no-repeat;
