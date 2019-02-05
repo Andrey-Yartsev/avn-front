@@ -44,6 +44,7 @@
               >
               <FollowersCounter :profile="profile" />
               <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+              <div class="mark-line"></div>
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </div>
           </div>
