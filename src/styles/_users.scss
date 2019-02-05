@@ -159,6 +159,10 @@
 
   .user-login {
     display: block;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      font-size: 13px;
+    }
   }
 
   .subscribed,
