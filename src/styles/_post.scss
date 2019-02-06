@@ -324,18 +324,6 @@
     }
   }
 
-  .post-no-comments {
-    margin-bottom: 76px;
-    min-height: 62px;
-    height: calc(100% - 76px);
-    position: relative;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 0;
-      height: 100%;
-    }
-  }
-
   .actions {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -462,6 +450,19 @@
       flex: 0 1 auto;
       width: auto;
     }
+  }
+}
+
+.post-no-comments {
+  margin-bottom: 76px;
+  min-height: 62px;
+  height: calc(100% - 76px);
+  position: relative;
+  pointer-events: none;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-bottom: 0;
+    height: 100%;
   }
 }
 
