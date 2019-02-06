@@ -73,6 +73,20 @@ const actions = {
       .catch(err => {
         commit("addNewStoryToCollectionFail", err);
       });
+  },
+  removeStoryFromCollection({ commit }, { collection, storyId }) {
+    const { id, title, stories, coverStoryId } = collection;
+    const storyIds = stories.filter(el => el.id !== storyId).map(el => el.id);
+    return HighlightsApi.updateCollection({
+      collectionId: id,
+      data: {
+        title: title,
+        storyIds,
+        coverStoryId: coverStoryId !== storyId ? coverStoryId : storyIds[0]
+      }
+    }).catch(err => {
+      commit("removeStoryFromCollectionFail", err);
+    });
   }
 };
 

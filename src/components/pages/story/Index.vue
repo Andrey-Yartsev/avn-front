@@ -605,7 +605,17 @@ export default {
         }
       });
     },
-    removeFromHighlight() {},
+    removeFromHighlight() {
+      this.pause();
+      this.$store
+        .dispatch("highlights/removeStoryFromCollection", {
+          collection: this.collection,
+          storyId: this.currentStory.id
+        })
+        .then(() => {
+          global.document.location.reload();
+        });
+    },
     sendHighlightTo() {},
     copyHighlightLink() {},
     removeHighlight() {}
