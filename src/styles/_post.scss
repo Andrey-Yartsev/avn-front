@@ -325,9 +325,9 @@
   }
 
   .post-no-comments {
-    margin-bottom: 56px;
-    min-height: 80px;
-    height: calc(100% - 56px);
+    margin-bottom: 76px;
+    min-height: 62px;
+    height: calc(100% - 76px);
     position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {

@@ -8,7 +8,7 @@
     ]"
   >
     <div class="postPage-content">
-      <div class="header-mobile">
+      <div class="header-mobile" v-if="$mq === 'mobile'">
         <button class="header-return-btn" @click="back"></button>
         <h1 class="page-title">Post</h1>
       </div>
@@ -18,6 +18,7 @@
         :user="post.author"
         :from="from"
         v-on:clickOnDetailsView="clickOnCommentForm"
+        v-if="$mq === 'mobile'"
       />
       <p class="text hidden-desktop" v-html="post.text"></p>
       <Media
@@ -34,8 +35,9 @@
           :postId="post.id"
           :user="post.author"
           :from="from"
+          v-if="$mq === 'desktop'"
         />
-        <p class="text hidden-mobile" v-html="post.text"></p>
+        <p class="text hidden-mobile" v-html="post.text" v-if="$mq === 'desktop'"></p>
         <CommentsList
           v-if="this.post.canComment"
           :comments="post.fullComments"
