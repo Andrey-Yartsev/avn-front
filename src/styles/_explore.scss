@@ -697,6 +697,7 @@
 
   .form-group {
     width: 80%;
+    margin-bottom: 20px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 50%;
