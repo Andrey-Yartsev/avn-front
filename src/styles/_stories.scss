@@ -860,8 +860,11 @@
   }
 
   .story-preview {
-    opacity: .7;
-    transition: opacity .3s;
+
+    img {
+      opacity: .7;
+      transition: opacity .3s;
+    }
   }
 }
 
