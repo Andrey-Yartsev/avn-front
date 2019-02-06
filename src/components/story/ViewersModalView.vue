@@ -217,7 +217,12 @@ export default {
       this.close();
     },
     addToHighlights() {
-      alert("добавить в highlights");
+      this.$store.dispatch("modal/show", {
+        name: "chooseHighlight",
+        data: {
+          storyId: this.current.id
+        }
+      });
     },
     init() {
       this.$store.dispatch("viewers/resetPageState");
