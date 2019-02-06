@@ -261,6 +261,13 @@
 
     .timestamp {
       margin-left: auto;
+
+      .lightbox-post & {
+        position: absolute;
+        top: 5px;
+        right: 15px;
+        opacity: 1;
+      }
     }
   }
 
