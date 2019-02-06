@@ -168,7 +168,12 @@
                   Send to ...
                 </button>
               </li>
-              <li>
+              <li v-if="copied">
+                <button class="btn-copy-link copied" type="button">
+                  Copied!
+                </button>
+              </li>
+              <li v-else>
                 <button
                   class="storySettings"
                   type="button"
@@ -278,7 +283,8 @@ export default {
       videoProgress: {},
       showDropdawnMenu: false,
       showLoader: false,
-      showVideoPlay: false
+      showVideoPlay: false,
+      copied: false
     };
   },
   computed: {
@@ -607,18 +613,38 @@ export default {
     },
     removeFromHighlight() {
       this.pause();
+      if (this.length === 1) {
+        this.removeHighlight();
+      } else {
+        this.$store
+          .dispatch("highlights/removeStoryFromCollection", {
+            collection: this.collection,
+            storyId: this.currentStory.id
+          })
+          .then(() => {
+            global.document.location.reload();
+          });
+      }
+    },
+    sendHighlightTo() {
+      alert("sendHighlightTo");
+    },
+    copyHighlightLink() {
+      this.$copyText(global.document.location.href).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
+    },
+    removeHighlight() {
+      this.pause();
       this.$store
-        .dispatch("highlights/removeStoryFromCollection", {
-          collection: this.collection,
-          storyId: this.currentStory.id
+        .dispatch("highlights/removeCollection", {
+          collection: this.collection
         })
         .then(() => {
-          global.document.location.reload();
+          // global.document.location.reload();
         });
-    },
-    sendHighlightTo() {},
-    copyHighlightLink() {},
-    removeHighlight() {}
+    }
   },
   created() {
     this.init();

@@ -87,6 +87,14 @@ const actions = {
     }).catch(err => {
       commit("removeStoryFromCollectionFail", err);
     });
+  },
+  removeCollection({ commit }, { collection }) {
+    const { id } = collection;
+    return HighlightsApi.removeCollection({
+      collectionId: id
+    }).catch(err => {
+      commit("removeCollectionFail", err);
+    });
   }
 };
 

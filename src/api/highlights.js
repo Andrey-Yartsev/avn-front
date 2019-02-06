@@ -1,5 +1,5 @@
 import anyRequest from "@/utils/anyRequest";
-// import tokenRequest from "@/utils/tokenRequest";
+import tokenRequest from "@/utils/tokenRequest";
 export default {
   getUserCollections({ offset, limit, marker, source }) {
     return anyRequest(`users/${source}/stories/collections/`, {
@@ -17,13 +17,19 @@ export default {
     });
   },
   updateCollection({ collectionId, data }) {
-    return anyRequest(`stories/collections/${collectionId}`, {
+    return tokenRequest(`stories/collections/${collectionId}`, {
       method: "PUT",
       mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
+    });
+  },
+  removeCollection({ collectionId }) {
+    return tokenRequest(`stories/collections/${collectionId}`, {
+      method: "DELETE",
+      mode: "cors"
     });
   }
 };
