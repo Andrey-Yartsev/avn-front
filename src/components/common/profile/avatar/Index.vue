@@ -22,6 +22,7 @@
         'hidden-mobile',
         { 'profile-position': profileExtraClass }
       ]"
+      v-if="$mq === 'desktop'"
     >
       <div class="profile-name profile-name_base">
         <div class="profile-name__main">

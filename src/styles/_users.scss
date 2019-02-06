@@ -134,6 +134,13 @@
       margin-bottom: 4px;
     }
 
+    &:last-child {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-bottom: 0;
+      }
+    }
+
     &.fix-columns {
 
       .user-actions {
@@ -305,26 +312,6 @@
 
       &:hover {
         color: $secondary-color-darken;
-      }
-    }
-  }
-
-  .more-functions {
-
-    &__btn {
-      padding: 0;
-
-      &:before {
-        margin-top: 6px;
-        margin-bottom: 13px;
-      }
-    }
-
-    &.open {
-
-      .more-functions__dropdown {
-        right: -18px;
-        transform: translateY(5px);
       }
     }
   }

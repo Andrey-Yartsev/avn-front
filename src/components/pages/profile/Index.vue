@@ -4,7 +4,7 @@
   </div>
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost" />
-    <HeaderControl :profile="profile" />
+    <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">
       <div class="profile-sticky-header">
         <ProfileBackground :profile="profile" />
@@ -16,7 +16,10 @@
             class="profile-header"
             v-if="useMediumPostView || $mq === 'mobile'"
           >
-            <div class="profile-name profile-name_base hidden-desktop">
+            <div
+              class="profile-name profile-name_base hidden-desktop"
+              v-if="$mq === 'mobile'"
+            >
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
                 <span class="verified-user" v-if="profile.isVerified"></span>
@@ -44,7 +47,7 @@
               >
               <FollowersCounter :profile="profile" />
               <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
-              <div class="mark-line"></div>
+              <div class="mark-line" v-if="$mq === 'desktop'"></div>
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
             </VuePerfectScrollbar>
           </div>
