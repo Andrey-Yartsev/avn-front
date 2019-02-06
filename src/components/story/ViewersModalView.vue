@@ -203,7 +203,7 @@ export default {
       xhr.send();
     },
     share() {
-      alert();
+      this.$copyText(global.document.location.href);
     },
     deleteStory() {
       this.$store.dispatch("story/deletePost", {
