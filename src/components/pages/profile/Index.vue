@@ -16,7 +16,10 @@
             class="profile-header"
             v-if="useMediumPostView || $mq === 'mobile'"
           >
-            <div class="profile-name profile-name_base hidden-desktop" v-if="$mq === 'mobile'">
+            <div
+              class="profile-name profile-name_base hidden-desktop"
+              v-if="$mq === 'mobile'"
+            >
               <div class="profile-name__main">
                 <span class="name">{{ profile.name }}</span>
                 <span class="verified-user" v-if="profile.isVerified"></span>
