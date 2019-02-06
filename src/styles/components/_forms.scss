@@ -121,12 +121,11 @@ textarea {
       color: $default-primary-color;
     }
   }
+}
 
-  .for-verified {
-    display: none;
-  }
+.for-unverified {
 
-  .for-unverified {
+  @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 90%;
   }
 }
@@ -136,10 +135,6 @@ textarea {
   &:before {
     content: "\E604";
     color: $default-secondary-color;
-  }
-
-  .for-unverified {
-    display: none;
   }
 }
 

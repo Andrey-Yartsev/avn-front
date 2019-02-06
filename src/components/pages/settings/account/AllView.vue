@@ -13,23 +13,29 @@
       <div class="shadow-block">
         <div class="container">
           <div class="form-group form-group_with-label">
-            <label
-              class="form-group-inner"
-              :class="{
-                'field-valid': user.emailChecked,
-                'field-invalid no-border': !user.emailChecked
-              }"
-            >
+            <label class="form-group-inner">
               <span class="label">
-                <span class="for-verified">Your email</span>
-                <span class="for-unverified">Please confirm your email</span>
+                <span class="for-verified" v-if="user.emailChecked"
+                  >Your email</span
+                >
+                <span class="for-unverified" v-else-if="!user.emailChecked"
+                  >Please confirm your email</span
+                >
               </span>
-              <input
-                class="input-email"
-                name="email"
-                v-model="localUser.email"
-                disabled
-              />
+              <span
+                class="form-group form-group_clear-gaps"
+                :class="{
+                  'field-valid': user.emailChecked,
+                  'field-invalid no-border': !user.emailChecked
+                }"
+              >
+                <input
+                  class="input-email"
+                  name="email"
+                  v-model="localUser.email"
+                  disabled
+                />
+              </span>
             </label>
           </div>
           <div
