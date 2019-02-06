@@ -36,6 +36,7 @@
             @hideDropdawn="showDropdawn = false"
             :actionPrefix="actionPrefix"
             class="hidden-mobile"
+            v-if="$mq === 'desktop'"
           />
         </div>
       </div>
