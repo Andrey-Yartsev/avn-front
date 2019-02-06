@@ -223,6 +223,10 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
     }
+
+    .popup & {
+      top: 0;
+    }
   }
 
   > * {
@@ -240,6 +244,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: visible;
       margin-top: 63px;
+      box-shadow: none;
     }
   }
 
