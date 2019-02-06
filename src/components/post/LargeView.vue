@@ -37,7 +37,11 @@
           :from="from"
           v-if="$mq === 'desktop'"
         />
-        <p class="text hidden-mobile" v-html="post.text" v-if="$mq === 'desktop'"></p>
+        <p
+          class="text hidden-mobile"
+          v-html="post.text"
+          v-if="$mq === 'desktop'"
+        ></p>
         <CommentsList
           v-if="this.post.canComment"
           :comments="post.fullComments"
