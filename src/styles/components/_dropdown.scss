@@ -36,6 +36,16 @@
         visibility: visible;
         opacity: 1;
       }
+
+      &__btn {
+
+        &_with-text {
+
+          + .more-functions__dropdown {
+            transform: translateY(5px);
+          }
+        }
+      }
     }
   }
 
@@ -67,8 +77,15 @@
     }
 
     &_with-text {
+      padding: 0;
+
+      + .more-functions__dropdown {
+        right: -18px;
+      }
 
       &:before {
+        margin-top: 6px;
+        margin-bottom: 13px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-bottom: 9px;

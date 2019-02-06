@@ -315,29 +315,6 @@
       }
     }
   }
-
-  .more-functions {
-
-    &__btn {
-      padding: 0;
-
-      &:before {
-        margin-top: 6px;
-        margin-bottom: 13px;
-      }
-    }
-
-    &__dropdown {
-      right: -18px;
-    }
-
-    &.open {
-
-      .more-functions__dropdown {
-        transform: translateY(5px);
-      }
-    }
-  }
 }
 
 .sticky-header-controls {
