@@ -193,4 +193,9 @@
 
 .username-group {
   flex: 1;
+  max-width: 100%;
+
+  .SearchResultsPopupCollectionView & {
+    max-width: calc(100% - 40px);
+  }
 }
