@@ -17,7 +17,7 @@ const initState = {
   marker: "",
   user: {},
   source: "feed",
-  collectionTitle: null
+  collection: null
 };
 
 const state = { ...initState };
@@ -28,7 +28,10 @@ const mutations = {
       state[k] = initState[k];
     }
   },
-  userPostsRequestSuccess(state, { list: posts, marker, user, title }) {
+  setCollectionData(state, collection) {
+    state.collection = collection;
+  },
+  userPostsRequestSuccess(state, { list: posts, marker, user }) {
     state.posts = [...state.posts, ...posts];
 
     if (posts.length < state.limit) {
@@ -36,7 +39,6 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
-    state.collectionTitle = title;
     state.loading = false;
     state.marker = state.marker.length ? state.marker : marker;
     state.user = user;
@@ -103,6 +105,7 @@ const actions = {
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
+            commit("setCollectionData", res);
             commit("userPostsRequestSuccess", { ...res, list: res.stories });
             if (!res.stories.length) {
               commit("postsRequestFail", "Collection is empty");

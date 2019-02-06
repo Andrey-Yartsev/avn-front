@@ -90,7 +90,7 @@
             :class="{ 'new-story': isOwner(author.id) }"
           >
             <template v-if="isCollections">
-              {{ collectionTitle }}
+              {{ collection.title }}
             </template>
             <template v-else>
               {{
@@ -249,7 +249,7 @@
       v-if="isCollections"
     >
       <div class="stories-collection-name">
-        {{ collectionTitle }}
+        {{ collection.title }}
       </div>
     </div>
   </div>
@@ -282,6 +282,9 @@ export default {
     };
   },
   computed: {
+    collection() {
+      return this.$store.state.stories.collection || {};
+    },
     length() {
       return this.$store.state.stories.posts.length;
     },
@@ -321,9 +324,6 @@ export default {
         .join(", ");
 
       return `${firstTwo}${othersText}`;
-    },
-    collectionTitle() {
-      return this.$store.state.stories.collectionTitle;
     },
     viewersPage() {
       return this.$store.state.modal.storyViewers.show;
@@ -594,7 +594,17 @@ export default {
         }
       });
     },
-    editHighlight() {},
+    editHighlight() {
+      this.hideDropdawn();
+      this.pause();
+      this.$store.dispatch("modal/show", {
+        name: "createHighlights",
+        data: {
+          editMode: true,
+          collection: this.collection
+        }
+      });
+    },
     removeFromHighlight() {},
     sendHighlightTo() {},
     copyHighlightLink() {},

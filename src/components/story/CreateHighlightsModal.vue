@@ -24,7 +24,7 @@
                   :disabled="!title"
                   @click="save"
                 >
-                  Add
+                  {{ isEditMode ? "Save" : "Add" }}
                 </button>
               </div>
             </div>
@@ -150,25 +150,29 @@ export default {
     Loader
   },
   data() {
+    const isEditMode = this.$store.state.modal.createHighlights.data.editMode;
+    const collection = this.$store.state.modal.createHighlights.data.collection;
     return {
-      checked: [],
+      checked: isEditMode ? collection.stories.map(el => el.id) : [],
       step: 1,
-      title: "",
-      choosenCover: undefined
+      title: isEditMode ? collection.title : "",
+      choosenCover: isEditMode ? collection.coverStoryId : undefined,
+      collection,
+      isEditMode
     };
   },
   computed: {
     loading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.storiesArchive.loading;
     },
     allDataReceived() {
-      return this.$store.state.stories.allDataReceived;
+      return this.$store.state.storiesArchive.allDataReceived;
     },
     stories() {
-      return this.$store.state.stories.posts;
+      return this.$store.state.storiesArchive.posts;
     },
     thumbs() {
-      return this.$store.state.stories.posts.filter(post => {
+      return this.$store.state.storiesArchive.posts.filter(post => {
         return this.checked.indexOf(post.id) !== -1;
       });
     }
@@ -187,18 +191,23 @@ export default {
     },
     save() {
       this.close();
-      this.$store.dispatch("story/saveCollection", {
-        title: this.title,
-        storyIds: this.checked,
-        coverStoryId: this.choosenCover
-      });
+      this.$store
+        .dispatch(`story/saveCollection`, {
+          id: this.isEditMode ? this.collection.id : undefined,
+          title: this.title,
+          storyIds: this.checked,
+          coverStoryId: this.choosenCover
+        })
+        .then(() => {
+          global.document.location.reload();
+        });
     },
     scrollFunction(e) {
       const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
       const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
 
       if (scrolledEnought && !this.loading && !this.allDataReceived) {
-        this.$store.dispatch("stories/getPosts");
+        this.$store.dispatch("storiesArchive/getPosts");
       }
     },
     createNewStory() {
@@ -207,10 +216,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("stories/resetPageState");
-    this.$store.dispatch("stories/setSource", { source: "archive" });
-    this.$store.dispatch("stories/setLimit", { limit: 20 });
-    this.$store.dispatch("stories/getPosts");
+    this.$store.dispatch("storiesArchive/resetPageState");
+    this.$store.dispatch("storiesArchive/getPosts");
   },
   watch: {
     step() {

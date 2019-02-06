@@ -33,13 +33,18 @@ export default {
     });
   },
   saveCollection(data) {
-    return tokenRequest(`stories/collections`, {
-      method: "POST",
+    const { id, title, storyIds, coverStoryId } = data;
+    return tokenRequest(`stories/collections/${id || ""}`, {
+      method: id ? "PUT" : "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        title,
+        storyIds,
+        coverStoryId
+      })
     });
   },
   deletePost({ postId }) {
