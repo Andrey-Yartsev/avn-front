@@ -78,20 +78,6 @@
           position: absolute;
         }
       }
-
-      &:after {
-        content: "";
-        position: absolute;
-        left: -1px;
-        right: -1px;
-        top: -1px;
-        bottom: -1px;
-        background: linear-gradient(
-          30deg,
-          $secondary-color-12 10%,
-          $primary-color-12 90%
-        );
-      }
     }
   }
 

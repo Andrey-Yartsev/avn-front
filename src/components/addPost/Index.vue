@@ -5,7 +5,7 @@
   >
     <form
       :class="[
-        'add-new-form',
+        'add-new-form bg-gradient_light-desk bg-gradient_light',
         { expanded: expanded || initialExpanded || preloadedMedias.length }
       ]"
     >

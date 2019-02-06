@@ -27,11 +27,11 @@
       object-fit: cover;
     }
     &:empty {
-      background: linear-gradient(
-        30deg,
-        $secondary-color-12 10%,
-        $primary-color-12 90%
-      );
+      //background: linear-gradient(
+      //  30deg,
+      //  $secondary-color-12 10%,
+      //  $primary-color-12 90%
+      //);
       & ~ .reset-bg {
         display: none;
       }

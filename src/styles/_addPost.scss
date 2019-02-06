@@ -206,29 +206,6 @@
     z-index: 0;
   }
 
-  &:after {
-    content: "";
-    position: absolute;
-    left: -2px; right: -2px;
-    top: -2px;
-    bottom: -2px;
-    display: none;
-    z-index: -1;
-    background: linear-gradient(
-      60deg,
-      $secondary-color-12 10%,
-      $primary-color-12 90%
-    );
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
-    }
-
-    .popup & {
-      top: 0;
-    }
-  }
-
   > * {
     position: relative;
     z-index: 2;
@@ -243,7 +220,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: visible;
-      margin-top: 63px;
+      margin-top: 60px;
       box-shadow: none;
     }
   }
