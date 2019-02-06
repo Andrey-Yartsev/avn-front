@@ -28,7 +28,7 @@
                 ><a>{{ profile.username }}</a></span
               >
             </div>
-            <div class="profile-desc">
+            <VuePerfectScrollbar class="profile-desc">
               <p
                 class="profile-text"
                 v-if="profile.about"
@@ -46,7 +46,7 @@
               <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
               <div class="mark-line"></div>
               <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
-            </div>
+            </VuePerfectScrollbar>
           </div>
         </div>
         <div
@@ -149,6 +149,7 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "ProfileHome",
@@ -166,7 +167,8 @@ export default {
     Footer,
     PostSmall,
     PostMedium,
-    Highlights
+    Highlights,
+    VuePerfectScrollbar
   },
 
   data() {
