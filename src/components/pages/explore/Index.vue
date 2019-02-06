@@ -1,6 +1,6 @@
 <template>
   <div class="exploreView">
-    <MobileHeader></MobileHeader>
+    <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
       class="addPost-btn-float hidden-desktop"
       to="/addPost"

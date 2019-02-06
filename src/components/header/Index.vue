@@ -5,7 +5,7 @@
         :class="['container', 'header_container']"
         v-bind:style="{ right: scrollBarWidth + 'px' }"
       >
-        <DesktopHeader v-if="!notFound" />
+        <DesktopHeader v-if="!notFound && $mq === 'desktop'" />
         <h1 class="header-logo">
           <router-link to="/">
             <span class="header-logo__text">OnMyTeam</span>

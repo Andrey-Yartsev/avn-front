@@ -25,7 +25,7 @@
             </a>
           </div>
         </div>
-        <MobileHeader activeName="chat" />
+        <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
       </div>
     </template>
 

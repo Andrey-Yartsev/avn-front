@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <MobileHeader />
+    <MobileHeader v-if="$mq === 'mobile'"/>
 
     <router-link
       class="addPost-btn-float hidden-desktop"
