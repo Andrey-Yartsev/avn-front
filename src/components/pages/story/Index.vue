@@ -140,7 +140,7 @@
                 </button>
               </li>
             </ul>
-            <ul v-esle>
+            <ul v-else>
               <li>
                 <button
                   class="storySettings"
