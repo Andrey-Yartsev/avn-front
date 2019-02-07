@@ -58,6 +58,7 @@
             'margin-right': -scrollBarWidth + 'px',
             'padding-right': scrollBarWidth + 'px'
           }"
+          v-if="$mq === 'desktop'"
         >
           <div class="container">
             <ProfileActions
@@ -68,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="profile-actions-mob">
+      <div class="profile-actions-mob" v-if="$mq === 'mobile'" >
         <ProfileActions
           :profile="profile"
           :page="pageName"
