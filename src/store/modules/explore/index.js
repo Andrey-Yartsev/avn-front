@@ -1,5 +1,5 @@
 "use strict";
-
+import PostApi from "@/api/post";
 import PostMixin from "@/store/mixins/posts";
 
 const initState = {
@@ -28,6 +28,22 @@ const mutations = {
 };
 
 const actions = {
+  getPosts({ commit, state }) {
+    const { limit, offset, marker, source } = state;
+    commit("postsRequest");
+
+    return PostApi.getExplorePosts({ limit, offset, marker, source })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("postsRequestSuccess", res);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
+      });
+  },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
   }

@@ -12,6 +12,16 @@ export default {
       }
     });
   },
+  getExplorePosts({ offset, limit, marker, source }) {
+    return anyRequest(`posts/${source}`, {
+      method: "GET",
+      query: {
+        offset,
+        limit,
+        marker
+      }
+    });
+  },
   getPost({ postId }) {
     return anyRequest(`posts/${postId}`, {
       method: "GET"

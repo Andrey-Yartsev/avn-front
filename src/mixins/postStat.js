@@ -35,6 +35,8 @@ export default {
       });
     },
     postStatView(post) {
+      if (!this.$root.ws) return;
+
       this.postsStatViewed.push(post.id);
       this.$root.ws.send({
         act: "collect",
