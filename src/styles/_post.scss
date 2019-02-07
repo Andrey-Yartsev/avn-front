@@ -17,6 +17,7 @@
   overflow: visible;
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    width: auto;
     max-width: 100%;
     box-shadow: none;
     background-color: transparent;
