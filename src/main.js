@@ -22,7 +22,7 @@ Vue.use(VeeValidate);
 
 Vue.use(VueMq, {
   breakpoints: {
-    mobile: 576,
+    mobile: 768,
     tablet: 990,
     desktop: Infinity
   }
