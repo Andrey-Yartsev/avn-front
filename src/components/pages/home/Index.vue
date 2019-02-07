@@ -9,7 +9,7 @@
       <div class="row">
         <div class="content-col">
           <div class="no-padding">
-            <AddPost v-if="$mq === 'desktop'" ></AddPost>
+            <AddPost v-if="$mq === 'desktop'"></AddPost>
             <NewFeedPostToast :init="init" :newPosts="newPosts" />
             <div class="feed rounded-container shadow-block reset-btr">
               <PostCollection :posts="posts" from="home" />
