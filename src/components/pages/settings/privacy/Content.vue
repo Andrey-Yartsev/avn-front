@@ -9,7 +9,7 @@
     </div>
 
     <form v-on:submit.stop.prevent="save">
-      <h1 class="form-title">Privacy Settings</h1>
+      <h1 class="form-title" v-if="$mq === 'desktop'">Privacy Settings</h1>
       <div class="form-title private-profile-block border-top">
         <div class="inner">
           <span class="semi-transparent">

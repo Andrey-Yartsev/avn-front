@@ -8,7 +8,7 @@
           </span>
         </div>
       </div>
-      <h1 class="form-title hidden-mobile">Personal Information</h1>
+      <h1 class="form-title hidden-mobile" v-if="$mq === 'desktop'">Personal Information</h1>
       <div class="shadow-block border-top">
         <div class="container">
           <div class="payouts-personal-info">

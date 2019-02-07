@@ -1,7 +1,7 @@
 <template>
   <div class="SettingsSecurityView">
     <form v-on:submit.stop.prevent="confirmOtp">
-      <h1 class="form-title">
+      <h1 class="form-title" v-if="$mq === 'desktop'">
         Security
       </h1>
       <div class="form-title border-top">
