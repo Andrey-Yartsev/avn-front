@@ -345,6 +345,13 @@
         }
       }
     }
+    
+    &.posts {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+      }
+    }
 
     .profile & {
 
