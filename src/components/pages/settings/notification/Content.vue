@@ -1,7 +1,9 @@
 <template>
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
-      <h1 class="form-title" v-if="$mq === 'desktop'">Notifications Settings</h1>
+      <h1 class="form-title" v-if="$mq === 'desktop'">
+        Notifications Settings
+      </h1>
       <div class="form-title border-top">
         <div class="inner">
           <span class="semi-transparent">
