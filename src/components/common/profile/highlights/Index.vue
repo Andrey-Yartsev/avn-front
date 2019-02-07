@@ -13,7 +13,7 @@
         <!--</button>-->
       </div>
       <div class="stories-group">
-        <VuePerfectScrollbar>
+        <VuePerfectScrollbar @ps-scroll-y="scrollFunction">
           <div class="stories">
             <a href="#" class="story" v-if="isOwner(userId)">
               <div
@@ -74,6 +74,12 @@ export default {
   computed: {
     posts() {
       return this.$store.state.highlights.posts;
+    },
+    loading() {
+      return this.$store.state.highlights.loading;
+    },
+    allDataReceived() {
+      return this.$store.state.highlights.allDataReceived;
     }
   },
   methods: {
@@ -81,6 +87,14 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "createHighlights"
       });
+    },
+    scrollFunction(e) {
+      const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
+      const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
+
+      if (scrolledEnought && !this.loading && !this.allDataReceived) {
+        this.$store.dispatch("highlights/getPosts");
+      }
     }
   },
   created() {
