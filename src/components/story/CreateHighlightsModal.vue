@@ -65,7 +65,7 @@
                   <div class="form-group form-group_clear-gaps">
                     <input
                       name="name"
-                      maxlength="100"
+                      maxlength="70"
                       placeholder="Highlights"
                       class="text-centered lg"
                       v-model="title"
