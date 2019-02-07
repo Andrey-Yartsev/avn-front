@@ -128,13 +128,6 @@
       }
     }
   }
-
-  .story-info {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: calc(100% - 70px);
-    }
-  }
 }
 
 .storyCollectionView {
@@ -617,6 +610,13 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
+    }
+  }
+
+  .story-info {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: calc(100% - 70px);
     }
   }
 }
