@@ -23,7 +23,9 @@
             {{ post.user.name }}
           </a>
           <span v-if="post.user.isVerified" class="verified-user"></span>
-          <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">{{ dateTime }}</div>
+          <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">
+            {{ dateTime }}
+          </div>
         </div>
         <div class="user-login reset-ml hidden-mobile" v-if="$mq === 'desktop'">
           <a :href="`/${post.user.username}`">{{ post.user.username }}</a>
