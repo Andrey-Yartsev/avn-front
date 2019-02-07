@@ -15,7 +15,7 @@ export default {
   methods: {
     keyUp(e) {
       if (e.keyCode === 27) {
-        this.onClose();
+        this.onClose(e);
       }
     }
   },
