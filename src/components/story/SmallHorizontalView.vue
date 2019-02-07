@@ -23,9 +23,9 @@
             {{ post.user.name }}
           </a>
           <span v-if="post.user.isVerified" class="verified-user"></span>
-          <div class="timestamp hidden-mobile">{{ dateTime }}</div>
+          <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">{{ dateTime }}</div>
         </div>
-        <div class="user-login reset-ml hidden-mobile">
+        <div class="user-login reset-ml hidden-mobile" v-if="$mq === 'desktop'">
           <a :href="`/${post.user.username}`">{{ post.user.username }}</a>
           <span class="followme" v-if="post.user.subscribedOn">
             <span class="followme__txt">Follows you</span>
