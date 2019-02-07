@@ -28,7 +28,7 @@
           </li>
           <li v-else>
             <button class="btn-copy-link" type="button" @click="copyHref">
-              Copy link to post
+              Copy link
             </button>
           </li>
         </ul>
