@@ -13,7 +13,10 @@
             <div class="popup-body">
               <div class="popup-container-scroll">
                 <div class="highlights-form">
-                  <div class="list-cover-variation">
+                  <VuePerfectScrollbar
+                    class="list-cover-variation"
+                    @ps-scroll-x="scrollFunction"
+                  >
                     <Loader :fullscreen="false" v-if="loading" />
                     <div
                       class="highlight-unit"
@@ -28,7 +31,7 @@
                         {{ post.title }}
                       </div>
                     </div>
-                  </div>
+                  </VuePerfectScrollbar>
                 </div>
               </div>
             </div>
@@ -92,20 +95,19 @@ export default {
     },
     close() {
       this.$store.dispatch("modal/hide", { name: "chooseHighlight" });
-    }
-    // scrollFunction(e) {
-    //   const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
-    //   const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
+    },
+    scrollFunction(e) {
+      const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
+      const scrolledEnought = scrollWidth - (offsetWidth + scrollLeft) < 100;
 
-    //   if (scrolledEnought && !this.loading && !this.allDataReceived) {
-    //     this.$store.dispatch("stories/getPosts");
-    //   }
-    // }
+      if (scrolledEnought && !this.loading && !this.allDataReceived) {
+        this.$store.dispatch("highlights/getPosts");
+      }
+    }
   },
   created() {
     this.$store.dispatch("highlights/resetPageState");
     this.$store.dispatch("highlights/setSource", { source: this.user.id });
-    // this.$store.dispatch("highlights/setLimit", { limit: 10 });
     this.$store.dispatch("highlights/getPosts");
   }
 };

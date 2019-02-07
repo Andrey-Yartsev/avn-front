@@ -642,7 +642,7 @@ export default {
           collection: this.collection
         })
         .then(() => {
-          // global.document.location.reload();
+          this.$router.push(`/${this.user.username}`);
         });
     }
   },
