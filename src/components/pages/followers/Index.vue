@@ -5,7 +5,7 @@
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost" />
     <div class="white-bg-block">
-      <div class="profile-sticky-header">
+      <div class="profile-sticky-header" v-if="$mq === 'desktop'">
         <ProfileBackground :profile="profile" />
         <div class="profile-header-container">
           <div class="profile-images">
