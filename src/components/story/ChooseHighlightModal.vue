@@ -13,11 +13,11 @@
             <div class="popup-body">
               <div class="popup-container-scroll">
                 <div class="highlights-form">
+                  <Loader :fullscreen="false" v-if="loading" />
                   <VuePerfectScrollbar
                     class="list-cover-variation"
                     @ps-scroll-x="scrollFunction"
                   >
-                    <Loader :fullscreen="false" v-if="loading" />
                     <div
                       class="highlight-unit"
                       v-for="post in posts"
