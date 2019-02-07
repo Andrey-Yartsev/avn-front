@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <div class="settings-header">
+    <div class="settings-header" v-if="$mq === 'mobile'">
       <router-link :to="returnRoute" class="header-return-btn"></router-link>
 
       <h1 class="page-title">
