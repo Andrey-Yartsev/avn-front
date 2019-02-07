@@ -9,7 +9,7 @@
       <div class="row">
         <div class="content-col">
           <div class="no-padding">
-            <AddPost></AddPost>
+            <AddPost v-if="$mq === 'desktop'" ></AddPost>
             <NewFeedPostToast :init="init" :newPosts="newPosts" />
             <div class="feed rounded-container shadow-block reset-btr">
               <PostCollection :posts="posts" from="home" />
@@ -23,7 +23,7 @@
           class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer"
         >
           <StoriesWrapper></StoriesWrapper>
-          <Footer></Footer>
+          <Footer v-if="$mq === 'desktop'"></Footer>
         </div>
       </div>
     </div>
