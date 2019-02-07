@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="profile-actions-mob" v-if="$mq === 'mobile'" >
+      <div class="profile-actions-mob" v-if="$mq === 'mobile'">
         <ProfileActions
           :profile="profile"
           :page="pageName"
