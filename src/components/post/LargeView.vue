@@ -20,7 +20,11 @@
         v-on:clickOnDetailsView="clickOnCommentForm"
         v-if="$mq === 'mobile'"
       />
-      <p class="text hidden-desktop" v-html="post.text"></p>
+      <p
+        class="text hidden-desktop"
+        v-html="post.text"
+        v-if="$mq === 'mobile'"
+      ></p>
       <Media
         v-if="post.media.length"
         :medias="post.media"
