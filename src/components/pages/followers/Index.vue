@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="container">
-        <div class="content-nav hidden-mobile">
+        <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">
           <router-link to="/following" class="content-nav__item"
             >Following {{ profile.followingCount }}</router-link
           >
