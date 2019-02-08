@@ -19,6 +19,7 @@
         :from="from"
         v-on:clickOnDetailsView="clickOnCommentForm"
         v-if="$mq === 'mobile'"
+        :postedAt="post.postedAt"
       />
       <p
         class="text hidden-desktop"
