@@ -156,6 +156,11 @@
         }
       }
     }
+
+    &.disabled {
+      color: $main-color;
+      opacity: .5;
+    }
   }
 }
 
