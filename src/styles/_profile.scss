@@ -776,9 +776,18 @@
 .tip-amount-field {
   flex: 1;
   margin: 0 15px;
+  position: relative;
 
   input {
     text-align: center;
+  }
+
+  &.field-invalid,
+  &.field-valid {
+
+    input {
+      padding-right: 10px;
+    }
   }
 }
 

@@ -3,7 +3,7 @@
     <span role="button" class="btn btn-cancel" @click="$emit('cancel')"
       >Cancel</span
     >
-    <div class="tip-amount-field">
+    <div class="tip-amount-field form-group form-group_clear-gaps">
       <input
         name="amount"
         class="tip-amount-input rounded"
