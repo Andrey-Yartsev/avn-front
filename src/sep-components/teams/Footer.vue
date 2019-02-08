@@ -10,7 +10,6 @@
             ]"
             v-for="(page, key) in pages"
             :key="page.name"
-            v-if="shouldShowLink(page.url)"
           >
             <template v-if="isExternal(page.url)">
               <a :href="page.url" target="_blank">{{ page.name }}</a>
@@ -18,9 +17,6 @@
             <template v-else>
               <router-link :to="page.url">{{ page.name }}</router-link>
             </template>
-          </div>
-          <div class="FooterNavView">
-            <router-link to="/2257">USC2257</router-link>
           </div>
         </div>
       </div>
@@ -31,26 +27,30 @@
 <script>
 export default {
   name: "Footer",
+  data() {
+    return {
+      location: global.location.pathname
+    };
+  },
   computed: {
     pages() {
-      const length = this.$store.state.common.pages.length;
-      return this.$store.state.common.pages.slice(0, length - 1);
-    },
-    last() {
-      const length = this.$store.state.common.pages.length;
-      return this.$store.state.common.pages[length - 1];
+      return this.$store.state.common.pages.filter(page => {
+        return page.url !== this.location;
+      });
     }
   },
   methods: {
     isExternal(url) {
       return url.match(/^http.*/);
-    },
-    shouldShowLink(link) {
-      return window.location.pathname !== link;
     }
   },
   created() {
     this.$store.dispatch("common/getPages");
+  },
+  watch: {
+    $route() {
+      this.location = global.location.pathname;
+    }
   }
 };
 </script>
