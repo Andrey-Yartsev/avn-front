@@ -154,6 +154,11 @@ export default {
 
       throw new Error("Invalid media format");
     }
+  },
+  watch: {
+    medias() {
+      this.activeSlide = 0;
+    }
   }
 };
 </script>
