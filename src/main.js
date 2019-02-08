@@ -5,15 +5,13 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueClipboard from "vue-clipboard2";
 import VeeValidate from "vee-validate";
 
-import App from "./App.vue";
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
 
-import router from "./router";
-import store from "./store";
-
-import "./iconfont";
+import "@/iconfont";
 
 Vue.config.productionTip = false;
-// VueClipboard.config.autoSetContainer = true;
 
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueScrollTo);
