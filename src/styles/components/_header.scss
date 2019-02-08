@@ -1095,6 +1095,7 @@
   }
 
   &__header {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       @media screen and (orientation: landscape) {
         display: flex;
@@ -1107,6 +1108,7 @@
           margin: 0;
           padding-bottom: 20px;
           position: relative;
+          max-width: 50%;
 
           &:after {
             content: "";
@@ -1252,6 +1254,7 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       @media screen and (orientation: landscape) {
         flex: 0 0 50%;
+        max-width: 50%;
       }
     }
 
