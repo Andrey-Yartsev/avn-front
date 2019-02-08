@@ -5,6 +5,75 @@
   body {
     overflow-y: auto;
   }
+
+  .site-footer {
+    position: relative;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-top: 55px;
+      border-top: 1px solid rgba($gray, 0.2);
+    }
+
+    &:before {
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      position: absolute;
+      background: linear-gradient(
+        to right,
+        rgba($gray, 0.2) 0%,
+        transparent 100%
+      );
+      display: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
+    .container {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .FooterNavCollectionView {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .footer-nav {
+
+    .FooterNavView {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 15px;
+      }
+
+      &:last-child {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: 21px;
+          flex: 0 0 100%;
+        }
+      }
+    }
+
+    a {
+      opacity: .5;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .login,
@@ -156,61 +225,7 @@
       margin-right: 0.25em;
     }
   }
-  .login-footer {
-    justify-content: space-between;
-    margin: 55px 0 0;
-    padding: 21px 0 0;
-    display: flex;
 
-    &.second-footer {
-      margin: 0;
-      justify-content: center;
-      text-align: center;
-    }
-
-    &:not(.second-footer) {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        border-top: 1px solid rgba($gray, 0.2);
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: 0;
-        position: relative;
-
-        &:before {
-          content: "";
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 1px;
-          position: absolute;
-          background: linear-gradient(
-            to right,
-            rgba($gray, 0.2) 0%,
-            transparent 100%
-          );
-        }
-      }
-    }
-    a {
-      color: inherit;
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        font-size: 0.86em;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 5px;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
   .text {
     max-width: 960px;
     margin: 0 auto;
