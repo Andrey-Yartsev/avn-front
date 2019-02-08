@@ -331,37 +331,6 @@
     }
   }
 
-  .right-col {
-    display: flex;
-    flex-direction: column;
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      flex: 1;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 100%;
-      background: $white;
-    }
-
-    .lightbox-post & {
-
-      .explore-page & {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          min-height: 50px;
-        }
-      }
-    }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: 620px;
-      }
-    }
-  }
-
   .actions {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -490,6 +459,37 @@
   }
 }
 
+.right-col {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex: 1;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: 100%;
+    background: $white;
+  }
+
+  .lightbox-post & {
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: 50px;
+      }
+    }
+  }
+
+  .popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 620px;
+    }
+  }
+}
+
 .post-no-comments {
   margin-bottom: 76px;
   min-height: 62px;
@@ -500,6 +500,14 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-bottom: 0;
     height: 100%;
+  }
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+
+    @media screen and (orientation: landscape) {
+      margin-bottom: 56px;
+      height: calc(100% - 56px);
+    }
   }
 }
 
@@ -517,7 +525,7 @@
   .postPage & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 54px;
+      margin-bottom: 66px;
     }
   }
 
