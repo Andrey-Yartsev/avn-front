@@ -345,6 +345,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 0;
       padding-bottom: 16px;
+      margin-top: auto;
     }
 
     &__btn {
