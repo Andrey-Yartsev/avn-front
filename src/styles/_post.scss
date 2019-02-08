@@ -32,6 +32,22 @@
     max-width: 100%;
   }
 
+  .lightbox-post & {
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        top: 30px;
+        bottom: 30px;
+
+        @media screen and (orientation: landscape) {
+          top: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+
   .explore-page & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -103,6 +119,10 @@
           left: auto;
           opacity: 1;
           display: block;
+
+          @media screen and (orientation: landscape) {
+            top: 5px;
+          }
         }
       }
     }
@@ -139,6 +159,13 @@
         @include media-breakpoint-down($desktop-breakpoint) {
           display: block;
           z-index: 3;
+
+          @media screen and (orientation: landscape) {
+            width: 50px;
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
+          }
         }
       }
     }
@@ -317,6 +344,16 @@
       background: $white;
     }
 
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          min-height: 50px;
+        }
+      }
+    }
+
     .popup & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -363,7 +400,6 @@
           border-bottom: none;
           margin-bottom: 0;
           color: #fff;
-          padding-bottom: 0;
           min-height: auto;
           position: static;
         }
@@ -411,7 +447,7 @@
         @include media-breakpoint-down($desktop-breakpoint) {
           right: 7px;
           top: auto;
-          bottom: -5px;
+          bottom: 8px;
         }
       }
     }
