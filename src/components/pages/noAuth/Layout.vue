@@ -43,37 +43,24 @@
             Share and check what others have going on right now
           </p>
         </div>
-        <div class="login-footer hidden-mobile">
-          <router-link to="/terms">Terms</router-link>
-          <router-link to="/privacy">Privacy</router-link>
-          <router-link to="/contact">Contact</router-link>
-          <a href="https://epoch.com/" target="_blank">Billing Support</a>
-          <router-link to="/2257">USC2257</router-link>
-        </div>
-        <!--<div class="login-footer second-footer hidden-mobile">-->
-        <!--<router-link to="/2257">USC2257</router-link>-->
-        <!--</div>-->
+        <Footer v-if="$mq === 'desktop'" />
       </div>
       <div class="login-form-col auth-block">
         <slot name="content" />
-        <div class="login-footer hidden-desktop">
-          <router-link to="/terms">Terms</router-link>
-          <router-link to="/privacy">Privacy</router-link>
-          <router-link to="/contact">Contact</router-link>
-          <a href="https://epoch.com/" target="_blank">Billing Support</a>
-        </div>
-        <div class="login-footer second-footer hidden-desktop">
-          <a href="/2257">USC2257</a>
-        </div>
+        <Footer v-if="$mq === 'mobile'" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Footer from "@/components/footer/Index";
+
 export default {
   name: "NoAuthLayout",
-
+  components: {
+    Footer
+  },
   props: {
     mainClass: {
       type: String,

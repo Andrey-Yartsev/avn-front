@@ -26,10 +26,8 @@ import StoryPage from "./components/pages/story/Index";
 import AddPostPage from "./components/pages/addPost/Index";
 import StreamPage from "./components/pages/stream/Index";
 import FollowersPage from "./components/pages/followers/Index";
-import TermsPage from "./components/pages/static/Terms";
-import PrivacyPage from "./components/pages/static/Privacy";
+import StaticPage from "./components/pages/static/Index";
 import ContactsPage from "./components/pages/static/Contacts";
-import Record2257Page from "./components/pages/static/Record2257";
 import StatPage from "./components/statistics/Page";
 
 import Auth from "./auth";
@@ -359,8 +357,9 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/terms",
-    component: TermsPage,
+    component: StaticPage,
     meta: {
+      apiPoint: "terms",
       staticPage: true,
       cssName: "staticPage"
     }
@@ -368,8 +367,9 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/privacy",
-    component: PrivacyPage,
+    component: StaticPage,
     meta: {
+      apiPoint: "privacy",
       staticPage: true,
       cssName: "staticPage"
     }
@@ -386,8 +386,9 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/2257",
-    component: Record2257Page,
+    component: StaticPage,
     meta: {
+      apiPoint: "2257",
       staticPage: true,
       cssName: "staticPage"
     }
