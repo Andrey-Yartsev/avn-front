@@ -41,71 +41,70 @@
       display: flex;
       justify-content: space-between;
     }
+  }
 
-    .post {
-      background-color: $white;
+  .post {
+    background-color: $white;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      box-shadow: 0 8px 30px rgba(#000, 0.1);
+      border-bottom: none;
+      width: 100%;
+      margin: 0 0 30px;
+      //padding-bottom: 0;
+    }
+
+    &:last-child {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-bottom: 1px solid rgba($gray, 0.2);
+      }
+    }
+
+    .postCollectionView & {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    &.open-dropdown-inside {
+
+      .post-header {
+        z-index: auto;
+      }
+    }
+
+    &-column {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        box-shadow: 0 8px 30px rgba(#000, 0.1);
-        border-bottom: none;
-        width: 100%;
-        margin: 0 0 30px;
-        padding-bottom: 0;
+        flex: 0 0 calc(50% - 15px);
+        width: calc(50% - 15px);
+        margin: 0 15px;
+      }
+
+      &:first-child {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-left: 0;
+        }
       }
 
       &:last-child {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          border-bottom: 1px solid rgba($gray, 0.2);
-        }
-      }
-
-      .postCollectionView & {
-        padding-bottom: 0;
-        border-bottom: none;
-      }
-
-      &.open-dropdown-inside {
-
-        .post-header {
-          z-index: auto;
-        }
-      }
-
-      &-column {
-
         @include media-breakpoint-up($desktop-breakpoint) {
-          flex: 0 0 calc(50% - 15px);
-          width: calc(50% - 15px);
-          margin: 0 15px;
-        }
-
-        &:first-child {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            margin-left: 0;
-          }
-        }
-
-        &:last-child {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            margin-right: 0;
-          }
+          margin-right: 0;
         }
       }
+    }
 
-      &-header {
-        z-index: 3;
-      }
+    &-header {
+      z-index: 3;
+    }
 
-      .actions {
-        z-index: 2;
+    .actions {
+      z-index: 2;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding-bottom: 16px;
-          z-index: 1;
-        }
+      @include media-breakpoint-up($desktop-breakpoint) {
+        z-index: 1;
       }
     }
   }
