@@ -819,10 +819,9 @@
 }
 
 .comments-list {
-  padding: 0 15px 9px;
+  padding: 0 15px 8px;
 
   .post & {
-    padding-bottom: 0;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-top: 10px;
