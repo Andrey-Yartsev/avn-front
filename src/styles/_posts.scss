@@ -192,6 +192,28 @@
         }
       }
     }
+
+    .timestamp {
+      display: none;
+
+      .lightbox-post & {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-left: auto;
+            opacity: 1;
+            display: block;
+            white-space: nowrap;
+            padding-left: 12px;
+
+            @media screen and (orientation: landscape) {
+              margin-right: 36px;
+            }
+          }
+        }
+      }
+    }
   }
 
   .text {
@@ -267,14 +289,7 @@
         .explore-page & {
 
           @include media-breakpoint-down($desktop-breakpoint) {
-            position: absolute;
-            top: 20px;
-            right: 15px;
-            opacity: 1;
-
-            @media screen and (orientation: landscape) {
-              right: 55px;
-            }
+            display: none;
           }
         }
       }
