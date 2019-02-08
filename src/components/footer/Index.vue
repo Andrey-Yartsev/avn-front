@@ -1,13 +1,13 @@
 <template>
-  <component :is="footer" />
+  <Footer />
 </template>
 
 <script>
+import Footer from "@/sep-components/teams/Footer";
+
 export default {
-  computed: {
-    footer() {
-      return "rl-footer";
-    }
+  components: {
+    Footer
   }
 };
 </script>
