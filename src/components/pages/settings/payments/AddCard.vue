@@ -11,7 +11,7 @@
       >
         <div class="border-top shadow-block">
           <div class="container">
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Street</span>
                 <input
@@ -22,7 +22,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">City</span>
                 <input
@@ -33,7 +33,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">State/Country</span>
                 <input
@@ -44,7 +44,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">ZIP/Post Code</span>
                 <input
@@ -55,7 +55,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Country</span>
                 <input
@@ -66,7 +66,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Email</span>
                 <input
@@ -77,7 +77,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Card Number</span>
                 <input
@@ -120,7 +120,7 @@
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Cardholder Name</span>
                 <input v-model="userinfo.name" type="text" />
