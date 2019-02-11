@@ -149,6 +149,13 @@
       }
     }
   }
+
+  .addPost-btn-float {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      z-index: 7;
+    }
+  }
 }
 
 .profile-header-container {
