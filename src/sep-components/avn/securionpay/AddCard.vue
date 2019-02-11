@@ -266,6 +266,15 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {
+    let script = document.createElement("script");
+    script.onload = () => {
+      console.log("securionpay loaded");
+      console.log(window.Securionpay);
+    };
+    script.async = true;
+    script.src = "https://securionpay.com/js/securionpay.js";
+    document.head.appendChild(script);
+  }
 };
 </script>
