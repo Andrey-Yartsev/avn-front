@@ -211,7 +211,7 @@ export default {
   mixins: [Form, User],
   data() {
     return {
-      error: null,
+      cardError: null,
       cardNumber: "",
       cvc: "",
       expMonth: "",
@@ -235,6 +235,11 @@ export default {
       return this.user.isPaymentCardConnected;
     }
   },
+  watch: {
+    cardError(error) {
+      this.$store.dispatch("global/flashToast", error);
+    }
+  },
   methods: {
     next() {
       window.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
@@ -245,20 +250,13 @@ export default {
     },
     createCardTokenCallback(result) {
       if (result.error) {
-        this.error = result.error.message;
+        this.cardError = result.error.message;
       } else {
         this.$store
           .dispatch("payment/card/add", {
             email: this.email,
             token: result.id,
-            userinfo: {
-              street: "825 Dawson Dr, Qwintry Suite 12",
-              city: "Newark",
-              state: "DE",
-              zip: "19712-082",
-              country: "US",
-              name: "PAVEL MAVEL"
-            }
+            userinfo: this.userinfo
           })
           .then(r => {
             console.log(">>", r);
