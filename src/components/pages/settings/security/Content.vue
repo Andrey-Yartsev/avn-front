@@ -118,7 +118,7 @@
             <Loader :fullscreen="false" text="" class="transparent small" />
           </div>
 
-          <div class="content shadow-block" v-if="sessions.length">
+          <div class="content shadow-block" v-else-if="sessions.length">
             <div class="SessionsView" v-for="v in sessions" v-bind:key="v.id">
               <div class="session-info-header">
                 <p>

@@ -164,9 +164,19 @@
     min-height: 60px;
   }
 
-  .payments &,
-  .payouts & {
+  .session-content & {
+    min-height: 70px;
+    .lds-dual-ring {
+      top: -30px;
+    }
+  }
 
+  .payments & {
+    min-height: 80px;
+  }
+
+
+  .payouts & {
     .lds-dual-ring {
       top: 70px;
     }
