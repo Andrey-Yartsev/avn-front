@@ -511,9 +511,11 @@
 
   svg {
     width: 105px;
+    height: 26px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 125px;
+      height: 30px;
     }
   }
 
