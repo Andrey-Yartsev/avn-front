@@ -26,22 +26,6 @@
                 <BirthDateSelect class="birthDateWrapper" v-model="birthDate" />
               </label>
             </div>
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">Expiration Date</span>
-                <span class="expireationDateWrapper">
-                  <span class="card-date-range">
-                    <input type="text" />
-                    <span class="separator">/</span>
-                    <input type="text" />
-                  </span>
-                  <span class="card-cvc-num">
-                    <span class="name-cvc">Cvc</span>
-                    <input type="text" />
-                  </span>
-                </span>
-              </label>
-            </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
@@ -196,8 +180,8 @@
                       to="/terms"
                       class="payouts-terms"
                       target="_blank"
-                      >Terms of Service</router-link
-                    >
+                      >Terms of Service
+                    </router-link>
                   </div>
                 </div>
               </label>
