@@ -80,7 +80,10 @@
       padding: 0;
 
       + .more-functions__dropdown {
-        right: -18px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: -18px;
+        }
       }
 
       &:before {
