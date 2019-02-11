@@ -195,9 +195,6 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 5.1em;
           transform: translate(-5px, -12px);
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
         }
 
         .cls-1 {
