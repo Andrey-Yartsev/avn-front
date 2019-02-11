@@ -15,7 +15,10 @@
             this.likes.length
           }}</span>
         </div>
-        <div class="stream-chart-legend-item stream-chart-legend-item__tips">
+        <div
+          v-if="$root.appName !== 'avn'"
+          class="stream-chart-legend-item stream-chart-legend-item__tips"
+        >
           <span class="stream-chart-legend-item-label">Funds</span>
           <span class="stream-chart-legend-item-value">{{ this.tips }}</span>
         </div>
@@ -63,7 +66,10 @@
               {{ this.likes.length }}
             </div>
           </div>
-          <div class="stream-summary-data-item stream-summary-data-item__tips">
+          <div
+            v-if="$root.appName !== 'avn'"
+            class="stream-summary-data-item stream-summary-data-item__tips"
+          >
             <div class="stream-summary-data-item__label">Funds</div>
             <div class="stream-summary-data-item__value">{{ this.tips }}</div>
           </div>

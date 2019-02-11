@@ -33,11 +33,15 @@
           </button>
         </div>
         <div class="profile-actions" v-else>
-          <div class="profile-actions-tip-form" :class="{ show: showTip }">
+          <div
+            v-if="$root.appName !== 'avn'"
+            class="profile-actions-tip-form"
+            :class="{ show: showTip }"
+          >
             <Tip :user="profile" ref="tip" @cancel="closeTip" />
           </div>
           <button
-            v-if="profile.canEarn"
+            v-if="profile.canEarn && $root.appName !== 'avn'"
             type="button"
             class="profile-actions__btn btn-with-icon profile-tip-btn selected"
             @click="openTip"

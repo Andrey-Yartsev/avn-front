@@ -68,6 +68,7 @@
             ></button>
           </form>
           <Tip
+            v-if="$root.appName !== 'avn'"
             :class="{ show: showTip }"
             :user="streamer"
             ref="tip"
@@ -88,7 +89,7 @@
           <span
             class="stream-btn stream-tip-btn"
             type="button"
-            v-if="streamer.canEarn"
+            v-if="streamer.canEarn && $root.appName !== 'avn'"
             @click="showTip = !showTip"
           ></span>
           <span class="stream-online-count" v-if="false"></span>

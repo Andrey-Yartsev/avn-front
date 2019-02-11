@@ -176,9 +176,7 @@ export default {
   },
 
   data() {
-    return {
-      showTip: false
-    };
+    return {};
   },
 
   computed: {

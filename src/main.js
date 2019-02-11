@@ -25,9 +25,11 @@ Vue.use(VueMq, {
   }
 });
 
-new Vue({
+const MyApp = new Vue({
   router,
   template: "<App/>",
   store,
   components: { App }
 }).$mount("#app");
+
+MyApp.$root.appName = process.env.VUE_APP_NAME;

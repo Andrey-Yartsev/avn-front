@@ -8,7 +8,9 @@
     <span class="comments actions__btn" @click="postShowCommentForm">{{
       post.commentsCount
     }}</span>
-    <template v-if="!isOwner(post.id) && post.author.canEarn">
+    <template
+      v-if="!isOwner(post.id) && post.author.canEarn && $root.appName !== 'avn'"
+    >
       <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
     </template>
     <time class="timestamp" :datetime="post.postedAt">

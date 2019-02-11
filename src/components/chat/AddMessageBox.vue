@@ -24,7 +24,7 @@
       </label>
 
       <button
-        v-if="withUser && !user.canEarn"
+        v-if="withUser && !user.canEarn && $root.appName !== 'avn'"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip }"

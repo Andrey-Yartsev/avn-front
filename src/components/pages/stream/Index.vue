@@ -216,7 +216,7 @@
           <span class="stream-btn stream-like-btn" ref="likeBtn">{{
             likesCount
           }}</span>
-          <span class="stream-btn stream-tip-btn"
+          <span v-if="$root.appName !== 'avn'" class="stream-btn stream-tip-btn"
             >{{ amount.toFixed(2) }} $</span
           >
           <span class="stream-btn stream-online-count">{{ looksCount }}</span>
@@ -473,12 +473,16 @@ export default {
       this.$root.ws.ws.send(
         JSON.stringify({ ...common, code: "stream_like_search_all" })
       );
-      this.$root.ws.ws.send(
-        JSON.stringify({ ...common, code: "stream_tip_search_all" })
-      );
+
       this.$root.ws.ws.send(
         JSON.stringify({ ...common, code: "stream_comment_search_all" })
       );
+
+      if (this.$root.appName !== "avn") {
+        this.$root.ws.ws.send(
+          JSON.stringify({ ...common, code: "stream_tip_search_all" })
+        );
+      }
     }
   },
   mounted() {
