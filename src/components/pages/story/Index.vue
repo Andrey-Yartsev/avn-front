@@ -86,6 +86,7 @@
         </div>
         <div class="user-name">
           <a
+            class="name"
             :href="isOwner(author.id) ? `/${author.username}` : ''"
             :class="{ 'new-story': isOwner(author.id) }"
           >
