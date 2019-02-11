@@ -579,6 +579,11 @@ label {
       }
     }
   }
+
+  &.text .inner {
+    display: block;
+    font-weight: 400;
+  }
 }
 select {
   border: none;
