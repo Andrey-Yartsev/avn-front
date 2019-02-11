@@ -1,6 +1,36 @@
 <template>
   <div class="payouts-bank">
-    <div class="PayoutsBankView">
+    <div class="payments-card" v-if="cardConnected">
+      <div class="payment-card">
+        <div>
+          <div class="form-title hidden-desktop">
+            <div class="inner">
+              <span class="semi-transparent">
+                Your Card
+              </span>
+            </div>
+          </div>
+          <h1 class="form-title hidden-mobile">
+            Your Card
+          </h1>
+          <div class="shadow-block border-top no-padding">
+            <div class="container">
+              <div class="cards-list">
+                <div class="item visa">
+                  <span class="payment-system">
+                    Visa/Master
+                  </span>
+                  <span class="number">XXXX</span>
+                </div>
+              </div>
+            </div>
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="PayoutsBankView" v-else>
       <h1 class="form-title">
         Add Card
       </h1>
@@ -127,12 +157,18 @@
               </label>
             </div>
 
+            <!--
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label"></span>
                 <div class="checkbox-wrapper">
                   <label class="checkbox-label">
-                    <input type="checkbox" name="tos" value="1" v-model="tos" />
+                    <input
+                      type="checkbox"
+                      name="tos"
+                      value="1"
+                      v-validate="'required'"
+                    />
                     <span></span>
                   </label>
                   <div class="input-desc payouts-desc">
@@ -141,12 +177,13 @@
                       to="/terms"
                       class="payouts-terms"
                       target="_blank"
-                      >Terms of Service
+                    >Terms of Service
                     </router-link>
                   </div>
                 </div>
               </label>
             </div>
+            -->
 
             <div class="form-group hidden" id="payouts-bank-form-error">
               <label class="form-group-inner">
@@ -156,10 +193,14 @@
             </div>
 
             <div class="form-group-btn">
-              <button type="submit" class="btn lg saveChanges">Next</button>
+              <button
+                type="submit"
+                class="btn lg saveChanges"
+                :disabled="!isFormValid"
+              >
+                Next
+              </button>
             </div>
-
-            <div>{{ error }}</div>
           </div>
         </div>
       </form>
@@ -169,31 +210,39 @@
 
 <script>
 import Form from "@/mixins/form";
+import User from "@/mixins/user";
 
 export default {
-  name: "AddCard",
-  mixins: [Form],
+  name: "AddCardSecurionpay",
+  mixins: [Form, User],
   data() {
     return {
       error: null,
-      cardNumber: "4242424242424242",
-      cvc: "111",
-      expMonth: "01",
-      expYear: "2029",
-      email: "asd@asd.as",
+      cardNumber: "",
+      cvc: "",
+      expMonth: "",
+      expYear: "",
+      email: "",
       userinfo: {
-        street: "Noroad st.",
-        city: "NN",
-        state: "Russia",
-        zip: "123123",
-        country: "Russia",
-        name: "Tester Tester"
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
+        country: "",
+        name: ""
       }
     };
   },
+  computed: {
+    isFormValid() {
+      return Object.keys(this.fields).some(key => this.fields[key].valid);
+    },
+    cardConnected() {
+      return this.user.isPaymentCardConnected;
+    }
+  },
   methods: {
     next() {
-      console.log(process.env.VUE_APP_SECURION_PK);
       window.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
       window.Securionpay.createCardToken(
         this.$refs.form,
