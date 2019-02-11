@@ -94,7 +94,7 @@ export const fileUpload = ({ id, file }, onProgress) =>
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("preset", "team");
+    formData.append("preset", process.env.VUE_APP_FILE_UPLOAD_PRESET);
     formData.append("isDelay", true);
 
     xhr.upload.onprogress = ({ loaded, total }) => {

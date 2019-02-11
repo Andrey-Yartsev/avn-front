@@ -33,3 +33,5 @@ const MyApp = new Vue({
 }).$mount("#app");
 
 MyApp.$root.showTips = process.env.VUE_APP_NAME !== "avn";
+MyApp.$root.isTeamApp = process.env.VUE_APP_NAME === "teams";
+MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";
