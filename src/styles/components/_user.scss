@@ -21,6 +21,11 @@
   @include ellipsis;
   transition: color 0.3s ease;
 
+  &_break-text {
+    white-space: normal;
+    word-break: break-word;
+  }
+
   a & {
     &:hover {
       color: $primary-color-darken;
