@@ -363,14 +363,39 @@
   padding-bottom: 0;
   opacity: 0.3;
 }
-.PayoutsLegalView {
-  .birthDateWrapper {
-    display: flex;
-    flex-grow: 1;
 
-    .month {
-      margin: 0 20px;
-    }
+.birthDateWrapper {
+  display: flex;
+  flex-grow: 1;
+
+  .month {
+    margin: 0 20px;
+  }
+}
+
+.expireationDateWrapper {
+  display: flex;
+}
+
+.card-date-range {
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+  .separator {
+    flex: 0 0 20px;
+    text-align: center;
+  }
+}
+
+.card-cvc-num {
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+  .name-cvc {
+    margin-right: 10px;
+    margin-left: 20px;
   }
 }
 
