@@ -159,15 +159,6 @@
                   Remove from highlight
                 </button>
               </li>
-              <li>
-                <button
-                  class="storySettings"
-                  type="button"
-                  @click="sendHighlightTo"
-                >
-                  Send to ...
-                </button>
-              </li>
               <li v-if="copied">
                 <button class="btn-copy-link copied" type="button">
                   Copied!
@@ -625,9 +616,6 @@ export default {
             global.document.location.reload();
           });
       }
-    },
-    sendHighlightTo() {
-      alert("sendHighlightTo");
     },
     copyHighlightLink() {
       this.$copyText(global.document.location.href).then(() => {
