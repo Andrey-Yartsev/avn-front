@@ -115,8 +115,8 @@
     }
   }
 
-  .followed,
-  .subscribed {
+  .followed {
+  //.subscribed {
 
     &:before {
       content: "\E630";
@@ -164,13 +164,6 @@
 
     &:before {
       content: "\E619";
-    }
-  }
-
-  .followed {
-
-    &:before {
-      content: "\E630";
     }
   }
 }
