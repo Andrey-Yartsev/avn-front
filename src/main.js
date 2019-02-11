@@ -32,4 +32,4 @@ const MyApp = new Vue({
   components: { App }
 }).$mount("#app");
 
-MyApp.$root.appName = process.env.VUE_APP_NAME;
+MyApp.$root.showTips = process.env.VUE_APP_NAME !== "avn";

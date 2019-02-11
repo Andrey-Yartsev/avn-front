@@ -130,13 +130,17 @@ export default {
       });
     },
     menu() {
-      return Object.entries(typeTitles).map(v => {
+      const menuTitles = Object.entries(typeTitles).map(v => {
         return {
           active: this.type === v[0],
           name: v[0],
           title: v[1]
         };
       });
+
+      return this.$root.showTips
+        ? menuTitles
+        : menuTitles.filter(a => a.name !== "tip");
     }
   },
 
