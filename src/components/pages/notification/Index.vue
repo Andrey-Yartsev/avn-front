@@ -65,9 +65,11 @@
             <span class="timestamp">{{ time(v.createdAt) }}</span>
           </div>
           <div class="content">
-            <router-link :to="'/' + v.user.username" class="name name_break-text">{{
-              v.user.name
-            }}</router-link>
+            <router-link
+              :to="'/' + v.user.username"
+              class="name name_break-text"
+              >{{ v.user.name }}</router-link
+            >
             <span class="notification-summary" v-html="v.text" />
           </div>
         </div>
