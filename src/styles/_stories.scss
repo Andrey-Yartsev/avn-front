@@ -313,8 +313,11 @@
         text-align: center;
       }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: calc(100% - 65px);
+      .aside-col & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-width: calc(100% - 65px);
+        }
       }
     }
   }
