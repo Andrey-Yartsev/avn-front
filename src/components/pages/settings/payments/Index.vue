@@ -6,7 +6,7 @@
 
 <script>
 import Layout from "../Layout";
-import Content from "./Content";
+import Content from "./AddCard";
 
 export default {
   name: "PaymentsSettings",

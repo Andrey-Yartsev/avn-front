@@ -48,6 +48,21 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "add",
+  apiPath: "payments/card",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,

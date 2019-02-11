@@ -375,12 +375,14 @@
 
 .expireationDateWrapper {
   display: flex;
+  width: 100%;
 }
 
 .card-date-range {
   display: flex;
   align-items: center;
   align-content: center;
+  flex: 1;
 
   .separator {
     flex: 0 0 20px;

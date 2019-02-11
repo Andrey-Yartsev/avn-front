@@ -121,11 +121,12 @@
 import Recaptcha from "vue-recaptcha";
 import Common from "@/components/auth/common";
 import Login from "@/components/auth/login";
+import Form from "@/mixins/form";
 
 export default {
   name: "LoginForm",
 
-  mixins: [Common, Login],
+  mixins: [Common, Login, Form],
 
   components: {
     Recaptcha

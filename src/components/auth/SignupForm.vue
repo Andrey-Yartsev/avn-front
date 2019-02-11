@@ -99,11 +99,12 @@
 import Recaptcha from "vue-recaptcha";
 import Common from "@/components/auth/common";
 import Signup from "@/components/auth/signup";
+import Form from "@/mixins/form";
 
 export default {
   name: "SignUp",
 
-  mixins: [Common, Signup],
+  mixins: [Common, Signup, Form],
 
   components: {
     Recaptcha
