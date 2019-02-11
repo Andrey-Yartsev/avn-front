@@ -76,20 +76,22 @@
         Sign up
       </button>
     </form>
-    <div class="login-or"><span>or</span></div>
-    <button
-      class="btn block twitter"
-      @click.prevent="twitter"
-      :class="{ lg: largeControls }"
-    >
-      Sign in with Twitter
-    </button>
+    <template v-if="$root.isTeamApp">
+      <div class="login-or"><span>or</span></div>
+      <button
+        class="btn block twitter"
+        @click.prevent="twitter"
+        :class="{ lg: largeControls }"
+      >
+        Sign in with Twitter
+      </button>
+    </template>
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">
-        <a href="/login" class="register" @click.prevent="openLogin"
-          >Login to OnMyTeam.com</a
-        >
+        <a href="/login" class="register" @click.prevent="openLogin">{{
+          loginText
+        }}</a>
       </p>
     </div>
   </div>
@@ -118,6 +120,13 @@ export default {
   },
 
   computed: {
+    loginText() {
+      if (this.$root.isTeamApp) {
+        return "Login to OnMyTeam.com";
+      }
+
+      return "Login";
+    },
     signupAction() {
       switch (this.type) {
         case "page":
