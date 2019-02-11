@@ -74,7 +74,7 @@
         </div>
 
         <div class="lds-dual-ring with-text not-fullscreen" v-if="loading">
-          <div class="loader-text lowered">Loading</div>
+          <div class="loader-text lowered"></div>
         </div>
       </div>
       <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">

@@ -1345,6 +1345,7 @@
     }
 
     .loader-text.lowered {
+      top: 100px;
 
       @include media-breakpoint-down($desktop-breakpoint) {
         top: 50%;
