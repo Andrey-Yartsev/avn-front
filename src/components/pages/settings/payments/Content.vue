@@ -127,7 +127,7 @@
                   </template>
                 </div>
                 <div class="empty-table-info">
-                  <span>Empty here for 1now</span>
+                  <span>Empty here for now</span>
                 </div>
               </div>
             </div>
