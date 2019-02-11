@@ -157,7 +157,6 @@
               </label>
             </div>
 
-            <!--
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label"></span>
@@ -177,13 +176,12 @@
                       to="/terms"
                       class="payouts-terms"
                       target="_blank"
-                    >Terms of Service
+                      >Terms of Service
                     </router-link>
                   </div>
                 </div>
               </label>
             </div>
-            -->
 
             <div class="form-group hidden" id="payouts-bank-form-error">
               <label class="form-group-inner">
@@ -193,11 +191,7 @@
             </div>
 
             <div class="form-group-btn">
-              <button
-                type="submit"
-                class="btn lg saveChanges"
-                :disabled="!isFormValid"
-              >
+              <button type="submit" class="btn lg saveChanges">
                 Next
               </button>
             </div>
