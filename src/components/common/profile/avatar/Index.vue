@@ -30,7 +30,7 @@
             {{ profile.name }}
           </span>
           <span class="verified-user" v-if="profile.isVerified"></span>
-          <div class="block-indicator" v-if="profile.isBlocked">
+          <div class="block-indicator" v-if="user && profile.isBlocked">
             <span class="icn-block icn-item"></span>
           </div>
         </div>
@@ -45,8 +45,11 @@
 </template>
 
 <script>
+import User from "@/mixins/user";
+
 export default {
   name: "ProfileAvatar",
+  mixins: [User],
   props: {
     pageName: {
       type: String,

@@ -11,19 +11,18 @@
         <Loader :fullscreen="false" text="" class="transparent small" />
       </div>
       <template v-else>
-
-          <div class="PayoutsAccountView" v-if="!user.isWantEarn">
-            <h1 class="form-title">
-              Payouts
-            </h1>
-            <div class="form-title text border-top centered">
-              <div class="inner">
-                You need to enable <b>Earn money</b> option in
-                <router-link to="/settings/profile">Profile</router-link>
-                settings
-              </div>
+        <div class="PayoutsAccountView" v-if="!user.isWantEarn">
+          <h1 class="form-title">
+            Payouts
+          </h1>
+          <div class="form-title text border-top centered">
+            <div class="inner">
+              You need to enable <b>Earn money</b> option in
+              <router-link to="/settings/profile">Profile</router-link>
+              settings
             </div>
           </div>
+        </div>
 
         <component :is="innerComponent" v-else />
       </template>
