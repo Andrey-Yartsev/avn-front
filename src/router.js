@@ -394,6 +394,16 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireAny,
+    path: "/usc2257",
+    component: StaticPage,
+    meta: {
+      apiPoint: "usc2257",
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
     beforeEnter: Auth.requireAuth,
     path: "/statistics",
     component: StatPage
