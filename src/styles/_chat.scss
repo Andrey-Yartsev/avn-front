@@ -505,16 +505,19 @@
     }
   }
 
-  .scroll-top & {
+  .chatCollectionContent:not(.chat) & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      top: -44px;
-    }
-
-    .header-nav {
+    .scroll-top & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        transform: translate3d(0, 0, 0);
+        top: -44px;
+      }
+
+      .header-nav {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          transform: translate3d(0, 0, 0);
+        }
       }
     }
   }
