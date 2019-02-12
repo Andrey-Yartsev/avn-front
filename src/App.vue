@@ -1,6 +1,7 @@
 <template>
   <div
     class="main-container"
+    :class="containerClassName"
     v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
   >
     <Loader v-if="loading" class="page-loader" />
@@ -117,7 +118,8 @@ export default {
   data() {
     return {
       showToast: false,
-      wasLogout: false
+      wasLogout: false,
+      containerClassName: ""
     };
   },
   computed: {
