@@ -647,6 +647,8 @@ select {
       content: "\E604";
       @include icon-font;
       @include position-center;
+      height: 18px;
+      line-height: 18px;
     }
   }
   input {
