@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <ConnectTwitter @connected="twitterConnected" />
+      <ConnectTwitter v-if="$root.isTeamApp" @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
         <div class="form-group form-group_with-label">
