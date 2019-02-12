@@ -28,47 +28,41 @@
           >
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
-                <span class="checkbox-label">
-                  <input
-                    v-model="
-                      localUser.isEmailNotificationNewSubscriptionEnabled
-                    "
-                    type="checkbox"
-                    name="isEmailNotificationNewSubscriptionEnabled"
-                    value="true"
-                  />
-                  <span></span>
-                </span>
+                <input
+                  v-model="
+                    localUser.isEmailNotificationNewSubscriptionEnabled
+                  "
+                  type="checkbox"
+                  name="isEmailNotificationNewSubscriptionEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
                 <span class="label">New subscriber</span>
               </div>
             </label>
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
-                <span class="checkbox-label">
-                  <input
-                    v-model="
-                      localUser.isEmailNotificationNewUnreadChatsMessagesEnabled
-                    "
-                    type="checkbox"
-                    name="isEmailNotificationNewUnreadChatsMessagesEnabled"
-                    value="true"
-                  />
-                  <span></span>
-                </span>
+                <input
+                  v-model="
+                    localUser.isEmailNotificationNewUnreadChatsMessagesEnabled
+                  "
+                  type="checkbox"
+                  name="isEmailNotificationNewUnreadChatsMessagesEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
                 <span class="label">New private message</span>
               </div>
             </label>
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
-                <span class="checkbox-label">
-                  <input
-                    v-model="localUser.isEmailNotificationNewTipsEnabled"
-                    type="checkbox"
-                    name="isEmailNotificationNewTipsEnabled"
-                    value="true"
-                  />
-                  <span></span>
-                </span>
+                <input
+                  v-model="localUser.isEmailNotificationNewTipsEnabled"
+                  type="checkbox"
+                  name="isEmailNotificationNewTipsEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
                 <span class="label">Fund was received</span>
               </div>
             </label>

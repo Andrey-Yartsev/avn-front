@@ -168,17 +168,14 @@
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
-                <span class="label"></span>
                 <div class="checkbox-wrapper">
-                  <label class="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="tos"
-                      value="1"
-                      v-validate="'required'"
-                    />
-                    <span></span>
-                  </label>
+                  <input
+                    type="checkbox"
+                    name="tos"
+                    value="1"
+                    v-validate="'required'"
+                  />
+                  <span class="checkbox"></span>
                   <div class="input-desc payouts-desc">
                     I agree to
                     <router-link

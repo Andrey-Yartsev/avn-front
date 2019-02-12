@@ -618,46 +618,73 @@ select {
     }
   }
 }
-.checkbox-label {
+.checkbox {
   margin: 0 9px 0 3px;
   width: 18px;
   height: 18px;
   flex: 0 0 18px;
   position: relative;
+  transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 2px;
+  opacity: 0.3;
+  box-shadow: 0 0 0 2px $main-color inset;
+  cursor: pointer;
+
   &,
   .form-group & {
     padding: 0;
   }
-  span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 2px;
-    opacity: 0.3;
-    box-shadow: 0 0 0 2px $main-color inset;
-    cursor: pointer;
-    &:before {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      content: "\E604";
-      @include icon-font;
-      @include position-center;
-      height: 18px;
-      line-height: 18px;
-    }
+
+  &:before {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    content: "\E604";
+    @include icon-font;
+    @include position-center;
+    height: 18px;
+    line-height: 18px;
   }
+
+}
+
+.radio {
+  margin: 0 9px 0 0;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+  border-radius: 1000px;
+  opacity: 0.3;
+  border: 2px solid $main-color;
+  cursor: pointer;
+  position: relative;
+
+  &:before {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: $primary-color;
+    border-radius: 1000px;
+    @include position-center;
+  }
+}
+
+.checkbox-wrapper {
+
   input {
     display: none;
+
     &:checked {
-      & + span {
+
+      & + .checkbox {
         background: $primary-color;
         box-shadow: none;
         opacity: 1;
+
         &:before {
           opacity: 1;
         }
@@ -665,31 +692,12 @@ select {
     }
   }
 }
+
 .radio-wrapper {
-  .radio {
-    margin: 0 9px 0 0;
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
-    transition: border-color 0.3s ease, opacity 0.3s ease;
-    border-radius: 1000px;
-    opacity: 0.3;
-    border: 2px solid $main-color;
-    cursor: pointer;
-    position: relative;
-    &:before {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: $primary-color;
-      border-radius: 1000px;
-      @include position-center;
-    }
-  }
+
   input {
     display: none;
+
     &:checked {
       & + .radio {
         border-color: $primary-color;
