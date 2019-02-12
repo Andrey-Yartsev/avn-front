@@ -2,6 +2,13 @@
 
 .static-page {
 
+  &:before {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
+  }
+
   &:not(.login-page),
   &.reset-page {
     background: $white;
