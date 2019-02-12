@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container subscribe-popup" slot="content">
       <div class="content">
-        <Content :profile="profile">
+        <Content :profile="profile" @subscribe="subscribe">
           <template slot="button-text">
             Subscribe for ${{ profile.subscribePrice }} / month
           </template>
