@@ -32,11 +32,16 @@
               >
             </div>
             <VuePerfectScrollbar class="profile-desc">
-              <p
-                class="profile-text"
-                v-if="profile.about"
-                v-html="profile.about"
-              ></p>
+              <p class="profile-text" v-if="profile.about">
+                {{ trunc(profile.about) }}
+                <a
+                  v-if="profile.about.length > collapseLimit"
+                  href="#"
+                  @click.prevent="collapsed = !collapsed"
+                >
+                  {{ collapsed ? "Read more" : "Collapse" }}
+                </a>
+              </p>
               <a
                 v-if="profile.twitterUsername"
                 :href="'https://twitter.com/' + profile.twitterUsername"
@@ -176,7 +181,10 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      collapseLimit: 100,
+      collapsed: true
+    };
   },
 
   computed: {
@@ -317,6 +325,13 @@ export default {
           : "remove";
 
       footer.classList[methodName]("site-footer_sticky-bottom");
+    },
+    trunc(text) {
+      if (this.collapsed && this.profile.about.length > this.collapseLimit) {
+        return text.substring(0, this.collapseLimit) + "…";
+      } else {
+        return text;
+      }
     }
   },
   created() {
