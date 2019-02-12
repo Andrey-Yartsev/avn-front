@@ -6,6 +6,23 @@
     overflow-y: auto;
   }
 
+  &.static-page {
+
+    .site-footer {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-top: none;
+      }
+
+      &:before {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
+  }
+
   .site-footer {
     position: relative;
 
@@ -71,6 +88,16 @@
 
       &:hover {
         opacity: 1;
+      }
+    }
+  }
+
+  &:not(.static-page) {
+
+    .footer-nav {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        justify-content: flex-start;
       }
     }
   }
@@ -185,12 +212,32 @@
         margin-bottom: 7px;
       }
 
+      .avn-style & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-bottom: 24px;
+        }
+      }
+
       svg {
         height: 3.2em;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           height: 5.1em;
           transform: translate(-5px, -12px);
+        }
+
+        .avn-style & {
+          margin-left: auto;
+          margin-right: auto;
+          height: 5.7em;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            height: 7.8em;
+            transform: translate(0, 0);
+            margin-left: 0;
+            margin-right: 0;
+          }
         }
       }
     }
@@ -204,6 +251,13 @@
         flex: 1 0 auto;
         display: flex;
         align-items: center;
+      }
+
+      .avn-style & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 1.7em;
+        }
       }
     }
   }
