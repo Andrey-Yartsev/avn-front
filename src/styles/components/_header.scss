@@ -504,11 +504,6 @@
     left: -999em;
   }
 
-  a,
-  svg {
-    display: block;
-  }
-
   svg {
     width: 105px;
     height: 26px;
@@ -517,6 +512,14 @@
       width: 125px;
       height: 30px;
     }
+  }
+}
+
+.logo {
+
+  a,
+  svg {
+    display: block;
   }
 
   .a {
@@ -550,7 +553,16 @@
   .cls-2 {
     fill: #fff;
   }
+
+  .cls-1 {
+    fill: #e12027;
+  }
+
+  .cls-2 {
+    fill: #fff;
+  }
 }
+
 .page-title {
   font: inherit;
   font-weight: 500;
