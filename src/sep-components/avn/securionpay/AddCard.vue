@@ -1,6 +1,6 @@
 <template>
   <div class="payouts-bank">
-    <div class="payments-card" v-if="cardConnected">
+    <div class="payments-card" v-if="showCard">
       <div class="payment-card">
         <div>
           <div class="form-title hidden-desktop">
@@ -21,13 +21,22 @@
                     Visa/Master
                   </span>
                   <span class="number">XXXX</span>
+                  <!--
+                  <button
+                    class="delete"
+                    id="deleteCard"
+                    @click="replaceCard"
+                  >
+                    Replace
+                  </button>
+                  -->
                 </div>
               </div>
             </div>
-            &nbsp;
           </div>
         </div>
       </div>
+      <br />
     </div>
 
     <div class="PayoutsBankView" v-else>
@@ -191,7 +200,11 @@
             </div>
 
             <div class="form-group-btn">
-              <button type="submit" class="btn lg saveChanges">
+              <button
+                type="submit"
+                class="btn lg saveChanges"
+                :disabled="!isFormValid"
+              >
                 Next
               </button>
             </div>
@@ -210,20 +223,38 @@ export default {
   name: "AddCardSecurionpay",
   mixins: [Form, User],
   data() {
+    // return {
+    //   cardExists: false,
+    //   cardError: null,
+    //   cardNumber: "",
+    //   cvc: "",
+    //   expMonth: "",
+    //   expYear: "",
+    //   email: "",
+    //   userinfo: {
+    //     street: "",
+    //     city: "",
+    //     state: "",
+    //     zip: "",
+    //     country: "",
+    //     name: ""
+    //   }
+    // };
     return {
+      cardExists: false,
       cardError: null,
-      cardNumber: "",
-      cvc: "",
-      expMonth: "",
-      expYear: "",
-      email: "",
+      cardNumber: "4012000100000007",
+      cvc: "123",
+      expMonth: "11",
+      expYear: "2022",
+      email: "asd@asdasd.asd",
       userinfo: {
-        street: "",
-        city: "",
-        state: "",
-        zip: "",
-        country: "",
-        name: ""
+        street: "sd",
+        city: "asd",
+        state: "asd",
+        zip: "123123",
+        country: "sdqwd",
+        name: "qwd"
       }
     };
   },
@@ -233,6 +264,9 @@ export default {
     },
     cardConnected() {
       return this.user.isPaymentCardConnected;
+    },
+    showCard() {
+      return this.cardConnected || !this.cardExists;
     }
   },
   watch: {
@@ -262,9 +296,13 @@ export default {
             console.log(">>", r);
           });
       }
+    },
+    replaceCard() {
+      this.cardExists = false;
     }
   },
   mounted() {
+    console.log("!");
     let script = document.createElement("script");
     script.onload = () => {
       console.log("securionpay loaded");

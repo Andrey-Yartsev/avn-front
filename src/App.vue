@@ -1,7 +1,6 @@
 <template>
   <div
     class="main-container"
-    :class="containerClassName"
     v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
   >
     <Loader v-if="loading" class="page-loader" />
@@ -118,8 +117,7 @@ export default {
   data() {
     return {
       showToast: false,
-      wasLogout: false,
-      containerClassName: ""
+      wasLogout: false
     };
   },
   computed: {
@@ -218,15 +216,6 @@ export default {
     }
   },
   methods: {
-    setContainerClass() {
-      if (this.$root.isTeamApp) {
-        this.containerClassName = "teams-style";
-      }
-
-      if (this.$root.isAvnApp) {
-        this.containerClassName = "avn-style";
-      }
-    },
     initLoggedInClass() {
       if (this.loggedIn) {
         htmlElement.classList.remove("not-authorized");

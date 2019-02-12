@@ -71,6 +71,10 @@ const state = {
   chooseHighlight: {
     show: false,
     data: {}
+  },
+  chatMessagePayConfirm: {
+    show: false,
+    data: {}
   }
 };
 

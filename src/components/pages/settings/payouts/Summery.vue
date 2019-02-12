@@ -2,8 +2,10 @@
   <div>
     <Legal />
     <Bank />
-    <Requests />
-    <Transactions />
+    <template v-if="user.isPaymentCardConnected">
+      <Requests />
+      <Transactions />
+    </template>
   </div>
 </template>
 
@@ -12,9 +14,12 @@ import Legal from "./summery/Legal";
 import Bank from "./summery/Bank";
 import Requests from "./summery/Requests";
 import Transactions from "./summery/Transactions";
+import User from "@/mixins/user";
 
 export default {
   name: "PayoutSettingsSummery",
+
+  mixins: [User],
 
   components: {
     Legal,

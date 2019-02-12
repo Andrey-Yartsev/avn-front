@@ -612,4 +612,9 @@
       top: 2px;
     }
   }
+  &.mine {
+    .message {
+      cursor: default;
+    }
+  }
 }

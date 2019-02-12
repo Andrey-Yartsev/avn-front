@@ -74,6 +74,11 @@ const actions = {
       commit("markChatAsViewed", activeUserId);
     });
   },
+  fetchMessagesDefault({ dispatch, commit, state }) {
+    dispatch("_fetchMessages", state.activeUserId).then(() => {
+      commit("markChatAsViewed", state.activeUserId);
+    });
+  },
   delete({ dispatch, commit }, userId) {
     dispatch("_delete", userId).then(() => {
       commit("removeChat", userId);
@@ -128,6 +133,14 @@ const mutations = {
     state.messages = state.messages.map(v => {
       if (v.id === message.id) {
         v = message;
+      }
+      return v;
+    });
+  },
+  extendMessage(state, { id, data }) {
+    state.messages = state.messages.map(v => {
+      if (v.id === id) {
+        v = { ...v, data };
       }
       return v;
     });

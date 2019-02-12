@@ -1,6 +1,12 @@
 <template>
   <div class="chat-section">
-    <VuePerfectScrollbar class="chat-wrapper" ref="messagesContainer">
+    <Loader
+      v-if="loading"
+      :fullscreen="false"
+      text=""
+      class="transparent small"
+    />
+    <VuePerfectScrollbar v-else class="chat-wrapper" ref="messagesContainer">
       <div class="chat-scrollbar">
         <div
           v-for="v in messages"
@@ -21,7 +27,11 @@
             <div class="messageContent">
               <div
                 class="messageWrapper"
-                :class="{ tipsMessage: v.isTips, lockedMessage: isLocked(v) }"
+                :class="{
+                  tipsMessage: v.isTips,
+                  lockedMessage: isLocked(v),
+                  mine: isMyMessage(v)
+                }"
                 @click="messageClick(v)"
               >
                 <span class="message" v-html="text(v)"></span>
@@ -96,6 +106,9 @@ export default {
     },
     sending() {
       return this.$store.state.chat.sendMessageLoading;
+    },
+    loading() {
+      return this.$store.state.chat._fetchMessagesLoading;
     }
   },
 
@@ -198,10 +211,36 @@ export default {
       return dateFns.distanceInWordsStrict(new Date(), date);
     },
 
+    isMyMessage(message) {
+      return message.fromUser.id === this.user.id;
+    },
+
     messageClick(message) {
+      if (this.isMyMessage(message)) {
+        return;
+      }
       if (message.isFree) {
         return;
       }
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch(
+            "global/flashToast",
+            "You should add card in payment settings"
+          );
+          return;
+        }
+        this.$store.dispatch("modal/show", {
+          name: "chatMessagePayConfirm",
+          data: {
+            price: message.price,
+            paymentType: "message",
+            messageId: message.id
+          }
+        });
+        return;
+      }
+
       this.$store.dispatch("paidMessage/openPaymentModal", {
         user: this.withUser,
         amount: parseInt(message.price.replace(/\$/, "")),
