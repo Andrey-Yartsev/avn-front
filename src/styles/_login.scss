@@ -91,16 +91,6 @@
       }
     }
   }
-
-  &:not(.static-page) {
-
-    .footer-nav {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        justify-content: flex-start;
-      }
-    }
-  }
 }
 
 .login,
