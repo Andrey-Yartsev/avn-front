@@ -1,6 +1,7 @@
 <template>
   <div
     class="main-container"
+    :class="{ 'teams-style': $root.isTeamApp, 'avn-style': $root.isAvnApp }"
     v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
   >
     <Loader v-if="loading" class="page-loader" />
