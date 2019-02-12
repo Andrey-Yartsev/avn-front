@@ -29,9 +29,7 @@
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
                 <input
-                  v-model="
-                    localUser.isEmailNotificationNewSubscriptionEnabled
-                  "
+                  v-model="localUser.isEmailNotificationNewSubscriptionEnabled"
                   type="checkbox"
                   name="isEmailNotificationNewSubscriptionEnabled"
                   value="true"
