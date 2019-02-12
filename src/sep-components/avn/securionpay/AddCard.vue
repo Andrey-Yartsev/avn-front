@@ -21,15 +21,10 @@
                     Visa/Master
                   </span>
                   <span class="number">XXXX</span>
-                  <!--
-                  <button
-                    class="delete"
-                    id="deleteCard"
-                    @click="replaceCard"
-                  >
+
+                  <button class="delete" id="deleteCard" @click="replaceCard">
                     Replace
                   </button>
-                  -->
                 </div>
               </div>
             </div>
@@ -168,6 +163,7 @@
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
+                <span class="label"></span>
                 <div class="checkbox-wrapper">
                   <input
                     type="checkbox"
@@ -200,7 +196,7 @@
               <button
                 type="submit"
                 class="btn lg saveChanges"
-                :disabled="!isFormValid"
+                :disabled="submitDisabled"
               >
                 Next
               </button>
@@ -216,63 +212,48 @@
 import Form from "@/mixins/form";
 import User from "@/mixins/user";
 
+const initData = {
+  showCardForm: false,
+  cardError: null,
+  cardNumber: "",
+  cvc: "",
+  expMonth: "",
+  expYear: "",
+  email: "",
+  submitting: false
+};
+
+const userinfo = {
+  street: "",
+  city: "",
+  state: "",
+  zip: "",
+  country: "",
+  name: ""
+};
+
 export default {
   name: "AddCardSecurionpay",
   mixins: [Form, User],
   data() {
-    // return {
-    //   cardExists: false,
-    //   cardError: null,
-    //   cardNumber: "",
-    //   cvc: "",
-    //   expMonth: "",
-    //   expYear: "",
-    //   email: "",
-    //   userinfo: {
-    //     street: "",
-    //     city: "",
-    //     state: "",
-    //     zip: "",
-    //     country: "",
-    //     name: ""
-    //   }
-    // };
-    return {
-      cardExists: false,
-      cardError: null,
-      cardNumber: "4012000100000007",
-      cvc: "123",
-      expMonth: "11",
-      expYear: "2022",
-      email: "asd@asdasd.asd",
-      userinfo: {
-        street: "sd",
-        city: "asd",
-        state: "asd",
-        zip: "123123",
-        country: "sdqwd",
-        name: "qwd"
-      }
-    };
+    const r = { ...initData };
+    r.userinfo = { ...userinfo };
+    return r;
   },
   computed: {
-    isFormValid() {
-      return Object.keys(this.fields).some(key => this.fields[key].valid);
-    },
     cardConnected() {
       return this.user.isPaymentCardConnected;
     },
     showCard() {
-      return this.cardConnected || !this.cardExists;
-    }
-  },
-  watch: {
-    cardError(error) {
-      this.$store.dispatch("global/flashToast", error);
+      return this.cardConnected && !this.showCardForm;
+    },
+    submitDisabled() {
+      return this.submitting || !this.isFormValid;
     }
   },
   methods: {
     next() {
+      this.submitting = true;
       window.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
       window.Securionpay.createCardToken(
         this.$refs.form,
@@ -281,7 +262,8 @@ export default {
     },
     createCardTokenCallback(result) {
       if (result.error) {
-        this.cardError = result.error.message;
+        this.$store.dispatch("global/flashToast", result.error.message);
+        this.submitting = false;
       } else {
         this.$store
           .dispatch("payment/card/add", {
@@ -290,20 +272,33 @@ export default {
             userinfo: this.userinfo
           })
           .then(r => {
-            console.log(">>", r);
+            if (r.success) {
+              this.$store.dispatch("auth/extendUser", {
+                isPaymentCardConnected: true
+              });
+              this.showCardForm = false;
+            } else {
+              this.$store.dispatch("global/flashToast", "Something goes wrong");
+            }
+            this.submitting = false;
           });
       }
     },
+    reset() {
+      Object.entries(initData).forEach(v => {
+        this[v[0]] = v[1];
+      });
+      this.userinfo = { ...userinfo };
+    },
     replaceCard() {
-      this.cardExists = false;
+      this.reset();
+      this.showCardForm = true;
     }
   },
   mounted() {
-    console.log("!");
     let script = document.createElement("script");
     script.onload = () => {
-      console.log("securionpay loaded");
-      console.log(window.Securionpay);
+      //
     };
     script.async = true;
     script.src = "https://securionpay.com/js/securionpay.js";

@@ -9,14 +9,24 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">First Name</span>
-                <input name="firstName" required v-model="firstName" />
+                <input
+                  name="firstName"
+                  required
+                  v-model="firstName"
+                  v-validate="'required'"
+                />
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Last Name</span>
-                <input name="lastName" required v-model="lastName" />
+                <input
+                  name="lastName"
+                  required
+                  v-model="lastName"
+                  v-validate="'required'"
+                />
               </label>
             </div>
 
@@ -31,7 +41,13 @@
               <label class="form-group-inner">
                 <span class="label">Legal Type</span>
                 <span class="select-wrapper">
-                  <select name="type" id="legal-type" required v-model="type">
+                  <select
+                    name="type"
+                    id="legal-type"
+                    required
+                    v-model="type"
+                    v-validate="'required'"
+                  >
                     <option value="">Select</option>
                     <option value="company">Company</option>
                     <option value="individual">Individual</option>
@@ -46,7 +62,11 @@
             >
               <label class="form-group-inner">
                 <span class="label">Company Name</span>
-                <input name="companyName" v-model="companyName" />
+                <input
+                  name="companyName"
+                  v-model="companyName"
+                  v-validate="'required'"
+                />
               </label>
             </div>
 
@@ -85,7 +105,12 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Address</span>
-                <input name="address" v-model="address" required />
+                <input
+                  name="address"
+                  v-model="address"
+                  required
+                  v-validate="'required'"
+                />
               </label>
             </div>
 
@@ -105,6 +130,7 @@
                         v-model="city"
                         required
                         id="input-city"
+                        v-validate="'required'"
                       />
                     </div>
                   </div>
@@ -118,6 +144,7 @@
                         v-model="postalCode"
                         required
                         id="input-cvv"
+                        v-validate="'required'"
                       />
                     </div>
                   </div>
@@ -129,7 +156,13 @@
               <label class="form-group-inner" for="state">
                 <span class="label">State</span>
                 <span class="select-wrapper">
-                  <select id="state" name="state" required v-model="state">
+                  <select
+                    id="state"
+                    name="state"
+                    required
+                    v-model="state"
+                    v-validate="'required'"
+                  >
                     <option value="">Select State</option>
                     <option :value="v" v-for="v in states" v-bind:key="v">{{
                       v
@@ -143,7 +176,12 @@
               <label class="form-group-inner">
                 <span class="label country-select__label">Country</span>
                 <span class="select-wrapper">
-                  <select name="country" disabled v-model="country">
+                  <select
+                    name="country"
+                    disabled
+                    v-model="country"
+                    v-validate="'required'"
+                  >
                     <option
                       class="country-select__option"
                       value="United States of America"
@@ -168,8 +206,15 @@
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
+                <span class="label"></span>
                 <div class="checkbox-wrapper">
-                  <input type="checkbox" name="tos" value="1" v-model="tos" />
+                  <input
+                    type="checkbox"
+                    name="tos"
+                    value="1"
+                    v-model="tos"
+                    v-validate="'required'"
+                  />
                   <span class="checkbox"></span>
                   <div class="input-desc payouts-desc">
                     I agree to
@@ -196,7 +241,13 @@
           </div>
 
           <div class="form-group-btn">
-            <button type="submit" class="btn lg saveChanges">Next</button>
+            <button
+              type="submit"
+              class="btn lg saveChanges"
+              :disabled="!isFormValid"
+            >
+              Next
+            </button>
           </div>
         </div>
       </form>
@@ -208,11 +259,12 @@
 import BirthDateSelect from "./BirthDateSelect";
 import FileUpload from "@/mixins/fileUpload";
 import states from "./states";
+import Form from "@/mixins/form";
 
 export default {
   name: "PayoutSettingsLegal",
 
-  mixins: [FileUpload],
+  mixins: [FileUpload, Form],
 
   components: {
     BirthDateSelect

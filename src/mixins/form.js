@@ -4,7 +4,9 @@ export default {
       return this.errors.first(name);
     }
   },
-  isFormValid() {
-    return Object.keys(this.fields).some(key => this.fields[key].valid);
+  computed: {
+    isFormValid() {
+      return Object.keys(this.fields).every(key => this.fields[key].valid);
+    }
   }
 };
