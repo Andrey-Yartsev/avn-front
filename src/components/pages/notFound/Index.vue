@@ -6,7 +6,11 @@
       <p>
         The link you followed may be broken, or the page may have been removed.
       </p>
-      <p><a class="alt" href="/">Go back to OnMyTeam.com</a></p>
+      <p>
+        <a class="alt" href="/">
+          Go back to {{ $root.isAvnApp ? "stars.avn.com" : "OnMyTeam.com" }}
+        </a>
+      </p>
     </div>
     <Footer class="site-footer_main" />
   </div>

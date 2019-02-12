@@ -90,9 +90,10 @@
         </div>
       </div>
       <div class="toggle-wrapper border-top option-earn-money">
-        <label class="toggle-label semi-transparent" for="is_paid_subscription"
-          >I want to earn money using OnMyTeam</label
-        >
+        <label class="toggle-label semi-transparent" for="is_paid_subscription">
+          I want to earn money using
+          {{ $root.isAvnApp ? "AVN Stars" : "OnMyTeam" }}
+        </label>
         <label class="toggle-element">
           <input
             type="checkbox"
