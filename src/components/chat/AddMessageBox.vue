@@ -24,7 +24,7 @@
       </label>
 
       <button
-        v-if="withUser && !user.canEarn && $root.showTips"
+        v-if="withUser && !withUser.canEarn && $root.showTips"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip }"
@@ -46,6 +46,7 @@
           @enter="sendMessage"
           :disabled="disable"
         ></TextareaAutosize>
+
         <div class="price-message-wrapper">
           <span class="price-message"></span>
           <button type="submit" class="btn-clear-price"></button>
@@ -62,7 +63,7 @@
       </div>
 
       <Tip
-        v-if="withUser && !user.canEarn"
+        v-if="withUser && !withUser.canEarn && $root.showTips"
         :user="withUser"
         ref="tip"
         @cancel="closeTip"

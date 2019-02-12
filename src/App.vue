@@ -267,6 +267,20 @@ export default {
     };
 
     this.initLoggedInClass();
+
+    // setTimeout(() => {
+    //   this.$store.dispatch(
+    //     "modal/show",
+    //     {
+    //       type: "subscription",
+    //       name: "payment",
+    //       data: {
+    //         user: this.user
+    //       }
+    //     },
+    //     { root: true }
+    //   );
+    // }, 1000);
   }
 };
 </script>

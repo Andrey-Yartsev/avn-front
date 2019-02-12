@@ -2,6 +2,7 @@
 
 import card from "./payment/card";
 import transactions from "./payment/transactions";
+import pay from "./payment/pay";
 
 const state = {};
 const actions = {};
@@ -14,6 +15,7 @@ export default {
   mutations,
   modules: {
     card,
-    transactions
+    transactions,
+    pay
   }
 };

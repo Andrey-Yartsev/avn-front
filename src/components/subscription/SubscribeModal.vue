@@ -21,9 +21,12 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Content from "./SubscribeModalContent";
+import User from "@/mixins/user";
 
 export default {
   name: "SubscribeModal",
+
+  mixins: [User],
 
   components: {
     Modal,
@@ -41,6 +44,24 @@ export default {
       this.$store.commit("modal/hideSafe", { name: "subscribe" });
     },
     subscribe() {
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch(
+            "global/flashToast",
+            "You should add card in payment settings"
+          );
+          return;
+        }
+        this.$store
+          .dispatch("payment/pay/pay", {
+            paymentType: "subscribe",
+            userId: this.profile.id
+          })
+          .then(() => {
+            window.location.reload();
+          });
+        return;
+      }
       this.close();
       this.$store.dispatch("subscription/openPaymentModal", this.profile);
     }
