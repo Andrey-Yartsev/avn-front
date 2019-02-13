@@ -31,11 +31,18 @@ export const askFor3dSecure = options => {
     Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
-      Store.dispatch("payment/pay/pay", { ...options, token }).then(() => {
-        if (options.onSuccess) {
-          options.onSuccess();
-        }
-      });
+      console.log({ ...options, token });
+      Store.dispatch("payment/pay/pay", { ...options, token })
+        .then(() => {
+          if (options.onSuccess) {
+            options.onSuccess();
+          }
+        })
+        .catch(error => {
+          if (options.onFailure) {
+            options.onFailure(error);
+          }
+        });
     }
   );
 };

@@ -2,16 +2,24 @@
   <Modal :onClose="close">
     <div class="popup-container popup-alert" slot="content">
       <div class="content">
-        <div class="popup-alert__title">
-          Pay to view
-        </div>
-        <div class="popup-alert__body">
-          You are opening message for {{ data.price }}
-        </div>
-        <div class="popup-alert__footer">
-          <a href="#" class="btn" @click.prevent="yes">Confirm</a>
-          <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
-        </div>
+        <Loader
+          v-if="progress"
+          :fullscreen="false"
+          text=""
+          class="transparent small"
+        />
+        <template v-else>
+          <div class="popup-alert__title">
+            Pay to view
+          </div>
+          <div class="popup-alert__body">
+            You are opening message for {{ data.price }}
+          </div>
+          <div class="popup-alert__footer">
+            <a href="#" class="btn" @click.prevent="yes">Confirm</a>
+            <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
+          </div>
+        </template>
       </div>
       <button type="button" class="close" @click="close"></button>
     </div>
@@ -21,6 +29,8 @@
 <script>
 import Modal from "@/components/modal/Index";
 import User from "@/mixins/user";
+import { askFor3dSecure } from "@/utils/3dsecure";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "SubscriptionConfirmModal",
@@ -28,7 +38,14 @@ export default {
   mixins: [User],
 
   components: {
-    Modal
+    Modal,
+    Loader
+  },
+
+  data() {
+    return {
+      progress: false
+    };
   },
 
   computed: {
@@ -39,24 +56,56 @@ export default {
 
   methods: {
     yes() {
-      this.close();
+      const onSuccess = () => {
+        this.close();
+        this.$store.dispatch("chat/fetchMessagesDefault");
+      };
+      const amount = parseInt(this.data.price.replace(/\$/, ""));
+      this.progress = true;
       this.$store
         .dispatch("payment/pay/pay", {
           paymentType: "message",
           messageId: this.data.messageId,
-          amount: this.data.amount,
+          amount,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         })
-        .then(() => {
-          this.$store.dispatch("chat/fetchMessagesDefault");
+        .then(onSuccess)
+        .catch(r => {
+          if (r.code === 201) {
+            askFor3dSecure({
+              paymentType: "message",
+              messageId: this.data.messageId,
+              amount,
+              paymentGateCustomerCardToken: this.user
+                .paymentGateCustomerCardToken,
+              onSuccess,
+              onFailure: error => {
+                this.close();
+                alert(error.message);
+              }
+            });
+          } else {
+            this.progress = false;
+            alert(r);
+          }
         });
     },
     no() {
       this.close();
     },
     close() {
+      this.progress = false;
       this.$store.commit("modal/hideSafe", { name: "chatMessagePayConfirm" });
     }
+  },
+  mounted() {
+    let script = document.createElement("script");
+    script.onload = () => {
+      this.loading = false;
+    };
+    script.async = true;
+    script.src = "https://securionpay.com/js/securionpay.js";
+    document.head.appendChild(script);
   }
 };
 </script>

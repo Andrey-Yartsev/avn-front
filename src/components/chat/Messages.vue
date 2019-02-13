@@ -230,23 +230,16 @@ export default {
           );
           return;
         }
+
         this.$store.dispatch("modal/show", {
           name: "chatMessagePayConfirm",
           data: {
             price: message.price,
             paymentType: "message",
-            messageId: message.id,
-            amount: message.amount
+            messageId: message.id
           }
         });
-        return;
       }
-
-      this.$store.dispatch("paidMessage/openPaymentModal", {
-        user: this.withUser,
-        amount: parseInt(message.price.replace(/\$/, "")),
-        messageId: message.id
-      });
     },
 
     isLocked(message) {

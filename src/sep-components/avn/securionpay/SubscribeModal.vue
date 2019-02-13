@@ -48,9 +48,7 @@ export default {
           amount: this.profile.subscribePrice,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         })
-        .then(() => {
-          onSuccess();
-        })
+        .then(onSuccess)
         .catch(r => {
           if (r.code === 201) {
             askFor3dSecure({
