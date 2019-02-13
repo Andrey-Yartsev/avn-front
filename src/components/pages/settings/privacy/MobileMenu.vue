@@ -14,7 +14,11 @@
           <span>Email</span>
           <span class="value user-email">{{ user.email }}</span></router-link
         >
-        <router-link to="/settings/account/twitter" class="settings-nav__item">
+        <router-link
+          to="/settings/account/twitter"
+          class="settings-nav__item"
+          v-if="$root.isTeamApp"
+        >
           <span>Twitter</span>
           <span class="value">Connect</span>
         </router-link>

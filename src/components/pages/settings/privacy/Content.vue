@@ -68,7 +68,10 @@
           </label>
         </div>
       </div>
-      <div class="go-twitter-block shadow-block no-padding hidden-desktop">
+      <div
+        v-if="$root.isTeamApp"
+        class="go-twitter-block shadow-block no-padding hidden-desktop"
+      >
         <div class="settings-nav">
           <router-link to="/settings/privacy/twitter" class="settings-nav__item"
             ><span>Twitter</span><span class="value">Connect</span></router-link
