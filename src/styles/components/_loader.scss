@@ -178,7 +178,10 @@
 
   .payouts & {
     .lds-dual-ring {
-      top: 70px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: 70px;
+      }
     }
   }
 
