@@ -28,11 +28,13 @@ export const askFor3dsecure = options => {
   global.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
   securion3DSecure(
     paymentGateCustomerCardToken,
-    amount * 100, // WARNING!!! PRICE IN CENTS
+    Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
       Store.dispatch("payment/pay/pay", { ...options.data, token }).then(() => {
-        global.location.reload();
+        if (options.data.paymentType !== "message") {
+          global.location.reload();
+        }
       });
     }
   );

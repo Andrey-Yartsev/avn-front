@@ -235,7 +235,8 @@ export default {
           data: {
             price: message.price,
             paymentType: "message",
-            messageId: message.id
+            messageId: message.id,
+            amount: message.amount
           }
         });
         return;

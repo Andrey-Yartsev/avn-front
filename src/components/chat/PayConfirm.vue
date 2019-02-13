@@ -20,9 +20,12 @@
 
 <script>
 import Modal from "@/components/modal/Index";
+import User from "@/mixins/user";
 
 export default {
   name: "SubscriptionConfirmModal",
+
+  mixins: [User],
 
   components: {
     Modal
@@ -40,7 +43,9 @@ export default {
       this.$store
         .dispatch("payment/pay/pay", {
           paymentType: "message",
-          messageId: this.data.messageId
+          messageId: this.data.messageId,
+          amount: this.data.amount,
+          paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         })
         .then(() => {
           this.$store.dispatch("chat/fetchMessagesDefault");
