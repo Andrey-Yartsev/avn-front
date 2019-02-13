@@ -1,9 +1,9 @@
 <template>
-  <SubscribeModalInner />
+  <SubscribeModalInner @subscribe="subscribe" ref="modal" />
 </template>
 
 <script>
-import SubscribeModalInner from "./SubscribeModalInner";
+import SubscribeModalInner from "@/components/subscription/SubscribeModalInner";
 
 export default {
   name: "SubscribeModal",
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     subscribe() {
-      this.close();
+      this.$refs.modal.close();
       this.$store.dispatch("subscription/openPaymentModal", this.profile);
     }
   }
