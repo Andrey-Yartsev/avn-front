@@ -145,6 +145,8 @@
                       v-model="expYear"
                       type="text"
                       size="4"
+                      minlength="4"
+                      maxlength="4"
                       data-securionpay="expYear"
                     />
                   </span>
