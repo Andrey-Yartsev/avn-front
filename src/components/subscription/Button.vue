@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="profile.canEarn"
+    v-if="profile.canEarn && price > 0"
     class="subscribePaidView profile-actions__btn"
     @click="subscription"
   >
@@ -36,6 +36,9 @@ export default {
   },
 
   computed: {
+    price() {
+      return parseFloat(this.profile.subscribePrice, 10);
+    },
     subsAction() {
       if (!this.profile.subscribedBy) {
         return "subscribe";
