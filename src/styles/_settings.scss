@@ -40,6 +40,25 @@
     }
   }
 
+  .aside-col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      order: 1;
+      padding-left: 10px;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: relative;
+    }
+  }
+
+  .content-col {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      order: 2;
+    }
+  }
+
   &-header {
     background: $white;
     width: 100%;
@@ -119,19 +138,19 @@
   }
 }
 
-.TwitterView {
-  .AccountAllView {
-    .form-title {
+.AccountAllView {
+
+  .form-title {
+
+    .TwitterView & {
+
       @include media-breakpoint-down($desktop-breakpoint) {
         display: none;
       }
     }
-  }
-}
 
-.AccountAllView {
-  .form-title {
     .btn-logout {
+
       &:before {
         display: none;
       }
@@ -165,23 +184,6 @@
   }
 }
 
-.settings {
-  .aside-col {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      order: 1;
-      padding-left: 10px;
-    }
-    @include media-breakpoint-down($desktop-breakpoint) {
-      position: relative;
-    }
-  }
-
-  .content-col {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      order: 2;
-    }
-  }
-}
 .rounded-container {
   @include media-breakpoint-up($desktop-breakpoint) {
     .content-col & {
