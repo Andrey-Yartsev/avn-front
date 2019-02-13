@@ -29,7 +29,7 @@
             v-if="profile.id !== user.id"
             ref="subscribeButton"
           />
-          <FollowButton :profile="profile" />
+          <FollowButton :profile="profile" :actionPrefix="actionPrefix" />
           <UserDropdown
             :profile="profile"
             @openDropdawn="showDropdawn = true"

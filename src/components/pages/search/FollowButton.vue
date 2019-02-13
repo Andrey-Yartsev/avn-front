@@ -25,15 +25,19 @@ export default {
     profile: {
       type: Object,
       required: true
+    },
+    actionPrefix: {
+      type: String,
+      required: true
     }
   },
 
   methods: {
     follow() {
-      this.$store.dispatch("search/page/follow", this.profile.id);
+      this.$store.dispatch(`${this.actionPrefix}/follow`, this.profile.id);
     },
     unfollow() {
-      this.$store.dispatch("search/page/unfollow", this.profile.id);
+      this.$store.dispatch(`${this.actionPrefix}/unfollow`, this.profile.id);
     }
   }
 };
