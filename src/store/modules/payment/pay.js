@@ -4,15 +4,7 @@ import { createRequestAction } from "../../utils/storeRequest";
 
 const state = {};
 
-const actions = {
-  // pay({ dispatch }) {
-  //   return new Promise((accept, reject) => {
-  //     dispatch("_pay").then().catch((err) => {
-  //       console.log(err);
-  //     });
-  //   });
-  // }
-};
+const actions = {};
 
 const mutations = {};
 
