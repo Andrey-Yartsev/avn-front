@@ -56,6 +56,7 @@
         type="submit"
         class="btn lg primary-color"
         id="subscribe-proceed"
+        :disabled="progress"
       >
         <slot name="button-text" />
       </button>
@@ -73,6 +74,11 @@ export default {
     profile: {
       type: Object,
       required: true
+    },
+    progress: {
+      type: Boolean,
+      require: true,
+      default: false
     }
   }
 };

@@ -23,17 +23,17 @@ function securion3DSecure(card, amount, success_callback) {
   );
 }
 
-export const askFor3dsecure = options => {
-  const { amount, paymentGateCustomerCardToken } = options.data;
+export const askFor3dSecure = options => {
+  const { amount, paymentGateCustomerCardToken } = options;
   global.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
   securion3DSecure(
     paymentGateCustomerCardToken,
     Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
-      Store.dispatch("payment/pay/pay", { ...options.data, token }).then(() => {
-        if (options.data.paymentType !== "message") {
-          global.location.reload();
+      Store.dispatch("payment/pay/pay", { ...options, token }).then(() => {
+        if (options.onSuccess) {
+          options.onSuccess();
         }
       });
     }

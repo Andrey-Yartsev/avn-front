@@ -20,7 +20,7 @@
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
-      <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
+      <rl-subscribe-modal v-if="this.$store.state.modal.subscribe.show" />
       <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
@@ -59,7 +59,6 @@ import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
 import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
 import UserReportModal from "@/components/common/UserReportModal";
-import SubscribeModal from "@/components/subscription/SubscribeModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import ModalRouter from "@/components/modal/Router";
@@ -98,7 +97,6 @@ export default {
     PostModal,
     ChatModal,
     UserReportModal,
-    SubscribeModal,
     ResubscribeModal,
     PaymentModal,
     ModalRouter,

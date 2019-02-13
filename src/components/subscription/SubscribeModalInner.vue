@@ -2,7 +2,18 @@
   <Modal :onClose="close">
     <div class="popup-container subscribe-popup" slot="content">
       <div class="content">
-        <Content :profile="profile" @subscribe="subscribe">
+        <Loader
+          v-if="loading"
+          :fullscreen="false"
+          text=""
+          class="transparent small"
+        />
+        <Content
+          v-else
+          :profile="profile"
+          @subscribe="subscribe"
+          :progress="progress"
+        >
           <template slot="button-text">
             Subscribe for ${{ profile.subscribePrice }} / month
           </template>
@@ -22,50 +33,39 @@
 import Modal from "@/components/modal/Index";
 import Content from "./SubscribeModalContent";
 import User from "@/mixins/user";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "SubscribeModal",
-
   mixins: [User],
-
   components: {
     Modal,
-    Content
+    Content,
+    Loader
   },
-
+  props: {
+    loading: {
+      type: Boolean,
+      require: true,
+      default: false
+    },
+    progress: {
+      type: Boolean,
+      require: true,
+      default: false
+    }
+  },
   computed: {
     profile() {
       return this.$store.state.modal.subscribe.data;
     }
   },
-
   methods: {
     close() {
       this.$store.commit("modal/hideSafe", { name: "subscribe" });
     },
     subscribe() {
-      if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch(
-            "global/flashToast",
-            "You should add card in payment settings"
-          );
-          return;
-        }
-        this.$store
-          .dispatch("payment/pay/pay", {
-            paymentType: "subscribe",
-            userId: this.profile.id,
-            amount: this.profile.subscribePrice,
-            paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
-          })
-          .then(() => {
-            window.location.reload();
-          });
-        return;
-      }
-      this.close();
-      this.$store.dispatch("subscription/openPaymentModal", this.profile);
+      this.$emit("subscribe");
     }
   }
 };
