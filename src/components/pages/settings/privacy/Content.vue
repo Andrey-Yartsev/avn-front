@@ -48,6 +48,7 @@
       </div>
       -->
       <div
+        v-if="$root.isTeamApp"
         class="form-title tweet-posts-block border-top disabled border-top-mobile"
       >
         <div class="inner">

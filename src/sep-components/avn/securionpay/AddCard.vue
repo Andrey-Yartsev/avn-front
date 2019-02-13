@@ -284,9 +284,7 @@ export default {
           })
           .then(r => {
             if (r.success) {
-              this.$store.dispatch("auth/extendUser", {
-                isPaymentCardConnected: true
-              });
+              this.$store.dispatch("profile/fetch");
               this.showCardForm = false;
             } else {
               this.$store.dispatch("global/flashToast", "Something goes wrong");
