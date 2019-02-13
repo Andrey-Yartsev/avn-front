@@ -27,7 +27,9 @@
                   <span class="payment-system">
                     {{ user.paymentGateCardBrand }}
                   </span>
-                  <span class="card-number">{{ user.paymentGateCardLast4 }}</span>
+                  <span class="card-number">{{
+                    user.paymentGateCardLast4
+                  }}</span>
 
                   <button class="delete" id="deleteCard" @click="replaceCard">
                     Replace
