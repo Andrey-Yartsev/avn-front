@@ -53,6 +53,15 @@
     &.american {
       background-image: url(#{$assetPath}/img/card-american.svg);
     }
+    &.jcb {
+      background-image: url(#{$assetPath}/img/card-jcb.svg);
+    }
+    &.discover {
+      background-image: url(#{$assetPath}/img/card-discover.svg);
+    }
+    &.club {
+      background-image: url(#{$assetPath}/img/card-dclubs.svg);
+    }
     .payment-system {
       font-weight: 500;
       width: 28%;
