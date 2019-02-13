@@ -1,6 +1,7 @@
 import anyRequest from "@/utils/anyRequest";
 import tokenRequest from "../../utils/tokenRequest";
 import request from "../../utils/request";
+import { askFor3dsecure } from "../modules/payment/3dsecure";
 
 const storeRequest = (
   requestType,
@@ -35,14 +36,20 @@ const storeRequest = (
           commit(prefix + "Requested");
         } else {
           const r = await response.json();
-          if (localError) {
-            commit(prefix + "Error", r.error);
+          const { code } = r.error;
+
+          if (code === 201) {
+            askFor3dsecure(options, dispatch);
           } else {
-            dispatch("global/setError", r.error, { root: true });
+            if (localError) {
+              commit(prefix + "Error", r.error);
+            } else {
+              dispatch("global/setError", r.error, { root: true });
+            }
+            commit(prefix + "Success", false);
+            commit(prefix + "Requested");
+            reject(r.error);
           }
-          commit(prefix + "Success", false);
-          commit(prefix + "Requested");
-          reject(r.error);
         }
       })
       .catch(error => {

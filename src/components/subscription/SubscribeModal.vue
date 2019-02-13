@@ -55,7 +55,9 @@ export default {
         this.$store
           .dispatch("payment/pay/pay", {
             paymentType: "subscribe",
-            userId: this.profile.id
+            userId: this.profile.id,
+            amount: this.profile.subscribePrice,
+            paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
           })
           .then(() => {
             window.location.reload();
