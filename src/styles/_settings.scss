@@ -226,11 +226,6 @@
 }
 
 .SettingsStoryView {
-  .form-title {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      padding: 19px 15px 10px;
-    }
-  }
 
   .form-group {
     .saveChanges {
@@ -331,5 +326,20 @@
 
   + .border-top-mobile {
     border-top: none;
+  }
+}
+
+
+.empty-label-gap {
+
+  .avn-style & {
+    display: none;
+  }
+}
+
+.row-save-privacy {
+
+  .avn-style & {
+    justify-content: center;
   }
 }

@@ -140,6 +140,18 @@ strong {
     padding-top: 11px;
   }
 }
+
+.border-bottom {
+
+  &-mobile {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-bottom: 1px solid rgba($gray, 0.2);
+      padding-bottom: 11px;
+    }
+  }
+}
+
 //#content,
 #content > * {
   transition: all 0.2s ease-in-out 0s;

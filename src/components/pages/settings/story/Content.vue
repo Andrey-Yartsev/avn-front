@@ -62,8 +62,8 @@
           </div>
         </div>
       </div>
-      <div class="form-title border-top private-story">
-        <div class="inner private-story__inner">
+      <div class="form-title border-top private-switcher-block private-story">
+        <div class="inner border-bottom-mobile">
           <span class="semi-transparent">
             Private Story
             <p class="subtext">

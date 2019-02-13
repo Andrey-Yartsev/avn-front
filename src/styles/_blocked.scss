@@ -52,12 +52,8 @@
 }
 
 .private-story {
+
   @include media-breakpoint-down($desktop-breakpoint) {
     padding-bottom: 0;
-
-    &__inner {
-      border-bottom: 1px solid rgba($gray, 0.2);
-      padding-bottom: 11px;
-    }
   }
 }

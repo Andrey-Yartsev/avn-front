@@ -499,6 +499,24 @@ label {
       opacity: 0.5;
     }
   }
+
+  &.pt-reset {
+
+    &_mob {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 0;
+      }
+    }
+  }
+
+  &.private-switcher-block {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-bottom: 10px;
+    }
+  }
+
   .inner {
     position: relative;
     font-size: 17px;

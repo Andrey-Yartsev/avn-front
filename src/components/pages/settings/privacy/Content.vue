@@ -10,8 +10,8 @@
 
     <form v-on:submit.stop.prevent="save">
       <h1 class="form-title" v-if="$mq === 'desktop'">Privacy Settings</h1>
-      <div class="form-title private-profile-block border-top">
-        <div class="inner">
+      <div class="form-title private-switcher-block private-profile-block border-top">
+        <div class="inner border-bottom-mobile">
           <span class="semi-transparent">
             Private Profile
             <p class="subtext">Only subscribers will see your posts</p>
@@ -83,9 +83,9 @@
       <ConnectTwitter v-if="$root.isTeamApp" @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
-        <div class="form-group form-group_with-label">
-          <div class="form-group-inner">
-            <span class="label"></span>
+        <div class="form-group form-group_row">
+          <div class="form-group-inner row-save-privacy">
+            <span class="label empty-label-gap"></span>
             <button
               type="submit"
               class="btn lg saveChanges"
