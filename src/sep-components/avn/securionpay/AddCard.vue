@@ -16,7 +16,7 @@
           <div class="shadow-block border-top no-padding">
             <div class="container">
               <div class="cards-list">
-                <div :class="['item', user.paymentGateCardBrand.toLowerCase()]">
+                <div :class="['item', user.paymentGateCardBrand ? user.paymentGateCardBrand.toLowerCase() : '']">
                   <span class="payment-system">
                     {{ user.paymentGateCardBrand }}
                   </span>
