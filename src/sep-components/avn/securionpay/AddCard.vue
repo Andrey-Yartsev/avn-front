@@ -16,11 +16,11 @@
           <div class="shadow-block border-top no-padding">
             <div class="container">
               <div class="cards-list">
-                <div class="item visa">
+                <div :class="['item', user.paymentGateCardBrand.toLowerCase()]">
                   <span class="payment-system">
-                    Visa/Master
+                    {{ user.paymentGateCardBrand }}
                   </span>
-                  <span class="number">XXXX</span>
+                  <span class="number">{{ user.paymentGateCardLast4 }}</span>
 
                   <button class="delete" id="deleteCard" @click="replaceCard">
                     Replace

@@ -118,7 +118,8 @@ export default {
   data() {
     return {
       showToast: false,
-      wasLogout: false
+      wasLogout: false,
+      containerClassName: ""
     };
   },
   computed: {
