@@ -1,5 +1,5 @@
 <template>
-  <div class="AccountAllView" v-if="$mq === 'desktop'">
+  <div class="AccountAllView">
     <div class="form-title form-title_cols">
       <h1>
         {{ user.name }}
