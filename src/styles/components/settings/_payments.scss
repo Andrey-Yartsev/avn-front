@@ -107,7 +107,10 @@
 
 .payment-system {
   font-weight: 500;
-  width: 28%;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: 28%;
+  }
 }
 
 .card-number {
