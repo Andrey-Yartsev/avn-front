@@ -26,7 +26,7 @@
                     <span class="payment-system">
                       {{ ucFirst(getCardType(card)) }}
                     </span>
-                    <span class="number">{{ card }}</span>
+                    <span class="card-number">{{ card }}</span>
                     <button v-if="cardDeleting" class="delete">
                       In progress
                     </button>

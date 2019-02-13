@@ -62,13 +62,7 @@
     &.club {
       background-image: url(#{$assetPath}/img/card-dclubs.svg);
     }
-    .payment-system {
-      font-weight: 500;
-      width: 28%;
-    }
-    .number {
-      margin: 0 auto 0 10px;
-    }
+
     &:last-child {
       border-bottom: none;
     }
@@ -108,6 +102,19 @@
         }
       }
     }
+  }
+}
+
+.payment-system {
+  font-weight: 500;
+  width: 28%;
+}
+
+.card-number {
+  margin: 0 auto 0 10px;
+
+  &:before {
+    content: "\b7\a0\b7\a0\b7\a0\b7\a0\b7\a0\b7\a0"; // 6 symbols &middot;
   }
 }
 
