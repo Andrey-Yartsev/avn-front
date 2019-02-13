@@ -334,12 +334,9 @@
 
   .avn-style & {
     display: none;
-  }
-}
 
-.row-save-privacy {
-
-  .avn-style & {
-    justify-content: center;
+    + .btn {
+      margin-left: 20px;
+    }
   }
 }
