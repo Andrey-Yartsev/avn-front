@@ -127,6 +127,9 @@
                   v-model="cardNumber"
                   size="20"
                   data-securionpay="number"
+                  autocomplete="cc-number"
+                  minlength="13"
+                  maxlength="19"
                 />
               </label>
             </div>
