@@ -158,6 +158,8 @@
                       v-model="cvc"
                       type="text"
                       size="8"
+                      minlength="3"
+                      maxlength="4"
                       data-securionpay="cvc"
                     />
                   </span>
