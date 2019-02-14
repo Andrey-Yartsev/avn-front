@@ -3,7 +3,19 @@
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {};
-const actions = {};
+const actions = {
+  save({ dispatch }, data) {
+    dispatch("_save", data).then(() => {
+      dispatch(
+        "auth/extendUser",
+        {
+          canEarn: true
+        },
+        { root: true }
+      );
+    });
+  }
+};
 const mutations = {};
 
 createRequestAction({
@@ -18,7 +30,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "save",
+  prefix: "_save",
   apiPath: "payouts/bank",
   state,
   mutations,

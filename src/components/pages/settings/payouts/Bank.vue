@@ -72,11 +72,7 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
-      this.$store.dispatch("payouts/bank/save", this.localBank).then(r => {
-        if (r.error) {
-          return;
-        }
-      });
+      this.$store.dispatch("payouts/bank/save", this.localBank);
     }
   },
 
