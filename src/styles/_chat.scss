@@ -902,17 +902,6 @@
   }
 }
 
-.chatView {
-
-  > div {
-    //padding: 0 0 0 1em;
-
-    &:first-child {
-      //padding: 0;
-    }
-  }
-}
-
 .newMessage {
   color: $secondary-color;
   display: inline-block;
@@ -1144,6 +1133,18 @@
 
     &:after {
       background: none;
+    }
+  }
+
+  &.disabled,
+  &.disabled.active {
+
+    .name {
+      opacity: .5;
+    }
+
+    .user-login {
+      opacity: .4;
     }
   }
 
