@@ -12,6 +12,14 @@ const actions = {
     dispatch("user/block", userId, { root: true }).then(r => {
       if (r.success) {
         commit("extendChatUser", { id: userId, isBlocked: true });
+        commit(
+          "search/page/extendUser",
+          {
+            userId,
+            data: { isBlocked: true }
+          },
+          { root: true }
+        );
       }
     });
   },
@@ -19,6 +27,14 @@ const actions = {
     dispatch("user/unblock", userId, { root: true }).then(r => {
       if (r.success) {
         commit("extendChatUser", { id: userId, isBlocked: false });
+        commit(
+          "search/page/extendUser",
+          {
+            userId,
+            data: { isBlocked: false }
+          },
+          { root: true }
+        );
       }
     });
   },
