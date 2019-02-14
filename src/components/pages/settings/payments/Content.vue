@@ -4,13 +4,13 @@
       <div class="payments-card" v-if="cardConnected">
         <div class="payment-card">
           <div>
-            <!--<div class="form-title hidden-desktop">-->
-            <!--<div class="inner">-->
-            <!--<span class="semi-transparent">-->
-            <!--Your Card-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div class="form-title hidden-desktop">
+              <div class="inner">
+                <span class="semi-transparent">
+                  Your Card
+                </span>
+               </div>
+           </div>
             <h1 class="form-title hidden-mobile">
               Your Card
             </h1>
