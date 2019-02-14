@@ -145,9 +145,12 @@ strong {
 
   &-mobile {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      border-bottom: 1px solid rgba($gray, 0.2);
-      padding-bottom: 11px;
+    .avn-style & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        border-bottom: 1px solid rgba($gray, 0.2);
+        padding-bottom: 11px;
+      }
     }
   }
 }

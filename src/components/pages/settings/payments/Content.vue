@@ -9,8 +9,8 @@
                 <span class="semi-transparent">
                   Your Card
                 </span>
-               </div>
-           </div>
+              </div>
+            </div>
             <h1 class="form-title hidden-mobile">
               Your Card
             </h1>

@@ -504,8 +504,11 @@ label {
 
     &_mob {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        padding-top: 0;
+      .avn-style & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          padding-top: 0;
+        }
       }
     }
   }

@@ -100,7 +100,7 @@
       </div>
 
       <div class="SessionsCollectionView">
-        <div class="form-title border-top">
+        <div class="form-title border-top border-top-mobile">
           <div class="inner">
             <span class="semi-transparent">Sessions</span>
             <button
