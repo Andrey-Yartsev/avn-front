@@ -1,11 +1,14 @@
 
 .boxes {
   width: 100%;
-  max-width: $width-wrapper;
   margin: 16px auto;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     overflow: hidden;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: $width-wrapper;
   }
 
   .cols {
