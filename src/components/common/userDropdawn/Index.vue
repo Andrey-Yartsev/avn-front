@@ -92,10 +92,10 @@ export default {
       this.$store.dispatch(this.actionPrefix + "/unblock", this.profile.id);
     },
     mute() {
-      this.$store.dispatch(this.actionPrefix + "/mute", this.profile.id);
+      this.$store.dispatch(this.actionPrefix + "/mute", this.profile);
     },
     unmute() {
-      this.$store.dispatch(this.actionPrefix + "/unmute", this.profile.id);
+      this.$store.dispatch(this.actionPrefix + "/unmute", this.profile);
     },
     toggle() {
       if (this.opened) {

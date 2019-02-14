@@ -38,17 +38,19 @@ const actions = {
       }
     });
   },
-  muteUser({ commit, dispatch }, userId) {
-    dispatch("user/mute", userId, { root: true }).then(r => {
+  muteUser({ commit, dispatch }, user) {
+    const prefix = user.subscribedBy ? "subs" : "follower";
+    dispatch(`user/${prefix}Mute`, user.id, { root: true }).then(r => {
       if (r.success) {
-        commit("extendChatUser", { id: userId, isMuted: true });
+        commit("extendChatUser", { id: user.id, isMuted: true });
       }
     });
   },
-  unmuteUser({ commit, dispatch }, userId) {
-    dispatch("user/unmute", userId, { root: true }).then(r => {
+  unmuteUser({ commit, dispatch }, user) {
+    const prefix = user.subscribedBy ? "subs" : "follower";
+    dispatch(`user/${prefix}Unmute`, user.id, { root: true }).then(r => {
       if (r.success) {
-        commit("extendChatUser", { id: userId, isMuted: false });
+        commit("extendChatUser", { id: user.id, isMuted: false });
       }
     });
   },

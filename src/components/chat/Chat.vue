@@ -309,11 +309,11 @@ export default {
       this.chatOptionsOpened = false;
     },
     muteActiveUser() {
-      this.$store.dispatch("chat/muteUser", this.activeUserId);
+      this.$store.dispatch("chat/muteUser", this.activeUser);
       this.chatOptionsOpened = false;
     },
     unmuteActiveUser() {
-      this.$store.dispatch("chat/unmuteUser", this.activeUserId);
+      this.$store.dispatch("chat/unmuteUser", this.activeUser);
       this.chatOptionsOpened = false;
     },
     deleteConversation() {
