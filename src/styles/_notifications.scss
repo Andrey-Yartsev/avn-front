@@ -388,6 +388,16 @@
           margin: 0 8px 0 0;
         }
       }
+
+      .notifications-filter > & {
+
+        &:before {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin: 0;
+          }
+        }
+      }
     }
 
     &:hover {
