@@ -98,7 +98,7 @@
                 </div>
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
-                  v-if="step === 1"
+                  v-if="step === 1 && stories.length"
                   @ps-scroll-y="scrollFunction"
                 >
                   <div class="explore-wrapper highlights">
