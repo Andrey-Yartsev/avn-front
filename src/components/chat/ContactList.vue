@@ -11,7 +11,11 @@
         class="chatView"
         v-for="v in chats"
         v-bind:key="v.withUser.id"
-        :class="{ active: v.active, unread: !!v.unreadMessagesCount }"
+        :class="{
+          active: v.active,
+          unread: !!v.unreadMessagesCount,
+          disabled: _isMuted(v.withUser)
+        }"
       >
         <div class="avatar avatar_md">
           <span class="avatar__img">
@@ -61,11 +65,12 @@
 import dateFns from "date-fns";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import Mute from "./mute";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, Mute],
 
   components: {
     VuePerfectScrollbar

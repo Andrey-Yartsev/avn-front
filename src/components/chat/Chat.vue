@@ -106,7 +106,7 @@
                           >Block user</a
                         >
                       </li>
-                      <li v-if="activeUser.isMuted">
+                      <li v-if="isMuted">
                         <a @click="unmuteActiveUser">Unmute user</a>
                       </li>
                       <li v-else>
@@ -171,11 +171,12 @@ import MobileHeader from "@/components/header/Mobile";
 import ClickOutside from "vue-click-outside";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserHeader from "@/components/header/User";
+import Mute from "./mute";
 
 export default {
   name: "Chat",
 
-  mixins: [User, ModalRouterParams],
+  mixins: [User, ModalRouterParams, Mute],
 
   directives: {
     ClickOutside
@@ -283,6 +284,9 @@ export default {
     },
     activeUserLoading() {
       return this.$store.state.chat.fetchActiveUserLoading;
+    },
+    isMuted() {
+      return this._isMuted(this.activeUser);
     }
   },
 
@@ -309,11 +313,17 @@ export default {
       this.chatOptionsOpened = false;
     },
     muteActiveUser() {
-      this.$store.dispatch("chat/muteUser", this.activeUser);
+      this.$store.dispatch("chat/muteUser", {
+        user: this.activeUser,
+        currentUser: this.user
+      });
       this.chatOptionsOpened = false;
     },
     unmuteActiveUser() {
-      this.$store.dispatch("chat/unmuteUser", this.activeUser);
+      this.$store.dispatch("chat/unmuteUser", {
+        user: this.activeUser,
+        currentUser: this.user
+      });
       this.chatOptionsOpened = false;
     },
     deleteConversation() {

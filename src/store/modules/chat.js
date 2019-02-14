@@ -1,10 +1,19 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
+import * as deepMerge from "deepmerge";
 
 const state = {
   isSecondScreen: false,
   activeUserId: null
+};
+
+const mutePreifx = (user, currentUser) => {
+  if (user.subscribedOn && user.subscribedOn.userId === currentUser.id) {
+    return "subs";
+  } else {
+    return "follower";
+  }
 };
 
 const actions = {
@@ -38,19 +47,29 @@ const actions = {
       }
     });
   },
-  muteUser({ commit, dispatch }, user) {
-    const prefix = user.subscribedBy ? "subs" : "follower";
+  muteUser({ commit, dispatch }, { user, currentUser }) {
+    const prefix = mutePreifx(user, currentUser);
     dispatch(`user/${prefix}Mute`, user.id, { root: true }).then(r => {
       if (r.success) {
-        commit("extendChatUser", { id: user.id, isMuted: true });
+        commit("extendChatUser", {
+          id: user.id,
+          followedOn: {
+            isMuted: true
+          }
+        });
       }
     });
   },
-  unmuteUser({ commit, dispatch }, user) {
-    const prefix = user.subscribedBy ? "subs" : "follower";
+  unmuteUser({ commit, dispatch }, { user, currentUser }) {
+    const prefix = mutePreifx(user, currentUser);
     dispatch(`user/${prefix}Unmute`, user.id, { root: true }).then(r => {
       if (r.success) {
-        commit("extendChatUser", { id: user.id, isMuted: false });
+        commit("extendChatUser", {
+          id: user.id,
+          followedOn: {
+            isMuted: false
+          }
+        });
       }
     });
   },
@@ -117,7 +136,8 @@ const mutations = {
   extendChatUser(state, user) {
     state.chats = state.chats.map(v => {
       if (v.withUser.id === user.id) {
-        v.withUser = { ...v.withUser, ...user };
+        v.withUser = deepMerge(v.withUser, user);
+        // v.withUser = { ...v.withUser, ...user };
       }
       return v;
     });
