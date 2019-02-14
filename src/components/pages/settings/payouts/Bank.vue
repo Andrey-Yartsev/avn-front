@@ -7,24 +7,25 @@
       <form class="payouts-bank-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
           <div class="container">
-            <div class="form-title">
-              <div class="inner">
-                <div class="semi-transparent">
-                  Add Bank
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Routing Number</span>
-                <input name="routingNumber" v-model="localBank.routingNumber" />
+                <input
+                  name="routingNumber"
+                  v-model="localBank.routingNumber"
+                  v-validate="'required'"
+                />
               </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Account Number</span>
-                <input name="accountNumber" v-model="localBank.accountNumber" />
+                <input
+                  name="accountNumber"
+                  v-model="localBank.accountNumber"
+                  v-validate="'required'"
+                />
               </label>
             </div>
           </div>
@@ -37,7 +38,13 @@
           </div>
 
           <div class="form-group-btn">
-            <button type="submit" class="btn lg saveChanges">Next</button>
+            <button
+              type="submit"
+              class="btn lg saveChanges"
+              :disabled="!isFormValid || saving"
+            >
+              Next
+            </button>
           </div>
         </div>
       </form>
@@ -46,8 +53,12 @@
 </template>
 
 <script>
+import Form from "@/mixins/form";
+
 export default {
   name: "PayoutSettingsBankE",
+
+  mixins: [Form],
 
   data() {
     return {
@@ -62,8 +73,8 @@ export default {
     changed() {
       return JSON.stringify(this.bank) !== JSON.stringify(this.localBank);
     },
-    valid() {
-      return this.localBank.routingNumber && this.localBank.accountNumber;
+    saving() {
+      return this.$store.state.payouts.bank._saveLoading;
     }
   },
 
