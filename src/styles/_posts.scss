@@ -899,16 +899,16 @@
   }
 
   .name {
-    max-width: 55%;
+    //max-width: 55%;
     padding: 0 4px 0 0;
     display: inline-block;
     vertical-align: top;
 
     .disable-scroll-page & {
-      max-width: 55%;
+      //max-width: 55%;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: 40%;
+        //max-width: 40%;
       }
     }
   }
