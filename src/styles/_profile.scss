@@ -430,6 +430,10 @@
       opacity: 1;
       pointer-events: unset;
     }
+
+    &.no-owner {
+      padding-right: 20px;
+    }
   }
 
   .icn-block {
