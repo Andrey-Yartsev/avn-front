@@ -63,6 +63,7 @@
                     class="subscription__input"
                     type="number"
                     min="0"
+                    step="0.01"
                     name="subscribePrice"
                     v-model="localUser.subscribePrice"
                   />

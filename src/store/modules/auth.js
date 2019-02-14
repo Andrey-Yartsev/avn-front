@@ -113,6 +113,7 @@ const mutations = {
   },
 
   setUser(state, user) {
+    user.subscribePrice = parseFloat(user.subscribePrice);
     state.user = Object.assign({}, defaultUser, user);
   },
 
