@@ -1,6 +1,7 @@
 <template>
   <div class="explore-wrapper videos">
-    <Video
+    <component
+      :is="videoComponent"
       v-for="post in items"
       v-bind:key="post.id"
       :post="post"
@@ -11,6 +12,7 @@
 
 <script>
 import Video from "@/components/post/SmallView";
+import PostMedium from "@/components/post/MediumView";
 
 export default {
   name: "SearchPosts",
@@ -18,7 +20,14 @@ export default {
   props: ["items", "query", "loading"],
 
   components: {
-    Video
+    Video,
+    PostMedium
+  },
+
+  computed: {
+    videoComponent() {
+      return this.$mq === "mobile" ? PostMedium : Video;
+    }
   }
 };
 </script>
