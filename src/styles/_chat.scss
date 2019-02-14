@@ -542,10 +542,9 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       content: "";
       position: absolute;
-      //left: -3px;
-      //right: -3px;
       left: 0;
-      right: 0;
+      //right: 0;
+      width: 956px;
       top: 0;
       bottom: 0;
       z-index: -1;
@@ -558,6 +557,14 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       box-shadow: 0 2px 1px 0 rgba(#000, 0.1);
     }
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
+
   }
 
   .header-avatar {
