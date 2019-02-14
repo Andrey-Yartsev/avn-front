@@ -526,7 +526,8 @@
 }
 
 .payout-type {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  font-size: 13px;
 }
 
 .payout-user {
@@ -535,6 +536,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
+  font-size: 13px;
 
   .user-login {
     margin-left: 5px;

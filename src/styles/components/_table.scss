@@ -204,9 +204,9 @@
     .userview-block {
       margin-left: 0;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-left: 0;
-      }
+      //@include media-breakpoint-up($desktop-breakpoint) {
+      //  margin-left: 0;
+      //}
     }
   }
 
