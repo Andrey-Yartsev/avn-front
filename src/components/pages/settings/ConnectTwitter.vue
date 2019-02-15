@@ -9,7 +9,7 @@
             <button
               v-if="!user.isTwitterConnected"
               type="button"
-              class="btn border connect-twitter hidden-mobile"
+              class="btn alt border connect-twitter hidden-mobile"
               @click="twitterConnect"
             >
               Connect Twitter account

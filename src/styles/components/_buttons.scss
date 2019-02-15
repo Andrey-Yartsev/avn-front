@@ -70,12 +70,12 @@
     }
 
     &.connect-twitter {
-      color: $default-secondary-color;
-      box-shadow: 0 0 0 2px $default-secondary-color inset;
-      &:hover {
-        color: #fff;
-        background: $default-secondary-color;
-      }
+      //color: $default-secondary-color;
+      //box-shadow: 0 0 0 2px $default-secondary-color inset;
+      //&:hover {
+      //  color: #fff;
+      //  background: $default-secondary-color;
+      //}
     }
     &.alt {
       color: $secondary-color;
