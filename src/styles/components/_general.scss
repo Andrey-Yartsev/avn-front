@@ -140,16 +140,6 @@ strong {
     border-top: 1px solid rgba($gray, 0.2);
     padding-top: 11px;
   }
-
-  &:first-child {
-
-    .payments-wrapper & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        border-top: none;
-      }
-    }
-  }
 }
 
 .border-bottom {
