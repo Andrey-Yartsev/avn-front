@@ -29,7 +29,6 @@ export default {
       this.avatarPreview = null;
     },
     saveAvatar() {
-      // console.log("save avatar");
       return new Promise(accept => {
         this.avatarUploading = true;
         upload(this.$refs.avatar.files[0]).then(fileName => {

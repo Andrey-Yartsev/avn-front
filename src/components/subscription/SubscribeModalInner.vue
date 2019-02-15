@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     profile() {
-      return this.$store.state.modal.subscribe.data;
+      return this.$store.state.modal.subscribe.data.user;
     }
   },
   methods: {

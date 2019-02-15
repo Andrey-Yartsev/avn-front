@@ -12,19 +12,6 @@ export default {
     };
   },
   created() {
-    // window.onhashchange = () => {
-    //   console.log("onhashchange");
-    //   if (!window.location.hash) {
-    //     this.reset();
-    //   } else {
-    //     const route = this.matchRoute();
-    //     if (!route) {
-    //       return;
-    //     }
-    //     this.setComponent(route);
-    //   }
-    // };
-
     const route = this.matchRoute();
     if (!route) {
       return;

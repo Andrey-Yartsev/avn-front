@@ -172,7 +172,6 @@ export default {
         return;
       }
       if (!this.canSend) {
-        // console.log(this.message.trim());
         if (!this.message.trim()) {
           setTimeout(() => {
             this.message = "";

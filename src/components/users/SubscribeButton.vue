@@ -1,0 +1,68 @@
+<template>
+  <SubscribeButton
+    :profile="profile"
+    :actionPrefix="actionPrefix"
+    @requested="subsRequested"
+  />
+</template>
+
+<script>
+import SubscribeButton from "@/components/subscription/Button";
+
+export default {
+  name: "SearchSubscribeButton",
+
+  components: {
+    SubscribeButton
+  },
+
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    },
+    actionPrefix: {
+      type: String,
+      required: true
+    }
+  },
+
+  methods: {
+    subsRequested(data) {
+      if (data.action === "unsubscribe") {
+        this.unsubscribed(data.result);
+      } else if (data.action === "resubscribe") {
+        this.resubscribed(data.result);
+      } else {
+        throw new Error("Wrong action");
+      }
+    },
+    unsubscribed(result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.commit(this.actionPrefix + "/extendUser", {
+        userId: this.profile.id,
+        data: { subscribedByExpire: true }
+      });
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have unsubscribed successfully"
+      );
+    },
+    resubscribed(result) {
+      if (!result.success) {
+        return;
+      }
+      this.$store.commit(this.actionPrefix + "/extendUser", {
+        userId: this.profile.id,
+        data: { subscribedByExpire: false }
+      });
+      this.$store.dispatch(
+        "global/flashToast",
+        "You have resubscribed successfully"
+      );
+    }
+  }
+};
+</script>

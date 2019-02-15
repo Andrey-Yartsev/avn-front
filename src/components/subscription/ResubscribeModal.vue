@@ -2,7 +2,11 @@
   <Modal :onClose="close">
     <div class="popup-container subscribe-popup" slot="content">
       <div class="content">
-        <Content :profile="profile" @subscribe="resubscribe">
+        <Content
+          :profile="profile"
+          @subscribe="resubscribe"
+          :progress="progress"
+        >
           <template slot="button-text">
             Resubscribe for ${{ profile.subscribePrice }} / month
           </template>
@@ -23,6 +27,12 @@ import Content from "./SubscribeModalContent";
 export default {
   name: "SubscribeModal",
 
+  data() {
+    return {
+      progress: false
+    };
+  },
+
   components: {
     Modal,
     Content
@@ -39,6 +49,7 @@ export default {
       this.$store.commit("modal/hide", { name: "resubscribe" });
     },
     resubscribe() {
+      this.progress = true;
       this.$store
         .dispatch("subscription/resubscribe", {
           userId: this.profile.id

@@ -10,8 +10,12 @@
           any additional costs.
         </div>
         <div class="popup-alert__footer">
-          <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
-          <a href="#" class="btn" @click.prevent="yes">Unsubscribe</a>
+          <button class="btn alt" @click.prevent="no" :disabled="progress">
+            Cancel
+          </button>
+          <button class="btn" @click.prevent="yes" :disabled="progress">
+            Unsubscribe
+          </button>
         </div>
       </div>
       <button type="button" class="close" @click="close"></button>
@@ -29,6 +33,12 @@ export default {
     Modal
   },
 
+  data() {
+    return {
+      progress: false
+    };
+  },
+
   computed: {
     user() {
       return this.$store.state.modal.subscriptionConfirm.data;
@@ -37,11 +47,15 @@ export default {
 
   methods: {
     yes() {
-      this.$store.dispatch("subscription/unsubscribe", {
-        userId: this.user.id
-      });
-      this.$store.commit("subscription/confirm/yes", this.user.id);
-      this.$store.commit("modal/hideSafe", { name: "subscriptionConfirm" });
+      this.progress = true;
+      this.$store
+        .dispatch("subscription/unsubscribe", {
+          userId: this.user.id
+        })
+        .then(() => {
+          this.$store.commit("subscription/confirm/yes", this.user.id);
+          this.$store.commit("modal/hideSafe", { name: "subscriptionConfirm" });
+        });
     },
     no() {
       this.$store.commit("subscription/confirm/no");

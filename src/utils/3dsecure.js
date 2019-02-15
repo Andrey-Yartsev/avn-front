@@ -31,7 +31,6 @@ export const askFor3dSecure = options => {
     Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
-      console.log({ ...options, token });
       Store.dispatch("payment/pay/pay", { ...options, token })
         .then(() => {
           if (options.onSuccess) {

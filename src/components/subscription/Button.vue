@@ -32,6 +32,10 @@ export default {
     profile: {
       type: Object,
       required: true
+    },
+    actionPrefix: {
+      type: String,
+      required: true
     }
   },
 
@@ -60,7 +64,10 @@ export default {
     subscribe() {
       this.$store.dispatch("modal/show", {
         name: "subscribe",
-        data: this.profile
+        data: {
+          user: this.profile,
+          actionPrefix: this.actionPrefix
+        }
       });
     },
     unsubscribe() {

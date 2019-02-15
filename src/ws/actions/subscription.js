@@ -17,10 +17,11 @@ export default data => {
         Store.dispatch("profile/home/getPosts");
       }
     }
-    Store.commit("search/page/extendUser", {
+    Store.commit(payment.actionPrefix + "/extendUser", {
       userId: payment.user.id,
       data: {
-        subscribedBy: true
+        subscribedBy: true,
+        subscribedByExpire: false
       }
     });
   } else {

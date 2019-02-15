@@ -8,7 +8,7 @@ const state = {
 };
 
 const actions = {
-  openPaymentModal({ dispatch }, user) {
+  openPaymentModal({ dispatch }, { user, actionPrefix }) {
     return new Promise(accept => {
       dispatch("fetchPaymentLink", {
         type: "subscription",
@@ -21,7 +21,8 @@ const actions = {
             type: "subscription",
             name: "payment",
             data: {
-              user
+              user,
+              actionPrefix
             }
           },
           { root: true }
@@ -31,7 +32,7 @@ const actions = {
     });
   },
   unsubscribe({ commit, dispatch }, data) {
-    dispatch("_unsubscribe", data).then(result => {
+    return dispatch("_unsubscribe", data).then(result => {
       commit("statusUpdate", {
         action: "unsubscribe",
         result,

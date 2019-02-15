@@ -29,6 +29,7 @@
         <div class="user-actions">
           <SubscribeButton
             :profile="profile"
+            :actionPrefix="actionPrefix"
             v-if="profile.id !== user.id"
             ref="subscribeButton"
           />
@@ -57,7 +58,7 @@
 </template>
 
 <script>
-import SubscribeButton from "../pages/search/SubscribeButton";
+import SubscribeButton from "./SubscribeButton";
 import FollowButton from "../pages/search/FollowButton";
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import User from "@/mixins/user";
