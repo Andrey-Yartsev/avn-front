@@ -41,7 +41,7 @@
         </div>
         <div class="search-all-link">
           <a
-            :href="'/search/users/' + query"
+            :href="'/search/users/' + localQuery"
             @click.prevent="goTo('/search/users/' + localQuery)"
             class="searchAllLink"
           >
