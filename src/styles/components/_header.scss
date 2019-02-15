@@ -1065,32 +1065,33 @@
       }
     }
   }
-  .menu-item-home {
-    &:before {
-      content: "\E612";
-    }
-  }
-  .menu-item-explore {
-    &:before {
-      content: "\E613";
-    }
-  }
-  .menu-item-notifications {
-    &:before {
-      content: "\E614";
-    }
-  }
-  .menu-item-messages {
-    &:before {
-      content: "\E615";
-    }
-  }
 
   + .page-header-title {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-top: 20px;
     }
+  }
+}
+
+.menu-item-home {
+  &:before {
+    content: "\E612";
+  }
+}
+.menu-item-explore {
+  &:before {
+    content: "\E613";
+  }
+}
+.menu-item-notifications {
+  &:before {
+    content: "\E614";
+  }
+}
+.menu-item-messages {
+  &:before {
+    content: "\E615";
   }
 }
 
