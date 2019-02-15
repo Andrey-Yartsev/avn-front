@@ -90,6 +90,10 @@ export default {
   created: function() {
     this.localBank = {};
     // this.localBank = this._clone(this.bank);
+  },
+
+  mounted() {
+    this.$emit("titleChanged", "Add Bank");
   }
 };
 </script>

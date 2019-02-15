@@ -64,6 +64,12 @@ export default {
     DefaultSection
   },
 
+  data() {
+    return {
+      title: ""
+    };
+  },
+
   computed: {
     isAccountPage() {
       return this.$route.name === "SettingsAccount";
@@ -79,19 +85,6 @@ export default {
         return true;
       }
       return false;
-    },
-    title() {
-      if (this.$route.params.view && this.$route.params.view === "blocked") {
-        return "Blocked Users";
-      }
-      if (this.isAccountPage) {
-        return this.accountViewToTitle(this.$route.params.view);
-      } else if (this.isPrivacyPage) {
-        if (this.$route.params.view) {
-          return ucFirst(this.$route.params.view);
-        }
-      }
-      return this.$route.meta.title;
     },
     showSaveButton() {
       if (this.isAccountPage && this.$route.params.view) {
@@ -153,7 +146,30 @@ export default {
         manage: "Manage Account"
       };
       return map[view];
+    },
+    changeTitle(title) {
+      this.title = title;
+    },
+    initTitle() {
+      if (this.$route.params.view && this.$route.params.view === "blocked") {
+        this.title = "Blocked Users";
+        return;
+      }
+      if (this.isAccountPage) {
+        this.title = this.accountViewToTitle(this.$route.params.view);
+        return;
+      } else if (this.isPrivacyPage) {
+        if (this.$route.params.view) {
+          this.title = ucFirst(this.$route.params.view);
+          return;
+        }
+      }
+      this.title = this.$route.meta.title;
     }
+  },
+
+  mounted() {
+    this.initTitle();
   }
 };
 </script>

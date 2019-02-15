@@ -1,6 +1,6 @@
 <template>
-  <Layout>
-    <Content slot="content" />
+  <Layout ref="layout">
+    <Content slot="content" @titleChanged="changeTitle" />
   </Layout>
 </template>
 
@@ -14,6 +14,12 @@ export default {
   components: {
     Layout,
     Content
+  },
+
+  methods: {
+    changeTitle(title) {
+      this.$refs.layout.changeTitle(title);
+    }
   }
 };
 </script>

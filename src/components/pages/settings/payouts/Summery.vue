@@ -26,6 +26,10 @@ export default {
     Bank,
     Requests,
     Transactions
+  },
+
+  mounted() {
+    this.$emit("titleChanged", "Personal Information");
   }
 };
 </script>

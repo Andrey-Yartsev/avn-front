@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <component :is="innerComponent" v-else />
+        <component :is="innerComponent" v-else @titleChanged="changeTitle" />
       </template>
     </div>
   </div>
@@ -104,6 +104,12 @@ export default {
     },
     bankExists() {
       return this.bank && this.bank.accountNumber;
+    }
+  },
+
+  methods: {
+    changeTitle(title) {
+      this.$emit("titleChanged", title);
     }
   },
 

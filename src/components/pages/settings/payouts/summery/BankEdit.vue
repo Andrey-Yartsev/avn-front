@@ -29,26 +29,16 @@
               <input name="accountNumber" v-model="localBank.accountNumber" />
             </label>
           </div>
-        </div>
 
-        <div
-          class="form-group form-group_with-label hidden"
-          id="payouts-bank-form-error"
-        >
-          <label class="form-group-inner">
-            <span class="label"></span>
-            <div class="error"></div>
-          </label>
-        </div>
-
-        <div class="form-group-btn hidden-mobile">
-          <button
-            type="submit"
-            class="btn lg saveChanges"
-            :disabled="!changed || !valid"
-          >
-            Save
-          </button>
+          <div class="form-group-btn">
+            <button
+              type="submit"
+              class="btn lg"
+              :disabled="!changed || !valid || saving"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </form>
@@ -61,7 +51,8 @@ export default {
 
   data() {
     return {
-      localBank: null
+      localBank: null,
+      saving: false
     };
   },
 
@@ -82,6 +73,7 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
+      this.saving = true;
       this.$store.dispatch("payouts/bank/save", this.localBank).then(r => {
         if (r.error) {
           return;
@@ -90,6 +82,7 @@ export default {
           "global/flashToast",
           "Bank info saved successfully"
         );
+        this.saving = false;
         this.cancel();
       });
     },

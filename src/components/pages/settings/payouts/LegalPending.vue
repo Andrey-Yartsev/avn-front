@@ -38,6 +38,9 @@ export default {
     legal() {
       return this.$store.state.payouts.legal.fetchResult;
     }
+  },
+  mounted() {
+    this.$emit("titleChanged", "Personal Information");
   }
 };
 </script>

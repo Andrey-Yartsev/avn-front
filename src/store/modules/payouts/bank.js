@@ -5,14 +5,17 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 const state = {};
 const actions = {
   save({ dispatch }, data) {
-    dispatch("_save", data).then(() => {
-      dispatch(
-        "auth/extendUser",
-        {
-          canEarn: true
-        },
-        { root: true }
-      );
+    return new Promise(accept => {
+      dispatch("_save", data).then(r => {
+        accept(r);
+        dispatch(
+          "auth/extendUser",
+          {
+            canEarn: true
+          },
+          { root: true }
+        );
+      });
     });
   }
 };

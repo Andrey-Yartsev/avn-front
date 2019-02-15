@@ -555,3 +555,13 @@
     display: none;
   }
 }
+
+.payouts-bank-form {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .form-group-btn {
+      .btn {
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
