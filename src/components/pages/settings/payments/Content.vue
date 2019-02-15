@@ -251,6 +251,8 @@ export default {
       this.$store.dispatch("payment/card/fetch");
     }
     this.$store.dispatch("payment/transactions/fetch");
+
+    this.$emit("titleChanged", "Your Card");
   }
 };
 </script>

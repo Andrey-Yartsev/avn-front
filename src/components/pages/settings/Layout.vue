@@ -152,19 +152,19 @@ export default {
     },
     initTitle() {
       if (this.$route.params.view && this.$route.params.view === "blocked") {
-        this.title = "Blocked Users";
+        this.changeTitle("Blocked Users");
         return;
       }
       if (this.isAccountPage) {
-        this.title = this.accountViewToTitle(this.$route.params.view);
+        this.changeTitle(this.accountViewToTitle(this.$route.params.view));
         return;
       } else if (this.isPrivacyPage) {
         if (this.$route.params.view) {
-          this.title = ucFirst(this.$route.params.view);
+          this.changeTitle(ucFirst(this.$route.params.view));
           return;
         }
       }
-      this.title = this.$route.meta.title;
+      this.changeTitle(this.$route.meta.title.toString());
     }
   },
 

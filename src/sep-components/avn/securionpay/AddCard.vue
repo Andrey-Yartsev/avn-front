@@ -309,11 +309,20 @@ export default {
       this.showCardForm = true;
     }
   },
+  watch: {
+    showCard: {
+      immediate: true,
+      handler(showCard) {
+        if (!showCard) {
+          this.$emit("titleChanged", "Add Card");
+        } else {
+          this.$emit("titleChanged", "Your Card");
+        }
+      }
+    }
+  },
   mounted() {
     let script = document.createElement("script");
-    script.onload = () => {
-      //
-    };
     script.async = true;
     script.src = "https://securionpay.com/js/securionpay.js";
     document.head.appendChild(script);

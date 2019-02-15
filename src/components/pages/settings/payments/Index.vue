@@ -1,7 +1,11 @@
 <template>
-  <Layout>
-    <Content v-if="appName === 'teams'" slot="content" />
-    <avn-settings-add-card v-else slot="content" />
+  <Layout ref="layout">
+    <Content
+      v-if="appName === 'teams'"
+      slot="content"
+      @titleChanged="changeTitle"
+    />
+    <avn-settings-add-card v-else slot="content" @titleChanged="changeTitle" />
   </Layout>
 </template>
 
@@ -20,6 +24,14 @@ export default {
   computed: {
     appName() {
       return process.env.VUE_APP_NAME;
+    }
+  },
+
+  methods: {
+    changeTitle(title) {
+      setTimeout(() => {
+        this.$refs.layout.changeTitle(title);
+      }, 100);
     }
   }
 };

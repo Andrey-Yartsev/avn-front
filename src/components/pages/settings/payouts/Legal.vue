@@ -330,6 +330,10 @@ export default {
         });
       });
     }
+  },
+
+  mounted() {
+    this.$emit("titleChanged", "Personal Information");
   }
 };
 </script>
