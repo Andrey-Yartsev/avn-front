@@ -52,12 +52,14 @@
         max-height: 60vh;
         max-width: 100%;
         width: auto;
-        height: auto;
-        background: #fff;
-        display: block;
+        //height: auto;
+        //background: #fff;
+        //display: block;
 
         @include media-breakpoint-up($tablet-breakpoint) {
           max-height: calc(81vh - 180px);
+          margin-left: 0;
+          margin-right: 0;
         }
       }
     }
