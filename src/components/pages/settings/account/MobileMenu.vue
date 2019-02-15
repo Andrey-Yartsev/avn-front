@@ -9,7 +9,10 @@
       <div class="settings-nav">
         <router-link
           to="/settings/account/email"
-          class="settings-nav__item field-invalid"
+          class="settings-nav__item"
+          :class="{
+            'field-invalid ': !user.emailChecked
+          }"
         >
           <span>Email</span>
           <span class="value user-email">{{ user.email }}</span>
@@ -44,7 +47,7 @@
     <div class="shadow-block no-padding">
       <div class="settings-nav">
         <router-link to="/settings/account/manage" class="settings-nav__item">
-          <span class="user-login reset-ml">{{ user.username }}</span>
+          <span class="user-login user-login_st reset-ml">{{ user.username }}</span>
         </router-link>
       </div>
     </div>
