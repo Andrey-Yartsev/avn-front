@@ -8,30 +8,18 @@
   }
 
   .bg-profile {
-    height: 32vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 2;
     top: auto;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 96px;
       border-radius: 5px 5px 0 0;
     }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+
     &:empty {
-      //background: linear-gradient(
-      //  30deg,
-      //  $secondary-color-12 10%,
-      //  $primary-color-12 90%
-      //);
+
       & ~ .reset-bg {
         display: none;
       }
