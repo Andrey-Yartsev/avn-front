@@ -544,6 +544,13 @@
   }
 }
 
+.payouts-bank {
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    margin-bottom: 20px;
+  }
+}
+
 .payouts-account,
 .payouts-legal,
 .payouts-bank,
