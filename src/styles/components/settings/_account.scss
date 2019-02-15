@@ -48,11 +48,16 @@
   }
 }
 .btn-logout {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
   height: 44px;
   width: 54px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
   &:before {
     content: "\E63D";
     @include icon-font;
