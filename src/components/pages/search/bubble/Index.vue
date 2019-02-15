@@ -13,7 +13,13 @@
       v-click-outside="close"
       tabindex="1"
     />
-    <span role="button" tabindex="-1" id="header-search-clear" class="btn-clear-search"></span>
+    <span
+      role="button"
+      tabindex="-1"
+      id="header-search-clear"
+      class="btn-clear-search"
+      :class="{ hidden: !canSearch }"
+    ></span>
 
     <button
       type="button"
