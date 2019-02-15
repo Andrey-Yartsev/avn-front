@@ -12,6 +12,10 @@
     margin-right: 20px;
     min-height: 61px;
   }
+
+   &.disabled {
+     pointer-events: none;
+   }
 }
 
 .chatForm {
@@ -61,6 +65,10 @@
       font-size: 24px;
       content: "\E61A";
       display: block;
+    }
+
+    .disabled & {
+      color: rgba(124, 139, 150, 0.18);
     }
   }
 
