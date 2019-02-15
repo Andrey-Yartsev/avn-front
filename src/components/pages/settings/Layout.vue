@@ -78,7 +78,10 @@ export default {
       return this.$route.name === "SettingsPrivacy";
     },
     showLogoutButton() {
-      return this.isAccountPage && !this.showSaveButton;
+      return (
+        this.isAccountPage &&
+        (this.$route.params.view === "manage" || !this.$route.params.view)
+      );
     },
     showUsernameAsTitle() {
       if (this.isAccountPage && !this.$route.params.view) {
@@ -87,7 +90,11 @@ export default {
       return false;
     },
     showSaveButton() {
-      if (this.isAccountPage && this.$route.params.view) {
+      if (
+        this.isAccountPage &&
+        this.$route.params.view &&
+        this.$route.params.view !== "manage"
+      ) {
         return true;
       }
       return (
