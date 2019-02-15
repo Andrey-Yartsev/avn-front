@@ -9,22 +9,25 @@ const state = {
 
 const actions = {
   openPaymentModal({ dispatch }, user) {
-    dispatch("fetchPaymentLink", {
-      type: "subscription",
-      amount: user.subscribePrice,
-      id: user.id
-    }).then(() => {
-      dispatch(
-        "modal/show",
-        {
-          type: "subscription",
-          name: "payment",
-          data: {
-            user
-          }
-        },
-        { root: true }
-      );
+    return new Promise(accept => {
+      dispatch("fetchPaymentLink", {
+        type: "subscription",
+        amount: user.subscribePrice,
+        id: user.id
+      }).then(() => {
+        dispatch(
+          "modal/show",
+          {
+            type: "subscription",
+            name: "payment",
+            data: {
+              user
+            }
+          },
+          { root: true }
+        );
+        accept();
+      });
     });
   },
   unsubscribe({ commit, dispatch }, data) {
