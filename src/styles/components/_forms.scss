@@ -430,6 +430,10 @@ label {
   box-shadow: 0 0 0 2px rgba($gray, 0.5) inset;
   position: relative;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    margin-top: -2px;
+  }
+
   span {
     position: absolute;
     left: 0;
