@@ -206,7 +206,7 @@
 
   .options-wrapper {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 16px);
     background: $white;
     left: 30px;
     right: 30px;
