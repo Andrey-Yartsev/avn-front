@@ -1611,8 +1611,11 @@
   &.popup-container_hfluid {
 
     .popup-container-scroll {
-      min-height: calc(100vh - 44px);
-      background-color: $white;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: calc(100vh - 44px);
+        background-color: $white;
+      }
     }
   }
 }
