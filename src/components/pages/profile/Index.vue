@@ -10,10 +10,7 @@
       <div class="profile-images">
         <ProfileAvatar :profile="profile" :pageName="pageName" />
       </div>
-      <div
-        class="profile-header"
-        v-if="useMediumPostView || $mq === 'mobile'"
-      >
+      <div class="profile-header" v-if="useMediumPostView || $mq === 'mobile'">
         <div
           class="profile-name profile-name_base hidden-desktop"
           v-if="$mq === 'mobile'"
@@ -46,7 +43,8 @@
             class="profile-twitter-link"
             target="_blank"
             rel="nofollow"
-          >twitter.com/{{ profile.twitterUsername }}</a>
+            >twitter.com/{{ profile.twitterUsername }}</a
+          >
           <FollowersCounter :profile="profile" />
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
@@ -55,11 +53,11 @@
       </div>
       <div
         class="post-types-tabs"
-          v-bind:style="{
-            'margin-right': -scrollBarWidth + 'px',
-            'padding-right': scrollBarWidth + 'px'
-          }"
-       v-if="$mq === 'desktop'"
+        v-bind:style="{
+          'margin-right': -scrollBarWidth + 'px',
+          'padding-right': scrollBarWidth + 'px'
+        }"
+        v-if="$mq === 'desktop'"
       >
         <div class="container">
           <ProfileActions

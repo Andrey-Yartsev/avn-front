@@ -11,14 +11,14 @@
       </div>
       <div
         class="post-types-tabs"
-          v-bind:style="{
-            'margin-right': -scrollBarWidth + 'px',
-            'padding-right': scrollBarWidth + 'px'
-          }"
-        >
-          <div class="container">
-            <ProfileActions :profile="profile" :page="page" />
-          </div>
+        v-bind:style="{
+          'margin-right': -scrollBarWidth + 'px',
+          'padding-right': scrollBarWidth + 'px'
+        }"
+      >
+        <div class="container">
+          <ProfileActions :profile="profile" :page="page" />
+        </div>
       </div>
       <div class="container">
         <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">
