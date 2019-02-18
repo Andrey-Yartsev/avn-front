@@ -31,19 +31,6 @@
             <div class="popup-body">
               <div class="popup-container-scroll">
                 <div class="highlights-form" v-if="step === 2">
-                  <!--<div class="avatar-block">-->
-                  <!--<span class="avatar">-->
-                  <!--<span class="avatar__img"></span>-->
-                  <!--</span>-->
-                  <!--<label for="avatar" class="select-user-image"></label>-->
-                  <!--<input-->
-                  <!--type="file"-->
-                  <!--id="avatar"-->
-                  <!--accept=".jpg,.jpeg,.gif,.png"-->
-                  <!--/>-->
-                  <!--<span class="reset-user-image reset-avatar"></span>-->
-                  <!--</div>-->
-
                   <div class="title-block text-centered">
                     Choose cover picture
                   </div>
