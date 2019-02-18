@@ -6,7 +6,10 @@
     </div>
     <div class="container" v-if="isOwner(profile.id)">
       <div class="controls-select-picture">
-        <label for="bg" class="select-user-image" :class="{ hide: profile.header || !showBgAdd }"
+        <label
+          for="bg"
+          class="select-user-image"
+          :class="{ hide: profile.header || !showBgAdd }"
           >Add background picture</label
         >
         <input
