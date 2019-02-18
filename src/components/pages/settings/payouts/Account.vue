@@ -13,7 +13,7 @@
             class="container payouts-account-country shadow-block"
             id="payouts-account-country"
           >
-            <div class="form-group">
+            <div class="form-group_with-label form-group">
               <label class="form-group-inner">
                 <span class="label">
                   Your Country

@@ -247,11 +247,8 @@ label {
 
   &_with-label {
 
-    &.form-group {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 11.5% 17px 0;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 11.5% 17px 0;
     }
   }
 
@@ -263,6 +260,7 @@ label {
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
     }
+    
     input + button {
       margin-left: 10px;
     }
