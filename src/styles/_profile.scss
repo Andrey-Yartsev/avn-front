@@ -1605,3 +1605,14 @@
 .mark-line {
   height: 1px;
 }
+
+.highlights-popup {
+
+  &.popup-container_hfluid {
+
+    .popup-container-scroll {
+      min-height: calc(100vh - 44px);
+      background-color: $white;
+    }
+  }
+}
