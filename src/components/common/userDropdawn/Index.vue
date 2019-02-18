@@ -10,19 +10,25 @@
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul>
-          <li><a href="#" @click.prevent="report">Report</a></li>
-          <li v-if="profile.isBlocked">
-            <a href="#" @click.prevent="unblock">Unblock</a>
+          <li v-if="!isOwner(profile.id)">
+            <a href="#" @click.prevent="report">Report</a>
           </li>
-          <li v-else><a href="#" @click.prevent="block">Block</a></li>
-
-          <template v-if="hasMute">
+          <template v-if="!isOwner(profile.id)">
+            <li v-if="profile.isBlocked">
+              <a href="#" @click.prevent="unblock">Unblock</a>
+            </li>
+            <li v-else>
+              <a href="#" @click.prevent="block">Block</a>
+            </li>
+          </template>
+          <template v-if="hasMute && !isOwner(profile.id)">
             <li v-if="isMuted">
               <a href="#" @click.prevent="unmute">Unmute</a>
             </li>
-            <li v-else><a href="#" @click.prevent="mute">Mute</a></li>
+            <li v-else>
+              <a href="#" @click.prevent="mute">Mute</a>
+            </li>
           </template>
-
           <li v-if="copied">
             <button class="btn-copy-link copied" type="button">Copied!</button>
           </li>
@@ -39,9 +45,12 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import User from "@/mixins/user";
 
 export default {
   name: "SearchUserDropdown",
+
+  mixins: [User],
 
   directives: {
     ClickOutside

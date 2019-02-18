@@ -30,10 +30,14 @@
           <SubscribeButton
             :profile="profile"
             :actionPrefix="actionPrefix"
-            v-if="profile.id !== user.id"
+            v-if="!isOwner(profile.id)"
             ref="subscribeButton"
           />
-          <FollowButton :profile="profile" :actionPrefix="actionPrefix" />
+          <FollowButton
+            v-if="!isOwner(profile.id)"
+            :profile="profile"
+            :actionPrefix="actionPrefix"
+          />
           <UserDropdown
             :profile="profile"
             @openDropdawn="showDropdawn = true"
