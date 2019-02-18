@@ -35,7 +35,7 @@ export default {
     },
     actionPrefix: {
       type: String,
-      required: true
+      default: ""
     }
   },
 
