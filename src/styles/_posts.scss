@@ -899,18 +899,10 @@
   }
 
   .name {
-    //max-width: 55%;
     padding: 0 4px 0 0;
     display: inline-block;
     vertical-align: top;
-
-    .disable-scroll-page & {
-      //max-width: 55%;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //max-width: 40%;
-      }
-    }
+    white-space: normal;
   }
 }
 
@@ -925,6 +917,7 @@
 
   &-content {
     flex: 1;
+    max-width: 100%;
 
     .post-popup & {
       padding-right: 24px;
