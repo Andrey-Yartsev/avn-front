@@ -28,7 +28,9 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-right: 18%;
+
     &-inner {
+
       & > .label {
         flex: 0 0 19%;
       }

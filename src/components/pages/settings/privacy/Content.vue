@@ -85,7 +85,7 @@
       <ConnectTwitter v-if="$root.isTeamApp" @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
-        <div class="form-group form-group_row">
+        <div class="form-group form-group_with-label">
           <div class="form-group-inner row-save-privacy">
             <span class="label empty-label-gap"></span>
             <button
