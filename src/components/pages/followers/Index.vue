@@ -5,15 +5,12 @@
   <div class="profile" v-else>
     <router-link class="addPost-btn-float" to="/addPost" />
     <div class="white-bg-block">
-      <div class="profile-sticky-header" v-if="$mq === 'desktop'">
-        <ProfileBackground :profile="profile" />
-        <div class="profile-header-container">
-          <div class="profile-images">
-            <ProfileAvatar :profile="profile" :pageName="page" />
-          </div>
-        </div>
-        <div
-          class="post-types-tabs"
+      <ProfileBackground :profile="profile" v-if="$mq === 'desktop'" />
+      <div class="profile-images" v-if="$mq === 'desktop'">
+        <ProfileAvatar :profile="profile" :pageName="page" />
+      </div>
+      <div
+        class="post-types-tabs"
           v-bind:style="{
             'margin-right': -scrollBarWidth + 'px',
             'padding-right': scrollBarWidth + 'px'
@@ -22,7 +19,6 @@
           <div class="container">
             <ProfileActions :profile="profile" :page="page" />
           </div>
-        </div>
       </div>
       <div class="container">
         <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">

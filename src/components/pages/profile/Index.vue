@@ -6,72 +6,67 @@
     <router-link class="addPost-btn-float" to="/addPost" />
     <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">
-      <div class="profile-sticky-header">
-        <ProfileBackground :profile="profile" />
-        <div class="profile-header-container">
-          <div class="profile-images">
-            <ProfileAvatar :profile="profile" :pageName="pageName" />
-          </div>
-          <div
-            class="profile-header"
-            v-if="useMediumPostView || $mq === 'mobile'"
-          >
-            <div
-              class="profile-name profile-name_base hidden-desktop"
-              v-if="$mq === 'mobile'"
-            >
-              <div class="profile-name__main">
-                <span class="name">{{ profile.name }}</span>
-                <span class="verified-user" v-if="profile.isVerified"></span>
-                <div class="block-indicator" v-if="user && profile.isBlocked">
-                  <span class="icn-item icn-block"></span>
-                </div>
-              </div>
-              <span class="user-login reset-ml"
-                ><a>{{ profile.username }}</a></span
-              >
-            </div>
-            <VuePerfectScrollbar class="profile-desc">
-              <p class="profile-text" v-if="profile.about">
-                {{ trunc(profile.about) }}
-                <a
-                  v-if="profile.about.length > collapseLimit"
-                  href="#"
-                  @click.prevent="collapsed = !collapsed"
-                >
-                  {{ collapsed ? "Read more" : "Collapse" }}
-                </a>
-              </p>
-              <a
-                v-if="profile.twitterUsername && $root.isTeamApp"
-                :href="'https://twitter.com/' + profile.twitterUsername"
-                class="profile-twitter-link"
-                target="_blank"
-                rel="nofollow"
-                >twitter.com/{{ profile.twitterUsername }}</a
-              >
-              <FollowersCounter :profile="profile" />
-              <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
-              <div class="mark-line" v-if="$mq === 'desktop'"></div>
-              <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
-            </VuePerfectScrollbar>
-          </div>
-        </div>
+      <ProfileBackground :profile="profile" />
+      <div class="profile-images">
+        <ProfileAvatar :profile="profile" :pageName="pageName" />
+      </div>
+      <div
+        class="profile-header"
+        v-if="useMediumPostView || $mq === 'mobile'"
+      >
         <div
-          class="post-types-tabs"
+          class="profile-name profile-name_base hidden-desktop"
+          v-if="$mq === 'mobile'"
+        >
+          <div class="profile-name__main">
+            <span class="name">{{ profile.name }}</span>
+            <span class="verified-user" v-if="profile.isVerified"></span>
+            <div class="block-indicator" v-if="user && profile.isBlocked">
+              <span class="icn-item icn-block"></span>
+            </div>
+          </div>
+          <span class="user-login reset-ml">
+            <a>{{ profile.username }}</a>
+          </span>
+        </div>
+        <VuePerfectScrollbar class="profile-desc">
+          <p class="profile-text" v-if="profile.about">
+            {{ trunc(profile.about) }}
+            <a
+              v-if="profile.about.length > collapseLimit"
+              href="#"
+              @click.prevent="collapsed = !collapsed"
+            >
+              {{ collapsed ? "Read more" : "Collapse" }}
+            </a>
+          </p>
+          <a
+            v-if="profile.twitterUsername && $root.isTeamApp"
+            :href="'https://twitter.com/' + profile.twitterUsername"
+            class="profile-twitter-link"
+            target="_blank"
+            rel="nofollow"
+          >twitter.com/{{ profile.twitterUsername }}</a>
+          <FollowersCounter :profile="profile" />
+          <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+          <div class="mark-line" v-if="$mq === 'desktop'"></div>
+          <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
+        </VuePerfectScrollbar>
+      </div>
+      <div
+        class="post-types-tabs"
           v-bind:style="{
             'margin-right': -scrollBarWidth + 'px',
             'padding-right': scrollBarWidth + 'px'
           }"
-          v-if="$mq === 'desktop'"
-        >
-          <div class="container">
-            <ProfileActions
-              :profile="profile"
-              :page="pageName"
-              ref="actionsDesktop"
-            />
-          </div>
+       v-if="$mq === 'desktop'"
+      >
+        <div class="container">
+          <ProfileActions
+            :profile="profile"
+            :page="pageName"
+            ref="actionsDesktop"
+          />
         </div>
       </div>
       <div class="profile-actions-mob" v-if="$mq === 'mobile'">

@@ -819,14 +819,3 @@
     }
   }
 }
-
-.highlights-popup {
-
-  .close {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //display: block;
-      //position: fixed;
-    }
-  }
-}

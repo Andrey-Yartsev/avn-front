@@ -158,30 +158,18 @@
   }
 }
 
-.profile-header-container {
-  background: $white;
-  position: relative;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    background-color: transparent;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 405px;
-    z-index: 4;
-    max-width: 960px;
-    margin: 0 auto;
-    height: 0;
-  }
-}
-
 .profile-header {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     box-shadow: none;
     height: 0;
-    max-width: 320px;
-    position: relative;
+    position: sticky;
+    top: 12px;
+    width: 100%;
+    max-width: $width-wrapper;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
   }
 
   .user-login {
@@ -213,17 +201,6 @@
       }
     }
   }
-
-  .site-footer {
-
-    .FooterNavCollectionView {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //margin-left: 5px;
-        //min-height: 120px;
-      }
-    }
-  }
 }
 
 .profile-images {
@@ -232,7 +209,10 @@
   width: 139px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    width: auto;
+    width: 100%;
+    position: sticky;
+    top: 79px;
+    transform: translateY(86px);
   }
 
   &__inner {
@@ -458,25 +438,21 @@
   padding: 0 15px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin-top: 51px;
+    margin-top: 136px;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 456px);
     max-height: calc(100vh - 152px);
     transition: all .3s;
     position: relative;
-    padding-left: 24px;
     overflow-y: auto;
+    padding-right: 10px;
+    max-width: 310px;
   }
 
   .header-scrolled & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      position: fixed;
-      margin-top: 0;
-      bottom: 0;
-      max-width: 320px;
-      width: 100%;
       height: calc(100vh - 152px);
     }
   }
@@ -586,7 +562,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 0 22px;
-  margin: 0 15px 10px;
+  margin: 0 15px;
   border-bottom: 1px solid rgba($gray, 0.2);
   flex: 0 0 calc(100% - 30px);
   order: 1;
@@ -658,6 +634,9 @@
     display: block;
     padding: 0;
     margin: 0 0 25px;
+
+    position: sticky;
+    top: 80px;
   }
 
   .container {
@@ -694,7 +673,6 @@
   position: sticky;
   top: -22px;
   z-index: 1;
-  background-color: $white;
   box-shadow: 0 2px 1px rgba(#000, 0.1);
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -828,7 +806,7 @@
   z-index: 2;
   padding-top: 4px;
   opacity: 0;
-  visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.4s;
   display: flex;
 
@@ -841,7 +819,15 @@
 
   &.show {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
+
+    .header-scrolled & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
   }
 
   .btn {
@@ -991,6 +977,9 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 320px;
+
+    position: sticky;
+    top: -240px;
   }
 
   .header-scrolled & {
@@ -1310,6 +1299,11 @@
 
     a {
 
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 10px;
+        background-color: $white;
+      }
+
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-bottom: 8px;
       }
@@ -1557,19 +1551,6 @@
     left: 3px;
   }
 }
-
-.profile-sticky-header {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    position: -webkit-sticky;
-    position: sticky;
-    top: -240px;
-    left: 0;
-    right: 0;
-    z-index: 3;
-  }
-}
-
 
 .has-page-footer {
   height: 100%;

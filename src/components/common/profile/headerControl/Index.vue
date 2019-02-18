@@ -1,6 +1,6 @@
 <template>
   <div class="sticky-header-controls">
-    <ProfileBackground :profile="profile" />
+    <!--<ProfileBackground :profile="profile" />-->
     <router-link to="/" class="header-return-btn"></router-link>
     <div
       class="profile-name__header"

@@ -10,16 +10,6 @@
         display: none;
       }
     }
-
-    .white-bg-block {
-
-      .profile-sticky-header {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          display: none;
-        }
-      }
-    }
   }
 
   .white-bg-block {
