@@ -33,7 +33,6 @@
                   class="input-email"
                   name="email"
                   v-model="localUser.email"
-                  disabled
                 />
               </span>
             </label>
