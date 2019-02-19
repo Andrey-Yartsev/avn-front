@@ -161,11 +161,11 @@ export default {
         document.body.classList.remove("scroll-bottom");
       } else {
         document.body.classList.remove("scroll-top");
-        if (st >= height) {
-          document.body.classList.add("scroll-bottom");
-        } else {
-          document.body.classList.remove("scroll-bottom");
-        }
+        document.body.classList.add("scroll-bottom");
+      }
+      if (st <= 0) {
+        document.body.classList.remove("scroll-bottom");
+        document.body.classList.remove("scroll-top");
       }
       this.lastScrollTop = st <= 0 ? 0 : st;
     },

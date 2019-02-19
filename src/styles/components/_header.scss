@@ -292,6 +292,17 @@
     }
   }
 
+  .scroll-bottom & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transform: translate3d(0, 0, 0);
+      top: 0;
+      position: fixed;
+      left: 0;
+      right: 0;
+    }
+  }
+
   .dark & {
     background: $main-color;
   }
@@ -425,14 +436,14 @@
 }
 
 .header-wrapper {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  //position: fixed;
+  //top: 0;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
   height: 44px;
-  transition: all 0.2s ease-in-out 0s;
-  transform: translate3d(0, 0, 0);
+  //transition: all 0.2s ease-in-out 0s;
+  //transform: translate3d(0, 0, 0);
 
   @include media-breakpoint-up($desktop-breakpoint) {
     box-shadow: 0 0 5px rgba(#000, 0.3);
@@ -442,7 +453,7 @@
 
   .scroll-top & {
     @include media-breakpoint-down($desktop-breakpoint) {
-      transform: translate3d(0, -44px, 0);
+      //transform: translate3d(0, -44px, 0);
     }
   }
 }
@@ -472,10 +483,10 @@
 .header_container {
   display: flex;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  //position: fixed;
+  //top: 0;
+  //left: 0;
+  //right: 0;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 44px;
@@ -960,10 +971,10 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     position: -webkit-sticky;
     position: sticky;
-    top: 44px;
+    top: 0;
     box-shadow: 0 0 5px rgba(#000, 0.3);
     width: 100%;
-    transition: transform 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -980,7 +991,17 @@
   .scroll-top & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      transform: translate3d(0, -44px, 0);
+      //transform: translate3d(0, -44px, 0);
+    }
+  }
+
+  .scroll-bottom & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transform: translate3d(0, 44px, 0);
+      position: fixed;
+      left: 0;
+      right: 0;
     }
   }
 
@@ -1625,14 +1646,14 @@
   &:hover {
     color: $primary-color;
   }
-  
+
   &.go-back {
     padding: 7px 15px;
     height: 44px;
     display: flex;
     align-items: center;
     align-content: center;
-    
+
     &:before {
       position: relative;
       transform: translateY(0);
