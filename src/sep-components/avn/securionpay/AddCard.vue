@@ -132,12 +132,13 @@
               </label>
             </div>
 
-            <div
-              class="form-group form-group_with-label"
-            >
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Card Number</span>
-                <span class="form-group form-group_clear-gaps" :class="{ 'field-invalid': fieldError('cardNumber') }">
+                <span
+                  class="form-group form-group_clear-gaps"
+                  :class="{ 'field-invalid': fieldError('cardNumber') }"
+                >
                   <input
                     name="cardNumber"
                     v-model.lazy="cardNumber"
@@ -159,7 +160,10 @@
               <label class="form-group-inner">
                 <span class="label">Expiration Date</span>
 
-                <div class="group-expiration-date" :class="{ 'field-invalid': fieldError('expDate') }">
+                <div
+                  class="group-expiration-date"
+                  :class="{ 'field-invalid': fieldError('expDate') }"
+                >
                   <CardExpDate
                     class="form-group"
                     v-validate="'card-exp-date'"
