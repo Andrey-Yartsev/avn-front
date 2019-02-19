@@ -43,7 +43,7 @@
       <br />
     </div>
 
-    <div class="PayoutsBankView">
+    <div class="PayoutsBankView" v-else>
       <h1 class="form-title">
         Add Card
       </h1>
