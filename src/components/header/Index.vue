@@ -158,8 +158,14 @@ export default {
         if (st > height) {
           document.body.classList.add("scroll-top");
         }
+        document.body.classList.remove("scroll-bottom");
       } else {
         document.body.classList.remove("scroll-top");
+        if (st >= height) {
+          document.body.classList.add("scroll-bottom");
+        } else {
+          document.body.classList.remove("scroll-bottom");
+        }
       }
       this.lastScrollTop = st <= 0 ? 0 : st;
     },
