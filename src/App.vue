@@ -265,16 +265,6 @@ export default {
       this.$store.commit("global/setScrollBarInitWidth", getScrollbarWidth());
     }, 3000);
 
-    let currentScroll = window.pageYOffset;
-    document.body.onscroll = function() {
-      if (currentScroll < window.pageYOffset) {
-        document.body.classList.add("scroll-top");
-      } else {
-        document.body.classList.remove("scroll-top");
-      }
-      currentScroll = window.pageYOffset;
-    };
-
     this.initLoggedInClass();
 
     this.$nextTick(() => {

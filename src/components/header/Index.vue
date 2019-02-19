@@ -1,5 +1,5 @@
 <template>
-  <header id="site_header" :class="{ guest: noAuthHeader }">
+  <header ref="siteHeader" id="site_header" :class="{ guest: noAuthHeader }">
     <div class="header-wrapper">
       <div
         :class="['container', 'header_container']"
@@ -103,7 +103,8 @@ export default {
     return {
       email: "",
       password: "",
-      opened: false
+      opened: false,
+      lastScrollTop: 0
     };
   },
   mixins: [ModalRouterGoto],
@@ -147,6 +148,21 @@ export default {
     }
   },
   methods: {
+    onScroll() {
+      const { scrollTop } = document.documentElement;
+      const { pageYOffset } = window;
+      const { height } = this.$refs.siteHeader.getBoundingClientRect();
+      const st = pageYOffset || scrollTop;
+
+      if (st > this.lastScrollTop) {
+        if (st > height) {
+          document.body.classList.add("scroll-top");
+        }
+      } else {
+        document.body.classList.remove("scroll-top");
+      }
+      this.lastScrollTop = st <= 0 ? 0 : st;
+    },
     openAddPostModal() {
       this.$store.dispatch("modal/show", {
         name: "addPost"
@@ -161,6 +177,12 @@ export default {
   },
   directives: {
     ClickOutside
+  },
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   }
 };
 </script>
