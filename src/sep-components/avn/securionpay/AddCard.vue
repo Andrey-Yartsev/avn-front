@@ -57,96 +57,113 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Street</span>
-                <input
-                  v-model="userinfo.street"
-                  name="street"
-                  v-validate="'required'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="userinfo.street"
+                    name="street"
+                    v-validate="'required'"
+                  />
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">City</span>
-                <input
-                  v-model="userinfo.city"
-                  name="city"
-                  v-validate="'required'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="userinfo.city"
+                    name="city"
+                    v-validate="'required'"
+                  />
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">State/Country</span>
-                <input
-                  v-model="userinfo.state"
-                  name="state"
-                  v-validate="'required'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="userinfo.state"
+                    name="state"
+                    v-validate="'required'"
+                  />
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">ZIP/Post Code</span>
-                <input
-                  v-model="userinfo.zip"
-                  name="zip"
-                  v-validate="'required'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="userinfo.zip"
+                    name="zip"
+                    v-validate="'required'"
+                  />
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Country</span>
-                <input
-                  v-model="userinfo.country"
-                  name="country"
-                  v-validate="'required'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="userinfo.country"
+                    name="country"
+                    v-validate="'required'"
+                  />
+                </span>
               </label>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Email</span>
-                <input
-                  v-model="email"
-                  name="email"
-                  v-validate="'required|email'"
-                />
+                <span class="form-group form-group_clear-gaps">
+                  <input
+                    v-model="email"
+                    name="email"
+                    v-validate="'required|email'"
+                  />
+                </span>
               </label>
             </div>
 
-            <div
-              class="form-group form-group_with-label"
-              :class="{ 'field-invalid': fieldError('cardNumber') }"
-            >
+            <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Card Number</span>
-                <input
-                  name="cardNumber"
-                  v-model.lazy="cardNumber"
-                  size="20"
-                  data-securionpay="number"
-                  autocomplete="cc-number"
-                  minlength="13"
-                  maxlength="19"
-                  v-validate="'required|numeric'"
-                />
+                <span
+                  class="form-group form-group_clear-gaps"
+                  :class="{ 'field-invalid': fieldError('cardNumber') }"
+                >
+                  <input
+                    name="cardNumber"
+                    v-model.lazy="cardNumber"
+                    size="20"
+                    data-securionpay="number"
+                    autocomplete="cc-number"
+                    minlength="13"
+                    maxlength="19"
+                    v-validate="'required|numeric'"
+                  />
+                  <div class="tooltip-info" v-if="fieldError('cardNumber')">
+                    {{ fieldError("cardNumber") }}
+                  </div>
+                </span>
               </label>
-              <div class="tooltip-info" v-if="fieldError('cardNumber')">
-                {{ fieldError("cardNumber") }}
-              </div>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Expiration Date</span>
 
-                <div :class="{ 'field-invalid': fieldError('expDate') }">
+                <div
+                  class="group-expiration-date"
+                  :class="{ 'field-invalid': fieldError('expDate') }"
+                >
                   <CardExpDate
                     class="form-group"
                     v-validate="'card-exp-date'"
@@ -160,15 +177,17 @@
 
                 <span class="card-cvc-num">
                   <span class="name-cvc">Cvc</span>
-                  <input
-                    v-model="cvc"
-                    type="text"
-                    size="8"
-                    minlength="3"
-                    maxlength="4"
-                    data-securionpay="cvc"
-                    v-validate="'required|numeric'"
-                  />
+                  <span class="form-group form-group_clear-gaps">
+                    <input
+                      v-model="cvc"
+                      type="text"
+                      size="8"
+                      minlength="3"
+                      maxlength="4"
+                      data-securionpay="cvc"
+                      v-validate="'required|numeric'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -176,7 +195,9 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Cardholder Name</span>
-                <input v-model="userinfo.name" type="text" />
+                <span class="form-group form-group_clear-gaps">
+                  <input v-model="userinfo.name" type="text" />
+                </span>
               </label>
             </div>
 
