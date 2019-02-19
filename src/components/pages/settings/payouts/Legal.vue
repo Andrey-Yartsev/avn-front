@@ -83,7 +83,7 @@
             <div class="form-group form-group_with-label photo-form-group">
               <label
                 class="form-group-inner photo-form-group-inner"
-                :class="{ success: !!preloadedMedias.length }"
+                :class="{ success: !!uploadedPhoto }"
               >
                 <span class="label">Photo ID</span>
 
@@ -97,7 +97,8 @@
                   type="file"
                   id="photo"
                   accept=".jpg,.jpeg,.png"
-                  @change="addMediaFiles"
+                  ref="photo"
+                  @change="upload"
                 />
               </label>
             </div>
@@ -230,16 +231,6 @@
             </div>
           </div>
 
-          <div
-            class="form-group form-group_with-label hidden"
-            id="payouts-legal-form-error"
-          >
-            <label class="form-group-inner">
-              <span class="label"></span>
-              <div class="error"></div>
-            </label>
-          </div>
-
           <div class="form-group-btn">
             <button
               type="submit"
@@ -257,14 +248,14 @@
 
 <script>
 import BirthDateSelect from "./BirthDateSelect";
-import FileUpload from "@/mixins/fileUpload";
 import states from "./states";
 import Form from "@/mixins/form";
+import upload from "@/utils/upload";
 
 export default {
   name: "PayoutSettingsLegal",
 
-  mixins: [FileUpload, Form],
+  mixins: [Form],
 
   components: {
     BirthDateSelect
@@ -283,7 +274,8 @@ export default {
       city: "",
       state: "",
       country: "United States of America",
-      tos: false
+      tos: false,
+      uploadedPhoto: null
     };
   },
 
@@ -298,7 +290,7 @@ export default {
       if (!this.isFormValid) {
         return false;
       }
-      if (!this.preloadedMedias.length) {
+      if (!this.uploadedPhoto) {
         return false;
       }
       return true;
@@ -306,12 +298,10 @@ export default {
   },
 
   methods: {
-    async save() {
-      if (!this.tos) {
-        alert("You need to agree with the terms of service");
-        return;
-      }
-      const files = await this.getMediaFiles();
+    async upload() {
+      this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+    },
+    save() {
       const fields = [
         "firstName",
         "lastName",
@@ -331,7 +321,7 @@ export default {
           data[f] = this[f];
         }
       }
-      data.personalIdImage = files[0];
+      data.personalIdImage = this.uploadedPhoto;
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
           return;
