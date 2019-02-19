@@ -244,7 +244,7 @@
             <button
               type="submit"
               class="btn lg saveChanges"
-              :disabled="!isFormValid"
+              :disabled="!canSave"
             >
               Next
             </button>
@@ -293,15 +293,25 @@ export default {
     },
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
+    },
+    canSave() {
+      if (!this.isFormValid) {
+        return false;
+      }
+      if (!this.preloadedMedias.length) {
+        return false;
+      }
+      return true;
     }
   },
 
   methods: {
-    save() {
+    async save() {
       if (!this.tos) {
         alert("You need to agree with the terms of service");
         return;
       }
+      const files = await this.getMediaFiles();
       const fields = [
         "firstName",
         "lastName",
@@ -321,6 +331,7 @@ export default {
           data[f] = this[f];
         }
       }
+      data.personalIdImage = files[0];
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
           return;

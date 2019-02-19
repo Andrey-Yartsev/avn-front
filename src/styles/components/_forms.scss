@@ -268,6 +268,31 @@ label {
     .form-group {
       flex: 1;
     }
+
+    &.success {
+      position: relative;
+
+      &:after {
+        position: absolute;
+        @include icon-font;
+        font-size: 24px;
+        width: 1.2em;
+        pointer-events: none;
+        right: 0;
+        content: "\E604";
+        color: $default-secondary-color;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          bottom: 0;
+        }
+        @include media-breakpoint-up($desktop-breakpoint) {
+          top: 0;
+        }
+      }
+
+      input {
+        padding-right: 30px;
+      }
+    }
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
