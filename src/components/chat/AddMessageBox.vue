@@ -1,5 +1,5 @@
 <template>
-  <div class="addChatMessage">
+  <div class="addChatMessage" :class="{ disabled: isMuted }">
     <div class="addFileCollectionView">
       <MediaPreview
         v-for="media in preloadedMedias"
@@ -110,11 +110,12 @@ import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import User from "@/mixins/user";
+import Mute from "./mute";
 
 export default {
   name: "ChatAddMesssageBox",
 
-  mixins: [FileUpload, User],
+  mixins: [FileUpload, User, Mute],
 
   components: {
     MediaPreview,
@@ -155,6 +156,9 @@ export default {
     },
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
+    },
+    isMuted() {
+      return this._isMuted(this.withUser);
     }
   },
 
