@@ -374,6 +374,19 @@
   }
 }
 
+.group-expiration-date {
+  position: relative;
+  flex: 1;
+
+  &.field-invalid,
+  &.field-valid {
+
+    input {
+      padding-right: 30px;
+    }
+  }
+}
+
 .expirationDateWrapper {
   display: flex;
   width: 100%;
