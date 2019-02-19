@@ -40,6 +40,7 @@
       <SignupModal v-if="this.$store.state.modal.signup.show" />
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <ErrorModal v-if="error" />
+      <Confirm v-if="this.$store.state.modal.confirm.show" />
     </template>
   </div>
 </template>
@@ -69,6 +70,7 @@ import IframeModal from "@/components/modal/Iframe";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
+import Confirm from "@/components/pages/settings/Confirm.vue";
 
 import Cookie from "@/utils/cookie";
 import rootClasses from "@/rootClasses";
@@ -110,7 +112,8 @@ export default {
     SignupModal,
     StoryViewerModal,
     CreateHighlightsModal,
-    ChooseHighlightModal
+    ChooseHighlightModal,
+    Confirm
   },
   mixins: [ColorScheme],
   data() {

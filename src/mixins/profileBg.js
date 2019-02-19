@@ -46,9 +46,6 @@ export default {
       });
     },
     removeBg() {
-      if (!confirm("Are you sure?")) {
-        return;
-      }
       this.bgRemoved = true;
       this.bgPreview = "";
       this.$store.dispatch("profile/extend", {

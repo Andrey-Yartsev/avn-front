@@ -45,9 +45,6 @@ export default {
       });
     },
     removeAvatar() {
-      if (!confirm("Are you sure?")) {
-        return;
-      }
       this.avatarRemoved = true;
       this.avatarPreview = "";
       this.$store.dispatch("profile/extend", {

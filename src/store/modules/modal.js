@@ -75,6 +75,10 @@ const state = {
   chatMessagePayConfirm: {
     show: false,
     data: {}
+  },
+  confirm: {
+    show: false,
+    data: {}
   }
 };
 

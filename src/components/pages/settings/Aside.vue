@@ -31,14 +31,14 @@
             />
             <span
               class="reset-user-image reset-avatar"
-              @click="removeAvatar"
+              @click="showAvatarConfirm"
             ></span>
           </div>
 
           <span
             v-show="showBgAdd"
             class="reset-user-image reset-bg"
-            @click="removeBg"
+            @click="showBgConfirm"
           ></span>
           <label for="bg" class="select-user-image" v-show="showBgAdd">
             <span class="select-user-image__text">
@@ -215,6 +215,24 @@ export default {
     reset() {
       this.resetAvatarPreview();
       this.resetBgPreview();
+    },
+    showAvatarConfirm() {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Remove avatar",
+          success: this.removeAvatar
+        }
+      });
+    },
+    showBgConfirm() {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Remove background image",
+          success: this.removeBg
+        }
+      });
     }
   }
 };
