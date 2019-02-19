@@ -80,11 +80,16 @@
       background: $white;
       position: -webkit-sticky;
       position: sticky;
-      top: 44px;
+      top: 0;
       line-height: 3em;
       font-weight: 500;
-      //z-index: 9;
-      transition: all 0.2s ease-in-out 0s;
+    }
+
+    .scroll-bottom & {
+      transform: translate3d(0, 44px, 0);
+      position: fixed;
+      left: 0;
+      right: 0;
     }
 
     &:after {
@@ -99,13 +104,6 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;
-      }
-    }
-
-    .scroll-top & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        transform: translate3d(0, -44px, 0);
       }
     }
   }
@@ -244,7 +242,6 @@
     padding: 0 10px 10px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //min-height: calc(100% - 60px);
       position: relative;
       align-items: start;
       align-content: start;

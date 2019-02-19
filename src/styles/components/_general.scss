@@ -317,6 +317,13 @@ video {
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-top: 88px;
     }
+
+    .no-site-header_mob & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 0;
+      }
+    }
   }
 }
 

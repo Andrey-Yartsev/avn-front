@@ -36,7 +36,6 @@
     align-items: center;
     position: -webkit-sticky;
     position: sticky;
-    transition: all 0.2s ease-in-out 0s;
     top: 0;
   }
 
@@ -51,15 +50,12 @@
     }
   }
 
-  .header_container {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      bottom: auto;
-    }
+  .scroll-bottom & {
+    transform: translate3d(0, 0, 0);
+    top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
   }
 }
 
@@ -82,22 +78,6 @@
 }
 
 .NotificationsCollectionView {
-
-  .header-nav {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      top: 44px;
-      transition: all 0.2s ease-in-out 0s;
-    }
-
-    .scroll-top & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        transform: translate3d(0, 0, 0);
-        top: 0;
-      }
-    }
-  }
 
   &.no-notifications {
 

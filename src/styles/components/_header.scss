@@ -245,7 +245,6 @@
   background-clip: padding-box;
   position: relative;
   z-index: 10;
-  transition: all 0.2s ease-in-out 0s;
   position: -webkit-sticky;
   position: sticky;
   top: -44px;
@@ -280,15 +279,7 @@
   .scroll-top & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //top: -44px;
       transform: translate3d(0, -44px, 0);
-    }
-
-    + #content {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        //margin-top: -44px;
-      }
     }
   }
 
@@ -436,25 +427,12 @@
 }
 
 .header-wrapper {
-  //position: fixed;
-  //top: 0;
-  //bottom: 0;
-  //left: 0;
-  //right: 0;
   height: 44px;
-  //transition: all 0.2s ease-in-out 0s;
-  //transform: translate3d(0, 0, 0);
 
   @include media-breakpoint-up($desktop-breakpoint) {
     box-shadow: 0 0 5px rgba(#000, 0.3);
     background-color: $white;
     height: 50px;
-  }
-
-  .scroll-top & {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //transform: translate3d(0, -44px, 0);
-    }
   }
 }
 
@@ -483,10 +461,6 @@
 .header_container {
   display: flex;
   align-items: center;
-  //position: fixed;
-  //top: 0;
-  //left: 0;
-  //right: 0;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 44px;
@@ -702,8 +676,6 @@
     }
     &:after {
       opacity: 1;
-      //transform: translate(0, 0);
-      //transform: translate(0, 0) rotate(45deg);
     }
   }
   .sidebar & {
@@ -974,7 +946,6 @@
     top: 0;
     box-shadow: 0 0 5px rgba(#000, 0.3);
     width: 100%;
-    transition: all 0.2s ease-in-out 0s;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -985,13 +956,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: auto;
-    }
-  }
-
-  .scroll-top & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //transform: translate3d(0, -44px, 0);
     }
   }
 
