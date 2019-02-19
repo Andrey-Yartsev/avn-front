@@ -43,7 +43,7 @@
       <br />
     </div>
 
-    <div class="PayoutsBankView" v-else>
+    <div class="PayoutsBankView">
       <h1 class="form-title">
         Add Card
       </h1>
@@ -120,52 +120,55 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ 'field-invalid': fieldError('cardNumber') }"
+            >
               <label class="form-group-inner">
                 <span class="label">Card Number</span>
                 <input
-                  v-model="cardNumber"
+                  name="cardNumber"
+                  v-model.lazy="cardNumber"
                   size="20"
                   data-securionpay="number"
                   autocomplete="cc-number"
                   minlength="13"
                   maxlength="19"
+                  v-validate="'required|numeric'"
                 />
               </label>
+              <div class="tooltip-info" v-if="fieldError('cardNumber')">
+                {{ fieldError("cardNumber") }}
+              </div>
             </div>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Expiration Date</span>
-                <span class="expireationDateWrapper">
-                  <span class="card-date-range">
-                    <input
-                      v-model="expMonth"
-                      type="text"
-                      size="2"
-                      data-securionpay="expMonth"
-                    />
-                    <span class="separator">/</span>
-                    <input
-                      v-model="expYear"
-                      type="text"
-                      size="4"
-                      minlength="4"
-                      maxlength="4"
-                      data-securionpay="expYear"
-                    />
-                  </span>
-                  <span class="card-cvc-num">
-                    <span class="name-cvc">Cvc</span>
-                    <input
-                      v-model="cvc"
-                      type="text"
-                      size="8"
-                      minlength="3"
-                      maxlength="4"
-                      data-securionpay="cvc"
-                    />
-                  </span>
+
+                <div :class="{ 'field-invalid': fieldError('expDate') }">
+                  <CardExpDate
+                    class="form-group"
+                    v-validate="'card-exp-date'"
+                    name="expDate"
+                    @input="expDateChanged"
+                  />
+                  <div class="tooltip-info" v-if="fieldError('expDate')">
+                    {{ fieldError("expDate") }}
+                  </div>
+                </div>
+
+                <span class="card-cvc-num">
+                  <span class="name-cvc">Cvc</span>
+                  <input
+                    v-model="cvc"
+                    type="text"
+                    size="8"
+                    minlength="3"
+                    maxlength="4"
+                    data-securionpay="cvc"
+                    v-validate="'required|numeric'"
+                  />
                 </span>
               </label>
             </div>
@@ -201,13 +204,6 @@
               </label>
             </div>
 
-            <div class="form-group hidden" id="payouts-bank-form-error">
-              <label class="form-group-inner">
-                <span class="label"></span>
-                <div class="error"></div>
-              </label>
-            </div>
-
             <div class="form-group-btn">
               <button
                 type="submit"
@@ -227,6 +223,7 @@
 <script>
 import Form from "@/mixins/form";
 import User from "@/mixins/user";
+import CardExpDate from "@/components/common/CardExpDate";
 
 const initData = {
   showCardForm: false,
@@ -251,6 +248,9 @@ const userinfo = {
 export default {
   name: "AddCardSecurionpay",
   mixins: [Form, User],
+  components: {
+    CardExpDate
+  },
   data() {
     const r = { ...initData };
     r.userinfo = { ...userinfo };
@@ -307,6 +307,14 @@ export default {
     replaceCard() {
       this.reset();
       this.showCardForm = true;
+    },
+    expDateChanged(value) {
+      if (value.expMonth) {
+        this.expMonth = value.expMonth;
+      }
+      if (value.expYear) {
+        this.expYear = value.expYear;
+      }
     }
   },
   watch: {
