@@ -14,7 +14,14 @@
               }
             "
           >
-            <div class="more-functions__overlay"></div>
+            <div
+              class="more-functions__overlay"
+              @click="
+                () => {
+                  showDropdown = false;
+                }
+              "
+            ></div>
             <div
               class="more-functions__btn"
               @click="showDropdown = !showDropdown"

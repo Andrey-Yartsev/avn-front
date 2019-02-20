@@ -81,7 +81,14 @@
                   }
                 "
               >
-                <div class="more-functions__overlay"></div>
+                <div
+                  class="more-functions__overlay"
+                  @click="
+                    () => {
+                      chatOptionsOpened = false;
+                    }
+                  "
+                ></div>
                 <div
                   class="more-functions__btn"
                   @click="chatOptionsOpened = !chatOptionsOpened"
