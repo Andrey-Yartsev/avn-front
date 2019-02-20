@@ -41,7 +41,9 @@
 
     <Footer class="hidden-desktop" />
 
-    <PayConfirm v-if="this.$store.state.modal.chatMessagePayConfirm.show" />
+    <avn-chat-message-pay-confirm
+      v-if="this.$store.state.modal.chatMessagePayConfirm.show"
+    />
   </div>
 </template>
 
@@ -50,7 +52,6 @@ import ModalRouterParams from "@/mixins/modalRouter/params";
 import User from "@/mixins/user";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
-import PayConfirm from "./PayConfirm";
 
 export default {
   name: "ChatWrapper",
@@ -59,8 +60,7 @@ export default {
 
   components: {
     MobileHeader,
-    Footer,
-    PayConfirm
+    Footer
   },
 
   computed: {

@@ -33,7 +33,7 @@ import { askFor3dSecure } from "@/utils/3dsecure";
 import Loader from "@/components/common/Loader";
 
 export default {
-  name: "SubscriptionConfirmModal",
+  name: "ChatMessagePayConfirm",
 
   mixins: [User],
 
