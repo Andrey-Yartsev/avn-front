@@ -301,6 +301,10 @@
             background-color: rgba(124, 139, 150, 0.2);
           }
 
+          &.selected {
+            opacity: .8;
+          }
+
           &:hover {
             opacity: 1;
           }
