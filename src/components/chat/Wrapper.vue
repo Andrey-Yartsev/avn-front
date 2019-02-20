@@ -5,7 +5,7 @@
   >
     <template>
       <div class="chatHeader">
-        <div class="contactsListHeader">
+        <div class="contactsListHeader main-header">
           <a
             :href="'/' + user.username"
             class="avatar header-avatar"
@@ -25,8 +25,8 @@
             </a>
           </div>
         </div>
-        <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
       </div>
+      <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
     </template>
 
     <div class="chatCollectionContent__col chatCollectionContent__col_narrow">

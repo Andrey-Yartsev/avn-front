@@ -26,7 +26,7 @@
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
-    padding-top: 88px;
+    //padding-top: 88px;
   }
 
   .popup & {
@@ -34,7 +34,7 @@
     .scroll-top & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        padding-top: 44px;
+        //padding-top: 44px;
       }
     }
   }
@@ -470,9 +470,9 @@
   flex: 0 0 44px;
   z-index: 11;
   background-color: $white;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  //position: -webkit-sticky;
+  //position: sticky;
+  //top: 0;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     width: 100%;
@@ -481,17 +481,17 @@
     height: auto;
     flex: 0 0 auto;
     transition: all .3s;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    //position: fixed;
+    //top: 0;
+    //left: 0;
+    //right: 0;
   }
 
   .contactsListHeader {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      position: relative;
-      z-index: 10;
+      //position: relative;
+      //z-index: 10;
     }
   }
 
@@ -510,13 +510,13 @@
     .scroll-top & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        top: -44px;
+        //top: -44px;
       }
 
       .header-nav {
 
         @include media-breakpoint-down($desktop-breakpoint) {
-          transform: translate3d(0, 0, 0);
+          //transform: translate3d(0, 0, 0);
         }
       }
     }
@@ -615,8 +615,8 @@
   background-color: $white;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    height: 44px;
-    transition: transform 0.2s ease-in-out 0s;
+    //height: 44px;
+    //transition: transform 0.2s ease-in-out 0s;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -894,11 +894,14 @@
       &.ps {
 
         .popup & {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
         }
       }
     }

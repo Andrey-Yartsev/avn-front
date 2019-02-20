@@ -241,12 +241,15 @@
 }
 
 .main-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: -44px;
-  height: 44px;
-  z-index: 10;
-  background-clip: padding-box;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -44px;
+    height: 44px;
+    z-index: 10;
+    background-clip: padding-box;
+  }
 
   .scroll-top & {
 
