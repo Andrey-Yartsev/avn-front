@@ -8,12 +8,19 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    headTag() {
+      return document.head || document.getElementsByTagName("head")[0];
     }
   },
 
   watch: {
     user() {
-      this.appendColorsCss();
+      if (this.user) {
+        this.appendColorsCss();
+      } else {
+        this.removeColorsCss();
+      }
     }
   },
 
@@ -22,14 +29,16 @@ export default {
   },
 
   methods: {
+    removeColorsCss() {
+      if (this.styleElement) {
+        this.headTag.removeChild(this.styleElement);
+      }
+    },
     appendColorsCss() {
       if (!this.user) {
         return;
       }
-      const head = document.head || document.getElementsByTagName("head")[0];
-      if (this.styleElement) {
-        head.removeChild(this.styleElement);
-      }
+      this.removeColorsCss();
       this.styleElement = document.createElement("style");
       this.styleElement.type = "text/css";
       if (this.styleElement.styleSheet) {
@@ -40,7 +49,7 @@ export default {
           document.createTextNode(this.colorsCss())
         );
       }
-      head.appendChild(this.styleElement);
+      this.headTag.appendChild(this.styleElement);
     },
     getNightModeColor: function() {
       const res = {
