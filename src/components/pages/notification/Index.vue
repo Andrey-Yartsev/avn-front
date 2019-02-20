@@ -3,7 +3,7 @@
     class="container-popup NotificationsCollectionView"
     :class="{ 'no-notifications': !items.length }"
   >
-    <div class="notifications-header">
+    <div class="notifications-header main-header">
       <div class="header_container">
         <router-link :to="'/' + user.username" class="avatar header-avatar"
           ><span class="avatar__img"></span

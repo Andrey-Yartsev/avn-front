@@ -1,5 +1,10 @@
 <template>
-  <header ref="siteHeader" id="site_header" :class="{ guest: noAuthHeader }">
+  <header
+    ref="siteHeader"
+    id="site_header"
+    :class="{ guest: noAuthHeader }"
+    class="main-header"
+  >
     <div class="header-wrapper">
       <div
         :class="['container', 'header_container']"

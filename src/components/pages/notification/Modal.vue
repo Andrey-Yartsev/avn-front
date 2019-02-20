@@ -28,26 +28,20 @@ export default {
     Content
   },
 
-  mounted() {
-    let currentScroll = this.$refs.container.scrollTop;
-    this.$refs.container.onscroll = () => {
-      if (currentScroll < this.$refs.container.scrollTop) {
-        document.body.classList.add("scroll-top");
-      } else {
-        document.body.classList.remove("scroll-top");
-      }
-      currentScroll = this.$refs.container.scrollTop;
-    };
-  },
+  // mounted() {
+  //   let currentScroll = this.$refs.container.scrollTop;
+  //   this.$refs.container.onscroll = () => {
+  //     if (currentScroll < this.$refs.container.scrollTop) {
+  //       document.body.classList.add("scroll-top");
+  //     } else {
+  //       document.body.classList.remove("scroll-top");
+  //     }
+  //     currentScroll = this.$refs.container.scrollTop;
+  //   };
+  // },
 
   beforeDestroy() {
     // document.body.classList.remove("scroll-top");
   }
 };
 </script>
-
-<style scoped>
-.content {
-  padding: 0;
-}
-</style>
