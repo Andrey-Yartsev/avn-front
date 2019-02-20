@@ -97,6 +97,7 @@
 import Search from "../pages/search/bubble/Index";
 import User from "./User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import StickyHeader from "@/mixins/stickyHeader";
 import DesktopHeader from "./Desktop";
 import LoginForm from "@/components/auth/LoginForm";
 import SignupForm from "@/components/auth/SignupForm";
@@ -108,11 +109,10 @@ export default {
     return {
       email: "",
       password: "",
-      opened: false,
-      lastScrollTop: 0
+      opened: false
     };
   },
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, StickyHeader],
   components: {
     Search,
     User,
@@ -153,27 +153,6 @@ export default {
     }
   },
   methods: {
-    onScroll() {
-      const { scrollTop } = document.documentElement;
-      const { pageYOffset } = window;
-      const { height } = this.$refs.siteHeader.getBoundingClientRect();
-      const st = pageYOffset || scrollTop;
-
-      if (st > this.lastScrollTop) {
-        if (st > height) {
-          document.body.classList.add("scroll-top");
-        }
-        document.body.classList.remove("scroll-bottom");
-      } else {
-        document.body.classList.remove("scroll-top");
-        document.body.classList.add("scroll-bottom");
-      }
-      if (st <= 0) {
-        document.body.classList.remove("scroll-bottom");
-        document.body.classList.remove("scroll-top");
-      }
-      this.lastScrollTop = st <= 0 ? 0 : st;
-    },
     openAddPostModal() {
       this.$store.dispatch("modal/show", {
         name: "addPost"
@@ -188,12 +167,6 @@ export default {
   },
   directives: {
     ClickOutside
-  },
-  mounted() {
-    window.addEventListener("scroll", this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll);
   }
 };
 </script>
