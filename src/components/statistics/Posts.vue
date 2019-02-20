@@ -7,12 +7,21 @@
 <script>
 import moment from "moment";
 import BrowserStore from "store";
-// import pluralize from "pluralize";
+import pluralize from "pluralize";
 
 import CalcCount from "./calcCount";
 import BuildScale from "./buildScale";
 
+import { chartTypes } from "./types";
+
 const altColor = "#16181A";
+
+const typeTitles = {};
+const chartColors = {};
+Object.entries(chartTypes.posts).forEach(v => {
+  typeTitles[v[0]] = pluralize(v[1][0], 2);
+  chartColors[v[0]] = v[1][2];
+});
 
 export default {
   name: "StatisticsPosts",
@@ -43,19 +52,6 @@ export default {
   },
   methods: {
     init() {
-      this.typeTitles = {
-        new_post: "Posts",
-        view_post: "Views",
-        post_like: "Likes",
-        post_comment_added: "Comments"
-      };
-      this.chartTypes = {
-        new_post: ["#FF3E33", "#FE3F8C"],
-        view_post: ["#ff9500", "#ffcc00"],
-        post_like: ["#67cc2e", "#b3f43a"],
-        post_comment_added: ["#3abfd3", "#49eeca"]
-      };
-
       this.buildContainers();
       this.initCharts();
       this.processDataSet();
@@ -125,7 +121,7 @@ export default {
     },
     processData(data) {
       const period = this.period;
-      for (let type of Object.keys(this.chartTypes)) {
+      for (let type of Object.keys(chartColors)) {
         switch (data.statistics.code) {
           case type + "_detailed_histogram_" + period:
             this.updateChartData(data, period, type);
@@ -141,12 +137,12 @@ export default {
     //
     buildContainers() {
       let html = "";
-      Object.keys(this.chartTypes).forEach(type => {
+      Object.keys(chartColors).forEach(type => {
         html += this.wrapperHtml(type);
       });
       this.$refs.container.innerHTML = html;
       // this.initCheckboxes();
-      Object.keys(this.chartTypes).forEach(type => {
+      Object.keys(chartColors).forEach(type => {
         this.buildChartContainer(type, this.period);
       });
       this.buildChartScaleContainer(this.$refs.container, this.period);
@@ -170,7 +166,7 @@ export default {
       return `<div class="charts-wrapper-outer charts-wrapper-outer__${type}" id="pmwr_${type}">
          <div class="charts-counter" id="${type}_charts_counter">
            <span class="count">0</span>
-           <span class="plural">${this.typeTitles[type]}</span>
+           <span class="plural">${typeTitles[type]}</span>
          </div>
          <!--
          <label class="statistics-view-toggle-label">
@@ -185,7 +181,7 @@ export default {
       this.sectionsState = BrowserStore.get("statPostsModalSections");
       if (!this.sectionsState) {
         this.sectionsState = {};
-        Object.keys(this.chartTypes).forEach(type => {
+        Object.keys(chartColors).forEach(type => {
           this.sectionsState[type] = true;
         });
       }
@@ -247,8 +243,8 @@ export default {
           break;
       }
 
-      for (let type in this.chartTypes) {
-        if (!this.chartTypes.hasOwnProperty(type)) {
+      for (let type in chartColors) {
+        if (!chartColors.hasOwnProperty(type)) {
           continue;
         }
 
@@ -342,7 +338,7 @@ export default {
           graphs: [
             {
               animationPlayed: true,
-              fillColors: this.chartTypes[type],
+              fillColors: chartColors[type],
               type: "column",
               cornerRadiusTop: 1,
               valueField: type,
@@ -350,7 +346,7 @@ export default {
               lineAlpha: 0,
               fixedColumnWidth: 2,
               balloon: {
-                color: this.chartTypes[type][0]
+                color: chartColors[type][0]
               }
             }
           ],

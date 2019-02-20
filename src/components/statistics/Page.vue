@@ -1,39 +1,47 @@
 <template>
   <div>
     <MobileHeader />
+
     <div class="boxes">
-      <div class="page-header-title cols">
-        <div class="col col-1-2">
-          <div class="page-name">Statistics</div>
-          <div class="more-functions">
-            <div class="more-functions__overlay"></div>
-            <div class="more-functions__btn more-functions__btn_arrow">
-              <div class="more-functions__btn-text">Today</div>
+    <div class="page-header-title cols">
+      <div class="col col-1-2">
+        <div class="page-name">Statistics</div>
+        <div
+          class="more-functions"
+          :class="{ open: periodOptionsOpened }"
+          v-click-outside="
+            () => {
+              periodOptionsOpened = false;
+            }
+          "
+        >
+          <div class="more-functions__overlay"></div>
+          <div
+            class="more-functions__btn more-functions__btn_arrow"
+            @click="periodOptionsOpened = !periodOptionsOpened"
+          >
+            <div class="more-functions__btn-text">
+              {{ getPeriodType(currentPeriodType).title }}
             </div>
-            <div class="more-functions__dropdown">
-              <div class="more-functions__dropdown-inside">
-                <ul>
-                  <li>
-                    <button type="button">
-                      Today
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      Last week
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      Last month
-                    </button>
-                  </li>
-                </ul>
-              </div>
+          </div>
+          <div class="more-functions__dropdown">
+            <div class="more-functions__dropdown-inside">
+              <ul>
+                <li v-for="v in periodTypes" :key="v.name">
+                  <button
+                    type="button"
+                    :disabled="v.name === currentPeriodType"
+                    @click="selectPeriod(v.name)"
+                  >
+                    {{ v.title }}
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
     <div class="boxes">
       <PostsModal
@@ -68,22 +76,20 @@
           <div class="box" id="posts-box" @click="openPostsModal">
             <h3 class="box-title">
               Posts
-              <span class="chart_period"
-                ><span ref="chartPeriod2"></span> - Today</span
-              >
+              <span class="chart_period">{{ periodTitle }}</span>
             </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="posts" ref="chartsDataPostsPosts"
+                <span class="posts" ref="count_posts_new_post"
                   >Posts <span>0</span></span
                 >
-                <span class="views" ref="chartsDataPostsViews"
+                <span class="views" ref="count_posts_view_post"
                   >Views <span>0</span></span
                 >
-                <span class="likes" ref="chartsDataPostsLikes"
+                <span class="likes" ref="count_posts_post_like"
                   >Likes <span>0</span></span
                 >
-                <span class="comments" ref="chartsDataPostsComments"
+                <span class="comments" ref="count_posts_post_comment_added"
                   >Comments <span>0</span></span
                 >
               </div>
@@ -99,16 +105,14 @@
           <div class="box" id="stories-box">
             <h3 class="box-title">
               Stories
-              <span class="chart_period"
-                ><span ref="chartPeriod3"></span> - Today</span
-              >
+              <span class="chart_period">{{ periodTitle }}</span>
             </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="uploaded" ref="chartsDataStoriesUploaded"
+                <span class="uploaded" ref="count_stories_story_added"
                   >Uploaded<span>0</span></span
                 >
-                <span class="views" ref="chartsDataStoriesViews"
+                <span class="views" ref="count_stories_story_view"
                   >Views<span>0</span></span
                 >
                 <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
@@ -233,6 +237,15 @@ import PostsModal from "./PostsModal";
 import MobileHeader from "@/components/header/Mobile";
 import CalcCount from "./calcCount";
 import BuildScale from "./buildScale";
+import ClickOutside from "vue-click-outside";
+
+import {
+  chartTypes,
+  periodTypes,
+  getPeriodType,
+  lineTypes,
+  periodTypeNames
+} from "./types";
 
 const colorSchemes = [
   "#FF5979",
@@ -247,6 +260,42 @@ const colorSchemes = [
   "#47525A"
 ];
 
+const matchChartCode = code => {
+  const r = code.match(/(.*)_detailed_histogram_(.*)/);
+  if (!r) {
+    return false;
+  }
+  if (!lineTypes[r[1]]) {
+    return false;
+  }
+  const periodI = periodTypeNames.indexOf(r[2]);
+  if (periodI === -1) {
+    return false;
+  }
+  const result = {
+    chartType: lineTypes[r[1]].chartType,
+    chartName: lineTypes[r[1]].chartType + "Chart",
+    lineType: r[1],
+    lineTitle: lineTypes[r[1]].title,
+    periodType: periodTypes[periodI].name,
+    dataProviderKey: lineTypes[r[1]].dataProviderKey
+  };
+  if (result.chartType === "posts") {
+    if (result.lineType === "post_like") {
+      result.subKey = "total";
+    }
+  }
+  return result;
+};
+
+const chartStorage = {};
+Object.keys(chartTypes).forEach(chartType => {
+  chartStorage[chartType] = {};
+  for (let periodType of periodTypeNames) {
+    chartStorage[chartType][periodType] = [];
+  }
+});
+
 const barCount = 80;
 const colorScheme = 1;
 const mainColor = "#fff";
@@ -255,12 +304,19 @@ const altColor = "#16181A";
 export default {
   name: "app",
   mixins: [CalcCount, BuildScale],
+  directives: {
+    ClickOutside
+  },
   components: {
     PostsModal,
     MobileHeader
   },
   data() {
     return {
+      periodTypes,
+      periodOptionsOpened: false,
+      currentPeriodType: "last_week",
+      //
       showedStats: {},
       profileMapData: [],
       topFollowers: null,
@@ -281,13 +337,25 @@ export default {
     this.initLineCharts();
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
-    this.initTitles();
   },
   beforeDestroy() {
     ws.removeListener("message", this.onData);
     ws.send({
       act: "clear_statistics"
     });
+  },
+  computed: {
+    periodTitle() {
+      const p = getPeriodType(this.currentPeriodType);
+      if (!p.moment) {
+        return "Today";
+      }
+      return (
+        moment()
+          .subtract(1, p.moment)
+          .format("D MMMM") + " - Today"
+      );
+    }
   },
   methods: {
     initWs() {
@@ -304,8 +372,20 @@ export default {
     openPostsModal() {
       this.$store.dispatch("modal/show", { name: "statPosts" });
     },
+    getPeriodType(name) {
+      return getPeriodType(name);
+    },
+    selectPeriod(name) {
+      this.currentPeriodType = name;
+      this.periodOptionsOpened = false;
+      this.postsPeriodChange(name);
+    },
     postsPeriodChange(period) {
       this.sendPostsWsRequests(period);
+
+      for (let v of chartStorage.posts[period]) {
+        this.processData(v);
+      }
     },
     subscribeUserStatistics(code, params) {
       if (this.subscribedWsCodes.indexOf(code) !== -1) {
@@ -327,7 +407,7 @@ export default {
       this.subscribeUserStatistics("user_subscribe_count_last_week");
       this.subscribeUserStatistics("user_unsubscribe_count_last_week");
       //
-      this.sendPostsWsRequests("last_week");
+      this.sendPostsWsRequests(this.currentPeriodType);
       //
       this.subscribeUserStatistics("story_added_detailed_histogram_last_week");
       this.subscribeUserStatistics("story_view_detailed_histogram_last_week");
@@ -355,6 +435,9 @@ export default {
         title = pluralize(title, value) + " ";
       } else {
         title = "&nbsp;";
+      }
+      if (!this.$refs[ref]) {
+        return;
       }
       this.$refs[ref].innerHTML = title + "<span>" + value + "</span>";
     },
@@ -561,12 +644,33 @@ export default {
         this.$refs.postsModal.$refs.posts.processData(data);
       }
 
-      this.processData(data);
+      this.processData(data, true);
     },
-    processData(data) {
+    processData(data, store) {
       this.showedStats[data.statistics.code] = data.statistics.time;
       const statData =
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
+
+      const r = matchChartCode(data.statistics.code);
+      if (r) {
+        if (r.periodType !== this.currentPeriodType) {
+          return;
+        }
+        this.setCounter(
+          "count_" + r.chartType + "_" + r.lineType,
+          r.lineTitle,
+          this.calcCount(statData, r.subKey || undefined)
+        );
+        this.updateChart(
+          this[r.chartName],
+          statData,
+          r.dataProviderKey,
+          r.subKey || undefined
+        );
+        if (store) {
+          chartStorage[r.chartType][r.periodType].push(data);
+        }
+      }
 
       switch (data.statistics.code) {
         // case "current_subscribers_latest_now":
@@ -584,60 +688,24 @@ export default {
         // case "user_unsubscribe_count_last_week":
         //   this.setCounter("chartsDataFollowersUnsubscribed", false, statData);
         //   break;
-
-        case "new_post_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataPostsPosts",
-            "Post",
-            this.calcCount(statData)
-          );
-          this.updateChart(this.postsChart, statData, "posts");
-          break;
-
-        case "view_post_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataPostsViews",
-            "View",
-            this.calcCount(statData)
-          );
-          this.updateChart(this.postsChart, statData, "views");
-          break;
-
-        case "post_comment_added_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataPostsComments",
-            "Comment",
-            this.calcCount(statData)
-          );
-          this.updateChart(this.postsChart, statData, "comments");
-          break;
-
-        case "post_like_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataPostsLikes",
-            "Like",
-            this.calcCount(statData, "total")
-          );
-          this.updateChart(this.postsChart, statData, "likes", "total");
-          break;
-
-        case "story_added_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataStoriesUploaded",
-            "Uploaded",
-            this.calcCount(statData)
-          );
-          this.updateChart(this.storiesChart, statData, "uploads");
-          break;
-
-        case "story_view_detailed_histogram_last_week":
-          this.setCounter(
-            "chartsDataStoriesViews",
-            "Views",
-            this.calcCount(statData)
-          );
-          this.updateChart(this.storiesChart, statData, "views");
-          break;
+        //
+        // case "story_added_detailed_histogram_last_week":
+        //   this.setCounter(
+        //     "chartsDataStoriesUploaded",
+        //     "Uploaded",
+        //     this.calcCount(statData)
+        //   );
+        //   this.updateChart(this.storiesChart, statData, "uploads");
+        //   break;
+        //
+        // case "story_view_detailed_histogram_last_week":
+        //   this.setCounter(
+        //     "chartsDataStoriesViews",
+        //     "Views",
+        //     this.calcCount(statData)
+        //   );
+        //   this.updateChart(this.storiesChart, statData, "views");
+        //   break;
 
         // case 'paid_subscriptions_count_last_week':
         //   // $('#charts-data-earnings .paid_subscriptions span').html(statData);
@@ -1638,14 +1706,6 @@ export default {
           areas: []
         }
       });
-    },
-    initTitles() {
-      const weekAgoDay = moment()
-        .subtract(1, "week")
-        .format("D MMMM");
-      // this.$refs.chartPeriod1.innerHTML = weekAgoDay;
-      this.$refs.chartPeriod2.innerHTML = weekAgoDay;
-      this.$refs.chartPeriod3.innerHTML = weekAgoDay;
     }
   }
 };
