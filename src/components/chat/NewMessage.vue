@@ -1,7 +1,7 @@
 <template>
   <ChatWrapper>
     <template slot="col1">
-      <div class="chatHeader chatHeader_add-shadow">
+      <div class="chatHeader">
         <div class="contactsListHeader main-header">
           <div class="back-popup-btn">
             <span

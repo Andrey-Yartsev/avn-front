@@ -2,6 +2,7 @@
   <div
     class="chatCollectionContent"
     :class="{ chat: isSecondScreen, 'no-chats': noActiveChats }"
+    @scroll="onScroll"
   >
     <template>
       <div class="chatHeader">
@@ -52,11 +53,12 @@ import ModalRouterParams from "@/mixins/modalRouter/params";
 import User from "@/mixins/user";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
+import StickyHeader from "@/mixins/stickyHeader";
 
 export default {
   name: "ChatWrapper",
 
-  mixins: [ModalRouterParams, User],
+  mixins: [ModalRouterParams, User, StickyHeader],
 
   components: {
     MobileHeader,

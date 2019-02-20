@@ -20,6 +20,27 @@
       display: none;
     }
   }
+
+  .main-container {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
 }
 
 .chatCollectionContent {
@@ -27,6 +48,8 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
     //padding-top: 88px;
+
+    display: block;
   }
   
   &:not(.chat) {
@@ -60,6 +83,7 @@
       max-height: 100%;
       padding-top: 0;
       flex-direction: column;
+      position: relative;
     }
 
     > .chatHeader {
@@ -75,9 +99,9 @@
     .chat-page_new & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+        //position: -webkit-sticky;
+        //position: sticky;
+        //top: 0;
       }
     }
   }
@@ -178,7 +202,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  position: relative;
+  //position: relative;
   overflow: hidden;
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -198,6 +222,7 @@
     margin: 0 auto 20px;
     height: calc(100vh - 100px);
     width: 100%;
+    position: relative;
   }
 
   .popup & {
@@ -277,15 +302,23 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       transition: transform .3s;
     }
+
+    .chat-popup_new-msg &,
+    .chat-page_new & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 
   &__col {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       transition: all .3s;
+      overflow: hidden;
     }
 
     .no-chats & {
@@ -323,6 +356,12 @@
 
         @include media-breakpoint-down($desktop-breakpoint) {
           flex: 1;
+
+          overflow-y: auto;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
         }
       }
 
@@ -488,6 +527,7 @@
   flex: 0 0 44px;
   z-index: 11;
   background-color: $white;
+  position: relative;
   //position: -webkit-sticky;
   //position: sticky;
   //top: 0;
@@ -540,11 +580,13 @@
     }
   }
 
+  .chat-page_new &,
   .chat-popup_new-msg & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      position: -webkit-sticky;
-      position: sticky;
+      //position: -webkit-sticky;
+      //position: sticky;
+      box-shadow: 0 0 5px rgba(#000, 0.3);
     }
   }
 
@@ -1213,11 +1255,11 @@
   .chat-page_new & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      //position: absolute;
+      //left: 0;
+      //right: 0;
+      //top: 0;
+      //bottom: 0;
     }
   }
 }
