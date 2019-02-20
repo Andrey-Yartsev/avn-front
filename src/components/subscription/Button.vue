@@ -22,6 +22,7 @@
 
 <script>
 import User from "@/mixins/user";
+import subsAction from "@/helpers/subsAction";
 
 export default {
   name: "SubscribeButton",
@@ -44,16 +45,7 @@ export default {
       return parseFloat(this.profile.subscribePrice, 10);
     },
     subsAction() {
-      if (!this.profile.subscribedBy) {
-        return "subscribe";
-      } else if (
-        this.profile.subscribedBy &&
-        !this.profile.subscribedByExpire
-      ) {
-        return "unsubscribe";
-      } else if (this.profile.subscribedBy && this.profile.subscribedByExpire) {
-        return "resubscribe";
-      }
+      return subsAction(this.profile);
     }
   },
 

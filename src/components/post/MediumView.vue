@@ -151,12 +151,7 @@ export default {
       this.showAddCommentForm = !this.showAddCommentForm;
     },
     showSubscribeModal() {
-      this.$store.dispatch("modal/show", {
-        name: "subscribe",
-        data: {
-          user: this.post.author
-        }
-      });
+      this.$store.dispatch("subscription/openSubscribeModal", this.post.author);
     },
     closeTip() {
       this.showTip = false;

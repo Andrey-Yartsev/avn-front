@@ -2,6 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 import confirm from "./subscription/confirm";
+import subsAction from "@/helpers/subsAction";
 
 const state = {
   updated: null
@@ -39,6 +40,31 @@ const actions = {
         data
       });
     });
+  },
+  openSubscribeModal({ dispatch }, user) {
+    dispatch("fetchProfile", user.username).then(profile => {
+      if (subsAction(profile) === "subscribe") {
+        dispatch(
+          "modal/show",
+          {
+            name: "subscribe",
+            data: {
+              user: user
+            }
+          },
+          { root: true }
+        );
+      } else {
+        dispatch(
+          "modal/show",
+          {
+            name: "resubscribe",
+            data: user
+          },
+          { root: true }
+        );
+      }
+    });
   }
 };
 
@@ -47,6 +73,22 @@ const mutations = {
     state.updated = data;
   }
 };
+
+createRequestAction({
+  requestType: "any",
+  prefix: "fetchProfile",
+  apiPath: "users/{username}",
+  state,
+  mutations,
+  actions,
+  resultKey: "profile",
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{username}/, params);
+  }
+});
 
 createRequestAction({
   prefix: "fetchPaymentLink",
