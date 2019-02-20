@@ -12,6 +12,8 @@ export default {
       const notifHeader = document.querySelector(
         ".notifications-header.main-header"
       );
+      const chatHeader = document.querySelector(".contactsListHeader");
+
       let height = 44;
       if (mainHeader) {
         height = mainHeader.getBoundingClientRect().height;
@@ -19,6 +21,10 @@ export default {
 
       if (notifHeader) {
         height = notifHeader.getBoundingClientRect().height;
+      }
+
+      if (chatHeader) {
+        height = chatHeader.getBoundingClientRect().height;
       }
 
       const st = pageYOffset || scrollTop || e.target.scrollTop;

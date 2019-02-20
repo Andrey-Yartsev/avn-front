@@ -3,8 +3,7 @@
     <VuePerfectScrollbar
       class="contactsListContent"
       ref="messages"
-      @ps-scroll-down="scrollDown"
-      @ps-scroll-up="scrollUp"
+      @ps-scroll-y="onScroll"
     >
       <div
         @click="openChat(v.withUser.id)"
@@ -66,11 +65,12 @@ import dateFns from "date-fns";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import Mute from "./mute";
+import StickyHeader from "@/mixins/stickyHeader";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouterGoto, Mute],
+  mixins: [ModalRouterGoto, Mute, StickyHeader],
 
   components: {
     VuePerfectScrollbar
@@ -94,12 +94,6 @@ export default {
       const tmp = document.createElement("DIV");
       tmp.innerHTML = html;
       return tmp.textContent || tmp.innerText || "";
-    },
-    scrollDown() {
-      document.body.classList.add("scroll-top");
-    },
-    scrollUp() {
-      document.body.classList.remove("scroll-top");
     }
   }
 };
