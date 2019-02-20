@@ -1,33 +1,35 @@
 <template>
   <div>
     <MobileHeader />
-    <div class="page-header-title cols">
-      <div class="col col-1-2">
-        <div class="page-name">Statistics</div>
-        <div class="more-functions">
-          <div class="more-functions__overlay"></div>
-          <div class="more-functions__btn more-functions__btn_arrow">
-            <div class="more-functions__btn-text">Today</div>
-          </div>
-          <div class="more-functions__dropdown">
-            <div class="more-functions__dropdown-inside">
-              <ul>
-                <li>
-                  <button type="button">
-                    Today
-                  </button>
-                </li>
-                <li>
-                  <button type="button">
-                    Last week
-                  </button>
-                </li>
-                <li>
-                  <button type="button">
-                    Last month
-                  </button>
-                </li>
-              </ul>
+    <div class="boxes">
+      <div class="page-header-title cols">
+        <div class="col col-1-2">
+          <div class="page-name">Statistics</div>
+          <div class="more-functions">
+            <div class="more-functions__overlay"></div>
+            <div class="more-functions__btn more-functions__btn_arrow">
+              <div class="more-functions__btn-text">Today</div>
+            </div>
+            <div class="more-functions__dropdown">
+              <div class="more-functions__dropdown-inside">
+                <ul>
+                  <li>
+                    <button type="button">
+                      Today
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      Last week
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      Last month
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
