@@ -28,7 +28,7 @@
         </div>
         <VuePerfectScrollbar class="profile-desc">
           <p class="profile-text" v-if="profile.about">
-            {{ trunc(profile.about) }}
+            <span v-html="trunc(profile.about)"></span>
             <a
               v-if="profile.about.length > collapseLimit"
               href="#"
@@ -321,6 +321,7 @@ export default {
     },
     trunc(text) {
       if (this.collapsed && this.profile.about.length > this.collapseLimit) {
+        text = text.replace(/<br \/>/g, " ");
         return text.substring(0, this.collapseLimit) + "…";
       } else {
         return text;
