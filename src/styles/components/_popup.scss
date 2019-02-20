@@ -187,7 +187,6 @@
         transform: translate(0, 0);
         height: auto;
         border-radius: 0;
-        overflow-y: auto;
       }
 
       &.chat-popup_new-msg {
@@ -212,6 +211,9 @@
 
         @include media-breakpoint-down($desktop-breakpoint) {
           overflow-y: hidden;
+
+          display: flex;
+          flex-direction: column;
         }
       }
 

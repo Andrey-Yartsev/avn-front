@@ -2,7 +2,7 @@
   <ChatWrapper>
     <template slot="col1">
       <div class="chatHeader chatHeader_add-shadow">
-        <div class="contactsListHeader">
+        <div class="contactsListHeader main-header">
           <div class="back-popup-btn">
             <span
               class="back backEvent hidden-mobile"
