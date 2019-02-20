@@ -115,7 +115,7 @@ export default {
   methods: {
     openModal() {
       if (!this.post.canViewMedia) {
-        this.showSubcribeModal();
+        this.showSubscribeModal();
         return;
       }
 
@@ -133,7 +133,7 @@ export default {
     },
     likePost() {
       if (!this.post.canViewMedia) {
-        this.showSubcribeModal();
+        this.showSubscribeModal();
         return;
       }
 
@@ -144,16 +144,18 @@ export default {
     },
     showForm() {
       if (!this.post.canViewMedia) {
-        this.showSubcribeModal();
+        this.showSubscribeModal();
         return;
       }
 
       this.showAddCommentForm = !this.showAddCommentForm;
     },
-    showSubcribeModal() {
+    showSubscribeModal() {
       this.$store.dispatch("modal/show", {
         name: "subscribe",
-        data: this.post.author
+        data: {
+          user: this.post.author
+        }
       });
     },
     closeTip() {
