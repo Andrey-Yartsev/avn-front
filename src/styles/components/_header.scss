@@ -282,6 +282,8 @@
     top: 0;
     z-index: 12;
     margin: 0 0 25px;
+    position: -webkit-sticky;
+    position: sticky;
   }
 
   &:before {
@@ -779,6 +781,7 @@
   position: absolute;
   background: $white;
   padding: 17px 15px 22px;
+  z-index: 10;
 
   &:before {
     content: "";
