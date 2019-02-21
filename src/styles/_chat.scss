@@ -553,6 +553,16 @@
     }
   }
 
+  .chat-page & {
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 960px;
+      }
+    }
+  }
+
   &_add-shadow {
 
     @include media-breakpoint-down($desktop-breakpoint) {
