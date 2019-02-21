@@ -21,7 +21,7 @@
               <a href="#" @click.prevent="block">Block</a>
             </li>
           </template>
-          <template v-if="hasMute && !isOwner(profile.id)">
+          <template v-if="canMute">
             <li v-if="isMuted">
               <a href="#" @click.prevent="unmute">Unmute</a>
             </li>
@@ -46,11 +46,12 @@
 <script>
 import ClickOutside from "vue-click-outside";
 import User from "@/mixins/user";
+import Mute from "@/mixins/mute";
 
 export default {
   name: "SearchUserDropdown",
 
-  mixins: [User],
+  mixins: [User, Mute],
 
   directives: {
     ClickOutside
@@ -79,11 +80,14 @@ export default {
       const { protocol, hostname } = window.location;
       return `${protocol}//${hostname}/${this.profile.username}`;
     },
-    hasMute() {
-      return this.actionPrefix === "followers";
-    },
     isMuted() {
-      return this.profile.followedOn.isMuted;
+      return this._isMuted(this.profile);
+    },
+    canMute() {
+      if (this.isOwner(this.profile.id)) {
+        return false;
+      }
+      return this._canMute(this.profile);
     }
   },
 
