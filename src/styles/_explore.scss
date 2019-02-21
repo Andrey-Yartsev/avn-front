@@ -86,10 +86,13 @@
     }
 
     .scroll-bottom & {
-      transform: translate3d(0, 44px, 0);
-      position: fixed;
-      left: 0;
-      right: 0;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, 44px, 0);
+        position: fixed;
+        left: 0;
+        right: 0;
+      }
     }
 
     &:after {
