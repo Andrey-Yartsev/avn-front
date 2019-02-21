@@ -776,6 +776,10 @@
     align-content: flex-start;
     overflow-y: hidden;
     position: relative;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-wrap: nowrap;
+    }
   }
 
   .no-chats & {
