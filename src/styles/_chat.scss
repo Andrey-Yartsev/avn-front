@@ -226,6 +226,17 @@
     }
   }
 
+  &:not(.chat) {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
   &.chat {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -516,6 +527,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       box-shadow: 0 0 5px rgba(#000, 0.3);
+      min-height: 44px;
     }
   }
 
