@@ -184,6 +184,7 @@
     align-content: flex-start;
     flex-wrap: wrap;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
