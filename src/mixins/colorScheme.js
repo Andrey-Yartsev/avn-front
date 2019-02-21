@@ -33,6 +33,8 @@ export default {
       if (this.styleElement) {
         this.headTag.removeChild(this.styleElement);
       }
+
+      this.styleElement = null;
     },
     appendColorsCss() {
       if (!this.user) {

@@ -1,9 +1,6 @@
 <template>
   <div class="contactsList">
-    <VuePerfectScrollbar
-      class="contactsListContent"
-      ref="messages"
-    >
+    <VuePerfectScrollbar class="contactsListContent" ref="messages">
       <div
         @click="openChat(v.withUser.id)"
         class="chatView"
