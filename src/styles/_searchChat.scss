@@ -61,6 +61,10 @@
     margin-bottom: auto;
   }
 
+  .username-group {
+    max-width: calc(100% - 40px);
+  }
+
   .check {
     visibility: hidden;
     opacity: 0;
