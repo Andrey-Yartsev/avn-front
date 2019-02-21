@@ -4,15 +4,17 @@
       >Cancel</span
     >
     <div class="tip-amount-field form-group form-group_clear-gaps">
-      <input
-        name="amount"
-        class="tip-amount-input rounded"
-        type="text"
-        pattern="\d{1,5}(?:\.\d{0,2})?"
-        maxlength="8"
-        placeholder="Amount"
-        v-model="amount"
-      />
+      <div class="form-field">
+        <input
+          name="amount"
+          class="tip-amount-input rounded"
+          type="text"
+          pattern="\d{1,5}(?:\.\d{0,2})?"
+          maxlength="8"
+          placeholder="Amount"
+          v-model="amount"
+        />
+      </div>
     </div>
     <button type="submit" class="btn" :disabled="!amount">Send fund</button>
   </form>

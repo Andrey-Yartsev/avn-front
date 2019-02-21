@@ -15,7 +15,9 @@
             <div class="form-group-inner">
               <span class="label">Name</span>
               <div class="form-group form-group_clear-gaps">
-                <input v-model="model.name" type="text" name="name" required />
+                <div class="form-field">
+                  <input v-model="model.name" type="text" name="name" required />
+                </div>
               </div>
             </div>
           </label>
@@ -23,12 +25,14 @@
             <div class="form-group-inner">
               <span class="label">Email</span>
               <div class="form-group form-group_clear-gaps">
-                <input
-                  v-model="model.email"
-                  type="email"
-                  name="email"
-                  required
-                />
+                <div class="form-field">
+                  <input
+                    v-model="model.email"
+                    type="email"
+                    name="email"
+                    required
+                  />
+                </div>
               </div>
             </div>
           </label>
@@ -36,12 +40,14 @@
             <div class="form-group-inner">
               <span class="label">Subject</span>
               <div class="form-group form-group_clear-gaps">
-                <input
-                  v-model="model.subject"
-                  type="text"
-                  name="subject"
-                  required
-                />
+                <div class="form-field">
+                  <input
+                    v-model="model.subject"
+                    type="text"
+                    name="subject"
+                    required
+                  />
+                </div>
               </div>
             </div>
           </label>
@@ -49,12 +55,14 @@
             <div class="form-group-inner">
               <span class="label">Message</span>
               <div class="form-group form-group_clear-gaps">
-                <textarea
-                  v-model="model.message"
-                  name="message"
-                  rows="6"
-                  required
-                ></textarea>
+                <div class="form-field">
+                  <textarea
+                    v-model="model.message"
+                    name="message"
+                    rows="6"
+                    required
+                  ></textarea>
+                </div>
               </div>
             </div>
           </label>

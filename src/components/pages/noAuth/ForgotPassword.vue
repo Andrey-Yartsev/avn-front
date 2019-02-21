@@ -8,15 +8,17 @@
       <form class="forgot-password-form" v-on:submit.stop.prevent="send">
         <div class="form-group form-group_row">
           <span class="form-group form-group_clear-gaps">
-            <input
-              v-model="email"
-              class="lg rounded"
-              type="text"
-              name="email"
-              placeholder="Your Email"
-              :disabled="loading || sendSuccess"
-            />
-            <div class="error" v-if="error">
+            <span class="form-field">
+              <input
+                v-model="email"
+                class="lg rounded"
+                type="text"
+                name="email"
+                placeholder="Your Email"
+                :disabled="loading || sendSuccess"
+              />
+            </span>
+            <div class="tooltip-info" v-if="error">
               {{ error }}
             </div>
             <div class="info" v-else-if="sendSuccess">

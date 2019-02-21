@@ -58,11 +58,13 @@
               <label class="form-group-inner">
                 <span class="label">Street</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="userinfo.street"
-                    name="street"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="userinfo.street"
+                      name="street"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -71,11 +73,13 @@
               <label class="form-group-inner">
                 <span class="label">City</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="userinfo.city"
-                    name="city"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="userinfo.city"
+                      name="city"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -84,11 +88,13 @@
               <label class="form-group-inner">
                 <span class="label">State/Country</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="userinfo.state"
-                    name="state"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="userinfo.state"
+                      name="state"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -97,11 +103,13 @@
               <label class="form-group-inner">
                 <span class="label">ZIP/Post Code</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="userinfo.zip"
-                    name="zip"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="userinfo.zip"
+                      name="zip"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -110,11 +118,13 @@
               <label class="form-group-inner">
                 <span class="label">Country</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="userinfo.country"
-                    name="country"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="userinfo.country"
+                      name="country"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -123,11 +133,13 @@
               <label class="form-group-inner">
                 <span class="label">Email</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input
-                    v-model="email"
-                    name="email"
-                    v-validate="'required|email'"
-                  />
+                  <span class="form-field">
+                    <input
+                      v-model="email"
+                      name="email"
+                      v-validate="'required|email'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>
@@ -139,16 +151,18 @@
                   class="form-group form-group_clear-gaps"
                   :class="{ 'field-invalid': fieldError('cardNumber') }"
                 >
-                  <input
-                    name="cardNumber"
-                    v-model.lazy="cardNumber"
-                    size="20"
-                    data-securionpay="number"
-                    autocomplete="cc-number"
-                    minlength="13"
-                    maxlength="19"
-                    v-validate="'required|numeric'"
-                  />
+                  <span class="form-field">
+                    <input
+                      name="cardNumber"
+                      v-model.lazy="cardNumber"
+                      size="20"
+                      data-securionpay="number"
+                      autocomplete="cc-number"
+                      minlength="13"
+                      maxlength="19"
+                      v-validate="'required|numeric'"
+                    />
+                  </span>
                   <div class="tooltip-info" v-if="fieldError('cardNumber')">
                     {{ fieldError("cardNumber") }}
                   </div>
@@ -164,12 +178,14 @@
                   class="group-expiration-date"
                   :class="{ 'field-invalid': fieldError('expDate') }"
                 >
-                  <CardExpDate
-                    class="form-group"
-                    v-validate="'card-exp-date'"
-                    name="expDate"
-                    @input="expDateChanged"
-                  />
+                  <div class="form-field">
+                    <CardExpDate
+                      class="form-group"
+                      v-validate="'card-exp-date'"
+                      name="expDate"
+                      @input="expDateChanged"
+                    />
+                  </div>
                   <div class="tooltip-info" v-if="fieldError('expDate')">
                     {{ fieldError("expDate") }}
                   </div>
@@ -178,15 +194,17 @@
                 <span class="card-cvc-num">
                   <span class="name-cvc">Cvc</span>
                   <span class="form-group form-group_clear-gaps">
-                    <input
-                      v-model="cvc"
-                      type="text"
-                      size="8"
-                      minlength="3"
-                      maxlength="4"
-                      data-securionpay="cvc"
-                      v-validate="'required|numeric'"
-                    />
+                    <span class="form-field">
+                      <input
+                        v-model="cvc"
+                        type="text"
+                        size="8"
+                        minlength="3"
+                        maxlength="4"
+                        data-securionpay="cvc"
+                        v-validate="'required|numeric'"
+                      />
+                    </span>
                   </span>
                 </span>
               </label>
@@ -196,7 +214,9 @@
               <label class="form-group-inner">
                 <span class="label">Cardholder Name</span>
                 <span class="form-group form-group_clear-gaps">
-                  <input v-model="userinfo.name" type="text" />
+                  <span class="form-field">
+                    <input v-model="userinfo.name" type="text" />
+                  </span>
                 </span>
               </label>
             </div>

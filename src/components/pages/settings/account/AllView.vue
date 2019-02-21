@@ -29,11 +29,13 @@
                   'field-invalid no-border': !user.emailChecked
                 }"
               >
-                <input
-                  class="input-email"
-                  name="email"
-                  v-model="localUser.email"
-                />
+                <span class="form-field">
+                  <input
+                    class="input-email"
+                    name="email"
+                    v-model="localUser.email"
+                  />
+                </span>
               </span>
             </label>
           </div>
@@ -103,12 +105,14 @@
             <label class="form-group-inner">
               <span class="label">Old password</span>
               <span class="form-group form-group_clear-gaps">
-                <input
-                  type="password"
-                  class="checkPass"
-                  name="oldPassword"
-                  v-model="oldPassword"
-                />
+                <span class="form-field">
+                  <input
+                    type="password"
+                    class="checkPass"
+                    name="oldPassword"
+                    v-model="oldPassword"
+                  />
+                </span>
               </span>
             </label>
             <div class="input-help">
@@ -119,12 +123,14 @@
             <label class="form-group-inner">
               <span class="label">New password</span>
               <span class="form-group form-group_clear-gaps">
-                <input
-                  type="password"
-                  class="checkPass"
-                  name="newPassword"
-                  v-model="newPassword"
-                />
+                <span class="form-field">
+                  <input
+                    type="password"
+                    class="checkPass"
+                    name="newPassword"
+                    v-model="newPassword"
+                  />
+                </span>
               </span>
             </label>
           </div>
@@ -133,12 +139,14 @@
             <label class="form-group-inner">
               <span class="label">Confirm new password</span>
               <span class="form-group form-group_clear-gaps">
-                <input
-                  type="password"
-                  class="checkPass"
-                  name="checkPassword"
-                  v-model="checkPassword"
-                />
+                <span class="form-field">
+                  <input
+                    type="password"
+                    class="checkPass"
+                    name="checkPassword"
+                    v-model="checkPassword"
+                  />
+                </span>
               </span>
             </label>
           </div>

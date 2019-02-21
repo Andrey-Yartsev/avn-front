@@ -5,17 +5,19 @@
         class="form-group form-group_clear-gaps"
         :class="{ 'field-invalid': fieldError('name') }"
       >
-        <input
-          v-model="name"
-          v-validate="'required'"
-          class="rounded"
-          :class="{ lg: largeControls }"
-          type="text"
-          name="name"
-          placeholder="Name"
-          autocomplete="name"
-          data-vv-validate-on="blur"
-        />
+        <div class="form-field">
+          <input
+            v-model="name"
+            v-validate="'required'"
+            class="rounded"
+            :class="{ lg: largeControls }"
+            type="text"
+            name="name"
+            placeholder="Name"
+            autocomplete="name"
+            data-vv-validate-on="blur"
+          />
+        </div>
         <div class="tooltip-info" v-if="fieldError('name')">
           {{ fieldError("name") }}
         </div>
@@ -24,17 +26,19 @@
         class="form-group form-group_clear-gaps"
         :class="{ 'field-invalid': fieldError('email') }"
       >
-        <input
-          v-model="email"
-          v-validate="'required|email'"
-          class="rounded"
-          :class="{ lg: largeControls }"
-          type="email"
-          name="email"
-          placeholder="Email"
-          autocomplete="email"
-          data-vv-validate-on="blur"
-        />
+        <div class="form-field">
+          <input
+            v-model="email"
+            v-validate="'required|email'"
+            class="rounded"
+            :class="{ lg: largeControls }"
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="email"
+            data-vv-validate-on="blur"
+          />
+        </div>
         <div class="tooltip-info" v-if="fieldError('email')">
           {{ fieldError("email") }}
         </div>
@@ -43,18 +47,20 @@
         class="form-group form-group_clear-gaps"
         :class="{ 'field-invalid': fieldError('password') }"
       >
-        <input
-          v-model="password"
-          v-validate="'required'"
-          class="rounded"
-          :class="{ lg: largeControls }"
-          type="password"
-          name="password"
-          minlength="6"
-          placeholder="Password"
-          autocomplete="new-password"
-          data-vv-validate-on="blur"
-        />
+        <div class="form-field">
+          <input
+            v-model="password"
+            v-validate="'required'"
+            class="rounded"
+            :class="{ lg: largeControls }"
+            type="password"
+            name="password"
+            minlength="6"
+            placeholder="Password"
+            autocomplete="new-password"
+            data-vv-validate-on="blur"
+          />
+        </div>
         <div class="tooltip-info" v-if="fieldError('password')">
           {{ fieldError("password") }}
         </div>

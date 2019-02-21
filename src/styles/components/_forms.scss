@@ -90,29 +90,40 @@ textarea {
   }
 }
 
+.form-field {
+  display: block;
+  position: relative;
+}
+
 .field-invalid,
 .field-valid {
 
-  &:before {
-    @include icon-font;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 6px;
-    font-size: 24px;
-    width: 1.2em;
-  }
+  .form-field {
 
-  input, textarea {
-    padding-right: 40px;
+    &:before {
+      @include icon-font;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 6px;
+      font-size: 24px;
+      width: 1.2em;
+    }
+
+    input, textarea {
+      padding-right: 40px;
+    }
   }
 }
 
 .field-invalid {
 
-  &:before {
-    content: "\E619";
-    color: red;
+  .form-field {
+
+    &:before {
+      content: "\E619";
+      color: red;
+    }
   }
 
   &.no-border {
@@ -839,28 +850,30 @@ select {
 }
 
 .tooltip-info {
-  background-color: red;
+  //background-color: red;
   font-size: 12px;
-  border-radius: 15px;
-  padding: 6px 14px;
-  position: absolute;
-  right: 7px;
-  bottom: calc(100% + 7px);
-  text-align: center;
-  color: #fff;
-  width: 230px;
-  pointer-events: none;
+  //border-radius: 15px;
+  //padding: 6px 14px;
+  //position: absolute;
+  //right: 7px;
+  //bottom: calc(100% + 7px);
+  //text-align: center;
+  //color: #fff;
+  color: red;
+  //width: 230px;
+  //pointer-events: none;
+  margin-top: 5px;
 
   &:after {
-    top: calc(100% - 3px);
-    right: 6px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-top-color: red;
-    border-width: 8px;
+    //top: calc(100% - 3px);
+    //right: 6px;
+    //border: solid transparent;
+    //content: " ";
+    //height: 0;
+    //width: 0;
+    //position: absolute;
+    //pointer-events: none;
+    //border-top-color: red;
+    //border-width: 8px;
   }
 }

@@ -37,17 +37,19 @@
           class="form-group form-group_clear-gaps"
           :class="{ 'field-invalid': fieldError('email') }"
         >
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            autocomplete="email"
-            class="rounded"
-            :class="{ lg: largeControls }"
-            v-model="email"
-            v-validate="'required|email'"
-            data-vv-validate-on="blur"
-          />
+          <div class="form-field">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              autocomplete="email"
+              class="rounded"
+              :class="{ lg: largeControls }"
+              v-model="email"
+              v-validate="'required|email'"
+              data-vv-validate-on="blur"
+            />
+          </div>
           <div class="tooltip-info" v-if="fieldError('email')">
             {{ fieldError("email") }}
           </div>
@@ -56,17 +58,19 @@
           class="form-group form-group_clear-gaps"
           :class="{ 'field-invalid': fieldError('password') }"
         >
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            class="rounded"
-            :class="{ lg: largeControls }"
-            v-model="password"
-            v-validate="'required'"
-            data-vv-validate-on="blur"
-          />
+          <div class="form-field">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              autocomplete="current-password"
+              class="rounded"
+              :class="{ lg: largeControls }"
+              v-model="password"
+              v-validate="'required'"
+              data-vv-validate-on="blur"
+            />
+          </div>
           <div class="tooltip-info" v-if="fieldError('password')">
             {{ fieldError("password") }}
           </div>
