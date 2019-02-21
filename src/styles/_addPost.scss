@@ -41,6 +41,16 @@
       position: inherit;
     }
   }
+
+  .scroll-bottom {
+
+    .main-container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-top: 0;
+      }
+    }
+  }
 }
 
 .addPostPage {

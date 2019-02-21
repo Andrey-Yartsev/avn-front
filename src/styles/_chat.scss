@@ -47,7 +47,6 @@
 
   @include media-breakpoint-down($desktop-breakpoint) {
     min-height: 100%;
-    //padding-top: 88px;
 
     display: block;
   }
@@ -55,16 +54,16 @@
   &:not(.chat) {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      display: block;
+      //display: block;
+
+      //flex-direction: column;
     }
-  }
 
-  .popup & {
-
-    .scroll-top & {
+    &.no-chats {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        //padding-top: 44px;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
@@ -94,18 +93,6 @@
     }
   }
 
-  .chatHeader {
-
-    .chat-page_new & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        //position: -webkit-sticky;
-        //position: sticky;
-        //top: 0;
-      }
-    }
-  }
-
   &.chat-wrapper {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -127,20 +114,6 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;
-      }
-    }
-
-    &:after {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //right: 0;
-      }
-
-      .modal-opened & {
-
-        &:after {
-          display: none;
-        }
       }
     }
   }
@@ -202,7 +175,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  //position: relative;
   overflow: hidden;
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -229,8 +201,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       flex-direction: column;
-
-      //display: block;
     }
   }
 
@@ -407,13 +377,6 @@
         flex: 1;
       }
 
-
-      .chatCollectionContentWrapper {
-
-        .avatar {
-          //margin-top: 5px;
-        }
-      }
     }
   }
 
@@ -528,9 +491,6 @@
   z-index: 11;
   background-color: $white;
   position: relative;
-  //position: -webkit-sticky;
-  //position: sticky;
-  //top: 0;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     width: 100%;
@@ -539,18 +499,6 @@
     height: auto;
     flex: 0 0 auto;
     transition: all .3s;
-    //position: fixed;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-  }
-
-  .contactsListHeader {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //position: relative;
-      //z-index: 10;
-    }
   }
 
   &.no-nav {
@@ -563,29 +511,10 @@
     }
   }
 
-  .chatCollectionContent:not(.chat) & {
-
-    .scroll-top & {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        //top: -44px;
-      }
-
-      .header-nav {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          //transform: translate3d(0, 0, 0);
-        }
-      }
-    }
-  }
-
   .chat-page_new &,
   .chat-popup_new-msg & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      //position: -webkit-sticky;
-      //position: sticky;
       box-shadow: 0 0 5px rgba(#000, 0.3);
     }
   }
@@ -603,7 +532,6 @@
       content: "";
       position: absolute;
       left: 0;
-      //right: 0;
       width: 956px;
       top: 0;
       bottom: 0;
@@ -673,11 +601,6 @@
   align-items: center;
   align-content: center;
   background-color: $white;
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //height: 44px;
-    //transition: transform 0.2s ease-in-out 0s;
-  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 1em 0 1.3em;
@@ -1250,18 +1173,6 @@
       }
     }
   }
-
-  .chat-popup_new-msg &,
-  .chat-page_new & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //position: absolute;
-      //left: 0;
-      //right: 0;
-      //top: 0;
-      //bottom: 0;
-    }
-  }
 }
 
 .mass-message {
@@ -1308,10 +1219,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //display: none;
-  }
 
   .selectedChatHeader {
     justify-content: center;
