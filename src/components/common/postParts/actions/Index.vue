@@ -5,9 +5,12 @@
       @click="postLike"
       >{{ post.favoritesCount }}</span
     >
-    <span class="comments actions__btn" @click="postShowCommentForm">{{
-      post.commentsCount
-    }}</span>
+    <span
+      class="comments actions__btn"
+      @click="postShowCommentForm"
+      v-if="post.canComment"
+      >{{ post.commentsCount }}</span
+    >
     <template v-if="!isOwner(post.id) && post.author.canEarn && $root.showTips">
       <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
     </template>
