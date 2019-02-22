@@ -24,8 +24,8 @@
   .main-container {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      display: flex;
-      flex-direction: column;
+      //display: flex;
+      //flex-direction: column;
     }
   }
 
