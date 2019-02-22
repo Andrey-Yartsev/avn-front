@@ -42,6 +42,19 @@
         class="SearchResultsPopupCollectionView"
         :class="{ hidden: !opened }"
       >
+        <div class="search-query" style="display: none;">
+          <ul class="search-query__list">
+            <li class="search-query__item">
+              <a href="#" class="search-query__link">Lorem ipsum</a>
+            </li>
+            <li class="search-query__item">
+              <a href="#" class="search-query__link">Lorem ipsum</a>
+            </li>
+            <li class="search-query__item">
+              <a href="#" class="search-query__link">Lorem ipsum</a>
+            </li>
+          </ul>
+        </div>
         <div class="users">
           <component :is="resultsComponent" :items="items" @away="reset" />
         </div>
