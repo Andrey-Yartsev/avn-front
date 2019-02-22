@@ -18,7 +18,7 @@
             data-vv-validate-on="blur"
           />
         </div>
-        <div class="tooltip-info" v-if="fieldError('name')">
+        <div class="error-info" v-if="fieldError('name')">
           {{ fieldError("name") }}
         </div>
       </div>
@@ -39,7 +39,7 @@
             data-vv-validate-on="blur"
           />
         </div>
-        <div class="tooltip-info" v-if="fieldError('email')">
+        <div class="error-info" v-if="fieldError('email')">
           {{ fieldError("email") }}
         </div>
       </div>
@@ -61,7 +61,7 @@
             data-vv-validate-on="blur"
           />
         </div>
-        <div class="tooltip-info" v-if="fieldError('password')">
+        <div class="error-info" v-if="fieldError('password')">
           {{ fieldError("password") }}
         </div>
       </div>

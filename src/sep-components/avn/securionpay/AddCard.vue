@@ -163,7 +163,7 @@
                       v-validate="'required|numeric'"
                     />
                   </span>
-                  <div class="tooltip-info" v-if="fieldError('cardNumber')">
+                  <div class="error-info" v-if="fieldError('cardNumber')">
                     {{ fieldError("cardNumber") }}
                   </div>
                 </span>
@@ -186,7 +186,7 @@
                       @input="expDateChanged"
                     />
                   </div>
-                  <div class="tooltip-info" v-if="fieldError('expDate')">
+                  <div class="error-info" v-if="fieldError('expDate')">
                     {{ fieldError("expDate") }}
                   </div>
                 </div>

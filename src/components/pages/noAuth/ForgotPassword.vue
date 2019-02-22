@@ -18,7 +18,7 @@
                 :disabled="loading || sendSuccess"
               />
             </span>
-            <div class="tooltip-info" v-if="error">
+            <div class="error-info" v-if="error">
               {{ error }}
             </div>
             <div class="info" v-else-if="sendSuccess">

@@ -849,31 +849,8 @@ select {
   }
 }
 
-.tooltip-info {
-  //background-color: red;
+.error-info {
   font-size: 12px;
-  //border-radius: 15px;
-  //padding: 6px 14px;
-  //position: absolute;
-  //right: 7px;
-  //bottom: calc(100% + 7px);
-  //text-align: center;
-  //color: #fff;
   color: red;
-  //width: 230px;
-  //pointer-events: none;
   margin-top: 5px;
-
-  &:after {
-    //top: calc(100% - 3px);
-    //right: 6px;
-    //border: solid transparent;
-    //content: " ";
-    //height: 0;
-    //width: 0;
-    //position: absolute;
-    //pointer-events: none;
-    //border-top-color: red;
-    //border-width: 8px;
-  }
 }
