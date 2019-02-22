@@ -30,28 +30,10 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     display: flex;
     align-items: center;
-    //position: -webkit-sticky;
-    //position: sticky;
-    //top: 0;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
-  }
-
-  .scroll-top & {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //top: -44px;
-    }
-  }
-
-  .scroll-bottom & {
-    //transform: translate3d(0, 0, 0);
-    //top: 0;
-    //position: fixed;
-    //left: 0;
-    //right: 0;
   }
 }
 
