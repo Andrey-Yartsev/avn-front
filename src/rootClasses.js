@@ -21,7 +21,12 @@ export default {
     "no-site-header_mob",
     "has-page-footer"
   ],
-  newChat: ["chat-page", "chat-page_new", "has-page-footer", "reset-sticky-gap"],
+  newChat: [
+    "chat-page",
+    "chat-page_new",
+    "has-page-footer",
+    "reset-sticky-gap"
+  ],
   addPost: ["addPost-page"],
   search: ["search-page", "has-page-footer"],
   stream: ["stream-page"],
