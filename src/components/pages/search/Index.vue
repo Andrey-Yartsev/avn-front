@@ -8,9 +8,6 @@
               v-bind:key="v.name"
               v-if="summary[`${v.name}Count`]"
               :to="'/search/' + v.name + '/' + query"
-              :class="{
-                active: v.active
-              }"
               class="content-nav__item"
             >
               {{ v.title }}
