@@ -30,5 +30,6 @@ export default {
   addPost: ["addPost-page"],
   search: ["search-page", "has-page-footer"],
   stream: ["stream-page"],
-  storiesPage: ["story-page"]
+  storiesPage: ["story-page"],
+  support: ["support-page", "special-site-header"]
 };

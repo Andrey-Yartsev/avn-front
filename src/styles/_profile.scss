@@ -978,9 +978,16 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 320px;
-
     position: sticky;
     top: -240px;
+  }
+
+  &.size-lg {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 400px;
+      top: -320px;
+    }
   }
 
   .header-scrolled & {
@@ -997,12 +1004,19 @@
   }
 
   .container {
-    height: 32vw;
     width: 100%;
     position: relative;
 
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 32vw;
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: 320px;
+      //height: 320px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .header-scrolled & {
@@ -1020,13 +1034,18 @@
   right: 0;
   top: 0;
   bottom: 0;
-  height: 32vw;
   overflow: hidden;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    height: 32vw;
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
-    height: 320px;
-    top: auto;
+    //height: 320px;
+    //top: auto;
     right: -20px;
+    display: flex;
+    flex-direction: column;
   }
 
   &:before {

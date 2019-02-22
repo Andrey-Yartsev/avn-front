@@ -526,6 +526,22 @@ video {
       }
     }
 
+    &.lg {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 47px;
+        height: 40px;
+      }
+
+      &:before {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          line-height: 40px;
+          font-size: 22px;
+        }
+      }
+    }
+
     &_mob {
 
       @include media-breakpoint-down($desktop-breakpoint) {

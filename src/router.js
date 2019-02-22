@@ -390,7 +390,7 @@ const routes = [
     component: HelpCenterPage,
     meta: {
       staticPage: true,
-      cssName: "staticPage"
+      cssName: "support"
     }
   },
   {
