@@ -16,7 +16,12 @@
               <span class="label">Name</span>
               <div class="form-group form-group_clear-gaps">
                 <div class="form-field">
-                  <input v-model="model.name" type="text" name="name" required />
+                  <input
+                    v-model="model.name"
+                    type="text"
+                    name="name"
+                    required
+                  />
                 </div>
               </div>
             </div>
