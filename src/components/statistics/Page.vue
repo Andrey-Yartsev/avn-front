@@ -3,45 +3,45 @@
     <MobileHeader />
 
     <div class="boxes">
-    <div class="page-header-title cols">
-      <div class="col col-1-2">
-        <div class="page-name">Statistics</div>
-        <div
-          class="more-functions"
-          :class="{ open: periodOptionsOpened }"
-          v-click-outside="
-            () => {
-              periodOptionsOpened = false;
-            }
-          "
-        >
-          <div class="more-functions__overlay"></div>
+      <div class="page-header-title cols">
+        <div class="col col-1-2">
+          <div class="page-name">Statistics</div>
           <div
-            class="more-functions__btn more-functions__btn_arrow"
-            @click="periodOptionsOpened = !periodOptionsOpened"
+            class="more-functions"
+            :class="{ open: periodOptionsOpened }"
+            v-click-outside="
+              () => {
+                periodOptionsOpened = false;
+              }
+            "
           >
-            <div class="more-functions__btn-text">
-              {{ getPeriodType(currentPeriodType).title }}
+            <div class="more-functions__overlay"></div>
+            <div
+              class="more-functions__btn more-functions__btn_arrow"
+              @click="periodOptionsOpened = !periodOptionsOpened"
+            >
+              <div class="more-functions__btn-text">
+                {{ getPeriodType(currentPeriodType).title }}
+              </div>
             </div>
-          </div>
-          <div class="more-functions__dropdown">
-            <div class="more-functions__dropdown-inside">
-              <ul>
-                <li v-for="v in periodTypes" :key="v.name">
-                  <button
-                    type="button"
-                    :disabled="v.name === currentPeriodType"
-                    @click="selectPeriod(v.name)"
-                  >
-                    {{ v.title }}
-                  </button>
-                </li>
-              </ul>
+            <div class="more-functions__dropdown">
+              <div class="more-functions__dropdown-inside">
+                <ul>
+                  <li v-for="v in periodTypes" :key="v.name">
+                    <button
+                      type="button"
+                      :disabled="v.name === currentPeriodType"
+                      @click="selectPeriod(v.name)"
+                    >
+                      {{ v.title }}
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
     <div class="boxes">
       <PostsModal
