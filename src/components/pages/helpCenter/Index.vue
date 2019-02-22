@@ -7,8 +7,12 @@
             <div class="support-header">
               <h1>Help Center</h1>
               <form action="#" class="support-search-form">
-                <input type="text" class="lg rounded">
-                <button type="button" class="b-search-form__btn b-search-form__btn_mob header-search-submit lg" disabled="disabled"></button>
+                <input type="text" class="lg rounded" />
+                <button
+                  type="button"
+                  class="b-search-form__btn b-search-form__btn_mob header-search-submit lg"
+                  disabled="disabled"
+                ></button>
               </form>
               <div class="popular-questions">
                 <a href="#" class="question-item">
@@ -35,7 +39,10 @@
         <div class="container">
           <div class="s-header text-centered">
             <h2>AVN Stars Support</h2>
-            <p>Get instant answers for the most common questions and learn how to share like a pro.</p>
+            <p>
+              Get instant answers for the most common questions and learn how to
+              share like a pro.
+            </p>
           </div>
           <div class="cols">
             <div class="col col-1-4">
@@ -53,7 +60,7 @@
           <div class="FooterNavCollectionView">
             <div class="footer-nav">
               <div class="FooterNavView">
-              <a href="/terms" class="">Terms</a>
+                <a href="/terms" class="">Terms</a>
               </div>
               <div class="FooterNavView">
                 <a href="/privacy" class="">Privacy</a>
@@ -68,7 +75,10 @@
                 <a href="/" class="active">OnMyTeam.com</a>
               </div>
               <div class="FooterNavView settings-onmyteam-link">
-                <a href="/2257" class="">18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement</a>
+                <a href="/2257" class=""
+                  >18 U.S.C. 2257 Record-Keeping Requirements Compliance
+                  Statement</a
+                >
               </div>
             </div>
           </div>
