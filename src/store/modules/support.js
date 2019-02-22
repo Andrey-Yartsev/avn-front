@@ -10,6 +10,7 @@ createRequestAction({
   prefix: "fetch",
   apiPath: "supports",
   requestType: "no-token",
+  resultKey: "items",
   state,
   mutations,
   actions,
