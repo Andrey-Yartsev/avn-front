@@ -11,7 +11,10 @@
           following form to contact us. Thank you.
         </h2>
         <form v-on:submit.stop.prevent="send">
-          <label class="form-group form-group_with-label">
+          <label
+            class="form-group form-group_with-label"
+            :class="{ 'field-invalid': fieldError('name') }"
+          >
             <div class="form-group-inner">
               <span class="label">Name</span>
               <div class="form-group form-group_clear-gaps">
@@ -20,13 +23,19 @@
                     v-model="model.name"
                     type="text"
                     name="name"
-                    required
+                    v-validate="'required'"
                   />
+                </div>
+                <div class="error-info" v-if="fieldError('name')">
+                  {{ fieldError("name") }}
                 </div>
               </div>
             </div>
           </label>
-          <label class="form-group form-group_with-label">
+          <label
+            class="form-group form-group_with-label"
+            :class="{ 'field-invalid': fieldError('email') }"
+          >
             <div class="form-group-inner">
               <span class="label">Email</span>
               <div class="form-group form-group_clear-gaps">
@@ -35,13 +44,20 @@
                     v-model="model.email"
                     type="email"
                     name="email"
-                    required
+                    v-validate="'required|email'"
+                    data-vv-validate-on="blur"
                   />
+                </div>
+                <div class="error-info" v-if="fieldError('email')">
+                  {{ fieldError("email") }}
                 </div>
               </div>
             </div>
           </label>
-          <label class="form-group form-group_with-label">
+          <label
+            class="form-group form-group_with-label"
+            :class="{ 'field-invalid': fieldError('subject') }"
+          >
             <div class="form-group-inner">
               <span class="label">Subject</span>
               <div class="form-group form-group_clear-gaps">
@@ -50,8 +66,11 @@
                     v-model="model.subject"
                     type="text"
                     name="subject"
-                    required
+                    v-validate="'required'"
                   />
+                </div>
+                <div class="error-info" v-if="fieldError('subject')">
+                  {{ fieldError("subject") }}
                 </div>
               </div>
             </div>
@@ -68,13 +87,22 @@
                     required
                   ></textarea>
                 </div>
+                <div class="error-info" v-if="fieldError('message')">
+                  {{ fieldError("message") }}
+                </div>
               </div>
             </div>
           </label>
           <label class="form-group form-group_with-label">
             <div class="form-group-inner">
               <span class="label"></span>
-              <button type="submit" class="btn lg">Submit</button>
+              <button
+                :disabled="!isFormValid || sending"
+                type="submit"
+                class="btn lg"
+              >
+                Submit
+              </button>
             </div>
           </label>
         </form>
@@ -86,9 +114,12 @@
 
 <script>
 import Footer from "@/components/footer/Index.vue";
+import Form from "@/mixins/form";
 
 export default {
   name: "ContactsPage",
+
+  mixins: [Form],
 
   components: {
     Footer
@@ -108,6 +139,9 @@ export default {
   computed: {
     sendSuccess() {
       return this.$store.state.contacts.sendSuccess;
+    },
+    sending() {
+      return this.$store.state.contacts.sendLoading;
     }
   },
 
