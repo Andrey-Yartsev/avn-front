@@ -7,7 +7,7 @@ export default {
     "special-site-header",
     "has-page-footer"
   ],
-  settings: ["settings-page", "no-site-header_mob"],
+  settings: ["settings-page", "no-site-header_mob", "reset-sticky-gap"],
   explore: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob"],
   chat: ["chat-page", "has-page-footer"],

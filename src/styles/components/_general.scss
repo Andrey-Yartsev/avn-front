@@ -325,10 +325,10 @@ video {
       padding-top: 88px;
     }
 
-    .no-site-header_mob & {
+    .reset-sticky-gap & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        //padding-top: 0;
+        padding-top: 0;
       }
     }
   }
