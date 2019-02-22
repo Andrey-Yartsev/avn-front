@@ -36,6 +36,7 @@ import paidMessage from "@/store/modules/paidMessage";
 import viewers from "@/store/modules/viewers";
 import highlights from "@/store/modules/highlights";
 import staticPage from "@/store/modules/staticPage";
+import support from "@/store/modules/support";
 
 Vue.use(Vuex);
 
@@ -77,7 +78,8 @@ const store = new Vuex.Store({
     viewers,
     highlights,
     storiesArchive,
-    staticPage
+    staticPage,
+    support
   }
 });
 

@@ -29,6 +29,7 @@ import FollowersPage from "./components/pages/followers/Index";
 import StaticPage from "./components/pages/static/Index";
 import ContactsPage from "./components/pages/static/Contacts";
 import StatPage from "./components/statistics/Page";
+import HelpCenterPage from "./components/pages/helpCenter/Index";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -378,6 +379,15 @@ const routes = [
     beforeEnter: Auth.requireAny,
     path: "/contact",
     component: ContactsPage,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/support",
+    component: HelpCenterPage,
     meta: {
       staticPage: true,
       cssName: "staticPage"
