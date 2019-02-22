@@ -2,14 +2,24 @@
 
 import { createRequestAction } from "../../utils/storeRequest";
 
-const state = {};
+const state = {
+  results: {
+    list: [],
+    marker: undefined,
+    suggestions: []
+  }
+};
 
 const mutations = {
   reset(state) {
-    state.items = [];
+    state.results = {
+      list: [],
+      marker: undefined,
+      suggestions: []
+    };
   },
-  setItems(state, items) {
-    state.items = items;
+  setItems(state, results) {
+    state.results = results;
   }
 };
 
@@ -24,7 +34,7 @@ createRequestAction({
   options: {
     method: "GET"
   },
-  resultKey: "items",
+  resultKey: "results",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     if (!params.offset) {
@@ -38,10 +48,11 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{type}/, params.type);
-  },
-  resultConvert: function(result) {
-    return result.list;
   }
+  // ,
+  // resultConvert: function(result) {
+  //   return result;
+  // }
 });
 
 export default {

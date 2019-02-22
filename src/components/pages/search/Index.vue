@@ -3,16 +3,26 @@
     <div class="container">
       <div class="over-container">
         <nav class="content-nav">
-          <router-link
-            v-for="v in types"
-            v-bind:key="v.name"
-            :to="'/search/' + v.name + '/' + query"
-            :class="{ active: v.active }"
-            class="content-nav__item"
-            >{{ v.title }}</router-link
-          >
+          <template v-for="v in types">
+            <router-link
+              v-bind:key="v.name"
+              v-if="summary[`${v.name}Count`]"
+              :to="'/search/' + v.name + '/' + query"
+              :class="{
+                active: v.active
+              }"
+              class="content-nav__item"
+            >
+              {{ v.title }}
+              <span v-if="summary[`${v.name}Count`]">{{
+                summary[`${v.name}Count`]
+              }}</span>
+            </router-link>
+            <span class="content-nav__item disabled" v-bind:key="v.name" v-else>
+              {{ v.title }}
+            </span>
+          </template>
         </nav>
-
         <div class="explore">
           <div :class="wrapperClass">
             <component
@@ -114,10 +124,19 @@ export default {
     },
     canSearch() {
       return !!this.localQuery.trim();
+    },
+    summary() {
+      return this.$store.state.search.summary.summary;
     }
   },
 
   methods: {
+    getSummary() {
+      this.$store.commit("search/summary/reset");
+      this.$store.dispatch("search/summary/search", {
+        query: this.query
+      });
+    },
     search() {
       if (!this.canSearch) {
         return;
@@ -147,12 +166,16 @@ export default {
 
   watch: {
     query() {
+      this.$store.commit("search/summary/reset");
+      this.getSummary();
       this.search();
       this.localQuery = this.query;
     },
     type() {
       this.$store.commit("search/page/reset");
+      this.$store.commit("search/summary/reset");
       this.$router.push(`/search/${this.type}/${this.localQuery}`);
+      this.getSummary();
       this.search();
     }
   },
@@ -162,10 +185,12 @@ export default {
       this.localQuery = this.query;
     }
     this.search();
+    this.getSummary();
   },
 
   beforeDestroy() {
     this.$store.commit("search/bubble/reset");
+    this.$store.commit("search/summary/reset");
   }
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <div class="b-search-form b-search-form_flex-align header-search">
+  <div
+    class="b-search-form b-search-form_flex-align header-search"
+    v-click-outside="close"
+  >
     <input
       @keyup="keyup"
       v-model="localQuery"
@@ -10,7 +13,6 @@
       placeholder="Search"
       type="text"
       @focus="open"
-      v-click-outside="close"
       tabindex="1"
     />
     <span
@@ -19,7 +21,8 @@
       id="header-search-clear"
       class="btn-clear-search"
       :class="{ hidden: !canSearch }"
-    ></span>
+      @click="reset"
+    />
 
     <button
       type="button"
@@ -28,45 +31,25 @@
       :disabled="!canSearch"
     ></button>
 
-    <!--
-    <button
-      type="button"
-      class="btn-clear-search"
-      :class="{hidden: !opened}"
-      @click="reset"
-    ></button>
-    -->
-
     <div class="header-search-results">
       <div
         class="SearchResultsPopupCollectionView"
         :class="{ hidden: !opened }"
       >
-        <div class="search-query" style="display: none;">
-          <ul class="search-query__list">
-            <li class="search-query__item">
-              <a href="#" class="search-query__link">Lorem ipsum</a>
-            </li>
-            <li class="search-query__item">
-              <a href="#" class="search-query__link">Lorem ipsum</a>
-            </li>
-            <li class="search-query__item">
-              <a href="#" class="search-query__link">Lorem ipsum</a>
-            </li>
-          </ul>
+        <div class="search-query" v-if="suggestions && suggestions.length">
+          <Suggestions :items="suggestions" :onSelect="selectSuggest" />
         </div>
         <div class="users">
           <component :is="resultsComponent" :items="items" @away="reset" />
         </div>
         <div class="search-all-link">
-          <a
-            :href="'/search/users/' + localQuery"
-            @click.prevent="goTo('/search/users/' + localQuery)"
+          <router-link
+            :to="`/search/${type}/${localQuery}`"
             class="searchAllLink"
           >
             Search all for&nbsp;
             <span class="searchAllTag">{{ localQuery }}</span>
-          </a>
+          </router-link>
         </div>
         <button type="button" class="close" @click="reset"></button>
       </div>
@@ -78,6 +61,7 @@
 import ClickOutside from "vue-click-outside";
 import Users from "./types/Users";
 import Posts from "./types/Posts";
+import Suggestions from "./types/Suggestions";
 
 export default {
   name: "SearchBubble",
@@ -88,7 +72,8 @@ export default {
 
   components: {
     Users,
-    Posts
+    Posts,
+    Suggestions
   },
 
   data() {
@@ -107,7 +92,10 @@ export default {
       return this.opened2 && this.localQuery;
     },
     items() {
-      return this.$store.state.search.bubble.items;
+      return this.$store.state.search.bubble.results.list;
+    },
+    suggestions() {
+      return this.$store.state.search.bubble.results.suggestions;
     },
     canSearch() {
       if (!this.localQuery) {
@@ -133,6 +121,9 @@ export default {
   watch: {
     query(query) {
       this.localQuery = query;
+    },
+    $route() {
+      this.opened2 = false;
     }
   },
 
@@ -152,9 +143,6 @@ export default {
     },
     close() {
       this.opened2 = false;
-    },
-    goTo(path) {
-      this.$router.push(path);
     },
     toToSearchPage() {
       if (!this.canSearch) {
@@ -189,6 +177,10 @@ export default {
       this.localQuery = "";
       this.opened2 = false;
       this.$store.commit("search/bubble/reset");
+    },
+    selectSuggest(value) {
+      this.localQuery = value;
+      this._search();
     }
   },
 
