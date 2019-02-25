@@ -67,6 +67,16 @@ export default {
       body: JSON.stringify(data)
     });
   },
+  updatePost({ postId, data }) {
+    return tokenRequest(`posts/${postId}`, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  },
   deletePost({ postId }) {
     return tokenRequest(`posts/${postId}`, {
       method: "DELETE",

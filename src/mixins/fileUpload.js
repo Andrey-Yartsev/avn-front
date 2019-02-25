@@ -111,8 +111,8 @@ export default {
     },
 
     async getMediaFiles() {
-      const promises = this.preloadedMedias.map(({ id, file }) =>
-        fileUpload({ id, file }, this.setUploadProgress)
+      const promises = this.preloadedMedias.map(({ id, file, alreadySaved }) =>
+        alreadySaved ? id : fileUpload({ id, file }, this.setUploadProgress)
       );
 
       return await Promise.all(promises);

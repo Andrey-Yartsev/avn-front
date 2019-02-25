@@ -24,6 +24,7 @@ import ChatNewMessage from "./components/chat/NewMessage";
 import SearchPage from "./components/pages/search/Index";
 import StoryPage from "./components/pages/story/Index";
 import AddPostPage from "./components/pages/addPost/Index";
+import EditPostPage from "./components/pages/editPost/Index";
 import StreamPage from "./components/pages/stream/Index";
 import FollowersPage from "./components/pages/followers/Index";
 import StaticPage from "./components/pages/static/Index";
@@ -80,6 +81,14 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/addPost",
     component: AddPostPage,
+    meta: {
+      cssName: "addPost"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/post/edit/:id",
+    component: EditPostPage,
     meta: {
       cssName: "addPost"
     }

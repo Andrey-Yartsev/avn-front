@@ -46,6 +46,19 @@ const actions = {
       });
   },
 
+  updatePostData({ commit }, { postId, data }) {
+    return PostApi.updatePost({ postId, data })
+      .then(async response => {
+        if (response.status === 200) {
+          const newPost = await response.json();
+          commit("savePostSuccess", newPost);
+        }
+      })
+      .catch(err => {
+        commit("sendPostCommentFail", err);
+      });
+  },
+
   updatePost({ commit }, { postId }) {
     return PostApi.getPost({ postId })
       .then(response => {

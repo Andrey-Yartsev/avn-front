@@ -17,6 +17,11 @@
           Copy link to post
         </button>
       </li>
+      <li v-if="isOwner(userId) && isAuth()">
+        <button class="edit" type="button" @click="editPost">
+          Edit post
+        </button>
+      </li>
       <template v-if="isOwner(userId)">
         <li>
           <button class="deletePost" type="button" @click="deletePost">
@@ -91,6 +96,10 @@ export default {
       }
 
       window.location.hash = "";
+    },
+
+    editPost() {
+      this.$router.push(`post/edit/${this.postId}`);
     },
 
     reportUser() {
