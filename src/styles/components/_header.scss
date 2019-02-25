@@ -130,20 +130,21 @@
     }
   }
 
-  .avn-style {
-
-    .header-logo {
-
-      svg {
-        fill: #fff;
-      }
-    }
-  }
+  //.avn-style {
+  //
+  //  .header-logo {
+  //
+  //    svg {
+  //      fill: #fff;
+  //    }
+  //  }
+  //}
 
   .header-logo {
 
     svg {
       filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+      fill: #fff;
     }
 
     .b, .e, .f, .c, .d {
@@ -1713,60 +1714,61 @@
 
   &.special-site-header {
 
+    #site_header {
+      display: block;
+      position: fixed;
+      left: 0; right: 0;
+      top: 0;
+
+      .header_container {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          background-color: transparent;
+        }
+      }
+
+      .btns-login-user {
+
+        .login,
+        > .register {
+          --primary-color: #fff;
+          --secondary-color: #fff;
+        }
+      }
+
+      .header-wrapper {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
     &.profile-page {
 
+    }
+
+    .header-scrolled {
+
       #site_header {
-        display: block;
-        position: fixed;
-        left: 0; right: 0;
-        top: 0;
 
-        .header_container {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            background-color: transparent;
-          }
-        }
-
-        .btns-login-user {
-
-          .login,
-          > .register {
-            --primary-color: #fff;
-            --secondary-color: #fff;
-          }
-        }
-
-        .header-wrapper {
-          transform: translate3d(0, 0, 0);
-        }
-      }
-
-      .header-scrolled {
-
-        #site_header {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            transform: translate3d(0, -44px, 0);
-          }
-        }
-      }
-
-      .sticky-header-controls {
-
-        .header-return-btn,
-        .profile-more-functions {
-          display: none;
-        }
-
-        .profile-name__header {
-          padding: 0 20px;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          transform: translate3d(0, -44px, 0);
         }
       }
     }
 
+    .sticky-header-controls {
+
+      .header-return-btn,
+      .profile-more-functions {
+        display: none;
+      }
+
+      .profile-name__header {
+        padding: 0 20px;
+      }
+    }
+
     #site_header {
-      display: none;
+      //display: none;
     }
   }
 
