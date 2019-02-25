@@ -527,6 +527,8 @@ video {
     }
 
     &.lg {
+      width: 47px;
+      height: 40px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 47px;
@@ -534,11 +536,8 @@ video {
       }
 
       &:before {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          line-height: 40px;
-          font-size: 22px;
-        }
+        line-height: 40px;
+        font-size: 22px;
       }
     }
 

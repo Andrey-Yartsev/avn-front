@@ -5,13 +5,14 @@ export default {
     "following-page",
     "no-site-header_mob",
     "special-site-header",
-    "has-page-footer"
+    "has-page-footer",
+    "reset-sticky-gap"
   ],
   settings: ["settings-page", "no-site-header_mob", "reset-sticky-gap"],
   explore: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob"],
   chat: ["chat-page", "has-page-footer"],
-  userProfile: ["profile-page", "no-site-header_mob", "special-site-header"],
+  userProfile: ["profile-page", "no-site-header_mob", "special-site-header", "reset-sticky-gap"],
   myProfile: ["profile-page"],
   staticPage: ["static-page"],
   contact: ["static-page", "contact-page"],
@@ -31,5 +32,5 @@ export default {
   search: ["search-page", "has-page-footer"],
   stream: ["stream-page"],
   storiesPage: ["story-page"],
-  support: ["profile-page", "support-page", "special-site-header"]
+  support: ["support-page", "special-site-header", "reset-sticky-gap"]
 };

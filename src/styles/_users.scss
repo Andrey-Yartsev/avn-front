@@ -304,15 +304,15 @@
   }
 }
 
-.sticky-header-controls {
-  @include media-breakpoint-down($desktop-breakpoint) {
-    background-color: $white;
-  }
-
-  .profile-name__header {
-    @include media-breakpoint-down($desktop-breakpoint) {
-      opacity: 1;
-      color: $main-color;
-    }
-  }
-}
+//.sticky-header-controls {
+//  @include media-breakpoint-down($desktop-breakpoint) {
+//    background-color: $white;
+//  }
+//
+//  .profile-name__header {
+//    @include media-breakpoint-down($desktop-breakpoint) {
+//      opacity: 1;
+//      color: $main-color;
+//    }
+//  }
+//}

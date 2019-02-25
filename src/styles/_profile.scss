@@ -37,8 +37,8 @@
     }
 
     .sticky-header-controls {
-      position: fixed;
-      background-color: transparent;
+      //position: fixed;
+      //background-color: transparent;
     }
 
     .header-return-btn {
@@ -65,7 +65,7 @@
         flex: 1;
         background: $white
         linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
-        z-index: 2;
+        //z-index: 2;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -869,80 +869,6 @@
 .profile {
   width: 100%;
 
-  .sticky-header-controls {
-    z-index: 7;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 44px;
-    display: flex;
-    align-items: center;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
-    }
-
-    .profile-name__header {
-      color: #fff;
-      opacity: 0;
-
-      .header-scrolled & {
-        opacity: 1;
-      }
-    }
-
-    .header-return-btn {
-
-      &:before {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          text-shadow: $shadow-light;
-        }
-      }
-    }
-
-    .more-functions {
-      position: absolute;
-      right: 0;
-      top: 0;
-
-      &__btn {
-        font-size: 0;
-        width: 56px;
-        height: 30px;
-        position: relative;
-        margin-top: 8px;
-
-        &:before {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            @include color-settings-dots(#fff, 1);
-            filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
-          }
-        }
-      }
-    }
-
-    .bg-profile {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      opacity: 0;
-      height: auto;
-
-      .header-scrolled & {
-        opacity: 1;
-        z-index: -1;
-      }
-
-      .bg-wrap {
-        top: auto;
-      }
-    }
-  }
-
   .row {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -963,6 +889,82 @@
   }
 }
 
+.sticky-header-controls {
+  z-index: 7;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background-color: transparent;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: none;
+  }
+
+  .profile-name__header {
+    color: #fff;
+    //opacity: 0;
+
+    .header-scrolled & {
+      opacity: 1;
+    }
+  }
+
+  .header-return-btn {
+
+    &:before {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        text-shadow: $shadow-light;
+      }
+    }
+  }
+
+  .more-functions {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &__btn {
+      font-size: 0;
+      width: 56px;
+      height: 30px;
+      position: relative;
+      margin-top: 8px;
+
+      &:before {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          @include color-settings-dots(#fff, 1);
+          filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
+        }
+      }
+    }
+  }
+
+  //.bg-profile {
+  //  position: absolute;
+  //  left: 0;
+  //  right: 0;
+  //  bottom: 0;
+  //  top: 0;
+  //  opacity: 0;
+  //  height: auto;
+  //
+  //  .header-scrolled & {
+  //    opacity: 1;
+  //    z-index: -1;
+  //  }
+  //
+  //  .bg-wrap {
+  //    top: auto;
+  //  }
+  //}
+}
+
 .bg-profile {
   overflow: hidden;
   z-index: 2;
@@ -973,7 +975,7 @@
     position: sticky;
     height: 32vw;
     top: calc(44px - 32vw);
-    z-index: 1;
+    //z-index: 1;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -983,6 +985,8 @@
   }
 
   &.size-lg {
+    height: 62vw;
+    top: calc(44px - 62vw);
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 400px;
@@ -1007,16 +1011,18 @@
     width: 100%;
     position: relative;
 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     @include media-breakpoint-down($desktop-breakpoint) {
-      height: 32vw;
+      //height: 32vw;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       //height: 320px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+
     }
 
     .header-scrolled & {
@@ -1035,17 +1041,17 @@
   top: 0;
   bottom: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    height: 32vw;
+    //height: 32vw;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     //height: 320px;
     //top: auto;
     right: -20px;
-    display: flex;
-    flex-direction: column;
   }
 
   &:before {
