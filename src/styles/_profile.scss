@@ -22,7 +22,7 @@
     }
   }
 
-  .profile {
+  .special-container {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
@@ -866,7 +866,7 @@
   }
 }
 
-.profile {
+.special-container {
   width: 100%;
 
   .row {
@@ -898,11 +898,17 @@
   height: 44px;
   display: flex;
   align-items: center;
-  position: fixed;
-  background-color: transparent;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
+  }
+
+  .profile-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: fixed;
+      background-color: transparent;
+    }
   }
 
   .profile-name__header {
@@ -1319,7 +1325,7 @@
   }
 }
 
-.profile {
+.special-container {
 
   .btns-user-activity {
 

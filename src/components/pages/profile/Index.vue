@@ -2,7 +2,7 @@
   <div class="loader-container" v-if="loading">
     <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
-  <div class="profile" v-else>
+  <div class="special-container" v-else>
     <router-link class="addPost-btn-float" to="/addPost" />
     <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">

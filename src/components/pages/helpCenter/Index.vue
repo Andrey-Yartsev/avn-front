@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="special-container">
     <div class="sticky-header-controls">
       <div class="profile-name__header">
         Help Center

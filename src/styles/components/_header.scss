@@ -23,7 +23,7 @@
         + #content {
 
           @include media-breakpoint-down($desktop-breakpoint) {
-            margin-top: 0;
+            //margin-top: 0;
           }
         }
       }
@@ -46,7 +46,23 @@
     }
   }
 
+  &:not(.no-site-header_mob) {
+
+    #site_header {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+      }
+    }
+  }
+
   #site_header {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      position: fixed;
+      left: 0; right: 0;
+      top: 0;
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
@@ -60,20 +76,44 @@
       margin: 0;
     }
 
+    .header_container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background-color: transparent;
+      }
+    }
+
     .header-wrapper {
       background-color: transparent;
       box-shadow: none;
     }
 
     .btn.make-post-btn {
-      background-color: #fff;
-      color: $main;
-      box-shadow: 0 2px 10px rgba(#000, 0.2);
+      //background-color: #fff;
+      //color: $main;
+      //box-shadow: 0 2px 10px rgba(#000, 0.2);
+      //
+      //&:hover {
+      //  background-color: $main;
+      //  color: #fff;
+      //}
 
-      &:hover {
-        background-color: $main;
+      &:before {
         color: #fff;
       }
+    }
+
+    .btns-login-user {
+
+      .login,
+      > .register {
+        --primary-color: #fff;
+        --secondary-color: #fff;
+      }
+    }
+
+    .header-wrapper {
+      transform: translate3d(0, 0, 0);
     }
   }
 
@@ -506,7 +546,10 @@
   }
 
   .special-site-header & {
-    margin-left: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 0;
+    }
   }
 
   .avn-style & {
@@ -1713,37 +1756,6 @@
   }
 
   &.special-site-header {
-
-    #site_header {
-      display: block;
-      position: fixed;
-      left: 0; right: 0;
-      top: 0;
-
-      .header_container {
-
-        @include media-breakpoint-down($desktop-breakpoint) {
-          background-color: transparent;
-        }
-      }
-
-      .btns-login-user {
-
-        .login,
-        > .register {
-          --primary-color: #fff;
-          --secondary-color: #fff;
-        }
-      }
-
-      .header-wrapper {
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    &.profile-page {
-
-    }
 
     .header-scrolled {
 

@@ -2,7 +2,7 @@
 
 .following-page {
 
-  .profile {
+  .special-container {
 
     &:before {
 
@@ -79,7 +79,7 @@
     }
   }
 
-  .profile {
+  .special-container {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;

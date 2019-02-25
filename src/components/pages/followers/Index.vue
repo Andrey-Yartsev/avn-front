@@ -2,7 +2,7 @@
   <div class="loader-container" v-if="!profile">
     <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
-  <div class="profile" v-else>
+  <div class="special-container" v-else>
     <router-link class="addPost-btn-float" to="/addPost" />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" v-if="$mq === 'desktop'" />

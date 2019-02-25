@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="special-container">
     <div class="white-bg-block">
       <div class="bg-profile size-lg">
         <div class="bg-wrap bg-color bg-gradient_standart">
