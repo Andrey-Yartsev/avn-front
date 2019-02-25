@@ -29,7 +29,9 @@ import FollowersPage from "./components/pages/followers/Index";
 import StaticPage from "./components/pages/static/Index";
 import ContactsPage from "./components/pages/static/Contacts";
 import StatPage from "./components/statistics/Page";
-import HelpCenterPage from "./components/pages/helpCenter/Index";
+import HelpCenterHomePage from "./components/pages/helpCenter/Home";
+import HelpCenterArticlePage from "./components/pages/helpCenter/Article";
+import HelpCenterSearchPage from "./components/pages/helpCenter/Search";
 
 import Auth from "./auth";
 import Profile from "./profile";
@@ -387,7 +389,25 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/support",
-    component: HelpCenterPage,
+    component: HelpCenterHomePage,
+    meta: {
+      staticPage: true,
+      cssName: "support"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/support/search/:text",
+    component: HelpCenterSearchPage,
+    meta: {
+      staticPage: true,
+      cssName: "support"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/support/article/:id",
+    component: HelpCenterArticlePage,
     meta: {
       staticPage: true,
       cssName: "support"

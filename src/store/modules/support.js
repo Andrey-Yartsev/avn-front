@@ -2,9 +2,21 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 
-const state = {};
-const actions = {};
-const mutations = {};
+const state = {
+  searchText: null
+};
+
+const actions = {
+  search({ commit }, searchText) {
+    commit("setSearchText", searchText);
+  }
+};
+
+const mutations = {
+  setSearchText(state, searchText) {
+    state.setSearchText = searchText;
+  }
+};
 
 createRequestAction({
   prefix: "fetch",
