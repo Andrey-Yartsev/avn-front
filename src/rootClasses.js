@@ -12,7 +12,12 @@ export default {
   explore: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob"],
   chat: ["chat-page", "has-page-footer"],
-  userProfile: ["profile-page", "no-site-header_mob", "special-site-header", "reset-sticky-gap"],
+  userProfile: [
+    "profile-page",
+    "no-site-header_mob",
+    "special-site-header",
+    "reset-sticky-gap"
+  ],
   myProfile: ["profile-page"],
   staticPage: ["static-page"],
   contact: ["static-page", "contact-page"],
