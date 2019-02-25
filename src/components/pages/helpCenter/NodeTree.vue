@@ -10,8 +10,13 @@
     -->
     <span class="label">{{ node.title }}</span>
 
-    <ul v-if="node.items && node.items.length">
-      <node v-for="child in node.items" :node="child" :key="child.id" />
+    <ul v-if="node.items && node.items.length" :class="'level-' + level">
+      <node
+        v-for="child in node.items"
+        :node="child"
+        :key="child.id"
+        :level="level + 1"
+      />
     </ul>
   </li>
 </template>
@@ -20,7 +25,11 @@
 export default {
   name: "node",
   props: {
-    node: Object
+    node: Object,
+    level: {
+      type: Number,
+      default: 1
+    }
   }
 };
 </script>
