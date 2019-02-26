@@ -8,10 +8,8 @@
           </div>
         </div>
       </div>
-      <div class="s-container support-content">
-        <div class="container">
-          <slot name="content" />
-        </div>
+      <div>
+        <slot name="content" />
       </div>
       <Footer class="site-footer_main" />
     </div>
