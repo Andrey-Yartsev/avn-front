@@ -229,6 +229,12 @@ form.support-search-form {
   color: #7c8b96;
   overflow: hidden;
 
+  @include media-breakpoint-up($desktop-breakpoint) {
+    top: 160px;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -245,10 +251,10 @@ form.support-search-form {
       }
 
       > .label {
-        font-size: 18px;
+        font-size: 17px;
         background: #f8f9fa;
         color: #000;
-        padding: 12px 36px 12px 14px;
+        padding: 12px 32px 12px 14px;
         word-wrap: break-word;
 
         &:after {
