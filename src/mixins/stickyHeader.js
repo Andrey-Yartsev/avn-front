@@ -27,7 +27,7 @@ export default {
         height = chatHeader.getBoundingClientRect().height;
       }
 
-      const st = pageYOffset || scrollTop || e.target.scrollTop;
+      const st = pageYOffset || scrollTop || e.target.scrollTop || 0;
 
       if (st > this.lastScrollTop) {
         if (st > height) {
