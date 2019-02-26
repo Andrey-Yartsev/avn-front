@@ -28,6 +28,9 @@ export default {
   created() {
     const postId = +this.$route.params.id;
     this.$store.dispatch("postPage/getPost", { postId });
+  },
+  beforeDestroy() {
+    this.$store.dispatch("postPage/resetPageState");
   }
 };
 </script>
