@@ -195,6 +195,8 @@ export default {
       if (mediaFiles.length) {
         opt.mediaFile = mediaFiles[0];
       }
+      this.price = "";
+      this.priceIsSet = false;
       this.$emit("send", opt);
     },
     closeTip() {
