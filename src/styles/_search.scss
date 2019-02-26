@@ -180,3 +180,17 @@
     }
   }
 }
+
+.label-counter {
+  position: absolute;
+  right: -15px;
+  top: -5px;
+  color: #fff;
+  background-color: $secondary-color;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 7px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}

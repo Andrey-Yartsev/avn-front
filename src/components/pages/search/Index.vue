@@ -11,7 +11,7 @@
               class="content-nav__item"
             >
               {{ v.title }}
-              <span v-if="summary[`${v.name}Count`]">{{
+              <span v-if="summary[`${v.name}Count`]" class="label-counter">{{
                 summary[`${v.name}Count`]
               }}</span>
             </router-link>
