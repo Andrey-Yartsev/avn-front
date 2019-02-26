@@ -24,9 +24,9 @@
                 <div class="search-results-support">
                   <ol v-if="results.length">
                     <li v-for="v in results" :key="v.id">
-                      <router-link :to="'/support/article/' + v.id"><span>{{
-                        v.title
-                      }}</span></router-link>
+                      <router-link :to="'/support/article/' + v.id"
+                        ><span>{{ v.title }}</span></router-link
+                      >
                     </li>
                   </ol>
                 </div>
