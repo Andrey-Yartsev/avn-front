@@ -11,9 +11,9 @@
               class="content-nav__item"
             >
               {{ v.title }}
-              <span v-if="summary[`${v.name}Count`]" class="label-counter">{{
-                summary[`${v.name}Count`]
-              }}</span>
+              <span v-if="summary[`${v.name}Count`]" class="label-counter">
+                {{ countHelper(+summary[`${v.name}Count`]) }}
+              </span>
             </router-link>
             <span class="content-nav__item disabled" v-bind:key="v.name" v-else>
               {{ v.title }}
@@ -158,6 +158,9 @@ export default {
     },
     infinityScrollGetDataMethod() {
       this.searchNext();
+    },
+    countHelper(count) {
+      return count < 100 ? count : "99+";
     }
   },
 
