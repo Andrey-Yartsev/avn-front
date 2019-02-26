@@ -56,8 +56,6 @@ form.support-search-form {
   }
 
   .col {
-    display: flex;
-    padding: 0 10px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-bottom: 30px;
@@ -218,110 +216,244 @@ form.support-search-form {
 }
 
 .questions-list {
+  border: 1px solid rgba(124, 139, 150, 0.2);
+  border-radius: 6px;
+  color: #7c8b96;
+  margin: 10px 0 0;
+  overflow: hidden;
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-
-    ul {
-      //display: none;
-
-      ul {
-        //display: none;
-
-        ul {
-          margin-right: 34px;
-
-          .label {
-
-            &:after {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-
-    li {
-      border-bottom: 1px solid rgba($gray, 0.2);
-
-      &:last-child {
-        margin-bottom: 20px;
-        border-bottom: none;
-      }
-    }
   }
 
   > ul {
 
-    > li {
+    > .node-tree {
+      border-top: 1px solid rgba(124, 139, 150, 0.2);
+
+      &:first-child {
+        border-top: none;
+      }
 
       > .label {
-        font-size: 20px;
-        padding: 10px 34px 10px 14px;
-        opacity: 1;
+        font-size: 21px;
+        background: #f8f9fa;
+        color: #000;
+        padding: 12px 36px 12px 14px;
+        word-wrap: break-word;
 
         &:after {
-          content: "\E608";
-          font-size: 24px;
+          content: "\E646";
+          position: absolute;
           right: 6px;
-          top: 6px;
+          font-size: 24px;
+          top: 50%;
+          @include icon-font;
+          transform: translate(0, -50%);
+          color: $secondary-color;
         }
       }
 
-      > ul {
-        margin-left: 20px;
+      &.selected {
 
-        > li {
-
-          > .label {
-            font-size: 18px;
-          }
-
-          > ul {
-            margin-left: 20px;
-
-            > li {
-
-              > .label {
-                margin-top: 5px;
-              }
-
-              > ul {
-                margin-left: 20px;
-              }
-            }
-          }
+        .level-1 {
+          max-height: 100%;
+          opacity: 1;
         }
       }
-    }
-  }
-
-  .node-tree {
-    //border-bottom: 1px solid rgba($gray, 0.2);
-
-    &:last-child {
-      //border-bottom: none;
     }
   }
 
   .label {
-    padding: 6px 34px 6px 14px;
+    font-weight: 300;
     display: block;
-    opacity: .5;
-    font-weight: 400;
     position: relative;
+  }
 
-    &:after {
-      content: "\E646";
-      @include icon-font;
-      position: absolute;
-      right: 10px;
-      top: 5px;
-      font-size: 16px;
+  .level-1 {
+    position: relative;
+    width: 100%;
+    max-height: 0;
+    opacity: 0;
+    transition: all .3s;
+
+    > .node-tree {
+      border-top: 1px solid rgba(124, 139, 150, 0.2);
+      width: inherit;
+
+      > .label {
+        cursor: pointer;
+        position: relative;
+        padding: 10px 34px 10px 14px;
+        font-weight: 400;
+
+        &:after {
+          content: "\E643";
+          position: absolute;
+          right: 6px;
+          font-size: 24px;
+          top: 50%;
+          @include icon-font;
+          transform: translate(0, -50%);
+          opacity: .5;
+        }
+      }
     }
   }
+
+  .level-2 {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    bottom: 0;
+    width: inherit;
+
+    > .node-tree {
+      border-top: 1px solid rgba(124, 139, 150, 0.2);
+      width: inherit;
+
+      > .label {
+        cursor: pointer;
+        position: relative;
+        padding: 10px 34px 10px 14px;
+
+        &:after {
+          content: "\E643";
+          position: absolute;
+          right: 6px;
+          font-size: 24px;
+          top: 50%;
+          @include icon-font;
+          transform: translate(0, -50%);
+          opacity: .5;
+        }
+      }
+    }
+  }
+
+  .level-3 {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    bottom: 0;
+    width: inherit;
+
+    > .node-tree {
+      width: inherit;
+
+      > .label {
+        cursor: pointer;
+        padding: 3px 0 12px 24px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  //ul {
+  //  list-style: none;
+  //  padding: 0;
+  //  margin: 0;
+  //
+  //  ul {
+  //    //display: none;
+  //
+  //    ul {
+  //      //display: none;
+  //
+  //      ul {
+  //        margin-right: 34px;
+  //
+  //        .label {
+  //
+  //          &:after {
+  //            display: none;
+  //          }
+  //        }
+  //      }
+  //    }
+  //  }
+  //
+  //  li {
+  //    border-bottom: 1px solid rgba($gray, 0.2);
+  //
+  //    &:last-child {
+  //      margin-bottom: 20px;
+  //      border-bottom: none;
+  //    }
+  //  }
+  //}
+  //
+  //> ul {
+  //
+  //  > li {
+  //
+  //    > .label {
+  //      font-size: 20px;
+  //      padding: 10px 34px 10px 14px;
+  //      opacity: 1;
+  //
+  //      &:after {
+  //        content: "\E608";
+  //        font-size: 24px;
+  //        right: 6px;
+  //        top: 6px;
+  //      }
+  //    }
+  //
+  //    > ul {
+  //      margin-left: 20px;
+  //
+  //      > li {
+  //
+  //        > .label {
+  //          font-size: 18px;
+  //        }
+  //
+  //        > ul {
+  //          margin-left: 20px;
+  //
+  //          > li {
+  //
+  //            > .label {
+  //              margin-top: 5px;
+  //            }
+  //
+  //            > ul {
+  //              margin-left: 20px;
+  //            }
+  //          }
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
+  //
+  //.node-tree {
+  //  //border-bottom: 1px solid rgba($gray, 0.2);
+  //
+  //  &:last-child {
+  //    //border-bottom: none;
+  //  }
+  //}
+  //
+  //.label {
+  //  padding: 6px 34px 6px 14px;
+  //  display: block;
+  //  opacity: .5;
+  //  font-weight: 400;
+  //  position: relative;
+  //
+  //  &:after {
+  //    content: "\E646";
+  //    @include icon-font;
+  //    position: absolute;
+  //    right: 10px;
+  //    top: 5px;
+  //    font-size: 16px;
+  //  }
+  //}
 }
 
 .s-breadcrumbs {
@@ -370,6 +502,11 @@ form.support-search-form {
 .support-cards {
   padding: 0 0 6px;
   color: #7c8b96;
+
+  .col {
+    display: flex;
+    padding: 0 10px;
+  }
 }
 
 .support-card {

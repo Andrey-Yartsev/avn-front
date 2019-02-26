@@ -1,7 +1,7 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <div class="s-breadcrumbs support-content">
+      <div class="s-breadcrumbs">
         <div class="container">
           <div class="breadcrumbs">
             <router-link to="/support">Help Center</router-link>
