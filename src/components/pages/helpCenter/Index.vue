@@ -222,6 +222,9 @@ export default {
   computed: {
     items() {
       return this.$store.state.support.items;
+    },
+    siteTitle() {
+      return process.env.VUE_APP_TITLE;
     }
   },
   mounted() {
