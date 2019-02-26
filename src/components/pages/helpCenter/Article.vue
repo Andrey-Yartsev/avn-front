@@ -5,22 +5,30 @@
         <Loader :fullscreen="false" text="" class="transparent small" />
       </div>
       <template v-else>
-        <div class="breadcrumbs" v-if="rootItem">
-          <router-link to="/support">Help Center</router-link>
-          <a>{{ rootItem.title }}</a>
-          <span>{{ item.title }}</span>
-        </div>
-        <div class="row">
-          <div class="col col-1-4">
-            <div class="questions-list">
-              <ul v-if="items && items.length">
-                <NodeTree v-for="node in items" :node="node" :key="node.id" />
-              </ul>
+        <div class="s-breadcrumbs">
+          <div class="container">
+            <div class="breadcrumbs" v-if="rootItem">
+              <router-link to="/support">Help Center</router-link>
+              <a>{{ rootItem.title }}</a>
+              <span>{{ item.title }}</span>
             </div>
           </div>
-          <div class="col col-3-4">
-            <h3>{{ item.title }} {{ item.rootId }}</h3>
-            <span v-html="item.description"></span>
+        </div>
+        <div class="s-container support-content">
+          <div class="container">
+            <div class="row">
+              <div class="col col-1-4">
+                <div class="questions-list">
+                  <ul v-if="items && items.length">
+                    <NodeTree v-for="node in items" :node="node" :key="node.id" />
+                  </ul>
+                </div>
+              </div>
+              <div class="col col-3-4">
+                <h3>{{ item.title }}</h3>
+                <span v-html="item.description"></span>
+              </div>
+            </div>
           </div>
         </div>
       </template>
