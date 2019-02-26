@@ -168,6 +168,14 @@ form.support-search-form {
       line-height: 37px;
     }
   }
+
+  h3 {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 23px;
+      font-size: 26px;
+    }
+  }
 }
 
 .popular-questions {
