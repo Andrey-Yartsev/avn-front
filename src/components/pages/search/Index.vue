@@ -177,6 +177,32 @@ export default {
       this.$router.push(`/search/${this.type}/${this.localQuery}`);
       this.getSummary();
       this.search();
+    },
+    summary() {
+      let goTo;
+
+      if (this.summary[`${this.type}Count`] === 0) {
+        switch (true) {
+          case this.summary.photosCount > 0:
+            goTo = "photos";
+            break;
+          case this.summary.videosCount > 0:
+            goTo = "videos";
+            break;
+          case this.summary.postsCount > 0:
+            goTo = "posts";
+            break;
+          case this.summary.usersCount > 0:
+            goTo = "users";
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (goTo) {
+        this.$router.push(`/search/${goTo}/${this.localQuery}`);
+      }
     }
   },
 
