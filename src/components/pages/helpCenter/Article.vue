@@ -30,7 +30,7 @@
               </div>
               <div class="col col-3-4">
                 <h3>{{ item.title }}</h3>
-                <span v-html="item.description"></span>
+                <div v-html="item.description" class="support-text"></div>
               </div>
             </div>
           </div>
