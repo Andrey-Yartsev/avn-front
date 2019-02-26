@@ -8,7 +8,9 @@
     shortDescription: "Learn the basics to help you make the most of OnMyTeam.com"
     title: "Using A
     -->
-    <span class="label">{{ node.title }}</span>
+    <router-link :to="'/support/article/' + node.id" class="label">{{
+      node.title
+    }}</router-link>
 
     <ul v-if="node.items && node.items.length" :class="'level-' + level">
       <node

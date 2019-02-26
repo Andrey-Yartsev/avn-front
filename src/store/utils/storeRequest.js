@@ -60,9 +60,15 @@ const storeRequest = (
   });
 };
 
-const buildInitState = (prefix, state, resultKey, defaultResultValue) => {
+const buildInitState = (
+  prefix,
+  state,
+  resultKey,
+  defaultResultValue,
+  defaultLoading
+) => {
   state[prefix + "Error"] = null;
-  state[prefix + "Loading"] = false;
+  state[prefix + "Loading"] = defaultLoading || false;
   state[prefix + "Success"] = null;
   if (resultKey && !state[resultKey]) {
     state[resultKey] = defaultResultValue;
@@ -80,6 +86,7 @@ const buildMutations = (prefix, mutations, resultKey) => {
     state[prefix + "Loading"] = true;
   };
   mutations[prefix + "Requested"] = state => {
+    console.log(prefix + "Loading");
     state[prefix + "Loading"] = false;
   };
   mutations[prefix + "Success"] = (state, value) => {
@@ -112,6 +119,7 @@ const createRequestAction = ({
   resultKey,
   resultConvert,
   defaultResultValue,
+  defaultLoading,
   paramsToOptions,
   paramsToPath
 }) => {
@@ -154,7 +162,7 @@ const createRequestAction = ({
     defaultResultValue = null;
   }
 
-  buildInitState(prefix, state, resultKey, defaultResultValue);
+  buildInitState(prefix, state, resultKey, defaultResultValue, defaultLoading);
   buildMutations(prefix, mutations, resultKey);
 };
 

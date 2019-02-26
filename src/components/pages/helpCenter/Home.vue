@@ -12,7 +12,7 @@
           </div>
           <div class="support-cards cols">
             <div class="col col-1-4">
-              <a href="#" class="support-card">
+              <router-link to="/support/article/1" class="support-card">
                 <span class="support-card__icon support-card__icon_logo">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 51">
                     <g id="Layer_2" data-name="Layer 2">
@@ -49,10 +49,10 @@
                   >Learn the basics to help you make the most of View.me</span
                 >
                 <span class="support-card__btn">More</span>
-              </a>
+              </router-link>
             </div>
             <div class="col col-1-4">
-              <a href="#" class="support-card">
+              <router-link to="/support/article/2" class="support-card">
                 <span
                   class="support-card__icon support-card__icon_account"
                 ></span>
@@ -61,20 +61,20 @@
                   >Manage your profile and account settings</span
                 >
                 <span class="support-card__btn">More</span>
-              </a>
+              </router-link>
             </div>
             <div class="col col-1-4">
-              <a href="#" class="support-card">
+              <router-link to="/support/article/3" class="support-card">
                 <span class="support-card__icon support-card__icon_fix"></span>
                 <span class="support-card__title">Fix a problem</span>
                 <span class="support-card__text"
                   >Find solutions to the most common problems</span
                 >
                 <span class="support-card__btn">More</span>
-              </a>
+              </router-link>
             </div>
             <div class="col col-1-4">
-              <a href="#" class="support-card">
+              <router-link to="/support/article/4" class="support-card">
                 <span
                   class="support-card__icon support-card__icon_report"
                 ></span>
@@ -83,7 +83,7 @@
                   >Understand the Twitter Rules and report violations</span
                 >
                 <span class="support-card__btn">More</span>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

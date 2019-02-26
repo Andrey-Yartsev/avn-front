@@ -1,26 +1,29 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <div class="breadcrumbs">
-        <router-link to="/support">Help Center</router-link>
-        <span>Article</span>
-      </div>
       <div class="loader-container" v-if="loading">
         <Loader :fullscreen="false" text="" class="transparent small" />
       </div>
-      <div v-else class="row">
-        <div class="col col-1-4">
-          <div class="questions-list">
-            <ul v-if="items && items.length">
-              <NodeTree v-for="node in items" :node="node" :key="node.id" />
-            </ul>
+      <template v-else>
+        <div class="breadcrumbs" v-if="rootItem">
+          <router-link to="/support">Help Center</router-link>
+          <a>{{ rootItem.title }}</a>
+          <span>{{ item.title }}</span>
+        </div>
+        <div class="row">
+          <div class="col col-1-4">
+            <div class="questions-list">
+              <ul v-if="items && items.length">
+                <NodeTree v-for="node in items" :node="node" :key="node.id" />
+              </ul>
+            </div>
+          </div>
+          <div class="col col-3-4">
+            <h3>{{ item.title }} {{ item.rootId }}</h3>
+            <span v-html="item.description"></span>
           </div>
         </div>
-        <div class="col col-3-4">
-          <h3>{{ item.title }}</h3>
-          <span v-html="item.description"></span>
-        </div>
-      </div>
+      </template>
     </template>
   </ContentWrapper>
 </template>
@@ -39,12 +42,18 @@ export default {
   },
   data() {
     return {
-      loading: true,
       item: null,
-      localSearchText: null
+      initialized: false,
+      rootItem: {}
     };
   },
   computed: {
+    fetchLoading() {
+      return this.$store.state.support.fetchLoading;
+    },
+    loading() {
+      return this.fetchLoading || !this.initialized;
+    },
     items() {
       return this.$store.state.support.items;
     },
@@ -58,16 +67,49 @@ export default {
   watch: {
     searchText(searchText) {
       this.search(searchText);
+    },
+    id() {
+      this.init();
+    },
+    fetchLoading: {
+      immediate: true,
+      handler(loading) {
+        console.log("fetchLoading", loading);
+        if (loading) {
+          return;
+        }
+        this.init();
+      }
     }
   },
   methods: {
-    findR(items, id) {
+    init() {
+      this.initialized = false;
+      const item = this.findR(this.items, this.id);
+      if (!item.rootId) {
+        this.redirectToDeepestLeaf(item);
+        return;
+      }
+      if (item) {
+        this.rootItem = this.findR(this.items, item.rootId);
+        this.item = item;
+        this.initialized = true;
+      }
+    },
+    findR(items, id, rootId) {
       for (let item of items) {
         if (item.id === id) {
+          item.rootId = rootId || null;
           return item;
         }
+        let _rootId;
         if (item.items && item.items.length) {
-          let r = this.findR(item.items, id);
+          if (!rootId) {
+            _rootId = item.id;
+          } else {
+            _rootId = rootId;
+          }
+          let r = this.findR(item.items, id, _rootId);
           if (r) {
             return r;
           }
@@ -75,42 +117,21 @@ export default {
       }
       return null;
     },
-    searchR(items) {
-      for (let item of items) {
-        if (this.matchSearch(item)) {
-          return item;
-        }
-        if (item.items && item.items.length) {
-          let r = this.searchR(item.items);
-          if (r) {
-            return r;
-          }
+    redirectToDeepestLeaf(item) {
+      const deepestItem = this.findDeepestLeafR(item);
+      this.$router.push("/support/article/" + deepestItem.id);
+    },
+    findDeepestLeafR(item) {
+      if (!item.items || !item.items.length) {
+        return item;
+      }
+      for (let _item of item.items) {
+        let r = this.findDeepestLeafR(_item);
+        if (r) {
+          return r;
         }
       }
-      return null;
-    },
-    escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-    },
-    search(text) {
-      this.localSearchText = this.escapeRegExp(text);
-      this.searchR(this.items);
-    },
-    matchSearch(item) {
-      const re = new RegExp(this.localSearchText);
-      if (item.description.match(re)) {
-        return true;
-      } else if (item.title.match(re)) {
-        return true;
-      }
-      return false;
     }
-  },
-  mounted() {
-    this.$store.dispatch("support/fetch").then(() => {
-      this.loading = false;
-      this.item = this.findR(this.items, this.id);
-    });
   }
 };
 </script>

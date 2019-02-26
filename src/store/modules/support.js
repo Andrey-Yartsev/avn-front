@@ -23,6 +23,7 @@ createRequestAction({
   apiPath: "supports",
   requestType: "no-token",
   resultKey: "items",
+  defaultLoading: true,
   state,
   mutations,
   actions,
