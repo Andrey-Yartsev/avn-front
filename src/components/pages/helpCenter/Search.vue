@@ -1,33 +1,41 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <div class="breadcrumbs">
-        <router-link to="/support">Help Center</router-link> >
-        <span>Search</span>
-      </div>
-      <div class="error" v-if="error">
-        {{ error }}
-      </div>
-      <template v-else>
-        <div class="loader-container" v-if="loading">
-          <Loader :fullscreen="false" text="" class="transparent small" />
+      <div class="s-breadcrumbs support-content">
+        <div class="container">
+          <div class="breadcrumbs">
+            <router-link to="/support">Help Center</router-link>
+            <span>Search</span>
+          </div>
         </div>
-        <template v-else>
-          <template v-if="results.length">
-            Search results:
-            <ol v-if="results.length">
-              <li v-for="v in results" :key="v.id">
-                <router-link :to="'/support/article/' + v.id">{{
-                  v.title
-                }}</router-link>
-              </li>
-            </ol>
-          </template>
+      </div>
+      <div class="s-container support-content">
+        <div class="container">
+          <div class="error" v-if="error">
+            {{ error }}
+          </div>
           <template v-else>
-            Nothing found
+            <div class="loader-container" v-if="loading">
+              <Loader :fullscreen="false" text="" class="transparent small" />
+            </div>
+            <template v-else>
+              <template v-if="results.length">
+                Search results:
+                <ol v-if="results.length">
+                  <li v-for="v in results" :key="v.id">
+                    <router-link :to="'/support/article/' + v.id">{{
+                      v.title
+                    }}</router-link>
+                  </li>
+                </ol>
+              </template>
+              <template v-else>
+                Nothing found
+              </template>
+            </template>
           </template>
-        </template>
-      </template>
+        </div>
+      </div>
     </template>
   </ContentWrapper>
 </template>

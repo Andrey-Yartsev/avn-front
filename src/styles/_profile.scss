@@ -635,7 +635,7 @@
     display: block;
     padding: 0;
     margin: 0 0 25px;
-
+    position: -webkit-sticky;
     position: sticky;
     top: 80px;
   }

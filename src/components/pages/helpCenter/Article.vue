@@ -2,7 +2,7 @@
   <ContentWrapper>
     <template slot="content">
       <div class="breadcrumbs">
-        <router-link to="/support">Help Center</router-link> >
+        <router-link to="/support">Help Center</router-link>
         <span>Article</span>
       </div>
       <div class="loader-container" v-if="loading">
