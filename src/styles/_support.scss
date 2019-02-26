@@ -645,6 +645,7 @@ form.support-search-form {
     &-1-4 {
       flex: 0 1 25%;
       width: 25%;
+
       @include media-breakpoint-down($desktop-breakpoint) {
         flex: 0 1 100%;
         width: 100%;

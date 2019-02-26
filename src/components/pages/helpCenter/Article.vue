@@ -16,11 +16,15 @@
         </div>
         <div class="s-container support-content">
           <div class="container">
-            <div class="row">
+            <div class="cols">
               <div class="col col-1-4">
                 <div class="questions-list">
                   <ul v-if="items && items.length">
-                    <NodeTree v-for="node in items" :node="node" :key="node.id" />
+                    <NodeTree
+                      v-for="node in items"
+                      :node="node"
+                      :key="node.id"
+                    />
                   </ul>
                 </div>
               </div>
