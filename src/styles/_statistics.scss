@@ -30,12 +30,17 @@
   .box {
     display: flex;
     flex-direction: column;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2) inset;
-    border-radius: 6px;
-    margin: 0 0 18px;
+    background: $white;
+    box-shadow: 0 3px 8px rgba(#000, 0.1);
+    margin: 0 -10px 18px;
     position: relative;
-    width: 100%;
+    width: calc(100% + 20px);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-radius: 6px;
+      margin-left: 0;
+      width: 100%;
+    }
   }
 
   .box-title {
