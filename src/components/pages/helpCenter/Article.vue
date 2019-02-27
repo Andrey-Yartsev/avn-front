@@ -25,7 +25,10 @@
                       :node="node"
                       :key="node.id"
                       :class="{ selected: selectedRootNodeId === node.id }"
-                      @click="clickRootNode(node.id)"
+                      :click="nodeClick"
+                      :selectedRootId="selectedRootNodeId"
+                      :level1Opened="!!selectedRootNodeId"
+                      :level2Opened="level2Opened"
                     />
                   </ul>
                 </div>
@@ -59,7 +62,8 @@ export default {
       item: null,
       initialized: false,
       rootItem: {},
-      selectedRootNodeId: null
+      selectedRootNodeId: null,
+      level2Opened: false
     };
   },
   computed: {
@@ -146,12 +150,17 @@ export default {
         }
       }
     },
-    clickRootNode(id) {
-      if (this.selectedRootNodeId && this.selectedRootNodeId === id) {
-        this.selectedRootNodeId = null;
-        return;
+    nodeClick({ level, id }) {
+      console.log(level, id);
+      if (level === 1) {
+        if (this.selectedRootNodeId && this.selectedRootNodeId === id) {
+          this.selectedRootNodeId = null;
+          return;
+        }
+        this.selectedRootNodeId = id;
+      } else if (level === 2) {
+        this.level2Opened = true;
       }
-      this.selectedRootNodeId = id;
     }
   }
 };
