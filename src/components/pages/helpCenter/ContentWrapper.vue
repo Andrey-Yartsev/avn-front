@@ -1,5 +1,10 @@
 <template>
   <div class="special-container">
+    <div class="sticky-header-controls">
+      <div class="profile-name__header">
+        Help Center
+      </div>
+    </div>
     <div class="white-bg-block">
       <div class="bg-profile size-lg">
         <div class="bg-wrap bg-color bg-gradient_standart">

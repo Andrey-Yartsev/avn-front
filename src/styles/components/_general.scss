@@ -311,12 +311,15 @@ video {
 }
 
 .main-container {
-  //height: 100%;
   min-height: 100%;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     display: flex;
     flex-direction: column;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 100%;
   }
 
   .scroll-bottom & {
