@@ -91,6 +91,7 @@ import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Footer from "@/components/footer/Index.vue";
+import InfinityScrollMixin from "@/mixins/infinityScroll";
 
 const typeTitles = {
   all: "Notifications",
@@ -106,7 +107,7 @@ const typeTitles = {
 export default {
   name: "Notifications",
 
-  mixins: [ModalRouterParams, User],
+  mixins: [ModalRouterParams, User, InfinityScrollMixin],
 
   components: {
     VuePerfectScrollbar,
@@ -115,19 +116,26 @@ export default {
   },
 
   computed: {
+    loadingName() {
+      return "fetchLoading";
+    },
+    store() {
+      return this.$store.state.notif;
+    },
     type() {
       return this.routeParams.type || "all";
     },
     loading() {
       return this.$store.state.notif.fetchLoading;
     },
+    allDataReceived() {
+      return this.$store.state.notif.allDataReceived;
+    },
     items() {
-      let n = 0;
-      return this.$store.state.notif.items.map(v => {
-        n++;
-        v.id = n;
-        return v;
-      });
+      return this.$store.state.notif.posts.map((v, key) => ({
+        ...v,
+        id: key
+      }));
     },
     menu() {
       const menuTitles = Object.entries(typeTitles).map(v => {
@@ -147,17 +155,22 @@ export default {
   methods: {
     time(date) {
       return dateFns.distanceInWordsStrict(new Date(), date);
+    },
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("notif/getPosts", { type: this.type });
     }
   },
 
   watch: {
     type() {
-      this.$store.dispatch("notif/fetch", this.type);
+      this.$store.commit("notif/reset");
+      this.lastYOffset = 0;
+      this.$store.dispatch("notif/getPosts", { type: this.type });
     }
   },
 
   created() {
-    this.$store.dispatch("notif/fetch", this.type).then(() => {
+    this.$store.dispatch("notif/getPosts", { type: this.type }).then(() => {
       this.$store.dispatch("auth/extendUser", { hasNotifications: false });
     });
   }
