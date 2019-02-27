@@ -157,6 +157,9 @@ export default {
       return this.inputAcceptTypes.photo;
     },
     isMuted() {
+      if (!this.withUser) {
+        return false;
+      }
       return this.withUser.isMuted;
     }
   },
