@@ -42,7 +42,10 @@
           to="/settings/notifications"
         ></router-link>
       </div>
-      <VuePerfectScrollbar class="popup-content-scroll notifications">
+      <VuePerfectScrollbar
+        class="popup-content-scroll notifications"
+        @ps-scroll-y="scrollFunction"
+      >
         <div
           class="NotificationsView"
           :class="{
@@ -158,6 +161,14 @@ export default {
     },
     infinityScrollGetDataMethod() {
       this.$store.dispatch("notif/getPosts", { type: this.type });
+    },
+    scrollFunction(e) {
+      const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
+      const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
+
+      if (scrolledEnought && !this.loading && !this.allDataReceived) {
+        this.infinityScrollGetDataMethod();
+      }
     }
   },
 
