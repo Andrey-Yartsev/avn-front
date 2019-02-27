@@ -335,24 +335,27 @@ form.support-search-form {
     background-color: $white;
     display: none;
 
-    > .node-tree {
-      border-top: 1px solid rgba(124, 139, 150, 0.2);
-      width: inherit;
+    > ul {
 
-      > .label {
-        cursor: pointer;
-        position: relative;
-        padding: 10px 34px 10px 14px;
+      > .node-tree {
+        border-top: 1px solid rgba(124, 139, 150, 0.2);
+        width: inherit;
 
-        &:after {
-          content: "\E643";
-          position: absolute;
-          right: 6px;
-          font-size: 24px;
-          top: 50%;
-          @include icon-font;
-          transform: translate(0, -50%);
-          opacity: .5;
+        > .label {
+          cursor: pointer;
+          position: relative;
+          padding: 10px 34px 10px 14px;
+
+          &:after {
+            content: "\E643";
+            position: absolute;
+            right: 6px;
+            font-size: 24px;
+            top: 50%;
+            @include icon-font;
+            transform: translate(0, -50%);
+            opacity: .5;
+          }
         }
       }
     }
@@ -367,13 +370,16 @@ form.support-search-form {
     background-color: $white;
     display: none;
 
-    > .node-tree {
-      width: inherit;
+    > ul {
 
-      > .label {
-        cursor: pointer;
-        padding: 3px 0 12px 24px;
-        font-size: 12px;
+      > .node-tree {
+        width: inherit;
+
+        > .label {
+          cursor: pointer;
+          padding: 3px 0 12px 24px;
+          font-size: 12px;
+        }
       }
     }
   }
