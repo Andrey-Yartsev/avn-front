@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fl-height-content">
     <MobileHeader />
 
     <div class="boxes">
@@ -224,6 +224,7 @@
         </div>
       </div>
     </div>
+    <Footer class="site-footer_main" />
   </div>
 </template>
 
@@ -238,6 +239,8 @@ import MobileHeader from "@/components/header/Mobile";
 import CalcCount from "./calcCount";
 import BuildScale from "./buildScale";
 import ClickOutside from "vue-click-outside";
+
+import Footer from "@/components/footer/Index";
 
 import {
   chartTypes,
@@ -309,7 +312,8 @@ export default {
   },
   components: {
     PostsModal,
-    MobileHeader
+    MobileHeader,
+    Footer
   },
   data() {
     return {

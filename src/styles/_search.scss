@@ -12,9 +12,9 @@
   #content {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      min-height: calc(100% - 75px);
-      display: flex;
-      flex-direction: column;
+      //min-height: calc(100% - 75px);
+      //display: flex;
+      //flex-direction: column;
     }
   }
 }

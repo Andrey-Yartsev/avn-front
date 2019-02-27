@@ -1620,7 +1620,23 @@
     }
   }
 
+  .fl-height-content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      flex: 1;
+      min-height: calc(100% - 75px);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   #content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: calc(100% - 75px);
+      display: flex;
+      flex-direction: column;
+    }
 
     > div:not(.chatCollectionContent) {
 

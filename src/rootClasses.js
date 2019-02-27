@@ -37,5 +37,6 @@ export default {
   search: ["search-page", "has-page-footer"],
   stream: ["stream-page"],
   storiesPage: ["story-page"],
-  support: ["support-page", "special-site-header", "reset-sticky-gap"]
+  support: ["support-page", "special-site-header", "reset-sticky-gap"],
+  statistics: ["has-page-footer"]
 };
