@@ -15,7 +15,10 @@
               }
             "
           >
-            <div class="more-functions__overlay"></div>
+            <div
+              class="more-functions__overlay"
+              @click="periodOptionsOpened = false"
+            ></div>
             <div
               class="more-functions__btn more-functions__btn_arrow"
               @click="periodOptionsOpened = !periodOptionsOpened"
