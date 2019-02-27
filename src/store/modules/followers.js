@@ -111,30 +111,24 @@ actions.unblock = ({ commit, dispatch }, userId) => {
 };
 
 actions.mute = ({ commit, dispatch }, user) => {
-  const prefix = user.subscribedBy ? "subs" : "follower";
-  dispatch(`user/${prefix}Mute`, user.id, { root: true }).then(r => {
+  dispatch(`user/mute`, user.id, { root: true }).then(r => {
     if (r.success) {
       commit("extendUser", {
         userId: user.id,
         data: {
-          followedOn: {
-            isMuted: true
-          }
+          isMuted: true
         }
       });
     }
   });
 };
 actions.unmute = ({ commit, dispatch }, user) => {
-  const prefix = user.subscribedBy ? "subs" : "follower";
-  dispatch(`user/${prefix}Unmute`, user.id, { root: true }).then(r => {
+  dispatch(`user/unmute`, user.id, { root: true }).then(r => {
     if (r.success) {
       commit("extendUser", {
         userId: user.id,
         data: {
-          followedOn: {
-            isMuted: false
-          }
+          isMuted: false
         }
       });
     }

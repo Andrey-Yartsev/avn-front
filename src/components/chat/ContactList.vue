@@ -9,7 +9,7 @@
         :class="{
           active: v.active,
           unread: !!v.unreadMessagesCount,
-          disabled: _isMuted(v.withUser)
+          disabled: v.withUser.isMuted
         }"
       >
         <div class="avatar avatar_md">
@@ -60,12 +60,11 @@
 import dateFns from "date-fns";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
-import Mute from "./mute";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouterGoto, Mute],
+  mixins: [ModalRouterGoto],
 
   components: {
     VuePerfectScrollbar

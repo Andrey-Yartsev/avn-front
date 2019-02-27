@@ -37,58 +37,28 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "subsMute",
-  apiPath: "subscriptions/{userId}/mute",
+  prefix: "mute",
+  apiPath: "users/{userId}/mute",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  resultKey: "mute",
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "unmute",
+  apiPath: "users/{userId}/mute",
   state,
   mutations,
   actions,
   options: {
     method: "DELETE"
-  },
-  resultKey: "mute",
-  paramsToPath: function(params, path) {
-    return path.replace(/{userId}/, params);
-  }
-});
-
-createRequestAction({
-  prefix: "subsUnmute",
-  apiPath: "subscriptions/{userId}/unmute",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "PUT"
-  },
-  resultKey: "mute",
-  paramsToPath: function(params, path) {
-    return path.replace(/{userId}/, params);
-  }
-});
-
-createRequestAction({
-  prefix: "followerMute",
-  apiPath: "subscriptions/follower/{userId}/mute",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "DELETE"
-  },
-  resultKey: "mute",
-  paramsToPath: function(params, path) {
-    return path.replace(/{userId}/, params);
-  }
-});
-
-createRequestAction({
-  prefix: "followerUnmute",
-  apiPath: "subscriptions/follower/{userId}/unmute",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "PUT"
   },
   resultKey: "unmute",
   paramsToPath: function(params, path) {

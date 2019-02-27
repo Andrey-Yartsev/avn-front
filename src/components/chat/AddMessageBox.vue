@@ -110,12 +110,11 @@ import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import User from "@/mixins/user";
-import Mute from "./mute";
 
 export default {
   name: "ChatAddMesssageBox",
 
-  mixins: [FileUpload, User, Mute],
+  mixins: [FileUpload, User],
 
   components: {
     MediaPreview,
@@ -158,7 +157,7 @@ export default {
       return this.inputAcceptTypes.photo;
     },
     isMuted() {
-      return this._isMuted(this.withUser);
+      return this.withUser.isMuted;
     }
   },
 

@@ -81,7 +81,7 @@ export default {
       return `${protocol}//${hostname}/${this.profile.username}`;
     },
     isMuted() {
-      return this._isMuted(this.profile);
+      return this.profile.isMuted;
     },
     canMute() {
       if (this.isOwner(this.profile.id)) {

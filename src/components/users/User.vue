@@ -1,5 +1,5 @@
 <template>
-  <div class="userView" :class="[{ 'open-dropdown-inside': showDropdawn }]">
+  <div class="userView" :class="[{ 'open-dropdown-inside': showDropdown }]">
     <div class="bg bg-color bg-gradient_light">
       <img v-if="profile.header" :src="profile.header" />
     </div>
@@ -40,8 +40,8 @@
           />
           <UserDropdown
             :profile="profile"
-            @openDropdawn="showDropdawn = true"
-            @hideDropdawn="showDropdawn = false"
+            @openDropdawn="showDropdown = true"
+            @hideDropdawn="showDropdown = false"
             :actionPrefix="actionPrefix"
             class="hidden-mobile"
             v-if="$mq === 'desktop'"
@@ -80,7 +80,7 @@ export default {
 
   data: function() {
     return {
-      showDropdawn: false
+      showDropdown: false
     };
   },
 

@@ -178,12 +178,11 @@ import MobileHeader from "@/components/header/Mobile";
 import ClickOutside from "vue-click-outside";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserHeader from "@/components/header/User";
-import Mute from "./mute";
 
 export default {
   name: "Chat",
 
-  mixins: [User, ModalRouterParams, Mute],
+  mixins: [User, ModalRouterParams],
 
   directives: {
     ClickOutside
@@ -293,7 +292,7 @@ export default {
       return this.$store.state.chat.fetchActiveUserLoading;
     },
     isMuted() {
-      return this._isMuted(this.activeUser);
+      return this.activeUser.isMuted;
     }
   },
 
