@@ -333,6 +333,7 @@ form.support-search-form {
     bottom: 0;
     width: inherit;
     background-color: $white;
+    display: none;
 
     > .node-tree {
       border-top: 1px solid rgba(124, 139, 150, 0.2);
@@ -364,6 +365,7 @@ form.support-search-form {
     bottom: 0;
     width: inherit;
     background-color: $white;
+    display: none;
 
     > .node-tree {
       width: inherit;
