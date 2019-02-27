@@ -1,25 +1,36 @@
 <template>
   <li class="node-tree">
-    <!--
-    description: "<p>Learn the basics to help you make the most of AVN Stars</p> <p>Learn the basics to help you make the most of AVN Stars</p> <p>Learn the basics to help you make the most of AVN Stars</p> <p>Learn the basics to help you make the most of AVN Stars</p> <p>Learn the basics to help you make the most of AVN Stars</p>"
-    icon: "using"
-    id: 1
-    items: Array[7]
-    shortDescription: "Learn the basics to help you make the most of OnMyTeam.com"
-    title: "Using A
-    -->
-    <router-link :to="'/support/article/' + node.id" class="label">{{
-      node.title
-    }}</router-link>
+    <a
+      @click.prevent="titleClick(node.id)"
+      :href="'/support/article/' + node.id"
+      class="label"
+      >{{ node.title }}</a
+    >
 
-    <ul v-if="node.items && node.items.length" :class="'level-' + level">
-      <node
-        v-for="child in node.items"
-        :node="child"
-        :key="child.id"
-        :level="level + 1"
-      />
-    </ul>
+    <template v-if="node.items && node.items.length">
+      <template v-if="level === 2 || level === 3">
+        <div class="scrollbar" :class="'level-' + level">
+          <ul>
+            <node
+              v-for="child in node.items"
+              :node="child"
+              :key="child.id"
+              :level="level + 1"
+            />
+          </ul>
+        </div>
+      </template>
+      <template>
+        <ul :class="ulClass1">
+          <node
+            v-for="child in node.items"
+            :node="child"
+            :key="child.id"
+            :level="level + 1"
+          />
+        </ul>
+      </template>
+    </template>
   </li>
 </template>
 
@@ -31,6 +42,23 @@ export default {
     level: {
       type: Number,
       default: 1
+    }
+  },
+  methods: {
+    titleClick(id) {
+      if (this.level === 1) {
+        this.$emit("click", id);
+      }
+    }
+  },
+  computed: {
+    ulClass1() {
+      const r = {};
+      r["level-" + this.level] = true;
+      if (this.level === 1) {
+        r.mlm100 = true;
+      }
+      return r;
     }
   }
 };

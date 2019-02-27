@@ -19,91 +19,13 @@
             <div class="cols">
               <div class="col col-1-4">
                 <div class="questions-list">
-                  <ul>
-                    <li class="node-tree selected">
-                      <a href="/support/article/1" class="label"
-                        >Using OnMyTeam.com</a
-                      >
-                      <ul class="level-1">
-                        <li class="node-tree">
-                          <a href="/support/article/1" class="label"
-                            >Using OnMyTeam.com</a
-                          >
-                          <div class="level-2 scrollbar">
-                            <ul>
-                              <li class="node-tree">
-                                <a href="/support/article/1" class="label"
-                                  >Using OnMyTeam.com</a
-                                >
-                                <div class="level-3 scrollbar">
-                                  <ul>
-                                    <li class="node-tree">
-                                      <a href="/support/article/1" class="label"
-                                        >Using OnMyTeam.com</a
-                                      >
-                                    </li>
-                                    <li class="node-tree">
-                                      <a href="/support/article/1" class="label"
-                                        >Using OnMyTeam.com</a
-                                      >
-                                    </li>
-                                    <li class="node-tree">
-                                      <a href="/support/article/1" class="label"
-                                        >Using OnMyTeam.com</a
-                                      >
-                                    </li>
-                                  </ul>
-                                </div>
-                              </li>
-                              <li class="node-tree">
-                                <a href="/support/article/1" class="label"
-                                  >Using OnMyTeam.com</a
-                                >
-                              </li>
-                              <li class="node-tree">
-                                <a href="/support/article/1" class="label"
-                                  >Using OnMyTeam.com</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li class="node-tree">
-                          <a href="/support/article/1" class="label"
-                            >Using OnMyTeam.com</a
-                          >
-                        </li>
-                        <li class="node-tree">
-                          <a href="/support/article/1" class="label"
-                            >Using OnMyTeam.com</a
-                          >
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="node-tree">
-                      <a href="/support/article/1" class="label"
-                        >Using OnMyTeam.com</a
-                      >
-                    </li>
-                    <li class="node-tree">
-                      <a href="/support/article/1" class="label"
-                        >Using OnMyTeam.com</a
-                      >
-                    </li>
-                    <li class="node-tree">
-                      <a href="/support/article/1" class="label"
-                        >Using OnMyTeam.com</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="questions-list">
                   <ul v-if="items && items.length">
                     <NodeTree
                       v-for="node in items"
                       :node="node"
                       :key="node.id"
+                      :class="{ selected: selectedRootNodeId === node.id }"
+                      @click="clickRootNode(node.id)"
                     />
                   </ul>
                 </div>
@@ -136,7 +58,8 @@ export default {
     return {
       item: null,
       initialized: false,
-      rootItem: {}
+      rootItem: {},
+      selectedRootNodeId: null
     };
   },
   computed: {
@@ -166,7 +89,6 @@ export default {
     fetchLoading: {
       immediate: true,
       handler(loading) {
-        console.log("fetchLoading", loading);
         if (loading) {
           return;
         }
@@ -223,6 +145,13 @@ export default {
           return r;
         }
       }
+    },
+    clickRootNode(id) {
+      if (this.selectedRootNodeId && this.selectedRootNodeId === id) {
+        this.selectedRootNodeId = null;
+        return;
+      }
+      this.selectedRootNodeId = id;
     }
   }
 };
