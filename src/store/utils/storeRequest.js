@@ -86,7 +86,6 @@ const buildMutations = (prefix, mutations, resultKey) => {
     state[prefix + "Loading"] = true;
   };
   mutations[prefix + "Requested"] = state => {
-    console.log(prefix + "Loading");
     state[prefix + "Loading"] = false;
   };
   mutations[prefix + "Success"] = (state, value) => {

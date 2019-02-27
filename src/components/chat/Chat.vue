@@ -72,73 +72,12 @@
                 ></span>
               </div>
 
-              <span
-                class="more-functions"
-                :class="{ open: chatOptionsOpened }"
-                v-click-outside="
-                  () => {
-                    chatOptionsOpened = false;
-                  }
-                "
-              >
-                <div
-                  class="more-functions__overlay"
-                  @click="
-                    () => {
-                      chatOptionsOpened = false;
-                    }
-                  "
-                ></div>
-                <div
-                  class="more-functions__btn"
-                  @click="chatOptionsOpened = !chatOptionsOpened"
-                ></div>
-                <div class="more-functions__dropdown">
-                  <div class="more-functions__dropdown-inside">
-                    <ul>
-                      <li>
-                        <router-link
-                          class="profile-url"
-                          :to="'/' + activeUser.username"
-                          >View profile</router-link
-                        >
-                      </li>
-                      <li v-if="activeUser.isBlocked">
-                        <a class="menu-block" @click="unblockActiveUser"
-                          >Unblock user</a
-                        >
-                      </li>
-                      <li v-else>
-                        <a class="menu-block" @click="blockActiveUser"
-                          >Block user</a
-                        >
-                      </li>
-                      <li v-if="isMuted">
-                        <a @click="unmuteActiveUser">Unmute user</a>
-                      </li>
-                      <li v-else>
-                        <a @click="muteActiveUser">Mute user</a>
-                      </li>
-                      <template v-if="messages.length">
-                        <li v-if="deleteInProgress"><a>Deleting...</a></li>
-                        <li v-else>
-                          <a class="menu-delete" @click="deleteConversation"
-                            >Delete conversation</a
-                          >
-                        </li>
-                      </template>
-                      <li><a class="menu-report" @click="report">Report</a></li>
-                      <li>
-                        <a
-                          class="menu-cancel"
-                          @click="chatOptionsOpened = false"
-                          >Cancel</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </span>
+              <UserDropdown
+                :activeUser="activeUser"
+                :hasMessages="!!messages.length"
+                :deleteInProgress="deleteInProgress"
+                @deleteConversation="deleteConversation"
+              />
             </div>
           </div>
           <div class="chatCollectionContentWrapper">
@@ -175,18 +114,14 @@ import AddMessage from "./AddMessage";
 import NoConversations from "./NoConversations";
 import Loader from "@/components/common/Loader";
 import MobileHeader from "@/components/header/Mobile";
-import ClickOutside from "vue-click-outside";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserHeader from "@/components/header/User";
+import UserDropdown from "./UserDropdown";
 
 export default {
   name: "Chat",
 
   mixins: [User, ModalRouterParams],
-
-  directives: {
-    ClickOutside
-  },
 
   components: {
     Wrapper,
@@ -196,12 +131,12 @@ export default {
     Loader,
     MobileHeader,
     ContactList,
-    UserHeader
+    UserHeader,
+    UserDropdown
   },
 
   data() {
     return {
-      chatOptionsOpened: false,
       isTyping: false,
       deleteInProgress: false,
       virtualChat: null
@@ -290,9 +225,6 @@ export default {
     },
     activeUserLoading() {
       return this.$store.state.chat.fetchActiveUserLoading;
-    },
-    isMuted() {
-      return this.activeUser.isMuted;
     }
   },
 
@@ -310,42 +242,12 @@ export default {
   },
 
   methods: {
-    blockActiveUser() {
-      this.$store.dispatch("chat/blockUser", this.activeUserId);
-      this.chatOptionsOpened = false;
-    },
-    unblockActiveUser() {
-      this.$store.dispatch("chat/unblockUser", this.activeUserId);
-      this.chatOptionsOpened = false;
-    },
-    muteActiveUser() {
-      this.$store.dispatch("chat/muteUser", {
-        user: this.activeUser,
-        currentUser: this.user
-      });
-      this.chatOptionsOpened = false;
-    },
-    unmuteActiveUser() {
-      this.$store.dispatch("chat/unmuteUser", {
-        user: this.activeUser,
-        currentUser: this.user
-      });
-      this.chatOptionsOpened = false;
-    },
     deleteConversation() {
       this.deleteInProgress = true;
       this.$store.dispatch("chat/delete", this.activeUserId).then(() => {
         this.deleteInProgress = false;
-        this.chatOptionsOpened = false;
         this.goTo("/chat");
       });
-    },
-    report() {
-      this.$store.dispatch("modal/show", {
-        name: "userReport",
-        data: this.activeUserId
-      });
-      this.chatOptionsOpened = false;
     },
     fetchMessages() {
       this.$store.dispatch("chat/fetchMessages", this.activeUserId);
