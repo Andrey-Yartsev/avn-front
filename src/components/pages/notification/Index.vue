@@ -42,41 +42,11 @@
           to="/settings/notifications"
         ></router-link>
       </div>
-      <VuePerfectScrollbar
-        class="popup-content-scroll notifications"
-        @ps-scroll-y="scrollFunction"
-      >
-        <div
-          class="NotificationsView"
-          :class="{
-            [v.type]: true,
-            unread: !v.isRead,
-            'last-child': key === items.length - 1
-          }"
-          v-for="(v, key) in items"
-          v-bind:key="v.id"
-        >
-          <div class="avatars-wrapper">
-            <router-link
-              :to="'/' + v.user.username"
-              class="avatar avatar_ex-sm"
-            >
-              <span class="avatar__img">
-                <img :src="v.user.avatar" v-if="v.user.avatar" />
-              </span>
-            </router-link>
-            <span class="timestamp">{{ time(v.createdAt) }}</span>
-          </div>
-          <div class="content">
-            <router-link
-              :to="'/' + v.user.username"
-              class="name name_break-text"
-              >{{ v.user.name }}</router-link
-            >
-            <span class="notification-summary" v-html="v.text" />
-          </div>
-        </div>
-      </VuePerfectScrollbar>
+      <component
+        :is="notificationView"
+        :items="items"
+        :scrollFunction="scrollFunction"
+      />
       <div class="msg-no-content">
         <div class="msg-no-content__text">
           {{ loading ? "Loading..." : "Nothing happened yet" }}
@@ -88,13 +58,14 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import NotificationSingleView from "./Items/Single";
+import NotificationMergedView from "./Items/Merged";
 
 const typeTitles = {
   all: "Notifications",
@@ -113,6 +84,8 @@ export default {
   mixins: [ModalRouterParams, User, InfinityScrollMixin],
 
   components: {
+    NotificationMergedView,
+    NotificationSingleView,
     VuePerfectScrollbar,
     MobileHeader,
     Footer
@@ -135,6 +108,30 @@ export default {
       return this.$store.state.notif.allDataReceived;
     },
     items() {
+      if (this.type === "all") {
+        const merged = this.$store.state.notif.posts.reduce((m, v, key) => {
+          if (key === 0) {
+            return [{ mergedByName: false, type: v.type, items: [v], id: key }];
+          }
+
+          const prevKey = m.length - 1;
+          const prevItem = m[prevKey];
+
+          if (v.type === prevItem.type && v.type !== "tip") {
+            prevItem.mergedByName =
+              v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
+            prevItem.items.push(v);
+            return [...m];
+          }
+
+          return [
+            ...m,
+            { mergedByName: false, type: v.type, items: [v], id: key }
+          ];
+        }, []);
+        return merged;
+      }
+
       return this.$store.state.notif.posts.map((v, key) => ({
         ...v,
         id: key
@@ -152,13 +149,15 @@ export default {
       return this.$root.showTips
         ? menuTitles
         : menuTitles.filter(a => a.name !== "tip");
+    },
+    notificationView() {
+      return this.type === "all"
+        ? NotificationMergedView
+        : NotificationSingleView;
     }
   },
 
   methods: {
-    time(date) {
-      return dateFns.distanceInWordsStrict(new Date(), date);
-    },
     infinityScrollGetDataMethod() {
       this.$store.dispatch("notif/getPosts", { type: this.type });
     },
