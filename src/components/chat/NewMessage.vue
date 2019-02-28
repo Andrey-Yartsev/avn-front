@@ -104,7 +104,7 @@
     <template slot="col2">
       <div class="chatHeader chatHeader_add-shadow no-nav">
         <div class="selectedChatHeader">
-          <div class="back-popup-btn hidden-desktop">
+          <div class="back-popup-btn hidden-desktop" v-if="$mq === 'mobile'">
             <span class="back backEvent" @click="back"></span>
           </div>
           <template v-if="selectedUser">
@@ -113,14 +113,16 @@
               :to="'/' + selectedUser.username"
               ><span class="avatar__img"></span
             ></router-link>
-            <router-link class="name" :to="'/' + selectedUser.username">{{
-              selectedUser.name
-            }}</router-link>
-            <span class="user-login">
-              <router-link class="username" :to="'/' + selectedUser.username">{{
-                selectedUser.username
-              }}</router-link></span
-            >
+            <div class="username-group">
+              <router-link class="name" :to="'/' + selectedUser.username">{{
+                selectedUser.name
+              }}</router-link>
+              <span class="user-login">
+                <router-link class="username" :to="'/' + selectedUser.username">{{
+                  selectedUser.username
+                }}</router-link></span
+              >
+            </div>
           </template>
           <span v-else-if="selected.length" class="mass-message"
             >Mass message</span
