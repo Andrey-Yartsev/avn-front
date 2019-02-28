@@ -389,6 +389,12 @@
         flex: 1;
       }
 
+      .chat-popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-width: 576px;
+        }
+      }
     }
   }
 
@@ -713,6 +719,16 @@
 
   .user-login {
     font-size: inherit;
+  }
+
+  .username-group {
+    max-width: calc(100% - 80px);
+    overflow: hidden;
+    display: flex;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: calc(100% - 80px);
+    }
   }
 
   .isTyping {

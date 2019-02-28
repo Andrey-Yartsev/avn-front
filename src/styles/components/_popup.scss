@@ -246,16 +246,16 @@
         }
 
         .more-functions {
-          margin: auto 0.4em auto auto;
+          //margin: auto 0.4em auto auto;
 
           @include media-breakpoint-down($desktop-breakpoint) {
             margin-right: -6px;
           }
 
           &__btn {
-            padding: 0;
-            width: 40px;
-            height: 30px;
+            //padding: 0;
+            //width: 40px;
+            //height: 30px;
           }
 
           &__dropdown {

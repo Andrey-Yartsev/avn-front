@@ -43,7 +43,7 @@
             v-if="activeUser"
           >
             <div class="selectedChatHeader">
-              <div class="back-popup-btn hidden-desktop">
+              <div class="back-popup-btn hidden-desktop" v-if="$mq === 'mobile'">
                 <span class="back" @click="mobileBack"></span>
               </div>
               <router-link
@@ -54,22 +54,24 @@
                   <img :src="activeUser.avatar" v-if="activeUser.avatar" />
                 </span>
               </router-link>
-              <router-link :to="'/' + activeUser.username" class="name">
-                {{ activeUser.name }}
-              </router-link>
-              <span class="verified-user" v-if="activeUser.isVerified"></span>
-              <span class="user-login">
-                <router-link class="username" :to="'/' + activeUser.username">{{
-                  activeUser.username
-                }}</router-link>
-              </span>
+              <div class="username-group">
+                <router-link :to="'/' + activeUser.username" class="name">
+                  {{ activeUser.name }}
+                </router-link>
+                <span class="verified-user" v-if="activeUser.isVerified"></span>
+                <span class="user-login">
+                  <router-link class="username" :to="'/' + activeUser.username">{{
+                    activeUser.username
+                  }}</router-link>
+                </span>
 
-              <div class="block-indicator">
-                <span class="user-login" v-if="blockLoading">...</span>
-                <span
-                  class="icn-block icn-item"
-                  v-else-if="activeUser.isBlocked"
-                ></span>
+                <div class="block-indicator">
+                  <span class="user-login" v-if="blockLoading">...</span>
+                  <span
+                    class="icn-block icn-item"
+                    v-else-if="activeUser.isBlocked"
+                  ></span>
+                </div>
               </div>
 
               <UserDropdown
