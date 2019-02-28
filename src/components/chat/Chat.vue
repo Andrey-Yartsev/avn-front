@@ -43,7 +43,10 @@
             v-if="activeUser"
           >
             <div class="selectedChatHeader">
-              <div class="back-popup-btn hidden-desktop" v-if="$mq === 'mobile'">
+              <div
+                class="back-popup-btn hidden-desktop"
+                v-if="$mq === 'mobile'"
+              >
                 <span class="back" @click="mobileBack"></span>
               </div>
               <router-link
@@ -60,9 +63,11 @@
                 </router-link>
                 <span class="verified-user" v-if="activeUser.isVerified"></span>
                 <span class="user-login">
-                  <router-link class="username" :to="'/' + activeUser.username">{{
-                    activeUser.username
-                  }}</router-link>
+                  <router-link
+                    class="username"
+                    :to="'/' + activeUser.username"
+                    >{{ activeUser.username }}</router-link
+                  >
                 </span>
 
                 <div class="block-indicator">
