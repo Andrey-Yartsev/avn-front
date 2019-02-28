@@ -118,9 +118,11 @@
                 selectedUser.name
               }}</router-link>
               <span class="user-login">
-                <router-link class="username" :to="'/' + selectedUser.username">{{
-                  selectedUser.username
-                }}</router-link></span
+                <router-link
+                  class="username"
+                  :to="'/' + selectedUser.username"
+                  >{{ selectedUser.username }}</router-link
+                ></span
               >
             </div>
           </template>
