@@ -32,7 +32,6 @@
           <router-link
             :to="'/' + v.items[0].user.username"
             class="name name_break-text"
-            v-if="v.items.length === 1"
             >{{ v.items[0].user.name }}</router-link
           >
           <span class="notification-summary" v-html="v.items[0].text" /> (x{{
