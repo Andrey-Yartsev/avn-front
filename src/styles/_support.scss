@@ -270,14 +270,24 @@ form.support-search-form {
           position: absolute;
           right: 6px;
           font-size: 24px;
-          top: 50%;
+          top: 16px;
           @include icon-font;
-          transform: translate(0, -50%);
           color: $secondary-color;
+          transition: all .3s;
+          width: 24px;
+          height: 14px;
+          line-height: 14px;
         }
       }
 
       &.selected {
+
+        > .label {
+
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
 
         .level-1 {
           max-height: 100%;
