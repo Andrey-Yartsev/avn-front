@@ -1648,6 +1648,16 @@
       }
     }
   }
+
+  &.special-site-header {
+
+    #content {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        min-height: 100%;
+      }
+    }
+  }
 }
 
 .block-indicator {
