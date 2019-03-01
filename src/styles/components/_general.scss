@@ -156,16 +156,16 @@ strong {
   }
 }
 
-//#content,
-#content > * {
-  transition: all 0.2s ease-in-out 0s;
-}
 #content {
 
   @include media-breakpoint-down($desktop-breakpoint) {
     height: 100%;
-
     flex: 1;
+    min-height: 100%;
+  }
+
+  > * {
+    transition: all 0.2s ease-in-out 0s;
   }
 }
 :hover > .hide-on-hover,

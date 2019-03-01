@@ -74,52 +74,54 @@
           ref="actionsMobile"
         />
       </div>
-      <Highlights :userId="profile.id" v-if="$mq === 'mobile'" />
-      <div class="container">
-        <div class="row">
-          <div :class="['content-col', { 'single-col': !useMediumPostView }]">
-            <p
-              :class="['empty-feed']"
-              v-if="!posts.length && !infinityScrollLoading"
-            >
-              <span>Nothing here yet</span>
-              <button
-                v-if="isOwner(this.profile.id)"
-                @click="openAddPostModal"
-                type="button"
-                class="make-post-btn feed"
+      <div class="content-wrapper">
+        <Highlights :userId="profile.id" v-if="$mq === 'mobile'" />
+        <div class="container">
+          <div class="row">
+            <div :class="['content-col', { 'single-col': !useMediumPostView }]">
+              <p
+                :class="['empty-feed']"
+                v-if="!posts.length && !infinityScrollLoading"
               >
-                Create new post
-              </button>
-            </p>
-            <div class="profile-content">
-              <div class="posts-container" v-if="useMediumPostView">
-                <PostCollection
-                  :class="'rounded-container'"
-                  :posts="posts"
-                  from="profile/home"
-                />
-              </div>
-              <div class="exploreAllCollectionView" v-else>
-                <div class="explore">
-                  <div class="explore__inside">
-                    <div :class="['explore-wrapper', pageName]">
-                      <component
-                        :is="postComponent"
-                        v-for="post in posts"
-                        :post="post"
-                        :key="post.id"
-                        from="profile/home"
-                      />
+                <span>Nothing here yet</span>
+                <button
+                  v-if="isOwner(this.profile.id)"
+                  @click="openAddPostModal"
+                  type="button"
+                  class="make-post-btn feed"
+                >
+                  Create new post
+                </button>
+              </p>
+              <div class="profile-content">
+                <div class="posts-container" v-if="useMediumPostView">
+                  <PostCollection
+                    :class="'rounded-container'"
+                    :posts="posts"
+                    from="profile/home"
+                  />
+                </div>
+                <div class="exploreAllCollectionView" v-else>
+                  <div class="explore">
+                    <div class="explore__inside">
+                      <div :class="['explore-wrapper', pageName]">
+                        <component
+                          :is="postComponent"
+                          v-for="post in posts"
+                          :post="post"
+                          :key="post.id"
+                          from="profile/home"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="loaderWrap loader-content"
-                v-if="infinityScrollLoading"
-              >
-                <Loader :fullscreen="false" />
+                <div
+                  class="loaderWrap loader-content"
+                  v-if="infinityScrollLoading"
+                >
+                  <Loader :fullscreen="false" />
+                </div>
               </div>
             </div>
           </div>

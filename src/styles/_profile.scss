@@ -60,7 +60,6 @@
         flex: 1;
         background: $white
         linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
-        //z-index: 2;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -920,7 +919,6 @@
 
   .profile-name__header {
     color: #fff;
-    //opacity: 0;
 
     .header-scrolled & {
       opacity: 1;
@@ -957,25 +955,6 @@
       }
     }
   }
-
-  //.bg-profile {
-  //  position: absolute;
-  //  left: 0;
-  //  right: 0;
-  //  bottom: 0;
-  //  top: 0;
-  //  opacity: 0;
-  //  height: auto;
-  //
-  //  .header-scrolled & {
-  //    opacity: 1;
-  //    z-index: -1;
-  //  }
-  //
-  //  .bg-wrap {
-  //    top: auto;
-  //  }
-  //}
 }
 
 .bg-profile {
@@ -988,7 +967,6 @@
     position: sticky;
     height: 32vw;
     top: calc(44px - 32vw);
-    //z-index: 1;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -1029,15 +1007,6 @@
     flex-direction: column;
     justify-content: center;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      //height: 32vw;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //height: 320px;
-
-    }
-
     .header-scrolled & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -1057,13 +1026,7 @@
   display: flex;
   flex-direction: column;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    //height: 32vw;
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
-    //height: 320px;
-    //top: auto;
     right: -20px;
   }
 
@@ -1118,9 +1081,12 @@
 
 .white-bg-block {
   position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    flex: 1;
+    //flex: 1;
     background-color: $white;
   }
 
@@ -1128,12 +1094,7 @@
     z-index: 1;
   }
 
-  > .container {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: relative;
-      z-index: 0;
-    }
+  > .content-wrapper {
 
     .posts-container {
 
@@ -1631,11 +1592,11 @@
   }
 
   #content {
+    display: flex;
+    flex-direction: column;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: calc(100% - 75px);
-      display: flex;
-      flex-direction: column;
     }
 
     > div:not(.chatCollectionContent) {
@@ -1656,6 +1617,16 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         min-height: 100%;
       }
+    }
+  }
+
+  .special-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
     }
   }
 }

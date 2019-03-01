@@ -20,48 +20,50 @@
           <ProfileActions :profile="profile" :page="page" />
         </div>
       </div>
-      <div class="container">
-        <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">
-          <router-link to="/following" class="content-nav__item"
-            >Following {{ profile.followingCount }}</router-link
-          >
-          <router-link to="/followers" class="content-nav__item"
-            >Followers {{ profile.followersCount }}</router-link
-          >
-        </div>
-        <div class="row">
-          <div class="content-col">
-            <div class="posts-container">
-              <div class="sticky-header-controls header-mobile">
-                <router-link
-                  class="header-return-btn"
-                  :to="`/${profile.username}`"
-                />
-                <h1 class="page-title">Following</h1>
-              </div>
-              <div class="explore">
-                <div class="userCollectionView">
-                  <Users
-                    :items="users"
-                    :loading="false"
-                    :query="page"
-                    actionPrefix="followers"
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">
+            <router-link to="/following" class="content-nav__item"
+              >Following {{ profile.followingCount }}</router-link
+            >
+            <router-link to="/followers" class="content-nav__item"
+              >Followers {{ profile.followersCount }}</router-link
+            >
+          </div>
+          <div class="row">
+            <div class="content-col">
+              <div class="posts-container">
+                <div class="sticky-header-controls header-mobile">
+                  <router-link
+                    class="header-return-btn"
+                    :to="`/${profile.username}`"
                   />
-                  <div
-                    class="loaderWrap loader-content"
-                    v-if="infinityScrollLoading"
-                  >
-                    <Loader :fullscreen="false" />
-                  </div>
-                  <div class="msg-no-content" v-if="!loading && !user.length">
+                  <h1 class="page-title">Following</h1>
+                </div>
+                <div class="explore">
+                  <div class="userCollectionView">
+                    <Users
+                      :items="users"
+                      :loading="false"
+                      :query="page"
+                      actionPrefix="followers"
+                    />
                     <div
-                      class="msg-no-content__text"
-                      v-if="page === 'following'"
+                      class="loaderWrap loader-content"
+                      v-if="infinityScrollLoading"
                     >
-                      Start following people to see them here
+                      <Loader :fullscreen="false" />
                     </div>
-                    <div class="msg-no-content__text" v-else>
-                      No one follows you yet
+                    <div class="msg-no-content" v-if="!loading && !user.length">
+                      <div
+                        class="msg-no-content__text"
+                        v-if="page === 'following'"
+                      >
+                        Start following people to see them here
+                      </div>
+                      <div class="msg-no-content__text" v-else>
+                        No one follows you yet
+                      </div>
                     </div>
                   </div>
                 </div>

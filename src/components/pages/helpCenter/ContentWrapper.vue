@@ -13,11 +13,11 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="content-wrapper">
         <slot name="content" />
       </div>
-      <Footer class="site-footer_main" />
     </div>
+    <Footer class="site-footer_main" />
   </div>
 </template>
 <script>
