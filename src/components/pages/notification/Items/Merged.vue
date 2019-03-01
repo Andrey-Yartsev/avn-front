@@ -55,9 +55,7 @@
               </span>
             </router-link>
           </div>
-          <span class="timestamp">{{
-            time(v.items[0].createdAt)
-          }}</span>
+          <span class="timestamp">{{ time(v.items[0].createdAt) }}</span>
         </div>
         <div class="content">
           <router-link
