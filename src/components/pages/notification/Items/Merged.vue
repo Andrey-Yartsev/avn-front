@@ -15,17 +15,19 @@
     >
       <template v-if="v.mergedByName">
         <div class="avatars-wrapper">
-          <router-link
-            :to="'/' + v.items[0].user.username"
-            class="avatar avatar_ex-sm"
-          >
-            <span class="avatar__img">
-              <img
-                :src="v.items[0].user.avatar"
-                v-if="v.items[0].user.avatar"
-              />
-            </span>
-          </router-link>
+          <div class="avatars-group">
+            <router-link
+              :to="'/' + v.items[0].user.username"
+              class="avatar avatar_ex-sm"
+            >
+              <span class="avatar__img">
+                <img
+                  :src="v.items[0].user.avatar"
+                  v-if="v.items[0].user.avatar"
+                />
+              </span>
+            </router-link>
+          </div>
           <span class="timestamp">{{ time(v.items[0].createdAt) }}</span>
         </div>
         <div class="content">
@@ -40,20 +42,20 @@
         </div>
       </template>
       <template v-else>
-        <div
-          class="avatars-wrapper"
-          v-for="(item, k) in v.items"
-          :key="k + v.id + item.user.username"
-        >
-          <router-link
-            :to="'/' + item.user.username"
-            class="avatar avatar_ex-sm"
-          >
-            <span class="avatar__img">
-              <img :src="item.user.avatar" v-if="item.user.avatar" />
-            </span>
-          </router-link>
-          <span class="timestamp" v-if="k === 0">{{
+        <div class="avatars-wrapper">
+          <div class="avatars-group">
+            <router-link
+              :to="'/' + item.user.username"
+              class="avatar avatar_ex-sm"
+              v-for="(item, k) in v.items"
+              :key="k + v.id + item.user.username"
+            >
+              <span class="avatar__img">
+                <img :src="item.user.avatar" v-if="item.user.avatar" />
+              </span>
+            </router-link>
+          </div>
+          <span class="timestamp">{{
             time(v.items[0].createdAt)
           }}</span>
         </div>

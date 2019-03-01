@@ -246,17 +246,14 @@
     }
   }
 
-  .avatar {
-
-    &:nth-child(n + 2) {
-      margin-left: 10px;
-    }
-  }
-
   .content {
     padding: 9px 0 0;
     word-break: break-all;
     overflow: visible;
+  }
+
+  .name {
+    margin-right: 6px;
   }
 }
 
@@ -265,6 +262,15 @@
   align-items: center;
   align-content: center;
   justify-content: space-between;
+}
+
+.avatars-group {
+  display: flex;
+  flex-wrap: wrap;
+
+  .avatar {
+    margin-right: 10px;
+  }
 }
 
 .notifications-filter {
@@ -399,7 +405,6 @@
 }
 
 .notification-summary {
-  margin-left: 6px;
   display: inline-block;
 
   a {
