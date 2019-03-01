@@ -440,8 +440,7 @@
     margin-top: 136px;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 456px);
-    max-height: calc(100vh - 152px);
+    height: calc(100vh - 456px);
     transition: all .3s;
     position: relative;
     overflow-y: auto;
