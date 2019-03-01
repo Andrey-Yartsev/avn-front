@@ -74,7 +74,7 @@
           ref="actionsMobile"
         />
       </div>
-      <div class="content-wrapper">
+      <div class="content-wrapper content-wrapper_cut">
         <Highlights :userId="profile.id" v-if="$mq === 'mobile'" />
         <div class="container">
           <div class="row">

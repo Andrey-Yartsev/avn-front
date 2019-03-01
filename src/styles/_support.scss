@@ -738,6 +738,12 @@ form.support-search-form {
   @include media-breakpoint-up($desktop-breakpoint) {
     position: relative;
     z-index: 0;
-    overflow: hidden;
+  }
+
+  &_cut {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow: hidden;
+    }
   }
 }
