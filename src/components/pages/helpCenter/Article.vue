@@ -1,8 +1,12 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <Loader :fullscreen="false" text="" class="not-fullscreen transparent small" v-if="loading" />
-      <!--<Loader :fullscreen="true" text="" class="not-fullscreen transparent small" />-->
+      <Loader
+        :fullscreen="false"
+        text=""
+        class="not-fullscreen transparent small"
+        v-if="loading"
+      />
       <template v-else>
         <div class="s-breadcrumbs">
           <div class="container">
