@@ -170,23 +170,26 @@
     }
 
     &.chat-popup {
-      //width: 100%;
-      max-width: 956px;
-      transform: translate(-50%, -50%);
-      left: 50%;
-      top: 50%;
-      height: 81%;
-      position: fixed;
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        max-width: 100%;
+        //max-width: 100%;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        transform: translate(0, 0);
+        //transform: translate(0, 0);
         height: auto;
         border-radius: 0;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        //width: 100%;
+        max-width: 956px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        height: 81%;
+        position: fixed;
       }
 
       &.chat-popup_new-msg {

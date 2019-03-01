@@ -59,6 +59,13 @@
       //flex-direction: column;
     }
 
+    .popup & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: block;
+      }
+    }
+
     &.no-chats {
 
       @include media-breakpoint-down($desktop-breakpoint) {
@@ -283,6 +290,14 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       transition: transform .3s;
+
+    }
+
+    .popup & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 0 0 44px;
+      }
     }
 
     .chat-popup_new-msg &,
@@ -329,7 +344,9 @@
       .popup & {
 
         @include media-breakpoint-down($desktop-breakpoint) {
-          flex: 1;
+          //flex: 1;
+
+          //display: block;
         }
       }
 
@@ -459,7 +476,7 @@
   z-index: 3;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    transform: translate(-50%, calc((50% - 30px) * (-1)));
+    //transform: translate(-50%, calc((50% - 30px) * (-1)));
   }
 
   &.visible {
@@ -516,7 +533,7 @@
     flex-wrap: wrap;
     height: auto;
     flex: 0 0 auto;
-    //transition: all .3s;
+    transition: all .3s;
   }
 
   &.no-nav {
