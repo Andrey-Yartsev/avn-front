@@ -31,23 +31,7 @@
       <p class="subscribe-popup__body-title">
         Subscription Benefits
       </p>
-      <ul class="subscribe-popup__list">
-        <li class="subscribe-popup__list-item">
-          <span></span>
-        </li>
-        <li class="subscribe-popup__list-item">
-          <span></span>
-        </li>
-        <li class="subscribe-popup__list-item">
-          <span></span>
-        </li>
-        <li class="subscribe-popup__list-item">
-          <span></span>
-        </li>
-        <li class="subscribe-popup__list-item">
-          <span></span>
-        </li>
-      </ul>
+      <div v-html="benefits"></div>
     </div>
 
     <div class="subscribe-popup__footer">
@@ -79,6 +63,11 @@ export default {
       type: Boolean,
       require: true,
       default: false
+    }
+  },
+  computed: {
+    benefits() {
+      return this.$store.state.init.data.messages.subscriptionBenefits;
     }
   }
 };

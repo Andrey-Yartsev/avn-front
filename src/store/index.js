@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import global from "@/store/modules/global";
 import auth from "@/store/modules/auth";
+import init from "@/store/modules/init";
 import home from "@/store/modules/home";
 import post from "@/store/modules/post";
 import postPage from "@/store/modules/postPage";
@@ -46,6 +47,7 @@ const store = new Vuex.Store({
   modules: {
     global,
     auth,
+    init,
     home,
     profile,
     signUp,

@@ -249,6 +249,8 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("init/fetch");
+
     const params = queryString.parse(location.search);
     if (params.code) {
       Cookie.set("code", params.code, {
