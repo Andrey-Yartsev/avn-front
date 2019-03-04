@@ -11,7 +11,23 @@
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
           <!--<button class="btn-back-list" @click="back"></button>-->
-          <ul>
+          <VuePerfectScrollbar>
+            <ul>
+              <node
+                v-for="child in node.items"
+                :node="child"
+                :key="child.id"
+                :level="level + 1"
+                :click="click"
+              />
+            </ul>
+          </VuePerfectScrollbar>
+        </div>
+      </template>
+      <template v-else>
+        <button class="btn-back-list" @click="back"></button>
+        <VuePerfectScrollbar>
+          <ul :class="ulClass">
             <node
               v-for="child in node.items"
               :node="child"
@@ -20,25 +36,15 @@
               :click="click"
             />
           </ul>
-        </div>
-      </template>
-      <template v-else>
-        <button class="btn-back-list" @click="back"></button>
-        <ul :class="ulClass">
-          <node
-            v-for="child in node.items"
-            :node="child"
-            :key="child.id"
-            :level="level + 1"
-            :click="click"
-          />
-        </ul>
+        </VuePerfectScrollbar>
       </template>
     </template>
   </li>
 </template>
 
 <script>
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+
 export default {
   name: "node",
   props: {
@@ -49,6 +55,9 @@ export default {
       default: 1
     },
     click: Function
+  },
+  components: {
+    VuePerfectScrollbar
   },
   methods: {
     nodeClick() {
