@@ -251,9 +251,11 @@ export default {
       this.footerScrollAction();
     },
     username() {
+      this.scrollToTop();
       this.initProfile();
     },
     pageName() {
+      this.scrollToTop();
       this.footerScrollAction();
       this.initPosts();
     },
@@ -328,6 +330,9 @@ export default {
       } else {
         return text;
       }
+    },
+    scrollToTop() {
+      global.scrollTo(0, 0);
     }
   },
   created() {
@@ -346,6 +351,7 @@ export default {
     }, 2000);
   },
   mounted() {
+    this.scrollToTop();
     this.footerScrollAction();
     window.addEventListener("scroll", this.scrollAction, true);
   },
