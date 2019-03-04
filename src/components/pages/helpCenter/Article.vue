@@ -25,7 +25,7 @@
                 <div class="questions-list">
                   <ul
                     v-if="items && items.length"
-                    :class="{ opened: level1Opened }"
+                    :class="{ opened: level2Opened }"
                   >
                     <NodeTree
                       v-for="node in items"
@@ -90,6 +90,9 @@ export default {
     },
     level1Opened() {
       return this.$store.state.support.menu.level1Opened;
+    },
+    level2Opened() {
+      return this.$store.state.support.menu.level2Opened;
     },
     debugLevels() {
       return this.$store.state.support.menu;
