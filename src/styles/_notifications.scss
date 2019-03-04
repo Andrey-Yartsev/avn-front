@@ -405,7 +405,7 @@
 }
 
 .notification-summary {
-  display: inline-block;
+  word-break: break-word;
 
   a {
     color: $secondary-color;
