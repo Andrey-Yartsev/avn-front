@@ -21,6 +21,8 @@
           <div class="container">
             <div class="cols">
               <div class="col col-1-4">
+                <!--<br><br><pre class="debug2">{{ debugLevels }}</pre>-->
+                <button @click="back" v-if="showBack">Back</button>
                 <div class="questions-list">
                   <ul v-if="items && items.length">
                     <NodeTree
@@ -30,8 +32,6 @@
                       :class="{ selected: selectedRootNodeId === node.id }"
                       :click="nodeClick"
                       :selectedRootId="selectedRootNodeId"
-                      :level1Opened="!!selectedRootNodeId"
-                      :level2Opened="level2Opened"
                     />
                   </ul>
                 </div>
@@ -65,8 +65,7 @@ export default {
       item: null,
       initialized: false,
       rootItem: {},
-      selectedRootNodeId: null,
-      level2Opened: false
+      selectedRootNodeId: null
     };
   },
   computed: {
@@ -84,6 +83,21 @@ export default {
     },
     searchText() {
       return this.$store.state.support.searchText;
+    },
+    level1Opened() {
+      return this.$store.state.support.menu.level1Opened;
+    },
+    showBack() {
+      return this.level1Opened;
+    },
+    allClosed() {
+      return (
+        !this.$store.state.support.menu.level1Opened &&
+        !this.$store.state.support.menu.level2Opened
+      );
+    },
+    debugLevels() {
+      return this.$store.state.support.menu;
     }
   },
   watch: {
@@ -153,16 +167,44 @@ export default {
         }
       }
     },
+    back() {
+      this.$store.dispatch("support/menu/back").then(() => {
+        if (this.allClosed) {
+          this.selectedRootNodeId = false;
+        }
+      });
+    },
     nodeClick({ level, id }) {
-      console.log(level, id);
       if (level === 1) {
+        this.$store.commit("support/menu/setOpened", {
+          level: 3,
+          opened: false
+        });
+        this.$store.commit("support/menu/setOpened", {
+          level: 2,
+          opened: false
+        });
         if (this.selectedRootNodeId && this.selectedRootNodeId === id) {
+          this.$store.commit("support/menu/setOpened", {
+            level: 1,
+            opened: false
+          });
           this.selectedRootNodeId = null;
           return;
         }
+        this.$store.commit("support/menu/setOpened", {
+          level: 1,
+          opened: true
+        });
         this.selectedRootNodeId = id;
-      } else if (level === 2) {
-        this.level2Opened = true;
+      } else if (level === 2 || level === 3) {
+        this.$store.commit("support/menu/setOpened", {
+          level,
+          opened: id
+        });
+        this["level" + level + "Opened"] = true;
+      } else if (level === 4) {
+        this.$router.push("/support/article/" + id);
       }
     }
   }

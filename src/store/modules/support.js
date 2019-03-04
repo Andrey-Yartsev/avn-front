@@ -1,6 +1,7 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
+import menu from "./support/menu";
 
 const state = {
   searchText: null
@@ -36,5 +37,8 @@ export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    menu
+  }
 };

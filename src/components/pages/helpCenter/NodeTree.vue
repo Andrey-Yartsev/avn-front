@@ -4,9 +4,9 @@
       @click.prevent="nodeClick"
       :href="'/support/article/' + node.id"
       class="label"
-      >{{ node.title }}</a
     >
-
+      {{ node.title }}</a
+    >
     <template v-if="node.items && node.items.length">
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
@@ -16,6 +16,7 @@
               :node="child"
               :key="child.id"
               :level="level + 1"
+              :click="click"
             />
           </ul>
         </div>
@@ -28,7 +29,6 @@
             :key="child.id"
             :level="level + 1"
             :click="click"
-            :level2Opened="level2Opened"
           />
         </ul>
       </template>
@@ -42,8 +42,6 @@ export default {
   props: {
     node: Object,
     selectedRootId: Number,
-    level1Opened: Boolean,
-    level2Opened: Boolean,
     level: {
       type: Number,
       default: 1
@@ -59,22 +57,68 @@ export default {
     }
   },
   computed: {
+    level2Opened() {
+      return this.$store.state.support.menu.level2Opened;
+    },
+    level3Opened() {
+      return this.$store.state.support.menu.level3Opened;
+    },
     ulClass() {
       const r = {};
       r["level-" + this.level] = true;
-      if (this.level === 1 && this.level2Opened) {
-        r.mlm100 = true;
+      if (this.level === 1) {
+        if (this.level3Opened) {
+          r.mlm200 = true;
+        } else if (this.level2Opened) {
+          r.mlm100 = true;
+        }
       }
       return r;
     },
     divClass() {
       const r = {};
       r["level-" + this.level] = true;
-      if (this.level === 2 && this.level2Opened) {
+      if (
+        this.level === 2 &&
+        this.level2Opened &&
+        this.node.id === this.level2Opened
+      ) {
+        r.show = true;
+      }
+      if (
+        this.level === 3 &&
+        this.level3Opened &&
+        this.node.id === this.level3Opened
+      ) {
         r.show = true;
       }
       return r;
+    },
+    debugInfo() {
+      return (
+        "Node=" +
+        this.node.id +
+        ") " +
+        this.node.title +
+        ", Level=" +
+        this.level
+      );
     }
   }
 };
 </script>
+
+<style>
+.debug {
+  background: #31708f;
+  color: #fff;
+
+  top: 2px;
+  left: 2px;
+  padding: 2px 6px;
+  font-size: 8px;
+}
+ul {
+  position: relative;
+}
+</style>
