@@ -41,6 +41,13 @@
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <ErrorModal v-if="error" />
       <Confirm v-if="this.$store.state.modal.confirm.show" />
+      <router-link
+        v-if="adminReturnUrl"
+        :to="adminReturnUrl"
+        class="btn alt btn-back-kitchen"
+      >
+        Return to admin
+      </router-link>
     </template>
   </div>
 </template>
@@ -126,6 +133,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    adminReturnUrl() {
+      return this.$store.state.auth.user.adminReturnUrl;
     },
     toastShowTrigger() {
       return this.$store.state.global.toastShowTrigger;
