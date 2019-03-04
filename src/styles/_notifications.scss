@@ -248,8 +248,12 @@
 
   .content {
     padding: 4px 0 0;
-    word-break: break-all;
     overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .name {
@@ -406,7 +410,12 @@
 }
 
 .notification-summary {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
   word-break: break-word;
+  hyphens: auto;
+  display: inline-block;
 
   a {
     color: $secondary-color;
