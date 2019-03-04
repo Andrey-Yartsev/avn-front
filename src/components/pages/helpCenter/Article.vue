@@ -22,8 +22,8 @@
             <div class="cols">
               <div class="col col-1-4">
                 <!--<br><br><pre class="debug2">{{ debugLevels }}</pre>-->
-                <button @click="back" v-if="showBack">Back</button>
                 <div class="questions-list">
+                  <button class="btn-back-list" @click="back" v-if="showBack">Back</button>
                   <ul v-if="items && items.length">
                     <NodeTree
                       v-for="node in items"
