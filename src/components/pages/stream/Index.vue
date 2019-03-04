@@ -229,7 +229,10 @@
       </div>
     </div>
     <StreamStatistic
-      :close="haveToSave => close({}, haveToSave)"
+      :close="
+        (haveToSave, haveToSaveComments) =>
+          close({}, haveToSave, haveToSaveComments)
+      "
       :duration="time"
       :streamDuration="streamDuration"
       :streamStartTime="streamStartTime"
@@ -425,12 +428,12 @@ export default {
         this.likes = this.likes.filter(item => item.date + 5000 < now);
       }, 5000);
     },
-    close(e, haveToSave) {
+    close(e, haveToSave, haveToSaveComments) {
       if (this.isStarted) {
         this.stopStream();
       } else {
         if (haveToSave) {
-          StreamApi.saveStream(this.startedStreamId)
+          StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
               this.$router.push("/");
             })

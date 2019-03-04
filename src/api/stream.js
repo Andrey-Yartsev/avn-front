@@ -24,12 +24,15 @@ export default {
       method: "DELETE"
     });
   },
-  saveStream(streamId) {
+  saveStream(streamId, haveToSaveComments) {
     return tokenRequest(`streams/${streamId}/save-video`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        keepComments: !!haveToSaveComments
+      })
     });
   }
 };
