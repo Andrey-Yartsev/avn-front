@@ -911,8 +911,11 @@
 
   .header-scrolled.scroll-bottom & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      opacity: 0;
+    .support-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        opacity: 0;
+      }
     }
   }
 
