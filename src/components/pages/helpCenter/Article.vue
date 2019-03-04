@@ -51,9 +51,11 @@
 import ContentWrapper from "./ContentWrapper";
 import NodeTree from "./NodeTree";
 import Loader from "@/components/common/Loader";
+import HeaderScrolled from "@/mixins/headerScrolled";
 
 export default {
   name: "HelpCenterArticle",
+  mixins: [HeaderScrolled],
   components: {
     ContentWrapper,
     NodeTree,
