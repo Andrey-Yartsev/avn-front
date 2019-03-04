@@ -236,6 +236,7 @@ form.support-search-form {
   border-radius: 6px;
   color: #7c8b96;
   overflow: hidden;
+  background-color: $white;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 160px;
@@ -290,8 +291,8 @@ form.support-search-form {
         }
 
         .level-1 {
-          max-height: 100%;
-          opacity: 1;
+          max-height: 1000px;
+          visibility: visible;
         }
       }
     }
@@ -308,9 +309,8 @@ form.support-search-form {
     position: relative;
     width: 100%;
     max-height: 0;
-    opacity: 0;
+    visibility: hidden;
     transition: all .3s;
-    background-color: $white;
 
     > .node-tree {
       border-top: 1px solid rgba(124, 139, 150, 0.2);
@@ -342,14 +342,13 @@ form.support-search-form {
     top: 0;
     bottom: 0;
     width: inherit;
-    background-color: $white;
     display: none;
 
     > ul {
 
       > .node-tree {
         border-top: 1px solid rgba(124, 139, 150, 0.2);
-        width: inherit;
+        width: 100%;
 
         > .label {
           cursor: pointer;
@@ -377,7 +376,6 @@ form.support-search-form {
     top: 0;
     bottom: 0;
     width: inherit;
-    background-color: $white;
     display: none;
 
     > ul {
@@ -387,7 +385,7 @@ form.support-search-form {
 
         > .label {
           cursor: pointer;
-          padding: 3px 0 12px 24px;
+          padding: 7px 13px 7px 24px;
           font-size: 12px;
         }
       }
