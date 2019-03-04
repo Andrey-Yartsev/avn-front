@@ -748,6 +748,16 @@
   }
 }
 
+.stream-toggle-controls {
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-left: 62px;
+    margin-right: 62px;
+  }
+}
+
 .share-stream-label {
   font-size: 13px;
   margin-left: 0;
@@ -755,11 +765,9 @@
   display: flex;
   align-content: center;
   align-items: center;
-  justify-content: center;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 0 62px;
-  }
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: none;
 
   .toggle-element {
     flex: 0 0 48px;

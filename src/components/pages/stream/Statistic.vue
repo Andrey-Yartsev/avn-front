@@ -83,27 +83,29 @@
           </div>
         </div>
       </div>
-      <label class="share-stream-label toggle-wrapper" v-if="canBeSaved">
-        Share this stream to your profile feed.
-        <div class="toggle-element">
-          <input type="checkbox" class="share-stream" v-model="haveToSave" />
-          <span></span>
-        </div>
-      </label>
-      <label
-        class="share-stream-label toggle-wrapper"
-        v-if="canBeSaved && haveToSave"
-      >
-        Keep comments.
-        <div class="toggle-element">
-          <input
-            type="checkbox"
-            class="share-stream"
-            v-model="haveToSaveComments"
-          />
-          <span></span>
-        </div>
-      </label>
+      <div class="stream-toggle-controls">
+        <label class="share-stream-label toggle-wrapper" v-if="canBeSaved">
+          Share this stream to your profile feed.
+          <div class="toggle-element">
+            <input type="checkbox" class="share-stream" v-model="haveToSave" />
+            <span></span>
+          </div>
+        </label>
+        <label
+          class="share-stream-label toggle-wrapper"
+          v-if="canBeSaved && haveToSave"
+        >
+          Keep comments.
+          <div class="toggle-element">
+            <input
+              type="checkbox"
+              class="share-stream"
+              v-model="haveToSaveComments"
+            />
+            <span></span>
+          </div>
+        </label>
+      </div>
       <div
         class="mediasBottom"
         @click="() => this.close(this.haveToSave, this.haveToSaveComments)"
