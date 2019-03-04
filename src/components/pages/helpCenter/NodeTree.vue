@@ -26,17 +26,19 @@
       </template>
       <template v-else>
         <button class="btn-back-list" @click="back"></button>
-        <VuePerfectScrollbar>
-          <ul :class="ulClass">
-            <node
-              v-for="child in node.items"
-              :node="child"
-              :key="child.id"
-              :level="level + 1"
-              :click="click"
-            />
-          </ul>
-        </VuePerfectScrollbar>
+        <div class="scrollbar" :class="divClass">
+          <VuePerfectScrollbar :class="ulClass">
+            <ul>
+              <node
+                v-for="child in node.items"
+                :node="child"
+                :key="child.id"
+                :level="level + 1"
+                :click="click"
+              />
+            </ul>
+          </VuePerfectScrollbar>
+        </div>
       </template>
     </template>
   </li>
