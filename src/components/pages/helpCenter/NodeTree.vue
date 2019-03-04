@@ -10,7 +10,7 @@
     <template v-if="node.items && node.items.length">
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
-          <button class="btn-back-list" @click="back">Back</button>
+          <!--<button class="btn-back-list" @click="back"></button>-->
           <ul>
             <node
               v-for="child in node.items"
@@ -23,7 +23,7 @@
         </div>
       </template>
       <template v-else>
-        <button class="btn-back-list" @click="back">Back</button>
+        <button class="btn-back-list" @click="back"></button>
         <ul :class="ulClass">
           <node
             v-for="child in node.items"
