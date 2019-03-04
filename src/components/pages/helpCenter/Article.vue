@@ -23,7 +23,6 @@
               <div class="col col-1-4">
                 <!--<br><br><pre class="debug2">{{ debugLevels }}</pre>-->
                 <div class="questions-list">
-                  <button class="btn-back-list" @click="back" v-if="showBack">Back</button>
                   <ul v-if="items && items.length">
                     <NodeTree
                       v-for="node in items"
@@ -86,15 +85,6 @@ export default {
     },
     level1Opened() {
       return this.$store.state.support.menu.level1Opened;
-    },
-    showBack() {
-      return this.level1Opened;
-    },
-    allClosed() {
-      return (
-        !this.$store.state.support.menu.level1Opened &&
-        !this.$store.state.support.menu.level2Opened
-      );
     },
     debugLevels() {
       return this.$store.state.support.menu;
@@ -166,13 +156,6 @@ export default {
           return r;
         }
       }
-    },
-    back() {
-      this.$store.dispatch("support/menu/back").then(() => {
-        if (this.allClosed) {
-          this.selectedRootNodeId = false;
-        }
-      });
     },
     nodeClick({ level, id }) {
       if (level === 1) {

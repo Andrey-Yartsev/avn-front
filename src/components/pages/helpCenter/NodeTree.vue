@@ -10,6 +10,7 @@
     <template v-if="node.items && node.items.length">
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
+          <button class="btn-back-list" @click="back">Back</button>
           <ul>
             <node
               v-for="child in node.items"
@@ -22,6 +23,7 @@
         </div>
       </template>
       <template v-else>
+        <button class="btn-back-list" @click="back">Back</button>
         <ul :class="ulClass">
           <node
             v-for="child in node.items"
@@ -54,9 +56,22 @@ export default {
         level: this.level,
         id: this.node.id
       });
+    },
+    back() {
+      this.$store.dispatch("support/menu/back").then(() => {
+        if (this.allClosed) {
+          this.selectedRootNodeId = false;
+        }
+      });
     }
   },
   computed: {
+    allClosed() {
+      return (
+        !this.$store.state.support.menu.level1Opened &&
+        !this.$store.state.support.menu.level2Opened
+      );
+    },
     level2Opened() {
       return this.$store.state.support.menu.level2Opened;
     },
