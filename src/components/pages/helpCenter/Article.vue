@@ -23,7 +23,10 @@
               <div class="col col-1-4">
                 <!--<br><br><pre class="debug2">{{ debugLevels }}</pre>-->
                 <div class="questions-list">
-                  <ul v-if="items && items.length">
+                  <ul
+                    v-if="items && items.length"
+                    :class="{ opened: level1Opened }"
+                  >
                     <NodeTree
                       v-for="node in items"
                       :node="node"

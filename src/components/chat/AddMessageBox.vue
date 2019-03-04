@@ -71,7 +71,9 @@
       />
 
       <div class="getPaidForm" v-if="showPaid">
-        <button class="cancelPaid btn btn-cancel" @click="showPaid = false">Cancel</button>
+        <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
+          Cancel
+        </button>
         <input type="hidden" name="priceAmount" class="getPaidAmount" />
         <div class="price-amount-field getPaidForm__field">
           <input
