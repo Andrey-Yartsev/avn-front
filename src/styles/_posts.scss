@@ -1150,7 +1150,17 @@
   bottom: 0;
   padding-top: 7px;
   padding-bottom: 7px;
-  height: 44px;
+  //height: 44px;
+
+  @supports (padding-bottom: constant(safe-area-inset-bottom)) {
+    --safe-area-inset-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: calc(7px + var(--safe-area-inset-bottom));
+  }
+
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+    padding-bottom: calc(7px + var(--safe-area-inset-bottom));
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100%;
