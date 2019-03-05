@@ -1604,6 +1604,7 @@
     > div:not(.chatCollectionContent) {
 
       @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 1;
         min-height: 100%;
         position: relative;
         display: flex;
