@@ -5,7 +5,7 @@
         <div class="content">
           <div class="container-popup">
             <div class="popup-title popup-title_sticky-mob">
-              <button class="header-return-btn"></button>
+              <button class="header-return-btn" @click="close"></button>
               <div class="page-title page-title_reset-gl">
                 Add to highlights
               </div>
@@ -14,9 +14,12 @@
               <div class="popup-container-scroll">
                 <div class="highlights-form">
                   <Loader :fullscreen="false" v-if="loading" />
-                  <div class="msg-no-content show">
+                  <div
+                    class="msg-no-content show"
+                    v-if="!loading && !posts.length"
+                  >
                     <div class="msg-no-content__text">
-                      No highlights collections here yet
+                      No highlights yet
                     </div>
                   </div>
                   <VuePerfectScrollbar
