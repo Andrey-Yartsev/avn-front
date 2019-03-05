@@ -135,7 +135,11 @@ export default {
       return this.$store.state.auth.user;
     },
     adminReturnUrl() {
-      return this.$store.state.auth.user.adminReturnUrl;
+      if (this.user) {
+        return this.user.adminReturnUrl;
+      }
+
+      return undefined;
     },
     toastShowTrigger() {
       return this.$store.state.global.toastShowTrigger;
