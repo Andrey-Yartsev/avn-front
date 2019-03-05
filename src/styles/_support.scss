@@ -244,6 +244,31 @@ form.support-search-form {
     position: sticky;
   }
 
+  .scrollbar {
+
+    &.mlm100 {
+
+      > .ps {
+        overflow: visible !important;
+      }
+    }
+
+    &.mlm200 {
+
+      > .ps {
+        overflow: visible !important;
+
+        .level-2.show {
+
+          > .ps {
+            overflow: visible !important;
+          }
+        }
+      }
+    }
+
+  }
+
   ul {
     list-style: none;
     padding: 0;
