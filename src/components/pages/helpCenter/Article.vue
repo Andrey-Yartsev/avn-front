@@ -30,22 +30,32 @@
                       <button class="btn-back-list"></button>
 
                       <div class="scrollbar level-1 mlm200">
-                        <section class="ps-container ps ps--theme_default ps--active-y">
+                        <section
+                          class="ps-container ps ps--theme_default ps--active-y"
+                        >
                           <ul>
                             <li class="node-tree">
                               <a href="#" class="label">Using OnMyTeam.com</a>
 
                               <div class="scrollbar level-2 show">
-                                <section class="ps-container ps ps--theme_default ps--active-y">
+                                <section
+                                  class="ps-container ps ps--theme_default ps--active-y"
+                                >
                                   <ul>
                                     <li class="node-tree">
-                                      <a href="#" class="label">Using OnMyTeam.com</a>
+                                      <a href="#" class="label"
+                                        >Using OnMyTeam.com</a
+                                      >
 
                                       <div class="scrollbar level-3 show">
-                                        <section class="ps-container ps ps--theme_default ps--active-y">
+                                        <section
+                                          class="ps-container ps ps--theme_default ps--active-y"
+                                        >
                                           <ul>
                                             <li class="node-tree">
-                                              <a href="#" class="label">Using OnMyTeam.com</a>
+                                              <a href="#" class="label"
+                                                >Using OnMyTeam.com</a
+                                              >
                                             </li>
                                           </ul>
                                         </section>
@@ -78,7 +88,8 @@
                       <a href="#" class="label">Using OnMyTeam.com</a>
                     </li>
                   </ul>
-                </div><br><br>
+                </div>
+                <br /><br />
 
                 <div class="questions-list">
                   <ul
