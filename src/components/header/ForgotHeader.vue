@@ -21,7 +21,7 @@
         <div class="login-caption">
           <component :is="logo" />
           <p class="promotion">
-            Share and check what others have going on right now
+            Coming together.
           </p>
         </div>
         <Footer v-if="$mq === 'desktop'" />

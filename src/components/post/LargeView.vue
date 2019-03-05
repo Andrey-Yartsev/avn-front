@@ -70,18 +70,9 @@
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
         />
-        <Tip
-          v-if="showTip"
-          :user="post.author"
-          ref="tip"
-          @cancel="closeTip"
-        />
+        <Tip v-if="showTip" :user="post.author" ref="tip" @cancel="closeTip" />
         <template v-if="!isOwner() && post.author.canEarn">
-          <form
-            class="tip-form hidden"
-            :action="tipActionUrl"
-            target="_blank"
-          >
+          <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
             <input type="hidden" name="type" value="tip" />
             <input type="hidden" name="id" :value="post.author.id" />
             <input type="hidden" name="access-token" :value="accessToken" />
