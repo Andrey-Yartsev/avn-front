@@ -680,11 +680,11 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
-  position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     border-radius: 0 0 5px 5px;
     background-color: $white;
+    position: relative;
   }
 
   .select-user-image {
@@ -715,6 +715,14 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 50%;
     }
+  }
+
+  .msg-no-content {
+    padding-bottom: 20px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    align-content: center;
   }
 }
 

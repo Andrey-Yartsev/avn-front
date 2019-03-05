@@ -14,6 +14,11 @@
               <div class="popup-container-scroll">
                 <div class="highlights-form">
                   <Loader :fullscreen="false" v-if="loading" />
+                  <div class="msg-no-content show">
+                    <div class="msg-no-content__text">
+                      No highlights collections here yet
+                    </div>
+                  </div>
                   <VuePerfectScrollbar
                     class="list-cover-variation"
                     @ps-scroll-x="scrollFunction"
