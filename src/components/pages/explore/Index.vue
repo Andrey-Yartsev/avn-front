@@ -71,7 +71,7 @@
               <Loader :fullscreen="false" />
             </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">
-              <div class="msg-no-content__text">No posts here yet</div>
+              <div class="msg-no-content__text">No {{contentName}} here yet</div>
             </div>
           </div>
         </div>
@@ -147,6 +147,19 @@ export default {
 
       if (this.type === "live") {
         return this.$store.state.lives;
+      }
+    },
+    contentName() {
+      if (this.type === "media") {
+        return "posts";
+      }
+
+      if (this.type === "story") {
+        return "stories";
+      }
+
+      if (this.type === "live") {
+        return "lives";
       }
     },
     shouldShowNoPosts() {
