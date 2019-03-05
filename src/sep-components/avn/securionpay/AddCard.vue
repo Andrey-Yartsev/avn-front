@@ -31,8 +31,11 @@
                     user.paymentGateCardLast4
                   }}</span>
 
-                  <button class="delete" id="deleteCard" @click="replaceCard">
+                  <button class="replace" id="replaceCard" @click="replaceCard">
                     Replace
+                  </button>
+                  <button class="delete" id="deleteCard">
+                    Delete
                   </button>
                 </div>
               </div>
