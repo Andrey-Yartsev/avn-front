@@ -73,6 +73,13 @@
         flex-direction: column;
       }
     }
+
+    .chatCollectionContent__col_narrow {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        min-height: calc(100% - 88px - 84px);
+      }
+    }
   }
 
   .chat-popup_new-msg & {
@@ -122,6 +129,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;
       }
+    }
+  }
+
+  .site-footer {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      transition: all .3s;
     }
   }
 }
@@ -279,6 +293,13 @@
 
     > .chatHeader,
     .header-nav {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translateX(-100%);
+      }
+    }
+
+    .site-footer {
 
       @include media-breakpoint-down($desktop-breakpoint) {
         transform: translateX(-100%);
