@@ -410,10 +410,21 @@
   align-items: center;
   flex: 0 0 35%;
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    flex: 0 0 40%;
+  }
+
   .name-cvc {
     margin-right: 10px;
     margin-left: 20px;
   }
+}
+
+.cards-details {
+  display: flex;
+  flex: 1;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 
 .help-text {

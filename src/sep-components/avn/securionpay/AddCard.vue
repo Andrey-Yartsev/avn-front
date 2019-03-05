@@ -174,39 +174,40 @@
               <label class="form-group-inner">
                 <span class="label">Expiration Date</span>
 
-                <div
-                  class="group-expiration-date"
-                  :class="{ 'field-invalid': fieldError('expDate') }"
-                >
-                  <div class="form-field">
-                    <CardExpDate
-                      class="form-group"
-                      v-validate="'card-exp-date'"
-                      name="expDate"
-                      @input="expDateChanged"
-                    />
-                  </div>
-                  <div class="error-info" v-if="fieldError('expDate')">
-                    {{ fieldError("expDate") }}
-                  </div>
-                </div>
-
-                <span class="card-cvc-num">
-                  <span class="name-cvc">Cvc</span>
-                  <span class="form-group form-group_clear-gaps">
-                    <span class="form-field">
-                      <input
-                        v-model="cvc"
-                        type="text"
-                        size="8"
-                        minlength="3"
-                        maxlength="4"
-                        data-securionpay="cvc"
-                        v-validate="'required|numeric'"
+                <div class="cards-details">
+                  <div
+                    class="group-expiration-date"
+                    :class="{ 'field-invalid': fieldError('expDate') }"
+                  >
+                    <div class="form-field">
+                      <CardExpDate
+                        v-validate="'card-exp-date'"
+                        name="expDate"
+                        @input="expDateChanged"
                       />
+                    </div>
+                    <div class="error-info" v-if="fieldError('expDate')">
+                      {{ fieldError("expDate") }}
+                    </div>
+                  </div>
+
+                  <span class="card-cvc-num">
+                    <span class="name-cvc">Cvc</span>
+                    <span class="form-group form-group_clear-gaps">
+                      <span class="form-field">
+                        <input
+                          v-model="cvc"
+                          type="text"
+                          size="8"
+                          minlength="3"
+                          maxlength="4"
+                          data-securionpay="cvc"
+                          v-validate="'required|numeric'"
+                        />
+                      </span>
                     </span>
                   </span>
-                </span>
+                </div>
               </label>
             </div>
 

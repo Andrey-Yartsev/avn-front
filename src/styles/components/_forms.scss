@@ -270,6 +270,8 @@ label {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
+      align-items: flex-start;
+      align-content: flex-start;
     }
 
     input + button {
