@@ -71,7 +71,9 @@
               <Loader :fullscreen="false" />
             </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">
-              <div class="msg-no-content__text">No {{contentName}} here yet</div>
+              <div class="msg-no-content__text">
+                No {{ contentName }} here yet
+              </div>
             </div>
           </div>
         </div>
