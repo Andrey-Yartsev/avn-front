@@ -94,7 +94,7 @@
       <div class="comment-form-wrapper" v-if="!isAuth()">
         <div class="guest-comments-form">
           <p>Please login to leave comments</p>
-          <time class="date" :datetime="post.postedAt"
+          <time class="timestamp" :datetime="post.postedAt"
             >{{ timePassed }} ago</time
           >
         </div>
