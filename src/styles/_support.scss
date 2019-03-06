@@ -296,6 +296,7 @@ form.support-search-form {
 
     > .node-tree {
       position: relative;
+      overflow: hidden;
 
       &:first-child {
 
@@ -347,17 +348,24 @@ form.support-search-form {
           }
         }
 
-        div.level-1 {
-          //max-height: 1000px;
-          max-height: 200px;
+        .level-1 {
           visibility: visible;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .level-1,
+        .level-2,
+        .level-3 {
+          max-height: 200px;
         }
       }
     }
   }
 
   .ps-container {
-    max-height: 200px;
+    height: 100%;
+    flex: 1;
   }
 
   .label {
@@ -460,6 +468,10 @@ form.support-search-form {
             cursor: pointer;
             padding: 7px 13px 7px 24px;
             font-size: 12px;
+
+            &:hover {
+              color: $secondary-color;
+            }
           }
         }
       }
@@ -475,7 +487,8 @@ form.support-search-form {
   }
 
   .show {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 }
 
