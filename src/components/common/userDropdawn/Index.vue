@@ -50,14 +50,21 @@
             </li>
           </template>
           <li class="more-functions__item" v-if="copied">
-            <button class="btn-copy-link copied more-functions__link" type="button">
+            <button
+              class="btn-copy-link copied more-functions__link"
+              type="button"
+            >
               <span class="more-functions__option">
                 Copied!
               </span>
             </button>
           </li>
           <li class="more-functions__item" v-else>
-            <button class="btn-copy-link more-functions__link" type="button" @click="copyHref">
+            <button
+              class="btn-copy-link more-functions__link"
+              type="button"
+              @click="copyHref"
+            >
               <span class="more-functions__option">
                 Copy link
               </span>

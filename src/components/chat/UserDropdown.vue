@@ -24,12 +24,19 @@
       <div class="more-functions__dropdown-inside">
         <ul class="more-functions__list">
           <li class="more-functions__item">
-            <router-link class="profile-url more-functions__link" :to="'/' + activeUser.username"
-            ><span class="more-functions__option">View profile</span></router-link
+            <router-link
+              class="profile-url more-functions__link"
+              :to="'/' + activeUser.username"
+              ><span class="more-functions__option"
+                >View profile</span
+              ></router-link
             >
           </li>
           <li class="more-functions__item" v-if="activeUser.isBlocked">
-            <a class="menu-block more-functions__link" @click="unblockActiveUser">
+            <a
+              class="menu-block more-functions__link"
+              @click="unblockActiveUser"
+            >
               <span class="more-functions__option">
                 Unblock user
               </span>
@@ -59,9 +66,16 @@
             </li>
           </template>
           <template v-if="hasMessages">
-            <li v-if="deleteInProgress" class="more-functions__item"><div class="more-functions__link"><span class="more-functions__option">Deleting...</span></div></li>
+            <li v-if="deleteInProgress" class="more-functions__item">
+              <div class="more-functions__link">
+                <span class="more-functions__option">Deleting...</span>
+              </div>
+            </li>
             <li class="more-functions__item" v-else>
-              <a class="menu-delete more-functions__link" @click="deleteConversation">
+              <a
+                class="menu-delete more-functions__link"
+                @click="deleteConversation"
+              >
                 <span class="more-functions__option">
                   Delete conversation
                 </span>
@@ -76,7 +90,10 @@
             </a>
           </li>
           <li class="more-functions__item">
-            <a class="menu-cancel more-functions__link" @click="chatOptionsOpened = false">
+            <a
+              class="menu-cancel more-functions__link"
+              @click="chatOptionsOpened = false"
+            >
               <span class="more-functions__option">
                 Cancel
               </span>

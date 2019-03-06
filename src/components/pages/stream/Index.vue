@@ -221,28 +221,39 @@
           >
           <span class="stream-btn stream-online-count">{{ looksCount }}</span>
         </div>
-        <div class="more-functions more-functions_dir-inverse more-functions_sticky more-functions_sticky-br">
+        <div
+          class="more-functions more-functions_dir-inverse more-functions_sticky more-functions_sticky-br"
+        >
           <div class="more-functions__overlay"></div>
           <div class="more-functions__btn"></div>
           <div class="more-functions__dropdown">
             <div class="more-functions__dropdown-inside">
               <ul class="more-functions__list">
                 <li class="more-functions__item">
-                  <button type="button" class="btn-toggle-state more-functions__link">
+                  <button
+                    type="button"
+                    class="btn-toggle-state more-functions__link"
+                  >
                     <span class="more-functions__option">
                       No filter
                     </span>
                   </button>
                 </li>
                 <li class="more-functions__item">
-                  <button type="button" class="btn-toggle-state more-functions__link checked">
+                  <button
+                    type="button"
+                    class="btn-toggle-state more-functions__link checked"
+                  >
                     <span class="more-functions__option">
                       Face pretty
                     </span>
                   </button>
                 </li>
                 <li class="more-functions__item">
-                  <button type="button" class="btn-toggle-state more-functions__link">
+                  <button
+                    type="button"
+                    class="btn-toggle-state more-functions__link"
+                  >
                     <span class="more-functions__option">
                       Zoom face
                     </span>

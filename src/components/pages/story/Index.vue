@@ -106,7 +106,10 @@
       </div>
       <div
         v-if="isOwner(author.id)"
-        :class="['more-functions more-functions_sticky more-functions_sticky-br more-functions_dir-inverse', { open: showDropdawnMenu }]"
+        :class="[
+          'more-functions more-functions_sticky more-functions_sticky-br more-functions_dir-inverse',
+          { open: showDropdawnMenu }
+        ]"
         v-click-outside="hideDropdawn"
       >
         <div
@@ -118,7 +121,11 @@
           <div class="more-functions__dropdown-inside">
             <ul v-if="!isCollections" class="more-functions__list">
               <li class="more-functions__item">
-                <button class="deleteStory more-functions__link" type="button" @click="deleteStory">
+                <button
+                  class="deleteStory more-functions__link"
+                  type="button"
+                  @click="deleteStory"
+                >
                   <span class="more-functions__option">
                     Delete
                   </span>
@@ -171,7 +178,10 @@
                 </button>
               </li>
               <li v-if="copied" class="more-functions__item">
-                <button class="btn-copy-link copied more-functions__link" type="button">
+                <button
+                  class="btn-copy-link copied more-functions__link"
+                  type="button"
+                >
                   <span class="more-functions__option">
                     Copied!
                   </span>

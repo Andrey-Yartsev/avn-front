@@ -156,10 +156,16 @@
                     <router-link
                       class="profile-url more-functions__link"
                       :to="'/' + selectedUser.username"
-                    ><span class="more-functions__option">View profile</span></router-link
+                      ><span class="more-functions__option"
+                        >View profile</span
+                      ></router-link
                     >
                   </li>
-                  <li class="more-functions__item"><a class="menu-cancel more-functions__link"><span class="more-functions__option">Cancel</span></a></li>
+                  <li class="more-functions__item">
+                    <a class="menu-cancel more-functions__link"
+                      ><span class="more-functions__option">Cancel</span></a
+                    >
+                  </li>
                 </ul>
               </div>
             </div>

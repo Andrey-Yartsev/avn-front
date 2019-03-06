@@ -31,8 +31,16 @@
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
                 <ul class="more-functions__list">
-                  <li v-for="v in periodOptions" v-bind:key="v.value" class="more-functions__item">
-                    <button type="button" @click="selectPeriod(v.value)" class="more-functions__link">
+                  <li
+                    v-for="v in periodOptions"
+                    v-bind:key="v.value"
+                    class="more-functions__item"
+                  >
+                    <button
+                      type="button"
+                      @click="selectPeriod(v.value)"
+                      class="more-functions__link"
+                    >
                       <span class="more-functions__option">
                         {{ v.title }}
                       </span>

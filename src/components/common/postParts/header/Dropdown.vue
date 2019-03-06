@@ -1,14 +1,21 @@
 <template>
   <div class="more-functions__dropdown-inside">
     <ul class="more-functions__list">
-      <li v-if="$mq === 'mobile'" class="more-functions__details more-functions__item">
+      <li
+        v-if="$mq === 'mobile'"
+        class="more-functions__details more-functions__item"
+      >
         <a href="#" @click.prevent="detailView" class="more-functions__link">
           <span class="more-functions__option">Details</span>
         </a>
       </li>
       <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
-        <button class="report more-functions__link" type="button" @click="reportUser">
-            <span class="more-functions__option">Report post</span>
+        <button
+          class="report more-functions__link"
+          type="button"
+          @click="reportUser"
+        >
+          <span class="more-functions__option">Report post</span>
         </button>
       </li>
       <li v-if="copied" class="more-functions__item">
@@ -17,18 +24,30 @@
         </button>
       </li>
       <li class="more-functions__item" v-else>
-        <button class="btn-copy-link more-functions__link" type="button" @click="copyHref">
+        <button
+          class="btn-copy-link more-functions__link"
+          type="button"
+          @click="copyHref"
+        >
           <span class="more-functions__option">Copy link to post</span>
         </button>
       </li>
       <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
-        <button class="edit more-functions__link" type="button" @click="editPost">
+        <button
+          class="edit more-functions__link"
+          type="button"
+          @click="editPost"
+        >
           <span class="more-functions__option">Edit post</span>
         </button>
       </li>
       <template v-if="isOwner(userId)">
         <li class="more-functions__item">
-          <button class="deletePost more-functions__link" type="button" @click="deletePost">
+          <button
+            class="deletePost more-functions__link"
+            type="button"
+            @click="deletePost"
+          >
             <span class="more-functions__option">Delete post</span>
           </button>
         </li>
