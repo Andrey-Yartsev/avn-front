@@ -92,18 +92,16 @@
           Login
         </button>
       </form>
-      <template v-if="$root.isTeamApp">
-        <div class="login-or">
-          <span>or</span>
-        </div>
-        <button
-          class="btn block twitter"
-          :class="{ lg: largeControls }"
-          @click.prevent="twitter"
-        >
-          Sign in with Twitter
-        </button>
-      </template>
+      <div class="login-or">
+        <span>or</span>
+      </div>
+      <button
+        class="btn block twitter"
+        :class="{ lg: largeControls }"
+        @click.prevent="twitter"
+      >
+        Sign in with Twitter
+      </button>
       <div class="signUp">
         <div class="signUp__body">
           <h3>Don't have an account yet?</h3>

@@ -50,7 +50,6 @@
       </div>
       -->
       <div
-        v-if="$root.isTeamApp"
         class="form-title tweet-posts-block border-top disabled border-top-mobile"
       >
         <div class="inner">
@@ -71,10 +70,7 @@
           </label>
         </div>
       </div>
-      <div
-        v-if="$root.isTeamApp"
-        class="go-twitter-block shadow-block no-padding hidden-desktop"
-      >
+      <div class="go-twitter-block shadow-block no-padding hidden-desktop">
         <div class="settings-nav">
           <router-link to="/settings/privacy/twitter" class="settings-nav__item"
             ><span>Twitter</span><span class="value">Connect</span></router-link
@@ -82,7 +78,7 @@
         </div>
       </div>
 
-      <ConnectTwitter v-if="$root.isTeamApp" @connected="twitterConnected" />
+      <ConnectTwitter @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
         <div class="form-group form-group_with-label">

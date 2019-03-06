@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <div v-if="$root.isTeamApp" class="border-top twitter-block">
+    <div class="border-top twitter-block">
       <ConnectTwitter @connected="twitterConnected" />
     </div>
 

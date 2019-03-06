@@ -38,7 +38,7 @@
             </a>
           </p>
           <a
-            v-if="profile.twitterUsername && $root.isTeamApp"
+            v-if="profile.twitterUsername"
             :href="'https://twitter.com/' + profile.twitterUsername"
             class="profile-twitter-link"
             target="_blank"

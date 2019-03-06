@@ -17,7 +17,6 @@
         <router-link
           to="/settings/account/twitter"
           class="settings-nav__item"
-          v-if="$root.isTeamApp"
         >
           <span>Twitter</span>
           <span class="value">Connect</span>
