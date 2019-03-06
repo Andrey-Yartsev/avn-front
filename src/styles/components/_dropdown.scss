@@ -386,8 +386,11 @@
     &.report,
     &.menu-block,
     &.deleteStory {
-      color: $primary-color;
-      opacity: 1;
+
+      .more-functions__option {
+        color: $primary-color;
+        opacity: 1;
+      }
     }
 
     &:before {
