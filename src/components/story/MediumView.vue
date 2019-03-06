@@ -1,7 +1,7 @@
 <template>
   <div class="storyView" :data-id="post.user.id">
     <router-link :to="`/stories/${post.user.id}`" class="story">
-      <div class="story-preview">
+      <div class="story-preview bg-gradient bg-gradient_light">
         <img :src="image" />
         <div
           :class="[
