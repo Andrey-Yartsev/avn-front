@@ -106,7 +106,7 @@
       </div>
       <div
         v-if="isOwner(author.id)"
-        :class="['more-functions', { open: showDropdawnMenu }]"
+        :class="['more-functions more-functions_sticky more-functions_sticky-br more-functions_dir-inverse', { open: showDropdawnMenu }]"
         v-click-outside="hideDropdawn"
       >
         <div
@@ -116,71 +116,87 @@
         <div class="more-functions__btn" @click.prevent="openDropdawn"></div>
         <div class="more-functions__dropdown">
           <div class="more-functions__dropdown-inside">
-            <ul v-if="!isCollections">
-              <li>
-                <button class="deleteStory" type="button" @click="deleteStory">
-                  Delete
+            <ul v-if="!isCollections" class="more-functions__list">
+              <li class="more-functions__item">
+                <button class="deleteStory more-functions__link" type="button" @click="deleteStory">
+                  <span class="more-functions__option">
+                    Delete
+                  </span>
                 </button>
               </li>
-              <li>
+              <li class="more-functions__item">
                 <button
-                  class="saveFile"
+                  class="saveFile more-functions__link"
                   type="button"
                   @click="saveToHighlights"
                 >
-                  Save
+                  <span class="more-functions__option">
+                    Save
+                  </span>
                 </button>
               </li>
-              <li>
+              <li class="more-functions__item">
                 <button
-                  class="storySettings"
+                  class="storySettings more-functions__link"
                   type="button"
                   @click="storySettings"
                 >
-                  Story Settings
+                  <span class="more-functions__option">
+                    Story Settings
+                  </span>
                 </button>
               </li>
             </ul>
-            <ul v-else>
-              <li>
+            <ul class="more-functions__list" v-else>
+              <li class=" more-functions__item">
                 <button
-                  class="storySettings"
+                  class="storySettings more-functions__link"
                   type="button"
                   @click="editHighlight"
                 >
-                  Edit highlight
+                  <span class="more-functions__option">
+                    Edit highlight
+                  </span>
                 </button>
               </li>
-              <li>
+              <li class="more-functions__item">
                 <button
-                  class="saveFile"
+                  class="saveFile more-functions__link"
                   type="button"
                   @click="removeFromHighlight"
                 >
-                  Remove from highlight
+                  <span class="more-functions__option">
+                    Remove from highlight
+                  </span>
                 </button>
               </li>
-              <li v-if="copied">
-                <button class="btn-copy-link copied" type="button">
-                  Copied!
+              <li v-if="copied" class="more-functions__item">
+                <button class="btn-copy-link copied more-functions__link" type="button">
+                  <span class="more-functions__option">
+                    Copied!
+                  </span>
                 </button>
               </li>
-              <li v-else>
+              <li class="more-functions__item" v-else>
                 <button
-                  class="storySettings"
+                  class="storySettings more-functions__link"
                   type="button"
                   @click="copyHighlightLink"
                 >
-                  Copy link
+                  <span class="more-functions__option">
+                    Copy link
+                  </span>
                 </button>
               </li>
-              <li>
+              <li class="more-functions__item">
                 <button
-                  class="deleteStory"
+                  class="deleteStory more-functions__link"
                   type="button"
                   @click="removeHighlight"
                 >
-                  Remove highlight
+                  <span class="more-functions__option">
+                    Remove highlight
+                  </span>
                 </button>
               </li>
             </ul>

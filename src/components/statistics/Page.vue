@@ -29,14 +29,17 @@
             </div>
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
-                <ul>
-                  <li v-for="v in periodTypes" :key="v.name">
+                <ul class="more-functions__list">
+                  <li v-for="v in periodTypes" :key="v.name" class="more-functions__item">
                     <button
                       type="button"
                       :disabled="v.name === currentPeriodType"
                       @click="selectPeriod(v.name)"
+                      class="more-functions__link"
                     >
-                      {{ v.title }}
+                      <span class="more-functions__option">
+                        {{ v.title }}
+                      </span>
                     </button>
                   </li>
                 </ul>

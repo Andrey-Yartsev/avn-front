@@ -9,32 +9,58 @@
     </div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
-        <ul>
-          <li v-if="!isOwner(profile.id)">
-            <a href="#" @click.prevent="report">Report</a>
+        <ul class="more-functions__list">
+          <li v-if="!isOwner(profile.id)" class="more-functions__item">
+            <a href="#" @click.prevent="report" class="more-functions__link">
+              <span class="more-functions__option">
+                Report
+              </span>
+            </a>
           </li>
           <template v-if="!isOwner(profile.id)">
-            <li v-if="profile.isBlocked">
-              <a href="#" @click.prevent="unblock">Unblock</a>
+            <li v-if="profile.isBlocked" class="more-functions__item">
+              <a href="#" @click.prevent="unblock" class="more-functions__link">
+                <span class="more-functions__option">
+                  Unblock
+                </span>
+              </a>
             </li>
-            <li v-else>
-              <a href="#" @click.prevent="block">Block</a>
+            <li class="more-functions__item" v-else>
+              <a href="#" @click.prevent="block" class="more-functions__link">
+                <span class="more-functions__option">
+                  Block
+                </span>
+              </a>
             </li>
           </template>
           <template v-if="canMute">
-            <li v-if="isMuted">
-              <a href="#" @click.prevent="unmute">Unmute</a>
+            <li class="more-functions__item" v-if="isMuted">
+              <a href="#" @click.prevent="unmute" class="more-functions__link">
+                <span class="more-functions__option">
+                  Unmute
+                </span>
+              </a>
             </li>
-            <li v-else>
-              <a href="#" @click.prevent="mute">Mute</a>
+            <li class="more-functions__item" v-else>
+              <a href="#" @click.prevent="mute" class="more-functions__link">
+                <span class="more-functions__option">
+                  Mute
+                </span>
+              </a>
             </li>
           </template>
-          <li v-if="copied">
-            <button class="btn-copy-link copied" type="button">Copied!</button>
+          <li class="more-functions__item" v-if="copied">
+            <button class="btn-copy-link copied more-functions__link" type="button">
+              <span class="more-functions__option">
+                Copied!
+              </span>
+            </button>
           </li>
-          <li v-else>
-            <button class="btn-copy-link" type="button" @click="copyHref">
-              Copy link
+          <li class="more-functions__item" v-else>
+            <button class="btn-copy-link more-functions__link" type="button" @click="copyHref">
+              <span class="more-functions__option">
+                Copy link
+              </span>
             </button>
           </li>
         </ul>

@@ -151,15 +151,15 @@
             <div class="more-functions__btn"></div>
             <div class="more-functions__dropdown">
               <div class="more-functions__dropdown-inside">
-                <ul>
-                  <li>
+                <ul class="more-functions__list">
+                  <li class="more-functions__item">
                     <router-link
-                      class="profile-url"
+                      class="profile-url more-functions__link"
                       :to="'/' + selectedUser.username"
-                      >View profile</router-link
+                    ><span class="more-functions__option">View profile</span></router-link
                     >
                   </li>
-                  <li><a class="menu-cancel">Cancel</a></li>
+                  <li class="more-functions__item"><a class="menu-cancel more-functions__link"><span class="more-functions__option">Cancel</span></a></li>
                 </ul>
               </div>
             </div>
