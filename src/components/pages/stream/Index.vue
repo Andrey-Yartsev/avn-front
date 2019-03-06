@@ -515,10 +515,10 @@ export default {
       thumbEnabled: true,
       videoSave: true,
       getApiUrl: StreamApi.getStreamPath(token),
-      clientGetApiUrl: "https://gpu3.view.me/webrtc-api",
+      clientGetApiUrl: null,
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
-      streamSource: "client",
+      streamSource: "local",
       showLikes: false,
       showErrorMessage(message) {
         // eslint-disable-next-line
@@ -567,6 +567,7 @@ export default {
               id,
               token
             );
+            Streams.getStreamAsClient();
           });
       },
       onStreamEnd: () => {
