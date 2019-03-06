@@ -10,7 +10,6 @@
     <template v-if="node.items && node.items.length">
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
-          <!--<button class="btn-back-list" @click="back"></button>-->
           <VuePerfectScrollbar>
             <ul>
               <node
@@ -27,7 +26,7 @@
       <template v-else>
         <button class="btn-back-list" @click="back"></button>
         <div class="scrollbar" :class="divClass">
-          <VuePerfectScrollbar :class="ulClass">
+          <VuePerfectScrollbar>
             <ul>
               <node
                 v-for="child in node.items"
@@ -89,7 +88,7 @@ export default {
     level3Opened() {
       return this.$store.state.support.menu.level3Opened;
     },
-    ulClass() {
+    divClass() {
       const r = {};
       r["level-" + this.level] = true;
       if (this.level === 1) {
@@ -99,11 +98,6 @@ export default {
           r.mlm100 = true;
         }
       }
-      return r;
-    },
-    divClass() {
-      const r = {};
-      r["level-" + this.level] = true;
       if (
         this.level === 2 &&
         this.level2Opened &&
@@ -119,16 +113,6 @@ export default {
         r.show = true;
       }
       return r;
-    },
-    debugInfo() {
-      return (
-        "Node=" +
-        this.node.id +
-        ") " +
-        this.node.title +
-        ", Level=" +
-        this.level
-      );
     }
   }
 };
