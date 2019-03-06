@@ -221,48 +221,11 @@
           >
           <span class="stream-btn stream-online-count">{{ looksCount }}</span>
         </div>
-        <div
-          class="more-functions more-functions_dir-inverse more-functions_sticky more-functions_sticky-br"
-        >
-          <div class="more-functions__overlay"></div>
-          <div class="more-functions__btn"></div>
-          <div class="more-functions__dropdown">
-            <div class="more-functions__dropdown-inside">
-              <ul class="more-functions__list">
-                <li class="more-functions__item">
-                  <button
-                    type="button"
-                    class="btn-toggle-state more-functions__link"
-                  >
-                    <span class="more-functions__option">
-                      No filter
-                    </span>
-                  </button>
-                </li>
-                <li class="more-functions__item">
-                  <button
-                    type="button"
-                    class="btn-toggle-state more-functions__link checked"
-                  >
-                    <span class="more-functions__option">
-                      Face pretty
-                    </span>
-                  </button>
-                </li>
-                <li class="more-functions__item">
-                  <button
-                    type="button"
-                    class="btn-toggle-state more-functions__link"
-                  >
-                    <span class="more-functions__option">
-                      Zoom face
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <Filters
+          v-if="filters.length"
+          :filters="filters"
+          :onChange="changeFilter"
+        />
       </div>
       <div class="mediasBottom" v-if="isReadyToStart">
         <button class="btn alt lg change-devices" @click="startStream">
@@ -287,6 +250,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import StreamStatistic from "@/components/pages/stream/Statistic";
+import Filters from "@/components/pages/stream/Filters";
 import userMixin from "@/mixins/user";
 import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
@@ -323,12 +287,15 @@ export default {
       canBeSaved: false,
 
       streamDuration: 0,
-      streamStartTime: 0
+      streamStartTime: 0,
+
+      filters: []
     };
   },
   components: {
     Loader,
-    StreamStatistic
+    StreamStatistic,
+    Filters
   },
   computed: {
     likesCount() {
@@ -528,6 +495,9 @@ export default {
           JSON.stringify({ ...common, code: "stream_tip_search_all" })
         );
       }
+    },
+    changeFilter(value) {
+      Streams.changeFilter(value);
     }
   },
   mounted() {
@@ -638,6 +608,12 @@ export default {
             date,
             ...pos
           });
+        }
+
+        if (message.type === "plugin.list") {
+          this.filters = message.list.filter(
+            filter => filter.parent_id === "face_filters"
+          );
         }
       },
       onDevicesReadyCallback
