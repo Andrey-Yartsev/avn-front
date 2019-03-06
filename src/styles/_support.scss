@@ -683,12 +683,26 @@ form.support-search-form {
 }
 
 .support-message {
-  padding: 19px 24px;
+  padding: 19px 24px 19px 48px;
   line-height: 1.4em;
   margin: 0 0 29px;
+  position: relative;
+
+  &:before {
+    @include icon-font;
+    position: absolute;
+    left: 6px;
+    top: 18px;
+    font-size: 40px;
+    line-height: 40px;
+  }
 
   &.info {
-    position: relative;
+
+    &:before {
+      content: "\E619";
+      color: $primary-color;
+    }
 
     &:after {
       content: "";
