@@ -11,7 +11,7 @@
     <template v-if="node.items && node.items.length">
       <template v-if="level === 2 || level === 3">
         <div class="scrollbar" :class="divClass">
-          <VuePerfectScrollbar>
+          <VuePerfectScrollbar v-if="divClass.show">
             <ul>
               <node
                 v-for="child in node.items"
