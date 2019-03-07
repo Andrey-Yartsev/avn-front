@@ -626,6 +626,17 @@
       max-width: calc(100% - 70px);
     }
   }
+
+  &.stories-wrapper {
+
+    + .container {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        position: relative;
+        z-index: 2;
+      }
+    }
+  }
 }
 
 .amount-items {
