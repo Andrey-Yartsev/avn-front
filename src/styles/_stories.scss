@@ -500,8 +500,8 @@
 }
 
 .stories-collection {
-  background: $white
-  linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+  //background: $white
+  //linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
   position: relative;
   overflow: hidden;
 
@@ -633,7 +633,6 @@
 
       @include media-breakpoint-down($desktop-breakpoint) {
         position: relative;
-        z-index: 2;
       }
     }
   }
