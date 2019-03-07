@@ -1779,7 +1779,7 @@
     }
   }
 
-  &.special-site-header {
+  &.special-site-header:not(.not-authorized) {
 
     .header-scrolled {
 
