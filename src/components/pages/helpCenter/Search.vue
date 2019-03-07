@@ -4,8 +4,8 @@
       <div class="s-breadcrumbs">
         <div class="container">
           <div class="breadcrumbs">
-            <router-link to="/support">Help Center</router-link>
-            <span>Search</span>
+            <router-link to="/support" class="breadcrumbs__item">Help Center</router-link>
+            <span class="breadcrumbs__item current">Search</span>
           </div>
         </div>
       </div>

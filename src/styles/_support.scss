@@ -532,12 +532,13 @@ form.support-search-form {
 
 .breadcrumbs {
 
-  a {
+  &__item {
     color: $main-color;
     opacity: .5;
     margin-right: 6px;
     position: relative;
     padding-right: 14px;
+    display: inline-block;
 
     &:after {
       content: "\E643";
@@ -547,10 +548,14 @@ form.support-search-form {
       top: -1px;
       font-size: 18px;
     }
-  }
 
-  a, span {
-    display: inline-block;
+    &.current {
+      opacity: 1;
+
+      &:after {
+        display: none;
+      }
+    }
   }
 }
 
