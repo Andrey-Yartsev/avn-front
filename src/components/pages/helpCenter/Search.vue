@@ -5,8 +5,8 @@
         <div class="container">
           <div class="breadcrumbs">
             <router-link to="/support" class="breadcrumbs__item"
-              >Help Center</router-link
-            >
+              >Help Center
+            </router-link>
             <span class="breadcrumbs__item current">Search</span>
           </div>
         </div>
@@ -21,14 +21,15 @@
               <Loader :fullscreen="false" text="" class="transparent small" />
             </div>
             <template v-else>
-              <template v-if="results.length">
+              <template v-if="visibleResults.length">
                 <h3>Search results:</h3>
                 <div class="search-results-support">
-                  <ol v-if="results.length">
-                    <li v-for="v in results" :key="v.id">
-                      <router-link :to="'/support/article/' + v.id"
-                        ><span>{{ v.title }}</span></router-link
-                      >
+                  <ol>
+                    <li v-for="v in visibleResults" :key="v.id">
+                      <router-link :to="'/support/article/' + v.id">
+                        <span>{{ v.title }}</span>
+                      </router-link>
+                      <span v-html="cutLength(v.description)"></span>
                     </li>
                   </ol>
                 </div>
@@ -48,9 +49,11 @@
 import ContentWrapper from "./ContentWrapper";
 import NodeTree from "./NodeTree";
 import Loader from "@/components/common/Loader";
+import InfinityScroll from "@/mixins/infinityScroll";
 
 export default {
   name: "HelpCenterArticle",
+  mixins: [InfinityScroll],
   components: {
     ContentWrapper,
     NodeTree,
@@ -61,7 +64,10 @@ export default {
       loading: true,
       error: null,
       results: [],
-      localSearchText: null
+      visibleResults: [],
+      localSearchText: null,
+      infinityScrollIndex: 0,
+      infinityScrollStep: 10
     };
   },
   computed: {
@@ -73,6 +79,12 @@ export default {
     },
     searchText() {
       return this.$route.params.text;
+    },
+    store() {
+      return {
+        loading: this.loading,
+        allDataReceived: false
+      };
     }
   },
   watch: {
@@ -97,17 +109,50 @@ export default {
     },
     search(text) {
       this.results = [];
+      this.error = null;
       this.localSearchText = this.escapeRegExp(text);
       this.searchR(this.items);
+      this.visibleResults = this.results.slice(0, this.infinityScrollStep);
     },
     matchSearch(item) {
-      const re = new RegExp(this.localSearchText);
+      const re = new RegExp(this.localSearchText, "i");
       if (item.description.match(re)) {
         return true;
       } else if (item.title.match(re)) {
         return true;
       }
       return false;
+    },
+    stripHtml(html) {
+      const tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    },
+    cut(v) {
+      if (!v) {
+        return "…";
+      }
+      if (v.length <= 100) {
+        return v;
+      }
+      return v.substring(0, 100) + "…";
+    },
+    cutLength(html) {
+      return this.cut(this.stripHtml(html));
+    },
+    infinityScrollGetDataMethod() {
+      this.infinityScrollIndex++;
+      const lastIndex =
+        (this.infinityScrollIndex + 1) * this.infinityScrollStep;
+      this.visibleResults = this.visibleResults.concat(
+        this.results.slice(
+          this.infinityScrollIndex * this.infinityScrollStep,
+          lastIndex
+        )
+      );
+      if (lastIndex >= this.results.length) {
+        this.store.allDataReceived = true;
+      }
     }
   },
   mounted() {
