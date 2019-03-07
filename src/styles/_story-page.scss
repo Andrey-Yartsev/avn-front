@@ -198,7 +198,7 @@
       max-height: calc(100% - 220px);
       object-fit: cover;
       position: relative;
-      pointer-events: none;
+      -webkit-user-select: none;
 
       @include media-breakpoint-down($desktop-breakpoint) {
 
