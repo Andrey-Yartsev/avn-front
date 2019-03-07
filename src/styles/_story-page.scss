@@ -1,5 +1,29 @@
 @import "components/imports";
 
+@-webkit-keyframes lineWidth {
+
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+
+}
+
+@keyframes lineWidth {
+
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+
+}
+
 .head-story {
   position: absolute;
   top: 15px;
@@ -125,8 +149,12 @@
       }
       &.active {
         &:after {
-          width: 100%;
-          transition: width 4s ease-in;
+          animation: lineWidth 4s normal forwards ease-in-out;
+          //width: 100%;
+          //transition: width 4s ease-in;
+        }
+        &.paused:after {
+          animation-play-state: paused;
         }
         &.video:after {
           width: 0;
