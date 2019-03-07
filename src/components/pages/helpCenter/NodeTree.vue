@@ -76,6 +76,9 @@ export default {
     }
   },
   computed: {
+    selected() {
+      return this.selectedRootId === this.node.id;
+    },
     allClosed() {
       return (
         !this.$store.state.support.menu.level1Opened &&
@@ -91,7 +94,7 @@ export default {
     divClass() {
       const r = {};
       r["level-" + this.level] = true;
-      if (this.level === 1) {
+      if (this.level === 1 && this.selected) {
         if (this.level3Opened) {
           r.mlm200 = true;
         } else if (this.level2Opened) {
@@ -113,6 +116,16 @@ export default {
         r.show = true;
       }
       return r;
+    },
+    debugInfo() {
+      return (
+        "Node=" +
+        this.node.id +
+        ") " +
+        this.node.title +
+        ", Level=" +
+        this.level
+      );
     }
   }
 };
