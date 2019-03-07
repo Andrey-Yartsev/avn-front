@@ -4,6 +4,7 @@
       @click.prevent="nodeClick"
       :href="'/support/article/' + node.id"
       class="label"
+      :class="{ selected: selectedLink }"
     >
       {{ node.title }}</a
     >
@@ -78,6 +79,15 @@ export default {
   computed: {
     selected() {
       return this.selectedRootId === this.node.id;
+    },
+    selectedId() {
+      return parseInt(this.$route.params.id);
+    },
+    selectedLink() {
+      if (this.level < 4) {
+        return false;
+      }
+      return this.node.id === this.selectedId;
     },
     allClosed() {
       return (

@@ -23,8 +23,6 @@
           <div class="container">
             <div class="cols">
               <div class="col col-1-4">
-                <!--<br><br><pre class="debug2">{{ debugLevels }}</pre>-->
-
                 <div class="questions-list">
                   <ul
                     v-if="items && items.length"
@@ -72,7 +70,9 @@ export default {
       item: null,
       initialized: false,
       rootItem: {},
-      selectedRootNodeId: null
+      selectedRootNodeId: null,
+      pathItems: [],
+      storePath: false
     };
   },
   computed: {
@@ -96,9 +96,6 @@ export default {
     },
     level2Opened() {
       return this.$store.state.support.menu.level2Opened;
-    },
-    debugLevels() {
-      return this.$store.state.support.menu;
     }
   },
   watch: {
@@ -121,7 +118,7 @@ export default {
   methods: {
     init() {
       this.initialized = false;
-      const item = this.findR(this.items, this.id);
+      const item = this.findCurrentItem();
       if (!item.rootId) {
         this.redirectToDeepestLeaf(item);
         return;
@@ -130,10 +127,21 @@ export default {
         this.rootItem = this.findR(this.items, item.rootId);
         this.item = item;
         this.initialized = true;
+        this.initMenuState();
       }
+    },
+    findCurrentItem() {
+      this.storePath = true;
+      this.pathItems = [];
+      const item = this.findR(this.items, this.id);
+      this.storePath = false;
+      return item;
     },
     findR(items, id, rootId) {
       for (let item of items) {
+        if (this.storePath) {
+          this.pathItems.push(item);
+        }
         if (item.id === id) {
           item.rootId = rootId || null;
           return item;
@@ -149,6 +157,9 @@ export default {
           if (r) {
             return r;
           }
+        }
+        if (this.storePath) {
+          this.pathItems.pop();
         }
       }
       return null;
@@ -196,10 +207,25 @@ export default {
           level,
           opened: id
         });
-        this["level" + level + "Opened"] = true;
       } else if (level === 4) {
         this.$router.push("/support/article/" + id);
       }
+    },
+    initMenuState() {
+      this.selectedRootNodeId = this.rootItem.id;
+
+      this.$store.commit("support/menu/setOpened", {
+        level: 1,
+        opened: true
+      });
+      this.$store.commit("support/menu/setOpened", {
+        level: 2,
+        opened: this.pathItems[1].id
+      });
+      this.$store.commit("support/menu/setOpened", {
+        level: 3,
+        opened: this.pathItems[2].id
+      });
     }
   }
 };
