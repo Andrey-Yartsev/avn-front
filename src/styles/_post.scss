@@ -222,6 +222,14 @@
       flex: 0 0 44px;
     }
 
+    .not-authorized & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+
     .lightbox-post & {
 
       .explore-page & {

@@ -513,6 +513,8 @@
     display: none;
     background: var(--white);
   }
+
+
 }
 
 .header_container {
@@ -656,6 +658,13 @@
   &_reset-gl {
 
     @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 0;
+    }
+  }
+
+  .not-authorized & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
       padding-left: 0;
     }
   }
@@ -1691,6 +1700,13 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
+  }
+
+  .not-authorized & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: none;
+    }
   }
 
   &:hover {

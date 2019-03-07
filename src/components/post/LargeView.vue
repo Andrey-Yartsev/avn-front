@@ -11,6 +11,9 @@
       <div class="header-mobile" v-if="$mq === 'mobile'">
         <button class="header-return-btn" @click="back"></button>
         <h1 class="page-title">Post</h1>
+        <router-link to="/login" class="btn border alt login hidden-desktop"
+          >Log in</router-link
+        >
       </div>
       <Header
         :class="'hidden-desktop'"
