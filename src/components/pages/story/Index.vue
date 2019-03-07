@@ -9,16 +9,18 @@
               :src="currentStory.src.source || currentStory.preview.source"
               alt
             />
-            <img
-              @mousedown="pause"
-              @mouseup="resume"
-              @touchstart="pause"
-              @touchend="resume"
-              class="storyItem"
-              :src="currentStory.src.source || currentStory.preview.source"
-              ref="storyItem"
-              alt
-            />
+            <div class="story-image">
+              <img
+                @mousedown="pause"
+                @mouseup="resume"
+                @touchstart="pause"
+                @touchend="resume"
+                class="storyItem"
+                :src="currentStory.src.source || currentStory.preview.source"
+                ref="storyItem"
+                alt
+              />
+            </div>
           </template>
           <video
             v-if="currentStory.mediaType === 'video'"
