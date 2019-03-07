@@ -9,12 +9,14 @@
               :src="currentStory.src.source || currentStory.preview.source"
               alt
             />
-            <div class="story-image">
+            <div
+              class="story-image"
+              @mousedown="pause"
+              @mouseup="resume"
+              @touchstart="pause"
+              @touchend="resume"
+            >
               <img
-                @mousedown="pause"
-                @mouseup="resume"
-                @touchstart="pause"
-                @touchend="resume"
                 class="storyItem"
                 :src="currentStory.src.source || currentStory.preview.source"
                 ref="storyItem"
