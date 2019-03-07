@@ -7,7 +7,7 @@
     }
   }
 
-  &_mob {
+  &_mob:not(.not-authorized) {
 
     #site_header {
 
@@ -15,6 +15,7 @@
         display: none;
       }
     }
+
 
     .scroll-top {
 
