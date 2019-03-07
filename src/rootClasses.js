@@ -16,7 +16,8 @@ export default {
     "profile-page",
     "no-site-header_mob",
     "special-site-header",
-    "reset-sticky-gap"
+    "reset-sticky-gap",
+    "has-page-footer"
   ],
   myProfile: ["profile-page"],
   staticPage: ["static-page"],
