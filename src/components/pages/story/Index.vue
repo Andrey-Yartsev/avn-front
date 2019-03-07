@@ -10,6 +10,10 @@
               alt
             />
             <img
+              @mousedown="pause"
+              @mouseup="resume"
+              @touchstart="pause"
+              @touchend="resume"
               class="storyItem"
               :src="currentStory.src.source || currentStory.preview.source"
               ref="storyItem"
@@ -21,6 +25,10 @@
             class="story-video-element storyItem"
             :src="currentStory.src.source"
             ref="storyItem"
+            @mousedown="pause"
+            @mouseup="resume"
+            @touchstart="pause"
+            @touchend="resume"
           ></video>
         </div>
       </div>
@@ -45,6 +53,7 @@
             'item',
             {
               active: key === currActiveIndex,
+              paused: isPaused,
               fullActive: key < currActiveIndex,
               video: value.mediaType === 'video'
             }
@@ -302,7 +311,8 @@ export default {
       showDropdawnMenu: false,
       showLoader: false,
       showVideoPlay: false,
-      copied: false
+      copied: false,
+      isPaused: false
     };
   },
   computed: {
@@ -500,6 +510,8 @@ export default {
     },
 
     pause() {
+      this.isPaused = true;
+
       const { mediaType, id } = this.currentStory;
 
       if (this.timer) {
@@ -513,6 +525,8 @@ export default {
     },
 
     resume() {
+      this.isPaused = false;
+
       if (this.timer) {
         this.timer.resume();
       }
