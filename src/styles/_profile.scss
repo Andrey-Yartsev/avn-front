@@ -978,12 +978,10 @@
   }
 
   &.size-lg {
-    height: 62vw;
-    top: calc(44px - 62vw);
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 400px;
-      top: -320px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 62vw;
+      top: calc(44px - 62vw);
     }
   }
 
