@@ -5,8 +5,8 @@
         v-for="media in preloadedMedias"
         :media="media"
         :key="media.id"
-        v-on:removePostMedia="removeMedia"
         :isSaving="isSaving"
+        @removeMedia="removeMedia"
       />
     </div>
     <div class="chatForm">
