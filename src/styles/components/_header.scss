@@ -297,6 +297,13 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       transform: translate3d(0, -44px, 0);
     }
+
+    .support-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        transform: translate3d(0, 0, 0);
+      }
+    }
   }
 
   .scroll-bottom & {
