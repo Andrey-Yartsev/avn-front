@@ -4,12 +4,14 @@
       <div class="s-breadcrumbs">
         <div class="container">
           <div class="breadcrumbs">
-            <router-link to="/support" class="breadcrumbs__item">Help Center</router-link>
+            <router-link to="/support" class="breadcrumbs__item"
+              >Help Center</router-link
+            >
             <span class="breadcrumbs__item current">Search</span>
           </div>
         </div>
       </div>
-      <div class="s-container support-content">
+      <div class="s-container support-content shadow-block">
         <div class="container">
           <div class="error" v-if="error">
             {{ error }}

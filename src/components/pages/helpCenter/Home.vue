@@ -1,7 +1,7 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <div class="s-container support-content">
+      <div class="s-container support-content shadow-block">
         <div class="container">
           <div class="s-header text-centered">
             <h2>AVN Stars Support</h2>
@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="s-container support-content">
+      <div class="s-container support-content shadow-block">
         <div class="container">
           <div class="cols">
             <div class="col col-1-2">
