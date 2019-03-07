@@ -448,6 +448,7 @@
 
 .story-image {
   position: relative;
+  user-select: none;
 
   &:after {
     content: "";
