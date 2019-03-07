@@ -68,6 +68,7 @@
   top: 0;
   z-index: 20;
   background-color: #000;
+
   &:before,
   &:after {
     content: "";
@@ -78,6 +79,7 @@
     pointer-events: none;
     z-index: 1;
   }
+
   &:before {
     top: 0;
     background: linear-gradient(
@@ -86,152 +88,20 @@
       transparent 100%
     );
   }
+
   &:after {
     bottom: 0;
     background: linear-gradient(to top, rgba(#000, 0.1) 0%, transparent 100%);
   }
-  .progress-pagination {
-    position: absolute;
-    display: flex;
-    left: 3px;
-    right: 3px;
-    top: 0;
-    z-index: 2;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      left: 7px;
-      right: 7px;
-    }
-    .item {
-      background: none;
-      border: none;
-      padding: 6px 0;
-      margin: 0 1px;
-      cursor: pointer;
-      position: relative;
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 10px 0;
-        margin: 0 3px;
-      }
-      width: 100%;
-      &:before {
-        content: "";
-        display: block;
-        height: 2px;
-        background-color: rgba(#fff, 0.5);
-        border-radius: 1000px;
-        transition: background-color 0.3s ease;
-        background-image: linear-gradient(to top, #fff 0%, #fff 100%);
-        background-size: 0 100%;
-        background-repeat: no-repeat;
-      }
-      &:hover,
-      &.fullActive {
-        &:before {
-          background-color: #fff;
-        }
-      }
-      &.fullActive {
-        &:before {
-          transition: none;
-        }
-      }
-      &:after {
-        content: "";
-        display: block;
-        height: 2px;
-        background-color: #ffffff;
-        border-radius: 1000px;
-        position: absolute;
-        left: 0;
-        width: 0;
-        margin-top: -2px;
-        transition: none;
-      }
-      &.active {
-        &:after {
-          animation: lineWidth 4s normal forwards ease-in-out;
-        }
-        &.paused:after {
-          animation-play-state: paused;
-        }
-        &.video:after {
-          width: 0;
-          transition: none;
-        }
-        &.video:before {
-          transition: none;
-        }
-      }
-      .item-filler {
-        width: 0;
-        background: none;
-        border: none;
-        padding: 0;
-        margin: -2px 1px 0;
-        height: 2px;
-        cursor: pointer;
-        position: relative;
-        background-color: #ffffff;
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding: 1px 0;
-          margin: -2px 1px 0;
-        }
-      }
-    }
-  }
-  .StoryPageView {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background: #000;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
 
-    img {
-      max-width: 100%;
-      max-height: calc(100% - 220px);
-      object-fit: cover;
-      position: relative;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-
-        @media screen and (orientation: landscape) {
-          max-height: calc(100% - 120px);
-        }
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100% - 150px);
-      }
-
-      &.bg {
-        position: absolute;
-        filter: blur(10px);
-        left: -10px;
-        top: -10px;
-        width: calc(100% + 20px);
-        height: calc(100% + 20px);
-        max-width: none;
-        max-height: none;
-        opacity: 0.5;
-
-        & + img {
-          object-fit: contain;
-        }
-      }
-    }
-  }
   .btn-prev,
   .btn-next {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
       top: 0;
@@ -244,27 +114,34 @@
       color: #fff;
       font-size: 46px;
       transition: opacity 0.3s ease;
+
       &:before {
         @include icon-font;
         @include position-center;
       }
+
       &:hover {
         opacity: 1;
       }
     }
   }
+
   .btn-prev {
     left: 0;
+
     &:before {
       content: "\E645";
     }
   }
+
   .btn-next {
     right: 0;
+
     &:before {
       content: "\E643";
     }
   }
+
   .close {
     position: absolute;
     right: 0;
@@ -276,13 +153,16 @@
     font-size: 24px;
     z-index: 3;
     transition: transform 0.3s ease;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 21px 16px;
       font-size: 30px;
     }
+
     &:hover {
       transform: scale(1.2);
     }
+
     &:before {
       content: "\E605";
       @include icon-font;
@@ -311,6 +191,7 @@
       @include position-center;
     }
   }
+
   .user-name {
     color: #fff;
     font-size: 15px;
@@ -325,10 +206,12 @@
 
   .btn-copy-link {
     animation: copy-link 0.5s;
+
     &.copied {
       animation: none;
     }
   }
+
   .bottom-btns {
     position: absolute;
     left: 7px;
@@ -336,9 +219,11 @@
     display: flex;
     align-items: center;
     z-index: 2;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       left: 10px;
     }
+
     & > button {
       border: none;
       padding: 12px 8px;
@@ -347,75 +232,95 @@
       font-size: 24px;
       transition: opacity 0.3s ease;
       opacity: 0.7;
+
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 15px 10px;
       }
+
       &:hover,
       &.active {
         opacity: 1;
       }
     }
-    .tip-form {
-      position: absolute;
-      bottom: 100%;
-      left: 5px;
-      margin-bottom: -3px;
-      display: flex;
-      @include media-breakpoint-down($desktop-breakpoint) {
-        width: calc(100vw - 30px);
-        input {
-          flex: 1;
-        }
-      }
+
+  }
+
+  .tip-form {
+    position: absolute;
+    bottom: 100%;
+    left: 5px;
+    margin-bottom: -3px;
+    display: flex;
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: calc(100vw - 30px);
+    }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      left: 10px;
+    }
+
+    .btn {
+      background: rgba(#fff, 0.5);
+      color: $main;
+
       @include media-breakpoint-up($desktop-breakpoint) {
-        left: 10px;
-        .btn {
-          padding: 11px 17px;
-          height: 40px;
-        }
-        input {
-          width: 150px;
-          height: 40px;
+        padding: 11px 17px;
+        height: 40px;
+      }
+
+      &:hover {
+        background: #fff;
+      }
+
+      &.btn-send {
+
+        &[disabled] {
+          opacity: 0.6;
         }
       }
-      .btn {
-        background: rgba(#fff, 0.5);
-        color: $main;
-        &:hover {
-          background: #fff;
-        }
-        &.btn-send {
-          &[disabled] {
-            opacity: 0.6;
-          }
-        }
+    }
+
+    input {
+      margin: 0 15px;
+      text-align: center;
+      background: rgba(#000, 0.3);
+      color: #fff;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        flex: 1;
       }
-      input {
-        margin: 0 15px;
-        text-align: center;
-        background: rgba(#000, 0.3);
-        color: #fff;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 150px;
+        height: 40px;
       }
     }
   }
+
   .btn-message {
+
     &:before {
       content: "\E622";
       @include icon-font;
     }
   }
+
   .btn-tip {
+
     &:before {
       content: "\E618";
       @include icon-font;
     }
   }
+
   .btn-save-highlights {
+
     &:before {
       content: "\E641";
       @include icon-font;
     }
   }
+
   .viewers {
     color: #fff;
     display: flex;
@@ -423,10 +328,13 @@
     margin-left: 10px;
     opacity: 0.7;
     font-weight: 500;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       font-size: 11px;
     }
+
     &:not(:empty) {
+
       &:before {
         content: "\E633";
         @include icon-font;
@@ -436,6 +344,7 @@
       }
     }
   }
+
   .story-video-element {
     max-width: 100%;
     max-height: 100%;
@@ -443,6 +352,168 @@
 
   .lds-dual-ring {
     pointer-events: none;
+  }
+}
+
+.StoryPageView {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.storyItem {
+  max-width: 100%;
+  max-height: calc(100% - 220px);
+  object-fit: cover;
+  position: relative;
+  display: block;
+  z-index: 0;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+
+    @media screen and (orientation: landscape) {
+      max-height: calc(100% - 120px);
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-height: calc(100% - 150px);
+  }
+
+  &_bg {
+    position: absolute;
+    filter: blur(10px);
+    left: -10px;
+    top: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    max-width: none;
+    max-height: none;
+    opacity: 0.5;
+
+    & + .story-image .storyItem {
+      object-fit: contain;
+    }
+  }
+}
+
+.progress-pagination {
+  position: absolute;
+  display: flex;
+  left: 3px;
+  right: 3px;
+  top: 0;
+  z-index: 2;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    left: 7px;
+    right: 7px;
+  }
+
+  .item {
+    background: none;
+    border: none;
+    padding: 6px 0;
+    margin: 0 1px;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 10px 0;
+      margin: 0 3px;
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      height: 2px;
+      border-radius: 1000px;
+    }
+
+    &:before {
+      background-color: rgba(#fff, 0.5);
+      background-image: linear-gradient(to top, #fff 0%, #fff 100%);
+      background-size: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-color 0.3s ease;
+    }
+
+    &:after {
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+      width: 0;
+      margin-top: -2px;
+      transition: none;
+    }
+
+    &:hover,
+    &.fullActive {
+
+      &:before {
+        background-color: #fff;
+      }
+    }
+
+    &.fullActive {
+
+      &:before {
+        transition: none;
+      }
+    }
+
+    &.active {
+
+      &:after {
+        animation: lineWidth 4s normal forwards ease-in-out;
+      }
+
+      &.paused {
+
+        &:after {
+          animation-play-state: paused;
+        }
+      }
+
+      &.video {
+
+        &:before {
+          transition: none;
+        }
+
+        &:after {
+          width: 0;
+          transition: none;
+        }
+      }
+    }
+
+    &-filler {
+      width: 0;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: -2px 1px 0;
+      height: 2px;
+      cursor: pointer;
+      position: relative;
+      background-color: #fff;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding: 1px 0;
+      }
+    }
   }
 }
 
@@ -458,11 +529,6 @@
     top: 0;
     bottom: 0;
     z-index: 2;
-  }
-  
-  img {
-    position: relative;
-    z-index: 0;
   }
 }
 

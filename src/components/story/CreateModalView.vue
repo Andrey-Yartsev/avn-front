@@ -4,7 +4,7 @@
       <div class="popup-container add-story-popup">
         <div class="previous hidden"></div>
         <div class="content">
-          <div class="addStoryView">
+          <div class="addStoryView bg-gradient bg-gradient_standart">
             <form class="storyOverlay">
               <div class="mediasTop">
                 <div class="mediasTop__header">
@@ -17,17 +17,17 @@
                   <button class="newStory btn hidden-desktop">Add</button>
                 </div>
               </div>
-              <div class="storyPlaceholder">
-                <label>
-                  <span>Tap here to add picture or video to your story</span>
-                </label>
-              </div>
-              <div class="texteditor">
-                <textarea maxlength="140"></textarea>
-                <div class="mediasBottom">
-                  <button type="submit" class="addTextButton btn">Done</button>
-                </div>
-              </div>
+              <!--<div class="storyPlaceholder">-->
+              <!--<label>-->
+              <!--<span>Tap here to add picture or video to your story</span>-->
+              <!--</label>-->
+              <!--</div>-->
+              <!--<div class="texteditor">-->
+              <!--<textarea maxlength="140"></textarea>-->
+              <!--<div class="mediasBottom">-->
+              <!--<button type="submit" class="addTextButton btn">Done</button>-->
+              <!--</div>-->
+              <!--</div>-->
               <div class="mediasBottom">
                 <button
                   type="submit"
@@ -40,7 +40,7 @@
               </div>
               <div class="storyPreview" v-if="showPreview">
                 <template v-if="preview.mediaType === 'photo'">
-                  <img :src="preview.preview" />
+                  <img :src="preview.preview" class="storyPreview__img" />
                   <div
                     class="story-block-fill"
                     :style="{
@@ -52,6 +52,7 @@
                   ref="videoTag"
                   v-if="preview.mediaType === 'video'"
                   :src="preview.fileContent"
+                  class="storyPreview__video"
                   loop="true"
                 ></video>
               </div>

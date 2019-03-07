@@ -5,7 +5,7 @@
         <div class="StoryPageView active">
           <template v-if="currentStory.mediaType === 'photo'">
             <img
-              class="bg"
+              class="storyItem_bg"
               :src="currentStory.src.source || currentStory.preview.source"
               alt
             />
