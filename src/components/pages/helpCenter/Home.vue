@@ -32,6 +32,7 @@
           </div>
         </div>
       </div>
+      <!--
       <div class="s-container bg-gradient bg-gradient_light support-content">
         <div class="container">
           <div class="cols">
@@ -72,6 +73,7 @@
           </div>
         </div>
       </div>
+      -->
     </template>
   </ContentWrapper>
 </template>
