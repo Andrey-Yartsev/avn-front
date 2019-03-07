@@ -75,7 +75,10 @@
         />
       </div>
       <div class="content-wrapper content-wrapper_cut">
-        <Highlights :userId="profile.id" v-if="$mq === 'mobile'" />
+        <Highlights
+          :userId="profile.id"
+          v-if="$mq === 'mobile' && isPostPage"
+        />
         <div class="container">
           <div class="row">
             <div :class="['content-col', { 'single-col': !useMediumPostView }]">
@@ -192,12 +195,11 @@ export default {
     pageName() {
       return this.$route.params.page;
     },
+    isPostPage() {
+      return !this.pageName || this.pageName === "posts";
+    },
     source() {
-      if (!this.pageName || this.pageName === "posts") {
-        return "";
-      }
-
-      return this.pageName;
+      return this.isPostPage ? "" : this.pageName;
     },
     footerPages() {
       return this.$store.state.common.pages;
