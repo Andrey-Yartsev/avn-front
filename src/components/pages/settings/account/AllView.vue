@@ -263,18 +263,20 @@ export default {
         });
     },
     deleteAccount() {
-      if (
-        !window.confirm(
-          "Are you sure? Your account and all associated info will be permanently deleted from our servers!"
-        )
-      ) {
-        return;
-      }
-      this.$store
-        .dispatch("user/deleteAccount", this.$store.state.auth.token)
-        .then(() => {
-          this.$router.push("/logout");
-        });
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title:
+            "Your account and all associated info will be permanently deleted from our servers!",
+          success: () => {
+            this.$store
+              .dispatch("user/deleteAccount", this.$store.state.auth.token)
+              .then(() => {
+                this.$router.push("/logout");
+              });
+          }
+        }
+      });
     },
     resendEmail() {
       this.$store.dispatch("emails/resend", this.localUser.email).then(() => {
