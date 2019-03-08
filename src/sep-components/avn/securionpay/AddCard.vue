@@ -34,7 +34,7 @@
                   <button class="replace" id="replaceCard" @click="replaceCard">
                     Replace
                   </button>
-                  <button class="delete" id="deleteCard">
+                  <button class="delete" id="deleteCard" @click="deleteCard">
                     Delete
                   </button>
                 </div>
@@ -350,8 +350,30 @@ export default {
       this.userinfo = { ...userinfo };
     },
     replaceCard() {
-      this.reset();
-      this.showCardForm = true;
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Replace your card",
+          success: () => {
+            this.reset();
+            this.showCardForm = true;
+          }
+        }
+      });
+    },
+    deleteCard() {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Remove your card",
+          success: () => {
+            this.$store.dispatch("payment/card/delete").then(() => {
+              this.reset();
+              this.showCardForm = true;
+            });
+          }
+        }
+      });
     },
     expDateChanged(value) {
       if (value.expMonth) {
