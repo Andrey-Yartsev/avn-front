@@ -33,7 +33,7 @@
       <div
         class="form-title private-switcher-block private-profile-block border-top"
       >
-        <div class="inner border-bottom-mobile">
+        <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for photo
             <p class="subtext">&nbsp;</p>
@@ -48,7 +48,7 @@
             <span></span>
           </label>
         </div>
-        <div class="inner border-bottom-mobile">
+        <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for video
             <p class="subtext">&nbsp;</p>
