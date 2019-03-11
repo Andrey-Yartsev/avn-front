@@ -1,6 +1,6 @@
 <template>
   <div class="BlockedUsersCollectionView">
-    <div class="form-title border-top table-header-title pt-reset_mob">
+    <div class="form-title border-top table-header-title">
       <div class="inner">
         <span class="semi-transparent">
           Blocked users

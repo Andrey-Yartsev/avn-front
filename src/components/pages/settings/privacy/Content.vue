@@ -31,12 +31,11 @@
       </div>
 
       <div
-        class="form-title private-switcher-block private-profile-block border-top"
+        class="form-title watermarks-settings border-top"
       >
         <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for photo
-            <p class="subtext">&nbsp;</p>
           </span>
           <label class="toggle-element">
             <input
@@ -51,7 +50,6 @@
         <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for video
-            <p class="subtext">&nbsp;</p>
           </span>
           <label class="toggle-element">
             <input
@@ -65,7 +63,7 @@
         </div>
 
         <div
-          class="form-group form-group_with-label"
+          class="form-group form-group_with-label pb-reset"
           v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
         >
           <label class="form-group-inner">
