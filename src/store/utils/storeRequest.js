@@ -15,7 +15,6 @@ const storeRequest = (
     commit(prefix + "ResetError");
     commit(prefix + "Request");
     commit(prefix + "Success", false);
-    commit(prefix + "Success", false);
     const requests = {
       any: anyRequest,
       token: tokenRequest,

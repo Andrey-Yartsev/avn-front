@@ -46,6 +46,27 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "rate",
+  apiPath: "supports/articles/{articleId}/rating",
+  requestType: "token",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{articleId}/, params.articleId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      rating: params.like ? 5 : 1
+    };
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,

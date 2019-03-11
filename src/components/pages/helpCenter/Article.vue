@@ -42,6 +42,7 @@
               <div class="col col-3-4">
                 <h3>{{ item.title }}</h3>
                 <div v-html="item.description" class="support-text"></div>
+                <Rate :articleId="id" v-if="user" />
               </div>
             </div>
           </div>
@@ -54,15 +55,18 @@
 <script>
 import ContentWrapper from "./ContentWrapper";
 import NodeTree from "./NodeTree";
+import Rate from "./Rate";
 import Loader from "@/components/common/Loader";
 import HeaderScrolled from "@/mixins/headerScrolled";
+import User from "@/mixins/user";
 
 export default {
   name: "HelpCenterArticle",
-  mixins: [HeaderScrolled],
+  mixins: [HeaderScrolled, User],
   components: {
     ContentWrapper,
     NodeTree,
+    Rate,
     Loader
   },
   data() {
