@@ -170,7 +170,7 @@ export default {
     },
     redirectToDeepestLeaf(item) {
       const deepestItem = this.findDeepestLeafR(item);
-      this.$router.push("/support/article/" + deepestItem.id);
+      this.$router.replace("/support/article/" + deepestItem.id);
     },
     findDeepestLeafR(item) {
       if (!item.items || !item.items.length) {
