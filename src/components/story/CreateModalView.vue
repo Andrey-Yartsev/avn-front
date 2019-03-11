@@ -61,9 +61,7 @@
               :class="['play-button-wrapper', { hidden: !videoError }]"
               @click="playPreviewVideo"
             >
-              <div class="play-button-outer">
-                <div class="play-button"></div>
-              </div>
+              <div class="play-button"></div>
             </div>
           </div>
         </div>

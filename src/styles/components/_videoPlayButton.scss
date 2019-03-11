@@ -1,14 +1,20 @@
 .play-button {
-  margin: 0 auto;
-  top: 50%;
+  margin: auto;
   position: relative;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 2.5em 0 2.5em 5em;
-  border-color: transparent transparent transparent #fff;
   opacity: 0.75;
-  transform: translateY(-50%);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity .3s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:after {
+    content: "\E661";
+    @include icon-font;
+    font-size: 6em;
+  }
 
   &-wrapper {
     width: 100%;
@@ -16,23 +22,9 @@
     position: absolute;
     z-index: 3;
     display: flex;
-  }
-
-  &-outer {
-    margin: auto;
-    width: 10em;
-    height: 10em;
-    background-color: rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    padding-left: 10px;
-    border-radius: 100px;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.5);
-
-      .play-button {
-        opacity: 1;
-      }
-    }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
 }
