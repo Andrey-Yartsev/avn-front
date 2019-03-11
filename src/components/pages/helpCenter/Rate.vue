@@ -3,12 +3,16 @@
     <div v-if="!rated">
       <div class="article-vote__header">Was this article helpful?</div>
       <div class="article-vote__btns">
-        <span role="button" class="article-vote__btn vote-like" @click="like"
-          ></span
-        >
-        <span role="button" class="article-vote__btn vote-dislike" @click="dislike"
-          ></span
-        >
+        <span
+          role="button"
+          class="article-vote__btn vote-like"
+          @click="like"
+        ></span>
+        <span
+          role="button"
+          class="article-vote__btn vote-dislike"
+          @click="dislike"
+        ></span>
       </div>
     </div>
     <div class="success-vote" v-else>
