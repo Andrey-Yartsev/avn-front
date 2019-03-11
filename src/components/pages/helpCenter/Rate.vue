@@ -1,17 +1,17 @@
 <template>
-  <div class="support-article-vote">
+  <div class="article-vote">
     <div v-if="!rated">
-      <div class="support-article-vote-header">Was this article helpful?</div>
-      <div class="support-article-vote-btns">
-        <span role="button" class="support-article-vote-btn" @click="like"
-          >L</span
+      <div class="article-vote__header">Was this article helpful?</div>
+      <div class="article-vote__btns">
+        <span role="button" class="article-vote__btn vote-like" @click="like"
+          ></span
         >
-        <span role="button" class="support-article-vote-btn" @click="dislike"
-          >D</span
+        <span role="button" class="article-vote__btn vote-dislike" @click="dislike"
+          ></span
         >
       </div>
     </div>
-    <div class="success" v-else>
+    <div class="success-vote" v-else>
       Thank you for voting
     </div>
   </div>
