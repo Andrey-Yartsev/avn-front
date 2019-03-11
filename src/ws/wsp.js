@@ -9,7 +9,7 @@ function Wsp(reloadAction) {
 
 Wsp.prototype.connect = function(openCallback, closeCallback) {
   const tz = moment().format("ZZ");
-  this.ws = new WebSocket(process.env.VUE_APP_WSP_URL);
+  this.ws = new WebSocket(Store.state.init.data.websocket.posts);
   this.ws.onopen = () => {
     new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
       this.ws.send(

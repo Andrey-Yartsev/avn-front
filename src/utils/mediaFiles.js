@@ -1,3 +1,5 @@
+import Store from "@/store";
+
 export const uniqId = () => {
   let ts = String(new Date().getTime()),
     i = 0,
@@ -94,7 +96,7 @@ export const fileUpload = ({ id, file }, onProgress) =>
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("preset", process.env.VUE_APP_FILE_UPLOAD_PRESET);
+    formData.append("preset", Store.state.init.data.converter.preset);
     formData.append("isDelay", true);
 
     xhr.upload.onprogress = ({ loaded, total }) => {
@@ -108,6 +110,10 @@ export const fileUpload = ({ id, file }, onProgress) =>
         reject();
       }
     };
-    xhr.open("POST", `${process.env.VUE_APP_CONVERTER_URL}/file/upload`, true);
+    xhr.open(
+      "POST",
+      `${Store.state.init.data.converter.url}/file/upload`,
+      true
+    );
     xhr.send(formData);
   });

@@ -21,9 +21,9 @@ export default class Ws extends EventEmitter {
     const tz = moment().format("ZZ");
     let ws;
     if (this.type && this.type === "wsg") {
-      ws = new WebSocket(process.env.VUE_APP_WSG_URL);
+      ws = new WebSocket(Store.state.init.data.websocket.guest);
     } else {
-      ws = new WebSocket(process.env.VUE_APP_WS_URL);
+      ws = new WebSocket(Store.state.init.data.websocket.general);
     }
     this.ws = ws;
 
