@@ -367,7 +367,7 @@
   .make-post-btn {
 
     &:hover {
-      color: $secondary-color-darken;
+      color: $primary-color;
       background: none;
     }
 
@@ -398,7 +398,7 @@
 
         @include media-breakpoint-up($desktop-breakpoint) {
           color: #fff;
-          background: $secondary-color-darken;
+          background: $primary-color-darken;
         }
       }
 
