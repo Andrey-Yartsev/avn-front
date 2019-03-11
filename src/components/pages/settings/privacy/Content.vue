@@ -29,6 +29,59 @@
           </label>
         </div>
       </div>
+
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner border-bottom-mobile">
+          <span class="semi-transparent">
+            Enable watermarks for photo
+            <p class="subtext">&nbsp;</p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="hasWatermarkPhoto"
+              value="true"
+              v-model="localUser.hasWatermarkPhoto"
+            />
+            <span></span>
+          </label>
+        </div>
+        <div class="inner border-bottom-mobile">
+          <span class="semi-transparent">
+            Enable watermarks for video
+            <p class="subtext">&nbsp;</p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="hasWatermarkVideo"
+              value="true"
+              v-model="localUser.hasWatermarkVideo"
+            />
+            <span></span>
+          </label>
+        </div>
+
+        <div
+          class="form-group form-group_with-label"
+          v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
+        >
+          <label class="form-group-inner">
+            <span class="label">Watermark text</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <input
+                  type="text"
+                  name="watermarkText"
+                  v-model="localUser.watermarkText"
+              /></span>
+            </span>
+          </label>
+        </div>
+      </div>
+
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">
