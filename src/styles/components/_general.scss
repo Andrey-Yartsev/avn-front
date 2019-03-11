@@ -122,7 +122,7 @@ strong {
   font-size: 13px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    font: inherit;
+    font-size: inherit;
   }
 
   span {

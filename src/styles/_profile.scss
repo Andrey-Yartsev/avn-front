@@ -714,20 +714,24 @@
   width: 70px;
   color: $secondary-color;
   transition: color 0.3s ease;
+
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 12px auto 0;
+    margin-top: 12px;
     width: auto;
   }
+
   &:hover {
     color: $secondary-color-darken;
     background: none;
   }
+
   &:before {
     font-size: 40px;
     display: block;
     margin: 0 0 5px;
+
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 0 10px;
+      margin-bottom: 10px;
     }
   }
 }
