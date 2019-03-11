@@ -31,14 +31,27 @@ export const getMediaFileMeta = file => {
           break;
       }
 
-      resolve({
-        mediaType,
-        preview: mediaType !== "video" ? preview : undefined,
-        file,
-        fileContent
-      });
-
-      reader = null;
+      if (mediaType !== "video") {
+        const temp = new Image();
+        temp.src = preview;
+        temp.onload = function() {
+          resolve({
+            mediaType,
+            preview,
+            file,
+            fileContent,
+            width: temp.width
+          });
+          reader = null;
+        };
+      } else {
+        resolve({
+          mediaType,
+          file,
+          fileContent
+        });
+        reader = null;
+      }
     };
 
     reader.readAsDataURL(file);
@@ -75,7 +88,8 @@ export const getMediaFilePreview = (media, callback) => {
       if (success) {
         callback({
           ...media,
-          preview: image
+          preview: image,
+          width: video.videoWidth
         });
       }
       return success;
@@ -90,11 +104,23 @@ export const getMediaFilePreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = ({ id, file }, onProgress) =>
+export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
   new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
+    const {
+      hasWatermarkPhoto,
+      hasWatermarkVideo,
+      watermarkText
+    } = Store.state.auth.user;
 
+    if (
+      (mediaType === "video" && hasWatermarkVideo) ||
+      ((mediaType === "gif" || mediaType === "photo") && hasWatermarkPhoto)
+    ) {
+      formData.append("watermark[text]", watermarkText);
+      formData.append("watermark[size]", width * 0.03);
+    }
     formData.append("file", file);
     formData.append("preset", Store.state.init.data.converter.preset);
     formData.append("isDelay", true);

@@ -50,10 +50,15 @@ export default {
 
       for (let i = 0; i < validLength; i += 1) {
         const file = validFiles[i];
-        const { mediaType, preview, fileContent } = await getMediaFileMeta(
-          file
-        );
+        const {
+          mediaType,
+          preview,
+          fileContent,
+          width
+        } = await getMediaFileMeta(file);
+
         addedFiles.push({
+          width,
           file,
           mediaType,
           fileContent,
@@ -111,8 +116,11 @@ export default {
     },
 
     async getMediaFiles() {
-      const promises = this.preloadedMedias.map(({ id, file, alreadySaved }) =>
-        alreadySaved ? id : fileUpload({ id, file }, this.setUploadProgress)
+      const promises = this.preloadedMedias.map(
+        ({ id, file, width, mediaType, alreadySaved }) =>
+          alreadySaved
+            ? id
+            : fileUpload({ id, file, width, mediaType }, this.setUploadProgress)
       );
 
       return await Promise.all(promises);
