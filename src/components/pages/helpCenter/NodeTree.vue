@@ -27,7 +27,7 @@
       <template v-else>
         <button class="btn-back-list" @click="back"></button>
         <div class="scrollbar" :class="divClass">
-          <VuePerfectScrollbar>
+          <VuePerfectScrollbar :settings="{ suppressScrollX: true }">
             <ul>
               <node
                 v-for="child in node.items"
