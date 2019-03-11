@@ -15,6 +15,14 @@
         @click="search"
       ></button>
     </form>
+    <div class="suggestions">
+      <router-link
+        :to="'/support/article/' + v.id"
+        v-for="v in suggestions"
+        :key="v.id"
+        >{{ v.title }}</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -29,6 +37,9 @@ export default {
   computed: {
     canSearch() {
       return this.searchText.length >= 3;
+    },
+    suggestions() {
+      return this.$store.state.support.common.suggestions;
     }
   },
   methods: {

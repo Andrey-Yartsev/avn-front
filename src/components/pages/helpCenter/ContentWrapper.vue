@@ -27,6 +27,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("support/fetch");
+    this.$store.dispatch("support/fetchTrending");
   }
 };
 </script>

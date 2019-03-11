@@ -32,6 +32,7 @@
           </div>
         </div>
       </div>
+
       <!--
       <div class="s-container bg-gradient bg-gradient_light support-content">
         <div class="container">
@@ -50,6 +51,8 @@
           </div>
         </div>
       </div>
+      -->
+
       <div class="s-container support-content shadow-block">
         <div class="container">
           <div class="cols">
@@ -57,23 +60,18 @@
               <div class="s-header">
                 <div class="subtitle">QUICK ANSWERS</div>
                 <h2>Trending Topics</h2>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet, consectetuer?</li>
-                  <li>Adipiscing elit, sed diam?</li>
-                  <li>Nonummy nibh euismod tincidunt?</li>
-                  <li>Ut laoreet dolore magna aliquam?</li>
-                  <li>Erat volutpat ut wisi enim?</li>
-                  <li>Ad minim veniam, quis nostrud?</li>
-                  <li>Exerci tation ullamcorper?</li>
-                  <li>Suscipit lobortis nisl ut aliquip ex ea commodo?</li>
-                  <li>Duis autem vel eum iriure?</li>
+                <ul v-for="v in trending" :key="v.id">
+                  <li>
+                    <router-link :to="'/article/id' + v.id">{{
+                      v.title
+                    }}</router-link>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-      -->
     </template>
   </ContentWrapper>
 </template>
@@ -93,6 +91,9 @@ export default {
     },
     sections() {
       return this.$store.state.support.items;
+    },
+    trending() {
+      return this.$store.state.support.common.trending;
     }
   },
   methods: {

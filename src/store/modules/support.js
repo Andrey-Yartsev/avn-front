@@ -33,6 +33,19 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchTrending",
+  apiPath: "supports/articles/trending",
+  requestType: "no-token",
+  resultKey: "common",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
 export default {
   namespaced: true,
   state,
