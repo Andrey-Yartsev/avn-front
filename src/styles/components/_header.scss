@@ -551,22 +551,6 @@
     }
   }
 
-  .special-site-header & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-left: 0;
-    }
-  }
-
-  .avn-style & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      order: -1;
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
   &__text {
     pointer-events: none;
     position: absolute;
@@ -800,13 +784,6 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 170px;
     margin-left: 22px;
-  }
-
-  .special-site-header & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-left: auto;
-    }
   }
 }
 
@@ -1043,13 +1020,6 @@
     height: 50px;
   }
 
-  .avn-style & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-right: auto;
-    }
-  }
-
   .scroll-bottom & {
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -1058,19 +1028,6 @@
       position: fixed;
       left: 0;
       right: 0;
-    }
-  }
-
-  + .header-logo {
-
-    .special-site-header:not(.not-authorized) & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-      }
     }
   }
 
