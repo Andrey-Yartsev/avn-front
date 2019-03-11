@@ -41,13 +41,13 @@
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <ErrorModal v-if="error" />
       <Confirm v-if="this.$store.state.modal.confirm.show" />
-      <router-link
+      <a
         v-if="adminReturnUrl"
-        :to="adminReturnUrl"
+        :href="adminReturnUrl"
         class="btn alt btn-back-kitchen"
       >
         Return to admin
-      </router-link>
+      </a>
     </template>
   </div>
 </template>
