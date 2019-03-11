@@ -390,7 +390,7 @@
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        background: $secondary-color;
+        background: $primary-color;
         position: static;
         height: 30px;
         padding: 4px 14px;
