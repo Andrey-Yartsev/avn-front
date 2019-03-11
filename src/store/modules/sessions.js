@@ -18,6 +18,11 @@ const actions = {
       })
     );
     commit("deleteAll");
+  },
+  delete({ dispatch, commit }, id) {
+    dispatch("_delete", id).then(() => {
+      commit("delete", id);
+    });
   }
 };
 
@@ -46,7 +51,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "delete",
+  prefix: "_delete",
   apiPath: "sessions/{id}",
   state,
   mutations,
