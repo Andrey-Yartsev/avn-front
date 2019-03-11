@@ -135,7 +135,7 @@
   .header-search-input {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: rgba(#fff, 0.3);
+      background-color: rgba(#fff, 0.6);
       box-shadow: 0 2px 10px rgba(#000, 0.06);
     }
 
