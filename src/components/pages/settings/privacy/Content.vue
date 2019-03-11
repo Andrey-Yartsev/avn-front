@@ -30,9 +30,7 @@
         </div>
       </div>
 
-      <div
-        class="form-title watermarks-settings border-top"
-      >
+      <div class="form-title watermarks-settings border-top">
         <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for photo
