@@ -19,6 +19,10 @@ form.support-search-form {
   input {
     border: 1px solid rgba($gray, 0.2);
   }
+
+  .header-search-submit {
+    color: $main-color;
+  }
 }
 
 .s-container {

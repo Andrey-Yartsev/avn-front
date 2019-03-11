@@ -15,11 +15,12 @@
         @click="search"
       ></button>
     </form>
-    <div class="suggestions">
+    <div class="popular-questions suggestions">
       <router-link
         :to="'/support/article/' + v.id"
         v-for="v in suggestions"
         :key="v.id"
+        class="question-item"
         >{{ v.title }}</router-link
       >
     </div>
