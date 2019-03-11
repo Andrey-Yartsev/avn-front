@@ -580,7 +580,7 @@
     .avn-style & {
       width: 45px;
       height: 34px;
-      fill: #fff;
+      fill: $main-color;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 75px;
