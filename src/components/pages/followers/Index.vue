@@ -20,7 +20,7 @@
           <ProfileActions :profile="profile" :page="page" />
         </div>
       </div>
-      <div class="content-wrapper content-wrapper_cut">
+      <div class="content-wrapper">
         <div class="container">
           <div class="content-nav hidden-mobile" v-if="$mq === 'desktop'">
             <router-link to="/following" class="content-nav__item"
