@@ -945,6 +945,10 @@
     right: 0;
     top: 0;
 
+    .not-authorized & {
+      display: none;
+    }
+
     &__btn {
       font-size: 0;
       width: 56px;
