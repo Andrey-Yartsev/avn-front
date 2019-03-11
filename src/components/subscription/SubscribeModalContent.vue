@@ -67,6 +67,9 @@ export default {
   },
   computed: {
     benefits() {
+      if (!this.$store.state.init.data.messages) {
+        return null;
+      }
       return this.$store.state.init.data.messages.subscriptionBenefits;
     }
   }
