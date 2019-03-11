@@ -39,6 +39,9 @@ export default {
       return this.searchText.length >= 3;
     },
     suggestions() {
+      if (!this.$store.state.support.common) {
+        return [];
+      }
       return this.$store.state.support.common.suggestions;
     }
   },

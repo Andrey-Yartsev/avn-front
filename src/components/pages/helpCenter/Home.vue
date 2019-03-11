@@ -93,6 +93,9 @@ export default {
       return this.$store.state.support.items;
     },
     trending() {
+      if (!this.$store.state.support.common) {
+        return [];
+      }
       return this.$store.state.support.common.trending;
     }
   },
