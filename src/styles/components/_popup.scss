@@ -128,11 +128,12 @@
     }
 
     &.popup-alert {
-      max-width: 300px;
+      max-width: 340px;
       margin: auto;
       display: block;
 
       @include media-breakpoint-down($tablet-breakpoint) {
+        max-width: 300px;
         position: fixed;
         top: 50%;
         left: 50%;
