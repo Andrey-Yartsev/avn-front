@@ -171,16 +171,6 @@
     }
   }
 
-  //.avn-style {
-  //
-  //  .header-logo {
-  //
-  //    svg {
-  //      fill: #fff;
-  //    }
-  //  }
-  //}
-
   .header-logo {
 
     svg {
@@ -590,6 +580,7 @@
     .avn-style & {
       width: 45px;
       height: 34px;
+      fill: #fff;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 75px;
