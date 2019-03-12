@@ -9,7 +9,11 @@
         Unfollow
       </div>
     </div>
-    <div v-else @click="follow" class="btn-with-icon btn-with-icon_st btn-subscribe">
+    <div
+      v-else
+      @click="follow"
+      class="btn-with-icon btn-with-icon_st btn-subscribe"
+    >
       <div class="btn-subscribe__label">
         Follow
       </div>

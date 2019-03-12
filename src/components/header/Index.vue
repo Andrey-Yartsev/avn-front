@@ -51,7 +51,10 @@
             >
               Share
             </button>
-            <router-link to="/addPost" class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop">
+            <router-link
+              to="/addPost"
+              class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+            >
               Share
             </router-link>
           </template>
