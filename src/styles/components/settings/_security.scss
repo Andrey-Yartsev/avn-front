@@ -98,8 +98,8 @@
   img {
     width: 145px;
     height: 145px;
-    box-shadow: 0 2px 5px rgba(#000, 0.2);
-    border-radius: 5px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
     border: 5px solid #fff;
 
     @include media-breakpoint-down($desktop-breakpoint) {
@@ -143,17 +143,28 @@
       }
     }
 
-    .copy-code {
-      &,
-      &:hover {
+    .btn {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          box-shadow: none;
-          padding: 0;
-          height: auto;
-          font-size: 15px;
-          background: none;
-          color: $secondary-color;
+      &.border {
+
+        &.alt {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            box-shadow: none;
+            padding: 0;
+            height: auto;
+            font-size: 15px;
+            background: none;
+            color: $secondary-color;
+            font-weight: 400;
+          }
+
+          &:after {
+
+            @include media-breakpoint-down($desktop-breakpoint) {
+              display: none;
+            }
+          }
         }
       }
     }
