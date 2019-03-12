@@ -8,13 +8,24 @@
             <form class="storyOverlay">
               <div class="mediasTop">
                 <div class="mediasTop__header">
-                  <span class="category-name category-name_story hidden-mobile" v-if="$mq === 'desktop'"
+                  <span
+                    class="category-name category-name_story hidden-mobile"
+                    v-if="$mq === 'desktop'"
                     >Story</span
                   >
                   <button class="close" @click="close">
-                    <span class="category-name hidden-desktop" v-if="$mq === 'mobile'">Story</span>
+                    <span
+                      class="category-name hidden-desktop"
+                      v-if="$mq === 'mobile'"
+                      >Story</span
+                    >
                   </button>
-                  <button class="newStory btn hidden-desktop" v-if="$mq === 'mobile'">Add</button>
+                  <button
+                    class="newStory btn hidden-desktop"
+                    v-if="$mq === 'mobile'"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
               <!--<div class="storyPlaceholder">-->
