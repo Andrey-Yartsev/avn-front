@@ -239,6 +239,20 @@
         }
       }
     }
+
+    .btn.alt {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+
+      .not-authorized & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: block;
+        }
+      }
+    }
   }
 }
 
