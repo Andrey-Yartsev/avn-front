@@ -56,6 +56,14 @@
                   <div class="code-text" v-if="otp.code">
                     <span class="code">{{ otp.code }}</span>
                     <button
+                      v-if="copied"
+                      type="button"
+                      class="btn border alt copy-code"
+                    >
+                      Copied!
+                    </button>
+                    <button
+                      v-else
                       @click="copyKey"
                       type="button"
                       class="btn border alt copy-code"
@@ -170,7 +178,8 @@ export default {
 
   data() {
     return {
-      otpEnable: false
+      otpEnable: false,
+      copied: false
     };
   },
 
@@ -236,7 +245,10 @@ export default {
       });
     },
     copyKey() {
-      this.$copyText(this.otp.code);
+      this.$copyText(this.otp.code).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
     },
     getActivityTime(time) {
       return datetimeHelper(time);
