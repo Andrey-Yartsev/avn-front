@@ -17,15 +17,15 @@
   background: $secondary-color;
   position: relative;
   display: inline-block;
-  .show-on-hover,
-  .hide-on-hover {
-    transition: opacity 0.3s ease;
-  }
-  .show-on-hover {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
+  //.show-on-hover,
+  //.hide-on-hover {
+  //  transition: opacity 0.3s ease;
+  //}
+  //.show-on-hover {
+  //  position: absolute;
+  //  left: 50%;
+  //  transform: translate(-50%, 0);
+  //}
   &:hover {
     background: $secondary-color-darken;
     color: #fff;
@@ -63,11 +63,25 @@
   &.border {
     color: $primary-color;
     background: none;
-    box-shadow: 0 0 0 2px $primary-color inset;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      box-shadow: 0 0 0 2px inset;
+      border-radius: 1000px;
+    }
 
     &:hover {
       color: #fff;
       background: $primary-color;
+
+      &:after {
+        color: $primary-color;
+      }
     }
 
     &.connect-twitter {
@@ -78,13 +92,17 @@
       //  background: $default-secondary-color;
       //}
     }
+
     &.alt {
       color: $secondary-color;
-      box-shadow: 0 0 0 2px inset;
+
       &:hover {
         color: #fff;
-        box-shadow: 0 0 0 2px $secondary-color inset;
         background: $secondary-color;
+
+        &:after {
+          color: $secondary-color;
+        }
       }
     }
   }
