@@ -12,7 +12,7 @@ import pluralize from "pluralize";
 import CalcCount from "./calcCount";
 import BuildScale from "./buildScale";
 
-import { chartTypes } from "./types";
+import { chartTypes, getScaleData } from "./types";
 
 const altColor = "#16181A";
 
@@ -57,6 +57,9 @@ export default {
       this.processDataSet();
     },
     updateChartData(data, period, type) {
+      // if (type === "view_post") {
+      //   console.log(period, Object.values(data.statistics.data));
+      // }
       const arrValues = {};
       let y = 0;
       for (let j = this.barCount; j >= 1; j--) {
@@ -211,37 +214,7 @@ export default {
 
       let period = this.period;
 
-      let periodType, count;
-      let startDate = now;
-
-      switch (period) {
-        case "today":
-          count = 1439;
-          periodType = "minutes";
-          // format = "YYYY-MM-DD HH:mm";
-          startDate = moment(
-            moment
-              .unix(now)
-              .add(1, "d")
-              .format("YYYY-MM-DD")
-          ).unix();
-          break;
-        case "last_week":
-          count = 167;
-          periodType = "hours";
-          // format = "YYYY-MM-DD HH";
-          break;
-        case "last_month":
-          count = 719;
-          periodType = "hours";
-          // format = "YYYY-MM-DD HH";
-          break;
-        case "last_year":
-          count = 364;
-          periodType = "days";
-          // format = "YYYY-MM-DD";
-          break;
-      }
+      const { periodType, count, startDate } = getScaleData(period);
 
       for (let type in chartColors) {
         if (!chartColors.hasOwnProperty(type)) {

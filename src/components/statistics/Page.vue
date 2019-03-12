@@ -6,6 +6,7 @@
       <div class="page-header-title cols">
         <div class="col col-1-2">
           <div class="page-name">Statistics</div>
+
           <div
             class="more-functions"
             :class="{ open: periodOptionsOpened }"
@@ -136,6 +137,40 @@
           </div>
         </div>
       </div>
+
+      <div class="cols">
+        <div class="col col-1-2">
+          <div class="box">
+            <div class="charts-wrapper-outer">
+              <div class="charts-data">
+                <span class="posts" ref="count_earnings_paid_subscriptions"
+                  >Subscribers <span>0</span></span
+                >
+                <span class="views" ref="count_earnings_tips"
+                  >Funding <span>0</span></span
+                >
+                <span class="likes" ref="count_earnings_paid_chat_messages"
+                  >Message <span>0</span></span
+                >
+                <span class="comments" ref="count_earnings_earn_referral"
+                  >Referrals <span>0</span></span
+                >
+              </div>
+              <div
+                id="earnings_chart"
+                class="charts-wrapper charts-wrapper_posts"
+              ></div>
+              <div class="statistics-chart-scale" id="earnings_scale"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-1-2">
+          <div class="box">
+            <MoneyTable :data="moneyTableData" />
+          </div>
+        </div>
+      </div>
+
       <div class="cols">
         <div class="col col-2-3">
           <div class="box" id="visitors-box">
@@ -251,13 +286,16 @@ import BuildScale from "./buildScale";
 import ClickOutside from "vue-click-outside";
 
 import Footer from "@/components/footer/Index";
+import MoneyTable from "./MoneyTable";
 
 import {
   chartTypes,
   periodTypes,
   getPeriodType,
   lineTypes,
-  periodTypeNames
+  chartDataSets,
+  periodTypeNames,
+  getScaleData
 } from "./types";
 
 const colorSchemes = [
@@ -285,20 +323,16 @@ const matchChartCode = code => {
   if (periodI === -1) {
     return false;
   }
-  const result = {
+  return {
     chartType: lineTypes[r[1]].chartType,
     chartName: lineTypes[r[1]].chartType + "Chart",
     lineType: r[1],
     lineTitle: lineTypes[r[1]].title,
     periodType: periodTypes[periodI].name,
-    dataProviderKey: lineTypes[r[1]].dataProviderKey
+    dataProviderKey: lineTypes[r[1]].dataProviderKey,
+    subKey: lineTypes[r[1]].countSubKey,
+    countPostfix: lineTypes[r[1]].countPostfix
   };
-  if (result.chartType === "posts") {
-    if (result.lineType === "post_like") {
-      result.subKey = "total";
-    }
-  }
-  return result;
 };
 
 const chartStorage = {};
@@ -315,13 +349,14 @@ const mainColor = "#fff";
 const altColor = "#16181A";
 
 export default {
-  name: "app",
+  name: "statistics-page",
   mixins: [CalcCount, BuildScale],
   directives: {
     ClickOutside
   },
   components: {
     PostsModal,
+    MoneyTable,
     MobileHeader,
     Footer
   },
@@ -337,17 +372,14 @@ export default {
       tempDataSet: [],
       subscribedWsCodes: [],
       //
-      chartDataSets: {
-        posts_chart: {},
-        stories_chart: {}
-      },
+      chartDataSets,
       updateDataTimeoutIds: {},
       updateChartTimeoutIds: {}
     };
   },
   mounted() {
     this.initWs();
-    this.initScales();
+    this.buildScales();
     this.initLineCharts();
     this.fillLineChartsByEmptyPoints();
     this.initMapCharts();
@@ -369,6 +401,9 @@ export default {
           .subtract(1, p.moment)
           .format("D MMMM") + " - Today"
       );
+    },
+    moneyTableData() {
+      return this.chartDataSets["earnings_chart"];
     }
   },
   methods: {
@@ -392,11 +427,10 @@ export default {
     selectPeriod(name) {
       this.currentPeriodType = name;
       this.periodOptionsOpened = false;
-      this.postsPeriodChange(name);
     },
     postsPeriodChange(period) {
-      this.sendPostsWsRequests(period);
-
+      // this.buildScales();
+      this.sendWsRequestsByPeriod(period);
       for (let v of chartStorage.posts[period]) {
         this.processData(v);
       }
@@ -416,15 +450,12 @@ export default {
       this.subscribedWsCodes.push(code);
     },
     sendWsRequests() {
+      this.sendWsRequestsByPeriod(this.currentPeriodType);
+
       // followers block
-      this.subscribeUserStatistics("current_subscribers_latest_now");
-      this.subscribeUserStatistics("user_subscribe_count_last_week");
-      this.subscribeUserStatistics("user_unsubscribe_count_last_week");
-      //
-      this.sendPostsWsRequests(this.currentPeriodType);
-      //
-      this.subscribeUserStatistics("story_added_detailed_histogram_last_week");
-      this.subscribeUserStatistics("story_view_detailed_histogram_last_week");
+      // this.subscribeUserStatistics("current_subscribers_latest_now");
+      // this.subscribeUserStatistics("user_subscribe_count_last_week");
+      // this.subscribeUserStatistics("user_unsubscribe_count_last_week");
       //
       this.subscribeUserStatistics("view_profile_by_country_count_today");
       this.subscribeUserStatistics("view_profile_count_today");
@@ -435,25 +466,50 @@ export default {
       this.subscribeUserStatistics("view_profile_by_device_count_today");
       //
       this.subscribeUserStatistics("top_followers_count_today");
+      //
+
+      // this.subscribeUserStatistics("paid_subscriptions_histogram_all");
+      // this.subscribeUserStatistics("tips_histogram_all");
+      // this.subscribeUserStatistics("paid_chat_messages_histogram_all");
+      // this.subscribeUserStatistics("earn_referral_histogram_all");
     },
-    sendPostsWsRequests(period) {
+    sendWsRequestsByPeriod(period) {
       this.subscribeUserStatistics("new_post_detailed_histogram_" + period);
       this.subscribeUserStatistics("view_post_detailed_histogram_" + period);
       this.subscribeUserStatistics(
         "post_comment_added_detailed_histogram_" + period
       );
       this.subscribeUserStatistics("post_like_detailed_histogram_" + period);
+      //
+      this.subscribeUserStatistics("story_added_detailed_histogram_" + period);
+      this.subscribeUserStatistics("story_view_detailed_histogram_" + period);
+      //
+      this.subscribeUserStatistics(
+        "paid_subscriptions_detailed_histogram_" + period
+      );
+      this.subscribeUserStatistics("tips_detailed_histogram_" + period);
+      this.subscribeUserStatistics(
+        "paid_chat_messages_detailed_histogram_" + period
+      );
+      this.subscribeUserStatistics(
+        "earn_referral_detailed_histogram_" + period
+      );
     },
-    setCounter(ref, title, value) {
+    setCounter(ref, title, value, postfix) {
       if (title) {
         title = pluralize(title, value) + " ";
       } else {
         title = "&nbsp;";
       }
       if (!this.$refs[ref]) {
+        console.log(ref + " not found");
         return;
       }
-      this.$refs[ref].innerHTML = title + "<span>" + value + "</span>";
+      if (!postfix) {
+        postfix = "";
+      }
+      this.$refs[ref].innerHTML =
+        title + "<span>" + value + postfix + "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
       const chartId = chart.div.id;
@@ -463,17 +519,20 @@ export default {
       if (this.updateDataTimeoutIds[dataId]) {
         clearTimeout(this.updateDataTimeoutIds[dataId]);
       }
+
       this.updateDataTimeoutIds[dataId] = setTimeout(() => {
         this.chartDataSets[chartId][dataProviderKey] = {};
         this.chartDataSets[chartId][dataProviderKey].statData = statData;
         this.chartDataSets[chartId][dataProviderKey].statDataSubKey =
           statDataSubKey || null;
+
         Object.entries(this.chartDataSets[chartId]).forEach(v => {
+          const [dataProviderKey, stat] = v;
           this._updateChartDataProvider(
             chart,
-            v[1].statData,
-            v[0],
-            v[1].statDataSubKey
+            stat.statData,
+            dataProviderKey,
+            stat.statDataSubKey
           );
         });
       }, 500);
@@ -484,7 +543,6 @@ export default {
       }
       this.updateChartTimeoutIds[chartId] = setTimeout(() => {
         chart.validateData();
-        // debug("updated " + chartId);
       }, 1000);
     },
     _updateChartDataProvider(chart, statData, dataProviderKey, statDataSubKey) {
@@ -514,132 +572,6 @@ export default {
       for (let i in approx) {
         chart.dataProvider[i][dataProviderKey] = approx[i];
       }
-    },
-    updateMap(statData) {
-      const sortable = [];
-      for (let index in statData) {
-        if (statData.hasOwnProperty(index)) {
-          sortable.push([index, statData[index]]);
-        }
-      }
-      sortable.sort((a, b) => {
-        return b[1] - a[1];
-      });
-      if (sortable.length) {
-        let alpha = sortable[0][1];
-        sortable.forEach((item, i) => {
-          this.profileMapData[i] = {
-            id: item[0],
-            alpha: 0.3 + (item[1] * 0.7) / alpha,
-            value: item[1]
-          };
-        });
-      }
-      if (this.profileMapData.length) {
-        this.mapChart.dataProvider.areas = this.profileMapData;
-        this.mapChart.validateData();
-      }
-    },
-    updateProfileDonut2(donut, statData, refKey, color) {
-      if (!statData) {
-        return;
-      }
-      if ("#7c8b96" === donut.dataProvider[0].color) {
-        donut.dataProvider = [];
-        donut.outlineThickness = "1.5";
-        donut.alpha = 1;
-      }
-      donut.dataProvider[0] = {
-        value: statData,
-        color: color
-      };
-      donut.validateData();
-      this.$refs[refKey].innerHTML = statData;
-    },
-    updateProfileDonut3(donut, statData, refKey, color, hasThird) {
-      if (!statData) {
-        return;
-      }
-      if ("#7c8b96" === donut.dataProvider[0].color) {
-        donut.dataProvider = [];
-        donut.outlineThickness = "1.5";
-        donut.alpha = 1;
-      }
-      if ("undefined" === typeof donut.dataProvider[0]) {
-        donut.dataProvider[0] = {
-          value: 0,
-          color: color
-        };
-      }
-      if (hasThird) {
-        if ("undefined" === typeof donut.dataProvider[1]) {
-          donut.dataProvider[1] = {
-            value: statData,
-            color: "#3dbdd6"
-          };
-        }
-        donut.dataProvider[2] = {
-          value: statData,
-          color: "#67cc2e"
-        };
-      } else {
-        donut.dataProvider[1] = {
-          value: statData,
-          color: "#3bbdd3"
-        };
-      }
-      donut.validateData();
-      this.$refs[refKey].innerHTML = statData;
-    },
-    updateProfileDeviceDonut(donut, statData) {
-      if ("undefined" !== typeof statData.mobile) {
-        if ("#7c8b96" === donut.dataProvider[0].color) {
-          donut.dataProvider = [];
-          donut.outlineThickness = "1.5";
-          donut.alpha = 1;
-        }
-        donut.dataProvider[0] = {
-          value: statData.mobile,
-          color: "#FF335A"
-        };
-
-        this.$refs.visitorsMobile.innerHTML = statData.mobile;
-      }
-      if ("undefined" !== typeof statData.desktop) {
-        if ("#7c8b96" === donut.dataProvider[0].color) {
-          donut.dataProvider = [];
-          donut.outlineThickness = "1.5";
-          donut.alpha = 1;
-        }
-        if ("undefined" === typeof donut.dataProvider[0]) {
-          donut.dataProvider[0] = {
-            value: 0,
-            color: "#FF335A"
-          };
-        }
-        donut.dataProvider[1] = {
-          value: statData.desktop,
-          color: "#67cc2e"
-        };
-        this.$refs.visitorsDesktop.innerHTML = statData.desktop;
-      }
-      donut.validateData();
-    },
-    async updateTopFollowers(statData) {
-      if (!statData || !statData.length) {
-        return;
-      }
-      const ids = statData.map(item => "ids[]=" + item.key_field);
-      const response = await request(
-        `users?access-token=` +
-          this.$store.state.auth.token +
-          "&" +
-          ids.join("&"),
-        {
-          method: "GET"
-        }
-      );
-      this.topFollowers = await response.json();
     },
     onData(data) {
       if (!data.statistics) {
@@ -673,7 +605,8 @@ export default {
         this.setCounter(
           "count_" + r.chartType + "_" + r.lineType,
           r.lineTitle,
-          this.calcCount(statData, r.subKey || undefined)
+          this.calcCount(statData, r.subKey || undefined),
+          r.countPostfix
         );
         this.updateChart(
           this[r.chartName],
@@ -684,231 +617,10 @@ export default {
         if (store) {
           chartStorage[r.chartType][r.periodType].push(data);
         }
+        return;
       }
 
       switch (data.statistics.code) {
-        // case "current_subscribers_latest_now":
-        //   this.setCounter(
-        //     "chartsDataFollowersFollowers",
-        //     "Followers",
-        //     statData.length ? statData[0].message.data_count : 0
-        //   );
-        //   break;
-        //
-        // case "user_subscribe_count_last_week":
-        //   this.setCounter("chartsDataFollowersSubscribed", false, statData);
-        //   break;
-        //
-        // case "user_unsubscribe_count_last_week":
-        //   this.setCounter("chartsDataFollowersUnsubscribed", false, statData);
-        //   break;
-        //
-        // case "story_added_detailed_histogram_last_week":
-        //   this.setCounter(
-        //     "chartsDataStoriesUploaded",
-        //     "Uploaded",
-        //     this.calcCount(statData)
-        //   );
-        //   this.updateChart(this.storiesChart, statData, "uploads");
-        //   break;
-        //
-        // case "story_view_detailed_histogram_last_week":
-        //   this.setCounter(
-        //     "chartsDataStoriesViews",
-        //     "Views",
-        //     this.calcCount(statData)
-        //   );
-        //   this.updateChart(this.storiesChart, statData, "views");
-        //   break;
-
-        // case 'paid_subscriptions_count_last_week':
-        //   // $('#charts-data-earnings .paid_subscriptions span').html(statData);
-        //   break;
-        //
-        // case 'tips_count_last_week':
-        //   // $('#charts-data-earnings .tips span').html(statData);
-        //   break;
-        //
-        // case 'paid_chat_messages_count_last_week':
-        //   // $('#charts-data-earnings .paid_chat_messages span').html(statData);
-        //   break;
-        //
-        // case 'earn_referral_count_last_week':
-        //   // $('#charts-data-earnings .earn_referral span').html(statData);
-        //   break;
-        //
-        // case "current_subscribers_latest_last_week":
-        //   this.getUserStatistics("current_subscribers_list_last_week");
-        //   var start_value = statData.length ? statData[0].message.data_count : 0;
-        //   for (var i = 0; i < bar_count; i++) {
-        //     this.followers_charts.dataProvider[i].followers = start_value;
-        //   }
-        //   break;
-        // case 'current_subscribers_list_last_week':
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var timestamp = moment.utc(statData[index].message.timestamp).unix(),
-        //         curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(this.followers_charts.dataProvider[ii].date - timestamp);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = 'undefined' !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].message.data_count;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     for (var ii = i; ii < bar_count; ii++) {
-        //       this.followers_charts.dataProvider[ii].followers = approx_arr[i];
-        //     }
-        //   }
-        //   this.followers_charts.validateData();
-        //   break;
-        //
-        // case 'user_subscribe_detailed_histogram_last_week':
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(subscribed_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = 'undefined' !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     subscribed_charts.dataProvider[i].subscribed = approx_arr[i];
-        //   }
-        //   subscribed_charts.validateData();
-        //   break;
-        //
-        // case 'user_unsubscribe_detailed_histogram_last_week':
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(subscribed_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = 'undefined' !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index];
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     subscribed_charts.dataProvider[i].unsubscribed = -approx_arr[i];
-        //   }
-        //   subscribed_charts.validateData();
-        //   break;
-        //
-        // case "paid_subscriptions_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(earnings_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].total;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     earnings_charts.dataProvider[i].paid_subscriptions = approx_arr[i];
-        //   }
-        //   earnings_charts.validateData();
-        //   break;
-        //
-        // case "tips_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(earnings_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].total;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     earnings_charts.dataProvider[i].tips = approx_arr[i];
-        //   }
-        //   earnings_charts.validateData();
-        //   break;
-        //
-        // case "paid_chat_messages_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(earnings_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].total;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     earnings_charts.dataProvider[i].paid_chat_messages = approx_arr[i];
-        //   }
-        //   earnings_charts.validateData();
-        //   break;
-        //
-        // case "earn_referral_detailed_histogram_last_week":
-        //   var approx_arr = {};
-        //   for (var index in statData) {
-        //     if (statData.hasOwnProperty(index)) {
-        //       var curr_index = 0,
-        //         diff = 0;
-        //       for (var ii = 0; ii < bar_count; ii++) {
-        //         var moment_diff = Math.abs(earnings_charts.dataProvider[ii].date - index);
-        //         if (0 === ii || diff > moment_diff) {
-        //           diff = moment_diff;
-        //           curr_index = ii;
-        //         }
-        //       }
-        //       var val = "undefined" !== typeof approx_arr[curr_index] ? parseInt(approx_arr[curr_index], 10) : 0;
-        //       approx_arr[curr_index] = val + statData[index].total;
-        //     }
-        //   }
-        //   for (var i in approx_arr) {
-        //     earnings_charts.dataProvider[i].earn_referral = approx_arr[i];
-        //   }
-        //   earnings_charts.validateData();
-        //   break;
-        //
-
         // visitors
         case "view_profile_count_today":
           this.updateProfileDonut2(
@@ -966,50 +678,19 @@ export default {
           this.updateTopFollowers(statData);
           break;
       }
-
-      // if (data.users_data) {
-      //   let html = "";
-      //   for (let i in data.users_data) {
-      //     if (data.users_data.hasOwnProperty(i)) {
-      //       html +=
-      //         '<a class=followers-item href="https://' +
-      //         data.users_data[i].username +
-      //         "." +
-      //         DOMAIN +
-      //         '">';
-      //       if (null === data.users_data[i].avatar) {
-      //         html += "<span class=followers-avatar></span>";
-      //       } else {
-      //         html +=
-      //           '<span class=followers-avatar style="background-image:url(' +
-      //           POST_MEDIA_CONFIG.prefix +
-      //           data.users_data[i].avatar +
-      //           ')"></span>';
-      //       }
-      //       html +=
-      //         "<span class=followers-name>" +
-      //         data.users_data[i].name +
-      //         "</span>";
-      //       html +=
-      //         "<span class=followers-username>@" +
-      //         data.users_data[i].username +
-      //         "</span></a>";
-      //     }
-      //   }
-      //   this.$refs.followersList.innerHTML = html;
-      // }
     },
-    initScales() {
+    buildScales() {
       const now = moment()
         .utc()
         .unix();
 
-      this.buildScale(document.getElementById("posts_scale"), "last_week", now);
-      this.buildScale(
-        document.getElementById("stories_scale"),
-        "last_week",
-        now
-      );
+      Object.keys(chartTypes).forEach(chartType => {
+        this.buildScale(
+          document.getElementById(chartType + "_scale"),
+          this.currentPeriodType,
+          now
+        );
+      });
     },
     initLineCharts() {
       this.followers_charts = window.AmCharts.makeChart("followers_charts", {
@@ -1249,7 +930,7 @@ export default {
       //       "borderThickness": 0,
       //       "fadeOutDuration": 0,
       //       "fillAlpha": 1,
-      //       "fillColor": alt_color,
+      //       "fillColor": altColor,
       //       "offsetX": 0,
       //       "fontSize": 15,
       //       "horizontalPadding": 8,
@@ -1268,7 +949,7 @@ export default {
       //       "tickLength": 2,
       //       "offset": 1,
       //       "gridThickness": 2,
-      //       "gridCount": bar_count
+      //       "gridCount": barCount
       //     },
       //     "valueAxes": [
       //       {
@@ -1429,157 +1110,165 @@ export default {
         ],
         dataProvider: []
       });
-      //   earnings_charts = window.AmCharts.makeChart("earnings_charts",
-      //     {
-      //       "type": "serial",
-      //       "categoryField": "date",
-      //       "fontFamily": "Open Sans",
-      //       "color": "#7c8b96",
-      //       "autoDisplay": false,
-      //       "autoMargins": false,
-      //       "marginBottom": 0,
-      //       "marginTop": 0,
-      //       "marginLeft": 0,
-      //       "marginRight": 0,
-      //       "addClassNames": true,
-      //       "chartCursor": {
-      //         "cursorAlpha": 0.1,
-      //         "cursorColor": "#7C8B96",
-      //         "tabIndex": -1,
-      //         "valueLineAlpha": 0,
-      //         "zoomable": false,
-      //         "balloonPointerOrientation": "vertical",
-      //         "bulletsEnabled": true,
-      //         "bulletSize": 10,
-      //         "categoryBalloonEnabled": false,
-      //         "fullWidth": true,
-      //         "leaveAfterTouch": false,
-      //         "oneBalloonOnly": true
-      //       },
-      //       "balloon": {
-      //         "animationDuration": 0,
-      //         "borderThickness": 0,
-      //         "fadeOutDuration": 0,
-      //         "fillAlpha": 1,
-      //         "fillColor": alt_color,
-      //         "offsetX": 0,
-      //         "fontSize": 15,
-      //         "horizontalPadding": 8,
-      //         "verticalPadding": 3,
-      //         "shadowAlpha": 0
-      //       },
-      //       "categoryAxis": {
-      //         "autoGridCount": false,
-      //         "labelsEnabled": false,
-      //         "axisThickness": 0,
-      //         "axisAlpha": 0.1,
-      //         "gridAlpha": 0,
-      //         "gridColor": "#7c8b96",
-      //         "startOnAxis": true,
-      //         "inside": true,
-      //         "tickLength": 2,
-      //         "offset": 1,
-      //         "gridThickness": 2,
-      //         "gridCount": bar_count
-      //       },
-      //       "valueAxes": [
-      //         {
-      //           "labelsEnabled": false,
-      //           "axisThickness": 0,
-      //           "dashLength": 6,
-      //           "tickLength": 0,
-      //           "gridAlpha": 0.1,
-      //           "stackType": "regular",
-      //           "gridColor": "#7c8b96",
-      //           "zeroGridAlpha": 0,
-      //           "autoGridCount": false,
-      //           "gridCount": 4
-      //         }
-      //       ],
-      //       "graphs": [
-      //         {
-      //           "bulletSize": 0,
-      //           "bullet": "round",
-      //           "bulletBorderThickness": 0,
-      //           "minBulletSize": 0,
-      //           "animationPlayed": true,
-      //           "fillColors": ["#3abfd3", "#49eeca"],
-      //           "type": "column",
-      //           "valueField": "earn_referral",
-      //           "fillAlphas": 1,
-      //           "lineAlpha": 0,
-      //           "fixedColumnWidth": 2,
-      //           "cornerRadiusTop": 1,
-      //           "balloon": {
-      //             "color": "#3abfd3"
-      //           }
-      //         }, {
-      //           "bulletSize": 0,
-      //           "bullet": "round",
-      //           "bulletBorderThickness": 0,
-      //           "minBulletSize": 0,
-      //           "animationPlayed": true,
-      //           "fillColors": ["#67cc2e", "#b3f43a"],
-      //           "type": "column",
-      //           "valueField": "paid_chat_messages",
-      //           "fillAlphas": 1,
-      //           "lineAlpha": 0,
-      //           "fixedColumnWidth": 2,
-      //           "cornerRadiusTop": 1,
-      //           "balloon": {
-      //             "color": "#67cc2e"
-      //           }
-      //         }, {
-      //           "bulletSize": 0,
-      //           "bullet": "round",
-      //           "bulletBorderThickness": 0,
-      //           "minBulletSize": 0,
-      //           "animationPlayed": true,
-      //           "fillColors": ["#ff9500", "#ffcc00"],
-      //           "type": "column",
-      //           "valueField": "tips",
-      //           "fillAlphas": 1,
-      //           "lineAlpha": 0,
-      //           "fixedColumnWidth": 2,
-      //           "cornerRadiusTop": 1,
-      //           "balloon": {
-      //             "color": "#ff9500"
-      //           }
-      //         }, {
-      //           "bulletSize": 0,
-      //           "bullet": "round",
-      //           "bulletBorderThickness": 0,
-      //           "minBulletSize": 0,
-      //           "animationPlayed": true,
-      //           "fillColors": ["#FF3E33", "#FE3F8C"],
-      //           "type": "column",
-      //           "valueField": "paid_subscriptions",
-      //           "fillAlphas": 1,
-      //           "lineAlpha": 0,
-      //           "fixedColumnWidth": 2,
-      //           "cornerRadiusTop": 1,
-      //           "balloon": {
-      //             "color": "#FF3E33"
-      //           }
-      //         }
-      //       ],
-      //       "dataProvider": []
-      //     }
-      //   );
+
+      this.earningsChart = window.AmCharts.makeChart("earnings_chart", {
+        name: "earnings",
+        type: "serial",
+        categoryField: "date",
+        fontFamily: "Open Sans",
+        color: "#7c8b96",
+        autoDisplay: false,
+        autoMargins: false,
+        marginBottom: 0,
+        marginTop: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        addClassNames: true,
+        chartCursor: {
+          cursorAlpha: 0.1,
+          cursorColor: "#7C8B96",
+          tabIndex: -1,
+          valueLineAlpha: 0,
+          zoomable: false,
+          balloonPointerOrientation: "vertical",
+          bulletsEnabled: true,
+          bulletSize: 10,
+          categoryBalloonEnabled: false,
+          fullWidth: true,
+          leaveAfterTouch: false,
+          oneBalloonOnly: true
+        },
+        balloon: {
+          animationDuration: 0,
+          borderThickness: 0,
+          fadeOutDuration: 0,
+          fillAlpha: 1,
+          fillColor: altColor,
+          offsetX: 0,
+          fontSize: 15,
+          horizontalPadding: 8,
+          verticalPadding: 3,
+          shadowAlpha: 0
+        },
+        categoryAxis: {
+          autoGridCount: false,
+          labelsEnabled: false,
+          axisThickness: 0,
+          axisAlpha: 0.1,
+          gridAlpha: 0,
+          gridColor: "#7c8b96",
+          startOnAxis: true,
+          inside: true,
+          tickLength: 2,
+          offset: 1,
+          gridThickness: 2,
+          gridCount: barCount
+        },
+        valueAxes: [
+          {
+            labelsEnabled: false,
+            axisThickness: 0,
+            dashLength: 6,
+            tickLength: 0,
+            gridAlpha: 0.1,
+            stackType: "regular",
+            gridColor: "#7c8b96",
+            zeroGridAlpha: 0,
+            autoGridCount: false,
+            gridCount: 4
+          }
+        ],
+        graphs: [
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#3abfd3", "#49eeca"],
+            type: "column",
+            valueField: "earn_referral",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#3abfd3"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#67cc2e", "#b3f43a"],
+            type: "column",
+            valueField: "paid_chat_messages",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#67cc2e"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#ff9500", "#ffcc00"],
+            type: "column",
+            valueField: "tips",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#ff9500"
+            }
+          },
+          {
+            bulletSize: 0,
+            bullet: "round",
+            bulletBorderThickness: 0,
+            minBulletSize: 0,
+            animationPlayed: true,
+            fillColors: ["#FF3E33", "#FE3F8C"],
+            type: "column",
+            valueField: "paid_subscriptions",
+            fillAlphas: 1,
+            lineAlpha: 0,
+            fixedColumnWidth: 2,
+            cornerRadiusTop: 1,
+            balloon: {
+              color: "#FF3E33"
+            }
+          }
+        ],
+        dataProvider: []
+      });
     },
     fillLineChartsByEmptyPoints() {
-      const now = moment()
-        .utc()
-        .unix();
+      this.postsChart.dataProvider = [];
+      this.storiesChart.dataProvider = [];
+      this.earningsChart.dataProvider = [];
+
+      const { periodType, count, startDate } = getScaleData(
+        this.currentPeriodType
+      );
+
       for (let i = barCount; i >= 1; i--) {
         let currDate = moment
-          .unix(moment.utc(moment.unix(now).format("YYYY-MM-DD HH")).unix())
-          .subtract((i * 167) / barCount, "hours")
+          .unix(startDate)
+          .subtract((i * count) / barCount, periodType)
           .unix();
-        this.followers_charts.dataProvider.push({
-          date: currDate,
-          followers: 0
-        });
+        // this.followers_charts.dataProvider.push({
+        //   date: currDate,
+        //   followers: 0
+        // });
         this.postsChart.dataProvider.push({
           date: currDate,
           posts: 0,
@@ -1587,24 +1276,24 @@ export default {
           likes: 0,
           comments: 0
         });
-        // subscribed_charts.dataProvider.push({
-        //   "date": curr_date,
-        //   "subscribed": 0,
-        //   "unsubscribed": 0
-        // });
-        // earnings_charts.dataProvider.push({
-        //   "date": curr_date,
-        //   "paid_subscriptions": 0,
-        //   "tips": 0,
-        //   "paid_chat_messages": 0,
-        //   "earn_referral": 0
-        // });
         this.storiesChart.dataProvider.push({
           date: currDate,
           uploads: 0,
           views: 0,
           comments: 0
         });
+        this.earningsChart.dataProvider.push({
+          date: currDate,
+          paid_subscriptions: 0,
+          tips: 0,
+          paid_chat_messages: 0,
+          earn_referral: 0
+        });
+        // subscribed_charts.dataProvider.push({
+        //   "date": curr_date,
+        //   "subscribed": 0,
+        //   "unsubscribed": 0
+        // });
       }
     },
     initMapCharts() {
@@ -1719,6 +1408,145 @@ export default {
           map: "worldLow",
           areas: []
         }
+      });
+    },
+    updateMap(statData) {
+      const sortable = [];
+      for (let index in statData) {
+        if (statData.hasOwnProperty(index)) {
+          sortable.push([index, statData[index]]);
+        }
+      }
+      sortable.sort((a, b) => {
+        return b[1] - a[1];
+      });
+      if (sortable.length) {
+        let alpha = sortable[0][1];
+        sortable.forEach((item, i) => {
+          this.profileMapData[i] = {
+            id: item[0],
+            alpha: 0.3 + (item[1] * 0.7) / alpha,
+            value: item[1]
+          };
+        });
+      }
+      if (this.profileMapData.length) {
+        this.mapChart.dataProvider.areas = this.profileMapData;
+        this.mapChart.validateData();
+      }
+    },
+    updateProfileDonut2(donut, statData, refKey, color) {
+      if (!statData) {
+        return;
+      }
+      if ("#7c8b96" === donut.dataProvider[0].color) {
+        donut.dataProvider = [];
+        donut.outlineThickness = "1.5";
+        donut.alpha = 1;
+      }
+      donut.dataProvider[0] = {
+        value: statData,
+        color: color
+      };
+      donut.validateData();
+      this.$refs[refKey].innerHTML = statData;
+    },
+    updateProfileDonut3(donut, statData, refKey, color, hasThird) {
+      if (!statData) {
+        return;
+      }
+      if ("#7c8b96" === donut.dataProvider[0].color) {
+        donut.dataProvider = [];
+        donut.outlineThickness = "1.5";
+        donut.alpha = 1;
+      }
+      if ("undefined" === typeof donut.dataProvider[0]) {
+        donut.dataProvider[0] = {
+          value: 0,
+          color: color
+        };
+      }
+      if (hasThird) {
+        if ("undefined" === typeof donut.dataProvider[1]) {
+          donut.dataProvider[1] = {
+            value: statData,
+            color: "#3dbdd6"
+          };
+        }
+        donut.dataProvider[2] = {
+          value: statData,
+          color: "#67cc2e"
+        };
+      } else {
+        donut.dataProvider[1] = {
+          value: statData,
+          color: "#3bbdd3"
+        };
+      }
+      donut.validateData();
+      this.$refs[refKey].innerHTML = statData;
+    },
+    updateProfileDeviceDonut(donut, statData) {
+      if ("undefined" !== typeof statData.mobile) {
+        if ("#7c8b96" === donut.dataProvider[0].color) {
+          donut.dataProvider = [];
+          donut.outlineThickness = "1.5";
+          donut.alpha = 1;
+        }
+        donut.dataProvider[0] = {
+          value: statData.mobile,
+          color: "#FF335A"
+        };
+
+        this.$refs.visitorsMobile.innerHTML = statData.mobile;
+      }
+      if ("undefined" !== typeof statData.desktop) {
+        if ("#7c8b96" === donut.dataProvider[0].color) {
+          donut.dataProvider = [];
+          donut.outlineThickness = "1.5";
+          donut.alpha = 1;
+        }
+        if ("undefined" === typeof donut.dataProvider[0]) {
+          donut.dataProvider[0] = {
+            value: 0,
+            color: "#FF335A"
+          };
+        }
+        donut.dataProvider[1] = {
+          value: statData.desktop,
+          color: "#67cc2e"
+        };
+        this.$refs.visitorsDesktop.innerHTML = statData.desktop;
+      }
+      donut.validateData();
+    },
+    async updateTopFollowers(statData) {
+      if (!statData || !statData.length) {
+        return;
+      }
+      const ids = statData.map(item => "ids[]=" + item.key_field);
+      const response = await request(
+        `users?access-token=` +
+          this.$store.state.auth.token +
+          "&" +
+          ids.join("&"),
+        {
+          method: "GET"
+        }
+      );
+      this.topFollowers = await response.json();
+    }
+  },
+  watch: {
+    currentPeriodType() {
+      this.buildScales();
+      this.fillLineChartsByEmptyPoints();
+      this.sendWsRequestsByPeriod(this.currentPeriodType);
+      Object.keys(chartTypes).forEach(chartType => {
+        for (let v of chartStorage[chartType][this.currentPeriodType]) {
+          this.processData(v, false);
+        }
+        this[chartType + "Chart"].validateData();
       });
     }
   }

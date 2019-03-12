@@ -1,3 +1,7 @@
+const isFloat = n => {
+  return Number(n) === n && n % 1 !== 0;
+};
+
 export default {
   methods: {
     add(a, b) {
@@ -7,8 +11,16 @@ export default {
       let values = Object.values(statData);
       if (subKey) {
         values = values.map(v => v[subKey]);
+        // if (!values.length) {
+        //   return 0;
+        // }
+        // return Math.max.apply(null, values);
       }
-      return values.reduce(this.add, 0);
+      const r = values.reduce(this.add, 0);
+      if (isFloat(r)) {
+        return Number(r.toFixed(2));
+      }
+      return r;
     }
   }
 };

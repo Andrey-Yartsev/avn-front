@@ -30,7 +30,7 @@ export default {
   methods: {
     subscribe() {
       const onSuccess = () => {
-        global.location.reload();
+        // global.location.reload();
       };
       this._pay(
         {

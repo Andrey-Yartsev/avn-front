@@ -151,6 +151,9 @@ export default {
       if (this.$store.state.auth.loginInProgress) {
         return true;
       }
+      if (this.$store.state.init.fetchLoading) {
+        return true;
+      }
       return this.$store.state.profile.fetchLoading;
     },
     error() {
@@ -228,7 +231,9 @@ export default {
     },
     loading(loading) {
       if (!loading) {
+        //setTimeout(() => {
         this.initWs();
+        //}, 1000);
       }
     }
   },
