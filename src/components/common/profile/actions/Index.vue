@@ -22,11 +22,11 @@
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link
             to="/settings/profile"
-            class="profile-actions__btn btn-with-icon btn-edit-profile"
+            class="profile-actions__btn btn-with-icon btn-with-icon_st btn-edit-profile"
             >Edit profile</router-link
           >
           <button
-            class="profile-actions__btn btn-with-icon btn-make-post make-post-btn"
+            class="profile-actions__btn btn-with-icon btn-with-icon_st btn-make-post make-post-btn"
             @click="openAddPostModal"
           >
             New post
@@ -43,7 +43,7 @@
           <button
             v-if="profile.canEarn && $root.showTips"
             type="button"
-            class="profile-actions__btn btn-with-icon profile-tip-btn selected"
+            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn selected"
             @click="openTip"
           >
             Fund
@@ -60,13 +60,13 @@
             <div
               v-if="profile.followedBy"
               @click="unfollow"
-              class="btn-with-icon btn-subscribe disable-state"
+              class="btn-with-icon btn-with-icon_st btn-subscribe disable-state"
             >
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
             </div>
-            <div v-else @click="follow" class="btn-with-icon btn-subscribe">
+            <div v-else @click="follow" class="btn-with-icon btn-with-icon_st btn-subscribe">
               <div class="btn-subscribe__label">
                 Follow
               </div>
@@ -76,7 +76,7 @@
             v-if="profile.followedBy"
             @click="sendMessage"
             type="button"
-            class="profile-actions__btn btn-with-icon profile-message-btn"
+            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-message-btn"
           >
             Message
           </button>

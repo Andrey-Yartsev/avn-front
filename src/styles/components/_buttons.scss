@@ -189,11 +189,33 @@ button,
   &:before {
     display: block;
     margin: 0 auto 4px;
-    font-size: 20px;
     @include icon-font;
-    width: 22px;
-    height: 22px;
     transition: all 0.3s;
+  }
+
+  &_st {
+
+    &:before {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+    }
+  }
+
+  &_lg {
+
+    &:before {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 5px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 
@@ -223,14 +245,9 @@ button,
 }
 
 .btn-make-post {
-  color: $secondary-color;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-left: 10px;
-  }
-
-  &:hover {
-    color: $secondary-color-darken;
   }
 }
 

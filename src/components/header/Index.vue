@@ -15,7 +15,7 @@
         <template v-if="notFound">
           <User />
           <button
-            class="btn make-post-btn hidden-mobile"
+            class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-mobile"
             type="button"
             @click="openAddPostModal"
             v-if="user"
@@ -24,7 +24,7 @@
           </button>
           <router-link
             to="/addPost"
-            class="btn make-post-btn hidden-desktop"
+            class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
             v-if="user"
           >
             Share
@@ -45,13 +45,13 @@
             <Search />
             <User />
             <button
-              class="btn make-post-btn hidden-mobile"
+              class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-mobile"
               type="button"
               @click="openAddPostModal"
             >
               Share
             </button>
-            <router-link to="/addPost" class="btn make-post-btn hidden-desktop">
+            <router-link to="/addPost" class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop">
               Share
             </router-link>
           </template>

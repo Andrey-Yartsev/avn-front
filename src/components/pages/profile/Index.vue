@@ -91,7 +91,7 @@
                   v-if="isOwner(this.profile.id)"
                   @click="openAddPostModal"
                   type="button"
-                  class="make-post-btn feed"
+                  class="make-post-btn btn-with-icon btn-with-icon_lg feed"
                 >
                   Create new post
                 </button>
