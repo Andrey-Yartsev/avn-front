@@ -11,13 +11,13 @@ export default {
       }
     });
   },
-  blockUser({ userId, storyId }) {
-    return tokenRequest(`stories/${storyId}/users/${userId}/block`, {
-      method: "PUT"
+  blockUser({ userId }) {
+    return tokenRequest(`users/${userId}/stories/block`, {
+      method: "POST"
     });
   },
-  unblockUser({ userId, storyId }) {
-    return tokenRequest(`stories/${storyId}/users/${userId}/block`, {
+  unblockUser({ userId }) {
+    return tokenRequest(`users/${userId}/stories/block`, {
       method: "DELETE"
     });
   }

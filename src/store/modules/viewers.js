@@ -66,7 +66,7 @@ const actions = {
     commit("setSource", { source });
   },
   blockUser({ commit }, { storyId, userId }) {
-    return ViewersApi.blockUser({ storyId, userId })
+    return ViewersApi.blockUser({ userId })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function() {
@@ -79,7 +79,7 @@ const actions = {
       });
   },
   unblockUser({ commit }, { storyId, userId }) {
-    return ViewersApi.unblockUser({ storyId, userId })
+    return ViewersApi.unblockUser({ userId })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function() {
