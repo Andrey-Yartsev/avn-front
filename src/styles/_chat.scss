@@ -340,7 +340,11 @@
     }
 
     .no-chats & {
-      overflow: visible;
+
+      .chat-popup &,
+      .chat-page:not(.chat-page_new) & {
+        overflow: visible;
+      }
     }
 
     &_narrow {
@@ -419,7 +423,7 @@
         left: 100vw;
         top: 0;
         bottom: 0;
-        z-index: 12;
+        z-index: 3;
         background-color: $white;
       }
 
