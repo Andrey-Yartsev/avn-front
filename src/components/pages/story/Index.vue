@@ -586,8 +586,10 @@ export default {
     },
 
     addNewStory() {
-      this.pause();
-      document.getElementById("storyFileSelect").click();
+      if (this.isOwner(this.author.id)) {
+        this.pause();
+        document.getElementById("storyFileSelect").click();
+      }
     },
 
     openDropdawn() {
