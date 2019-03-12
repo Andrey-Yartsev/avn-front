@@ -1013,8 +1013,8 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    box-shadow: 0 0 5px rgba(#000, 0.3);
     width: 100%;
+    box-shadow: 0 0 5px rgba(#000, 0.3);
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {

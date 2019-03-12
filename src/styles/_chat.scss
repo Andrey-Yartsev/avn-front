@@ -295,7 +295,7 @@
     .header-nav {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        transform: translateX(-100%);
+        transform: translateX(calc(-100% - 5px));
       }
     }
 
