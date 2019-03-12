@@ -111,15 +111,20 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
     const {
       hasWatermarkPhoto,
       hasWatermarkVideo,
-      watermarkText
+      watermarkText,
+      watermarkFile
     } = Store.state.auth.user;
 
     if (
       (mediaType === "video" && hasWatermarkVideo) ||
       ((mediaType === "gif" || mediaType === "photo") && hasWatermarkPhoto)
     ) {
-      formData.append("watermark[text]", watermarkText);
-      formData.append("watermark[size]", width * 0.03);
+      if (watermarkFile) {
+        formData.append("watermark[imagePath]", watermarkFile);
+      } else {
+        formData.append("watermark[text]", watermarkText);
+        formData.append("watermark[size]", width * 0.03);
+      }
     }
     formData.append("file", file);
     formData.append("preset", Store.state.init.data.converter.preset);
