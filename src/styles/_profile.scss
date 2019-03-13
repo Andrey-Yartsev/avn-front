@@ -960,20 +960,24 @@
 }
 
 .bg-profile {
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+
   overflow: hidden;
   z-index: 2;
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+
+  will-change: scroll-position;
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    position: -webkit-sticky;
-    position: sticky;
     height: 32vw;
     top: calc(44px - 32vw);
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 320px;
-    position: sticky;
     top: -240px;
   }
 
@@ -992,11 +996,11 @@
     }
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  //img {
+  //  width: 100%;
+  //  height: 100%;
+  //  object-fit: cover;
+  //}
 
   .container {
     width: 100%;
@@ -1014,6 +1018,12 @@
       }
     }
   }
+
+  //.bg-wrap {
+  //  position: -webkit-sticky;
+  //  position: sticky;
+  //  top: 0;
+  //}
 }
 
 .bg-wrap {

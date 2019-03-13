@@ -1,9 +1,5 @@
 <template>
-  <div class="bg-profile">
-    <div class="bg-wrap bg-color bg-gradient_standart">
-      <img v-if="bgPreview" :src="bgPreview" />
-      <img v-else-if="profile.header" :src="profile.header" />
-    </div>
+  <div class="bg-profile bg-color bg-gradient_standart" :style="bgStyle">
     <div class="container" v-if="isOwner(profile.id)">
       <div class="controls-select-picture">
         <label
@@ -42,6 +38,15 @@ export default {
     profile: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    bgStyle() {
+      return this.bgPreview || this.profile.header
+        ? {
+            "background-image": `url(${this.bgPreview || this.profile.header})`
+          }
+        : {};
     }
   }
 };

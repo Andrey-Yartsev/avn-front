@@ -1,8 +1,8 @@
 <template>
   <div class="special-container">
     <div class="white-bg-block">
-      <div class="bg-profile size-lg">
-        <div class="bg-wrap bg-color bg-gradient_standart">
+      <div class="bg-profile bg-color bg-gradient_standart size-lg">
+        <div class="bg-wrap">
           <div class="container">
             <div class="support-header">
               <h1>Help Center</h1>
