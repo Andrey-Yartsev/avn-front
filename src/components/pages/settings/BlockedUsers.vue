@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import moment from "moment";
 
 export default {
   name: "BlockedUsers",
@@ -138,7 +138,7 @@ export default {
 
   methods: {
     dt(date) {
-      return dateFns.format(new Date(date), "DD MMM");
+      return moment(date).format("DD MMM");
     },
     unblock(userId) {
       this.$store.dispatch("blocked/unblock", userId);

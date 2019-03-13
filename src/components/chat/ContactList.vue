@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
@@ -82,7 +82,7 @@ export default {
       this.goTo("/chat/" + id);
     },
     messageTime(message) {
-      return dateFns.distanceInWordsStrict(new Date(), message.changedAt);
+      return fromNow(message.changedAt);
     },
     stripHtml(html) {
       const tmp = document.createElement("DIV");

@@ -22,7 +22,7 @@
         :from="from"
         v-on:clickOnDetailsView="clickOnCommentForm"
         v-if="$mq === 'mobile'"
-        :postedAt="post.postedAt"
+        :datetime="timePassed"
       />
       <p
         class="text hidden-desktop"
@@ -97,9 +97,7 @@
       <div class="comment-form-wrapper" v-if="!isAuth()">
         <div class="guest-comments-form">
           <p>Please login to leave comments</p>
-          <time class="timestamp" :datetime="post.postedAt"
-            >{{ timePassed }} ago</time
-          >
+          <time class="timestamp">{{ timePassed }}</time>
         </div>
       </div>
     </div>
@@ -107,7 +105,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 import User from "@/mixins/user";
 import Header from "@/components/common/postParts/header/Index";
 import Actions from "@/components/common/postParts/actions/Index";
@@ -127,7 +125,7 @@ export default {
       return this.from;
     },
     timePassed() {
-      return dateFns.distanceInWordsStrict(new Date(), this.post.postedAt);
+      return fromNow(this.post.postedAt);
     },
     tipActionUrl() {
       return "{{%API_HOST%}}/api2/v2/payments/link/direct";

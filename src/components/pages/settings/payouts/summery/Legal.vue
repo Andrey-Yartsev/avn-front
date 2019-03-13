@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import moment from "moment";
 import Common from "../../common";
 
 export default {
@@ -106,7 +106,7 @@ export default {
 
   methods: {
     dt(date) {
-      return dateFns.format(new Date(date), "DD MMM YYYY");
+      return moment(date).format("DD MMM YYYY");
     },
     ucFirst(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);

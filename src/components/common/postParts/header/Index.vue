@@ -17,8 +17,8 @@
     <span class="user-login">
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
-    <time class="timestamp" v-if="postedAt">
-      {{ datetimeHelper(postedAt) }}
+    <time class="timestamp" v-if="datetime">
+      {{ datetime }}
     </time>
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import datetimeHelper from "@/helpers/datetime";
 import Dropdown from "./Dropdown";
 import ClickOutside from "vue-click-outside";
 
@@ -52,7 +51,7 @@ export default {
     opened: false
   }),
   props: {
-    postedAt: {
+    datetime: {
       type: String,
       default: undefined
     },
@@ -70,7 +69,6 @@ export default {
     }
   },
   methods: {
-    datetimeHelper,
     open() {
       this.opened = true;
       this.$emit("openDropdawn");

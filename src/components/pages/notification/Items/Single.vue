@@ -33,7 +33,7 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "NotificationSingleView",
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     time(date) {
-      return dateFns.distanceInWordsStrict(new Date(), date);
+      return fromNow(date);
     }
   }
 };

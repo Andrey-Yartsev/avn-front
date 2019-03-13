@@ -141,7 +141,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import dateFns from "date-fns";
+import moment from "moment";
 
 export default {
   name: "PaymentsSettingsContent",
@@ -185,7 +185,7 @@ export default {
       this.$store.dispatch("payment/card/delete");
     },
     dt(date) {
-      return dateFns.format(new Date(date), "DD MMM");
+      return moment(date).format("DD MMM");
     },
     /**
      * https://stackoverflow.com/a/21617574

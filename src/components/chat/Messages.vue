@@ -73,7 +73,7 @@
 import userMixin from "@/mixins/user";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "ChatMessages",
@@ -208,7 +208,7 @@ export default {
     },
 
     time(date) {
-      return dateFns.distanceInWordsStrict(new Date(), date);
+      return fromNow(date);
     },
 
     isMyMessage(message) {

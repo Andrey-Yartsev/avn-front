@@ -14,7 +14,7 @@
     <template v-if="!isOwner(post.id) && post.author.canEarn && $root.showTips">
       <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
     </template>
-    <time class="timestamp" :datetime="post.postedAt">
+    <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
         {{ dateTime }}
       </a>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import datetimeHelper from "@/helpers/datetime";
+import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";
 
 export default {
@@ -40,8 +40,8 @@ export default {
     }
   },
   computed: {
-    dateTime: function() {
-      return datetimeHelper(this.post.postedAt);
+    dateTime() {
+      return fromNow(this.post.postedAt);
     }
   },
   methods: {

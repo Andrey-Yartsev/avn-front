@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 import Modal from "@/components/modal/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
@@ -161,7 +161,7 @@ export default {
       return this.$store.state.viewers.posts;
     },
     dateTime() {
-      return dateFns.distanceInWordsStrict(new Date(), this.current.createdAt);
+      return fromNow(this.current.createdAt);
     },
     loading() {
       return this.$store.state.viewers.loading;

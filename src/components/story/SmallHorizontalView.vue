@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "StorySmallHorizontal",
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     dateTime: function() {
-      return dateFns.distanceInWordsStrict(new Date(), this.post.createdAt);
+      return fromNow(this.post.createdAt);
     },
     userIds() {
       return this.stories.map(s => s.user.id);

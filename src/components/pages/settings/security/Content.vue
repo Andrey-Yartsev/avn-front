@@ -165,7 +165,7 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import Auth from "@/utils/auth";
-import datetimeHelper from "@/helpers/datetime";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "SecuritySettingsContent",
@@ -251,7 +251,7 @@ export default {
       });
     },
     getActivityTime(time) {
-      return datetimeHelper(time);
+      return fromNow(time);
     }
   },
 

@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import datetimeHelper from "@/helpers/datetime";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "Comment",
@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     dateTime: function() {
-      return datetimeHelper(this.comment.postedAt);
+      return fromNow(this.comment.postedAt);
     }
   },
   methods: {

@@ -70,7 +70,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import dateFns from "date-fns";
+import moment from "moment";
 
 export default {
   name: "PayoutSettingsSummeryTransactions",
@@ -98,7 +98,7 @@ export default {
 
   methods: {
     dt(date) {
-      return dateFns.format(new Date(date), "DD MMM, hh:mm");
+      return moment(date).format("MMM DD, hh:mm");
     }
   },
 

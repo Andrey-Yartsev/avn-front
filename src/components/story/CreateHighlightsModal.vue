@@ -98,9 +98,9 @@
                     >
                       <div class="timestamp timestamp_unit">
                         <div class="timestamp__date">
-                          {{ formatDate(new Date(story.createdAt), "DD") }}
+                          {{ moment(story.createdAt).format("DD") }}
                         </div>
-                        {{ formatDate(new Date(story.createdAt), "MMM") }}
+                        {{ moment(story.createdAt).format("MMM") }}
                       </div>
                       <div class="postLink">
                         <figure class="explore-media">
@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import dateFns from "date-fns";
+import moment from "moment";
 import Modal from "@/components/modal/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
@@ -165,7 +165,7 @@ export default {
     }
   },
   methods: {
-    formatDate: dateFns.format,
+    moment,
     check(id) {
       if (this.checked.indexOf(id) !== -1) {
         this.checked = this.checked.filter(el => el !== id);

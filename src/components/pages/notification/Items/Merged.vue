@@ -95,7 +95,7 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import dateFns from "date-fns";
+import { fromNow } from "@/helpers/datetime";
 import { uniqId } from "@/utils/mediaFiles";
 
 export default {
@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     time(date) {
-      return dateFns.distanceInWordsStrict(new Date(), date);
+      return fromNow(date);
     },
     uniqId
   }
