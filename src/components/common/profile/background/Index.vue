@@ -1,6 +1,6 @@
 <template>
   <div class="bg-profile bg-color bg-gradient_standart" :style="bgStyle">
-    <div class="container" v-if="isOwner(profile.id)">
+    <div class="container" v-if="isOwner(profile.id) && !profile.header">
       <div class="controls-select-picture">
         <label
           for="bg"
@@ -41,6 +41,7 @@ export default {
     }
   },
   computed: {
+
     bgStyle() {
       return this.bgPreview || this.profile.header
         ? {
