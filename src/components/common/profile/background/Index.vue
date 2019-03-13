@@ -41,7 +41,6 @@ export default {
     }
   },
   computed: {
-
     bgStyle() {
       return this.bgPreview || this.profile.header
         ? {
