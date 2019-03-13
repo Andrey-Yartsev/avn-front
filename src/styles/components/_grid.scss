@@ -1,5 +1,9 @@
 .container {
   @include container;
+
+  &_lg-width {
+    max-width: 1300px;
+  }
 }
 .row {
   display: flex;
