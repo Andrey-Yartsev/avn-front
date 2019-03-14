@@ -43,7 +43,6 @@
           </div>
         </div>
       </div>
-      <br />
       <Transactions />
     </div>
 
@@ -270,7 +269,7 @@
 import Form from "@/mixins/form";
 import User from "@/mixins/user";
 import CardExpDate from "@/components/common/CardExpDate";
-import Transactions from "@/components/pages/settings/payouts/summery/Transactions";
+import Transactions from "@/components/pages/settings/payments/Transactions";
 
 const initData = {
   showCardForm: false,
