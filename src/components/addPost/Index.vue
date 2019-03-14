@@ -76,9 +76,16 @@
               type="datetime"
               v-model="datetime"
               input-class="post-datetime__input"
+              use12-hour="true"
             />
-            <span class="post-datetime__value">{{ datetime }}</span>
-            <span class="post-datetime__reset"></span>
+            <span class="post-datetime__value" v-if="datetime">{{
+              formattedDate
+            }}</span>
+            <span
+              @click="resetDatetime"
+              class="post-datetime__reset"
+              v-if="datetime"
+            />
           </div>
           <router-link
             class="b-check-state b-check-state_live"
@@ -116,7 +123,11 @@ import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
+import moment from "moment";
+import { Settings } from "luxon";
 import "vue-datetime/dist/vue-datetime.css";
+
+Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
@@ -187,9 +198,15 @@ export default {
         this.mediaType &&
         this.preloadedMedias.length >= this.limits[this.mediaType]
       );
+    },
+    formattedDate() {
+      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     }
   },
   methods: {
+    resetDatetime() {
+      this.datetime = InitialState.datetime;
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = InitialState.tweetSend;
@@ -198,6 +215,7 @@ export default {
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
+      this.datetime = InitialState.datetime;
     },
     addNewPost: async function(e) {
       e.preventDefault();
@@ -207,10 +225,15 @@ export default {
       this.isSaving = true;
 
       const mediaFiles = await this.getMediaFiles();
+      const scheduledDate = moment(this.datetime)
+        .utc()
+        .format("Y-M-D H:m:s");
 
       const newPostData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
+        isScheduled: !!this.datetime,
+        scheduledDate,
         mediaFiles
       };
 
