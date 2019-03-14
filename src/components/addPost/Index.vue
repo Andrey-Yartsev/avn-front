@@ -70,13 +70,16 @@
               </label>
             </div>
           </template>
-          <Datetime
-            class="post-datetime"
-            type="datetime"
-            v-model="datetime"
-            input-class="post-datetime__input"
-          />
-          <span>{{ datetime }}</span>
+          <div class="post-datetime" :class="{ active: datetime }">
+            <Datetime
+              class="post-datetime__btn"
+              type="datetime"
+              v-model="datetime"
+              input-class="post-datetime__input"
+            />
+            <span class="post-datetime__value">{{ datetime }}</span>
+            <span class="post-datetime__reset">x</span>
+          </div>
           <router-link
             class="b-check-state b-check-state_live"
             :class="{ disabled: preloadedMedias.length || postMsg.length }"
