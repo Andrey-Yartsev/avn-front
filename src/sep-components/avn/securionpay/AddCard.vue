@@ -44,6 +44,7 @@
         </div>
       </div>
       <br />
+      <Transactions />
     </div>
 
     <div class="PayoutsBankView" v-else>
@@ -269,6 +270,7 @@
 import Form from "@/mixins/form";
 import User from "@/mixins/user";
 import CardExpDate from "@/components/common/CardExpDate";
+import Transactions from "@/components/pages/settings/payouts/summery/Transactions";
 
 const initData = {
   showCardForm: false,
@@ -294,7 +296,8 @@ export default {
   name: "AddCardSecurionpay",
   mixins: [Form, User],
   components: {
-    CardExpDate
+    CardExpDate,
+    Transactions
   },
   data() {
     const r = { ...initData };

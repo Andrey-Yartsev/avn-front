@@ -2,7 +2,7 @@
   <div>
     <Legal />
     <Bank />
-    <template v-if="user.isPaymentCardConnected">
+    <template>
       <Requests />
       <Transactions />
     </template>
