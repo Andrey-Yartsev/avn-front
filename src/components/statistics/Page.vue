@@ -270,13 +270,13 @@
       </div>
     </div>
 
+    <!--
     <div class="container container_lg-width">
       <div class="row">
         <div
           class="unit-col unit-col_flex unit-col_justify-between unit-col_margin-center unit-col_mob-1 unit-col_desk-3 statistics-page-header"
         >
           <div class="s-title">Statistics</div>
-          <!--<div class="dates-range"><span></span></div>-->
           <div
             class="more-functions"
             :class="{ open: periodOptionsOpened }"
@@ -689,6 +689,7 @@
         </div>
       </div>
     </div>
+    -->
 
     <Footer class="site-footer_main" />
   </div>
@@ -946,7 +947,8 @@ export default {
           statDataSubKey || null;
 
         if (chartId === "earnings_chart") {
-          this.moneyTableData = this.chartDataSets[chartId];
+          // change data for earnings table block
+          this.moneyTableData = { ...this.chartDataSets[chartId] };
         }
 
         Object.entries(this.chartDataSets[chartId]).forEach(v => {
@@ -958,7 +960,7 @@ export default {
             stat.statDataSubKey
           );
         });
-      }, 500);
+      }, 1000);
 
       // updating chart
       if (this.updateChartTimeoutIds[chartId]) {
@@ -1971,9 +1973,6 @@ export default {
         }
         this[chartType + "Chart"].validateData();
       });
-    },
-    chartDataSets() {
-      console.log("!!!!!!");
     }
   }
 };

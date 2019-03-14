@@ -1,26 +1,47 @@
 <template>
-  <table class="table table_dotts-line">
-    <thead>
-      <th>Date</th>
-      <th>Subscribers</th>
-      <th>Funding</th>
-      <th>Messages</th>
-      <th>Referrals</th>
-      <th>Total</th>
-    </thead>
-    <tbody>
-      <tr v-for="v in items" :key="v.id">
-        <td>
-          <span class="date-item">{{ month(v.date) }}</span>
-        </td>
-        <td class="line-1">${{ v.paid_subscriptions }}</td>
-        <td class="line-2">${{ v.tips }}</td>
-        <td class="line-3">${{ v.paid_chat_messages }}</td>
-        <td class="line-4">${{ v.earn_referral }}</td>
-        <td>-</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <div class="b-stat-info__header">
+      <div class="value-data current">
+        <div class="value-data__name">
+          Balance
+        </div>
+        <div class="value-data__num line-4">
+          $-
+        </div>
+      </div>
+      <div class="value-data text-right">
+        <div class="value-data__name">
+          Overall payouts
+        </div>
+        <div class="value-data__num default-color">
+          $-
+        </div>
+      </div>
+    </div>
+
+    <table class="table table_dotts-line">
+      <thead>
+        <th>Date</th>
+        <th>Subscribers</th>
+        <th>Funding</th>
+        <th>Messages</th>
+        <th>Referrals</th>
+        <th>Total</th>
+      </thead>
+      <tbody>
+        <tr v-for="v in items" :key="v.id">
+          <td>
+            <span class="date-item">{{ month(v.date) }}</span>
+          </td>
+          <td class="line-1">${{ v.paid_subscriptions }}</td>
+          <td class="line-2">${{ v.tips }}</td>
+          <td class="line-3">${{ v.paid_chat_messages }}</td>
+          <td class="line-4">${{ v.earn_referral }}</td>
+          <td>${{ v.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -59,15 +80,14 @@ export default {
         ]);
       }
 
-      console.log("..");
-
       const data = {};
       const lineTypes = Object.keys(chartTypes.earnings);
+
       lineTypes.forEach(lineType => {
         const statData = this.data[lineType].statData;
-
         const items = [];
-        // fill by null arrays
+
+        // fill by nulls
         ranges.forEach(() => {
           items.push(0);
         });
@@ -85,8 +105,10 @@ export default {
       });
 
       const result = [];
+      let total;
       for (let i = 0; i < monthNumber; i++) {
         let item = {};
+        total = 0;
         item.id = i + 1;
         item.date = moment().subtract(i, "month");
         lineTypes.forEach(lineType => {
@@ -94,11 +116,11 @@ export default {
             data[lineType][i] = Number(data[lineType][i].toFixed(2));
           }
           item[lineType] = data[lineType][i];
+          total += data[lineType][i];
         });
+        item.total = total;
         result.push(item);
       }
-
-      console.log(result);
 
       return result;
     }
