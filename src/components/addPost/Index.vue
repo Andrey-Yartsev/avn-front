@@ -71,10 +71,10 @@
             </div>
           </template>
           <Datetime
-            class="add-post-datetime hidden"
+            class="post-datetime"
             type="datetime"
             v-model="datetime"
-            input-class="add-post-datetime-input"
+            input-class="post-datetime__input"
           />
           <span>{{ datetime }}</span>
           <router-link
