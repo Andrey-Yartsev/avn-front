@@ -202,7 +202,7 @@ export default {
     },
     async save() {
       if (this.$refs.bg.files.length) {
-        await this.saveBg();
+        await this.saveBg(true);
       }
       if (this.$refs.avatar.files.length) {
         await this.saveAvatar();

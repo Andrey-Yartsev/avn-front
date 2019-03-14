@@ -29,7 +29,7 @@ export default {
       this.bgPreview = null;
       this.$refs.bg.value = "";
     },
-    saveBg() {
+    saveBg(clear) {
       return new Promise(accept => {
         this.bgUploading = true;
         upload(this.$refs.bg.files[0]).then(fileName => {
@@ -38,7 +38,9 @@ export default {
               header: fileName
             })
             .then(() => {
-              this.bgPreview = "";
+              if(clear === true) {
+                this.bgPreview = "";
+              }
               this.bgUploading = false;
               accept();
             });
