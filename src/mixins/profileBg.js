@@ -38,7 +38,7 @@ export default {
               header: fileName
             })
             .then(() => {
-              if(clear === true) {
+              if (clear === true) {
                 this.bgPreview = "";
               }
               this.bgUploading = false;

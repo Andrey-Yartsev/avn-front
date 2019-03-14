@@ -70,6 +70,13 @@
               </label>
             </div>
           </template>
+          <Datetime
+            class="add-post-datetime hidden"
+            type="datetime"
+            v-model="datetime"
+            input-class="add-post-datetime-input"
+          />
+          <span>{{ datetime }}</span>
           <router-link
             class="b-check-state b-check-state_live"
             :class="{ disabled: preloadedMedias.length || postMsg.length }"
@@ -105,6 +112,8 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
+import { Datetime } from "vue-datetime";
+import "vue-datetime/dist/vue-datetime.css";
 
 const InitialState = {
   expanded: false,
@@ -112,7 +121,8 @@ const InitialState = {
   postMsg: "",
   isSaving: false,
   isFree: false,
-  mediaType: "all"
+  mediaType: "all",
+  datetime: undefined
 };
 
 export default {
@@ -125,7 +135,8 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    Datetime
   },
   props: {
     initialExpanded: {
