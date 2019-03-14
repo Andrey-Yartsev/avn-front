@@ -739,7 +739,13 @@
 }
 
 .post-datetime {
-  position: relative;
+
+  &.active {
+    color: $primary-color;
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
 
   @include media-breakpoint-down($desktop-breakpoint) {
     margin-right: 7px;
@@ -752,16 +758,25 @@
     }
   }
 
-  &:before {
-    content: "\E667";
-    @include icon-font;
-    font-size: 24px;
-    width: 44px;
-    height: 30px;
+  &__btn {
     position: relative;
-    z-index: 1;
-    color: $secondary-color;
-    display: inline-block;
+
+    &:before {
+      content: "\E667";
+      @include icon-font;
+      font-size: 24px;
+      width: 39px;
+      height: 30px;
+      position: relative;
+      z-index: 1;
+      color: $secondary-color;
+      display: inline-block;
+      transition: color .3s;
+
+      .active & {
+        color: $primary-color;
+      }
+    }
   }
 
   &__input {
@@ -774,5 +789,23 @@
     left: 0;
     z-index: 1;
     padding: 0;
+  }
+
+  &__reset {
+    display: none;
+    margin-left: 6px;
+    cursor: pointer;
+    
+    .active & {
+      display: block;
+    }
+
+    &:after {
+      content: "\E600";
+      @include icon-font;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
   }
 }
