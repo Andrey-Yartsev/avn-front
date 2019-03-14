@@ -76,7 +76,7 @@
               type="datetime"
               v-model="datetime"
               input-class="post-datetime__input"
-              use12-hour="true"
+              use12-hour
             />
             <span class="post-datetime__value" v-if="datetime">{{
               formattedDate
@@ -227,7 +227,7 @@ export default {
       const mediaFiles = await this.getMediaFiles();
       const scheduledDate = moment(this.datetime)
         .utc()
-        .format("Y-M-D H:m:s");
+        .format("Y-MM-DD HH:mm:ss");
 
       const newPostData = {
         text: this.postMsg,
