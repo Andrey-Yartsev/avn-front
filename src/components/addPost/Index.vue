@@ -104,7 +104,7 @@
         </button>
       </div>
     </form>
-    <Loader v-if="isSaving" :fullscreen="false"></Loader>
+    <Loader v-if="isSaving" :fullscreen="false" class="small"></Loader>
   </div>
 </template>
 
