@@ -11,10 +11,6 @@ export default {
       let values = Object.values(statData);
       if (subKey) {
         values = values.map(v => v[subKey]);
-        // if (!values.length) {
-        //   return 0;
-        // }
-        // return Math.max.apply(null, values);
       }
       const r = values.reduce(this.add, 0);
       if (isFloat(r)) {

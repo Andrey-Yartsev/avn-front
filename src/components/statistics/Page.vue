@@ -795,7 +795,8 @@ export default {
       //
       chartDataSets,
       updateDataTimeoutIds: {},
-      updateChartTimeoutIds: {}
+      updateChartTimeoutIds: {},
+      moneyTableData: {}
     };
   },
   mounted() {
@@ -822,9 +823,6 @@ export default {
           .subtract(1, p.moment)
           .format("D MMMM") + " - Today"
       );
-    },
-    moneyTableData() {
-      return this.chartDataSets["earnings_chart"];
     }
   },
   methods: {
@@ -930,7 +928,7 @@ export default {
         postfix = "";
       }
       this.$refs[ref].innerHTML =
-        title + "<span>" + value + postfix + "</span>";
+        title + "<span>" + postfix + value + "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
       const chartId = chart.div.id;
@@ -946,6 +944,10 @@ export default {
         this.chartDataSets[chartId][dataProviderKey].statData = statData;
         this.chartDataSets[chartId][dataProviderKey].statDataSubKey =
           statDataSubKey || null;
+
+        if (chartId === "earnings_chart") {
+          this.moneyTableData = this.chartDataSets[chartId];
+        }
 
         Object.entries(this.chartDataSets[chartId]).forEach(v => {
           const [dataProviderKey, stat] = v;
@@ -1969,6 +1971,9 @@ export default {
         }
         this[chartType + "Chart"].validateData();
       });
+    },
+    chartDataSets() {
+      console.log("!!!!!!");
     }
   }
 };
