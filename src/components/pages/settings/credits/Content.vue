@@ -2,6 +2,7 @@
   <div class="rounded-container rounded-container_fluid-height">
     <h1 class="form-title hidden-mobile">
       Credits
+      <span>Balance: {{ user.creditBalance * 100 }} credits</span>
     </h1>
 
     <form v-on:submit.stop.prevent="deposit">

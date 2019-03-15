@@ -12,7 +12,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
     }
-    button {
+    button, span {
       right: 20px;
       position: absolute;
       border: none;
