@@ -7,6 +7,21 @@ const state = {
 
 const actions = {
   openPaymentModal({ dispatch }, { user, amount, tipId }) {
+    if (process.env.VUE_APP_NAME === "avn") {
+      dispatch(
+        "modal/show",
+        {
+          name: "tipPayConfirm",
+          data: {
+            amount,
+            user
+          }
+        },
+        { root: true }
+      );
+      return;
+    }
+
     dispatch(
       "subscription/fetchPaymentLink",
       {

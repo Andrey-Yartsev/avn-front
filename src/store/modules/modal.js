@@ -79,6 +79,10 @@ const state = {
   confirm: {
     show: false,
     data: {}
+  },
+  tipPayConfirm: {
+    show: false,
+    data: {}
   }
 };
 

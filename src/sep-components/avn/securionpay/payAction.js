@@ -22,15 +22,18 @@ export default {
               ...payload,
               onSuccess,
               onFailure: error => {
-                this.close();
-                alert(error.message);
+                this._error(error);
               }
             });
           } else {
             this.progress = false;
-            alert(r);
+            this._error(r);
           }
         });
+    },
+    _error(error) {
+      this.$store.dispatch("global/flashToast", error.message);
+      this.close();
     }
   },
   mounted() {
