@@ -745,6 +745,10 @@
     display: flex;
     align-content: center;
     align-items: center;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 7px;
+    }
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
@@ -806,6 +810,149 @@
       font-size: 24px;
       width: 24px;
       height: 24px;
+    }
+  }
+}
+
+
+.vdatetime-popup {
+  border-radius: 6px;
+  width: 285px;
+
+  &__header {
+    display: none;
+  }
+
+  &__body {
+    padding: 15px;
+  }
+
+  &__actions {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    &__button {
+      width: 90px;
+      height: 30px;
+      font-weight: 500;
+      text-align: center;
+      color: #fff;
+      border-radius: 1000px;
+      padding: 6px 15px;
+      transition: all .3s;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &--cancel {
+        background-color: $secondary-color;
+        margin-right: 10px;
+
+        &:hover {
+          background-color: $secondary-color-darken;
+        }
+      }
+
+      &--confirm {
+        background-color: $primary-color;
+
+        &:hover {
+          background-color: $primary-color-darken;
+        }
+      }
+    }
+  }
+}
+
+.vdatetime-calendar {
+
+  &__navigation {
+    background-color: rgba(33, 150, 243, .1);
+    padding: 0;
+    margin: 0 0 8px;
+    height: 30px;
+    width: auto;
+    border-radius: 20px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+
+    &--previous,
+    &--next {
+      top: 3px;
+      padding: 0;
+      font-size: 22px;
+
+      &:after {
+        content: "\E609";
+        @include icon-font;
+      }
+
+      svg {
+        display: none;
+      }
+    }
+
+    &--previous {
+      left: 6px;
+    }
+
+    &--next {
+      right: 6px;
+    }
+  }
+
+
+  &__month {
+    padding-left: 0;
+    padding-right: 0;
+
+    &__weekday,
+    &__day {
+      width: 30px;
+      line-height: 30px;
+      margin-right: 7px;
+
+      &:nth-child(7n) {
+        margin-right: 0;
+      }
+    }
+
+    &__weekday {
+      font-size: 9px;
+      font-weight: 500;
+      opacity: .5;
+    }
+
+    &__day {
+
+      &--selected {
+
+        > span {
+
+          > span {
+            background-color: $primary-color;
+          }
+        }
+
+        &:hover {
+
+          > span {
+
+            > span {
+              background-color: $primary-color;
+            }
+          }
+        }
+      }
     }
   }
 }
