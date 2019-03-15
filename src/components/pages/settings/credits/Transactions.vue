@@ -1,0 +1,95 @@
+<template>
+  <div class="payouts-transactions">
+    <div class="PayoutsTransactionsCollectionView">
+      <div class="form-title table-header-title border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Transactions
+          </span>
+        </div>
+        <div class="border-top loader-container" v-if="loading">
+          <Loader :fullscreen="false" text="" class="transparent small" />
+        </div>
+        <div class="table-header transactions-table-header" v-if="!loading">
+          <div
+            class="date table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Date
+          </div>
+          <div
+            class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+          >
+            Amount
+          </div>
+          <div
+            class="expected table__cell table__cell_align table__cell_align-hor-c"
+          >
+            Item
+          </div>
+        </div>
+      </div>
+      <div class="shadow-block no-padding" v-if="!loading">
+        <div class="table-wrapper">
+          <div class="table transactions-table">
+            <div
+              class="PayoutsTransactionsView"
+              v-for="v in transactions"
+              v-bind:key="v.n"
+            >
+              <div class="item">
+                <div class="date table__cell">{{ dt(v.createdAt) }}</div>
+                <div
+                  class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+                >
+                  ${{ v.amount }}
+                </div>
+                <div class="expected table__cell">
+                  Buy {{ v.amount * 100 }} credits
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="empty-table-info"><span>Empty here for now</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Loader from "@/components/common/Loader";
+import moment from "moment";
+
+export default {
+  name: "CreditsSettingsTransactions",
+
+  components: {
+    Loader
+  },
+
+  computed: {
+    loading() {
+      return this.$store.state.credits.transactions.fetchLoading;
+    },
+    transactions() {
+      if (!this.$store.state.credits.transactions.fetchResult) {
+        return [];
+      }
+      return this.$store.state.credits.transactions.fetchResult.list;
+    },
+    transactionsLoading() {
+      return this.$store.state.credits.transactions.fetchLoading;
+    }
+  },
+
+  methods: {
+    dt(date) {
+      return moment(date).format("DD MMM");
+    }
+  },
+
+  created() {
+    this.$store.dispatch("credits/transactions/fetch");
+  }
+};
+</script>

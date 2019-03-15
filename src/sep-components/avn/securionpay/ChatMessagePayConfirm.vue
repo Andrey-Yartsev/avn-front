@@ -38,11 +38,6 @@ export default {
     Modal,
     Loader
   },
-  data() {
-    return {
-      progress: false
-    };
-  },
   computed: {
     data() {
       return this.$store.state.modal.chatMessagePayConfirm.data;

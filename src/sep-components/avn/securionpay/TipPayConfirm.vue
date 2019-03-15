@@ -38,11 +38,6 @@ export default {
     Modal,
     Loader
   },
-  data() {
-    return {
-      progress: false
-    };
-  },
   computed: {
     data() {
       return this.$store.state.modal.tipPayConfirm.data;
@@ -52,7 +47,6 @@ export default {
     yes() {
       const onSuccess = () => {
         this.close();
-        this.$store.dispatch("chat/fetchMessagesDefault");
       };
       const amount = parseInt(this.data.amount.replace(/\$/, ""));
       this._pay(
@@ -71,7 +65,6 @@ export default {
     close() {
       this.progress = false;
       this.$store.commit("modal/hideSafe", { name: "tipPayConfirm" });
-      console.log("CLOSE");
     }
   }
 };

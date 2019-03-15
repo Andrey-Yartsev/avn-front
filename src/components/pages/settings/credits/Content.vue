@@ -1,0 +1,86 @@
+<template>
+  <div class="rounded-container rounded-container_fluid-height">
+    <h1 class="form-title hidden-mobile">
+      Credits
+    </h1>
+
+    <form v-on:submit.stop.prevent="deposit">
+      <div class="border-top">
+        <div class="shadow-block">
+          <div class="container">
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">Credits</span>
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field subscription__field">
+                    <input
+                      name="amount"
+                      v-model="amount"
+                      class="subscription__input"
+                    />
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container hidden-mobile">
+        <div class="form-group form-group_with-label">
+          <div class="form-group-inner row-save-privacy">
+            <span class="label empty-label-gap"></span>
+            <button
+              type="submit"
+              :disabled="!amount || progress"
+              class="btn lg saveChanges"
+            >
+              Deposit
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <Transactions />
+  </div>
+</template>
+
+<script>
+import Loader from "@/components/common/Loader";
+import Transactions from "./Transactions";
+import PayAction from "./payAction";
+// import PayAction from "../../../../sep-components/avn/securionpay/payAction";
+
+export default {
+  name: "CreditsSettingsContent",
+  mixins: [PayAction],
+  components: {
+    Loader,
+    Transactions
+  },
+  data() {
+    return {
+      amount: ""
+    };
+  },
+  methods: {
+    deposit() {
+      this._pay(
+        {
+          paymentType: "credit",
+          amount: parseFloat(this.amount)
+        },
+        () => {
+          this.amount = "";
+          this.$store.dispatch("credits/transactions/fetch");
+          this.$store.dispatch(
+            "global/flashToast",
+            "Deposit is made successfully"
+          );
+        }
+      );
+    }
+  }
+};
+</script>

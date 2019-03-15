@@ -158,6 +158,10 @@ export default {
           title: "Payments"
         },
         {
+          name: "credits",
+          title: "Credits"
+        },
+        {
           name: "referrals",
           title: "Referrals"
         },

@@ -38,6 +38,7 @@ import viewers from "@/store/modules/viewers";
 import highlights from "@/store/modules/highlights";
 import staticPage from "@/store/modules/staticPage";
 import support from "@/store/modules/support";
+import credits from "@/store/modules/credits";
 
 Vue.use(Vuex);
 
@@ -81,7 +82,8 @@ const store = new Vuex.Store({
     highlights,
     storiesArchive,
     staticPage,
-    support
+    support,
+    credits
   }
 });
 
