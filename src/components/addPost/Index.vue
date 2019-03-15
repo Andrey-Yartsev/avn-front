@@ -70,6 +70,23 @@
               </label>
             </div>
           </template>
+          <div class="post-datetime" :class="{ active: datetime }">
+            <Datetime
+              class="post-datetime__btn"
+              type="datetime"
+              v-model="datetime"
+              input-class="post-datetime__input"
+              use12-hour
+            />
+            <span class="post-datetime__value" v-if="datetime">{{
+              formattedDate
+            }}</span>
+            <span
+              @click="resetDatetime"
+              class="post-datetime__reset"
+              v-if="datetime"
+            />
+          </div>
           <router-link
             class="b-check-state b-check-state_live"
             :class="{ disabled: preloadedMedias.length || postMsg.length }"
@@ -94,7 +111,7 @@
         </button>
       </div>
     </form>
-    <Loader v-if="isSaving" :fullscreen="false"></Loader>
+    <Loader v-if="isSaving" :fullscreen="false" class="small"></Loader>
   </div>
 </template>
 
@@ -105,6 +122,12 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
+import { Datetime } from "vue-datetime";
+import moment from "moment";
+import { Settings } from "luxon";
+import "vue-datetime/dist/vue-datetime.css";
+
+Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
@@ -112,7 +135,8 @@ const InitialState = {
   postMsg: "",
   isSaving: false,
   isFree: false,
-  mediaType: "all"
+  mediaType: "all",
+  datetime: undefined
 };
 
 export default {
@@ -125,7 +149,8 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    Datetime
   },
   props: {
     initialExpanded: {
@@ -173,9 +198,15 @@ export default {
         this.mediaType &&
         this.preloadedMedias.length >= this.limits[this.mediaType]
       );
+    },
+    formattedDate() {
+      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     }
   },
   methods: {
+    resetDatetime() {
+      this.datetime = InitialState.datetime;
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = InitialState.tweetSend;
@@ -184,6 +215,7 @@ export default {
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
+      this.datetime = InitialState.datetime;
     },
     addNewPost: async function(e) {
       e.preventDefault();
@@ -193,10 +225,15 @@ export default {
       this.isSaving = true;
 
       const mediaFiles = await this.getMediaFiles();
+      const scheduledDate = moment(this.datetime)
+        .utc()
+        .format("Y-MM-DD HH:mm:ss");
 
       const newPostData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
+        isScheduled: !!this.datetime,
+        scheduledDate,
         mediaFiles
       };
 
