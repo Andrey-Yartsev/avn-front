@@ -749,6 +749,16 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 7px;
     }
+
+    + .b-check-state_live {
+
+      &.disabled {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          display: none;
+        }
+      }
+    }
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
