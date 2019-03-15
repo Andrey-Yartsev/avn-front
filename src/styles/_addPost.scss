@@ -775,6 +775,7 @@
   &__btn {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 
     &:before {
       content: "\E667";
@@ -795,8 +796,7 @@
   }
 
   &__switcher {
-    pointer-events: none;
-    opacity: 0;
+
   }
 
   &__input {
