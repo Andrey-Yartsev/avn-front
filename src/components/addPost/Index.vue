@@ -89,7 +89,7 @@
           </div>
           <router-link
             class="b-check-state b-check-state_live"
-            :class="{ disabled: preloadedMedias.length || postMsg.length }"
+            :class="{ disabled: preloadedMedias.length || postMsg.length || datetime }"
             to="/stream"
             >Go live</router-link
           >
