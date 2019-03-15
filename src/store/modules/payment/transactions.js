@@ -16,7 +16,7 @@ createRequestAction({
     method: "GET",
     query: {
       offset: 0,
-      limit: 10
+      limit: 50
     }
   }
 });
