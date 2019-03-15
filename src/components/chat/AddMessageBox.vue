@@ -22,9 +22,8 @@
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
         />
       </label>
-
       <button
-        v-if="withUser && !withUser.canEarn && $root.showTips"
+        v-if="withUser && withUser.canEarn && $root.showTips"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip }"
@@ -63,7 +62,7 @@
       </div>
 
       <Tip
-        v-if="withUser && !withUser.canEarn && $root.showTips"
+        v-if="withUser && withUser.canEarn && $root.showTips"
         :user="withUser"
         ref="tip"
         @cancel="closeTip"
