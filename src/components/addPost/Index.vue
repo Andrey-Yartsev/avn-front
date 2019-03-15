@@ -72,14 +72,16 @@
           </template>
           <div class="post-datetime" :class="{ active: datetime }">
             <Datetime
+              input-id="post-datetime__switcher"
               class="post-datetime__switcher"
               type="datetime"
               v-model="datetime"
               input-class="post-datetime__input"
               use12-hour
               :min-datetime="minDate"
+              @close="closeDatepicker"
             />
-            <span class="post-datetime__btn"></span>
+            <span class="post-datetime__btn" @click="openDatepicker"></span>
             <span class="post-datetime__value" v-if="datetime">{{
               formattedDate
             }}</span>
@@ -252,6 +254,13 @@ export default {
     },
     toast(text) {
       this.$store.dispatch("global/flashToast", text, { root: true });
+    },
+    openDatepicker() {
+      document.body.classList.add("open-timepicker");
+      document.getElementById("post-datetime__switcher").click();
+    },
+    closeDatepicker() {
+      document.body.classList.remove("open-timepicker");
     }
   },
   watch: {
