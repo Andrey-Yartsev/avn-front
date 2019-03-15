@@ -12,6 +12,16 @@ export default {
       }
     });
   },
+  getPostsQueue({ offset, limit, marker }) {
+    return tokenRequest(`posts/queue`, {
+      method: "GET",
+      query: {
+        offset,
+        limit,
+        marker
+      }
+    });
+  },
   getExplorePosts({ offset, limit, marker, source }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",

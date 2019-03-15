@@ -39,6 +39,7 @@ import highlights from "@/store/modules/highlights";
 import staticPage from "@/store/modules/staticPage";
 import support from "@/store/modules/support";
 import credits from "@/store/modules/credits";
+import postQueue from "@/store/modules/postQueue";
 
 Vue.use(Vuex);
 
@@ -83,7 +84,8 @@ const store = new Vuex.Store({
     storiesArchive,
     staticPage,
     support,
-    credits
+    credits,
+    postQueue
   }
 });
 
