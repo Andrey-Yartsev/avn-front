@@ -28,32 +28,26 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import User from "@/mixins/user";
-import { askFor3dSecure } from "@/utils/3dsecure";
+import PayAction from "./payAction";
 import Loader from "@/components/common/Loader";
 
 export default {
   name: "ChatMessagePayConfirm",
-
-  mixins: [User],
-
+  mixins: [PayAction],
   components: {
     Modal,
     Loader
   },
-
   data() {
     return {
       progress: false
     };
   },
-
   computed: {
     data() {
       return this.$store.state.modal.chatMessagePayConfirm.data;
     }
   },
-
   methods: {
     yes() {
       const onSuccess = () => {
@@ -61,34 +55,15 @@ export default {
         this.$store.dispatch("chat/fetchMessagesDefault");
       };
       const amount = parseInt(this.data.price.replace(/\$/, ""));
-      this.progress = true;
-      this.$store
-        .dispatch("payment/pay/pay", {
+      this._pay(
+        {
           paymentType: "message",
           messageId: this.data.messageId,
           amount,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
-        })
-        .then(onSuccess)
-        .catch(r => {
-          if (r.code === 201) {
-            askFor3dSecure({
-              paymentType: "message",
-              messageId: this.data.messageId,
-              amount,
-              paymentGateCustomerCardToken: this.user
-                .paymentGateCustomerCardToken,
-              onSuccess,
-              onFailure: error => {
-                this.close();
-                alert(error.message);
-              }
-            });
-          } else {
-            this.progress = false;
-            alert(r);
-          }
-        });
+        },
+        onSuccess
+      );
     },
     no() {
       this.close();
@@ -97,15 +72,6 @@ export default {
       this.progress = false;
       this.$store.commit("modal/hideSafe", { name: "chatMessagePayConfirm" });
     }
-  },
-  mounted() {
-    let script = document.createElement("script");
-    script.onload = () => {
-      this.loading = false;
-    };
-    script.async = true;
-    script.src = "https://securionpay.com/js/securionpay.js";
-    document.head.appendChild(script);
   }
 };
 </script>
