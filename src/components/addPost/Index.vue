@@ -72,7 +72,7 @@
           </template>
           <div class="post-datetime" :class="{ active: datetime }">
             <Datetime
-              input-id="post-datetime__switcher"
+              :inputId="`post-datetime__switcher_${where}`"
               class="post-datetime__switcher"
               type="datetime"
               v-model="datetime"
@@ -166,6 +166,10 @@ export default {
     close: {
       type: Function,
       default: () => {}
+    },
+    where: {
+      type: String,
+      default: ""
     }
   },
   computed: {
@@ -257,7 +261,7 @@ export default {
     },
     openDatepicker() {
       document.body.classList.add("open-timepicker");
-      document.getElementById("post-datetime__switcher").click();
+      document.getElementById(`post-datetime__switcher_${this.where}`).click();
     },
     closeDatepicker() {
       document.body.classList.remove("open-timepicker");

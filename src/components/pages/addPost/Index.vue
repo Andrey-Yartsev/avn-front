@@ -1,6 +1,6 @@
 <template>
   <div class="addPostPage">
-    <AddPost :initialExpanded="true" :close="close" />
+    <AddPost :initialExpanded="true" :close="close" where="modal" />
     <Footer class="site-footer_main" />
   </div>
 </template>
