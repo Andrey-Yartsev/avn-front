@@ -2,7 +2,7 @@
   <div class="rounded-container rounded-container_fluid-height">
     <h1 class="form-title hidden-mobile">
       Credits
-      <span>Balance: {{ user.creditBalance * 100 }} credits</span>
+      <span>Balance: {{ user.creditBalance }} credits</span>
     </h1>
 
     <form v-on:submit.stop.prevent="deposit">
@@ -51,11 +51,13 @@
 import Loader from "@/components/common/Loader";
 import Transactions from "./Transactions";
 import PayAction from "./payAction";
+import userMixin from "@/mixins/user";
+
 // import PayAction from "../../../../sep-components/avn/securionpay/payAction";
 
 export default {
   name: "CreditsSettingsContent",
-  mixins: [PayAction],
+  mixins: [PayAction, userMixin],
   components: {
     Loader,
     Transactions
@@ -67,10 +69,12 @@ export default {
   },
   methods: {
     deposit() {
+      const { paymentGateCustomerCardToken } = this.user;
       this._pay(
         {
           paymentType: "credit",
-          amount: parseFloat(this.amount)
+          amount: parseFloat(this.amount),
+          paymentGateCustomerCardToken
         },
         () => {
           this.amount = "";

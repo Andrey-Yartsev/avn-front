@@ -46,7 +46,7 @@
                   ${{ v.amount }}
                 </div>
                 <div class="expected table__cell">
-                  <div class="type payout-type">Monthly subscription from</div>
+                  <div class="type payout-type">{{ v.description }}</div>
                   <div class="payout-user">
                     <router-link :to="'/' + v.userFrom.username" class="name">
                       {{ v.userFrom.name }}

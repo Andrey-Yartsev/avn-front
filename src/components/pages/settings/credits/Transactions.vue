@@ -44,7 +44,7 @@
                   ${{ v.amount }}
                 </div>
                 <div class="expected table__cell">
-                  Buy {{ v.amount * 100 }} credits
+                  {{ v.description }}
                 </div>
               </div>
             </div>
