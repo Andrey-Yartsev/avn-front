@@ -77,6 +77,7 @@
               v-model="datetime"
               input-class="post-datetime__input"
               use12-hour
+              :min-datetime="minDate"
             />
             <span class="post-datetime__value" v-if="datetime">{{
               formattedDate
@@ -89,7 +90,9 @@
           </div>
           <router-link
             class="b-check-state b-check-state_live"
-            :class="{ disabled: preloadedMedias.length || postMsg.length || datetime }"
+            :class="{
+              disabled: preloadedMedias.length || postMsg.length || datetime
+            }"
             to="/stream"
             >Go live</router-link
           >
@@ -124,7 +127,7 @@ import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
 import moment from "moment";
-import { Settings } from "luxon";
+import { Settings, DateTime as LuxonDateTime } from "luxon";
 import "vue-datetime/dist/vue-datetime.css";
 
 Settings.defaultLocale = "en";
@@ -201,6 +204,9 @@ export default {
     },
     formattedDate() {
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
+    },
+    minDate() {
+      return LuxonDateTime.local().toISO();
     }
   },
   methods: {
