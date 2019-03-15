@@ -774,6 +774,7 @@
 
   &__btn {
     position: relative;
+    display: inline-block;
 
     &:before {
       content: "\E667";
@@ -791,6 +792,11 @@
         color: $primary-color;
       }
     }
+  }
+
+  &__switcher {
+    pointer-events: none;
+    opacity: 0;
   }
 
   &__input {
@@ -964,5 +970,12 @@
         }
       }
     }
+  }
+}
+
+.open-timepicker {
+
+  #site_header {
+    z-index: 0;
   }
 }

@@ -72,13 +72,14 @@
           </template>
           <div class="post-datetime" :class="{ active: datetime }">
             <Datetime
-              class="post-datetime__btn"
+              class="post-datetime__switcher"
               type="datetime"
               v-model="datetime"
               input-class="post-datetime__input"
               use12-hour
               :min-datetime="minDate"
             />
+            <span class="post-datetime__btn"></span>
             <span class="post-datetime__value" v-if="datetime">{{
               formattedDate
             }}</span>
