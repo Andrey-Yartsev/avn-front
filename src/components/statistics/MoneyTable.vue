@@ -53,6 +53,7 @@ const isFloat = n => {
 };
 
 const monthNumber = 5;
+const lineTypes = Object.keys(chartTypes.earnings);
 
 export default {
   name: "statistics-money-table",
@@ -69,9 +70,15 @@ export default {
   },
   computed: {
     items() {
-      if (!this.data || !this.data.paid_chat_messages) {
+      if (!this.data) {
         return [];
       }
+      for (let t of lineTypes) {
+        if (!this.data[t]) {
+          return [];
+        }
+      }
+
       const ranges = [];
       for (let i = 0; i < monthNumber; i++) {
         ranges.push([
@@ -81,7 +88,6 @@ export default {
       }
 
       const data = {};
-      const lineTypes = Object.keys(chartTypes.earnings);
 
       lineTypes.forEach(lineType => {
         const statData = this.data[lineType].statData;
