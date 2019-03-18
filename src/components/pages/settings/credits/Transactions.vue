@@ -84,7 +84,7 @@ export default {
 
   methods: {
     dt(date) {
-      return moment(date).format("DD MMM");
+      return moment(date).format("DD MMM HH:mm");
     },
     dollar(amount) {
       amount = amount.toString();

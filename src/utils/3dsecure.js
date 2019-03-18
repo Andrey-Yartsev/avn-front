@@ -8,6 +8,7 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
       card
     },
     function(result) {
+      console.log(result);
       if (typeof result === "undefined") {
         onFailure({ message: "Unknown error" });
       } else {
@@ -16,7 +17,9 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
         } else {
           if (result.threeDSecureInfo.liabilityShift === "successful") {
             onSuccess(result.id);
-          } else if (result.threeDSecureInfo.liabilityShift === "not_possible") {
+          } else if (
+            result.threeDSecureInfo.liabilityShift === "not_possible"
+          ) {
             onSuccess(result.id);
           } else {
             onFailure({ message: "3ds check failed" });
