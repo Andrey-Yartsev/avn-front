@@ -990,7 +990,6 @@ export default {
       //   }
       // }
 
-
       const approx = {};
       for (let index of Object.keys(statData)) {
         let currIndex = 0;

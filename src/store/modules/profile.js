@@ -33,6 +33,11 @@ const actions = {
       });
     });
   },
+  async fetchSilent({ dispatch }) {
+    let response = await UserApi.fetch();
+    response = await response.json();
+    dispatch("auth/setUser", response, { root: true });
+  },
   update({ commit, dispatch }, user) {
     commit("setError", null);
     commit("setLoading", true);
