@@ -38,6 +38,7 @@
             >
               Deposit
             </button>
+            <div class="lds-dual-ring transparent inline"></div>
           </div>
         </div>
       </div>

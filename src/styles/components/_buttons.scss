@@ -135,6 +135,10 @@
       left: auto;
     }
   }
+
+  + .lds-dual-ring.inline {
+    margin-left: 10px;
+  }
 }
 button {
   font: inherit;
