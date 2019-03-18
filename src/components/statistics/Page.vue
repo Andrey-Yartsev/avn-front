@@ -968,9 +968,29 @@ export default {
       }
       this.updateChartTimeoutIds[chartId] = setTimeout(() => {
         chart.validateData();
+        if (chart.name === "earnings") {
+          console.log(chart.dataProvider);
+        }
       }, 1000);
     },
     _updateChartDataProvider(chart, statData, dataProviderKey, statDataSubKey) {
+      // if (chart.name === "earnings") {
+      //   if (dataProviderKey === "paid_chat_messages") {
+      //     const _statData = {};
+      //     Object.entries(statData).forEach(v => {
+      //       if (v[1].total) {
+      //         _statData[v[0]] = v[1];
+      //       }
+      //     });
+      //     statData = _statData;
+      //     // console.log(dataProviderKey, statData);
+      //     // if (Object.keys(statData).length === 0) {
+      //     //   return;
+      //     // }
+      //   }
+      // }
+
+
       const approx = {};
       for (let index of Object.keys(statData)) {
         let currIndex = 0;
@@ -1966,6 +1986,7 @@ export default {
     currentPeriodType() {
       this.buildScales();
       this.fillLineChartsByEmptyPoints();
+      // return;
       this.sendWsRequestsByPeriod(this.currentPeriodType);
       Object.keys(chartTypes).forEach(chartType => {
         for (let v of chartStorage[chartType][this.currentPeriodType]) {
