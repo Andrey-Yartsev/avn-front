@@ -9,12 +9,14 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
     },
     function(result) {
       if (typeof result === "undefined") {
-        alert("Unknown error");
+        onFailure({ message: "Unknown error" });
       } else {
         if (result.error) {
-          alert(result.error.message);
+          onFailure(result.error);
         } else {
           if (result.threeDSecureInfo.liabilityShift === "successful") {
+            onSuccess(result.id);
+          } else if (result.threeDSecureInfo.liabilityShift === "not_possible") {
             onSuccess(result.id);
           } else {
             onFailure({ message: "3ds check failed" });

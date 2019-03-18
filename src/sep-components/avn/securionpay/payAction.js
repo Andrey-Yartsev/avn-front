@@ -10,7 +10,6 @@ export default {
   },
   methods: {
     _pay(payload, _onSuccess) {
-      console.log(payload);
       if (!this.user.isPaymentCardConnected) {
         this.$store.dispatch(
           "global/flashToast",
