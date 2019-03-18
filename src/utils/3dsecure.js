@@ -1,22 +1,24 @@
 import Store from "@/store";
 
-function securion3DSecure(card, amount, success_callback) {
-  global.GlobalSecurionSuccess3DSecureCallback = success_callback;
+function securion3DSecure(card, amount, onSuccess, onFailure) {
   global.SecurionPay.verifyThreeDSecure(
     {
-      amount: amount,
+      amount,
       currency: "USD",
-      card: card
+      card
     },
-    function(token) {
-      if (typeof token === "undefined") {
-        // Display error message
+    function(result) {
+      if (typeof result === "undefined") {
         alert("Unknown error");
       } else {
-        if (token.error) {
-          alert(token.error.message);
+        if (result.error) {
+          alert(result.error.message);
         } else {
-          global.GlobalSecurionSuccess3DSecureCallback(token.id);
+          if (result.threeDSecureInfo.liabilityShift === "successful") {
+            onSuccess(result.id);
+          } else {
+            onFailure({ message: "3ds check failed" });
+          }
         }
       }
     }
@@ -42,8 +44,7 @@ export const askFor3dSecure = options => {
             options.onFailure(error);
           }
         });
-    }
+    },
+    options.onFailure
   );
 };
-
-export default {};

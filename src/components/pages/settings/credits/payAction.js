@@ -42,7 +42,6 @@ export default {
     _error(error) {
       this.progress = false;
       this.$store.dispatch("global/flashToast", error.message);
-      this.close();
     }
   },
   mounted() {
