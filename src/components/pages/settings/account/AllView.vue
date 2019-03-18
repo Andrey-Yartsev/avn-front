@@ -42,6 +42,7 @@
           <div
             class="form-group-btn hidden-mobile email-confirm-block"
             id="confirm-email-block"
+            v-if="$mq === 'desktop'"
           >
             <button
               v-if="!user.emailChecked"
@@ -63,7 +64,10 @@
         </div>
       </div>
 
-      <div class="text-centered hidden-desktop email-confirm-block">
+      <div
+        class="text-centered hidden-desktop email-confirm-block"
+        v-if="$mq === 'mobile'"
+      >
         <button
           v-if="!user.emailChecked"
           type="button"
@@ -176,20 +180,19 @@
     <div class="border-top shadow-block delete-account-block">
       <div class="container">
         <div class="form-group form-group_with-label delete-account">
-          <label class="form-group-inner">
-            <span class="label hidden-mobile"></span>
-            <button
-              type="button"
-              class="delete-account-btn"
-              @click="deleteAccount"
-            >
-              Delete account
-              <span class="user-login"
-                ><span class="username">{{ user.username }}</span>
-              </span>
-            </button>
-          </label>
           <div class="input-help">
+            <div class="input-help__title">
+              <button
+                type="button"
+                class="delete-account-btn"
+                @click="deleteAccount"
+              >
+                Delete account
+                <span class="user-login"
+                  ><span class="username">{{ user.username }}</span>
+                </span>
+              </button>
+            </div>
             Your account and all associated info will be permanently deleted
             from our servers!
           </div>

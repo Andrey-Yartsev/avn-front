@@ -21,6 +21,7 @@
         <div
           class="form-group hidden-mobile email-confirm-block"
           id="confirm-email-block"
+          v-if="$mq === 'desktop'"
         >
           <div class="form-group-inner">
             <span class="label"></span>
@@ -49,7 +50,10 @@
       </div>
     </div>
 
-    <div class="text-centered hidden-desktop email-confirm-block">
+    <div
+      class="text-centered hidden-desktop email-confirm-block"
+      v-if="$mq === 'mobile'"
+    >
       <button
         type="button"
         class="btn lg border btn_fix-width-lg btn-confirm-email"

@@ -325,6 +325,11 @@ label {
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 32.5%;
     }
+
+    &__title {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
   }
   .row {
     margin: 0 -7.5px;

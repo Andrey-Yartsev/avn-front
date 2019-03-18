@@ -16,7 +16,10 @@
             </button>
 
             <template v-else>
-              <span class="value twitter-value hidden-desktop">
+              <span
+                class="value twitter-value hidden-desktop"
+                v-if="$mq === 'mobile'"
+              >
                 <a
                   :href="'https://twitter.com/' + user.twitterUsername"
                   target="_blank"
@@ -29,11 +32,13 @@
                 type="text"
                 readonly=""
                 :value="'@' + user.twitterUsername"
+                v-if="$mq === 'desktop'"
               />
               <button
                 type="button"
                 class="btn border disconnect-twitter hidden-mobile"
                 @click="twitterDisconnect"
+                v-if="$mq === 'desktop'"
               >
                 Disconnect
               </button>
@@ -42,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="hidden-desktop text-centered">
+    <div class="hidden-desktop text-centered" v-if="$mq === 'mobile'">
       <button
         v-if="!user.isTwitterConnected"
         type="button"
