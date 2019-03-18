@@ -41,10 +41,6 @@
     <slot name="extra"></slot>
 
     <Footer class="hidden-desktop" />
-
-    <avn-chat-message-pay-confirm
-      v-if="this.$store.state.modal.chatMessagePayConfirm.show"
-    />
   </div>
 </template>
 

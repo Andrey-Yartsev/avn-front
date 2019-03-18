@@ -48,6 +48,10 @@
       >
         Return to admin
       </a>
+      <avn-tip-pay-confirm v-if="this.$store.state.modal.tipPayConfirm.show" />
+      <avn-chat-message-pay-confirm
+        v-if="this.$store.state.modal.chatMessagePayConfirm.show"
+      />
     </template>
   </div>
 </template>

@@ -17,7 +17,6 @@
       </div>
     </div>
     <button type="submit" class="btn" :disabled="!amount">Send fund</button>
-    <avn-tip-pay-confirm v-if="this.$store.state.modal.tipPayConfirm.show" />
   </form>
 </template>
 
