@@ -153,7 +153,7 @@
           <div class="form-group-btn hidden-mobile">
             <button
               type="submit"
-              class="btn lg saveChanges"
+              class="btn lg btn_fix-width saveChanges"
               :disabled="!canChangePassword"
             >
               Save changes
@@ -163,7 +163,7 @@
       </div>
       <div class="text-centered hidden-desktop">
         <button
-          class="btn lg saveChanges"
+          class="btn lg btn_not-bold btn_fix-width btn_fix-width_mob-lg saveChanges"
           type="submit"
           :disabled="!canChangePassword"
         >

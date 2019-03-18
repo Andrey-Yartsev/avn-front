@@ -29,7 +29,7 @@
                 <button
                   type="submit"
                   :disabled="!amount || progress"
-                  class="btn lg saveChanges"
+                  class="btn lg btn_fix-width"
                 >
                   Deposit
                 </button>

@@ -185,7 +185,7 @@
               <span class="label"></span>
               <button
                 type="submit"
-                class="btn lg saveChanges"
+                class="btn lg btn_fix-width saveChanges"
                 :disabled="loading || !changed"
               >
                 Save changes

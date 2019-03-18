@@ -46,7 +46,7 @@
               </label>
               <label class="form-group-inner">
                 <span class="label"></span>
-                <button type="submit" class="btn lg saveChanges">
+                <button type="submit" class="btn lg btn_fix-width saveChanges">
                   Next
                 </button>
               </label>

@@ -82,7 +82,11 @@
       </div>
       <div class="container hidden-mobile">
         <div class="form-group form-group_with-label">
-          <button type="submit" class="btn lg saveChanges" :disabled="!changed">
+          <button
+            type="submit"
+            class="btn lg btn_fix-width saveChanges"
+            :disabled="!changed"
+          >
             Save changes
           </button>
         </div>

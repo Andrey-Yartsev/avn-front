@@ -50,15 +50,15 @@
     }
   }
 
-  .saveChanges {
-    margin: 0 auto;
-    display: block;
+  .btn_fix-width {
+    //margin: 0 auto;
+    //display: block;
     @include media-breakpoint-up($desktop-breakpoint) {
       margin: 0 0 0 15px;
     }
   }
   &.otp-enabled {
-    .saveChanges {
+    .btn_fix-width {
       @include media-breakpoint-up($desktop-breakpoint) {
         margin: 5px 0 0;
       }

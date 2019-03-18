@@ -47,8 +47,8 @@
     padding: 11px 29px;
   }
   &.saveChanges {
-    width: 170px;
-    padding: 0;
+    //width: 170px;
+    //padding: 0;
   }
   &.btn-cancel {
     background: rgba($gray, 0.5);
@@ -121,6 +121,21 @@
     &:hover {
       color: $secondary-color-darken;
       background-color: transparent;
+    }
+  }
+
+  &_not-bold {
+    font-weight: 400;
+  }
+
+  &_fix-width {
+    width: 170px;
+
+    &_mob-lg {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 274px;
+      }
     }
   }
 

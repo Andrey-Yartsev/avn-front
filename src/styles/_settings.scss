@@ -173,14 +173,6 @@
         }
       }
     }
-
-    .btn.saveChanges {
-      font-weight: 400;
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        width: 274px;
-      }
-    }
   }
 }
 

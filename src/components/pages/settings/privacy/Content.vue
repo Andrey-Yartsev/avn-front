@@ -135,7 +135,7 @@
             <span class="label empty-label-gap"></span>
             <button
               type="submit"
-              class="btn lg saveChanges"
+              class="btn lg btn_fix-width"
               :disabled="!changed"
             >
               Save changes

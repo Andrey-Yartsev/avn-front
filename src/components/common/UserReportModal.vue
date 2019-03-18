@@ -64,7 +64,7 @@
                       :disabled="!reason"
                       type="submit"
                       id="send-report"
-                      class="btn lg saveChanges"
+                      class="btn lg btn_fix-width saveChanges"
                     >
                       Report
                     </button>

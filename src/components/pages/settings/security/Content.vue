@@ -86,7 +86,7 @@
                 (otpEnable && !user.otpEnable) || (!otpEnable && user.otpEnable)
               "
               type="submit"
-              class="btn lg saveChanges hidden-mobile"
+              class="btn lg btn_fix-width hidden-mobile"
               :disabled="!otpCode"
             >
               Confirm
