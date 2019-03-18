@@ -16,7 +16,7 @@ const initState = {
 const state = { ...initState };
 
 const mutations = {
-  resetPageState(state) {
+  reset(state) {
     for (let k of Object.keys(initState)) {
       state[k] = initState[k];
     }

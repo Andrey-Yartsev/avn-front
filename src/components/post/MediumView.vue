@@ -17,24 +17,31 @@
         :from="from"
         @openDropdawn="showDropdawn = true"
         @hideDropdawn="showDropdawn = false"
+        :showCopy="!delayedPost"
       />
       <p class="text" v-html="post.text"></p>
       <Media
         v-if="medias.length"
         :medias="medias"
         :showSlider="post.canViewMedia"
-        :shouldHasLink="true"
+        :shouldHasLink="!delayedPost"
         :postId="post.id"
         :openModal="openModal"
         mediaSize="preview"
       />
       <Actions
+        v-if="!delayedPost"
         :post="post"
         v-on:postShowCommentForm="showForm"
         v-on:postLike="likePost"
         @toggleTip="showTip = !showTip"
         :openModal="openModal"
       />
+      <div v-else class="actions">
+        <div class="datetime-value">
+          <span class="post-datetime__value">{{ formattedDate }}</span>
+        </div>
+      </div>
       <Tip :user="post.author" v-if="showTip" ref="tip" @cancel="closeTip" />
     </div>
     <AddComment
@@ -58,6 +65,7 @@ import Actions from "@/components/common/postParts/actions/Index";
 import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
+import moment from "moment";
 
 export default {
   name: "Post",
@@ -102,6 +110,14 @@ export default {
     },
     funded() {
       return this.$store.state.tip.funded;
+    },
+    delayedPost() {
+      return !!this.post.scheduledDate;
+    },
+    formattedDate() {
+      return `Scheduled for ${moment(this.post.scheduledDate).format(
+        "MMM D, hh:mm a"
+      )}`;
     }
   },
   watch: {
@@ -114,6 +130,10 @@ export default {
   },
   methods: {
     openModal() {
+      if (this.delayedPost) {
+        return;
+      }
+
       if (!this.post.canViewMedia) {
         this.showSubscribeModal();
         return;

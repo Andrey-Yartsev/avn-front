@@ -31,6 +31,7 @@
           :userId="user.id"
           :from="from"
           :hide="hide"
+          :showCopy="showCopy"
           v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
         />
       </div>
@@ -65,6 +66,10 @@ export default {
     },
     from: {
       type: String,
+      required: true
+    },
+    showCopy: {
+      type: Boolean,
       required: true
     }
   },

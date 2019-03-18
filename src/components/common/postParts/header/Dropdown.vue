@@ -18,20 +18,25 @@
           <span class="more-functions__option">Report post</span>
         </button>
       </li>
-      <li v-if="copied" class="more-functions__item">
-        <button class="btn-copy-link copied more-functions__link" type="button">
-          <span class="more-functions__option">Copied!</span>
-        </button>
-      </li>
-      <li class="more-functions__item" v-else>
-        <button
-          class="btn-copy-link more-functions__link"
-          type="button"
-          @click="copyHref"
-        >
-          <span class="more-functions__option">Copy link to post</span>
-        </button>
-      </li>
+      <template v-if="showCopy">
+        <li v-if="copied" class="more-functions__item">
+          <button
+            class="btn-copy-link copied more-functions__link"
+            type="button"
+          >
+            <span class="more-functions__option">Copied!</span>
+          </button>
+        </li>
+        <li class="more-functions__item" v-else>
+          <button
+            class="btn-copy-link more-functions__link"
+            type="button"
+            @click="copyHref"
+          >
+            <span class="more-functions__option">Copy link to post</span>
+          </button>
+        </li>
+      </template>
       <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
         <button
           class="edit more-functions__link"
@@ -92,6 +97,10 @@ export default {
     },
     hide: {
       type: Function,
+      required: true
+    },
+    showCopy: {
+      type: Boolean,
       required: true
     }
   },
