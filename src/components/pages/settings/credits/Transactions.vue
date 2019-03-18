@@ -41,7 +41,7 @@
                 <div
                   class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
                 >
-                  ${{ v.amount }}
+                  {{ dollar(v.amount) }}
                 </div>
                 <div class="expected table__cell">
                   {{ v.description }}
@@ -85,6 +85,13 @@ export default {
   methods: {
     dt(date) {
       return moment(date).format("DD MMM");
+    },
+    dollar(amount) {
+      amount = amount.toString();
+      if (amount.match(/-.*/)) {
+        return amount.replace(/(-)(.*)/, "$1$$2");
+      }
+      return "$" + amount;
     }
   },
 
