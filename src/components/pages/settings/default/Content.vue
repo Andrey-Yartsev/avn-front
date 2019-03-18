@@ -180,17 +180,14 @@
               </div>
             </label>
           </div>
-          <div class="form-group form-group_with-label hidden-mobile">
-            <div class="form-group-inner">
-              <span class="label"></span>
-              <button
-                type="submit"
-                class="btn lg btn_fix-width saveChanges"
-                :disabled="loading || !changed"
-              >
-                Save changes
-              </button>
-            </div>
+          <div class="form-group-btn hidden-mobile">
+            <button
+              type="submit"
+              class="btn lg btn_fix-width"
+              :disabled="loading || !changed"
+            >
+              Save changes
+            </button>
           </div>
         </div>
       </div>

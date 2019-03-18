@@ -33,7 +33,7 @@
           <div class="form-group-btn">
             <button
               type="submit"
-              class="btn lg"
+              class="btn lg btn_fix-width"
               :disabled="!changed || !valid || saving"
             >
               Save

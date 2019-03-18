@@ -70,17 +70,14 @@
                 </span>
               </label>
             </div>
-            <div class="form-group form-group_with-label row-btn-save">
-              <div class="form-group-inner">
-                <span class="label"></span>
-                <button
-                  type="submit"
-                  class="btn lg btn_fix-width saveChanges"
-                  :disabled="!changed"
-                >
-                  Save changes
-                </button>
-              </div>
+            <div class="form-group-btn">
+              <button
+                type="submit"
+                class="btn lg btn_fix-width saveChanges"
+                :disabled="!changed"
+              >
+                Save changes
+              </button>
             </div>
           </div>
         </div>

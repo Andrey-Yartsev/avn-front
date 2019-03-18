@@ -221,10 +221,8 @@
 
 .SettingsStoryView {
 
-  .form-group {
-    .saveChanges {
-      margin-top: 3px;
-    }
+  .btn_fix-width {
+    margin-top: 3px;
   }
 }
 
@@ -284,33 +282,33 @@
   }
 }
 
-.row-btn-save {
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    padding: 0;
-  }
-
-  &.form-group {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 0;
-    }
-  }
-
-  .form-group-inner {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      margin: 0;
-    }
-  }
-
-  .label {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
-    }
-  }
-}
+//.row-btn-save {
+//
+//  @include media-breakpoint-down($desktop-breakpoint) {
+//    padding: 0;
+//  }
+//
+//  &.form-group {
+//
+//    @include media-breakpoint-up($desktop-breakpoint) {
+//      padding-bottom: 0;
+//    }
+//  }
+//
+//  .form-group-inner {
+//
+//    @include media-breakpoint-down($desktop-breakpoint) {
+//      margin: 0;
+//    }
+//  }
+//
+//  .label {
+//
+//    @include media-breakpoint-down($desktop-breakpoint) {
+//      display: none;
+//    }
+//  }
+//}
 
 .add-options-blur {
 

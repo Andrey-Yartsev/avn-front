@@ -13,7 +13,7 @@
       <div
         class="form-title private-switcher-block private-profile-block border-top"
       >
-        <div class="inner border-bottom-mobile">
+        <div class="inner">
           <span class="semi-transparent">
             Private Profile
             <p class="subtext">Only subscribers will see your posts</p>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="form-title watermarks-settings border-top">
+      <div class="form-title watermarks-settings shadow-block border-top">
         <div class="inner">
           <span class="semi-transparent">
             Enable watermarks for photo
@@ -130,17 +130,14 @@
       <ConnectTwitter @connected="twitterConnected" />
 
       <div class="container hidden-mobile">
-        <div class="form-group form-group_with-label">
-          <div class="form-group-inner row-save-privacy">
-            <span class="label empty-label-gap"></span>
-            <button
-              type="submit"
-              class="btn lg btn_fix-width"
-              :disabled="!changed"
-            >
-              Save changes
-            </button>
-          </div>
+        <div class="form-group-btn">
+          <button
+            type="submit"
+            class="btn lg btn_fix-width"
+            :disabled="!changed"
+          >
+            Save changes
+          </button>
         </div>
       </div>
     </form>
