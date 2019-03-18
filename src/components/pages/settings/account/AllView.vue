@@ -48,7 +48,7 @@
               <button
                 v-if="!user.emailChecked"
                 type="button"
-                class="btn border btn-confirm-email"
+                class="btn border btn_fix-width-lg btn-confirm-email"
                 @click="resendEmail"
               >
                 Re-send confirmation email
@@ -59,7 +59,7 @@
             <div class="form-group hidden-mobile email-confirm-block hidden" id="change-email-block">
               <div class="form-group-inner">
                 <span class="label"></span>
-                <button type="button" class="btn border btn-confirm-email">Save new email</button>
+                <button type="button" class="btn border btn_fix-width-lg btn-confirm-email">Save new email</button>
               </div>
             </div>
             -->
@@ -70,7 +70,7 @@
         <button
           v-if="!user.emailChecked"
           type="button"
-          class="btn lg border btn-confirm-email"
+          class="btn lg border btn_fix-width-lg btn-confirm-email"
           id="confirm-email-block-mobile"
           @click="resendEmail"
         >
@@ -79,7 +79,7 @@
         <!--
           <button
             type="button"
-            class="btn lg border btn-confirm-email hidden"
+            class="btn lg border btn_fix-width-lg btn-confirm-email hidden"
             id="change-email-block-mobile"
           >Save new email</button>
           -->

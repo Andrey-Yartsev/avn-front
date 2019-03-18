@@ -129,13 +129,19 @@
   }
 
   &_fix-width {
-    width: 170px;
+    width: 100%;
+    max-width: 170px;
 
     &_mob-lg {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        width: 274px;
+        max-width: 274px;
       }
+    }
+
+    &-lg {
+      width: 100%;
+      max-width: 240px;
     }
   }
 
