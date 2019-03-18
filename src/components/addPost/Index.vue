@@ -6,7 +6,10 @@
     <form
       :class="[
         'add-new-form bg-gradient_light-desk bg-gradient_light',
-        { expanded: expanded || initialExpanded || preloadedMedias.length }
+        {
+          expanded:
+            expanded || initialExpanded || preloadedMedias.length || datetime
+        }
       ]"
     >
       <div class="addPost-header">
