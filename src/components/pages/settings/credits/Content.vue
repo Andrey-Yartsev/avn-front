@@ -33,7 +33,10 @@
                 >
                   Deposit
                 </button>
-                <div class="lds-dual-ring transparent inline"></div>
+                <div
+                  class="lds-dual-ring transparent inline"
+                  v-if="progress"
+                ></div>
               </div>
             </div>
           </div>
