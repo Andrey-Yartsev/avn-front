@@ -23,22 +23,19 @@
                 </span>
               </label>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container hidden-mobile">
-        <div class="form-group form-group_with-label">
-          <div class="form-group-inner row-save-privacy">
-            <span class="label empty-label-gap"></span>
-            <button
-              type="submit"
-              :disabled="!amount || progress"
-              class="btn lg saveChanges"
-            >
-              Deposit
-            </button>
-            <div class="lds-dual-ring transparent inline"></div>
+            <div class="form-group form-group_with-label">
+              <div class="form-group-inner row-save-privacy">
+                <span class="label empty-label-gap"></span>
+                <button
+                  type="submit"
+                  :disabled="!amount || progress"
+                  class="btn lg saveChanges"
+                >
+                  Deposit
+                </button>
+                <div class="lds-dual-ring transparent inline"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
