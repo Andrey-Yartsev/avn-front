@@ -1,5 +1,5 @@
 <template>
-  <div class="addPostPage">
+  <div class="addPostPage" :class="{ hasPosts: delayedPosts.length }">
     <AddPost :initialExpanded="true" :close="close" where="modal" />
     <div class="feed rounded-container shadow-block reset-btr">
       <PostCollection :posts="delayedPosts" from="queue" />
