@@ -4,6 +4,9 @@
     <div class="feed rounded-container shadow-block reset-btr">
       <PostCollection :posts="delayedPosts" from="queue" />
     </div>
+    <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+      <Loader :fullscreen="false" />
+    </div>
     <Footer class="site-footer_main" />
   </div>
 </template>
@@ -12,20 +15,31 @@
 import Footer from "@/components/footer/Index";
 import AddPost from "@/components/addPost/Index";
 import PostCollection from "@/components/common/postCollection/Index";
+import InfinityScrollMixin from "@/mixins/infinityScroll";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "AddPostPage",
   components: {
     Footer,
     AddPost,
-    PostCollection
+    PostCollection,
+    Loader
   },
+  mixins: [InfinityScrollMixin],
   computed: {
     delayedPosts() {
       return this.$store.state.postQueue.posts;
+    },
+    store() {
+      // uses into InfinityScrollMixin
+      return this.$store.state.postQueue;
     }
   },
   methods: {
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("postQueue/getPosts");
+    },
     close() {
       this.$router.push("/");
     }
