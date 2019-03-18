@@ -53,13 +53,8 @@
           </VuePerfectScrollbar>
           <div class="post-scheduled-time" v-if="datetime">
             <div class="datetime-result">
-              <span class="post-datetime__value">{{
-                formattedDate
-              }}</span>
-              <span
-                @click="resetDatetime"
-                class="datetime-result__reset"
-              />
+              <span class="post-datetime__value">{{ formattedDate }}</span>
+              <span @click="resetDatetime" class="datetime-result__reset" />
             </div>
           </div>
         </div>
@@ -265,7 +260,7 @@ export default {
       this.$store.dispatch("global/flashToast", text, { root: true });
     },
     openDatepicker() {
-      if(this.datetime) return;
+      if (this.datetime) return;
       document.body.classList.add("open-timepicker");
       document.getElementById(`post-datetime__switcher_${this.where}`).click();
     },
