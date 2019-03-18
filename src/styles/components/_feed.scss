@@ -1,14 +1,21 @@
 .feed {
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-top: 0;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    position: relative;
+    z-index: 2;
+  }
+
   .addPostPage & {
     width: 100%;
     max-width: 920px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  @include media-breakpoint-down($desktop-breakpoint) {
-    padding-top: 0;
+    position: relative;
+    z-index: 2;
   }
 
   .aside-col {

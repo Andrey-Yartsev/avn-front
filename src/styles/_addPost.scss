@@ -234,6 +234,11 @@
     background: $light;
     opacity: 0.3;
     z-index: 0;
+
+    .popup-addPost & {
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
   }
 
   > * {
@@ -250,16 +255,25 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-top: 60px;
       box-shadow: none;
-      //border-radius: 6px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
   }
 
   .feed & {
-    border-radius: 5px 5px 0 0;
-    box-shadow: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       display: none;
+    }
+  }
+
+  .hasScheduledPosts & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 
