@@ -52,9 +52,9 @@
             />
           </VuePerfectScrollbar>
           <div class="post-scheduled-time" v-if="datetime">
-            <div class="datetime-result">
+            <div class="datetime-value">
               <span class="post-datetime__value">{{ formattedDate }}</span>
-              <span @click="resetDatetime" class="datetime-result__reset" />
+              <span @click="resetDatetime" class="datetime-value__reset" />
             </div>
           </div>
         </div>

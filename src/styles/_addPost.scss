@@ -725,14 +725,32 @@
 
 .post-scheduled-time {
   margin: 0 16px 15px;
+
+  .datetime-value {
+    background: rgba(138, 150, 163, .12);
+    border-radius: 6px;
+    padding: 6px 36px;
+
+    &:before {
+      color: $secondary-color;
+      left: 0;
+      opacity: 1;
+    }
+
+    &__reset {
+      color: $secondary-color;
+    }
+
+    .post-datetime__value {
+      opacity: 1;
+    }
+  }
 }
 
-.datetime-result {
+.datetime-value {
   height: 36px;
-  padding: 6px 36px;
-  background: rgba(138,150,163,.12);
+  padding-left: 28px;
   font-size: 13px;
-  border-radius: 6px;
   display: inline-flex;
   align-content: center;
   align-items: center;
@@ -745,18 +763,16 @@
     width: 39px;
     height: 30px;
     z-index: 1;
-    color: $secondary-color;
     display: inline-block;
     transition: color .3s;
     position: absolute;
-    left: 0;
+    left: -9px;
     top: 3px;
+    opacity: .5;
   }
-
 
   &__reset {
     cursor: pointer;
-    color: $secondary-color;
     position: absolute;
     right: 6px;
     top: 3px;
@@ -817,6 +833,11 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
+  }
+
+  &__value {
+    opacity: .5;
+    font-weight: 400;
   }
 
   &__btn {
@@ -999,6 +1020,16 @@
           }
         }
       }
+    }
+  }
+}
+
+.vdatetime-time-picker {
+
+  &__item {
+
+    &--selected {
+      color: $primary-color;
     }
   }
 }

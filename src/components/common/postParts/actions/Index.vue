@@ -1,5 +1,8 @@
 <template>
   <div class="actions">
+    <div class="datetime-value">
+      <span class="post-datetime__value">Scheduled for Mar 18, 05:08 pm</span>
+    </div>
     <span
       :class="[{ active: post.isFavorite }, 'likes actions__btn']"
       @click="postLike"
