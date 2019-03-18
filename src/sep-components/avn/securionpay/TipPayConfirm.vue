@@ -46,6 +46,7 @@ export default {
   methods: {
     yes() {
       const onSuccess = () => {
+        this.$store.dispatch("global/flashToast", "Fund successfully sent");
         this.close();
       };
       const amount = parseInt(this.data.amount.replace(/\$/, ""));
