@@ -72,23 +72,20 @@ const actions = {
       }
     });
   },
-  newMessage({ state, commit }, message) {
+  newMessage({ state, commit, rootState }, message) {
     const found = state.messages.find(v => v.id === message.id);
     if (found) {
       commit("replaceMessage", message);
     } else {
-      if (state.activeUserId === message.fromUser.id) {
+      if (rootState.auth.user.id === message.fromUser.id) {
         commit("addMessage", message);
-        commit("updateChatLastMessage", {
-          message,
-          fromUserId: message.fromUser.id
-        });
-      } else {
-        commit("updateChatLastMessage", {
-          message,
-          fromUserId: message.fromUser.id
-        });
+      } else if (state.activeUserId === message.fromUser.id) {
+        commit("addMessage", message);
       }
+      commit("updateChatLastMessage", {
+        message,
+        fromUserId: message.fromUser.id
+      });
     }
   },
   fetchMessages({ dispatch, commit }, activeUserId) {
@@ -152,12 +149,19 @@ const mutations = {
     });
   },
   replaceMessage(state, message) {
-    state.messages = state.messages.map(v => {
+    let found = false;
+    const messages = state.messages.map(v => {
       if (v.id === message.id) {
+        found = true;
         v = message;
       }
       return v;
     });
+    if (!found) {
+      state.messages = [...state.messages, message];
+    } else {
+      state.messages = messages;
+    }
   },
   extendMessage(state, { id, data }) {
     state.messages = state.messages.map(v => {

@@ -8,7 +8,6 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
       card
     },
     function(result) {
-      console.log(result);
       if (typeof result === "undefined") {
         onFailure({ message: "Unknown error" });
       } else {
