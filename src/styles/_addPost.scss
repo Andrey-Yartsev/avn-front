@@ -725,7 +725,6 @@
 
 .post-scheduled-time {
   margin: 0 16px 15px;
-  display: none;
 }
 
 .datetime-result {
@@ -775,7 +774,6 @@
 .post-attachment {
   position: relative;
   padding-top: 12px;
-  display: none;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-top: 14px;
