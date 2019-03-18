@@ -41,15 +41,29 @@
           maxlength="1000"
           v-model="postMsg"
         ></textarea>
-        <VuePerfectScrollbar class="addFileCollectionView">
-          <MediaPreview
-            v-for="media in preloadedMedias"
-            :media="media"
-            :key="media.id"
-            @removeMedia="removeMedia"
-            :isSaving="isSaving"
-          />
-        </VuePerfectScrollbar>
+        <div class="post-attachment">
+          <VuePerfectScrollbar class="addFileCollectionView">
+            <MediaPreview
+              v-for="media in preloadedMedias"
+              :media="media"
+              :key="media.id"
+              @removeMedia="removeMedia"
+              :isSaving="isSaving"
+            />
+          </VuePerfectScrollbar>
+          <div class="post-scheduled-time">
+            <div class="datetime-result">
+              <span class="post-datetime__value" v-if="datetime">{{
+                formattedDate
+              }}</span>
+              <span
+                @click="resetDatetime"
+                class="datetime-result__reset"
+                v-if="datetime"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="actions-controls">
@@ -70,7 +84,7 @@
               </label>
             </div>
           </template>
-          <div class="post-datetime" :class="{ active: datetime }">
+          <div class="post-datetime" :class="{ disabled: datetime }">
             <Datetime
               :inputId="`post-datetime__switcher_${where}`"
               class="post-datetime__switcher"
@@ -82,14 +96,6 @@
               @close="closeDatepicker"
             />
             <span class="post-datetime__btn" @click="openDatepicker"></span>
-            <span class="post-datetime__value" v-if="datetime">{{
-              formattedDate
-            }}</span>
-            <span
-              @click="resetDatetime"
-              class="post-datetime__reset"
-              v-if="datetime"
-            />
           </div>
           <router-link
             class="b-check-state b-check-state_live"
