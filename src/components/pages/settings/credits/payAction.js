@@ -20,6 +20,7 @@ export default {
       this.progress = true;
       const onSuccess = () => {
         this.progress = false;
+        this.$store.dispatch("payment/pay/complete", payload.paymentType);
         _onSuccess();
       };
       this.$store

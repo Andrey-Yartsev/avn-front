@@ -2,11 +2,24 @@
 
 import { createRequestAction } from "../../utils/storeRequest";
 
-const state = {};
+const state = {
+  complete: null
+};
 
-const actions = {};
+const actions = {
+  complete({ commit }, paymentType) {
+    commit("complete", paymentType);
+    setTimeout(() => {
+      commit("complete", null);
+    }, 100);
+  }
+};
 
-const mutations = {};
+const mutations = {
+  complete(state, complete) {
+    state.complete = complete;
+  }
+};
 
 createRequestAction({
   prefix: "pay",

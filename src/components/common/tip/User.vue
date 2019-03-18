@@ -38,6 +38,18 @@ export default {
       amount: ""
     };
   },
+  computed: {
+    paymentComplete() {
+      return this.$store.state.payment.pay.complete;
+    }
+  },
+  watch: {
+    paymentComplete(paymentType) {
+      if (paymentType && paymentType === "tip") {
+        this.$emit("cancel");
+      }
+    }
+  },
   methods: {
     send() {
       this.$store.dispatch("tip/openPaymentModal", {
