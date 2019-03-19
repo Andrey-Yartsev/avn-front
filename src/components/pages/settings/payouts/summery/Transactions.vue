@@ -1,7 +1,9 @@
 <template>
   <div class="payouts-transactions">
     <div class="PayoutsTransactionsCollectionView">
-      <div class="form-title table-header-title border-top">
+      <div
+        class="form-title table-header-title table-header-title_sticky border-top"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Transactions

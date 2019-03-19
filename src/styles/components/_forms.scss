@@ -368,6 +368,13 @@ label {
 
     &_reset-pb {
       padding-bottom: 0;
+
+      &-mob {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          padding-bottom: 0;
+        }
+      }
     }
 
     .btn {

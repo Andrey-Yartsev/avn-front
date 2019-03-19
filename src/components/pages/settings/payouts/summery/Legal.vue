@@ -70,7 +70,7 @@
                 </span>
               </label>
             </div>
-            <div class="form-group-btn">
+            <div class="form-group-btn form-group-btn_reset-pb-mob">
               <button
                 type="submit"
                 class="btn lg btn_fix-width saveChanges"
