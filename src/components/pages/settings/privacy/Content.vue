@@ -139,7 +139,7 @@
           <button
             type="submit"
             class="btn lg btn_fix-width"
-            :disabled="!changed"
+            :disabled="!changed || loading"
           >
             Save changes
           </button>

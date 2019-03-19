@@ -45,6 +45,14 @@ const actions = {
       UserApi.update(user)
         .then(async response => {
           const r = await response.json();
+          if (r.error) {
+            commit("setError", r.error);
+            dispatch("global/flashToast", r.error.message, {
+              root: true
+            });
+            commit("setLoading", false);
+            return;
+          }
           dispatch("auth/extendUser", r, { root: true });
           dispatch("profile/home/extend", r, { root: true });
           dispatch("global/flashToast", "Changes saved successfully", {

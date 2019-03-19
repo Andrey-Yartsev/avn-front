@@ -35,6 +35,18 @@ export default {
       preview: null
     };
   },
+  computed: {
+    error() {
+      return this.$store.state.profile.error;
+    }
+  },
+  watch: {
+    error(error) {
+      if (error) {
+        this.preview = null;
+      }
+    }
+  },
   methods: {
     change(e) {
       this.save();
