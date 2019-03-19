@@ -6,7 +6,7 @@
     <div class="rounded-container">
       <AddPost :initialExpanded="true" :close="close" where="modal" />
       <div class="feed reset-btr">
-        <PostCollection :posts="delayedPosts" from="queue" />
+        <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>
       <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
         <Loader :fullscreen="false" />

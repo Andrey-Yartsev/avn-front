@@ -6,7 +6,10 @@
     <form
       :class="[
         'add-new-form bg-gradient_light-desk bg-gradient_light',
-        { expanded: expanded || initialExpanded || preloadedMedias.length }
+        {
+          expanded:
+            expanded || initialExpanded || preloadedMedias.length || datetime
+        }
       ]"
     >
       <div class="addPost-header">
@@ -28,7 +31,6 @@
       </div>
       <span
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
-        v-if="$mq === 'desktop'"
       >
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
@@ -42,15 +44,23 @@
           maxlength="1000"
           v-model="postMsg"
         ></textarea>
-        <VuePerfectScrollbar class="addFileCollectionView">
-          <MediaPreview
-            v-for="media in preloadedMedias"
-            :media="media"
-            :key="media.id"
-            @removeMedia="removeMedia"
-            :isSaving="isSaving"
-          />
-        </VuePerfectScrollbar>
+        <div class="post-attachment" v-if="datetime || preloadedMedias.length">
+          <VuePerfectScrollbar class="addFileCollectionView">
+            <MediaPreview
+              v-for="media in preloadedMedias"
+              :media="media"
+              :key="media.id"
+              @removeMedia="removeMedia"
+              :isSaving="isSaving"
+            />
+          </VuePerfectScrollbar>
+          <div class="post-scheduled-time" v-if="datetime">
+            <div class="datetime-value">
+              <span class="post-datetime__value">{{ formattedDate }}</span>
+              <span @click="resetDatetime" class="datetime-value__reset" />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="actions-controls">
@@ -71,6 +81,19 @@
               </label>
             </div>
           </template>
+          <div class="post-datetime" :class="{ disabled: datetime }">
+            <Datetime
+              :inputId="`post-datetime__switcher_${where}`"
+              class="post-datetime__switcher"
+              type="datetime"
+              v-model="datetime"
+              input-class="post-datetime__input"
+              use12-hour
+              :min-datetime="minDate"
+              @close="closeDatepicker"
+            />
+            <span class="post-datetime__btn" @click="openDatepicker"></span>
+          </div>
         </div>
         <div class="add-new-type add-new-type_underline-items line-top">
           <AddNewNav active="post" />
@@ -84,7 +107,6 @@
           class="btn submit hidden-mobile"
           :disabled="notEhoughData"
           @click="updatePost"
-          v-if="$mq === 'desktop'"
         >
           Save
         </button>
@@ -101,6 +123,12 @@ import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
+import { Datetime } from "vue-datetime";
+import moment from "moment";
+import { Settings, DateTime as LuxonDateTime } from "luxon";
+import "vue-datetime/dist/vue-datetime.css";
+
+Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
@@ -108,7 +136,8 @@ const InitialState = {
   postMsg: "",
   isSaving: false,
   isFree: false,
-  mediaType: "all"
+  mediaType: "all",
+  datetime: undefined
 };
 
 export default {
@@ -121,7 +150,8 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    Datetime
   },
   props: {
     initialExpanded: {
@@ -135,6 +165,10 @@ export default {
     post: {
       type: Object,
       default: () => ({})
+    },
+    where: {
+      type: String,
+      default: ""
     }
   },
   computed: {
@@ -173,9 +207,18 @@ export default {
         this.mediaType &&
         this.preloadedMedias.length >= this.limits[this.mediaType]
       );
+    },
+    formattedDate() {
+      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
+    },
+    minDate() {
+      return LuxonDateTime.local().toISO();
     }
   },
   methods: {
+    resetDatetime() {
+      this.datetime = InitialState.datetime;
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = InitialState.tweetSend;
@@ -184,6 +227,7 @@ export default {
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
+      this.datetime = InitialState.datetime;
     },
     updatePost: async function(e) {
       e.preventDefault();
@@ -194,10 +238,15 @@ export default {
 
       const mediaFiles = await this.getMediaFiles();
 
+      const scheduledDate = moment(this.datetime)
+        .utc()
+        .format("Y-MM-DD HH:mm:ss");
+
       const postData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
-        mediaFiles
+        mediaFiles,
+        scheduledDate
       };
 
       if (this.hasSubscribePrice) {
@@ -211,11 +260,20 @@ export default {
     },
     toast(text) {
       this.$store.dispatch("global/flashToast", text, { root: true });
+    },
+    openDatepicker() {
+      if (this.datetime) return;
+      document.body.classList.add("open-timepicker");
+      document.getElementById(`post-datetime__switcher_${this.where}`).click();
+    },
+    closeDatepicker() {
+      document.body.classList.remove("open-timepicker");
     }
   },
   watch: {
     post() {
       if (this.post.id) {
+        this.datetime = this.post.scheduledDate;
         this.postMsg = this.post.text;
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
