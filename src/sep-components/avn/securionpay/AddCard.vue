@@ -12,6 +12,10 @@
           </div>
           <h1 class="form-title hidden-mobile">
             Your Card
+
+            <button @click="$router.push('/settings/credits')">
+              Balance: {{ user.creditBalance }} credits
+            </button>
           </h1>
           <div class="shadow-block border-top no-padding">
             <div class="container">
