@@ -1,7 +1,7 @@
 <template>
   <Layout ref="layout">
     <Content slot="content" />
-    <span class="hidden-desktop" slot="after-title"
+    <span class="balance-info" slot="after-title"
       >Balance: {{ user.creditBalance }} credits</span
     >
   </Layout>

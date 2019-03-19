@@ -2,7 +2,9 @@
   <div class="rounded-container rounded-container_fluid-height">
     <h1 class="form-title hidden-mobile">
       Credits
-      <span>Balance: {{ user.creditBalance }} credits</span>
+      <span class="balance-info"
+        >Balance: {{ user.creditBalance }} credits</span
+      >
     </h1>
 
     <form v-on:submit.stop.prevent="deposit">
@@ -16,11 +18,7 @@
                 </span>
                 <span class="form-group form-group_clear-gaps">
                   <span class="form-field subscription__field">
-                    <input
-                      name="amount"
-                      v-model="amount"
-                      class="subscription__input"
-                    />
+                    <input name="amount" v-model="amount" />
                   </span>
                 </span>
               </label>

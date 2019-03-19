@@ -9,7 +9,7 @@
     <button
       slot="after-title"
       @click="$router.push('/settings/credits')"
-      class="hidden-desktop"
+      class="balance-info"
     >
       Balance: {{ user.creditBalance }} credits
     </button>
