@@ -31,6 +31,7 @@
       </div>
       <span
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
+        v-if="$mq === 'desktop'"
       >
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
@@ -118,6 +119,7 @@
           class="btn submit hidden-mobile"
           :disabled="notEhoughData"
           @click="addNewPost"
+          v-if="$mq === 'desktop'"
         >
           Share
         </button>
