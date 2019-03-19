@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="container hidden-mobile">
+      <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group form-group_with-label">
           <button
             :disabled="loading || !changed"
