@@ -4,7 +4,12 @@
     :class="{ hasScheduledPosts: delayedPosts.length }"
   >
     <div class="rounded-container">
-      <AddPost :initialExpanded="true" :close="close" where="modal" />
+      <AddPost
+        :initialExpanded="true"
+        :close="close"
+        where="modal"
+        type="new"
+      />
       <div class="feed reset-btr">
         <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>

@@ -5,7 +5,7 @@
         <div class="previous hidden"></div>
         <div class="popup-addPost__header">New post</div>
         <div class="content">
-          <AddPost :initialExpanded="true" :close="close" />
+          <AddPost :initialExpanded="true" :close="close" type="new" />
         </div>
         <button type="button" class="close" @click="close"></button>
         <div class="next hidden"></div>

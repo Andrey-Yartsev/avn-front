@@ -1,7 +1,13 @@
 <template>
   <div class="container addPostPage">
     <div class="rounded-container">
-      <EditPost :initialExpanded="true" :close="close" :post="post" />
+      <EditPost
+        :initialExpanded="true"
+        :close="close"
+        :post="post"
+        where="editPage"
+        type="edit"
+      />
     </div>
     <Footer class="site-footer_main" />
   </div>
@@ -9,7 +15,7 @@
 
 <script>
 import Footer from "@/components/footer/Index";
-import EditPost from "@/components/addPost/Edit";
+import EditPost from "@/components/addPost/Index";
 
 export default {
   name: "EditPostPage",
