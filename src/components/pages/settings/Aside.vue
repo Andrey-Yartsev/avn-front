@@ -128,7 +128,7 @@ export default {
       return this.$route.name === "SettingsProfile";
     },
     navigation() {
-      return [
+      const items = [
         {
           name: "profile",
           title: "Edit Profile"
@@ -156,20 +156,23 @@ export default {
         {
           name: "payments",
           title: "Payments"
-        },
-        {
-          name: "credits",
-          title: "Credits"
-        },
-        {
-          name: "referrals",
-          title: "Referrals"
-        },
-        {
-          name: "notifications",
-          title: "Notifications"
         }
       ];
+      if (process.env.VUE_APP_NAME === "avn") {
+        items.push({
+          name: "credits",
+          title: "Credits"
+        });
+      }
+      items.push({
+        name: "referrals",
+        title: "Referrals"
+      });
+      items.push({
+        name: "notifications",
+        title: "Notifications"
+      });
+      return items;
     },
     showAvatarSave() {
       return this.avatarPreview && !this.avatarUploading;
