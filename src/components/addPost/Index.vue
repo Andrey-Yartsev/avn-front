@@ -97,6 +97,7 @@
               use12-hour
               :min-datetime="minDate"
               @close="closeDatepicker"
+              :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
             />
             <span class="post-datetime__btn" @click="openDatepicker"></span>
           </div>
