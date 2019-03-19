@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group form-group_with-label">
+  <div class="form-group form-group_with-label pb-reset">
     <label
       class="form-group-inner photo-form-group-inner"
       :class="{ success: uploaded }"
@@ -8,18 +8,26 @@
 
       <div class="photo-label-wrapper">
         <div class="photo-label">
-          <label for="photo" class="btn lg photo-btn">Choose</label>
+          <label for="photo" class="btn lg photo-btn">
+            Choose
+            <input
+              type="file"
+              id="photo"
+              accept=".jpg,.jpeg,.png"
+              ref="photo"
+              @change="change"
+            />
+          </label>
         </div>
-        <img v-if="preview" :src="preview" />
+        <div class="watermark-picture" v-if="preview">
+          <div class="watermark-picture__remove">
+            <svg aria-hidden="true" class="icn icn-remove">
+              <use xlink:href="#icon-remove"></use>
+            </svg>
+          </div>
+          <img :src="preview" />
+        </div>
       </div>
-
-      <input
-        type="file"
-        id="photo"
-        accept=".jpg,.jpeg,.png"
-        ref="photo"
-        @change="change"
-      />
     </label>
   </div>
 </template>

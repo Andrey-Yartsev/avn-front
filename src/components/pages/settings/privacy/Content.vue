@@ -76,12 +76,11 @@
             </span>
           </label>
         </div>
+        <WatermarkImageUploader
+          v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
+          @change="watermarkImageChange"
+        />
       </div>
-
-      <WatermarkImageUploader
-        v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
-        @change="watermarkImageChange"
-      />
 
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
