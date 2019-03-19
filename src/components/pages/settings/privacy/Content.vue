@@ -78,6 +78,11 @@
         </div>
       </div>
 
+      <WatermarkImageUploader
+        v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
+        @change="watermarkImageChange"
+      />
+
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">
@@ -151,6 +156,7 @@ import BlockedUsers from "../BlockedUsers";
 import ConnectTwitter from "../ConnectTwitter";
 import User from "@/mixins/user";
 import ucFirst from "@/helpers/ucFirst";
+import WatermarkImageUploader from "./WatermarkImageUploader";
 
 export default {
   name: "PrivacySettingsContent",
@@ -159,7 +165,8 @@ export default {
 
   components: {
     BlockedUsers,
-    ConnectTwitter
+    ConnectTwitter,
+    WatermarkImageUploader
   },
 
   computed: {
@@ -174,6 +181,9 @@ export default {
   methods: {
     twitterConnected() {
       this.$router.push("/settings/privacy");
+    },
+    watermarkImageChange(file) {
+      this.localUser.watermarkFile = file;
     }
   }
 };
