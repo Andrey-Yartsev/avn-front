@@ -904,12 +904,25 @@
     z-index: 1;
     padding: 0;
   }
+
+  .vdatetime-popup {
+
+    &:before {
+      content: "Schedule post";
+      font-weight: 500;
+      display: block;
+      padding: 20px 20px 3px;
+    }
+  }
 }
 
 
 .vdatetime-popup {
   border-radius: 6px;
   width: 285px;
+  color: $main-color;
+  background-color: $white;
+  font-family: $main-font;
 
   &__header {
     display: none;
