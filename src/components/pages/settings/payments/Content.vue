@@ -4,7 +4,7 @@
       <div class="payments-card" v-if="cardConnected">
         <div class="payment-card">
           <div>
-            <div class="form-title hidden-desktop">
+            <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
               <div class="inner">
                 <span class="semi-transparent">
                   Your Card
