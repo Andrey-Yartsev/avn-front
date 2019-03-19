@@ -44,7 +44,10 @@
           maxlength="1000"
           v-model="postMsg"
         ></textarea>
-        <div class="post-attachment" v-if="datetime || preloadedMedias.length">
+        <div
+          class="post-attachment"
+          v-if="(datetime || preloadedMedias.length) && $mq === 'desktop'"
+        >
           <VuePerfectScrollbar class="addFileCollectionView">
             <MediaPreview
               v-for="media in preloadedMedias"
@@ -118,6 +121,26 @@
         >
           Share
         </button>
+      </div>
+      <div
+        class="post-attachment"
+        v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
+      >
+        <VuePerfectScrollbar class="addFileCollectionView">
+          <MediaPreview
+            v-for="media in preloadedMedias"
+            :media="media"
+            :key="media.id"
+            @removeMedia="removeMedia"
+            :isSaving="isSaving"
+          />
+        </VuePerfectScrollbar>
+        <div class="post-scheduled-time" v-if="datetime">
+          <div class="datetime-value">
+            <span class="post-datetime__value">{{ formattedDate }}</span>
+            <span @click="resetDatetime" class="datetime-value__reset" />
+          </div>
+        </div>
       </div>
     </form>
     <Loader v-if="isSaving" :fullscreen="false" class="small"></Loader>
