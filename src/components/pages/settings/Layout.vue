@@ -14,6 +14,7 @@
             {{ title }}
           </span>
         </template>
+        <slot name="after-title" />
       </h1>
 
       <router-link

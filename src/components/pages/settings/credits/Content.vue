@@ -13,9 +13,6 @@
               <label class="form-group-inner">
                 <span class="label">
                   Credits
-                  <span class="hidden-desktop"
-                    >Balance: {{ user.creditBalance }} credits</span
-                  >
                 </span>
                 <span class="form-group form-group_clear-gaps">
                   <span class="form-field subscription__field">
