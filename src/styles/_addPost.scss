@@ -55,11 +55,24 @@
 
 .addPostPage {
 
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: calc(100vh - 75px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .rounded-container {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 }
 
@@ -85,20 +98,11 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    width: 100%;
-    max-width: $width-wrapper;
-    margin: 0 auto;
-    padding: 0 10px;
-
 
     .popup &,
     .feed & {
       padding: 0;
-      max-width: none;
-      margin: 0;
       border-radius: 5px 5px 0 0;
-
-      //overflow: hidden;  -  not necessary to case when add datepicker
     }
   }
 
@@ -150,10 +154,14 @@
       height: 44px;
       align-items: center;
       padding: 0 15px 0 0;
-      position: relative;
       z-index: 2;
       background: inherit;
       box-shadow: 0 0 5px rgba(#000, 0.3);
+      background-color: $white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
     }
   }
 }
@@ -216,12 +224,10 @@
   z-index: 1;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    //overflow: hidden;  -  not necessary to case when add datepicker
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 8px 30px rgba(#000, 0.1);
   }
 
   &:before {
@@ -242,8 +248,11 @@
   }
 
   > * {
-    position: relative;
-    z-index: 2;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+      z-index: 2;
+    }
   }
 
   .popup & {
@@ -290,10 +299,6 @@
 
     .addFileView {
       margin: 0 8px 15px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //margin: 14px 8px 15px;
-      }
     }
   }
 
@@ -349,7 +354,7 @@
     .actions {
       align-items: center;
       align-content: center;
-      margin-right: -15px;
+      margin-right: -16px;
     }
 
     .add-new-type {
@@ -378,7 +383,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
       top: 0;
-      right: 170px;
+      right: 208px;
     }
 
     &:hover {
@@ -849,7 +854,9 @@
   .add-new-form:not(.expanded) & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
+      position: absolute;
+      top: 0;
+      right: 174px;
     }
   }
 

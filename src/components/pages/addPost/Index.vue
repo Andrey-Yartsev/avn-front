@@ -1,11 +1,16 @@
 <template>
-  <div class="addPostPage" :class="{ hasScheduledPosts: delayedPosts.length }">
-    <AddPost :initialExpanded="true" :close="close" where="modal" />
-    <div class="feed rounded-container shadow-block reset-btr">
-      <PostCollection :posts="delayedPosts" from="queue" />
-    </div>
-    <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
-      <Loader :fullscreen="false" />
+  <div
+    class="container addPostPage"
+    :class="{ hasScheduledPosts: delayedPosts.length }"
+  >
+    <div class="rounded-container">
+      <AddPost :initialExpanded="true" :close="close" where="modal" />
+      <div class="feed reset-btr">
+        <PostCollection :posts="delayedPosts" from="queue" />
+      </div>
+      <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+        <Loader :fullscreen="false" />
+      </div>
     </div>
     <Footer class="site-footer_main" />
   </div>

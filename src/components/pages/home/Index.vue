@@ -8,10 +8,10 @@
     <div class="container">
       <div class="row">
         <div class="content-col">
-          <div class="no-padding">
+          <div class="no-padding rounded-container shadow-block">
             <AddPost v-if="$mq === 'desktop'" where="home" />
             <NewFeedPostToast :init="init" :newPosts="newPosts" />
-            <div class="feed rounded-container shadow-block reset-btr">
+            <div class="feed reset-btr">
               <PostCollection :posts="posts" from="home" />
             </div>
           </div>
