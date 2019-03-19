@@ -2,6 +2,7 @@
 
 import PostMixin from "@/store/mixins/posts";
 import ViewersApi from "@/api/viewers";
+import { createRequestAction } from "@/store/utils/storeRequest";
 
 const initState = {
   loading: false,
@@ -90,8 +91,25 @@ const actions = {
       .catch(err => {
         commit("userUnblockFail", err);
       });
+  },
+  unblock({ a }, userId) {
+    a;
+    return ViewersApi.unblockUser({ userId });
   }
 };
+
+createRequestAction({
+  prefix: "fetchBlocked",
+  apiPath: `stories/blocked`,
+  state,
+  mutations,
+  actions,
+  defaultResultValue: [],
+  resultKey: "blocked",
+  options: {
+    method: "GET"
+  }
+});
 
 export default {
   namespaced: true,

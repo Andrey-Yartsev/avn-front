@@ -113,6 +113,10 @@ export default {
     mobileBlockedRoute: {
       type: String,
       required: true
+    },
+    source: {
+      type: String,
+      default: "users"
     }
   },
 
@@ -123,11 +127,25 @@ export default {
   },
 
   computed: {
+    state() {
+      if (this.source === "users") {
+        return this.$store.state.blocked;
+      } else if (this.source === "stories") {
+        return this.$store.state.viewers;
+      }
+    },
+    storePath() {
+      if (this.source === "users") {
+        return "blocked";
+      } else if (this.source === "stories") {
+        return "viewers";
+      }
+    },
     initItems() {
-      return this.$store.state.blocked.users;
+      return this.state.blocked;
     },
     items() {
-      let users = this.$store.state.blocked.users;
+      let users = this.state.blocked;
       const query = this.query.trim();
       if (query) {
         users = users.filter(v => v.name.match(new RegExp(query)));
@@ -141,12 +159,14 @@ export default {
       return moment(date).format("DD MMM");
     },
     unblock(userId) {
-      this.$store.dispatch("blocked/unblock", userId);
+      this.$store.dispatch(this.storePath + "/unblock", userId).then(() => {
+        this.$store.dispatch(this.storePath + "/fetchBlocked");
+      });
     }
   },
 
   created() {
-    this.$store.dispatch("blocked/fetchUsers");
+    this.$store.dispatch(this.storePath + "/fetchBlocked");
   }
 };
 </script>

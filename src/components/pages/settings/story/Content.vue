@@ -92,7 +92,10 @@
         </div>
       </div>
     </form>
-    <BlockedUsers mobileBlockedRoute="/settings/story/blocked" />
+    <BlockedUsers
+      mobileBlockedRoute="/settings/story/blocked"
+      source="stories"
+    />
   </div>
 </template>
 
