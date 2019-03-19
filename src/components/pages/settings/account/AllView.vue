@@ -155,7 +155,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width"
-              :disabled="!canChangePassword"
+              :disabled="!canChangePassword || passwordSaving"
             >
               Save changes
             </button>
@@ -215,7 +215,8 @@ export default {
     return {
       checkPassword: "",
       newPassword: "",
-      oldPassword: ""
+      oldPassword: "",
+      passwordSaving: false
     };
   },
 
@@ -246,6 +247,7 @@ export default {
       this.$router.push("/settings/account");
     },
     changePassword() {
+      this.passwordSaving = true;
       this.$store
         .dispatch("user/changePassword", {
           checkPassword: this.checkPassword,
@@ -253,6 +255,7 @@ export default {
           oldPassword: this.oldPassword
         })
         .then(() => {
+          this.passwordSaving = false;
           this.$store.dispatch(
             "global/flashToast",
             "Password has changed successfully"
@@ -260,6 +263,9 @@ export default {
           this.checkPassword = "";
           this.newPassword = "";
           this.oldPassword = "";
+        })
+        .catch(() => {
+          this.passwordSaving = false;
         });
     },
     deleteAccount() {
