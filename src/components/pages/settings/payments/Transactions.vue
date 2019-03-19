@@ -2,7 +2,9 @@
   <div class="payments-statements">
     <div class="paymentsStatementsView">
       <div class="payments-wrapper">
-        <div class="form-title border-top table-header-title">
+        <div
+          class="form-title border-top table-header-title table-header-title_sticky"
+        >
           <div class="inner">
             <span class="semi-transparent">
               Payments Statements

@@ -1,7 +1,7 @@
 <template>
   <div class="payouts-legal-done">
     <div class="PayoutsLegalDoneView">
-      <div class="form-title hidden-desktop">
+      <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
         <div class="inner">
           <span class="semi-transparent">
             Personal Information
@@ -70,7 +70,7 @@
                 </span>
               </label>
             </div>
-            <div class="form-group-btn">
+            <div class="form-group-btn form-group-btn_reset-pb-mob">
               <button
                 type="submit"
                 class="btn lg btn_fix-width saveChanges"

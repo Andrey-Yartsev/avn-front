@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">
-        <div class="form-title hidden-desktop">
+        <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
           <div class="inner">
             <span class="semi-transparent">
               {{ user.name }}

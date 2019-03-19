@@ -172,7 +172,7 @@
         </button>
       </div>
     </form>
-    <div class="form-title hidden-desktop">
+    <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
       <div class="inner text-centered">
         <span class="semi-transparent">{{ user.username }}</span>
       </div>

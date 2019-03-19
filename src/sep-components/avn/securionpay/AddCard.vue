@@ -3,7 +3,7 @@
     <div class="payments-card" v-if="showCard">
       <div class="payment-card">
         <div>
-          <div class="form-title hidden-desktop">
+          <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
             <div class="inner">
               <span class="semi-transparent">
                 Your Card
@@ -12,7 +12,10 @@
           </div>
           <h1 class="form-title hidden-mobile">
             Your Card
-            <button @click="$router.push('/settings/credits')">
+            <button
+              @click="$router.push('/settings/credits')"
+              class="balance-info"
+            >
               Balance: {{ user.creditBalance }} credits
             </button>
           </h1>

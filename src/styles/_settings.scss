@@ -12,17 +12,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
     }
-    button, span {
-      right: 20px;
-      position: absolute;
-      border: none;
-      padding: 0;
-      background: none;
-      font-size: 15px;
-      top: 50%;
-      transform: translate(0, -50%);
-      color: $secondary-color;
-    }
   }
 }
 
@@ -282,34 +271,6 @@
   }
 }
 
-//.row-btn-save {
-//
-//  @include media-breakpoint-down($desktop-breakpoint) {
-//    padding: 0;
-//  }
-//
-//  &.form-group {
-//
-//    @include media-breakpoint-up($desktop-breakpoint) {
-//      padding-bottom: 0;
-//    }
-//  }
-//
-//  .form-group-inner {
-//
-//    @include media-breakpoint-down($desktop-breakpoint) {
-//      margin: 0;
-//    }
-//  }
-//
-//  .label {
-//
-//    @include media-breakpoint-down($desktop-breakpoint) {
-//      display: none;
-//    }
-//  }
-//}
-
 .add-options-blur {
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -321,14 +282,14 @@
   }
 }
 
-
-.empty-label-gap {
-
-  .avn-style & {
-    //display: none;
-
-    + .btn {
-      //margin-left: 20px;
-    }
-  }
+.balance-info {
+  right: 20px;
+  position: absolute;
+  border: none;
+  padding: 0;
+  background: none;
+  font-size: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: $secondary-color;
 }

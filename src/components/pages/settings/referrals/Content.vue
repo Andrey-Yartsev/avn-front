@@ -5,7 +5,7 @@
       <!-- QR temporary hidden -->
       <!--<button type="button">Show QR</button>-->
     </h1>
-    <div class="form-title hidden-desktop">
+    <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
       <div class="inner">
         <span class="semi-transparent">
           Referral URL
