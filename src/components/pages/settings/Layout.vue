@@ -38,7 +38,7 @@
           <div class="rounded-container rounded-container_fluid-height">
             <slot name="content" />
           </div>
-          <div class="site-footer hidden-mobile">
+          <div class="site-footer hidden-mobile" v-if="$mq === 'desktop'">
             <div class="container"></div>
           </div>
         </div>
