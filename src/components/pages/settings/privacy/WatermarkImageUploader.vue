@@ -41,8 +41,13 @@ export default {
       this.setPreview(e);
     },
     async save() {
-      const fileName = await upload(this.$refs.photo.files[0]);
-      this.$emit("change", fileName);
+      try {
+        const fileName = await upload(this.$refs.photo.files[0]);
+        this.$emit("change", fileName);
+      } catch (error) {
+        this.$store.dispatch("global/flashToast", error.message);
+        this.preview = null;
+      }
     },
     setPreview(e) {
       const reader = new FileReader();
