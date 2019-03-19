@@ -1,6 +1,8 @@
 <template>
-  <div class="addPostPage">
-    <EditPost :initialExpanded="true" :close="close" :post="post" />
+  <div class="container addPostPage">
+    <div class="rounded-container">
+      <EditPost :initialExpanded="true" :close="close" :post="post" />
+    </div>
     <Footer class="site-footer_main" />
   </div>
 </template>
