@@ -31,10 +31,10 @@
             </div>
 
             <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
+              <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
                 <BirthDateSelect class="birthDateWrapper" v-model="birthDate" />
-              </label>
+              </div>
             </div>
 
             <div class="form-group form-group_with-label">
