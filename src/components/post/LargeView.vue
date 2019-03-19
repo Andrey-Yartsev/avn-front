@@ -23,6 +23,7 @@
         v-on:clickOnDetailsView="clickOnCommentForm"
         v-if="$mq === 'mobile'"
         :datetime="timePassed"
+        :showCopy="!delayedPost"
       />
       <p
         class="text hidden-desktop"
@@ -44,14 +45,15 @@
           :user="post.author"
           :from="from"
           v-if="$mq === 'desktop'"
+          :showCopy="!delayedPost"
         />
         <p
           class="text hidden-mobile"
           v-html="post.text"
           v-if="$mq === 'desktop'"
-        ></p>
+        />
         <CommentsList
-          v-if="this.post.canComment"
+          v-if="!delayedPost && post.canComment"
           :comments="post.fullComments"
           :totalComments="post.commentsCount"
           :loading="commentsLoading"
@@ -59,7 +61,7 @@
           v-on:commentReply="commentReply"
           v-on:likeComment="likeComment"
         />
-        <template v-if="isAuth() && this.post.canFavorite">
+        <template v-if="!delayedPost && isAuth() && post.canFavorite">
           <Actions
             :post="post"
             v-on:postShowCommentForm="clickOnCommentForm"
@@ -67,8 +69,16 @@
             @toggleTip="showTip = !showTip"
           />
         </template>
+        <div v-if="delayedPost" class="actions">
+          <div class="datetime-value">
+            <span class="post-datetime__value">{{ formattedDate }}</span>
+          </div>
+        </div>
       </div>
-      <div class="comment-form-wrapper" v-if="this.post.canComment && isAuth()">
+      <div
+        class="comment-form-wrapper"
+        v-if="!delayedPost && post.canComment && isAuth()"
+      >
         <AddComment
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
@@ -94,7 +104,7 @@
           </form>
         </template>
       </div>
-      <div class="comment-form-wrapper" v-if="!isAuth()">
+      <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
         <div class="guest-comments-form">
           <p>Please login to leave comments</p>
           <time class="timestamp">{{ timePassed }}</time>
@@ -113,6 +123,7 @@ import Media from "@/components/common/postParts/media/Index";
 import CommentsList from "@/components/common/postParts/commentsListScrollable/Index";
 import AddComment from "@/components/common/postParts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
+import moment from "moment";
 
 export default {
   name: "PostLastView",
@@ -135,6 +146,14 @@ export default {
     },
     commentsLoading() {
       return this.post.commentsLoading;
+    },
+    delayedPost() {
+      return !!this.post.scheduledDate;
+    },
+    formattedDate() {
+      return `Scheduled for ${moment(this.post.scheduledDate).format(
+        "MMM D, hh:mm a"
+      )}`;
     }
   },
   data: () => ({
@@ -204,7 +223,7 @@ export default {
       this.$refs.tip.reset();
     },
     getComments() {
-      if (!this.post.canComment) return;
+      if (!this.post.canComment || this.delayedPost) return;
       this.commentPage += 1;
       this.$store.dispatch(this.actionPrefix + "/getPostComments", {
         postId: this.post.id,
