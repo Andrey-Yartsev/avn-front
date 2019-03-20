@@ -38,7 +38,7 @@
             <span class="value">{{ post.media.length }}</span>
           </span>
           <span
-            v-if="media.duration"
+            v-if="media.duration && $mq === 'desktop'"
             class="item-length item-length_video hidden-mobile"
           >
             <span class="value">{{ mediaDuration }}</span>
