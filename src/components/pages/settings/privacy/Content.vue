@@ -79,6 +79,8 @@
         <WatermarkImageUploader
           v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
           @change="watermarkImageChange"
+          @remove="watermarkImageRemove"
+          :localUser="localUser"
         />
       </div>
 
@@ -183,6 +185,9 @@ export default {
     },
     watermarkImageChange(file) {
       this.localUser.watermarkFile = file;
+    },
+    watermarkImageRemove() {
+      this.localUser.watermarkFile = "";
     }
   }
 };

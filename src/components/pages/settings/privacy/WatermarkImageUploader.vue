@@ -9,7 +9,7 @@
       <div class="photo-label-wrapper">
         <div class="photo-label">
           <label for="photo" class="btn lg photo-btn">
-            Choose
+            {{ buttonTitle }}
             <input
               type="file"
               id="photo"
@@ -19,13 +19,13 @@
             />
           </label>
         </div>
-        <div class="watermark-picture" v-if="preview">
-          <div class="watermark-picture__remove" @click="preview = ''">
+        <div class="watermark-picture" v-if="picture">
+          <div class="watermark-picture__remove" @click="remove">
             <svg aria-hidden="true" class="icn icn-remove">
               <use xlink:href="#icon-remove"></use>
             </svg>
           </div>
-          <img :src="preview" />
+          <img :src="picture" />
         </div>
       </div>
     </div>
@@ -37,8 +37,12 @@ import upload from "@/utils/upload";
 
 export default {
   name: "WatermarkImageUploader",
+  props: {
+    localUser: Object
+  },
   data() {
     return {
+      uploading: false,
       uploaded: false,
       preview: null
     };
@@ -46,6 +50,18 @@ export default {
   computed: {
     error() {
       return this.$store.state.profile.error;
+    },
+    buttonTitle() {
+      return this.uploading ? "Uploading" : "Choose";
+    },
+    picture() {
+      if (this.localUser.watermarkFile) {
+        if (this.localUser.watermarkFile.match(/\/upload.*/)) {
+          return this.preview;
+        }
+        return this.localUser.watermarkFile;
+      }
+      return this.preview;
     }
   },
   watch: {
@@ -61,13 +77,17 @@ export default {
       this.setPreview(e);
     },
     async save() {
+      this.uploaded = false;
+      this.uploading = true;
       try {
         const fileName = await upload(this.$refs.photo.files[0]);
+        this.uploaded = true;
         this.$emit("change", fileName);
       } catch (error) {
         this.$store.dispatch("global/flashToast", error.message);
         this.preview = null;
       }
+      this.uploading = false;
     },
     setPreview(e) {
       const reader = new FileReader();
@@ -75,6 +95,12 @@ export default {
         this.preview = reader.result;
       };
       reader.readAsDataURL(e.target.files[0]);
+    },
+    remove() {
+      this.preview = null;
+      this.uploaded = false;
+      this.$refs.photo.value = "";
+      this.$emit("remove");
     }
   }
 };
