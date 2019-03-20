@@ -57,10 +57,10 @@
             <div class="form-group form-group_with-label">
               <label class="form-group-inner subscription">
                 <span class="label">Subscription</span>
-                <span class="subscription__field">
+                <span class="subscription__field field-symbol-currency">
                   <span class="subscription__per-month">per month</span>
                   <input
-                    class="subscription__input"
+                    class="field-gap_currency field-gap_timeunit"
                     type="number"
                     min="0"
                     step="0.01"

@@ -920,3 +920,27 @@ select {
     right: -5px;
   }
 }
+
+.field-gap {
+
+  &_currency {
+    padding-left: 23px;
+  }
+
+  &_timeunit {
+    padding-right: 90px;
+  }
+}
+
+.field-symbol-currency {
+  position: relative;
+
+  &:before {
+    content: "$";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: lighten($gray, 20%);
+  }
+}

@@ -110,20 +110,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
     }
-
-    &:before {
-      content: "$";
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: lighten($gray, 20%);
-    }
-  }
-
-  &__input {
-    padding-right: 90px;
-    padding-left: 23px;
   }
 }
 

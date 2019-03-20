@@ -17,8 +17,12 @@
                   Credits
                 </span>
                 <span class="form-group form-group_clear-gaps">
-                  <span class="form-field subscription__field">
-                    <input name="amount" v-model="amount" />
+                  <span class="form-field field-symbol-currency">
+                    <input
+                      name="amount"
+                      v-model="amount"
+                      class="field-gap_currency"
+                    />
                   </span>
                 </span>
               </label>
