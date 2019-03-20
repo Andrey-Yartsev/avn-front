@@ -6,13 +6,16 @@
       @titleChanged="changeTitle"
     />
     <avn-settings-add-card v-else slot="content" @titleChanged="changeTitle" />
-    <button
-      slot="after-title"
-      @click="$router.push('/settings/credits')"
-      class="balance-info"
-    >
-      Balance: {{ user.creditBalance }} credits
-    </button>
+    <template slot="title">
+      <span class="page-title__category">{{ $route.meta.title }}</span>
+      <button
+        slot="title"
+        @click="$router.push('/settings/credits')"
+        class="balance-info"
+      >
+        Balance: {{ user.creditBalance }} credits
+      </button>
+    </template>
   </Layout>
 </template>
 

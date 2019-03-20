@@ -1,9 +1,12 @@
 <template>
   <Layout ref="layout">
     <Content slot="content" />
-    <span class="balance-info" slot="after-title"
-      >Balance: {{ user.creditBalance }} credits</span
-    >
+    <template slot="title">
+      <span class="page-title__category">{{ $route.meta.title }}</span>
+      <span class="balance-info"
+        >Balance: {{ user.creditBalance }} credits</span
+      >
+    </template>
   </Layout>
 </template>
 

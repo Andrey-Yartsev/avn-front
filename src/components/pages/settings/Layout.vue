@@ -4,17 +4,7 @@
       <router-link :to="returnRoute" class="header-return-btn"></router-link>
 
       <h1 class="page-title">
-        <template v-if="showUsernameAsTitle">
-          <span class="page-title__username">
-            {{ user.name }}
-          </span>
-        </template>
-        <template v-else>
-          <span class="page-title__category">
-            {{ title }}
-          </span>
-        </template>
-        <slot name="after-title" />
+        <slot name="title">{{ title }}</slot>
       </h1>
 
       <router-link
@@ -53,7 +43,6 @@ import Aside from "./Aside";
 import DefaultSection from "./default/Content";
 import Mobile from "./mobile";
 import User from "@/mixins/user";
-import ucFirst from "@/helpers/ucFirst";
 
 export default {
   name: "Settings",
@@ -83,12 +72,6 @@ export default {
         this.isAccountPage &&
         (this.$route.params.view === "manage" || !this.$route.params.view)
       );
-    },
-    showUsernameAsTitle() {
-      if (this.isAccountPage && !this.$route.params.view) {
-        return true;
-      }
-      return false;
     },
     showSaveButton() {
       if (
@@ -159,18 +142,8 @@ export default {
       this.title = title;
     },
     initTitle() {
-      if (this.$route.params.view && this.$route.params.view === "blocked") {
-        this.changeTitle("Blocked Users");
+      if (!this.$route.meta.title) {
         return;
-      }
-      if (this.isAccountPage) {
-        this.changeTitle(this.accountViewToTitle(this.$route.params.view));
-        return;
-      } else if (this.isPrivacyPage) {
-        if (this.$route.params.view) {
-          this.changeTitle(ucFirst(this.$route.params.view));
-          return;
-        }
       }
       this.changeTitle(this.$route.meta.title.toString());
     }
