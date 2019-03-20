@@ -72,7 +72,11 @@ const actions = {
       }
     });
   },
-  newMessage({ state, commit, rootState }, message) {
+  newMessage({ state, commit, rootState, dispatch }, message) {
+    if (!rootState.auth.user.hasMessages) {
+      dispatch("auth/extendUser", { hasMessages: true }, { root: true });
+    }
+
     const found = state.messages.find(v => v.id === message.id);
     if (found) {
       commit("replaceMessage", message);
@@ -88,20 +92,34 @@ const actions = {
       });
     }
   },
-  fetchMessages({ dispatch, commit }, activeUserId) {
+  fetchMessages({ dispatch }, activeUserId) {
     dispatch("_fetchMessages", activeUserId).then(() => {
-      commit("markChatAsViewed", activeUserId);
+      dispatch("markChatAsViewed", activeUserId);
     });
   },
-  fetchMessagesDefault({ dispatch, commit, state }) {
+  fetchMessagesDefault({ dispatch, state }) {
     dispatch("_fetchMessages", state.activeUserId).then(() => {
-      commit("markChatAsViewed", state.activeUserId);
+      dispatch("markChatAsViewed", state.activeUserId);
     });
   },
   delete({ dispatch, commit }, userId) {
     dispatch("_delete", userId).then(() => {
       commit("removeChat", userId);
     });
+  },
+  markChatAsViewed({ commit, dispatch, state, rootState }, userId) {
+    commit("markChatAsViewed", userId);
+
+    // if no new messages, change current user hasMessages flag
+    let n = 0;
+    state.chats.forEach(chat => {
+      n += chat.unreadMessagesCount;
+    });
+    if (n === 0) {
+      if (rootState.auth.user.hasMessages) {
+        dispatch("auth/extendUser", { hasMessages: false }, { root: true });
+      }
+    }
   }
 };
 
