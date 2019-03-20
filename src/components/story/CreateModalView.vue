@@ -159,6 +159,7 @@ export default {
             this.videoError = false;
           })
           .catch(() => {
+            this.readyToUpload = true;
             this.videoError = true;
           });
       });
