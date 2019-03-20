@@ -935,7 +935,6 @@ export default {
       const chartId = chart.div.id;
       const dataId = chart.div.id + "-" + dataProviderKey;
 
-      // updating data
       if (this.updateDataTimeoutIds[dataId]) {
         clearTimeout(this.updateDataTimeoutIds[dataId]);
       }
@@ -951,15 +950,12 @@ export default {
           this.moneyTableData = { ...this.chartDataSets[chartId] };
         }
 
-        Object.entries(this.chartDataSets[chartId]).forEach(v => {
-          const [dataProviderKey, stat] = v;
-          this._updateChartDataProvider(
-            chart,
-            stat.statData,
-            dataProviderKey,
-            stat.statDataSubKey
-          );
-        });
+        this._updateChartDataProvider(
+          chart,
+          statData,
+          dataProviderKey,
+          statDataSubKey || null
+        );
       }, 1000);
 
       // updating chart
@@ -968,28 +964,9 @@ export default {
       }
       this.updateChartTimeoutIds[chartId] = setTimeout(() => {
         chart.validateData();
-        if (chart.name === "earnings") {
-          console.log(chart.dataProvider);
-        }
       }, 1000);
     },
     _updateChartDataProvider(chart, statData, dataProviderKey, statDataSubKey) {
-      // if (chart.name === "earnings") {
-      //   if (dataProviderKey === "paid_chat_messages") {
-      //     const _statData = {};
-      //     Object.entries(statData).forEach(v => {
-      //       if (v[1].total) {
-      //         _statData[v[0]] = v[1];
-      //       }
-      //     });
-      //     statData = _statData;
-      //     // console.log(dataProviderKey, statData);
-      //     // if (Object.keys(statData).length === 0) {
-      //     //   return;
-      //     // }
-      //   }
-      // }
-
       const approx = {};
       for (let index of Object.keys(statData)) {
         let currIndex = 0;
@@ -1052,11 +1029,13 @@ export default {
           this.calcCount(statData, r.subKey || undefined),
           r.countPostfix
         );
+
         this.updateChart(
           this[r.chartName],
           statData,
           r.dataProviderKey,
-          r.subKey || undefined
+          r.subKey || undefined,
+          data.statistics.code
         );
         if (store) {
           chartStorage[r.chartType][r.periodType].push(data);
