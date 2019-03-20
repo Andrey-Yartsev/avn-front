@@ -1,10 +1,13 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container popup-addPost" :class="{'popup-container_hfluid': delayedPosts.length}">
+      <div
+        class="popup-container popup-addPost"
+        :class="{ 'popup-container_hfluid': delayedPosts.length }"
+      >
         <div class="previous hidden"></div>
         <div class="content">
-          <div :class="{'container-popup': delayedPosts.length}">
+          <div :class="{ 'container-popup': delayedPosts.length }">
             <div
               class="popup-addPost__header hidden-mobile"
               v-if="$mq === 'desktop'"
@@ -13,19 +16,22 @@
             </div>
             <AddPost :initialExpanded="true" :close="close" type="new" />
             <template v-if="false">
-            <div class="popup-container-scroll" v-if="delayedPosts.length">
-              <VuePerfectScrollbar :settings="{ suppressScrollX: true }" class="popup-content-scroll add-post-schedule">
-                <div class="feed reset-btr">
-                  <PostCollection :posts="delayedPosts" from="postQueue" />
-                </div>
-                <div
-                  class="loaderWrap loader-content"
-                  v-if="infinityScrollLoading"
+              <div class="popup-container-scroll" v-if="delayedPosts.length">
+                <VuePerfectScrollbar
+                  :settings="{ suppressScrollX: true }"
+                  class="popup-content-scroll add-post-schedule"
                 >
-                  <Loader :fullscreen="false" />
-                </div>
-              </VuePerfectScrollbar>
-            </div>
+                  <div class="feed reset-btr">
+                    <PostCollection :posts="delayedPosts" from="postQueue" />
+                  </div>
+                  <div
+                    class="loaderWrap loader-content"
+                    v-if="infinityScrollLoading"
+                  >
+                    <Loader :fullscreen="false" />
+                  </div>
+                </VuePerfectScrollbar>
+              </div>
             </template>
           </div>
         </div>
