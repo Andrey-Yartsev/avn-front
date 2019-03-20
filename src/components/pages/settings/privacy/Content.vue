@@ -125,7 +125,10 @@
           </label>
         </div>
       </div>
-      <div class="go-twitter-block shadow-block no-padding hidden-desktop">
+      <div
+        class="go-twitter-block shadow-block no-padding hidden-desktop"
+        v-if="$mq === 'mobile'"
+      >
         <div class="settings-nav">
           <router-link to="/settings/privacy/twitter" class="settings-nav__item"
             ><span>Twitter</span><span class="value">Connect</span></router-link
@@ -135,7 +138,7 @@
 
       <ConnectTwitter @connected="twitterConnected" />
 
-      <div class="container hidden-mobile">
+      <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group-btn">
           <button
             type="submit"
