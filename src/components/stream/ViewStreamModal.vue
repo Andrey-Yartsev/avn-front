@@ -51,7 +51,10 @@
           </div>
         </div>
         <div class="form-stream">
-          <form class="stream-comment-form" v-if="showCommentForm">
+          <form
+            class="stream-comment-form"
+            v-if="showCommentForm && !isMyStream"
+          >
             <input
               type="text"
               placeholder="Comment"
@@ -76,7 +79,10 @@
             :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
           />
         </div>
-        <div class="stream-btns stream-viewer-btns" v-if="connected">
+        <div
+          class="stream-btns stream-viewer-btns"
+          v-if="connected && !isMyStream"
+        >
           <span
             role="button"
             class="stream-btn stream-comment-btn"
@@ -102,6 +108,7 @@
 import { throttle } from "throttle-debounce";
 import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
+import userMixin from "@/mixins/user";
 import Streams from "streaming-module/view_module";
 import StreamApi from "@/api/stream";
 import moment from "moment";
@@ -114,6 +121,7 @@ export default {
     Loader,
     Tip
   },
+  mixins: [userMixin],
   data: () => ({
     loading: true,
     time: undefined,
@@ -140,6 +148,10 @@ export default {
     },
     tipData() {
       return this.$store.state.tip.tipData;
+    },
+    isMyStream() {
+      const { id } = this.$store.state.modal.stream.data.stream.user;
+      return this.user.id === id;
     }
   },
   methods: {
@@ -232,7 +244,7 @@ export default {
       return { x, y };
     },
     click(event) {
-      if (!this.connected) {
+      if (!this.connected || this.isMyStream) {
         return;
       }
 
