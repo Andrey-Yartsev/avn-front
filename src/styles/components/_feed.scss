@@ -4,6 +4,12 @@
     padding-top: 0;
   }
 
+  .popup-content-scroll & {
+    background-color: $white;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
   .aside-col {
     @include media-breakpoint-down($desktop-breakpoint) {
       order: -1;

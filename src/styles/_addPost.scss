@@ -97,10 +97,18 @@
     }
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
+  .popup-container_hfluid & {
 
-    .popup &,
-    .feed & {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 11px;
+      margin-right: 11px;
+    }
+  }
+
+  .popup &,
+  .feed & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0;
       border-radius: 5px 5px 0 0;
     }
@@ -143,8 +151,16 @@
     }
   }
 
-  + .feed {
+  + .feed,
+  + .popup-container-scroll {
     border-top: 1px solid rgba(124, 139, 150, 0.2);
+  }
+
+  + .popup-container-scroll {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-top: none;
+    }
   }
 
   &-header {
@@ -276,10 +292,23 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-top: 60px;
+      //margin-top: 60px;
       box-shadow: none;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
+      background-color: $white;
+    }
+  }
+
+  .popup-container_hfluid & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: auto;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 
@@ -887,6 +916,7 @@
       font-size: 24px;
       width: 39px;
       height: 30px;
+      line-height: 32px;
       position: relative;
       z-index: 1;
       color: $secondary-color;

@@ -1,21 +1,35 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container popup-addPost">
+      <div class="popup-container popup-addPost" :class="{'popup-container_hfluid': delayedPosts.length}">
         <div class="previous hidden"></div>
-        <div class="popup-addPost__header">New post</div>
         <div class="content">
-          <AddPost :initialExpanded="true" :close="close" type="new" />
+          <div :class="{'container-popup': delayedPosts.length}">
+            <div
+              class="popup-addPost__header hidden-mobile"
+              v-if="$mq === 'desktop'"
+            >
+              New post
+            </div>
+            <AddPost :initialExpanded="true" :close="close" type="new" />
+            <template v-if="false">
+            <div class="popup-container-scroll" v-if="delayedPosts.length">
+              <VuePerfectScrollbar :settings="{ suppressScrollX: true }" class="popup-content-scroll add-post-schedule">
+                <div class="feed reset-btr">
+                  <PostCollection :posts="delayedPosts" from="postQueue" />
+                </div>
+                <div
+                  class="loaderWrap loader-content"
+                  v-if="infinityScrollLoading"
+                >
+                  <Loader :fullscreen="false" />
+                </div>
+              </VuePerfectScrollbar>
+            </div>
+            </template>
+          </div>
         </div>
-        <template v-if="false">
-          <div class="feed reset-btr">
-            <PostCollection :posts="delayedPosts" from="postQueue" />
-          </div>
-          <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" />
-          </div>
-        </template>
-        <button type="button" class="close" @click="close"></button>
+        <button type="button" class="close" />
         <div class="next hidden"></div>
       </div>
     </template>
@@ -27,6 +41,7 @@ import Modal from "@/components/modal/Index";
 import AddPost from "./Index";
 import PostCollection from "@/components/common/postCollection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "AddPostModal",
@@ -34,7 +49,8 @@ export default {
   components: {
     Modal,
     AddPost,
-    PostCollection
+    PostCollection,
+    VuePerfectScrollbar
   },
   methods: {
     close(e) {

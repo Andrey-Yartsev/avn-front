@@ -600,6 +600,13 @@
       }
     }
 
+    &.popup-addPost {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-top: 0;
+      }
+    }
+
     .close {
       
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -639,14 +646,26 @@
 .popup-addPost {
 
   &__header {
-    position: absolute;
-    left: 20px;
-    top: 20px;
+    //position: absolute;
+    //left: 20px;
+    //top: 20px;
     font-size: 17px;
     font-weight: 500;
+    background-color: $white;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 19px 20px 20px;
+
+    .popup-container_hfluid & {
+      margin-left: 11px;
+      margin-right: 11px;
+    }
+  }
+
+  .container-popup {
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
+      overflow-y: auto;
     }
   }
 }
@@ -809,6 +828,14 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: block;
+      }
+    }
+
+    &.add-post-schedule {
+      max-height: calc(100vh - 216px);
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 250px);
       }
     }
   }
