@@ -67,13 +67,13 @@
                   loop="true"
                 ></video>
               </div>
+              <div
+                :class="['play-button-wrapper', { hidden: !videoError }]"
+                @click="playPreviewVideo"
+              >
+                <div class="play-button"></div>
+              </div>
             </form>
-            <div
-              :class="['play-button-wrapper', { hidden: !videoError }]"
-              @click="playPreviewVideo"
-            >
-              <div class="play-button"></div>
-            </div>
           </div>
         </div>
         <div class="next hidden"></div>
