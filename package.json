@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@sentry/browser": "^4.6.4",
     "deepmerge": "^3.1.0",
     "fingerprintjs2": "^1.8.6",
     "luxon": "^1.11.4",
