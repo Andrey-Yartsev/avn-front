@@ -365,6 +365,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         right: -22px;
       }
+
+      .popup-content-scroll & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: -4px;
+        }
+      }
     }
   }
 

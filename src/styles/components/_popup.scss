@@ -63,11 +63,13 @@
       display: block;
 
       @include media-breakpoint-up($tablet-breakpoint) {
-        position: fixed;
-        left: 50%;
-        right: auto;
-        top: 36px;
-        transform: translate(-50%, 0);
+        //position: fixed;
+        //left: 50%;
+        //right: auto;
+        //top: 36px;
+        //transform: translate(-50%, 0);
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .popup-title {

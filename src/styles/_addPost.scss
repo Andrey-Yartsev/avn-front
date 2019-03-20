@@ -132,6 +132,11 @@
 
       .lds-dual-ring {
         top: -60px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+        }
       }
     }
 

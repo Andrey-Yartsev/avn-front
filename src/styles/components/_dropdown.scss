@@ -311,6 +311,13 @@
           right: 34px;
           display: block;
         }
+
+        .popup-content-scroll & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            right: 16px;
+          }
+        }
       }
     }
   }
