@@ -6,7 +6,10 @@
     <div class="postLink live">
       <figure class="explore-media">
         <img :src="imageSrc" />
-        <div v-if="duraion" class="item-length item-length_live hidden-mobile">
+        <div
+          v-if="duraion && $mq === 'desktop'"
+          class="item-length item-length_live hidden-mobile"
+        >
           <span class="value">{{ duraion }}</span>
         </div>
         <div class="overlay">
