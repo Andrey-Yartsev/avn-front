@@ -1,6 +1,6 @@
 <template>
   <div class="form-group form-group_with-label pb-reset">
-    <label
+    <div
       class="form-group-inner photo-form-group-inner"
       :class="{ success: uploaded }"
     >
@@ -20,7 +20,7 @@
           </label>
         </div>
         <div class="watermark-picture" v-if="preview">
-          <div class="watermark-picture__remove">
+          <div class="watermark-picture__remove" @click="preview = ''">
             <svg aria-hidden="true" class="icn icn-remove">
               <use xlink:href="#icon-remove"></use>
             </svg>
@@ -28,7 +28,7 @@
           <img :src="preview" />
         </div>
       </div>
-    </label>
+    </div>
   </div>
 </template>
 
