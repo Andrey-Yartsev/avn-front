@@ -370,13 +370,19 @@
 
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 0;
-      box-shadow: none;
       height: auto;
       margin: 0 5px 0 10px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: auto;
+    }
+
+    &:before {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
 
     &:hover {
