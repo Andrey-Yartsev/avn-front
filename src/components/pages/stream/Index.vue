@@ -172,7 +172,9 @@
             v-if="!isStopped"
           />
         </div>
-        <div id="stream-timer" v-if="!isStopped">{{ time }}</div>
+        <div id="stream-timer" v-if="!isStopped && !startingStream">
+          {{ time }}
+        </div>
         <div class="stream-online-label">live</div>
         <div class="stream-comments-wrapper">
           <div
@@ -233,6 +235,11 @@
         </button>
       </div>
     </div>
+    <Loader
+      :fullscreen="true"
+      text="Starting the stream"
+      v-if="startingStream"
+    />
     <StreamStatistic
       :close="
         (haveToSave, haveToSaveComments) =>
@@ -278,6 +285,7 @@ export default {
       isReadyToStart: false,
       isStarted: false,
       isStopped: false,
+      startingStream: false,
       time: undefined,
       startedStreamId: undefined,
       likes: [],
@@ -395,6 +403,7 @@ export default {
     startStream() {
       this.isReadyToStart = false;
       this.isStarted = true;
+      this.startingStream = true;
       Streams.startStream();
     },
     stopStream() {
@@ -563,6 +572,7 @@ export default {
             );
 
             this.startedStreamId = id;
+            this.startingStream = false;
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
               token
