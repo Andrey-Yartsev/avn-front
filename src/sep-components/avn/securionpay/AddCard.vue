@@ -180,7 +180,7 @@
             </div>
 
             <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
+              <div class="form-group-inner">
                 <span class="label">Expiration Date</span>
 
                 <div class="cards-details">
@@ -217,7 +217,7 @@
                     </span>
                   </span>
                 </div>
-              </label>
+              </div>
             </div>
 
             <div class="form-group form-group_with-label">

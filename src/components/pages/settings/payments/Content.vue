@@ -11,7 +11,7 @@
                 </span>
               </div>
             </div>
-            <h1 class="form-title hidden-mobile">
+            <h1 class="form-title hidden-mobile" v-if="$mq === 'desktop'">
               Your Card
             </h1>
 

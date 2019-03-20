@@ -19,6 +19,7 @@
             type="button"
             @click="openAddPostModal"
             v-if="user"
+            :disabled="disabledButton"
           >
             Share
           </button>
@@ -48,6 +49,7 @@
               class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-mobile"
               type="button"
               @click="openAddPostModal"
+              :disabled="disabledButton"
             >
               Share
             </button>
@@ -153,10 +155,14 @@ export default {
     },
     logo() {
       return "rl-logo";
+    },
+    disabledButton() {
+      return this.$route.meta.disabledAddPostButton;
     }
   },
   methods: {
     openAddPostModal() {
+      if (this.disabledAddPostButton) return;
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });

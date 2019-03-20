@@ -76,7 +76,6 @@
             </span>
           </label>
         </div>
-
         <WatermarkImageUploader
           v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
           @change="watermarkImageChange"

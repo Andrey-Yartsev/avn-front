@@ -898,3 +898,25 @@ select {
     margin-top: 15px;
   }
 }
+
+.watermark-picture {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 3px;
+  }
+
+  &__remove {
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+  }
+}

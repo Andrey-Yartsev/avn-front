@@ -18,19 +18,22 @@
           class="header-return-btn go-back go-back_times"
           @click="close"
         >
-          <h1 class="category-name">New Post</h1>
+          <h1 class="category-name">
+            {{ this.isNew ? "New Post" : "Edit Post" }}
+          </h1>
         </button>
         <button
           type="submit"
           class="btn submit sm"
           :disabled="notEhoughData"
-          @click="addNewPost"
+          @click="clickHandler"
         >
-          Share
+          {{ this.isNew ? "Share" : "Save" }}
         </button>
       </div>
       <span
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
+        v-if="$mq === 'desktop'"
       >
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
@@ -94,10 +97,12 @@
               use12-hour
               :min-datetime="minDate"
               @close="closeDatepicker"
+              :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
             />
             <span class="post-datetime__btn" @click="openDatepicker"></span>
           </div>
           <router-link
+            v-if="isNew"
             class="b-check-state b-check-state_live"
             :class="{
               disabled: preloadedMedias.length || postMsg.length || datetime
@@ -117,9 +122,10 @@
           type="submit"
           class="btn submit hidden-mobile"
           :disabled="notEhoughData"
-          @click="addNewPost"
+          @click="clickHandler"
+          v-if="$mq === 'desktop'"
         >
-          Share
+          {{ this.isNew ? "Share" : "Save" }}
         </button>
       </div>
       <div
@@ -143,7 +149,7 @@
         </div>
       </div>
     </form>
-    <Loader v-if="isSaving" :fullscreen="false" class="small"></Loader>
+    <Loader v-if="isSaving" :fullscreen="false" class="small" />
   </div>
 </template>
 
@@ -193,12 +199,23 @@ export default {
       type: Function,
       default: () => {}
     },
+    post: {
+      type: Object,
+      default: () => ({})
+    },
     where: {
       type: String,
       default: ""
+    },
+    type: {
+      type: String,
+      required: true
     }
   },
   computed: {
+    isNew() {
+      return this.type === "new";
+    },
     user() {
       return this.$store.state.auth.user;
     },
@@ -243,6 +260,13 @@ export default {
     }
   },
   methods: {
+    clickHandler(e) {
+      if (this.isNew) {
+        this.addNewPost(e);
+      } else {
+        this.updatePost(e);
+      }
+    },
     resetDatetime() {
       this.datetime = InitialState.datetime;
     },
@@ -272,15 +296,51 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        scheduledDate,
         mediaFiles
       };
+
+      if (newPostData.isScheduled) {
+        newPostData.scheduledDate = scheduledDate;
+      }
 
       if (this.hasSubscribePrice) {
         newPostData.isFree = this.isFree;
       }
 
       this.$store.dispatch("post/savePost", newPostData);
+    },
+    updatePost: async function(e) {
+      e.preventDefault();
+
+      if (this.notEhoughData) return;
+
+      this.isSaving = true;
+
+      const mediaFiles = await this.getMediaFiles();
+
+      const scheduledDate = moment(this.datetime)
+        .utc()
+        .format("Y-MM-DD HH:mm:ss");
+
+      const postData = {
+        text: this.postMsg,
+        tweetSend: this.tweetSend,
+        isScheduled: !!this.datetime,
+        mediaFiles
+      };
+
+      if (postData.isScheduled) {
+        postData.scheduledDate = scheduledDate;
+      }
+
+      if (this.hasSubscribePrice) {
+        postData.isFree = this.isFree;
+      }
+
+      this.$store.dispatch("post/updatePostData", {
+        postId: this.post.id,
+        data: postData
+      });
     },
     toast(text) {
       this.$store.dispatch("global/flashToast", text, { root: true });
@@ -298,6 +358,21 @@ export default {
     newPost() {
       this.reset();
       this.$router.push("/");
+    },
+    post() {
+      if (this.post.id && !this.isNew) {
+        this.datetime = this.post.scheduledDate;
+        this.postMsg = this.post.text;
+        this.tweetSend = this.post.tweetSend;
+        this.isFree = this.post.isFree;
+        this.preloadedMedias = (this.post.media || []).map(media => ({
+          alreadySaved: true,
+          fileContent: media.thumb.source,
+          id: media.id,
+          mediaType: media.type,
+          preview: media.thumb.source
+        }));
+      }
     }
   },
   mounted() {

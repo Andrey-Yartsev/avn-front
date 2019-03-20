@@ -81,7 +81,8 @@ const routes = [
     path: "/addPost",
     component: AddPostPage,
     meta: {
-      cssName: "addPost"
+      cssName: "addPost",
+      disabledAddPostButton: true
     }
   },
   {
@@ -89,7 +90,8 @@ const routes = [
     path: "/post/edit/:id",
     component: EditPostPage,
     meta: {
-      cssName: "addPost"
+      cssName: "addPost",
+      disabledAddPostButton: true
     }
   },
   {
