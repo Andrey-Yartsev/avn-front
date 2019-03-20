@@ -49,6 +49,10 @@
     .postComments {
       margin-bottom: 0;
     }
+
+    .popup-addPost & {
+      padding-bottom: 0;
+    }
   }
 
   &_preparation.post {
@@ -402,8 +406,12 @@
 
   .container & {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 130px);
+    img {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 130px);
+        object-fit: cover;
+      }
     }
   }
 
@@ -411,8 +419,11 @@
 
     .special-site-header & {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 180px);
+      img {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-height: calc(100vh - 180px);
+        }
       }
     }
   }
