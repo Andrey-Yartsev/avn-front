@@ -24,17 +24,14 @@
                 <div class="feed reset-btr">
                   <PostCollection :posts="delayedPosts" from="postQueue" />
                 </div>
-                <div
-                  class="loaderWrap loader-content"
-                  v-if="loading"
-                >
+                <div class="loaderWrap loader-content" v-if="loading">
                   <Loader :fullscreen="false" />
                 </div>
               </VuePerfectScrollbar>
             </div>
           </div>
         </div>
-        <button type="button" class="close" @click="close"/>
+        <button type="button" class="close" @click="close" />
         <div class="next hidden"></div>
       </div>
     </template>
