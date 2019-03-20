@@ -1,5 +1,5 @@
 export default {
-  login: ["login-page", "no-site-header_all"],
+  login: ["login-page", "no-site-header_all", "reset-sticky-gap"],
   following: [
     // , followers
     "following-page",
