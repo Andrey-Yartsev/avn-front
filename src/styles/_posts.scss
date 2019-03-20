@@ -45,6 +45,10 @@
     &:last-child {
       border-bottom: none;
     }
+
+    .postComments {
+      margin-bottom: 0;
+    }
   }
 
   &_preparation.post {
@@ -1039,16 +1043,12 @@
   font-size: 13px;
   cursor: pointer;
   color: $primary-color;
-  background: $white linear-gradient(
-                  60deg,
-                  $secondary-color-20 10%,
-                  $primary-color-20 90%
-  );
   position: sticky;
   z-index: 10;
   overflow: hidden;
   transition: all .2s;
   top: 88px;
+  background-color: #fff;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 50px;
