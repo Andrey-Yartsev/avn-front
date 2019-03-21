@@ -21,7 +21,7 @@
             <div class="error-info" v-if="error">
               {{ error }}
             </div>
-            <div class="info" v-else-if="sendSuccess">
+            <div class="success-info info" v-else-if="sendSuccess">
               Please check your mailbox for further instructions to recover your
               password.
             </div>
