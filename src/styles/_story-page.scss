@@ -234,7 +234,7 @@
       opacity: 0.7;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 15px 10px;
+        padding: 18px 10px;
       }
 
       &:hover,
@@ -285,7 +285,7 @@
     }
 
     input {
-      margin: 0 15px;
+      //margin: 0 15px;
       text-align: center;
       background: rgba(#000, 0.3);
       color: #fff;
@@ -297,6 +297,7 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 150px;
         height: 40px;
+        border-radius: 1000px;
       }
     }
   }
@@ -572,6 +573,7 @@
 
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    margin-top: 18px;
     margin-bottom: 18px;
     margin-left: 13px;
   }
