@@ -361,7 +361,9 @@ export default {
       Streams.switchDevices(false, value.deviceId);
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
-      this.isMirrow = Streams.cameraFacingMode === "user";
+      setTimeout(() => {
+        this.isMirrow = Streams.cameraFacingMode === "user";
+      }, 333);
     },
     showStreamAudioMenu() {
       this.shownStreamAudioMenu = true;
@@ -388,7 +390,9 @@ export default {
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
-      this.isMirrow = Streams.cameraFacingMode === "user";
+      setTimeout(() => {
+        this.isMirrow = Streams.cameraFacingMode === "user";
+      }, 333);
     },
     tick() {
       const currentTime = Math.round(new Date().getTime() / 1000);
@@ -539,6 +543,8 @@ export default {
       showLikes: false,
       showErrorMessage(message) {
         // eslint-disable-next-line
+        alert(message);
+        // eslint-disable-next-line
         console.log(message);
       },
       showInfoMessage(message) {
@@ -549,7 +555,9 @@ export default {
       onRemoteStreamInit() {},
       onStreamError(error) {
         // eslint-disable-next-line
-        console.error(error);
+        alert(error);
+        // eslint-disable-next-line
+        console.log(error);
         Streams.config.onStreamEnd();
       },
       onStreamTick: start => {
