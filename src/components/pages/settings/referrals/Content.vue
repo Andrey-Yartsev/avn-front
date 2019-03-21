@@ -33,34 +33,36 @@
     </div>
     <div class="ReferralsBlockCollectionView">
       <div
-        class="form-title border-top table-header-title referrals-form-title"
+        class="form-title border-top table-header-title referrals-form-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
       >
-        <div class="inner">
-          <span class="semi-transparent referrals-text">
-            Referrals
-          </span>
-          <form class="referrals-search b-search-form">
-            <input type="text" class="rounded sm" placeholder="Search" />
-            <button
-              type="submit"
-              disabled=""
-              class="b-search-form__btn"
-            ></button>
-          </form>
-        </div>
-        <div class="table-header referrals-table-header">
-          <div class="user table__cell">
-            User
+        <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+          <div class="inner">
+            <span class="semi-transparent referrals-text">
+              Referrals
+            </span>
+            <form class="referrals-search b-search-form">
+              <input type="text" class="rounded sm" placeholder="Search" />
+              <button
+                type="submit"
+                disabled=""
+                class="b-search-form__btn"
+              ></button>
+            </form>
           </div>
-          <div
-            class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
-          >
-            Amount
-          </div>
-          <div
-            class="joined table__cell table__cell_align table__cell_align-hor-c"
-          >
-            Joined
+          <div class="table-header referrals-table-header">
+            <div class="user table__cell">
+              User
+            </div>
+            <div
+              class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
+            >
+              Amount
+            </div>
+            <div
+              class="joined table__cell table__cell_align table__cell_align-hor-c"
+            >
+              Joined
+            </div>
           </div>
         </div>
       </div>

@@ -1,37 +1,45 @@
 <template>
   <div class="BlockedUsersCollectionView">
-    <div class="form-title border-top table-header-title">
-      <div class="inner">
-        <span class="semi-transparent">
-          Blocked users
-          <p class="subtext">
-            These people can't see your posts, stories and live streams
-          </p>
-        </span>
+    <div
+      class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+    >
+      <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+        <div class="inner">
+          <span class="semi-transparent">
+            Blocked users
+            <p class="subtext">
+              These people can't see your posts, stories and live streams
+            </p>
+          </span>
 
-        <form class="blocked-search b-search-form">
-          <input
-            type="text"
-            class="rounded sm"
-            placeholder="Search"
-            v-model="query"
-          />
-          <button type="submit" disabled="" class="b-search-form__btn"></button>
-        </form>
-      </div>
-      <div class="table-header blocked-table-header ">
-        <div class="user table__cell">
-          User
+          <form class="blocked-search b-search-form">
+            <input
+              type="text"
+              class="rounded sm"
+              placeholder="Search"
+              v-model="query"
+            />
+            <button
+              type="submit"
+              disabled=""
+              class="b-search-form__btn"
+            ></button>
+          </form>
         </div>
-        <div
-          class="date table__cell table__cell_align-hor-c table__cell_selected"
-        >
-          Date
-        </div>
-        <div
-          class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-        >
-          Status
+        <div class="table-header blocked-table-header ">
+          <div class="user table__cell">
+            User
+          </div>
+          <div
+            class="date table__cell table__cell_align-hor-c table__cell_selected"
+          >
+            Date
+          </div>
+          <div
+            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
+          >
+            Status
+          </div>
         </div>
       </div>
     </div>
