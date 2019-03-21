@@ -133,6 +133,7 @@
       transform: rotateY(180deg);
       -webkit-backface-visibility: visible;
       backface-visibility: visible;
+      transform: scaleX(-1);
     }
   }
 }
