@@ -585,28 +585,31 @@ export default {
               id,
               token
             );
-            this.streamStartTime = new Date().getTime() / 1000;
             Streams.getStreamAsClient();
+            this.streamStartTime = new Date().getTime() / 1000;
           });
       },
       onStreamEnd: () => {
         const token = this.$store.state.auth.token;
         const userId = this.$store.state.auth.user.id;
 
-        this.$root.ws.ws.send(
-          JSON.stringify({
-            act: "stream_stop",
-            stream_id: this.startedStreamId,
-            stream_user_id: userId,
-            sess: token
-          })
-        );
+        if (this.startedStreamId) {
+          this.$root.ws.ws.send(
+            JSON.stringify({
+              act: "stream_stop",
+              stream_id: this.startedStreamId,
+              stream_user_id: userId,
+              sess: token
+            })
+          );
 
-        StreamApi.deleteStream(this.startedStreamId);
+          StreamApi.deleteStream(this.startedStreamId);
+        }
 
         this.isReadyToStart = true;
         this.isStarted = false;
         this.isStopped = true;
+        this.startingStream = false;
       },
       onCleanUp() {},
       onViewersCountGet: looks => {
