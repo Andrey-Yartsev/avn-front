@@ -28,7 +28,9 @@
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip }"
-      ><span>Tips</span></button>
+      >
+        <span>Tips</span>
+      </button>
 
       <div
         class="field-text-message"
@@ -228,4 +230,3 @@ export default {
   }
 };
 </script>
-
