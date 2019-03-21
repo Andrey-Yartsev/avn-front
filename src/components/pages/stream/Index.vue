@@ -151,7 +151,11 @@
         </div>
       </div>
       <div id="videos">
-        <div id="videowrap" class="stream-video-container">
+        <div
+          id="videowrap"
+          class="stream-video-container"
+          :class="{ 'mirror-reflection': isMirrow }"
+        >
           <div class="likesContainer">
             <div
               v-for="like in likes"
@@ -286,6 +290,7 @@ export default {
       isStarted: false,
       isStopped: false,
       startingStream: false,
+      isMirrow: false,
       time: undefined,
       startedStreamId: undefined,
       likes: [],
@@ -356,6 +361,7 @@ export default {
       Streams.switchDevices(false, value.deviceId);
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
+      this.isMirrow = Streams.cameraFacingMode === "user";
     },
     showStreamAudioMenu() {
       this.shownStreamAudioMenu = true;
@@ -382,10 +388,12 @@ export default {
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
+      this.isMirrow = Streams.cameraFacingMode === "user";
     },
-    tick(start) {
-      this.streamStartTime = start;
-      const diff = Math.round(new Date().getTime() / 1000) - start;
+    tick() {
+      const currentTime = Math.round(new Date().getTime() / 1000);
+      const startTime = this.streamStartTime || currentTime;
+      const diff = currentTime - startTime;
       const date = new Date(diff * 1000);
       let hours = date.getHours();
       let mins = date.getMinutes();
@@ -418,7 +426,7 @@ export default {
       const window_width = window.innerWidth;
       const window_height = window.innerHeight;
       const window_ratio = window_height / window_width;
-      let left = "0%"; //$( '.stream-like-btn' ).offset().left;
+      let left = "0%";
       let top = "100%";
 
       if (video_ratio > window_ratio) {
@@ -577,6 +585,7 @@ export default {
               id,
               token
             );
+            this.streamStartTime = new Date().getTime() / 1000;
             Streams.getStreamAsClient();
           });
       },
