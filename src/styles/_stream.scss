@@ -125,8 +125,11 @@
     .stream_enabled & {
       opacity: 1;
     }
+  }
 
-    .mirror-reflection & {
+  &.mirror-reflection {
+
+    video {
       transform: rotateY(180deg);
       -webkit-backface-visibility: visible;
       backface-visibility: visible;
