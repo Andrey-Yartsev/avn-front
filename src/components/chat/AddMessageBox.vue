@@ -22,12 +22,13 @@
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
         />
       </label>
+
       <button
         v-if="withUser && withUser.canEarn && $root.showTips"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip }"
-      ></button>
+      ><span>Tips</span></button>
 
       <div
         class="field-text-message"
@@ -228,11 +229,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.text-media-container {
-  overflow: hidden;
-  overflow-wrap: break-word;
-  min-height: 30px;
-  border: 10px solid #f00;
-}
-</style>

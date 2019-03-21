@@ -137,6 +137,7 @@
       </div>
 
       <ConnectTwitter @connected="twitterConnected" />
+      <IpBlocking />
 
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group-btn">
@@ -161,6 +162,7 @@ import ConnectTwitter from "../ConnectTwitter";
 import User from "@/mixins/user";
 import ucFirst from "@/helpers/ucFirst";
 import WatermarkImageUploader from "./WatermarkImageUploader";
+import IpBlocking from "./IpBlocking";
 
 export default {
   name: "PrivacySettingsContent",
@@ -170,7 +172,8 @@ export default {
   components: {
     BlockedUsers,
     ConnectTwitter,
-    WatermarkImageUploader
+    WatermarkImageUploader,
+    IpBlocking
   },
 
   computed: {
