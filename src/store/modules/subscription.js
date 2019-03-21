@@ -65,6 +65,38 @@ const actions = {
         );
       }
     });
+  },
+  success({ dispatch, commit, rootState }) {
+    const payment = rootState.modal.subscribe.data;
+    dispatch(
+      "global/flashToast",
+      `Subscription to ${payment.user.name} is successful`,
+      { root: true }
+    );
+    if (rootState.profile.home.profile) {
+      if (rootState.profile.home.profile.id === payment.user.id) {
+        dispatch(
+          "profile/home/extend",
+          {
+            subscribedBy: true
+          },
+          { root: true }
+        );
+        commit("profile/home/resetPosts", { root: true });
+        dispatch("profile/home/getPosts", { root: true });
+      }
+    }
+    commit(
+      payment.actionPrefix + "/extendUser",
+      {
+        userId: payment.user.id,
+        data: {
+          subscribedBy: true,
+          subscribedByExpire: false
+        }
+      },
+      { root: true }
+    );
   }
 };
 

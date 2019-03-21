@@ -40,7 +40,7 @@ export const askFor3dSecure = options => {
       Store.dispatch("payment/pay/pay", { ...options, token })
         .then(() => {
           if (options.onSuccess) {
-            options.onSuccess();
+            options.onSuccess(options);
           }
         })
         .catch(error => {
