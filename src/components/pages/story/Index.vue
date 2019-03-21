@@ -242,8 +242,12 @@
             {{ viewersText }}
           </div>
         </div>
-        <!-- !isOwner(author.id) && author.canEarn -->
-        <button @click="openTip" v-if="true" type="button" class="btn-tip" />
+        <button
+          @click="openTip"
+          v-if="!isOwner(author.id) && author.canEarn"
+          type="button"
+          class="btn-tip"
+        />
         <Tip
           ref="tip"
           v-if="showTip"
