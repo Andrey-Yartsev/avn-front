@@ -22,8 +22,12 @@
                 class="popup-content-scroll add-post-schedule"
               >
                 <div class="feed reset-btr">
-                  <div class="title-block title-block_row">
-                    <div class="title-block__txt">
+                  <div
+                    class="title-block title-block_row bg-gradient bg-gradient_pseudo"
+                  >
+                    <div
+                      class="title-block__txt bg-gradient__shadow bg-gradient__shadow_mob"
+                    >
                       <span>Scheduled posts</span>
                     </div>
                   </div>

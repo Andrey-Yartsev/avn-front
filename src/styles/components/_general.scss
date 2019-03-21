@@ -654,36 +654,6 @@ video {
     overflow: hidden;
     z-index: 0;
 
-    &:before {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        background: $light;
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.3;
-      }
-    }
-
-    &:after {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        background: $white
-        linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -10px;
-        right: -10px;
-        bottom: 0;
-        z-index: -1;
-      }
-    }
-
-
     + .postCollectionView {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -700,19 +670,6 @@ video {
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 20px;
       padding-right: 20px;
-    }
-
-    &:after {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -10px;
-        right: -10px;
-        bottom: 0;
-        box-shadow: 0 1px 7px rgba(#000, 0.15) inset;
-      }
     }
 
     span {
@@ -790,6 +747,58 @@ video {
       $secondary-color-20 10%,
       $primary-color-20 90%
     );
+  }
+
+  &_pseudo {
+
+    &:before {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background: $light;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.3;
+      }
+    }
+
+    &:after {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background: $white
+        linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -10px;
+        right: -10px;
+        bottom: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+
+  &__shadow {
+
+    &_mob {
+
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -30px;
+          right: -30px;
+          bottom: 0;
+          box-shadow: 0 1px 7px rgba(#000, 0.15) inset;
+        }
+      }
+    }
   }
 }
 

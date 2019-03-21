@@ -3,25 +3,27 @@
     <div class="paymentsStatementsView">
       <div class="payments-wrapper">
         <div
-          class="form-title border-top table-header-title table-header-title_sticky"
+          class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
         >
-          <div class="inner">
-            <span class="semi-transparent">
-              Payments Statements
-            </span>
-          </div>
-          <div class="table-header payments-table-header">
-            <div class="date table__cell">Date</div>
-            <div
-              class="amount table__cell table__cell_selected  table__cell_align table__cell_align-hor-c"
-            >
-              Amount
+          <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+            <div class="inner">
+              <span class="semi-transparent">
+                Payments Statements
+              </span>
             </div>
-            <div class="user table__cell">User</div>
-            <div
-              class="status table__cell table__cell_align table__cell_align-hor-c"
-            >
-              Status
+            <div class="table-header payments-table-header">
+              <div class="date table__cell">Date</div>
+              <div
+                class="amount table__cell table__cell_selected  table__cell_align table__cell_align-hor-c"
+              >
+                Amount
+              </div>
+              <div class="user table__cell">User</div>
+              <div
+                class="status table__cell table__cell_align table__cell_align-hor-c"
+              >
+                Status
+              </div>
             </div>
           </div>
         </div>

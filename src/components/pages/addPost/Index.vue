@@ -11,8 +11,12 @@
         type="new"
       />
       <div class="feed reset-btr" v-if="delayedPosts.length">
-        <div class="title-block title-block_row">
-          <div class="title-block__txt"><span>Scheduled posts</span></div>
+        <div class="title-block title-block_row bg-gradient bg-gradient_pseudo">
+          <div
+            class="title-block__txt bg-gradient__shadow bg-gradient__shadow_mob"
+          >
+            <span>Scheduled posts</span>
+          </div>
         </div>
         <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>
