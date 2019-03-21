@@ -901,6 +901,12 @@
     }
   }
 
+  &__switcher {
+    position: relative;
+    width: 39px;
+    height: 0;
+  }
+
   &__value {
     opacity: .5;
     font-weight: 400;
@@ -921,7 +927,6 @@
       font-size: 24px;
       width: 39px;
       height: 30px;
-      line-height: 32px;
       position: relative;
       z-index: 1;
       color: $secondary-color;
