@@ -4,7 +4,7 @@
       <div class="FooterNavCollectionView">
         <div class="footer-nav">
           <div class="FooterNavView">
-            <router-link to="/support">Help Center</router-link>
+            <router-link to="/help">Help Center</router-link>
           </div>
           <div
             :class="[

@@ -12,10 +12,7 @@
           </div>
           <div class="support-cards cols">
             <div class="col col-1-4" v-for="v in sections" :key="v.id">
-              <router-link
-                :to="'/support/article/' + v.id"
-                class="support-card"
-              >
+              <router-link :to="'/help/article/' + v.id" class="support-card">
                 <span
                   v-if="cssExists(v.icon)"
                   class="support-card__icon"

@@ -11,7 +11,7 @@
         <div class="s-breadcrumbs">
           <div class="container">
             <div class="breadcrumbs" v-if="rootItem">
-              <router-link to="/support" class="breadcrumbs__item"
+              <router-link to="/help" class="breadcrumbs__item"
                 >Help Center</router-link
               >
               <span class="breadcrumbs__item">{{ rootItem.title }}</span>
@@ -170,7 +170,7 @@ export default {
     },
     redirectToDeepestLeaf(item) {
       const deepestItem = this.findDeepestLeafR(item);
-      this.$router.replace("/support/article/" + deepestItem.id);
+      this.$router.replace("/help/article/" + deepestItem.id);
     },
     findDeepestLeafR(item) {
       if (!item.items || !item.items.length) {
@@ -212,7 +212,7 @@ export default {
           opened: id
         });
       } else if (level === 4) {
-        this.$router.push("/support/article/" + id);
+        this.$router.push("/help/article/" + id);
       }
     },
     initMenuState() {

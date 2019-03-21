@@ -407,7 +407,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/support",
+    path: "/help",
     component: HelpCenterHomePage,
     meta: {
       staticPage: true,
@@ -416,7 +416,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/support/search/:text",
+    path: "/help/search/:text",
     component: HelpCenterSearchPage,
     meta: {
       staticPage: true,
@@ -425,7 +425,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/support/article/:id",
+    path: "/help/article/:id",
     component: HelpCenterArticlePage,
     meta: {
       staticPage: true,

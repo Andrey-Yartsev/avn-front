@@ -2,7 +2,7 @@
   <li class="node-tree">
     <a
       @click.prevent="nodeClick"
-      :href="'/support/article/' + node.id"
+      :href="'/help/article/' + node.id"
       class="label"
       :class="{ selected: selectedLink }"
     >

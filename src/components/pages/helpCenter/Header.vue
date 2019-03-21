@@ -17,7 +17,7 @@
     </form>
     <div class="popular-questions suggestions">
       <router-link
-        :to="'/support/article/' + v.id"
+        :to="'/help/article/' + v.id"
         v-for="v in suggestions"
         :key="v.id"
         class="question-item"
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     search() {
-      this.$router.push(`/support/search/${this.searchText}`);
+      this.$router.push(`/help/search/${this.searchText}`);
     }
   }
 };

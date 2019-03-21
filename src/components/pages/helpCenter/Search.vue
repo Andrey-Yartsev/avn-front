@@ -4,7 +4,7 @@
       <div class="s-breadcrumbs">
         <div class="container">
           <div class="breadcrumbs">
-            <router-link to="/support" class="breadcrumbs__item"
+            <router-link to="/help" class="breadcrumbs__item"
               >Help Center
             </router-link>
             <span class="breadcrumbs__item current">Search</span>
@@ -26,7 +26,7 @@
                 <div class="search-results-support">
                   <ol>
                     <li v-for="v in visibleResults" :key="v.id">
-                      <router-link :to="'/support/article/' + v.id">
+                      <router-link :to="'/help/article/' + v.id">
                         <span>{{ v.title }}</span>
                       </router-link>
                       <span v-html="cutLength(v.description)"></span>
