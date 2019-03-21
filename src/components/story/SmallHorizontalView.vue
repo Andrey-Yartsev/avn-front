@@ -28,7 +28,11 @@
           </div>
         </div>
         <div class="user-login reset-ml hidden-mobile" v-if="$mq === 'desktop'">
-          <a :href="`/${post.user.username}`">{{ post.user.username }}</a>
+          <a
+            :href="`/${post.user.username}`"
+            @click.prevent="() => watchAll(post.user.id)"
+            >{{ post.user.username }}</a
+          >
           <span class="followme" v-if="post.user.subscribedOn">
             <span class="followme__txt">Follows you</span>
           </span>
