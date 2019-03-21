@@ -1944,10 +1944,11 @@ export default {
       donut.validateData();
     },
     async updateTopFollowers(statData) {
-      if (!statData || !statData.length) {
+      const _ids = Object.keys(statData);
+      if (!_ids.length) {
         return;
       }
-      const ids = statData.map(item => "ids[]=" + item.key_field);
+      const ids = _ids.map(id => "ids[]=" + id);
       const response = await request(
         `users?access-token=` +
           this.$store.state.auth.token +
