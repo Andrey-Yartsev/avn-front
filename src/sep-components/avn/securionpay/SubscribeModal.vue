@@ -30,7 +30,7 @@ export default {
   methods: {
     subscribe() {
       const onSuccess = () => {
-        // global.location.reload();
+        this.$store.dispatch("subscription/success");
       };
       this._pay(
         {
@@ -41,6 +41,9 @@ export default {
         },
         onSuccess
       );
+    },
+    close() {
+      this.$store.commit("modal/hide", { name: "subscribe" });
     }
   }
 };
