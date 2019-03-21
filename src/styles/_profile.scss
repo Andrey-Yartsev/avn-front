@@ -991,6 +991,10 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 80px;
     }
+
+    .settings-profile-images & {
+      display: none;
+    }
   }
 
   &:before {
