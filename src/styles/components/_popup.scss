@@ -94,10 +94,6 @@
 
       .popup-container-scroll {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
-          min-height: calc(100vh - 254px);
-        }
-
         @include media-breakpoint-up($desktop-breakpoint) {
           position: static;
           overflow: visible;
@@ -109,10 +105,38 @@
           background-color: transparent;
         }
       }
+
+      &:not(.popup-addPost) {
+
+        .popup-container-scroll {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            min-height: calc(100vh - 254px);
+          }
+        }
+      }
+
+      &.popup-addPost {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          background-color: $white;
+          background-image: none;
+        }
+
+        &:before {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            display: none;
+          }
+        }
+      }
     }
 
     &.popup-addPost {
-      overflow: visible;
+
+      &:not(.popup-container_hfluid) {
+        overflow: visible;
+      }
 
       .close {
         top: 6px;
@@ -834,7 +858,7 @@
     }
 
     &.add-post-schedule {
-      max-height: calc(100vh - 216px);
+      max-height: none;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         max-height: calc(100vh - 250px);
