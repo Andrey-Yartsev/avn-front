@@ -244,7 +244,13 @@
         </div>
         <!-- !isOwner(author.id) && author.canEarn -->
         <button @click="openTip" v-if="true" type="button" class="btn-tip" />
-        <Tip v-if="showTip" :user="author" ref="tip" @cancel="closeTip" />
+        <Tip
+          ref="tip"
+          v-if="showTip"
+          :user="author"
+          @cancel="closeTip"
+          :tipId="`h${currentStory.id}`"
+        />
       </div>
       <button type="button" class="close" @click="close"></button>
       <div

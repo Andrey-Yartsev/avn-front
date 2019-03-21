@@ -54,6 +54,7 @@ export default {
         {
           paymentType: "tip",
           userId: this.data.user.id,
+          tipId: this.data.tipId,
           amount,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
