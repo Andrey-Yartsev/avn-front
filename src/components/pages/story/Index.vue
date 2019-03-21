@@ -272,10 +272,7 @@
         <div class="play-button"></div>
       </div>
     </template>
-    <Loader
-      v-if="loading || showLoader || !currentStory || !currentStory.isReady"
-      :fullscreen="false"
-    />
+    <Loader v-if="loadingFinal" :fullscreen="false" />
 
     <div
       class="stories-collection-overlay"
@@ -314,7 +311,8 @@ export default {
       showLoader: false,
       showVideoPlay: false,
       copied: false,
-      isPaused: false
+      isPaused: false,
+      videoDoesNotExists: false
     };
   },
   computed: {
@@ -335,6 +333,17 @@ export default {
     },
     loading() {
       return this.$store.state.stories.loading;
+    },
+    loadingFinal() {
+      if (this.videoDoesNotExists) {
+        return false;
+      }
+      return (
+        this.loading ||
+        this.showLoader ||
+        !this.currentStory ||
+        !this.currentStory.isReady
+      );
     },
     userId() {
       return this.$route.params.userId;
@@ -408,6 +417,10 @@ export default {
     launchVideo() {
       const videoId = this.currentStory.id;
       const videoTag = this.$refs.storyItem;
+
+      this.$refs.storyItem.onerror = () => {
+        this.videoDoesNotExists = true;
+      };
 
       if (!this.videos[videoId]) {
         this.videos[videoId] = videoTag;
