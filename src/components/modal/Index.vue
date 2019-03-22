@@ -36,9 +36,9 @@ export default {
     this.$store.commit("global/setModalOpened", true);
     document.addEventListener("keyup", this.keyUp);
     document.getElementsByTagName("body")[0].classList.add("modal-opened");
-    this.$nextTick(() => {
-      this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
-    });
+  },
+  created() {
+    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
   },
   beforeDestroy() {
     this.$store.commit("global/setModalOpened", false);

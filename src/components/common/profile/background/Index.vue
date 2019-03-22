@@ -31,6 +31,10 @@
 import UserMixin from "@/mixins/user";
 import ProfileBg from "@/mixins/profileBg";
 
+const getScrollbarWidth = () => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
 export default {
   name: "ProfileBackground",
   mixins: [UserMixin, ProfileBg],
@@ -56,6 +60,9 @@ export default {
     scrollBarWidth() {
       return this.$store.state.global.scrollBarWidth;
     }
+  },
+  mounted() {
+    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
   }
 };
 </script>
