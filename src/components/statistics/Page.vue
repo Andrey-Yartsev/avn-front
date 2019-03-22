@@ -84,23 +84,56 @@
       </div>
       -->
         <div class="col col-1-2">
-          <div class="box" id="posts-box" @click="openPostsModal">
+          <!-- <div class="box" id="posts-box" @click="openPostsModal"> -->
+          <div class="box" id="posts-box">
             <h3 class="box-title">
               Posts
               <span class="chart_period">{{ periodTitle }}</span>
             </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="posts" ref="count_posts_new_post"
+                <span
+                  class="posts"
+                  @click="selectLine('posts-posts')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'posts' &&
+                      selectedLineName === 'posts'
+                  }"
+                  ref="count_posts_new_post"
                   >Posts <span>0</span></span
                 >
-                <span class="views" ref="count_posts_view_post"
+                <span
+                  class="views"
+                  @click="selectLine('posts-views')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'posts' &&
+                      selectedLineName === 'views'
+                  }"
+                  ref="count_posts_view_post"
                   >Views <span>0</span></span
                 >
-                <span class="likes" ref="count_posts_post_like"
+                <span
+                  class="likes"
+                  @click="selectLine('posts-likes')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'posts' &&
+                      selectedLineName === 'likes'
+                  }"
+                  ref="count_posts_post_like"
                   >Likes <span>0</span></span
                 >
-                <span class="comments" ref="count_posts_post_comment_added"
+                <span
+                  class="comments"
+                  @click="selectLine('posts-comments')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'posts' &&
+                      selectedLineName === 'comments'
+                  }"
+                  ref="count_posts_post_comment_added"
                   >Comments <span>0</span></span
                 >
               </div>
@@ -770,6 +803,65 @@ const colorScheme = 1;
 const mainColor = "#fff";
 const altColor = "#16181A";
 
+const chartOptions = {
+  type: "serial",
+  categoryField: "date",
+  theme: "default",
+  fontFamily: "arial, sans-serif",
+  autoDisplay: false,
+  autoMargins: false,
+  marginBottom: 0,
+  marginTop: 0,
+  marginLeft: 0,
+  marginRight: 0,
+  chartCursor: {
+    cursorAlpha: 0.1,
+    cursorColor: "#7C8B96",
+    tabIndex: -1,
+    valueLineAlpha: 0,
+    zoomable: false,
+    balloonPointerOrientation: "vertical",
+    bulletsEnabled: true,
+    bulletSize: 10,
+    categoryBalloonEnabled: false,
+    fullWidth: true,
+    leaveAfterTouch: false,
+    oneBalloonOnly: true
+  },
+  balloon: {
+    animationDuration: 0,
+    borderThickness: 0,
+    fadeOutDuration: 0,
+    fillAlpha: 1,
+    fillColor: altColor,
+    offsetX: 0,
+    fontSize: 15,
+    horizontalPadding: 8,
+    verticalPadding: 3,
+    shadowAlpha: 0
+  },
+  categoryAxis: {
+    labelsEnabled: false,
+    axisAlpha: 0,
+    startOnAxis: true,
+    gridAlpha: 0,
+    tickLength: 0
+  },
+  valueAxes: [
+    {
+      labelsEnabled: false,
+      autoGridCount: false,
+      gridCount: 5,
+      axisThickness: 0,
+      dashLength: 6,
+      tickLength: 0,
+      gridAlpha: 0.1,
+      gridColor: "#7c8b96",
+      zeroGridAlpha: 0.1
+    }
+  ]
+};
+
 export default {
   name: "statistics-page",
   mixins: [CalcCount, BuildScale],
@@ -786,7 +878,7 @@ export default {
     return {
       periodTypes,
       periodOptionsOpened: false,
-      currentPeriodType: "last_week",
+      currentPeriodType: "today",
       //
       showedStats: {},
       profileMapData: [],
@@ -797,7 +889,9 @@ export default {
       chartDataSets,
       updateDataTimeoutIds: {},
       updateChartTimeoutIds: {},
-      moneyTableData: {}
+      moneyTableData: {},
+      selectedLineChart: null,
+      selectedLineName: null
     };
   },
   mounted() {
@@ -1194,132 +1288,30 @@ export default {
         ],
         dataProvider: []
       });
-      this.postsChart = window.AmCharts.makeChart("posts_chart", {
-        type: "serial",
-        categoryField: "date",
-        theme: "default",
-        fontFamily: "arial, sans-serif",
-        color: "#аа00",
-        autoDisplay: false,
-        autoMargins: false,
-        marginBottom: 0,
-        marginTop: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        chartCursor: {
-          cursorAlpha: 0.1,
-          cursorColor: "#7C8B96",
-          tabIndex: -1,
-          valueLineAlpha: 0,
-          zoomable: false,
-          balloonPointerOrientation: "vertical",
-          bulletsEnabled: true,
-          bulletSize: 10,
-          categoryBalloonEnabled: false,
-          fullWidth: true,
-          leaveAfterTouch: false,
-          oneBalloonOnly: true
-        },
-        balloon: {
-          animationDuration: 0,
-          borderThickness: 0,
-          fadeOutDuration: 0,
-          fillAlpha: 1,
-          fillColor: altColor,
-          offsetX: 0,
-          fontSize: 15,
-          horizontalPadding: 8,
-          verticalPadding: 3,
-          shadowAlpha: 0
-        },
-        categoryAxis: {
-          labelsEnabled: false,
-          axisAlpha: 0,
-          startOnAxis: true,
-          gridAlpha: 0,
-          tickLength: 0
-        },
-        valueAxes: [
-          {
-            labelsEnabled: false,
-            axisThickness: 0,
-            dashLength: 6,
-            tickLength: 0,
-            gridAlpha: 0.1,
-            gridColor: "#7c8b96",
-            zeroGridAlpha: 0.1,
-            autoGridCount: false,
-            gridCount: 5
-          }
-        ],
-        graphs: [
-          {
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#FF335A",
-            type: "smoothedLine",
-            fillColors: ["#FF335A", mainColor],
-            valueField: "posts",
-            lineThickness: 1.5,
-            balloon: {
+
+      this.buildChart("posts");
+
+      this.storiesChart = window.AmCharts.makeChart("stories_chart", {
+        ...chartOptions,
+        ...{
+          color: "#7c8b96",
+          graphs: [
+            this.getLineChartGraph({
+              valueField: "uploads",
               color: "#FF335A"
-            }
-          },
-          {
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#ff9500",
-            fillColors: ["#ff9500", mainColor],
-            type: "smoothedLine",
-            valueField: "views",
-            lineThickness: 1.5,
-            balloon: {
+            }),
+            this.getLineChartGraph({
+              valueField: "views",
               color: "#ff9500"
-            }
-          },
-          {
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#67cc2e",
-            fillColors: ["#67cc2e", mainColor],
-            type: "smoothedLine",
-            valueField: "likes",
-            lineThickness: 1.5,
-            balloon: {
-              color: "#67cc2e"
-            }
-          },
-          {
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            lineColor: "#3abfd3",
-            fillColors: ["#3abfd3", mainColor],
-            type: "smoothedLine",
-            valueField: "comments",
-            lineThickness: 1.5,
-            balloon: {
+            }),
+            this.getLineChartGraph({
+              valueField: "comments",
               color: "#3abfd3"
-            }
-          }
-        ],
-        dataProvider: []
+            })
+          ]
+        }
       });
+
       // var subscribed_charts = window.AmCharts.makeChart("subscribed_charts",
       //   {
       //     "type": "serial",
@@ -1423,116 +1415,6 @@ export default {
       //   }
       // );
       // const profile_map_data = [];
-      this.storiesChart = window.AmCharts.makeChart("stories_chart", {
-        type: "serial",
-        categoryField: "date",
-        theme: "default",
-        fontFamily: "arial, sans-serif",
-        color: "#7c8b96",
-        autoDisplay: false,
-        autoMargins: false,
-        marginBottom: 0,
-        marginTop: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        chartCursor: {
-          cursorAlpha: 0.1,
-          cursorColor: "#7C8B96",
-          tabIndex: -1,
-          valueLineAlpha: 0,
-          zoomable: false,
-          balloonPointerOrientation: "vertical",
-          bulletsEnabled: true,
-          bulletSize: 10,
-          categoryBalloonEnabled: false,
-          fullWidth: true,
-          leaveAfterTouch: false,
-          oneBalloonOnly: true
-        },
-        balloon: {
-          animationDuration: 0,
-          borderThickness: 0,
-          fadeOutDuration: 0,
-          fillAlpha: 1,
-          fillColor: altColor,
-          offsetX: 0,
-          fontSize: 15,
-          horizontalPadding: 8,
-          verticalPadding: 3,
-          shadowAlpha: 0
-        },
-        categoryAxis: {
-          labelsEnabled: false,
-          axisAlpha: 0,
-          startOnAxis: true,
-          gridAlpha: 0,
-          tickLength: 0
-        },
-        valueAxes: [
-          {
-            labelsEnabled: false,
-            autoGridCount: false,
-            gridCount: 5,
-            axisThickness: 0,
-            dashLength: 6,
-            tickLength: 0,
-            gridAlpha: 0.1,
-            gridColor: "#7c8b96",
-            zeroGridAlpha: 0.1
-          }
-        ],
-        graphs: [
-          {
-            animationPlayed: true,
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            fillAlphas: 0.1,
-            lineColor: "#FF335A",
-            fillColors: ["#FF335A", mainColor],
-            type: "smoothedLine",
-            valueField: "uploads",
-            lineThickness: 1.5,
-            balloon: {
-              color: "#FF335A"
-            }
-          },
-          {
-            animationPlayed: true,
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            fillAlphas: 0.1,
-            lineColor: "#ff9500",
-            fillColors: ["#ff9500", mainColor],
-            type: "smoothedLine",
-            valueField: "views",
-            lineThickness: 1.5,
-            balloon: {
-              color: "#ff9500"
-            }
-          },
-          {
-            animationPlayed: true,
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            fillAlphas: 0.1,
-            lineColor: "#3abfd3",
-            fillColors: ["#3abfd3", mainColor],
-            type: "smoothedLine",
-            valueField: "comments",
-            lineThickness: 1.5,
-            balloon: {
-              color: "#3abfd3"
-            }
-          }
-        ],
-        dataProvider: []
-      });
 
       this.earningsChart = window.AmCharts.makeChart("earnings_chart", {
         name: "earnings",
@@ -1719,6 +1601,25 @@ export default {
         // });
       }
     },
+    fillLineChartByEmptyPoints(name) {
+      this[name + "Chart"].dataProvider = [];
+      const { periodType, count, startDate } = getScaleData(
+        this.currentPeriodType
+      );
+      for (let i = barCount; i >= 1; i--) {
+        let currDate = moment
+          .unix(startDate)
+          .subtract((i * count) / barCount, periodType)
+          .unix();
+        this[name + "Chart"].dataProvider.push({
+          date: currDate,
+          posts: 0,
+          views: 0,
+          likes: 0,
+          comments: 0
+        });
+      }
+    },
     initMapCharts() {
       this.visitorsCountDonut = window.AmCharts.makeChart("visitors_donut", {
         type: "pie",
@@ -1832,6 +1733,51 @@ export default {
           areas: []
         }
       });
+    },
+    getLineChartGraph({
+      valueField,
+      lineColor,
+      fillColor,
+      balloonColor,
+      color
+    }) {
+      if (color) {
+        lineColor = color;
+        fillColor = color;
+        balloonColor = color;
+      }
+      return {
+        bulletSize: 0,
+        bullet: "round",
+        bulletBorderThickness: 0,
+        minBulletSize: 0,
+        animationPlayed: true,
+        fillAlphas: 0.1,
+        lineColor,
+        type: "smoothedLine",
+        fillColors: [fillColor, mainColor],
+        valueField,
+        lineThickness: 1.5,
+        balloon: {
+          color: balloonColor
+        }
+      };
+    },
+    getLinesChartGraph(lines, { selectedLineName }) {
+      let _lines = lines.map(line => this.getLineChartGraph(line));
+      if (selectedLineName) {
+        let selectedLine = _lines.find(
+          line => line.valueField === selectedLineName
+        );
+        // Make selected line more thick
+        selectedLine.lineThickness = 2;
+        selectedLine.fillAlphas = 0.9;
+        // Set line to the end of array to show under others
+        _lines = _lines.filter(line => line.valueField !== selectedLineName);
+        _lines.push(selectedLine);
+        return _lines;
+      }
+      return _lines;
     },
     updateMap(statData) {
       const sortable = [];
@@ -1959,13 +1905,67 @@ export default {
         }
       );
       this.topFollowers = await response.json();
+    },
+    selectLine(name) {
+      const m = name.match(/(.*)-(.*)/);
+      this.selectedLineChart = m[1];
+      this.selectedLineName = m[2];
+      this.rebuildChart(this.selectedLineChart);
+    },
+    rebuildChart(name) {
+      this[name + "Chart"].clear();
+      this.buildChart(name);
+      this.buildChartPointsFromCache(name);
+    },
+    buildChart(name) {
+      let selectedLineName = null;
+      if (name === this.selectedLineChart) {
+        selectedLineName = this.selectedLineName;
+      }
+      if (name === "posts") {
+        this.postsChart = window.AmCharts.makeChart("posts_chart", {
+          ...chartOptions,
+          ...{
+            color: "#аа00",
+            graphs: this.getLinesChartGraph(
+              [
+                {
+                  valueField: "posts",
+                  color: "#FF335A"
+                },
+                {
+                  valueField: "views",
+                  color: "#ff9500"
+                },
+                {
+                  valueField: "likes",
+                  color: "#67cc2e"
+                },
+                {
+                  valueField: "comments",
+                  color: "#3abfd3"
+                }
+              ],
+              {
+                selectedLineName
+              }
+            )
+          }
+        });
+      }
+    },
+    buildChartPointsFromCache(name) {
+      this.fillLineChartByEmptyPoints(name);
+      for (let v of chartStorage[name][this.currentPeriodType]) {
+        this.processData(v, false);
+      }
+      this[name + "Chart"].validateData();
     }
   },
   watch: {
     currentPeriodType() {
       this.buildScales();
       this.fillLineChartsByEmptyPoints();
-      // return;
       this.sendWsRequestsByPeriod(this.currentPeriodType);
       Object.keys(chartTypes).forEach(chartType => {
         for (let v of chartStorage[chartType][this.currentPeriodType]) {
@@ -1978,8 +1978,11 @@ export default {
 };
 </script>
 
-<style>
-#posts-box {
+<style scoped>
+.charts-data > span {
   cursor: pointer;
+}
+.charts-data > span.selected {
+  font-weight: bold;
 }
 </style>
