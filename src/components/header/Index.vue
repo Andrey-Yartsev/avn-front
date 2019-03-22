@@ -4,12 +4,15 @@
     id="site_header"
     :class="{ guest: noAuthHeader }"
     class="main-header"
+    :style="{
+      right: `${-scrollBarWidth}px`
+    }"
   >
-    <div class="header-wrapper">
-      <div
-        :class="['container', 'header_container']"
-        v-bind:style="{ right: scrollBarWidth + 'px' }"
-      >
+    <div
+      class="header-wrapper"
+      :style="{ 'padding-right': `${scrollBarWidth}px` }"
+    >
+      <div :class="['container', 'header_container']">
         <DesktopHeader v-if="!notFound && $mq === 'desktop'" />
         <component :is="logo" class="header-logo" />
         <template v-if="notFound">

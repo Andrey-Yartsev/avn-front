@@ -42,11 +42,19 @@ export default {
   },
   computed: {
     bgStyle() {
+      const style = {
+        "margin-right": `${-this.scrollBarWidth}px`,
+        "padding-right": `${this.scrollBarWidth}px`
+      };
       return this.bgPreview || this.profile.header
         ? {
+            ...style,
             "background-image": `url(${this.bgPreview || this.profile.header})`
           }
-        : {};
+        : style;
+    },
+    scrollBarWidth() {
+      return this.$store.state.global.scrollBarWidth;
     }
   }
 };
