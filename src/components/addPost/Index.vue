@@ -114,9 +114,20 @@
         <div class="add-new-type add-new-type_underline-items line-top">
           <AddNewNav active="post" />
         </div>
-        <div :class="['tweet-new-post', { hidden: !user.isAllowTweets }]">
-          <input class="tweetSend" type="checkbox" :checked="tweetSend" id="tweetPost" />
-          <label class="icon" @click="tweetSend = !tweetSend" for="tweetPost"></label>
+        <div
+          class="tweet-new-post"
+          :class="{
+            hidden: !user.isPostsTweets || !user.isTwitterConnected
+          }"
+        >
+          <input
+            class="tweetSend"
+            type="checkbox"
+            v-model="tweetSend"
+            :checked="tweetSend"
+            id="tweetPost"
+          />
+          <label class="icon" for="tweetPost"></label>
         </div>
         <button
           type="submit"
