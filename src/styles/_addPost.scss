@@ -220,6 +220,7 @@
     color: $main-color;
     opacity: 0.3;
     transition: color 0.3s ease, opacity 0.3s ease;
+    display: block;
 
     &:before {
       font-weight: 400;
