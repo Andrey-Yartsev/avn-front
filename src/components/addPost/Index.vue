@@ -191,9 +191,12 @@ const InitialState = {
 export default {
   name: "AddPost",
   mixins: [FileUpload],
-  data: () => ({
-    ...InitialState
-  }),
+  data() {
+    return {
+      ...InitialState,
+      tweetSend: !!this.$store.state.auth.user.isPostsTweets
+    };
+  },
   components: {
     Loader,
     MediaPreview,
