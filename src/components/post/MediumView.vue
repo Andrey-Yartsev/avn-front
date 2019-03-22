@@ -65,11 +65,12 @@ import Actions from "@/components/common/postParts/actions/Index";
 import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
+import PostOpen from "@/mixins/postOpen";
 import moment from "moment";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, User],
+  mixins: [ModalRouterGoto, User, PostOpen],
   data: function() {
     return {
       showAddCommentForm: false,
@@ -111,9 +112,6 @@ export default {
     funded() {
       return this.$store.state.tip.funded;
     },
-    delayedPost() {
-      return !!this.post.scheduledDate;
-    },
     formattedDate() {
       return `Scheduled for ${moment(this.post.scheduledDate).format(
         "MMM D, hh:mm a"
@@ -129,22 +127,6 @@ export default {
     }
   },
   methods: {
-    openModal() {
-      if (this.delayedPost) {
-        return;
-      }
-
-      if (!this.post.canViewMedia) {
-        this.showSubscribeModal();
-        return;
-      }
-
-      if (!this.post.isMediaReady) {
-        return;
-      }
-
-      this.goToModalRoute(`post/${this.post.id}/${this.from}`);
-    },
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         post: this.post,
@@ -169,9 +151,6 @@ export default {
       }
 
       this.showAddCommentForm = !this.showAddCommentForm;
-    },
-    showSubscribeModal() {
-      this.$store.dispatch("subscription/openSubscribeModal", this.post.author);
     },
     closeTip() {
       this.showTip = false;

@@ -29,7 +29,7 @@ const mutations = {
   },
 
   resetPosts(state) {
-    state.source = "";
+    // state.source = "";
     state.loading = false;
     state.posts = [];
     state.offset = 0;
