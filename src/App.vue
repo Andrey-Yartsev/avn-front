@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="main-container"
-    :class="containerClassName"
-  >
+  <div class="main-container" :class="containerClassName">
     <Loader v-if="loading" class="page-loader" />
     <template v-else>
       <Header />
-      <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px`}">
+      <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
       </main>
       <Sidebar v-if="user" />
