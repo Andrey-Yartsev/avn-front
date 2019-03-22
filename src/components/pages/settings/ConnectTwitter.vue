@@ -116,6 +116,7 @@ export default {
               "auth/extendUser",
               {
                 isTwitterConnected: true,
+                canSendTweets: r.canSendTweets,
                 twitterUsername: r.twitterUsername
               },
               { root: true }

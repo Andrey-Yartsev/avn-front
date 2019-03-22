@@ -117,7 +117,7 @@
         <div
           class="tweet-new-post"
           :class="{
-            hidden: !user.isPostsTweets || !user.isTwitterConnected
+            hidden: !user.canSendTweets
           }"
         >
           <input
