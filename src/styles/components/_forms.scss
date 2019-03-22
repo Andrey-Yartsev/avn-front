@@ -143,9 +143,12 @@ textarea {
 
 .field-valid {
 
-  &:before {
-    content: "\E604";
-    color: $default-secondary-color;
+  .form-field {
+
+    &:before {
+      content: "\E604";
+      color: $default-secondary-color;
+    }
   }
 }
 

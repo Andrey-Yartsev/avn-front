@@ -180,7 +180,7 @@
 
 .tweet-new-post {
   display: none;
-  margin: 0 15px 0 0;
+  margin: 0 15px 0 auto;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     position: absolute;
@@ -567,12 +567,12 @@
         }
       }
     }
-
-    .tweet-new-post {
-      .popup & {
-        margin-left: auto;
-      }
-    }
+    //
+    //.tweet-new-post {
+    //  .popup & {
+    //    margin-left: auto;
+    //  }
+    //}
 
     .submit {
       display: block;
