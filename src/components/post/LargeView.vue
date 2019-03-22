@@ -83,26 +83,13 @@
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
         />
-        <Tip v-if="showTip" :user="post.author" ref="tip" @cancel="closeTip" />
-        <template v-if="!isOwner() && post.author.canEarn">
-          <form class="tip-form hidden" :action="tipActionUrl" target="_blank">
-            <input type="hidden" name="type" value="tip" />
-            <input type="hidden" name="id" :value="post.author.id" />
-            <input type="hidden" name="access-token" :value="accessToken" />
-            <span role="button" class="btn btn-cancel">Cancel</span>
-            <div class="tip-amount-field">
-              <input
-                name="amount"
-                class="tip-amount-input rounded"
-                type="text"
-                pattern="\d{1,5}(?:\.\d{0,2})?"
-                maxlength="8"
-                placeholder="Enter amount"
-              />
-            </div>
-            <button type="submit" class="btn" disabled>Send tip</button>
-          </form>
-        </template>
+        <Tip
+          v-if="showTip"
+          :user="post.author"
+          ref="tip"
+          @cancel="closeTip"
+          :tipId="`${post.id}`"
+        />
       </div>
       <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
         <div class="guest-comments-form">

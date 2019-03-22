@@ -11,7 +11,9 @@
       v-if="post.canComment"
       >{{ post.commentsCount }}</span
     >
-    <template v-if="!isOwner(post.id) && post.author.canEarn && $root.showTips">
+    <template
+      v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
+    >
       <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
     </template>
     <time class="timestamp">
