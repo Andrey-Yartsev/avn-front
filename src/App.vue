@@ -2,12 +2,11 @@
   <div
     class="main-container"
     :class="containerClassName"
-    v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
   >
     <Loader v-if="loading" class="page-loader" />
     <template v-else>
       <Header />
-      <main id="content">
+      <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px`}">
         <router-view />
       </main>
       <Sidebar v-if="user" />
