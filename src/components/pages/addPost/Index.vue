@@ -7,7 +7,7 @@
       <AddPost
         :initialExpanded="true"
         :close="close"
-        where="modal"
+        where="addPost"
         type="new"
       />
       <div class="feed reset-btr" v-if="delayedPosts.length">

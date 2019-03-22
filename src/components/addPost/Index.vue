@@ -125,9 +125,9 @@
             type="checkbox"
             v-model="tweetSend"
             :checked="tweetSend"
-            id="tweetPost"
+            :id="`tweetPost_${where}`"
           />
-          <label class="icon" for="tweetPost"></label>
+          <label class="icon" :for="`tweetPost_${where}`" />
         </div>
         <button
           type="submit"
@@ -180,7 +180,6 @@ Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
-  tweetSend: false,
   postMsg: "",
   isSaving: false,
   isFree: false,
@@ -286,7 +285,7 @@ export default {
     },
     reset() {
       this.expanded = InitialState.expanded;
-      this.tweetSend = InitialState.tweetSend;
+      this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
       this.postMsg = InitialState.postMsg;
       this.isSaving = InitialState.isSaving;
       this.isFree = InitialState.isFree;

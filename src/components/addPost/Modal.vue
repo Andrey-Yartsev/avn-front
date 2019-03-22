@@ -14,7 +14,12 @@
             >
               New post
             </div>
-            <AddPost :initialExpanded="true" :close="close" type="new" />
+            <AddPost
+              :initialExpanded="true"
+              :close="close"
+              type="new"
+              where="modal"
+            />
             <div class="popup-container-scroll" v-if="delayedPosts.length">
               <VuePerfectScrollbar
                 @ps-scroll-y="scrollFunction"
