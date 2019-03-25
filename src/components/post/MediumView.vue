@@ -23,7 +23,6 @@
       <Media
         v-if="medias.length"
         :medias="medias"
-        :showSlider="post.canViewMedia"
         :shouldHasLink="!delayedPost"
         :postId="post.id"
         :openModal="openModal"
@@ -109,9 +108,6 @@ export default {
     medias() {
       if (!this.post.media.length) {
         return [];
-      }
-      if (this.post.media[0] && this.post.media[0].locked) {
-        return [this.post.media[0]];
       }
       return this.post.media;
     },

@@ -33,7 +33,6 @@
       <Media
         v-if="post.media.length"
         :medias="post.media"
-        :showSlider="post.canViewMedia"
         :shouldHasLink="false"
         :postId="post.id"
         mediaSize="full"
