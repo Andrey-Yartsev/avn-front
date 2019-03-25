@@ -100,6 +100,8 @@ export default {
           });
         }
       }
+
+      this.saveMediaFiles();
     },
 
     removeMedia(id) {
@@ -124,6 +126,22 @@ export default {
       );
 
       return await Promise.all(promises);
+    },
+
+    saveMediaFiles() {
+      this.preloadedMedias
+        .filter(i => !i.loaded || !i.alreadySaved)
+        .forEach(media => {
+          const { id, file, width, mediaType } = media;
+          fileUpload(
+            { id, file, width, mediaType },
+            this.setUploadProgress
+          ).then(processId => {
+            this.preloadedMedias = this.preloadedMedias.map(m =>
+              m.id === id ? { ...m, processId } : m
+            );
+          });
+        });
     },
 
     validateFiles(files) {

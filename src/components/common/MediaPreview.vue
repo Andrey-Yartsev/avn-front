@@ -9,7 +9,10 @@
         <div class="loader centered" v-if="!media.previewError"></div>
       </template>
     </span>
-    <div class="progress" :style="{ width: `${media.loaded}%` }"></div>
+    <div
+      class="progress"
+      :style="{ width: `${media.alreadySaved ? 100 : media.loaded}%` }"
+    />
     <span
       class="remove centered"
       @mousedown.prevent.stop="() => {}"

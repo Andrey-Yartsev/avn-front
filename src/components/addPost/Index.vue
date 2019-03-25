@@ -26,7 +26,7 @@
           type="submit"
           class="btn submit sm"
           :disabled="notEhoughData"
-          @click="clickHandler"
+          @click.prevent="clickHandler"
         >
           {{ this.isNew ? "Share" : "Save" }}
         </button>
@@ -133,7 +133,7 @@
           type="submit"
           class="btn submit hidden-mobile"
           :disabled="notEhoughData"
-          @click="clickHandler"
+          @click.prevent="clickHandler"
           v-if="$mq === 'desktop'"
         >
           {{ this.isNew ? "Share" : "Save" }}
@@ -236,13 +236,13 @@ export default {
       return this.$store.state.auth.user.subscribePrice > 0;
     },
     notEhoughData() {
-      if (this.preloadedMedias.length) {
+      if (this.preloadedMedias.filter(i => !i.processId).length) {
+        return true;
+      } else if (!this.preloadedMedias.length && !this.postMsg.trim()) {
+        return true;
+      } else {
         return false;
       }
-      if (!this.postMsg.trim()) {
-        return true;
-      }
-      return false;
     },
     newPost() {
       return this.$store.state.post.newPost;
@@ -273,11 +273,17 @@ export default {
     }
   },
   methods: {
-    clickHandler(e) {
+    clickHandler() {
+      const postData = this.getPostData();
+      if (!postData) return;
+
       if (this.isNew) {
-        this.addNewPost(e);
+        this.$store.dispatch("post/savePost", postData);
       } else {
-        this.updatePost(e);
+        this.$store.dispatch("post/updatePostData", {
+          postId: this.post.id,
+          data: postData
+        });
       }
     },
     resetDatetime() {
@@ -293,43 +299,10 @@ export default {
       this.preloadedMedias = [];
       this.datetime = InitialState.datetime;
     },
-    addNewPost: async function(e) {
-      e.preventDefault();
-
+    getPostData() {
       if (this.notEhoughData) return;
 
       this.isSaving = true;
-
-      const mediaFiles = await this.getMediaFiles();
-      const scheduledDate = moment(this.datetime)
-        .utc()
-        .format("Y-MM-DD HH:mm:ss");
-
-      const newPostData = {
-        text: this.postMsg,
-        tweetSend: this.tweetSend,
-        isScheduled: !!this.datetime,
-        mediaFiles
-      };
-
-      if (newPostData.isScheduled) {
-        newPostData.scheduledDate = scheduledDate;
-      }
-
-      if (this.hasSubscribePrice) {
-        newPostData.isFree = this.isFree;
-      }
-
-      this.$store.dispatch("post/savePost", newPostData);
-    },
-    updatePost: async function(e) {
-      e.preventDefault();
-
-      if (this.notEhoughData) return;
-
-      this.isSaving = true;
-
-      const mediaFiles = await this.getMediaFiles();
 
       const scheduledDate = moment(this.datetime)
         .utc()
@@ -339,7 +312,7 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        mediaFiles
+        mediaFiles: this.preloadedMedias.map(i => i.processId)
       };
 
       if (postData.isScheduled) {
@@ -350,10 +323,7 @@ export default {
         postData.isFree = this.isFree;
       }
 
-      this.$store.dispatch("post/updatePostData", {
-        postId: this.post.id,
-        data: postData
-      });
+      return postData;
     },
     toast(text) {
       this.$store.dispatch("global/flashToast", text, { root: true });
@@ -382,6 +352,7 @@ export default {
           alreadySaved: true,
           fileContent: media.thumb.source,
           id: media.id,
+          processId: media.id,
           mediaType: media.type,
           preview: media.thumb.source
         }));
