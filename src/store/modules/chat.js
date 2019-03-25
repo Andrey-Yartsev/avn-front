@@ -58,11 +58,12 @@ const actions = {
       }
     });
   },
-  sendMessage({ commit, dispatch }, params) {
+  sendMessage({ dispatch }, params) {
     dispatch("_sendMessage", params).then(message => {
-      commit("updateChatLastMessage", {
+      dispatch("updateChatLastMessage", {
         message,
-        fromUserId: params.userId
+        withUserId: params.userId,
+        isMine: true
       });
       const chatExists = state.chats.find(
         chat => chat.withUser.id === params.userId
@@ -86,9 +87,10 @@ const actions = {
       } else if (state.activeUserId === message.fromUser.id) {
         commit("addMessage", message);
       }
-      commit("updateChatLastMessage", {
+      dispatch("updateChatLastMessage", {
         message,
-        fromUserId: message.fromUser.id
+        fromUserId: message.fromUser.id,
+        isMine: message.fromUser.id === rootState.auth.user.id
       });
     }
   },
@@ -120,6 +122,13 @@ const actions = {
         dispatch("auth/extendUser", { hasMessages: false }, { root: true });
       }
     }
+  },
+  updateChatLastMessage({ commit }, { message, withUserId, isMine }) {
+    commit("updateChatLastMessage", {
+      message,
+      withUserId,
+      isMine
+    });
   }
 };
 
@@ -149,11 +158,14 @@ const mutations = {
   setSecondScreen(state, isSecondScreen) {
     state.isSecondScreen = isSecondScreen;
   },
-  updateChatLastMessage(state, { message, fromUserId }) {
+  updateChatLastMessage(state, { message, withUserId, isMine }) {
     state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === fromUserId) {
+      if (chat.withUser.id === withUserId) {
         chat.lastMessage = message;
-        chat.unreadMessagesCount++;
+        if (!isMine) {
+          console.log("isMine");
+          chat.unreadMessagesCount++;
+        }
       }
       return chat;
     });
