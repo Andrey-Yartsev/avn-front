@@ -287,7 +287,14 @@
   &.camera {
     .root-btn__inside {
       &:before {
-        content: "\E627";
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: "\E647";
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          content: "\E627";
+        }
       }
     }
 
