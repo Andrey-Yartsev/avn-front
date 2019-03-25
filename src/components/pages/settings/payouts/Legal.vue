@@ -117,12 +117,12 @@
 
             <div class="form-group form-group_with-label city-zip-form-group">
               <div class="form-group-inner">
-                <span class="label hidden-mobile">
+                <span class="label hidden-mobile" v-if="$mq === 'desktop'">
                   City
                 </span>
                 <div class="row">
                   <div class="col-form-lg">
-                    <label class="hidden-desktop label" for="input-city">
+                    <label class="hidden-desktop label" for="input-city" v-if="$mq === 'mobile'">
                       City
                     </label>
                     <div class="exp-row">

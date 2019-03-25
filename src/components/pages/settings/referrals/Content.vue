@@ -27,7 +27,7 @@
           class="btn border alt btn-copy-url"
           @click="copyToClipboard"
         >
-          Copy<span class="hidden-mobile"> link</span>
+          Copy<span class="hidden-mobile" v-if="$mq === 'desktop'"> link</span>
         </button>
       </div>
     </div>
