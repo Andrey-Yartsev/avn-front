@@ -307,6 +307,19 @@
     }
   }
 
+  &.camera-switcher {
+
+    .root-btn__inside {
+
+      &:before {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: "\E647";
+        }
+      }
+    }
+  }
+
   &.microphone {
     .root-btn__inside {
       &:before {

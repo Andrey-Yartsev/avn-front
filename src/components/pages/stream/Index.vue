@@ -71,6 +71,14 @@
                 </div>
               </div>
               <div
+                class="btn-media-event camera-switcher"
+                v-if="$mq === 'mobile'"
+              >
+                <button type="button" class="root-btn">
+                  <div class="root-btn__inside"></div>
+                </button>
+              </div>
+              <div
                 v-if="streamVideo"
                 v-click-outside="hideStreamVideoMenu"
                 :class="[
@@ -85,6 +93,7 @@
                   type="button"
                   class="root-btn"
                   @click="showStreamVideoMenu"
+                  v-if="$mq === 'desktop'"
                 >
                   <span class="root-btn__inside" />
                 </button>
