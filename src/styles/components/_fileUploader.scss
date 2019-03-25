@@ -82,7 +82,7 @@
         )
         no-repeat 50% / cover;
       transition: width 0.1s;
-      display: none;
+      width: 0;
     }
     &.uploading {
       &:before {
@@ -93,9 +93,6 @@
         top: 0;
         background: rgba(#000, 0.3);
         content: "";
-      }
-      .progress {
-        display: block;
       }
     }
   }
