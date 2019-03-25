@@ -73,13 +73,14 @@
               <div
                 class="btn-media-event camera-switcher"
                 v-if="$mq === 'mobile'"
+                @click="toggleCamera"
               >
                 <button type="button" class="root-btn">
                   <div class="root-btn__inside"></div>
                 </button>
               </div>
               <div
-                v-if="streamVideo"
+                v-if="streamVideos && streamVideos.length > 1"
                 v-click-outside="hideStreamVideoMenu"
                 :class="[
                   'btn-media-event has-dropdown camera',
@@ -373,6 +374,18 @@ export default {
       setTimeout(() => {
         this.isMirrow = Streams.cameraFacingMode === "user";
       }, 333);
+    },
+    toggleCamera() {
+      let selectedCamIndex = this.streamVideos.indexOf(
+        this.streamVideos.find(
+          device => device.deviceId === Streams.videoVars.device.id
+        )
+      );
+
+      selectedCamIndex >= this.streamVideos.length ? 0 : selectedCamIndex + 1;
+      const newVideoDevice = this.streamVideos[selectedCamIndex];
+
+      this.setStreamVideo(newVideoDevice);
     },
     showStreamAudioMenu() {
       this.shownStreamAudioMenu = true;
