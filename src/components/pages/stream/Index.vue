@@ -71,8 +71,10 @@
                 </div>
               </div>
               <div
+                v-if="
+                  $mq === 'mobile' && streamVideos && streamVideos.length > 1
+                "
                 class="btn-media-event camera-switcher"
-                v-if="$mq === 'mobile'"
                 @click="toggleCamera"
               >
                 <button type="button" class="root-btn">
@@ -80,7 +82,9 @@
                 </button>
               </div>
               <div
-                v-if="streamVideos && streamVideos.length > 1"
+                v-if="
+                  $mq === 'desktop' && streamVideos && streamVideos.length > 1
+                "
                 v-click-outside="hideStreamVideoMenu"
                 :class="[
                   'btn-media-event has-dropdown camera',
@@ -94,7 +98,6 @@
                   type="button"
                   class="root-btn"
                   @click="showStreamVideoMenu"
-                  v-if="$mq === 'desktop'"
                 >
                   <span class="root-btn__inside" />
                 </button>
@@ -376,15 +379,14 @@ export default {
       }, 333);
     },
     toggleCamera() {
-      let selectedCamIndex = this.streamVideos.indexOf(
-        this.streamVideos.find(
-          device => device.deviceId === Streams.videoVars.device.id
-        )
+      const currentDevice = this.streamVideos.find(
+        device => device.deviceId === Streams.videoVars.device.id
       );
 
-      selectedCamIndex >= this.streamVideos.length ? 0 : selectedCamIndex + 1;
-      const newVideoDevice = this.streamVideos[selectedCamIndex];
+      let camIndex = this.streamVideos.indexOf(currentDevice);
+      camIndex = camIndex >= this.streamVideos.length - 1 ? 0 : camIndex + 1;
 
+      const newVideoDevice = this.streamVideos[camIndex];
       this.setStreamVideo(newVideoDevice);
     },
     showStreamAudioMenu() {
