@@ -465,13 +465,13 @@ export default {
         if (haveToSave) {
           StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
-              this.$router.push("/");
+              location.href = "/";
             })
             .catch(() => {
-              this.$router.push("/");
+              location.href = "/";
             });
         } else {
-          this.$router.push("/");
+          location.href = "/";
         }
 
         this.startedStreamId = undefined;

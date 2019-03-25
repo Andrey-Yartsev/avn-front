@@ -8,12 +8,7 @@
     :poster="media.preview.source"
     v-if="video"
   >
-    <source
-      v-for="(videoSrc, videoType) in video"
-      :src="videoSrc"
-      :type="`video/${videoType}`"
-      :key="videoType"
-    />
+    <source :src="video.source" type="video/mp4" />
   </video>
 </template>
 
@@ -25,14 +20,14 @@ export default {
   mixins: [PostMediaPropsMixin],
   data() {
     return {
-      video: this.media.video
+      video: this.media.src
     };
   },
   watch: {
     media() {
       this.video = undefined;
       setTimeout(() => {
-        this.video = this.media.video;
+        this.video = this.media.src;
       }, 100);
     }
   }
