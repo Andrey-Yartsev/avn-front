@@ -122,7 +122,11 @@
                 </span>
                 <div class="row">
                   <div class="col-form-lg">
-                    <label class="hidden-desktop label" for="input-city" v-if="$mq === 'mobile'">
+                    <label
+                      class="hidden-desktop label"
+                      for="input-city"
+                      v-if="$mq === 'mobile'"
+                    >
                       City
                     </label>
                     <div class="exp-row">
