@@ -162,12 +162,18 @@ export default {
         return false;
       }
       return this.withUser.isMuted;
+    },
+    activeUserId() {
+      return this.$store.state.chat.activeUserId;
     }
   },
 
   watch: {
     funded() {
       this.closeTip();
+    },
+    activeUserId() {
+      this.reset();
     }
   },
 
@@ -223,6 +229,12 @@ export default {
     resetPrice() {
       this.priceIsSet = false;
       this.price = "";
+    },
+    reset() {
+      this.message = "";
+      this.showPaid = false;
+      this.closeTip();
+      this.resetPrice();
     }
   }
 };
