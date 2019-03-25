@@ -215,11 +215,19 @@ export default {
     setPrice() {
       const p = parseFloat(this.price);
       if (!p) {
-        alert("Use correct number");
+        this.$store.dispatch(
+          "global/setError",
+          { message: "Use correct number" },
+          { root: true }
+        );
         return;
       }
       if (p < 2) {
-        alert("Minimum price is 2$");
+        this.$store.dispatch(
+          "global/setError",
+          { message: "Minimum price is 2$" },
+          { root: true }
+        );
         return;
       }
       this.price = p;
