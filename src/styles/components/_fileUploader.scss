@@ -136,7 +136,7 @@
   }
 
   &.success-status {
-    color: $primary-color;
+    color: green;
 
     &:after {
       content: "\E604";
@@ -144,7 +144,7 @@
   }
 
   &.error-status {
-    color: $secondary-color;
+    color: red;
 
     &:after {
       content: "\E605";
