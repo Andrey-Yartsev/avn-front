@@ -28,8 +28,8 @@ export default {
       resolve(response);
     });
   },
-  async logout() {
-    await tokenRequest("sessions/" + Store.state.auth.token, {
+  logout() {
+    return tokenRequest("sessions/" + Store.state.auth.token, {
       method: "DELETE"
     });
   },

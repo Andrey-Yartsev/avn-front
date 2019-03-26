@@ -11,9 +11,16 @@ const Auth = {
   },
 
   logout(to, from, next) {
-    UserApi.logout();
-    Store.dispatch("auth/logout").then(() => {
-      next("/login");
+    if (!Store.state.auth.token) {
+      Store.dispatch("auth/logout").then(() => {
+        next("/login");
+      });
+      return;
+    }
+    UserApi.logout().then(() => {
+      Store.dispatch("auth/logout").then(() => {
+        next("/login");
+      });
     });
   },
 
