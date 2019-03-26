@@ -23,6 +23,7 @@
                   <button
                     class="newStory btn hidden-desktop"
                     v-if="$mq === 'mobile'"
+                    @click.prevent="createNewStory"
                   >
                     Add
                   </button>
