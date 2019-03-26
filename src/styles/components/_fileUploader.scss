@@ -48,44 +48,7 @@
         height: 100%;
       }
     }
-    .filename {
-      background: $default-avatar-bg;
-      display: inline-block;
-      vertical-align: top;
-      width: 6em;
-      height: 6em;
-      text-align: center;
-      position: relative;
 
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center center;
-        vertical-align: top;
-      }
-      > span {
-        max-width: 90%;
-        //line-height: 6em;
-        display: inline-block;
-        vertical-align: top;
-        @include ellipsis;
-      }
-    }
-    .progress {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 5px;
-      background: linear-gradient(
-          30deg,
-          $default-secondary-color 10%,
-          $default-primary-color 90%
-        )
-        no-repeat 50% / cover;
-      transition: width 0.1s;
-      width: 0;
-    }
     &.uploading {
       &:before {
         position: absolute;
@@ -97,6 +60,47 @@
         content: "";
       }
     }
+  }
+
+  .filename {
+    background: $default-avatar-bg;
+    display: inline-block;
+    vertical-align: top;
+    width: 6em;
+    height: 6em;
+    text-align: center;
+    position: relative;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+      vertical-align: top;
+    }
+
+    > span {
+      max-width: 90%;
+      //line-height: 6em;
+      display: inline-block;
+      vertical-align: top;
+      @include ellipsis;
+    }
+  }
+
+  .progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    background: linear-gradient(
+      30deg,
+      $default-secondary-color 10%,
+      $default-primary-color 90%
+    )
+    no-repeat 50% / cover;
+    transition: width 0.1s;
+    width: 0;
   }
 }
 
