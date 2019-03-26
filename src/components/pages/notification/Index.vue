@@ -21,6 +21,7 @@
     <router-link
       class="addPost-btn-float hidden-desktop"
       to="/addPost"
+      v-if="$mq === 'mobile'"
     ></router-link>
 
     <div class="popup-container-scroll notifications-container">
