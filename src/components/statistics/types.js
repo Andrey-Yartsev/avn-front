@@ -1,6 +1,10 @@
 import moment from "moment";
 
 const chartTypes = {
+  followers: {
+    current_followers: ["Followers", "followers"],
+    current_subscribers: ["Subscribers", "subscribers"]
+  },
   posts: {
     new_post: ["Post", "posts", ["#FF3E33", "#FE3F8C"]],
     view_post: ["View", "views", ["#ff9500", "#ffcc00"]],
@@ -110,6 +114,7 @@ const getScaleData = period => {
 };
 
 const dataProviderKeys = {
+  followers: ["followers", "subscribers"],
   posts: ["posts", "views", "likes", "comments"],
   stories: ["uploads", "views"]
 };

@@ -63,33 +63,43 @@
       />
 
       <div class="cols">
-        <!--
-      <div class="col col-1-3">
-        <div class="box" id="followers-box">
-          <h3 class="box-title">
-            Followers
-            <span class="chart_period"><span ref="chartPeriod1"></span> - Today</span>
-          </h3>
-          <div class="charts-wrapper-outer">
-            <div class="charts-data" id="charts-data-followers">
-              <span class="followers" ref="chartsDataFollowersFollowers">Followers	<span>0</span></span>
-              <span class="subscribed" ref="chartsDataFollowersSubscribed">&nbsp;<span>0</span></span>
-              <span class="unsubscribed" ref="chartsDataFollowersUnsubscribed">&nbsp;<span>0</span></span>
+        <div class="col col-1-3">
+          <div class="box" id="followers-box">
+            <div class="charts-wrapper-outer">
+              <div class="charts-data">
+                <span
+                  class="uploaded"
+                  @click="selectLine('followers-followers')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'followers' &&
+                      selectedLineName === 'followers'
+                  }"
+                  ref="count_followers_followers"
+                  >Followers<span>0</span></span
+                >
+                <span
+                  class="views"
+                  @click="selectLine('followers-subscribers')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'followers' &&
+                      selectedLineName === 'subscribers'
+                  }"
+                  ref="count_stories_story_view"
+                  >Subscribers<span>0</span></span
+                >
+              </div>
+              <div
+                id="followers_chart"
+                class="charts-wrapper charts-wrapper_followers"
+              ></div>
+              <div class="statistics-chart-scale" id="followers_scale"></div>
             </div>
-            <div id="followers_charts" class="charts-wrapper charts-wrapper_followers"></div>
-            <div id="subscribed_charts" class="charts-wrapper charts-wrapper_subscribed"></div>
-            <div class="statistics-chart-scale"></div>
           </div>
         </div>
-      </div>
-      -->
-        <div class="col col-1-2">
-          <!-- <div class="box" id="posts-box" @click="openPostsModal"> -->
+        <div class="col col-1-3">
           <div class="box" id="posts-box">
-            <h3 class="box-title">
-              Posts
-              <span class="chart_period">{{ periodTitle }}</span>
-            </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
                 <span
@@ -145,12 +155,8 @@
             </div>
           </div>
         </div>
-        <div class="col col-1-2">
+        <div class="col col-1-3">
           <div class="box" id="stories-box">
-            <h3 class="box-title">
-              Stories
-              <span class="chart_period">{{ periodTitle }}</span>
-            </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
                 <span
@@ -1025,6 +1031,14 @@ export default {
       this.subscribeUserStatistics(
         "earn_referral_detailed_histogram_" + period
       );
+      //
+
+      this.subscribeUserStatistics(
+        "current_followers_detailed_histogram_" + period
+      );
+      this.subscribeUserStatistics(
+        "current_subscribers_detailed_histogram_" + period
+      );
     },
     setCounter(ref, title, value, postfix) {
       if (title) {
@@ -1227,192 +1241,9 @@ export default {
       });
     },
     initLineCharts() {
-      this.followers_charts = window.AmCharts.makeChart("followers_charts", {
-        type: "serial",
-        categoryField: "date",
-        theme: "default",
-        fontFamily: "arial, sans-serif",
-        color: "#7c8b96",
-        autoDisplay: false,
-        autoMargins: false,
-        marginBottom: 0,
-        marginTop: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        chartCursor: {
-          cursorAlpha: 0.1,
-          cursorColor: "#7C8B96",
-          tabIndex: -1,
-          valueLineAlpha: 0,
-          zoomable: false,
-          balloonPointerOrientation: "vertical",
-          bulletsEnabled: true,
-          bulletSize: 10,
-          categoryBalloonEnabled: false,
-          fullWidth: true,
-          leaveAfterTouch: false,
-          oneBalloonOnly: true
-        },
-        balloon: {
-          animationDuration: 0,
-          borderThickness: 0,
-          fadeOutDuration: 0,
-          fillAlpha: 1,
-          fillColor: altColor,
-          offsetX: 0,
-          fontSize: 15,
-          horizontalPadding: 8,
-          verticalPadding: 3,
-          shadowAlpha: 0
-        },
-        categoryAxis: {
-          labelsEnabled: false,
-          axisAlpha: 0,
-          startOnAxis: true,
-          gridAlpha: 0,
-          tickLength: 0
-        },
-        valueAxes: [
-          {
-            labelsEnabled: false,
-            axisThickness: 0,
-            dashLength: 6,
-            tickLength: 0,
-            gridAlpha: 0.1,
-            gridColor: "#7c8b96",
-            zeroGridAlpha: 0,
-            autoGridCount: false,
-            gridCount: 2
-          }
-        ],
-        graphs: [
-          {
-            bulletSize: 0,
-            bullet: "round",
-            bulletBorderThickness: 0,
-            minBulletSize: 0,
-            animationPlayed: true,
-            fillAlphas: 0.1,
-            type: "smoothedLine",
-            lineColor: "#3abfd3",
-            fillColors: ["#3abfd3", mainColor],
-            valueField: "followers",
-            lineThickness: 1.5,
-            balloon: {
-              color: "#3abfd3"
-            }
-          }
-        ],
-        dataProvider: []
-      });
-
+      this.buildChart("followers");
       this.buildChart("posts");
       this.buildChart("stories");
-
-      // var subscribed_charts = window.AmCharts.makeChart("subscribed_charts",
-      //   {
-      //     "type": "serial",
-      //     "categoryField": "date",
-      //     "theme": "default",
-      //     "fontFamily": "Open Sans",
-      //     "color": "#7c8b96",
-      //     "autoDisplay": false,
-      //     "autoMargins": false,
-      //     "marginBottom": 0,
-      //     "marginTop": 0,
-      //     "marginLeft": 4,
-      //     "marginRight": 4,
-      //     "addClassNames": true,
-      //     "chartCursor": {
-      //       "cursorAlpha": 0.1,
-      //       "cursorColor": "#7C8B96",
-      //       "tabIndex": -1,
-      //       "valueLineAlpha": 0,
-      //       "zoomable": false,
-      //       "balloonPointerOrientation": "vertical",
-      //       "bulletsEnabled": true,
-      //       "bulletSize": 10,
-      //       "categoryBalloonEnabled": false,
-      //       "fullWidth": true,
-      //       "leaveAfterTouch": false,
-      //       "oneBalloonOnly": true
-      //     },
-      //     "balloon": {
-      //       "animationDuration": 0,
-      //       "borderThickness": 0,
-      //       "fadeOutDuration": 0,
-      //       "fillAlpha": 1,
-      //       "fillColor": altColor,
-      //       "offsetX": 0,
-      //       "fontSize": 15,
-      //       "horizontalPadding": 8,
-      //       "verticalPadding": 3,
-      //       "shadowAlpha": 0
-      //     },
-      //     "categoryAxis": {
-      //       "autoGridCount": false,
-      //       "labelsEnabled": false,
-      //       "axisThickness": 0,
-      //       "axisAlpha": 0.1,
-      //       "gridAlpha": 0,
-      //       "gridColor": "#7c8b96",
-      //       "startOnAxis": true,
-      //       "inside": true,
-      //       "tickLength": 2,
-      //       "offset": 1,
-      //       "gridThickness": 2,
-      //       "gridCount": barCount
-      //     },
-      //     "valueAxes": [
-      //       {
-      //         "labelsEnabled": false,
-      //         "axisThickness": 0,
-      //         "tickLength": 0,
-      //         "gridAlpha": 0
-      //       }
-      //     ],
-      //     "graphs": [
-      //       {
-      //         "bulletSize": 0,
-      //         "bullet": "round",
-      //         "bulletBorderThickness": 0,
-      //         "minBulletSize": 0,
-      //         "animationPlayed": true,
-      //         "fillColors": ["#67cc2e", "#b3f43a"],
-      //         "type": "column",
-      //         "valueField": "subscribed",
-      //         "fillAlphas": 1,
-      //         "lineAlpha": 0,
-      //         "fixedColumnWidth": 2,
-      //         "clustered": false,
-      //         "cornerRadiusTop": 1,
-      //         "balloon": {
-      //           "color": "#67cc2e"
-      //         }
-      //       }, {
-      //         "bulletSize": 0,
-      //         "bullet": "round",
-      //         "bulletBorderThickness": 0,
-      //         "minBulletSize": 0,
-      //         "animationPlayed": true,
-      //         "fillColors": ["#FF3E33", "#FE3F8C"],
-      //         "type": "column",
-      //         "valueField": "unsubscribed",
-      //         "fillAlphas": 1,
-      //         "lineAlpha": 0,
-      //         "fixedColumnWidth": 2,
-      //         "clustered": false,
-      //         "cornerRadiusTop": 1,
-      //         "balloon": {
-      //           "color": "#FF3E33"
-      //         }
-      //       }
-      //     ],
-      //     "dataProvider": []
-      //   }
-      // );
-      // const profile_map_data = [];
-
       this.earningsChart = window.AmCharts.makeChart("earnings_chart", {
         name: "earnings",
         type: "serial",
@@ -1554,6 +1385,7 @@ export default {
       });
     },
     fillLineChartsByEmptyPoints() {
+      this.followersChart.dataProvider = [];
       this.postsChart.dataProvider = [];
       this.storiesChart.dataProvider = [];
       this.earningsChart.dataProvider = [];
@@ -1567,10 +1399,11 @@ export default {
           .unix(startDate)
           .subtract((i * count) / barCount, periodType)
           .unix();
-        // this.followers_charts.dataProvider.push({
-        //   date: currDate,
-        //   followers: 0
-        // });
+        this.followersChart.dataProvider.push({
+          date: currDate,
+          followers: 0,
+          subscribers: 0
+        });
         this.postsChart.dataProvider.push({
           date: currDate,
           posts: 0,
@@ -1590,11 +1423,6 @@ export default {
           paid_chat_messages: 0,
           earn_referral: 0
         });
-        // subscribed_charts.dataProvider.push({
-        //   "date": curr_date,
-        //   "subscribed": 0,
-        //   "unsubscribed": 0
-        // });
       }
     },
     fillLineChartByEmptyPoints(name) {
@@ -1924,6 +1752,30 @@ export default {
       }
 
       switch (name) {
+        case "followers":
+          this.followersChart = window.AmCharts.makeChart("followers_chart", {
+            ...chartOptions,
+            ...{
+              color: "#аа00",
+              graphs: this.getLinesChartGraph(
+                [
+                  {
+                    valueField: "followers",
+                    color: "#FF335A"
+                  },
+                  {
+                    valueField: "subscribers",
+                    color: "#ff9500"
+                  }
+                ],
+                {
+                  selectedLineName
+                }
+              )
+            }
+          });
+          break;
+
         case "posts":
           this.postsChart = window.AmCharts.makeChart("posts_chart", {
             ...chartOptions,
