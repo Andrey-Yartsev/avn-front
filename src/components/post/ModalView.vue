@@ -78,7 +78,7 @@ export default {
     },
     next() {
       if (this.index >= this.postsState.posts.length - 3) {
-        if (!this.$store.state.home.allDataReceived) {
+        if (!this.postsState.allDataReceived && !this.postsState.loading) {
           this.$store.dispatch(`${this.from}/getPosts`);
         }
       }

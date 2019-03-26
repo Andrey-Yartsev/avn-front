@@ -6,6 +6,7 @@
           <div class="storyviewers-controls">
             <button class="header-return-btn" @click.prevent="close"></button>
             <a
+              v-if="!fromCollection"
               @click.prevent="addToHighlights"
               class="btn-story-details hidden-mobile"
             />
@@ -121,10 +122,14 @@ export default {
   },
   data() {
     const self = this;
-    const { currIndex } = this.$store.state.modal.storyViewers.data;
+    const {
+      currIndex,
+      fromCollection
+    } = this.$store.state.modal.storyViewers.data;
 
     return {
       currIndex,
+      fromCollection,
       swiperOption: {
         initialSlide: currIndex,
         slidesPerView: "auto",

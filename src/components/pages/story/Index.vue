@@ -637,7 +637,8 @@ export default {
         name: "storyViewers",
         data: {
           stories: this.stories,
-          currIndex: this.currIndex
+          currIndex: this.currIndex,
+          fromCollection: this.isCollections
         }
       });
     },
