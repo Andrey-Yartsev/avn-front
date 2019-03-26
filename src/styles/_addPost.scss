@@ -868,12 +868,13 @@
 }
 
 .post-datetime {
+  color: $primary-color;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  width: 39px;
 
   &.disabled {
-    color: $primary-color;
-    display: flex;
-    align-content: center;
-    align-items: center;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 7px;
