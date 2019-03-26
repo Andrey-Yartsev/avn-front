@@ -55,6 +55,8 @@
       width: 6em;
       height: 6em;
       text-align: center;
+      position: relative;
+
       img {
         height: 100%;
         width: 100%;
@@ -64,7 +66,7 @@
       }
       > span {
         max-width: 90%;
-        line-height: 6em;
+        //line-height: 6em;
         display: inline-block;
         vertical-align: top;
         @include ellipsis;
@@ -94,6 +96,58 @@
         background: rgba(#000, 0.3);
         content: "";
       }
+    }
+  }
+}
+
+.attachment-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  z-index: 2;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  border-radius: 50%;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 0;
+  }
+
+  &:after {
+    @include icon-font;
+    font-size: 30px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    z-index: 1;
+  }
+
+  &.success-status {
+    color: $primary-color;
+
+    &:after {
+      content: "\E604";
+    }
+  }
+
+  &.error-status {
+    color: $secondary-color;
+
+    &:after {
+      content: "\E605";
     }
   }
 }

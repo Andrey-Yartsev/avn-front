@@ -3,6 +3,8 @@
     <span class="filename">
       <template v-if="media.preview">
         <img :src="media.preview" :title="media.userFileName" />
+        <span class="attachment-status success-status"></span>
+        <span class="attachment-status error-status"></span>
       </template>
       <template v-else>
         <span>{{ media.userFileName }}</span>
