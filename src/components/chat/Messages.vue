@@ -228,6 +228,7 @@ export default {
             "global/flashToast",
             "You should add card in payment settings"
           );
+          this.$router.push("/settings/payments");
           return;
         }
 
