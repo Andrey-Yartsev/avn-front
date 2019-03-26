@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden-desktop">
+  <div class="hidden-desktop" v-if="$mq === 'mobile'">
     <div class="form-title">
       <div class="inner">
         <span class="semi-transparent">Login</span>

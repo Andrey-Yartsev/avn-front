@@ -162,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="text-centered hidden-desktop">
+      <div class="text-centered hidden-desktop" v-if="$mq === 'mobile'">
         <button
           class="btn lg btn_not-bold btn_fix-width btn_fix-width_mob-lg saveChanges"
           type="submit"

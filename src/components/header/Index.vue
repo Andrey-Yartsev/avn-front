@@ -71,6 +71,7 @@
               <router-link
                 to="/login"
                 class="btn border alt login hidden-desktop"
+                v-if="$mq === 'mobile'"
                 >Log in</router-link
               >
               <div

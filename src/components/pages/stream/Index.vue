@@ -15,7 +15,9 @@
             >Live video</span
           >
           <button class="close" @click="close">
-            <span class="category-name category-name_live hidden-desktop"
+            <span
+              class="category-name category-name_live hidden-desktop"
+              v-if="$mq === 'mobile'"
               >Live Video</span
             >
           </button>

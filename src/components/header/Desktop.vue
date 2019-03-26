@@ -27,6 +27,7 @@
       <router-link
         class="menu-item-notifications header-nav__item hidden-desktop"
         to="/notifications"
+        v-if="$mq === 'mobile'"
         ><span>Notifications</span>
       </router-link>
 
@@ -41,6 +42,7 @@
       <router-link
         class="menu-item-messages header-nav__item hidden-desktop"
         to="/chat"
+        v-if="$mq === 'mobile'"
         ><span>Messages</span></router-link
       >
     </template>

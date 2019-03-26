@@ -3,6 +3,7 @@
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
       class="addPost-btn-float hidden-desktop"
+      v-if="$mq === 'mobile'"
       to="/addPost"
     ></router-link>
     <div class="container">
