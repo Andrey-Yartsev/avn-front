@@ -3,8 +3,8 @@
     <span class="filename">
       <template v-if="media.preview">
         <img :src="media.preview" :title="media.userFileName" />
-        <span class="attachment-status success-status"></span>
-        <span class="attachment-status error-status"></span>
+        <span class="attachment-status success-status" v-if="media.processId" />
+        <span class="attachment-status error-status" v-if="media.uploadError" />
       </template>
       <template v-else>
         <span>{{ media.userFileName }}</span>
@@ -12,8 +12,9 @@
       </template>
     </span>
     <div
+      v-if="!media.uploadError && !media.processId"
       class="progress"
-      :style="{ width: `${media.alreadySaved ? 100 : media.loaded}%` }"
+      :style="{ width: `${media.loaded}%` }"
     />
     <span
       class="remove centered"

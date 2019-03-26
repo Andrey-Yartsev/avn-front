@@ -130,17 +130,21 @@ export default {
 
     saveMediaFiles() {
       this.preloadedMedias
-        .filter(i => !i.loaded || !i.alreadySaved)
+        .filter(i => !i.processId && !i.loaded)
         .forEach(media => {
           const { id, file, width, mediaType } = media;
-          fileUpload(
-            { id, file, width, mediaType },
-            this.setUploadProgress
-          ).then(processId => {
-            this.preloadedMedias = this.preloadedMedias.map(m =>
-              m.id === id ? { ...m, processId } : m
-            );
-          });
+          fileUpload({ id, file, width, mediaType }, this.setUploadProgress)
+            .then(processId => {
+              this.preloadedMedias = this.preloadedMedias.map(m =>
+                m.id === id ? { ...m, processId } : m
+              );
+            })
+            .catch(() => {
+              this.preloadedMedias = this.preloadedMedias.map(m =>
+                m.id === id ? { ...m, uploadError: true } : m
+              );
+              this.toast("Can't upload file");
+            });
         });
     },
 

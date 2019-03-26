@@ -356,6 +356,9 @@ export default {
           mediaType: media.type,
           preview: media.thumb.source
         }));
+        this.mediaType = this.preloadedMedias.length
+          ? this.preloadedMedias[0].mediaType
+          : "all";
       }
     }
   },
