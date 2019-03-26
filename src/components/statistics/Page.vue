@@ -153,10 +153,26 @@
             </h3>
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="uploaded" ref="count_stories_story_added"
+                <span
+                  class="uploaded"
+                  @click="selectLine('stories-uploads')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'stories' &&
+                      selectedLineName === 'uploads'
+                  }"
+                  ref="count_stories_story_added"
                   >Uploaded<span>0</span></span
                 >
-                <span class="views" ref="count_stories_story_view"
+                <span
+                  class="views"
+                  @click="selectLine('stories-views')"
+                  :class="{
+                    selected:
+                      selectedLineChart === 'stories' &&
+                      selectedLineName === 'views'
+                  }"
+                  ref="count_stories_story_view"
                   >Views<span>0</span></span
                 >
                 <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
@@ -750,7 +766,8 @@ import {
   lineTypes,
   chartDataSets,
   periodTypeNames,
-  getScaleData
+  getScaleData,
+  dataProviderKeys
 } from "./types";
 
 const colorSchemes = [
@@ -878,7 +895,7 @@ export default {
     return {
       periodTypes,
       periodOptionsOpened: false,
-      currentPeriodType: "today",
+      currentPeriodType: "last_week",
       //
       showedStats: {},
       profileMapData: [],
@@ -1290,27 +1307,7 @@ export default {
       });
 
       this.buildChart("posts");
-
-      this.storiesChart = window.AmCharts.makeChart("stories_chart", {
-        ...chartOptions,
-        ...{
-          color: "#7c8b96",
-          graphs: [
-            this.getLineChartGraph({
-              valueField: "uploads",
-              color: "#FF335A"
-            }),
-            this.getLineChartGraph({
-              valueField: "views",
-              color: "#ff9500"
-            }),
-            this.getLineChartGraph({
-              valueField: "comments",
-              color: "#3abfd3"
-            })
-          ]
-        }
-      });
+      this.buildChart("stories");
 
       // var subscribed_charts = window.AmCharts.makeChart("subscribed_charts",
       //   {
@@ -1584,8 +1581,7 @@ export default {
         this.storiesChart.dataProvider.push({
           date: currDate,
           uploads: 0,
-          views: 0,
-          comments: 0
+          views: 0
         });
         this.earningsChart.dataProvider.push({
           date: currDate,
@@ -1606,18 +1602,22 @@ export default {
       const { periodType, count, startDate } = getScaleData(
         this.currentPeriodType
       );
+      const keys = {};
+      dataProviderKeys[name].forEach(k => (keys[k] = 0));
       for (let i = barCount; i >= 1; i--) {
         let currDate = moment
           .unix(startDate)
           .subtract((i * count) / barCount, periodType)
           .unix();
-        this[name + "Chart"].dataProvider.push({
-          date: currDate,
-          posts: 0,
-          views: 0,
-          likes: 0,
-          comments: 0
-        });
+
+        this[name + "Chart"].dataProvider.push(
+          Object.assign(
+            {
+              date: currDate
+            },
+            keys
+          )
+        );
       }
     },
     initMapCharts() {
@@ -1922,36 +1922,63 @@ export default {
       if (name === this.selectedLineChart) {
         selectedLineName = this.selectedLineName;
       }
-      if (name === "posts") {
-        this.postsChart = window.AmCharts.makeChart("posts_chart", {
-          ...chartOptions,
-          ...{
-            color: "#аа00",
-            graphs: this.getLinesChartGraph(
-              [
+
+      switch (name) {
+        case "posts":
+          this.postsChart = window.AmCharts.makeChart("posts_chart", {
+            ...chartOptions,
+            ...{
+              color: "#аа00",
+              graphs: this.getLinesChartGraph(
+                [
+                  {
+                    valueField: "posts",
+                    color: "#FF335A"
+                  },
+                  {
+                    valueField: "views",
+                    color: "#ff9500"
+                  },
+                  {
+                    valueField: "likes",
+                    color: "#67cc2e"
+                  },
+                  {
+                    valueField: "comments",
+                    color: "#3abfd3"
+                  }
+                ],
                 {
-                  valueField: "posts",
-                  color: "#FF335A"
-                },
-                {
-                  valueField: "views",
-                  color: "#ff9500"
-                },
-                {
-                  valueField: "likes",
-                  color: "#67cc2e"
-                },
-                {
-                  valueField: "comments",
-                  color: "#3abfd3"
+                  selectedLineName
                 }
-              ],
-              {
-                selectedLineName
-              }
-            )
-          }
-        });
+              )
+            }
+          });
+          break;
+
+        case "stories":
+          this.storiesChart = window.AmCharts.makeChart("stories_chart", {
+            ...chartOptions,
+            ...{
+              color: "#7c8b96",
+              graphs: this.getLinesChartGraph(
+                [
+                  {
+                    valueField: "uploads",
+                    color: "#FF335A"
+                  },
+                  {
+                    valueField: "views",
+                    color: "#ff9500"
+                  }
+                ],
+                {
+                  selectedLineName
+                }
+              )
+            }
+          });
+          break;
       }
     },
     buildChartPointsFromCache(name) {

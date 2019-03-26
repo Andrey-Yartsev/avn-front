@@ -109,6 +109,11 @@ const getScaleData = period => {
   };
 };
 
+const dataProviderKeys = {
+  posts: ["posts", "views", "likes", "comments"],
+  stories: ["uploads", "views"]
+};
+
 export {
   chartTypes,
   periodTypes,
@@ -116,5 +121,6 @@ export {
   lineTypes,
   chartDataSets,
   periodTypeNames,
-  getScaleData
+  getScaleData,
+  dataProviderKeys
 };
