@@ -12,15 +12,18 @@ import store from "@/store";
 
 import "@/iconfont";
 
-Sentry.init({
-  dsn: "https://452f146ea4c343d79547432c09816d85@sentry.io/1419946",
-  integrations: [
-    new Sentry.Integrations.Vue({
-      Vue,
-      attachProps: true
-    })
-  ]
-});
+if (process.env.NODE_ENV !== "development") {
+  Sentry.init({
+    dsn: "https://452f146ea4c343d79547432c09816d85@sentry.io/1419946",
+    integrations: [
+      new Sentry.Integrations.Vue({
+        Vue,
+        attachProps: true
+      })
+    ],
+    environment: process.env.VUE_APP_LOG_MODE
+  });
+}
 
 Vue.config.productionTip = false;
 
