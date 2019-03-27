@@ -33,7 +33,11 @@
             <div class="form-group form-group_with-label">
               <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
-                <BirthDateSelect v-if="false" class="birthDateWrapper" v-model="birthDate" />
+                <BirthDateSelect
+                  v-if="false"
+                  class="birthDateWrapper"
+                  v-model="birthDate"
+                />
                 <Datetime
                   :inputId="`post-datetime__switcher_birthdate`"
                   class="post-datetime__switcher"
