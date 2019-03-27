@@ -8,7 +8,7 @@
             <PostLargeView
               v-if="post"
               :post="post"
-              :from="from"
+              :from="backFrom || from"
               v-on:addExtraClassName="addExtraClassName"
             />
           </div>
@@ -31,7 +31,8 @@ export default {
   data() {
     return {
       index: undefined,
-      extraClassName: "lightbox-post"
+      extraClassName: "lightbox-post",
+      backFrom: undefined
     };
   },
   computed: {
@@ -42,15 +43,7 @@ export default {
       return parseInt(this.$store.state.modalRouter.params.postId);
     },
     post() {
-      return this.postFromList || this.postFromServer;
-    },
-    postFromList() {
-      return this.posts.length && this.index !== undefined
-        ? this.posts[this.index]
-        : null;
-    },
-    postFromServer() {
-      return this.$store.state.postPage.posts[0];
+      return this.posts[this.index];
     },
     length() {
       return this.posts.length;
@@ -59,7 +52,9 @@ export default {
       return `post/${this.postId}`;
     },
     postsState() {
-      if (this.from === "profile/home") {
+      if (this.backFrom) {
+        return this.$store.state.postPage;
+      } else if (this.from === "profile/home") {
         return this.$store.state.profile.home;
       } else if (this.from === "home") {
         return this.$store.state.home;
@@ -109,6 +104,7 @@ export default {
   },
   watch: {
     index() {
+      if (this.backFrom === "postPage") return;
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
@@ -117,7 +113,14 @@ export default {
   },
   created() {
     if (!this.posts.length) {
-      this.$store.dispatch("postPage/getPost", { postId: this.postId });
+      this.backFrom = "postPage";
+      this.$store.commit("postPage/resetPageState");
+      this.$store
+        .dispatch("postPage/getPost", { postId: this.postId })
+        .then(() => {
+          this.index = 0;
+        });
+
       return;
     }
 
