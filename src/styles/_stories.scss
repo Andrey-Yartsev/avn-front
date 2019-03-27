@@ -338,6 +338,10 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       font-size: 11px;
     }
+    
+    .explore-page & {
+      display: block;
+    }
 
     a {
       font-size: 12px;
