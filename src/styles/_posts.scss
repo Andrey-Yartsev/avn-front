@@ -277,20 +277,24 @@
       display: flex;
       align-items: center;
       margin: 0 25px 0 0;
-      cursor: pointer;
       min-width: 54px;
       transition: color 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 58px;
-        &:hover {
-          opacity: 1;
-          color: $primary-color;
-        }
       }
 
       @include media-breakpoint-down($mobile-breakpoint) {
         margin: 0 10px 0 0;
+      }
+
+      &:hover {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: 1;
+          color: $primary-color;
+        }
       }
 
       &.active {
@@ -320,6 +324,21 @@
           @include media-breakpoint-down($desktop-breakpoint) {
             display: none;
           }
+        }
+      }
+    }
+  }
+
+  .right-col {
+
+    .comments {
+      cursor: auto;
+
+      &:hover {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: .3;
+          color: $main-color;
         }
       }
     }
