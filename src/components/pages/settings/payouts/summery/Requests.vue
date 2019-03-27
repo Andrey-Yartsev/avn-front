@@ -2,7 +2,8 @@
   <div class="payouts-requests">
     <div class="PayoutsRequestsCollectionView">
       <div
-        class="form-title table-header-title border-top table-header-title_sticky bg-gradient bg-gradient_pseudo"
+        class="form-title border-top table-header-title_sticky bg-gradient bg-gradient_pseudo"
+        :class="{ 'table-header-title': !loading }"
       >
         <div class="bg-gradient__shadow bg-gradient__shadow_mob">
           <div class="inner">
@@ -17,11 +18,6 @@
               Withdraw Request
             </button>
           </div>
-
-          <div class="border-top loader-container" v-if="loading">
-            <Loader :fullscreen="false" text="" class="transparent small" />
-          </div>
-
           <div class="table-header payouts-table-header" v-if="!loading">
             <div
               class="date table__cell table__cell_align table__cell_align-hor-c"
@@ -40,6 +36,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="border-top shadow-block no-padding loader-container"
+        v-if="loading"
+      >
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
       </div>
       <div class="shadow-block no-padding" v-if="!loading && items.length">
         <div class="table-wrapper">
@@ -81,6 +83,7 @@ export default {
   computed: {
     loading() {
       return this.$store.state.payouts.requests.fetchLoading;
+      // return true;
     },
     items() {
       if (!this.$store.state.payouts.requests.fetchResult) {

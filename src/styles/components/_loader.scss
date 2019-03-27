@@ -115,6 +115,17 @@
           margin-top: -40px;
       }
     }
+
+    &.no-text {
+
+      .loader-text {
+        transform: translate(-50%, -50%);
+
+        &:after {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   .loader-text {

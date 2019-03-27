@@ -596,6 +596,7 @@ label {
     display: flex;
     justify-content: space-between;
     flex: 1;
+    z-index: 3;
 
     .semi-transparent {
       display: block;
