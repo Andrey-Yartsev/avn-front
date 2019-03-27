@@ -112,7 +112,7 @@ export default {
     }
   },
   created() {
-    if (!this.posts.length) {
+    if (!this.length) {
       this.backFrom = "postPage";
       this.$store.commit("postPage/resetPageState");
       this.$store
