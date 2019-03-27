@@ -33,7 +33,18 @@
             <div class="form-group form-group_with-label">
               <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
-                <BirthDateSelect class="birthDateWrapper" v-model="birthDate" />
+                <BirthDateSelect v-if="false" class="birthDateWrapper" v-model="birthDate" />
+                <Datetime
+                  :inputId="`post-datetime__switcher_birthdate`"
+                  class="post-datetime__switcher"
+                  type="datetime"
+                  v-model="birthDate"
+                  input-class="post-datetime__input"
+                  use12-hour
+                  :flow="['year', 'month', 'date']"
+                  :phrases="{ ok: 'ok', cancel: 'Cancel' }"
+                />
+                <span v-if="birthDate">{{ formattedBirthdate }}</span>
               </div>
             </div>
 
@@ -255,6 +266,12 @@ import BirthDateSelect from "./BirthDateSelect";
 import states from "./states";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
+import { Datetime } from "vue-datetime";
+import { Settings } from "luxon";
+import moment from "moment";
+import "vue-datetime/dist/vue-datetime.css";
+
+Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
@@ -262,7 +279,8 @@ export default {
   mixins: [Form],
 
   components: {
-    BirthDateSelect
+    BirthDateSelect,
+    Datetime
   },
 
   data() {
@@ -298,6 +316,9 @@ export default {
         return false;
       }
       return true;
+    },
+    formattedBirthdate() {
+      return moment(this.birthDate).format("LL");
     }
   },
 
