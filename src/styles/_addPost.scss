@@ -1142,6 +1142,17 @@
   }
 }
 
+.vdatetime-year-picker,
+.vdatetime-month-picker {
+
+  &__item {
+
+    &--selected {
+      color: $primary-color;
+    }
+  }
+}
+
 .open-timepicker {
 
   #site_header {

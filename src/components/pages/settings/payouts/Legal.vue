@@ -38,17 +38,19 @@
                   class="birthDateWrapper"
                   v-model="birthDate"
                 />
-                <Datetime
-                  :inputId="`post-datetime__switcher_birthdate`"
-                  class="post-datetime__switcher"
-                  type="datetime"
-                  v-model="birthDate"
-                  input-class="post-datetime__input"
-                  use12-hour
-                  :flow="['year', 'month', 'date']"
-                  :phrases="{ ok: 'ok', cancel: 'Cancel' }"
-                />
-                <span v-if="birthDate">{{ formattedBirthdate }}</span>
+                <div class="field-birthday">
+                  <Datetime
+                    :inputId="`post-datetime__switcher_birthdate`"
+                    class="field-birthday__input"
+                    type="datetime"
+                    v-model="birthDate"
+                    input-class=""
+                    use12-hour
+                    :flow="['year', 'month', 'date']"
+                    :phrases="{ ok: 'ok', cancel: 'Cancel' }"
+                  />
+                  <span v-if="birthDate" class="field-birthday__text">{{ formattedBirthdate }}</span>
+                </div>
               </div>
             </div>
 
