@@ -9,6 +9,13 @@
             <span class="semi-transparent">
               Payouts Statements
             </span>
+            <button
+              class="btn-edit-bank"
+              @click="withdrawRequest"
+              :disabled="withdrawRequesting"
+            >
+              Withdraw Request
+            </button>
           </div>
 
           <div class="border-top loader-container" v-if="loading">
@@ -34,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="shadow-block no-padding" v-if="!loading && !items.length">
+      <div class="shadow-block no-padding" v-if="!loading && items.length">
         <div class="table-wrapper">
           <div class="table payouts-table">
             <div
@@ -85,12 +92,19 @@ export default {
         v.id = n;
         return v;
       });
+    },
+    withdrawRequesting() {
+      return this.$store.state.payouts.requests.withdrawLoading;
     }
   },
 
   methods: {
     dt(date) {
       return moment(date).format("DD MMM, hh:mm");
+    },
+    async withdrawRequest() {
+      await this.$store.dispatch("payouts/requests/withdraw");
+      this.$store.dispatch("payouts/requests/fetch");
     }
   },
 
