@@ -5,7 +5,7 @@
       slot="content"
     >
       <div class="content">
-        <div class="popup-alert__title">Error</div>
+        <div class="popup-alert__title">{{ error.title || "Error" }}</div>
         <div class="popup-alert__body">
           {{ error.message }}
         </div>

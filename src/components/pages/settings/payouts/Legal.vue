@@ -239,7 +239,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave"
+              :disabled="!canSave || saving"
             >
               Next
             </button>
@@ -298,6 +298,9 @@ export default {
         return false;
       }
       return true;
+    },
+    saving() {
+      return this.$store.state.payouts.legal.saveLoading;
     }
   },
 
