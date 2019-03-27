@@ -30,7 +30,7 @@ export default class Ws extends EventEmitter {
     ws.onopen = () => {
       this.connected = true;
       this.connecting = false;
-      new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
+      Fingerprint.getV18({}, fp => {
         ws.send(
           JSON.stringify({
             sess: Store.state.auth.token,

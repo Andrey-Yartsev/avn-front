@@ -10,7 +10,7 @@
   "dependencies": {
     "@sentry/browser": "^4.6.4",
     "deepmerge": "^3.1.0",
-    "fingerprintjs2": "^1.8.6",
+    "fingerprintjs2": "^2.0.6",
     "luxon": "^1.11.4",
     "moment": "^2.24.0",
     "query-string": "^6.3.0",
