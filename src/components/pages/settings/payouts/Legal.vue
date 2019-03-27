@@ -49,7 +49,9 @@
                     :flow="['year', 'month', 'date']"
                     :phrases="{ ok: 'ok', cancel: 'Cancel' }"
                   />
-                  <span v-if="birthDate" class="field-birthday__text">{{ formattedBirthdate }}</span>
+                  <span v-if="birthDate" class="field-birthday__text">{{
+                    formattedBirthdate
+                  }}</span>
                 </div>
               </div>
             </div>
