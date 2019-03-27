@@ -878,6 +878,7 @@
   width: 39px;
 
   &.disabled {
+    pointer-events: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 7px;
