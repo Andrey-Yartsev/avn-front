@@ -34,7 +34,7 @@
   align-content: center;
   align-items: center;
   flex-wrap: wrap;
-  max-width: calc(100% - 70px);
+  width: calc(100% - 70px);
 
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 25px;
@@ -53,7 +53,7 @@
   }
 
   .user-name {
-    max-width: calc(100% - 44px);
+    //max-width: calc(100% - 44px);
     display: flex;
     align-content: center;
     align-items: center;
