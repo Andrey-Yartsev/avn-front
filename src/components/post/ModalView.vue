@@ -6,6 +6,7 @@
         <div class="content">
           <div class="postPageWrapper">
             <PostLargeView
+              v-if="post"
               :post="post"
               :from="from"
               v-on:addExtraClassName="addExtraClassName"
@@ -29,7 +30,7 @@ export default {
   mixins: [ModalRouterGoto],
   data() {
     return {
-      index: null,
+      index: undefined,
       extraClassName: "lightbox-post"
     };
   },
@@ -41,7 +42,15 @@ export default {
       return parseInt(this.$store.state.modalRouter.params.postId);
     },
     post() {
-      return this.posts[this.index];
+      return this.postFromList || this.postFromServer;
+    },
+    postFromList() {
+      return this.posts.length && this.index !== undefined
+        ? this.posts[this.index]
+        : null;
+    },
+    postFromServer() {
+      return this.$store.state.postPage.posts[0];
     },
     length() {
       return this.posts.length;
@@ -83,11 +92,23 @@ export default {
         }
       }
       this.index++;
+    },
+    setIndex() {
+      if (this.index) {
+        return;
+      }
+
+      const post = this.posts.find(({ id }) => {
+        return id === this.postId;
+      });
+
+      if (post) {
+        this.index = this.posts.indexOf(post);
+      }
     }
   },
   watch: {
-    index: function() {
-      // this.scroll();
+    index() {
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
@@ -95,10 +116,12 @@ export default {
     }
   },
   created() {
-    const post = this.posts.find(({ id }) => {
-      return id === this.postId;
-    });
-    this.index = this.posts.indexOf(post);
+    if (!this.posts.length) {
+      this.$store.dispatch("postPage/getPost", { postId: this.postId });
+      return;
+    }
+
+    this.setIndex();
   }
 };
 </script>

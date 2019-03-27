@@ -40,7 +40,7 @@ const mutations = {
       state.offset = state.offset + state.limit;
     }
     state.loading = false;
-    state.marker = state.marker.length ? state.marker : marker;
+    state.marker = state.marker ? state.marker : marker;
     state.user = user;
   },
   setSource(state, { source }) {
