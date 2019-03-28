@@ -1,5 +1,8 @@
 <template>
-  <div class="main-container" :class="containerClassName">
+  <div v-if="!hasLayout">
+    <router-view />
+  </div>
+  <div v-else class="main-container" :class="containerClassName">
     <Loader v-if="loading" class="page-loader" />
     <template v-else>
       <Header />
@@ -188,6 +191,9 @@ export default {
     },
     loginInProgress() {
       return this.$store.state.auth.loginInProgress;
+    },
+    hasLayout() {
+      return !this.$route.meta.noLayout;
     }
   },
   watch: {

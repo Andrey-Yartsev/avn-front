@@ -19,7 +19,8 @@ if (process.env.NODE_ENV !== "development") {
       new Sentry.Integrations.Vue({
         Vue,
         attachProps: true
-      })
+      }),
+      new Sentry.Integrations.RewriteFrames()
     ],
     environment: process.env.VUE_APP_LOG_MODE
   });

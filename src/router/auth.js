@@ -3,25 +3,10 @@
 import Store from "@/store";
 import BrowserStore from "store";
 import Twitter from "@/utils/twitter";
-import UserApi from "@/api/user";
 
 const Auth = {
   get loggedIn() {
     return Store.state.auth.user;
-  },
-
-  logout(to, from, next) {
-    if (!Store.state.auth.token) {
-      Store.dispatch("auth/logout").then(() => {
-        next("/login");
-      });
-      return;
-    }
-    UserApi.logout().then(() => {
-      Store.dispatch("auth/logout").then(() => {
-        next("/login");
-      });
-    });
   },
 
   init(to, from, next) {

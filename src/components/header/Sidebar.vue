@@ -74,8 +74,10 @@
                 to="/contact"
                 >Help</router-link
               >
-              <a class="user-menu-item user-menu-item__logout" href="/logout"
-                >Log out</a
+              <router-link
+                class="user-menu-item user-menu-item__logout"
+                to="/logout"
+                >Log out</router-link
               >
             </div>
           </nav>

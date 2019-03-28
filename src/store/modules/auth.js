@@ -98,8 +98,19 @@ const actions = {
   },
 
   logout({ commit, dispatch }) {
-    commit("logout");
-    dispatch("payouts/reset", null, { root: true });
+    return new Promise(accept => {
+      const token = BrowserStore.get("token");
+      if (!token) {
+        accept();
+        return;
+      }
+      commit("setToken", token);
+      UserApi.logout().then(() => {
+        commit("logout");
+        dispatch("payouts/reset", null, { root: true });
+        accept();
+      });
+    });
   },
 
   setOtpAuth({ commit }, flag) {
