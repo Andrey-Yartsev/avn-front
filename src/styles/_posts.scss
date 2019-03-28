@@ -433,11 +433,8 @@
   .container & {
 
     img {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 130px);
-        object-fit: cover;
-      }
+      max-height: calc(100vh - 130px);
+      object-fit: cover;
     }
   }
 
@@ -446,10 +443,7 @@
     .special-site-header & {
 
       img {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-height: calc(100vh - 180px);
-        }
+        max-height: calc(100vh - 180px);
       }
     }
   }
