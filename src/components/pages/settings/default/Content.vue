@@ -178,6 +178,8 @@
                       <option value="0">Not specified</option>
                       <option value="1">Male</option>
                       <option value="2">Female</option>
+                      <option value="3">Non-Binary</option>
+                      <option value="4">Trans</option>
                     </select>
                   </div>
                 </div>
