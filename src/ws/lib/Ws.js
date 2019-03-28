@@ -4,12 +4,17 @@ import Fingerprint from "fingerprintjs2";
 
 import Store from "@/store";
 
+const isOffline = () => {
+  return global.navigator && global.navigator.onLine === false;
+};
+
 export default class Ws extends EventEmitter {
   constructor(actions, type) {
     super();
     this.type = type || "ws";
     this.actions = actions;
     this.doNotReconnect = false;
+    this.queue = [];
   }
   start(reconnect) {
     this.connecting = true;
@@ -30,6 +35,7 @@ export default class Ws extends EventEmitter {
     ws.onopen = () => {
       this.connected = true;
       this.connecting = false;
+      this.clearQueue();
       Fingerprint.getV18({}, fp => {
         ws.send(
           JSON.stringify({
@@ -81,12 +87,26 @@ export default class Ws extends EventEmitter {
     console.log(this.type + " disconnected");
   }
   send(data) {
-    if (!this.connected) {
+    const message = { ...data, sess: Store.state.auth.token };
+    if (!this.connected || this.connecting || isOffline()) {
       console.log(
         this.type + " not connected. Can't send " + JSON.stringify(data)
       );
+      this.queue.push(message);
     }
-    data.sess = Store.state.auth.token;
-    this.ws.send(JSON.stringify(data));
+
+    if (!this.connected || this.connecting) {
+      return;
+    }
+
+    this.ws.send(JSON.stringify(message));
+  }
+  clearQueue() {
+    if (this.connected && this.queue.length) {
+      this.queue.forEach(message => {
+        this.ws.send(JSON.stringify(message));
+      });
+      this.queue = [];
+    }
   }
 }
