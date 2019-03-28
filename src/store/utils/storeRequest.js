@@ -1,6 +1,7 @@
 import anyRequest from "@/utils/anyRequest";
 import tokenRequest from "../../utils/tokenRequest";
 import request from "../../utils/request";
+import Router from "@/router";
 
 const storeRequest = (
   requestType,
@@ -23,6 +24,11 @@ const storeRequest = (
     const Request = requests[requestType];
     Request(apiPath, options)
       .then(async response => {
+        console.log(response);
+        if (response.status === 401) {
+          Router.push("/login");
+          return;
+        }
         if (response.status === 200) {
           commit(prefix + "Success", true);
           let r = await response.json();
