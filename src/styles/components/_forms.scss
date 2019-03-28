@@ -309,6 +309,10 @@ label {
         padding-right: 30px;
       }
     }
+
+    &.disabled {
+      pointer-events: none;
+    }
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
