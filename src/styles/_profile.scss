@@ -758,15 +758,15 @@
     margin: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 5px 15px 5px;
+      padding: 5px 15px;
     }
+  }
 
-    .btn {
+  .btn {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 100px;
-        flex: 0 0 100px;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 100px;
+      flex: 0 0 100px;
     }
   }
 }
