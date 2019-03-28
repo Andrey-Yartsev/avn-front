@@ -1671,9 +1671,12 @@
 
     .popup-container-scroll {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: calc(100vh - 44px);
-        background-color: $white;
+      .popup & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          min-height: calc(100vh - 44px);
+          background-color: $white;
+        }
       }
     }
   }
