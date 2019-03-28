@@ -40,6 +40,7 @@
                     type="datetime"
                     v-model="birthDate"
                     input-class=""
+                    v-validate="'required'"
                     use12-hour
                     :flow="['year', 'month', 'date']"
                     :phrases="{ ok: 'ok', cancel: 'Cancel' }"
