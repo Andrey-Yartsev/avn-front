@@ -573,12 +573,17 @@ button,
   border: none;
   transition: color 0.3s ease, opacity 0.3s ease;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    &:hover {
-      opacity: 1;
-      color: $primary-color;
+  &:not(.actions__btn) {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+        color: $primary-color;
+      }
     }
   }
+
   &.active {
     opacity: 1;
     color: $primary-color;

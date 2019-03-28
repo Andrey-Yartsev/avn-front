@@ -17,6 +17,17 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "withdraw",
+  apiPath: "payouts/requests",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  }
+});
+
 export default {
   namespaced: true,
   state,

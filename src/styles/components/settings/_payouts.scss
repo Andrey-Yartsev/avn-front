@@ -259,14 +259,22 @@
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    background-position: 200% 460px;
-    overflow: hidden;
+    //background-position: 200% 460px;
+    //overflow: hidden;
     position: relative;
   }
 
   @include media-breakpoint-down($tablet-breakpoint) {
-    background-position: 100px 460px;
+    //background-position: 100px 460px;
   }
+
+  &.with-bg-picture {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      overflow: hidden;
+    }
+  }
+
   &-legal-form {
     select {
       color: $main-color;

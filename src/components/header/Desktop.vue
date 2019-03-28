@@ -18,7 +18,7 @@
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
         :class="{
-          unread: user.hasNotifications,
+          unread: user && user.hasNotifications,
           active: !!$route.meta.notifications
         }"
         @click.prevent="goToNotifications"

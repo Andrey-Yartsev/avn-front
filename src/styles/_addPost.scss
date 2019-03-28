@@ -114,6 +114,21 @@
     }
   }
 
+  .popup-addPost &,
+  .addPost-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100vh;
+    }
+
+    + .loader-content {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
   .addPost-page & {
 
     .lds-dual-ring {
@@ -878,6 +893,7 @@
   width: 39px;
 
   &.disabled {
+    pointer-events: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 7px;

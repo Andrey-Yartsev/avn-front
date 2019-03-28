@@ -41,7 +41,9 @@ const storeRequest = (
           }
           commit(prefix + "Success", false);
           commit(prefix + "Requested");
-          reject(r.error);
+          if (response.status !== 400) {
+            reject(r.error);
+          }
         }
       })
       .catch(error => {

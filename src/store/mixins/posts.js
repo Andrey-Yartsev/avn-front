@@ -142,7 +142,7 @@ export default {
         state.offset = state.offset + state.limit;
       }
       state.loading = false;
-      state.marker = state.marker.length ? state.marker : marker;
+      state.marker = state.marker ? state.marker : marker;
     },
 
     postsRequestFail(state, err) {
@@ -249,7 +249,7 @@ export default {
 
         return {
           ...post,
-          fullComments: [...post.fullComments, ...list],
+          fullComments: [...(post.fullComments || []), ...list],
           comments: page === 1 ? list : post.comments,
           commentsLoading: false,
           commentMarker: marker

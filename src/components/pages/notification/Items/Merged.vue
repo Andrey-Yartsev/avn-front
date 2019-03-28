@@ -68,10 +68,9 @@
             <router-link
               :to="'/' + v.items[0].user.username"
               class="name name_break-text"
-              >{{ v.items[0].user.name }}
-            </router-link>
-            and
-            <router-link
+              >{{ v.items[0].user.name }}</router-link
+            >{{ `and `
+            }}<router-link
               :to="'/' + v.items[0].user.username"
               class="name name_break-text"
               >{{ v.items[1].user.name }}</router-link
@@ -83,8 +82,7 @@
               class="name name_break-text"
               v-if="v.items.length > 2"
               >{{ v.items[0].user.name }}</router-link
-            >
-            and {{ v.items.length - 1 }} others</template
+            >{{ `and ${v.items.length - 1} others ` }}</template
           >
           <span class="notification-summary" v-html="v.items[0].text" />
         </div>

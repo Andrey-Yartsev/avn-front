@@ -93,7 +93,7 @@
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">
-        <a href="/login" class="register" @click.prevent="openLogin">{{
+        <a href="/login" class="register" @click.prevent.stop="openLogin">{{
           loginText
         }}</a>
       </p>

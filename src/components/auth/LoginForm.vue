@@ -106,7 +106,11 @@
         <div class="signUp__body">
           <h3>Don't have an account yet?</h3>
           <p>
-            <a href="/register" class="register" @click.prevent="openSignup">
+            <a
+              href="/register"
+              class="register"
+              @click.prevent.stop="openSignup"
+            >
               {{ signUpText }}
             </a>
           </p>

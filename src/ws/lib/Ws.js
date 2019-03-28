@@ -44,6 +44,10 @@ export default class Ws extends EventEmitter {
     };
     ws.onmessage = r => {
       const data = JSON.parse(r.data);
+      if (data.payoutsApproved !== undefined) {
+        this.actions.payoutsLegalResult(data);
+        return;
+      }
       this.emit("message", data);
       // console.log("ws:", data);
       const keys = Object.keys(data);

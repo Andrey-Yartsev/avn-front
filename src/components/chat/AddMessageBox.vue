@@ -26,7 +26,7 @@
         v-if="withUser && withUser.canEarn && $root.showTips"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
-        :class="{ active: showTip }"
+        :class="{ active: showTip, disabled: showPaid }"
       ></button>
 
       <div
@@ -91,7 +91,7 @@
 
       <button
         class="getPaid btn-el"
-        :class="{ active: showPaid }"
+        :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
       ></button>

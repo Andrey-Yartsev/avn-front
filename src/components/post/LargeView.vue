@@ -31,7 +31,7 @@
         v-if="$mq === 'mobile'"
       ></p>
       <Media
-        v-if="post.media.length"
+        v-if="post.media && post.media.length"
         :medias="post.media"
         :shouldHasLink="false"
         :postId="post.id"
@@ -230,7 +230,7 @@ export default {
   created() {
     this.init();
     setTimeout(() => {
-      if (this.$root.ws) {
+      if (this.$root.ws && this.post.id) {
         this.$root.ws.send({
           act: "collect",
           message: "view_post",

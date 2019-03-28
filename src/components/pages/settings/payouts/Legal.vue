@@ -258,7 +258,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave"
+              :disabled="!canSave || saving"
             >
               Next
             </button>
@@ -327,6 +327,9 @@ export default {
     },
     formattedBirthdate() {
       return moment(this.birthDate).format("LL");
+    },
+    saving() {
+      return this.$store.state.payouts.legal.saveLoading;
     }
   },
 
