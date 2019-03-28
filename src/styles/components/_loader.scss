@@ -183,6 +183,17 @@
 
   &_payouts {
     margin-bottom: 20px;
+
+    .lds-dual-ring.with-text {
+
+      .loader-text {
+        transform: translate(-50%, -50%);
+
+        &:after {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   .settings-page & {

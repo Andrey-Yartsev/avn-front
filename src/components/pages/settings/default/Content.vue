@@ -119,7 +119,10 @@
       >
         <div class="container">
           <div class="form-group form-group_with-label">
-            <label class="form-group-inner subscription" :class="{'disabled': !user.canEarn}">
+            <label
+              class="form-group-inner subscription"
+              :class="{ disabled: !user.canEarn }"
+            >
               <span class="label">Subscription</span>
               <span class="subscription__field field-symbol-currency">
                 <span class="subscription__per-month">per month</span>
