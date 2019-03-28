@@ -33,11 +33,6 @@
             <div class="form-group form-group_with-label">
               <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
-                <BirthDateSelect
-                  v-if="false"
-                  class="birthDateWrapper"
-                  v-model="birthDate"
-                />
                 <div class="field-birthday">
                   <Datetime
                     :inputId="`post-datetime__switcher_birthdate`"
@@ -354,7 +349,8 @@ export default {
       const data = {};
       for (let f of fields) {
         if (this[f]) {
-          data[f] = this[f];
+          data[f] =
+            f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
       data.personalIdImage = this.uploadedPhoto;
