@@ -114,6 +114,14 @@
     }
   }
 
+  .popup-addPost &,
+  .addPost-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100vh;
+    }
+  }
+
   .addPost-page & {
 
     .lds-dual-ring {
