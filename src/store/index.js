@@ -40,6 +40,7 @@ import staticPage from "@/store/modules/staticPage";
 import support from "@/store/modules/support";
 import credits from "@/store/modules/credits";
 import postQueue from "@/store/modules/postQueue";
+import genders from "@/store/modules/genders";
 
 Vue.use(Vuex);
 
@@ -50,6 +51,7 @@ const store = new Vuex.Store({
     global,
     auth,
     init,
+    genders,
     home,
     profile,
     signUp,

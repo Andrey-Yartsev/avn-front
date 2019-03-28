@@ -176,10 +176,13 @@
                       v-model="localUser.gender"
                     >
                       <option value="0">Not specified</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
-                      <option value="3">Non-Binary</option>
-                      <option value="4">Trans</option>
+                      <option
+                        v-for="gender in genderList"
+                        :value="gender.id"
+                        :key="gender.id"
+                      >
+                        {{ gender.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -235,6 +238,9 @@ export default {
         return null;
       }
       return this.localUser.about;
+    },
+    genderList() {
+      return this.$store.state.genders.data;
     }
   },
 
