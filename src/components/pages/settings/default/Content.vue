@@ -107,6 +107,7 @@
             type="checkbox"
             id="is_paid_subscription"
             name="isWantEarn"
+            @change="changeWantEarn"
             v-model="localUser.isWantEarn"
           />
           <span></span>
@@ -219,6 +220,9 @@ export default {
         primaryColor: this.localUser.primaryColor,
         secondColor: this.localUser.secondColor
       });
+      this.$store.dispatch("profile/update", this.localUser);
+    },
+    changeWantEarn() {
       this.$store.dispatch("profile/update", this.localUser);
     }
   },
