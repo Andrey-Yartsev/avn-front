@@ -164,7 +164,6 @@
 <script>
 import Common from "../common";
 import Loader from "@/components/common/Loader";
-import Auth from "@/utils/auth";
 import { fromNow } from "@/helpers/datetime";
 
 export default {
@@ -232,7 +231,7 @@ export default {
     deleteSession(session) {
       this.$store.dispatch("sessions/delete", session.id).then(() => {
         if (session.isCurrent) {
-          Auth.logout();
+          this.$router.replace("/logout");
         }
       });
     },
@@ -241,7 +240,7 @@ export default {
         return;
       }
       this.$store.dispatch("sessions/deleteAll").then(() => {
-        Auth.logout();
+        this.$router.replace("/logout");
       });
     },
     copyKey() {
