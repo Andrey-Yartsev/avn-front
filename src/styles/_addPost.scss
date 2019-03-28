@@ -120,6 +120,13 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       height: 100vh;
     }
+
+    + .loader-content {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 
   .addPost-page & {
