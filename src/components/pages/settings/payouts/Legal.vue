@@ -331,7 +331,11 @@ export default {
 
   methods: {
     async upload() {
-      this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+      try {
+        this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+      } catch (error) {
+        this.$store.dispatch("global/setError", error);
+      }
     },
     save() {
       const fields = [
