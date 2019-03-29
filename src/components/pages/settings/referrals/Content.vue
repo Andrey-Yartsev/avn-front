@@ -37,19 +37,21 @@
       >
         <div class="bg-gradient__shadow bg-gradient__shadow_mob">
           <div class="inner">
-            <span class="semi-transparent referrals-text">
-              Referrals
-            </span>
-            <!--
+            <span class="semi-transparent referrals-text"> Referrals</span>
+
             <form class="referrals-search b-search-form">
-              <input type="text" class="rounded sm" placeholder="Search"/>
+              <input
+                type="text"
+                class="rounded sm"
+                placeholder="Search"
+                v-model="filter"
+              />
               <button
                 type="submit"
                 disabled=""
                 class="b-search-form__btn"
               ></button>
             </form>
-            -->
           </div>
           <div class="table-header referrals-table-header">
             <div class="user table__cell">
@@ -84,7 +86,7 @@
                 </router-link>
               </div>
               <div
-                class="amount table__cell table__cell_align table__cell_align-hor-c"
+                class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
               >
                 ${{ v.bonusSum }}
               </div>
@@ -104,7 +106,7 @@
 
 <script>
 import Common from "../common";
-import { fromNow } from "@/helpers/datetime";
+import moment from "moment";
 
 export default {
   name: "ReferralsSettingsContent",
@@ -112,6 +114,12 @@ export default {
   mixins: [Common],
 
   components: {},
+
+  data() {
+    return {
+      filter: ""
+    };
+  },
 
   computed: {
     url() {
@@ -124,7 +132,19 @@ export default {
       );
     },
     items() {
-      return this.$store.state.referrals.items;
+      const items = this.$store.state.referrals.items;
+      if (this.filter) {
+        return items.filter(v => {
+          if (v.username.match(new RegExp(".*" + this.filter + ".*"))) {
+            return true;
+          }
+          if (v.name.match(new RegExp(".*" + this.filter + ".*"))) {
+            return true;
+          }
+          return false;
+        });
+      }
+      return items;
     }
   },
 
@@ -135,7 +155,7 @@ export default {
       });
     },
     time(date) {
-      return fromNow(date);
+      return moment(date).format("DD MMM");
     }
   },
 
