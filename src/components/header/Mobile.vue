@@ -9,7 +9,7 @@
     <router-link
       to="/notifications"
       class="menu-item-notifications header-nav__item hidden-desktop"
-      :class="{ unread: user.hasNotifications }"
+      :class="{ unread: user && user.hasNotifications }"
       @click.prevent="goToModalRoute('/notifications')"
       ><span>Notifications</span></router-link
     >
