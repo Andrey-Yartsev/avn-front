@@ -71,19 +71,27 @@
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
           <div class="table payouts-table">
-            <div class="PayoutsRequestsView">
-              <div class="item" v-for="v in items" :key="v.id">
-                <div class="user table__cell">{{ v.name }}</div>
-                <div
-                  class="amount table__cell table__cell_align table__cell_align-hor-c"
-                >
-                  ${{ v.bonusSum }}
-                </div>
-                <div
-                  class="joined table__cell table__cell_align table__cell_align-hor-c"
-                >
-                  {{ time(v.joinedAt) }}
-                </div>
+            <div class="item" v-for="v in items" :key="v.id">
+              <div class="user table__cell">
+                <router-link :to="'/' + v.username" class="userview-block">
+                  <span class="avatar avatar_sm">
+                    <span class="avatar__img">
+                      <img :src="v.avatar" v-if="v.avatar" />
+                    </span>
+                  </span>
+                  <div class="name">{{ v.name }}</div>
+                  <span class="user-login reset-ml">{{ v.username }}</span>
+                </router-link>
+              </div>
+              <div
+                class="amount table__cell table__cell_align table__cell_align-hor-c"
+              >
+                ${{ v.bonusSum }}
+              </div>
+              <div
+                class="joined table__cell table__cell_align table__cell_align-hor-c"
+              >
+                {{ time(v.joinedAt) }}
               </div>
             </div>
           </div>
