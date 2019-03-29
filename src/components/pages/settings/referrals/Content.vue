@@ -104,6 +104,10 @@ export default {
         this.$store.dispatch("global/flashToast", "Referral URL copied!");
       });
     }
+  },
+
+  mounted() {
+    this.$store.dispatch("referrals/fetch");
   }
 };
 </script>

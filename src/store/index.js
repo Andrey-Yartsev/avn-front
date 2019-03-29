@@ -41,6 +41,7 @@ import support from "@/store/modules/support";
 import credits from "@/store/modules/credits";
 import postQueue from "@/store/modules/postQueue";
 import genders from "@/store/modules/genders";
+import referrals from "@/store/modules/referrals";
 
 Vue.use(Vuex);
 
@@ -87,7 +88,8 @@ const store = new Vuex.Store({
     staticPage,
     support,
     credits,
-    postQueue
+    postQueue,
+    referrals
   }
 });
 
