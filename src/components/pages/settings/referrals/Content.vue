@@ -31,7 +31,7 @@
         </button>
       </div>
     </div>
-    <div class="ReferralsBlockCollectionView">
+    <div class="ReferralsBlockCollectionView PayoutsRequestsCollectionView">
       <div
         class="form-title border-top table-header-title referrals-form-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
       >
@@ -40,14 +40,16 @@
             <span class="semi-transparent referrals-text">
               Referrals
             </span>
+            <!--
             <form class="referrals-search b-search-form">
-              <input type="text" class="rounded sm" placeholder="Search" />
+              <input type="text" class="rounded sm" placeholder="Search"/>
               <button
                 type="submit"
                 disabled=""
                 class="b-search-form__btn"
               ></button>
             </form>
+            -->
           </div>
           <div class="table-header referrals-table-header">
             <div class="user table__cell">
@@ -68,7 +70,23 @@
       </div>
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
-          <div class="table referrals-table"></div>
+          <div class="table payouts-table">
+            <div class="PayoutsRequestsView">
+              <div class="item" v-for="v in items" :key="v.id">
+                <div class="user table__cell">{{ v.name }}</div>
+                <div
+                  class="amount table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  ${{ v.bonusSum }}
+                </div>
+                <div
+                  class="joined table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  {{ time(v.joinedAt) }}
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="empty-table-info"><span>Empty here for now</span></div>
         </div>
       </div>
@@ -78,6 +96,7 @@
 
 <script>
 import Common from "../common";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "ReferralsSettingsContent",
@@ -95,6 +114,9 @@ export default {
         "/?code=" +
         this.user.referralUrl
       );
+    },
+    items() {
+      return this.$store.state.referrals.items;
     }
   },
 
@@ -103,6 +125,9 @@ export default {
       this.$copyText(this.url).then(() => {
         this.$store.dispatch("global/flashToast", "Referral URL copied!");
       });
+    },
+    time(date) {
+      return fromNow(date);
     }
   },
 
