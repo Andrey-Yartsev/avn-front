@@ -10,7 +10,7 @@ const storeRequest = (
   dispatch,
   apiPath,
   options,
-  { state, localError, resultKey, resultConvert }
+  { state, localError, resultKey, resultConvert, throw400 }
 ) => {
   return new Promise((accept, reject) => {
     commit(prefix + "ResetError");
@@ -46,7 +46,7 @@ const storeRequest = (
           }
           commit(prefix + "Success", false);
           commit(prefix + "Requested");
-          if (response.status !== 400) {
+          if (response.status !== 400 || throw400) {
             reject(r.error);
           }
         }
@@ -126,7 +126,8 @@ const createRequestAction = ({
   defaultResultValue,
   defaultLoading,
   paramsToOptions,
-  paramsToPath
+  paramsToPath,
+  throw400
 }) => {
   if (!resultKey) {
     resultKey = prefix + "Result";
@@ -154,7 +155,8 @@ const createRequestAction = ({
         state,
         localError,
         resultKey,
-        resultConvert
+        resultConvert,
+        throw400
       }
     );
   };
