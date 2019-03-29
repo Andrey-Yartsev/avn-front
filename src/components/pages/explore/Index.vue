@@ -192,6 +192,8 @@ export default {
   },
   methods: {
     scrollFunction(e) {
+      if (!e) return;
+
       const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
       const scrolledEnought = scrollWidth - (offsetWidth + scrollLeft) < 600;
       if (
