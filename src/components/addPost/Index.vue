@@ -124,7 +124,6 @@
             class="tweetSend"
             type="checkbox"
             v-model="tweetSend"
-            :checked="tweetSend"
             :id="`tweetPost_${where}`"
           />
           <label class="icon" :for="`tweetPost_${where}`" />
