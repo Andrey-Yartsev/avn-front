@@ -113,6 +113,27 @@ const actions = {
     });
   },
 
+  mute({ dispatch }, user) {
+    dispatch(`user/mute`, user.id, { root: true }).then(r => {
+      if (r.success) {
+        dispatch("extend", {
+          id: user.id,
+          isMuted: true
+        });
+      }
+    });
+  },
+  unmute({ dispatch }, user) {
+    dispatch(`user/unmute`, user.id, { root: true }).then(r => {
+      if (r.success) {
+        dispatch("extend", {
+          id: user.id,
+          isMuted: false
+        });
+      }
+    });
+  },
+
   extend({ commit, state }, data) {
     commit("profile", { ...state.profile, ...data });
   },
