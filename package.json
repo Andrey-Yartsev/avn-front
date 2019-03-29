@@ -16,6 +16,7 @@
     "query-string": "^6.3.0",
     "streaming-module": "git+ssh://gogs@git.retloko.com:44468/alien.pavlov/streaming-module.git",
     "throttle-debounce": "^2.1.0",
+    "unfetch": "^4.1.0",
     "vee-validate": "^2.1.7",
     "vue": "^2.6.8",
     "vue-awesome-swiper": "^3.1.3",
