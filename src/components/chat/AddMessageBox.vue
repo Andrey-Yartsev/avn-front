@@ -209,6 +209,9 @@ export default {
       this.$emit("send", opt);
     },
     closeTip() {
+      if (!this.$refs.tip) {
+        return;
+      }
       this.showTip = false;
       this.$refs.tip.reset();
     },
