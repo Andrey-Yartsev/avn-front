@@ -12,7 +12,7 @@
       </template>
     </span>
     <div
-      v-if="true"
+      v-if="!media.uploadError && !media.processId"
       class="progress"
       :style="{ width: `${media.loaded}%` }"
     />
@@ -26,7 +26,7 @@
       </svg>
     </span>
     <Loader
-      v-if="true"
+      v-if="!media.uploadError && !media.processId"
       :fullscreen="false"
       text=""
       class="small"
