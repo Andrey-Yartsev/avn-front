@@ -25,10 +25,17 @@
         <use xlink:href="#icon-remove"></use>
       </svg>
     </span>
+    <Loader
+      v-if="!media.uploadError && !media.processId"
+      :fullscreen="false"
+      text=""
+    />
   </div>
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
+
 export default {
   name: "MediaPreview",
   props: {
@@ -40,6 +47,9 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  components: {
+    Loader
   },
   methods: {
     remove() {
