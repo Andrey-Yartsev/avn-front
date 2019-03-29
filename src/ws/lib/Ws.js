@@ -16,13 +16,13 @@ export default class Ws extends EventEmitter {
     this.doNotReconnect = false;
     this.queue = [];
   }
-  start(reconnect) {
+  start(/* reconnect */) {
     this.connecting = true;
-    if (reconnect) {
-      console.log(this.type + " reconnected");
-    } else {
-      console.log(this.type + " connected");
-    }
+    // if (reconnect) {
+    //   console.log(this.type + " reconnected");
+    // } else {
+    //   console.log(this.type + " connected");
+    // }
     const tz = moment().format("ZZ");
     let ws;
     if (this.type && this.type === "wsg") {
@@ -84,7 +84,7 @@ export default class Ws extends EventEmitter {
     this.connected = false;
     this.doNotReconnect = true;
     this.ws.close();
-    console.log(this.type + " disconnected");
+    // console.log(this.type + " disconnected");
   }
   send(data) {
     const message = { ...data, sess: Store.state.auth.token };

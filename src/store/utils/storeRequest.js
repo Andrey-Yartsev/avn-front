@@ -24,7 +24,6 @@ const storeRequest = (
     const Request = requests[requestType];
     Request(apiPath, options)
       .then(async response => {
-        console.log(response);
         if (response.status === 401) {
           Router.push("/login");
           return;
