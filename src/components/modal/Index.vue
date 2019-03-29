@@ -43,7 +43,9 @@ export default {
   beforeDestroy() {
     this.$store.commit("global/setModalOpened", false);
     document.removeEventListener("keyup", this.keyUp);
-    document.getElementsByTagName("body")[0].classList.remove("modal-opened");
+    if (this.$store.state.global.openedModalsCount === 0) {
+      document.getElementsByTagName("body")[0].classList.remove("modal-opened");
+    }
   }
 };
 </script>
