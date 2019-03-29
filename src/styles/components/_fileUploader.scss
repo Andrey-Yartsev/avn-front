@@ -60,6 +60,18 @@
         content: "";
       }
     }
+
+    .lds-dual-ring {
+      background-color: rgba(0, 0, 0, .4);
+
+      .loader-text {
+        transform: translateY(-50%);
+
+        &:after {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   .filename {
@@ -101,6 +113,7 @@
     no-repeat 50% / cover;
     transition: width 0.1s;
     width: 0;
+    z-index: 12;
   }
 }
 
