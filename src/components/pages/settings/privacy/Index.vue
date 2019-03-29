@@ -19,7 +19,6 @@ export default {
   computed: {
     title() {
       if (this.$route.params.view) {
-        console.log("!!!");
         return ucFirst(this.$route.params.view);
       } else {
         return "Privacy";
