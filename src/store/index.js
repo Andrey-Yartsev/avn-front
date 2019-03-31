@@ -42,6 +42,7 @@ import credits from "@/store/modules/credits";
 import postQueue from "@/store/modules/postQueue";
 import genders from "@/store/modules/genders";
 import referrals from "@/store/modules/referrals";
+import countries from "@/store/modules/countries";
 
 Vue.use(Vuex);
 
@@ -89,7 +90,8 @@ const store = new Vuex.Store({
     support,
     credits,
     postQueue,
-    referrals
+    referrals,
+    countries
   }
 });
 

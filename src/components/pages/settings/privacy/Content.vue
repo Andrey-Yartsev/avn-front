@@ -1,4 +1,4 @@
-<template>
+w<template>
   <div :class="viewClass">
     <div class="hidden-desktop" v-if="view === 'twitter'">
       <div class="form-title">
@@ -7,7 +7,6 @@
         </div>
       </div>
     </div>
-
     <form v-on:submit.stop.prevent="save">
       <h1 class="form-title" v-if="$mq === 'desktop'">Privacy Settings</h1>
       <div
@@ -138,7 +137,12 @@
       </div>
 
       <ConnectTwitter @connected="twitterConnected" />
-      <IpBlocking />
+
+      <Blocking
+        ref="blocking"
+        @change="blockingChange"
+        :localUser="localUser"
+      />
 
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group-btn">
@@ -163,7 +167,7 @@ import ConnectTwitter from "../ConnectTwitter";
 import User from "@/mixins/user";
 import ucFirst from "@/helpers/ucFirst";
 import WatermarkImageUploader from "./WatermarkImageUploader";
-import IpBlocking from "./IpBlocking";
+import Blocking from "./Blocking";
 
 export default {
   name: "PrivacySettingsContent",
@@ -174,7 +178,7 @@ export default {
     BlockedUsers,
     ConnectTwitter,
     WatermarkImageUploader,
-    IpBlocking
+    Blocking
   },
 
   computed: {
@@ -195,6 +199,19 @@ export default {
     },
     watermarkImageRemove() {
       this.localUser.watermarkFile = "";
+    },
+    blockingChange(data) {
+      this.localUser = { ...this.localUser, ...data };
+    },
+    save() {
+      if (!this.$refs.blocking.isFormValid) {
+        this.$store.dispatch(
+          "global/flashToast",
+          "Please, fix IP & Geo Blocking validation"
+        );
+        return;
+      }
+      this.$store.dispatch("profile/update", this.localUser);
     }
   }
 };
