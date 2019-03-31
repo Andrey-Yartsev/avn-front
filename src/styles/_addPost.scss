@@ -114,13 +114,26 @@
     }
   }
 
+  .popup-addPost &,
+  .addPost-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      height: 100vh;
+    }
+
+    + .loader-content {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+    }
+  }
+
   .addPost-page & {
 
     .lds-dual-ring {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        left: 10px;
-        right: 10px;
         border-radius: 6px;
       }
     }
@@ -143,7 +156,8 @@
     .loader-text {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding-top: 44px;
+        padding-top: 30px;
+        transform: translate(-50%, calc(-50% + 20px));
       }
 
       &:after {
@@ -153,18 +167,6 @@
           top: 0;
         }
       }
-    }
-  }
-
-  + .feed,
-  + .popup-container-scroll {
-    border-top: 1px solid rgba(124, 139, 150, 0.2);
-  }
-
-  + .popup-container-scroll {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      border-top: none;
     }
   }
 
@@ -193,7 +195,7 @@
 
 .tweet-new-post {
   display: none;
-  margin: 0 15px 0 0;
+  margin: 0 15px 0 auto;
 
   @include media-breakpoint-down($desktop-breakpoint) {
     position: absolute;
@@ -233,6 +235,7 @@
     color: $main-color;
     opacity: 0.3;
     transition: color 0.3s ease, opacity 0.3s ease;
+    display: block;
 
     &:before {
       font-weight: 400;
@@ -271,6 +274,7 @@
       background: $light;
       opacity: 0.3;
       z-index: 0;
+      border-radius: 5px;
     }
 
     .popup-addPost & {
@@ -317,12 +321,15 @@
     }
   }
 
-  .feed & {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  .addPost:not(.round-borders) & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
-      display: none;
+    .feed & {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
 
@@ -492,7 +499,9 @@
       max-height: 200px;
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        height: 137px;
+        //height: 137px;
+
+        height: 180px;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -577,12 +586,12 @@
         }
       }
     }
-
-    .tweet-new-post {
-      .popup & {
-        margin-left: auto;
-      }
-    }
+    //
+    //.tweet-new-post {
+    //  .popup & {
+    //    margin-left: auto;
+    //  }
+    //}
 
     .submit {
       display: block;
@@ -593,7 +602,8 @@
     }
 
     .actions {
-      padding: 12px 5px;
+      //padding: 12px 5px;
+      padding: 12px 5px 23px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 15px 0 0;
@@ -876,12 +886,14 @@
 }
 
 .post-datetime {
+  color: $primary-color;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  width: 39px;
 
   &.disabled {
-    color: $primary-color;
-    display: flex;
-    align-content: center;
-    align-items: center;
+    pointer-events: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 7px;
@@ -1009,17 +1021,29 @@
         opacity: .3;
         width: 24px;
         height: 24px;
+        line-height: 24px;
         color: $main-color;
         box-sizing: content-box;
+        transition: opacity .3s;
 
         &:after {
           content: "\E605";
           @include icon-font;
           font-size: 24px;
+          transition: font-size .3s;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
 
         &:hover {
           color: $main-color;
+          opacity: 1;
+
+          &:after {
+            font-size: 30px;
+          }
         }
       }
 
@@ -1125,6 +1149,17 @@
 }
 
 .vdatetime-time-picker {
+
+  &__item {
+
+    &--selected {
+      color: $primary-color;
+    }
+  }
+}
+
+.vdatetime-year-picker,
+.vdatetime-month-picker {
 
   &__item {
 

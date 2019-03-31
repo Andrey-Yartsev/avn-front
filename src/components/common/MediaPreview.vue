@@ -3,13 +3,19 @@
     <span class="filename">
       <template v-if="media.preview">
         <img :src="media.preview" :title="media.userFileName" />
+        <span class="attachment-status success-status" v-if="media.processId" />
+        <span class="attachment-status error-status" v-if="media.uploadError" />
       </template>
       <template v-else>
         <span>{{ media.userFileName }}</span>
         <div class="loader centered" v-if="!media.previewError"></div>
       </template>
     </span>
-    <div class="progress" :style="{ width: `${media.loaded}%` }"></div>
+    <div
+      v-if="!media.uploadError && !media.processId"
+      class="progress"
+      :style="{ width: `${media.loaded}%` }"
+    />
     <span
       class="remove centered"
       @mousedown.prevent.stop="() => {}"
@@ -19,10 +25,18 @@
         <use xlink:href="#icon-remove"></use>
       </svg>
     </span>
+    <Loader
+      v-if="!media.uploadError && !media.processId"
+      :fullscreen="false"
+      text=""
+      class="small"
+    />
   </div>
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
+
 export default {
   name: "MediaPreview",
   props: {
@@ -34,6 +48,9 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  components: {
+    Loader
   },
   methods: {
     remove() {

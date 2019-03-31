@@ -21,6 +21,23 @@
         }
       }
     }
+
+    .forgot {
+
+      .site-footer {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: auto;
+        }
+
+        .FooterNavCollectionView {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            padding-bottom: 22px;
+          }
+        }
+      }
+    }
   }
 
   .site-footer {

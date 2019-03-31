@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-nav hidden-desktop">
+  <nav class="header-nav hidden-desktop" v-if="$mq === 'mobile'">
     <router-link class="menu-item-home header-nav__item" to="/" exact
       ><span>Home</span></router-link
     >
@@ -9,7 +9,7 @@
     <router-link
       to="/notifications"
       class="menu-item-notifications header-nav__item hidden-desktop"
-      :class="{ unread: user.hasNotifications }"
+      :class="{ unread: user && user.hasNotifications }"
       @click.prevent="goToModalRoute('/notifications')"
       ><span>Notifications</span></router-link
     >
@@ -21,6 +21,7 @@
     <router-link
       class="menu-item-messages header-nav__item hidden-desktop"
       to="/chat"
+      v-if="$mq === 'mobile'"
     >
       <span>Messages</span>
     </router-link>

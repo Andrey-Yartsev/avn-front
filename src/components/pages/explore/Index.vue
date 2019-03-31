@@ -3,6 +3,7 @@
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
       class="addPost-btn-float hidden-desktop"
+      v-if="$mq === 'mobile'"
       to="/addPost"
     ></router-link>
     <div class="container">
@@ -191,6 +192,8 @@ export default {
   },
   methods: {
     scrollFunction(e) {
+      if (!e) return;
+
       const { scrollWidth, scrollLeft, offsetWidth } = e.srcElement;
       const scrolledEnought = scrollWidth - (offsetWidth + scrollLeft) < 600;
       if (

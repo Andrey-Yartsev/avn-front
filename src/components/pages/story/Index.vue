@@ -242,27 +242,19 @@
             {{ viewersText }}
           </div>
         </div>
-
-        <template v-if="!isOwner(author.id) && author.canEarn">
-          <button type="button" class="btn-tip"></button>
-          <form class="tip-form hidden">
-            <button type="button" role="button" class="btn btn-cancel">
-              Cancel
-            </button>
-            <div class="tip-amount-field">
-              <input
-                class="tip-amount-input rounded"
-                type="text"
-                pattern="\d{1,5}(?:\.\d{0,2})?"
-                maxlength="8"
-                placeholder="Enter fund amount"
-              />
-            </div>
-            <button type="submit" class="btn btn-send" disabled>
-              Send fund
-            </button>
-          </form>
-        </template>
+        <button
+          @click="openTip"
+          v-if="!isOwner(author.id) && author.canEarn"
+          type="button"
+          class="btn-tip"
+        />
+        <Tip
+          ref="tip"
+          v-if="showTip"
+          :user="author"
+          @cancel="closeTip"
+          :tipId="`h${currentStory.id}`"
+        />
       </div>
       <button type="button" class="close" @click="close"></button>
       <div
@@ -291,12 +283,14 @@ import Loader from "@/components/common/Loader";
 import userMixin from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
 import ClickOutside from "vue-click-outside";
+import Tip from "@/components/common/tip/User";
 
 export default {
   name: "StoryPage",
   mixins: [userMixin],
   components: {
-    Loader
+    Loader,
+    Tip
   },
   data() {
     return {
@@ -312,7 +306,8 @@ export default {
       showVideoPlay: false,
       copied: false,
       isPaused: false,
-      videoDoesNotExists: false
+      videoDoesNotExists: false,
+      showTip: false
     };
   },
   computed: {
@@ -378,6 +373,15 @@ export default {
     }
   },
   methods: {
+    openTip() {
+      this.pause();
+      this.showTip = true;
+    },
+    closeTip() {
+      this.resume();
+      this.showTip = false;
+      this.$refs.tip.reset();
+    },
     next() {
       if (this.currIndex === this.length - 1) {
         this.findNextUserStory();
@@ -633,7 +637,8 @@ export default {
         name: "storyViewers",
         data: {
           stories: this.stories,
-          currIndex: this.currIndex
+          currIndex: this.currIndex,
+          fromCollection: this.isCollections
         }
       });
     },

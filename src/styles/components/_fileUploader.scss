@@ -18,7 +18,7 @@
     }
     .remove,
     .cancel {
-      z-index: 3;
+      z-index: 12;
       cursor: pointer;
     }
     .cancel {
@@ -48,42 +48,7 @@
         height: 100%;
       }
     }
-    .filename {
-      background: $default-avatar-bg;
-      display: inline-block;
-      vertical-align: top;
-      width: 6em;
-      height: 6em;
-      text-align: center;
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center center;
-        vertical-align: top;
-      }
-      > span {
-        max-width: 90%;
-        line-height: 6em;
-        display: inline-block;
-        vertical-align: top;
-        @include ellipsis;
-      }
-    }
-    .progress {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 5px;
-      background: linear-gradient(
-          30deg,
-          $default-secondary-color 10%,
-          $default-primary-color 90%
-        )
-        no-repeat 50% / cover;
-      transition: width 0.1s;
-      display: none;
-    }
+
     &.uploading {
       &:before {
         position: absolute;
@@ -94,9 +59,112 @@
         background: rgba(#000, 0.3);
         content: "";
       }
-      .progress {
-        display: block;
+    }
+
+    .lds-dual-ring {
+      background-color: rgba(0, 0, 0, .4);
+
+      .loader-text {
+        transform: translateY(-50%);
+
+        &:after {
+          margin-top: 0;
+        }
       }
+    }
+  }
+
+  .filename {
+    background: $default-avatar-bg;
+    display: inline-block;
+    vertical-align: top;
+    width: 6em;
+    height: 6em;
+    text-align: center;
+    position: relative;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+      vertical-align: top;
+    }
+
+    > span {
+      max-width: 90%;
+      //line-height: 6em;
+      display: inline-block;
+      vertical-align: top;
+      @include ellipsis;
+    }
+  }
+
+  .progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    background: linear-gradient(
+      30deg,
+      $default-secondary-color 10%,
+      $default-primary-color 90%
+    )
+    no-repeat 50% / cover;
+    transition: width 0.1s;
+    width: 0;
+    z-index: 12;
+  }
+}
+
+.attachment-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  z-index: 2;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  border-radius: 50%;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 0;
+  }
+
+  &:after {
+    @include icon-font;
+    font-size: 30px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    z-index: 1;
+  }
+
+  &.success-status {
+    color: #fff;
+
+    &:after {
+      content: "\E604";
+    }
+  }
+
+  &.error-status {
+    color: red;
+
+    &:after {
+      content: "\E605";
     }
   }
 }

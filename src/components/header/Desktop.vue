@@ -18,7 +18,7 @@
         href="/notifications"
         class="menu-item-notifications header-nav__item hidden-mobile btn-notifications"
         :class="{
-          unread: user.hasNotifications,
+          unread: user && user.hasNotifications,
           active: !!$route.meta.notifications
         }"
         @click.prevent="goToNotifications"
@@ -27,6 +27,7 @@
       <router-link
         class="menu-item-notifications header-nav__item hidden-desktop"
         to="/notifications"
+        v-if="$mq === 'mobile'"
         ><span>Notifications</span>
       </router-link>
 
@@ -41,6 +42,7 @@
       <router-link
         class="menu-item-messages header-nav__item hidden-desktop"
         to="/chat"
+        v-if="$mq === 'mobile'"
         ><span>Messages</span></router-link
       >
     </template>

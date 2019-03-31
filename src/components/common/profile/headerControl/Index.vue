@@ -11,8 +11,8 @@
       </span>
       <span class="verified-user"></span>
       <span class="user-login">
-        <router-link :to="'/' + profile.name">{{
-          profile.username
+        <router-link :to="'/' + profile.username">{{
+          profile.name
         }}</router-link>
       </span>
     </div>

@@ -24,6 +24,27 @@
       </div>
       <div
         class="form-group form-group_clear-gaps"
+        :class="{ 'field-invalid': fieldError('name') }"
+      >
+        <div class="form-field">
+          <input
+            v-model="username"
+            v-validate="'required'"
+            class="rounded"
+            :class="{ lg: largeControls }"
+            type="text"
+            name="username"
+            placeholder="Username"
+            autocomplete="username"
+            data-vv-validate-on="blur"
+          />
+        </div>
+        <div class="error-info" v-if="fieldError('username')">
+          {{ fieldError("username") }}
+        </div>
+      </div>
+      <div
+        class="form-group form-group_clear-gaps"
         :class="{ 'field-invalid': fieldError('email') }"
       >
         <div class="form-field">
@@ -93,7 +114,7 @@
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">
-        <a href="/login" class="register" @click.prevent="openLogin">{{
+        <a href="/login" class="register" @click.prevent.stop="openLogin">{{
           loginText
         }}</a>
       </p>
@@ -177,6 +198,7 @@ export default {
         if (result) {
           this.$store.dispatch("signUp/" + this.signupAction, {
             name: this.name,
+            username: this.username,
             email: this.email,
             password: this.password,
             captcha: this.captcha

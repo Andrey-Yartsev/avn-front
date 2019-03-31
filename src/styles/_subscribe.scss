@@ -81,6 +81,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+
     @include media-breakpoint-down($desktop-breakpoint) {
       max-width: 340px;
       justify-content: flex-start;
@@ -108,10 +109,6 @@
 
     .user-login {
       font-size: inherit;
-
-      a {
-        color: inherit;
-      }
     }
   }
 
@@ -179,7 +176,8 @@
 
   &__footer {
     text-align: center;
-    margin-top: 32px;
+    margin: 32px auto 0;
+    max-width: 320px;
 
     @include media-breakpoint-down($desktop-breakpoint) {
       padding: 0 15px;
@@ -187,18 +185,15 @@
     }
 
     .btn {
-      max-width: 320px;
       width: 100%;
     }
 
     &-text {
-      max-width: 320px;
-      margin: 25px auto 0;
+      margin-top: 25px;
       font-size: 13px;
       padding: 0;
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        max-width: 300px;
         margin-top: 33px;
       }
 

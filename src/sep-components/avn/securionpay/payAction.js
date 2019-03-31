@@ -1,5 +1,6 @@
 import { askFor3dSecure } from "@/utils/3dsecure";
 import User from "@/mixins/user";
+import Router from "@/router";
 
 export default {
   mixins: [User],
@@ -15,6 +16,7 @@ export default {
           "global/flashToast",
           "You should add card in payment settings"
         );
+        Router.push("/settings/payments");
         return;
       }
       this.progress = true;

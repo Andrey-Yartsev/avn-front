@@ -1,36 +1,49 @@
 <template>
   <div class="payouts-requests">
     <div class="PayoutsRequestsCollectionView">
-      <div class="form-title table-header-title border-top">
-        <div class="inner">
-          <span class="semi-transparent">
-            Payouts Statements
-          </span>
-        </div>
-
-        <div class="border-top loader-container" v-if="loading">
-          <Loader :fullscreen="false" text="" class="transparent small" />
-        </div>
-
-        <div class="table-header payouts-table-header" v-if="!loading">
-          <div
-            class="date table__cell table__cell_align table__cell_align-hor-c"
-          >
-            Date
+      <div
+        class="form-title border-top table-header-title_sticky bg-gradient bg-gradient_pseudo"
+        :class="{ 'table-header-title': !loading }"
+      >
+        <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+          <div class="inner">
+            <span class="semi-transparent">
+              Payouts Statements
+            </span>
+            <button
+              class="btn-edit-bank"
+              @click="withdrawRequest"
+              :disabled="withdrawRequesting"
+            >
+              Withdraw Request
+            </button>
           </div>
-          <div
-            class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
-          >
-            Amount
-          </div>
-          <div
-            class="expected table__cell table__cell_align table__cell_align-hor-c"
-          >
-            Expected
+          <div class="table-header payouts-table-header" v-if="!loading">
+            <div
+              class="date table__cell table__cell_align table__cell_align-hor-c"
+            >
+              Date
+            </div>
+            <div
+              class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+            >
+              Amount
+            </div>
+            <div
+              class="expected table__cell table__cell_align table__cell_align-hor-c"
+            >
+              Expected
+            </div>
           </div>
         </div>
       </div>
-      <div class="shadow-block no-padding" v-if="!loading && !items.length">
+      <div
+        class="border-top shadow-block no-padding loader-container"
+        v-if="loading"
+      >
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
+      </div>
+      <div class="shadow-block no-padding" v-if="!loading && items.length">
         <div class="table-wrapper">
           <div class="table payouts-table">
             <div
@@ -70,6 +83,7 @@ export default {
   computed: {
     loading() {
       return this.$store.state.payouts.requests.fetchLoading;
+      // return true;
     },
     items() {
       if (!this.$store.state.payouts.requests.fetchResult) {
@@ -81,12 +95,19 @@ export default {
         v.id = n;
         return v;
       });
+    },
+    withdrawRequesting() {
+      return this.$store.state.payouts.requests.withdrawLoading;
     }
   },
 
   methods: {
     dt(date) {
       return moment(date).format("DD MMM, hh:mm");
+    },
+    async withdrawRequest() {
+      await this.$store.dispatch("payouts/requests/withdraw");
+      this.$store.dispatch("payouts/requests/fetch");
     }
   },
 

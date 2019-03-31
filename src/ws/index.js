@@ -9,7 +9,7 @@ import stream_comment from "./actions/stream_comment";
 import statistics from "./actions/statistics";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
-import payoutsApproved from "./actions/payoutsApproved";
+import payoutsLegalResult from "./actions/payoutsLegalResult";
 import subscription from "./actions/subscription";
 import tip from "./actions/tip";
 import message from "./actions/message";
@@ -18,7 +18,7 @@ import new_feed_post from "./actions/new_feed_post";
 const actions = {
   chats,
   new_notification,
-  payoutsApproved,
+  payoutsLegalResult,
   subscription,
   tip,
   stream,

@@ -14,7 +14,12 @@
             >
               New post
             </div>
-            <AddPost :initialExpanded="true" :close="close" type="new" />
+            <AddPost
+              :initialExpanded="true"
+              :close="close"
+              type="new"
+              where="modal"
+            />
             <div class="popup-container-scroll" v-if="delayedPosts.length">
               <VuePerfectScrollbar
                 @ps-scroll-y="scrollFunction"
@@ -22,6 +27,15 @@
                 class="popup-content-scroll add-post-schedule"
               >
                 <div class="feed reset-btr">
+                  <div
+                    class="title-block title-block_row bg-gradient bg-gradient_pseudo"
+                  >
+                    <div
+                      class="title-block__txt bg-gradient__shadow bg-gradient__shadow_mob"
+                    >
+                      <span>Scheduled posts</span>
+                    </div>
+                  </div>
                   <PostCollection :posts="delayedPosts" from="postQueue" />
                 </div>
                 <div class="loaderWrap loader-content" v-if="loading">

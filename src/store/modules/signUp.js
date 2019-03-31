@@ -3,6 +3,7 @@
 import InitApi from "@/api/init";
 import UserApi from "@/api/user";
 import Router from "@/router";
+import responseJson from "@/utils/responseJson";
 
 const state = {
   showCaptcha: false,
@@ -19,7 +20,7 @@ const actions = {
   signUp({ commit, dispatch }, data) {
     commit("signUpError", null);
     UserApi.signUp(data).then(async response => {
-      response = await response.json();
+      response = await responseJson(response);
       if (response.error) {
         commit("signUpError", response.error.message);
         return;
@@ -36,7 +37,7 @@ const actions = {
   signUpFromModal({ commit, dispatch }, data) {
     commit("signUpError", null);
     UserApi.signUp(data).then(async response => {
-      response = await response.json();
+      response = await responseJson(response);
       if (response.error) {
         commit("signUpError", response.error.message);
         return;

@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-container rounded-container_fluid-height">
-    <h1 class="form-title hidden-mobile">
+    <h1 class="form-title hidden-mobile" v-if="$mq === 'desktop'">
       Credits
       <span class="balance-info"
         >Balance: {{ user.creditBalance }} credits</span

@@ -2,31 +2,33 @@
   <div class="payouts-transactions">
     <div class="PayoutsTransactionsCollectionView">
       <div
-        class="form-title table-header-title table-header-title_sticky border-top"
+        class="form-title table-header-title table-header-title_sticky border-top bg-gradient bg-gradient_pseudo"
       >
-        <div class="inner">
-          <span class="semi-transparent">
-            Transactions
-          </span>
-        </div>
-        <div class="border-top loader-container" v-if="loading">
-          <Loader :fullscreen="false" text="" class="transparent small" />
-        </div>
-        <div class="table-header transactions-table-header" v-if="!loading">
-          <div
-            class="date table__cell table__cell_align table__cell_align-hor-c"
-          >
-            Date
+        <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+          <div class="inner">
+            <span class="semi-transparent">
+              Transactions
+            </span>
           </div>
-          <div
-            class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
-          >
-            Amount
+          <div class="border-top loader-container" v-if="loading">
+            <Loader :fullscreen="false" text="" class="transparent small" />
           </div>
-          <div
-            class="expected table__cell table__cell_align table__cell_align-hor-c"
-          >
-            Item
+          <div class="table-header transactions-table-header" v-if="!loading">
+            <div
+              class="date table__cell table__cell_align table__cell_align-hor-c"
+            >
+              Date
+            </div>
+            <div
+              class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
+            >
+              Amount
+            </div>
+            <div
+              class="expected table__cell table__cell_align table__cell_align-hor-c"
+            >
+              Item
+            </div>
           </div>
         </div>
       </div>

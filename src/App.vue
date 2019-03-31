@@ -1,13 +1,12 @@
 <template>
-  <div
-    class="main-container"
-    :class="containerClassName"
-    v-bind:style="{ 'padding-right': scrollBarWidth + 'px' }"
-  >
+  <div v-if="!hasLayout">
+    <router-view />
+  </div>
+  <div v-else class="main-container" :class="containerClassName">
     <Loader v-if="loading" class="page-loader" />
     <template v-else>
       <Header />
-      <main id="content">
+      <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
       </main>
       <Sidebar v-if="user" />
@@ -192,6 +191,9 @@ export default {
     },
     loginInProgress() {
       return this.$store.state.auth.loginInProgress;
+    },
+    hasLayout() {
+      return !this.$route.meta.noLayout;
     }
   },
   watch: {
@@ -230,6 +232,7 @@ export default {
         if (this.wasLogout) {
           this.webSocket.connect();
         }
+        this.$store.dispatch("genders/fetch");
       }
       this.initLoggedInClass();
     },

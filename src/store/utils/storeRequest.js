@@ -1,6 +1,7 @@
 import anyRequest from "@/utils/anyRequest";
 import tokenRequest from "../../utils/tokenRequest";
 import request from "../../utils/request";
+import Router from "@/router";
 
 const storeRequest = (
   requestType,
@@ -9,7 +10,7 @@ const storeRequest = (
   dispatch,
   apiPath,
   options,
-  { state, localError, resultKey, resultConvert }
+  { state, localError, resultKey, resultConvert, throw400 }
 ) => {
   return new Promise((accept, reject) => {
     commit(prefix + "ResetError");
@@ -23,6 +24,10 @@ const storeRequest = (
     const Request = requests[requestType];
     Request(apiPath, options)
       .then(async response => {
+        if (response.status === 401) {
+          Router.push("/login");
+          return;
+        }
         if (response.status === 200) {
           commit(prefix + "Success", true);
           let r = await response.json();
@@ -41,7 +46,9 @@ const storeRequest = (
           }
           commit(prefix + "Success", false);
           commit(prefix + "Requested");
-          reject(r.error);
+          if (response.status !== 400 || throw400) {
+            reject(r.error);
+          }
         }
       })
       .catch(error => {
@@ -119,7 +126,8 @@ const createRequestAction = ({
   defaultResultValue,
   defaultLoading,
   paramsToOptions,
-  paramsToPath
+  paramsToPath,
+  throw400
 }) => {
   if (!resultKey) {
     resultKey = prefix + "Result";
@@ -147,7 +155,8 @@ const createRequestAction = ({
         state,
         localError,
         resultKey,
-        resultConvert
+        resultConvert,
+        throw400
       }
     );
   };

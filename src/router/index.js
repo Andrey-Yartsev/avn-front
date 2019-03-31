@@ -5,6 +5,7 @@ import HomePage from "@/components/pages/home/Index";
 import ExplorePage from "@/components/pages/explore/Index";
 import NotificationsPage from "@/components/pages/notification/Index";
 import LoginPage from "@/components/pages/noAuth/Login";
+import LogoutPage from "@/components/pages/noAuth/Logout";
 import SignUpPage from "@/components/pages/noAuth/SignUp";
 import ForgotPasswordPage from "@/components/pages/noAuth/ForgotPassword";
 import SettingsDefaultPage from "@/components/pages/settings/default/Index";
@@ -49,7 +50,10 @@ const routes = [
   },
   {
     path: "/logout",
-    beforeEnter: Auth.logout
+    component: LogoutPage,
+    meta: {
+      noLayout: true
+    }
   },
   {
     beforeEnter: Auth.twitterAuth,

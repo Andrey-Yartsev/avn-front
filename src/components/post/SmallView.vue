@@ -61,10 +61,11 @@
 <script>
 import { toHumanDuration } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import PostOpen from "@/mixins/postOpen";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, PostOpen],
   props: {
     post: {
       type: Object,
@@ -88,14 +89,6 @@ export default {
     },
     mediaDuration() {
       return this.media.duration ? toHumanDuration(this.media.duration) : "";
-    }
-  },
-  methods: {
-    openModal() {
-      if (this.media.locked) {
-        return;
-      }
-      this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     }
   }
 };

@@ -29,7 +29,7 @@ const mutations = {
   },
 
   resetPosts(state) {
-    state.source = "";
+    // state.source = "";
     state.loading = false;
     state.posts = [];
     state.offset = 0;
@@ -110,6 +110,27 @@ const actions = {
         }
         reject(await response.json());
       });
+    });
+  },
+
+  mute({ dispatch }, user) {
+    dispatch(`user/mute`, user.id, { root: true }).then(r => {
+      if (r.success) {
+        dispatch("extend", {
+          id: user.id,
+          isMuted: true
+        });
+      }
+    });
+  },
+  unmute({ dispatch }, user) {
+    dispatch(`user/unmute`, user.id, { root: true }).then(r => {
+      if (r.success) {
+        dispatch("extend", {
+          id: user.id,
+          isMuted: false
+        });
+      }
     });
   },
 

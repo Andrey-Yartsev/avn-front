@@ -49,11 +49,13 @@ strong {
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    //position: fixed;
+    //left: 0;
+    //top: 0;
+    //width: 100%;
+    //height: 100%;
+
+    overflow: hidden;
   }
 
   #site_header {
@@ -337,7 +339,7 @@ video {
   }
 }
 
-.ps {
+.ps-container.ps {
 
   &:hover {
 
@@ -646,6 +648,39 @@ video {
   margin-bottom: 20px;
   font-weight: 500;
   font-size: 18px;
+
+  &_row {
+    font-size: 17px;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+
+    + .postCollectionView {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-top: 1px solid rgba(124, 139, 150, 0.2);
+      }
+    }
+  }
+
+  &__txt {
+    position: relative;
+    display: block;
+    padding: 20px 16px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    span {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        opacity: .5;
+      }
+    }
+  }
 }
 
 .page-header-title {
@@ -714,6 +749,58 @@ video {
       $secondary-color-20 10%,
       $primary-color-20 90%
     );
+  }
+
+  &_pseudo {
+
+    &:before {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background: $light;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.3;
+      }
+    }
+
+    &:after {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        background: $white
+        linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -10px;
+        right: -10px;
+        bottom: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+
+  &__shadow {
+
+    &_mob {
+
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -30px;
+          right: -30px;
+          bottom: 0;
+          box-shadow: 0 1px 7px rgba(#000, 0.15) inset;
+        }
+      }
+    }
   }
 }
 

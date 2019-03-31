@@ -7,10 +7,17 @@
       <AddPost
         :initialExpanded="true"
         :close="close"
-        where="modal"
+        where="addPost"
         type="new"
       />
-      <div class="feed reset-btr">
+      <div class="feed reset-btr" v-if="delayedPosts.length">
+        <div class="title-block title-block_row bg-gradient bg-gradient_pseudo">
+          <div
+            class="title-block__txt bg-gradient__shadow bg-gradient__shadow_mob"
+          >
+            <span>Scheduled posts</span>
+          </div>
+        </div>
         <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>
       <div class="loaderWrap loader-content" v-if="infinityScrollLoading">

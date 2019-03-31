@@ -3,7 +3,7 @@
     <div class="lds-dual-ring transparent small with-text not-fullscreen">
       <div class="loader-text">Media is currently processing</div>
     </div>
-    <template v-if="medias.length > 1 && showSlider">
+    <template v-if="medias.length > 1">
       <swiper
         ref="mySwiper"
         class="media-slider"
@@ -32,7 +32,7 @@
         />
       </figure>
     </template>
-    <template v-if="medias.length > 1 && showSlider">
+    <template v-if="medias.length > 1">
       <div
         :class="`media-slider-pagination pagination-${uniqId}`"
         :style="{ zIndex: 20 }"
@@ -120,10 +120,6 @@ export default {
   props: {
     medias: {
       type: Array,
-      required: true
-    },
-    showSlider: {
-      type: Boolean,
       required: true
     },
     shouldHasLink: {

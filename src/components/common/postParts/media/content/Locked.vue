@@ -3,8 +3,8 @@
     <img
       class="locked"
       :src="image"
-      :width="`${size.width}px`"
-      :height="`${size.height}px`"
+      :width="`${size.width}`"
+      :height="`${size.height}`"
     />
   </div>
 </template>

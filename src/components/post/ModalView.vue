@@ -6,8 +6,9 @@
         <div class="content">
           <div class="postPageWrapper">
             <PostLargeView
+              v-if="post"
               :post="post"
-              :from="from"
+              :from="backFrom || from"
               v-on:addExtraClassName="addExtraClassName"
             />
           </div>
@@ -29,8 +30,9 @@ export default {
   mixins: [ModalRouterGoto],
   data() {
     return {
-      index: null,
-      extraClassName: "lightbox-post"
+      index: undefined,
+      extraClassName: "lightbox-post",
+      backFrom: undefined
     };
   },
   computed: {
@@ -50,7 +52,9 @@ export default {
       return `post/${this.postId}`;
     },
     postsState() {
-      if (this.from === "profile/home") {
+      if (this.backFrom) {
+        return this.$store.state.postPage;
+      } else if (this.from === "profile/home") {
         return this.$store.state.profile.home;
       } else if (this.from === "home") {
         return this.$store.state.home;
@@ -78,16 +82,29 @@ export default {
     },
     next() {
       if (this.index >= this.postsState.posts.length - 3) {
-        if (!this.$store.state.home.allDataReceived) {
+        if (!this.postsState.allDataReceived && !this.postsState.loading) {
           this.$store.dispatch(`${this.from}/getPosts`);
         }
       }
       this.index++;
+    },
+    setIndex() {
+      if (this.index) {
+        return;
+      }
+
+      const post = this.posts.find(({ id }) => {
+        return id === this.postId;
+      });
+
+      if (post) {
+        this.index = this.posts.indexOf(post);
+      }
     }
   },
   watch: {
-    index: function() {
-      // this.scroll();
+    index() {
+      if (this.backFrom === "postPage") return;
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`
@@ -95,10 +112,19 @@ export default {
     }
   },
   created() {
-    const post = this.posts.find(({ id }) => {
-      return id === this.postId;
-    });
-    this.index = this.posts.indexOf(post);
+    if (!this.length) {
+      this.backFrom = "postPage";
+      this.$store.commit("postPage/resetPageState");
+      this.$store
+        .dispatch("postPage/getPost", { postId: this.postId })
+        .then(() => {
+          this.index = 0;
+        });
+
+      return;
+    }
+
+    this.setIndex();
   }
 };
 </script>

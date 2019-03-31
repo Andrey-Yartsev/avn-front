@@ -11,7 +11,7 @@ Wsp.prototype.connect = function(openCallback, closeCallback) {
   const tz = moment().format("ZZ");
   this.ws = new WebSocket(Store.state.init.data.websocket.posts);
   this.ws.onopen = () => {
-    new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
+    Fingerprint.getV18({}, fp => {
       this.ws.send(
         JSON.stringify({
           sess: Store.state.auth.token,

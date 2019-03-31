@@ -33,7 +33,22 @@
             <div class="form-group form-group_with-label">
               <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
-                <BirthDateSelect class="birthDateWrapper" v-model="birthDate" />
+                <div class="field-birthday">
+                  <Datetime
+                    :inputId="`post-datetime__switcher_birthdate`"
+                    class="field-birthday__input"
+                    type="datetime"
+                    v-model="birthDate"
+                    input-class=""
+                    v-validate="'required'"
+                    use12-hour
+                    :flow="['year', 'month', 'date']"
+                    :phrases="{ ok: 'ok', cancel: 'Cancel' }"
+                  />
+                  <span v-if="birthDate" class="field-birthday__text">{{
+                    formattedBirthdate
+                  }}</span>
+                </div>
               </div>
             </div>
 
@@ -117,12 +132,16 @@
 
             <div class="form-group form-group_with-label city-zip-form-group">
               <div class="form-group-inner">
-                <span class="label hidden-mobile">
+                <span class="label hidden-mobile" v-if="$mq === 'desktop'">
                   City
                 </span>
                 <div class="row">
                   <div class="col-form-lg">
-                    <label class="hidden-desktop label" for="input-city">
+                    <label
+                      class="hidden-desktop label"
+                      for="input-city"
+                      v-if="$mq === 'mobile'"
+                    >
                       City
                     </label>
                     <div class="exp-row">
@@ -235,7 +254,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave"
+              :disabled="!canSave || saving"
             >
               Next
             </button>
@@ -251,6 +270,12 @@ import BirthDateSelect from "./BirthDateSelect";
 import states from "./states";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
+import { Datetime } from "vue-datetime";
+import { Settings } from "luxon";
+import moment from "moment";
+import "vue-datetime/dist/vue-datetime.css";
+
+Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
@@ -258,7 +283,8 @@ export default {
   mixins: [Form],
 
   components: {
-    BirthDateSelect
+    BirthDateSelect,
+    Datetime
   },
 
   data() {
@@ -294,12 +320,22 @@ export default {
         return false;
       }
       return true;
+    },
+    formattedBirthdate() {
+      return moment(this.birthDate).format("LL");
+    },
+    saving() {
+      return this.$store.state.payouts.legal.saveLoading;
     }
   },
 
   methods: {
     async upload() {
-      this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+      try {
+        this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+      } catch (error) {
+        this.$store.dispatch("global/setError", error);
+      }
     },
     save() {
       const fields = [
@@ -318,7 +354,8 @@ export default {
       const data = {};
       for (let f of fields) {
         if (this[f]) {
-          data[f] = this[f];
+          data[f] =
+            f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
       data.personalIdImage = this.uploadedPhoto;

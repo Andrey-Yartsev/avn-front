@@ -101,10 +101,10 @@
     right: 10px;
     transform: translateY(-50%);
     color: lighten($gray, 20%);
+    pointer-events: none;
   }
 
   &__field {
-    position: relative;
     display: block;
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -154,7 +154,10 @@
 .rounded-container {
   @include media-breakpoint-up($desktop-breakpoint) {
     .content-col & {
-      height: calc(100% - 20px);
+
+      .settings-page & {
+        //height: calc(100% - 20px);
+      }
     }
   }
 

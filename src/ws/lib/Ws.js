@@ -4,20 +4,25 @@ import Fingerprint from "fingerprintjs2";
 
 import Store from "@/store";
 
+const isOffline = () => {
+  return global.navigator && global.navigator.onLine === false;
+};
+
 export default class Ws extends EventEmitter {
   constructor(actions, type) {
     super();
     this.type = type || "ws";
     this.actions = actions;
     this.doNotReconnect = false;
+    this.queue = [];
   }
-  start(reconnect) {
+  start(/* reconnect */) {
     this.connecting = true;
-    if (reconnect) {
-      console.log(this.type + " reconnected");
-    } else {
-      console.log(this.type + " connected");
-    }
+    // if (reconnect) {
+    //   console.log(this.type + " reconnected");
+    // } else {
+    //   console.log(this.type + " connected");
+    // }
     const tz = moment().format("ZZ");
     let ws;
     if (this.type && this.type === "wsg") {
@@ -30,7 +35,8 @@ export default class Ws extends EventEmitter {
     ws.onopen = () => {
       this.connected = true;
       this.connecting = false;
-      new Fingerprint({ excludeWebGL: true, excludeCanvas: true }).get(fp => {
+      this.clearQueue();
+      Fingerprint.getV18({}, fp => {
         ws.send(
           JSON.stringify({
             sess: Store.state.auth.token,
@@ -44,6 +50,10 @@ export default class Ws extends EventEmitter {
     };
     ws.onmessage = r => {
       const data = JSON.parse(r.data);
+      if (data.payoutsApproved !== undefined) {
+        this.actions.payoutsLegalResult(data);
+        return;
+      }
       this.emit("message", data);
       // console.log("ws:", data);
       const keys = Object.keys(data);
@@ -74,15 +84,29 @@ export default class Ws extends EventEmitter {
     this.connected = false;
     this.doNotReconnect = true;
     this.ws.close();
-    console.log(this.type + " disconnected");
+    // console.log(this.type + " disconnected");
   }
   send(data) {
-    if (!this.connected) {
+    const message = { ...data, sess: Store.state.auth.token };
+    if (!this.connected || this.connecting || isOffline()) {
       console.log(
         this.type + " not connected. Can't send " + JSON.stringify(data)
       );
+      this.queue.push(message);
     }
-    data.sess = Store.state.auth.token;
-    this.ws.send(JSON.stringify(data));
+
+    if (!this.connected || this.connecting) {
+      return;
+    }
+
+    this.ws.send(JSON.stringify(message));
+  }
+  clearQueue() {
+    if (this.connected && this.queue.length) {
+      this.queue.forEach(message => {
+        this.ws.send(JSON.stringify(message));
+      });
+      this.queue = [];
+    }
   }
 }

@@ -7,6 +7,7 @@
   }
 
   body {
+    overflow-x: hidden;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 100%;
@@ -757,15 +758,15 @@
     margin: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 5px 15px 5px;
+      padding: 5px 15px;
     }
+  }
 
-    .btn {
+  .btn {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 100px;
-        flex: 0 0 100px;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: 100px;
+      flex: 0 0 100px;
     }
   }
 }
@@ -990,6 +991,10 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 80px;
+    }
+
+    .settings-profile-images & {
+      display: none;
     }
   }
 
@@ -1322,7 +1327,7 @@
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 8px;
+        //padding-bottom: 8px;
       }
     }
   }
@@ -1359,7 +1364,7 @@
 
 
 #avatarBgAside {
-  overflow: hidden;
+  //overflow: hidden;
 
   .lds-dual-ring.not-fullscreen {
 
@@ -1666,9 +1671,12 @@
 
     .popup-container-scroll {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        min-height: calc(100vh - 44px);
-        background-color: $white;
+      .popup & {
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          min-height: calc(100vh - 44px);
+          background-color: $white;
+        }
       }
     }
   }

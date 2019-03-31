@@ -53,9 +53,9 @@
       </div>
       <div
         class="post-types-tabs"
-        v-bind:style="{
-          'margin-right': -scrollBarWidth + 'px',
-          'padding-right': scrollBarWidth + 'px'
+        :style="{
+          'margin-right': `${-scrollBarWidth}px`,
+          'padding-right': `${scrollBarWidth}px`
         }"
         v-if="$mq === 'desktop'"
       >

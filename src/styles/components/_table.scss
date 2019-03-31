@@ -115,36 +115,6 @@
         top: 0;
         z-index: 1;
 
-        &:before {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            background: $light;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0.3;
-          }
-        }
-
-        &:after {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            background: $white
-            linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -10px;
-            right: -10px;
-            bottom: 0;
-            z-index: -1;
-            box-shadow: 0 1px 7px rgba(#000, 0.15) inset;
-          }
-        }
-
         @include media-breakpoint-up($desktop-breakpoint) {
           background-color: $white;
         }

@@ -107,6 +107,7 @@
             type="checkbox"
             id="is_paid_subscription"
             name="isWantEarn"
+            @change="changeWantEarn"
             v-model="localUser.isWantEarn"
           />
           <span></span>
@@ -119,7 +120,10 @@
       >
         <div class="container">
           <div class="form-group form-group_with-label">
-            <label class="form-group-inner subscription">
+            <label
+              class="form-group-inner subscription"
+              :class="{ disabled: !user.canEarn }"
+            >
               <span class="label">Subscription</span>
               <span class="subscription__field field-symbol-currency">
                 <span class="subscription__per-month">per month</span>
@@ -135,8 +139,8 @@
               </span>
             </label>
 
-            <label class="form-group-inner subscription" v-if="!user.canEarn">
-              <span class="label"></span>
+            <div class="form-group-inner subscription" v-if="!user.canEarn">
+              <span class="label" v-if="$mq === 'desktop'"></span>
               <span class="subscription-desc">
                 Before setting your monthly subscription price (or to be able to
                 accept tips), you must first
@@ -144,7 +148,7 @@
                   >add a bank account</router-link
                 >
               </span>
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -172,8 +176,13 @@
                       v-model="localUser.gender"
                     >
                       <option value="0">Not specified</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
+                      <option
+                        v-for="gender in genderList"
+                        :value="gender.id"
+                        :key="gender.id"
+                      >
+                        {{ gender.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -217,6 +226,9 @@ export default {
         secondColor: this.localUser.secondColor
       });
       this.$store.dispatch("profile/update", this.localUser);
+    },
+    changeWantEarn() {
+      this.$store.dispatch("profile/update", this.localUser);
     }
   },
 
@@ -226,6 +238,9 @@ export default {
         return null;
       }
       return this.localUser.about;
+    },
+    genderList() {
+      return this.$store.state.genders.data;
     }
   },
 

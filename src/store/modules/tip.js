@@ -14,7 +14,8 @@ const actions = {
           name: "tipPayConfirm",
           data: {
             amount,
-            user
+            user,
+            tipId
           }
         },
         { root: true }

@@ -32,18 +32,20 @@ export default {
       type: String
     }
   },
-  created() {
-    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
-  },
   mounted() {
     this.$store.commit("global/setModalOpened", true);
     document.addEventListener("keyup", this.keyUp);
     document.getElementsByTagName("body")[0].classList.add("modal-opened");
   },
+  created() {
+    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
+  },
   beforeDestroy() {
     this.$store.commit("global/setModalOpened", false);
     document.removeEventListener("keyup", this.keyUp);
-    document.getElementsByTagName("body")[0].classList.remove("modal-opened");
+    if (this.$store.state.global.openedModalsCount === 0) {
+      document.getElementsByTagName("body")[0].classList.remove("modal-opened");
+    }
   }
 };
 </script>

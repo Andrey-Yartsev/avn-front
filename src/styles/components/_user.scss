@@ -81,16 +81,6 @@
     flex: 0 0 30px;
     width: 30px;
     height: 30px;
-
-    .avatar__img {
-
-      &:empty {
-
-        &:before {
-          //font-size: 29px;
-        }
-      }
-    }
   }
 
   &_md {
@@ -246,6 +236,7 @@
     border-radius: 50%;
     position: relative;
     object-fit: cover;
+    background: $default-avatar-bg;
   }
 
   &__img {

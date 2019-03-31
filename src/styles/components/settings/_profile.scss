@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     top: auto;
+    position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 96px;

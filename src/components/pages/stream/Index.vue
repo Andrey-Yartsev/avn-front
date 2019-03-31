@@ -15,7 +15,9 @@
             >Live video</span
           >
           <button class="close" @click="close">
-            <span class="category-name category-name_live hidden-desktop"
+            <span
+              class="category-name category-name_live hidden-desktop"
+              v-if="$mq === 'mobile'"
               >Live Video</span
             >
           </button>
@@ -71,7 +73,20 @@
                 </div>
               </div>
               <div
-                v-if="streamVideo"
+                v-if="
+                  $mq === 'mobile' && streamVideos && streamVideos.length > 1
+                "
+                class="btn-media-event camera-switcher"
+                @click="toggleCamera"
+              >
+                <button type="button" class="root-btn">
+                  <div class="root-btn__inside"></div>
+                </button>
+              </div>
+              <div
+                v-if="
+                  $mq === 'desktop' && streamVideos && streamVideos.length > 1
+                "
                 v-click-outside="hideStreamVideoMenu"
                 :class="[
                   'btn-media-event has-dropdown camera',
@@ -151,7 +166,11 @@
         </div>
       </div>
       <div id="videos">
-        <div id="videowrap" class="stream-video-container">
+        <div
+          id="videowrap"
+          class="stream-video-container"
+          :class="{ 'mirror-reflection': isMirrow }"
+        >
           <div class="likesContainer">
             <div
               v-for="like in likes"
@@ -286,6 +305,7 @@ export default {
       isStarted: false,
       isStopped: false,
       startingStream: false,
+      isMirrow: false,
       time: undefined,
       startedStreamId: undefined,
       likes: [],
@@ -356,6 +376,20 @@ export default {
       Streams.switchDevices(false, value.deviceId);
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
+      setTimeout(() => {
+        this.isMirrow = Streams.cameraFacingMode === "user";
+      }, 333);
+    },
+    toggleCamera() {
+      const currentDevice = this.streamVideos.find(
+        device => device.deviceId === Streams.videoVars.device.id
+      );
+
+      let camIndex = this.streamVideos.indexOf(currentDevice);
+      camIndex = camIndex >= this.streamVideos.length - 1 ? 0 : camIndex + 1;
+
+      const newVideoDevice = this.streamVideos[camIndex];
+      this.setStreamVideo(newVideoDevice);
     },
     showStreamAudioMenu() {
       this.shownStreamAudioMenu = true;
@@ -382,10 +416,14 @@ export default {
       this.streamVideo = defaultVideoDevice;
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
+      setTimeout(() => {
+        this.isMirrow = Streams.cameraFacingMode === "user";
+      }, 333);
     },
-    tick(start) {
-      this.streamStartTime = start;
-      const diff = Math.round(new Date().getTime() / 1000) - start;
+    tick() {
+      const currentTime = Math.round(new Date().getTime() / 1000);
+      const startTime = this.streamStartTime || currentTime;
+      const diff = currentTime - startTime;
       const date = new Date(diff * 1000);
       let hours = date.getHours();
       let mins = date.getMinutes();
@@ -418,7 +456,7 @@ export default {
       const window_width = window.innerWidth;
       const window_height = window.innerHeight;
       const window_ratio = window_height / window_width;
-      let left = "0%"; //$( '.stream-like-btn' ).offset().left;
+      let left = "0%";
       let top = "100%";
 
       if (video_ratio > window_ratio) {
@@ -453,13 +491,13 @@ export default {
         if (haveToSave) {
           StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
-              this.$router.push("/");
+              location.href = "/";
             })
             .catch(() => {
-              this.$router.push("/");
+              location.href = "/";
             });
         } else {
-          this.$router.push("/");
+          location.href = "/";
         }
 
         this.startedStreamId = undefined;
@@ -531,6 +569,8 @@ export default {
       showLikes: false,
       showErrorMessage(message) {
         // eslint-disable-next-line
+        alert(message);
+        // eslint-disable-next-line
         console.log(message);
       },
       showInfoMessage(message) {
@@ -541,7 +581,9 @@ export default {
       onRemoteStreamInit() {},
       onStreamError(error) {
         // eslint-disable-next-line
-        console.error(error);
+        alert(error);
+        // eslint-disable-next-line
+        console.log(error);
         Streams.config.onStreamEnd();
       },
       onStreamTick: start => {
@@ -578,26 +620,30 @@ export default {
               token
             );
             Streams.getStreamAsClient();
+            this.streamStartTime = new Date().getTime() / 1000;
           });
       },
       onStreamEnd: () => {
         const token = this.$store.state.auth.token;
         const userId = this.$store.state.auth.user.id;
 
-        this.$root.ws.ws.send(
-          JSON.stringify({
-            act: "stream_stop",
-            stream_id: this.startedStreamId,
-            stream_user_id: userId,
-            sess: token
-          })
-        );
+        if (this.startedStreamId) {
+          this.$root.ws.ws.send(
+            JSON.stringify({
+              act: "stream_stop",
+              stream_id: this.startedStreamId,
+              stream_user_id: userId,
+              sess: token
+            })
+          );
 
-        StreamApi.deleteStream(this.startedStreamId);
+          StreamApi.deleteStream(this.startedStreamId);
+        }
 
         this.isReadyToStart = true;
         this.isStarted = false;
         this.isStopped = true;
+        this.startingStream = false;
       },
       onCleanUp() {},
       onViewersCountGet: looks => {

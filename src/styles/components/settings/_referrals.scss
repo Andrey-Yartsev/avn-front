@@ -16,33 +16,6 @@
       padding-top: 20px;
       padding-bottom: 24px;
     }
-
-    .referral-desc {
-      display: flex;
-      padding: 10px 0 0;
-      @include media-breakpoint-down($desktop-breakpoint) {
-        border-top: 1px solid rgba($gray, 0.2);
-        margin-top: 13px;
-        padding: 14px 0 0;
-      }
-      .subtext {
-        flex: 1;
-        padding: 0 20px 0 0;
-        font-size: 13px;
-        opacity: 0.5;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding: 0 40px 0 0;
-        }
-      }
-
-      .btn-copy-url {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 120px;
-        }
-      }
-    }
   }
 
   &-search {
@@ -60,6 +33,29 @@
     }
   }
 }
+
+.referral-desc {
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 0 0;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    border-top: 1px solid rgba($gray, 0.2);
+    margin-top: 13px;
+    padding: 14px 0 0;
+  }
+  .subtext {
+    flex: 1;
+    padding: 0 20px 0 0;
+    font-size: 13px;
+    opacity: 0.5;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding: 0 40px 0 0;
+    }
+  }
+}
+
 .ReferralsBlockCollectionView {
   @include media-breakpoint-up($desktop-breakpoint) {
     overflow: auto;
@@ -72,6 +68,11 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    width: 120px;
+    margin-top: -6px;
   }
 
   &.copied {

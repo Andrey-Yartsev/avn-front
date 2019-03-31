@@ -13,7 +13,8 @@ const state = {
   userMobileBarOpening: false,
   scrollBarInitWidth: 0,
   scrollBarWidth: 0,
-  modalOpened: false
+  modalOpened: false,
+  openedModalsCount: 0
 };
 
 const actions = {
@@ -82,6 +83,11 @@ const mutations = {
 
   setModalOpened(state, opened) {
     state.modalOpened = opened;
+    if (opened) {
+      state.openedModalsCount++;
+    } else {
+      state.openedModalsCount--;
+    }
   }
 };
 

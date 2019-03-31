@@ -71,6 +71,9 @@ export default {
         if (!this.legalExists) {
           return Legal;
         }
+        if (this.user.payoutLegalApproveState === "rejected") {
+          return Legal;
+        }
         if (this.user.payoutLegalApproveState === "pending") {
           return LegalPending;
         }

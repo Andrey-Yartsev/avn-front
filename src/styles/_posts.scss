@@ -97,8 +97,8 @@
     position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint) {
-      margin: 0 15px;
-      padding: 15px 32px 8px 0;
+      //margin: 0 15px;
+      padding: 15px 38px 8px 15px;
 
       @media screen and (orientation: landscape) {
         min-height: 54px;
@@ -277,20 +277,24 @@
       display: flex;
       align-items: center;
       margin: 0 25px 0 0;
-      cursor: pointer;
       min-width: 54px;
       transition: color 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 58px;
-        &:hover {
-          opacity: 1;
-          color: $primary-color;
-        }
       }
 
       @include media-breakpoint-down($mobile-breakpoint) {
         margin: 0 10px 0 0;
+      }
+
+      &:hover {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: 1;
+          color: $primary-color;
+        }
       }
 
       &.active {
@@ -325,6 +329,21 @@
     }
   }
 
+  .right-col {
+
+    .comments {
+      cursor: auto;
+
+      &:hover {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: .3;
+          color: $main-color;
+        }
+      }
+    }
+  }
+
   .tip-form {
     display: flex;
     padding: 10px 15px 0;
@@ -341,7 +360,7 @@
 
   .more-functions {
     position: absolute;
-    right: -8px;
+    right: 0;
     top: 10px;
     z-index: 0;
 
@@ -414,11 +433,8 @@
   .container & {
 
     img {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 130px);
-        object-fit: cover;
-      }
+      max-height: calc(100vh - 130px);
+      object-fit: cover;
     }
   }
 
@@ -427,10 +443,7 @@
     .special-site-header & {
 
       img {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-height: calc(100vh - 180px);
-        }
+        max-height: calc(100vh - 180px);
       }
     }
   }

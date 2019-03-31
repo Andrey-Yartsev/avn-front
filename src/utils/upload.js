@@ -14,9 +14,14 @@ export default file => {
     );
     xhr.onload = e => {
       const result = JSON.parse(e.currentTarget.responseText);
+      if (!result) {
+        return reject({ message: "Upload failed" });
+      }
       if (result.error) {
-        reject(result.error);
-        return;
+        if (result.error.message === "getimagesize(): Read error!") {
+          return reject({ message: "Uploaded file is not valid image" });
+        }
+        return reject(result.error);
       }
       accept(result[0].fileName);
     };

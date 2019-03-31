@@ -22,15 +22,12 @@
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
         />
       </label>
-
       <button
         v-if="withUser && withUser.canEarn && $root.showTips"
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
-        :class="{ active: showTip }"
-      >
-        <span>Tips</span>
-      </button>
+        :class="{ active: showTip, disabled: showPaid }"
+      ></button>
 
       <div
         class="field-text-message"
@@ -94,7 +91,7 @@
 
       <button
         class="getPaid btn-el"
-        :class="{ active: showPaid }"
+        :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
       ></button>
@@ -165,12 +162,18 @@ export default {
         return false;
       }
       return this.withUser.isMuted;
+    },
+    activeUserId() {
+      return this.$store.state.chat.activeUserId;
     }
   },
 
   watch: {
     funded() {
       this.closeTip();
+    },
+    activeUserId() {
+      this.reset();
     }
   },
 
@@ -206,17 +209,28 @@ export default {
       this.$emit("send", opt);
     },
     closeTip() {
+      if (!this.$refs.tip) {
+        return;
+      }
       this.showTip = false;
       this.$refs.tip.reset();
     },
     setPrice() {
       const p = parseFloat(this.price);
       if (!p) {
-        alert("Use correct number");
+        this.$store.dispatch(
+          "global/setError",
+          { message: "Use correct number" },
+          { root: true }
+        );
         return;
       }
       if (p < 2) {
-        alert("Minimum price is 2$");
+        this.$store.dispatch(
+          "global/setError",
+          { message: "Minimum price is 2$" },
+          { root: true }
+        );
         return;
       }
       this.price = p;
@@ -226,7 +240,22 @@ export default {
     resetPrice() {
       this.priceIsSet = false;
       this.price = "";
+    },
+    reset() {
+      this.message = "";
+      this.showPaid = false;
+      this.closeTip();
+      this.resetPrice();
     }
   }
 };
 </script>
+
+<style scoped>
+.text-media-container {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  min-height: 30px;
+  border: 10px solid #f00;
+}
+</style>

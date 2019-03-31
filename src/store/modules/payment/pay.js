@@ -34,7 +34,8 @@ createRequestAction({
     options.data = params;
     return options;
   },
-  localError: true
+  localError: true,
+  throw400: true
 });
 
 export default {

@@ -31,6 +31,10 @@
 import UserMixin from "@/mixins/user";
 import ProfileBg from "@/mixins/profileBg";
 
+const getScrollbarWidth = () => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
 export default {
   name: "ProfileBackground",
   mixins: [UserMixin, ProfileBg],
@@ -42,12 +46,23 @@ export default {
   },
   computed: {
     bgStyle() {
+      const style = {
+        "margin-right": `${-this.scrollBarWidth}px`,
+        "padding-right": `${this.scrollBarWidth}px`
+      };
       return this.bgPreview || this.profile.header
         ? {
+            ...style,
             "background-image": `url(${this.bgPreview || this.profile.header})`
           }
-        : {};
+        : style;
+    },
+    scrollBarWidth() {
+      return this.$store.state.global.scrollBarWidth;
     }
+  },
+  mounted() {
+    this.$store.commit("global/setScrollBarWidth", getScrollbarWidth());
   }
 };
 </script>
