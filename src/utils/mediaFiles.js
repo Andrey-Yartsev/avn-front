@@ -12,6 +12,16 @@ export const uniqId = () => {
 
 export const getMediaFileMeta = file => {
   return new Promise(resolve => {
+    if (file.type.startsWith("video")) {
+      resolve({
+        mediaType: "video",
+        file,
+        fileContent: null
+      });
+
+      return;
+    }
+
     let reader = new FileReader();
 
     reader.onload = function(resFileData) {
@@ -60,6 +70,15 @@ export const getMediaFileMeta = file => {
 
 export const getMediaFilePreview = (media, callback) => {
   const { file } = media;
+
+  if (file.size > 50000000) {
+    callback({
+      ...media,
+      preview: undefined
+    });
+    return;
+  }
+
   const fileReader = new FileReader();
   fileReader.onload = function() {
     const blob = new Blob([fileReader.result], { type: file.type });
@@ -88,8 +107,7 @@ export const getMediaFilePreview = (media, callback) => {
       if (success) {
         callback({
           ...media,
-          preview: image,
-          width: video.videoWidth
+          preview: image
         });
       }
       return success;

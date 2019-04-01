@@ -1,18 +1,17 @@
 <template>
   <div :class="['addFileView', { uploading: isSaving }]">
     <span class="filename">
-      <template v-if="media.preview">
-        <img :src="media.preview" :title="media.userFileName" />
-        <span class="attachment-status success-status" v-if="media.processId" />
-        <span class="attachment-status error-status" v-if="media.uploadError" />
-      </template>
-      <template v-else>
-        <span>{{ media.userFileName }}</span>
-        <div class="loader centered" v-if="!media.previewError"></div>
-      </template>
+      <img
+        v-if="media.preview"
+        :src="media.preview"
+        :title="media.userFileName"
+      />
+      <span v-else>{{ media.userFileName }}</span>
+      <span class="attachment-status success-status" v-if="media.processId" />
+      <span class="attachment-status error-status" v-if="media.uploadError" />
     </span>
     <div
-      v-if="!media.uploadError && !media.processId"
+      v-if="showLoader"
       class="progress"
       :style="{ width: `${media.loaded}%` }"
     />
@@ -25,12 +24,7 @@
         <use xlink:href="#icon-remove"></use>
       </svg>
     </span>
-    <Loader
-      v-if="!media.uploadError && !media.processId"
-      :fullscreen="false"
-      text=""
-      class="small"
-    />
+    <Loader v-if="showLoader" :fullscreen="false" text="" class="small" />
   </div>
 </template>
 
@@ -51,6 +45,11 @@ export default {
   },
   components: {
     Loader
+  },
+  computed: {
+    showLoader() {
+      return !this.media.uploadError && !this.media.processId;
+    }
   },
   methods: {
     remove() {
