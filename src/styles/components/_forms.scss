@@ -889,6 +889,117 @@ select {
   }
 }
 
+.multiselect {
+  min-height: 30px;
+
+  &__tags {
+    border: none;
+    border-radius: 5px;
+    background-color: rgba($gray, 0.1);
+    color: inherit;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    padding: 6px 10px;
+    min-height: 30px;
+    height: 30px;
+    transition: background-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      background-color: $secondary-color-10;
+    }
+  }
+
+  &__select {
+    width: 34px;
+    height: 30px;
+    top: auto;
+    padding: 0;
+
+    &:before {
+      content: '\E608';
+      @include icon-font;
+      left: 50%;
+      top: 50%;
+      right: auto;
+      position: absolute;
+      display: block;
+      opacity: .3;
+      font-size: 24px;
+      border: none;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      color: $main-color;
+    }
+  }
+
+  &__input,
+  &__single {
+    background-color: transparent;
+    margin-bottom: 0;
+  }
+
+  &__input {
+    height: 18px;
+    min-height: 18px;
+    line-height: 8px;
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+
+  &__content {
+
+    &-wrapper {
+      border-color: rgba($gray, 0.1);
+    }
+  }
+
+  &__option {
+    transition: all .3s;
+
+    &--selected {
+      font-weight: 400;
+      background: none;
+      color: $main-color;
+
+      &.multiselect__option--highlight {
+        background: rgba($gray, 0.05);
+        color: $main-color;
+
+        &:after {
+          content: "\E604";
+          color: $primary-color;
+          background: none;
+          display: block;
+        }
+      }
+
+      &:after {
+        content: "\E604";
+        @include icon-font;
+        color: $primary-color;
+        font-size: 24px;
+        background: none;
+      }
+    }
+
+    &--highlight {
+      background: rgba($gray, 0.05);
+      color: $main-color;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+
 .error-info {
   font-size: 12px;
   color: red;
@@ -946,10 +1057,6 @@ select {
   &_timeunit {
     padding-right: 90px;
   }
-}
-
-.field-symbol-currency {
-
 }
 
 .field-symbol-currency {

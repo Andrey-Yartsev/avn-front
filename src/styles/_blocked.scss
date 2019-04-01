@@ -34,9 +34,9 @@
     overflow: auto;
   }
 
-  .settings-nav__wrapper {
+  .form-title {
     @include media-breakpoint-down($desktop-breakpoint) {
-      margin-top: 11px;
+      padding-bottom: 11px;
     }
   }
 

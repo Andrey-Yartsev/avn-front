@@ -104,7 +104,7 @@ w<template>
       </div>
       -->
       <div
-        class="form-title tweet-posts-block border-top border-top-mobile"
+        class="form-title tweet-posts-block border-top"
         :class="{ disabled: !localUser.isTwitterConnected }"
       >
         <div class="inner">

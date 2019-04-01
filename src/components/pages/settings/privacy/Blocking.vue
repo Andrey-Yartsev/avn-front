@@ -1,70 +1,76 @@
 <template>
   <div>
-    <div class="form-title table-header-title border-top">
+    <div class="form-title border-top">
       <div class="inner">
         <span class="semi-transparent">
           IP & Geo Blocking
         </span>
       </div>
     </div>
-    <div class="form-group form-group_with-label pb-reset">
-      <label class="form-group-inner">
-        <span class="label">By Country</span>
-        <span class="form-group form-group_clear-gaps">
-          <span class="form-field">
-            <multiselect
-              v-model="selectedCountries"
-              :options="countries"
-              :multiple="true"
-              :close-on-select="false"
-              :clear-on-select="false"
-              :preserve-search="true"
-              placeholder="Pick some"
-              label="title"
-              track-by="title"
-              :preselect-first="true"
-              :taggable="true"
-              @input="countriesChange"
+    <div class="shadow-block">
+      <div class="container">
+        <div class="form-group form-group_with-label">
+          <label class="form-group-inner">
+            <span class="label">By Country</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <multiselect
+                  v-model="selectedCountries"
+                  :options="countries"
+                  :multiple="true"
+                  :close-on-select="false"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="Pick some"
+                  label="title"
+                  track-by="title"
+                  :preselect-first="true"
+                  :taggable="true"
+                  @input="countriesChange"
+                >
+                  <template
+                    slot="selection"
+                    slot-scope="{ values, search, isOpen }"
+                  >
+                    <span
+                      class="multiselect__single"
+                      v-if="values.length &amp;&amp;
+                      !isOpen"
+                      >{{ values.length }} options selected</span
+                    ></template
+                  >
+                </multiselect>
+              </span>
+            </span>
+          </label>
+        </div>
+        <div class="form-group form-group_with-label">
+          <label class="form-group-inner">
+            <span class="label">By IP</span>
+            <span
+              class="form-group form-group_clear-gaps"
+              :class="{ 'field-invalid': fieldError('ips') }"
             >
-              <template
-                slot="selection"
-                slot-scope="{ values, search, isOpen }"
-              >
-                <span
-                  class="multiselect__single"
-                  v-if="values.length &amp;&amp;
-                  !isOpen"
-                  >{{ values.length }} options selected</span
-                ></template
-              >
-            </multiselect>
-          </span>
-        </span>
-      </label>
-      <label class="form-group-inner">
-        <span class="label">By IP</span>
-        <span
-          class="form-group form-group_clear-gaps"
-          :class="{ 'field-invalid': fieldError('ips') }"
-        >
-          <span class="form-field">
-            <textarea
-              rows="3"
-              name="ips"
-              :minHeight="50"
-              :maxHeight="200"
-              v-model="ips"
-              @input="ipsTextChange"
-              v-validate="'ips'"
-              data-vv-validate-on="blur"
-            ></textarea>
-            <div class="input-desc">list IPS separating by commas</div>
-            <div class="error-info" v-if="fieldError('ips')">
-              {{ fieldError("ips") }}
-            </div>
-          </span>
-        </span>
-      </label>
+              <span class="form-field">
+                <textarea
+                  rows="3"
+                  name="ips"
+                  :minHeight="50"
+                  :maxHeight="200"
+                  v-model="ips"
+                  @input="ipsTextChange"
+                  v-validate="'ips'"
+                  data-vv-validate-on="blur"
+                ></textarea>
+                <div class="error-info" v-if="fieldError('ips')">
+                  {{ fieldError("ips") }}
+                </div>
+              </span>
+            </span>
+          </label>
+          <div class="input-help">list IPS separating by commas</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
