@@ -11,6 +11,7 @@ import router from "@/router";
 import store from "@/store";
 
 import "unfetch/polyfill";
+import "url-search-params-polyfill";
 import "@/iconfont";
 
 if (process.env.NODE_ENV !== "development") {
