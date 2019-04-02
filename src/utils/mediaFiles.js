@@ -167,7 +167,7 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) => {
         const processId = JSON.parse(xhr.response).processId;
         resolve(processId);
       } else {
-        reject();
+        reject(true);
       }
     };
     xhr.onabort = () => {

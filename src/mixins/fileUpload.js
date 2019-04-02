@@ -157,11 +157,14 @@ export default {
               m.id === id ? { ...m, processId } : m
             );
           })
-          .catch(() => {
+          .catch(hasError => {
             this.preloadedMedias = this.preloadedMedias.map(m =>
               m.id === id ? { ...m, uploadError: true } : m
             );
-            this.toast("Can't upload file");
+
+            if (hasError) {
+              this.toast("Can't upload file");
+            }
           });
 
         return { ...media, req: uploadProcess.xhr };
