@@ -271,6 +271,9 @@ export default {
       this.initPosts();
     },
     subscriptionUpdate(data) {
+      if (!this.$refs.actionsDesktop) {
+        return;
+      }
       this.$refs.actionsDesktop.subsRequested(data);
     },
     highlights() {
