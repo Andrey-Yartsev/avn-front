@@ -68,6 +68,22 @@ export const getMediaFileMeta = file => {
   });
 };
 
+const snapImage = function(video, media, callback) {
+  const canvas = document.createElement("canvas");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+  const image = canvas.toDataURL();
+  const success = image.length > 100000;
+  if (success) {
+    callback({
+      ...media,
+      preview: image
+    });
+  }
+  return success;
+};
+
 export const getMediaFilePreview = (media, callback) => {
   const { file } = media;
 
@@ -84,40 +100,34 @@ export const getMediaFilePreview = (media, callback) => {
     const blob = new Blob([fileReader.result], { type: file.type });
     const url = URL.createObjectURL(blob);
     const video = document.createElement("video");
+
     const timeupdate = function() {
-      if (snapImage()) {
+      if (snapImage(video, media, callback)) {
         video.removeEventListener("timeupdate", timeupdate);
-        video.pause();
+
+        if (playPromise && playPromise.then) {
+          playPromise.then(() => {
+            video.pause();
+          });
+        } else {
+          video.pause();
+        }
       }
     };
+
     video.addEventListener("loadeddata", function() {
-      if (snapImage()) {
+      if (snapImage(video, media, callback)) {
         video.removeEventListener("timeupdate", timeupdate);
       }
     });
-    const snapImage = function() {
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas
-        .getContext("2d")
-        .drawImage(video, 0, 0, canvas.width, canvas.height);
-      const image = canvas.toDataURL();
-      const success = image.length > 100000;
-      if (success) {
-        callback({
-          ...media,
-          preview: image
-        });
-      }
-      return success;
-    };
+
     video.addEventListener("timeupdate", timeupdate);
+
     video.preload = "metadata";
     video.src = url;
     video.muted = true;
     video.playsInline = true;
-    video.play();
+    const playPromise = video.play();
   };
   fileReader.readAsArrayBuffer(file);
 };
