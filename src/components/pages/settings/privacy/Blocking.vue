@@ -10,7 +10,7 @@
     <div class="shadow-block">
       <div class="container">
         <div class="form-group form-group_with-label">
-          <label class="form-group-inner">
+          <div class="form-group-inner">
             <span class="label">By Country</span>
             <span class="form-group form-group_clear-gaps">
               <span class="form-field">
@@ -42,7 +42,7 @@
                 </multiselect>
               </span>
             </span>
-          </label>
+          </div>
         </div>
         <div class="form-group form-group_with-label">
           <label class="form-group-inner">
