@@ -18,6 +18,9 @@ export default {
   },
   methods: {
     setAvatarPreview(e) {
+      if (!e.target.files || e.target.files.length) {
+        return;
+      }
       this.avatarRemoved = false;
       const reader = new FileReader();
       reader.onload = () => {
