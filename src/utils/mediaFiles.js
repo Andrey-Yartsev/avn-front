@@ -132,9 +132,10 @@ export const getMediaFilePreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
-  new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+export const fileUpload = ({ id, file, width, mediaType }, onProgress) => {
+  const xhr = new XMLHttpRequest();
+
+  const pr = new Promise((resolve, reject) => {
     const formData = new FormData();
     const {
       hasWatermarkPhoto,
@@ -159,7 +160,7 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
     formData.append("isDelay", true);
 
     xhr.upload.onprogress = ({ loaded, total }) => {
-      onProgress(id, loaded, total);
+      onProgress(id, loaded, total, xhr);
     };
     xhr.onload = xhr.onerror = () => {
       if (xhr.status == 200) {
@@ -169,6 +170,10 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
         reject();
       }
     };
+    xhr.onabort = () => {
+      reject();
+    };
+
     xhr.open(
       "POST",
       `${Store.state.init.data.converter.url}/file/upload`,
@@ -176,3 +181,8 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) =>
     );
     xhr.send(formData);
   });
+
+  pr.xhr = xhr;
+
+  return pr;
+};

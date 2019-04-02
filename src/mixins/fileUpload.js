@@ -105,15 +105,25 @@ export default {
     },
 
     removeMedia(id) {
-      this.preloadedMedias = this.preloadedMedias.filter(m => m.id !== id);
+      this.preloadedMedias = this.preloadedMedias.reduce((memo, media) => {
+        if (media.id !== id) {
+          return [...memo, media];
+        } else {
+          if (media.res && media.res.abort) {
+            media.res.abort();
+          }
+          return memo;
+        }
+      }, []);
+
       this.mediaType = this.preloadedMedias.length
         ? this.preloadedMedias[0].mediaType
         : "all";
     },
 
-    setUploadProgress(id, loaded, total) {
+    setUploadProgress(id, loaded, total, xhr) {
       this.preloadedMedias = this.preloadedMedias.map(m =>
-        m.id === id ? { ...m, loaded: (loaded / total) * 100 } : m
+        m.id === id ? { ...m, res: xhr, loaded: (loaded / total) * 100 } : m
       );
     },
 
@@ -129,23 +139,33 @@ export default {
     },
 
     saveMediaFiles() {
-      this.preloadedMedias
-        .filter(i => !i.processId && !i.loaded)
-        .forEach(media => {
-          const { id, file, width, mediaType } = media;
-          fileUpload({ id, file, width, mediaType }, this.setUploadProgress)
-            .then(processId => {
-              this.preloadedMedias = this.preloadedMedias.map(m =>
-                m.id === id ? { ...m, processId } : m
-              );
-            })
-            .catch(() => {
-              this.preloadedMedias = this.preloadedMedias.map(m =>
-                m.id === id ? { ...m, uploadError: true } : m
-              );
-              this.toast("Can't upload file");
-            });
-        });
+      this.preloadedMedias = this.preloadedMedias.map(media => {
+        if (media.processId || media.loaded) {
+          return { ...media };
+        }
+
+        const { id, file, width, mediaType } = media;
+
+        const uploadProcess = fileUpload(
+          { id, file, width, mediaType },
+          this.setUploadProgress
+        );
+
+        uploadProcess
+          .then(processId => {
+            this.preloadedMedias = this.preloadedMedias.map(m =>
+              m.id === id ? { ...m, processId } : m
+            );
+          })
+          .catch(() => {
+            this.preloadedMedias = this.preloadedMedias.map(m =>
+              m.id === id ? { ...m, uploadError: true } : m
+            );
+            this.toast("Can't upload file");
+          });
+
+        return { ...media, req: uploadProcess.xhr };
+      });
     },
 
     validateFiles(files) {
