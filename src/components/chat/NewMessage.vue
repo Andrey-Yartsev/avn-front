@@ -60,9 +60,9 @@
             placeholder="Search"
           />
           <div
-            class="btn-selected-all visible"
+            class="btn-selected-all"
             @click="toggleSelectAll"
-            :class="{ active: isAllSelected }"
+            :class="{ visible: !!chats.length, active: isAllSelected }"
           ></div>
         </div>
         <VuePerfectScrollbar
