@@ -62,7 +62,7 @@
           <div
             class="btn-selected-all"
             @click="toggleSelectAll"
-            :class="{ visible: !!chats.length, active: isAllSelected }"
+            :class="{ visible: chats.length, active: isAllSelected }"
           ></div>
         </div>
         <VuePerfectScrollbar

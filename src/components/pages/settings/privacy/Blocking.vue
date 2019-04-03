@@ -10,7 +10,7 @@
     <div class="shadow-block">
       <div class="container">
         <div class="form-group form-group_with-label">
-          <div class="form-group-inner">
+          <label class="form-group-inner">
             <span class="label">By Country</span>
             <span class="form-group form-group_clear-gaps">
               <span class="form-field">
@@ -42,6 +42,9 @@
                 </multiselect>
               </span>
             </span>
+          </label>
+          <div class="input-help" v-if="selectedCountriesText">
+            {{ selectedCountriesText }}
           </div>
         </div>
         <div class="form-group form-group_with-label">
@@ -68,7 +71,7 @@
               </span>
             </span>
           </label>
-          <div class="input-help">list IPS separating by commas</div>
+          <div class="input-help">List IPS separating by commas</div>
         </div>
       </div>
     </div>
@@ -129,6 +132,12 @@ export default {
           title: v[1]
         };
       });
+    },
+    selectedCountriesText() {
+      if (!this.selectedCountries || !this.selectedCountries.length) {
+        return "";
+      }
+      return this.selectedCountries.map(v => v.title).join(", ");
     }
   },
   methods: {
@@ -159,6 +168,7 @@ export default {
       this.selectedCountries = this.localUser.blockedCountries.map(id => {
         return countries.find(v => v.id === id);
       });
+      this.selectedCountries = this.selectedCountries.filter(v => !!v);
     }
   },
   mounted() {
