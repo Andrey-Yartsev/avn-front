@@ -142,7 +142,7 @@
         class="post-attachment"
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
-        <VuePerfectScrollbar class="addFileCollectionView">
+        <div class="addFileCollectionView">
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
@@ -150,7 +150,7 @@
             @removeMedia="removeMedia"
             :isSaving="isSaving"
           />
-        </VuePerfectScrollbar>
+        </div>
         <div class="post-scheduled-time" v-if="datetime">
           <div class="datetime-value">
             <span class="post-datetime__value">{{ formattedDate }}</span>
