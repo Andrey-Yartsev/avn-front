@@ -3,6 +3,10 @@
   display: flex;
   flex-wrap: nowrap;
 
+  @include media-breakpoint-down($tablet-breakpoint) {
+    flex-wrap: wrap;
+  }
+
   .addFileView {
     position: relative;
     margin: 0 1em 0.6em 0;
