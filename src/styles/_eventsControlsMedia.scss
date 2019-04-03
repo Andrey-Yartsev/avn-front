@@ -3,7 +3,7 @@
 .group-controls {
   display: flex;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     justify-content: space-around;
     width: 100%;
     position: absolute;
@@ -288,7 +288,7 @@
     .root-btn__inside {
       &:before {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           content: "\E647";
         }
 
@@ -313,7 +313,7 @@
 
       &:before {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           content: "\E647";
         }
       }

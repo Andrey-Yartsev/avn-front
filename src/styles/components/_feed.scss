@@ -1,6 +1,6 @@
 .feed {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-top: 0;
   }
 
@@ -11,7 +11,7 @@
   }
 
   .aside-col {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       order: -1;
     }
   }

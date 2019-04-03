@@ -10,18 +10,18 @@
 .BlockedView {
   .BlockedUsersCollectionView {
     .table-header-title {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 19px;
       }
     }
 
     .table-header {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 14px;
       }
 
       &_reset-pt {
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-top: 0;
         }
       }
@@ -35,7 +35,7 @@
   }
 
   .form-title {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-bottom: 11px;
     }
   }
@@ -53,7 +53,7 @@
 
 .private-story {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-bottom: 0;
   }
 }

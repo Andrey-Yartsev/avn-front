@@ -1,6 +1,6 @@
 html,
 body {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 100%;
   }
 }
@@ -48,7 +48,7 @@ strong {
     overflow: hidden;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     //position: fixed;
     //left: 0;
     //top: 0;
@@ -65,7 +65,7 @@ strong {
 
 .hidden {
   display: none !important;
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     &-mobile {
       display: none !important;
     }
@@ -77,7 +77,7 @@ strong {
   }
 }
 .over-container {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     margin: 0 -15px;
   }
 }
@@ -99,7 +99,7 @@ strong {
 }
 
 .shadow-block {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     background: $white;
     box-shadow: 0 1px 7px rgba(#000, 0.15);
     padding: 15px 0 0;
@@ -109,7 +109,7 @@ strong {
   }
 
   &_reset-pt {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-top: 0;
     }
   }
@@ -150,7 +150,7 @@ strong {
 
     .avn-style & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         border-bottom: 1px solid rgba($gray, 0.2);
         padding-bottom: 11px;
       }
@@ -160,7 +160,7 @@ strong {
 
 #content {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 100%;
     flex: 1;
     min-height: 100%;
@@ -194,7 +194,7 @@ strong {
   height: 100%;
   position: relative;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
   }
@@ -284,7 +284,7 @@ video {
   .form-title {
     margin-bottom: 0;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 16px;
       font-weight: 500;
       padding-top: 16px;
@@ -295,7 +295,7 @@ video {
   .shadow-block {
     margin-bottom: 30px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background-color: transparent;
       box-shadow: none;
     }
@@ -305,7 +305,7 @@ video {
 
     .btn {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-left: 0;
       }
     }
@@ -315,7 +315,7 @@ video {
 .main-container {
   min-height: 100%;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: flex;
     flex-direction: column;
   }
@@ -326,13 +326,13 @@ video {
 
   .scroll-bottom & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-top: 88px;
     }
 
     .reset-sticky-gap & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 0;
       }
     }
@@ -440,7 +440,7 @@ video {
 
   &_flex-align {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
       align-content: center;
       align-items: center;
@@ -449,7 +449,7 @@ video {
 
   input.sm {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 24px;
       padding: 2px 10px;
 
@@ -468,7 +468,7 @@ video {
 
     #site_header & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
         &::-moz-placeholder {
           text-align: center;
@@ -548,7 +548,7 @@ video {
 
     &_mob {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         color: $secondary-color;
         margin-left: 10px;
         position: relative;
@@ -560,7 +560,7 @@ video {
 
         .b-search-form & {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             font-size: 24px;
             line-height: 30px;
           }
@@ -631,7 +631,7 @@ video {
   align-items: center;
   margin-bottom: 2px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     font-size: 13px;
     margin-bottom: 3px;
   }
@@ -676,7 +676,7 @@ video {
 
     span {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         opacity: .5;
       }
     }
@@ -691,7 +691,7 @@ video {
   align-content: center;
   margin-top: -7px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -737,7 +737,7 @@ video {
 
     &-desk {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background-image: none;
       }
     }
@@ -755,7 +755,7 @@ video {
 
     &:before {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background: $light;
         content: "";
         position: absolute;
@@ -769,7 +769,7 @@ video {
 
     &:after {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background: $white
         linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
         content: "";
@@ -790,7 +790,7 @@ video {
 
       &:after {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           content: "";
           position: absolute;
           top: 0;

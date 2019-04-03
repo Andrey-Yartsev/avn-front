@@ -3,7 +3,7 @@
   width: 100%;
   margin: 16px auto;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     //overflow: hidden;
   }
 
@@ -16,7 +16,7 @@
     margin: 0 -10px;
     max-width: none;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-left: 0;
       margin-right: 0;
       flex-wrap: wrap;
@@ -168,7 +168,7 @@
       flex-wrap: wrap;
       align-items: center;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex-direction: row;
         overflow: hidden;
       }
@@ -322,7 +322,7 @@
   flex: 1;
   height: 230px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     overflow: visible !important;
   }
 }
@@ -330,7 +330,7 @@
 .visitors-donuts-wrapper-outer {
   padding: 20px 0 7px 25px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding: 10px;
     flex: 0 0 100%;
     display: flex;
@@ -348,7 +348,7 @@
   white-space: nowrap;
   margin: 0 0 23px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding: 10px;
     flex: 0 0 33%;
     flex-wrap: wrap;
@@ -361,7 +361,7 @@
   .visitors_data {
     padding: 0 0 0 19px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 10px 0 0;
     }
 
@@ -472,7 +472,7 @@
 
     &-1 {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 0 0 100%;
       }
     }

@@ -243,7 +243,7 @@ label {
   position: relative;
   display: block;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-bottom: 13px;
   }
 
@@ -297,7 +297,7 @@ label {
         right: 0;
         content: "\E604";
         color: $default-secondary-color;
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           bottom: 0;
         }
         @include media-breakpoint-up($desktop-breakpoint) {
@@ -315,7 +315,7 @@ label {
     }
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     &-title {
       display: flex;
       justify-content: space-between;
@@ -378,7 +378,7 @@ label {
 
       &-mob {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-bottom: 0;
         }
       }
@@ -396,7 +396,7 @@ label {
     }
   }
   &-checkbox {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       .form-group-inner {
         padding-left: 30px;
         position: relative;
@@ -412,7 +412,7 @@ label {
     }
   }
   &.radio-group {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-bottom: 0;
       overflow: hidden;
     }
@@ -423,12 +423,12 @@ label {
       padding-bottom: 11px;
     }
     .form-group-inner {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         border-bottom: 1px solid rgba($gray, 0.2);
         margin-bottom: 12px;
       }
       &:last-child {
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           border-bottom: none;
         }
         .radio-wrapper {
@@ -438,7 +438,7 @@ label {
     }
   }
   &.checkbox-group {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-bottom: 0;
       overflow: hidden;
     }
@@ -449,12 +449,12 @@ label {
       padding-bottom: 13px;
     }
     .form-group-inner {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         border-bottom: 1px solid rgba($gray, 0.2);
         margin-bottom: 12px;
       }
       &:last-child {
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           border-bottom: none;
         }
         .checkbox-wrapper {
@@ -499,7 +499,7 @@ label {
   box-shadow: 0 0 0 2px rgba($gray, 0.5) inset;
   position: relative;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     margin-top: -2px;
   }
 
@@ -579,7 +579,7 @@ label {
 
       .avn-style & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-top: 0;
         }
       }
@@ -588,7 +588,7 @@ label {
 
   &.private-switcher-block {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-bottom: 10px;
     }
   }
@@ -630,7 +630,7 @@ label {
     padding: 0;
     margin-top: 2px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 8px;
     }
   }
@@ -706,7 +706,7 @@ select {
       color: $secondary-color;
     }
   }
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     .input-desc {
       font-size: 13px;
       opacity: 0.5;
@@ -844,7 +844,7 @@ select {
       margin-right: 16px;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-left: 10px;
     }
   }
@@ -1022,7 +1022,7 @@ select {
 
 .watermarks-settings  {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     //padding-top: 3px;
     //padding-bottom: 13px;
   }

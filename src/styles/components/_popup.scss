@@ -133,6 +133,10 @@
 
       &:not(.popup-container_hfluid) {
         overflow: visible;
+
+        @include media-breakpoint-down($desktop-breakpoint) {
+          max-width: 100%;
+        }
       }
 
       .close {
@@ -145,7 +149,7 @@
       .close {
         color: $main;
 
-        @include media-breakpoint-down($tablet-breakpoint) {
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
           display: block;
         }
       }
@@ -156,7 +160,7 @@
       margin: auto;
       display: block;
 
-      @include media-breakpoint-down($tablet-breakpoint) {
+      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
         max-width: 300px;
         position: fixed;
         top: 50%;
@@ -172,7 +176,7 @@
       margin: auto;
       display: block;
 
-      @include media-breakpoint-down($tablet-breakpoint) {
+      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
         max-width: 300px;
         position: fixed;
         top: 50%;

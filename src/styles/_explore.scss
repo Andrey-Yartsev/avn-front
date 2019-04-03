@@ -9,7 +9,7 @@
       .header-logo,
       .make-post-btn {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: none;
         }
       }
@@ -20,7 +20,7 @@
 
     #site_header {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         box-shadow: 0 0 5px rgba(#000, 0.3);
       }
     }
@@ -28,7 +28,7 @@
 
   #content {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: calc(100% - 44px);
       height: auto;
       display: flex;
@@ -42,7 +42,7 @@
 
     &.make-post-btn {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -50,7 +50,7 @@
 
   .b-search-form_flex-align {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
     }
   }
@@ -59,7 +59,7 @@
 .content-nav {
   display: flex;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     line-height: 4em;
     justify-content: space-around;
   }
@@ -76,7 +76,7 @@
 
   .searchView & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background: $white;
       position: -webkit-sticky;
       position: sticky;
@@ -87,7 +87,7 @@
 
     .scroll-bottom & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         transform: translate3d(0, 44px, 0);
         position: fixed;
         left: 0;
@@ -120,13 +120,13 @@
     text-align: center;
     font-weight: 400;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin: 0;
     }
 
     .searchView & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
         height: 44px;
         background-color: $white;
@@ -145,7 +145,7 @@
 
         .searchView & {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -173,7 +173,7 @@
     min-height: calc(100vh - 75px);
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     width: 100%;
     flex-wrap: nowrap;
     justify-content: stretch;
@@ -181,7 +181,7 @@
 
   .container {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex: 1;
       width: 100%;
       display: flex;
@@ -191,7 +191,7 @@
 
   .over-container {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: calc(100% + 30px);
       display: flex;
       flex-direction: column;
@@ -207,7 +207,7 @@
     margin-bottom: 14px;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     min-height: calc(100% - 60px);
     flex: 1;
     display: flex;
@@ -224,7 +224,7 @@
       margin-right: -10px;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background: $light;
       flex: 1;
       display: flex;
@@ -244,7 +244,7 @@
     align-content: stretch;
     padding: 0 10px 10px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: relative;
       align-items: start;
       align-content: start;
@@ -257,7 +257,7 @@
 
       .searchView & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           min-height: 100%;
           padding: 0;
           grid-gap: 0;
@@ -281,7 +281,7 @@
     &.videos {
       grid-template-columns: 1fr;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         grid-gap: 0;
         padding-top: 0;
       }
@@ -292,7 +292,7 @@
 
       .post {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           border-bottom: 1px solid rgba($gray, 0.2);
           padding-bottom: 8px;
           background-color: $white;
@@ -334,7 +334,7 @@
     &.users {
       grid-template-columns: 1fr;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         grid-gap: 0;
       }
 
@@ -353,7 +353,7 @@
     
     &.posts {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block;
       }
     }
@@ -624,7 +624,7 @@
       padding: 0 18%;
       z-index: 1;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }

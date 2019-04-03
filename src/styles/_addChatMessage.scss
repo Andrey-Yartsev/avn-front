@@ -162,7 +162,7 @@
     }
 
     &.hidden {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block !important;
       }
     }
@@ -179,7 +179,7 @@
     width: 100%;
     flex: 0 0 100%;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       order: 5;
       margin-left: 0;
       margin-top: 15px;

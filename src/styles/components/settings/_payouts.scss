@@ -264,7 +264,7 @@
     position: relative;
   }
 
-  @include media-breakpoint-down($tablet-breakpoint) {
+  @include media-breakpoint-down($tablet-breakpoint-dcrs) {
     //background-position: 100px 460px;
   }
 

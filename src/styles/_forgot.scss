@@ -14,7 +14,7 @@
     font-weight: 400;
     margin: 0 0 42px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font: inherit;
       margin: 0 0 23px;
     }
@@ -22,7 +22,7 @@
 
   #content {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: auto;
     }
   }

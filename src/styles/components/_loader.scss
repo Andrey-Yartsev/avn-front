@@ -222,7 +222,7 @@
   }
 
   .payments .payment-card & {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: 20px;
 
       .lds-dual-ring {

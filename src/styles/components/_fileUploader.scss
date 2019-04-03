@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  @include media-breakpoint-down($tablet-breakpoint) {
+  @include media-breakpoint-down($tablet-breakpoint-dcrs) {
     flex-wrap: wrap;
   }
 

@@ -134,7 +134,7 @@
 
     &_mob-lg {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         max-width: 274px;
       }
     }
@@ -353,7 +353,7 @@ button,
 
     .searchView & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         min-width: 70px;
       }
     }

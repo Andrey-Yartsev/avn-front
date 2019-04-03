@@ -16,7 +16,7 @@
       font-weight: 400;
       margin: 0 0 42px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         font: inherit;
         margin: 0 0 23px;
       }
@@ -45,7 +45,7 @@
 .staticPage {
   form {
     padding: 0 0 68px;
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin: 0 -5px;
       .form-group .label + .btn {
         display: block;

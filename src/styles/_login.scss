@@ -10,7 +10,7 @@
 
     .site-footer {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         border-top: none;
       }
 
@@ -26,13 +26,13 @@
 
       .site-footer {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           margin-top: auto;
         }
 
         .FooterNavCollectionView {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             padding-bottom: 22px;
           }
         }
@@ -43,7 +43,7 @@
   .site-footer {
     position: relative;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 55px;
       border-top: 1px solid rgba($gray, 0.2);
     }
@@ -77,7 +77,7 @@
 
     .FooterNavCollectionView {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-bottom: 0;
       }
     }
@@ -93,7 +93,7 @@
 
       &:last-child {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           margin-top: 21px;
           flex: 0 0 100%;
         }
@@ -183,7 +183,7 @@
 
         & > * {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             width: 100%;
           }
         }
@@ -202,7 +202,7 @@
     margin-bottom: 22px;
     padding: 22px 15px 26px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       text-align: center;
     }
 
@@ -217,13 +217,13 @@
     }
     .logo {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-bottom: 7px;
       }
 
       .avn-style & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           margin-bottom: 24px;
         }
 

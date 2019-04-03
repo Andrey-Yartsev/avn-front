@@ -4,7 +4,7 @@
 
   #content {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: auto;
       min-height: 100%;
       display: flex;
@@ -14,12 +14,12 @@
 }
 
 .header_container {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     //transition: transform 0.2s ease-in-out;
   }
 
   .scroll-top & {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       //transform: translateY(-100%);
     }
   }
@@ -27,7 +27,7 @@
 
 .notifications-header {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: flex;
     align-items: center;
   }
@@ -44,7 +44,7 @@
   transform: translate(0, -50%);
   transition: color 0.3s ease;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     color: $secondary-color;
   }
 
@@ -131,7 +131,7 @@
 .notifications-container {
   position: relative;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -193,7 +193,7 @@
 
   .no-notifications & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
 
@@ -283,7 +283,7 @@
   position: relative;
   padding: 0 8px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     margin-top: -60px;
   }
 
@@ -315,7 +315,7 @@
     font-weight: 500;
     color: inherit;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex: 1;
       justify-content: center;
     }
@@ -328,7 +328,7 @@
       font-weight: 400;
       transition: opacity 0.3s ease, color 0.3s ease;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         color: $secondary-color;
       }
     }
@@ -394,7 +394,7 @@
 .notificationsFilterList {
   display: flex;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     width: 100%;
   }
 }

@@ -2,34 +2,34 @@
 
 .addPost-page {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     background: $white;
   }
 
   &:before {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
 
   #site_header {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
 
   .site-footer {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
 
   #content {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: relative;
       z-index: 11;
     }
@@ -37,7 +37,7 @@
 
   .addPost {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: inherit;
     }
   }
@@ -46,7 +46,7 @@
 
     .main-container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 0;
       }
     }
@@ -55,7 +55,7 @@
 
 .addPostPage {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-left: 0;
     padding-right: 0;
   }
@@ -78,7 +78,7 @@
 
 .addPost {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 100%;
     background: $white;
     position: relative;
@@ -119,13 +119,13 @@
     .popup-addPost &,
     .addPost-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         height: 100vh;
       }
 
       + .loader-content {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: none;
         }
       }
@@ -179,7 +179,7 @@
       display: none;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
       height: 44px;
       align-items: center;
@@ -200,7 +200,7 @@
   display: none;
   margin: 0 15px 0 auto;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: absolute;
     top: 7px;
     right: 86px;
@@ -254,7 +254,7 @@
   position: relative;
   z-index: 1;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-top: 44px;
   }
 
@@ -299,7 +299,7 @@
 
   .popup & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 100vh;
     }
 
@@ -314,7 +314,7 @@
 
   .popup-container_hfluid & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: auto;
     }
 
@@ -330,7 +330,7 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -358,7 +358,7 @@
     overflow: hidden;
     flex: 1;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: relative;
       overflow: visible;
 
@@ -383,7 +383,7 @@
     background-color: transparent;
     caret-color: $secondary-color;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 17px;
       padding: 21px 15px;
       height: 137px;
@@ -501,7 +501,7 @@
       overflow: auto;
       max-height: 200px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         //height: 137px;
 
         height: 180px;
@@ -599,7 +599,7 @@
     .submit {
       display: block;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin: auto 0 auto auto;
       }
     }
@@ -903,7 +903,7 @@
     }
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     margin-right: 7px;
   }
 

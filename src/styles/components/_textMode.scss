@@ -7,14 +7,14 @@
 
   .addStoryButtonWrapper {
     .addStoryButton {
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
   }
 
   .category-name {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       opacity: 0;
       pointer-events: none;
     }
@@ -24,7 +24,7 @@
     .btn-media-event {
       transition: all 0.4s;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         opacity: 0;
         pointer-events: none;
       }

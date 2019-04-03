@@ -129,7 +129,7 @@
     align-content: center;
     align-items: center;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       //z-index: 42;
     }
 
@@ -209,7 +209,7 @@
 
         .explore-page & {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             @include color-settings-dots(#fff, 1);
           }
         }
@@ -238,7 +238,7 @@
         transform: translate(0, 1px);
         color: $secondary-color;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           position: relative;
           left: auto;
           top: auto;
@@ -331,7 +331,7 @@
 
         &:before {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             display: none;
           }
 
@@ -339,7 +339,7 @@
 
             .explore-page & {
 
-              @include media-breakpoint-down($desktop-breakpoint) {
+              @include media-breakpoint-down($desktop-breakpoint-dcrs) {
                 display: block;
               }
             }

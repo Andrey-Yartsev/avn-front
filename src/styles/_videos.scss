@@ -30,7 +30,7 @@
   }
 
   .container & {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       .shadow-block {
         background: $light;
         overflow: hidden;
@@ -41,7 +41,7 @@
 }
 .videoView {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding: 0 0 8px;
     border-bottom: 1px solid rgba(124, 139, 150, 0.2);
     background: $white;
@@ -56,14 +56,14 @@
 
   .videoplayer {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
 
   .postLink {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: block;
     }
   }
@@ -128,7 +128,7 @@
 
     .overlay {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
 

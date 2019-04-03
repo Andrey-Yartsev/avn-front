@@ -6,7 +6,7 @@
 
     &:before {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -14,7 +14,7 @@
 
   .white-bg-block {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       box-shadow: 0 0 5px rgba(#000, 0.3);
     }
 
@@ -22,7 +22,7 @@
 
       .posts-container {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           box-shadow: none;
         }
       }
@@ -31,7 +31,7 @@
 
   .explore {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       box-shadow: none;
     }
   }
@@ -40,7 +40,7 @@
 
     .userCollectionView {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         position: static;
       }
     }

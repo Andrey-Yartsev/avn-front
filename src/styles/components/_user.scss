@@ -160,7 +160,7 @@
 
           &-mob {
 
-            @include media-breakpoint-down($desktop-breakpoint) {
+            @include media-breakpoint-down($desktop-breakpoint-dcrs) {
               margin-right: 0;
             }
           }

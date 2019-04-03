@@ -118,7 +118,7 @@
 
       &-navigation {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: none;
         }
 
@@ -179,7 +179,7 @@
   position: relative;
   flex: 1;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: flex;
     flex-direction: column;
   }
@@ -199,7 +199,7 @@
     .lds-dual-ring {
       bottom: 0;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         top: -44px;
       }
     }
@@ -207,7 +207,7 @@
 
   > .chatContent {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: auto;
       margin-bottom: 0;
     }

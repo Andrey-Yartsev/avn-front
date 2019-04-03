@@ -4,7 +4,7 @@
 
   &:before {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
@@ -49,7 +49,7 @@
 
   #content {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: auto;
     }
   }
@@ -62,7 +62,7 @@
   .text {
     padding: 25px 0 70px;
     font-size: 13px;
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       text-align: justify;
       padding: 25px 0 45px;
     }
@@ -100,7 +100,7 @@
 .PasswordConfirmedView {
   display: flex;
   flex-direction: column;
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding: 32px 5px 0;
     min-height: calc(100vh - 44px);
   }

@@ -11,7 +11,7 @@
 
     #site_header {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -23,7 +23,7 @@
 
         + #content {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             //margin-top: 0;
           }
         }
@@ -51,7 +51,7 @@
 
     #site_header {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block;
       }
     }
@@ -59,7 +59,7 @@
 
   #site_header {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: fixed;
       left: 0; right: 0;
       top: 0;
@@ -79,7 +79,7 @@
 
     .header_container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background-color: transparent;
       }
     }
@@ -280,7 +280,7 @@
 
 .main-header {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: -webkit-sticky;
     position: sticky;
     top: -44px;
@@ -291,13 +291,13 @@
 
   .scroll-top & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       transform: translate3d(0, -44px, 0);
     }
 
     .support-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         transform: translate3d(0, 0, 0);
       }
     }
@@ -305,7 +305,7 @@
 
   .scroll-bottom & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       transform: translate3d(0, 0, 0);
       top: 0;
       position: fixed;
@@ -368,7 +368,7 @@
   .register {
     position: relative;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 0;
       height: auto;
       margin: 0 5px 0 10px;
@@ -380,7 +380,7 @@
 
     &:before {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -421,14 +421,14 @@
 
   .register {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
 
   .header-search {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: 100%;
       margin-right: 0;
       align-items: center;
@@ -459,7 +459,7 @@
   z-index: 5;
   box-shadow: 0 0 5px rgba(#000, 0.3);
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     background-color: $white;
   }
 
@@ -475,7 +475,7 @@
   display: flex;
   align-items: center;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 44px;
     background: var(--white);
     width: 100%;
@@ -483,7 +483,7 @@
 
   .static-page.dark-theme & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background: transparent;
     }
   }
@@ -504,7 +504,7 @@
 
   .not-authorized & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-left: 0;
     }
   }
@@ -603,7 +603,7 @@
 
   .not-authorized & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-left: 0;
     }
   }
@@ -732,7 +732,7 @@
 
 .header-search {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: none;
     margin: 0 40px;
     padding: 10px 0;
@@ -781,7 +781,7 @@
     position: absolute;
     top: 0;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       left: 15px;
       right: 15px;
       height: 1px;
@@ -805,7 +805,7 @@
     }
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     left: 0;
     right: 0;
     top: 44px;
@@ -840,7 +840,7 @@
 
   .close {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
 
@@ -965,7 +965,7 @@
 
   &_header.btn {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       color: $primary-color;
     }
 
@@ -974,7 +974,7 @@
       background: none;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-radius: 0;
       background: none;
       right: 0;
@@ -1015,7 +1015,7 @@
   z-index: 9;
   background: $white;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -1029,7 +1029,7 @@
 
   .scroll-bottom & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       //transform: translate3d(0, 44px, 0);
       top: 44px;
       position: fixed;
@@ -1047,7 +1047,7 @@
     border-bottom: 2px solid transparent;
     font-weight: 500;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       line-height: 11px;
     }
 
@@ -1109,7 +1109,7 @@
 
   + .page-header-title {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 20px;
     }
   }
@@ -1154,7 +1154,7 @@
   width: calc(100vw - 55px);
   max-width: 320px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     @media screen and (orientation: landscape) {
       max-width: 800px;
     }
@@ -1187,7 +1187,7 @@
     transition: transform 0.4s ease;
     padding-bottom: 70px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         max-width: 800px;
       }
@@ -1204,7 +1204,7 @@
 
   &__header {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         display: flex;
         flex-direction: row;
@@ -1274,7 +1274,7 @@
     height: 100%;
     display: flex;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         padding-top: 24px;
       }
@@ -1318,7 +1318,7 @@
     flex: 0 0 auto;
     margin-bottom: -24px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         position: absolute;
         left: 0;
@@ -1335,7 +1335,7 @@
     margin-bottom: 12px;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     @media screen and (orientation: landscape) {
       margin-bottom: 0;
       padding-left: 85px;
@@ -1346,7 +1346,7 @@
 .user-menu {
   flex: 0 1 100%;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     @media screen and (orientation: landscape) {
       display: flex;
       flex-direction: row;
@@ -1359,7 +1359,7 @@
     margin-bottom: 9px;
     position: relative;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         flex: 0 0 50%;
         max-width: 50%;
@@ -1380,7 +1380,7 @@
       right: 20px;
       bottom: 0;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         @media screen and (orientation: landscape) {
           top: 0;
           left: auto;
@@ -1489,7 +1489,7 @@
     align-items: center;
     align-content: center;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         padding-left: 0;
         padding-right: 0;
@@ -1504,7 +1504,7 @@
   &-login {
     padding: 0 20px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         padding-left: 0;
         padding-right: 0;
@@ -1513,7 +1513,7 @@
 
     &.user-login {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         min-width: 100%;
       }
 
@@ -1527,7 +1527,7 @@
     margin: 0 20px 9px;
     border-bottom: 1px solid rgba($gray, 0.2);
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         border-bottom: none;
         padding: 0 20px;
@@ -1546,7 +1546,7 @@
       vertical-align: top;
       transition: color 0.3s;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         @media screen and (orientation: landscape) {
           margin-bottom: 0;
           margin-top: 10px;
@@ -1614,7 +1614,7 @@
     transition: transform 0.3s ease;
     color: $primary-color;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         top: -14px;
       }
@@ -1665,7 +1665,7 @@
 
   .not-authorized & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
     }
   }
@@ -1746,7 +1746,7 @@
 
       #site_header {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           transform: translate3d(0, -44px, 0);
         }
       }

@@ -31,7 +31,7 @@
       flex-direction: column;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: 100%;
       display: flex;
       flex-direction: column;
@@ -44,7 +44,7 @@
 
   .white-bg-block {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
       flex-direction: column;
     }
@@ -57,7 +57,7 @@
 
     > .container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
         background: $white
         linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%) fixed;
@@ -110,7 +110,7 @@
 
   .site-footer {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex: 0 0 auto;
       width: 100%;
     }
@@ -127,7 +127,7 @@
 
     .container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-top: 22px;
       }
     }
@@ -148,7 +148,7 @@
 
   .addPost-btn-float {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       z-index: 7;
     }
   }
@@ -580,7 +580,7 @@
 
   &:before,
   &:after {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       content: "";
     }
   }
@@ -622,7 +622,7 @@
   box-shadow: 0 2px 1px rgba(#000, 0.1);
   z-index: 5;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: -webkit-sticky;
     position: sticky;
     top: -22px;
@@ -641,7 +641,7 @@
   .container {
     position: relative;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: 100%;
       display: none;
     }
@@ -678,7 +678,7 @@
     display: none;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     background-color: $white;
   }
 
@@ -807,7 +807,7 @@
 
   .settings-aside & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       top: auto;
     }
   }
@@ -818,7 +818,7 @@
 
     .header-scrolled & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         opacity: 0;
         pointer-events: none;
       }
@@ -900,7 +900,7 @@
   .support-page &,
   .profile-page & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: fixed;
       background-color: transparent;
     }
@@ -910,7 +910,7 @@
 
     .support-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         opacity: 0;
       }
     }
@@ -951,7 +951,7 @@
 
       &:before {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           @include color-settings-dots(#fff, 1);
           filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.5));
         }
@@ -972,7 +972,7 @@
 
   will-change: scroll-position;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 32vw;
     top: calc(44px - 32vw);
   }
@@ -1010,7 +1010,7 @@
     );
     z-index: 7;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 44px;
     }
   }
@@ -1025,7 +1025,7 @@
       transparent 100%
     );
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 12px;
     }
 
@@ -1040,7 +1040,7 @@
 
   &.size-lg {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 62vw;
       top: calc(44px - 62vw);
     }
@@ -1048,7 +1048,7 @@
 
   .header-scrolled & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       z-index: 6;
     }
   }
@@ -1104,7 +1104,7 @@
 
   .settings-aside & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background-color: $white;
     }
   }
@@ -1113,7 +1113,7 @@
 
     .posts-container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         box-shadow: 0 1px 7px rgba(0,0,0,.15);
       }
     }
@@ -1121,7 +1121,7 @@
 
   .profile-header {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background-color: $white;
     }
   }
@@ -1321,7 +1321,7 @@
 
     a {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-top: 10px;
         background-color: $white;
       }
@@ -1368,14 +1368,14 @@
 
   .lds-dual-ring.not-fullscreen {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: fixed;
     }
 
     .loader-text.lowered {
       top: 100px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         top: 50%;
       }
     }
@@ -1518,7 +1518,7 @@
     left: auto;
     top: auto;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       white-space: nowrap;
       position: relative;
       left: auto;
@@ -1564,7 +1564,7 @@
   left: 0;
   bottom: 10px;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: none;
   }
 
@@ -1585,7 +1585,7 @@
 
     .site-footer {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
     }
@@ -1597,7 +1597,7 @@
 
     .container {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-top: 22px;
       }
     }
@@ -1623,7 +1623,7 @@
 
     > div:not(.chatCollectionContent) {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
         min-height: 100%;
         position: relative;
@@ -1673,7 +1673,7 @@
 
       .popup & {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           min-height: calc(100vh - 44px);
           background-color: $white;
         }

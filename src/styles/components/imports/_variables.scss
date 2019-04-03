@@ -9,14 +9,20 @@ $default-avatar-bg: #e4edf1;
 $default-avatar-color: $gray;
 
 $desktop-breakpoint: lg;
+$desktop-breakpoint-dcrs: lg-s;
 $tablet-breakpoint: md;
+$tablet-breakpoint-dcrs: md-s;
 $mobile-breakpoint: sm;
+$mobile-breakpoint-dcrs: sm-s;
 
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
+  sm-s: 575px,
   md: 768px,
+  md-s: 767px,
   lg: 992px,
+  lg-s: 991px,
   xl: 1200px
 );
 

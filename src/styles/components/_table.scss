@@ -170,7 +170,7 @@
           max-width: 19%;
         }
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           font-size: 13px;
         }
       }
@@ -287,7 +287,7 @@
       }
 
       &:last-child {
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-bottom: 7px;
         }
       }
@@ -296,7 +296,7 @@
     time {
       font-weight: 400;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         font-size: 13px;
       }
     }
@@ -365,7 +365,7 @@
         flex: 0 1 14%;
         max-width: 14%;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           font-size: 13px;
           text-align: right;
         }
@@ -419,7 +419,7 @@
         text-align: center;
         justify-content: center;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           flex: 0 1 calc((100% - 160px) / 2);
           max-width: calc((100% - 160px) / 2);
           text-align: left;
@@ -433,7 +433,7 @@
         flex: 0 1 118px;
         max-width: 118px;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           flex: 0 1 88px;
           max-width: 88px;
         }
@@ -446,7 +446,7 @@
         justify-content: center;
         padding-left: 4px;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           flex: 0 1 calc((100% - 20px) / 2);
           max-width: calc((100% - 20px) / 2);
           justify-content: flex-end;
@@ -487,7 +487,7 @@
         padding-bottom: 3px;
       }
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         font-size: 13px;
       }
     }
@@ -556,7 +556,7 @@
   }
 
   .BlockedUsersCollectionView & {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-bottom: 8px;
     }
   }

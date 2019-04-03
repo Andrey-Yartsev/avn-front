@@ -3,7 +3,7 @@
 .subscribe-popup {
 
   &.popup-container {
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       width: 100%;
       max-width: 100%;
       top: 0;
@@ -17,7 +17,7 @@
     color: #fff;
     text-shadow: $shadow-light;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: block;
     }
 
@@ -82,7 +82,7 @@
     display: flex;
     justify-content: center;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       max-width: 340px;
       justify-content: flex-start;
       margin: 0 auto;
@@ -94,7 +94,7 @@
       margin-left: 36px;
       margin-top: -43px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-left: -7px;
       }
     }
@@ -122,7 +122,7 @@
     padding-left: 45px;
     margin-top: 18px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       max-width: 340px;
       margin: 24px auto 0;
       padding: 0 17px;
@@ -134,7 +134,7 @@
       padding-bottom: 0;
       margin-bottom: 21px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-bottom: 27px;
       }
     }
@@ -179,7 +179,7 @@
     margin: 32px auto 0;
     max-width: 320px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 0 15px;
       margin-top: 36px;
     }
@@ -193,7 +193,7 @@
       font-size: 13px;
       padding: 0;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin-top: 33px;
       }
 
