@@ -9,6 +9,7 @@
         :close="close"
         where="addPost"
         type="new"
+        :class="{ addPost_delayed: delayedPosts.length }"
       />
       <div class="feed reset-btr" v-if="delayedPosts.length">
         <div class="title-block title-block_row bg-gradient bg-gradient_pseudo">
