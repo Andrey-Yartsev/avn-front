@@ -499,8 +499,10 @@
         }
 
         &:after {
-          width: 0;
-          transition: none;
+          //width: 0;
+          //transition: none;
+
+          display: none;
         }
       }
     }
