@@ -295,22 +295,12 @@ export default {
       return this.allSelectedStates.indexOf(id) !== -1;
     },
     resetStates(countryId) {
+      this.selectedStates[countryId] = {};
+      this.initAllStates();
       this.resetSelectElement(this.$refs["states" + countryId][0]);
     },
     resetSelectElement(selectElement) {
-      console.log(selectElement);
-      const options = selectElement.options;
-
-      // Look for a default selected option
-      for (let i = 0, iLen = options.length; i < iLen; i++) {
-        // if (options[i].defaultSelected) {
-        //   selectElement.selectedIndex = i;
-        //   return;
-        // }
-      }
-
-      // If no option is the default, select first or none as appropriate
-      selectElement.selectedIndex = -1; // or -1 for no option selected
+      selectElement.selectedIndex = -1;
     }
   },
   watch: {
@@ -344,9 +334,6 @@ export default {
 
     if (this.localUser.blockedStates && this.localUser.blockedStates.length) {
       this.allSelectedStates = this.localUser.blockedStates;
-      // this.localUser.blockedStates.forEach(state => {
-      //   console.log(state);
-      // });
     }
   }
 };
