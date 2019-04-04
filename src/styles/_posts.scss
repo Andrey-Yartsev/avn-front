@@ -456,10 +456,7 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 4px;
 
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      align-items: center;
+      max-height: calc(100vh - 210px);
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -515,6 +512,10 @@
   img {
 
     .postPage & {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        max-height: calc(100vh - 210px);
+      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: auto;
@@ -573,23 +574,16 @@
     .postPage & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        max-height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        background: none;
       }
     }
   }
 
   video {
     width: 100%;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 200px);
     display: block;
-
-    .postCollectionView & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 200px);
-      }
-    }
   }
 
   &-slider {
@@ -828,6 +822,7 @@
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           flex: 1;
+          max-height: 100%;
         }
       }
     }
@@ -1223,7 +1218,7 @@
 
 .comment-form-wrapper {
   background-color: $white;
-  z-index: 10;
+  z-index: 21;
   left: 0;
   right: 0;
   bottom: 0;
