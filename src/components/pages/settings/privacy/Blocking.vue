@@ -24,7 +24,6 @@
                   placeholder="Pick some"
                   label="title"
                   track-by="title"
-                  :preselect-first="true"
                   :taggable="true"
                   @input="countriesChange"
                 >
@@ -45,6 +44,42 @@
           </label>
           <div class="input-help" v-if="selectedCountriesText">
             {{ selectedCountriesText }}
+          </div>
+        </div>
+        <div class="form-group form-group_with-label">
+          <label class="form-group-inner">
+            <span class="label">By State</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <multiselect
+                  v-model="selectedStates"
+                  :options="states"
+                  :multiple="true"
+                  :close-on-select="false"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="Pick some"
+                  label="title"
+                  track-by="title"
+                  @input="statesChange"
+                >
+                  <template
+                    slot="selection"
+                    slot-scope="{ values, search, isOpen }"
+                  >
+                    <span
+                      class="multiselect__single"
+                      v-if="values.length &amp;&amp;
+                      !isOpen"
+                      >{{ values.length }} options selected</span
+                    ></template
+                  >
+                </multiselect>
+              </span>
+            </span>
+          </label>
+          <div class="input-help" v-if="selectedStatesText">
+            {{ selectedStatesText }}
           </div>
         </div>
         <div class="form-group form-group_with-label">
@@ -83,6 +118,7 @@ import Multiselect from "vue-multiselect";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import { Validator, ValidationProvider } from "vee-validate";
 import Form from "@/mixins/form";
+import states from "../payouts/states";
 
 const validateIPaddress = ipaddress => {
   if (
@@ -118,7 +154,9 @@ export default {
   data() {
     return {
       ips: "",
-      selectedCountries: []
+      selectedCountries: [],
+      selectedStates: "",
+      selectedStates2: null
     };
   },
   computed: {
@@ -138,11 +176,28 @@ export default {
         return "";
       }
       return this.selectedCountries.map(v => v.title).join(", ");
+    },
+    selectedStatesText() {
+      if (!this.selectedStates || !this.selectedStates.length) {
+        return "";
+      }
+      return this.selectedStates.map(v => v.title).join(", ");
+    },
+    states() {
+      return states.map(v => {
+        return {
+          id: v,
+          title: v
+        };
+      });
     }
   },
   methods: {
     countriesChange(countries) {
       this.$emit("change", { blockedCountries: countries.map(v => v.id) });
+    },
+    statesChange(states) {
+      this.$emit("change", { blockedStates: states.map(v => v.id) });
     },
     parseIpsText(e) {
       const text = e.target.value;
@@ -153,7 +208,6 @@ export default {
         this.$emit("change", { blockedIps: "" });
         return;
       }
-      console.log(this.parseIpsText(text));
       this.$emit("change", { blockedIps: this.parseIpsText(text) });
     }
   },
@@ -176,11 +230,14 @@ export default {
     if (this.localUser.blockedIps) {
       this.ips = this.localUser.blockedIps.join(", ");
     }
-    //
-    // this.ips =
-    // this.localUser.blockedIps;
-    // if (this.localUser.blockedCountries.length)
-    //  = this.localUser.blockedCountries;
+    if (this.localUser.blockedStates) {
+      this.selectedStates = this.localUser.blockedStates.map(v => {
+        return {
+          id: v,
+          title: v
+        };
+      });
+    }
   }
 };
 </script>
