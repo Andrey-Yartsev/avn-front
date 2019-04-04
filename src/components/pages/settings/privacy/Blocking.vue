@@ -62,6 +62,7 @@
                 :key="'states' + state.countryId"
               >
                 <select
+                  :ref="'states' + state.countryId"
                   class="msct"
                   :multiple="true"
                   @change="
@@ -80,6 +81,9 @@
                 </select>
                 <div class="sub-title">
                   {{ findCountry(state.countryId).title }}
+                  <a href="#" @click.prevent="resetStates(state.countryId)"
+                    >Clear</a
+                  >
                 </div>
               </span>
             </span>
@@ -235,7 +239,6 @@ export default {
       this.$emit("change", { blockedIps: this.parseIpsText(text) });
     },
     selectAllStates(countryId) {
-      console.log(this.$refs["states" + countryId]);
       this.selectedStates[countryId] = {};
       this.initAllStates();
       this.$refs["states" + countryId].removeAttr("selected");
@@ -290,6 +293,24 @@ export default {
     },
     isStateSelected(id) {
       return this.allSelectedStates.indexOf(id) !== -1;
+    },
+    resetStates(countryId) {
+      this.resetSelectElement(this.$refs["states" + countryId][0]);
+    },
+    resetSelectElement(selectElement) {
+      console.log(selectElement);
+      const options = selectElement.options;
+
+      // Look for a default selected option
+      for (let i = 0, iLen = options.length; i < iLen; i++) {
+        // if (options[i].defaultSelected) {
+        //   selectElement.selectedIndex = i;
+        //   return;
+        // }
+      }
+
+      // If no option is the default, select first or none as appropriate
+      selectElement.selectedIndex = -1; // or -1 for no option selected
     }
   },
   watch: {
@@ -337,6 +358,7 @@ export default {
 .msct {
   height: 100px;
 }
+
 .sub-title {
   font-size: 11px;
   margin-top: 5px;
