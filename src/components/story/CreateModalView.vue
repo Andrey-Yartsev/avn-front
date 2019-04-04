@@ -49,6 +49,9 @@
                 >
                   Add to your story
                 </button>
+                <!--<div class="story-text-info">-->
+                <!--Videos over 60 sec will be trimmed-->
+                <!--</div>-->
               </div>
               <div class="storyPreview" v-if="showPreview">
                 <template v-if="preview.mediaType === 'photo'">

@@ -402,3 +402,17 @@
     }
   }
 }
+
+.story-text-info {
+  color: $white;
+  position: absolute;
+  top: calc(100% + 15px);
+  text-align: center;
+  left: 0;
+  right: 0;
+  font-size: 13px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    top: calc(100% + 20px);
+  }
+}
