@@ -455,6 +455,11 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 4px;
+
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -562,6 +567,14 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           width: 440px;
         }
+      }
+    }
+
+    .postPage & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        max-height: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -810,10 +823,25 @@
           }
         }
       }
+
+      .postPage & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          flex: 1;
+        }
+      }
     }
 
     &.active {
       display: block;
+
+      .postPage & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          display: flex;
+          flex: 1;
+        }
+      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: flex;

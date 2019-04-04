@@ -290,6 +290,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-bottom: 0;
+      display: block;
     }
   }
 
@@ -510,6 +511,14 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: 620px;
+    }
+  }
+
+  .postPage & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-bottom: 70px;
+      flex: 0 0 auto;
     }
   }
 }
