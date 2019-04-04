@@ -46,41 +46,41 @@
             {{ selectedCountriesText }}
           </div>
         </div>
-        <div class="form-group form-group_with-label">
-          <label class="form-group-inner">
+        <div
+          class="form-group form-group_with-label"
+          v-if="selectedCountries.length"
+        >
+          <label class="form-group-inner" v-if="states.length">
             <span class="label">By State</span>
             <span class="form-group form-group_clear-gaps">
-              <span class="form-field">
-                <multiselect
-                  v-model="selectedStates"
-                  :options="states"
+              <span
+                class="form-field"
+                v-for="state in states"
+                :key="'states' + state.countryId"
+              >
+                <select
+                  class="msct"
                   :multiple="true"
-                  :close-on-select="false"
-                  :clear-on-select="false"
-                  :preserve-search="true"
-                  placeholder="Pick some"
-                  label="title"
-                  track-by="title"
-                  @input="statesChange"
+                  @change="
+                    event => {
+                      statesChange(state.countryId, event);
+                    }
+                  "
                 >
-                  <template
-                    slot="selection"
-                    slot-scope="{ values, search, isOpen }"
+                  <option
+                    :value="v.id"
+                    v-for="v in state.states"
+                    :selected="isStateSelected(v.id)"
+                    :key="v.id"
+                    >{{ v.title }}</option
                   >
-                    <span
-                      class="multiselect__single"
-                      v-if="values.length &amp;&amp;
-                      !isOpen"
-                      >{{ values.length }} options selected</span
-                    ></template
-                  >
-                </multiselect>
+                </select>
+                <div class="sub-title">
+                  {{ findCountry(state.countryId).title }}
+                </div>
               </span>
             </span>
           </label>
-          <div class="input-help" v-if="selectedStatesText">
-            {{ selectedStatesText }}
-          </div>
         </div>
         <div class="form-group form-group_with-label">
           <label class="form-group-inner">
@@ -118,7 +118,7 @@ import Multiselect from "vue-multiselect";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import { Validator, ValidationProvider } from "vee-validate";
 import Form from "@/mixins/form";
-import states from "../payouts/states";
+import StatesApi from "@/api/states";
 
 const validateIPaddress = ipaddress => {
   if (
@@ -155,8 +155,9 @@ export default {
     return {
       ips: "",
       selectedCountries: [],
-      selectedStates: "",
-      selectedStates2: null
+      selectedStates: {},
+      allSelectedStates: [],
+      states: []
     };
   },
   computed: {
@@ -167,7 +168,8 @@ export default {
       return Object.entries(this.$store.state.countries.items).map(v => {
         return {
           id: v[0],
-          title: v[1]
+          title: v[1].name,
+          hasStates: v[1].hasStates
         };
       });
     },
@@ -176,28 +178,47 @@ export default {
         return "";
       }
       return this.selectedCountries.map(v => v.title).join(", ");
-    },
-    selectedStatesText() {
-      if (!this.selectedStates || !this.selectedStates.length) {
-        return "";
-      }
-      return this.selectedStates.map(v => v.title).join(", ");
-    },
-    states() {
-      return states.map(v => {
-        return {
-          id: v,
-          title: v
-        };
-      });
     }
   },
   methods: {
     countriesChange(countries) {
+      const ids = countries.map(v => v.id);
+      // this
+
+      Object.keys(this.selectedStates).forEach(key => {
+        if (ids.indexOf(key) === -1) {
+          this.selectedStates[key] = {};
+        }
+      });
+      this.initAllStates();
+
       this.$emit("change", { blockedCountries: countries.map(v => v.id) });
     },
-    statesChange(states) {
-      this.$emit("change", { blockedStates: states.map(v => v.id) });
+    getSelectValues(select) {
+      const result = [];
+      const options = select && select.options;
+      let opt;
+
+      for (let i = 0, iLen = options.length; i < iLen; i++) {
+        opt = options[i];
+
+        if (opt.selected) {
+          result.push(opt.value || opt.text);
+        }
+      }
+      return result;
+    },
+    initAllStates() {
+      let allStates = [];
+      Object.values(this.selectedStates).forEach(values => {
+        allStates = allStates.concat(values);
+      });
+      this.$emit("change", { blockedStates: allStates });
+    },
+    statesChange(countryId, event) {
+      this.selectedStates[countryId] = this.getSelectValues(event.target);
+      this.selectedStates = { ...this.selectedStates };
+      this.initAllStates();
     },
     parseIpsText(e) {
       const text = e.target.value;
@@ -209,6 +230,63 @@ export default {
         return;
       }
       this.$emit("change", { blockedIps: this.parseIpsText(text) });
+    },
+    selectAllStates(countryId) {
+      console.log(this.$refs["states" + countryId]);
+      this.selectedStates[countryId] = {};
+      this.initAllStates();
+      this.$refs["states" + countryId].removeAttr("selected");
+    },
+    fetchStates() {
+      const fetchStates = [];
+      this.selectedCountries.map(v => {
+        if (!v.hasStates) {
+          return;
+        }
+
+        fetchStates.push(
+          new Promise(accept => {
+            StatesApi.fetch(v.id).then(response => {
+              accept({
+                countryId: v.id,
+                response
+              });
+            });
+          })
+        );
+
+        this.states = [];
+
+        Promise.all(fetchStates).then(results => {
+          results.forEach(async result => {
+            try {
+              const response = await result.response.json();
+              this.states.push({
+                countryId: result.countryId,
+                states: Object.entries(response).map(v => {
+                  if (this.allSelectedStates.indexOf(v[0]) !== -1) {
+                    this.selectedStates[result.countryId].push(v[0]);
+                  }
+                  return {
+                    id: v[0],
+                    title: v[1]
+                  };
+                })
+              });
+            } catch (e) {
+              e;
+            }
+          });
+        });
+      });
+    },
+    findCountry(id) {
+      return this.countries.find(v => {
+        return id === v.id;
+      });
+    },
+    isStateSelected(id) {
+      return this.allSelectedStates.indexOf(id) !== -1;
     }
   },
   watch: {
@@ -223,6 +301,15 @@ export default {
         return countries.find(v => v.id === id);
       });
       this.selectedCountries = this.selectedCountries.filter(v => !!v);
+    },
+    selectedCountries() {
+      this.selectedCountries.forEach(v => {
+        if (v.hasStates) {
+          this.selectedStates[v.id] = [];
+        }
+      });
+
+      this.fetchStates();
     }
   },
   mounted() {
@@ -230,16 +317,26 @@ export default {
     if (this.localUser.blockedIps) {
       this.ips = this.localUser.blockedIps.join(", ");
     }
-    if (this.localUser.blockedStates) {
-      this.selectedStates = this.localUser.blockedStates.map(v => {
-        return {
-          id: v,
-          title: v
-        };
-      });
+
+    if (this.localUser.blockedStates && this.localUser.blockedStates.length) {
+      this.allSelectedStates = this.localUser.blockedStates;
+      // this.localUser.blockedStates.forEach(state => {
+      //   console.log(state);
+      // });
     }
   }
 };
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style>
+.msct {
+  height: 100px;
+}
+.sub-title {
+  font-size: 11px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+</style>
