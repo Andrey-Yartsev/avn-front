@@ -72,7 +72,11 @@
                 <div class="play-button" />
               </div>
               <div
-                v-if="preview.mediaType === 'video' && !preview.fileContent && !showLoader"
+                v-if="
+                  preview.mediaType === 'video' &&
+                    !preview.fileContent &&
+                    !showLoader
+                "
                 :class="['play-button-wrapper']"
               >
                 <div class="play-button" />
