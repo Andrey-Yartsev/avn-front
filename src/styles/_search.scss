@@ -183,16 +183,16 @@
 
 .label-counter {
   position: absolute;
-  right: -15px;
+  left: 100%;
   top: -5px;
   color: #fff;
   background-color: $secondary-color;
-  border-radius: 50%;
+  border-radius: 1000px;
   text-align: center;
-  font-size: 7px;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
+  font-size: 10px;
+  min-width: 16px;
+  line-height: 10px;
+  padding: 3px 5px;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: none;
