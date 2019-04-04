@@ -69,7 +69,13 @@
                 :class="['play-button-wrapper', { hidden: !videoError }]"
                 @click="playPreviewVideo"
               >
-                <div class="play-button"></div>
+                <div class="play-button" />
+              </div>
+              <div
+                v-if="preview.mediaType === 'video' && !preview.fileContent && !showLoader"
+                :class="['play-button-wrapper']"
+              >
+                <div class="play-button" />
               </div>
             </form>
           </div>
