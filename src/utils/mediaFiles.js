@@ -10,9 +10,9 @@ export const uniqId = () => {
   return "d" + out;
 };
 
-export const getMediaFileMeta = file => {
+export const getMediaFileMeta = (file, force) => {
   return new Promise(resolve => {
-    if (file.type.startsWith("video")) {
+    if (file.type.startsWith("video") && !force) {
       resolve({
         mediaType: "video",
         file,

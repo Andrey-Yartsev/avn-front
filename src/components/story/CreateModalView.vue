@@ -29,17 +29,6 @@
                   </button>
                 </div>
               </div>
-              <!--<div class="storyPlaceholder">-->
-              <!--<label>-->
-              <!--<span>Tap here to add picture or video to your story</span>-->
-              <!--</label>-->
-              <!--</div>-->
-              <!--<div class="texteditor">-->
-              <!--<textarea maxlength="140"></textarea>-->
-              <!--<div class="mediasBottom">-->
-              <!--<button type="submit" class="addTextButton btn">Done</button>-->
-              <!--</div>-->
-              <!--</div>-->
               <div class="mediasBottom">
                 <button
                   type="submit"
@@ -49,14 +38,15 @@
                 >
                   Add to your story
                 </button>
-                <!--<div class="story-text-info">-->
-                <!--Videos over 60 sec will be trimmed-->
-                <!--</div>-->
+                <div class="story-text-info" v-if="preview.mediaType === 'video'">
+                  Videos over 60 sec will be trimmed
+                </div>
               </div>
               <div class="storyPreview" v-if="showPreview">
                 <template v-if="preview.mediaType === 'photo'">
                   <img :src="preview.preview" class="storyPreview__img" />
                   <div
+                    v-if="preview.preview"
                     class="story-block-fill"
                     :style="{
                       'background-image': 'url(' + preview.preview + ')'
@@ -65,13 +55,14 @@
                 </template>
                 <video
                   ref="videoTag"
-                  v-if="preview.mediaType === 'video'"
+                  v-if="preview.mediaType === 'video' && preview.fileContent"
                   :src="preview.fileContent"
                   class="storyPreview__video"
                   loop="true"
                 ></video>
               </div>
               <div
+                v-if="preview.mediaType === 'video' && preview.fileContent"
                 :class="['play-button-wrapper', { hidden: !videoError }]"
                 @click="playPreviewVideo"
               >
@@ -121,8 +112,17 @@ export default {
       this.$store.dispatch("modal/hide", { name: "createStory" });
     },
     chooseFileEvent: async function() {
+      const { type, size } = this.file;
+      const isLargeVideo = type.startsWith("video") && size > 50000000;
+      const defaultPreview = {
+        mediaType: "video",
+        fileContent: null
+      };
+
       this.showLoader = true;
-      this.preview = await getMediaFileMeta(this.file);
+      this.preview = isLargeVideo
+        ? defaultPreview
+        : await getMediaFileMeta(this.file, true);
 
       this.showLoader = false;
       this.showPreview = true;
@@ -156,16 +156,20 @@ export default {
 
     playPreviewVideo: function() {
       this.$nextTick().then(() => {
-        this.$refs.videoTag
-          .play()
-          .then(() => {
-            this.readyToUpload = true;
-            this.videoError = false;
-          })
-          .catch(() => {
-            this.readyToUpload = true;
-            this.videoError = true;
-          });
+        if (this.$refs.videoTag) {
+          this.$refs.videoTag
+            .play()
+            .then(() => {
+              this.readyToUpload = true;
+              this.videoError = false;
+            })
+            .catch(() => {
+              this.readyToUpload = true;
+              this.videoError = true;
+            });
+        } else {
+          this.readyToUpload = true;
+        }
       });
     }
   },
