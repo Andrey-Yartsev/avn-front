@@ -53,6 +53,9 @@
           <label class="form-group-inner" v-if="states.length">
             <span class="label">By State</span>
             <span class="form-group form-group_clear-gaps">
+              <div class="sub-title">
+                Do not select if you want to block all country
+              </div>
               <span
                 class="form-field"
                 v-for="state in states"
