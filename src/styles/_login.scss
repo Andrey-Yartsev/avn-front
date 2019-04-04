@@ -252,6 +252,10 @@
             transform: translate(0, 0);
           }
         }
+
+        .dark-theme & {
+          fill: #fff;
+        }
       }
     }
     .promotion {
