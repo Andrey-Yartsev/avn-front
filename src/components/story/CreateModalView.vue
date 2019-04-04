@@ -38,7 +38,10 @@
                 >
                   Add to your story
                 </button>
-                <div class="story-text-info" v-if="preview.mediaType === 'video'">
+                <div
+                  class="story-text-info"
+                  v-if="preview.mediaType === 'video'"
+                >
                   Videos over 60 sec will be trimmed
                 </div>
               </div>
