@@ -5,7 +5,7 @@
     >
       <div class="storyCollectionView__header">
         <h4>Stories</h4>
-        <span class="add-story-link">+ Add story</span>
+        <span class="add-story-link" @click="addStory">+ Add story</span>
       </div>
       <div class="stories-group__outer">
         <div class="stories-group">
@@ -80,6 +80,9 @@ export default {
   },
   methods: {
     addNewStory() {
+      document.getElementById("storyFileSelect").click();
+    },
+    addStory: function() {
       document.getElementById("storyFileSelect").click();
     }
   }
