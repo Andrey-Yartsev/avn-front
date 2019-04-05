@@ -38,7 +38,7 @@
         <div class="stream-comments-wrapper">
           <div
             class="item"
-            v-for="comment in comments"
+            v-for="comment in shownComments"
             v-bind:key="comment.comment"
           >
             <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
@@ -131,7 +131,8 @@ export default {
     newComment: "",
     showCommentForm: false,
     showTip: false,
-    connected: false
+    connected: false,
+    shownComments: []
   }),
   computed: {
     throttledLike() {
@@ -198,6 +199,8 @@ export default {
       const SS = s >= 10 ? s : `0${s}`;
 
       this.time = h > 0 ? `${HH}:${MM}:${SS}` : `${MM}:${SS}`;
+
+      this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
 
       setTimeout(() => {
         this.updateTimer();

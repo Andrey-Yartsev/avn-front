@@ -58,7 +58,13 @@ const mutations = {
   },
 
   comment(state, comment) {
-    state.currentLive.comments = [...state.currentLive.comments, comment];
+    state.currentLive.comments = [
+      ...state.currentLive.comments,
+      {
+        ...comment,
+        hideTime: Date.now() + 60 * 1000
+      }
+    ];
   },
 
   tip(state, tip) {

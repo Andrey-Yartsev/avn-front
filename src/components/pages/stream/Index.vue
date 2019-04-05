@@ -198,8 +198,8 @@
         <div class="stream-comments-wrapper">
           <div
             class="item"
-            v-for="comment in comments"
-            v-bind:key="comment.comment"
+            v-for="comment in shownComments"
+            v-bind:key="comment.comment + comment.hideTime"
           >
             <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
               <span class="avatar__img">
@@ -317,7 +317,9 @@ export default {
       streamDuration: 0,
       streamStartTime: 0,
 
-      filters: []
+      filters: [],
+
+      shownComments: []
     };
   },
   components: {
@@ -437,6 +439,7 @@ export default {
       if (diff > 5) {
         this.canBeSaved = true;
       }
+      this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
     },
     startStream() {
       this.isReadyToStart = false;
