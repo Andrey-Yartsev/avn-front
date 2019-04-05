@@ -15,6 +15,7 @@
       <span class="addNewNav__text">Story</span>
     </span>
     <span
+      v-if="user.isPerformer"
       :class="['new-live', { active: active === 'live' }]"
       class="addNewNav__item"
       @click="addLive"
@@ -32,10 +33,11 @@
 </template>
 <script>
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import UserMixin from "@/mixins/user";
 
 export default {
   name: "AddNewNav",
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, UserMixin],
   props: {
     active: {
       type: String,

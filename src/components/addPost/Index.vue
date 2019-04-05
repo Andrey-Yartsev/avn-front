@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['addPost', { loaderWrap: isSaving }]"
+    :class="['addPost', { loaderWrap: isSaving, truncated: !user.isPerformer }]"
     v-click-outside="() => (expanded = false)"
   >
     <form
@@ -87,7 +87,11 @@
               </label>
             </div>
           </template>
-          <div class="post-datetime" :class="{ disabled: datetime }">
+          <div
+            v-if="user.isPerformer"
+            class="post-datetime"
+            :class="{ disabled: datetime }"
+          >
             <Datetime
               :inputId="`post-datetime__switcher_${where}`"
               class="post-datetime__switcher"
@@ -102,7 +106,7 @@
             <span class="post-datetime__btn" @click="openDatepicker"></span>
           </div>
           <router-link
-            v-if="isNew"
+            v-if="isNew && user.isPerformer"
             class="b-check-state b-check-state_live"
             :class="{
               disabled: preloadedMedias.length || postMsg.length || datetime
