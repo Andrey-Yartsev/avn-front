@@ -3,7 +3,10 @@
     <div
       class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
     >
-      <h4>Stories</h4>
+      <div class="storyCollectionView__header">
+        <h4>Stories</h4>
+        <span class="add-story-link">+ Add story</span>
+      </div>
       <div class="stories-group__outer">
         <div class="stories-group">
           <VuePerfectScrollbar class="stories-group__inner">
@@ -29,7 +32,7 @@
                 </div>
                 <div class="story-info">
                   <div class="story-header">
-                    <div class="name">Your story</div>
+                    <div class="name">Your Story</div>
                   </div>
                   <div class="user-login reset-ml hidden-mobile">
                     <a class="new-story">Create new story</a>

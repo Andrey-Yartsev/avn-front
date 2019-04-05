@@ -34,9 +34,9 @@
 .btn-add {
   position: absolute;
   right: -2px;
-  bottom: -5px;
-  width: 18px;
-  height: 18px;
+  bottom: -8px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   text-align: center;
   border: 2px solid $white;
@@ -164,6 +164,11 @@
       max-height: none;
       display: block;
     }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
   }
 
   .stories {
@@ -1036,4 +1041,11 @@
   font-size: 38px;
   position: relative;
   z-index: 2;
+}
+
+.add-story-link {
+  font-size: 13px;
+  cursor: pointer;
+  color: $secondary-color;
+  font-weight: 500;
 }

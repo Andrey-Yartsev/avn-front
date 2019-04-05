@@ -52,6 +52,7 @@
   + .aside-col {
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 20px;
+      padding-right: 26px;
       padding-top: 2px;
     }
   }
