@@ -8,7 +8,7 @@
     ></router-link>
     <div class="container">
       <div class="row">
-        <div class="content-col">
+        <div class="content-col" :class="{ 'new-user': newUser }">
           <div class="no-padding rounded-container shadow-block">
             <AddPost
               v-if="$mq === 'desktop'"
@@ -21,7 +21,18 @@
               <PostCollection :posts="posts" from="home" />
             </div>
           </div>
-          <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+          <div v-if="newUser" class="msg-no-content show start-feed-page">
+            <div class="msg-no-content__text">
+              Not subscribed to anyone yet?
+            </div>
+            <router-link class="btn border lg" to="/explore"
+              >Explore</router-link
+            >
+          </div>
+          <div
+            class="loaderWrap loader-content"
+            v-if="infinityScrollLoading && posts.length"
+          >
             <Loader :fullscreen="false" />
           </div>
         </div>
@@ -78,6 +89,9 @@ export default {
     },
     updatedPost() {
       return this.$store.state.post.updatedPost;
+    },
+    newUser() {
+      return !this.posts.length && !this.infinityScrollLoading;
     }
   },
   methods: {
