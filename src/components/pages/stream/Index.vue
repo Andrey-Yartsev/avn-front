@@ -548,6 +548,10 @@ export default {
     }
   },
   mounted() {
+    if (!this.user.isPerformer) {
+      this.$router.push("/");
+      return;
+    }
     this.$store.commit("lives/resetCurrentLive");
 
     this.streamVisibility =
