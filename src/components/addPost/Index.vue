@@ -7,11 +7,19 @@
       :class="[
         'add-new-form bg-gradient_light-desk bg-gradient_light',
         {
-          expanded:
-            expanded || initialExpanded || preloadedMedias.length || datetime
+          expanded: isExtended
         }
       ]"
     >
+      <div
+        class="post-scheduled-time"
+        v-if="datetime && $mq === 'desktop' && where === 'modal'"
+      >
+        <div class="datetime-value">
+          <span class="post-datetime__value">{{ formattedDate }}</span>
+          <span @click="resetDatetime" class="datetime-value__reset" />
+        </div>
+      </div>
       <div class="addPost-header">
         <button
           type="button"
@@ -22,14 +30,44 @@
             {{ this.isNew ? "New Post" : "Edit Post" }}
           </h1>
         </button>
-        <button
-          type="submit"
-          class="btn submit sm"
-          :disabled="notEhoughData"
-          @click.prevent="clickHandler"
-        >
-          {{ this.isNew ? "Share" : "Save" }}
-        </button>
+
+        <div class="addPost-header__controls">
+          <div
+            class="btn-post"
+            v-if="hasSubscribePrice && $mq === 'mobile' && isNew"
+          >
+            <div class="b-check-state b-check-state_post">
+              <label>
+                <input class="is-free-post" type="checkbox" v-model="isFree" />
+                <span class="b-check-state__icon"></span>
+                <span class="b-check-state__text">Free</span>
+              </label>
+            </div>
+          </div>
+          <div
+            class="tweet-new-post"
+            :class="{
+              hidden: !user.canSendTweets
+            }"
+            v-if="$mq === 'mobile' && isNew"
+          >
+            <input
+              class="tweetSend"
+              type="checkbox"
+              v-model="tweetSend"
+              :id="`tweetPost_${where}`"
+            />
+            <label class="icon" :for="`tweetPost_${where}`" />
+          </div>
+          <button
+            type="submit"
+            class="btn submit sm"
+            :disabled="notEhoughData"
+            @click.prevent="clickHandler"
+          >
+            {{ isNew ? "Share" : "Save" }}
+          </button>
+        </div>
       </div>
       <span
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
@@ -49,7 +87,10 @@
         ></textarea>
         <div
           class="post-attachment"
-          v-if="(datetime || preloadedMedias.length) && $mq === 'desktop'"
+          v-if="
+            ((datetime && where !== 'modal') || preloadedMedias.length) &&
+              $mq === 'desktop'
+          "
         >
           <VuePerfectScrollbar class="addFileCollectionView">
             <MediaPreview
@@ -60,7 +101,10 @@
               :isSaving="isSaving"
             />
           </VuePerfectScrollbar>
-          <div class="post-scheduled-time" v-if="datetime">
+          <div
+            class="post-scheduled-time"
+            v-if="datetime && $mq === 'desktop' && where !== 'modal'"
+          >
             <div class="datetime-value">
               <span class="post-datetime__value">{{ formattedDate }}</span>
               <span @click="resetDatetime" class="datetime-value__reset" />
@@ -70,50 +114,64 @@
       </div>
       <div class="actions">
         <div class="actions-controls">
-          <label :class="['add-media-input', { disabled: cantAddMoreMedia }]">
+          <label
+            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
+            class="btn-post"
+          >
             <input
               type="file"
               multiple
               :accept="inputAccepts"
               @change="addMediaFiles"
             />
+            <span class="btn-post__text">
+              Add media
+            </span>
           </label>
-          <template v-if="hasSubscribePrice">
-            <div class="b-check-state b-check-state_post">
-              <label>
-                <input class="is-free-post" type="checkbox" v-model="isFree" />
-                <span class="b-check-state__icon"></span>
-                <span class="b-check-state__text">Free post</span>
-              </label>
+          <div class="btn-post btn-post_datetime" v-if="user.isPerformer">
+            <div class="post-datetime" :class="{ disabled: datetime }">
+              <Datetime
+                :inputId="`post-datetime__switcher_${where}`"
+                class="post-datetime__switcher"
+                type="datetime"
+                v-model="datetime"
+                input-class="post-datetime__input"
+                use12-hour
+                :min-datetime="minDate"
+                @close="closeDatepicker"
+                :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
+              />
+              <span class="post-datetime__btn" @click="openDatepicker"></span>
+              <span class="btn-post__text">
+                Schedule
+              </span>
+            </div>
+          </div>
+          <template v-if="isExtended">
+            <div class="btn-post" v-if="isNew && user.isPerformer">
+              <router-link
+                class="b-check-state b-check-state_live"
+                :class="{
+                  disabled: preloadedMedias.length || postMsg.length || datetime
+                }"
+                to="/stream"
+                ><span class="btn-post__text">Go live</span></router-link
+              >
+            </div>
+            <div class="btn-post" v-if="hasSubscribePrice && $mq === 'desktop'">
+              <div class="b-check-state b-check-state_post">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="isFree"
+                  />
+                  <span class="b-check-state__icon"></span>
+                  <span class="b-check-state__text">Free post</span>
+                </label>
+              </div>
             </div>
           </template>
-          <div
-            v-if="user.isPerformer"
-            class="post-datetime"
-            :class="{ disabled: datetime }"
-          >
-            <Datetime
-              :inputId="`post-datetime__switcher_${where}`"
-              class="post-datetime__switcher"
-              type="datetime"
-              v-model="datetime"
-              input-class="post-datetime__input"
-              use12-hour
-              :min-datetime="minDate"
-              @close="closeDatepicker"
-              :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
-            />
-            <span class="post-datetime__btn" @click="openDatepicker"></span>
-          </div>
-          <router-link
-            v-if="isNew && user.isPerformer"
-            class="b-check-state b-check-state_live"
-            :class="{
-              disabled: preloadedMedias.length || postMsg.length || datetime
-            }"
-            to="/stream"
-            >Go live</router-link
-          >
         </div>
         <div class="add-new-type add-new-type_underline-items line-top">
           <AddNewNav active="post" />
@@ -123,6 +181,7 @@
           :class="{
             hidden: !user.canSendTweets
           }"
+          v-if="$mq === 'desktop' && isNew"
         >
           <input
             class="tweetSend"
@@ -155,7 +214,7 @@
             :isSaving="isSaving"
           />
         </div>
-        <div class="post-scheduled-time" v-if="datetime">
+        <div class="post-scheduled-time" v-if="datetime && $mq === 'mobile'">
           <div class="datetime-value">
             <span class="post-datetime__value">{{ formattedDate }}</span>
             <span @click="resetDatetime" class="datetime-value__reset" />
@@ -269,10 +328,24 @@ export default {
       );
     },
     formattedDate() {
+      if (this.$mq === "mobile") {
+        return (
+          "Post will be scheduled for " +
+          moment(this.datetime).format("MMM D, hh:mm a")
+        );
+      }
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     },
     minDate() {
       return LuxonDateTime.local().toISO();
+    },
+    isExtended() {
+      return (
+        this.expanded ||
+        this.initialExpanded ||
+        this.preloadedMedias.length ||
+        this.datetime
+      );
     }
   },
   methods: {
