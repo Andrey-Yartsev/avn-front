@@ -510,12 +510,16 @@
 
   &.expanded {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+    .text-media-container {
 
-      .text-media-container {
+      @include media-breakpoint-up($desktop-breakpoint) {
         border-radius: 6px;
         box-shadow: 0 0 0 2px $secondary-color-20;
         flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
+
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
       }
     }
 
@@ -537,15 +541,13 @@
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        height: 80px;
-        min-height: 80px;
-      }
+        //height: 80px;
+        //min-height: 80px;
 
-      .popup & {
+        //height: 53px;
+        //min-height: 53px;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          height: 80px;
-        }
+        flex: 1;
       }
     }
 
@@ -960,21 +962,23 @@
   padding: 12px 10px 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 14px 0 0;
+    //padding: 14px 0 0;
+
+    padding: 0 7px;
   }
 
   &:before {
-    position: absolute;
-    top: 0;
-    content: "";
-    height: 1px;
-    left: 15px;
-    right: 15px;
-    background: rgba($gray, 0.2);
-    display: none;
+    //position: absolute;
+    //top: 0;
+    //content: "";
+    //height: 1px;
+    //left: 15px;
+    //right: 15px;
+    //background: rgba($gray, 0.2);
+    //display: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
+      //display: block;
     }
   }
 }
