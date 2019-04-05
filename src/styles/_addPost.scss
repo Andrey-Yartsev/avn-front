@@ -437,6 +437,13 @@
       right: 208px;
     }
 
+    .truncated & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 132px;
+      }
+    }
+
     &:hover {
       color: $secondary-color-darken;
     }
