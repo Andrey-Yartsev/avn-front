@@ -150,6 +150,10 @@
 
     .popup & {
 
+      @include media-breakpoint-up($desktop-breakpoint) {
+        overflow: visible;
+      }
+
       .lds-dual-ring {
         top: -60px;
 
@@ -285,6 +289,14 @@
     border-radius: 5px 5px 0 0;
   }
 
+  .popup-addPost & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+  }
+
   &:before {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -298,14 +310,6 @@
       opacity: 0.3;
       z-index: 0;
       border-radius: 5px;
-    }
-
-    .popup-addPost & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
     }
   }
 
@@ -423,7 +427,8 @@
     .actions {
       align-items: center;
       align-content: center;
-      margin-right: -16px;
+      margin-right: -13px;
+      margin-left: 15px;
     }
 
     .add-new-type {
@@ -444,9 +449,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         position: absolute;
         top: 0;
-        right: 208px;
+        right: 148px;
         margin-right: 0;
       }
+    }
+
+    .addNewNav  {
+      display: none;
     }
   }
 
@@ -1003,6 +1012,10 @@
   &__value {
     opacity: .5;
     font-weight: 500;
+
+    .post & {
+      font-weight: 400;
+    }
   }
 
   &__btn {
@@ -1273,7 +1286,7 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         position: absolute;
         top: 0;
-        right: 174px;
+        right: 113px;
         margin-right: 0;
       }
 
@@ -1289,8 +1302,11 @@
   &__text {
     font-weight: 500;
 
-    .add-new-form:not(.expanded) & {
-      display: none;
+    &:not(.exception) {
+
+      .add-new-form:not(.expanded) & {
+        display: none;
+      }
     }
   }
 }

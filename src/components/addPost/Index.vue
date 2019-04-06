@@ -81,7 +81,7 @@
         <textarea
           @focus="() => (expanded = true)"
           class="sm"
-          placeholder="What is going on?"
+          placeholder="What's going on?"
           maxlength="1000"
           v-model="postMsg"
         ></textarea>
@@ -147,17 +147,17 @@
               </span>
             </div>
           </div>
+          <div class="btn-post" v-if="isNew && user.isPerformer">
+            <router-link
+                    class="b-check-state b-check-state_live"
+                    :class="{
+              disabled: preloadedMedias.length || postMsg.length || datetime
+            }"
+                    to="/stream"
+            ><span class="btn-post__text exception">Go live</span></router-link
+            >
+          </div>
           <template v-if="isExtended">
-            <div class="btn-post" v-if="isNew && user.isPerformer">
-              <router-link
-                class="b-check-state b-check-state_live"
-                :class="{
-                  disabled: preloadedMedias.length || postMsg.length || datetime
-                }"
-                to="/stream"
-                ><span class="btn-post__text">Go live</span></router-link
-              >
-            </div>
             <div class="btn-post" v-if="hasSubscribePrice && $mq === 'desktop'">
               <div class="b-check-state b-check-state_post">
                 <label>
