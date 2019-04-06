@@ -6,6 +6,10 @@
 
   &-plus {
     fill: $secondary-color;
+
+    .story-avatar & {
+      fill: $primary-color;
+    }
   }
 
   &-remove {
