@@ -826,8 +826,11 @@
   }
 
   .btn {
-    padding-left: 19px;
-    padding-right: 19px;
+
+    .bg-profile & {
+      padding-left: 19px;
+      padding-right: 19px;
+    }
   }
 
   .controls-select-picture & {
