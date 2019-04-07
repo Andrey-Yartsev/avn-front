@@ -149,12 +149,14 @@
           </div>
           <div class="btn-post" v-if="isNew && user.isPerformer">
             <router-link
-                    class="b-check-state b-check-state_live"
-                    :class="{
-              disabled: preloadedMedias.length || postMsg.length || datetime
-            }"
-                    to="/stream"
-            ><span class="btn-post__text exception">Go live</span></router-link
+              class="b-check-state b-check-state_live"
+              :class="{
+                disabled: preloadedMedias.length || postMsg.length || datetime
+              }"
+              to="/stream"
+              ><span class="btn-post__text exception"
+                >Go live</span
+              ></router-link
             >
           </div>
           <template v-if="isExtended">
