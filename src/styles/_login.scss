@@ -2,6 +2,10 @@
 
 .login-page {
 
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    background: $white;
+  }
+
   body {
     overflow-y: auto;
   }
@@ -42,9 +46,10 @@
 
   .site-footer {
     position: relative;
+    margin-bottom: 15px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-top: 55px;
+      margin-top: 70px;
       border-top: 1px solid rgba($gray, 0.2);
     }
 
@@ -116,35 +121,50 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 100vh;
     background-color: $white;
-    background-image: linear-gradient(
-      30deg,
-      rgba($default-secondary-color, 0.06) 10%,
-      rgba($default-primary-color, 0.06) 90%
-    );
-    background-position: right top;
-    background-repeat: no-repeat;
-    background-size: 43.4% 100%;
+    //background-image: linear-gradient(
+    //  30deg,
+    //  rgba($default-secondary-color, 0.06) 10%,
+    //  rgba($default-primary-color, 0.06) 90%
+    //);
+    //background-position: right top;
+    //background-repeat: no-repeat;
+    //background-size: 43.4% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &:not(.btn) {
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 94%;
+    left: 0;
+    background: url(#{$assetPath}/img/bg-login-page.png) no-repeat 100% 13% / 100% auto;
 
-    &:before {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        right: 0;
-        width: 43.4%;
-        top: 0;
-        bottom: 0;
-        background: $light;
-        opacity: 0.3;
-        content: "";
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-position: 100% 16%;
+      width: 57%;
     }
   }
+
+  //&:not(.btn) {
+  //
+  //  &:before {
+  //
+  //    @include media-breakpoint-up($desktop-breakpoint) {
+  //      position: absolute;
+  //      right: 0;
+  //      width: 43.4%;
+  //      top: 0;
+  //      bottom: 0;
+  //      background: $light;
+  //      opacity: 0.3;
+  //      content: "";
+  //    }
+  //  }
+  //}
 }
 
 .forgot,
@@ -172,7 +192,7 @@
 
       .login-caption-col {
         flex: 0 1 50%;
-        padding: 20px 0 20px 20px;
+        padding: 20px 0 20px 80px;
         display: flex;
         flex-direction: column;
         max-height: 100vh;
@@ -199,7 +219,7 @@
     }
   }
   .login-caption {
-    margin-bottom: 22px;
+    margin-bottom: 10px;
     padding: 22px 15px 26px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -210,10 +230,10 @@
       padding: 0;
       flex: 1;
       display: flex;
-      flex-direction: column;
-      margin-bottom: 7.5em;
-
-      justify-content: center;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      margin-bottom: 15.3em;
     }
     .logo {
 
@@ -224,11 +244,12 @@
       .avn-style & {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          margin-bottom: 24px;
+          margin-bottom: 12px;
         }
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          margin-bottom: 1em;
+          margin-bottom: 0;
+          margin-right: 50px;
         }
       }
 
@@ -245,7 +266,7 @@
         }
 
         .avn-style & {
-          height: 5.7em;
+          height: 5.2em;
 
           @include media-breakpoint-up($desktop-breakpoint) {
             height: 7.8em;
@@ -262,6 +283,7 @@
       font-size: 21px;
       font-weight: 300;
       padding: 0;
+      font-style: italic;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 2.4em;
@@ -271,9 +293,12 @@
       }
 
       .avn-style & {
+        font-size: 20px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 1.7em;
+          font-size: 3.2em;
+          text-transform: capitalize;
+          font-family: $add-font;
         }
       }
     }
@@ -281,6 +306,11 @@
 
   .twitter {
     background: #1da1f3;
+
+    &:hover {
+      background: darken(#1da1f3, 10%);
+    }
+
     &:before {
       position: relative;
       top: -1px;
@@ -304,6 +334,46 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-top: 60px;
+  }
+
+  .form-field {
+
+    .login-page & {
+      position: relative;
+    }
+
+    &:after {
+
+      .login-page & {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(124, 139, 150, 1);
+        opacity: .08;
+        border-radius: 20px;
+        z-index: 0;
+      }
+    }
+  }
+
+  input,
+  textarea {
+
+    .login-page & {
+      background: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    &:-webkit-autofill {
+
+      .login-page & {
+        -webkit-box-shadow: none;
+      }
+    }
   }
 }
 
@@ -384,12 +454,16 @@
 
   .signUp {
     text-align: center;
-    margin-top: 31px;
+    margin-top: 56px;
     font-weight: 500;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 50px;
+    }
 
     &__body {
       margin: auto;
@@ -397,24 +471,38 @@
 
     h3 {
       font-weight: 300;
-      font-size: 21px;
-      margin: 0 0 6px;
+      font-size: 20px;
+      margin: 0 0 8px;
+      font-style: italic;
+
+      a {
+        font-weight: 400;
+        font-size: 21px;
+      }
     }
 
     a.register {
-      color: $default-secondary-color;
+      color: $secondary-color;
 
       &:hover {
-        color: $default-primary-color;
+        color: $secondary-color-darken;
       }
     }
 
     p {
       padding-bottom: 0;
+
+      &:not(.forgot) {
+        font-weight: 400;
+      }
+
+      &.forgot {
+        font-weight: 500;
+      }
     }
 
     p.forgot {
-      padding: 31px 0 0;
+      padding: 41px 0 0;
     }
   }
 

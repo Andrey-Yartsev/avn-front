@@ -104,8 +104,9 @@
       </button>
       <div class="signUp">
         <div class="signUp__body">
-          <h3>Don't have an account yet?</h3>
+          <h3><router-link to="/explore">Start exploring</router-link> right now</h3>
           <p>
+
             <a
               href="/register"
               class="register"
@@ -113,6 +114,7 @@
             >
               {{ signUpText }}
             </a>
+            later.
           </p>
           <p class="forgot">
             <a href="/forgot" class="forgot" @click.prevent="forgot"
@@ -153,7 +155,7 @@ export default {
         return "Sign up for OnMyTeam.com";
       }
 
-      return "Sign up";
+      return "Sign up for AVN Stars";
     },
     loginAction() {
       switch (this.type) {

@@ -150,7 +150,7 @@ export default {
         return "Login to OnMyTeam.com";
       }
 
-      return "Login";
+      return "Login to AVN Stars";
     },
     signupAction() {
       switch (this.type) {
