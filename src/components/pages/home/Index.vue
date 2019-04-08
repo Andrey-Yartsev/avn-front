@@ -56,8 +56,8 @@
                 </svg>
               </div>
               <div class="start-feed-page__text">
-                <a href="#">Find</a> someone to follow<br />
-                or <a href="#">Start sharing</a> right away
+                <router-link to="/explore">Find</router-link> someone to follow<br />
+                or <router-link to="/addPost">Start sharing</router-link> right away
               </div>
             </div>
           </div>
