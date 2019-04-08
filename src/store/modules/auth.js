@@ -108,6 +108,7 @@ const actions = {
       UserApi.logout().then(() => {
         commit("logout");
         dispatch("payouts/reset", null, { root: true });
+        dispatch("global/hideUserMobileBar", null, { root: true });
         accept();
       });
     });
