@@ -86,7 +86,7 @@ import PostCollection from "@/components/common/postCollection/Index";
 import NewFeedPostToast from "@/components/common/newFeedPostToast/Index";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index";
-import AddPost from "@/components/addPost/Index";
+import AddPost from "@/components/addPost/Fake";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Wsp from "@/mixins/wsp";

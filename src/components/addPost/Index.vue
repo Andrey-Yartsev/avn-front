@@ -84,7 +84,8 @@
           placeholder="What's going on?"
           maxlength="1000"
           v-model="postMsg"
-        ></textarea>
+          ref="textarea"
+        />
         <div
           class="post-attachment"
           v-if="
@@ -441,6 +442,10 @@ export default {
     }
   },
   mounted() {
+    if (this.$refs.textarea) {
+      this.$refs.textarea.focus();
+    }
+
     this.popupItem = this.$el;
   },
   directives: {
