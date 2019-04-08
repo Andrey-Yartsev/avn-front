@@ -87,6 +87,7 @@ import rootClasses from "@/rootClasses";
 import postMessageHandler from "@/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
+import wsp from "@/ws/wsp";
 
 // iterate
 
@@ -272,6 +273,8 @@ export default {
       }
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
+
+      wsp.connect();
     }
   },
   created() {

@@ -1,112 +1,59 @@
-import { EventEmitter } from "events";
-import moment from "moment";
-import Fingerprint from "fingerprintjs2";
-
 import Store from "@/store";
+import WsAbstract from "./WsAbstract";
 
-const isOffline = () => {
-  return global.navigator && global.navigator.onLine === false;
+import stream from "./actions/stream";
+import stream_stop from "./actions/stream_stop";
+import stream_look from "./actions/stream_look";
+import stream_unlook from "./actions/stream_unlook";
+import stream_tip from "./actions/stream_tip";
+import stream_comment from "./actions/stream_comment";
+import statistics from "./actions/statistics";
+import chats from "./actions/chats";
+import new_notification from "./actions/new_notification";
+import payoutsLegalResult from "./actions/payoutsLegalResult";
+import subscription from "./actions/subscription";
+import tip from "./actions/tip";
+import message from "./actions/message";
+import new_feed_post from "./actions/new_feed_post";
+
+const actions = {
+  chats,
+  new_notification,
+  payoutsLegalResult,
+  subscription,
+  tip,
+  stream,
+  stream_stop,
+  stream_look,
+  stream_unlook,
+  stream_tip,
+  message,
+  stream_comment,
+  statistics,
+  new_feed_post
 };
 
-export default class Ws extends EventEmitter {
-  constructor(actions, type) {
-    super();
-    this.type = type || "ws";
+export default class Ws extends WsAbstract {
+  constructor() {
+    super("ws");
     this.actions = actions;
-    this.doNotReconnect = false;
-    this.queue = [];
   }
-  start(/* reconnect */) {
-    this.connecting = true;
-    // if (reconnect) {
-    //   console.log(this.type + " reconnected");
-    // } else {
-    //   console.log(this.type + " connected");
-    // }
-    const tz = moment().format("ZZ");
-    let ws;
-    if (this.type && this.type === "wsg") {
-      ws = new WebSocket(Store.state.init.data.websocket.guest);
-    } else {
-      ws = new WebSocket(Store.state.init.data.websocket.general);
-    }
-    this.ws = ws;
-
-    ws.onopen = () => {
-      this.connected = true;
-      this.connecting = false;
-      this.clearQueue();
-      Fingerprint.getV18({}, fp => {
-        ws.send(
-          JSON.stringify({
-            sess: Store.state.auth.token,
-            act: "connect",
-            fp,
-            tz
-          })
-        );
-        this.emit("connect");
-      });
-    };
-    ws.onmessage = r => {
-      const data = JSON.parse(r.data);
-      if (data.payoutsApproved !== undefined) {
-        this.actions.payoutsLegalResult(data);
-        return;
-      }
-      this.emit("message", data);
-      // console.log("ws:", data);
-      const keys = Object.keys(data);
-      for (let key of keys) {
-        if (this.actions[key]) {
-          this.actions[key](data[key]);
-        }
-      }
-    };
-    ws.onclose = () => {
-      this.connected = false;
-      this.connecting = false;
-      setTimeout(() => {
-        if (!this.doNotReconnect) {
-          this.start(true);
-        }
-      }, 5000);
-    };
-  }
-  connect() {
-    if (this.connected || this.connecting) {
+  onData(data) {
+    if (data.payoutsApproved !== undefined) {
+      this.actions.payoutsLegalResult(data);
       return;
     }
-    this.doNotReconnect = false;
-    this.start();
-  }
-  close() {
-    this.connected = false;
-    this.doNotReconnect = true;
-    this.ws.close();
-    // console.log(this.type + " disconnected");
+    this.emit("message", data);
+    // console.log("ws:", data);
+    const keys = Object.keys(data);
+    for (let key of keys) {
+      if (this.actions[key]) {
+        this.actions[key](data[key]);
+      }
+    }
   }
   send(data) {
-    const message = { ...data, sess: Store.state.auth.token };
-    if (!this.connected || this.connecting || isOffline()) {
-      console.log(
-        this.type + " not connected. Can't send " + JSON.stringify(data)
-      );
-      this.queue.push(message);
-    }
-
-    if (!this.connected || this.connecting) {
-      return;
-    }
-
-    this.ws.send(JSON.stringify(message));
-  }
-  clearQueue() {
-    if (this.connected && this.queue.length) {
-      this.queue.forEach(message => {
-        this.ws.send(JSON.stringify(message));
-      });
-      this.queue = [];
-    }
+    data = { ...data, sess: Store.state.auth.token };
+    super.send(data);
   }
 }

@@ -1,5 +1,5 @@
-import Ws from "./lib/Ws";
+import Wsg from "./lib/Wsg";
 
-const ws = new Ws({}, "wsg");
+const ws = new Wsg();
 
 export default ws;

@@ -1,78 +1,39 @@
-import Wsp from "@/ws/wsp";
+import wsp from "@/ws/wsp";
 
 export default {
   data: () => ({
-    shouldMaintainConnection: false,
-    alreadySended: ""
+    alreadySent: ""
   }),
   methods: {
     checkNonReadyPosts() {
       this.posts.map(post => {
         if (!post.isMediaReady) {
-          this.wsp.reloadAction(post.id);
+          wsp.reloadAction(post.id);
         }
       });
     },
     getObservedIds() {
       const allIds = this.posts.map(p => p.id);
-      const sended = this.alreadySended.split(",");
-      const shouldBePosted = allIds.filter(
-        id => sended.indexOf(`${id}`) === -1
-      );
+      const sent = this.alreadySent.split(",");
+      const shouldBePosted = allIds.filter(id => sent.indexOf(`${id}`) === -1);
       return shouldBePosted.join(",");
     },
-    connectWs() {
-      this.wsp.connect(
-        // onOpen
-        () => {
-          if (this.posts.length) {
-            this.alreadySended = "";
-            this.sendObservedIds();
-            this.checkNonReadyPosts();
-          }
-          this.maintainСonnection();
-        },
-        // onClose
-        () => {
-          this.connectWs();
-        }
-      );
-    },
-    closeWs() {
-      this.wsp.close();
-    },
-    maintainСonnection() {
-      if (!this.wsp || !this.shouldMaintainConnection) return;
-      this.wsp.ws.send("");
-      setTimeout(() => this.maintainСonnection(), 20000);
-    },
-    stopMaintainСonnection() {
-      this.shouldMaintainConnection = false;
-    },
     sendObservedIds() {
-      if (this.wsp.ws.readyState !== 1) {
-        setTimeout(() => this.sendObservedIds(), 1000);
-        return;
-      }
-
       const ids = this.getObservedIds();
-
-      if (!this.wsp || !ids.length) return;
-      this.alreadySended = !this.alreadySended
-        ? ids
-        : `${this.alreadySended},${ids}`;
-      this.wsp.ws.send(ids);
+      if (!ids.length) return;
+      this.alreadySent = !this.alreadySent ? ids : `${this.alreadySent},${ids}`;
+      wsp.send(ids);
+    },
+    reloadPost(postId) {
+      console.log("reloadPost");
+      this.$store.dispatch("post/updatePost", { postId });
     }
   },
   created() {
-    this.wsp = new Wsp(postId => {
-      this.$store.dispatch("post/updatePost", { postId });
-    });
-    this.connectWs();
+    wsp.on("reloadPost", this.reloadPost);
   },
   beforeDestroy() {
-    this.stopMaintainСonnection();
-    this.closeWs();
+    wsp.removeListener("reloadPost", this.reloadPost);
   },
   watch: {
     posts() {
