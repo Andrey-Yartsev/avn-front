@@ -1,5 +1,5 @@
 <template>
-  <div class="addPost">
+  <div :class="['addPost', { truncated: !user.isPerformer }]">
     <form class="add-new-form bg-gradient_light-desk bg-gradient_light">
       <span
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"

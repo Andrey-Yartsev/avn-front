@@ -429,6 +429,11 @@
       align-content: center;
       margin-right: -13px;
       margin-left: 15px;
+
+      .truncated & {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
 
     .add-new-type {
@@ -471,7 +476,7 @@
     .truncated & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        right: 132px;
+        right: 0;
       }
     }
 

@@ -30,6 +30,10 @@
     display: none;
   }
 
+  .truncated & {
+    display: none;
+  }
+
   &:after {
 
     .mediasTop & {
