@@ -340,7 +340,9 @@ export default {
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     },
     minDate() {
-      return LuxonDateTime.local().toISO();
+      return LuxonDateTime.local()
+        .plus({ minutes: 1 })
+        .toISO();
     },
     isExtended() {
       return (
