@@ -57,6 +57,10 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         overflow-y: auto;
       }
+
+      &_relative {
+        position: relative;
+      }
     }
 
     &_hfluid {

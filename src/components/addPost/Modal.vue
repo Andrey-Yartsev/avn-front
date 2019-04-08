@@ -6,7 +6,7 @@
         :class="{ 'popup-container_hfluid': delayedPosts.length }"
       >
         <div class="previous hidden"></div>
-        <div class="content">
+        <div class="content content_relative">
           <div :class="{ 'container-popup': delayedPosts.length }">
             <div
               class="popup-addPost__header hidden-mobile"
@@ -44,8 +44,8 @@
               </VuePerfectScrollbar>
             </div>
           </div>
+          <button type="button" class="close" @click="close" />
         </div>
-        <button type="button" class="close" @click="close" />
         <div class="next hidden"></div>
       </div>
     </template>
