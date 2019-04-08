@@ -1,5 +1,4 @@
 "use strict";
-
 import LivesApi from "@/api/lives";
 import PostMixin from "@/store/mixins/posts";
 
@@ -49,7 +48,16 @@ const mutations = {
     state.currentLive.likesCount += 1;
   },
 
-  look(state) {
+  look(state, look) {
+    state.currentLive.comments = [
+      ...state.currentLive.comments,
+      {
+        ...look,
+        type: "look",
+        comment: "has joined",
+        hideTime: Date.now() + 60 * 1000
+      }
+    ];
     state.currentLive.looksCount += 1;
   },
 

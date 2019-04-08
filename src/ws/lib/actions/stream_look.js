@@ -1,5 +1,7 @@
 import Store from "@/store";
 
-export default () => {
-  Store.commit("lives/look");
+export default look => {
+  if (Store.state.auth.user.id !== look.user.id) {
+    Store.commit("lives/look", look);
+  }
 };
