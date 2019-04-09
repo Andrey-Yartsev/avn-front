@@ -24,12 +24,19 @@
         </div>
       </div>
     </div>
+    <Loader
+      :fullscreen="false"
+      text=""
+      class="small no-text"
+      v-if="gettingBgPreview"
+    />
   </div>
 </template>
 
 <script>
 import UserMixin from "@/mixins/user";
 import ProfileBg from "@/mixins/profileBg";
+import Loader from "@/components/common/Loader";
 
 const getScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
@@ -43,6 +50,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  components: {
+    Loader
   },
   computed: {
     bgStyle() {

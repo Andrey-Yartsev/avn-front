@@ -26,6 +26,10 @@
     background-color: transparent;
   }
 
+  &.rounded {
+    border-radius: 50%;
+  }
+
   &.transparent {
     background-color: transparent;
 

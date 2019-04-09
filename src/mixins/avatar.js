@@ -6,7 +6,8 @@ export default {
     return {
       avatarPreview: null,
       avatarUploading: false,
-      avatarRemoved: false
+      avatarRemoved: false,
+      gettingPreview: false
     };
   },
   computed: {
@@ -24,9 +25,11 @@ export default {
       }
 
       this.avatarRemoved = false;
+      this.gettingPreview = true;
 
       getImagePreview({ file: e.target.files[0] }, ({ preview }) => {
         this.avatarPreview = preview;
+        this.gettingPreview = false;
       });
     },
     resetAvatarPreview() {

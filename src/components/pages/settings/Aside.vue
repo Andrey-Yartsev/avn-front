@@ -12,6 +12,12 @@
               <img v-if="bgPreview" :src="bgPreview" />
               <img v-else-if="user.header" :src="user.header" />
             </template>
+            <Loader
+              :fullscreen="false"
+              text=""
+              class="small no-text"
+              v-if="gettingBgPreview"
+            />
           </div>
 
           <div class="avatar-block">
@@ -20,19 +26,27 @@
                 <img v-if="avatarPreview" :src="avatarPreview" />
                 <img v-else-if="user.avatar" :src="user.avatar" />
               </span>
+              <Loader
+                :fullscreen="false"
+                text=""
+                class="small no-text rounded"
+                v-if="gettingPreview"
+              />
             </span>
-            <label for="avatar" class="select-user-image"></label>
-            <input
-              type="file"
-              id="avatar"
-              ref="avatar"
-              accept=".jpg,.jpeg,.gif,.png"
-              @change="setAvatarPreview"
-            />
-            <span
-              class="reset-user-image reset-avatar"
-              @click="showAvatarConfirm"
-            ></span>
+            <template v-if="!gettingPreview">
+              <label for="avatar" class="select-user-image"></label>
+              <input
+                type="file"
+                id="avatar"
+                ref="avatar"
+                accept=".jpg,.jpeg,.gif,.png"
+                @change="setAvatarPreview"
+              />
+              <span
+                class="reset-user-image reset-avatar"
+                @click="showAvatarConfirm"
+              ></span>
+            </template>
           </div>
 
           <span
@@ -110,6 +124,7 @@ import Mobile from "./mobile";
 import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "SettingsAside",
@@ -117,7 +132,8 @@ export default {
   mixins: [Mobile, ProfileBg, Avatar],
 
   components: {
-    Footer
+    Footer,
+    Loader
   },
 
   computed: {

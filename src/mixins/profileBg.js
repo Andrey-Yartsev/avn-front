@@ -6,7 +6,8 @@ export default {
     return {
       bgPreview: null,
       bgUploading: false,
-      bgRemoved: false
+      bgRemoved: false,
+      gettingBgPreview: false
     };
   },
   computed: {
@@ -20,8 +21,10 @@ export default {
   methods: {
     setBgPreview(e) {
       this.bgRemoved = false;
+      this.gettingBgPreview = true;
       getImagePreview({ file: e.target.files[0] }, ({ preview }) => {
         this.bgPreview = preview;
+        this.gettingBgPreview = false;
       });
     },
     resetBgPreview() {
