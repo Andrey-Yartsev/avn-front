@@ -90,7 +90,8 @@ export const getMediaFilePreview = (media, callback) => {
   if (file.size > 50000000) {
     callback({
       ...media,
-      preview: undefined
+      preview: undefined,
+      needServerPreview: true
     });
     return;
   }
@@ -132,9 +133,11 @@ export const getMediaFilePreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = ({ id, file, width, mediaType }, onProgress) => {
+export const fileUpload = (
+  { id, file, width, mediaType, needServerPreview },
+  onProgress
+) => {
   const xhr = new XMLHttpRequest();
-
   const pr = new Promise((resolve, reject) => {
     const formData = new FormData();
     const {
@@ -152,12 +155,18 @@ export const fileUpload = ({ id, file, width, mediaType }, onProgress) => {
         formData.append("watermark[imagePath]", watermarkFile);
       } else {
         formData.append("watermark[text]", watermarkText);
-        formData.append("watermark[size]", width * 0.03);
+        if (width) {
+          formData.append("watermark[size]", width * 0.03);
+        }
       }
     }
     formData.append("file", file);
     formData.append("preset", Store.state.init.data.converter.preset);
     formData.append("isDelay", true);
+
+    if (needServerPreview) {
+      formData.append("needThumb", true);
+    }
 
     xhr.upload.onprogress = ({ loaded, total }) => {
       onProgress(id, loaded, total, xhr);
