@@ -1,6 +1,7 @@
 import {
-  getMediaFilePreview,
+  getVideoPreview,
   getMediaFileMeta,
+  getImagePreview,
   fileUpload,
   uniqId
 } from "@/utils/mediaFiles";
@@ -50,22 +51,15 @@ export default {
 
       for (let i = 0; i < validLength; i += 1) {
         const file = validFiles[i];
-        const {
-          mediaType,
-          preview,
-          fileContent,
-          width
-        } = await getMediaFileMeta(file);
+        const { mediaType, name, size } = getMediaFileMeta(file);
 
         addedFiles.push({
-          width,
           file,
           mediaType,
-          fileContent,
-          userFileName: file.name,
-          preview,
+          userFileName: name,
           id: uniqId(),
-          loaded: 0
+          loaded: 0,
+          size
         });
       }
 
@@ -91,14 +85,14 @@ export default {
 
       for (let i = 0; i < this.preloadedMedias.length; i += 1) {
         const media = this.preloadedMedias[i];
+        const getPreviewMethod =
+          media.mediaType === "video" ? getVideoPreview : getImagePreview;
 
-        if (media.mediaType === "video" && !media.preview) {
-          getMediaFilePreview(media, newMedia => {
-            this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
-              oldMedia.id === newMedia.id ? newMedia : oldMedia
-            );
-          });
-        }
+        getPreviewMethod(media, newMedia => {
+          this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
+            oldMedia.id === newMedia.id ? newMedia : oldMedia
+          );
+        });
       }
 
       this.saveMediaFiles();

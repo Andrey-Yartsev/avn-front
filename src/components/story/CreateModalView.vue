@@ -95,7 +95,12 @@
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
 import userMixin from "@/mixins/user";
-import { getMediaFileMeta, fileUpload } from "@/utils/mediaFiles";
+import {
+  getMediaFileMeta,
+  fileUpload,
+  getImagePreview,
+  readFileContent
+} from "@/utils/mediaFiles";
 
 export default {
   name: "CreateModal",
@@ -125,28 +130,37 @@ export default {
       this.$store.dispatch("modal/hide", { name: "createStory" });
     },
     chooseFileEvent: async function() {
-      const { type, size } = this.file;
-      const isLargeVideo = type.startsWith("video") && size > 50000000;
+      const media = getMediaFileMeta(this.file);
+      const { mediaType, size } = media;
+      const isLargeVideo = mediaType === "video" && size > 50000000;
+
       const defaultPreview = {
-        mediaType: "video",
+        mediaType,
         fileContent: null
       };
 
       this.showLoader = true;
-      this.preview = isLargeVideo
-        ? defaultPreview
-        : await getMediaFileMeta(this.file, true);
 
-      this.showLoader = false;
-      this.showPreview = true;
+      if (isLargeVideo) {
+        this.preview = defaultPreview;
+        this.showLoader = false;
+        this.showPreview = true;
+        return;
+      }
 
-      if (this.preview.mediaType === "photo") {
+      const getPreviewMethod =
+        mediaType === "video" ? readFileContent : getImagePreview;
+
+      getPreviewMethod(media, newMedia => {
+        this.preview = newMedia;
         this.readyToUpload = true;
-      }
+        this.showLoader = false;
+        this.showPreview = true;
 
-      if (this.preview.mediaType === "video") {
-        this.playPreviewVideo();
-      }
+        if (mediaType === "video") {
+          this.playPreviewVideo();
+        }
+      });
     },
 
     createNewStory: async function() {
