@@ -1,4 +1,5 @@
 import upload from "@/utils/upload";
+import { getImagePreview } from "@/utils/mediaFiles";
 
 export default {
   data() {
@@ -19,11 +20,9 @@ export default {
   methods: {
     setBgPreview(e) {
       this.bgRemoved = false;
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.bgPreview = reader.result;
-      };
-      reader.readAsDataURL(e.target.files[0]);
+      getImagePreview({ file: e.target.files[0] }, ({ preview }) => {
+        this.bgPreview = preview;
+      });
     },
     resetBgPreview() {
       this.bgPreview = null;

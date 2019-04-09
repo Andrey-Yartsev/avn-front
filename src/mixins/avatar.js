@@ -1,4 +1,5 @@
 import upload from "@/utils/upload";
+import { getImagePreview } from "@/utils/mediaFiles";
 
 export default {
   data() {
@@ -21,12 +22,12 @@ export default {
       if (!e.target.files || !e.target.files.length) {
         return;
       }
+
       this.avatarRemoved = false;
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.avatarPreview = reader.result;
-      };
-      reader.readAsDataURL(e.target.files[0]);
+
+      getImagePreview({ file: e.target.files[0] }, ({ preview }) => {
+        this.avatarPreview = preview;
+      });
     },
     resetAvatarPreview() {
       this.avatarPreview = null;
