@@ -109,11 +109,12 @@ import Media from "@/components/common/postParts/media/Index";
 import CommentsList from "@/components/common/postParts/commentsListScrollable/Index";
 import AddComment from "@/components/common/postParts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
+import PostStat from "@/mixins/postStat";
 import moment from "moment";
 
 export default {
   name: "PostLastView",
-  mixins: [User],
+  mixins: [User, PostStat],
   computed: {
     postId() {
       return this.post.id;
@@ -229,19 +230,6 @@ export default {
   },
   created() {
     this.init();
-    setTimeout(() => {
-      if (this.$root.ws && this.post.id) {
-        this.$root.ws.send({
-          act: "collect",
-          message: "view_post",
-          data: {
-            post_id: this.post.id,
-            owner: this.post.author.id,
-            duration: 1
-          }
-        });
-      }
-    }, 2000);
   },
   beforeDestroy() {
     this.$store.commit(this.actionPrefix + "/resetComments", {

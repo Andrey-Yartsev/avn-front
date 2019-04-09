@@ -14,8 +14,8 @@ import "unfetch/polyfill";
 import "url-search-params-polyfill";
 import "@/iconfont";
 
-// import Logger from "js-logger";
-// Logger.useDefaults();
+import Logger from "js-logger";
+Logger.useDefaults();
 
 if (process.env.NODE_ENV !== "development") {
   Sentry.init({

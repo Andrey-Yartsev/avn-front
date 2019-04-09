@@ -1,59 +1,56 @@
+import Logger from "js-logger";
+
+const logger = Logger.get("stat");
+
 export default {
   data() {
     return {
-      postsStatViewActionTimeoutId: null,
-      postsStatViewed: []
+      postStatTimer: 0,
+      postStatDuration: 0
     };
   },
   methods: {
-    postsStatViewAction() {
-      if (this.postsStatViewActionTimeoutId) {
-        clearTimeout(this.postsStatViewActionTimeoutId);
-      }
-      this.postsStatViewActionTimeoutId = setTimeout(() => {
-        this._postsStatViewAction();
-      }, 1000);
+    startTimer() {
+      this.postStatTimer = new Date().getTime();
+      logger.info("timer started");
     },
-    _postsStatViewAction() {
-      const winHeight = Math.max(
-        document.documentElement.clientHeight,
-        window.innerHeight || 0
-      );
-      this.posts.forEach(post => {
-        const el = document.getElementById("p" + post.id);
-        if (!el) {
-          return;
-        }
-        if (this.postsStatViewed.indexOf(post.id) !== -1) {
-          return;
-        }
-        const postTop = el.getBoundingClientRect().top;
-        if (postTop + 40 > winHeight) {
-          return;
-        }
-        this.postStatView(post);
-      });
+    stopTimer() {
+      this.postStatDuration =
+        this.postStatDuration +
+        Math.floor(new Date().getTime() - this.postStatTimer);
+      logger.info("timer stopped");
     },
-    postStatView(post) {
+    sendStat() {
+      this.stopTimer();
+
       if (!this.$root.ws) return;
 
-      this.postsStatViewed.push(post.id);
       this.$root.ws.send({
         act: "collect",
-        message: "view_post_in_feed",
+        message: "view_post",
         data: {
-          post_id: post.id,
-          owner: post.author.id,
-          duration: 1
+          post_id: this.post.id,
+          owner: this.post.author.id,
+          duration: this.postStatDuration
         }
       });
+
+      logger.info("stat sent");
+    },
+    visibilityChange() {
+      if (document.hidden) {
+        this.stopTimer();
+      } else {
+        this.startTimer();
+      }
     }
   },
   mounted() {
-    this.postsStatViewAction();
-    window.addEventListener("scroll", this.postsStatViewAction, true);
+    this.startTimer();
+    document.addEventListener("visibilitychange", this.visibilityChange);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.postsStatViewAction, true);
+    this.sendStat();
+    document.removeEventListener("visibilitychange", this.visibilityChange);
   }
 };
