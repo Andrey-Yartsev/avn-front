@@ -159,7 +159,7 @@
     }
   }
 
-  .forgot-wrapper,
+  //.forgot-wrapper,
   .login-wrapper {
     padding: 1.3em;
     position: relative;
@@ -529,6 +529,10 @@
       h3 {
         font-size: 17px;
         margin-bottom: 2px;
+
+        a {
+          font-size: 18px;
+        }
       }
 
       a.switch-link,
@@ -538,6 +542,7 @@
 
       p.forgot {
         margin-top: 10px;
+        padding-top: 20px;
         font-size: 13px;
       }
     }
