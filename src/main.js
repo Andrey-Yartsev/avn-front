@@ -14,6 +14,9 @@ import "unfetch/polyfill";
 import "url-search-params-polyfill";
 import "@/iconfont";
 
+// import Logger from "js-logger";
+// Logger.useDefaults();
+
 if (process.env.NODE_ENV !== "development") {
   Sentry.init({
     dsn: "https://452f146ea4c343d79547432c09816d85@sentry.io/1419946",

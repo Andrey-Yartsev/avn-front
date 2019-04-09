@@ -268,13 +268,15 @@ export default {
       }
       if (this.loggedIn) {
         this.webSocket = ws;
+        wsp.connect();
       } else {
         this.webSocket = wsg;
+        if (wsp.connected) {
+          wsp.close();
+        }
       }
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
-
-      wsp.connect();
     }
   },
   created() {

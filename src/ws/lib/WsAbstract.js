@@ -2,25 +2,24 @@ import { EventEmitter } from "events";
 import moment from "moment";
 import Fingerprint from "fingerprintjs2";
 import Store from "@/store";
+import Logger from "js-logger";
 
 const isOffline = () => {
   return global.navigator && global.navigator.onLine === false;
 };
 
+const logger = Logger.get("ws");
+
 export default class Ws extends EventEmitter {
   constructor(type) {
     super();
+    this.forcedClose = false;
     this.type = type;
     this.doNotReconnect = false;
     this.queue = [];
   }
-  start(/* reconnect */) {
+  start(reconnect) {
     this.connecting = true;
-    // if (reconnect) {
-    //   console.log(this.type + " reconnected");
-    // } else {
-    //   console.log(this.type + " connected");
-    // }
     const tz = moment().format("ZZ");
     let ws;
     if (this.type === "ws") {
@@ -49,17 +48,29 @@ export default class Ws extends EventEmitter {
     ws.onclose = () => {
       this.connected = false;
       this.connecting = false;
-      setTimeout(() => {
-        if (!this.doNotReconnect) {
-          this.start(true);
-        }
-      }, 5000);
+      logger.info(
+        this.type + " disconnected" + (this.forcedClose ? " (forced)" : "")
+      );
+
+      if (!this.forcedClose) {
+        setTimeout(() => {
+          if (!this.doNotReconnect) {
+            this.start(true);
+          }
+        }, 5000);
+      }
+
+      this.forcedClose = false;
     };
 
     this.ws.onmessage = r => {
       const data = JSON.parse(r.data);
       if (data.userConnected) {
-        // console.log(this.type + " connected");
+        if (reconnect) {
+          logger.info(this.type + " reconnected");
+        } else {
+          logger.info(this.type + " connected");
+        }
         this.connected = true;
         this.clearQueue();
         this.emit("connect");
@@ -79,8 +90,8 @@ export default class Ws extends EventEmitter {
   close() {
     this.connected = false;
     this.doNotReconnect = true;
+    this.forcedClose = true;
     this.ws.close();
-    // console.log(this.type + " disconnected");
   }
   maintainConnection() {
     this.ws.send("");
@@ -88,7 +99,7 @@ export default class Ws extends EventEmitter {
   }
   addedToQueue(data) {
     if (!this.connected || isOffline()) {
-      // console.log(this.type + " not connected. Added to queue " + data);
+      logger.info(this.type + " not connected. Added to queue " + data);
       this.queue.push(data);
       return true;
     }
@@ -106,7 +117,7 @@ export default class Ws extends EventEmitter {
   clearQueue() {
     if (this.connected && this.queue.length) {
       this.queue.forEach(data => {
-        // console.log("Sending from queue:", data);
+        logger.info("Sending from queue:", data);
         this.ws.send(data);
       });
       this.queue = [];
