@@ -121,50 +121,30 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 100vh;
     background-color: $white;
-    //background-image: linear-gradient(
-    //  30deg,
-    //  rgba($default-secondary-color, 0.06) 10%,
-    //  rgba($default-primary-color, 0.06) 90%
-    //);
-    //background-position: right top;
-    //background-repeat: no-repeat;
-    //background-size: 43.4% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 94%;
-    left: 0;
-    background: url(#{$assetPath}/img/bg-login-page.png) no-repeat 100% 13% / 100% auto;
+  &:not(.btn) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-position: 100% 16%;
-      width: 57%;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 94%;
+      left: 0;
+      background: url(#{$assetPath}/img/bg-login-page.png) no-repeat 100% 13% / 100% 100%;
+      z-index: 0;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background-position: 100% 16%;
+        background-size: 100% auto;
+        width: 57%;
+      }
     }
   }
-
-  //&:not(.btn) {
-  //
-  //  &:before {
-  //
-  //    @include media-breakpoint-up($desktop-breakpoint) {
-  //      position: absolute;
-  //      right: 0;
-  //      width: 43.4%;
-  //      top: 0;
-  //      bottom: 0;
-  //      background: $light;
-  //      opacity: 0.3;
-  //      content: "";
-  //    }
-  //  }
-  //}
 }
 
 .forgot,
@@ -182,6 +162,9 @@
   .forgot-wrapper,
   .login-wrapper {
     padding: 1.3em;
+    position: relative;
+    z-index: 1;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0;
       display: flex;
