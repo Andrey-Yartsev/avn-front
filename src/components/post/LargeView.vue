@@ -35,6 +35,7 @@
         :medias="post.media"
         :shouldHasLink="false"
         :postId="post.id"
+        :authorId="post.author.id"
         mediaSize="full"
       />
       <div class="right-col">

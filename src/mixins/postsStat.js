@@ -97,7 +97,7 @@ export default {
           post_id: postId,
           owner: this.postsMap[postId].author.id,
           duration,
-          start_time: this.postsStatTimers[postId]
+          start_time: Math.round(this.postsStatTimers[postId] / 1000)
         }
       });
 

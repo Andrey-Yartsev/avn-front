@@ -15,6 +15,7 @@
             :is="getMediaViewType(medias[key])"
             :media="medias[key]"
             :postId="postId"
+            :authorId="authorId"
             :openModal="openModal"
             :mediaSize="mediaSize"
           />
@@ -27,6 +28,7 @@
           :is="getMediaViewType(medias[0])"
           :media="medias[0]"
           :postId="postId"
+          :authorId="authorId"
           :openModal="openModal"
           :mediaSize="mediaSize"
         />
@@ -127,6 +129,10 @@ export default {
       required: true
     },
     postId: {
+      type: Number,
+      required: true
+    },
+    authorId: {
       type: Number,
       required: true
     },

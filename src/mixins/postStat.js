@@ -32,7 +32,7 @@ export default {
           post_id: this.post.id,
           owner: this.post.author.id,
           duration: this.postStatDuration,
-          start_time: this.postStatTimer
+          start_time: Math.round(this.postStatTimer / 1000)
         }
       });
 

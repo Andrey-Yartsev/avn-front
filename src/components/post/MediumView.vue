@@ -25,6 +25,7 @@
         :medias="medias"
         :shouldHasLink="!delayedPost"
         :postId="post.id"
+        :authorId="post.author.id"
         :openModal="openModal"
         mediaSize="preview"
       />
