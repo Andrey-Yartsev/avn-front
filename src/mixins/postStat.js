@@ -12,6 +12,7 @@ export default {
   methods: {
     startTimer() {
       this.postStatTimer = new Date().getTime();
+      console.log(this.postStatTimer);
       logger.info("timer started");
     },
     stopTimer() {
@@ -31,7 +32,8 @@ export default {
         data: {
           post_id: this.post.id,
           owner: this.post.author.id,
-          duration: this.postStatDuration
+          duration: this.postStatDuration,
+          start_time: this.postStatTimer
         }
       });
 

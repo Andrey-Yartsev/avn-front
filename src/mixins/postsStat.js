@@ -96,7 +96,8 @@ export default {
         data: {
           post_id: postId,
           owner: this.postsMap[postId].author.id,
-          duration
+          duration,
+          start_time: this.postsStatTimers[postId]
         }
       });
 
