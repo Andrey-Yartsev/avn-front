@@ -75,7 +75,7 @@
                       selectedLineChart === 'followers' &&
                       selectedLineName === 'followers'
                   }"
-                  ref="count_followers_followers"
+                  ref="count_followers_current_followers"
                   >Followers<span>0</span></span
                 >
                 <span
@@ -86,7 +86,7 @@
                       selectedLineChart === 'followers' &&
                       selectedLineName === 'subscribers'
                   }"
-                  ref="count_stories_story_view"
+                  ref="count_followers_current_subscribers"
                   >Subscribers<span>0</span></span
                 >
               </div>
