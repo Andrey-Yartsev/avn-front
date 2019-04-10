@@ -246,7 +246,6 @@ Settings.defaultLocale = "en";
 const InitialState = {
   expanded: false,
   postMsg: "",
-  isSaving: false,
   isFree: false,
   mediaType: "all",
   datetime: undefined
@@ -312,6 +311,9 @@ export default {
     newPost() {
       return this.$store.state.post.newPost;
     },
+    isSaving() {
+      return this.$store.state.post._savePostLoading;
+    },
     allMediaTypes() {
       const { photo, video, gif } = this.inputAcceptTypes;
       return [...photo, ...video, ...gif];
@@ -374,7 +376,6 @@ export default {
       this.expanded = InitialState.expanded;
       this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
       this.postMsg = InitialState.postMsg;
-      this.isSaving = InitialState.isSaving;
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
@@ -382,8 +383,6 @@ export default {
     },
     getPostData() {
       if (this.notEhoughData) return;
-
-      this.isSaving = true;
 
       const scheduledDate = moment(this.datetime)
         .utc()

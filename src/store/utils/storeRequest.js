@@ -3,6 +3,10 @@ import tokenRequest from "../../utils/tokenRequest";
 import request from "../../utils/request";
 import Router from "@/router";
 
+const isOffline = () => {
+  return global.navigator && global.navigator.onLine === false;
+};
+
 const storeRequest = (
   requestType,
   prefix,
@@ -16,6 +20,15 @@ const storeRequest = (
     commit(prefix + "ResetError");
     commit(prefix + "Request");
     commit(prefix + "Success", false);
+
+    if (isOffline()) {
+      dispatch("global/flashToast", "Internet connection problems", {
+        root: true
+      });
+      commit(prefix + "Requested");
+      return;
+    }
+
     const requests = {
       any: anyRequest,
       token: tokenRequest,
@@ -52,6 +65,7 @@ const storeRequest = (
         }
       })
       .catch(error => {
+        commit(prefix + "Requested");
         if (error.name === "TypeError") {
           console.error(error);
           error = { message: error.toString() };

@@ -1,6 +1,7 @@
 "use strict";
 
 import PostApi from "@/api/post";
+import { createRequestAction } from "../utils/storeRequest";
 
 const state = {
   currentPost: undefined,
@@ -22,41 +23,15 @@ const mutations = {
     state.postReportReasons = data;
   },
 
-  savePostSuccess(state, data) {
-    state.newPost = data;
-  },
-
   updatePostSuccess(state, data) {
     state.updatedPost = data;
   }
 };
 
 const actions = {
-  savePost({ commit }, data) {
-    return PostApi.savePost(data)
-      .then(async response => {
-        if (response.status === 200) {
-          const newPost = await response.json();
-          commit("savePostSuccess", newPost);
-          commit("modal/hide", { name: "addPost" }, { root: true });
-        }
-      })
-      .catch(err => {
-        commit("sendPostCommentFail", err);
-      });
-  },
-
-  updatePostData({ commit }, { postId, data }) {
-    return PostApi.updatePost({ postId, data })
-      .then(async response => {
-        if (response.status === 200) {
-          const newPost = await response.json();
-          commit("savePostSuccess", newPost);
-        }
-      })
-      .catch(err => {
-        commit("sendPostCommentFail", err);
-      });
+  async savePost({ dispatch, commit }, data) {
+    await dispatch("_savePost", data);
+    commit("modal/hide", { name: "addPost" }, { root: true });
   },
 
   updatePost({ commit }, { postId }) {
@@ -95,6 +70,41 @@ const actions = {
       .catch(() => {});
   }
 };
+
+createRequestAction({
+  prefix: "_savePost",
+  apiPath: "posts",
+  resultKey: "newPost",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "updatePostData",
+  apiPath: "posts/{id}",
+  resultKey: "newPost",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params.data;
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params.postId);
+  }
+});
 
 export default {
   namespaced: true,
