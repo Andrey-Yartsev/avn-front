@@ -12,7 +12,6 @@ export default {
   methods: {
     startTimer() {
       this.postStatTimer = new Date().getTime();
-      console.log(this.postStatTimer);
       logger.info("timer started");
     },
     stopTimer() {
