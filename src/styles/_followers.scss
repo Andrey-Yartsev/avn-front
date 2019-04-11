@@ -14,10 +14,6 @@
 
   .white-bg-block {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      box-shadow: 0 0 5px rgba(#000, 0.3);
-    }
-
     > .container {
 
       .posts-container {
