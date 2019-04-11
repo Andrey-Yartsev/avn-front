@@ -245,6 +245,7 @@ export default {
   },
   watch: {
     page() {
+      this.postsStatFinishViewAction();
       this.getPageData();
       this.lastYOffset = 0;
     }

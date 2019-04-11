@@ -12,7 +12,6 @@ export default {
   data() {
     return {
       postsStatViewActionTimeoutId: null,
-      postsStatViewed: [],
       postsStatAppearedIds: [],
       postsStatTimers: {},
       postsMap: {}
@@ -31,6 +30,13 @@ export default {
       this.postsStatAppearedIds.forEach(postId =>
         this.finishPostWatchTimer(postId)
       );
+      this.postsStatReset();
+    },
+    postsStatReset() {
+      this.postsStatViewActionTimeoutId = null;
+      this.postsStatAppearedIds = [];
+      this.postsStatTimers = {};
+      this.postsMap = {};
     },
     _postsStatViewAction() {
       const winHeight = Math.max(
@@ -106,7 +112,11 @@ export default {
   },
   watch: {
     posts(posts) {
+      if (!posts.length) {
+        return;
+      }
       this.postsMap = arrayToObject(posts);
+      this.postsStatViewAction();
     }
   },
   mounted() {
