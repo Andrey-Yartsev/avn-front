@@ -1226,12 +1226,32 @@
           }
         }
 
-        &:hover {
+        &.vdatetime-calendar__month__day {
+
+          &:hover {
+
+            > span {
+
+              > span {
+                background-color: $primary-color;
+
+                .dark-theme & {
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &:hover {
+
+        > span {
 
           > span {
 
-            > span {
-              background-color: $primary-color;
+            .dark-theme & {
+              color: $white;
             }
           }
         }
