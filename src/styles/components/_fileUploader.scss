@@ -33,6 +33,47 @@
       top: 0.31em;
       right: 0.31em;
     }
+
+    &_option {
+      cursor: pointer;
+
+      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+        flex: 0 0 3.5em;
+      }
+
+      &:after {
+        content: "\E610";
+        @include icon-font;
+        font-size: 18px;
+        line-height: 18px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        color: #fff;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+
+        @include media-breakpoint-up($tablet-breakpoint) {
+          font-size: 24px;
+          line-height: 24px;
+        }
+      }
+
+      &.current {
+
+        &:after {
+          content: "\E60F";
+        }
+      }
+
+      .filename {
+
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+          width: 3.5em;
+          height: 3.5em;
+        }
+      }
+    }
+
     .loader {
       z-index: 2;
       top: 50%;
@@ -170,5 +211,13 @@
     &:after {
       content: "\E605";
     }
+  }
+}
+
+.block-thumbnails {
+
+  &__title {
+    margin: 0 8px 6px;
+    font-weight: 700;
   }
 }

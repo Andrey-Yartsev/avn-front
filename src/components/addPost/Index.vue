@@ -102,6 +102,32 @@
               :isSaving="isSaving"
             />
           </VuePerfectScrollbar>
+
+          <!--<div class="block-thumbnails">-->
+          <!--<div class="block-thumbnails__title">Choose thumbnail</div>-->
+          <!--<div class="addFileCollectionView">-->
+          <!--<div class="addFileView addFileView_option current">-->
+          <!--<div class="filename">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="addFileView addFileView_option">-->
+          <!--<div class="filename">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="addFileView addFileView_option">-->
+          <!--<div class="filename">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="addFileView addFileView_option">-->
+          <!--<div class="filename">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="addFileView addFileView_option">-->
+          <!--<div class="filename">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
           <div
             class="post-scheduled-time"
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
@@ -217,6 +243,31 @@
             :isSaving="isSaving"
           />
         </div>
+        <!--<div class="block-thumbnails">-->
+        <!--<div class="block-thumbnails__title">Choose thumbnail</div>-->
+        <!--<div class="addFileCollectionView">-->
+        <!--<div class="addFileView addFileView_option current">-->
+        <!--<div class="filename">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="addFileView addFileView_option">-->
+        <!--<div class="filename">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="addFileView addFileView_option">-->
+        <!--<div class="filename">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="addFileView addFileView_option">-->
+        <!--<div class="filename">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="addFileView addFileView_option">-->
+        <!--<div class="filename">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
         <div class="post-scheduled-time" v-if="datetime && $mq === 'mobile'">
           <div class="datetime-value">
             <span class="post-datetime__value">{{ formattedDate }}</span>

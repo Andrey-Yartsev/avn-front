@@ -550,7 +550,6 @@
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         //height: 137px;
-
         height: 180px;
       }
 
@@ -561,6 +560,7 @@
         //height: 53px;
         //min-height: 53px;
 
+        min-height: 80px;
         flex: 1;
       }
     }
