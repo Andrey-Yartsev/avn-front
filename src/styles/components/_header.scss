@@ -757,9 +757,15 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     right: 32px;
   }
+
+  .dark-theme & {
+    color: $main-color;
+  }
+
   &:hover {
     opacity: 1;
   }
+
   &:before {
     @include icon-font;
     content: "\E600";
