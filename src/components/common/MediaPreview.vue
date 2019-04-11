@@ -1,11 +1,7 @@
 <template>
   <div :class="['addFileView', { uploading: isSaving }]">
     <span class="filename">
-      <img
-        v-if="media.preview"
-        :src="media.preview"
-        :title="media.userFileName"
-      />
+      <img v-if="hasPreview" :src="preview" :title="media.userFileName" />
       <span v-else>{{ media.userFileName }}</span>
       <span class="attachment-status success-status" v-if="media.processId" />
       <span class="attachment-status error-status" v-if="media.uploadError" />
@@ -47,6 +43,20 @@ export default {
     Loader
   },
   computed: {
+    preview() {
+      if (
+        this.media.mediaType === "video" &&
+        this.media.thumbs &&
+        this.media.thumbs.length
+      ) {
+        return this.media.thumbs[this.media.thumbIndex - 1].url;
+      }
+
+      return this.media.preview;
+    },
+    hasPreview() {
+      return this.media.preview || this.media.thumbs;
+    },
     showLoader() {
       return !this.media.uploadError && !this.media.processId;
     }

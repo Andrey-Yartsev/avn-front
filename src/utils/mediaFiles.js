@@ -179,8 +179,7 @@ export const getVideoPreview = (media, callback) => {
   if (file.size > 50000000) {
     callback({
       ...media,
-      preview: undefined,
-      needServerPreview: true
+      preview: undefined
     });
     return;
   }
@@ -222,10 +221,7 @@ export const getVideoPreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = (
-  { id, file, width, mediaType, needServerPreview },
-  onProgress
-) => {
+export const fileUpload = ({ id, file, mediaType }, onProgress) => {
   const xhr = new XMLHttpRequest();
   const pr = new Promise((resolve, reject) => {
     const formData = new FormData();
@@ -244,17 +240,15 @@ export const fileUpload = (
         formData.append("watermark[imagePath]", watermarkFile);
       } else {
         formData.append("watermark[text]", watermarkText);
-        if (width) {
-          formData.append("watermark[size]", width * 0.03);
-        }
       }
     }
+
     formData.append("file", file);
     formData.append("preset", Store.state.init.data.converter.preset);
     formData.append("isDelay", true);
 
-    if (needServerPreview) {
-      formData.append("needThumb", true);
+    if (mediaType === "video") {
+      formData.append("needThumbs", true);
     }
 
     xhr.upload.onprogress = ({ loaded, total }) => {
@@ -262,8 +256,11 @@ export const fileUpload = (
     };
     xhr.onload = xhr.onerror = () => {
       if (xhr.status == 200) {
-        const processId = JSON.parse(xhr.response).processId;
-        resolve(processId);
+        const { processId, thumbs } = JSON.parse(xhr.response);
+        resolve({
+          processId,
+          thumbs
+        });
       } else {
         reject(true);
       }

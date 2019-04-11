@@ -146,9 +146,9 @@ export default {
         );
 
         uploadProcess
-          .then(processId => {
+          .then(({ processId, thumbs }) => {
             this.preloadedMedias = this.preloadedMedias.map(m =>
-              m.id === id ? { ...m, processId } : m
+              m.id === id ? { ...m, processId, thumbs, thumbIndex: 1 } : m
             );
           })
           .catch(hasError => {

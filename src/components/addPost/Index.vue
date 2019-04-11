@@ -102,32 +102,24 @@
               :isSaving="isSaving"
             />
           </VuePerfectScrollbar>
-
-          <!--<div class="block-thumbnails">-->
-          <!--<div class="block-thumbnails__title">Choose thumbnail</div>-->
-          <!--<div class="addFileCollectionView">-->
-          <!--<div class="addFileView addFileView_option current">-->
-          <!--<div class="filename">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="addFileView addFileView_option">-->
-          <!--<div class="filename">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="addFileView addFileView_option">-->
-          <!--<div class="filename">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="addFileView addFileView_option">-->
-          <!--<div class="filename">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--<div class="addFileView addFileView_option">-->
-          <!--<div class="filename">-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
+          <div class="block-thumbnails" v-if="showChooseThumbBlock">
+            <div class="block-thumbnails__title">Choose thumbnail</div>
+            <div class="addFileCollectionView">
+              <div
+                v-for="thumb in preloadedMedias[0].thumbs"
+                :key="thumb.index"
+                class="addFileView addFileView_option"
+                :class="{
+                  current: preloadedMedias[0].thumbIndex === thumb.index
+                }"
+                @click="preloadedMedias[0].thumbIndex = thumb.index"
+              >
+                <div class="filename">
+                  <img :src="thumb.url" />
+                </div>
+              </div>
+            </div>
+          </div>
           <div
             class="post-scheduled-time"
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
@@ -227,7 +219,7 @@
           @click.prevent="clickHandler"
           v-if="$mq === 'desktop'"
         >
-          {{ this.isNew ? "Share" : "Save" }}
+          {{ isNew ? "Share" : "Save" }}
         </button>
       </div>
       <div
@@ -243,31 +235,24 @@
             :isSaving="isSaving"
           />
         </div>
-        <!--<div class="block-thumbnails">-->
-        <!--<div class="block-thumbnails__title">Choose thumbnail</div>-->
-        <!--<div class="addFileCollectionView">-->
-        <!--<div class="addFileView addFileView_option current">-->
-        <!--<div class="filename">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="addFileView addFileView_option">-->
-        <!--<div class="filename">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="addFileView addFileView_option">-->
-        <!--<div class="filename">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="addFileView addFileView_option">-->
-        <!--<div class="filename">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="addFileView addFileView_option">-->
-        <!--<div class="filename">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="block-thumbnails" v-if="showChooseThumbBlock">
+          <div class="block-thumbnails__title">Choose thumbnail</div>
+          <div class="addFileCollectionView">
+            <div
+              v-for="thumb in preloadedMedias[0].thumbs"
+              :key="thumb.index"
+              class="addFileView addFileView_option"
+              :class="{
+                current: preloadedMedias[0].thumbIndex === thumb.index
+              }"
+              @click="preloadedMedias[0].thumbIndex = thumb.index"
+            >
+              <div class="filename">
+                <img :src="thumb.url" />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="post-scheduled-time" v-if="datetime && $mq === 'mobile'">
           <div class="datetime-value">
             <span class="post-datetime__value">{{ formattedDate }}</span>
@@ -404,6 +389,16 @@ export default {
         this.preloadedMedias.length ||
         this.datetime
       );
+    },
+    showChooseThumbBlock() {
+      const pm = this.preloadedMedias;
+      return (
+        pm &&
+        pm.length &&
+        pm[0].mediaType === "video" &&
+        pm[0].thumbs &&
+        pm[0].thumbs.length
+      );
     }
   },
   methods: {
@@ -445,6 +440,13 @@ export default {
         isScheduled: !!this.datetime,
         mediaFiles: this.preloadedMedias.map(i => i.processId)
       };
+
+      if (
+        this.preloadedMedias.length &&
+        this.preloadedMedias[0].mediaType === "video"
+      ) {
+        postData.thumbId = this.preloadedMedias[0].thumbIndex;
+      }
 
       if (postData.isScheduled) {
         postData.scheduledDate = scheduledDate;
