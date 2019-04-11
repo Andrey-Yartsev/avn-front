@@ -98,6 +98,7 @@ textarea {
 .field-invalid,
 .field-valid {
 
+  &.settings-nav__item,
   .form-field {
 
     &:before {
@@ -118,6 +119,7 @@ textarea {
 
 .field-invalid {
 
+  &.settings-nav__item,
   .form-field {
 
     &:before {
@@ -143,6 +145,7 @@ textarea {
 
 .field-valid {
 
+  &.settings-nav__item,
   .form-field {
 
     &:before {
