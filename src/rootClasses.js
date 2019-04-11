@@ -20,7 +20,7 @@ export default {
     "has-page-footer"
   ],
   myProfile: ["profile-page"],
-  staticPage: ["static-page"],
+  staticPage: ["static-page", "reset-sticky-gap"],
   contact: ["static-page", "contact-page"],
   forgot: ["login-page", "reset-page", "static-page", "reset-sticky-gap"],
   notifications: [
