@@ -33,7 +33,7 @@
                 v-if="gettingPreview"
               />
             </span>
-            <template v-if="!gettingPreview">
+            <template v-show="!gettingPreview">
               <label for="avatar" class="select-user-image"></label>
               <input
                 type="file"
