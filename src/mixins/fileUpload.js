@@ -57,7 +57,7 @@ export default {
           file,
           mediaType,
           userFileName: name,
-          id: uniqId(),
+          id: uniqId() + i,
           loaded: 0,
           size
         });

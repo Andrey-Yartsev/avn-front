@@ -165,14 +165,14 @@ export default {
 
     createNewStory: async function() {
       this.showLoader = true;
-      const processId = await fileUpload(
+      const { processId } = await fileUpload(
         { id: "story", file: this.file },
         () => {}
       );
 
       const newStoryData = {
         fitTypes: [],
-        mediaFiles: [processId]
+        mediaFiles: [{ id: processId}]
       };
 
       this.$store.dispatch("story/savePost", {
