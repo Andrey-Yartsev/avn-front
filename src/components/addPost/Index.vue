@@ -439,14 +439,15 @@ export default {
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
         mediaFiles: this.preloadedMedias.map(media => {
-          const data = {}
+          const data = {};
 
           if (media.mediaType === "video") {
             data.thumbId = media.thumbIndex;
           }
 
           return {
-            id: media.processId, ...data
+            id: media.processId,
+            ...data
           };
         })
       };
