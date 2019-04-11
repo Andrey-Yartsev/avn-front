@@ -103,7 +103,7 @@
             />
           </VuePerfectScrollbar>
           <div class="block-thumbnails" v-if="showChooseThumbBlock">
-            <div class="block-thumbnails__title">Choose thumbnail</div>
+            <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView">
               <div
                 v-for="thumb in preloadedMedias[0].thumbs"
@@ -236,7 +236,7 @@
           />
         </div>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
-          <div class="block-thumbnails__title">Choose thumbnail</div>
+          <div class="block-thumbnails__title">Choose cover</div>
           <div class="addFileCollectionView">
             <div
               v-for="thumb in preloadedMedias[0].thumbs"
