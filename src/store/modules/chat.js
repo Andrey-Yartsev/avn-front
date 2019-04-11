@@ -74,7 +74,10 @@ const actions = {
     });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
-    if (!rootState.auth.user.hasMessages) {
+    if (
+      !rootState.auth.user.hasMessages &&
+      rootState.auth.user.id !== message.fromUser.id
+    ) {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
@@ -163,7 +166,6 @@ const mutations = {
       if (chat.withUser.id === withUserId) {
         chat.lastMessage = message;
         if (!isMine) {
-          console.log("isMine");
           chat.unreadMessagesCount++;
         }
       }
