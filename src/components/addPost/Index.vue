@@ -438,15 +438,18 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        mediaFiles: this.preloadedMedias.map(i => i.processId)
-      };
+        mediaFiles: this.preloadedMedias.map(media => {
+          const data = {}
 
-      if (
-        this.preloadedMedias.length &&
-        this.preloadedMedias[0].mediaType === "video"
-      ) {
-        postData.thumbId = this.preloadedMedias[0].thumbIndex;
-      }
+          if (media.mediaType === "video") {
+            data.thumbId = media.thumbIndex;
+          }
+
+          return {
+            id: media.processId, ...data
+          };
+        })
+      };
 
       if (postData.isScheduled) {
         postData.scheduledDate = scheduledDate;
