@@ -99,6 +99,7 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       //margin: 0 15px;
       padding: 15px 38px 8px 15px;
+      max-width: 100vw;
 
       @media screen and (orientation: landscape) {
         min-height: 54px;
