@@ -202,7 +202,7 @@ export default {
         text: message
       };
       if (mediaFiles.length) {
-        opt.mediaFile = mediaFiles[0];
+        opt.mediaFile = [{ id: mediaFiles[0].processId }];
       }
       this.price = "";
       this.priceIsSet = false;

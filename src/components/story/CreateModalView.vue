@@ -172,7 +172,7 @@ export default {
 
       const newStoryData = {
         fitTypes: [],
-        mediaFiles: [{ id: processId}]
+        mediaFiles: [{ id: processId }]
       };
 
       this.$store.dispatch("story/savePost", {
