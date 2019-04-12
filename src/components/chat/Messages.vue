@@ -34,7 +34,14 @@
                 }"
                 @click="messageClick(v)"
               >
-                <span class="message" v-html="text(v)"></span>
+                <span
+                  class="message"
+                  v-if="v.textLength"
+                  v-html="text(v)"
+                ></span>
+                <span class="message message-locked" v-if="isLocked(v)">
+                  <span>{{ lockedText(v) }}</span>
+                </span>
                 <div class="media" v-if="v.media.length">
                   <template v-if="!v.media[0].locked">
                     <figure
@@ -143,6 +150,14 @@ export default {
           return "You have been funded for " + message.text;
         }
       }
+    },
+
+    lockedText(message) {
+      let s = "";
+      for (let i = 0; i < Math.round(message.textLength / 2); i++) {
+        s += "x ";
+      }
+      return s;
     },
 
     addGrouping(messages) {
