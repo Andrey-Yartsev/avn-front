@@ -1,13 +1,10 @@
 <template>
   <Modal :onClose="close">
-    <div
-      class="popup-container popup-image popup-alert_show-close"
-      slot="content"
-    >
+    <div class="popup-container popup-image" slot="content">
       <div class="content">
         <img :src="src" />
+        <button type="button" class="close" @click="close"></button>
       </div>
-      <button type="button" class="close" @click="close"></button>
     </div>
   </Modal>
 </template>

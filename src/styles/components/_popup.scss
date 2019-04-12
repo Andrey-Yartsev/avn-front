@@ -17,7 +17,7 @@
 
   .explore-page & {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background: rgba(#000, 0.85);
     }
   }
@@ -54,7 +54,7 @@
     .content {
       width: 100%;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         overflow-y: auto;
       }
 
@@ -76,7 +76,7 @@
 
       .popup-title {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           background-color: $white;
         }
 
@@ -111,7 +111,7 @@
 
         .popup-container-scroll {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             min-height: calc(100vh - 254px);
           }
         }
@@ -119,14 +119,14 @@
 
       &.popup-addPost {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           background-color: $white;
           background-image: none;
         }
 
         &:before {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             display: none;
           }
         }
@@ -138,7 +138,7 @@
       &:not(.popup-container_hfluid) {
         overflow: visible;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           max-width: 100%;
         }
       }
@@ -192,7 +192,7 @@
 
       .close {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: block;
         }
       }
@@ -204,7 +204,7 @@
 
     &.chat-popup {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         //max-width: 100%;
         top: 0;
         bottom: 0;
@@ -229,7 +229,7 @@
 
         .content {
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             display: flex;
           }
         }
@@ -245,7 +245,7 @@
       .content {
         height: 100%;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           overflow-y: hidden;
 
           display: flex;
@@ -264,7 +264,7 @@
       .close {
         top: 6px;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: none;
         }
       }
@@ -284,7 +284,7 @@
         .more-functions {
           //margin: auto 0.4em auto auto;
 
-          @include media-breakpoint-down($desktop-breakpoint) {
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             margin-right: -6px;
           }
 
@@ -308,7 +308,7 @@
       max-width: 344px;
       padding: 52px 20px 23px;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         transform: translate(-50%, -50%);
         left: 50%;
         top: 50%;
@@ -324,7 +324,7 @@
       
       .close {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: block;
         }
       }
@@ -342,7 +342,7 @@
 
       @include media-breakpoint-up($tablet-breakpoint) {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           box-shadow: none;
           border-radius: 0;
           display: block;
@@ -352,7 +352,7 @@
       .close {
         top: 5px;
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: block;
         }
       }
@@ -415,13 +415,55 @@
         }
       }
     }
+
+    &.popup-image {
+      margin: auto;
+      background-color: transparent;
+      border-radius: 0;
+      padding: 20px;
+      text-align: center;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-width: none;
+        width: auto;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100vh - 40px);
+        margin: auto;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-height: calc(100vh - 120px);
+        }
+      }
+
+      .content {
+        width: auto;
+        display: inline-block;
+        position: relative;
+      }
+
+      .close {
+        display: block;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+        top: 0;
+        right: 0;
+
+        &:before {
+          opacity: 1;
+          color: #fff;
+        }
+      }
+    }
   }
 
   & &-payment {
     width: 100%;
     max-width: 800px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       &,
       .content,
       .paymentView {
@@ -448,7 +490,7 @@
       align-items: center;
       align-content: center;
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         position: sticky;
         top: 0;
         z-index: 10;
@@ -542,7 +584,7 @@
 
     .explore-page & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         font-size: 24px;
         line-height: 44px;
       }
@@ -592,7 +634,7 @@
 
   .popup-container_hfluid {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       overflow-y: scroll;
       flex-direction: column;
       justify-content: stretch;
@@ -618,7 +660,7 @@
       padding: 84px 0 0;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       &:before {
         background: $light;
         content: "";
@@ -649,7 +691,7 @@
 
     > .content {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         min-height: 100%;
         display: flex;
         flex-direction: column;
@@ -677,9 +719,6 @@
 .popup-addPost {
 
   &__header {
-    //position: absolute;
-    //left: 20px;
-    //top: 20px;
     font-size: 17px;
     font-weight: 500;
     background-color: $white;
@@ -695,7 +734,7 @@
 
   .container-popup {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       overflow-y: auto;
     }
   }
@@ -759,7 +798,7 @@
     
     .close {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block;
       }
     }
@@ -794,7 +833,7 @@
 
 .container-popup {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     height: 100%;
     flex: 1;
     display: flex;
@@ -819,7 +858,7 @@
       min-height: auto;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: block;
     }
 
@@ -835,7 +874,7 @@
 
 .popup-content-scroll {
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding: 1px 0 20px;
     background-color: $white;
   }
