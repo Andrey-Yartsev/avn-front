@@ -45,6 +45,7 @@
                         class="postLink"
                         :href="v.media[0].src.source"
                         target="_blank"
+                        @click.prevent="openImage(v.media[0].src.source)"
                       >
                         <img
                           :src="v.media[0].src.source"
@@ -250,6 +251,15 @@ export default {
 
     isLocked(message) {
       return !message.isOpened && !message.isFree;
+    },
+
+    openImage(src) {
+      this.$store.dispatch("modal/show", {
+        name: "image",
+        data: {
+          src
+        }
+      });
     }
   },
 

@@ -83,6 +83,10 @@ const state = {
   tipPayConfirm: {
     show: false,
     data: {}
+  },
+  image: {
+    show: false,
+    data: {}
   }
 };
 

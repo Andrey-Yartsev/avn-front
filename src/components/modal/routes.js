@@ -1,6 +1,7 @@
 import PostModal from "@/components/post/ModalView";
 import NotifModal from "@/components/pages/notification/Modal";
 import ChatModal from "@/components/chat/Modal";
+import ImageModal from "@/components/modal/Image";
 
 export default {
   "post/:postId/:from": {
@@ -17,5 +18,6 @@ export default {
     component: ChatModal,
     _name: "ChatNew"
   },
-  "chat/:userId": ChatModal
+  "chat/:userId": ChatModal,
+  "image/:src": ImageModal
 };

@@ -40,6 +40,7 @@
       <PaymentModal v-if="this.$store.state.modal.payment.show" />
       <ErrorModal v-if="error" />
       <Confirm v-if="this.$store.state.modal.confirm.show" />
+      <ImageModal v-if="this.$store.state.modal.image.show" />
       <a
         v-if="adminReturnUrl"
         :href="adminReturnUrl"
@@ -81,6 +82,7 @@ import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
+import ImageModal from "@/components/modal/Image.vue";
 
 import Cookie from "@/utils/cookie";
 import rootClasses from "@/rootClasses";
@@ -124,7 +126,8 @@ export default {
     StoryViewerModal,
     CreateHighlightsModal,
     ChooseHighlightModal,
-    Confirm
+    Confirm,
+    ImageModal
   },
   mixins: [ColorScheme],
   data() {
