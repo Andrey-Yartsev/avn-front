@@ -113,6 +113,13 @@
       }
     }
   }
+
+  #content {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: relative;
+    }
+  }
 }
 
 .login,
@@ -150,7 +157,10 @@
 .forgot,
 .login,
 .OtpView {
-  position: relative;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    position: relative;
+  }
 
   #content > & {
 
@@ -164,6 +174,12 @@
     padding: 1.3em;
     position: relative;
     z-index: 1;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0;
@@ -560,6 +576,35 @@
 
     input {
       font-size: 13px;
+    }
+  }
+}
+
+.login-form-col {
+
+  &.auth-block {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > div:not(.site-footer) {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    .signUp {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        flex: 0 0 auto;
+      }
     }
   }
 }

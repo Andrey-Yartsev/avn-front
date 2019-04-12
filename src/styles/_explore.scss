@@ -16,16 +16,6 @@
     }
   }
 
-  &.not-authorized {
-
-    #site_header {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        box-shadow: 0 0 5px rgba(#000, 0.3);
-      }
-    }
-  }
-
   #content {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
