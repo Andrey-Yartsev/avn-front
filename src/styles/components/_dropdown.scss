@@ -444,6 +444,14 @@
         opacity: 1;
       }
     }
+
+    &[disabled] {
+      opacity: 1;
+
+      .more-functions__option {
+        opacity: .3;
+      }
+    }
   }
 
   &__option {
