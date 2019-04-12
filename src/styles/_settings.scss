@@ -202,6 +202,13 @@
   .btn_fix-width {
     margin-top: 3px;
   }
+
+  .form-title {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-bottom: 11px;
+    }
+  }
 }
 
 .delete-account-block {

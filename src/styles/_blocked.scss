@@ -34,18 +34,49 @@
     overflow: auto;
   }
 
-  .form-title {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding-bottom: 11px;
-    }
-  }
-
   .semi-transparent {
     .subtext {
       margin-top: 6px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-top: 2px;
+      }
+    }
+  }
+
+  .SettingsStoryView & {
+
+    .form-title {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-top: 5px;
+      }
+    }
+
+    .bg-gradient {
+
+      &_pseudo {
+
+        &:before,
+        &:after {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            display: none;
+          }
+        }
+      }
+
+      &__shadow {
+
+        &_mob {
+
+          &:after {
+
+            @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+              display: none;
+            }
+          }
+        }
       }
     }
   }
