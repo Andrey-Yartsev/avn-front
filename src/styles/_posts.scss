@@ -919,7 +919,7 @@
   &_in-col {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding-bottom: 68px;
+      //padding-bottom: 68px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
