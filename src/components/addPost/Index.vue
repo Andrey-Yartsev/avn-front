@@ -275,6 +275,7 @@ import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
 import moment from "moment";
 import { Settings, DateTime as LuxonDateTime } from "luxon";
+import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 
 Settings.defaultLocale = "en";
@@ -289,7 +290,7 @@ const InitialState = {
 
 export default {
   name: "AddPost",
-  mixins: [FileUpload],
+  mixins: [FileUpload, UserMixin],
   data() {
     return {
       ...InitialState,
@@ -481,6 +482,11 @@ export default {
     },
     post() {
       if (this.post.id && !this.isNew) {
+        if (!this.isOwner(this.post.author.id)) {
+          this.$router.push("/");
+          return;
+        }
+
         this.datetime = this.post.scheduledDate;
         this.postMsg = this.post.text;
         this.tweetSend = this.post.tweetSend;
