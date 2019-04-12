@@ -54,7 +54,7 @@
                       </a>
                     </figure>
                   </template>
-                  <template>
+                  <template v-else>
                     <img :src="`data:image/jpeg;base64,${v.media[0].locked}`" />
                   </template>
                 </div>
