@@ -427,7 +427,7 @@ export default {
     },
     tick() {
       const currentTime = Math.round(new Date().getTime() / 1000);
-      
+
       if (!this.streamStartTime || currentTime < this.streamStartTime) {
         return;
       }
