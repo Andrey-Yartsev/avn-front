@@ -49,7 +49,7 @@ export default {
         this.media.thumbs &&
         this.media.thumbs.length
       ) {
-        return this.media.thumbs[this.media.thumbIndex - 1].url;
+        return this.media.thumbs[this.media.thumbId - 1].url;
       }
 
       return this.media.preview;

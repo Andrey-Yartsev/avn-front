@@ -151,7 +151,7 @@ export default {
         uploadProcess
           .then(({ processId, thumbs }) => {
             this.preloadedMedias = this.preloadedMedias.map(m =>
-              m.id === id ? { ...m, processId, thumbs, thumbIndex: 1 } : m
+              m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
             );
 
             this.uploadInProgress = false;

@@ -107,12 +107,12 @@
             <div class="addFileCollectionView">
               <div
                 v-for="thumb in preloadedMedias[0].thumbs"
-                :key="thumb.index"
+                :key="thumb.id"
                 class="addFileView addFileView_option"
                 :class="{
-                  current: preloadedMedias[0].thumbIndex === thumb.index
+                  current: preloadedMedias[0].thumbId === thumb.id
                 }"
-                @click="preloadedMedias[0].thumbIndex = thumb.index"
+                @click="preloadedMedias[0].thumbId = thumb.id"
               >
                 <div class="filename">
                   <img :src="thumb.url" />
@@ -240,12 +240,12 @@
           <div class="addFileCollectionView">
             <div
               v-for="thumb in preloadedMedias[0].thumbs"
-              :key="thumb.index"
+              :key="thumb.id"
               class="addFileView addFileView_option"
               :class="{
-                current: preloadedMedias[0].thumbIndex === thumb.index
+                current: preloadedMedias[0].thumbId === thumb.id
               }"
-              @click="preloadedMedias[0].thumbIndex = thumb.index"
+              @click="preloadedMedias[0].thumbId = thumb.id"
             >
               <div class="filename">
                 <img :src="thumb.url" />
@@ -396,7 +396,7 @@ export default {
       return (
         pm &&
         pm.length &&
-        pm[0].mediaType === "video" &&
+        (pm[0].mediaType === "video" || pm[0].type === "video") &&
         pm[0].thumbs &&
         pm[0].thumbs.length
       );
@@ -443,7 +443,7 @@ export default {
           const data = {};
 
           if (media.mediaType === "video") {
-            data.thumbId = media.thumbIndex;
+            data.thumbId = media.thumbId;
           }
 
           return {
@@ -497,7 +497,9 @@ export default {
           id: media.id,
           processId: media.id,
           mediaType: media.type,
-          preview: media.thumb.source
+          preview: media.thumb.source,
+          thumbs: media.thumbs,
+          thumbId: media.thumbId
         }));
         this.mediaType = this.preloadedMedias.length
           ? this.preloadedMedias[0].mediaType
