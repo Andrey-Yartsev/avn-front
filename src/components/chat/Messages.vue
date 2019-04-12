@@ -39,7 +39,7 @@
                   class="message message-locked"
                   v-if="v.textLength && isLocked(v)"
                 >
-                  <span>{{ lockedText(v) }}</span>
+                  <span class="message-locked__text">{{ lockedText(v) }}</span>
                 </span>
                 <div class="media" v-if="v.media.length">
                   <template v-if="!v.media[0].locked">

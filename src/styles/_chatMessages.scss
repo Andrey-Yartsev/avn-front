@@ -456,6 +456,7 @@
 }
 
 .messageWrapper {
+
   .message {
     position: relative;
     display: inline-block;
@@ -570,6 +571,15 @@
         }
       }
     }
+  }
+}
+
+.message-locked {
+
+  &__text {
+    color: transparent;
+    pointer-events: none;
+    user-select: none;
   }
 }
 
