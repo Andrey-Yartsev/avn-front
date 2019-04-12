@@ -3,10 +3,18 @@
 
   @include media-breakpoint-down($desktop-breakpoint) {
     text-align: center;
-    .input-help {
-      padding: 16px 0 0;
-      margin: 11px 0 0;
-      border-top: 1px solid rgba($gray, 0.2);
+  }
+
+  .input-help {
+
+    &__title {
+      font-weight: 500;
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding: 0 0 12px;
+        margin: 0 0 18px;
+        border-bottom: 1px solid rgba($gray, 0.2);
+      }
     }
   }
 
