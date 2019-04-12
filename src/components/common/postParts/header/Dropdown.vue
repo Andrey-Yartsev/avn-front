@@ -131,7 +131,7 @@ export default {
     },
 
     editPost() {
-      this.$router.push(`post/edit/${this.postId}`);
+      this.$router.push(`/post/edit/${this.postId}`);
     },
 
     reportUser() {
