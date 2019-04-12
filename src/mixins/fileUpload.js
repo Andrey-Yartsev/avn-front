@@ -89,6 +89,10 @@ export default {
         const getPreviewMethod =
           media.mediaType === "video" ? getVideoPreview : getImagePreview;
 
+        if (media.alreadySaved) {
+          continue;
+        }
+
         getPreviewMethod(media, newMedia => {
           this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
             oldMedia.id === newMedia.id ? newMedia : oldMedia

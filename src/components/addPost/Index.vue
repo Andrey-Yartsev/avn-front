@@ -285,7 +285,8 @@ const InitialState = {
   postMsg: "",
   isFree: false,
   mediaType: "all",
-  datetime: undefined
+  datetime: undefined,
+  saving: false
 };
 
 export default {
@@ -405,7 +406,7 @@ export default {
   methods: {
     clickHandler() {
       const postData = this.getPostData();
-      if (!postData) return;
+      if (!postData || this.saving) return;
 
       if (this.isNew) {
         this.$store.dispatch("post/savePost", postData);
@@ -415,6 +416,7 @@ export default {
           data: postData
         });
       }
+      this.saving = true;
     },
     resetDatetime() {
       this.datetime = InitialState.datetime;
@@ -427,6 +429,7 @@ export default {
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
       this.datetime = InitialState.datetime;
+      this.saving = false;
     },
     getPostData() {
       if (this.notEhoughData) return;
