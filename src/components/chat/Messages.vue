@@ -11,9 +11,10 @@
         <div
           v-for="v in messages"
           v-bind:key="v.id"
-          class="chatMessage notAuthorMessage"
+          class="chatMessage"
           :class="{
             authorMessage: isAuthor(v),
+            notAuthorMessage: !isAuthor(v),
             firstMessageInGroup: v.firstMessageInGroup,
             withTime: v.lastMessageInGroup
           }"
@@ -34,12 +35,17 @@
                 }"
                 @click="messageClick(v)"
               >
-                <span class="message" v-html="text(v)"></span>
                 <span
-                  class="message message-locked"
-                  v-if="v.textLength && isLocked(v)"
+                  class="message"
+                  :class="{ 'message-locked': v.textLength && isLocked(v) }"
+                  v-if="v.textLength"
                 >
-                  <span class="message-locked__text">{{ lockedText(v) }}</span>
+                  <span class="message__text" v-html="text(v)"></span>
+                  <span
+                    class="message-locked__text"
+                    v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
+                    >{{ lockedText(v) }}</span
+                  >
                 </span>
                 <div class="media" v-if="v.media.length">
                   <template v-if="!v.media[0].locked">
@@ -55,14 +61,27 @@
                       >
                         <img
                           :src="v.media[0].src.source"
-                          width="760"
-                          height="428"
+                          :class="{ 'no-media-text': !v.textLength }"
+                          :width="v.media[0].src.width"
+                          :height="v.media[0].src.height"
                         />
                       </a>
                     </figure>
                   </template>
                   <template v-else>
-                    <img :src="`data:image/jpeg;base64,${v.media[0].locked}`" />
+                    <figure class="media-item active media-item_photo">
+                      <div class="postLink">
+                        <img
+                          :src="`data:image/jpeg;base64,${v.media[0].locked}`"
+                          :width="v.media[0].src.width"
+                          :height="v.media[0].src.height"
+                          :style="{
+                            width: `${v.media[0].src.width}px`,
+                            height: `${v.media[0].src.height}px`
+                          }"
+                        />
+                      </div>
+                    </figure>
                   </template>
                 </div>
               </div>
