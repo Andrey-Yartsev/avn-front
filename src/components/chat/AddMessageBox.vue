@@ -149,6 +149,9 @@ export default {
       if (this.showTip) {
         return false;
       }
+      if (this.uploadInProgress) {
+        return false;
+      }
       return this.message.trim() || this.preloadedMedias.length;
     },
     funded() {
@@ -195,7 +198,7 @@ export default {
       const message = this.message;
       this.message = "";
       this.isSaving = true;
-      const mediaFiles = await this.getMediaFiles();
+      const mediaFiles = this.preloadedMedias;
       this.preloadedMedias = [];
       const opt = {
         price: this.price ? this.price : 0,

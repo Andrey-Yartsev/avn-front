@@ -29,7 +29,8 @@ export default {
     return {
       preloadedMedias: [],
       inputAcceptTypes,
-      limits
+      limits,
+      uploadInProgress: false
     };
   },
 
@@ -133,6 +134,8 @@ export default {
     },
 
     saveMediaFiles() {
+      this.uploadInProgress = true;
+
       this.preloadedMedias = this.preloadedMedias.map(media => {
         if (media.processId || media.loaded) {
           return { ...media };
@@ -150,11 +153,15 @@ export default {
             this.preloadedMedias = this.preloadedMedias.map(m =>
               m.id === id ? { ...m, processId, thumbs, thumbIndex: 1 } : m
             );
+
+            this.uploadInProgress = false;
           })
           .catch(hasError => {
             this.preloadedMedias = this.preloadedMedias.map(m =>
               m.id === id ? { ...m, uploadError: true } : m
             );
+
+            this.uploadInProgress = false;
 
             if (hasError) {
               this.toast("Can't upload file");
