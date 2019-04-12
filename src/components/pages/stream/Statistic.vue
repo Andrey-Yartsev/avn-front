@@ -113,15 +113,20 @@
         <button class="btn alt lg change-devices">Done</button>
       </div>
     </div>
+    <Loader :fullscreen="true" text="" v-if="loading" />
   </div>
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
 import moment from "moment";
 import ChartSettings from "./ChartSettings.js";
 
 export default {
   name: "Statistic",
+  components: {
+    Loader
+  },
   data() {
     return {
       haveToSave: false,
@@ -146,6 +151,10 @@ export default {
       isRequired: true
     },
     canBeSaved: {
+      type: Boolean,
+      isRequired: true
+    },
+    loading: {
       type: Boolean,
       isRequired: true
     }

@@ -269,6 +269,7 @@
       :streamStartTime="streamStartTime"
       v-if="isStopped"
       :canBeSaved="canBeSaved"
+      :loading="finishing"
     />
   </div>
 </template>
@@ -319,7 +320,9 @@ export default {
 
       filters: [],
 
-      shownComments: []
+      shownComments: [],
+
+      finishing: false
     };
   },
   components: {
@@ -424,8 +427,12 @@ export default {
     },
     tick() {
       const currentTime = Math.round(new Date().getTime() / 1000);
-      const startTime = this.streamStartTime || currentTime;
-      const diff = currentTime - startTime;
+      
+      if (!this.streamStartTime || currentTime < this.streamStartTime) {
+        return;
+      }
+
+      const diff = currentTime - this.streamStartTime;
       const date = new Date(diff * 1000);
       let hours = date.getHours();
       let mins = date.getMinutes();
@@ -644,7 +651,11 @@ export default {
             })
           );
 
-          StreamApi.deleteStream(this.startedStreamId);
+          this.finishing = true;
+
+          StreamApi.deleteStream(this.startedStreamId).then(() => {
+            this.finishing = false;
+          });
         }
 
         this.isReadyToStart = true;
