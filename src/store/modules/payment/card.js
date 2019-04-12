@@ -2,7 +2,9 @@
 
 import { createRequestAction } from "../../utils/storeRequest";
 
-const state = {};
+const state = {
+  afterAddCardRedirect: null
+};
 
 const actions = {
   delete({ dispatch }) {
@@ -16,7 +18,14 @@ const actions = {
   }
 };
 
-const mutations = {};
+const mutations = {
+  setAfterAddCardRedirect(state, path) {
+    state.afterAddCardRedirect = path;
+  },
+  resetAfterAddCardRedirect(state) {
+    state.afterAddCardRedirect = null;
+  }
+};
 
 createRequestAction({
   prefix: "fetch",

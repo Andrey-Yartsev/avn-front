@@ -16,6 +16,10 @@ export default {
           "global/flashToast",
           "You should add card in payment settings"
         );
+        this.$store.commit(
+          "payment/card/setAfterAddCardRedirect",
+          this.$route.path
+        );
         Router.push("/settings/payments");
         return;
       }
