@@ -422,6 +422,7 @@
       border-radius: 0;
       padding: 20px;
       text-align: center;
+      box-shadow: none;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         max-width: none;
@@ -433,6 +434,7 @@
         max-width: 100%;
         max-height: calc(100vh - 40px);
         margin: auto;
+        background-color: $white;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           max-height: calc(100vh - 120px);
@@ -443,6 +445,19 @@
         width: auto;
         display: inline-block;
         position: relative;
+
+        &:before {
+          position: absolute;
+          pointer-events: none;
+          top: 0;
+          height: 50px;
+          left: 0;
+          right: 0;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+          opacity: 0.2;
+          content: "";
+          z-index: 1;
+        }
       }
 
       .close {
