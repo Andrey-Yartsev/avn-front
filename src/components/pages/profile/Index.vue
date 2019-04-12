@@ -29,13 +29,15 @@
         <VuePerfectScrollbar class="profile-desc">
           <p class="profile-text" v-if="profile.about">
             <span v-html="trunc(profile.about)"></span>
-            <a
-              v-if="profile.about.length > collapseLimit"
-              href="#"
-              @click.prevent="collapsed = !collapsed"
-            >
-              {{ collapsed ? "Read more" : "Collapse" }}
-            </a>
+            <span class="collapse-text">
+              <a
+                v-if="profile.about.length > collapseLimit"
+                href="#"
+                @click.prevent="collapsed = !collapsed"
+              >
+                {{ collapsed ? "Read more" : "Collapse" }}
+              </a>
+            </span>
           </p>
           <a
             v-if="profile.twitterUsername"
