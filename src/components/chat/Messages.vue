@@ -34,12 +34,11 @@
                 }"
                 @click="messageClick(v)"
               >
+                <span class="message" v-html="text(v)"></span>
                 <span
-                  class="message"
-                  v-if="v.textLength"
-                  v-html="text(v)"
-                ></span>
-                <span class="message message-locked" v-if="isLocked(v)">
+                  class="message message-locked"
+                  v-if="v.textLength && isLocked(v)"
+                >
                   <span>{{ lockedText(v) }}</span>
                 </span>
                 <div class="media" v-if="v.media.length">
