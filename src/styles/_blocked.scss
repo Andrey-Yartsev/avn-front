@@ -52,6 +52,20 @@
         padding-top: 5px;
       }
     }
+  }
+
+  .SettingsPrivacyView & {
+
+    .form-title {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-bottom: 11px;
+      }
+    }
+  }
+
+  .SettingsPrivacyView &,
+  .SettingsStoryView & {
 
     .bg-gradient {
 

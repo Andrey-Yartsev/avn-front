@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="geoblocking">
     <div class="form-title border-top">
       <div class="inner">
         <span class="semi-transparent">

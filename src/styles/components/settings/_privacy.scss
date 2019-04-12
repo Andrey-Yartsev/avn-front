@@ -1,4 +1,4 @@
-@include media-breakpoint-down($desktop-breakpoint) {
+@include media-breakpoint-down($desktop-breakpoint-dcrs) {
   .SettingsPrivacyView {
     .TwitterBlockView {
       display: none;
@@ -7,7 +7,7 @@
 }
 
 .TwitterView {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     .BlockedUsersCollectionView,
     .private-profile-block,
     .tweet-posts-block,
@@ -19,14 +19,15 @@
   }
 }
 .BlockedView {
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     .private-profile-block,
     .tweet-posts-block,
     .TwitterBlockView,
     .go-twitter-block,
     .watermarks-settings,
     .go-blocked,
-    .form-title .inner .semi-transparent
+    .form-title .inner .semi-transparent,
+    .geoblocking
     {
       display: none;
     }
