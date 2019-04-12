@@ -36,22 +36,27 @@
               >
                 <span class="message" v-html="text(v)"></span>
                 <div class="media" v-if="v.media.length">
-                  <figure
-                    class="media-item active media-item_photo"
-                    data-index="0"
-                  >
-                    <a
-                      class="postLink"
-                      :href="v.media[0].src.source"
-                      target="_blank"
+                  <template v-if="!v.media[0].locked">
+                    <figure
+                      class="media-item active media-item_photo"
+                      data-index="0"
                     >
-                      <img
-                        :src="v.media[0].src.source"
-                        width="760"
-                        height="428"
-                      />
-                    </a>
-                  </figure>
+                      <a
+                        class="postLink"
+                        :href="v.media[0].src.source"
+                        target="_blank"
+                      >
+                        <img
+                          :src="v.media[0].src.source"
+                          width="760"
+                          height="428"
+                        />
+                      </a>
+                    </figure>
+                  </template>
+                  <template>
+                    <img :src="`data:image/jpeg;base64,${v.media[0].locked}`" />
+                  </template>
                 </div>
               </div>
               <div class="time" v-if="v.lastMessageInGroup">
