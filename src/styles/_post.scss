@@ -37,8 +37,8 @@
     .explore-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        top: 30px;
-        bottom: 30px;
+        top: 45px;
+        bottom: 45px;
 
         @media screen and (orientation: landscape) {
           top: 0;
