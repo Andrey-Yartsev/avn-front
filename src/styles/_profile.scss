@@ -675,16 +675,13 @@
 .profile-actions-mob {
   position: -webkit-sticky;
   position: sticky;
-  top: -22px;
+  top: -24px;
   z-index: 1;
   box-shadow: 0 2px 1px rgba(#000, 0.1);
+  background-color: $white;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
-  }
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    background-color: $white;
   }
 
   > .row {
