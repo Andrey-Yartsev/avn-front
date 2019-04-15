@@ -357,13 +357,6 @@
     }
   }
 
-  .verified-user {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
-  }
-
   .timestamp {
     padding-left: 20px;
     margin-left: auto;
