@@ -93,7 +93,10 @@
               $mq === 'desktop'
           "
         >
-          <VuePerfectScrollbar class="addFileCollectionView">
+          <Draggable
+            class="addFileCollectionView"
+            v-model="preloadedMedias" 
+          >
             <MediaPreview
               v-for="media in preloadedMedias"
               :media="media"
@@ -101,7 +104,7 @@
               @removeMedia="removeMedia"
               :isSaving="isSaving"
             />
-          </VuePerfectScrollbar>
+          </Draggable>
           <div class="block-thumbnails" v-if="showChooseThumbBlock">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView">
@@ -226,7 +229,10 @@
         class="post-attachment"
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
-        <div class="addFileCollectionView">
+        <Draggable
+          class="addFileCollectionView"
+          v-model="preloadedMedias" 
+        >
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
@@ -234,7 +240,7 @@
             @removeMedia="removeMedia"
             :isSaving="isSaving"
           />
-        </div>
+        </Draggable>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
           <div class="block-thumbnails__title">Choose cover</div>
           <div class="addFileCollectionView">
@@ -268,6 +274,7 @@
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
+import Draggable from "vuedraggable";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
 import AddNewNav from "@/components/addNewNav/Index";
@@ -303,7 +310,8 @@ export default {
     MediaPreview,
     AddNewNav,
     VuePerfectScrollbar,
-    Datetime
+    Datetime,
+    Draggable
   },
   props: {
     initialExpanded: {
