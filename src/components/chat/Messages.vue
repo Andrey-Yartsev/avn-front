@@ -20,7 +20,10 @@
           }"
         >
           <div class="chatMessageWrapper">
-            <div class="avatar avatar_gap-r-md avatar_sm">
+            <div
+              class="avatar avatar_gap-r-md avatar_sm"
+              v-if="v.lastMessageInGroup"
+            >
               <span class="avatar__img">
                 <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar" />
               </span>

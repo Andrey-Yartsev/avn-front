@@ -333,6 +333,11 @@
           }
         }
 
+        img,
+        video {
+          margin: 0;
+        }
+
         .no-media-text {
           border-radius: 0 20px 20px 0;
         }
@@ -381,6 +386,13 @@
           color: $secondary-color;
           transform: translateY(-50%);
         }
+      }
+    }
+
+    &:not(.withTime) {
+
+      .messageContent {
+        margin-left: 45px;
       }
     }
 
