@@ -598,6 +598,10 @@
         flex-direction: column;
         justify-content: center;
       }
+
+      @include media-breakpoint-down($mobile-breakpoint-dcrs) {
+        display: block;
+      }
     }
 
     .signUp {
