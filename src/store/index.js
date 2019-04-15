@@ -40,7 +40,6 @@ import staticPage from "@/store/modules/staticPage";
 import support from "@/store/modules/support";
 import credits from "@/store/modules/credits";
 import postQueue from "@/store/modules/postQueue";
-import genders from "@/store/modules/genders";
 import referrals from "@/store/modules/referrals";
 import countries from "@/store/modules/countries";
 import states from "@/store/modules/states";
@@ -54,7 +53,6 @@ const store = new Vuex.Store({
     global,
     auth,
     init,
-    genders,
     home,
     profile,
     signUp,

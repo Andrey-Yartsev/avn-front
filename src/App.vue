@@ -261,7 +261,6 @@ export default {
         if (this.wasLogout) {
           this.webSocket.connect();
         }
-        this.$store.dispatch("genders/fetch");
       }
       this.initLoggedInClass();
     },

@@ -240,7 +240,7 @@ export default {
       return this.localUser.about;
     },
     genderList() {
-      return this.$store.state.genders.data;
+      return this.$store.state.init.data.genders;
     }
   },
 
