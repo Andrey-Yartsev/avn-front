@@ -117,13 +117,42 @@
 }
 .TwitterView {
   @include media-breakpoint-down($desktop-breakpoint) {
+    .BlockedUsersCollectionView,
+    .private-profile-block,
+    .tweet-posts-block,
+    .go-twitter-block,
+    .watermarks-settings,
     .email-block,
     .password-form,
-    .delete-account-block {
+    .delete-account-block,
+    .geoblocking {
       display: none;
     }
   }
 }
+.BlockedView {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    .private-profile-block,
+    .tweet-posts-block,
+    .TwitterBlockView,
+    .go-twitter-block,
+    .watermarks-settings,
+    .go-blocked,
+    .form-title .inner .semi-transparent,
+    .geoblocking
+    {
+      display: none;
+    }
+  }
+}
+@include media-breakpoint-down($desktop-breakpoint-dcrs) {
+  .SettingsPrivacyView {
+    .TwitterBlockView {
+      display: none;
+    }
+  }
+}
+
 .PasswordView {
   @include media-breakpoint-down($desktop-breakpoint) {
     .email-block,
