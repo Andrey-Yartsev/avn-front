@@ -19,14 +19,6 @@
 </noscript>
 <div id="app"></div>
 
-<script>
-  document.addEventListener('touchmove', function(e) {
-      e = e.originale || e;
-      if (e.scale !== 1) {
-        e.preventDefault();
-      }
-  }, false);
-</script>
 <script src="<%= BASE_URL %>static/js/amcharts/amcharts.js"></script>
 <script src="<%= BASE_URL %>static/js/amcharts/serial.js"></script>
 <script src="<%= BASE_URL %>static/js/amcharts/amstock.js"></script>
