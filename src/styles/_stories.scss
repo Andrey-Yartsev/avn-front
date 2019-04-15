@@ -151,6 +151,7 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-top: 1px solid rgba($gray, 0.2);
       padding-top: 6px;
+      padding-bottom: 5px;
       margin-bottom: 0;
     }
   }
