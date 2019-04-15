@@ -76,7 +76,10 @@
                 class="btn lg btn_fix-width saveChanges"
                 :disabled="!changed"
               >
-                Save changes
+                Save
+                <template v-if="$mq === 'desktop'">
+                  changes
+                </template>
               </button>
             </div>
           </div>
