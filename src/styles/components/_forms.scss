@@ -1026,7 +1026,12 @@ select {
 .watermarks-settings  {
 
   .form-group_with-label {
-    margin-top: 15px;
+    padding-bottom: 4px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-bottom: 0;
+      margin-bottom: 30px;
+    }
   }
 }
 

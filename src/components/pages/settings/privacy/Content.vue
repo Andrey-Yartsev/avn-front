@@ -29,58 +29,71 @@ w<template>
         </div>
       </div>
 
-      <div class="form-title watermarks-settings shadow-block border-top">
-        <div class="inner">
-          <span class="semi-transparent">
-            Enable watermarks for photo
-          </span>
-          <label class="toggle-element">
-            <input
-              type="checkbox"
-              name="hasWatermarkPhoto"
-              value="true"
-              v-model="localUser.hasWatermarkPhoto"
-            />
-            <span></span>
-          </label>
-        </div>
-        <div class="inner">
-          <span class="semi-transparent">
-            Enable watermarks for video
-          </span>
-          <label class="toggle-element">
-            <input
-              type="checkbox"
-              name="hasWatermarkVideo"
-              value="true"
-              v-model="localUser.hasWatermarkVideo"
-            />
-            <span></span>
-          </label>
-        </div>
-
-        <div
-          class="form-group form-group_with-label pb-reset"
-          v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
-        >
-          <label class="form-group-inner">
-            <span class="label">Watermark text</span>
-            <span class="form-group form-group_clear-gaps">
-              <span class="form-field">
-                <input
-                  type="text"
-                  name="watermarkText"
-                  v-model="localUser.watermarkText"
-              /></span>
+      <div class="watermarks-settings">
+        <div class="form-title border-top border-top-mobile">
+          <div class="inner">
+            <span class="semi-transparent">
+              Watermarks media
             </span>
-          </label>
+          </div>
         </div>
-        <WatermarkImageUploader
-          v-if="localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo"
-          @change="watermarkImageChange"
-          @remove="watermarkImageRemove"
-          :localUser="localUser"
-        />
+        <div class="shadow-block">
+          <div class="container">
+            <div class="form-group form-group_with-label checkbox-group">
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasWatermarkPhoto"
+                    value="true"
+                    v-model="localUser.hasWatermarkPhoto"
+                  />
+                  <span class="checkbox"></span>
+                  <span class="label">Enable watermarks for photo</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasWatermarkVideo"
+                    value="true"
+                    v-model="localUser.hasWatermarkVideo"
+                  />
+                  <span class="checkbox"></span>
+                  <span class="label">Enable watermarks for video</span>
+                </div>
+              </label>
+
+              <div
+                class="form-group form-group_with-label pb-reset"
+                v-if="
+                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                "
+              >
+                <label class="form-group-inner">
+                  <span class="label">Watermark text</span>
+                  <span class="form-group form-group_clear-gaps">
+                    <span class="form-field">
+                      <input
+                        type="text"
+                        name="watermarkText"
+                        v-model="localUser.watermarkText"
+                    /></span>
+                  </span>
+                </label>
+              </div>
+              <WatermarkImageUploader
+                v-if="
+                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                "
+                @change="watermarkImageChange"
+                @remove="watermarkImageRemove"
+                :localUser="localUser"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--
@@ -130,7 +143,9 @@ w<template>
         v-if="$mq === 'mobile'"
       >
         <div class="settings-nav">
-          <router-link to="/settings/privacy/twitter" class="settings-nav__item"
+          <router-link
+            to="/settings/privacy/twitter"
+            class="settings-nav__item settings-nav__item_arr"
             ><span>Twitter</span><span class="value">Connect</span></router-link
           >
         </div>

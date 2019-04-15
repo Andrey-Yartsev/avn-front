@@ -28,6 +28,9 @@
           <img :src="picture" />
         </div>
       </div>
+      <div class="input-help">
+        Required width from 100px to 300px
+      </div>
     </div>
   </div>
 </template>

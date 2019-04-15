@@ -157,10 +157,24 @@
   @include media-breakpoint-down($desktop-breakpoint) {
     .email-block,
     .twitter-block,
-    .delete-account-block {
+    .delete-account-block,
+    .form-title_cols{
       display: none;
     }
-    .form-title_cols {
+  }
+}
+.WatermarksView {
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    .private-profile-block,
+    .tweet-posts-block,
+    .TwitterBlockView,
+    .go-twitter-block,
+    .go-blocked,
+    //.form-title .inner .semi-transparent,
+    .geoblocking,
+    .BlockedUsersCollectionView,
+    .watermarks-settings .shadow-block {
       display: none;
     }
   }
