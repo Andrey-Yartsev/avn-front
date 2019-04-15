@@ -106,7 +106,7 @@
               :class="navClass(v.name)"
               v-for="v in navigation"
               v-bind:key="v.name"
-              class="settings-nav__item"
+              class="settings-nav__item settings-nav__item_arr"
             >
               <span>{{ v.title }}</span>
             </router-link>

@@ -88,7 +88,10 @@
       class="go-blocked shadow-block no-padding hidden-desktop settings-nav__wrapper"
     >
       <div class="settings-nav">
-        <div class="settings-nav__item empty" v-if="!items.length">
+        <div
+          class="settings-nav__item settings-nav__item_arr empty"
+          v-if="!items.length"
+        >
           <span class="not-lspacing">
             Blocked
           </span>
@@ -97,7 +100,11 @@
             people
           </span>
         </div>
-        <router-link :to="mobileBlockedRoute" v-else class="settings-nav__item">
+        <router-link
+          :to="mobileBlockedRoute"
+          v-else
+          class="settings-nav__item settings-nav__item_arr"
+        >
           <span class="not-lspacing">
             Blocked
           </span>

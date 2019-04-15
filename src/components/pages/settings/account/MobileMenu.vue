@@ -9,7 +9,7 @@
       <div class="settings-nav">
         <router-link
           to="/settings/account/email"
-          class="settings-nav__item"
+          class="settings-nav__item settings-nav__item_arr"
           :class="{
             'field-invalid ': !user.emailChecked
           }"
@@ -17,7 +17,10 @@
           <span>Email</span>
           <span class="value user-email">{{ user.email }}</span>
         </router-link>
-        <router-link to="/settings/account/twitter" class="settings-nav__item">
+        <router-link
+          to="/settings/account/twitter"
+          class="settings-nav__item settings-nav__item_arr"
+        >
           <span>Twitter</span>
           <span class="value">Connect</span>
         </router-link>
@@ -30,7 +33,9 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/password" class="settings-nav__item"
+        <router-link
+          to="/settings/account/password"
+          class="settings-nav__item settings-nav__item_arr"
           ><span>Change or reset your password</span></router-link
         >
       </div>
@@ -42,7 +47,10 @@
     </div>
     <div class="shadow-block no-padding">
       <div class="settings-nav">
-        <router-link to="/settings/account/manage" class="settings-nav__item">
+        <router-link
+          to="/settings/account/manage"
+          class="settings-nav__item settings-nav__item_arr"
+        >
           <span class="user-login user-login_st reset-ml">{{
             user.username
           }}</span>
