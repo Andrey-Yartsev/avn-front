@@ -101,7 +101,7 @@ const getScrollbarWidth = () => {
 
 const htmlElement = document.getElementsByTagName("html")[0];
 
-window.onload = () => {
+(function() {
   document.addEventListener(
     "touchstart",
     event => {
@@ -124,7 +124,7 @@ window.onload = () => {
     },
     false
   );
-};
+})();
 
 export default {
   components: {
