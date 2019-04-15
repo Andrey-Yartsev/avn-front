@@ -93,10 +93,7 @@
               $mq === 'desktop'
           "
         >
-          <Draggable
-            class="addFileCollectionView"
-            v-model="preloadedMedias" 
-          >
+          <Draggable class="addFileCollectionView" v-model="preloadedMedias">
             <MediaPreview
               v-for="media in preloadedMedias"
               :media="media"
@@ -229,10 +226,7 @@
         class="post-attachment"
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
-        <Draggable
-          class="addFileCollectionView"
-          v-model="preloadedMedias" 
-        >
+        <Draggable class="addFileCollectionView" v-model="preloadedMedias">
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
