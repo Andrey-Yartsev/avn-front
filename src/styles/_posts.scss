@@ -97,7 +97,6 @@
     position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //margin: 0 15px;
       padding: 15px 38px 8px 15px;
       max-width: 100vw;
 
@@ -597,9 +596,6 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
           @media screen and (orientation: landscape) {
-            //display: flex;
-            //flex-direction: row;
-            //flex: 1;
             width: 100vw;
           }
         }
@@ -707,22 +703,6 @@
         right: 0;
         &:before {
           content: "\E643";
-        }
-      }
-    }
-
-    .swiper-wrapper {
-
-      .lightbox-post & {
-
-        .explore-page & {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-
-            @media screen and (orientation: landscape) {
-              //height: inherit !important;
-            }
-          }
         }
       }
     }
@@ -918,10 +898,6 @@
   }
 
   &_in-col {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //padding-bottom: 68px;
-    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       position: absolute;
@@ -1145,17 +1121,14 @@
 
 .guest-comments-form {
   padding-top: 5px;
-  //padding-bottom: 8px;
   margin-left: 15px;
   margin-right: 15px;
-  //border-top: 1px solid rgba($gray, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    //padding-top: 15px;
     padding-bottom: 18px;
   }
 
@@ -1226,7 +1199,6 @@
   bottom: 0;
   padding-top: 7px;
   padding-bottom: 20px;
-  //height: 44px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100%;

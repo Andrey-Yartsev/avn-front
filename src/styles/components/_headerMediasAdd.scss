@@ -63,7 +63,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 2px;
-      //display: block;
     }
   }
 
@@ -88,7 +87,6 @@
     position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      //display: none;
       border-bottom-width: 2px;
       padding: 5px 4em 3px 1em;
     }

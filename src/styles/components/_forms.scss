@@ -1025,11 +1025,6 @@ select {
 
 .watermarks-settings  {
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    //padding-top: 3px;
-    //padding-bottom: 13px;
-  }
-
   .form-group_with-label {
     margin-top: 15px;
   }

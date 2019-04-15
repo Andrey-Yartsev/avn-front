@@ -549,17 +549,10 @@
       max-height: 200px;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        //height: 137px;
         height: 180px;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //height: 80px;
-        //min-height: 80px;
-
-        //height: 53px;
-        //min-height: 53px;
-
         min-height: 80px;
         flex: 1;
       }
@@ -976,24 +969,7 @@
   padding: 12px 10px 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    //padding: 14px 0 0;
-
     padding: 0 7px;
-  }
-
-  &:before {
-    //position: absolute;
-    //top: 0;
-    //content: "";
-    //height: 1px;
-    //left: 15px;
-    //right: 15px;
-    //background: rgba($gray, 0.2);
-    //display: none;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //display: block;
-    }
   }
 }
 

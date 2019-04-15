@@ -16,19 +16,6 @@
       }
     }
 
-
-    .scroll-top {
-
-      #site_header {
-
-        + #content {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            //margin-top: 0;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -1005,7 +992,6 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         margin: 0 5px 0 -5px;
-        //color: inherit;
       }
     }
   }
@@ -1032,7 +1018,6 @@
   .scroll-bottom & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //transform: translate3d(0, 44px, 0);
       top: 44px;
       position: fixed;
       left: 0;
@@ -1764,10 +1749,6 @@
       .profile-name__header {
         padding: 0 20px;
       }
-    }
-
-    #site_header {
-      //display: none;
     }
   }
 

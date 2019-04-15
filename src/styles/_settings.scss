@@ -152,14 +152,6 @@
 }
 
 .rounded-container {
-  @include media-breakpoint-up($desktop-breakpoint) {
-    .content-col & {
-
-      .settings-page & {
-        //height: calc(100% - 20px);
-      }
-    }
-  }
 
   &_fluid-height {
     @include media-breakpoint-up($desktop-breakpoint) {

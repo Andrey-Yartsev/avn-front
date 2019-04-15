@@ -111,16 +111,4 @@
       }
     }
   }
-
-  &_sticky-bottom {
-
-    .profile-header & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //position: fixed;
-        //bottom: 0;
-        //max-width: 290px;
-      }
-    }
-  }
 }

@@ -129,10 +129,6 @@
     align-content: center;
     align-items: center;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //z-index: 42;
-    }
-
     @include media-breakpoint-up($desktop-breakpoint) {
       white-space: nowrap;
       padding: 10px 0 8px;

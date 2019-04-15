@@ -1333,10 +1333,6 @@
         padding-top: 10px;
         background-color: $white;
       }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //padding-bottom: 8px;
-      }
     }
   }
 
@@ -1372,7 +1368,6 @@
 
 
 #avatarBgAside {
-  //overflow: hidden;
 
   .lds-dual-ring.not-fullscreen {
 

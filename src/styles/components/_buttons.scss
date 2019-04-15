@@ -17,15 +17,7 @@
   background: $secondary-color;
   position: relative;
   display: inline-block;
-  //.show-on-hover,
-  //.hide-on-hover {
-  //  transition: opacity 0.3s ease;
-  //}
-  //.show-on-hover {
-  //  position: absolute;
-  //  left: 50%;
-  //  transform: translate(-50%, 0);
-  //}
+
   &:hover {
     background: $secondary-color-darken;
     color: #fff;
@@ -46,10 +38,7 @@
     height: 40px;
     padding: 11px 29px;
   }
-  &.saveChanges {
-    //width: 170px;
-    //padding: 0;
-  }
+
   &.btn-cancel {
     background: rgba($gray, 0.5);
     &:hover {
@@ -82,15 +71,6 @@
       &:before {
         color: $primary-color;
       }
-    }
-
-    &.connect-twitter {
-      //color: $default-secondary-color;
-      //box-shadow: 0 0 0 2px $default-secondary-color inset;
-      //&:hover {
-      //  color: #fff;
-      //  background: $default-secondary-color;
-      //}
     }
 
     &.alt {
@@ -358,10 +338,6 @@ button,
       }
     }
 
-    .userCollectionView & {
-      //min-width: auto;
-    }
-
     &:hover {
       color: $primary-color-darken;
     }
@@ -495,7 +471,6 @@ button,
 .btn-like {
   position: absolute;
   right: 0;
-  //top: 13px;
   top: 5px;
   font-size: 19px;
   line-height: 19px;

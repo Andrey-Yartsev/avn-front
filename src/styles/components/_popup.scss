@@ -205,18 +205,15 @@
     &.chat-popup {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        //max-width: 100%;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        //transform: translate(0, 0);
         height: auto;
         border-radius: 0;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        //width: 100%;
         max-width: 956px;
         transform: translate(-50%, -50%);
         left: 50%;
@@ -255,7 +252,6 @@
 
       .selectedChatHeader {
         @include media-breakpoint-up($desktop-breakpoint) {
-          //padding: 15px 40px 15px 15px;
           padding-right: 40px;
           min-height: 60px;
         }
@@ -282,16 +278,9 @@
         }
 
         .more-functions {
-          //margin: auto 0.4em auto auto;
 
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             margin-right: -6px;
-          }
-
-          &__btn {
-            //padding: 0;
-            //width: 40px;
-            //height: 30px;
           }
 
           &__dropdown {

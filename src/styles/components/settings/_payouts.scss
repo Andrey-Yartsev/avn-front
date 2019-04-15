@@ -181,12 +181,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-
-    img {
-      //max-height: 50px;
-      //margin-left: 20px;
-      //border-radius: 3px;
-    }
   }
 
   &-btn {
@@ -259,13 +253,7 @@
   }
 
   @include media-breakpoint-down($desktop-breakpoint) {
-    //background-position: 200% 460px;
-    //overflow: hidden;
     position: relative;
-  }
-
-  @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-    //background-position: 100px 460px;
   }
 
   &.with-bg-picture {
@@ -352,7 +340,6 @@
     left: 50%;
     right: auto;
     top: auto;
-    //bottom: calc(-416px - 55px);
     bottom: -140px;
     transform: translateX(-50%);
   }

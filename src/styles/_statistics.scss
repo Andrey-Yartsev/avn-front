@@ -3,10 +3,6 @@
   width: 100%;
   margin: 16px auto;
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    //overflow: hidden;
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: $width-wrapper;
   }
@@ -255,7 +251,6 @@
   display: flex;
   font-size: 10px;
   color: #7c8b96;
-  //padding: 13px 0 19px;
   padding: 11px 10px 19px 24px;
 
   &__item {

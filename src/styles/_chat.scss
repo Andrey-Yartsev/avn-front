@@ -21,14 +21,6 @@
     }
   }
 
-  .main-container {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //display: flex;
-      //flex-direction: column;
-    }
-  }
-
   #content {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -52,12 +44,6 @@
   }
   
   &:not(.chat) {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //display: block;
-
-      //flex-direction: column;
-    }
 
     .popup & {
 
@@ -366,15 +352,6 @@
         flex: 0 0 41%;
       }
 
-      .popup & {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          //flex: 1;
-
-          //display: block;
-        }
-      }
-
       .chat-popup_new-msg &,
       .chat-page_new & {
 
@@ -499,10 +476,6 @@
   justify-content: center;
   flex-wrap: wrap;
   z-index: 3;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    //transform: translate(-50%, calc((50% - 30px) * (-1)));
-  }
 
   &.visible {
     opacity: 1;

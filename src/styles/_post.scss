@@ -526,22 +526,12 @@
 
 .post-no-comments {
   min-height: 62px;
-  //margin-bottom: 76px;
-  //height: calc(100% - 76px);
   position: relative;
   pointer-events: none;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-bottom: 0;
     height: 100%;
-  }
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-
-    @media screen and (orientation: landscape) {
-      //margin-bottom: 56px;
-      //height: calc(100% - 56px);
-    }
   }
 }
 

@@ -8,26 +8,9 @@
       height: calc(100% - 44px);
     }
   }
-
-  #content {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      //min-height: calc(100% - 75px);
-      //display: flex;
-      //flex-direction: column;
-    }
-  }
 }
 
 .searchView {
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    //min-height: 100%;
-    //width: 100%;
-    //align-items: stretch;
-    //align-content: stretch;
-    //flex-wrap: wrap;
-  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     flex: 1;
@@ -51,7 +34,6 @@
       border-bottom: none;
       width: 100%;
       margin: 0 0 30px;
-      //padding-bottom: 0;
     }
 
     &:last-child {
@@ -155,7 +137,6 @@
       width: 100%;
       margin: 0;
       flex-wrap: nowrap;
-      //z-index: 9;
     }
   }
 

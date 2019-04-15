@@ -13,18 +13,6 @@
   }
 }
 
-.header_container {
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    //transition: transform 0.2s ease-in-out;
-  }
-
-  .scroll-top & {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //transform: translateY(-100%);
-    }
-  }
-}
-
 .notifications-header {
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -74,7 +62,6 @@
   }
 
   .followed {
-  //.subscribed {
 
     &:before {
       content: "\E630";
@@ -157,7 +144,6 @@
         background-color: $white;
         padding: 35px 0;
         border-radius: 0 0 5px 5px;
-        //min-height: calc(100vh - 170px);
         min-height: auto;
         margin-bottom: 0;
       }

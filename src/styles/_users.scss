@@ -2,11 +2,6 @@
 
 .userCollectionView {
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    //padding-left: 4px;
-    //padding-right: 4px;
-  }
-
   p {
     &:last-child {
       padding-bottom: 0;
@@ -228,7 +223,6 @@
   .subscribeView {
     min-width: 62px;
     margin-left: 13px;
-    //margin-top: -10px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 0;
@@ -306,16 +300,3 @@
     }
   }
 }
-
-//.sticky-header-controls {
-//  @include media-breakpoint-down($desktop-breakpoint) {
-//    background-color: $white;
-//  }
-//
-//  .profile-name__header {
-//    @include media-breakpoint-down($desktop-breakpoint) {
-//      opacity: 1;
-//      color: $main-color;
-//    }
-//  }
-//}
