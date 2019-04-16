@@ -795,3 +795,10 @@ video {
 .text-right {
   text-align: right;
 }
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}

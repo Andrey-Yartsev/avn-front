@@ -544,12 +544,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.flip-list-move {
-  transition: transform 0.5s;
-}
-.no-move {
-  transition: transform 0s;
-}
-</style>
