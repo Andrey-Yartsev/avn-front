@@ -138,10 +138,12 @@ export default {
     },
     open() {
       if (this.localQuery) {
+        document.body.classList.add("open-search-popup");
         this.opened2 = true;
       }
     },
     close() {
+      document.body.classList.remove("open-search-popup");
       this.opened2 = false;
     },
     toToSearchPage() {
@@ -176,6 +178,7 @@ export default {
     reset() {
       this.localQuery = "";
       this.opened2 = false;
+      document.body.classList.remove("open-search-popup");
       this.$store.commit("search/bubble/reset");
     },
     selectSuggest(value) {
