@@ -1,34 +1,6 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <div class="s-container support-content shadow-block shadow-block_desk">
-        <div class="container">
-          <div class="s-header text-centered">
-            <h2>AVN Stars Support</h2>
-            <p>
-              Get instant answers for the most common questions and learn how to
-              share like a pro.
-            </p>
-          </div>
-          <!--<div class="support-cards cols">-->
-          <!--<div class="col col-1-4" v-for="v in sections" :key="v.id">-->
-          <!--<router-link :to="'/help/article/' + v.id" class="support-card">-->
-          <!--<span-->
-          <!--v-if="cssExists(v.icon)"-->
-          <!--class="support-card__icon"-->
-          <!--:class="'support-card__icon_' + v.icon"-->
-          <!--&gt;</span>-->
-          <!--<span v-else class="support-card__icon support-card__icon_logo">-->
-          <!--<component :is="'rl-support-icon-' + v.icon" />-->
-          <!--</span>-->
-          <!--<span class="support-card__title">{{ v.title }}</span>-->
-          <!--<span class="support-card__text">{{ v.shortDescription }}</span>-->
-          <!--<span class="support-card__btn">More</span>-->
-          <!--</router-link>-->
-          <!--</div>-->
-          <!--</div>-->
-        </div>
-      </div>
       <div class="s-container support-content">
         <div class="container">
           <div class="cols">
