@@ -13,7 +13,7 @@
     align-items: center;
     top: auto;
     position: relative;
-    z-index: 5;
+    z-index: 3;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 96px;

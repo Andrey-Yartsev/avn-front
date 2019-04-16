@@ -1130,6 +1130,10 @@
       background-color: $white;
     }
   }
+
+  &.loadWrap {
+    overflow: hidden;
+  }
 }
 
 .profile-name-sticky {
