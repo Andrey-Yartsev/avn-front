@@ -22,7 +22,7 @@ export const fromNow = time => {
   }
 
   if (today.isSame(day, "year")) {
-    return day.format("MMMM DD");
+    return day.format("MMMM D");
   }
 
   return day.format("LL");
