@@ -312,6 +312,13 @@ video {
     height: 100%;
   }
 
+  .explore-page & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: auto;
+    }
+  }
+
   .scroll-bottom & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
