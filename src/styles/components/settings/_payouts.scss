@@ -592,6 +592,10 @@
   }
 }
 
+.negative {
+  color: $red;
+}
+
 .payouts-bank-form {
   @include media-breakpoint-down($desktop-breakpoint) {
     .form-group-btn {

@@ -43,6 +43,7 @@
               <div class="item">
                 <div class="date table__cell">{{ dt(v.createdAt) }}</div>
                 <div
+                  :class="amountClass(v.amount)"
                   class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
                 >
                   {{ dollar(v.amount) }}
@@ -92,10 +93,19 @@ export default {
     },
     dollar(amount) {
       amount = amount.toString();
-      if (amount.match(/-.*/)) {
-        return amount.replace(/(-)(.*)/, "$1$$2");
+      if (amount.match(/-\d+/)) {
+        return "-$" + amount.replace(/-(\d+)/, "$1");
       }
       return "$" + amount;
+    },
+    amountClass(amount) {
+      const negative = !!amount.toString().match(/-\d+/);
+      if (negative) {
+        return {
+          negative
+        };
+      }
+      return null;
     }
   },
 
