@@ -100,7 +100,9 @@ export default {
   created() {
     this.$store.commit("highlights/resetPageState");
     this.$store.dispatch("highlights/setSource", { source: this.userId });
-    this.$store.dispatch("highlights/getPosts");
+    if (this.user) {
+      this.$store.dispatch("highlights/getPosts");
+    }
   },
   beforeDestroy() {}
 };
