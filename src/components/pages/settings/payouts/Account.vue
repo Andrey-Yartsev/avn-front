@@ -68,6 +68,8 @@ const countries = {
   212: "United States of America"
 };
 
+const htmlElement = document.getElementsByTagName("html")[0];
+
 export default {
   name: "PayoutSettingsAccount",
 
@@ -109,6 +111,12 @@ export default {
         countryName: this.countryName
       });
     }
+  },
+  mounted() {
+    htmlElement.classList.add("with-bg-picture");
+  },
+  beforeDestroy() {
+    htmlElement.classList.remove("with-bg-picture");
   }
 };
 </script>
