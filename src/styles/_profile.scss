@@ -987,6 +987,13 @@
     top: -240px;
   }
 
+  .support-page & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: -268px;
+    }
+  }
+
   &:before,
   &:after {
     pointer-events: none;
