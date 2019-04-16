@@ -316,13 +316,6 @@ export default {
       });
     }
 
-    // const sess = Cookie.get("sess");
-    // if (sess && !this.$store.state.auth.token) {
-    //   this.$store.dispatch("auth/setToken", sess);
-    //   Cookie.remove("sess");
-    //   window.location.reload();
-    // }
-
     window.addEventListener("message", postMessageHandler);
   },
 

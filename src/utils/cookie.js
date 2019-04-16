@@ -27,9 +27,6 @@ export default {
 
     document.cookie = updatedCookie;
   },
-  remove: function(name) {
-    document.cookie = name + "=; Max-Age=-99999999;";
-  },
   get(name) {
     const value = "; " + document.cookie;
     const parts = value.split("; " + name + "=");

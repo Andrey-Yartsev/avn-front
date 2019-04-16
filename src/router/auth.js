@@ -3,6 +3,7 @@
 import Store from "@/store";
 import BrowserStore from "store";
 import Twitter from "@/utils/twitter";
+const queryString = require("query-string");
 
 const Auth = {
   get loggedIn() {
@@ -34,6 +35,13 @@ const Auth = {
   },
 
   requireAuth(to, from, next) {
+    const params = queryString.parse(location.search);
+    if (params.token && params.url) {
+      Store.dispatch("auth/setToken", params.token);
+      window.location = params.url;
+      return;
+    }
+
     if (Auth.loggedIn) {
       return next();
     }
