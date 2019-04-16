@@ -75,11 +75,20 @@
         position: -webkit-sticky;
         position: sticky;
         top: 75px;
-        height: calc(100vh - 100px);
         min-height: 294px;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
+      }
+    }
+
+    .feed & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        @media screen and (min-height: 400px) {
+          height: calc(100vh - 100px);
+        }
       }
     }
 
