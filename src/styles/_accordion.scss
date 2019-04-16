@@ -1,0 +1,61 @@
+
+.accordion-section {
+  margin-bottom: 20px;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(124, 139, 150, 0.2);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  &.opened {
+
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+
+    &:before {
+      content: "\E643";
+      position: absolute;
+      left: 0;
+      font-size: 24px;
+      top: 50%;
+      @include icon-font;
+      transform: translate(0, -50%);
+      color: $secondary-color;
+      transition: all .3s;
+
+      .opened & {
+        transform: translate(0, -50%) rotate(-90deg);
+      }
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .4s;
+
+    .opened & {
+      max-height: 3000px;
+    }
+
+    &-inside {
+      padding: 20px 0 0 25px;
+    }
+  }
+}
