@@ -93,14 +93,20 @@
               $mq === 'desktop'
           "
         >
-          <Draggable class="addFileCollectionView" v-model="preloadedMedias">
-            <MediaPreview
-              v-for="media in preloadedMedias"
-              :media="media"
-              :key="media.id"
-              @removeMedia="removeMedia"
-              :isSaving="isSaving"
-            />
+          <Draggable v-model="preloadedMedias" v-bind="dragOptions">
+            <transition-group
+              class="addFileCollectionView"
+              type="transition"
+              name="flip-list"
+            >
+              <MediaPreview
+                v-for="media in preloadedMedias"
+                :media="media"
+                :key="media.id"
+                @removeMedia="removeMedia"
+                :isSaving="isSaving"
+              />
+            </transition-group>
           </Draggable>
           <div class="block-thumbnails" v-if="showChooseThumbBlock">
             <div class="block-thumbnails__title">Choose cover</div>
@@ -226,14 +232,20 @@
         class="post-attachment"
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
-        <Draggable class="addFileCollectionView" v-model="preloadedMedias">
-          <MediaPreview
-            v-for="media in preloadedMedias"
-            :media="media"
-            :key="media.id"
-            @removeMedia="removeMedia"
-            :isSaving="isSaving"
-          />
+        <Draggable v-model="preloadedMedias">
+          <transition-group
+            class="addFileCollectionView"
+            type="transition"
+            name="flip-list"
+          >
+            <MediaPreview
+              v-for="media in preloadedMedias"
+              :media="media"
+              :key="media.id"
+              @removeMedia="removeMedia"
+              :isSaving="isSaving"
+            />
+          </transition-group>
         </Draggable>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
           <div class="block-thumbnails__title">Choose cover</div>
@@ -330,6 +342,14 @@ export default {
     }
   },
   computed: {
+    dragOptions() {
+      return {
+        animation: 0,
+        group: "description",
+        disabled: false,
+        ghostClass: "ghost"
+      };
+    },
     isNew() {
       return this.type === "new";
     },
@@ -524,3 +544,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+</style>
