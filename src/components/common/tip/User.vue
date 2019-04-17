@@ -16,7 +16,7 @@
         />
       </div>
     </div>
-    <button type="submit" class="btn" :disabled="!amount">Send fund</button>
+    <button type="submit" class="btn" :disabled="!amount">Send funds</button>
   </form>
 </template>
 
