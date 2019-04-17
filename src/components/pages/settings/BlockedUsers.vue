@@ -75,11 +75,11 @@
               </div>
             </div>
           </template>
-          <div v-else class="empty-table-info shadow-block">
+          <div v-else class="empty-table-info show shadow-block">
             <span>Nothing found</span>
           </div>
         </div>
-        <div class="empty-table-info shadow-block" v-else>
+        <div class="empty-table-info show shadow-block" v-else>
           <span>No one blocked yet</span>
         </div>
       </div>
@@ -185,9 +185,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.empty-table-info {
-  display: block;
-}
-</style>
