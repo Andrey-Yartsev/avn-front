@@ -313,7 +313,8 @@
           .media-item {
 
             img,
-            video {
+            video,
+            .video-placeholder {
               border-radius: 0 20px 20px 0;
             }
           }
@@ -325,7 +326,8 @@
         &-item {
 
           img,
-          video {
+          video,
+          .video-placeholder {
             border-radius: 0 20px 20px 0;
           }
         }
@@ -435,7 +437,8 @@
             justify-content: flex-end;
 
             img,
-            video {
+            video,
+            .video-placeholder {
               border-radius: 20px 0 0 20px;
             }
           }
@@ -447,7 +450,8 @@
         &-item {
 
           img,
-          video {
+          video,
+          .video-placeholder {
             border-radius: 20px 0 0 20px;
           }
         }
@@ -519,6 +523,10 @@
     &:empty {
       display: none;
     }
+  }
+
+  .video-placeholder {
+    overflow: hidden;
   }
 
   &.lockedMessage {

@@ -11,6 +11,10 @@
         :src="'data:image/jpeg;base64,' + media.locked"
         :width="media.preview.width"
         :height="media.preview.height"
+        :style="{
+          width: `${media.preview.width}px`,
+          height: `${media.preview.height}px`
+        }"
       />
     </template>
     <template v-else>
@@ -27,6 +31,10 @@
         :src="media.preview.source"
         :width="media.preview.width"
         :height="media.preview.height"
+        :style="{
+          width: `${media.preview.width}px`,
+          height: `${media.preview.height}px`
+        }"
       />
 
       <video
