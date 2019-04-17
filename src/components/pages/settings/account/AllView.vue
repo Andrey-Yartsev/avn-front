@@ -229,7 +229,7 @@ export default {
       return this.$store.state.user.changePasswordError;
     },
     canChangePassword() {
-      if (this.user.hasPassword) {
+      if (!this.user.hasPassword) {
         return this.checkPassword && this.newPassword;
       }
       return this.checkPassword && this.newPassword && this.oldPassword;
