@@ -254,12 +254,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.text-media-container {
-  overflow: hidden;
-  overflow-wrap: break-word;
-  min-height: 30px;
-  border: 10px solid #f00;
-}
-</style>
