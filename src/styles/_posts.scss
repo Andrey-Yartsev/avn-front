@@ -247,6 +247,8 @@
 
   .text {
     padding: 0 15px 4px;
+    max-width: 100%;
+    word-break: break-word;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-bottom: 2px;
