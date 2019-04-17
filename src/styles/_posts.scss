@@ -1214,6 +1214,8 @@
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     box-shadow: 0 -3px 2px rgba(#000, 0.05);
     position: fixed;
+    backface-visibility: hidden;
+    -webkit-overflow-scrolling: touch
   }
 
   .lightbox-post & {
