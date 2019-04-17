@@ -47,7 +47,13 @@
             <span class="likes">{{ post.favoritesCount }}</span>
             <span class="comments">{{ post.commentsCount }}</span>
           </span>
-          <div class="video-placeholder">
+          <span class="explore-media__name" v-if="!shouldBePoster">{{
+            post.author.name
+          }}</span>
+          <div
+            class="video-placeholder"
+            v-if="page === 'all' && shouldBePoster"
+          >
             <span class="video-recommendations-text">
               Watch<br />videos you might like
             </span>
@@ -89,6 +95,9 @@ export default {
     },
     mediaDuration() {
       return this.media.duration ? toHumanDuration(this.media.duration) : "";
+    },
+    page() {
+      return this.$route.meta.page;
     }
   }
 };
