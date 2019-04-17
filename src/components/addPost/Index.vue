@@ -488,9 +488,6 @@ export default {
 
       return postData;
     },
-    toast(text) {
-      this.$store.dispatch("global/flashToast", text, { root: true });
-    },
     openDatepicker() {
       if (this.datetime) return;
       document.body.classList.add("open-timepicker");

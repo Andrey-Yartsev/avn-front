@@ -189,6 +189,10 @@ export default {
         .toLowerCase();
 
       return this.allMediaTypes.indexOf(fileExt) !== -1;
+    },
+
+    toast(text) {
+      this.$store.dispatch("global/flashToast", text, { root: true });
     }
   }
 };

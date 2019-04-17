@@ -50,47 +50,22 @@
                     >{{ lockedText(v) }}</span
                   >
                 </span>
-                <div class="media" v-if="v.media.length">
-                  <template v-if="!v.media[0].locked">
-                    <figure
-                      class="media-item active media-item_photo"
-                      data-index="0"
-                    >
-                      <a
-                        class="postLink"
-                        :href="v.media[0].src.source"
-                        target="_blank"
-                        @click.prevent="openImage(v.media[0].src.source)"
-                      >
-                        <img
-                          :src="v.media[0].src.source"
-                          :class="{ 'no-media-text': !v.textLength }"
-                          :width="v.media[0].src.width"
-                          :height="v.media[0].src.height"
-                        />
-                      </a>
-                    </figure>
-                  </template>
-                  <template v-else>
-                    <figure class="media-item active media-item_photo">
-                      <div class="postLink">
-                        <img
-                          :src="`data:image/jpeg;base64,${v.media[0].locked}`"
-                          :width="v.media[0].src.width"
-                          :height="v.media[0].src.height"
-                          :style="{
-                            width: `${v.media[0].src.width}px`,
-                            height: `${v.media[0].src.height}px`
-                          }"
-                        />
-                      </div>
-                    </figure>
-                  </template>
+                <div class="media media-item" v-if="v.media.length">
+                  <MediaVideo
+                    v-if="v.media.length && v.media[0].type === 'video'"
+                    :message="v"
+                    :ref="'video' + v.id"
+                    @play="stopOtherVideo(v.id)"
+                  />
+                  <MediaImage
+                    v-else-if="v.media.length && v.media[0].type === 'photo'"
+                    :message="v"
+                  />
                 </div>
               </div>
               <div class="time" v-if="v.lastMessageInGroup">
                 <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
-                <span class="timeValue"> {{ time(v.changedAt) }}</span>
+                <span class="timeValue">{{ time(v.changedAt) }}</span>
               </div>
             </div>
           </div>
@@ -108,13 +83,17 @@ import userMixin from "@/mixins/user";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
+import MediaImage from "./media/Image";
+import MediaVideo from "./media/Video";
 
 export default {
   name: "ChatMessages",
 
   components: {
     VuePerfectScrollbar,
-    Loader
+    Loader,
+    MediaImage,
+    MediaVideo
   },
 
   mixins: [userMixin],
@@ -139,7 +118,7 @@ export default {
       return this.addGrouping(messages);
     },
     sending() {
-      return this.$store.state.chat.sendMessageLoading;
+      return this.$store.state.chat._sendMessageLoading;
     },
     loading() {
       return this.$store.state.chat._fetchMessagesLoading;
@@ -289,12 +268,24 @@ export default {
       return !message.isOpened && !message.isFree;
     },
 
-    openImage(src) {
-      this.$store.dispatch("modal/show", {
-        name: "image",
-        data: {
-          src
+    media(media) {
+      if (media.type === "image") {
+        return MediaImage;
+      } else if (media.type === "video") {
+        return MediaVideo;
+      }
+    },
+
+    stopOtherVideo(currentPlayingId) {
+      let videos = this._messages.filter(v => {
+        const r = v.media && v.media.length && v.media[0].type === "video";
+        if (!r) {
+          return false;
         }
+        return currentPlayingId !== v.id;
+      });
+      videos.forEach(v => {
+        this.$refs["video" + v.id][0].cancelPlay();
       });
     }
   },

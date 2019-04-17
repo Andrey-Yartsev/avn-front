@@ -158,7 +158,8 @@ export default {
       return this.$store.state.tip.funded;
     },
     allMediaTypes() {
-      return this.inputAcceptTypes.photo;
+      const { photo, video } = this.inputAcceptTypes;
+      return [...photo, ...video];
     },
     isMuted() {
       if (!this.withUser) {
