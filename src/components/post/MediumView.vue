@@ -50,11 +50,9 @@
         :tipId="`${post.id}`"
       />
     </div>
-    <AddComment
-      :class="{ hidden: !showAddCommentForm }"
-      :sendNewComment="sendNewComment"
-    ></AddComment>
+    <AddComment v-if="showAddCommentForm" :sendNewComment="sendNewComment" />
     <CommentsList
+      v-if="post.commentsCount"
       :comments="post.comments || []"
       :commentsCount="post.commentsCount || 0"
       :clickOnShowMore="openModal"
