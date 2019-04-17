@@ -34,7 +34,7 @@
             ref="subscribeButton"
           />
           <FollowButton
-            v-if="!isOwner(profile.id)"
+            v-if="!isOwner(profile.id) && user"
             :profile="profile"
             :actionPrefix="actionPrefix"
           />

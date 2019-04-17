@@ -90,6 +90,7 @@ const actions = {
 createRequestAction({
   prefix: "topModelsRequest",
   apiPath: "users/performers/top",
+  requestType: "any",
   state,
   mutations,
   actions,
@@ -100,6 +101,7 @@ createRequestAction({
   resultKey: "posts",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
+    options.query = options.query || {};
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";

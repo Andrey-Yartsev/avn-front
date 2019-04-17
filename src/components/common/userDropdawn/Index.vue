@@ -10,14 +10,14 @@
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul class="more-functions__list">
-          <li v-if="!isOwner(profile.id)" class="more-functions__item">
+          <li v-if="!isOwner(profile.id) && user" class="more-functions__item">
             <a href="#" @click.prevent="report" class="more-functions__link">
               <span class="more-functions__option">
                 Report
               </span>
             </a>
           </li>
-          <template v-if="!isOwner(profile.id)">
+          <template v-if="!isOwner(profile.id) && user">
             <li v-if="profile.isBlocked" class="more-functions__item">
               <a href="#" @click.prevent="unblock" class="more-functions__link">
                 <span class="more-functions__option">
@@ -33,7 +33,7 @@
               </a>
             </li>
           </template>
-          <template v-if="canMute">
+          <template v-if="canMute && user">
             <li class="more-functions__item" v-if="isMuted">
               <a href="#" @click.prevent="unmute" class="more-functions__link">
                 <span class="more-functions__option">
