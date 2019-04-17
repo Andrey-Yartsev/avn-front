@@ -278,6 +278,13 @@
           }
         }
       }
+
+      .story-info {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          max-width: 60px;
+        }
+      }
     }
   }
 
