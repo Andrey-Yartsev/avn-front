@@ -293,6 +293,7 @@
       background: rgba(#000, 0.3);
       border: 1px solid rgba(255, 255, 255, .2);
       color: #fff;
+      caret-color: #fff;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
