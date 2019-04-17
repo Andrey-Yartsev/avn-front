@@ -62,7 +62,9 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info show"><span>Empty here for now</span></div>
+          <div class="empty-table-info show">
+            <span>Empty here for now</span>
+          </div>
         </div>
       </div>
     </div>
