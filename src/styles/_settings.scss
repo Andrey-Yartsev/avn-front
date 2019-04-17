@@ -253,7 +253,11 @@
   padding: 20px 0;
   font-size: 16px;
   display: none;
-
+  
+  &.show {
+    display: block;
+  }
+  
   span {
     opacity: 0.5;
   }

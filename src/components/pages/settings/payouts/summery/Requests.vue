@@ -43,9 +43,9 @@
       >
         <Loader :fullscreen="false" text="" class="transparent small no-text" />
       </div>
-      <div class="shadow-block no-padding" v-if="!loading && items.length">
+      <div class="shadow-block no-padding">
         <div class="table-wrapper">
-          <div class="table payouts-table">
+          <div class="table payouts-table" v-if="!loading && items.length">
             <div
               class="PayoutsRequestsView"
               v-for="v in items"
@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info"><span>Empty here for now</span></div>
+          <div class="empty-table-info show"><span>Empty here for now</span></div>
         </div>
       </div>
     </div>
