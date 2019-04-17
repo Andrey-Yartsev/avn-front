@@ -16,6 +16,7 @@ import modal from "@/store/modules/modal";
 import chat from "@/store/modules/chat";
 import user from "@/store/modules/user";
 import explore from "@/store/modules/explore/index";
+import topModels from "@/store/modules/explore/topModels";
 import lives from "@/store/modules/lives";
 import stories from "@/store/modules/stories";
 import storiesArchive from "@/store/modules/storiesArchive";
@@ -91,7 +92,8 @@ const store = new Vuex.Store({
     postQueue,
     referrals,
     countries,
-    states
+    states,
+    topModels
   }
 });
 

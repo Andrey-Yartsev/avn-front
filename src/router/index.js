@@ -355,6 +355,16 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireAny,
+    path: "/explore/top",
+    component: ExplorePage,
+    meta: {
+      page: "topmodels",
+      type: "top",
+      cssName: "explore"
+    }
+  },
+  {
     beforeEnter: (to, from, next) => {
       global.storyFirstEnter = !from.matched.length;
       return Auth.requireAny(to, from, next);

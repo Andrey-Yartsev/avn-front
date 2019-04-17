@@ -39,10 +39,16 @@
               photoCollectionView: page === 'photos',
               videoCollectionView: page === 'videos',
               storyCollectionView: page === 'stories',
-              liveCollectionView: page === 'lives'
+              liveCollectionView: page === 'lives',
+              userCollectionView: page === 'topmodels'
             }"
           >
-            <div :class="['explore-wrapper', page]">
+            <Users
+              v-if="page === 'topmodels'"
+              :items="topModels"
+              actionPrefix="topModels"
+            />
+            <div v-else :class="['explore-wrapper', page]">
               <component
                 :is="postComponent"
                 v-for="post in posts"
@@ -92,6 +98,7 @@ import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
+import Users from "@/components/users/Users";
 import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
@@ -110,6 +117,7 @@ export default {
     PostMedium,
     StoryMedium,
     StorySmall,
+    Users,
     Live,
     Loader,
     VuePerfectScrollbar
@@ -132,6 +140,9 @@ export default {
     lives() {
       return this.$store.state.lives.posts;
     },
+    topModels() {
+      return this.$store.state.topModels.posts;
+    },
     storiesLoading() {
       return this.$store.state.stories.loading;
     },
@@ -151,6 +162,10 @@ export default {
       if (this.type === "live") {
         return this.$store.state.lives;
       }
+
+      if (this.type === "top") {
+        return this.$store.state.topModels;
+      }
     },
     contentName() {
       if (this.type === "media") {
@@ -163,6 +178,10 @@ export default {
 
       if (this.type === "live") {
         return "lives";
+      }
+
+      if (this.type === "top") {
+        return "models";
       }
     },
     shouldShowNoPosts() {
@@ -217,11 +236,16 @@ export default {
       if (this.type === "live") {
         this.$store.dispatch("lives/getPosts");
       }
+
+      if (this.type === "top") {
+        this.$store.dispatch("topModels/getPosts");
+      }
     },
     getPageData() {
       this.$store.dispatch("explore/resetPageState");
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("lives/resetPageState");
+      this.$store.commit("topModels/reset");
 
       if (this.type === "media") {
         this.$store.dispatch("explore/setSource", { source: this.source });
@@ -238,8 +262,8 @@ export default {
         this.$store.dispatch("stories/getPosts");
       }
 
-      if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+      if (this.type === "top") {
+        this.$store.dispatch("topModels/getPosts");
       }
     }
   },

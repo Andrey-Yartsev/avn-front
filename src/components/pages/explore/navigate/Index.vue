@@ -25,6 +25,9 @@
     <router-link to="/explore/live" class="content-nav__item" data-type="live"
       >Live</router-link
     >
+    <router-link to="/explore/top" class="content-nav__item" data-type="top"
+      >Top models</router-link
+    >
   </nav>
 </template>
 
