@@ -75,14 +75,15 @@
   }
 
   &:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    content: "";
-    height: 30px;
-    z-index: 2;
+
     @include media-breakpoint-down($desktop-breakpoint) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      content: "";
+      height: 30px;
+      z-index: 2;
       background: linear-gradient(
         to bottom,
         rgba(#000, 0.1) 0%,
