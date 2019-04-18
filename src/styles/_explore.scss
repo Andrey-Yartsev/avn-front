@@ -64,6 +64,14 @@
     justify-content: flex-start;
   }
 
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
   .searchView & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
