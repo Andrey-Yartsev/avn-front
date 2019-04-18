@@ -47,13 +47,20 @@ export default {
       this.playTimer = new Date().getTime();
     },
     calcDuration() {
-      this.playDuration =
-        this.playDuration + new Date().getTime() - this.playTimer;
+      const playDuration = new Date().getTime() - this.playTimer;
+      if (playDuration > 3 * 60 * 60 * 1000) {
+        this.playDuration = 0;
+        return;
+      }
+      this.playDuration = playDuration;
     }
   },
   beforeDestroy() {
     this.calcDuration();
     const duration = Math.round(this.playDuration / 1000);
+    if (duration < 0) {
+      return;
+    }
     logger.info(
       `send video view duration for post ${this.postId} (${duration})`
     );
