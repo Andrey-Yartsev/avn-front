@@ -1856,12 +1856,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.charts-data > span {
-  cursor: pointer;
-}
-.charts-data > span.selected {
-  font-weight: bold;
-}
-</style>
