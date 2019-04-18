@@ -1,5 +1,9 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 420 420"
+    class="globe-img"
+  >
     <title>globe</title>
     <g id="Layer_2" data-name="Layer 2">
       <g id="Layer_1-2" data-name="Layer 1">
@@ -160,9 +164,3 @@
     </g>
   </svg>
 </template>
-
-<style scoped>
-.cls-2 {
-  fill: none;
-}
-</style>
