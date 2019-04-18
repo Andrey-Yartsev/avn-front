@@ -297,10 +297,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.chatMessageSending {
-  margin: 5px 5px 40px 5px;
-  text-align: right;
-}
-</style>
