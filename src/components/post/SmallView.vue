@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'explore-item explore-item_col',
+      'explore-item explore-item_col bg-gradient bg-gradient_light',
       {
         'explore-item_col-3': !shouldBePoster,
         'explore-item_double': shouldBePoster
