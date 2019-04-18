@@ -45,8 +45,9 @@ export default {
   },
   methods: {
     yes() {
-      const onSuccess = () => {
+      const onSuccess = data => {
         this.$store.dispatch("global/flashToast", "Fund successfully sent");
+        this.$store.commit("tip/funded", data);
         this.close();
       };
       const amount = parseInt(this.data.amount.replace(/\$/, ""));
@@ -58,7 +59,13 @@ export default {
           amount,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
-        onSuccess
+        () =>
+          onSuccess({
+            success: true,
+            toUserId: this.data.user.id,
+            tipId: this.data.tipId,
+            amount
+          })
       );
     },
     no() {
