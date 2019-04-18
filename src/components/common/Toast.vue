@@ -43,24 +43,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.jq-toast-loader {
-  transition: width 2.5s ease-in;
-  background-color: #9ec600;
-}
-.jq-toast-wrap {
-  top: 20px;
-  left: 50%;
-}
-.jq-toast-single {
-  position: relative;
-  left: -50%;
-  transition: opacity 0.5s ease-in;
-  opacity: 1;
-
-  &.jq-toast-hide {
-    opacity: 0;
-  }
-}
-</style>
