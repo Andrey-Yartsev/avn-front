@@ -8,39 +8,39 @@
     >
       {{ node.title }}</a
     >
-    <!--<template v-if="node.items && node.items.length">-->
-    <!--<template v-if="level === 2 || level === 3">-->
-    <!--<div class="scrollbar" :class="divClass">-->
-    <!--<VuePerfectScrollbar v-if="divClass.show">-->
-    <!--<ul>-->
-    <!--<node-->
-    <!--v-for="child in node.items"-->
-    <!--:node="child"-->
-    <!--:key="child.id"-->
-    <!--:level="level + 1"-->
-    <!--:click="click"-->
-    <!--/>-->
-    <!--</ul>-->
-    <!--</VuePerfectScrollbar>-->
-    <!--</div>-->
-    <!--</template>-->
-    <!--<template v-else>-->
-    <!--<button class="btn-back-list" @click="back"></button>-->
-    <!--<div class="scrollbar" :class="divClass">-->
-    <!--<VuePerfectScrollbar :settings="{ suppressScrollX: true }">-->
-    <!--<ul>-->
-    <!--<node-->
-    <!--v-for="child in node.items"-->
-    <!--:node="child"-->
-    <!--:key="child.id"-->
-    <!--:level="level + 1"-->
-    <!--:click="click"-->
-    <!--/>-->
-    <!--</ul>-->
-    <!--</VuePerfectScrollbar>-->
-    <!--</div>-->
-    <!--</template>-->
-    <!--</template>-->
+    <template v-if="node.items && node.items.length">
+      <template v-if="level === 2 || level === 3">
+        <div class="scrollbar" :class="divClass">
+          <VuePerfectScrollbar v-if="divClass.show">
+            <ul>
+              <node
+                v-for="child in node.items"
+                :node="child"
+                :key="child.id"
+                :level="level + 1"
+                :click="click"
+              />
+            </ul>
+          </VuePerfectScrollbar>
+        </div>
+      </template>
+      <template v-else>
+        <button class="btn-back-list" @click="back"></button>
+        <div class="scrollbar" :class="divClass">
+          <VuePerfectScrollbar :settings="{ suppressScrollX: true }">
+            <ul>
+              <node
+                v-for="child in node.items"
+                :node="child"
+                :key="child.id"
+                :level="level + 1"
+                :click="click"
+              />
+            </ul>
+          </VuePerfectScrollbar>
+        </div>
+      </template>
+    </template>
   </li>
 </template>
 

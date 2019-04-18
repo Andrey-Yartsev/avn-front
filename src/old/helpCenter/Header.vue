@@ -17,7 +17,7 @@
     </form>
     <div class="popular-questions suggestions">
       <router-link
-        :to="'/help/' + v.id"
+        :to="'/help/article/' + v.id"
         v-for="v in suggestions"
         :key="v.id"
         class="question-item"
