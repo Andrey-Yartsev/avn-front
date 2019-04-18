@@ -72,13 +72,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.content {
-  padding: 50px;
-  text-align: center;
-}
-.yes {
-  margin-right: 15px;
-}
-</style>
