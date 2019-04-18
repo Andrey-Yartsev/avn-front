@@ -1124,10 +1124,21 @@ select {
 
 .msct {
   height: 100px;
+
+  + .sm-text {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
 }
 
 .sm-text {
   font-size: 11px;
-  margin-top: 5px;
-  margin-bottom: 15px;
+
+  &:first-child {
+    margin-bottom: 6px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 10px;
+    }
+  }
 }
