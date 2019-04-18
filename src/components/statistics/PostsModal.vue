@@ -124,11 +124,3 @@ export default {
   }
 };
 </script>
-
-<style>
-@media (min-width: 768px) {
-  .popup .popup-container {
-    max-width: 100%;
-  }
-}
-</style>
