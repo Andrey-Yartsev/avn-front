@@ -39,7 +39,7 @@
       color: $secondary-color;
       transition: all .3s;
 
-      .opened & {
+      .opened > & {
         transform: translate(0, -50%) rotate(-90deg);
       }
     }
@@ -50,7 +50,7 @@
     max-height: 0;
     transition: max-height .4s;
 
-    .opened & {
+    .opened > & {
       max-height: 3000px;
     }
 
