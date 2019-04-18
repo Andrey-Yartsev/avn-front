@@ -1310,10 +1310,15 @@
   &__logo {
     width: 80px;
     height: 80px;
-    margin: 0 auto 30px;
+    margin: 0 auto;
   }
 
   &__text {
+    margin-bottom: 30px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      font-size: 18px;
+    }
 
     a {
       color: $secondary-color;

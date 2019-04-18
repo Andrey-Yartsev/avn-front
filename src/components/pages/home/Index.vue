@@ -24,6 +24,12 @@
               <div class="start-feed-page__title">
                 Welcome to
               </div>
+              <div class="start-feed-page__text">
+                <router-link to="/explore">Find</router-link> someone to
+                follow<br />
+                or <router-link to="/addPost">Start sharing</router-link> right
+                away
+              </div>
               <div class="start-feed-page__logo logo">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 51">
                   <g id="Layer_2" data-name="Layer 2">
@@ -54,12 +60,6 @@
                     </g>
                   </g>
                 </svg>
-              </div>
-              <div class="start-feed-page__text">
-                <router-link to="/explore">Find</router-link> someone to
-                follow<br />
-                or <router-link to="/addPost">Start sharing</router-link> right
-                away
               </div>
             </div>
           </div>
