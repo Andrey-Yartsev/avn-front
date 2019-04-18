@@ -21,9 +21,6 @@
               <PostCollection :posts="posts" from="home" />
             </div>
             <div v-if="newUser" class="start-feed-page">
-              <div class="start-feed-page__title">
-                Welcome to
-              </div>
               <div class="start-feed-page__text">
                 <router-link to="/explore">Find</router-link> someone to
                 follow<br />

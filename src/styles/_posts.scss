@@ -1315,9 +1315,10 @@
 
   &__text {
     margin-bottom: 30px;
+    font-size: 18px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 18px;
+      font-size: 22px;
     }
 
     a {
