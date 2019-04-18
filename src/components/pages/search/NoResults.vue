@@ -23,9 +23,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.no-results-search {
-  display: block;
-}
-</style>
