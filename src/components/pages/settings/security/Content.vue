@@ -152,7 +152,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info shadow-block" v-else>
+          <div class="empty-table-info show shadow-block" v-else>
             <span>Empty here for now</span>
           </div>
         </div>
@@ -263,9 +263,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.empty-table-info {
-  display: block;
-}
-</style>
