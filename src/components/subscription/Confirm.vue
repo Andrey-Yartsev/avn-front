@@ -10,11 +10,11 @@
           any additional costs.
         </div>
         <div class="popup-alert__footer">
-          <button class="btn alt" @click.prevent="no" :disabled="progress">
-            Cancel
-          </button>
           <button class="btn" @click.prevent="yes" :disabled="progress">
             Unsubscribe
+          </button>
+          <button class="btn alt" @click.prevent="no" :disabled="progress">
+            Cancel
           </button>
         </div>
       </div>
