@@ -16,8 +16,8 @@
             You are opening message for {{ data.price }}
           </div>
           <div class="popup-alert__footer">
-            <a href="#" class="btn" @click.prevent="yes">Confirm</a>
-            <a href="#" class="btn alt" @click.prevent="no">Cancel</a>
+            <button class="btn" @click.prevent="yes">Confirm</button>
+            <button class="btn alt" @click.prevent="no">Cancel</button>
           </div>
         </template>
       </div>
