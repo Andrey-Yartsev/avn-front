@@ -185,18 +185,27 @@ strong {
   opacity: 0.4;
 }
 
-.iframe-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+.iframe {
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
+  &-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      -webkit-overflow-scrolling: touch;
+      overflow-y: scroll;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: calc(100vh - 120px);
+    }
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    height: calc(100vh - 120px);
+  &-wrapper {
+    width: 400px;
+    height: 200px;
+    background: #fff;
   }
 }
 

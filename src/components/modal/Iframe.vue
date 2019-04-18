@@ -21,11 +21,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.iframe-wrapper {
-  width: 400px;
-  height: 200px;
-  background: #fff;
-}
-</style>
