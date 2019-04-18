@@ -31,8 +31,7 @@ import FollowersPage from "@/components/pages/followers/Index";
 import StaticPage from "@/components/pages/static/Index";
 import ContactsPage from "@/components/pages/static/Contacts";
 import StatPage from "@/components/statistics/Page";
-import HelpCenterHomePage from "@/components/pages/helpCenter/Home";
-import HelpCenterArticlePage from "@/components/pages/helpCenter/Article";
+import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
 import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
 
 import Auth from "./auth";
@@ -422,7 +421,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/help",
-    component: HelpCenterHomePage,
+    component: HelpCenterArticlePage,
     meta: {
       staticPage: true,
       cssName: "support"
@@ -439,7 +438,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/help/article/:id",
+    path: "/help/:id",
     component: HelpCenterArticlePage,
     meta: {
       staticPage: true,

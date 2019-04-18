@@ -47,6 +47,7 @@
 
 <script>
 import ContentWrapper from "./ContentWrapper";
+import NodeTree from "./NodeTree";
 import Loader from "@/components/common/Loader";
 import InfinityScroll from "@/mixins/infinityScroll";
 
@@ -55,6 +56,7 @@ export default {
   mixins: [InfinityScroll],
   components: {
     ContentWrapper,
+    NodeTree,
     Loader
   },
   data() {

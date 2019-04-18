@@ -1,21 +1,30 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
-import menu from "./support/menu";
+import accordion from "./support/accordion";
 
 const state = {
-  searchText: null
+  searchText: null,
+  ratedIds: []
 };
 
 const actions = {
   search({ commit }, searchText) {
     commit("setSearchText", searchText);
+  },
+  rate({ dispatch, commit }, data) {
+    dispatch("_rate", data).then(() => {
+      commit("addRatedId", data.articleId);
+    });
   }
 };
 
 const mutations = {
   setSearchText(state, searchText) {
     state.setSearchText = searchText;
+  },
+  addRatedId(state, id) {
+    state.ratedIds.push(id);
   }
 };
 
@@ -47,7 +56,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "rate",
+  prefix: "_rate",
   apiPath: "supports/articles/{articleId}/rating",
   requestType: "token",
   state,
@@ -73,6 +82,6 @@ export default {
   actions,
   mutations,
   modules: {
-    menu
+    accordion
   }
 };
