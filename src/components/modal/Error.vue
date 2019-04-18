@@ -36,10 +36,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.content {
-  padding: 50px;
-  text-align: center;
-}
-</style>
