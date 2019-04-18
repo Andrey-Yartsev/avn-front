@@ -11,8 +11,9 @@
   -webkit-overflow-scrolling: touch;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 60px 80px;
+    padding: 20px 30px;
     align-items: center;
+    overflow-y: auto;
   }
 
   .explore-page & {
@@ -40,11 +41,13 @@
     max-height: 100%;
     box-sizing: border-box;
     position: relative;
+    margin: auto;
 
     @include media-breakpoint-up($tablet-breakpoint) {
       box-shadow: 0 2px 2px rgba(#000, 0.1);
       border-radius: 6px;
       max-width: 620px;
+      max-height: none;
       display: flex;
       align-items: center;
       align-content: center;
@@ -67,8 +70,8 @@
       display: block;
 
       @include media-breakpoint-up($tablet-breakpoint) {
-        margin-left: auto;
-        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
         align-self: flex-start;
 
         overflow: visible;
@@ -161,7 +164,6 @@
 
     &.popup-alert {
       max-width: 340px;
-      margin: auto;
       display: block;
 
       @include media-breakpoint-down($tablet-breakpoint-dcrs) {
@@ -177,7 +179,6 @@
 
     &.popup-reasons {
       max-width: 450px;
-      margin: auto;
       display: block;
 
       @include media-breakpoint-down($tablet-breakpoint-dcrs) {
@@ -215,11 +216,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         max-width: 956px;
-        transform: translate(-50%, -50%);
-        left: 50%;
-        top: 50%;
         height: 81%;
-        position: fixed;
       }
 
       &.chat-popup_new-msg {
@@ -329,13 +326,10 @@
     &.statistics-popup {
       max-width: 100%;
 
-      @include media-breakpoint-up($tablet-breakpoint) {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          box-shadow: none;
-          border-radius: 0;
-          display: block;
-        }
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        box-shadow: none;
+        border-radius: 0;
+        display: block;
       }
 
       .close {
@@ -406,7 +400,6 @@
     }
 
     &.popup-image {
-      margin: auto;
       background-color: transparent;
       border-radius: 0;
       padding: 20px;
@@ -890,7 +883,7 @@
   .popup-container_hfluid & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 162px);
+      max-height: calc(100vh - 140px);
       height: auto;
     }
 
