@@ -53,7 +53,7 @@
           <label class="form-group-inner" v-if="states.length">
             <span class="label">By State</span>
             <span class="form-group form-group_clear-gaps">
-              <div class="sub-title">
+              <div class="sm-text">
                 Do not select if you want to block all country
               </div>
               <span
@@ -79,7 +79,7 @@
                     >{{ v.title }}</option
                   >
                 </select>
-                <div class="sub-title">
+                <div class="sm-text">
                   {{ findCountry(state.countryId).title }}
                   <a href="#" @click.prevent="resetStates(state.countryId)"
                     >Clear</a
@@ -340,15 +340,3 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
-<style>
-.msct {
-  height: 100px;
-}
-
-.sub-title {
-  font-size: 11px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-</style>
