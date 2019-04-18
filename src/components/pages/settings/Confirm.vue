@@ -9,8 +9,8 @@
           Are you sure?
         </div>
         <div class="popup-alert__footer">
-          <a href="#" class="btn" @click.prevent="yes">Confirm</a>
-          <a href="#" class="btn alt" @click.prevent="close">Cancel</a>
+          <button class="btn" @click.prevent="yes">Confirm</button>
+          <button class="btn alt" @click.prevent="close">Cancel</button>
         </div>
       </div>
       <button type="button" class="close" @click="close"></button>
