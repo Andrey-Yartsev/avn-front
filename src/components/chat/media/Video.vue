@@ -92,24 +92,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.processing .lds-dual-ring .loader-text {
-  color: #fff !important;
-}
-
-.processing .lds-dual-ring:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.video-placeholder.show-player:after,
-.video-placeholder.processing:after {
-  display: none;
-}
-</style>

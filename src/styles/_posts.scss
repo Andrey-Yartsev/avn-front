@@ -1191,6 +1191,14 @@
       line-height: 60px;
     }
   }
+
+  &.show-player,
+  &.processing {
+
+    &:after {
+      display: none;
+    }
+  }
 }
 
 .comment-form-wrapper {
