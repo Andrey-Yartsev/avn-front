@@ -13,7 +13,10 @@
                     v-if="$mq === 'desktop'"
                     >Story</span
                   >
-                  <button class="close" @click="close">
+                  <button
+                    class="close close_default close_visible-mob"
+                    @click="close"
+                  >
                     <span
                       class="category-name hidden-desktop"
                       v-if="$mq === 'mobile'"

@@ -15,7 +15,11 @@
           </template>
         </Content>
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button
+        type="button"
+        class="close close_light close_visible-mob"
+        @click="close"
+      ></button>
     </div>
   </Modal>
 </template>

@@ -1586,10 +1586,16 @@
 }
 
 .has-page-footer {
-  height: 100%;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    height: 100%;
+  }
 
   body {
-    height: 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      height: 100%;
+    }
   }
 
   &.chat-page_new {

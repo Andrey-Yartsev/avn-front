@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="popup-container post post-popup">
         <div class="previous" @click="index -= 1" v-if="index > 0"></div>
-        <div class="content">
+        <div class="content content_column-mob">
           <div class="postPageWrapper">
             <PostLargeView
               v-if="post"
@@ -13,7 +13,11 @@
             />
           </div>
         </div>
-        <button type="button" class="close" @click="close"></button>
+        <button
+          type="button"
+          class="close close_default"
+          @click="close"
+        ></button>
         <div class="next" @click="next" v-if="index + 1 < length"></div>
       </div>
     </template>

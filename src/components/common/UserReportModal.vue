@@ -1,11 +1,15 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container popup-reasons">
+      <div class="popup-container popup-container_block popup-reasons">
         <div class="content">
           <div class="reasonsView">
             <div class="reasons">
-              <button type="button" class="close" @click="close"></button>
+              <button
+                type="button"
+                class="close close_default close_visible-mob"
+                @click="close"
+              ></button>
               <form v-on:submit.stop.prevent="report">
                 <h1 class="form-title">Choose reason</h1>
                 <div class="shadow-block">

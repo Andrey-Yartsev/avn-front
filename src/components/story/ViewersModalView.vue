@@ -1,8 +1,8 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container storyviewers-popup">
-        <div class="content">
+      <div class="popup-container popup-storyviewers">
+        <div class="content content_relative">
           <div class="storyviewers-controls">
             <button class="header-return-btn" @click.prevent="close"></button>
             <a
@@ -103,7 +103,7 @@
             </div>
           </div>
         </div>
-        <button type="button" class="close" @click="close"></button>
+        <button type="button" class="close close_light" @click="close"></button>
       </div>
     </template>
   </Modal>

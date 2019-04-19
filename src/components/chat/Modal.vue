@@ -5,10 +5,14 @@
       slot="content"
       :class="{ 'chat-popup_new-msg': isNew }"
     >
-      <div class="content" ref="content">
+      <div class="content content_column-mob" ref="content">
         <component :is="component" mode="modal" />
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button
+        type="button"
+        class="close close_shift-t close_default"
+        @click="close"
+      ></button>
     </div>
   </Modal>
 </template>

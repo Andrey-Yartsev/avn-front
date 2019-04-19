@@ -5,7 +5,6 @@
         class="popup-container popup-addPost"
         :class="{ 'popup-container_hfluid': delayedPosts.length }"
       >
-        <div class="previous hidden"></div>
         <div class="content content_relative">
           <div :class="{ 'container-popup': delayedPosts.length }">
             <div
@@ -13,6 +12,11 @@
               v-if="$mq === 'desktop'"
             >
               New post
+              <button
+                type="button"
+                class="close close_shift-t close_default"
+                @click="close"
+              />
             </div>
             <AddPost
               :initialExpanded="true"
@@ -44,9 +48,7 @@
               </VuePerfectScrollbar>
             </div>
           </div>
-          <button type="button" class="close" @click="close" />
         </div>
-        <div class="next hidden"></div>
       </div>
     </template>
   </Modal>

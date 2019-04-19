@@ -26,7 +26,7 @@
         ></video>
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
-          <div class="popup-container popup-alert">
+          <div class="popup-container popup-container_block popup-alert">
             <div class="popup-alert__msg">
               Live video has ended
             </div>

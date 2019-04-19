@@ -96,8 +96,6 @@
     }
 
     .close {
-      border: none;
-      background: none;
       color: #fff;
       z-index: 3;
       margin: 0 auto 0 0;
@@ -114,7 +112,6 @@
         display: flex;
         align-content: center;
         align-items: center;
-        font-size: 24px;
 
         .stream_enabled & {
           left: auto;
@@ -127,7 +124,6 @@
         font-size: 30px;
         top: 4px;
         right: 4px;
-        position: absolute;
       }
 
       &:hover {
@@ -138,26 +134,13 @@
       }
 
       &:before {
-        content: "\E605";
-        @include icon-font;
-        height: 24px;
-        line-height: 24px;
-        opacity: .5;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        position: absolute;
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           position: relative;
           left: auto;
-          right: auto;
           top: auto;
-          bottom: auto;
           opacity: 1;
           transform: translate(0, 0);
-          display: inline-block;
-          vertical-align: middle;
         }
       }
     }

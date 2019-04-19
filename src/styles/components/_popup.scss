@@ -31,14 +31,34 @@
     bottom: 0;
   }
 
+  .content {
+    width: 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      overflow-y: auto;
+    }
+
+    &_relative {
+      position: relative;
+    }
+
+    &_column-mob {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
   & &-container {
     max-width: 100%;
     width: 100%;
-    overflow: hidden;
-    background: $white;
-    z-index: 100;
     min-height: 100px;
     max-height: 100%;
+    overflow: hidden;
+    background-color: $white;
+    z-index: 100;
     box-sizing: border-box;
     position: relative;
     margin: auto;
@@ -54,425 +74,9 @@
       justify-content: center;
     }
 
-    .content {
-      width: 100%;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        overflow-y: auto;
-      }
-
-      &_relative {
-        position: relative;
-      }
-    }
-
-    &_hfluid {
+    &_block {
       display: block;
-
-      @include media-breakpoint-up($tablet-breakpoint) {
-        margin-top: 0;
-        margin-bottom: 0;
-        align-self: flex-start;
-
-        overflow: visible;
-      }
-
-      .popup-title {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          background-color: $white;
-        }
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding-left: 15px;
-          box-shadow: 0 0 5px rgba(#000, 0.3);
-          background: $white;
-          z-index: 10;
-          border-radius: 5px 5px 0 0;
-          position: absolute;
-          left: 30px;
-          right: 30px;
-          top: 24px;
-        }
-      }
-
-      .popup-container-scroll {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          position: static;
-          overflow: visible;
-          box-shadow: none;
-          border-radius: 0;
-          max-width: 620px;
-          margin-left: auto;
-          margin-right: auto;
-          background-color: transparent;
-        }
-      }
-
-      &:not(.popup-addPost) {
-
-        .popup-container-scroll {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            min-height: calc(100vh - 254px);
-          }
-        }
-      }
-
-      &.popup-addPost {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          background-color: $white;
-          background-image: none;
-        }
-
-        &:before {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            display: none;
-          }
-        }
-      }
     }
-
-    &.popup-addPost {
-
-      &:not(.popup-container_hfluid) {
-        overflow: visible;
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          max-width: 100%;
-        }
-      }
-
-      .close {
-        top: 6px;
-      }
-    }
-
-    &.popup-payment {
-
-      .close {
-        color: $main;
-
-        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-          display: block;
-        }
-      }
-    }
-
-    &.popup-alert {
-      max-width: 340px;
-      display: block;
-
-      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-        max-width: 300px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 2px 2px rgba(#000, 0.1);
-        border-radius: 6px;
-      }
-    }
-
-    &.popup-reasons {
-      max-width: 450px;
-      display: block;
-
-      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-        max-width: 300px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 2px 2px rgba(#000, 0.1);
-        border-radius: 6px;
-      }
-
-      .close {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: block;
-        }
-      }
-    }
-
-    &.popup-info {
-      max-width: 480px;
-    }
-
-    &.chat-popup {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: auto;
-        border-radius: 0;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: 956px;
-        height: 81%;
-      }
-
-      &.chat-popup_new-msg {
-
-        .content {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            display: flex;
-          }
-        }
-      }
-
-      .header-nav {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          display: none;
-        }
-      }
-
-      .content {
-        height: 100%;
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          overflow-y: hidden;
-
-          display: flex;
-          flex-direction: column;
-        }
-      }
-
-      .selectedChatHeader {
-        @include media-breakpoint-up($desktop-breakpoint) {
-          padding-right: 40px;
-          min-height: 60px;
-        }
-      }
-
-      .close {
-        top: 6px;
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
-      }
-
-      .chatCollectionContent {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          background-color: transparent;
-          box-shadow: none;
-          border-radius: 0;
-          max-width: none;
-          margin: 0;
-          max-height: 100%;
-          height: 100%;
-        }
-
-        .more-functions {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            margin-right: -6px;
-          }
-
-          &__dropdown {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              right: -22px;
-            }
-          }
-        }
-      }
-    }
-
-    &.popup-login {
-      max-width: 344px;
-      padding: 52px 20px 23px;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        transform: translate(-50%, -50%);
-        left: 50%;
-        top: 50%;
-        position: fixed;
-        border-radius: 6px;
-      }
-
-      .content {
-        overflow: visible;
-        position: relative;
-        z-index: 667;
-      }
-      
-      .close {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: block;
-        }
-      }
-
-      .form-group {
-
-        .btn {
-          margin: 0;
-        }
-      }
-    }
-
-    &.statistics-popup {
-      max-width: 100%;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        box-shadow: none;
-        border-radius: 0;
-        display: block;
-      }
-
-      .close {
-        top: 5px;
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: block;
-        }
-      }
-    }
-
-    &.storyviewers-popup {
-      max-width: 100%;
-      box-shadow: none;
-      border-radius: 0;
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-
-      &:before {
-        content: "";
-        height: 80px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        pointer-events: none;
-        z-index: 1;
-        top: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(#000, 0.1) 0%,
-          transparent 100%
-        );
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        left: -1px;
-        right: -1px;
-        top: -1px;
-        bottom: -1px;
-        background: linear-gradient(
-          30deg,
-          $secondary-color-12 10%,
-          $primary-color-12 90%
-        );
-      }
-
-      .content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 1;
-      }
-
-      .close {
-        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-        color: #fff;
-
-        &:before {
-          opacity: 1;
-        }
-      }
-    }
-
-    &.popup-image {
-      background-color: transparent;
-      border-radius: 0;
-      padding: 20px;
-      text-align: center;
-      box-shadow: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-width: none;
-        width: auto;
-      }
-
-      img {
-        display: block;
-        max-width: 100%;
-        max-height: calc(100vh - 40px);
-        margin: auto;
-        background-color: $white;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-height: calc(100vh - 120px);
-        }
-      }
-
-      .content {
-        width: auto;
-        display: inline-block;
-        position: relative;
-
-        &:before {
-          position: absolute;
-          pointer-events: none;
-          top: 0;
-          height: 50px;
-          left: 0;
-          right: 0;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
-          opacity: 0.2;
-          content: "";
-          z-index: 1;
-        }
-      }
-
-      .close {
-        display: block;
-        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
-        top: 0;
-        right: 0;
-
-        &:before {
-          opacity: 1;
-          color: #fff;
-        }
-      }
-    }
-  }
-
-  & &-payment {
-    width: 100%;
-    max-width: 800px;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      &,
-      .content,
-      .paymentView {
-        height: 100%;
-      }
-    }
-  }
-
-  & .subscribe-popup {
-    max-width: 400px;
-    width: 100%;
-    padding-bottom: 25px;
   }
 
   & &-title {
@@ -522,10 +126,6 @@
     }
   }
 
-  & &-body {
-
-  }
-
   .close {
     position: absolute;
     right: 0;
@@ -536,7 +136,6 @@
     font-size: 24px;
     z-index: 666;
     color: $main-color;
-    display: none;
     cursor: pointer;
     width: 54px;
     height: 50px;
@@ -546,6 +145,36 @@
       display: block;
     }
 
+    &:not(.close_visible-mob) {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
+    }
+
+    &_light {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      color: #fff;
+
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    &_default {
+
+      &:before {
+        opacity: 0.5;
+      }
+    }
+
+    &_shift {
+
+      &-t {
+        top: 6px;
+      }
+    }
+
     &:before {
       content: "\E605";
       @include icon-font;
@@ -553,7 +182,6 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      opacity: 0.5;
     }
 
     &:hover {
@@ -678,11 +306,14 @@
     }
 
     .close {
-      
-      @include media-breakpoint-up($desktop-breakpoint) {
-        z-index: 10;
-        right: 30px;
-        top: 29px;
+
+      &:not(.close_shift-t) {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          z-index: 10;
+          right: 30px;
+          top: 29px;
+        }
       }
     }
 
@@ -697,6 +328,476 @@
         z-index: 1;
         position: relative;
       }
+    }
+  }
+}
+
+.popup-container {
+
+  &_hfluid {
+    display: block;
+
+    @include media-breakpoint-up($tablet-breakpoint) {
+      margin-top: 0;
+      margin-bottom: 0;
+      align-self: flex-start;
+      overflow: visible;
+    }
+
+    .popup-title {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        background-color: $white;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 15px;
+        box-shadow: 0 0 5px rgba(#000, 0.3);
+        background: $white;
+        z-index: 10;
+        border-radius: 5px 5px 0 0;
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 24px;
+      }
+    }
+
+    .popup-container-scroll {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: static;
+        overflow: visible;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+      }
+    }
+
+    &:not(.popup-addPost) {
+
+      .popup-container-scroll {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          min-height: calc(100vh - 254px);
+        }
+      }
+    }
+
+    &.popup-addPost {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        background-color: $white;
+        background-image: none;
+      }
+
+      &:before {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.popup-addPost {
+
+    &:not(.popup-container_hfluid) {
+      overflow: visible;
+    }
+  }
+
+  &.popup-payment {
+    max-width: 800px;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+      &,
+      .content,
+      .paymentView {
+        height: 100%;
+      }
+    }
+  }
+
+  &.popup-alert,
+  &.popup-reasons {
+
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+      max-width: 300px;
+      box-shadow: 0 2px 2px rgba(#000, 0.1);
+    }
+  }
+
+  &.popup-login,
+  &.popup-alert,
+  &.popup-reasons {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 6px;
+    }
+  }
+
+  &.popup-alert {
+    max-width: 340px;
+  }
+
+  &.popup-reasons {
+    max-width: 450px;
+  }
+
+  &.chat-popup {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: fixed;
+      height: auto;
+      border-radius: 0;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 956px;
+      height: 81%;
+    }
+
+    .content {
+      height: 100%;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        overflow-y: hidden;
+      }
+    }
+
+    .selectedChatHeader {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-right: 40px;
+        min-height: 60px;
+      }
+    }
+
+    .chatCollectionContent {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: none;
+        margin: 0;
+        max-height: 100%;
+        height: 100%;
+      }
+
+      .more-functions {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          margin-right: -6px;
+        }
+
+        &__dropdown {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            right: -22px;
+          }
+        }
+      }
+    }
+  }
+
+  &.popup-login {
+    max-width: 344px;
+    padding: 52px 20px 23px;
+
+    .content {
+      overflow: visible;
+      z-index: 667;
+    }
+
+    .form-group {
+
+      .btn {
+        margin: 0;
+      }
+    }
+  }
+
+  &.popup-statistics {
+    max-width: 100%;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      box-shadow: none;
+      border-radius: 0;
+      display: block;
+    }
+  }
+
+  &.popup-storyviewers {
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+    }
+
+    &:before {
+      height: 80px;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 1;
+      top: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(#000, 0.1) 0%,
+        transparent 100%
+      );
+    }
+
+    &:after {
+      left: -1px;
+      right: -1px;
+      top: -1px;
+      bottom: -1px;
+      background: linear-gradient(
+        30deg,
+        $secondary-color-12 10%,
+        $primary-color-12 90%
+      );
+    }
+
+    .content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+  }
+
+  &.popup-image {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 20px;
+    text-align: center;
+    box-shadow: none;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: none;
+      width: auto;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(100vh - 40px);
+      margin: auto;
+      background-color: $white;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 120px);
+      }
+    }
+
+    .content {
+      width: auto;
+      display: inline-block;
+
+      &:before {
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        height: 50px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+        opacity: 0.2;
+        content: "";
+        z-index: 1;
+      }
+    }
+  }
+
+  &.post-popup {
+    overflow: visible;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: auto;
+      max-width: 100%;
+      box-shadow: none;
+      background-color: transparent;
+    }
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      border-radius: 0;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      max-width: 100%;
+    }
+
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          top: 45px;
+          bottom: 45px;
+
+          @media screen and (orientation: landscape) {
+            top: 0;
+            bottom: 0;
+          }
+        }
+      }
+    }
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        background-color: transparent;
+      }
+    }
+
+    .content {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        min-width: 620px;
+      }
+    }
+
+    .post.postPage {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        width: 100%;
+      }
+
+      .lightbox-post & {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            justify-content: center;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+
+    .close {
+      position: fixed;
+      color: #fff;
+      opacity: 0.7;
+      font-size: 30px;
+      padding: 7px 10px;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        right: auto;
+        left: 0;
+        width: 54px;
+        height: 44px;
+        padding: 0;
+        z-index: 15;
+        opacity: 0;
+      }
+
+      .lightbox-post & {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            right: 0;
+            left: auto;
+            opacity: 1;
+            display: block;
+
+            @media screen and (orientation: landscape) {
+              top: 5px;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          opacity: 0;
+        }
+      }
+
+      &:before {
+        opacity: 1;
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          @include position-center;
+        }
+      }
+    }
+
+    .next,
+    .previous {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
+
+
+      .lightbox-post & {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            display: block;
+            z-index: 3;
+
+            @media screen and (orientation: landscape) {
+              width: 50px;
+              left: 50%;
+              right: auto;
+              transform: translateX(-50%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.subscribe-popup {
+    max-width: 400px;
+    padding-bottom: 25px;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      width: 100%;
+      max-width: 100%;
+      top: 0;
+      bottom: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
     }
   }
 }
@@ -722,6 +823,7 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     padding: 19px 20px 20px;
+    position: relative;
 
     .popup-container_hfluid & {
       margin-left: 11px;
@@ -789,16 +891,6 @@
   .content {
     text-align: center;
     padding: 16px;
-  }
-  
-  &_show-close {
-    
-    .close {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: block;
-      }
-    }
   }
 }
 
@@ -883,7 +975,7 @@
   .popup-container_hfluid & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 140px);
+      max-height: calc(100vh - 122px);
       height: auto;
     }
 

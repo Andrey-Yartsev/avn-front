@@ -9,7 +9,7 @@
       <div class="content">
         <Content mode="modal" />
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button type="button" class="close close_default" @click="close"></button>
     </div>
   </Modal>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <div
-      class="popup-container popup-alert popup-alert_show-close"
+      class="popup-container popup-container_block popup-alert"
       slot="content"
     >
       <div class="content">
@@ -10,7 +10,11 @@
           {{ error.message }}
         </div>
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button
+        type="button"
+        class="close close_default close_visible-mob"
+        @click="close"
+      ></button>
     </div>
   </Modal>
 </template>

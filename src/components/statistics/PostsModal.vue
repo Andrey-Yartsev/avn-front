@@ -1,6 +1,6 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container statistics-popup" slot="content">
+    <div class="popup-container popup-statistics" slot="content">
       <div class="content" ref="content">
         <div class="popup-title popup-title_underlined">
           Posts
@@ -53,7 +53,11 @@
         </div>
         <Posts :dataSet="dataSet" :period="period" ref="posts" />
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button
+        type="button"
+        class="close close_shift-t close_default close_visible-mob"
+        @click="close"
+      ></button>
     </div>
   </Modal>
 </template>

@@ -2,30 +2,6 @@
 
 .subscribe-popup {
 
-  &.popup-container {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      width: 100%;
-      max-width: 100%;
-      top: 0;
-      bottom: 0;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-
-  .close {
-    color: #fff;
-    text-shadow: $shadow-light;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: block;
-    }
-
-    &:before {
-      opacity: 1;
-    }
-  }
-
   &__header {
     position: relative;
     height: 80px;
