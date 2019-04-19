@@ -37,6 +37,7 @@
 
 <script>
 import upload from "@/utils/upload";
+import { getImagePreview } from "@/utils/mediaFiles";
 
 export default {
   name: "WatermarkImageUploader",
@@ -76,8 +77,22 @@ export default {
   },
   methods: {
     change(e) {
-      this.save();
-      this.setPreview(e);
+      if (e.target.files && e.target.files.length) {
+        getImagePreview(
+          { file: e.target.files[0] },
+          ({ preview, params: { width } }) => {
+            if (width > 100 && width < 300) {
+              this.preview = preview;
+              this.save();
+            } else {
+              this.$store.dispatch(
+                "global/flashToast",
+                "Required width from 100px to 300px"
+              );
+            }
+          }
+        );
+      }
     },
     async save() {
       this.uploaded = false;
@@ -91,13 +106,6 @@ export default {
         this.preview = null;
       }
       this.uploading = false;
-    },
-    setPreview(e) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.preview = reader.result;
-      };
-      reader.readAsDataURL(e.target.files[0]);
     },
     remove() {
       this.preview = null;
