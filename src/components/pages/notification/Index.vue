@@ -3,7 +3,7 @@
     class="container-popup NotificationsCollectionView"
     :class="{ 'no-notifications': !items.length }"
   >
-    <div class="notifications-header main-header">
+    <div class="notifications-header main-header" v-if="$mq === 'mobile'">
       <div class="header_container">
         <router-link :to="'/' + user.username" class="avatar header-avatar"
           ><span class="avatar__img"></span
@@ -54,7 +54,10 @@
         </div>
       </div>
     </div>
-    <Footer class="site-footer_main" />
+    <Footer
+      class="site-footer_main"
+      v-if="$mq === 'mobile' || mode !== 'modal'"
+    />
   </div>
 </template>
 
