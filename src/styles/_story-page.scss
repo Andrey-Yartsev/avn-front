@@ -382,22 +382,10 @@
 
 .storyItem {
   max-width: 100%;
-  max-height: calc(100% - 220px);
   object-fit: cover;
   position: relative;
   display: block;
   z-index: 0;
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-
-    @media screen and (orientation: landscape) {
-      max-height: calc(100% - 120px);
-    }
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    max-height: calc(100% - 150px);
-  }
 
   &_bg {
     position: absolute;
@@ -529,6 +517,20 @@
 .story-image {
   position: relative;
   user-select: none;
+  max-height: calc(100% - 220px);
+  display: flex;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+    @media screen and (orientation: landscape) {
+      max-height: calc(100% - 120px);
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-height: calc(100% - 150px);
+  }
+
 
   &:after {
     content: "";
