@@ -174,20 +174,16 @@
 
   .chatTip,
   .getPaidForm {
-    display: flex;
-    flex-direction: row;
     width: 100%;
     flex: 0 0 100%;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       order: 5;
-      margin-left: 0;
-      margin-top: 15px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1;
-      margin-left: 0;
+      padding: 0;
     }
   }
 
