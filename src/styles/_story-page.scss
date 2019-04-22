@@ -253,60 +253,6 @@
     z-index: 3;
   }
 
-  .tip-form {
-    position: absolute;
-    bottom: 100%;
-    left: 5px;
-    margin-bottom: -3px;
-    display: flex;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      width: calc(100vw - 30px);
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      left: 10px;
-    }
-
-    .btn {
-      background: rgba(#fff, 0.5);
-      color: $main;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 11px 17px;
-        height: 40px;
-      }
-
-      &:hover {
-        background: #fff;
-      }
-
-      &.btn-send {
-
-        &[disabled] {
-          opacity: 0.6;
-        }
-      }
-    }
-
-    input {
-      text-align: center;
-      background: rgba(#000, 0.3);
-      border: 1px solid rgba(255, 255, 255, .2);
-      color: #fff;
-      caret-color: #fff;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        flex: 1;
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 150px;
-        height: 40px;
-        border-radius: 1000px;
-      }
-    }
-  }
-
   .btn-message {
 
     &:before {

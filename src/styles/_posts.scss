@@ -347,20 +347,6 @@
     }
   }
 
-  .tip-form {
-    display: flex;
-    padding: 10px 15px 0;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 5px 15px 8px;
-
-      .btn {
-        width: 100px;
-        flex: 0 0 100px;
-      }
-    }
-  }
-
   .more-functions {
     position: absolute;
     right: 0;
@@ -1260,22 +1246,9 @@
     }
   }
 
-  .comment-form,
-  .tip-form {
+  .comment-form {
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .tip-form {
-    position: absolute;
-    background-color: $white;
-    left: 0;
-    right: 0;
-    top: 7px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      top: 15px;
-    }
   }
 }
 

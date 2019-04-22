@@ -38,7 +38,12 @@
             class="profile-actions-tip-form"
             :class="{ show: showTip }"
           >
-            <Tip :user="profile" ref="tip" @cancel="closeTip" />
+            <Tip
+              :user="profile"
+              ref="tip"
+              @cancel="closeTip"
+              class="tip-form_profile"
+            />
           </div>
           <button
             v-if="profile.canEarn && $root.showTips"

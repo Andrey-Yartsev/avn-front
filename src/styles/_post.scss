@@ -299,23 +299,6 @@
     }
   }
 
-  .tip-form {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      order: -1;
-      padding-top: 0;
-      padding-bottom: 10px;
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      .btn {
-        width: 95px;
-        flex: 0 0 95px;
-      }
-      .tip-amount-input {
-        min-width: 0;
-      }
-    }
-  }
-
   .comment-form {
 
     .comment-btn {

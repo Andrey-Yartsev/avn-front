@@ -48,6 +48,7 @@
         ref="tip"
         @cancel="closeTip"
         :tipId="`${post.id}`"
+        class="tip-form_post"
       />
     </div>
     <AddComment v-if="showAddCommentForm" :sendNewComment="sendNewComment" />

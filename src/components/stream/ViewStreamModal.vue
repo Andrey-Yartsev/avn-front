@@ -73,12 +73,12 @@
             ></button>
           </form>
           <Tip
-            v-if="$root.showTips"
-            :class="{ show: showTip }"
+            v-if="$root.showTips && showTip"
             :user="streamer"
             ref="tip"
             @cancel="closeTip"
             :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
+            class="tip-form_viewer"
           />
         </div>
         <div

@@ -89,6 +89,7 @@
           ref="tip"
           @cancel="closeTip"
           :tipId="`${post.id}`"
+          class="tip-form_post"
         />
       </div>
       <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">

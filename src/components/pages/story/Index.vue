@@ -254,6 +254,7 @@
           :user="author"
           @cancel="closeTip"
           :tipId="`h${currentStory.id}`"
+          class="tip-form_viewer"
         />
       </div>
       <button type="button" class="close" @click="close"></button>
