@@ -98,22 +98,18 @@
           </template>
         </div>
         <div class="user-name">
-          <a
-            class="name"
-            :href="isOwner(author.id) ? `/${author.username}` : ''"
-            :class="{ 'new-story': isOwner(author.id) }"
-          >
-            <template v-if="isCollections">
-              {{ collection.title }}
-            </template>
-            <template v-else>
+          <span v-if="isCollections">
+            {{ collection.title }}
+          </span>
+          <template v-else>
+            <router-link class="name" :to="`/${author.username}`">
               {{
                 isOwner(author.id)
                   ? "Your story"
                   : author.name || author.username
               }}
-            </template>
-          </a>
+            </router-link>
+          </template>
           <span class="time"></span>
         </div>
       </div>
@@ -757,6 +753,9 @@ export default {
     deletedPost() {
       this.init();
     }
+  },
+  beforeDestroy() {
+    this.resetState();
   }
 };
 </script>
