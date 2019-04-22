@@ -149,7 +149,8 @@ export default {
     commentPage: 0,
     showAddCommentForm: false,
     commentReplyUserName: "",
-    showTip: false
+    showTip: false,
+    popupView: true
   }),
   props: {
     post: {
@@ -172,8 +173,16 @@ export default {
   methods: {
     clickOnCommentForm() {
       this.showAddCommentForm = !this.showAddCommentForm;
-      const className = this.showAddCommentForm ? "" : "lightbox-post";
-      this.$emit("addExtraClassName", className);
+      this.showTip = false;
+      if (this.popupView) {
+        const className = this.showAddCommentForm ? "" : "lightbox-post";
+        this.$emit("addExtraClassName", className);
+      }
+      this.popupView = false;
+    },
+    toggleTipForm() {
+      this.showTip = !this.showTip;
+      this.showAddCommentForm = false;
     },
     likePost() {
       this.$store.dispatch(this.actionPrefix + "/likePost", {

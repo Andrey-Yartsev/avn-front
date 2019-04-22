@@ -88,7 +88,7 @@
           <span
             role="button"
             class="stream-btn stream-comment-btn"
-            @click="showCommentForm = !showCommentForm"
+            @click="openCommentForm"
           ></span>
           <span
             class="stream-btn stream-like-btn"
@@ -98,7 +98,7 @@
             class="stream-btn stream-tip-btn"
             type="button"
             v-if="streamer.canEarn && $root.showTips"
-            @click="showTip = !showTip"
+            @click="openTipForm"
           ></span>
           <span class="stream-online-count" v-if="false"></span>
         </div>
@@ -301,6 +301,14 @@ export default {
         })
       );
       this.newComment = "";
+    },
+    openCommentForm() {
+      this.showCommentForm = !this.showCommentForm;
+      this.showTip = false;
+    },
+    openTipForm() {
+      this.showTip = !this.showTip;
+      this.showCommentForm = false;
     },
     closeTip() {
       this.showTip = false;

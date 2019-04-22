@@ -32,9 +32,9 @@
       <Actions
         v-if="!delayedPost"
         :post="post"
-        v-on:postShowCommentForm="showForm"
+        v-on:postShowCommentForm="toggleCommentForm"
         v-on:postLike="likePost"
-        @toggleTip="showTip = !showTip"
+        @toggleTip="toggleTipForm"
         :openModal="openModal"
       />
       <div v-else class="actions">
@@ -146,13 +146,18 @@ export default {
         addLike: !this.post.isFavorite
       });
     },
-    showForm() {
+    toggleCommentForm() {
       if (!this.post.canViewMedia) {
         this.showSubscribeModal();
         return;
       }
 
       this.showAddCommentForm = !this.showAddCommentForm;
+      this.showTip = false;
+    },
+    toggleTipForm() {
+      this.showTip = !this.showTip;
+      this.showAddCommentForm = false;
     },
     closeTip() {
       this.showTip = false;
