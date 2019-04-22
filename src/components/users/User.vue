@@ -8,6 +8,7 @@
         <span class="avatar__img"
           ><img v-if="profile.avatar" :src="profile.avatar"
         /></span>
+        <div class="stream-online-label" v-if="showLiveLabel">live</div>
       </div>
       <div class="names-actions-wrapper">
         <div class="user-names">
@@ -92,6 +93,11 @@ export default {
     actionPrefix: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    showLiveLabel() {
+      return !!this.profile.currentStream;
     }
   }
 };
