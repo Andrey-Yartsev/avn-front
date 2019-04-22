@@ -269,9 +269,7 @@
 }
 
 .stream-comments-wrapper {
-  position: absolute;
-  left: 12px;
-  bottom: 108px;
+  margin-bottom: 12px;
   z-index: 3;
   color: #fff;
   height: 175px;
@@ -288,8 +286,6 @@
   );
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    left: 17px;
-    bottom: 111px;
     height: 184px;
   }
 
@@ -364,6 +360,8 @@
       color: #fff;
       background-color: rgba(0, 0, 0, 0.2);
       height: 40px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 20px;
     }
   }
 }
