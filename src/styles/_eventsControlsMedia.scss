@@ -209,6 +209,10 @@
         }
       }
 
+      &:active {
+        color: $main-color;
+      }
+
       & + .item {
         &:before {
           content: "";
