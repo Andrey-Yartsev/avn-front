@@ -265,6 +265,10 @@ export default {
       if (this.type === "top") {
         this.$store.dispatch("topModels/getPosts");
       }
+
+      if (this.type === "live") {
+        this.$store.dispatch("lives/getPosts");
+      }
     }
   },
   watch: {
