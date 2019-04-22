@@ -1,6 +1,6 @@
 <template>
   <div
-    class="stream-container"
+    class="stream-container popup"
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
   >
     <div class="loader-container" v-if="!user">
@@ -14,7 +14,7 @@
             @click="close"
             >Live video</span
           >
-          <button class="close" @click="close">
+          <button class="close close_visible-mob" @click="close">
             <span
               class="category-name category-name_live hidden-desktop"
               v-if="$mq === 'mobile'"
