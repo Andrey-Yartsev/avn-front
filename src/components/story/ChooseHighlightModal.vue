@@ -49,7 +49,11 @@
             </div>
           </div>
         </div>
-        <button type="button" class="close close_shift-t close_shift-r close_default" @click="close"></button>
+        <button
+          type="button"
+          class="close close_shift-t close_shift-r close_default"
+          @click="close"
+        ></button>
       </div>
     </template>
   </Modal>
