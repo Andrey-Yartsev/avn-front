@@ -11,12 +11,11 @@
           type="text"
           pattern="\d{1,5}(?:\.\d{0,2})?"
           maxlength="8"
-          :placeholder="'Min: $' + limits.min + '  Max: $' + limits.max"
+          :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
         />
       </div>
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="submit" class="btn" :disabled="!isValid">Send funds</button>
   </form>
 </template>
