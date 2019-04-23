@@ -50,7 +50,7 @@
                 <span class="back" @click="mobileBack"></span>
               </div>
               <router-link
-                :to="'/' + activeUser.name"
+                :to="'/' + activeUser.username"
                 class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
               >
                 <span class="avatar__img">
