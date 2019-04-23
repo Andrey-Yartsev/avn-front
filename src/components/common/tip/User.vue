@@ -13,14 +13,19 @@
           maxlength="8"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
+          :class="{ error: !isValid }"
         />
       </div>
     </div>
-    <button type="submit" class="btn" :disabled="!isValid">Send funds</button>
+    <button type="submit" class="btn" :disabled="!canSend">Send funds</button>
   </form>
 </template>
 
 <script>
+const isFloat = function(number) {
+  return number % 1 != 0;
+};
+
 export default {
   name: "UserTip",
   props: {
@@ -46,8 +51,17 @@ export default {
       return this.$store.state.init.data.payments.tipsLimit;
     },
     isValid() {
+      if (!this.amount) {
+        return true;
+      }
+      if (!isFloat(this.amount)) {
+        return false;
+      }
+      return this.amount >= this.limits.min && this.amount <= this.limits.max;
+    },
+    canSend() {
       if (this.amount) {
-        return this.amount >= this.limits.min && this.amount <= this.limits.max;
+        return this.isValid;
       }
       return false;
     }
