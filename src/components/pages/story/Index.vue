@@ -223,10 +223,9 @@
         </div>
       </div>
       <div class="bottom-btns">
-        <div class="story-details-info">
+        <div class="story-details-info" v-if="isOwner(author.id) && !isCollections">
           <a
             href="#"
-            v-if="isOwner(author.id) && !isCollections"
             class="btn-story-details"
             @click.prevent="saveToHighlights"
           />
