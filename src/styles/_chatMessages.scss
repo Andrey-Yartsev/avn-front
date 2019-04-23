@@ -373,21 +373,6 @@
       }
     }
 
-    .tipsMessage,
-    .unlockedMessage,
-    .lockedMessage {
-
-      .message {
-
-        &:before {
-          top: 50%;
-          right: -30px;
-          color: $secondary-color;
-          transform: translateY(-50%);
-        }
-      }
-    }
-
     &:not(.withTime) {
 
       .messageContent {
@@ -454,18 +439,6 @@
           .video-placeholder {
             border-radius: 20px 0 0 20px;
           }
-        }
-      }
-    }
-
-    .tipsMessage,
-    .unlockedMessage,
-    .lockedMessage {
-      .message {
-        &:before {
-          left: -30px;
-          right: auto;
-          color: $primary-color;
         }
       }
     }
@@ -668,51 +641,80 @@
   }
 }
 
-.tipsMessage {
+.message-icon {
+
   .message {
+
     &:before {
       @include icon-font;
       font-size: 24px;
-      content: "\E618";
       display: inline-block;
       vertical-align: middle;
       position: absolute;
       top: 2px;
+    }
+
+    .authorMessage & {
+
+      &:before {
+        left: -30px;
+        //color: $primary-color;
+      }
+    }
+
+    .notAuthorMessage & {
+
+      &:before {
+        top: 50%;
+        right: -30px;
+        color: $secondary-color;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.tipsMessage {
+
+  &:not(.unlockedMessage) {
+
+    .message {
+      &:before {
+        content: "\E618";
+      }
+    }
+  }
+
+  .message {
+    &:before {
+      content: "\E618";
     }
   }
 }
 
 .unlockedMessage {
+
   .message {
+
     &:before {
-      @include icon-font;
-      font-size: 24px;
       content: "\E61C";
-      display: inline-block;
-      vertical-align: middle;
-      position: absolute;
-      top: 2px;
     }
   }
 }
 
 .lockedMessage {
+
   .message {
-    cursor: pointer;
 
     &:before {
-      @include icon-font;
-      font-size: 24px;
       content: "\E61B";
-      display: inline-block;
-      vertical-align: middle;
-      position: absolute;
-      top: 2px;
     }
   }
-  &.mine {
+
+  &:not(.mine) {
+
     .message {
-      cursor: default;
+      cursor: pointer;
     }
   }
 }

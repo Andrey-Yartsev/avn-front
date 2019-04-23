@@ -34,6 +34,8 @@
                 :class="{
                   tipsMessage: v.isTips,
                   lockedMessage: isLocked(v),
+                  unlockedMessage: !isLocked(v) && !v.isTips,
+                  'message-icon': isLocked(v) || v.isTips || !isLocked(v),
                   mine: isMyMessage(v)
                 }"
                 @click="messageClick(v)"
