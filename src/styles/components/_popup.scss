@@ -173,6 +173,14 @@
       &-t {
         top: 6px;
       }
+
+      &-r {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          z-index: 10;
+          right: 30px;
+        }
+      }
     }
 
     &:before {
@@ -282,7 +290,9 @@
       box-shadow: none;
       max-width: 680px;
       border-radius: 5px 5px 0 0;
-      padding: 84px 0 0;
+      padding: 60px 0 0;
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -305,18 +315,6 @@
       }
     }
 
-    .close {
-
-      &:not(.close_shift-t) {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          z-index: 10;
-          right: 30px;
-          top: 29px;
-        }
-      }
-    }
-
     > .content {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -327,6 +325,10 @@
         overflow: visible;
         z-index: 1;
         position: relative;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 96px);
       }
     }
   }
@@ -359,7 +361,7 @@
         position: absolute;
         left: 30px;
         right: 30px;
-        top: 24px;
+        top: 0;
       }
     }
 
@@ -972,7 +974,7 @@
   .popup-container_hfluid & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 122px);
+      max-height: calc(100vh - 96px);
       height: auto;
     }
 
