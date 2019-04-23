@@ -791,10 +791,7 @@
     max-width: 400px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      width: 100%;
       max-width: 100%;
-      top: 0;
-      bottom: 0;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       margin: 0;
