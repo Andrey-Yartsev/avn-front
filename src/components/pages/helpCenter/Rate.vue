@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     rated() {
-      return !!this.$store.state.support.rateSuccess;
+      return this.$store.state.support.ratedIds.indexOf(this.articleId) !== -1;
     }
   },
   watch: {
