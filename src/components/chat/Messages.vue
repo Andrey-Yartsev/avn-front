@@ -65,7 +65,10 @@
                   />
                 </div>
               </div>
-              <div class="time" v-if="v.lastMessageInGroup">
+              <div
+                class="timestamp timestamp_sm-size message-time"
+                v-if="v.lastMessageInGroup"
+              >
                 <span class="status">{{ v.isNew ? "Sent" : "Seen" }} </span>
                 <span class="timeValue">{{ time(v.changedAt) }}</span>
               </div>

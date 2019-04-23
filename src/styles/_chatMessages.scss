@@ -13,15 +13,6 @@
     left: -9999999px;
   }
 
-  .time {
-    color: rgba($main, 0.5);
-    font-size: 0.76em;
-
-    .status {
-      display: none;
-    }
-  }
-
   .media {
     margin: 0 0 1px;
     font-size: 0;
@@ -268,7 +259,7 @@
       margin-bottom: 0;
     }
 
-    .time {
+    .message-time {
       display: block;
     }
 
@@ -455,7 +446,7 @@
       display: none;
     }
 
-    .time {
+    .message-time {
       text-align: right;
 
       .status {
@@ -478,6 +469,13 @@
         }
       }
     }
+  }
+}
+
+.message-time {
+
+  .status {
+    display: none;
   }
 }
 
@@ -676,16 +674,8 @@
 
 .tipsMessage {
 
-  &:not(.unlockedMessage) {
-
-    .message {
-      &:before {
-        content: "\E618";
-      }
-    }
-  }
-
   .message {
+
     &:before {
       content: "\E618";
     }
