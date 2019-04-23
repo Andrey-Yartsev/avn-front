@@ -223,7 +223,10 @@
         </div>
       </div>
       <div class="bottom-btns">
-        <div class="story-details-info" v-if="isOwner(author.id) && !isCollections">
+        <div
+          class="story-details-info"
+          v-if="isOwner(author.id) && !isCollections"
+        >
           <a
             href="#"
             class="btn-story-details"
@@ -237,12 +240,6 @@
             {{ viewersText }}
           </div>
         </div>
-        <button
-          @click="openTip"
-          v-if="!isOwner(author.id) && author.canEarn"
-          type="button"
-          class="btn-tip"
-        />
         <Tip
           ref="tip"
           v-if="showTip"
@@ -250,6 +247,12 @@
           @cancel="closeTip"
           :tipId="`h${currentStory.id}`"
           class="tip-form_viewer"
+        />
+        <button
+          @click="openTip"
+          v-if="!isOwner(author.id) && author.canEarn"
+          type="button"
+          class="btn-tip"
         />
       </div>
       <button type="button" class="close" @click="close"></button>

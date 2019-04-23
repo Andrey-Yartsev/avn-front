@@ -395,6 +395,14 @@
       margin-bottom: 17px;
     }
 
+    .bottom-btns & {
+      flex: 0 0 100%;
+      margin-bottom: 0;
+      margin-left: 10px;
+      margin-right: 10px;
+      max-width: calc(100% - 20px);
+    }
+
     .tip-amount-input {
       color: #fff;
       height: 40px;
