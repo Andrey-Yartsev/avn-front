@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group form-group_with-label">
+  <div>
     <div
       class="b-search-form b-search-form_flex-align header-search"
       v-click-outside="close"
@@ -42,15 +42,78 @@
           <button type="button" class="close" @click="reset"></button>
         </div>
       </div>
+    </div>
 
-      <div v-if="usersForAdding && usersForAdding.length">
-        <h2>Users to add</h2>
-        <UsersTable :items="usersForAdding" @remove="removeAdding" />
-        <button>Add</button>
+    <div v-if="usersForAdding && usersForAdding.length">
+      <div
+        class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+      >
+        <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+          <div class="inner">
+            <span class="semi-transparent">
+              Users to add
+            </span>
+          </div>
+          <div class="table-header blocked-table-header ">
+            <div class="user table__cell">
+              User
+            </div>
+            <div
+              class="date table__cell table__cell_align-hor-c table__cell_selected"
+            >
+              Date
+            </div>
+            <div
+              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
+            >
+              Status
+            </div>
+            <div class="table__cell table__cell_remove">
+              &nbsp;
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div v-if="addedUsers && addedUsers.length">
-        <h2>Added users</h2>
+      <div class="shadow-block no-padding">
+        <UsersTable :items="usersForAdding" @remove="removeAdding" />
+        <div class="buttons-row">
+          <div class="container">
+            <button class="btn lg">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="addedUsers && addedUsers.length">
+      <div
+        class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+      >
+        <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+          <div class="inner">
+            <span class="semi-transparent">
+              Added users
+            </span>
+          </div>
+          <div class="table-header blocked-table-header ">
+            <div class="user table__cell">
+              User
+            </div>
+            <div
+              class="date table__cell table__cell_align-hor-c table__cell_selected"
+            >
+              Date
+            </div>
+            <div
+              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
+            >
+              Status
+            </div>
+            <div class="table__cell table__cell_remove">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shadow-block no-padding">
         <UsersTable :items="usersForAdding" @remove="removeAdding" />
       </div>
     </div>

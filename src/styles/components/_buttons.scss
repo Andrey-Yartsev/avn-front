@@ -140,7 +140,26 @@
   + .lds-dual-ring.inline {
     margin-left: 10px;
   }
+
+  &_delete {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: $secondary-color;
+
+    &:after {
+      content: "\E600";
+      @include icon-font;
+      font-size: 18px;
+      @include position-center;
+    }
+  }
 }
+
 button {
   font: inherit;
 

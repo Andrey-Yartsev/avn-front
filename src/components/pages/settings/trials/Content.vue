@@ -3,10 +3,8 @@
     <h1 class="form-title" v-if="$mq === 'desktop'">
       Free Trials
     </h1>
-    <div class="shadow-block">
-      <div class="container">
-        <UserSearchField />
-      </div>
+    <div class="trialsSectionCollection">
+      <UserSearchField />
     </div>
   </div>
 </template>

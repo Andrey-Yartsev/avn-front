@@ -285,3 +285,12 @@
   transform: translate(0, -50%);
   color: $secondary-color;
 }
+
+.buttons-row {
+  padding-bottom: 15px;
+  text-align: center;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-bottom: 30px;
+  }
+}

@@ -13,8 +13,20 @@
             <span class="user-login reset-ml">{{ v.username }}</span>
           </a>
         </div>
-        <div class="table__cell">
-          <button type="button" class="delete" @click="remove(v)"></button>
+        <div
+          class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
+        >
+          <time datetime="">20 Mar</time>
+        </div>
+        <div
+          class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
+        >
+          <button type="button" class="btn-unblock"></button>
+        </div>
+        <div
+          class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
+        >
+          <button type="button" class="btn_delete" @click="remove(v)"></button>
         </div>
       </div>
     </div>
