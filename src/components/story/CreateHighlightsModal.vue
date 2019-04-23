@@ -85,10 +85,10 @@
                 </div>
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
-                  v-if="step === 1 && stories.length"
+                  v-if="step === 1"
                   @ps-scroll-y="scrollFunction"
                 >
-                  <div class="explore-wrapper highlights">
+                  <div class="explore-wrapper highlights" v-if="stories.length">
                     <div
                       v-for="story in stories"
                       :key="story.id"
