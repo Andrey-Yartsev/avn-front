@@ -5,7 +5,11 @@
         class="chatCollectionContentWrapper chatCollectionContentWrapper_mob-height"
         v-if="!noMessages"
       >
-        <ContactList :chats="chats" :mode="mode" />
+        <ContactList
+          :chats="chats"
+          :mode="mode"
+          :class="{ 'bg-contacts': $mq === 'desktop' }"
+        />
       </div>
     </template>
 
