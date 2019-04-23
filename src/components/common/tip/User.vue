@@ -11,12 +11,13 @@
           type="text"
           pattern="\d{1,5}(?:\.\d{0,2})?"
           maxlength="8"
-          placeholder="Amount"
+          :placeholder="'Min: $' + limits.min + '  Max: $' + limits.max"
           v-model="amount"
         />
       </div>
     </div>
-    <button type="submit" class="btn" :disabled="!amount">Send funds</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn" :disabled="!isValid">Send funds</button>
   </form>
 </template>
 
@@ -41,6 +42,15 @@ export default {
   computed: {
     paymentComplete() {
       return this.$store.state.payment.pay.complete;
+    },
+    limits() {
+      return this.$store.state.init.data.payments.tipsLimit;
+    },
+    isValid() {
+      if (this.amount) {
+        return this.amount >= this.limits.min && this.amount <= this.limits.max;
+      }
+      return false;
     }
   },
   watch: {
