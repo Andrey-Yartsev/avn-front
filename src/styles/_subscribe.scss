@@ -154,9 +154,11 @@
     text-align: center;
     margin: 32px auto 0;
     max-width: 320px;
+    padding-bottom: 25px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding: 0 15px;
+      padding-left: 15px;
+      padding-right: 15px;
       margin-top: 36px;
     }
 
