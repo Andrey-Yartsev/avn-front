@@ -1615,7 +1615,7 @@
     flex-direction: column;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      min-height: calc(100% - 75px);
+      min-height: calc(100vh - 75px);
     }
 
     > div:not(.chatCollectionContent) {
@@ -1626,16 +1626,6 @@
         position: relative;
         display: flex;
         flex-direction: column;
-      }
-    }
-  }
-
-  &.special-site-header {
-
-    #content {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        min-height: 100vh;
       }
     }
   }
