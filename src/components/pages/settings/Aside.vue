@@ -188,6 +188,10 @@ export default {
         name: "notifications",
         title: "Notifications"
       });
+      items.push({
+        name: "trials",
+        title: "Free Trials"
+      });
       return items;
     },
     showAvatarSave() {
