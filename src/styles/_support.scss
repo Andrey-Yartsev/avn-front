@@ -926,3 +926,9 @@ form.support-search-form {
   font-weight: 300;
   color: $primary-color;
 }
+
+.support-page {
+  .content-wrapper {
+    min-height: 100px;
+  }
+}
