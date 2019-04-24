@@ -23,6 +23,11 @@
 
 <script>
 const isFloat = function(number) {
+  number = parseFloat(number);
+  console.log(number);
+  if (Number.isInteger(number)) {
+    return true;
+  }
   return number % 1 != 0;
 };
 
@@ -77,7 +82,7 @@ export default {
     send() {
       this.$store.dispatch("tip/openPaymentModal", {
         user: this.user,
-        amount: this.amount,
+        amount: parseFloat(this.amount),
         tipId: this.tipId
       });
     },
