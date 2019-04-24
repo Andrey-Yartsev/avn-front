@@ -1039,13 +1039,12 @@
     align-items: center;
     align-content: center;
 
-    .time {
+    .timestamp {
       white-space: nowrap;
       text-align: right;
       margin-right: 0;
       margin-left: auto;
       padding-left: 5px;
-      font-size: 13px;
     }
 
     .user-login {
@@ -1071,8 +1070,7 @@
   }
 
   .username,
-  .message,
-  .time {
+  .message {
     color: $main-color;
     opacity: 0.5;
   }
@@ -1153,7 +1151,7 @@
       opacity: 1;
     }
 
-    .time {
+    .timestamp {
       color: $secondary-color;
       opacity: 1;
     }
