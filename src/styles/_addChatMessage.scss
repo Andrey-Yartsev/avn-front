@@ -48,24 +48,21 @@
 
   .add-media-input {
     color: $secondary-color;
-    transition: color 0.3s ease;
-    background-color: transparent;
-    border: none;
     margin: 0 0.6em 0 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1em;
     }
 
-    &:hover {
-      color: $secondary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
 
     &:before {
-      @include icon-font;
-      font-size: 24px;
       content: "\E61A";
-      display: block;
     }
 
     .disabled & {
@@ -81,36 +78,22 @@
     }
   }
   .submit {
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
     color: $secondary-color;
-    transition: color 0.3s ease;
-    background-color: transparent;
-    border: none;
 
-    &:hover {
-      color: $secondary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
+
     &:before {
-      display: inline-block;
-      @include icon-font;
-      font-size: 24px;
-      margin: 0;
-      width: 1.1em;
-      font-weight: 400;
       content: "\E62D";
     }
   }
   .getPaid {
     color: $main-color;
     opacity: 0.3;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
-    transition: color 0.3s ease, opacity 0.3s ease;
-    background-color: transparent;
-    border: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 15px;
@@ -125,12 +108,6 @@
       color: $primary-color;
     }
     &:before {
-      display: inline-block;
-      @include icon-font;
-      font-size: 24px;
-      margin: 0;
-      width: 1.1em;
-      font-weight: 400;
       content: "\E62E";
     }
   }
@@ -160,12 +137,6 @@
     &.has-price {
       padding-top: 26px;
     }
-
-    &.hidden {
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: block !important;
-      }
-    }
   }
 
   .getPaidForm {
@@ -188,6 +159,22 @@
   }
 
   .btn-el {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.3s ease, opacity 0.3s ease;
+
+    &:before {
+      display: inline-block;
+      @include icon-font;
+      font-size: 24px;
+      margin: 0;
+      width: 1.1em;
+      font-weight: 400;
+    }
+
     &.disabled,
     &[disabled] {
       opacity: 1;
