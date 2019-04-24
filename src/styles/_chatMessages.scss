@@ -259,10 +259,6 @@
       margin-bottom: 0;
     }
 
-    .message-time {
-      display: block;
-    }
-
     .chatMessageWrapper {
       margin: 0.25em 0;
     }
@@ -274,43 +270,49 @@
 
   .messageWrapper {
     position: relative;
+  }
 
-    .message {
-      padding: 0.5em 1em;
-      margin-bottom: 1px;
-      -ms-word-break: break-all;
-      word-break: break-all;
-      word-break: break-word;
-      word-wrap: break-word;
-      hyphens: auto;
-      text-align: left;
+  .message {
+    padding: 0.5em 1em;
+    margin-bottom: 1px;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    text-align: left;
+    position: relative;
+    display: inline-block;
 
-      &:not(:last-child) {
-        border-bottom-left-radius: 0;
-      }
+    &:empty {
+      display: none;
+    }
+
+    &:not(:last-child) {
+      border-bottom-left-radius: 0;
     }
   }
 
   &.notAuthorMessage {
 
-    .messageWrapper {
+    .message {
+      background-color: rgba(124, 139, 150, 0.2);
+      border-radius: 0 20px 20px 0;
 
-      .message {
-        background-color: rgba(124, 139, 150, 0.2);
-        border-radius: 0 20px 20px 0;
+      + .media {
 
-        + .media {
+        .media-item {
 
-          .media-item {
-
-            img,
-            video,
-            .video-placeholder {
-              border-radius: 0 20px 20px 0;
-            }
+          img,
+          video,
+          .video-placeholder {
+            border-radius: 0 20px 20px 0;
           }
         }
       }
+    }
+
+    .messageWrapper {
 
       .media {
 
@@ -356,11 +358,8 @@
 
     &.firstMessageInGroup {
 
-      .messageWrapper {
-
-        .message {
-          border-top-left-radius: 20px;
-        }
+      .message {
+        border-top-left-radius: 20px;
       }
     }
 
@@ -380,11 +379,11 @@
       }
     }
 
-    .avatar {
-      opacity: 0;
-      pointer-events: none;
-      margin-top: auto;
-    }
+    //.avatar {
+    //  opacity: 0;
+    //  pointer-events: none;
+    //  margin-top: auto;
+    //}
   }
 
   &.authorMessage {
@@ -392,33 +391,33 @@
     margin-left: auto;
     margin-right: 0;
 
+    .message {
+      color: white;
+      background-color: $primary-color;
+      border-radius: 20px 0 0 20px;
+
+      &:before {
+        color: var(--primary-color);
+      }
+
+      + .media {
+
+        .media-item {
+          justify-content: flex-end;
+
+          img,
+          video,
+          .video-placeholder {
+            border-radius: 20px 0 0 20px;
+          }
+        }
+      }
+    }
+
     .messageWrapper {
 
       &.lockedMessage {
         opacity: 0.5;
-      }
-
-      .message {
-        color: white;
-        background-color: $primary-color;
-        border-radius: 20px 0 0 20px;
-
-        &:before {
-          color: var(--primary-color);
-        }
-
-        + .media {
-
-          .media-item {
-            justify-content: flex-end;
-
-            img,
-            video,
-            .video-placeholder {
-              border-radius: 20px 0 0 20px;
-            }
-          }
-        }
       }
 
       .media {
@@ -435,10 +434,9 @@
     }
 
     &.firstMessageInGroup {
-      .messageWrapper {
-        .message {
-          border-radius: 20px 20px 0 20px;
-        }
+
+      .message {
+        border-top-right-radius: 20px;
       }
     }
 
@@ -482,23 +480,15 @@
 
 .messageWrapper {
 
-  .message {
-    position: relative;
-    display: inline-block;
-
-    &:empty {
-      display: none;
-    }
-  }
-
   .video-placeholder {
     overflow: hidden;
   }
 
   &.lockedMessage {
-    .message {
-      color: $secondary-color;
-    }
+
+    //.message {
+    //  color: $secondary-color;
+    //}
 
     &.messageTypeText {
       .message {
