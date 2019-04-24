@@ -64,6 +64,7 @@
         <template v-if="!delayedPost && isAuth() && post.canFavorite">
           <Actions
             :post="post"
+            :showTips="showTip"
             v-on:postShowCommentForm="clickOnCommentForm"
             v-on:postLike="likePost"
             @toggleTip="showTip = !showTip"

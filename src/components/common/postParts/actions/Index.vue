@@ -7,6 +7,7 @@
     >
     <span
       class="comments actions__btn"
+      :class="{ 'clickable-state': showTips }"
       @click="postShowCommentForm"
       v-if="post.canComment"
       >{{ post.commentsCount }}</span
@@ -14,7 +15,7 @@
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
+      <span class="tips actions__btn" @click="$emit('toggleTip')" />
     </template>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
@@ -39,6 +40,10 @@ export default {
     openModal: {
       type: Function,
       default: () => {}
+    },
+    showTips: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
