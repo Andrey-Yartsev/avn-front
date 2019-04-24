@@ -14,6 +14,12 @@ import "unfetch/polyfill";
 import "url-search-params-polyfill";
 import "@/iconfont";
 
+import VTooltip from "v-tooltip";
+
+Vue.use(VTooltip, {
+  autoHide: true
+});
+
 // uncomment to see the logs
 // import Logger from "js-logger";
 // Logger.useDefaults();

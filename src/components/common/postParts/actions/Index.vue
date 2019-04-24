@@ -3,18 +3,24 @@
     <span
       :class="[{ active: post.isFavorite }, 'likes actions__btn']"
       @click="postLike"
+      v-tooltip="'Like'"
       >{{ post.favoritesCount }}</span
     >
     <span
       class="comments actions__btn"
       @click="postShowCommentForm"
       v-if="post.canComment"
+      v-tooltip="'Comments'"
       >{{ post.commentsCount }}</span
     >
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="tips actions__btn" @click="$emit('toggleTip')"></span>
+      <span
+        class="tips actions__btn"
+        @click="$emit('toggleTip')"
+        v-tooltip="'Fund'"
+      ></span>
     </template>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
