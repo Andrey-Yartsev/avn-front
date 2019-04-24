@@ -28,11 +28,12 @@
           </div>
         </div>
 
-        <div
-          class="border-top shadow-block loader-container"
-          v-if="transactionsLoading"
-        >
-          <Loader :fullscreen="false" text="" class="transparent small" />
+        <div class="shadow-block loader-container" v-if="transactionsLoading">
+          <Loader
+            :fullscreen="false"
+            text=""
+            class="transparent small no-text"
+          />
         </div>
 
         <div class="shadow-block no-padding" v-else>
