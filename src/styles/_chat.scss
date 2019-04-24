@@ -172,10 +172,6 @@
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     flex-direction: column;
   }
-
-  .verified-user {
-    margin-left: 7px;
-  }
 }
 
 .chatCollectionContent {
