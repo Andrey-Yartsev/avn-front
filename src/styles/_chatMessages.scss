@@ -373,17 +373,10 @@
     &.withTime {
 
       .avatar {
-        opacity: 1;
-        pointer-events: visible;
         margin-bottom: 16px;
+        margin-top: auto;
       }
     }
-
-    //.avatar {
-    //  opacity: 0;
-    //  pointer-events: none;
-    //  margin-top: auto;
-    //}
   }
 
   &.authorMessage {
