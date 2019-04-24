@@ -492,11 +492,6 @@
     font-size: 24px;
     transition: opacity 0.3s ease;
 
-    &[disabled] {
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
     &:before {
       content: "\E62D";
       @include icon-font;
