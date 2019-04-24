@@ -1583,6 +1583,16 @@
     }
   }
 
+  &.special-site-header {
+
+    #content {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        min-height: 100vh;
+      }
+    }
+  }
+
   .site-footer {
     flex: 0 0 auto;
     width: 100%;
@@ -1612,6 +1622,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: calc(100vh - 75px);
     }
+
 
     > div:not(.chatCollectionContent) {
 
