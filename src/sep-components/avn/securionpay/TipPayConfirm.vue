@@ -52,7 +52,7 @@ export default {
         this.$store.commit("tip/funded", data);
         this.close();
       };
-      const amount = parseInt(this.data.amount.replace(/\$/, ""));
+      const amount = this.data.amount;
       this._pay(
         {
           paymentType: "tip",
