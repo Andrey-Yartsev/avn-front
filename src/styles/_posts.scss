@@ -335,13 +335,16 @@
   .right-col {
 
     .comments {
-      cursor: auto;
 
-      &:hover {
+      &:not(.clickable-state) {
+        cursor: auto;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          opacity: .3;
-          color: $main-color;
+        &:hover {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            opacity: .3;
+            color: $main-color;
+          }
         }
       }
     }
