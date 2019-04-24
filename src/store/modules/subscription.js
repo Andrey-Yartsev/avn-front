@@ -82,8 +82,8 @@ const actions = {
           },
           { root: true }
         );
-        commit("profile/home/resetPosts", { root: true });
-        dispatch("profile/home/getPosts", { root: true });
+        commit("profile/home/resetPosts", null, { root: true });
+        dispatch("profile/home/getPosts", null, { root: true });
       }
     }
     commit(
