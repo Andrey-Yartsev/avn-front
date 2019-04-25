@@ -227,10 +227,10 @@
           class="story-details-info"
           v-if="isOwner(author.id) && !isCollections"
         >
-          <a
-            href="#"
+          <span
             class="btn-story-details"
             @click.prevent="saveToHighlights"
+            v-tooltip="'Add to highlights'"
           />
           <div
             class="story-viewer story-viewer_clickable"

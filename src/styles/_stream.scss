@@ -554,34 +554,6 @@
   }
 }
 
-.stream-comment-btn {
-
-  &:before {
-    content: "\E617";
-  }
-}
-
-.stream-like-btn {
-
-  &:before {
-    content: "\E616";
-  }
-}
-
-.stream-tip-btn {
-
-  &:before {
-    content: "\E618";
-  }
-}
-
-.stream-online-count {
-
-  &:before {
-    content: "\E633";
-  }
-}
-
 #stream {
   position: fixed;
   z-index: 99;

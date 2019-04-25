@@ -85,22 +85,23 @@
           class="stream-btns stream-viewer-btns"
           v-if="connected && !isMyStream"
         >
+          <span role="button" class="stream-btn" @click="openCommentForm">
+            <span class="btn-icon comments" v-tooltip="'Comments'"></span>
+          </span>
+          <span class="stream-btn" @click="throttledLike">
+            <span class="btn-icon likes" v-tooltip="'Likes'"></span>
+          </span>
           <span
-            role="button"
-            class="stream-btn stream-comment-btn"
-            @click="openCommentForm"
-          ></span>
-          <span
-            class="stream-btn stream-like-btn"
-            @click="throttledLike"
-          ></span>
-          <span
-            class="stream-btn stream-tip-btn"
+            class="stream-btn"
             type="button"
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
-          ></span>
-          <span class="stream-online-count" v-if="false"></span>
+          >
+            <span class="btn-icon tips" v-tooltip="'Funds'"></span>
+          </span>
+          <span class="stream-online-count" v-if="false">
+            <span class="looking btn-icon" v-tooltip="'Viewers'"></span>
+          </span>
         </div>
       </div>
     </template>
