@@ -252,7 +252,7 @@
           @click="openTip"
           v-if="!isOwner(author.id) && author.canEarn"
           type="button"
-          class="btn-tip"
+          class="btn-tip tips"
         />
       </div>
       <button type="button" class="close" @click="close"></button>

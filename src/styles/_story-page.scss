@@ -237,9 +237,14 @@
       font-size: 24px;
       transition: opacity 0.3s ease;
       opacity: 0.7;
+      height: auto;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 18px 10px;
+      }
+
+      &:before {
+        margin: auto;
       }
 
       &:hover,
@@ -264,10 +269,10 @@
 
   .btn-tip {
 
-    &:before {
-      content: "\E618";
-      @include icon-font;
-    }
+    //&:before {
+    //  content: "\E618";
+    //  @include icon-font;
+    //}
   }
 
   .btn-save-highlights {
