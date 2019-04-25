@@ -19,9 +19,14 @@ export default {
       body: JSON.stringify(data)
     });
   },
-  deleteStream(streamId) {
+  deleteStream(streamId = "") {
     return tokenRequest(`streams/${streamId}`, {
       method: "DELETE"
+    });
+  },
+  checkActive() {
+    return tokenRequest(`streams/has-active`, {
+      method: "GET"
     });
   },
   saveStream(streamId, haveToSaveComments) {

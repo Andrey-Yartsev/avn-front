@@ -8,12 +8,12 @@
         <div class="popup-alert__title">
           {{ title }}
         </div>
-        <div class="popup-alert__body">
+        <div class="popup-alert__body" v-if="!hideQuestion">
           Are you sure?
         </div>
         <div class="popup-alert__footer">
           <button class="btn" @click.prevent="yes">Confirm</button>
-          <button class="btn alt" @click.prevent="close">Cancel</button>
+          <button class="btn alt" @click.prevent="no">Cancel</button>
         </div>
       </div>
     </div>
@@ -33,14 +33,26 @@ export default {
     title() {
       return this.$store.state.modal.confirm.data.title;
     },
+    hideQuestion() {
+      return this.$store.state.modal.confirm.data.hideQuestion;
+    },
     success() {
       return this.$store.state.modal.confirm.data.success;
+    },
+    abort() {
+      return this.$store.state.modal.confirm.data.abort;
     }
   },
 
   methods: {
     yes() {
       this.success();
+      this.close();
+    },
+    no() {
+      if (typeof this.abort === "function") {
+        this.abort();
+      }
       this.close();
     },
     close() {

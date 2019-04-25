@@ -194,7 +194,9 @@
         <div id="stream-timer" v-if="!isStopped && !startingStream">
           {{ time }}
         </div>
-        <div class="stream-online-label">live</div>
+        <div class="stream-online-label" v-if="isStarted && !startingStream">
+          live
+        </div>
         <div class="form-stream">
           <div class="stream-comments-wrapper" v-if="shownComments.length">
             <div
@@ -251,7 +253,7 @@
         />
       </div>
       <div class="mediasBottom" v-if="isReadyToStart">
-        <button class="btn alt lg change-devices" @click="startStream">
+        <button class="btn alt lg change-devices" @click="tryToStartStream">
           Start live video
         </button>
       </div>
@@ -450,11 +452,38 @@ export default {
       }
       this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
     },
-    startStream() {
-      this.isReadyToStart = false;
-      this.isStarted = true;
+    tryToStartStream() {
       this.startingStream = true;
-      Streams.startStream();
+      this.isReadyToStart = false;
+
+      StreamApi.checkActive()
+        .then(res => res.json())
+        .then(({ hasActive }) => {
+          if (hasActive) {
+            this.$store.dispatch("modal/show", {
+              name: "confirm",
+              data: {
+                title:
+                  "You have another stream started. Do you want to stop it?",
+                success: () => {
+                  this.killActiveStreamAndStart();
+                },
+                abort: () => {
+                  this.$router.push("/");
+                },
+                hideQuestion: true
+              }
+            });
+          } else {
+            this.isStarted = true;
+            Streams.startStream();
+          }
+        });
+    },
+    killActiveStreamAndStart() {
+      return StreamApi.deleteStream().then(() => {
+        this.tryToStartStream();
+      });
     },
     stopStream() {
       this.requestStreamStat();
@@ -655,9 +684,13 @@ export default {
 
           this.finishing = true;
 
-          StreamApi.deleteStream(this.startedStreamId).then(() => {
-            this.finishing = false;
-          });
+          StreamApi.deleteStream(this.startedStreamId)
+            .then(() => {
+              this.finishing = false;
+            })
+            .catch(() => {
+              this.finishing = false;
+            });
         }
 
         this.isReadyToStart = true;
