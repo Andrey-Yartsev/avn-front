@@ -490,11 +490,6 @@ button,
     }
   }
 
-  &:before {
-    content: "\E616";
-    @include icon-font;
-  }
-
   &.active {
     opacity: 1;
     color: $primary-color;
@@ -514,6 +509,24 @@ button,
     vertical-align: middle;
     font-weight: 400;
     margin-right: 5px;
+  }
+
+  &_size {
+
+    &-sm {
+      height: 19px;
+
+      &:before {
+        font-size: 19px;
+      }
+    }
+  }
+
+  &_reset-gap-r {
+
+    &:before {
+      margin-right: 0;
+    }
   }
 }
 

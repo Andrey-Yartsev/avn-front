@@ -47,7 +47,9 @@
             isLiked: comment.isLiked
           })
         "
-      ></button>
+      >
+       <span class="likes likes_size-sm likes_reset-gap-r"></span>
+      </button>
     </div>
   </div>
 </template>
