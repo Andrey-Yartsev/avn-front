@@ -311,6 +311,25 @@
       z-index: 0;
       border-radius: 5px;
     }
+
+    .popup &,
+    .popup-addPost & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
+    .feed .addPost:not(.round-borders) &,
+    .popup-container_hfluid &,
+    .hasScheduledPosts & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
   }
 
   > * {
