@@ -83,9 +83,9 @@ export default {
       return null;
     },
     maskedEmail() {
-      const regex = /(?<=.)[^@\n](?=[^@\n]*?@)|(?:(?<=@.)|(?!^)\\G(?=[^@\n]*$)).(?=.*\.)/gm;
-      const subst = `*`;
-      return this.email.replace(regex, subst);
+      // const regex = /(?<=.)[^@\n](?=[^@\n]*?@)|(?:(?<=@.)|(?!^)\\G(?=[^@\n]*$)).(?=.*\.)/gm;
+      // const subst = `*`;
+      return this.email; // .replace(regex, subst);
     }
   },
 
