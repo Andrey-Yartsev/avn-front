@@ -262,14 +262,6 @@
     }
   }
 
-  .btn-tip {
-
-    &:before {
-      content: "\E618";
-      @include icon-font;
-    }
-  }
-
   .btn-save-highlights {
 
     &:before {
@@ -309,6 +301,11 @@
 
   .lds-dual-ring {
     pointer-events: none;
+  }
+
+  .btn-icon {
+    margin-right: 0;
+    color: #fff;
   }
 }
 
