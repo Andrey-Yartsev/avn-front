@@ -83,9 +83,20 @@ export default {
       return null;
     },
     maskedEmail() {
-      // const regex = /(?<=.)[^@\n](?=[^@\n]*?@)|(?:(?<=@.)|(?!^)\\G(?=[^@\n]*$)).(?=.*\.)/gm;
-      // const subst = `*`;
-      return this.email; // .replace(regex, subst);
+      let maskid = "";
+      const myemailId = this.email;
+      const prefix = myemailId.substring(0, myemailId.lastIndexOf("@"));
+      const postfix = myemailId.substring(myemailId.lastIndexOf("@"));
+
+      for (let i = 0; i < prefix.length; i++) {
+        if (i == 0 || i == prefix.length - 1) {
+          maskid = maskid + prefix[i].toString();
+        } else {
+          maskid = maskid + "*";
+        }
+      }
+
+      return maskid + postfix;
     }
   },
 
