@@ -286,6 +286,7 @@ import userMixin from "@/mixins/user";
 import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
+import logoBase64 from "./logo";
 
 export default {
   name: "Stream",
@@ -665,6 +666,15 @@ export default {
               token
             );
             Streams.getStreamAsClient();
+            Streams.sendCustomMessage({
+              msgtype: "data.custom",
+              to: ["transcoder"],
+              data: {
+                type: "watermark",
+                data: this.user.publicUrl,
+                logo: logoBase64
+              }
+            });
             this.streamStartTime = new Date().getTime() / 1000;
           });
       },
