@@ -2,9 +2,13 @@
   <div class="profile-images__inner" :style="{ fontSize: fontSize }">
     <router-link
       :to="`/stories/${profile.id}`"
-      v-if="profile.hasNotViewedStory && !showLiveLabel"
+      v-if="(profile.hasNotViewedStory || profile.hasStory) && !showLiveLabel"
     >
-      <span class="avatar with-story" :style="{ fontSize: fontSize }">
+      <span
+        class="avatar"
+        :class="{ 'with-story': profile.hasNotViewedStory }"
+        :style="{ fontSize: fontSize }"
+      >
         <span class="avatar__img">
           <img :src="profile.avatar" v-if="profile.avatar" />
         </span>
