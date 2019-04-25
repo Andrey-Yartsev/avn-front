@@ -98,7 +98,7 @@
 
       <button
         @click="sendMessage"
-        class="submit btn-el"
+        class="btn-send btn-send_default"
         :disabled="!canSend || disable"
       ></button>
     </div>

@@ -479,24 +479,6 @@
     padding-left: 17px;
     border: 1px solid rgba(255, 255, 255, .2);
   }
-
-  .stream-comment-send-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 10px;
-    height: 100%;
-    background: none;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    transition: opacity 0.3s ease;
-
-    &:before {
-      content: "\E62D";
-      @include icon-font;
-    }
-  }
 }
 
 .stream-btn {

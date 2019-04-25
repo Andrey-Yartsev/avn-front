@@ -77,20 +77,7 @@
       margin-right: 1.1em;
     }
   }
-  .submit {
-    color: $secondary-color;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $secondary-color-darken;
-      }
-    }
-
-    &:before {
-      content: "\E62D";
-    }
-  }
   .getPaid {
     color: $main-color;
     opacity: 0.3;

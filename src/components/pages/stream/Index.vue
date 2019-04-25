@@ -227,7 +227,7 @@
             <button
               @click="sendComment"
               type="button"
-              class="stream-comment-send-btn"
+              class="btn-send btn-send_inside-field"
               :disabled="!newComment.length"
             ></button>
           </form>

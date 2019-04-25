@@ -605,3 +605,48 @@ button,
 .btn-edit-bank {
   color: $secondary-color;
 }
+
+.btn-send {
+  background-color: transparent;
+  border: none;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease, opacity 0.3s ease;
+
+  &_default {
+    color: $secondary-color;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
+    }
+
+    &.disabled,
+    &[disabled] {
+      opacity: 1;
+      pointer-events: none;
+      color: rgba(124, 139, 150, 0.18);
+    }
+  }
+
+  &_inside-field {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 10px;
+    height: 100%;
+    color: #fff;
+  }
+
+  &:before {
+    content: "\E62D";
+    @include icon-font;
+    font-size: 24px;
+    margin: 0;
+    width: 1.1em;
+    font-weight: 400;
+  }
+}
