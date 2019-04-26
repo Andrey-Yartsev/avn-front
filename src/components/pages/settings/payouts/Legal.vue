@@ -104,7 +104,9 @@
 
                 <div class="photo-label-wrapper">
                   <div class="photo-label">
-                    <label for="photo" class="btn lg photo-btn">Upload</label>
+                    <label for="photo" class="btn border photo-btn"
+                      >Upload</label
+                    >
                   </div>
                 </div>
 

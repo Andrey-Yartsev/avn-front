@@ -78,6 +78,10 @@
 
     &:not(.alt) {
       color: $primary-color;
+      
+      &:hover {
+        color: #fff;
+      }
     }
 
     &.alt {
