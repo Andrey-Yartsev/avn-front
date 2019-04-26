@@ -48,8 +48,8 @@
             <div
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_date"
             >
-              <span class="table-value__date">{{ dt1(v.createdAt) }}</span>
-              <span class="table-value__time">{{ dt2(v.createdAt) }}</span>
+              <span class="table-value__date">{{ dt1(v.createAt) }}</span>
+              <span class="table-value__time">{{ dt2(v.createAt) }}</span>
             </div>
             <div
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
