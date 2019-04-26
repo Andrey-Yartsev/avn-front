@@ -403,10 +403,16 @@
   opacity: 0.5;
   display: block;
   cursor: pointer;
-  margin: 0 15px 8px;
+  margin: 8px 15px 0;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
 
   .postPage & {
     font-size: 13px;
+    margin-top: 0;
   }
 
   & + .comments-list_in-col {
