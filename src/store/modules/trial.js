@@ -53,6 +53,11 @@ createRequestAction({
   options: {
     method: "GET"
   },
+  paramsToOptions: function(params, options) {
+    options.query = {};
+    options.query.limit = 100;
+    return options;
+  },
   resultConvert: r => {
     return r.list;
   }

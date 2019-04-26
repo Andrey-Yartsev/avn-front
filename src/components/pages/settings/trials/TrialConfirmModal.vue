@@ -102,9 +102,9 @@ export default {
     } catch (err) {
       return;
     }
-    this.sendTrialStatus("pending").catch(() => {
-      this.close();
-    });
+    // this.sendTrialStatus("pending").catch(() => {
+    //   this.close();
+    // });
     BrowserStore.remove("trialCode");
   }
 };

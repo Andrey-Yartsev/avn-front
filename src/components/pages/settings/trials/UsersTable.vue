@@ -93,7 +93,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("trial/getModels");
+    this.$store.dispatch("trial/getModels", {});
   }
 };
 </script>
