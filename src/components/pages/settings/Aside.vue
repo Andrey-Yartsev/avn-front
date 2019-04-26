@@ -188,6 +188,12 @@ export default {
         name: "notifications",
         title: "Notifications"
       });
+      if (this.$store.state.auth.user.subscribePrice > 0) {
+        items.push({
+          name: "trials",
+          title: "Free Trials"
+        });
+      }
       return items;
     },
     showAvatarSave() {

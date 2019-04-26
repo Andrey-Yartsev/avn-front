@@ -84,6 +84,10 @@ const state = {
     show: false,
     data: {}
   },
+  trialConfirm: {
+    show: false,
+    data: {}
+  },
   image: {
     show: false,
     data: {}

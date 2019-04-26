@@ -35,6 +35,7 @@ const storeRequest = (
       "no-token": request
     };
     const Request = requests[requestType];
+
     Request(apiPath, options)
       .then(async response => {
         if (response.status === 401) {
@@ -52,6 +53,7 @@ const storeRequest = (
           commit(prefix + "Requested");
         } else {
           const r = await response.json();
+
           if (localError) {
             commit(prefix + "Error", r.error);
           } else {
@@ -59,6 +61,7 @@ const storeRequest = (
           }
           commit(prefix + "Success", false);
           commit(prefix + "Requested");
+
           if (response.status !== 400 || throw400) {
             reject(r.error);
           }

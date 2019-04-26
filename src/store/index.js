@@ -44,6 +44,7 @@ import postQueue from "@/store/modules/postQueue";
 import referrals from "@/store/modules/referrals";
 import countries from "@/store/modules/countries";
 import states from "@/store/modules/states";
+import trial from "@/store/modules/trial";
 
 Vue.use(Vuex);
 
@@ -93,7 +94,8 @@ const store = new Vuex.Store({
     referrals,
     countries,
     states,
-    topModels
+    topModels,
+    trial
   }
 });
 
