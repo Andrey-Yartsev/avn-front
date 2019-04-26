@@ -14,7 +14,7 @@
           </p>
           <button
             type="button"
-            class="btn border alt btn-copy-url"
+            class="btn border alt btn-copy-url btn-copy-url_reset-mt"
             @click="copyToClipboard"
           >
             Copy<span class="hidden-mobile"> link</span>

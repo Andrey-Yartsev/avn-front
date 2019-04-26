@@ -78,6 +78,13 @@
   &.copied {
     animation: none;
   }
+
+  &_reset-mt {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 0;
+    }
+  }
 }
 
 @keyframes copy-url {
