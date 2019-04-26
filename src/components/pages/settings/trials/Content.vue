@@ -5,7 +5,9 @@
     </h1>
     <div class="trialsSectionCollection">
       <div class="border-top shadow-block referrals-link" v-if="link">
-        <a :href="link">{{ link }}</a>
+        <div class="referrals-url">
+          <a :href="link">{{ link }}</a>
+        </div>
         <div class="referral-desc">
           <p class="subtext">
             Copy this link to send to the person you want to provide a trial
