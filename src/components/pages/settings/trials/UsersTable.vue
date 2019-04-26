@@ -6,34 +6,35 @@
     >
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
         <div class="inner">
-          <span class="semi-transparent"> Trial Subscribers<br /><br /> </span>
+          <span class="semi-transparent">Trial Subscribers</span>
+        </div>
+        <div class="table-header">
+          <div class="user table__cell table__cell_user">
+            User
+          </div>
+          <div
+            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_date"
+          >
+            Start
+          </div>
+          <div
+            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
+          >
+            Days left
+          </div>
+          <div
+            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
+          >
+            State
+          </div>
         </div>
       </div>
     </div>
     <div class="shadow-block no-padding">
       <div class="table-wrapper" v-if="items && items.length">
         <div class="table">
-          <div class="item">
-            <div class="user table__cell">
-              User
-            </div>
-            <div class="table__cell">
-              Start
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
-            >
-              Days left
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
-            >
-              State
-            </div>
-          </div>
-
           <div class="item" v-for="v in items" :key="v.id">
-            <div class="table__cell">
+            <div class="user table__cell table__cell_user">
               <router-link :to="'/' + v.user.username" class="userview-block">
                 <span class="avatar avatar_sm">
                   <span class="avatar__img">
@@ -44,8 +45,11 @@
                 <span class="user-login reset-ml">{{ v.user.username }}</span>
               </router-link>
             </div>
-            <div class="table__cell">
-              {{ dt(v.createdAt) }}
+            <div
+              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_date"
+            >
+              <span class="table-value__date">{{ dt1(v.createdAt) }}</span>
+              <span class="table-value__time">{{ dt2(v.createdAt) }}</span>
             </div>
             <div
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_selected"
@@ -90,6 +94,12 @@ export default {
     },
     dt(date) {
       return moment(date).format("MMM DD, hh:mm");
+    },
+    dt1(date) {
+      return moment(date).format("MMM DD");
+    },
+    dt2(date) {
+      return moment(date).format("hh:mm");
     }
   },
   created() {

@@ -63,6 +63,16 @@
     }
   }
 
+  &-header {
+
+    .ReferralsBlockCollectionView & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        justify-content: space-between;
+      }
+    }
+  }
+
   > * {
     border-bottom: 1px solid rgba($gray, 0.2);
 
@@ -226,10 +236,40 @@
     &__cell {
       flex: 1;
 
-      &_selected,
+      &_user {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          min-width: 130px;
+        }
+      }
+
+      &_date {
+        flex-wrap: wrap;
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 13px;
+        }
+      }
+
+      &_selected {
+        flex: 0 1 76px;
+        max-width: 76px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 0 1 116px;
+          max-width: 116px;
+        }
+      }
+
+      &_date,
       &_status {
-        flex: 0 1 116px;
-        max-width: 116px;
+        flex: 0 1 86px;
+        max-width: 86px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 0 1 116px;
+          max-width: 116px;
+        }
       }
 
       &_remove {
@@ -609,6 +649,25 @@
     }
   }
 }
+
+.table-value {
+  
+  &__date {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: block;
+      flex: 0 0 100%;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 8px;
+    }
+  }
+  
+  &__time {
+    
+  }
+}  
 
 .userview-block {
   position: relative;
