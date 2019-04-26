@@ -36,10 +36,7 @@
     }
 
     &:hover {
-
-      @include media-breakpoint-down($desktop-breakpoint) {
-        color: $main-color;
-      }
+      color: $main-color;
     }
 
     .value {
@@ -83,24 +80,18 @@
           opacity: 1;
         }
         &:after {
-          border-left-color: $main-color;
+          color: $main-color;
         }
       }
     }
     &:after {
       position: absolute;
       top: 50%;
-      //border-left: 5px solid;
-      //border-top: 5px solid transparent;
-      //border-bottom: 5px solid transparent;
-      //transition: border-color 0.3s ease;
       transition: color .3s ease;
       transform: translate(0, -50%);
       @include icon-font;
       color: $secondary-color;
       font-size: 24px;
-      //border-left-color: $secondary-color;
-
     }
     &.empty {
       &:after {
