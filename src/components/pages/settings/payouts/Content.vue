@@ -8,7 +8,7 @@
         class="border-top shadow-block loader-container loader-container_payouts"
         v-if="loading"
       >
-        <Loader :fullscreen="false" text="" class="transparent small" />
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
       </div>
       <template v-else>
         <div class="PayoutsAccountView" v-if="!user.isWantEarn">
