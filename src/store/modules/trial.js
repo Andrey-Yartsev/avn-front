@@ -44,6 +44,66 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "getModels",
+  apiPath: "users/trials",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  resultConvert: r => {
+    return r.list;
+  }
+});
+
+createRequestAction({
+  prefix: "getModel",
+  apiPath: "users/{code}/trial",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{code}/, params);
+  },
+  localError: true
+});
+
+createRequestAction({
+  prefix: "getCode",
+  apiPath: "users/trial",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  resultKey: "code",
+  resultConvert: r => {
+    return r.trialCode;
+  }
+});
+
+createRequestAction({
+  prefix: "sendCodeStatus",
+  apiPath: "users/trial",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  },
+  throw400: true
+});
+
 export default {
   namespaced: true,
   state,
