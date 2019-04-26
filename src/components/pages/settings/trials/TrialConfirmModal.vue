@@ -74,13 +74,18 @@ export default {
   },
   methods: {
     async yes() {
-      await this.sendTrialStatus("approved");
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have subscribed successfully"
-      );
+      this.sendTrialStatus("approved")
+        .then(() => {
+          this.$store.dispatch(
+            "global/flashToast",
+            "You have subscribed successfully"
+          );
+          this.$router.push("/" + this.model.username);
+        })
+        .catch(() => {
+          //
+        });
       this.close();
-      this.$router.push("/" + this.model.username);
     },
     no() {
       this.sendTrialStatus("rejected");
