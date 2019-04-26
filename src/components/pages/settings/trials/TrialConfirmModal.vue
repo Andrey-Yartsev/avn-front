@@ -102,6 +102,7 @@ export default {
     }
   },
   async created() {
+    BrowserStore.remove("trialCode");
     try {
       await this.$store.dispatch("trial/getModel", this.code);
     } catch (err) {
@@ -110,7 +111,6 @@ export default {
     // this.sendTrialStatus("pending").catch(() => {
     //   this.close();
     // });
-    BrowserStore.remove("trialCode");
   }
 };
 </script>
