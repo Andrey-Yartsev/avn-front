@@ -102,7 +102,7 @@ export default {
 
   methods: {
     dt(date) {
-      return moment(date).format("MMM DD, hh:mm");
+      return moment(date).format("MMM DD, HH:mm");
     }
   },
 

@@ -92,14 +92,11 @@ export default {
     remove(user) {
       this.$emit("remove", user);
     },
-    dt(date) {
-      return moment(date).format("MMM DD, hh:mm");
-    },
     dt1(date) {
       return moment(date).format("MMM DD");
     },
     dt2(date) {
-      return moment(date).format("hh:mm");
+      return moment(date).format("HH:mm");
     }
   },
   created() {

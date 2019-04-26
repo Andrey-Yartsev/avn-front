@@ -82,13 +82,11 @@ export default {
           );
           this.$router.push("/" + this.model.username);
         })
-        .catch(() => {
-          //
-        });
+        .catch(() => {});
       this.close();
     },
     no() {
-      this.sendTrialStatus("rejected");
+      this.sendTrialStatus("rejected").catch(() => {});
       this.close();
     },
     close() {

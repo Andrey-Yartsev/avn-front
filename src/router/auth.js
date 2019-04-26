@@ -13,7 +13,9 @@ const saveTrialCode = () => {
   if (queryParams.trialCode) {
     trialLogger.info("save trial code to store:" + queryParams.trialCode);
     BrowserStore.set("trialCode", queryParams.trialCode);
+    return true;
   }
+  return false;
 };
 
 const Auth = {
@@ -46,7 +48,7 @@ const Auth = {
   },
 
   requireAuth(to, from, next) {
-    saveTrialCode();
+    const trialCodeExists = saveTrialCode();
 
     const params = queryString.parse(location.search);
     if (params.token && params.url) {
@@ -54,7 +56,6 @@ const Auth = {
       window.location = params.url;
       return;
     }
-
     if (Auth.loggedIn) {
       return next();
     }
@@ -64,7 +65,12 @@ const Auth = {
     }
     Store.dispatch("auth/setToken", token);
     Store.dispatch("profile/fetch")
-      .then(() => next())
+      .then(() => {
+        if (trialCodeExists) {
+          return next("/");
+        }
+        next();
+      })
       .catch(error => {
         if (error.code === 102) {
           Store.dispatch("auth/resetUser").then(() => {
