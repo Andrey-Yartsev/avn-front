@@ -88,6 +88,8 @@ import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmMo
 
 import Cookie from "@/utils/cookie";
 import BrowserStore from "store";
+import Logger from "js-logger";
+
 import rootClasses from "@/rootClasses";
 import postMessageHandler from "@/postMessage";
 import ws from "@/ws";
@@ -97,6 +99,7 @@ import wsp from "@/ws/wsp";
 // iterate
 
 const queryString = require("query-string");
+const trialLogger = Logger.get("trial");
 
 const getScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
@@ -310,27 +313,24 @@ export default {
     },
     initTrial() {
       setTimeout(() => {
-        const queryParams = queryString.parse(window.location.search);
-        if (queryParams.trialCode) {
-          BrowserStore.set("trialCode", queryParams.trialCode);
-          window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-          );
-        }
         if (this.user) {
+          trialLogger.info("user exists");
           const code = BrowserStore.get("trialCode");
           if (code) {
+            trialLogger.info("code exists: " + code);
             this.$store.dispatch("modal/show", {
               name: "trialConfirm",
               data: {
                 code
               }
             });
+          } else {
+            trialLogger.info("code does not exists in store");
           }
+        } else {
+          trialLogger.info("user does not exists");
         }
-      }, 100);
+      }, 1000);
     }
   },
   created() {
@@ -345,6 +345,8 @@ export default {
     }
 
     window.addEventListener("message", postMessageHandler);
+
+    this.initTrial();
   },
 
   beforeDestroy() {

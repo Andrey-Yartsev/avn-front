@@ -3,7 +3,18 @@
 import Store from "@/store";
 import BrowserStore from "store";
 import Twitter from "@/utils/twitter";
+import Logger from "js-logger";
+
+const trialLogger = Logger.get("trial");
 const queryString = require("query-string");
+
+const saveTrialCode = () => {
+  const queryParams = queryString.parse(window.location.search);
+  if (queryParams.trialCode) {
+    trialLogger.info("save trial code to store:" + queryParams.trialCode);
+    BrowserStore.set("trialCode", queryParams.trialCode);
+  }
+};
 
 const Auth = {
   get loggedIn() {
@@ -35,6 +46,8 @@ const Auth = {
   },
 
   requireAuth(to, from, next) {
+    saveTrialCode();
+
     const params = queryString.parse(location.search);
     if (params.token && params.url) {
       Store.dispatch("auth/setToken", params.token);
@@ -66,6 +79,8 @@ const Auth = {
   },
 
   requireNonAuth(to, from, next) {
+    saveTrialCode();
+
     const token = BrowserStore.get("token");
     if (token) {
       Store.dispatch("auth/setToken", token);

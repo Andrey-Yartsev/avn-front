@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close">
+  <Modal :onClose="no">
     <div
       class="popup-container popup-container_block popup-alert"
       slot="content"
@@ -32,8 +32,8 @@
             Do you wish to confirm trial subscription on {{ model.name }}
           </div>
           <div class="popup-alert__footer">
-            <button class="btn" @click.prevent="yes">Confirm</button>
-            <button class="btn alt" @click.prevent="no">Cancel</button>
+            <button class="btn" @click.prevent="yes">Accept</button>
+            <button class="btn alt" @click.prevent="no">Reject</button>
           </div>
         </template>
       </div>
@@ -80,6 +80,7 @@ export default {
         "You have subscribed successfully"
       );
       this.close();
+      this.$router.push("/" + this.model.username);
     },
     no() {
       this.sendTrialStatus("rejected");

@@ -4,7 +4,7 @@
       Free Trials
     </h1>
     <div class="trialsSectionCollection">
-      <div class="border-top shadow-block referrals-link">
+      <div class="border-top shadow-block referrals-link" v-if="link">
         <a :href="link">{{ link }}</a>
         <div class="referral-desc">
           <p class="subtext">
@@ -39,6 +39,9 @@ export default {
   },
   computed: {
     link() {
+      if (!this.$store.state.trial.code) {
+        return null;
+      }
       return (
         window.location.origin + "/?trialCode=" + this.$store.state.trial.code
       );
