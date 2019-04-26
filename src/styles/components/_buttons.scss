@@ -23,11 +23,15 @@
     color: #fff;
   }
   &.alt {
-    background: $primary-color;
-    color: #fff;
-    &:hover {
-      background: $primary-color-darken;
+
+    &:not(.border) {
+      background: $primary-color;
       color: #fff;
+
+      &:hover {
+        background: $primary-color-darken;
+        color: #fff;
+      }
     }
   }
   &.sm {
@@ -50,7 +54,6 @@
     width: 100%;
   }
   &.border {
-    color: $primary-color;
     background: none;
 
     &:before {
@@ -71,6 +74,10 @@
       &:before {
         color: $primary-color;
       }
+    }
+
+    &:not(.alt) {
+      color: $primary-color;
     }
 
     &.alt {
