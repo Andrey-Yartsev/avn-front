@@ -161,16 +161,15 @@
 
 .chatCollectionContent,
 .chatCreateNewView {
-  background-color: $white;
-  display: flex;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    background-color: transparent;
     height: 100%;
   }
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     flex-direction: column;
+    background-color: $white;
+    display: flex;
   }
 }
 
@@ -190,21 +189,42 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    background-color: $white;
-    box-shadow: 0 6px 30px rgba(#000, 0.15);
-    border-radius: 5px;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    height: calc(100vh - 100px);
-    width: 100%;
-    position: relative;
+  &.page-block {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: $white;
+      box-shadow: 0 6px 30px rgba(#000, 0.15);
+      border-radius: 5px;
+      max-width: 960px;
+      margin: 0 auto 20px;
+      height: calc(100vh - 100px);
+      width: 100%;
+      position: relative;
+    }
   }
 
   .popup & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex-direction: column;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: 100%;
+    }
+
+    .more-functions {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        margin-right: -6px;
+      }
+
+      &__dropdown {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: -22px;
+        }
+      }
     }
   }
 
@@ -553,7 +573,6 @@
     min-height: 60px;
     padding: 0;
     z-index: 5;
-    border-radius: 5px;
   }
 
   &:after {
