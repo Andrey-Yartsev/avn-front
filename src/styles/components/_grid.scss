@@ -1,6 +1,13 @@
 .container {
   @include container;
 
+  &_sm-width {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 640px;
+    }
+  }
+
   &_lg-width {
     max-width: 1300px;
   }

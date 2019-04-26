@@ -107,11 +107,4 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: calc(100vh - 75px);
   }
-
-  > .container {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: 640px;
-      width: 100%;
-    }
-  }
 }
