@@ -1,6 +1,7 @@
 <template>
   <div>
     <div
+      v-if="items && items.length"
       class="form-title table-header-title table-header-title_sticky border-top bg-gradient bg-gradient_pseudo"
     >
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
@@ -9,8 +10,8 @@
         </div>
       </div>
     </div>
-    <div class="shadow-block no-padding" v-if="items && items.length">
-      <div class="table-wrapper">
+    <div class="shadow-block no-padding">
+      <div class="table-wrapper" v-if="items && items.length">
         <div class="table">
           <div class="item">
             <div class="user table__cell">
