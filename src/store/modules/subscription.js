@@ -92,7 +92,7 @@ const actions = {
         userId: payment.user.id,
         data: {
           subscribedBy: true,
-          subscribedByExpire: false
+          subscribedByProgress: false
         }
       },
       { root: true }

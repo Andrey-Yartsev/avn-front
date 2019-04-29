@@ -21,7 +21,7 @@ export default data => {
       userId: payment.user.id,
       data: {
         subscribedBy: true,
-        subscribedByExpire: false
+        subscribedByProgress: false
       }
     });
   } else {
