@@ -51,6 +51,20 @@
       flex-direction: row;
     }
 
+    .lightbox-post & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        overflow: hidden;
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: auto 0;
+        flex: 0 0 auto;
+      }
+    }
+
     &:not(.has-media) {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -317,6 +331,8 @@
         @include media-breakpoint-down($mobile-breakpoint-dcrs) {
           flex: 0 0 auto;
           width: 100%;
+
+          display: none;
         }
       }
     }
@@ -396,6 +412,7 @@
   min-height: 62px;
   position: relative;
   pointer-events: none;
+  margin-bottom: 12px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-bottom: 0;
