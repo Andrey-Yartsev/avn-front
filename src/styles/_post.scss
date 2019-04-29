@@ -53,15 +53,18 @@
 
     .lightbox-post & {
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        overflow: hidden;
-        position: relative;
-        top: auto;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin: auto 0;
-        flex: 0 0 auto;
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          overflow: hidden;
+          position: relative;
+          top: auto;
+          bottom: auto;
+          left: auto;
+          right: auto;
+          margin: auto 0;
+          flex: 0 0 auto;
+        }
       }
     }
 
