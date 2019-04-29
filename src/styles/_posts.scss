@@ -465,6 +465,7 @@
       align-items: center;
       justify-content: center;
       min-width: 360px;
+      max-width: calc(100% - 360px);
     }
 
     .popup & {
@@ -865,13 +866,6 @@
         max-width: 360px;
       }
     }
-
-    + .comment-form-wrapper {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 360px;
-      }
-    }
   }
 
   .locked-picture {
@@ -901,7 +895,7 @@
       left: 15px;
       right: 10px;
       top: 0;
-      bottom: 0;
+      bottom: 10px;
       padding: 0;
     }
 
@@ -989,6 +983,7 @@
   &-body {
     margin-bottom: 3px;
     word-break: break-word;
+    padding-right: 20px;
 
     &:last-child {
       margin-bottom: 0;
@@ -1199,40 +1194,13 @@
 }
 
 .comment-form-wrapper {
-  background-color: $white;
-  z-index: 21;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding-top: 7px;
-  padding-bottom: 20px;
+  position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100%;
-    height: 54px;
-    position: absolute;
-    left: auto;
-    bottom: 46px;
+    min-height: 54px;
     padding-top: 15px;
     padding-bottom: 9px;
-    background-color: transparent;
-  }
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    box-shadow: 0 -3px 2px rgba(#000, 0.05);
-    position: fixed;
-    backface-visibility: hidden;
-    -webkit-overflow-scrolling: touch
-  }
-
-  .lightbox-post & {
-
-    .explore-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: none;
-      }
-    }
   }
 
   &:after {
@@ -1257,7 +1225,8 @@
     }
   }
 
-  .comment-form {
+  .comment-form,
+  .tip-form_post {
     padding-top: 0;
     padding-bottom: 0;
   }

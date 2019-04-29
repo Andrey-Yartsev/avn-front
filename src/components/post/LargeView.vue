@@ -8,60 +8,45 @@
     ]"
   >
     <div class="postPage-content">
-      <div class="header-mobile" v-if="$mq === 'mobile'">
-        <button class="header-return-btn" @click="back"></button>
-        <h1 class="page-title">Post</h1>
-        <router-link to="/login" class="btn border alt login hidden-desktop"
-          >Log in</router-link
-        >
-      </div>
-      <Header
-        :class="'hidden-desktop'"
-        :postId="post.id"
-        :user="post.author"
-        :from="from"
-        v-on:clickOnDetailsView="clickOnCommentForm"
-        v-if="$mq === 'mobile'"
-        :datetime="timePassed"
-        :showCopy="!delayedPost"
-      />
-      <p
-        class="text hidden-desktop"
-        v-html="post.text"
-        v-if="$mq === 'mobile'"
-      ></p>
-      <Media
-        v-if="post.media && post.media.length"
-        :medias="post.media"
-        :shouldHasLink="false"
-        :postId="post.id"
-        :authorId="post.author.id"
-        mediaSize="full"
-      />
-      <div class="right-col">
+      <div
+        class="postPage-content__inside"
+        :class="{ 'has-media': post.media && post.media.length }"
+      >
+        <div class="header-mobile" v-if="$mq === 'mobile'">
+          <button class="header-return-btn" @click="back"></button>
+          <h1 class="page-title">Post</h1>
+          <router-link to="/login" class="btn border alt login hidden-desktop"
+            >Log in</router-link
+          >
+        </div>
         <Header
-          :class="'hidden-mobile'"
+          :class="'hidden-desktop'"
           :postId="post.id"
           :user="post.author"
           :from="from"
-          v-if="$mq === 'desktop'"
+          v-on:clickOnDetailsView="clickOnCommentForm"
+          v-if="$mq === 'mobile'"
+          :datetime="timePassed"
           :showCopy="!delayedPost"
         />
         <p
-          class="text hidden-mobile"
+          class="text hidden-desktop"
           v-html="post.text"
-          v-if="$mq === 'desktop'"
+          v-if="$mq === 'mobile'"
+        ></p>
+        <Media
+          v-if="post.media && post.media.length"
+          :medias="post.media"
+          :shouldHasLink="false"
+          :postId="post.id"
+          :authorId="post.author.id"
+          mediaSize="full"
         />
-        <CommentsList
-          v-if="!delayedPost && post.canComment"
-          :comments="post.fullComments"
-          :totalComments="post.commentsCount"
-          :loading="commentsLoading"
-          :getComments="getComments"
-          v-on:commentReply="commentReply"
-          v-on:likeComment="likeComment"
-        />
-        <template v-if="!delayedPost && isAuth() && post.canFavorite">
+        <template
+          v-if="
+            !delayedPost && isAuth() && post.canFavorite && $mq === 'mobile'
+          "
+        >
           <Actions
             :post="post"
             :showTips="showTip"
@@ -70,17 +55,80 @@
             @toggleTip="showTip = !showTip"
           />
         </template>
-        <div v-if="delayedPost" class="actions">
-          <div class="datetime-value">
-            <span class="post-datetime__value">{{ formattedDate }}</span>
+        <div class="right-col">
+          <Header
+            :class="'hidden-mobile'"
+            :postId="post.id"
+            :user="post.author"
+            :from="from"
+            v-if="$mq === 'desktop'"
+            :showCopy="!delayedPost"
+          />
+          <p
+            class="text hidden-mobile"
+            v-html="post.text"
+            v-if="$mq === 'desktop'"
+          />
+          <CommentsList
+            v-if="!delayedPost && post.canComment"
+            :comments="post.fullComments"
+            :totalComments="post.commentsCount"
+            :loading="commentsLoading"
+            :getComments="getComments"
+            v-on:commentReply="commentReply"
+            v-on:likeComment="likeComment"
+          />
+          <div v-if="delayedPost" class="actions">
+            <div class="datetime-value">
+              <span class="post-datetime__value">{{ formattedDate }}</span>
+            </div>
+          </div>
+
+          <div class="post-capability" v-if="!delayedPost && $mq === 'desktop'">
+            <div
+              class="comment-form-wrapper"
+              v-if="!delayedPost && post.canComment && isAuth()"
+            >
+              <AddComment
+                v-if="!showTip"
+                :sendNewComment="sendNewComment"
+                :userName="commentReplyUserName"
+              />
+              <Tip
+                v-if="showTip"
+                :user="post.author"
+                ref="tip"
+                @cancel="closeTip"
+                :tipId="`${post.id}`"
+                class="tip-form_post"
+              />
+            </div>
+            <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
+              <div class="guest-comments-form">
+                <p>Please login to leave comments</p>
+                <time class="timestamp">{{ timePassed }}</time>
+              </div>
+            </div>
+            <template v-if="!delayedPost && isAuth() && post.canFavorite">
+              <Actions
+                :post="post"
+                :showTips="showTip"
+                v-on:postShowCommentForm="clickOnCommentForm"
+                v-on:postLike="likePost"
+                @toggleTip="showTip = !showTip"
+              />
+            </template>
           </div>
         </div>
       </div>
+    </div>
+    <div class="post-capability" v-if="!delayedPost && $mq === 'mobile'">
       <div
         class="comment-form-wrapper"
         v-if="!delayedPost && post.canComment && isAuth()"
       >
         <AddComment
+          v-if="!showTip"
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
         />
@@ -114,10 +162,11 @@ import AddComment from "@/components/common/postParts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
 import PostStat from "@/mixins/postStat";
 import moment from "moment";
+import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "PostLastView",
-  mixins: [User, PostStat],
+  mixins: [User, PostStat, ModalRouterParams],
   computed: {
     postId() {
       return this.post.id;

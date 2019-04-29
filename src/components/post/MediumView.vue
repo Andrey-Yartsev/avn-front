@@ -42,16 +42,16 @@
           <span class="post-datetime__value">{{ formattedDate }}</span>
         </div>
       </div>
-      <Tip
-        :user="post.author"
-        v-if="showTip"
-        ref="tip"
-        @cancel="closeTip"
-        :tipId="`${post.id}`"
-        class="tip-form_post"
-      />
     </div>
     <AddComment v-if="showAddCommentForm" :sendNewComment="sendNewComment" />
+    <Tip
+      :user="post.author"
+      v-if="showTip"
+      ref="tip"
+      @cancel="closeTip"
+      :tipId="`${post.id}`"
+      class="tip-form_post"
+    />
     <CommentsList
       v-if="post.commentsCount"
       :comments="post.comments || []"

@@ -357,33 +357,16 @@
   &_post {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 20px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 5px;
       padding-bottom: 8px;
     }
 
-    .comment-form-wrapper & {
-      padding-top: 0;
-      padding-bottom: 0;
-      position: absolute;
-      background-color: $white;
-      left: 0;
-      right: 0;
-      top: 7px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        top: 15px;
-      }
-
-      .postPage & {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          order: -1;
-          padding-top: 0;
-          padding-bottom: 10px;
-        }
-      }
+    .price-amount-field,
+    .tip-amount-field {
+      flex: 1;
     }
   }
 
