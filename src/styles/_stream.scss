@@ -357,7 +357,7 @@
   &_post {
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 20px;
+    padding-bottom: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 5px;
