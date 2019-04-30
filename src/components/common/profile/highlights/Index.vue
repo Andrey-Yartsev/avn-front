@@ -31,14 +31,15 @@
               </div>
             </a>
             <div class="story" v-for="post in posts" :key="post.id">
-              <router-link
+              <a
+                :href="`collections/${post.id}`"
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                :to="`collections/${post.id}`"
+                @click.prevent="open(post)"
               >
                 <span class="avatar__img">
                   <img :src="post.cover" />
                 </span>
-              </router-link>
+              </a>
               <div class="story-info">
                 <div class="story-header">
                   <router-link :to="`collections/${post.id}`" class="name">
@@ -95,6 +96,15 @@ export default {
       if (scrolledEnought && !this.loading && !this.allDataReceived) {
         this.$store.dispatch("highlights/getPosts");
       }
+    },
+    open(post) {
+      this.$store.dispatch("subscription/openSubscribeModal", post.user);
+      // return;
+      // if (!post.canLookStory) {
+      //   this.$store.dispatch("subscription/openSubscribeModal", post.user);
+      //   return;
+      // }
+      // this.$router.push(`collections/${post.id}`);
     }
   },
   created() {

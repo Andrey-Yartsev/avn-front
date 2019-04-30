@@ -84,8 +84,13 @@ const actions = {
         );
         commit("profile/home/resetPosts", null, { root: true });
         dispatch("profile/home/getPosts", null, { root: true });
+        commit("highlights/resetPageState", null, { root: true });
+        dispatch("highlights/getPosts", null, { root: true });
       }
     }
+    console.log("BAD 4");
+    console.trace(payment);
+
     commit(
       payment.actionPrefix + "/extendUser",
       {

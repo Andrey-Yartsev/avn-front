@@ -41,6 +41,8 @@ export default {
       if (!result.success) {
         return;
       }
+      console.log("BAD 2");
+      console.trace(this.actionPrefix);
       this.$store.commit(this.actionPrefix + "/extendUser", {
         userId: this.profile.id,
         data: { subscribedByProgress: true }
@@ -54,6 +56,9 @@ export default {
       if (!result.success) {
         return;
       }
+      console.log("BAD 3");
+      console.trace(this.actionPrefix);
+
       this.$store.commit(this.actionPrefix + "/extendUser", {
         userId: this.profile.id,
         data: { subscribedByProgress: false }
