@@ -278,6 +278,7 @@ label {
     margin: 0 0 8px;
     display: block;
     position: relative;
+    cursor: auto;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
