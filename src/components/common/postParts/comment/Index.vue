@@ -66,7 +66,7 @@ export default {
     },
     full: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {
