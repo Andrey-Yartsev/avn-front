@@ -11,7 +11,7 @@
         v-for="comment in visibleComments"
         :key="comment.id"
         :comment="comment"
-        @commentReply="userName => $emit('commentReply', userName)"
+        @commentReply="comment => $emit('commentReply', comment)"
       />
     </div>
   </div>

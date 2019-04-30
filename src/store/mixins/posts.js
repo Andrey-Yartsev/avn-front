@@ -44,9 +44,9 @@ export default {
         });
     },
 
-    sendPostComment({ commit }, { post, text }) {
+    sendPostComment({ commit }, { post, text, answerTo }) {
       const postId = post.id;
-      return PostApi.sendPostComment({ postId, text })
+      return PostApi.sendPostComment({ postId, text, answerTo })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(comment) {

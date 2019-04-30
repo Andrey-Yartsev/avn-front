@@ -75,8 +75,8 @@
             :totalComments="post.commentsCount"
             :loading="commentsLoading"
             :getComments="getComments"
-            v-on:commentReply="commentReply"
-            v-on:likeComment="likeComment"
+            @commentReply="commentReply"
+            @likeComment="likeComment"
           />
           <div v-if="delayedPost" class="actions">
             <div class="datetime-value">
@@ -199,6 +199,7 @@ export default {
     commentPage: 0,
     showAddCommentForm: false,
     commentReplyUserName: "",
+    commentReplyId: 0,
     showTip: false,
     popupView: true
   }),
@@ -243,13 +244,15 @@ export default {
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         post: this.post,
-        text: msg
+        text: msg,
+        answerTo: this.commentReplyId
       });
     },
-    commentReply(userName) {
+    commentReply(comment) {
       this.commentReplyUserName = "";
+      this.commentReplyId = comment.id;
       setTimeout(() => {
-        this.commentReplyUserName = userName;
+        this.commentReplyUserName = comment.author.username;
       });
     },
     likeComment(data) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="comment">
+  <div class="comment" :class="{ 'comment-answer': !!comment.answerTo }">
     <router-link
       v-if="comment.author && full"
       :to="'/' + comment.author.username"
@@ -33,7 +33,7 @@
         <button
           type="button"
           class="btn-reply"
-          @click="$emit('commentReply', comment.author.username)"
+          @click="$emit('commentReply', comment)"
         >
           Reply
         </button>

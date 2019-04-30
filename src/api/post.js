@@ -48,11 +48,11 @@ export default {
       }
     );
   },
-  sendPostComment({ postId, text }) {
+  sendPostComment({ postId, text, answerTo }) {
     return tokenRequest(`posts/${postId}/comments`, {
       method: "POST",
       mode: "cors",
-      body: JSON.stringify({ text })
+      body: JSON.stringify({ text, answerTo })
     });
   },
   likePost({ postId, addLike }) {

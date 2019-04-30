@@ -86,7 +86,8 @@ export default {
       showAddCommentForm: false,
       showDropdawn: false,
       showTip: false,
-      commentReplyUserName: ""
+      commentReplyUserName: "",
+      commentReplyId: 0
     };
   },
   components: {
@@ -138,7 +139,8 @@ export default {
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
         post: this.post,
-        text: msg
+        text: msg,
+        answerTo: this.commentReplyId
       });
     },
     likePost() {
@@ -169,11 +171,12 @@ export default {
       this.showTip = false;
       this.$refs.tip.reset();
     },
-    commentReply(userName) {
+    commentReply(comment) {
       this.showAddCommentForm = true;
       this.commentReplyUserName = "";
+      this.commentReplyId = comment.id;
       setTimeout(() => {
-        this.commentReplyUserName = userName;
+        this.commentReplyUserName = comment.author.username;
       });
     }
   }
