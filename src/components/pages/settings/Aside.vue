@@ -9,8 +9,8 @@
         <div class="settings-profile-images">
           <div class="bg-profile bg-color bg-gradient_light">
             <template v-if="!bgRemoved">
-              <img v-if="bgPreview" :src="bgPreview" />
-              <img v-else-if="user.header" :src="user.header" />
+              <img v-if="bgPreview" :src="bgPreview" class="f1" />
+              <img v-else-if="user.header" :src="user.header" class="f2" />
             </template>
             <Loader
               :fullscreen="false"
@@ -34,7 +34,11 @@
               />
             </span>
             <template v-show="!gettingPreview">
-              <label for="avatar" class="select-user-image"></label>
+              <label
+                for="avatar"
+                class="select-user-image select-user-image_avatar"
+                :class="{ 'single-btn': !user.avatar }"
+              ></label>
               <input
                 type="file"
                 id="avatar"
@@ -43,6 +47,7 @@
                 @change="setAvatarPreview"
               />
               <span
+                v-if="user.avatar"
                 class="reset-user-image reset-avatar"
                 @click="showAvatarConfirm"
               ></span>
@@ -50,12 +55,18 @@
           </div>
 
           <span
+            v-if="!bgRemoved && user.header"
             v-show="showBgAdd"
             class="reset-user-image reset-bg"
             @click="showBgConfirm"
-          ></span>
-          <label for="bg" class="select-user-image" v-show="showBgAdd">
-            <span class="select-user-image__text">
+          />
+          <label
+            for="bg"
+            class="select-user-image select-user-image_cover select-user-image_cover-sm"
+            :class="{ 'single-btn': !user.header }"
+            v-show="showBgAdd"
+          >
+            <span class="select-user-image__text" v-if="!user.header">
               Add background picture
             </span>
           </label>

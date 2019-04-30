@@ -4,9 +4,11 @@
       <div class="controls-select-picture">
         <label
           for="bg"
-          class="select-user-image"
+          class="select-user-image select-user-image_cover select-user-image_cover-lg"
           :class="{ hide: profile.header || !showBgAdd }"
-          >Add background picture</label
+          ><span class="select-user-image__text"
+            >Add background picture</span
+          ></label
         >
         <input
           type="file"

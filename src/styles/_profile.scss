@@ -819,6 +819,9 @@
     text-align: right;
     justify-content: flex-end;
     padding-top: 0;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
   }
 }
 
@@ -948,7 +951,6 @@
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-size: cover;
-
   overflow: hidden;
   z-index: 2;
   position: -webkit-sticky;
@@ -1048,6 +1050,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
   }
 
   .container {
@@ -1373,61 +1376,25 @@
 }
 
 .select-user-image {
-  position: absolute;
   color: #fff;
-  bottom: 12px;
-  align-items: center;
   text-shadow: $shadow-light;
   display: none;
   font-size: 13px;
-  right: 15px;
   transition: opacity 0.3s;
   font-weight: 500;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    right: auto;
-    bottom: auto;
-    top: 50%;
-    left: 50%;
-    font-size: 17px;
-    margin-top: -8px;
-    transform: translate(-50%, -50%);
-  }
-
-  .settings-aside & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-top: 0;
-    }
-  }
-
-  &:hover {
-
-    &:before {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        transform: scale(1.2);
-      }
-    }
+  &:after {
+    font-weight: 400;
+    @include icon-font;
+    content: "\E61A";
+    transition: transform .2s ease;
   }
 
   &__text {
-    font-size: 0;
-    position: absolute;
-
-    &:after {
-      font-weight: 400;
-      font-size: 24px;
-      content: "\E61A";
-      @include icon-font;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 18px;
-      }
-    }
+    white-space: nowrap;
   }
 
-  &[for="avatar"] {
+  &_avatar {
     position: absolute;
     left: 0;
     right: 0;
@@ -1435,60 +1402,96 @@
     bottom: 0;
     z-index: 3;
     transform: translate(0, 0);
-    display: block;
-
-    &:after {
-      font-weight: 400;
-      font-size: 24px;
-      @include icon-font;
-      content: "\E61A";
-      position: absolute;
-      bottom: 10px;
-      left: 19px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 18px;
-      }
-
-      .avatar-block & {
-        vertical-align: sub;
-      }
-    }
-  }
-
-  &[for="bg"] {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-end;
+    padding: 0 18px 10px;
+
+    &.single-btn {
+      justify-content: center;
+    }
+
+    &:after {
+      font-size: 24px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  &_cover {
+    display: flex;
     transform: translate(0, 0);
     z-index: 3;
 
-    .select-user-image__text {
-      right: 53px;
-      bottom: 12px;
+    &:after {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 24px;
+      }
+    }
+
+    &-sm {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      justify-content: flex-end;
+      align-items: flex-end;
+      align-content: flex-end;
+      padding: 0 53px 12px 0;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        right: 43px;
+        padding-right: 44px;
+      }
+
+      &.single-btn {
+        padding-right: 15px;
+      }
+
+      .select-user-image__text {
+        margin-bottom: 7px;
+        margin-right: 7px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-bottom: 3px;
+        }
       }
 
       &:after {
-        margin: 0 0 0 5px;
-        vertical-align: middle;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 18px;
+        }
       }
     }
 
-    .controls-select-picture & {
+    &-lg {
+      align-items: center;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        transform: translate(0, 0);
+        font-size: 17px;
+      }
+
+      &:after {
+        margin-left: 11px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 34px;
+        }
+      }
+
+      &:hover {
+
+        &:after {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            transform: scale(1.2);
+          }
+        }
       }
     }
   }
@@ -1496,44 +1499,6 @@
   .header-scrolled & {
     opacity: 0;
     pointer-events: none;
-  }
-
-  .controls-select-picture & {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    flex-direction: row;
-    bottom: 12px;
-    right: 15px;
-    left: auto;
-    top: auto;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      white-space: nowrap;
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      bottom: auto;
-    }
-
-    &:after {
-      margin-left: 11px;
-    }
-
-    &:before {
-      @include icon-font;
-      content: "\E61A";
-      display: block;
-      transition: transform 0.2s ease;
-      margin-left: 11px;
-      order: 2;
-      font-size: 24px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 34px;
-      }
-    }
   }
 
   &.hide {
