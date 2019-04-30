@@ -387,13 +387,16 @@
     }
 
     .tip-amount-input {
-      color: #fff;
       height: 40px;
       border-radius: 20px;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, .2);
-      caret-color: #fff;
+
+      &:not(.error) {
+        color: #fff;
+        caret-color: #fff;
+        border: 1px solid rgba(255, 255, 255, .2);
+      }
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
