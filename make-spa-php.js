@@ -1,7 +1,7 @@
 const fs = require("fs");
 let s = fs.readFileSync("dist/index.html").toString();
 
-const meta = "<meta />";
+const meta = "<?php include __DIR__ . '/meta.php'; ?>";
 
 s = s.replace("</head>", meta + "</head>");
 
