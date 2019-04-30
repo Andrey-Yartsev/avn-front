@@ -98,13 +98,11 @@ export default {
       }
     },
     open(post) {
-      this.$store.dispatch("subscription/openSubscribeModal", post.user);
-      // return;
-      // if (!post.canLookStory) {
-      //   this.$store.dispatch("subscription/openSubscribeModal", post.user);
-      //   return;
-      // }
-      // this.$router.push(`collections/${post.id}`);
+      if (!post.canLookStory) {
+        this.$store.dispatch("subscription/openSubscribeModal", post.user);
+        return;
+      }
+      this.$router.push(`collections/${post.id}`);
     }
   },
   created() {

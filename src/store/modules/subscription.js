@@ -78,30 +78,37 @@ const actions = {
         dispatch(
           "profile/home/extend",
           {
-            subscribedBy: true
+            subscribedBy: true,
+            subscribedByProgress: false
           },
           { root: true }
         );
         commit("profile/home/resetPosts", null, { root: true });
         dispatch("profile/home/getPosts", null, { root: true });
+
         commit("highlights/resetPageState", null, { root: true });
+        dispatch(
+          "highlights/setSource",
+          { source: rootState.profile.home.profile.id },
+          { root: true }
+        );
         dispatch("highlights/getPosts", null, { root: true });
       }
     }
-    console.log("BAD 4");
-    console.trace(payment);
 
-    commit(
-      payment.actionPrefix + "/extendUser",
-      {
-        userId: payment.user.id,
-        data: {
-          subscribedBy: true,
-          subscribedByProgress: false
-        }
-      },
-      { root: true }
-    );
+    if (payment.actionPrefix) {
+      commit(
+        payment.actionPrefix + "/extendUser",
+        {
+          userId: payment.user.id,
+          data: {
+            subscribedBy: true,
+            subscribedByProgress: false
+          }
+        },
+        { root: true }
+      );
+    }
   }
 };
 
