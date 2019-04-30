@@ -1,6 +1,9 @@
 <template>
   <div
-    v-if="profile.canEarn && price > 0"
+    v-if="
+      (profile.canEarn && price > 0) ||
+        (profile.canEarn && profile.subscribedBy)
+    "
     class="subscribePaidView profile-actions__btn"
     @click="subscription"
   >
