@@ -43,7 +43,11 @@
         </div>
       </div>
     </div>
-    <AddComment v-if="showAddCommentForm" :sendNewComment="sendNewComment" />
+    <AddComment
+      v-if="showAddCommentForm"
+      :sendNewComment="sendNewComment"
+      :userName="commentReplyUserName"
+    />
     <Tip
       :user="post.author"
       v-if="showTip"
@@ -57,6 +61,7 @@
       :comments="post.comments || []"
       :commentsCount="post.commentsCount || 0"
       :clickOnShowMore="openModal"
+      @commentReply="commentReply"
     />
   </div>
 </template>
@@ -80,7 +85,8 @@ export default {
     return {
       showAddCommentForm: false,
       showDropdawn: false,
-      showTip: false
+      showTip: false,
+      commentReplyUserName: ""
     };
   },
   components: {
@@ -162,6 +168,13 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    commentReply(userName) {
+      this.showAddCommentForm = true;
+      this.commentReplyUserName = "";
+      setTimeout(() => {
+        this.commentReplyUserName = userName;
+      });
     }
   }
 };

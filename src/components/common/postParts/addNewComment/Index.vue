@@ -52,7 +52,7 @@ export default {
   watch: {
     userName: function() {
       this.message = `@${this.userName}, `;
-      this.$refs.message.focus();
+      this.$refs.message.$el.focus();
     }
   }
 };
