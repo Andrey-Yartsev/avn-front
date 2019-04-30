@@ -24,7 +24,6 @@
 <script>
 const isFloat = function(number) {
   number = parseFloat(number);
-  console.log(number);
   if (Number.isInteger(number)) {
     return true;
   }
