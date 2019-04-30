@@ -63,8 +63,7 @@
                   class="offer-create-story"
                   v-if="step === 1 && !loading && !stories.length"
                 >
-                  <a
-                    href="#"
+                  <div
                     class="link-create-story"
                     @click.prevent="createNewStory"
                   >
@@ -72,7 +71,7 @@
                       <span class="avatar avatar_ex-lg">
                         <span class="avatar__img"></span>
                       </span>
-                      <span class="btn-add">
+                      <span class="btn-add btn-add_lg-size">
                         <svg aria-hidden="true" class="icn icn-plus">
                           <use xlink:href="#icon-plus-in-circle"></use>
                         </svg>
@@ -81,7 +80,7 @@
                     <div class="text-create-story">
                       Create new story
                     </div>
-                  </a>
+                  </div>
                 </div>
                 <VuePerfectScrollbar
                   class="popup-content-scroll"
