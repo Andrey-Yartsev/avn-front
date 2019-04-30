@@ -182,7 +182,7 @@ export default {
 
   data() {
     return {
-      collapseLimit: 100,
+      collapseLimit: 250,
       collapsed: true
     };
   },
