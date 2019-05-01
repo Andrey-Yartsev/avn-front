@@ -399,6 +399,37 @@
   }
 }
 
+.follow-link {
+  cursor: pointer;
+  color: $secondary-color;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin-left: 6px;
+  transition: color .3s;
+
+  .lightbox-post & {
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 13px;
+        color: #fff;
+      }
+    }
+  }
+
+  &:hover {
+    color: $secondary-color-darken;
+  }
+
+  &:before {
+    content: "\00B7";
+    font-size: 24px;
+    margin-right: 5px;
+  }
+}
+
 .load-more-comments {
   opacity: 0.5;
   display: block;
@@ -453,7 +484,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 4px;
-
       max-height: calc(100vh - 210px);
     }
 
