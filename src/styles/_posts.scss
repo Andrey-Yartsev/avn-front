@@ -444,6 +444,10 @@
   .postPage & {
     font-size: 13px;
     margin-top: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-bottom: 10px;
+    }
   }
 
   & + .comments-list_in-col {
