@@ -113,8 +113,8 @@
               <Actions
                 :post="post"
                 :showTips="showTip"
-                v-on:postShowCommentForm="clickOnCommentForm"
-                v-on:postLike="likePost"
+                @postShowCommentForm="clickOnCommentForm"
+                @postLike="likePost"
                 @toggleTip="showTip = !showTip"
               />
             </template>
@@ -161,12 +161,13 @@ import CommentsList from "@/components/common/postParts/commentsListScrollable/I
 import AddComment from "@/components/common/postParts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
 import PostStat from "@/mixins/postStat";
+import PostCommon from "@/mixins/postCommon";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "PostLastView",
-  mixins: [User, PostStat, ModalRouterParams],
+  mixins: [User, PostCommon, PostStat, ModalRouterParams],
   computed: {
     postId() {
       return this.post.id;
@@ -197,10 +198,6 @@ export default {
   },
   data: () => ({
     commentPage: 0,
-    showAddCommentForm: false,
-    commentReplyUserName: "",
-    commentReplyId: 0,
-    showTip: false,
     popupView: true
   }),
   props: {
@@ -235,43 +232,12 @@ export default {
       this.showTip = !this.showTip;
       this.showAddCommentForm = false;
     },
-    likePost() {
-      this.$store.dispatch(this.actionPrefix + "/likePost", {
-        post: this.post,
-        addLike: !this.post.isFavorite
-      });
-    },
-    sendNewComment(msg) {
-      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
-        post: this.post,
-        text: msg,
-        answerTo: this.commentReplyId
-      });
-    },
-    commentReply(comment) {
-      this.commentReplyUserName = "";
-      this.commentReplyId = comment.id;
-      setTimeout(() => {
-        this.commentReplyUserName = comment.author.username;
-      });
-    },
-    likeComment(data) {
-      this.$store.dispatch(this.actionPrefix + "/likeComment", {
-        postId: this.post.id,
-        addLike: !data.isLiked,
-        commentId: data.commentId
-      });
-    },
     back() {
       if (window.location.hash) {
         window.location.hash = "";
         return;
       }
       this.$router.push("/");
-    },
-    closeTip() {
-      this.showTip = false;
-      this.$refs.tip.reset();
     },
     getComments() {
       if (!this.post.canComment || this.delayedPost) return;

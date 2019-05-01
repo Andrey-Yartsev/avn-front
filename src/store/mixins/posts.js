@@ -214,6 +214,16 @@ export default {
                 };
               }
               return comment;
+            }),
+            comments: (post.comments || []).map(comment => {
+              if (comment.id === commentId) {
+                return {
+                  ...comment,
+                  isLiked,
+                  likesCount
+                };
+              }
+              return comment;
             })
           };
         }

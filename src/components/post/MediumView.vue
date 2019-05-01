@@ -62,6 +62,7 @@
       :commentsCount="post.commentsCount || 0"
       :clickOnShowMore="openModal"
       @commentReply="commentReply"
+      @likeComment="likeComment"
     />
   </div>
 </template>
@@ -76,18 +77,15 @@ import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
 import PostOpen from "@/mixins/postOpen";
+import PostCommon from "@/mixins/postCommon";
 import moment from "moment";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, User, PostOpen],
+  mixins: [ModalRouterGoto, User, PostCommon, PostOpen],
   data: function() {
     return {
-      showAddCommentForm: false,
-      showDropdawn: false,
-      showTip: false,
-      commentReplyUserName: "",
-      commentReplyId: 0
+      showDropdawn: false
     };
   },
   components: {
@@ -136,24 +134,6 @@ export default {
     }
   },
   methods: {
-    sendNewComment(msg) {
-      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
-        post: this.post,
-        text: msg,
-        answerTo: this.commentReplyId
-      });
-    },
-    likePost() {
-      if (!this.post.canViewMedia) {
-        this.showSubscribeModal();
-        return;
-      }
-
-      this.$store.dispatch(this.actionPrefix + "/likePost", {
-        post: this.post,
-        addLike: !this.post.isFavorite
-      });
-    },
     toggleCommentForm() {
       if (!this.post.canViewMedia) {
         this.showSubscribeModal();
@@ -162,22 +142,6 @@ export default {
 
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
-    },
-    toggleTipForm() {
-      this.showTip = !this.showTip;
-      this.showAddCommentForm = false;
-    },
-    closeTip() {
-      this.showTip = false;
-      this.$refs.tip.reset();
-    },
-    commentReply(comment) {
-      this.showAddCommentForm = true;
-      this.commentReplyUserName = "";
-      this.commentReplyId = comment.id;
-      setTimeout(() => {
-        this.commentReplyUserName = comment.author.username;
-      });
     }
   }
 };
