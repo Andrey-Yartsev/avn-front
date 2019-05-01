@@ -1,5 +1,5 @@
 <template>
-  <div class="payouts-legal">
+  <div class="payouts-legal" v-if="!loading">
     <div class="PayoutsLegalView">
       <h1 class="form-title">Personal Information</h1>
 
@@ -174,7 +174,7 @@
               </div>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div class="form-group form-group_with-label" v-if="hasStates">
               <label class="form-group-inner" for="state">
                 <span class="label">State</span>
                 <span class="select-wrapper">
@@ -198,17 +198,10 @@
               <label class="form-group-inner">
                 <span class="label country-select__label">Country</span>
                 <span class="select-wrapper">
-                  <select
-                    name="country"
-                    disabled
-                    v-model="country"
-                    v-validate="'required'"
-                  >
-                    <option
-                      class="country-select__option"
-                      value="United States of America"
-                      >United States of America</option
-                    >
+                  <select name="country" disabled v-validate="'required'">
+                    <option class="country-select__option">{{
+                      account.countryName
+                    }}</option>
                   </select>
                 </span>
               </label>
@@ -301,13 +294,24 @@ export default {
       postalCode: "",
       city: "",
       state: "",
-      country: "United States of America",
       tos: false,
       uploadedPhoto: null
     };
   },
 
   computed: {
+    loading() {
+      return this.$store.state.payouts.countries.fetchLoading;
+    },
+    account() {
+      return this.$store.state.payouts.account.fetchResult;
+    },
+    country() {
+      return this.account.countryId;
+    },
+    hasStates() {
+      return this.country.id == 212;
+    },
     states() {
       return states;
     },
@@ -373,6 +377,7 @@ export default {
   },
 
   mounted() {
+    this.$store.dispatch("payouts/countries/fetch");
     this.$emit("titleChanged", "Personal Information");
   }
 };

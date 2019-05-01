@@ -106,7 +106,7 @@ export default {
       return this.$store.state.payouts.bank.fetchResult;
     },
     bankExists() {
-      return this.bank && this.bank.accountNumber;
+      return this.bank && (this.bank.accountNumber || this.bank.bic);
     }
   },
 

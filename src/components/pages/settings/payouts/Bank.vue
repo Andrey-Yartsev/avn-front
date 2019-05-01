@@ -6,7 +6,7 @@
       </h1>
       <form class="payouts-bank-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
-          <div class="container">
+          <div v-if="isAmerica" class="container">
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Routing Number</span>
@@ -24,6 +24,29 @@
                 <input
                   name="accountNumber"
                   v-model="localBank.accountNumber"
+                  v-validate="'required'"
+                />
+              </label>
+            </div>
+          </div>
+          <div v-else class="container">
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">IBAN</span>
+                <input
+                  name="iban"
+                  v-model="localBank.iban"
+                  v-validate="'required'"
+                />
+              </label>
+            </div>
+
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">SWIFT/BIC</span>
+                <input
+                  name="bic"
+                  v-model="localBank.bic"
                   v-validate="'required'"
                 />
               </label>
@@ -75,6 +98,12 @@ export default {
     },
     saving() {
       return this.$store.state.payouts.bank._saveLoading;
+    },
+    account() {
+      return this.$store.state.payouts.account.fetchResult;
+    },
+    isAmerica() {
+      return this.account.countryId == 212;
     }
   },
 

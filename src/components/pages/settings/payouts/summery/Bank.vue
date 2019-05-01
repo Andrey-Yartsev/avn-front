@@ -13,7 +13,7 @@
         </div>
         <div class="shadow-block">
           <div class="container">
-            <div class="payouts-bank-info">
+            <div class="payouts-bank-info" v-if="isAmerica">
               <div class="item">
                 <span class="title">Routing Number</span>
                 <span class="value">{{ bank.routingNumber }}</span>
@@ -21,6 +21,16 @@
               <div class="item">
                 <span class="title">Account Number</span>
                 <span class="value">{{ bank.accountNumber }}</span>
+              </div>
+            </div>
+            <div class="payouts-bank-info" v-else>
+              <div class="item">
+                <span class="title">IBAN</span>
+                <span class="value">{{ bank.iban }}</span>
+              </div>
+              <div class="item">
+                <span class="title">SWIFT/BIC</span>
+                <span class="value">{{ bank.bic }}</span>
               </div>
             </div>
           </div>
@@ -47,8 +57,14 @@ export default {
   },
 
   computed: {
+    account() {
+      return this.$store.state.payouts.account.fetchResult;
+    },
     bank() {
       return this.$store.state.payouts.bank.fetchResult;
+    },
+    isAmerica() {
+      return this.account.countryId == 212;
     }
   }
 };

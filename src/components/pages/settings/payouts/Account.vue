@@ -79,7 +79,7 @@ export default {
 
   data() {
     return {
-      countryId: 212
+      countryId: 0
     };
   },
 
@@ -88,14 +88,21 @@ export default {
       return this.$store.state.payouts.account.fetchResult;
     },
     loading() {
-      return this.$store.state.payouts.account.fetchLoading;
+      return (
+        this.$store.state.payouts.countries.fetchLoading ||
+        this.$store.state.payouts.account.fetchLoading
+      );
+    },
+    _countries() {
+      return this.$store.state.payouts.countries.fetchResult;
     },
     countries() {
-      return Object.keys(countries).map(id => {
+      return this._countries.map(v => {
+        console.log(v);
         return {
-          id,
-          title: countries[id],
-          selected: id === this.data
+          id: v.id,
+          title: v.name,
+          selected: v.id === this.countryId
         };
       });
     },
@@ -112,7 +119,15 @@ export default {
       });
     }
   },
+
+  watch: {
+    _countries(countries) {
+      this.countryId = countries[0].id;
+    }
+  },
+
   mounted() {
+    this.$store.dispatch("payouts/countries/fetch");
     htmlElement.classList.add("with-bg-picture");
   },
   beforeDestroy() {

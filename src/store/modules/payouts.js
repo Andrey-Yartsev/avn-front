@@ -5,6 +5,7 @@ import legal from "./payouts/legal";
 import bank from "./payouts/bank";
 import requests from "./payouts/requests";
 import transactions from "./payouts/transactions";
+import countries from "./payouts/countries";
 
 const state = {};
 const mutations = {};
@@ -29,6 +30,7 @@ export default {
     legal,
     bank,
     requests,
-    transactions
+    transactions,
+    countries
   }
 };

@@ -16,19 +16,35 @@
               </button>
             </div>
           </div>
-          <div class="form-group form-group_with-label">
-            <label class="form-group-inner">
-              <span class="label">Routing Number</span>
-              <input name="routingNumber" v-model="localBank.routingNumber" />
-            </label>
-          </div>
 
-          <div class="form-group form-group_with-label">
-            <label class="form-group-inner">
-              <span class="label">Account Number</span>
-              <input name="accountNumber" v-model="localBank.accountNumber" />
-            </label>
-          </div>
+          <template v-if="isAmerica">
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">Routing Number</span>
+                <input name="routingNumber" v-model="localBank.routingNumber" />
+              </label>
+            </div>
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">Account Number</span>
+                <input name="accountNumber" v-model="localBank.accountNumber" />
+              </label>
+            </div>
+          </template>
+          <template v-else>
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">IBAN</span>
+                <input name="routingNumber" v-model="localBank.iban" />
+              </label>
+            </div>
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">SWIFT/BIC</span>
+                <input name="accountNumber" v-model="localBank.bic" />
+              </label>
+            </div>
+          </template>
 
           <div class="form-group-btn">
             <button
@@ -64,7 +80,17 @@ export default {
       return JSON.stringify(this.bank) !== JSON.stringify(this.localBank);
     },
     valid() {
-      return this.localBank.routingNumber && this.localBank.accountNumber;
+      if (this.isAmerica) {
+        return this.localBank.routingNumber && this.localBank.accountNumber;
+      } else {
+        return this.localBank.iban && this.localBank.bic;
+      }
+    },
+    account() {
+      return this.$store.state.payouts.account.fetchResult;
+    },
+    isAmerica() {
+      return this.account.countryId == 212;
     }
   },
 
