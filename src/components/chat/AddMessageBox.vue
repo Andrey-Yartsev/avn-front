@@ -31,7 +31,7 @@
 
       <div
         class="field-text-message"
-        :class="{ disabled: showTip || showPaid }"
+        :class="{ disabled: showTip || showPaid, 'has-price': priceIsSet }"
       >
         <TextareaAutosize
           v-model="message"
@@ -45,11 +45,6 @@
           @enter="sendMessage"
           :disabled="disable"
         ></TextareaAutosize>
-
-        <div class="price-message-wrapper">
-          <span class="price-message"></span>
-          <button type="submit" class="btn-clear-price"></button>
-        </div>
 
         <div class="price-message-wrapper" v-if="priceIsSet">
           <span class="price-message">${{ price }}</span>
