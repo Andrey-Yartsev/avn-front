@@ -681,19 +681,21 @@
     padding: 4px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 8px 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
-        padding: 8px 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
       }
     }
 
     &__duration {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 8px 0 11px;
+        padding-bottom: 11px;
       }
 
       .stream-summary-data-item__value {
