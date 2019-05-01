@@ -18,7 +18,7 @@
           >{{ comment.author.name }}</router-link
         >
         <div v-if="comment.text.length > collapseLimit" class="comment-text">
-          <span v-html="trunc(comment.text)"></span>&nbsp;
+          <span v-html="trunc(comment.text)"></span>
           <a href="#" @click.prevent="collapsed = !collapsed">{{
             collapsed ? "Read more" : "Collapse"
           }}</a>
