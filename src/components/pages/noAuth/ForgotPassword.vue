@@ -1,6 +1,6 @@
 <template>
   <div class="forgot staticPage">
-    <div class="container">
+    <div class="container container_sm-width">
       <template v-if="!sendSuccess">
         <h1>Reset Password</h1>
         <h2>
