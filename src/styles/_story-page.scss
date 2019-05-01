@@ -101,31 +101,33 @@
 
   .btn-prev,
   .btn-next {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 58px;
+    background: none;
+    padding: 0;
+    border: none;
+    z-index: 2;
+    opacity: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 58px;
-      background: none;
-      padding: 0;
-      border: none;
       opacity: 0.7;
       color: #fff;
       font-size: 46px;
       transition: opacity 0.3s ease;
 
-      &:before {
-        @include icon-font;
-        @include position-center;
-      }
-
       &:hover {
         opacity: 1;
+      }
+    }
+
+    &:before {
+      @include icon-font;
+      @include position-center;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
       }
     }
   }
