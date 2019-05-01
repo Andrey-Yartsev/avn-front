@@ -696,47 +696,6 @@
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
       }
-
-      .btn-prev,
-      .btn-next {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 45px;
-        color: #fff;
-        font-size: 36px;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-        filter: drop-shadow(2px 2px 5px rgba(#000, 0.4));
-
-        .postPage & {
-          width: 56px;
-          font-size: 44px;
-        }
-
-        &:before {
-          @include icon-font;
-          @include position-center;
-        }
-
-        &:hover {
-          opacity: 1;
-        }
-      }
-
-      .btn-prev {
-        left: 0;
-        &:before {
-          content: "\E645";
-        }
-      }
-      .btn-next {
-        right: 0;
-        &:before {
-          content: "\E643";
-        }
-      }
     }
 
     .swiper-slide {

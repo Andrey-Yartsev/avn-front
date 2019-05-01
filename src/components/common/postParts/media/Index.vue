@@ -43,8 +43,8 @@
         :class="`media-slider-navigation navigation-${uniqId}`"
         v-if="$mq === 'desktop'"
       >
-        <span :class="`btn-prev btn-prev-${uniqId}`" :style="{ zIndex: 999 }" />
-        <span :class="`btn-next btn-next-${uniqId}`" :style="{ zIndex: 999 }" />
+        <span :class="`btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId}`" :style="{ zIndex: 999 }" />
+        <span :class="`btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId}`" :style="{ zIndex: 999 }" />
       </div>
     </template>
   </div>
