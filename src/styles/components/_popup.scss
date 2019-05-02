@@ -693,33 +693,6 @@
         }
       }
     }
-
-    .next,
-    .previous {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: none;
-      }
-
-
-      .lightbox-post & {
-
-        .explore-page & {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            display: block;
-            z-index: 3;
-
-            @media screen and (orientation: landscape) {
-              width: 50px;
-              left: 50%;
-              right: auto;
-              transform: translateX(-50%);
-            }
-          }
-        }
-      }
-    }
   }
 
   &.subscribe-popup {
