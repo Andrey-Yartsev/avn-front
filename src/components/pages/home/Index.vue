@@ -123,6 +123,9 @@ export default {
     },
     newUser() {
       return !this.posts.length && !this.infinityScrollLoading;
+    },
+    subscriptionUpdate() {
+      return this.$store.state.subscription.updated;
     }
   },
   methods: {
@@ -152,6 +155,9 @@ export default {
     },
     updatedPost() {
       this.$store.dispatch("home/updatePost", this.updatedPost);
+    },
+    subscriptionUpdate() {
+      this.init();
     }
   }
 };
