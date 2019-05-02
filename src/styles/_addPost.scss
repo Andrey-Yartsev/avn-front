@@ -120,7 +120,7 @@
     .addPost-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        height: 100vh;
+        //height: 100vh;
       }
 
       + .loader-content {
