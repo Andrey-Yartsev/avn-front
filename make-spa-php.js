@@ -1,7 +1,7 @@
 const fs = require("fs");
 let s = fs.readFileSync("dist/index.html").toString();
 
-require("dotenv").config();
+require("dotenv").config({ path: ".env.local" });
 
 const meta = "<?php include " + process.env.META_PHP_PATH + "; ?>";
 
