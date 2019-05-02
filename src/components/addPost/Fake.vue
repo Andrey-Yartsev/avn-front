@@ -25,7 +25,7 @@
             @click="goToAddPost"
           >
             <div class="post-datetime">
-              <span class="post-datetime__btn" />
+              <span class="post-datetime__icn" />
             </div>
           </div>
           <div class="btn-post" v-if="user.isPerformer">

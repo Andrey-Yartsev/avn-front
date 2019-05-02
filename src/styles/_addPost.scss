@@ -625,7 +625,7 @@
 
     .post-datetime {
 
-      &__btn {
+      &__icn {
         position: absolute;
         top: 50%;
         left: 0;
@@ -839,7 +839,7 @@
   .text-media-container & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 16px 15px;
+      margin: 0 8px 15px;
     }
 
     .popup & {
@@ -878,21 +878,17 @@
     }
   }
 
-  &:before {
+  .post-datetime__icn {
 
     .text-media-container & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        text-align: center;
-        font-size: 24px;
-        width: 39px;
-        height: 30px;
-        position: absolute;
-        left: 0;
+        cursor: auto;
+        left: 6px;
+        right: auto;
         top: 3px;
         color: $secondary-color;
-        content: "\E667";
-        @include icon-font;
+        transform: translateY(0);
       }
     }
   }
@@ -953,6 +949,11 @@
   align-content: center;
   align-items: center;
   position: relative;
+  transition: color .3s;
+
+  &:hover {
+    color: $secondary-color-darken
+  }
 
   &.disabled {
     pointer-events: none;
@@ -973,7 +974,7 @@
     }
   }
 
-  &__btn {
+  &__icn {
     display: inline-block;
     cursor: pointer;
 
