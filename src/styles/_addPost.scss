@@ -674,12 +674,14 @@
 
         &:before {
           color: $secondary-color;
+          content: "\E60F";
+          opacity: 1;
         }
 
-        &:after {
-          opacity: 1;
-          color: $primary-color;
-        }
+        //&:after {
+        //  opacity: 1;
+        //  color: $primary-color;
+        //}
 
         + .b-check-state__text {
           opacity: 1;
@@ -695,6 +697,10 @@
     position: relative;
     opacity: 0.5;
 
+    .b-check-state_live & {
+      opacity: 1;
+    }
+
     &:before {
       @include icon-font;
       width: 18px;
@@ -705,33 +711,21 @@
       left: 0;
       top: 2px;
       font-size: 24px;
-      transition: opacity 0.3s;
+      transition: color .3s;
+      opacity: 0.5;
+      color: $main-color;
     }
 
     &:before {
-      opacity: 0.5;
-      color: $main-color;
 
       .b-check-state_post & {
         content: "\E610";
       }
-    }
 
-    .b-check-state_post & {
-
-      &:after {
-        content: "\E60F";
-        @include icon-font;
-        width: 18px;
-        height: 18px;
-        line-height: 15px;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        top: 2px;
-        font-size: 24px;
-        opacity: 0;
-        transition: opacity .3s;
+      .b-check-state_live & {
+        content: "\E621";
+        color: $primary-color;
+        opacity: 1;
       }
     }
   }
@@ -754,8 +748,7 @@
 
     .b-check-state__icon {
 
-      &:before,
-      &:after {
+      &:before {
         top: 0;
         left: -3px;
         line-height: 18px;
@@ -770,12 +763,7 @@
           opacity: 1;
 
           &:before {
-            color: $secondary-color;
-            opacity: 0;
-          }
-
-          &:after {
-            opacity: 1;
+            color: $primary-color;
           }
         }
       }
@@ -794,6 +782,13 @@
 
     &:hover {
       color: $primary-color-darken;
+
+      .b-check-state__icon {
+
+        &:before {
+          color: $primary-color-darken;
+        }
+      }
     }
 
     &.disabled {
@@ -801,25 +796,17 @@
       opacity: .5;
       pointer-events: none;
 
-      &:before {
-        opacity: .3;
+      .b-check-state__icon {
+
+        &:before {
+          opacity: .3;
+          color: $main-color;
+        }
       }
 
       .btn-post__text {
         opacity: .3;
       }
-    }
-
-    &:before {
-      content: "\E621";
-      @include icon-font;
-      width: 18px;
-      height: 16px;
-      line-height: 16px;
-      text-align: center;
-      font-size: 24px;
-      transition: opacity 0.3s, color 0.3s;
-      margin-right: 12px;
     }
   }
 }

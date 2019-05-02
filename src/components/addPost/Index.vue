@@ -180,9 +180,9 @@
                 disabled: preloadedMedias.length || postMsg.length || datetime
               }"
               to="/stream"
-              ><span class="btn-post__text exception"
-                >Go live</span
-              ></router-link
+            >
+              <span class="b-check-state__icon"></span>
+              <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>
           <template v-if="isExtended">
