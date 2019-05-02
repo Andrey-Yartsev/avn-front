@@ -273,10 +273,12 @@ export default {
       this.initPosts();
     },
     subscriptionUpdate(data) {
-      if (!this.$refs.actionsDesktop) {
-        return;
+      if (this.$refs.actionsDesktop) {
+        this.$refs.actionsDesktop.subsRequested(data);
       }
-      this.$refs.actionsDesktop.subsRequested(data);
+      if (this.$refs.actionsMobile) {
+        this.$refs.actionsMobile.subsRequested(data);
+      }
     },
     highlights() {
       this.footerScrollAction();
