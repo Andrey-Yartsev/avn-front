@@ -310,7 +310,9 @@ export default {
       return this.account.countryId;
     },
     hasStates() {
-      return this.country.id == 212;
+      console.log("acc",this.account);
+      console.log("count", this.country);
+      return this.account.countryId == 212;
     },
     states() {
       return states;
