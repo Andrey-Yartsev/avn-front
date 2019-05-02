@@ -37,31 +37,7 @@
     }
 
     &:first-child {
-      margin: 0;
-    }
-  }
-
-  .add-media-input {
-    color: $secondary-color;
-    margin: 0 0.6em 0 0;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-right: 1em;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $secondary-color-darken;
-      }
-    }
-
-    &:before {
-      content: "\E61A";
-    }
-
-    .disabled & {
-      color: rgba(124, 139, 150, 0.18);
+      //margin: 0;
     }
   }
 

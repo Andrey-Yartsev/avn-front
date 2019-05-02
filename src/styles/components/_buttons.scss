@@ -780,3 +780,69 @@ button,
     @include icon-font;
   }
 }
+
+.add-media-input {
+  color: $secondary-color;
+  transition: color 0.3s ease;
+
+  &:before {
+    content: "\E61A";
+    display: block;
+    @include icon-font;
+    font-size: 24px;
+
+    .add-new-form & {
+      width: 2em;
+    }
+
+    .add-new-form.expanded & {
+      width: 1.5em;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 1.1em;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
+  }
+
+  .chatForm & {
+    margin: 0 0.6em 0 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1em;
+    }
+  }
+
+  .chatForm.disabled & {
+    color: rgba(124, 139, 150, 0.18);
+  }
+
+  .add-new-form:not(.expanded) & {
+    right: 148px;
+    position: absolute;
+    top: 0;
+    margin-right: 0;
+
+    .truncated & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 0;
+      }
+    }
+  }
+
+  .add-new-form.expanded & {
+
+    &.disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+}

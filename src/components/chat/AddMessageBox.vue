@@ -11,7 +11,7 @@
     </div>
     <div class="chatForm">
       <label
-        class="add-media-input btn-el"
+        class="add-media-input"
         :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"

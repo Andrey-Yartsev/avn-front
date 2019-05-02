@@ -473,16 +473,6 @@
       }
     }
 
-    .add-media-input {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        top: 0;
-        right: 148px;
-        margin-right: 0;
-      }
-    }
-
     .addNewNav  {
       display: none;
     }
@@ -491,30 +481,6 @@
   .actions {
     display: flex;
     justify-content: space-between;
-  }
-
-  .add-media-input {
-    color: $secondary-color;
-    transition: color 0.3s ease;
-
-    .truncated & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        right: 0;
-      }
-    }
-
-    &:hover {
-      color: $secondary-color-darken;
-    }
-
-    &:before {
-      @include icon-font;
-      font-size: 24px;
-      width: 2em;
-      content: "\E61A";
-      display: block;
-    }
   }
 
   .submit {
@@ -579,22 +545,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         min-height: 80px;
         flex: 1;
-      }
-    }
-
-    .add-media-input {
-
-      &:before {
-        width: 1.5em;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 1.1em;
-          margin-right: 4px;
-        }
-      }
-      &.disabled {
-        opacity: .5;
-        pointer-events: none;
       }
     }
 
