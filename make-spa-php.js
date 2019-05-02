@@ -1,9 +1,11 @@
 const fs = require("fs");
 let s = fs.readFileSync("dist/index.html").toString();
 
-const meta = "<?php include '/var/www/stars.avn.com/current/public_html/meta.php'; ?>";
+require("dotenv").config();
+
+const meta = "<?php include " + process.env.META_PHP_PATH + "; ?>";
 
 s = s.replace("</head>", meta + "</head>");
 
 fs.writeFileSync("dist/spa.php", s);
-console.log("spa.php generated");
+console.log("spa.php generated with " + process.env.META_PHP_PATH);
