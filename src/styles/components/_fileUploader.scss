@@ -108,14 +108,6 @@
 
     .lds-dual-ring {
       background-color: rgba(0, 0, 0, .4);
-
-      .loader-text {
-        transform: translateY(-50%);
-
-        &:after {
-          margin-top: 0;
-        }
-      }
     }
   }
 
