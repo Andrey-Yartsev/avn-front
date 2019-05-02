@@ -70,6 +70,67 @@
       <div class="form-title border-top">
         <div class="inner">
           <span class="semi-transparent">
+            Receive Twitter Notifications
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isTweetNotificationsEnabled"
+              value="true"
+              v-model="localUser.isTweetNotificationsEnabled"
+            />
+            <span></span>
+          </label>
+        </div>
+      </div>
+      <div class="shadow-block">
+        <div class="container">
+          <div
+            class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
+            :class="{ disabled: !localUser.isTweetNotificationsEnabled }"
+          >
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isTweetNotificationNewSubscriberEnabled"
+                  type="checkbox"
+                  name="isEmailNotificationNewSubscriptionEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
+                <span class="label">New subscriber</span>
+              </div>
+            </label>
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isTweetNotificationAutoprolongEnabled"
+                  type="checkbox"
+                  name="isTweetNotificationAutoprolongEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
+                <span class="label">Auto prolongation</span>
+              </div>
+            </label>
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isPostsTweets"
+                  type="checkbox"
+                  name="isEmailNotificationNewTipsEnabled"
+                  value="true"
+                />
+                <span class="checkbox"></span>
+                <span class="label">Post tweets</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-title border-top">
+        <div class="inner">
+          <span class="semi-transparent">
             Emails Frequency
             <p class="subtext">Choose how often you want to receive emails</p>
           </span>
