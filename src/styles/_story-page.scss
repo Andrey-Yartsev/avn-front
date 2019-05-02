@@ -98,56 +98,6 @@
     background: linear-gradient(to top, rgba(#000, 0.1) 0%, transparent 100%);
   }
 
-
-  .btn-prev,
-  .btn-next {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 58px;
-    background: none;
-    padding: 0;
-    border: none;
-    z-index: 2;
-    opacity: 0;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      opacity: 0.7;
-      color: #fff;
-      font-size: 46px;
-      transition: opacity 0.3s ease;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    &:before {
-      @include icon-font;
-      @include position-center;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: none;
-      }
-    }
-  }
-
-  .btn-prev {
-    left: 0;
-
-    &:before {
-      content: "\E645";
-    }
-  }
-
-  .btn-next {
-    right: 0;
-
-    &:before {
-      content: "\E643";
-    }
-  }
-
   .close {
     position: absolute;
     right: 0;

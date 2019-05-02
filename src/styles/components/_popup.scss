@@ -203,46 +203,6 @@
       }
     }
   }
-  .next,
-  .previous {
-    color: #fff;
-    cursor: pointer;
-    position: fixed;
-    opacity: 0.7;
-    left: 0;
-    text-align: center;
-    font-size: 48px;
-    transition: opacity 0.3s ease;
-    right: 0;
-
-    .explore-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        font-size: 24px;
-        line-height: 44px;
-      }
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-
-    &:before {
-      @include icon-font;
-    }
-  }
-  .next {
-    bottom: 0;
-    &:before {
-      content: "\E646";
-    }
-  }
-  .previous {
-    top: 0;
-    &:before {
-      content: "\E644";
-    }
-  }
 
 
   & .add-story-popup {

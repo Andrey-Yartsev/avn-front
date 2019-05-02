@@ -39,13 +39,13 @@
       <template v-if="length > 1">
         <button
           type="button"
-          class="btn-prev"
+          class="btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left"
           v-if="currIndex > 0"
           @click="currIndex = currIndex - 1"
         />
         <button
           type="button"
-          class="btn-next"
+          class="btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right"
           v-if="currIndex < length - 1"
           @click="currIndex = currIndex + 1"
         />
