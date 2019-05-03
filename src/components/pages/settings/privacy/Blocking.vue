@@ -172,11 +172,11 @@ export default {
       if (!this.$store.state.countries.items) {
         return [];
       }
-      return Object.entries(this.$store.state.countries.items).map(v => {
+      return this.$store.state.countries.items.map(v => {
         return {
-          id: v[0],
-          title: v[1].name,
-          hasStates: v[1].hasStates
+          id: v.id,
+          title: v.name,
+          hasStates: v.hasStates
         };
       });
     },
@@ -245,6 +245,7 @@ export default {
     },
     fetchStates() {
       const fetchStates = [];
+      console.log(this.selectedCountries);
       this.selectedCountries.map(v => {
         if (!v.hasStates) {
           return;
