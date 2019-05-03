@@ -277,24 +277,25 @@
     }
 
     &.create-story-button {
+
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         margin: 0;
-      }
-
-      .user-login {
-        a {
-          transition: color 0.3s ease;
-
-          &:hover {
-            color: $primary-color-darken;
-          }
-        }
       }
 
       .story-info {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           max-width: 60px;
+        }
+      }
+
+      &:hover {
+
+        .name {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            color: $primary-color-darken;
+          }
         }
       }
     }
@@ -371,6 +372,7 @@
 
     a {
       font-size: 12px;
+      transition: color .3s ease;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 13px;
