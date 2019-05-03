@@ -371,9 +371,7 @@ label {
   .btn {
     margin: 0 0 13px 20px;
   }
-  .label + .btn {
-    margin: 0;
-  }
+
   &-btn {
     padding: 0 0 21px;
 
@@ -906,7 +904,7 @@ select {
     border: none;
     border-radius: 5px;
     background-color: rgba($gray, 0.1);
-    color: inherit;
+    color: $main-color;
     font: inherit;
     font-size: 1rem;
     font-weight: 400;
@@ -920,6 +918,11 @@ select {
     &:focus {
       outline: none;
       background-color: $secondary-color-10;
+    }
+
+    &-wrap {
+      z-index: 2;
+      position: relative;
     }
   }
 
@@ -959,6 +962,18 @@ select {
     min-height: 18px;
     line-height: 18px;
     font-size: 15px;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    padding: 0 10px;
+    z-index: 0;
+
+    &::-moz-placeholder,
+    &:-ms-input-placeholder,
+    &::-webkit-input-placeholder {
+      color: $main-color;
+      opacity: 1;
+    }
 
     &:focus {
       background-color: transparent;
