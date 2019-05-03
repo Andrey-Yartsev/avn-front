@@ -38,15 +38,17 @@ export default {
     });
   },
   getPostComments({ postId, page, marker }) {
-    const limit = 5;
+    const limit = 30;
     const offset = (page - 1) * limit;
 
-    return tokenRequest(
-      `posts/${postId}/comments?limit=${limit}&offset=${offset}&marker=${marker}`,
-      {
-        method: "GET"
-      }
-    );
+    return tokenRequest(`posts/${postId}/comments`, {
+      query: {
+        limit,
+        offset,
+        marker
+      },
+      method: "GET"
+    });
   },
   sendPostComment({ postId, text, answerTo }) {
     return tokenRequest(`posts/${postId}/comments`, {

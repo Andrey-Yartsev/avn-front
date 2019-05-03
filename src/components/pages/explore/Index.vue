@@ -48,6 +48,9 @@
               :items="topModels"
               actionPrefix="topModels"
             />
+            <div v-else-if="page === 'feed'">
+              <PostCollection :posts="posts" from="explore" />
+            </div>
             <div v-else :class="['explore-wrapper', page]">
               <component
                 :is="postComponent"
@@ -110,6 +113,7 @@ import InfinityScrollMixin from "@/mixins/infinityScroll";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
+import PostCollection from "@/components/common/postCollection/Index";
 
 export default {
   name: "Explore",
@@ -125,7 +129,8 @@ export default {
     Users,
     Live,
     Loader,
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    PostCollection
   },
   mixins: [InfinityScrollMixin, PostsStat],
   created() {
@@ -170,6 +175,10 @@ export default {
 
       if (this.type === "top") {
         return this.$store.state.topModels;
+      }
+
+      if (this.type === "feed") {
+        return this.$store.state.explore;
       }
     },
     contentName() {
@@ -252,7 +261,7 @@ export default {
       this.$store.dispatch("lives/resetPageState");
       this.$store.commit("topModels/reset");
 
-      if (this.type === "media") {
+      if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         this.$store.dispatch("explore/getPosts");
       }

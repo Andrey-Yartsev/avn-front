@@ -374,6 +374,16 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireAny,
+    path: "/explore/feed",
+    component: ExplorePage,
+    meta: {
+      page: "feed",
+      type: "feed",
+      cssName: "explore"
+    }
+  },
+  {
     beforeEnter: (to, from, next) => {
       global.storyFirstEnter = !from.matched.length;
       return Auth.requireAny(to, from, next);

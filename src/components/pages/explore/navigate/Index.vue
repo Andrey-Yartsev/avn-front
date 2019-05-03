@@ -28,6 +28,9 @@
     <router-link to="/explore/top" class="content-nav__item" data-type="top"
       >Top Models</router-link
     >
+    <router-link to="/explore/feed" class="content-nav__item" data-type="top"
+      >Feed</router-link
+    >
   </nav>
 </template>
 

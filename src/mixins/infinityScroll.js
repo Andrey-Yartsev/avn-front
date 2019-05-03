@@ -9,6 +9,11 @@ export default {
   },
   computed: {
     infinityScrollLoading() {
+      if (!this.store) {
+        throw new Error(
+          "this.store is not defined in component using mixin inifinityScroll"
+        );
+      }
       const { loading } = this.store;
       const isLoading = this.loadingName
         ? this.store[this.loadingName]
