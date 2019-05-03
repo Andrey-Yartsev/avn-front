@@ -79,7 +79,12 @@
             </div>
             <div class="msg-no-content" v-if="shouldShowNoPosts">
               <div class="msg-no-content__text">
-                No {{ contentName }} here yet
+                <template v-if="page !== 'lives'">
+                  No {{ contentName }} here yet
+                </template>
+                <template v-else
+                  >No live streams for now</template
+                >
               </div>
             </div>
           </div>
