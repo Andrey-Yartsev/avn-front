@@ -29,7 +29,11 @@ const mutations = {
 
 const actions = {
   getPosts({ commit, state }) {
-    const { limit, offset, marker, source } = state;
+    const { limit, offset, marker } = state;
+    let source = state.source;
+    if (source === "feed") {
+      source = "media";
+    }
     commit("postsRequest");
 
     return PostApi.getExplorePosts({ limit, offset, marker, source })

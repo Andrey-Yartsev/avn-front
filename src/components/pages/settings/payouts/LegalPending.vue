@@ -18,7 +18,7 @@
               <span class="value">
                 <span class="value__text"
                   >{{ legal.address }}, {{ legal.city }},
-                  {{ legal.postalCode }}, {{ legal.state }}</span
+                  {{ legal.postalCode }}, {{ account.countryName }}</span
                 >
               </span>
             </div>
@@ -37,6 +37,9 @@ export default {
   computed: {
     legal() {
       return this.$store.state.payouts.legal.fetchResult;
+    },
+    account() {
+      return this.$store.state.payouts.account.fetchResult;
     }
   },
   mounted() {

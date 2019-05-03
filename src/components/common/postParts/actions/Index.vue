@@ -15,7 +15,7 @@
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="tips actions__btn" @click="$emit('toggleTip')" />
+      <span class="tips actions__btn" @click="toggleTip" />
     </template>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
@@ -65,6 +65,13 @@ export default {
         return;
       }
       this.$emit("postShowCommentForm");
+    },
+    toggleTip() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+      this.$emit("toggleTip");
     }
   }
 };

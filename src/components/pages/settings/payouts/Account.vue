@@ -1,6 +1,6 @@
 <template>
   <div class="payouts-account">
-    <div class="PayoutsAccountView">
+    <div class="PayoutsAccountView" v-if="!loading">
       <h1 class="form-title">
         Add Bank
       </h1>
