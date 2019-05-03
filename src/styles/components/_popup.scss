@@ -412,7 +412,11 @@
   }
 
   &.popup-reasons {
-    max-width: 450px;
+    max-width: 300px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 450px;
+    }
   }
 
   &.chat-popup {
