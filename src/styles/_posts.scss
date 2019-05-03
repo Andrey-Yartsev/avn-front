@@ -1136,6 +1136,7 @@
 
   p {
     padding-bottom: 4px;
+    padding-right: 20px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-bottom: 0;
