@@ -1,12 +1,17 @@
 <template>
   <nav class="header-nav hidden-desktop" v-if="$mq === 'mobile'">
-    <router-link class="menu-item-home header-nav__item" to="/" exact
+    <router-link
+      v-if="user"
+      class="menu-item-home header-nav__item"
+      to="/"
+      exact
       ><span>Home</span></router-link
     >
     <router-link class="menu-item-explore header-nav__item" to="/explore"
       ><span>Explore</span></router-link
     >
     <router-link
+      v-if="user"
       to="/notifications"
       class="menu-item-notifications header-nav__item hidden-desktop"
       :class="{ unread: user && user.hasNotifications }"
@@ -14,6 +19,7 @@
       ><span>Notifications</span></router-link
     >
     <router-link
+      v-if="user"
       class="menu-item-messages header-nav__item showChat hidden-mobile"
       to="/chat"
       ><span>Messages</span></router-link
@@ -21,7 +27,7 @@
     <router-link
       class="menu-item-messages header-nav__item hidden-desktop"
       to="/chat"
-      v-if="$mq === 'mobile'"
+      v-if="$mq === 'mobile' && user"
     >
       <span>Messages</span>
     </router-link>
