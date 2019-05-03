@@ -72,7 +72,7 @@
           <span class="semi-transparent">
             Receive Twitter Notifications
           </span>
-          <label class="toggle-element">
+          <label class="toggle-element" :disabled="!user.twitterUsername">
             <input
               type="checkbox"
               name="isTweetNotificationsEnabled"
@@ -87,7 +87,10 @@
         <div class="container">
           <div
             class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
-            :class="{ disabled: !localUser.isTweetNotificationsEnabled }"
+            :class="{
+              disabled:
+                !user.twitterUsername || !localUser.isTweetNotificationsEnabled
+            }"
           >
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
