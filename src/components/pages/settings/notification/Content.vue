@@ -189,7 +189,7 @@
           <button
             :disabled="loading || !changed"
             type="submit"
-            class="btn lg btn_fix-width saveChanges"
+            class="btn lg btn_fix-width saveChanges btn_form-gap"
           >
             Save changes
           </button>

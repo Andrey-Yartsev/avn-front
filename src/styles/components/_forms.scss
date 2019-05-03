@@ -369,7 +369,7 @@ label {
     }
   }
   .btn {
-    margin: 0 0 13px 20px;
+    //margin: 0 0 13px 20px;
   }
 
   &-btn {
@@ -611,6 +611,7 @@ label {
 
     .semi-transparent {
       display: block;
+      word-break: break-word;
     }
 
     form {

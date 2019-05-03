@@ -9,7 +9,7 @@
             <button
               v-if="!user.isTwitterConnected"
               type="button"
-              class="btn alt border btn_fix-width-lg connect-twitter hidden-mobile"
+              class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter hidden-mobile"
               @click="twitterConnect"
             >
               Connect Twitter account
@@ -51,7 +51,7 @@
       <button
         v-if="!user.isTwitterConnected"
         type="button"
-        class="btn lg border btn_fix-width-lg connect-twitter"
+        class="btn btn_reset-mgap lg border btn_fix-width-lg connect-twitter"
         @click="twitterConnect"
       >
         Connect Twitter account

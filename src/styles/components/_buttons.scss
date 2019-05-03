@@ -136,6 +136,14 @@
     }
   }
 
+  &_reset-mgap {
+    margin: 0;
+  }
+
+  &_form-gap {
+    margin: 0 0 13px 20px;
+  }
+
   &.btn-back-kitchen {
     position: fixed;
     z-index: 12;
