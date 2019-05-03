@@ -98,6 +98,10 @@ import wsp from "@/ws/wsp";
 
 // iterate
 
+import { fromNow } from "@/helpers/datetime";
+
+fromNow("2019-05-03T11:01:12+00:00");
+
 const queryString = require("query-string");
 const trialLogger = Logger.get("trial");
 
