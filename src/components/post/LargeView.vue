@@ -106,7 +106,9 @@
             </div>
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
               <div class="guest-comments-form">
-                <p>Please login to leave comments</p>
+                <a href="#" @click.prevent="openLoginModal"
+                  >Create a free account or log in to leave a comment!</a
+                >
                 <time class="timestamp">{{ timePassed }}</time>
               </div>
             </div>
@@ -144,7 +146,9 @@
       </div>
       <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
         <div class="guest-comments-form">
-          <p>Please login to leave comments</p>
+          <a href="#" @click.prevent="openLoginModal"
+            >Create a free account or log in to leave a comment!</a
+          >
           <time class="timestamp">{{ timePassed }}</time>
         </div>
       </div>

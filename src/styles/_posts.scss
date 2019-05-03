@@ -1138,10 +1138,8 @@
     }
   }
 
-  .date {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      white-space: nowrap;
-    }
+  .timestamp {
+    white-space: nowrap;
   }
 }
 

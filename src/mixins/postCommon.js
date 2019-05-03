@@ -48,6 +48,11 @@ export default {
     closeTip() {
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    openLoginModal() {
+      this.$store.dispatch("modal/show", {
+        name: "login"
+      });
     }
   }
 };
