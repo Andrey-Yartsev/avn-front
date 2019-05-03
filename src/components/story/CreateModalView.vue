@@ -2,7 +2,6 @@
   <Modal :onClose="close">
     <template slot="content">
       <div class="popup-container add-story-popup">
-        <div class="previous hidden"></div>
         <div class="content">
           <div class="addStoryView bg-gradient bg-gradient_standart">
             <form class="storyOverlay">
@@ -87,7 +86,6 @@
             </form>
           </div>
         </div>
-        <div class="next hidden"></div>
         <Loader v-if="showLoader" :fullscreen="false"></Loader>
       </div>
     </template>
