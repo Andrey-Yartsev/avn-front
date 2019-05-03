@@ -7,7 +7,9 @@
         :class="{ 'hidden-mobile': !showAvatarBlock, loaderWrap: loading }"
       >
         <div class="settings-profile-images">
-          <div class="bg-profile bg-color bg-gradient_light">
+          <div
+            class="bg-profile bg-profile_height bg-profile_height-sm bg-color bg-gradient_light"
+          >
             <template v-if="!bgRemoved">
               <img v-if="bgPreview" :src="bgPreview" class="f1" />
               <img v-else-if="user.header" :src="user.header" class="f2" />

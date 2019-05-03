@@ -951,30 +951,66 @@
 }
 
 .bg-profile {
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-  background-size: cover;
   overflow: hidden;
   z-index: 2;
-  position: -webkit-sticky;
-  position: sticky;
 
-  will-change: scroll-position;
+  &_sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    will-change: scroll-position;
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    height: 32vw;
-    top: calc(44px - 32vw);
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: calc(44px - 32vw);
+    }
+
+    &-default {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: -240px;
+      }
+    }
+
+    &-lg {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: -268px;
+      }
+    }
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    height: 320px;
-    top: -240px;
-  }
+  &_height {
 
-  .support-page & {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      height: 32vw;
+    }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      top: -268px;
+    &-sm {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 96px;
+      }
+    }
+
+    &-lg {
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      background-size: cover;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 320px;
+      }
+    }
+
+    &-exlg {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        height: 62vw;
+        top: calc(44px - 62vw);
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 320px;
+      }
     }
   }
 
@@ -1031,14 +1067,6 @@
         rgba(#000, 0.1) 0%,
         transparent 100%
       );
-    }
-  }
-
-  &.size-lg {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      height: 62vw;
-      top: calc(44px - 62vw);
     }
   }
 

@@ -8,15 +8,13 @@
   }
 
   .bg-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: auto;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
     position: relative;
     z-index: 3;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: 96px;
       border-radius: 5px 5px 0 0;
     }
   }
@@ -53,7 +51,7 @@
       right: 0;
       content: "";
       height: 30px;
-      z-index: 2;
+      z-index: 4;
       background: linear-gradient(
         to bottom,
         rgba(#000, 0.1) 0%,

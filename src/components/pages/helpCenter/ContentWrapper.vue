@@ -1,7 +1,9 @@
 <template>
   <div class="special-container">
     <div class="white-bg-block">
-      <div class="bg-profile size-lg">
+      <div
+        class="bg-profile bg-profile_sticky bg-profile_sticky-lg bg-profile_height bg-profile_height-exlg size-lg"
+      >
         <div class="bg-wrap bg-color bg-gradient_standart">
           <div class="container">
             <Header />

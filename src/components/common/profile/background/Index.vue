@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-profile bg-color bg-gradient_standart" :style="bgStyle">
+  <div
+    class="bg-profile bg-profile_height bg-profile_height-lg bg-profile_sticky bg-profile_sticky-default bg-color bg-gradient_standart"
+    :style="bgStyle"
+  >
     <div class="container" v-if="isOwner(profile.id) && !profile.header">
       <div class="controls-select-picture">
         <label
