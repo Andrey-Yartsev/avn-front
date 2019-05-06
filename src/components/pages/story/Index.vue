@@ -252,7 +252,7 @@
           @click="openTip"
           v-if="!isOwner(author.id) && author.canEarn"
           type="button"
-          class="btn-tip tips"
+          class="btn-tip"
         >
           <span class="btn-icon tips" v-tooltip="'Fund'"></span>
         </button>
