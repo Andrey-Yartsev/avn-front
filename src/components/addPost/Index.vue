@@ -78,14 +78,17 @@
         </span>
       </span>
       <div class="text-media-container">
-        <textarea
-          @focus="() => (expanded = true)"
-          class="sm"
-          placeholder="What's going on?"
-          maxlength="1000"
-          v-model="postMsg"
-          ref="textarea"
-        />
+        <vue-tribute :options="tributeOptions">
+          <div
+            @focus="() => (expanded = true)"
+            class="sm content-editable"
+            contenteditable
+            placeholder="What's going on?"
+            maxlength="1000"
+            @input="textInput"
+            ref="textarea"
+          ></div>
+        </vue-tribute>
         <div
           class="post-attachment"
           v-if="
@@ -291,6 +294,8 @@ import moment from "moment";
 import { Settings, DateTime as LuxonDateTime } from "luxon";
 import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
+import VueTribute from "vue-tribute";
+import UserSuggestions from "@/mixins/userSuggestions";
 
 Settings.defaultLocale = "en";
 
@@ -305,7 +310,7 @@ const InitialState = {
 
 export default {
   name: "AddPost",
-  mixins: [FileUpload, UserMixin],
+  mixins: [FileUpload, UserMixin, UserSuggestions],
   data() {
     return {
       ...InitialState,
@@ -318,7 +323,8 @@ export default {
     AddNewNav,
     VuePerfectScrollbar,
     Datetime,
-    Draggable
+    Draggable,
+    VueTribute
   },
   props: {
     initialExpanded: {
@@ -496,7 +502,16 @@ export default {
     },
     closeDatepicker() {
       document.body.classList.remove("open-timepicker");
+    },
+
+    // user suggestions API
+    textInput() {
+      this.postMsg = this.$refs.textarea.innerText;
+    },
+    getText() {
+      return this.postMsg;
     }
+    // ---------------------
   },
   watch: {
     newPost() {
@@ -527,6 +542,8 @@ export default {
         this.mediaType = this.preloadedMedias.length
           ? this.preloadedMedias[0].mediaType
           : "all";
+
+        this.$refs.textarea.innerHTML = this.getText();
       }
     }
   },
@@ -536,6 +553,7 @@ export default {
     }
 
     this.popupItem = this.$el;
+    this.$refs.textarea.innerHTML = this.getText();
   },
   directives: {
     ClickOutside
