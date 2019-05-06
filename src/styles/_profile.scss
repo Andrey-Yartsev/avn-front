@@ -1365,14 +1365,6 @@
     justify-content: flex-end;
   }
 
-  .profile-tip-btn {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: auto;
-      margin-left: 0;
-    }
-  }
-
   .profile-actions {
 
     .more-functions {
