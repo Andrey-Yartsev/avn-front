@@ -39,13 +39,13 @@
       <template v-if="length > 1">
         <button
           type="button"
-          class="btn-prev"
+          class="btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left"
           v-if="currIndex > 0"
           @click="currIndex = currIndex - 1"
         />
         <button
           type="button"
-          class="btn-next"
+          class="btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right"
           v-if="currIndex < length - 1"
           @click="currIndex = currIndex + 1"
         />
@@ -252,10 +252,8 @@
           @click="openTip"
           v-if="!isOwner(author.id) && author.canEarn"
           type="button"
-          class="btn-tip"
-        >
-          <span class="btn-icon tips" v-tooltip="'Fund'"></span>
-        </button>
+          class="btn-tip tips"
+        ><span class="btn-icon tips" v-tooltip="'Fund'"></span></button>
       </div>
       <button type="button" class="close" @click="close"></button>
       <div
@@ -265,7 +263,8 @@
         <div class="play-button"></div>
       </div>
     </template>
-    <Loader v-if="loadingFinal" :fullscreen="false" />
+    <Loader v-if="!isReady" :fullscreen="false" text="Media is processing..." />
+    <Loader v-else-if="loadingFinal" :fullscreen="false" />
 
     <div
       class="stories-collection-overlay"
@@ -334,12 +333,13 @@ export default {
       if (this.videoDoesNotExists) {
         return false;
       }
-      return (
-        this.loading ||
-        this.showLoader ||
-        !this.currentStory ||
-        !this.currentStory.isReady
-      );
+      return this.loading || this.showLoader || !this.currentStory;
+    },
+    isReady() {
+      if (!this.currentStory) {
+        return true;
+      }
+      return this.currentStory.isReady;
     },
     userId() {
       return this.$route.params.userId;
@@ -520,6 +520,7 @@ export default {
     },
 
     close() {
+      console.log("CLOSE");
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
       if (global.storyFirstEnter) {
@@ -727,6 +728,7 @@ export default {
     },
     error() {
       if (this.error) {
+        console.log("error", this.error);
         this.$router.push("/");
       }
     },

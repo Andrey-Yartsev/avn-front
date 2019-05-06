@@ -57,6 +57,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    max-width: 100%;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       max-width: 340px;
@@ -91,6 +92,11 @@
   .user-names {
     margin: 0 auto 0 10px;
     padding-top: 17px;
+    max-width: calc(100% - 100px);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: calc(100% - 176px);
+    }
   }
 
   &__body {

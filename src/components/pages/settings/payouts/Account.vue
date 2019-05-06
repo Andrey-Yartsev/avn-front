@@ -1,6 +1,6 @@
 <template>
   <div class="payouts-account">
-    <div class="PayoutsAccountView">
+    <div class="PayoutsAccountView" v-if="!loading">
       <h1 class="form-title">
         Add Bank
       </h1>
@@ -34,6 +34,7 @@
                   </select>
                 </span>
               </label>
+
               <label class="form-group-inner">
                 <span></span>
                 <span class="input-help">
@@ -46,7 +47,11 @@
               </label>
               <label class="form-group-inner">
                 <span class="label"></span>
-                <button type="submit" class="btn lg btn_fix-width saveChanges">
+                <button
+                  :disabled="!isValid"
+                  type="submit"
+                  class="btn lg btn_fix-width saveChanges"
+                >
                   Next
                 </button>
               </label>
@@ -79,7 +84,7 @@ export default {
 
   data() {
     return {
-      countryId: 212
+      countryId: 0
     };
   },
 
@@ -88,14 +93,36 @@ export default {
       return this.$store.state.payouts.account.fetchResult;
     },
     loading() {
-      return this.$store.state.payouts.account.fetchLoading;
+      return (
+        this.$store.state.payouts.countries.fetchLoading ||
+        this.$store.state.payouts.account.fetchLoading
+      );
+    },
+    selectedCountry() {
+      if (!this._countries) {
+        return null;
+      }
+      return this._countries.find(v => v.id == this.countryId);
+    },
+    isValid() {
+      return !!this.countryId;
+    },
+    _countries() {
+      return this.$store.state.payouts.countries.fetchResult;
     },
     countries() {
-      return Object.keys(countries).map(id => {
+      if (!this._countries) {
+        return [];
+      }
+      let c = this._countries;
+      const america = c.find(v => v.id === "212");
+      c = c.filter(v => v.id !== "212");
+      c = [{ id: 0, name: "—" }, america, ...c];
+      return c.map(v => {
         return {
-          id,
-          title: countries[id],
-          selected: id === this.data
+          id: v.id,
+          title: v.name,
+          selected: v.id === this.countryId
         };
       });
     },
@@ -112,7 +139,9 @@ export default {
       });
     }
   },
+
   mounted() {
+    this.$store.dispatch("payouts/countries/fetch");
     htmlElement.classList.add("with-bg-picture");
   },
   beforeDestroy() {

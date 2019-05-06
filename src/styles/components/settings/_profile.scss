@@ -8,31 +8,14 @@
   }
 
   .bg-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: auto;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
     position: relative;
     z-index: 3;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: 96px;
       border-radius: 5px 5px 0 0;
-    }
-
-    &:empty {
-
-      & ~ .reset-bg {
-        display: none;
-      }
-      & ~ .select-user-image {
-        &[for="bg"] {
-          .select-user-image__text {
-            font-size: 13px;
-            right: 15px;
-          }
-        }
-      }
     }
   }
 
@@ -54,21 +37,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       font-size: 80px;
     }
-    &:empty {
-      & ~ .reset-avatar {
-        display: none;
-      }
-      & ~ .select-user-image {
-        &[for="avatar"] {
-          &:after {
-            left: 50%;
-            bottom: 10px;
-            transform: translate(-50%, 0);
-            text-shadow: $shadow-light;
-          }
-        }
-      }
-    }
   }
   .reset-user-image {
     z-index: 3;
@@ -76,14 +44,14 @@
 
   &:before {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: absolute;
       left: 0;
       top: 0;
       right: 0;
       content: "";
       height: 30px;
-      z-index: 2;
+      z-index: 4;
       background: linear-gradient(
         to bottom,
         rgba(#000, 0.1) 0%,
@@ -160,7 +128,7 @@
 
     .user-color-select-visible & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         visibility: visible;
         opacity: 1;
       }
@@ -247,7 +215,7 @@
 
       &:after {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           right: calc(50% + (50% / 2) + 15px);
           left: auto;
         }
@@ -264,7 +232,7 @@
 
       &:after {
 
-        @include media-breakpoint-down($desktop-breakpoint) {
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           left: calc(50% + (50% / 2) + 15px);
         }
       }
@@ -375,7 +343,7 @@
   .settings-aside & {
     margin: 8px 10px 8px 110px;
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin: 0 0 0 130px;
     }
   }

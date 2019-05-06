@@ -24,7 +24,7 @@
             <span class="user-login"
               ><span class="username">{{ v.withUser.username }}</span></span
             >
-            <div class="time" v-if="v.lastMessage">
+            <div class="timestamp" v-if="v.lastMessage">
               {{ messageTime(v.lastMessage) }}
             </div>
           </div>

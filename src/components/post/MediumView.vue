@@ -39,24 +39,31 @@
       />
       <div v-else class="actions">
         <div class="datetime-value">
+          <span class="post-datetime__icn" />
           <span class="post-datetime__value">{{ formattedDate }}</span>
         </div>
       </div>
-      <Tip
-        :user="post.author"
-        v-if="showTip"
-        ref="tip"
-        @cancel="closeTip"
-        :tipId="`${post.id}`"
-        class="tip-form_post"
-      />
     </div>
-    <AddComment v-if="showAddCommentForm" :sendNewComment="sendNewComment" />
+    <AddComment
+      v-if="showAddCommentForm"
+      :sendNewComment="sendNewComment"
+      :userName="commentReplyUserName"
+    />
+    <Tip
+      :user="post.author"
+      v-if="showTip"
+      ref="tip"
+      @cancel="closeTip"
+      :tipId="`${post.id}`"
+      class="tip-form_post"
+    />
     <CommentsList
       v-if="post.commentsCount"
       :comments="post.comments || []"
       :commentsCount="post.commentsCount || 0"
       :clickOnShowMore="openModal"
+      @commentReply="commentReply"
+      @likeComment="likeComment"
     />
   </div>
 </template>
@@ -71,16 +78,15 @@ import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
 import PostOpen from "@/mixins/postOpen";
+import PostCommon from "@/mixins/postCommon";
 import moment from "moment";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, User, PostOpen],
+  mixins: [ModalRouterGoto, User, PostCommon, PostOpen],
   data: function() {
     return {
-      showAddCommentForm: false,
-      showDropdawn: false,
-      showTip: false
+      showDropdawn: false
     };
   },
   components: {
@@ -129,23 +135,6 @@ export default {
     }
   },
   methods: {
-    sendNewComment(msg) {
-      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
-        post: this.post,
-        text: msg
-      });
-    },
-    likePost() {
-      if (!this.post.canViewMedia) {
-        this.showSubscribeModal();
-        return;
-      }
-
-      this.$store.dispatch(this.actionPrefix + "/likePost", {
-        post: this.post,
-        addLike: !this.post.isFavorite
-      });
-    },
     toggleCommentForm() {
       if (!this.post.canViewMedia) {
         this.showSubscribeModal();
@@ -154,14 +143,6 @@ export default {
 
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
-    },
-    toggleTipForm() {
-      this.showTip = !this.showTip;
-      this.showAddCommentForm = false;
-    },
-    closeTip() {
-      this.showTip = false;
-      this.$refs.tip.reset();
     }
   }
 };

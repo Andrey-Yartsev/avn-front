@@ -8,7 +8,7 @@
 
       <div class="photo-label-wrapper">
         <div class="photo-label">
-          <label for="photo" class="btn lg photo-btn">
+          <label for="photo" class="btn border photo-btn">
             {{ buttonTitle }}
             <input
               type="file"

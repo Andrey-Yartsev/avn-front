@@ -9,6 +9,7 @@
     </span>
     <span
       class="actions__btn"
+      :class="{ 'clickable-state': showTips }"
       @click="postShowCommentForm"
       v-if="post.canComment"
     >
@@ -18,9 +19,7 @@
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="actions__btn" @click="$emit('toggleTip')">
-        <span class="btn-icon tips" v-tooltip="'Fund'"></span>
-      </span>
+      <span class="actions__btn" @click="toggleTip"><span class="btn-icon tips" v-tooltip="'Fund'"></span></span>
     </template>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
@@ -45,6 +44,10 @@ export default {
     openModal: {
       type: Function,
       default: () => {}
+    },
+    showTips: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -66,6 +69,13 @@ export default {
         return;
       }
       this.$emit("postShowCommentForm");
+    },
+    toggleTip() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+      this.$emit("toggleTip");
     }
   }
 };

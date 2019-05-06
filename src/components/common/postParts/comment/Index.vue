@@ -1,5 +1,5 @@
 <template>
-  <div class="comment">
+  <div class="comment" :class="{ 'comment-answer': !!comment.answerTo }">
     <router-link
       v-if="comment.author && full"
       :to="'/' + comment.author.username"
@@ -18,7 +18,7 @@
           >{{ comment.author.name }}</router-link
         >
         <div v-if="comment.text.length > collapseLimit" class="comment-text">
-          <span v-html="trunc(comment.text)"></span>&nbsp;
+          <span v-html="trunc(comment.text)"></span>
           <a href="#" @click.prevent="collapsed = !collapsed">{{
             collapsed ? "Read more" : "Collapse"
           }}</a>
@@ -33,7 +33,7 @@
         <button
           type="button"
           class="btn-reply"
-          @click="$emit('commentReply', comment.author.username)"
+          @click="$emit('commentReply', comment)"
         >
           Reply
         </button>
@@ -47,7 +47,9 @@
             isLiked: comment.isLiked
           })
         "
-      ></button>
+      >
+        <span class="likes likes_size-sm likes_reset-gap-r"></span>
+      </button>
     </div>
   </div>
 </template>
@@ -64,7 +66,7 @@ export default {
     },
     full: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   data() {

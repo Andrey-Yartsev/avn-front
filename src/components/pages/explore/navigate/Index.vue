@@ -26,7 +26,13 @@
       >Live</router-link
     >
     <router-link to="/explore/top" class="content-nav__item" data-type="top"
-      >Top Models</router-link
+      >Top
+      <template v-if="$mq === 'desktop'"
+        >Models</template
+      ></router-link
+    >
+    <router-link to="/explore/feed" class="content-nav__item" data-type="top"
+      >Feed</router-link
     >
   </nav>
 </template>

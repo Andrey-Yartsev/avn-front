@@ -177,7 +177,7 @@ export default {
         return;
       }
       this.$store.dispatch("profile/home/extend", {
-        subscribedByExpire: true
+        subscribedByProgress: true
       });
       this.$store.dispatch(
         "global/flashToast",
@@ -189,7 +189,7 @@ export default {
         return;
       }
       this.$store.dispatch("profile/home/extend", {
-        subscribedByExpire: false
+        subscribedByProgress: false
       });
       this.$store.dispatch(
         "global/flashToast",

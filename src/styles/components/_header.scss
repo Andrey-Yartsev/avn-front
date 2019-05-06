@@ -240,7 +240,6 @@
     .profile-actions__btn {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        margin-left: 25px;
         height: 60px;
         white-space: nowrap;
         padding: 10px 0 8px;
@@ -253,6 +252,10 @@
           width: auto;
           height: 100%;
         }
+      }
+
+      &:not(.profile-tip-btn) {
+        margin-left: 25px;
       }
 
       &.more-functions {

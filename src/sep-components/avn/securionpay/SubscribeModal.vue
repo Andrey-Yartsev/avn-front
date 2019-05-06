@@ -43,7 +43,7 @@ export default {
       );
     },
     close() {
-      this.$store.commit("modal/hide", { name: "subscribe" });
+      this.$store.commit("modal/hideSafe", { name: "subscribe" });
     }
   }
 };

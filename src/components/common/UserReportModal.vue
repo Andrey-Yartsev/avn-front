@@ -60,18 +60,16 @@
                         </div>
                       </label>
                     </div>
-                  </div>
-                </div>
-                <div class="container">
-                  <div class="form-group form-group_with-label">
-                    <button
-                      :disabled="!reason"
-                      type="submit"
-                      id="send-report"
-                      class="btn lg btn_fix-width saveChanges"
-                    >
-                      Report
-                    </button>
+                    <div class="form-group form-group_with-label">
+                      <button
+                        :disabled="!reason"
+                        type="submit"
+                        id="send-report"
+                        class="btn btn_form-gap lg btn_fix-width saveChanges"
+                      >
+                        Report
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>

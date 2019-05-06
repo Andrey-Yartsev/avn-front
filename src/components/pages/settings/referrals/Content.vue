@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="border-top shadow-block referrals-link">
-      <a :href="url">{{ url }}</a>
+      <div class="referrals-url">
+        <a :href="url">{{ url }}</a>
+      </div>
       <div class="referral-desc">
         <p class="subtext">
           Refer creators to

@@ -84,7 +84,7 @@
         <div class="form-group form-group_with-label">
           <button
             type="submit"
-            class="btn lg btn_fix-width"
+            class="btn lg btn_fix-width btn_form-gap"
             :disabled="!changed"
           >
             Save changes

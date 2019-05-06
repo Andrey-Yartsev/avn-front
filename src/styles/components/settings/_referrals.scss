@@ -9,6 +9,10 @@
     }
   }
 
+  &-url {
+    word-break: break-all;
+  }
+
   &-link {
     padding: 14px 20px;
 
@@ -77,6 +81,13 @@
 
   &.copied {
     animation: none;
+  }
+
+  &_reset-mt {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 0;
+    }
   }
 }
 

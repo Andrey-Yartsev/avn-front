@@ -18,7 +18,11 @@
           </div>
           <template v-else>
             <div class="loader-container" v-if="loading">
-              <Loader :fullscreen="false" text="" class="transparent small" />
+              <Loader
+                :fullscreen="false"
+                text=""
+                class="transparent small no-text"
+              />
             </div>
             <template v-else>
               <template v-if="visibleResults.length">

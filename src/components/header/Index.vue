@@ -53,12 +53,14 @@
               type="button"
               @click="openAddPostModal"
               :disabled="disabledButton"
+              v-if="$mq === 'desktop'"
             >
               Share
             </button>
             <router-link
               to="/addPost"
               class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+              v-if="$mq === 'mobile'"
             >
               Share
             </router-link>

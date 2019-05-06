@@ -1,6 +1,9 @@
 <template>
   <div class="staticPage">
-    <div class="container contact-page" id="contact-container">
+    <div
+      class="container container_sm-width contact-page"
+      id="contact-container"
+    >
       <h1>Contact</h1>
       <template v-if="sendSuccess">
         Your request has been sent. Thank you for conversation.

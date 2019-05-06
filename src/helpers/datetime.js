@@ -17,7 +17,7 @@ export const fromNow = time => {
   const today = moment();
   const day = moment(time);
 
-  if (today.isSame(day, "d")) {
+  if (today.diff(day) / 1000 / 60 / 60 < 24) {
     return day.fromNow();
   }
 

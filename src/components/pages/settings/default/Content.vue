@@ -129,12 +129,11 @@
                 <span class="subscription__per-month">per month</span>
                 <input
                   class="field-gap_currency field-gap_timeunit"
-                  type="number"
-                  min="0"
-                  step="0.01"
+                  type="text"
                   name="subscribePrice"
                   v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
+                  :class="{ error: !isValid }"
                 />
               </span>
             </label>
@@ -193,7 +192,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width"
-              :disabled="loading || !changed"
+              :disabled="loading || !changed || !isValid"
             >
               Save changes
             </button>
@@ -241,6 +240,18 @@ export default {
     },
     genderList() {
       return this.$store.state.init.data.genders;
+    },
+    subscribePrice() {
+      if (!this.localUser) {
+        return null;
+      }
+      return this.localUser.subscribePrice;
+    },
+    isValid() {
+      if (!this.subscribePrice) {
+        return true;
+      }
+      return !!this.subscribePrice.toString().match(/^\d+(\.\d+)?$/);
     }
   },
 
@@ -254,6 +265,10 @@ export default {
         ""
       );
     }
+    // subscribePrice(subscribePrice) {
+    //   this.localUser.subscribePrice = subscribePrice.toString().replace(",", ".");
+    //   console.log(this.localUser.subscribePrice);
+    // }
   },
 
   mounted() {

@@ -19,4 +19,4 @@ const b = a.filter(function(item, pos, self) {
 });
 
 fs.writeFileSync("reserved-words.json", JSON.stringify(b));
-console.log("done");
+console.log("routes generated");

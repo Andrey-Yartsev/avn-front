@@ -44,9 +44,9 @@ export default {
         });
     },
 
-    sendPostComment({ commit }, { post, text }) {
+    sendPostComment({ commit }, { post, text, answerTo }) {
       const postId = post.id;
-      return PostApi.sendPostComment({ postId, text })
+      return PostApi.sendPostComment({ postId, text, answerTo })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(comment) {
@@ -206,6 +206,16 @@ export default {
           return {
             ...post,
             fullComments: (post.fullComments || []).map(comment => {
+              if (comment.id === commentId) {
+                return {
+                  ...comment,
+                  isLiked,
+                  likesCount
+                };
+              }
+              return comment;
+            }),
+            comments: (post.comments || []).map(comment => {
               if (comment.id === commentId) {
                 return {
                   ...comment,

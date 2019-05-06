@@ -1,6 +1,5 @@
 <template>
   <div class="sticky-header-controls">
-    <!--<ProfileBackground :profile="profile" />-->
     <router-link to="/" class="header-return-btn"></router-link>
     <div
       class="profile-name__header"
@@ -9,11 +8,9 @@
       <span class="name">
         {{ profile.name }}
       </span>
-      <span class="verified-user"></span>
+      <span class="verified-user" v-if="user.isVerified"></span>
       <span class="user-login">
-        <router-link :to="'/' + profile.username">{{
-          profile.name
-        }}</router-link>
+        <router-link :to="'/' + profile.username">{{ profile.id }}</router-link>
       </span>
     </div>
     <UserDropdown

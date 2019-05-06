@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info show">
+          <div class="empty-table-info show" v-if="!items.length">
             <span>Empty here for now</span>
           </div>
         </div>

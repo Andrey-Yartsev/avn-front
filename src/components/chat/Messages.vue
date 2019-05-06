@@ -22,7 +22,7 @@
           <div class="chatMessageWrapper">
             <div
               class="avatar avatar_gap-r-md avatar_sm"
-              v-if="v.lastMessageInGroup"
+              v-if="v.lastMessageInGroup && !isAuthor(v)"
             >
               <span class="avatar__img">
                 <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar" />
@@ -34,7 +34,6 @@
                 :class="{
                   tipsMessage: v.isTips,
                   lockedMessage: isLocked(v),
-                  unlockedMessage: !isLocked(v) && !v.isTips,
                   'message-icon': isLocked(v) || v.isTips || !isLocked(v),
                   mine: isMyMessage(v)
                 }"

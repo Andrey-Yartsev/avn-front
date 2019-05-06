@@ -182,7 +182,7 @@ export default {
 
   data() {
     return {
-      collapseLimit: 100,
+      collapseLimit: 250,
       collapsed: true
     };
   },
@@ -273,10 +273,12 @@ export default {
       this.initPosts();
     },
     subscriptionUpdate(data) {
-      if (!this.$refs.actionsDesktop) {
-        return;
+      if (this.$refs.actionsDesktop) {
+        this.$refs.actionsDesktop.subsRequested(data);
       }
-      this.$refs.actionsDesktop.subsRequested(data);
+      if (this.$refs.actionsMobile) {
+        this.$refs.actionsMobile.subsRequested(data);
+      }
     },
     highlights() {
       this.footerScrollAction();
@@ -361,9 +363,11 @@ export default {
     this.scrollToTop();
     this.footerScrollAction();
     window.addEventListener("scroll", this.scrollAction, true);
+    document.title = this.profile.name + " | AVN";
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.scrollAction, true);
+    document.title = "AVN";
   }
 };
 </script>

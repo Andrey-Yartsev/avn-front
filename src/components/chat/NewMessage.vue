@@ -21,6 +21,7 @@
             class="nextStep btn hidden-desktop"
             :disabled="!selected.length"
             @click="next"
+            v-if="$mq === 'mobile'"
           >
             Next
           </button>

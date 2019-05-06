@@ -2,7 +2,11 @@
   <Modal :onClose="close" :path="path" :extraClassName="extraClassName">
     <template slot="content">
       <div class="popup-container post post-popup">
-        <div class="previous" @click="index -= 1" v-if="index > 0"></div>
+        <div
+          class="btn-direction btn-direction_tb-sides btn-direction_prev btn-direction_prev-up"
+          @click="index -= 1"
+          v-if="index > 0"
+        ></div>
         <div class="content content_column-mob">
           <div class="postPageWrapper">
             <PostLargeView
@@ -18,7 +22,11 @@
           class="close close_default"
           @click="close"
         ></button>
-        <div class="next" @click="next" v-if="index + 1 < length"></div>
+        <div
+          class="btn-direction btn-direction_tb-sides btn-direction_next btn-direction_next-down"
+          @click="next"
+          v-if="index + 1 < length"
+        ></div>
       </div>
     </template>
   </Modal>

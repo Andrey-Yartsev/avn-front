@@ -17,11 +17,15 @@ export default data => {
         Store.dispatch("profile/home/getPosts");
       }
     }
+    if (!payment.actionPrefix) {
+      console.log("BAD");
+      console.trace(payment);
+    }
     Store.commit(payment.actionPrefix + "/extendUser", {
       userId: payment.user.id,
       data: {
         subscribedBy: true,
-        subscribedByExpire: false
+        subscribedByProgress: false
       }
     });
   } else {

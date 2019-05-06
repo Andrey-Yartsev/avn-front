@@ -18,6 +18,7 @@ import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
 import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
 import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
+import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
 import PostPage from "@/components/pages/post/Index";
 import NotFoundPage from "@/components/pages/notFound/Index";
 import Chat from "@/components/chat/Chat";
@@ -261,6 +262,15 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/settings/trials",
+    component: SettingsTrialsPage,
+    meta: {
+      title: "Free Trials",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/stream",
     component: StreamPage,
     meta: {
@@ -360,6 +370,16 @@ const routes = [
     meta: {
       page: "topmodels",
       type: "top",
+      cssName: "explore"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/explore/feed",
+    component: ExplorePage,
+    meta: {
+      page: "feed",
+      type: "feed",
       cssName: "explore"
     }
   },

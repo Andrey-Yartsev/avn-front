@@ -122,8 +122,12 @@
           </div>
         </div>
         <div class="session-content">
-          <div class="loader-container" v-if="loading">
-            <Loader :fullscreen="false" text="" class="transparent small" />
+          <div class="content shadow-block loader-container" v-if="loading">
+            <Loader
+              :fullscreen="false"
+              text=""
+              class="transparent small no-text"
+            />
           </div>
 
           <div class="content shadow-block" v-else-if="sessions.length">

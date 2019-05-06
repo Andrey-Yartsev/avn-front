@@ -38,7 +38,6 @@ export default {
   },
   computed: {
     media() {
-      console.log(this.message);
       return this.message.media[0];
     }
   },

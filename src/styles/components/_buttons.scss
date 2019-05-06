@@ -23,11 +23,15 @@
     color: #fff;
   }
   &.alt {
-    background: $primary-color;
-    color: #fff;
-    &:hover {
-      background: $primary-color-darken;
+
+    &:not(.border) {
+      background: $primary-color;
       color: #fff;
+
+      &:hover {
+        background: $primary-color-darken;
+        color: #fff;
+      }
     }
   }
   &.sm {
@@ -50,7 +54,6 @@
     width: 100%;
   }
   &.border {
-    color: $primary-color;
     background: none;
 
     &:before {
@@ -70,6 +73,14 @@
 
       &:before {
         color: $primary-color;
+      }
+    }
+
+    &:not(.alt) {
+      color: $primary-color;
+      
+      &:hover {
+        color: #fff;
       }
     }
 
@@ -125,6 +136,14 @@
     }
   }
 
+  &_reset-mgap {
+    margin: 0;
+  }
+
+  &_form-gap {
+    margin: 0 0 13px 20px;
+  }
+
   &.btn-back-kitchen {
     position: fixed;
     z-index: 12;
@@ -140,7 +159,26 @@
   + .lds-dual-ring.inline {
     margin-left: 10px;
   }
+
+  &_delete {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: $secondary-color;
+
+    &:after {
+      content: "\E600";
+      @include icon-font;
+      font-size: 18px;
+      @include position-center;
+    }
+  }
 }
+
 button {
   font: inherit;
 
@@ -490,11 +528,6 @@ button,
     }
   }
 
-  &:before {
-    content: "\E616";
-    @include icon-font;
-  }
-
   &.active {
     opacity: 1;
     color: $primary-color;
@@ -503,10 +536,15 @@ button,
 
 .likes,
 .comments,
-.looking {
+.looking,
+.tips {
   display: inline-block;
   height: 24px;
   line-height: 24px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
 
   &:before {
     @include icon-font;
@@ -517,7 +555,18 @@ button,
     margin-right: 5px;
   }
 
-  &:last-child {
+  &_size {
+
+    &-sm {
+      height: 19px;
+
+      &:before {
+        font-size: 19px;
+      }
+    }
+  }
+
+  &_reset-gap-r {
 
     &:before {
       margin-right: 0;
@@ -547,14 +596,8 @@ button,
 }
 
 .tips {
-  color: $main-color;
-  opacity: 0.3;
-  display: inline-block;
+  //color: $main-color;
   align-items: center;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  transition: color 0.3s ease, opacity 0.3s ease;
 
   &:not(.btn-icon) {
 
@@ -567,18 +610,10 @@ button,
     }
   }
 
-  &.active {
-    opacity: 1;
-    color: $primary-color;
-  }
   &:before {
-    display: inline-block;
-    @include icon-font;
-    font-size: 24px;
-    margin: 0;
     width: 1.1em;
-    font-weight: 400;
     content: "\E618";
+    //transform: translateY(-1px);
   }
 }
 
@@ -612,4 +647,222 @@ button,
 
 .btn-edit-bank {
   color: $secondary-color;
+}
+
+.btn-send {
+  background-color: transparent;
+  border: none;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease, opacity 0.3s ease;
+
+  &_default {
+    color: $secondary-color;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
+    }
+
+    &.disabled,
+    &[disabled] {
+      opacity: 1;
+      pointer-events: none;
+      color: rgba(124, 139, 150, 0.18);
+    }
+  }
+
+  &_inside-field {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 10px;
+    height: 100%;
+    color: #fff;
+  }
+
+  &:before {
+    content: "\E62D";
+    @include icon-font;
+    font-size: 24px;
+    margin: 0;
+    width: 1.1em;
+    font-weight: 400;
+  }
+}
+
+.btn-direction {
+  cursor: pointer;
+  opacity: 0.7;
+  text-align: center;
+  color: #fff;
+  transition: opacity 0.3s ease;
+  background: none;
+  padding: 0;
+  border: none;
+
+  &_prev {
+
+    &-up {
+      top: 0;
+
+      &:before {
+        content: "\E644";
+      }
+    }
+
+    &-left {
+      left: 0;
+
+      &:before {
+        content: "\E645";
+      }
+    }
+  }
+
+  &_next {
+
+    &-down {
+      bottom: 0;
+
+      &:before {
+        content: "\E646";
+      }
+    }
+
+    &-right {
+      right: 0;
+
+      &:before {
+        content: "\E643";
+      }
+    }
+  }
+
+  &_lr-sides {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 58px;
+    z-index: 2;
+    font-size: 48px;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      opacity: 0;
+    }
+
+    &:before {
+      @include position-center;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
+    }
+
+    .media-slider-navigation & {
+      filter: drop-shadow(2px 2px 5px rgba(#000, 0.4));
+      width: 45px;
+      font-size: 36px;
+
+      .postPage & {
+        width: 56px;
+        font-size: 44px;
+      }
+    }
+  }
+
+  &_tb-sides {
+    position: fixed;
+    left: 0;
+    right: 0;
+    font-size: 46px;
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 24px;
+        line-height: 44px;
+      }
+    }
+  }
+
+  &:hover {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      opacity: 1;
+    }
+  }
+
+  &:before {
+    @include icon-font;
+  }
+}
+
+.add-media-input {
+  color: $secondary-color;
+  transition: color 0.3s ease;
+
+  &:before {
+    content: "\E61A";
+    display: block;
+    @include icon-font;
+    font-size: 24px;
+
+    .add-new-form & {
+      width: 2em;
+    }
+
+    .add-new-form.expanded & {
+      width: 1.5em;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 1.1em;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
+  }
+
+  .chatForm & {
+    margin: 0 0.6em 0 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 1em;
+    }
+  }
+
+  .chatForm.disabled & {
+    color: rgba(124, 139, 150, 0.18);
+  }
+
+  .add-new-form:not(.expanded) & {
+    right: 148px;
+    position: absolute;
+    top: 0;
+    margin-right: 0;
+
+    .truncated & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 0;
+      }
+    }
+  }
+
+  .add-new-form.expanded & {
+
+    &.disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
 }

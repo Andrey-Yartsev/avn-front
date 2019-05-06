@@ -298,7 +298,6 @@ video {
   }
 
   .shadow-block {
-    margin-bottom: 30px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background-color: transparent;
@@ -852,5 +851,17 @@ video {
     &.jq-toast-hide {
       opacity: 0;
     }
+  }
+}
+
+.text2257 {
+  font-size: 14px;
+
+  p {
+    padding-bottom: 15px;
+  }
+
+  strong {
+    font-weight: 600;
   }
 }

@@ -11,6 +11,8 @@
         v-for="comment in visibleComments"
         :key="comment.id"
         :comment="comment"
+        @commentReply="comment => $emit('commentReply', comment)"
+        @likeComment="data => $emit('likeComment', data)"
       />
     </div>
   </div>

@@ -43,7 +43,7 @@
           >
             <span class="value">{{ mediaDuration }}</span>
           </span>
-          <span class="overlay">
+          <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster">
             <span class="likes">{{ post.favoritesCount }}</span>
             <span class="comments">{{ post.commentsCount }}</span>
           </span>

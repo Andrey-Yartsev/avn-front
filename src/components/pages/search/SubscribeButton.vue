@@ -35,7 +35,7 @@ export default {
       }
       this.$store.commit("search/page/extendUser", {
         userId: this.profile.id,
-        data: { subscribedByExpire: true }
+        data: { subscribedByProgress: true }
       });
       this.$store.dispatch(
         "global/flashToast",
@@ -48,7 +48,7 @@ export default {
       }
       this.$store.commit("search/page/extendUser", {
         userId: this.profile.id,
-        data: { subscribedByExpire: false }
+        data: { subscribedByProgress: false }
       });
       this.$store.dispatch(
         "global/flashToast",

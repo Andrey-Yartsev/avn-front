@@ -1,7 +1,11 @@
 <template>
   <div
     class="chatCollectionContent"
-    :class="{ chat: isSecondScreen, 'no-chats': noActiveChats }"
+    :class="{
+      chat: isSecondScreen,
+      'no-chats': noActiveChats,
+      'page-block': mode !== 'modal'
+    }"
     @scroll="onScroll"
   >
     <template>

@@ -194,38 +194,46 @@
         <div id="stream-timer" v-if="!isStopped && !startingStream">
           {{ time }}
         </div>
-        <div class="stream-online-label">live</div>
+        <div class="stream-online-label" v-if="isStarted && !startingStream">
+          live
+        </div>
         <div class="form-stream">
           <div class="stream-comments-wrapper" v-if="shownComments.length">
             <div
-              class="item"
+              class="stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
-              <span
-                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-              >
-                <span class="avatar__img">
-                  <img :src="comment.user.avatar" v-if="comment.user.avatar" />
+              <div class="stream-message__head">
+                <span
+                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+                >
+                  <span class="avatar__img">
+                    <img
+                      :src="comment.user.avatar"
+                      v-if="comment.user.avatar"
+                    />
+                  </span>
                 </span>
-              </span>
-              <span class="name">{{ comment.user.name }}</span>
-              <span class="text">{{ comment.comment }}</span>
+                <span class="name">{{ comment.user.name }}</span>
+              </div>
+              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form class="stream-comment-form" v-if="showCommentForm">
-            <input
-              type="text"
+            <textarea
               placeholder="Comment"
               class="stream-comment-input rounded lg"
-              maxlength="24"
+              maxlength="200"
+              :minHeight="20"
+              :maxHeight="85"
               v-model="newComment"
               @keypress.enter.prevent="sendComment"
             />
             <button
               @click="sendComment"
               type="button"
-              class="stream-comment-send-btn"
+              class="btn-send btn-send_inside-field"
               :disabled="!newComment.length"
             ></button>
           </form>
@@ -258,7 +266,7 @@
         />
       </div>
       <div class="mediasBottom" v-if="isReadyToStart">
-        <button class="btn alt lg change-devices" @click="startStream">
+        <button class="btn alt lg change-devices" @click="tryToStartStream">
           Start live video
         </button>
       </div>
@@ -291,6 +299,7 @@ import userMixin from "@/mixins/user";
 import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
+import logoBase64 from "./logo";
 
 export default {
   name: "Stream",
@@ -457,11 +466,38 @@ export default {
       }
       this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
     },
-    startStream() {
-      this.isReadyToStart = false;
-      this.isStarted = true;
+    tryToStartStream() {
       this.startingStream = true;
-      Streams.startStream();
+      this.isReadyToStart = false;
+
+      StreamApi.checkActive()
+        .then(res => res.json())
+        .then(({ hasActive }) => {
+          if (hasActive) {
+            this.$store.dispatch("modal/show", {
+              name: "confirm",
+              data: {
+                title:
+                  "You have another stream started. Do you want to stop it?",
+                success: () => {
+                  this.killActiveStreamAndStart();
+                },
+                abort: () => {
+                  this.$router.push("/");
+                },
+                hideQuestion: true
+              }
+            });
+          } else {
+            this.isStarted = true;
+            Streams.startStream();
+          }
+        });
+    },
+    killActiveStreamAndStart() {
+      return StreamApi.deleteStream().then(() => {
+        this.tryToStartStream();
+      });
     },
     stopStream() {
       this.requestStreamStat();
@@ -643,6 +679,15 @@ export default {
               token
             );
             Streams.getStreamAsClient();
+            Streams.sendCustomMessage({
+              msgtype: "data.custom",
+              to: ["transcoder"],
+              data: {
+                type: "watermark",
+                data: this.user.publicUrl,
+                logo: logoBase64
+              }
+            });
             this.streamStartTime = new Date().getTime() / 1000;
           });
       },
@@ -662,9 +707,13 @@ export default {
 
           this.finishing = true;
 
-          StreamApi.deleteStream(this.startedStreamId).then(() => {
-            this.finishing = false;
-          });
+          StreamApi.deleteStream(this.startedStreamId)
+            .then(() => {
+              this.finishing = false;
+            })
+            .catch(() => {
+              this.finishing = false;
+            });
         }
 
         this.isReadyToStart = true;

@@ -11,7 +11,7 @@
     </div>
     <div class="chatForm">
       <label
-        class="add-media-input btn-el"
+        class="add-media-input"
         :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"
@@ -33,7 +33,7 @@
 
       <div
         class="field-text-message"
-        :class="{ disabled: showTip || showPaid }"
+        :class="{ disabled: showTip || showPaid, 'has-price': priceIsSet }"
       >
         <TextareaAutosize
           v-model="message"
@@ -47,11 +47,6 @@
           @enter="sendMessage"
           :disabled="disable"
         ></TextareaAutosize>
-
-        <div class="price-message-wrapper">
-          <span class="price-message"></span>
-          <button type="submit" class="btn-clear-price"></button>
-        </div>
 
         <div class="price-message-wrapper" v-if="priceIsSet">
           <span class="price-message">${{ price }}</span>
@@ -101,7 +96,7 @@
 
       <button
         @click="sendMessage"
-        class="submit btn-el"
+        class="btn-send btn-send_default"
         :disabled="!canSend || disable"
         v-tooltip="'Send'"
       ></button>

@@ -19,28 +19,66 @@
   display: flex;
   flex-direction: column;
 
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    flex: 1;
+    position: relative;
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     background: $white;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    flex-direction: row;
     flex-wrap: wrap;
     border-radius: 5px;
     min-height: 440px;
   }
 
-  .post-popup & {
-    margin-bottom: 0;
-    position: relative;
+  &__inside {
+    flex: 1;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: absolute;
-      left: 0;
-      right: 0;
       top: 0;
       bottom: 0;
+      left: 0;
+      right: 0;
       overflow-y: auto;
     }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          overflow: hidden;
+          position: relative;
+          top: auto;
+          bottom: auto;
+          left: auto;
+          right: auto;
+          margin: auto 0;
+          flex: 0 0 auto;
+        }
+      }
+    }
+
+    &:not(.has-media) {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .post-popup & {
+    margin-bottom: 0;
+    position: relative;
   }
 
   .lightbox-post & {
@@ -127,14 +165,6 @@
     }
   }
 
-  .postPage-content {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-bottom: 0;
-      display: block;
-    }
-  }
-
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -154,6 +184,7 @@
     position: relative;
     background: $white;
     width: 100%;
+    flex-direction: column;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -190,6 +221,16 @@
     background: none;
     box-shadow: none;
 
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+      flex-direction: column;
+    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       max-height: calc(100vh - 120px);
       min-height: 440px;
@@ -199,7 +240,6 @@
   .actions {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      order: -2;
       padding-top: 10px;
       padding-bottom: 18px;
       border-bottom: 1px solid rgba($gray, 0.2);
@@ -294,6 +334,8 @@
         @include media-breakpoint-down($mobile-breakpoint-dcrs) {
           flex: 0 0 auto;
           width: 100%;
+
+          display: none;
         }
       }
     }
@@ -311,10 +353,7 @@
 .right-col {
   display: flex;
   flex-direction: column;
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    flex: 1;
-  }
+  flex: 1;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100%;
@@ -342,8 +381,32 @@
   .postPage & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-bottom: 70px;
       flex: 0 0 auto;
+    }
+  }
+}
+
+.post-capability {
+  width: 100%;
+  margin-top: auto;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    box-shadow: 0 -3px 2px rgba(#000, 0.05);
+    backface-visibility: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 7px;
+    padding-bottom: 20px;
+    z-index: 21;
+    background-color: $white;
+  }
+
+  .lightbox-post & {
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
     }
   }
 }
@@ -352,6 +415,7 @@
   min-height: 62px;
   position: relative;
   pointer-events: none;
+  margin-bottom: 12px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-bottom: 0;
@@ -367,14 +431,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-  }
-
-  .popup &,
-  .postPage & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 66px;
-    }
   }
 
   .lightbox-post & {

@@ -17,6 +17,7 @@
     <span class="user-login">
       <router-link :to="'/' + user.username">{{ user.username }}</router-link>
     </span>
+    <span class="follow-link hidden">Follow</span>
     <time class="timestamp" v-if="datetime">
       {{ datetime }}
     </time>

@@ -25,14 +25,13 @@
             @click="goToAddPost"
           >
             <div class="post-datetime">
-              <span class="post-datetime__btn" />
+              <span class="post-datetime__icn" />
             </div>
           </div>
           <div class="btn-post" v-if="user.isPerformer">
-            <router-link class="b-check-state b-check-state_live" to="/stream"
-              ><span class="btn-post__text exception"
-                >Go live</span
-              ></router-link
+            <router-link class="b-check-state b-check-state_live" to="/stream">
+              <span class="b-check-state__icon"></span>
+              <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>
         </div>

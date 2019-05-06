@@ -10,10 +10,7 @@
               Transactions
             </span>
           </div>
-          <div class="border-top loader-container" v-if="loading">
-            <Loader :fullscreen="false" text="" class="transparent small" />
-          </div>
-          <div class="table-header transactions-table-header" v-if="!loading">
+          <div class="table-header transactions-table-header">
             <div
               class="date table__cell table__cell_align table__cell_align-hor-c"
             >
@@ -31,6 +28,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="shadow-block loader-container no-padding" v-if="loading">
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
       </div>
       <div class="shadow-block no-padding" v-if="!loading">
         <div class="table-wrapper">

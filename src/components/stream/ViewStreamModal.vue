@@ -38,37 +38,38 @@
         <div class="form-stream">
           <div class="stream-comments-wrapper" v-if="shownComments.length">
             <div
-              class="item"
+              class="stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment"
             >
-              <span
-                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-              >
-                <span class="avatar__img">
-                  <img :src="comment.user.avatar" />
+              <div class="stream-message__head">
+                <span
+                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+                >
+                  <span class="avatar__img">
+                    <img :src="comment.user.avatar" />
+                  </span>
                 </span>
-              </span>
-              <span class="name">{{ comment.user.name }}</span>
-              <span class="text">{{ comment.comment }}</span>
+                <span class="name">{{ comment.user.name }}</span>
+              </div>
+              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form
             class="stream-comment-form"
             v-if="showCommentForm && !isMyStream"
           >
-            <input
-              type="text"
+            <textarea
               placeholder="Comment"
               class="stream-comment-input rounded lg"
-              maxlength="24"
+              maxlength="200"
               v-model="newComment"
               @keypress.enter.prevent="sendComment"
             />
             <button
               @click="sendComment"
               type="button"
-              class="stream-comment-send-btn"
+              class="btn-send btn-send_inside-field"
               :disabled="!newComment.length"
             ></button>
           </form>

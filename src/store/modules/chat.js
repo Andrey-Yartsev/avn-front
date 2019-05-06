@@ -81,6 +81,21 @@ const actions = {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
+    if (rootState.auth.user.id !== message.fromUser.id) {
+      const chatFound = state.chats.find(chat => {
+        return message.fromUser.id === chat.withUser.id;
+      });
+      if (!chatFound) {
+        commit("addNewChat", {
+          hasHistory: true,
+          lastMessage: message,
+          mediaCount: message.mediaCount,
+          unreadMessageCount: 0,
+          withUser: message.fromUser
+        });
+      }
+    }
+
     const found = state.messages.find(v => v.id === message.id);
     if (found) {
       commit("replaceMessage", message);
@@ -90,12 +105,13 @@ const actions = {
       } else if (state.activeUserId === message.fromUser.id) {
         commit("addMessage", message);
       }
-      dispatch("updateChatLastMessage", {
-        message,
-        fromUserId: message.fromUser.id,
-        isMine: message.fromUser.id === rootState.auth.user.id
-      });
     }
+
+    dispatch("updateChatLastMessage", {
+      message,
+      withUserId: message.fromUser.id,
+      isMine: message.fromUser.id === rootState.auth.user.id
+    });
   },
   fetchMessages({ dispatch }, activeUserId) {
     dispatch("_fetchMessages", activeUserId).then(() => {
@@ -205,6 +221,9 @@ const mutations = {
   },
   addMessage(state, message) {
     state.messages = [...state.messages, message];
+  },
+  addNewChat(state, chat) {
+    state.chats = [chat, ...state.chats];
   }
 };
 

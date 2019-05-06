@@ -8,7 +8,7 @@
         class="border-top shadow-block loader-container loader-container_payouts"
         v-if="loading"
       >
-        <Loader :fullscreen="false" text="" class="transparent small" />
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
       </div>
       <template v-else>
         <div class="PayoutsAccountView" v-if="!user.isWantEarn">
@@ -106,7 +106,7 @@ export default {
       return this.$store.state.payouts.bank.fetchResult;
     },
     bankExists() {
-      return this.bank && this.bank.accountNumber;
+      return this.bank && (this.bank.accountNumber || this.bank.bic);
     }
   },
 

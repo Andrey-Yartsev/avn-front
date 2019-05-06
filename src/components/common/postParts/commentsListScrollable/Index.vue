@@ -19,7 +19,7 @@
           :key="comment.id"
           :comment="comment"
           :full="true"
-          v-on:commentReply="userName => $emit('commentReply', userName)"
+          v-on:commentReply="comment => $emit('commentReply', comment)"
           v-on:likeComment="data => $emit('likeComment', data)"
         />
       </VuePerfectScrollbar>

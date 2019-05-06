@@ -276,6 +276,7 @@
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
   align-content: flex-end;
   -webkit-mask-image: -webkit-gradient(
     linear,
@@ -298,17 +299,29 @@
       align-items: flex-end;
     }
   }
+}
 
-  .item {
+.stream-message {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  margin: 5px 0 0;
+  width: 100%;
+  padding: 3px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 8px 0 0;
+  }
+
+  &__head {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    margin: 5px 0 0;
-    width: 100%;
-    padding: 3px;
+    align-content: center;
+  }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 8px 0 0;
-    }
+  &__text {
+    padding-top: 3px;
   }
 
   .name {
@@ -357,33 +370,16 @@
   &_post {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 5px;
       padding-bottom: 8px;
     }
 
-    .comment-form-wrapper & {
-      padding-top: 0;
-      padding-bottom: 0;
-      position: absolute;
-      background-color: $white;
-      left: 0;
-      right: 0;
-      top: 7px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        top: 15px;
-      }
-
-      .postPage & {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          order: -1;
-          padding-top: 0;
-          padding-bottom: 10px;
-        }
-      }
+    .price-amount-field,
+    .tip-amount-field {
+      flex: 1;
     }
   }
 
@@ -404,13 +400,16 @@
     }
 
     .tip-amount-input {
-      color: #fff;
       height: 40px;
       border-radius: 20px;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, .2);
-      caret-color: #fff;
+
+      &:not(.error) {
+        color: #fff;
+        caret-color: #fff;
+        border: 1px solid rgba(255, 255, 255, .2);
+      }
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 1;
@@ -475,32 +474,9 @@
   .stream-comment-input {
     background: rgba(#000, 0.2);
     color: #fff;
-    border-radius: 22px;
-    padding-left: 17px;
+    padding: 9px 45px 9px 17px;
     border: 1px solid rgba(255, 255, 255, .2);
-  }
-
-  .stream-comment-send-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 10px;
-    height: 100%;
-    background: none;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    transition: opacity 0.3s ease;
-
-    &[disabled] {
-      pointer-events: none;
-      opacity: 0.3;
-    }
-
-    &:before {
-      content: "\E62D";
-      @include icon-font;
-    }
+    height: 40px;
   }
 }
 
@@ -694,19 +670,21 @@
     padding: 4px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 8px 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
-        padding: 8px 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
       }
     }
 
     &__duration {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 8px 0 11px;
+        padding-bottom: 11px;
       }
 
       .stream-summary-data-item__value {

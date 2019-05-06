@@ -51,7 +51,7 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     line-height: 4em;
-    justify-content: space-around;
+    overflow-x: auto;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -67,6 +67,7 @@
   .explore-page & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      justify-content: space-around;
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -119,7 +120,8 @@
     font-weight: 400;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin: 0;
+      margin-right: 0;
+      white-space: nowrap;
     }
 
     .searchView & {
@@ -858,24 +860,6 @@
   .avatar {
     margin: 0 auto 10px;
   }
-
-  .btn-add {
-    width: 20px;
-    height: 20px;
-    right: 8px;
-    bottom: 5px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 26px;
-      height: 26px;
-      right: 6px;
-      bottom: 4px;
-    }
-  }
-}
-
-.link-create-story {
-  color: $main-color;
 }
 
 .text-create-story {

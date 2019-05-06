@@ -1,6 +1,6 @@
 <template>
   <div class="staticPage">
-    <div class="container">
+    <div class="container container_sm-width">
       <h1>{{ title }}</h1>
       <div class="text" v-html="text" />
     </div>

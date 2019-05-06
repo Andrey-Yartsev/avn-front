@@ -41,6 +41,7 @@
       <ErrorModal v-if="error" />
       <Confirm v-if="this.$store.state.modal.confirm.show" />
       <ImageModal v-if="this.$store.state.modal.image.show" />
+      <TrialConfirmModal v-if="this.$store.state.modal.trialConfirm.show" />
       <a
         v-if="adminReturnUrl"
         :href="adminReturnUrl"
@@ -83,8 +84,12 @@ import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
+import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
 
 import Cookie from "@/utils/cookie";
+import BrowserStore from "store";
+import Logger from "js-logger";
+
 import rootClasses from "@/rootClasses";
 import postMessageHandler from "@/postMessage";
 import ws from "@/ws";
@@ -93,7 +98,12 @@ import wsp from "@/ws/wsp";
 
 // iterate
 
+import { fromNow } from "@/helpers/datetime";
+
+fromNow("2019-05-03T11:01:12+00:00");
+
 const queryString = require("query-string");
+const trialLogger = Logger.get("trial");
 
 const getScrollbarWidth = () => {
   return window.innerWidth - document.documentElement.clientWidth;
@@ -152,7 +162,8 @@ export default {
     CreateHighlightsModal,
     ChooseHighlightModal,
     Confirm,
-    ImageModal
+    ImageModal,
+    TrialConfirmModal
   },
   mixins: [ColorScheme],
   data() {
@@ -261,14 +272,13 @@ export default {
         if (this.wasLogout) {
           this.webSocket.connect();
         }
+        this.initTrial();
       }
       this.initLoggedInClass();
     },
     loading(loading) {
       if (!loading) {
-        //setTimeout(() => {
         this.initWs();
-        //}, 1000);
       }
     }
   },
@@ -304,19 +314,43 @@ export default {
       }
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
+    },
+    initTrial() {
+      setTimeout(() => {
+        if (this.user) {
+          trialLogger.info("user exists");
+          const code = BrowserStore.get("trialCode");
+          if (code) {
+            trialLogger.info("code exists: " + code);
+            this.$store.dispatch("modal/show", {
+              name: "trialConfirm",
+              data: {
+                code
+              }
+            });
+          } else {
+            trialLogger.info("code does not exists in store");
+          }
+        } else {
+          trialLogger.info("user does not exists");
+        }
+      }, 1000);
     }
   },
   created() {
     this.$store.dispatch("init/fetch");
 
-    const params = queryString.parse(location.search);
-    if (params.code) {
-      Cookie.set("code", params.code, {
+    const queryParams = queryString.parse(window.location.search);
+
+    if (queryParams.code) {
+      Cookie.set("code", queryParams.code, {
         path: "/"
       });
     }
 
     window.addEventListener("message", postMessageHandler);
+
+    this.initTrial();
   },
 
   beforeDestroy() {
