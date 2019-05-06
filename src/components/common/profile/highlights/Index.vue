@@ -42,9 +42,13 @@
               </a>
               <div class="story-info">
                 <div class="story-header">
-                  <router-link :to="`collections/${post.id}`" class="name">
+                  <a
+                    :href="`collections/${post.id}`"
+                    @click.prevent="open(post)"
+                    class="name"
+                  >
                     {{ post.title }}
-                  </router-link>
+                  </a>
                 </div>
                 <div class="amount-items">{{ post.storiesCount }} items</div>
               </div>
