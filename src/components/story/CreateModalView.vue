@@ -86,7 +86,11 @@
             </form>
           </div>
         </div>
-        <Loader v-if="showLoader" :fullscreen="false"></Loader>
+        <Loader
+          v-if="showLoader"
+          :fullscreen="false"
+          text="Uploading..."
+        ></Loader>
       </div>
     </template>
   </Modal>
@@ -165,6 +169,7 @@ export default {
     },
 
     createNewStory: async function() {
+      this.stopPreviewVideo();
       this.showLoader = true;
       const { processId } = await fileUpload(
         { id: "story", file: this.file },
@@ -199,6 +204,12 @@ export default {
           this.readyToUpload = true;
         }
       });
+    },
+
+    stopPreviewVideo() {
+      if (this.$refs.videoTag) {
+        this.$refs.videoTag.pause();
+      }
     }
   },
   watch: {

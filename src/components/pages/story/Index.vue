@@ -263,7 +263,8 @@
         <div class="play-button"></div>
       </div>
     </template>
-    <Loader v-if="loadingFinal" :fullscreen="false" />
+    <Loader v-if="!isReady" :fullscreen="false" text="Media is processing..." />
+    <Loader v-else-if="loadingFinal" :fullscreen="false" />
 
     <div
       class="stories-collection-overlay"
@@ -332,12 +333,13 @@ export default {
       if (this.videoDoesNotExists) {
         return false;
       }
-      return (
-        this.loading ||
-        this.showLoader ||
-        !this.currentStory ||
-        !this.currentStory.isReady
-      );
+      return this.loading || this.showLoader || !this.currentStory;
+    },
+    isReady() {
+      if (!this.currentStory) {
+        return true;
+      }
+      return this.currentStory.isReady;
     },
     userId() {
       return this.$route.params.userId;
