@@ -338,16 +338,22 @@
 
   .right-col {
 
-    .comments {
+    .comments-btn {
 
       &:not(.clickable-state) {
-        cursor: auto;
+
+        .btn-icon {
+          cursor: auto;
+        }
 
         &:hover {
 
-          @include media-breakpoint-up($desktop-breakpoint) {
-            opacity: .3;
-            color: $main-color;
+          .btn-icon {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              opacity: .3;
+              color: $main-color;
+            }
           }
         }
       }

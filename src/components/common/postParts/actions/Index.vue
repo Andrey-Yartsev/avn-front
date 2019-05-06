@@ -11,7 +11,7 @@
       {{ post.favoritesCount ? post.favoritesCount : "" }}
     </span>
     <span
-      class="actions__btn"
+      class="actions__btn comments-btn"
       :class="{ 'clickable-state': showTips }"
       @click="postShowCommentForm"
       v-if="post.canComment"
