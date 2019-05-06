@@ -248,7 +248,7 @@
           </span>
           <span class="stream-btn" ref="likeBtn">
             <span class="btn-icon likes" v-tooltip="'Likes'"></span>
-            {{ likesCount }}
+            {{ likesCount ? likesCount : "" }}
           </span>
           <span v-if="$root.showTips" class="stream-btn">
             <span class="btn-icon tips" v-tooltip="'Funds'"></span>
