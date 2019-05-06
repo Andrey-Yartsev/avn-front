@@ -4,7 +4,7 @@
       :class="[{ active: post.isFavorite }, 'actions__btn']"
       @click="postLike"
     >
-      <span class="btn-icon likes" v-tooltip="'Like'"></span>
+      <span class="btn-icon likes" v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"></span>
       {{ post.favoritesCount ? post.favoritesCount : "" }}
     </span>
     <span
