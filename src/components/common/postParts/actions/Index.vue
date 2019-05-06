@@ -19,7 +19,9 @@
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="actions__btn" @click="toggleTip"><span class="btn-icon tips" v-tooltip="'Fund'"></span></span>
+      <span class="actions__btn" @click="toggleTip"
+        ><span class="btn-icon tips" v-tooltip="'Fund'"></span
+      ></span>
     </template>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
