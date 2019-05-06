@@ -41,8 +41,10 @@ const actions = {
       });
     });
   },
-  openSubscribeModal({ dispatch }, user) {
+  openSubscribeModal({ dispatch, commit }, user) {
+    commit("global/setLoading", true, { root: true });
     dispatch("fetchProfile", user.username).then(profile => {
+      commit("global/setLoading", false, { root: true });
       if (subsAction(profile) === "subscribe") {
         dispatch(
           "modal/show",

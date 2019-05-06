@@ -14,7 +14,8 @@ const state = {
   scrollBarInitWidth: 0,
   scrollBarWidth: 0,
   modalOpened: false,
-  openedModalsCount: 0
+  openedModalsCount: 0,
+  loading: false
 };
 
 const actions = {
@@ -88,6 +89,10 @@ const mutations = {
     } else {
       state.openedModalsCount--;
     }
+  },
+
+  setLoading(state, loading) {
+    state.loading = loading;
   }
 };
 

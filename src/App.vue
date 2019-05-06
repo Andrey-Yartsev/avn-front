@@ -5,6 +5,7 @@
   <div v-else class="main-container" :class="containerClassName">
     <Loader v-if="loading" class="page-loader" />
     <template v-else>
+      <Loader text="" v-if="this.$store.state.global.loading" />
       <Header />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
