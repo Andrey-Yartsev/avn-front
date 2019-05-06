@@ -200,27 +200,33 @@
         <div class="form-stream">
           <div class="stream-comments-wrapper" v-if="shownComments.length">
             <div
-              class="item"
+              class="stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
-              <span
-                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-              >
-                <span class="avatar__img">
-                  <img :src="comment.user.avatar" v-if="comment.user.avatar" />
+              <div class="stream-message__head">
+                <span
+                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+                >
+                  <span class="avatar__img">
+                    <img
+                      :src="comment.user.avatar"
+                      v-if="comment.user.avatar"
+                    />
+                  </span>
                 </span>
-              </span>
-              <span class="name">{{ comment.user.name }}</span>
-              <span class="text">{{ comment.comment }}</span>
+                <span class="name">{{ comment.user.name }}</span>
+              </div>
+              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form class="stream-comment-form" v-if="showCommentForm">
-            <input
-              type="text"
+            <textarea
               placeholder="Comment"
               class="stream-comment-input rounded lg"
-              maxlength="24"
+              maxlength="200"
+              :minHeight="20"
+              :maxHeight="85"
               v-model="newComment"
               @keypress.enter.prevent="sendComment"
             />
