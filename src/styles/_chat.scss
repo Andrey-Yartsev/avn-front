@@ -1178,6 +1178,21 @@
     .message {
       opacity: 1;
     }
+
+    .avatar {
+
+      &:after {
+        background: $secondary-color;
+        width: 4px;
+        height: 4px;
+        content: "";
+        position: absolute;
+        border-radius: 1000px;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
 
   &.active {
