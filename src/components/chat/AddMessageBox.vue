@@ -15,6 +15,7 @@
         :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"
+        v-tooltip="'Media'"
       >
         <input
           @change="addMediaFiles"
@@ -27,6 +28,7 @@
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip, disabled: showPaid }"
+        v-tooltip="'Fund'"
       ></button>
 
       <div
@@ -89,12 +91,14 @@
         :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
+        v-tooltip="'Price'"
       ></button>
 
       <button
         @click="sendMessage"
         class="btn-send btn-send_default"
         :disabled="!canSend || disable"
+        v-tooltip="'Send'"
       ></button>
     </div>
   </div>

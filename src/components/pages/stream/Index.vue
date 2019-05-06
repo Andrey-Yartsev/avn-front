@@ -241,16 +241,23 @@
         <div class="stream-btns stream-viewer-btns">
           <span
             role="button"
-            class="stream-btn stream-comment-btn"
+            class="stream-btn"
             @click="showCommentForm = !showCommentForm"
-          ></span>
-          <span class="stream-btn stream-like-btn" ref="likeBtn">{{
-            likesCount
-          }}</span>
-          <span v-if="$root.showTips" class="stream-btn stream-tip-btn"
-            >{{ amount.toFixed(2) }} $</span
           >
-          <span class="stream-btn stream-online-count">{{ looksCount }}</span>
+            <span class="btn-icon comments" v-tooltip="'Comments'"></span>
+          </span>
+          <span class="stream-btn" ref="likeBtn">
+            <span class="btn-icon likes" v-tooltip="'Likes'"></span>
+            {{ likesCount }}
+          </span>
+          <span v-if="$root.showTips" class="stream-btn">
+            <span class="btn-icon tips" v-tooltip="'Funds'"></span>
+            {{ amount.toFixed(2) }} $
+          </span>
+          <span class="stream-btn stream-online-count">
+            <span class="looking btn-icon" v-tooltip="'Viewers'"></span>
+            {{ looksCount }}
+          </span>
         </div>
         <Filters
           v-if="filters.length"

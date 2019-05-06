@@ -540,6 +540,7 @@ button,
 .tips {
   display: inline-block;
   height: 24px;
+  line-height: 24px;
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -597,6 +598,17 @@ button,
 .tips {
   //color: $main-color;
   align-items: center;
+
+  &:not(.btn-icon) {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+        color: $primary-color;
+      }
+    }
+  }
 
   &:before {
     width: 1.1em;

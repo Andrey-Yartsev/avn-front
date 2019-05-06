@@ -508,6 +508,10 @@
       margin-right: 6px;
     }
   }
+
+  .tips {
+    color: #fff;
+  }
 }
 
 .stream-btns {
@@ -527,34 +531,6 @@
     .stream_enabled & {
       display: flex;
     }
-  }
-}
-
-.stream-comment-btn {
-
-  &:before {
-    content: "\E617";
-  }
-}
-
-.stream-like-btn {
-
-  &:before {
-    content: "\E616";
-  }
-}
-
-.stream-tip-btn {
-
-  &:before {
-    content: "\E618";
-  }
-}
-
-.stream-online-count {
-
-  &:before {
-    content: "\E633";
   }
 }
 
