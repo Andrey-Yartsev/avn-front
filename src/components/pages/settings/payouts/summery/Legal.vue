@@ -42,8 +42,7 @@
               <span class="title">Address</span>
               <span class="value">
                 <span class="value__text">
-                  {{ legal.address }}, {{ legal.city }}, {{ legal.postalCode }},
-                  {{ legal.state }}
+                  {{ address }}
                 </span>
               </span>
             </div>
@@ -92,17 +91,12 @@
 <script>
 import moment from "moment";
 import Common from "../../common";
+import PayoutsCommon from "../common";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
 
-  mixins: [Common],
-
-  computed: {
-    legal() {
-      return this.$store.state.payouts.legal.fetchResult;
-    }
-  },
+  mixins: [Common, PayoutsCommon],
 
   methods: {
     dt(date) {

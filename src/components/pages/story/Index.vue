@@ -520,6 +520,7 @@ export default {
     },
 
     close() {
+      console.log("CLOSE");
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
       if (global.storyFirstEnter) {
@@ -727,6 +728,7 @@ export default {
     },
     error() {
       if (this.error) {
+        console.log("error", this.error);
         this.$router.push("/");
       }
     },

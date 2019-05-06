@@ -174,6 +174,19 @@
               </div>
             </div>
 
+            <div class="form-group form-group_with-label country-select">
+              <label class="form-group-inner">
+                <span class="label country-select__label">Country</span>
+                <span class="select-wrapper">
+                  <select name="country" disabled v-validate="'required'">
+                    <option class="country-select__option">{{
+                      account.countryName
+                    }}</option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
             <div class="form-group form-group_with-label" v-if="hasStates">
               <label class="form-group-inner" for="state">
                 <span class="label">State</span>
@@ -186,22 +199,12 @@
                     v-validate="'required'"
                   >
                     <option value="">Select State</option>
-                    <option :value="v" v-for="v in states" v-bind:key="v">{{
-                      v
-                    }}</option>
-                  </select>
-                </span>
-              </label>
-            </div>
-
-            <div class="form-group form-group_with-label country-select">
-              <label class="form-group-inner">
-                <span class="label country-select__label">Country</span>
-                <span class="select-wrapper">
-                  <select name="country" disabled v-validate="'required'">
-                    <option class="country-select__option">{{
-                      account.countryName
-                    }}</option>
+                    <option
+                      :value="v.title"
+                      v-for="v in states"
+                      v-bind:key="v.id"
+                      >{{ v.title }}</option
+                    >
                   </select>
                 </span>
               </label>
@@ -262,7 +265,6 @@
 
 <script>
 import BirthDateSelect from "./BirthDateSelect";
-import states from "./states";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
@@ -301,7 +303,10 @@ export default {
 
   computed: {
     loading() {
-      return this.$store.state.payouts.countries.fetchLoading;
+      return (
+        this.$store.state.payouts.countries.fetchLoading ||
+        this.$store.state.states.fetchLoading
+      );
     },
     account() {
       return this.$store.state.payouts.account.fetchResult;
@@ -309,11 +314,15 @@ export default {
     country() {
       return this.account.countryId;
     },
-    hasStates() {
-      return this.account.countryId == 212;
+    countries() {
+      return this.$store.state.payouts.countries.fetchResult;
     },
-    states() {
-      return states;
+    hasStates() {
+      if (!this.countries) {
+        return false;
+      }
+      return this.countries.find(v => this.account.countryId === v.id)
+        .hasStates;
     },
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
@@ -332,6 +341,21 @@ export default {
     },
     saving() {
       return this.$store.state.payouts.legal.saveLoading;
+    },
+    _states() {
+      return this.$store.state.states.fetchResult;
+    },
+    states() {
+      if (!this._states) {
+        return [];
+      }
+      return Object.entries(this._states).map(v => {
+        return {
+          id: v[0],
+          title: v[1],
+          selected: v[0].id === this.state
+        };
+      });
     }
   },
 
@@ -377,7 +401,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("payouts/countries/fetch");
+    this.$store.dispatch("payouts/countries/fetch").then(() => {
+      if (this.hasStates) {
+        this.$store.dispatch("states/fetch", this.account.countryId);
+      }
+    });
     this.$emit("titleChanged", "Personal Information");
   }
 };

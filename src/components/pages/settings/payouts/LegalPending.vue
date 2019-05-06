@@ -16,10 +16,7 @@
             <div class="item">
               <span class="title">Address</span>
               <span class="value">
-                <span class="value__text"
-                  >{{ legal.address }}, {{ legal.city }},
-                  {{ legal.postalCode }}, {{ account.countryName }}</span
-                >
+                <span class="value__text">{{ address }}</span>
               </span>
             </div>
           </div>
@@ -33,15 +30,11 @@
 </template>
 
 <script>
+import Common from "../common";
+import PayoutsCommon from "./common";
+
 export default {
-  computed: {
-    legal() {
-      return this.$store.state.payouts.legal.fetchResult;
-    },
-    account() {
-      return this.$store.state.payouts.account.fetchResult;
-    }
-  },
+  mixins: [Common, PayoutsCommon],
   mounted() {
     this.$emit("titleChanged", "Personal Information");
   }

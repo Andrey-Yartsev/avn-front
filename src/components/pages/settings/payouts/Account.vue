@@ -34,6 +34,7 @@
                   </select>
                 </span>
               </label>
+
               <label class="form-group-inner">
                 <span></span>
                 <span class="input-help">
@@ -46,7 +47,11 @@
               </label>
               <label class="form-group-inner">
                 <span class="label"></span>
-                <button type="submit" class="btn lg btn_fix-width saveChanges">
+                <button
+                  :disabled="!isValid"
+                  type="submit"
+                  class="btn lg btn_fix-width saveChanges"
+                >
                   Next
                 </button>
               </label>
@@ -93,12 +98,27 @@ export default {
         this.$store.state.payouts.account.fetchLoading
       );
     },
+    selectedCountry() {
+      if (!this._countries) {
+        return null;
+      }
+      return this._countries.find(v => v.id == this.countryId);
+    },
+    isValid() {
+      return !!this.countryId;
+    },
     _countries() {
       return this.$store.state.payouts.countries.fetchResult;
     },
     countries() {
-      return this._countries.map(v => {
-        console.log(v);
+      if (!this._countries) {
+        return [];
+      }
+      let c = this._countries;
+      const america = c.find(v => v.id === "212");
+      c = c.filter(v => v.id !== "212");
+      c = [{ id: 0, name: "—" }, america, ...c];
+      return c.map(v => {
         return {
           id: v.id,
           title: v.name,
@@ -117,12 +137,6 @@ export default {
         countryId: this.countryId,
         countryName: this.countryName
       });
-    }
-  },
-
-  watch: {
-    _countries(countries) {
-      this.countryId = countries[0].id;
     }
   },
 

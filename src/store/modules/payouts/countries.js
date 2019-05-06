@@ -8,7 +8,7 @@ const mutations = {};
 
 createRequestAction({
   prefix: "fetch",
-  apiPath: "payouts/countries",
+  apiPath: "countries/payouts",
   state,
   mutations,
   actions,
