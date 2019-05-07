@@ -28,8 +28,7 @@
       </div>
       <div class="more-functions__dropdown">
         <Dropdown
-          :postId="postId"
-          :userId="user.id"
+          :post="post"
           :from="from"
           :hide="hide"
           :showCopy="showCopy"
@@ -57,11 +56,7 @@ export default {
       type: String,
       default: undefined
     },
-    postId: {
-      type: Number,
-      required: true
-    },
-    user: {
+    post: {
       type: Object,
       required: true
     },
@@ -72,6 +67,14 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
+    }
+  },
+  computed: {
+    postId() {
+      return this.post.id;
+    },
+    user() {
+      return this.post.author;
     }
   },
   methods: {

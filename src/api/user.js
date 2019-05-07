@@ -42,6 +42,7 @@ export default {
     });
   },
   getPosts({ userId, offset, limit, marker, source }) {
+    console.trace("!123");
     return anyRequest(`users/${userId}/posts/${source}`, {
       method: "GET",
       query: {

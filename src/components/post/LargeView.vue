@@ -21,8 +21,7 @@
         </div>
         <Header
           :class="'hidden-desktop'"
-          :postId="post.id"
-          :user="post.author"
+          :post="post"
           :from="from"
           v-on:clickOnDetailsView="clickOnCommentForm"
           v-if="$mq === 'mobile'"

@@ -16,7 +16,8 @@ const initState = {
   offset: 0,
   marker: "",
   source: "",
-  deletedPost: undefined
+  deletedPost: undefined,
+  postPinChanged: 0
 };
 
 const state = { ...initState };
@@ -156,6 +157,16 @@ const actions = {
         commit("profile", { ...state.profile, isBlocked: false });
       }
     });
+  },
+  pin({ state, dispatch }, postId) {
+    dispatch("_pin", postId).then(() => {
+      state.postPinChanged++;
+    });
+  },
+  unpin({ state, dispatch }, postId) {
+    dispatch("_unpin", postId).then(() => {
+      state.postPinChanged++;
+    });
   }
 };
 
@@ -174,6 +185,34 @@ createRequestAction({
     return path.replace(/{username}/, params);
   },
   localError: true
+});
+
+createRequestAction({
+  prefix: "_pin",
+  apiPath: "posts/{id}/pin",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "_unpin",
+  apiPath: "posts/{id}/pin",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params);
+  }
 });
 
 export default {

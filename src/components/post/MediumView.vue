@@ -12,14 +12,13 @@
   >
     <div class="post-details">
       <Header
-        :postId="post.id"
-        :user="post.author"
+        :post="post"
         :from="from"
         @openDropdawn="showDropdawn = true"
         @hideDropdawn="showDropdawn = false"
         :showCopy="!delayedPost"
       />
-      <p class="text" v-html="post.text"></p>
+      <p class="text" v-html="post.text" ref="text"></p>
       <Media
         v-if="medias.length"
         :medias="medias"

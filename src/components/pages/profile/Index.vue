@@ -227,6 +227,9 @@ export default {
     deletedPost() {
       return this.$store.state.profile.home.deletedPost;
     },
+    postPinChanged() {
+      return this.$store.state.profile.home.postPinChanged;
+    },
     scrollBarWidth() {
       if (!this.$store.state.global.modalOpened) {
         return 0;
@@ -270,6 +273,9 @@ export default {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
     },
     deletedPost() {
+      this.initPosts();
+    },
+    postPinChanged() {
       this.initPosts();
     },
     subscriptionUpdate(data) {

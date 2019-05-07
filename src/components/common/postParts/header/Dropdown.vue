@@ -47,6 +47,14 @@
         </button>
       </li>
       <template v-if="isOwner(userId)">
+        <li class="more-functions__item" v-if="actionPrefix === 'profile/home'">
+          <button class="more-functions__link" type="button" @click="pinAction">
+            <span class="more-functions__option" v-if="post.isPinned"
+              >Pinned. Unpin post</span
+            >
+            <span class="more-functions__option" v-else>Pin post</span>
+          </button>
+        </li>
         <li class="more-functions__item">
           <button
             class="deletePost more-functions__link"
@@ -80,15 +88,17 @@ export default {
     },
     isOnPostPage() {
       return this.from === "postPage";
+    },
+    postId() {
+      return this.post.id;
+    },
+    userId() {
+      return this.post.author.id;
     }
   },
   props: {
-    userId: {
-      type: Number,
-      required: true
-    },
-    postId: {
-      type: Number,
+    post: {
+      type: Object,
       required: true
     },
     from: {
@@ -128,6 +138,15 @@ export default {
       }
 
       window.location.hash = "";
+    },
+
+    pinAction() {
+      if (this.post.isPinned) {
+        this.$store.dispatch("profile/home/unpin", this.postId);
+      } else {
+        this.$store.dispatch("profile/home/pin", this.postId);
+      }
+      this.hide();
     },
 
     editPost() {
