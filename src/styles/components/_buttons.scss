@@ -96,6 +96,23 @@
         }
       }
     }
+
+    &.disconnect-twitter {
+      color: $main-color;
+      opacity: 0.5;
+      &:before {
+        box-shadow: 0 0 0 2px $main-color inset;
+        opacity: 0.6;
+        transition: background-color .3s ease;
+      }
+      &:hover {
+        background-color: $main-color;
+      }
+
+      &[disabled] {
+        opacity: 0.15;
+      }
+    }
   }
   &.gray {
     background-color: rgba($gray, 0.5);

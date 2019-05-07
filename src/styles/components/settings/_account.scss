@@ -195,35 +195,6 @@
   .form-group .btn {
   }
 }
-.btn.disconnect-twitter {
-  color: $main-color;
-  opacity: 0.5;
-  box-shadow: none;
-  position: relative;
-  &:before {
-    position: absolute;
-    pointer-events: none;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    content: "";
-    box-shadow: 0 0 0 2px $main-color inset;
-    border-radius: 1000px;
-    opacity: 0.6;
-    transition: background 0.3s ease;
-    z-index: -1;
-  }
-  &:hover {
-    background: none;
-    &:before {
-      background: $main-color;
-    }
-  }
-  &[disabled] {
-    opacity: 0.15;
-  }
-}
 
 .ManageView {
   .form-group {
