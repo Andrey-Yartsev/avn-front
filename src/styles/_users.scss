@@ -12,42 +12,9 @@
       }
     }
   }
-
-  .subscribed,
+  
   .followme {
-    font-size: 9px;
-    line-height: 12px;
-    padding: 0 5px;
-    margin-top: 2px;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-
-    &__txt {
-      opacity: 0.5;
-    }
-
-    &:after {
-      content: "";
-      opacity: 0.16;
-      border-radius: 1000px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-    }
-  }
-  .subscribed {
-    color: $secondary-color;
-    &:after {
-      background-color: $secondary-color;
-    }
-  }
-  .followme {
-    &:after {
-      background-color: currentColor;
-    }
+    margin-left: 0;
   }
 
   .subscribeView {
@@ -86,11 +53,11 @@
     }
   }
 
-  .posts-container & {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      background: $white;
-    }
-  }
+  //.posts-container & {
+  //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+  //    background: $white;
+  //  }
+  //}
 }
 
 .user-actions {
