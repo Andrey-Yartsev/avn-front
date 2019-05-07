@@ -441,7 +441,9 @@
   &:before {
     content: "\00B7";
     font-size: 24px;
+    line-height: 15px;
     margin-right: 5px;
+    color: $main-color;
   }
 }
 
