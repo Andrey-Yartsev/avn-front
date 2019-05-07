@@ -290,16 +290,12 @@
 
   .user-container {
     position: relative;
-    padding: 0 15px;
+    padding: 14px 15px 14px 70px;
     z-index: 6;
     background: $white;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding: 14px 15px 14px 70px;
-    }
-
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 16px 15px;
+      padding: 0 15px 15px;
       flex: 1;
       display: flex;
       flex-direction: column;
