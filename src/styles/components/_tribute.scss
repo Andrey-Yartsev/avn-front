@@ -1,4 +1,6 @@
 .tribute-container {
+
+
   position: absolute;
   top: 0;
   left: 0;
@@ -11,6 +13,8 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     //transform: translateX(-25px);
   }
+
+  /*
 
   &:before {
     content: "";
@@ -25,6 +29,8 @@
     z-index: 0;
     pointer-events: none;
   }
+
+  */
 
   ul {
     margin: 0;
