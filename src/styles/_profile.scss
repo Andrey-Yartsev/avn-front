@@ -661,6 +661,10 @@
   transition: color 0.3s ease;
   font-size: 13px;
 
+  &:hover {
+    color: $secondary-color-darken;
+  }
+
   .searchView & {
     display: block;
     margin-top: 4px;
