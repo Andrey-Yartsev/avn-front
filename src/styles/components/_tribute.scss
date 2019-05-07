@@ -1,0 +1,85 @@
+.tribute-container {
+
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  z-index: 999999;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  //transform: translate(-15px, 10px);
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    //transform: translateX(-25px);
+  }
+
+  /*
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 32px;
+    background-color: $white;
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+    width: 17px;
+    height: 17px;
+    transform: translate(0, 0) rotate(45deg);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  */
+
+  ul {
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+    background-color: $white;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 220px;
+  }
+
+  li {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: $secondary-color;
+    transition: color .3s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    &.highlight {
+      color: $primary-color;
+    }
+
+    span {
+      font-weight: bold;
+    }
+
+    &.no-match {
+      cursor: default;
+    }
+  }
+
+  .menu-highlighted {
+    font-weight: bold;
+  }
+
+}
+
+.v-tribute {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

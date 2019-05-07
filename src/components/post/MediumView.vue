@@ -143,6 +143,18 @@ export default {
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
     }
+  },
+  mounted() {
+    if (this.$refs.text) {
+      const aTags = this.$refs.text.getElementsByTagName("a");
+      if (aTags && aTags.length) {
+        for (let a of aTags) {
+          a.addEventListener("mouseover", () => {
+            console.log("!");
+          });
+        }
+      }
+    }
   }
 };
 </script>

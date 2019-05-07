@@ -11,7 +11,7 @@
       <div class="text-media-container">
         <textarea
           ref="textarea"
-          class="sm"
+          class="textarea sm"
           placeholder="What's going on?"
           @click="goToAddPost"
         />

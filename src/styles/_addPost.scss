@@ -425,7 +425,7 @@
     }
   }
 
-  textarea {
+  .textarea {
     background-color: transparent;
     caret-color: $secondary-color;
 
@@ -534,7 +534,7 @@
       }
     }
 
-    textarea {
+    .textarea {
       overflow: auto;
       max-height: 200px;
 

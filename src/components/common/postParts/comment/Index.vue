@@ -23,7 +23,7 @@
             collapsed ? "Read more" : "Collapse"
           }}</a>
         </div>
-        <div v-else class="comment-text" v-html="comment.text" />
+        <div v-else class="comment-text" v-html="comment.text" ref="text" />
       </div>
       <div class="comment-footer" v-if="full">
         <time class="timestamp">{{ dateTime }}</time>
