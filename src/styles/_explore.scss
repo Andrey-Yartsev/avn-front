@@ -51,7 +51,6 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     line-height: 4em;
-    overflow-x: auto;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
