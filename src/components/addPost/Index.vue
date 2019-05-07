@@ -81,7 +81,7 @@
         <vue-tribute :options="tributeOptions">
           <div
             @focus="() => (expanded = true)"
-            class="sm content-editable"
+            class="sm content-editable textarea"
             contenteditable
             placeholder="What's going on?"
             maxlength="1000"
