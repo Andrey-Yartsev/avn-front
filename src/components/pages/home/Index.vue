@@ -1,33 +1,58 @@
 <template>
   <div class="feed">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="100" viewBox="0 0 600 200">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="300"
+      height="100"
+      viewBox="0 0 600 200"
+    >
       <defs>
         <clipPath id="clipping">
           <polygon points="50,10 60,0 70,10 50,10"></polygon>
         </clipPath>
       </defs>
-      <image xlink:href="https://pbs.twimg.com/profile_banners/457033547/1551803660/600x200" width="600" height="200" clip-path="url(#clipping)"></image>
+      <image
+        xlink:href="https://pbs.twimg.com/profile_banners/457033547/1551803660/600x200"
+        width="600"
+        height="200"
+        clip-path="url(#clipping)"
+      ></image>
     </svg>
-
 
     <div class="userView userView_dropdown userView_dropdown-up">
       <div class="arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="100" viewBox="0 0 600 200">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="300"
+          height="100"
+          viewBox="0 0 600 200"
+        >
           <defs>
             <clipPath id="clipping">
               <polygon points="50,10 60,0 70,10 50,10"></polygon>
             </clipPath>
           </defs>
-          <image xlink:href="https://avnsocial-dev.s3.amazonaws.com/files/v/vr/vrd/vrdklpjj1svkqh7pynugn2yszpjpr8yc1554219619/avatar.jpg" width="480" height="360" clip-path="url(#clipping)"></image>
+          <image
+            xlink:href="https://avnsocial-dev.s3.amazonaws.com/files/v/vr/vrd/vrdklpjj1svkqh7pynugn2yszpjpr8yc1554219619/avatar.jpg"
+            width="480"
+            height="360"
+            clip-path="url(#clipping)"
+          ></image>
         </svg>
       </div>
       <div class="bg bg-color bg-gradient_light">
-        <img src="https://avnsocial-dev.s3.amazonaws.com/files/v/vr/vrd/vrdklpjj1svkqh7pynugn2yszpjpr8yc1554219619/avatar.jpg">
+        <img
+          src="https://avnsocial-dev.s3.amazonaws.com/files/v/vr/vrd/vrdklpjj1svkqh7pynugn2yszpjpr8yc1554219619/avatar.jpg"
+        />
       </div>
       <div class="user-container">
         <div class="avatar avatar_md avatar_md-desk">
           <span class="avatar__img">
-            <img src="https://avnsocial-dev.s3.amazonaws.com/files/h/hc/hc2/hc2rseq922ltv0wnaezoaqwq47krndnv1554219620/avatar.jpg">
+            <img
+              src="https://avnsocial-dev.s3.amazonaws.com/files/h/hc/hc2/hc2rseq922ltv0wnaezoaqwq47krndnv1554219620/avatar.jpg"
+            />
           </span>
           <div class="stream-online-label">live</div>
         </div>
@@ -44,13 +69,22 @@
           </div>
         </div>
         <p class="profile-text">
-          <a href="https://avn2.retloko.com/wolters">https://avn2.retloko.com/wolters</a><br>
-          cvzxcvzxcvzxc<br>
-          fvsz dg d  hdztgsd stgsdh aetdhseheththseth thz<a href="https://avn2.retloko.com/wolters">https://avn2.retloko.com/wolters</a><br>
-          cvzxcvzxcvzxc<br>
-          fvsz dg d  hdztgsd stgsdh aetdhseheththseth thz<a href="https://avn2.retloko.com/wolters">https://avn2.retloko.com/wolters</a><br>
-          cvzxcvzxcvzxc<br>
-          fvsz dg d  hdztgsd stgsdh aetdhseheththseth thz</p>
+          <a href="https://avn2.retloko.com/wolters"
+            >https://avn2.retloko.com/wolters</a
+          ><br />
+          cvzxcvzxcvzxc<br />
+          fvsz dg d hdztgsd stgsdh aetdhseheththseth thz<a
+            href="https://avn2.retloko.com/wolters"
+            >https://avn2.retloko.com/wolters</a
+          ><br />
+          cvzxcvzxcvzxc<br />
+          fvsz dg d hdztgsd stgsdh aetdhseheththseth thz<a
+            href="https://avn2.retloko.com/wolters"
+            >https://avn2.retloko.com/wolters</a
+          ><br />
+          cvzxcvzxcvzxc<br />
+          fvsz dg d hdztgsd stgsdh aetdhseheththseth thz
+        </p>
       </div>
     </div>
 
