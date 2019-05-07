@@ -129,6 +129,8 @@ import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserHeader from "@/components/header/User";
 import UserDropdown from "./UserDropdown";
 
+let focusIntervalId = 0;
+
 export default {
   name: "Chat",
 
@@ -281,6 +283,21 @@ export default {
             };
           });
       }
+    },
+
+    windowFocus() {
+      if (!focusIntervalId) {
+        this.$store.commit("chat/setActiveWindow", true);
+        focusIntervalId = setInterval(() => {
+          this.$store.dispatch("chat/markUnread");
+        }, 1000);
+      }
+    },
+    windowBlur() {
+      console.log("BLUR");
+      this.$store.commit("chat/setActiveWindow", false);
+      clearInterval(focusIntervalId);
+      focusIntervalId = 0;
     }
   },
 
@@ -293,11 +310,15 @@ export default {
         this.initVirtualChat();
       }
     });
+    window.addEventListener("focus", this.windowFocus);
+    window.addEventListener("blur", this.windowBlur);
   },
 
   beforeDestroy() {
     this.$store.commit("chat/messages", []);
     this.$store.commit("chat/resetChats");
+    window.removeEventListener("focus", this.windowFocus);
+    window.removeEventListener("blur", this.windowBlur);
   }
 };
 </script>

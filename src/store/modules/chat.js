@@ -4,7 +4,23 @@ import { createRequestAction } from "../utils/storeRequest";
 
 const state = {
   isSecondScreen: false,
-  activeUserId: null
+  activeUserId: null,
+  windowIsActive: true
+};
+
+let markAsReadId = 0;
+
+let unreadLastMessage = null;
+
+const _markAsRead = (dispatch, params) => {
+  dispatch("markAsRead", params);
+};
+
+const markAsRead = (dispatch, params) => {
+  clearTimeout(markAsReadId);
+  markAsReadId = setTimeout(() => {
+    _markAsRead(dispatch, params);
+  }, 2000);
 };
 
 const actions = {
@@ -94,6 +110,17 @@ const actions = {
           withUser: message.fromUser
         });
       }
+
+      if (state.activeUserId === message.fromUser.id) {
+        if (!state.windowIsActive) {
+          unreadLastMessage = message;
+          return;
+        }
+        markAsRead(dispatch, {
+          userId: message.fromUser.id,
+          messageId: message.id
+        });
+      }
     }
 
     const found = state.messages.find(v => v.id === message.id);
@@ -148,6 +175,16 @@ const actions = {
       withUserId,
       isMine
     });
+  },
+  markUnread({ dispatch }) {
+    if (!unreadLastMessage) {
+      return;
+    }
+    markAsRead(dispatch, {
+      userId: unreadLastMessage.fromUser.id,
+      messageId: unreadLastMessage.id
+    });
+    unreadLastMessage = null;
   }
 };
 
@@ -224,6 +261,9 @@ const mutations = {
   },
   addNewChat(state, chat) {
     state.chats = [chat, ...state.chats];
+  },
+  setActiveWindow(state, isActive) {
+    state.windowIsActive = isActive;
   }
 };
 
@@ -358,6 +398,22 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "markAsRead",
+  apiPath: "chats/{userId}/messages/{messageId}/view",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(params, path) {
+    let p = path.replace(/{userId}/, params.userId);
+    p = p.replace(/{messageId}/, params.messageId);
+    return p;
   }
 });
 
