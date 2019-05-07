@@ -5,6 +5,7 @@ import Store from "@/store";
 
 export default {
   signUp(data) {
+    data.userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
     return request("users/register", {
       method: "POST",
       data
@@ -16,6 +17,7 @@ export default {
     });
   },
   login(data) {
+    data.userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
     return new Promise(async (resolve, reject) => {
       let response = await request("users/login", {
         method: "POST",
