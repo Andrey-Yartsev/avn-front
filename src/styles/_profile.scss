@@ -475,35 +475,6 @@
   margin-bottom: 7px;
   word-break: break-word;
 
-  .userCollectionView &,
-  .searchView & {
-    font-size: 13px;
-    margin-bottom: 0;
-    @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: $white);
-
-    @supports (-webkit-line-clamp: 3) {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 48px;
-      height: auto;
-
-      &:before {
-        display: none;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 4px;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
   &:empty {
     display: none;
   }
