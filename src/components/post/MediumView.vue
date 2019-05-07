@@ -19,7 +19,7 @@
         @hideDropdawn="showDropdawn = false"
         :showCopy="!delayedPost"
       />
-      <p class="text" v-html="post.text"></p>
+      <p class="text" v-html="post.text" ref="text"></p>
       <Media
         v-if="medias.length"
         :medias="medias"
@@ -143,6 +143,18 @@ export default {
 
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
+    }
+  },
+  mounted() {
+    if (this.$refs.text) {
+      const aTags = this.$refs.text.getElementsByTagName("a");
+      if (aTags && aTags.length) {
+        for (let a of aTags) {
+          a.addEventListener("mouseover", () => {
+            console.log("!");
+          });
+        }
+      }
     }
   }
 };
