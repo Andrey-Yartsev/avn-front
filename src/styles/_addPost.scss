@@ -158,8 +158,18 @@
         top: -60px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          border-top-left-radius: 6px;
-          border-top-right-radius: 6px;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .popup-container_hfluid & {
+
+      .lds-dual-ring {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
         }
       }
     }
