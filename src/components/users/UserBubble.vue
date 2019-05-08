@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="userView userView_dropdown userView_dropdown-up"
-    ref="bubble"
-  >
+  <div class="userView userView_dropdown userView_dropdown-up" ref="bubble">
     <div v-if="show">
       <Loader
         :fullscreen="false"
@@ -11,7 +8,7 @@
         v-if="loading"
       />
       <template v-else>
-        <div class="arrow" :class="{'collapse-height': !profile.header}">
+        <div class="arrow" :class="{ 'collapse-height': !profile.header }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
