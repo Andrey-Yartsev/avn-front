@@ -1,13 +1,11 @@
 <template>
   <div :class="['addPost', { truncated: !user.isPerformer }]">
     <form class="add-new-form bg-gradient_light-desk bg-gradient_light">
-      <span
-        class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"
-      >
+      <router-link :to="'/' + user.username" class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile">
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
         </span>
-      </span>
+      </router-link>
       <div class="text-media-container">
         <textarea
           ref="textarea"
