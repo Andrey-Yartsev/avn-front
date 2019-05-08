@@ -78,11 +78,12 @@ import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
 import PostOpen from "@/mixins/postOpen";
 import PostCommon from "@/mixins/postCommon";
+import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, User, PostCommon, PostOpen],
+  mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
   data: function() {
     return {
       showDropdawn: false
@@ -142,18 +143,6 @@ export default {
 
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
-    }
-  },
-  mounted() {
-    if (this.$refs.text) {
-      const aTags = this.$refs.text.getElementsByTagName("a");
-      if (aTags && aTags.length) {
-        for (let a of aTags) {
-          a.addEventListener("mouseover", () => {
-            console.log(a.innerText.replace(/@(.*)/, "$1"));
-          });
-        }
-      }
     }
   }
 };

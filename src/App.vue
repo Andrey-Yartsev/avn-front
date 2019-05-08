@@ -54,7 +54,11 @@
       <avn-chat-message-pay-confirm
         v-if="this.$store.state.modal.chatMessagePayConfirm.show"
       />
-      <UserBubble username="stompeg" />
+      <UserBubble
+        username="stompeg"
+        v-show="this.$store.state.userBubble.show"
+        id="user-bubble"
+      />
     </template>
   </div>
 </template>
