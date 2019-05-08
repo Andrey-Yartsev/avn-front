@@ -1,25 +1,5 @@
 <template>
   <div class="feed">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="300"
-      height="100"
-      viewBox="0 0 600 200"
-    >
-      <defs>
-        <clipPath id="clipping">
-          <polygon points="50,10 60,0 70,10 50,10"></polygon>
-        </clipPath>
-      </defs>
-      <image
-        xlink:href="https://pbs.twimg.com/profile_banners/457033547/1551803660/600x200"
-        width="600"
-        height="200"
-        clip-path="url(#clipping)"
-      ></image>
-    </svg>
-
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
       class="addPost-btn-float hidden-desktop"
