@@ -19,6 +19,7 @@
             >Log in</router-link
           >
         </div>
+
         <Header
           :class="'hidden-desktop'"
           :post="post"
@@ -57,8 +58,7 @@
         <div class="right-col">
           <Header
             :class="'hidden-mobile'"
-            :postId="post.id"
-            :user="post.author"
+            :post="post"
             :from="from"
             v-if="$mq === 'desktop'"
             :showCopy="!delayedPost"
