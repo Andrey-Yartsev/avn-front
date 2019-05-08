@@ -21,7 +21,7 @@ createRequestAction({
   options: {
     method: "GET",
     query: {
-      limit: 10
+      limit: 7
     }
   },
   resultKey: "users",
