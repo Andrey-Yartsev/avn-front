@@ -427,7 +427,7 @@
       .chat-popup & {
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          max-width: 576px;
+          max-width: calc(100% - 380px);
         }
       }
     }
