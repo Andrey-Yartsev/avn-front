@@ -115,12 +115,12 @@
                 >
                   Login
                 </button>
-                <a
-                  href="/register"
+                <button
                   class="btn border alt btn_fix-width-sm"
-                  @click.prevent.stop="openSignup"
-                  >Sing up</a
+                  @click.prevent="openSingupModal"
                 >
+                  Sing up
+                </button>
               </div>
             </div>
             <template v-if="!delayedPost && isAuth() && post.canFavorite">
@@ -163,12 +163,12 @@
           >
             Login
           </button>
-          <a
-            href="/register"
+          <button
             class="btn border alt btn_fix-width-sm"
-            @click.prevent.stop="openSignup"
-            >Sing up</a
+            @click.prevent="openSingupModal"
           >
+            Sing up
+          </button>
         </div>
       </div>
     </div>

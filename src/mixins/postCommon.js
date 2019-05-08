@@ -53,6 +53,11 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "login"
       });
+    },
+    openSingupModal() {
+      this.$store.dispatch("modal/show", {
+        name: "signup"
+      });
     }
   }
 };
