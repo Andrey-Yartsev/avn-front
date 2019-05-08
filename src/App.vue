@@ -54,6 +54,7 @@
       <avn-chat-message-pay-confirm
         v-if="this.$store.state.modal.chatMessagePayConfirm.show"
       />
+      <UserBubble username="stompeg" />
     </template>
   </div>
 </template>
@@ -86,6 +87,8 @@ import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
+
+import UserBubble from "@/components/users/UserBubble.vue";
 
 import Cookie from "@/utils/cookie";
 import BrowserStore from "store";
@@ -164,7 +167,8 @@ export default {
     ChooseHighlightModal,
     Confirm,
     ImageModal,
-    TrialConfirmModal
+    TrialConfirmModal,
+    UserBubble
   },
   mixins: [ColorScheme],
   data() {

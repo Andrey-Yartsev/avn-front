@@ -150,7 +150,7 @@ export default {
       if (aTags && aTags.length) {
         for (let a of aTags) {
           a.addEventListener("mouseover", () => {
-            console.log("!");
+            console.log(a.innerText.replace(/@(.*)/, "$1"));
           });
         }
       }
