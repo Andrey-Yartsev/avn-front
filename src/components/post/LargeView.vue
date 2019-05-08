@@ -42,7 +42,10 @@
           :authorId="post.author.id"
           mediaSize="full"
         />
-        <div class="text text_posttime" v-if="$mq === 'mobile'">
+        <div
+          class="text text_posttime"
+          v-if="$mq === 'mobile' && !delayedPost && !isAuth()"
+        >
           <time class="timestamp">{{ timePassed }}</time>
         </div>
         <template
@@ -68,7 +71,7 @@
           />
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
             <p v-html="post.text" />
-            <div class="post-time">
+            <div class="post-time" v-if="!delayedPost && !isAuth()">
               <time class="timestamp">{{ timePassed }}</time>
             </div>
           </div>
