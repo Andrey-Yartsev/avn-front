@@ -82,7 +82,6 @@
 
 .userView {
   min-width: 0;
-  position: fixed !important;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
@@ -110,7 +109,7 @@
     width: 100%;
     max-width: 300px;
     min-height: 180px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -131,10 +130,31 @@
       }
     }
 
-    &-up.userView {
+    &-up {
 
-      .arrow {
-        display: block;
+      &.userView {
+
+        .arrow {
+          display: block;
+
+          &:before {
+            content: "";
+            left: 26px;
+            bottom: 0;
+            position: absolute;
+            background-image: linear-gradient(
+              60deg,
+              $secondary-color-12 10%,
+              $primary-color-12 90%
+            );
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.04);
+            width: 9px;
+            height: 9px;
+            transform: translate(0, 5px) rotate(45deg);
+            z-index: 0;
+            pointer-events: none;
+          }
+        }
       }
     }
   }
@@ -143,6 +163,12 @@
     display: none;
     height: 15px;
     margin-bottom: -10px;
+    position: relative;
+
+    &.collapse-height {
+      height: 0;
+      margin-bottom: 0;
+    }
   }
 
   .bg {

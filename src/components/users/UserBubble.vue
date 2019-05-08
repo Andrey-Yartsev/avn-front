@@ -1,5 +1,8 @@
 <template>
-  <div class="userView userView_dropdown userView_dropdown-up" ref="bubble">
+  <div
+    class="userView userView_dropdown userView_dropdown-up"
+    ref="bubble"
+  >
     <div v-if="show">
       <Loader
         :fullscreen="false"
@@ -8,23 +11,23 @@
         v-if="loading"
       />
       <template v-else>
-        <div class="arrow">
+        <div class="arrow" :class="{'collapse-height': !profile.header}">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             width="300"
             height="100"
             viewBox="0 0 600 200"
+            v-if="profile.header"
           >
             <defs>
-              <clipPath id="clipping">
-                <polygon points="50,10 60,0 70,10 50,10"></polygon>
+              <clipPath id="clipping" fill="blue">
+                <polygon points="50,10 60,0 70,10 50,10" fill="red"></polygon>
               </clipPath>
             </defs>
             <image
-              :xlink:href="profile.avatar"
+              :xlink:href="profile.header"
               width="480"
-              height="360"
               clip-path="url(#clipping)"
             ></image>
           </svg>
