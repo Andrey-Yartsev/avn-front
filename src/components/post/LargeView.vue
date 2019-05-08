@@ -19,6 +19,7 @@
             >Log in</router-link
           >
         </div>
+
         <Header
           :class="'hidden-desktop'"
           :post="post"
@@ -41,6 +42,9 @@
           :authorId="post.author.id"
           mediaSize="full"
         />
+        <div class="text text_posttime" v-if="$mq === 'mobile'">
+          <time class="timestamp">{{ timePassed }}</time>
+        </div>
         <template
           v-if="
             !delayedPost && isAuth() && post.canFavorite && $mq === 'mobile'
@@ -57,17 +61,17 @@
         <div class="right-col">
           <Header
             :class="'hidden-mobile'"
-            :postId="post.id"
-            :user="post.author"
+            :post="post"
             :from="from"
             v-if="$mq === 'desktop'"
             :showCopy="!delayedPost"
           />
-          <p
-            class="text hidden-mobile"
-            v-html="post.text"
-            v-if="$mq === 'desktop'"
-          />
+          <div class="text hidden-mobile" v-if="$mq === 'desktop'">
+            <p v-html="post.text" />
+            <div class="post-time">
+              <time class="timestamp">{{ timePassed }}</time>
+            </div>
+          </div>
           <CommentsList
             v-if="!delayedPost && post.canComment"
             :comments="post.fullComments"
@@ -105,12 +109,18 @@
             </div>
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
               <div class="guest-comments-form">
-                <p>
-                  <a href="#" @click.prevent="openLoginModal"
-                    >Create a free account or log in to leave a comment!</a
-                  >
-                </p>
-                <time class="timestamp">{{ timePassed }}</time>
+                <button
+                  class="btn border btn_fix-width-sm"
+                  @click.prevent="openLoginModal"
+                >
+                  Login
+                </button>
+                <button
+                  class="btn border alt btn_fix-width-sm"
+                  @click.prevent="openSingupModal"
+                >
+                  Sing up
+                </button>
               </div>
             </div>
             <template v-if="!delayedPost && isAuth() && post.canFavorite">
@@ -147,12 +157,18 @@
       </div>
       <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
         <div class="guest-comments-form">
-          <p>
-            <a href="#" @click.prevent="openLoginModal"
-              >Create a free account or log in to leave a comment!</a
-            >
-          </p>
-          <time class="timestamp">{{ timePassed }}</time>
+          <button
+            class="btn border btn_fix-width-sm"
+            @click.prevent="openLoginModal"
+          >
+            Login
+          </button>
+          <button
+            class="btn border alt btn_fix-width-sm"
+            @click.prevent="openSingupModal"
+          >
+            Sing up
+          </button>
         </div>
       </div>
     </div>

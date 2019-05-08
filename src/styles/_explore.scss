@@ -44,6 +44,37 @@
       display: flex;
     }
   }
+
+  .postCollectionView {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 0 10px;
+      border-radius: 5px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .posts {
+
+      .post {
+
+        &:first-child {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+          }
+        }
+
+        &:last-child {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .content-nav {
@@ -51,7 +82,6 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     line-height: 4em;
-    overflow-x: auto;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -687,37 +717,6 @@
       + .msg-no-content {
         pointer-events: auto;
         opacity: 1;
-      }
-    }
-  }
-
-  .postCollectionView {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 10px;
-      border-radius: 5px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .posts {
-
-      .post {
-
-        &:first-child {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-          }
-        }
-
-        &:last-child {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-          }
-        }
       }
     }
   }

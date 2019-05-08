@@ -21,6 +21,11 @@ const htmlEntities = str => {
 };
 
 export default {
+  data() {
+    return {
+      maxLength: 1000
+    };
+  },
   computed: {
     tributeOptions() {
       const obj = this;
@@ -58,6 +63,14 @@ export default {
       this.$store.dispatch("search/tribute/search", text).then(result => {
         cb(result.list);
       });
+    },
+    checkLength(e) {
+      if (
+        e.which !== 8 &&
+        this.$refs.textarea.innerText.length > this.maxLength
+      ) {
+        e.preventDefault();
+      }
     }
   },
   mounted() {
@@ -71,5 +84,12 @@ export default {
         insertTextAtCursor(text);
       }
     });
+
+    this.$refs.textarea.addEventListener("keyup", this.checkLength);
+    this.$refs.textarea.addEventListener("keydown", this.checkLength);
+  },
+  beforeDestroy() {
+    this.$refs.textarea.removeEventListener("keyup", this.checkLength);
+    this.$refs.textarea.removeEventListener("keydown", this.checkLength);
   }
 };

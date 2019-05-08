@@ -183,10 +183,12 @@ input {
   &[type="file"] {
     display: none;
   }
-  &.twitter-input {
-    color: $default-secondary-color;
-  }
 }
+
+.twitter-input {
+  color: $default-secondary-color;
+}
+
 textarea {
   resize: none;
 }

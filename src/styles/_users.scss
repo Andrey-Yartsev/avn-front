@@ -2,16 +2,6 @@
 
 .userCollectionView {
 
-  p {
-    &:last-child {
-      padding-bottom: 0;
-    }
-
-    a {
-      font-size: 13px;
-    }
-  }
-
   .users {
 
     &:empty {
@@ -23,67 +13,8 @@
     }
   }
 
-  .subscribed,
   .followme {
-    font-size: 9px;
-    line-height: 12px;
-    padding: 0 5px;
-    margin-top: 2px;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-
-    &__txt {
-      opacity: 0.5;
-    }
-
-    &:after {
-      content: "";
-      opacity: 0.16;
-      border-radius: 1000px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-    }
-  }
-  .subscribed {
-    color: $secondary-color;
-    &:after {
-      background-color: $secondary-color;
-    }
-  }
-  .followme {
-    &:after {
-      background-color: currentColor;
-    }
-  }
-
-  .about {
-    word-wrap: break-word;
-    margin-top: 4px;
-    max-width: 100%;
-    display: block;
-    display: -webkit-box;
-    font-size: 13px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    max-height: 32px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 0 5px;
-    }
-
-    &:last-child {
-      padding-bottom: 0;
-    }
-
-    p {
-      padding: 0;
-    }
+    margin-left: 0;
   }
 
   .subscribeView {
@@ -107,18 +38,6 @@
     }
   }
 
-  .twitter-link {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 13px;
-      color: $default-secondary-color;
-      &:hover {
-        color: darken($default-secondary-color, 10%);
-      }
-    }
-  }
   .user-actions {
     display: flex;
     justify-content: flex-end;
@@ -134,11 +53,11 @@
     }
   }
 
-  .posts-container & {
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      background: $white;
-    }
-  }
+  //.posts-container & {
+  //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+  //    background: $white;
+  //  }
+  //}
 }
 
 .user-actions {
@@ -261,7 +180,7 @@
   .avatar {
     position: absolute;
     top: 13px;
-    left: 0;
+    left: 16px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       top: -40px;
@@ -290,17 +209,12 @@
 
   .user-container {
     position: relative;
-    margin: 0 15px;
+    padding: 14px 15px 14px 70px;
     z-index: 6;
     background: $white;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding: 14px 0 14px 55px;
-    }
-
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 16px;
-      padding-bottom: 15px;
+      padding: 0 15px 15px;
       flex: 1;
       display: flex;
       flex-direction: column;

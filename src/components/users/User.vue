@@ -1,6 +1,6 @@
 <template>
   <div class="userView" :class="[{ 'open-dropdown-inside': showDropdown }]">
-    <div class="bg bg-color bg-gradient_light">
+    <div class="bg bg-color bg-gradient_light" v-if="$mq === 'desktop'">
       <img v-if="profile.header" :src="profile.header" />
     </div>
     <div class="user-container">
