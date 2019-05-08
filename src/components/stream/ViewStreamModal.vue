@@ -47,10 +47,12 @@
                   class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
                 >
                   <span class="avatar__img">
-                    <img :src="comment.user.avatar" />
+                    <img :src="comment.user.avatar" v-if="comment.user" />
                   </span>
                 </span>
-                <span class="name">{{ comment.user.name }}</span>
+                <span class="name">{{
+                  comment.user ? comment.user.name : "Guest"
+                }}</span>
               </div>
               <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
@@ -155,6 +157,9 @@ export default {
       return this.$store.state.tip.tipData;
     },
     isMyStream() {
+      if (!this.user) {
+        return false;
+      }
       const { id } = this.$store.state.modal.stream.data.stream.user;
       return this.user.id === id;
     }
@@ -168,20 +173,19 @@ export default {
       }, 5000);
     },
     stopWatching() {
-      Streams.stopStream(false, true);
-
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
-      this.$root.ws.ws.send(
-        JSON.stringify({
-          act: "stream_unlook",
-          stream_id: id,
-          stream_user_id: userId,
-          sess: token
-        })
-      );
+      this.$root.ws.send({
+        act: "stream_unlook",
+        stream_id: id,
+        stream_user_id: userId,
+        sess: token
+      });
+
+      Streams.stopStream(false, true);
+
       this.close();
     },
     updateTimer() {
@@ -264,23 +268,25 @@ export default {
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
-      Streams.sendCustomMessage({
-        msgtype: "data.custom",
-        to: ["streamer"],
-        data: {
-          type: "click.position",
-          position
-        }
-      });
+      try {
+        Streams.sendCustomMessage({
+          msgtype: "data.custom",
+          to: ["streamer"],
+          data: {
+            type: "click.position",
+            position
+          }
+        });
+      } catch (error) {
+        console.log("Error while sending  sendCustomMessage message ", {});
+      }
 
-      this.$root.ws.ws.send(
-        JSON.stringify({
-          act: "stream_like",
-          stream_id: id,
-          stream_user_id: userId,
-          sess: token
-        })
-      );
+      this.$root.ws.send({
+        act: "stream_like",
+        stream_id: id,
+        stream_user_id: userId,
+        sess: token
+      });
 
       this.likes.push({
         date,
@@ -293,15 +299,13 @@ export default {
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
-      this.$root.ws.ws.send(
-        JSON.stringify({
-          act: "stream_comment",
-          stream_user_id: userId,
-          stream_id: id,
-          comment: this.newComment,
-          sess: token
-        })
-      );
+      this.$root.ws.send({
+        act: "stream_comment",
+        stream_user_id: userId,
+        stream_id: id,
+        comment: this.newComment,
+        sess: token
+      });
       this.newComment = "";
     },
     openCommentForm() {
@@ -357,14 +361,12 @@ export default {
         const id = this.$store.state.modal.stream.data.stream.id;
         const userId = this.$store.state.modal.stream.data.stream.user.id;
 
-        this.$root.ws.ws.send(
-          JSON.stringify({
-            act: "stream_look",
-            stream_id: id,
-            stream_user_id: userId,
-            sess: token
-          })
-        );
+        this.$root.ws.send({
+          act: "stream_look",
+          stream_id: id,
+          stream_user_id: userId,
+          sess: token
+        });
       },
 
       onSetupStreamingSession: function() {},
@@ -414,16 +416,14 @@ export default {
       const { success, toUserId, amount, tipId } = this.tipData;
 
       if (success && `${toUserId}` === `${userId}` && `${tipId}` === `s${id}`) {
-        this.$root.ws.ws.send(
-          JSON.stringify({
-            act: "stream_tip",
-            stream_id: id,
-            stream_user_id: userId,
-            amount,
-            owner: userId,
-            sess: token
-          })
-        );
+        this.$root.ws.send({
+          act: "stream_tip",
+          stream_id: id,
+          stream_user_id: userId,
+          amount,
+          owner: userId,
+          sess: token
+        });
       }
 
       this.closeTip();

@@ -48,7 +48,7 @@ export default class Ws extends EventEmitter {
     ws.onclose = () => {
       this.connected = false;
       this.connecting = false;
-      logger.info(
+      console.trace(
         this.type + " disconnected" + (this.forcedClose ? " (forced)" : "")
       );
 
@@ -112,6 +112,7 @@ export default class Ws extends EventEmitter {
     this._send(data);
   }
   _send(data) {
+    logger.info("Sending", data);
     this.ws.send(JSON.stringify(data));
   }
   clearQueue() {
