@@ -89,11 +89,6 @@
 .userView {
   min-width: 0;
 
-  .lds-dual-ring {
-    width: 100px;
-    height: 100px;
-  }
-
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
     & + .userView {
@@ -117,7 +112,9 @@
   }
 
   &_dropdown {
+    width: 100%;
     max-width: 300px;
+    min-height: 180px;
     position: absolute;
     top: 0;
     left: 0;
