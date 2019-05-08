@@ -4,7 +4,7 @@
       <Loader
         :fullscreen="false"
         text=""
-        class="transparent small"
+        class="page-loader small no-text"
         v-if="loading"
       />
       <template v-else>
