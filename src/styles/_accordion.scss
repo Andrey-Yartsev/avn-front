@@ -15,11 +15,15 @@
     transition: opacity .3s;
   }
 
-  &.opened {
+  &.opened:not(:last-child) {
 
     &:after {
       opacity: 1;
     }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 
   &__title {
