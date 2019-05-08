@@ -67,9 +67,7 @@
             :showCopy="!delayedPost"
           />
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
-            <p
-              v-html="post.text"
-            />
+            <p v-html="post.text" />
             <div class="post-time">
               <time class="timestamp">{{ timePassed }}</time>
             </div>
@@ -111,8 +109,18 @@
             </div>
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
               <div class="guest-comments-form">
-                <button class="btn border btn_fix-width-sm" @click.prevent="openLoginModal">Login</button>
-                <a href="/register" class="btn border alt btn_fix-width-sm" @click.prevent.stop="openSignup">Sing up</a>
+                <button
+                  class="btn border btn_fix-width-sm"
+                  @click.prevent="openLoginModal"
+                >
+                  Login
+                </button>
+                <a
+                  href="/register"
+                  class="btn border alt btn_fix-width-sm"
+                  @click.prevent.stop="openSignup"
+                  >Sing up</a
+                >
               </div>
             </div>
             <template v-if="!delayedPost && isAuth() && post.canFavorite">
@@ -149,8 +157,18 @@
       </div>
       <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
         <div class="guest-comments-form">
-          <button class="btn border btn_fix-width-sm" @click.prevent="openLoginModal">Login</button>
-          <a href="/register" class="btn border alt btn_fix-width-sm" @click.prevent.stop="openSignup">Sing up</a>
+          <button
+            class="btn border btn_fix-width-sm"
+            @click.prevent="openLoginModal"
+          >
+            Login
+          </button>
+          <a
+            href="/register"
+            class="btn border alt btn_fix-width-sm"
+            @click.prevent.stop="openSignup"
+            >Sing up</a
+          >
         </div>
       </div>
     </div>
