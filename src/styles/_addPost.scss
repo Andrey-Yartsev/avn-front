@@ -954,7 +954,13 @@
 
   &.disabled {
     pointer-events: none;
-    color: $primary-color;
+    color: $main-color;
+    opacity: .5;
+
+    .post-datetime__icn,
+    .btn-post__text {
+      opacity: .3;
+    }
   }
 
   &__switcher {
