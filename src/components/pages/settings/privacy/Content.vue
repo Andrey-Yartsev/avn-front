@@ -153,6 +153,27 @@ w<template>
 
       <ConnectTwitter @connected="twitterConnected" />
 
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+        v-if="localUser.isTwitterConnected"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Private Twitter
+            <p class="subtext">Users will not be able to see your twitter</p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isPrivateTwitter"
+              value="true"
+              v-model="localUser.isPrivateTwitter"
+            />
+            <span></span>
+          </label>
+        </div>
+      </div>
+
       <Blocking
         ref="blocking"
         @change="blockingChange"
