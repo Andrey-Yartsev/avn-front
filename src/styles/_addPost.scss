@@ -442,7 +442,7 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 17px;
       padding: 21px 15px;
-      height: 137px;
+      height: 180px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -547,10 +547,6 @@
     .textarea {
       overflow: auto;
       max-height: 200px;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        height: 180px;
-      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
         min-height: 80px;
