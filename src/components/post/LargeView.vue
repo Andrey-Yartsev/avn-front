@@ -13,7 +13,7 @@
         :class="{ 'has-media': post.media && post.media.length }"
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
-          <button class="header-return-btn" @click="back"></button>
+          <button class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs" @click="back"></button>
           <h1 class="page-title">Post</h1>
           <router-link to="/login" class="btn border alt login hidden-desktop"
             >Log in</router-link

@@ -4,7 +4,7 @@
       <div class="popup-container popup-storyviewers">
         <div class="content content_relative">
           <div class="storyviewers-controls">
-            <button class="header-return-btn" @click.prevent="close"></button>
+            <button class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs" @click.prevent="close"></button>
             <a
               v-if="!fromCollection"
               @click.prevent="addToHighlights"

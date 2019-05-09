@@ -1649,12 +1649,7 @@
 
   &:before {
     font-size: 24px;
-    content: "\E606";
     @include icon-font;
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -1672,6 +1667,16 @@
     color: $primary-color;
   }
 
+  &_icn-abs {
+
+    &:before {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   &.go-back {
     padding: 7px 15px;
     display: flex;
@@ -1679,10 +1684,6 @@
     align-content: center;
 
     &:before {
-      position: relative;
-      transform: translateY(0);
-      left: auto;
-      top: auto;
       display: inline-block;
       vertical-align: middle;
       width: 1.1em;

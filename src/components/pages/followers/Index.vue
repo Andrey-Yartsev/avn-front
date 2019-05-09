@@ -35,7 +35,7 @@
               <div class="posts-container">
                 <div class="sticky-header-controls header-mobile">
                   <router-link
-                    class="header-return-btn"
+                    class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
                     :to="`/${profile.username}`"
                   />
                   <h1 class="page-title">Following</h1>
