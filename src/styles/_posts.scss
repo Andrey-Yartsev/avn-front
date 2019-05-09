@@ -1295,6 +1295,10 @@
     width: 80px;
     height: 80px;
     margin: 0 auto;
+
+    svg {
+      fill: $main-color
+    }
   }
 
   &__text {
