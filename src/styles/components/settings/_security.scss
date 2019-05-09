@@ -275,8 +275,8 @@
     background: none;
     position: absolute;
     right: -5px;
-    top: -6px;
-    opacity: 0.3;
+    top: -4px;
+    opacity: .3;
     color: inherit;
     transition: opacity 0.3s ease, color 0.3s ease;
 
@@ -284,6 +284,7 @@
       opacity: 1;
       color: $default-primary-color;
     }
+
     &:before {
       @include icon-font;
       content: "\E605";
