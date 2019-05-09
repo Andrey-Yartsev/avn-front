@@ -1588,6 +1588,8 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: calc(100vh - 75px);
+      position: relative;
+      z-index: 0;
     }
 
 
