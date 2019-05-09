@@ -78,35 +78,35 @@
       font-weight: bold;
     }
 
-    &.comments,
-    &.followers,
-    &.earn_referral {
+    &.tab-comments,
+    &.tab-followers,
+    &.tab-earn_referral {
 
       span {
         color: #3abfd3;
       }
     }
 
-    &.likes,
-    &.subscribed,
-    &.paid_chat_messages {
+    &.tab-likes,
+    &.tab-subscribed,
+    &.tab-paid_chat_messages {
 
       span {
         color: #67cc2e;
       }
     }
 
-    &.posts,
-    &.uploaded,
-    &.unsubscribed,
-    &.paid_subscriptions {
+    &.tab-posts,
+    &.tab-uploaded,
+    &.tab-unsubscribed,
+    &.tab-paid_subscriptions {
 
       span {
         color: #FF335A;
       }
     }
 
-    &.views {
+    &.tab-views {
 
       span {
         color: #ff9501;

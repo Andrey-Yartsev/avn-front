@@ -68,7 +68,7 @@
             <div class="charts-wrapper-outer">
               <div class="charts-data">
                 <span
-                  class="uploaded"
+                  class="tab-uploaded"
                   @click="selectLine('followers-followers')"
                   :class="{
                     selected:
@@ -79,7 +79,7 @@
                   >Followers<span>0</span></span
                 >
                 <span
-                  class="views"
+                  class="tab-views"
                   @click="selectLine('followers-subscribers')"
                   :class="{
                     selected:
@@ -103,7 +103,7 @@
             <div class="charts-wrapper-outer">
               <div class="charts-data">
                 <span
-                  class="posts"
+                  class="tab-posts"
                   @click="selectLine('posts-posts')"
                   :class="{
                     selected:
@@ -114,7 +114,7 @@
                   >Posts <span>0</span></span
                 >
                 <span
-                  class="views"
+                  class="tab-views"
                   @click="selectLine('posts-views')"
                   :class="{
                     selected:
@@ -125,7 +125,7 @@
                   >Views <span>0</span></span
                 >
                 <span
-                  class="likes"
+                  class="tab-likes"
                   @click="selectLine('posts-likes')"
                   :class="{
                     selected:
@@ -136,7 +136,7 @@
                   >Likes <span>0</span></span
                 >
                 <span
-                  class="comments"
+                  class="tab-comments"
                   @click="selectLine('posts-comments')"
                   :class="{
                     selected:
@@ -160,7 +160,7 @@
             <div class="charts-wrapper-outer">
               <div class="charts-data">
                 <span
-                  class="uploaded"
+                  class="tab-uploaded"
                   @click="selectLine('stories-uploads')"
                   :class="{
                     selected:
@@ -171,7 +171,7 @@
                   >Uploaded<span>0</span></span
                 >
                 <span
-                  class="views"
+                  class="tab-views"
                   @click="selectLine('stories-views')"
                   :class="{
                     selected:
@@ -198,16 +198,16 @@
           <div class="box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="posts" ref="count_earnings_paid_subscriptions"
+                <span class="tab-posts" ref="count_earnings_paid_subscriptions"
                   >Subscribers <span>0</span></span
                 >
-                <span class="views" ref="count_earnings_tips"
+                <span class="tab-views" ref="count_earnings_tips"
                   >Funding <span>0</span></span
                 >
-                <span class="likes" ref="count_earnings_paid_chat_messages"
+                <span class="tab-likes" ref="count_earnings_paid_chat_messages"
                   >Message <span>0</span></span
                 >
-                <span class="comments" ref="count_earnings_earn_referral"
+                <span class="tab-comments" ref="count_earnings_earn_referral"
                   >Referrals <span>0</span></span
                 >
               </div>
