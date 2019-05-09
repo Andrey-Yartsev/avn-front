@@ -5,7 +5,10 @@
         <div class="content">
           <div class="container-popup">
             <div class="popup-title popup-title_sticky-mob">
-              <button class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs" @click="close"></button>
+              <button
+                class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+                @click="close"
+              ></button>
               <div class="page-title page-title_reset-gl">
                 Highlight
               </div>

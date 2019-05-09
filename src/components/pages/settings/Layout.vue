@@ -1,7 +1,10 @@
 <template>
   <div class="settings">
     <div class="settings-header" v-if="$mq === 'mobile'">
-      <router-link :to="returnRoute" class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"></router-link>
+      <router-link
+        :to="returnRoute"
+        class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+      ></router-link>
 
       <h1 class="page-title">
         <slot name="title">{{ title }}</slot>

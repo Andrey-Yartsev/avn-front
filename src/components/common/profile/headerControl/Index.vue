@@ -1,6 +1,9 @@
 <template>
   <div class="sticky-header-controls">
-    <router-link to="/" class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"></router-link>
+    <router-link
+      to="/"
+      class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+    ></router-link>
     <div
       class="profile-name__header"
       :class="{ 'no-owner': isOwner(profile.id) }"
