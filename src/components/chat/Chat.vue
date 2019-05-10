@@ -28,7 +28,7 @@
           <div class="chatMessagesCollectionView">
             <div class="msg-no-chat">
               <div class="msg-no-chat__msg">
-                Chose one from your existing messages,<br />or start
+                Choose one of your existing message<br />or start
               </div>
               <span class="btn-start" @click="goTo('/chat/new')"
                 >New message</span
