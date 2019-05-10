@@ -929,7 +929,7 @@
 
 .post-attachment {
   position: relative;
-  padding: 12px 10px 0;
+  padding: 12px 10px 20px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 7px;
