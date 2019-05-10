@@ -52,6 +52,13 @@
       margin-top: 0;
     }
   }
+
+  .explore & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      background-color: $white;
+    }
+  }
 }
 
 .user-actions {
