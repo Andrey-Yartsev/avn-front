@@ -13,7 +13,7 @@
       </span>
       <span class="verified-user" v-if="profile.isVerified"></span>
       <span class="user-login">
-        <router-link :to="'/' + profile.username">{{ profile.id }}</router-link>
+        <router-link :to="'/' + profile.username">{{ profile.username }}</router-link>
       </span>
     </div>
     <UserDropdown
