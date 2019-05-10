@@ -5,9 +5,9 @@
         v-if="$mq === 'mobile'"
         class="more-functions__details more-functions__item"
       >
-        <a href="#" @click.prevent="detailView" class="more-functions__link">
+        <button @click.prevent="detailView" class="more-functions__link">
           <span class="more-functions__option">Details</span>
-        </a>
+        </button>
       </li>
       <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
         <button
