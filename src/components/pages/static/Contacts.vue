@@ -6,7 +6,8 @@
     >
       <h1>Contact</h1>
       <template v-if="sendSuccess">
-        Thank you for your inquiry!  We will review your submission and an AVN Staff member will get back to you shortly.
+        Thank you for your inquiry! We will review your submission and an AVN
+        Staff member will get back to you shortly.
       </template>
       <template v-else>
         <h2>
