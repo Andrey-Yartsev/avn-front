@@ -518,7 +518,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 4px;
-      max-height: calc(100vh - 210px);
+      //max-height: calc(100vh - 210px);
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
