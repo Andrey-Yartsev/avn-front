@@ -121,6 +121,14 @@
     left: 0;
     margin-top: 4px;
 
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      box-shadow: 0 3px 8px rgba(#000, 0.1);
+      position: relative;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
     &-down {
 
       &:before {
@@ -185,30 +193,23 @@
 
   .bg {
     overflow: hidden;
+    padding-top: 33%;
+    position: relative;
+    height: auto;
+    top: 0;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-top: 33%;
-      position: relative;
-      height: auto;
-      top: 0;
-
-      img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-      }
-
-      &:before {
-        position: absolute;
-      }
+    &:before {
+      position: absolute;
     }
   }
 
