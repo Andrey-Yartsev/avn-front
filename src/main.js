@@ -21,8 +21,8 @@ Vue.use(VTooltip, {
 });
 
 // uncomment to see the logs
-import Logger from "js-logger";
-Logger.useDefaults();
+// import Logger from "js-logger";
+// Logger.useDefaults();
 
 if (process.env.NODE_ENV !== "development") {
   Sentry.init({

@@ -1,4 +1,4 @@
-import Bubble from "@/helpers/bubble";
+import Bubble from "@/helpers/userBubble";
 
 export default {
   mounted() {

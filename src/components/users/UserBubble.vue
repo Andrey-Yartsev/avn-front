@@ -1,5 +1,5 @@
 <template>
-  <div class="userView userView_dropdown userView_dropdown-up" ref="bubble">
+  <div class="userView userView_dropdown" ref="bubble">
     <div v-if="show">
       <Loader
         :fullscreen="false"
@@ -62,7 +62,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import Bubble from "@/helpers/bubble";
+import Bubble from "@/helpers/userBubble";
 
 export default {
   name: "UserBubble",
