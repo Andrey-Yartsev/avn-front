@@ -14,7 +14,7 @@ const _open = (a, bubble) => {
   let up = false;
   if (r.bottom > window.innerHeight - 200) {
     up = true;
-    bubble.style.top = r.top - 20 - 200 + "px";
+    bubble.style.top = r.top - 12 - 200 + "px";
   } else {
     bubble.style.top = r.top + 20 + "px";
   }
@@ -24,7 +24,7 @@ const _open = (a, bubble) => {
   setTimeout(() => {
     if (up) {
       const h = bubble.getBoundingClientRect().height;
-      bubble.style.top = r.top - 20 - h + "px";
+      bubble.style.top = r.top - 12 - h + "px";
       bubble.classList.add("userView_dropdown-down");
       bubble.classList.remove("userView_dropdown-up");
     } else {
