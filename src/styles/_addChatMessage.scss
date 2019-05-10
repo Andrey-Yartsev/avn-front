@@ -199,10 +199,11 @@
   border: none;
   padding: 0;
   background: none;
-  opacity: 0.2;
+  opacity: .2;
   font-size: 17px;
   margin-left: 5px;
   transition: opacity 0.3s ease;
+  color: $main-color;
 
   &:hover {
     color: $primary-color;
