@@ -129,7 +129,9 @@
                 <span class="subscription__per-month">per month</span>
                 <input
                   class="field-gap_currency field-gap_timeunit"
-                  type="text"
+                  type="number"
+                  min="0"
+                  step="0.01"
                   name="subscribePrice"
                   v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
