@@ -75,7 +75,8 @@
     }
   }
 
-  .subscribed {
+  .subscribed,
+  .price_changed {
 
     &:before {
       content: "\E62E";
