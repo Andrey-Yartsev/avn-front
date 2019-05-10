@@ -35,10 +35,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 1em;
     }
-
-    &:first-child {
-      //margin: 0;
-    }
   }
 
   .tips {
@@ -127,21 +123,14 @@
   }
 
   .btn-el {
-    background-color: transparent;
-    border: none;
-    display: inline-block;
     align-items: center;
-    cursor: pointer;
     transition: color 0.3s ease, opacity 0.3s ease;
     height: 30px;
+    color: $main-color;
 
     &:before {
       display: inline-block;
-      @include icon-font;
-      font-size: 24px;
-      margin: 0;
       width: 1.1em;
-      font-weight: 400;
     }
 
     &.disabled,
@@ -149,6 +138,13 @@
       opacity: 1;
       pointer-events: none;
       color: rgba(124, 139, 150, 0.18);
+    }
+
+    &.tips {
+
+      &:before {
+        transform: translateY(-1px);
+      }
     }
   }
 }
