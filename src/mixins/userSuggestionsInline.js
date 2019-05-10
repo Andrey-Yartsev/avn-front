@@ -2,6 +2,9 @@ import Bubble from "@/helpers/userBubble";
 
 export default {
   mounted() {
+    if (this.$mq === "mobile") {
+      return;
+    }
     const bubble = document.getElementById("user-bubble");
     if (this.$refs.text) {
       const aTags = this.$refs.text.getElementsByTagName("a");

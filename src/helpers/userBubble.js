@@ -10,7 +10,6 @@ const _hide = () => {
 
 const _open = (a, bubble) => {
   const r = a.getBoundingClientRect();
-  console.log(r.bottom, window.innerHeight - 200);
   let up = false;
   if (r.bottom > window.innerHeight - 200) {
     up = true;
