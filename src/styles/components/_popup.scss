@@ -597,12 +597,12 @@
       .explore-page & {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          top: 45px;
-          bottom: 45px;
+          padding-top: 45px;
+          padding-bottom: 45px;
 
           @media screen and (orientation: landscape) {
-            top: 0;
-            bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
           }
         }
       }
