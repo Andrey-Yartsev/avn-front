@@ -6,47 +6,36 @@
       </h1>
       <form class="payouts-bank-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
-          <div v-if="isAmerica" class="container">
+          <div class="container">
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
-                <span class="label">Routing Number</span>
+                <span class="label">
+                  Select payouts method
+                </span>
+                <span class="select-wrapper">
+                  <select
+                    name="country"
+                    id="account-country"
+                    v-model="localBank.payoutCode"
+                  >
+                    <option v-for="v in payouts" :key="v.code" :value="v.code"
+                      >{{ v.title }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div
+              class="form-group form-group_with-label"
+              v-for="v in payoutFields"
+              :key="'f' + v.code"
+            >
+              <label class="form-group-inner">
+                <span class="label">{{ v.label }}</span>
                 <input
                   name="routingNumber"
-                  v-model="localBank.routingNumber"
-                  v-validate="'required'"
-                />
-              </label>
-            </div>
-
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">Account Number</span>
-                <input
-                  name="accountNumber"
-                  v-model="localBank.accountNumber"
-                  v-validate="'required'"
-                />
-              </label>
-            </div>
-          </div>
-          <div v-else class="container">
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">IBAN</span>
-                <input
-                  name="iban"
-                  v-model="localBank.iban"
-                  v-validate="'required'"
-                />
-              </label>
-            </div>
-
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">SWIFT/BIC</span>
-                <input
-                  name="bic"
-                  v-model="localBank.bic"
+                  v-model="localBank[v.code]"
                   v-validate="'required'"
                 />
               </label>
@@ -102,8 +91,15 @@ export default {
     account() {
       return this.$store.state.payouts.account.fetchResult;
     },
-    isAmerica() {
-      return this.account.countryId == 212;
+    payouts() {
+      // const selected = this.bank.payouts[0].code;
+      return this.bank.payouts;
+    },
+    selectedPayout() {
+      return this.payouts.find(v => v.code === this.localBank.payoutCode);
+    },
+    payoutFields() {
+      return this.selectedPayout.fields;
     }
   },
 
@@ -118,6 +114,7 @@ export default {
 
   created: function() {
     this.localBank = {};
+    this.localBank.payoutCode = this.payouts[0].code;
     // this.localBank = this._clone(this.bank);
   },
 

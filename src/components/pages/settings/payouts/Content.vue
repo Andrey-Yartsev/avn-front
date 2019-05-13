@@ -106,7 +106,12 @@ export default {
       return this.$store.state.payouts.bank.fetchResult;
     },
     bankExists() {
-      return this.bank && (this.bank.accountNumber || this.bank.bic);
+      if (!this.bank) {
+        return false;
+      }
+      const fieldCodes = this.bank.fields.map(v => v.code);
+      // every field exists in bank model
+      return fieldCodes.every(code => !!this.bank[code]);
     }
   },
 
@@ -120,13 +125,13 @@ export default {
     this.$store.dispatch("payouts/account/fetch").then(r => {
       if (r.countryId) {
         this.$store.dispatch("payouts/legal/fetch").then(() => {
-          if (this.isApproved) {
-            this.$store.dispatch("payouts/bank/fetch").then(() => {
-              this.loading = false;
-            });
-          } else {
+          //if (this.isApproved) {
+          this.$store.dispatch("payouts/bank/fetch").then(() => {
             this.loading = false;
-          }
+          });
+          //} else {
+          //  this.loading = false;
+          //}
         });
       } else {
         this.loading = false;

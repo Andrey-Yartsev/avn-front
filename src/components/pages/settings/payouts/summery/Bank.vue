@@ -13,24 +13,10 @@
         </div>
         <div class="shadow-block">
           <div class="container">
-            <div class="payouts-bank-info" v-if="isAmerica">
-              <div class="item">
-                <span class="title">Routing Number</span>
-                <span class="value">{{ bank.routingNumber }}</span>
-              </div>
-              <div class="item">
-                <span class="title">Account Number</span>
-                <span class="value">{{ bank.accountNumber }}</span>
-              </div>
-            </div>
-            <div class="payouts-bank-info" v-else>
-              <div class="item">
-                <span class="title">IBAN</span>
-                <span class="value">{{ bank.iban }}</span>
-              </div>
-              <div class="item">
-                <span class="title">SWIFT/BIC</span>
-                <span class="value">{{ bank.bic }}</span>
+            <div class="payouts-bank-info">
+              <div class="item" v-for="v in bankFields" :key="v.code">
+                <span class="title">{{ v.label }}</span>
+                <span class="value">{{ bank[v.code] }}</span>
               </div>
             </div>
           </div>
@@ -42,29 +28,25 @@
 
 <script>
 import BankEdit from "./BankEdit";
+import Bank from "../bank";
 
 export default {
   name: "PayoutSettingsSummeryBank",
-
+  mixins: [Bank],
   components: {
     BankEdit
   },
-
   data() {
     return {
       edit: false
     };
   },
-
   computed: {
     account() {
       return this.$store.state.payouts.account.fetchResult;
     },
     bank() {
       return this.$store.state.payouts.bank.fetchResult;
-    },
-    isAmerica() {
-      return this.account.countryId == 212;
     }
   }
 };

@@ -95,7 +95,8 @@ export default {
     loading() {
       return (
         this.$store.state.payouts.countries.fetchLoading ||
-        this.$store.state.payouts.account.fetchLoading
+        this.$store.state.payouts.account.fetchLoading ||
+        this.$store.state.payouts.bank.fetchLoading
       );
     },
     selectedCountry() {
@@ -133,10 +134,14 @@ export default {
 
   methods: {
     save() {
-      this.$store.dispatch("payouts/account/save", {
-        countryId: this.countryId,
-        countryName: this.countryName
-      });
+      this.$store
+        .dispatch("payouts/account/save", {
+          countryId: this.countryId,
+          countryName: this.countryName
+        })
+        .then(() => {
+          this.$store.dispatch("payouts/bank/fetch");
+        });
     }
   },
 
