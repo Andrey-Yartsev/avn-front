@@ -239,7 +239,7 @@ export default {
     },
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
-      if (this.type === "media") {
+      if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/getPosts");
       }
 
