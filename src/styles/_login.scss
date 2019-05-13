@@ -482,8 +482,11 @@
     a.register {
       color: $secondary-color;
 
-      &:hover {
-        color: $secondary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $secondary-color-darken;
+        }
       }
     }
 

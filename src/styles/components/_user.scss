@@ -27,8 +27,12 @@
   }
 
   a & {
-    &:hover {
-      color: $primary-color-darken;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $primary-color-darken;
+      }
     }
   }
 }
@@ -321,8 +325,11 @@
 
   &.alt {
 
-    &:hover {
-      background: $default-primary-color;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background: $default-primary-color;
+      }
     }
   }
 }

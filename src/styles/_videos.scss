@@ -99,12 +99,15 @@
       }
     }
 
-    &:not(.locked-wrapper):hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      &:before,
-      .overlay {
-        opacity: 1;
-        transform: scale(1);
+      &:not(.locked-wrapper):hover {
+
+        &:before,
+        .overlay {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
     }
 

@@ -241,13 +241,14 @@
     margin-left: 0;
   }
 
-  &:hover {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    .icon {
+    &:hover {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+      .icon {
         color: $secondary-color;
         opacity: 1;
+
       }
     }
   }
@@ -508,9 +509,15 @@
     cursor: pointer;
     color: $secondary-color;
 
-    &:hover,
     &.active {
       color: $secondary-color-darken;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
 
     &:before {
@@ -781,13 +788,16 @@
     font-size: 15px;
     font-weight: 500;
 
-    &:hover {
-      color: $primary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      .b-check-state__icon {
+      &:hover {
+        color: $primary-color-darken;
 
-        &:before {
-          color: $primary-color-darken;
+        .b-check-state__icon {
+
+          &:before {
+            color: $primary-color-darken;
+          }
         }
       }
     }
@@ -943,8 +953,11 @@
   position: relative;
   transition: color .3s;
 
-  &:hover {
-    color: $secondary-color-darken
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken
+    }
   }
 
   &.disabled {
@@ -1050,8 +1063,11 @@
       padding: 6px 15px;
       transition: all .3s;
 
-      &:hover {
-        color: #fff;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: #fff;
+        }
       }
 
       &--cancel {
@@ -1078,12 +1094,15 @@
           transform: translate(-50%, -50%);
         }
 
-        &:hover {
-          color: $main-color;
-          opacity: 1;
+        @include media-breakpoint-up($desktop-breakpoint) {
 
-          &:after {
-            font-size: 30px;
+          &:hover {
+            color: $main-color;
+            opacity: 1;
+
+            &:after {
+              font-size: 30px;
+            }
           }
         }
       }
@@ -1094,8 +1113,11 @@
         font-size: 15px;
         font-weight: 400;
 
-        &:hover {
-          background-color: $secondary-color-darken;
+        @include media-breakpoint-up($desktop-breakpoint) {
+
+          &:hover {
+            background-color: $secondary-color-darken;
+          }
         }
       }
     }
@@ -1177,15 +1199,18 @@
 
         &.vdatetime-calendar__month__day {
 
-          &:hover {
+          @include media-breakpoint-up($desktop-breakpoint) {
 
-            > span {
+            &:hover {
 
               > span {
-                background-color: $primary-color;
 
-                .dark-theme & {
-                  color: #fff;
+                > span {
+                  background-color: $primary-color;
+
+                  .dark-theme & {
+                    color: #fff;
+                  }
                 }
               }
             }
@@ -1193,14 +1218,17 @@
         }
       }
 
-      &:hover {
+      @include media-breakpoint-up($desktop-breakpoint) {
 
-        > span {
+        &:hover {
 
           > span {
 
-            .dark-theme & {
-              color: $white;
+            > span {
+
+              .dark-theme & {
+                color: $white;
+              }
             }
           }
         }

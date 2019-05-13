@@ -431,10 +431,10 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-left: 17px;
         padding-right: 17px;
-      }
 
-      &:hover {
-        background-color: #fff;
+        &:hover {
+          background-color: #fff;
+        }
       }
 
       &.btn-send {
@@ -491,10 +491,10 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 15px 10px;
-  }
 
-  &:hover {
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &:before {

@@ -301,9 +301,9 @@
         margin: 0 10px 0 0;
       }
 
-      &:hover {
+      @include media-breakpoint-up($desktop-breakpoint) {
 
-        @include media-breakpoint-up($desktop-breakpoint) {
+        &:hover {
           opacity: 1;
           color: $primary-color;
         }
@@ -351,16 +351,13 @@
           cursor: auto;
         }
 
-        &:hover {
+        @include media-breakpoint-up($desktop-breakpoint) {
 
-          @include media-breakpoint-up($desktop-breakpoint) {
+          &:hover {
             opacity: .3;
             color: $main-color;
-          }
 
-          .btn-icon {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
+            .btn-icon {
               color: $main-color;
             }
           }
@@ -447,8 +444,11 @@
     }
   }
 
-  &:hover {
-    color: $secondary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
   }
 
   &:before {
@@ -714,9 +714,15 @@
           content: "";
         }
 
-        &.active,
-        &:hover {
+        &.active {
           opacity: 1;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }
@@ -1164,33 +1170,23 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-
-  //p {
-  //  padding-bottom: 4px;
-  //  padding-right: 20px;
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    padding-bottom: 0;
-  //  }
-  //}
-  //
-  //.timestamp {
-  //  white-space: nowrap;
-  //}
 }
 
 .video-placeholder {
   display: inline-block;
   position: relative;
 
-  &:hover {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    &:after {
-      opacity: 1;
-    }
+    &:hover {
 
-    .video-recommendations-text {
-      opacity: 1;
+      &:after {
+        opacity: 1;
+      }
+
+      .video-recommendations-text {
+        opacity: 1;
+      }
     }
   }
 

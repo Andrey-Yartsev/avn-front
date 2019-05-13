@@ -474,8 +474,11 @@
       @include icon-font;
     }
 
-    &:hover {
-      opacity: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -521,9 +524,12 @@
     color: $secondary-color;
     cursor: pointer;
 
-    &:hover {
-      background-color: $secondary-color;
-      color: #fff;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background-color: $secondary-color;
+        color: #fff;
+      }
     }
 
     &:before {
@@ -739,10 +745,13 @@
 
   > .avatar {
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      + .name {
-        color: $primary-color-darken;
+      &:hover {
+
+        + .name {
+          color: $primary-color-darken;
+        }
       }
     }
   }
@@ -984,8 +993,11 @@
     font-size: 15px;
   }
 
-  &:hover {
-    color: $secondary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
   }
 
   &:after {

@@ -27,19 +27,21 @@ body {
 }
 a {
   color: $primary-color;
-  &:hover {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
       color: $primary-color-darken;
     }
   }
+
   &.alt {
     color: $secondary-color;
     transition: color 0.3s ease;
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+      &:hover {
         color: $secondary-color-darken;
       }
     }
@@ -173,10 +175,11 @@ strong {
     transition: all 0.2s ease-in-out 0s;
   }
 }
-:hover > .hide-on-hover,
-:not(:hover) > .show-on-hover {
-  opacity: 0;
-}
+
+//:hover > .hide-on-hover,
+//:not(:hover) > .show-on-hover {
+//  opacity: 0;
+//}
 
 .text-centered {
   text-align: center;
@@ -359,33 +362,36 @@ video {
 
 .ps-container.ps {
 
-  &:hover {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    > .ps__scrollbar-y-rail {
+    &:hover {
 
-      &:hover {
-        background-color: transparent;
-      }
-    }
+      > .ps__scrollbar-y-rail {
 
-    &.ps--in-scrolling {
-
-      &.ps--y {
-
-        > .ps__scrollbar-y-rail {
-
-          >.ps__scrollbar-y {
-            width: 4px;
-          }
+        &:hover {
+          background-color: transparent;
         }
       }
 
-      &.ps--x {
+      &.ps--in-scrolling {
 
-        > .ps__scrollbar-x-rail {
+        &.ps--y {
 
-          >.ps__scrollbar-x {
-            height: 4px;
+          > .ps__scrollbar-y-rail {
+
+            >.ps__scrollbar-y {
+              width: 4px;
+            }
+          }
+        }
+
+        &.ps--x {
+
+          > .ps__scrollbar-x-rail {
+
+            >.ps__scrollbar-x {
+              height: 4px;
+            }
           }
         }
       }
@@ -401,11 +407,20 @@ video {
       bottom: 0;
     }
 
-    &:hover,
     &:active {
 
       > .ps__scrollbar-x {
         height: 4px;
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+
+        > .ps__scrollbar-x {
+          height: 4px;
+        }
       }
     }
   }
@@ -419,11 +434,20 @@ video {
       right: 0;
     }
 
-    &:hover,
     &:active {
 
       > .ps__scrollbar-y {
         width: 4px;
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+
+        > .ps__scrollbar-y {
+          width: 4px;
+        }
       }
     }
   }
@@ -542,9 +566,9 @@ video {
       height: 30px;
     }
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+      &:hover {
         opacity: 1;
       }
     }
@@ -618,8 +642,11 @@ video {
     color: inherit;
     transition: color 0.3s ease;
 
-    &:hover {
-      color: $primary-color;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
 

@@ -289,12 +289,15 @@
         }
       }
 
-      &:hover {
+      @include media-breakpoint-up($desktop-breakpoint) {
 
-        .name {
+        &:hover {
 
-          @include media-breakpoint-up($desktop-breakpoint) {
-            color: $primary-color-darken;
+          .name {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              color: $primary-color-darken;
+            }
           }
         }
       }
@@ -819,8 +822,11 @@
       margin-left: 19px;
     }
 
-    &:hover {
-      color: $secondary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
 
     &:first-child {

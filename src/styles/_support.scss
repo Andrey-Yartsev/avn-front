@@ -255,10 +255,13 @@ form.support-search-form {
     color: $main-color;
     text-align: center;
 
-    &:hover {
-      color: $main-color;
-      box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset, 0 10px 30px rgba(0, 0, 0, 0.15);
-      transform: scale(1.03);
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $main-color;
+        box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset, 0 10px 30px rgba(0, 0, 0, 0.15);
+        transform: scale(1.03);
+      }
     }
 
     &__title {
@@ -290,8 +293,11 @@ form.support-search-form {
       background-color: $secondary-color;
       transition: background-color .3s;
 
-      &:hover {
-        background-color: $secondary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background-color: $secondary-color-darken;
+        }
       }
     }
 
@@ -415,12 +421,15 @@ form.support-search-form {
   color: #fff;
   position: relative;
   z-index: 1;
-  
-  &:hover {
-    color: #fff;
 
-    &:after {
-      background-color: $primary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: #fff;
+
+      &:after {
+        background-color: $primary-color-darken;
+      }
     }
   }
 
@@ -538,8 +547,11 @@ form.support-search-form {
         padding: 6px 0 6px 35px;
         transition: all .3s;
 
-        &:hover {
-          padding-left: 45px;
+        @include media-breakpoint-up($desktop-breakpoint) {
+
+          &:hover {
+            padding-left: 45px;
+          }
         }
 
         &:before {
@@ -656,8 +668,11 @@ form.support-search-form {
     &.vote-like {
       color: $primary-color;
 
-      &:hover {
-        color: $primary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $primary-color-darken;
+        }
       }
 
       &:after {
@@ -668,8 +683,11 @@ form.support-search-form {
     &.vote-dislike {
       color: $secondary-color;
 
-      &:hover {
-        color: $secondary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $secondary-color-darken;
+        }
       }
 
       &:after {

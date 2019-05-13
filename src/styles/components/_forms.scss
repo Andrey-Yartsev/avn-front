@@ -676,8 +676,11 @@ label {
       color: $primary-color;
       font-weight: 500;
 
-      &:hover {
-        color: $primary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $primary-color-darken;
+        }
       }
 
       &:before {
@@ -1053,8 +1056,11 @@ select {
         color: #fff;
       }
 
-      &:hover {
-        background-color: $secondary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background-color: $secondary-color-darken;
+        }
       }
     }
   }
