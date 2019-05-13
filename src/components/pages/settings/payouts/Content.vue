@@ -36,7 +36,7 @@ import Loader from "@/components/common/Loader";
 import Account from "./Account";
 import Legal from "./Legal";
 import LegalPending from "./LegalPending";
-import Bank from "./Bank";
+import Bank from "./Bank.vue";
 import Summery from "./Summery";
 import Unexpected from "./Unexpected";
 
