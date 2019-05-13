@@ -66,7 +66,7 @@
         :class="{ chatTip: true, hidden: !showTip }"
       />
 
-      <div class="tip-form getPaidForm" v-if="showPaid">
+      <div class="tip-form tip-form_post getPaidForm" v-if="showPaid">
         <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
           Cancel
         </button>
