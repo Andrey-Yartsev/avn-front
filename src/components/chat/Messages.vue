@@ -244,7 +244,7 @@ export default {
       if (this.isMyMessage(message)) {
         return;
       }
-      if (message.isFree) {
+      if (message.isFree || message.isOpened) {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
