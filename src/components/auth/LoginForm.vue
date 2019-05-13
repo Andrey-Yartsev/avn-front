@@ -1,7 +1,7 @@
 <template>
   <div v-if="otpAuth">
     <div class="auth-block auth-block_sm-size">
-      <h2>Hi</h2>
+      <h2>Enter 2-Factor Authentication Code</h2>
       <form v-on:submit.stop.prevent="sendOtp">
         <input
           class="rounded otpCode"
