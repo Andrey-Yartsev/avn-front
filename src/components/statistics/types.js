@@ -12,7 +12,7 @@ const chartTypes = {
     post_comment_added: ["Comment", "comments", ["#3abfd3", "#49eeca"]]
   },
   stories: {
-    story_added: ["Uploaded", "uploads"],
+    story_added: ["Uploads", "uploads"],
     story_view: ["Views", "views"]
   },
   earnings: {
