@@ -67,6 +67,16 @@ const mutations = {
   },
 
   comment(state, comment) {
+    const foundI = state.currentLive.comments.findIndex(
+      v => v.id === comment.id
+    );
+    if (foundI !== -1) {
+      state.currentLive.comments[foundI] = {
+        ...comment,
+        hideTime: Date.now() + 60 * 1000
+      };
+      return;
+    }
     state.currentLive.comments = [
       ...state.currentLive.comments,
       {
