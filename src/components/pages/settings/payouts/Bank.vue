@@ -14,9 +14,10 @@
                 </span>
                 <span class="select-wrapper">
                   <select
-                    name="country"
+                    name="payoutCode"
                     id="account-country"
                     v-model="localBank.payoutCode"
+                    @change="payoutChanged"
                   >
                     <option v-for="v in payouts" :key="v.code" :value="v.code"
                       >{{ v.title }}
@@ -34,7 +35,7 @@
               <label class="form-group-inner">
                 <span class="label">{{ v.label }}</span>
                 <input
-                  name="routingNumber"
+                  :name="v.code"
                   v-model="localBank[v.code]"
                   v-validate="'required'"
                 />
@@ -92,7 +93,6 @@ export default {
       return this.$store.state.payouts.account.fetchResult;
     },
     payouts() {
-      // const selected = this.bank.payouts[0].code;
       return this.bank.payouts;
     },
     selectedPayout() {
@@ -108,7 +108,16 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
+      const data = {};
+      data.payoutCode = this.localBank.payoutCode;
+      this.payoutFields.map(v => {
+        data[v.code] = this.localBank[v.code];
+      });
+
       this.$store.dispatch("payouts/bank/save", this.localBank);
+    },
+    payoutChanged() {
+      this.localBank = { ...this.localBank };
     }
   },
 

@@ -17,6 +17,26 @@
             </div>
           </div>
 
+          <div class="form-group form-group_with-label">
+            <label class="form-group-inner">
+              <span class="label">
+                Select payouts method
+              </span>
+              <span class="select-wrapper">
+                <select
+                  name="payoutCode"
+                  id="account-country"
+                  v-model="localBank.payoutCode"
+                  @change="payoutChanged"
+                >
+                  <option v-for="v in bankPayouts" :key="v.code" :value="v.code"
+                    >{{ v.title }}
+                  </option>
+                </select>
+              </span>
+            </label>
+          </div>
+
           <div
             class="form-group form-group_with-label"
             v-for="v in bankFields"
@@ -64,6 +84,14 @@ export default {
     },
     account() {
       return this.$store.state.payouts.account.fetchResult;
+    },
+    selectedBankPayout() {
+      return this.localBank.payouts.find(
+        v => v.code === this.localBank.payoutCode
+      );
+    },
+    bankFields() {
+      return this.selectedBankPayout.fields;
     }
   },
   methods: {
@@ -72,7 +100,14 @@ export default {
     },
     save() {
       this.saving = true;
-      this.$store.dispatch("payouts/bank/save", this.localBank).then(r => {
+
+      const data = {};
+      data.payoutCode = this.localBank.payoutCode;
+      this.bankFields.map(v => {
+        data[v.code] = this.localBank[v.code];
+      });
+
+      this.$store.dispatch("payouts/bank/save", data).then(r => {
         if (r.error) {
           return;
         }
@@ -87,6 +122,9 @@ export default {
     cancel() {
       this.localBank = null;
       this.$emit("cancel");
+    },
+    payoutChanged() {
+      this.localBank = { ...this.localBank };
     }
   },
   created: function() {

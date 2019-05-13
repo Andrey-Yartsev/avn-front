@@ -69,10 +69,6 @@
 <script>
 import Globe from "./Globe";
 
-const countries = {
-  212: "United States of America"
-};
-
 const htmlElement = document.getElementsByTagName("html")[0];
 
 export default {
@@ -126,9 +122,6 @@ export default {
           selected: v.id === this.countryId
         };
       });
-    },
-    countryName() {
-      return countries[this.countryId];
     }
   },
 
@@ -136,8 +129,7 @@ export default {
     save() {
       this.$store
         .dispatch("payouts/account/save", {
-          countryId: this.countryId,
-          countryName: this.countryName
+          countryId: this.countryId
         })
         .then(() => {
           this.$store.dispatch("payouts/bank/fetch");
