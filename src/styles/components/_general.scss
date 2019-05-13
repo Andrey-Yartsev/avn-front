@@ -28,13 +28,20 @@ body {
 a {
   color: $primary-color;
   &:hover {
-    color: $primary-color-darken;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      color: $primary-color-darken;
+    }
   }
   &.alt {
     color: $secondary-color;
     transition: color 0.3s ease;
+
     &:hover {
-      color: $secondary-color-darken;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        color: $secondary-color-darken;
+      }
     }
   }
 }
