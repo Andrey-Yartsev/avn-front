@@ -291,6 +291,10 @@ export default {
     },
     highlights() {
       this.footerScrollAction();
+    },
+    source() {
+      // fix for infinity scroll. reset lastYOffset when switching tabs
+      this.lastYOffset = 0;
     }
   },
   methods: {
