@@ -36,6 +36,9 @@ const _open = (a, bubble) => {
 
 export default {
   open(a, bubble) {
+    if (!a.innerText.match(/^@(.*)/)) {
+      return;
+    }
     clearTimeout(hideTimeoutId);
     clearTimeout(showTimeoutId);
     showTimeoutId = setTimeout(() => {
