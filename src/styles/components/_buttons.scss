@@ -436,8 +436,11 @@ button,
     background-color: transparent;
     opacity: 1;
     color: $primary-color;
-    transition: color 0.3s ease, opacity 0.3s ease;
     font-size: 13px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
 
     .searchView & {
 
@@ -494,6 +497,10 @@ button,
     margin-bottom: 5px;
     transform: translate(-2px, 0);
     transition: none;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      transition: none;
+    }
   }
 
   &.disable-state {
@@ -512,14 +519,6 @@ button,
     position: relative;
     text-align: center;
   }
-
-  //.show-on-hover {
-  //  top: 1px;
-  //  line-height: 13px;
-  //  position: absolute;
-  //  left: 50%;
-  //  transform: translate(-50%, 0);
-  //}
 }
 
 .subscribe-cost {
@@ -543,13 +542,6 @@ button,
   &__label {
     position: relative;
     margin-top: 4px;
-
-    //.show-on-hover {
-    //  position: absolute;
-    //  left: 50%;
-    //  top: 0;
-    //  transform: translateX(-50%);
-    //}
   }
 
   &.disable-state {
