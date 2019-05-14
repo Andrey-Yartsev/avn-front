@@ -868,6 +868,10 @@ button,
     right: 0;
     font-size: 46px;
 
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: none;
+    }
+
     .lightbox-post & {
 
       .explore-page & {
@@ -877,13 +881,6 @@ button,
           line-height: 44px;
           display: block;
         }
-      }
-    }
-
-    .explore-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: none;
       }
     }
   }
