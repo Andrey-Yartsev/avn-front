@@ -876,11 +876,22 @@ button,
     right: 0;
     font-size: 46px;
 
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 24px;
+          line-height: 44px;
+          display: block;
+        }
+      }
+    }
+
     .explore-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        font-size: 24px;
-        line-height: 44px;
+        display: none;
       }
     }
   }
