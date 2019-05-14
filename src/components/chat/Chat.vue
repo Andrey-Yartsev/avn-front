@@ -294,7 +294,6 @@ export default {
       }
     },
     windowBlur() {
-      console.log("BLUR");
       this.$store.commit("chat/setActiveWindow", false);
       clearInterval(focusIntervalId);
       focusIntervalId = 0;
