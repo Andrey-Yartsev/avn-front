@@ -30,7 +30,8 @@
     overflow: hidden;
     flex-wrap: wrap;
     border-radius: 5px;
-    min-height: 440px;
+    //min-height: 440px;
+    min-height: calc(100vh - 126px);
   }
 
   &__inside {
