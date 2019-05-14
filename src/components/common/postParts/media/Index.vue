@@ -116,9 +116,7 @@ export default {
   },
   computed: {
     mediaStyle() {
-      return this.mediaSize === "full" &&
-        this.medias.length &&
-        this.medias[this.activeSlide].background
+      return this.medias.length && this.medias[this.activeSlide].background
         ? {
             "background-image": `url(data:image/jpeg;base64,${
               this.medias[this.activeSlide].background
