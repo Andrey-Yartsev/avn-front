@@ -108,6 +108,19 @@
 
     .lds-dual-ring {
       background-color: rgba(0, 0, 0, .4);
+
+      .loader-text {
+        width: 40px;
+        height: 40px;
+        background-color: $white;
+        border-radius: 50%;
+
+        &:after {
+          width: 36px;
+          height: 36px;
+          margin-top: -36px;
+        }
+      }
     }
   }
 
@@ -138,18 +151,30 @@
 
   .progress {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 5px;
-    background: linear-gradient(
-      30deg,
-      $default-secondary-color 10%,
-      $default-primary-color 90%
-    )
-    no-repeat 50% / cover;
-    transition: width 0.1s;
-    width: 0;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 8px;
     z-index: 12;
+    background-color: $white;
+    border: 2px solid $white;
+    overflow: hidden;
+    border-radius: .3em;
+
+    &-loader {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(
+        30deg,
+        $default-secondary-color 10%,
+        $default-primary-color 90%
+      )
+      no-repeat 50% / cover;
+      transition: width 0.1s;
+      width: 0;
+    }
   }
 }
 
@@ -173,7 +198,6 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .4);
     z-index: 0;
     @include icon-font;
     font-size: 30px;
@@ -184,14 +208,16 @@
 
     &:before {
       content: "\E604";
+      background-color: rgba(0, 0, 0, .4);
     }
   }
 
   &.error-status {
-    color: red;
+    background-color: red;
+    color: #fff;
 
     &:before {
-      content: "\E605";
+      content: "\E619";
     }
   }
 }
@@ -201,5 +227,18 @@
   &__title {
     margin: 0 8px 6px;
     font-weight: 700;
+  }
+}
+
+.error-upload {
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(#000, 0.3);
   }
 }

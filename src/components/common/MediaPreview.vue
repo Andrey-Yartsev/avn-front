@@ -1,6 +1,6 @@
 <template>
   <div :class="['addFileView', { uploading: isSaving }]">
-    <span class="filename">
+    <span class="filename" :class="{ 'error-upload' : media.uploadError }">
       <img v-if="hasPreview" :src="preview" :title="media.userFileName" />
       <span v-else>{{ media.userFileName }}</span>
       <span class="attachment-status success-status" v-if="media.processId" />
@@ -9,8 +9,9 @@
     <div
       v-if="showLoader"
       class="progress"
-      :style="{ width: `${media.loaded}%` }"
-    />
+    >
+      <div class="progress-loader" :style="{ width: `${media.loaded}%` }" />
+    </div>
     <span
       class="remove centered"
       @mousedown.prevent.stop="() => {}"
