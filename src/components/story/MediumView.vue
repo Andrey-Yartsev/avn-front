@@ -1,6 +1,6 @@
 <template>
   <div class="storyView" :data-id="post.user.id">
-    <router-link :to="`/stories/${post.user.id}`" class="story">
+    <a :href="`/stories/${post.user.id}`" @click.prevent="go" class="story">
       <div class="story-preview bg-gradient bg-gradient_light">
         <img :src="image" />
         <div
@@ -21,7 +21,7 @@
         </div>
         <div class="user-login reset-ml">{{ post.user.username }}</div>
       </div>
-    </router-link>
+    </a>
   </div>
 </template>
 
@@ -48,6 +48,15 @@ export default {
         (preview && preview.source) ||
         (src && src.source)
       );
+    }
+  },
+  methods: {
+    go() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+      this.$router.push(`/stories/${this.post.user.id}`);
     }
   }
 };
