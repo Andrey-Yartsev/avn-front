@@ -33,12 +33,6 @@
       font-weight: 600;
     }
 
-    .name {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        font-weight: 400;
-      }
-    }
-
     .user-login {
       font-size: inherit;
       opacity: 1;
