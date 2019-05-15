@@ -36,9 +36,11 @@
             class="name name_break-text"
             >{{ v.items[0].user.name }}</router-link
           >
-          <span class="notification-summary" v-html="v.items[0].text" /> (x{{
-            v.items.length
-          }})
+          <span class="notification-summary"
+            ><span v-html="v.items[0].text"></span> (x{{
+              v.items.length
+            }})</span
+          >
         </div>
       </template>
       <template v-else>
