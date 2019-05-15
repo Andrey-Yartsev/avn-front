@@ -51,11 +51,7 @@
         >
           <time class="timestamp">{{ timePassed }}</time>
         </div>
-        <template
-          v-if="
-            !delayedPost && isAuth() && post.canFavorite && $mq === 'mobile'
-          "
-        >
+        <template v-if="!delayedPost && isAuth() && $mq === 'mobile'">
           <Actions
             :post="post"
             :showTips="showTip"
@@ -94,18 +90,18 @@
             </div>
           </div>
 
-          <div class="post-capability" v-if="!delayedPost && $mq === 'desktop'">
-            <div
-              class="comment-form-wrapper"
-              v-if="!delayedPost && post.canComment && isAuth()"
-            >
+          <div
+            class="post-capability"
+            v-if="$mq === 'desktop' && showCommentPanel"
+          >
+            <div class="comment-form-wrapper">
               <AddComment
-                v-if="!showTip"
+                v-if="post.canComment && !showTip"
                 :sendNewComment="sendNewComment"
                 :userName="commentReplyUserName"
               />
               <Tip
-                v-if="showTip"
+                v-if="showTip || (!post.canComment && this.canSendTips)"
                 :user="post.author"
                 ref="tip"
                 @cancel="closeTip"
@@ -129,7 +125,7 @@
                 </button>
               </div>
             </div>
-            <template v-if="!delayedPost && isAuth() && post.canFavorite">
+            <template v-if="!delayedPost && isAuth()">
               <Actions
                 :post="post"
                 :showTips="showTip"
@@ -142,18 +138,15 @@
         </div>
       </div>
     </div>
-    <div class="post-capability" v-if="!delayedPost && $mq === 'mobile'">
-      <div
-        class="comment-form-wrapper"
-        v-if="!delayedPost && post.canComment && isAuth()"
-      >
+    <div class="post-capability" v-if="$mq === 'mobile' && showCommentPanel">
+      <div class="comment-form-wrapper">
         <AddComment
-          v-if="!showTip"
+          v-if="post.canComment && !showTip"
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
         />
         <Tip
-          v-if="showTip"
+          v-if="showTip || (!post.canComment && this.canSendTips)"
           :user="post.author"
           ref="tip"
           @cancel="closeTip"
@@ -161,7 +154,12 @@
           class="tip-form_post"
         />
       </div>
-      <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
+    </div>
+    <div
+      class="post-capability"
+      v-if="!delayedPost && $mq === 'mobile' && !isAuth()"
+    >
+      <div class="comment-form-wrapper">
         <div class="guest-comments-form">
           <button
             class="btn border btn_fix-width-sm"
@@ -192,12 +190,13 @@ import AddComment from "@/components/common/postParts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
 import PostStat from "@/mixins/postStat";
 import PostCommon from "@/mixins/postCommon";
+import postOpen from "@/mixins/postOpen";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "PostLastView",
-  mixins: [User, PostCommon, PostStat, ModalRouterParams],
+  mixins: [User, PostCommon, postOpen, PostStat, ModalRouterParams],
   computed: {
     postId() {
       return this.post.id;
@@ -224,6 +223,20 @@ export default {
       return `Scheduled for ${moment(this.post.scheduledDate).format(
         "MMM D, hh:mm a"
       )}`;
+    },
+    canSendTips() {
+      return (
+        !this.isOwner(this.post.author.id) &&
+        this.post.author.canEarn &&
+        this.$root.showTips
+      );
+    },
+    showCommentPanel() {
+      return (
+        !this.delayedPost &&
+        this.isAuth() &&
+        (this.canSendTips || this.post.canComment)
+      );
     }
   },
   data: () => ({
