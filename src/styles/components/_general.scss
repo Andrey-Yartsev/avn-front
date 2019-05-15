@@ -221,6 +221,8 @@ strong {
 
 img,
 video {
+  outline: none;
+  
   &.locked {
     opacity: 0.7;
     transform: scale(1.2);
