@@ -35,10 +35,19 @@
               <label class="form-group-inner">
                 <span class="label">{{ v.label }}</span>
                 <input
+                  v-if="!v.values"
                   :name="v.code"
                   v-model="localBank[v.code]"
                   v-validate="'required'"
                 />
+
+                <span class="select-wrapper" v-else>
+                  <select :name="v.code" v-model="localBank[v.code]">
+                    <option v-for="vv in v.values" :key="vv.key" :value="vv.key"
+                      >{{ vv.value }}
+                    </option>
+                  </select>
+                </span>
               </label>
             </div>
           </div>
@@ -70,16 +79,13 @@ import Form from "@/mixins/form";
 
 export default {
   name: "PayoutSettingsBankE",
-
   mixins: [Form],
-
   data() {
     return {
       loading: true,
       localBank: null
     };
   },
-
   computed: {
     bank() {
       return this.$store.state.payouts.bank.fetchResult;
@@ -103,7 +109,6 @@ export default {
       return this.selectedPayout.fields;
     }
   },
-
   methods: {
     _clone(o) {
       return JSON.parse(JSON.stringify(o));
@@ -121,7 +126,6 @@ export default {
       this.localBank = { ...this.localBank };
     }
   },
-
   created: function() {
     this.$store.dispatch("payouts/bank/fetch").then(() => {
       this.loading = false;
@@ -129,7 +133,6 @@ export default {
       this.localBank.payoutCode = this.payouts[0].code;
     });
   },
-
   mounted() {
     this.$emit("titleChanged", "Add Bank");
   }

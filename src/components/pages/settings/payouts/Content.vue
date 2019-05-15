@@ -37,6 +37,7 @@ import Account from "./Account";
 import Legal from "./Legal";
 import LegalPending from "./LegalPending";
 import Bank from "./Bank.vue";
+import BankMixin from "./bank.js";
 import Summery from "./Summery";
 import Unexpected from "./Unexpected";
 
@@ -51,7 +52,7 @@ import Unexpected from "./Unexpected";
 export default {
   name: "PayoutsSettingsContent",
 
-  mixins: [User],
+  mixins: [User, BankMixin],
 
   components: {
     Loader
@@ -102,14 +103,11 @@ export default {
     isApproved() {
       return this.user.payoutLegalApproveState === "approved";
     },
-    bank() {
-      return this.$store.state.payouts.bank.fetchResult;
-    },
     bankExists() {
       if (!this.bank) {
         return false;
       }
-      const fieldCodes = this.bank.fields.map(v => v.code);
+      const fieldCodes = this.bankFields.map(v => v.code);
       // every field exists in bank model
       return fieldCodes.every(code => !!this.bank[code]);
     }
