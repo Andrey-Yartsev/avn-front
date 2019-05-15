@@ -40,7 +40,7 @@
             <div
               class="stream-message"
               v-for="comment in shownComments"
-              v-bind:key="comment.comment"
+              v-bind:key="comment.comment + comment.hideTime"
             >
               <div class="stream-message__head">
                 <span
