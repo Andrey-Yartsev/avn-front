@@ -14,6 +14,7 @@
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
           <button
+            v-if="isAuth()"
             class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
             @click="back"
           ></button>
