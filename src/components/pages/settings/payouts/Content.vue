@@ -120,20 +120,12 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("payouts/account/fetch").then(r => {
-      if (r.countryId) {
-        this.$store.dispatch("payouts/legal/fetch").then(() => {
-          //if (this.isApproved) {
-          this.$store.dispatch("payouts/bank/fetch").then(() => {
-            this.loading = false;
-          });
-          //} else {
-          //  this.loading = false;
-          //}
+    this.$store.dispatch("payouts/account/fetch").then(() => {
+      this.$store.dispatch("payouts/legal/fetch").then(() => {
+        this.$store.dispatch("payouts/bank/fetch").then(() => {
+          this.loading = false;
         });
-      } else {
-        this.loading = false;
-      }
+      });
     });
   }
 };

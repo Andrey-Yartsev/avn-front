@@ -40,7 +40,6 @@
                   v-model="localBank[v.code]"
                   v-validate="'required'"
                 />
-
                 <span class="select-wrapper" v-else>
                   <select :name="v.code" v-model="localBank[v.code]">
                     <option v-for="vv in v.values" :key="vv.key" :value="vv.key"
