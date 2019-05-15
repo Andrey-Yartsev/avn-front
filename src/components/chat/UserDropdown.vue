@@ -156,7 +156,15 @@ export default {
       this.chatOptionsOpened = false;
     },
     deleteConversation() {
-      this.$emit("deleteConversation");
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "All messages will be deleted",
+          success: () => {
+            this.$emit("deleteConversation");
+          }
+        }
+      });
       this.chatOptionsOpened = false;
     }
   }
