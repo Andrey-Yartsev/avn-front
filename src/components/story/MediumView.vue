@@ -17,7 +17,10 @@
       <div class="user-names">
         <div class="wrap-name">
           <div class="name">{{ post.user.name }}</div>
-          <span v-if="post.user.isVerified" class="verified-user"></span>
+          <span
+            v-if="post.user && post.user.isVerified"
+            class="verified-user"
+          ></span>
         </div>
         <div class="user-login reset-ml">{{ post.user.username }}</div>
       </div>

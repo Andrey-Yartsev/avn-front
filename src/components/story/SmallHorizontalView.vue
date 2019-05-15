@@ -22,7 +22,10 @@
           >
             {{ post.user.name }}
           </a>
-          <span v-if="post.user.isVerified" class="verified-user"></span>
+          <span
+            v-if="post.user && post.user.isVerified"
+            class="verified-user"
+          ></span>
           <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">
             {{ dateTime }}
           </div>
