@@ -121,7 +121,11 @@ export default {
           const prevKey = m.length - 1;
           const prevItem = m[prevKey];
 
-          if (v.type === prevItem.type && v.type !== "tip") {
+          if (
+            v.type === prevItem.type &&
+            v.type !== "tip" &&
+            v.type !== "mentioned"
+          ) {
             prevItem.mergedByName =
               v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
             prevItem.items.push(v);
