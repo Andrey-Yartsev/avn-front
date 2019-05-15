@@ -1,6 +1,6 @@
 <template>
   <div class="payouts-bank">
-    <div class="PayoutsBankView">
+    <div class="PayoutsBankView" v-if="!loading">
       <h1 class="form-title">
         Add Bank
       </h1>
@@ -75,6 +75,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       localBank: null
     };
   },
@@ -122,9 +123,11 @@ export default {
   },
 
   created: function() {
-    this.localBank = {};
-    this.localBank.payoutCode = this.payouts[0].code;
-    // this.localBank = this._clone(this.bank);
+    this.$store.dispatch("payouts/bank/fetch").then(() => {
+      this.loading = false;
+      this.localBank = {};
+      this.localBank.payoutCode = this.payouts[0].code;
+    });
   },
 
   mounted() {
