@@ -4,7 +4,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(#000, 0.4);
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -16,19 +15,20 @@
     overflow-y: auto;
   }
 
-  .explore-page & {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      background: rgba(#000, 0.85);
-    }
-  }
-
   .overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    background: rgba(#000, 0.4);
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        background: rgba(#000, 0.85);
+      }
+    }
   }
 
   .content {
