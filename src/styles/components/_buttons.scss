@@ -120,6 +120,7 @@
     &.disconnect-twitter {
       color: $main-color;
       opacity: 0.5;
+
       &:before {
         box-shadow: 0 0 0 2px $main-color inset;
         opacity: 0.6;
@@ -130,6 +131,7 @@
 
         &:hover {
           background-color: $main-color;
+          color: $white;
         }
       }
 
