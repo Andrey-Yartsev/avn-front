@@ -20,7 +20,7 @@
         <span class="label">Followers</span>
       </template>
     </div>
-    <div class="item">
+    <div class="item" v-if="profile.id === user.id">
       <span class="value">{{ profile.favoritesCount }}</span>
       <span class="label">Likes</span>
     </div>

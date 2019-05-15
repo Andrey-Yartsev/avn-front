@@ -6,7 +6,12 @@
       text=""
       class="transparent small"
     />
-    <VuePerfectScrollbar v-else class="chat-wrapper" ref="messagesContainer">
+    <component
+      :is="scrollableComponent"
+      v-else
+      class="chat-wrapper"
+      ref="messagesContainer"
+    >
       <div class="chat-scrollbar">
         <div
           v-for="v in messages"
@@ -78,7 +83,7 @@
           Sending...
         </div>
       </div>
-    </VuePerfectScrollbar>
+    </component>
   </div>
 </template>
 
@@ -114,6 +119,9 @@ export default {
   },
 
   computed: {
+    scrollableComponent() {
+      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+    },
     messages() {
       if (!this._messages.length) {
         return [];

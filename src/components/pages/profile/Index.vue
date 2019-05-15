@@ -26,7 +26,7 @@
             <a>{{ profile.username }}</a>
           </span>
         </div>
-        <VuePerfectScrollbar class="profile-desc">
+        <component :is="scrollableComponent" class="profile-desc">
           <p class="profile-text" v-if="profile.about">
             <span v-html="trunc(profile.about)"></span>
             <span class="collapse-text">
@@ -51,7 +51,7 @@
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
           <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
-        </VuePerfectScrollbar>
+        </component>
       </div>
       <div
         class="post-types-tabs"
@@ -188,6 +188,9 @@ export default {
   },
 
   computed: {
+    scrollableComponent() {
+      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+    },
     loading() {
       return this.$store.state.profile.home.fetchProfileLoading;
     },
@@ -288,6 +291,10 @@ export default {
     },
     highlights() {
       this.footerScrollAction();
+    },
+    source() {
+      // fix for infinity scroll. reset lastYOffset when switching tabs
+      this.lastYOffset = 0;
     }
   },
   methods: {

@@ -1,6 +1,10 @@
 <template>
   <div class="contactsList">
-    <VuePerfectScrollbar class="contactsListContent" ref="messages">
+    <component
+      :is="scrollableComponent"
+      class="contactsListContent"
+      ref="messages"
+    >
       <div
         @click="openChat(v.withUser.id)"
         class="chatView"
@@ -52,7 +56,7 @@
           </div>
         </div>
       </div>
-    </VuePerfectScrollbar>
+    </component>
   </div>
 </template>
 
@@ -68,6 +72,12 @@ export default {
 
   components: {
     VuePerfectScrollbar
+  },
+
+  computed: {
+    scrollableComponent() {
+      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+    }
   },
 
   props: {

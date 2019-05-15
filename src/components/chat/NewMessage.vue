@@ -35,7 +35,7 @@
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
         >
-          <VuePerfectScrollbar class="all-contacts-found">
+          <component :is="scrollableComponent" class="all-contacts-found">
             <div class="selectedContacts" v-if="selected.length">
               <div
                 class="chatSelectedView"
@@ -49,7 +49,7 @@
                 ></span>
               </div>
             </div>
-          </VuePerfectScrollbar>
+          </component>
         </div>
         <div class="searchWrapper">
           <span class="sendTo">To</span>
@@ -244,6 +244,9 @@ export default {
   },
 
   computed: {
+    scrollableComponent() {
+      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+    },
     noMessages() {
       return false;
       // return this.$route.params[1] && this.$route.params[1] === "no-messages";

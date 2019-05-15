@@ -144,9 +144,9 @@
     opacity: 1;
   }
 
-  &:hover {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+    &:hover {
       color: $secondary-color;
       opacity: 1;
     }

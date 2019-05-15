@@ -163,9 +163,15 @@
       }
     }
 
-    &.active,
-    &:hover {
+    &.active {
       color: $main-color;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $main-color;
+      }
     }
 
     &.active {
@@ -565,16 +571,17 @@
       }
     }
 
-    &:not(.locked-wrapper):hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      .item-length {
+      &:not(.locked-wrapper):hover {
 
-        .value {
-          opacity: 1;
+        .item-length {
+
+          .value {
+            opacity: 1;
+          }
         }
-      }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
         &:before,
         .overlay {
           opacity: 1;

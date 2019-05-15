@@ -114,12 +114,12 @@ const actions = {
       if (state.activeUserId === message.fromUser.id) {
         if (!state.windowIsActive) {
           unreadLastMessage = message;
-          return;
+        } else {
+          markAsRead(dispatch, {
+            userId: message.fromUser.id,
+            messageId: message.id
+          });
         }
-        markAsRead(dispatch, {
-          userId: message.fromUser.id,
-          messageId: message.id
-        });
       }
     }
 

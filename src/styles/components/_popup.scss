@@ -192,14 +192,14 @@
       transform: translate(-50%, -50%);
     }
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+      &:hover {
         font-size: 30px;
-      }
 
-      &:before {
-        opacity: 1;
+        &:before {
+          opacity: 1;
+        }
       }
     }
   }
@@ -660,7 +660,7 @@
         width: 54px;
         height: 44px;
         padding: 0;
-        z-index: 15;
+        z-index: 100;
         opacity: 0;
       }
 
@@ -910,13 +910,16 @@
 
   &.ps {
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      > .ps__scrollbar-y-rail {
-        opacity: 0;
+      &:hover {
 
-        &:hover {
+        > .ps__scrollbar-y-rail {
           opacity: 0;
+
+          &:hover {
+            opacity: 0;
+          }
         }
       }
     }

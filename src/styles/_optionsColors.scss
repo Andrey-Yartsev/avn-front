@@ -444,8 +444,11 @@
     transition: color 0.3s ease;
     cursor: pointer;
 
-    &:hover {
-      color: lighten($gray, 5%);
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: lighten($gray, 5%);
+      }
     }
 
     &:before {
@@ -512,9 +515,14 @@
     }
 
     &:not(.active) {
-      &:hover {
-        &:after {
-          transform: scale(1.8);
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+
+          &:after {
+            transform: scale(1.8);
+          }
         }
       }
     }

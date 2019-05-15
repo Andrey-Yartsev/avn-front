@@ -205,9 +205,12 @@
   transition: opacity 0.3s ease;
   color: $main-color;
 
-  &:hover {
-    color: $primary-color;
-    opacity: 1;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $primary-color;
+      opacity: 1;
+    }
   }
 
   &:before {

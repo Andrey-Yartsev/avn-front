@@ -59,9 +59,9 @@
           <Actions
             :post="post"
             :showTips="showTip"
-            v-on:postShowCommentForm="clickOnCommentForm"
-            v-on:postLike="likePost"
-            @toggleTip="showTip = !showTip"
+            @postShowCommentForm="clickOnCommentForm"
+            @postLike="likePost"
+            @toggleTip="toggleTipForm"
           />
         </template>
         <div class="right-col">
@@ -135,7 +135,7 @@
                 :showTips="showTip"
                 @postShowCommentForm="clickOnCommentForm"
                 @postLike="likePost"
-                @toggleTip="showTip = !showTip"
+                @toggleTip="toggleTipForm"
               />
             </template>
           </div>
@@ -261,6 +261,11 @@ export default {
     toggleTipForm() {
       this.showTip = !this.showTip;
       this.showAddCommentForm = false;
+      if (this.popupView) {
+        const className = this.showTip ? "" : "lightbox-post";
+        this.$emit("addExtraClassName", className);
+      }
+      this.popupView = false;
     },
     back() {
       if (window.location.hash) {

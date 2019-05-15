@@ -356,11 +356,14 @@
       }
     }
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      &:before {
-        color: $primary-color;
-        opacity: 1;
+      &:hover {
+
+        &:before {
+          color: $primary-color;
+          opacity: 1;
+        }
       }
     }
   }
@@ -408,8 +411,11 @@
     color: $secondary-color;
     transition: color 0.3s ease;
 
-    &:hover {
-      color: $secondary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
   }
 }

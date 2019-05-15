@@ -32,8 +32,11 @@
     opacity: 0.3;
     transition: opacity 0.3s ease;
 
-    &:hover {
-      opacity: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 

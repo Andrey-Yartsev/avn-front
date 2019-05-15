@@ -329,8 +329,7 @@
       }
     }
 
-    &.active,
-    &:hover {
+    &.active {
 
       &:before {
         color: $primary-color;
@@ -338,16 +337,24 @@
       }
     }
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      .mediasTop & {
-        opacity: 1;
-      }
+      &:hover {
 
-      &:before {
+        &:before {
+          color: $primary-color;
+          opacity: 1;
+        }
 
         .mediasTop & {
-          color: #fff;
+          opacity: 1;
+        }
+
+        &:before {
+
+          .mediasTop & {
+            color: #fff;
+          }
         }
       }
     }

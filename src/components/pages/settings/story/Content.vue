@@ -62,7 +62,10 @@
           </div>
         </div>
       </div>
-      <div class="form-title border-top private-switcher-block private-story">
+      <div
+        class="form-title border-top private-switcher-block private-story"
+        :class="{ disabled: !localUser.isWantEarn }"
+      >
         <div class="inner border-bottom-mobile">
           <span class="semi-transparent">
             Private Story
@@ -79,6 +82,10 @@
             <span></span>
           </label>
         </div>
+        <p></p>
+        You need to enable <b>Earn Money</b> option in
+        <router-link to="/settings/profile">Profile</router-link> settings to
+        enable Private Story option.
       </div>
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group form-group_with-label">

@@ -18,19 +18,26 @@
   position: relative;
   display: inline-block;
 
-  &:hover {
-    background: $secondary-color-darken;
-    color: #fff;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      background: $secondary-color-darken;
+      color: #fff;
+    }
   }
+
   &.alt {
 
     &:not(.border) {
       background: $primary-color;
       color: #fff;
 
-      &:hover {
-        background: $primary-color-darken;
-        color: #fff;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background: $primary-color-darken;
+          color: #fff;
+        }
       }
     }
   }
@@ -45,8 +52,12 @@
 
   &.btn-cancel {
     background: rgba($gray, 0.5);
-    &:hover {
-      background: darken(rgba($gray, 0.5), 10%);
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background: darken(rgba($gray, 0.5), 10%);
+      }
     }
   }
   &.block {
@@ -67,32 +78,41 @@
       border-radius: 1000px;
     }
 
-    &:hover {
-      color: #fff;
-      background: $primary-color;
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      &:before {
-        color: $primary-color;
+      &:hover {
+        color: #fff;
+        background: $primary-color;
+
+        &:before {
+          color: $primary-color;
+        }
       }
     }
 
     &:not(.alt) {
       color: $primary-color;
-      
-      &:hover {
-        color: #fff;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
 
     &.alt {
       color: $secondary-color;
 
-      &:hover {
-        color: #fff;
-        background: $secondary-color;
+      @include media-breakpoint-up($desktop-breakpoint) {
 
-        &:before {
-          color: $secondary-color;
+        &:hover {
+          color: #fff;
+          background: $secondary-color;
+
+          &:before {
+            color: $secondary-color;
+          }
         }
       }
     }
@@ -105,8 +125,12 @@
         opacity: 0.6;
         transition: background-color .3s ease;
       }
-      &:hover {
-        background-color: $main-color;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background-color: $main-color;
+        }
       }
 
       &[disabled] {
@@ -116,9 +140,13 @@
   }
   &.gray {
     background-color: rgba($gray, 0.5);
-    &:hover {
-      background-color: $primary-color;
-      color: #fff;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background-color: $primary-color;
+        color: #fff;
+      }
     }
   }
 
@@ -126,9 +154,12 @@
     background-color: transparent;
     color: $secondary-color;
 
-    &:hover {
-      color: $secondary-color-darken;
-      background-color: transparent;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $secondary-color-darken;
+        background-color: transparent;
+      }
     }
   }
 
@@ -237,10 +268,15 @@ button,
     padding: 0;
     box-shadow: 0 6px 30px rgba(#000, 0.15);
     z-index: 10;
-    &:hover {
-      color: #fff;
-      background: $secondary-color-darken;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: #fff;
+        background: $secondary-color-darken;
+      }
     }
+
     &:before {
       opacity: 1;
       font-size: 24px;
@@ -308,9 +344,12 @@ button,
   transition: all 0.3s;
   opacity: 0.4;
 
-  &:hover {
-    color: $main-color;
-    opacity: 1;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $main-color;
+      opacity: 1;
+    }
   }
 }
 
@@ -350,8 +389,11 @@ button,
     }
   }
 
-  &:hover {
-    color: $secondary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
   }
 }
 
@@ -363,8 +405,11 @@ button,
     opacity: 1;
     color: $primary-color;
 
-    &:hover {
-      color: $primary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $primary-color-darken;
+      }
     }
   }
 
@@ -377,8 +422,11 @@ button,
     margin-bottom: 2px;
   }
 
-  &:hover {
-    opacity: 1;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
@@ -388,8 +436,11 @@ button,
     background-color: transparent;
     opacity: 1;
     color: $primary-color;
-    transition: color 0.3s ease, opacity 0.3s ease;
     font-size: 13px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
 
     .searchView & {
 
@@ -398,20 +449,29 @@ button,
       }
     }
 
-    &:hover {
-      color: $primary-color-darken;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $primary-color-darken;
+      }
     }
 
     &.alt {
       background-color: transparent;
 
-      &:hover {
-        background-color: transparent;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
 
-    &:hover {
-      background-color: transparent;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -437,28 +497,27 @@ button,
     margin-bottom: 5px;
     transform: translate(-2px, 0);
     transition: none;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      transition: none;
+    }
   }
 
   &.disable-state {
     color: $main-color;
     opacity: 0.4;
 
-    &:hover {
-      opacity: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
   &__label {
     position: relative;
     text-align: center;
-  }
-
-  .show-on-hover {
-    top: 1px;
-    line-height: 13px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
   }
 }
 
@@ -483,21 +542,17 @@ button,
   &__label {
     position: relative;
     margin-top: 4px;
-
-    .show-on-hover {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-    }
   }
 
   &.disable-state {
     color: $main-color;
     opacity: 0.4;
 
-    &:hover {
-      opacity: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
@@ -506,8 +561,11 @@ button,
     display: none;
   }
 
-  &:hover {
-    color: $primary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $primary-color-darken;
+    }
   }
 }
 
@@ -518,9 +576,12 @@ button,
   color: inherit;
   transition: color 0.3s ease, opacity 0.3s ease;
 
-  &:hover {
-    opacity: 1;
-    color: $secondary-color;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      opacity: 1;
+      color: $secondary-color;
+    }
   }
 
   .comments-list & {
@@ -649,8 +710,11 @@ button,
   font-weight: 500;
   transition: color 0.3s ease;
 
-  &:hover {
-    color: $secondary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
   }
 }
 
@@ -804,18 +868,29 @@ button,
     right: 0;
     font-size: 46px;
 
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 24px;
+          line-height: 44px;
+          display: block;
+        }
+      }
+    }
+
     .explore-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        font-size: 24px;
-        line-height: 44px;
+        display: none;
       }
     }
   }
 
-  &:hover {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+    &:hover {
       opacity: 1;
     }
   }

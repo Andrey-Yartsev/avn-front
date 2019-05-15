@@ -105,9 +105,12 @@
     }
   }
 
-  &:hover {
-    .name {
-      color: $primary-color;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      .name {
+        color: $primary-color;
+      }
     }
   }
 }

@@ -474,8 +474,11 @@
       @include icon-font;
     }
 
-    &:hover {
-      opacity: 1;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -521,9 +524,12 @@
     color: $secondary-color;
     cursor: pointer;
 
-    &:hover {
-      background-color: $secondary-color;
-      color: #fff;
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        background-color: $secondary-color;
+        color: #fff;
+      }
     }
 
     &:before {
@@ -739,10 +745,13 @@
 
   > .avatar {
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      + .name {
-        color: $primary-color-darken;
+      &:hover {
+
+        + .name {
+          color: $primary-color-darken;
+        }
       }
     }
   }
@@ -984,8 +993,11 @@
     font-size: 15px;
   }
 
-  &:hover {
-    color: $secondary-color-darken;
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
+    }
   }
 
   &:after {
@@ -1049,6 +1061,27 @@
   max-width: 100%;
   position: relative;
   z-index: 1;
+
+  &:before,
+  &:after {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+  &:before {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: $white;
+      z-index: -1;
+    }
+  }
 
   &__header {
     display: flex;
@@ -1114,99 +1147,107 @@
 
   &.unread {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: $white;
-      border-right-color: rgba(124, 139, 150, 0.2);
-    }
+    //@include media-breakpoint-up($desktop-breakpoint) {
+    //  background-color: $white;
+    //  border-right-color: rgba(124, 139, 150, 0.2);
+    //}
 
-    &:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: linear-gradient(
-        30deg,
-        rgba(33, 150, 243, 1) 10%,
-        rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.2;
-      display: none;
-      z-index: -1;
+    //&:before {
+    //  background: linear-gradient(
+    //    30deg,
+    //    rgba(33, 150, 243, 1) 10%,
+    //    rgba(255, 64, 129, 1) 90%
+    //  );
+    //  opacity: 0.2;
+    //  display: none;
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    display: block;
+    //  }
+    //}
+    //
+    //&:after {
+    //  background: linear-gradient(
+    //    30deg,
+    //    rgba(33, 150, 243, 1) 10%,
+    //    rgba(255, 64, 129, 1) 90%
+    //  );
+    //  opacity: 0.06;
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    background: rgba(248, 249, 250, 0.3);
+    //    z-index: 0;
+    //  }
+    //}
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
-      }
-    }
+    //.name {
+    //  color: $primary-color;
+    //}
 
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: -1;
-      background: linear-gradient(
-        30deg,
-        rgba(33, 150, 243, 1) 10%,
-        rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.06;
+    //.username {
+    //  font-weight: 500;
+    //  opacity: 1;
+    //}
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        background: rgba(248, 249, 250, 0.3);
-        z-index: 0;
-      }
-    }
+    //.timestamp {
+    //  color: $secondary-color;
+    //  opacity: 1;
+    //}
 
-    .name {
-      color: $primary-color;
-    }
-
-    .username {
-      font-weight: 500;
-      opacity: 1;
-    }
-
-    .timestamp {
-      color: $secondary-color;
-      opacity: 1;
-    }
-
-    .message {
-      opacity: 1;
-    }
+    //.message {
+    //  opacity: 1;
+    //}
 
     .avatar {
 
       &:after {
         background: $secondary-color;
-        width: 4px;
-        height: 4px;
+        width: 8px;
+        height: 8px;
         content: "";
         position: absolute;
         border-radius: 1000px;
         left: -10px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: -6px;
       }
     }
   }
 
   &.active {
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: $white;
-      border-right-color: $white;
-    }
+
+    //@include media-breakpoint-up($desktop-breakpoint) {
+    //  background-color: $white;
+    //  border-right-color: $white;
+    //}
+
+    //&:before,
+    //&:after {
+    //  background: none;
+    //}
 
     &:before {
-      background: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background: linear-gradient(
+          30deg,
+          rgba(33, 150, 243, 1) 10%,
+          rgba(255, 64, 129, 1) 90%
+        );
+        opacity: 0.2;
+      }
     }
 
     &:after {
-      background: none;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background: linear-gradient(
+          30deg,
+          rgba(33, 150, 243, 1) 10%,
+          rgba(255, 64, 129, 1) 90%
+        );
+        opacity: 0.06;
+        z-index: 0;
+      }
     }
   }
 

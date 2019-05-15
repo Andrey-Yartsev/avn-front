@@ -20,6 +20,8 @@ Vue.use(VTooltip, {
   autoHide: true
 });
 
+VTooltip.enabled = window.innerWidth > 990;
+
 // uncomment to see the logs
 // import Logger from "js-logger";
 // Logger.useDefaults();
