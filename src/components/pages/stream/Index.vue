@@ -559,6 +559,11 @@ export default {
       }
     },
     sendComment() {
+      if (!this.newComment.trim()) {
+        this.newComment = "";
+        return;
+      }
+
       this.$root.ws.ws.send(
         JSON.stringify({
           act: "stream_comment",

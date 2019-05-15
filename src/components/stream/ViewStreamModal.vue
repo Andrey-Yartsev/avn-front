@@ -295,6 +295,11 @@ export default {
       });
     },
     sendComment() {
+      if (!this.newComment.trim()) {
+        this.newComment = "";
+        return;
+      }
+
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;
       const userId = this.$store.state.modal.stream.data.stream.user.id;
