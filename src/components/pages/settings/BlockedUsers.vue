@@ -71,6 +71,7 @@
                   type="button"
                   class="btn-unblock"
                   @click="unblock(v.id)"
+                  v-tooltip="'Unblock'"
                 ></button>
               </div>
             </div>

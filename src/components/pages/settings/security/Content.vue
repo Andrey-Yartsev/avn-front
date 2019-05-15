@@ -147,6 +147,7 @@
                   type="button"
                   class="delete"
                   @click="deleteSession(v)"
+                  v-tooltip="'Delete session'"
                 ></button>
               </div>
               <div class="session-info-details">
