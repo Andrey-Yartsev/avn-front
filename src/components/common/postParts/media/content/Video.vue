@@ -9,6 +9,7 @@
     v-if="video"
     @play="play"
     @pause="calcDuration"
+    :height="videoHeight"
   >
     <source :src="video.source" type="video/mp4" />
   </video>
@@ -33,6 +34,12 @@ export default {
       playTimer: 0,
       playDuration: 0
     };
+  },
+  computed: {
+    videoHeight() {
+      const ratio = global.innerWidth / this.media.preview.width;
+      return this.media.preview.height * ratio;
+    }
   },
   watch: {
     media() {
