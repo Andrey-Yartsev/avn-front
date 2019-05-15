@@ -143,6 +143,13 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           right: -18px;
         }
+
+        .profile-actions & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            right: -6px;
+          }
+        }
       }
 
       &:before {
