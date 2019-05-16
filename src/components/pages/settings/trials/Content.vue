@@ -4,8 +4,8 @@
       Free Trials
     </h1>
     <div class="trialsSectionCollection">
-      <div class="border-top shadow-block referrals-link" v-if="link">
-        <div class="referrals-url">
+      <div class="border-top shadow-block referrals-link">
+        <div class="referrals-url" v-if="link">
           <a :href="link">{{ link }}</a>
         </div>
         <div class="referral-desc">
@@ -17,11 +17,10 @@
           <button
             type="button"
             class="btn border alt btn-copy-url btn-copy-url_reset-mt"
-            @click="copyToClipboard"
+            @click="generateCode"
           >
-            Copy<span class="hidden-mobile" v-if="$mq === 'desktop'">
-              link</span
-            >
+            Generate<span class="hidden-mobile" v-if="$mq === 'desktop'">
+            </span>
           </button>
         </div>
       </div>
@@ -52,18 +51,12 @@ export default {
     }
   },
   methods: {
-    getLink() {
-      this.$store.dispatch("trial/getCode");
-    },
-    copyToClipboard() {
-      this.$copyText(this.link).then(() => {
+    generateCode() {
+      this.$store.dispatch("trial/getCode").then(() => {
+        this.$copyText(this.link);
         this.$store.dispatch("global/flashToast", "Trial URL copied!");
-        this.getLink();
       });
     }
-  },
-  mounted() {
-    this.getLink();
   }
 };
 </script>
