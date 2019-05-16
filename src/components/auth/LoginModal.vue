@@ -19,12 +19,10 @@ import LoginForm from "@/components/auth/LoginForm";
 
 export default {
   name: "LoginModal",
-
   components: {
     Modal,
     LoginForm
   },
-
   methods: {
     close() {
       this.$store.commit("modal/hideSafe", { name: "login" });

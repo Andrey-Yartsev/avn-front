@@ -1,6 +1,6 @@
 <template>
   <div v-if="otpAuth">
-    <div class="auth-block auth-block_sm-size">
+    <div class="auth-block auth-block_sm-size" :class="mainClass">
       <h3>Enter 2-Factor Authentication Code</h3>
       <form v-on:submit.stop.prevent="sendOtp">
         <input
@@ -181,6 +181,12 @@ export default {
         return null;
       }
       return { "auth-block auth-block_sm-size": true };
+    },
+    otpAuth() {
+      return this.$store.state.auth.otpAuth;
+    },
+    mainClass() {
+      return this.otpAuth ? "otp" : "login";
     }
   },
 
