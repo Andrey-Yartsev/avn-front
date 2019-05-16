@@ -8,6 +8,7 @@
               <button
                 class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
                 @click="close"
+                v-if="$mq === 'mobile'"
               ></button>
               <div class="page-title page-title_reset-gl">
                 Add to highlights

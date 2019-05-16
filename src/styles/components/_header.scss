@@ -1680,8 +1680,14 @@
     @include icon-font;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    display: none;
+  &.go-back {
+
+    .popup-title & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
+    }
   }
 
   .not-authorized & {
