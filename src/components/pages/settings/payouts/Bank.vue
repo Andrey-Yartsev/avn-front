@@ -27,28 +27,12 @@
               </label>
             </div>
 
-            <div
-              class="form-group form-group_with-label"
-              v-for="v in payoutFields"
-              :key="'f' + v.code"
-            >
-              <label class="form-group-inner">
-                <span class="label">{{ v.label }}</span>
-                <input
-                  v-if="!v.values"
-                  :name="v.code"
-                  v-model="localBank[v.code]"
-                  v-validate="'required'"
-                />
-                <span class="select-wrapper" v-else>
-                  <select :name="v.code" v-model="localBank[v.code]">
-                    <option v-for="vv in v.values" :key="vv.key" :value="vv.key"
-                      >{{ vv.value }}
-                    </option>
-                  </select>
-                </span>
-              </label>
-            </div>
+            <BankFields
+              :bankFields="payoutFields"
+              :localBank="localBank"
+              ref="bankFields"
+              @change="bankValidate"
+            />
           </div>
 
           <div class="form-group hidden" id="payouts-bank-form-error">
@@ -62,7 +46,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!isFormValid || saving"
+              :disabled="!valid || saving"
             >
               Next
             </button>
@@ -75,14 +59,17 @@
 
 <script>
 import Form from "@/mixins/form";
+import BankFields from "./BankFields";
 
 export default {
   name: "PayoutSettingsBankE",
   mixins: [Form],
+  components: { BankFields },
   data() {
     return {
       loading: true,
-      localBank: null
+      localBank: null,
+      valid: false
     };
   },
   computed: {
@@ -123,6 +110,12 @@ export default {
     },
     payoutChanged() {
       this.localBank = { ...this.localBank };
+      setTimeout(() => {
+        this.bankValidate();
+      }, 10);
+    },
+    bankValidate() {
+      this.valid = this.$refs.bankFields.isFormValid;
     }
   },
   created: function() {

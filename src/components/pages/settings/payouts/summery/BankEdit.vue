@@ -37,27 +37,11 @@
             </label>
           </div>
 
-          <div
-            class="form-group form-group_with-label"
-            v-for="v in bankFields"
-            :key="v.code"
-          >
-            <label class="form-group-inner">
-              <span class="label">{{ v.label }}</span>
-              <input
-                v-if="!v.values"
-                :name="v.code"
-                v-model="localBank[v.code]"
-              />
-              <span class="select-wrapper" v-else>
-                <select :name="v.code" v-model="localBank[v.code]">
-                  <option v-for="vv in v.values" :key="vv.key" :value="vv.key"
-                    >{{ vv.value }}
-                  </option>
-                </select>
-              </span>
-            </label>
-          </div>
+          <BankFields
+            :bankFields="bankFields"
+            :localBank="localBank"
+            ref="bankFields"
+          />
 
           <div class="form-group-btn">
             <button
@@ -76,10 +60,12 @@
 
 <script>
 import Bank from "../bank.js";
+import BankFields from "../BankFields";
 
 export default {
   name: "PayoutSettingsSummeryBankEdit",
   mixins: [Bank],
+  components: { BankFields },
   data() {
     return {
       localBank: null,
@@ -91,9 +77,7 @@ export default {
       return JSON.stringify(this.bank) !== JSON.stringify(this.localBank);
     },
     valid() {
-      return this.bankPayout.fields.every(
-        field => !!this.localBank[field.code]
-      );
+      return this.$refs.bankFields.isFormValid;
     },
     account() {
       return this.$store.state.payouts.account.fetchResult;
