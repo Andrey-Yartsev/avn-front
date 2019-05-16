@@ -70,6 +70,7 @@ import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import NotificationSingleView from "./Items/Single";
 import NotificationMergedView from "./Items/Merged";
+import uniqBy from "lodash.uniqby";
 
 const typeTitles = {
   all: "Notifications",
@@ -137,7 +138,12 @@ export default {
             { mergedByName: false, type: v.type, items: [v], id: key }
           ];
         }, []);
-        return merged;
+
+        return merged.map(i =>
+          i.mergedByName
+            ? i
+            : { ...i, items: uniqBy(i.items, item => item.user.id) }
+        );
       }
 
       return this.$store.state.notif.posts.map((v, key) => ({

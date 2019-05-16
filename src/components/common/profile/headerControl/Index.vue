@@ -5,7 +5,6 @@
       class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
     ></router-link>
     <div
-      v-if="profile"
       class="profile-name__header"
       :class="{ 'no-owner': isOwner(profile.id) }"
     >
@@ -20,7 +19,7 @@
       </span>
     </div>
     <UserDropdown
-      v-if="profile && !isOwner(profile.id)"
+      v-if="!isOwner(profile.id)"
       class="profile-more-functions hidden-desktop"
       :profile="profile"
     />

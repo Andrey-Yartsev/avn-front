@@ -13,6 +13,7 @@
     "dotenv": "^7.0.0",
     "fingerprintjs2": "^2.0.6",
     "js-logger": "^1.6.0",
+    "lodash.uniqby": "^4.7.0",
     "luxon": "^1.12.1",
     "moment": "^2.24.0",
     "query-string": "^6.4.2",
