@@ -100,6 +100,7 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
+      console.trace("+++");
       const data = {};
       data.payoutCode = this.localBank.payoutCode;
       this.payoutFields.map(v => {
@@ -109,7 +110,7 @@ export default {
       this.$store.dispatch("payouts/bank/save", this.localBank);
     },
     payoutChanged() {
-      this.localBank = { ...this.localBank };
+      // this.localBank = { ...this.localBank };
       setTimeout(() => {
         this.bankValidate();
       }, 10);
@@ -119,10 +120,10 @@ export default {
     }
   },
   created: function() {
-    this.$store.dispatch("payouts/bank/fetch").then(() => {
+    this.$store.dispatch("payouts/bank/fetch").then(r => {
       this.loading = false;
-      this.localBank = {};
-      this.localBank.payoutCode = this.payouts[0].code;
+      this.localBank = { ...r };
+      // this.localBank.payoutCode = this.payouts[0].code;
     });
   },
   mounted() {

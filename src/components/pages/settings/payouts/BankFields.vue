@@ -14,9 +14,16 @@
           v-model="localBank[v.code]"
           v-validate="'required'"
           @input="changed"
+          :disabled="!!v.onlyRead"
         />
         <span class="select-wrapper" v-else>
-          <select @input="changed" :name="v.code" v-model="localBank[v.code]">
+          <select
+            @input="changed"
+            :name="v.code"
+            v-model="localBank[v.code]"
+            v-validate="'required'"
+            :disabled="!!v.onlyRead"
+          >
             <option v-for="vv in v.values" :key="vv.key" :value="vv.key">{{
               vv.value
             }}</option>
