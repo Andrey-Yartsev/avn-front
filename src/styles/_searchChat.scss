@@ -125,6 +125,11 @@
 
   .contacts-top & {
     max-height: calc(50% - 30px);
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   &.user-selected + .searchWrapper {
