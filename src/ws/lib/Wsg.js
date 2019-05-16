@@ -5,6 +5,10 @@ import stream_stop from "./actions-g/stream_stop";
 import stream_look from "./actions-g/stream_look";
 import stream_unlook from "./actions-g/stream_unlook";
 
+import Logger from "js-logger";
+
+const logger = Logger.get("ws");
+
 const actions = {
   stream,
   stream_stop,
@@ -19,7 +23,7 @@ export default class Ws extends WsAbstract {
   }
   onData(data) {
     this.emit("message", data);
-    console.log("wsg:", data);
+    logger.info("wsg:", data);
     const keys = Object.keys(data);
     for (let key of keys) {
       if (this.actions[key]) {
