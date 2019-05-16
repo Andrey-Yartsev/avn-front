@@ -123,7 +123,7 @@
                 }"
                 @click="preloadedMedias[0].thumbId = thumb.id"
               >
-                <div class="filename">
+                <div class="filename filename_sm">
                   <img :src="thumb.url" />
                 </div>
               </div>
@@ -263,7 +263,7 @@
               }"
               @click="preloadedMedias[0].thumbId = thumb.id"
             >
-              <div class="filename">
+              <div class="filename filename_sm">
                 <img :src="thumb.url" />
               </div>
             </div>

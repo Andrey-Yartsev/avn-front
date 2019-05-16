@@ -2,111 +2,106 @@
   overflow: auto;
   display: flex;
   flex-wrap: nowrap;
+  position: relative;
 
   @include media-breakpoint-down($tablet-breakpoint-dcrs) {
     flex-wrap: wrap;
   }
+}
 
-  .addFileView {
-    position: relative;
-    margin: 0 1em 0.6em 0;
-    z-index: 1;
-    overflow: hidden;
-    border-radius: 0.3em;
-    flex: 0 0 6em;
+.progress {
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  height: 8px;
+  z-index: 12;
+  background-color: $white;
+  border: 2px solid $white;
+  overflow: hidden;
+  border-radius: .3em;
 
-    .remove,
-    .cancel,
-    .loader {
+  &-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      30deg,
+      $default-secondary-color 10%,
+      $default-primary-color 90%
+    )
+    no-repeat 50% / cover;
+    transition: width 0.1s;
+    width: 0;
+  }
+}
+
+.addFileView {
+  position: relative;
+  margin: 0 1em 0.6em 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 0.3em;
+  flex: 0 0 6em;
+
+  .remove {
+    z-index: 12;
+    cursor: pointer;
+    top: .31em;
+    right: .31em;
+    position: absolute;
+  }
+
+  &_option {
+    cursor: pointer;
+
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+      flex: 0 0 3.5em;
+    }
+
+    &:after {
+      content: "\E610";
+      @include icon-font;
+      font-size: 18px;
+      line-height: 18px;
       position: absolute;
-    }
-    .remove,
-    .cancel {
-      z-index: 12;
-      cursor: pointer;
-    }
-    .cancel {
-      top: calc(50% - 0.5em);
-      left: calc(50% - 0.5em);
-    }
-    .remove {
-      top: .31em;
-      right: .31em;
-    }
+      right: 8px;
+      top: 8px;
+      color: #fff;
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
 
-    &_option {
-      cursor: pointer;
-
-      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-        flex: 0 0 3.5em;
+      @include media-breakpoint-up($tablet-breakpoint) {
+        font-size: 24px;
+        line-height: 24px;
       }
+    }
+
+    &.current {
 
       &:after {
-        content: "\E610";
-        @include icon-font;
-        font-size: 18px;
-        line-height: 18px;
-        position: absolute;
-        right: 8px;
-        top: 8px;
-        color: #fff;
-        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-
-        @include media-breakpoint-up($tablet-breakpoint) {
-          font-size: 24px;
-          line-height: 24px;
-        }
-      }
-
-      &.current {
-
-        &:after {
-          content: "\E60F";
-        }
-      }
-
-      .filename {
-
-        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-          width: 3.5em;
-          height: 3.5em;
-        }
+        content: "\E60F";
       }
     }
+  }
 
-    .loader {
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      height: 50%;
-      transform: translate(-50%, -50%);
+  &.uploading {
 
-      &:after {
-        content: "";
-        background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
-        animation: lds-dual-ring 1.2s linear infinite;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 100%;
-        height: 100%;
-      }
+    &:before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: rgba(#000, 0.3);
+      content: "";
+      z-index: 1;
     }
+  }
 
-    &.uploading {
-      &:before {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        background: rgba(#000, 0.3);
-        content: "";
-      }
-    }
+  .lds-dual-ring {
 
-    .lds-dual-ring {
+    &.small {
       background-color: rgba(0, 0, 0, .4);
 
       .loader-text {
@@ -123,58 +118,38 @@
       }
     }
   }
+}
 
-  .filename {
-    background: $default-avatar-bg;
-    display: inline-block;
-    vertical-align: top;
-    width: 6em;
-    height: 6em;
-    text-align: center;
-    position: relative;
+.filename {
+  background: $default-avatar-bg;
+  display: inline-block;
+  vertical-align: top;
+  width: 6em;
+  height: 6em;
+  text-align: center;
+  position: relative;
 
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: center center;
-      vertical-align: top;
-    }
+  &_sm {
 
-    > span {
-      max-width: 90%;
-      display: inline-block;
-      vertical-align: top;
-      @include ellipsis;
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+      width: 3.5em;
+      height: 3.5em;
     }
   }
 
-  .progress {
-    position: absolute;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
-    height: 8px;
-    z-index: 12;
-    background-color: $white;
-    border: 2px solid $white;
-    overflow: hidden;
-    border-radius: .3em;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    vertical-align: top;
+  }
 
-    &-loader {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(
-        30deg,
-        $default-secondary-color 10%,
-        $default-primary-color 90%
-      )
-      no-repeat 50% / cover;
-      transition: width 0.1s;
-      width: 0;
-    }
+  > span {
+    max-width: 90%;
+    display: inline-block;
+    vertical-align: top;
+    @include ellipsis;
   }
 }
 
@@ -191,6 +166,7 @@
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
   border-radius: 50%;
   overflow: hidden;
+  color: #fff;
 
   &:before {
     position: absolute;
@@ -204,7 +180,6 @@
   }
 
   &.success-status {
-    color: #fff;
 
     &:before {
       content: "\E604";
@@ -214,7 +189,6 @@
 
   &.error-status {
     background-color: red;
-    color: #fff;
 
     &:before {
       content: "\E619";
@@ -240,5 +214,6 @@
     left: 0;
     right: 0;
     background: rgba(#000, 0.3);
+    z-index: 1;
   }
 }

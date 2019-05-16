@@ -402,12 +402,8 @@
     border-bottom-right-radius: 5px;
   }
 
-  .addFileCollectionView {
-    position: relative;
-
-    .addFileView {
-      margin: 0 8px 15px;
-    }
+  .addFileView {
+    margin: 0 8px 15px;
   }
 
   .text-media-container {
@@ -1063,11 +1059,8 @@
       padding: 6px 15px;
       transition: all .3s;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-
-        &:hover {
-          color: #fff;
-        }
+      &:hover {
+        color: #fff;
       }
 
       &--cancel {

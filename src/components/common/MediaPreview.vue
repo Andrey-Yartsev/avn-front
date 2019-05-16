@@ -10,7 +10,7 @@
       <div class="progress-loader" :style="{ width: `${media.loaded}%` }" />
     </div>
     <span
-      class="remove centered"
+      class="remove"
       @mousedown.prevent.stop="() => {}"
       @click="remove"
     >
