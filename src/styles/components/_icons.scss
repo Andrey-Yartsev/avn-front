@@ -15,85 +15,88 @@
   &-remove {
     fill: $gray;
   }
-}
 
-.icn-item {
-  display: inline-block;
-  vertical-align: top;
+  &-viewer,
+  &-share,
+  &-download {
 
-  &:after {
-    @include icon-font;
-  }
-}
-
-.icn-block {;
-  color: red;
-  height: 22px;
-  line-height: 22px;
-  transition: all .3s;
-
-  .btn-block & {
-    color: $main-color;
-    opacity: .3;
-  }
-
-  .btn-block.active & {
-    color: red;
-    opacity: 1;
-  }
-
-  &:after {
-    content: "\E668";
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+    &:after {
+      font-size: 26px;
+      width: 26px;
+      height: 26px;
     }
   }
-}
 
-.icn-viewer {
+  &-viewer {
 
-  &:after {
-    content: "\E633";
-    font-size: 26px;
-    width: 26px;
-    height: 26px;
+    &:after {
+      content: "\E633";
+    }
   }
-}
 
-.icn-remove {
+  &-remove {
 
-  &:after {
-    content: "\E648";
-    font-size: 23px;
-    width: 23px;
-    height: 23px;
+    &:after {
+      content: "\E648";
+      font-size: 23px;
+      width: 23px;
+      height: 23px;
+    }
   }
-}
 
-.icn-share {
-  height: 26px;
-  line-height: 26px;
-
-  &:after {
-    content: "\E638";
-    font-size: 26px;
-    width: 26px;
+  &-share {
     height: 26px;
+    line-height: 26px;
+
+    &:after {
+      content: "\E638";
+    }
   }
-}
 
-.icn-download {
+  &-download {
 
-  &:after {
-    content: "\E64C";
-    font-size: 26px;
-    width: 26px;
-    height: 26px;
+    &:after {
+      content: "\E64C";
+    }
+  }
+
+
+  &-item {
+    display: inline-block;
+    vertical-align: top;
+
+    &:after {
+      @include icon-font;
+    }
+  }
+
+  &-block {;
+    color: red;
+    height: 22px;
+    line-height: 22px;
+    transition: all .3s;
+
+    .btn-block & {
+      color: $main-color;
+      opacity: .3;
+    }
+
+    .btn-block.active & {
+      color: red;
+      opacity: 1;
+    }
+
+    &:after {
+      content: "\E668";
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 }
