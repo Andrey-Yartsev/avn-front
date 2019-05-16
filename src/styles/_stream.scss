@@ -75,16 +75,20 @@
   bottom: 0;
   z-index: 99;
 
-  &:before {
+  &:before,
+  &:after {
     position: absolute;
     pointer-events: none;
-    top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
     opacity: 0.2;
     content: "";
     z-index: 100;
+  }
+
+  &:before {
+    top: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 75px;
@@ -92,15 +96,8 @@
   }
 
   &:after {
-    position: absolute;
-    pointer-events: none;
     bottom: 0;
-    left: 0;
-    right: 0;
     background: linear-gradient(360deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    opacity: 0.2;
-    content: "";
-    z-index: 100;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 80px;
