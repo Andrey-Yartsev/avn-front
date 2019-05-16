@@ -35,30 +35,27 @@
     justify-content: space-between;
   }
 
-  &:before {
-    position: absolute;
-    pointer-events: none;
-    top: 0;
-    bottom: -15px;
-    left: 0;
-    right: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    opacity: 0.2;
-    content: "";
-    z-index: 1;
-  }
-
+  &:before,
   &:after {
     position: absolute;
     pointer-events: none;
+    content: "";
+    z-index: 1;
+    opacity: .2;
+    left: 0;
+    right: 0;
+  }
+
+  &:before {
+    top: 0;
+    bottom: -15px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+  }
+
+  &:after {
     bottom: 0;
     height: 1px;
     background: #fff;
-    opacity: 0.2;
-    content: "";
-    left: 0;
-    right: 0;
-    z-index: 1;
     display: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
