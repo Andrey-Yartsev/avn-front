@@ -1740,6 +1740,13 @@
       }
     }
   }
+
+  .storyviewers-controls &{
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: -4px 0 0 -17px;
+  }
 }
 .header-popup-menu-btn {
   position: absolute;
