@@ -617,3 +617,31 @@
     }
   }
 }
+
+
+.payments-system {
+  justify-content: space-between;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+
+  &__logo {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    &.label {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding: 0;
+      }
+    }
+
+    svg {
+      width: 100px;
+      fill: $main-color;
+    }
+  }
+}
