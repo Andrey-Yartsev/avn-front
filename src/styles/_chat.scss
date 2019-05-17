@@ -1147,57 +1147,6 @@
 
   &.unread {
 
-    //@include media-breakpoint-up($desktop-breakpoint) {
-    //  background-color: $white;
-    //  border-right-color: rgba(124, 139, 150, 0.2);
-    //}
-
-    //&:before {
-    //  background: linear-gradient(
-    //    30deg,
-    //    rgba(33, 150, 243, 1) 10%,
-    //    rgba(255, 64, 129, 1) 90%
-    //  );
-    //  opacity: 0.2;
-    //  display: none;
-    //
-    //  @include media-breakpoint-up($desktop-breakpoint) {
-    //    display: block;
-    //  }
-    //}
-    //
-    //&:after {
-    //  background: linear-gradient(
-    //    30deg,
-    //    rgba(33, 150, 243, 1) 10%,
-    //    rgba(255, 64, 129, 1) 90%
-    //  );
-    //  opacity: 0.06;
-    //
-    //  @include media-breakpoint-up($desktop-breakpoint) {
-    //    background: rgba(248, 249, 250, 0.3);
-    //    z-index: 0;
-    //  }
-    //}
-
-    //.name {
-    //  color: $primary-color;
-    //}
-
-    //.username {
-    //  font-weight: 500;
-    //  opacity: 1;
-    //}
-
-    //.timestamp {
-    //  color: $secondary-color;
-    //  opacity: 1;
-    //}
-
-    //.message {
-    //  opacity: 1;
-    //}
-
     .avatar {
 
       &:after {
@@ -1215,16 +1164,6 @@
   }
 
   &.active {
-
-    //@include media-breakpoint-up($desktop-breakpoint) {
-    //  background-color: $white;
-    //  border-right-color: $white;
-    //}
-
-    //&:before,
-    //&:after {
-    //  background: none;
-    //}
 
     &:before {
 
