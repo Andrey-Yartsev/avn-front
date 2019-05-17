@@ -19,10 +19,8 @@
         <div class="live-short-info">
           <span class="looking">{{ post.viewsCount }}</span>
           <div class="wrap-name wrap-name_center">
-              <span class="name"
-                >{{ user.name }}
-              </span>
-              <span v-if="user.isVerified" class="verified-user" />
+            <span class="name">{{ user.name }} </span>
+            <span v-if="user.isVerified" class="verified-user" />
           </div>
         </div>
       </figure>

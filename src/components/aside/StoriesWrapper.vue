@@ -70,8 +70,10 @@ export default {
       return this.$store.state.stories.posts;
     },
     streams() {
-      const filteredStreams = this.$store.state.lives.posts.filter(stream => !stream.stream_public);
-      return uniqBy(filteredStreams, 'id');
+      const filteredStreams = this.$store.state.lives.posts.filter(
+        stream => !stream.stream_public
+      );
+      return uniqBy(filteredStreams, "id");
     },
     hasMine() {
       if (this.stories[0]) {

@@ -85,7 +85,9 @@
                 <template v-if="page !== 'lives'">
                   No {{ contentName }} here yet
                 </template>
-                <template v-else >No live streams for now</template>
+                <template v-else
+                  >No live streams for now</template
+                >
               </div>
             </div>
           </div>
@@ -97,7 +99,6 @@
 </template>
 
 <script>
-
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
@@ -148,7 +149,7 @@ export default {
       return this.$store.state.stories.posts;
     },
     lives() {
-      return uniqBy(this.$store.state.lives.posts, 'id');
+      return uniqBy(this.$store.state.lives.posts, "id");
     },
     topModels() {
       return this.$store.state.topModels.posts;
