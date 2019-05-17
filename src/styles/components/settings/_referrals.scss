@@ -1,10 +1,16 @@
 .referrals {
 
   &-form-title {
+
     .inner {
+
       .referrals-text {
         display: flex;
         align-items: center;
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          word-break: normal;
+        }
       }
     }
   }
@@ -24,7 +30,7 @@
 
   &-search {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-left: 16px;
     }
 
@@ -44,7 +50,7 @@
   align-items: flex-start;
   padding: 10px 0 0;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     border-top: 1px solid rgba($gray, 0.2);
     margin-top: 13px;
     padding: 14px 0 0;
@@ -52,7 +58,7 @@
 
   &:first-child {
 
-    @include media-breakpoint-down($desktop-breakpoint) {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-top: none;
       margin-top: 0;
       padding: 0;
@@ -80,7 +86,7 @@
 .btn-copy-url {
   animation: copy-url 0.5s;
 
-  @include media-breakpoint-down($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-left: 18px;
     padding-right: 18px;
   }
