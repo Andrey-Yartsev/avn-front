@@ -43,6 +43,20 @@
             ref="bankFields"
           />
 
+          <div
+            class="form-group form-group_with-label"
+            v-if="selectedBankPayout.authUrl"
+          >
+            <label class="form-group-inner">
+              <span class="label"> </span>
+              <span>
+                <a :href="selectedBankPayout.authUrl"
+                  >E-payments authorization</a
+                >
+              </span>
+            </label>
+          </div>
+
           <div class="form-group-btn">
             <button
               type="submit"

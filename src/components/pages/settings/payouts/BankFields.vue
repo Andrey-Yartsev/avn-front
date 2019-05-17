@@ -31,7 +31,7 @@
         </span>
       </label>
     </div>
-    <div class="form-group form-group_with-label">
+    <div class="form-group form-group_with-label" v-if="bankFields.length">
       <div class="input-status">All fields is required</div>
     </div>
   </div>

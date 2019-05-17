@@ -33,6 +33,18 @@
               ref="bankFields"
               @change="bankValidate"
             />
+
+            <div
+              class="form-group form-group_with-label"
+              v-if="selectedPayout.authUrl"
+            >
+              <label class="form-group-inner">
+                <span class="label"> </span>
+                <span>
+                  <a :href="selectedPayout.authUrl">E-payments authorization</a>
+                </span>
+              </label>
+            </div>
           </div>
 
           <div class="form-group hidden" id="payouts-bank-form-error">
@@ -100,14 +112,12 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
-      console.trace("+++");
       const data = {};
       data.payoutCode = this.localBank.payoutCode;
       this.payoutFields.map(v => {
         data[v.code] = this.localBank[v.code];
       });
-
-      this.$store.dispatch("payouts/bank/save", this.localBank);
+      this.$store.dispatch("payouts/bank/save", data);
     },
     payoutChanged() {
       // this.localBank = { ...this.localBank };
