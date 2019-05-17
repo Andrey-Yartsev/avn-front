@@ -66,6 +66,7 @@
                   <MediaImage
                     v-else-if="v.media.length && v.media[0].type === 'photo'"
                     :message="v"
+                    ref="img"
                   />
                 </div>
               </div>
@@ -141,6 +142,11 @@ export default {
     messages() {
       setTimeout(() => {
         this.scrollToLast();
+        this.$refs.img.forEach(img => {
+          img.$el.getElementsByTagName("img")[0].onload = () => {
+            this.scrollToLast();
+          };
+        });
       }, 100);
     }
   },
