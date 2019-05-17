@@ -84,7 +84,6 @@
 }
 
 .btn-copy-url {
-  animation: copy-url 0.5s;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-left: 18px;
@@ -92,12 +91,7 @@
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    width: 120px;
     margin-top: -6px;
-  }
-
-  &.copied {
-    animation: none;
   }
 
   &_reset-mt {
@@ -105,14 +99,5 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-top: 0;
     }
-  }
-}
-
-@keyframes copy-url {
-  0% {
-    color: transparent;
-  }
-  100% {
-    color: $secondary-color;
   }
 }
