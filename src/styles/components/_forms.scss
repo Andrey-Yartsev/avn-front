@@ -901,6 +901,13 @@ select {
     &::-ms-expand {
       display: none;
     }
+
+    option {
+
+      .dark-theme & {
+        background: $gray;
+      }
+    }
   }
 }
 
