@@ -209,13 +209,12 @@
                   class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
                 >
                   <span class="avatar__img">
-                    <img
-                      :src="comment.user.avatar"
-                      v-if="comment.user.avatar"
-                    />
+                    <img :src="comment.user.avatar" v-if="comment.user" />
                   </span>
                 </span>
-                <span class="name">{{ comment.user.name }}</span>
+                <span class="name">{{
+                  comment.user ? comment.user.name : "Guest"
+                }}</span>
               </div>
               <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
