@@ -1,17 +1,21 @@
 import WsAbstract from "./WsAbstract";
 
-import stream from "./actions-g/stream";
-import stream_stop from "./actions-g/stream_stop";
-import stream_look from "./actions-g/stream_look";
-import stream_unlook from "./actions-g/stream_unlook";
+import stream from "./actions/stream";
+import stream_public from "./actions/stream_public";
+import stream_stop from "./actions/stream_stop";
+import stream_look from "./actions/stream_look";
+import stream_unlook from "./actions/stream_unlook";
+import stream_comment from "./actions/stream_comment";
 
 import Logger from "js-logger";
 
 const logger = Logger.get("ws");
 
 const actions = {
+  stream_public,
   stream,
   stream_stop,
+  stream_comment,
   stream_look,
   stream_unlook
 };

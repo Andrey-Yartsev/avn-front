@@ -85,9 +85,9 @@
                 <template v-if="page !== 'lives'">
                   No {{ contentName }} here yet
                 </template>
-                <template v-else
-                  >No live streams for now</template
-                >
+                <template v-else>
+                  No live streams for now
+                </template>
               </div>
             </div>
           </div>
