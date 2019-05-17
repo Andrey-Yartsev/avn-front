@@ -108,6 +108,14 @@
     flex-direction: column;
   }
 
+  .explore-wrapper & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+      z-index: 0;
+    }
+  }
+
   &.open-dropdown-inside {
 
     @include media-breakpoint-up($desktop-breakpoint) {
