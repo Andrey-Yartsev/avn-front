@@ -13,9 +13,12 @@
 .searchContact {
 
   .selectedContacts {
-    //padding-right: 40px;
-    //padding-top: 9px;
     padding: 9px 9px 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 0;
+      padding-right: 40px;
+    }
   }
 }
 
