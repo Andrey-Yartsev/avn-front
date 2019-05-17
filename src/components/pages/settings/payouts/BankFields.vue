@@ -30,6 +30,8 @@
           </select>
         </span>
       </label>
+    </div>
+    <div class="form-group form-group_help-fields form-group_with-label">
       <div class="input-help" v-if="bankFields.length">
         All fields is required
       </div>
