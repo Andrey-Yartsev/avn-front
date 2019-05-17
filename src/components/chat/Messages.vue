@@ -12,7 +12,7 @@
       class="chat-wrapper"
       ref="messagesContainer"
     >
-      <div class="chat-scrollbar">
+      <div class="chat-scrollbar" ref="messagesMobileContainer">
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -242,10 +242,15 @@ export default {
     },
 
     scrollToLast() {
-      if (!this.$refs.messagesContainer) {
-        return;
+      if (this.$mq === "mobile") {
+        if (this.$refs.messagesMobileContainer) {
+          this.$refs.messagesMobileContainer.scrollTop = this.$refs.messagesMobileContainer.scrollHeight;
+        }
+      } else {
+        if (this.$refs.messagesContainer && this.$refs.messagesContainer.$el) {
+          this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
+        }
       }
-      this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
     },
 
     time(date) {
