@@ -43,11 +43,22 @@
   align-content: flex-start;
   align-items: flex-start;
   padding: 10px 0 0;
+
   @include media-breakpoint-down($desktop-breakpoint) {
     border-top: 1px solid rgba($gray, 0.2);
     margin-top: 13px;
     padding: 14px 0 0;
   }
+
+  &:first-child {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      border-top: none;
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+
   .subtext {
     flex: 1;
     padding: 0 20px 0 0;
