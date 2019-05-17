@@ -682,6 +682,10 @@ video {
     margin-bottom: 3px;
   }
 
+  &_center {
+    justify-content: center;
+  }
+
   a {
     display: inline-block;
     color: inherit;

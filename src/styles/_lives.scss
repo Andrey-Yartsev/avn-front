@@ -28,8 +28,8 @@
   position: absolute;
   z-index: 3;
   bottom: 20px;
-  left: 0;
-  right: 0;
+  left: 10px;
+  right: 10px;
   text-align: center;
   color: #fff;
   pointer-events: none;
@@ -56,5 +56,9 @@
         margin-right: 3px;
       }
     }
+  }
+
+  .verified-user {
+    color: #fff;
   }
 }
