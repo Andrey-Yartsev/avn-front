@@ -142,11 +142,13 @@ export default {
     messages() {
       setTimeout(() => {
         this.scrollToLast();
-        this.$refs.img.forEach(img => {
-          img.$el.getElementsByTagName("img")[0].onload = () => {
-            this.scrollToLast();
-          };
-        });
+        if (this.$refs.img) {
+          this.$refs.img.forEach(img => {
+            img.$el.getElementsByTagName("img")[0].onload = () => {
+              this.scrollToLast();
+            };
+          });
+        }
       }, 100);
     }
   },

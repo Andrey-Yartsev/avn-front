@@ -139,6 +139,12 @@ const actions = {
       withUserId: message.fromUser.id,
       isMine: message.fromUser.id === rootState.auth.user.id
     });
+
+    if (rootState.auth.user.id !== message.fromUser.id) {
+      if (state.activeUserId === message.fromUser.id) {
+        dispatch("markChatAsViewed", message.fromUser.id);
+      }
+    }
   },
   fetchMessages({ dispatch }, activeUserId) {
     dispatch("_fetchMessages", activeUserId).then(() => {
