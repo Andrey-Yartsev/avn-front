@@ -63,11 +63,6 @@
                   ></path>
                 </svg>
               </span>
-              <span class="payments-system__btn">
-                <a :href="selectedBankPayout.authUrl" class="btn alt border"
-                  >Connect</a
-                >
-              </span>
             </div>
           </div>
 
@@ -77,7 +72,7 @@
               class="btn lg btn_fix-width"
               :disabled="!changed || !valid || saving"
             >
-              Save
+              {{ selectedBankPayout.authUrl ? "Connect" : "Save" }}
             </button>
           </div>
         </div>
@@ -125,6 +120,11 @@ export default {
     },
     save() {
       this.saving = true;
+
+      if (this.selectedBankPayout.authUrl) {
+        window.location = this.selectedBankPayout.authUrl;
+        return;
+      }
 
       const data = {};
       data.payoutCode = this.localBank.payoutCode;

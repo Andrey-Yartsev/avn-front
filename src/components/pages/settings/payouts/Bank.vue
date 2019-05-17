@@ -54,11 +54,13 @@
                     ></path>
                   </svg>
                 </span>
+                <!--
                 <span class="payments-system__btn">
                   <a :href="selectedPayout.authUrl" class="btn alt border"
                     >Connect</a
                   >
                 </span>
+                -->
               </div>
             </div>
           </div>
@@ -74,7 +76,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!valid || saving"
+              :disabled="!valid || saving || progress"
             >
               Next
             </button>
@@ -97,7 +99,8 @@ export default {
     return {
       loading: true,
       localBank: null,
-      valid: false
+      valid: false,
+      progress: false
     };
   },
   computed: {
@@ -128,6 +131,11 @@ export default {
       return JSON.parse(JSON.stringify(o));
     },
     save() {
+      if (this.selectedPayout.authUrl) {
+        this.progress = true;
+        window.location = this.selectedPayout.authUrl;
+        return;
+      }
       const data = {};
       data.payoutCode = this.localBank.payoutCode;
       this.payoutFields.map(v => {
