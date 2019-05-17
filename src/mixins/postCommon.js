@@ -35,6 +35,7 @@ export default {
     },
     commentReply(comment) {
       this.showAddCommentForm = true;
+      this.showTip = false;
       this.commentReplyUserName = "";
       this.commentReplyId = comment.id;
       setTimeout(() => {
