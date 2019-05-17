@@ -95,6 +95,7 @@ export default {
     sendStat(postId, duration) {
       if (!duration) return;
       if (!this.$root.ws) return;
+      if (!this.postsMap[postId]) return;
 
       this.$root.ws.send({
         act: "collect",
