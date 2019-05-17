@@ -85,9 +85,7 @@
                 <template v-if="page !== 'lives'">
                   No {{ contentName }} here yet
                 </template>
-                <template v-else
-                  >No live streams for now</template
-                >
+                <template v-else >No live streams for now</template>
               </div>
             </div>
           </div>
@@ -99,6 +97,7 @@
 </template>
 
 <script>
+
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
@@ -114,6 +113,7 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
 import PostCollection from "@/components/common/postCollection/Index";
+import uniqBy from "lodash.uniqby";
 
 export default {
   name: "Explore",
@@ -148,7 +148,7 @@ export default {
       return this.$store.state.stories.posts;
     },
     lives() {
-      return this.$store.state.lives.posts;
+      return uniqBy(this.$store.state.lives.posts, 'id');
     },
     topModels() {
       return this.$store.state.topModels.posts;

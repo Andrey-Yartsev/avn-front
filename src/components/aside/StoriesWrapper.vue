@@ -53,6 +53,7 @@
 import StoryCollection from "@/components/common/storyCollection/Index";
 import StreamCollection from "@/components/common/streamCollection/Index";
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import uniqBy from "lodash.uniqby";
 
 export default {
   name: "StoriesWrapper",
@@ -69,7 +70,8 @@ export default {
       return this.$store.state.stories.posts;
     },
     streams() {
-      return this.$store.state.lives.posts;
+      const filteredStreams = this.$store.state.lives.posts.filter(stream => !stream.stream_public);
+      return uniqBy(filteredStreams, 'id');
     },
     hasMine() {
       if (this.stories[0]) {

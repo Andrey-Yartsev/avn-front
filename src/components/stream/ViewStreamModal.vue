@@ -86,7 +86,7 @@
         </div>
         <div
           class="stream-btns stream-viewer-btns"
-          v-if="connected && !isMyStream"
+          v-if="connected && !isMyStream && isAuth()"
         >
           <span role="button" class="stream-btn" @click="openCommentForm">
             <span class="btn-icon comments" v-tooltip="'Comments'"></span>
@@ -255,7 +255,7 @@ export default {
       return { x, y };
     },
     click(event) {
-      if (!this.connected || this.isMyStream) {
+      if (!this.connected || this.isMyStream || !this.isAuth()) {
         return;
       }
 
