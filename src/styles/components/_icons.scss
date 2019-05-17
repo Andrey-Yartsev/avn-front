@@ -12,10 +12,6 @@
     }
   }
 
-  &-remove {
-    fill: $gray;
-  }
-
   &-viewer,
   &-share,
   &-download {
@@ -35,6 +31,12 @@
   }
 
   &-remove {
+    fill: $gray;
+    transition: fill .3s;
+
+    &:hover {
+      fill: darken(rgba($gray, 0.5), 10%);
+    }
 
     &:after {
       content: "\E648";

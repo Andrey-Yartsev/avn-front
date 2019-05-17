@@ -41,8 +41,7 @@ const state = { ...initState };
 
 const mutations = {
   addNewOne(state, live) {
-    const posts = state.posts.filter(v => v.id !== live.id);
-    state.posts = [live, ...posts];
+    state.posts = [...state.posts, live];
   },
 
   addLike(state) {

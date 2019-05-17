@@ -114,6 +114,7 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
 import PostCollection from "@/components/common/postCollection/Index";
+import uniqBy from "lodash.uniqby";
 
 export default {
   name: "Explore",
@@ -148,7 +149,7 @@ export default {
       return this.$store.state.stories.posts;
     },
     lives() {
-      return this.$store.state.lives.posts;
+      return uniqBy(this.$store.state.lives.posts, "id");
     },
     topModels() {
       return this.$store.state.topModels.posts;

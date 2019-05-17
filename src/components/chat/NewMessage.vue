@@ -12,6 +12,7 @@
               href="/chat"
               @click.prevent="goTo('/chat')"
               class="header-return-btn go-back go-back_times hidden-desktop"
+              v-if="$mq === 'mobile'"
             >
               <span class="category-name">New message</span>
             </a>

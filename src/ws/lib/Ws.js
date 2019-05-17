@@ -2,6 +2,7 @@ import Store from "@/store";
 import WsAbstract from "./WsAbstract";
 
 import stream from "./actions/stream";
+import stream_public from "./actions/stream_public";
 import stream_stop from "./actions/stream_stop";
 import stream_look from "./actions/stream_look";
 import stream_unlook from "./actions/stream_unlook";
@@ -30,7 +31,8 @@ const actions = {
   message,
   stream_comment,
   statistics,
-  new_feed_post
+  new_feed_post,
+  stream_public
 };
 
 export default class Ws extends WsAbstract {
