@@ -913,6 +913,7 @@
     position: absolute;
     left: 4px;
     top: -6px;
+    transition: color .3s;
 
     .text-media-container & {
 
@@ -926,6 +927,13 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       right: 4px;
       left: auto;
+
+      &:hover {
+
+        .text-media-container & {
+          color: $secondary-color-darken;
+        }
+      }
     }
 
     &:after {
