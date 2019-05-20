@@ -441,10 +441,13 @@
       }
     }
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      .more-functions__option {
-        opacity: 1;
+      &:hover {
+
+        .more-functions__option {
+          opacity: 1;
+        }
       }
     }
 
