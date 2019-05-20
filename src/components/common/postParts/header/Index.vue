@@ -21,6 +21,7 @@
     <time class="timestamp" v-if="datetime">
       {{ datetime }}
     </time>
+    <span v-if="post.isPinned" class="post-pinned"></span>
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open">

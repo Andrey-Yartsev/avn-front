@@ -249,6 +249,17 @@
     }
   }
 
+  &-pinned {
+    margin-left: auto;
+
+    &:after {
+      content: "\E670";
+      @include icon-font;
+      font-size: 24px;
+      color: $secondary-color;
+    }
+  }
+
   .text {
     padding: 0 15px 4px;
     max-width: 100%;

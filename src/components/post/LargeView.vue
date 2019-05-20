@@ -70,7 +70,7 @@
             :showCopy="!delayedPost"
           />
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
-            <p v-html="post.text" />
+            <p v-if="post.text" v-html="post.text" />
             <div class="post-time" v-if="!delayedPost && !isAuth()">
               <time class="timestamp">{{ timePassed }}</time>
             </div>
