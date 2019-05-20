@@ -1004,7 +1004,7 @@ export default {
       //
       this.subscribeUserStatistics("top_followers_count_today");
       //
-
+      this.subscribeUserStatistics("current_user_total_balance_info");
       // this.subscribeUserStatistics("paid_subscriptions_histogram_all");
       // this.subscribeUserStatistics("tips_histogram_all");
       // this.subscribeUserStatistics("paid_chat_messages_histogram_all");
