@@ -62,6 +62,7 @@
             v-if="showCommentForm && !isMyStream"
           >
             <textarea
+              ref="commentInput"
               placeholder="Comment"
               class="stream-comment-input rounded lg"
               maxlength="200"
@@ -414,6 +415,15 @@ export default {
     window.clearInterval(this.likesInterval);
   },
   watch: {
+    showCommentForm() {
+      if (this.showCommentForm) {
+        this.$nextTick(() => {
+          this.$refs.commentInput.focus();
+        });
+      } else {
+        this.newComment = "";
+      }
+    },
     funded() {
       const token = this.$store.state.auth.token;
       const id = this.$store.state.modal.stream.data.stream.id;

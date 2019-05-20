@@ -221,6 +221,7 @@
           </div>
           <form class="stream-comment-form" v-if="showCommentForm">
             <textarea
+              ref="commentInput"
               placeholder="Comment"
               class="stream-comment-input rounded lg"
               maxlength="200"
@@ -759,6 +760,17 @@ export default {
   beforeDestroy() {
     Streams.stopAllTracks(Streams.localStream);
     window.clearInterval(this.likesInterval);
+  },
+  watch: {
+    showCommentForm() {
+      if (this.showCommentForm) {
+        this.$nextTick(() => {
+          this.$refs.commentInput.focus();
+        });
+      } else {
+        this.newComment = "";
+      }
+    }
   }
 };
 </script>
