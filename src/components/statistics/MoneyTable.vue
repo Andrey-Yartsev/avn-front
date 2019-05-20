@@ -6,7 +6,7 @@
           Balance
         </div>
         <div class="value-data__num line-4">
-          $-
+          ${{ balance ? balance.data_current_balance : "-" }}
         </div>
       </div>
       <div class="value-data text-right">
@@ -14,7 +14,7 @@
           Overall payouts
         </div>
         <div class="value-data__num default-color">
-          $-
+          ${{ balance ? balance.data_overall_payouts : "-" }}
         </div>
       </div>
     </div>
@@ -59,6 +59,10 @@ export default {
   name: "statistics-money-table",
   props: {
     data: {
+      type: Object,
+      required: true
+    },
+    balance: {
       type: Object,
       required: true
     }

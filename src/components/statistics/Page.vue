@@ -221,7 +221,7 @@
         </div>
         <div class="col col-1-2">
           <div class="box">
-            <MoneyTable :data="moneyTableData" />
+            <MoneyTable :data="moneyTableData" :balance="balance" />
           </div>
         </div>
       </div>
@@ -914,7 +914,8 @@ export default {
       updateChartTimeoutIds: {},
       moneyTableData: {},
       selectedLineChart: null,
-      selectedLineName: null
+      selectedLineName: null,
+      balance: null
     };
   },
   mounted() {
@@ -1224,6 +1225,10 @@ export default {
 
         case "top_followers_count_today":
           this.updateTopFollowers(statData);
+          break;
+
+        case "current_user_total_balance_info":
+          this.updateTotalBalance(statData);
           break;
       }
     },
@@ -1733,6 +1738,9 @@ export default {
         }
       );
       this.topFollowers = await response.json();
+    },
+    updateTotalBalance(data) {
+      this.balance = data[0].message;
     },
     selectLine(name) {
       const m = name.match(/(.*)-(.*)/);
