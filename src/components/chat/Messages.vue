@@ -39,6 +39,7 @@
                 :class="{
                   tipsMessage: v.isTips,
                   lockedMessage: isLocked(v),
+                  unlockedMessage: isUnlocked(v),
                   'message-icon': isLocked(v) || v.isTips || !isLocked(v),
                   mine: isMyMessage(v)
                 }"
@@ -292,7 +293,9 @@ export default {
     isLocked(message) {
       return !message.isOpened && !message.isFree;
     },
-
+    isUnlocked(message) {
+      return message.isOpened && !message.isFree;
+    },
     media(media) {
       if (media.type === "image") {
         return MediaImage;
