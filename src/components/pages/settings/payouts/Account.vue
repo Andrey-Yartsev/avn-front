@@ -69,8 +69,6 @@
 <script>
 import Globe from "./Globe";
 
-const htmlElement = document.getElementsByTagName("html")[0];
-
 export default {
   name: "PayoutSettingsAccount",
 
@@ -139,10 +137,6 @@ export default {
 
   mounted() {
     this.$store.dispatch("payouts/countries/fetch");
-    htmlElement.classList.add("with-bg-picture");
-  },
-  beforeDestroy() {
-    htmlElement.classList.remove("with-bg-picture");
   }
 };
 </script>
