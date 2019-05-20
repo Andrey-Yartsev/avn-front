@@ -346,6 +346,7 @@
     .comments-btn {
 
       &:not(.clickable-state) {
+        cursor: auto;
 
         .btn-icon {
           cursor: auto;
