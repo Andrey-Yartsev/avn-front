@@ -35,7 +35,7 @@
         <div class="user-container">
           <div class="avatar avatar_md avatar_md-desk">
             <span class="avatar__img">
-              <img :src="profile.avatar" />
+              <img v-if="profile.avatar" :src="profile.avatar" />
             </span>
             <!--<div class="stream-online-label">live</div>-->
           </div>
