@@ -583,6 +583,11 @@ button,
     &:hover {
       opacity: 1;
       color: $secondary-color;
+
+      .dark-theme & {
+        color: $main-color;
+        opacity: 1;
+      }
     }
   }
 
