@@ -896,6 +896,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         display: block;
+        pointer-events: none;
       }
     }
 
@@ -903,7 +904,7 @@
       max-height: none;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 290px);
+        max-height: calc(100vh - 330px);
       }
     }
   }

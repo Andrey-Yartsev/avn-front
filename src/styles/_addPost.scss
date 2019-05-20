@@ -40,6 +40,19 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: inherit;
     }
+
+    .lds-dual-ring {
+
+      &.with-text {
+
+        .loader-text {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            position: fixed;
+          }
+        }
+      }
+    }
   }
 
   .scroll-bottom {
@@ -118,10 +131,6 @@
 
     .popup-addPost &,
     .addPost-page & {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        //height: 100vh;
-      }
 
       + .loader-content {
 
@@ -864,6 +873,14 @@
     padding-right: 36px;
   }
 
+  .actions & {
+    padding-left: 0;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-right: 0;
+    }
+  }
+
   .text-media-container & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -922,6 +939,10 @@
 
   .post-datetime__value {
     opacity: 1;
+
+    .actions & {
+      margin-left: 6px;
+    }
 
     .text-media-container & {
 
