@@ -42,7 +42,7 @@
               <template v-if="transactions.length">
                 <div
                   class="PaymentsStatementsCollectionItemView"
-                  v-for="v, i in transactions"
+                  v-for="(v, i) in transactions"
                   :key="i"
                 >
                   <div class="item">
