@@ -56,6 +56,10 @@ const mutations = {
 
       return post;
     });
+  },
+
+  postPinChanged(state) {
+    state.postPinChanged++;
   }
 };
 
@@ -158,14 +162,14 @@ const actions = {
       }
     });
   },
-  pin({ state, dispatch }, postId) {
+  pin({ commit, dispatch }, postId) {
     dispatch("_pin", postId).then(() => {
-      state.postPinChanged++;
+      commit("postPinChanged");
     });
   },
-  unpin({ state, dispatch }, postId) {
+  unpin({ commit, dispatch }, postId) {
     dispatch("_unpin", postId).then(() => {
-      state.postPinChanged++;
+      commit("postPinChanged");
     });
   }
 };

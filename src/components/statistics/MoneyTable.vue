@@ -57,16 +57,7 @@ const lineTypes = Object.keys(chartTypes.earnings);
 
 export default {
   name: "statistics-money-table",
-  props: {
-    data: {
-      type: Object,
-      required: true
-    },
-    balance: {
-      type: Object,
-      required: true
-    }
-  },
+  props: ["data", "balance"],
   methods: {
     month(date) {
       return "1 " + moment(date).format("MMM");
