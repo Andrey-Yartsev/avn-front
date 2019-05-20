@@ -19,7 +19,7 @@
           </template>
           <template slot="footer-text">
             You will be charged
-            <a>${{ profile.subscribePrice }} monthly</a>
+            <span class="selected-text">${{ profile.subscribePrice }} monthly</span>
             until you cancel your subscription
           </template>
         </Content>
