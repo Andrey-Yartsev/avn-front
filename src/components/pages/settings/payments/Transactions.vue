@@ -42,8 +42,8 @@
               <template v-if="transactions.length">
                 <div
                   class="PaymentsStatementsCollectionItemView"
-                  v-for="v in transactions"
-                  v-bind:key="v.createdAt + v.userTo.username"
+                  v-for="v, i in transactions"
+                  :key="i"
                 >
                   <div class="item">
                     <div
