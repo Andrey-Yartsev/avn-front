@@ -415,10 +415,14 @@
   }
 
   .btn-copy-link {
-    animation: copy-link 0.5s;
     transition: color 0.3s ease;
+
     &.copied {
-      animation: none;
+      color: $primary-color;
+
+      .more-functions__option {
+        opacity: 1;
+      }
     }
   }
 

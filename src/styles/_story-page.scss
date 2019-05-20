@@ -160,14 +160,6 @@
     }
   }
 
-  .btn-copy-link {
-    animation: copy-link 0.5s;
-
-    &.copied {
-      animation: none;
-    }
-  }
-
   .bottom-btns {
     position: absolute;
     left: 7px;
