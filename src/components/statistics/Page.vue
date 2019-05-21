@@ -67,8 +67,8 @@
           <div class="box" id="followers-box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span
-                  class="tab-uploaded"
+                <div
+                  class="tab-stat tab-uploaded"
                   @click="selectLine('followers-followers')"
                   :class="{
                     selected:
@@ -76,10 +76,10 @@
                       selectedLineName === 'followers'
                   }"
                   ref="count_followers_current_followers"
-                  >Followers<span>0</span></span
+                ><div class="tab-stat__name">Followers</div><span>0</span></div
                 >
-                <span
-                  class="tab-views"
+                <div
+                  class="tab-stat tab-views"
                   @click="selectLine('followers-subscribers')"
                   :class="{
                     selected:
@@ -87,7 +87,7 @@
                       selectedLineName === 'subscribers'
                   }"
                   ref="count_followers_current_subscribers"
-                  >Subscribers<span>0</span></span
+                ><div class="tab-stat__name">Subscribers</div><span>0</span></div
                 >
               </div>
               <div
@@ -102,8 +102,8 @@
           <div class="box" id="posts-box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span
-                  class="tab-posts"
+                <div
+                  class="tab-stat tab-posts"
                   @click="selectLine('posts-posts')"
                   :class="{
                     selected:
@@ -111,10 +111,10 @@
                       selectedLineName === 'posts'
                   }"
                   ref="count_posts_new_post"
-                  >Posts <span>0</span></span
+                ><div class="tab-stat__name">Posts</div><span>0</span></div
                 >
-                <span
-                  class="tab-views"
+                <div
+                  class="tab-stat tab-views"
                   @click="selectLine('posts-views')"
                   :class="{
                     selected:
@@ -122,10 +122,10 @@
                       selectedLineName === 'views'
                   }"
                   ref="count_posts_view_post"
-                  >Views <span>0</span></span
+                ><div class="tab-stat__name">Views</div><span>0</span></div
                 >
-                <span
-                  class="tab-likes"
+                <div
+                  class="tab-stat tab-likes"
                   @click="selectLine('posts-likes')"
                   :class="{
                     selected:
@@ -133,10 +133,10 @@
                       selectedLineName === 'likes'
                   }"
                   ref="count_posts_post_like"
-                  >Likes <span>0</span></span
+                ><div class="tab-stat__name">Likes</div><span>0</span></div
                 >
-                <span
-                  class="tab-comments"
+                <div
+                  class="tab-stat tab-comments"
                   @click="selectLine('posts-comments')"
                   :class="{
                     selected:
@@ -144,7 +144,7 @@
                       selectedLineName === 'comments'
                   }"
                   ref="count_posts_post_comment_added"
-                  >Comments <span>0</span></span
+                ><div class="tab-stat__name">Comments</div><span>0</span></div
                 >
               </div>
               <div
@@ -159,8 +159,8 @@
           <div class="box" id="stories-box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span
-                  class="tab-uploaded"
+                <div
+                  class="tab-stat tab-uploaded"
                   @click="selectLine('stories-uploads')"
                   :class="{
                     selected:
@@ -168,10 +168,10 @@
                       selectedLineName === 'uploads'
                   }"
                   ref="count_stories_story_added"
-                  >Uploaded<span>0</span></span
+                  ><div class="tab-stat__name">Uploaded</div><span>0</span></div
                 >
-                <span
-                  class="tab-views"
+                <div
+                  class="tab-stat tab-views"
                   @click="selectLine('stories-views')"
                   :class="{
                     selected:
@@ -179,7 +179,7 @@
                       selectedLineName === 'views'
                   }"
                   ref="count_stories_story_view"
-                  >Views<span>0</span></span
+                ><div class="tab-stat__name">Views</div><span>0</span></div
                 >
                 <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
               </div>
@@ -198,17 +198,17 @@
           <div class="box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <span class="tab-posts" ref="count_earnings_paid_subscriptions"
-                  >Subscribers <span>0</span></span
+                <div class="tab-stat tab-posts" ref="count_earnings_paid_subscriptions"
+                  >Subscribers <span>0</span></div
                 >
-                <span class="tab-views" ref="count_earnings_tips"
-                  >Funding <span>0</span></span
+                <div class="tab-stat tab-views" ref="count_earnings_tips"
+                >Funding <span>0</span></div
                 >
-                <span class="tab-likes" ref="count_earnings_paid_chat_messages"
-                  >Message <span>0</span></span
+                <div class="tab-stat tab-likes" ref="count_earnings_paid_chat_messages"
+                >Message <span>0</span></div
                 >
-                <span class="tab-comments" ref="count_earnings_earn_referral"
-                  >Referrals <span>0</span></span
+                <div class="tab-stat tab-comments" ref="count_earnings_earn_referral"
+                >Referrals <span>0</span></div
                 >
               </div>
               <div
@@ -1055,7 +1055,7 @@ export default {
         postfix = "";
       }
       this.$refs[ref].innerHTML =
-        title + "<span>" + postfix + value + "</span>";
+        "<div class='tab-stat__name'>" + title + "</div>" + "<span>" + postfix + value + "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
       const chartId = chart.div.id;

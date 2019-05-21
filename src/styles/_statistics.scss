@@ -73,57 +73,66 @@
   justify-content: space-between;
   padding: 14px 15px 12px;
   font-size: 10px;
+}
 
-  > span {
-    cursor: pointer;
+.tab-stat {
+  cursor: pointer;
 
-    &:before {
-      display: none;
+  &:before {
+    display: none;
+  }
+
+  &__name {
+    opacity: .5;
+    color: $main-color;
+  }
+
+  &.selected {
+    font-weight: bold;
+
+    .tab-stat__name {
+      opacity: 1;
     }
+  }
 
-    &.selected {
-      font-weight: bold;
-    }
-
-    &.tab-comments,
-    &.tab-followers,
-    &.tab-earn_referral {
-
-      span {
-        color: #3abfd3;
-      }
-    }
-
-    &.tab-likes,
-    &.tab-subscribed,
-    &.tab-paid_chat_messages {
-
-      span {
-        color: #67cc2e;
-      }
-    }
-
-    &.tab-posts,
-    &.tab-uploaded,
-    &.tab-unsubscribed,
-    &.tab-paid_subscriptions {
-
-      span {
-        color: #FF335A;
-      }
-    }
-
-    &.tab-views {
-
-      span {
-        color: #ff9501;
-      }
-    }
+  &.tab-comments,
+  &.tab-followers,
+  &.tab-earn_referral {
 
     span {
-      display: block;
-      font-size: 21px;
+      color: #3abfd3;
     }
+  }
+
+  &.tab-likes,
+  &.tab-subscribed,
+  &.tab-paid_chat_messages {
+
+    span {
+      color: #67cc2e;
+    }
+  }
+
+  &.tab-posts,
+  &.tab-uploaded,
+  &.tab-unsubscribed,
+  &.tab-paid_subscriptions {
+
+    span {
+      color: #FF335A;
+    }
+  }
+
+  &.tab-views {
+
+    span {
+      color: #ff9501;
+    }
+  }
+
+  span {
+    display: block;
+    font-size: 21px;
   }
 }
 
