@@ -8,7 +8,7 @@
             <span class="semi-transparent">
               Connected Bank
             </span>
-            <button class="btn-edit-bank" @click="edit = true">Edit</button>
+            <button @click="edit = true">Edit</button>
           </div>
         </div>
         <div class="shadow-block">

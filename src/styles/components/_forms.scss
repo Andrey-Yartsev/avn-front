@@ -633,6 +633,10 @@ label {
       font: inherit;
       font-size: 15px;
       font-weight: 500;
+
+      &:not(.close-all-sessions-btn) {
+        color: $secondary-color;
+      }
     }
 
     + .inner {

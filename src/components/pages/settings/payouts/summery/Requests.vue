@@ -11,7 +11,6 @@
               Payouts Statements
             </span>
             <button
-              class="btn-edit-bank"
               @click="withdrawRequest"
               :disabled="withdrawRequesting"
             >

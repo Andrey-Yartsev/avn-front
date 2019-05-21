@@ -71,6 +71,7 @@
       border: none;
       padding: 0;
       background: none;
+      transition: color .3s;
       @include media-breakpoint-down($desktop-breakpoint) {
         font-size: 0;
         &:before {
@@ -85,9 +86,17 @@
     .replace {
       margin-right: 25px;
       color: $secondary-color;
+
+      &:hover {
+        color: $secondary-color-darken;
+      }
     }
     .delete {
       color: $primary-color;
+
+      &:hover {
+        color: $primary-color-darken;
+      }
     }
     @include media-breakpoint-down($desktop-breakpoint) {
       .replace {

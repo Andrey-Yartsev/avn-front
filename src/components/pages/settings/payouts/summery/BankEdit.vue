@@ -11,7 +11,7 @@
               <div class="semi-transparent">
                 Edit Bank
               </div>
-              <button class="btn-edit-bank" @click.stop.prevent="cancel">
+              <button @click.stop.prevent="cancel">
                 Cancel
               </button>
             </div>

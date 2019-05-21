@@ -284,6 +284,14 @@
   top: 50%;
   transform: translate(0, -50%);
   color: $secondary-color;
+  transition: color .3s;
+}
+
+button.balance-info {
+  
+  &:hover {
+    color: $secondary-color-darken;
+  }
 }
 
 .buttons-row {
