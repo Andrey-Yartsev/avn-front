@@ -140,6 +140,13 @@
   &-outer {
     position: relative;
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 260px;
+    }
+
     .popup & {
       padding: 8px 10px 2px 24px;
     }
@@ -148,6 +155,10 @@
       height: 66px;
       overflow: hidden;
       text-align: left;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 1;
+      }
 
       &:not(:empty) {
 
