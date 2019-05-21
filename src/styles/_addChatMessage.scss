@@ -7,7 +7,8 @@
   transition: transform 0.4s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 1em 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
     margin-left: 20px;
     margin-right: 20px;
     min-height: 61px;
@@ -43,9 +44,6 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1.1em;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
 
       &:hover {
         opacity: 1;
@@ -64,7 +62,7 @@
     opacity: 0.3;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-left: 15px;
+      //margin-left: 15px;
 
       &:hover {
         opacity: 1;
