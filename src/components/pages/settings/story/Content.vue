@@ -82,10 +82,11 @@
             <span></span>
           </label>
         </div>
-        <p></p>
-        You need to enable <b>Earn Money</b> option in
-        <router-link to="/settings/profile">Profile</router-link> settings to
-        enable Private Story option.
+        <div class="text-enable-money border-bottom-mobile">
+          You need to enable <b>Earn Money</b> option in
+          <router-link to="/settings/profile">Profile</router-link> settings to
+          enable Private Story option.
+        </div>
       </div>
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group form-group_with-label">

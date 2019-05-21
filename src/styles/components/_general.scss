@@ -163,6 +163,10 @@ strong {
   }
 }
 
+.text-enable-money {
+  padding-top: 11px;
+}
+
 #content {
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
