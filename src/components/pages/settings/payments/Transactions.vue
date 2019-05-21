@@ -27,19 +27,10 @@
             </div>
           </div>
         </div>
-
-        <div class="shadow-block loader-container" v-if="transactionsLoading">
-          <Loader
-            :fullscreen="false"
-            text=""
-            class="transparent small no-text"
-          />
-        </div>
-
-        <div class="shadow-block no-padding" v-else>
+        <div class="shadow-block no-padding" v-if="transactions.length">
           <div class="table-wrapper">
             <div class="table payments-table">
-              <template v-if="transactions.length">
+              <template>
                 <div
                   class="PaymentsStatementsCollectionItemView"
                   v-for="(v, i) in transactions"
@@ -90,6 +81,13 @@
             </div>
           </div>
         </div>
+        <div class="shadow-block loader-container" v-if="transactionsLoading">
+          <Loader
+            :fullscreen="false"
+            text=""
+            class="transparent small no-text"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -98,34 +96,35 @@
 <script>
 import Loader from "@/components/common/Loader";
 import moment from "moment";
+import InfinityScroll from "@/mixins/infinityScroll";
 
 export default {
   name: "PaymentsSettingsTransactions",
-
+  mixins: [InfinityScroll],
   components: {
     Loader
   },
-
   computed: {
+    store() {
+      return this.$store.state.payment.transactions;
+    },
     transactions() {
-      if (!this.$store.state.payment.transactions.fetchResult) {
-        return [];
-      }
-      return this.$store.state.payment.transactions.fetchResult.list;
+      return this.$store.state.payment.transactions.list;
     },
     transactionsLoading() {
-      return this.$store.state.payment.transactions.fetchLoading;
+      return this.$store.state.payment.transactions.loading;
     }
   },
-
   methods: {
     dt(date) {
       return moment(date).format("DD MMM");
+    },
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("payment/transactions/fetch");
     }
   },
-
   created() {
-    this.$store.dispatch("payment/transactions/fetch");
+    this.$store.dispatch("payment/transactions/firstFetch");
   }
 };
 </script>

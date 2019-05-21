@@ -44,7 +44,6 @@ export default {
         this.lastYOffset = window.pageYOffset;
 
         const isOnBottom = getBottom();
-
         if (
           isOnBottom &&
           !this.infinityScrollLoading &&
