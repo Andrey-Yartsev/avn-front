@@ -1036,14 +1036,6 @@
   &-content {
     flex: 1;
     max-width: 100%;
-
-    .post-popup & {
-      padding-right: 24px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-right: 35px;
-      }
-    }
   }
 
   &-answer {
