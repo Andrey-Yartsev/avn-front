@@ -7,6 +7,13 @@
     max-width: $width-wrapper;
   }
 
+  &:first-child {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 0;
+    }
+  }
+
   .cols {
     display: flex;
     margin: 0 -10px;
