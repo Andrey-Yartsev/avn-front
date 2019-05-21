@@ -48,12 +48,13 @@
 
 @mixin container {
   padding: 0 15px;
+  margin: 0 auto;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 960px;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
