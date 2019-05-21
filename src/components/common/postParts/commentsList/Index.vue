@@ -12,6 +12,7 @@
         :key="comment.id"
         :comment="comment"
         @commentReply="comment => $emit('commentReply', comment)"
+        @commentRemove="comment => $emit('commentRemove', comment)"
         @likeComment="data => $emit('likeComment', data)"
       />
     </div>

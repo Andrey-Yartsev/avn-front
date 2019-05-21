@@ -37,6 +37,14 @@
         >
           Reply
         </button>
+        <button
+          v-if="comment.canDelete"
+          type="button"
+          class="post-option btn-remove"
+          @click="$emit('commentRemove', comment)"
+        >
+          Remove
+        </button>
       </div>
       <button
         :class="['btn-like', { active: comment.isLiked }]"

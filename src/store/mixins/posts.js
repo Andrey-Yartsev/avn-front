@@ -129,6 +129,21 @@ export default {
           }
         })
         .catch(() => {});
+    },
+
+    removeComment({ commit }, { postId, commentId }) {
+      return PostApi.removeComment({ commentId })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(() => {
+              commit("postCommentRemoveSuccess", {
+                postId,
+                commentId
+              });
+            });
+          }
+        })
+        .catch(() => {});
     }
   },
 
@@ -228,6 +243,22 @@ export default {
           };
         }
 
+        return post;
+      });
+    },
+
+    postCommentRemoveSuccess(state, { postId, commentId }) {
+      state.posts = state.posts.map(post => {
+        if (postId === post.id) {
+          return {
+            ...post,
+            fullComments: (post.fullComments || []).filter(
+              c => c.id !== commentId
+            ),
+            comments: (post.comments || []).filter(c => c.id !== commentId),
+            commentsCount: post.commentsCount - 1
+          };
+        }
         return post;
       });
     },

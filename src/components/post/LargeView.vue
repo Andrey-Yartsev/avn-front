@@ -83,6 +83,7 @@
             :getComments="getComments"
             @commentReply="commentReply"
             @likeComment="likeComment"
+            @commentRemove="commentRemove"
           />
           <div v-if="delayedPost" class="actions">
             <div class="datetime-value">

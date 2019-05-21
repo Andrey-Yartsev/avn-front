@@ -69,6 +69,12 @@ export default {
       mode: "cors"
     });
   },
+  removeComment({ commentId }) {
+    return tokenRequest(`posts/${commentId}/comments`, {
+      method: "DELETE",
+      mode: "cors"
+    });
+  },
   savePost(data) {
     return tokenRequest(`posts`, {
       method: "POST",

@@ -19,8 +19,9 @@
           :key="comment.id"
           :comment="comment"
           :full="true"
-          v-on:commentReply="comment => $emit('commentReply', comment)"
-          v-on:likeComment="data => $emit('likeComment', data)"
+          @commentReply="comment => $emit('commentReply', comment)"
+          @commentRemove="comment => $emit('commentRemove', comment)"
+          @likeComment="data => $emit('likeComment', data)"
         />
       </VuePerfectScrollbar>
     </div>

@@ -42,6 +42,21 @@ export default {
         this.commentReplyUserName = comment.author.username;
       });
     },
+    commentRemove(comment) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Remove comment",
+          success: () => this.commentRemoving(comment)
+        }
+      });
+    },
+    commentRemoving(comment) {
+      this.$store.dispatch(this.actionPrefix + "/removeComment", {
+        postId: this.post.id,
+        commentId: comment.id
+      });
+    },
     toggleTipForm() {
       this.showTip = !this.showTip;
       this.showAddCommentForm = false;

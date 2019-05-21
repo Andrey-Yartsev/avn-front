@@ -63,6 +63,7 @@
       :clickOnShowMore="openModal"
       @commentReply="commentReply"
       @likeComment="likeComment"
+      @commentRemove="commentRemove"
     />
   </div>
 </template>
