@@ -6,10 +6,10 @@
       ref="messages"
     >
       <div
-        @click="openChat(v.withUser.id)"
+        @click="openChat(v.id)"
         class="chatView"
         v-for="v in chats"
-        v-bind:key="v.withUser.id"
+        :key="v.id"
         :class="{
           active: v.active,
           unread: !!v.unreadMessagesCount,

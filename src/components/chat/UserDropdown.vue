@@ -23,7 +23,7 @@
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul class="more-functions__list">
-          <li class="more-functions__item">
+          <li class="more-functions__item" v-if="userExists">
             <router-link
               class="profile-url more-functions__link"
               :to="'/' + activeUser.username"
@@ -32,24 +32,29 @@
               ></router-link
             >
           </li>
-          <li class="more-functions__item" v-if="activeUser.isBlocked">
-            <a
-              class="menu-block more-functions__link"
-              @click="unblockActiveUser"
-            >
-              <span class="more-functions__option">
-                Unblock user
-              </span>
-            </a>
-          </li>
-          <li class="more-functions__item" v-else>
-            <a class="menu-block more-functions__link" @click="blockActiveUser">
-              <span class="more-functions__option">
-                Block user
-              </span>
-            </a>
-          </li>
-          <template v-if="_canMute(activeUser)">
+          <template v-if="userExists">
+            <li class="more-functions__item" v-if="activeUser.isBlocked">
+              <a
+                class="menu-block more-functions__link"
+                @click="unblockActiveUser"
+              >
+                <span class="more-functions__option">
+                  Unblock user
+                </span>
+              </a>
+            </li>
+            <li class="more-functions__item" v-else>
+              <a
+                class="menu-block more-functions__link"
+                @click="blockActiveUser"
+              >
+                <span class="more-functions__option">
+                  Block user
+                </span>
+              </a>
+            </li>
+          </template>
+          <template v-if="userExists && _canMute(activeUser)">
             <li class="more-functions__item" v-if="activeUser.isMuted">
               <a @click="unmuteActiveUser" class="more-functions__link">
                 <span class="more-functions__option">
@@ -82,7 +87,7 @@
               </a>
             </li>
           </template>
-          <li class="more-functions__item">
+          <li class="more-functions__item" v-if="userExists">
             <a class="menu-report more-functions__link" @click="report">
               <span class="more-functions__option">
                 Report
@@ -124,6 +129,11 @@ export default {
     return {
       chatOptionsOpened: false
     };
+  },
+  computed: {
+    userExists() {
+      return !!this.activeUser.id;
+    }
   },
   methods: {
     blockActiveUser() {

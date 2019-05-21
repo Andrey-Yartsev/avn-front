@@ -107,6 +107,7 @@ const actions = {
           lastMessage: message,
           mediaCount: message.mediaCount,
           unreadMessageCount: 0,
+          id: message.fromUser.id,
           withUser: message.fromUser
         });
       }
@@ -115,10 +116,12 @@ const actions = {
         if (!state.windowIsActive) {
           unreadLastMessage = message;
         } else {
-          markAsRead(dispatch, {
-            userId: message.fromUser.id,
-            messageId: message.id
-          });
+          if (message.fromUser.id) {
+            markAsRead(dispatch, {
+              userId: message.fromUser.id,
+              messageId: message.id
+            });
+          }
         }
       }
     }
@@ -214,7 +217,7 @@ const mutations = {
   },
   removeChat(state, userId) {
     state.chats = state.chats.filter(chat => {
-      return chat.withUser.id !== userId;
+      return chat.id !== userId;
     });
   },
   setSecondScreen(state, isSecondScreen) {

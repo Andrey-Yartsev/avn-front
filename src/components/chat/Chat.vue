@@ -172,7 +172,7 @@ export default {
         if (Object.keys(copy.lastMessage).length === 0) {
           copy.lastMessage = null;
         }
-        if (this.activeUserId === copy.withUser.id) {
+        if (this.activeUserId === copy.id) {
           copy.active = true;
         }
         return copy;
@@ -217,9 +217,7 @@ export default {
       return parseInt(this.routeParams.userId);
     },
     activeChat() {
-      return this.$store.state.chat.chats.find(
-        v => v.withUser.id === this.activeUserId
-      );
+      return this.$store.state.chat.chats.find(v => v.id == this.activeUserId);
     },
     activeUser() {
       if (!this.activeChat) {
@@ -273,18 +271,26 @@ export default {
     },
     initVirtualChat() {
       if (!this.activeChat) {
+        const deletedUserChat = this.findDeletedUserChat(this.activeUserId);
+        if (deletedUserChat) {
+          this.virtualChat = { ...deletedUserChat };
+          return;
+        }
         this.$store
           .dispatch("chat/fetchActiveUser", this.activeUserId)
           .then(user => {
             this.virtualChat = {
               lastMessage: null,
+              id: user.id,
               withUser: user,
               changedAt: new Date()
             };
           });
       }
     },
-
+    findDeletedUserChat(userId) {
+      return this.chats.find(v => v.id === userId && !v.withUser.id);
+    },
     windowFocus() {
       if (!focusIntervalId) {
         this.$store.commit("chat/setActiveWindow", true);

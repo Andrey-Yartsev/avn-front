@@ -11,12 +11,12 @@ const state = {};
 const mutations = {};
 
 const actions = {
-  reset({ dispatch }) {
+  reset({ commit, dispatch }) {
     dispatch("payouts/account/fetchReset", null, { root: true });
     dispatch("payouts/legal/fetchReset", null, { root: true });
     dispatch("payouts/bank/fetchReset", null, { root: true });
     dispatch("payouts/requests/fetchReset", null, { root: true });
-    dispatch("payouts/transactions/fetchReset", null, { root: true });
+    commit("payouts/transactions/reset", null, { root: true });
   }
 };
 
