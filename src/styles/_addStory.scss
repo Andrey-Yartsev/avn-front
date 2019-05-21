@@ -121,13 +121,17 @@
   justify-content: center;
   z-index: 0;
 
-  &__img {
+  &__img,
+  &__video {
     max-width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__img {
     max-height: calc(100% - 220px);
     display: inline-block;
     vertical-align: middle;
-    position: relative;
-    z-index: 2;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-height: calc(100% - 150px);
@@ -135,10 +139,7 @@
   }
 
   &__video {
-    max-width: 100%;
     max-height: 100%;
-    position: relative;
-    z-index: 2;
   }
 }
 
@@ -160,23 +161,30 @@
     margin-bottom: 0;
   }
 
-  &__strong {
+  &__strong,
+  &__modern {
     font-size: 21px;
+  }
+
+  &__type,
+  &__soft {
+    font-size: 24px;
+  }
+
+
+  &__strong {
     font-weight: 700;
   }
 
   &__modern {
-    font-size: 21px;
     font-family: "Lato", sans-serif;
   }
 
   &__type {
-    font-size: 24px;
     font-family: "Cutive Mono", monospace;
   }
 
   &__soft {
-    font-size: 24px;
     font-family: "Courgette", cursive;
   }
 
@@ -196,24 +204,26 @@
       a {
         display: block;
         color: $main-color;
-        opacity: 0.5;
-        transition: all 0.3s;
+        opacity: .5;
+        transition: all .3s;
 
         &.font-style__strong,
         &.font-style__modern {
-          padding: 12px 0;
+          padding-top: 12px;
+          padding-bottom: 12px;
         }
 
         &.font-style__soft,
         &.font-style__type {
-          padding: 9px 0;
+          padding-top: 9px;
+          padding-bottom: 9px;
         }
 
         @include media-breakpoint-up($desktop-breakpoint) {
 
           &:hover {
-            animation: splash 0.3s normal forwards ease-in-out;
-            opacity: 0.8;
+            animation: splash .3s normal forwards ease-in-out;
+            opacity: .8;
           }
         }
       }
