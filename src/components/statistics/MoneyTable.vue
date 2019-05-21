@@ -21,12 +21,12 @@
 
     <table class="table table_dotts-line">
       <thead>
-        <th>Date</th>
-        <th>Subscribers</th>
-        <th>Funding</th>
-        <th>Messages</th>
-        <th>Referrals</th>
-        <th>Total</th>
+        <th><span>Date</span></th>
+        <th><span>Subscribers</span></th>
+        <th><span>Funding</span></th>
+        <th><span>Messages</span></th>
+        <th><span>Referrals</span></th>
+        <th><span>Total</span></th>
       </thead>
       <tbody>
         <tr v-for="v in items" :key="v.id">
