@@ -1740,6 +1740,13 @@ export default {
       this.topFollowers = await response.json();
     },
     updateTotalBalance(data) {
+      if (!data || !data[0]) {
+        this.balance = {
+          data_current_balance: 0,
+          data_overall_payouts: 0
+        };
+        return;
+      }
       this.balance = data[0].message;
     },
     selectLine(name) {
