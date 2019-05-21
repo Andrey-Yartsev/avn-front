@@ -260,6 +260,29 @@
     }
   }
 
+  &-option {
+    border: none;
+    background: none;
+    padding: 0;
+    opacity: .5;
+    color: $main-color;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    margin-right: 20px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        opacity: 1;
+        color: $secondary-color;
+
+        .dark-theme & {
+          color: $main-color;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   .text {
     padding: 0 15px 4px;
     max-width: 100%;

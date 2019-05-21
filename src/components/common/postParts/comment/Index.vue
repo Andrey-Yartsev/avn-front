@@ -32,7 +32,7 @@
         >
         <button
           type="button"
-          class="btn-reply"
+          class="post-option btn-reply"
           @click="$emit('commentReply', comment)"
         >
           Reply
