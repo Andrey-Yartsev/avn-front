@@ -40,7 +40,7 @@
             </span>
           </p>
           <a
-            v-if="profile.twitterUsername"
+            v-if="profile.twitterUsername && profile.isPrivateTwitter"
             :href="'https://twitter.com/' + profile.twitterUsername"
             class="profile-twitter-link"
             target="_blank"
