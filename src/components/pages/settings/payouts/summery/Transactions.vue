@@ -10,12 +10,10 @@
               Transactions
             </span>
           </div>
-
-          <div class="border-top loader-container" v-if="loading">
-            <Loader :fullscreen="false" text="" class="transparent small" />
-          </div>
-
-          <div class="table-header transactions-table-header" v-if="!loading">
+          <div
+            class="table-header transactions-table-header"
+            v-if="items.length"
+          >
             <div
               class="date table__cell table__cell_align table__cell_align-hor-c"
             >
@@ -34,13 +32,13 @@
           </div>
         </div>
       </div>
-      <div class="shadow-block no-padding" v-if="!loading">
+      <div class="shadow-block no-padding" v-if="items.length">
         <div class="table-wrapper">
           <div class="table transactions-table">
             <div
               class="PayoutsTransactionsView"
-              v-for="v in items"
-              v-bind:key="v.n"
+              v-for="(v, i) in items"
+              :key="i"
             >
               <div class="item">
                 <div class="date table__cell">{{ dt(v.createdAt) }}</div>
@@ -68,6 +66,9 @@
           <div class="empty-table-info"><span>Empty here for now</span></div>
         </div>
       </div>
+      <div class="shadow-block loader-container" v-if="loading">
+        <Loader :fullscreen="false" text="" class="transparent small no-text" />
+      </div>
     </div>
   </div>
 </template>
@@ -75,39 +76,35 @@
 <script>
 import Loader from "@/components/common/Loader";
 import moment from "moment";
+import InfinityScroll from "@/mixins/infinityScroll";
 
 export default {
   name: "PayoutSettingsSummeryTransactions",
-
+  mixins: [InfinityScroll],
   components: {
     Loader
   },
-
   computed: {
+    store() {
+      return this.$store.state.payouts.transactions;
+    },
     loading() {
-      return this.$store.state.payouts.transactions.fetchLoading;
+      return this.$store.state.payouts.transactions.loading;
     },
     items() {
-      if (!this.$store.state.payouts.transactions.fetchResult) {
-        return [];
-      }
-      let n = 1;
-      return this.$store.state.payouts.transactions.fetchResult.list.map(v => {
-        n++;
-        v.id = n;
-        return v;
-      });
+      return this.$store.state.payouts.transactions.list;
     }
   },
-
   methods: {
     dt(date) {
       return moment(date).format("MMM DD, HH:mm");
+    },
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("payouts/transactions/fetch");
     }
   },
-
   created() {
-    this.$store.dispatch("payouts/transactions/fetch");
+    this.$store.dispatch("payouts/transactions/firstFetch");
   }
 };
 </script>
