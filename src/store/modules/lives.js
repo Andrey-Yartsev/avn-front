@@ -49,13 +49,27 @@ const mutations = {
   },
 
   look(state, look) {
+    const prevLook = state.currentLive.comments.filter(comment => {
+      const commentUser = comment.user || comment.guest;
+      const lookUser = look.user || look.guest;
+
+      return (
+        comment.type === "look" &&
+        commentUser.id === lookUser.id &&
+        Date.now() - comment.canShowAnother < 0
+      );
+    });
+
+    if (prevLook.length) return;
+
     state.currentLive.comments = [
       ...state.currentLive.comments,
       {
         ...look,
         type: "look",
         comment: "has joined",
-        hideTime: Date.now() + 60 * 1000
+        hideTime: Date.now() + 60 * 1000,
+        canShowAnother: Date.now() + 180 * 1000
       }
     ];
     state.currentLive.looksCount += 1;
