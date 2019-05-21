@@ -47,9 +47,9 @@
             <span class="likes">{{ post.favoritesCount }}</span>
             <span class="comments">{{ post.commentsCount }}</span>
           </span>
-          <span class="explore-media__name" v-if="!shouldBePoster">{{
-            post.author.name
-          }}</span>
+          <span class="explore-media__name" v-if="!shouldBePoster">
+            <span class="name">{{ post.author.name }}</span>
+          </span>
           <div
             class="video-placeholder"
             v-if="page === 'all' && shouldBePoster"
