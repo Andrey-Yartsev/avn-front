@@ -76,8 +76,10 @@
                       selectedLineName === 'followers'
                   }"
                   ref="count_followers_current_followers"
-                ><div class="tab-stat__name">Followers</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Followers</div>
+                  <span>0</span>
+                </div>
                 <div
                   class="tab-stat tab-views"
                   @click="selectLine('followers-subscribers')"
@@ -87,8 +89,10 @@
                       selectedLineName === 'subscribers'
                   }"
                   ref="count_followers_current_subscribers"
-                ><div class="tab-stat__name">Subscribers</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Subscribers</div>
+                  <span>0</span>
+                </div>
               </div>
               <div
                 id="followers_chart"
@@ -111,8 +115,10 @@
                       selectedLineName === 'posts'
                   }"
                   ref="count_posts_new_post"
-                ><div class="tab-stat__name">Posts</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Posts</div>
+                  <span>0</span>
+                </div>
                 <div
                   class="tab-stat tab-views"
                   @click="selectLine('posts-views')"
@@ -122,8 +128,10 @@
                       selectedLineName === 'views'
                   }"
                   ref="count_posts_view_post"
-                ><div class="tab-stat__name">Views</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Views</div>
+                  <span>0</span>
+                </div>
                 <div
                   class="tab-stat tab-likes"
                   @click="selectLine('posts-likes')"
@@ -133,8 +141,10 @@
                       selectedLineName === 'likes'
                   }"
                   ref="count_posts_post_like"
-                ><div class="tab-stat__name">Likes</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Likes</div>
+                  <span>0</span>
+                </div>
                 <div
                   class="tab-stat tab-comments"
                   @click="selectLine('posts-comments')"
@@ -144,8 +154,10 @@
                       selectedLineName === 'comments'
                   }"
                   ref="count_posts_post_comment_added"
-                ><div class="tab-stat__name">Comments</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Comments</div>
+                  <span>0</span>
+                </div>
               </div>
               <div
                 id="posts_chart"
@@ -168,8 +180,10 @@
                       selectedLineName === 'uploads'
                   }"
                   ref="count_stories_story_added"
-                  ><div class="tab-stat__name">Uploaded</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Uploaded</div>
+                  <span>0</span>
+                </div>
                 <div
                   class="tab-stat tab-views"
                   @click="selectLine('stories-views')"
@@ -179,8 +193,10 @@
                       selectedLineName === 'views'
                   }"
                   ref="count_stories_story_view"
-                ><div class="tab-stat__name">Views</div><span>0</span></div
                 >
+                  <div class="tab-stat__name">Views</div>
+                  <span>0</span>
+                </div>
                 <!--<span class=comments ref="chartsDataStoriesComments">Comments<span>0</span></span>-->
               </div>
               <div
@@ -198,18 +214,27 @@
           <div class="box">
             <div class="charts-wrapper-outer">
               <div class="charts-data">
-                <div class="tab-stat tab-posts" ref="count_earnings_paid_subscriptions"
-                  >Subscribers <span>0</span></div
+                <div
+                  class="tab-stat tab-posts"
+                  ref="count_earnings_paid_subscriptions"
                 >
-                <div class="tab-stat tab-views" ref="count_earnings_tips"
-                >Funding <span>0</span></div
+                  Subscribers <span>0</span>
+                </div>
+                <div class="tab-stat tab-views" ref="count_earnings_tips">
+                  Funding <span>0</span>
+                </div>
+                <div
+                  class="tab-stat tab-likes"
+                  ref="count_earnings_paid_chat_messages"
                 >
-                <div class="tab-stat tab-likes" ref="count_earnings_paid_chat_messages"
-                >Message <span>0</span></div
+                  Message <span>0</span>
+                </div>
+                <div
+                  class="tab-stat tab-comments"
+                  ref="count_earnings_earn_referral"
                 >
-                <div class="tab-stat tab-comments" ref="count_earnings_earn_referral"
-                >Referrals <span>0</span></div
-                >
+                  Referrals <span>0</span>
+                </div>
               </div>
               <div
                 id="earnings_chart"
@@ -1055,7 +1080,13 @@ export default {
         postfix = "";
       }
       this.$refs[ref].innerHTML =
-        "<div class='tab-stat__name'>" + title + "</div>" + "<span>" + postfix + value + "</span>";
+        "<div class='tab-stat__name'>" +
+        title +
+        "</div>" +
+        "<span>" +
+        postfix +
+        value +
+        "</span>";
     },
     updateChart(chart, statData, dataProviderKey, statDataSubKey) {
       const chartId = chart.div.id;
