@@ -179,9 +179,9 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      flex-direction: row;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        flex-direction: row;
         overflow: hidden;
       }
     }
