@@ -10,10 +10,7 @@
             <span class="semi-transparent">
               Payouts Statements
             </span>
-            <button
-              @click="withdrawRequest"
-              :disabled="withdrawRequesting"
-            >
+            <button @click="withdrawRequest" :disabled="withdrawRequesting">
               Withdraw Request
             </button>
           </div>
