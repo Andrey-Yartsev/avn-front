@@ -1,6 +1,5 @@
+
 .tribute-container {
-
-
   position: absolute;
   top: 0;
   left: 0;
@@ -10,29 +9,6 @@
   border-radius: 5px;
   display: none;
   transform: translateY(3px);
-  //transform: translate(-15px, 10px);
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    //transform: translateX(-25px);
-  }
-
-  /*
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -9px;
-    left: 32px;
-    background-color: $white;
-    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
-    width: 17px;
-    height: 17px;
-    transform: translate(0, 0) rotate(45deg);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  */
 
   ul {
     margin: 0;
