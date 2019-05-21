@@ -241,6 +241,17 @@
       background: $white
       linear-gradient(30deg, $secondary-color-06 10%, $primary-color-06 90%)
       fixed;
+
+      &:before {
+        background: $light;
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.3;
+      }
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -253,19 +264,7 @@
       padding: 60px 0 0;
       margin-top: 0;
       margin-bottom: 0;
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      &:before {
-        background: $light;
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.3;
-      }
+      overflow: visible;
     }
 
     &.popup-addPost {
