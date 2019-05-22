@@ -14,7 +14,9 @@ export default {
       `${process.env.VUE_APP_API_URL}/proxy/twitter` +
       `?return_url=${window.location.origin}/twitter` +
       `&callback=${process.env.VUE_APP_API_URL}/proxy/twitter` +
-      "&response_type=token"
+      "&response_type=token" +
+      "&user_avn_tz=" +
+      Intl.DateTimeFormat().resolvedOptions().timeZone
     );
   },
 
