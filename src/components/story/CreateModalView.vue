@@ -23,7 +23,7 @@
                     >
                   </button>
                   <button
-                    class="newStory btn hidden-desktop"
+                    class="newStory btn sm hidden-desktop"
                     v-if="$mq === 'mobile'"
                     @click.prevent="createNewStory"
                   >

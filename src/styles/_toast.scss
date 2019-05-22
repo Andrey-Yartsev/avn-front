@@ -1,15 +1,18 @@
 @import "components/imports";
 
 .jq-toast-wrap {
+  color: var(--white);
 
   .jq-icon-success {
-    background-color: $primary-color;
-    color: var(--white);
+    background-color: map_get($colors, 4);
   }
 
   .jq-icon-error {
-    background-color: $secondary-color;
-    color: var(--white);
+    background-color: map_get($colors, 6);
+  }
+
+  .jq-icon-warning {
+    background-color: map_get($colors, 8);
   }
 
   .jq-has-icon {
