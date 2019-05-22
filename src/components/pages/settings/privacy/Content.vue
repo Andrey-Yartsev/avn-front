@@ -241,10 +241,9 @@ export default {
     },
     save() {
       if (!this.$refs.blocking.isFormValid) {
-        this.$store.dispatch(
-          "global/flashToast",
-          "Please, fix IP & Geo Blocking validation"
-        );
+        this.$store.dispatch("global/flashToast", {
+          text: "Please, fix IP & Geo Blocking validation"
+        });
         return;
       }
       this.$store.dispatch("profile/update", this.localUser);

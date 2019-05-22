@@ -80,7 +80,7 @@ export default {
       if (!error) {
         return;
       }
-      this.$store.dispatch("global/flashToast", error.message);
+      this.$store.dispatch("global/flashToast", { text: error.message });
     }
   },
 

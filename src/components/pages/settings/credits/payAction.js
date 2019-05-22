@@ -12,10 +12,9 @@ export default {
   methods: {
     _pay(payload, _onSuccess) {
       if (!this.user.isPaymentCardConnected) {
-        this.$store.dispatch(
-          "global/flashToast",
-          "You should add card in payment settings"
-        );
+        this.$store.dispatch("global/flashToast", {
+          text: "You should add card in payment settings"
+        });
         Router.push("/settings/payments");
         return;
       }
@@ -44,7 +43,7 @@ export default {
     },
     _error(error) {
       this.progress = false;
-      this.$store.dispatch("global/flashToast", error.message);
+      this.$store.dispatch("global/flashToast", { text: error.message });
     }
   },
   mounted() {

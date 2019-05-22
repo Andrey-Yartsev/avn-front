@@ -153,7 +153,9 @@ export default {
   methods: {
     copyToClipboard() {
       this.$copyText(this.url).then(() => {
-        this.$store.dispatch("global/flashToast", "Referral URL copied!");
+        this.$store.dispatch("global/flashToast", {
+          text: "Referral URL copied!"
+        });
       });
     },
     time(date) {

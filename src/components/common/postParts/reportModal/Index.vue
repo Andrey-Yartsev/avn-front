@@ -91,9 +91,13 @@ export default {
 
       this.close();
 
-      this.$store.dispatch("global/flashToast", "Report has been sent", {
-        root: true
-      });
+      this.$store.dispatch(
+        "global/flashToast",
+        { text: "Report has been sent" },
+        {
+          root: true
+        }
+      );
     }
   }
 };

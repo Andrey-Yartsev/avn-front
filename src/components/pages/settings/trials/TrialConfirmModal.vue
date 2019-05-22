@@ -76,10 +76,9 @@ export default {
     async yes() {
       this.sendTrialStatus("approved")
         .then(() => {
-          this.$store.dispatch(
-            "global/flashToast",
-            "You have subscribed successfully"
-          );
+          this.$store.dispatch("global/flashToast", {
+            text: "You have subscribed successfully"
+          });
           this.$router.push("/" + this.model.username);
         })
         .catch(() => {});

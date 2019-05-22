@@ -175,10 +175,9 @@ export default {
       this.$store.dispatch("profile/home/extend", {
         subscribedByProgress: true
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have unsubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have unsubscribed successfully"
+      });
       this.$store.commit("profile/home/resetPosts");
       this.$store.dispatch("profile/home/getPosts");
     },
@@ -186,10 +185,9 @@ export default {
       this.$store.dispatch("profile/home/extend", {
         subscribedByProgress: false
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have resubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have resubscribed successfully"
+      });
       this.$store.commit("profile/home/resetPosts");
       this.$store.dispatch("profile/home/getPosts");
     },

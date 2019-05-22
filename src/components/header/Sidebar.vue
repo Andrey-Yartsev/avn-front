@@ -118,7 +118,9 @@ export default {
     copyToClipboard() {
       this.$copyText(window.location.origin + "/" + this.user.username).then(
         () => {
-          this.$store.dispatch("global/flashToast", "Profile link copied!");
+          this.$store.dispatch("global/flashToast", {
+            text: "Profile link copied!"
+          });
         }
       );
     },

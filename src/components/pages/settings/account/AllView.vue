@@ -241,7 +241,7 @@ export default {
       if (!error) {
         return;
       }
-      this.$store.dispatch("global/flashToast", error.message);
+      this.$store.dispatch("global/flashToast", { text: error.message });
     }
   },
 
@@ -259,10 +259,9 @@ export default {
         })
         .then(() => {
           this.passwordSaving = false;
-          this.$store.dispatch(
-            "global/flashToast",
-            "Password has changed successfully"
-          );
+          this.$store.dispatch("global/flashToast", {
+            text: "Password has changed successfully"
+          });
           this.checkPassword = "";
           this.newPassword = "";
           this.oldPassword = "";
@@ -289,7 +288,7 @@ export default {
     },
     resendEmail() {
       this.$store.dispatch("emails/resend", this.localUser.email).then(() => {
-        this.$store.dispatch("global/flashToast", "Email sent");
+        this.$store.dispatch("global/flashToast", { text: "Email sent" });
       });
     }
   }

@@ -179,10 +179,9 @@ export default {
       this.$store.dispatch("profile/home/extend", {
         subscribedByProgress: true
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have unsubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have unsubscribed successfully"
+      });
     },
     resubscribed(result) {
       if (!result.success) {
@@ -191,10 +190,9 @@ export default {
       this.$store.dispatch("profile/home/extend", {
         subscribedByProgress: false
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have resubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have resubscribed successfully"
+      });
     },
     getPosts() {
       this.$store.dispatch("followers/getPosts", { type: this.page });

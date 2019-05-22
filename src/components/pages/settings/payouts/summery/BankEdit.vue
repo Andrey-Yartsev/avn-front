@@ -136,10 +136,9 @@ export default {
         if (r.error) {
           return;
         }
-        this.$store.dispatch(
-          "global/flashToast",
-          "Bank info saved successfully"
-        );
+        this.$store.dispatch("global/flashToast", {
+          text: "Bank info saved successfully"
+        });
         this.saving = false;
         this.cancel();
       });

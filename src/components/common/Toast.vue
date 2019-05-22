@@ -1,8 +1,8 @@
 <template>
   <div class="jq-toast-wrap">
     <div
-      class="jq-toast-single jq-has-icon jq-icon-success"
-      :class="{ 'jq-toast-hide': hide }"
+      class="jq-toast-single jq-has-icon"
+      :class="classes"
       style="text-align: left;"
     >
       <span
@@ -27,6 +27,16 @@ export default {
   computed: {
     text() {
       return this.$store.state.global.toastText;
+    },
+    type() {
+      return this.$store.state.global.toastType;
+    },
+    classes() {
+      const r = {
+        "jq-toast-hide": this.hide
+      };
+      r["jq-icon-" + this.type] = true;
+      return r;
     }
   },
   mounted() {

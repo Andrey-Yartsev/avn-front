@@ -271,10 +271,9 @@ export default {
       }
       if (process.env.VUE_APP_NAME === "avn") {
         if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch(
-            "global/flashToast",
-            "You should add card in payment settings"
-          );
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings"
+          });
           this.$router.push("/settings/payments");
           return;
         }

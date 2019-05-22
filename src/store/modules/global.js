@@ -19,8 +19,8 @@ const state = {
 };
 
 const actions = {
-  flashToast({ commit }, text) {
-    commit("toastShowTrigger", text);
+  flashToast({ commit }, { text, type }) {
+    commit("toastShowTrigger", { text, type });
   },
 
   setError({ commit }, error) {
@@ -53,9 +53,14 @@ const actions = {
 };
 
 const mutations = {
-  toastShowTrigger(state, text) {
+  toastShowTrigger(state, { text, type }) {
     state.toastShowTrigger = !state.toastShowTrigger;
     state.toastText = text;
+    if (!type) {
+      state.toastType = "success";
+    } else {
+      state.toastType = type;
+    }
   },
 
   setError(state, error) {

@@ -567,9 +567,13 @@ export default {
         postId: this.currentStory.id
       });
 
-      this.$store.dispatch("global/flashToast", "Story deleted", {
-        root: true
-      });
+      this.$store.dispatch(
+        "global/flashToast",
+        { text: "Story deleted" },
+        {
+          root: true
+        }
+      );
 
       if (this.currIndex === this.length - 1) {
         this.close();

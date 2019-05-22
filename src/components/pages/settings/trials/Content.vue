@@ -54,7 +54,9 @@ export default {
     generateCode() {
       this.$store.dispatch("trial/getCode").then(() => {
         this.$copyText(this.link);
-        this.$store.dispatch("global/flashToast", "Trial URL copied!");
+        this.$store.dispatch("global/flashToast", {
+          text: "Trial URL copied!"
+        });
       });
     }
   }

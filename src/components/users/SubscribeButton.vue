@@ -45,10 +45,9 @@ export default {
         userId: this.profile.id,
         data: { subscribedByProgress: true }
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have unsubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have unsubscribed successfully"
+      });
     },
     resubscribed(result) {
       if (!result.success) {
@@ -59,10 +58,9 @@ export default {
         userId: this.profile.id,
         data: { subscribedByProgress: false }
       });
-      this.$store.dispatch(
-        "global/flashToast",
-        "You have resubscribed successfully"
-      );
+      this.$store.dispatch("global/flashToast", {
+        text: "You have resubscribed successfully"
+      });
     }
   }
 };

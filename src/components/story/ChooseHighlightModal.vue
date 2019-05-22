@@ -104,7 +104,7 @@ export default {
         .then(() => {
           this.$store.dispatch(
             "global/flashToast",
-            "Story added to collection",
+            { text: "Story added to collection" },
             {
               root: true
             }

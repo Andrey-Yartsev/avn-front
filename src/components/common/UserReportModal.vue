@@ -109,7 +109,9 @@ export default {
         userId: this.userId,
         reasonId: this.reason
       });
-      this.$store.dispatch("global/flashToast", "Report has been sent");
+      this.$store.dispatch("global/flashToast", {
+        text: "Report has been sent"
+      });
       this.close();
     },
     close() {
