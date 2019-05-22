@@ -1142,7 +1142,7 @@
   overflow: hidden;
   transition: all .2s;
   top: 88px;
-  background-color: #fff;
+  background-color: $white;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 50px;
