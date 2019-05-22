@@ -86,7 +86,8 @@ export default {
               this.save();
             } else {
               this.$store.dispatch("global/flashToast", {
-                text: "Required width from 100px to 300px"
+                text: "Required width from 100px to 300px",
+                type: "error"
               });
             }
           }
@@ -101,7 +102,10 @@ export default {
         this.uploaded = true;
         this.$emit("change", fileName);
       } catch (error) {
-        this.$store.dispatch("global/flashToast", { text: error.message });
+        this.$store.dispatch("global/flashToast", {
+          text: error.message,
+          type: "error"
+        });
         this.preview = null;
       }
       this.uploading = false;
