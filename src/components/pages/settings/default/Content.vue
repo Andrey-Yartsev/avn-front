@@ -95,6 +95,23 @@
               </div>
             </div>
           </div>
+          <div class="form-group form-group_with-label gender-options">
+            <label class="form-group-inner">
+              <span class="label">Time Zone</span>
+              <div class="row">
+                <div class="col-1-2">
+                  <div class="select-wrapper">
+                    <select name="userTZ" v-model="localUser.userTZ">
+                      <option value="">Not specified</option>
+                      <option :value="v" v-for="v in tz" :key="v">
+                        {{ v }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
       <div class="toggle-wrapper border-top option-earn-money">
@@ -209,6 +226,7 @@
 import ColorSelect from "./ColorSelect";
 import Common from "../common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
+import moment from "moment-timezone";
 
 export default {
   name: "ProfileSettingsContent",
@@ -254,6 +272,9 @@ export default {
         return true;
       }
       return !!this.subscribePrice.toString().match(/^\d+(\.\d+)?$/);
+    },
+    tz() {
+      return moment.tz.names();
     }
   },
 
