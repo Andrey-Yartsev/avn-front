@@ -8,6 +8,14 @@
         class="payouts-account-form border-top"
         v-on:submit.stop.prevent="save"
       >
+        <button
+          :disabled="!isValid"
+          type="submit"
+          class="btn lg btn_fix-width saveChanges"
+          v-if="!loading && $mq === 'mobile'"
+        >
+          Next
+        </button>
         <div class="wrapper-payouts-bg">
           <div
             class="container payouts-account-country shadow-block"
@@ -46,11 +54,12 @@
                 </span>
               </label>
               <label class="form-group-inner">
-                <span class="label"></span>
+                <span class="label" v-if="$mq === 'desktop'"></span>
                 <button
                   :disabled="!isValid"
                   type="submit"
                   class="btn lg btn_fix-width saveChanges"
+                  v-if="$mq === 'desktop'"
                 >
                   Next
                 </button>
