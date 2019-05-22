@@ -174,7 +174,7 @@
               </div>
             </div>
 
-            <div class="form-group form-group_with-label country-select">
+            <div class="form-group form-group_with-label disabled country-select">
               <label class="form-group-inner">
                 <span class="label country-select__label">Country</span>
                 <span class="select-wrapper">
