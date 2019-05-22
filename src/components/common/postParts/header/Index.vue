@@ -2,38 +2,38 @@
   <div class="post-header">
     <router-link
       class="avatar avatar_gap-r-sm avatar_sm"
-      :to="'/' + user.username"
+      :to="'/' + postUser.username"
     >
       <span class="avatar__img">
-        <img v-if="user.avatar" :src="user.avatar" />
+        <img v-if="postUser.avatar" :src="postUser.avatar" />
       </span>
     </router-link>
     <a
       class="name"
-      :href="'/' + user.username"
+      :href="'/' + postUser.username"
       ref="name"
-      @click.prevent="$router.push('/' + user.username)"
+      @click.prevent="$router.push('/' + postUser.username)"
       @mouseover="showBubble"
       @mouseout="hideBubble"
-      >{{ user.name }}</a
+      >{{ postUser.name }}</a
     >
-    <template v-if="user.isVerified">
+    <template v-if="postUser.isVerified">
       <span class="verified-user"></span>
     </template>
     <span class="user-login">
       <a
-        :href="'/' + user.username"
-        @click.prevent="$router.push('/' + user.username)"
+        :href="'/' + postUser.username"
+        @click.prevent="$router.push('/' + postUser.username)"
         @mouseover="showBubble"
         @mouseout="hideBubble"
-        >{{ user.username }}</a
+        >{{ postUser.username }}</a
       >
     </span>
     <span class="follow-link hidden">Follow</span>
     <time class="timestamp" v-if="datetime">
       {{ datetime }}
     </time>
-    <span v-if="post.isPinned" class="post-pinned"></span>
+    <span v-if="post.isPinned && isAuth()" class="post-pinned" />
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open">
@@ -56,9 +56,11 @@
 import Dropdown from "./Dropdown";
 import ClickOutside from "vue-click-outside";
 import Bubble from "@/helpers/userBubble";
+import UserMixin from "@/mixins/user";
 
 export default {
   name: "Header",
+  mixins: [UserMixin],
   components: {
     Dropdown
   },
@@ -87,7 +89,7 @@ export default {
     postId() {
       return this.post.id;
     },
-    user() {
+    postUser() {
       return this.post.author;
     }
   },
@@ -103,7 +105,7 @@ export default {
     showBubble() {
       Bubble.open({
         a: this.$refs.name,
-        username: this.user.username
+        username: this.postUser.username
       });
     },
     hideBubble() {
