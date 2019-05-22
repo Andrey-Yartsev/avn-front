@@ -1,148 +1,29 @@
 @import "components/imports";
 
+$colorsConst: (
+  item1: linear-gradient(30deg, rgba(33, 150, 243, 1) 10%, rgba(255, 64, 129, 1) 90%),
+  item2: linear-gradient(30deg, rgba(179, 41, 176, 1) 10%, rgba(255, 64, 129, 1) 90%),
+  item3: linear-gradient(30deg, rgba(255, 165, 11, 1) 10%, rgba(255, 51, 65, 1) 90%),
+  item4: linear-gradient(30deg, rgba(115, 230, 143, 1) 10%, rgba(33, 150, 243, 1) 90%),
+  item5: linear-gradient(30deg, rgba(50, 200, 250, 1) 10%, rgba(148, 102, 255, 1) 90%)
+);
+
 .options-color-definition {
 
   .option {
-    &-1 {
-      &:after {
-        background: map_get($colors, 1);
-      }
 
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 1), 0.5);
+    @for $i from 1 to 13 {
+
+      &-#{$i} {
+
+        &:after {
+          background: map_get($colors, $i);
         }
-      }
-    }
 
-    &-2 {
-      &:after {
-        background: map_get($colors, 2);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 2), 0.5);
-        }
-      }
-    }
-
-    &-3 {
-      &:after {
-        background: map_get($colors, 3);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 3), 0.5);
-        }
-      }
-    }
-
-    &-4 {
-      &:after {
-        background: map_get($colors, 4);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 4), 0.5);
-        }
-      }
-    }
-
-    &-5 {
-      &:after {
-        background: map_get($colors, 5);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 5), 0.5);
-        }
-      }
-    }
-
-    &-6 {
-      &:after {
-        background: map_get($colors, 6);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 6), 0.5);
-        }
-      }
-    }
-
-    &-7 {
-      &:after {
-        background: map_get($colors, 7);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 7), 0.5);
-        }
-      }
-    }
-
-    &-8 {
-      &:after {
-        background: map_get($colors, 8);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 8), 0.5);
-        }
-      }
-    }
-
-    &-9 {
-      &:after {
-        background: map_get($colors, 9);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 9), 0.5);
-        }
-      }
-    }
-
-    &-10 {
-      &:after {
-        background: map_get($colors, 10);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 10), 0.5);
-        }
-      }
-    }
-
-    &-11 {
-      &:after {
-        background: map_get($colors, 11);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 11), 0.5);
-        }
-      }
-    }
-
-    &-12 {
-      &:after {
-        background: map_get($colors, 12);
-      }
-
-      &.active {
-        &:before {
-          box-shadow: 0 0 0 2px rgba(map_get($colors, 12), 0.5);
+        &.active {
+          &:before {
+            box-shadow: 0 0 0 2px rgba(map_get($colors, $i), 0.5);
+          }
         }
       }
     }
@@ -164,13 +45,24 @@
         }
       }
 
+      //@each $k, $color in $colorsConst {
+      //
+      //  &-#{$k} {
+      //
+      //    &:before,
+      //    &:after {
+      //      background: $color;
+      //    }
+      //  }
+      //}
+
       &-1 {
         &:before,
         &:after {
           background: linear-gradient(
-                          30deg,
-                          rgba(33, 150, 243, 1) 10%,
-                          rgba(255, 64, 129, 1) 90%
+            30deg,
+            rgba(33, 150, 243, 1) 10%,
+            rgba(255, 64, 129, 1) 90%
           );
         }
       }
@@ -179,9 +71,9 @@
         &:before,
         &:after {
           background: linear-gradient(
-                          30deg,
-                          rgba(179, 41, 176, 1) 10%,
-                          rgba(255, 64, 129, 1) 90%
+            30deg,
+            rgba(179, 41, 176, 1) 10%,
+            rgba(255, 64, 129, 1) 90%
           );
         }
       }
@@ -190,9 +82,9 @@
         &:before,
         &:after {
           background: linear-gradient(
-                          30deg,
-                          rgba(255, 165, 11, 1) 10%,
-                          rgba(255, 51, 65, 1) 90%
+            30deg,
+            rgba(255, 165, 11, 1) 10%,
+            rgba(255, 51, 65, 1) 90%
           );
         }
       }
@@ -201,9 +93,9 @@
         &:before,
         &:after {
           background: linear-gradient(
-                          30deg,
-                          rgba(115, 230, 143, 1) 10%,
-                          rgba(33, 150, 243, 1) 90%
+            30deg,
+            rgba(115, 230, 143, 1) 10%,
+            rgba(33, 150, 243, 1) 90%
           );
         }
       }
@@ -212,9 +104,9 @@
         &:before,
         &:after {
           background: linear-gradient(
-                          30deg,
-                          rgba(50, 200, 250, 1) 10%,
-                          rgba(148, 102, 255, 1) 90%
+            30deg,
+            rgba(50, 200, 250, 1) 10%,
+            rgba(148, 102, 255, 1) 90%
           );
         }
       }
@@ -224,199 +116,49 @@
   &_bgs {
 
     .option {
-      &-1 {
-        &:after {
-          background: map_get($stories_colors, 1);
-        }
 
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 1), 0.5);
-          }
-        }
-      }
+      @for $i from 1 to 16 {
 
-      &-2 {
-        &:after {
-          background: map_get($stories_colors, 2);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 2), 0.5);
-          }
-        }
-      }
-
-      &-3 {
-        &:after {
-          background: map_get($stories_colors, 3);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 3), 0.5);
-          }
-        }
-      }
-
-      &-4 {
-        &:after {
-          background: map_get($stories_colors, 4);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 4), 0.5);
-          }
-        }
-      }
-
-      &-5 {
-        &:after {
-          background: map_get($stories_colors, 5);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 5), 0.5);
-          }
-        }
-      }
-
-      &-6 {
-        &:after {
-          background: map_get($stories_colors, 6);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 6), 0.5);
-          }
-        }
-      }
-
-      &-7 {
-        &:after {
-          background: map_get($stories_colors, 7);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 7), 0.5);
-          }
-        }
-      }
-
-      &-8 {
-        &:after {
-          background: map_get($stories_colors, 8);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 8), 0.5);
-          }
-        }
-      }
-
-      &-9 {
-        &:after {
-          background: map_get($stories_colors, 9);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 9), 0.5);
-          }
-        }
-      }
-
-      &-10 {
-        &:after {
-          background: map_get($stories_colors, 10);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 10), 0.5);
-          }
-        }
-      }
-
-      &-11 {
-        &:after {
-          background: map_get($stories_colors, 11);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 11), 0.5);
-          }
-        }
-      }
-
-      &-12 {
-        &:after {
-          background: map_get($stories_colors, 12);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 12), 0.5);
-          }
-        }
-      }
-
-      &-13 {
-        &:before {
-          box-shadow: 0 0 0 2px rgba($main, 0.2);
-          opacity: 0;
-        }
-
-        &:after {
-          background: map_get($stories_colors, 13);
-          box-shadow: 0 0 0 2px rgba($main, 0.2);
-          width: 18px;
-          height: 18px;
-        }
-
-        &.active {
-          &:before {
-            opacity: 1;
-          }
+        &-#{$i} {
 
           &:after {
-            box-shadow: 0 0 0 2px rgba($main, 0.2);
-            width: 16px;
-            height: 16px;
+            background: map_get($stories_colors,  $i);
+          }
+
+          &.active {
+            &:before {
+              box-shadow: 0 0 0 2px rgba(map_get($stories_colors, $i), 0.5);
+            }
           }
         }
       }
 
-      &-14 {
-        &:after {
-          background: map_get($stories_colors, 14);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 14), 0.5);
-          }
-        }
-      }
-
-      &-15 {
-        &:after {
-          background: map_get($stories_colors, 15);
-        }
-
-        &.active {
-          &:before {
-            box-shadow: 0 0 0 2px rgba(map_get($stories_colors, 15), 0.5);
-          }
-        }
-      }
+      // Dont remove this part - its for unrealized functional
+      //&-13 {
+      //  &:before {
+      //    box-shadow: 0 0 0 2px rgba($main, 0.2);
+      //    opacity: 0;
+      //  }
+      //
+      //  &:after {
+      //    background: map_get($stories_colors, 13);
+      //    box-shadow: 0 0 0 2px rgba($main, 0.2);
+      //    width: 18px;
+      //    height: 18px;
+      //  }
+      //
+      //  &.active {
+      //    &:before {
+      //      opacity: 1;
+      //    }
+      //
+      //    &:after {
+      //      box-shadow: 0 0 0 2px rgba($main, 0.2);
+      //      width: 16px;
+      //      height: 16px;
+      //    }
+      //  }
+      //}
     }
   }
 }
