@@ -35,9 +35,10 @@
         <div
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
+          v-if="selectedChats.length"
         >
           <component :is="scrollableComponent" class="all-contacts-found">
-            <div class="selectedContacts" v-if="selected.length">
+            <div class="selectedContacts">
               <div
                 class="chatSelectedView"
                 v-for="v in selectedChats"
