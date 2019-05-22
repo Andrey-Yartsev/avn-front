@@ -13,6 +13,7 @@ createRequestAction({
   apiPath: "init",
   requestType: "no-token",
   resultKey: "data",
+  defaultLoading: true,
   state,
   mutations,
   actions,
