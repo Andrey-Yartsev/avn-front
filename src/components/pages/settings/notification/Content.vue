@@ -7,6 +7,24 @@
       <div class="form-title border-top">
         <div class="inner">
           <span class="semi-transparent">
+            Push Notifications
+            <p class="subtext">Receive WebPush about</p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="webPushes"
+              v-model="webPushes"
+              :disabled="disableBtn"
+              @change="changeWP"
+            />
+            <span></span>
+          </label>
+        </div>
+      </div>
+      <div class="form-title border-top">
+        <div class="inner">
+          <span class="semi-transparent">
             Receive Email Notifications
           </span>
           <label class="toggle-element">
@@ -201,10 +219,10 @@
 
 <script>
 import Common from "../common";
+import webPushNotifications from "@/mixins/webPushNotifications";
 
 export default {
   name: "NotificationSettingsContent",
-
-  mixins: [Common]
+  mixins: [Common, webPushNotifications]
 };
 </script>
