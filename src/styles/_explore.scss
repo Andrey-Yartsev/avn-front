@@ -334,6 +334,10 @@
           background-color: $white;
           position: relative;
           max-width: 100vw;
+
+          &:last-child {
+            border-bottom: none;
+          }
         }
 
         &:not(.open-dropdown-inside) {
