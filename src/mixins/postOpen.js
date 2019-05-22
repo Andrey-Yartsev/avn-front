@@ -2,11 +2,21 @@ export default {
   computed: {
     delayedPost() {
       return !!this.post.scheduledDate;
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   methods: {
     openModal() {
       if (this.delayedPost) {
+        return;
+      }
+
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login"
+        });
         return;
       }
 
