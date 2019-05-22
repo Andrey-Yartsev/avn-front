@@ -45,10 +45,10 @@ export default {
       this.loaded = true;
     }, 500);
     setTimeout(() => {
-      //this.hide = true;
+      this.hide = true;
     }, 3000);
     setTimeout(() => {
-      //this.$emit("hide");
+      this.$emit("hide");
     }, 3500);
   }
 };
