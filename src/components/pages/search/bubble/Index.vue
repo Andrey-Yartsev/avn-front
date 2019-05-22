@@ -161,6 +161,10 @@ export default {
       this.open();
     },
     _search() {
+      if (!this.localQuery) {
+        this.$store.commit("search/bubble/reset");
+        return;
+      }
       if (!this.localQuery.trim()) {
         this.$store.commit("search/bubble/reset");
         return;
