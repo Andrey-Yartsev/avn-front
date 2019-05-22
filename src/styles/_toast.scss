@@ -4,15 +4,15 @@
   color: var(--white);
 
   .jq-icon-success {
-    background-color: map_get($colors, 4);
+    background-color: map_get($colors, 8);
   }
 
   .jq-icon-error {
-    background-color: map_get($colors, 6);
+    background-color: map_get($colors, 4);
   }
 
   .jq-icon-warning {
-    background-color: map_get($colors, 8);
+    background-color: map_get($colors, 6);
   }
 
   .jq-has-icon {
