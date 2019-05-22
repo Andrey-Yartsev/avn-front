@@ -37,7 +37,9 @@
             <span class="avatar__img">
               <img v-if="profile.avatar" :src="profile.avatar" />
             </span>
-            <!--<div class="stream-online-label">live</div>-->
+            <div class="stream-online-label" v-if="!!profile.currentStream">
+              live
+            </div>
           </div>
           <div class="names-actions-wrapper">
             <div class="user-names">
