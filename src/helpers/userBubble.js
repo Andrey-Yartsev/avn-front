@@ -8,7 +8,11 @@ const _hide = () => {
   Store.dispatch("userBubble/hide");
 };
 
-const _open = (a, bubble) => {
+const _open = ({ a, username }) => {
+  if (!window.userBubble) {
+    window.userBubble = document.getElementById("user-bubble");
+  }
+  const bubble = window.userBubble;
   const r = a.getBoundingClientRect();
   let up = false;
   if (r.bottom > window.innerHeight - 200) {
@@ -19,7 +23,10 @@ const _open = (a, bubble) => {
   }
   bubble.style.visibility = "hidden";
   bubble.style.left = r.left + "px";
-  Store.dispatch("userBubble/open", a.innerText.replace(/@(.*)/, "$1"));
+  if (!username) {
+    username = a.innerText.replace(/@(.*)/, "$1");
+  }
+  Store.dispatch("userBubble/open", username);
   setTimeout(() => {
     if (up) {
       const h = bubble.getBoundingClientRect().height;
@@ -35,14 +42,11 @@ const _open = (a, bubble) => {
 };
 
 export default {
-  open(a, bubble) {
-    if (!a.innerText.match(/^@(.*)/)) {
-      return;
-    }
+  open(data) {
     clearTimeout(hideTimeoutId);
     clearTimeout(showTimeoutId);
     showTimeoutId = setTimeout(() => {
-      _open(a, bubble);
+      _open(data);
     }, showTimeout);
   },
   show() {
@@ -55,4 +59,8 @@ export default {
     clearTimeout(showTimeoutId);
     Store.dispatch("userBubble/hide");
   }
+};
+
+window.onscroll = () => {
+  _hide();
 };

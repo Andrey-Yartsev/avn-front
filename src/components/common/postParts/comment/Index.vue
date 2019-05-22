@@ -11,11 +11,15 @@
     </router-link>
     <div class="comment-content">
       <div class="comment-body">
-        <router-link
+        <a
           v-if="comment.author"
-          :to="'/' + comment.author.username"
+          :href="'/' + comment.author.username"
+          @click.prevent="$router.push('/' + comment.author.username)"
           class="comment-author-name name"
-          >{{ comment.author.name }}</router-link
+          ref="name"
+          @mouseover="showBubble"
+          @mouseout="hideBubble"
+          >{{ comment.author.name }}</a
         >
         <div v-if="comment.text.length > collapseLimit" class="comment-text">
           <span v-html="trunc(comment.text)"></span>
@@ -64,6 +68,7 @@
 
 <script>
 import { fromNow } from "@/helpers/datetime";
+import Bubble from "@/helpers/userBubble";
 
 export default {
   name: "Comment",
@@ -95,6 +100,15 @@ export default {
       } else {
         return html;
       }
+    },
+    showBubble() {
+      Bubble.open({
+        a: this.$refs.name,
+        username: this.comment.author.username
+      });
+    },
+    hideBubble() {
+      Bubble.hide();
     }
   }
 };

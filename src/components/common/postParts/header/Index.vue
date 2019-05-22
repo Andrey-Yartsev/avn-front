@@ -8,14 +8,26 @@
         <img v-if="user.avatar" :src="user.avatar" />
       </span>
     </router-link>
-    <router-link class="name" :to="'/' + user.username">{{
-      user.name
-    }}</router-link>
+    <a
+      class="name"
+      :href="'/' + user.username"
+      ref="name"
+      @click.prevent="$router.push('/' + user.username)"
+      @mouseover="showBubble"
+      @mouseout="hideBubble"
+      >{{ user.name }}</a
+    >
     <template v-if="user.isVerified">
       <span class="verified-user"></span>
     </template>
     <span class="user-login">
-      <router-link :to="'/' + user.username">{{ user.username }}</router-link>
+      <a
+        :href="'/' + user.username"
+        @click.prevent="$router.push('/' + user.username)"
+        @mouseover="showBubble"
+        @mouseout="hideBubble"
+        >{{ user.username }}</a
+      >
     </span>
     <span class="follow-link hidden">Follow</span>
     <time class="timestamp" v-if="datetime">
@@ -43,6 +55,7 @@
 <script>
 import Dropdown from "./Dropdown";
 import ClickOutside from "vue-click-outside";
+import Bubble from "@/helpers/userBubble";
 
 export default {
   name: "Header",
@@ -86,10 +99,22 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdawn");
+    },
+    showBubble() {
+      Bubble.open({
+        a: this.$refs.name,
+        username: this.user.username
+      });
+    },
+    hideBubble() {
+      Bubble.hide();
     }
   },
   mounted() {
     this.popupItem = this.$el.querySelector(".more-functions");
+  },
+  beforeDestroy() {
+    Bubble._hide();
   },
   directives: {
     ClickOutside

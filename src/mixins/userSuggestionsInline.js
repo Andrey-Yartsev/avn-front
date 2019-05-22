@@ -5,13 +5,15 @@ export default {
     if (this.$mq === "mobile") {
       return;
     }
-    const bubble = document.getElementById("user-bubble");
     if (this.$refs.text) {
       const aTags = this.$refs.text.getElementsByTagName("a");
       if (aTags && aTags.length) {
         for (let a of aTags) {
+          if (!a.innerText.match(/^@(.*)/)) {
+            continue;
+          }
           a.addEventListener("mouseover", () => {
-            Bubble.open(a, bubble);
+            Bubble.open({ a });
           });
           a.addEventListener("mouseout", Bubble.hide);
         }
