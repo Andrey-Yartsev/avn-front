@@ -42,6 +42,7 @@
                     input-class=""
                     v-validate="'required'"
                     use12-hour
+                    :max-datetime="maxDate"
                     :flow="['year', 'month', 'date']"
                     :phrases="{ ok: 'ok', cancel: 'Cancel' }"
                   />
@@ -270,7 +271,7 @@ import BirthDateSelect from "./BirthDateSelect";
 import Form from "@/mixins/form";
 import upload from "@/utils/upload";
 import { Datetime } from "vue-datetime";
-import { Settings } from "luxon";
+import { Settings, DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 
@@ -358,6 +359,11 @@ export default {
           selected: v[0].id === this.state
         };
       });
+    },
+    maxDate() {
+      return LuxonDateTime.local()
+        .minus({ year: 18 })
+        .toISO();
     }
   },
 
