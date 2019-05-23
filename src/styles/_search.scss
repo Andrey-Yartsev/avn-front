@@ -94,7 +94,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: relative;
-      //z-index: 1;
       width: 100%;
       min-height: calc(100% - 152px);
     }
