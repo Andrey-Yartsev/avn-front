@@ -241,8 +241,7 @@
                     value="1"
                     v-validate="'required'"
                   />
-                  <span class="checkbox"></span>
-                  <div class="input-desc payouts-desc">
+                  <div class="label input-desc payouts-desc">
                     I agree to
                     <router-link
                       to="/terms"

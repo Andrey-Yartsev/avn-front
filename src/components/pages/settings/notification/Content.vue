@@ -52,7 +52,6 @@
                   name="isEmailNotificationNewSubscriptionEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">New subscriber</span>
               </div>
             </label>
@@ -66,7 +65,6 @@
                   name="isEmailNotificationNewUnreadChatsMessagesEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">New private message</span>
               </div>
             </label>
@@ -78,7 +76,6 @@
                   name="isEmailNotificationNewTipsEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">Fund was received</span>
               </div>
             </label>
@@ -118,7 +115,6 @@
                   name="isEmailNotificationNewSubscriptionEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">New subscriber</span>
               </div>
             </label>
@@ -130,7 +126,6 @@
                   name="isTweetNotificationAutoprolongEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">Auto prolongation</span>
               </div>
             </label>
@@ -142,7 +137,6 @@
                   name="isEmailNotificationNewTipsEnabled"
                   value="true"
                 />
-                <span class="checkbox"></span>
                 <span class="label">Post tweets</span>
               </div>
             </label>
@@ -171,7 +165,6 @@
                   name="emailNotificationNewPostsPeriod"
                   value="0"
                 />
-                <span class="radio"></span>
                 <span class="label">Immediately</span>
               </div>
             </label>
@@ -183,7 +176,6 @@
                   name="emailNotificationNewPostsPeriod"
                   value="1"
                 />
-                <span class="radio"></span>
                 <span class="label">Daily</span>
               </div>
             </label>
@@ -195,7 +187,6 @@
                   name="emailNotificationNewPostsPeriod"
                   value="2"
                 />
-                <span class="radio"></span>
                 <span class="label">Weekly</span>
               </div>
             </label>

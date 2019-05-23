@@ -48,7 +48,6 @@ w<template>
                     value="true"
                     v-model="localUser.hasWatermarkPhoto"
                   />
-                  <span class="checkbox"></span>
                   <span class="label">Enable watermarks for photo</span>
                 </div>
               </label>
@@ -60,7 +59,6 @@ w<template>
                     value="true"
                     v-model="localUser.hasWatermarkVideo"
                   />
-                  <span class="checkbox"></span>
                   <span class="label">Enable watermarks for video</span>
                 </div>
               </label>

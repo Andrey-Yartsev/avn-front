@@ -40,7 +40,7 @@ textarea,
   width: 100%;
   padding: 6px 10px;
   transition: background-color 0.3s ease;
-  
+
   &.rounded {
     border-radius: 15px;
 
@@ -721,13 +721,38 @@ select {
   align-items: flex-start;
   padding: 1px 0 0;
   cursor: pointer;
+
+  input {
+    display: none;
+
+    &:checked {
+
+      + .label {
+
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   .label {
     font-weight: 400;
+    padding-left: 30px;
+    position: relative;
+
     a {
       font-weight: 500;
       color: $secondary-color;
     }
+
+    &:before {
+      content: "";
+      position: absolute;
+      opacity: .3;
+    }
   }
+
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     .input-desc {
       font-size: 13px;
@@ -735,100 +760,85 @@ select {
     }
   }
 }
-.checkbox {
-  margin: 0 9px 0 3px;
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-  position: relative;
-  transition: background 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 2px;
-  opacity: 0.3;
-  box-shadow: 0 0 0 2px $main-color inset;
-  cursor: pointer;
 
-  &,
-  .form-group & {
-    padding: 0;
+.radio-wrapper {
+
+  input[type="radio"] {
+
+    &:checked {
+
+      + .label {
+        font-weight: 500;
+
+        &:before {
+          background-color: $primary-color;
+          box-shadow: 0 0 0 2px $primary-color;
+        }
+      }
+    }
   }
 
-  &:before {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    content: "\E604";
-    @include icon-font;
-    @include position-center;
-    height: 18px;
-    line-height: 18px;
-  }
+  .label {
 
-}
-
-.radio {
-  margin: 0 9px 0 0;
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  transition: border-color 0.3s ease, opacity 0.3s ease;
-  border-radius: 1000px;
-  opacity: 0.3;
-  border: 2px solid $main-color;
-  cursor: pointer;
-  position: relative;
-
-  &:before {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    content: "";
-    width: 10px;
-    height: 10px;
-    background: $primary-color;
-    border-radius: 1000px;
-    @include position-center;
+    &:before {
+      width: 10px;
+      height: 10px;
+      border: 3px solid $white;
+      transition: border-color .3s ease, opacity .3s ease;
+      border-radius: 1000px;
+      box-shadow: 0 0 0 2px $main-color;
+      left: 2px;
+      top: 1px;
+      box-sizing: content-box;
+    }
   }
 }
 
 .checkbox-wrapper {
 
-  input {
-    display: none;
+  input[type="checkbox"] {
 
     &:checked {
 
-      & + .checkbox {
-        background: $primary-color;
-        box-shadow: none;
-        opacity: 1;
+      + .label {
 
         &:before {
-          opacity: 1;
+          background: $primary-color;
+          box-shadow: none;
+          content: "\E604";
         }
       }
     }
   }
-}
 
-.radio-wrapper {
+  .label {
 
-  input {
-    display: none;
+    &.payouts-desc {
+      opacity: 1;
+      margin-top: 2px;
 
-    &:checked {
-      & + .radio {
-        border-color: $primary-color;
-        opacity: 1;
-        &:before {
-          opacity: 1;
-        }
+      &:before {
+        top: -2px;
       }
-      & ~ .label {
-        font-weight: 500;
-      }
+    }
+
+    &:before {
+      border-radius: 2px;
+      box-shadow: 0 0 0 2px $main-color inset;
+      left: 3px;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+      transition: background .3s ease, box-shadow .3s ease, opacity .3s ease;
+      color: #fff;
+      @include icon-font;
     }
   }
 }
+
 .input-notice {
   padding: 7px 5px 0;
   font-size: 13px;

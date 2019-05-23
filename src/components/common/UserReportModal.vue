@@ -23,7 +23,6 @@
                             value="4"
                             v-model="reason"
                           />
-                          <span class="radio"></span>
                           <span class="label"
                             >This profile posts violent or offensive
                             content</span
@@ -38,7 +37,6 @@
                             value="5"
                             v-model="reason"
                           />
-                          <span class="radio"></span>
                           <span class="label"
                             >This profile uses my personal data</span
                           >
@@ -52,7 +50,6 @@
                             value="6"
                             v-model="reason"
                           />
-                          <span class="radio"></span>
                           <span class="label"
                             >This profile uses personal data from someone I
                             know</span

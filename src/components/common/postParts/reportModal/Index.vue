@@ -27,7 +27,6 @@
                             :value="reason.id"
                             @click="reasonId = reason.id"
                           />
-                          <span class="radio"></span>
                           <span class="label">{{ reason.name }}</span>
                         </div>
                       </label>

@@ -25,7 +25,6 @@
                   value="all"
                   v-model="localUser.storyAnswerType"
                 />
-                <span class="radio"></span>
                 <span class="label">
                   Everyone
                 </span>
@@ -39,7 +38,6 @@
                   value="following"
                   v-model="localUser.storyAnswerType"
                 />
-                <span class="radio"></span>
                 <span class="label">
                   People you follow
                 </span>
@@ -53,7 +51,6 @@
                   value="off"
                   v-model="localUser.storyAnswerType"
                 />
-                <span class="radio"></span>
                 <span class="label">
                   Off
                 </span>
