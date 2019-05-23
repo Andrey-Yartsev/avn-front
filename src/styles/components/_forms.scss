@@ -374,9 +374,6 @@ label {
       opacity: 0.5;
     }
   }
-  .btn {
-    //margin: 0 0 13px 20px;
-  }
 
   &-btn {
     padding: 0 0 21px;
@@ -392,6 +389,13 @@ label {
       &-mob {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-bottom: 0;
+        }
+      }
+
+      &-desk {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
           padding-bottom: 0;
         }
       }
@@ -584,6 +588,11 @@ label {
       pointer-events: none;
       opacity: 0.5;
     }
+  }
+
+  &_psides-reset {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   &.pt-reset {

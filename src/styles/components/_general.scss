@@ -143,6 +143,16 @@ strong {
     padding-top: 24px;
   }
 
+  &_reset-bt {
+
+    &-desk {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-top: none;
+      }
+    }
+  }
+
   &-mobile {
     border-top: 1px solid rgba($gray, 0.2);
     padding-top: 11px;

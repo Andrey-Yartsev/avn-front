@@ -62,31 +62,21 @@
   .item {
     display: flex;
     justify-content: space-between;
+    position: relative;
+
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-bottom: 1px solid rgba($gray, 0.2);
     }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0 12% 0 0;
     }
 
     &:last-child {
       border: none;
+
       .value {
         border: none;
-      }
-    }
-
-    button {
-      float: right;
-      border: none;
-      background: none;
-      padding: 0;
-      font: inherit;
-      font-size: 15px;
-      font-weight: 500;
-
-      &:not(.close-all-sessions-btn) {
-        color: $secondary-color;
       }
     }
   }
@@ -108,12 +98,17 @@
   .value {
     text-align: right;
     padding: 9px 5px;
+    position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       text-align: left;
       flex: 1;
       border-bottom: 1px solid rgba($gray, 0.2);
       margin-left: 2.5%;
+    }
+
+    &_editable-field {
+      padding-right: 38px;
     }
 
     &__text {

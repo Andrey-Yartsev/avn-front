@@ -1,6 +1,6 @@
 <template>
-  <div class="border-top shadow-block">
-    <div class="form-title">
+  <div class="border-top border-top_reset-bt-desk">
+    <div class="form-title form-title_psides-reset">
       <div class="inner">
         <div class="semi-transparent">
           Edit Personal Information
@@ -86,7 +86,7 @@
           </span>
         </label>
       </div>
-      <div class="form-group-btn">
+      <div class="form-group-btn form-group-btn_reset-pb-desk">
         <button
           type="submit"
           class="btn lg btn_fix-width"
