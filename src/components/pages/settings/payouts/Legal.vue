@@ -274,19 +274,17 @@ import { Datetime } from "vue-datetime";
 import { Settings, DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
+import States from "./states";
 
 Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
-
-  mixins: [Form],
-
+  mixins: [Form, States],
   components: {
     BirthDateSelect,
     Datetime
   },
-
   data() {
     return {
       firstName: "",
@@ -298,12 +296,10 @@ export default {
       address: "",
       postalCode: "",
       city: "",
-      state: "",
       tos: false,
       uploadedPhoto: null
     };
   },
-
   computed: {
     loading() {
       return (
@@ -311,21 +307,8 @@ export default {
         this.$store.state.states.fetchLoading
       );
     },
-    account() {
-      return this.$store.state.payouts.account.fetchResult;
-    },
     country() {
       return this.account.countryId;
-    },
-    countries() {
-      return this.$store.state.payouts.countries.fetchResult;
-    },
-    hasStates() {
-      if (!this.countries) {
-        return false;
-      }
-      return this.countries.find(v => this.account.countryId === v.id)
-        .hasStates;
     },
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
@@ -345,28 +328,12 @@ export default {
     saving() {
       return this.$store.state.payouts.legal.saveLoading;
     },
-    _states() {
-      return this.$store.state.states.fetchResult;
-    },
-    states() {
-      if (!this._states) {
-        return [];
-      }
-      return Object.entries(this._states).map(v => {
-        return {
-          id: v[0],
-          title: v[1],
-          selected: v[0].id === this.state
-        };
-      });
-    },
     maxDate() {
       return LuxonDateTime.local()
         .minus({ year: 18 })
         .toISO();
     }
   },
-
   methods: {
     async upload() {
       try {
@@ -407,13 +374,7 @@ export default {
       });
     }
   },
-
   mounted() {
-    this.$store.dispatch("payouts/countries/fetch").then(() => {
-      if (this.hasStates) {
-        this.$store.dispatch("states/fetch", this.account.countryId);
-      }
-    });
     this.$emit("titleChanged", "Personal Information");
   }
 };

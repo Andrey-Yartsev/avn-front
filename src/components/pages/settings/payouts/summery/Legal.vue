@@ -38,14 +38,16 @@
                 </span>
               </span>
             </div>
-            <div class="item">
+            <div class="item" v-if="!edit">
               <span class="title">Address</span>
               <span class="value">
+                <button @click="edit = true">Edit</button>
                 <span class="value__text">
                   {{ address }}
                 </span>
               </span>
             </div>
+            <LegalEdit v-else @cancel="edit = false" />
           </div>
         </div>
       </div>
@@ -92,12 +94,17 @@
 import moment from "moment";
 import Common from "../../common";
 import PayoutsCommon from "../common";
+import LegalEdit from "./LegalEdit";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
-
   mixins: [Common, PayoutsCommon],
-
+  components: { LegalEdit },
+  data() {
+    return {
+      edit: false
+    };
+  },
   methods: {
     dt(date) {
       return moment(date).format("DD MMM YYYY");
