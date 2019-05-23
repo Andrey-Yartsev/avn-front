@@ -398,6 +398,14 @@
     padding-bottom: 20px;
     z-index: 21;
     background-color: $white;
+    transition: all .3s;
+  }
+
+  .dropdawnOpened & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-bottom: -100%;
+    }
   }
 
   .lightbox-post & {
