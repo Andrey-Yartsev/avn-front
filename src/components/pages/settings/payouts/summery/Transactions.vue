@@ -1,5 +1,5 @@
 <template>
-  <div class="payouts-transactions">
+  <div class="payouts-transactions" v-if="items.length">
     <div class="PayoutsTransactionsCollectionView">
       <div
         class="form-title table-header-title table-header-title_sticky border-top bg-gradient bg-gradient_pseudo"
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="shadow-block no-padding" v-if="items.length">
+      <div class="shadow-block no-padding">
         <div class="table-wrapper">
           <div class="table transactions-table">
             <div
