@@ -41,7 +41,9 @@
             <div class="item" v-if="!edit">
               <span class="title">Address</span>
               <span class="value value_editable-field">
-                <button @click="edit = true" class="btn-address-edit">Edit</button>
+                <button @click="edit = true" class="btn-address-edit">
+                  Edit
+                </button>
                 <span class="value__text">
                   {{ address }}
                 </span>
