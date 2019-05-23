@@ -38,7 +38,7 @@
       <button
         @click="$emit('subscribe')"
         type="submit"
-        class="btn lg primary-color"
+        class="btn lg block"
         id="subscribe-proceed"
         :disabled="progress"
       >

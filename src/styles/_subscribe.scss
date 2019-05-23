@@ -107,7 +107,8 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       max-width: 340px;
       margin: 24px auto 0;
-      padding: 0 17px;
+      padding-right: 17px;
+      padding-left: 17px;
     }
 
     &-title {
@@ -132,10 +133,6 @@
       padding-left: 15px;
       padding-right: 15px;
       margin-top: 36px;
-    }
-
-    .btn {
-      width: 100%;
     }
 
     &-text {
