@@ -192,7 +192,7 @@ export default {
     },
 
     toast(text) {
-      this.$store.dispatch("global/flashToast", text, { root: true });
+      this.$store.dispatch("global/flashToast", { text }, { root: true });
     }
   }
 };

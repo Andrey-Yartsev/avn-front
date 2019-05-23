@@ -330,7 +330,10 @@ export default {
     },
     createCardTokenCallback(result) {
       if (result.error) {
-        this.$store.dispatch("global/flashToast", result.error.message);
+        this.$store.dispatch("global/flashToast", {
+          text: result.error.message,
+          type: "error"
+        });
         this.submitting = false;
       } else {
         this.$store
@@ -354,7 +357,10 @@ export default {
                 this.$store.commit("payment/card/resetAfterAddCardRedirect");
               }
             } else {
-              this.$store.dispatch("global/flashToast", "Something goes wrong");
+              this.$store.dispatch("global/flashToast", {
+                text: "Something goes wrong",
+                type: "error"
+              });
             }
             this.submitting = false;
           });

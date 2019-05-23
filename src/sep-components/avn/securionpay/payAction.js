@@ -12,10 +12,10 @@ export default {
   methods: {
     _pay(payload, _onSuccess) {
       if (!this.user.isPaymentCardConnected) {
-        this.$store.dispatch(
-          "global/flashToast",
-          "You should add card in payment settings"
-        );
+        this.$store.dispatch("global/flashToast", {
+          text: "You should add card in payment settings",
+          type: "warning"
+        });
         this.$store.commit(
           "payment/card/setAfterAddCardRedirect",
           this.$route.path

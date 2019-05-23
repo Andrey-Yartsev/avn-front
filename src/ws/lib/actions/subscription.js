@@ -29,6 +29,9 @@ export default data => {
       }
     });
   } else {
-    Store.dispatch("global/flashToast", "Subscription failed");
+    Store.dispatch("global/flashToast", {
+      text: "Subscription failed",
+      type: "error"
+    });
   }
 };

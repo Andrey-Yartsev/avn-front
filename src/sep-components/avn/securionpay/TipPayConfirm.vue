@@ -48,7 +48,9 @@ export default {
   methods: {
     yes() {
       const onSuccess = data => {
-        this.$store.dispatch("global/flashToast", "Fund successfully sent");
+        this.$store.dispatch("global/flashToast", {
+          text: "Fund successfully sent"
+        });
         this.$store.commit("tip/funded", data);
         this.close();
       };
