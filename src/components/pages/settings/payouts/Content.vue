@@ -69,7 +69,7 @@ export default {
       if (!this.accountExists) {
         return Account;
       } else {
-        if (!this.legalExists) {
+        if (!this.legalExists || this.legalExistsWithoutState) {
           return Legal;
         }
         if (this.user.payoutLegalApproveState === "rejected") {
@@ -91,6 +91,16 @@ export default {
     account() {
       return this.$store.state.payouts.account.fetchResult;
     },
+    countries() {
+      return this.$store.state.payouts.countries.fetchResult;
+    },
+    hasStates() {
+      if (!this.countries) {
+        return false;
+      }
+      return this.countries.find(v => this.account.countryId === v.id)
+        .hasStates;
+    },
     accountExists() {
       return this.account && this.account.countryId;
     },
@@ -99,6 +109,15 @@ export default {
     },
     legalExists() {
       return this.legal && this.legal.type;
+    },
+    legalExistsWithoutState() {
+      if (!this.legalExists) {
+        return false;
+      }
+      if (!this.hasStates) {
+        return false;
+      }
+      return !this.legal.state;
     },
     isApproved() {
       return this.user.payoutLegalApproveState === "approved";
@@ -123,7 +142,9 @@ export default {
     this.$store.dispatch("payouts/account/fetch").then(() => {
       this.$store.dispatch("payouts/legal/fetch").then(() => {
         this.$store.dispatch("payouts/bank/fetch").then(() => {
-          this.loading = false;
+          this.$store.dispatch("payouts/countries/fetch").then(() => {
+            this.loading = false;
+          });
         });
       });
     });

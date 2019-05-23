@@ -6,7 +6,10 @@
       <form class="payouts-legal-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
           <div class="container">
-            <div class="form-group form-group_with-label">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
               <label class="form-group-inner">
                 <span class="label">First Name</span>
                 <input
@@ -18,7 +21,10 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
               <label class="form-group-inner">
                 <span class="label">Last Name</span>
                 <input
@@ -30,7 +36,10 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
               <div class="form-group-inner">
                 <span class="label">Date of Birth</span>
                 <div class="field-birthday">
@@ -53,11 +62,15 @@
               </div>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
               <label class="form-group-inner">
                 <span class="label">Legal Type</span>
                 <span class="select-wrapper">
                   <select
+                    :disabled="legalExists"
                     name="type"
                     id="legal-type"
                     required
@@ -96,7 +109,10 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label photo-form-group">
+            <div
+              class="form-group form-group_with-label photo-form-group"
+              :class="{ disabled: legalExists }"
+            >
               <label
                 class="form-group-inner photo-form-group-inner"
                 :class="{ success: !!uploadedPhoto }"
@@ -296,7 +312,8 @@ export default {
       postalCode: "",
       city: "",
       tos: false,
-      uploadedPhoto: null
+      uploadedPhoto: null,
+      legalExisted: false
     };
   },
   computed: {
@@ -316,7 +333,7 @@ export default {
       if (!this.isFormValid) {
         return false;
       }
-      if (!this.uploadedPhoto) {
+      if (!this.uploadedPhoto && !this.legalExists) {
         return false;
       }
       return true;
@@ -331,6 +348,12 @@ export default {
       return LuxonDateTime.local()
         .minus({ year: 18 })
         .toISO();
+    },
+    legal() {
+      return this.$store.state.payouts.legal.fetchResult;
+    },
+    legalExists() {
+      return this.legal && this.legal.type;
     }
   },
   methods: {
@@ -367,14 +390,22 @@ export default {
         if (!r.type) {
           return;
         }
-        this.$store.dispatch("auth/extendUser", {
-          payoutLegalApproveState: "pending"
-        });
+        if (!this.legalExisted) {
+          this.$store.dispatch("auth/extendUser", {
+            payoutLegalApproveState: "pending"
+          });
+        }
       });
     }
   },
   mounted() {
     this.$emit("titleChanged", "Personal Information");
+    if (this.legalExists) {
+      this.legalExisted = true;
+      Object.keys(this.legal).forEach(k => {
+        this[k] = this.legal[k];
+      });
+    }
   }
 };
 </script>

@@ -95,6 +95,12 @@ export default {
     account() {
       return this.$store.state.payouts.account.fetchResult;
     },
+    legal() {
+      return this.$store.state.payouts.legal.fetchResult;
+    },
+    legalInitFilled() {
+      return !!this.legal.firstName;
+    },
     loading() {
       return (
         this.$store.state.payouts.countries.fetchLoading ||

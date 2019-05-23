@@ -36,11 +36,12 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("payouts/countries/fetch").then(() => {
-      if (this.hasStates) {
-        this.$store.dispatch("states/fetch", this.account.countryId);
+    if (this.hasStates) {
+      this.$store.dispatch("states/fetch", this.account.countryId).then(() => {
         this.statesLoading = false;
-      }
-    });
+      });
+    } else {
+      this.statesLoading = false;
+    }
   }
 };
