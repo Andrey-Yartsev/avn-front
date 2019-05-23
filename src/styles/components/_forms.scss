@@ -40,6 +40,7 @@ textarea,
   width: 100%;
   padding: 6px 10px;
   transition: background-color 0.3s ease;
+  
   &.rounded {
     border-radius: 15px;
 
@@ -47,9 +48,11 @@ textarea,
       border-radius: 20px;
     }
   }
+
   &.sm {
     padding: 6px 12px;
   }
+
   &:focus {
     outline: none;
     background-color: $secondary-color-10;
@@ -60,21 +63,17 @@ textarea,
       opacity: 0;
     }
   }
-  &::-moz-placeholder {
-    color: inherit;
-    opacity: 0.5;
-  }
-  &:-ms-input-placeholder {
-    color: inherit;
-    opacity: 0.5;
-  }
+
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
   &::-webkit-input-placeholder {
     color: inherit;
     opacity: 0.5;
   }
+
   &[disabled] {
-    opacity: 0.3;
-    background-color: rgba($gray, 0.333333333);
+    opacity: .3;
+    background-color: rgba($gray, 0.3);
   }
 
   .field-invalid:not(.no-border) & {
