@@ -3,7 +3,8 @@
     :class="[
       'post postPage',
       {
-        post_preparation: !post.isMediaReady
+        post_preparation: !post.isMediaReady,
+        dropdawnOpened
       }
     ]"
   >
@@ -32,6 +33,8 @@
           v-if="$mq === 'mobile'"
           :datetime="timePassed"
           :showCopy="!delayedPost"
+          @openDropdawn="dropdawnOpened = true"
+          @hideDropdawn="dropdawnOpened = false"
         />
         <p
           class="text hidden-desktop"
@@ -243,7 +246,8 @@ export default {
   },
   data: () => ({
     commentPage: 0,
-    popupView: true
+    popupView: true,
+    dropdawnOpened: false
   }),
   props: {
     post: {
