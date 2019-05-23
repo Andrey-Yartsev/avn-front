@@ -367,7 +367,8 @@ label {
   }
   &.disabled {
     pointer-events: none;
-    label {
+
+    > * {
       opacity: 0.3;
     }
     .input-notice {
