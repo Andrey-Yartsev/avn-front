@@ -22,14 +22,25 @@ const actions = {
     OtpApi.setCode(code).then(async response => {
       response = await response.json();
       if (response.error) {
-        dispatch("global/flashToast", response.error.message, {
-          root: true
-        });
+        dispatch(
+          "global/flashToast",
+          {
+            text: response.error.message,
+            type: "error"
+          },
+          {
+            root: true
+          }
+        );
         return;
       }
-      dispatch("global/flashToast", "Code saved successfully", {
-        root: true
-      });
+      dispatch(
+        "global/flashToast",
+        { text: "Code saved successfully" },
+        {
+          root: true
+        }
+      );
       dispatch("profile/extend", { otpEnable: true }, { root: true });
     });
   },
@@ -38,9 +49,13 @@ const actions = {
       OtpApi.setCode(code).then(async response => {
         response = await response.json();
         if (response.error) {
-          dispatch("global/flashToast", response.error.message, {
-            root: true
-          });
+          dispatch(
+            "global/flashToast",
+            { text: response.error.message, type: "error" },
+            {
+              root: true
+            }
+          );
           reject(response.error);
           return;
         }

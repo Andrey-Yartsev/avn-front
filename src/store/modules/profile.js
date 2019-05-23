@@ -47,17 +47,28 @@ const actions = {
           const r = await response.json();
           if (r.error) {
             commit("setError", r.error);
-            dispatch("global/flashToast", r.error.message, {
-              root: true
-            });
+            dispatch(
+              "global/flashToast",
+              {
+                text: r.error.message,
+                type: "error"
+              },
+              {
+                root: true
+              }
+            );
             commit("setLoading", false);
             return;
           }
           dispatch("auth/extendUser", r, { root: true });
           dispatch("profile/home/extend", r, { root: true });
-          dispatch("global/flashToast", "Changes saved successfully", {
-            root: true
-          });
+          dispatch(
+            "global/flashToast",
+            { text: "Changes saved successfully" },
+            {
+              root: true
+            }
+          );
           commit("setLoading", false);
           accept(r);
         })

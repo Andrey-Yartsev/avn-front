@@ -22,9 +22,13 @@ const storeRequest = (
     commit(prefix + "Success", false);
 
     if (isOffline()) {
-      dispatch("global/flashToast", "Internet connection problems", {
-        root: true
-      });
+      dispatch(
+        "global/flashToast",
+        { text: "Internet connection problems" },
+        {
+          root: true
+        }
+      );
       commit(prefix + "Requested");
       return;
     }

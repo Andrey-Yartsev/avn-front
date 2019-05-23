@@ -72,7 +72,7 @@ const actions = {
     const payment = rootState.modal.subscribe.data;
     dispatch(
       "global/flashToast",
-      `Subscription to ${payment.user.name} is successful`,
+      { text: `Subscription to ${payment.user.name} is successful` },
       { root: true }
     );
     if (rootState.profile.home.profile) {
