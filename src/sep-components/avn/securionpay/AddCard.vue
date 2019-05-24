@@ -347,10 +347,9 @@ export default {
               this.$store.dispatch("profile/fetch");
               this.showCardForm = false;
               if (this.$store.state.payment.card.afterAddCardRedirect) {
-                this.$store.dispatch(
-                  "global/flashToast",
-                  "Card added successfully"
-                );
+                this.$store.dispatch("global/flashToast", {
+                  text: "Card added successfully"
+                });
                 this.$router.push(
                   this.$store.state.payment.card.afterAddCardRedirect
                 );

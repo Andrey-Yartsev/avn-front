@@ -48,7 +48,10 @@ export default {
     },
     _error(error) {
       this.progress = false;
-      this.$store.dispatch("global/flashToast", error.message);
+      this.$store.dispatch("global/flashToast", {
+        text: error.message,
+        type: "error"
+      });
       if (this.close) {
         this.close();
       }
