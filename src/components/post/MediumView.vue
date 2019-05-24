@@ -4,8 +4,8 @@
       'post',
       {
         'open-dropdown-inside': showDropdawn,
-        'post_preparation': !post.isMediaReady,
-        'outofviewport': isVisible === false
+        post_preparation: !post.isMediaReady,
+        outofviewport: isVisible === false
       }
     ]"
     :data-id="post.id"
