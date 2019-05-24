@@ -163,6 +163,9 @@ const actions = {
     });
   },
   pin({ commit, dispatch }, postId) {
+    if (window.location.hash) {
+      window.location.hash = "";
+    }
     dispatch("_pin", postId).then(() => {
       commit("postPinChanged");
     });
