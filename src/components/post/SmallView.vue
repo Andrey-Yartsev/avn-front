@@ -4,13 +4,17 @@
       'explore-item explore-item_col bg-gradient bg-gradient_light',
       {
         'explore-item_col-3': !shouldBePoster,
-        'explore-item_double': shouldBePoster
+        'explore-item_double': shouldBePoster,
+        outofviewport: isVisible === false
       }
     ]"
     :data-id="post.id"
     :id="'p' + post.id"
+    v-observe-visibility="visibilityChanged"
   >
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
     <a
+      v-else
       :class="[
         'postLink',
         {
@@ -72,6 +76,12 @@ import PostOpen from "@/mixins/postOpen";
 export default {
   name: "Post",
   mixins: [ModalRouterGoto, PostOpen],
+  data() {
+    return {
+      isVisible: undefined,
+      height: undefined
+    };
+  },
   props: {
     post: {
       type: Object,
@@ -98,6 +108,12 @@ export default {
     },
     page() {
       return this.$route.meta.page;
+    }
+  },
+  methods: {
+    visibilityChanged(isVisible, entry) {
+      this.isVisible = isVisible;
+      this.height = entry.boundingClientRect.height;
     }
   }
 };

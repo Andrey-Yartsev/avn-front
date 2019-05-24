@@ -90,7 +90,7 @@ import moment from "moment";
 export default {
   name: "Post",
   mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
-  data: function() {
+  data() {
     return {
       showDropdawn: false,
       isVisible: undefined,
@@ -153,10 +153,8 @@ export default {
       this.showTip = false;
     },
     visibilityChanged(isVisible, entry) {
-      this.$nextTick(() => {
-        this.isVisible = isVisible;
-        this.height = entry.boundingClientRect.height;
-      });
+      this.isVisible = isVisible;
+      this.height = entry.boundingClientRect.height;
     }
   }
 };

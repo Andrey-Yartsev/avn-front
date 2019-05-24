@@ -1,6 +1,17 @@
 <template>
-  <div class="storyView" :data-id="post.user.id">
-    <a :href="`/stories/${post.user.id}`" @click.prevent="go" class="story">
+  <div
+    class="storyView"
+    :class="{ outofviewport: isVisible === false }"
+    :data-id="post.user.id"
+    v-observe-visibility="visibilityChanged"
+  >
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <a
+      v-else
+      :href="`/stories/${post.user.id}`"
+      @click.prevent="go"
+      class="story"
+    >
       <div class="story-preview bg-gradient bg-gradient_light">
         <img :src="image" />
         <div
@@ -60,6 +71,10 @@ export default {
         return;
       }
       this.$router.push(`/stories/${this.post.user.id}`);
+    },
+    visibilityChanged(isVisible, entry) {
+      this.isVisible = isVisible;
+      this.height = entry.boundingClientRect.height;
     }
   }
 };
