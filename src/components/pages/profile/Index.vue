@@ -277,6 +277,7 @@ export default {
     },
     deletedPost() {
       this.initPosts();
+      this.initProfile();
     },
     postPinChanged() {
       this.initPosts();
