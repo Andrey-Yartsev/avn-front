@@ -157,7 +157,7 @@
               Add media
             </span>
           </label>
-          <div class="btn-post btn-post_datetime" v-if="user.isPerformer">
+          <div class="btn-post btn-post_datetime" v-if="showSchedule">
             <div class="post-datetime" :class="{ disabled: datetime }">
               <Datetime
                 :inputId="`post-datetime__switcher_${where}`"
@@ -430,6 +430,12 @@ export default {
         pm[0].thumbs &&
         pm[0].thumbs.length
       );
+    },
+    showSchedule() {
+      if (this.post && this.post.isActive) {
+        return false;
+      }
+      return this.user.isPerformer;
     }
   },
   methods: {
