@@ -22,11 +22,13 @@
       v-if="user"
       class="menu-item-messages header-nav__item showChat hidden-mobile"
       to="/chat"
+      :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
       ><span>Messages</span></router-link
     >
     <router-link
       class="menu-item-messages header-nav__item hidden-desktop"
       to="/chat"
+      :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
       v-if="$mq === 'mobile' && user"
     >
       <span>Messages</span>
