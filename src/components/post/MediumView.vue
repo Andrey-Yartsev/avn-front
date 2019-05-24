@@ -13,7 +13,7 @@
     v-observe-visibility="visibilityChanged"
   >
     <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
-    <template v-else>
+    <div class="post-wrapper" v-else>
       <div class="post-details">
         <Header
           :post="post"
@@ -69,7 +69,7 @@
         @likeComment="likeComment"
         @commentRemove="commentRemove"
       />
-    </template>
+    </div>
   </div>
 </template>
 
