@@ -13,9 +13,10 @@ self.addEventListener("push", function(event) {
   var data = JSON.parse(event.data.text());
 
   const title = data.title;
+  console.log(data);
   const options = {
     body: data.body,
-    icon: data.icon || "/static/img/android-chrome-384x384.png"
+    icon: data.icon || "/static/img/avn-push.jpg"
   };
   if (data.data) {
     options.data = data.data;
