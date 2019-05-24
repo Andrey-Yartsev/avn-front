@@ -4,67 +4,72 @@
       'post',
       {
         'open-dropdown-inside': showDropdawn,
-        post_preparation: !post.isMediaReady
+        'post_preparation': !post.isMediaReady,
+        'outofviewport': isVisible === false
       }
     ]"
     :data-id="post.id"
     :id="'p' + post.id"
+    v-observe-visibility="visibilityChanged"
   >
-    <div class="post-details">
-      <Header
-        :post="post"
-        :from="from"
-        @openDropdawn="showDropdawn = true"
-        @hideDropdawn="showDropdawn = false"
-        :showCopy="!delayedPost"
-      />
-      <p class="text" v-html="post.text" ref="text"></p>
-      <Media
-        v-if="medias.length"
-        :medias="medias"
-        :shouldHasLink="!delayedPost"
-        :postId="post.id"
-        :authorId="post.author.id"
-        :openModal="openModal"
-        mediaSize="preview"
-      />
-      <Actions
-        v-if="!delayedPost"
-        :post="post"
-        v-on:postShowCommentForm="toggleCommentForm"
-        v-on:postLike="likePost"
-        @toggleTip="toggleTipForm"
-        :openModal="openModal"
-      />
-      <div v-else class="actions">
-        <div class="datetime-value">
-          <span class="post-datetime__icn" />
-          <span class="post-datetime__value">{{ formattedDate }}</span>
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <template v-else>
+      <div class="post-details">
+        <Header
+          :post="post"
+          :from="from"
+          @openDropdawn="showDropdawn = true"
+          @hideDropdawn="showDropdawn = false"
+          :showCopy="!delayedPost"
+        />
+        <p class="text" v-html="post.text" ref="text"></p>
+        <Media
+          v-if="medias.length"
+          :medias="medias"
+          :shouldHasLink="!delayedPost"
+          :postId="post.id"
+          :authorId="post.author.id"
+          :openModal="openModal"
+          mediaSize="preview"
+        />
+        <Actions
+          v-if="!delayedPost"
+          :post="post"
+          v-on:postShowCommentForm="toggleCommentForm"
+          v-on:postLike="likePost"
+          @toggleTip="toggleTipForm"
+          :openModal="openModal"
+        />
+        <div v-else class="actions">
+          <div class="datetime-value">
+            <span class="post-datetime__icn" />
+            <span class="post-datetime__value">{{ formattedDate }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <AddComment
-      v-if="showAddCommentForm"
-      :sendNewComment="sendNewComment"
-      :userName="commentReplyUserName"
-    />
-    <Tip
-      :user="post.author"
-      v-if="showTip"
-      ref="tip"
-      @cancel="closeTip"
-      :tipId="`${post.id}`"
-      class="tip-form_post"
-    />
-    <CommentsList
-      v-if="post.commentsCount"
-      :comments="post.comments || []"
-      :commentsCount="post.commentsCount || 0"
-      :clickOnShowMore="openModal"
-      @commentReply="commentReply"
-      @likeComment="likeComment"
-      @commentRemove="commentRemove"
-    />
+      <AddComment
+        v-if="showAddCommentForm"
+        :sendNewComment="sendNewComment"
+        :userName="commentReplyUserName"
+      />
+      <Tip
+        :user="post.author"
+        v-if="showTip"
+        ref="tip"
+        @cancel="closeTip"
+        :tipId="`${post.id}`"
+        class="tip-form_post"
+      />
+      <CommentsList
+        v-if="post.commentsCount"
+        :comments="post.comments || []"
+        :commentsCount="post.commentsCount || 0"
+        :clickOnShowMore="openModal"
+        @commentReply="commentReply"
+        @likeComment="likeComment"
+        @commentRemove="commentRemove"
+      />
+    </template>
   </div>
 </template>
 
@@ -87,7 +92,9 @@ export default {
   mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
   data: function() {
     return {
-      showDropdawn: false
+      showDropdawn: false,
+      isVisible: undefined,
+      height: undefined
     };
   },
   components: {
@@ -144,6 +151,12 @@ export default {
 
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
+    },
+    visibilityChanged(isVisible, entry) {
+      this.$nextTick(() => {
+        this.isVisible = isVisible;
+        this.height = entry.boundingClientRect.height;
+      });
     }
   }
 };
