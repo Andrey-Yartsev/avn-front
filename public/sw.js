@@ -15,7 +15,7 @@ self.addEventListener("push", function(event) {
   const title = data.title;
   const options = {
     body: data.body,
-    icon: "/static/img/android-chrome-384x384.png"
+    icon: data.icon || "/static/img/android-chrome-384x384.png"
   };
   if (data.data) {
     options.data = data.data;
