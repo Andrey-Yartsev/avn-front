@@ -217,13 +217,10 @@
                     v-model="state"
                     v-validate="'required'"
                   >
-                    <option value="">Select State</option>
-                    <option
-                      :value="v.title"
-                      v-for="v in states"
-                      v-bind:key="v.id"
-                      >{{ v.title }}</option
-                    >
+                    <option :value="null">Select State</option>
+                    <option :value="v.title" v-for="v in states" :key="v.id">{{
+                      v.title
+                    }}</option>
                   </select>
                 </span>
               </label>

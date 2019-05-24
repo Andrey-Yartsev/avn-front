@@ -26,11 +26,11 @@ export default {
       if (!this._states) {
         return [];
       }
-      return Object.entries(this._states).map(v => {
+      return this._states.map(v => {
         return {
-          id: v[0],
-          title: v[1],
-          selected: v[0].id === this.state
+          id: v.id,
+          title: v.name,
+          selected: v.id === this.state
         };
       });
     }

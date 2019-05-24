@@ -270,13 +270,13 @@ export default {
               const response = await result.response.json();
               this.states.push({
                 countryId: result.countryId,
-                states: Object.entries(response).map(v => {
-                  if (this.allSelectedStates.indexOf(v[0]) !== -1) {
-                    this.selectedStates[result.countryId].push(v[0]);
+                states: response.map(v => {
+                  if (this.allSelectedStates.indexOf(v.id) !== -1) {
+                    this.selectedStates[result.countryId].push(v.id);
                   }
                   return {
-                    id: v[0],
-                    title: v[1]
+                    id: v.id,
+                    title: v.name
                   };
                 })
               });
