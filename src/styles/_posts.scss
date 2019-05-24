@@ -31,9 +31,15 @@
 
 .post {
 
+  &-details {
+
+    .posts & {
+      padding: 0 0 12px;
+      border-bottom: 1px solid rgba($gray, 0.2);
+    }
+  }
+
   .posts & {
-    padding: 0 0 12px;
-    border-bottom: 1px solid rgba($gray, 0.2);
     position: relative;
     z-index: 0;
 
