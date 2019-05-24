@@ -12,7 +12,7 @@
     :id="'p' + post.id"
     v-observe-visibility="visibilityChanged"
   >
-    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" class="postLink" />
     <a
       v-else
       :class="[
