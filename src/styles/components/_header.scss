@@ -1614,16 +1614,7 @@
     &:before {
       @include icon-font;
     }
-    &__skin-toggle {
-      &:before {
-        content: "\E636";
-      }
-      .dark-theme & {
-        &:before {
-          content: "\E637";
-        }
-      }
-    }
+
     &__qr {
       &:before {
         content: "\E63A";

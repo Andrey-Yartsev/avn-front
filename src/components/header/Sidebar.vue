@@ -86,6 +86,10 @@
               role="button"
               class="user-menu-bottom-btn user-menu-bottom-btn__skin-toggle"
               @click="toggleDarkTheme"
+              ><span
+                class="icn-theme icn-item"
+                v-tooltip="'Change theme'"
+              ></span
             ></span>
             <!-- QR temporary hidden -->
             <!--<span role="button" class="user-menu-bottom-btn user-menu-bottom-btn__qr"></span>-->
@@ -95,7 +99,7 @@
               :data-title="user.username"
               class="user-menu-bottom-btn user-menu-bottom-btn__share"
               @click="copyToClipboard"
-              ><span class="icn-share icn-item"></span
+              ><span class="icn-share icn-item" v-tooltip="'Copy link'"></span
             ></span>
           </div>
         </div>

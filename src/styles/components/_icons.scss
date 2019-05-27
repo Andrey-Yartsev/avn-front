@@ -55,6 +55,20 @@
     }
   }
 
+  &-theme {
+
+    &:after {
+      content: "\E636";
+    }
+
+    .dark-theme & {
+
+      &:after {
+        content: "\E637";
+      }
+    }
+  }
+
   &-download {
 
     &:after {
