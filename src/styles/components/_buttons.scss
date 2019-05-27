@@ -300,6 +300,13 @@ button,
   cursor: pointer;
   transition: color 0.3s ease;
   text-align: center;
+
+  &.btn-with-icon {
+
+    &:before {
+      transition: none;
+    }
+  }
 }
 
 .btn-with-icon {
