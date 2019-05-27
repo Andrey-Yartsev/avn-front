@@ -52,14 +52,16 @@
               <PostCollection :posts="posts" from="explore" />
             </div>
             <div v-else :class="['explore-wrapper', page]">
-              <component
-                :is="postComponent"
-                v-for="post in posts"
-                :post="post"
-                :key="post.id"
-                from="explore"
-                :shouldBePoster="page === 'all' && post.id === firstVideoId"
-              />
+              <template v-if="type === 'media'">
+                <component
+                  :is="postComponent"
+                  v-for="post in posts"
+                  :post="post"
+                  :key="post.id"
+                  from="explore"
+                  :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                />
+              </template>
               <template v-if="page === 'stories'">
                 <StoryMedium
                   v-for="post in stories"
