@@ -88,7 +88,7 @@
           Share this stream to your profile feed.
           <div class="toggle-element">
             <input type="checkbox" class="share-stream" v-model="haveToSave" />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </div>
         </label>
         <label
@@ -102,7 +102,7 @@
               class="share-stream"
               v-model="haveToSaveComments"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </div>
         </label>
       </div>

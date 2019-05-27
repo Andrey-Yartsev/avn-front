@@ -24,7 +24,7 @@ w<template>
               value="true"
               v-model="localUser.isPrivate"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
@@ -132,7 +132,7 @@ w<template>
               value="true"
               v-model="localUser.isPostsTweets"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
@@ -167,7 +167,7 @@ w<template>
               value="true"
               v-model="localUser.isPrivateTwitter"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>

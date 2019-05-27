@@ -18,7 +18,7 @@
               :disabled="disableBtn"
               @change="changeWP"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
@@ -34,7 +34,7 @@
               value="true"
               v-model="localUser.isEmailNotificationsEnabled"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
@@ -94,7 +94,7 @@
               value="true"
               v-model="localUser.isTweetNotificationsEnabled"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>

@@ -76,7 +76,7 @@
               name="isPrivateStories"
               v-model="localUser.isPrivateStories"
             />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
         <div class="text-enable-money border-bottom-mobile">
