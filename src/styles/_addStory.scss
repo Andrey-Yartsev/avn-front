@@ -1,19 +1,5 @@
 @import "components/imports";
 
-@keyframes splash {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 .addstory-page {
 
   html {
@@ -222,7 +208,7 @@
         @include media-breakpoint-up($desktop-breakpoint) {
 
           &:hover {
-            animation: splash .3s normal forwards ease-in-out;
+            animation: splashSize .3s normal forwards ease-in-out;
             opacity: .8;
           }
         }
