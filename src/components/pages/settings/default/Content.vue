@@ -127,7 +127,7 @@
             @change="changeWantEarn"
             v-model="localUser.isWantEarn"
           />
-          <span></span>
+          <span class="toggle-element_switcher"></span>
         </label>
       </div>
       <div

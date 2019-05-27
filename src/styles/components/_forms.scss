@@ -521,7 +521,7 @@ label {
     margin-top: -2px;
   }
 
-  span {
+  &_switcher {
     position: absolute;
     left: 0;
     right: 0;
@@ -544,12 +544,13 @@ label {
       transition: all 0.3s ease;
     }
   }
+
   input {
     display: none;
 
     &:checked {
 
-      & + span {
+      & + .toggle-element_switcher {
         background-color: $secondary-color;
 
         &:before {

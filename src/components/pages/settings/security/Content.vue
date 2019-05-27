@@ -14,7 +14,7 @@
           </span>
           <label class="toggle-element">
             <input type="checkbox" class="otpEnable" v-model="otpEnable" />
-            <span></span>
+            <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
