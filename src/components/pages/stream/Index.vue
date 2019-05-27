@@ -198,9 +198,12 @@
           live
         </div>
         <div class="form-stream">
-          <div class="stream-comments-wrapper" v-if="shownComments.length">
+          <div
+            class="comments-list stream-comments-wrapper"
+            v-if="shownComments.length"
+          >
             <div
-              class="stream-message"
+              class="comment stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
@@ -211,11 +214,15 @@
                   <img :src="comment.user.avatar" v-if="comment.user" />
                 </span>
               </span>
-              <div class="stream-message__head">
-                <span class="name">{{
-                  comment.user ? comment.user.name : "Guest"
-                }}</span>
-                <span class="stream-message__text">{{ comment.comment }}</span>
+              <div class="comment-content stream-message__head">
+                <div class="comment-body">
+                  <span class="name">{{
+                    comment.user ? comment.user.name : "Guest"
+                  }}</span>
+                  <span class="comment-text stream-message__text">{{
+                    comment.comment
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
