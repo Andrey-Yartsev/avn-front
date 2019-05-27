@@ -919,19 +919,6 @@
     }
   }
 
-  .gif-player {
-    position: relative;
-    .gif-img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #fff;
-    }
-  }
-
   & + .right-col {
 
     &,
@@ -948,6 +935,20 @@
 
   .locked-picture {
     position: static;
+  }
+}
+
+.gif-player {
+  position: relative;
+
+  .gif-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: $white;
   }
 }
 
