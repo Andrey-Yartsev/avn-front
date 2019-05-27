@@ -10,7 +10,7 @@
       :minHeight="30"
       :maxHeight="85"
       @keypress.enter.prevent="sendComment"
-    ></TextareaAutosize>
+    />
     <button
       type="submit"
       class="btn comment-btn"
@@ -51,7 +51,7 @@ export default {
   },
   watch: {
     userName: function() {
-      this.message = `@${this.userName}, `;
+      this.message = `@${this.userName} `;
       this.$refs.message.$el.focus();
     }
   }
