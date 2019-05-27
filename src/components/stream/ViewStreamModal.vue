@@ -42,19 +42,19 @@
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
-              <div class="stream-message__head">
-                <span
-                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-                >
-                  <span class="avatar__img">
-                    <img :src="comment.user.avatar" v-if="comment.user" />
-                  </span>
+              <span
+                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+              >
+                <span class="avatar__img">
+                  <img :src="comment.user.avatar" v-if="comment.user" />
                 </span>
+              </span>
+              <div class="stream-message__head">
                 <span class="name">{{
                   comment.user ? comment.user.name : "Guest"
                 }}</span>
+                <span class="stream-message__text">{{ comment.comment }}</span>
               </div>
-              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form

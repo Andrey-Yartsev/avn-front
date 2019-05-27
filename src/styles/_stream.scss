@@ -268,10 +268,9 @@
   }
 
   &__head {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
+    display: block;
+    margin-top: 3px;
+    max-width: calc(100% - 30px);
   }
 
   &__text {
@@ -280,6 +279,9 @@
 
   .name {
     margin-right: 6px;
+    display: inline;
+    word-break: break-word;
+    white-space: normal;
   }
 }
 
