@@ -8,7 +8,7 @@
         v-if="loading"
       />
       <template v-else>
-        <div class="arrow" :class="{ 'collapse-height': !profile.header }">
+        <div class="arrow" v-if="profile.header">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
