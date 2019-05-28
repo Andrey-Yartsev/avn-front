@@ -39,7 +39,8 @@
           </div>
           <div class="row">
             <div class="content-col">
-              <div class="sticky-header-controls header-mobile"
+              <div
+                class="sticky-header-controls header-mobile"
                 v-if="$mq === 'mobile'"
               >
                 <router-link
