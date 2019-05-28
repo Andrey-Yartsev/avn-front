@@ -17,7 +17,7 @@
           maxlength="8"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
-          :class="{ error: !isValid }"
+          :class="{ error: !isValid, lg: $mq === 'desktop' && needLgClassName }"
         />
       </div>
     </div>

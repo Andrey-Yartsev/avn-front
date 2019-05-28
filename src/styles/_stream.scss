@@ -345,8 +345,6 @@
     }
 
     .tip-amount-input {
-      height: 40px;
-      border-radius: 20px;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.2);
 
@@ -362,8 +360,6 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 150px;
-        height: 40px;
-        border-radius: 1000px;
       }
     }
 
