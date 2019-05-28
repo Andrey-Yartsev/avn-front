@@ -39,6 +39,13 @@
           </div>
           <div class="row">
             <div class="content-col">
+              <div class="sticky-header-controls header-mobile">
+                <router-link
+                  class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+                  :to="`/${profile.username}`"
+                />
+                <h1 class="page-title">Likes</h1>
+              </div>
               <div class="explore">
                 <div class="feed-wrapper">
                   <div class="postCollectionView">
