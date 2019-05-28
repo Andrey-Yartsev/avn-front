@@ -46,6 +46,7 @@ import countries from "@/store/modules/countries";
 import states from "@/store/modules/states";
 import trial from "@/store/modules/trial";
 import userBubble from "@/store/modules/userBubble";
+import favPosts from "@/store/modules/favPosts";
 
 Vue.use(Vuex);
 
@@ -63,6 +64,7 @@ const store = new Vuex.Store({
     otp,
     sessions,
     post,
+    favPosts,
     modal,
     chat,
     user,
