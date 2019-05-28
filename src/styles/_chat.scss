@@ -39,7 +39,6 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     min-height: 100%;
-
     display: block;
   }
   
@@ -193,8 +192,14 @@
     align-items: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  }
+
+  &:not(.chat) {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
   &.page-block {
