@@ -5,7 +5,12 @@
         <div class="mediasTop__header">
           <div id="stream-timer">{{ time }}</div>
           <div class="stream-online-label">live</div>
-          <span role="button" id="close-stream-window" class="close close_visible-mob" @click="stopWatching" />
+          <span
+            role="button"
+            id="close-stream-window"
+            class="close close_visible-mob"
+            @click="stopWatching"
+          />
         </div>
         <div class="likesContainer">
           <div
