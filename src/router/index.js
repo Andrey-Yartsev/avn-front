@@ -29,6 +29,7 @@ import AddPostPage from "@/components/pages/addPost/Index";
 import EditPostPage from "@/components/pages/editPost/Index";
 import StreamPage from "@/components/pages/stream/Index";
 import FollowersPage from "@/components/pages/followers/Index";
+import LikesPage from "@/components/pages/likes/Index";
 import StaticPage from "@/components/pages/static/Index";
 import ContactsPage from "@/components/pages/static/Contacts";
 import StatPage from "@/components/statistics/Page";
@@ -293,6 +294,15 @@ const routes = [
     meta: {
       title: "following",
       cssName: "following"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/likes",
+    component: LikesPage,
+    meta: {
+      title: "likes",
+      cssName: "likes"
     }
   },
   // PUBLIC ZONE

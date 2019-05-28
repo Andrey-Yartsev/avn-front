@@ -21,8 +21,10 @@
       </template>
     </div>
     <div class="item" v-if="profile && user && profile.id === user.id">
-      <span class="value">{{ profile.favoritesCount }}</span>
-      <span class="label">Likes</span>
+      <router-link to="/likes" v-if="isOwner(profile.id)">
+        <span class="value">{{ profile.favoritesCount }}</span>
+        <span class="label">Likes</span>
+      </router-link>
     </div>
   </div>
 </template>
