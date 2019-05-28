@@ -39,7 +39,9 @@
           </div>
           <div class="row">
             <div class="content-col">
-              <div class="sticky-header-controls header-mobile">
+              <div class="sticky-header-controls header-mobile"
+                v-if="$mq === 'mobile'"
+              >
                 <router-link
                   class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
                   :to="`/${profile.username}`"
