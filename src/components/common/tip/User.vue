@@ -1,6 +1,10 @@
 <template>
   <form class="tip-form" v-on:submit.stop.prevent="send">
-    <span role="button" class="btn lg btn-cancel" @click="$emit('cancel')"
+    <span
+      role="button"
+      class="btn btn-cancel"
+      :class="{ lg: $mq === 'desktop' }"
+      @click="$emit('cancel')"
       >Cancel</span
     >
     <div class="tip-amount-field form-group form-group_clear-gaps">
@@ -17,7 +21,12 @@
         />
       </div>
     </div>
-    <button type="submit" class="btn btn-submit lg" :disabled="!canSend">
+    <button
+      type="submit"
+      class="btn btn-submit"
+      :disabled="!canSend"
+      :class="{ lg: $mq === 'desktop' }"
+    >
       Send funds
     </button>
   </form>
