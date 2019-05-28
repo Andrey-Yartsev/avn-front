@@ -13,8 +13,7 @@
     }
   }
 
-  #site_header,
-  .addPost-btn-float {
+  #site_header {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;

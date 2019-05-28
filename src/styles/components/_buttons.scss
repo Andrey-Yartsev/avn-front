@@ -241,24 +241,27 @@ button {
     opacity: 0.3;
     pointer-events: none;
   }
-}
-button,
-[role="button"] {
-  cursor: pointer;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  &:focus {
-    outline: none;
-  }
-  &::-moz-focus-inner {
-    border: 0;
-  }
-}
-.addPost-btn-float {
+
   &,
-  .header-nav & {
+  [role="button"] {
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    &:focus {
+      outline: none;
+    }
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+}
+
+.addPost-btn-float {
+  //&,
+  //.header-nav & {
     position: fixed;
     right: 20px;
     bottom: 20px;
@@ -289,7 +292,7 @@ button,
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
-  }
+  //}
 }
 
 .profile-actions__btn {
