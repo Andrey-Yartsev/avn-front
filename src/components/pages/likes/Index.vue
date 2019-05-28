@@ -52,6 +52,12 @@
               <div class="explore">
                 <div class="feed-wrapper">
                   <PostCollection :posts="posts" from="favPosts" />
+                  <div
+                    class="loaderWrap loader-content"
+                    v-if="infinityScrollLoading"
+                  >
+                    <Loader :fullscreen="false" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -92,14 +98,12 @@ export default {
     ProfileActions,
     Footer
   },
-
-  data: () => ({
-    // loadingName: "followersRequestLoading",
-    showTip: false
-  }),
   computed: {
     loading() {
-      return this.$store.state.followers.followersRequestLoading;
+      return this.$store.state.favPosts.loading;
+    },
+    deletedPost() {
+      return this.$store.state.favPosts.deletedPost;
     },
     page() {
       return this.$route.meta.title;
@@ -111,7 +115,7 @@ export default {
       return this.$store.state.favPosts.posts;
     },
     store() {
-      return this.$store.state.likes;
+      return this.$store.state.favPosts;
     },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
@@ -131,55 +135,11 @@ export default {
       this.$store.commit("favPosts/resetPageState");
       this.getPosts();
     },
-    // follow() {
-    //   if (this.user) {
-    //     this.$store.dispatch("profile/home/follow", this.profile.id);
-    //   } else {
-    //     this.$router.push("/login");
-    //   }
-    // },
-    // unfollow() {
-    //   this.$store.dispatch("profile/home/unfollow", this.profile.id);
-    // },
-    // sendMessage() {
-    //   this.$router.push("/chat/" + this.profile.id);
-    // },
     infinityScrollGetDataMethod() {
       if (this.profile) {
         this.getPosts();
       }
     },
-    // subsRequested(data) {
-    //   if (data.action === "unsubscribe") {
-    //     this.unsubscribed(data.result);
-    //   } else if (data.action === "resubscribe") {
-    //     this.resubscribed(data.result);
-    //   } else {
-    //     throw new Error("Wrong action");
-    //   }
-    // },
-    // unsubscribed(result) {
-    //   if (!result.success) {
-    //     return;
-    //   }
-    //   this.$store.dispatch("profile/home/extend", {
-    //     subscribedByProgress: true
-    //   });
-    //   this.$store.dispatch("global/flashToast", {
-    //     text: "You have unsubscribed successfully"
-    //   });
-    // },
-    // resubscribed(result) {
-    //   if (!result.success) {
-    //     return;
-    //   }
-    //   this.$store.dispatch("profile/home/extend", {
-    //     subscribedByProgress: false
-    //   });
-    //   this.$store.dispatch("global/flashToast", {
-    //     text: "You have resubscribed successfully"
-    //   });
-    // },
     getPosts() {
       this.$store.dispatch("favPosts/getPosts");
     },
@@ -187,6 +147,12 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });
+    }
+  },
+  watch: {
+    deletedPost() {
+      this.$store.commit("favPosts/resetPageState");
+      this.$store.dispatch("profile/fetch");
     }
   },
   created() {
