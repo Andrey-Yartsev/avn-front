@@ -8,7 +8,7 @@
     </div>
     <div class="stream " v-else>
       <div class="mediasTop">
-        <div class="mediasTop__header">
+        <div class="mediasTop__header" :class="{ 'mediasTop__header-underlined' : !isStarted }">
           <span
             class="category-name category-name_live hidden-mobile"
             @click="close"

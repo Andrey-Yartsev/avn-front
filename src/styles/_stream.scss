@@ -370,8 +370,8 @@
     .btn {
       background-color: rgba(#fff, .5);
       color: $main;
-      height: 40px;
-      padding: 11px 9px;
+      padding-left: 9px;
+      padding-right: 9px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-left: 17px;
@@ -382,7 +382,7 @@
         }
       }
 
-      &.btn-send {
+      &.btn-submit {
 
         &[disabled] {
           opacity: 0.6;
@@ -415,14 +415,14 @@
       display: block;
     }
   }
+}
 
-  .stream-comment-input {
-    background: rgba(#000, 0.2);
-    color: #fff;
-    padding: 9px 45px 9px 17px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    height: 40px;
-  }
+.stream-comment-input {
+  background: rgba(#000, 0.2);
+  color: #fff;
+  padding: 9px 45px 9px 17px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  height: 40px;
 }
 
 .stream-btn {
@@ -494,25 +494,25 @@
   }
 }
 
-#close-stream-window {
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: #fff;
-  font-size: 24px;
-  padding: 8px 15px;
-  z-index: 2;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    font-size: 30px;
-    padding: 11px 15px;
-  }
-
-  &:before {
-    content: "\E605";
-    @include icon-font;
-  }
-}
+//#close-stream-window {
+//  position: absolute;
+//  right: 0;
+//  top: 0;
+//  color: #fff;
+//  font-size: 24px;
+//  padding: 8px 15px;
+//  z-index: 2;
+//
+//  @include media-breakpoint-up($desktop-breakpoint) {
+//    font-size: 30px;
+//    padding: 11px 15px;
+//  }
+//
+//  &:before {
+//    content: "\E605";
+//    @include icon-font;
+//  }
+//}
 
 
 .stream-summary-container {
