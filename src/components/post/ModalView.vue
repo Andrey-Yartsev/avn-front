@@ -74,6 +74,8 @@ export default {
         return this.$store.state.explore;
       } else if (this.from === "search/page") {
         return this.$store.state.search.page;
+      } else if (this.from === "favPosts") {
+        return this.$store.state.favPosts;
       }
       throw new Error(`from "${this.from}" does not exists`);
     },
