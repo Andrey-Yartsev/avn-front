@@ -3,7 +3,7 @@
     <span
       role="button"
       class="btn btn-cancel"
-      :class="{ lg: $mq === 'desktop' }"
+      :class="{ lg: $mq === 'desktop' && needLgClassName }"
       @click="$emit('cancel')"
       >Cancel</span
     >
@@ -25,7 +25,7 @@
       type="submit"
       class="btn btn-submit"
       :disabled="!canSend"
-      :class="{ lg: $mq === 'desktop' }"
+      :class="{ lg: $mq === 'desktop' && needLgClassName }"
     >
       Send funds
     </button>
@@ -54,6 +54,10 @@ export default {
     tipId: {
       type: String,
       default: undefined
+    },
+    needLgClassName: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

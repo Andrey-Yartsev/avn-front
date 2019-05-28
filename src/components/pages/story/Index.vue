@@ -247,6 +247,7 @@
           @cancel="closeTip"
           :tipId="`h${currentStory.id}`"
           class="tip-form_viewer"
+          :needLgClassName="true"
         />
         <button
           @click="openTip"
