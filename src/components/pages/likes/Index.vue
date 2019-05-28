@@ -29,43 +29,188 @@
             <router-link to="/followers" class="content-nav__item"
               >Followers {{ profile.followersCount }}</router-link
             >
+            <router-link
+              to="/likes"
+              class="content-nav__item"
+              v-if="isOwner(profile.id)"
+            >
+              Likes {{ profile.favoritesCount }}
+            </router-link>
           </div>
           <div class="row">
             <div class="content-col">
-              <div class="posts-container">
-                <div class="sticky-header-controls header-mobile">
-                  <router-link
-                    class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                    :to="`/${profile.username}`"
-                  />
-                  <h1 class="page-title">Following</h1>
-                </div>
-                <div class="explore">
-                  <div class="userCollectionView">
-                    <!-- <Users
-                      :items="users"
-                      :loading="false"
-                      :query="page"
-                      actionPrefix="followers"
-                    /> -->
-                    <!-- <div
-                      class="loaderWrap loader-content"
-                      v-if="infinityScrollLoading"
-                    >
-                      <Loader :fullscreen="false" />
-                    </div> -->
-                    <div class="msg-no-content" v-if="!loading && !user.length">
-                      <div
-                        class="msg-no-content__text"
-                        v-if="page === 'following'"
-                      >
-                        Start following people to see them here
-                      </div>
-                      <div class="msg-no-content__text" v-else>
-                        No one follows you yet
+              <div class="explore">
+                <div class="feed-wrapper">
+                <div class="postCollectionView">
+                  <div class="posts">
+                    <div class="post">
+                      <div class="post-wrapper">
+                        <div class="post-details">
+                          <div class="post-header">
+                            <a
+                              href="#"
+                              class="avatar avatar_gap-r-sm avatar_sm"
+                            >
+                              <span class="avatar__img">
+                                <img
+                                  src="https://avnsocial-dev.s3.amazonaws.com/files/9/9j/9jn/9jnvsevyf8kjz5frufzmqkbutnyczkid1558107368/avatar.jpg"
+                                />
+                              </span>
+                            </a>
+                            <a href="#" class="name">user1</a>
+                            <span class="user-login">
+                              <a href="#">id468343</a>
+                            </span>
+                            <span class="follow-link hidden">Follow</span>
+                            <div class="more-functions">
+                              <div class="more-functions__overlay"></div>
+                              <div class="more-functions__btn">
+                                <div class="more-functions__btn-text"></div>
+                              </div>
+                              <div class="more-functions__dropdown">
+                                <div class="more-functions__dropdown-inside">
+                                  <ul class="more-functions__list">
+                                    <li class="more-functions__item">
+                                      <button
+                                        type="button"
+                                        class="report more-functions__link"
+                                      >
+                                        <span class="more-functions__option"
+                                          >Report post</span
+                                        >
+                                      </button>
+                                    </li>
+                                    <li class="more-functions__item">
+                                      <button
+                                        type="button"
+                                        class="btn-copy-link more-functions__link"
+                                      >
+                                        <span class="more-functions__option"
+                                          >Copy link to post</span
+                                        >
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="text"></p>
+                          <div
+                            class="media"
+                            style='background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUEBAUEAwUFBAUGBgUGCA4JCAcHCBEMDQoOFBEVFBMRExMWGB8bFhceFxMTGyUcHiAhIyMjFRomKSYiKR8iIyL/2wBDAQYGBggHCBAJCRAiFhMWIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAdADIDASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUAAgMGB//EAB0QAAICAwEBAQAAAAAAAAAAAAABAwQCESExElH/xAAXAQEBAQEAAAAAAAAAAAAAAAACAQMA/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAECERL/2gAMAwEAAhEDEQA/APSLNvSfRFbu+9MrVzj6IrVptvobsplvYvdfQJ2236L5Zm2UjybYenw4ileTGEO3oV1sW2h7Vh3oNdFvh/hBgq/PCBVy88+99Fk2TyN822YNbZn6aTIb4bYTBD0vHgmw+CNbQs1LBFSDqOhpw+cFtXBcH9PFcGAlQcXCBqxWkQiv/9k=");'
+                          >
+                            <div
+                              class="lds-dual-ring transparent small with-text not-fullscreen"
+                            >
+                              <div class="loader-text">
+                                Media is currently processing
+                              </div>
+                            </div>
+                            <figure class="media-item active">
+                              <a href="#" class="postLink">
+                                <span class="video-placeholder">
+                                  <img
+                                    src="https://avnsocial-dev.s3.amazonaws.com/files/0/0c/0ce2284415b992cc70d5cdf6d5c7b5b9/718x404_d088f9bd2fc71b32c1b872a70b2850556207920_preview.jpg"
+                                  />
+                                </span>
+                              </a>
+                            </figure>
+                          </div>
+                          <div class="actions">
+                            <span class="active actions__btn">
+                              <span class="btn-icon likes"></span>
+                            </span>
+                            <span class="actions__btn comments-btn">
+                              <span class="btn-icon comments"></span>
+                              2
+                            </span>
+                            <span class="actions__btn">
+                              <span class="btn-icon tips"></span>
+                            </span>
+                            <time class="timestamp">
+                              <a href="#" class="postLink">
+                                May 24
+                              </a>
+                            </time>
+                          </div>
+                        </div>
+                        <div class="postComments">
+                          <div class="comments-list comments-list_main">
+                            <div class="comment">
+                              <a
+                                href="#"
+                                class="avatar avatar_gap-r-sm avatar_sm"
+                              >
+                                <span class="avatar__img">
+                                  <img
+                                    src="https://avnsocial-dev.s3.amazonaws.com/files/t/tl/tl4/tl4zhrssmfqykrexcm9ojmyo4rbpbme31558945116/avatar.jpg"
+                                  />
+                                </span>
+                              </a>
+                              <div class="comment-content">
+                                <div class="comment-body">
+                                  <a href="#" class="comment-author-name name"
+                                    >Павел</a
+                                  >
+                                  <div class="comment-text">yo</div>
+                                </div>
+                                <div class="comment-footer">
+                                  <time class="timestamp">May 27</time>
+                                  <button
+                                    type="button"
+                                    class="post-option btn-reply"
+                                  >
+                                    Reply
+                                  </button>
+                                </div>
+                                <button class="btn-like">
+                                  <span
+                                    class="likes likes_size-sm likes_reset-gap-r"
+                                  ></span>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="comment">
+                              <a
+                                href="#"
+                                class="avatar avatar_gap-r-sm avatar_sm"
+                              >
+                                <span class="avatar__img">
+                                  <img
+                                    src="https://avnsocial-dev.s3.amazonaws.com/files/t/tl/tl4/tl4zhrssmfqykrexcm9ojmyo4rbpbme31558945116/avatar.jpg"
+                                  />
+                                </span>
+                              </a>
+                              <div class="comment-content">
+                                <div class="comment-body">
+                                  <a href="#" class="comment-author-name name"
+                                    >Павел</a
+                                  >
+                                  <div class="comment-text">че каво</div>
+                                </div>
+                                <div class="comment-footer">
+                                  <time class="timestamp">May 27</time>
+                                  <button
+                                    type="button"
+                                    class="post-option btn-reply"
+                                  >
+                                    Reply
+                                  </button>
+                                </div>
+                                <button class="btn-like">
+                                  <span
+                                    class="likes likes_size-sm likes_reset-gap-r"
+                                  ></span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

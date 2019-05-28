@@ -29,6 +29,13 @@
             <router-link to="/followers" class="content-nav__item"
               >Followers {{ profile.followersCount }}</router-link
             >
+            <router-link
+              to="/likes"
+              class="content-nav__item"
+              v-if="isOwner(profile.id)"
+            >
+              Likes {{ profile.favoritesCount }}
+            </router-link>
           </div>
           <div class="row">
             <div class="content-col">

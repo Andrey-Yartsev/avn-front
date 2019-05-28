@@ -48,7 +48,7 @@
               :items="topModels"
               actionPrefix="topModels"
             />
-            <div v-else-if="page === 'feed'">
+            <div v-else-if="page === 'feed'" class="feed-wrapper">
               <PostCollection :posts="posts" from="explore" />
             </div>
             <div v-else :class="['explore-wrapper', page]">
