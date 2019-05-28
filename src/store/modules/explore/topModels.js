@@ -105,6 +105,8 @@ createRequestAction({
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
+    options.query.order_by = params.order_by || "revenue";
+    options.query.order_type = params.order_type || "DESC";
     return options;
   },
   resultConvert: function(result, state) {
