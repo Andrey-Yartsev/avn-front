@@ -340,6 +340,10 @@
         }
       }
 
+      .btn-icon {
+        transition: none;
+      }
+
       &.active {
         opacity: 1;
         color: $primary-color;
