@@ -204,6 +204,8 @@ input {
 
 textarea {
   resize: none;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
 label {
