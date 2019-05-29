@@ -67,7 +67,10 @@
       />
 
       <div class="tip-form tip-form_post getPaidForm" v-if="showPaid">
-        <button class="cancelPaid btn btn-cancel btn_white btn_white-alfabg" @click="showPaid = false">
+        <button
+          class="cancelPaid btn btn-cancel btn_white btn_white-alfabg"
+          @click="showPaid = false"
+        >
           Cancel
         </button>
         <input type="hidden" name="priceAmount" class="getPaidAmount" />
@@ -81,7 +84,11 @@
             v-model="price"
           />
         </div>
-        <button class="setPrice btn btn_white btn_white-alfabg" @click="setPrice" :disabled="!price">
+        <button
+          class="setPrice btn btn_white btn_white-alfabg"
+          @click="setPrice"
+          :disabled="!price"
+        >
           Set Price
         </button>
       </div>
