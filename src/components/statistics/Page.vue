@@ -246,7 +246,10 @@
         </div>
         <div class="col col-1-2">
           <div class="box">
-            <MoneyTable :data="moneyTableData" :balance="balance" />
+            <MoneyTable
+              :data="moneyTableData"
+              :currentPeriodType="currentPeriodType"
+            />
           </div>
         </div>
       </div>
@@ -1030,7 +1033,7 @@ export default {
       //
       this.subscribeUserStatistics("top_followers_count_today");
       //
-      this.subscribeUserStatistics("current_user_total_balance_info");
+      // this.subscribeUserStatistics("current_user_total_balance_info");
       // this.subscribeUserStatistics("paid_subscriptions_histogram_all");
       // this.subscribeUserStatistics("tips_histogram_all");
       // this.subscribeUserStatistics("paid_chat_messages_histogram_all");
@@ -1258,9 +1261,9 @@ export default {
           this.updateTopFollowers(statData);
           break;
 
-        case "current_user_total_balance_info":
-          this.updateTotalBalance(statData);
-          break;
+        // case "current_user_total_balance_info":
+        //   this.updateTotalBalance(statData);
+        //   break;
       }
     },
     buildScales() {

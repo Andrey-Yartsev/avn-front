@@ -533,6 +533,15 @@
   }
 }
 
+.financeTable {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 200px;
+    .table {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .b-stat-info {
   background-color: $white;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
@@ -540,6 +549,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     border-radius: 6px;
+
   }
 
   &__header {
@@ -558,6 +568,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-top: -5px;
+
     }
   }
 }

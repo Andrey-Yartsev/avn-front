@@ -46,6 +46,7 @@ import countries from "@/store/modules/countries";
 import states from "@/store/modules/states";
 import trial from "@/store/modules/trial";
 import userBubble from "@/store/modules/userBubble";
+import stats from "@/store/modules/stats";
 
 Vue.use(Vuex);
 
@@ -97,7 +98,8 @@ const store = new Vuex.Store({
     states,
     topModels,
     trial,
-    userBubble
+    userBubble,
+    stats
   }
 });
 

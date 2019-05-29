@@ -5,48 +5,55 @@
         <div class="value-data__name">
           Balance
         </div>
-        <div class="value-data__num line-4">
-          ${{ balance ? balance.data_current_balance : "-" }}
-        </div>
+        <div class="value-data__num line-4">${{ balance }}</div>
       </div>
       <div class="value-data text-right">
         <div class="value-data__name">
           Overall payouts
         </div>
-        <div class="value-data__num default-color">
-          ${{ balance ? balance.data_overall_payouts : "-" }}
-        </div>
+        <div class="value-data__num default-color">${{ payouts }}</div>
       </div>
     </div>
 
-    <table class="table table_dotts-line">
-      <thead>
-        <th><span>Date</span></th>
-        <th><span>Subscribers</span></th>
-        <th><span>Funding</span></th>
-        <th><span>Messages</span></th>
-        <th><span>Referrals</span></th>
-        <th><span>Total</span></th>
-      </thead>
-      <tbody>
-        <tr v-for="v in items" :key="v.id">
-          <td>
-            <span class="date-item">{{ month(v.date) }}</span>
-          </td>
-          <td class="line-1">${{ v.paid_subscriptions }}</td>
-          <td class="line-2">${{ v.tips }}</td>
-          <td class="line-3">${{ v.paid_chat_messages }}</td>
-          <td class="line-4">${{ v.earn_referral }}</td>
-          <td>${{ v.total }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <component :is="scrollableComponent" class="financeTable">
+      <table class="table table_dotts-line" v-if="items.length">
+        <thead>
+          <th><span>Date</span></th>
+          <th><span>Subscribers</span></th>
+          <th><span>Funding</span></th>
+          <th><span>Messages</span></th>
+          <th><span>Referrals</span></th>
+          <th><span>Total</span></th>
+        </thead>
+
+        <tbody>
+          <tr v-for="(v, i) in items" :key="i">
+            <td>
+              <span class="date-item">{{ formatDate(v.date) }}</span>
+            </td>
+            <td class="line-1">${{ v.earnSubscribes }}</td>
+            <td class="line-2">${{ v.earnTips }}</td>
+            <td class="line-3">${{ v.earnChatMessages }}</td>
+            <td class="line-4">${{ v.earnReferral }}</td>
+            <td>${{ v.total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </component>
   </div>
 </template>
 
 <script>
 import moment from "moment";
 import { chartTypes } from "./types";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+
+const dataTypes = [
+  "earnSubscribes",
+  "earnTips",
+  "earnChatMessages",
+  "earnReferral"
+];
 
 const isFloat = n => {
   return Number(n) === n && n % 1 !== 0;
@@ -57,14 +64,15 @@ const lineTypes = Object.keys(chartTypes.earnings);
 
 export default {
   name: "statistics-money-table",
-  props: ["data", "balance"],
-  methods: {
-    month(date) {
-      return "1 " + moment(date).format("MMM");
-    }
+  props: ["data", "currentPeriodType"],
+  components: {
+    VuePerfectScrollbar
   },
   computed: {
-    items() {
+    scrollableComponent() {
+      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+    },
+    itemsOld() {
       if (!this.data) {
         return [];
       }
@@ -124,7 +132,130 @@ export default {
       }
 
       return result;
+    },
+    items() {
+      if (!this.finance) {
+        return [];
+      }
+      const items = [];
+
+      const dummy = {};
+      dataTypes.forEach(dataType => {
+        dummy[dataType] = 0;
+      });
+      this.ranges.forEach(() => {
+        items.push({ ...dummy });
+      });
+
+      dataTypes.forEach(dataType => {
+        Object.entries(this.finance[dataType]).forEach(([timestamp, value]) => {
+          const date = moment.unix(timestamp);
+          this.ranges.forEach((_ranges, range) => {
+            if (date.isBetween(_ranges[0], _ranges[1])) {
+              items[range][dataType] += value;
+            }
+          });
+        });
+      });
+      items.forEach((item, i) => {
+        items[i].total = 0;
+        items[i].date = this.ranges[i][1];
+        dataTypes.forEach(dataType => {
+          items[i].total += items[i][dataType];
+        });
+      });
+      return items.reverse();
+    },
+    finance() {
+      return this.$store.state.stats.fetchFinanceResult;
+    },
+    balance() {
+      if (!this.finance) {
+        return "-";
+      }
+      return this.finance.currentBalance;
+    },
+    payouts() {
+      if (!this.finance) {
+        return "-";
+      }
+      return this.finance.overallPayouts;
+    },
+    ranges() {
+      const ranges = [];
+      let rangeNumber;
+      if (this.currentPeriodType === "last_month") {
+        rangeNumber = 5;
+        let step = Math.round(30 / rangeNumber);
+        for (let i = 0; i < rangeNumber; i++) {
+          ranges.push([
+            moment()
+              .startOf("month")
+              .add(i * step, "day"),
+            moment()
+              .startOf("month")
+              .add((i + 1) * step, "day")
+          ]);
+        }
+      } else if (this.currentPeriodType === "last_week") {
+        rangeNumber = 7;
+        for (let i = rangeNumber - 1; i >= 0; i--) {
+          ranges.push([
+            moment().subtract(i + 1, "day"),
+            moment().subtract(i, "day")
+          ]);
+        }
+      } else if (this.currentPeriodType === "last_year") {
+        rangeNumber = 12;
+        for (let i = 0; i < rangeNumber; i++) {
+          let a = moment()
+            .startOf("year")
+            .add(i - 1, "month");
+          if (a > moment()) {
+            continue;
+          }
+          ranges.push([
+            a,
+            moment()
+              .startOf("year")
+              .add(i, "month")
+          ]);
+        }
+      } else {
+        ranges.push([
+          moment().startOf("day"),
+          moment()
+            .startOf("day")
+            .add(1, "day")
+        ]);
+      }
+      return ranges;
     }
+  },
+  methods: {
+    formatDate(date) {
+      switch (this.currentPeriodType) {
+        case "last_month":
+          return date.format("D MMM");
+        case "last_week":
+          return date.format("D MMM");
+        case "last_year":
+          return date.format("D MMM");
+        case "today":
+          return "Today";
+      }
+    },
+    fetchFinance() {
+      this.$store.dispatch("stats/fetchFinance", this.currentPeriodType);
+    }
+  },
+  watch: {
+    currentPeriodType() {
+      this.fetchFinance();
+    }
+  },
+  mounted() {
+    this.fetchFinance();
   }
 };
 </script>
