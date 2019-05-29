@@ -164,6 +164,7 @@ export default {
           items[i][dataType] = Math.round(items[i][dataType] * 100) / 100;
           items[i].total += items[i][dataType];
         });
+        items[i].total = Math.round(items[i].total * 100) / 100;
       });
       return items.reverse();
     },
@@ -202,8 +203,8 @@ export default {
         rangeNumber = 7;
         for (let i = rangeNumber - 1; i >= 0; i--) {
           ranges.push([
-            moment().subtract(i + 1, "day"),
-            moment().subtract(i, "day")
+            moment().subtract(i + 7 + 1, "day"),
+            moment().subtract(i + 7, "day")
           ]);
         }
       } else if (this.currentPeriodType === "last_year") {
