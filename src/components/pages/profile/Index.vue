@@ -377,11 +377,11 @@ export default {
     this.scrollToTop();
     this.footerScrollAction();
     window.addEventListener("scroll", this.scrollAction, true);
-    document.title = this.profile.name + " | AVN";
+    document.title = this.profile.name + " | AVN Stars";
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.scrollAction, true);
-    document.title = "AVN";
+    document.title = "AVN Stars";
   }
 };
 </script>
