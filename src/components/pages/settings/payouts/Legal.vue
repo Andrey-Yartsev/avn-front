@@ -113,15 +113,17 @@
               class="form-group form-group_with-label photo-form-group"
               :class="{ disabled: legalExists }"
             >
-              <label
+              <div
                 class="form-group-inner photo-form-group-inner"
                 :class="{ success: !!uploadedPhoto }"
               >
                 <span class="label">Photo ID</span>
 
                 <div class="photo-label-wrapper">
-                  <div class="photo-label">
-                    <label for="photo" class="btn border photo-btn"
+                  <div class="photo-label btn_fix-width">
+                    <label
+                      for="photo"
+                      class="btn btn_fix-width btn_block border photo-btn"
                       >Upload</label
                     >
                   </div>
@@ -134,7 +136,7 @@
                   ref="photo"
                   @change="upload"
                 />
-              </label>
+              </div>
             </div>
 
             <div class="form-group form-group_with-label">
