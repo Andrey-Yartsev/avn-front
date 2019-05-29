@@ -56,4 +56,11 @@
       }
     }
   }
+
+  .explore & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: static;
+    }
+  }
 }

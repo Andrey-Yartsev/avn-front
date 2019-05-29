@@ -52,12 +52,12 @@
       margin-top: 0;
     }
   }
+}
 
-  .explore & {
+.block-bg {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      background-color: $white;
-    }
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    background-color: $white;
   }
 }
 

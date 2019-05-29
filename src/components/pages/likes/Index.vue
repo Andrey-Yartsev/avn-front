@@ -39,28 +39,32 @@
           </div>
           <div class="row">
             <div class="content-col">
-              <div
-                class="sticky-header-controls header-mobile"
-                v-if="$mq === 'mobile'"
-              >
-                <router-link
-                  class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                  :to="`/${profile.username}`"
-                />
-                <h1 class="page-title">Likes</h1>
-              </div>
-              <div class="explore">
-                <div class="feed-wrapper">
-                  <PostCollection :posts="posts" from="favPosts" />
-                  <div
-                    class="loaderWrap loader-content"
-                    v-if="infinityScrollLoading"
-                  >
-                    <Loader :fullscreen="false" />
-                  </div>
-                  <div class="msg-no-content" v-if="!loading && !posts.length">
-                    <div class="msg-no-content__text">
-                      Like posts to see them here
+              <div class="posts-container">
+                <div
+                  class="sticky-header-controls header-mobile"
+                  v-if="$mq === 'mobile'"
+                >
+                  <router-link
+                    class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+                    :to="`/${profile.username}`"
+                  />
+                  <h1 class="page-title">Likes</h1>
+                </div>
+                <div class="explore">
+                  <div class="feed-wrapper">
+                    <div class="block-bg">
+                      <PostCollection :posts="posts" from="favPosts" />
+                      <div
+                        class="loaderWrap loader-content"
+                        v-if="infinityScrollLoading"
+                      >
+                        <Loader :fullscreen="false" />
+                      </div>
+                      <div class="msg-no-content show" v-if="!loading && !posts.length">
+                        <div class="msg-no-content__text">
+                          Like posts to see them here
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

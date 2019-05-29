@@ -52,27 +52,29 @@
                 </div>
                 <div class="explore">
                   <div class="userCollectionView">
-                    <Users
-                      :items="users"
-                      :loading="false"
-                      :query="page"
-                      actionPrefix="followers"
-                    />
-                    <div
-                      class="loaderWrap loader-content"
-                      v-if="infinityScrollLoading"
-                    >
-                      <Loader :fullscreen="false" />
-                    </div>
-                    <div class="msg-no-content" v-if="!loading && !user.length">
+                    <div class="block-bg">
+                      <Users
+                        :items="users"
+                        :loading="false"
+                        :query="page"
+                        actionPrefix="followers"
+                      />
                       <div
-                        class="msg-no-content__text"
-                        v-if="page === 'following'"
+                        class="loaderWrap loader-content"
+                        v-if="infinityScrollLoading"
                       >
-                        Start following people to see them here
+                        <Loader :fullscreen="false" />
                       </div>
-                      <div class="msg-no-content__text" v-else>
-                        No one follows you yet
+                      <div class="msg-no-content show" v-if="!loading && !users.length">
+                        <div
+                          class="msg-no-content__text"
+                          v-if="page === 'following'"
+                        >
+                          Start following people to see them here
+                        </div>
+                        <div class="msg-no-content__text" v-else>
+                          No one follows you yet
+                        </div>
                       </div>
                     </div>
                   </div>
