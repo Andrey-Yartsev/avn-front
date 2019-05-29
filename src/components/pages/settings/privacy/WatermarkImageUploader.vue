@@ -7,8 +7,11 @@
       <span class="label">Watermark image</span>
 
       <div class="photo-label-wrapper">
-        <div class="photo-label">
-          <label for="photo" class="btn border photo-btn">
+        <div class="photo-label btn_fix-width">
+          <label
+            for="photo"
+            class="btn btn_fix-width btn_block border photo-btn"
+          >
             {{ buttonTitle }}
             <input
               type="file"

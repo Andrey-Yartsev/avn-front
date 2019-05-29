@@ -20,7 +20,7 @@
           <span @click="resetDatetime" class="datetime-value__reset" />
         </div>
       </div>
-      <div class="addPost-header">
+      <div class="addPost-header" v-if="$mq === 'mobile'">
         <button
           type="button"
           class="header-return-btn go-back go-back_times"
