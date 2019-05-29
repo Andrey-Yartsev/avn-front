@@ -65,7 +65,10 @@
                       >
                         <Loader :fullscreen="false" />
                       </div>
-                      <div class="msg-no-content show" v-if="!loading && !users.length">
+                      <div
+                        class="msg-no-content show"
+                        v-if="!loading && !users.length"
+                      >
                         <div
                           class="msg-no-content__text"
                           v-if="page === 'following'"

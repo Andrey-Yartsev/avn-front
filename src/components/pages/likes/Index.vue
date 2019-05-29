@@ -60,7 +60,10 @@
                       >
                         <Loader :fullscreen="false" />
                       </div>
-                      <div class="msg-no-content show" v-if="!loading && !posts.length">
+                      <div
+                        class="msg-no-content show"
+                        v-if="!loading && !posts.length"
+                      >
                         <div class="msg-no-content__text">
                           Like posts to see them here
                         </div>
