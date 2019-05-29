@@ -228,7 +228,7 @@ export default {
           moment().startOf("day"),
           moment()
             .startOf("day")
-            .add(1, "day")
+            .subtract(7, "day")
         ]);
       }
       return ranges;
@@ -244,7 +244,7 @@ export default {
         case "last_year":
           return date.format("D MMM");
         case "today":
-          return "Today";
+          return date.format("D MMM");
       }
     },
     fetchFinance() {
