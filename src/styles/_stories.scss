@@ -224,6 +224,13 @@
 
         .story {
 
+          .story-preview {
+
+            img {
+              box-shadow: none;
+            }
+          }
+
           .avatar {
             position: absolute;
             left: 50%;
