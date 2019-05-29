@@ -1,6 +1,10 @@
 <template>
   <form class="tip-form" v-on:submit.stop.prevent="send">
-    <span role="button" class="btn btn-cancel" @click="$emit('cancel')"
+    <span
+      role="button"
+      class="btn btn-cancel btn_white btn_white-alfabg"
+      :class="{ lg: $mq === 'desktop' && needLgClassName }"
+      @click="$emit('cancel')"
       >Cancel</span
     >
     <div class="tip-amount-field form-group form-group_clear-gaps">
@@ -13,11 +17,18 @@
           maxlength="8"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
-          :class="{ error: !isValid }"
+          :class="{ error: !isValid, lg: $mq === 'desktop' && needLgClassName }"
         />
       </div>
     </div>
-    <button type="submit" class="btn" :disabled="!canSend">Send funds</button>
+    <button
+      type="submit"
+      class="btn btn-submit btn_white btn_white-alfabg"
+      :disabled="!canSend"
+      :class="{ lg: $mq === 'desktop' && needLgClassName }"
+    >
+      Send funds
+    </button>
   </form>
 </template>
 
@@ -43,6 +54,10 @@ export default {
     tipId: {
       type: String,
       default: undefined
+    },
+    needLgClassName: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

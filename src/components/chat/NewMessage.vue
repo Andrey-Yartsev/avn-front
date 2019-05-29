@@ -19,7 +19,7 @@
           </div>
           <h3 class="hidden-mobile new-message-title">New message</h3>
           <button
-            class="nextStep btn hidden-desktop"
+            class="nextStep btn sm hidden-desktop"
             :disabled="!selected.length"
             @click="next"
             v-if="$mq === 'mobile'"

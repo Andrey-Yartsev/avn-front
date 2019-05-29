@@ -97,18 +97,19 @@
               </div>
             </div>
           </label>
-          <label class="form-group form-group_with-label">
+          <div class="form-group form-group_with-label">
             <div class="form-group-inner">
-              <span class="label"></span>
+              <span class="label" v-if="$mq === 'desktop'"></span>
               <button
                 :disabled="!isFormValid || sending"
                 type="submit"
-                class="btn lg"
+                class="btn lg btn_fix-width-md"
+                :class="{ 'block btn-center': $mq === 'mobile' }"
               >
                 Submit
               </button>
             </div>
-          </label>
+          </div>
         </form>
       </template>
     </div>

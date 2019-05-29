@@ -5,7 +5,7 @@
       class="addPost-btn-float hidden-desktop"
       v-if="$mq === 'mobile'"
       to="/addPost"
-    ></router-link>
+    />
     <div class="container">
       <div class="over-container">
         <Navigate />
@@ -48,18 +48,20 @@
               :items="topModels"
               actionPrefix="topModels"
             />
-            <div v-else-if="page === 'feed'">
+            <div v-else-if="page === 'feed'" class="feed-wrapper">
               <PostCollection :posts="posts" from="explore" />
             </div>
             <div v-else :class="['explore-wrapper', page]">
-              <component
-                :is="postComponent"
-                v-for="post in posts"
-                :post="post"
-                :key="post.id"
-                from="explore"
-                :shouldBePoster="page === 'all' && post.id === firstVideoId"
-              />
+              <template v-if="type === 'media'">
+                <component
+                  :is="postComponent"
+                  v-for="post in posts"
+                  :post="post"
+                  :key="post.id"
+                  from="explore"
+                  :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                />
+              </template>
               <template v-if="page === 'stories'">
                 <StoryMedium
                   v-for="post in stories"

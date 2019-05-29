@@ -8,10 +8,14 @@
     </div>
     <div class="stream " v-else>
       <div class="mediasTop">
-        <div class="mediasTop__header">
+        <div
+          class="mediasTop__header"
+          :class="{ 'mediasTop__header-underlined': !isStarted }"
+        >
           <span
             class="category-name category-name_live hidden-mobile"
             @click="close"
+            v-if="$mq === 'mobile'"
             >Live video</span
           >
           <button class="close close_visible-mob" @click="close">
@@ -198,25 +202,32 @@
           live
         </div>
         <div class="form-stream">
-          <div class="stream-comments-wrapper" v-if="shownComments.length">
+          <div
+            class="comments-list stream-comments-wrapper"
+            v-if="shownComments.length"
+          >
             <div
-              class="stream-message"
+              class="comment stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
-              <div class="stream-message__head">
-                <span
-                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-                >
-                  <span class="avatar__img">
-                    <img :src="comment.user.avatar" v-if="comment.user" />
-                  </span>
+              <span
+                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+              >
+                <span class="avatar__img">
+                  <img :src="comment.user.avatar" v-if="comment.user" />
                 </span>
-                <span class="name">{{
-                  comment.user ? comment.user.name : "Guest"
-                }}</span>
+              </span>
+              <div class="comment-content stream-message__head">
+                <div class="comment-body">
+                  <span class="name">{{
+                    comment.user ? comment.user.name : "Guest"
+                  }}</span>
+                  <span class="comment-text stream-message__text">{{
+                    comment.comment
+                  }}</span>
+                </div>
               </div>
-              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form class="stream-comment-form" v-if="showCommentForm">
@@ -266,7 +277,10 @@
         />
       </div>
       <div class="mediasBottom" v-if="isReadyToStart">
-        <button class="btn alt lg change-devices" @click="tryToStartStream">
+        <button
+          class="btn alt lg block change-devices btn-center btn_fix-width-lg btn_not-bold btn_white btn_white-alfabg"
+          @click="tryToStartStream"
+        >
           Start live video
         </button>
       </div>

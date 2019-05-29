@@ -1,29 +1,5 @@
 @import "components/imports";
 
-@-webkit-keyframes lineWidth {
-
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
-
-}
-
-@keyframes lineWidth {
-
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
-
-}
-
 .head-story {
   position: absolute;
   top: 15px;

@@ -508,32 +508,6 @@
     }
   }
 
-  .voting-block-toggle-btn {
-    display: none;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    color: $secondary-color;
-
-    &.active {
-      color: $secondary-color-darken;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $secondary-color-darken;
-      }
-    }
-
-    &:before {
-      @include icon-font;
-      font-size: 24px;
-      width: 1.5em;
-      display: block;
-      content: "\E624";
-    }
-  }
-
   &.expanded {
 
     .text-media-container {
@@ -635,10 +609,6 @@
         flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
         margin-left: auto;
       }
-    }
-
-    .voting-block-toggle-btn {
-      display: block;
     }
 
     .post-datetime {

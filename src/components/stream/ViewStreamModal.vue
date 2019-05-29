@@ -2,9 +2,16 @@
   <Modal :onClose="close">
     <template slot="content">
       <div id="stream">
-        <div id="stream-timer">{{ time }}</div>
-        <div class="stream-online-label">live</div>
-        <span role="button" id="close-stream-window" @click="stopWatching" />
+        <div class="mediasTop__header">
+          <div id="stream-timer">{{ time }}</div>
+          <div class="stream-online-label">live</div>
+          <span
+            role="button"
+            id="close-stream-window"
+            class="close close_visible-mob"
+            @click="stopWatching"
+          />
+        </div>
         <div class="likesContainer">
           <div
             v-for="like in likes"
@@ -36,25 +43,32 @@
           </div>
         </div>
         <div class="form-stream">
-          <div class="stream-comments-wrapper" v-if="shownComments.length">
+          <div
+            class="comments-list stream-comments-wrapper"
+            v-if="shownComments.length"
+          >
             <div
-              class="stream-message"
+              class="comment stream-message"
               v-for="comment in shownComments"
               v-bind:key="comment.comment + comment.hideTime"
             >
-              <div class="stream-message__head">
-                <span
-                  class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-                >
-                  <span class="avatar__img">
-                    <img :src="comment.user.avatar" v-if="comment.user" />
-                  </span>
+              <span
+                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
+              >
+                <span class="avatar__img">
+                  <img :src="comment.user.avatar" v-if="comment.user" />
                 </span>
-                <span class="name">{{
-                  comment.user ? comment.user.name : "Guest"
-                }}</span>
+              </span>
+              <div class="comment-content stream-message__head">
+                <div class="comment-body">
+                  <span class="name">{{
+                    comment.user ? comment.user.name : "Guest"
+                  }}</span>
+                  <span class="comment-text stream-message__text">{{
+                    comment.comment
+                  }}</span>
+                </div>
               </div>
-              <span class="stream-message__text">{{ comment.comment }}</span>
             </div>
           </div>
           <form
@@ -83,6 +97,7 @@
             @cancel="closeTip"
             :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
             class="tip-form_viewer"
+            :needLgClassName="true"
           />
         </div>
         <div

@@ -1,48 +1,5 @@
 @import "components/imports";
 
-@keyframes splash {
-  0% {
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  30% {
-    transform: translate(-10px, -20px);
-  }
-
-  40% {
-    transform: translate(0, -30px);
-  }
-
-  50% {
-    transform: translate(10px, -40px);
-  }
-
-  60% {
-    transform: translate(0, -50px);
-  }
-
-  70% {
-    transform: translate(-10px, -60px);
-  }
-
-  80% {
-    transform: translate(0, -70px);
-  }
-
-  90% {
-    transform: translate(10px, -80px);
-  }
-
-  100% {
-    transform: translate(0, -90px);
-    opacity: 0;
-  }
-}
-
 .stream-page {
 
   &,
@@ -282,6 +239,7 @@
     color-stop(0, transparent),
     color-stop(0.2, #000)
   );
+  padding: 0;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 184px;
@@ -299,30 +257,20 @@
 }
 
 .stream-message {
-  display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
-  margin: 5px 0 0;
   width: 100%;
-  padding: 3px;
+  padding: 8px 3px 3px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin: 8px 0 0;
+    padding-top: 11px;
   }
 
   &__head {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
+    margin-top: 3px;
+    max-width: calc(100% - 30px);
   }
 
-  &__text {
-    padding-top: 3px;
-  }
-
-  .name {
-    margin-right: 6px;
+  .comment-body {
+    padding-right: 0;
   }
 }
 
@@ -397,8 +345,6 @@
     }
 
     .tip-amount-input {
-      height: 40px;
-      border-radius: 20px;
       text-align: center;
       background-color: rgba(0, 0, 0, 0.2);
 
@@ -414,27 +360,28 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 150px;
-        height: 40px;
-        border-radius: 1000px;
+      }
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: #fff;
+
+        &:hover,
+        &:focus {
+          -webkit-text-fill-color: #fff;
+        }
       }
     }
 
     .btn {
-      background-color: rgba(#fff, .5);
-      color: $main;
-      height: 40px;
-      padding: 11px 9px;
+      padding-left: 9px;
+      padding-right: 9px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-left: 17px;
         padding-right: 17px;
-
-        &:hover {
-          background-color: #fff;
-        }
       }
 
-      &.btn-send {
+      &.btn-submit {
 
         &[disabled] {
           opacity: 0.6;
@@ -467,14 +414,14 @@
       display: block;
     }
   }
+}
 
-  .stream-comment-input {
-    background: rgba(#000, 0.2);
-    color: #fff;
-    padding: 9px 45px 9px 17px;
-    border: 1px solid rgba(255, 255, 255, .2);
-    height: 40px;
-  }
+.stream-comment-input {
+  background: rgba(#000, 0.2);
+  color: #fff;
+  padding: 9px 45px 9px 17px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  height: 40px;
 }
 
 .stream-btn {
@@ -545,27 +492,6 @@
     height: 100%;
   }
 }
-
-#close-stream-window {
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: #fff;
-  font-size: 24px;
-  padding: 8px 15px;
-  z-index: 2;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    font-size: 30px;
-    padding: 11px 15px;
-  }
-
-  &:before {
-    content: "\E605";
-    @include icon-font;
-  }
-}
-
 
 .stream-summary-container {
   width: 100%;
@@ -920,7 +846,7 @@
       }
 
       &:after {
-        top: 0px;
+        top: 0;
         right: -13px;
       }
     }

@@ -57,15 +57,29 @@ textarea,
     outline: none;
     background-color: $secondary-color-10;
 
-    &::-moz-placeholder,
-    &:-ms-input-placeholder,
+    &::-moz-placeholder {
+      opacity: 0;
+    }
+
+    &:-ms-input-placeholder {
+      opacity: 0;
+    }
+
     &::-webkit-input-placeholder {
       opacity: 0;
     }
   }
 
-  &::-moz-placeholder,
-  &:-ms-input-placeholder,
+  &::-moz-placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
+  &:-ms-input-placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
   &::-webkit-input-placeholder {
     color: inherit;
     opacity: 0.5;
@@ -190,6 +204,8 @@ input {
 
 textarea {
   resize: none;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
 label {
