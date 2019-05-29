@@ -929,7 +929,7 @@ export default {
     return {
       periodTypes,
       periodOptionsOpened: false,
-      currentPeriodType: "last_year",
+      currentPeriodType: "last_week",
       //
       showedStats: {},
       profileMapData: [],
