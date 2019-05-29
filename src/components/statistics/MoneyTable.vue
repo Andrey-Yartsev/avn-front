@@ -161,6 +161,7 @@ export default {
         items[i].total = 0;
         items[i].date = this.ranges[i][1];
         dataTypes.forEach(dataType => {
+          items[i][dataType] = Math.round(items[i][dataType] * 100) / 100;
           items[i].total += items[i][dataType];
         });
       });
@@ -246,12 +247,21 @@ export default {
       }
     },
     fetchFinance() {
-      this.$store.dispatch("stats/fetchFinance", this.currentPeriodType);
+      this.$store.dispatch(
+        "stats/fetchFinance",
+        this.currentPeriodType.replace(/last_(.*)/, "$1")
+      );
     }
   },
   watch: {
     currentPeriodType() {
       this.fetchFinance();
+    },
+    finance() {
+      console.log(
+        moment.unix(Object.keys(this.finance.earnTips)[0]).toString()
+      );
+      console.log(Object.keys(this.finance.earnTips)[0]);
     }
   },
   mounted() {
