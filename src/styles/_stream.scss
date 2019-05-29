@@ -361,6 +361,15 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         width: 150px;
       }
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: #fff;
+
+        &:hover,
+        &:focus {
+          -webkit-text-fill-color: #fff;
+        }
+      }
     }
 
     .btn {
