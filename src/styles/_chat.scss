@@ -724,14 +724,6 @@
       }
     }
   }
-
-  .btn {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      height: 24px;
-      padding: 3px 16px;
-    }
-  }
 }
 
 .selectedChatHeader {
