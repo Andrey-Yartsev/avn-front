@@ -2,7 +2,7 @@
   <form class="tip-form" v-on:submit.stop.prevent="send">
     <span
       role="button"
-      class="btn btn-cancel"
+      class="btn btn-cancel btn_white btn_white-alfabg"
       :class="{ lg: $mq === 'desktop' && needLgClassName }"
       @click="$emit('cancel')"
       >Cancel</span
@@ -23,7 +23,7 @@
     </div>
     <button
       type="submit"
-      class="btn btn-submit"
+      class="btn btn-submit btn_white btn_white-alfabg"
       :disabled="!canSend"
       :class="{ lg: $mq === 'desktop' && needLgClassName }"
     >

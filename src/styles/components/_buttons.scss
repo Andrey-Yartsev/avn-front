@@ -50,16 +50,6 @@
     padding: 11px 29px;
   }
 
-  &.btn-cancel {
-    background: rgba($gray, 0.5);
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        background: darken(rgba($gray, 0.5), 10%);
-      }
-    }
-  }
   &.block {
     display: block;
     width: 100%;
@@ -140,15 +130,30 @@
       }
     }
   }
-  &.gray {
-    background-color: rgba($gray, 0.5);
+
+  &_white {
+    color: $main;
 
     @include media-breakpoint-up($desktop-breakpoint) {
 
       &:hover {
-        background-color: $primary-color;
-        color: #fff;
+        color: $main;
       }
+    }
+
+    &-alfabg {
+      background-color: rgba(#fff, .5);
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+    }
+
+    &-default {
+      background-color: #fff;
     }
   }
 
@@ -646,7 +651,6 @@ button {
     line-height: 0;
     vertical-align: middle;
     font-weight: 400;
-    //margin-right: 5px;
   }
 
   &_size {
@@ -690,7 +694,6 @@ button {
 }
 
 .tips {
-  //color: $main-color;
   align-items: center;
 
   &:not(.btn-icon) {
@@ -707,7 +710,6 @@ button {
   &:before {
     width: 1.1em;
     content: "\E618";
-    //transform: translateY(-1px);
   }
 }
 

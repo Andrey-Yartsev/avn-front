@@ -110,7 +110,7 @@
         class="mediasBottom"
         @click="() => this.close(this.haveToSave, this.haveToSaveComments)"
       >
-        <button class="btn alt lg change-devices">Done</button>
+        <button class="btn alt lg block change-devices btn-center btn_fix-width-btn btn_not-bold btn_white btn_white-alfabg">Done</button>
       </div>
     </div>
     <Loader :fullscreen="true" text="" v-if="loading" />

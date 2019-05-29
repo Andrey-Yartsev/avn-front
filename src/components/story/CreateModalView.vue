@@ -23,7 +23,7 @@
                     >
                   </button>
                   <button
-                    class="newStory btn sm hidden-desktop"
+                    class="newStory btn btn_white btn_white-default sm hidden-desktop"
                     v-if="$mq === 'mobile'"
                     @click.prevent="createNewStory"
                   >
@@ -34,7 +34,7 @@
               <div class="mediasBottom">
                 <button
                   type="submit"
-                  class="addStoryButton btn"
+                  class="addStoryButton btn lg block btn-center btn_fix-width-lg btn_not-bold btn_white btn_white-alfabg"
                   :disabled="!readyToUpload"
                   @click.prevent="createNewStory"
                 >

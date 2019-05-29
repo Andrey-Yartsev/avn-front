@@ -277,7 +277,7 @@
         />
       </div>
       <div class="mediasBottom" v-if="isReadyToStart">
-        <button class="btn alt lg change-devices" @click="tryToStartStream">
+        <button class="btn alt lg block change-devices btn-center btn_fix-width-lg btn_not-bold btn_white btn_white-alfabg" @click="tryToStartStream">
           Start live video
         </button>
       </div>
