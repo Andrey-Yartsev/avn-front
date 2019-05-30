@@ -5,7 +5,9 @@
     </div>
     <div class="user-container">
       <div class="avatar avatar_md avatar_md-desk">
-        <span class="avatar__img"
+        <span
+          class="avatar__img"
+          :class="{ 'with-story': profile.hasNotViewedStory }"
           ><img v-if="profile.avatar" :src="profile.avatar"
         /></span>
         <div class="stream-online-label" v-if="showLiveLabel">live</div>
