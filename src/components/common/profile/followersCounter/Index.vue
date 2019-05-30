@@ -1,6 +1,6 @@
 <template>
   <div class="profile-data">
-    <div class="item" v-if="profile">
+    <div class="item" v-if="profile && profile.followingCount">
       <router-link to="/following" v-if="isOwner(profile.id)">
         <span class="value">{{ profile.followingCount }}</span>
         <span class="label">Following</span>
@@ -10,7 +10,7 @@
         <span class="label">Following</span>
       </template>
     </div>
-    <div class="item">
+    <div class="item" v-if="profile.followersCount">
       <router-link to="/followers" v-if="isOwner(profile.id)">
         <span class="value">{{ profile.followersCount }}</span>
         <span class="label">Followers</span>
