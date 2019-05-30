@@ -4,7 +4,7 @@
       <h1>
         {{ user.name }}
       </h1>
-      <router-link to="/logout" class="link-title btn-logout"
+      <router-link to="/logout" class="link-title"
         >Log out</router-link
       >
     </div>
