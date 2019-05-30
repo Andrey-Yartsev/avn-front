@@ -26,6 +26,7 @@
           <th><span>Total</span></th>
         </thead>
 
+        <!--
         <tbody>
           <tr v-for="(v, i) in items" :key="i">
             <td>
@@ -35,6 +36,20 @@
             <td class="line-2">${{ v.earnTips }}</td>
             <td class="line-3">${{ v.earnChatMessages }}</td>
             <td class="line-4">${{ v.earnReferral }}</td>
+            <td>${{ v.total }}</td>
+          </tr>
+        </tbody>
+        -->
+
+        <tbody>
+          <tr v-for="(v, i) in items2" :key="i">
+            <td>
+              <span class="date-item">{{ formatTimestamp(v.timestamp) }}</span>
+            </td>
+            <td class="line-1">${{ v.values.earnSubscribes || 0 }}</td>
+            <td class="line-2">${{ v.values.earnTips || 0 }}</td>
+            <td class="line-3">${{ v.values.earnChatMessages || 0 }}</td>
+            <td class="line-4">${{ v.values.earnReferral || 0 }}</td>
             <td>${{ v.total }}</td>
           </tr>
         </tbody>
@@ -168,6 +183,73 @@ export default {
       });
       return items.reverse();
     },
+    // items() {
+    //   if (!this.finance) {
+    //     return [];
+    //   }
+    //   const items = [];
+    //
+    //   const dummy = {};
+    //   dataTypes.forEach(dataType => {
+    //     dummy[dataType] = 0;
+    //   });
+    //   this.ranges.forEach(() => {
+    //     items.push({ ...dummy });
+    //   });
+    //
+    //   dataTypes.forEach(dataType => {
+    //     Object.entries(this.finance[dataType]).forEach(([timestamp, value]) => {
+    //       const date = moment.unix(timestamp);
+    //       this.ranges.forEach((_ranges, range) => {
+    //         if (date.isBetween(_ranges[0], _ranges[1])) {
+    //           items[range][dataType] += value;
+    //         }
+    //       });
+    //     });
+    //   });
+    //   items.forEach((item, i) => {
+    //     items[i].total = 0;
+    //     items[i].date = this.ranges[i][1];
+    //     dataTypes.forEach(dataType => {
+    //       items[i][dataType] = Math.round(items[i][dataType] * 100) / 100;
+    //       items[i].total += items[i][dataType];
+    //     });
+    //     items[i].total = Math.round(items[i].total * 100) / 100;
+    //   });
+    //   return items.reverse();
+    // },
+    items2() {
+      if (!this.finance) {
+        return [];
+      }
+      const data = {};
+      dataTypes.forEach(dataType => {
+        Object.entries(this.finance[dataType]).forEach(([timestamp, value]) => {
+          if (!data[timestamp]) {
+            data[timestamp] = {};
+          }
+          data[timestamp][dataType] = value;
+        });
+      });
+      const items = [];
+      Object.entries(data).forEach(([timestamp, values]) => {
+        timestamp = parseInt(timestamp);
+        items.push({
+          timestamp,
+          values
+        });
+      });
+      for (let item of items) {
+        let total = 0;
+        for (let value of Object.values(item.values)) {
+          total += value;
+        }
+        total = Math.round(total * 100) / 100;
+        item.total = total;
+      }
+      items.sort((n1, n2) => n1 - n2);
+      return items;
+    },
     finance() {
       return this.$store.state.stats.fetchFinanceResult;
     },
@@ -203,8 +285,8 @@ export default {
         rangeNumber = 7;
         for (let i = rangeNumber - 1; i >= 0; i--) {
           ranges.push([
-            moment().subtract(i + 7 + 1, "day"),
-            moment().subtract(i + 7, "day")
+            moment().subtract(i + 1, "day"),
+            moment().subtract(i, "day")
           ]);
         }
       } else if (this.currentPeriodType === "last_year") {
@@ -224,18 +306,26 @@ export default {
           ]);
         }
       } else {
-        ranges.push([
-          moment().startOf("day"),
-          moment()
-            .startOf("day")
-            .subtract(7, "day")
-        ]);
+        ranges.push([moment().startOf("day"), moment().startOf("day")]);
       }
       return ranges;
     }
   },
   methods: {
     formatDate(date) {
+      switch (this.currentPeriodType) {
+        case "last_month":
+          return date.format("D MMM");
+        case "last_week":
+          return date.format("D MMM");
+        case "last_year":
+          return date.format("D MMM");
+        case "today":
+          return date.format("D MMM");
+      }
+    },
+    formatTimestamp(timestamp) {
+      const date = moment.unix(timestamp);
       switch (this.currentPeriodType) {
         case "last_month":
           return date.format("D MMM");
@@ -257,12 +347,6 @@ export default {
   watch: {
     currentPeriodType() {
       this.fetchFinance();
-    },
-    finance() {
-      console.log(
-        moment.unix(Object.keys(this.finance.earnTips)[0]).toString()
-      );
-      console.log(Object.keys(this.finance.earnTips)[0]);
     }
   },
   mounted() {
