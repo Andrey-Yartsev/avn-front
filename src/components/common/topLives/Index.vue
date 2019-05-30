@@ -1,11 +1,8 @@
 <template>
   <div class="storyView storyView_top-live">
     <div class="story">
-      <router-link
-        to="explore/live"
-        class="avatar avatar_lg avatar_lg-desk with-story"
-      >
-        <span class="avatar__slider">
+      <router-link to="explore/live" class="avatar avatar_lg avatar_lg-desk">
+        <span class="avatar__slider with-story">
           <span
             :class="[
               'avatar__slide',

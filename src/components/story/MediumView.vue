@@ -16,13 +16,11 @@
         class="story-preview story-preview_list bg-gradient bg-gradient_light"
       >
         <img :src="image" class="story-preview__img" />
-        <div
-          :class="[
-            'avatar avatar_ex-lg',
-            { 'with-story': post.user.hasNotViewedStory }
-          ]"
-        >
-          <span class="avatar__img">
+        <div class="avatar avatar_ex-lg">
+          <span
+            class="avatar__img"
+            :class="{ 'with-story': post.user.hasNotViewedStory }"
+          >
             <img v-if="post.user.avatar" :src="post.user.avatar" />
           </span>
         </div>

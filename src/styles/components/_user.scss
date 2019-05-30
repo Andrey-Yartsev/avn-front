@@ -271,31 +271,38 @@
       content: "";
     }
   }
+}
 
-  &.with-story {
+.with-story {
 
-    .avatar__img {
+  &:after {
+    z-index: -1;
+    background: linear-gradient(
+      to top,
+      #9466ff 0%,
+      $default-secondary-color 100%
+    )
+    100% no-repeat,
+    linear-gradient(to bottom, $default-primary-color 0%, #9466ff 100%) 0
+    no-repeat;
+    background-size: 50% 100%;
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    top: -5px;
+    transform: rotate(60deg);
+    transition: all 0.3s;
 
-      &:after {
-        z-index: -1;
-        background: linear-gradient(
-          to top,
-          #9466ff 0%,
-          $default-secondary-color 100%
-        )
-        100% no-repeat,
-        linear-gradient(to bottom, $default-primary-color 0%, #9466ff 100%) 0
-        no-repeat;
-        background-size: 50% 100%;
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-        top: -5px;
-        transform: rotate(60deg);
-        transition: all 0.3s;
+    .profile-images & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: calc(-0.045em - (200px - 1em) * 0.02);
+        right: calc(-0.045em - (200px - 1em) * 0.02);
+        bottom: calc(-0.045em - (200px - 1em) * 0.02);
+        top: calc(-0.045em - (200px - 1em) * 0.02);
       }
     }
   }

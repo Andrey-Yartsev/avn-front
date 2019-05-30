@@ -3,13 +3,13 @@
     <div class="story">
       <a
         :href="`/stories/${post.user.id}`"
-        :class="[
-          'avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg',
-          { 'with-story': post.user.hasNotViewedStory }
-        ]"
+        class="avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg"
         @click.prevent="() => watchAll(post.user.id)"
       >
-        <span class="avatar__img">
+        <span
+          class="avatar__img"
+          :class="{ 'with-story': post.user.hasNotViewedStory }"
+        >
           <img v-if="post.user.avatar" :src="post.user.avatar" />
         </span>
       </a>

@@ -253,22 +253,6 @@
         }
       }
     }
-
-    &.with-story {
-
-      .avatar__img {
-
-        &:after {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            left: calc(-0.045em - (200px - 1em) * 0.02);
-            right: calc(-0.045em - (200px - 1em) * 0.02);
-            bottom: calc(-0.045em - (200px - 1em) * 0.02);
-            top: calc(-0.045em - (200px - 1em) * 0.02);
-          }
-        }
-      }
-    }
   }
 
   .stream-online-label {
