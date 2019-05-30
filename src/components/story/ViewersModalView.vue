@@ -18,8 +18,8 @@
           <div class="stories-list-preview">
             <swiper :options="swiperOption" key="viewerModalView" ref="swiper">
               <swiper-slide v-for="(story, key) in stories" :key="key">
-                <div class="story-preview">
-                  <img :src="story.preview.source" />
+                <div class="story-preview story-preview_viewers">
+                  <img :src="story.preview.source" class="story-preview__img" />
                   <div class="amount-viewers">
                     <span class="icn-viewer icn-item" />{{ story.viewersCount }}
                   </div>

@@ -224,24 +224,6 @@
 
         .story {
 
-          .story-preview {
-
-            img {
-              box-shadow: none;
-            }
-          }
-
-          .avatar {
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translate(-50%, 50%);
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              bottom: -2px;
-            }
-          }
-
           .user-login {
 
             @include media-breakpoint-up($desktop-breakpoint) {
@@ -389,26 +371,6 @@
   .timestamp {
     padding-left: 20px;
     margin-left: auto;
-  }
-
-  .story-preview {
-    position: relative;
-    margin: 0 0 77px;
-    padding-top: 100%;
-    height: 0;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-bottom: 42%;
-    }
-
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
 
   .user-names {
@@ -811,6 +773,10 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
+  .username-group {
+    max-width: calc(100% - 50px);
+  }
 }
 
 .controls-story {
@@ -889,24 +855,6 @@
 
   .swiper-slide {
     width: auto;
-
-    &.active {
-
-      .story-preview {
-
-        img {
-          opacity: 1;
-        }
-      }
-    }
-  }
-
-  .story-preview {
-
-    img {
-      opacity: .7;
-      transition: opacity .3s;
-    }
   }
 }
 
@@ -916,27 +864,66 @@
   height: 100%;
   box-sizing: border-box;
 
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    opacity: .15;
-    z-index: 1;
-    height: 30px;
+  &_viewers {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 40px;
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      opacity: .15;
+      z-index: 1;
+      height: 30px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 40px;
+      }
+    }
+
+    .story-preview__img {
+      height: 100%;
+      z-index: 0;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+      opacity: .7;
+      transition: opacity .3s;
+
+      .active & {
+        opacity: 1;
+      }
     }
   }
 
-  img {
-    display: block;
-    height: 100%;
-    z-index: 0;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  &_list {
+    margin: 0 0 77px;
+    padding-top: 100%;
+    height: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-bottom: 42%;
+    }
+
+    .story-preview__img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        bottom: -2px;
+      }
+    }
   }
 
   .amount-viewers {

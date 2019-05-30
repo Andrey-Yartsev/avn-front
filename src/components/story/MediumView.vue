@@ -12,8 +12,8 @@
       @click.prevent="go"
       class="story"
     >
-      <div class="story-preview bg-gradient bg-gradient_light">
-        <img :src="image" />
+      <div class="story-preview story-preview_list bg-gradient bg-gradient_light">
+        <img :src="image" class="story-preview__img" />
         <div
           :class="[
             'avatar avatar_ex-lg',
