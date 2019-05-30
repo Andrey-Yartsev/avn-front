@@ -153,6 +153,9 @@ export default {
       this.showTip = false;
     },
     visibilityChanged(isVisible, entry) {
+      if (this.$mq === "desktop") {
+        return;
+      }
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
     }
