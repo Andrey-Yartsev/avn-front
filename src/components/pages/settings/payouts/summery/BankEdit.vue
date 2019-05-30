@@ -68,8 +68,6 @@
           </div>
 
           <div class="form-group-btn">
-            ={{ { changed, valid, saving } }}=
-            {{ errors }}
             <button
               type="submit"
               class="btn lg btn_fix-width"

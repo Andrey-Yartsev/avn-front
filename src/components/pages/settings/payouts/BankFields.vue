@@ -1,7 +1,5 @@
 <template>
   <div>
-    {{ isFormValid }}
-    {{ errors }}
     <div
       class="form-group form-group_with-label"
       :class="{ 'field-invalid': fieldError(v.code) }"
