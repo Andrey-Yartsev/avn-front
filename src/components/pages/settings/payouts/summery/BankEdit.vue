@@ -40,6 +40,7 @@
           <BankFields
             :bankFields="bankFields"
             :localBank="localBank"
+            @validChange="validChange"
             ref="bankFields"
           />
 
@@ -67,6 +68,8 @@
           </div>
 
           <div class="form-group-btn">
+            ={{ { changed, valid, saving } }}=
+            {{ errors }}
             <button
               type="submit"
               class="btn lg btn_fix-width"
@@ -92,15 +95,13 @@ export default {
   data() {
     return {
       localBank: null,
-      saving: false
+      saving: false,
+      valid: false
     };
   },
   computed: {
     changed() {
       return JSON.stringify(this.bank) !== JSON.stringify(this.localBank);
-    },
-    valid() {
-      return this.$refs.bankFields.isFormValid;
     },
     account() {
       return this.$store.state.payouts.account.fetchResult;
@@ -115,6 +116,9 @@ export default {
     }
   },
   methods: {
+    validChange(valid) {
+      this.valid = valid;
+    },
     _clone(o) {
       return JSON.parse(JSON.stringify(o));
     },
@@ -133,13 +137,13 @@ export default {
       });
 
       this.$store.dispatch("payouts/bank/save", data).then(r => {
+        this.saving = false;
         if (r.error) {
           return;
         }
         this.$store.dispatch("global/flashToast", {
           text: "Bank info saved successfully"
         });
-        this.saving = false;
         this.cancel();
       });
     },

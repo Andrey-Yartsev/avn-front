@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{ isFormValid }}
+    {{ errors }}
     <div
       class="form-group form-group_with-label"
       :class="{ 'field-invalid': fieldError(v.code) }"
@@ -61,6 +63,14 @@ export default {
         this.$emit("change");
       }, 10);
     }
+  },
+  watch: {
+    isFormValid(isFormValid) {
+      this.$emit("validChange", isFormValid);
+    }
+  },
+  mounted() {
+    this.$emit("validChange", this.isFormValid);
   }
 };
 </script>
