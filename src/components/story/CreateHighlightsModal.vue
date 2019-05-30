@@ -25,7 +25,7 @@
                 <button
                   class="btn alt sm"
                   v-if="step === 2"
-                  :disabled="!title"
+                  :disabled="!title.trim()"
                   @click="save"
                 >
                   {{ isEditMode ? "Save" : "Add" }}
