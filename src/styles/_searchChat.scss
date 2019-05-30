@@ -188,22 +188,23 @@
       right: 20px;
     }
   }
+}
 
-  .sendTo {
-    font-weight: 500;
-  }
+.sendTo {
+  font-weight: 500;
+}
 
-  input {
-    flex: 1;
-    border-radius: 0;
-    background-color: transparent;
+.searchInput {
+  flex: 1;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  &:focus {
     border: none;
     outline: none;
-
-    &:focus {
-      border: none;
-      outline: none;
-    }
+    background-color: transparent;
   }
 }
 
