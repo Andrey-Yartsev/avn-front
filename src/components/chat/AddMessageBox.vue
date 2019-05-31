@@ -37,7 +37,7 @@
       >
         <TextareaAutosize
           v-model="message"
-          class="text-media-container"
+          class="text-media-container rounded lg"
           rows="1"
           cols="60"
           placeholder="Message"
