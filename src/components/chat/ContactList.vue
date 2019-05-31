@@ -40,7 +40,7 @@
                   class="type-msg-icn type-msg-icn_media"
                   >x</span
                 >
-                <span v-else class="message">
+                <span v-else class="message semi-transparent">
                   <span
                     v-if="v.lastMessage.isTips"
                     class="type-msg-icn type-msg-icn_tips"
