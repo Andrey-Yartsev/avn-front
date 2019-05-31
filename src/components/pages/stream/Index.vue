@@ -202,34 +202,7 @@
           live
         </div>
         <div class="form-stream">
-          <div
-            class="comments-list stream-comments-wrapper"
-            v-if="shownComments.length"
-          >
-            <div
-              class="comment stream-message"
-              v-for="comment in shownComments"
-              v-bind:key="comment.comment + comment.hideTime"
-            >
-              <span
-                class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm"
-              >
-                <span class="avatar__img">
-                  <img :src="comment.user.avatar" v-if="comment.user" />
-                </span>
-              </span>
-              <div class="comment-content stream-message__head">
-                <div class="comment-body">
-                  <span class="name">{{
-                    comment.user ? comment.user.name : "Guest"
-                  }}</span>
-                  <span class="comment-text stream-message__text">{{
-                    comment.comment
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Comments :shownComments="shownComments" :count="10" />
           <form class="stream-comment-form" v-if="showCommentForm">
             <textarea
               ref="commentInput"
@@ -314,6 +287,7 @@ import Streams from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
+import Comments from "@/components/common/streamComments/Index";
 
 export default {
   name: "Stream",
@@ -360,7 +334,8 @@ export default {
   components: {
     Loader,
     StreamStatistic,
-    Filters
+    Filters,
+    Comments
   },
   computed: {
     likesCount() {
