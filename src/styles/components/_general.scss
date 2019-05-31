@@ -705,6 +705,10 @@ video {
     color: inherit;
     min-width: 0;
     max-width: 100%;
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 }
 
