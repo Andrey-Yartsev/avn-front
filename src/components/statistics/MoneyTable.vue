@@ -47,9 +47,9 @@
               <span class="date-item">{{ formatTimestamp(v.timestamp) }}</span>
             </td>
             <td class="line-1">${{ v.values.earnSubscribes || 0 }}</td>
-            <td class="line-2">${{ v.values.earnTips || 0 }}</td>
+            <td class="line-4">${{ v.values.earnTips || 0 }}</td>
             <td class="line-3">${{ v.values.earnChatMessages || 0 }}</td>
-            <td class="line-4">${{ v.values.earnReferral || 0 }}</td>
+            <td class="line-2">${{ v.values.earnReferral || 0 }}</td>
             <td>${{ v.total }}</td>
           </tr>
         </tbody>

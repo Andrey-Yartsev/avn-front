@@ -4,12 +4,11 @@
       :to="`/stories/${profile.id}`"
       v-if="(profile.hasNotViewedStory || profile.hasStory) && !showLiveLabel"
     >
-      <span
-        class="avatar"
-        :class="{ 'with-story': profile.hasNotViewedStory }"
-        :style="{ fontSize: fontSize }"
-      >
-        <span class="avatar__img">
+      <span class="avatar" :style="{ fontSize: fontSize }">
+        <span
+          class="avatar__img"
+          :class="{ 'with-story': profile.hasNotViewedStory }"
+        >
           <img :src="profile.avatar" v-if="profile.avatar" />
         </span>
       </span>

@@ -45,6 +45,10 @@
     height: 24px;
     padding: 3px 16px;
   }
+  &.md {
+    height: 34px;
+    padding: 8px 22px;
+  }
   &.lg {
     height: 40px;
     padding: 11px 29px;
@@ -109,12 +113,10 @@
 
     &.disconnect-twitter {
       color: $main-color;
-      opacity: 0.5;
 
       &:before {
         box-shadow: 0 0 0 2px $main-color inset;
         opacity: 0.6;
-        transition: background-color .3s ease;
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {

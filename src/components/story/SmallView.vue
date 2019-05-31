@@ -3,13 +3,13 @@
     <div class="story" :data-id="post.user.id">
       <a
         :href="`/stories/${post.user.id}`"
-        :class="[
-          'avatar avatar_lg avatar_lg-desk',
-          { 'with-story': post.user.hasNotViewedStory }
-        ]"
+        class="avatar avatar_lg avatar_lg-desk"
         @click.prevent="go"
       >
-        <span class="avatar__img">
+        <span
+          class="avatar__img"
+          :class="{ 'with-story': post.user.hasNotViewedStory }"
+        >
           <img v-if="post.user.avatar" :src="post.user.avatar" />
         </span>
       </a>

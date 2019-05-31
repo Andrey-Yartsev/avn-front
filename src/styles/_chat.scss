@@ -519,35 +519,6 @@
     opacity: 0.3;
     text-align: center;
   }
-
-  .btn-start {
-    position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
-    bottom: auto;
-    visibility: visible;
-    width: auto;
-    height: auto;
-    border: 2px solid $secondary-color;
-    opacity: 1;
-    border-radius: 1000px;
-    padding: 6px 20px;
-    color: $secondary-color;
-    cursor: pointer;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        background-color: $secondary-color;
-        color: #fff;
-      }
-    }
-
-    &:before {
-      display: none;
-    }
-  }
 }
 
 .chatHeader {
@@ -787,7 +758,11 @@
   }
 
   .more-functions {
-    margin: auto 0.4em auto auto;
+    margin: auto 0 auto auto;
+
+    .popup & {
+      margin-right: 0.4em;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-right: -6px;
@@ -1123,12 +1098,6 @@
   .avatar {
     margin-right: 17px;
     margin-left: 3px;
-  }
-
-  .username,
-  .message {
-    color: $main-color;
-    opacity: 0.5;
   }
 
   .typing {

@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="chatMessageSending" v-if="sending">
+        <div class="chatMessageSending semi-transparent" v-if="sending">
           Sending...
         </div>
       </div>

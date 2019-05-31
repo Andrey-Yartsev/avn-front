@@ -14,7 +14,7 @@
         to="/logout"
         class="link-title btn-logout"
         v-if="showLogoutButton"
-      ></router-link>
+      />
 
       <button
         class="btn sm header-apply-btn"

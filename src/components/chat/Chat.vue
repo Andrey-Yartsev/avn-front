@@ -30,7 +30,9 @@
               <div class="msg-no-chat__msg">
                 Choose one of your existing message<br />or start
               </div>
-              <span class="btn-start" @click="goTo('/chat/new')"
+              <span
+                class="btn border md alt btn-start"
+                @click="goTo('/chat/new')"
                 >New message</span
               >
             </div>

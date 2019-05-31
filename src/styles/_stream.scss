@@ -226,7 +226,6 @@
   margin-bottom: 12px;
   z-index: 3;
   color: #fff;
-  height: 175px;
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
@@ -240,9 +239,10 @@
     color-stop(0.2, #000)
   );
   padding: 0;
+  max-height: calc(100vh - 150px);
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    height: 184px;
+    max-height: calc(100vh - 170px);
   }
 
   .stream & {
@@ -777,7 +777,6 @@
 }
 
 .amcharts-main-div {
-  position: relative;
 
   a {
     // remove copyright

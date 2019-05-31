@@ -36,7 +36,7 @@
               />
               <button
                 type="button"
-                class="btn border disconnect-twitter hidden-mobile"
+                class="btn border disconnect-twitter hidden-mobile semi-transparent"
                 @click="twitterDisconnect"
                 v-if="$mq === 'desktop'"
               >

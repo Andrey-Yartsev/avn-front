@@ -111,7 +111,7 @@
         @click="() => this.close(this.haveToSave, this.haveToSaveComments)"
       >
         <button
-          class="btn alt lg block change-devices btn-center btn_fix-width-btn btn_not-bold btn_white btn_white-alfabg"
+          class="btn alt lg block change-devices btn-center btn_fix-width btn_not-bold btn_white btn_white-alfabg"
         >
           Done
         </button>
