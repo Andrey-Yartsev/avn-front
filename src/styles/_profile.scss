@@ -1417,6 +1417,11 @@
       }
     }
 
+    .header-scrolled & {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     &-sm {
       top: 0;
       bottom: 0;
@@ -1478,11 +1483,6 @@
         }
       }
     }
-  }
-
-  .header-scrolled & {
-    opacity: 0;
-    pointer-events: none;
   }
 
   &.hide {
