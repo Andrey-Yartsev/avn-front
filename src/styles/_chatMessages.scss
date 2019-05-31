@@ -43,6 +43,8 @@
         max-height: 60vh;
         max-width: 100%;
         width: auto;
+        object-fit: cover;
+        object-position: left;
 
         @include media-breakpoint-up($tablet-breakpoint) {
           max-height: calc(81vh - 180px);
