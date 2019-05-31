@@ -151,7 +151,7 @@
                 ></button>
               </div>
               <div class="session-info-details">
-                <p class="ip-country">
+                <p class="ip-country semi-transparent">
                   {{ v.ipAddress }} - {{ v.countryName }}
                 </p>
               </div>
