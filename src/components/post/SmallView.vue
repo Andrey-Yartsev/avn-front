@@ -52,8 +52,14 @@
             <span class="value">{{ mediaDuration }}</span>
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster">
-            <span class="likes">{{ post.favoritesCount }}</span>
-            <span class="comments">{{ post.commentsCount }}</span>
+            <span class="explore-media__counter"
+              ><span class="btn-icon likes"></span
+              >{{ post.favoritesCount }}</span
+            >
+            <span class="explore-media__counter"
+              ><span class="btn-icon comments"></span
+              >{{ post.commentsCount }}</span
+            >
           </span>
           <span class="explore-media__name" v-if="!shouldBePoster">
             <span class="name">{{ post.author.name }}</span>

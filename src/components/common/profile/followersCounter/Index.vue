@@ -1,7 +1,11 @@
 <template>
   <div class="profile-data">
     <div class="item" v-if="profile && profile.followingCount">
-      <router-link to="/following" v-if="isOwner(profile.id)" class="profile-data__link">
+      <router-link
+        to="/following"
+        v-if="isOwner(profile.id)"
+        class="profile-data__link"
+      >
         <span class="data-value">{{ profile.followingCount }}</span>
         <span class="data-label">Following</span>
       </router-link>
@@ -11,7 +15,11 @@
       </template>
     </div>
     <div class="item" v-if="profile.followersCount">
-      <router-link to="/followers" v-if="isOwner(profile.id)" class="profile-data__link">
+      <router-link
+        to="/followers"
+        v-if="isOwner(profile.id)"
+        class="profile-data__link"
+      >
         <span class="data-value">{{ profile.followersCount }}</span>
         <span class="data-label">Followers</span>
       </router-link>
@@ -21,7 +29,11 @@
       </template>
     </div>
     <div class="item" v-if="profile && user && profile.id === user.id">
-      <router-link to="/likes" v-if="isOwner(profile.id)" class="profile-data__link">
+      <router-link
+        to="/likes"
+        v-if="isOwner(profile.id)"
+        class="profile-data__link"
+      >
         <span class="data-value">{{ profile.favoritesCount }}</span>
         <span class="data-label">Likes</span>
       </router-link>
