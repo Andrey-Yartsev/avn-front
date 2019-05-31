@@ -8,8 +8,17 @@
     >
       <label class="form-group-inner">
         <span class="label">{{ v.label }}</span>
+        <textarea
+          v-if="v.type === 'textarea'"
+          :name="v.code"
+          v-model="localBank[v.code]"
+          v-validate="'required'"
+          @input="changed"
+          :disabled="!!v.onlyRead"
+        >
+        </textarea>
         <input
-          v-if="!v.values"
+          v-else-if="!v.values"
           :name="v.code"
           v-model="localBank[v.code]"
           v-validate="'required'"
@@ -30,6 +39,7 @@
           </select>
         </span>
       </label>
+      <div class="help-input" v-if="v.description" v-html="v.description"></div>
     </div>
     <div class="form-group form-group_help-fields form-group_with-label">
       <div class="input-help" v-if="bankFields.length">

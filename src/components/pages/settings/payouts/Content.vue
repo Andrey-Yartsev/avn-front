@@ -82,6 +82,7 @@ export default {
           if (this.bankExists) {
             return Summery;
           } else {
+            console.log("BANK NOT EXISTS", this.bankExists);
             return Bank;
           }
         }
@@ -123,12 +124,8 @@ export default {
       return this.user.payoutLegalApproveState === "approved";
     },
     bankExists() {
-      if (!this.bank) {
-        return false;
-      }
-      const fieldCodes = this.bankFields.map(v => v.code);
-      // every field exists in bank model
-      return fieldCodes.every(code => !!this.bank[code]);
+      console.log(this.bank);
+      return this.bank.isApprove;
     }
   },
 
