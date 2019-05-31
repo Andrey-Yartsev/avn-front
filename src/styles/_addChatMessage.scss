@@ -165,14 +165,17 @@
     }
   }
 
-  &.has-price {
-    background-color: rgba(124, 139, 150, 0.08);
-    border-radius: 1em;
-    display: flex;
+  &:not(.disabled) {
 
-    .text-media-container {
-      background-color: transparent;
-      border-radius: 0;
+    &.has-price {
+      background-color: rgba(124, 139, 150, 0.08);
+      border-radius: 1em;
+      display: flex;
+
+      .text-media-container {
+        background-color: transparent;
+        border-radius: 0;
+      }
     }
   }
 }
