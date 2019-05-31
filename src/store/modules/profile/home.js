@@ -17,7 +17,8 @@ const initState = {
   marker: "",
   source: "",
   deletedPost: undefined,
-  postPinChanged: 0
+  postPinChanged: 0,
+  postPinCount: 0
 };
 
 const state = { ...initState };
@@ -57,9 +58,12 @@ const mutations = {
       return post;
     });
   },
-
-  postPinChanged(state) {
+  setPostPinCount(state, n) {
+    state.postPinCount = n;
+  },
+  postPinChanged(state, n) {
     state.postPinChanged++;
+    state.postPinCount += n;
   }
 };
 
@@ -73,6 +77,7 @@ const actions = {
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
+            commit("setPostPinCount", res.list.filter(v => v.isPinned).length);
             commit("postsRequestSuccess", res);
           });
         }
@@ -167,12 +172,12 @@ const actions = {
       window.location.hash = "";
     }
     dispatch("_pin", postId).then(() => {
-      commit("postPinChanged");
+      commit("postPinChanged", 1);
     });
   },
   unpin({ commit, dispatch }, postId) {
     dispatch("_unpin", postId).then(() => {
-      commit("postPinChanged");
+      commit("postPinChanged", -1);
     });
   }
 };

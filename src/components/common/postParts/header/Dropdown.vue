@@ -47,12 +47,24 @@
         </button>
       </li>
       <template v-if="isOwner(userId)">
-        <li class="more-functions__item" v-if="actionPrefix === 'profile/home'">
+        <li
+          class="more-functions__item"
+          v-if="actionPrefix === 'profile/home' && canPin && !post.isPinned"
+        >
           <button class="more-functions__link" type="button" @click="pinAction">
-            <span class="more-functions__option" v-if="post.isPinned"
-              >Pinned. Unpin post</span
-            >
-            <span class="more-functions__option" v-else>Pin post</span>
+            <span class="more-functions__option">Pin post</span>
+          </button>
+        </li>
+        <li
+          class="more-functions__item"
+          v-if="actionPrefix === 'profile/home' && post.isPinned"
+        >
+          <button
+            class="more-functions__link"
+            type="button"
+            @click="unpinAction"
+          >
+            <span class="more-functions__option">Pinned. Unpin post</span>
           </button>
         </li>
         <li class="more-functions__item">
@@ -94,6 +106,12 @@ export default {
     },
     userId() {
       return this.post.author.id;
+    },
+    pinCount() {
+      return this.$store.state.profile.home.postPinCount;
+    },
+    canPin() {
+      return this.pinCount < 3;
     }
   },
   props: {
@@ -125,7 +143,6 @@ export default {
         setTimeout(() => (this.copied = false), 1000);
       });
     },
-
     deletePost() {
       this.$store.dispatch(this.actionPrefix + "/deletePost", {
         postId: this.postId
@@ -139,20 +156,17 @@ export default {
 
       window.location.hash = "";
     },
-
     pinAction() {
-      if (this.post.isPinned) {
-        this.$store.dispatch("profile/home/unpin", this.postId);
-      } else {
-        this.$store.dispatch("profile/home/pin", this.postId);
-      }
+      this.$store.dispatch("profile/home/pin", this.postId);
       this.hide();
     },
-
+    unpinAction() {
+      this.$store.dispatch("profile/home/unpin", this.postId);
+      this.hide();
+    },
     editPost() {
       this.$router.push(`/post/edit/${this.postId}`);
     },
-
     reportUser() {
       this.hide();
 
