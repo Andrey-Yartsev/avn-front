@@ -40,8 +40,17 @@
 </template>
 
 <script>
+import UserMixin from "@/mixins/user";
+
 export default {
   name: "StoryMedium",
+  mixins: [UserMixin],
+  data() {
+    return {
+      isVisible: undefined,
+      height: undefined
+    };
+  },
   props: {
     post: {
       type: Object,
