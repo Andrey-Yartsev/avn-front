@@ -165,9 +165,15 @@
     }
   }
 
-  &:not(.disabled) {
+  &.has-price {
 
-    &.has-price {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      background-color: rgba(124, 139, 150, 0.08);
+      border-radius: 1em;
+      display: flex;
+    }
+
+    &:not(.disabled) {
       background-color: rgba(124, 139, 150, 0.08);
       border-radius: 1em;
       display: flex;
