@@ -30,7 +30,7 @@
           <div class="name">{{ post.user.name }}</div>
           <span
             v-if="post.user && post.user.isVerified"
-            class="verified-user"
+            class="verified-user icn-item"
           ></span>
         </div>
         <div class="user-login reset-ml">{{ post.user.username }}</div>

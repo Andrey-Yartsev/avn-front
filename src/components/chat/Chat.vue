@@ -67,7 +67,7 @@
                 <router-link :to="'/' + activeUser.username" class="name">
                   {{ activeUser.name }}
                 </router-link>
-                <span class="verified-user" v-if="activeUser.isVerified"></span>
+                <span class="verified-user icn-item" v-if="activeUser.isVerified"></span>
                 <span class="user-login">
                   <router-link
                     class="username"

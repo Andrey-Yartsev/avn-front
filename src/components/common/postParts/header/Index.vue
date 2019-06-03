@@ -18,7 +18,7 @@
       >{{ postUser.name }}</a
     >
     <template v-if="postUser.isVerified">
-      <span class="verified-user"></span>
+      <span class="verified-user icn-item"></span>
     </template>
     <span class="user-login">
       <a

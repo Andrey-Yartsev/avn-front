@@ -17,7 +17,7 @@
         >
           <div class="profile-name__main">
             <span class="name">{{ profile.name }}</span>
-            <span class="verified-user" v-if="profile.isVerified"></span>
+            <span class="verified-user icn-item" v-if="profile.isVerified"></span>
             <div class="block-indicator" v-if="user && profile.isBlocked">
               <span class="icn-item icn-block"></span>
             </div>

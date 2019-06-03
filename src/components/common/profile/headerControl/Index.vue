@@ -11,7 +11,7 @@
       <span class="name">
         {{ profile.name }}
       </span>
-      <span class="verified-user" v-if="profile.isVerified"></span>
+      <span class="verified-user icn-item" v-if="profile.isVerified"></span>
       <span class="user-login">
         <router-link :to="'/' + profile.username">{{
           profile.username

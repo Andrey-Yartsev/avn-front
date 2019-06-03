@@ -90,7 +90,7 @@
                 <div class="chatView__header">
                   <span class="name">{{ v.withUser.name }}</span>
                   <span
-                    class="verified-user"
+                    class="verified-user icn-item"
                     v-if="v.withUser.isVerified"
                   ></span>
                 </div>

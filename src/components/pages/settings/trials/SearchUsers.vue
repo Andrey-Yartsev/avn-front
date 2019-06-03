@@ -16,7 +16,7 @@
       <div class="username-group">
         <div class="user__name">
           <div class="name">{{ v.name }}</div>
-          <span v-if="v.isVerified" class="verified-user"></span>
+          <span v-if="v.isVerified" class="verified-user icn-item"></span>
         </div>
         <span class="user-login reset-ml">{{ v.username }}</span>
       </div>

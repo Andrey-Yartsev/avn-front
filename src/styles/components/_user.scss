@@ -7,10 +7,8 @@
   height: 18px;
   line-height: 18px;
   font-size: 18px;
-  &:before {
-    @include icon-font;
+  &:after {
     content: "\E61E";
-    vertical-align: top;
   }
 }
 .name {
