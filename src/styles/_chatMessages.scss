@@ -83,8 +83,11 @@
     flex-direction: column;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    min-height: 100%;
+  .no-selected-conversation & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: 100%;
+    }
   }
 
   &_loading {
