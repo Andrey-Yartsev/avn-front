@@ -41,13 +41,13 @@
           <img :src="media.thumb.source" />
           <span
             v-if="post.media.length > 1"
-            class="item-length item-length_photo"
+            class="item-length item-length_photo icn-item"
           >
             <span class="value">{{ post.media.length }}</span>
           </span>
           <span
             v-if="media.duration && $mq === 'desktop'"
-            class="item-length item-length_video hidden-mobile"
+            class="item-length item-length_video icn-item hidden-mobile"
           >
             <span class="value">{{ mediaDuration }}</span>
           </span>
