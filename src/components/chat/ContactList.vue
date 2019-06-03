@@ -24,7 +24,10 @@
         <div class="chatViewContent">
           <div class="chatView__header">
             <span class="name">{{ v.withUser.name }}</span>
-            <span class="verified-user icn-item" v-if="v.withUser.isVerified"></span>
+            <span
+              class="verified-user icn-item"
+              v-if="v.withUser.isVerified"
+            ></span>
             <span class="user-login"
               ><span class="username">{{ v.withUser.username }}</span></span
             >

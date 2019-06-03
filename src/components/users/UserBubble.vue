@@ -50,7 +50,10 @@
                 <a :href="'/' + profile.username" class="name">{{
                   profile.name
                 }}</a>
-                <span class="verified-user icn-item" v-if="profile.isVerified"></span>
+                <span
+                  class="verified-user icn-item"
+                  v-if="profile.isVerified"
+                ></span>
                 <!-- <span class="follow-link">Follow</span> -->
               </div>
               <span class="user-login reset-ml">

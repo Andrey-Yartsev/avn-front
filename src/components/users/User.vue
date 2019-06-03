@@ -18,7 +18,10 @@
             <router-link :to="'/' + profile.username" class="name">{{
               profile.name
             }}</router-link>
-            <span class="verified-user icn-item" v-if="profile.isVerified"></span>
+            <span
+              class="verified-user icn-item"
+              v-if="profile.isVerified"
+            ></span>
             <div class="block-indicator" v-if="profile.isBlocked">
               <span class="icn-block icn-item"></span>
             </div>

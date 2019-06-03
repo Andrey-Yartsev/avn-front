@@ -84,7 +84,10 @@
           <div class="profile-name profile-name-settings">
             <div class="profile-name__main">
               <span class="name">{{ user.name }}</span>
-              <span class="verified-user icn-item" v-if="user.isVerified"></span>
+              <span
+                class="verified-user icn-item"
+                v-if="user.isVerified"
+              ></span>
             </div>
             <span class="user-login reset-ml"
               ><a :href="'/' + user.username">{{ user.username }}</a></span
