@@ -3,7 +3,10 @@
     <span
       role="button"
       class="btn btn-cancel"
-      :class="{ 'lg': $mq === 'desktop' && needLgClassName, 'btn_white btn_white-alfabg': needLgClassName }"
+      :class="{
+        lg: $mq === 'desktop' && needLgClassName,
+        'btn_white btn_white-alfabg': needLgClassName
+      }"
       @click="$emit('cancel')"
       >Cancel</span
     >
@@ -25,7 +28,10 @@
       type="submit"
       class="btn btn-submit"
       :disabled="!canSend"
-      :class="{ 'lg': $mq === 'desktop' && needLgClassName, 'btn_white btn_white-alfabg': needLgClassName }"
+      :class="{
+        lg: $mq === 'desktop' && needLgClassName,
+        'btn_white btn_white-alfabg': needLgClassName
+      }"
     >
       Send funds
     </button>
