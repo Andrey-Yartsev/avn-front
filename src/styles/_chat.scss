@@ -984,10 +984,9 @@
 
   &:after {
     content: "\E622";
-    font-weight: 400;
-    @include icon-font;
+    //font-weight: 400;
     font-size: 24px;
-    display: block;
+    //display: block;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: auto;

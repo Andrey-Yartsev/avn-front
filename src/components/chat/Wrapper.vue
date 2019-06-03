@@ -25,7 +25,7 @@
             <a
               href="/chat/new"
               @click.prevent="goTo('/chat/new')"
-              class="newMessage"
+              class="newMessage icn-item"
               >New message
             </a>
           </div>
