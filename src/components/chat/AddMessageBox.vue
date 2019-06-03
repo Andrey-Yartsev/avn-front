@@ -68,7 +68,7 @@
 
       <div class="tip-form tip-form_post getPaidForm" v-if="showPaid">
         <button
-          class="cancelPaid btn btn-cancel btn_white btn_white-alfabg"
+          class="cancelPaid btn btn-cancel"
           @click="showPaid = false"
         >
           Cancel
@@ -85,7 +85,7 @@
           />
         </div>
         <button
-          class="setPrice btn btn_white btn_white-alfabg"
+          class="setPrice btn"
           @click="setPrice"
           :disabled="!price"
         >
