@@ -5,7 +5,7 @@
       @click="postLike"
     >
       <span
-        class="btn-icon likes"
+        class="btn-icon likes icn-item"
         v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"
       ></span>
       {{ post.favoritesCount ? post.favoritesCount : "" }}
@@ -16,14 +16,14 @@
       @click="postShowCommentForm"
       v-if="post.canComment"
     >
-      <span class="btn-icon comments" v-tooltip="'Comments'"></span>
+      <span class="btn-icon comments icn-item" v-tooltip="'Comments'"></span>
       {{ post.commentsCount ? post.commentsCount : "" }}
     </span>
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
       <span class="actions__btn" @click="toggleTip"
-        ><span class="btn-icon tips" v-tooltip="'Fund'"></span
+        ><span class="btn-icon tips icn-item" v-tooltip="'Fund'"></span
       ></span>
     </template>
     <time class="timestamp">

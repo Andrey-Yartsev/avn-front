@@ -228,18 +228,24 @@
             class="stream-btn"
             @click="showCommentForm = !showCommentForm"
           >
-            <span class="btn-icon comments" v-tooltip="'Comments'"></span>
+            <span
+              class="btn-icon comments icn-item"
+              v-tooltip="'Comments'"
+            ></span>
           </span>
           <span class="stream-btn" ref="likeBtn">
-            <span class="btn-icon likes" v-tooltip="'Likes'"></span>
+            <span class="btn-icon likes icn-item" v-tooltip="'Likes'"></span>
             {{ likesCount ? likesCount : "" }}
           </span>
           <span v-if="$root.showTips" class="stream-btn">
-            <span class="btn-icon tips" v-tooltip="'Funds'"></span>
+            <span class="btn-icon tips icn-item" v-tooltip="'Funds'"></span>
             {{ amount.toFixed(2) }} $
           </span>
           <span class="stream-btn stream-online-count">
-            <span class="looking btn-icon" v-tooltip="'Viewers'"></span>
+            <span
+              class="looking btn-icon icn-item"
+              v-tooltip="'Viewers'"
+            ></span>
             {{ looksCount }}
           </span>
         </div>

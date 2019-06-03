@@ -233,11 +233,6 @@
   .lds-dual-ring {
     pointer-events: none;
   }
-
-  .btn-icon {
-    margin-right: 0;
-    color: #fff;
-  }
 }
 
 .StoryPageView {
@@ -422,7 +417,6 @@
 }
 
 .story-viewer {
-  color: #fff;
   opacity: .7;
   line-height: 24px;
 
@@ -432,16 +426,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-
-  &:before {
-    content: "\E633";
-    @include icon-font;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 23px;
-    line-height: 23px;
-    margin-right: 3px;
   }
 
   &_clickable {
@@ -461,27 +445,28 @@
     margin-bottom: 18px;
     margin-left: 13px;
   }
+
+  &__btn {
+    color: #fff;
+    opacity: .7;
+    margin-right: 15px;
+    transition: color .3s;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 18px;
+
+      &:hover {
+        opacity: 1;
+        color: #fff;
+      }
+    }
+  }
 }
 
 .btn-story-details {
-  display: inline-block;
-  color: #fff;
-  opacity: .7;
-  margin: 0 15px 0 0;
-  transition: color .3s;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin-right: 18px;
-
-    &:hover {
-      opacity: 1;
-      color: #fff;
-    }
-  }
 
   &:after {
     content: "\E669";
-    @include icon-font;
     font-size: 23px;
   }
 }

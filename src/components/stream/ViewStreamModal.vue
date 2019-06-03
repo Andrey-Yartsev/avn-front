@@ -78,10 +78,16 @@
           v-if="connected && !isMyStream && isAuth()"
         >
           <span role="button" class="stream-btn" @click="openCommentForm">
-            <span class="btn-icon comments" v-tooltip="'Comments'"></span>
+            <span
+              class="btn-icon comments icn-init_before"
+              v-tooltip="'Comments'"
+            ></span>
           </span>
           <span class="stream-btn" @click="throttledLike">
-            <span class="btn-icon likes" v-tooltip="'Likes'"></span>
+            <span
+              class="btn-icon likes icn-init_before"
+              v-tooltip="'Likes'"
+            ></span>
           </span>
           <span
             class="stream-btn"
@@ -89,10 +95,16 @@
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
           >
-            <span class="btn-icon tips" v-tooltip="'Funds'"></span>
+            <span
+              class="btn-icon tips icn-init_before"
+              v-tooltip="'Funds'"
+            ></span>
           </span>
           <span class="stream-online-count" v-if="false">
-            <span class="looking btn-icon" v-tooltip="'Viewers'"></span>
+            <span
+              class="looking btn-icon icn-init_before"
+              v-tooltip="'Viewers'"
+            ></span>
           </span>
         </div>
       </div>

@@ -4,6 +4,29 @@
   width: 1em;
   height: 1em;
 
+  &-init {
+
+    &_before {
+
+      &:before {
+        @include icon-font;
+        line-height: 0;
+        vertical-align: middle;
+        font-weight: 400;
+      }
+    }
+
+    &_after {
+
+      &:after {
+        @include icon-font;
+        line-height: 0;
+        vertical-align: middle;
+        font-weight: 400;
+      }
+    }
+  }
+
   &-plus {
     fill: $secondary-color;
 

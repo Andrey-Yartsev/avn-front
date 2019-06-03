@@ -228,16 +228,16 @@
           v-if="isOwner(author.id) && !isCollections"
         >
           <span
-            class="btn-story-details"
+            class="story-details-info__btn btn-story-details icn-item"
             @click.prevent="saveToHighlights"
             v-tooltip="'Add to highlights'"
           />
           <div
-            class="story-viewer story-viewer_clickable"
+            class="story-details-info__btn story-viewer story-viewer_clickable"
             v-if="isOwner(author.id) && currentStory.viewersCount"
             @click="openViewersModal"
           >
-            {{ viewersText }}
+            <span class="looking btn-icon icn-item"></span>{{ viewersText }}
           </div>
         </div>
         <Tip
@@ -255,7 +255,7 @@
           type="button"
           class="btn-tip"
         >
-          <span class="btn-icon tips" v-tooltip="'Fund'"></span>
+          <span class="btn-icon tips icn-init_before" v-tooltip="'Fund'"></span>
         </button>
       </div>
       <button type="button" class="close" @click="close"></button>

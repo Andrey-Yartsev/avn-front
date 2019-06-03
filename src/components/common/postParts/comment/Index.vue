@@ -60,7 +60,7 @@
           })
         "
       >
-        <span class="likes likes_size-sm"></span>
+        <span class="likes likes_size-sm icn-init_before"></span>
       </button>
     </div>
   </div>

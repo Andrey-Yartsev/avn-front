@@ -53,11 +53,11 @@
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster">
             <span class="explore-media__counter"
-              ><span class="btn-icon likes"></span
+              ><span class="btn-icon likes icn-init_before"></span
               >{{ post.favoritesCount }}</span
             >
             <span class="explore-media__counter"
-              ><span class="btn-icon comments"></span
+              ><span class="btn-icon comments icn-init_before"></span
               >{{ post.commentsCount }}</span
             >
           </span>

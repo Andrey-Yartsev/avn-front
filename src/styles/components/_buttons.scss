@@ -639,7 +639,6 @@ button {
 .looking,
 .tips,
 .getPaid {
-  display: inline-block;
   height: 24px;
   line-height: 24px;
   cursor: pointer;
@@ -647,12 +646,8 @@ button {
   border: none;
   transition: color 0.3s ease, opacity 0.3s ease;
 
-  &:before {
-    @include icon-font;
+  &:after {
     font-size: 24px;
-    line-height: 0;
-    vertical-align: middle;
-    font-weight: 400;
   }
 
   &_size {
@@ -660,7 +655,7 @@ button {
     &-sm {
       height: 19px;
 
-      &:before {
+      &:after {
         font-size: 19px;
       }
     }
@@ -669,21 +664,21 @@ button {
 
 .likes {
 
-  &:before {
+  &:after {
     content: "\E616";
   }
 }
 
 .comments {
 
-  &:before {
+  &:after {
     content: "\E617";
   }
 }
 
 .looking {
 
-  &:before {
+  &:after {
     content: "\E633";
   }
 }
@@ -702,7 +697,7 @@ button {
     }
   }
 
-  &:before {
+  &:after {
     width: 1.1em;
     content: "\E618";
   }

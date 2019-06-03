@@ -55,13 +55,17 @@
           <div
             class="stream-summary-data-item stream-summary-data-item__viewers"
           >
-            <div class="stream-summary-data-item__label">Viewers</div>
+            <div class="stream-summary-data-item__label">
+              <span class="btn-icon icn-viewer icn-item"></span>Viewers
+            </div>
             <div class="stream-summary-data-item__value">
               {{ this.looks.length }}
             </div>
           </div>
           <div class="stream-summary-data-item stream-summary-data-item__likes">
-            <div class="stream-summary-data-item__label">Likes</div>
+            <div class="stream-summary-data-item__label">
+              <span class="btn-icon likes icn-item"></span>Likes
+            </div>
             <div class="stream-summary-data-item__value">
               {{ this.likes.length }}
             </div>
@@ -70,13 +74,17 @@
             v-if="$root.showTips"
             class="stream-summary-data-item stream-summary-data-item__tips"
           >
-            <div class="stream-summary-data-item__label">Funds</div>
+            <div class="stream-summary-data-item__label">
+              <span class="btn-icon tips icn-item"></span>Funds
+            </div>
             <div class="stream-summary-data-item__value">{{ this.tips }}</div>
           </div>
           <div
             class="stream-summary-data-item stream-summary-data-item__comments"
           >
-            <div class="stream-summary-data-item__label">Comments</div>
+            <div class="stream-summary-data-item__label">
+              <span class="btn-icon comments icn-item"></span>Comments
+            </div>
             <div class="stream-summary-data-item__value">
               {{ this.comments.length }}
             </div>

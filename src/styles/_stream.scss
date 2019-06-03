@@ -604,6 +604,16 @@
       }
     }
 
+    .btn-icon {
+      width: 43px;
+      vertical-align: middle;
+      text-align: center;
+
+      &:after {
+        font-size: 20px;
+      }
+    }
+
     &__duration {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -623,17 +633,6 @@
           font-size: 21px;
         }
       }
-
-      &__label {
-
-        &:before {
-          @include icon-font;
-          text-align: center;
-          display: inline-block;
-          width: 43px;
-          font-size: 20px;
-        }
-      }
     }
 
     &__viewers {
@@ -643,13 +642,12 @@
         &__value {
           color: map_get($colors, 3);
         }
+      }
 
-        &__label {
+      .btn-icon {
 
-          &:before {
-            content: '\E633';
-            color: map_get($colors, 3);
-          }
+        &:after {
+          color: map_get($colors, 3);
         }
       }
     }
@@ -661,13 +659,12 @@
         &__value {
           color: map_get($colors, 9);
         }
+      }
 
-        &__label {
+      .btn-icon {
 
-          &:before {
-            content: "\E616";
-            color: map_get($colors, 9);
-          }
+        &:after {
+          color: map_get($colors, 9);
         }
       }
     }
@@ -679,13 +676,12 @@
         &__value {
           color: map_get($colors, 8);
         }
+      }
 
-        &__label {
+      .btn-icon {
 
-          &:before {
-            content: "\E618";
-            color: map_get($colors, 8);
-          }
+        &:after {
+          color: map_get($colors, 8);
         }
       }
     }
@@ -697,13 +693,12 @@
         &__value {
           color: map_get($colors, 6);
         }
+      }
 
-        &__label {
+      .btn-icon {
 
-          &:before {
-            content: "\E617";
-            color: map_get($colors, 6);
-          }
+        &:after {
+          color: map_get($colors, 6);
         }
       }
     }
