@@ -761,7 +761,10 @@
     margin: auto 0 auto auto;
 
     .popup & {
-      margin-right: 0.4em;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-right: 0.4em;
+      }
     }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
