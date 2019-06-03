@@ -193,7 +193,7 @@
               <div class="msg-no-chat__msg">
                 Select people to send them a message
               </div>
-              <div class="btn-start btn-selected-all" @click="toggleSelectAll">
+              <div class="btn border md alt btn-start" @click="toggleSelectAll">
                 Select all
               </div>
             </div>
