@@ -60,7 +60,7 @@
           })
         "
       >
-        <span class="likes likes_size-sm likes_reset-gap-r"></span>
+        <span class="likes likes_size-sm"></span>
       </button>
     </div>
   </div>
