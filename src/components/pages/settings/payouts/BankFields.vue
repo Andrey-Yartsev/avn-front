@@ -24,6 +24,7 @@
           v-validate="'required'"
           @input="changed"
           :disabled="!!v.onlyRead"
+          v-mask="v.inputMaskRegex ? v.inputMaskRegex : ''"
         />
         <span class="select-wrapper" v-else>
           <select
