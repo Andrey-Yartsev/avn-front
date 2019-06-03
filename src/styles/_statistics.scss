@@ -470,6 +470,10 @@
   align-content: center;
   align-items: center;
   color: $main-color;
+
+  .username-group {
+    max-width: calc(100% - 40px);
+  }
 }
 
 
