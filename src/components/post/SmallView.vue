@@ -122,6 +122,11 @@ export default {
   },
   methods: {
     visibilityChanged(isVisible, entry) {
+      const isOpenedModal = document.body.classList.contains("modal-opened");
+      if (isVisible === false && isOpenedModal) {
+        return;
+      }
+
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
     }
