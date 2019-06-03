@@ -1,5 +1,4 @@
 import PostApi from "@/api/post";
-import ws from "@/ws";
 
 export default {
   actions: {
@@ -54,17 +53,6 @@ export default {
                 postId,
                 comment
               });
-
-              ws.send({
-                act: "collect",
-                message: "comment_added",
-                data: {
-                  post_id: postId,
-                  post_user_id: comment.author.id,
-                  comment_id: comment.id,
-                  owner: post.author.id
-                }
-              });
             });
           }
         })
@@ -84,17 +72,6 @@ export default {
                 postId,
                 isFavorite,
                 favoritesCount
-              });
-
-              ws.send({
-                act: "collect",
-                message: addLike ? "post_like" : "post_unlike",
-                data: {
-                  post_id: post.id,
-                  post_user_id: post.author.id,
-                  weight: addLike ? 1 : -1,
-                  owner: post.author.id
-                }
               });
             });
           }
