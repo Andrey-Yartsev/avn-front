@@ -255,7 +255,7 @@
           type="button"
           class="btn-tip"
         >
-          <span class="btn-icon tips icn-init_before" v-tooltip="'Fund'"></span>
+          <span class="btn-icon tips icn-item" v-tooltip="'Fund'"></span>
         </button>
       </div>
       <button type="button" class="close" @click="close"></button>

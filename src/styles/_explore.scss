@@ -570,6 +570,13 @@
       }
     }
 
+    &__counter {
+
+      .icn-item {
+        vertical-align: middle;
+      }
+    }
+
     &__name {
       position: absolute;
       left: 0;

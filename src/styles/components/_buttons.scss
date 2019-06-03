@@ -769,13 +769,16 @@ button {
     color: #fff;
   }
 
-  &:before {
+  &:after {
     content: "\E62D";
-    @include icon-font;
     font-size: 24px;
     margin: 0;
     width: 1.1em;
     font-weight: 400;
+  }
+
+  .chatForm & {
+    margin-bottom: 2px;
   }
 }
 
@@ -899,10 +902,8 @@ button {
   color: $secondary-color;
   transition: color 0.3s ease;
 
-  &:before {
+  &:after {
     content: "\E61A";
-    display: block;
-    @include icon-font;
     font-size: 24px;
 
     .add-new-form & {
@@ -927,7 +928,7 @@ button {
   }
 
   .chatForm & {
-    margin: 0 0.6em 0 0;
+    margin: 0 0.6em 2px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1em;

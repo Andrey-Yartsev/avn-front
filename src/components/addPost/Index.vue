@@ -144,7 +144,10 @@
       <div class="actions">
         <div class="actions-controls">
           <label
-            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
+            :class="[
+              'add-media-input icn-item',
+              { disabled: cantAddMoreMedia }
+            ]"
             class="btn-post"
           >
             <input

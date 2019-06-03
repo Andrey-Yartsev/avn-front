@@ -11,7 +11,7 @@
     </div>
     <div class="chatForm">
       <label
-        class="add-media-input"
+        class="add-media-input icn-item"
         :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"
@@ -87,7 +87,7 @@
       </div>
 
       <button
-        class="getPaid btn-el"
+        class="getPaid btn-el icn-item"
         :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
@@ -96,7 +96,7 @@
 
       <button
         @click="sendMessage"
-        class="btn-send btn-send_default"
+        class="btn-send btn-send_default icn-item"
         :disabled="!canSend || disable"
         v-tooltip="'Send'"
       ></button>

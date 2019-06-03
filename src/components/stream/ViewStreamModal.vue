@@ -59,7 +59,7 @@
             <button
               @click="sendComment"
               type="button"
-              class="btn-send btn-send_inside-field"
+              class="btn-send btn-send_inside-field icn-item"
               :disabled="!newComment.length"
             ></button>
           </form>
@@ -79,15 +79,12 @@
         >
           <span role="button" class="stream-btn" @click="openCommentForm">
             <span
-              class="btn-icon comments icn-init_before"
+              class="btn-icon comments icn-item"
               v-tooltip="'Comments'"
             ></span>
           </span>
           <span class="stream-btn" @click="throttledLike">
-            <span
-              class="btn-icon likes icn-init_before"
-              v-tooltip="'Likes'"
-            ></span>
+            <span class="btn-icon likes icn-item" v-tooltip="'Likes'"></span>
           </span>
           <span
             class="stream-btn"
@@ -95,14 +92,11 @@
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
           >
-            <span
-              class="btn-icon tips icn-init_before"
-              v-tooltip="'Funds'"
-            ></span>
+            <span class="btn-icon tips icn-item" v-tooltip="'Funds'"></span>
           </span>
           <span class="stream-online-count" v-if="false">
             <span
-              class="looking btn-icon icn-init_before"
+              class="looking btn-icon icn-item"
               v-tooltip="'Viewers'"
             ></span>
           </span>

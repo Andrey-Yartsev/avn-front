@@ -19,7 +19,10 @@
       </div>
       <div class="actions">
         <div class="actions-controls">
-          <label class="add-media-input btn-post" @click="goToAddPost" />
+          <label
+            class="add-media-input icn-item btn-post"
+            @click="goToAddPost"
+          />
           <div
             class="btn-post btn-post_datetime"
             v-if="user.isPerformer"
