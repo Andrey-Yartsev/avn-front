@@ -57,12 +57,9 @@
   }
 
   &:first-child {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      border-top: none;
-      margin-top: 0;
-      padding: 0;
-    }
+    border-top: none;
+    margin-top: 0;
+    padding: 0;
   }
 
   .subtext {
