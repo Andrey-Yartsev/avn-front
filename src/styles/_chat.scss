@@ -1224,30 +1224,17 @@
   display: block;
   opacity: 0.5;
 
-  &:after {
-    @include icon-font;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-  }
+  .icn-item {
 
-  &_media {
     &:after {
-      content: "\E61A";
+      font-size: 16px;
+      line-height: 16px;
     }
   }
 
   &_locked {
     &:after {
       content: "\E61B";
-    }
-  }
-
-  &_tips {
-    &:after {
-      content: "\E618";
     }
   }
 }

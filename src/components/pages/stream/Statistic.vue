@@ -75,7 +75,7 @@
             class="stream-summary-data-item stream-summary-data-item__tips"
           >
             <div class="stream-summary-data-item__label">
-              <span class="btn-icon tips icn-item"></span>Funds
+              <span class="btn-icon icn-tips icn-item"></span>Funds
             </div>
             <div class="stream-summary-data-item__value">{{ this.tips }}</div>
           </div>

@@ -23,7 +23,7 @@
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
       <span class="actions__btn" @click="toggleTip"
-        ><span class="btn-icon tips icn-item" v-tooltip="'Fund'"></span
+        ><span class="btn-icon icn-tips icn-item" v-tooltip="'Fund'"></span
       ></span>
     </template>
     <time class="timestamp">

@@ -9,10 +9,9 @@
           for="bg"
           class="select-user-image select-user-image_cover select-user-image_cover-lg"
           :class="{ hide: profile.header || !showBgAdd }"
-          ><span class="select-user-image__text"
-            >Add background picture</span
-          ></label
-        >
+          ><span class="select-user-image__text">Add background picture</span
+          ><span class="icn-item icn-media"></span
+        ></label>
         <input
           type="file"
           id="bg"

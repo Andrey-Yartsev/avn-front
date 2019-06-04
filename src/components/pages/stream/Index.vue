@@ -238,7 +238,7 @@
             {{ likesCount ? likesCount : "" }}
           </span>
           <span v-if="$root.showTips" class="stream-btn">
-            <span class="btn-icon tips icn-item" v-tooltip="'Funds'"></span>
+            <span class="btn-icon icn-tips icn-item" v-tooltip="'Funds'"></span>
             {{ amount.toFixed(2) }} $
           </span>
           <span class="stream-btn stream-online-count">

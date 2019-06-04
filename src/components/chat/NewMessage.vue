@@ -98,7 +98,7 @@
                   <span class="username">{{ v.withUser.username }}</span>
                 </div>
               </div>
-              <span class="check"></span>
+              <span class="check icn-item"></span>
             </div>
           </div>
         </VuePerfectScrollbar>

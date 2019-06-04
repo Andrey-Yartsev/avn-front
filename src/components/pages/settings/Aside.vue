@@ -40,6 +40,7 @@
                 for="avatar"
                 class="select-user-image select-user-image_avatar"
                 :class="{ 'single-btn': !user.avatar }"
+                ><span class="icn-media icn-item"></span
               ></label>
               <input
                 type="file"
@@ -71,6 +72,7 @@
             <span class="select-user-image__text" v-if="!user.header">
               Add background picture
             </span>
+            <span class="icn-item icn-media"></span>
           </label>
           <input
             type="file"

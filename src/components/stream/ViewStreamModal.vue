@@ -92,7 +92,7 @@
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
           >
-            <span class="btn-icon tips icn-item" v-tooltip="'Funds'"></span>
+            <span class="btn-icon icn-tips icn-item" v-tooltip="'Funds'"></span>
           </span>
           <span class="stream-online-count" v-if="false">
             <span

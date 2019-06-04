@@ -38,17 +38,13 @@
           <div class="chatView__body">
             <p class="typing">
               <template v-if="v.lastMessage">
-                <span
-                  v-if="v.lastMessage.media.length"
-                  class="type-msg-icn type-msg-icn_media"
-                  >x</span
-                >
+                <span v-if="v.lastMessage.media.length" class="type-msg-icn"
+                  ><span class="icn-media icn-item"></span
+                ></span>
                 <span v-else class="message semi-transparent">
-                  <span
-                    v-if="v.lastMessage.isTips"
-                    class="type-msg-icn type-msg-icn_tips"
-                    >x</span
-                  >
+                  <span v-if="v.lastMessage.isTips" class="type-msg-icn"
+                    ><span class="icn-tips icn-item"></span
+                  ></span>
                   <template v-else>{{
                     stripHtml(v.lastMessage.text)
                   }}</template>

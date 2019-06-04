@@ -11,7 +11,7 @@
     </div>
     <div class="chatForm">
       <label
-        class="add-media-input icn-item"
+        class="add-media-input"
         :class="{ disabled: showTip || showPaid }"
         :disabled="disable"
         v-if="!preloadedMedias.length"
@@ -22,14 +22,17 @@
           type="file"
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
         />
+        <span class="icn-media icn-item"></span>
       </label>
       <button
         v-if="withUser && withUser.canEarn && $root.showTips"
-        class="tips btn-el icn-item"
+        class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip, disabled: showPaid }"
         v-tooltip="'Fund'"
-      ></button>
+      >
+        <span class="icn-tips icn-item"></span>
+      </button>
 
       <div
         class="field-text-message"

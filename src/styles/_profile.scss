@@ -1362,13 +1362,6 @@
   transition: opacity 0.3s;
   font-weight: 500;
 
-  &:after {
-    font-weight: 400;
-    @include icon-font;
-    content: "\E61A";
-    transition: transform .2s ease;
-  }
-
   &__text {
     white-space: nowrap;
   }
@@ -1391,11 +1384,14 @@
       justify-content: center;
     }
 
-    &:after {
-      font-size: 24px;
+    .icn-media {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 18px;
+      &:after {
+        font-size: 24px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 18px;
+        }
       }
     }
   }
@@ -1405,10 +1401,13 @@
     transform: translate(0, 0);
     z-index: 3;
 
-    &:after {
+    .icn-media {
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        font-size: 24px;
+      &:after {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 24px;
+        }
       }
     }
 
@@ -1445,10 +1444,13 @@
         }
       }
 
-      &:after {
+      .icn-media {
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 18px;
+        &:after {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            font-size: 18px;
+          }
         }
       }
     }
@@ -1460,11 +1462,16 @@
         font-size: 17px;
       }
 
-      &:after {
-        margin-left: 11px;
+      .icn-media {
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 34px;
+        &:after {
+          margin-left: 11px;
+          display: block;
+          transition: transform .3s;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            font-size: 34px;
+          }
         }
       }
 
@@ -1472,8 +1479,11 @@
 
         &:hover {
 
-          &:after {
-            transform: scale(1.2);
+          .icn-media {
+
+            &:after {
+              transform: scale(1.2);
+            }
           }
         }
       }

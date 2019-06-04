@@ -442,13 +442,15 @@ button {
     }
   }
 
-  &:before {
-    content: "\E618";
+  .icn-tips {
     width: 24px;
     height: 24px;
-    font-size: 24px;
-    line-height: 24px;
-    margin-bottom: 2px;
+    margin: 0 auto 2px;
+
+    &:after {
+      font-size: 24px;
+      line-height: 24px;
+    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -637,7 +639,7 @@ button {
 .likes,
 .comments,
 .looking,
-.tips,
+//.tips,
 .getPaid {
   height: 24px;
   line-height: 24px;
@@ -683,25 +685,25 @@ button {
   }
 }
 
-.tips {
-  align-items: center;
-
-  &:not(.btn-icon) {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        opacity: 1;
-        color: $primary-color;
-      }
-    }
-  }
-
-  &:after {
-    width: 1.1em;
-    content: "\E618";
-  }
-}
+//.tips {
+//  align-items: center;
+//
+//  &:not(.btn-icon) {
+//
+//    @include media-breakpoint-up($desktop-breakpoint) {
+//
+//      &:hover {
+//        opacity: 1;
+//        color: $primary-color;
+//      }
+//    }
+//  }
+//
+//  &:after {
+//    width: 1.1em;
+//    content: "\E618";
+//  }
+//}
 
 .btn-watch-all {
   background: none;
@@ -902,24 +904,6 @@ button {
   color: $secondary-color;
   transition: color 0.3s ease;
 
-  &:after {
-    content: "\E61A";
-    font-size: 24px;
-
-    .add-new-form & {
-      width: 2em;
-    }
-
-    .add-new-form.expanded & {
-      width: 1.5em;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 1.1em;
-        margin-right: 4px;
-      }
-    }
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
 
     &:hover {
@@ -944,6 +928,8 @@ button {
     position: absolute;
     top: 0;
     margin-right: 0;
+    width: 48px;
+    justify-content: center;
 
     .truncated & {
 

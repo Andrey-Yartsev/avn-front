@@ -117,6 +117,10 @@
     transition: color 0.3s ease, opacity 0.3s ease;
     height: 30px;
     color: $main-color;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
 
     &:before {
       display: inline-block;
@@ -132,8 +136,8 @@
 
     &.tips {
 
-      &:before {
-        transform: translateY(-1px);
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 2px;
       }
     }
   }

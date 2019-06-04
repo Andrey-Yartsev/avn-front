@@ -144,10 +144,7 @@
       <div class="actions">
         <div class="actions-controls">
           <label
-            :class="[
-              'add-media-input icn-item',
-              { disabled: cantAddMoreMedia }
-            ]"
+            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
             class="btn-post"
           >
             <input
@@ -156,6 +153,7 @@
               :accept="inputAccepts"
               @change="addMediaFiles"
             />
+            <span class="icn-media icn-item"></span>
             <span class="btn-post__text">
               Add media
             </span>

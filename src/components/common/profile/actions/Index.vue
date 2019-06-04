@@ -51,6 +51,7 @@
             class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn selected"
             @click="openTip"
           >
+            <span class="icn-item icn-tips"></span>
             Fund
           </button>
           <SubscribeButton
