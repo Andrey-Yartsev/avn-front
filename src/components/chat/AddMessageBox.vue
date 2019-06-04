@@ -25,7 +25,7 @@
       </label>
       <button
         v-if="withUser && withUser.canEarn && $root.showTips"
-        class="tips btn-el"
+        class="tips btn-el icn-item"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip, disabled: showPaid }"
         v-tooltip="'Fund'"
