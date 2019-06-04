@@ -136,6 +136,15 @@
     }
   }
 
+  &-twitter {
+
+    &:after {
+      font-size: 24px;
+      //width: 1.6em;
+      content: "\E61F";
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;

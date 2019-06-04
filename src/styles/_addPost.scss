@@ -250,18 +250,6 @@
     margin-left: 0;
   }
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-
-    &:hover {
-
-      .icon {
-        color: $secondary-color;
-        opacity: 1;
-
-      }
-    }
-  }
-
   .add-new-form.expanded & {
     display: block;
   }
@@ -271,26 +259,18 @@
 
     &:checked {
 
-      + .icon {
+      + .icn-item {
         color: $secondary-color;
         opacity: 1;
       }
     }
   }
 
-  .icon {
+  .icn-item {
     color: $main-color;
     opacity: 0.3;
     transition: color 0.3s ease, opacity 0.3s ease;
     display: block;
-
-    &:before {
-      font-weight: 400;
-      @include icon-font;
-      font-size: 24px;
-      width: 1.6em;
-      content: "\E61F";
-    }
   }
 }
 

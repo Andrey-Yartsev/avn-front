@@ -221,7 +221,7 @@
             v-model="tweetSend"
             :id="`tweetPost_${where}`"
           />
-          <label class="icon" :for="`tweetPost_${where}`" />
+          <label class="icn-item icn-twitter" :for="`tweetPost_${where}`" />
         </div>
         <button
           type="submit"
