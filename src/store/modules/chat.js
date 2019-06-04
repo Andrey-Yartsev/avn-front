@@ -208,6 +208,9 @@ const mutations = {
   resetChats() {
     state.chats = [];
   },
+  resetMessages() {
+    state.messages = [];
+  },
   extendChatUser(state, user) {
     state.chats = state.chats.map(v => {
       if (v.withUser.id === user.id) {
@@ -340,8 +343,11 @@ createRequestAction({
   paramsToPath: function(params, path) {
     return path.replace(/{userId}/, params);
   },
-  resultConvert: function(messages) {
-    return Object.values(messages).reverse();
+  resultConvert: function(res, state) {
+    if (res.chatsId === state.activeUserId) {
+      return Object.values(res.list).reverse();
+    }
+    return state.messages || [];
   }
 });
 

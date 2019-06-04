@@ -253,6 +253,7 @@ export default {
         return;
       }
       this.$store.commit("chat/setActiveUserId", activeUserId);
+      this.$store.commit("chat/resetMessages");
       this.fetchMessages();
     }
   },
