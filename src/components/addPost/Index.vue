@@ -39,7 +39,7 @@
             <div class="b-check-state b-check-state_post">
               <label>
                 <input class="is-free-post" type="checkbox" v-model="isFree" />
-                <span class="b-check-state__icon"></span>
+                <span class="b-check-state__icon icn-item"></span>
                 <span class="b-check-state__text">Free</span>
               </label>
             </div>
@@ -185,7 +185,7 @@
               }"
               to="/stream"
             >
-              <span class="b-check-state__icon"></span>
+              <span class="b-check-state__icon icn-live icn-item"></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>
@@ -198,7 +198,7 @@
                     type="checkbox"
                     v-model="isFree"
                   />
-                  <span class="b-check-state__icon"></span>
+                  <span class="b-check-state__icon icn-item"></span>
                   <span class="b-check-state__text">Free post</span>
                 </label>
               </div>

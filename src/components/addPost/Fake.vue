@@ -33,7 +33,7 @@
           </div>
           <div class="btn-post" v-if="user.isPerformer">
             <router-link class="b-check-state b-check-state_live" to="/stream">
-              <span class="b-check-state__icon"></span>
+              <span class="b-check-state__icon icn-live icn-item"></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>

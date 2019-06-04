@@ -684,8 +684,7 @@
       opacity: 1;
     }
 
-    &:before {
-      @include icon-font;
+    &:after {
       width: 18px;
       height: 18px;
       line-height: 15px;
@@ -699,14 +698,13 @@
       color: $main-color;
     }
 
-    &:before {
+    &:after {
 
       .b-check-state_post & {
         content: "\E610";
       }
 
       .b-check-state_live & {
-        content: "\E621";
         color: $primary-color;
         opacity: 1;
       }
