@@ -982,11 +982,7 @@
     }
   }
 
-  &:after {
-    content: "\E622";
-    //font-weight: 400;
-    font-size: 24px;
-    //display: block;
+  .icn-msg {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: auto;

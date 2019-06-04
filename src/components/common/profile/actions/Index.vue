@@ -86,8 +86,9 @@
             v-if="profile.followedBy"
             @click="sendMessage"
             type="button"
-            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-message-btn"
+            class="profile-actions__btn btn-with-icon profile-message-btn"
           >
+            <span class="icn-msg icn-item"></span>
             Message
           </button>
           <UserDropdown

@@ -405,13 +405,12 @@ button {
 .profile-message-btn {
   color: $secondary-color;
 
-  &:before {
-    content: "\E622";
+  .icn-msg {
     width: 24px;
     height: 24px;
     font-size: 24px;
     line-height: 24px;
-    margin-bottom: 3px;
+    margin: 0 auto 3px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 1px;

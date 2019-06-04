@@ -96,6 +96,13 @@
     }
   }
 
+  &-msg {
+
+    &:after {
+      content: "\E622";
+      font-size: 24px;
+    }
+  }
 
   &-item {
     display: inline-block;
