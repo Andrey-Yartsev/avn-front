@@ -130,9 +130,10 @@ const actions = {
     if (found) {
       commit("replaceMessage", message);
     } else {
-      if (rootState.auth.user.id === message.fromUser.id) {
-        commit("addMessage", message);
-      } else if (state.activeUserId === message.fromUser.id) {
+      // if (rootState.auth.user.id === message.fromUser.id) {
+      //   commit("addMessage", message);
+      // } else
+      if (state.activeUserId === message.fromUser.id) {
         commit("addMessage", message);
       }
     }
