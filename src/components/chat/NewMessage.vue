@@ -63,7 +63,7 @@
             placeholder="Search"
           />
           <div
-            class="btn-selected-all"
+            class="btn-selected-all icn-item"
             @click="toggleSelectAll"
             :class="{ visible: chats.length, active: isAllSelected }"
           ></div>
