@@ -72,7 +72,9 @@
                   class="btn-unblock"
                   @click="unblock(v.id)"
                   v-tooltip="'Unblock'"
-                ></button>
+                >
+                  <span class="icn-item icn-block"></span>
+                </button>
               </div>
             </div>
           </template>

@@ -65,7 +65,7 @@
           <div
             class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
           >
-            <button type="button" class="btn-unblock"></button>
+            <button type="button" class="btn-unblock"><span class="icn-item icn-block"></span></button>
           </div>
           <div
             class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
