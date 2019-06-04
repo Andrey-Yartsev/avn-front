@@ -41,15 +41,17 @@
           <img :src="media.thumb.source" />
           <span
             v-if="post.media.length > 1"
-            class="item-length item-length_photo icn-item"
+            class="item-length item-length_photo"
           >
             <span class="value">{{ post.media.length }}</span>
+            <span class="icn-item icn-photos"></span>
           </span>
           <span
             v-if="media.duration && $mq === 'desktop'"
-            class="item-length item-length_video icn-item hidden-mobile"
+            class="item-length item-length_video hidden-mobile"
           >
             <span class="value">{{ mediaDuration }}</span>
+            <span class="icn-item icn-camera"></span>
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster">
             <span class="explore-media__counter"

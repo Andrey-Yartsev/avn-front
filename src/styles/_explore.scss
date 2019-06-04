@@ -608,40 +608,22 @@
         top: 12px;
       }
 
-      &:after {
-        font-size: 18px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          font-size: 24px;
-        }
-      }
-
-      &_video {
-
-        &:after {
-          content: "\E635";
-        }
-      }
-
-      &_live {
-
-        &:after {
-          content: "\E621";
-        }
-      }
-
-      &_photo {
-
-        &:after {
-          content: "\E634";
-        }
-      }
-
       .value {
         font-weight: 500;
         opacity: 0;
         transition: opacity 0.3s ease;
         margin: 0 5px 0 0;
+      }
+
+      .icn-item {
+
+        &:after {
+          font-size: 18px;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            font-size: 24px;
+          }
+        }
       }
     }
 

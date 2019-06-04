@@ -104,6 +104,27 @@
     }
   }
 
+  &-camera {
+
+    &:after {
+      content: "\E635";
+    }
+  }
+
+  &-photos {
+
+    &:after {
+      content: "\E634";
+    }
+  }
+
+  &-live {
+
+    &:after {
+      content: "\E621";
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;
