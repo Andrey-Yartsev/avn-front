@@ -25,6 +25,7 @@
           @input="changed"
           :disabled="!!v.onlyRead"
           v-mask="v.inputMaskRegex ? v.inputMaskRegex : ''"
+          :placeholder="v.inputMaskPlaceholder ? v.inputMaskPlaceholder : ''"
         />
         <span class="select-wrapper" v-else>
           <select
