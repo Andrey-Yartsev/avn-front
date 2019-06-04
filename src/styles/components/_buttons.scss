@@ -519,6 +519,13 @@ button {
     align-items: center;
   }
 
+  .profile-actions & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: -3px;
+    }
+  }
+
   &:before {
     content: "\E630";
     font-size: 28px;

@@ -571,10 +571,9 @@
     }
 
     &__counter {
-
-      .icn-item {
-        vertical-align: middle;
-      }
+      display: inline-flex;
+      align-content: center;
+      align-items: center;
     }
 
     &__name {
