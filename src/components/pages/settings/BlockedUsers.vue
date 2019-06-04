@@ -22,7 +22,7 @@
             <button
               type="submit"
               disabled=""
-              class="b-search-form__btn"
+              class="b-search-form__btn icn-item"
             ></button>
           </form>
         </div>

@@ -621,8 +621,7 @@ video {
       }
     }
 
-    &:before {
-      @include icon-font;
+    &:after {
       display: block;
       content: "\E60C";
       font-size: 18px;

@@ -26,7 +26,7 @@
       />
       <button
         type="button"
-        class="b-search-form__btn b-search-form__btn_mob header-search-submit"
+        class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item"
         @click="() => {}"
         :disabled="!canSearch"
       ></button>

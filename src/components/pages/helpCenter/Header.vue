@@ -10,7 +10,7 @@
       />
       <button
         type="button"
-        class="b-search-form__btn b-search-form__btn_mob header-search-submit lg"
+        class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item lg"
         :disabled="!canSearch"
         @click="search"
       ></button>
