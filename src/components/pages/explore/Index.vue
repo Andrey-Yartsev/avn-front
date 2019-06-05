@@ -3,7 +3,7 @@
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
       class="addPost-btn-float hidden-desktop"
-      v-if="$mq === 'mobile'"
+      v-if="$mq === 'mobile' && isAuth()"
       to="/addPost"
     />
     <div class="container">
@@ -109,6 +109,7 @@ import PostMedium from "@/components/post/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
 import Users from "@/components/users/Users";
+import UserMixin from "@/mixins/user";
 import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
@@ -135,7 +136,7 @@ export default {
     VuePerfectScrollbar,
     PostCollection
   },
-  mixins: [InfinityScrollMixin, PostsStat],
+  mixins: [UserMixin, InfinityScrollMixin, PostsStat],
   created() {
     this.getPageData();
   },
