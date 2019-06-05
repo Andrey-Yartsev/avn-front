@@ -193,9 +193,8 @@ $colorsConst: (
       }
     }
 
-    &:before {
+    &:after {
       content: "\E605";
-      @include icon-font;
     }
   }
 
