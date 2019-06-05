@@ -1,0 +1,386 @@
+
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+
+.pdf-page {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  input {
+    padding: 0;
+  }
+
+  .acroform-field {
+    font-size: 20px !important;
+    background-color: rgba(210,230,250,0.29);
+    border: 0;
+    pointer-events: auto;
+    color: #000;
+
+    &[type="text"] {
+      height: 28px;
+    }
+  }
+
+  .pdf-obj-fixed {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .pdf-page-inner {
+    transform-origin: 0 0;
+    transform: scale(1.0);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: 12px;
+  }
+}
+
+.pdf-page-0 {
+  height: 1552px;
+  background-image: url(#{$assetPath}/img/w9/page0.jpg);
+}
+
+.pdf-page-1 {
+  height: 1552px;
+  background-image: url(#{$assetPath}/img/w9/page1.jpg);
+}
+
+.pdf-page-2 {
+  height: 1552px;
+  background-image: url(#{$assetPath}/img/w9/page2.jpg);
+}
+
+.pdf-page-3 {
+  height: 1552px;
+  background-image: url(#{$assetPath}/img/w9/page3.jpg);
+}
+
+.pdf-page-4 {
+  height: 1552px;
+  background-image: url(#{$assetPath}/img/w9/page4.jpg);
+}
+
+.pdf-page-5 {
+  height: 550px;
+  background-image: url(#{$assetPath}/img/w9/page5.jpg);
+  background-size: 100% auto !important;
+}
+
+.pdf-page-text {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  position: absolute;
+}
+
+.pdf-page-annots {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.pdf-obj-fixed {
+
+  span {
+    padding: 0;
+    margin: 0;
+    cursor: text;
+    color: transparent;
+    font-family: sans-serif;
+    direction: ltr;
+    white-space: nowrap;
+    text-shadow: none;
+  }
+}
+
+.obj_1 {
+  left: 9.667%;
+  top: 11.86%;
+  width: 84.5%;
+  height: 1.804%;
+  font-size: 12.000000px;
+}
+
+.obj_2 {
+  left: 9.667%;
+  top: 14.88%;
+  width: 84.5%;
+  height: 1.804%;
+  font-size: 12.000000px;
+}
+
+.obj_3 {
+  left: 10.75%;
+  top: 20.1%;
+  width: 1.333%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_4 {
+  left: 29.33%;
+  top: 19.91%;
+  width: 1.417%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_5 {
+  left: 41.17%;
+  top: 19.91%;
+  width: 1.333%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_6 {
+  left: 52.92%;
+  top: 19.91%;
+  width: 1.417%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_7 {
+  left: 64.67%;
+  top: 19.91%;
+  width: 1.417%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_8 {
+  left: 88.5%;
+  top: 21.2%;
+  width: 5.75%;
+  height: 1.546%;
+  text-align: center;
+  font-size: 12.000000px;
+}
+
+.obj_9 {
+  left: 10.75%;
+  top: 23.13%;
+  width: 1.333%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_10 {
+  left: 67.42%;
+  top: 22.68%;
+  width: 5.583%;
+  height: 1.611%;
+  text-align: center;
+  font-size: 12.000000px;
+}
+
+.obj_11 {
+  left: 82.33%;
+  top: 25.71%;
+  width: 11.92%;
+  height: 1.611%;
+  text-align: center;
+  font-size: 12.000000px;
+}
+
+.obj_12 {
+  left: 10.75%;
+  top: 29.06%;
+  width: 1.333%;
+  height: 1.095%;
+  font-size: 7.466667px;
+  margin: 0;
+}
+
+.obj_13 {
+  left: 26.5%;
+  top: 28.74%;
+  width: 47.33%;
+  height: 1.611%;
+  text-align: center;
+  font-size: 12.000000px;
+}
+
+.obj_14 {
+  left: 9.667%;
+  top: 31.51%;
+  width: 53.58%;
+  height: 1.869%;
+  font-size: 12.000000px;
+}
+
+.obj_15 {
+  left: 63.83%;
+  top: 31.51%;
+  width: 30.33%;
+  height: 4.897%;
+  font-size: 12.000000px;
+}
+
+.obj_16 {
+  left: 9.667%;
+  top: 34.54%;
+  width: 53.58%;
+  height: 1.869%;
+  font-size: 12.000000px;
+}
+
+.obj_17 {
+  left: 9.667%;
+  top: 37.56%;
+  width: 84.5%;
+  height: 1.869%;
+  font-size: 12.000000px;
+}
+
+.obj_18 {
+  left: 68.17%;
+  top: 42.4%;
+  width: 7.167%;
+  height: 3.093%;
+  font-size: 12.000000px;
+}
+
+.obj_19 {
+  left: 77.58%;
+  top: 42.4%;
+  width: 4.833%;
+  height: 3.093%;
+  font-size: 12.000000px;
+}
+
+.obj_20 {
+  left: 84.67%;
+  top: 42.4%;
+  width: 9.5%;
+  height: 3.093%;
+  font-size: 12.000000px;
+}
+
+.obj_21 {
+  left: 68.17%;
+  top: 48.45%;
+  width: 4.833%;
+  height: 3.093%;
+  font-size: 12.000000px;
+}
+
+.obj_22 {
+  left: 75.25%;
+  top: 48.45%;
+  width: 16.58%;
+  height: 3.093%;
+  font-size: 12.000000px;
+}
+
+.obj_23 {
+  left: 21%;
+  top: 68.8%;
+  height: 1.869%;
+  width: 41%;
+  font-family: 'Dancing Script', cursive;
+  padding: 0 5px !important;
+}
+
+
+.ssn-part {
+  top: 42.4%;
+  width: 2.389%;
+  height: 3.093%;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.ssn-1 {
+  left: 68.17%;
+}
+
+.ssn-2 {
+  left: 70.559%;
+}
+
+.ssn-3 {
+  left: 72.948%;
+}
+
+.ssn-4 {
+  left: 77.58%;
+}
+
+.ssn-5 {
+  left: 79.969%;
+}
+
+.ssn-6 {
+  left: 84.67%;
+}
+
+.ssn-7 {
+  left: 87.059%;
+}
+
+.ssn-8 {
+  left: 89.448%;
+}
+
+.ssn-9 {
+  left: 91.837%;
+}
+
+
+.employer-part {
+  top: 48.45%;
+}
+
+.employer-1 {
+  left: 68.17%;
+}
+
+.employer-2 {
+  left: 70.559%;
+}
+
+.employer-3 {
+  left: 75.25%;
+}
+
+.employer-4 {
+  left: 77.639%;
+}
+
+.employer-5 {
+  left: 80.028%;
+}
+
+.employer-6 {
+  left: 82.417%;
+}
+
+.employer-7 {
+  left: 84.806%;
+}
+
+.employer-8 {
+  left: 87.195%;
+}
+
+.employer-9 {
+  left: 89.584%;
+}
