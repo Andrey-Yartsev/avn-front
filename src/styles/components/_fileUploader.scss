@@ -62,7 +62,6 @@
 
     &:after {
       content: "\E610";
-      @include icon-font;
       font-size: 18px;
       line-height: 18px;
       position: absolute;
@@ -168,20 +167,19 @@
   overflow: hidden;
   color: #fff;
 
-  &:before {
+  &:after {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 0;
-    @include icon-font;
     font-size: 30px;
   }
 
   &.success-status {
 
-    &:before {
+    &:after {
       content: "\E604";
       background-color: rgba(0, 0, 0, .4);
     }
@@ -190,7 +188,7 @@
   &.error-status {
     background-color: red;
 
-    &:before {
+    &:after {
       content: "\E619";
     }
   }

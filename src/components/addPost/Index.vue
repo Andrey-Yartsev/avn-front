@@ -117,7 +117,7 @@
               <div
                 v-for="thumb in preloadedMedias[0].thumbs"
                 :key="thumb.id"
-                class="addFileView addFileView_option"
+                class="addFileView addFileView_option icn-item"
                 :class="{
                   current: preloadedMedias[0].thumbId === thumb.id
                 }"
@@ -258,7 +258,7 @@
             <div
               v-for="thumb in preloadedMedias[0].thumbs"
               :key="thumb.id"
-              class="addFileView addFileView_option"
+              class="addFileView addFileView_option icn-item"
               :class="{
                 current: preloadedMedias[0].thumbId === thumb.id
               }"
