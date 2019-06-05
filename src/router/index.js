@@ -19,6 +19,7 @@ import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
 import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
 import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
+import W9 from "@/components/pages/settings/payouts/W9.vue";
 import PostPage from "@/components/pages/post/Index";
 import NotFoundPage from "@/components/pages/notFound/Index";
 import Chat from "@/components/chat/Chat";
@@ -267,6 +268,15 @@ const routes = [
     component: SettingsTrialsPage,
     meta: {
       title: "Free Trials",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings1/w9",
+    component: W9,
+    meta: {
+      title: "W9",
       cssName: "settings"
     }
   },
