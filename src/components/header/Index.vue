@@ -38,7 +38,7 @@
               <router-link to="/register" class="register"
                 >Have an account?</router-link
               >
-              <router-link to="/login" class="btn border alt login"
+              <router-link to="/login" class="btn border alt login icn-item"
                 >Log in</router-link
               >
             </div>
@@ -80,7 +80,9 @@
                 :class="['auth-header-block hidden-mobile', { show: opened }]"
                 v-click-outside="hide"
               >
-                <div class="btn border alt login" @click="show">Log in</div>
+                <div class="btn border alt login icn-item" @click="show">
+                  Log in
+                </div>
                 <div class="auth-block-dropdown">
                   <div class="auth-block-dropdown__inside">
                     <SignupForm type="dropdown" v-if="showSignup" />
