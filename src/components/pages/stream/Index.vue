@@ -18,7 +18,7 @@
             v-if="$mq === 'mobile'"
             >Live video</span
           >
-          <button class="close close_visible-mob" @click="close">
+          <button class="close close_visible-mob icn-item" @click="close">
             <span
               class="category-name category-name_live hidden-desktop"
               v-if="$mq === 'mobile'"

@@ -106,7 +106,11 @@
             </div>
           </div>
         </div>
-        <button type="button" class="close close_light" @click="close"></button>
+        <button
+          type="button"
+          class="close close_light icn-item"
+          @click="close"
+        />
       </div>
     </template>
   </Modal>

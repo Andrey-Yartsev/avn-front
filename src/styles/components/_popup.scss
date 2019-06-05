@@ -183,9 +183,8 @@
       }
     }
 
-    &:before {
+    &:after {
       content: "\E605";
-      @include icon-font;
       position: absolute;
       left: 50%;
       top: 50%;
@@ -197,7 +196,7 @@
       &:hover {
         font-size: 30px;
 
-        &:before {
+        &:after {
           opacity: 1;
         }
       }

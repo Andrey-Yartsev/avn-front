@@ -11,9 +11,9 @@
       </div>
       <button
         type="button"
-        class="close close_shift-t close_shift-r close_default"
+        class="close close_shift-t close_shift-r close_default icn-item"
         @click="close"
-      ></button>
+      />
     </div>
   </Modal>
 </template>

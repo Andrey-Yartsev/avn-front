@@ -258,7 +258,7 @@
           <span class="btn-icon icn-tips icn-item" v-tooltip="'Fund'"></span>
         </button>
       </div>
-      <button type="button" class="close" @click="close"></button>
+      <button type="button" class="close icn-item" @click="close" />
       <div
         :class="['play-button-wrapper', { hidden: !showVideoPlay }]"
         ref="videoPlayButton"

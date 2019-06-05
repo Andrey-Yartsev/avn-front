@@ -19,9 +19,9 @@
         </div>
         <button
           type="button"
-          class="close close_default"
+          class="close close_default icn-item"
           @click="close"
-        ></button>
+        />
         <div
           class="btn-direction btn-direction_tb-sides btn-direction_next btn-direction_next-down"
           @click="next"

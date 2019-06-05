@@ -20,9 +20,9 @@
           </div>
           <button
             type="button"
-            class="close close_default close_visible-mob"
+            class="close close_default close_visible-mob icn-item"
             @click="close"
-          ></button>
+          />
         </template>
         <template v-else>
           <div class="popup-alert__title">

@@ -7,9 +7,9 @@
             <div class="reasons">
               <button
                 type="button"
-                class="close close_default close_visible-mob"
+                class="close close_default close_visible-mob icn-item"
                 @click="this.close"
-              ></button>
+              />
               <form>
                 <h1 class="form-title">Choose reason</h1>
                 <div class="shadow-block">
