@@ -477,13 +477,10 @@
       opacity: 0.3;
     }
 
-    &:before {
+    &:after {
       content: "\E606";
       font-size: 24px;
       width: 1.1em;
-      display: inline-block;
-      vertical-align: middle;
-      @include icon-font;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {

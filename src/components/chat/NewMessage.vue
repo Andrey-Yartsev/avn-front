@@ -5,7 +5,7 @@
         <div class="contactsListHeader main-header">
           <div class="back-popup-btn">
             <span
-              class="back backEvent hidden-mobile"
+              class="back backEvent hidden-mobile icn-item"
               @click="backDesktop"
             ></span>
             <a
