@@ -45,6 +45,7 @@ import Unexpected from "./Unexpected";
 1. Account
 2. Legal
 3. Legal Pending
+3.5 W9
 4. Bank
 5. Summery
 */
@@ -65,6 +66,14 @@ export default {
   },
 
   computed: {
+    isShowW9From() {
+      return (
+        this.user &&
+        this.user.payoutLegalApproveState === "approved" &&
+        this.legal &&
+        this.legal.isNeedW9
+      );
+    },
     innerComponent() {
       if (!this.accountExists) {
         return Account;
@@ -132,6 +141,14 @@ export default {
   methods: {
     changeTitle(title) {
       this.$emit("titleChanged", title);
+    }
+  },
+
+  watch: {
+    isShowW9From(value) {
+      if (value) {
+        // this.$router.push("/settings/w9");
+      }
     }
   },
 

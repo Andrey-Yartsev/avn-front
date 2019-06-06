@@ -6,6 +6,7 @@ import bank from "./payouts/bank";
 import requests from "./payouts/requests";
 import transactions from "./payouts/transactions";
 import countries from "./payouts/countries";
+import w9 from "./payouts/w9";
 
 const state = {};
 const mutations = {};
@@ -31,6 +32,7 @@ export default {
     bank,
     requests,
     transactions,
-    countries
+    countries,
+    w9
   }
 };

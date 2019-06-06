@@ -273,7 +273,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings1/w9",
+    path: "/settings/w9",
     component: W9,
     meta: {
       title: "W9",
