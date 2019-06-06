@@ -70,7 +70,7 @@
           <div
             class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
           >
-            <button type="button" class="btn_delete" @click="remove(v)"></button>
+            <button type="button" class="btn_delete icn-item" @click="remove(v)"></button>
           </div>
           --></div>
         </div>

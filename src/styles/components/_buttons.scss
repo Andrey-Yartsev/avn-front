@@ -239,7 +239,6 @@
 
     &:after {
       content: "\E600";
-      @include icon-font;
       font-size: 18px;
       @include position-center;
     }
