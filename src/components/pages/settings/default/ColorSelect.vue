@@ -10,7 +10,7 @@
       :class="wrapperClass"
     >
       <div class="select" @click="toggle">
-        <span class="select__text">{{ label }}</span>
+        <span class="select__text icn-item">{{ label }}</span>
       </div>
       <div class="options-wrapper">
         <span class="close icn-item" @click="toggle"></span>
