@@ -6069,7 +6069,6 @@ export default {
     },
     sendForm(e) {
       const data = this.getFormData(e);
-      console.log(data);
 
       this.$store
         .dispatch("payouts/w9/save", data)
@@ -6078,6 +6077,7 @@ export default {
           if (r.error) {
             return;
           }
+          this.$router.push("/settings/payouts");
           this.$store.dispatch("global/flashToast", {
             text: "Form W-9 saved successfully"
           });
