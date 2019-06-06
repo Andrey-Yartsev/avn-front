@@ -66,9 +66,14 @@
   cursor: pointer;
   font-size: 24px;
   color: #fff;
+  text-shadow: $shadow-light;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     font-size: 18px;
+  }
+
+  &:hover {
+    color: #fff;
   }
 
   &.reset-bg {
@@ -91,12 +96,6 @@
       bottom: 22px;
       left: 55px;
     }
-  }
-
-  &:after {
-    content: "\E600";
-    @include position-center;
-    text-shadow: $shadow-light;
   }
 }
 

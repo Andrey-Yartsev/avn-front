@@ -194,31 +194,13 @@
   opacity: 0.3;
 
   &-wrapper {
-    padding: 5px 0.55em 4px 0;
+    padding: 8px 0.55em 8px 0;
   }
 }
 
 .btn-clear-price {
-  border: none;
-  padding: 0;
-  background: none;
-  opacity: .2;
-  font-size: 17px;
-  margin-left: 5px;
-  transition: opacity 0.3s ease;
-  color: $main-color;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-
-    &:hover {
-      color: $primary-color;
-      opacity: 1;
-    }
-  }
-
-  &:before {
-    @include icon-font;
-    text-align: center;
-    content: "\E600";
+  &:not(:hover) {
+    opacity: .2;
   }
 }

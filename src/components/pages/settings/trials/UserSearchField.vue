@@ -20,7 +20,7 @@
         role="button"
         tabindex="-1"
         id="header-search-clear"
-        class="btn-clear-search"
+        class="btn-clear-search icn-item btn-reset btn-reset_prim-color"
         :class="{ hidden: !canSearch }"
         @click="reset"
       />

@@ -227,23 +227,6 @@
     margin-left: 10px;
   }
 
-  &_delete {
-    cursor: pointer;
-    width: 18px;
-    height: 18px;
-    position: relative;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    color: $secondary-color;
-
-    &:after {
-      content: "\E600";
-      font-size: 18px;
-      @include position-center;
-    }
-  }
-
   &-center {
     margin-left: auto;
     margin-right: auto;
@@ -273,6 +256,49 @@
         .auth-block_sm-size & {
           font-size: 20px;
         }
+      }
+    }
+  }
+
+  &-reset {
+    font-size: 17px;
+    border: none;
+    padding: 0;
+    background: none;
+    color: $main-color;
+    transition: all .3s ease;
+    cursor: pointer;
+    position: relative;
+
+    &_fix-sizes {
+      width: 17px;
+      height: 17px;
+      line-height: 17px;
+    }
+
+    &_prim-color {
+      color: $primary-color;
+    }
+
+    &_sec-color {
+      color: $secondary-color;
+    }
+
+    &_ml {
+      margin-left: 6px;
+    }
+
+    &:after {
+      @include position-center;
+      content: "\E600";
+      vertical-align: middle;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+        color: $primary-color;
+        opacity: 1;
       }
     }
   }

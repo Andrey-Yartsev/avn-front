@@ -46,7 +46,7 @@
               >
                 <span class="chatSelectedName">{{ v.withUser.name }}</span>
                 <span
-                  class="remove"
+                  class="remove icn-item btn-reset btn-reset_fix-sizes btn-reset_ml"
                   @click="toggleSelect(v.withUser.id)"
                 ></span>
               </div>

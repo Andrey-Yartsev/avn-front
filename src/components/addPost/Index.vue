@@ -17,7 +17,10 @@
       >
         <div class="datetime-value">
           <span class="post-datetime__value">{{ formattedDate }}</span>
-          <span @click="resetDatetime" class="datetime-value__reset" />
+          <span
+            @click="resetDatetime"
+            class="datetime-value__reset icn-item btn-reset btn-reset_prim-color"
+          />
         </div>
       </div>
       <div class="addPost-header" v-if="$mq === 'mobile'">
@@ -136,7 +139,10 @@
             <div class="datetime-value">
               <span class="post-datetime__icn" />
               <span class="post-datetime__value">{{ formattedDate }}</span>
-              <span @click="resetDatetime" class="datetime-value__reset" />
+              <span
+                @click="resetDatetime"
+                class="datetime-value__reset icn-item btn-reset btn-reset_sec-color"
+              />
             </div>
           </div>
         </div>
@@ -273,7 +279,10 @@
         <div class="post-scheduled-time" v-if="datetime && $mq === 'mobile'">
           <div class="datetime-value">
             <span class="post-datetime__value">{{ formattedDate }}</span>
-            <span @click="resetDatetime" class="datetime-value__reset" />
+            <span
+              @click="resetDatetime"
+              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color"
+            />
           </div>
         </div>
       </div>

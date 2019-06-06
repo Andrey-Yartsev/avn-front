@@ -40,11 +40,14 @@
     }
   }
 
-  .chatSelectedName,
-  .remove {
-    font-size: 13px;
+  .remove,
+  .chatSelectedName {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .chatSelectedName {
+    font-size: 13px;
   }
 
   .chatSelectedName {
@@ -55,30 +58,10 @@
   }
 
   .remove {
-    cursor: pointer;
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
-    width: 16px;
-    height: 16px;
-    position: relative;
-    margin-left: 7px;
 
-    &:before {
-      display: inline-block;
-      vertical-align: middle;
-      @include icon-font;
-      font-size: 1.3em;
-      margin: -2px 0 0;
-      font-weight: 400;
-      content: "\E600";
+    &:not(:hover) {
+      opacity: 0.3;
       color: $primary-color;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
-    &:hover {
-      opacity: 1;
     }
   }
 }

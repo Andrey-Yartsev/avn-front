@@ -51,7 +51,7 @@
               />
               <span
                 v-if="user.avatar"
-                class="reset-user-image reset-avatar icn-item"
+                class="reset-user-image reset-avatar icn-item btn-reset"
                 @click="showAvatarConfirm"
               ></span>
             </template>
@@ -60,7 +60,7 @@
           <span
             v-if="!bgRemoved && user.header"
             v-show="showBgAdd"
-            class="reset-user-image reset-bg icn-item"
+            class="reset-user-image reset-bg icn-item btn-reset"
             @click="showBgConfirm"
           />
           <label
