@@ -220,7 +220,8 @@
       }
     }
 
-    .success {
+    .success,
+    .fail {
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-right: 10px;
       }
@@ -627,16 +628,12 @@
   .success,
   .fail {
     font-size: 18px;
-
-    &:before {
-      @include icon-font;
-    }
   }
 
   .success {
     color: $secondary-color;
 
-    &:before {
+    &:after {
       content: "\E604";
     }
   }
@@ -644,7 +641,7 @@
   .fail {
     color: $primary-color;
 
-    &:before {
+    &:after {
       content: "\E605";
     }
   }

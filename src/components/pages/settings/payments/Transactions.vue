@@ -70,7 +70,7 @@
                     <div
                       class="status table__cell table__cell_align table__cell_align-vert-c"
                     >
-                      <span class="success" v-if="v.isSuccess"></span>
+                      <span class="success icn-item" v-if="v.isSuccess"></span>
                     </div>
                   </div>
                 </div>
