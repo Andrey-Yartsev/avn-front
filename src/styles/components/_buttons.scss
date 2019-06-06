@@ -264,6 +264,17 @@
       height: 0;
       vertical-align: middle;
       margin-right: 10px;
+
+      .auth-block_sm-size & {
+        margin-right: 5px;
+      }
+
+      &:after {
+
+        .auth-block_sm-size & {
+          font-size: 20px;
+        }
+      }
     }
   }
 }
