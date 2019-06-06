@@ -96,11 +96,11 @@
         <span>or</span>
       </div>
       <button
-        class="btn block twitter"
+        class="btn block btn-twitter"
         :class="{ lg: largeControls }"
         @click.prevent="twitter"
       >
-        Sign in with Twitter
+        <span class="icn-item icn-twitter"></span>Sign in with Twitter
       </button>
       <div class="signUp">
         <div class="signUp__body">

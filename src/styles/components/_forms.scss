@@ -661,7 +661,7 @@ label {
       font-size: 15px;
       font-weight: 500;
 
-      &:not(.close-all-sessions-btn) {
+      &:not(.delete-session_all) {
         color: $secondary-color;
       }
     }

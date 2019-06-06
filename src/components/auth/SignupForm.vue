@@ -105,11 +105,11 @@
     </form>
     <div class="login-or"><span>or</span></div>
     <button
-      class="btn block twitter"
+      class="btn block btn-twitter"
       @click.prevent="twitter"
       :class="{ lg: largeControls }"
     >
-      Sign in with Twitter
+      <span class="icn-item icn-twitter"></span>Sign in with Twitter
     </button>
     <div class="signUp">
       <h3>Already have an account?</h3>

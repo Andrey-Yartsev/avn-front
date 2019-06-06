@@ -249,6 +249,23 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  &-twitter {
+    background: #1da1f3;
+
+    &:hover {
+      background: darken(#1da1f3, 10%);
+    }
+
+    .icn-twitter {
+      position: relative;
+      top: -1px;
+      line-height: 0;
+      height: 0;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
 }
 
 button {
@@ -727,19 +744,6 @@ button {
     }
   }
 }
-
-//.close-all-sessions-btn {
-//  color: $default-primary-color;
-//
-//  &:after {
-//    content: "\E605";
-//    font-size: 24px;
-//    display: inline-block;
-//    vertical-align: top;
-//    margin: -1px 0 0 6px;
-//    line-height: 21px;
-//  }
-//}
 
 .btn-send {
   background-color: transparent;
