@@ -91,7 +91,7 @@ export default {
           if (this.bankExists) {
             return Summery;
           } else {
-            console.log("BANK NOT EXISTS", this.bankExists);
+            // console.log("BANK NOT EXISTS", this.bankExists);
             return Bank;
           }
         }
@@ -133,7 +133,7 @@ export default {
       return this.user.payoutLegalApproveState === "approved";
     },
     bankExists() {
-      console.log(this.bank);
+      // console.log(this.bank);
       return this.bank.isApprove;
     }
   },
@@ -147,7 +147,7 @@ export default {
   watch: {
     isShowW9From(value) {
       if (value) {
-        // this.$router.push("/settings/w9");
+        this.$router.push("/settings/w9");
       }
     }
   },
