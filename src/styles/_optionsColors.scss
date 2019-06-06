@@ -176,28 +176,6 @@ $colorsConst: (
     }
   }
 
-  .close {
-    position: absolute;
-    color: lighten($gray, 20%);
-    right: 0;
-    top: 0;
-    padding: 12px 15px;
-    font-size: 24px;
-    transition: color 0.3s ease;
-    cursor: pointer;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: lighten($gray, 5%);
-      }
-    }
-
-    &:after {
-      content: "\E605";
-    }
-  }
-
   .options-wrap {
     padding: 16px 0 0;
   }

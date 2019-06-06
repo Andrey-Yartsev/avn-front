@@ -126,83 +126,6 @@
     }
   }
 
-  .close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: none;
-    border: none;
-    padding: 10px 15px;
-    font-size: 24px;
-    z-index: 666;
-    color: $main-color;
-    cursor: pointer;
-    width: 54px;
-    height: 50px;
-    transition: font-size .3s;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
-    }
-
-    &:not(.close_visible-mob) {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        display: none;
-      }
-    }
-
-    &_light {
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      color: #fff;
-
-      &:before {
-        opacity: 1;
-      }
-    }
-
-    &_default {
-
-      &:before {
-        opacity: 0.5;
-      }
-    }
-
-    &_shift {
-
-      &-t {
-        top: 6px;
-      }
-
-      &-r {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          z-index: 10;
-          right: 30px;
-        }
-      }
-    }
-
-    &:after {
-      content: "\E605";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        font-size: 30px;
-
-        &:after {
-          opacity: 1;
-        }
-      }
-    }
-  }
-
 
   & .add-story-popup {
     width: 100%;
@@ -648,9 +571,9 @@
     .close {
       position: fixed;
       color: #fff;
-      opacity: 0.7;
+      opacity: .7;
       font-size: 30px;
-      padding: 7px 10px;
+      //padding: 7px 10px;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         right: auto;
@@ -687,7 +610,7 @@
         }
       }
 
-      &:before {
+      &:after {
         opacity: 1;
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {

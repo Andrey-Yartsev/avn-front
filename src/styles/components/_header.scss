@@ -838,35 +838,6 @@
       }
     }
   }
-
-  .close {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: absolute;
-      right: 0;
-      top: 0;
-      opacity: 0.3;
-      color: inherit;
-      padding: 12px 18px;
-      font-size: 24px;
-      background: none;
-      border: none;
-      transition: opacity 0.3s ease;
-
-      &:before {
-        content: "\E605";
-        @include icon-font;
-      }
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .search-query {
