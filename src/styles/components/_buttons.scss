@@ -728,19 +728,18 @@ button {
   }
 }
 
-.close-all-sessions-btn {
-  color: $default-primary-color;
-
-  &:after {
-    @include icon-font;
-    content: "\E605";
-    font-size: 24px;
-    display: inline-block;
-    vertical-align: top;
-    margin: -1px 0 0 6px;
-    line-height: 21px;
-  }
-}
+//.close-all-sessions-btn {
+//  color: $default-primary-color;
+//
+//  &:after {
+//    content: "\E605";
+//    font-size: 24px;
+//    display: inline-block;
+//    vertical-align: top;
+//    margin: -1px 0 0 6px;
+//    line-height: 21px;
+//  }
+//}
 
 .btn-send {
   background-color: transparent;

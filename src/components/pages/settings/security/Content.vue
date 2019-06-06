@@ -114,7 +114,7 @@
             <button
               v-if="sessions.length"
               type="button"
-              class="close-all-sessions-btn"
+              class="close-all-sessions-btn delete-session delete-session_all icn-item"
               @click="deleteAllSessions"
             >
               Close all
@@ -145,7 +145,7 @@
                 </span>
                 <button
                   type="button"
-                  class="delete"
+                  class="delete-session delete-session_single icn-item"
                   @click="deleteSession(v)"
                   v-tooltip="'Delete session'"
                 ></button>

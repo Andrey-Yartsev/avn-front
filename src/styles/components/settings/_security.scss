@@ -269,34 +269,50 @@
     }
   }
 
-  .delete {
-    padding: 0;
-    border: none;
-    background: none;
-    position: absolute;
-    right: -5px;
-    top: -4px;
-    opacity: .3;
-    color: inherit;
-    transition: opacity 0.3s ease, color 0.3s ease;
-
-    &:hover {
-      opacity: 1;
-      color: $default-primary-color;
-    }
-
-    &:before {
-      @include icon-font;
-      content: "\E605";
-      font-size: 24px;
-    }
-  }
-
   &:last-child {
     border: none;
     @include media-breakpoint-down($desktop-breakpoint) {
       margin-bottom: 0;
       padding-bottom: 16px;
+    }
+  }
+}
+
+.delete-session {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  transition: opacity 0.3s ease, color 0.3s ease;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      opacity: 1;
+      color: $default-primary-color;
+    }
+  }
+
+  &:after {
+    content: "\E605";
+    font-size: 24px;
+  }
+
+  &_single {
+    position: absolute;
+    right: -5px;
+    top: -4px;
+    opacity: .3;
+  }
+
+  &_all {
+    color: $default-primary-color;
+
+    &:after {
+      display: inline-block;
+      vertical-align: top;
+      margin: -1px 0 0 6px;
+      line-height: 21px;
     }
   }
 }
