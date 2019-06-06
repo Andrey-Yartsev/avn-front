@@ -6,7 +6,7 @@
       v-for="v in subSections"
       :key="v.id"
     >
-      <div class="accordion-section__title" @click="toggle(v.id)">
+      <div class="accordion-section__title icn-item" @click="toggle(v.id)">
         {{ v.title }}
       </div>
       <div class="accordion-section__body">

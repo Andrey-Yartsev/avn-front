@@ -32,13 +32,12 @@
       font-size: 20px;
     }
 
-    &:before {
+    &:after {
       content: "\E643";
       position: absolute;
       left: 0;
       font-size: 24px;
       top: 50%;
-      @include icon-font;
       transform: translate(0, -50%);
       color: $secondary-color;
       transition: all .3s;
