@@ -211,11 +211,11 @@
 }
 
 .mediasHeaderControls {
-  float: right;
+  margin-left: auto;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    float: none;
-  }
+  //@include media-breakpoint-up($desktop-breakpoint) {
+  //  float: none;
+  //}
 
   #stop {
     display: none;

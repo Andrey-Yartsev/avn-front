@@ -1066,14 +1066,20 @@ button {
   }
 
   .mediasTop__header.mediasTop__header-underlined & {
-    height: 54px;
+
+    .stream_start & {
+      height: 54px;
+    }
   }
 
   .mediasTop__header:not(.mediasTop__header-underlined) & {
-    height: 44px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 54px;
+    .stream_start & {
+      height: 44px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 54px;
+      }
     }
   }
 
@@ -1107,14 +1113,14 @@ button {
       }
     }
   }
-
-  &:not(#close-stream-window) {
+  
+  .mediasTop__header & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       left: auto;
       right: auto;
       position: relative;
-      padding: 0 0 0 24px;
+      padding: 0 0 0 20px;
       height: auto;
       width: auto;
       display: flex;
@@ -1124,6 +1130,7 @@ button {
       .stream_enabled & {
         left: auto;
         right: 0;
+        display: none;
       }
     }
   }
@@ -1137,20 +1144,12 @@ button {
     transform-origin: center;
     transition: all .3s;
 
-    .mediasTop__header-underlined & {
+    .mediasTop__header & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        left: 0;
-        top: auto;
         opacity: 1;
-        transform: translate(0, 0);
-      }
-
-      .stream_enabled & {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
+        left: 0;
+        transform: translate(0, -50%);
       }
     }
   }
