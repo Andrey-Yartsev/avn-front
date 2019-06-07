@@ -205,7 +205,10 @@
           live
         </div>
         <div class="form-stream">
-          <Comments :shownComments="shownComments" :count="10" />
+          <Comments
+            :shownComments="shownComments"
+            :count="$mq === 'desktop' ? 20 : 10"
+          />
           <form class="stream-comment-form" v-if="showCommentForm">
             <textarea
               ref="commentInput"

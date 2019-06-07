@@ -68,7 +68,7 @@ const mutations = {
         ...look,
         type: "look",
         comment: "has joined",
-        hideTime: Date.now() + 60 * 1000,
+        hideTime: Date.now() + 2 * 60 * 1000,
         canShowAnother: Date.now() + 180 * 1000
       }
     ];
@@ -84,7 +84,7 @@ const mutations = {
       ...state.currentLive.comments,
       {
         ...comment,
-        hideTime: Date.now() + 60 * 1000
+        hideTime: Date.now() + 2 * 60 * 1000
       }
     ];
   },
@@ -96,7 +96,7 @@ const mutations = {
         ...tip,
         type: "tip",
         comment: `sent you a $ ${tip.amount} tip`,
-        hideTime: Date.now() + 60 * 1000
+        hideTime: Date.now() + 2 * 60 * 1000
       }
     ];
     state.currentLive.amount += tip.amount;
