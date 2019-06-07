@@ -95,25 +95,24 @@
             </div>
           </div>
 
-          <div
-            class="post-capability"
-            v-if="$mq === 'desktop' && showCommentPanel"
-          >
-            <div class="comment-form-wrapper">
-              <AddComment
-                v-if="post.canComment && !showTip"
-                :sendNewComment="sendNewComment"
-                :userName="commentReplyUserName"
-              />
-              <Tip
-                v-if="showTip || (!post.canComment && this.canSendTips)"
-                :user="post.author"
-                ref="tip"
-                @cancel="closeTip"
-                :tipId="`${post.id}`"
-                class="tip-form_post"
-              />
-            </div>
+          <div class="post-capability" v-if="$mq === 'desktop'">
+            <template v-if="showCommentPanel">
+              <div class="comment-form-wrapper">
+                <AddComment
+                  v-if="post.canComment && !showTip"
+                  :sendNewComment="sendNewComment"
+                  :userName="commentReplyUserName"
+                />
+                <Tip
+                  v-if="showTip || (!post.canComment && this.canSendTips)"
+                  :user="post.author"
+                  ref="tip"
+                  @cancel="closeTip"
+                  :tipId="`${post.id}`"
+                  class="tip-form_post"
+                />
+              </div>
+            </template>
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
               <div class="guest-comments-form">
                 <button
@@ -130,7 +129,7 @@
                 </button>
               </div>
             </div>
-            <template v-if="!delayedPost && isAuth()">
+            <template v-if="showCommentPanel">
               <Actions
                 :post="post"
                 :showTips="showTip"
@@ -166,18 +165,12 @@
     >
       <div class="comment-form-wrapper">
         <div class="guest-comments-form">
-          <button
-            class="btn border btn_fix-width-sm"
-            @click.prevent="openLoginModal"
+          <router-link to="/login" class="btn border btn_fix-width-sm"
+            >Log in</router-link
           >
-            Log in
-          </button>
-          <button
-            class="btn border alt btn_fix-width-sm"
-            @click.prevent="openSingupModal"
+          <router-link to="/register" class="btn border alt btn_fix-width-sm"
+            >Sing up</router-link
           >
-            Sing up
-          </button>
         </div>
       </div>
     </div>
