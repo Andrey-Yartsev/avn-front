@@ -440,22 +440,6 @@
       opacity: 1;
     }
   }
-
-  &:before {
-    @include icon-font;
-    font-size: 24px;
-  }
-
-  &:not(:empty) {
-
-    &:before {
-      margin-right: 6px;
-    }
-  }
-
-  .tips {
-    color: #fff;
-  }
 }
 
 .stream-btns {
