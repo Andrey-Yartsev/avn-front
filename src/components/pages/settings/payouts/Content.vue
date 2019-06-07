@@ -153,6 +153,7 @@ export default {
   },
 
   created() {
+    this.$store.dispatch("payouts/reset");
     this.$store.dispatch("payouts/account/fetch").then(() => {
       this.$store.dispatch("payouts/legal/fetch").then(() => {
         this.$store.dispatch("payouts/bank/fetch").then(() => {
