@@ -109,10 +109,7 @@
               </label>
             </div>
 
-            <div
-              class="form-group form-group_with-label photo-form-group"
-              :class="{ disabled: legalExists }"
-            >
+            <div class="form-group form-group_with-label photo-form-group">
               <div
                 class="form-group-inner photo-form-group-inner"
                 :class="{ success: !!uploadedPhoto }"
@@ -269,7 +266,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave || saving"
+              :disabled="!canSave || saving || imageUploading"
             >
               Next
             </button>
@@ -289,12 +286,13 @@ import { Settings, DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 import States from "./states";
+import UserMixin from "@/mixins/user";
 
 Settings.defaultLocale = "en";
 
 export default {
   name: "PayoutSettingsLegal",
-  mixins: [Form, States],
+  mixins: [Form, States, UserMixin],
   components: {
     BirthDateSelect,
     Datetime
@@ -312,7 +310,8 @@ export default {
       city: "",
       tos: false,
       uploadedPhoto: null,
-      legalExisted: false
+      legalExisted: false,
+      imageUploading: false
     };
   },
   computed: {
@@ -357,9 +356,12 @@ export default {
   },
   methods: {
     async upload() {
+      this.imageUploading = true;
       try {
         this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
+        this.imageUploading = false;
       } catch (error) {
+        this.imageUploading = false;
         this.$store.dispatch("global/setError", error);
       }
     },
@@ -389,7 +391,11 @@ export default {
         if (!r.type) {
           return;
         }
-        if (!this.legalExisted) {
+
+        if (
+          !this.legalExisted ||
+          this.user.payoutLegalApproveState === "rejected"
+        ) {
           this.$store.dispatch("auth/extendUser", {
             payoutLegalApproveState: "pending"
           });
