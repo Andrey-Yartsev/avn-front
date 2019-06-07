@@ -137,7 +137,7 @@
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
           >
             <div class="datetime-value">
-              <span class="post-datetime__icn" />
+              <span class="post-datetime__icn icn-item icn-calendar" />
               <span class="post-datetime__value">{{ formattedDate }}</span>
               <span
                 @click="resetDatetime"
@@ -177,7 +177,10 @@
                 @close="closeDatepicker"
                 :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
               />
-              <span class="post-datetime__icn" @click="openDatepicker"></span>
+              <span
+                class="post-datetime__icn icn-item icn-calendar"
+                @click="openDatepicker"
+              ></span>
               <span class="btn-post__text">
                 Schedule
               </span>

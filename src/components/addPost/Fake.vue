@@ -28,7 +28,7 @@
             @click="goToAddPost"
           >
             <div class="post-datetime">
-              <span class="post-datetime__icn" />
+              <span class="post-datetime__icn icn-item icn-calendar" />
             </div>
           </div>
           <div class="btn-post" v-if="user.isPerformer">

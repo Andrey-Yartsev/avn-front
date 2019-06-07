@@ -145,6 +145,13 @@
     }
   }
 
+  &-calendar {
+
+    &:after {
+      content: "\E667";
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;

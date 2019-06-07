@@ -960,16 +960,12 @@
     display: inline-block;
     cursor: pointer;
 
-    &:before {
-      content: "\E667";
-      @include icon-font;
+    &:after {
       font-size: 24px;
       width: 24px;
       height: 30px;
       position: relative;
       z-index: 1;
-      display: inline-block;
-      transition: color .3s;
     }
   }
 
