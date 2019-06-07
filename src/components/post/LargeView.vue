@@ -120,7 +120,7 @@
                   class="btn border btn_fix-width-sm"
                   @click.prevent="openLoginModal"
                 >
-                  Login
+                  Log in
                 </button>
                 <button
                   class="btn border alt btn_fix-width-sm"
@@ -170,7 +170,7 @@
             class="btn border btn_fix-width-sm"
             @click.prevent="openLoginModal"
           >
-            Login
+            Log in
           </button>
           <button
             class="btn border alt btn_fix-width-sm"
