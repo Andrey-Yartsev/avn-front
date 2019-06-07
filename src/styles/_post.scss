@@ -166,6 +166,13 @@
     }
   }
 
+  .lightbox-post & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: relative;
+    }
+  }
+
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {

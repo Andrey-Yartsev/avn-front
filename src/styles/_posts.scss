@@ -546,7 +546,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 4px;
-      //max-height: calc(100vh - 210px);
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -565,6 +564,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 calc(100% - 360px);
         width: calc(100% - 360px);
+      }
+    }
+
+    .lightbox-post & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        max-height: calc(100vh - 210px);
       }
     }
   }
