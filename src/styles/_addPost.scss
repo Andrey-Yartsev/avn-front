@@ -640,7 +640,7 @@
       + .b-check-state__icon {
         opacity: 1;
 
-        &:before {
+        &:after {
           color: $secondary-color;
           content: "\E60F";
           opacity: 1;
@@ -676,9 +676,6 @@
       transition: color .3s;
       opacity: 0.5;
       color: $main-color;
-    }
-
-    &:after {
 
       .b-check-state_post & {
         content: "\E610";
@@ -709,7 +706,7 @@
 
     .b-check-state__icon {
 
-      &:before {
+      &:after {
         top: 0;
         left: -3px;
         line-height: 18px;
@@ -723,7 +720,7 @@
         + .b-check-state__icon {
           opacity: 1;
 
-          &:before {
+          &:after {
             color: $primary-color;
           }
         }
