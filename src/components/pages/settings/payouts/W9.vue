@@ -530,7 +530,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-1"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_11[0]"
@@ -541,7 +541,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-2"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_11[0]"
@@ -552,7 +552,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-3"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_11[0]"
@@ -563,7 +563,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-4"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_12[0]"
@@ -574,7 +574,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-5"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_12[0]"
@@ -585,7 +585,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-6"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_13[0]"
@@ -596,7 +596,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-7"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_13[0]"
@@ -607,7 +607,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-8"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_13[0]"
@@ -618,7 +618,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part ssn-9"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].SSN[0].f1_13[0]"
@@ -716,7 +716,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-1"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_14[0]"
@@ -727,7 +727,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-2"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_14[0]"
@@ -738,7 +738,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-3"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -749,7 +749,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-4"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -760,7 +760,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-5"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -771,7 +771,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-6"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -782,7 +782,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-7"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -793,7 +793,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-8"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
@@ -804,7 +804,7 @@
               <input
                 type="number"
                 class="acroform-field pdf-obj-fixed pdf-annot ssn-part employer-part employer-9"
-                min="1"
+                min="0"
                 step="1"
                 max="9"
                 data-rel="topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]"
