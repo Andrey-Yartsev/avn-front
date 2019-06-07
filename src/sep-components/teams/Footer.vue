@@ -9,7 +9,7 @@
           <div
             :class="[
               'FooterNavView',
-              { 'settings-onmyteam-link': key === pages.length - 1 }
+              { 'settings-link': key === pages.length - 1 }
             ]"
             v-for="(page, key) in pages"
             :key="page.name"
