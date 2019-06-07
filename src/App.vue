@@ -293,10 +293,6 @@ export default {
   },
   methods: {
     setContainerClass() {
-      if (this.$root.isTeamApp) {
-        this.containerClassName = "teams-style";
-      }
-
       if (this.$root.isAvnApp) {
         this.containerClassName = "avn-style";
       }

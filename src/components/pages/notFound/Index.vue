@@ -8,7 +8,7 @@
       </p>
       <p>
         <a class="alt" href="/">
-          Go back to {{ $root.isAvnApp ? "stars.avn.com" : "OnMyTeam.com" }}
+          Go back to stars.avn.com
         </a>
       </p>
     </div>

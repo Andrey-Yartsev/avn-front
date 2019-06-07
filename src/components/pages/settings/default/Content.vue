@@ -116,8 +116,7 @@
       </div>
       <div class="toggle-wrapper border-top option-earn-money">
         <label class="toggle-label semi-transparent" for="is_paid_subscription">
-          I want to earn money using
-          {{ $root.isAvnApp ? "AVN Stars" : "OnMyTeam" }}
+          I want to earn money using AVN Stars
         </label>
         <label class="toggle-element">
           <input

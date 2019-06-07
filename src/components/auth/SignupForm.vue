@@ -146,10 +146,6 @@ export default {
 
   computed: {
     loginText() {
-      if (this.$root.isTeamApp) {
-        return "Login to OnMyTeam.com";
-      }
-
       return "Login to AVN Stars";
     },
     signupAction() {

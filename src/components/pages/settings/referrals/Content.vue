@@ -20,9 +20,8 @@
       </div>
       <div class="referral-desc">
         <p class="subtext">
-          Refer creators to
-          {{ $root.isAvnApp ? "stars.avn.com" : "OnMyTeam.com" }} receive 5% of
-          their earnings as a bonus!
+          Refer creators to stars.avn.com receive 5% of their earnings as a
+          bonus!
         </p>
         <button
           type="button"

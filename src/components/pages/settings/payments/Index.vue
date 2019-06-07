@@ -1,7 +1,7 @@
 <template>
   <Layout ref="layout">
     <Content
-      v-if="appName === 'teams'"
+      v-if="appName !== 'avn'"
       slot="content"
       @titleChanged="changeTitle"
     />
