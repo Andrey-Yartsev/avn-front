@@ -7,7 +7,7 @@
         </span>
       </router-link>
       <div class="sidebar__inside">
-        <span role="button" class="user-menu-close"></span>
+        <span role="button" class="user-menu-close" @click="hide" />
         <div class="sidebar__header">
           <div class="user-group-info">
             <div class="user-menu-name">
@@ -122,6 +122,10 @@ export default {
   },
 
   methods: {
+    hide() {
+      this.$store.dispatch("global/hideUserMobileBar");
+      document.body.classList.remove("sidebar-shown", "disable-scroll-page");
+    },
     copyToClipboard() {
       this.$copyText(window.location.origin + "/" + this.user.username).then(
         () => {
