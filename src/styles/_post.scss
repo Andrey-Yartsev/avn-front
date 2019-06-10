@@ -34,6 +34,17 @@
     min-height: calc(100vh - 160px);
   }
 
+  .lightbox-post & {
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
   &__inside {
     flex: 1;
 
@@ -65,6 +76,11 @@
           right: auto;
           margin: auto 0;
           flex: 0 0 auto;
+
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          justify-content: center;
         }
       }
     }
@@ -284,7 +300,7 @@
           margin-bottom: 0;
           color: #fff;
           min-height: auto;
-          position: static;
+          position: relative;
         }
       }
 

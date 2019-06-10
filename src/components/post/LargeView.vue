@@ -58,6 +58,8 @@
         <template v-if="!delayedPost && isAuth() && $mq === 'mobile'">
           <Actions
             :post="post"
+            :from="from"
+            :showCopy="!delayedPost"
             :showTips="showTip"
             @postShowCommentForm="clickOnCommentForm"
             @postLike="likePost"
@@ -132,6 +134,8 @@
             <template v-if="showCommentPanel">
               <Actions
                 :post="post"
+                :from="from"
+                :showCopy="!delayedPost"
                 :showTips="showTip"
                 @postShowCommentForm="clickOnCommentForm"
                 @postLike="likePost"
