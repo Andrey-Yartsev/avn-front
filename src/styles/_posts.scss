@@ -122,6 +122,13 @@
           min-height: 48px;
           padding-right: 15px;
         }
+
+        .more-functions {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            display: none;
+          }
+        }
       }
     }
 
@@ -335,6 +342,17 @@
       &.active {
         opacity: 1;
         color: $primary-color;
+      }
+    }
+
+    .more-functions {
+      display: none;
+
+      .lightbox-post & {
+
+        .explore-page & {
+          display: block;    
+        }
       }
     }
 
@@ -569,8 +587,14 @@
 
     .lightbox-post & {
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        max-height: calc(100vh - 210px);
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          //max-height: calc(100vh - 210px);
+
+          //flex: 1;
+          display: flex;
+        }
       }
     }
   }
@@ -611,7 +635,7 @@
     .postPage & {
 
       @include media-breakpoint-down($desktop-breakpoint) {
-        max-height: calc(100vh - 210px);
+        //max-height: calc(100vh - 210px);
       }
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -631,6 +655,7 @@
       .explore-page & {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          height: 100%;
 
           @media screen and (orientation: landscape) {
             object-fit: contain;
