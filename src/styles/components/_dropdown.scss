@@ -422,7 +422,6 @@
 
       &:after {
         content: "\E604";
-        @include icon-font;
         position: absolute;
         left: 10px;
         top: 10px;

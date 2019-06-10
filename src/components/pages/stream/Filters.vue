@@ -12,7 +12,7 @@
           <li class="more-functions__item">
             <button
               type="button"
-              class="btn-toggle-state more-functions__link"
+              class="btn-toggle-state more-functions__link icn-item"
               :class="{ checked: noOneActive }"
               @click="onChangeValue('none')"
             >
@@ -28,7 +28,7 @@
           >
             <button
               type="button"
-              class="btn-toggle-state more-functions__link"
+              class="btn-toggle-state more-functions__link icn-item"
               :class="{ checked: filter.active }"
               @click="onChangeValue(filter.id)"
             >
