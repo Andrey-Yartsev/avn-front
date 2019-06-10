@@ -240,6 +240,7 @@
     position: relative;
     object-fit: cover;
     background: $default-avatar-bg;
+    display: block;
   }
 
   &__img {
