@@ -35,6 +35,8 @@
         <Actions
           v-if="!delayedPost"
           :post="post"
+          :showCopy="!delayedPost"
+          :from="from"
           v-on:postShowCommentForm="toggleCommentForm"
           v-on:postLike="likePost"
           @toggleTip="toggleTipForm"
