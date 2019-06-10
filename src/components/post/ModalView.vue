@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="popup-container post post-popup">
         <div
-          class="btn-direction btn-direction_tb-sides btn-direction_prev btn-direction_prev-up"
+          class="btn-direction btn-direction_tb-sides btn-direction_prev btn-direction_prev-up icn-item"
           @click="index -= 1"
           v-if="index > 0"
         ></div>
@@ -23,7 +23,7 @@
           @click="close"
         />
         <div
-          class="btn-direction btn-direction_tb-sides btn-direction_next btn-direction_next-down"
+          class="btn-direction btn-direction_tb-sides btn-direction_next btn-direction_next-down icn-item"
           @click="next"
           v-if="index + 1 < length"
         ></div>

@@ -838,6 +838,7 @@ button {
   background: none;
   padding: 0;
   border: none;
+  outline: none;
   z-index: 40;
 
   &_prev {
@@ -845,7 +846,7 @@ button {
     &-up {
       top: 0;
 
-      &:before {
+      &:after {
         content: "\E644";
       }
     }
@@ -853,7 +854,7 @@ button {
     &-left {
       left: 0;
 
-      &:before {
+      &:after {
         content: "\E645";
       }
     }
@@ -864,7 +865,7 @@ button {
     &-down {
       bottom: 0;
 
-      &:before {
+      &:after {
         content: "\E646";
       }
     }
@@ -872,7 +873,7 @@ button {
     &-right {
       right: 0;
 
-      &:before {
+      &:after {
         content: "\E643";
       }
     }
@@ -890,7 +891,7 @@ button {
       opacity: 0;
     }
 
-    &:before {
+    &:after {
       @include position-center;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -938,10 +939,6 @@ button {
     &:hover {
       opacity: 1;
     }
-  }
-
-  &:before {
-    @include icon-font;
   }
 }
 
