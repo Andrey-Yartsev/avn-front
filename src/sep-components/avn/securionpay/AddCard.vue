@@ -37,11 +37,11 @@
                     user.paymentGateCardLast4
                   }}</span>
 
-                  <button class="replace" id="replaceCard" @click="replaceCard">
-                    Replace
+                  <button class="replace icn-item" id="replaceCard" @click="replaceCard">
+                    <template v-if="$mq === 'desktop'">Replace</template>
                   </button>
-                  <button class="delete" id="deleteCard" @click="deleteCard">
-                    Delete
+                  <button class="delete icn-item" id="deleteCard" @click="deleteCard">
+                    <template v-if="$mq === 'desktop'">Delete</template>
                   </button>
                 </div>
               </div>
