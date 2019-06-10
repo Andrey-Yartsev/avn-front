@@ -56,14 +56,14 @@
     top: 0;
   }
 
-  &:before {
+  &:after {
     content: "\E63D";
-    @include icon-font;
     color: $secondary-color;
     @include position-center;
     font-size: 24px;
   }
 }
+
 .twitter-value {
   a &,
   a {
