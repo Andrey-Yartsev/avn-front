@@ -84,7 +84,7 @@ export default {
         getImagePreview(
           { file: e.target.files[0] },
           ({ preview, params: { width } }) => {
-            if (width > 100 && width < 300) {
+            if (width >= 100 && width <= 300) {
               this.preview = preview;
               this.save();
             } else {
