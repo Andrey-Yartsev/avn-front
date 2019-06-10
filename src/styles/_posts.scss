@@ -356,16 +356,21 @@
       }
     }
 
-    .report {
-      opacity: 0.15;
-      &,
-      &:empty {
-        margin: 0 0 0 auto;
-      }
-      &:before {
-        content: "\E619";
-      }
-    }
+    //.report {
+    //
+    //  .more-functions__option {
+    //    opacity: 0.15;
+    //
+    //    &:after {
+    //      content: "\E619";
+    //    }
+    //  }
+    //
+    //  &,
+    //  &:empty {
+    //    margin: 0 0 0 auto;
+    //  }
+    //}
 
     .timestamp {
       margin-left: auto;

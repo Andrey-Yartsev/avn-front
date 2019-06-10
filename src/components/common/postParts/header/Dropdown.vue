@@ -15,7 +15,7 @@
           type="button"
           @click="reportUser"
         >
-          <span class="more-functions__option">Report post</span>
+          <span class="more-functions__option icn-item">Report post</span>
         </button>
       </li>
       <template v-if="showCopy">

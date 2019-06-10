@@ -323,6 +323,7 @@ video {
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       background-color: transparent;
       box-shadow: none;
+      padding-bottom: 20px;
     }
   }
 
