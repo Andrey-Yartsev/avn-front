@@ -95,7 +95,7 @@
                     <div
                       v-for="story in stories"
                       :key="story.id"
-                      class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView"
+                      class="explore-item explore-item_radio explore-item_col explore-item_col-4 liveView icn-item"
                       :class="{ selected: checked.indexOf(story.id) !== -1 }"
                       @click="check(story.id)"
                     >

@@ -492,7 +492,6 @@
 
       &:after {
         content: "\E60E";
-        @include icon-font;
         position: absolute;
         right: 10px;
         bottom: 10px;
