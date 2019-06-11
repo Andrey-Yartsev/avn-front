@@ -39,10 +39,7 @@
             />
             <NoResults :query="query" :loading="loading" />
           </div>
-          <div
-            class="loaderWrap loader-content"
-            v-if="loading && items.length"
-          >
+          <div class="loaderWrap loader-content" v-if="loading && items.length">
             <Loader :fullscreen="false" />
           </div>
         </div>

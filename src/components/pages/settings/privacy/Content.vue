@@ -48,7 +48,9 @@ w<template>
                     value="true"
                     v-model="localUser.hasWatermarkPhoto"
                   />
-                  <span class="label icn-item">Enable watermarks for photo</span>
+                  <span class="label icn-item"
+                    >Enable watermarks for photo</span
+                  >
                 </div>
               </label>
               <label class="form-group-inner">
@@ -59,7 +61,9 @@ w<template>
                     value="true"
                     v-model="localUser.hasWatermarkVideo"
                   />
-                  <span class="label icn-item">Enable watermarks for video</span>
+                  <span class="label icn-item"
+                    >Enable watermarks for video</span
+                  >
                 </div>
               </label>
 
