@@ -45,7 +45,7 @@
                       :key="thumb.id"
                     >
                       <div
-                        class="cover-highlight"
+                        class="cover-highlight icn-item"
                         :class="{ selected: choosenCover == thumb.id }"
                         @click="choosenCover = thumb.id"
                       >

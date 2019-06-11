@@ -785,29 +785,13 @@
 
   &.selected {
 
-    &:before,
     &:after {
       opacity: 1;
     }
   }
 
-  &:before {
-    content: "\E604";
-    @include icon-font;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    opacity: 0;
-    transition: opacity .3s;
-    z-index: 5;
-    font-size: 40px;
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-  }
-
   &:after {
-    content: "";
+    content: "\E604";
     position: absolute;
     left: 0;
     right: 0;
@@ -816,6 +800,15 @@
     background-color: rgba(0, 0, 0, .4);
     opacity: 0;
     transition: opacity .3s;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    line-height: 80px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      line-height: 100px;
+    }
   }
 
   img {

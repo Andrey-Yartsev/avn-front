@@ -40,7 +40,7 @@
                       :key="post.id"
                       @click="addNewStoryToCollection(post.id)"
                     >
-                      <div class="cover-highlight">
+                      <div class="cover-highlight icn-item">
                         <img :src="post.cover" alt="" />
                       </div>
                       <div class="name-highlight">
