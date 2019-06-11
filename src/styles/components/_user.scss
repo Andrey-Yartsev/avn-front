@@ -241,6 +241,7 @@
     object-fit: cover;
     background: $default-avatar-bg;
     display: block;
+    z-index: 2;
   }
 
   &__img {
@@ -268,6 +269,7 @@
       border-radius: 50%;
       background: $white;
       content: "";
+      z-index: 1;
     }
   }
 }
