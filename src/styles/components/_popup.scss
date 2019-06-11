@@ -520,11 +520,6 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           padding-top: 45px;
           padding-bottom: 45px;
-
-          @media screen and (orientation: landscape) {
-            padding-top: 0;
-            padding-bottom: 0;
-          }
         }
       }
     }

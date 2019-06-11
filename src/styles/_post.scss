@@ -301,6 +301,7 @@
           color: #fff;
           min-height: auto;
           position: relative;
+          padding-bottom: 0;
         }
       }
 
@@ -346,7 +347,7 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           right: 7px;
           top: auto;
-          bottom: 8px;
+          bottom: -5px;
         }
       }
     }
