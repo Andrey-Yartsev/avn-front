@@ -7,7 +7,12 @@
         </span>
       </router-link>
       <div class="sidebar__inside">
-        <span role="button" class="user-menu-close" @click="hide" />
+        <span
+          role="button"
+          class="close icn-item user-menu-close hidden-desktop"
+          @click="hide"
+          v-if="$mq === 'mobile'"
+        />
         <div class="sidebar__header">
           <div class="user-group-info">
             <div class="user-menu-name">

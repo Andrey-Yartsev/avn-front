@@ -1576,35 +1576,15 @@
     }
   }
   &-close {
-    position: absolute;
-    top: 0;
-    right: 0;
     padding: 17px 20px;
-    font-size: 24px;
-    transition: transform 0.3s ease;
     color: $primary-color;
+    width: 64px;
+    height: 64px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
         top: -14px;
       }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $primary-color-darken;
-        transform: scale(1.5);
-      }
-    }
-
-    &:before {
-      @include icon-font;
-      content: "\E605";
     }
   }
 }

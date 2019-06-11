@@ -157,57 +157,6 @@
       }
     }
   }
-
-  > .close {
-    border: none;
-    background: none;
-    color: #fff;
-    z-index: 3;
-    display: block;
-    transition: all .3s;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding: 7px 15px;
-      font-size: 24px;
-
-      .stream_enabled & {
-        left: auto;
-        right: 0;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      right: 0;
-      padding: 12px 15px;
-      font-size: 30px;
-      width: 54px;
-      height: 50px;
-    }
-
-    &:before {
-      transition: all .3s;
-      content: "\E605";
-      @include icon-font;
-      display: inline-block;
-      vertical-align: middle;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 1;
-      }
-
-    }
-
-    &:hover {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        transform: scale(1.2);
-      }
-    }
-  }
 }
 
 .mediasHeaderControls {

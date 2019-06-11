@@ -15,7 +15,7 @@
           <span
             class="category-name category-name_live hidden-mobile"
             @click="close"
-            v-if="$mq === 'mobile'"
+            v-if="$mq === 'mobilez'"
             >Live video</span
           >
           <button
