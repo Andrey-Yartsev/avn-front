@@ -248,7 +248,7 @@
                     v-model="tos"
                     v-validate="'required'"
                   />
-                  <div class="label input-desc payouts-desc">
+                  <div class="label input-desc payouts-desc icn-item">
                     I agree to
                     <router-link
                       to="/terms"

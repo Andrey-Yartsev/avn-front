@@ -52,7 +52,7 @@
                   name="isEmailNotificationNewSubscriptionEnabled"
                   value="true"
                 />
-                <span class="label">New subscriber</span>
+                <span class="label icn-item">New subscriber</span>
               </div>
             </label>
             <label class="form-group-inner">
@@ -65,7 +65,7 @@
                   name="isEmailNotificationNewUnreadChatsMessagesEnabled"
                   value="true"
                 />
-                <span class="label">New private message</span>
+                <span class="label icn-item">New private message</span>
               </div>
             </label>
             <label class="form-group-inner">
@@ -76,7 +76,7 @@
                   name="isEmailNotificationNewTipsEnabled"
                   value="true"
                 />
-                <span class="label">Fund was received</span>
+                <span class="label icn-item">Fund was received</span>
               </div>
             </label>
           </div>
@@ -115,7 +115,7 @@
                   name="isEmailNotificationNewSubscriptionEnabled"
                   value="true"
                 />
-                <span class="label">New subscriber</span>
+                <span class="label icn-item">New subscriber</span>
               </div>
             </label>
             <label class="form-group-inner">
@@ -126,7 +126,7 @@
                   name="isTweetNotificationAutoprolongEnabled"
                   value="true"
                 />
-                <span class="label">Auto prolongation</span>
+                <span class="label icn-item">Auto prolongation</span>
               </div>
             </label>
             <label class="form-group-inner">
@@ -137,7 +137,7 @@
                   name="isEmailNotificationNewTipsEnabled"
                   value="true"
                 />
-                <span class="label">Post tweets</span>
+                <span class="label icn-item">Post tweets</span>
               </div>
             </label>
           </div>
@@ -158,7 +158,7 @@
             class="form-group form-group_with-label radio-group emailNotificationsFrequency"
           >
             <label class="form-group-inner">
-              <div class="radio-wrapper">
+              <div class="radio-wrapper icn-item">
                 <input
                   v-model="localUser.emailNotificationNewPostsPeriod"
                   type="radio"
@@ -169,7 +169,7 @@
               </div>
             </label>
             <label class="form-group-inner">
-              <div class="radio-wrapper">
+              <div class="radio-wrapper icn-item">
                 <input
                   v-model="localUser.emailNotificationNewPostsPeriod"
                   type="radio"
@@ -180,7 +180,7 @@
               </div>
             </label>
             <label class="form-group-inner">
-              <div class="radio-wrapper">
+              <div class="radio-wrapper icn-item">
                 <input
                   v-model="localUser.emailNotificationNewPostsPeriod"
                   type="radio"

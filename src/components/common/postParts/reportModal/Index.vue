@@ -20,7 +20,7 @@
                         v-for="reason in reasons"
                         :key="reason.id"
                       >
-                        <div class="radio-wrapper">
+                        <div class="radio-wrapper icn-item">
                           <input
                             type="radio"
                             name="reason"

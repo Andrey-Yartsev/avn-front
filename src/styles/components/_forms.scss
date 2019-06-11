@@ -757,7 +757,7 @@ select {
 
       + .label {
 
-        &:before {
+        &:after {
           opacity: 1;
         }
       }
@@ -774,7 +774,7 @@ select {
       color: $secondary-color;
     }
 
-    &:before {
+    &:after {
       content: "";
       position: absolute;
       opacity: .3;
@@ -798,7 +798,7 @@ select {
       + .label {
         font-weight: 500;
 
-        &:before {
+        &:after {
           background-color: $primary-color;
           box-shadow: 0 0 0 2px $primary-color;
         }
@@ -808,7 +808,7 @@ select {
 
   .label {
 
-    &:before {
+    &:after {
       width: 10px;
       height: 10px;
       border: 3px solid $white;
@@ -830,7 +830,7 @@ select {
 
       + .label {
 
-        &:before {
+        &:after {
           background: $primary-color;
           box-shadow: none;
           content: "\E604";
@@ -845,12 +845,12 @@ select {
       opacity: 1;
       margin-top: 2px;
 
-      &:before {
+      &:after {
         top: -2px;
       }
     }
 
-    &:before {
+    &:after {
       border-radius: 2px;
       box-shadow: 0 0 0 2px $main-color inset;
       left: 3px;
@@ -862,7 +862,6 @@ select {
       text-align: center;
       transition: background .3s ease, box-shadow .3s ease, opacity .3s ease;
       color: #fff;
-      @include icon-font;
     }
   }
 }

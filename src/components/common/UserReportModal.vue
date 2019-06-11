@@ -16,7 +16,7 @@
                   <div class="container">
                     <div class="form-group form-group_with-label radio-group">
                       <label class="form-group-inner">
-                        <div class="radio-wrapper">
+                        <div class="radio-wrapper icn-item">
                           <input
                             type="radio"
                             name="reason"
@@ -30,7 +30,7 @@
                         </div>
                       </label>
                       <label class="form-group-inner">
-                        <div class="radio-wrapper">
+                        <div class="radio-wrapper icn-item">
                           <input
                             type="radio"
                             name="reason"
@@ -43,7 +43,7 @@
                         </div>
                       </label>
                       <label class="form-group-inner">
-                        <div class="radio-wrapper">
+                        <div class="radio-wrapper icn-item">
                           <input
                             type="radio"
                             name="reason"
