@@ -39,6 +39,12 @@
             />
             <NoResults :query="query" :loading="loading" />
           </div>
+          <div
+            class="loaderWrap loader-content"
+            v-if="loading && items.length"
+          >
+            <Loader :fullscreen="false" />
+          </div>
         </div>
       </div>
     </div>
@@ -54,6 +60,7 @@ import Photos from "./types/Photos";
 import InfinityScroll from "@/mixins/infinityScroll";
 import NoResults from "./NoResults";
 import Footer from "@/components/footer/Index";
+import Loader from "@/components/common/Loader";
 
 const types = {
   users: "People",
@@ -80,7 +87,8 @@ export default {
     Videos,
     Photos,
     NoResults,
-    Footer
+    Footer,
+    Loader
   },
 
   data: () => ({
@@ -172,6 +180,7 @@ export default {
       this.localQuery = this.query;
     },
     type() {
+      this.lastYOffset = 0;
       this.$store.commit("search/page/reset");
       this.$store.commit("search/summary/reset");
       this.$router.push(`/search/${this.type}/${this.localQuery}`);
