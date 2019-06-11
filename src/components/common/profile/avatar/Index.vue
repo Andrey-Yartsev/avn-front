@@ -3,14 +3,13 @@
     <router-link
       :to="`/stories/${profile.id}`"
       v-if="(profile.hasNotViewedStory || profile.hasStory) && !showLiveLabel"
+      class="avatar"
     >
-      <span class="avatar" :style="{ fontSize: fontSize }">
-        <span
-          class="avatar__img"
-          :class="{ 'with-story': profile.hasNotViewedStory }"
-        >
-          <img :src="profile.avatar" v-if="profile.avatar" />
-        </span>
+      <span
+        class="avatar__img"
+        :class="{ 'with-story': profile.hasNotViewedStory }"
+      >
+        <img :src="profile.avatar" v-if="profile.avatar" />
       </span>
     </router-link>
     <span v-else class="avatar" @click="click">
