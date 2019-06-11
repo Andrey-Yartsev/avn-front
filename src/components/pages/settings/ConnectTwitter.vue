@@ -56,6 +56,14 @@
       >
         Connect Twitter account
       </button>
+      <button
+        v-if="user.isTwitterConnected"
+        type="button"
+        class="btn border lg btn_fix-width-lg disconnect-twitter semi-transparent"
+        @click="twitterDisconnect"
+      >
+        Disconnect
+      </button>
     </div>
   </div>
 </template>
