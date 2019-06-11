@@ -62,6 +62,7 @@ import ClickOutside from "vue-click-outside";
 import Users from "./types/Users";
 import Posts from "./types/Posts";
 import Suggestions from "./types/Suggestions";
+import { throttle } from "throttle-debounce";
 
 export default {
   name: "SearchBubble",
@@ -85,6 +86,9 @@ export default {
   },
 
   computed: {
+    throttledSearch() {
+      return throttle(1500, this.search);
+    },
     loading() {
       return this.$store.state.search.bubble.searchLoading;
     },
@@ -133,7 +137,7 @@ export default {
         this.toToSearchPage();
         this.close();
       } else {
-        this.search();
+        this.throttledSearch();
       }
     },
     open() {
