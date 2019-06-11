@@ -29,6 +29,7 @@
                     <div class="msg-no-content__text">
                       No highlights yet
                     </div>
+                    <a @click="createHL">dsfdfdfs</a>
                   </div>
                   <VuePerfectScrollbar
                     class="list-cover-variation"
@@ -95,6 +96,11 @@ export default {
     }
   },
   methods: {
+    createHL() {
+      this.$store.dispatch("modal/show", {
+        name: "createHighlights"
+      });
+    },
     addNewStoryToCollection(id) {
       this.$store
         .dispatch("highlights/addNewStoryToCollection", {

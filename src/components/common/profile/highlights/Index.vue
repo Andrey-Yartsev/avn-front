@@ -8,9 +8,6 @@
     >
       <div class="stories-collection__header">
         <h4>Highlights</h4>
-        <!--<button class="btn-watch-all hidden-desktop" type="button">-->
-        <!--Watch All-->
-        <!--</button>-->
       </div>
       <div class="stories-group">
         <VuePerfectScrollbar @ps-scroll-y="scrollFunction">

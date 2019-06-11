@@ -27,11 +27,11 @@
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
       <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
-      <CreateHighlightsModal
-        v-if="this.$store.state.modal.createHighlights.show"
-      />
       <ChooseHighlightModal
         v-if="this.$store.state.modal.chooseHighlight.show"
+      />
+      <CreateHighlightsModal
+        v-if="this.$store.state.modal.createHighlights.show"
       />
       <SubscriptionConfirmModal
         v-if="this.$store.state.modal.subscriptionConfirm.show"
