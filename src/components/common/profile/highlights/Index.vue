@@ -12,7 +12,7 @@
       <div class="stories-group">
         <VuePerfectScrollbar @ps-scroll-y="scrollFunction">
           <div class="stories">
-            <a href="#" class="story" v-if="isOwner(userId)">
+            <a href="#" class="story btn-add-story" v-if="isOwner(userId)">
               <div
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
                 @click.prevent="addNew"

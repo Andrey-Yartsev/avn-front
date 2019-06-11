@@ -558,12 +558,12 @@
       flex-direction: column;
     }
 
-    .name {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 13px;
-      }
-    }
+    //.name {
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    font-size: 13px;
+    //  }
+    //}
   }
 
   .stories-group {
@@ -612,6 +612,20 @@
         position: relative;
       }
     }
+  }
+}
+
+.btn-add-story {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  .name {
+    color: $main-color;
+    font-size: 13px;
+    line-height: 18px;
   }
 }
 

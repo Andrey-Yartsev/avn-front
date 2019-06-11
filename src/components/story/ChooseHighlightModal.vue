@@ -29,7 +29,21 @@
                     <div class="msg-no-content__text">
                       No highlights yet
                     </div>
-                    <a @click="createHL">dsfdfdfs</a>
+                    <a @click="createHL" class="story btn-add-story">
+                      <div
+                        class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                        @click.prevent="addNew"
+                      >
+                        <div class="round-add"></div>
+                      </div>
+                      <div class="story-info">
+                        <div class="story-header">
+                          <div class="name">
+                            Add new
+                          </div>
+                        </div>
+                      </div>
+                    </a>
                   </div>
                   <VuePerfectScrollbar
                     class="list-cover-variation"
