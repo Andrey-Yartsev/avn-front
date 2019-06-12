@@ -17,7 +17,7 @@
                 class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
                 @click.prevent="addNew"
               >
-                <div class="round-add"></div>
+                <div class="round-add icn-item"></div>
               </div>
               <div class="story-info">
                 <div class="story-header">
