@@ -34,7 +34,7 @@
         class="explore-media"
         :class="{ 'locked-wrapper': media.locked }"
       >
-        <div v-if="!media.canView" class="locked-picture">
+        <div v-if="!media.canView" class="locked-picture icn-item">
           <img class="locked" :src="'data:image/jpeg;base64,' + media.locked" />
         </div>
         <template v-else>
