@@ -66,8 +66,7 @@
     &:last-child {
       border-bottom: none;
     }
-    .replace,
-    .delete {
+    .replace {
       border: none;
       padding: 0;
       background: none;
@@ -86,28 +85,26 @@
       margin-right: 25px;
       color: $secondary-color;
 
-      &:hover {
-        color: $secondary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $secondary-color-darken;
+        }
       }
     }
     .delete {
       color: $primary-color;
 
-      &:hover {
-        color: $primary-color-darken;
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:hover {
+          color: $primary-color-darken;
+        }
       }
     }
     @include media-breakpoint-down($desktop-breakpoint) {
       .replace {
         margin-right: 15px;
-        &:after {
-          content: "\E647";
-        }
-      }
-      .delete {
-        &:after {
-          content: "\E648";
-        }
       }
     }
   }
