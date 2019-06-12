@@ -345,6 +345,9 @@ export default {
     return r;
   },
   computed: {
+    hasCCBill() {
+      return !!this.$store.state.init.data.payments.ccbill;
+    },
     cardConnected() {
       return this.user.isPaymentCardConnected;
     },
@@ -362,7 +365,10 @@ export default {
     next() {
       this.submitting = true;
 
-      if (this.getCountryCodeByName(this.userinfo.country) === "US") {
+      if (
+        this.hasCCBill &&
+        this.getCountryCodeByName(this.userinfo.country) === "US"
+      ) {
         this.tokens.ccb.status = "pending";
         const customerInfo = {
           email: this.email,
