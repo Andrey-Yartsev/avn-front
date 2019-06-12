@@ -243,6 +243,10 @@ video {
   position: relative;
   flex: 0 0 100%;
 
+  &.icn-item {
+    display: block;
+  }
+
   &:after {
     content: "\E61B";
     font-size: 42px;
