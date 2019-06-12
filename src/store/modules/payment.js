@@ -3,6 +3,7 @@
 import card from "./payment/card";
 import transactions from "./payment/transactions";
 import pay from "./payment/pay";
+import countries from "./payment/countries";
 
 const state = {};
 const actions = {};
@@ -16,6 +17,7 @@ export default {
   modules: {
     card,
     transactions,
-    pay
+    pay,
+    countries
   }
 };

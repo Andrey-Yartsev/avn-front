@@ -106,14 +106,43 @@
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
+                <span class="label">Country</span>
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field">
+                    <select
+                      name="country"
+                      id="account-country"
+                      v-validate="'required'"
+                      v-model="userinfo.country"
+                    >
+                      <option
+                        v-for="v in countries"
+                        v-bind:key="v.id"
+                        :value="v.name"
+                        >{{ v.name }}
+                      </option>
+                    </select>
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-group form-group_with-label" v-if="hasStates">
+              <label class="form-group-inner">
                 <span class="label">State/Country</span>
                 <span class="form-group form-group_clear-gaps">
                   <span class="form-field">
-                    <input
-                      v-model="userinfo.state"
+                    <select
+                      id="state"
                       name="state"
+                      v-model="userinfo.state"
                       v-validate="'required'"
-                    />
+                    >
+                      <option :value="null">Select State</option>
+                      <option :value="v.name" v-for="v in states" :key="v.id">{{
+                        v.name
+                      }}</option>
+                    </select>
                   </span>
                 </span>
               </label>
@@ -133,22 +162,6 @@
                 </span>
               </label>
             </div>
-
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">Country</span>
-                <span class="form-group form-group_clear-gaps">
-                  <span class="form-field">
-                    <input
-                      v-model="userinfo.country"
-                      name="country"
-                      v-validate="'required'"
-                    />
-                  </span>
-                </span>
-              </label>
-            </div>
-
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Email</span>
@@ -287,6 +300,7 @@ import User from "@/mixins/user";
 import CardExpDate from "@/components/common/CardExpDate";
 import Transactions from "@/components/pages/settings/payments/Transactions";
 import { goCcbill } from "@/utils/ccbill";
+import States from "@/components/pages/settings/payments/states";
 
 const initData = {
   showCardForm: false,
@@ -320,7 +334,7 @@ const userinfo = {
 
 export default {
   name: "AddCardSecurionpay",
-  mixins: [Form, User],
+  mixins: [Form, User, States],
   components: {
     CardExpDate,
     Transactions
@@ -348,7 +362,7 @@ export default {
     next() {
       this.submitting = true;
 
-      if (this.userinfo.country === "US") {
+      if (this.getCountryCodeByName(this.userinfo.country) === "US") {
         this.tokens.ccb.status = "pending";
         const customerInfo = {
           email: this.email,
