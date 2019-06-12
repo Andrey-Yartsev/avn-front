@@ -22,7 +22,9 @@
                 <div class="story-preview story-preview_viewers">
                   <img :src="story.preview.source" class="story-preview__img" />
                   <div class="amount-viewers">
-                    <span class="icn-viewer icn-item" />{{ story.viewersCount }}
+                    <span class="btn-icon icn-viewer icn-item" />{{
+                      story.viewersCount
+                    }}
                   </div>
                 </div>
               </swiper-slide>
@@ -32,7 +34,9 @@
             <div class="container-story-details__inside">
               <div class="header-story-details">
                 <div class="amount-viewers">
-                  <span class="icn-viewer icn-item" />{{ current.viewersCount }}
+                  <span class="btn-icon icn-viewer icn-item" />{{
+                    current.viewersCount
+                  }}
                 </div>
                 <div class="story-time-created">
                   {{ dateTime }}
@@ -42,6 +46,7 @@
                     href="#"
                     class="controls-story__btn"
                     @click.prevent="saveFile"
+                    v-tooltip="'Download'"
                   >
                     <span class="icn-download icn-item" />
                   </a>
@@ -49,6 +54,7 @@
                     href="#"
                     class="controls-story__btn"
                     @click.prevent="share"
+                    v-tooltip="'Copy link'"
                   >
                     <span class="icn-share icn-item" />
                   </a>
@@ -56,6 +62,7 @@
                     href="#"
                     class="controls-story__btn controls-story__btn_remove"
                     @click.prevent="deleteStory"
+                    v-tooltip="'Remove'"
                   >
                     <span class="icn-remove icn-item" />
                   </a>
@@ -80,8 +87,7 @@
                           <span class="username">{{ user.username }}</span>
                         </div>
                       </div>
-                      <a
-                        href="#"
+                      <div
                         class="btn-block"
                         :class="{ active: user.isBlockedStory }"
                         @click.prevent="
@@ -89,9 +95,10 @@
                             ? unblockUser(user.id)
                             : blockUser(user.id)
                         "
+                        v-tooltip="'Block'"
                       >
                         <span class="icn-block icn-item"></span>
-                      </a>
+                      </div>
                     </div>
                   </VuePerfectScrollbar>
                 </div>

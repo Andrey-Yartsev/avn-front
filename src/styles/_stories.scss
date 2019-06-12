@@ -833,7 +833,10 @@
 
   .icn-viewer {
     color: $secondary-color;
-    margin-right: 9px;
+
+    .container-story-details & {
+      margin-right: 9px;
+    }
   }
 }
 
@@ -948,13 +951,12 @@
     color: #fff;
     z-index: 2;
 
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      font-size: 13px;
+    }
+
     .icn-viewer {
       color: #fff;
-      margin-right: 2px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-right: 5px;
-      }
 
       &:after {
         font-size: 12px;
