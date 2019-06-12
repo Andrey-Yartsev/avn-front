@@ -14,11 +14,21 @@
           <span class="icn-item icn-live"></span>
         </div>
         <div class="overlay">
-          <span class="likes">{{ post.likesCount }}</span>
-          <span class="looking">{{ post.viewsCount }}</span>
+          <span class="explore-media__counter">
+            <span class="btn-icon likes icn-item"></span>
+            {{ post.likesCount }}
+          </span>
+          <span class="explore-media__counter">
+            <span class="btn-icon comments icn-item"></span>
+            {{ post.viewsCount }}
+          </span>
         </div>
         <div class="live-short-info">
-          <span class="looking">{{ post.viewsCount }}</span>
+          <span class="explore-media__counter">
+            <span class="btn-icon icn-viewer icn-item"></span>
+            {{ post.viewsCount }}
+          </span>
+
           <div class="wrap-name wrap-name_center">
             <span class="name">{{ user.name }} </span>
             <span v-if="user.isVerified" class="verified-user icn-item" />

@@ -573,6 +573,14 @@
       display: inline-flex;
       align-content: center;
       align-items: center;
+
+      .liveView & {
+        margin-bottom: 8px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-bottom: 4px;
+        }
+      }
     }
 
     &__name {
