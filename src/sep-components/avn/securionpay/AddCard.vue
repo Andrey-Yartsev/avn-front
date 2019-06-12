@@ -33,27 +33,23 @@
                   <span class="payment-system">
                     {{ user.paymentGateCardBrand }}
                   </span>
-                  <span class="card-number">{{
-                    user.paymentGateCardLast4
-                  }}</span>
+                  <span class="card-number">
+                    {{ user.paymentGateCardLast4 }}
+                  </span>
 
                   <button
                     class="replace icn-item"
                     id="replaceCard"
                     @click="replaceCard"
                   >
-                    <template v-if="$mq === 'desktop'"
-                      >Replace</template
-                    >
+                    <span v-if="$mq === 'desktop'">Replace</span>
                   </button>
                   <button
                     class="delete icn-item"
                     id="deleteCard"
                     @click="deleteCard"
                   >
-                    <template v-if="$mq === 'desktop'"
-                      >Delete</template
-                    >
+                    <span v-if="$mq === 'desktop'">Delete</span>
                   </button>
                 </div>
               </div>
@@ -63,7 +59,6 @@
       </div>
       <Transactions />
     </div>
-
     <div class="PayoutsBankView" v-else>
       <h1 class="form-title">
         Add Card
@@ -287,6 +282,7 @@ import Form from "@/mixins/form";
 import User from "@/mixins/user";
 import CardExpDate from "@/components/common/CardExpDate";
 import Transactions from "@/components/pages/settings/payments/Transactions";
+import { goCcbill } from "@/utils/ccbill";
 
 const initData = {
   showCardForm: false,
@@ -296,7 +292,17 @@ const initData = {
   expMonth: "",
   expYear: "",
   email: "",
-  submitting: false
+  submitting: false,
+  tokens: {
+    ccb: {
+      status: null,
+      data: {}
+    },
+    scp: {
+      status: null,
+      data: {}
+    }
+  }
 };
 
 const userinfo = {
@@ -329,52 +335,103 @@ export default {
     },
     submitDisabled() {
       return this.submitting || !this.isFormValid;
+    },
+    IP() {
+      return this.$store.state.init.data.ip;
     }
   },
   methods: {
     next() {
       this.submitting = true;
-      window.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
-      window.Securionpay.createCardToken(
-        this.$refs.form,
-        this.createCardTokenCallback
-      );
-    },
-    createCardTokenCallback(result) {
-      if (result.error) {
-        this.$store.dispatch("global/flashToast", {
-          text: result.error.message,
-          type: "error"
-        });
-        this.submitting = false;
+
+      if (this.userinfo.country === "US") {
+        this.tokens.ccb.status = "pending";
+        const customerInfo = {
+          email: this.email,
+          city: this.userinfo.city,
+          state: this.userinfo.state,
+          zipcode: this.userinfo.zip,
+          customerFname: this.userinfo.name.split(" ")[0],
+          customerLname: this.userinfo.name.split(" ")[1],
+          address1: this.userinfo.street,
+          address2: "",
+          phoneNumber: "",
+          country: "US",
+          ipAddress: this.IP
+        };
+
+        const creditCardPaymentInfo = {
+          cardNum: this.cardNumber,
+          expMonth: this.expMonth,
+          expYear: this.expYear,
+          nameOnCard: this.userinfo.name
+        };
+
+        goCcbill(customerInfo, creditCardPaymentInfo, this.submitCCB);
       } else {
-        this.$store
-          .dispatch("payment/card/add", {
-            email: this.email,
-            token: result.id,
-            userinfo: this.userinfo
-          })
-          .then(r => {
-            if (r.success) {
-              this.$store.dispatch("profile/fetch");
-              this.showCardForm = false;
-              if (this.$store.state.payment.card.afterAddCardRedirect) {
-                this.$store.dispatch("global/flashToast", {
-                  text: "Card added successfully"
-                });
-                this.$router.push(
-                  this.$store.state.payment.card.afterAddCardRedirect
-                );
-                this.$store.commit("payment/card/resetAfterAddCardRedirect");
-              }
-            } else {
-              this.$store.dispatch("global/flashToast", {
-                text: "Something goes wrong",
-                type: "error"
-              });
-            }
-            this.submitting = false;
+        this.tokens.ccb.status = "reject";
+      }
+
+      this.tokens.scp.status = "pending";
+
+      window.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
+      window.Securionpay.createCardToken(this.$refs.form, this.submitSCPay);
+    },
+    submitSCPay(result) {
+      this.tokens.scp.status = "ready";
+      this.tokens.scp.data = result;
+      this.createCardTokenCallback();
+    },
+    submitCCB(result) {
+      this.tokens.ccb.status = result.status;
+      this.tokens.ccb.data = result.data;
+      this.createCardTokenCallback();
+    },
+    createCardTokenCallback() {
+      if (
+        (this.tokens.ccb.status === "ready" ||
+          this.tokens.ccb.status === "reject") &&
+        this.tokens.scp.status === "ready"
+      ) {
+        const result = this.tokens.scp.data;
+        const ccbres = this.tokens.ccb.data;
+
+        if (result.error) {
+          this.$store.dispatch("global/flashToast", {
+            text: result.error.message,
+            type: "error"
           });
+          this.submitting = false;
+        } else {
+          this.$store
+            .dispatch("payment/card/add", {
+              email: this.email,
+              token: result.id,
+              ccbillResponse: ccbres,
+              userinfo: this.userinfo
+            })
+            .then(r => {
+              if (r.success) {
+                this.$store.dispatch("profile/fetch");
+                this.showCardForm = false;
+                if (this.$store.state.payment.card.afterAddCardRedirect) {
+                  this.$store.dispatch("global/flashToast", {
+                    text: "Card added successfully"
+                  });
+                  this.$router.push(
+                    this.$store.state.payment.card.afterAddCardRedirect
+                  );
+                  this.$store.commit("payment/card/resetAfterAddCardRedirect");
+                }
+              } else {
+                this.$store.dispatch("global/flashToast", {
+                  text: "Something goes wrong",
+                  type: "error"
+                });
+              }
+              this.submitting = false;
+            });
+        }
       }
     },
     reset() {
@@ -416,6 +473,12 @@ export default {
       if (value.expYear) {
         this.expYear = value.expYear;
       }
+    },
+    scpayInit() {
+      let script = document.createElement("script");
+      script.async = true;
+      script.src = "https://securionpay.com/js/securionpay.js";
+      document.head.appendChild(script);
     }
   },
   watch: {
@@ -431,10 +494,7 @@ export default {
     }
   },
   mounted() {
-    let script = document.createElement("script");
-    script.async = true;
-    script.src = "https://securionpay.com/js/securionpay.js";
-    document.head.appendChild(script);
+    this.scpayInit();
   }
 };
 </script>
