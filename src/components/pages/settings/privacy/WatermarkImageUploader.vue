@@ -2,7 +2,7 @@
   <div class="form-group form-group_with-label pb-reset">
     <div
       class="form-group-inner photo-form-group-inner"
-      :class="{ success: uploaded }"
+      :class="{ 'success icn-item': uploaded }"
     >
       <span class="label">Watermark image</span>
 

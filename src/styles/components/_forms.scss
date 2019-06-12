@@ -322,7 +322,6 @@ label {
 
       &:after {
         position: absolute;
-        @include icon-font;
         font-size: 24px;
         width: 1.2em;
         pointer-events: none;

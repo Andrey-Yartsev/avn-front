@@ -112,7 +112,7 @@
             <div class="form-group form-group_with-label photo-form-group">
               <div
                 class="form-group-inner photo-form-group-inner"
-                :class="{ success: !!uploadedPhoto }"
+                :class="{ 'success icn-item': !!uploadedPhoto }"
               >
                 <span class="label">Photo ID</span>
 
