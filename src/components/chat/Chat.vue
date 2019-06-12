@@ -53,7 +53,7 @@
                 class="back-popup-btn hidden-desktop"
                 v-if="$mq === 'mobile'"
               >
-                <span class="back" @click="mobileBack"></span>
+                <span class="back icn-item" @click="mobileBack"></span>
               </div>
               <router-link
                 :to="'/' + activeUser.username"

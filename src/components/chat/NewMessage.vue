@@ -108,7 +108,7 @@
       <div class="chatHeader chatHeader_add-shadow no-nav">
         <div class="selectedChatHeader">
           <div class="back-popup-btn hidden-desktop" v-if="$mq === 'mobile'">
-            <span class="back backEvent" @click="back"></span>
+            <span class="back backEvent icn-item" @click="back"></span>
           </div>
           <template v-if="selectedUser">
             <router-link
