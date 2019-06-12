@@ -5,13 +5,14 @@
         <div class="content content_relative">
           <div class="storyviewers-controls">
             <button
-              class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+              class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs hidden-desktop"
+              v-if="$mq === 'mobile'"
               @click.prevent="close"
             ></button>
             <a
               v-if="!fromCollection"
               @click.prevent="addToHighlights"
-              class="btn-story-details hidden-mobile"
+              class="btn-story-details icn-item hidden-mobile"
             />
             <router-link to="/settings/story" class="btn-settings" />
           </div>

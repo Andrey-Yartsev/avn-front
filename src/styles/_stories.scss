@@ -661,8 +661,8 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     border-radius: 6px 6px 0 0;
-    flex: 0 0 62.9%;
-    height: 62.9%;
+    flex: 0 0 58.9%;
+    height: 58.9%;
     max-width: 620px;
   }
 
@@ -850,20 +850,20 @@
   flex: 0 0 28.5%;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    height: 37.1%;
-    flex: 0 0 37.1%;
+    height: 41.1%;
+    flex: 0 0 41.1%;
   }
 
   .swiper-container {
-    margin-top: 30px;
+    margin-top: 52px;
     margin-bottom: 30px;
-    height: calc(100% - 60px);
+    height: calc(100% - 82px);
     padding: 3px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin-top: 3vw;
+      margin-top: 6vw;
       margin-bottom: 3vw;
-      height: calc(100% - 6vw);
+      height: calc(100% - 9vw);
     }
   }
 

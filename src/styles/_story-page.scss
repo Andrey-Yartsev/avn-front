@@ -158,46 +158,6 @@
     z-index: 3;
   }
 
-  .btn-message {
-
-    &:before {
-      content: "\E622";
-      @include icon-font;
-    }
-  }
-
-  .btn-save-highlights {
-
-    &:before {
-      content: "\E641";
-      @include icon-font;
-    }
-  }
-
-  .viewers {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    opacity: 0.7;
-    font-weight: 500;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      font-size: 11px;
-    }
-
-    &:not(:empty) {
-
-      &:before {
-        content: "\E633";
-        @include icon-font;
-        margin-right: 7px;
-        font-size: 24px;
-        font-weight: 400;
-      }
-    }
-  }
-
   .story-video-element {
     max-width: 100%;
     max-height: 100%;
@@ -441,5 +401,12 @@
   &:after {
     content: "\E669";
     font-size: 23px;
+  }
+
+  .popup-storyviewers & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 20px;
+    }
   }
 }
