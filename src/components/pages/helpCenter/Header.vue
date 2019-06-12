@@ -15,7 +15,7 @@
         @click="search"
       ></button>
     </form>
-    <div class="popular-questions suggestions">
+    <div class="popular-questions suggestions" v-if="$mq === 'desktop'">
       <router-link
         :to="'/help/' + v.id"
         v-for="v in suggestions"

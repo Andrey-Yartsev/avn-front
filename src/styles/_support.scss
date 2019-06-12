@@ -242,161 +242,161 @@ form.support-search-form {
   }
 
 
-  &-card {
-    box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset;
-    border-radius: 6px;
-    overflow: hidden;
-    padding: 20px 0 40px;
-    font-size: 15px;
-    display: block;
-    position: relative;
-    width: 100%;
-    transition: all .3s ease;
-    color: $main-color;
-    text-align: center;
+  //&-card {
+  //  box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset;
+  //  border-radius: 6px;
+  //  overflow: hidden;
+  //  padding: 20px 0 40px;
+  //  font-size: 15px;
+  //  display: block;
+  //  position: relative;
+  //  width: 100%;
+  //  transition: all .3s ease;
+  //  color: $main-color;
+  //  text-align: center;
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //
+  //    &:hover {
+  //      color: $main-color;
+  //      box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset, 0 10px 30px rgba(0, 0, 0, 0.15);
+  //      transform: scale(1.03);
+  //    }
+  //  }
+  //
+  //  &__title {
+  //    font-weight: 400;
+  //    font-size: 21px;
+  //    padding: 0 10px;
+  //    margin: 0 0 11px;
+  //    display: block;
+  //  }
+  //
+  //  &__text {
+  //    line-height: 1.7;
+  //    margin: 0 0 1.1em;
+  //    padding: 0 20px;
+  //    min-height: 50px;
+  //    display: block;
+  //    opacity: .5;
+  //  }
+  //
+  //  &__btn {
+  //    display: block;
+  //    font-size: 15px;
+  //    color: #fff;
+  //    padding: 10px 0 12px;
+  //    position: absolute;
+  //    bottom: 0;
+  //    left: 0;
+  //    right: 0;
+  //    background-color: $secondary-color;
+  //    transition: background-color .3s;
+  //
+  //    @include media-breakpoint-up($desktop-breakpoint) {
+  //
+  //      &:hover {
+  //        background-color: $secondary-color-darken;
+  //      }
+  //    }
+  //  }
+  //
+  //  &__icon {
+  //    width: 140px;
+  //    height: 40px;
+  //    line-height: 40px;
+  //    margin-bottom: 20px;
+  //    color: $primary-color;
+  //    display: inline-block;
+  //
+  //    &:before {
+  //      @include icon-font;
+  //      font-size: 40px;
+  //    }
+  //
+  //    &_logo {
+  //
+  //      svg {
+  //        fill: $primary-color;
+  //        display: inline-block;
+  //        vertical-align: middle;
+  //        max-height: 40px;
+  //      }
+  //
+  //      .cls-2 {
+  //        fill: #fff;
+  //      }
+  //    }
+  //
+  //    &_account {
+  //
+  //      &:before {
+  //        content: "\E551";
+  //      }
+  //    }
+  //
+  //    &_problems {
+  //
+  //      &:before {
+  //        content: "\E654";
+  //      }
+  //    }
+  //
+  //    &_reports {
+  //
+  //      &:before {
+  //        content: "\E650";
+  //      }
+  //    }
+  //  }
+  //}
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+  //&-message {
+  //  padding: 19px 24px 19px 48px;
+  //  line-height: 1.4em;
+  //  margin: 0 0 29px;
+  //  position: relative;
+  //
+  //  &:before {
+  //    @include icon-font;
+  //    position: absolute;
+  //    left: 6px;
+  //    top: 18px;
+  //    font-size: 40px;
+  //    line-height: 40px;
+  //  }
+  //
+  //  &.info {
+  //
+  //    &:before {
+  //      content: "\E619";
+  //      color: $primary-color;
+  //    }
+  //
+  //    &:after {
+  //      content: "";
+  //      position: absolute;
+  //      left: 0;
+  //      right: 0;
+  //      top: 0;
+  //      bottom: 0;
+  //      border-radius: 6px;
+  //      border: 1px solid rgba($gray, 0.2);
+  //      background: rgba($gray, 0.2);
+  //      opacity: .5;
+  //    }
+  //  }
+  //}
 
-      &:hover {
-        color: $main-color;
-        box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.21) inset, 0 10px 30px rgba(0, 0, 0, 0.15);
-        transform: scale(1.03);
-      }
-    }
-
-    &__title {
-      font-weight: 400;
-      font-size: 21px;
-      padding: 0 10px;
-      margin: 0 0 11px;
-      display: block;
-    }
-
-    &__text {
-      line-height: 1.7;
-      margin: 0 0 1.1em;
-      padding: 0 20px;
-      min-height: 50px;
-      display: block;
-      opacity: .5;
-    }
-
-    &__btn {
-      display: block;
-      font-size: 15px;
-      color: #fff;
-      padding: 10px 0 12px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: $secondary-color;
-      transition: background-color .3s;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-
-        &:hover {
-          background-color: $secondary-color-darken;
-        }
-      }
-    }
-
-    &__icon {
-      width: 140px;
-      height: 40px;
-      line-height: 40px;
-      margin-bottom: 20px;
-      color: $primary-color;
-      display: inline-block;
-
-      &:before {
-        @include icon-font;
-        font-size: 40px;
-      }
-
-      &_logo {
-
-        svg {
-          fill: $primary-color;
-          display: inline-block;
-          vertical-align: middle;
-          max-height: 40px;
-        }
-
-        .cls-2 {
-          fill: #fff;
-        }
-      }
-
-      &_account {
-
-        &:before {
-          content: "\E551";
-        }
-      }
-
-      &_problems {
-
-        &:before {
-          content: "\E654";
-        }
-      }
-
-      &_reports {
-
-        &:before {
-          content: "\E650";
-        }
-      }
-    }
-  }
-
-  &-message {
-    padding: 19px 24px 19px 48px;
-    line-height: 1.4em;
-    margin: 0 0 29px;
-    position: relative;
-
-    &:before {
-      @include icon-font;
-      position: absolute;
-      left: 6px;
-      top: 18px;
-      font-size: 40px;
-      line-height: 40px;
-    }
-
-    &.info {
-
-      &:before {
-        content: "\E619";
-        color: $primary-color;
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        border-radius: 6px;
-        border: 1px solid rgba($gray, 0.2);
-        background: rgba($gray, 0.2);
-        opacity: .5;
-      }
-    }
-  }
-
-  &-cards {
-    padding: 0 0 6px;
-    color: #7c8b96;
-
-    .col {
-      display: flex;
-      padding: 0 10px;
-    }
-  }
+  //&-cards {
+  //  padding: 0 0 6px;
+  //  color: #7c8b96;
+  //
+  //  .col {
+  //    display: flex;
+  //    padding: 0 10px;
+  //  }
+  //}
 }
 
 .popular-questions {
@@ -572,31 +572,31 @@ form.support-search-form {
   }
 }
 
-.btn-back-list {
-  display: block;
-  border: none;
-  text-align: left;
-  font-weight: 500;
-  font-size: 17px;
-  color: $primary-color;
-  background-color: transparent;
-  position: absolute;
-  left: 10px;
-  top: 8px;
-  width: 24px;
-  height: 30px;
-  opacity: 0;
-  transition: opacity .3s;
-
-  &:before {
-    content: "\E606";
-    @include icon-font;
-    font-size: 24px;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
+//.btn-back-list {
+//  display: block;
+//  border: none;
+//  text-align: left;
+//  font-weight: 500;
+//  font-size: 17px;
+//  color: $primary-color;
+//  background-color: transparent;
+//  position: absolute;
+//  left: 10px;
+//  top: 8px;
+//  width: 24px;
+//  height: 30px;
+//  opacity: 0;
+//  transition: opacity .3s;
+//
+//  &:before {
+//    content: "\E606";
+//    @include icon-font;
+//    font-size: 24px;
+//    position: absolute;
+//    left: 0;
+//    top: 0;
+//  }
+//}
 
 .content-wrapper {
   flex: 1;
