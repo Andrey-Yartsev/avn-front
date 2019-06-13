@@ -55,6 +55,11 @@
             rel="nofollow"
             >twitter.com/{{ profile.twitterUsername }}</a
           >
+          <div class="profile-offer">
+            <button class="btn border alt btn_fix-width-lg">
+              Premium Snapchat $25
+            </button>
+          </div>
           <FollowersCounter :profile="profile" />
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
