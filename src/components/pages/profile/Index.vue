@@ -59,6 +59,13 @@
             <button class="btn border alt btn_fix-width-lg">
               Premium Snapchat $25
             </button>
+
+            <div class="profile-offer__chat">
+              <div class="user-login reset-ml">
+                <span class="name">{{ profile.name }}</span>
+              </div>
+              <button class="btn">Send message</button>
+            </div>
           </div>
           <FollowersCounter :profile="profile" />
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />

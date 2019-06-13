@@ -168,12 +168,12 @@
     z-index: 2;
   }
 
-  .user-login {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 17px;
-    }
-  }
+  //.user-login {
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //    font-size: 17px;
+  //  }
+  //}
 
   .header-popup-menu-btn {
 
@@ -473,6 +473,17 @@
 
 .profile-offer {
   padding-top: 12px;
+
+  .user-login {
+    opacity: 1;
+  }
+
+  &__chat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
 }
 
 .profile-data {
