@@ -661,7 +661,6 @@ form.support-search-form {
     transition: color .3s;
 
     &:after {
-      @include icon-font;
       font-size: 36px;
     }
 

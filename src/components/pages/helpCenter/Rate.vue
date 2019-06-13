@@ -5,12 +5,12 @@
       <div class="article-vote__btns">
         <span
           role="button"
-          class="article-vote__btn vote-like"
+          class="article-vote__btn vote-like icn-item"
           @click="like"
         ></span>
         <span
           role="button"
-          class="article-vote__btn vote-dislike"
+          class="article-vote__btn vote-dislike icn-item"
           @click="dislike"
         ></span>
       </div>
