@@ -36,8 +36,7 @@
     color: $secondary-color;
   }
 
-  &:before {
-    @include icon-font;
+  &:after {
     font-size: 24px;
     content: "\E62F";
   }
@@ -56,21 +55,21 @@
 
   .all {
 
-    &:before {
+    &:after {
       content: "\E632";
     }
   }
 
   .followed {
 
-    &:before {
+    &:after {
       content: "\E630";
     }
   }
 
   .favorited {
 
-    &:before {
+    &:after {
       content: "\E616";
     }
   }
@@ -78,7 +77,7 @@
   .subscribed,
   .price_changed {
 
-    &:before {
+    &:after {
       content: "\E62E";
     }
   }
@@ -87,28 +86,28 @@
   .replied,
   .commented {
 
-    &:before {
+    &:after {
       content: "\E617";
     }
   }
 
   .tip {
 
-    &:before {
+    &:after {
       content: "\E618";
     }
   }
 
   .mentioned {
 
-    &:before {
+    &:after {
       content: "\E631";
     }
   }
 
   .system {
 
-    &:before {
+    &:after {
       content: "\E619";
     }
   }
@@ -200,6 +199,7 @@
   background: $white;
   position: relative;
   padding: 14px 20px 14px 54px;
+  display: block;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 65px;
@@ -214,7 +214,7 @@
     }
   }
 
-  &:before {
+  &:after {
     position: absolute;
     left: 15px;
     top: 11px;
@@ -226,7 +226,7 @@
 
   &.unread {
 
-    &:before {
+    &:after {
       opacity: 1;
       color: $primary-color;
     }
@@ -315,9 +315,14 @@
       margin: 0 10px 0 0;
     }
 
-    &:before {
+    &-text {
+      order: 2;
+    }
+
+    &:after {
       font-weight: 400;
       transition: opacity 0.3s ease, color 0.3s ease;
+      order: 1;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         color: $secondary-color;
@@ -329,7 +334,7 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         font-size: 17px;
 
-        &:after {
+        &:before {
           position: absolute;
           height: 2px;
           background: $secondary-color;
@@ -340,7 +345,7 @@
         }
       }
 
-      &:before {
+      &:after {
         opacity: 1;
         color: $primary-color;
 
@@ -351,7 +356,7 @@
 
       .notifications-filter > & {
 
-        &:before {
+        &:after {
 
           @include media-breakpoint-up($desktop-breakpoint) {
             margin: 0;
@@ -364,7 +369,7 @@
 
       &:hover {
 
-        &:before {
+        &:after {
           color: $primary-color;
           opacity: 1;
         }
@@ -396,8 +401,7 @@
 .notifications-filter__btn,
 .NotificationsView {
 
-  &:before {
-    @include icon-font;
+  &:after {
     font-size: 24px;
     opacity: 0.3;
   }

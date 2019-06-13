@@ -10,9 +10,9 @@
         ></router-link>
         <h1 class="page-title">Notifications</h1>
         <router-link
-          class="btn-settings"
+          class="btn-settings icn-item"
           to="/settings/notifications"
-        ></router-link>
+        />
       </div>
     </div>
 
@@ -35,14 +35,15 @@
             :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
-            class="notifications-filter__btn"
-            >{{ v.title }}</a
+            class="notifications-filter__btn icn-item"
+            ><span class="notifications-filter__btn-text">{{ v.title }}</span></a
           >
         </div>
         <router-link
-          class="notifications-filter__btn btn-settings hidden-mobile"
+          class="notifications-filter__btn btn-settings hidden-mobile icn-item"
           to="/settings/notifications"
-        ></router-link>
+          v-if="$mq === 'desktop'"
+        />
       </div>
       <component
         :is="notificationView"

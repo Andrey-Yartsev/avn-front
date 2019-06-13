@@ -4,7 +4,7 @@
     @ps-scroll-y="scrollFunction"
   >
     <div
-      class="NotificationsView"
+      class="NotificationsView icn-item"
       :class="{
         [v.type]: true,
         unread: !v.isRead,
