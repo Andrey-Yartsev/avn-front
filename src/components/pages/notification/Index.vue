@@ -19,10 +19,11 @@
     <MobileHeader v-if="$mq === 'mobile'" />
 
     <router-link
-      class="addPost-btn-float hidden-desktop icn-item"
+      class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="$mq === 'mobile'"
-    />
+      ><span class="icn-item icn-post"></span
+    ></router-link>
 
     <div class="popup-container-scroll notifications-container">
       <div class="notifications-filter">

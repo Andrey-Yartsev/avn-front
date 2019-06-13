@@ -4,10 +4,11 @@
   </div>
   <div class="special-container" v-else>
     <router-link
-      class="addPost-btn-float hidden-desktop icn-item"
+      class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="isAuth()"
-    />
+      ><span class="icn-item icn-post"></span
+    ></router-link>
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" v-if="$mq === 'desktop'" />
       <div class="profile-images" v-if="$mq === 'desktop'">

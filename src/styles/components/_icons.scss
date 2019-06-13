@@ -160,6 +160,14 @@
     }
   }
 
+  &-post {
+
+    &:after {
+      content: "\E611";
+      font-size: 24px;
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;

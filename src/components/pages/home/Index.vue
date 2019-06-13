@@ -2,10 +2,11 @@
   <div class="feed">
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
-      class="addPost-btn-float hidden-desktop icn-item"
+      class="addPost-btn-float hidden-desktop"
       v-if="$mq === 'mobile'"
       to="/addPost"
-    />
+      ><span class="icn-item icn-post"></span
+    ></router-link>
     <div class="container">
       <div class="row">
         <div class="content-col" :class="{ 'new-user': newUser }">

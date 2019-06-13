@@ -352,10 +352,8 @@ button {
       }
     }
 
-    &:after {
+    .icn-post {
       opacity: 1;
-      font-size: 24px;
-      content: "\E611";
       @include position-center;
     }
   //}

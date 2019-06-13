@@ -901,9 +901,8 @@
     }
   }
 
-  &:before {
-    content: "\E611";
-    @include icon-font;
+  .icn-post {
+    line-height: 24px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       vertical-align: middle;
@@ -924,49 +923,37 @@
     }
   }
 
-  &_header.btn {
+  &_header {
+    color: $primary-color;
+    padding: 10px 15px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      color: $primary-color;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $primary-color;
-        background: none;
-      }
-    }
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      border-radius: 0;
-      background: none;
       right: 0;
       top: 0;
       position: absolute;
     }
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background: $primary-color;
-      position: static;
-      height: 30px;
-      padding: 4px 14px;
-      margin: 0 0 0 15px;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        background: none;
-        color: #fff;
-        background: $primary-color-darken;
-      }
-    }
-
-    &:before {
+    &.btn {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 0 5px 0 -5px;
+        background: $primary-color;
+        position: static;
+        height: 30px;
+        padding: 4px 14px;
+        margin: 0 0 0 15px;
+
+        &:hover {
+          background: none;
+          color: #fff;
+          background: $primary-color-darken;
+        }
+      }
+
+      .icn-post {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin: -2px 5px 0 -5px;
+        }
       }
     }
   }

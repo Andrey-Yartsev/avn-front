@@ -24,14 +24,19 @@
             v-if="user"
             :disabled="disabledButton"
           >
+            <span class="icn-item icn-post"></span>
             Share
           </button>
           <router-link
             to="/addPost"
-            class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+            class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+            :class="{ btn: $mq === 'desktop' }"
             v-if="user"
           >
-            Share
+            <span class="icn-item icn-post"></span>
+            <template v-if="$mq === 'desktop'"
+              >Share</template
+            >
           </router-link>
           <template v-if="authSection">
             <div class="btns-login-user">
@@ -55,15 +60,15 @@
               :disabled="disabledButton"
               v-if="$mq === 'desktop'"
             >
+              <span class="icn-item icn-post"></span>
               Share
             </button>
             <router-link
               to="/addPost"
-              class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+              class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
               v-if="$mq === 'mobile'"
-            >
-              Share
-            </router-link>
+              ><span class="icn-item icn-post"></span
+            ></router-link>
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
