@@ -103,6 +103,7 @@
                   type="button"
                   class="make-post-btn btn-with-icon btn-with-icon_lg feed"
                 >
+                  <span class="icn-item icn-post"></span>
                   Create new post
                 </button>
               </p>

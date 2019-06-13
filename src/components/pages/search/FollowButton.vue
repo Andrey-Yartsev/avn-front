@@ -5,6 +5,7 @@
       @click="unfollow"
       class="btn-with-icon btn-with-icon_st btn-subscribe disable-state"
     >
+      <span class="icn-item icn-userp"></span>
       <div class="btn-subscribe__label">
         Unfollow
       </div>
@@ -14,6 +15,7 @@
       @click="follow"
       class="btn-with-icon btn-with-icon_st btn-subscribe"
     >
+      <span class="icn-item icn-userp"></span>
       <div class="btn-subscribe__label">
         Follow
       </div>

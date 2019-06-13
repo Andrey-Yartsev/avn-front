@@ -23,12 +23,15 @@
           <router-link
             to="/settings/profile"
             class="profile-actions__btn btn-with-icon btn-with-icon_st btn-edit-profile"
-            >Edit profile</router-link
           >
+            <span class="icn-item icn-profile"></span>
+            Edit profile
+          </router-link>
           <button
             class="profile-actions__btn btn-with-icon btn-with-icon_st btn-make-post make-post-btn"
             @click="openAddPostModal"
           >
+            <span class="icn-item icn-post"></span>
             New post
           </button>
         </div>
@@ -68,6 +71,7 @@
               @click="unfollow"
               class="btn-with-icon btn-with-icon_st btn-subscribe disable-state"
             >
+              <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
@@ -77,6 +81,7 @@
               @click="follow"
               class="btn-with-icon btn-with-icon_st btn-subscribe"
             >
+              <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Follow
               </div>

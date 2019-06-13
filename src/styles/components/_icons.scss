@@ -168,6 +168,21 @@
     }
   }
 
+  &-userp {
+
+    &:after {
+      content: "\E630";
+    }
+  }
+
+  &-profile {
+
+    &:after {
+      content: "\E63F";
+      font-size: 24px;
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;
