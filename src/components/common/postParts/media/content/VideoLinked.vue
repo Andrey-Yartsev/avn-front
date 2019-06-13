@@ -1,6 +1,6 @@
 <template>
   <a class="postLink" :href="`/post/${postId}`" @click.prevent="openModal">
-    <span class="video-placeholder">
+    <span class="video-placeholder icn-item">
       <img :src="src" />
     </span>
   </a>

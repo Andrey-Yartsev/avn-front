@@ -67,7 +67,7 @@
             <span class="name">{{ post.author.name }}</span>
           </span>
           <div
-            class="video-placeholder"
+            class="video-placeholder icn-item"
             v-if="page === 'all' && shouldBePoster"
           >
             <span class="video-recommendations-text">

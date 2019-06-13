@@ -244,10 +244,6 @@
             display: block;
             white-space: nowrap;
             padding-left: 12px;
-
-            @media screen and (orientation: landscape) {
-              margin-right: 36px;
-            }
           }
         }
       }
@@ -1252,7 +1248,6 @@
 
   &:after {
     content: "\E61D";
-    @include icon-font;
     position: absolute;
     left: 15px;
     bottom: 15px;
