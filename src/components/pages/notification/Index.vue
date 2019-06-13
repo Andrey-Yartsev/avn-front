@@ -19,7 +19,7 @@
     <MobileHeader v-if="$mq === 'mobile'" />
 
     <router-link
-      class="addPost-btn-float hidden-desktop"
+      class="addPost-btn-float hidden-desktop icn-item"
       to="/addPost"
       v-if="$mq === 'mobile'"
     />

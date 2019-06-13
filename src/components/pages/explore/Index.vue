@@ -2,7 +2,7 @@
   <div class="exploreView">
     <MobileHeader v-if="$mq === 'mobile'"></MobileHeader>
     <router-link
-      class="addPost-btn-float hidden-desktop"
+      class="addPost-btn-float hidden-desktop icn-item"
       v-if="$mq === 'mobile' && isAuth()"
       to="/addPost"
     />

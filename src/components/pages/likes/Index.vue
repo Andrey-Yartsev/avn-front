@@ -3,7 +3,11 @@
     <Loader :fullscreen="false" text="" class="transparent small" />
   </div>
   <div class="special-container" v-else>
-    <router-link class="addPost-btn-float" to="/addPost" v-if="isAuth()" />
+    <router-link
+      class="addPost-btn-float hidden-desktop icn-item"
+      to="/addPost"
+      v-if="isAuth()"
+    />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" v-if="$mq === 'desktop'" />
       <div class="profile-images" v-if="$mq === 'desktop'">

@@ -352,15 +352,11 @@ button {
       }
     }
 
-    &:before {
+    &:after {
       opacity: 1;
       font-size: 24px;
-      @include icon-font;
       content: "\E611";
       @include position-center;
-    }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
     }
   //}
 }
