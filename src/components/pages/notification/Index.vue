@@ -36,7 +36,9 @@
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
             class="notifications-filter__btn icn-item"
-            ><span class="notifications-filter__btn-text">{{ v.title }}</span></a
+            ><span class="notifications-filter__btn-text">{{
+              v.title
+            }}</span></a
           >
         </div>
         <router-link
