@@ -76,6 +76,10 @@ const state = {
     show: false,
     data: {}
   },
+  buySnapchatConfirm: {
+    show: false,
+    data: {}
+  },
   confirm: {
     show: false,
     data: {}

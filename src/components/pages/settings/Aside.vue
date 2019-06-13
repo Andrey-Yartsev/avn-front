@@ -183,6 +183,10 @@ export default {
           name: "security",
           title: "Security"
         },
+        // {
+        //   name: "premium-links",
+        //   title: "Premium Links"
+        // },
         {
           name: "payouts",
           title: "Payouts"

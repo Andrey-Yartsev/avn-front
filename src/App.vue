@@ -54,6 +54,9 @@
       <avn-chat-message-pay-confirm
         v-if="this.$store.state.modal.chatMessagePayConfirm.show"
       />
+      <avn-buy-snapchat-pay-confirm
+        v-if="this.$store.state.modal.buySnapchatConfirm.show"
+      />
       <UserBubble
         username="stompeg"
         v-show="this.$store.state.userBubble.show"

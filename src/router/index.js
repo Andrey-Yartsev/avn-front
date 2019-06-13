@@ -12,6 +12,7 @@ import SettingsDefaultPage from "@/components/pages/settings/default/Index";
 import SettingsSecurityPage from "@/components/pages/settings/security/Index";
 import SettingsNotificationPage from "@/components/pages/settings/notification/Index";
 import SettingsPayoutsPage from "@/components/pages/settings/payouts/Index";
+import SettingsPremiumLinksPage from "@/components/pages/settings/premiumLinks/Index";
 import SettingsPaymentsPage from "@/components/pages/settings/payments/Index";
 import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
 import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
@@ -224,6 +225,17 @@ const routes = [
       cssName: "settings"
     }
   },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/premium-links",
+    component: SettingsPremiumLinksPage,
+    name: "SettingsPremiumLinks",
+    meta: {
+      title: "Premium Links",
+      cssName: "settings"
+    }
+  },
+
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/account/:view?",

@@ -4,6 +4,7 @@ import Footer from "@/sep-components/avn/Footer";
 import AddCard from "@/sep-components/avn/securionpay/AddCard";
 import SubscribeModal from "@/sep-components/avn/securionpay/SubscribeModal";
 import ChatMessagePayConfirm from "@/sep-components/avn/securionpay/ChatMessagePayConfirm";
+import BuySnapchatConfirm from "@/sep-components/avn/securionpay/BuySnapchatConfirm";
 import TipPayConfirm from "@/sep-components/avn/securionpay/TipPayConfirm";
 import SupportIconUsing from "@/sep-components/avn/icons/Using";
 
@@ -13,6 +14,7 @@ Vue.component("rl-footer", Footer);
 Vue.component("avn-settings-add-card", AddCard);
 Vue.component("rl-subscribe-modal", SubscribeModal);
 Vue.component("avn-chat-message-pay-confirm", ChatMessagePayConfirm);
+Vue.component("avn-buy-snapchat-pay-confirm", BuySnapchatConfirm);
 Vue.component("avn-tip-pay-confirm", TipPayConfirm);
 
 Vue.component("rl-support-icon-using", SupportIconUsing);

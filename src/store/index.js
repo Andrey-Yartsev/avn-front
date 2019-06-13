@@ -26,6 +26,7 @@ import notif from "@/store/modules/notif";
 import search from "@/store/modules/search";
 import subscription from "@/store/modules/subscription";
 import payment from "@/store/modules/payment";
+import premiumLinks from "@/store/modules/premiumLinks";
 import payouts from "@/store/modules/payouts";
 import twitter from "@/store/modules/twitter";
 import emails from "@/store/modules/emails";
@@ -101,7 +102,8 @@ const store = new Vuex.Store({
     topModels,
     trial,
     userBubble,
-    stats
+    stats,
+    premiumLinks
   }
 });
 

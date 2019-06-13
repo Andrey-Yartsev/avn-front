@@ -55,8 +55,11 @@
             rel="nofollow"
             >twitter.com/{{ profile.twitterUsername }}</a
           >
-          <div class="profile-offer">
-            <button class="btn border alt btn_fix-width-lg">
+          <div class="profile-offer" v-if="false">
+            <button
+              class="btn border alt btn_fix-width-lg"
+              @click="buySnapchat"
+            >
               Premium Snapchat $25
             </button>
 
@@ -377,6 +380,30 @@ export default {
     },
     scrollToTop() {
       global.scrollTo(0, 0);
+    },
+    buySnapchat() {
+      // if (this.isMyMessage(message)) {
+      //   return;
+      // }
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "buySnapchatConfirm",
+          data: {
+            price: this.profile.snapchatPrice,
+            paymentType: "snapchat",
+            userId: this.profile.id
+          }
+        });
+      }
     }
   },
   created() {
