@@ -61,6 +61,24 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "activate",
+  apiPath: "users/products/{id}/completed",
+  state,
+  mutations,
+  actions,
+  paramsToOptions: function(params, options) {
+    options.data = params.data;
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params.id);
+  },
+  options: {
+    method: "PUT"
+  }
+});
+
+createRequestAction({
   prefix: "delete",
   apiPath: "users/product/{id}",
   state,

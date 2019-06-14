@@ -70,7 +70,10 @@
               <div class="user-login reset-ml">
                 Snapchat: <span class="name">{{ profile.name }}</span>
               </div>
-              <div class="profile-offer__form">
+              <div
+                class="profile-offer__form"
+                v-if="snapchat.isCompleted === false"
+              >
                 <input
                   type="text"
                   v-model="mysnapchat"
@@ -436,13 +439,19 @@ export default {
           userId: this.profile.id,
           data: {
             price: 0,
-            text: `Hi! I have paid for your snapchat. My snapchat is ${
+            text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
+              "{SNAPCHAT}",
               this.mysnapchat
-            }. Please add me!`
+            )
           }
         });
 
-        this.$router.push(`/chat/${this.profile.id}`);
+        this.$store
+          .dispatch(`premiumLinks/activate`, { id: this.snapchat.id })
+          .then(r => {
+            console.log(r);
+            this.$router.push(`/chat/${this.profile.id}`);
+          });
       }
     }
   },
