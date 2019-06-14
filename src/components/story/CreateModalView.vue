@@ -8,7 +8,7 @@
               <div class="mediasTop">
                 <div class="mediasTop__header">
                   <span
-                    class="category-name category-name_story hidden-mobile icn-item"
+                    class="category-name category-name_story hidden-mobile icn-item icn-size_lg"
                     v-if="$mq === 'desktop'"
                     >Story</span
                   >
