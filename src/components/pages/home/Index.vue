@@ -5,7 +5,8 @@
       class="addPost-btn-float hidden-desktop"
       v-if="$mq === 'mobile'"
       to="/addPost"
-      ><span class="icn-item icn-post icn-size_lg" /></router-link>
+      ><span class="icn-item icn-post icn-size_lg"
+    /></router-link>
     <div class="container">
       <div class="row">
         <div class="content-col" :class="{ 'new-user': newUser }">

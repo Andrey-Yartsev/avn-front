@@ -7,7 +7,8 @@
       class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="isAuth()"
-      ><span class="icn-item icn-post icn-size_lg" /></router-link>
+      ><span class="icn-item icn-post icn-size_lg"
+    /></router-link>
     <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" />

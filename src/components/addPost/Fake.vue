@@ -28,12 +28,16 @@
             @click="goToAddPost"
           >
             <div class="post-datetime">
-              <span class="post-datetime__icn icn-item icn-calendar icn-size_lg" />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+              />
             </div>
           </div>
           <div class="btn-post" v-if="user.isPerformer">
             <router-link class="b-check-state b-check-state_live" to="/stream">
-              <span class="b-check-state__icon icn-live icn-item icn-size_lg"></span>
+              <span
+                class="b-check-state__icon icn-live icn-item icn-size_lg"
+              ></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>

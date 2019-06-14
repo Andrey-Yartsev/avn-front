@@ -22,7 +22,8 @@
       class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="$mq === 'mobile'"
-      ><span class="icn-item icn-post icn-size_lg" /></router-link>
+      ><span class="icn-item icn-post icn-size_lg"
+    /></router-link>
 
     <div class="popup-container-scroll notifications-container">
       <div class="notifications-filter">

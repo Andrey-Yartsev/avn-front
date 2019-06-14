@@ -84,7 +84,10 @@
             ></span>
           </span>
           <span class="stream-btn" @click="throttledLike">
-            <span class="btn-icon likes icn-item icn-size_lg" v-tooltip="'Likes'"></span>
+            <span
+              class="btn-icon likes icn-item icn-size_lg"
+              v-tooltip="'Likes'"
+            ></span>
           </span>
           <span
             class="stream-btn"
@@ -92,7 +95,10 @@
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
           >
-            <span class="btn-icon icn-tips icn-item icn-size_lg" v-tooltip="'Funds'"></span>
+            <span
+              class="btn-icon icn-tips icn-item icn-size_lg"
+              v-tooltip="'Funds'"
+            ></span>
           </span>
           <span class="stream-online-count" v-if="false">
             <span

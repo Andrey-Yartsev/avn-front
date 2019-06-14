@@ -137,7 +137,9 @@
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
           >
             <div class="datetime-value">
-              <span class="post-datetime__icn icn-item icn-calendar icn-size_lg" />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+              />
               <span class="post-datetime__value">{{ formattedDate }}</span>
               <span
                 @click="resetDatetime"
@@ -194,7 +196,9 @@
               }"
               to="/stream"
             >
-              <span class="b-check-state__icon icn-live icn-item icn-size_lg"></span>
+              <span
+                class="b-check-state__icon icn-live icn-item icn-size_lg"
+              ></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>

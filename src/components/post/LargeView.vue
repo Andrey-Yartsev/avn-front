@@ -93,7 +93,9 @@
           />
           <div v-if="delayedPost" class="actions">
             <div class="datetime-value">
-              <span class="post-datetime__icn icn-item icn-calendar icn-size_lg" />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+              />
               <span class="post-datetime__value">{{ formattedDate }}</span>
             </div>
           </div>
