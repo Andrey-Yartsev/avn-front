@@ -38,14 +38,14 @@
           <div class="form-group-btn">
             <button
               type="submit"
-              class="btn lg btn_fix-width saveChanges"
+              class="btn lg btn_fix-width-sm saveLinks"
               :disabled="!canSave || saving"
             >
               Save
             </button>
             <button
               @click.prevent="deleteSnapchat"
-              class="btn lg btn_fix-width"
+              class="btn lg btn_fix-width-sm alt"
               v-if="snapchatData.id"
             >
               Delete

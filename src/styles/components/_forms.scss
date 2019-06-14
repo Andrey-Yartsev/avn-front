@@ -427,6 +427,17 @@ label {
           margin-left: 33%;
         }
       }
+
+      &.saveLinks {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          margin-left: 15px;
+        }
+      }
+
+      + .btn {
+        margin-left: 15px;
+      }
     }
   }
   &-checkbox {
@@ -1178,6 +1189,7 @@ select {
 
 .field-symbol-currency {
   position: relative;
+  flex: 1;
 
   &:before {
     content: "$";
