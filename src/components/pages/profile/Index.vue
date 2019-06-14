@@ -57,6 +57,7 @@
           >
           <div
             class="profile-offer"
+            v-if="!isOwner(this.profile.id) && snapchat"
           >
             <button
               class="btn border alt btn_fix-width-lg"
@@ -65,7 +66,7 @@
             >
               Premium Snapchat ${{ snapchat.price }}
             </button>
-            <div class="profile-offer__chat">
+            <div class="profile-offer__chat" v-if="snapchat.isPaid === true">
               <div class="user-login reset-ml">
                 Snapchat: <span class="name">{{ profile.name }}</span>
               </div>
