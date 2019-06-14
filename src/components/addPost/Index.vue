@@ -60,7 +60,10 @@
               v-model="tweetSend"
               :id="`tweetPost_${where}`"
             />
-            <label class="icn-item icn-twitter icn-size_lg" :for="`tweetPost_${where}`" />
+            <label
+              class="icn-item icn-twitter icn-size_lg"
+              :for="`tweetPost_${where}`"
+            />
           </div>
           <button
             type="submit"
@@ -234,7 +237,10 @@
             v-model="tweetSend"
             :id="`tweetPost_${where}`"
           />
-          <label class="icn-item icn-twitter icn-size_lg" :for="`tweetPost_${where}`" />
+          <label
+            class="icn-item icn-twitter icn-size_lg"
+            :for="`tweetPost_${where}`"
+          />
         </div>
         <button
           type="submit"
