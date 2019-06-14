@@ -109,7 +109,7 @@
       @click.prevent="twitter"
       :class="{ lg: largeControls }"
     >
-      <span class="icn-item icn-twitter"></span>Sign in with Twitter
+      <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with Twitter
     </button>
     <div class="signUp">
       <h3>Already have an account?</h3>

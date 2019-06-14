@@ -128,7 +128,6 @@
 
     &:after {
       content: "\E670";
-      font-size: 24px;
       color: $secondary-color;
     }
   }
@@ -136,8 +135,6 @@
   &-twitter {
 
     &:after {
-      font-size: 24px;
-      //width: 1.6em;
       content: "\E61F";
     }
   }
