@@ -55,15 +55,18 @@
             rel="nofollow"
             >twitter.com/{{ profile.twitterUsername }}</a
           >
-          <div class="profile-offer">
+          <div
+            class="profile-offer"
+            v-if="!isOwner(this.profile.id) && snapchat"
+          >
             <button
               class="btn border alt btn_fix-width-lg"
               @click="buySnapchat"
+              v-if="snapchat.isPaid === false"
             >
-              Premium Snapchat $25
+              Premium Snapchat ${{ snapchat.price }}
             </button>
-
-            <div class="profile-offer__chat">
+            <div class="profile-offer__chat" v-if="snapchat.isPaid === true">
               <div class="user-login reset-ml">
                 <span class="name">{{ profile.name }}</span>
               </div>
@@ -278,6 +281,9 @@ export default {
       }
 
       return PostSmall;
+    },
+    snapchat() {
+      return this.profile.snapchat;
     }
   },
   watch: {
@@ -398,9 +404,9 @@ export default {
         this.$store.dispatch("modal/show", {
           name: "buySnapchatConfirm",
           data: {
-            price: this.profile.snapchatPrice,
-            paymentType: "snapchat",
-            userId: this.profile.id
+            price: "$" + this.snapchat.price,
+            paymentType: "product",
+            productId: this.snapchat.id
           }
         });
       }

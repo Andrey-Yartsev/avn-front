@@ -54,9 +54,9 @@ export default {
       const amount = parseInt(this.data.price.replace(/\$/, ""));
       this._pay(
         {
-          paymentType: "snapchat",
+          paymentType: this.data.paymentType,
           amount,
-          userId: this.data.userId,
+          productId: this.data.productId,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
         onSuccess
