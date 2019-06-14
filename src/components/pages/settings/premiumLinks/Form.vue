@@ -35,18 +35,19 @@
             </div>
           </div>
 
-          <div class="form-group-btn">
+          <div class="form-group-btn form-group-btn_reset-pb-mob">
             <button
               type="submit"
-              class="btn lg btn_fix-width-sm saveLinks"
+              class="btn lg btn_fix-width-sm saveChanges"
               :disabled="!canSave || saving"
             >
               Save
             </button>
             <button
               @click.prevent="deleteSnapchat"
-              class="btn lg btn_fix-width-sm alt"
+              class="btn alt"
               v-if="snapchatData.id"
+              :class="{ 'lg btn_fix-width-sm': $mq === 'desktop', 'deleteSnapchat': $mq === 'mobile' }"
             >
               Delete
             </button>

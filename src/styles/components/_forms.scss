@@ -428,15 +428,11 @@ label {
         }
       }
 
-      &.saveLinks {
+      + .btn {
 
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        @include media-breakpoint-up($desktop-breakpoint) {
           margin-left: 15px;
         }
-      }
-
-      + .btn {
-        margin-left: 15px;
       }
     }
   }
