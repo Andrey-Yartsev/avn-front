@@ -101,8 +101,7 @@ export default {
     deleteSnapchat() {
       this.$store
         .dispatch(`premiumLinks/delete`, { id: this.snapchatData.id })
-        .then(r => {
-          console.log(r);
+        .then((/* r */) => {
           this.$store.dispatch(
             "global/flashToast",
             {
@@ -128,8 +127,7 @@ export default {
 
       this.$store
         .dispatch(`premiumLinks/${method}`, { id: this.snapchatData.id, data })
-        .then(r => {
-          console.log(r);
+        .then((/* r */) => {
           this.saving = false;
           this.$store.dispatch(
             "global/flashToast",
