@@ -176,6 +176,13 @@
     }
   }
 
+  &-price {
+
+    &:after {
+      content: "\E62E";
+    }
+  }
+
   &-item {
     display: inline-block;
     vertical-align: top;

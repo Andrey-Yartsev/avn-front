@@ -31,7 +31,7 @@
         :class="{ active: showTip, disabled: showPaid }"
         v-tooltip="'Fund'"
       >
-        <span class="icn-tips icn-item"></span>
+        <span class="icn-tips icn-item icn-size_lg"></span>
       </button>
 
       <div
@@ -90,16 +90,16 @@
       </div>
 
       <button
-        class="getPaid btn-el icn-item"
+        class="getPaid btn-el"
         :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
         v-tooltip="'Price'"
-      ></button>
+      ><span class="icn-item icn-price icn-size_lg"></span></button>
 
       <button
         @click="sendMessage"
-        class="btn-send btn-send_default icn-item"
+        class="btn-send btn-send_default icn-item icn-size_lg"
         :disabled="!canSend || disable"
         v-tooltip="'Send'"
       ></button>
