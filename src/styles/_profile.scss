@@ -483,6 +483,26 @@
     justify-content: space-between;
     align-items: center;
     align-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    flex: 0 0 100%;
+    margin-top: 10px;
+
+    @include media-breakpoint-up($tablet-breakpoint) {
+      flex: 1;
+      margin-top: auto;
+      margin-left: 20px;
+    }
+
+    input {
+      margin-right: 10px;
+    }
   }
 }
 

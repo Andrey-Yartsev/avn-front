@@ -68,9 +68,15 @@
             </button>
             <div class="profile-offer__chat" v-if="snapchat.isPaid === true">
               <div class="user-login reset-ml">
-                <span class="name">{{ profile.name }}</span>
+                Snapchat: <span class="name">{{ profile.name }}</span>
               </div>
-              <button class="btn">Send message</button>
+              <div class="profile-offer__form">
+                <input type="text" class="rounded" >
+                <button class="btn">
+                  Send
+                  <template v-if="$mq === 'desktop'">message</template>
+                </button>
+              </div>
             </div>
           </div>
           <FollowersCounter :profile="profile" />
