@@ -84,7 +84,6 @@
 
     &:after {
       content: "\E61A";
-      font-size: 24px;
     }
   }
 
@@ -92,7 +91,6 @@
 
     &:after {
       content: "\E618";
-      font-size: 24px;
     }
   }
 
@@ -100,7 +98,6 @@
 
     &:after {
       content: "\E622";
-      font-size: 24px;
     }
   }
 
@@ -164,7 +161,6 @@
 
     &:after {
       content: "\E611";
-      font-size: 24px;
     }
   }
 
@@ -189,6 +185,23 @@
 
     &:after {
       @include icon-font;
+    }
+  }
+
+  &-size {
+
+    &_md {
+
+      &:after {
+        font-size: 19px;
+      }
+    }
+
+    &_lg {
+
+      &:after {
+        font-size: 24px;
+      }
     }
   }
 

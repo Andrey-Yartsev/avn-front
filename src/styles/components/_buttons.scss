@@ -500,12 +500,8 @@ button {
   .icn-tips {
     width: 24px;
     height: 24px;
+    line-height: 24px;
     margin: 0 auto 2px;
-
-    &:after {
-      font-size: 24px;
-      line-height: 24px;
-    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -705,24 +701,22 @@ button {
 .looking,
 //.tips,
 .getPaid {
-  height: 24px;
-  line-height: 24px;
   cursor: pointer;
   background-color: transparent;
   border: none;
   transition: color 0.3s ease, opacity 0.3s ease;
 
-  &:after {
-    font-size: 24px;
-  }
+  &.icn {
 
-  &_size {
+    &-size {
 
-    &-sm {
-      height: 19px;
+      &_md {
+        height: 19px;
+      }
 
-      &:after {
-        font-size: 19px;
+      &_lg {
+        height: 24px;
+        line-height: 24px;
       }
     }
   }

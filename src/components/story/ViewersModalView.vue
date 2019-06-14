@@ -22,7 +22,7 @@
                 <div class="story-preview story-preview_viewers">
                   <img :src="story.preview.source" class="story-preview__img" />
                   <div class="amount-viewers">
-                    <span class="btn-icon icn-viewer icn-item" />{{
+                    <span class="btn-icon icn-viewer icn-item icn-size_lg" />{{
                       story.viewersCount
                     }}
                   </div>

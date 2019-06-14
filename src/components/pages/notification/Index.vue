@@ -10,7 +10,7 @@
         ></router-link>
         <h1 class="page-title">Notifications</h1>
         <router-link
-          class="btn-settings icn-item"
+          class="btn-settings icn-item icn-size_lg"
           to="/settings/notifications"
         />
       </div>
@@ -22,8 +22,7 @@
       class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="$mq === 'mobile'"
-      ><span class="icn-item icn-post"></span
-    ></router-link>
+      ><span class="icn-item icn-post icn-size_lg" /></router-link>
 
     <div class="popup-container-scroll notifications-container">
       <div class="notifications-filter">
@@ -35,14 +34,14 @@
             :href="'/notification/' + v.name"
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
-            class="notifications-filter__btn icn-item"
+            class="notifications-filter__btn icn-item icn-size_lg"
             ><span class="notifications-filter__btn-text">{{
               v.title
             }}</span></a
           >
         </div>
         <router-link
-          class="notifications-filter__btn btn-settings hidden-mobile icn-item"
+          class="notifications-filter__btn btn-settings hidden-mobile icn-item icn-size_lg"
           to="/settings/notifications"
           v-if="$mq === 'desktop'"
         />

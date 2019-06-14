@@ -672,9 +672,8 @@
       position: absolute;
       left: 0;
       top: 2px;
-      font-size: 24px;
       transition: color .3s;
-      opacity: 0.5;
+      opacity: .5;
       color: $main-color;
 
       .b-check-state_post & {
@@ -958,7 +957,6 @@
     cursor: pointer;
 
     &:after {
-      font-size: 24px;
       width: 24px;
       height: 30px;
       position: relative;

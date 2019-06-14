@@ -22,7 +22,7 @@
           type="file"
           accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
         />
-        <span class="icn-media icn-item"></span>
+        <span class="icn-media icn-item icn-size_lg"></span>
       </label>
       <button
         v-if="withUser && withUser.canEarn && $root.showTips"

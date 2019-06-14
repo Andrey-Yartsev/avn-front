@@ -31,7 +31,7 @@
             class="profile-actions__btn btn-with-icon btn-with-icon_st btn-make-post make-post-btn"
             @click="openAddPostModal"
           >
-            <span class="icn-item icn-post"></span>
+            <span class="icn-item icn-post icn-size_lg"></span>
             New post
           </button>
         </div>
@@ -54,7 +54,7 @@
             class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn selected"
             @click="openTip"
           >
-            <span class="icn-item icn-tips"></span>
+            <span class="icn-item icn-tips icn-size_lg"></span>
             Fund
           </button>
           <SubscribeButton
@@ -93,7 +93,7 @@
             type="button"
             class="profile-actions__btn btn-with-icon profile-message-btn"
           >
-            <span class="icn-msg icn-item"></span>
+            <span class="icn-msg icn-item icn-size_lg"></span>
             Message
           </button>
           <UserDropdown

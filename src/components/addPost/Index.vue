@@ -42,7 +42,7 @@
             <div class="b-check-state b-check-state_post">
               <label>
                 <input class="is-free-post" type="checkbox" v-model="isFree" />
-                <span class="b-check-state__icon icn-item"></span>
+                <span class="b-check-state__icon icn-item icn-size_lg"></span>
                 <span class="b-check-state__text">Free</span>
               </label>
             </div>
@@ -137,7 +137,7 @@
             v-if="datetime && $mq === 'desktop' && where !== 'modal'"
           >
             <div class="datetime-value">
-              <span class="post-datetime__icn icn-item icn-calendar" />
+              <span class="post-datetime__icn icn-item icn-calendar icn-size_lg" />
               <span class="post-datetime__value">{{ formattedDate }}</span>
               <span
                 @click="resetDatetime"
@@ -159,7 +159,7 @@
               :accept="inputAccepts"
               @change="addMediaFiles"
             />
-            <span class="icn-media icn-item"></span>
+            <span class="icn-media icn-item icn-size_lg"></span>
             <span class="btn-post__text">
               Add media
             </span>
@@ -178,7 +178,7 @@
                 :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
               />
               <span
-                class="post-datetime__icn icn-item icn-calendar"
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
                 @click="openDatepicker"
               ></span>
               <span class="btn-post__text">
@@ -194,7 +194,7 @@
               }"
               to="/stream"
             >
-              <span class="b-check-state__icon icn-live icn-item"></span>
+              <span class="b-check-state__icon icn-live icn-item icn-size_lg"></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>
@@ -207,7 +207,7 @@
                     type="checkbox"
                     v-model="isFree"
                   />
-                  <span class="b-check-state__icon icn-item"></span>
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
                   <span class="b-check-state__text">Free post</span>
                 </label>
               </div>

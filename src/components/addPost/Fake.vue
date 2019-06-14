@@ -20,7 +20,7 @@
       <div class="actions">
         <div class="actions-controls">
           <span class="add-media-input btn-post" @click="goToAddPost"
-            ><span class="icn-media icn-item"></span
+            ><span class="icn-media icn-item icn-size_lg"></span
           ></span>
           <div
             class="btn-post btn-post_datetime"
@@ -28,12 +28,12 @@
             @click="goToAddPost"
           >
             <div class="post-datetime">
-              <span class="post-datetime__icn icn-item icn-calendar" />
+              <span class="post-datetime__icn icn-item icn-calendar icn-size_lg" />
             </div>
           </div>
           <div class="btn-post" v-if="user.isPerformer">
             <router-link class="b-check-state b-check-state_live" to="/stream">
-              <span class="b-check-state__icon icn-live icn-item"></span>
+              <span class="b-check-state__icon icn-live icn-item icn-size_lg"></span>
               <span class="btn-post__text exception">Go live</span></router-link
             >
           </div>

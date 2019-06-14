@@ -27,7 +27,7 @@
               @click.prevent="goTo('/chat/new')"
               class="newMessage"
               >New message
-              <span class="icn-msg icn-item"></span>
+              <span class="icn-msg icn-item icn-size_lg"></span>
             </a>
           </div>
         </div>

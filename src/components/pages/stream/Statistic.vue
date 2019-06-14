@@ -64,7 +64,7 @@
           </div>
           <div class="stream-summary-data-item stream-summary-data-item__likes">
             <div class="stream-summary-data-item__label">
-              <span class="btn-icon likes icn-item"></span>Likes
+              <span class="btn-icon likes icn-item icn-size_lg"></span>Likes
             </div>
             <div class="stream-summary-data-item__value">
               {{ this.likes.length }}

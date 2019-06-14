@@ -235,21 +235,21 @@
             @click="showCommentForm = !showCommentForm"
           >
             <span
-              class="btn-icon comments icn-item"
+              class="btn-icon comments icn-item icn-size_lg"
               v-tooltip="'Comments'"
             ></span>
           </span>
           <span class="stream-btn" ref="likeBtn">
-            <span class="btn-icon likes icn-item" v-tooltip="'Likes'"></span>
+            <span class="btn-icon likes icn-item icn-size_lg" v-tooltip="'Likes'"></span>
             {{ likesCount ? likesCount : "" }}
           </span>
           <span v-if="$root.showTips" class="stream-btn">
-            <span class="btn-icon icn-tips icn-item" v-tooltip="'Funds'"></span>
+            <span class="btn-icon icn-tips icn-item icn-size_lg" v-tooltip="'Funds'"></span>
             {{ amount.toFixed(2) }} $
           </span>
           <span class="stream-btn stream-online-count">
             <span
-              class="looking btn-icon icn-item"
+              class="looking btn-icon icn-item icn-size_lg"
               v-tooltip="'Viewers'"
             ></span>
             {{ looksCount }}

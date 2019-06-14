@@ -37,7 +37,6 @@
   }
 
   &:after {
-    font-size: 24px;
     content: "\E62F";
   }
 }
@@ -402,8 +401,7 @@
 .NotificationsView {
 
   &:after {
-    font-size: 24px;
-    opacity: 0.3;
+    opacity: .3;
   }
 }
 
