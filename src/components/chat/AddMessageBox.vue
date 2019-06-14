@@ -95,7 +95,9 @@
         v-if="user.canEarn"
         @click="showPaid = !showPaid"
         v-tooltip="'Price'"
-      ><span class="icn-item icn-price icn-size_lg"></span></button>
+      >
+        <span class="icn-item icn-price icn-size_lg"></span>
+      </button>
 
       <button
         @click="sendMessage"
