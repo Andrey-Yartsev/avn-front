@@ -8,7 +8,7 @@
           <span
             role="button"
             id="close-stream-window"
-            class="close close_light close_visible-mob icn-item"
+            class="close close_light close_visible-mob icn-item icn-size_lg"
             @click="stopWatching"
           />
         </div>

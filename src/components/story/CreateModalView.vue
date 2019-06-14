@@ -13,7 +13,7 @@
                     >Story</span
                   >
                   <button
-                    class="close close_default close_visible-mob icn-item"
+                    class="close close_default close_visible-mob icn-item icn-size_lg"
                     @click="close"
                   >
                     <span

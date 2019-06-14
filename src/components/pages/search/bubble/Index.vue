@@ -51,7 +51,11 @@
             <span class="searchAllTag">{{ localQuery }}</span>
           </router-link>
         </div>
-        <button type="button" class="close icn-item" @click="reset"></button>
+        <button
+          type="button"
+          class="close icn-item icn-size_lg"
+          @click="reset"
+        ></button>
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
       <div class="sidebar__inside">
         <span
           role="button"
-          class="close icn-item user-menu-close hidden-desktop"
+          class="close icn-item user-menu-close hidden-desktop icn-size_lg"
           @click="hide"
           v-if="$mq === 'mobile'"
         />
