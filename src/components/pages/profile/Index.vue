@@ -71,12 +71,18 @@
                 Snapchat: <span class="name">{{ profile.name }}</span>
               </div>
               <div class="profile-offer__form">
-                <input type="text" class="rounded" />
-                <button class="btn">
+                <input
+                  type="text"
+                  v-model="mysnapchat"
+                  class="rounded"
+                  placeholder="Enter your snapchat"
+                />
+                <button
+                  class="btn"
+                  @click="sendMySnapchat"
+                  :disabled="!mysnapchat.trim()"
+                >
                   Send
-                  <template v-if="$mq === 'desktop'"
-                    >message</template
-                  >
                 </button>
               </div>
             </div>
@@ -218,7 +224,8 @@ export default {
   data() {
     return {
       collapseLimit: 250,
-      collapsed: true
+      collapsed: true,
+      mysnapchat: ""
     };
   },
 
@@ -396,9 +403,9 @@ export default {
       global.scrollTo(0, 0);
     },
     buySnapchat() {
-      // if (this.isMyMessage(message)) {
-      //   return;
-      // }
+      if (!this.snapchat || this.snapchat.isPaid !== false) {
+        return;
+      }
       if (process.env.VUE_APP_NAME === "avn") {
         if (!this.user.isPaymentCardConnected) {
           this.$store.dispatch("global/flashToast", {
@@ -414,9 +421,28 @@ export default {
           data: {
             price: "$" + this.snapchat.price,
             paymentType: "product",
-            productId: this.snapchat.id
+            productId: this.snapchat.id,
+            callback: this.initProfile
           }
         });
+      }
+    },
+    sendMySnapchat() {
+      if (!this.snapchat || this.snapchat.isPaid === false) {
+        return;
+      }
+      if (process.env.VUE_APP_NAME === "avn") {
+        this.$store.dispatch("chat/sendMessage", {
+          userId: this.profile.id,
+          data: {
+            price: 0,
+            text: `Hi! I have paid for your snapchat. My snapchat is ${
+              this.mysnapchat
+            }. Please add me!`
+          }
+        });
+
+        this.$router.push(`/chat/${this.profile.id}`);
       }
     }
   },
