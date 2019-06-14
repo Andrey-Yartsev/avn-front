@@ -47,7 +47,10 @@
               @click.prevent="deleteSnapchat"
               class="btn alt"
               v-if="snapchatData.id"
-              :class="{ 'lg btn_fix-width-sm': $mq === 'desktop', 'deleteSnapchat': $mq === 'mobile' }"
+              :class="{
+                'lg btn_fix-width-sm': $mq === 'desktop',
+                deleteSnapchat: $mq === 'mobile'
+              }"
             >
               Delete
             </button>
