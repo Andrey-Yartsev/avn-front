@@ -29,7 +29,7 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
     }`
   )
     .then(function(response) {
-      response.text().then(function(token) {
+      response.json().then(function({ token }) {
         console.log(
           JSON.stringify({
             clientAccnum,
