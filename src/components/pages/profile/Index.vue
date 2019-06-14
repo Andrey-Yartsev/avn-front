@@ -406,10 +406,15 @@ export default {
       global.scrollTo(0, 0);
     },
     buySnapchat() {
-      if (!this.snapchat || this.snapchat.isPaid !== false) {
-        return;
-      }
       if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user) {
+          this.$router.push("/settings/payments");
+        }
+
+        if (!this.snapchat || this.snapchat.isPaid !== false) {
+          return;
+        }
+
         if (!this.user.isPaymentCardConnected) {
           this.$store.dispatch("global/flashToast", {
             text: "You should add card in payment settings",
