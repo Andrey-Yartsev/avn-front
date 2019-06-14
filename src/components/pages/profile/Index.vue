@@ -68,7 +68,7 @@
             </button>
             <div class="profile-offer__chat" v-if="snapchat.isPaid === true">
               <div class="user-login reset-ml">
-                Snapchat: <span class="name">{{ profile.name }}</span>
+                Snapchat: <span class="name">{{ snapchat.content }}</span>
               </div>
               <div
                 class="profile-offer__form"
