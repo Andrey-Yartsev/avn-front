@@ -403,6 +403,7 @@ button {
     &.make-post-btn {
 
       .icn-post {
+        height: 40px;
         line-height: 40px;
       }
     }
@@ -817,9 +818,6 @@ button {
 
   &:after {
     content: "\E62D";
-    //margin: 0;
-    //width: 1.1em;
-    //font-weight: 400;
   }
 
   .chatForm & {

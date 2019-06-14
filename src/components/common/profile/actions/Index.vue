@@ -24,7 +24,7 @@
             to="/settings/profile"
             class="profile-actions__btn btn-with-icon btn-with-icon_st btn-edit-profile"
           >
-            <span class="icn-item icn-profile"></span>
+            <span class="icn-item icn-profile icn-size_lg"></span>
             Edit profile
           </router-link>
           <button

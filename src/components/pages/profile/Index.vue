@@ -71,10 +71,12 @@
                 Snapchat: <span class="name">{{ profile.name }}</span>
               </div>
               <div class="profile-offer__form">
-                <input type="text" class="rounded" >
+                <input type="text" class="rounded" />
                 <button class="btn">
                   Send
-                  <template v-if="$mq === 'desktop'">message</template>
+                  <template v-if="$mq === 'desktop'"
+                    >message</template
+                  >
                 </button>
               </div>
             </div>

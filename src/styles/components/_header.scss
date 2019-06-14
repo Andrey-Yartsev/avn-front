@@ -902,6 +902,7 @@
   }
 
   .icn-post {
+    height: 24px;
     line-height: 24px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
