@@ -55,7 +55,7 @@
             rel="nofollow"
             >twitter.com/{{ profile.twitterUsername }}</a
           >
-          <div class="profile-offer" v-if="false">
+          <div class="profile-offer">
             <button
               class="btn border alt btn_fix-width-lg"
               @click="buySnapchat"

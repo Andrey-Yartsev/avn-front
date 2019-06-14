@@ -43,6 +43,13 @@
             >
               Save
             </button>
+            <button
+              @click.prevent="deleteSnapchat"
+              class="btn lg btn_fix-width"
+              v-if="snapchatData.id"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </form>
@@ -64,6 +71,18 @@ export default {
     };
   },
   computed: {
+    productList() {
+      if (this.$store.state.premiumLinks.fetchResult) {
+        return this.$store.state.premiumLinks.fetchResult.list;
+      }
+
+      return [];
+    },
+    snapchatData() {
+      return (
+        this.productList.find(item => item.contentType === "snapchat") || {}
+      );
+    },
     loading() {
       return this.$store.state.premiumLinks.fetchLoading;
     },
@@ -75,32 +94,64 @@ export default {
     }
   },
   methods: {
+    deleteSnapchat() {
+      this.$store
+        .dispatch(`premiumLinks/delete`, { id: this.snapchatData.id })
+        .then(r => {
+          console.log(r);
+          this.$store.dispatch(
+            "global/flashToast",
+            {
+              text: "Changes saved successfully"
+            },
+            {
+              root: true
+            }
+          );
+          this.getInitData();
+        });
+    },
     save() {
       this.saving = true;
       const data = {
+        ...this.snapchatData,
         contentType: "snapchat",
         content: this.snapchatAccount,
         price: this.snapchatPrice
       };
 
-      this.$store.dispatch("premiumLinks/save", data).then(r => {
-        console.log(r);
-        this.$store.dispatch(
-          "global/flashToast",
-          {
-            text: "Changes saved successfully"
-          },
-          {
-            root: true
-          }
-        );
-      });
+      const method = data.id ? "update" : "save";
+
+      this.$store
+        .dispatch(`premiumLinks/${method}`, { id: this.snapchatData.id, data })
+        .then(r => {
+          console.log(r);
+          this.saving = false;
+          this.$store.dispatch(
+            "global/flashToast",
+            {
+              text: "Changes saved successfully"
+            },
+            {
+              root: true
+            }
+          );
+          this.getInitData();
+        });
+    },
+    getInitData() {
+      this.$store.commit("premiumLinks/reset");
+      this.$store
+        .dispatch("premiumLinks/fetch", { contentType: "snapchat" })
+        .then(() => {
+          this.snapchatAccount = this.snapchatData.content;
+          this.snapchatPrice = this.snapchatData.price;
+        });
     }
   },
 
   mounted() {
-    this.$store.commit("premiumLinks/reset");
-    this.$store.dispatch("premiumLinks/fetch");
+    this.getInitData();
   }
 };
 </script>
