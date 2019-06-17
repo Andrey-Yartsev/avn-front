@@ -8,11 +8,10 @@ function ccbillResponseHandler(response, formSubmit) {
         formSubmit({ status: "ready", data });
       })
       .catch(function(error) {
-        console.log(error);
-        formSubmit({ status: "reject" });
+        formSubmit({ status: "reject", data: { error: error.message } });
       });
   } else {
-    formSubmit({ status: "reject" });
+    formSubmit({ status: "reject", data: { error: response } });
   }
 }
 
@@ -30,22 +29,6 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
   )
     .then(function(response) {
       response.json().then(function({ token }) {
-        console.log(
-          JSON.stringify({
-            clientAccnum,
-            clientSubacc,
-            subscriptionId: 0,
-            browserHttpAcceptLanguage: global.navigator.language,
-            browserHttpUserAgent: global.navigator.userAgent,
-            browserHttpAccept:
-              "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,* /*;q=0.8",
-            browserHttpAcceptEncoding: "gzip, deflate",
-            customerInfo,
-            paymentInfo: {
-              creditCardPaymentInfo
-            }
-          })
-        );
         fetch(`${host}payment-tokens/merchant-only`, {
           headers: {
             "Content-type": "application/json",
@@ -70,13 +53,11 @@ export function goCcbill(customerInfo, creditCardPaymentInfo, formSubmit) {
         })
           .then(res => ccbillResponseHandler(res, formSubmit))
           .catch(function(error) {
-            console.log(error);
-            formSubmit({ status: "reject" });
+            formSubmit({ status: "reject", data: { error: error.message } });
           });
       });
     })
     .catch(function(error) {
-      console.log(error);
-      formSubmit({ status: "reject" });
+      formSubmit({ status: "reject", data: { error: error.message } });
     });
 }
