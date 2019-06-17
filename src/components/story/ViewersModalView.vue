@@ -116,7 +116,7 @@
         </div>
         <button
           type="button"
-          class="close close_light icn-item"
+          class="close close_light icn-item icn-size_lg"
           @click="close"
         />
       </div>
