@@ -768,7 +768,7 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100px;
-    flex: 0 0 100px;
+    flex-basis: 100px;
   }
 }
 

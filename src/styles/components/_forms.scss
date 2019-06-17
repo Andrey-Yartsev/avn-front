@@ -892,7 +892,7 @@ select {
   flex: 0 1 71%;
   width: 71%;
   @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 0 1 63%;
+    flex-basis: 63%;
     width: 63%;
   }
 }
@@ -900,7 +900,7 @@ select {
   flex: 0 1 29%;
   width: 29%;
   @include media-breakpoint-up($desktop-breakpoint) {
-    flex: 0 1 37%;
+    flex-basis: 37%;
     width: 37%;
   }
 

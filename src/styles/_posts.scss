@@ -596,9 +596,6 @@
       .explore-page & {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          //max-height: calc(100vh - 210px);
-
-          //flex: 1;
           display: flex;
         }
       }
