@@ -210,19 +210,16 @@
           box-shadow: 0 3px 6px rgba(#000, 0.1);
         }
 
-        a {
+        .story {
           display: block;
           padding: 0 0 8%;
-          margin: 0;
           width: 100%;
-          color: $main-color;
+          //margin: 0;
+          //color: $main-color;
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            padding: 0 0 19px;
+            padding-bottom: 19px;
           }
-        }
-
-        .story {
 
           .user-login {
 
