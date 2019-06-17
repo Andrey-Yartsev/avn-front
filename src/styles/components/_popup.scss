@@ -350,6 +350,7 @@
       position: fixed;
       height: auto;
       border-radius: 0;
+      max-width: 100%;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
