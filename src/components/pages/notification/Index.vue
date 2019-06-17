@@ -6,7 +6,8 @@
     <div class="notifications-header main-header" v-if="$mq === 'mobile'">
       <div class="header_container">
         <router-link :to="'/' + user.username" class="avatar header-avatar"
-          ><span class="avatar__img"></span
+          ><span class="avatar__img">
+            <img v-if="user.avatar" :src="user.avatar" /> </span
         ></router-link>
         <h1 class="page-title">Notifications</h1>
         <router-link
