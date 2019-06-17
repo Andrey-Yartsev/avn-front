@@ -31,7 +31,7 @@
                     </div>
                     <a @click="createHL" class="story btn-add-story">
                       <div
-                        class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                        class="avatar avatar_lg-tab avatar_gap-r-md"
                         @click.prevent="addNew"
                       >
                         <div class="round-add icn-item"></div>
