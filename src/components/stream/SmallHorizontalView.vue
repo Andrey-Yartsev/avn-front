@@ -19,10 +19,12 @@
             @click.prevent="run"
             >{{ post.user.name }}</a
           >
-          <div class="timestamp hidden-mobile">{{ dateTime }}</div>
+          <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">
+            {{ dateTime }}
+          </div>
         </div>
-        <div class="user-login reset-ml hidden-mobile">
-          <router-link :to="`/${post.user.username}`" class="">{{
+        <div class="user-login reset-ml hidden-mobile" v-if="$mq === 'desktop'">
+          <router-link :to="`/${post.user.username}`">{{
             post.user.username
           }}</router-link>
         </div>
