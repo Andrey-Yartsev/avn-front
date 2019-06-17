@@ -4,7 +4,7 @@
       <h1 class="form-title" v-if="$mq === 'desktop'">
         Notifications Settings
       </h1>
-      <div class="form-title border-top">
+      <div class="form-title border-top border-bottom-mobile">
         <div class="inner">
           <span class="semi-transparent">
             Push Notifications
