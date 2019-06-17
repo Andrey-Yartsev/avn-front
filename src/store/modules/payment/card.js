@@ -69,7 +69,8 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.data = params;
     return options;
-  }
+  },
+  throw400: true
 });
 
 export default {

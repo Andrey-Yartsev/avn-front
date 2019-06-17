@@ -74,6 +74,13 @@
       >
         <div class="border-top shadow-block">
           <div class="container">
+            <div
+              :fullscreen="false"
+              class="shadow-block loader-container no-padding"
+              v-if="submitting"
+            >
+              <Loader text="" class="small no-text" />
+            </div>
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
                 <span class="label">Street</span>
@@ -118,7 +125,7 @@
                       <option
                         v-for="v in countries"
                         v-bind:key="v.id"
-                        :value="v.name"
+                        :value="v.code"
                         >{{ v.name }}
                       </option>
                     </select>
@@ -301,6 +308,7 @@ import CardExpDate from "@/components/common/CardExpDate";
 import Transactions from "@/components/pages/settings/payments/Transactions";
 import { goCcbill } from "@/utils/ccbill";
 import States from "@/components/pages/settings/payments/states";
+import Loader from "@/components/common/Loader";
 
 const initData = {
   showCardForm: false,
@@ -337,6 +345,7 @@ export default {
   mixins: [Form, User, States],
   components: {
     CardExpDate,
+    Loader,
     Transactions
   },
   data() {
@@ -365,10 +374,7 @@ export default {
     next() {
       this.submitting = true;
 
-      if (
-        this.hasCCBill &&
-        this.getCountryCodeByName(this.userinfo.country) === "US"
-      ) {
+      if (this.hasCCBill && this.userinfo.country === "US") {
         this.tokens.ccb.status = "pending";
         const customerInfo = {
           email: this.email,
@@ -453,6 +459,9 @@ export default {
                   type: "error"
                 });
               }
+              this.submitting = false;
+            })
+            .catch(() => {
               this.submitting = false;
             });
         }
