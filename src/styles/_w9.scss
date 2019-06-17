@@ -5,6 +5,11 @@
   padding: 20px 0;
 }
 
+.pdf-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .pdf-page {
   width: 1200px;
   margin-left: auto;
