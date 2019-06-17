@@ -494,6 +494,7 @@ export default {
             this.$store.dispatch("payment/card/delete").then(() => {
               this.reset();
               this.showCardForm = true;
+              this.fetchCountries();
             });
           }
         }
