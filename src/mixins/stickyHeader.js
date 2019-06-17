@@ -27,7 +27,7 @@ export default {
         height = chatHeader.getBoundingClientRect().height;
       }
 
-      const st = pageYOffset || scrollTop || e.target.scrollTop || 0;
+      const st = pageYOffset || scrollTop || (e && e.target.scrollTop) || 0;
 
       if (st > this.lastScrollTop) {
         if (st > height) {
@@ -47,6 +47,7 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
+    this.onScroll();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
