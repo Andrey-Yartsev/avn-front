@@ -51,39 +51,39 @@
           <nav class="user-menu">
             <div class="user-menu__col">
               <router-link
-                class="user-menu-item user-menu-item__profile"
+                class="user-menu-item user-menu-item__profile icn-item"
                 :to="'/' + user.username"
                 >Profile</router-link
               >
               <router-link
-                class="user-menu-item user-menu-item__statistics"
+                class="user-menu-item user-menu-item__statistics icn-item"
                 to="/statistics"
                 >Statistics</router-link
               >
               <router-link
-                class="user-menu-item user-menu-item__payouts"
+                class="user-menu-item user-menu-item__payouts icn-item"
                 to="/settings/payouts"
                 >Payouts</router-link
               >
               <router-link
-                class="user-menu-item user-menu-item__payments"
+                class="user-menu-item user-menu-item__payments icn-item"
                 to="/settings/payments"
                 >Payments
               </router-link>
             </div>
             <div class="user-menu__col">
               <router-link
-                class="user-menu-item user-menu-item__privacy"
+                class="user-menu-item user-menu-item__privacy icn-item"
                 to="/settings"
                 >Settings and Privacy
               </router-link>
               <router-link
-                class="user-menu-item user-menu-item__help"
+                class="user-menu-item user-menu-item__help icn-item"
                 to="/contact"
                 >Help</router-link
               >
               <router-link
-                class="user-menu-item user-menu-item__logout"
+                class="user-menu-item user-menu-item__logout icn-item"
                 to="/logout"
                 >Log out</router-link
               >
