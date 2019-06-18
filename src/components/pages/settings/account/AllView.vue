@@ -40,10 +40,9 @@
           <div
             class="form-group-btn hidden-mobile email-confirm-block"
             id="confirm-email-block"
-            v-if="$mq === 'desktop'"
+            v-if="$mq === 'desktop' && !user.emailChecked"
           >
             <button
-              v-if="!user.emailChecked"
               type="button"
               class="btn border btn_fix-width-lg btn-confirm-email"
               @click="resendEmail"
