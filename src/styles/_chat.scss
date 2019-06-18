@@ -1210,16 +1210,11 @@
 }
 
 .type-msg-icn {
-  font-size: 0;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  display: block;
-  opacity: 0.5;
 
   .icn-item {
 
     &:after {
+      opacity: 0.5;
       font-size: 16px;
       line-height: 16px;
     }
