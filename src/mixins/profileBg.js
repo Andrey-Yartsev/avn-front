@@ -34,19 +34,30 @@ export default {
     saveBg(clear) {
       return new Promise(accept => {
         this.bgUploading = true;
-        upload(this.$refs.bg.files[0]).then(fileName => {
-          this.$store
-            .dispatch("profile/extend", {
-              header: fileName
-            })
-            .then(() => {
-              if (clear === true) {
-                this.bgPreview = "";
-              }
-              this.bgUploading = false;
-              accept();
+        upload(this.$refs.bg.files[0])
+          .then(fileName => {
+            this.$store
+              .dispatch("profile/extend", {
+                header: fileName
+              })
+              .then(() => {
+                if (clear === true) {
+                  this.bgPreview = "";
+                }
+                this.bgUploading = false;
+                accept();
+              });
+          })
+          .catch(e => {
+            this.$store.dispatch("global/flashToast", {
+              text: e.message && e.message,
+              type: "error"
             });
-        });
+
+            this.bgPreview = "";
+            this.bgUploading = false;
+            this.$refs.bg.value = "";
+          });
       });
     },
     removeBg() {
