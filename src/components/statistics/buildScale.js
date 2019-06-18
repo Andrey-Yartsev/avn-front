@@ -10,6 +10,8 @@ export default {
           format = "YYYY-MM-DD",
           displayFormat;
 
+        let unit = "days";
+
         switch (period) {
           case "last_week":
             scaleCount = 6;
@@ -20,8 +22,9 @@ export default {
             displayFormat = "D.MM";
             break;
           case "last_year":
+            // scaleCount = 6;
             periodCount = 2;
-            period = "months";
+            unit = "months";
             format = "YYYY-MM";
             displayFormat = "MMM";
             break;
@@ -30,7 +33,7 @@ export default {
         for (let j = scaleCount; j >= 0; j--) {
           let currLabel = moment
             .unix(moment.utc(moment.unix(now).format(format)).unix())
-            .subtract(j * periodCount, "days")
+            .subtract(j * periodCount, unit)
             .format(displayFormat);
           scaleHtml +=
             "<span class=statistics-chart-scale__item>" + currLabel + "</span>";
