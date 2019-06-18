@@ -43,7 +43,9 @@
             v-if="post.media.length > 1"
             class="item-length item-length_photo"
           >
-            <span class="value">{{ post.media.length }}</span>
+            <span class="value" v-if="$mq === 'desktop'">{{
+              post.media.length
+            }}</span>
             <span class="icn-item icn-photos"></span>
           </span>
           <span
