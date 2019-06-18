@@ -40,19 +40,6 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: inherit;
     }
-
-    .lds-dual-ring {
-
-      &.with-text {
-
-        .loader-text {
-
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-            position: fixed;
-          }
-        }
-      }
-    }
   }
 
   .scroll-bottom {

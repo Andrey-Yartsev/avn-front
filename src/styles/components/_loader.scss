@@ -163,10 +163,7 @@
 
     .loader-text {
       color: #fff;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        font-size: 0;
-      }
+      width: 100%;
     }
   }
 }
