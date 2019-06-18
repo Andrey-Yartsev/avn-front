@@ -1,6 +1,6 @@
 <template>
   <div class="media" :style="mediaStyle">
-    <div class="lds-dual-ring transparent small with-text not-fullscreen">
+    <div class="lds-dual-ring transparent small with-text not-fullscreen processing-loader">
       <div class="loader-text">Media is currently processing</div>
     </div>
     <template v-if="medias.length > 1">

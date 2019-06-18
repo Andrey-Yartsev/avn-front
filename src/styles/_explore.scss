@@ -534,19 +534,24 @@
     }
 
     &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(#000, 0.4);
+      opacity: 0;
+      transform: scale(0);
+      z-index: 1;
+      content: "";
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        background: rgba(#000, 0.4);
-        opacity: 0;
-        transform: scale(0);
-        z-index: 1;
-        content: "";
-        transition: opacity 0.3s ease, transform 0.3s ease;
+    &_processing {
+
+      &:before {
+        opacity: 1;
+        transform: scale(1);
       }
     }
 

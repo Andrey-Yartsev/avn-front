@@ -31,7 +31,7 @@
     >
       <figure
         v-if="media"
-        class="explore-media"
+        class="explore-media locked-wrapper explore-media_processing"
         :class="{ 'locked-wrapper': media.locked }"
       >
         <div v-if="!media.canView" class="locked-picture icn-item">
@@ -75,6 +75,10 @@
             <span class="video-recommendations-text">
               Watch<br />videos you might like
             </span>
+          </div>
+
+          <div class="lds-dual-ring transparent small with-text not-fullscreen processing-loader">
+            <div class="loader-text">Media is currently processing</div>
           </div>
         </template>
       </figure>

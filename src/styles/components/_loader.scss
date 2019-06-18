@@ -151,6 +151,26 @@
   position: relative;
 }
 
+.processing-loader {
+  display: block;
+  pointer-events: none;
+
+  .loader-text {
+    text-align: center;
+  }
+
+  &.transparent {
+
+    .loader-text {
+      color: #fff;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 0;
+      }
+    }
+  }
+}
+
 .lds-dual-ring,
 .loader-text {
 
@@ -204,15 +224,6 @@
     min-height: 80px;
   }
 
-
-  .payouts & {
-    .lds-dual-ring {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        //top: 70px;
-      }
-    }
-  }
 
   .payments .payment-card & {
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {

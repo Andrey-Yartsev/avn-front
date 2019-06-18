@@ -19,7 +19,7 @@
     </template>
     <template v-else>
       <div
-        class="lds-dual-ring transparent small with-text not-fullscreen"
+        class="lds-dual-ring transparent small with-text not-fullscreen processing-loader"
         v-if="processing"
       >
         <div class="loader-text">Media is currently processing</div>

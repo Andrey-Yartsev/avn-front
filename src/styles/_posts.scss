@@ -60,16 +60,6 @@
 
     .media {
 
-      .lds-dual-ring {
-        display: block;
-        pointer-events: none;
-
-        .loader-text {
-          color: #fff;
-          text-align: center;
-        }
-      }
-
       &:after {
         content: "";
         position: absolute;
@@ -87,7 +77,7 @@
 
   .media {
 
-    .lds-dual-ring {
+    .lds-dual-ring:not(.processing-loader) {
       display: none;
     }
   }
