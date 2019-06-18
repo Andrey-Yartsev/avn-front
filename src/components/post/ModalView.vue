@@ -8,7 +8,7 @@
           v-if="index > 0"
         ></div>
         <div class="content content_column-mob">
-          <div class="postPageWrapper">
+          <div class="postPageWrapper postPageWrapper_in-popup">
             <PostLargeView
               v-if="post"
               :post="post"
