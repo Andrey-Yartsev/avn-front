@@ -249,6 +249,7 @@
             <MoneyTable
               :data="moneyTableData"
               :currentPeriodType="currentPeriodType"
+              ref="moneyTable"
             />
           </div>
         </div>
@@ -1155,6 +1156,10 @@ export default {
       }
     },
     onData(data) {
+      if (data.financeChanged) {
+        this.$refs.moneyTable.fetchFinance();
+        return;
+      }
       if (!data.statistics) {
         return;
       }
