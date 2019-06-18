@@ -31,8 +31,11 @@
     >
       <figure
         v-if="media"
-        class="explore-media locked-wrapper explore-media_processing"
-        :class="{ 'locked-wrapper': media.locked }"
+        class="explore-media"
+        :class="{
+          'explore-media_processing': post.mediaType === 'processing',
+          'locked-wrapper': media.locked || post.mediaType === 'processing'
+        }"
       >
         <div v-if="!media.canView" class="locked-picture icn-item">
           <img class="locked" :src="'data:image/jpeg;base64,' + media.locked" />
@@ -65,7 +68,10 @@
               >{{ post.commentsCount }}</span
             >
           </span>
-          <span class="explore-media__name" v-if="!shouldBePoster">
+          <span
+            class="explore-media__name"
+            v-if="!shouldBePoster && from !== 'profile/home'"
+          >
             <span class="name">{{ post.author.name }}</span>
           </span>
           <div
@@ -78,6 +84,7 @@
           </div>
 
           <div
+            v-if="post.mediaType === 'processing'"
             class="lds-dual-ring transparent small with-text not-fullscreen processing-loader"
           >
             <div class="loader-text">Media is currently processing</div>
