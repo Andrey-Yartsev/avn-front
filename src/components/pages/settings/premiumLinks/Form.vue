@@ -21,7 +21,7 @@
                 <span class="label">Price</span>
                 <span class="price__field field-symbol-currency">
                   <input
-                    class="field-gap_currency field-gap_timeunit"
+                    class="field-gap_currency"
                     type="number"
                     min="0"
                     step="0.01"
