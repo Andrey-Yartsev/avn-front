@@ -801,9 +801,9 @@ button {
 
     &.disabled,
     &[disabled] {
-      opacity: 1;
+      opacity: .1;
       pointer-events: none;
-      color: rgba(124, 139, 150, 0.18);
+      color: $main-color;
     }
   }
 

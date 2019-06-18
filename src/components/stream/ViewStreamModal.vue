@@ -59,7 +59,7 @@
             <button
               @click="sendComment"
               type="button"
-              class="btn-send btn-send_inside-field icn-item"
+              class="btn-send btn-send_inside-field icn-item icn-size_lg"
               :disabled="!newComment.length"
             ></button>
           </form>
