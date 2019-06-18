@@ -103,6 +103,14 @@
               Turning off two factor verification will make your account less
               secure
             </div>
+
+            <button
+              type="submit"
+              class="btn lg btn_fix-width hidden-mobile"
+              :disabled="!otpCode"
+            >
+              Confirm
+            </button>
           </div>
         </div>
       </div>
@@ -227,7 +235,9 @@ export default {
     },
     confirmOtp() {
       if (this.user.otpEnable) {
-        this.$store.dispatch("otp/deleteCode", this.otpCode);
+        this.$store.dispatch("otp/deleteCode", this.otpCode).catch(() => {
+          this.otpCode = "";
+        });
         setTimeout(() => {
           this.$store.dispatch("otp/fetchInitCodes");
         }, 3000);

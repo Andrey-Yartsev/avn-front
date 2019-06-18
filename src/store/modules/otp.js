@@ -64,12 +64,25 @@ const actions = {
     });
   },
   deleteCode({ dispatch }, code) {
-    OtpApi.deleteCode(code).then(async response => {
-      response = await response.json();
-      if (response.error) {
-        return;
-      }
-      dispatch("profile/extend", { otpEnable: false }, { root: true });
+    return new Promise((accept, reject) => {
+      OtpApi.deleteCode(code).then(async response => {
+        response = await response.json();
+        if (response.error) {
+          dispatch(
+            "global/flashToast",
+            {
+              text: response.error.message,
+              type: "error"
+            },
+            {
+              root: true
+            }
+          );
+          reject();
+        }
+        dispatch("profile/extend", { otpEnable: false }, { root: true });
+        accept();
+      });
     });
   }
 };
