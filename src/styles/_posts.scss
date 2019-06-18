@@ -72,12 +72,17 @@
         z-index: 0;
         pointer-events: none;
       }
+
+      .lds-dual-ring {
+        display: block;
+        pointer-events: none;
+      }
     }
   }
 
   .media {
 
-    .lds-dual-ring:not(.processing-loader) {
+    .lds-dual-ring {
       display: none;
     }
   }
