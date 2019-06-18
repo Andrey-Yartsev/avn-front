@@ -498,13 +498,6 @@
   &.post-popup {
     overflow: visible;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: auto;
-      max-width: 100%;
-      box-shadow: none;
-      background-color: transparent;
-    }
-
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-radius: 0;
       position: fixed;
@@ -512,6 +505,15 @@
       bottom: 0;
       top: 0;
       max-width: 100%;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      width: auto;
+      max-width: 100%;
+      box-shadow: none;
+      background-color: transparent;
+      padding-top: 38px;
+      padding-bottom: 38px;
     }
 
     .lightbox-post & {
@@ -569,7 +571,6 @@
       color: #fff;
       opacity: .7;
       font-size: 30px;
-      //padding: 7px 10px;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         right: auto;

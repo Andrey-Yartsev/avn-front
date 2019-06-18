@@ -573,22 +573,11 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 1;
       padding: 0;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 360px;
-      max-width: calc(100% - 360px);
-    }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 calc(100% - 360px);
-        width: calc(100% - 360px);
-      }
     }
 
     .lightbox-post & {
@@ -637,10 +626,6 @@
 
     .postPage & {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        //max-height: calc(100vh - 210px);
-      }
-
       @include media-breakpoint-up($desktop-breakpoint) {
         width: auto;
         height: auto;
@@ -650,6 +635,13 @@
 
       @media (min-height: 560px) and (min-width: 768px) {
         max-height: calc(100vh - 120px);
+      }
+
+      .popup & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          max-height: calc(100vh - 114px);
+        }
       }
     }
 

@@ -30,7 +30,6 @@
     overflow: hidden;
     flex-wrap: wrap;
     border-radius: 5px;
-    //min-height: 440px;
     min-height: calc(100vh - 160px);
   }
 
@@ -172,6 +171,15 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: calc(100vh - 75px);
     }
+
+    .media {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 1;
+        min-width: 360px;
+        max-width: calc(100% - 360px);
+      }
+    }
   }
 
   &_in-popup {
@@ -179,6 +187,14 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       min-height: auto;
+    }
+
+    .media {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 calc(100% - 360px);
+        width: calc(100% - 360px);
+      }
     }
   }
 
@@ -260,11 +276,6 @@
       right: 0;
       overflow-y: auto;
       flex-direction: column;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 120px);
-      min-height: 440px;
     }
   }
 
