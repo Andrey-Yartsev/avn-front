@@ -216,7 +216,9 @@ export default {
   mounted() {
     this.otpEnable = this.user.otpEnable;
     this.$store.dispatch("sessions/fetch");
-    this.$store.dispatch("otp/fetchInitCodes");
+    if (!this.otpEnable) {
+      this.$store.dispatch("otp/fetchInitCodes");
+    }
   },
 
   methods: {
