@@ -51,7 +51,7 @@ export default {
         this.close();
         this.$store.dispatch("chat/fetchMessagesDefault");
       };
-      const amount = parseInt(this.data.price.replace(/\$/, ""));
+      const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
       this._pay(
         {
           paymentType: "message",
