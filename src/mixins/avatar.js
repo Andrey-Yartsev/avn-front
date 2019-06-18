@@ -38,17 +38,28 @@ export default {
     saveAvatar() {
       return new Promise(accept => {
         this.avatarUploading = true;
-        upload(this.$refs.avatar.files[0]).then(fileName => {
-          this.$store
-            .dispatch("profile/extend", {
-              avatar: fileName
-            })
-            .then(() => {
-              this.avatarPreview = "";
-              this.avatarUploading = false;
-              accept();
+        upload(this.$refs.avatar.files[0])
+          .then(fileName => {
+            this.$store
+              .dispatch("profile/extend", {
+                avatar: fileName
+              })
+              .then(() => {
+                this.avatarPreview = "";
+                this.avatarUploading = false;
+                accept();
+              });
+          })
+          .catch(e => {
+            this.$store.dispatch("global/flashToast", {
+              text: e.message && e.message,
+              type: "error"
             });
-        });
+
+            this.avatarPreview = "";
+            this.avatarUploading = false;
+            this.$refs.avatar.value = "";
+          });
       });
     },
     removeAvatar() {

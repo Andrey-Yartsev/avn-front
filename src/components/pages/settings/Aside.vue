@@ -40,8 +40,8 @@
                 for="avatar"
                 class="select-user-image select-user-image_avatar"
                 :class="{ 'single-btn': !user.avatar }"
-                ><span class="icn-media icn-item"></span
-              ></label>
+                ><span class="icn-media icn-item" />
+              </label>
               <input
                 type="file"
                 id="avatar"
