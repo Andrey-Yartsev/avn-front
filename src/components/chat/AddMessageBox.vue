@@ -55,7 +55,7 @@
           <span class="price-message">${{ price }}</span>
           <button
             type="button"
-            class="btn-clear-price btn-reset btn-reset_fix-sizes btn-reset_ml icn-item"
+            class="btn-clear-price btn-reset btn-reset_fix-sizes btn-reset_ml icn-item icn-pos_center"
             @click="resetPrice"
           ></button>
         </div>

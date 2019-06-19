@@ -208,6 +208,16 @@
     }
   }
 
+  &-pos {
+
+    &_center {
+
+      &:after {
+        @include position-center;
+      }
+    }
+  }
+
   &-block {;
     color: red;
     height: 22px;

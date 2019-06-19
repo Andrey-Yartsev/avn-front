@@ -59,7 +59,6 @@
   &:after {
     content: "\E63D";
     color: $secondary-color;
-    @include position-center;
   }
 }
 

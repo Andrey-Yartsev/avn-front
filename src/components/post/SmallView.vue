@@ -37,7 +37,10 @@
           'locked-wrapper': media.locked || post.mediaType === 'processing'
         }"
       >
-        <div v-if="!media.canView" class="locked-picture icn-item">
+        <div
+          v-if="!media.canView"
+          class="locked-picture icn-item icn-pos_center"
+        >
           <img class="locked" :src="'data:image/jpeg;base64,' + media.locked" />
         </div>
         <template v-else>

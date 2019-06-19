@@ -54,7 +54,7 @@
               />
               <span
                 v-if="user.avatar"
-                class="reset-user-image reset-avatar icn-item btn-reset"
+                class="reset-user-image reset-avatar icn-item btn-reset icn-pos_center"
                 :class="{ 'icn-size_lg': $mq === 'mobile' }"
                 @click="showAvatarConfirm"
               ></span>
@@ -64,7 +64,7 @@
           <span
             v-if="!bgRemoved && user.header"
             v-show="showBgAdd"
-            class="reset-user-image reset-bg icn-item btn-reset"
+            class="reset-user-image reset-bg icn-item btn-reset icn-pos_center"
             :class="{ 'icn-size_lg': $mq === 'mobile' }"
             @click="showBgConfirm"
           />

@@ -1,5 +1,8 @@
 <template>
-  <div class="locked-picture icn-item" @click.prevent="openModal">
+  <div
+    class="locked-picture icn-item icn-pos_center"
+    @click.prevent="openModal"
+  >
     <img
       class="locked"
       :src="image"

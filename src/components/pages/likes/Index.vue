@@ -7,7 +7,7 @@
       class="addPost-btn-float hidden-desktop"
       to="/addPost"
       v-if="isAuth()"
-      ><span class="icn-item icn-post icn-size_lg"
+      ><span class="icn-item icn-post icn-size_lg icn-pos_center"
     /></router-link>
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" v-if="$mq === 'desktop'" />

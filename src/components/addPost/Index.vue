@@ -19,7 +19,7 @@
           <span class="post-datetime__value">{{ formattedDate }}</span>
           <span
             @click="resetDatetime"
-            class="datetime-value__reset icn-item btn-reset btn-reset_prim-color"
+            class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
           />
         </div>
       </div>
@@ -146,7 +146,7 @@
               <span class="post-datetime__value">{{ formattedDate }}</span>
               <span
                 @click="resetDatetime"
-                class="datetime-value__reset icn-item btn-reset btn-reset_sec-color"
+                class="datetime-value__reset icn-item btn-reset btn-reset_sec-color icn-pos_center"
               />
             </div>
           </div>
@@ -294,7 +294,7 @@
             <span class="post-datetime__value">{{ formattedDate }}</span>
             <span
               @click="resetDatetime"
-              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color"
+              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
             />
           </div>
         </div>
