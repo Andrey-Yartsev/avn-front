@@ -13,7 +13,7 @@
         <span class="select__text icn-item">{{ label }}</span>
       </div>
       <div class="options-wrapper">
-        <span class="close icn-item" @click="toggle"></span>
+        <span class="close icn-item icn-size_lg" @click="toggle" />
         <p>{{ text }}</p>
         <div class="options-wrap">
           <div class="options" data-type="primary">
