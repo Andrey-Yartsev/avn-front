@@ -75,6 +75,22 @@
         transform: translate(-50%, 0);
       }
 
+      .notifications-container & {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          transform: translate(-50%, calc(-50% + 38px));
+        }
+
+        &:after {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            width: 36px;
+            height: 36px;
+            margin-top: -30px;
+          }
+        }
+      }
+
       &.lowered {
         top: 75%;
       }

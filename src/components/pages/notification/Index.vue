@@ -53,10 +53,17 @@
         :items="items"
         :scrollFunction="scrollFunction"
       />
-      <div class="msg-no-content">
+      <div class="msg-no-content" v-if="!items.length && !loading">
         <div class="msg-no-content__text">
-          {{ loading ? "Loading..." : "Nothing happened yet" }}
+          Nothing happened yet
         </div>
+      </div>
+
+      <div
+        class="lds-dual-ring transparent small with-text not-fullscreen"
+        v-if="loading"
+      >
+        <div class="loader-text">Loading...</div>
       </div>
     </div>
     <Footer
