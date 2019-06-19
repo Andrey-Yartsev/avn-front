@@ -1820,83 +1820,98 @@ export default {
 
       switch (name) {
         case "followers":
-          this.followersChart = window.AmCharts.makeChart("followers_chart", {
-            ...chartOptions,
-            ...{
-              color: "#аа00",
-              graphs: this.getLinesChartGraph(
-                [
-                  {
-                    valueField: "followers",
-                    color: "#FF335A"
-                  },
-                  {
-                    valueField: "subscribers",
-                    color: "#ff9500"
-                  }
-                ],
-                {
-                  selectedLineName
+          this.followersChart = window.AmCharts.makeChart(
+            "followers_chart",
+            JSON.parse(
+              JSON.stringify({
+                ...chartOptions,
+                ...{
+                  color: "#аа00",
+                  graphs: this.getLinesChartGraph(
+                    [
+                      {
+                        valueField: "followers",
+                        color: "#FF335A"
+                      },
+                      {
+                        valueField: "subscribers",
+                        color: "#ff9500"
+                      }
+                    ],
+                    {
+                      selectedLineName
+                    }
+                  )
                 }
-              )
-            }
-          });
+              })
+            )
+          );
           break;
 
         case "posts":
-          this.postsChart = window.AmCharts.makeChart("posts_chart", {
-            ...chartOptions,
-            ...{
-              color: "#аа00",
-              graphs: this.getLinesChartGraph(
-                [
-                  {
-                    valueField: "posts",
-                    color: "#FF335A"
-                  },
-                  {
-                    valueField: "views",
-                    color: "#ff9500"
-                  },
-                  {
-                    valueField: "likes",
-                    color: "#67cc2e"
-                  },
-                  {
-                    valueField: "comments",
-                    color: "#3abfd3"
-                  }
-                ],
-                {
-                  selectedLineName
+          this.postsChart = window.AmCharts.makeChart(
+            "posts_chart",
+            JSON.parse(
+              JSON.stringify({
+                ...chartOptions,
+                ...{
+                  color: "#аа00",
+                  graphs: this.getLinesChartGraph(
+                    [
+                      {
+                        valueField: "posts",
+                        color: "#FF335A"
+                      },
+                      {
+                        valueField: "views",
+                        color: "#ff9500"
+                      },
+                      {
+                        valueField: "likes",
+                        color: "#67cc2e"
+                      },
+                      {
+                        valueField: "comments",
+                        color: "#3abfd3"
+                      }
+                    ],
+                    {
+                      selectedLineName
+                    }
+                  )
                 }
-              )
-            }
-          });
+              })
+            )
+          );
           break;
 
         case "stories":
-          this.storiesChart = window.AmCharts.makeChart("stories_chart", {
-            ...chartOptions,
-            ...{
-              color: "#7c8b96",
-              graphs: this.getLinesChartGraph(
-                [
-                  {
-                    valueField: "uploads",
-                    color: "#FF335A"
-                  },
-                  {
-                    valueField: "views",
-                    color: "#ff9500"
-                  }
-                ],
-                {
-                  selectedLineName
+          this.storiesChart = window.AmCharts.makeChart(
+            "stories_chart",
+            JSON.parse(
+              JSON.stringify({
+                ...chartOptions,
+                ...{
+                  color: "#7c8b96",
+                  graphs: this.getLinesChartGraph(
+                    [
+                      {
+                        valueField: "uploads",
+                        color: "#FF335A"
+                      },
+                      {
+                        valueField: "views",
+                        color: "#ff9500"
+                      }
+                    ],
+                    {
+                      selectedLineName
+                    }
+                  )
                 }
-              )
-            }
-          });
+              })
+            )
+          );
           break;
       }
     },
