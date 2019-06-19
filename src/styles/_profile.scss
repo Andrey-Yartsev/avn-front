@@ -1420,7 +1420,6 @@
     .icn-media {
 
       &:after {
-        font-size: 24px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 18px;

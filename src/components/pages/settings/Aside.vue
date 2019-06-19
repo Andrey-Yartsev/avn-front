@@ -40,7 +40,10 @@
                 for="avatar"
                 class="select-user-image select-user-image_avatar"
                 :class="{ 'single-btn': !user.avatar }"
-                ><span class="icn-media icn-item" />
+                ><span
+                  class="icn-media icn-item"
+                  :class="{ 'icn-size_lg': $mq === 'mobile' }"
+                />
               </label>
               <input
                 type="file"
@@ -52,6 +55,7 @@
               <span
                 v-if="user.avatar"
                 class="reset-user-image reset-avatar icn-item btn-reset"
+                :class="{ 'icn-size_lg': $mq === 'mobile' }"
                 @click="showAvatarConfirm"
               ></span>
             </template>
@@ -61,6 +65,7 @@
             v-if="!bgRemoved && user.header"
             v-show="showBgAdd"
             class="reset-user-image reset-bg icn-item btn-reset"
+            :class="{ 'icn-size_lg': $mq === 'mobile' }"
             @click="showBgConfirm"
           />
           <label
@@ -72,7 +77,10 @@
             <span class="select-user-image__text" v-if="!user.header">
               Add background picture
             </span>
-            <span class="icn-item icn-media"></span>
+            <span
+              class="icn-item icn-media"
+              :class="{ 'icn-size_lg': $mq === 'mobile' }"
+            />
           </label>
           <input
             type="file"
