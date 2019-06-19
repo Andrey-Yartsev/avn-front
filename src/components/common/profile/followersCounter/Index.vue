@@ -1,6 +1,6 @@
 <template>
-  <div class="profile-data">
-    <div class="item" v-if="profile && profile.followingCount">
+  <div class="profile-data" v-if="hasFollowings || hasFollowers || showLikes">
+    <div class="item" v-if="hasFollowings">
       <router-link
         to="/following"
         v-if="isOwner(profile.id)"
@@ -14,7 +14,7 @@
         <span class="data-label">Following</span>
       </template>
     </div>
-    <div class="item" v-if="profile.followersCount">
+    <div class="item" v-if="hasFollowers">
       <router-link
         to="/followers"
         v-if="isOwner(profile.id)"
@@ -28,12 +28,8 @@
         <span class="data-label">Followers</span>
       </template>
     </div>
-    <div class="item" v-if="profile && user && profile.id === user.id">
-      <router-link
-        to="/likes"
-        v-if="isOwner(profile.id)"
-        class="profile-data__link"
-      >
+    <div class="item" v-if="showLikes">
+      <router-link to="/likes" class="profile-data__link">
         <span class="data-value">{{ profile.favoritesCount }}</span>
         <span class="data-label">Likes</span>
       </router-link>
@@ -51,6 +47,22 @@ export default {
     profile: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    hasFollowings() {
+      return this.profile && this.profile.followingCount;
+    },
+    hasFollowers() {
+      return this.profile && this.profile.followersCount;
+    },
+    showLikes() {
+      return (
+        this.profile &&
+        this.user &&
+        this.isOwner(this.profile.id) &&
+        this.profile.favoritesCount
+      );
     }
   }
 };
