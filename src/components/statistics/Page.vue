@@ -55,12 +55,14 @@
       </div>
     </div>
     <div class="boxes">
+      <!--
       <PostsModal
         v-if="$store.state.modal.statPosts.show"
         :dataSet="tempDataSet"
         @periodChange="postsPeriodChange"
         ref="postsModal"
       />
+      -->
 
       <div class="cols">
         <div class="col col-1-3">
@@ -842,6 +844,10 @@ const matchChartCode = code => {
   };
 };
 
+const matchCodeByPrefix = (code, prefix) => {
+  return code.match(new RegExp(`${prefix}_(.*)`));
+};
+
 const chartStorage = {};
 Object.keys(chartTypes).forEach(chartType => {
   chartStorage[chartType] = {};
@@ -849,6 +855,11 @@ Object.keys(chartTypes).forEach(chartType => {
     chartStorage[chartType][periodType] = [];
   }
 });
+
+const topFollowersStorage = {};
+for (let periodType of periodTypeNames) {
+  topFollowersStorage[periodType] = {};
+}
 
 const barCount = 80;
 const colorScheme = 1;
@@ -935,7 +946,8 @@ export default {
       showedStats: {},
       profileMapData: [],
       topFollowers: null,
-      tempDataSet: [],
+      // tempDataSet: [],
+      dataCache: {}, // by period
       subscribedWsCodes: [],
       //
       chartDataSets,
@@ -1032,8 +1044,6 @@ export default {
       this.subscribeUserStatistics("view_profile_count_all");
       this.subscribeUserStatistics("view_profile_by_device_count_today");
       //
-      this.subscribeUserStatistics("top_followers_count_today");
-      //
       // this.subscribeUserStatistics("current_user_total_balance_info");
       // this.subscribeUserStatistics("paid_subscriptions_histogram_all");
       // this.subscribeUserStatistics("tips_histogram_all");
@@ -1069,6 +1079,8 @@ export default {
       this.subscribeUserStatistics(
         "current_subscribers_detailed_histogram_" + period
       );
+
+      this.subscribeUserStatistics("top_followers_count_" + period);
     },
     setCounter(ref, title, value, postfix) {
       if (title) {
@@ -1170,7 +1182,7 @@ export default {
         return;
       }
 
-      this.tempDataSet.push(data);
+      // this.tempDataSet.push(data);
 
       if (this.$store.state.modal.statPosts.show) {
         this.$refs.postsModal.$refs.posts.processData(data);
@@ -1180,10 +1192,11 @@ export default {
     },
     processData(data, store) {
       this.showedStats[data.statistics.code] = data.statistics.time;
+
       const statData =
         "NaN" === data.statistics.data ? 0 : data.statistics.data;
 
-      const r = matchChartCode(data.statistics.code);
+      let r = matchChartCode(data.statistics.code);
       if (r) {
         if (r.periodType !== this.currentPeriodType) {
           return;
@@ -1205,6 +1218,13 @@ export default {
         if (store) {
           chartStorage[r.chartType][r.periodType].push(data);
         }
+        return;
+      }
+
+      r = matchCodeByPrefix(data.statistics.code, "top_followers_count");
+      if (r) {
+        this.updateTopFollowers(statData);
+        topFollowersStorage[this.currentPeriodType] = statData;
         return;
       }
 
@@ -1261,14 +1281,6 @@ export default {
         case "view_profile_by_country_count_today":
           this.updateMap(statData);
           break;
-
-        case "top_followers_count_today":
-          this.updateTopFollowers(statData);
-          break;
-
-        // case "current_user_total_balance_info":
-        //   this.updateTotalBalance(statData);
-        //   break;
       }
     },
     buildScales() {
@@ -1762,10 +1774,11 @@ export default {
       donut.validateData();
     },
     async updateTopFollowers(statData) {
-      const _ids = Object.keys(statData);
+      let _ids = Object.keys(statData);
       if (!_ids.length) {
         return;
       }
+      _ids = _ids.slice(0, 5);
       const ids = _ids.map(id => "ids[]=" + id);
       const response = await request(
         `users?access-token=` +
@@ -1893,6 +1906,10 @@ export default {
         this.processData(v, false);
       }
       this[name + "Chart"].validateData();
+    },
+    updateTopFollowersFromCache() {
+      this.topFollowers = [];
+      this.updateTopFollowers(topFollowersStorage[this.currentPeriodType]);
     }
   },
   watch: {
@@ -1906,6 +1923,7 @@ export default {
         }
         this[chartType + "Chart"].validateData();
       });
+      this.updateTopFollowersFromCache();
     }
   }
 };
