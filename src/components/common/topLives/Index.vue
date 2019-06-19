@@ -1,7 +1,7 @@
 <template>
   <div class="storyView storyView_top-live">
     <div class="story">
-      <router-link to="explore/live" class="avatar avatar_lg avatar_lg-desk">
+      <div class="avatar avatar_lg avatar_lg-desk" @click="openLive">
         <span class="avatar__slider with-story">
           <span
             :class="[
@@ -20,7 +20,7 @@
           </span>
         </span>
         <div class="stream-online-label">live</div>
-      </router-link>
+      </div>
       <div class="story-info">
         <div class="story-header">
           <div class="name">
@@ -66,6 +66,16 @@ export default {
     init() {
       this.setData();
       this.run();
+    },
+    openLive() {
+      if (this.lives[this.current]) {
+        this.$store.dispatch("modal/show", {
+          name: "stream",
+          data: {
+            stream: this.lives[this.current]
+          }
+        });
+      }
     }
   },
   mounted() {
