@@ -147,7 +147,7 @@ export default {
   watch: {
     isShowW9From(value) {
       if (value) {
-        this.$router.push("/settings/w9");
+        this.$router.replace("/settings/w9");
       }
     }
   },
