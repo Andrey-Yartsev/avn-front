@@ -12,7 +12,7 @@
 
       <router-link
         to="/logout"
-        class="link-title btn-logout icn-item"
+        class="link-title btn-logout icn-item icn-size_lg"
         v-if="showLogoutButton"
       />
 
