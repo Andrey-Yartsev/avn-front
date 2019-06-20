@@ -27,6 +27,9 @@
           >
             State
           </div>
+          <div
+            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
+          />
         </div>
       </div>
     </div>
@@ -61,16 +64,20 @@
             >
               {{ v.trialState }}
             </div>
+            <div
+              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
+            >
+              <button
+                type="button"
+                class="btn-reset btn-reset_fix-sizes btn-reset_sec-color icn-item icn-pos_center"
+                @click="remove(v)"
+              />
+            </div>
             <!--
           <div
             class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_status"
           >
             <button type="button" class="btn-unblock"><span class="icn-item icn-block"></span></button>
-          </div>
-          <div
-            class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c table__cell_remove"
-          >
-            <button type="button" class="btn-reset btn-reset_fix-sizes btn-reset_sec-color icn-item icn-pos_center" @click="remove(v)"></button>
           </div>
           --></div>
         </div>
@@ -90,17 +97,26 @@ export default {
   },
   methods: {
     remove(user) {
-      this.$emit("remove", user);
+      this.$store
+        .dispatch("trial/delete", {
+          trialId: user.trialId
+        })
+        .then(() => {
+          this.init();
+        });
     },
     dt1(date) {
       return moment(date).format("MMM DD");
     },
     dt2(date) {
       return moment(date).format("HH:mm");
+    },
+    init() {
+      this.$store.dispatch("trial/getModels", {});
     }
   },
   created() {
-    this.$store.dispatch("trial/getModels", {});
+    this.init();
   }
 };
 </script>

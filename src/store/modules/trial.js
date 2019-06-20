@@ -94,6 +94,20 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "delete",
+  apiPath: "users/{code}/trial",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{code}/, params.trialId);
+  }
+});
+
+createRequestAction({
   prefix: "sendCodeStatus",
   apiPath: "users/trial",
   state,
