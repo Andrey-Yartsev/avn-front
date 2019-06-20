@@ -9,7 +9,7 @@ const state = {
   marker: null,
   offset: 0,
   allDataReceived: false,
-  limit: 10,
+  limit: 20,
   posts: []
 };
 
@@ -21,7 +21,7 @@ const mutations = {
     state.marker = null;
     state.offset = 0;
     state.allDataReceived = false;
-    state.limit = 10;
+    state.limit = 20;
   },
   checkResult(state, items) {
     if (items.length < state.limit) {

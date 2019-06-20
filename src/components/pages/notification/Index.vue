@@ -137,7 +137,8 @@ export default {
           if (
             v.type === prevItem.type &&
             v.type !== "tip" &&
-            v.type !== "mentioned"
+            v.type !== "mentioned" &&
+            v.type !== "subscribed"
           ) {
             prevItem.mergedByName =
               v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
