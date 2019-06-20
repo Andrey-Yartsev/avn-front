@@ -53,7 +53,28 @@ export default {
           return "@" + item.original.username;
         },
         menuItemTemplate: function(item) {
-          return item.original.name;
+          let template = ``;
+          template += `<span contenteditable="false">
+<a tabindex="2" class="user">
+  <span class="avatar avatar_gap-r-sm avatar_sm">
+    <span class="avatar__img">`;
+          if (item.original.avatar) {
+            template += `<img src="${item.original.avatar}">`;
+          }
+          template += `
+    </span>
+  </span>
+  <div class="username-group">
+    <div class="user__name">
+      <div class="name">${item.original.name}</div>
+      <span class="verified-user icn-item"></span>
+    </div>
+    <span class="user-login reset-ml">${item.original.username}</span>
+  </div>
+</a>
+</span>
+`;
+          return template;
         }
       };
     }
