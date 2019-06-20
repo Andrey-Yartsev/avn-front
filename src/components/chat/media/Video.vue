@@ -4,7 +4,7 @@
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
     :style="{
-      'width': `100%`,
+      width: `100%`,
       'max-width': `${media.preview.width}px`,
       'max-height': `${media.preview.height}px`
     }"
@@ -18,7 +18,7 @@
         :height="media.preview.height"
         :style="{
           'max-width': `${media.preview.width}px`,
-          'width': `auto`,
+          width: `auto`,
           'max-height': `${media.preview.height}px`
         }"
       />
@@ -52,7 +52,7 @@
         ref="video"
         class="rounded-corners media-content"
         :style="{
-          'width': `100%`,
+          width: `100%`,
           'max-width': `${media.preview.width}px`
         }"
       >
