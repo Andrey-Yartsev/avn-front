@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 160px;
+  width: 320px;
   z-index: 999999;
   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
@@ -12,7 +12,7 @@
 
   ul {
     margin: 0;
-    padding: 10px 0;
+    padding: 5px 0;
     list-style: none;
     background-color: $white;
     border-radius: 5px;
@@ -24,7 +24,7 @@
   }
 
   li {
-    padding: 5px 10px;
+    padding: 8px 10px;
     cursor: pointer;
     color: $secondary-color;
     transition: color .3s, background-color .2s;
@@ -43,7 +43,7 @@
     }
 
     span {
-      font-weight: bold;
+      display: block;
     }
 
     &.no-match {
@@ -53,6 +53,28 @@
 
   .menu-highlighted {
     font-weight: bold;
+  }
+
+  .avatar {
+    transition: transform .3s;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    color: $main-color;
+
+    &:hover {
+
+      .avatar {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .username-group {
+    max-width: calc(100% - 40px);
   }
 
 }
