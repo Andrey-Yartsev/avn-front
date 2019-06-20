@@ -46,7 +46,7 @@
                 @click="messageClick(v)"
               >
                 <span
-                  class="message"
+                  class="message rounded-corners"
                   :class="{ 'message-locked': v.textLength && isLocked(v) }"
                   v-if="v.textLength"
                 >

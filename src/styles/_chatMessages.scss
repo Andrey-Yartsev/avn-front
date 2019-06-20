@@ -36,21 +36,19 @@
         overflow: hidden;
         border-radius: 0 20px 20px 0;
       }
+    }
 
-      img,
-      video {
-        border-radius: 20px;
-        max-height: 60vh;
-        max-width: 100%;
-        width: auto;
-        object-fit: cover;
-        object-position: left;
+    &-content {
+      max-height: 60vh;
+      max-width: 100%;
+      width: auto;
+      object-fit: cover;
+      object-position: left top;
 
-        @include media-breakpoint-up($tablet-breakpoint) {
-          max-height: calc(81vh - 180px);
-          margin-left: 0;
-          margin-right: 0;
-        }
+      @include media-breakpoint-up($tablet-breakpoint) {
+        max-height: calc(81vh - 180px);
+        margin-left: 0;
+        margin-right: 0;
       }
     }
 
@@ -213,71 +211,21 @@
 
   &.notAuthorMessage {
 
-    .message {
-      background-color: rgba(124, 139, 150, 0.2);
+    .rounded-corners {
       border-radius: 0 20px 20px 0;
-
-      + .media {
-
-        .media-item {
-
-          img,
-          video,
-          .video-placeholder {
-            border-radius: 0 20px 20px 0;
-          }
-        }
-      }
     }
 
-    .messageWrapper {
-
-      .media {
-
-        &-item {
-
-          img,
-          video,
-          .video-placeholder {
-            border-radius: 0 20px 20px 0;
-          }
-        }
-
-        img,
-        video {
-          margin: 0;
-        }
-
-        .no-media-text {
-          border-radius: 0 20px 20px 0;
-        }
-      }
-
-      //&.lockedMessage {
-      //  cursor: pointer;
-      //
-      //  .media {
-      //
-      //    &:after {
-      //      content: "\E61B";
-      //      @include icon-font;
-      //      font-size: 42px;
-      //      position: absolute;
-      //      left: 50%;
-      //      top: 50%;
-      //      transform: translate(-50%, -50%);
-      //      opacity: 0.7;
-      //      color: #fff;
-      //      text-shadow: $shadow-light;
-      //    }
-      //  }
-      //}
+    .message {
+      background-color: rgba(124, 139, 150, 0.2);
     }
 
     &.firstMessageInGroup {
 
       .message {
-        border-top-left-radius: 20px;
+
+        &.rounded-corners {
+          border-top-left-radius: 20px;
+        }
       }
     }
 
@@ -302,9 +250,12 @@
     margin-left: auto;
     margin-right: 0;
 
+    .rounded-corners {
+      border-radius: 20px 0 0 20px;
+    }
+
     .message {
       background-color: $primary-color;
-      border-radius: 20px 0 0 20px;
 
       &:before {
         color: var(--primary-color);
@@ -318,12 +269,6 @@
 
         .media-item {
           justify-content: flex-end;
-
-          img,
-          video,
-          .video-placeholder {
-            border-radius: 20px 0 0 20px;
-          }
         }
       }
     }
@@ -333,34 +278,25 @@
       &.lockedMessage {
         opacity: 0.5;
       }
-
-      .media {
-
-        &-item {
-
-          img,
-          video,
-          .video-placeholder {
-            border-radius: 20px 0 0 20px;
-          }
-        }
-      }
     }
 
     &.firstMessageInGroup {
 
       .message {
-        border-top-right-radius: 20px;
+
+        &.rounded-corners {
+          border-top-right-radius: 20px;
+        }
       }
     }
 
     .media {
+
+      &-content {
+        margin-right: 0;
+      }
+
       &-item {
-        img,
-        video {
-          border-radius: 20px 0 0 20px;
-          margin-right: 0;
-        }
 
         .postLink {
           justify-content: flex-end;
@@ -375,119 +311,53 @@
 .messageContent {
   z-index: 1;
   display: inline-block;
-  width: 100%;
+  width: calc(100% - 46px);
+  flex: 1;
 }
 
 .messageWrapper {
 
   .video-placeholder {
     overflow: hidden;
+
+    .media-content {
+      transition: opacity .3s;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.show-player {
+
+      img {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      video {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
   }
 
   &.lockedMessage {
 
-    //.message {
-    //  color: $secondary-color;
-    //}
+    .notAuthorMessage & {
 
-    &.messageTypeText {
-      .message {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        max-height: 200px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          max-height: 400px;
-        }
-      }
-    }
-
-    &.messageTypePhoto,
-    &.messageTypeVideo {
-      display: flex;
-      align-items: center;
-      align-content: center;
-      justify-content: center;
-      min-width: 140px;
-      min-height: 32px;
-
-      .message {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 2;
-        margin-bottom: 0;
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
+      .video-placeholder {
+        position: static;
       }
 
       .media {
-        flex: 1;
-        height: 100%;
-        display: flex;
-        overflow: hidden;
         border-radius: 0 20px 20px 0;
-        opacity: 0.5;
-
-        &-item {
-          flex: 1;
-          height: 100%;
-          display: flex;
-        }
-      }
-
-      .locked-picture {
-        flex: 1;
-        width: 100%;
-
-        .locked {
-          width: 100%;
-          height: 100%;
-          opacity: 1;
-        }
-      }
-
-      .condition-unlock {
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.7);
-        padding: 8px 16px;
-        border-radius: 1000px;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        white-space: nowrap;
-      }
-    }
-
-    &.messageTypePhoto {
-      .locked-picture {
-        &:after {
-          display: none;
-        }
-      }
-    }
-
-    &.messageTypeVideo {
-      .locked-picture {
-        &:after {
-          content: "\E661";
-          @include icon-font;
-          position: absolute;
-          left: 15px;
-          bottom: 10px;
-          font-size: 40px;
-          color: #fff;
-          opacity: 0.8;
-          transition: all 0.3s;
-          top: auto;
-          transform: translate(0, 0);
-        }
+        overflow: hidden;
       }
     }
   }
@@ -591,6 +461,10 @@
         text-shadow: $shadow-light;
         z-index: 1;
       }
+    }
+
+    &-content {
+      width: auto;
     }
   }
 

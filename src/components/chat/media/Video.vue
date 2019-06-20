@@ -1,19 +1,25 @@
 <template>
   <div
-    class="video-placeholder icn-item"
+    class="video-placeholder icn-item rounded-corners"
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
+    :style="{
+      'width': `100%`,
+      'max-width': `${media.preview.width}px`,
+      'max-height': `${media.preview.height}px`
+    }"
   >
     <template v-if="media.locked">
       <img
         v-show="!showPlayer"
-        class="video-preview"
+        class="video-preview rounded-corners media-content"
         :src="'data:image/jpeg;base64,' + media.locked"
         :width="media.preview.width"
         :height="media.preview.height"
         :style="{
-          width: `${media.preview.width}px`,
-          height: `${media.preview.height}px`
+          'max-width': `${media.preview.width}px`,
+          'width': `auto`,
+          'max-height': `${media.preview.height}px`
         }"
       />
     </template>
@@ -26,14 +32,12 @@
       </div>
 
       <img
-        v-show="!showPlayer"
-        class="video-preview"
+        class="video-preview rounded-corners media-content"
         :src="media.preview.source"
         :width="media.preview.width"
         :height="media.preview.height"
         :style="{
-          width: `${media.preview.width}px`,
-          height: `${media.preview.height}px`
+          'max-width': `${media.preview.width}px`
         }"
       />
 
@@ -46,6 +50,11 @@
         :poster="media.preview.source"
         @play="play"
         ref="video"
+        class="rounded-corners media-content"
+        :style="{
+          'width': `100%`,
+          'max-width': `${media.preview.width}px`
+        }"
       >
         <source :src="media.src.source" type="video/mp4" />
       </video>
