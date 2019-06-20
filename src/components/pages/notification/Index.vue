@@ -59,11 +59,12 @@
         </div>
       </div>
 
-      <div
-        class="lds-dual-ring transparent small with-text not-fullscreen"
-        v-if="loading"
-      >
-        <div class="loader-text">Loading...</div>
+      <div class="loader-wrapper" v-if="!items.length && loading">
+        <div
+          class="lds-dual-ring transparent small with-text inline"
+        >
+          <div class="loader-text">Loading...</div>
+        </div>
       </div>
     </div>
     <Footer

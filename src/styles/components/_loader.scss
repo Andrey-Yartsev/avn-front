@@ -77,10 +77,6 @@
 
       .notifications-container & {
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          transform: translate(-50%, calc(-50% + 38px));
-        }
-
         &:after {
 
           @include media-breakpoint-up($desktop-breakpoint) {
@@ -248,4 +244,12 @@
     }
   }
 
+}
+
+.loader-wrapper {
+  text-align: center;
+
+  .lds-dual-ring {
+    margin-top: -24px;
+  }
 }

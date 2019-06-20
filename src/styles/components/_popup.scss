@@ -23,6 +23,10 @@
     bottom: 0;
     background: rgba(#000, 0.4);
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: fixed;
+    }
+
     .explore-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -769,7 +773,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 0;
-      margin: 0 auto 20px;
+      margin: 0 auto;
       position: static;
       min-height: auto;
     }
