@@ -99,6 +99,7 @@
         type="submit"
         class="btn block alt"
         :class="{ lg: largeControls }"
+        :disabled="isSaving"
       >
         Sign up
       </button>
@@ -132,6 +133,12 @@ export default {
   name: "SignUp",
 
   mixins: [Common, Signup, Form],
+
+  data() {
+    return {
+      isSaving: false
+    };
+  },
 
   components: {
     Recaptcha
@@ -192,13 +199,24 @@ export default {
     signUp() {
       this.$validator.validate().then(result => {
         if (result) {
-          this.$store.dispatch("signUp/" + this.signupAction, {
-            name: this.name,
-            username: this.username,
-            email: this.email,
-            password: this.password,
-            captcha: this.captcha
-          });
+          if (this.isSaving) return;
+          this.isSaving = true;
+          this.$store
+            .dispatch("signUp/" + this.signupAction, {
+              name: this.name,
+              username: this.username,
+              email: this.email,
+              password: this.password,
+              captcha: this.captcha
+            })
+            .then(() => {
+              this.isSaving = false;
+            })
+            .catch(() => {
+              this.isSaving = false;
+            });
+        } else {
+          this.isSaving = false;
         }
       });
     }
