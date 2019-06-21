@@ -69,9 +69,11 @@ export default {
   </span>
   <div class="username-group">
     <div class="user__name">
-      <div class="name">${item.original.name}</div>
-      <span class="verified-user icn-item"></span>
-    </div>
+      <div class="name">${item.original.name}</div>`;
+          if (item.original.isVerified) {
+            template += `<span class="verified-user icn-item"></span>`;
+          }
+          template += `</div>
     <span class="user-login reset-ml">${item.original.username}</span>
   </div>
 </a>
