@@ -27,9 +27,9 @@
             </div>
           </div>
         </div>
-        <div class="shadow-block no-padding" v-if="transactions.length">
+        <div class="shadow-block no-padding">
           <div class="table-wrapper">
-            <div class="table payments-table">
+            <div class="table payments-table" v-if="transactions.length">
               <template>
                 <div
                   class="PaymentsStatementsCollectionItemView"
@@ -76,17 +76,20 @@
                 </div>
               </template>
             </div>
-            <div class="empty-table-info">
+            <div
+              class="empty-table-info"
+              :class="{ show: !transactions.length && !transactionsLoading }"
+            >
               <span>Empty here for now</span>
             </div>
+            <div class="loader-container" v-if="transactionsLoading">
+              <Loader
+                :fullscreen="false"
+                text=""
+                class="transparent small no-text"
+              />
+            </div>
           </div>
-        </div>
-        <div class="shadow-block loader-container" v-if="transactionsLoading">
-          <Loader
-            :fullscreen="false"
-            text=""
-            class="transparent small no-text"
-          />
         </div>
       </div>
     </div>
