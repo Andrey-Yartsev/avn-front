@@ -154,7 +154,6 @@
                   name="subscribePrice"
                   v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
-                  :class="{ error: !isValid }"
                   v-validate="'subscription-price'"
                 />
               </span>
