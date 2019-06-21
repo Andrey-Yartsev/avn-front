@@ -8,6 +8,8 @@
       :src="image"
       :width="`${size.width}`"
       :height="`${size.height}`"
+      @contextmenu.prevent="() => false"
+      @dragstart.prevent="() => false"
     />
   </div>
 </template>

@@ -41,10 +41,19 @@
           v-if="!media.canView"
           class="locked-picture icn-item icn-pos_center"
         >
-          <img class="locked" :src="'data:image/jpeg;base64,' + media.locked" />
+          <img
+            class="locked"
+            :src="'data:image/jpeg;base64,' + media.locked"
+            @contextmenu.prevent="() => false"
+            @dragstart.prevent="() => false"
+          />
         </div>
         <template v-else>
-          <img :src="media.thumb.source" />
+          <img
+            :src="media.thumb.source"
+            @contextmenu.prevent="() => false"
+            @dragstart.prevent="() => false"
+          />
           <span
             v-if="post.media.length > 1"
             class="item-length item-length_photo"
