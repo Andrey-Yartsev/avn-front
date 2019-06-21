@@ -33,6 +33,8 @@
             @mouseup="resume"
             @touchstart="pause"
             @touchend="resume"
+            @contextmenu.prevent="() => false"
+            @dragstart.prevent="() => false"
           ></video>
         </div>
       </div>

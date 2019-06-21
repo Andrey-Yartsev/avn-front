@@ -1,6 +1,12 @@
 <template>
   <div class="postLink" @click="$emit('click')">
-    <img :src="src" :style="style" @load="() => (loaded = true)" />
+    <img
+      :src="src"
+      :style="style"
+      @load="() => (loaded = true)"
+      @contextmenu.prevent="() => false"
+      @dragstart.prevent="() => false"
+    />
   </div>
 </template>
 

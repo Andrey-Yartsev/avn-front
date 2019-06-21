@@ -64,7 +64,9 @@
                   :src="preview.fileContent"
                   class="storyPreview__video"
                   loop="true"
-                ></video>
+                  @contextmenu.prevent="() => false"
+                  @dragstart.prevent="() => false"
+                />
               </div>
               <div
                 v-if="preview.mediaType === 'video' && preview.fileContent"

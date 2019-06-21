@@ -30,7 +30,9 @@
           playsinline=""
           autoplay=""
           @click="click"
-        ></video>
+          @contextmenu.prevent="() => false"
+          @dragstart.prevent="() => false"
+        />
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay"></div>
           <div class="popup-container popup-container_block popup-alert">

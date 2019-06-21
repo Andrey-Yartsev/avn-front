@@ -196,6 +196,8 @@
             muted=""
             playsinline=""
             v-if="!isStopped"
+            @contextmenu.prevent="() => false"
+            @dragstart.prevent="() => false"
           />
         </div>
         <div id="stream-timer" v-if="!isStopped && !startingStream">

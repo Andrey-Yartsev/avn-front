@@ -10,6 +10,8 @@
     @play="play"
     @pause="calcDuration"
     :height="videoHeight"
+    @contextmenu.prevent="() => false"
+    @dragstart.prevent="() => false"
   >
     <source :src="video.source" type="video/mp4" />
   </video>

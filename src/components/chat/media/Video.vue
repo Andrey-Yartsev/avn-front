@@ -55,6 +55,8 @@
           width: `100%`,
           'max-width': `${media.preview.width}px`
         }"
+        @contextmenu.prevent="() => false"
+        @dragstart.prevent="() => false"
       >
         <source :src="media.src.source" type="video/mp4" />
       </video>
