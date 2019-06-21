@@ -102,6 +102,9 @@ export default {
       }
     },
     showBubble() {
+      if (this.$mq === "mobile") {
+        return;
+      }
       Bubble.open({
         a: this.$refs.name,
         username: this.comment.author.username
