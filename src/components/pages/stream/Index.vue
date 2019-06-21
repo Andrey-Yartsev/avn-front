@@ -205,10 +205,7 @@
           live
         </div>
         <div class="form-stream">
-          <Comments
-            :shownComments="shownComments"
-            :count="$mq === 'desktop' ? 20 : 10"
-          />
+          <Comments :shownComments="comments" :count="comments.length" />
           <form class="stream-comment-form" v-if="showCommentForm">
             <textarea
               ref="commentInput"
@@ -471,7 +468,7 @@ export default {
       if (diff > 5) {
         this.canBeSaved = true;
       }
-      this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
+      // this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
     },
     tryToStartStream() {
       this.startingStream = true;
