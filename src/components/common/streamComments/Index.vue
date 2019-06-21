@@ -1,21 +1,26 @@
 <template>
-  <div class="comments-list stream-comments-wrapper" v-if="comments.length">
+  <VuePerfectScrollbar
+    class="comments-list stream-comments-wrapper"
+    v-if="comments.length"
+  >
     <Comment
       v-for="comment in comments"
       :key="comment.comment + comment.hideTime"
       :comment="comment"
     />
-  </div>
+  </VuePerfectScrollbar>
 </template>
 
 <script>
 import Comment from "@/components/common/streamComments/Item";
 import takeRight from "lodash.takeright";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "StreamComments",
   components: {
-    Comment
+    Comment,
+    VuePerfectScrollbar
   },
   computed: {
     comments() {

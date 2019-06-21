@@ -20,16 +20,18 @@
               <label class="form-group-inner">
                 <span class="label">Price</span>
                 <span class="price__field field-symbol-currency">
-                  <input
-                    class="field-gap_currency"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    required
-                    name="snapchatPrice"
-                    v-model="snapchatPrice"
-                    v-validate="'required'"
-                  />
+                  <span class="form-field">
+                    <input
+                      class="field-gap_currency"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required
+                      name="snapchatPrice"
+                      v-model="snapchatPrice"
+                      v-validate="'required'"
+                    />
+                  </span>
                 </span>
               </label>
             </div>

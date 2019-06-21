@@ -145,22 +145,24 @@
             >
               <span class="label">Subscription</span>
               <span class="subscription__field field-symbol-currency">
-                <span class="subscription__per-month">per month</span>
-                <input
-                  class="field-gap_currency field-gap_timeunit"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  name="subscribePrice"
-                  v-model="localUser.subscribePrice"
-                  :disabled="!user.canEarn"
-                  v-validate="'subscription-price'"
-                />
+                <span class="form-field">
+                  <span class="subscription__per-month">per month</span>
+                  <input
+                    class="field-gap_currency field-gap_timeunit"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    name="subscribePrice"
+                    v-model="localUser.subscribePrice"
+                    :disabled="!user.canEarn"
+                    v-validate="'subscription-price'"
+                  />
+                </span>
+                <div class="error-info" v-if="fieldError('subscribePrice')">
+                  {{ fieldError("subscribePrice") }}
+                </div>
               </span>
             </label>
-            <div class="error-info" v-if="fieldError('subscribePrice')">
-              {{ fieldError("subscribePrice") }}
-            </div>
 
             <div class="form-group-inner subscription" v-if="!user.canEarn">
               <span class="label" v-if="$mq === 'desktop'"></span>
