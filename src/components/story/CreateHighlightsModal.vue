@@ -107,7 +107,12 @@
                       </div>
                       <div class="postLink">
                         <figure class="explore-media">
-                          <img v-if="story.thumb" :src="story.thumb.source" />
+                          <img
+                            v-if="story.thumb"
+                            :src="story.thumb.source"
+                            @contextmenu.prevent="() => false"
+                            @dragstart.prevent="() => false"
+                          />
                         </figure>
                       </div>
                     </div>

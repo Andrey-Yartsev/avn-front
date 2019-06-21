@@ -6,6 +6,11 @@
     <div class="postLink live">
       <figure class="explore-media">
         <img :src="imageSrc" />
+        <img
+          :src="imageSrc"
+          @contextmenu.prevent="() => false"
+          @dragstart.prevent="() => false"
+        />
         <div
           v-if="duraion && $mq === 'desktop'"
           class="item-length item-length_live hidden-mobile"
