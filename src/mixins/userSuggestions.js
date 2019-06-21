@@ -33,6 +33,9 @@ export default {
         values: this.usersSearch,
         lookup: "name",
         fillAttr: "name",
+        noMatchTemplate: function() {
+          return "<span class='no-results'>nothing found</span>";
+        },
         selectTemplate: function(item) {
           if (typeof item === "undefined") {
             return null;
