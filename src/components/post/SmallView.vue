@@ -28,6 +28,8 @@
       ]"
       :href="`/post/${post.id}`"
       @click.prevent="openModal"
+      @contextmenu.prevent="() => false"
+      @dragstart.prevent="() => false"
     >
       <figure
         v-if="media"
