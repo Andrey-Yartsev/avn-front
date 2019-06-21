@@ -239,10 +239,10 @@
     color-stop(0.2, #000)
   );
   padding: 0;
-  max-height: calc(100vh - 150px);
+  height: calc(100vh - 150px);
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    max-height: calc(100vh - 170px);
+    height: calc(100vh - 170px);
   }
 
   .stream & {

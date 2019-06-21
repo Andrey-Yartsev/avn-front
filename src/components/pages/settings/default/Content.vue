@@ -138,7 +138,10 @@
           <div class="form-group form-group_with-label">
             <label
               class="form-group-inner subscription"
-              :class="{ disabled: !user.canEarn }"
+              :class="{
+                disabled: !user.canEarn,
+                'field-invalid': fieldError('subscribePrice')
+              }"
             >
               <span class="label">Subscription</span>
               <span class="subscription__field field-symbol-currency">
@@ -152,9 +155,13 @@
                   v-model="localUser.subscribePrice"
                   :disabled="!user.canEarn"
                   :class="{ error: !isValid }"
+                  v-validate="'subscription-price'"
                 />
               </span>
             </label>
+            <div class="error-info" v-if="fieldError('subscribePrice')">
+              {{ fieldError("subscribePrice") }}
+            </div>
 
             <div class="form-group-inner subscription" v-if="!user.canEarn">
               <span class="label" v-if="$mq === 'desktop'"></span>
@@ -210,7 +217,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width"
-              :disabled="loading || !changed || !isValid"
+              :disabled="loading || !changed || !isFormValid"
             >
               Save changes
             </button>
@@ -226,11 +233,24 @@ import ColorSelect from "./ColorSelect";
 import Common from "../common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import moment from "moment-timezone";
+import { Validator } from "vee-validate";
+import Form from "@/mixins/form";
+
+Validator.extend("subscription-price", {
+  getMessage: () => "Required two numbers past the decimal",
+  validate: value => {
+    const m = value.toString().match(/^\d+\.(\d+)?$/);
+    if (!m) {
+      return true;
+    }
+    return m[1].length === 2;
+  }
+});
 
 export default {
   name: "ProfileSettingsContent",
 
-  mixins: [Common],
+  mixins: [Common, Form],
 
   components: {
     ColorSelect,
@@ -265,12 +285,6 @@ export default {
         return null;
       }
       return this.localUser.subscribePrice;
-    },
-    isValid() {
-      if (!this.subscribePrice) {
-        return true;
-      }
-      return !!this.subscribePrice.toString().match(/^\d+(\.\d+)?$/);
     },
     tz() {
       return moment.tz.names();

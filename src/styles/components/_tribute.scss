@@ -78,7 +78,10 @@
   }
 
   .no-results {
-    padding: 0px 15px;
+    padding: 10px 15px;
+    display: block;
+    text-align: center;
+    opacity: .5;
   }
 }
 
