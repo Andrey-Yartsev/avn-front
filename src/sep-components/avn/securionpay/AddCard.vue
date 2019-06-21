@@ -115,7 +115,7 @@
               <label class="form-group-inner">
                 <span class="label">Country</span>
                 <span class="form-group form-group_clear-gaps">
-                  <span class="form-field">
+                  <span class="select-wrapper form-field">
                     <select
                       name="country"
                       id="account-country"
@@ -142,7 +142,7 @@
               <label class="form-group-inner">
                 <span class="label">State/Country</span>
                 <span class="form-group form-group_clear-gaps">
-                  <span class="form-field">
+                  <span class="select-wrapper form-field">
                     <select
                       id="state"
                       name="state"
