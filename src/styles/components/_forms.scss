@@ -114,6 +114,7 @@ textarea,
   position: relative;
 }
 
+.field-loading,
 .field-invalid,
 .field-valid {
 
@@ -155,13 +156,6 @@ textarea,
   }
 }
 
-.for-unverified {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    max-width: 90%;
-  }
-}
-
 .field-valid {
 
   &.settings-nav__item,
@@ -171,6 +165,28 @@ textarea,
       content: "\E604";
       color: $default-secondary-color;
     }
+  }
+}
+
+.field-loading {
+
+  &.settings-nav__item,
+  .form-field {
+
+    &:before {
+      content: "";
+      background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
+      animation: lds-dual-ring 1.2s linear infinite;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.for-unverified {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-width: 90%;
   }
 }
 
