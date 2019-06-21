@@ -6,7 +6,7 @@
     <div class="trialsSectionCollection">
       <div class="border-top shadow-block referrals-link">
         <div class="referrals-url" v-if="link">
-          <a>{{ link }}</a>
+          <span class="referrals-url__link">{{ link }}</span>
         </div>
         <div class="referral-desc">
           <p class="subtext">
