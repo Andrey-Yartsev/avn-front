@@ -61,8 +61,8 @@ export default {
           if (item.original.avatar) {
             template += `<img src="${item.original.avatar}">`;
           }
+          template += `</span>`;
           template += `
-    </span>
   </span>
   <div class="username-group">
     <div class="user__name">
