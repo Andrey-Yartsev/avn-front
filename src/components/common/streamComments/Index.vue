@@ -1,14 +1,13 @@
 <template>
-  <VuePerfectScrollbar
-    class="comments-list stream-comments-wrapper"
-    v-if="comments.length"
-  >
-    <Comment
-      v-for="comment in comments"
-      :key="comment.comment + comment.hideTime"
-      :comment="comment"
-    />
-  </VuePerfectScrollbar>
+  <div class="comments-list stream-comments-wrapper" v-if="comments.length">
+    <VuePerfectScrollbar class="comments-list-scrolling">
+      <Comment
+        v-for="comment in comments"
+        :key="comment.comment + comment.hideTime"
+        :comment="comment"
+      />
+    </VuePerfectScrollbar>
+  </div>
 </template>
 
 <script>
