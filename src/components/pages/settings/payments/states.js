@@ -4,7 +4,6 @@ export default {
   mixins: [UserMixin],
   data() {
     return {
-      state: "",
       statesLoading: true
     };
   },
@@ -31,6 +30,7 @@ export default {
       return this.countries.find(v => code === v.code).id;
     },
     fetchCountries() {
+      this.$store.commit("payment/countries/reset");
       this.$store.dispatch("payment/countries/fetch").then(() => {
         if (this.defaultCountryCode) {
           const country = this.countries.find(
@@ -47,7 +47,9 @@ export default {
       });
     },
     fetchStates() {
+      this.$store.commit("states/reset");
       if (this.hasStates) {
+        this.statesLoading = true;
         this.$store
           .dispatch(
             "states/fetch",

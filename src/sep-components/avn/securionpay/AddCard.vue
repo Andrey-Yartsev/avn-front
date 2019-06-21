@@ -134,7 +134,11 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label" v-if="hasStates">
+            <div
+              class="form-group form-group_with-label"
+              :class="{ 'field-loading': statesLoading }"
+              v-if="hasStates"
+            >
               <label class="form-group-inner">
                 <span class="label">State/Country</span>
                 <span class="form-group form-group_clear-gaps">
@@ -145,7 +149,9 @@
                       v-model="userinfo.state"
                       v-validate="'required'"
                     >
-                      <option :value="null">Select State</option>
+                      <option :value="null">
+                        {{ statesLoading ? "Loading..." : "Select State" }}
+                      </option>
                       <option :value="v.name" v-for="v in states" :key="v.id">{{
                         v.name
                       }}</option>
@@ -481,6 +487,7 @@ export default {
           success: () => {
             this.reset();
             this.showCardForm = true;
+            this.fetchCountries();
           }
         }
       });
