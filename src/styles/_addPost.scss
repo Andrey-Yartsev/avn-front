@@ -434,7 +434,7 @@
     .actions {
       align-items: center;
       align-content: center;
-      margin-right: -13px;
+      margin-right: 3px;
       margin-left: 15px;
 
       .truncated & {
@@ -1243,7 +1243,7 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         position: absolute;
         top: 0;
-        right: 113px;
+        right: 97px;
         margin-right: 0;
       }
 
