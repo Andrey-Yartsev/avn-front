@@ -1,9 +1,9 @@
 <template>
   <div class="comment stream-message">
     <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
-      <span class="avatar__img">
-        <img :src="comment.user.avatar" v-if="comment.user" />
-      </span>
+      <span class="avatar__img"
+        ><img :src="comment.user.avatar" v-if="comment.user.avatar"
+      /></span>
     </span>
     <div class="comment-content stream-message__head">
       <div class="comment-body">
