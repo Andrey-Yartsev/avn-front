@@ -18,16 +18,7 @@
           <span class="value">{{ duraion }}</span>
           <span class="icn-item icn-live"></span>
         </div>
-        <div class="overlay">
-          <span class="explore-media__counter">
-            <span class="btn-icon likes icn-item icn-size_lg"></span>
-            {{ post.likesCount }}
-          </span>
-          <span class="explore-media__counter">
-            <span class="btn-icon comments icn-item icn-size_lg"></span>
-            {{ post.viewsCount }}
-          </span>
-        </div>
+        <div class="overlay" />
         <div class="live-short-info">
           <span class="explore-media__counter">
             <span class="btn-icon icn-viewer icn-item icn-size_lg"></span>
@@ -41,6 +32,14 @@
         </div>
       </figure>
     </div>
+    <span class="explore-media__counter explore-media__counter_likes">
+      <span class="btn-icon likes icn-item icn-size_lg"></span>
+      {{ post.likesCount }}
+    </span>
+    <span class="explore-media__counter explore-media__counter_comments">
+      <span class="btn-icon comments icn-item icn-size_lg"></span>
+      {{ post.viewsCount }}
+    </span>
   </div>
 </template>
 

@@ -452,6 +452,37 @@
       }
     }
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+
+        .overlay {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        .explore-media {
+
+          &__counter {
+            opacity: 1;
+
+            &_likes {
+              transform: translate(-66px, -50%) scale(1);
+            }
+
+            &_comments {
+              transform: translate(28px, -50%) scale(1);
+            }
+          }
+
+          &:before {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      }
+    }
+
     &:after {
       content: "";
       display: block;
@@ -565,12 +596,6 @@
             opacity: 1;
           }
         }
-
-        &:before,
-        .overlay {
-          opacity: 1;
-          transform: scale(1);
-        }
       }
     }
 
@@ -578,6 +603,14 @@
       display: inline-flex;
       align-content: center;
       align-items: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      color: #fff;
+      z-index: 2;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
 
       .liveView & {
         margin-bottom: 8px;

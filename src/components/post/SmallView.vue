@@ -72,16 +72,7 @@
             <span class="value">{{ mediaDuration }}</span>
             <span class="icn-item icn-camera"></span>
           </span>
-          <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster">
-            <span class="explore-media__counter"
-              ><span class="btn-icon likes icn-item icn-size_lg"></span
-              >{{ post.favoritesCount }}</span
-            >
-            <span class="explore-media__counter"
-              ><span class="btn-icon comments icn-item icn-size_lg"></span
-              >{{ post.commentsCount }}</span
-            >
-          </span>
+          <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <span
             class="explore-media__name"
             v-if="!shouldBePoster && from !== 'profile/home'"
@@ -106,6 +97,16 @@
         </template>
       </figure>
     </a>
+    <span
+      class="explore-media__counter explore-media__counter_likes"
+      @click="postLike"
+      ><span class="btn-icon likes icn-item icn-size_lg"></span
+      >{{ post.favoritesCount }}</span
+    >
+    <span class="explore-media__counter explore-media__counter_comments"
+      ><span class="btn-icon comments icn-item icn-size_lg"></span
+      >{{ post.commentsCount }}</span
+    >
   </div>
 </template>
 
@@ -113,10 +114,11 @@
 import { toHumanDuration } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import PostOpen from "@/mixins/postOpen";
+import userMixin from "@/mixins/user";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, PostOpen],
+  mixins: [ModalRouterGoto, PostOpen, userMixin],
   data() {
     return {
       isVisible: undefined,
@@ -160,6 +162,13 @@ export default {
 
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
+    },
+    postLike() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+      this.$emit("postLike");
     }
   }
 };
