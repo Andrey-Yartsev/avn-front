@@ -50,7 +50,7 @@
         </div>
       </div>
       <Transactions />
-      <div class="payments-nocard"></div>
+      <!--<div class="payments-nocard"></div>-->
     </div>
   </div>
 </template>
