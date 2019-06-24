@@ -70,7 +70,7 @@
         </div>
         <button
           type="button"
-          class="close close_shift-t close_shift-r close_default icn-item"
+          class="close close_shift-t close_shift-r close_default icn-item icn-size_lg"
           @click="close"
         />
       </div>
