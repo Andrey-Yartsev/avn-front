@@ -63,12 +63,10 @@
 }
 
 .twitter-value {
-  a &,
+
   a {
     color: $default-secondary-color;
-    .settings-nav & {
-      opacity: 1;
-    }
+
     &:before {
       content: "@";
     }
