@@ -148,12 +148,6 @@
   }
 }
 
-.btn_next {
-  @include media-breakpoint-up($desktop-breakpoint) {
-    width: 170px;
-  }
-}
-
 .payments-nocard {
   min-height: 300px;
   padding-top: 50px;
