@@ -99,7 +99,7 @@
     </a>
     <span
       class="explore-media__counter explore-media__counter_likes"
-      @click="postLike"
+      @click="likePost"
       ><span class="btn-icon likes icn-item icn-size_lg"></span
       >{{ post.favoritesCount }}</span
     >
@@ -115,10 +115,11 @@ import { toHumanDuration } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import PostOpen from "@/mixins/postOpen";
 import userMixin from "@/mixins/user";
+import PostCommon from "@/mixins/postCommon";
 
 export default {
   name: "Post",
-  mixins: [ModalRouterGoto, PostOpen, userMixin],
+  mixins: [ModalRouterGoto, PostOpen, userMixin, PostCommon],
   data() {
     return {
       isVisible: undefined,
@@ -162,13 +163,6 @@ export default {
 
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
-    },
-    postLike() {
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
-      this.$emit("postLike");
     }
   }
 };
