@@ -1,15 +1,28 @@
 <template>
   <nav class="header-nav hidden-mobile">
     <template v-if="!noAuthHeader">
-      <router-link
-        v-if="user"
-        class="menu-item-home header-nav__item"
-        :class="{ 'router-link-exact-active active': isModalOnHomePage }"
-        to="/"
-        exact
-      >
-        <span>Home</span>
-      </router-link>
+      <template v-if="user">
+        <a
+          v-if="$route.meta.home"
+          class="menu-item-home header-nav__item active"
+          href="/"
+          :class="{
+            'router-link-exact-active active': isModalOnHomePage
+          }"
+          @click.prevent="goToHomePage"
+        >
+          <span>Home</span>
+        </a>
+        <router-link
+          v-else
+          class="menu-item-home header-nav__item"
+          :class="{ 'router-link-exact-active active': isModalOnHomePage }"
+          to="/"
+          exact
+        >
+          <span>Home</span>
+        </router-link>
+      </template>
       <router-link class="menu-item-explore header-nav__item" to="/explore">
         <span>Explore</span>
       </router-link>
@@ -72,6 +85,12 @@ export default {
     }
   },
   methods: {
+    goToHomePage(e) {
+      if (this.$route.meta.home) {
+        e.preventDefault();
+        this.$root.$emit("homePageReload");
+      }
+    },
     goToChat() {
       if (this.$route.meta.chat) {
         this.$router.push("/chat");
