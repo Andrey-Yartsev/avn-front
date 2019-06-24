@@ -541,19 +541,10 @@ export default {
       return this.postMsg;
     },
     getConvertedText() {
-      const p =
-        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji(.+?)"></span></span>';
-      return this.post.text.replace(new RegExp(p, "ug"), (m, p1) => {
-        const codePoint = "0x" + p1;
-        let result;
-        try {
-          result = String.fromCodePoint(codePoint);
-        } catch (e) {
-          console.error("Invalid unicode " + codePoint);
-          console.log(this.post.text);
-          return "";
-        }
-        return result;
+      const pattern =
+        '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
+      return this.post.text.replace(new RegExp(pattern, "ug"), (m, unicode) => {
+        return unicode;
       });
     }
   },
