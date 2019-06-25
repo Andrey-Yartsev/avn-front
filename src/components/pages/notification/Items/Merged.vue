@@ -73,7 +73,7 @@
               >{{ v.items[0].user.name }}</router-link
             >{{ `and `
             }}<router-link
-              :to="'/' + v.items[0].user.username"
+              :to="'/' + v.items[1].user.username"
               class="name name_break-text"
               >{{ v.items[1].user.name }}</router-link
             >
