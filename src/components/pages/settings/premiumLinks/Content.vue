@@ -4,7 +4,8 @@
     id="payouts-container"
   >
     <div class="payouts">
-      <div class="PayoutsAccountView" v-if="!user.isWantEarn">
+      <Form v-if="user.isWantEarn && user.subscribePrice > 0" />
+      <div class="PayoutsAccountView" v-else>
         <h1 class="form-title">
           Premium Links
         </h1>
@@ -12,11 +13,10 @@
           <div class="inner">
             You need to enable <b>Earn money</b> option in
             <router-link to="/settings/profile">Profile</router-link>
-            settings
+            settings and set subscription price
           </div>
         </div>
       </div>
-      <Form v-else />
     </div>
   </div>
 </template>
