@@ -45,11 +45,12 @@
     align-content: flex-end;
     border-bottom: none;
     padding: 0;
-    margin: -5px 0 0;
+    margin: -5px 0 0 20px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       justify-content: space-between;
       margin-top: 0;
+      margin-left: 0;
     }
   }
 }
