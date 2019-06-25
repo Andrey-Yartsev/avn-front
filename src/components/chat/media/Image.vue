@@ -8,10 +8,10 @@
         @click.prevent="openImage(media.src.source)"
       >
         <img
-          :src="media.src.source"
+          :src="media.thumb.source"
           :class="{ 'no-media-text': !message.textLength }"
-          :width="media.src.width"
-          :height="media.src.height"
+          :width="media.thumb.width"
+          :height="media.thumb.height"
           class="media-content"
         />
       </a>
@@ -20,12 +20,12 @@
       <div class="postLink">
         <img
           :src="`data:image/jpeg;base64,${media.locked}`"
-          :width="media.src.width"
-          :height="media.src.height"
+          :width="media.thumb.width"
+          :height="media.thumb.height"
           class="media-content"
           :style="{
-            width: `${media.src.width}px`,
-            height: `${media.src.height}px`
+            width: `${media.thumb.width}px`,
+            height: `${media.thumb.height}px`
           }"
         />
       </div>
