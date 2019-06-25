@@ -120,6 +120,10 @@
               <router-link class="name" :to="'/' + selectedUser.username">{{
                 selectedUser.name
               }}</router-link>
+              <span
+                class="verified-user icn-item"
+                v-if="selectedUser.isVerified"
+              ></span>
               <span class="user-login">
                 <router-link
                   class="username"
