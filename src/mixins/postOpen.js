@@ -29,6 +29,13 @@ export default {
         return;
       }
 
+      if (this.shouldBePoster) {
+        this.$router.push(
+          `/explore/videos#m/post/${this.post.id}/${this.from}`
+        );
+        return;
+      }
+
       this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     },
     showSubscribeModal() {

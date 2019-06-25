@@ -1220,12 +1220,6 @@
       line-height: 16px;
     }
   }
-
-  &_locked {
-    &:after {
-      content: "\E61B";
-    }
-  }
 }
 
 .start-chat-wrapper {

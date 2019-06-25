@@ -118,7 +118,7 @@ export default {
   },
   watch: {
     index() {
-      if (this.backFrom === "postPage") return;
+      if (this.backFrom === "postPage" || !this.post) return;
       this.$store.dispatch(
         "modalRouter/updatePath",
         `post/${this.post.id}/${this.from}`

@@ -130,6 +130,13 @@
       content: "\E670";
       color: $secondary-color;
     }
+
+    .lightbox-post & {
+
+      .explore-page & {
+        display: none;
+      }
+    }
   }
 
   &-twitter {
@@ -205,6 +212,13 @@
       &:after {
         font-size: 24px;
       }
+    }
+  }
+
+  &-locked {
+
+    &:after {
+      content: "\E61B";
     }
   }
 
