@@ -149,6 +149,12 @@ export default {
       this.$store.dispatch("lives/getPosts");
     }
   },
+  mounted() {
+    this.$root.$on("homePageReload", this.init);
+  },
+  beforeDestroy() {
+    this.$root.$off("homePageReload", this.init);
+  },
   watch: {
     newPost() {
       this.$store.dispatch("modal/hide", { name: "addPost" });

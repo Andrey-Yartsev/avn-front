@@ -40,7 +40,7 @@
                         class="icn-remove icn-item hidden-desktop"
                         v-if="$mq === 'mobile'"
                       ></span>
-                      <span v-if="$mq === 'desktop'">Delete</span>А
+                      <span v-if="$mq === 'desktop'">Delete</span>
                     </button>
                   </div>
                 </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <Transactions />
-      <div class="payments-nocard"></div>
+      <!--<div class="payments-nocard"></div>-->
     </div>
   </div>
 </template>

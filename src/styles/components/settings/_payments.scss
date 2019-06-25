@@ -66,50 +66,57 @@
     &:last-child {
       border-bottom: none;
     }
-    .replace,
-    .delete {
-      border: none;
-      padding: 0;
-      background: none;
-      transition: color .3s;
-      @include media-breakpoint-down($desktop-breakpoint) {
-        font-size: 0;
-        &:after {
-          font-size: 24px;
-        }
-      }
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-weight: 500;
-      }
+  }
+}
+
+
+.replace-card,
+.delete-card {
+  border: none;
+  padding: 0;
+  background: none;
+  transition: color .3s;
+
+  @include media-breakpoint-down($desktop-breakpoint) {
+    font-size: 0;
+
+    &:after {
+      font-size: 24px;
     }
-    .replace {
-      margin-right: 25px;
-      color: $secondary-color;
+  }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+  @include media-breakpoint-up($desktop-breakpoint) {
+    font-weight: 500;
+  }
+}
 
-        &:hover {
-          color: $secondary-color-darken;
-        }
-      }
-    }
-    .delete {
-      color: $primary-color;
+.replace-card {
+  margin-right: 25px;
+  color: $secondary-color;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    margin-right: 15px;
+  }
 
-        &:hover {
-          color: $primary-color-darken;
-        }
-      }
-    }
-    @include media-breakpoint-down($desktop-breakpoint) {
-      .replace {
-        margin-right: 15px;
-      }
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $secondary-color-darken;
     }
   }
 }
+
+.delete-card {
+  color: $primary-color;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    &:hover {
+      color: $primary-color-darken;
+    }
+  }
+}
+
 
 .payment-system {
   font-weight: 500;
@@ -141,21 +148,15 @@
   }
 }
 
-.btn_next {
-  @include media-breakpoint-up($desktop-breakpoint) {
-    width: 170px;
-  }
-}
-
-.payments-nocard {
-  min-height: 300px;
-  padding-top: 50px;
-
-  & h1 {
-    text-align: center;
-  }
-
-  &:empty {
-    display: none;
-  }
-}
+//.payments-nocard {
+//  min-height: 300px;
+//  padding-top: 50px;
+//
+//  & h1 {
+//    text-align: center;
+//  }
+//
+//  &:empty {
+//    display: none;
+//  }
+//}

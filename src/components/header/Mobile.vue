@@ -1,12 +1,16 @@
 <template>
   <nav class="header-nav hidden-desktop" v-if="$mq === 'mobile'">
-    <router-link
-      v-if="user"
-      class="menu-item-home header-nav__item"
-      to="/"
-      exact
-      ><span>Home</span></router-link
-    >
+    <template v-if="user">
+      <a
+        v-if="$route.meta.home"
+        class="menu-item-home header-nav__item active"
+        @click="goToHomePage"
+        ><span>Home</span></a
+      >
+      <router-link v-else class="menu-item-home header-nav__item" to="/" exact
+        ><span>Home</span></router-link
+      >
+    </template>
     <router-link class="menu-item-explore header-nav__item" to="/explore"
       ><span>Explore</span></router-link
     >
@@ -57,6 +61,14 @@ export default {
     },
     noAuthHeader() {
       return this.$route.meta && this.$route.meta.noAuthHeader;
+    }
+  },
+  methods: {
+    goToHomePage(e) {
+      if (this.$route.meta.home) {
+        e.preventDefault();
+        this.$root.$emit("homePageReload");
+      }
     }
   }
 };

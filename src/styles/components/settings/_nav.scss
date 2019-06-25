@@ -7,10 +7,6 @@
 
   .profile-name {
     padding: 0;
-
-    .verified-user {
-      margin-left: 6px;
-    }
   }
 }
 
@@ -31,6 +27,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 13px;
       padding-bottom: 13px;
+      margin-left: 20px;
       margin-right: 20px;
       font-size: 15px;
     }
@@ -71,7 +68,6 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      margin: 0 20px;
       span {
         opacity: 0.5;
         transition: opacity 0.3s ease;

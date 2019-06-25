@@ -1,6 +1,7 @@
 .add-new-type {
   font-size: 0;
-  padding: 0 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   position: relative;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -17,7 +18,8 @@
 
     &:not(.chat-new-type) {
       @include media-breakpoint-up($desktop-breakpoint) {
-        padding: 0 13px;
+        padding-top: 13px;
+        padding-bottom: 13px;
         position: absolute;
         left: 0;
         right: 0;
@@ -26,10 +28,7 @@
     }
   }
 
-  .stream_enabled & {
-    display: none;
-  }
-
+  .stream_enabled &,
   .truncated & {
     display: none;
   }

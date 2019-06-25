@@ -10,7 +10,7 @@
               </span>
             </div>
           </div>
-          <h1 class="form-title hidden-mobile">
+          <h1 class="form-title hidden-mobile" v-if="$mq === 'desktop'">
             Your Card
             <button
               @click="$router.push('/settings/credits')"
@@ -37,7 +37,11 @@
                     {{ user.paymentGateCardLast4 }}
                   </span>
 
-                  <button class="replace" id="replaceCard" @click="replaceCard">
+                  <button
+                    class="replace-card"
+                    id="replaceCard"
+                    @click="replaceCard"
+                  >
                     <span
                       class="icn-replaced icn-item hidden-desktop"
                       v-if="$mq === 'mobile'"
@@ -45,7 +49,7 @@
                     <span v-if="$mq === 'desktop'">Replace</span>
                   </button>
                   <button
-                    class="delete icn-item"
+                    class="delete-card icn-item"
                     id="deleteCard"
                     @click="deleteCard"
                   >
