@@ -98,18 +98,8 @@
           </div>
           <div class="chatCollectionContentWrapper">
             <div class="chatMessagesCollectionView">
-              <div
-                class="chat-section chat-section_loading"
-                v-if="messagesLoading"
-              >
-                <Loader :fullscreen="false" text="" class="transparent small" />
-              </div>
               <template v-if="activeUser">
-                <Messages
-                  v-if="messages"
-                  :_messages="messages"
-                  :withUser="activeUser"
-                />
+                <Messages :withUser="activeUser" />
                 <AddMessage :withUser="activeUser" />
               </template>
             </div>
@@ -229,9 +219,6 @@ export default {
         return this.$store.state.chat.fetchActiveUserResult;
       }
       return this.activeChat.withUser;
-    },
-    messagesLoading() {
-      return this.$store.state.chat.fetchMessagesLoading;
     },
     blockLoading() {
       return (

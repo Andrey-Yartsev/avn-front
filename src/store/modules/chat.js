@@ -5,7 +5,10 @@ import { createRequestAction } from "../utils/storeRequest";
 const state = {
   isSecondScreen: false,
   activeUserId: null,
-  windowIsActive: true
+  windowIsActive: true,
+  messagesOffset: 100,
+  allMessagesLoaded: true,
+  fetchingOld: false
 };
 
 let markAsReadId = 0;
@@ -150,14 +153,32 @@ const actions = {
       }
     }
   },
-  fetchMessages({ dispatch }, activeUserId) {
-    dispatch("_fetchMessages", activeUserId).then(() => {
+  fetchMessages({ dispatch, commit }, activeUserId) {
+    commit("fetchingOld", false);
+    dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
+      if (r.list.length >= 100) {
+        commit("allMessagesLoaded", false);
+      }
     });
   },
   fetchMessagesDefault({ dispatch, state }) {
     dispatch("_fetchMessages", state.activeUserId).then(() => {
       dispatch("markChatAsViewed", state.activeUserId);
+    });
+  },
+  fetchMoreMessages({ dispatch, commit, state }, userId) {
+    commit("fetchingOld", true);
+    dispatch("_fetchMoreMessages", { userId }).then(() => {
+      if (!state.moreMessages.length) {
+        commit("allMessagesLoaded", true);
+        return;
+      }
+      if (state.moreMessages.length < 100) {
+        commit("allMessagesLoaded", true);
+      }
+      commit("incrementMessagesOffset");
+      commit("addOldMessages");
     });
   },
   delete({ dispatch, commit }, userId) {
@@ -201,6 +222,14 @@ const actions = {
 const mutations = {
   setActiveUserId(state, activeUserId) {
     state.activeUserId = activeUserId;
+    state.messagesOffset = 100;
+    state.allMessagesLoaded = true;
+  },
+  allMessagesLoaded(state, allMessagesLoaded) {
+    state.allMessagesLoaded = allMessagesLoaded;
+  },
+  fetchingOld(state, fetchingOld) {
+    state.fetchingOld = fetchingOld;
   },
   resetSearchUsers(state) {
     state.chatUsers = null;
@@ -277,6 +306,12 @@ const mutations = {
   },
   setActiveWindow(state, isActive) {
     state.windowIsActive = isActive;
+  },
+  incrementMessagesOffset(state) {
+    state.messagesOffset += 100;
+  },
+  addOldMessages(state) {
+    state.messages = state.moreMessages.concat(state.messages);
   }
 };
 
@@ -348,6 +383,30 @@ createRequestAction({
       return Object.values(res.list).reverse();
     }
     return state.messages || [];
+  }
+});
+
+createRequestAction({
+  prefix: "_fetchMoreMessages",
+  apiPath: "chats/{userId}/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {}
+  },
+  resultKey: "moreMessages",
+  defaultResultValue: [],
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  },
+  resultConvert: function(res) {
+    return Object.values(res.list).reverse();
+  },
+  paramsToOptions: function(params, options, state) {
+    options.query.offset = state.messagesOffset;
+    return options;
   }
 });
 

@@ -14,7 +14,7 @@ const storeRequest = (
   dispatch,
   apiPath,
   options,
-  { state, localError, resultKey, resultConvert, throw400 }
+  { state, localError, resultKey, resultConvert, throw400, debugLoading }
 ) => {
   return new Promise((accept, reject) => {
     commit(prefix + "ResetError");
@@ -47,14 +47,21 @@ const storeRequest = (
           return;
         }
         if (response.status === 200) {
-          commit(prefix + "Success", true);
-          let r = await response.json();
-          accept(r);
-          if (resultConvert) {
-            r = resultConvert(r, state);
+          const done = async () => {
+            commit(prefix + "Success", true);
+            let r = await response.json();
+            accept(r);
+            if (resultConvert) {
+              r = resultConvert(r, state);
+            }
+            commit(resultKey, r);
+            commit(prefix + "Requested");
+          };
+          if (debugLoading) {
+            setTimeout(done, 5000);
+          } else {
+            done();
           }
-          commit(resultKey, r);
-          commit(prefix + "Requested");
         } else {
           const r = await response.json();
 
@@ -148,7 +155,8 @@ const createRequestAction = ({
   defaultLoading,
   paramsToOptions,
   paramsToPath,
-  throw400
+  throw400,
+  debugLoading
 }) => {
   if (!resultKey) {
     resultKey = prefix + "Result";
@@ -156,7 +164,7 @@ const createRequestAction = ({
 
   actions[prefix] = function({ commit, dispatch, state }, params) {
     if (params !== undefined && paramsToOptions) {
-      options = paramsToOptions(params, options);
+      options = paramsToOptions(params, options, state);
     }
     let _apiPath = null;
     if (params !== undefined && paramsToPath) {
@@ -177,7 +185,8 @@ const createRequestAction = ({
         localError,
         resultKey,
         resultConvert,
-        throw400
+        throw400,
+        debugLoading
       }
     );
   };

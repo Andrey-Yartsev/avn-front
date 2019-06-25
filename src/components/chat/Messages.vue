@@ -11,8 +11,12 @@
       v-else
       class="chat-wrapper"
       ref="messagesContainer"
+      @ps-scroll-y="scrollHandle"
     >
       <div class="chat-scrollbar" ref="messagesMobileContainer">
+        <div class="chatMessageSending semi-transparent" v-if="moreLoading">
+          Loading history...
+        </div>
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -112,14 +116,16 @@ export default {
   mixins: [userMixin],
 
   props: {
-    _messages: {
-      type: Array,
-      required: true
-    },
     withUser: {
       type: Object,
       required: true
     }
+  },
+
+  data() {
+    return {
+      scrollTimeoutId: 0
+    };
   },
 
   computed: {
@@ -136,8 +142,20 @@ export default {
     sending() {
       return this.$store.state.chat._sendMessageLoading;
     },
+    _messages() {
+      return this.$store.state.chat.messages;
+    },
     loading() {
       return this.$store.state.chat._fetchMessagesLoading;
+    },
+    moreLoading() {
+      return this.$store.state.chat._fetchMoreMessagesLoading;
+    },
+    allMessagesLoaded() {
+      return this.$store.state.chat.allMessagesLoaded;
+    },
+    fetchingOld() {
+      return this.$store.state.chat.fetchingOld;
     }
   },
 
@@ -153,6 +171,13 @@ export default {
           });
         }
       }, 100);
+    },
+    loading(loading) {
+      if (!loading) {
+        setTimeout(() => {
+          this.initMobileScroll();
+        }, 100);
+      }
     }
   },
 
@@ -160,7 +185,6 @@ export default {
     isAuthor(message) {
       return message.fromUser.id === this.user.id;
     },
-
     text(message) {
       if (!message.isTips) {
         return message.text;
@@ -174,7 +198,6 @@ export default {
         }
       }
     },
-
     lockedText(message) {
       let s = "";
       for (let i = 0; i < Math.round(message.textLength / 2); i++) {
@@ -182,11 +205,9 @@ export default {
       }
       return s;
     },
-
     addGrouping(messages) {
       return this.setFirstInGroup(this.setLastInGroup(messages));
     },
-
     setFirstInGroup(messages) {
       // if only one message
       if (messages.length === 1) {
@@ -213,7 +234,6 @@ export default {
       }
       return messages;
     },
-
     setLastInGroup(messages) {
       // if only one message
       if (messages.length === 1) {
@@ -239,31 +259,33 @@ export default {
       }
       return messages;
     },
-
     checkAuthor(user) {
       return user.id === this.user.id;
     },
-
     scrollToLast() {
-      if (this.$mq === "mobile") {
-        if (this.$refs.messagesMobileContainer) {
-          this.$refs.messagesMobileContainer.scrollTop = this.$refs.messagesMobileContainer.scrollHeight;
-        }
+      if (this.fetchingOld) {
+        //
       } else {
-        if (this.$refs.messagesContainer && this.$refs.messagesContainer.$el) {
-          this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
+        if (this.$mq === "mobile") {
+          if (this.$refs.messagesMobileContainer) {
+            this.$refs.messagesMobileContainer.scrollTop = this.$refs.messagesMobileContainer.scrollHeight;
+          }
+        } else {
+          if (
+            this.$refs.messagesContainer &&
+            this.$refs.messagesContainer.$el
+          ) {
+            this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
+          }
         }
       }
     },
-
     time(date) {
       return fromNow(date);
     },
-
     isMyMessage(message) {
       return message.fromUser.id === this.user.id;
     },
-
     messageClick(message) {
       if (this.isMyMessage(message)) {
         return;
@@ -291,7 +313,6 @@ export default {
         });
       }
     },
-
     isLocked(message) {
       return !message.isOpened && !message.isFree;
     },
@@ -305,7 +326,6 @@ export default {
         return MediaVideo;
       }
     },
-
     stopOtherVideo(currentPlayingId) {
       let videos = this._messages.filter(v => {
         const r = v.media && v.media.length && v.media[0].type === "video";
@@ -317,6 +337,36 @@ export default {
       videos.forEach(v => {
         this.$refs["video" + v.id][0].cancelPlay();
       });
+    },
+    _scrollHandler(mobile) {
+      if (mobile) {
+        if (this.$refs.messagesMobileContainer.scrollTop > 150) {
+          return;
+        }
+      } else {
+        if (this.$refs.messagesContainer.$el.scrollTop > 150) {
+          return;
+        }
+      }
+      if (this.moreLoading) {
+        return;
+      }
+      if (this.allMessagesLoaded) {
+        return;
+      }
+      this.fetchMoreMessages();
+    },
+    scrollHandle(mobile) {
+      clearTimeout(this.scrollTimeoutId);
+      this.scrollTimeoutId = setTimeout(() => this._scrollHandler(mobile), 500);
+    },
+    initMobileScroll() {
+      this.$refs.messagesMobileContainer.addEventListener("scroll", () => {
+        this.scrollHandle(true);
+      });
+    },
+    fetchMoreMessages() {
+      this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
     }
   },
 
