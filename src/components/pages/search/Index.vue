@@ -39,8 +39,8 @@
             />
             <NoResults :query="query" :loading="loading" />
           </div>
-          <div class="loaderWrap loader-content" v-if="loading && items.length">
-            <Loader :fullscreen="false" />
+          <div class="loaderWrap loader-content loader-content_tgap" v-if="loading && items.length">
+            <Loader :fullscreen="false" class="small inline" />
           </div>
         </div>
       </div>

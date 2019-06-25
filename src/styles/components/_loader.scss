@@ -2,6 +2,12 @@
 
 .loader-content {
   height: 130px;
+  text-align: center;
+
+  &_tgap {
+    padding-top: 40px;
+    height: 82px;
+  }
 }
 
 .lds-dual-ring {
@@ -104,6 +110,8 @@
     height: 40px;
     vertical-align: middle;
     z-index: 0;
+    margin-left: auto;
+    margin-right: auto;
 
     &:after {
       width: 20px;
