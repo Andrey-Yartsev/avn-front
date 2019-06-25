@@ -79,10 +79,32 @@
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-        <div class="text-enable-money border-bottom-mobile">
+        <div
+          class="text-enable-money border-bottom-mobile"
+          v-if="!localUser.isWantEarn"
+        >
           You need to enable <b>Earn Money</b> option in
           <router-link to="/settings/profile">Profile</router-link> settings to
           enable Private Story option.
+        </div>
+      </div>
+      <div class="form-title border-top private-switcher-block private-story">
+        <div class="inner border-bottom-mobile">
+          <span class="semi-transparent">
+            Followers Private
+            <p class="subtext">
+              Story visible only to followers (if you have a paid
+              account enabled subscribers will see it too)
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isPrivateStoriesFollowers"
+              v-model="localUser.isPrivateStoriesFollowers"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
         </div>
       </div>
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
