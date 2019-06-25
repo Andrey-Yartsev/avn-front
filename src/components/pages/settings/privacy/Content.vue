@@ -194,7 +194,10 @@ w<template>
         </div>
       </div>
     </form>
-    <BlockedUsers mobileBlockedRoute="/settings/privacy/blocked" />
+    <BlockedUsers
+      mobileBlockedRoute="/settings/privacy/blocked"
+      subtext="These people can't see your posts, stories and live streams"
+    />
   </div>
 </template>
 

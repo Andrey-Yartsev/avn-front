@@ -8,7 +8,7 @@
           <span class="semi-transparent">
             Blocked users
             <p class="subtext">
-              These people can't see your posts, stories and live streams
+              {{ subtext }}
             </p>
           </span>
 
@@ -135,6 +135,10 @@ export default {
     source: {
       type: String,
       default: "users"
+    },
+    subtext: {
+      type: String,
+      required: true
     }
   },
 

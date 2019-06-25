@@ -245,7 +245,6 @@ export default {
     },
     fetchStates() {
       const fetchStates = [];
-      console.log(this.selectedCountries);
       this.selectedCountries.map(v => {
         if (!v.hasStates) {
           return;

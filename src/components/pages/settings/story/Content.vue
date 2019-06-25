@@ -93,8 +93,8 @@
           <span class="semi-transparent">
             Followers Private
             <p class="subtext">
-              Story visible only to followers (if you have a paid
-              account enabled subscribers will see it too)
+              Story visible only to followers (if you have a paid account
+              enabled subscribers will see it too)
             </p>
           </span>
           <label class="toggle-element">
@@ -122,6 +122,7 @@
     <BlockedUsers
       mobileBlockedRoute="/settings/story/blocked"
       source="stories"
+      subtext="Your stories will be hidden from these users"
     />
   </div>
 </template>
