@@ -130,6 +130,13 @@
       content: "\E670";
       color: $secondary-color;
     }
+
+    .lightbox-post & {
+
+      .explore-page & {
+        display: none;
+      }
+    }
   }
 
   &-twitter {
