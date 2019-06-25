@@ -215,6 +215,13 @@
     }
   }
 
+  &-locked {
+
+    &:after {
+      content: "\E61B";
+    }
+  }
+
   &-pos {
 
     &_center {
