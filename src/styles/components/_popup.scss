@@ -682,6 +682,8 @@
 .popup-alert {
   text-align: center;
   display: block;
+  overflow: auto;
+  min-height: 100px;
 
   &__msg {
     font-weight: 500;
