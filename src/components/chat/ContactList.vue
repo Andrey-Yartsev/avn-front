@@ -39,15 +39,13 @@
             <p class="typing">
               <template v-if="v.lastMessage">
                 <span v-if="v.lastMessage.media.length" class="type-msg-icn"
-                  ><span class="icn-media icn-item"></span
-                ></span>
+                  ><span class="icn-media icn-item" />
+                </span>
+                <span v-else-if="v.lastMessage.isTips" class="type-msg-icn"
+                  ><span class="icn-tips icn-item" />
+                </span>
                 <span v-else class="message semi-transparent">
-                  <span v-if="v.lastMessage.isTips" class="type-msg-icn"
-                    ><span class="icn-tips icn-item"></span
-                  ></span>
-                  <template v-else>{{
-                    stripHtml(v.lastMessage.text)
-                  }}</template>
+                  {{ stripHtml(v.lastMessage.text) }}
                 </span>
               </template>
               <span class="isTyping">tester is typing...</span>
