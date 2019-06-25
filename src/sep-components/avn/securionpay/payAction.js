@@ -6,7 +6,7 @@ export default {
   mixins: [User],
   data() {
     return {
-      progress: true
+      progress: false
     };
   },
   methods: {
