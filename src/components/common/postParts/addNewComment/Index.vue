@@ -12,6 +12,7 @@
         :minHeight="30"
         :maxHeight="85"
         @keypress.enter.prevent="sendComment"
+        @tribute-replaced="tributeHandler"
       />
     </vue-tribute>
     <button
@@ -101,6 +102,9 @@ export default {
       this.$store.dispatch("search/tribute/search", text).then(result => {
         cb(result.list);
       });
+    },
+    tributeHandler() {
+      this.message = this.$refs.message.$el.value;
     }
   },
   watch: {
@@ -108,13 +112,6 @@ export default {
       this.message = `@${this.userName} `;
       this.$refs.message.$el.focus();
     }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$refs.message.$el.addEventListener("tribute-replaced", () => {
-        this.message = this.$refs.message.$el.value;
-      });
-    }, 0);
   }
 };
 </script>
