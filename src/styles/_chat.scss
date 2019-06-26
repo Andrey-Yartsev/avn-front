@@ -61,7 +61,7 @@
     .chatCollectionContent__col_narrow {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        min-height: calc(100% - 88px - 84px);
+        min-height: calc(100% - 172px);
       }
     }
   }
@@ -129,6 +129,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 16px;
+  flex: 1;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 20px;
@@ -147,7 +148,6 @@
 .chat-scrollbar {
   position: absolute;
   left: 16px;
-  //right: 16px;
   right: 0;
   padding-right: 16px;
   max-height: 100%;
@@ -423,7 +423,7 @@
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         width: 100vw;
-        max-height: 100vh;
+        height: 100vh;
         position: absolute;
         left: 100vw;
         top: 0;
@@ -839,6 +839,20 @@
         transform: translateX(-100vw);
         margin-top: 44px;
         margin-bottom: 84px;
+      }
+    }
+  }
+
+  .chatCollectionContent__col_wide & {
+
+    .chat & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        position: absolute;
+        top: 44px;
+        bottom: 0;
+        left: 0;
+        right: 0;
       }
     }
   }

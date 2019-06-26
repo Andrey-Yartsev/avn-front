@@ -45,7 +45,7 @@
     </div>
     <slot name="extra"></slot>
 
-    <Footer class="hidden-desktop" />
+    <Footer class="hidden-desktop" v-if="$mq === 'mobile'" />
   </div>
 </template>
 
