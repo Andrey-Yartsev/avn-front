@@ -99,7 +99,6 @@
 
 <script>
 import userMixin from "@/mixins/user";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
@@ -109,7 +108,6 @@ export default {
   name: "ChatMessages",
 
   components: {
-    VuePerfectScrollbar,
     Loader,
     MediaImage,
     MediaVideo
@@ -132,7 +130,7 @@ export default {
 
   computed: {
     scrollableComponent() {
-      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+      return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     },
     messages() {
       if (!this._messages.length) {

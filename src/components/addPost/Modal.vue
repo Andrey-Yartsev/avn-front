@@ -25,7 +25,7 @@
               where="modal"
             />
             <div class="popup-container-scroll" v-if="delayedPosts.length">
-              <VuePerfectScrollbar
+              <perfect-scrollbar
                 @ps-scroll-y="scrollFunction"
                 :settings="{ suppressScrollX: true }"
                 class="popup-content-scroll add-post-schedule"
@@ -45,7 +45,7 @@
                 <div class="loaderWrap loader-content" v-if="loading">
                   <Loader :fullscreen="false" />
                 </div>
-              </VuePerfectScrollbar>
+              </perfect-scrollbar>
             </div>
           </div>
         </div>
@@ -58,7 +58,6 @@
 import Modal from "@/components/modal/Index";
 import AddPost from "./Index";
 import PostCollection from "@/components/common/postCollection/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 
 export default {
@@ -67,7 +66,6 @@ export default {
     Modal,
     AddPost,
     PostCollection,
-    VuePerfectScrollbar,
     Loader
   },
   methods: {

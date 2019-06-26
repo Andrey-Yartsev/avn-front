@@ -12,7 +12,7 @@
         :width="media.preview.width"
         :height="media.preview.height"
         :style="{
-          'width': `${media.preview.width}px`,
+          width: `${media.preview.width}px`,
           'max-height': `${media.preview.height}px`
         }"
       />

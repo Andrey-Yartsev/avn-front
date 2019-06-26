@@ -68,7 +68,7 @@
             :class="{ visible: chats.length, active: isAllSelected }"
           ></div>
         </div>
-        <VuePerfectScrollbar
+        <perfect-scrollbar
           class="searchChatContacts"
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
@@ -101,7 +101,7 @@
               <span class="check icn-item"></span>
             </div>
           </div>
-        </VuePerfectScrollbar>
+        </perfect-scrollbar>
       </div>
     </template>
     <template slot="col2">
@@ -221,7 +221,6 @@ import ChatAddMultiMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import Loader from "@/components/common/Loader";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "Chat",
@@ -233,7 +232,6 @@ export default {
   },
 
   components: {
-    VuePerfectScrollbar,
     ChatAddMultiMessage,
     ChatWrapper,
     Loader
@@ -251,7 +249,7 @@ export default {
 
   computed: {
     scrollableComponent() {
-      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+      return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     },
     noMessages() {
       return false;

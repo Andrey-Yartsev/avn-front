@@ -86,7 +86,7 @@
                     </div>
                   </div>
                 </div>
-                <VuePerfectScrollbar
+                <perfect-scrollbar
                   class="popup-content-scroll"
                   v-if="step === 1"
                   @ps-scroll-y="scrollFunction"
@@ -120,7 +120,7 @@
                   <div class="loaderWrap loader-content" v-if="loading">
                     <Loader :fullscreen="false" />
                   </div>
-                </VuePerfectScrollbar>
+                </perfect-scrollbar>
               </div>
             </div>
           </div>
@@ -138,14 +138,12 @@
 <script>
 import moment from "moment";
 import Modal from "@/components/modal/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 
 export default {
   name: "CreateHighlightsModal",
   components: {
     Modal,
-    VuePerfectScrollbar,
     Loader
   },
   data() {

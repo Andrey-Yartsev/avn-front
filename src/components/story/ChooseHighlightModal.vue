@@ -45,7 +45,7 @@
                       </div>
                     </a>
                   </div>
-                  <VuePerfectScrollbar
+                  <perfect-scrollbar
                     class="list-cover-variation"
                     @ps-scroll-x="scrollFunction"
                   >
@@ -62,7 +62,7 @@
                         {{ post.title }}
                       </div>
                     </div>
-                  </VuePerfectScrollbar>
+                  </perfect-scrollbar>
                 </div>
               </div>
             </div>
@@ -80,7 +80,6 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 
@@ -89,7 +88,6 @@ export default {
   mixins: [User],
   components: {
     Modal,
-    VuePerfectScrollbar,
     Loader
   },
   data() {

@@ -61,7 +61,6 @@
 <script>
 import moment from "moment";
 import { chartTypes } from "./types";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 const dataTypes = [
   "earnSubscribes",
@@ -80,12 +79,9 @@ const lineTypes = Object.keys(chartTypes.earnings);
 export default {
   name: "statistics-money-table",
   props: ["data", "currentPeriodType"],
-  components: {
-    VuePerfectScrollbar
-  },
   computed: {
     scrollableComponent() {
-      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+      return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     },
     itemsOld() {
       if (!this.data) {

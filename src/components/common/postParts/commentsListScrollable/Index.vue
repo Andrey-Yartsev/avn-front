@@ -13,7 +13,7 @@
     >
     <span class="load-more-comments" v-if="loading">Loading...</span>
     <div class="comments-list comments-list_in-col" v-if="comments.length">
-      <VuePerfectScrollbar id="vue-comments-list">
+      <perfect-scrollbar id="vue-comments-list">
         <Comment
           v-for="comment in reversed"
           :key="comment.id"
@@ -23,20 +23,18 @@
           @commentRemove="comment => $emit('commentRemove', comment)"
           @likeComment="data => $emit('likeComment', data)"
         />
-      </VuePerfectScrollbar>
+      </perfect-scrollbar>
     </div>
   </div>
 </template>
 
 <script>
 import Comment from "@/components/common/postParts/comment/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CommentsListFull",
   components: {
-    Comment,
-    VuePerfectScrollbar
+    Comment
   },
   computed: {
     reversed() {

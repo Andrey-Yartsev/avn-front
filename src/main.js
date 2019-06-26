@@ -2,6 +2,7 @@ import Vue from "vue";
 import "intersection-observer";
 import VueScrollTo from "vue-scrollto";
 import VueMq from "vue-mq";
+import PerfectScrollbar from "vue2-perfect-scrollbar";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueClipboard from "vue-clipboard2";
 import VeeValidate from "vee-validate";
@@ -11,12 +12,13 @@ import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
 import VueMask from "v-mask";
+import VTooltip from "v-tooltip";
 
 import "unfetch/polyfill";
 import "url-search-params-polyfill";
 import "@/iconfont";
 
-import VTooltip from "v-tooltip";
+import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 
 Vue.use(VueMask);
 
@@ -25,6 +27,8 @@ Vue.use(VTooltip, {
 });
 
 Vue.use(VueObserveVisibility);
+
+Vue.use(PerfectScrollbar);
 
 VTooltip.enabled = window.innerWidth > 990;
 

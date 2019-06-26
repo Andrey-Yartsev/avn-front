@@ -9,7 +9,7 @@
       </div>
       <div class="stories-group__outer">
         <div class="stories-group">
-          <VuePerfectScrollbar class="stories-group__inner">
+          <perfect-scrollbar class="stories-group__inner">
             <div
               v-if="!hasMine"
               class="storyView create-story-button"
@@ -42,7 +42,7 @@
             </div>
             <StreamCollection :stories="streams" />
             <StoryCollection :stories="stories" />
-          </VuePerfectScrollbar>
+          </perfect-scrollbar>
         </div>
       </div>
     </div>
@@ -52,13 +52,11 @@
 <script>
 import StoryCollection from "@/components/common/storyCollection/Index";
 import StreamCollection from "@/components/common/streamCollection/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import uniqBy from "lodash.uniqby";
 
 export default {
   name: "StoriesWrapper",
   components: {
-    VuePerfectScrollbar,
     StoryCollection,
     StreamCollection
   },

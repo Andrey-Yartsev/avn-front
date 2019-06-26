@@ -75,7 +75,7 @@
               </div>
               <div class="body-story-details">
                 <div class="list-viewers">
-                  <VuePerfectScrollbar @ps-scroll-y="scrollFunction">
+                  <perfect-scrollbar @ps-scroll-y="scrollFunction">
                     <div
                       class="viewer-row"
                       v-for="user in viewers"
@@ -105,7 +105,7 @@
                         <span class="icn-block icn-item"></span>
                       </div>
                     </div>
-                  </VuePerfectScrollbar>
+                  </perfect-scrollbar>
                 </div>
                 <div
                   class="msg-no-content"
@@ -132,13 +132,11 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import Modal from "@/components/modal/Index";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "StoryViewers",
   components: {
-    Modal,
-    VuePerfectScrollbar
+    Modal
   },
   data() {
     const self = this;

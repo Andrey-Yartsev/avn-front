@@ -10,7 +10,7 @@
         <h4>Highlights</h4>
       </div>
       <div class="stories-group">
-        <VuePerfectScrollbar @ps-scroll-y="scrollFunction">
+        <perfect-scrollbar @ps-scroll-y="scrollFunction">
           <div class="stories">
             <a href="#" class="story btn-add-story" v-if="isOwner(userId)">
               <div
@@ -51,7 +51,7 @@
               </div>
             </div>
           </div>
-        </VuePerfectScrollbar>
+        </perfect-scrollbar>
       </div>
     </div>
   </div>
@@ -59,14 +59,10 @@
 
 <script>
 import UserMixin from "@/mixins/user";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "Highlights",
   mixins: [UserMixin],
-  components: {
-    VuePerfectScrollbar
-  },
   props: {
     userId: {
       type: Number,

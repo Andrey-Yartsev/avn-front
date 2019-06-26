@@ -76,7 +76,6 @@
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
 import User from "@/mixins/user";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import NotificationSingleView from "./Items/Single";
@@ -102,7 +101,6 @@ export default {
   components: {
     NotificationMergedView,
     NotificationSingleView,
-    VuePerfectScrollbar,
     MobileHeader,
     Footer
   },

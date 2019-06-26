@@ -66,7 +66,6 @@
 
 <script>
 import { fromNow } from "@/helpers/datetime";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
@@ -74,13 +73,9 @@ export default {
 
   mixins: [ModalRouterGoto],
 
-  components: {
-    VuePerfectScrollbar
-  },
-
   computed: {
     scrollableComponent() {
-      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+      return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     }
   },
 

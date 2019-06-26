@@ -1,5 +1,5 @@
 <template>
-  <VuePerfectScrollbar
+  <perfect-scrollbar
     class="popup-content-scroll notifications"
     @ps-scroll-y="scrollFunction"
   >
@@ -28,18 +28,14 @@
         <span class="notification-summary" v-html="v.text" />
       </div>
     </div>
-  </VuePerfectScrollbar>
+  </perfect-scrollbar>
 </template>
 
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "NotificationSingleView",
-  components: {
-    VuePerfectScrollbar
-  },
   props: {
     items: {
       type: Array,

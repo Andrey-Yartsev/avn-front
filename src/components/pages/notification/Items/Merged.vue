@@ -1,5 +1,5 @@
 <template>
-  <VuePerfectScrollbar
+  <perfect-scrollbar
     class="popup-content-scroll notifications"
     @ps-scroll-y="scrollFunction"
   >
@@ -90,19 +90,15 @@
         </div>
       </template>
     </div>
-  </VuePerfectScrollbar>
+  </perfect-scrollbar>
 </template>
 
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import { fromNow } from "@/helpers/datetime";
 import { uniqId } from "@/utils/mediaFiles";
 
 export default {
   name: "NotificationMergedView",
-  components: {
-    VuePerfectScrollbar
-  },
   props: {
     items: {
       type: Array,

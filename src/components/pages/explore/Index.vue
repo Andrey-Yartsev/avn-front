@@ -18,7 +18,7 @@
             <div class="stories-group__outer">
               <div class="stories-group">
                 <TopLives :lives="lives" v-if="lives.length" />
-                <VuePerfectScrollbar
+                <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
                 >
@@ -28,7 +28,7 @@
                     :key="post.id"
                     from="explore"
                   />
-                </VuePerfectScrollbar>
+                </perfect-scrollbar>
               </div>
             </div>
           </div>
@@ -114,7 +114,6 @@ import UserMixin from "@/mixins/user";
 import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
 import PostCollection from "@/components/common/postCollection/Index";
@@ -134,7 +133,6 @@ export default {
     Users,
     Live,
     Loader,
-    VuePerfectScrollbar,
     PostCollection
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat],

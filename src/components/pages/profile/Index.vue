@@ -202,7 +202,6 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "ProfileHome",
@@ -220,8 +219,7 @@ export default {
     Footer,
     PostSmall,
     PostMedium,
-    Highlights,
-    VuePerfectScrollbar
+    Highlights
   },
 
   data() {
@@ -234,7 +232,7 @@ export default {
 
   computed: {
     scrollableComponent() {
-      return this.$mq === "mobile" ? "div" : VuePerfectScrollbar;
+      return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     },
     loading() {
       return this.$store.state.profile.home.fetchProfileLoading;

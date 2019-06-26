@@ -305,7 +305,6 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import Loader from "@/components/common/Loader";
 import Draggable from "vuedraggable";
 import MediaPreview from "@/components/common/MediaPreview";
@@ -344,7 +343,6 @@ export default {
     Loader,
     MediaPreview,
     AddNewNav,
-    VuePerfectScrollbar,
     Datetime,
     Draggable,
     VueTribute
