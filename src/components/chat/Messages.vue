@@ -1,17 +1,17 @@
 <template>
   <div class="chat-section">
     <Loader
-      v-if="loading"
+      v-if="loading || !loaderHidden"
       :fullscreen="false"
       text=""
-      class="transparent small"
+      class="small solid"
     />
     <component
       :is="scrollableComponent"
-      v-else
+      v-show="!loading"
       class="chat-wrapper"
       ref="messagesContainer"
-      @ps-scroll-y="scrollHandle"
+      @ps-scroll-y="psScrollHandle"
     >
       <div class="chat-scrollbar" ref="messagesMobileContainer">
         <div class="chatMessageSending semi-transparent" v-if="moreLoading">
@@ -128,7 +128,8 @@ export default {
 
   data() {
     return {
-      scrollTimeoutId: 0
+      scrollTimeoutId: 0,
+      loaderHidden: false
     };
   },
 
@@ -167,6 +168,7 @@ export default {
     messages() {
       setTimeout(() => {
         this.scrollToLast();
+        this.loaderHidden = true;
         if (this.$refs.img) {
           this.$refs.img.forEach(img => {
             img.$el.getElementsByTagName("img")[0].onload = () => {
@@ -442,6 +444,9 @@ export default {
         return;
       }
       this.fetchMoreMessages();
+    },
+    psScrollHandle() {
+      this.scrollHandle(false);
     },
     scrollHandle(mobile) {
       clearTimeout(this.scrollTimeoutId);
