@@ -371,6 +371,10 @@ video {
   }
 }
 
+.ps__rail-y {
+  z-index: 2;
+}
+
 .ps-container.ps {
 
   @include media-breakpoint-up($desktop-breakpoint) {
