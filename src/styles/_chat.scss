@@ -435,7 +435,7 @@
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         width: 100vw;
-        height: 100vh;
+        max-height: 100vh;
         position: absolute;
         left: 100vw;
         top: 0;
