@@ -84,6 +84,7 @@
                 <span class="status" v-if="isAuthor(v)"
                   >{{ v.isNew ? "Sent" : "Seen" }}
                 </span>
+
                 <span class="timeValue">{{ time(v.changedAt) }}</span>
               </div>
             </div>
@@ -104,6 +105,7 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/Video";
+import moment from "moment";
 
 export default {
   name: "ChatMessages",
@@ -237,10 +239,13 @@ export default {
       return messages;
     },
     setLastInGroup(messages) {
+      let lastDate = null;
+
       // if only one message
       if (messages.length === 1) {
         messages[messages.length - 1].lastMessageInGroup = true;
       } else {
+        const now = moment();
         for (let i = 0; i < messages.length; i++) {
           // if very last message
           if (i === messages.length - 1) {
@@ -248,12 +253,89 @@ export default {
             return messages;
           }
 
-          let currentMine = this.checkAuthor(messages[i].fromUser);
-          let isNextNotMine = !this.checkAuthor(messages[i + 1].fromUser);
+          // groping by data
+          let currentIsMine = this.checkAuthor(messages[i].fromUser);
+          let nextIsMine = this.checkAuthor(messages[i + 1].fromUser);
+          let nextAuthorChanges = false;
+          let prevAuthorChanges = false;
+          let nextDayChanges = false;
+
+          let current = moment(messages[i].changedAt);
+          let diffTime2 = now.diff(current);
+          let oldMessage = moment.duration(diffTime2).days() > 0;
+
+          if (messages[i + 1]) {
+            if (messages[i].fromUser.id !== messages[i + 1].fromUser.id) {
+              nextAuthorChanges = true;
+            }
+
+            let next = moment(messages[i + 1].changedAt);
+
+            let diffTime = next.diff(current);
+            let duration = moment.duration(diffTime);
+
+            let days = duration.days();
+            if (days > 0) {
+              nextDayChanges = true;
+            }
+          }
+          if (messages[i - 1]) {
+            if (messages[i].fromUser.id !== messages[i - 1].fromUser.id) {
+              prevAuthorChanges = true;
+            }
+          }
+
+          if (messages[i - 1]) {
+            if (!prevAuthorChanges) {
+              if (lastDate) {
+                // check for new day
+                let current = moment(messages[i].changedAt);
+                let last = moment(lastDate);
+
+                lastDate = messages[i].changedAt;
+
+                let diffTime = current.diff(last);
+                let duration = moment.duration(diffTime);
+
+                let days = duration.days();
+                let hours = duration.hours();
+                let minutes = duration.minutes();
+
+                if (nextDayChanges) {
+                  messages[i].lastMessageInGroup = true;
+                  messages[i].diffDays = days;
+                  continue;
+                }
+
+                if (!oldMessage) {
+                  if (minutes > 10 && minutes < 30) {
+                    messages[i].lastMessageInGroup = true;
+                    continue;
+                  }
+                  if (hours > 2) {
+                    messages[i].lastMessageInGroup = true;
+                    continue;
+                  }
+                }
+              } else {
+                lastDate = messages[i].changedAt;
+              }
+            } else {
+              lastDate = null;
+            }
+          } else {
+            lastDate = null;
+          }
+
+          if (nextAuthorChanges) {
+            lastDate = null;
+          }
+          // -------- end of groping by data
+
           // If current message is mine but not next message OR current message is not mine but next one is mine - set lastMessageInGroup flag
           if (
-            (currentMine && isNextNotMine) ||
-            (!currentMine && !isNextNotMine)
+            (currentIsMine && !nextIsMine) ||
+            (!currentIsMine && nextIsMine)
           ) {
             messages[i].lastMessageInGroup = true;
           }
@@ -284,6 +366,9 @@ export default {
     },
     time(date) {
       return fromNow(date);
+    },
+    time2(date) {
+      return moment(date).format("DD/MM HH:mm:ss");
     },
     isMyMessage(message) {
       return message.fromUser.id === this.user.id;
