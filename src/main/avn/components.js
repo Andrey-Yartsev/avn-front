@@ -7,6 +7,7 @@ import ChatMessagePayConfirm from "@/sep-components/avn/securionpay/ChatMessageP
 import BuySnapchatConfirm from "@/sep-components/avn/securionpay/BuySnapchatConfirm";
 import TipPayConfirm from "@/sep-components/avn/securionpay/TipPayConfirm";
 import SupportIconUsing from "@/sep-components/avn/icons/Using";
+import { Validator } from "vee-validate";
 
 Vue.component("rl-logo", Logo);
 Vue.component("rl-footer", Footer);
@@ -18,3 +19,16 @@ Vue.component("avn-buy-snapchat-pay-confirm", BuySnapchatConfirm);
 Vue.component("avn-tip-pay-confirm", TipPayConfirm);
 
 Vue.component("rl-support-icon-using", SupportIconUsing);
+
+// --
+
+Validator.extend("subscription-price", {
+  getMessage: () => "Required two numbers past the decimal",
+  validate: value => {
+    const m = value.toString().match(/^\d+\.(\d+)?$/);
+    if (!m) {
+      return true;
+    }
+    return m[1].length === 2;
+  }
+});

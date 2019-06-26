@@ -238,19 +238,7 @@ import ColorSelect from "./ColorSelect";
 import Common from "../common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import moment from "moment-timezone";
-import { Validator } from "vee-validate";
 import Form from "@/mixins/form";
-
-Validator.extend("subscription-price", {
-  getMessage: () => "Required two numbers past the decimal",
-  validate: value => {
-    const m = value.toString().match(/^\d+\.(\d+)?$/);
-    if (!m) {
-      return true;
-    }
-    return m[1].length === 2;
-  }
-});
 
 export default {
   name: "ProfileSettingsContent",

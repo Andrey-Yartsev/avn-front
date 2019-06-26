@@ -61,15 +61,26 @@
               <label class="form-group-inner subscription">
                 <span class="label">Subscription</span>
                 <span class="subscription__field field-symbol-currency">
-                  <span class="subscription__per-month">per month</span>
-                  <input
-                    class="field-gap_currency field-gap_timeunit"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    name="subscribePrice"
-                    v-model="localUser.subscribePrice"
-                  />
+                  <span
+                    class="form-field"
+                    :class="{
+                      'field-invalid': fieldError('subscribePrice')
+                    }"
+                  >
+                    <span class="subscription__per-month">per month</span>
+                    <input
+                      class="field-gap_currency field-gap_timeunit"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      name="subscribePrice"
+                      v-model="localUser.subscribePrice"
+                      v-validate="'subscription-price'"
+                    />
+                  </span>
+                  <div class="error-info" v-if="fieldError('subscribePrice')">
+                    {{ fieldError("subscribePrice") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -97,10 +108,11 @@ import moment from "moment";
 import Common from "../../common";
 import PayoutsCommon from "../common";
 import LegalEdit from "./LegalEdit";
+import Form from "@/mixins/form";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
-  mixins: [Common, PayoutsCommon],
+  mixins: [Common, PayoutsCommon, Form],
   components: { LegalEdit },
   data() {
     return {
