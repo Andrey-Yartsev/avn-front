@@ -28,8 +28,8 @@
         :height="media.preview.height"
         :style="{
           'max-width': `${media.preview.width}px`,
-          'width': `100%`,
-          'height': `auto`
+          width: `100%`,
+          height: `auto`
         }"
       />
 
