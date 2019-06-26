@@ -11,10 +11,6 @@
         :src="'data:image/jpeg;base64,' + media.locked"
         :width="media.preview.width"
         :height="media.preview.height"
-        :style="{
-          width: `${media.preview.width}px`,
-          'max-height': `${media.preview.height}px`
-        }"
       />
     </template>
     <template v-else>
@@ -31,12 +27,13 @@
         :width="media.preview.width"
         :height="media.preview.height"
         :style="{
-          'max-width': `${media.preview.width}px`
+          'max-width': `${media.preview.width}px`,
+          'width': `100%`,
+          'height': `auto`
         }"
       />
 
       <video
-        v-show="showPlayer"
         disableremoteplayback
         webkit-playsinline
         playsinline
@@ -45,10 +42,6 @@
         @play="play"
         ref="video"
         class="rounded-corners media-content"
-        :style="{
-          width: `100%`,
-          'max-width': `${media.preview.width}px`
-        }"
         @contextmenu.prevent="() => false"
         @dragstart.prevent="() => false"
       >

@@ -20,14 +20,10 @@
     &-item {
       display: inline-block;
       vertical-align: top;
-      max-width: 100%;
-      max-height: 60vh;
+      width: 100%;
+      max-width: 440px;
       position: relative;
       overflow: hidden;
-
-      @include media-breakpoint-up($tablet-breakpoint) {
-        max-height: calc(81vh - 180px);
-      }
 
       .postLink {
         display: flex;
@@ -39,14 +35,15 @@
     }
 
     &-content {
-      max-height: 60vh;
+      //max-height: 60vh;
       max-width: 100%;
       width: auto;
       object-fit: cover;
       object-position: left top;
+      display: block;
 
       @include media-breakpoint-up($tablet-breakpoint) {
-        max-height: calc(81vh - 180px);
+        //max-height: calc(81vh - 180px);
         margin-left: 0;
         margin-right: 0;
       }
@@ -301,8 +298,29 @@
         .postLink {
           justify-content: flex-end;
           border-radius: 20px 0 0 20px;
-          overflow: hidden;
         }
+      }
+    }
+  }
+
+  .media-item {
+
+    .postLink {
+      width: 100%;
+      padding-top: 100%;
+      max-width: 440px;
+      background-color: rgba($gray, 0.2);
+      max-height: 60vh;
+
+      @include media-breakpoint-up($tablet-breakpoint) {
+        max-height: calc(81vh - 180px);
+      }
+
+      .media-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
   }
@@ -317,20 +335,30 @@
 
 .messageWrapper {
 
+  &:not(.lockedMessage) {
+
+    .video-placeholder {
+
+      img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+      }
+
+      video {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
   .video-placeholder {
     overflow: hidden;
 
     .media-content {
       transition: opacity .3s;
-    }
-
-    video {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      height: 100%;
-      opacity: 0;
-      pointer-events: none;
     }
 
     &.show-player {
@@ -345,15 +373,24 @@
         pointer-events: auto;
       }
     }
+
+    img,
+    video {
+      max-height: 60vh;
+
+      @include media-breakpoint-up($tablet-breakpoint) {
+        max-height: calc(81vh - 180px);
+      }
+    }
   }
 
   &.lockedMessage {
 
     .notAuthorMessage & {
 
-      .video-placeholder {
-        position: static;
-      }
+      //.video-placeholder {
+      //  position: static;
+      //}
 
       .media {
         border-radius: 0 20px 20px 0;
@@ -388,7 +425,8 @@
 .message-icon {
 
   .media,
-  .message {
+  .message,
+  .video-placeholder {
 
     &:before {
       @include icon-font;
@@ -441,7 +479,8 @@
 
 .lockedMessage {
 
-  .media {
+  .media,
+  .video-placeholder {
 
     .notAuthorMessage & {
       cursor: pointer;
@@ -462,6 +501,9 @@
         z-index: 1;
       }
     }
+  }
+
+  .media {
 
     &-content {
       width: auto;
@@ -469,7 +511,8 @@
   }
 
   .media,
-  .message {
+  .message,
+  .video-placeholder {
 
     &:before {
       content: "\E61B";

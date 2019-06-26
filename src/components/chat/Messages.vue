@@ -62,19 +62,17 @@
                   >
                 </span>
                 <div class="media-chat" v-if="v.media.length">
-                  <div class="media media-item">
-                    <MediaVideo
-                      v-if="v.media.length && v.media[0].type === 'video'"
-                      :message="v"
-                      :ref="'video' + v.id"
-                      @play="stopOtherVideo(v.id)"
-                    />
-                    <MediaImage
-                      v-else-if="v.media.length && v.media[0].type === 'photo'"
-                      :message="v"
-                      ref="img"
-                    />
-                  </div>
+                  <MediaVideo
+                    v-if="v.media.length && v.media[0].type === 'video'"
+                    :message="v"
+                    :ref="'video' + v.id"
+                    @play="stopOtherVideo(v.id)"
+                  />
+                  <MediaImage
+                    v-else-if="v.media.length && v.media[0].type === 'photo'"
+                    :message="v"
+                    ref="img"
+                  />
                 </div>
               </div>
               <div
