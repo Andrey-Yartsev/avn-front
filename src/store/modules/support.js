@@ -4,14 +4,11 @@ import { createRequestAction } from "../utils/storeRequest";
 import accordion from "./support/accordion";
 
 const state = {
-  searchText: null,
+  searchText: "",
   ratedIds: []
 };
 
 const actions = {
-  search({ commit }, searchText) {
-    commit("setSearchText", searchText);
-  },
   rate({ dispatch, commit }, data) {
     dispatch("_rate", data).then(() => {
       commit("addRatedId", data.articleId);
@@ -21,7 +18,7 @@ const actions = {
 
 const mutations = {
   setSearchText(state, searchText) {
-    state.setSearchText = searchText;
+    state.searchText = searchText;
   },
   addRatedId(state, id) {
     state.ratedIds.push(id);

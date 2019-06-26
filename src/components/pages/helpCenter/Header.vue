@@ -5,7 +5,7 @@
       <input
         type="text"
         class="lg rounded"
-        v-model="searchText"
+        v-model="localSearchText"
         placeholder="Search"
       />
       <button
@@ -32,7 +32,7 @@ export default {
   name: "SearchCenterHeader",
   data() {
     return {
-      searchText: ""
+      localSearchText: ""
     };
   },
   computed: {
@@ -44,11 +44,19 @@ export default {
         return [];
       }
       return this.$store.state.support.common.suggestions;
+    },
+    searchText() {
+      return this.$store.state.support.searchText;
     }
   },
   methods: {
     search() {
-      this.$router.push(`/help/search/${this.searchText}`);
+      this.$router.push(`/help/search/${this.localSearchText}`);
+    }
+  },
+  watch: {
+    searchText(text) {
+      this.localSearchText = text;
     }
   }
 };

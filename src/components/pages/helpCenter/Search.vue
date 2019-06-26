@@ -112,7 +112,9 @@ export default {
     search(text) {
       this.results = [];
       this.error = null;
+      text = text.trim();
       this.localSearchText = this.escapeRegExp(text);
+      this.$store.commit("support/setSearchText", text);
       this.searchR(this.items);
       this.visibleResults = this.results.slice(0, this.infinityScrollStep);
     },
