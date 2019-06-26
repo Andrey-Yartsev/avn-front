@@ -50,7 +50,6 @@
                   <span v-if="v.lastMessage.isTips" class="type-msg-icn"
                     ><span class="icn-tips icn-item"></span
                   ></span>
-                  <span v-if="true" class="icn-locked icn-item"></span>
                   <template v-else>{{
                     stripHtml(v.lastMessage.text)
                   }}</template>
