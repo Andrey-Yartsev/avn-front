@@ -167,6 +167,10 @@
       }
     }
   }
+
+  &.solid {
+    background-color: $white;
+  }
 }
 
 .loaderWrap {
