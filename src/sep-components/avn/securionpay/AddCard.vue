@@ -384,7 +384,7 @@ export default {
     next() {
       this.submitting = true;
 
-      if (this.hasCCBill && this.userinfo.country === "US") {
+      if (this.hasCCBill) {
         this.tokens.ccb.status = "pending";
         const customerInfo = {
           email: this.email,
@@ -396,7 +396,7 @@ export default {
           address1: this.userinfo.street,
           address2: "",
           phoneNumber: "",
-          country: "US",
+          country: this.userinfo.country,
           ipAddress: this.IP
         };
 
