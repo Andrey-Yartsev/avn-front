@@ -3,11 +3,6 @@
     class="video-placeholder icn-item rounded-corners"
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
-    :style="{
-      width: `100%`,
-      'max-width': `${media.preview.width}px`,
-      'max-height': `${media.preview.height}px`
-    }"
   >
     <template v-if="media.locked">
       <img
@@ -17,8 +12,7 @@
         :width="media.preview.width"
         :height="media.preview.height"
         :style="{
-          'max-width': `${media.preview.width}px`,
-          width: `auto`,
+          'width': `${media.preview.width}px`,
           'max-height': `${media.preview.height}px`
         }"
       />

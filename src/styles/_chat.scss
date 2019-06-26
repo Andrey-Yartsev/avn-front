@@ -143,6 +143,18 @@
     top: 3px;
     bottom: 14px;
   }
+
+  &:not(.ps) {
+
+    .chat-scrollbar {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+    }
+  }
 }
 
 .chat-scrollbar {
