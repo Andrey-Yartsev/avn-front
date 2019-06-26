@@ -300,7 +300,7 @@
         </div>
       </div>
     </form>
-    <Loader v-if="true || isSaving" :fullscreen="false" class="small" />
+    <Loader v-if="isSaving" :fullscreen="false" class="small" />
   </div>
 </template>
 
