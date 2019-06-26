@@ -139,13 +139,17 @@
             <label
               class="form-group-inner subscription"
               :class="{
-                disabled: !user.canEarn,
-                'field-invalid': fieldError('subscribePrice')
+                disabled: !user.canEarn
               }"
             >
               <span class="label">Subscription</span>
               <span class="subscription__field field-symbol-currency">
-                <span class="form-field">
+                <span
+                  class="form-field"
+                  :class="{
+                    'field-invalid': fieldError('subscribePrice')
+                  }"
+                >
                   <span class="subscription__per-month">per month</span>
                   <input
                     class="field-gap_currency field-gap_timeunit"
