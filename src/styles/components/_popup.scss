@@ -844,7 +844,8 @@
 
       &:hover {
 
-        > .ps__scrollbar-y-rail {
+        > .ps__scrollbar-y-rail,
+        .ps__rail-y {
           opacity: 0;
 
           &:hover {
