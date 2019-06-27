@@ -75,7 +75,10 @@
                   />
                 </div>
 
-                <div class="userView userView_card rounded-corners">
+                <div
+                  class="userView userView_card rounded-corners"
+                  v-if="false"
+                >
                   <div class="bg bg-color bg-gradient_light">
                     <img
                       src="https://avnsocial-dev.s3.amazonaws.com/files/j/jn/jnt/jnt6gxkskuwkltaxng0hwmjoydw5ayof1557328654/avatar.jpg"
