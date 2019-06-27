@@ -493,7 +493,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/help/:id",
+    path: "/help/article/:id",
     component: HelpCenterArticlePage,
     meta: {
       staticPage: true,
