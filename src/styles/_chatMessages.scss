@@ -356,6 +356,7 @@
 
   .video-placeholder {
     overflow: hidden;
+    background-color: rgba($gray, 0.2);
 
     .media-content {
       transition: opacity .3s;
