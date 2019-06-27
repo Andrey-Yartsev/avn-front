@@ -96,7 +96,7 @@
           >
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">
-              {{ fieldError('paidPrice') }}
+              {{ fieldError("paidPrice") }}
             </div>
           </div>
         </div>

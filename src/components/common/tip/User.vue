@@ -32,7 +32,7 @@
         >
           <div class="tooltip-arrow"></div>
           <div class="tooltip-inner">
-            {{ fieldError('amount') }}
+            {{ fieldError("amount") }}
           </div>
         </div>
       </div>

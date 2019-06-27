@@ -21,6 +21,13 @@ form {
     }
   }
 
+  .enabled-tooltip {
+
+    .error {
+      margin-bottom: 0;
+    }
+  }
+
   input.error {
     font-size: 1em;
   }
