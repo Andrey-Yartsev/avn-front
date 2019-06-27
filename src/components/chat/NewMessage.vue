@@ -349,7 +349,8 @@ export default {
     },
     sent() {
       this.sending = false;
-      this.gotoLastSelected();
+      this.goTo("/chat");
+      // this.gotoLastSelected();
     }
   },
 
