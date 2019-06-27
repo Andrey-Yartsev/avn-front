@@ -262,7 +262,7 @@ export default {
       if (p < 2) {
         this.$store.dispatch(
           "global/setError",
-          { message: "Minimum price is 2$" },
+          { message: "Minimum price is $2" },
           { root: true }
         );
         return;
