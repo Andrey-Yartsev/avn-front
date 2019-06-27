@@ -929,3 +929,30 @@ video {
 .default-cursor {
   cursor: text;
 }
+
+.tooltip {
+
+  &_error-field {
+
+    &.tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 4px);
+      transform: translateX(-50%);
+
+      .enabled-tooltip & {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .tooltip-inner {
+        background: red;
+        white-space: nowrap;
+      }
+
+      .tooltip-arrow {
+        border-color: red;
+      }
+    }
+  }
+}

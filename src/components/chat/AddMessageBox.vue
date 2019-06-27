@@ -78,7 +78,7 @@
           Cancel
         </button>
         <input type="hidden" name="priceAmount" class="getPaidAmount" />
-        <div class="price-amount-field getPaidForm__field">
+        <div class="price-amount-field getPaidForm__field enabled-tooltip">
           <input
             type="number"
             name="paidPrice"
@@ -88,6 +88,16 @@
             :class="{ error: fieldError('paidPrice') }"
             v-validate="'subscription-price'"
           />
+          <div
+            class="tooltip tooltip_error-field"
+            x-placement="top"
+            aria-hidden="true"
+          >
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner">
+              Message about mistake
+            </div>
+          </div>
         </div>
         <button
           class="setPrice btn"
