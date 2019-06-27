@@ -29,7 +29,7 @@
     <button
       type="submit"
       class="btn btn-submit"
-      :disabled="!canSend"
+      :disabled="!isFormValid || !canSend"
       :class="{
         lg: $mq === 'desktop' && needLgClassName,
         'btn_white btn_white-alfabg': needLgClassName
