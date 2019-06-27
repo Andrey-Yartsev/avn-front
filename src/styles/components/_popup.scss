@@ -636,7 +636,6 @@
 .popup-container-scroll {
 
   .loaderWrap {
-    margin-top: -5px;
     background-color: $white;
 
     @include media-breakpoint-up($desktop-breakpoint) {

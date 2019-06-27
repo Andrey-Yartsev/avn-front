@@ -83,12 +83,22 @@
 
       .notifications-container & {
 
-        &:after {
+        .popup & {
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            width: 36px;
-            height: 36px;
-            margin-top: -30px;
+            font-size: 13px;
+            bottom: auto;
+            top: 50%;
+            transform: translate(-50%, calc(-50% + 22px));
+          }
+
+          &:after {
+
+            @include media-breakpoint-up($desktop-breakpoint) {
+              width: 36px;
+              height: 36px;
+              margin-top: -30px;
+            }
           }
         }
       }

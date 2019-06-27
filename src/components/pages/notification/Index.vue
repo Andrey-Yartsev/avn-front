@@ -59,10 +59,8 @@
         </div>
       </div>
 
-      <div class="loader-wrapper" v-if="!items.length && loading">
-        <div class="lds-dual-ring transparent small with-text inline">
-          <div class="loader-text">Loading</div>
-        </div>
+      <div class="loaderWrap loader-content" v-if="!items.length && loading">
+        <Loader :fullscreen="false" />
       </div>
     </div>
     <Footer
@@ -80,6 +78,7 @@ import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import NotificationSingleView from "./Items/Single";
 import NotificationMergedView from "./Items/Merged";
+import Loader from "@/components/common/Loader";
 import uniqBy from "lodash.uniqby";
 
 const typeTitles = {
@@ -102,6 +101,7 @@ export default {
     NotificationMergedView,
     NotificationSingleView,
     MobileHeader,
+    Loader,
     Footer
   },
 
