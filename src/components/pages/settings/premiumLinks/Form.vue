@@ -20,18 +20,24 @@
               <label class="form-group-inner">
                 <span class="label">Price</span>
                 <span class="price__field field-symbol-currency">
-                  <span class="form-field">
+                  <span
+                    class="form-field"
+                    :class="{ 'field-invalid': fieldError('price') }"
+                  >
                     <input
                       class="field-gap_currency"
                       type="number"
                       min="0"
                       step="0.01"
                       required
-                      name="snapchatPrice"
+                      name="price"
                       v-model="snapchatPrice"
-                      v-validate="'required'"
+                      v-validate="'required|subscription-price'"
                     />
                   </span>
+                  <div class="error-info" v-if="fieldError('price')">
+                    {{ fieldError("price") }}
+                  </div>
                 </span>
               </label>
             </div>
