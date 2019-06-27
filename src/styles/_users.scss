@@ -201,6 +201,21 @@
       margin-left: 0;
       margin-right: auto;
     }
+
+    &.userView {
+
+      .user-container {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-left: 15px;
+        }
+      }
+
+      .user-names {
+        padding-left: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
   .arrow {
@@ -337,4 +352,10 @@
       margin-bottom: 0;
     }
   }
+}
+
+.link-render {
+  margin-top: 8px;
+  text-align: left;
+  font-size: 13px;
 }

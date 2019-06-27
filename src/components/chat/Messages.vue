@@ -82,22 +82,11 @@
                     />
                   </div>
                   <div class="user-container">
-                    <div class="avatar avatar_md avatar_md-desk">
-                      <span class="avatar__img">
-                        <img
-                          src="https://avnsocial-dev.s3.amazonaws.com/files/z/ze/ze0/ze0f43dpxqt7g0oooxyg5d3emkq9reao1559231458/avatar.jpg"
-                        />
-                      </span>
-                    </div>
                     <div class="names-actions-wrapper">
                       <div class="user-names">
                         <div class="wrap-name">
                           <a href="/wolters" class="name">Wolk&amp;Forest</a>
-                          <span class="verified-user icn-item"></span>
                         </div>
-                        <span class="user-login reset-ml">
-                          <a href="/wolters">Wolk&amp;Forest</a>
-                        </span>
                       </div>
                     </div>
                     <p class="profile-text">
@@ -106,6 +95,9 @@
                         >https://avn2.retloko.com/wolters\ncvzxcvzxcvzxc</a
                       >
                     </p>
+                    <div class="link-render">
+                      <a href="https://stars.avn.com">stars.avn.com</a>
+                    </div>
                   </div>
                 </div>
               </div>
