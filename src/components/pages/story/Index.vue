@@ -239,7 +239,9 @@
             v-if="isOwner(author.id) && currentStory.viewersCount"
             @click="openViewersModal"
           >
-            <span class="looking btn-icon icn-item"></span>{{ viewersText }}
+            <span class="looking btn-icon icn-item icn-size_lg" />{{
+              viewersText
+            }}
           </div>
         </div>
         <Tip

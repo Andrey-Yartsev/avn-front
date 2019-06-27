@@ -14,7 +14,10 @@
               @click.prevent="addToHighlights"
               class="btn-story-details icn-item hidden-mobile"
             />
-            <router-link to="/settings/story" class="btn-settings icn-item" />
+            <router-link
+              to="/settings/story"
+              class="btn-settings icn-item icn-size_lg"
+            />
           </div>
           <div class="stories-list-preview">
             <swiper :options="swiperOption" key="viewerModalView" ref="swiper">
