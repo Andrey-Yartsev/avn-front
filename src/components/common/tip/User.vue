@@ -15,12 +15,14 @@
         <input
           name="amount"
           class="tip-amount-input rounded"
-          type="text"
-          pattern="\d{1,5}(?:\.\d{0,2})?"
-          maxlength="8"
+          type="number"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
-          :class="{ error: !isValid, lg: $mq === 'desktop' && needLgClassName }"
+          :class="{
+            error: fieldError('amount'),
+            lg: $mq === 'desktop' && needLgClassName
+          }"
+          v-validate="'tip-amount'"
         />
       </div>
     </div>
@@ -39,11 +41,32 @@
 </template>
 
 <script>
+import Form from "@/mixins/form";
+import Store from "@/store";
+import { Validator } from "vee-validate";
+
+const validLimits = amount => {
+  const limits = Store.state.init.data.payments.tipsLimit;
+  return amount >= limits.min && amount <= limits.max;
+};
+
+Validator.extend("tip-amount", {
+  getMessage: () => "Required two numbers past the decimal",
+  validate: value => {
+    const m = value.toString().match(/^\d+\.(\d+)?$/);
+    if (!m) {
+      return validLimits(value);
+    }
+    if (m[1].length === 2) {
+      return validLimits(value);
+    } else {
+      return false;
+    }
+  }
+});
+
 const isFloat = function(number) {
   number = parseFloat(number);
-
-  console.log(number);
-
   if (Number.isInteger(number)) {
     return true;
   }
@@ -52,6 +75,7 @@ const isFloat = function(number) {
 
 export default {
   name: "UserTip",
+  mixins: [Form],
   props: {
     user: {
       type: Object,
