@@ -74,6 +74,40 @@
                     ref="img"
                   />
                 </div>
+
+                <div class="userView userView_card">
+                  <div class="bg bg-color bg-gradient_light">
+                    <img
+                      src="https://avnsocial-dev.s3.amazonaws.com/files/j/jn/jnt/jnt6gxkskuwkltaxng0hwmjoydw5ayof1557328654/avatar.jpg"
+                    />
+                  </div>
+                  <div class="user-container">
+                    <div class="avatar avatar_md avatar_md-desk">
+                      <span class="avatar__img">
+                        <img
+                          src="https://avnsocial-dev.s3.amazonaws.com/files/z/ze/ze0/ze0f43dpxqt7g0oooxyg5d3emkq9reao1559231458/avatar.jpg"
+                        />
+                      </span>
+                    </div>
+                    <div class="names-actions-wrapper">
+                      <div class="user-names">
+                        <div class="wrap-name">
+                          <a href="/wolters" class="name">Wolk&amp;Forest</a>
+                          <span class="verified-user icn-item"></span>
+                        </div>
+                        <span class="user-login reset-ml">
+                          <a href="/wolters">Wolk&amp;Forest</a>
+                        </span>
+                      </div>
+                    </div>
+                    <p class="profile-text">
+                      For me&amp;<a
+                        href="https://avn2.retloko.com/wolters\ncvzxcvzxcvzxc"
+                        >https://avn2.retloko.com/wolters\ncvzxcvzxcvzxc</a
+                      >
+                    </p>
+                  </div>
+                </div>
               </div>
               <div
                 class="timestamp timestamp_sm-size message-time"
