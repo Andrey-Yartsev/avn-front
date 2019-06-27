@@ -69,22 +69,31 @@
         :class="{ chatTip: true, hidden: !showTip }"
       />
 
-      <div class="tip-form tip-form_post getPaidForm" v-if="showPaid">
+      <div
+        class="tip-form tip-form_post getPaidForm"
+        v-if="showPaid"
+        key="paidPrice"
+      >
         <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
           Cancel
         </button>
         <input type="hidden" name="priceAmount" class="getPaidAmount" />
         <div class="price-amount-field getPaidForm__field">
           <input
-            type="text"
-            pattern="\d{1,3}(?:\.\d{0,2})?"
-            maxlength="6"
+            type="number"
+            name="paidPrice"
             class="getPaidAmountPlaceholder"
             placeholder="Enter price"
             v-model="price"
+            :class="{ error: fieldError('paidPrice') }"
+            v-validate="'subscription-price'"
           />
         </div>
-        <button class="setPrice btn" @click="setPrice" :disabled="!price">
+        <button
+          class="setPrice btn"
+          @click="setPrice"
+          :disabled="!isFormValid || !price"
+        >
           Set Price
         </button>
       </div>
@@ -93,7 +102,7 @@
         class="getPaid btn-el"
         :class="{ active: showPaid, disabled: showTip }"
         v-if="user.canEarn"
-        @click="showPaid = !showPaid"
+        @click="showPaidForm"
         v-tooltip="'Price'"
       >
         <span class="icn-item icn-price icn-size_lg"></span>
@@ -115,11 +124,12 @@ import FileUpload from "@/mixins/fileUpload";
 import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import User from "@/mixins/user";
+import Form from "@/mixins/form";
 
 export default {
   name: "ChatAddMesssageBox",
 
-  mixins: [FileUpload, User],
+  mixins: [FileUpload, User, Form],
 
   components: {
     MediaPreview,
@@ -223,7 +233,12 @@ export default {
       this.showTip = false;
       this.$refs.tip.reset();
     },
+    showPaidForm() {
+      this.showPaid = !this.showPaid;
+      this.$validator.resume();
+    },
     setPrice() {
+      this.$validator.pause();
       const p = parseFloat(this.price);
       if (!p) {
         this.$store.dispatch(
