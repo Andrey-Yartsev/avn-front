@@ -43,15 +43,6 @@
 
 .NotificationsCollectionView {
 
-  &.no-notifications {
-
-    .msg-no-content {
-      pointer-events: auto;
-      opacity: 1;
-    }
-  }
-
-
   .all {
 
     &:after {
@@ -187,6 +178,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         display: none;
       }
+    }
+  }
+
+  .notifications-popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: 88px;
     }
   }
 }
