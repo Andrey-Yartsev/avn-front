@@ -1,9 +1,10 @@
 <template>
   <div class="sticky-header-controls">
-    <router-link
-      to="/"
+    <a
+      href="/"
       class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-    ></router-link>
+      @click.prevent="goBack"
+    />
     <div
       class="profile-name__header"
       :class="{ 'no-owner': isOwner(profile.id) }"
@@ -42,6 +43,11 @@ export default {
     profile: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     }
   }
 };
