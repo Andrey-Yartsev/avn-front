@@ -92,10 +92,11 @@
             class="tooltip tooltip_error-field"
             x-placement="top"
             aria-hidden="true"
+            v-if="fieldError('paidPrice')"
           >
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">
-              Message about mistake
+              {{ fieldError('paidPrice') }}
             </div>
           </div>
         </div>

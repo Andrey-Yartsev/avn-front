@@ -11,7 +11,7 @@
       >Cancel</span
     >
     <div class="tip-amount-field form-group form-group_clear-gaps">
-      <div class="form-field">
+      <div class="form-field enabled-tooltip">
         <input
           name="amount"
           class="tip-amount-input rounded"
@@ -24,6 +24,17 @@
           }"
           v-validate="'tip-amount'"
         />
+        <div
+          class="tooltip tooltip_error-field"
+          x-placement="top"
+          aria-hidden="true"
+          v-if="fieldError('amount')"
+        >
+          <div class="tooltip-arrow"></div>
+          <div class="tooltip-inner">
+            {{ fieldError('amount') }}
+          </div>
+        </div>
       </div>
     </div>
     <button
