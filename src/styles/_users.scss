@@ -91,6 +91,8 @@
   }
 }
 
+
+
 .userView {
   min-width: 0;
 
@@ -179,6 +181,13 @@
           display: block;
         }
       }
+    }
+  }
+
+  &.nolink {
+    color: $main-color;
+    &:hover {
+      color: $main-color;
     }
   }
 
