@@ -846,15 +846,21 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
 
+      .ps__rail-y {
+        opacity: 0;
+
+        &:hover {
+          opacity: 0;
+        }
+      }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
       &:hover {
 
-        > .ps__scrollbar-y-rail,
         .ps__rail-y {
           opacity: 0;
-
-          &:hover {
-            opacity: 0;
-          }
         }
       }
     }

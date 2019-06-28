@@ -992,13 +992,13 @@
         padding-right: 5px;
       }
 
-      > .ps__scrollbar-x-rail,
-      > .ps__scrollbar-y-rail {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
-      }
+      //.ps__rail-x,
+      //.ps__rail-y {
+      //
+      //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      //    display: none;
+      //  }
+      //}
     }
   }
 

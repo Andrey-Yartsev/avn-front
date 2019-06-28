@@ -100,7 +100,7 @@
     <template v-if="$mq === 'desktop' && !shouldBePoster">
       <span
         class="explore-media__counter explore-media__counter_likes"
-        @click="likePost"
+        @click="like"
         ><span class="btn-icon likes icn-item icn-size_lg"></span
         >{{ post.favoritesCount }}</span
       >
@@ -165,6 +165,13 @@ export default {
 
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
+    },
+    like() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+      this.likePost();
     }
   }
 };
