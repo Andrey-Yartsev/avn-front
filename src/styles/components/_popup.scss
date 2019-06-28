@@ -35,6 +35,10 @@
     }
   }
 
+  &.lightbox-post {
+    overflow-y: hidden;
+  }
+
   .content {
     width: 100%;
 
