@@ -24,7 +24,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
-
       position: fixed;
       left: 0;
       right: 0;

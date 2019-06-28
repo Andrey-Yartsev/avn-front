@@ -335,7 +335,8 @@
 
 .messageWrapper {
 
-  &:not(.lockedMessage) {
+  &:not(.lockedMessage),
+  &.lockedMessage.mine {
 
     .video-placeholder {
 
@@ -351,6 +352,19 @@
         opacity: 0;
         pointer-events: none;
       }
+
+      &.show-player {
+
+        img {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        video {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
     }
   }
 
@@ -360,19 +374,6 @@
 
     .media-content {
       transition: opacity .3s;
-    }
-
-    &.show-player {
-
-      img {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      video {
-        opacity: 1;
-        pointer-events: auto;
-      }
     }
 
     img,
@@ -388,10 +389,6 @@
   &.lockedMessage {
 
     .notAuthorMessage & {
-
-      //.video-placeholder {
-      //  position: static;
-      //}
 
       .media {
         border-radius: 0 20px 20px 0;
