@@ -27,6 +27,7 @@
       <button
         type="button"
         class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item"
+        :class="{ 'icn-size_lg': $mq === 'mobile' }"
         @click="() => {}"
         :disabled="!canSearch"
       ></button>
