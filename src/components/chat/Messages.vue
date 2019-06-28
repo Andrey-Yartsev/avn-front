@@ -85,7 +85,7 @@
                   <a
                     :href="vv.url"
                     target="_blank"
-                    class="userView userView_card rounded-corners"
+                    class="userView userView_card rounded-corners nolink"
                     v-for="(vv, k) in v.messageAttachment"
                     :key="k"
                   >
@@ -95,12 +95,14 @@
                     <div class="user-container">
                       <div class="names-actions-wrapper">
                         <div class="user-names">
-                          <div class="wrap-name">
-                            {{ vv.title }}
-                          </div>
+                          <div class="wrap-name" v-html="vv.title"></div>
                         </div>
                       </div>
-                      <!-- <p class="profile-text"></p> -->
+                      <p
+                        class="profile-text"
+                        v-if="vv.description"
+                        v-html="vv.description"
+                      ></p>
                       <div class="link-render">
                         <a>{{ vv.url }}</a>
                       </div>
