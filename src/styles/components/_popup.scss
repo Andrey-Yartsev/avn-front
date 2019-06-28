@@ -854,5 +854,15 @@
         }
       }
     }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+
+        .ps__rail-y {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
