@@ -1056,11 +1056,6 @@ button {
 
   .mediasTop__header:not(.mediasTop__header-underlined) & {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-right: 0;
-      margin-left: auto;
-    }
-
     .stream_start & {
       height: 44px;
 

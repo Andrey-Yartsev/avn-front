@@ -183,6 +183,17 @@
   }
 }
 
+.stream-header {
+
+  .close {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+}
+
 .texteditor {
   position: absolute;
   left: 0;

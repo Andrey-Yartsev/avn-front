@@ -6,7 +6,7 @@
           <div class="addStoryView bg-gradient bg-gradient_standart">
             <form class="storyOverlay">
               <div class="mediasTop">
-                <div class="mediasTop__header">
+                <div class="mediasTop__header story-header">
                   <span
                     class="category-name category-name_story hidden-mobile icn-item icn-size_lg"
                     v-if="$mq === 'desktop'"

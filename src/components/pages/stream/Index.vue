@@ -9,7 +9,7 @@
     <div class="stream " v-else>
       <div class="mediasTop">
         <div
-          class="mediasTop__header"
+          class="mediasTop__header stream-header"
           :class="{ 'mediasTop__header-underlined': !isStarted }"
         >
           <span
