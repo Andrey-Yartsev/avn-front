@@ -74,35 +74,30 @@
                     ref="img"
                   />
                 </div>
-
-                <div
-                  class="userView userView_card rounded-corners"
-                  v-if="false"
-                >
-                  <div class="bg bg-color bg-gradient_light">
-                    <img
-                      src="https://avnsocial-dev.s3.amazonaws.com/files/j/jn/jnt/jnt6gxkskuwkltaxng0hwmjoydw5ayof1557328654/avatar.jpg"
-                    />
-                  </div>
-                  <div class="user-container">
-                    <div class="names-actions-wrapper">
-                      <div class="user-names">
-                        <div class="wrap-name">
-                          <a href="/wolters" class="name">Wolk&amp;Forest</a>
+                <template v-if="v.messageAttachment">
+                  <div
+                    class="userView userView_card rounded-corners"
+                    v-for="(vv, k) in v.messageAttachment"
+                    :key="k"
+                  >
+                    <div class="bg bg-color bg-gradient_light">
+                      <img v-if="vv.image" :src="vv.image" />
+                    </div>
+                    <div class="user-container">
+                      <div class="names-actions-wrapper">
+                        <div class="user-names">
+                          <div class="wrap-name">
+                            {{ vv.title }}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <p class="profile-text">
-                      For me&amp;<a
-                        href="https://avn2.retloko.com/wolters\ncvzxcvzxcvzxc"
-                        >https://avn2.retloko.com/wolters\ncvzxcvzxcvzxc</a
-                      >
-                    </p>
-                    <div class="link-render">
-                      <a href="https://stars.avn.com">stars.avn.com</a>
+                      <!-- <p class="profile-text"></p> -->
+                      <div class="link-render">
+                        <a :href="vv.url">{{ vv.url }}</a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </template>
               </div>
               <div
                 class="timestamp timestamp_sm-size message-time"
