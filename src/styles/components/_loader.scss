@@ -283,3 +283,45 @@
     margin-top: -24px;
   }
 }
+
+.loader-stories {
+  height: 88px;
+  position: relative;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    width: 50px;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  .lds-dual-ring {
+
+    .loader-text {
+      font-size: 11px;
+      transform: translate(-50%, calc(-50% + 28px));
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: 74px;
+        transform: translate(0, -50%);
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 700;
+      }
+
+      &:after {
+        width: 50px;
+        height: 50px;
+        margin-top: -39px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-top: 0;
+          transform: translate(0, -50%);
+          left: -40px;
+        }
+      }
+    }
+  }
+}
