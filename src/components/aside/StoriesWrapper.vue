@@ -9,7 +9,10 @@
       </div>
       <div class="stories-group__outer">
         <div class="stories-group">
-          <perfect-scrollbar class="stories-group__inner">
+          <perfect-scrollbar
+            class="stories-group__inner"
+            v-if="!streamsLoading && !storiesLoading"
+          >
             <div
               v-if="!hasMine"
               class="storyView create-story-button"
@@ -40,9 +43,12 @@
                 </div>
               </div>
             </div>
-            <StreamCollection :stories="streams" />
-            <StoryCollection :stories="stories" />
+            <StreamCollection :stories="streams" v-if="streams.length" />
+            <StoryCollection :stories="stories" v-if="stories.length" />
           </perfect-scrollbar>
+          <div class="loader-stories" v-else>
+            <Loader :fullscreen="false" text="Loading" class="transparent" />
+          </div>
         </div>
       </div>
     </div>
@@ -52,13 +58,15 @@
 <script>
 import StoryCollection from "@/components/common/storyCollection/Index";
 import StreamCollection from "@/components/common/streamCollection/Index";
+import Loader from "@/components/common/Loader";
 import uniqBy from "lodash.uniqby";
 
 export default {
   name: "StoriesWrapper",
   components: {
     StoryCollection,
-    StreamCollection
+    StreamCollection,
+    Loader
   },
   computed: {
     user() {
@@ -78,6 +86,12 @@ export default {
         return this.stories[0].user.id === this.user.id;
       }
       return false;
+    },
+    storiesLoading() {
+      return this.$store.state.stories.loading;
+    },
+    streamsLoading() {
+      return this.$store.state.lives.loading;
     }
   },
   methods: {

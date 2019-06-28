@@ -6,20 +6,8 @@
     background: $white;
   }
 
-  &:before {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
-  }
-
-  #site_header {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
-  }
-
+  &:before,
+  #site_header,
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
