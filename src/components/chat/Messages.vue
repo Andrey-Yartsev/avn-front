@@ -75,7 +75,9 @@
                   />
                 </div>
                 <template v-if="v.messageAttachment">
-                  <div
+                  <a
+                    :href="vv.url"
+                    target="_blank"
                     class="userView userView_card rounded-corners"
                     v-for="(vv, k) in v.messageAttachment"
                     :key="k"
@@ -93,10 +95,10 @@
                       </div>
                       <!-- <p class="profile-text"></p> -->
                       <div class="link-render">
-                        <a :href="vv.url">{{ vv.url }}</a>
+                        <a>{{ vv.url }}</a>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </template>
               </div>
               <div
