@@ -375,118 +375,26 @@ video {
   z-index: 2;
 }
 
-.ps-container.ps {
+.ps {
 
-  @include media-breakpoint-up($desktop-breakpoint) {
+  &.ps--active-y {
 
-    &:hover {
+    @include media-breakpoint-up($desktop-breakpoint) {
 
-      > .ps__scrollbar-y-rail {
+      .ps__rail-y {
 
         &:hover {
           background-color: transparent;
-        }
-      }
 
-      &.ps--in-scrolling {
-
-        &.ps--y {
-
-          > .ps__scrollbar-y-rail {
-
-            >.ps__scrollbar-y {
-              width: 4px;
-            }
-          }
-        }
-
-        &.ps--x {
-
-          > .ps__scrollbar-x-rail {
-
-            >.ps__scrollbar-x {
-              height: 4px;
-            }
+          > .ps__thumb-y {
+            width: 4px;
           }
         }
       }
     }
-  }
 
-  > .ps__scrollbar-x-rail {
-    height: 4px;
-    z-index: 2;
-    
-    > .ps__scrollbar-x {
-      height: 4px;
-      bottom: 0;
-    }
-
-    &:active {
-
-      > .ps__scrollbar-x {
-        height: 4px;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-
-        > .ps__scrollbar-x {
-          height: 4px;
-        }
-      }
-    }
-  }
-
-  > .ps__scrollbar-y-rail {
-    width: 4px;
-    z-index: 2;
-
-    > .ps__scrollbar-y {
+    .ps__thumb-y {
       width: 4px;
-      right: 0;
-    }
-
-    &:active {
-
-      > .ps__scrollbar-y {
-        width: 4px;
-      }
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-
-        > .ps__scrollbar-y {
-          width: 4px;
-        }
-      }
-    }
-  }
-
-  &.ps--in-scrolling {
-
-    &.ps--y {
-
-      > .ps__scrollbar-y-rail {
-
-        >.ps__scrollbar-y {
-          width: 4px;
-        }
-      }
-    }
-
-    &.ps--x {
-
-      > .ps__scrollbar-x-rail {
-
-        >.ps__scrollbar-x {
-          height: 4px;
-        }
-      }
     }
   }
 }
