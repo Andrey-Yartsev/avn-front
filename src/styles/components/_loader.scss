@@ -4,6 +4,13 @@
   height: 130px;
   text-align: center;
 
+  .notifications-container & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 92px;
+    }
+  }
+
   &_tgap {
     padding-top: 40px;
     height: 82px;
@@ -87,9 +94,8 @@
 
           @include media-breakpoint-up($desktop-breakpoint) {
             font-size: 13px;
-            bottom: auto;
-            top: 50%;
-            transform: translate(-50%, calc(-50% + 22px));
+            transform: translate(-50%, -5px);
+            color: $main-color;
           }
 
           &:after {

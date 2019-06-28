@@ -1,14 +1,11 @@
 <template>
   <div
     class="container-popup NotificationsCollectionView"
-    :class="{ 'no-notifications': !items.length }"
+    :class="{ 'no-notifications': !items.length && !loading }"
   >
     <div class="notifications-header main-header" v-if="$mq === 'mobile'">
       <div class="header_container">
-        <router-link :to="'/' + user.username" class="avatar header-avatar"
-          ><span class="avatar__img">
-            <img v-if="user.avatar" :src="user.avatar" /> </span
-        ></router-link>
+        <User />
         <h1 class="page-title">Notifications</h1>
         <router-link
           class="btn-settings icn-item icn-size_lg"
@@ -52,15 +49,16 @@
         :is="notificationView"
         :items="items"
         :scrollFunction="scrollFunction"
+        :loading="loading"
       />
-      <div class="msg-no-content" v-if="!items.length && !loading">
+      <div
+        class="msg-no-content"
+        v-if="!items.length && !loading"
+        :class="{ show: !loading }"
+      >
         <div class="msg-no-content__text">
           Nothing happened yet
         </div>
-      </div>
-
-      <div class="loaderWrap loader-content" v-if="!items.length && loading">
-        <Loader :fullscreen="false" />
       </div>
     </div>
     <Footer
@@ -73,12 +71,12 @@
 <script>
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import MobileHeader from "@/components/header/Mobile";
-import User from "@/mixins/user";
+import UserMixin from "@/mixins/user";
 import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import NotificationSingleView from "./Items/Single";
-import NotificationMergedView from "./Items/Merged";
-import Loader from "@/components/common/Loader";
+import NotificationSingleView from "@/components/pages/notification/Items/Single";
+import NotificationMergedView from "@/components/pages/notification/Items/Merged";
+import User from "@/components/header/User";
 import uniqBy from "lodash.uniqby";
 
 const typeTitles = {
@@ -95,14 +93,14 @@ const typeTitles = {
 export default {
   name: "Notifications",
 
-  mixins: [ModalRouterParams, User, InfinityScrollMixin],
+  mixins: [ModalRouterParams, UserMixin, InfinityScrollMixin],
 
   components: {
     NotificationMergedView,
     NotificationSingleView,
     MobileHeader,
-    Loader,
-    Footer
+    Footer,
+    User
   },
 
   computed: {

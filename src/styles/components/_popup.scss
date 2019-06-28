@@ -35,6 +35,10 @@
     }
   }
 
+  &.lightbox-post {
+    overflow-y: hidden;
+  }
+
   .content {
     width: 100%;
 
@@ -637,6 +641,7 @@
 
   .loaderWrap {
     background-color: $white;
+    margin-top: -4px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       border-radius: 0 0 5px 5px;

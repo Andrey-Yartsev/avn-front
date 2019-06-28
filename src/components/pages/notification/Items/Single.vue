@@ -28,14 +28,25 @@
         <span class="notification-summary" v-html="v.text" />
       </div>
     </div>
+    <div
+      class="loaderWrap loader-content"
+      v-if="loading"
+      :class="{ 'loader-content': $mq === 'mobile' }"
+    >
+      <Loader :fullscreen="false" />
+    </div>
   </perfect-scrollbar>
 </template>
 
 <script>
 import { fromNow } from "@/helpers/datetime";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "NotificationSingleView",
+  components: {
+    Loader
+  },
   props: {
     items: {
       type: Array,
@@ -44,6 +55,10 @@ export default {
     scrollFunction: {
       type: Function,
       required: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
