@@ -197,6 +197,7 @@
     margin-top: 1px;
     margin-bottom: 1px;
     overflow: hidden;
+    display: block;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       box-shadow: 0 3px 8px rgba(#000, 0.1);
