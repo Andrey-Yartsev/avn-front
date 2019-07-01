@@ -22,7 +22,7 @@
             error: fieldError('amount'),
             lg: $mq === 'desktop' && needLgClassName
           }"
-          v-validate="'tip-amount'"
+          v-validate="'tip-sum|tip-amount'"
         />
         <div
           class="tooltip tooltip_error-field"
@@ -61,8 +61,18 @@ const validLimits = amount => {
   return amount >= limits.min && amount <= limits.max;
 };
 
+Validator.extend("tip-sum", {
+  getMessage: "min: $2, max: $200",
+  validate: value => {
+    const r = parseFloat(value);
+    if (r) {
+      return r > 2 && r < 200;
+    }
+  }
+});
+
 Validator.extend("tip-amount", {
-  getMessage: () => "Required two numbers past the decimal",
+  getMessage: "Required two numbers past the decimal",
   validate: value => {
     const m = value.toString().match(/^\d+\.(\d+)?$/);
     if (!m) {
