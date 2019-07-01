@@ -209,11 +209,15 @@ export default {
         }
       }, 100);
     },
-    loading(loading) {
-      if (!loading) {
-        setTimeout(() => {
-          this.initMobileScroll();
-        }, 100);
+    loading: {
+      immediate: true,
+      handler(loading) {
+        if (!loading) {
+          setTimeout(() => {
+            this.loaderHidden = true;
+            this.initMobileScroll();
+          }, 100);
+        }
       }
     }
   },
