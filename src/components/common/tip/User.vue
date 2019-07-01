@@ -67,7 +67,7 @@ Validator.extend("tip-sum", {
   validate: value => {
     const r = parseFloat(value);
     if (r) {
-      return r > 2 && r < 200;
+      return r >= 2 && r <= 200;
     }
   }
 });
