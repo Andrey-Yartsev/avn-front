@@ -129,23 +129,29 @@ const actions = {
       }
     }
 
-    const found = state.messages.find(v => v.id === message.id);
-    if (found) {
-      commit("replaceMessage", message);
-    } else {
-      // if (rootState.auth.user.id === message.fromUser.id) {
-      //   commit("addMessage", message);
-      // } else
-      if (state.activeUserId === message.fromUser.id) {
-        commit("addMessage", message);
-      }
-    }
+    if (state.activeUserId) {
+      let withUserId = message.fromUser.id;
+      const isMine = message.fromUser.id === rootState.auth.user.id;
 
-    dispatch("updateChatLastMessage", {
-      message,
-      withUserId: message.fromUser.id,
-      isMine: message.fromUser.id === rootState.auth.user.id
-    });
+      if (isMine) {
+        withUserId = state.activeUserId;
+      }
+
+      const found = state.messages.find(v => v.id === message.id);
+      if (found) {
+        commit("replaceMessage", message);
+      } else {
+        if (state.activeUserId === withUserId) {
+          commit("addMessage", message);
+        }
+      }
+
+      dispatch("updateChatLastMessage", {
+        message,
+        withUserId,
+        isMine
+      });
+    }
 
     if (rootState.auth.user.id !== message.fromUser.id) {
       if (state.activeUserId === message.fromUser.id) {
