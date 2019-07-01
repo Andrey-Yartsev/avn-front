@@ -339,6 +339,7 @@ export default {
     Streams.config.remoteVideo = document.getElementById("remotevideo");
     Streams.viewStream();
     this.updateLikes();
+    document.body.classList.add("stream-page");
   },
   created() {
     Streams.init({
@@ -417,6 +418,7 @@ export default {
     this.connected = false;
     this.shouldUpdateTimer = false;
     window.clearInterval(this.likesInterval);
+    document.body.classList.remove("stream-page");
   },
   watch: {
     showCommentForm() {
