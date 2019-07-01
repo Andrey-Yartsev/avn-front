@@ -1,5 +1,5 @@
 <template>
-  <form class="tip-form" v-on:submit.stop.prevent="send">
+  <form class="tip-form">
     <span
       role="button"
       class="btn btn-cancel"
@@ -38,7 +38,8 @@
       </div>
     </div>
     <button
-      type="submit"
+      type="button"
+      @click="send"
       class="btn btn-submit"
       :disabled="!isFormValid || !canSend"
       :class="{
