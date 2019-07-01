@@ -18,6 +18,7 @@
 
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
+      <ChatVideoModal v-if="this.$store.state.modal.chatVideo.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
       <rl-subscribe-modal v-if="this.$store.state.modal.subscribe.show" />
@@ -76,6 +77,7 @@ import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
+import ChatVideoModal from "@/components/chat/media/VideoModal";
 import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
@@ -106,8 +108,6 @@ import postMessageHandler from "@/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
-
-// iterate
 
 import { fromNow } from "@/helpers/datetime";
 
@@ -157,6 +157,7 @@ export default {
     PostReportModal,
     PostModal,
     ChatModal,
+    ChatVideoModal,
     UserReportModal,
     ResubscribeModal,
     PaymentModal,

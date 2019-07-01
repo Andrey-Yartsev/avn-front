@@ -136,7 +136,7 @@ import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
-import MediaVideo from "./media/Video";
+import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
 export default {
@@ -445,18 +445,6 @@ export default {
       } else if (media.type === "video") {
         return MediaVideo;
       }
-    },
-    stopOtherVideo(currentPlayingId) {
-      let videos = this._messages.filter(v => {
-        const r = v.media && v.media.length && v.media[0].type === "video";
-        if (!r) {
-          return false;
-        }
-        return currentPlayingId !== v.id;
-      });
-      videos.forEach(v => {
-        this.$refs["video" + v.id][0].cancelPlay();
-      });
     },
     _scrollHandler(mobile) {
       if (mobile) {
