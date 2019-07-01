@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="shadow-block no-padding">
-        <div class="table-wrapper">
+        <div class="table-wrapper" v-if="items.length">
           <div class="table transactions-table">
             <div
               class="PayoutsTransactionsView"
@@ -63,11 +63,17 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info"><span>Empty here for now</span></div>
+          <div class="empty-table-info" v-if="!items.length">
+            <span>Empty here for now</span>
+          </div>
         </div>
-      </div>
-      <div class="shadow-block loader-container" v-if="loading">
-        <Loader :fullscreen="false" text="" class="transparent small no-text" />
+        <div class="loader-container" v-if="loading">
+          <Loader
+            :fullscreen="false"
+            text=""
+            class="transparent small no-text"
+          />
+        </div>
       </div>
     </div>
   </div>
