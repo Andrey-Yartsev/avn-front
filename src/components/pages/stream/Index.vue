@@ -1,6 +1,6 @@
 <template>
   <div
-    class="stream-container popup"
+    class="stream-container"
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
   >
     <div class="loader-container" v-if="!user">
