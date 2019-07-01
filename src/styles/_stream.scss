@@ -28,6 +28,15 @@
 .stream-viewer {
   background-color: #000;
 
+  .popup {
+
+    .overlay {
+      background: #000;
+      top: -70px;
+      padding-bottom: 70px;
+    }
+  }
+
   .main-header,
   #content {
     visibility: hidden;
@@ -458,7 +467,6 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: #000;
 
   video {
     width: 100%;
