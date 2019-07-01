@@ -38,6 +38,9 @@
           <div class="chatView__body">
             <p class="typing">
               <template v-if="v.lastMessage">
+                <span v-if="v.lastMessage.isTips" class="type-msg-icn"
+                  ><span class="icn-tips icn-item"></span
+                ></span>
                 <span class="type-msg-icn" v-if="!v.lastMessage.isFree">
                   <span class="icn-locked icn-item"></span>
                 </span>
@@ -47,10 +50,7 @@
                   ><span class="icn-media icn-item"></span
                 ></span>
                 <span v-else class="message semi-transparent">
-                  <span v-if="v.lastMessage.isTips" class="type-msg-icn"
-                    ><span class="icn-tips icn-item"></span
-                  ></span>
-                  <template v-else>{{
+                  <template>{{
                     stripHtml(v.lastMessage.text)
                   }}</template>
                 </span>
