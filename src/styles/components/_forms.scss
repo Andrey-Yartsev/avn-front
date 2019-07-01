@@ -1270,7 +1270,10 @@ select {
 
   + .sm-text {
     margin-top: 5px;
-    margin-bottom: 15px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 15px;
+    }
   }
 }
 
