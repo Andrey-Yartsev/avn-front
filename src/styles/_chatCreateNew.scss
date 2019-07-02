@@ -7,7 +7,7 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-left: 0;
-      padding-right: 40px;
+      padding-right: 0;
     }
   }
 }
@@ -46,17 +46,6 @@
     vertical-align: middle;
   }
 
-  .chatSelectedName {
-    font-size: 13px;
-  }
-
-  .chatSelectedName {
-    font-weight: 500;
-    line-height: 17px;
-    max-width: 10em;
-    @include ellipsis;
-  }
-
   .remove {
 
     &:not(:hover) {
@@ -64,6 +53,14 @@
       color: $primary-color;
     }
   }
+}
+
+.chatSelectedName {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 17px;
+  max-width: 10em;
+  @include ellipsis;
 }
 
 .all-contacts-found {
