@@ -207,7 +207,12 @@
           live
         </div>
         <div class="form-stream">
-          <Comments :shownComments="comments" :count="comments.length" />
+          <Comments
+            v-if="asideType === 'comments'"
+            :shownComments="comments"
+            :count="comments.length"
+          />
+          <StreamViewers v-else :type="asideType" />
           <form class="stream-comment-form" v-if="showCommentForm">
             <textarea
               ref="commentInput"
@@ -231,32 +236,52 @@
           <span
             role="button"
             class="stream-btn"
-            @click="showCommentForm = !showCommentForm"
+            :class="{ selected: asideType === 'comments' }"
+            @click="
+              () => {
+                this.showCommentForm = !this.showCommentForm;
+                this.asideType = 'comments';
+              }
+            "
           >
             <span
               class="btn-icon comments icn-item icn-size_lg"
               v-tooltip="'Comments'"
-            ></span>
+            />
           </span>
-          <span class="stream-btn" ref="likeBtn">
+          <span
+            class="stream-btn"
+            :class="{ selected: asideType === 'like' }"
+            ref="likeBtn"
+            @click="asideType = 'like'"
+          >
             <span
               class="btn-icon likes icn-item icn-size_lg"
               v-tooltip="'Likes'"
-            ></span>
+            />
             {{ likesCount ? likesCount : "" }}
           </span>
-          <span v-if="$root.showTips" class="stream-btn">
+          <span
+            v-if="$root.showTips"
+            class="stream-btn"
+            @click="asideType = 'tip'"
+            :class="{ selected: asideType === 'tip' }"
+          >
             <span
               class="btn-icon icn-tips icn-item icn-size_lg"
               v-tooltip="'Funds'"
-            ></span>
-            {{ amount.toFixed(2) }} $
+            />
+            {{ amount.toFixed(2) }}
           </span>
-          <span class="stream-btn stream-online-count">
+          <span
+            class="stream-btn stream-online-count"
+            @click="asideType = 'view'"
+            :class="{ selected: asideType === 'view' }"
+          >
             <span
               class="looking btn-icon icn-item icn-size_lg"
               v-tooltip="'Viewers'"
-            ></span>
+            />
             {{ looksCount }}
           </span>
         </div>
@@ -305,6 +330,7 @@ import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
 import Comments from "@/components/common/streamComments/Index";
+import StreamViewers from "@/components/pages/stream/Viewers";
 
 export default {
   name: "Stream",
@@ -345,14 +371,17 @@ export default {
 
       shownComments: [],
 
-      finishing: false
+      finishing: false,
+
+      asideType: "comments"
     };
   },
   components: {
     Loader,
     StreamStatistic,
     Filters,
-    Comments
+    Comments,
+    StreamViewers
   },
   computed: {
     likesCount() {

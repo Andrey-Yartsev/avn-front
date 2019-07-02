@@ -1,5 +1,5 @@
 import Store from "@/store";
 
-export default () => {
-  Store.commit("lives/unlook");
+export default look => {
+  Store.commit("lives/unlook", look);
 };

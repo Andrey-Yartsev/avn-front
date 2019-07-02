@@ -6,60 +6,6 @@
         :key="comment.comment + comment.hideTime"
         :comment="comment"
       />
-
-      <template v-if="false">
-        <div class="comment stream-message">
-          <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
-            <span class="avatar__img">
-              <img
-                src="https://avnsocial-dev.s3.amazonaws.com/files/h/hv/hvt/hvtdzqnjkwmc3u3rf3ylcnn6gdhohf6n1555004518/avatar.jpg"
-              />
-            </span>
-          </span>
-          <div class="comment-content stream-message__head">
-            <div class="comment-body">
-              <span class="name">tester11</span>
-              <span class="comment-text stream-message__text"
-                ><span class="likes icn-item icn-size_md"></span> 10</span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="comment stream-message">
-          <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
-            <span class="avatar__img">
-              <img
-                src="https://avnsocial-dev.s3.amazonaws.com/files/h/hv/hvt/hvtdzqnjkwmc3u3rf3ylcnn6gdhohf6n1555004518/avatar.jpg"
-              />
-            </span>
-          </span>
-          <div class="comment-content stream-message__head">
-            <div class="comment-body">
-              <span class="name">tester11</span>
-              <span class="comment-text stream-message__text"
-                ><span class="icn-tips icn-item icn-size_md"></span> 10</span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="comment stream-message">
-          <span class="avatar avatar_not-shadow avatar_ex-sm avatar_gap-r-sm">
-            <span class="avatar__img">
-              <img
-                src="https://avnsocial-dev.s3.amazonaws.com/files/h/hv/hvt/hvtdzqnjkwmc3u3rf3ylcnn6gdhohf6n1555004518/avatar.jpg"
-              />
-            </span>
-          </span>
-          <div class="comment-content stream-message__head">
-            <div class="comment-body">
-              <span class="name">tester11</span>
-              <span class="comment-text stream-message__text"
-                ><span class="looking icn-item icn-size_md"></span
-              ></span>
-            </div>
-          </div>
-        </div>
-      </template>
     </perfect-scrollbar>
   </div>
 </template>
