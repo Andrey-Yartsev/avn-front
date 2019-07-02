@@ -37,7 +37,7 @@
               :loading="loading"
               :query="query"
             />
-            <NoResults :query="query" :loading="loading" />
+            <NoResults :query="query" :loading="loading && !items.length" />
           </div>
           <div
             class="loaderWrap loader-content loader-content_tgap"
