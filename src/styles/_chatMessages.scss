@@ -136,6 +136,7 @@
 
 .chatMessage {
   margin-bottom: 1px;
+  width: 100%;
   max-width: 83%;
 
   &:not(:first-child) {
@@ -163,6 +164,7 @@
   .chatMessageWrapper {
     display: flex;
     flex-direction: row;
+    width: 100%;
   }
 
   &.withTime {
