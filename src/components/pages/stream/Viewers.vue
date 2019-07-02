@@ -52,7 +52,7 @@ export default {
     },
     items() {
       if (this.type === "view")
-        return this.$store.state.lives.currentLive.viewers;
+        return uniqBy(this.$store.state.lives.currentLive.viewers, "user.id");
       if (this.type === "tip")
         return this.$store.state.lives.currentLive.payers;
       if (this.type === "like")

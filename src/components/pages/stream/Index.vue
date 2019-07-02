@@ -213,7 +213,7 @@
             :count="comments.length"
           />
           <StreamViewers v-else :type="asideType" />
-          <form class="stream-comment-form" v-if="showCommentForm">
+          <form class="stream-comment-form" v-if="asideType === 'comments'">
             <textarea
               ref="commentInput"
               placeholder="Comment"
@@ -237,12 +237,7 @@
             role="button"
             class="stream-btn"
             :class="{ selected: asideType === 'comments' }"
-            @click="
-              () => {
-                this.showCommentForm = !this.showCommentForm;
-                this.asideType = 'comments';
-              }
-            "
+            @click="asideType = 'comments'"
           >
             <span
               class="btn-icon comments icn-item icn-size_lg"
@@ -361,7 +356,6 @@ export default {
       likes: [],
       newComment: "",
       looksCount: 0,
-      showCommentForm: false,
       canBeSaved: false,
 
       streamDuration: 0,
@@ -797,8 +791,8 @@ export default {
     window.clearInterval(this.likesInterval);
   },
   watch: {
-    showCommentForm() {
-      if (this.showCommentForm) {
+    asideType() {
+      if (this.asideType === "comments") {
         this.$nextTick(() => {
           this.$refs.commentInput.focus();
         });
