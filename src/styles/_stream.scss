@@ -267,6 +267,12 @@
     max-width: calc(100% - 30px);
   }
 
+  &__values {
+    white-space: nowrap;
+    text-align: right;
+    margin-left: 10px;
+  }
+
   .comment-body {
     padding-right: 0;
   }

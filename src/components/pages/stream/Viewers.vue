@@ -12,9 +12,9 @@
           </span>
         </span>
         <div class="comment-content stream-message__head">
-          <div class="comment-body">
+          <div class="comment-body comment-body_data">
             <span class="name">{{ item.user.name || "Guest" }}</span>
-            <span class="comment-text stream-message__text">
+            <span class="comment-text stream-message__values">
               <span class="icn-item icn-size_md" :class="className" />
               {{ type === "like" ? getCount(item.user.id) : "" }}
               {{ type === "tip" ? item.amount.toFixed(2) : "" }}
