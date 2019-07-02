@@ -10,9 +10,7 @@
         <form class="forgot-password-form" v-on:submit.stop.prevent="send">
           <div class="form-group form-group_row">
             <span class="form-group form-group_clear-gaps">
-              <span class="form-field"
-                :class="{ 'field-invalid': error }"
-              >
+              <span class="form-field" :class="{ 'field-invalid': error }">
                 <input
                   v-model="email"
                   class="lg rounded"
