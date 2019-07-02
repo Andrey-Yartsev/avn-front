@@ -86,8 +86,8 @@ const typeTitles = {
   mentioned: "Mentions",
   followed: "Followers",
   tip: "Funds",
-  subscribed: "Subscriptions",
-  system: "System"
+  subscribed: "Subscriptions"
+  // system: "System"
 };
 
 export default {
