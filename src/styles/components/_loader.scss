@@ -4,7 +4,8 @@
   height: 130px;
   text-align: center;
 
-  .notifications-container & {
+  .notifications-container &,
+  .searchView & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 92px;
@@ -261,6 +262,10 @@
 
   .payments & {
     min-height: 80px;
+  }
+
+  .searchView & {
+    flex: 1;
   }
 
 
