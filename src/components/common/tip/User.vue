@@ -18,6 +18,7 @@
           type="number"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
+          autocomplete="off"
           :class="{
             error: fieldError('amount'),
             lg: $mq === 'desktop' && needLgClassName
