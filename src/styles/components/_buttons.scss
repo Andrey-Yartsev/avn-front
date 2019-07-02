@@ -740,26 +740,6 @@ button {
   }
 }
 
-//.tips {
-//  align-items: center;
-//
-//  &:not(.btn-icon) {
-//
-//    @include media-breakpoint-up($desktop-breakpoint) {
-//
-//      &:hover {
-//        opacity: 1;
-//        color: $primary-color;
-//      }
-//    }
-//  }
-//
-//  &:after {
-//    width: 1.1em;
-//    content: "\E618";
-//  }
-//}
-
 .btn-watch-all {
   background: none;
   border: none;
