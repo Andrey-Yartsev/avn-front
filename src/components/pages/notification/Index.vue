@@ -34,9 +34,11 @@
             :data-type="v.name"
             @click.prevent="goTo('/notifications/' + v.name)"
             class="notifications-filter__btn icn-item icn-size_lg"
-            ><span class="notifications-filter__btn-text">{{
-              v.title
-            }}</span></a
+            ><span
+              class="notifications-filter__btn-text"
+              v-if="$mq === 'desktop'"
+              >{{ v.title }}</span
+            ></a
           >
         </div>
         <router-link
