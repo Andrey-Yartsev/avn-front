@@ -4,7 +4,8 @@
   height: 130px;
   text-align: center;
 
-  .notifications-container & {
+  .notifications-container &,
+  .searchView & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 92px;
@@ -263,6 +264,10 @@
     min-height: 80px;
   }
 
+  .searchView & {
+    flex: 1;
+  }
+
 
   .payments .payment-card & {
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -324,4 +329,10 @@
       }
     }
   }
+}
+
+.loader-history-text {
+  font-size: 13px;
+  display: block;
+  text-align: center;
 }

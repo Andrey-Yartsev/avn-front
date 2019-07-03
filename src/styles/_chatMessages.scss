@@ -5,14 +5,6 @@
   flex-direction: column;
   width: 100%;
 
-  .notVisible {
-    visibility: hidden;
-    width: 1px;
-    height: 1px;
-    position: absolute;
-    left: -9999999px;
-  }
-
   .media {
     margin: 0 0 1px;
     font-size: 0;
@@ -35,7 +27,6 @@
     }
 
     &-content {
-      //max-height: 60vh;
       max-width: 100%;
       width: auto;
       object-fit: cover;
@@ -43,7 +34,6 @@
       display: block;
 
       @include media-breakpoint-up($tablet-breakpoint) {
-        //max-height: calc(81vh - 180px);
         margin-left: 0;
         margin-right: 0;
       }
@@ -54,14 +44,8 @@
     }
 
     .gif-player {
-      position: relative;
+
       .gif-img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
         background: #000;
       }
     }
@@ -113,8 +97,6 @@
       margin-bottom: 0;
     }
   }
-
-
 }
 
 .chatContent {
@@ -136,9 +118,11 @@
 
 .chatMessage {
   margin-bottom: 1px;
+  width: 100%;
   max-width: 83%;
 
   &:not(:first-child) {
+
     .chatMessageWrapper,
     .message,
     .messageWrapper {
@@ -153,7 +137,9 @@
   }
 
   + .chatMessage {
+
     &.withTime {
+
       .chatMessageWrapper {
         margin-top: 0;
       }
@@ -163,6 +149,7 @@
   .chatMessageWrapper {
     display: flex;
     flex-direction: row;
+    width: 100%;
   }
 
   &.withTime {
@@ -322,6 +309,10 @@
         transform: translate(-50%, -50%);
       }
     }
+  }
+
+  .processing-loader {
+    overflow: hidden;
   }
 }
 
@@ -525,6 +516,21 @@
 }
 
 .chatMessageSending {
-  text-align: right;
-  font-size: 13px;
+  padding-top: 45px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+
+  .lds-dual-ring {
+
+    &.small {
+
+      &.no-text {
+
+        .loader-text {
+          top: 0;
+          transform: translate(-50%, 0);
+        }
+      }
+    }
+  }
 }

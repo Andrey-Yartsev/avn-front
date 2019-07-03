@@ -8,7 +8,12 @@ const state = {
   windowIsActive: true,
   messagesOffset: 100,
   allMessagesLoaded: true,
-  fetchingOld: false
+  fetchingOld: false,
+  // fetch chats
+  allDataReceived: false,
+  offset: 0,
+  chats: []
+  //
 };
 
 let markAsReadId = 0;
@@ -129,23 +134,29 @@ const actions = {
       }
     }
 
-    const found = state.messages.find(v => v.id === message.id);
-    if (found) {
-      commit("replaceMessage", message);
-    } else {
-      // if (rootState.auth.user.id === message.fromUser.id) {
-      //   commit("addMessage", message);
-      // } else
-      if (state.activeUserId === message.fromUser.id) {
-        commit("addMessage", message);
-      }
-    }
+    if (state.activeUserId) {
+      let withUserId = message.fromUser.id;
+      const isMine = message.fromUser.id === rootState.auth.user.id;
 
-    dispatch("updateChatLastMessage", {
-      message,
-      withUserId: message.fromUser.id,
-      isMine: message.fromUser.id === rootState.auth.user.id
-    });
+      if (isMine) {
+        withUserId = state.activeUserId;
+      }
+
+      const found = state.messages.find(v => v.id === message.id);
+      if (found) {
+        commit("replaceMessage", message);
+      } else {
+        if (state.activeUserId === withUserId) {
+          commit("addMessage", message);
+        }
+      }
+
+      dispatch("updateChatLastMessage", {
+        message,
+        withUserId,
+        isMine
+      });
+    }
 
     if (rootState.auth.user.id !== message.fromUser.id) {
       if (state.activeUserId === message.fromUser.id) {
@@ -234,9 +245,6 @@ const mutations = {
   resetSearchUsers(state) {
     state.chatUsers = null;
   },
-  resetChats() {
-    state.chats = [];
-  },
   resetMessages() {
     state.messages = [];
   },
@@ -315,8 +323,37 @@ const mutations = {
   }
 };
 
+const fetchChatsLimit = 20;
+
+const fetchChatsInitState = {
+  allDataReceived: false,
+  offset: 0,
+  chats: []
+};
+
+mutations.fetchChatsReset = state => {
+  for (let k of Object.keys(fetchChatsInitState)) {
+    state[k] = fetchChatsInitState[k];
+  }
+};
+
+mutations.fetchChatsComplete = state => {
+  state.chats = [...state.chats, ...state._fetchChatsResult];
+  if (state._fetchChatsResult.length < fetchChatsLimit) {
+    state.allDataReceived = true;
+  } else {
+    state.offset = state.offset + fetchChatsLimit;
+  }
+};
+
+actions.fetchChats = ({ commit, dispatch, state }) => {
+  return dispatch("_fetchChats", state.offset).then(response => {
+    commit("fetchChatsComplete", response);
+  });
+};
+
 createRequestAction({
-  prefix: "fetchChats",
+  prefix: "_fetchChats",
   apiPath: "chats",
   state,
   mutations,
@@ -324,8 +361,13 @@ createRequestAction({
   options: {
     method: "GET"
   },
-  resultKey: "chats",
-  defaultResultValue: []
+  paramsToOptions: function(params, options) {
+    options.query = {
+      limit: fetchChatsLimit,
+      offset: params
+    };
+    return options;
+  }
 });
 
 createRequestAction({

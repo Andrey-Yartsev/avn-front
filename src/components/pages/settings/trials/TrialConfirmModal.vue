@@ -9,7 +9,7 @@
           v-if="loading"
           :fullscreen="false"
           text=""
-          class="transparent small"
+          class="transparent small no-text"
         />
         <template v-else-if="error">
           <div class="popup-alert__title">

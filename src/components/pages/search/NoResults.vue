@@ -1,8 +1,17 @@
 <template>
-  <div class="no-results-search" v-if="loading">
-    <div class="no-results-search__message">
-      <span class="no-results-search__text">Loading</span>
-    </div>
+  <div
+    v-if="loading"
+    :class="{
+      'loader-content': $mq === 'desktop',
+      'loader-container': $mq === 'mobile'
+    }"
+  >
+    <Loader
+      :fullscreen="false"
+      text="Loading"
+      class="transparent"
+      :class="{ small: $mq === 'desktop' }"
+    />
   </div>
   <div class="no-results-search" v-else-if="!items.length">
     <div class="no-results-search__message">
@@ -13,8 +22,13 @@
 </template>
 
 <script>
+import Loader from "@/components/common/Loader";
+
 export default {
   name: "SearchNoResults",
+  components: {
+    Loader
+  },
   props: ["query", "loading"],
   computed: {
     items() {

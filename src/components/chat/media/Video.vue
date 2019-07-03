@@ -15,7 +15,7 @@
     </template>
     <template v-else>
       <div
-        class="lds-dual-ring transparent small with-text not-fullscreen processing-loader"
+        class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
         v-if="processing"
       >
         <div class="loader-text">Media is currently processing</div>
@@ -28,8 +28,7 @@
         :height="media.preview.height"
         :style="{
           'max-width': `${media.preview.width}px`,
-          width: `100%`,
-          height: `auto`
+          width: `100%`
         }"
       />
 

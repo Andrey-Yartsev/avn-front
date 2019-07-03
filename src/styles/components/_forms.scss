@@ -558,6 +558,7 @@ label {
   display: block;
   height: 24px;
   width: 48px;
+  flex: 0 0 48px;
   overflow: hidden;
   border-radius: 1000px;
   box-shadow: 0 0 0 2px rgba($gray, 0.5) inset;
@@ -1270,7 +1271,10 @@ select {
 
   + .sm-text {
     margin-top: 5px;
-    margin-bottom: 15px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 15px;
+    }
   }
 }
 

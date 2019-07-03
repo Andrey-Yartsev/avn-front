@@ -77,8 +77,8 @@
               </template>
             </div>
             <div
-              class="empty-table-info"
-              :class="{ show: !transactions.length && !transactionsLoading }"
+              class="empty-table-info show"
+              v-if="!transactions.length && !transactionsLoading"
             >
               <span>Empty here for now</span>
             </div>

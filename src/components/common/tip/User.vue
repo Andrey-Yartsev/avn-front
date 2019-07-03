@@ -1,5 +1,5 @@
 <template>
-  <form class="tip-form" v-on:submit.stop.prevent="send">
+  <form class="tip-form">
     <span
       role="button"
       class="btn btn-cancel"
@@ -18,11 +18,12 @@
           type="number"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
+          autocomplete="off"
           :class="{
             error: fieldError('amount'),
             lg: $mq === 'desktop' && needLgClassName
           }"
-          v-validate="'tip-amount'"
+          v-validate="'tip-sum|tip-amount'"
         />
         <div
           class="tooltip tooltip_error-field"
@@ -38,7 +39,8 @@
       </div>
     </div>
     <button
-      type="submit"
+      type="button"
+      @click="send"
       class="btn btn-submit"
       :disabled="!isFormValid || !canSend"
       :class="{
@@ -61,8 +63,18 @@ const validLimits = amount => {
   return amount >= limits.min && amount <= limits.max;
 };
 
+Validator.extend("tip-sum", {
+  getMessage: "min: $2, max: $200",
+  validate: value => {
+    const r = parseFloat(value);
+    if (r) {
+      return r >= 2 && r <= 200;
+    }
+  }
+});
+
 Validator.extend("tip-amount", {
-  getMessage: () => "Required two numbers past the decimal",
+  getMessage: "Required two numbers past the decimal",
   validate: value => {
     const m = value.toString().match(/^\d+\.(\d+)?$/);
     if (!m) {

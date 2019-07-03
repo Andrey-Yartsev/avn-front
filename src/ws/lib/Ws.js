@@ -5,6 +5,7 @@ import stream from "./actions/stream";
 import stream_public from "./actions/stream_public";
 import stream_stop from "./actions/stream_stop";
 import stream_look from "./actions/stream_look";
+import stream_like from "./actions/stream_like";
 import stream_unlook from "./actions/stream_unlook";
 import stream_tip from "./actions/stream_tip";
 import stream_comment from "./actions/stream_comment";
@@ -26,6 +27,7 @@ const actions = {
   stream,
   stream_stop,
   stream_look,
+  stream_like,
   stream_unlook,
   stream_tip,
   message,

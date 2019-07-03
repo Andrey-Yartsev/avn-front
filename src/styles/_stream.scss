@@ -11,17 +11,44 @@
     position: relative;
   }
 
+  .main-header {
+    display: none;
+  }
+
   #content {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 100%;
+    }
+  }
+}
+
+.stream-viewer {
+  background-color: #000;
+
+  .popup {
+
+    .overlay {
+      background: #000;
+      top: -70px;
+      padding-bottom: 70px;
+    }
+  }
+
+  .main-header,
+  #content {
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
 .stream-container {
   height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .stream_enabled {
@@ -93,41 +120,11 @@
 }
 
 .stream {
-  position: fixed;
+  position: relative;
   z-index: 99;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  &:before {
-    //position: fixed;
-    //pointer-events: none;
-    //top: 0;
-    //height: 70px;
-    //background: linear-gradient(to bottom, #000 0%, transparent 100%);
-    //opacity: 0.2;
-    //content: "";
-    //left: 0;
-    //right: 0;
-    //z-index: 1;
-  }
+  flex: 1;
 
   &:after {
-    /*position: fixed;
-        pointer-events: none;
-        top: 87px;
-        height: 1px;
-        background: #fff;
-        opacity: .2;
-        content: '';
-        left: 0;
-        right: 0;
-        z-index: 1;
-        @include media-breakpoint-up($desktop-breakpoint) {
-            height: 2px;
-            top: 58px;
-        }*/
 
     .stream_enabled & {
       content: none;
@@ -153,21 +150,12 @@
   }
 
   #devices {
-    /*position: fixed;*/
     width: 100%;
     display: flex;
     z-index: 2;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      /*top: 88px;
-      left: 0;
-      right: 0;*/
       justify-content: center;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      /*top: 0;
-      right: 60px;*/
     }
 
     .stream_enabled & {
@@ -450,6 +438,10 @@
       opacity: 1;
     }
   }
+
+  &.selected {
+    opacity: 1;
+  }
 }
 
 .stream-btns {
@@ -479,7 +471,6 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: #000;
 
   video {
     width: 100%;
@@ -726,7 +717,6 @@
   border-bottom: none;
 
   .toggle-element {
-    flex: 0 0 48px;
     margin-left: 20px;
   }
 }

@@ -84,7 +84,7 @@ export default {
       });
     },
     selectSection(id) {
-      this.$router.push(`/help/${id}`);
+      this.$router.push(`/help/article/${id}`);
     },
     openR(sections, level) {
       this.open(sections[0].id, level);

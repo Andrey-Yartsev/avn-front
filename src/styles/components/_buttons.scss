@@ -740,26 +740,6 @@ button {
   }
 }
 
-//.tips {
-//  align-items: center;
-//
-//  &:not(.btn-icon) {
-//
-//    @include media-breakpoint-up($desktop-breakpoint) {
-//
-//      &:hover {
-//        opacity: 1;
-//        color: $primary-color;
-//      }
-//    }
-//  }
-//
-//  &:after {
-//    width: 1.1em;
-//    content: "\E618";
-//  }
-//}
-
 .btn-watch-all {
   background: none;
   border: none;
@@ -1101,6 +1081,7 @@ button {
     margin-top: auto;
     margin-bottom: auto;
     width: 50px;
+    height: 50px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 12px 15px;

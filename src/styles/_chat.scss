@@ -163,6 +163,7 @@
   padding-right: 16px;
   max-height: 100%;
   bottom: 0;
+  padding-top: 3px;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     overflow-y: auto;
@@ -750,10 +751,6 @@
     display: flex;
     align-items: center;
     align-content: center;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: calc(100% - 80px);
-    }
   }
 
   .isTyping {
@@ -1159,18 +1156,7 @@
 
   &.active {
 
-    &:before {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        background: linear-gradient(
-          30deg,
-          rgba(33, 150, 243, 1) 10%,
-          rgba(255, 64, 129, 1) 90%
-        );
-        opacity: 0.2;
-      }
-    }
-
+    &:before,
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -1179,6 +1165,19 @@
           rgba(33, 150, 243, 1) 10%,
           rgba(255, 64, 129, 1) 90%
         );
+      }
+    }
+
+    &:before {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        opacity: 0.2;
+      }
+    }
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         opacity: 0.06;
         z-index: 0;
       }
@@ -1236,6 +1235,7 @@
 }
 
 .type-msg-icn {
+  margin-right: 5px;
 
   .icn-item {
 

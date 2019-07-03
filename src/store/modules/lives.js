@@ -20,6 +20,9 @@ const initState = {
     likesCount: 0,
     looksCount: 0,
     comments: [],
+    viewers: [],
+    payers: [],
+    likers: [],
     statistic: {
       stream_comment_search_all: {
         data: []
@@ -48,7 +51,13 @@ const mutations = {
     state.currentLive.likesCount += 1;
   },
 
+  like(state, like) {
+    state.currentLive.likers = [...state.currentLive.likers, like];
+  },
+
   look(state, look) {
+    state.currentLive.viewers = [...state.currentLive.viewers, look];
+
     const prevLook = state.currentLive.comments.filter(comment => {
       const commentUser = comment.user || comment.guest;
       const lookUser = look.user || look.guest;
@@ -75,7 +84,10 @@ const mutations = {
     state.currentLive.looksCount += 1;
   },
 
-  unlook(state) {
+  unlook(state, look) {
+    state.currentLive.viewers = state.currentLive.viewers.filter(
+      viewer => viewer.id !== look.id
+    );
     state.currentLive.looksCount -= 1;
   },
 
@@ -90,12 +102,13 @@ const mutations = {
   },
 
   tip(state, tip) {
+    state.currentLive.payers = [...state.currentLive.payers, tip];
     state.currentLive.comments = [
       ...state.currentLive.comments,
       {
         ...tip,
         type: "tip",
-        comment: `sent you a $ ${tip.amount} tip`,
+        comment: `sent you $ ${tip.amount}`,
         hideTime: Date.now() + 2 * 60 * 1000
       }
     ];
