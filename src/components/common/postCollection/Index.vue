@@ -4,12 +4,12 @@
       <div class="post-secret">
         <img :src="user.avatar" alt="" class="post-secret__img" />
         <span class="post-secret__text">
-          Subscription required to see posts
+          Subscribe to view posts
         </span>
       </div>
       <div class="post-secret post-secret_no-avatar">
         <span class="post-secret__text">
-          Subscription required to see posts
+          Subscribe to view posts
         </span>
       </div>
     </template>
