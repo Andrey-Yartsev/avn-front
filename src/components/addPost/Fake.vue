@@ -12,7 +12,7 @@
       <div class="text-media-container">
         <textarea
           ref="textarea"
-          class="textarea sm"
+          class="textarea sm rounded"
           placeholder="What's going on?"
           @click="goToAddPost"
         />
