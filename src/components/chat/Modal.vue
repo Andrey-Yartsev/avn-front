@@ -5,7 +5,11 @@
       slot="content"
       :class="{ 'chat-popup_new-msg': isNew }"
     >
-      <div class="content content_column-mob" ref="content">
+      <div
+        class="content"
+        ref="content"
+        :class="{ 'content_column-mob': $mq === 'mobile' }"
+      >
         <component :is="component" mode="modal" />
       </div>
       <button
