@@ -50,6 +50,19 @@
       }
     }
   }
+
+
+  &.no-selected-conversation {
+
+    .msg-no-chat {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .addChatMessage {
+      transform: translateY(100%);
+    }
+  }
 }
 
 .chat-section {
