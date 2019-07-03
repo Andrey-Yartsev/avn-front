@@ -1,5 +1,6 @@
 <template>
   <div
+    id="chatCollectionContent"
     class="chatCollectionContent"
     :class="{
       chat: isSecondScreen,

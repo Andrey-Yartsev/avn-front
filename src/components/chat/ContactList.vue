@@ -3,7 +3,8 @@
     <component
       :is="scrollableComponent"
       class="contactsListContent"
-      ref="messages"
+      ref="contactsList"
+      @ps-scroll-y="psScroll"
     >
       <div
         @click="openChat(v.id)"
@@ -65,15 +66,19 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import InfinityScrollData from "@/mixins/infinityScrollData";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouterGoto],
+  mixins: [ModalRouterGoto, InfinityScrollData],
 
   computed: {
     scrollableComponent() {
       return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
+    },
+    store() {
+      return this.$store.state.chat;
     }
   },
 
@@ -83,6 +88,11 @@ export default {
       required: true
     }
   },
+
+  data: () => ({
+    loadingName: "_fetchChatsLoading",
+    mobileContainer: null
+  }),
 
   methods: {
     openChat(id) {
@@ -95,7 +105,42 @@ export default {
       const tmp = document.createElement("DIV");
       tmp.innerHTML = html;
       return tmp.textContent || tmp.innerText || "";
+    },
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("chat/fetchChats");
+    },
+    psScroll() {
+      this.scrollHandler();
+    },
+    _scrollHandler(el, offset) {
+      if (this.infinityScrollTimeoutId) {
+        clearTimeout(this.infinityScrollTimeoutId);
+      }
+
+      this.infinityScrollTimeoutId = setTimeout(() => {
+        const isOnBottom = el.scrollTop > el.offsetHeight - offset;
+
+        if (
+          isOnBottom &&
+          !this.infinityScrollLoading &&
+          !this.allDataReceived
+        ) {
+          this.infinityScrollGetDataMethod();
+        }
+      }, 100);
+    },
+    scrollHandler() {
+      this._scrollHandler(this.$refs.contactsList.$el, 50);
+    },
+    mobileScrollHandler(e) {
+      this._scrollHandler(e.target, 200);
     }
+  },
+  mounted() {
+    this.mobileContainer = document.getElementById("chatCollectionContent");
+    this.mobileContainer.addEventListener("scroll", e => {
+      this.mobileScrollHandler(e);
+    });
   }
 };
 </script>

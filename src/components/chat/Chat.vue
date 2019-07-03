@@ -310,7 +310,7 @@ export default {
 
   beforeDestroy() {
     this.$store.commit("chat/messages", []);
-    this.$store.commit("chat/resetChats");
+    this.$store.commit("chat/fetchChatsReset");
     window.removeEventListener("focus", this.windowFocus);
     window.removeEventListener("blur", this.windowBlur);
   }
