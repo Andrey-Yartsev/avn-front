@@ -1,14 +1,11 @@
 @import "components/imports";
 
-.searchContact {
+.selectedContacts {
+  padding: 9px 9px 0;
 
-  .selectedContacts {
-    padding: 9px 9px 0;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-left: 0;
-      padding-right: 0;
-    }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -102,7 +99,6 @@
     font-size: 24px;
     margin: 0 4px 0 0;
     width: 1.1em;
-    //font-weight: 400;
     content: "\E603";
   }
 
