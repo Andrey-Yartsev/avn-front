@@ -322,7 +322,6 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      box-shadow: none;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       background-color: $white;
@@ -475,13 +474,6 @@
         min-height: 160px;
         display: flex;
         flex-direction: column;
-      }
-    }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 15px;
       }
     }
 
