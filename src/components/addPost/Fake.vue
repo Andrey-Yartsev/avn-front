@@ -1,6 +1,9 @@
 <template>
   <div :class="['addPost', { truncated: !user.isPerformer }]">
-    <form class="add-new-form bg-gradient_light-desk bg-gradient_light">
+    <form
+      class="add-new-form"
+      :class="{ 'bg-gradient_light': $mq === 'desktop' }"
+    >
       <router-link
         :to="'/' + user.username"
         class="avatar avatar_not-shadow avatar_gap-r-md avatar_sm hidden-mobile"

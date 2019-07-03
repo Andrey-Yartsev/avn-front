@@ -713,13 +713,6 @@ video {
       $secondary-color-12 10%,
       $primary-color-12 90%
     );
-
-    &-desk {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        background-image: none;
-      }
-    }
   }
 
   &_standart {
