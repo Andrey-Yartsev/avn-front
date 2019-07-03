@@ -1160,18 +1160,7 @@
 
   &.active {
 
-    &:before {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        background: linear-gradient(
-          30deg,
-          rgba(33, 150, 243, 1) 10%,
-          rgba(255, 64, 129, 1) 90%
-        );
-        opacity: 0.2;
-      }
-    }
-
+    &:before,
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -1180,6 +1169,19 @@
           rgba(33, 150, 243, 1) 10%,
           rgba(255, 64, 129, 1) 90%
         );
+      }
+    }
+
+    &:before {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        opacity: 0.2;
+      }
+    }
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
         opacity: 0.06;
         z-index: 0;
       }
