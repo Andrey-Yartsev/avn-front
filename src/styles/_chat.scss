@@ -751,10 +751,6 @@
     display: flex;
     align-items: center;
     align-content: center;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: calc(100% - 80px);
-    }
   }
 
   .isTyping {
