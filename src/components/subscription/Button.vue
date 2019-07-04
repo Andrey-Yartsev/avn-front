@@ -89,6 +89,12 @@ export default {
       }
       this[this.subsAction]();
     }
+  },
+  mounted() {
+    this.$root.$on("subcribeBtnClick", this.subscribe);
+  },
+  beforeDestroy() {
+    this.$root.$off("subcribeBtnClick", this.subscribe);
   }
 };
 </script>

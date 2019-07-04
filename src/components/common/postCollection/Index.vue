@@ -1,18 +1,5 @@
 <template>
   <div class="postCollectionView">
-    <template v-if="false">
-      <div class="post-secret">
-        <img :src="user.avatar" alt="" class="post-secret__img" />
-        <span class="post-secret__text">
-          Subscribe to view posts
-        </span>
-      </div>
-      <div class="post-secret post-secret_no-avatar">
-        <span class="post-secret__text">
-          Subscribe to view posts
-        </span>
-      </div>
-    </template>
     <div class="posts">
       <Post
         v-for="post in posts"

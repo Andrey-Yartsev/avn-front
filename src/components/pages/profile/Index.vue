@@ -127,51 +127,57 @@
         <div class="container">
           <div class="row">
             <div :class="['content-col', { 'single-col': !useMediumPostView }]">
-              <p
-                :class="['empty-feed']"
-                v-if="!posts.length && !infinityScrollLoading"
-              >
-                <span>Nothing here yet</span>
-                <button
-                  v-if="isOwner(this.profile.id)"
-                  @click="openAddPostModal"
-                  type="button"
-                  class="make-post-btn btn-with-icon btn-with-icon_lg feed"
+              <PrivateBlock
+                v-if="!isOwner(profile.id) && profile.isPrivatePost"
+                :profile="profile"
+              />
+              <template v-else>
+                <p
+                  :class="['empty-feed']"
+                  v-if="!posts.length && !infinityScrollLoading"
                 >
-                  <span class="icn-item icn-post"></span>
-                  Create new post
-                </button>
-              </p>
-              <div class="profile-content">
-                <div class="posts-container" v-if="useMediumPostView">
-                  <PostCollection
-                    :class="'rounded-container'"
-                    :posts="posts"
-                    from="profile/home"
-                  />
-                </div>
-                <div class="exploreAllCollectionView" v-else>
-                  <div class="explore">
-                    <div class="explore__inside">
-                      <div :class="['explore-wrapper', pageName]">
-                        <component
-                          :is="postComponent"
-                          v-for="post in posts"
-                          :post="post"
-                          :key="post.id"
-                          from="profile/home"
-                        />
+                  <span>Nothing here yet</span>
+                  <button
+                    v-if="isOwner(this.profile.id)"
+                    @click="openAddPostModal"
+                    type="button"
+                    class="make-post-btn btn-with-icon btn-with-icon_lg feed"
+                  >
+                    <span class="icn-item icn-post"></span>
+                    Create new post
+                  </button>
+                </p>
+                <div class="profile-content">
+                  <div class="posts-container" v-if="useMediumPostView">
+                    <PostCollection
+                      :class="'rounded-container'"
+                      :posts="posts"
+                      from="profile/home"
+                    />
+                  </div>
+                  <div class="exploreAllCollectionView" v-else>
+                    <div class="explore">
+                      <div class="explore__inside">
+                        <div :class="['explore-wrapper', pageName]">
+                          <component
+                            :is="postComponent"
+                            v-for="post in posts"
+                            :post="post"
+                            :key="post.id"
+                            from="profile/home"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="loaderWrap loader-content"
+                    v-if="infinityScrollLoading"
+                  >
+                    <Loader :fullscreen="false" />
+                  </div>
                 </div>
-                <div
-                  class="loaderWrap loader-content"
-                  v-if="infinityScrollLoading"
-                >
-                  <Loader :fullscreen="false" />
-                </div>
-              </div>
+              </template>
             </div>
           </div>
         </div>
@@ -199,6 +205,7 @@ import HeaderControl from "@/components/common/profile/headerControl/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
+import PrivateBlock from "@/components/common/profile/privateBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
@@ -219,6 +226,7 @@ export default {
     Footer,
     PostSmall,
     PostMedium,
+    PrivateBlock,
     Highlights
   },
 
