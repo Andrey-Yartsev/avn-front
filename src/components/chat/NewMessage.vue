@@ -73,7 +73,7 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult">
+          <div class="searchResult" v-if="chats.length">
             <div
               v-for="v in chats"
               v-bind:key="v.withUser.id"
@@ -101,6 +101,27 @@
               <span class="check icn-item"></span>
             </div>
           </div>
+
+          <template v-if="false">
+            <div class="loader-container" v-if="!chats.length && loading">
+              <Loader
+                :fullscreen="false"
+                text="Loading"
+                class="transparent small"
+              />
+            </div>
+            <div
+              class="no-results-search show"
+              v-if="!chats.length && !loading"
+            >
+              <div class="no-results-search__message">
+                <span class="no-results-search__text">
+                  Nothing found for&nbsp;
+                </span>
+                <span class="searchAllTag">"{{ searchQuery }}"</span>
+              </div>
+            </div>
+          </template>
         </perfect-scrollbar>
       </div>
     </template>
