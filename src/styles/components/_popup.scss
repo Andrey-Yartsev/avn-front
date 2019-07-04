@@ -463,13 +463,15 @@
   &.popup-image {
     background-color: transparent;
     border-radius: 0;
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
     box-shadow: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: none;
       width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     img {
