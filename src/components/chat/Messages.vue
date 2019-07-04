@@ -14,15 +14,11 @@
       @ps-scroll-y="psScrollHandle"
     >
       <div class="chat-scrollbar" ref="messagesMobileContainer">
-        <div class="chatMessageSending loader-container" v-if="moreLoading">
-          <Loader
-            :fullscreen="false"
-            text=""
-            class="transparent small no-text"
-          />
-          <span class="loader-history-text semi-transparent"
-            >Loading history...</span
-          >
+        <div
+          class="chatMessageSending past-messages semi-transparent"
+          v-if="moreLoading"
+        >
+          Loading history...
         </div>
         <div
           v-for="v in messages"
@@ -123,7 +119,10 @@
             </div>
           </div>
         </div>
-        <div class="chatMessageSending semi-transparent" v-if="sending">
+        <div
+          class="chatMessageSending new-messages semi-transparent"
+          v-if="sending"
+        >
           Sending...
         </div>
       </div>

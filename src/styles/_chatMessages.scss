@@ -50,6 +50,19 @@
       }
     }
   }
+
+
+  &.no-selected-conversation {
+
+    .msg-no-chat {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .addChatMessage {
+      transform: translateY(100%);
+    }
+  }
 }
 
 .chat-section {
@@ -516,21 +529,23 @@
 }
 
 .chatMessageSending {
-  padding-top: 45px;
-  margin-bottom: 10px;
-  margin-top: 5px;
+  margin-left: -20px;
+  margin-right: -20px;
+  height: 6px;
+  background: repeating-linear-gradient(to right, rgba(255, 64, 129, 1) 0%, rgba(33, 150, 243, 1) 50%, rgba(255, 64, 129, 1) 100%);
+  background-size: 200% auto;
+  background-position: 0 100%;
+  animation: gradient 2s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  font-size: 0;
 
-  .lds-dual-ring {
+  &.past-messages {
+    margin-top: -3px;
+    margin-bottom: 5px;
+  }
 
-    &.small {
-
-      &.no-text {
-
-        .loader-text {
-          top: 0;
-          transform: translate(-50%, 0);
-        }
-      }
-    }
+  &.new-messages {
+    margin-top: 5px;
   }
 }
