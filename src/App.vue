@@ -109,6 +109,8 @@ import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
 
+import BackRouter from "@/mixins/backRouter";
+
 import { fromNow } from "@/helpers/datetime";
 
 fromNow("2019-05-03T11:01:12+00:00");
@@ -178,7 +180,7 @@ export default {
     TrialConfirmModal,
     UserBubble
   },
-  mixins: [ColorScheme],
+  mixins: [ColorScheme, BackRouter],
   data() {
     return {
       showToast: false,

@@ -5,6 +5,7 @@ export default router => {
   router.addRoutes([
     {
       beforeEnter: Profile.init,
+      name: "profile",
       path: "/:username/:page?",
       component: ProfilePage,
       meta: {
