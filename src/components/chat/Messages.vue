@@ -219,6 +219,11 @@ export default {
           }, 100);
         }
       }
+    },
+    sending(sending) {
+      if (sending) {
+        this.scrollToLast();
+      }
     }
   },
 
