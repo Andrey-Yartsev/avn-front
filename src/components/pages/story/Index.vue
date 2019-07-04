@@ -531,7 +531,6 @@ export default {
     },
 
     close() {
-      console.log("CLOSE");
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
       if (global.storyFirstEnter) {

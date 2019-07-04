@@ -47,25 +47,20 @@
 
 <script>
 import { fromNow } from "@/helpers/datetime";
+import Story from "@/mixins/story";
 
 export default {
   name: "StorySmallHorizontal",
+  mixins: [Story],
   props: {
     post: {
       type: Object,
       required: true
-    },
-    stories: {
-      type: Array,
-      default: () => []
     }
   },
   computed: {
     dateTime: function() {
       return fromNow(this.post.createdAt);
-    },
-    userIds() {
-      return this.stories.map(s => s.user.id);
     }
   },
   methods: {
