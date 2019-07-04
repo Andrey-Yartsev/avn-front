@@ -1,7 +1,7 @@
 <template>
   <div class="media media-item">
     <figure class="media-item active media-item_photo" data-index="0">
-      <template v-if="!media.locked">
+      <template v-if="isMyMessage || isFree || isUnlocked">
         <a
           class="postLink video-placeholder icn-item rounded-corners"
           :class="{ processing }"
@@ -26,15 +26,18 @@
       </template>
       <template v-else>
         <div class="postLink video-placeholder icn-item rounded-corners">
+          <div
+            class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
+            v-if="processing"
+          >
+            <div class="loader-text">Media is currently processing</div>
+          </div>
           <img
-            :src="`data:image/jpeg;base64,${media.locked}`"
+            :src="media.thumb.source"
+            :class="{ 'no-media-text': !message.textLength }"
             :width="media.thumb.width"
             :height="media.thumb.height"
             class="media-content"
-            :style="{
-              width: `${media.thumb.width}px`,
-              height: `${media.thumb.height}px`
-            }"
           />
         </div>
       </template>
@@ -43,7 +46,10 @@
 </template>
 
 <script>
+import User from "@/mixins/user";
+
 export default {
+  mixins: [User],
   props: {
     message: Object
   },
@@ -53,6 +59,15 @@ export default {
     },
     processing() {
       return !this.message.isMediaReady;
+    },
+    isFree() {
+      return this.message.isFree;
+    },
+    isUnlocked() {
+      return this.message.isOpened && !this.message.isFree;
+    },
+    isMyMessage() {
+      return this.message.fromUser.id === this.user.id;
     }
   },
   methods: {
