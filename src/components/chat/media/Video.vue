@@ -1,6 +1,6 @@
 <template>
   <div
-    class="video-placeholder icn-item rounded-corners"
+    class="video-placeholder icn-item"
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
   >

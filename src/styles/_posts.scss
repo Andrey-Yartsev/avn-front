@@ -1253,11 +1253,23 @@
     }
   }
 
-  &.show-player,
-  &.processing {
+  &.show-player {
 
     &:after {
       display: none;
+    }
+  }
+
+  &.processing {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  video {
+
+    .popup & {
+      max-width: 100%;
+      max-height: calc(100vh - 80px);
     }
   }
 }

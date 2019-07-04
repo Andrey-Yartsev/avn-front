@@ -1,17 +1,14 @@
 <template>
   <Modal>
-    <div
-      class="popup-container popup-container_block popup-alert"
-      slot="content"
-    >
-      <div class="content">
+    <div class="popup-container popup-image" slot="content">
+      <div class="content content_relative">
         <Video :message="message" />
+        <button
+          type="button"
+          class="close close_light close_visible-mob icn-item icn-size_lg"
+          @click="close"
+        />
       </div>
-      <button
-        type="button"
-        class="close close_default icn-item"
-        @click="close"
-      />
     </div>
   </Modal>
 </template>

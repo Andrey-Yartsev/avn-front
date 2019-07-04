@@ -3,11 +3,18 @@
     <figure class="media-item active media-item_photo" data-index="0">
       <template v-if="!media.locked">
         <a
-          class="postLink"
+          class="postLink video-placeholder icn-item rounded-corners"
+          :class="{ processing }"
           :href="media.src.source"
           target="_blank"
           @click.prevent="openVideo"
         >
+          <div
+            class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
+            v-if="processing"
+          >
+            <div class="loader-text">Media is currently processing</div>
+          </div>
           <img
             :src="media.thumb.source"
             :class="{ 'no-media-text': !message.textLength }"
@@ -18,7 +25,7 @@
         </a>
       </template>
       <template v-else>
-        <div class="postLink">
+        <div class="postLink video-placeholder icn-item rounded-corners">
           <img
             :src="`data:image/jpeg;base64,${media.locked}`"
             :width="media.thumb.width"
@@ -43,6 +50,9 @@ export default {
   computed: {
     media() {
       return this.message.media[0];
+    },
+    processing() {
+      return !this.message.isMediaReady;
     }
   },
   methods: {
