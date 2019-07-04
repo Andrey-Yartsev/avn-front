@@ -31,6 +31,7 @@
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import UserMixin from "@/mixins/user";
 import ProfileBackground from "@/components/common/profile/background/Index";
+import BackRouter from "@/router/backRouter";
 
 export default {
   name: "HeaderControl",
@@ -47,7 +48,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.go(-1);
+      BackRouter.back();
     }
   }
 };

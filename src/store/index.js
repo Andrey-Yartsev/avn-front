@@ -49,6 +49,7 @@ import trial from "@/store/modules/trial";
 import userBubble from "@/store/modules/userBubble";
 import favPosts from "@/store/modules/favPosts";
 import stats from "@/store/modules/stats";
+import backRouter from "@/store/modules/backRouter";
 
 Vue.use(Vuex);
 
@@ -103,7 +104,8 @@ const store = new Vuex.Store({
     trial,
     userBubble,
     stats,
-    premiumLinks
+    premiumLinks,
+    backRouter
   }
 });
 
