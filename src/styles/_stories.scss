@@ -739,6 +739,20 @@
     right: 20px;
   }
 
+  .popup-likers & {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: 100%;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 220px;
+    }
+  }
+
   .ps {
     position: absolute;
     left: 0;
@@ -750,6 +764,12 @@
       right: -10px;
       padding-right: 10px;
     }
+
+    .popup-likers & {
+      left: 20px;
+      right: 20px;
+      padding-right: 0;
+    }
   }
 }
 
@@ -760,10 +780,15 @@
   align-items: center;
   align-content: center;
   padding: 10px 20px 10px 0;
+  text-align: left;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-top: 11px;
     padding-bottom: 11px;
+  }
+
+  &_likers {
+    padding-right: 0;
   }
 
   .name {
@@ -780,7 +805,17 @@
 
   .username-group {
     max-width: calc(100% - 50px);
+    margin-right: 10px;
+
+    &_btn-follow {
+      max-width: calc(100% - 130px);
+    }
   }
+}
+
+.btn-follow-viewers {
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .controls-story {

@@ -56,6 +56,13 @@
         display: flex;
         flex-direction: column;
       }
+
+      .popup-body {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          flex: 1;
+        }
+      }
     }
   }
 
@@ -77,6 +84,7 @@
       max-width: 620px;
       max-height: none;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       align-content: center;
       justify-content: center;
@@ -345,6 +353,24 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: 450px;
+    }
+  }
+
+  &.popup-likers {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      height: 100%;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 340px;
+    }
+
+    .content {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        height: 100%;
+      }
     }
   }
 
