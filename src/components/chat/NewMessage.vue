@@ -103,7 +103,10 @@
           </div>
 
           <template v-if="false">
-            <div class="loader-container" v-if="!chats.length && loading">
+            <div
+              class="loader-container loader-container_show-center"
+              v-if="!chats.length && loading"
+            >
               <Loader
                 :fullscreen="false"
                 text="Loading"
