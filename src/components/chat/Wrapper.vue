@@ -36,7 +36,7 @@
       <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
     </template>
 
-    <div class="loader-container loader-container_show-center" v-if="false">
+    <div class="loader-container loader-container_show-center" v-if="loading">
       <Loader :fullscreen="false" text="Loading" class="colored small" />
     </div>
 
@@ -74,6 +74,12 @@ export default {
   },
 
   computed: {
+    loading() {
+      return (
+        this.$store.state.chat._fetchChatsLoading ||
+        this.$store.state.chat.fetchAnyChatsLoading
+      );
+    },
     isSecondScreen() {
       if (this.$store.state.chat.isSecondScreen) {
         return true;

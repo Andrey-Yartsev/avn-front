@@ -102,19 +102,14 @@
             </div>
           </div>
 
-          <template v-if="false">
-            <div
-              class="no-results-search show"
-              v-if="!chats.length && !loading"
-            >
-              <div class="no-results-search__message">
-                <span class="no-results-search__text">
-                  Nothing found for&nbsp;
-                </span>
-                <span class="searchAllTag">"{{ searchQuery }}"</span>
-              </div>
+          <div class="no-results-search show" v-if="!foundUsers.length">
+            <div class="no-results-search__message">
+              <span class="no-results-search__text">
+                Nothing found for&nbsp;
+              </span>
+              <span class="searchAllTag">"{{ searchQuery }}"</span>
             </div>
-          </template>
+          </div>
         </perfect-scrollbar>
       </div>
     </template>
