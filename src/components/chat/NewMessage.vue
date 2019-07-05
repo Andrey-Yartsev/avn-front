@@ -219,10 +219,17 @@
                 v-if="selectedUsers && selectedUsers.length"
               >
                 <b class="selectedContacts__title">Recipients:</b>
-                <span v-for="v in selectedUsers" :key="v.id" class="selectedContacts__item">
-                  <a :href="'/' + v.username" target="_blank" class="chatSelectedView chatSelectedView_link"><span class="chatSelectedName">{{
-                    cut(v.name)
-                  }}</span></a>
+                <span
+                  v-for="v in selectedUsers"
+                  :key="v.id"
+                  class="selectedContacts__item"
+                >
+                  <a
+                    :href="'/' + v.username"
+                    target="_blank"
+                    class="chatSelectedView chatSelectedView_link"
+                    ><span class="chatSelectedName">{{ cut(v.name) }}</span></a
+                  >
                 </span>
               </div>
             </div>
