@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 
-const limit = 20;
+const limit = 10;
 
 const state = {
   likes: [],
@@ -22,7 +22,7 @@ const mutations = {
     state.allDataReceived = false;
     state.limit = limit;
   },
-  searchSetNextState(state, { list, marker }) {
+  setState(state, { list, marker }) {
     if (list.length < state.limit) {
       state.allDataReceived = true;
     } else {
@@ -33,15 +33,11 @@ const mutations = {
 };
 
 const actions = {
-  // searchNext({ dispatch, commit, state }, params) {
-  //   params.offset = state.offset;
-  //   params.marker = state.marker || "";
-  //   params.limit = limit;
-  //   dispatch("searchRequest", params).then(r => {
-  //     commit("search/bubble/setItems", r.list, { root: true });
-  //     commit("searchSetNextState", r);
-  //   });
-  // }
+  fetchUsers({ dispatch, commit }, params) {
+    dispatch("fetch", params).then(r => {
+      commit("setState", r);
+    });
+  }
 };
 
 createRequestAction({
@@ -56,11 +52,10 @@ createRequestAction({
   },
   resultKey: "likes",
   defaultResultValue: [],
-  paramsToOptions: function(params, options) {
-    options.query.query = params.query;
-    options.query.offset = params.offset || 0;
-    options.query.limit = params.limit || 5;
-    options.query.marker = params.marker || "";
+  paramsToOptions: function(params, options, state) {
+    options.query.offset = state.offset || 0;
+    options.query.limit = state.limit || limit;
+    options.query.marker = state.marker || "";
     return options;
   },
   paramsToPath: function(params, path) {

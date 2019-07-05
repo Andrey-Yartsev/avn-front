@@ -53,11 +53,8 @@ export default {
     postId() {
       return this.$store.state.modal.postLikes.data.postId;
     },
-    loading() {
-      return this.$store.state.postLikes.fetchLoading;
-    },
-    allDataReceived() {
-      return this.$store.state.postLikes.allDataReceived;
+    store() {
+      return this.$store.state.postLikes;
     }
   },
   methods: {
@@ -68,17 +65,17 @@ export default {
       const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
       const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
 
-      if (scrolledEnought && !this.loading && !this.allDataReceived) {
-        this.$store.dispatch("postLikes/fetch", { postId: this.postId });
+      if (scrolledEnought && !this.infinityScrollLoading && !this.allDataReceived) {
+        this.infinityScrollGetDataMethod();
       }
     },
     infinityScrollGetDataMethod() {
-      this.$store.dispatch("postQueue/getPosts");
+      this.$store.dispatch("postLikes/fetchUsers", { postId: this.postId });
     }
   },
   mounted() {
     this.$store.commit("postLikes/reset");
-    this.$store.dispatch("postLikes/fetch", { postId: this.postId });
+    this.$store.dispatch("postLikes/fetchUsers", { postId: this.postId });
   }
 };
 </script>
