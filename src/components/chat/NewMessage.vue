@@ -104,16 +104,6 @@
 
           <template v-if="false">
             <div
-              class="loader-container loader-container_show-center"
-              v-if="!chats.length && loading"
-            >
-              <Loader
-                :fullscreen="false"
-                text="Loading"
-                class="transparent small"
-              />
-            </div>
-            <div
               class="no-results-search show"
               v-if="!chats.length && !loading"
             >

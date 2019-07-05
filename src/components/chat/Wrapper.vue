@@ -36,6 +36,10 @@
       <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
     </template>
 
+    <div class="loader-container loader-container_show-center" v-if="false">
+      <Loader :fullscreen="false" text="Loading" class="colored small" />
+    </div>
+
     <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
       <div class="chat-container">
         <slot name="col1"></slot>
@@ -56,6 +60,7 @@ import User from "@/mixins/user";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import StickyHeader from "@/mixins/stickyHeader";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "ChatWrapper",
@@ -64,7 +69,8 @@ export default {
 
   components: {
     MobileHeader,
-    Footer
+    Footer,
+    Loader
   },
 
   computed: {

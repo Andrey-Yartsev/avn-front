@@ -6,9 +6,6 @@
       ref="contactsList"
       @ps-scroll-y="psScroll"
     >
-      <div class="loader-container loader-container_show-center" v-if="false">
-        <Loader :fullscreen="false" text="Loading" class="transparent small" />
-      </div>
       <div
         @click="openChat(v.id)"
         class="chatView"
@@ -70,16 +67,11 @@
 import { fromNow } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import InfinityScrollData from "@/mixins/infinityScrollData";
-import Loader from "@/components/common/Loader";
 
 export default {
   name: "ChatContactList",
 
   mixins: [ModalRouterGoto, InfinityScrollData],
-
-  components: {
-    Loader
-  },
 
   computed: {
     scrollableComponent() {
