@@ -245,6 +245,9 @@ const mutations = {
   resetSearchUsers(state) {
     state.chatUsers = null;
   },
+  resetChats(state) {
+    state.chats = [];
+  },
   resetMessages() {
     state.messages = [];
   },
