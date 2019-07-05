@@ -5,10 +5,14 @@
         <img :src="user.avatar" />
       </span>
     </span>
-    <div class="username-group username-group_btn-follow">
-      <span class="name">{{ user.name }}</span>
+    <div class="username-group">
+      <span class="name">
+        <router-link :to="'/' + user.username">{{ user.name }}</router-link>
+      </span>
       <div class="user-login reset-ml">
-        <span class="username">{{ user.username }}</span>
+        <router-link :to="'/' + user.username" class="username">{{
+          user.username
+        }}</router-link>
       </div>
     </div>
     <!-- <button class="btn sm btn-follow-viewers">Follow</button> -->

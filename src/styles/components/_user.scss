@@ -24,6 +24,10 @@
     word-break: break-word;
   }
 
+  a {
+    color: $main-color;
+  }
+
   a & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
