@@ -12,7 +12,10 @@
                 class="ps"
               >
                 <Item v-for="user in users" :key="user.id" :user="user" />
-                <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
+                <div
+                  class="loaderWrap loader-content"
+                  v-if="infinityScrollLoading"
+                >
                   <Loader :fullscreen="false" />
                 </div>
               </perfect-scrollbar>
