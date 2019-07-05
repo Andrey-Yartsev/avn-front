@@ -65,7 +65,11 @@ export default {
       const { scrollHeight, scrollTop, offsetHeight } = e.srcElement;
       const scrolledEnought = scrollHeight - (offsetHeight + scrollTop) < 100;
 
-      if (scrolledEnought && !this.infinityScrollLoading && !this.allDataReceived) {
+      if (
+        scrolledEnought &&
+        !this.infinityScrollLoading &&
+        !this.allDataReceived
+      ) {
         this.infinityScrollGetDataMethod();
       }
     },
