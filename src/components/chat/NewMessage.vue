@@ -213,7 +213,21 @@
             />
           </div>
           <div class="chat-section" v-else>
-            <div class="chatContent"></div>
+            <div class="chatContent">
+              <div
+                class="recipients"
+                v-if="selectedUsers && selectedUsers.length"
+              >
+                <b>Recipients:</b>
+                <ul>
+                  <li v-for="v in selectedUsers" :key="v.id">
+                    <a :href="'/' + v.username" target="_blank">{{
+                      cut(v.name)
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="msg-no-chat">
               <div class="msg-no-chat__msg">
                 Select people to send them a message
@@ -302,10 +316,22 @@ export default {
       }
       const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
       return chat.withUser;
+    },
+    selectedUsers() {
+      return this.selectedChats.map(v => v.withUser);
     }
   },
 
   methods: {
+    cut(v) {
+      if (!v) {
+        return "…";
+      }
+      if (v.length <= 30) {
+        return v;
+      }
+      return v.substring(0, 30) + "…";
+    },
     toggleSelect(id) {
       if (this.selected.indexOf(id) !== -1) {
         this.selected = this.selected.filter(_id => _id !== id);
@@ -371,7 +397,6 @@ export default {
     sent() {
       this.sending = false;
       this.goTo("/chat");
-      // this.gotoLastSelected();
     }
   },
 
