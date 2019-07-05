@@ -103,7 +103,8 @@
           </div>
 
           <div
-            class="no-results-search show"
+            class="no-results-search"
+            :class="{ show: !chats.length }"
             v-if="!foundUsers || !foundUsers.length"
           >
             <div class="no-results-search__message">
