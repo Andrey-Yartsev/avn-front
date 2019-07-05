@@ -98,12 +98,10 @@
       </figure>
     </a>
     <template v-if="$mq === 'desktop' && !shouldBePoster">
-      <span
-        class="explore-media__counter explore-media__counter_likes"
-        @click="like"
-        ><span class="btn-icon likes icn-item icn-size_lg"></span
-        >{{ post.favoritesCount }}</span
-      >
+      <span class="explore-media__counter explore-media__counter_likes">
+        <span class="btn-icon likes icn-item icn-size_lg" @click="like" />
+        <span @click="showLikesModal">{{ post.favoritesCount }}</span>
+      </span>
       <span class="explore-media__counter explore-media__counter_comments"
         ><span class="btn-icon comments icn-item icn-size_lg"></span
         >{{ post.commentsCount }}</span
@@ -172,6 +170,14 @@ export default {
         return;
       }
       this.likePost();
+    },
+    showLikesModal() {
+      this.$store.dispatch("modal/show", {
+        name: "postLikes",
+        data: {
+          postId: this.post.id
+        }
+      });
     }
   }
 };

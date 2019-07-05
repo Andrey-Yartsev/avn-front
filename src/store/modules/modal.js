@@ -99,6 +99,10 @@ const state = {
   image: {
     show: false,
     data: {}
+  },
+  postLikes: {
+    show: false,
+    data: {}
   }
 };
 

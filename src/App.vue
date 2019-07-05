@@ -65,98 +65,7 @@
       />
     </template>
 
-    <template v-if="false">
-      <div class="popup">
-        <div class="overlay" />
-        <div class="popup-container popup-likers">
-          <div class="content content_column-mob">
-            <div class="popup-title popup-title_underlined">Likes</div>
-            <div class="popup-body">
-              <div class="list-viewers">
-                <div class="ps">
-                  <div class="viewer-row viewer-row_likers">
-                    <span class="avatar avatar_gap-r-sm avatar_sm">
-                      <span class="avatar__img">
-                        <img
-                          src="https://avnsocial-dev.s3.amazonaws.com/files/e/e2/e2m/e2miptmpsml7z7ga1imhbrajd4gjmixm1561365025/avatar.jpg"
-                        />
-                      </span>
-                    </span>
-                    <div class="username-group username-group_btn-follow">
-                      <span class="name"
-                        >IvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaI</span
-                      >
-                      <div class="user-login reset-ml">
-                        <span class="username">myid468351</span>
-                      </div>
-                    </div>
-                    <button class="btn sm btn-follow-viewers">Follow</button>
-                  </div>
-                  <div class="viewer-row viewer-row_likers">
-                    <span class="avatar avatar_gap-r-sm avatar_sm">
-                      <span class="avatar__img">
-                        <img
-                          src="https://avnsocial-dev.s3.amazonaws.com/files/e/e2/e2m/e2miptmpsml7z7ga1imhbrajd4gjmixm1561365025/avatar.jpg"
-                        />
-                      </span>
-                    </span>
-                    <div class="username-group username-group_btn-follow">
-                      <span class="name"
-                        >IvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaI</span
-                      >
-                      <div class="user-login reset-ml">
-                        <span class="username">myid468351</span>
-                      </div>
-                    </div>
-                    <button class="btn sm btn-follow-viewers">Follow</button>
-                  </div>
-                  <div class="viewer-row viewer-row_likers">
-                    <span class="avatar avatar_gap-r-sm avatar_sm">
-                      <span class="avatar__img">
-                        <img
-                          src="https://avnsocial-dev.s3.amazonaws.com/files/e/e2/e2m/e2miptmpsml7z7ga1imhbrajd4gjmixm1561365025/avatar.jpg"
-                        />
-                      </span>
-                    </span>
-                    <div class="username-group username-group_btn-follow">
-                      <span class="name"
-                        >IvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaI</span
-                      >
-                      <div class="user-login reset-ml">
-                        <span class="username">myid468351</span>
-                      </div>
-                    </div>
-                    <button class="btn sm btn-follow-viewers">Follow</button>
-                  </div>
-                  <div class="viewer-row viewer-row_likers">
-                    <span class="avatar avatar_gap-r-sm avatar_sm">
-                      <span class="avatar__img">
-                        <img
-                          src="https://avnsocial-dev.s3.amazonaws.com/files/e/e2/e2m/e2miptmpsml7z7ga1imhbrajd4gjmixm1561365025/avatar.jpg"
-                        />
-                      </span>
-                    </span>
-                    <div class="username-group username-group_btn-follow">
-                      <span class="name"
-                        >IvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaIvaI</span
-                      >
-                      <div class="user-login reset-ml">
-                        <span class="username">myid468351</span>
-                      </div>
-                    </div>
-                    <button class="btn sm btn-follow-viewers">Follow</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button
-            type="button"
-            class="close close_default close_visible-mob close_shift-t icn-item icn-size_lg"
-          />
-        </div>
-      </div>
-    </template>
+    <PostLikesModal v-if="this.$store.state.modal.postLikes.show" />
   </div>
 </template>
 
@@ -175,6 +84,7 @@ import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
 import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
+import PostLikesModal from "@/components/common/postParts/likesModal/Index";
 import UserReportModal from "@/components/common/UserReportModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
@@ -189,7 +99,6 @@ import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
-
 import UserBubble from "@/components/users/UserBubble.vue";
 
 import Cookie from "@/utils/cookie";
@@ -268,6 +177,7 @@ export default {
     StoryViewerModal,
     CreateHighlightsModal,
     ChooseHighlightModal,
+    PostLikesModal,
     Confirm,
     ImageModal,
     TrialConfirmModal,

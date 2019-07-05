@@ -1,14 +1,14 @@
 <template>
   <div class="actions">
-    <span
-      :class="[{ active: post.isFavorite }, 'actions__btn']"
-      @click="postLike"
-    >
+    <span :class="[{ active: post.isFavorite }, 'actions__btn']">
       <span
+        @click="postLike"
         class="btn-icon likes icn-item icn-size_lg"
         v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"
-      ></span>
-      {{ post.favoritesCount ? post.favoritesCount : "" }}
+      />
+      <span @click="showLikesModal">
+        {{ post.favoritesCount ? post.favoritesCount : "" }}
+      </span>
     </span>
     <span
       class="actions__btn comments-btn"
@@ -130,6 +130,14 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdawn");
+    },
+    showLikesModal() {
+      this.$store.dispatch("modal/show", {
+        name: "postLikes",
+        data: {
+          postId: this.post.id
+        }
+      });
     }
   },
   directives: {
