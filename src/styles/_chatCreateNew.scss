@@ -7,6 +7,20 @@
     padding-left: 0;
     padding-right: 0;
   }
+
+  &_recipients {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    margin-bottom: 7px;
+    margin-right: 6px;
+  }
 }
 
 .chatSelectedView {
@@ -16,6 +30,11 @@
   font-size: 0;
   position: relative;
   z-index: 1;
+  color: $main-color;
+
+  &_link {
+    padding-right: 13px;
+  }
 
   &:after {
     content: "";

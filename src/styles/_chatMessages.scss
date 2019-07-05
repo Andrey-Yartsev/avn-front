@@ -110,28 +110,6 @@
       margin-bottom: 0;
     }
   }
-
-  .recipients {
-    padding: 10px 0;
-
-    ul {
-      display: inline;
-      list-style: none;
-      padding: 0 0 0 5px;
-    }
-
-    li {
-      display: inline;
-    }
-
-    li::after {
-      content: ", ";
-    }
-
-    li:last-child::after {
-      content: "";
-    }
-  }
 }
 
 .chatContent {
@@ -148,6 +126,13 @@
     right: 0;
     bottom: 0;
     margin: 0;
+  }
+
+  &_new-chat {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+    }
   }
 }
 
