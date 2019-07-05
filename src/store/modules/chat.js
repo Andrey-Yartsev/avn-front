@@ -487,6 +487,21 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "sendMultiMessages",
+  apiPath: "chats/bulk/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
   prefix: "_delete",
   apiPath: "chats/{userId}",
   state,
