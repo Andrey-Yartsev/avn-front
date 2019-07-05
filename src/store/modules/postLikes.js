@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 
-const limit = 10;
+const limit = 20;
 
 const state = {
   likes: [],
