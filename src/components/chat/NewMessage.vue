@@ -102,7 +102,10 @@
             </div>
           </div>
 
-          <div class="no-results-search show" v-if="!foundUsers.length">
+          <div
+            class="no-results-search show"
+            v-if="!foundUsers || !foundUsers.length"
+          >
             <div class="no-results-search__message">
               <span class="no-results-search__text">
                 Nothing found for&nbsp;
