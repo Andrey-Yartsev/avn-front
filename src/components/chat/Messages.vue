@@ -195,19 +195,6 @@ export default {
   },
 
   watch: {
-    messages() {
-      setTimeout(() => {
-        this.scrollToLast();
-        this.loaderHidden = true;
-        if (this.$refs.img) {
-          this.$refs.img.forEach(img => {
-            img.$el.getElementsByTagName("img")[0].onload = () => {
-              this.scrollToLast();
-            };
-          });
-        }
-      }, 100);
-    },
     loading: {
       immediate: true,
       handler(loading) {
@@ -215,6 +202,7 @@ export default {
           setTimeout(() => {
             this.loaderHidden = true;
             this.initMobileScroll();
+            this.scrollToLast();
           }, 100);
         }
       }
