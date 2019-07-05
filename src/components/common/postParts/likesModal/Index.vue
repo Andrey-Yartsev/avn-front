@@ -13,6 +13,9 @@
               >
                 <Item v-for="user in users" :key="user.id" :user="user" />
               </perfect-scrollbar>
+              <div class="loader-container" v-if="infinityScrollLoading">
+                <Loader :fullscreen="false" />
+              </div>
             </div>
           </div>
         </div>
