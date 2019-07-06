@@ -56,6 +56,13 @@
         display: flex;
         flex-direction: column;
       }
+
+      .popup-body {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          flex: 1;
+        }
+      }
     }
   }
 
@@ -77,6 +84,7 @@
       max-width: 620px;
       max-height: none;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       align-content: center;
       justify-content: center;
@@ -348,6 +356,24 @@
     }
   }
 
+  &.popup-likers {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      height: 100%;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-width: 340px;
+    }
+
+    .content {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        height: 100%;
+      }
+    }
+  }
+
   &.chat-popup {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -463,13 +489,15 @@
   &.popup-image {
     background-color: transparent;
     border-radius: 0;
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
     box-shadow: none;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: none;
       width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     img {

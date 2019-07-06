@@ -27,6 +27,7 @@
                     :post="post"
                     :key="post.id"
                     from="explore"
+                    :stories="stories"
                   />
                 </perfect-scrollbar>
               </div>
@@ -69,6 +70,7 @@
                   :post="post"
                   :key="post.id"
                   from="explore"
+                  :stories="stories"
                 />
               </template>
               <template v-if="page === 'lives'">

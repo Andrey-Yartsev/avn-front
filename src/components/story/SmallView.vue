@@ -26,10 +26,11 @@
 
 <script>
 import User from "@/mixins/user";
+import Story from "@/mixins/story";
 
 export default {
   name: "StorySmall",
-  mixins: [User],
+  mixins: [User, Story],
   props: {
     post: {
       type: Object,
@@ -38,15 +39,10 @@ export default {
     from: {
       type: String,
       required: true
-    }
-  },
-  methods: {
-    go() {
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
-      this.$router.push(`/stories/${this.post.user.id}`);
+    },
+    stories: {
+      type: Array,
+      default: () => []
     }
   }
 };

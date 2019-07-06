@@ -76,6 +76,10 @@ const state = {
     show: false,
     data: {}
   },
+  chatVideo: {
+    show: false,
+    data: {}
+  },
   buySnapchatConfirm: {
     show: false,
     data: {}
@@ -93,6 +97,10 @@ const state = {
     data: {}
   },
   image: {
+    show: false,
+    data: {}
+  },
+  postLikes: {
     show: false,
     data: {}
   }

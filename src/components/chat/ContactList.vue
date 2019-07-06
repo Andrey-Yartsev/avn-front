@@ -112,13 +112,14 @@ export default {
     psScroll() {
       this.scrollHandler();
     },
-    _scrollHandler(el, offset) {
+    _scrollHandler(el) {
       if (this.infinityScrollTimeoutId) {
         clearTimeout(this.infinityScrollTimeoutId);
       }
 
       this.infinityScrollTimeoutId = setTimeout(() => {
-        const isOnBottom = el.scrollTop > el.offsetHeight - offset;
+        const isOnBottom =
+          el.scrollTop > el.scrollHeight - el.offsetHeight - 50;
 
         if (
           isOnBottom &&
@@ -130,10 +131,10 @@ export default {
       }, 100);
     },
     scrollHandler() {
-      this._scrollHandler(this.$refs.contactsList.$el, 50);
+      this._scrollHandler(this.$refs.contactsList.$el);
     },
     mobileScrollHandler(e) {
-      this._scrollHandler(e.target, 200);
+      this._scrollHandler(e.target);
     }
   },
   mounted() {

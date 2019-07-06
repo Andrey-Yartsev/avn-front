@@ -14,15 +14,11 @@
       @ps-scroll-y="psScrollHandle"
     >
       <div class="chat-scrollbar" ref="messagesMobileContainer">
-        <div class="chatMessageSending loader-container" v-if="moreLoading">
-          <Loader
-            :fullscreen="false"
-            text=""
-            class="transparent small no-text"
-          />
-          <span class="loader-history-text semi-transparent"
-            >Loading history...</span
-          >
+        <div
+          class="chatMessageSending past-messages semi-transparent"
+          v-if="moreLoading"
+        >
+          Loading history...
         </div>
         <div
           v-for="v in messages"
@@ -123,7 +119,10 @@
             </div>
           </div>
         </div>
-        <div class="chatMessageSending semi-transparent" v-if="sending">
+        <div
+          class="chatMessageSending new-messages semi-transparent"
+          v-if="sending"
+        >
           Sending...
         </div>
       </div>
@@ -136,7 +135,7 @@ import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
-import MediaVideo from "./media/Video";
+import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
 export default {
@@ -196,19 +195,6 @@ export default {
   },
 
   watch: {
-    messages() {
-      setTimeout(() => {
-        this.scrollToLast();
-        this.loaderHidden = true;
-        if (this.$refs.img) {
-          this.$refs.img.forEach(img => {
-            img.$el.getElementsByTagName("img")[0].onload = () => {
-              this.scrollToLast();
-            };
-          });
-        }
-      }, 100);
-    },
     loading: {
       immediate: true,
       handler(loading) {
@@ -216,8 +202,14 @@ export default {
           setTimeout(() => {
             this.loaderHidden = true;
             this.initMobileScroll();
+            this.scrollToLast();
           }, 100);
         }
+      }
+    },
+    sending(sending) {
+      if (sending) {
+        this.scrollToLast();
       }
     }
   },
@@ -449,18 +441,6 @@ export default {
       } else if (media.type === "video") {
         return MediaVideo;
       }
-    },
-    stopOtherVideo(currentPlayingId) {
-      let videos = this._messages.filter(v => {
-        const r = v.media && v.media.length && v.media[0].type === "video";
-        if (!r) {
-          return false;
-        }
-        return currentPlayingId !== v.id;
-      });
-      videos.forEach(v => {
-        this.$refs["video" + v.id][0].cancelPlay();
-      });
     },
     _scrollHandler(mobile) {
       if (mobile) {

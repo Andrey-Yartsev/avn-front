@@ -14,7 +14,7 @@ export default file => {
     );
     xhr.onload = e => {
       const result = JSON.parse(e.currentTarget.responseText);
-      if (!result) {
+      if (!result || !result[0] || !result[0].fileName) {
         return reject({ message: "Upload failed" });
       }
       if (result.error) {

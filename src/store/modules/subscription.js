@@ -81,7 +81,8 @@ const actions = {
           "profile/home/extend",
           {
             subscribedBy: true,
-            subscribedByProgress: false
+            subscribedByProgress: false,
+            isPrivatePost: false
           },
           { root: true }
         );
@@ -105,7 +106,8 @@ const actions = {
           userId: payment.user.id,
           data: {
             subscribedBy: true,
-            subscribedByProgress: false
+            subscribedByProgress: false,
+            isPrivatePost: false
           }
         },
         { root: true }

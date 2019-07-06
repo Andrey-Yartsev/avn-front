@@ -50,6 +50,19 @@
       }
     }
   }
+
+
+  &.no-selected-conversation {
+
+    .msg-no-chat {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .addChatMessage {
+      transform: translateY(100%);
+    }
+  }
 }
 
 .chat-section {
@@ -113,6 +126,13 @@
     right: 0;
     bottom: 0;
     margin: 0;
+  }
+
+  &_new-chat {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+    }
   }
 }
 
@@ -325,54 +345,12 @@
 
 .messageWrapper {
 
-  &:not(.lockedMessage),
-  &.lockedMessage.mine {
-
-    .video-placeholder {
-
-      img {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        height: 100%;
-      }
-
-      video {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      &.show-player {
-
-        img {
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        video {
-          opacity: 1;
-          pointer-events: auto;
-        }
-      }
-    }
-  }
-
   .video-placeholder {
     overflow: hidden;
     background-color: rgba($gray, 0.2);
 
     .media-content {
       transition: opacity .3s;
-    }
-
-    img,
-    video {
-      max-height: 60vh;
-
-      @include media-breakpoint-up($tablet-breakpoint) {
-        max-height: calc(81vh - 180px);
-      }
     }
   }
 
@@ -516,21 +494,23 @@
 }
 
 .chatMessageSending {
-  padding-top: 45px;
-  margin-bottom: 10px;
-  margin-top: 5px;
+  margin-left: -20px;
+  margin-right: -20px;
+  height: 6px;
+  background: repeating-linear-gradient(to right, rgba(255, 64, 129, 1) 0%, rgba(33, 150, 243, 1) 50%, rgba(255, 64, 129, 1) 100%);
+  background-size: 200% auto;
+  background-position: 0 100%;
+  animation: gradient 2s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  font-size: 0;
 
-  .lds-dual-ring {
+  &.past-messages {
+    margin-top: -3px;
+    margin-bottom: 5px;
+  }
 
-    &.small {
-
-      &.no-text {
-
-        .loader-text {
-          top: 0;
-          transform: translate(-50%, 0);
-        }
-      }
-    }
+  &.new-messages {
+    margin-top: 5px;
   }
 }

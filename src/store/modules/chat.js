@@ -245,6 +245,9 @@ const mutations = {
   resetSearchUsers(state) {
     state.chatUsers = null;
   },
+  resetChats(state) {
+    state.chats = [];
+  },
   resetMessages() {
     state.messages = [];
   },
@@ -483,6 +486,21 @@ createRequestAction({
     }
 
     return messages;
+  }
+});
+
+createRequestAction({
+  prefix: "sendMultiMessages",
+  apiPath: "chats/bulk/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 

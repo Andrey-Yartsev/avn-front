@@ -1,52 +1,30 @@
 <template>
   <div
-    class="video-placeholder icn-item rounded-corners"
+    class="video-placeholder icn-item"
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
   >
-    <template v-if="media.locked">
-      <img
-        v-show="!showPlayer"
-        class="video-preview rounded-corners media-content"
-        :src="'data:image/jpeg;base64,' + media.locked"
-        :width="media.preview.width"
-        :height="media.preview.height"
-      />
-    </template>
-    <template v-else>
-      <div
-        class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
-        v-if="processing"
-      >
-        <div class="loader-text">Media is currently processing</div>
-      </div>
-
-      <img
-        class="video-preview rounded-corners media-content"
-        :src="media.preview.source"
-        :width="media.preview.width"
-        :height="media.preview.height"
-        :style="{
-          'max-width': `${media.preview.width}px`,
-          width: `100%`
-        }"
-      />
-
-      <video
-        disableremoteplayback
-        webkit-playsinline
-        playsinline
-        controls
-        :poster="media.preview.source"
-        @play="play"
-        ref="video"
-        class="rounded-corners media-content"
-        @contextmenu.prevent="() => false"
-        @dragstart.prevent="() => false"
-      >
-        <source :src="media.src.source" type="video/mp4" />
-      </video>
-    </template>
+    <div
+      class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
+      v-if="processing"
+    >
+      <div class="loader-text">Media is currently processing</div>
+    </div>
+    <video
+      disableremoteplayback
+      webkit-playsinline
+      autoplay
+      playsinline
+      controls
+      :poster="media.preview.source"
+      @play="play"
+      ref="video"
+      class="rounded-corners media-content"
+      @contextmenu.prevent="() => false"
+      @dragstart.prevent="() => false"
+    >
+      <source :src="media.src.source" type="video/mp4" />
+    </video>
   </div>
 </template>
 <script>

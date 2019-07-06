@@ -36,6 +36,14 @@
     border-radius: 50%;
   }
 
+  &.colored {
+    background-color: $white;
+
+    .loader-text {
+      color: $main-color;
+    }
+  }
+
   &.transparent {
     background-color: transparent;
 
@@ -279,6 +287,21 @@
     }
   }
 
+  &_show-center {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+
+    .chatCollectionContent & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        top: 48px;
+      }
+    }
+  }
 }
 
 .loader-wrapper {
@@ -329,10 +352,4 @@
       }
     }
   }
-}
-
-.loader-history-text {
-  font-size: 13px;
-  display: block;
-  text-align: center;
 }

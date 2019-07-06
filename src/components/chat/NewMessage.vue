@@ -73,7 +73,7 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult">
+          <div class="searchResult" v-if="chats.length">
             <div
               v-for="v in chats"
               v-bind:key="v.withUser.id"
@@ -99,6 +99,19 @@
                 </div>
               </div>
               <span class="check icn-item"></span>
+            </div>
+          </div>
+
+          <div
+            class="no-results-search"
+            :class="{ show: !chats.length }"
+            v-if="!foundUsers || !foundUsers.length"
+          >
+            <div class="no-results-search__message">
+              <span class="no-results-search__text">
+                Nothing found for&nbsp;
+              </span>
+              <span class="searchAllTag">"{{ searchQuery }}"</span>
             </div>
           </div>
         </perfect-scrollbar>
@@ -192,7 +205,26 @@
             />
           </div>
           <div class="chat-section" v-else>
-            <div class="chatContent"></div>
+            <div class="chatContent chatContent_new-chat">
+              <div
+                class="selectedContacts selectedContacts_recipients"
+                v-if="selectedUsers && selectedUsers.length"
+              >
+                <b class="selectedContacts__title">Recipients:</b>
+                <span
+                  v-for="v in selectedUsers"
+                  :key="v.id"
+                  class="selectedContacts__item"
+                >
+                  <a
+                    :href="'/' + v.username"
+                    target="_blank"
+                    class="chatSelectedView chatSelectedView_link"
+                    ><span class="chatSelectedName">{{ cut(v.name) }}</span></a
+                  >
+                </span>
+              </div>
+            </div>
             <div class="msg-no-chat">
               <div class="msg-no-chat__msg">
                 Select people to send them a message
@@ -281,10 +313,22 @@ export default {
       }
       const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
       return chat.withUser;
+    },
+    selectedUsers() {
+      return this.selectedChats.map(v => v.withUser);
     }
   },
 
   methods: {
+    cut(v) {
+      if (!v) {
+        return "…";
+      }
+      if (v.length <= 30) {
+        return v;
+      }
+      return v.substring(0, 30) + "…";
+    },
     toggleSelect(id) {
       if (this.selected.indexOf(id) !== -1) {
         this.selected = this.selected.filter(_id => _id !== id);
@@ -350,7 +394,6 @@ export default {
     sent() {
       this.sending = false;
       this.goTo("/chat");
-      // this.gotoLastSelected();
     }
   },
 

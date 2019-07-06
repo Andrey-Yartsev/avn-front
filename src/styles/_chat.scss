@@ -460,18 +460,6 @@
 
   .chatMessagesCollectionView {
     flex: 1;
-
-    &.no-selected-conversation {
-
-      .msg-no-chat {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .addChatMessage {
-        transform: translateY(100%);
-      }
-    }
   }
 
   .back {
@@ -907,6 +895,9 @@
     position: relative;
     z-index: 1;
 
+    display: flex;
+    flex-direction: column;
+
     .chatCollectionContent__col_narrow & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -921,6 +912,8 @@
     .contactsListContent {
       position: relative;
       height: 100%;
+
+      flex: 1;
 
       &.ps {
 

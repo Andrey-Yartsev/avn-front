@@ -97,7 +97,6 @@
   .feed & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0;
       border-radius: 5px 5px 0 0;
     }
   }
@@ -322,7 +321,6 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      box-shadow: none;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       background-color: $white;
@@ -389,27 +387,15 @@
         background: rgba($gray, 0.2);
       }
     }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      border-radius: 15px;
-      background-color: $white;
-    }
   }
 
   .textarea {
-    background-color: transparent;
     caret-color: $secondary-color;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 17px;
       padding: 21px 15px;
       height: 180px;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      height: 30px;
-      min-height: 30px;
-      overflow: hidden;
     }
 
     &:focus {
@@ -447,6 +433,16 @@
     .addNewNav  {
       display: none;
     }
+
+    .textarea {
+      background-color: $white;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        height: 30px;
+        min-height: 30px;
+        overflow: hidden;
+      }
+    }
   }
 
   .actions {
@@ -475,19 +471,14 @@
         min-height: 160px;
         display: flex;
         flex-direction: column;
-      }
-    }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 15px;
+        background-color: $white;
       }
     }
 
     .textarea {
       overflow: auto;
       max-height: 200px;
+      background-color: transparent;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         min-height: 80px;

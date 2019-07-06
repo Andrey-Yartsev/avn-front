@@ -20,7 +20,10 @@
             @click="back"
           />
           <h1 class="page-title">Post</h1>
-          <router-link to="/login" class="btn border alt login hidden-desktop"
+          <router-link
+            to="/login"
+            class="btn border alt login hidden-desktop"
+            v-if="!isAuth()"
             >Log in</router-link
           >
         </div>

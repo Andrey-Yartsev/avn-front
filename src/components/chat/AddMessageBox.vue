@@ -1,6 +1,6 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
-    <div class="addFileCollectionView">
+    <div class="addFileCollectionView" v-if="preloadedMedias.length">
       <MediaPreview
         v-for="media in preloadedMedias"
         :media="media"

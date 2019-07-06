@@ -41,10 +41,11 @@
 
 <script>
 import UserMixin from "@/mixins/user";
+import Story from "@/mixins/story";
 
 export default {
   name: "StoryMedium",
-  mixins: [UserMixin],
+  mixins: [UserMixin, Story],
   data() {
     return {
       isVisible: undefined,
@@ -74,13 +75,6 @@ export default {
     }
   },
   methods: {
-    go() {
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
-      this.$router.push(`/stories/${this.post.user.id}`);
-    },
     visibilityChanged(isVisible, entry) {
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;

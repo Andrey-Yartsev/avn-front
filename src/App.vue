@@ -18,6 +18,7 @@
 
       <PostModal v-if="this.$store.state.modal.post.show" />
       <PostReportModal v-if="this.$store.state.modal.postReport.show" />
+      <ChatVideoModal v-if="this.$store.state.modal.chatVideo.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
       <rl-subscribe-modal v-if="this.$store.state.modal.subscribe.show" />
@@ -63,6 +64,8 @@
         id="user-bubble"
       />
     </template>
+
+    <PostLikesModal v-if="this.$store.state.modal.postLikes.show" />
   </div>
 </template>
 
@@ -76,10 +79,12 @@ import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
+import ChatVideoModal from "@/components/chat/media/VideoModal";
 import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
 import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
+import PostLikesModal from "@/components/common/postParts/likesModal/Index";
 import UserReportModal from "@/components/common/UserReportModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
@@ -94,7 +99,6 @@ import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
-
 import UserBubble from "@/components/users/UserBubble.vue";
 
 import Cookie from "@/utils/cookie";
@@ -107,7 +111,7 @@ import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
 
-// iterate
+import BackRouter from "@/mixins/backRouter";
 
 import { fromNow } from "@/helpers/datetime";
 
@@ -157,6 +161,7 @@ export default {
     PostReportModal,
     PostModal,
     ChatModal,
+    ChatVideoModal,
     UserReportModal,
     ResubscribeModal,
     PaymentModal,
@@ -172,12 +177,13 @@ export default {
     StoryViewerModal,
     CreateHighlightsModal,
     ChooseHighlightModal,
+    PostLikesModal,
     Confirm,
     ImageModal,
     TrialConfirmModal,
     UserBubble
   },
-  mixins: [ColorScheme],
+  mixins: [ColorScheme, BackRouter],
   data() {
     return {
       showToast: false,

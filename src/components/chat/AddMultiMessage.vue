@@ -5,8 +5,6 @@
 <script>
 import AddMessageBox from "./AddMessageBox";
 
-const timeout = ms => new Promise(res => setTimeout(res, ms));
-
 export default {
   name: "ChatAddMultiMessage",
 
@@ -28,13 +26,13 @@ export default {
   methods: {
     async sendMessage(message) {
       this.$emit("startSending");
-      for (const userId of this.userIds) {
-        await this.$store.dispatch("chat/sendMessage", {
-          userId,
-          data: message
-        });
-        await timeout(500);
-      }
+      await this.$store.dispatch("chat/sendMultiMessages", {
+        ...message,
+        ...{ ids: this.userIds }
+      });
+      this.$store.dispatch("global/flashToast", {
+        text: "Messages sent successfully"
+      });
       this.$emit("sent");
     }
   }
