@@ -7,7 +7,9 @@
       { 'with-text': text.length }
     ]"
   >
-    <div :class="['loader-text', { lowered: lowered }]">{{ text }}</div>
+    <div v-if="text.length" :class="['loader-text', { lowered: lowered }]">
+      {{ text }}
+    </div>
   </div>
 </template>
 
