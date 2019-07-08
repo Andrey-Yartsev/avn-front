@@ -1,5 +1,11 @@
 <template>
-  <div :class="['lds-dual-ring with-text', { 'not-fullscreen': !fullscreen }]">
+  <div
+    :class="[
+      'lds-dual-ring with-text',
+      { 'not-fullscreen': !fullscreen },
+      { 'inline-loader': inline }
+    ]"
+  >
     <div :class="['loader-text', { lowered: lowered }]">{{ text }}</div>
   </div>
 </template>
@@ -19,6 +25,10 @@ export default {
     fullscreen: {
       type: Boolean,
       default: true
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
   }
 };

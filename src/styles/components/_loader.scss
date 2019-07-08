@@ -1,5 +1,20 @@
 
 
+.loader-infinity {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  .notifications & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background-color: $white;
+      margin-top: -5px;
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}
+
 .loader-content {
   height: 130px;
   text-align: center;
@@ -20,13 +35,6 @@
 
 .lds-dual-ring {
   display: inline-block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 100;
 
   .loader-content & {
     background-color: transparent;
@@ -79,54 +87,130 @@
     }
   }
 
-  &.with-text {
+  &:not(.with-text) {
 
     &:after {
-      display: none;
-    }
-
-    .loader-text {
+      content: " ";
+      display: block;
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, calc(-50% + 30px));
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
+      animation: lds-dual-ring 1.2s linear infinite;
 
-      .loader-content & {
-        top: auto;
-        bottom: 10px;
-        transform: translate(-50%, 0);
-      }
-
-      .notifications-container & {
-
-        .popup & {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 13px;
-            transform: translate(-50%, -5px);
-            color: $main-color;
-          }
-
-          &:after {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              width: 36px;
-              height: 36px;
-              margin-top: -30px;
-            }
-          }
-        }
-      }
-
-      &.lowered {
-        top: 75%;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 66px;
+        height: 66px;
       }
     }
   }
 
+  &.with-text {
+
+    &:not(.inline-loader) {
+
+      .loader-text {
+
+        &:after {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    .loader-text {
+
+      &:after {
+        content: " ";
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
+        animation: lds-dual-ring 1.2s linear infinite;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 66px;
+          height: 66px;
+        }
+      }
+    }
+
+    &.small {
+
+      .loader-text {
+        padding-top: 44px;
+
+        &:after {
+          top: 20px;
+        }
+      }
+    }
+
+    &:not(.small) {
+
+      .loader-text {
+        padding-top: 70px;
+
+        &:after {
+          top: 33px;
+        }
+      }
+    }
+  }
+
+  &:not(.not-fullscreen) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+  }
+
   &.not-fullscreen {
-    position: absolute;
-    z-index: 11; //just beneath header
+
+    &:not(.inline-loader) {
+      position: absolute;
+      z-index: 11; //just beneath header
+    }
+  }
+
+  &.not-fullscreen:not(.inline-loader) {
+
+    &.with-text {
+
+      .loader-text {
+
+        .loader-content & {
+          top: auto;
+          bottom: 10px;
+          transform: translate(-50%, 0);
+        }
+
+        &.lowered {
+          top: 75%;
+        }
+      }
+    }
+  }
+
+  &.text-dark {
+    color: $main-color;
+  }
+
+  &.text-light {
+    color: $white;
   }
 
   &.inline {
@@ -148,12 +232,14 @@
   &.small {
 
     .loader-text {
-      font-size: 13px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 13px;
+      }
 
       &:after {
-          width: 40px;
-          height: 40px;
-          margin-top: -40px;
+        width: 40px;
+        height: 40px;
       }
     }
 
@@ -171,26 +257,35 @@
     }
   }
 
-  .loader-text {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 400;
+  &:not(.small) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 18px;
+    .loader-text {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .loader-text {
+    font-weight: 400;
+    position: relative;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      font-size: 13px;
     }
 
     .loader-content & {
       color: $main-color;
     }
 
-    &:after {
-      margin-top: -50px;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-top: -60px;
-      }
-    }
+    //&:after {
+    //  margin-top: -50px;
+    //
+    //  @include media-breakpoint-up($desktop-breakpoint) {
+    //    margin-top: -60px;
+    //  }
+    //}
   }
 
   &.solid {
@@ -215,29 +310,6 @@
     .loader-text {
       color: #fff;
       width: 100%;
-    }
-  }
-}
-
-.lds-dual-ring,
-.loader-text {
-
-  &:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: url(#{$assetPath}/img/loading.svg) no-repeat 0 0 / cover;
-    animation: lds-dual-ring 1.2s linear infinite;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      width: 66px;
-      height: 66px;
     }
   }
 }

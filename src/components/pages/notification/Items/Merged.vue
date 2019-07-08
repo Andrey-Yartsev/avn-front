@@ -90,12 +90,8 @@
         </div>
       </template>
     </div>
-    <div
-      class="loaderWrap loader-content"
-      v-if="loading"
-      :class="{ 'loader-content': $mq === 'mobile' }"
-    >
-      <Loader :fullscreen="false" />
+    <div class="loader-infinity" v-if="loading">
+      <Loader :fullscreen="false" :inline="true" class="text-dark small" />
     </div>
   </perfect-scrollbar>
 </template>
