@@ -46,10 +46,6 @@
 
   &.colored {
     background-color: $white;
-
-    .loader-text {
-      color: $main-color;
-    }
   }
 
   &.transparent {
@@ -274,6 +270,7 @@
   .loader-text {
     font-weight: 400;
     position: relative;
+    text-align: center;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 13px;
@@ -282,14 +279,6 @@
     .loader-content & {
       color: $main-color;
     }
-
-    //&:after {
-    //  margin-top: -50px;
-    //
-    //  @include media-breakpoint-up($desktop-breakpoint) {
-    //    margin-top: -60px;
-    //  }
-    //}
   }
 
   &.solid {
@@ -363,7 +352,7 @@
     }
   }
 
-  &_show-center {
+  &_center {
     position: absolute;
     left: 0;
     top: 0;
@@ -371,10 +360,19 @@
     height: 100%;
     z-index: 4;
 
-    .chatCollectionContent & {
+    .lds-dual-ring {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      .chatCollectionContent & {
         top: 48px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          top: 60px;
+        }
       }
     }
   }
