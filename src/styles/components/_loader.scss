@@ -125,11 +125,6 @@
         position: absolute;
         left: 50%;
         transform: translate(-50%, 0);
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 66px;
-          height: 66px;
-        }
       }
     }
 
@@ -151,6 +146,11 @@
 
         &:after {
           top: 33px;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            width: 66px;
+            height: 66px;
+          }
         }
       }
     }
@@ -213,21 +213,21 @@
     color: $white;
   }
 
-  &.inline {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    z-index: 0;
-    margin-left: auto;
-    margin-right: auto;
-
-    &:after {
-      width: 20px;
-      height: 20px;
-      margin-top: 0;
-    }
-  }
+  //&.inline {
+  //  position: relative;
+  //  width: 40px;
+  //  height: 40px;
+  //  vertical-align: middle;
+  //  z-index: 0;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  //
+  //  &:after {
+  //    width: 20px;
+  //    height: 20px;
+  //    margin-top: 0;
+  //  }
+  //}
 
   &.small {
 
