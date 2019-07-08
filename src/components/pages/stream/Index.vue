@@ -503,6 +503,7 @@ export default {
         .then(res => res.json())
         .then(({ hasActive }) => {
           if (hasActive) {
+            this.startingStream = false;
             this.$store.dispatch("modal/show", {
               name: "confirm",
               data: {
