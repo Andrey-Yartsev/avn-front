@@ -279,6 +279,12 @@
             />
             {{ looksCount }}
           </span>
+          <span class="stream-btn">
+            <span
+              class="btn-icon icn-item icn-size_lg icn-block"
+              v-tooltip="'Block'"
+            />
+          </span>
         </div>
         <Filters
           v-if="filters.length"
