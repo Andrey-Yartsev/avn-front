@@ -1,9 +1,10 @@
 <template>
   <div
     :class="[
-      'lds-dual-ring with-text',
+      'lds-dual-ring',
       { 'not-fullscreen': !fullscreen },
-      { 'inline-loader': inline }
+      { 'inline-loader': inline },
+      { 'with-text': text.length }
     ]"
   >
     <div :class="['loader-text', { lowered: lowered }]">{{ text }}</div>

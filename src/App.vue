@@ -3,7 +3,7 @@
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">
-    <Loader v-if="loading" class="page-loader" />
+    <Loader v-if="loading" text="" class="page-loader" />
     <template v-else>
       <Loader text="" v-if="this.$store.state.global.loading" />
       <Header />
