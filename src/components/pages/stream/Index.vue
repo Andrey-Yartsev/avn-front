@@ -212,7 +212,11 @@
             :shownComments="comments"
             :count="comments.length"
           />
-          <StreamViewers v-else :type="asideType" />
+          <StreamViewers
+            v-else
+            :type="asideType"
+            :block="showBlockUserConfirm"
+          />
           <form class="stream-comment-form" v-if="asideType === 'comments'">
             <textarea
               ref="commentInput"
@@ -278,12 +282,6 @@
               v-tooltip="'Viewers'"
             />
             {{ looksCount }}
-          </span>
-          <span class="stream-btn">
-            <span
-              class="btn-icon icn-item icn-size_lg icn-block"
-              v-tooltip="'Block'"
-            />
           </span>
         </div>
         <Filters
@@ -641,6 +639,33 @@ export default {
     },
     changeFilter(value) {
       Streams.changeFilter(value);
+    },
+    showBlockUserConfirm(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Block user",
+          success: () => this.blockUser(userId)
+        }
+      });
+    },
+    blockUser(userId) {
+      this.$store.dispatch("user/block", userId, { root: true }).then(() => {
+        // if (r.success) {
+        try {
+          Streams.sendCustomMessage({
+            msgtype: "data.custom",
+            to: ["viewer"],
+            data: {
+              type: "kick.user",
+              userId
+            }
+          });
+        } catch (error) {
+          console.log("Error while sending  sendCustomMessage message ", {});
+        }
+        // }
+      });
     }
   },
   mounted() {

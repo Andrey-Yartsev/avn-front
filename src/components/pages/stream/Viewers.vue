@@ -19,6 +19,12 @@
               {{ type === "like" ? getCount(item.user.id) : "" }}
               {{ type === "tip" ? item.amount.toFixed(2) : "" }}
             </span>
+            <span
+              v-if="type === 'view'"
+              class="btn-icon icn-item icn-size_lg icn-block"
+              v-tooltip="'Block'"
+              @click="() => block(item.user.id)"
+            />
           </div>
         </div>
       </div>
@@ -34,6 +40,10 @@ export default {
   props: {
     type: {
       type: String,
+      required: true
+    },
+    block: {
+      type: Function,
       required: true
     }
   },

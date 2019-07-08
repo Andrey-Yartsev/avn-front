@@ -504,6 +504,13 @@
 
   &.icn-block {
     color: #fff;
+    margin-left: 5px;
+
+    &:after {
+      width: 17px;
+      height: 17px;
+      font-size: 17px;
+    }
   }
 }
 
