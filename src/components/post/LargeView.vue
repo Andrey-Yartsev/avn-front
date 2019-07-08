@@ -133,7 +133,7 @@
                   class="btn border alt btn_fix-width-sm"
                   @click.prevent="openSingupModal"
                 >
-                  Sing up
+                  Sign up
                 </button>
               </div>
             </div>
@@ -180,7 +180,7 @@
             >Log in</router-link
           >
           <router-link to="/register" class="btn border alt btn_fix-width-sm"
-            >Sing up</router-link
+            >Sign up</router-link
           >
         </div>
       </div>
