@@ -19,8 +19,7 @@
   height: 130px;
   text-align: center;
 
-  .notifications-container &,
-  .searchView & {
+  .notifications-container & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       height: 92px;
@@ -309,6 +308,7 @@
 
 .loader-container {
   position: relative;
+  text-align: center;
 
   &_payouts {
     margin-bottom: 20px;

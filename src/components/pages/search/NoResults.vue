@@ -1,17 +1,6 @@
 <template>
-  <div
-    v-if="loading"
-    :class="{
-      'loader-content': $mq === 'desktop',
-      'loader-container': $mq === 'mobile'
-    }"
-  >
-    <Loader
-      :fullscreen="false"
-      text="Loading"
-      class="transparent"
-      :class="{ small: $mq === 'desktop' }"
-    />
+  <div v-if="loading" class="loader-container">
+    <Loader :fullscreen="false" :inline="true" class="transparent" />
   </div>
   <div class="no-results-search" v-else-if="!items.length">
     <div class="no-results-search__message">
