@@ -86,7 +86,7 @@ const mutations = {
 
   unlook(state, look) {
     state.currentLive.viewers = state.currentLive.viewers.filter(
-      viewer => viewer.id !== look.id
+      viewer => viewer.user.id !== look.user.id
     );
     state.currentLive.looksCount -= 1;
   },
