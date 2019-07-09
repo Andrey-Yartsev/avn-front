@@ -67,7 +67,8 @@
             <span>Empty here for now</span>
           </div>
         </div>
-        <div class="loader-infinity"
+        <div
+          class="loader-infinity"
           v-if="loading"
           :class="{ 'loader-infinity_pt-reset': items.length }"
         >
