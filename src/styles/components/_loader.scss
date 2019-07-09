@@ -4,15 +4,6 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
-
-  .notifications & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      background-color: $white;
-      margin-top: -5px;
-      border-radius: 0 0 5px 5px;
-    }
-  }
 }
 
 .loader-content {
