@@ -274,8 +274,22 @@
         <div class="play-button"></div>
       </div>
     </template>
-    <Loader v-if="!isReady" :fullscreen="false" text="Media is processing..." />
-    <Loader v-else-if="loadingFinal" :fullscreen="false" />
+    <div
+      class="loader-container loader-container_center"
+      v-if="!isReady || loadingFinal"
+    >
+      <Loader
+        v-if="!isReady"
+        :fullscreen="false"
+        text="Media is processing..."
+        class="overlay_semidark text-light"
+      />
+      <Loader
+        v-else-if="loadingFinal"
+        :fullscreen="false"
+        class="overlay_semidark text-light"
+      />
+    </div>
 
     <div
       class="stories-collection-overlay"
