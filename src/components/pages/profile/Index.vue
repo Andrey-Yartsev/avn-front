@@ -171,10 +171,10 @@
                     </div>
                   </div>
                   <div
-                    class="loaderWrap loader-content"
+                    class="loader-infinity"
                     v-if="infinityScrollLoading"
                   >
-                    <Loader :fullscreen="false" />
+                    <Loader :fullscreen="false" :inline="true" class="small" />
                   </div>
                 </div>
               </template>
@@ -493,9 +493,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.loader-container {
-  height: 300px;
-}
-</style>
