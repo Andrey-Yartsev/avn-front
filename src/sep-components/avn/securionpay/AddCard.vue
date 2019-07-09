@@ -83,7 +83,7 @@
               class="shadow-block loader-container no-padding"
               v-if="submitting"
             >
-              <Loader text="" class="small no-text" />
+              <Loader text="" class="small" />
             </div>
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">

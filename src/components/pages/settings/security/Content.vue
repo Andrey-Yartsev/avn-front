@@ -130,12 +130,11 @@
           </div>
         </div>
         <div class="session-content">
-          <div class="content shadow-block loader-container" v-if="loading">
-            <Loader
-              :fullscreen="false"
-              text=""
-              class="transparent small no-text"
-            />
+          <div
+            class="shadow-block loader-infinity loader-container"
+            v-if="loading"
+          >
+            <Loader :fullscreen="false" :inline="true" text="" class="small" />
           </div>
 
           <div class="content shadow-block" v-else-if="sessions.length">

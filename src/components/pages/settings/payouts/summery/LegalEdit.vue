@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="loader-container" v-if="statesLoading">
-      <Loader :fullscreen="false" text="" class="transparent small no-text" />
+      <Loader :fullscreen="false" text="" class="small" />
     </div>
 
     <form class="payouts-legal-form" v-on:submit.stop.prevent="save">

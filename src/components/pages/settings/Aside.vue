@@ -17,7 +17,7 @@
             <Loader
               :fullscreen="false"
               text=""
-              class="small no-text"
+              class="small"
               v-if="gettingBgPreview"
             />
           </div>
@@ -31,7 +31,7 @@
               <Loader
                 :fullscreen="false"
                 text=""
-                class="small no-text"
+                class="small"
                 v-if="gettingPreview"
               />
             </span>

@@ -4,7 +4,7 @@
       <Loader
         :fullscreen="false"
         text="Media is currently processing"
-        class="small no-text overlay_semidark processing-loader text-light"
+        class="small overlay_semidark processing-loader text-light"
       />
     </div>
     <template v-if="medias.length > 1">

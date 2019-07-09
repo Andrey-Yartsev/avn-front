@@ -24,7 +24,7 @@
       v-if="showLoader"
       :fullscreen="false"
       text=""
-      class="small no-text overlay_semidark"
+      class="small overlay_semidark"
     />
   </div>
 </template>

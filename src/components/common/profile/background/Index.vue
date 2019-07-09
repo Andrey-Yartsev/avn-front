@@ -28,12 +28,7 @@
         </div>
       </div>
     </div>
-    <Loader
-      :fullscreen="false"
-      text=""
-      class="small no-text"
-      v-if="gettingBgPreview"
-    />
+    <Loader :fullscreen="false" text="" class="small" v-if="gettingBgPreview" />
   </div>
 </template>
 

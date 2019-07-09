@@ -4,7 +4,8 @@
       'lds-dual-ring',
       { 'not-fullscreen': !fullscreen },
       { 'inline-loader': inline },
-      { 'with-text': text.length }
+      { 'with-text': text.length },
+      { 'no-text': !text.length }
     ]"
   >
     <div v-if="text.length" :class="['loader-text', { lowered: lowered }]">

@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="shadow-block loader-container no-padding" v-if="loading">
-        <Loader :fullscreen="false" text="" class="transparent small no-text" />
+        <Loader :fullscreen="false" text="" class="small" />
       </div>
       <div class="shadow-block no-padding" v-if="!loading">
         <div class="table-wrapper">

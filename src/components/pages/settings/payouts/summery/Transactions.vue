@@ -68,11 +68,7 @@
           </div>
         </div>
         <div class="loader-container" v-if="loading">
-          <Loader
-            :fullscreen="false"
-            text=""
-            class="transparent small no-text"
-          />
+          <Loader :fullscreen="false" text="" class="small" />
         </div>
       </div>
     </div>

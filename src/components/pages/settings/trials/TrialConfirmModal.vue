@@ -5,12 +5,7 @@
       slot="content"
     >
       <div class="content">
-        <Loader
-          v-if="loading"
-          :fullscreen="false"
-          text=""
-          class="transparent small no-text"
-        />
+        <Loader v-if="loading" :fullscreen="false" text="" class="small" />
         <template v-else-if="error">
           <div class="popup-alert__title">
             Error

@@ -83,11 +83,7 @@
               <span>Empty here for now</span>
             </div>
             <div class="loader-container" v-if="transactionsLoading">
-              <Loader
-                :fullscreen="false"
-                text=""
-                class="transparent small no-text"
-              />
+              <Loader :fullscreen="false" text="" class="small" />
             </div>
           </div>
         </div>

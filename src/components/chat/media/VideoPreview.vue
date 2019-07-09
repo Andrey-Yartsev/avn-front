@@ -16,7 +16,7 @@
             <Loader
               :fullscreen="false"
               text="Media is currently processing"
-              class="small no-text overlay_semidark processing-loader rounded-corners text-light"
+              class="small overlay_semidark processing-loader rounded-corners text-light"
             />
           </span>
           <img
@@ -37,7 +37,7 @@
             <Loader
               :fullscreen="false"
               text="Media is currently processing"
-              class="small no-text overlay_semidark processing-loader rounded-corners text-light"
+              class="small overlay_semidark processing-loader rounded-corners text-light"
             />
           </div>
           <img
