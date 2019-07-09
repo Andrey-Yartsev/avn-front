@@ -23,7 +23,7 @@
           <button
             class="btn-cancel-changes cancel-changes"
             @click="resetBgPreview"
-          ></button>
+          />
           <button class="btn save-changes" @click="saveBg">Save changes</button>
         </div>
       </div>

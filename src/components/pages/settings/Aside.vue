@@ -31,7 +31,7 @@
               <Loader
                 :fullscreen="false"
                 text=""
-                class="small no-text rounded"
+                class="small no-text"
                 v-if="gettingPreview"
               />
             </span>
