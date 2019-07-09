@@ -1142,7 +1142,7 @@
                   class="pdf-obj-fixed"
                   style="left: 621px; top: 1136px; width: 43px; height: 17px; font-size: 16px; transform: scale(0.86, 0.842105);"
                 >
-                  <span>funds)<br /></span>
+                  <span>tips)<br /></span>
                 </div>
                 <div
                   class="pdf-obj-fixed"
@@ -1164,7 +1164,7 @@
                   style="left: 622px; top: 1202px; width: 422px; height: 17px; font-size: 16px; transform: scale(0.875519, 0.842105);"
                 >
                   <span
-                    >• Form 1099-B (stock or mutual fund sales and certain
+                    >• Form 1099-B (stock or mutual tip sales and certain
                     other<br
                   /></span>
                 </div>
@@ -3594,7 +3594,7 @@
                   style="left: 622px; top: 1261px; width: 468px; height: 24px; font-size: 16px; transform: scale(0.869889, 1.21053); "
                 >
                   <span
-                    >10—A common trust fund operated by a bank under section
+                    >10—A common trust tip operated by a bank under section
                     584(a)<br
                   /></span>
                 </div>
@@ -4149,7 +4149,7 @@
                   style="left: 87px; top: 1264px; width: 363px; height: 24px; font-size: 16px; transform: scale(0.870504, 1.21053); "
                 >
                   <span
-                    >I—A common trust fund as defined in section 584(a)<br
+                    >I—A common trust tip as defined in section 584(a)<br
                   /></span>
                 </div>
                 <div
@@ -5038,7 +5038,7 @@
                   class="pdf-obj-fixed"
                   style="left: 336px; top: 731px; width: 234px; height: 19px; font-size: 14px; transform: scale(0.863469, 1.125); "
                 >
-                  <span>combined funds, the first individual on<br /></span>
+                  <span>combined tips, the first individual on<br /></span>
                 </div>
                 <div
                   class="pdf-obj-fixed"
@@ -5535,7 +5535,7 @@
                   class="pdf-obj-fixed"
                   style="left: 621px; top: 762px; width: 61px; height: 20px; font-size: 16px; transform: scale(0.835616, 1); "
                 >
-                  <span>a refund.<br /></span>
+                  <span>a retip.<br /></span>
                 </div>
                 <div
                   class="pdf-obj-fixed"

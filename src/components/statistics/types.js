@@ -17,7 +17,7 @@ const chartTypes = {
   },
   earnings: {
     paid_subscriptions: ["Subscriber", "paid_subscriptions", [], "total", "$"],
-    tips: ["Fund", "tips", [], "total", "$"],
+    tips: ["Tip", "tips", [], "total", "$"],
     paid_chat_messages: ["Message", "paid_chat_messages", [], "total", "$"],
     earn_referral: ["Referral", "earn_referral", [], "total", "$"]
   }

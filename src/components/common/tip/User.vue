@@ -48,7 +48,7 @@
         'btn_white btn_white-alfabg': needLgClassName
       }"
     >
-      Send funds
+      Send tips
     </button>
   </form>
 </template>

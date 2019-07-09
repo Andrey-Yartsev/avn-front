@@ -223,7 +223,7 @@
                   Subscribers <span>0</span>
                 </div>
                 <div class="tab-stat tab-views" ref="count_earnings_tips">
-                  Funding <span>0</span>
+                  Tipping <span>0</span>
                 </div>
                 <div
                   class="tab-stat tab-likes"
@@ -518,7 +518,7 @@
               </div>
               <div class="value-data">
                 <div class="value-data__name">
-                  Funding
+                  Tipping
                 </div>
                 <div class="value-data__num line-2">
                   $155
@@ -569,7 +569,7 @@
                 <tr>
                   <th><span>Date</span></th>
                   <th><span>Subscribers</span></th>
-                  <th><span>Funding</span></th>
+                  <th><span>Tipping</span></th>
                   <th><span>Messages</span></th>
                   <th><span>Referrals</span></th>
                   <th><span>Total</span></th>

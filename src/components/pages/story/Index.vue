@@ -259,7 +259,7 @@
           type="button"
           class="btn-tip"
         >
-          <span class="btn-icon icn-tips icn-item" v-tooltip="'Fund'"></span>
+          <span class="btn-icon icn-tips icn-item" v-tooltip="'Tip'"></span>
         </button>
       </div>
       <button
