@@ -21,8 +21,8 @@
         </div>
         <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>
-      <div class="loaderWrap loader-content" v-if="infinityScrollLoading">
-        <Loader :fullscreen="false" />
+      <div class="loader-infinity" v-if="infinityScrollLoading">
+        <Loader :fullscreen="false" :inline="true" class="small" />
       </div>
     </div>
     <Footer class="site-footer_main" />
