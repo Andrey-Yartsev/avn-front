@@ -29,12 +29,13 @@
           </div>
         </div>
       </div>
-      <div class="shadow-block loader-container no-padding" v-if="loading">
-        <Loader :fullscreen="false" text="" class="small" />
-      </div>
-      <div class="shadow-block no-padding" v-if="!loading">
+
+      <div class="shadow-block no-padding">
         <div class="table-wrapper">
-          <div class="table transactions-table">
+          <div
+            class="table transactions-table"
+            v-if="!loading && transactions.length"
+          >
             <div
               class="PayoutsTransactionsView"
               v-for="v in transactions"
@@ -54,7 +55,19 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info"><span>Empty here for now</span></div>
+          <div
+            class="empty-table-info show"
+            v-if="!loading && !transactions.length"
+          >
+            <span>Empty here for now</span>
+          </div>
+          <div
+            class="loader-infinity"
+            v-if="loading"
+            :class="{ 'loader-infinity_pt-reset': transactions.length }"
+          >
+            <Loader :fullscreen="false" text="" :inline="true" class="small" />
+          </div>
         </div>
       </div>
     </div>

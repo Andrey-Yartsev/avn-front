@@ -351,6 +351,15 @@
       justify-content: center;
       align-content: center;
       align-items: center;
+
+      &.small {
+
+        &.no-text {
+          width: auto;
+          height: auto;
+          position: static;
+        }
+      }
     }
   }
 
