@@ -197,11 +197,14 @@
           class="chatMessagesCollectionView"
           :class="{ 'no-selected-conversation': !selected.length }"
         >
-          <div class="chat-section chat-section_loading" v-if="sending">
+          <div
+            class="chat-section loader-container loader-container_center"
+            v-if="sending"
+          >
             <Loader
               :fullscreen="false"
               text="Sending..."
-              class="semitransparent small"
+              class="small overlay_fulllight"
             />
           </div>
           <div class="chat-section" v-else>
