@@ -194,7 +194,12 @@ export default {
       this.close();
     },
     updateTimer() {
-      if (!this.shouldUpdateTimer) return;
+      if (
+        !this.shouldUpdateTimer ||
+        !this.$store.state.modal.stream.data.stream
+      ) {
+        return;
+      }
 
       const start = moment(
         this.$store.state.modal.stream.data.stream.startedAt,
@@ -386,8 +391,11 @@ export default {
         alert(error);
       },
 
-      onRemoteVideoUnavailable: function() {
+      onRemoteVideoUnavailable: () => {
         this.connected = false;
+        if (!this.$store.state.modal.stream.data.stream) {
+          return;
+        }
         alert("No remote video available");
       },
 
@@ -401,7 +409,19 @@ export default {
 
       onCleanUp: function() {},
 
-      onCustomDataGet: function(/* message */) {
+      onCustomDataGet: message => {
+        if (message.type === "kick.user" && this.user.id === message.userId) {
+          this.$store.commit("lives/resetCurrentLive");
+
+          this.$store.dispatch("global/flashToast", {
+            text: "You were blocked by the broadcaster",
+            type: "error"
+          });
+          this.stopWatching();
+          this.$root.$emit("homePageReload");
+          this.$router.push("/");
+        }
+
         // if (message.type === "video") {
         //   document.getElementById("video-muted").innerText = message.is_mute
         //     ? "Video muted"
