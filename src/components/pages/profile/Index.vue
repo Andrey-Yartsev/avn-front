@@ -170,10 +170,7 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="loader-infinity"
-                    v-if="infinityScrollLoading"
-                  >
+                  <div class="loader-infinity" v-if="infinityScrollLoading">
                     <Loader :fullscreen="false" :inline="true" class="small" />
                   </div>
                 </div>
