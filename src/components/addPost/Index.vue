@@ -301,7 +301,9 @@
         </div>
       </div>
     </form>
-    <Loader v-if="isSaving" :fullscreen="false" class="small" />
+    <div class="loader-container loader-container_center" v-if="isSaving">
+      <Loader :fullscreen="false" class="small overlay_semidark text-light" />
+    </div>
   </div>
 </template>
 

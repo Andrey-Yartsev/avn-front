@@ -125,25 +125,24 @@
     }
   }
 
+  .popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow: visible;
+    }
+
+    .lds-dual-ring {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-radius: 5px;
+      }
+    }
+  }
+
   &.loaderWrap {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: hidden;
-    }
-
-    .popup & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        overflow: visible;
-      }
-
-      .lds-dual-ring {
-        top: -60px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          border-radius: 5px;
-        }
-      }
     }
 
     .popup-container_hfluid & {

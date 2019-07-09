@@ -74,6 +74,17 @@
     }
   }
 
+  &.overlay {
+
+    &_fulllight {
+      background-color: $white;
+    }
+
+    &_semidark {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
   &:not(.with-text) {
 
     &:after {
@@ -165,16 +176,8 @@
 
   &:not(.not-fullscreen) {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.6);
+    //background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
-
-    &.page-loader {
-      background-color: $white;
-
-      .loader-text {
-        color: $main-color;
-      }
-    }
   }
 
   &.not-fullscreen {
