@@ -177,6 +177,14 @@
       position: absolute;
       z-index: 11; //just beneath header
     }
+
+    &.main-chat-loader {
+      top: 48px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: 60px;
+      }
+    }
   }
 
   &.not-fullscreen:not(.inline-loader) {
@@ -275,20 +283,7 @@
 }
 
 .processing-loader {
-  display: block;
   pointer-events: none;
-
-  .loader-text {
-    text-align: center;
-  }
-
-  &.transparent {
-
-    .loader-text {
-      color: #fff;
-      width: 100%;
-    }
-  }
 }
 
 .loader-container {
@@ -351,14 +346,6 @@
       justify-content: center;
       align-content: center;
       align-items: center;
-
-      .chatCollectionContent & {
-        top: 48px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          top: 60px;
-        }
-      }
     }
   }
 

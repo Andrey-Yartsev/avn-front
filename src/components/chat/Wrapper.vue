@@ -37,7 +37,7 @@
     </template>
 
     <div class="loader-container loader-container_center" v-if="loading">
-      <Loader :fullscreen="false" class="colored small" />
+      <Loader :fullscreen="false" class="colored small main-chat-loader" />
     </div>
 
     <div class="chatCollectionContent__col chatCollectionContent__col_narrow">
