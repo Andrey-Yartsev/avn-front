@@ -55,7 +55,7 @@
             @click="openTip"
           >
             <span class="icn-item icn-tips icn-size_lg"></span>
-            Fund
+            Tip
           </button>
           <SubscribeButton
             :profile="profile"

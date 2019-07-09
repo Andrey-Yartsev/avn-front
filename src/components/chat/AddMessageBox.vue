@@ -29,7 +29,7 @@
         class="tips btn-el"
         @click.prevent="showTip = !showTip"
         :class="{ active: showTip, disabled: showPaid }"
-        v-tooltip="'Fund'"
+        v-tooltip="'Tip'"
       >
         <span class="icn-tips icn-item icn-size_lg"></span>
       </button>

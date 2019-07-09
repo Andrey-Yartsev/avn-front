@@ -76,7 +76,7 @@
                   name="isEmailNotificationNewTipsEnabled"
                   value="true"
                 />
-                <span class="label icn-item">Fund was received</span>
+                <span class="label icn-item">Tip was received</span>
               </div>
             </label>
           </div>

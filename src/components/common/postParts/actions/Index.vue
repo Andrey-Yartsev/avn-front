@@ -28,7 +28,7 @@
       <span class="actions__btn" @click="toggleTip"
         ><span
           class="btn-icon icn-tips icn-item icn-size_lg"
-          v-tooltip="'Fund'"
+          v-tooltip="'Tip'"
         ></span
       ></span>
     </template>

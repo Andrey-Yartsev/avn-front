@@ -224,10 +224,10 @@ export default {
       } else {
         if (this.isAuthor(message)) {
           return (
-            "You have funded " + this.withUser.name + " for " + message.text
+            "You have tipped " + this.withUser.name + " for " + message.text
           );
         } else {
-          return "You have been funded for " + message.text;
+          return "You have been tipped for " + message.text;
         }
       }
     },

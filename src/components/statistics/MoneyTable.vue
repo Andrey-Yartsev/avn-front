@@ -20,7 +20,7 @@
         <thead>
           <th><span>Date</span></th>
           <th><span>Subscribers</span></th>
-          <th><span>Funding</span></th>
+          <th><span>Tipping</span></th>
           <th><span>Messages</span></th>
           <th><span>Referrals</span></th>
           <th><span>Total</span></th>

@@ -99,7 +99,7 @@
           >
             <span
               class="btn-icon icn-tips icn-item icn-size_lg"
-              v-tooltip="'Funds'"
+              v-tooltip="'Tips'"
             ></span>
           </span>
           <span class="stream-online-count" v-if="false">
