@@ -140,6 +140,7 @@
   }
 
   &.loaderWrap {
+    position: static;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: hidden;
