@@ -1,9 +1,11 @@
 <template>
   <div class="media" :style="mediaStyle">
-    <div
-      class="lds-dual-ring transparent small with-text not-fullscreen processing-loader"
-    >
-      <div class="loader-text">Media is currently processing</div>
+    <div class="loader-container loader-container_center">
+      <Loader
+        :fullscreen="false"
+        text="Media is currently processing"
+        class="small no-text overlay_semidark processing-loader text-light"
+      />
     </div>
     <template v-if="medias.length > 1">
       <swiper
@@ -69,6 +71,7 @@ import Gif from "./content/GifLinked";
 import GifLinked from "./content/GifLinked";
 import Photo from "./content/Photo";
 import PhotoLinked from "./content/PhotoLinked";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Media",
@@ -81,7 +84,8 @@ export default {
     Photo,
     PhotoLinked,
     swiper,
-    swiperSlide
+    swiperSlide,
+    Loader
   },
   data() {
     const uniqId = Math.random()

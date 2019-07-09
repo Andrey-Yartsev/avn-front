@@ -156,22 +156,6 @@
         }
       }
     }
-
-    .loader-text {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-top: 30px;
-        transform: translate(-50%, calc(-50% + 20px));
-      }
-
-      &:after {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin-top: 0;
-          top: 0;
-        }
-      }
-    }
   }
 
   &-header {
