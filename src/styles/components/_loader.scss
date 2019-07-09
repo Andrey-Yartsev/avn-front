@@ -379,6 +379,10 @@
       }
     }
   }
+
+  &_top-level {
+    z-index: 100;
+  }
 }
 
 .loader-wrapper {

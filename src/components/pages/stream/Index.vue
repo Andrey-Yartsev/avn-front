@@ -299,11 +299,16 @@
         </button>
       </div>
     </div>
-    <Loader
-      :fullscreen="true"
-      text="Starting the stream"
+    <div
+      class="loader-container loader-container_top-level loader-container_center"
       v-if="startingStream"
-    />
+    >
+      <Loader
+        :fullscreen="true"
+        text="Starting the stream"
+        class="overlay_semidark text-light"
+      />
+    </div>
     <StreamStatistic
       :close="
         (haveToSave, haveToSaveComments) =>
