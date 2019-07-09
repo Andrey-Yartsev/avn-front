@@ -82,8 +82,13 @@
             >
               <span>Empty here for now</span>
             </div>
-            <div class="loader-container" v-if="transactionsLoading">
-              <Loader :fullscreen="false" text="" class="small" />
+            <div class="loader-infinity" v-if="transactionsLoading">
+              <Loader
+                :fullscreen="false"
+                :inline="true"
+                text=""
+                class="small"
+              />
             </div>
           </div>
         </div>
