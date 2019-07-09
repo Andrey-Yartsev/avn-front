@@ -5,7 +5,7 @@
   >
     <div class="payouts">
       <div
-        class="border-top shadow-block loader-container loader-container_payouts"
+        class="border-top shadow-block loader-container loader-container_center"
         v-if="loading"
       >
         <Loader :fullscreen="false" text="" class="small" />

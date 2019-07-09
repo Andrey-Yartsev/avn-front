@@ -246,9 +246,12 @@
     }
 
     &.no-text {
-      width: 40px;
-      height: 40px;
-      position: relative;
+
+      .loader-container:not(.loader-container_center) & {
+        width: 40px;
+        height: 40px;
+        position: relative;
+      }
 
       &:after {
         width: 40px;
