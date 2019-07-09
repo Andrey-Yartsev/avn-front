@@ -4,7 +4,7 @@
       v-if="loading || !loaderHidden"
       :fullscreen="false"
       text=""
-      class="small solid"
+      class="small overlay_fulllight no-text"
     />
     <component
       :is="scrollableComponent"
