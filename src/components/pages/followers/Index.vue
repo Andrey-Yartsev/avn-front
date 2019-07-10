@@ -64,11 +64,12 @@
                         :query="page"
                         actionPrefix="followers"
                       />
-                      <div
-                        class="loaderWrap loader-content"
-                        v-if="infinityScrollLoading"
-                      >
-                        <Loader :fullscreen="false" />
+                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                        <Loader
+                          :fullscreen="false"
+                          :inline="true"
+                          :class="{ small: users.length }"
+                        />
                       </div>
                       <div
                         class="msg-no-content show"
