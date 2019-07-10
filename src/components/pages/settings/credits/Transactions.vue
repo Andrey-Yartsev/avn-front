@@ -61,10 +61,7 @@
           >
             <span>Empty here for now</span>
           </div>
-          <div
-            class="loader-infinity"
-            v-if="loading"
-          >
+          <div class="loader-infinity" v-if="loading">
             <Loader :fullscreen="false" text="" :inline="true" class="small" />
           </div>
         </div>
