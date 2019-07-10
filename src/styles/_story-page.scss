@@ -11,6 +11,7 @@
   align-items: center;
   flex-wrap: wrap;
   width: calc(100% - 70px);
+  z-index: 2;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 25px;
@@ -213,7 +214,7 @@
   left: 3px;
   right: 3px;
   top: 0;
-  z-index: 2;
+  z-index: 3;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     left: 7px;
