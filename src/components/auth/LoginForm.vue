@@ -116,7 +116,6 @@
             >
               {{ signUpText }}
             </a>
-            later.
           </p>
           <p class="forgot">
             <a href="/forgot" class="forgot" @click.prevent="forgot"
