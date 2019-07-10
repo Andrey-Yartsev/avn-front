@@ -34,7 +34,7 @@
       </div>
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
-          <div class="table transactions-table" v-if="!loading && items.length">
+          <div class="table transactions-table" v-if="items.length">
             <div
               class="PayoutsTransactionsView"
               v-for="(v, i) in items"

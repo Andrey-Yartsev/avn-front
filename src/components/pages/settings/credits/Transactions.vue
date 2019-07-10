@@ -32,10 +32,7 @@
 
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
-          <div
-            class="table transactions-table"
-            v-if="!loading && transactions.length"
-          >
+          <div class="table transactions-table" v-if="transactions.length">
             <div
               class="PayoutsTransactionsView"
               v-for="v in transactions"
