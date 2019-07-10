@@ -64,7 +64,6 @@
           <div
             class="loader-infinity"
             v-if="loading"
-            :class="{ 'loader-infinity_pt-reset': transactions.length }"
           >
             <Loader :fullscreen="false" text="" :inline="true" class="small" />
           </div>
