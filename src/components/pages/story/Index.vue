@@ -27,6 +27,8 @@
           <video
             v-if="currentStory.mediaType === 'video'"
             class="story-video-element storyItem"
+            autoplay
+            playsinline
             :src="currentStory.src.source"
             ref="storyItem"
             @mousedown="pause"
