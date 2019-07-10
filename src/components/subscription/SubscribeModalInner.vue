@@ -2,7 +2,9 @@
   <Modal :onClose="close">
     <div class="popup-container subscribe-popup" slot="content">
       <div class="content">
-        <Loader v-if="loading" :fullscreen="false" text="" class="small" />
+        <div class="loader-container loader-container_center" v-if="loading">
+          <Loader :fullscreen="false" text="" class="small" />
+        </div>
         <Content
           v-else
           :profile="profile"
