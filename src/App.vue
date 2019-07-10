@@ -5,7 +5,11 @@
   <div v-else class="main-container" :class="containerClassName">
     <Loader v-if="loading" text="" class="overlay_fulllight" />
     <template v-else>
-      <Loader text="" v-if="this.$store.state.global.loading" />
+      <Loader
+        text=""
+        v-if="this.$store.state.global.loading"
+        class="overlay_semidark"
+      />
       <Header />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
