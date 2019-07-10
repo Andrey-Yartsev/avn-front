@@ -5,7 +5,8 @@
       {
         'explore-item_col-3': !shouldBePoster,
         'explore-item_double': shouldBePoster,
-        outofviewport: isVisible === false
+        outofviewport: isVisible === false,
+        'explore-media_processing': post.mediaType === 'processing'
       }
     ]"
     :data-id="post.id"
@@ -23,7 +24,8 @@
         'postLink',
         {
           'photo-post': post.mediaType === 'image',
-          'video-post': post.mediaType === 'video'
+          'video-post': post.mediaType === 'video',
+          'locked-wrapper': media.locked || post.mediaType === 'processing'
         }
       ]"
       :href="`/post/${post.id}`"
@@ -31,14 +33,7 @@
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
     >
-      <figure
-        v-if="media"
-        class="explore-media"
-        :class="{
-          'explore-media_processing': post.mediaType === 'processing',
-          'locked-wrapper': media.locked || post.mediaType === 'processing'
-        }"
-      >
+      <figure v-if="media" class="explore-media">
         <div
           v-if="!media.canView"
           class="locked-picture icn-item icn-pos_center"
@@ -89,20 +84,29 @@
           </div>
 
           <div
+            class="loader-container loader-container_center"
             v-if="post.mediaType === 'processing'"
-            class="lds-dual-ring transparent small with-text not-fullscreen processing-loader"
           >
-            <div class="loader-text">Media is currently processing</div>
+            <Loader
+              :fullscreen="false"
+              text="Media is currently processing"
+              class="small processing-loader text-light"
+            />
           </div>
         </template>
       </figure>
     </a>
     <template v-if="$mq === 'desktop' && !shouldBePoster">
-      <span class="explore-media__counter explore-media__counter_likes">
+      <span
+        class="explore-media__counter explore-media__counter_likes"
+        v-if="post.mediaType !== 'processing'"
+      >
         <span class="btn-icon likes icn-item icn-size_lg" @click="like" />
         <span @click="showLikesModal">{{ post.favoritesCount }}</span>
       </span>
-      <span class="explore-media__counter explore-media__counter_comments"
+      <span
+        class="explore-media__counter explore-media__counter_comments"
+        v-if="post.mediaType !== 'processing'"
         ><span class="btn-icon comments icn-item icn-size_lg"></span
         >{{ post.commentsCount }}</span
       >
@@ -116,9 +120,13 @@ import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import PostOpen from "@/mixins/postOpen";
 import userMixin from "@/mixins/user";
 import PostCommon from "@/mixins/postCommon";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Post",
+  components: {
+    Loader
+  },
   mixins: [ModalRouterGoto, PostOpen, userMixin, PostCommon],
   data() {
     return {
