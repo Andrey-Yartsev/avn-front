@@ -14,12 +14,17 @@
               <img v-if="bgPreview" :src="bgPreview" class="f1" />
               <img v-else-if="user.header" :src="user.header" class="f2" />
             </template>
-            <Loader
-              :fullscreen="false"
-              text=""
-              class="small"
+            <span
+              class="loader-container loader-container_center"
               v-if="gettingBgPreview"
-            />
+            >
+              <Loader
+                :fullscreen="false"
+                :inline="true"
+                text=""
+                class="small"
+              />
+            </span>
           </div>
 
           <div class="avatar-block">
@@ -28,12 +33,17 @@
                 <img v-if="avatarPreview" :src="avatarPreview" />
                 <img v-else-if="user.avatar" :src="user.avatar" />
               </span>
-              <Loader
-                :fullscreen="false"
-                text=""
-                class="small"
+              <span
+                class="loader-container loader-container_center"
                 v-if="gettingPreview"
-              />
+              >
+                <Loader
+                  :fullscreen="false"
+                  :inline="true"
+                  text=""
+                  class="small"
+                />
+              </span>
             </span>
             <template v-show="!gettingPreview">
               <label

@@ -28,7 +28,12 @@
         </div>
       </div>
     </div>
-    <Loader :fullscreen="false" text="" class="small" v-if="gettingBgPreview" />
+    <span
+      class="loader-container loader-container_center"
+      v-if="gettingBgPreview"
+    >
+      <Loader :fullscreen="false" :inline="true" text="" class="small" />
+    </span>
   </div>
 </template>
 
