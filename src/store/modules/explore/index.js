@@ -36,17 +36,20 @@ const actions = {
     }
     commit("postsRequest");
 
-    return PostApi.getExplorePosts({ limit, offset, marker, source })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("postsRequestSuccess", res);
-          });
-        }
-      })
-      .catch(err => {
-        commit("postsRequestFail", err);
-      });
+    return new Promise(accept => {
+      PostApi.getExplorePosts({ limit, offset, marker, source })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(function(res) {
+              commit("postsRequestSuccess", res);
+              accept(res);
+            });
+          }
+        })
+        .catch(err => {
+          commit("postsRequestFail", err);
+        });
+    });
   },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
