@@ -20,12 +20,9 @@
         <use xlink:href="#icon-remove"></use>
       </svg>
     </span>
-    <Loader
-      v-if="showLoader"
-      :fullscreen="false"
-      text=""
-      class="small overlay_semidark"
-    />
+    <div class="loader-container loader-container_center" v-if="showLoader">
+      <Loader :fullscreen="false" text="" class="small overlay_semidark" />
+    </div>
   </div>
 </template>
 
