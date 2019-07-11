@@ -13,6 +13,7 @@ import statistics from "./actions/statistics";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
 import payoutsLegalResult from "./actions/payoutsLegalResult";
+import payoutsReset from "./actions/payoutsReset";
 import subscription from "./actions/subscription";
 import tip from "./actions/tip";
 import message from "./actions/message";
@@ -22,6 +23,7 @@ const actions = {
   chats,
   new_notification,
   payoutsLegalResult,
+  payoutsReset,
   subscription,
   tip,
   stream,
