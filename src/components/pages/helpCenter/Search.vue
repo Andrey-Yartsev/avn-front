@@ -17,7 +17,10 @@
             {{ error }}
           </div>
           <template v-else>
-            <div class="loader-container" v-if="loading">
+            <div
+              class="loader-container loader-container_center"
+              v-if="loading"
+            >
               <Loader :fullscreen="false" text="" class="small" />
             </div>
             <template v-else>
