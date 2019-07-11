@@ -86,7 +86,7 @@
       </span>
       <div class="text-media-container">
         <vue-tribute :options="tributeOptions">
-          <div
+          <textarea
             @focus="() => (expanded = true)"
             class="sm content-editable textarea"
             contenteditable
@@ -94,7 +94,7 @@
             maxlength="1000"
             @input="textInput"
             ref="textarea"
-          ></div>
+          ></textarea>
         </vue-tribute>
         <div
           class="post-attachment"
@@ -534,7 +534,7 @@ export default {
 
     // user suggestions API
     textInput() {
-      this.postMsg = this.$refs.textarea.innerText;
+      this.postMsg = this.$refs.textarea.value;
     },
     getText() {
       return this.postMsg;
@@ -542,9 +542,14 @@ export default {
     getConvertedText() {
       const pattern =
         '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      return this.post.text.replace(new RegExp(pattern, "ug"), (m, unicode) => {
-        return unicode;
-      });
+      let text = this.post.text.replace(
+        new RegExp(pattern, "ug"),
+        (m, unicode) => {
+          return unicode;
+        }
+      );
+      text = text.replace(/<br \/>/g, "\n");
+      return text.replace(/(<([^>]+)>)/gi, "");
     }
   },
   watch: {
