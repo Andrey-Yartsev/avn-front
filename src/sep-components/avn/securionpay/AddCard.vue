@@ -210,7 +210,7 @@
                       autocomplete="cc-number"
                       minlength="13"
                       maxlength="19"
-                      v-validate="'required|numeric'"
+                      v-validate="'required|numeric|non-amex'"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('cardNumber')">
@@ -319,6 +319,14 @@ import Transactions from "@/components/pages/settings/payments/Transactions";
 import { goCcbill } from "@/utils/ccbill";
 import States from "@/components/pages/settings/payments/states";
 import Loader from "@/components/common/Loader";
+import { Validator } from "vee-validate";
+
+Validator.extend("non-amex", {
+  getMessage: () => "We are not supporting American Express cards",
+  validate: value => {
+    return !value.match(/^3[47][0-9]{13}$/);
+  }
+});
 
 const initData = {
   showCardForm: false,
