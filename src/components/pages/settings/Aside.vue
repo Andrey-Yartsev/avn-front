@@ -3,7 +3,7 @@
     <div class="settings-aside">
       <div
         id="avatarBgAside"
-        class="rounded-container white-bg-block loadWrap"
+        class="rounded-container white-bg-block"
         :class="{ 'hidden-mobile': !showAvatarBlock, 'loader-wrap': loading }"
       >
         <div class="settings-profile-images">
@@ -123,8 +123,11 @@
           </div>
         </div>
 
-        <div class="lds-dual-ring with-text not-fullscreen" v-if="loading">
-          <div class="loader-text lowered"></div>
+        <div
+          class="loader-container loader-container_center loader-container_top-level"
+          v-if="loading"
+        >
+          <Loader :fullscreen="false" text="" class="overlay_semidark" />
         </div>
       </div>
       <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">

@@ -166,7 +166,6 @@
 
   &:not(.not-fullscreen) {
     position: fixed;
-    //background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
   }
 
@@ -196,10 +195,6 @@
           top: auto;
           bottom: 10px;
           transform: translate(-50%, 0);
-        }
-
-        &.lowered {
-          top: 75%;
         }
       }
     }
