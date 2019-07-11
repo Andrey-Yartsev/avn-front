@@ -125,8 +125,8 @@ export default {
         return [];
       }
       let c = this._countries;
-      const america = c.find(v => v.id === "212");
-      c = c.filter(v => v.id !== "212");
+      const america = c.find(v => v.id === 212);
+      c = c.filter(v => v.id !== 212);
       c = [{ id: 0, name: "—" }, america, ...c];
       return c.map(v => {
         return {
