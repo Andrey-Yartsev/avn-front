@@ -1,12 +1,7 @@
 <template>
   <ContentWrapper>
     <template slot="content">
-      <Loader
-        v-if="loading"
-        :fullscreen="false"
-        text=""
-        class="small"
-      />
+      <Loader v-if="loading" :fullscreen="false" text="" class="small" />
       <div v-else class="s-container support-content">
         <div class="container">
           <div class="cols">

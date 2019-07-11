@@ -47,11 +47,7 @@
             <StoryCollection :stories="stories" v-if="stories.length" />
           </perfect-scrollbar>
           <div class="loader-stories" v-else>
-            <Loader
-              :fullscreen="false"
-              :inline="true"
-              class="small"
-            />
+            <Loader :fullscreen="false" :inline="true" class="small" />
           </div>
         </div>
       </div>
