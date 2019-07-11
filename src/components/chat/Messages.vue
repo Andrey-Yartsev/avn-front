@@ -1,11 +1,11 @@
 <template>
   <div class="chat-section">
-    <Loader
+    <div
+      class="loader-container loader-container_center"
       v-if="loading || !loaderHidden"
-      :fullscreen="false"
-      text=""
-      class="small overlay_fulllight no-text"
-    />
+    >
+      <Loader :fullscreen="false" text="" class="small overlay_fulllight" />
+    </div>
     <component
       :is="scrollableComponent"
       v-show="!loading"
