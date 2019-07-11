@@ -499,6 +499,13 @@ form.support-search-form {
     padding-top: 21px;
     padding-bottom: 21px;
   }
+
+  .not-authorized & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: 52px;
+    }
+  }
 }
 
 .breadcrumbs {
