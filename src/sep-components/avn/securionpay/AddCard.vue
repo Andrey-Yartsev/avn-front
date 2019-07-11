@@ -77,13 +77,13 @@
         ref="form"
       >
         <div class="border-top shadow-block">
-          <div class="container">
+          <div class="container pos-relative">
             <div
               :fullscreen="false"
-              class="shadow-block loader-container no-padding"
+              class="loader-container loader-container_center"
               v-if="submitting"
             >
-              <Loader text="" class="small" />
+              <Loader text="" class="small overlay_semilight" />
             </div>
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
