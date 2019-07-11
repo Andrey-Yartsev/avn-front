@@ -23,6 +23,7 @@
                         name="amount"
                         v-model="amount"
                         class="field-gap_currency"
+                        autocomplete="off"
                       />
                     </span>
                   </span>
