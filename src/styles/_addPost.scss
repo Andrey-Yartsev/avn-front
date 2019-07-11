@@ -100,19 +100,19 @@
     }
   }
 
-  &:not(.addPost_delayed) {
-
-    .popup-addPost &,
-    .addPost-page & {
-
-      + .loader-content {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
-      }
-    }
-  }
+  //&:not(.addPost_delayed) {
+  //
+  //  .popup-addPost &,
+  //  .addPost-page & {
+  //
+  //    + .loader-content {
+  //
+  //      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+  //        display: none;
+  //      }
+  //    }
+  //  }
+  //}
 
   .addPost-page & {
 
