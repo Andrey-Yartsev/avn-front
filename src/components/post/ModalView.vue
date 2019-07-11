@@ -47,7 +47,8 @@ export default {
     return {
       index: undefined,
       extraClassName: "lightbox-post",
-      backFrom: undefined
+      backFrom: undefined,
+      preloadedImageIndexes: {}
     };
   },
   computed: {
@@ -100,11 +101,38 @@ export default {
     next() {
       if (this.index >= this.postsState.posts.length - 3) {
         if (!this.postsState.allDataReceived && !this.postsState.loading) {
-          this.$store.dispatch(`${this.from}/getPosts`);
+          this.$store.dispatch(`${this.from}/getPosts`).then(() => {
+            this.preloadNextImages();
+          });
         }
       }
       this.index++;
+      this.preloadNextImages();
     },
+    preloadNextImages() {
+      this.preloadNextImage(1);
+      this.preloadNextImage(2);
+      this.preloadNextImage(3);
+    },
+    preloadNextImage(indexOffset) {
+      const i = this.index + indexOffset;
+      if (!this.postsState.posts[i]) {
+        return;
+      }
+      const post = this.postsState.posts[i];
+      if (!post.media || !post.media.length) {
+        return;
+      }
+      if (this.preloadedImageIndexes[i]) {
+        return;
+      }
+      this.preloadedImageIndexes[i] = true;
+      const url = post.media[0].src.source;
+
+      const img = new Image();
+      img.src = url;
+    },
+
     setIndex() {
       if (this.index) {
         return;
@@ -142,6 +170,7 @@ export default {
     }
 
     this.setIndex();
+    this.preloadNextImages();
   }
 };
 </script>
