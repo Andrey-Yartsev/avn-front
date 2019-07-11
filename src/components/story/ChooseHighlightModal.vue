@@ -20,7 +20,7 @@
                   <Loader
                     :fullscreen="false"
                     v-if="loading"
-                    class="not-fullscreen transparent small"
+                    class="not-fullscreen small"
                   />
                   <div
                     class="msg-no-content show"

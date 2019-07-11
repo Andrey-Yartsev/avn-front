@@ -37,7 +37,7 @@
         class="border-top shadow-block no-padding loader-container"
         v-if="loading"
       >
-        <Loader :fullscreen="false" text="" class="transparent small" />
+        <Loader :fullscreen="false" text="" class="small" />
       </div>
       <div class="shadow-block no-padding">
         <div class="table-wrapper">

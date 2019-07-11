@@ -7,7 +7,7 @@
             <Loader
               :fullscreen="false"
               text=""
-              class="transparent"
+              class=""
               v-if="loading"
             />
             <iframe

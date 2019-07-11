@@ -35,14 +35,6 @@
     background-color: $white;
   }
 
-  &.transparent {
-    background-color: transparent;
-
-    .loader-text {
-      color: $main-color;
-    }
-  }
-
   &.semitransparent {
     background-color: transparent;
 

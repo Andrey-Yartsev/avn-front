@@ -16,7 +16,7 @@
             </h1>
 
             <div class="border-top loader-container" v-if="cardLoading">
-              <Loader :fullscreen="false" text="" class="transparent small" />
+              <Loader :fullscreen="false" text="" class="small" />
             </div>
 
             <div class="shadow-block border-top no-padding" v-else-if="card">

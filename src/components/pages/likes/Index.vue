@@ -1,6 +1,6 @@
 <template>
   <div class="loader-container" v-if="!profile">
-    <Loader :fullscreen="false" text="" class="transparent small" />
+    <Loader :fullscreen="false" text="" class="small" />
   </div>
   <div class="special-container" v-else>
     <router-link

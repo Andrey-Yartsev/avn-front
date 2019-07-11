@@ -5,7 +5,7 @@
         v-if="loading"
         :fullscreen="false"
         text=""
-        class="transparent small"
+        class="small"
       />
       <div v-else class="s-container support-content">
         <div class="container">

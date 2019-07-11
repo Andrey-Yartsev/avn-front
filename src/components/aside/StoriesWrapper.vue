@@ -50,7 +50,7 @@
             <Loader
               :fullscreen="false"
               :inline="true"
-              class="transparent small"
+              class="small"
             />
           </div>
         </div>

@@ -4,7 +4,7 @@
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
   >
     <div class="loader-container" v-if="!user">
-      <Loader :fullscreen="false" text="" class="transparent small" />
+      <Loader :fullscreen="false" text="" class="small" />
     </div>
     <div class="stream " v-else>
       <div class="mediasTop">
