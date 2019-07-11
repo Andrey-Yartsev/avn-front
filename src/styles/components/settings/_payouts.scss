@@ -250,10 +250,10 @@
 }
 
 .payouts {
-  position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 506px;
+    position: relative;
   }
 
   &-legal-form {
