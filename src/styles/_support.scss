@@ -494,17 +494,10 @@ form.support-search-form {
   top: 44px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    top: 80px;
+    top: 52px;
     min-height: 60px;
     padding-top: 21px;
     padding-bottom: 21px;
-  }
-
-  .not-authorized & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      top: 52px;
-    }
   }
 }
 
