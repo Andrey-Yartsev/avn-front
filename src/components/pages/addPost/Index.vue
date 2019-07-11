@@ -21,7 +21,10 @@
         </div>
         <PostCollection :posts="delayedPosts" from="postQueue" />
       </div>
-      <div class="loader-infinity" v-if="infinityScrollLoading">
+      <div
+        class="loader-infinity"
+        v-if="infinityScrollLoading && delayedPosts.length"
+      >
         <Loader :fullscreen="false" :inline="true" class="small" />
       </div>
     </div>

@@ -93,7 +93,6 @@
     }
   }
 
-  .popup &,
   .feed & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -140,20 +139,36 @@
   }
 
   &.loaderWrap {
-    position: static;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: hidden;
+      position: static;
     }
 
     .popup-container_hfluid & {
+      position: relative;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        overflow: visible;
+      }
 
       .lds-dual-ring {
 
         @include media-breakpoint-up($desktop-breakpoint) {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
+          margin-top: -60px;
         }
+      }
+    }
+  }
+
+  &_delayed {
+
+    &.loaderWrap {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        position: relative;
       }
     }
   }
@@ -538,6 +553,10 @@
         padding: 15px 0 0;
         flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
         margin-left: auto;
+      }
+
+      .hasScheduledPosts & {
+        padding-bottom: 12px;
       }
     }
 
