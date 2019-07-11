@@ -299,29 +299,9 @@
   position: relative;
   text-align: center;
 
-  &_payouts {
-    margin-bottom: 20px;
-
-    .lds-dual-ring.with-text {
-
-      .loader-text {
-        transform: translate(-50%, -50%);
-
-        &:after {
-          margin-top: 0;
-        }
-      }
-    }
-  }
-
   .payments & {
     min-height: 80px;
   }
-
-  .searchView & {
-    flex: 1;
-  }
-
 
   .payments .payment-card & {
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -347,6 +327,10 @@
       justify-content: center;
       align-content: center;
       align-items: center;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        height: 100%;
+      }
 
       &.small {
 
