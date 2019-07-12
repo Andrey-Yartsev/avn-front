@@ -153,6 +153,7 @@
                       :class="'rounded-container'"
                       :posts="posts"
                       from="profile/home"
+                      v-if="posts.length"
                     />
                   </div>
                   <div class="exploreAllCollectionView" v-else>
