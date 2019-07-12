@@ -144,6 +144,11 @@ export default {
         return;
       }
       this.closeTip();
+    },
+    $mq() {
+      if (this.$mq === "desktop" && !this.isVisible) {
+        this.isVisible = true;
+      }
     }
   },
   methods: {
