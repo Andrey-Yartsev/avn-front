@@ -10,10 +10,10 @@
         </div>
         <template v-else>
           <div class="popup-alert__title">
-            Fund user
+            Tip user
           </div>
           <div class="popup-alert__body">
-            You are funding user {{ data.user.name }} for ${{ data.amount }}
+            You are tipping user {{ data.user.name }} for ${{ data.amount }}
           </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
@@ -46,7 +46,7 @@ export default {
     yes() {
       const onSuccess = data => {
         this.$store.dispatch("global/flashToast", {
-          text: "Fund successfully sent"
+          text: "Tip successfully sent"
         });
         this.$store.commit("tip/funded", data);
         this.close();
