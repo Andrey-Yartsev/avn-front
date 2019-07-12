@@ -83,7 +83,7 @@
               class="loader-container loader-container_center"
               v-if="submitting"
             >
-              <Loader text="" class="small overlay_semilight" />
+              <Loader text="" :small="true" class="overlay_semilight" />
             </div>
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">

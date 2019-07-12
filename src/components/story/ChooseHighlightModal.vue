@@ -17,7 +17,7 @@
             <div class="popup-body">
               <div class="popup-container-scroll">
                 <div class="highlights-form">
-                  <Loader :fullscreen="false" v-if="loading" class="small" />
+                  <Loader :fullscreen="false" v-if="loading" :small="true" />
                   <div
                     class="msg-no-content show"
                     v-if="!loading && !posts.length"

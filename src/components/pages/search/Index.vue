@@ -40,7 +40,7 @@
             <NoResults :query="query" :loading="loading && !items.length" />
           </div>
           <div class="loader-infinity" v-if="loading && items.length">
-            <Loader :fullscreen="false" :inline="true" class="small" />
+            <Loader :fullscreen="false" :inline="true" :small="true" />
           </div>
         </div>
       </div>

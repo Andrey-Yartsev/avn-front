@@ -91,7 +91,12 @@
       </template>
     </div>
     <div class="loader-infinity" v-if="loading">
-      <Loader :fullscreen="false" :inline="true" class="text-dark small" />
+      <Loader
+        :fullscreen="false"
+        :inline="true"
+        :small="true"
+        class="text-dark"
+      />
     </div>
   </perfect-scrollbar>
 </template>

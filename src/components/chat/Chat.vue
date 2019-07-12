@@ -41,7 +41,7 @@
       </div>
       <template v-else>
         <div class="chatCollectionContentWrapper" v-if="activeUserLoading">
-          <Loader :fullscreen="false" text="" class="small" />
+          <Loader :fullscreen="false" text="" :small="true" />
         </div>
         <template v-else>
           <div

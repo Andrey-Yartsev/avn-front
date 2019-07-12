@@ -21,7 +21,7 @@
               class="loader-container loader-container_center"
               v-if="loading"
             >
-              <Loader :fullscreen="false" text="" class="small" />
+              <Loader :fullscreen="false" text="" :small="true" />
             </div>
             <template v-else>
               <template v-if="visibleResults.length">

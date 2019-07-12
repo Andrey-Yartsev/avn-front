@@ -6,7 +6,7 @@
     >
       <div class="content">
         <div class="loader-container loader-container_center" v-if="progress">
-          <Loader :fullscreen="false" text="" class="small" />
+          <Loader :fullscreen="false" text="" :small="true" />
         </div>
         <template v-else>
           <div class="popup-alert__title">

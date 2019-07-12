@@ -21,7 +21,12 @@
       </svg>
     </span>
     <div class="loader-container loader-container_center" v-if="showLoader">
-      <Loader :fullscreen="false" text="" class="small overlay_semidark" />
+      <Loader
+        :fullscreen="false"
+        text=""
+        :small="true"
+        class="overlay_semidark"
+      />
     </div>
   </div>
 </template>

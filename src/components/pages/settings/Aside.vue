@@ -22,7 +22,7 @@
                 :fullscreen="false"
                 :inline="true"
                 text=""
-                class="small"
+                :small="true"
               />
             </span>
           </div>

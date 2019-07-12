@@ -3,7 +3,7 @@
     <div class="popup-container subscribe-popup" slot="content">
       <div class="content">
         <div class="loader-container loader-container_center" v-if="loading">
-          <Loader :fullscreen="false" text="" class="small" />
+          <Loader :fullscreen="false" text="" :small="true" />
         </div>
         <Content
           v-else

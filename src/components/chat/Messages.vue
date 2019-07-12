@@ -4,7 +4,12 @@
       class="loader-container loader-container_center"
       v-if="loading || !loaderHidden"
     >
-      <Loader :fullscreen="false" text="" class="small overlay_fulllight" />
+      <Loader
+        :fullscreen="false"
+        text=""
+        :small="true"
+        class="overlay_fulllight"
+      />
     </div>
     <component
       :is="scrollableComponent"

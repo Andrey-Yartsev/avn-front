@@ -25,7 +25,7 @@
         class="loader-infinity"
         v-if="infinityScrollLoading && delayedPosts.length"
       >
-        <Loader :fullscreen="false" :inline="true" class="small" />
+        <Loader :fullscreen="false" :inline="true" :small="true" />
       </div>
     </div>
     <Footer class="site-footer_main" />

@@ -2,7 +2,7 @@
   <ContentWrapper>
     <template slot="content">
       <div class="loader-container loader-container_center" v-if="loading">
-        <Loader :fullscreen="false" text="" class="small" />
+        <Loader :fullscreen="false" text="" :small="true" />
       </div>
       <div v-else class="s-container support-content">
         <div class="container">

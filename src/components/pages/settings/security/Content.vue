@@ -131,7 +131,7 @@
         </div>
         <div class="session-content shadow-block shadow-block_reset-pt">
           <div class="loader-infinity" v-if="loading">
-            <Loader :fullscreen="false" :inline="true" text="" class="small" />
+            <Loader :fullscreen="false" :inline="true" text="" :small="true" />
           </div>
 
           <div class="content shadow-block" v-else-if="sessions.length">

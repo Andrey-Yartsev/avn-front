@@ -65,7 +65,7 @@
             class="loader-infinity"
             v-if="infinityScrollLoading && posts.length"
           >
-            <Loader :fullscreen="false" :inline="true" class="small" />
+            <Loader :fullscreen="false" :inline="true" :small="true" />
           </div>
         </div>
         <div

@@ -1,6 +1,6 @@
 <template>
   <div class="loader-container loader-container_center" v-if="loading">
-    <Loader :fullscreen="false" text="" class="small" />
+    <Loader :fullscreen="false" text="" :small="true" />
   </div>
   <div class="special-container" v-else>
     <router-link
@@ -172,7 +172,7 @@
                     </div>
                   </div>
                   <div class="loader-infinity" v-if="infinityScrollLoading">
-                    <Loader :fullscreen="false" :inline="true" class="small" />
+                    <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </div>
               </template>

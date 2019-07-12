@@ -32,7 +32,7 @@
       class="loader-container loader-container_center"
       v-if="gettingBgPreview"
     >
-      <Loader :fullscreen="false" :inline="true" text="" class="small" />
+      <Loader :fullscreen="false" :inline="true" text="" :small="true" />
     </span>
   </div>
 </template>
