@@ -192,35 +192,6 @@
   }
 }
 
-.session-content {
-
-  .content {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-right: 25px;
-      padding-top: 0;
-      margin: -4px 0 0;
-    }
-
-    &.shadow-block {
-
-      &:empty {
-        display: none;
-
-        + .empty-table-info {
-          display: block;
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            border-top: 1px solid rgba($gray, 0.2);
-            margin-left: 20px;
-            margin-right: 20px;
-          }
-        }
-      }
-    }
-  }
-}
-
 .session-info-header {
   display: flex;
   justify-content: space-between;

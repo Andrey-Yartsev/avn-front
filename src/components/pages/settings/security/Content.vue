@@ -161,7 +161,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info show shadow-block" v-else>
+          <div class="empty-table-info show" v-else>
             <span>Empty here for now</span>
           </div>
         </div>
