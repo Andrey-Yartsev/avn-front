@@ -1157,6 +1157,7 @@
   bottom: .4em;
   transform: translate(7px, 13px);
   transition: transform .3s;
+  max-width: 420px;
 
   &.profile-position {
     transform: translate(0, 0);
@@ -1164,6 +1165,7 @@
     bottom: -80px;
     transition: all .3s;
     width: 286px;
+    max-width: none;
 
     .header-scrolled & {
       left: 54px;
