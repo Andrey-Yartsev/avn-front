@@ -291,16 +291,16 @@
   position: relative;
   text-align: center;
 
-  .payments .payment-card & {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      min-height: 20px;
-
-      .lds-dual-ring {
-        top: 40px;
-      }
-    }
-  }
+  //.payments .payment-card & {
+  //
+  //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+  //    min-height: 20px;
+  //
+  //    .lds-dual-ring {
+  //      top: 40px;
+  //    }
+  //  }
+  //}
 
   &_center {
     position: absolute;
