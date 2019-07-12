@@ -5,7 +5,9 @@
       slot="content"
     >
       <div class="content">
-        <Loader v-if="progress" :fullscreen="false" text="" class="small" />
+        <div class="loader-container loader-container_center" v-if="progress">
+          <Loader :fullscreen="false" text="" class="small" />
+        </div>
         <template v-else>
           <div class="popup-alert__title">
             Fund user
