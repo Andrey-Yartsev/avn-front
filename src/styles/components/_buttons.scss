@@ -376,6 +376,8 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
+  align-content: center;
 
   .icn-item {
     display: block;
