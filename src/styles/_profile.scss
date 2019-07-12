@@ -1370,25 +1370,6 @@
   }
 }
 
-
-#avatarBgAside {
-
-  .lds-dual-ring.not-fullscreen {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      position: fixed;
-    }
-
-    .loader-text.lowered {
-      top: 100px;
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        top: 50%;
-      }
-    }
-  }
-}
-
 .select-user-image {
   color: #fff;
   text-shadow: $shadow-light;
