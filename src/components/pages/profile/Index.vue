@@ -1,5 +1,5 @@
 <template>
-  <div class="loader-container" v-if="loading">
+  <div class="loader-container loader-container_center" v-if="loading">
     <Loader :fullscreen="false" text="" class="small" />
   </div>
   <div class="special-container" v-else>
