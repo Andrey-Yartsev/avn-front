@@ -6,53 +6,9 @@
   padding-bottom: 20px;
 }
 
-//.loader-content {
-//  height: 130px;
-//  text-align: center;
-//
-//  .notifications-container & {
-//
-//    @include media-breakpoint-up($desktop-breakpoint) {
-//      height: 92px;
-//    }
-//  }
-//
-//  &_tgap {
-//    padding-top: 40px;
-//    height: 82px;
-//  }
-//}
-
 .lds-dual-ring {
   display: inline-block;
   vertical-align: top;
-
-  //.loader-content & {
-  //  background-color: transparent;
-  //}
-
-  //&.colored {
-  //  background-color: $white;
-  //}
-
-  //&.semitransparent {
-  //  background-color: transparent;
-  //
-  //  &:before {
-  //    content: "";
-  //    position: absolute;
-  //    left: 0;
-  //    right: 0;
-  //    top: 0;
-  //    bottom: 0;
-  //    background-color: $white;
-  //    opacity: .4;
-  //  }
-  //
-  //  .loader-text {
-  //    color: $main-color;
-  //  }
-  //}
 
   &.overlay {
 
@@ -178,18 +134,6 @@
     &:not(.inline-loader) {
       position: absolute;
       z-index: 11; //just beneath header
-
-      //&.with-text {
-      //
-      //  .loader-text {
-      //
-      //    .loader-content & {
-      //      top: auto;
-      //      bottom: 10px;
-      //      transform: translate(-50%, 0);
-      //    }
-      //  }
-      //}
     }
 
     &.main-chat-loader {
@@ -208,22 +152,6 @@
   &.text-light {
     color: $white;
   }
-
-  //&.inline {
-  //  position: relative;
-  //  width: 40px;
-  //  height: 40px;
-  //  vertical-align: middle;
-  //  z-index: 0;
-  //  margin-left: auto;
-  //  margin-right: auto;
-  //
-  //  &:after {
-  //    width: 20px;
-  //    height: 20px;
-  //    margin-top: 0;
-  //  }
-  //}
 
   &.small {
 
@@ -272,10 +200,6 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       font-size: 13px;
     }
-
-    //.loader-content & {
-    //  color: $main-color;
-    //}
   }
 }
 
@@ -290,17 +214,6 @@
 .loader-container {
   position: relative;
   text-align: center;
-
-  //.payments .payment-card & {
-  //
-  //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-  //    min-height: 20px;
-  //
-  //    .lds-dual-ring {
-  //      top: 40px;
-  //    }
-  //  }
-  //}
 
   &_center {
     position: absolute;
