@@ -334,12 +334,12 @@
 }
 
 .loader-stories {
-  height: 88px;
-  position: relative;
-  text-align: center;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     width: 50px;
+    height: 88px;
+    position: relative;
+    text-align: center;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -347,6 +347,10 @@
   }
 
   .lds-dual-ring {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: block;
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: flex;
@@ -357,10 +361,12 @@
     }
 
     .loader-text {
-      font-size: 11px;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 11px;
+      }
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 13px;
         line-height: 18px;
         font-weight: 700;
         padding-left: 74px;
