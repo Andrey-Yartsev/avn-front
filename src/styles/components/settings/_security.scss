@@ -179,10 +179,14 @@
   }
 
   .content {
-    padding: 18px 20px 0;
+    padding-top: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 25px;
+      padding-top: 0;
+      padding-left: 25px;
+      padding-right: 25px;
       margin: -4px 0 0;
     }
   }
@@ -191,7 +195,6 @@
 .session-content {
 
   .content {
-    padding: 18px 20px 0;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-right: 25px;
