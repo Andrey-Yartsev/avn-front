@@ -1,12 +1,13 @@
 <template>
   <div class="userView userView_dropdown" ref="bubble">
     <div v-if="show">
-      <Loader
-        :fullscreen="false"
-        text=""
-        class="page-loader small"
-        v-if="loading"
-      />
+      <div class="loader-container loader-container_center" v-if="loading">
+        <Loader
+          :fullscreen="false"
+          text=""
+          class="overlay_fulllight small"
+        />
+      </div>
       <template v-else>
         <div class="arrow" v-if="profile.header">
           <svg
