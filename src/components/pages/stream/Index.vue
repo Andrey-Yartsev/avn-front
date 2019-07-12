@@ -3,7 +3,7 @@
     class="stream-container"
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
   >
-    <div class="loader-container" v-if="!user">
+    <div class="loader-container loader-container_center" v-if="!user">
       <Loader :fullscreen="false" text="" class="small" />
     </div>
     <div class="stream " v-else>
