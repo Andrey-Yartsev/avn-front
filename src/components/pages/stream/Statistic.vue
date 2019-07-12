@@ -125,12 +125,7 @@
         </button>
       </div>
     </div>
-    <div
-      class="loader-container loader-container_top-level loader-container_center"
-      v-if="loading"
-    >
-      <Loader :fullscreen="true" text="" class="overlay_semidark" />
-    </div>
+    <Loader text="" class="overlay_semidark" v-if="loading" />
   </div>
 </template>
 

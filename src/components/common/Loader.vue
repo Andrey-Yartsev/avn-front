@@ -3,6 +3,7 @@
     :class="[
       'lds-dual-ring',
       { 'not-fullscreen': !fullscreen },
+      { fullscreen: fullscreen },
       { 'inline-loader': inline },
       { 'with-text': text.length },
       { 'no-text': !text.length }
