@@ -127,7 +127,7 @@
           class="loader-container loader-container_center loader-container_top-level"
           v-if="loading"
         >
-          <Loader :fullscreen="false" text="" class="overlay_semidark" />
+          <Loader :fullscreen="false" text="" :semidark="true" />
         </div>
       </div>
       <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">

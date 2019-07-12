@@ -125,7 +125,7 @@
         </button>
       </div>
     </div>
-    <Loader text="" class="overlay_semidark" v-if="loading" />
+    <Loader text="" :semidark="true" v-if="loading" />
   </div>
 </template>
 

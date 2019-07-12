@@ -3,12 +3,12 @@
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">
-    <Loader v-if="loading" text="" class="overlay_fulllight" />
+    <Loader v-if="loading" text="" :fulllight="true" />
     <template v-else>
       <Loader
         text=""
         v-if="this.$store.state.global.loading"
-        class="overlay_semidark"
+        :semidark="true"
       />
       <Header />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">

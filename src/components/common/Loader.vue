@@ -7,7 +7,10 @@
       { 'inline-loader': inline },
       { 'with-text': text.length },
       { 'no-text': !text.length },
-      { small: small }
+      { small: small },
+      { overlay_semilight: semilight },
+      { overlay_semidark: semidark },
+      { overlay_fulllight: fulllight }
     ]"
   >
     <div v-if="text.length" :class="['loader-text', { lowered: lowered }]">
@@ -37,6 +40,18 @@ export default {
       default: false
     },
     small: {
+      type: Boolean,
+      default: false
+    },
+    semidark: {
+      type: Boolean,
+      default: false
+    },
+    semilight: {
+      type: Boolean,
+      default: false
+    },
+    fulllight: {
       type: Boolean,
       default: false
     }

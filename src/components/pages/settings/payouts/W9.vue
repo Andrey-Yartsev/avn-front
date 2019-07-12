@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loader v-if="saving" text="" class="overlay_fulllight" />
+    <Loader v-if="saving" text="" :fulllight="true" />
     <span class="signature" v-if="false"></span>
     <div class="settings">
       <div class="settings-header" v-if="$mq === 'mobile'">
