@@ -31,6 +31,10 @@ export default {
     subscribe() {
       const onSuccess = () => {
         this.$store.dispatch("subscription/success");
+        if (window.onSubscriptionSuccess) {
+          window.onSubscriptionSuccess();
+          window.onSubscriptionSuccess = null;
+        }
         this.close();
       };
       this._pay(

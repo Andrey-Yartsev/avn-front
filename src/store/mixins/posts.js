@@ -1,6 +1,9 @@
 import PostApi from "@/api/post";
 
-export default {
+import { createRequestAction } from "@/store/utils/storeRequest";
+
+const result = {
+  state: {},
   actions: {
     getPosts({ commit, state }) {
       const { limit, offset, marker, source } = state;
@@ -121,9 +124,14 @@ export default {
           }
         })
         .catch(() => {});
+    },
+
+    reloadPost({ dispatch, commit }, postId) {
+      dispatch("fetchPost", postId).then(data => {
+        commit("updatePost", data);
+      });
     }
   },
-
   mutations: {
     postsRequestSuccess(state, { list: posts, marker }) {
       state.posts = [...state.posts, ...posts];
@@ -273,6 +281,32 @@ export default {
           commentMarker: marker
         };
       });
+    },
+
+    updatePost(state, updatedPost) {
+      state.posts = state.posts.map(post => {
+        if (post.id === updatedPost.id) {
+          return updatedPost;
+        }
+
+        return post;
+      });
     }
   }
 };
+
+createRequestAction({
+  prefix: "fetchPost",
+  apiPath: "posts/{id}",
+  state: result.state,
+  mutations: result.mutations,
+  actions: result.actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params);
+  }
+});
+
+export default result;

@@ -78,6 +78,13 @@
             v-if="$mq === 'desktop'"
             :showCopy="!delayedPost"
           />
+
+          <div class="tip-form_post" v-if="isAuth() && showSubscribeButton">
+            <span role="button" class="btn btn-cancel" @click="subscribe"
+              >Subscribe to view</span
+            >
+          </div>
+
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
             <p v-if="post.text" v-html="post.text" />
             <div class="post-time" v-if="!delayedPost && !isAuth()">

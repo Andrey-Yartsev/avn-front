@@ -38,7 +38,13 @@ export default {
 
       this.goToModalRoute(`post/${this.post.id}/${this.from}`);
     },
-    showSubscribeModal() {
+    showSubscribeModal(onSuccess) {
+      window.onSubscriptionSuccess = () => {
+        if (onSuccess) {
+          onSuccess();
+        }
+        this.$store.dispatch(this.actionPrefix + "/reloadPost", this.post.id);
+      };
       this.$store.dispatch("subscription/openSubscribeModal", this.post.author);
     }
   }

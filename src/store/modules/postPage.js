@@ -43,7 +43,7 @@ const actions = {
 
 export default {
   namespaced: true,
-  state,
+  state: { ...state, ...PostMixin.state },
   actions: { ...actions, ...PostMixin.actions },
   mutations: { ...mutations, ...PostMixin.mutations }
 };

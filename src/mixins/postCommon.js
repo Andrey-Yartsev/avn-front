@@ -7,6 +7,11 @@ export default {
       showTip: false
     };
   },
+  computed: {
+    showSubscribeButton() {
+      return !this.post.canViewMedia;
+    }
+  },
   methods: {
     sendNewComment(msg) {
       this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
@@ -15,12 +20,19 @@ export default {
         answerTo: this.commentReplyId
       });
     },
-    likePost() {
+    subscribe() {
       if (!this.post.canViewMedia) {
         this.showSubscribeModal();
+      }
+    },
+    likePost() {
+      if (!this.post.canViewMedia) {
+        this.showSubscribeModal(this._likePost);
         return;
       }
-
+      this._likePost();
+    },
+    _likePost() {
       this.$store.dispatch(this.actionPrefix + "/likePost", {
         post: this.post,
         addLike: !this.post.isFavorite
