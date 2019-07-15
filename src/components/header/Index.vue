@@ -84,6 +84,7 @@
               <div
                 :class="['auth-header-block hidden-mobile', { show: opened }]"
                 v-click-outside="hide"
+                v-if="$mq === 'desktop'"
               >
                 <div class="btn border alt login icn-item" @click="show">
                   Log in
