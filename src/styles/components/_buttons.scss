@@ -481,18 +481,13 @@ button {
 }
 
 .profile-tip-btn {
-  opacity: 0.4;
-  color: $main-color;
+  opacity: 1;
+  color: $primary-color;
 
-  &.selected {
-    opacity: 1;
-    color: $primary-color;
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:hover {
-        color: $primary-color-darken;
-      }
+    &:hover {
+      color: $primary-color-darken;
     }
   }
 
@@ -501,6 +496,7 @@ button {
     height: 24px;
     line-height: 24px;
     margin: 0 auto 2px;
+    transition: none;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {

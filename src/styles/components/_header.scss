@@ -240,15 +240,6 @@
         padding: 10px 0 8px;
       }
 
-      //> * {
-      //
-      //  @include media-breakpoint-up($desktop-breakpoint) {
-      //    flex: 0 0 auto;
-      //    width: auto;
-      //    height: 100%;
-      //  }
-      //}
-
       &:not(.profile-tip-btn) {
         margin-left: 25px;
       }

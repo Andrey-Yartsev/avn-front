@@ -51,7 +51,7 @@
           <button
             v-if="profile.canEarn && $root.showTips"
             type="button"
-            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn selected"
+            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn"
             @click="openTip"
           >
             <span class="icn-item icn-tips icn-size_lg"></span>
