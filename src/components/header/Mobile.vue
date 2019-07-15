@@ -1,21 +1,19 @@
 <template>
-  <nav class="header-nav hidden-desktop" v-if="$mq === 'mobile'">
-    <template v-if="user">
-      <a
-        v-if="$route.meta.home"
-        class="menu-item-home header-nav__item active"
-        @click="goToHomePage"
-        ><span>Home</span></a
-      >
-      <router-link v-else class="menu-item-home header-nav__item" to="/" exact
-        ><span>Home</span></router-link
-      >
-    </template>
+  <nav class="header-nav hidden-desktop" v-if="$mq === 'mobile' && user">
+    <a
+      v-if="$route.meta.home"
+      class="menu-item-home header-nav__item active"
+      @click="goToHomePage"
+      ><span>Home</span></a
+    >
+    <router-link v-else class="menu-item-home header-nav__item" to="/" exact
+      ><span>Home</span></router-link
+    >
     <router-link class="menu-item-explore header-nav__item" to="/explore"
       ><span>Explore</span></router-link
     >
+
     <router-link
-      v-if="user"
       to="/notifications"
       class="menu-item-notifications header-nav__item hidden-desktop"
       :class="{ unread: user && user.hasNotifications }"
@@ -23,7 +21,6 @@
       ><span>Notifications</span></router-link
     >
     <router-link
-      v-if="user"
       class="menu-item-messages header-nav__item showChat hidden-mobile"
       to="/chat"
       :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
