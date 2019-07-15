@@ -240,7 +240,7 @@
                 </span>
               </div>
             </div>
-            <div class="msg-no-chat">
+            <div class="msg-no-chat" v-if="!selectedUsers.length">
               <div class="msg-no-chat__msg">
                 Select people to send them a message
               </div>
