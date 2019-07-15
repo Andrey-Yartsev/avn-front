@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-nav hidden-mobile">
+  <nav class="header-nav hidden-mobile" v-if="$mq === 'desktop'">
     <template v-if="!noAuthHeader">
       <template v-if="user">
         <a

@@ -10,8 +10,8 @@
         </button>
       </div>
     </div>
-    <div class="loader-container" v-if="statesLoading">
-      <Loader :fullscreen="false" text="" class="transparent small no-text" />
+    <div class="loader-infinity" v-if="statesLoading">
+      <Loader :fullscreen="false" text="" :inline="true" :small="true" />
     </div>
 
     <form class="payouts-legal-form" v-on:submit.stop.prevent="save">

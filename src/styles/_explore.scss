@@ -499,6 +499,23 @@
       top: 0;
       bottom: 0;
       z-index: 0;
+
+      &.locked-wrapper {
+        pointer-events: none;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+
+        &:not(.locked-wrapper):hover {
+
+          .item-length {
+
+            .value {
+              opacity: 1;
+            }
+          }
+        }
+      }
     }
 
     img {
@@ -581,21 +598,11 @@
 
     &_processing {
 
-      &:before {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+      .explore-media {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-
-      &:not(.locked-wrapper):hover {
-
-        .item-length {
-
-          .value {
-            opacity: 1;
-          }
+        &:before {
+          opacity: 1;
+          transform: scale(1);
         }
       }
     }

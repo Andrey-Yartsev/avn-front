@@ -206,6 +206,10 @@
   outline: none;
   padding-right: 30px;
 
+  .search-text & {
+    padding-right: 70px;
+  }
+
   &:focus {
     border: none;
     outline: none;

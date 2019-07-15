@@ -4,11 +4,12 @@
     :class="{ processing, 'show-player': showPlayer }"
     @click="play"
   >
-    <div
-      class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
-      v-if="processing"
-    >
-      <div class="loader-text">Media is currently processing</div>
+    <div class="loader-container loader-container_center" v-if="processing">
+      <Loader
+        :fullscreen="false"
+        text="Media is currently processing"
+        class="small overlay_semidark text-light"
+      />
     </div>
     <video
       disableremoteplayback
@@ -28,7 +29,12 @@
   </div>
 </template>
 <script>
+import Loader from "@/components/common/Loader";
+
 export default {
+  components: {
+    Loader
+  },
   props: {
     message: Object
   },

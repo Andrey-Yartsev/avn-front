@@ -117,8 +117,12 @@
                       </div>
                     </div>
                   </div>
-                  <div class="loaderWrap loader-content" v-if="loading">
-                    <Loader :fullscreen="false" />
+                  <div class="loader-infinity" v-if="loading">
+                    <Loader
+                      :fullscreen="false"
+                      :inline="true"
+                      :class="{ small: stories.length }"
+                    />
                   </div>
                 </perfect-scrollbar>
               </div>

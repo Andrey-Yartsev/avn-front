@@ -36,8 +36,11 @@
       <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
     </template>
 
-    <div class="loader-container loader-container_show-center" v-if="loading">
-      <Loader :fullscreen="false" text="Loading" class="colored small" />
+    <div class="loader-container loader-container_center" v-if="loading">
+      <Loader
+        :fullscreen="false"
+        class="overlay_fulllight small main-chat-loader"
+      />
     </div>
 
     <div class="chatCollectionContent__col chatCollectionContent__col_narrow">

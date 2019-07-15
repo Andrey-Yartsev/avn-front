@@ -1,7 +1,5 @@
 <template>
-  <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="true" text="" class="transparent small" />
-  </div>
+  <Loader text="" v-if="loading" />
   <NotFoundPage v-else-if="error" />
   <ProfilePage v-else />
 </template>

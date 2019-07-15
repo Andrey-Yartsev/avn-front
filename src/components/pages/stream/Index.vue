@@ -3,8 +3,8 @@
     class="stream-container"
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
   >
-    <div class="loader-container" v-if="!user">
-      <Loader :fullscreen="false" text="" class="transparent small" />
+    <div class="loader-container loader-container_center" v-if="!user">
+      <Loader :fullscreen="false" text="" :small="true" />
     </div>
     <div class="stream " v-else>
       <div class="mediasTop">
@@ -300,8 +300,8 @@
       </div>
     </div>
     <Loader
-      :fullscreen="true"
       text="Starting the stream"
+      class="overlay_semidark text-light"
       v-if="startingStream"
     />
     <StreamStatistic

@@ -9,12 +9,16 @@
           target="_blank"
           @click.prevent="openVideo"
         >
-          <div
-            class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
+          <span
+            class="loader-container loader-container_center"
             v-if="processing"
           >
-            <div class="loader-text">Media is currently processing</div>
-          </div>
+            <Loader
+              :fullscreen="false"
+              text="Media is currently processing"
+              class="small overlay_semidark processing-loader rounded-corners text-light"
+            />
+          </span>
           <img
             :src="media.thumb.source"
             :class="{ 'no-media-text': !message.textLength }"
@@ -27,10 +31,14 @@
       <template v-else>
         <div class="postLink video-placeholder icn-item rounded-corners">
           <div
-            class="lds-dual-ring transparent small with-text not-fullscreen processing-loader rounded-corners"
+            class="loader-container loader-container_center"
             v-if="processing"
           >
-            <div class="loader-text">Media is currently processing</div>
+            <Loader
+              :fullscreen="false"
+              text="Media is currently processing"
+              class="small overlay_semidark processing-loader rounded-corners text-light"
+            />
           </div>
           <img
             :src="media.thumb.source"
@@ -47,11 +55,15 @@
 
 <script>
 import User from "@/mixins/user";
+import Loader from "@/components/common/Loader";
 
 export default {
   mixins: [User],
   props: {
     message: Object
+  },
+  components: {
+    Loader
   },
   computed: {
     media() {

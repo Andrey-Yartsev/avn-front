@@ -3,8 +3,8 @@
     <div class="settings-aside">
       <div
         id="avatarBgAside"
-        class="rounded-container white-bg-block loadWrap"
-        :class="{ 'hidden-mobile': !showAvatarBlock, loaderWrap: loading }"
+        class="rounded-container white-bg-block"
+        :class="{ 'hidden-mobile': !showAvatarBlock, 'loader-wrap': loading }"
       >
         <div class="settings-profile-images">
           <div
@@ -14,12 +14,17 @@
               <img v-if="bgPreview" :src="bgPreview" class="f1" />
               <img v-else-if="user.header" :src="user.header" class="f2" />
             </template>
-            <Loader
-              :fullscreen="false"
-              text=""
-              class="small no-text"
+            <span
+              class="loader-container loader-container_center"
               v-if="gettingBgPreview"
-            />
+            >
+              <Loader
+                :fullscreen="false"
+                :inline="true"
+                text=""
+                :small="true"
+              />
+            </span>
           </div>
 
           <div class="avatar-block">
@@ -28,12 +33,17 @@
                 <img v-if="avatarPreview" :src="avatarPreview" />
                 <img v-else-if="user.avatar" :src="user.avatar" />
               </span>
-              <Loader
-                :fullscreen="false"
-                text=""
-                class="small no-text rounded"
+              <span
+                class="loader-container loader-container_center"
                 v-if="gettingPreview"
-              />
+              >
+                <Loader
+                  :fullscreen="false"
+                  :inline="true"
+                  text=""
+                  class="small"
+                />
+              </span>
             </span>
             <template v-show="!gettingPreview">
               <label
@@ -113,8 +123,11 @@
           </div>
         </div>
 
-        <div class="lds-dual-ring with-text not-fullscreen" v-if="loading">
-          <div class="loader-text lowered"></div>
+        <div
+          class="loader-container loader-container_center loader-container_top-level"
+          v-if="loading"
+        >
+          <Loader :fullscreen="false" text="" :semidark="true" />
         </div>
       </div>
       <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">

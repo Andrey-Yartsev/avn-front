@@ -5,10 +5,10 @@
   >
     <div class="payouts">
       <div
-        class="border-top shadow-block loader-container loader-container_payouts"
+        class="border-top shadow-block loader-container loader-container_center"
         v-if="loading"
       >
-        <Loader :fullscreen="false" text="" class="transparent small no-text" />
+        <Loader :fullscreen="false" :inline="true" text="" :small="true" />
       </div>
       <template v-else>
         <div class="PayoutsAccountView" v-if="!user.isWantEarn">

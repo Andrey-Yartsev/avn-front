@@ -529,6 +529,12 @@
         z-index: 1;
       }
     }
+
+    .close {
+      position: fixed;
+      right: 0;
+      top: 0;
+    }
   }
 
   &.post-popup {
@@ -667,7 +673,7 @@
 
 .popup-container-scroll {
 
-  .loaderWrap {
+  .loader-infinity {
     background-color: $white;
     margin-top: -4px;
 

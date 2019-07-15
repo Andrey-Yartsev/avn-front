@@ -1,6 +1,6 @@
 <template>
-  <div class="loader-container" v-if="loading">
-    <Loader :fullscreen="false" text="" class="transparent small" />
+  <div class="loader-container loader-container_center" v-if="loading">
+    <Loader :fullscreen="false" text="" :small="true" />
   </div>
   <div class="special-container" v-else>
     <router-link
@@ -153,6 +153,7 @@
                       :class="'rounded-container'"
                       :posts="posts"
                       from="profile/home"
+                      v-if="posts.length"
                     />
                   </div>
                   <div class="exploreAllCollectionView" v-else>
@@ -170,11 +171,8 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="loaderWrap loader-content"
-                    v-if="infinityScrollLoading"
-                  >
-                    <Loader :fullscreen="false" />
+                  <div class="loader-infinity" v-if="infinityScrollLoading">
+                    <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </div>
               </template>
@@ -493,9 +491,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.loader-container {
-  height: 300px;
-}
-</style>

@@ -88,11 +88,13 @@
             </form>
           </div>
         </div>
-        <Loader
-          v-if="showLoader"
-          :fullscreen="false"
-          text="Uploading..."
-        ></Loader>
+        <div class="loader-container loader-container_center" v-if="showLoader">
+          <Loader
+            :fullscreen="false"
+            text="Uploading..."
+            class="overlay_semidark text-light"
+          />
+        </div>
       </div>
     </template>
   </Modal>

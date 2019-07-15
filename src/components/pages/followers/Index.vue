@@ -1,6 +1,6 @@
 <template>
-  <div class="loader-container" v-if="!profile">
-    <Loader :fullscreen="false" text="" class="transparent small" />
+  <div class="loader-container loader-container_center" v-if="!profile">
+    <Loader :fullscreen="false" text="" :small="true" />
   </div>
   <div class="special-container" v-else>
     <router-link
@@ -64,11 +64,12 @@
                         :query="page"
                         actionPrefix="followers"
                       />
-                      <div
-                        class="loaderWrap loader-content"
-                        v-if="infinityScrollLoading"
-                      >
-                        <Loader :fullscreen="false" />
+                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                        <Loader
+                          :fullscreen="false"
+                          :inline="true"
+                          :class="{ small: users.length }"
+                        />
                       </div>
                       <div
                         class="msg-no-content show"

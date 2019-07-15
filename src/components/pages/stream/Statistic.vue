@@ -125,7 +125,7 @@
         </button>
       </div>
     </div>
-    <Loader :fullscreen="true" text="" v-if="loading" />
+    <Loader text="" :semidark="true" v-if="loading" />
   </div>
 </template>
 

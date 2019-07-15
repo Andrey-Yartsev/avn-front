@@ -240,15 +240,6 @@
         padding: 10px 0 8px;
       }
 
-      //> * {
-      //
-      //  @include media-breakpoint-up($desktop-breakpoint) {
-      //    flex: 0 0 auto;
-      //    width: auto;
-      //    height: 100%;
-      //  }
-      //}
-
       &:not(.profile-tip-btn) {
         margin-left: 25px;
       }
@@ -411,13 +402,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         display: block;
       }
-    }
-  }
-
-  .register {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
     }
   }
 
@@ -747,6 +731,21 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     right: 32px;
+  }
+
+  &_lg {
+    width: 30px;
+    height: 30px;
+    right: 52px;
+    font-size: 20px;
+
+    .no-results & {
+      right: 16px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 20px;
+      }
+    }
   }
 
   .dark-theme & {

@@ -33,12 +33,6 @@
           </div>
         </div>
       </div>
-      <div
-        class="border-top shadow-block no-padding loader-container"
-        v-if="loading"
-      >
-        <Loader :fullscreen="false" text="" class="transparent small no-text" />
-      </div>
       <div class="shadow-block no-padding">
         <div class="table-wrapper">
           <div class="table payouts-table" v-if="!loading && items.length">
@@ -60,6 +54,9 @@
           </div>
           <div class="empty-table-info show" v-if="!items.length">
             <span>Empty here for now</span>
+          </div>
+          <div class="loader-infinity" v-if="loading">
+            <Loader :fullscreen="false" text="" :inline="true" :small="true" />
           </div>
         </div>
       </div>

@@ -42,8 +42,13 @@
                   </div>
                   <PostCollection :posts="delayedPosts" from="postQueue" />
                 </div>
-                <div class="loaderWrap loader-content" v-if="loading">
-                  <Loader :fullscreen="false" />
+                <div class="loader-infinity" v-if="loading">
+                  <Loader
+                    :fullscreen="false"
+                    :inline="true"
+                    text=""
+                    class="small"
+                  />
                 </div>
               </perfect-scrollbar>
             </div>

@@ -23,17 +23,17 @@
           <button
             class="btn-cancel-changes cancel-changes"
             @click="resetBgPreview"
-          ></button>
+          />
           <button class="btn save-changes" @click="saveBg">Save changes</button>
         </div>
       </div>
     </div>
-    <Loader
-      :fullscreen="false"
-      text=""
-      class="small no-text"
+    <span
+      class="loader-container loader-container_center"
       v-if="gettingBgPreview"
-    />
+    >
+      <Loader :fullscreen="false" :inline="true" text="" :small="true" />
+    </span>
   </div>
 </template>
 

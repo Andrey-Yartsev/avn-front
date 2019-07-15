@@ -4,12 +4,7 @@
       <div class="content">
         <div class="paymentView">
           <div class="iframe-container">
-            <Loader
-              :fullscreen="false"
-              text=""
-              class="transparent"
-              v-if="loading"
-            />
+            <Loader :fullscreen="false" text="" v-if="loading" />
             <iframe
               sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
               ref="iframe"

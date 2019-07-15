@@ -129,13 +129,9 @@
             </button>
           </div>
         </div>
-        <div class="session-content">
-          <div class="content shadow-block loader-container" v-if="loading">
-            <Loader
-              :fullscreen="false"
-              text=""
-              class="transparent small no-text"
-            />
+        <div class="session-content shadow-block shadow-block_reset-pt">
+          <div class="loader-infinity" v-if="loading">
+            <Loader :fullscreen="false" :inline="true" text="" :small="true" />
           </div>
 
           <div class="content shadow-block" v-else-if="sessions.length">
@@ -165,7 +161,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info show shadow-block" v-else>
+          <div class="empty-table-info show" v-else>
             <span>Empty here for now</span>
           </div>
         </div>

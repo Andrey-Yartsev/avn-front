@@ -93,25 +93,10 @@
     }
   }
 
-  .popup &,
   .feed & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       border-radius: 5px 5px 0 0;
-    }
-  }
-
-  &:not(.addPost_delayed) {
-
-    .popup-addPost &,
-    .addPost-page & {
-
-      + .loader-content {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
-      }
     }
   }
 
@@ -125,51 +110,51 @@
     }
   }
 
+  .popup & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      overflow: visible;
+    }
+
+    .lds-dual-ring {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        border-radius: 5px;
+      }
+    }
+  }
+
   &.loaderWrap {
 
     @include media-breakpoint-up($desktop-breakpoint) {
       overflow: hidden;
+      position: static;
     }
 
-    .popup & {
+    .popup-container_hfluid & {
+      position: relative;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         overflow: visible;
       }
 
       .lds-dual-ring {
-        top: -60px;
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          border-radius: 5px;
-        }
-      }
-    }
-
-    .popup-container_hfluid & {
-
-      .lds-dual-ring {
 
         @include media-breakpoint-up($desktop-breakpoint) {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
+          margin-top: -60px;
         }
       }
     }
+  }
 
-    .loader-text {
+  &_delayed {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-top: 30px;
-        transform: translate(-50%, calc(-50% + 20px));
-      }
+    &.loaderWrap {
 
-      &:after {
-
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin-top: 0;
-          top: 0;
-        }
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        position: relative;
       }
     }
   }
@@ -554,6 +539,10 @@
         padding: 15px 0 0;
         flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
         margin-left: auto;
+      }
+
+      .hasScheduledPosts & {
+        padding-bottom: 12px;
       }
     }
 
