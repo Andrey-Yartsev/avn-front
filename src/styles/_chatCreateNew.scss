@@ -53,7 +53,7 @@
   @include media-breakpoint-up($desktop-breakpoint) {
 
     &:hover {
-      
+
       &:after {
         opacity: 1;
       }

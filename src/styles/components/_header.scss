@@ -733,6 +733,21 @@
     right: 32px;
   }
 
+  &_lg {
+    width: 30px;
+    height: 30px;
+    right: 52px;
+    font-size: 20px;
+
+    .no-results & {
+      right: 16px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        right: 20px;
+      }
+    }
+  }
+
   .dark-theme & {
     color: $main-color;
   }

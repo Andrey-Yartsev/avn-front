@@ -53,7 +53,13 @@
             </div>
           </component>
         </div>
-        <div class="searchWrapper">
+        <div
+          class="searchWrapper"
+          :class="{
+            'no-results': !chats.length && searchQuery.length,
+            'search-text': chats.length && searchQuery.length
+          }"
+        >
           <span class="sendTo">To</span>
           <input
             @keyup="search"
@@ -62,9 +68,15 @@
             class="searchInput"
             placeholder="Search"
           />
+          <span
+            class="btn-clear-search btn-clear-search_lg icn-item btn-reset btn-reset_prim-color icn-pos_center"
+            @click="reset"
+            v-if="searchQuery.length"
+          ></span>
           <div
             class="btn-selected-all icn-item"
             @click="toggleSelectAll"
+            v-if="chats.length"
             :class="{ visible: chats.length, active: isAllSelected }"
           ></div>
         </div>
@@ -397,6 +409,10 @@ export default {
     sent() {
       this.sending = false;
       this.goTo("/chat");
+    },
+    reset() {
+      this.searchQuery = "";
+      this.$store.commit("chat/resetSearchUsers");
     }
   },
 
