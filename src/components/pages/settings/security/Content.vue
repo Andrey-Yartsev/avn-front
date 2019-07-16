@@ -249,11 +249,12 @@ export default {
       });
     },
     deleteAllSessions() {
-      if (!confirm("Are you sure?")) {
-        return;
-      }
-      this.$store.dispatch("sessions/deleteAll").then(() => {
-        this.$router.replace("/logout");
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Remove all sessions",
+          success: this.removeSessions
+        }
       });
     },
     copyKey() {
@@ -264,6 +265,11 @@ export default {
     },
     getActivityTime(time) {
       return fromNow(time);
+    },
+    removeSessions() {
+        this.$store.dispatch("sessions/deleteAll").then(() => {
+          this.$router.replace("/logout");
+        });
     }
   },
 
