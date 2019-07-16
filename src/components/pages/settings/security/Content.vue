@@ -267,9 +267,9 @@ export default {
       return fromNow(time);
     },
     removeSessions() {
-        this.$store.dispatch("sessions/deleteAll").then(() => {
-          this.$router.replace("/logout");
-        });
+      this.$store.dispatch("sessions/deleteAll").then(() => {
+        this.$router.replace("/logout");
+      });
     }
   },
 
