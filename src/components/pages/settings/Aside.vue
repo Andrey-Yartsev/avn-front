@@ -134,7 +134,9 @@
         <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
           <div class="inner">
             <span class="semi-transparent">
-              {{ user.name }}
+              <router-link :to="'/' + user.username" class="link-profile">
+                {{ user.name }}
+              </router-link>
             </span>
           </div>
         </div>
