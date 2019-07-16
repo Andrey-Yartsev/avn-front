@@ -79,8 +79,11 @@
             :showCopy="!delayedPost"
           />
 
-          <div class="tip-form_post" v-if="isAuth() && showSubscribeButton">
-            <span role="button" class="btn btn-cancel" @click="subscribe"
+          <div
+            class="subscribe-view-post"
+            v-if="isAuth() && showSubscribeButton"
+          >
+            <span role="button" class="btn lg" @click="subscribe"
               >Subscribe to view</span
             >
           </div>
