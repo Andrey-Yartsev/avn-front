@@ -722,6 +722,10 @@ button {
   &:after {
     content: "\E616";
   }
+
+  &__counter {
+    cursor: pointer;
+  }
 }
 
 .comments {

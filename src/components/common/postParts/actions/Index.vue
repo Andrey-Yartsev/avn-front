@@ -6,7 +6,7 @@
         class="btn-icon likes icn-item icn-size_lg"
         v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"
       />
-      <span @click="showLikesModal">
+      <span class="likes__counter" @click="showLikesModal">
         {{ post.favoritesCount ? post.favoritesCount : "" }}
       </span>
     </span>

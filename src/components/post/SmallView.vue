@@ -102,7 +102,9 @@
         v-if="post.mediaType !== 'processing'"
       >
         <span class="btn-icon likes icn-item icn-size_lg" @click="like" />
-        <span @click="showLikesModal">{{ post.favoritesCount }}</span>
+        <span class="likes__counter" @click="showLikesModal">{{
+          post.favoritesCount
+        }}</span>
       </span>
       <span
         class="explore-media__counter explore-media__counter_comments"
