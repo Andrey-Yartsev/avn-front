@@ -101,7 +101,7 @@ export default {
       this.uploaded = false;
       this.uploading = true;
       try {
-        const fileName = await upload(this.$refs.photo.files[0]);
+        const fileName = await upload(this.$refs.photo.files[0], "watermark");
         this.uploaded = true;
         this.$emit("change", fileName);
       } catch (error) {

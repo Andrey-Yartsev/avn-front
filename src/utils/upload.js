@@ -1,6 +1,9 @@
 import Store from "@/store";
 
-export default file => {
+export default (file, type) => {
+  if (!type) {
+    type = "image";
+  }
   return new Promise((accept, reject) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -8,7 +11,9 @@ export default file => {
     xhr.open(
       "POST",
       process.env.VUE_APP_API_URL +
-        "/upload?access-token=" +
+        "/upload/" +
+        type +
+        "?access-token=" +
         Store.state.auth.token,
       true
     );
