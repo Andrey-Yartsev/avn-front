@@ -1,22 +1,32 @@
 <template>
   <div class="explore-wrapper posts">
     <template v-if="items.length">
-      <div class="post-column">
+      <template v-if="$mq === 'desktop'">
+        <div class="post-column">
+          <Post
+            v-for="post in posts1"
+            v-bind:key="post.id"
+            :post="post"
+            from="search/page"
+          />
+        </div>
+        <div class="post-column">
+          <Post
+            v-for="post in posts2"
+            v-bind:key="post.id"
+            :post="post"
+            from="search/page"
+          />
+        </div>
+      </template>
+      <template v-else>
         <Post
-          v-for="post in posts1"
+          v-for="post in posts"
           v-bind:key="post.id"
           :post="post"
           from="search/page"
         />
-      </div>
-      <div class="post-column">
-        <Post
-          v-for="post in posts2"
-          v-bind:key="post.id"
-          :post="post"
-          from="search/page"
-        />
-      </div>
+      </template>
     </template>
   </div>
 </template>
