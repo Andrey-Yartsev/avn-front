@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       showDropdawn: false,
-      isVisible: undefined,
+      // isVisible: undefined,
       height: undefined
     };
   },
@@ -136,6 +136,9 @@ export default {
       return `Scheduled for ${moment(this.post.scheduledDate).format(
         "MMM D, hh:mm a"
       )}`;
+    },
+    isVisible() {
+      return this.post.isVisible;
     }
   },
   watch: {
@@ -144,12 +147,12 @@ export default {
         return;
       }
       this.closeTip();
-    },
-    $mq() {
-      if (this.$mq === "desktop" && !this.isVisible) {
-        this.isVisible = true;
-      }
     }
+    // $mq() {
+    //   if (this.$mq === "desktop" && !this.isVisible) {
+    //     this.isVisible = true;
+    //   }
+    // }
   },
   methods: {
     toggleCommentForm() {
@@ -157,7 +160,6 @@ export default {
         this.showSubscribeModal();
         return;
       }
-
       this.showAddCommentForm = !this.showAddCommentForm;
       this.showTip = false;
     },
@@ -165,7 +167,11 @@ export default {
       if (this.$mq === "desktop") {
         return;
       }
-      this.isVisible = isVisible;
+      // this.isVisible = isVisible;
+      this.$emit("visibilityChanged", {
+        isVisible,
+        id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
+      });
       this.height = entry.boundingClientRect.height;
     }
   }

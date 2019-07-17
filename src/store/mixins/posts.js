@@ -134,6 +134,12 @@ const result = {
   },
   mutations: {
     postsRequestSuccess(state, { list: posts, marker }) {
+      posts = posts.map(v => {
+        const r = { ...v };
+        r.isVisible = true;
+        return r;
+      });
+
       state.posts = [...state.posts, ...posts];
 
       if (posts.length < state.limit) {
@@ -143,6 +149,14 @@ const result = {
       }
       state.loading = false;
       state.marker = state.marker ? state.marker : marker;
+    },
+
+    updateVisibility(state, items) {
+      const posts = [...state.posts];
+      items.forEach(item => {
+        posts[item.index].isVisible = item.isVisible;
+      });
+      state.posts = posts;
     },
 
     postsRequestFail(state, err) {
