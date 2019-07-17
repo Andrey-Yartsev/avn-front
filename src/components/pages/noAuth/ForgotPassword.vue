@@ -8,7 +8,7 @@
           there.
         </h2>
         <form class="forgot-password-form" v-on:submit.stop.prevent="send">
-          <div class="form-group form-group_row">
+          <div class="form-group form-group_row-lg">
             <span class="form-group form-group_clear-gaps">
               <span class="form-field" :class="{ 'field-invalid': error }">
                 <input
@@ -30,7 +30,7 @@
             </span>
           </div>
           <div class="g-recaptcha" id="captcha"></div>
-          <div class="form-group form-group_row">
+          <div class="form-group form-group_row-lg">
             <button type="submit" class="btn lg alt">
               Reset password
             </button>

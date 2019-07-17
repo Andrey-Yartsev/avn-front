@@ -287,6 +287,11 @@ label {
       }
     }
   }
+
+  &_row {
+    display: block;
+    margin-bottom: 5px;
+  }
 }
 .form-group {
   position: relative;
@@ -298,14 +303,17 @@ label {
   }
 
   &_row {
-    margin-bottom: 20px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 26px;
+    &-md {
+      margin-bottom: 14px;
     }
 
-    &.form-group {
-      padding: 0;
+    &-lg {
+      margin-bottom: 20px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 26px;
+      }
     }
   }
 
