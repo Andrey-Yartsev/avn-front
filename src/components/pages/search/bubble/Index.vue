@@ -20,7 +20,7 @@
       tabindex="-1"
       id="header-search-clear"
       class="btn-clear-search icn-item btn-reset btn-reset_prim-color icn-pos_center"
-      :class="{ hidden: !canSearch }"
+      v-if="canSearch"
       @click="reset"
     />
 
