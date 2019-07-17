@@ -198,6 +198,7 @@ import PostSmall from "@/components/post/SmallView";
 import PostMedium from "@/components/post/MediumView";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import Visibility from "@/mixins/postsVisibility";
 import UserMixin from "@/mixins/user";
 import FileUpload from "@/mixins/fileUpload";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
@@ -212,7 +213,7 @@ import Footer from "@/components/footer/Index.vue";
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp],
+  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp, Visibility],
 
   components: {
     Loader,
@@ -233,10 +234,7 @@ export default {
     return {
       collapseLimit: 250,
       collapsed: true,
-      mysnapchat: "",
-      visibilityIdTimeout: 0,
-      visibilityIndexes: [],
-      isVisibleIndexes: []
+      mysnapchat: ""
     };
   },
 
@@ -475,47 +473,8 @@ export default {
           });
       }
     },
-    // visibility block
-    visibilityChanged({ isVisible, id }) {
-      if (isVisible) {
-        let index = this.posts.findIndex(post => post.id === id);
-        this.visibilityIndexes.push(index);
-        clearTimeout(this.visibilityIdTimeout);
-        this.visibilityIdTimeout = setTimeout(
-          this.visibilityFinishCollect,
-          100
-        );
-      }
-    },
-    visibilityFinishCollect() {
-      const averageIndex = this.getVisibilityAverage();
-      let from = averageIndex - 4;
-      let to = averageIndex + 4;
-      this.visibilityIndexes = [];
-      this.isVisibleIndexes = [];
-      if (from < 0) {
-        from = 0;
-      }
-      if (to > this.posts.length - 1) {
-        to = this.posts.length - 1;
-      }
-      for (let i = from; i <= to; i++) {
-        this.isVisibleIndexes.push(i);
-      }
-      const items = [];
-      for (let i = 0; i < this.posts.length; i++) {
-        items.push({
-          index: i,
-          isVisible: this.isVisibleIndexes.indexOf(i) !== -1
-        });
-      }
-      this.$store.commit("profile/home/updateVisibility", items);
-    },
-    getVisibilityAverage() {
-      let r = this.visibilityIndexes.reduce((a, b) => a + b, 0);
-      r = r / this.visibilityIndexes.length;
-      r = Math.round(r);
-      return r;
+    storePrefix() {
+      return "profile/home";
     }
   },
   created() {

@@ -92,7 +92,7 @@ import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
 
 export default {
-  name: "Post",
+  name: "PostMedium",
   mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
   data() {
     return {

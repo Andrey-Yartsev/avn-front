@@ -51,7 +51,11 @@
               actionPrefix="topModels"
             />
             <div v-else-if="page === 'feed'" class="feed-wrapper">
-              <PostCollection :posts="posts" from="explore" />
+              <PostCollection
+                :posts="posts"
+                from="explore"
+                @visibilityChanged="visibilityChanged"
+              />
             </div>
             <div v-else :class="['explore-wrapper', page]">
               <template v-if="type === 'media'">
@@ -62,6 +66,7 @@
                   :key="post.id"
                   from="explore"
                   :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                  @visibilityChanged="visibilityChanged"
                 />
               </template>
               <template v-if="page === 'stories'">
@@ -116,6 +121,7 @@ import UserMixin from "@/mixins/user";
 import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
+import Visibility from "@/mixins/postsVisibility";
 import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
 import PostCollection from "@/components/common/postCollection/Index";
@@ -137,7 +143,7 @@ export default {
     Loader,
     PostCollection
   },
-  mixins: [UserMixin, InfinityScrollMixin, PostsStat],
+  mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
   created() {
     this.getPageData();
   },
@@ -288,6 +294,9 @@ export default {
       if (this.type === "live") {
         this.$store.dispatch("lives/getPosts");
       }
+    },
+    storePrefix() {
+      return "explore";
     }
   },
   watch: {

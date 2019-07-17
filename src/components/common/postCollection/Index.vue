@@ -6,6 +6,7 @@
         v-bind:post="post"
         :key="post.id"
         :from="from"
+        @visibilityChanged="visibilityChanged"
       ></Post>
     </div>
   </div>
@@ -30,6 +31,11 @@ export default {
     from: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    visibilityChanged(data) {
+      this.$emit("visibilityChanged", data);
     }
   }
 };
