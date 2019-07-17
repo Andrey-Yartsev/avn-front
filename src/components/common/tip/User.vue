@@ -1,5 +1,5 @@
 <template>
-  <form class="tip-form">
+  <form class="tip-form" @submit.stop.prevent="send">
     <span
       role="button"
       class="btn btn-cancel"
