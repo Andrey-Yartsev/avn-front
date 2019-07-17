@@ -18,3 +18,13 @@ router.addRoutes([
 ]);
 
 profileRoute(router);
+
+// Google Analytics
+
+window.ga("set", "page", router.currentRoute.path);
+window.ga("send", "pageview");
+
+router.afterEach(to => {
+  window.ga("set", "page", to.path);
+  window.ga("send", "pageview");
+});
