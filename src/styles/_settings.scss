@@ -307,3 +307,51 @@ button.balance-info {
   color: $main-color;
   display: block;
 }
+
+.notification-setting-row {
+
+  .select-wrapper {
+    margin-left: auto;
+  }
+
+  .form-group-inner {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.notification-checkbox-switcher {
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    margin-bottom: 20px;
+  }
+
+  .checkbox-wrapper {
+    flex: 0 0 100%;
+
+    .label {
+      font-weight: 500;
+      position: static;
+      text-align: right;
+      margin-right: 3%;
+      padding: 0 3px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 29.5%;
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+
+      &:after {
+        left: auto;
+        right: 85px;
+      }
+    }
+  }
+}

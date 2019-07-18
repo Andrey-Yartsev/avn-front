@@ -42,10 +42,10 @@
       <div class="shadow-block">
         <div class="container">
           <div
-            class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
+            class="form-group emailNotificationsTypes"
             :class="{ disabled: !localUser.isEmailNotificationsEnabled }"
           >
-            <label class="form-group-inner">
+            <label class="form-group-inner notification-checkbox-switcher">
               <div class="checkbox-wrapper">
                 <input
                   v-model="
@@ -59,12 +59,12 @@
               </div>
             </label>
 
-            <div class="form-group form-group_with-label">
+            <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label">
                   New subscriber
                 </span>
-                <span class="select-wrapper">
+                <span class="select-wrapper select-wrapper_short">
                   <select
                     name="emailNotificationSubscriptionPeriod"
                     v-model="localUser.emailNotificationSubscriptionPeriod"
@@ -77,12 +77,12 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label">
                   New post created
                 </span>
-                <span class="select-wrapper">
+                <span class="select-wrapper select-wrapper_short">
                   <select
                     name="emailNotificationTipPeriod"
                     v-model="localUser.emailNotificationTipPeriod"
@@ -95,12 +95,12 @@
               </label>
             </div>
 
-            <div class="form-group form-group_with-label">
+            <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label">
                   New post created
                 </span>
-                <span class="select-wrapper">
+                <span class="select-wrapper select-wrapper_short">
                   <select
                     name="emailNotificationPostPeriod"
                     v-model="localUser.emailNotificationPostPeriod"
