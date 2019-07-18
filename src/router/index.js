@@ -80,7 +80,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAuthOrExplore,
     path: "/",
     component: HomePage,
     meta: {
