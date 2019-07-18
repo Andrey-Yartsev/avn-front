@@ -48,11 +48,19 @@
                 <span
                   v-else-if="v.lastMessage.media.length"
                   class="type-msg-icn"
-                  ><span class="icn-media icn-item"></span
-                ></span>
-                <span v-else class="message semi-transparent">
-                  <span v-html="v.lastMessage.text"></span>
+                >
+                  <span class="icn-media icn-item"></span>
+                  <span
+                    v-if="v.lastMessage.textLength > 0"
+                    class="message semi-transparent"
+                    v-html="v.lastMessage.text"
+                  ></span>
                 </span>
+                <span
+                  v-else
+                  class="message semi-transparent"
+                  v-html="v.lastMessage.text"
+                ></span>
               </template>
               <span class="isTyping">tester is typing...</span>
             </p>
