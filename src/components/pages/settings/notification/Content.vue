@@ -80,7 +80,7 @@
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label">
-                  New post created
+                  Tip was received
                 </span>
                 <span class="select-wrapper select-wrapper_short">
                   <select
@@ -172,56 +172,6 @@
                   value="true"
                 />
                 <span class="label icn-item">Post tweets</span>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="form-title border-top">
-        <div class="inner">
-          <span class="semi-transparent">
-            Emails Frequency
-            <p class="subtext">Choose how often you want to receive emails</p>
-          </span>
-        </div>
-      </div>
-      <div class="shadow-block">
-        <div class="container">
-          <div
-            :class="{ disabled: !localUser.isEmailNotificationsEnabled }"
-            class="form-group form-group_with-label radio-group emailNotificationsFrequency"
-          >
-            <label class="form-group-inner">
-              <div class="radio-wrapper icn-item">
-                <input
-                  v-model="localUser.emailNotificationNewPostsPeriod"
-                  type="radio"
-                  name="emailNotificationNewPostsPeriod"
-                  value="0"
-                />
-                <span class="label">Immediately</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="radio-wrapper icn-item">
-                <input
-                  v-model="localUser.emailNotificationNewPostsPeriod"
-                  type="radio"
-                  name="emailNotificationNewPostsPeriod"
-                  value="1"
-                />
-                <span class="label">Daily</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="radio-wrapper icn-item">
-                <input
-                  v-model="localUser.emailNotificationNewPostsPeriod"
-                  type="radio"
-                  name="emailNotificationNewPostsPeriod"
-                  value="2"
-                />
-                <span class="label">Weekly</span>
               </div>
             </label>
           </div>
