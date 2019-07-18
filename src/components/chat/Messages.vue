@@ -208,10 +208,10 @@ export default {
         }
       }
     },
-    sending(sending) {
-      if (sending) {
-        this.scrollToLast();
-      }
+    sending() {
+      //sending changed 2 times, before sending and after
+      //1st time scroll to message Sending, 2nd time scroll to new messsage
+      this.scrollToLast();
     }
   },
 
