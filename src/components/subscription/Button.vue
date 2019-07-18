@@ -80,7 +80,7 @@ export default {
     subscription() {
       if (!this.user) {
         this.$store.dispatch("modal/show", {
-          name: "login",
+          name: "signup",
           data: {
             profilePageAction: "subscribe"
           }
