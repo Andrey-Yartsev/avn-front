@@ -38,23 +38,13 @@
           </label>
         </div>
       </div>
+
       <div class="shadow-block">
         <div class="container">
           <div
             class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
             :class="{ disabled: !localUser.isEmailNotificationsEnabled }"
           >
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isEmailNotificationNewSubscriptionEnabled"
-                  type="checkbox"
-                  name="isEmailNotificationNewSubscriptionEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">New subscriber</span>
-              </div>
-            </label>
             <label class="form-group-inner">
               <div class="checkbox-wrapper">
                 <input
@@ -68,20 +58,64 @@
                 <span class="label icn-item">New private message</span>
               </div>
             </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isEmailNotificationNewTipsEnabled"
-                  type="checkbox"
-                  name="isEmailNotificationNewTipsEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">Tip was received</span>
-              </div>
-            </label>
+
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">
+                  New subscriber
+                </span>
+                <span class="select-wrapper">
+                  <select
+                    name="emailNotificationSubscriptionPeriod"
+                    v-model="localUser.emailNotificationSubscriptionPeriod"
+                  >
+                    <option v-for="(v, k) in notifOptions" :key="k" :value="k"
+                      >{{ v }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">
+                  New post created
+                </span>
+                <span class="select-wrapper">
+                  <select
+                    name="emailNotificationTipPeriod"
+                    v-model="localUser.emailNotificationTipPeriod"
+                  >
+                    <option v-for="(v, k) in notifOptions" :key="k" :value="k"
+                      >{{ v }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-group form-group_with-label">
+              <label class="form-group-inner">
+                <span class="label">
+                  New post created
+                </span>
+                <span class="select-wrapper">
+                  <select
+                    name="emailNotificationPostPeriod"
+                    v-model="localUser.emailNotificationPostPeriod"
+                  >
+                    <option v-for="(v, k) in notifOptions" :key="k" :value="k"
+                      >{{ v }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="form-title border-top">
         <div class="inner">
           <span class="semi-transparent">
@@ -214,6 +248,16 @@ import webPushNotifications from "@/mixins/webPushNotifications";
 
 export default {
   name: "NotificationSettingsContent",
-  mixins: [Common, webPushNotifications]
+  mixins: [Common, webPushNotifications],
+  computed: {
+    notifOptions() {
+      return {
+        none: "Disabled",
+        now: "Immediately",
+        day: "Daily",
+        week: "Weekly"
+      };
+    }
+  }
 };
 </script>
