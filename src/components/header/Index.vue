@@ -72,14 +72,18 @@
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
-              <router-link to="/register" class="register"
-                >Have an account?</router-link
+              <a
+                href="/register"
+                @click.prevent="openSingupModal"
+                class="register"
+                >Have an account?</a
               >
-              <router-link
-                to="/login"
+              <a
+                href="/login"
                 class="btn border alt login hidden-desktop"
                 v-if="$mq === 'mobile'"
-                >Log in</router-link
+                @click.prevent="openLoginModal"
+                >Log in</a
               >
               <div
                 :class="['auth-header-block hidden-mobile', { show: opened }]"
@@ -179,6 +183,16 @@ export default {
       if (this.disabledAddPostButton) return;
       this.$store.dispatch("modal/show", {
         name: "addPost"
+      });
+    },
+    openLoginModal() {
+      this.$store.dispatch("modal/show", {
+        name: "login"
+      });
+    },
+    openSingupModal() {
+      this.$store.dispatch("modal/show", {
+        name: "signup"
       });
     },
     show() {

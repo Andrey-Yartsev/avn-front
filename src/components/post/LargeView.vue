@@ -20,11 +20,12 @@
             @click="back"
           />
           <h1 class="page-title">Post</h1>
-          <router-link
-            to="/login"
+          <a
+            href="/login"
+            @click.prevent="openLoginModal"
             class="btn border alt login hidden-desktop"
             v-if="!isAuth()"
-            >Log in</router-link
+            >Log in</a
           >
         </div>
 
@@ -137,7 +138,7 @@
                   class="btn border btn_fix-width-sm"
                   @click.prevent="openLoginModal"
                 >
-                  Log in
+                  Log in7
                 </button>
                 <button
                   class="btn border alt btn_fix-width-sm"
@@ -186,11 +187,17 @@
     >
       <div class="comment-form-wrapper">
         <div class="guest-comments-form">
-          <router-link to="/login" class="btn border btn_fix-width-sm"
-            >Log in</router-link
+          <a
+            href="/login"
+            @click.prevent="openLoginModal"
+            class="btn border btn_fix-width-sm"
+            >Log in</a
           >
-          <router-link to="/register" class="btn border alt btn_fix-width-sm"
-            >Sign up</router-link
+          <a
+            href="/register"
+            @click.prevent="openSingupModal"
+            class="btn border alt btn_fix-width-sm"
+            >Sign up</a
           >
         </div>
       </div>
