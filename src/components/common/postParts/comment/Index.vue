@@ -38,6 +38,7 @@
           type="button"
           class="post-option btn-reply"
           @click="$emit('commentReply', comment)"
+          v-if="user"
         >
           Reply
         </button>
@@ -69,9 +70,11 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import Bubble from "@/helpers/userBubble";
+import User from "@/mixins/user";
 
 export default {
   name: "Comment",
+  mixins: [User],
   props: {
     comment: {
       type: Object,
