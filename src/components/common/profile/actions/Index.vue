@@ -4,17 +4,24 @@
       <div class="profile-btns-group">
         <div class="btns-user-activity">
           <router-link
+            class="btn-user-activity"
             :class="!page ? 'active' : ''"
             :to="`/${profile.username}/posts`"
           >
             <span class="value">{{ profile.postsCount }}</span>
             <span class="label">Posts</span>
           </router-link>
-          <router-link :to="`/${profile.username}/photos`">
+          <router-link
+            class="btn-user-activity"
+            :to="`/${profile.username}/photos`"
+          >
             <span class="value">{{ profile.photosCount }}</span>
             <span class="label">Photos</span>
           </router-link>
-          <router-link :to="`/${profile.username}/videos`">
+          <router-link
+            class="btn-user-activity"
+            :to="`/${profile.username}/videos`"
+          >
             <span class="value">{{ profile.videosCount }}</span>
             <span class="label">Videos</span>
           </router-link>

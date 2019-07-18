@@ -1254,38 +1254,6 @@
     order: 1;
   }
 
-  a {
-    flex: 0 1 100%;
-    text-align: center;
-    padding: 0 0 8px;
-    border-bottom: 2px solid transparent;
-    color: inherit;
-    transition: border-color 0.3s ease;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex-shrink: 1;
-      flex-basis: 76px;
-      width: 76px;
-      padding-top: 12px;
-    }
-
-    &:hover,
-    &.active {
-      .value {
-        opacity: 1;
-      }
-
-      .label {
-        color: $primary-color;
-        opacity: 1;
-      }
-    }
-
-    &.active {
-      border-color: $secondary-color;
-    }
-  }
-
   .value {
     font-weight: 500;
     display: block;
@@ -1305,6 +1273,46 @@
     display: block;
     font-weight: 400;
     transition: all 0.3s ease;
+  }
+}
+
+.btn-user-activity {
+  flex: 0 1 100%;
+  text-align: center;
+  padding: 0 0 8px;
+  border-bottom: 2px solid transparent;
+  color: inherit;
+  transition: border-color 0.3s ease;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    flex-shrink: 1;
+    flex-basis: 76px;
+    width: 76px;
+    padding-top: 12px;
+  }
+
+  &:hover,
+  &.active {
+    .value {
+      opacity: 1;
+    }
+
+    .label {
+      color: $primary-color;
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    border-color: $secondary-color;
+  }
+
+  .special-container & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-top: 10px;
+      background-color: $white;
+    }
   }
 }
 
@@ -1341,17 +1349,6 @@
 }
 
 .special-container {
-
-  .btns-user-activity {
-
-    a {
-
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        padding-top: 10px;
-        background-color: $white;
-      }
-    }
-  }
 
   .subscribe-cost {
     transition: color 0.3s ease, opacity 0.3s ease;
