@@ -51,7 +51,7 @@
                   ><span class="icn-media icn-item"></span
                 ></span>
                 <span v-else class="message semi-transparent">
-                  <template>{{ stripHtml(v.lastMessage.text) }}</template>
+                  <span v-html="v.lastMessage.text"></span>
                 </span>
               </template>
               <span class="isTyping">tester is typing...</span>
