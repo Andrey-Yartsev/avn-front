@@ -5,6 +5,9 @@ import router from "@/router";
 import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
 import profileRoute from "@/router/profileRoute";
 
+import VueAnalytics from "vue-analytics";
+import Vue from "vue";
+
 router.addRoutes([
   {
     beforeEnter: Auth.requireAuth,
@@ -19,12 +22,7 @@ router.addRoutes([
 
 profileRoute(router);
 
-// Google Analytics
-//
-// window.ga("set", "page", router.currentRoute.path);
-// window.ga("send", "pageview");
-//
-// router.afterEach(to => {
-//   window.ga("set", "page", to.path);
-//   window.ga("send", "pageview");
-// });
+Vue.use(VueAnalytics, {
+  id: "UA-2521515-51",
+  router
+});
