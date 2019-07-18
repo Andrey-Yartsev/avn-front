@@ -61,8 +61,8 @@
             <span class="icn-item icn-photos"></span>
           </span>
           <span
-            v-if="media.duration && $mq === 'desktop'"
-            class="item-length item-length_video hidden-mobile"
+            v-if="media.duration && !shouldBePoster"
+            class="item-length item-length_video"
           >
             <span class="value">{{ mediaDuration }}</span>
             <span class="icn-item icn-camera"></span>
