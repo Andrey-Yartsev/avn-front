@@ -104,21 +104,21 @@ export default {
   methods: {
     postLike() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
+        this.$store.dispatch("modal/show", { name: "signup" });
         return;
       }
       this.$emit("postLike");
     },
     postShowCommentForm() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
+        this.$store.dispatch("modal/show", { name: "signup" });
         return;
       }
       this.$emit("postShowCommentForm");
     },
     toggleTip() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
+        this.$store.dispatch("modal/show", { name: "signup" });
         return;
       }
       this.$emit("toggleTip");
