@@ -40,14 +40,14 @@
           <div
             class="form-group-btn hidden-mobile email-confirm-block"
             id="confirm-email-block"
-            v-if="$mq === 'desktop' && !user.emailChecked"
+            v-if="$mq === 'desktop' && showSendEmailButton"
           >
             <button
               type="button"
               class="btn border btn_fix-width-lg btn-confirm-email"
               @click="resendEmail"
             >
-              Re-send confirmation email
+              {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
             </button>
           </div>
           <!--
@@ -63,16 +63,15 @@
 
       <div
         class="text-centered hidden-desktop email-confirm-block"
-        v-if="$mq === 'mobile'"
+        v-if="$mq === 'mobile' && showSendEmailButton"
       >
         <button
-          v-if="!user.emailChecked"
           type="button"
           class="btn lg border btn_fix-width-lg btn-confirm-email"
           id="confirm-email-block-mobile"
           @click="resendEmail"
         >
-          Re-send confirmation email
+          {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
         </button>
         <!--
           <button
@@ -230,6 +229,11 @@ export default {
         return this.checkPassword && this.newPassword;
       }
       return this.checkPassword && this.newPassword && this.oldPassword;
+    },
+    showSendEmailButton() {
+      return (
+        !this.user.emailChecked || this.user.email !== this.localUser.email
+      );
     }
   },
 

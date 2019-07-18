@@ -80,7 +80,8 @@ export default {
       if (
         this.isAccountPage &&
         this.$route.params.view &&
-        this.$route.params.view !== "manage"
+        this.$route.params.view !== "manage" &&
+        this.$route.params.view !== "email"
       ) {
         return true;
       }
