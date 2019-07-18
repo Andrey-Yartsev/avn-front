@@ -422,7 +422,10 @@ export default {
     buySnapchat() {
       if (process.env.VUE_APP_NAME === "avn") {
         if (!this.user) {
-          this.$router.push("/settings/payments");
+          this.$store.dispatch("modal/show", {
+            name: "signup"
+          });
+          return;
         }
 
         if (!this.snapchat || this.snapchat.isPaid !== false) {
