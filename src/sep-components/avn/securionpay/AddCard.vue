@@ -230,9 +230,13 @@
                     :class="{ 'field-invalid': fieldError('expDate') }"
                   >
                     <div class="form-field">
-                      <CardExpDate
-                        v-validate="'card-exp-date'"
+                      <input
+                        v-model="expDate"
+                        v-mask="'##/##'"
+                        v-validate="'required|card-date'"
+                        data-vv-validate-on="blur"
                         name="expDate"
+                        placeholder="DD/MM"
                         @input="expDateChanged"
                       />
                     </div>
@@ -253,6 +257,7 @@
                           maxlength="4"
                           data-securionpay="cvc"
                           v-validate="'required|numeric'"
+                          ref="cvc"
                         />
                       </span>
                     </span>
@@ -266,8 +271,16 @@
                 <span class="label">Cardholder Name</span>
                 <span class="form-group form-group_clear-gaps">
                   <span class="form-field">
-                    <input v-model="userinfo.name" type="text" />
+                    <input
+                      v-validate="'required|card-holder'"
+                      name="cardHolder"
+                      v-model="cardHolder"
+                      type="text"
+                    />
                   </span>
+                  <div class="error-info" v-if="fieldError('cardHolder')">
+                    {{ fieldError("cardHolder") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -328,6 +341,20 @@ Validator.extend("non-amex", {
   }
 });
 
+Validator.extend("card-date", {
+  getMessage: "Wrong card date expiration",
+  validate: value => {
+    return !!value.match(/^\d\d\/\d\d$/);
+  }
+});
+
+Validator.extend("card-holder", {
+  getMessage: "Wrong characters",
+  validate: value => {
+    return !!value.match(/^[a-z\-'. ]+$/i);
+  }
+});
+
 const initData = {
   showCardForm: false,
   cardError: null,
@@ -346,7 +373,8 @@ const initData = {
       status: null,
       data: {}
     }
-  }
+  },
+  expDate: ""
 };
 
 const userinfo = {
@@ -386,6 +414,14 @@ export default {
     },
     IP() {
       return this.$store.state.init.data.ip;
+    },
+    cardHolder: {
+      set(value) {
+        this.userinfo.name = value.toUpperCase();
+      },
+      get() {
+        return this.userinfo.name;
+      }
     }
   },
   methods: {
@@ -519,12 +555,12 @@ export default {
         }
       });
     },
-    expDateChanged(value) {
-      if (value.expMonth) {
-        this.expMonth = value.expMonth;
-      }
-      if (value.expYear) {
-        this.expYear = value.expYear;
+    expDateChanged() {
+      if (this.expDate.length === 5) {
+        const m = this.expDate.match(/^(\d\d)\/(\d\d)$/);
+        this.expMonth = m[1];
+        this.expYear = "20" + m[2];
+        this.$refs.cvc.focus();
       }
     },
     scpayInit() {
