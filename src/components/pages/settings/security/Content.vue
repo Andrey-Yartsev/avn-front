@@ -25,8 +25,8 @@
             <div class="label">
               Google Authenticator setup
             </div>
-            <ol>
-              <li>
+            <ol class="otp-block__list">
+              <li class="otp-block__item">
                 <p>
                   Download and install Google Authenticator app from
                   <a
@@ -44,13 +44,13 @@
                   >
                 </p>
               </li>
-              <li>
+              <li class="otp-block__item">
                 <p>
                   In Google Authenticator app open “Settings“ and select “Set up
                   account“
                 </p>
               </li>
-              <li>
+              <li class="otp-block__item">
                 <p>Select “Scan a barcode“ or “Enter provided key“</p>
                 <div class="code-wrapper">
                   <div class="code-text" v-if="otp.code">
@@ -58,7 +58,8 @@
                     <button
                       v-if="copied"
                       type="button"
-                      class="btn border alt copy-code"
+                      class="btn"
+                      :class="{ 'border alt copy-code': $mq === 'desktop' }"
                     >
                       Copied!
                     </button>
@@ -66,7 +67,8 @@
                       v-else
                       @click="copyKey"
                       type="button"
-                      class="btn border alt copy-code"
+                      class="btn"
+                      :class="{ 'border alt copy-code': $mq === 'desktop' }"
                     >
                       Copy key
                     </button>
@@ -76,7 +78,7 @@
                   /></span>
                 </div>
               </li>
-              <li>
+              <li class="otp-block__item">
                 <p>Enter code from your Google Authenticator</p>
                 <input type="text" name="otpCode" v-model="otpCode" />
               </li>
@@ -116,7 +118,12 @@
       </div>
 
       <div class="SessionsCollectionView">
-        <div class="form-title border-top border-top-mobile">
+        <div class="form-title"
+          :class="{
+            'border-top-mobile': !otpEnable && !user.otpEnable && $mq === 'mobile',
+            'border-top': $mq === 'desktop'
+          }"
+        >
           <div class="inner">
             <span class="semi-transparent">Sessions</span>
             <button

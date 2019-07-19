@@ -15,7 +15,7 @@
     }
   }
 
-  ol {
+  &__list {
     font-size: 13px;
     padding: 13px 10px 7px 0;
     list-style: none;
@@ -23,28 +23,29 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 13px 0 25px 0;
     }
-    li {
-      padding: 0 0 0 20px;
-      position: relative;
-      &:before {
-        position: absolute;
-        left: 0;
-        top: 0;
-        counter-increment: list;
-        content: counter(list) ".";
-        opacity: 0.5;
-      }
-      p {
-        padding: 0 0 4px;
-      }
-      a {
-        color: $secondary-color;
-      }
-      input[name="otpCode"] {
-        margin: 5px 0 0 -5px;
-        @include media-breakpoint-up($desktop-breakpoint) {
-          width: 360px;
-        }
+  }
+
+  &__item {
+    padding: 0 0 0 20px;
+    position: relative;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      counter-increment: list;
+      content: counter(list) ".";
+      opacity: 0.5;
+    }
+    p {
+      padding: 0 0 4px;
+    }
+    a {
+      color: $secondary-color;
+    }
+    input[name="otpCode"] {
+      margin: 5px 0 0 -5px;
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 360px;
       }
     }
   }
@@ -110,14 +111,17 @@
   }
 }
 
-.code-wrapper {
+.code {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    display: flex;
-    align-items: center;
+    font-size: 21px;
+    margin: 0 0 24px;
   }
 
-  .code-text {
+  &-text {
 
     @include media-breakpoint-down($desktop-breakpoint) {
       text-align: center;
@@ -128,41 +132,25 @@
       order: 2;
       padding: 0 0 5px 50px;
     }
+  }
 
-    .code {
-      display: block;
-      font-size: 16px;
-      font-weight: 500;
+  &-wrapper {
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 21px;
-        margin: 0 0 24px;
-      }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+      align-items: center;
     }
 
     .btn {
 
-      &.border {
-
-        &.alt {
-
-          @include media-breakpoint-down($desktop-breakpoint) {
-            box-shadow: none;
-            padding: 0;
-            height: auto;
-            font-size: 15px;
-            background: none;
-            color: $secondary-color;
-            font-weight: 400;
-          }
-
-          &:before {
-
-            @include media-breakpoint-down($desktop-breakpoint) {
-              display: none;
-            }
-          }
-        }
+      @include media-breakpoint-down($desktop-breakpoint) {
+        box-shadow: none;
+        padding: 0;
+        height: auto;
+        font-size: 15px;
+        font-weight: 400;
+        background: none;
+        color: $secondary-color;
       }
     }
   }
