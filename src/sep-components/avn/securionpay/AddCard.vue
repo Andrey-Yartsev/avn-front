@@ -93,9 +93,12 @@
                     <input
                       v-model="userinfo.street"
                       name="street"
-                      v-validate="'required'"
+                      v-validate="'required|latin'"
                     />
                   </span>
+                  <div class="error-info" v-if="fieldError('street')">
+                    {{ fieldError("street") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -108,9 +111,12 @@
                     <input
                       v-model="userinfo.city"
                       name="city"
-                      v-validate="'required'"
+                      v-validate="'required|latin'"
                     />
                   </span>
+                  <div class="error-info" v-if="fieldError('city')">
+                    {{ fieldError("city") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -134,6 +140,9 @@
                       </option>
                     </select>
                   </span>
+                  <div class="error-info" v-if="fieldError('country')">
+                    {{ fieldError("country") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -161,6 +170,9 @@
                       }}</option>
                     </select>
                   </span>
+                  <div class="error-info" v-if="fieldError('state')">
+                    {{ fieldError("state") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -176,6 +188,9 @@
                       v-validate="'required'"
                     />
                   </span>
+                  <div class="error-info" v-if="fieldError('zip')">
+                    {{ fieldError("zip") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -190,6 +205,9 @@
                       v-validate="'required|email'"
                     />
                   </span>
+                  <div class="error-info" v-if="fieldError('email')">
+                    {{ fieldError("email") }}
+                  </div>
                 </span>
               </label>
             </div>
@@ -251,6 +269,7 @@
                       <span class="form-field">
                         <input
                           v-model="cvc"
+                          name="cvc"
                           type="text"
                           size="8"
                           minlength="3"
@@ -260,6 +279,9 @@
                           ref="cvc"
                         />
                       </span>
+                      <div class="error-info" v-if="fieldError('cvc')">
+                        {{ fieldError("cvc") }}
+                      </div>
                     </span>
                   </span>
                 </div>
@@ -349,9 +371,16 @@ Validator.extend("card-date", {
 });
 
 Validator.extend("card-holder", {
-  getMessage: "Wrong characters",
+  getMessage: "Wrong chars",
   validate: value => {
     return !!value.match(/^[a-z\-'. ]+$/i);
+  }
+});
+
+Validator.extend("latin", {
+  getMessage: "Wrong chars",
+  validate: value => {
+    return !!value.match(/^[0-9a-z\-'., ]+$/i);
   }
 });
 
