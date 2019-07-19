@@ -310,6 +310,13 @@ button.balance-info {
 
 .notification-setting-row {
 
+  &:last-child {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 30px;
+    }
+  }
+
   .select-wrapper {
     margin-left: auto;
   }
