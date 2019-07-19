@@ -61,8 +61,8 @@
 
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
-                <span class="label">
-                  New subscriber
+                <span class="label label_cursor-default">
+                  Subscription notification frequency
                 </span>
                 <span class="select-wrapper select-wrapper_short">
                   <select
@@ -79,8 +79,8 @@
 
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
-                <span class="label">
-                  Tip was received
+                <span class="label label_cursor-default">
+                  Tip notification frequency
                 </span>
                 <span class="select-wrapper select-wrapper_short">
                   <select
@@ -97,8 +97,8 @@
 
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
-                <span class="label">
-                  New post created
+                <span class="label label_cursor-default">
+                  Post notification frequency
                 </span>
                 <span class="select-wrapper select-wrapper_short">
                   <select

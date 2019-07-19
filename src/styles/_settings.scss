@@ -324,6 +324,15 @@ button.balance-info {
       padding-bottom: 0;
     }
   }
+
+  &.form-group {
+
+    .label {
+      flex: 0 0 50%;
+      justify-content: flex-start;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .notification-checkbox-switcher {
@@ -338,19 +347,18 @@ button.balance-info {
     .label {
       font-weight: 500;
       position: static;
-      text-align: right;
       margin-right: 3%;
       padding: 0 3px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 29.5%;
+        flex: 0 0 50%;
         padding-left: 7px;
         padding-right: 7px;
       }
 
       &:after {
         left: auto;
-        right: 85px;
+        right: 80px;
       }
     }
   }

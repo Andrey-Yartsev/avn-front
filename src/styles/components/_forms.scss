@@ -292,6 +292,10 @@ label {
     display: block;
     margin-bottom: 5px;
   }
+  
+  &_cursor-default {
+    cursor: default;
+  }
 }
 .form-group {
   position: relative;
