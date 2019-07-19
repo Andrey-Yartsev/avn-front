@@ -378,7 +378,8 @@
   }
 }
 
-.group-expiration-date {
+.group-expiration-date,
+.card-cvc-num {
   position: relative;
   width: 100px;
 
@@ -389,6 +390,10 @@
       padding-right: 30px;
     }
   }
+}
+
+.card-cvc-num {
+  margin-left: 12px;
 }
 
 .expirationDateWrapper {
@@ -405,22 +410,6 @@
   .separator {
     flex: 0 0 20px;
     text-align: center;
-  }
-}
-
-.card-cvc-num {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  flex: 0 0 35%;
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    flex: 0 0 40%;
-  }
-
-  .name-cvc {
-    margin-right: 10px;
-    margin-left: 20px;
   }
 }
 

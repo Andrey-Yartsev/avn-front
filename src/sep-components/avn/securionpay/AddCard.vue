@@ -264,7 +264,6 @@
                   </div>
 
                   <span class="card-cvc-num">
-                    <span class="name-cvc">Cvc</span>
                     <span class="form-group form-group_clear-gaps">
                       <span class="form-field">
                         <input
@@ -277,6 +276,7 @@
                           data-securionpay="cvc"
                           v-validate="'required|numeric'"
                           ref="cvc"
+                          placeholder="Cvc"
                         />
                       </span>
                       <div class="error-info" v-if="fieldError('cvc')">
