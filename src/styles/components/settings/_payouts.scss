@@ -256,6 +256,13 @@
     position: relative;
   }
 
+  &_height-reset {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: auto;
+    }
+  }
+
   &-legal-form {
     select {
       color: $main-color;

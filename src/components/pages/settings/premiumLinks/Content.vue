@@ -3,7 +3,7 @@
     class="rounded-container rounded-container_fluid-height"
     id="payouts-container"
   >
-    <div class="payouts">
+    <div class="payouts payouts_height-reset">
       <Form v-if="user.isWantEarn && user.subscribePrice > 0" />
       <div class="PayoutsAccountView" v-else>
         <h1 class="form-title">
