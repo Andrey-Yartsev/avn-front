@@ -449,17 +449,6 @@
           }
         }
       }
-
-      .overlay {
-        display: none;
-      }
-
-      .video-placeholder {
-        
-        &:after {
-          color: #fff;
-        }
-      }
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
