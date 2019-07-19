@@ -366,7 +366,14 @@ Validator.extend("non-amex", {
 Validator.extend("card-date", {
   getMessage: "Wrong card date expiration",
   validate: value => {
-    return !!value.match(/^\d\d\/\d\d$/);
+    const r = value.match(/^(\d\d)\/(\d\d)$/);
+    if (!r) {
+      return false;
+    }
+    if (r[1] > 12) {
+      return false;
+    }
+    return true;
   }
 });
 
