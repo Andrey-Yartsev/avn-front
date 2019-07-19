@@ -258,13 +258,13 @@
                         @input="expDateChanged"
                       />
                     </div>
-                    <div class="error-info" v-if="fieldError('expDate')">
-                      {{ fieldError("expDate") }}
-                    </div>
                   </div>
 
                   <span class="card-cvc-num">
-                    <span class="form-group form-group_clear-gaps">
+                    <span
+                      class="form-group form-group_clear-gaps"
+                      :class="{ 'field-invalid': fieldError('cvc') }"
+                    >
                       <span class="form-field">
                         <input
                           v-model="cvc"
@@ -279,11 +279,15 @@
                           placeholder="Cvc"
                         />
                       </span>
-                      <div class="error-info" v-if="fieldError('cvc')">
-                        {{ fieldError("cvc") }}
-                      </div>
                     </span>
                   </span>
+
+                  <div class="error-info" v-if="fieldError('expDate')">
+                    {{ fieldError("expDate") }}
+                  </div>
+                  <div class="error-info" v-if="fieldError('cvc')">
+                    {{ fieldError("cvc") }}
+                  </div>
                 </div>
               </div>
             </div>

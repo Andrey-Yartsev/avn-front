@@ -418,6 +418,11 @@
   flex: 1;
   align-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
+
+  .error-info {
+    flex: 0 0 100%;
+  }
 }
 
 .help-text {
