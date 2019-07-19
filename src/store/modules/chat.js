@@ -105,6 +105,7 @@ const actions = {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
+    //if message from another user
     if (rootState.auth.user.id !== message.fromUser.id) {
       const chatFound = state.chats.find(chat => {
         return message.fromUser.id === chat.withUser.id;
@@ -134,29 +135,42 @@ const actions = {
       }
     }
 
-    if (state.activeUserId) {
-      let withUserId = message.fromUser.id;
-      const isMine = message.fromUser.id === rootState.auth.user.id;
+    let withUserId = message.fromUser.id;
+    const isMine = message.fromUser.id === rootState.auth.user.id;
+    // if (isMine) {
+    //   withUserId = state.activeUserId;
+    // }
 
-      if (isMine) {
-        withUserId = state.activeUserId;
-      }
+    if (state.activeUserId) {
+      // let withUserId = message.fromUser.id;
+      // const isMine = message.fromUser.id === rootState.auth.user.id;
+
+      // if (isMine) {
+      //   withUserId = state.activeUserId;
+      // }
 
       const found = state.messages.find(v => v.id === message.id);
       if (found) {
         commit("replaceMessage", message);
       } else {
-        if (state.activeUserId === withUserId) {
+        // if (state.activeUserId === withUserId) {
+        if (isMine) {
           commit("addMessage", message);
         }
       }
 
-      dispatch("updateChatLastMessage", {
-        message,
-        withUserId,
-        isMine
-      });
+      // dispatch("updateChatLastMessage", {
+      //   message,
+      //   withUserId,
+      //   isMine
+      // });
     }
+
+    dispatch("updateChatLastMessage", {
+      message,
+      withUserId,
+      isMine
+    });
 
     if (rootState.auth.user.id !== message.fromUser.id) {
       if (state.activeUserId === message.fromUser.id) {
@@ -268,7 +282,9 @@ const mutations = {
     state.isSecondScreen = isSecondScreen;
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
+    console.log(message);
     state.chats = state.chats.map(chat => {
+    console.log(`message: ${message.text}, withUser.id: ${chat.withUser.id}, withUserId: ${withUserId}`);
       if (chat.withUser.id === withUserId) {
         chat.lastMessage = message;
         if (!isMine) {

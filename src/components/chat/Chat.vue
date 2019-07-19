@@ -296,9 +296,11 @@ export default {
   },
 
   created() {
-    this.$store.commit("chat/resetChats");
-    this.$store.commit("chat/messages", []);
-    this.$store.dispatch("chat/fetchChats").then(() => {
+    console.log("chat/created");
+    // setTimeout(function(){
+      this.$store.commit("chat/resetChats");
+      this.$store.commit("chat/messages", []);
+      this.$store.dispatch("chat/fetchChats").then(() => {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
@@ -307,6 +309,8 @@ export default {
     });
     window.addEventListener("focus", this.windowFocus);
     window.addEventListener("blur", this.windowBlur);
+    // }.bind(this), 5000);
+    
   },
 
   beforeDestroy() {
