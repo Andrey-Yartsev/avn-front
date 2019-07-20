@@ -135,7 +135,7 @@ const actions = {
       }
     }
 
-    let withUserId = message.fromUser.id;
+    let withUserId = message.withUser.id;
     const isMine = message.fromUser.id === rootState.auth.user.id;
     // if (isMine) {
     //   withUserId = state.activeUserId;
@@ -282,9 +282,7 @@ const mutations = {
     state.isSecondScreen = isSecondScreen;
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
-    console.log(message);
     state.chats = state.chats.map(chat => {
-    console.log(`message: ${message.text}, withUser.id: ${chat.withUser.id}, withUserId: ${withUserId}`);
       if (chat.withUser.id === withUserId) {
         chat.lastMessage = message;
         if (!isMine) {
