@@ -306,10 +306,11 @@
     }
   }
 
-  .not-authorized & {
+  &.guest {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       top: 0;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -317,13 +318,6 @@
 #site_header {
   width: 100%;
   background-clip: padding-box;
-
-  .not-authorized & {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     height: 50px;
@@ -336,22 +330,26 @@
     position: sticky;
   }
 
-  &:before {
-    position: fixed;
-    top: 0;
-    height: 0;
-    left: 0;
-    width: 100%;
-    background: rgba($gray, 0.4);
-    z-index: 9;
-    content: "";
-    opacity: 0;
-    transition: opacity 0.4s ease, height 0s linear 0.4s;
+  &:not(.guest) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: none;
+    &:before {
+      position: fixed;
+      top: 0;
+      height: 0;
+      left: 0;
+      width: 100%;
+      background: rgba($gray, 0.4);
+      z-index: 9;
+      content: "";
+      opacity: 0;
+      transition: opacity 0.4s ease, height 0s linear 0.4s;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: none;
+      }
     }
   }
+
   .dark & {
     background: $main-color;
   }
