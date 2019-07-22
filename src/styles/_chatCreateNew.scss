@@ -81,6 +81,7 @@
   line-height: 17px;
   max-width: 10em;
   @include ellipsis;
+  color: $main-color;
 }
 
 .all-contacts-found {
