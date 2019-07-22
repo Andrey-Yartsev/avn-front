@@ -362,6 +362,13 @@ video {
       padding-top: 88px;
     }
 
+    .not-authorized & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-top: 44px;
+      }
+    }
+
     .reset-sticky-gap & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {

@@ -286,6 +286,7 @@
       transform: translate3d(0, -44px, 0);
     }
 
+    .not-authorized &,
     .support-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -305,6 +306,12 @@
     }
   }
 
+  .not-authorized & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: 0;
+    }
+  }
 }
 
 #site_header {
