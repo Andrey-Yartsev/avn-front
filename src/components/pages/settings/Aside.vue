@@ -25,7 +25,10 @@
               </span>
               <span
                 class="icn-item icn-media"
-                :class="{ 'icn-size_lg': $mq === 'mobile' }"
+                :class="{
+                  'icn-size_lg': $mq === 'mobile',
+                  'icn-size_md': $mq === 'desktop'
+                }"
               />
             </label>
             <span
