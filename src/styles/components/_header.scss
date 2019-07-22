@@ -44,6 +44,13 @@
     }
   }
 
+  &.not-authorized {
+
+    #site_header {
+      box-shadow: none;
+    }
+  }
+
   #site_header {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
