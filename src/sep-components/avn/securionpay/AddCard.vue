@@ -285,6 +285,7 @@
                           maxlength="4"
                           data-securionpay="cvc"
                           v-validate="'required|numeric'"
+                          data-vv-validate-on="blur"
                           ref="cvc"
                           placeholder="Cvc"
                         />
