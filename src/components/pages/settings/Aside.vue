@@ -14,6 +14,34 @@
               <img v-if="bgPreview" :src="bgPreview" class="f1" />
               <img v-else-if="user.header" :src="user.header" class="f2" />
             </template>
+            <label
+              for="bg"
+              class="select-user-image select-user-image_cover select-user-image_cover-sm"
+              :class="{ 'single-btn': !user.header }"
+              v-show="showBgAdd"
+            >
+              <span class="select-user-image__text" v-if="!user.header">
+                Add background picture
+              </span>
+              <span
+                class="icn-item icn-media"
+                :class="{ 'icn-size_lg': $mq === 'mobile' }"
+              />
+            </label>
+            <span
+              v-if="!bgRemoved && user.header"
+              v-show="showBgAdd"
+              class="reset-user-image reset-bg icn-item btn-reset icn-pos_center"
+              :class="{ 'icn-size_lg': $mq === 'mobile' }"
+              @click="showBgConfirm"
+            />
+            <input
+              type="file"
+              id="bg"
+              ref="bg"
+              accept=".jpg,.jpeg,.gif,.png"
+              @change="setBgPreview"
+            />
             <span
               class="loader-container loader-container_center"
               v-if="gettingBgPreview"
@@ -70,38 +98,12 @@
               ></span>
             </template>
           </div>
-
-          <span
-            v-if="!bgRemoved && user.header"
-            v-show="showBgAdd"
-            class="reset-user-image reset-bg icn-item btn-reset icn-pos_center"
-            :class="{ 'icn-size_lg': $mq === 'mobile' }"
-            @click="showBgConfirm"
-          />
-          <label
-            for="bg"
-            class="select-user-image select-user-image_cover select-user-image_cover-sm"
-            :class="{ 'single-btn': !user.header }"
-            v-show="showBgAdd"
-          >
-            <span class="select-user-image__text" v-if="!user.header">
-              Add background picture
-            </span>
-            <span
-              class="icn-item icn-media"
-              :class="{ 'icn-size_lg': $mq === 'mobile' }"
-            />
-          </label>
-          <input
-            type="file"
-            id="bg"
-            ref="bg"
-            accept=".jpg,.jpeg,.gif,.png"
-            @change="setBgPreview"
-          />
         </div>
         <div class="profile-identifier">
-          <div class="profile-name profile-name-settings">
+          <div
+            class="profile-name profile-name-settings hidden-mobile"
+            v-if="$mq === 'desktop'"
+          >
             <div class="profile-name__main">
               <span class="name">{{ user.name }}</span>
               <span
@@ -116,7 +118,7 @@
 
           <div class="profile-picture-btns" :class="{ show: showSave }">
             <button
-              class="btn-cancel-changes cancel-changes"
+              class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
               @click="reset"
             ></button>
             <button class="btn save-changes" @click="save">Save changes</button>
@@ -130,7 +132,7 @@
           <Loader :fullscreen="false" text="" :semidark="true" />
         </div>
       </div>
-      <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">
+      <div class="rounded-container" v-if="isHome">
         <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
           <div class="inner">
             <span class="semi-transparent">

@@ -843,9 +843,7 @@
 
   &:after {
     content: "\E64F";
-    font-size: 24px;
     color: #fff;
-    @include icon-font;
   }
 }
 
@@ -1391,7 +1389,6 @@
     top: 0;
     bottom: 0;
     z-index: 3;
-    transform: translate(0, 0);
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;

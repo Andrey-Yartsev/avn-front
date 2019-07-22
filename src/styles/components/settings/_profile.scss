@@ -311,12 +311,10 @@
 .settings-aside {
 
   .profile-name {
-    display: none;
     padding: 8px 10px 10px 110px;
     opacity: 1;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
       min-height: 54px;
       padding: 0;
     }

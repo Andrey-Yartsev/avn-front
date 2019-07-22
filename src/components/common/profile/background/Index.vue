@@ -21,7 +21,7 @@
         />
         <div class="profile-picture-btns" :class="{ show: showBgSave }">
           <button
-            class="btn-cancel-changes cancel-changes"
+            class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
             @click="resetBgPreview"
           />
           <button class="btn save-changes" @click="saveBg">Save changes</button>
