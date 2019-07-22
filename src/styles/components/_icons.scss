@@ -213,6 +213,13 @@
         font-size: 24px;
       }
     }
+
+    &_extralg {
+
+      &:after {
+        font-size: 34px;
+      }
+    }
   }
 
   &-locked {

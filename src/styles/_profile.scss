@@ -1462,10 +1462,6 @@
           margin-left: 11px;
           display: block;
           transition: transform .3s;
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 34px;
-          }
         }
       }
 

@@ -9,9 +9,15 @@
           for="bg"
           class="select-user-image select-user-image_cover select-user-image_cover-lg"
           :class="{ hide: profile.header || !showBgAdd }"
-          ><span class="select-user-image__text">Add background picture</span
-          ><span class="icn-item icn-media"></span
-        ></label>
+          ><span class="select-user-image__text">Add background picture</span>
+          <span
+            class="icn-item icn-media"
+            :class="{
+              'icn-size_md': $mq === 'mobile',
+              'icn-size_extralg': $mq === 'desktop'
+            }"
+          />
+        </label>
         <input
           type="file"
           id="bg"
