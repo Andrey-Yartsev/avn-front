@@ -11,7 +11,7 @@
 
   &.not-authorized {
 
-    #site_header {
+    .main-header {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;

@@ -7,7 +7,7 @@
   }
 
   &:before,
-  #site_header,
+  .main-header,
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -1184,7 +1184,7 @@
 
 .open-timepicker {
 
-  #site_header {
+  .main-header {
     z-index: 0;
   }
 }

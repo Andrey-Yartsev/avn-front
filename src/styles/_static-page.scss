@@ -16,7 +16,7 @@
 
   .scroll-top {
 
-    #site_header {
+    .main-header {
       top: 0;
     }
 
@@ -25,7 +25,7 @@
     }
   }
 
-  #site_header {
+  .main-header {
     box-shadow: none;
     position: relative;
     top: 0;
@@ -81,7 +81,7 @@
 
     &.avn-style {
 
-      #site_header {
+      .main-header {
 
         .header-logo {
 

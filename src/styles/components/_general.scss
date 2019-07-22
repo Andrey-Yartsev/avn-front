@@ -55,7 +55,7 @@ strong {
 .modal-opened {
   overflow: hidden;
 
-  #site_header {
+  .main-header {
     transition: all 0s;
   }
 }
@@ -438,7 +438,7 @@ video {
       }
     }
 
-    #site_header & {
+    .main-header & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 

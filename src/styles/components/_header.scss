@@ -2,14 +2,14 @@
 
   &_all {
 
-    #site_header {
+    .main-header {
       display: none;
     }
   }
 
   &_mob:not(.not-authorized) {
 
-    #site_header {
+    .main-header {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: none;
@@ -36,7 +36,7 @@
 
   &:not(.no-site-header_mob) {
 
-    #site_header {
+    .main-header {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         display: block;
@@ -46,12 +46,12 @@
 
   &.not-authorized {
 
-    #site_header {
+    .main-header {
       box-shadow: none;
     }
   }
 
-  #site_header {
+  .main-header {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: fixed;
@@ -262,22 +262,24 @@
 }
 
 .main-header {
+  width: 100%;
+  background-clip: padding-box;
+  position: -webkit-sticky;
+  position: sticky;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    position: -webkit-sticky;
-    position: sticky;
     top: -44px;
     height: 44px;
     z-index: 10;
-    background-clip: padding-box;
   }
 
-  .open-search-popup &,
-  .scroll-top.open-search-popup & {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      top: 0;
-    }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    height: 50px;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 12;
+    margin: 0 0 25px;
   }
 
   .scroll-top:not(.open-search-popup) & {
@@ -299,7 +301,6 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       transform: translate3d(0, 0, 0);
-      top: 0;
       position: fixed;
       left: 0;
       right: 0;
@@ -312,22 +313,6 @@
       top: 0;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
-  }
-}
-
-#site_header {
-  width: 100%;
-  background-clip: padding-box;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    height: 50px;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 12;
-    margin: 0 0 25px;
-    position: -webkit-sticky;
-    position: sticky;
   }
 
   &:not(.guest) {
@@ -348,10 +333,15 @@
         display: none;
       }
     }
-  }
 
-  .dark & {
-    background: $main-color;
+    .scroll-bottom &,
+    .open-search-popup &,
+    .scroll-top.open-search-popup & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        top: 0;
+      }
+    }
   }
 
   .header-nav {
@@ -1719,7 +1709,7 @@
 
     .header-scrolled {
 
-      #site_header {
+      .main-header {
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           transform: translate3d(0, -44px, 0);
@@ -1740,7 +1730,7 @@
     }
   }
 
-  #site_header {
+  .main-header {
 
     .login {
       filter: none;
