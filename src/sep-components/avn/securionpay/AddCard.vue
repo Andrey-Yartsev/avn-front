@@ -257,6 +257,16 @@
                         placeholder="DD/MM"
                         @input="expDateChanged"
                       />
+                      <input
+                        type="hidden"
+                        :value="expMonth"
+                        data-securionpay="expMonth"
+                      />
+                      <input
+                        type="hidden"
+                        :value="expYear"
+                        data-securionpay="expYear"
+                      />
                     </div>
                   </div>
 
