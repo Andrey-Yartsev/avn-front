@@ -377,6 +377,7 @@
 
     .not-authorized & {
       padding-right: 20px;
+      padding-left: 20px;
     }
 
     .verified-user {
@@ -391,8 +392,19 @@
     }
 
     .header-scrolled & {
-      opacity: 1;
-      pointer-events: unset;
+
+      .special-site-header:not(.not-authorized) & {
+        opacity: 1;
+        pointer-events: unset;
+      }
+    }
+
+    .scroll-top & {
+
+      .special-site-header.not-authorized & {
+        opacity: 1;
+        pointer-events: unset;
+      }
     }
 
     &.no-owner {
@@ -911,9 +923,9 @@
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
-    .header-scrolled & {
-      opacity: 1;
-    }
+    //.header-scrolled & {
+    //  opacity: 1;
+    //}
   }
 
   .header-return-btn {
