@@ -2,7 +2,12 @@
   <div class="profile-wrapper">
     <h1 class="form-title" v-if="$mq === 'desktop'">Edit Profile</h1>
     <form class="settings-form" v-on:submit.stop.prevent="save">
-      <div class="border-top shadow-block">
+      <div
+        :class="{
+          'border-top': $mq === 'desktop',
+          'shadow-block': $mq === 'mobile'
+        }"
+      >
         <div class="container">
           <div class="form-group form-group_with-label">
             <label class="form-group-inner">

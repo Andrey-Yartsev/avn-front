@@ -1,12 +1,25 @@
 .settings-aside {
+
   .white-bg-block {
+
     @include media-breakpoint-down($desktop-breakpoint) {
       overflow: hidden;
+      padding-bottom: 8px;
     }
   }
 
   .profile-name {
     padding: 0;
+  }
+}
+
+.profile-wrapper {
+
+  .shadow-block {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-top: 7px;
+    }
   }
 }
 
