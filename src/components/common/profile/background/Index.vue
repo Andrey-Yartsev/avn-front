@@ -13,7 +13,7 @@
           <span
             class="icn-item icn-media"
             :class="{
-              'icn-size_md': $mq === 'mobile',
+              'icn-size_lg': $mq === 'mobile',
               'icn-size_extralg': $mq === 'desktop'
             }"
           />
