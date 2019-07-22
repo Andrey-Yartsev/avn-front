@@ -1449,8 +1449,11 @@
     &-lg {
       align-items: center;
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        font-size: 17px;
+      .select-user-image__text {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          font-size: 17px;
+        }
       }
 
       .icn-media {
