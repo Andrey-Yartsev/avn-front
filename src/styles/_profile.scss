@@ -1373,13 +1373,13 @@
 .select-user-image {
   color: #fff;
   text-shadow: $shadow-light;
-  display: none;
-  font-size: 13px;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
   font-weight: 500;
+  display: flex;
 
   &__text {
     white-space: nowrap;
+    font-size: 13px;
   }
 
   &_avatar {
@@ -1389,7 +1389,6 @@
     top: 0;
     bottom: 0;
     z-index: 3;
-    display: flex;
     justify-content: flex-start;
     align-items: flex-end;
     align-content: flex-end;
@@ -1411,7 +1410,6 @@
   }
 
   &_cover {
-    display: flex;
     z-index: 3;
 
     .header-scrolled & {
@@ -1444,16 +1442,6 @@
 
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-bottom: 3px;
-        }
-      }
-
-      .icn-media {
-
-        &:after {
-
-          @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 18px;
-          }
         }
       }
     }
