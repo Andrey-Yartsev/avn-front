@@ -2,7 +2,8 @@
   <div class="sticky-header-controls">
     <a
       href="/"
-      class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+      class="header-return-btn go-back_arrow header-return-btn_icn-abs"
+      :class="{ 'go-back': user }"
       @click.prevent="goBack"
     />
     <div
