@@ -1412,18 +1412,7 @@
 
   &_cover {
     display: flex;
-    transform: translate(0, 0);
     z-index: 3;
-
-    .icn-media {
-
-      &:after {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          font-size: 24px;
-        }
-      }
-    }
 
     .header-scrolled & {
       opacity: 0;
