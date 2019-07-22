@@ -24,7 +24,10 @@ export default {
     this.$store.commit("modalRouter/updateLoading", false);
   },
   watch: {
-    ["$route"](route) {
+    ["$route"](route, from) {
+      if (from.path !== route.path) {
+        this.$store.commit("modalRouter/resetStack");
+      }
       if (route.hash) {
         this.initComponent();
       } else {
@@ -37,6 +40,11 @@ export default {
       this.$store.commit("modalRouter/updatePath", null);
       this.$store.commit("modalRouter/updateParams", null);
       this.routedComponent = null;
+
+      const stack = this.$store.state.modalRouter.stack;
+      if (stack.length) {
+        this.$store.dispatch("modalRouter/updatePath", stack[stack.length - 1]);
+      }
     },
     initComponent() {
       const route = this.matchRoute();
@@ -64,7 +72,6 @@ export default {
     },
     matchRoute() {
       const hash = window.location.hash.replace(/^#m\/(.*)/, "$1");
-      console.log(hash);
       const _routes = Object.entries(routes).map(v => {
         const pattern = v[0];
         const parts = pattern.split("/");

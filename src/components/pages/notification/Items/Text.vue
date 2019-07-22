@@ -25,7 +25,7 @@ export default {
       }
     },
     openModal(id) {
-      this.goToModalRoute(`post/${id}/home`);
+      this.goToModalRoute(`post/${id}/notif`);
     }
   },
   mounted() {

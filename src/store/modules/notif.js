@@ -2,6 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
+import postModal from "./notif/postModal";
 
 const state = {
   type: "",
@@ -75,5 +76,8 @@ export default {
   namespaced: true,
   state,
   actions: { ...PostMixin.actions, ...actions },
-  mutations: { ...PostMixin.mutations, ...mutations }
+  mutations: { ...PostMixin.mutations, ...mutations },
+  modules: {
+    postModal
+  }
 };

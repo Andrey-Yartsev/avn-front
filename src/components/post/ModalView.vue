@@ -80,6 +80,8 @@ export default {
         return this.$store.state.search.page;
       } else if (this.from === "favPosts") {
         return this.$store.state.favPosts;
+      } else if (this.from === "notif") {
+        return this.$store.state.notif.postModal;
       }
       throw new Error(`from "${this.from}" does not exists`);
     },
