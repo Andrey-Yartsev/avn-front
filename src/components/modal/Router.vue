@@ -64,6 +64,7 @@ export default {
     },
     matchRoute() {
       const hash = window.location.hash.replace(/^#m\/(.*)/, "$1");
+      console.log(hash);
       const _routes = Object.entries(routes).map(v => {
         const pattern = v[0];
         const parts = pattern.split("/");

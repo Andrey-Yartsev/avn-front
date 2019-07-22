@@ -76,8 +76,8 @@ import MobileHeader from "@/components/header/Mobile";
 import UserMixin from "@/mixins/user";
 import Footer from "@/components/footer/Index.vue";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import NotificationSingleView from "@/components/pages/notification/Items/Single";
-import NotificationMergedView from "@/components/pages/notification/Items/Merged";
+import NotificationSingleView from "./Items/Single";
+import NotificationMergedView from "./Items/Merged";
 import User from "@/components/header/User";
 import uniqBy from "lodash.uniqby";
 
@@ -192,7 +192,8 @@ export default {
       if (scrolledEnought && !this.loading && !this.allDataReceived) {
         this.infinityScrollGetDataMethod();
       }
-    }
+    },
+    initPostModals() {}
   },
 
   watch: {
@@ -207,6 +208,7 @@ export default {
     this.$store.commit("notif/reset");
     this.$store.dispatch("notif/getPosts", { type: this.type }).then(() => {
       this.$store.dispatch("auth/extendUser", { hasNotifications: false });
+      this.initPostModals();
     });
   }
 };

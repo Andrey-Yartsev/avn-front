@@ -36,11 +36,9 @@
             class="name name_break-text"
             >{{ v.items[0].user.name }}</router-link
           >
-          <span class="notification-summary"
-            ><span v-html="v.items[0].text"></span> (x{{
-              v.items.length
-            }})</span
-          >
+          <span class="notification-summary">
+            <NotifText :text="v.items[0].text" /> (x{{ v.items.length }})
+          </span>
         </div>
       </template>
       <template v-else>
@@ -86,7 +84,7 @@
               >{{ v.items[0].user.name }}</router-link
             >{{ `and ${v.items.length - 1} others ` }}</template
           >
-          <span class="notification-summary" v-html="v.items[0].text" />
+          <NotifText class="notification-summary" :text="v.items[0].text" />
         </div>
       </template>
     </div>
@@ -105,11 +103,13 @@
 import { fromNow } from "@/helpers/datetime";
 import { uniqId } from "@/utils/mediaFiles";
 import Loader from "@/components/common/Loader";
+import NotifText from "./Text";
 
 export default {
   name: "NotificationMergedView",
   components: {
-    Loader
+    Loader,
+    NotifText
   },
   props: {
     items: {

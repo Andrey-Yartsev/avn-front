@@ -25,7 +25,9 @@
         <router-link :to="'/' + v.user.username" class="name name_break-text">{{
           v.user.name
         }}</router-link>
-        <span class="notification-summary" v-html="v.text" />
+        <span class="notification-summary">
+          <NotifText :text="v.text" />
+        </span>
       </div>
     </div>
     <div class="loader-infinity" v-if="loading">
@@ -42,11 +44,13 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import Loader from "@/components/common/Loader";
+import NotifText from "./Text";
 
 export default {
   name: "NotificationSingleView",
   components: {
-    Loader
+    Loader,
+    NotifText
   },
   props: {
     items: {
