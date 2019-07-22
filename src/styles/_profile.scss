@@ -375,6 +375,10 @@
       padding-left: 20px;
     }
 
+    .not-authorized & {
+      padding-right: 20px;
+    }
+
     .verified-user {
       color: inherit;
     }
