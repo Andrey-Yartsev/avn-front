@@ -1,7 +1,7 @@
 <template>
   <div :class="['popup', extraClassName]">
-    <div class="overlay" @click="onClose"></div>
-    <slot name="content"></slot>
+    <div class="overlay" @click="onClose" />
+    <slot name="content" />
   </div>
 </template>
 

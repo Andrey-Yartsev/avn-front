@@ -1,6 +1,6 @@
 <template>
   <div class="popup popup-stream-details">
-    <div class="overlay"></div>
+    <div class="overlay" />
     <div class="stream-summary-container">
       <div class="stream-chart-legend">
         <div class="stream-chart-legend-item stream-chart-legend-item__viewers">
