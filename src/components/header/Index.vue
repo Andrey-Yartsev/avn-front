@@ -2,7 +2,7 @@
   <header
     ref="siteHeader"
     id="site_header"
-    :class="{ guest: noAuthHeader }"
+    :class="{ guest: !user }"
     class="main-header"
     :style="{
       right: `${-scrollBarWidth}px`
