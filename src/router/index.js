@@ -40,6 +40,7 @@ import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
 import AvnAwards from "@/components/pages/static/Awards";
 
 import Auth from "./auth";
+import Post from "./post";
 
 Vue.use(Router);
 
@@ -342,7 +343,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Post.page,
     path: "/post/:postId",
     component: PostPage,
     meta: {

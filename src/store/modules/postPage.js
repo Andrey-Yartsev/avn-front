@@ -27,17 +27,23 @@ const mutations = {
 const actions = {
   getPost({ commit }, { postId }) {
     commit("postsRequest");
-    return PostApi.getPost({ postId })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("postsRequestSuccess", { list: [res] });
-          });
-        }
-      })
-      .catch(err => {
-        commit("postsRequestFail", err);
-      });
+    return new Promise((accept, reject) => {
+      PostApi.getPost({ postId })
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(function(res) {
+              commit("postsRequestSuccess", { list: [res] });
+              accept(res);
+            });
+          } else {
+            reject({ message: "Not found" });
+          }
+        })
+        .catch(err => {
+          commit("postsRequestFail", err);
+          reject(err);
+        });
+    });
   }
 };
 

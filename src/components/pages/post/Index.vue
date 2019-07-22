@@ -19,11 +19,6 @@ export default {
   components: {
     Post,
     Footer
-  },
-  created() {
-    const postId = +this.$route.params.postId;
-    this.$store.commit("postPage/resetPageState");
-    this.$store.dispatch("postPage/getPost", { postId });
   }
 };
 </script>
