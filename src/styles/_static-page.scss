@@ -17,23 +17,19 @@
   .scroll-top {
 
     .main-header {
-      top: 0;
-    }
-
-    .header-wrapper {
       transform: translate3d(0, 0, 0);
     }
+  }
+
+  .header-wrapper {
+    box-shadow: none;
+    position: relative;
   }
 
   .main-header {
     box-shadow: none;
     position: relative;
     top: 0;
-
-    .header-wrapper {
-      box-shadow: none;
-      position: relative;
-    }
 
     .header-nav,
     .header-search {
