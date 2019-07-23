@@ -1105,7 +1105,11 @@
 
   &-text {
     display: inline;
-    //word-break: break-word;
+
+    a {
+      word-break: break-word;
+      display: inline-block;
+    }
 
     .icn-size_md {
       line-height: 19px;
