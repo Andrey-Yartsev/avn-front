@@ -1,7 +1,15 @@
 <template>
   <div class="chat-section">
-    <div class="loader-container loader-container_center" v-if="loading || !loaderHidden">
-      <Loader :fullscreen="false" text :small="true" class="overlay_fulllight" />
+    <div
+      class="loader-container loader-container_center"
+      v-if="loading || !loaderHidden"
+    >
+      <Loader
+        :fullscreen="false"
+        text
+        :small="true"
+        class="overlay_fulllight"
+      />
     </div>
     <component
       :is="scrollableComponent"
@@ -14,7 +22,9 @@
         <div
           class="chatMessageSending past-messages semi-transparent"
           v-if="moreLoading"
-        >Loading history...</div>
+        >
+          Loading history...
+        </div>
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -56,7 +66,8 @@
                   <span
                     class="message-locked__text"
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
-                  >{{ lockedText(v) }}</span>
+                    >{{ lockedText(v) }}</span
+                  >
                 </span>
                 <div class="media-chat" v-if="v.media.length">
                   <MediaVideo
@@ -88,7 +99,11 @@
                           <div class="wrap-name" v-html="vv.title"></div>
                         </div>
                       </div>
-                      <p class="profile-text" v-if="vv.description" v-html="vv.description"></p>
+                      <p
+                        class="profile-text"
+                        v-if="vv.description"
+                        v-html="vv.description"
+                      ></p>
                       <div class="link-render">
                         <a>{{ vv.url }}</a>
                       </div>
@@ -96,13 +111,21 @@
                   </a>
                 </template>
               </div>
-              <div class="timestamp timestamp_sm-size message-time" v-if="v.lastMessageInGroup">
+              <div
+                class="timestamp timestamp_sm-size message-time"
+                v-if="v.lastMessageInGroup"
+              >
                 <span class="timeValue">{{ time(v.createdAt) }}</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="chatMessageSending new-messages semi-transparent" v-if="sending">Sending...</div>
+        <div
+          class="chatMessageSending new-messages semi-transparent"
+          v-if="sending"
+        >
+          Sending...
+        </div>
       </div>
     </component>
   </div>
