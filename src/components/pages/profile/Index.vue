@@ -4,11 +4,10 @@
   </div>
   <div class="special-container" v-else>
     <router-link
-      class="addPost-btn-float hidden-desktop"
+      class="addPost-btn-float hidden-desktop icn-item icn-post icn-size_lg icn-pos_center"
       to="/addPost"
       v-if="isAuth()"
-      ><span class="icn-item icn-post icn-size_lg icn-pos_center"
-    /></router-link>
+    />
     <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" />
