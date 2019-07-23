@@ -1254,6 +1254,10 @@
       width: auto;
       transform: translate(0, 0);
     }
+
+    .sidebar-shown & {
+      transform: translate(0, 0);
+    }
   }
 
   &-menu {
@@ -1269,10 +1273,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       top: 57px;
       transition: opacity 0.4s ease, transform 0.4s ease, top 0s linear;
-    }
-
-    .sidebar__inside {
-      transform: translate(0, 0);
     }
   }
 
