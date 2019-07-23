@@ -901,6 +901,13 @@
     right: 0;
     top: 0;
     height: 44px;
+
+    .header-scrolled & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.15);
+      }
+    }
   }
 
   .support-page &,
