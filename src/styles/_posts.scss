@@ -807,15 +807,6 @@
           }
         }
 
-        //&:before {
-        //  position: absolute;
-        //  left: -3px;
-        //  right: -3px;
-        //  top: -3px;
-        //  bottom: -3px;
-        //  content: "";
-        //}
-
         &.active {
           opacity: 1;
         }
@@ -1040,14 +1031,6 @@
         bottom: 0;
         padding-right: 5px;
       }
-
-      //.ps__rail-x,
-      //.ps__rail-y {
-      //
-      //  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      //    display: none;
-      //  }
-      //}
     }
   }
 
