@@ -43,8 +43,8 @@
         <p
           class="text hidden-desktop"
           v-html="post.text"
-          v-if="$mq === 'mobile'"
-        ></p>
+          v-if="$mq === 'mobile' && post.text.length !== 0"
+        />
         <Media
           v-if="post.media && post.media.length"
           :medias="post.media"
@@ -138,7 +138,7 @@
                   class="btn border btn_fix-width-sm"
                   @click.prevent="openLoginModal"
                 >
-                  Log in7
+                  Log in
                 </button>
                 <button
                   class="btn border alt btn_fix-width-sm"
