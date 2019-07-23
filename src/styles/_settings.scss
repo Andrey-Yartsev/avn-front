@@ -9,6 +9,7 @@
     padding: 17px 20px;
     margin-bottom: 0;
     flex: 0 0 auto;
+
     @include media-breakpoint-up($desktop-breakpoint) {
       display: block;
     }
@@ -22,6 +23,7 @@
 
     .aside-col {
       order: 1;
+      position: relative;
     }
 
     .content-col {
@@ -29,21 +31,14 @@
     }
   }
 
-  .aside-col {
+  @include media-breakpoint-up($desktop-breakpoint) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
+    .aside-col {
       order: 1;
       padding-left: 10px;
     }
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      position: relative;
-    }
-  }
-
-  .content-col {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
+    .content-col {
       order: 2;
     }
   }
