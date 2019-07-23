@@ -294,13 +294,27 @@ export default {
       focusIntervalId = 0;
     }
   },
-
+  mounted() {
+    console.log(
+      `[mounted] activeUserId: ${this.$store.state.chat.activeUserId}`
+    );
+  },
+  beforeUpdate() {
+    console.log(
+      `[beforeUpdate] activeUserId: ${this.$store.state.chat.activeUserId}`
+    );
+  },
+  updated() {
+    console.log(
+      `[updated] activeUserId: ${this.$store.state.chat.activeUserId}`
+    );
+  },
   created() {
     console.log("chat/created");
     // setTimeout(function(){
-      this.$store.commit("chat/resetChats");
-      this.$store.commit("chat/messages", []);
-      this.$store.dispatch("chat/fetchChats").then(() => {
+    this.$store.commit("chat/resetChats");
+    this.$store.commit("chat/messages", []);
+    this.$store.dispatch("chat/fetchChats").then(() => {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
@@ -310,7 +324,6 @@ export default {
     window.addEventListener("focus", this.windowFocus);
     window.addEventListener("blur", this.windowBlur);
     // }.bind(this), 5000);
-    
   },
 
   beforeDestroy() {

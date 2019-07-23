@@ -118,9 +118,11 @@
       </div>
 
       <div class="SessionsCollectionView">
-        <div class="form-title"
+        <div
+          class="form-title"
           :class="{
-            'border-top-mobile': !otpEnable && !user.otpEnable && $mq === 'mobile',
+            'border-top-mobile':
+              !otpEnable && !user.otpEnable && $mq === 'mobile',
             'border-top': $mq === 'desktop'
           }"
         >
