@@ -2,13 +2,14 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 
-const MESSAGES_OFFSET = 10;
+const MESSAGES_LIMIT = 20;
+const CHATS_LIMIT = 20;
 
 const state = {
   isSecondScreen: false,
   activeUserId: null,
   windowIsActive: true,
-  messagesOffset: MESSAGES_OFFSET,
+  messagesOffset: 0,
   allMessagesLoaded: true,
   fetchingOld: false,
   // fetch chats
@@ -190,7 +191,7 @@ const actions = {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
-      if (r.list.length >= this.MESSAGES_OFFSET) {
+      if (r.list.length >= MESSAGES_LIMIT) {
         commit("allMessagesLoaded", false);
       }
     });
@@ -207,7 +208,7 @@ const actions = {
         commit("allMessagesLoaded", true);
         return;
       }
-      if (state.moreMessages.length < this.MESSAGES_OFFSET) {
+      if (state.moreMessages.length < MESSAGES_LIMIT) {
         commit("allMessagesLoaded", true);
       }
       commit("incrementMessagesOffset");
@@ -258,7 +259,7 @@ const actions = {
 const mutations = {
   setActiveUserId(state, activeUserId) {
     state.activeUserId = activeUserId;
-    state.messagesOffset = MESSAGES_OFFSET;
+    state.messagesOffset = MESSAGES_LIMIT;
     state.allMessagesLoaded = true;
   },
   allMessagesLoaded(state, allMessagesLoaded) {
@@ -352,14 +353,12 @@ const mutations = {
     state.windowIsActive = isActive;
   },
   incrementMessagesOffset(state) {
-    state.messagesOffset += MESSAGES_OFFSET;
+    state.messagesOffset += MESSAGES_LIMIT;
   },
   addOldMessages(state) {
     state.messages = state.moreMessages.concat(state.messages);
   }
 };
-
-const fetchChatsLimit = 20;
 
 const fetchChatsInitState = {
   allDataReceived: false,
@@ -375,10 +374,10 @@ mutations.fetchChatsReset = state => {
 
 mutations.fetchChatsComplete = state => {
   state.chats = [...state.chats, ...state._fetchChatsResult];
-  if (state._fetchChatsResult.length < fetchChatsLimit) {
+  if (state._fetchChatsResult.length < CHATS_LIMIT) {
     state.allDataReceived = true;
   } else {
-    state.offset = state.offset + fetchChatsLimit;
+    state.offset += CHATS_LIMIT;
   }
 };
 
@@ -399,7 +398,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.query = {
-      limit: fetchChatsLimit,
+      limit: CHATS_LIMIT,
       offset: params
     };
     return options;
@@ -449,7 +448,8 @@ createRequestAction({
   mutations,
   actions,
   options: {
-    method: "GET"
+    method: "GET",
+    query: {}
   },
   resultKey: "messages",
   defaultResultValue: [],
@@ -461,6 +461,10 @@ createRequestAction({
       return Object.values(res.list).reverse();
     }
     return state.messages || [];
+  },
+  paramsToOptions: function(params, options) {
+    options.query.limit = MESSAGES_LIMIT;
+    return options;
   }
 });
 
@@ -484,6 +488,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options, state) {
     options.query.offset = state.messagesOffset;
+    options.query.limit = MESSAGES_LIMIT;
     return options;
   }
 });
