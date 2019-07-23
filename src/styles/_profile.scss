@@ -889,15 +889,18 @@
 .sticky-header-controls {
   z-index: 7;
   width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 44px;
-  display: flex;
-  align-items: center;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     display: none;
+  }
+
+  &:not(.header-mobile) {
+    display: flex;
+    align-items: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 44px;
   }
 
   .support-page &,
@@ -922,10 +925,6 @@
   .profile-name__header {
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-
-    //.header-scrolled & {
-    //  opacity: 1;
-    //}
   }
 
   .header-return-btn {
