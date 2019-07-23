@@ -30,13 +30,16 @@
           <router-link
             to="/addPost"
             class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
-            :class="{ btn: $mq === 'desktop' }"
+            :class="{
+              btn: $mq === 'desktop',
+              'icn-item icn-post icn-size_lg': $mq === 'mobile'
+            }"
             v-if="user"
           >
-            <span class="icn-item icn-post icn-size_lg"></span>
-            <template v-if="$mq === 'desktop'"
-              >Share</template
-            >
+            <template v-if="$mq === 'desktop'">
+              <span class="icn-item icn-post icn-size_lg"></span>
+              Share
+            </template>
           </router-link>
           <template v-if="authSection">
             <div class="btns-login-user">
@@ -65,10 +68,9 @@
             </button>
             <router-link
               to="/addPost"
-              class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+              class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop icn-item icn-post icn-size_lg"
               v-if="$mq === 'mobile'"
-              ><span class="icn-item icn-post icn-size_lg"></span
-            ></router-link>
+            />
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
