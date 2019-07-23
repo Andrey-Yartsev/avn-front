@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 
-const MESSAGES_LIMIT = 20;
+const MESSAGES_LIMIT = 50;
 const CHATS_LIMIT = 20;
 
 const state = {
@@ -356,7 +356,9 @@ const mutations = {
     state.messagesOffset += MESSAGES_LIMIT;
   },
   addOldMessages(state) {
-    state.messages = state.moreMessages.concat(state.messages);
+    // state.messages = state.moreMessages.concat(state.messages);
+    state.messages = [...state.moreMessages, ...state.messages];
+    // state.messages.splice(0, 0, state.moreMessages);
   }
 };
 

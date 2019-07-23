@@ -1,15 +1,7 @@
 <template>
   <div class="chat-section">
-    <div
-      class="loader-container loader-container_center"
-      v-if="loading || !loaderHidden"
-    >
-      <Loader
-        :fullscreen="false"
-        text
-        :small="true"
-        class="overlay_fulllight"
-      />
+    <div class="loader-container loader-container_center" v-if="loading || !loaderHidden">
+      <Loader :fullscreen="false" text :small="true" class="overlay_fulllight" />
     </div>
     <component
       :is="scrollableComponent"
@@ -22,9 +14,7 @@
         <div
           class="chatMessageSending past-messages semi-transparent"
           v-if="moreLoading"
-        >
-          Loading history...
-        </div>
+        >Loading history...</div>
         <div
           v-for="v in messages"
           v-bind:key="v.id"
@@ -66,8 +56,7 @@
                   <span
                     class="message-locked__text"
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
-                    >{{ lockedText(v) }}</span
-                  >
+                  >{{ lockedText(v) }}</span>
                 </span>
                 <div class="media-chat" v-if="v.media.length">
                   <MediaVideo
@@ -99,11 +88,7 @@
                           <div class="wrap-name" v-html="vv.title"></div>
                         </div>
                       </div>
-                      <p
-                        class="profile-text"
-                        v-if="vv.description"
-                        v-html="vv.description"
-                      ></p>
+                      <p class="profile-text" v-if="vv.description" v-html="vv.description"></p>
                       <div class="link-render">
                         <a>{{ vv.url }}</a>
                       </div>
@@ -111,21 +96,13 @@
                   </a>
                 </template>
               </div>
-              <div
-                class="timestamp timestamp_sm-size message-time"
-                v-if="v.lastMessageInGroup"
-              >
+              <div class="timestamp timestamp_sm-size message-time" v-if="v.lastMessageInGroup">
                 <span class="timeValue">{{ time(v.createdAt) }}</span>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="chatMessageSending new-messages semi-transparent"
-          v-if="sending"
-        >
-          Sending...
-        </div>
+        <div class="chatMessageSending new-messages semi-transparent" v-if="sending">Sending...</div>
       </div>
     </component>
   </div>
@@ -163,7 +140,8 @@ export default {
   data() {
     return {
       scrollTimeoutId: 0,
-      loaderHidden: false
+      loaderHidden: false,
+      scrollPosition: 0
     };
   },
 
@@ -226,19 +204,31 @@ export default {
       //1st time scroll to message Sending, 2nd time scroll to new messsage
       this.scrollToLast();
     },
-    _messages(value) {
+    messages(value) {
       if (value.length == 0) return;
-
-      //Do scrollToLast if we at bottom of chat messages
-      if (this.isMessagesContainerScrolledMostBottom()) {
-        this.$nextTick(() => {
-          this.scrollToLast();
-        });
-      } else {
-        this.$store.dispatch(
-          "chat/incrementUnreadMessagesCount",
-          this.withUser.id
-        );
+      switch (value.length) {
+        case 0:
+          return;
+        case 1: //new message has arrived
+          //if we at bottom of chat messages, do scrollToLast
+          if (this.isBottom()) {
+            this.$nextTick(() => {
+              this.scrollToLast();
+            });
+          } else {
+            //if we are not at bottom, increment unreadMessageCount
+            this.$store.dispatch(
+              "chat/incrementUnreadMessagesCount",
+              this.withUser.id
+            );
+          }
+          break;
+        default:
+          // fetched more messages, restore scroll position
+          this.$nextTick(() => {
+            this.restoreScrollPosition();
+          });
+          break;
       }
     }
   },
@@ -404,11 +394,13 @@ export default {
     checkAuthor(user) {
       return user.id === this.user.id;
     },
-    isMessagesContainerScrolledMostBottom() {
+    isBottom() {
       if (this.container) {
         return (
-          this.container.scrollHeight - this.container.scrollTop <=
-          this.container.clientHeight + BOTTOM_TRESHOLD
+          this.container.scrollTop >
+          this.container.scrollHeight -
+            this.container.clientHeight -
+            BOTTOM_TRESHOLD
         );
       }
       return true;
@@ -472,8 +464,9 @@ export default {
       }
     },
     _scrollHandler() {
+      this.saveScrollPosition();
       //if scrolled to most bottom markChatAsViewed
-      if (this.isMessagesContainerScrolledMostBottom()) {
+      if (this.isBottom()) {
         this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
       }
       if (this.container.scrollTop > 150) return;
@@ -497,13 +490,33 @@ export default {
         this.scrollHandle();
       });
     },
+    saveScrollPosition() {
+      this.scrollPosition =
+        this.container.scrollHeight -
+        this.container.scrollTop -
+        this.container.clientHeight;
+      console.log(`scrollPosition: ${this.scrollPosition}`);
+    },
+    restoreScrollPosition() {
+      this.container.scrollTop =
+        this.container.scrollHeight -
+        this.container.clientHeight -
+        this.scrollPosition;
+    },
     fetchMoreMessages() {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
     }
   },
+  beforeUpdate() {
+    // this.saveScrollPosition();
+  },
+  updated() {
+    // this.restoreScrollPosition();
+  },
   mounted() {
     setTimeout(() => {
       this.scrollToLast();
+      // this.saveScrollPosition();
     }, 100);
   }
 };

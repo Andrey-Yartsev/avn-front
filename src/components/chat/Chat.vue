@@ -295,22 +295,22 @@ export default {
     }
   },
   mounted() {
-    console.log(
-      `[mounted] activeUserId: ${this.$store.state.chat.activeUserId}`
-    );
+    // console.log(
+    //   `[mounted] activeUserId: ${this.$store.state.chat.activeUserId}`
+    // );
   },
   beforeUpdate() {
-    console.log(
-      `[beforeUpdate] activeUserId: ${this.$store.state.chat.activeUserId}`
-    );
+    // console.log(
+    //   `[beforeUpdate] activeUserId: ${this.$store.state.chat.activeUserId}`
+    // );
   },
   updated() {
-    console.log(
-      `[updated] activeUserId: ${this.$store.state.chat.activeUserId}`
-    );
+    // console.log(
+    //   `[updated] activeUserId: ${this.$store.state.chat.activeUserId}`
+    // );
   },
   created() {
-    console.log("chat/created");
+    // console.log("chat/created");
     // setTimeout(function(){
     this.$store.commit("chat/resetChats");
     this.$store.commit("chat/messages", []);
