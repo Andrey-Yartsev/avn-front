@@ -549,10 +549,6 @@ video {
       @include media-breakpoint-up($desktop-breakpoint) {
         line-height: 30px;
       }
-
-      .dark & {
-        color: #fff;
-      }
     }
   }
 }

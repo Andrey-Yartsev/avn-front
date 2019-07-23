@@ -595,9 +595,6 @@
   .user-login {
     font-weight: 400;
     opacity: 1;
-    .dark & {
-      color: #fff;
-    }
   }
 }
 
@@ -1277,10 +1274,6 @@
     .sidebar__inside {
       transform: translate(0, 0);
     }
-  }
-
-  .dark & {
-    background: $main-color;
   }
 
   .header-avatar {

@@ -60,9 +60,7 @@
     height: 44px;
     display: flex;
     align-items: center;
-    .dark & {
-      background: $main-color;
-    }
+
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
     }
