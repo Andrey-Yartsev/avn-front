@@ -3,7 +3,7 @@
     ref="siteHeader"
     id="site_header"
     :class="{ guest: !user }"
-    class="main-header"
+    class="main-header main-header_top"
     :style="{
       right: `${-scrollBarWidth}px`
     }"

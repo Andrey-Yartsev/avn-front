@@ -1,5 +1,5 @@
 <template>
-  <header id="site_header" class="main-header">
+  <header id="site_header" class="main-header main-header_top">
     <div class="header-wrapper">
       <div class="container header_container guest">
         <nav class="header-nav hidden-mobile"></nav>

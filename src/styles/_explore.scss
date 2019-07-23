@@ -4,14 +4,11 @@
 
   &:not(.not-authorized) {
 
-    .main-header {
+    .header-logo,
+    .make-post-btn {
 
-      .header-logo,
-      .make-post-btn {
-
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          display: none;
-        }
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
       }
     }
   }

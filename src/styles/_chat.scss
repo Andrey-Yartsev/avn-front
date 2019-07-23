@@ -13,7 +13,7 @@
     }
   }
 
-  .main-header {
+  .main-header_top {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: none;
