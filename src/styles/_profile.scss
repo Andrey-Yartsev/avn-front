@@ -1428,11 +1428,6 @@
   &_cover {
     z-index: 3;
 
-    .header-scrolled & {
-      opacity: 0;
-      pointer-events: none;
-    }
-
     &-sm {
       top: 0;
       bottom: 0;
@@ -1464,6 +1459,11 @@
 
     &-lg {
       align-items: center;
+
+      .header-scrolled & {
+        opacity: 0;
+        pointer-events: none;
+      }
 
       .select-user-image__text {
 
