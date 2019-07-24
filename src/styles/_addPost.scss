@@ -1203,6 +1203,7 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: relative;
+    overflow: hidden;
   }
   
   input[type="file"] {
