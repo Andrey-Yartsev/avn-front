@@ -62,6 +62,7 @@ export default {
 
   mounted() {
     const errors = [
+      "Twitter connection error",
       "User banned.",
       "This Twitter is already used by another account.",
       "This account already used Twitter.",
