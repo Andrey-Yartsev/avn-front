@@ -123,6 +123,7 @@ import StreamApi from "@/api/stream";
 import moment from "moment";
 import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
+import { getCookie } from "@/components/pages/stream/debug";
 
 export default {
   name: "ViewStremModal",
@@ -348,6 +349,7 @@ export default {
   },
   created() {
     Streams.init({
+      debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       getApiUrl: undefined,
       remoteVideo: document.getElementById("remotevideo"),
       showLikes: false,
