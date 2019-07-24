@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "id": 434,
+      "title": "Favorite Indie Clip Star",
+      "key": "favorite-indie-clip-star",
+      "orientation": "vertical",
+      "isFan": true,
+      "type": {
+        "id": 1,
+        "title": "Profile",
+        "key": "PROFILE",
+        "description": "popularity award. best newcomer, hall of fame award, etc. no related movie just the persons name."
+      },
+      "group": {
+        "id": 5,
+        "title": "Fan Awards",
+        "key": "fan_awards",
+        "description": null
+      }
+    }
+  ],
+  "links": {
+    "first": "https:\/\/api.avn.com\/awards\/events\/91\/categories\/fan?page=1",
+    "last": "https:\/\/api.avn.com\/awards\/events\/91\/categories\/fan?page=2",
+    "prev": "https:\/\/api.avn.com\/awards\/events\/91\/categories\/fan?page=1",
+    "next": null
+  },
+  "meta": {
+    "current_page": 2,
+    "from": 16,
+    "last_page": 2,
+    "path": "https:\/\/api.avn.com\/awards\/events\/91\/categories\/fan",
+    "per_page": 15,
+    "to": 16,
+    "total": 16
+  }
+}

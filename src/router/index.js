@@ -37,7 +37,7 @@ import ContactsPage from "@/components/pages/static/Contacts";
 import StatPage from "@/components/statistics/Page";
 import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
 import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
-import AvnAwards from "@/components/pages/static/Awards";
+import AvnAwards from "@/components/pages/awards/Index";
 
 import Auth from "./auth";
 import Post from "./post";
