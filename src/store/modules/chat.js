@@ -1,6 +1,7 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
+import arrayUtils from "../../utils/arrayUtils";
 
 const MESSAGES_LIMIT = 50;
 const CHATS_LIMIT = 20;
@@ -9,7 +10,7 @@ const state = {
   isSecondScreen: false,
   activeUserId: null,
   windowIsActive: true,
-  messagesOffset: 0,
+  messagesOffset: MESSAGES_LIMIT,
   allMessagesLoaded: true,
   fetchingOld: false,
   // fetch chats
@@ -114,9 +115,6 @@ const actions = {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
-    //if new message from another user
-    // if (rootState.auth.user.id !== message.fromUser.id) {
-    // if (!isMine) {
     //search for existing chat
     const chatFound = state.chats.find(chat => {
       return chat.withUser.id === withUser.id;
@@ -131,7 +129,6 @@ const actions = {
         id: withUser.id,
         withUser
       });
-      // }
 
       //if chat with user opened already then mark message as read
       if (state.activeUserId === withUser.id) {
@@ -211,7 +208,7 @@ const actions = {
       if (state.moreMessages.length < MESSAGES_LIMIT) {
         commit("allMessagesLoaded", true);
       }
-      commit("incrementMessagesOffset");
+      commit("incrementMessagesOffset", state.moreMessages.length);
       commit("addOldMessages");
     });
   },
@@ -302,23 +299,23 @@ const mutations = {
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
     //Search chat with User from message and update lastMessage
-    state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === withUserId) {
+    arrayUtils.modifyBy(
+      state.chats,
+      chat => chat.withUser.id === withUserId,
+      chat => {
         chat.lastMessage = message;
         if (!isMine) {
           chat.unreadMessagesCount++;
         }
       }
-      return chat;
-    });
+    );
   },
   markChatAsViewed(state, userId) {
-    state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === userId) {
-        chat.unreadMessagesCount = 0;
-      }
-      return chat;
-    });
+    arrayUtils.modifyBy(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => chat.unreadMessagesCount = 0
+    );
   },
   replaceMessage(state, message) {
     let found = false;
@@ -344,7 +341,9 @@ const mutations = {
     });
   },
   addMessage(state, message) {
-    state.messages = [...state.messages, message];
+    // state.messages = [...state.messages, message];
+    state.messages.push(message);
+    state.messagesOffset++;
   },
   addNewChat(state, chat) {
     state.chats = [chat, ...state.chats];
@@ -352,13 +351,11 @@ const mutations = {
   setActiveWindow(state, isActive) {
     state.windowIsActive = isActive;
   },
-  incrementMessagesOffset(state) {
-    state.messagesOffset += MESSAGES_LIMIT;
+  incrementMessagesOffset(state, count) {
+    state.messagesOffset += count;
   },
   addOldMessages(state) {
-    // state.messages = state.moreMessages.concat(state.messages);
-    state.messages = [...state.moreMessages, ...state.messages];
-    // state.messages.splice(0, 0, state.moreMessages);
+    state.messages = state.moreMessages.concat(state.messages);
   }
 };
 

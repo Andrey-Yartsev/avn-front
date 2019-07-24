@@ -140,7 +140,7 @@ import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
 //BOTTOM_TRESHOLD - pixels left to bottom of container
-const BOTTOM_TRESHOLD = 30;
+const BOTTOM_TRESHOLD = 40;
 
 export default {
   name: "ChatMessages",
@@ -227,9 +227,10 @@ export default {
       //1st time scroll to message Sending, 2nd time scroll to new messsage
       this.scrollToLast();
     },
-    messages(value) {
-      if (value.length == 0) return;
-      switch (value.length) {
+    messages(value, oldValue) {
+      //count added messages
+      let messagesCount = value.length - oldValue.length;
+      switch (messagesCount) {
         case 0:
           return;
         case 1: //new message has arrived
@@ -247,7 +248,7 @@ export default {
           }
           break;
         default:
-          // fetched more messages, restore scroll position
+          // fetched more messages (message history), restore scroll position
           this.$nextTick(() => {
             this.restoreScrollPosition();
           });
