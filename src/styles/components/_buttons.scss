@@ -830,7 +830,7 @@ button {
     top: 0;
     bottom: 0;
     width: 58px;
-    z-index: 2;
+    z-index: 5;
     font-size: 48px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -987,7 +987,7 @@ button {
   .StoryPageCollectionView & {
     padding-left: 15px;
     padding-right: 15px;
-    z-index: 3;
+    z-index: 5;
     height: 60px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
