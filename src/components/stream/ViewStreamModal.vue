@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div id="stream">
+      <div id="stream-test">
         <div class="mediasTop__header stream-header">
           <div id="stream-timer">{{ time }}</div>
           <div class="stream-online-label">live</div>
