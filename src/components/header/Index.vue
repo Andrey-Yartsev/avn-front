@@ -18,7 +18,7 @@
         <template v-if="notFound">
           <User />
           <button
-            class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-mobile"
+            class="btn make-post-btn make-post-btn_header hidden-mobile"
             type="button"
             @click="openAddPostModal"
             v-if="user"
@@ -29,7 +29,7 @@
           </button>
           <router-link
             to="/addPost"
-            class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop"
+            class="make-post-btn make-post-btn_header hidden-desktop"
             :class="{
               btn: $mq === 'desktop',
               'icn-item icn-post icn-size_lg': $mq === 'mobile'
@@ -57,7 +57,7 @@
             <Search />
             <User />
             <button
-              class="btn make-post-btn make-post-btn_header btn-with-icon_st hidden-mobile"
+              class="btn make-post-btn make-post-btn_header hidden-mobile"
               type="button"
               @click="openAddPostModal"
               :disabled="disabledButton"
@@ -68,7 +68,7 @@
             </button>
             <router-link
               to="/addPost"
-              class="make-post-btn make-post-btn_header btn-with-icon_st hidden-desktop icn-item icn-post icn-size_lg"
+              class="make-post-btn make-post-btn_header hidden-desktop icn-item icn-post icn-size_lg"
               v-if="$mq === 'mobile'"
             />
           </template>

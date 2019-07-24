@@ -29,13 +29,13 @@
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link
             to="/settings/profile"
-            class="profile-actions__btn btn-with-icon btn-with-icon_st btn-edit-profile"
+            class="profile-actions__btn btn-with-icon btn-edit-profile"
           >
             <span class="icn-item icn-profile icn-size_lg"></span>
             Edit profile
           </router-link>
           <button
-            class="profile-actions__btn btn-with-icon btn-with-icon_st btn-make-post make-post-btn"
+            class="profile-actions__btn btn-with-icon btn-make-post make-post-btn"
             @click="openAddPostModal"
           >
             <span class="icn-item icn-post icn-size_lg"></span>
@@ -58,7 +58,7 @@
           <button
             v-if="profile.canEarn && $root.showTips"
             type="button"
-            class="profile-actions__btn btn-with-icon btn-with-icon_st profile-tip-btn"
+            class="profile-actions__btn btn-with-icon profile-tip-btn"
             @click="openTip"
           >
             <span class="icn-item icn-tips icn-size_lg"></span>
@@ -76,18 +76,14 @@
             <div
               v-if="profile.followedBy"
               @click="unfollow"
-              class="btn-with-icon btn-with-icon_st btn-subscribe disable-state"
+              class="btn-with-icon btn-subscribe disable-state"
             >
               <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
             </div>
-            <div
-              v-else
-              @click="follow"
-              class="btn-with-icon btn-with-icon_st btn-subscribe"
-            >
+            <div v-else @click="follow" class="btn-with-icon btn-subscribe">
               <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Follow
