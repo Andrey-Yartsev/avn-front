@@ -276,7 +276,7 @@
       </div>
     </template>
     <div
-      class="loader-container loader-container_center"
+      class="loader-container loader-container_center processing-loader"
       v-if="!isReady || loadingFinal"
     >
       <Loader
