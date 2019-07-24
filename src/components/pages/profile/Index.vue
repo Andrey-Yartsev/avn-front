@@ -153,6 +153,7 @@
                       :posts="posts"
                       from="profile/home"
                       v-if="posts.length"
+                      @visibilityChanged="visibilityChanged"
                     />
                   </div>
                   <div class="exploreAllCollectionView" v-else>

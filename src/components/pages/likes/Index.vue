@@ -57,7 +57,11 @@
                 <div class="explore">
                   <div class="feed-wrapper">
                     <div class="block-bg">
-                      <PostCollection :posts="posts" from="favPosts" />
+                      <PostCollection
+                        :posts="posts"
+                        from="favPosts"
+                        @visibilityChanged="visibilityChanged"
+                      />
 
                       <div class="loader-infinity" v-if="infinityScrollLoading">
                         <Loader
@@ -100,10 +104,11 @@ import UserDropdown from "@/components/common/userDropdawn/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import PostCollection from "@/components/common/postCollection/Index";
+import PostVisibility from "@/mixins/postsVisibility";
 
 export default {
   name: "FavPosts",
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [InfinityScrollMixin, UserMixin, PostVisibility],
   components: {
     Loader,
     PostCollection,
@@ -165,6 +170,9 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });
+    },
+    storePrefix() {
+      return "favPosts";
     }
   },
   watch: {

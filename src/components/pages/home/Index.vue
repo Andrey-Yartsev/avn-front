@@ -18,7 +18,11 @@
             />
             <NewFeedPostToast :init="init" :newPosts="newPosts" />
             <div class="feed reset-btr">
-              <PostCollection :posts="posts" from="home" />
+              <PostCollection
+                :posts="posts"
+                from="home"
+                @visibilityChanged="visibilityChanged"
+              />
             </div>
             <div v-if="newUser" class="start-feed-page">
               <div class="start-feed-page__text">
@@ -88,6 +92,7 @@ import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Wsp from "@/mixins/wsp";
 import Loader from "@/components/common/Loader";
+import PostVisibility from "@/mixins/postsVisibility";
 
 export default {
   name: "HomePage",
@@ -100,7 +105,7 @@ export default {
     NewFeedPostToast,
     Loader
   },
-  mixins: [InfinityScrollMixin, Wsp],
+  mixins: [InfinityScrollMixin, Wsp, PostVisibility],
   created() {
     this.init();
   },
@@ -129,6 +134,9 @@ export default {
     }
   },
   methods: {
+    storePrefix() {
+      return "home";
+    },
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
       this.$store.dispatch("home/getPosts");
