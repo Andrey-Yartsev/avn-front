@@ -97,21 +97,24 @@
       }
     }
 
-    .add-new-form:not(.expanded) & {
-      width: 39px;
-    }
+    .add-new-form {
 
-    .add-new-form.expanded & {
-      font-size: 9px;
-      text-align: center;
-      justify-content: center;
-      align-content: flex-start;
+      &:not(.expanded) & {
+        width: 39px;
+      }
 
-      .popup & {
+      &.expanded & {
+        font-size: 9px;
+        text-align: center;
+        justify-content: center;
+        align-content: flex-start;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin-left: 4px;
-          flex: 0 0 72px;
+        .popup & {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-left: 4px;
+            flex: 0 0 72px;
+          }
         }
       }
     }
