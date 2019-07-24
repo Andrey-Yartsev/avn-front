@@ -158,8 +158,10 @@
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
             class="btn-post"
+            for="addFile"
           >
             <input
+              id="addFile"
               type="file"
               multiple
               :accept="inputAccepts"
