@@ -495,10 +495,6 @@
       bottom: 0;
       z-index: 0;
 
-      &.locked-wrapper {
-        pointer-events: none;
-      }
-
       @include media-breakpoint-up($desktop-breakpoint) {
 
         &:not(.locked-wrapper):hover {
