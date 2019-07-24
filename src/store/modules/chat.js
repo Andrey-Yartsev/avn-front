@@ -314,7 +314,7 @@ const mutations = {
     arrayUtils.modifyBy(
       state.chats,
       chat => chat.withUser.id === userId,
-      chat => chat.unreadMessagesCount = 0
+      chat => (chat.unreadMessagesCount = 0)
     );
   },
   replaceMessage(state, message) {
