@@ -330,6 +330,7 @@ import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
 import Comments from "@/components/common/streamComments/Index";
 import StreamViewers from "@/components/pages/stream/Viewers";
+import { getCookie } from "@/components/pages/stream/debug";
 
 export default {
   name: "Stream",
@@ -684,6 +685,7 @@ export default {
     const token = this.$store.state.auth.token;
     window.Streams = Streams;
     Streams.init({
+      debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
       videoSave: true,
       getApiUrl: StreamApi.getStreamPath(token),
