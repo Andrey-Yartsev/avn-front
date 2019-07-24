@@ -16,32 +16,34 @@
             </div>
             <div class="popup-body">
               <div class="popup-container-scroll">
-                <div class="highlights-form">
-                  <Loader :fullscreen="false" v-if="loading" :small="true" />
-                  <div
-                    class="msg-no-content show"
-                    v-if="!loading && !posts.length"
-                  >
-                    <div class="msg-no-content__text">
-                      No highlights yet
-                    </div>
-                    <a @click="createHL" class="story btn-add-story">
-                      <div
-                        class="avatar avatar_lg-tab avatar_gap-r-md"
-                        @click.prevent="addNew"
-                      >
-                        <div class="round-add icn-item"></div>
-                      </div>
-                      <div class="story-info">
-                        <div class="story-header">
-                          <div class="name">
-                            Add new
-                          </div>
-                        </div>
-                      </div>
-                    </a>
+                <div
+                  class="loader-container loader-container_center"
+                  v-if="loading"
+                >
+                  <Loader :fullscreen="false" :small="true" />
+                </div>
+                <div
+                  class="msg-no-content show"
+                  v-if="!loading && !posts.length"
+                >
+                  <div class="msg-no-content__text">
+                    No highlights yet
                   </div>
+                  <a @click="createHL" class="story btn-add-story">
+                    <div
+                      class="avatar avatar_lg-tab avatar_gap-r-md"
+                      @click.prevent="addNew"
+                    >
+                      <div class="round-add icn-item"></div>
+                    </div>
+                    <div class="name">
+                      Add new
+                    </div>
+                  </a>
+                </div>
+                <div class="highlights-form" v-if="!loading && posts.length">
                   <perfect-scrollbar
+                    v-if="posts.length"
                     class="list-cover-variation"
                     @ps-scroll-x="scrollFunction"
                   >

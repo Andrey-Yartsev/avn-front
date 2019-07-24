@@ -612,6 +612,10 @@
   align-items: center;
   cursor: pointer;
 
+  .msg-no-content & {
+    display: inline-flex;
+  }
+
   .name {
     color: $main-color;
     font-size: 13px;
