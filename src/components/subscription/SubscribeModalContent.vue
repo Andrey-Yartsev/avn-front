@@ -1,6 +1,6 @@
 <template>
   <div class="subscribePopupView">
-    <div class="subscribe-popup__header bg bg-color bg-gradient_standart">
+    <div class="subscribe-popup__header bg-profile bg-profile_height-extrasm bg-color bg-gradient_standart pos-relative">
       <img v-if="profile.header" :src="profile.header" />
     </div>
 
