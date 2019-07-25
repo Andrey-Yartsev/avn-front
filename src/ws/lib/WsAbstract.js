@@ -22,12 +22,17 @@ export default class Ws extends EventEmitter {
     this.connecting = true;
     const tz = moment().format("ZZ");
     let ws;
+
     if (this.type === "ws") {
       ws = new WebSocket(Store.state.init.data.websocket.general);
     } else if (this.type === "wsp") {
       ws = new WebSocket(Store.state.init.data.websocket.posts);
     } else {
-      ws = new WebSocket(Store.state.init.data.websocket.guest);
+      if (!Store.state.init.data) {
+        ws = new WebSocket("wss://ws.stars.avn.com/wsg/");
+      } else {
+        ws = new WebSocket(Store.state.init.data.websocket.guest);
+      }
     }
     this.ws = ws;
 
