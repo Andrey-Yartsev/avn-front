@@ -74,7 +74,10 @@
     }
 
     .user-login {
-      font-size: inherit;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        font-size: inherit;
+      }
     }
   }
 
@@ -110,6 +113,14 @@
         margin-bottom: 27px;
       }
     }
+
+    ol {
+      margin: 0 0 0 20px;
+    }
+
+    li {
+      margin-bottom: 15px;
+    }
   }
 
   &__footer {
@@ -138,14 +149,5 @@
         margin-top: 25px;
       }
     }
-  }
-}
-
-.subscribe-popup__body {
-  ol {
-    margin: 0 0 0 20px;
-  }
-  li {
-    margin-bottom: 15px;
   }
 }
