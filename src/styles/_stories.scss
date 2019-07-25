@@ -276,10 +276,7 @@
         &:hover {
 
           .name {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              color: $primary-color-darken;
-            }
+            color: $primary-color-darken;
           }
         }
       }

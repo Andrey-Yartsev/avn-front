@@ -649,6 +649,13 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 15px 25px;
       }
+
+      .name {
+
+        &:hover {
+          color: #fff;
+        }
+      }
     }
 
     .item-length {
