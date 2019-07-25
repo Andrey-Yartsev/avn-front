@@ -662,7 +662,7 @@
   &.subscribe-popup {
     max-width: 400px;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
       max-width: 100%;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
