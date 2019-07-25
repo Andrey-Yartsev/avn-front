@@ -33,8 +33,10 @@
 </template>
 
 <script>
+import userMixin from "@/mixins/user";
 export default {
   name: "TopLives",
+  mixins: [userMixin],
   data() {
     return {
       current: 0,
@@ -68,6 +70,10 @@ export default {
       this.run();
     },
     openLive() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "signup" });
+        return;
+      }
       if (this.lives[this.current]) {
         this.$store.dispatch("modal/show", {
           name: "stream",
