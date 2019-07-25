@@ -651,6 +651,7 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 1em 0 1.3em;
     border-right: 1px solid rgba(124, 139, 150, 0.2);
+    min-height: 60px;
   }
 
   h3 {
