@@ -156,12 +156,16 @@
   }
 
   .more-functions {
-    z-index: 5;
+    z-index: 6;
   }
 
   .story-video-element {
     max-width: 100%;
     max-height: 100%;
+  }
+
+  .loader-container_center {
+    z-index: 1;
   }
 }
 
