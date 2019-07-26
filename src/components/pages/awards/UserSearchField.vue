@@ -89,7 +89,7 @@ export default {
       if (this.selected) {
         return this.selected.name;
       }
-      return this.placeholder;
+      return "";
     },
     searchLoading() {
       return this.$store.state.awards.searchLoading;

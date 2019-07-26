@@ -87,7 +87,7 @@ export default {
       return this.isGay ? 92 : 91;
     },
     loading() {
-      return this.$store.state.fetchCategoriesLoading;
+      return this.$store.state.awards.fetchCategoriesLoading;
     },
     canSend() {
       return !!Object.values(this.data).filter(v => !!v).length;
