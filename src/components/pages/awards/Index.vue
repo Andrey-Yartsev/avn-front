@@ -9,7 +9,7 @@
     <div class="title-subtext semi-transparent text-centered">
       these are instructions
     </div>
-    <div class="loader-container" v-if="loading || true">
+    <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <div v-else-if="sent" class="input-status">
