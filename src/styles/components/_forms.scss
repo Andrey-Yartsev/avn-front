@@ -93,6 +93,21 @@ textarea,
     opacity: 0.5;
   }
 
+  &.placeholder-dark {
+
+    &::-moz-placeholder {
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      opacity: 1;
+    }
+
+    &::-webkit-input-placeholder {
+      opacity: 1;
+    }
+  }
+
   &[disabled] {
     opacity: .3;
     background-color: rgba($gray, 0.3);

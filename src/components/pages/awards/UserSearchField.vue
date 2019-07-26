@@ -1,13 +1,10 @@
 <template>
   <div>
-    <div
-      class="b-search-form b-search-form_flex-align header-search"
-      v-click-outside="close"
-    >
+    <div class="b-search-form b-search-form_flex-align" v-click-outside="close">
       <input
         @keyup="keyup"
         v-model="localQuery"
-        class="header-search-input rounded sm"
+        class="header-search-input rounded md placeholder-dark"
         name="query"
         maxlength="13"
         autocomplete="off"
