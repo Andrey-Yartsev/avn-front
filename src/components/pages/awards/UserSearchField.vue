@@ -37,21 +37,19 @@
         @click="resetValue"
       ></span>
 
-      <div class="header-search-results">
-        <div
-          class="SearchResultsPopupCollectionView"
-          :class="{ hidden: !opened }"
-        >
-          <div v-if="searchLoading">Loading</div>
-          <div class="users" v-else>
-            <SearchUsers :items="items" @select="setUser" />
-          </div>
-          <button
-            type="button"
-            class="close icn-item icn-size_lg"
-            @click="reset"
-          ></button>
+      <div
+        class="SearchResultsPopupCollectionView"
+        :class="{ hidden: !opened }"
+      >
+        <div v-if="searchLoading">Loading</div>
+        <div class="users" v-else>
+          <SearchUsers :items="items" @select="setUser" />
         </div>
+        <button
+          type="button"
+          class="close icn-item icn-size_lg"
+          @click="reset"
+        ></button>
       </div>
     </div>
   </div>

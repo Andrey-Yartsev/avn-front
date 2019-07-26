@@ -737,15 +737,26 @@
 .btn-clear-search {
   position: absolute;
   opacity: 0.2;
-  right: 64px;
   top: 50%;
   transform: translate(0, -50%);
   width: 17px;
   height: 21px;
   outline: none;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    right: 32px;
+  .awards & {
+    right: 50px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: 35px;
+    }
+  }
+
+  .main-header_top & {
+    right: 64px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: 32px;
+    }
   }
 
   &_lg {
@@ -775,44 +786,42 @@
   z-index: 10;
 
   &:before {
-    content: "";
-    position: absolute;
-    top: 0;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      left: 15px;
-      right: 15px;
-      height: 1px;
-      background: rgba($gray, 0.2);
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: absolute;
+    .main-header_top & {
       content: "";
-      right: auto;
-      bottom: auto;
-      top: -9px;
-      left: 32px;
-      background-color: $white;
-      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
-      width: 17px;
-      height: 17px;
-      transform: translate(0, 0) rotate(45deg);
-      z-index: 0;
-      pointer-events: none;
+      position: absolute;
+      top: 0;
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        left: 15px;
+        right: 15px;
+        height: 1px;
+        background: rgba($gray, 0.2);
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        position: absolute;
+        content: "";
+        right: auto;
+        bottom: auto;
+        top: -9px;
+        left: 32px;
+        background-color: $white;
+        box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+        width: 17px;
+        height: 17px;
+        transform: translate(0, 0) rotate(45deg);
+        z-index: 0;
+        pointer-events: none;
+      }
     }
   }
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     left: 0;
     right: 0;
-    top: 44px;
+    top: 34px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    height: calc(100vh - 44px);
-
-    .scroll-top & {
-      height: 100vh;
-    }
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -824,6 +833,29 @@
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 17px;
+  }
+
+  .awards & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  .main-header_top & {
+    height: calc(100vh - 44px);
+    top: 44px;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+      .scroll-top & {
+        height: 100vh;
+      }
+    }
   }
 
   .search-all-link {
@@ -879,6 +911,13 @@
     position: relative;
     color: inherit;
     margin: 0 0 13px;
+
+    .awards & {
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     .avatar {
       transition: transform 0.3s ease;

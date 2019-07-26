@@ -1020,16 +1020,16 @@ button {
   }
 
   .SearchResultsPopupCollectionView & {
+    opacity: .3;
+    padding: 12px 18px;
+    width: 60px;
+    height: 54px;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: none;
-    }
+    .main-header_top {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      opacity: .3;
-      padding: 12px 18px;
-      width: 60px;
-      height: 54px;
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
     }
   }
 

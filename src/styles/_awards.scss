@@ -42,7 +42,11 @@
   }
 
   &__btn-row {
-    text-align: right;
+    text-align: center;
+
+    @include media-breakpoint-up($tablet-breakpoint) {
+      text-align: right;
+    }
   }
 }
 
