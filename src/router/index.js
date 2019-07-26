@@ -532,11 +532,21 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/awards",
+    path: "/avn_awards/nominations",
     component: AvnAwards,
     meta: {
       staticPage: true,
       cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/gayvn_awards/nominations",
+    component: AvnAwards,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage",
+      isGay: true
     }
   }
 ];

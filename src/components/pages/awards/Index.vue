@@ -9,8 +9,13 @@
     <div class="title-subtext semi-transparent text-centered">
       these are instructions
     </div>
-    {{ data }}
-    <form action="#" class="awards-form" @submit.prevent="send">
+    <div class="loader-container loader-container_center" v-if="loading">
+      <Loader text="" :fullscreen="false" :small="true" />
+    </div>
+    <div v-else-if="sent" class="input-status">
+      Your voting have been sent successfully
+    </div>
+    <form action="#" class="awards-form" @submit.prevent="send" v-else>
       <div class="row awards">
         <div class="awards__col" v-for="(col, i) in categories" :key="i">
           <label
@@ -21,7 +26,7 @@
             <span class="label label_row">{{ v.title }}</span>
             <span class="form-group form-group_clear-gaps">
               <span class="form-field">
-                <input
+                <UserSearchField
                   type="text"
                   :placeholder="v.title"
                   v-model="data[v.id]"
@@ -32,7 +37,9 @@
         </div>
       </div>
       <div class="awards__btn-row">
-        <button class="btn alt border lg">Submit</button>
+        <button class="btn alt border lg" :disabled="sending || !canSend">
+          Submit
+        </button>
       </div>
     </form>
   </div>
@@ -40,12 +47,15 @@
 
 <script>
 import Footer from "@/components/footer/Index.vue";
-import cat from "./cat1.json";
+import Loader from "@/components/common/Loader";
+import UserSearchField from "./UserSearchField";
 
 export default {
   name: "AvnAwards",
   components: {
-    Footer
+    Footer,
+    Loader,
+    UserSearchField
   },
   data() {
     return {
@@ -54,6 +64,10 @@ export default {
   },
   computed: {
     categories() {
+      if (!this.$store.state.awards.categories) {
+        return [];
+      }
+      const cat = this.$store.state.awards.categories;
       const items = cat.data;
       const columns = [[], [], []];
       let col = 0;
@@ -65,18 +79,67 @@ export default {
         }
       }
       return columns;
+    },
+    isGay() {
+      return this.$route.meta.isGay;
+    },
+    eventId() {
+      return this.isGay ? 92 : 91;
+    },
+    loading() {
+      return this.$store.state.fetchCategoriesLoading;
+    },
+    canSend() {
+      return !!Object.values(this.data).filter(v => !!v).length;
+    },
+    sending() {
+      return this.$store.state.awards.nominateLoading;
+    },
+    sent() {
+      return this.$store.state.awards.nominateSuccess;
     }
   },
-
   methods: {
     send() {
       this.$store.dispatch("awards/nominate", {
-        eventId: 91,
+        eventId: this.eventId,
         data: this.data
       });
     }
+    // // search
+    // keyup(e) {
+    //   if (e.key === "Enter") {
+    //     // add
+    //     this.close();
+    //   } else {
+    //     this.search();
+    //   }
+    // },
+    // search() {
+    //   this._search();
+    //   this.open();
+    // },
+    // _search() {
+    //   if (!this.localQuery.trim()) {
+    //     this.$store.commit("awards/reset");
+    //     return;
+    //   }
+    //   if (this.searchId) {
+    //     clearTimeout(this.searchId);
+    //   }
+    //   this.searchId = setTimeout(() => {
+    //     this.$store.dispatch("awards/search", {
+    //       "users",
+    //       query: this.localQuery
+    //     });
+    //   }, 200);
+    // },
+    // open() {
+    //   this.opened = true;
+    // },
   },
-
-  created() {}
+  created() {
+    this.$store.dispatch("awards/fetchCategories", this.eventId);
+  }
 };
 </script>
