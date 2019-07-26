@@ -4,12 +4,18 @@
     @click="run"
   >
     <div class="postLink live">
-      <figure class="explore-media">
-        <img :src="imageSrc" />
+      <figure
+        class="explore-media"
+        :class="{
+          'explore-media_avatar': this.post.user.avatar === null && !imageSrc
+        }"
+      >
+        <!--<img :src="imageSrc" />-->
         <img
           :src="imageSrc"
           @contextmenu.prevent="() => false"
           @dragstart.prevent="() => false"
+          v-if="this.post.user.avatar !== null || imageSrc"
         />
         <div
           v-if="duraion && $mq === 'desktop'"

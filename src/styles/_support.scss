@@ -28,7 +28,6 @@ form.support-search-form {
 .s-container {
   padding-top: 30px;
   padding-bottom: 30px;
-  //position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-top: 45px;
@@ -78,11 +77,6 @@ form.support-search-form {
         margin-left: auto;
       }
     }
-  }
-
-  .container {
-    //position: relative;
-    //z-index: 1;
   }
 }
 

@@ -276,10 +276,7 @@
         &:hover {
 
           .name {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              color: $primary-color-darken;
-            }
+            color: $primary-color-darken;
           }
         }
       }
@@ -446,6 +443,7 @@
 
     .name {
       width: 100%;
+      display: block;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         font-weight: 400;

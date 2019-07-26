@@ -1004,6 +1004,10 @@
       height: 32vw;
     }
 
+    &-extrasm {
+      height: 80px;
+    }
+
     &-sm {
 
       @include media-breakpoint-up($desktop-breakpoint) {

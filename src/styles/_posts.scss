@@ -649,12 +649,15 @@
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
         @media screen and (orientation: landscape) {
-          display: flex;
           flex-direction: column;
           max-height: calc(100vh - 104px);
         }
       }
     }
+  }
+
+  &-wrapper {
+    width: 100%;
   }
 
   &-info-laoder {
@@ -697,7 +700,7 @@
           height: 100%;
 
           @media screen and (orientation: landscape) {
-            object-fit: contain;
+            width: auto;
           }
         }
       }
@@ -717,6 +720,11 @@
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           background: none;
+
+          @media screen and (orientation: landscape) {
+            object-fit: contain;
+            max-height: 100%;
+          }
         }
       }
     }
@@ -748,6 +756,17 @@
     width: 100%;
     max-height: calc(100vh - 200px);
     display: block;
+
+    .lightbox-post & {
+
+      .explore-page & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
   }
 
   &-slider {
@@ -890,8 +909,6 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
 
           @media screen and (orientation: landscape) {
-            flex: 1;
-            display: flex;
             flex-direction: column;
           }
         }

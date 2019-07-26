@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div id="stream-test">
+      <div id="stream" class="stream-block">
         <div class="mediasTop__header stream-header">
           <div id="stream-timer">{{ time }}</div>
           <div class="stream-online-label">live</div>
@@ -23,16 +23,18 @@
             <div class="like-icon"><div class="like-icon__symbol" /></div>
           </div>
         </div>
-        <video
-          id="remotevideo"
-          width="320"
-          height="240"
-          playsinline=""
-          autoplay=""
-          @click="click"
-          @contextmenu.prevent="() => false"
-          @dragstart.prevent="() => false"
-        />
+        <div class="stream-video-container">
+          <video
+            id="remotevideo"
+            width="320"
+            height="240"
+            playsinline=""
+            autoplay=""
+            @click="click"
+            @contextmenu.prevent="() => false"
+            @dragstart.prevent="() => false"
+          />
+        </div>
         <div class="popup" v-if="streamIsFinished">
           <div class="overlay" />
           <div class="popup-container popup-container_block popup-alert">

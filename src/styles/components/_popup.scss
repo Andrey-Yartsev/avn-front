@@ -37,6 +37,13 @@
 
   &.lightbox-post {
     overflow-y: hidden;
+
+    .explore-page & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        overflow: visible;
+      }
+    }
   }
 
   .content {
@@ -588,6 +595,16 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         min-width: 620px;
       }
+
+      .lightbox-post & {
+
+        .explore-page & {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            overflow: visible;
+          }
+        }
+      }
     }
 
     .post.postPage {
@@ -603,6 +620,7 @@
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             justify-content: center;
             flex-direction: column;
+            overflow: visible;
           }
         }
       }
@@ -662,7 +680,7 @@
   &.subscribe-popup {
     max-width: 400px;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    @include media-breakpoint-down($tablet-breakpoint-dcrs) {
       max-width: 100%;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
