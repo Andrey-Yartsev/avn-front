@@ -4,7 +4,12 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {};
 const actions = {};
-const mutations = {};
+
+const mutations = {
+  reset(state) {
+    state.searchResult = [];
+  }
+};
 
 createRequestAction({
   prefix: "fetchCategories",
@@ -58,6 +63,9 @@ createRequestAction({
     }
     options.query = params;
     return options;
+  },
+  resultConvert: function(res) {
+    return res.list || [];
   }
 });
 

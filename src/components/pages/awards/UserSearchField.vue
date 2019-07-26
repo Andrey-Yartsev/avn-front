@@ -8,13 +8,11 @@
         name="query"
         maxlength="13"
         autocomplete="off"
-        :placeholder="placeholder"
+        :placeholder="_placeholder"
         type="text"
         @focus="open"
         tabindex="1"
       />
-      {{ selected.name }}
-
       <span
         role="button"
         tabindex="-1"
@@ -31,12 +29,21 @@
         :disabled="!canSearch"
       ></button>
 
+      <span
+        role="button"
+        tabindex="-1"
+        class="btn-clear-search icn-item btn-reset btn-reset_prim-color icn-pos_center"
+        v-if="user"
+        @click="resetValue"
+      ></span>
+
       <div class="header-search-results">
         <div
           class="SearchResultsPopupCollectionView"
           :class="{ hidden: !opened }"
         >
-          <div class="users">
+          <div v-if="searchLoading"></div>
+          <div class="users" v-else>
             <SearchUsers :items="items" @select="setUser" />
           </div>
           <button type="button" class="close" @click="reset"></button>
@@ -73,10 +80,19 @@ export default {
       return false;
     },
     items() {
-      return this.$store.state.trial.results.list;
+      return this.$store.state.awards.searchResult;
     },
     selected() {
       return this.user || "";
+    },
+    _placeholder() {
+      if (this.selected) {
+        return this.selected.name;
+      }
+      return this.placeholder;
+    },
+    searchLoading() {
+      return this.$store.state.awards.searchLoading;
     }
   },
   methods: {
@@ -93,15 +109,15 @@ export default {
       this.open();
     },
     _search() {
+      this.$store.commit("awards/reset");
       if (!this.localQuery.trim()) {
-        this.$store.commit("trial/reset");
         return;
       }
       if (this.searchId) {
         clearTimeout(this.searchId);
       }
       this.searchId = setTimeout(() => {
-        this.$store.dispatch("trial/search", {
+        this.$store.dispatch("awards/search", {
           type: this.type,
           query: this.localQuery
         });
@@ -109,18 +125,25 @@ export default {
     },
     setUser(user) {
       this.user = user;
+      this.$emit("input", user.name);
+      this.localQuery = "";
       this.close();
     },
     open() {
+      if (!this.localQuery) {
+        return;
+      }
       this.opened = true;
     },
     reset() {
       this.localQuery = "";
       this.opened = false;
-      this.$store.commit("search/bubble/reset");
     },
     close() {
       this.opened = false;
+    },
+    resetValue() {
+      this.user = null;
     }
   }
 };

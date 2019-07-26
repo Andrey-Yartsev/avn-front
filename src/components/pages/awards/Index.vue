@@ -106,37 +106,6 @@ export default {
         data: this.data
       });
     }
-    // // search
-    // keyup(e) {
-    //   if (e.key === "Enter") {
-    //     // add
-    //     this.close();
-    //   } else {
-    //     this.search();
-    //   }
-    // },
-    // search() {
-    //   this._search();
-    //   this.open();
-    // },
-    // _search() {
-    //   if (!this.localQuery.trim()) {
-    //     this.$store.commit("awards/reset");
-    //     return;
-    //   }
-    //   if (this.searchId) {
-    //     clearTimeout(this.searchId);
-    //   }
-    //   this.searchId = setTimeout(() => {
-    //     this.$store.dispatch("awards/search", {
-    //       "users",
-    //       query: this.localQuery
-    //     });
-    //   }, 200);
-    // },
-    // open() {
-    //   this.opened = true;
-    // },
   },
   created() {
     this.$store.dispatch("awards/fetchCategories", this.eventId);
