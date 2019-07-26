@@ -46,7 +46,7 @@
           <div class="users" v-else>
             <SearchUsers :items="items" @select="setUser" />
           </div>
-          <button type="button" class="close" @click="reset"></button>
+          <button type="button" class="close icn-item icn-size_lg" @click="reset"></button>
         </div>
       </div>
     </div>
