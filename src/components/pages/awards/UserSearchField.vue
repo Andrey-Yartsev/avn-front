@@ -42,7 +42,7 @@
           class="SearchResultsPopupCollectionView"
           :class="{ hidden: !opened }"
         >
-          <div v-if="searchLoading"></div>
+          <div v-if="searchLoading">Loading</div>
           <div class="users" v-else>
             <SearchUsers :items="items" @select="setUser" />
           </div>
