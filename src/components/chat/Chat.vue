@@ -294,7 +294,6 @@ export default {
       focusIntervalId = 0;
     }
   },
-
   created() {
     this.$store.commit("chat/resetChats");
     this.$store.commit("chat/messages", []);
@@ -310,6 +309,7 @@ export default {
   },
 
   beforeDestroy() {
+    this.$store.commit("chat/resetChats");
     this.$store.commit("chat/messages", []);
     this.$store.commit("chat/fetchChatsReset");
     window.removeEventListener("focus", this.windowFocus);
