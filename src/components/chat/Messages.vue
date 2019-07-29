@@ -519,7 +519,6 @@ export default {
         this.container.scrollHeight -
         this.container.scrollTop -
         this.container.clientHeight;
-      console.log(`scrollPosition: ${this.scrollPosition}`);
     },
     restoreScrollPosition() {
       this.container.scrollTop =
@@ -531,16 +530,9 @@ export default {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
     }
   },
-  beforeUpdate() {
-    // this.saveScrollPosition();
-  },
-  updated() {
-    // this.restoreScrollPosition();
-  },
   mounted() {
     setTimeout(() => {
       this.scrollToLast();
-      // this.saveScrollPosition();
     }, 100);
   }
 };

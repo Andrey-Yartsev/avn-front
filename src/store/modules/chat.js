@@ -102,15 +102,10 @@ const actions = {
     });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
-    // const isMine = message.fromUser.id === message.withUser.id;
     const isMine = message.fromUser.id === rootState.auth.user.id;
     //withUser - user to whom chatting
     const withUser = isMine ? message.withUser : message.fromUser;
 
-    // if (
-    //   !rootState.auth.user.hasMessages &&
-    //   rootState.auth.user.id !== message.fromUser.id
-    // ) {
     if (!isMine && !rootState.auth.user.hasMessages) {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
@@ -119,6 +114,7 @@ const actions = {
     const chatFound = state.chats.find(chat => {
       return chat.withUser.id === withUser.id;
     });
+
     //if chat not found then add new chat
     if (!chatFound) {
       commit("addNewChat", {
@@ -135,9 +131,7 @@ const actions = {
         if (!state.windowIsActive) {
           unreadLastMessage = message;
         } else {
-          //if (message.fromUser.id) {
           markAsRead(dispatch, {
-            // userId: message.fromUser.id,
             userId: withUser.id,
             messageId: message.id
           });
@@ -145,21 +139,8 @@ const actions = {
       }
     }
 
-    // const isMine = message.fromUser.id === rootState.auth.user.id;
-
-    // if (isMine) {
-    //   withUserId = state.activeUserId;
-    // }
-
     //if there is active chat opened
     if (state.activeUserId) {
-      // let withUserId = message.fromUser.id;
-      // const isMine = message.fromUser.id === rootState.auth.user.id;
-
-      // if (isMine) {
-      //   withUserId = state.activeUserId;
-      // }
-
       const found = state.messages.find(v => v.id === message.id);
       if (found) {
         commit("replaceMessage", message);
@@ -176,8 +157,6 @@ const actions = {
       isMine
     });
 
-    //if
-    // if (!rootState.auth.user.id !== message.fromUser.id) {
     if (!isMine) {
       if (state.activeUserId === withUser.id) {
         dispatch("markChatAsViewed", withUser.id);
