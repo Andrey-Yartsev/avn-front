@@ -10,7 +10,6 @@ export default {
       return;
     }
     const prev = stack[stack.length - 1];
-    // console.log("GO>" + .path);
     Router.push(prev.path);
   }
 };

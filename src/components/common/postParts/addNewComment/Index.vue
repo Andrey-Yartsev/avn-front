@@ -11,7 +11,7 @@
         maxlength="200"
         :minHeight="30"
         :maxHeight="85"
-        @keypress.enter.prevent="sendComment"
+        @enter="sendComment"
         @tribute-replaced="tributeHandler"
       />
     </vue-tribute>

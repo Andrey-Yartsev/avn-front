@@ -92,7 +92,6 @@ import PostLikesModal from "@/components/common/postParts/likesModal/Index";
 import UserReportModal from "@/components/common/UserReportModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
-import ModalRouter from "@/components/modal/Router";
 import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
@@ -115,6 +114,7 @@ import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
 
+import ModalRouter from "@/components/modal/Router";
 import BackRouter from "@/mixins/backRouter";
 
 import { fromNow } from "@/helpers/datetime";
