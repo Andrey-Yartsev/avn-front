@@ -796,6 +796,7 @@
   .name {
     display: block;
     margin-bottom: 3px;
+    color: $main-color;
   }
 
   .btn-block {
@@ -803,6 +804,13 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .user-login {
+
+    &:before {
+      display: none;
+    }
   }
 
   .username-group {
