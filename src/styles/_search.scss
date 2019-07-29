@@ -105,12 +105,20 @@
       position: relative;
       width: 100%;
       min-height: calc(100% - 152px);
+      background-color: $white;
     }
 
     > div {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         background-color: $white;
+      }
+
+      &:not(.search-loading-content) {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          flex: 0 0 auto;
+        }
       }
     }
   }
