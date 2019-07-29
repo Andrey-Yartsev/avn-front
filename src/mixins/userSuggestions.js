@@ -31,7 +31,9 @@ export default {
       const obj = this;
       return {
         values: this.usersSearch,
-        lookup: "name",
+        lookup: el => {
+          return el.name + "|" + el.username;
+        },
         fillAttr: "name",
         noMatchTemplate: function() {
           return "<span class='no-results'>nothing found</span>";
