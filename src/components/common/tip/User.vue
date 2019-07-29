@@ -15,7 +15,7 @@
         <input
           name="amount"
           class="tip-amount-input rounded"
-          type="number"
+          type="text"
           :placeholder="'$' + limits.min + '—' + limits.max"
           v-model="amount"
           autocomplete="off"
@@ -23,7 +23,7 @@
             error: fieldError('amount'),
             lg: $mq === 'desktop' && needLgClassName
           }"
-          v-validate="'tip-sum|tip-amount'"
+          v-validate="'tip-amount|tip-sum'"
         />
         <div
           class="tooltip tooltip_error-field"
@@ -70,6 +70,7 @@ Validator.extend("tip-sum", {
     if (r) {
       return r >= 2 && r <= 200;
     }
+    return false;
   }
 });
 
@@ -79,6 +80,9 @@ Validator.extend("tip-amount", {
     const m = value.toString().match(/^\d+\.(\d+)?$/);
     if (!m) {
       return validLimits(value);
+    }
+    if (!m[1]) {
+      return false;
     }
     if (m[1].length === 2) {
       return validLimits(value);
