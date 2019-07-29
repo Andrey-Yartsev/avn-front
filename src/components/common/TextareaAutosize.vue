@@ -3,7 +3,7 @@
     @focus="resize"
     v-model="val"
     :style="computedStyles"
-    @keypress.enter="enter"
+    @keypress.enter.prevent="enter"
   ></textarea>
 </template>
 
