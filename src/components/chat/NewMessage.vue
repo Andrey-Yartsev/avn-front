@@ -14,11 +14,7 @@
               class="header-return-btn go-back go-back_times hidden-desktop"
               v-if="$mq === 'mobile'"
             >
-              <span class="category-name"
-                >New message
-                {{ selectedChats.length }}
-                {{ chats.length }}
-              </span>
+              <span class="category-name">New message</span>
             </a>
           </div>
           <h3 class="hidden-mobile new-message-title">New message</h3>
