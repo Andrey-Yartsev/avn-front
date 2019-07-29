@@ -330,7 +330,7 @@ export default {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
     },
     deletedPost() {
-      this.initPosts();
+      // this.initPosts();
       this.initProfile();
     },
     postPinChanged() {
