@@ -327,6 +327,9 @@ export default {
         return null;
       }
       const chat = this.chats.find(v => v.withUser.id === this.selected[0]);
+      if (!chat) {
+        return null;
+      }
       return chat.withUser;
     },
     selectedUsers() {
