@@ -21,7 +21,12 @@
           </template>
         </nav>
         <div class="explore">
-          <div :class="wrapperClass">
+          <div
+            :class="{
+              wrapperClass,
+              'search-loading-content': loading && !items.length
+            }"
+          >
             <component
               v-if="component === 'Users'"
               :is="component"

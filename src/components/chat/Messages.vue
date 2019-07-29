@@ -6,7 +6,7 @@
     >
       <Loader
         :fullscreen="false"
-        text=""
+        text
         :small="true"
         class="overlay_fulllight"
       />
@@ -139,6 +139,9 @@ import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
+//BOTTOM_TRESHOLD - pixels left to bottom of container
+const BOTTOM_TRESHOLD = 40;
+
 export default {
   name: "ChatMessages",
 
@@ -160,13 +163,24 @@ export default {
   data() {
     return {
       scrollTimeoutId: 0,
-      loaderHidden: false
+      loaderHidden: false,
+      scrollPosition: 0
     };
   },
 
   computed: {
     scrollableComponent() {
       return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
+    },
+    container() {
+      if (this.$mq === "mobile") {
+        return this.$refs.messagesMobileContainer;
+      } else if (
+        this.$refs.messagesContainer &&
+        this.$refs.messagesContainer.$el
+      ) {
+        return this.$refs.messagesContainer.$el;
+      } else return null;
     },
     messages() {
       if (!this._messages.length) {
@@ -212,6 +226,34 @@ export default {
       //sending changed 2 times, before sending and after
       //1st time scroll to message Sending, 2nd time scroll to new messsage
       this.scrollToLast();
+    },
+    messages(value, oldValue) {
+      //count added messages
+      let messagesCount = value.length - oldValue.length;
+      switch (messagesCount) {
+        case 0:
+          return;
+        case 1: //new message has arrived
+          //if we at bottom of chat messages, do scrollToLast
+          if (this.isBottom()) {
+            this.$nextTick(() => {
+              this.scrollToLast();
+            });
+          } else {
+            //if we are not at bottom, increment unreadMessageCount
+            this.$store.dispatch(
+              "chat/incrementUnreadMessagesCount",
+              this.withUser.id
+            );
+          }
+          break;
+        default:
+          // fetched more messages (message history), restore scroll position
+          this.$nextTick(() => {
+            this.restoreScrollPosition();
+          });
+          break;
+      }
     }
   },
 
@@ -376,21 +418,23 @@ export default {
     checkAuthor(user) {
       return user.id === this.user.id;
     },
+    isBottom() {
+      if (this.container) {
+        return (
+          this.container.scrollTop >
+          this.container.scrollHeight -
+            this.container.clientHeight -
+            BOTTOM_TRESHOLD
+        );
+      }
+      return true;
+    },
     scrollToLast() {
       if (this.fetchingOld) {
         //
       } else {
-        if (this.$mq === "mobile") {
-          if (this.$refs.messagesMobileContainer) {
-            this.$refs.messagesMobileContainer.scrollTop = this.$refs.messagesMobileContainer.scrollHeight;
-          }
-        } else {
-          if (
-            this.$refs.messagesContainer &&
-            this.$refs.messagesContainer.$el
-          ) {
-            this.$refs.messagesContainer.$el.scrollTop = this.$refs.messagesContainer.$el.scrollHeight;
-          }
+        if (this.container) {
+          this.container.scrollTop = this.container.scrollHeight;
         }
       }
     },
@@ -443,16 +487,13 @@ export default {
         return MediaVideo;
       }
     },
-    _scrollHandler(mobile) {
-      if (mobile) {
-        if (this.$refs.messagesMobileContainer.scrollTop > 150) {
-          return;
-        }
-      } else {
-        if (this.$refs.messagesContainer.$el.scrollTop > 150) {
-          return;
-        }
+    _scrollHandler() {
+      this.saveScrollPosition();
+      //if scrolled to most bottom markChatAsViewed
+      if (this.isBottom()) {
+        this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
       }
+      if (this.container.scrollTop > 150) return;
       if (this.moreLoading) {
         return;
       }
@@ -464,20 +505,31 @@ export default {
     psScrollHandle() {
       this.scrollHandle(false);
     },
-    scrollHandle(mobile) {
+    scrollHandle() {
       clearTimeout(this.scrollTimeoutId);
-      this.scrollTimeoutId = setTimeout(() => this._scrollHandler(mobile), 500);
+      this.scrollTimeoutId = setTimeout(() => this._scrollHandler(), 500);
     },
     initMobileScroll() {
       this.$refs.messagesMobileContainer.addEventListener("scroll", () => {
-        this.scrollHandle(true);
+        this.scrollHandle();
       });
+    },
+    saveScrollPosition() {
+      this.scrollPosition =
+        this.container.scrollHeight -
+        this.container.scrollTop -
+        this.container.clientHeight;
+    },
+    restoreScrollPosition() {
+      this.container.scrollTop =
+        this.container.scrollHeight -
+        this.container.clientHeight -
+        this.scrollPosition;
     },
     fetchMoreMessages() {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
     }
   },
-
   mounted() {
     setTimeout(() => {
       this.scrollToLast();

@@ -1,12 +1,16 @@
 "use strict";
 
 import { createRequestAction } from "../utils/storeRequest";
+import arrayUtils from "../../utils/arrayUtils";
+
+const MESSAGES_LIMIT = 50;
+const CHATS_LIMIT = 20;
 
 const state = {
   isSecondScreen: false,
   activeUserId: null,
   windowIsActive: true,
-  messagesOffset: 100,
+  messagesOffset: MESSAGES_LIMIT,
   allMessagesLoaded: true,
   fetchingOld: false,
   // fetch chats
@@ -98,69 +102,64 @@ const actions = {
     });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
-    if (
-      !rootState.auth.user.hasMessages &&
-      rootState.auth.user.id !== message.fromUser.id
-    ) {
+    const isMine = message.fromUser.id === rootState.auth.user.id;
+    //withUser - user to whom chatting
+    const withUser = isMine ? message.withUser : message.fromUser;
+
+    if (!isMine && !rootState.auth.user.hasMessages) {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
-    if (rootState.auth.user.id !== message.fromUser.id) {
-      const chatFound = state.chats.find(chat => {
-        return message.fromUser.id === chat.withUser.id;
-      });
-      if (!chatFound) {
-        commit("addNewChat", {
-          hasHistory: true,
-          lastMessage: message,
-          mediaCount: message.mediaCount,
-          unreadMessageCount: 0,
-          id: message.fromUser.id,
-          withUser: message.fromUser
-        });
-      }
+    //search for existing chat
+    const chatFound = state.chats.find(chat => {
+      return chat.withUser.id === withUser.id;
+    });
 
-      if (state.activeUserId === message.fromUser.id) {
+    //if chat not found then add new chat
+    if (!chatFound) {
+      commit("addNewChat", {
+        hasHistory: true,
+        lastMessage: message,
+        mediaCount: message.mediaCount,
+        unreadMessageCount: 0,
+        id: withUser.id,
+        withUser
+      });
+
+      //if chat with user opened already then mark message as read
+      if (state.activeUserId === withUser.id) {
         if (!state.windowIsActive) {
           unreadLastMessage = message;
         } else {
-          if (message.fromUser.id) {
-            markAsRead(dispatch, {
-              userId: message.fromUser.id,
-              messageId: message.id
-            });
-          }
+          markAsRead(dispatch, {
+            userId: withUser.id,
+            messageId: message.id
+          });
         }
       }
     }
 
+    //if there is active chat opened
     if (state.activeUserId) {
-      let withUserId = message.fromUser.id;
-      const isMine = message.fromUser.id === rootState.auth.user.id;
-
-      if (isMine) {
-        withUserId = state.activeUserId;
-      }
-
       const found = state.messages.find(v => v.id === message.id);
       if (found) {
         commit("replaceMessage", message);
       } else {
-        if (state.activeUserId === withUserId) {
+        if (state.activeUserId === withUser.id) {
           commit("addMessage", message);
         }
       }
-
-      dispatch("updateChatLastMessage", {
-        message,
-        withUserId,
-        isMine
-      });
     }
 
-    if (rootState.auth.user.id !== message.fromUser.id) {
-      if (state.activeUserId === message.fromUser.id) {
-        dispatch("markChatAsViewed", message.fromUser.id);
+    dispatch("updateChatLastMessage", {
+      message,
+      withUserId: withUser.id,
+      isMine
+    });
+
+    if (!isMine) {
+      if (state.activeUserId === withUser.id) {
+        dispatch("markChatAsViewed", withUser.id);
       }
     }
   },
@@ -168,7 +167,7 @@ const actions = {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
-      if (r.list.length >= 100) {
+      if (r.list.length >= MESSAGES_LIMIT) {
         commit("allMessagesLoaded", false);
       }
     });
@@ -185,10 +184,10 @@ const actions = {
         commit("allMessagesLoaded", true);
         return;
       }
-      if (state.moreMessages.length < 100) {
+      if (state.moreMessages.length < MESSAGES_LIMIT) {
         commit("allMessagesLoaded", true);
       }
-      commit("incrementMessagesOffset");
+      commit("incrementMessagesOffset", state.moreMessages.length);
       commit("addOldMessages");
     });
   },
@@ -210,6 +209,9 @@ const actions = {
         dispatch("auth/extendUser", { hasMessages: false }, { root: true });
       }
     }
+  },
+  incrementUnreadMessagesCount({ commit }, withUserId) {
+    commit("incrementUnreadMessagesCount", withUserId);
   },
   updateChatLastMessage({ commit }, { message, withUserId, isMine }) {
     commit("updateChatLastMessage", {
@@ -233,7 +235,7 @@ const actions = {
 const mutations = {
   setActiveUserId(state, activeUserId) {
     state.activeUserId = activeUserId;
-    state.messagesOffset = 100;
+    state.messagesOffset = MESSAGES_LIMIT;
     state.allMessagesLoaded = true;
   },
   allMessagesLoaded(state, allMessagesLoaded) {
@@ -247,6 +249,7 @@ const mutations = {
   },
   resetChats(state) {
     state.chats = [];
+    state.activeUserId = null;
   },
   resetMessages() {
     state.messages = [];
@@ -267,24 +270,31 @@ const mutations = {
   setSecondScreen(state, isSecondScreen) {
     state.isSecondScreen = isSecondScreen;
   },
+  incrementUnreadMessagesCount(state, withUserId) {
+    let chat = state.chats.filter(chat => chat.withUser.id == withUserId)[0];
+    if (chat) {
+      chat.unreadMessagesCount++;
+    }
+  },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
-    state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === withUserId) {
+    //Search chat with User from message and update lastMessage
+    arrayUtils.modifyBy(
+      state.chats,
+      chat => chat.withUser.id === withUserId,
+      chat => {
         chat.lastMessage = message;
         if (!isMine) {
           chat.unreadMessagesCount++;
         }
       }
-      return chat;
-    });
+    );
   },
   markChatAsViewed(state, userId) {
-    state.chats = state.chats.map(chat => {
-      if (chat.withUser.id === userId) {
-        chat.unreadMessagesCount = 0;
-      }
-      return chat;
-    });
+    arrayUtils.modifyBy(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => (chat.unreadMessagesCount = 0)
+    );
   },
   replaceMessage(state, message) {
     let found = false;
@@ -310,7 +320,9 @@ const mutations = {
     });
   },
   addMessage(state, message) {
-    state.messages = [...state.messages, message];
+    // state.messages = [...state.messages, message];
+    state.messages.push(message);
+    state.messagesOffset++;
   },
   addNewChat(state, chat) {
     state.chats = [chat, ...state.chats];
@@ -318,15 +330,13 @@ const mutations = {
   setActiveWindow(state, isActive) {
     state.windowIsActive = isActive;
   },
-  incrementMessagesOffset(state) {
-    state.messagesOffset += 100;
+  incrementMessagesOffset(state, count) {
+    state.messagesOffset += count;
   },
   addOldMessages(state) {
     state.messages = state.moreMessages.concat(state.messages);
   }
 };
-
-const fetchChatsLimit = 20;
 
 const fetchChatsInitState = {
   allDataReceived: false,
@@ -342,10 +352,10 @@ mutations.fetchChatsReset = state => {
 
 mutations.fetchChatsComplete = state => {
   state.chats = [...state.chats, ...state._fetchChatsResult];
-  if (state._fetchChatsResult.length < fetchChatsLimit) {
+  if (state._fetchChatsResult.length < CHATS_LIMIT) {
     state.allDataReceived = true;
   } else {
-    state.offset = state.offset + fetchChatsLimit;
+    state.offset += CHATS_LIMIT;
   }
 };
 
@@ -366,7 +376,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.query = {
-      limit: fetchChatsLimit,
+      limit: CHATS_LIMIT,
       offset: params
     };
     return options;
@@ -416,7 +426,8 @@ createRequestAction({
   mutations,
   actions,
   options: {
-    method: "GET"
+    method: "GET",
+    query: {}
   },
   resultKey: "messages",
   defaultResultValue: [],
@@ -428,6 +439,10 @@ createRequestAction({
       return Object.values(res.list).reverse();
     }
     return state.messages || [];
+  },
+  paramsToOptions: function(params, options) {
+    options.query.limit = MESSAGES_LIMIT;
+    return options;
   }
 });
 
@@ -451,6 +466,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options, state) {
     options.query.offset = state.messagesOffset;
+    options.query.limit = MESSAGES_LIMIT;
     return options;
   }
 });

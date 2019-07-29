@@ -1104,6 +1104,10 @@
       padding-bottom: 0;
       @include ellipsis;
     }
+
+    span.emoji-inner {
+      vertical-align: top;
+    }
   }
 
 
