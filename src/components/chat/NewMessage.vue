@@ -14,7 +14,11 @@
               class="header-return-btn go-back go-back_times hidden-desktop"
               v-if="$mq === 'mobile'"
             >
-              <span class="category-name">New message</span>
+              <span class="category-name"
+                >New message
+                {{ selectedChats.length }}
+                {{ chats.length }}
+              </span>
             </a>
           </div>
           <h3 class="hidden-mobile new-message-title">New message</h3>
@@ -302,11 +306,15 @@ export default {
       return false;
       // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
-    chats() {
+    _chats() {
       let chats = this.$store.state.chat.anyChats.map(v => {
         v.selected = this.selected.indexOf(v.withUser.id) !== -1;
         return v;
       });
+      return chats;
+    },
+    chats() {
+      let chats = this._chats;
       if (this.foundUsers) {
         const foundUserIds = this.foundUsers.map(v => v.id);
         chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
@@ -314,7 +322,7 @@ export default {
       return chats;
     },
     selectedChats() {
-      return this.chats.filter(v => v.selected);
+      return this._chats.filter(v => v.selected);
     },
     isAllSelected() {
       return this.chats.length === this.selected.length;
