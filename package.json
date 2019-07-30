@@ -20,7 +20,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "query-string": "^6.8.1",
-    "streaming-module": "git+ssh://gogs@git.retloko.com:44468/alien.pavlov/streaming-module.git",
+    "streaming-module": "git+ssh://gogs@git.retloko.com:44468/alien.pavlov/streaming-module.git#v1.3.11",
     "throttle-debounce": "^2.1.0",
     "tributejs": "^3.7.1",
     "unfetch": "^4.1.0",
