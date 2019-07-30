@@ -84,7 +84,7 @@
             @click.prevent="addNewStory"
             :href="isOwner(author.id) ? `/${author.username}` : ''"
             :class="[
-              'avatar avatar_not-shadow',
+              'avatar avatar_md avatar_not-shadow',
               { 'new-story': isOwner(author.id) }
             ]"
           >
@@ -113,7 +113,6 @@
               }}
             </router-link>
           </template>
-          <span class="time"></span>
         </div>
       </div>
       <div
