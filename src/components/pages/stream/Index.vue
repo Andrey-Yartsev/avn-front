@@ -434,7 +434,7 @@ export default {
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
       setTimeout(() => {
-        this.isMirrow = Streams.cameraFacingMode === "user";
+        this.isMirrow = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
     },
     toggleCamera() {
@@ -474,7 +474,7 @@ export default {
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
       setTimeout(() => {
-        this.isMirrow = Streams.cameraFacingMode === "user";
+        this.isMirrow = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
     },
     tick() {
