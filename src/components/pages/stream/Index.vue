@@ -186,7 +186,9 @@
               class="like"
               :style="{ top: `${like.y}px`, left: `${like.x}px` }"
             >
-              <div class="like-icon"><div class="like-icon__symbol" /></div>
+              <div class="like-icon">
+                <div class="like-icon__symbol icn-item" />
+              </div>
             </div>
           </div>
           <video
