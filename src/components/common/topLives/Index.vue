@@ -2,7 +2,7 @@
   <div class="storyView storyView_top-live">
     <div class="story">
       <div class="avatar avatar_lg avatar_lg-desk" @click="openLive">
-        <span class="avatar__slider with-story">
+        <span class="with-story" :class="{ avatar__slider: lives.length > 1 }">
           <span
             :class="[
               'avatar__slide',
@@ -13,10 +13,14 @@
             ]"
             v-for="(item, key) in lives"
             v-bind:key="key"
+            v-if="lives.length > 1"
           >
             <span class="avatar__img">
               <img :src="item.user.avatar" v-if="item.user.avatar" />
             </span>
+          </span>
+          <span class="avatar__img" v-else>
+            <img :src="item.user.avatar" v-if="item.user.avatar" />
           </span>
         </span>
         <div class="stream-online-label">live</div>
@@ -24,7 +28,7 @@
       <div class="story-info">
         <div class="story-header">
           <div class="name">
-            Top Live
+            {{ lives.length > 1 ? "Top Live" : lives[0].user.name }}
           </div>
         </div>
       </div>
