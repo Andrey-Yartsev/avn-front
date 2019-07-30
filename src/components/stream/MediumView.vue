@@ -10,7 +10,6 @@
           'explore-media_avatar': this.post.user.avatar === null && !imageSrc
         }"
       >
-        <!--<img :src="imageSrc" />-->
         <img
           :src="imageSrc"
           @contextmenu.prevent="() => false"
@@ -18,7 +17,7 @@
           v-if="this.post.user.avatar !== null || imageSrc"
         />
         <div
-          v-if="duraion && $mq === 'desktop'"
+          v-if="$mq === 'desktop'"
           class="item-length item-length_live hidden-mobile"
         >
           <span class="value">{{ duraion }}</span>
