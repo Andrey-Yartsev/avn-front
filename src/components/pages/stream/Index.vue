@@ -696,21 +696,21 @@ export default {
       showLikes: false,
       showErrorMessage(message) {
         // eslint-disable-next-line
-        alert(message);
+        alert("1:" + message);
         // eslint-disable-next-line
-        console.log(message);
+        console.trace(message);
       },
       showInfoMessage(message) {
         // eslint-disable-next-line
-        console.log(message);
+        console.trace(message);
       },
       onLocalStreamInit() {},
       onRemoteStreamInit() {},
       onStreamError(error) {
         // eslint-disable-next-line
-        alert(error);
+        alert("2: " + error);
         // eslint-disable-next-line
-        console.log(error);
+        console.trace(error);
         Streams.config.onStreamEnd();
       },
       onStreamTick: start => {
