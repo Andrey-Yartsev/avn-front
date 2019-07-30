@@ -1,5 +1,25 @@
 @import "components/imports";
 
+.userCollectionView,
+.userView {
+
+  .user-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
+    border-bottom: none;
+    padding: 0;
+    margin: -5px 0 0 20px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      justify-content: space-between;
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}
+
 .userCollectionView {
 
   .users {
@@ -35,22 +55,6 @@
 
     &:empty {
       display: none;
-    }
-  }
-
-  .user-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    align-content: flex-end;
-    border-bottom: none;
-    padding: 0;
-    margin: -5px 0 0 20px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      justify-content: space-between;
-      margin-top: 0;
-      margin-left: 0;
     }
   }
 }
