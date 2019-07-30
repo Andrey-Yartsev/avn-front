@@ -847,10 +847,10 @@
   }
 
   .main-header_top & {
-    height: calc(100vh - 44px);
     top: 44px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      height: calc(100vh - 44px);
 
       .scroll-top & {
         height: 100vh;
