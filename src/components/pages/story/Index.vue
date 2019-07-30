@@ -79,19 +79,17 @@
         </div>
       </div>
       <div class="head-story">
-        <div class="story-avatar">
-          <a
-            @click.prevent="addNewStory"
-            :href="isOwner(author.id) ? `/${author.username}` : ''"
-            :class="[
-              'avatar avatar_md avatar_not-shadow',
-              { 'new-story': isOwner(author.id) }
-            ]"
-          >
-            <span class="avatar__img">
-              <img v-if="author.avatar" :src="author.avatar" />
-            </span>
-          </a>
+        <a
+          @click.prevent="addNewStory"
+          :href="isOwner(author.id) ? `/${author.username}` : ''"
+          :class="[
+            'avatar avatar_md avatar_not-shadow',
+            { 'new-story': isOwner(author.id) }
+          ]"
+        >
+          <span class="avatar__img">
+            <img v-if="author.avatar" :src="author.avatar" />
+          </span>
           <template v-if="isOwner(author.id) && !isCollections">
             <span class="btn-add" @click="addNewStory">
               <svg aria-hidden="true" class="icn icn-plus">
@@ -99,7 +97,7 @@
               </svg>
             </span>
           </template>
-        </div>
+        </a>
         <div class="user-name">
           <span v-if="isCollections">
             {{ collection.title }}
