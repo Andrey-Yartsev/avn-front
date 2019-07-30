@@ -367,6 +367,12 @@ export default {
       } else {
         this.selected = [];
       }
+
+      if (!this.chats.length) {
+        this.searchQuery = "";
+        this.$store.commit("chat/resetSearchUsers");
+        this.selected = this.chats.map(v => v.withUser.id);
+      }
     },
     search() {
       if (!this.searchQuery) {
