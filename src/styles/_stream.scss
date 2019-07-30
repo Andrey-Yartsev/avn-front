@@ -161,6 +161,31 @@
       display: none;
     }
   }
+
+  &-author {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    z-index: 1;
+    max-width: 40%;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 5px;
+    }
+
+    .user-name {
+      color: #fff;
+      font-size: 15px;
+      margin-left: 14px;
+      max-width: calc(100% - 54px);
+
+      a {
+        color: inherit;
+        font-weight: 500;
+        display: block;
+      }
+    }
+  }
 }
 
 #stream-timer {
@@ -175,6 +200,13 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     font-size: 17px;
     top: 20px;
+  }
+
+  .stream-viewer & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: 24px;
+    }
   }
 }
 

@@ -4,7 +4,23 @@
       <div id="stream" class="stream-block">
         <div class="mediasTop__header stream-header">
           <div id="stream-timer">{{ time }}</div>
-          <div class="stream-online-label">live</div>
+          <div class="stream-author">
+            <router-link
+              :to="'/' + streamer.username"
+              class="avatar avatar_md avatar_not-shadow"
+            >
+              <span class="avatar__img">
+                <img :src="streamer.avatar" v-if="streamer.avatar.length" />
+              </span>
+              <div class="stream-online-label">live</div>
+            </router-link>
+            <div class="user-name">
+              <router-link :to="'/' + streamer.username" class="name">
+                {{ streamer.name }}
+              </router-link>
+            </div>
+          </div>
+          {{ "/" + streamer.username }}
           <span
             role="button"
             id="close-stream-window"
