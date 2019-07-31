@@ -121,12 +121,15 @@
           <span class="semi-transparent">
             Receive Twitter Notifications
           </span>
-          <label class="toggle-element" :disabled="!user.twitterUsername">
+          <label class="toggle-element"
+            :class="{ 'disabled': !user.twitterUsername }"
+          >
             <input
               type="checkbox"
               name="isTweetNotificationsEnabled"
               value="true"
               v-model="localUser.isTweetNotificationsEnabled"
+              :disabled="!user.twitterUsername"
             />
             <span class="toggle-element_switcher"></span>
           </label>
