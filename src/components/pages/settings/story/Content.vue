@@ -75,6 +75,7 @@
               type="checkbox"
               name="isPrivateStories"
               v-model="localUser.isPrivateStories"
+              :disabled="!localUser.isWantEarn"
             />
             <span class="toggle-element_switcher"></span>
           </label>

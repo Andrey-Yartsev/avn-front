@@ -116,14 +116,15 @@
         </div>
       </div>
 
-      <div class="form-title border-top">
+      <div class="form-title border-top"
+        :class="{ disabled: !user.twitterUsername }"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Receive Twitter Notifications
           </span>
           <label
             class="toggle-element"
-            :class="{ disabled: !user.twitterUsername }"
           >
             <input
               type="checkbox"

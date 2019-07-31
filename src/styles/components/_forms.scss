@@ -634,11 +634,6 @@ label {
       }
     }
   }
-
-  &.disabled {
-    opacity: .5;
-    pointer-events: none;
-  }
 }
 .toggle-wrapper {
   display: flex;
