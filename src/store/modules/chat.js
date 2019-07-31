@@ -151,17 +151,19 @@ const actions = {
       }
     }
 
-    dispatch("updateChatLastMessage", {
-      message,
-      withUserId: withUser.id,
-      isMine
-    });
-
-    if (!isMine) {
-      if (state.activeUserId === withUser.id) {
-        dispatch("markChatAsViewed", withUser.id);
-      }
+    if (message.isMediaReady) {
+      dispatch("updateChatLastMessage", {
+        message,
+        withUserId: withUser.id,
+        isMine
+      });
     }
+
+    // if (!isMine) {
+    //   if (state.activeUserId === withUser.id) {
+    //     dispatch("markChatAsViewed", withUser.id);
+    //   }
+    // }
   },
   fetchMessages({ dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
@@ -271,14 +273,16 @@ const mutations = {
     state.isSecondScreen = isSecondScreen;
   },
   incrementUnreadMessagesCount(state, withUserId) {
-    let chat = state.chats.filter(chat => chat.withUser.id == withUserId)[0];
-    if (chat) {
-      chat.unreadMessagesCount++;
-    }
+    arrayUtils.modifyByCondition(
+      state.chats,
+      chat => chat.withUser.id === withUserId,
+      chat => chat.unreadMessagesCount++,
+      this._vm
+    );
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
     //Search chat with User from message and update lastMessage
-    arrayUtils.modifyBy(
+    arrayUtils.updateByCondition(
       state.chats,
       chat => chat.withUser.id === withUserId,
       chat => {
@@ -286,30 +290,29 @@ const mutations = {
         if (!isMine) {
           chat.unreadMessagesCount++;
         }
-      }
+        return chat;
+      },
+      this._vm
     );
   },
   markChatAsViewed(state, userId) {
-    arrayUtils.modifyBy(
+    arrayUtils.modifyByCondition(
       state.chats,
       chat => chat.withUser.id === userId,
-      chat => (chat.unreadMessagesCount = 0)
+      chat => (chat.unreadMessagesCount = 0),
+      this._vm
     );
   },
   replaceMessage(state, message) {
-    let found = false;
-    const messages = state.messages.map(v => {
-      if (v.id === message.id) {
-        found = true;
-        v = message;
-      }
-      return v;
-    });
-    if (!found) {
-      state.messages = [...state.messages, message];
-    } else {
-      state.messages = messages;
-    }
+    // arrayUtils.replaceBy(state.messages, m => m.id === message.id, m => message);
+    arrayUtils.updateByCondition(
+      state.messages,
+      m => m.id === message.id,
+      () => {
+        return message;
+      },
+      this._vm
+    );
   },
   extendMessage(state, { id, data }) {
     state.messages = state.messages.map(v => {

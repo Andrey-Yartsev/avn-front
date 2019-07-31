@@ -12,18 +12,34 @@ export default {
   itemsBy(items, conditionAction) {
     return items.filter(item => conditionAction(item));
   },
-  modifyBy(items, conditionAction, modifyAction) {
-    items
-      .filter(item => conditionAction(item))
-      .forEach(item => {
-        modifyAction(item);
-      });
+  modifyByCondition(items, conditionAction, modifyAction, vue) {
+    items = items.map((item, index) => {
+      if (conditionAction(item, index)) {
+        modifyAction(item, index);
+        vue.$set(items, index, item);
+      }
+      return item;
+    });
+    return items;
   },
-  /// Replace item found by conditionAction by item returned by newItemAction
-  replaceBy(items, conditionAction, newItemAction) {
-    let index = this.indexBy(items, item => conditionAction(item));
-    if (index != -1) {
-      items[index] = newItemAction(items[index]);
-    }
+  // updateAction have to return updated item
+  updateByCondition(items, conditionAction, updateAction, vue) {
+    items = items.map((item, index) => {
+      if (conditionAction(item, index)) {
+        item = updateAction(item, index);
+        vue.$set(items, index, item);
+      }
+      return item;
+    });
+    return items;
+  },
+  updateByIndex(items, indexToUpdate, updateAction, vue) {
+    items = this.updateByCondition(
+      items,
+      (item, index) => index == indexToUpdate,
+      updateAction,
+      vue
+    );
+    return items;
   }
 };
