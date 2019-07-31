@@ -94,6 +94,7 @@
                       v-model="userinfo.street"
                       name="street"
                       v-validate="'required|latin'"
+                      @blur="trimUserInfo('street')"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('street')">
@@ -186,6 +187,7 @@
                       v-model="userinfo.zip"
                       name="zip"
                       v-validate="'required'"
+                      @blur="trimUserInfo('zip')"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('zip')">
@@ -313,6 +315,7 @@
                       name="cardHolder"
                       v-model="cardHolder"
                       type="text"
+                      @blur="trimUserInfo('name')"
                     />
                   </span>
                   <div class="error-info" v-if="fieldError('cardHolder')">
@@ -622,6 +625,9 @@ export default {
       script.async = true;
       script.src = "https://securionpay.com/js/securionpay.js";
       document.head.appendChild(script);
+    },
+    trimUserInfo(name) {
+      this.userinfo[name] = this.userinfo[name].trim();
     }
   },
   watch: {
