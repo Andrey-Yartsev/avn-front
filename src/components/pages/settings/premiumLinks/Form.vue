@@ -30,7 +30,7 @@
                       min="0"
                       step="0.01"
                       required
-                      name="price"
+                      name="snapchatPrice"
                       v-model="snapchatPrice"
                       v-validate="'required|subscription-price'"
                     />
