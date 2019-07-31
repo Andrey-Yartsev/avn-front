@@ -118,9 +118,7 @@ w<template>
         </div>
       </div>
       -->
-      <div
-        class="form-title tweet-posts-block border-top"
-      >
+      <div class="form-title tweet-posts-block border-top">
         <div class="inner">
           <span class="semi-transparent">
             Tweet my posts
@@ -128,7 +126,8 @@ w<template>
               This can be changed for each individual post later
             </p>
           </span>
-          <label class="toggle-element"
+          <label
+            class="toggle-element"
             :class="{ disabled: !localUser.isTwitterConnected }"
           >
             <input
