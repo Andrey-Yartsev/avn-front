@@ -87,21 +87,21 @@ const actions = {
     });
   },
   sendMessage({ dispatch }, params) {
-    dispatch("_sendMessage", params);//.then(message => {
-      //unnecessary code
-      //lastMessage is updated when message arrives through websocket
-      //chats is loaded when chat component is created
-      // dispatch("updateChatLastMessage", {
-      //   message,
-      //   withUserId: params.userId,
-      //   isMine: true
-      // });
-      // const chatExists = state.chats.find(
-      //   chat => chat.withUser.id === params.userId
-      // );
-      // if (!chatExists) {
-      //   dispatch("fetchChats");
-      // }
+    dispatch("_sendMessage", params); //.then(message => {
+    //unnecessary code
+    //lastMessage is updated when message arrives through websocket
+    //chats is loaded when chat component is created
+    // dispatch("updateChatLastMessage", {
+    //   message,
+    //   withUserId: params.userId,
+    //   isMine: true
+    // });
+    // const chatExists = state.chats.find(
+    //   chat => chat.withUser.id === params.userId
+    // );
+    // if (!chatExists) {
+    //   dispatch("fetchChats");
+    // }
     // });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
