@@ -695,7 +695,6 @@ export default {
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
       streamSource: "local",
-      showLikes: false,
       showErrorMessage(message) {
         // eslint-disable-next-line
         alert("1:" + message);
