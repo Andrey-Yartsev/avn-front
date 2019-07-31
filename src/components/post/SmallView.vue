@@ -65,7 +65,13 @@
             class="item-length item-length_video"
           >
             <span class="value">{{ mediaDuration }}</span>
-            <span class="icn-item icn-camera"></span>
+            <span
+              class="icn-item"
+              :class="{
+                'icn-live': postFlagStream,
+                'icn-camera': !postFlagStream
+              }"
+            ></span>
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <span
@@ -190,6 +196,9 @@ export default {
           postId: this.post.id
         }
       });
+    },
+    postFlagStream() {
+      return this.post.streamHasConverted;
     }
   }
 };
