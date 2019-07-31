@@ -118,7 +118,8 @@ w<template>
         </div>
       </div>
       -->
-      <div class="form-title tweet-posts-block border-top"
+      <div
+        class="form-title tweet-posts-block border-top"
         :class="{ disabled: !localUser.isTwitterConnected }"
       >
         <div class="inner">
@@ -128,9 +129,7 @@ w<template>
               This can be changed for each individual post later
             </p>
           </span>
-          <label
-            class="toggle-element"
-          >
+          <label class="toggle-element">
             <input
               type="checkbox"
               name="isPostsTweets"
