@@ -10,7 +10,7 @@
               class="avatar avatar_md avatar_not-shadow"
             >
               <span class="avatar__img">
-                <img :src="streamer.avatar" v-if="streamer.avatar.length" />
+                <img :src="streamer.avatar" v-if="streamer.avatar" />
               </span>
               <div class="stream-online-label">live</div>
             </router-link>
