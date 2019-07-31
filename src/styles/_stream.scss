@@ -169,6 +169,7 @@
     align-content: center;
     z-index: 1;
     max-width: 40%;
+    width: 100%;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-top: 5px;
