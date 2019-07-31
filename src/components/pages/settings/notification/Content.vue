@@ -121,8 +121,9 @@
           <span class="semi-transparent">
             Receive Twitter Notifications
           </span>
-          <label class="toggle-element"
-            :class="{ 'disabled': !user.twitterUsername }"
+          <label
+            class="toggle-element"
+            :class="{ disabled: !user.twitterUsername }"
           >
             <input
               type="checkbox"
