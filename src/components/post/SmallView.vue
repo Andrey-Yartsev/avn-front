@@ -68,8 +68,8 @@
             <span
               class="icn-item"
               :class="{
-                'icn-live': postFlagStream,
-                'icn-camera': !postFlagStream
+                'icn-live': post.streamHasConverted,
+                'icn-camera': !post.streamHasConverted
               }"
             ></span>
           </span>
@@ -196,9 +196,6 @@ export default {
           postId: this.post.id
         }
       });
-    },
-    postFlagStream() {
-      return this.post.streamHasConverted;
     }
   }
 };
