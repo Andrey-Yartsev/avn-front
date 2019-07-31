@@ -231,7 +231,7 @@ export default {
       //count added messages
       let messagesCount = value.length - oldValue.length;
 
-        switch (messagesCount) {
+      switch (messagesCount) {
         case 0: //second part of media message replaced previous message
         case 1: //new message has arrived
           //if we at bottom of chat messages, do scrollToLast
