@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     click() {
-      this.$root.$emit("subcribeBtnClick");
+      this.$root.$emit("subscribeBtnClick");
     }
   }
 };

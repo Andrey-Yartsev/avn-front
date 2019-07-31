@@ -26,6 +26,7 @@
 <script>
 import User from "@/mixins/user";
 import subsAction from "@/helpers/subsAction";
+import BrowserStore from "store";
 
 export default {
   name: "SubscribeButton",
@@ -57,6 +58,7 @@ export default {
       return name.charAt(0).toUpperCase() + name.slice(1);
     },
     subscribe() {
+      this.$store.commit("profile/home/setOnPageAction", "subscribe");
       this.$store.dispatch("modal/show", {
         name: "subscribe",
         data: {
@@ -79,22 +81,19 @@ export default {
     },
     subscription() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", {
-          name: "signup",
-          data: {
-            profilePageAction: "subscribe"
-          }
-        });
+        this.$store.dispatch("modal/show", { name: "signup" });
+        BrowserStore.set("onLoginSubsProfile", this.profile.username);
+        this.$store.commit("profile/home/setOnLoginAction", "subscribe");
         return;
       }
       this[this.subsAction]();
     }
   },
   mounted() {
-    this.$root.$on("subcribeBtnClick", this.subscribe);
+    this.$root.$on("subscribeBtnClick", this.subscribe);
   },
   beforeDestroy() {
-    this.$root.$off("subcribeBtnClick", this.subscribe);
+    this.$root.$off("subscribeBtnClick", this.subscribe);
   }
 };
 </script>

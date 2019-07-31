@@ -23,6 +23,7 @@ export default {
         Router.push("/settings/payments");
         return;
       }
+      this.$store.commit("profile/home/resetOnPageAction");
       this.progress = true;
       const onSuccess = () => {
         this.progress = false;

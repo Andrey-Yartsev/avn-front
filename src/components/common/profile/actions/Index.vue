@@ -153,12 +153,8 @@ export default {
     },
     follow() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", {
-          name: "login",
-          data: {
-            profilePageAction: "follow"
-          }
-        });
+        this.$store.commit("profile/home/setOnPageAction", "follow");
+        this.$store.dispatch("modal/show", { name: "login" });
         return;
       }
       this.$store.dispatch("profile/home/follow", this.profile.id);
@@ -207,12 +203,8 @@ export default {
     },
     openTip() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", {
-          name: "login",
-          data: {
-            profilePageAction: "openTip"
-          }
-        });
+        this.$store.commit("profile/home/setOnPageAction", "openTip");
+        this.$store.dispatch("modal/show");
         return;
       }
       this.showTip = true;
@@ -224,7 +216,18 @@ export default {
     }
   },
   mounted() {
-    const action = this.$store.state.modal.login.data.profilePageAction;
+    let action;
+
+    action = this.$store.state.profile.home.onLoginAction;
+
+    if (action) {
+      this.$store.commit("profile/home/resetOnLoginAction");
+    }
+
+    if (!action) {
+      action = this.$store.state.profile.home.onPageAction;
+    }
+
     if (action) {
       if (action === "subscribe") {
         this.$refs.subscribeButton.subscription();

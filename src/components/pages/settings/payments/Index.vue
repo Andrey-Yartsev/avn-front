@@ -39,7 +39,9 @@ export default {
   methods: {
     changeTitle(title) {
       setTimeout(() => {
-        this.$refs.layout.changeTitle(title);
+        if (this.$refs.layout) {
+          this.$refs.layout.changeTitle(title);
+        }
       }, 100);
     }
   }

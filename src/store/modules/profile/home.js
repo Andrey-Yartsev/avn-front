@@ -18,7 +18,10 @@ const initState = {
   source: "",
   deletedPost: undefined,
   postPinChanged: 0,
-  postPinCount: 0
+  postPinCount: 0,
+  onPageAction: null,
+  onLoginAction: null,
+  beforeLoginProfileUsername: null
 };
 
 const state = { ...initState };
@@ -29,7 +32,6 @@ const mutations = {
       state[k] = initState[k];
     }
   },
-
   resetPosts(state) {
     // state.source = "";
     state.loading = false;
@@ -38,17 +40,14 @@ const mutations = {
     state.marker = "";
     state.allDataReceived = false;
   },
-
   setSource(state, source) {
     state.source = source;
   },
-
   setLive(state, { id, currentStream }) {
     if (state.profile && state.profile.id === id) {
       state.profile.currentStream = currentStream;
     }
   },
-
   updatePost(state, updatedPost) {
     state.posts = state.posts.map(post => {
       if (post.id === updatedPost.id) {
@@ -64,6 +63,18 @@ const mutations = {
   postPinChanged(state, n) {
     state.postPinChanged++;
     state.postPinCount += n;
+  },
+  setOnPageAction(state, action) {
+    state.onPageAction = action;
+  },
+  resetOnPageAction(state) {
+    state.onPageAction = null;
+  },
+  setOnLoginAction(state, action) {
+    state.onLoginAction = action;
+  },
+  resetOnLoginAction(state) {
+    state.onLoginAction = null;
   }
 };
 
@@ -86,15 +97,12 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
-
   updatePost({ commit }, updatedPost) {
     commit("updatePost", updatedPost);
   },
-
   setSource({ commit }, source) {
     commit("setSource", source);
   },
-
   follow({ dispatch }, userId) {
     return new Promise((accept, reject) => {
       SubscriptionsApi.follow(userId).then(async response => {
@@ -108,7 +116,6 @@ const actions = {
       });
     });
   },
-
   unfollow({ dispatch }, userId) {
     return new Promise((accept, reject) => {
       SubscriptionsApi.unfollow(userId).then(async response => {
@@ -122,7 +129,6 @@ const actions = {
       });
     });
   },
-
   mute({ dispatch }, user) {
     dispatch(`user/mute`, user.id, { root: true }).then(r => {
       if (r.success) {
@@ -143,11 +149,9 @@ const actions = {
       }
     });
   },
-
   extend({ commit, state }, data) {
     commit("profile", { ...state.profile, ...data });
   },
-
   reload({ dispatch, state }) {
     dispatch("fetchProfile", state.profile.username).then(() => {
       // dispatch("profile/setFetchLoading", false, { root: true });

@@ -24,6 +24,7 @@ const Auth = {
   },
 
   init(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     if (Auth.loggedIn) {
       return next();
     }
@@ -48,6 +49,7 @@ const Auth = {
   },
 
   requireAuth(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     const trialCodeExists = saveTrialCode();
 
     const params = queryString.parse(location.search);
@@ -85,6 +87,7 @@ const Auth = {
   },
 
   requireAuthOrExplore(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     const trialCodeExists = saveTrialCode();
 
     const params = queryString.parse(location.search);
@@ -124,6 +127,7 @@ const Auth = {
   },
 
   requireNonAuth(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     saveTrialCode();
 
     const token = BrowserStore.get("token");
@@ -139,6 +143,7 @@ const Auth = {
   },
 
   requireAny(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile");
     if (Auth.loggedIn) {
       return next();
     }
@@ -184,6 +189,13 @@ const Auth = {
         if (r.otpEnable) {
           Store.dispatch("auth/setOtpAuth", true);
           return next("/login");
+        }
+
+        const username = BrowserStore.get("onLoginSubsProfile");
+        if (username) {
+          Store.commit("profile/home/setOnLoginAction", "subscribe");
+          BrowserStore.remove("onLoginSubsProfile");
+          return next("/" + username);
         }
         next("/");
       });
