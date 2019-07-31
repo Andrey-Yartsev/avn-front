@@ -87,19 +87,22 @@ const actions = {
     });
   },
   sendMessage({ dispatch }, params) {
-    dispatch("_sendMessage", params).then(message => {
-      dispatch("updateChatLastMessage", {
-        message,
-        withUserId: params.userId,
-        isMine: true
-      });
-      const chatExists = state.chats.find(
-        chat => chat.withUser.id === params.userId
-      );
-      if (!chatExists) {
-        dispatch("fetchChats");
-      }
-    });
+    dispatch("_sendMessage", params);//.then(message => {
+      //unnecessary code
+      //lastMessage is updated when message arrives through websocket
+      //chats is loaded when chat component is created
+      // dispatch("updateChatLastMessage", {
+      //   message,
+      //   withUserId: params.userId,
+      //   isMine: true
+      // });
+      // const chatExists = state.chats.find(
+      //   chat => chat.withUser.id === params.userId
+      // );
+      // if (!chatExists) {
+      //   dispatch("fetchChats");
+      // }
+    // });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
     const isMine = message.fromUser.id === rootState.auth.user.id;
@@ -353,8 +356,13 @@ mutations.fetchChatsReset = state => {
   }
 };
 
-mutations.fetchChatsComplete = state => {
-  state.chats = [...state.chats, ...state._fetchChatsResult];
+//if forceUpdate == true then do chat updating else add chats to existing
+mutations.fetchChatsComplete = (state, forceUpdate) => {
+  if (forceUpdate) {
+    state.chats = [...state._fetchChatsResult];
+  } else {
+    state.chats = [...state.chats, ...state._fetchChatsResult];
+  }
   if (state._fetchChatsResult.length < CHATS_LIMIT) {
     state.allDataReceived = true;
   } else {
@@ -362,9 +370,9 @@ mutations.fetchChatsComplete = state => {
   }
 };
 
-actions.fetchChats = ({ commit, dispatch, state }) => {
-  return dispatch("_fetchChats", state.offset).then(response => {
-    commit("fetchChatsComplete", response);
+actions.fetchChats = ({ commit, dispatch, state }, forceUpdate) => {
+  return dispatch("_fetchChats", state.offset).then(() => {
+    commit("fetchChatsComplete", forceUpdate);
   });
 };
 

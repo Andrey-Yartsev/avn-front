@@ -297,7 +297,7 @@ export default {
   created() {
     this.$store.commit("chat/resetChats");
     this.$store.commit("chat/messages", []);
-    this.$store.dispatch("chat/fetchChats").then(() => {
+    this.$store.dispatch("chat/fetchChats", true).then(() => {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();

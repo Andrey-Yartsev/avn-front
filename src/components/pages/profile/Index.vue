@@ -457,22 +457,24 @@ export default {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
-        this.$store.dispatch("chat/sendMessage", {
-          userId: this.profile.id,
-          data: {
-            price: 0,
-            text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
-              "{SNAPCHAT}",
-              this.mysnapchat
-            )
-          }
-        });
-
         this.$store
-          .dispatch(`premiumLinks/activate`, { id: this.snapchat.id })
-          .then(r => {
-            console.log(r);
-            this.$router.push(`/chat/${this.profile.id}`);
+          .dispatch("chat/sendMessage", {
+            userId: this.profile.id,
+            data: {
+              price: 0,
+              text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
+                "{SNAPCHAT}",
+                this.mysnapchat
+              )
+            }
+          })
+          .then(() => {
+            this.$store
+              .dispatch(`premiumLinks/activate`, { id: this.snapchat.id })
+              .then(() => {
+                // console.log(r);
+                this.$router.push(`/chat/${this.profile.id}`);
+              });
           });
       }
     },

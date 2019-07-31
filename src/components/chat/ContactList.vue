@@ -115,7 +115,7 @@ export default {
       return tmp.textContent || tmp.innerText || "";
     },
     infinityScrollGetDataMethod() {
-      this.$store.dispatch("chat/fetchChats");
+      this.$store.dispatch("chat/fetchChats", false);
     },
     psScroll() {
       this.scrollHandler();
