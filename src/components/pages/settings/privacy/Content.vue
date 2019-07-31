@@ -120,7 +120,6 @@ w<template>
       -->
       <div
         class="form-title tweet-posts-block border-top"
-        :class="{ disabled: !localUser.isTwitterConnected }"
       >
         <div class="inner">
           <span class="semi-transparent">
@@ -129,12 +128,15 @@ w<template>
               This can be changed for each individual post later
             </p>
           </span>
-          <label class="toggle-element">
+          <label class="toggle-element"
+            :class="{ disabled: !localUser.isTwitterConnected }"
+          >
             <input
               type="checkbox"
               name="isPostsTweets"
               value="true"
               v-model="localUser.isPostsTweets"
+              :disabled="!localUser.isTwitterConnected"
             />
             <span class="toggle-element_switcher"></span>
           </label>
