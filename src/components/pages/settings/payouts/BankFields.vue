@@ -26,6 +26,7 @@
           :disabled="!!v.onlyRead"
           v-mask="v.inputMaskRegex ? v.inputMaskRegex : ''"
           :placeholder="v.inputMaskPlaceholder ? v.inputMaskPlaceholder : ''"
+          maxlength="20"
         />
         <span class="select-wrapper" v-else>
           <select
