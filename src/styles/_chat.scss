@@ -1105,6 +1105,7 @@
     > p {
       padding-bottom: 0;
       @include ellipsis;
+      height: 20px;
     }
 
     span.emoji-inner {
