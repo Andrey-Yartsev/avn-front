@@ -282,7 +282,7 @@
                           type="text"
                           size="8"
                           minlength="3"
-                          maxlength="4"
+                          maxlength="3"
                           data-securionpay="cvc"
                           v-validate="'required|numeric'"
                           data-vv-validate-on="blur"
