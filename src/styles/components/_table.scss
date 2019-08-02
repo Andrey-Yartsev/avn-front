@@ -205,6 +205,18 @@
           max-width: calc(60.5% - 58px);
           padding-left: 42px;
         }
+
+        &_purchases {
+          flex: 0 1 calc(63% - 50px);
+          padding-left: 15px;
+          max-width: calc(63% - 50px);
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            flex: 0 1 calc(60.5% - 100px);
+            max-width: calc(60.5% - 100px);
+            padding-left: 42px;
+          }
+        }
       }
 
       &.status {
@@ -213,6 +225,17 @@
         margin-left: auto;
         flex: 0 0 28px;
         max-width: 28px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          margin-right: 20px;
+        }
+      }
+
+      &.product {
+        justify-content: center;
+        margin-right: 5px;
+        flex: 0 0 100px;
+        max-width: 100px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-right: 20px;

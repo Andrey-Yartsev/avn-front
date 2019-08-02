@@ -611,6 +611,16 @@
 }
 
 
+.payments-wrapper {
+
+  &_gap-over {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-top: 3px;
+    }
+  }
+}
+
 .payments-system {
   justify-content: space-between;
 

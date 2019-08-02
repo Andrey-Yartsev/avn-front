@@ -1,9 +1,9 @@
 <template>
   <div class="payments-statements">
     <div class="paymentsStatementsView">
-      <div class="payments-wrapper">
+      <div class="payments-wrapper payments-wrapper_gap-over">
         <div
-          class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+          class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
         >
           <div class="bg-gradient__shadow bg-gradient__shadow_mob">
             <div class="inner">
@@ -18,9 +18,9 @@
               >
                 Product
               </div>
-              <div class="user table__cell">User</div>
+              <div class="user user_purchases table__cell">User</div>
               <div
-                class="price table__cell table__cell_selected  table__cell_align table__cell_align-hor-c"
+                class="amount table__cell table__cell_selected  table__cell_align table__cell_align-hor-c"
               >
                 Price
               </div>
@@ -47,11 +47,11 @@
                     >
                       <span class="product">{{ v.title }}</span>
                     </div>
-                    <div class="user table__cell">
+                    <div class="user user_purchases table__cell">
                       <router-link
                         :to="'/' + v.userId"
                         target="_blank"
-                        class="userview-block payment-user-wrapper"
+                        class="payment-user-wrapper"
                       >
                         <!-- <span class="avatar avatar_sm">
                           <span class="avatar__img">
@@ -61,12 +61,12 @@
                             />
                           </span>
                         </span> -->
-                        <span class="name">{{ v.userId }}</span>
+                        <span class="user-login reset-ml">{{ v.userId }}</span>
                         <!-- <span class="user-login reset-ml">{{ v.userId }}</span> -->
                       </router-link>
                     </div>
                     <div
-                      class="price table__cell table__cell_selected table__cell_align table__cell_align-hor-c table__cell_align-vert-c"
+                      class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c table__cell_align-vert-c"
                     >
                       ${{ v.price }}
                     </div>
