@@ -190,6 +190,11 @@ export default {
     showLikesModal() {
       if (this.post.favoritesCount === 0) return;
 
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
+
       this.$store.dispatch("modal/show", {
         name: "postLikes",
         data: {
