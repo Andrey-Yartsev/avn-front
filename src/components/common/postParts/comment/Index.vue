@@ -32,8 +32,9 @@
       <div class="comment-footer" v-if="full">
         <time class="timestamp">{{ dateTime }}</time>
         <span v-if="comment.likesCount" class="likes-count"
-          >{{ comment.likesCount }} likes</span
-        >
+          >{{ comment.likesCount }}
+          {{ comment.likesCount > 1 ? "likes" : "like" }}
+        </span>
         <button
           type="button"
           class="post-option btn-reply"
