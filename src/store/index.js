@@ -52,6 +52,7 @@ import stats from "@/store/modules/stats";
 import backRouter from "@/store/modules/backRouter";
 import postLikes from "@/store/modules/postLikes";
 import awards from "@/store/modules/awards";
+import products from "@/store/modules/products";
 
 Vue.use(Vuex);
 
@@ -109,7 +110,8 @@ const store = new Vuex.Store({
     premiumLinks,
     backRouter,
     postLikes,
-    awards
+    awards,
+    products
   }
 });
 

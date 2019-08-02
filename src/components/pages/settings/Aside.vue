@@ -216,6 +216,10 @@ export default {
           title: "Premium Links"
         },
         {
+          name: "products",
+          title: "My purchases"
+        },
+        {
           name: "payouts",
           title: "Payouts"
         },
