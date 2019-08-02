@@ -25,13 +25,13 @@
       </router-link>
       <template v-else>
         <span class="data-value">{{ profile.followersCount }}</span>
-        <span class="data-label">Followers</span>
+        <span class="data-label">{{ profile.followersCount > 1 ? 'Followers' : 'Follower' }}</span>
       </template>
     </div>
     <div class="item" v-if="showLikes">
       <router-link to="/likes" class="profile-data__link">
         <span class="data-value">{{ profile.favoritesCount }}</span>
-        <span class="data-label">Likes</span>
+        <span class="data-label">{{ profile.favoritesCount > 1 ? 'Likes' : 'Like' }}</span>
       </router-link>
     </div>
   </div>
