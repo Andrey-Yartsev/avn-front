@@ -634,6 +634,10 @@
           margin-bottom: 4px;
         }
       }
+
+      &_comments {
+        pointer-events: none;
+      }
     }
 
     &__name {
