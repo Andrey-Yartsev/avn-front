@@ -74,12 +74,6 @@
             ></span>
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
-          <span
-            class="explore-media__name"
-            v-if="!shouldBePoster && from !== 'profile/home'"
-          >
-            <span class="name">{{ post.author.name }}</span>
-          </span>
           <div
             class="video-placeholder icn-item"
             v-if="page === 'all' && shouldBePoster"
@@ -101,6 +95,13 @@
           </div>
         </template>
       </figure>
+    </a>
+    <a
+      :href="'/' + post.author.username"
+      class="explore-media__name"
+      v-if="!shouldBePoster && from !== 'profile/home'"
+    >
+      <span class="name">{{ post.author.name }}</span>
     </a>
     <template v-if="$mq === 'desktop' && !shouldBePoster">
       <span
