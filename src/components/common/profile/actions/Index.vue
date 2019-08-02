@@ -204,7 +204,7 @@ export default {
     openTip() {
       if (!this.user) {
         this.$store.commit("profile/home/setOnPageAction", "openTip");
-        this.$store.dispatch("modal/show");
+        this.$store.dispatch("modal/show", { name: "signup" });
         return;
       }
       this.showTip = true;
