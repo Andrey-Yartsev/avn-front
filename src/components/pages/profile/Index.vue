@@ -1,6 +1,6 @@
 <template>
   <div class="loader-container loader-container_center" v-if="loading">
-    <Loader :fullscreen="false" text="" :small="true" />
+    <Loader :fullscreen="false" text :small="true" />
   </div>
   <div class="special-container" v-else>
     <router-link
@@ -41,9 +41,8 @@
                 v-if="profile.about.length > collapseLimit"
                 href="#"
                 @click.prevent="collapsed = !collapsed"
+                >{{ collapsed ? "Read more" : "Collapse" }}</a
               >
-                {{ collapsed ? "Read more" : "Collapse" }}
-              </a>
             </span>
           </p>
           <a
@@ -54,24 +53,25 @@
             rel="nofollow"
             >twitter.com/{{ profile.twitterUsername }}</a
           >
-          <div
-            class="profile-offer"
-            v-if="!isOwner(this.profile.id) && snapchat"
-          >
+          <div class="profile-offer" v-if="showProfileOffer">
             <button
               class="btn border alt btn_fix-width-lg"
               @click="buySnapchat"
-              v-if="snapchat.isPaid === false"
+              v-if="snapchat && snapchat.isPaid === false"
             >
               Premium Snapchat ${{ snapchat.price }}
             </button>
-            <div class="profile-offer__chat" v-if="snapchat.isPaid === true">
+            <div
+              class="profile-offer__chat"
+              v-if="snapchat && snapchat.isPaid === true"
+            >
               <div class="user-login reset-ml">
-                Snapchat: <span class="name">{{ snapchat.content }}</span>
+                Snapchat:
+                <span class="name">{{ snapchat.content }}</span>
               </div>
               <div
                 class="profile-offer__form"
-                v-if="snapchat.isCompleted === false"
+                v-if="snapchat && snapchat.isCompleted === false"
               >
                 <input
                   type="text"
@@ -307,7 +307,16 @@ export default {
       return PostSmall;
     },
     snapchat() {
+      //if user has not a snapchat an empty array is coming from server
+      if (Array.isArray(this.profile.snapchat)) {
+        return this.profile.snapchat.length > 0
+          ? this.profile.snapchat[0]
+          : null;
+      }
       return this.profile.snapchat;
+    },
+    showProfileOffer() {
+      return this.snapchat && !this.isOwner(this.profile.id);
     }
   },
   watch: {
@@ -502,6 +511,7 @@ export default {
     this.footerScrollAction();
     window.addEventListener("scroll", this.scrollAction, true);
     document.title = this.profile.name + " | AVN Stars";
+    window.snapchat = this.snapchat;
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.scrollAction, true);
