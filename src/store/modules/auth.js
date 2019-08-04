@@ -168,6 +168,16 @@ const mutations = {
 
   setOtpAuth(state, flag) {
     state.otpAuth = flag;
+  },
+  incrementFollowingCount() {
+    if (state.user) {
+      state.user.followingCount++;
+    }
+  },
+  decrementFollowingCount() {
+    if (state.user) {
+      state.user.followingCount--;
+    }
   }
 };
 

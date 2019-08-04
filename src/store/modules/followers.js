@@ -77,6 +77,7 @@ actions.follow = ({ commit, dispatch }, userId) => {
       userId,
       data: { followedBy: true }
     });
+    commit("auth/incrementFollowingCount", null, { root: true });
   });
 };
 
@@ -86,6 +87,7 @@ actions.unfollow = ({ commit, dispatch }, userId) => {
       userId,
       data: { followedBy: false }
     });
+    commit("auth/decrementFollowingCount", null, { root: true });
   });
 };
 
