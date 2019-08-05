@@ -8,7 +8,7 @@
           <div class="bg-gradient__shadow bg-gradient__shadow_mob">
             <div class="inner">
               <span class="semi-transparent">
-                My Purchases
+                Products
               </span>
             </div>
             <div class="table-header payments-table-header">
@@ -49,20 +49,22 @@
                     </div>
                     <div class="user user_purchases table__cell">
                       <router-link
-                        :to="'/' + v.userId"
+                        :to="'/' + v.productOwner.username"
                         target="_blank"
-                        class="payment-user-wrapper"
+                        class="userview-block payment-user-wrapper"
                       >
-                        <!-- <span class="avatar avatar_sm">
+                        <span class="avatar avatar_sm">
                           <span class="avatar__img">
                             <img
-                              :src="v.userTo.avatar"
-                              v-if="v.userTo.avatar"
+                              :src="v.productOwner.avatar"
+                              v-if="v.productOwner.avatar"
                             />
                           </span>
-                        </span> -->
-                        <span class="user-login reset-ml">{{ v.userId }}</span>
-                        <!-- <span class="user-login reset-ml">{{ v.userId }}</span> -->
+                        </span>
+                        <span class="name">{{ v.productOwner.name }}</span>
+                        <span class="user-login reset-ml">{{
+                          v.productOwner.username
+                        }}</span>
                       </router-link>
                     </div>
                     <div
