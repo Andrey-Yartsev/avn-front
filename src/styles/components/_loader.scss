@@ -87,10 +87,20 @@
     &.small {
 
       .loader-text {
-        padding-top: 44px;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
 
         &:after {
-          top: 20px;
+          margin-bottom: 5px;
+          order: -1;
+          position: relative;
+          transform: translate(0, 0);
+          top: auto;
+          left: auto;
+          animation: lds-dual-ring-inline 1.2s linear infinite;
         }
       }
     }
@@ -257,6 +267,7 @@
     height: 88px;
     position: relative;
     text-align: center;
+    padding: 9px 0 8px;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -286,7 +297,6 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         line-height: 18px;
         font-weight: 700;
-        padding-left: 74px;
       }
     }
 
@@ -295,21 +305,21 @@
       &.small {
 
         .loader-text {
-          padding-top: 65px;
 
           @include media-breakpoint-up($desktop-breakpoint) {
             padding-top: 0;
+            flex-direction: row;
+            justify-content: flex-start;
           }
 
           &:after {
             width: 50px;
             height: 50px;
-            top: 33px;
+            margin-bottom: 7px;
 
             @include media-breakpoint-up($desktop-breakpoint) {
-              transform: translate(0, -50%);
-              left: 34px;
-              top: 9px;
+              margin-bottom: 0;
+              margin-right: 15px;
             }
           }
         }
