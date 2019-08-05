@@ -76,7 +76,6 @@ const storeRequest = (
             commit(prefix + "Requested");
             return;
           }
-
           if (localError) {
             commit(prefix + "Error", r.error);
           } else {

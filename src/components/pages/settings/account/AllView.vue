@@ -173,34 +173,15 @@
         <span class="semi-transparent">{{ user.username }}</span>
       </div>
     </div>
-    <div class="border-top shadow-block delete-account-block">
-      <div class="container">
-        <div class="form-group form-group_with-label delete-account">
-          <div class="input-help">
-            <div class="input-help__title">
-              <button
-                type="button"
-                class="delete-account-btn"
-                @click="deleteAccount"
-              >
-                Delete account
-                <span class="user-login"
-                  ><span class="username">{{ user.username }}</span>
-                </span>
-              </button>
-            </div>
-            Your account and all associated info will be permanently deleted
-            from our servers!
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <DeleteRestore />
   </div>
 </template>
 
 <script>
 import ConnectTwitter from "../ConnectTwitter";
 import Common from "../common";
+import DeleteRestore from "../DeleteRestore";
 
 export default {
   name: "AccountSettingsAllView",
@@ -217,7 +198,8 @@ export default {
   },
 
   components: {
-    ConnectTwitter
+    ConnectTwitter,
+    DeleteRestore
   },
 
   computed: {
@@ -273,22 +255,6 @@ export default {
         .catch(() => {
           this.passwordSaving = false;
         });
-    },
-    deleteAccount() {
-      this.$store.dispatch("modal/show", {
-        name: "confirm",
-        data: {
-          title:
-            "Your account and all associated info will be permanently deleted from our servers!",
-          success: () => {
-            this.$store
-              .dispatch("user/deleteAccount", this.$store.state.auth.token)
-              .then(() => {
-                this.$router.push("/logout");
-              });
-          }
-        }
-      });
     },
     resendEmail() {
       this.$store.dispatch("emails/resend", this.localUser.email).then(() => {

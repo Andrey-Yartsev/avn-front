@@ -49,6 +49,21 @@ export default {
     },
     _clone(o) {
       return JSON.parse(JSON.stringify(o));
+    },
+    updateProps(props) {
+      this.$store
+        .dispatch("user/update", {
+          ...this.localUser,
+          ...props
+        })
+        .then(r => {
+          this.replaceProps(r);
+        });
+    },
+    replaceProps(r) {
+      this.$store.dispatch("auth/extendUser", r);
+      this.$store.dispatch("profile/home/extend", r);
+      this.localUser = { ...this.localUser, ...r };
     }
   }
 };

@@ -2,7 +2,13 @@ import { createRequestAction } from "../utils/storeRequest";
 
 const state = {};
 
-const actions = {};
+const actions = {
+  restoreAccount({ dispatch }) {
+    return dispatch("update", {
+      deleteRequested: false
+    });
+  }
+};
 
 const mutations = {};
 
@@ -137,7 +143,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "deleteAccount",
+  prefix: "_deleteAccount",
   apiPath: `users/me`,
   state,
   mutations,
@@ -145,8 +151,25 @@ createRequestAction({
   options: {
     method: "DELETE"
   },
+  throw400: true,
+  localError: true,
   paramsToPath: function(params, path) {
     return path.replace(/{token}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "update",
+  apiPath: "users/me",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 

@@ -119,73 +119,81 @@
           </div>
         </div>
       </div>
-      <div class="toggle-wrapper border-top option-earn-money">
-        <label class="toggle-label semi-transparent" for="is_paid_subscription">
-          I want to earn money using AVN Stars
-        </label>
-        <label class="toggle-element">
-          <input
-            type="checkbox"
-            id="is_paid_subscription"
-            name="isWantEarn"
-            @change="changeWantEarn"
-            v-model="localUser.isWantEarn"
-          />
-          <span class="toggle-element_switcher"></span>
-        </label>
-      </div>
-      <div
-        class="shadow-block"
-        id="is_paid_subscription__wrapper"
-        v-if="localUser.isWantEarn"
-      >
-        <div class="container">
-          <div class="form-group form-group_with-label">
-            <label
-              class="form-group-inner subscription"
-              :class="{
-                disabled: !user.canEarn
-              }"
-            >
-              <span class="label">Subscription</span>
-              <span class="subscription__field field-symbol-currency">
-                <span
-                  class="form-field"
-                  :class="{
-                    'field-invalid': fieldError('subscribePrice')
-                  }"
-                >
-                  <span class="subscription__per-month">per month</span>
-                  <input
-                    class="field-gap_currency field-gap_timeunit"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    name="subscribePrice"
-                    v-model="localUser.subscribePrice"
-                    :disabled="!user.canEarn"
-                    v-validate="'subscription-price'"
-                  />
-                </span>
-                <div class="error-info" v-if="fieldError('subscribePrice')">
-                  {{ fieldError("subscribePrice") }}
-                </div>
-              </span>
-            </label>
 
-            <div class="form-group-inner subscription" v-if="!user.canEarn">
-              <span class="label" v-if="$mq === 'desktop'"></span>
-              <span class="subscription-desc">
-                Before setting your monthly subscription price (or to be able to
-                accept tips), you must first
-                <router-link to="/settings/payouts"
-                  >add a bank account</router-link
-                >
-              </span>
+      <template v-if="!user.deleteRequested">
+        <div class="toggle-wrapper border-top option-earn-money">
+          <label
+            class="toggle-label semi-transparent"
+            for="is_paid_subscription"
+          >
+            I want to earn money using AVN Stars
+          </label>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              id="is_paid_subscription"
+              name="isWantEarn"
+              @change="changeWantEarn"
+              v-model="localUser.isWantEarn"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+        <div
+          class="shadow-block"
+          id="is_paid_subscription__wrapper"
+          v-if="localUser.isWantEarn"
+        >
+          <div class="container">
+            <div class="form-group form-group_with-label">
+              <label
+                class="form-group-inner subscription"
+                :class="{
+                  disabled: !user.canEarn
+                }"
+              >
+                <span class="label">Subscription</span>
+                <span class="subscription__field field-symbol-currency">
+                  <span
+                    class="form-field"
+                    :class="{
+                      'field-invalid': fieldError('subscribePrice')
+                    }"
+                  >
+                    <span class="subscription__per-month">per month</span>
+                    <input
+                      class="field-gap_currency field-gap_timeunit"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      name="subscribePrice"
+                      v-model="localUser.subscribePrice"
+                      :disabled="!user.canEarn"
+                      v-validate="'subscription-price'"
+                    />
+                  </span>
+                  <div class="error-info" v-if="fieldError('subscribePrice')">
+                    {{ fieldError("subscribePrice") }}
+                  </div>
+                </span>
+              </label>
+
+              <div class="form-group-inner subscription" v-if="!user.canEarn">
+                <span class="label" v-if="$mq === 'desktop'"></span>
+                <span class="subscription-desc">
+                  Before setting your monthly subscription price (or to be able
+                  to accept tips), you must first
+                  <router-link to="/settings/payouts"
+                    >add a bank account</router-link
+                  >
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </template>
+      <DeleteRestore v-else />
+
       <div class="form-title border-top">
         <div class="inner">
           <span class="semi-transparent">
@@ -244,6 +252,7 @@ import Common from "../common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import moment from "moment-timezone";
 import Form from "@/mixins/form";
+import DeleteRestore from "../DeleteRestore";
 
 export default {
   name: "ProfileSettingsContent",
@@ -252,7 +261,8 @@ export default {
 
   components: {
     ColorSelect,
-    TextareaAutosize
+    TextareaAutosize,
+    DeleteRestore
   },
 
   methods: {
