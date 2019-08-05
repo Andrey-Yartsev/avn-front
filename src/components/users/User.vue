@@ -25,8 +25,8 @@
             <div class="block-indicator" v-if="profile.isBlocked">
               <span class="icn-block icn-item"></span>
             </div>
-            <span class="subscribed" v-if="profile.subscribedOn"
-              >subscribed</span
+            <span class="followme" v-if="profile.subscribedOn"
+              ><span class="followme__txt">subscribed</span></span
             >
           </div>
           <span class="user-login reset-ml">
