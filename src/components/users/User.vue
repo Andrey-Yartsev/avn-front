@@ -25,6 +25,9 @@
             <div class="block-indicator" v-if="profile.isBlocked">
               <span class="icn-block icn-item"></span>
             </div>
+            <span class="subscribed" v-if="profile.subscribedBy"
+              >subscribed</span
+            >
           </div>
           <span class="user-login reset-ml">
             <router-link :to="'/' + profile.username">{{
