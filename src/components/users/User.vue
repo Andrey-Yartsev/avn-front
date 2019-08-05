@@ -25,7 +25,7 @@
             <div class="block-indicator" v-if="profile.isBlocked">
               <span class="icn-block icn-item"></span>
             </div>
-            <span class="subscribed" v-if="profile.subscribedBy"
+            <span class="subscribed" v-if="profile.subscribedOn"
               >subscribed</span
             >
           </div>
