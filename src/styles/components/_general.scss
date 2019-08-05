@@ -378,11 +378,19 @@ video {
   }
 }
 
-.ps__rail-y {
-  z-index: 2;
-}
-
 .ps {
+
+  &.ps--active-x {
+
+    .ps__rail-x {
+      height: 4px;
+      background-color: transparent;
+    }
+
+    .ps__thumb-x {
+      bottom: 0;
+    }
+  }
 
   &.ps--active-y {
 
@@ -402,6 +410,13 @@ video {
 
     .ps__thumb-y {
       width: 4px;
+    }
+  }
+
+  &__rail {
+
+    &-y {
+      z-index: 2;
     }
   }
 }
