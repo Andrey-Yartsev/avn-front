@@ -162,6 +162,7 @@ export default {
   },
   methods: {
     init() {
+      this.resetInfinityScroll();
       this.$store.commit("followers/reset");
       this.getPosts();
     },

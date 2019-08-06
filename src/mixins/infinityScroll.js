@@ -52,6 +52,9 @@ export default {
           this.infinityScrollGetDataMethod();
         }
       }, 100);
+    },
+    resetInfinityScroll() {
+      this.lastYOffset = 0;
     }
   }
 };
