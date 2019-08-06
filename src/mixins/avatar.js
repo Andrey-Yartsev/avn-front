@@ -34,6 +34,7 @@ export default {
     },
     resetAvatarPreview() {
       this.avatarPreview = null;
+      this.$refs.avatar.value = "";
     },
     saveAvatar() {
       return new Promise(accept => {
@@ -65,9 +66,13 @@ export default {
     removeAvatar() {
       this.avatarRemoved = true;
       this.avatarPreview = "";
-      this.$store.dispatch("profile/extend", {
-        avatar: ""
-      });
+      this.$store
+        .dispatch("profile/extend", {
+          avatar: ""
+        })
+        .then(() => {
+          this.resetAvatarPreview();
+        });
     }
   }
 };

@@ -63,9 +63,13 @@ export default {
     removeBg() {
       this.bgRemoved = true;
       this.bgPreview = "";
-      this.$store.dispatch("profile/extend", {
-        header: ""
-      });
+      this.$store
+        .dispatch("profile/extend", {
+          header: ""
+        })
+        .then(() => {
+          this.resetBgPreview();
+        });
     }
   }
 };
