@@ -431,7 +431,6 @@ export default {
 
   created() {
     this.$store.dispatch("chat/fetchAnyChats");
-    this.$store.dispatch("chat/fetchChats", true);
     this.search();
   },
 

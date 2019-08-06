@@ -28,7 +28,8 @@
           <div class="chatMessagesCollectionView">
             <div class="msg-no-chat">
               <div class="msg-no-chat__msg">
-                Choose one of your existing message<br />or start
+                Choose one of your existing message
+                <br />or start
               </div>
               <span
                 class="btn border md alt btn-start"
@@ -41,7 +42,7 @@
       </div>
       <template v-else>
         <div class="chatCollectionContentWrapper" v-if="activeUserLoading">
-          <Loader :fullscreen="false" text="" :small="true" />
+          <Loader :fullscreen="false" text :small="true" />
         </div>
         <template v-else>
           <div
@@ -64,9 +65,9 @@
                 </span>
               </router-link>
               <div class="username-group">
-                <router-link :to="'/' + activeUser.username" class="name">
-                  {{ activeUser.name }}
-                </router-link>
+                <router-link :to="'/' + activeUser.username" class="name">{{
+                  activeUser.name
+                }}</router-link>
                 <span
                   class="verified-user icn-item"
                   v-if="activeUser.isVerified"
@@ -160,8 +161,10 @@ export default {
     chats() {
       let chats = this.$store.state.chat.chats.map(v => {
         const copy = { ...v };
-        if (Object.keys(copy.lastMessage).length === 0) {
-          copy.lastMessage = null;
+        if (copy.lastMessage) {
+          if (Object.keys(copy.lastMessage).length === 0) {
+            copy.lastMessage = null;
+          }
         }
         if (this.activeUserId === copy.id) {
           copy.active = true;
@@ -269,11 +272,13 @@ export default {
           .dispatch("chat/fetchActiveUser", this.activeUserId)
           .then(user => {
             this.virtualChat = {
-              lastMessage: null,
               id: user.id,
               withUser: user,
+              unreadMessagesCount: 0,
+              lastMessage: null,
               changedAt: new Date()
             };
+            this.$store.commit("chat/addNewChat", this.virtualChat);
           });
       }
     },

@@ -124,7 +124,7 @@ const actions = {
         hasHistory: true,
         lastMessage: message,
         mediaCount: message.mediaCount,
-        unreadMessageCount: 0,
+        unreadMessagesCount: 0,
         id: withUser.id,
         withUser
       });
@@ -150,6 +150,7 @@ const actions = {
       } else {
         if (state.activeUserId === withUser.id) {
           commit("addMessage", message);
+          // dispatch("markChatAsViewed", withUser.id);
         }
       }
     }
@@ -201,22 +202,32 @@ const actions = {
       commit("removeChat", userId);
     });
   },
-  markChatAsViewed({ commit, dispatch, state, rootState }, userId) {
-    commit("markChatAsViewed", userId);
-
+  markChatAsViewed({ commit, dispatch }, userId) {
+    commit("resetUnreadMessagesCount", userId);
+    dispatch("updateHasMessages");
+  },
+  updateHasMessages({ dispatch, state, rootState }) {
     // if no new messages, change current user hasMessages flag
-    let n = 0;
-    state.chats.forEach(chat => {
-      n += chat.unreadMessagesCount;
-    });
-    if (n === 0) {
+    const messageCount = state.chats.reduce(
+      (sum, chat) => sum + chat.unreadMessagesCount,
+      0
+    );
+    console.log(`updateHasMessages: ${messageCount}`);
+    if (messageCount === 0) {
       if (rootState.auth.user.hasMessages) {
         dispatch("auth/extendUser", { hasMessages: false }, { root: true });
       }
+    } else {
+      // if (!rootState.auth.user.hasMessages) {
+      //   dispatch("auth/extendUser", { hasMessages: false }, { root: true });
+      // }
     }
   },
   incrementUnreadMessagesCount({ commit }, withUserId) {
     commit("incrementUnreadMessagesCount", withUserId);
+  },
+  resetUnreadMessagesCount({ commit }, withUserId) {
+    commit("resetUnreadMessagesCount", withUserId);
   },
   updateChatLastMessage({ commit }, { message, withUserId, isMine }) {
     commit("updateChatLastMessage", {
@@ -283,6 +294,14 @@ const mutations = {
       this._vm
     );
   },
+  resetUnreadMessagesCount(state, userId) {
+    arrayUtils.modifyByCondition(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => (chat.unreadMessagesCount = 0),
+      this._vm
+    );
+  },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
     //Search chat with User from message and update lastMessage
     arrayUtils.updateByCondition(
@@ -295,14 +314,6 @@ const mutations = {
         }
         return chat;
       },
-      this._vm
-    );
-  },
-  markChatAsViewed(state, userId) {
-    arrayUtils.modifyByCondition(
-      state.chats,
-      chat => chat.withUser.id === userId,
-      chat => (chat.unreadMessagesCount = 0),
       this._vm
     );
   },
@@ -332,6 +343,7 @@ const mutations = {
   },
   addNewChat(state, chat) {
     state.chats = [chat, ...state.chats];
+    state.offset++;
   },
   setActiveWindow(state, isActive) {
     state.windowIsActive = isActive;

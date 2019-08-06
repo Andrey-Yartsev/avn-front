@@ -29,9 +29,9 @@
               class="verified-user icn-item"
               v-if="v.withUser.isVerified"
             ></span>
-            <span class="user-login"
-              ><span class="username">{{ v.withUser.username }}</span></span
-            >
+            <span class="user-login">
+              <span class="username">{{ v.withUser.username }}</span>
+            </span>
             <div class="timestamp" v-if="v.lastMessage">
               {{ messageTime(v.lastMessage) }}
             </div>
@@ -39,9 +39,9 @@
           <div class="chatView__body">
             <p class="typing">
               <template v-if="v.lastMessage">
-                <span v-if="v.lastMessage.isTips" class="type-msg-icn"
-                  ><span class="icn-tips icn-item"></span
-                ></span>
+                <span v-if="v.lastMessage.isTips" class="type-msg-icn">
+                  <span class="icn-tips icn-item"></span>
+                </span>
                 <span class="type-msg-icn" v-if="!v.lastMessage.isFree">
                   <span class="icn-locked icn-item"></span>
                 </span>

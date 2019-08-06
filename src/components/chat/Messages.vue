@@ -239,8 +239,9 @@ export default {
             this.$nextTick(() => {
               this.scrollToLast();
             });
+            this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
           } else {
-            //if we are not at bottom, increment unreadMessageCount
+            //if we are not at bottom, increment unreadMessagesCount
             this.$store.dispatch(
               "chat/incrementUnreadMessagesCount",
               this.withUser.id
