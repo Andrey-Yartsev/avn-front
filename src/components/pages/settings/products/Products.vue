@@ -114,20 +114,26 @@ export default {
     Loader
   },
   computed: {
+    store() {
+      return this.$store.state.products;
+    },
     products() {
       return this.$store.state.products.list;
     },
-    purchasesLoading() {
+    productsLoading() {
       return this.$store.state.products.loading;
     }
   },
   methods: {
     dt(date) {
       return moment(date).format("DD MMM");
+    },
+    infinityScrollGetDataMethod() {
+      this.$store.dispatch("products/fetch");
     }
   },
   created() {
-    this.$store.dispatch("products/fetch");
+    this.$store.dispatch("products/firstFetch");
   }
 };
 </script>
