@@ -370,6 +370,7 @@ import { goCcbill } from "@/utils/ccbill";
 import States from "@/components/pages/settings/payments/states";
 import Loader from "@/components/common/Loader";
 import { Validator } from "vee-validate";
+import creditCardType from "credit-card-type";
 
 Validator.extend("non-amex", {
   getMessage: () => "We are not supporting American Express cards",
@@ -543,7 +544,9 @@ export default {
               email: this.email,
               token: result.id,
               ccbillResponse: ccbres,
-              userinfo: this.userinfo
+              userinfo: this.userinfo,
+              cardLast4: this.cardNumber.substr(this.cardNumber.length - 4),
+              cardBrand: creditCardType(this.cardNumber)[0].type
             })
             .then(r => {
               if (r.success) {

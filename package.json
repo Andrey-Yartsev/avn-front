@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@sentry/browser": "^4.6.6",
+    "credit-card-type": "^8.2.0",
     "deepmerge": "^3.3.0",
     "dotenv": "^7.0.0",
     "fingerprintjs2": "^2.1.0",
