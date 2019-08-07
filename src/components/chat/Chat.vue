@@ -66,9 +66,9 @@
                 </span>
               </router-link>
               <div class="username-group">
-                <router-link :to="'/' + activeUser.username" class="name">{{
-                  activeUser.name
-                }}</router-link>
+                <router-link :to="'/' + activeUser.username" class="name">
+                  {{ activeUser.name }}
+                </router-link>
                 <span
                   class="verified-user icn-item"
                   v-if="activeUser.isVerified"
@@ -256,6 +256,9 @@ export default {
     fetchMessages() {
       this.$store.dispatch("chat/fetchMessages", this.activeUserId);
     },
+    fetchLastMessage() {
+      return this.$store.dispatch("chat/fetchLastMessage", this.activeUserId);
+    },
     mobileBack() {
       this.goTo("/chat");
     },
@@ -264,6 +267,7 @@ export default {
     },
     initVirtualChat() {
       if (!this.activeChat) {
+        const lastMessage = this.$store.state.chat.fetchLastMessageResult;
         const deletedUserChat = this.findDeletedUserChat(this.activeUserId);
         if (deletedUserChat) {
           this.virtualChat = { ...deletedUserChat };
@@ -276,7 +280,7 @@ export default {
               id: user.id,
               withUser: user,
               unreadMessagesCount: 0,
-              lastMessage: null,
+              lastMessage: lastMessage,
               changedAt: new Date()
             };
             this.$store.commit("chat/addNewChat", this.virtualChat);
@@ -307,7 +311,11 @@ export default {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.fetchMessages();
-        this.initVirtualChat();
+        if (!this.activeChat) {
+          this.fetchLastMessage().then(() => {
+            this.initVirtualChat();
+          });
+        }
       }
     });
     window.addEventListener("focus", this.windowFocus);

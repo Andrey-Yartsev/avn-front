@@ -498,6 +498,28 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "fetchLastMessage",
+  apiPath: "chats/{userId}/last-messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {}
+  },
+  defaultResultValue: [],
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  },
+  resultConvert: function(res) {
+    if (res.list && res.list.length > 0) {
+      return res.list[0];
+    }
+    return null;
+  }
+});
+
+createRequestAction({
   prefix: "_sendMessage",
   apiPath: "chats/{userId}/messages",
   state,
