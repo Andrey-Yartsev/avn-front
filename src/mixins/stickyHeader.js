@@ -34,10 +34,12 @@ export default {
           document.body.classList.add("scroll-top");
         }
         document.body.classList.remove("scroll-bottom");
-      } else {
-        document.body.classList.remove("scroll-top");
-        document.body.classList.add("scroll-bottom");
       }
+      //commented to fix shaking bug in mobile scrolling
+      // else {
+      //   document.body.classList.remove("scroll-top");
+      //   document.body.classList.add("scroll-bottom");
+      // }
       if (st <= 0) {
         document.body.classList.remove("scroll-bottom");
         document.body.classList.remove("scroll-top");
