@@ -13,7 +13,7 @@ export default {
     return items.filter(item => conditionAction(item));
   },
   modifyByCondition(items, conditionAction, modifyAction, vue) {
-    items = items.map((item, index) => {
+    items.map((item, index) => {
       if (conditionAction(item, index)) {
         modifyAction(item, index);
         vue.$set(items, index, item);
@@ -24,7 +24,7 @@ export default {
   },
   // updateAction have to return updated item
   updateByCondition(items, conditionAction, updateAction, vue) {
-    items = items.map((item, index) => {
+    items.map((item, index) => {
       if (conditionAction(item, index)) {
         item = updateAction(item, index);
         vue.$set(items, index, item);
@@ -41,5 +41,20 @@ export default {
       vue
     );
     return items;
+  },
+  mergeByCondition(items1, items2, condition, vue) {
+    let newItems = [];
+    items2.forEach(item2 => {
+      var index1 = items1.findIndex(item1 => {
+        return condition(item1, item2);
+      });
+      if (index1 >= 0) {
+        vue.$set(items1, index1, item2);
+      } else {
+        newItems.push(item2);
+      }
+    });
+
+    return [...items1, ...newItems];
   }
 };

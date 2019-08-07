@@ -287,7 +287,7 @@ const mutations = {
     state.isSecondScreen = isSecondScreen;
   },
   incrementUnreadMessagesCount(state, withUserId) {
-    arrayUtils.modifyByCondition(
+    state.chats = arrayUtils.modifyByCondition(
       state.chats,
       chat => chat.withUser.id === withUserId,
       chat => chat.unreadMessagesCount++,
@@ -295,7 +295,7 @@ const mutations = {
     );
   },
   resetUnreadMessagesCount(state, userId) {
-    arrayUtils.modifyByCondition(
+    state.chats = arrayUtils.modifyByCondition(
       state.chats,
       chat => chat.withUser.id === userId,
       chat => (chat.unreadMessagesCount = 0),
@@ -304,7 +304,7 @@ const mutations = {
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
     //Search chat with User from message and update lastMessage
-    arrayUtils.updateByCondition(
+    state.chats = arrayUtils.updateByCondition(
       state.chats,
       chat => chat.withUser.id === withUserId,
       chat => {
@@ -318,8 +318,7 @@ const mutations = {
     );
   },
   replaceMessage(state, message) {
-    // arrayUtils.replaceBy(state.messages, m => m.id === message.id, m => message);
-    arrayUtils.updateByCondition(
+    state.messages = arrayUtils.updateByCondition(
       state.messages,
       m => m.id === message.id,
       () => {
@@ -353,6 +352,24 @@ const mutations = {
   },
   addOldMessages(state) {
     state.messages = state.moreMessages.concat(state.messages);
+  },
+  //if forceUpdate == true then do chat updating else add chats to existing
+  fetchChatsComplete(state, forceUpdate) {
+    if (forceUpdate) {
+      state.chats = [...state._fetchChatsResult];
+    } else {
+      state.chats = arrayUtils.mergeByCondition(
+        state.chats,
+        state._fetchChatsResult,
+        (chat1, chat2) => chat1.id === chat2.id,
+        this._vm
+      );
+    }
+    if (state._fetchChatsResult.length < CHATS_LIMIT) {
+      state.allDataReceived = true;
+    } else {
+      state.offset += CHATS_LIMIT;
+    }
   }
 };
 
@@ -365,20 +382,6 @@ const fetchChatsInitState = {
 mutations.fetchChatsReset = state => {
   for (let k of Object.keys(fetchChatsInitState)) {
     state[k] = fetchChatsInitState[k];
-  }
-};
-
-//if forceUpdate == true then do chat updating else add chats to existing
-mutations.fetchChatsComplete = (state, forceUpdate) => {
-  if (forceUpdate) {
-    state.chats = [...state._fetchChatsResult];
-  } else {
-    state.chats = [...state.chats, ...state._fetchChatsResult];
-  }
-  if (state._fetchChatsResult.length < CHATS_LIMIT) {
-    state.allDataReceived = true;
-  } else {
-    state.offset += CHATS_LIMIT;
   }
 };
 
