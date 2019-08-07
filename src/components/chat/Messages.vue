@@ -214,11 +214,11 @@ export default {
       immediate: true,
       handler(loading) {
         if (!loading) {
-          setTimeout(() => {
+          this.$nextTick(() => {
             this.loaderHidden = true;
             this.initMobileScroll();
             this.scrollToLast();
-          }, 100);
+          });
         }
       }
     },
