@@ -137,7 +137,7 @@ export default {
       if (!isFloat(this.amount)) {
         return false;
       }
-      return this.amount >= this.limits.min && this.amount <= this.limits.max;
+      return validLimits(this.amount);
     },
     canSend() {
       if (this.amount) {
