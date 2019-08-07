@@ -107,7 +107,7 @@ export default {
       this.goTo("/chat/" + id);
     },
     messageTime(message) {
-      return fromNow(message.changedAt);
+      return fromNow(message.createdAt);
     },
     stripHtml(html) {
       const tmp = document.createElement("DIV");
