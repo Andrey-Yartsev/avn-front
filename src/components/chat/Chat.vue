@@ -41,10 +41,11 @@
         </div>
       </div>
       <template v-else>
-        <div class="chatCollectionContentWrapper" v-if="activeUserLoading">
+        <!-- <div class="chatCollectionContentWrapper" v-if="activeUserLoading">
           <Loader :fullscreen="false" text :small="true" />
-        </div>
-        <template v-else>
+        </div>-->
+        <!-- <template v-else> -->
+        <template>
           <div
             class="chatHeader chatHeader_add-shadow no-nav"
             v-if="activeUser"
