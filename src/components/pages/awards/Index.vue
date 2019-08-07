@@ -26,7 +26,7 @@
             <span class="label label_row">{{ v.title }}</span>
             <span class="form-group form-group_clear-gaps">
               <span class="form-field">
-                <UserSearchField
+                <input
                   type="text"
                   :placeholder="v.title"
                   v-model="data[v.id]"
