@@ -23,7 +23,7 @@
             error: fieldError('amount'),
             lg: $mq === 'desktop' && needLgClassName
           }"
-          v-validate="'tip-amount|tip-sum'"
+          v-validate="'tip-sum|tip-amount'"
         />
         <div
           class="tooltip tooltip_error-field"
@@ -32,9 +32,7 @@
           v-if="fieldError('amount')"
         >
           <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">
-            {{ fieldError("amount") }}
-          </div>
+          <div class="tooltip-inner">{{ fieldError("amount") }}</div>
         </div>
       </div>
     </div>
@@ -58,19 +56,22 @@ import Form from "@/mixins/form";
 import Store from "@/store";
 import { Validator } from "vee-validate";
 
+const tipsLimit = () => {
+  return Store.state.profile.home.profile.payments.tipsLimit;
+};
+
 const validLimits = amount => {
-  const limits = Store.state.init.data.payments.tipsLimit;
-  return amount >= limits.min && amount <= limits.max;
+  return amount
+    ? amount >= tipsLimit().min && amount <= tipsLimit().max
+    : false;
 };
 
 Validator.extend("tip-sum", {
-  getMessage: "min: $2, max: $200",
+  getMessage() {
+    return `min: $${tipsLimit().min}, max: $${tipsLimit().max}`;
+  },
   validate: value => {
-    const r = parseFloat(value);
-    if (r) {
-      return r >= 2 && r <= 200;
-    }
-    return false;
+    return validLimits(parseFloat(value));
   }
 });
 
@@ -127,7 +128,7 @@ export default {
       return this.$store.state.payment.pay.complete;
     },
     limits() {
-      return this.$store.state.init.data.payments.tipsLimit;
+      return this.$store.state.profile.home.profile.payments.tipsLimit;
     },
     isValid() {
       if (!this.amount) {
