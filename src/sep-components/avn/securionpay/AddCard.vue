@@ -256,7 +256,7 @@
                         v-validate="'required|card-date'"
                         data-vv-validate-on="blur"
                         name="expDate"
-                        placeholder="DD/MM"
+                        placeholder="MM/YY"
                         @input="expDateChanged"
                       />
                       <input
