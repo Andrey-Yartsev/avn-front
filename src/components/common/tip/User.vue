@@ -53,22 +53,20 @@
 
 <script>
 import Form from "@/mixins/form";
-import Store from "@/store";
+// import Store from "@/store";
 import { Validator } from "vee-validate";
 
-const tipsLimit = () => {
-  return Store.state.profile.home.profile.payments.tipsLimit;
-};
+// const tipsLimit = () => {
+//   return Store.state.profile.home.profile.payments.tipsLimit;
+// };
 
 const validLimits = amount => {
-  return amount
-    ? amount >= tipsLimit().min && amount <= tipsLimit().max
-    : false;
+  return amount ? amount >= 2 && amount <= 500 : false;
 };
 
 Validator.extend("tip-sum", {
   getMessage() {
-    return `min: $${tipsLimit().min}, max: $${tipsLimit().max}`;
+    return `min: $2, max: $500`;
   },
   validate: value => {
     return validLimits(parseFloat(value));
@@ -128,7 +126,7 @@ export default {
       return this.$store.state.payment.pay.complete;
     },
     limits() {
-      return this.$store.state.profile.home.profile.payments.tipsLimit;
+      return this.user.payments.tipsLimit;
     },
     isValid() {
       if (!this.amount) {
