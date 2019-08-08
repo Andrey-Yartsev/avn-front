@@ -8,7 +8,8 @@
         'btn_white btn_white-alfabg': needLgClassName
       }"
       @click="$emit('cancel')"
-    >Cancel</span>
+      >Cancel</span
+    >
     <div class="tip-amount-field form-group form-group_clear-gaps">
       <div class="form-field enabled-tooltip">
         <input
@@ -44,7 +45,9 @@
         lg: $mq === 'desktop' && needLgClassName,
         'btn_white btn_white-alfabg': needLgClassName
       }"
-    >Send tips</button>
+    >
+      Send tips
+    </button>
   </form>
 </template>
 
