@@ -67,6 +67,12 @@
           </div>
         </div>
       </div>
+      <div
+        class="chatMessageSending past-messages semi-transparent"
+        v-if="false"
+      >
+        Loading history...
+      </div>
     </component>
   </div>
 </template>
