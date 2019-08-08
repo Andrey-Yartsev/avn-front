@@ -7,81 +7,7 @@
       <router-link to="/logout" class="link-title">Log out</router-link>
     </div>
 
-    <div class="border-top email-block">
-      <div class="shadow-block">
-        <div class="container">
-          <div class="form-group form-group_with-label">
-            <label class="form-group-inner">
-              <span class="label">
-                <span class="for-verified" v-if="user.emailChecked"
-                  >Your email</span
-                >
-                <span class="for-unverified" v-else-if="!user.emailChecked"
-                  >Please confirm your email</span
-                >
-              </span>
-              <span
-                class="form-group form-group_clear-gaps"
-                :class="{
-                  'field-valid': user.emailChecked,
-                  'field-invalid no-border': !user.emailChecked
-                }"
-              >
-                <span class="form-field">
-                  <input
-                    class="input-email"
-                    name="email"
-                    v-model="localUser.email"
-                  />
-                </span>
-              </span>
-            </label>
-          </div>
-          <div
-            class="form-group-btn hidden-mobile email-confirm-block"
-            id="confirm-email-block"
-            v-if="$mq === 'desktop' && showSendEmailButton"
-          >
-            <button
-              type="button"
-              class="btn border btn_fix-width-lg btn-confirm-email"
-              @click="resendEmail"
-            >
-              {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
-            </button>
-          </div>
-          <!--
-            <div class="form-group hidden-mobile email-confirm-block hidden" id="change-email-block">
-              <div class="form-group-inner">
-                <span class="label"></span>
-                <button type="button" class="btn border btn_fix-width-lg btn-confirm-email">Save new email</button>
-              </div>
-            </div>
-            -->
-        </div>
-      </div>
-
-      <div
-        class="text-centered hidden-desktop email-confirm-block"
-        v-if="$mq === 'mobile' && showSendEmailButton"
-      >
-        <button
-          type="button"
-          class="btn lg border btn_fix-width-lg btn-confirm-email"
-          id="confirm-email-block-mobile"
-          @click="resendEmail"
-        >
-          {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
-        </button>
-        <!--
-          <button
-            type="button"
-            class="btn lg border btn_fix-width-lg btn-confirm-email hidden"
-            id="change-email-block-mobile"
-          >Save new email</button>
-          -->
-      </div>
-    </div>
+    <Email />
 
     <div class="border-top twitter-block">
       <ConnectTwitter @connected="twitterConnected" />
@@ -182,6 +108,7 @@
 import ConnectTwitter from "../ConnectTwitter";
 import Common from "../common";
 import DeleteRestore from "../DeleteRestore";
+import Email from "./Email";
 
 export default {
   name: "AccountSettingsAllView",
@@ -199,7 +126,8 @@ export default {
 
   components: {
     ConnectTwitter,
-    DeleteRestore
+    DeleteRestore,
+    Email
   },
 
   computed: {
@@ -211,11 +139,6 @@ export default {
         return this.checkPassword && this.newPassword;
       }
       return this.checkPassword && this.newPassword && this.oldPassword;
-    },
-    showSendEmailButton() {
-      return (
-        !this.user.emailChecked || this.user.email !== this.localUser.email
-      );
     }
   },
 
@@ -255,11 +178,6 @@ export default {
         .catch(() => {
           this.passwordSaving = false;
         });
-    },
-    resendEmail() {
-      this.$store.dispatch("emails/resend", this.localUser.email).then(() => {
-        this.$store.dispatch("global/flashToast", { text: "Email sent" });
-      });
     }
   }
 };
