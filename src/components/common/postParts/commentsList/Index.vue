@@ -14,6 +14,7 @@
         @commentReply="comment => $emit('commentReply', comment)"
         @commentRemove="comment => $emit('commentRemove', comment)"
         @likeComment="data => $emit('likeComment', data)"
+        :noPadding="true"
       />
     </div>
   </div>

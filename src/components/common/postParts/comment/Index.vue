@@ -1,5 +1,8 @@
 <template>
-  <div class="comment" :class="{ 'comment-answer': !!comment.answerTo }">
+  <div
+    class="comment"
+    :class="{ 'comment-answer': !noPadding && !!comment.answerTo }"
+  >
     <router-link
       v-if="comment.author && full"
       :to="'/' + comment.author.username"
@@ -84,6 +87,10 @@ export default {
     full: {
       type: Boolean,
       default: true
+    },
+    noPadding: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
