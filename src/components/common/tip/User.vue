@@ -53,6 +53,51 @@
 
 <script>
 import Form from "@/mixins/form";
+// import Store from "@/store";
+import { Validator } from "vee-validate";
+
+// const tipsLimit = () => {
+//   return Store.state.profile.home.profile.payments.tipsLimit;
+// };
+
+const validLimits = amount => {
+  return amount ? amount >= 2 && amount <= 500 : false;
+};
+
+Validator.extend("tip-sum", {
+  getMessage() {
+    return `min: $2, max: $500`;
+  },
+  validate: value => {
+    return validLimits(parseFloat(value));
+  }
+});
+
+Validator.extend("tip-amount", {
+  getMessage: "Required two numbers past the decimal",
+  validate: value => {
+    const m = value.toString().match(/^\d+\.(\d+)?$/);
+    if (!m) {
+      return validLimits(value);
+    }
+    if (!m[1]) {
+      return false;
+    }
+    if (m[1].length === 2) {
+      return validLimits(value);
+    } else {
+      return false;
+    }
+  }
+});
+
+const isFloat = function(number) {
+  number = parseFloat(number);
+  if (Number.isInteger(number)) {
+    return true;
+  }
+  return number % 1 != 0;
+};
 
 export default {
   name: "UserTip",
@@ -77,9 +122,6 @@ export default {
     };
   },
   computed: {
-    validator() {
-      return this.$validator;
-    },
     paymentComplete() {
       return this.$store.state.payment.pay.complete;
     },
@@ -90,10 +132,10 @@ export default {
       if (!this.amount) {
         return true;
       }
-      if (!this.isFloat(this.amount)) {
+      if (!isFloat(this.amount)) {
         return false;
       }
-      return this.validLimits(this.amount);
+      return validLimits(this.amount);
     },
     canSend() {
       if (this.amount) {
@@ -119,47 +161,7 @@ export default {
     },
     reset() {
       this.amount = "";
-    },
-    validLimits(amount) {
-      return amount
-        ? amount >= this.limits.min && amount <= this.limits.max
-        : false;
-    },
-    isFloat(number) {
-      number = parseFloat(number);
-      if (Number.isInteger(number)) {
-        return true;
-      }
-      return number % 1 != 0;
     }
-  },
-  created() {
-    this.validator.extend("tip-sum", {
-      getMessage: () => {
-        return `min: $${this.limits.min}, max: $${this.limits.max}`;
-      },
-      validate: value => {
-        return this.validLimits(parseFloat(value));
-      }
-    });
-
-    this.validator.extend("tip-amount", {
-      getMessage: "Required two numbers past the decimal",
-      validate: value => {
-        const m = value.toString().match(/^\d+\.(\d+)?$/);
-        if (!m) {
-          return this.validLimits(value);
-        }
-        if (!m[1]) {
-          return false;
-        }
-        if (m[1].length === 2) {
-          return this.validLimits(value);
-        } else {
-          return false;
-        }
-      }
-    });
   }
 };
 </script>

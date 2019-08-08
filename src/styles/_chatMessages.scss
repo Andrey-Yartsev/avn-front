@@ -494,6 +494,8 @@
 }
 
 .chatMessageSending {
+  margin-left: -16px;
+  margin-right: -16px;
   height: 6px;
   background: repeating-linear-gradient(to right, rgba(255, 64, 129, 1) 0%, rgba(33, 150, 243, 1) 50%, rgba(255, 64, 129, 1) 100%);
   background-size: 200% auto;
@@ -503,22 +505,14 @@
   animation-timing-function: linear;
   font-size: 0;
 
-  .chat-section & {
-    margin-left: -16px;
-    margin-right: -16px;
-
-    @include media-breakpoint-up($tablet-breakpoint) {
-      margin-left: -20px;
-      margin-right: -20px;
-    }
+  @include media-breakpoint-up($tablet-breakpoint) {
+    margin-left: -20px;
+    margin-right: -20px;
   }
 
   &.past-messages {
-
-    .chat-section & {
-      margin-top: -3px;
-      margin-bottom: 5px;
-    }
+    margin-top: -3px;
+    margin-bottom: 5px;
   }
 
   &.new-messages {

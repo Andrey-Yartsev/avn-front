@@ -363,7 +363,7 @@
     flex-direction: column;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transition: all .3s;
+      //transition: all .3s;
       overflow: hidden;
     }
 
@@ -536,7 +536,7 @@
     flex-wrap: wrap;
     height: auto;
     flex-basis: auto;
-    transition: all .3s;
+    //transition: all .3s;
   }
 
   &.no-nav {
