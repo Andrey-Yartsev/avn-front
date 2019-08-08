@@ -49,8 +49,9 @@
               </div>
             </span>
           </label>
-          <div class="input-help" v-if="user.emailNew">
-            New email address <b>{{ user.emailNew }}</b> is not confirmed yet
+          <div class="input-help" v-if="!user.emailChecked">
+            Email address <b>{{ user.emailNew || user.email }}</b> is not
+            confirmed yet
           </div>
         </div>
 
