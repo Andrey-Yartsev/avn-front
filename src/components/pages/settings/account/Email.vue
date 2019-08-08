@@ -2,7 +2,7 @@
   <div class="border-top email-block">
     <div class="shadow-block">
       <div class="container">
-        <div class="form-group form-group_with-label">
+        <div class="form-group form-group_with-label" v-if="user.emailChecked">
           <label class="form-group-inner">
             <span class="label">
               <span class="for-verified" v-if="user.emailChecked"
@@ -23,7 +23,7 @@
                 <input
                   class="input-email"
                   :value="currentEmail"
-                  :disabled="user.emailChecked"
+                  :disabled="user.email"
                 />
               </span>
             </span>
@@ -33,12 +33,7 @@
         <div class="form-group form-group_with-label">
           <label class="form-group-inner">
             <span class="label">New email</span>
-            <span
-              class="form-group form-group_clear-gaps"
-              :class="{
-                'field-invalid no-border': !user.emailChecked
-              }"
-            >
+            <span class="form-group form-group_clear-gaps" :class="{}">
               <span class="form-field">
                 <input
                   class="input-email"
@@ -133,10 +128,6 @@ export default {
   },
 
   created() {
-    if (!this.user) {
-      this.currentEmail = "aaaaaaaaaaa";
-      return;
-    }
     this.currentEmail = this.user.email;
   }
 };
