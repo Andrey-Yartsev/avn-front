@@ -212,7 +212,6 @@ const actions = {
       (sum, chat) => sum + chat.unreadMessagesCount,
       0
     );
-    console.log(`updateHasMessages: ${messageCount}`);
     if (messageCount === 0) {
       if (rootState.auth.user.hasMessages) {
         dispatch("auth/extendUser", { hasMessages: false }, { root: true });
