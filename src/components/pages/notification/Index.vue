@@ -147,7 +147,8 @@ export default {
             v.type !== "subscribed" &&
             fromNow(v.createdAt) === prevItem.time
           ) {
-            prevItem.mergedByName = v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
+            prevItem.mergedByName =
+              v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
             prevItem.items.push(v);
             return [...m];
           }
