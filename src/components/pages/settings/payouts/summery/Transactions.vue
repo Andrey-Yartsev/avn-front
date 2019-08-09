@@ -41,7 +41,10 @@
               :key="i"
             >
               <div class="item">
-                <div class="date table__cell">{{ dt(v.createdAt) }}</div>
+                <div class="date table__cell">
+                  {{ dt(v.createdAt) }}
+                  <div class="user-login" v-if="v.is_pending">pending</div>
+                </div>
                 <div
                   class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
                 >

@@ -10,9 +10,6 @@
             <span class="semi-transparent">
               Payouts Statements
             </span>
-            <button @click="withdrawRequest" :disabled="withdrawRequesting">
-              Withdraw Request
-            </button>
           </div>
           <div class="table-header payouts-table-header" v-if="!loading">
             <div
@@ -52,7 +49,7 @@
               </div>
             </div>
           </div>
-          <div class="empty-table-info show" v-if="!items.length">
+          <div class="empty-table-info show" v-if="!loading && !items.length">
             <span>Empty here for now</span>
           </div>
           <div class="loader-infinity" v-if="loading">
@@ -70,15 +67,12 @@ import moment from "moment";
 
 export default {
   name: "PayoutSettingsSummeryRequests",
-
   components: {
     Loader
   },
-
   computed: {
     loading() {
       return this.$store.state.payouts.requests.fetchLoading;
-      // return true;
     },
     items() {
       if (!this.$store.state.payouts.requests.fetchResult) {
@@ -95,17 +89,11 @@ export default {
       return this.$store.state.payouts.requests.withdrawLoading;
     }
   },
-
   methods: {
     dt(date) {
       return moment(date).format("DD MMM, hh:mm");
-    },
-    async withdrawRequest() {
-      await this.$store.dispatch("payouts/requests/withdraw");
-      this.$store.dispatch("payouts/requests/fetch");
     }
   },
-
   created() {
     this.$store.dispatch("payouts/requests/fetch");
   }

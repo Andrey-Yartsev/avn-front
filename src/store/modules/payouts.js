@@ -3,6 +3,7 @@
 import account from "./payouts/account";
 import legal from "./payouts/legal";
 import bank from "./payouts/bank";
+import balances from "./payouts/balances";
 import requests from "./payouts/requests";
 import transactions from "./payouts/transactions";
 import countries from "./payouts/countries";
@@ -30,6 +31,7 @@ export default {
     account,
     legal,
     bank,
+    balances,
     requests,
     transactions,
     countries,
