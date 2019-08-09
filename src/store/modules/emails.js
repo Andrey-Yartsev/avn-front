@@ -20,7 +20,8 @@ createRequestAction({
       email: params
     };
     return options;
-  }
+  },
+  localError: true
 });
 
 export default {

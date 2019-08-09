@@ -49,9 +49,18 @@
               </div>
             </span>
           </label>
+
           <div class="input-help" v-if="!user.emailChecked">
-            Email address <b>{{ user.emailNew || user.email }}</b> is not
-            confirmed yet
+            Registration email address <b>{{ user.email }}</b> is not confirmed
+            yet
+          </div>
+
+          <div class="input-help" v-if="user.emailNew">
+            New email address <b>{{ user.emailNew }}</b> is not confirmed yet
+          </div>
+
+          <div class="input-help error-info" v-if="sendingError">
+            {{ sendingError }}
           </div>
         </div>
 
@@ -94,23 +103,29 @@ import Form from "@/mixins/form";
 
 export default {
   name: "AccountSettingsEmail",
-
   mixins: [User, Form],
-
   data() {
     return {
       currentEmail: "",
-      newEmail: "",
-      sendingEmail: false
+      newEmail: ""
     };
   },
-
+  computed: {
+    sendingEmail() {
+      return this.$store.state.emails.resendLoading;
+    },
+    sendingError() {
+      if (!this.$store.state.emails.resendError) {
+        return null;
+      }
+      return this.$store.state.emails.resendError.message;
+    }
+  },
   methods: {
     sendEmail() {
       if (!this.isFormValid) {
         return;
       }
-      this.sendingEmail = true;
       this.$store.dispatch("emails/resend", this.newEmail).then(r => {
         if (!r.success) {
           this.$store.dispatch("global/flashToast", {
@@ -118,7 +133,6 @@ export default {
           });
           return;
         }
-        this.sendingEmail = false;
         this.$store.dispatch("auth/extendUser", {
           emailNew: this.newEmail
         });
