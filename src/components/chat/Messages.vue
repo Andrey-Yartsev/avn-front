@@ -16,7 +16,7 @@
       <div class="chat-scrollbar" ref="messagesMobileContainer">
         <div v-if="allMessagesLoaded" class="startMessages"></div>
         <div
-          class="chatMessageSending past-messages semi-transparent"
+          class="chatFlatLoader past-messages semi-transparent"
           v-if="moreLoading"
         >
           Loading history...
@@ -117,7 +117,7 @@
           </div>
         </div>
         <div
-          class="chatMessageSending new-messages semi-transparent"
+          class="chatFlatLoader new-messages semi-transparent"
           v-if="sending"
         >
           Sending...

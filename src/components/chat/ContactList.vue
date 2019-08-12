@@ -68,8 +68,8 @@
         </div>
       </div>
       <div
-        class="chatMessageSending past-messages semi-transparent"
-        v-if="false"
+        class="chatFlatLoader past-messages semi-transparent"
+        v-if="moreLoading"
       >
         Loading history...
       </div>
@@ -93,6 +93,9 @@ export default {
     },
     store() {
       return this.$store.state.chat;
+    },
+    moreLoading() {
+      return this.$store.state.chat.moreChatsLoading;
     }
   },
 

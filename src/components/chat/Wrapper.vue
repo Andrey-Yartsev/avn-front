@@ -79,7 +79,7 @@ export default {
   computed: {
     loading() {
       return (
-        this.$store.state.chat._fetchChatsLoading ||
+        this.$store.state.chat.chatsLoading ||
         this.$store.state.chat.fetchAnyChatsLoading
       );
     },
