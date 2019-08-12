@@ -88,9 +88,10 @@ const actions = {
   },
   sendMessage({ dispatch }, params) {
     dispatch("_sendMessage", params); //.then(message => {
-    //unnecessary code
-    //lastMessage is updated when message arrives through websocket
-    //chats is loaded when chat component is created
+    // unnecessary code
+    // lastMessage is updated when message arrives through websocket
+    // chats is loaded when chat component is created
+    //
     // dispatch("updateChatLastMessage", {
     //   message,
     //   withUserId: params.userId,
@@ -106,19 +107,19 @@ const actions = {
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
     const isMine = message.fromUser.id === rootState.auth.user.id;
-    //withUser - user to whom chatting
+    // withUser - user to whom chatting
     const withUser = isMine ? message.withUser : message.fromUser;
 
     if (!isMine && !rootState.auth.user.hasMessages) {
       dispatch("auth/extendUser", { hasMessages: true }, { root: true });
     }
 
-    //search for existing chat
+    // search for existing chat
     const chatFound = state.chats.find(chat => {
       return chat.withUser.id === withUser.id;
     });
 
-    //if chat not found then add new chat
+    // if chat not found then add new chat
     if (!chatFound) {
       commit("addNewChat", {
         hasHistory: true,
@@ -129,7 +130,7 @@ const actions = {
         withUser
       });
 
-      //if chat with user opened already then mark message as read
+      // if chat with user opened already then mark message as read
       if (state.activeUserId === withUser.id) {
         if (!state.windowIsActive) {
           unreadLastMessage = message;
@@ -142,7 +143,7 @@ const actions = {
       }
     }
 
-    //if there is active chat opened
+    // if there is active chat opened
     if (state.activeUserId) {
       const found = state.messages.find(v => v.id === message.id);
       if (found) {

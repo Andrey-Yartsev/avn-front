@@ -14,6 +14,7 @@
       @ps-scroll-y="psScrollHandle"
     >
       <div class="chat-scrollbar" ref="messagesMobileContainer">
+        <div v-if="allMessagesLoaded" class="startMessages"></div>
         <div
           class="chatMessageSending past-messages semi-transparent"
           v-if="moreLoading"
@@ -224,14 +225,21 @@ export default {
     messages(value, oldValue) {
       // count added messages
       let messagesCount = value.length - oldValue.length;
-
-      const lastMessage = value[value.length - 1];
-
-      console.trace(lastMessage);
+      let lastMessage;
+      let lastMessageIsMine;
 
       switch (messagesCount) {
         case 0: // second part of media message replaced previous message
         case 1: // new message has arrived
+          lastMessage = value[value.length - 1];
+          lastMessageIsMine = lastMessage.fromUser.id === this.user.id;
+
+          if (lastMessageIsMine) {
+            this.$nextTick(() => {
+              this.scrollToLast(true);
+            });
+          }
+
           // if we at bottom of chat messages, do scrollToLast
           if (this.isBottom()) {
             this.$nextTick(() => {
@@ -239,7 +247,7 @@ export default {
             });
             this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
           } else {
-            //if we are not at bottom, increment unreadMessagesCount
+            // if we are not at bottom, increment unreadMessagesCount
             this.$store.dispatch(
               "chat/incrementUnreadMessagesCount",
               this.withUser.id
@@ -428,8 +436,8 @@ export default {
       }
       return true;
     },
-    scrollToLast() {
-      if (this.fetchingOld) {
+    scrollToLast(forceScroll) {
+      if (this.fetchingOld && !forceScroll) {
         //
       } else {
         if (this.container) {
