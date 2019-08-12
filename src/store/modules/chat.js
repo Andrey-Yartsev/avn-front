@@ -3,14 +3,14 @@
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 
-const MESSAGES_LIMIT = 50;
-const CHATS_LIMIT = 20;
+const messagesLimit = 50;
+const chatsLimit = 20;
 
 const state = {
   isSecondScreen: false,
   activeUserId: null,
   windowIsActive: true,
-  messagesOffset: MESSAGES_LIMIT,
+  messagesOffset: messagesLimit,
   allMessagesLoaded: true,
   fetchingOld: false,
   // fetch chats
@@ -173,7 +173,7 @@ const actions = {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
-      if (r.list.length >= MESSAGES_LIMIT) {
+      if (r.list.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
     });
@@ -190,7 +190,7 @@ const actions = {
         commit("allMessagesLoaded", true);
         return;
       }
-      if (state.moreMessages.length < MESSAGES_LIMIT) {
+      if (state.moreMessages.length < messagesLimit) {
         commit("allMessagesLoaded", true);
       }
       commit("incrementMessagesOffset", state.moreMessages.length);
@@ -250,7 +250,7 @@ const actions = {
 const mutations = {
   setActiveUserId(state, activeUserId) {
     state.activeUserId = activeUserId;
-    state.messagesOffset = MESSAGES_LIMIT;
+    state.messagesOffset = messagesLimit;
     state.allMessagesLoaded = true;
   },
   allMessagesLoaded(state, allMessagesLoaded) {
@@ -364,10 +364,10 @@ const mutations = {
         this._vm
       );
     }
-    if (state._fetchChatsResult.length < CHATS_LIMIT) {
+    if (state._fetchChatsResult.length < chatsLimit) {
       state.allDataReceived = true;
     } else {
-      state.offset += CHATS_LIMIT;
+      state.offset += chatsLimit;
     }
   }
 };
@@ -401,7 +401,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.query = {
-      limit: CHATS_LIMIT,
+      limit: chatsLimit,
       offset: params
     };
     return options;
@@ -466,7 +466,7 @@ createRequestAction({
     return state.messages || [];
   },
   paramsToOptions: function(params, options) {
-    options.query.limit = MESSAGES_LIMIT;
+    options.query.limit = messagesLimit;
     return options;
   }
 });
@@ -491,7 +491,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options, state) {
     options.query.offset = state.messagesOffset;
-    options.query.limit = MESSAGES_LIMIT;
+    options.query.limit = messagesLimit;
     return options;
   }
 });
