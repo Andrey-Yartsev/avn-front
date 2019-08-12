@@ -15,10 +15,14 @@
     <div class="comments-list comments-list_in-col" v-if="comments.length">
       <perfect-scrollbar id="vue-comments-list">
         <Comment
-          v-for="comment in rearranged"
+          v-for="(comment, index) in rearranged"
           :key="comment.id"
           :comment="comment"
           :full="true"
+          :class="{
+            'first-comment': index === 0,
+            'last-comment': index === rearranged.length - 1
+          }"
           @commentReply="comment => $emit('commentReply', comment)"
           @commentRemove="comment => $emit('commentRemove', comment)"
           @likeComment="data => $emit('likeComment', data)"
@@ -115,18 +119,18 @@ export default {
   },
   watch: {
     lastCommentId: function() {
-      setTimeout(() => {
-        this.$scrollTo("#vue-comments-list .comment:last-child", {
+      this.$nextTick(() => {
+        this.$scrollTo("#vue-comments-list .last-comment", {
           container: "#vue-comments-list"
         });
-      }, 100);
+      });
     },
     firstCommentId: function() {
-      setTimeout(() => {
-        this.$scrollTo("#vue-comments-list .comment:first-child", {
+      this.$nextTick(() => {
+        this.$scrollTo("#vue-comments-list .first-comment", {
           container: "#vue-comments-list"
         });
-      }, 100);
+      });
     }
   }
 };
