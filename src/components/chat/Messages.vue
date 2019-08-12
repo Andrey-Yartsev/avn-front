@@ -134,8 +134,7 @@ import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
-//BOTTOM_TRESHOLD - pixels left to bottom of container
-const BOTTOM_TRESHOLD = 40;
+const bottomThreshold = 40; // pixels left to bottom of container
 
 export default {
   name: "ChatMessages",
@@ -218,18 +217,18 @@ export default {
       }
     },
     sending() {
-      //sending changed 2 times, before sending and after
-      //1st time scroll to message Sending, 2nd time scroll to new messsage
+      // sending changed 2 times, before sending and after
+      // 1st time scroll to message Sending, 2nd time scroll to new messsage
       this.scrollToLast();
     },
     messages(value, oldValue) {
-      //count added messages
+      // count added messages
       let messagesCount = value.length - oldValue.length;
 
       switch (messagesCount) {
-        case 0: //second part of media message replaced previous message
-        case 1: //new message has arrived
-          //if we at bottom of chat messages, do scrollToLast
+        case 0: // second part of media message replaced previous message
+        case 1: // new message has arrived
+          // if we at bottom of chat messages, do scrollToLast
           if (this.isBottom()) {
             this.$nextTick(() => {
               this.scrollToLast();
@@ -295,7 +294,7 @@ export default {
 
           let currentMine = this.checkAuthor(currentModel.fromUser);
           let isPrevNotMine = !this.checkAuthor(messages[i - 1].fromUser);
-          //If current message is mine but not previous message set firstMessageInGroup flag
+          // If current message is mine but not previous message set firstMessageInGroup flag
           if (
             (currentMine && isPrevNotMine) ||
             (!currentMine && !isPrevNotMine)
@@ -420,7 +419,7 @@ export default {
           this.container.scrollTop >
           this.container.scrollHeight -
             this.container.clientHeight -
-            BOTTOM_TRESHOLD
+            bottomThreshold
         );
       }
       return true;
@@ -485,7 +484,7 @@ export default {
     },
     _scrollHandler() {
       this.saveScrollPosition();
-      //if scrolled to most bottom markChatAsViewed
+      // if scrolled to most bottom markChatAsViewed
       if (this.isBottom()) {
         this.$store.dispatch("chat/markChatAsViewed", this.withUser.id);
       }
@@ -503,7 +502,7 @@ export default {
     },
     scrollHandle() {
       clearTimeout(this.scrollTimeoutId);
-      this.scrollTimeoutId = setTimeout(() => this._scrollHandler(), 500);
+      this.scrollTimeoutId = setTimeout(() => this._scrollHandler(), 100);
     },
     initMobileScroll() {
       this.$refs.messagesMobileContainer.addEventListener("scroll", () => {
