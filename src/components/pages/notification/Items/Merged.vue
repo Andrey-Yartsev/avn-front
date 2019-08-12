@@ -28,7 +28,7 @@
               </span>
             </router-link>
           </div>
-          <span class="timestamp">{{ time(v.items[0].createdAt) }}</span>
+          <span class="timestamp">{{ v.time }}</span>
         </div>
         <div class="content">
           <router-link
@@ -55,13 +55,13 @@
               </span>
             </router-link>
           </div>
-          <span class="timestamp">{{ time(v.items[0].createdAt) }}</span>
+          <span class="timestamp">{{ v.time }}</span>
         </div>
         <div class="content">
           <router-link
+            v-if="v.items.length === 1"
             :to="'/' + v.items[0].user.username"
             class="name name_break-text"
-            v-if="v.items.length === 1"
             >{{ v.items[0].user.name }}</router-link
           >
           <template v-if="v.items.length === 2">

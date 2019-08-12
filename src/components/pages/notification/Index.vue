@@ -127,14 +127,17 @@ export default {
     items() {
       if (this.type === "all") {
         const merged = this.posts.reduce((m, v, index) => {
+          const time = fromNow(v.createdAt);
+
+          //first item
           if (index === 0) {
             return [
               {
-                mergedByName: false,
+                id: index,
                 type: v.type,
                 items: [v],
-                id: index,
-                time: fromNow(v.createdAt)
+                mergedByName: false,
+                time
               }
             ];
           }
@@ -145,7 +148,7 @@ export default {
             v.type !== "tip" &&
             v.type !== "mentioned" &&
             v.type !== "subscribed" &&
-            fromNow(v.createdAt) === prevItem.time
+            prevItem.time === time
           ) {
             prevItem.mergedByName =
               v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
@@ -160,7 +163,7 @@ export default {
               type: v.type,
               items: [v],
               id: index,
-              time: fromNow(v.createdAt)
+              time
             }
           ];
         }, []);
