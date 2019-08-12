@@ -225,6 +225,10 @@ export default {
       // count added messages
       let messagesCount = value.length - oldValue.length;
 
+      const lastMessage = value[value.length - 1];
+
+      console.trace(lastMessage);
+
       switch (messagesCount) {
         case 0: // second part of media message replaced previous message
         case 1: // new message has arrived
