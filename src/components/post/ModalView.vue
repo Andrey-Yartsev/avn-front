@@ -173,6 +173,7 @@ export default {
             title: err.message,
             message: "Post does not exists"
           });
+          this.close();
         });
 
       return;
