@@ -58,7 +58,7 @@
                   :class="{ 'message-locked': v.textLength && isLocked(v) }"
                   v-if="v.textLength"
                 >
-                  <span class="message__text" v-html="text(v)"></span>
+                  <span class="message__text" v-html="text(v)" />
                   <span
                     class="message-locked__text"
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
