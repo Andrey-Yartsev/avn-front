@@ -11,6 +11,20 @@
   .profile-name {
     padding: 0;
   }
+
+  .rounded-container {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: calc(100vh - 357px);
+    }
+
+    &.ps {
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        overflow: visible !important;
+      }
+    }
+  }
 }
 
 .profile-wrapper {
