@@ -542,6 +542,15 @@ export default {
           });
           this.submitting = false;
         } else {
+          const types = creditCardType(this.cardNumber);
+          if (!types.length) {
+            this.$store.dispatch("global/flashToast", {
+              text: "Wrong credit card number",
+              type: "error"
+            });
+            this.submitting = false;
+            return;
+          }
           this.$store
             .dispatch("payment/card/add", {
               email: this.email,
@@ -549,7 +558,7 @@ export default {
               ccbillResponse: ccbres,
               userinfo: this.userinfo,
               cardLast4: this.cardNumber.substr(this.cardNumber.length - 4),
-              cardBrand: creditCardType(this.cardNumber)[0].type
+              cardBrand: types[0].type
             })
             .then(r => {
               if (r.success) {
