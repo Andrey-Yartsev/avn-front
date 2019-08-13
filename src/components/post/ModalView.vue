@@ -162,10 +162,17 @@ export default {
     if (!this.length) {
       this.backFrom = "postPage";
       this.$store.commit("postPage/resetPageState");
+
       this.$store
         .dispatch("postPage/getPost", { postId: this.postId })
         .then(() => {
           this.index = 0;
+        })
+        .catch(err => {
+          this.$store.dispatch("global/setError", {
+            title: err.message,
+            message: "Post does not exists"
+          });
         });
 
       return;
