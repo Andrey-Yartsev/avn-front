@@ -103,16 +103,14 @@
           <div class="form-group form-group_with-label gender-options">
             <label class="form-group-inner">
               <span class="label">Time Zone</span>
-              <div class="row">
-                <div class="col-1-2">
-                  <div class="select-wrapper">
-                    <select name="userTZ" v-model="localUser.userTZ">
-                      <option value="">Not specified</option>
-                      <option :value="v" v-for="v in tz" :key="v">
-                        {{ v }}
-                      </option>
-                    </select>
-                  </div>
+              <div class="form-group form-group_clear-gaps">
+                <div class="select-wrapper">
+                  <select name="userTZ" v-model="localUser.userTZ">
+                    <option value="">Not specified</option>
+                    <option :value="v" v-for="v in tz" :key="v">
+                      {{ v }}
+                    </option>
+                  </select>
                 </div>
               </div>
             </label>
