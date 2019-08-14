@@ -432,6 +432,17 @@
       }
     }
 
+    .site-footer {
+
+      .container {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+
     .FooterNavCollectionView {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
