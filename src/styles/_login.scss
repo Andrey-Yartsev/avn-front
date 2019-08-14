@@ -393,6 +393,14 @@
     pointer-events: auto;
     transform: translateY(0);
   }
+
+  .site-footer {
+    position: relative;
+    z-index: 12;
+    background-color: $white;
+    margin-top: -5px;
+    border-radius: 0 0 6px 6px;
+  }
 }
 
 .auth-block {

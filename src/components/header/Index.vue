@@ -107,6 +107,7 @@
                       "
                       type="dropdown"
                     />
+                    <Footer class="site-footer_main" />
                   </div>
                 </div>
               </div>
@@ -127,6 +128,7 @@ import DesktopHeader from "./Desktop";
 import LoginForm from "@/components/auth/LoginForm";
 import SignupForm from "@/components/auth/SignupForm";
 import ClickOutside from "vue-click-outside";
+import Footer from "@/components/footer/Index.vue";
 
 export default {
   name: "Header",
@@ -143,7 +145,8 @@ export default {
     User,
     DesktopHeader,
     LoginForm,
-    SignupForm
+    SignupForm,
+    Footer
   },
   computed: {
     user() {

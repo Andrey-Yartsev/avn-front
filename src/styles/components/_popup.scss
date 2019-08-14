@@ -431,6 +431,14 @@
         margin: 0;
       }
     }
+
+    .FooterNavCollectionView {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-top: 15px;
+        padding-bottom: 0;
+      }
+    }
   }
 
   &.popup-statistics {
