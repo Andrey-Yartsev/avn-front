@@ -43,9 +43,7 @@
           </router-link>
           <template v-if="authSection">
             <div class="btns-login-user">
-              <router-link to="/register" class="register"
-                >Have an account?</router-link
-              >
+              <router-link to="/register" class="btn border register">Sign up</router-link>
               <router-link to="/login" class="btn border alt login icn-item"
                 >Log in</router-link
               >
@@ -77,8 +75,8 @@
               <a
                 href="/register"
                 @click.prevent="openSingupModal"
-                class="register"
-                >Have an account?</a
+                class="btn border register"
+                >Sign Up</a
               >
               <a
                 href="/login"
@@ -92,7 +90,7 @@
                 v-click-outside="hide"
                 v-if="$mq === 'desktop'"
               >
-                <div class="btn border alt login icn-item" @click="show">
+                <div class="btn login login_colored icn-item" @click="show">
                   Log in
                 </div>
                 <div class="auth-block-dropdown">
