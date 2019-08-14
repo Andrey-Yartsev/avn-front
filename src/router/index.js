@@ -362,7 +362,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore",
+    path: "/explore/all",
     component: ExplorePage,
     meta: {
       page: "all",
@@ -422,7 +422,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/feed",
+    path: "/explore",
     component: ExplorePage,
     meta: {
       page: "feed",
