@@ -474,7 +474,8 @@ export default {
               text: this.$store.state.init.data.messages.snapchatSuccessPaid.replace(
                 "{SNAPCHAT}",
                 this.mysnapchat
-              )
+              ),
+              isSnapchat: true
             }
           })
           .then(() => {
