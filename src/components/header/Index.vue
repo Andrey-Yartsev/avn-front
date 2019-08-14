@@ -43,7 +43,9 @@
           </router-link>
           <template v-if="authSection">
             <div class="btns-login-user">
-              <router-link to="/register" class="btn border register">Sign up</router-link>
+              <router-link to="/register" class="btn border register"
+                >Sign up</router-link
+              >
               <router-link to="/login" class="btn border alt login icn-item"
                 >Log in</router-link
               >
