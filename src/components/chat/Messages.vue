@@ -49,7 +49,8 @@
                   lockedMessage: isLocked(v),
                   unlockedMessage: isUnlocked(v),
                   'message-icon': isLocked(v) || v.isTips || !isLocked(v),
-                  mine: isMyMessage(v)
+                  mine: isMyMessage(v),
+                  snapchatMessage: v.isSnapchat
                 }"
                 @click="messageClick(v)"
               >
