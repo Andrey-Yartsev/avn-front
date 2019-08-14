@@ -374,10 +374,10 @@ export default {
       remoteVideo: document.getElementById("remotevideo"),
       showLikes: false,
       showErrorMessage: function(message) {
-        alert(message);
+        this.$store.dispatch("global/setError", { message });
       },
       showInfoMessage: function(message) {
-        alert(message);
+        this.$store.dispatch("global/setError", { message });
       },
       onStreamEnd: (isError, isClient) => {
         this.shouldUpdateTimer = false;
@@ -389,7 +389,9 @@ export default {
         }
 
         if (isError) {
-          alert("An error was happened");
+          this.$store.dispatch("global/setError", {
+            message: "An error was happened"
+          });
           this.close();
         }
       },
@@ -410,7 +412,7 @@ export default {
       onSetupStreamingSession: function() {},
 
       onStreamError: function(error) {
-        alert(error);
+        this.$store.dispatch("global/setError", { message: error });
       },
 
       onRemoteVideoUnavailable: () => {
@@ -418,7 +420,9 @@ export default {
         if (!this.$store.state.modal.stream.data.stream) {
           return;
         }
-        alert("No remote video available");
+        this.$store.dispatch("global/setError", {
+          message: "No remote video available"
+        });
       },
 
       onInit: function() {},

@@ -697,7 +697,7 @@ export default {
       streamSource: "local",
       showErrorMessage(message) {
         // eslint-disable-next-line
-        alert("1:" + message);
+        this.$store.dispatch("global/setError", { message });
         // eslint-disable-next-line
         console.trace(message);
       },
@@ -709,7 +709,7 @@ export default {
       onRemoteStreamInit() {},
       onStreamError(error) {
         // eslint-disable-next-line
-        alert("2: " + error);
+        this.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
         console.trace(error);
         Streams.config.onStreamEnd();
