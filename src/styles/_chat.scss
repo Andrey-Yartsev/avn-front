@@ -118,7 +118,7 @@
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transition: all .3s;
+      transition: transform .3s;
     }
   }
 }
