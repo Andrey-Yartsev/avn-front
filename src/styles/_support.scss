@@ -142,7 +142,10 @@ form.support-search-form {
     justify-content: center;
     align-items: center;
     align-content: center;
-    transition: all .3s;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      transition: opacity .3s;
+    }
 
     .header-scrolled & {
 
