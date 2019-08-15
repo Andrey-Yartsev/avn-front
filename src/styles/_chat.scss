@@ -367,7 +367,7 @@
     flex-direction: column;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transition: all .3s;
+      transition: transform .3s, left .3s;
       overflow: hidden;
     }
 
