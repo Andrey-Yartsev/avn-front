@@ -518,6 +518,7 @@
     padding: 20px 0;
     text-align: center;
     box-shadow: none;
+    position: static;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: none;
@@ -558,7 +559,7 @@
     }
 
     .close {
-      position: fixed;
+      position: absolute;
       right: 0;
       top: 0;
     }
