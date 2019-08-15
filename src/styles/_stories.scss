@@ -472,6 +472,27 @@
   }
 }
 
+.name-switcher {
+  text-align: center;
+  height: 18px;
+  position: relative;
+
+  span {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: all .7s ease-in-out;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
 .followme {
   background: rgba(124, 139, 150, 0.08);
   border-radius: 1000px;
