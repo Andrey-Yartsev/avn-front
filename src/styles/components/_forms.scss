@@ -1113,7 +1113,7 @@ select {
   }
 
   &__option {
-    transition: all .3s;
+    transition: background-color .3s;
     color: $main-color;
 
     &--selected {
