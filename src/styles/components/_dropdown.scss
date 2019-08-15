@@ -195,7 +195,7 @@
       margin: 0 auto 4px;
       font-size: 20px;
       @include icon-font;
-      transition: all 0.3s;
+      //transition: all 0.3s;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         margin: 11px auto;
