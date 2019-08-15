@@ -136,7 +136,7 @@ import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
-const bottomThreshold = 40; // pixels left to bottom of container
+const bottomThreshold = 100; // pixels left to bottom of container
 
 export default {
   name: "ChatMessages",
