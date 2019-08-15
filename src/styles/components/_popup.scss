@@ -541,6 +541,7 @@
     .content {
       width: auto;
       display: inline-block;
+      overflow: visible;
 
       &:before {
         position: absolute;
