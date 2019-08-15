@@ -1,23 +1,78 @@
+const initData = {
+  showAddComment: false,
+  showTip: false,
+  commentReplyUserName: "",
+  commentReplyId: 0
+};
+
 export default {
   data: function() {
     return {
-      showAddCommentForm: false,
-      commentReplyUserName: "",
-      commentReplyId: 0,
-      showTip: false
+      ...initData
     };
   },
   computed: {
+    comments() {
+      return this.post.comments || [];
+    },
     showSubscribeButton() {
       return !this.post.canViewMedia;
     }
   },
+  watch: {
+    commentFocused: function() {
+      console.log(`commentFocused changed: ${this.commentFocused}`);
+    }
+  },
   methods: {
+    showAddCommentForm() {
+      this.showTip = false;
+      this.showAddComment = true;
+    },
+    hideAddCommentForm() {
+      this.showAddComment = false;
+      this.resetCommentReply();
+    },
+    resetCommentReply() {
+      this.commentReplyId = initData.commentReplyId;
+      this.commentReplyUserName = initData.commentReplyUserName;
+    },
+    showTipForm() {
+      this.showAddComment = false;
+      this.showTip = true;
+    },
+    hideTipForm() {
+      this.showTip = false;
+    },
+    toggleAddCommentForm(comment) {
+      comment = comment || {
+        id: initData.commentReplyId,
+        author: {
+          username: initData.commentReplyUserName
+        }
+      };
+
+      if (
+        (comment.id === 0 || this.commentReplyId === comment.id) &&
+        this.showAddComment
+      ) {
+        this.hideAddCommentForm();
+      } else {
+        new Promise(resolve => {
+          this.showAddCommentForm();
+          resolve();
+        }).then(() => {
+          this.commentReplyId = comment.id;
+          this.commentReplyUserName = comment.author.username;
+        });
+      }
+    },
     sendNewComment(msg) {
-      this.$store.dispatch(this.actionPrefix + "/sendPostComment", {
+      this.$store.dispatch("comments/sendNewComment", {
+        actionPrefix: this.actionPrefix,
         post: this.post,
-        text: msg,
-        answerTo: this.commentReplyId
+        msg,
+        commentReplyId: this.commentReplyId
       });
     },
     subscribe() {
@@ -33,48 +88,39 @@ export default {
       this._likePost();
     },
     _likePost() {
-      this.$store.dispatch(this.actionPrefix + "/likePost", {
-        post: this.post,
-        addLike: !this.post.isFavorite
+      this.$store.dispatch("comments/likePost", {
+        actionPrefix: this.actionPrefix,
+        post: this.post
       });
     },
     likeComment(data) {
-      this.$store.dispatch(this.actionPrefix + "/likeComment", {
+      this.$store.dispatch("comments/likeComment", {
+        actionPrefix: this.actionPrefix,
         postId: this.post.id,
-        addLike: !data.isLiked,
-        commentId: data.commentId
+        commentId: data.commentId,
+        addLike: !data.isLiked
       });
     },
     commentReply(comment) {
-      this.showAddCommentForm = true;
-      this.showTip = false;
-      this.commentReplyUserName = "";
-      this.commentReplyId = comment.id;
-      setTimeout(() => {
-        this.commentReplyUserName = comment.author.username;
-      });
+      this.hideTipForm();
+      this.toggleAddCommentForm(comment);
     },
     commentRemove(comment) {
-      this.$store.dispatch("modal/show", {
-        name: "confirm",
-        data: {
-          title: "Remove comment",
-          success: () => this.commentRemoving(comment)
-        }
-      });
-    },
-    commentRemoving(comment) {
-      this.$store.dispatch(this.actionPrefix + "/removeComment", {
+      this.$store.dispatch("comments/commentRemove", {
+        actionPrefix: this.actionPrefix,
         postId: this.post.id,
         commentId: comment.id
       });
     },
     toggleTipForm() {
-      this.showTip = !this.showTip;
-      this.showAddCommentForm = false;
+      if (this.showTip) {
+        this.hideTipForm();
+      } else {
+        this.showTipForm();
+      }
     },
-    closeTip() {
-      this.showTip = false;
+    closeTipForm() {
+      this.hideTipForm();
       this.$refs.tip.reset();
     },
     openLoginModal() {
@@ -86,6 +132,9 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "signup"
       });
+    },
+    commentReset() {
+      this.resetCommentReply();
     }
   }
 };
