@@ -69,6 +69,20 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchUser",
+  apiPath: "users/{username}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{username}/, params);
+  }
+});
+
 export default {
   namespaced: true,
   state,

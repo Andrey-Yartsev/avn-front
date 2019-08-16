@@ -558,6 +558,16 @@ const routes = [
       cssName: "staticPage",
       isGay: true
     }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/nominator/:username/:type/:categories?",
+    component: AvnAwards,
+    meta: {
+      staticPage: true,
+      cssName: "staticPage",
+      predefined: true
+    }
   }
 ];
 
