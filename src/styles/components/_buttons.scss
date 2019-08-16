@@ -266,7 +266,7 @@
     padding: 0;
     background: none;
     color: $main-color;
-    transition: all .3s ease;
+    transition: color .3s ease, opaicty .3s ease;
     cursor: pointer;
     position: relative;
 
@@ -369,7 +369,6 @@ button {
   .icn-item {
     display: block;
     margin: 0 auto 4px;
-    transition: all 0.3s;
   }
 
   &_lg {
