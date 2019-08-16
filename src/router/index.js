@@ -74,6 +74,15 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireNonAuth,
+    path: "/register-model",
+    component: SignUpPage,
+    meta: {
+      cssName: "login",
+      forModels: true
+    }
+  },
+  {
     beforeEnter: Auth.requireAny,
     path: "/forgot",
     component: ForgotPasswordPage,
