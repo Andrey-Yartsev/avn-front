@@ -57,7 +57,11 @@
           />
         </div>
       </div>
-      <p class="profile-text" v-if="profile.about" v-html="profile.about"></p>
+      <p
+        class="profile-text"
+        v-if="profile.about"
+        v-html="truncate(profile.about)"
+      ></p>
       <a
         v-if="profile.twitterUsername"
         :href="'https://twitter.com/' + profile.twitterUsername"
@@ -75,24 +79,21 @@ import SubscribeButton from "./SubscribeButton";
 import FollowButton from "../pages/search/FollowButton";
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import User from "@/mixins/user";
+import truncate from "truncate-html";
 
 export default {
   name: "User",
-
   mixins: [User],
-
   components: {
     SubscribeButton,
     FollowButton,
     UserDropdown
   },
-
   data: function() {
     return {
       showDropdown: false
     };
   },
-
   props: {
     profile: {
       type: Object,
@@ -106,6 +107,11 @@ export default {
   computed: {
     showLiveLabel() {
       return !!this.profile.currentStream;
+    }
+  },
+  methods: {
+    truncate(v) {
+      return truncate(v, 150);
     }
   }
 };
