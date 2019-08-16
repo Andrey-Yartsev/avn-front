@@ -161,6 +161,31 @@
   }
 }
 
+.login {
+
+  .login-wrapper {
+
+    &.promotion-models {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: 100%;
+        max-width: 1100px;
+        padding-right: 40px;
+      }
+
+      .login-caption-col {
+
+        .login-caption {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-bottom: 6.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
 .forgot,
 .login,
 .OtpView {
@@ -224,6 +249,7 @@
       }
     }
   }
+
   .login-caption {
     margin-bottom: 10px;
     padding: 22px 15px 26px;
@@ -310,7 +336,7 @@
           display: block;
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 2.8em;
+            font-size: 1.8em;
           }
 
           p {

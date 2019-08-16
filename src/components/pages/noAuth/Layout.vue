@@ -1,6 +1,6 @@
 <template>
   <div :class="mainClass">
-    <div class="login-wrapper">
+    <div class="login-wrapper promotion-models">
       <div class="login-caption-col">
         <div class="login-caption">
           <component :is="logo" />
