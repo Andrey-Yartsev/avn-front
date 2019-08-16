@@ -40,7 +40,7 @@
       top: 50%;
       transform: translate(0, -50%);
       color: $secondary-color;
-      transition: all .3s;
+      transition: transform .3s;
 
       .opened > & {
         transform: translate(0, -50%) rotate(-90deg);
