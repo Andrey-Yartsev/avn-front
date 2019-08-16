@@ -2,7 +2,7 @@
   <div class="row awards">
     <div class="awards__col" v-for="(col, i) in categories" :key="i">
       <label class="form-group form-group_row-md" v-for="v in col" :key="v.id">
-        <span class="label label_row">{{ v.title }}{{ v.id }}</span>
+        <span class="label label_row">{{ v.title }}</span>
         <span class="form-group form-group_clear-gaps">
           <span class="form-field">
             <input
