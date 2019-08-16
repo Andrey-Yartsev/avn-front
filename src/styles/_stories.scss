@@ -2,18 +2,13 @@
 
 .story-page {
 
- .popup {
-   opacity: 0;
-   transition: all .4s;
-   transition-delay: .3s;
- }
-
- .modal-opened {
-
-   .popup {
-     opacity: 1;
-   }
- }
+  .msg-no-content {
+    background-color: $white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .create-story-button {
