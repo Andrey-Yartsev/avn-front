@@ -11,7 +11,7 @@
         <Navigate />
         <div
           class="stories-wrapper stories-all"
-          v-if="page === 'all' && (stories.length || lives.length)"
+          v-if="stories.length || lives.length"
         >
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
@@ -276,15 +276,11 @@ export default {
         this.$store.dispatch("explore/getPosts");
       }
 
-      if (["all"].indexOf(this.page) !== -1) {
-        this.$store.dispatch("stories/setLimit", { limit: 20 });
-        this.$store.dispatch("lives/getPosts");
-      }
+      this.$store.dispatch("stories/setLimit", { limit: 20 });
+      this.$store.dispatch("lives/getPosts");
 
-      if (["all", "stories"].indexOf(this.page) !== -1) {
-        this.$store.dispatch("stories/setSource", { source: "" });
-        this.$store.dispatch("stories/getPosts");
-      }
+      this.$store.dispatch("stories/setSource", { source: "" });
+      this.$store.dispatch("stories/getPosts");
 
       if (this.type === "top") {
         this.$store.dispatch("topModels/getPosts");

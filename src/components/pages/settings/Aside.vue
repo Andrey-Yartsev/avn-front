@@ -135,7 +135,10 @@
           <Loader :fullscreen="false" text="" :semidark="true" />
         </div>
       </div>
-      <div class="rounded-container" :class="{ 'hidden-mobile': !isHome }">
+      <perfect-scrollbar
+        class="rounded-container"
+        :class="{ 'hidden-mobile': !isHome }"
+      >
         <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
           <div class="inner">
             <span class="semi-transparent">
@@ -158,7 +161,7 @@
             </router-link>
           </div>
         </div>
-      </div>
+      </perfect-scrollbar>
 
       <Footer class="site-footer_sidebar" v-if="isHome || $mq === 'desktop'" />
     </div>

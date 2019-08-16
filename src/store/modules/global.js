@@ -7,6 +7,7 @@ const darkTheme = !!BrowserStore.get("darkTheme");
 const state = {
   toastShowTrigger: false,
   toastText: "",
+  toastType: null,
   error: null,
   darkTheme,
   showUserMobileBar: false,

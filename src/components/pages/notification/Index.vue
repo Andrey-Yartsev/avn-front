@@ -79,6 +79,7 @@ import NotificationSingleView from "./Items/Single";
 import NotificationMergedView from "./Items/Merged";
 import User from "@/components/header/User";
 import uniqBy from "lodash.uniqby";
+import { fromNow } from "@/helpers/datetime";
 
 const typeTitles = {
   all: "Notifications",
@@ -111,6 +112,9 @@ export default {
     store() {
       return this.$store.state.notif;
     },
+    posts() {
+      return this.$store.state.notif.posts;
+    },
     type() {
       return this.routeParams.type || "all";
     },
@@ -122,19 +126,29 @@ export default {
     },
     items() {
       if (this.type === "all") {
-        const merged = this.$store.state.notif.posts.reduce((m, v, key) => {
-          if (key === 0) {
-            return [{ mergedByName: false, type: v.type, items: [v], id: key }];
+        const merged = this.posts.reduce((m, v, index) => {
+          const time = fromNow(v.createdAt);
+
+          //first item
+          if (index === 0) {
+            return [
+              {
+                id: index,
+                type: v.type,
+                items: [v],
+                mergedByName: false,
+                time
+              }
+            ];
           }
 
-          const prevKey = m.length - 1;
-          const prevItem = m[prevKey];
-
+          const prevItem = m[m.length - 1];
           if (
             v.type === prevItem.type &&
             v.type !== "tip" &&
             v.type !== "mentioned" &&
-            v.type !== "subscribed"
+            v.type !== "subscribed" &&
+            prevItem.time === time
           ) {
             prevItem.mergedByName =
               v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
@@ -144,7 +158,13 @@ export default {
 
           return [
             ...m,
-            { mergedByName: false, type: v.type, items: [v], id: key }
+            {
+              mergedByName: false,
+              type: v.type,
+              items: [v],
+              id: index,
+              time
+            }
           ];
         }, []);
 
@@ -155,9 +175,9 @@ export default {
         );
       }
 
-      return this.$store.state.notif.posts.map((v, key) => ({
+      return this.posts.map((v, index) => ({
         ...v,
-        id: key
+        id: index
       }));
     },
     menu() {

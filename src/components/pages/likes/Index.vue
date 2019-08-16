@@ -48,9 +48,10 @@
                   class="sticky-header-controls header-mobile"
                   v-if="$mq === 'mobile'"
                 >
-                  <router-link
+                  <a
                     class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                    :to="`/${profile.username}`"
+                    :href="`/`"
+                    @click.prevent="goBack"
                   />
                   <h1 class="page-title">Likes</h1>
                 </div>
@@ -105,6 +106,7 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import PostCollection from "@/components/common/postCollection/Index";
 import PostVisibility from "@/mixins/postsVisibility";
+import BackRouter from "@/router/backRouter";
 
 export default {
   name: "FavPosts",
@@ -173,6 +175,9 @@ export default {
     },
     storePrefix() {
       return "favPosts";
+    },
+    goBack() {
+      BackRouter.back();
     }
   },
   watch: {

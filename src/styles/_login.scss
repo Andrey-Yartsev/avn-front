@@ -122,12 +122,19 @@
   }
 }
 
+.login:not(.login_colored),
+.OtpView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    background-color: $white;
+  }
+}
+
 .login,
 .OtpView {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 100vh;
-    background-color: $white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -392,6 +399,16 @@
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+  }
+
+  .site-footer {
+    position: relative;
+    z-index: 12;
+    background-color: $white;
+    margin-top: -5px;
+    border-radius: 0 0 6px 6px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 

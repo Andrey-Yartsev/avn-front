@@ -48,9 +48,10 @@
                   class="sticky-header-controls header-mobile"
                   v-if="$mq === 'mobile'"
                 >
-                  <router-link
+                  <a
                     class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                    :to="`/${profile.username}`"
+                    :href="`/`"
+                    @click.prevent="goBack"
                   />
                   <h1 class="page-title">Following</h1>
                 </div>
@@ -110,6 +111,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import UserDropdown from "@/components/common/userDropdawn/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
+import BackRouter from "@/router/backRouter";
 
 export default {
   name: "Followers",
@@ -222,6 +224,9 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addPost"
       });
+    },
+    goBack() {
+      BackRouter.back();
     }
   },
   watch: {

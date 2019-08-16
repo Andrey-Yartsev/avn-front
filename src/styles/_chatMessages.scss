@@ -423,7 +423,9 @@
   }
 }
 
-.tipsMessage {
+.tipsMessage,
+.snapchatMessage {
+  color: $secondary-color;
 
   .message {
 
@@ -493,7 +495,7 @@
   }
 }
 
-.chatMessageSending {
+.chatFlatLoader {
   height: 6px;
   background: repeating-linear-gradient(to right, rgba(255, 64, 129, 1) 0%, rgba(33, 150, 243, 1) 50%, rgba(255, 64, 129, 1) 100%);
   background-size: 200% auto;

@@ -11,6 +11,34 @@
   .profile-name {
     padding: 0;
   }
+
+  .rounded-container {
+
+
+    &.ps {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 357px);
+      }
+
+      @include media-breakpoint-down($desktop-breakpoint) {
+        overflow: visible !important;
+      }
+
+      .ps {
+
+        &__rail-y {
+          opacity: .6;
+          margin-top: 4px;
+          margin-bottom: 4px;
+        }
+
+        &__thumb-y {
+          right: 4px;
+        }
+      }
+    }
+  }
 }
 
 .profile-wrapper {

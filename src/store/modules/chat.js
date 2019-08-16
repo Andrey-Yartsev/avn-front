@@ -16,7 +16,9 @@ const state = {
   // fetch chats
   allDataReceived: false,
   offset: 0,
-  chats: []
+  chats: [],
+  chatsLoading: false,
+  moreChatsLoading: false
   //
 };
 
@@ -353,7 +355,7 @@ const mutations = {
   addOldMessages(state) {
     state.messages = state.moreMessages.concat(state.messages);
   },
-  //if forceUpdate == true then do chat updating else add chats to existing
+  // if forceUpdate == true then do chat updating else add chats to existing
   fetchChatsComplete(state, forceUpdate) {
     if (forceUpdate) {
       state.chats = [...state._fetchChatsResult];
@@ -385,9 +387,27 @@ mutations.fetchChatsReset = state => {
   }
 };
 
+mutations.chatsLoading = (state, flag) => {
+  state.chatsLoading = flag;
+};
+
+mutations.moreChatsLoading = (state, flag) => {
+  state.moreChatsLoading = flag;
+};
+
 actions.fetchChats = ({ commit, dispatch, state }, forceUpdate) => {
+  if (forceUpdate) {
+    commit("chatsLoading", true);
+  } else {
+    commit("moreChatsLoading", true);
+  }
   return dispatch("_fetchChats", state.offset).then(() => {
     commit("fetchChatsComplete", forceUpdate);
+    if (forceUpdate) {
+      commit("chatsLoading", false);
+    } else {
+      commit("moreChatsLoading", false);
+    }
   });
 };
 

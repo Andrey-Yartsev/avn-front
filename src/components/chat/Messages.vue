@@ -16,7 +16,7 @@
       <div class="chat-scrollbar" ref="messagesMobileContainer">
         <div v-if="allMessagesLoaded" class="startMessages"></div>
         <div
-          class="chatMessageSending past-messages semi-transparent"
+          class="chatFlatLoader past-messages semi-transparent"
           v-if="moreLoading"
         >
           Loading history...
@@ -49,7 +49,8 @@
                   lockedMessage: isLocked(v),
                   unlockedMessage: isUnlocked(v),
                   'message-icon': isLocked(v) || v.isTips || !isLocked(v),
-                  mine: isMyMessage(v)
+                  mine: isMyMessage(v),
+                  snapchatMessage: v.isSnapchat
                 }"
                 @click="messageClick(v)"
               >
@@ -58,7 +59,7 @@
                   :class="{ 'message-locked': v.textLength && isLocked(v) }"
                   v-if="v.textLength"
                 >
-                  <span class="message__text" v-html="text(v)"></span>
+                  <span class="message__text" v-html="text(v)" />
                   <span
                     class="message-locked__text"
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
@@ -117,7 +118,7 @@
           </div>
         </div>
         <div
-          class="chatMessageSending new-messages semi-transparent"
+          class="chatFlatLoader new-messages semi-transparent"
           v-if="sending"
         >
           Sending...

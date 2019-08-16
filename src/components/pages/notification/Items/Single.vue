@@ -8,9 +8,9 @@
       :class="{
         [v.type]: true,
         unread: !v.isRead,
-        'last-child': key === items.length - 1
+        'last-child': index === items.length - 1
       }"
-      v-for="(v, key) in items"
+      v-for="(v, index) in items"
       v-bind:key="v.id"
     >
       <div class="avatars-wrapper">
