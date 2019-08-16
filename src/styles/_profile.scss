@@ -306,6 +306,7 @@
 
       &__main {
         font-size: 17px;
+        transition: font-size .3s;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 21px;
@@ -438,7 +439,6 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - 456px);
-    transition: all .3s;
     position: relative;
     overflow-y: auto;
     padding-right: 10px;
@@ -1192,7 +1192,7 @@
     transform: translate(0, 0);
     left: 4px;
     bottom: -80px;
-    transition: all .3s;
+    transition: left .3s, bottom .3s;
     width: 286px;
     max-width: none;
 
@@ -1296,7 +1296,7 @@
     line-height: 1;
     display: block;
     font-weight: 400;
-    transition: all 0.3s ease;
+    transition: opacity .3s ease, color .3s ease;
   }
 }
 
