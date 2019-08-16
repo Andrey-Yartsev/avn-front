@@ -22,7 +22,6 @@
 
   .group-controls {
     .btn-media-event {
-      transition: all 0.4s;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         opacity: 0;
