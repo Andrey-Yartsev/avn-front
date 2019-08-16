@@ -122,12 +122,19 @@
   }
 }
 
+.login:not(.login_colored),
+.OtpView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    background-color: $white;
+  }
+}
+
 .login,
 .OtpView {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 100vh;
-    background-color: $white;
     display: flex;
     align-items: center;
     justify-content: center;

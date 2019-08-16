@@ -122,7 +122,9 @@ export default {
         return;
       }
       const post = this.postsState.posts[i];
-      if (!post.media || !post.media.length) {
+
+      //sometimes post.media[0].src may be null
+      if (!post.media || !post.media.length || !post.media[0].src) {
         return;
       }
       if (this.preloadedImageIndexes[i]) {

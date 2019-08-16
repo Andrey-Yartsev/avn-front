@@ -49,7 +49,8 @@
                   lockedMessage: isLocked(v),
                   unlockedMessage: isUnlocked(v),
                   'message-icon': isLocked(v) || v.isTips || !isLocked(v),
-                  mine: isMyMessage(v)
+                  mine: isMyMessage(v),
+                  snapchatMessage: v.isSnapchat
                 }"
                 @click="messageClick(v)"
               >
@@ -135,7 +136,7 @@ import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
 import moment from "moment";
 
-const bottomThreshold = 40; // pixels left to bottom of container
+const bottomThreshold = 100; // pixels left to bottom of container
 
 export default {
   name: "ChatMessages",
@@ -339,7 +340,7 @@ export default {
           let prevAuthorChanges = false;
           let nextDayChanges = false;
 
-          let current = moment(messages[i].changedAt);
+          let current = moment(messages[i].createdAt);
           let diffTime2 = now.diff(current);
           let oldMessage = moment.duration(diffTime2).days() > 0;
 
@@ -348,7 +349,7 @@ export default {
               nextAuthorChanges = true;
             }
 
-            let next = moment(messages[i + 1].changedAt);
+            let next = moment(messages[i + 1].createdAt);
 
             let diffTime = next.diff(current);
             let duration = moment.duration(diffTime);
@@ -368,10 +369,10 @@ export default {
             if (!prevAuthorChanges) {
               if (lastDate) {
                 // check for new day
-                let current = moment(messages[i].changedAt);
+                let current = moment(messages[i].createdAt);
                 let last = moment(lastDate);
 
-                lastDate = messages[i].changedAt;
+                lastDate = messages[i].createdAt;
 
                 let diffTime = current.diff(last);
                 let duration = moment.duration(diffTime);
@@ -397,7 +398,7 @@ export default {
                   }
                 }
               } else {
-                lastDate = messages[i].changedAt;
+                lastDate = messages[i].createdAt;
               }
             } else {
               lastDate = null;

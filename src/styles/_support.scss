@@ -142,7 +142,10 @@ form.support-search-form {
     justify-content: center;
     align-items: center;
     align-content: center;
-    transition: all .3s;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      transition: opacity .3s;
+    }
 
     .header-scrolled & {
 
@@ -539,7 +542,7 @@ form.support-search-form {
         display: block;
         position: relative;
         padding: 6px 0 6px 35px;
-        transition: all .3s;
+        transition: padding-left .3s;
 
         @include media-breakpoint-up($desktop-breakpoint) {
 

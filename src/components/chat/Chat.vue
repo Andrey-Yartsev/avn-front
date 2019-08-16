@@ -183,14 +183,14 @@ export default {
       chats = chats.sort((a, b) => {
         let d1, d2;
         if (a.lastMessage) {
-          d1 = new Date(a.lastMessage.changedAt);
-        } else if (a.changedAt) {
-          d1 = a.changedAt;
+          d1 = new Date(a.lastMessage.createdAt);
+        } else if (a.createdAt) {
+          d1 = a.createdAt;
         }
         if (b.lastMessage) {
-          d2 = new Date(b.lastMessage.changedAt);
-        } else if (b.changedAt) {
-          d2 = b.changedAt;
+          d2 = new Date(b.lastMessage.createdAt);
+        } else if (b.createdAt) {
+          d2 = b.createdAt;
         }
         if (!d1 || !d2) {
           return -1;
@@ -281,7 +281,7 @@ export default {
               withUser: user,
               unreadMessagesCount: 0,
               lastMessage: lastMessage,
-              changedAt: new Date()
+              createdAt: new Date()
             };
             this.$store.commit("chat/addNewChat", this.virtualChat);
           });

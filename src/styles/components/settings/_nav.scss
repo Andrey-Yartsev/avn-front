@@ -14,11 +14,12 @@
 
   .rounded-container {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 357px);
-    }
 
     &.ps {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        max-height: calc(100vh - 357px);
+      }
 
       @include media-breakpoint-down($desktop-breakpoint) {
         overflow: visible !important;

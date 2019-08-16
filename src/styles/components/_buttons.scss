@@ -960,7 +960,7 @@ button {
   background: none;
   border: none;
   color: $main-color;
-  transition: all .3s;
+  transition: transform .3s;
 
   .popup &,
   .options-wrapper &,
@@ -1090,7 +1090,6 @@ button {
     top: 50%;
     transform: translate(-50%, -50%);
     transform-origin: center;
-    transition: all .3s;
 
     .mediasTop__header & {
 
@@ -1107,9 +1106,9 @@ button {
     &:hover {
       transform: scale(1.2);
 
-      &:after {
-        opacity: 1;
-      }
+      //&:after {
+      //  opacity: 1;
+      //}
 
       .options-wrapper & {
         opacity: .5;
@@ -1125,15 +1124,26 @@ button {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     color: #fff;
 
-    &:after {
-      opacity: 1;
-    }
+    //&:after {
+    //  opacity: 1;
+    //}
   }
 
   &_default {
 
     &:after {
       opacity: 0.5;
+      transition: opacity .3s;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+
+      &:hover {
+
+        &:after {
+          opacity: 1;
+        }
+      }
     }
   }
 

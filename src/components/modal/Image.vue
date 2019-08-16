@@ -3,12 +3,12 @@
     <div class="popup-container popup-image" slot="content">
       <div class="content content_relative">
         <img :src="src" />
-        <button
-          type="button"
-          class="close close_light close_visible-mob icn-item icn-size_lg"
-          @click="close"
-        />
       </div>
+      <button
+        type="button"
+        class="close close_light close_visible-mob icn-item icn-size_lg"
+        @click="close"
+      />
     </div>
   </Modal>
 </template>

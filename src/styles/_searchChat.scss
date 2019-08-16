@@ -75,7 +75,7 @@
   .check {
     visibility: hidden;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
     position: absolute;
     height: 2em;
     width: 2em;

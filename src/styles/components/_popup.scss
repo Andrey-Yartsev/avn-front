@@ -518,6 +518,7 @@
     padding: 20px 0;
     text-align: center;
     box-shadow: none;
+    position: static;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       max-width: none;
@@ -541,6 +542,7 @@
     .content {
       width: auto;
       display: inline-block;
+      overflow: visible;
 
       &:before {
         position: absolute;
@@ -557,7 +559,7 @@
     }
 
     .close {
-      position: fixed;
+      position: absolute;
       right: 0;
       top: 0;
     }
@@ -648,7 +650,6 @@
     .close {
       position: fixed;
       color: #fff;
-      opacity: .7;
       font-size: 30px;
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -668,8 +669,8 @@
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             right: 0;
             left: auto;
-            opacity: 1;
             display: block;
+            opacity: 1;
 
             @media screen and (orientation: landscape) {
               top: 5px;
@@ -679,18 +680,33 @@
       }
 
       &:hover {
-        opacity: 1;
 
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          opacity: 0;
+        &:after {
+          opacity: 1;
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            opacity: 0;
+          }
         }
       }
 
       &:after {
-        opacity: 1;
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           @include position-center;
+        }
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          opacity: .7;
+        }
+
+        .lightbox-post & {
+
+          .explore-page & {
+            @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+              opacity: 1;
+            }
+          }
         }
       }
     }

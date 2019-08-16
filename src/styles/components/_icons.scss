@@ -243,7 +243,7 @@
     color: red;
     height: 22px;
     line-height: 22px;
-    transition: all .3s;
+    transition: color .3s;
 
     .btn-block & {
       color: $main-color;

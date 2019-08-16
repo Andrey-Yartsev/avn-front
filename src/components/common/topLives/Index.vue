@@ -28,7 +28,18 @@
       <div class="story-info">
         <div class="story-header">
           <div class="name">
-            {{ lives.length > 1 ? "Top Live" : lives[0].user.name }}
+            <strong>Top Live</strong>
+            <div class="name-switcher">
+              <span
+                v-for="(item, key) in lives"
+                v-bind:key="key"
+                :class="{
+                  active: key === current
+                }"
+              >
+                {{ item.user.name }}
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -978,10 +978,17 @@
       color: #fff;
       border-radius: 1000px;
       padding: 6px 15px;
-      transition: all .3s;
 
       &:hover {
         color: #fff;
+      }
+
+      &--cancel {
+        transition: opacity .3s;
+      }
+
+      &--confirm {
+        transition: background-color .3s;
       }
 
       &--cancel {
@@ -995,7 +1002,6 @@
         line-height: 24px;
         color: $main-color;
         box-sizing: content-box;
-        transition: opacity .3s;
 
         &:after {
           content: "\E605";
