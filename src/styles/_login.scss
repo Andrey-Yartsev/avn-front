@@ -336,12 +336,22 @@
           display: block;
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            font-size: 1.8em;
+            font-size: 1.6em;
           }
 
           p {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
           }
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            font-size: 1.2em;
+            margin-top: 45px;
+
+            p {
+              margin-bottom: 0;
+            }
+          }
+
         }
 
       }
