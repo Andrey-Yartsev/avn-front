@@ -401,7 +401,7 @@ button {
 .btn-subscribe,
 .btn-edit-profile {
   color: $main-color;
-  transition: all 0.3s;
+  transition: opacity 0.3s, color 0.3s;
   opacity: 0.4;
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -644,7 +644,7 @@ button {
   border: none;
   background: none;
   opacity: 0.15;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, color 0.3s ease;
   color: inherit;
 
   @include media-breakpoint-up($desktop-breakpoint) {
