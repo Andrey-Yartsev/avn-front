@@ -1094,10 +1094,13 @@
     }
   }
 
-  .header-scrolled & {
+  &:not(.subscribe-popup__header) {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      z-index: 6;
+    .header-scrolled & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        z-index: 6;
+      }
     }
   }
 
