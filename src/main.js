@@ -7,6 +7,7 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueClipboard from "vue-clipboard2";
 import VeeValidate from "vee-validate";
 import * as Sentry from "@sentry/browser";
+import * as SentryIntegrations from "@sentry/integrations";
 import VueObserveVisibility from "vue-observe-visibility";
 import App from "@/App.vue";
 import router from "@/router";
@@ -36,19 +37,19 @@ VTooltip.enabled = window.innerWidth > 990;
 // import Logger from "js-logger";
 // Logger.useDefaults();
 
-if (process.env.NODE_ENV !== "development") {
-  Sentry.init({
-    dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
-    integrations: [
-      new Sentry.Integrations.Vue({
-        Vue,
-        attachProps: true
-      }),
-      new Sentry.Integrations.RewriteFrames()
-    ],
-    environment: process.env.VUE_APP_LOG_MODE
-  });
-}
+// if (process.env.NODE_ENV !== "development") {
+Sentry.init({
+  dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
+  integrations: [
+    new SentryIntegrations.Vue({
+      Vue,
+      attachProps: true
+    }),
+    new SentryIntegrations.RewriteFrames()
+  ],
+  environment: process.env.VUE_APP_LOG_MODE
+});
+// }
 
 Vue.config.productionTip = false;
 
