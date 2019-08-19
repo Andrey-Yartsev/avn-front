@@ -1,7 +1,5 @@
 <template>
-  <form class="comment-form"
-    :class="{ 'comment-form_clear-btn': canSend }"
-  >
+  <form class="comment-form" :class="{ 'comment-form_clear-btn': canSend }">
     <vue-tribute :options="tributeOptions">
       <TextareaAutosize
         id="comment_message"
