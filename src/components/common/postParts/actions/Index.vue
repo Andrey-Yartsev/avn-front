@@ -14,7 +14,7 @@
       class="actions__btn comments-btn"
       :class="{
         'clickable-state': showTip,
-        active: showAddCommentForm
+        active: commentsBtnSelectable && showAddCommentForm
       }"
       @click="postShowCommentForm"
       v-if="post.canComment"
@@ -91,6 +91,11 @@ export default {
       default: false
     },
     showAddCommentForm: {
+      type: Boolean,
+      default: false
+    },
+    //Needs for MediumView and LargeView different behaviours
+    commentsBtnSelectable: {
       type: Boolean,
       default: false
     },

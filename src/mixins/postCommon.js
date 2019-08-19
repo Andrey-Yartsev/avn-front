@@ -19,14 +19,10 @@ export default {
       return !this.post.canViewMedia;
     }
   },
-  watch: {
-    commentFocused: function() {
-      console.log(`commentFocused changed: ${this.commentFocused}`);
-    }
-  },
+  watch: {},
   methods: {
     showAddCommentForm() {
-      this.showTip = false;
+      this.hideTipForm();
       this.showAddComment = true;
     },
     hideAddCommentForm() {
@@ -38,7 +34,7 @@ export default {
       this.commentReplyUserName = initData.commentReplyUserName;
     },
     showTipForm() {
-      this.showAddComment = false;
+      this.hideAddCommentForm();
       this.showTip = true;
     },
     hideTipForm() {

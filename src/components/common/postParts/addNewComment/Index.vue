@@ -128,6 +128,8 @@ export default {
     userName: function() {
       if (this.userName) {
         this.message = `@${this.userName} `;
+      } else {
+        this.reset();
       }
       this.$refs.message.$el.focus();
     },

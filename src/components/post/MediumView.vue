@@ -37,6 +37,7 @@
           :post="post"
           :showCopy="!delayedPost"
           :from="from"
+          :commentsBtnSelectable="true"
           :showAddCommentForm="showAddComment"
           :showTip="showTip"
           :openModal="openModal"
