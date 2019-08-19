@@ -5,6 +5,9 @@ let showTimeoutId = 0;
 let hideTimeoutId = 0;
 
 const _hide = () => {
+  if (!Store.state.userBubble.show) {
+    return;
+  }
   Store.dispatch("userBubble/hide");
 };
 

@@ -53,7 +53,9 @@
           </template>
         </template>
         <template v-else>
-          <template v-if="!noAuthHeader && !authSection">
+          <template
+            v-if="!noAuthHeader && !authSection && !noAuthSectionForGuest"
+          >
             <Search />
             <User />
             <button
@@ -78,7 +80,7 @@
                 href="/register"
                 @click.prevent="openSingupModal"
                 class="btn border register"
-                >Sign Up</a
+                >Sign Up {{ noAuthSection }}</a
               >
               <a
                 href="/login"
@@ -155,7 +157,16 @@ export default {
     noAuthHeader() {
       return this.$route.meta && this.$route.meta.noAuthHeader;
     },
+    noAuthSection() {
+      return this.$route.meta && this.$route.meta.noAuthSection;
+    },
+    noAuthSectionForGuest() {
+      return this.noAuthSection && !this.user;
+    },
     authSection() {
+      if (this.noAuthSection) {
+        return false;
+      }
       if (!this.user) {
         return true;
       }

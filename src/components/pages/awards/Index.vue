@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="awards-header">
+      ddd
       <img src="/static/img/avnawards.png" alt="" />
     </div>
     <div class="awards-title text-centered">
@@ -20,7 +21,7 @@
         <h3>Autofilled categories</h3>
         <Columns
           :categories="categories[0]"
-          :value="user.name"
+          :value="modelUser.name"
           class="underscore"
           :disabled="true"
         />
@@ -43,9 +44,11 @@ import Footer from "@/components/footer/Index.vue";
 import Loader from "@/components/common/Loader";
 import UserSearchField from "./UserSearchField";
 import Columns from "./Columns";
+import User from "@/mixins/user";
 
 export default {
   name: "AvnAwards",
+  mixins: [User],
   components: {
     Footer,
     Loader,
@@ -119,10 +122,10 @@ export default {
     sent() {
       return this.$store.state.awards.nominateSuccess;
     },
-    username() {
+    modelUsername() {
       return this.$route.params.username;
     },
-    user() {
+    modelUser() {
       return this.$store.state.awards.fetchUserResult;
     },
     successText() {
@@ -130,19 +133,21 @@ export default {
     }
   },
   watch: {
-    sent(sent) {
-      if (this.predefined && sent) {
-        this.$store.dispatch("global/flashToast", {
-          text: this.successText
-        });
-        this.$router.push("/" + this.$route.params.username);
-      }
-    },
     loading(loading) {
       if (this.predefined && !loading) {
         if (!this.categories[0].length) {
           this.$router.push("/not-found");
         }
+      }
+    },
+    // user(user) {
+    //   console.log(user);
+    //   // this.init();
+    // },
+    user: {
+      immediate: true,
+      handler(user) {
+        console.log(user);
       }
     }
   },
@@ -151,10 +156,20 @@ export default {
       this.data[v.id] = v.value;
     },
     send() {
-      this.$store.dispatch("awards/nominate", {
-        eventId: this.eventId,
-        data: this.data
-      });
+      this.$store
+        .dispatch("awards/nominate", {
+          eventId: this.eventId,
+          data: this.data
+        })
+        .then(() => {
+          if (this.predefined && this.sent) {
+            this.$router.push("/" + this.$route.params.username);
+            this.$store.dispatch("global/flashToast", {
+              text: this.successText
+            });
+            this.$store.dispatch("awards/nominateReset");
+          }
+        });
     },
     rearrangeByCols(items) {
       const columns = [[], [], []];
@@ -167,13 +182,39 @@ export default {
         }
       }
       return columns;
+    },
+    setPredefinedData() {
+      const autofilledCats = this._categories.filter(v => {
+        return this.autofilledCatIds.indexOf(v.id) !== -1;
+      });
+      autofilledCats.forEach(cat => {
+        this.data[cat.id] = this.modelUser.name;
+      });
     }
   },
   created() {
-    this.$store.dispatch("awards/fetchCategories", this.eventId);
-    if (this.predefined) {
-      this.$store.dispatch("awards/fetchUser", this.username);
+    if (!this.user) {
+      this.$store.dispatch("modal/show", {
+        name: "login",
+        data: {
+          disableClose: true,
+          disableFooter: true
+        }
+      });
     }
+
+    this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
+      if (this.predefined) {
+        this.$store
+          .dispatch("awards/fetchUser", this.modelUsername)
+          .then(() => {
+            this.setPredefinedData();
+          })
+          .catch(() => {
+            this.$router.push("/not-found");
+          });
+      }
+    });
   }
 };
 </script>

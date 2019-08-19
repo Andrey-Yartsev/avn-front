@@ -554,6 +554,7 @@ const routes = [
     path: "/avn_awards/nominations",
     component: AvnAwards,
     meta: {
+      noAuthSection: true,
       staticPage: true,
       cssName: "staticPage"
     }
@@ -563,6 +564,7 @@ const routes = [
     path: "/gayvn_awards/nominations",
     component: AvnAwards,
     meta: {
+      noAuthSection: true,
       staticPage: true,
       cssName: "staticPage",
       isGay: true
@@ -573,6 +575,7 @@ const routes = [
     path: "/nominator/:username/:type/:categories?",
     component: AvnAwards,
     meta: {
+      noAuthSection: true,
       staticPage: true,
       cssName: "staticPage",
       predefined: true

@@ -13,6 +13,7 @@ const mutations = {
 
 createRequestAction({
   prefix: "fetchCategories",
+  requestType: "any",
   apiPath: "ballot/categories/{eventId}",
   state,
   mutations,
@@ -80,7 +81,9 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{username}/, params);
-  }
+  },
+  localError: true,
+  requestType: "no-token"
 });
 
 export default {
