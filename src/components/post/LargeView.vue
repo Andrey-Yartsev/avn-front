@@ -4,7 +4,7 @@
       'post postPage',
       {
         post_preparation: !post.isMediaReady,
-        dropdawnOpened
+        dropdownOpened
       }
     ]"
   >
@@ -37,8 +37,8 @@
           v-if="$mq === 'mobile'"
           :datetime="timePassed"
           :showCopy="!delayedPost"
-          @openDropdawn="dropdawnOpened = true"
-          @hideDropdawn="dropdawnOpened = false"
+          @openDropdawn="dropdownOpened = true"
+          @hideDropdawn="dropdownOpened = false"
         />
         <p
           class="text hidden-desktop"
@@ -64,11 +64,12 @@
             :post="post"
             :from="from"
             :showCopy="!delayedPost"
-            :showTips="showTip"
+            :showAddCommentForm="showAddComment"
+            :showTip="showTip"
             @clickOnDetailsView="clickOnCommentForm"
             @postShowCommentForm="clickOnCommentForm"
             @postLike="likePost"
-            @toggleTip="toggleTipForm"
+            @toggleTip="_toggleTipForm"
           />
         </template>
         <div class="right-col">
@@ -101,6 +102,7 @@
             :totalComments="post.commentsCount"
             :loading="commentsLoading"
             :getComments="getComments"
+            :commentReplyId="commentReplyId"
             @commentReply="commentReply"
             @likeComment="likeComment"
             @commentRemove="commentRemove"
@@ -121,12 +123,13 @@
                   v-if="post.canComment && !showTip"
                   :sendNewComment="sendNewComment"
                   :userName="commentReplyUserName"
+                  @reset="commentReset"
                 />
                 <Tip
                   v-if="showTip || (!post.canComment && this.canSendTips)"
                   :user="post.author"
                   ref="tip"
-                  @cancel="closeTip"
+                  @cancel="closeTipForm"
                   :tipId="`${post.id}`"
                   class="tip-form_post"
                 />
@@ -153,11 +156,12 @@
                 :post="post"
                 :from="from"
                 :showCopy="!delayedPost"
-                :showTips="showTip"
+                :showTip="showTip"
+                :showAddCommentForm="showAddComment"
                 @clickOnDetailsView="clickOnCommentForm"
                 @postShowCommentForm="clickOnCommentForm"
                 @postLike="likePost"
-                @toggleTip="toggleTipForm"
+                @toggleTip="_toggleTipForm"
               />
             </template>
           </div>
@@ -170,12 +174,13 @@
           v-if="post.canComment && !showTip"
           :sendNewComment="sendNewComment"
           :userName="commentReplyUserName"
+          @reset="commentReset"
         />
         <Tip
           v-if="showTip || (!post.canComment && this.canSendTips)"
           :user="post.author"
           ref="tip"
-          @cancel="closeTip"
+          @cancel="closeTipForm"
           :tipId="`${post.id}`"
           class="tip-form_post"
         />
@@ -263,12 +268,16 @@ export default {
         this.isAuth() &&
         (this.canSendTips || this.post.canComment)
       );
+    },
+    showSubscribeButton() {
+      return !this.post.canViewMedia;
     }
   },
   data: () => ({
     commentPage: 0,
     popupView: true,
-    dropdawnOpened: false
+    dropdownOpened: false,
+    currentCommentReply: null
   }),
   props: {
     post: {
@@ -290,17 +299,19 @@ export default {
   },
   methods: {
     clickOnCommentForm() {
-      this.showAddCommentForm = !this.showAddCommentForm;
-      this.showTip = false;
+      this.toggleAddCommentForm();
+      // this.showAddComment = !this.showAddComment;
+      // this.showTip = false;
       if (this.popupView) {
-        const className = this.showAddCommentForm ? "" : "lightbox-post";
+        const className = this.showAddComment ? "" : "lightbox-post";
         this.$emit("addExtraClassName", className);
       }
       this.popupView = false;
     },
-    toggleTipForm() {
-      this.showTip = !this.showTip;
-      this.showAddCommentForm = false;
+    _toggleTipForm() {
+      this.toggleTipForm();
+      // this.showTip = !this.showTip;
+      // this.showAddComment = false;
       if (this.popupView) {
         const className = this.showTip ? "" : "lightbox-post";
         this.$emit("addExtraClassName", className);

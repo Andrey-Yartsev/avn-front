@@ -1,5 +1,5 @@
 <template>
-  <form class="comment-form">
+  <form class="comment-form" :class="{ 'comment-form_clear-btn': canSend }">
     <vue-tribute :options="tributeOptions">
       <TextareaAutosize
         id="comment_message"
@@ -14,11 +14,19 @@
         @enter="sendComment"
         @tribute-replaced="tributeHandler"
       />
+      <span
+        role="button"
+        tabindex="-1"
+        id="comment-input-clear"
+        class="btn-clear-search icn-item btn-reset btn-reset_prim-color icn-pos_center"
+        v-if="canSend"
+        @click="reset"
+      />
     </vue-tribute>
     <button
       type="submit"
       class="btn comment-btn"
-      v-bind:disabled="!message.trim().length"
+      :disabled="!canSend"
       @click.prevent="sendComment"
     >
       Post
@@ -91,6 +99,12 @@ export default {
           return template;
         }
       };
+    },
+    canSend() {
+      if (!this.message) {
+        return false;
+      }
+      return !!this.message.trim();
     }
   },
   methods: {
@@ -105,12 +119,24 @@ export default {
     },
     tributeHandler() {
       this.message = this.$refs.message.$el.value;
+    },
+    reset() {
+      this.message = "";
     }
   },
   watch: {
     userName: function() {
-      this.message = `@${this.userName} `;
+      if (this.userName) {
+        this.message = `@${this.userName} `;
+      } else {
+        this.reset();
+      }
       this.$refs.message.$el.focus();
+    },
+    message: function() {
+      if (!this.message) {
+        this.$emit("reset");
+      }
     }
   }
 };
