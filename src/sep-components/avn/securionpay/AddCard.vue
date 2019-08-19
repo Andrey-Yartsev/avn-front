@@ -360,6 +360,7 @@
           </div>
         </div>
       </form>
+      <Transactions />
     </div>
   </div>
 </template>
