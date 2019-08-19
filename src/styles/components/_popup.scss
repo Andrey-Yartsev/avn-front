@@ -418,7 +418,11 @@
 
   &.popup-login {
     max-width: 344px;
-    padding: 52px 20px 23px;
+    padding: 23px 20px;
+
+    &:not(.popup-login_no-close) {
+      padding-top: 52px;
+    }
 
     .content {
       overflow: visible;

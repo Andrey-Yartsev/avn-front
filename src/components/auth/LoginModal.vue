@@ -1,6 +1,9 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container popup-login" slot="content">
+    <div
+      class="popup-container popup-login popup-login_no-close"
+      slot="content"
+    >
       <div class="content content_relative">
         <LoginForm type="modal" @openSignup="_close" />
       </div>
