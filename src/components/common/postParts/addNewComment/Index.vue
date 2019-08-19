@@ -1,5 +1,7 @@
 <template>
-  <form class="comment-form">
+  <form class="comment-form"
+    :class="{ 'comment-form_clear-btn': canSend }"
+  >
     <vue-tribute :options="tributeOptions">
       <TextareaAutosize
         id="comment_message"
@@ -18,7 +20,6 @@
         role="button"
         tabindex="-1"
         id="comment-input-clear"
-        style="left: 250px;"
         class="btn-clear-search icn-item btn-reset btn-reset_prim-color icn-pos_center"
         v-if="canSend"
         @click="reset"

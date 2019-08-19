@@ -629,9 +629,14 @@ button {
 
 .btn-reply {
   color: $main-color;
+
+  &.active {
+    color: $secondary-color;
+    opacity: 1;
+  }
 }
 
-.btn-remove {
+.btn-remove:not([disabled]) {
   color: red;
 }
 

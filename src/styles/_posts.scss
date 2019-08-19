@@ -272,8 +272,13 @@
       }
     }
 
-    &.btn-remove {
+    &.btn-remove:not([disabled]) {
       opacity: 1;
+    }
+
+    &[disabled] {
+      opacity: .5;
+      color: $main-color;
     }
   }
 
