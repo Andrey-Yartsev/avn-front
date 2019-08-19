@@ -139,21 +139,13 @@ export default {
           this.$router.push("/not-found");
         }
       }
-    },
-    // user(user) {
-    //   console.log(user);
-    //   // this.init();
-    // },
-    user: {
-      immediate: true,
-      handler(user) {
-        console.log(user);
-      }
     }
   },
   methods: {
     input(v) {
-      this.data[v.id] = v.value;
+      const o = {};
+      o[v.id] = v.value;
+      this.data = { ...this.data, ...o };
     },
     send() {
       this.$store
@@ -188,7 +180,9 @@ export default {
         return this.autofilledCatIds.indexOf(v.id) !== -1;
       });
       autofilledCats.forEach(cat => {
-        this.data[cat.id] = this.modelUser.name;
+        const o = {};
+        o[cat.id] = this.modelUser.name;
+        this.data = { ...this.data, ...o };
       });
     }
   },

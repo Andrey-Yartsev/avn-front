@@ -40,7 +40,7 @@ export default {
     input(e, v) {
       this.$emit("input", {
         id: v.id,
-        value: e.data
+        value: e.target.value
       });
     }
   }
