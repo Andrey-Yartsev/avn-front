@@ -395,9 +395,18 @@
 
 .comment-form {
 
+  &_clear-btn {
+    padding-right: 34px;
+  }
+
   .v-tribute {
     flex: 1;
     margin: 0 15px 0 0;
+    position: relative;
+  }
+
+  .btn-clear-search {
+    right: 8px;
   }
 }
 

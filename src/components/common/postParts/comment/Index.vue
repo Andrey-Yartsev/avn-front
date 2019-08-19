@@ -41,6 +41,7 @@
         <button
           type="button"
           class="post-option btn-reply"
+          :class="{ active: isReplying }"
           @click="$emit('commentReply', comment)"
           v-if="user"
         >
@@ -50,6 +51,7 @@
           v-if="comment.canDelete"
           type="button"
           class="post-option btn-remove"
+          :disabled="isReplying"
           @click="$emit('commentRemove', comment)"
         >
           Remove
@@ -89,6 +91,10 @@ export default {
       default: true
     },
     noPadding: {
+      type: Boolean,
+      default: false
+    },
+    isReplying: {
       type: Boolean,
       default: false
     }

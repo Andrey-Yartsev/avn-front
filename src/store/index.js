@@ -53,6 +53,7 @@ import backRouter from "@/store/modules/backRouter";
 import postLikes from "@/store/modules/postLikes";
 import awards from "@/store/modules/awards";
 import products from "@/store/modules/products";
+import comments from "@/store/modules/comments";
 
 Vue.use(Vuex);
 
@@ -111,7 +112,8 @@ const store = new Vuex.Store({
     backRouter,
     postLikes,
     awards,
-    products
+    products,
+    comments
   }
 });
 

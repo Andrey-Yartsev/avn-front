@@ -23,6 +23,7 @@
             'first-comment': index === 0,
             'last-comment': index === rearranged.length - 1
           }"
+          :isReplying="commentReplyId === comment.id"
           @commentReply="comment => $emit('commentReply', comment)"
           @commentRemove="comment => $emit('commentRemove', comment)"
           @likeComment="data => $emit('likeComment', data)"
@@ -114,6 +115,10 @@ export default {
     },
     getComments: {
       type: Function,
+      required: true
+    },
+    commentReplyId: {
+      type: Number,
       required: true
     }
   },

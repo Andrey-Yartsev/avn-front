@@ -11,6 +11,7 @@
         v-for="comment in visibleComments"
         :key="comment.id"
         :comment="comment"
+        :isReplying="commentReplyId === comment.id"
         @commentReply="comment => $emit('commentReply', comment)"
         @commentRemove="comment => $emit('commentRemove', comment)"
         @likeComment="data => $emit('likeComment', data)"
@@ -39,6 +40,10 @@ export default {
     },
     clickOnShowMore: {
       type: Function,
+      required: true
+    },
+    commentReplyId: {
+      type: Number,
       required: true
     }
   },

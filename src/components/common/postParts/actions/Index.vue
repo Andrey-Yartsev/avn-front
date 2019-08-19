@@ -12,7 +12,10 @@
     </span>
     <span
       class="actions__btn comments-btn"
-      :class="{ 'clickable-state': showTips }"
+      :class="{
+        'clickable-state': showTip,
+        active: commentsBtnSelectable && showAddCommentForm
+      }"
       @click="postShowCommentForm"
       v-if="post.canComment"
     >
@@ -25,7 +28,7 @@
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
-      <span class="actions__btn" @click="toggleTip"
+      <span class="actions__btn" :class="{ active: showTip }" @click="toggleTip"
         ><span
           class="btn-icon icn-tips icn-item icn-size_lg"
           v-tooltip="'Tip'"
@@ -83,7 +86,16 @@ export default {
       type: Function,
       default: () => {}
     },
-    showTips: {
+    showTip: {
+      type: Boolean,
+      default: false
+    },
+    showAddCommentForm: {
+      type: Boolean,
+      default: false
+    },
+    //Needs for MediumView and LargeView different behaviours
+    commentsBtnSelectable: {
       type: Boolean,
       default: false
     },

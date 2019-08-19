@@ -194,12 +194,12 @@
     position: relative;
   }
 
-  #content > & {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      transition: none;
-    }
-  }
+  //#content > & {
+  //
+  //  @include media-breakpoint-up($desktop-breakpoint) {
+  //    transition: none;
+  //  }
+  //}
 
   //.forgot-wrapper,
   .login-wrapper {

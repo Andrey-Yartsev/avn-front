@@ -3,7 +3,7 @@
     :class="[
       'post',
       {
-        'open-dropdown-inside': showDropdawn,
+        'open-dropdown-inside': showDropdown,
         post_preparation: !post.isMediaReady,
         outofviewport: isVisible === false
       }
@@ -18,8 +18,8 @@
         <Header
           :post="post"
           :from="from"
-          @openDropdawn="showDropdawn = true"
-          @hideDropdawn="showDropdawn = false"
+          @openDropdawn="showDropdown = true"
+          @hideDropdawn="showDropdown = false"
           :showCopy="!delayedPost"
         />
         <p class="text" v-html="post.text" ref="text"></p>
@@ -37,10 +37,13 @@
           :post="post"
           :showCopy="!delayedPost"
           :from="from"
-          v-on:postShowCommentForm="toggleCommentForm"
-          v-on:postLike="likePost"
-          @toggleTip="toggleTipForm"
+          :commentsBtnSelectable="true"
+          :showAddCommentForm="showAddComment"
+          :showTip="showTip"
           :openModal="openModal"
+          @postShowCommentForm="toggleCommentForm"
+          @postLike="likePost"
+          @toggleTip="toggleTipForm"
         />
         <div v-else class="actions">
           <div class="datetime-value">
@@ -52,22 +55,24 @@
         </div>
       </div>
       <AddComment
-        v-if="showAddCommentForm"
+        v-if="showAddComment"
         :sendNewComment="sendNewComment"
         :userName="commentReplyUserName"
+        @reset="commentReset"
       />
       <Tip
         :user="post.author"
         v-if="showTip"
         ref="tip"
-        @cancel="closeTip"
+        @cancel="closeTipForm"
         :tipId="`${post.id}`"
         class="tip-form_post"
       />
       <CommentsList
         v-if="post.commentsCount"
-        :comments="post.comments || []"
+        :comments="comments"
         :commentsCount="post.commentsCount || 0"
+        :commentReplyId="commentReplyId"
         :clickOnShowMore="openModal"
         @commentReply="commentReply"
         @likeComment="likeComment"
@@ -96,7 +101,7 @@ export default {
   mixins: [ModalRouterGoto, User, PostCommon, PostOpen, UserSuggestionsInline],
   data() {
     return {
-      showDropdawn: false,
+      showDropdown: false,
       // isVisible: undefined,
       height: undefined
     };
@@ -143,10 +148,10 @@ export default {
   },
   watch: {
     funded() {
-      if (!this.showTip) {
+      if (!this.showTipForm) {
         return;
       }
-      this.closeTip();
+      this.closeTipForm();
     }
     // $mq() {
     //   if (this.$mq === "desktop" && !this.isVisible) {
@@ -160,8 +165,9 @@ export default {
         this.showSubscribeModal();
         return;
       }
-      this.showAddCommentForm = !this.showAddCommentForm;
-      this.showTip = false;
+      this.toggleAddCommentForm();
+      // this.showAddCommentForm = !this.showAddCommentForm;
+      // this.showTip = false;
     },
     visibilityChanged(isVisible, entry) {
       if (this.$mq === "desktop") {
