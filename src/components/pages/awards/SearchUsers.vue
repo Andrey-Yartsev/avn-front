@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     select(user) {
-      console.log(user);
       this.$emit("select", user);
     }
   }
