@@ -474,6 +474,10 @@
   &.selected {
     opacity: 1;
   }
+
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .stream-btns {
