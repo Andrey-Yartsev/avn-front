@@ -65,7 +65,6 @@ const result = {
     },
 
     likePost({ commit }, { post, addLike }) {
-      console.log("XXX");
       const postId = post.id;
       return PostApi.likePost({ postId, addLike })
         .then(response => {
