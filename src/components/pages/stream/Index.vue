@@ -266,7 +266,7 @@
             v-if="$root.showTips"
             class="stream-btn"
             @click="asideType = 'tip'"
-            :class="{ selected: asideType === 'tip' }"
+            :class="{ selected: asideType === 'tip', disabled: !amount }"
           >
             <span
               class="btn-icon icn-tips icn-item icn-size_lg"
@@ -277,7 +277,7 @@
           <span
             class="stream-btn stream-online-count"
             @click="asideType = 'view'"
-            :class="{ selected: asideType === 'view' }"
+            :class="{ selected: asideType === 'view', disabled: !looksCount }"
           >
             <span
               class="looking btn-icon icn-item icn-size_lg"
