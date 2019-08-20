@@ -157,6 +157,7 @@
                 :from="from"
                 :showCopy="!delayedPost"
                 :showTip="showTip"
+                :commentsBtnSelectable="true"
                 :showAddCommentForm="showAddComment"
                 @clickOnDetailsView="clickOnCommentForm"
                 @postShowCommentForm="clickOnCommentForm"
@@ -277,7 +278,8 @@ export default {
     commentPage: 0,
     popupView: true,
     dropdownOpened: false,
-    currentCommentReply: null
+    currentCommentReply: null,
+    showAddComment: true
   }),
   props: {
     post: {
