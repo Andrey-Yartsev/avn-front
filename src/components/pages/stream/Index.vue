@@ -314,7 +314,7 @@
       :duration="time"
       :streamDuration="streamDuration"
       :streamStartTime="streamStartTime"
-      v-if="isStopped"
+      v-if="isStopped && isStoppedByButton"
       :canBeSaved="canBeSaved"
       :loading="finishing"
     />
@@ -356,6 +356,7 @@ export default {
       isReadyToStart: false,
       isStarted: false,
       isStopped: false,
+      isStoppedByButton: false,
       startingStream: false,
       isMirror: false,
       time: undefined,
@@ -537,6 +538,7 @@ export default {
       });
     },
     stopStream() {
+      this.isStoppedByButton = true;
       this.requestStreamStat();
       Streams.stopStream();
     },
@@ -583,13 +585,13 @@ export default {
         if (haveToSave) {
           StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
-              location.href = "/";
+              this.$router.push("/");
             })
             .catch(() => {
-              location.href = "/";
+              this.$router.push("/");
             });
         } else {
-          location.href = "/";
+          this.$router.push("/");
         }
 
         this.startedStreamId = undefined;
