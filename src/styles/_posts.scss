@@ -1047,10 +1047,10 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         left: 0;
-        right: 0;
+        right: -6px;
         top: 0;
         bottom: 0;
-        padding-right: 5px;
+        padding-right: 12px;
       }
     }
   }
