@@ -1,7 +1,8 @@
 <template>
   <Modal :onClose="close">
     <div
-      class="popup-container popup-login popup-login_no-close"
+      class="popup-container popup-login"
+      :class="{ 'popup-login_no-close': disableClose }"
       slot="content"
     >
       <div class="content content_relative">
