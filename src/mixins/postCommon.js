@@ -5,7 +5,10 @@ const initData = {
   commentReplyId: 0
 };
 
+import User from "@/mixins/user";
+
 export default {
+  mixins: [User],
   data: function() {
     return {
       ...initData
@@ -90,6 +93,10 @@ export default {
       });
     },
     likeComment(data) {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "signup" });
+        return;
+      }
       this.$store.dispatch("comments/likeComment", {
         actionPrefix: this.actionPrefix,
         postId: this.post.id,
