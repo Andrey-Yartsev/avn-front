@@ -130,13 +130,6 @@
       opacity: .1;
       pointer-events: none;
     }
-
-    &.tips {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-bottom: 2px;
-      }
-    }
   }
 }
 
