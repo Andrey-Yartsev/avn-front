@@ -358,7 +358,8 @@ const routes = [
     component: NotFoundPage,
     meta: {
       noAuthHeader: true,
-      cssName: "staticPage"
+      cssName: "staticPage",
+      noAuthSection: true
     }
   },
   {
