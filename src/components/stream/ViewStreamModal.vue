@@ -415,15 +415,15 @@ export default {
         this.$store.dispatch("global/setError", { message: error });
       },
 
-      onRemoteVideoUnavailable: () => {
-        this.connected = false;
-        if (!this.$store.state.modal.stream.data.stream) {
-          return;
-        }
-        this.$store.dispatch("global/setError", {
-          message: "No remote video available"
-        });
-      },
+      // onRemoteVideoUnavailable: () => {
+      //   this.connected = false;
+      //   if (!this.$store.state.modal.stream.data.stream) {
+      //     return;
+      //   }
+      //   this.$store.dispatch("global/setError", {
+      //     message: "No remote video available"
+      //   });
+      // },
 
       onInit: function() {},
 
