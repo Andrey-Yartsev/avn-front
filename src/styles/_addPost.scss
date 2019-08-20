@@ -1198,6 +1198,7 @@
   align-items: center;
   flex-wrap: nowrap;
   margin-right: 14px;
+  cursor: pointer;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-right: 16px;
