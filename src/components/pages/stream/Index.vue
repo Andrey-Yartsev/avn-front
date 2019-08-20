@@ -252,7 +252,7 @@
           </span>
           <span
             class="stream-btn"
-            :class="{ selected: asideType === 'like' }"
+            :class="{ selected: asideType === 'like', disabled: !likesCount }"
             ref="likeBtn"
             @click="asideType = 'like'"
           >
