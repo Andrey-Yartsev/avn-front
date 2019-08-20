@@ -176,7 +176,7 @@
         <div
           id="videowrap"
           class="stream-video-container"
-          :class="{ 'mirror-reflection': isMirrow }"
+          :class="{ 'mirror-reflection': isMirror }"
         >
           <div class="likesContainer">
             <div
@@ -357,7 +357,7 @@ export default {
       isStarted: false,
       isStopped: false,
       startingStream: false,
-      isMirrow: false,
+      isMirror: false,
       time: undefined,
       startedStreamId: undefined,
       likes: [],
@@ -436,7 +436,7 @@ export default {
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
       setTimeout(() => {
-        this.isMirrow = Streams.cameraFacingMode === "user" && Streams.isMobile;
+        this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
     },
     toggleCamera() {
@@ -476,7 +476,7 @@ export default {
       this.streamAudios = audioDevices;
       this.streamAudio = audioDevices[1];
       setTimeout(() => {
-        this.isMirrow = Streams.cameraFacingMode === "user" && Streams.isMobile;
+        this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
     },
     tick() {
