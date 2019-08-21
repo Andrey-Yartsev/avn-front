@@ -202,6 +202,7 @@
             @dragstart.prevent="() => false"
           />
         </div>
+        ddd
         <div id="stream-timer" v-if="!isStopped && !startingStream">
           {{ time }}
         </div>
@@ -333,6 +334,7 @@ import logoBase64 from "./logo";
 import Comments from "@/components/common/streamComments/Index";
 import StreamViewers from "@/components/pages/stream/Viewers";
 import { getCookie } from "@/components/pages/stream/debug";
+import moment from "moment";
 
 export default {
   name: "Stream",
@@ -481,24 +483,32 @@ export default {
       }, 333);
     },
     tick() {
-      const currentTime = Math.round(new Date().getTime() / 1000);
+      const _currentTime = Math.round(new Date().getTime() / 1000);
 
-      if (!this.streamStartTime || currentTime < this.streamStartTime) {
+      if (!this.streamStartTime || _currentTime < this.streamStartTime) {
         return;
       }
 
-      const diff = currentTime - this.streamStartTime;
-      const date = new Date(diff * 1000);
-      let hours = date.getHours();
-      let mins = date.getMinutes();
-      let secs = date.getSeconds();
-      hours = hours < 10 ? `0${hours}` : `${hours}`;
-      mins = mins < 10 ? `0${mins}` : `${mins}`;
-      secs = secs < 10 ? `0${secs}` : `${secs}`;
-      this.streamDuration = diff;
+      const currentTime = moment.unix(_currentTime);
+      const streamStartTime = moment.unix(this.streamStartTime);
+
+      const diffTime = currentTime.diff(streamStartTime);
+      const duration = moment.duration(diffTime);
+
+      let seconds = duration.seconds(),
+        minute = duration.minutes(),
+        hours = duration.hours();
+
+      const _hours = hours < 10 ? `0${hours}` : `${hours}`;
+      minute = minute < 10 ? `0${minute}` : `${minute}`;
+      seconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
       this.time =
-        diff > 3600 ? hours + ":" + mins + ":" + secs : mins + ":" + secs;
-      if (diff > 5) {
+        hours > 0
+          ? _hours + ":" + minute + ":" + seconds //
+          : minute + ":" + seconds;
+
+      if (seconds > 5) {
         this.canBeSaved = true;
       }
       // this.shownComments = this.comments.filter(i => i.hideTime > Date.now());
