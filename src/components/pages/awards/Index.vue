@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="awards-header">
-      ddd
       <img src="/static/img/avnawards.png" alt="" />
     </div>
     <div class="awards-title text-centered">

@@ -202,7 +202,6 @@
             @dragstart.prevent="() => false"
           />
         </div>
-        ddd
         <div id="stream-timer" v-if="!isStopped && !startingStream">
           {{ time }}
         </div>
