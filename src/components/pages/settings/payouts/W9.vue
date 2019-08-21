@@ -5,7 +5,7 @@
     <div class="settings">
       <div class="settings-header" v-if="$mq === 'mobile'">
         <router-link
-          :to="returnRoute"
+          to="/settings"
           class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
         />
 
@@ -6109,6 +6109,16 @@
 <script>
 import Loader from "@/components/common/Loader";
 
+/*
+
+Name or Business name is required
+Name or Business name should be 250 symbols maximum
+Social security number or Employer identification number is required
+Social security number or Employer identification number should be 9 symbols
+Social security number or Employer identification number should contain only digits
+
+*/
+
 export default {
   name: "W9",
   components: {
@@ -6119,45 +6129,16 @@ export default {
       saving: false
     };
   },
-  computed: {
-    returnRoute() {
-      if (this.isAccountPage) {
-        if (this.$route.params.view) {
-          return "/settings/account";
-        } else {
-          return "/settings";
-        }
-      } else if (this.isPrivacyPage) {
-        if (this.$route.params.view) {
-          return "/settings/privacy";
-        } else {
-          return "/settings";
-        }
-      } else if (this.$route.name === "SettingsStory") {
-        if (this.$route.params.view) {
-          return "/settings/story";
-        } else {
-          return "/settings";
-        }
-      }
-      if (this.$route.name === "Settings") {
-        return "/";
-      } else {
-        return "/settings";
-      }
-    }
-  },
   methods: {
     getFormData(event) {
       const formData = new FormData(event.target);
-      const data = Array.from(formData.entries()).reduce(
+      return Array.from(formData.entries()).reduce(
         (m, pair) => ({
           ...m,
           [pair[0]]: pair[1]
         }),
         {}
       );
-      return data;
     },
     sendForm(e) {
       const data = this.getFormData(e);

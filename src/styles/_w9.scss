@@ -29,6 +29,11 @@
     &[type="text"] {
       height: 28px;
     }
+
+    &[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   .pdf-obj-fixed {
@@ -147,7 +152,7 @@
 }
 
 .obj_5 {
-  left: 41.17%;
+  left: 41.10%;
   top: 19.91%;
   width: 1.333%;
   height: 1.095%;
