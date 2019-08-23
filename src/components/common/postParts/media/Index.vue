@@ -41,10 +41,7 @@
       </figure>
     </template>
     <template v-if="medias.length > 1">
-      <div
-        :class="`media-slider-pagination pagination-${uniqId}`"
-        :style="{ zIndex: 20 }"
-      />
+      <div :class="`media-slider-pagination pagination-${uniqId}`" />
       <div
         :class="`media-slider-navigation navigation-${uniqId}`"
         v-if="$mq === 'desktop'"
