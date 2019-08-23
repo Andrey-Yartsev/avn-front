@@ -140,7 +140,7 @@
                     v-if="isOwner(this.profile.id)"
                     @click="openAddPostModal"
                     type="button"
-                    class="make-post-btn btn-with-icon btn-with-icon_lg feed"
+                    class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
                   >
                     <span class="icn-item icn-post"></span>
                     Create new post

@@ -35,7 +35,7 @@
             Edit profile
           </router-link>
           <button
-            class="profile-actions__btn btn-with-icon btn-make-post make-post-btn"
+            class="profile-actions__btn btn-with-icon make-post-btn make-post-btn_color-sec"
             @click="openAddPostModal"
           >
             <span class="icn-item icn-post icn-size_lg"></span>

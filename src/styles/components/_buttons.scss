@@ -438,13 +438,6 @@ button {
   }
 }
 
-.btn-make-post {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin-left: 10px;
-  }
-}
-
 .profile-message-btn {
   color: $secondary-color;
 
