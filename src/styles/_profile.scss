@@ -89,24 +89,6 @@
     }
   }
 
-  .content-col {
-
-    &:not(.single-col) {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 calc(100% - 320px);
-        margin-left: auto;
-      }
-    }
-
-    &.single-col {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        margin-bottom: 20px;
-      }
-    }
-  }
-
   .site-footer {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
