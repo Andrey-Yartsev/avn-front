@@ -321,7 +321,6 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 3.2em;
           text-transform: capitalize;
-          font-family: $add-font;
         }
 
         &.for-models {
@@ -354,6 +353,13 @@
   .text {
     max-width: 960px;
     margin: 0 auto;
+  }
+}
+
+.alt-font {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    font-family: $add-font;
   }
 }
 

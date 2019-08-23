@@ -20,7 +20,7 @@
       <div class="login-caption-col">
         <div class="login-caption">
           <component :is="logo" />
-          <p class="promotion">
+          <p class="promotion alt-font">
             Coming together.
           </p>
         </div>
