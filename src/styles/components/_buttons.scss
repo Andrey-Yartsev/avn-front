@@ -211,6 +211,19 @@
     margin: 0 0 13px 20px;
   }
 
+  &_drop-arrow {
+    padding-right: 32px;
+
+    &:after {
+      content: "\E608";
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+    }
+  }
+
   &.btn-back-kitchen {
     position: fixed;
     z-index: 12;

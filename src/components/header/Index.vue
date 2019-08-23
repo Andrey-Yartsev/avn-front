@@ -94,7 +94,10 @@
                 v-click-outside="hide"
                 v-if="$mq === 'desktop'"
               >
-                <div class="btn login login_colored icn-item" @click="show">
+                <div
+                  class="btn login login_colored icn-item" @click="show"
+                  :class="{ 'btn_drop-arrow': $mq === 'desktop' }"
+                >
                   Log in
                 </div>
                 <div class="auth-block-dropdown">
