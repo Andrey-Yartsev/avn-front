@@ -477,8 +477,9 @@ export default {
 
       this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
-      this.streamAudios = audioDevices;
-      this.streamAudio = audioDevices[1];
+      this.streamAudios = [{ deviceId: undefined }, ...audioDevices];
+      this.streamAudio = this.streamAudios[1];
+
       setTimeout(() => {
         this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
