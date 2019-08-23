@@ -1166,7 +1166,7 @@
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        opacity: 0.06;
+        opacity: 0.12;
         z-index: 0;
       }
     }
