@@ -959,22 +959,6 @@
       background-color: rgba(248, 249, 250, 0.3);
       opacity: 0.06;
     }
-
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: -1;
-      background: linear-gradient(
-        30deg,
-        rgba(33, 150, 243, 1) 10%,
-        rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.06;
-    }
   }
 }
 
