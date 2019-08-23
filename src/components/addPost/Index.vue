@@ -307,7 +307,8 @@
       <Loader
         :fullscreen="false"
         :small="true"
-        class="overlay_semidark text-light"
+        :semidark="true"
+        class="text-light"
       />
     </div>
   </div>

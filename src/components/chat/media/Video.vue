@@ -8,7 +8,9 @@
       <Loader
         :fullscreen="false"
         text="Media is currently processing"
-        class="small overlay_semidark text-light"
+        :semidark="true"
+        class="text-light"
+        :small="true"
       />
     </div>
     <video

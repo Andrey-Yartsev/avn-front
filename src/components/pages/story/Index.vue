@@ -280,12 +280,14 @@
         v-if="!isReady"
         :fullscreen="false"
         text="Media is processing..."
-        class="overlay_semidark text-light processing-loader"
+        :semidark="true"
+        class="text-light processing-loader"
       />
       <Loader
         v-else-if="loadingFinal"
         :fullscreen="false"
-        class="overlay_semidark text-light processing-loader"
+        class="text-light processing-loader"
+        :semidark="true"
       />
     </div>
 

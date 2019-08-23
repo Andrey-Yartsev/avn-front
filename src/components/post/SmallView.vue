@@ -90,7 +90,8 @@
             <Loader
               :fullscreen="false"
               text="Media is currently processing"
-              class="small processing-loader text-light"
+              class="processing-loader text-light"
+              :small="true"
             />
           </div>
         </template>

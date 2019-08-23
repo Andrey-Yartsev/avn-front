@@ -304,7 +304,8 @@
     </div>
     <Loader
       text="Starting the stream"
-      class="overlay_semidark text-light"
+      class="text-light"
+      :semidark="true"
       v-if="startingStream"
     />
     <StreamStatistic
