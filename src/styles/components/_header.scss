@@ -409,22 +409,8 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 90px;
-      padding: 6px 32px 6px 13px;
+      padding-left: 13px;
       margin-left: 15px;
-    }
-
-    &:after {
-      content: "\E608";
-      position: absolute;
-      right: 6px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 24px;
-      display: none;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        display: block;
-      }
     }
   }
 
@@ -638,7 +624,7 @@
     font-size: 30px;
     margin: 0 0 0 15px;
     z-index: 1;
-    transition: transform 0.3s ease;
+    transition-duration: .3s;
 
     &:hover {
       transform: scale(1.1);
@@ -961,9 +947,11 @@
 }
 
 .make-post-btn {
-  color: $secondary-color;
 
   @include media-breakpoint-up($desktop-breakpoint) {
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
 
     &:hover {
       color: $secondary-color-darken;
@@ -979,53 +967,72 @@
     }
   }
 
-  &.btn {
-    font-size: 0;
-    line-height: 0;
-    padding: 10px 15px;
-    height: auto;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      color: #fff;
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1;
-    }
-  }
-
   &_header {
-    color: $primary-color;
-    padding: 10px 15px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      color: $primary-color;
       right: 0;
       top: 0;
       position: absolute;
       line-height: 24px;
+      height: 44px;
+      padding: 10px 15px;
     }
 
-    &.btn {
+    @include media-breakpoint-up($desktop-breakpoint) {
+      background: $primary-color;
+      position: static;
+      height: 30px;
+      padding: 4px 14px;
+      margin-left: 15px;
+      font-size: 15px;
+
+      &:hover {
+        background: none;
+        color: #fff;
+        background: $primary-color-darken;
+      }
+    }
+
+    .icn-post {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        background: $primary-color;
-        position: static;
-        height: 30px;
-        padding: 4px 14px;
-        margin: 0 0 0 15px;
-
-        &:hover {
-          background: none;
-          color: #fff;
-          background: $primary-color-darken;
-        }
+        margin: -2px 5px 0 -5px;
       }
+    }
+  }
 
-      .icn-post {
+  &_feed {
+    margin: 5px auto 0;
+    border: none;
+    padding: 0;
+    background: none;
+    display: block;
+    font: inherit;
+    font-weight: 500;
+    text-align: center;
+    width: 60px;
+    transition: color .3s ease;
 
-        @include media-breakpoint-up($desktop-breakpoint) {
-          margin: -2px 5px 0 -5px;
-        }
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-top: 12px;
+      width: auto;
+
+      &:hover {
+        background: none;
       }
+    }
+  }
+
+  &_color-sec {
+    color: $secondary-color;
+  }
+
+  .profile-actions & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-left: 10px;
+      line-height: 18px;
     }
   }
 }

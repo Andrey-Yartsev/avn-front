@@ -45,6 +45,7 @@
 
     .postComments {
       margin-bottom: 0;
+      display: block;
     }
 
     .popup-addPost & {
@@ -563,13 +564,19 @@
 
 .load-more-comments {
   opacity: 0.5;
-  display: block;
+  display: inline-block;
   cursor: pointer;
   margin: 8px 15px 0;
+  transition: color .3s, opacity .3s;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-top: 0;
     margin-bottom: 8px;
+  }
+
+  &:hover {
+    opacity: 1;
+    color: $secondary-color;
   }
 
   .postPage & {
@@ -1434,4 +1441,8 @@
       color: $secondary-color;
     }
   }
+}
+
+.media-slider-pagination {
+  z-index: 20;
 }

@@ -47,7 +47,7 @@
                     :fullscreen="false"
                     :inline="true"
                     text=""
-                    class="small"
+                    :small="true"
                   />
                 </div>
               </perfect-scrollbar>

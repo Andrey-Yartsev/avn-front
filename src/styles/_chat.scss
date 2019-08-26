@@ -620,6 +620,8 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       display: none;
+      flex: 0 0 30px;
+      margin-left: 0;
     }
 
     &:empty {
@@ -631,15 +633,6 @@
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         transform: translate3d(0, 0, 0);
       }
-    }
-  }
-
-  .header-avatar {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      flex: 0 0 30px;
-      margin-left: 0;
-      display: none;
     }
   }
 }
@@ -959,22 +952,6 @@
       background-color: rgba(248, 249, 250, 0.3);
       opacity: 0.06;
     }
-
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: -1;
-      background: linear-gradient(
-        30deg,
-        rgba(33, 150, 243, 1) 10%,
-        rgba(255, 64, 129, 1) 90%
-      );
-      opacity: 0.06;
-    }
   }
 }
 
@@ -1182,7 +1159,7 @@
     &:after {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        opacity: 0.06;
+        opacity: 0.12;
         z-index: 0;
       }
     }

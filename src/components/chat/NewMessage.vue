@@ -216,7 +216,8 @@
             <Loader
               :fullscreen="false"
               text="Sending..."
-              class="small overlay_fulllight"
+              :fulllight="true"
+              :small="true"
             />
           </div>
           <div class="chat-section" v-else>

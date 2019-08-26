@@ -39,7 +39,9 @@
     <div class="loader-container loader-container_center" v-if="loading">
       <Loader
         :fullscreen="false"
-        class="overlay_fulllight small main-chat-loader"
+        class="main-chat-loader"
+        :small="true"
+        :fulllight="true"
       />
     </div>
 

@@ -303,7 +303,8 @@
     </div>
     <Loader
       text="Starting the stream"
-      class="overlay_semidark text-light"
+      class="text-light"
+      :semidark="true"
       v-if="startingStream"
     />
     <StreamStatistic
@@ -475,8 +476,9 @@ export default {
 
       this.streamVideos = videoDevices;
       this.streamVideo = defaultVideoDevice;
-      this.streamAudios = audioDevices;
-      this.streamAudio = audioDevices[1];
+      this.streamAudios = [{ deviceId: undefined }, ...audioDevices];
+      this.streamAudio = this.streamAudios[1];
+
       setTimeout(() => {
         this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
       }, 333);
