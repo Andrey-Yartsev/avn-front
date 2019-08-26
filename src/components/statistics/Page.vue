@@ -1190,7 +1190,28 @@ export default {
 
       this.processData(data, true);
     },
+    shiftTimeZone(statistics) {
+      const data = {};
+      Object.keys(statistics.data).forEach(time => {
+        const newTime = moment
+          .unix(time)
+          .local()
+          .unix();
+        data[newTime] = statistics.data[time];
+      });
+      const time = moment
+        .unix(statistics.time)
+        .local()
+        .unix();
+      return {
+        code: statistics.code,
+        data,
+        time
+      };
+    },
     processData(data, store) {
+      data.statistics = this.shiftTimeZone(data.statistics);
+
       this.showedStats[data.statistics.code] = data.statistics.time;
 
       const statData =
