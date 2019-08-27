@@ -106,11 +106,8 @@
       display: none;
     }
 
-    .btn {
-
-      &.newStory {
-        min-width: 72px;
-      }
+    .newStory {
+      min-width: 72px;
     }
 
     .category-name {
