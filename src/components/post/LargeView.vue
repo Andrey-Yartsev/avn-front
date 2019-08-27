@@ -301,7 +301,7 @@ export default {
   },
   methods: {
     clickOnCommentForm() {
-      this.toggleAddCommentForm();
+      this.showAddCommentForm();
       // this.showAddComment = !this.showAddComment;
       // this.showTip = false;
       if (this.popupView) {
