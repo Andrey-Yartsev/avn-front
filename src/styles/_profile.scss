@@ -288,14 +288,17 @@
 
       &__main {
         font-size: 17px;
-        transition: font-size .3s;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           font-size: 21px;
+          transition: font-size .3s;
         }
 
         .header-scrolled & {
-          font-size: 17px;
+
+          @include media-breakpoint-up($desktop-breakpoint) {
+            font-size: 17px;
+          }
         }
       }
     }
