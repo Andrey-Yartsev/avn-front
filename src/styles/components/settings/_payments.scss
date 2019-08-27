@@ -66,6 +66,33 @@
     &:last-child {
       border-bottom: none;
     }
+
+    position: relative;
+
+    .default {
+      color: $gray;
+      font-size: 30px;
+      position: absolute;
+      left: 0px;
+      opacity: 0.5;
+      cursor: pointer;
+
+      &.on {
+        color: $secondary-color;
+        opacity: 1;
+        cursor: default;
+      }
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &:after {
+        content: "\E604";
+      }
+    }
   }
 }
 
