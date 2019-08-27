@@ -100,7 +100,7 @@
             Message
           </button>
           <UserDropdown
-            v-if="user"
+            v-if="user && $mq === 'desktop'"
             class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
             :profile="profile"
           />
