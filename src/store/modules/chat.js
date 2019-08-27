@@ -158,6 +158,17 @@ const actions = {
       }
     }
 
+    // if not in chat with user - show toast
+    if (message.fromUser.id !== state.activeUserId) {
+      dispatch(
+        "global/flashToast",
+        { text: "You have a new message from " + message.fromUser.name },
+        {
+          root: true
+        }
+      );
+    }
+
     if (message.isMediaReady) {
       dispatch("updateChatLastMessage", {
         message,
