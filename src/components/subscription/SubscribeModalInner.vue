@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     close() {
+      this.$store.commit("profile/home/resetOnPageAction");
       this.$store.commit("modal/hideSafe", { name: "subscribe" });
     },
     subscribe() {
