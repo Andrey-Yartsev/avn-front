@@ -45,22 +45,16 @@
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-right: 1.1em;
-
-      &:hover {
-        opacity: 1;
-        color: $primary-color;
-      }
     }
+  }
+
+  .tips,
+  .getPaid {
 
     &.active {
       opacity: 1;
       color: $primary-color;
     }
-  }
-
-  .getPaid {
-    //color: $main-color;
-    //opacity: 0.3;
 
     @include media-breakpoint-up($desktop-breakpoint) {
 
@@ -69,11 +63,8 @@
         color: $primary-color;
       }
     }
-    &.active {
-      opacity: 1;
-      color: $primary-color;
-    }
   }
+
   .text-media-container {
     border-radius: 1em;
     padding: 8px 0.55em 7px;
