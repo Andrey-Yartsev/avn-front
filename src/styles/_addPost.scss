@@ -198,15 +198,10 @@
 }
 
 .tweet-new-post {
-  display: none;
   margin: 0 15px 0 auto;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     margin-left: 0;
-  }
-
-  .add-new-form.expanded & {
-    display: block;
   }
 
   input {
