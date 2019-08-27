@@ -8,7 +8,7 @@
         <ContactList
           :chats="chats"
           :mode="mode"
-          :class="{ 'bg-contacts': $mq === 'desktop' }"
+          :class="{ 'border-contacts': $mq === 'desktop' }"
         />
       </div>
     </template>
