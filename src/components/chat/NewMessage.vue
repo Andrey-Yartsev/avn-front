@@ -6,6 +6,7 @@
           <div class="back-popup-btn">
             <span
               class="back backEvent hidden-mobile icn-item"
+              v-if="$mq === 'desktop'"
               @click="backDesktop"
             ></span>
             <a

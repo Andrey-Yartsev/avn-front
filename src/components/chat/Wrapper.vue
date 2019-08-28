@@ -16,6 +16,7 @@
             :href="'/' + user.username"
             class="avatar header-avatar"
             @click.prevent="openUserMobileBar"
+            v-if="$mq === 'mobile'"
           >
             <span class="avatar__img">
               <img v-if="user.avatar" :src="user.avatar" />
