@@ -212,8 +212,8 @@
           max-width: calc(63% - 50px);
 
           @include media-breakpoint-up($desktop-breakpoint) {
-            flex: 0 1 calc(60.5% - 100px);
-            max-width: calc(60.5% - 100px);
+            flex: 0 1 calc(60.5% - 120px);
+            max-width: calc(60.5% - 120px);
             padding-left: 42px;
           }
         }
