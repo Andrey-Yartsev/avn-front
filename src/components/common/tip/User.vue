@@ -77,6 +77,9 @@ export default {
     };
   },
   computed: {
+    me() {
+      return this.$store.state.auth.user;
+    },
     validator() {
       return this.$validator;
     },
@@ -84,7 +87,7 @@ export default {
       return this.$store.state.payment.pay.complete;
     },
     limits() {
-      return this.user.payments.tipsLimit;
+      return this.me.payments.tipsLimit;
     },
     isValid() {
       if (!this.amount) {
