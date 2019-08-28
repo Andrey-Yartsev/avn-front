@@ -95,15 +95,8 @@
             :needLgClassName="true"
           />
         </div>
-        <div
-          class="bottom-btns"
-          v-if="connected && !isMyStream && isAuth()"
-        >
-          <span
-            role="button"
-            class="bottom-btn"
-            @click="openCommentForm"
-          >
+        <div class="bottom-btns" v-if="connected && !isMyStream && isAuth()">
+          <span role="button" class="bottom-btn" @click="openCommentForm">
             <span
               class="btn-icon comments icn-item icn-size_lg"
               v-tooltip="'Comments'"
