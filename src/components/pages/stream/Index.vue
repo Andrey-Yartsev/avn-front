@@ -238,10 +238,10 @@
             ></button>
           </form>
         </div>
-        <div class="stream-btns stream-viewer-btns">
+        <div class="bottom-btns">
           <span
             role="button"
-            class="stream-btn"
+            class="bottom-btn"
             :class="{ selected: asideType === 'comments' }"
             @click="asideType = 'comments'"
           >
@@ -251,7 +251,7 @@
             />
           </span>
           <span
-            class="stream-btn"
+            class="bottom-btn"
             :class="{ selected: asideType === 'like', disabled: !likesCount }"
             ref="likeBtn"
             @click="asideType = 'like'"
@@ -264,7 +264,7 @@
           </span>
           <span
             v-if="$root.showTips"
-            class="stream-btn"
+            class="stream-btn bottom-btn"
             @click="asideType = 'tip'"
             :class="{ selected: asideType === 'tip', disabled: !amount }"
           >
@@ -275,7 +275,7 @@
             {{ amount.toFixed(2) }}
           </span>
           <span
-            class="stream-btn stream-online-count"
+            class="stream-online-count bottom-btn"
             @click="asideType = 'view'"
             :class="{ selected: asideType === 'view', disabled: !looksCount }"
           >

@@ -223,25 +223,6 @@
         </div>
       </div>
       <div class="bottom-btns">
-        <div
-          class="story-details-info"
-          v-if="isOwner(author.id) && !isCollections"
-        >
-          <span
-            class="story-details-info__btn btn-story-details icn-item"
-            @click.prevent="saveToHighlights"
-            v-tooltip="'Add to highlights'"
-          />
-          <div
-            class="story-details-info__btn story-viewer story-viewer_clickable"
-            v-if="isOwner(author.id) && currentStory.viewersCount"
-            @click="openViewersModal"
-          >
-            <span class="looking btn-icon icn-item icn-size_lg" />{{
-              viewersText
-            }}
-          </div>
-        </div>
         <Tip
           ref="tip"
           v-if="showTip"
@@ -251,11 +232,28 @@
           class="tip-form_viewer"
           :needLgClassName="true"
         />
+        <span
+          class="btn-story-details bottom-btn icn-item"
+          @click.prevent="saveToHighlights"
+          v-tooltip="'Add to highlights'"
+          v-if="isOwner(author.id) && !isCollections"
+        />
+        <div
+          class="story-viewer bottom-btn story-viewer_clickable"
+          v-if="
+            isOwner(author.id) && currentStory.viewersCount && !isCollections
+          "
+          @click="openViewersModal"
+        >
+          <span class="looking btn-icon icn-item icn-size_lg" />{{
+            viewersText
+          }}
+        </div>
         <button
           @click="openTip"
           v-if="!isOwner(author.id) && author.canEarn"
           type="button"
-          class="btn-tip"
+          class="btn-tip bottom-btn"
         >
           <span class="btn-icon icn-tips icn-item" v-tooltip="'Tip'"></span>
         </button>

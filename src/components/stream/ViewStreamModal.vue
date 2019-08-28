@@ -96,23 +96,27 @@
           />
         </div>
         <div
-          class="stream-btns stream-viewer-btns"
+          class="bottom-btns"
           v-if="connected && !isMyStream && isAuth()"
         >
-          <span role="button" class="stream-btn" @click="openCommentForm">
+          <span
+            role="button"
+            class="bottom-btn"
+            @click="openCommentForm"
+          >
             <span
               class="btn-icon comments icn-item icn-size_lg"
               v-tooltip="'Comments'"
             ></span>
           </span>
-          <span class="stream-btn" @click="throttledLike">
+          <span class="stream-btn bottom-btn" @click="throttledLike">
             <span
               class="btn-icon likes icn-item icn-size_lg"
               v-tooltip="'Likes'"
             ></span>
           </span>
           <span
-            class="stream-btn"
+            class="bottom-btn"
             type="button"
             v-if="streamer.canEarn && $root.showTips"
             @click="openTipForm"
