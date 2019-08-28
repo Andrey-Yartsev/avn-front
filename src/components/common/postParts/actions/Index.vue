@@ -46,9 +46,7 @@
       v-if="$mq === 'mobile'"
     >
       <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open">
-        <div class="more-functions__btn-text"></div>
-      </div>
+      <div class="more-functions__btn" @click="open" />
       <div class="more-functions__dropdown">
         <Dropdown
           :post="post"
