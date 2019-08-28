@@ -20,10 +20,10 @@
               : ''
           ]"
         >
-          <span v-if="card.isDefault" class="default on icn-item"></span>
+          <span v-if="card.isDefault" class="status-card on icn-item"></span>
           <span
             v-else
-            class="default icn-item"
+            class="status-card icn-item"
             v-tooltip="'Set as default'"
             @click="setDefault(card.id)"
           ></span>
@@ -49,13 +49,15 @@
         </div>
       </div>
 
-      <button
-        type="button"
-        class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter hidden-mobile"
-        @click="showForm(true)"
-      >
-        Add
-      </button>
+      <div class="cards__btn">
+        <button
+          type="button"
+          class="btn alt border btn_fix-width-sm"
+          @click="showForm(true)"
+        >
+          Add
+        </button>
+      </div>
     </div>
   </div>
 </template>

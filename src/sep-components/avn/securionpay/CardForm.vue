@@ -262,15 +262,15 @@
         </div>
 
         <div class="form-group-btn">
+          <button class="btn lg btn_fix-width-sm" @click="$emit('cancel')">
+            Cancel
+          </button>
           <button
             type="submit"
-            class="btn lg btn_fix-width"
+            class="btn lg btn_fix-width-sm"
             :disabled="submitDisabled"
           >
             Next
-          </button>
-          <button class="btn lg btn_fix-width" @click="$emit('cancel')">
-            Cancel
           </button>
         </div>
       </div>
