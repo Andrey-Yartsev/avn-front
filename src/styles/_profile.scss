@@ -838,17 +838,6 @@
       flex: 1;
     }
   }
-
-  .post-types-tabs {
-
-    .content-col {
-      @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 calc(100% - 320px);
-        margin-right: 0;
-        margin-left: auto;
-      }
-    }
-  }
 }
 
 .sticky-header-controls {
