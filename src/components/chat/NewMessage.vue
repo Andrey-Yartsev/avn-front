@@ -18,9 +18,7 @@
               <span class="category-name">New message</span>
             </a>
           </div>
-          <h3 class="hidden-mobile chat-title"
-            v-if="$mq === 'desktop'"
-          >
+          <h3 class="hidden-mobile chat-title" v-if="$mq === 'desktop'">
             New message
           </h3>
           <button
