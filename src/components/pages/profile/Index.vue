@@ -6,7 +6,7 @@
     <router-link
       class="addPost-btn-float hidden-desktop icn-item icn-post icn-size_lg icn-pos_center"
       to="/addPost"
-      v-if="isAuth()"
+      v-if="isAuth() && $mq === 'mobile'"
     />
     <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
     <div class="white-bg-block">
