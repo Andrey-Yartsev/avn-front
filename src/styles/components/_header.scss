@@ -60,15 +60,11 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
       background: none;
       box-shadow: none;
       position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
       height: 0;
-      margin: 0;
+      margin-bottom: 0;
     }
 
     .header_container {
@@ -282,6 +278,7 @@
   background-clip: padding-box;
   position: -webkit-sticky;
   position: sticky;
+  display: block;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     top: -44px;
@@ -295,7 +292,7 @@
     right: 0;
     top: 0;
     z-index: 12;
-    margin: 0 0 25px;
+    margin-bottom: 25px;
   }
 
   .scroll-top:not(.open-search-popup) & {
