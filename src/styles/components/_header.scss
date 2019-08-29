@@ -259,7 +259,8 @@
       @include media-breakpoint-up($desktop-breakpoint) {
         height: 60px;
         white-space: nowrap;
-        padding: 10px 0 8px;
+        padding-top: 10px;
+        padding-bottom: 8px;
       }
 
       &:not(.profile-tip-btn) {
