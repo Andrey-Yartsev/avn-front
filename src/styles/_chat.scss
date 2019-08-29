@@ -638,7 +638,8 @@
 }
 
 .contactsListHeader {
-  padding: 0 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -648,20 +649,10 @@
   background-color: $white;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 1em 0 1.3em;
+    padding-left: 1.3em;
+    padding-right: 1em;
     border-right: 1px solid rgba(124, 139, 150, 0.2);
     min-height: 60px;
-  }
-
-  h3 {
-    font-size: 1rem;
-    margin: auto auto auto calc(54px - 0.7em);
-    font-weight: 500;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      font-size: 1.15rem;
-      margin-left: 0;
-    }
   }
 
   .add-new-type {
@@ -695,8 +686,20 @@
   }
 }
 
+.chat-title {
+  font-size: 1rem;
+  margin: auto auto auto calc(54px - 0.7em);
+  font-weight: 500;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    font-size: 1.15rem;
+    margin-left: 0;
+  }
+}
+
 .selectedChatHeader {
-  padding: 0 1em;
+  padding-left: 1em;
+  padding-right: 1em;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -1000,8 +1003,11 @@
   }
 
   .chatCollectionContent & {
-    padding-right: 0;
-    padding-left: 0;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 
@@ -1186,7 +1192,6 @@
   flex-direction: column;
   flex: 1;
   max-width: calc(100% - 60px);
-  padding: 0;
 }
 
 .chat-container {

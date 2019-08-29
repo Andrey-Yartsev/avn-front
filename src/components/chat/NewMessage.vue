@@ -18,7 +18,11 @@
               <span class="category-name">New message</span>
             </a>
           </div>
-          <h3 class="hidden-mobile new-message-title">New message</h3>
+          <h3 class="hidden-mobile chat-title"
+            v-if="$mq === 'desktop'"
+          >
+            New message
+          </h3>
           <button
             class="nextStep btn sm hidden-desktop"
             :disabled="!selected.length"

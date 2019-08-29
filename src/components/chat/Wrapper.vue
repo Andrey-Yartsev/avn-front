@@ -22,7 +22,7 @@
               <img v-if="user.avatar" :src="user.avatar" />
             </span>
           </a>
-          <h3>Messages</h3>
+          <h3 class="chat-title">Messages</h3>
           <div class="newMessage-link">
             <a
               href="/chat/new"
