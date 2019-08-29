@@ -42,7 +42,7 @@
             </router-link>
           </div>
           <div class="row">
-            <div class="content-col">
+            <div class="content-col single-col">
               <div class="posts-container">
                 <div
                   class="sticky-header-controls header-mobile"
