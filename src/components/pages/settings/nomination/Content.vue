@@ -1,58 +1,82 @@
 <template>
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
-      <h1 class="form-title" v-if="$mq === 'desktop'">
+      <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
         Nomination Settings
       </h1>
 
-      <div class="shadow-block">
-        <div class="container">
-          <div class="form-group form-group_with-label">
-            <div class="form-group-inner form-group-title">
-              <span class="label">Chose the event</span>
-              <select v-model="eventId">
-                <option value="91">AVN</option>
-                <option value="92">AVN Gay</option>
-              </select>
-            </div>
-          </div>
-
-          <template v-if="eventId">
-            <div
-              class="border-top shadow-block loader-container loader-container_center"
-              v-if="loading"
-            >
-              <Loader
-                :fullscreen="false"
-                :inline="true"
-                text=""
-                :small="true"
-              />
-            </div>
-
-            <template v-else>
-              <div class="border-top shadow-block referrals-link" v-if="url">
-                <div class="referrals-url">
-                  <a :href="url" class="referrals-url__link">{{ url }}</a>
-                  <button
-                    type="button"
-                    class="btn btn_fix-width-sm border alt btn-copy-url"
-                    @click="copyToClipboard"
-                  >
-                    Copy<span class="hidden-mobile" v-if="$mq === 'desktop'">
-                      link</span
-                    >
-                  </button>
-                </div>
-                <div class="referral-desc">
-                  <p class="subtext"></p>
+      <div
+        class="form-nomination"
+        :class="{
+          'border-top': $mq === 'desktop',
+          'shadow-block shadow-block_b-gap-sm': $mq === 'mobile' && !url
+        }"
+      >
+        <div :class="{
+          'shadow-block': url
+        }">
+          <div class="container">
+            <div class="form-group form-group_with-label">
+              <div
+                class="form-group-inner"
+                :class="{ 'form-group-title': $mq === 'desktop' }"
+              >
+                <span class="label">Choose the event</span>
+                <div class="select-wrapper">
+                  <select v-model="eventId">
+                    <option value="91">AVN</option>
+                    <option value="92">AVN Gay</option>
+                  </select>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              <div class="table-wrapper">
-                <div class="table blocked-table">
-                  <div class="item" v-for="(selects, i) in selects" :key="i">
-                    <div class="table__cell">
+        <template v-if="eventId">
+          <div
+            class="border-top shadow-block loader-container loader-container_center"
+            v-if="loading"
+          >
+            <Loader :fullscreen="false" :inline="true" text="" :small="true" />
+          </div>
+
+          <template v-else>
+            <div class="border-top referrals-link" v-if="url">
+              <div class="referrals-url referrals-url_row">
+                <a :href="url" class="referrals-url__link">{{ url }}</a>
+                <button
+                  type="button"
+                  class="btn btn_fix-width-sm border alt btn-copy-url"
+                  @click="copyToClipboard"
+                >
+                  Copy<span class="hidden-mobile" v-if="$mq === 'desktop'">
+                    link</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="border-top gaps-around-selects"
+              :class="{
+                'shadow-block shadow-block_b-gap-sm': url,
+                'shadow-block_reset-pt': !url
+              }"
+            >
+              <div class="container">
+                <div
+                  class="row row_separate-line"
+                  v-for="(selects, i) in selects"
+                  :key="i"
+                >
+                  <div
+                    :class="{
+                      'col-3-4': $mq === 'mobile',
+                      'col-1-2': $mq === 'desktop'
+                    }"
+                  >
+                    <div class="select-wrapper">
                       <select v-model="category[i]">
                         <option
                           v-for="v in categories"
@@ -62,46 +86,57 @@
                         >
                       </select>
                     </div>
-
-                    <div
-                      class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-                    >
-                      <button
-                        type="button"
-                        class="btn-unblock has-tooltip"
-                        data-original-title="null"
-                        v-if="hasRemoveButton(i)"
-                        @click="remove(i)"
-                      >
-                        <span class="icn-item icn-block"></span>
-                      </button>
-                    </div>
                   </div>
+                  <button
+                    type="button"
+                    class="btn-unblock"
+                    data-original-title="null"
+                    v-if="hasRemoveButton(i)"
+                    @click="remove(i)"
+                  >
+                    <span class="icn-item icn-block"></span>
+                  </button>
                 </div>
               </div>
+            </div>
 
-              <div
-                class="form-group form-group_with-label"
-                v-for="(selects, i) in selects"
-                :key="i"
-              >
-                <div class="form-group-inner form-group-title"></div>
-              </div>
-            </template>
+            <div
+              class="form-group form-group_with-label"
+              v-if="selects.length"
+              v-for="(selects, i) in selects"
+              :key="i"
+            >
+              <div class="form-group-inner form-group-title"></div>
+            </div>
           </template>
-        </div>
-      </div>
+        </template>
 
-      <div class="container hidden-mobile" v-if="$mq === 'desktop'">
-        <div class="form-group form-group_with-label">
+        <div
+          class="form-group form-group_with-label"
+          v-if="$mq === 'desktop'"
+        >
           <button
             type="submit"
-            class="btn lg btn_fix-width saveChanges btn_form-gap"
+            class="btn lg btn_fix-width saveChanges"
+            :class="{ 'btn_form-gap': $mq === 'desktop' }"
             :disabled="!changed"
           >
             Save changes
           </button>
         </div>
+      </div>
+      <div
+        class="text-centered"
+        v-if="$mq === 'mobile'"
+      >
+        <button
+          type="submit"
+          class="btn lg btn_fix-width saveChanges"
+          :class="{ 'btn_form-gap': $mq === 'desktop' }"
+          :disabled="!changed"
+        >
+          Save changes
+        </button>
       </div>
     </form>
   </div>

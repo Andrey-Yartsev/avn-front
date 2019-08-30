@@ -21,6 +21,15 @@
     &__link {
       color: $primary-color;
     }
+
+    &_row {
+      display: flex;
+      justify-content: space-between;
+
+      .btn-copy-url {
+        margin-left: 20px;
+      }
+    }
   }
 
   &-link {

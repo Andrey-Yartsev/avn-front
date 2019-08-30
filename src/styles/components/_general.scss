@@ -92,12 +92,21 @@ strong {
 }
 
 .shadow-block {
+
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     background: $white;
     box-shadow: 0 1px 7px rgba(#000, 0.15);
-    padding: 15px 0 0;
+    padding-top: 15px;
+
     &.videos {
       padding: 0;
+    }
+  }
+
+  &_b-gap-sm {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-bottom: 5px;
     }
   }
 

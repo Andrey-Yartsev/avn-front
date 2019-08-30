@@ -1328,3 +1328,18 @@ select {
     }
   }
 }
+
+.gaps-around-selects {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.form-nomination {
+
+  &:not(.shadow-block) {
+    margin-bottom: 24px;
+  }
+}
