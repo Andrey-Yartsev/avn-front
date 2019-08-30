@@ -339,7 +339,8 @@ label {
   &_with-label {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 11.5% 17px 0;
+      padding-right: 11.5%;
+      padding-bottom: 17px;
     }
   }
 
@@ -348,7 +349,7 @@ label {
   }
 
   &-inner {
-    margin: 0 0 8px;
+    margin-bottom: 8px;
     display: block;
     position: relative;
     cursor: auto;
@@ -444,10 +445,10 @@ label {
   }
 
   &-btn {
-    padding: 0 0 21px;
+    padding-bottom: 21px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 0 25px;
+      padding-bottom: 25px;
       margin-right: 12%;
     }
 
@@ -640,7 +641,8 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 0;
+  padding-top: 18px;
+  padding-bottom: 18px;
   border-bottom: 1px solid rgba($gray, 0.2);
   margin: 0 15px -1px;
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -756,11 +758,11 @@ label {
     justify-content: space-between;
     padding: 17px 20px;
 
-    h1 {
-      font-size: 21px;
-      font-weight: 500;
+    .settings-title {
       margin: 0 20px 0 0;
       flex: 1;
+      padding-top: 0;
+      padding-bottom: 0;
       @include ellipsis;
     }
 
