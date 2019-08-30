@@ -37,7 +37,7 @@
 
         <template v-if="eventId">
           <div
-            class="border-top shadow-block loader-container loader-container_center"
+            class="border-top shadow-block loader-container"
             v-if="loadingCategories"
           >
             <Loader :fullscreen="false" :inline="true" text="" :small="true" />
