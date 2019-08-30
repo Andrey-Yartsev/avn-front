@@ -1294,7 +1294,7 @@
       overflow-y: auto;
       transform: translate(0, 20px);
       bottom: auto;
-      padding: 21px 0 0;
+      padding-top: 21px;
       border-radius: 4px;
       width: auto;
       background: $white;
@@ -1304,7 +1304,7 @@
   &__inside {
     transform: translate(-100%, 0);
     transition: transform 0.4s ease;
-    padding: 81px 0 0;
+    padding-top: 81px;
     flex-direction: column;
     flex: 0 0 100%;
     position: relative;
@@ -1319,13 +1319,16 @@
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0;
+      padding-top: 0;
       width: auto;
       transform: translate(0, 0);
     }
 
     .sidebar-shown & {
-      transform: translate(0, 0);
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        transform: translate(0, 0);
+      }
     }
   }
 
@@ -1516,7 +1519,7 @@
     }
   }
   &-name {
-    padding: 0 20px 3px 20px;
+    padding: 0 20px 3px;
     font-size: 17px;
     flex: 0 0 auto;
     display: flex;
@@ -1535,7 +1538,8 @@
     }
   }
   &-login {
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       @media screen and (orientation: landscape) {
@@ -1556,7 +1560,7 @@
     }
   }
   &-counts {
-    padding: 0 0 12px;
+    padding-bottom: 12px;
     margin: 0 20px 9px;
     border-bottom: 1px solid rgba($gray, 0.2);
 
@@ -1573,7 +1577,8 @@
     }
 
     &-item {
-      padding: 0 17px 10px 0;
+      padding-right: 17px;
+      padding-bottom: 10px;
       color: inherit;
       display: inline-block;
       vertical-align: top;
