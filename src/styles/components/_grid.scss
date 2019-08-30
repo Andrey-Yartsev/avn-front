@@ -24,27 +24,32 @@
     margin-right: -10px;
   }
   .col-1-2 {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 1 50%;
     width: 50%;
   }
   .col-3-4 {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 1 75%;
     width: 75%;
   }
   .col-1-4 {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 1 25%;
     width: 25%;
   }
   .col-7-10 {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 1 70%;
     width: 70%;
   }
   .col-3-10 {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 1 30%;
     width: 30%;
   }
@@ -87,7 +92,8 @@
   width: 100%;
   flex: 0 1 100%;
   @include media-breakpoint-up($desktop-breakpoint) {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex: 0 0 33.35%;
     max-width: 33.35%;
     align-self: flex-start;
@@ -132,14 +138,16 @@
 
 .cols {
   display: flex;
-  margin: 0 -10px;
+  margin-left: -10px;
+  margin-right: -10px;
   max-width: none;
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     display: block;
   }
   > .col {
     flex: 0 1 100%;
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     &:last-child {
       margin-right: 0;
     }
