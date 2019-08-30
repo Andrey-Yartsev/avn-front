@@ -6,7 +6,7 @@
     <div class="payouts payouts_height-reset">
       <Form v-if="user.isWantEarn && user.subscribePrice > 0" />
       <div class="PayoutsAccountView" v-else>
-        <h1 class="form-title">
+        <h1 class="form-title settings-title">
           Premium Links
         </h1>
         <div class="form-title text border-top centered">

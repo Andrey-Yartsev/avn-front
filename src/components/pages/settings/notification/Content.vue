@@ -1,7 +1,7 @@
 <template>
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
-      <h1 class="form-title" v-if="$mq === 'desktop'">
+      <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
         Notifications Settings
       </h1>
       <div class="form-title border-top border-bottom-mobile">

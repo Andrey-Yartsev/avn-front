@@ -8,7 +8,9 @@ w<template>
       </div>
     </div>
     <form v-on:submit.stop.prevent="save">
-      <h1 class="form-title" v-if="$mq === 'desktop'">Privacy Settings</h1>
+      <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
+        Privacy Settings
+      </h1>
       <div
         class="form-title private-switcher-block private-profile-block border-top"
       >

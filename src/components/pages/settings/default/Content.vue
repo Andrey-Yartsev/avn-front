@@ -1,6 +1,8 @@
 <template>
   <div class="profile-wrapper">
-    <h1 class="form-title" v-if="$mq === 'desktop'">Edit Profile</h1>
+    <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
+      Edit Profile
+    </h1>
     <form class="settings-form" v-on:submit.stop.prevent="save">
       <div
         :class="{

@@ -1,19 +1,16 @@
 @import "components/imports";
 
-.settings-page {
+.settings-title {
+  display: none;
+  font-weight: 500;
+  font-size: 21px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  margin-bottom: 0;
+  flex: 0 0 auto;
 
-  .form-title {
-    display: none;
-    font-weight: 500;
-    font-size: 21px;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    margin-bottom: 0;
-    flex: 0 0 auto;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      display: block;
-    }
+  @include media-breakpoint-up($desktop-breakpoint) {
+    display: block;
   }
 }
 

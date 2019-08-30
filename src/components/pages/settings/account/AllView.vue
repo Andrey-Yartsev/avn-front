@@ -1,7 +1,7 @@
 <template>
   <div class="AccountAllView">
     <div class="form-title form-title_cols">
-      <h1>
+      <h1 class="settings-title">
         {{ user.name }}
       </h1>
       <router-link to="/logout" class="link-title">Log out</router-link>

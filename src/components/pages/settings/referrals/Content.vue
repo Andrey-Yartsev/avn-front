@@ -1,6 +1,6 @@
 <template>
   <div class="ReferralsView">
-    <h1 class="form-title" v-if="$mq === 'desktop'">
+    <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
       Referral URL
       <!-- QR temporary hidden -->
       <!--<button type="button">Show QR</button>-->
