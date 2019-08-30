@@ -187,7 +187,6 @@ export default {
       Object.values(c).forEach((v, i) => {
         r[i + ""] = v;
       });
-      console.log(JSON.stringify(r));
       this.category = r;
     },
     copyToClipboard() {
