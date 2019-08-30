@@ -87,6 +87,12 @@ export default {
       return this.$store.state.payment.pay.complete;
     },
     limits() {
+      if (!this.me) {
+        return {
+          min: 2,
+          max: 500
+        };
+      }
       return this.me.payments.tipsLimit;
     },
     isValid() {
