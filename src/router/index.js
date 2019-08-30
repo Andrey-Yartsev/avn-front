@@ -17,6 +17,7 @@ import SettingsProductsPage from "@/components/pages/settings/products/Index";
 import SettingsPaymentsPage from "@/components/pages/settings/payments/Index";
 import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
 import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
+import SettingsNominationPage from "@/components/pages/settings/nomination/Index.vue";
 import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
 import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
@@ -264,6 +265,15 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/account/:view?",
     component: SettingsAccountPage,
+    name: "SettingsAccount",
+    meta: {
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/nomination",
+    component: SettingsNominationPage,
     name: "SettingsAccount",
     meta: {
       cssName: "settings"

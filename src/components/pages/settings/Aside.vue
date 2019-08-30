@@ -203,6 +203,10 @@ export default {
           title: "Account"
         },
         {
+          name: "nomination",
+          title: "Nomination"
+        },
+        {
           name: "story",
           title: "Story Settings"
         },
