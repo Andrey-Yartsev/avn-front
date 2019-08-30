@@ -223,7 +223,7 @@ export default {
     copyToClipboard() {
       this.$copyText(this.url).then(() => {
         this.$store.dispatch("global/flashToast", {
-          text: "Referral URL copied!"
+          text: "URL copied!"
         });
       });
     }
