@@ -20,7 +20,7 @@
           <template v-if="eventId">
             <div
               class="border-top shadow-block loader-container loader-container_center"
-              v-if="loading"
+              v-if="loadingCategories"
             >
               <Loader
                 :fullscreen="false"
@@ -53,7 +53,7 @@
                 <div class="table blocked-table">
                   <div class="item" v-for="(selects, i) in selects" :key="i">
                     <div class="table__cell">
-                      <select v-model="category[i]">
+                      <select v-model="category[i]" @change="changeTrig">
                         <option
                           v-for="v in categories"
                           :key="v.id"
@@ -97,7 +97,7 @@
           <button
             type="submit"
             class="btn lg btn_fix-width saveChanges btn_form-gap"
-            :disabled="!changed"
+            :disabled="!changed || loading"
           >
             Save changes
           </button>
@@ -155,7 +155,7 @@ export default {
       r.push(0);
       return r;
     },
-    loading() {
+    loadingCategories() {
       return this.$store.state.awards.fetchCategoriesLoading;
     }
   },
@@ -171,6 +171,9 @@ export default {
     }
   },
   methods: {
+    changeTrig() {
+      this.category = Object.assign({}, this.category);
+    },
     fetchCategories() {
       this.$store.dispatch("awards/fetchCategories", this.eventId);
     },
@@ -178,8 +181,14 @@ export default {
       return this.selects.length !== n + 1;
     },
     remove(n) {
-      delete this.category[n];
-      this.category = Object.assign({}, this.category);
+      const c = Object.assign({}, this.category);
+      delete c[n];
+      const r = {};
+      Object.values(c).forEach((v, i) => {
+        r[i + ""] = v;
+      });
+      console.log(JSON.stringify(r));
+      this.category = r;
     },
     copyToClipboard() {
       this.$copyText(this.url).then(() => {
