@@ -12,9 +12,11 @@
           'shadow-block shadow-block_b-gap-sm': $mq === 'mobile' && !url
         }"
       >
-        <div :class="{
-          'shadow-block': url
-        }">
+        <div
+          :class="{
+            'shadow-block': url
+          }"
+        >
           <div class="container">
             <div class="form-group form-group_with-label">
               <div
@@ -111,10 +113,7 @@
           </template>
         </template>
 
-        <div
-          class="form-group form-group_with-label"
-          v-if="$mq === 'desktop'"
-        >
+        <div class="form-group form-group_with-label" v-if="$mq === 'desktop'">
           <button
             type="submit"
             class="btn lg btn_fix-width saveChanges"
@@ -125,10 +124,7 @@
           </button>
         </div>
       </div>
-      <div
-        class="text-centered"
-        v-if="$mq === 'mobile'"
-      >
+      <div class="text-centered" v-if="$mq === 'mobile'">
         <button
           type="submit"
           class="btn lg btn_fix-width saveChanges"
