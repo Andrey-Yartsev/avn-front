@@ -139,92 +139,100 @@
 </template>
 
 <script>
-import Common from "../common";
-import Loader from "@/components/common/Loader";
-import User from "@/mixins/user";
+  import Common from "../common";
+  import Loader from "@/components/common/Loader";
+  import User from "@/mixins/user";
 
-export default {
-  name: "NominationSettingsContent",
-  mixins: [Common, User],
-  components: { Loader },
-  data() {
-    return {
-      eventId: 91,
-      category: {},
-      catN: 0
-    };
-  },
-  computed: {
-    url() {
-      const values = Object.values(this.category);
-      if (!values.length) {
-        return null;
-      }
-      // nominator/id468312/avn_awards/15,121
-      let url = window.location.origin;
-      url += "/nominator/";
-      url += this.user.username + "/";
-      if (this.eventId == 91) {
-        url += "avn_awards";
-      } else {
-        url += "gayvn_awards";
-      }
-      url += "/" + values.filter(v => v !== 0).join(",");
-      return url;
+  export default {
+    name: "NominationSettingsContent",
+    mixins: [Common, User],
+    components: { Loader },
+    data() {
+      return {
+        eventId: 91,
+        category: {},
+        catN: 0
+      };
     },
-    categories() {
-      if (!this.$store.state.awards.categories) {
-        return [];
-      }
-      return this.$store.state.awards.categories.data;
-    },
-    selects() {
-      let r = Object.values(this.category);
-      if (!r.length) {
-        return [0];
-      }
-      r.push(0);
-      return r;
-    },
-    loading() {
-      return this.$store.state.awards.fetchCategoriesLoading;
-    }
-  },
-  watch: {
-    eventId() {
-      if (this.eventId) {
-        this.fetchCategories();
-        this.category = {};
+    computed: {
+      url() {
+        const values = Object.values(this.category);
+        if (!values.length) {
+          return null;
+        }
+        // nominator/id468312/avn_awards/15,121
+        let url = window.location.origin;
+        url += "/nominator/";
+        url += this.user.username + "/";
+        if (this.eventId == 91) {
+          url += "avn_awards";
+        } else {
+          url += "gayvn_awards";
+        }
+        url += "/" + values.filter(v => v !== 0).join(",");
+        return url;
+      },
+      categories() {
+        if (!this.$store.state.awards.categories) {
+          return [];
+        }
+        return this.$store.state.awards.categories.data;
+      },
+      selects() {
+        let r = Object.values(this.category);
+        if (!r.length) {
+          return [0];
+        }
+        r.push(0);
+        return r;
+      },
+      loadingCategories() {
+        return this.$store.state.awards.fetchCategoriesLoading;
       }
     },
-    category(category) {
-      this.localUser.nominationCategories = JSON.stringify(category);
-    }
-  },
-  methods: {
-    fetchCategories() {
-      this.$store.dispatch("awards/fetchCategories", this.eventId);
+    watch: {
+      eventId() {
+        if (this.eventId) {
+          this.fetchCategories();
+          this.category = {};
+        }
+      },
+      category(category) {
+        this.localUser.nominationCategories = JSON.stringify(category);
+      }
     },
-    hasRemoveButton(n) {
-      return this.selects.length !== n + 1;
-    },
-    remove(n) {
-      delete this.category[n];
-      this.category = Object.assign({}, this.category);
-    },
-    copyToClipboard() {
-      this.$copyText(this.url).then(() => {
-        this.$store.dispatch("global/flashToast", {
-          text: "Referral URL copied!"
+    methods: {
+      changeTrig() {
+        this.category = Object.assign({}, this.category);
+      },
+      fetchCategories() {
+        this.$store.dispatch("awards/fetchCategories", this.eventId);
+      },
+      hasRemoveButton(n) {
+        return this.selects.length !== n + 1;
+      },
+      remove(n) {
+        const c = Object.assign({}, this.category);
+        delete c[n];
+        const r = {};
+        Object.values(c).forEach((v, i) => {
+          r[i + ""] = v;
         });
-      });
+        this.category = r;
+      },
+      copyToClipboard() {
+        this.$copyText(this.url).then(() => {
+          this.$store.dispatch("global/flashToast", {
+            text: "Referral URL copied!"
+          });
+        });
+      }
+    },
+    created() {
+      this.fetchCategories();
+      if (this.localUser.nominationCategories) {
+        this.category = JSON.parse(this.localUser.nominationCategories);
+      }
     }
-  },
-  created() {
-    this.fetchCategories();
-    if (this.localUser.nominationCategories) {
-      this.category = JSON.parse(this.localUser.nominationCategories);
-    }
-  }
-};
+  };
 </script>
