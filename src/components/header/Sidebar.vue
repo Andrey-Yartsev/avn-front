@@ -1,7 +1,11 @@
 <template>
   <div class="sidebar" v-if="user">
     <div class="sidebar__scroller">
-      <router-link :to="'/' + user.username" class="avatar header-avatar">
+      <router-link
+        :to="'/' + user.username"
+        class="avatar header-avatar"
+        v-if="$mq === 'mobile'"
+      >
         <span class="avatar__img">
           <img v-if="user.avatar" :src="user.avatar" />
         </span>
