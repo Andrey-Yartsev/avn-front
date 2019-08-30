@@ -136,7 +136,7 @@
         </div>
       </div>
       <perfect-scrollbar
-        class="rounded-container"
+        class="rounded-container settings-scroll-wrapper"
         :class="{ 'hidden-mobile': !isHome }"
       >
         <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">

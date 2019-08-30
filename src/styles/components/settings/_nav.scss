@@ -11,32 +11,31 @@
   .profile-name {
     padding: 0;
   }
+}
 
-  .rounded-container {
+.settings-scroll-wrapper {
 
+  @include media-breakpoint-up($desktop-breakpoint) {
+    max-height: calc(100vh - 357px);
+    overflow: hidden;
+    position: relative;
+  }
 
-    &.ps {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    overflow: visible !important;
+  }
 
-      @include media-breakpoint-up($desktop-breakpoint) {
-        max-height: calc(100vh - 357px);
-      }
+  .ps {
 
-      @include media-breakpoint-down($desktop-breakpoint) {
-        overflow: visible !important;
-      }
+    &__rail-y {
+      opacity: .6;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
 
-      .ps {
-
-        &__rail-y {
-          opacity: .6;
-          margin-top: 4px;
-          margin-bottom: 4px;
-        }
-
-        &__thumb-y {
-          right: 4px;
-        }
-      }
+    &__thumb-y {
+      width: 4px;
+      right: 4px;
     }
   }
 }
