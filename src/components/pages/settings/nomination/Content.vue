@@ -38,7 +38,7 @@
         <template v-if="eventId">
           <div
             class="border-top shadow-block loader-container loader-container_center"
-            v-if="loading"
+            v-if="loadingCategories"
           >
             <Loader :fullscreen="false" :inline="true" text="" :small="true" />
           </div>
@@ -79,7 +79,7 @@
                     }"
                   >
                     <div class="select-wrapper">
-                      <select v-model="category[i]">
+                      <select v-model="category[i]" @change="changeTrig">
                         <option
                           v-for="v in categories"
                           :key="v.id"
@@ -118,7 +118,7 @@
             type="submit"
             class="btn lg btn_fix-width saveChanges"
             :class="{ 'btn_form-gap': $mq === 'desktop' }"
-            :disabled="!changed"
+            :disabled="!changed || loading"
           >
             Save changes
           </button>
@@ -129,7 +129,7 @@
           type="submit"
           class="btn lg btn_fix-width saveChanges"
           :class="{ 'btn_form-gap': $mq === 'desktop' }"
-          :disabled="!changed"
+          :disabled="!changed || loading"
         >
           Save changes
         </button>
