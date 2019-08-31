@@ -26,8 +26,8 @@
                 <span class="label">Choose the event</span>
                 <div class="select-wrapper">
                   <select v-model="eventId">
-                    <option value="91">AVN</option>
-                    <option value="92">AVN Gay</option>
+                    <option value="91">AVN Awards</option>
+                    <option value="92">GayVN Awards</option>
                   </select>
                 </div>
               </div>
