@@ -274,7 +274,7 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/nomination",
     component: SettingsNominationPage,
-    name: "SettingsAccount",
+    name: "SettingsNomination",
     meta: {
       cssName: "settings"
     }
