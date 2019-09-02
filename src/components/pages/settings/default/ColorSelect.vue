@@ -9,8 +9,8 @@
       class="user-color-select-wrapper options-color-definition"
       :class="wrapperClass"
     >
-      <div class="select" @click="toggle">
-        <span class="select__text icn-item">{{ label }}</span>
+      <div class="select-switcher" @click="toggle">
+        <span class="select-switcher__text icn-item">{{ label }}</span>
       </div>
       <div class="options-wrapper">
         <span class="close icn-item icn-size_lg" @click="toggle" />
