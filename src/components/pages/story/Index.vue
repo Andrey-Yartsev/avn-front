@@ -28,6 +28,7 @@
             v-if="currentStory.mediaType === 'video'"
             class="story-video-element storyItem"
             autoplay
+            :playsinline="$mq === 'mobile'"
             :src="currentStory.src.source"
             ref="storyItem"
             @mousedown="pause"
@@ -36,7 +37,7 @@
             @touchend="resume"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
-          ></video>
+          />
         </div>
       </div>
       <template v-if="length > 1">
