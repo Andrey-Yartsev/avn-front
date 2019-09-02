@@ -823,6 +823,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
   }
 
   .user-login {
@@ -899,7 +900,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: .5;
 }
 
 .stories-list-preview {
