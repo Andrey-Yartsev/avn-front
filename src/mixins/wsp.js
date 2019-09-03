@@ -1,4 +1,5 @@
 import wsp from "@/ws/wsp";
+import ws from "@/ws";
 
 export default {
   data: () => ({
@@ -25,15 +26,16 @@ export default {
       wsp.send(ids);
     },
     reloadPost(postId) {
-      console.log("reloadPost");
       this.$store.dispatch("post/updatePost", { postId });
     }
   },
   created() {
     wsp.on("reloadPost", this.reloadPost);
+    ws.on("reloadPost", this.reloadPost);
   },
   beforeDestroy() {
     wsp.removeListener("reloadPost", this.reloadPost);
+    ws.removeListener("reloadPost", this.reloadPost);
   },
   watch: {
     posts() {
