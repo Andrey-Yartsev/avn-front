@@ -46,7 +46,7 @@
                     current.viewersCount
                   }}
                 </div>
-                <div class="story-time-created">
+                <div class="story-time-created semi-transparent">
                   {{ dateTime }}
                 </div>
                 <div class="controls-story">

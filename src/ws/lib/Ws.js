@@ -45,6 +45,10 @@ export default class Ws extends WsAbstract {
     this.actions = actions;
   }
   onData(data) {
+    if (data.reload) {
+      this.emit("reloadPost", data.post_id);
+      return;
+    }
     if (data.payoutsApproved !== undefined) {
       this.actions.payoutsLegalResult(data);
       return;

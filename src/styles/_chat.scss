@@ -342,8 +342,14 @@
   .header-nav {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transition: transform .3s;
+      position: relative;
+    }
 
+    .scroll-bottom & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        top: 0;
+      }
     }
 
     .popup & {
@@ -538,9 +544,24 @@
     width: 100%;
     background-color: transparent;
     flex-wrap: wrap;
-    height: auto;
     flex-basis: auto;
-    transition: transform .3s;
+  }
+
+  &:not(.no-nav) {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      position: -webkit-sticky;
+      position: sticky;
+      height: 88px;
+      top: -44px;
+    }
+  }
+
+  .scroll-bottom & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: 0;
+    }
   }
 
   &.no-nav {
@@ -647,6 +668,12 @@
   align-items: center;
   align-content: center;
   background-color: $white;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    height: 44px;
+    z-index: 10;
+    position: relative;
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 1.3em;

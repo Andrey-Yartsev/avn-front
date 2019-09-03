@@ -11,7 +11,7 @@
   >
     <template>
       <div class="chatHeader">
-        <div class="contactsListHeader main-header">
+        <div class="contactsListHeader">
           <a
             :href="'/' + user.username"
             class="avatar header-avatar"
@@ -33,8 +33,8 @@
             </a>
           </div>
         </div>
+        <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
       </div>
-      <MobileHeader activeName="chat" v-if="$mq === 'mobile'" />
     </template>
 
     <div class="loader-container loader-container_center" v-if="loading">

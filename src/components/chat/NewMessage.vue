@@ -1,8 +1,8 @@
 <template>
   <ChatWrapper>
     <template slot="col1">
-      <div class="chatHeader">
-        <div class="contactsListHeader main-header">
+      <div class="chatHeader" :class="{ 'no-nav': $mq === 'mobile' }">
+        <div class="contactsListHeader">
           <div class="back-popup-btn">
             <span
               class="back backEvent hidden-mobile icn-item"
@@ -133,7 +133,10 @@
       </div>
     </template>
     <template slot="col2">
-      <div class="chatHeader chatHeader_add-shadow no-nav">
+      <div
+        class="chatHeader chatHeader_add-shadow"
+        :class="{ 'no-nav': $mq === 'mobile' }"
+      >
         <div class="selectedChatHeader">
           <div class="back-popup-btn hidden-desktop" v-if="$mq === 'mobile'">
             <span class="back backEvent icn-item" @click="back"></span>

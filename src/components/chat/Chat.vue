@@ -19,7 +19,10 @@
         class="start-chat-wrapper"
         :class="{ 'hidden-mobile': hasActiveChats }"
       >
-        <div class="chatHeader chatHeader_add-shadow no-nav">
+        <div
+          class="chatHeader chatHeader_add-shadow"
+          :class="{ 'no-nav': $mq === 'mobile' }"
+        >
           <div class="selectedChatHeader">
             You don't have any messages selected.
           </div>
@@ -47,7 +50,8 @@
         <!-- <template v-else> -->
         <template>
           <div
-            class="chatHeader chatHeader_add-shadow no-nav"
+            class="chatHeader chatHeader_add-shadow"
+            :class="{ 'no-nav': $mq === 'mobile' }"
             v-if="activeUser"
           >
             <div class="selectedChatHeader">
