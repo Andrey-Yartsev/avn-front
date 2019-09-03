@@ -301,6 +301,10 @@
       padding-top: 7px;
     }
 
+    &.trunc-text {
+      max-height: calc((1.25em * 5) + 2px);
+    }
+
     &:empty {
       display: none;
     }
