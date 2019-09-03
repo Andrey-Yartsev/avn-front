@@ -23,15 +23,6 @@ const mutations = {
       state[k] = initState[k];
     }
   },
-  updatePost(state, updatedPost) {
-    state.posts = state.posts.map(post => {
-      if (post.id === updatedPost.id) {
-        return updatedPost;
-      }
-
-      return post;
-    });
-  },
   newFeedPost(state) {
     state.newFeedPosts += 1;
   }

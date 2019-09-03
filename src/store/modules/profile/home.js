@@ -48,15 +48,6 @@ const mutations = {
       state.profile.currentStream = currentStream;
     }
   },
-  updatePost(state, updatedPost) {
-    state.posts = state.posts.map(post => {
-      if (post.id === updatedPost.id) {
-        return updatedPost;
-      }
-
-      return post;
-    });
-  },
   setPostPinCount(state, n) {
     state.postPinCount = n;
   },

@@ -130,6 +130,37 @@ const result = {
       dispatch("fetchPost", postId).then(data => {
         commit("updatePost", data);
       });
+    },
+
+    updatePost(state, updatedPost) {
+      const find = () => {
+        state.posts.find(post => post.id === updatedPost.id);
+      };
+      const update = () => {
+        state.posts = state.posts.map(post => {
+          if (post.id === updatedPost.id) {
+            return updatedPost;
+          }
+          return post;
+        });
+      };
+      if (!find()) {
+        setTimeout(() => {
+          if (find()) {
+            update();
+          } else {
+            if (find()) {
+              update();
+            } else {
+              setTimeout(() => {
+                update();
+              }, 2000);
+            }
+          }
+        }, 1000);
+      } else {
+        update();
+      }
     }
   },
   mutations: {
