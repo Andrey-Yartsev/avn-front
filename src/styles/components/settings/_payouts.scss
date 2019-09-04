@@ -600,17 +600,6 @@
   color: $red;
 }
 
-.payouts-bank-form {
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    .form-group-btn {
-      .btn {
-        margin-left: 0 !important;
-      }
-    }
-  }
-}
-
-
 .payments-wrapper {
 
   &_gap-over {

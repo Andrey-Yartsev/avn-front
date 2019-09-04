@@ -35,6 +35,7 @@
     background-repeat: no-repeat;
     background-position: 0 50%;
     border-bottom: 1px solid rgba($gray, 0.2);
+    position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding-top: 10px;
@@ -66,6 +67,32 @@
     &:last-child {
       border-bottom: none;
     }
+  }
+}
+
+.status-card {
+  color: $gray;
+  font-size: 30px;
+  line-height: 20px;
+  position: absolute;
+  left: 0;
+  opacity: 0.5;
+  cursor: pointer;
+
+  &.on {
+    color: $secondary-color;
+    opacity: 1;
+    cursor: default;
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &:after {
+    content: "\E604";
   }
 }
 
@@ -120,6 +147,7 @@
 
 .payment-system {
   font-weight: 500;
+  text-transform: capitalize;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 28%;
@@ -145,6 +173,14 @@
 
   &-wrapper {
     align-items: center;
+  }
+}
+
+.cards {
+
+  &__btn {
+    padding-bottom: 20px;
+    text-align: center;
   }
 }
 

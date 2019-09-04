@@ -485,6 +485,13 @@ label {
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-left: 15px;
         }
+
+        &.btn_fix-width-sm {
+
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-left: 15px;
+          }
+        }
       }
     }
   }
