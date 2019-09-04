@@ -22,7 +22,15 @@
           @hideDropdawn="showDropdown = false"
           :showCopy="!delayedPost"
         />
-        <p class="text" v-html="post.text" ref="text"></p>
+        <p
+          class="text"
+          :class="{ 'trunc-text': truncateText && !showTruncatedText }"
+          v-html="post.text"
+          ref="text"
+        ></p>
+        <button v-if="truncateText" @click="truncateToggle">
+          {{ showTruncatedText ? "hide" : "show" }}
+        </button>
         <Media
           v-if="medias.length"
           :medias="medias"
@@ -103,7 +111,9 @@ export default {
     return {
       showDropdown: false,
       // isVisible: undefined,
-      height: undefined
+      height: undefined,
+      truncateText: false,
+      showTruncatedText: false
     };
   },
   components: {
@@ -179,6 +189,14 @@ export default {
         id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
       });
       this.height = entry.boundingClientRect.height;
+    },
+    truncateToggle() {
+      this.showTruncatedText = !this.showTruncatedText;
+    }
+  },
+  mounted() {
+    if (this.$refs.text.getBoundingClientRect().height > 18 * 5 + 2) {
+      this.truncateText = true;
     }
   }
 };
