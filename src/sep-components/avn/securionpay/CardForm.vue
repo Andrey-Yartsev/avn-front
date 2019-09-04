@@ -322,21 +322,21 @@ Validator.extend("latin", {
 });
 
 const userinfo = {
-  street: "asd",
-  city: "asd",
-  state: "Adygeya",
-  zip: "123",
+  street: "",
+  city: "",
+  state: "",
+  zip: "",
   country: "",
-  name: "ASD ASD"
+  name: ""
 };
 
 const initData = {
   cardError: null,
-  cardNumber: "4242000000000109",
-  cvc: "123",
+  cardNumber: "",
+  cvc: "",
   expMonth: "",
   expYear: "",
-  email: "asd@asd.asd",
+  email: "",
   submitting: false,
   tokens: {
     ccb: {
@@ -348,7 +348,7 @@ const initData = {
       data: {}
     }
   },
-  expDate: "11/22"
+  expDate: ""
 };
 
 export default {
