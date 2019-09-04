@@ -884,3 +884,22 @@ video {
 .trunc-text {
   overflow: hidden;
 }
+
+.trunc-toggle-btn {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 8px;
+}
+
+.trunc-toggle-link {
+  color: $secondary-color;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+}

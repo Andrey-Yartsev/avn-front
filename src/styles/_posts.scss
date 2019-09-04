@@ -302,7 +302,7 @@
     }
 
     &.trunc-text {
-      max-height: calc((1.25em * 5) + 2px);
+      max-height: calc((1.25em * 5) - 2px);
     }
 
     &:empty {

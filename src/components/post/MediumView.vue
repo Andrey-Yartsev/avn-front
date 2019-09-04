@@ -27,10 +27,12 @@
           :class="{ 'trunc-text': truncateText && !showTruncatedText }"
           v-html="post.text"
           ref="text"
-        ></p>
-        <button v-if="truncateText" @click="truncateToggle">
-          {{ showTruncatedText ? "hide" : "show" }}
-        </button>
+        />
+        <div class="trunc-toggle-btn" v-if="truncateText">
+          <button @click="truncateToggle" class="trunc-toggle-link">
+            {{ showTruncatedText ? "Collapse" : "More" }}
+          </button>
+        </div>
         <Media
           v-if="medias.length"
           :medias="medias"
