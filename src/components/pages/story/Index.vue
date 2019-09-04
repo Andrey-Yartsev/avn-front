@@ -223,16 +223,21 @@
           </div>
         </div>
       </div>
-      <div class="form-comments">
+      <div class="form-comments" v-if="showComments">
         <form class="form-comments__wrapper">
           <textarea
             placeholder="Comment"
             maxlength="200"
             class="form-comments__input rounded lg"
+            @focus="pause"
+            @blur="resume"
+            v-model="comment"
+            @keypress.enter.prevent="sendComment"
           />
           <button
+            @click="sendComment"
             type="button"
-            disabled="disabled"
+            :disabled="!comment.length"
             class="btn-send btn-send_inside-field icn-item icn-size_lg"
           />
         </form>
@@ -276,6 +281,7 @@
           <span
             class="btn-icon comments icn-item icn-size_lg"
             v-tooltip="'Comments'"
+            @click="openComments"
           />
         </span>
       </div>
@@ -351,7 +357,9 @@ export default {
       copied: false,
       isPaused: false,
       videoDoesNotExists: false,
-      showTip: false
+      showTip: false,
+      showComments: true,
+      comment: ""
     };
   },
   computed: {
@@ -420,12 +428,18 @@ export default {
   methods: {
     openTip() {
       this.pause();
+      this.showComments = false;
       this.showTip = true;
     },
     closeTip() {
       this.resume();
       this.showTip = false;
       this.$refs.tip.reset();
+    },
+    openComments() {
+      this.pause();
+      this.showComments = true;
+      this.showTip = false;
     },
     next() {
       if (this.currIndex === this.length - 1) {
@@ -744,6 +758,21 @@ export default {
         .then(() => {
           this.$router.push(`/${this.user.username}`);
         });
+    },
+    sendComment() {
+      if (!this.comment.trim()) {
+        this.comment = "";
+        return;
+      }
+
+      this.$store.dispatch("chat/sendMessage", {
+        userId: this.author.id,
+        data: {
+          text: "Story message: " + this.comment
+        }
+      });
+
+      this.comment = "";
     }
   },
   created() {
