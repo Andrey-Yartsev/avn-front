@@ -304,7 +304,7 @@
   }
 }
 
-.form-stream {
+.form-comments {
   position: absolute;
   left: 15px;
   bottom: 40px;
@@ -318,12 +318,21 @@
     right: auto;
   }
 
-  .stream-comment-form {
+  &__wrapper {
     margin-bottom: 14px;
+    position: relative;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-bottom: 17px;
     }
+  }
+
+  &__input {
+    background: rgba(#000, 0.2);
+    color: #fff;
+    padding: 10px 45px 9px 17px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    height: 40px;
   }
 }
 
@@ -445,14 +454,6 @@
       display: block;
     }
   }
-}
-
-.stream-comment-input {
-  background: rgba(#000, 0.2);
-  color: #fff;
-  padding: 9px 45px 9px 17px;
-  border: 1px solid rgba(255, 255, 255, .2);
-  height: 40px;
 }
 
 .stream-block {

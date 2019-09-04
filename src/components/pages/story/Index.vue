@@ -223,6 +223,20 @@
           </div>
         </div>
       </div>
+      <div class="form-comments">
+        <form class="form-comments__wrapper">
+          <textarea
+            placeholder="Comment"
+            maxlength="200"
+            class="form-comments__input rounded lg"
+          />
+          <button
+            type="button"
+            disabled="disabled"
+            class="btn-send btn-send_inside-field icn-item icn-size_lg"
+          />
+        </form>
+      </div>
       <div class="bottom-btns">
         <Tip
           ref="tip"
@@ -258,6 +272,12 @@
         >
           <span class="btn-icon icn-tips icn-item" v-tooltip="'Tip'"></span>
         </button>
+        <span class="bottom-btn">
+          <span
+            class="btn-icon comments icn-item icn-size_lg"
+            v-tooltip="'Comments'"
+          />
+        </span>
       </div>
       <button
         type="button"

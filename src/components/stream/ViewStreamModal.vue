@@ -64,16 +64,16 @@
             </div>
           </div>
         </div>
-        <div class="form-stream">
+        <div class="form-comments">
           <Comments :shownComments="shownComments" :count="5" />
           <form
-            class="stream-comment-form"
+            class="form-comments__wrapper"
             v-if="showCommentForm && !isMyStream"
           >
             <textarea
               ref="commentInput"
               placeholder="Comment"
-              class="stream-comment-input rounded lg"
+              class="form-comments__input rounded lg"
               maxlength="200"
               v-model="newComment"
               @keypress.enter.prevent="sendComment"

@@ -208,7 +208,7 @@
         <div class="stream-online-label" v-if="isStarted && !startingStream">
           live
         </div>
-        <div class="form-stream">
+        <div class="form-comments">
           <Comments
             v-if="asideType === 'comments'"
             :shownComments="comments"
@@ -219,11 +219,11 @@
             :type="asideType"
             :block="showBlockUserConfirm"
           />
-          <form class="stream-comment-form" v-if="asideType === 'comments'">
+          <form class="form-comments__wrapper" v-if="asideType === 'comments'">
             <textarea
               ref="commentInput"
               placeholder="Comment"
-              class="stream-comment-input rounded lg"
+              class="form-comments__input rounded lg"
               maxlength="200"
               :minHeight="20"
               :maxHeight="85"
