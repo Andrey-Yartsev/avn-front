@@ -52,7 +52,8 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     font-size: 17px;
-    margin: -4px 0 24px;
+    margin-top: -4px;
+    margin-bottom: 24px;
     padding: 0 5px 8px;
     border-bottom: 1px solid rgba($gray, 0.2);
     align-items: flex-end;
