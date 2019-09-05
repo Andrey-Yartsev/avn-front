@@ -79,6 +79,13 @@
                     ref="img"
                   />
                 </div>
+                <template v-if="v.story">
+                  <a class="userView userView_card rounded-corners nolink">
+                    <div class="bg bg-color bg-gradient_light">
+                      <img :src="v.story.preview" />
+                    </div>
+                  </a>
+                </template>
                 <template v-if="v.messageAttachment">
                   <a
                     :href="vv.url"

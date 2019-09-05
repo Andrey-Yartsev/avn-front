@@ -334,6 +334,13 @@
       }
     }
   }
+
+  .story {
+    img {
+      max-width: 50px;
+      border-radius: 5px;
+    }
+  }
 }
 
 .messageContent {

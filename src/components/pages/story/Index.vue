@@ -223,7 +223,7 @@
           </div>
         </div>
       </div>
-      <div class="form-comments" v-if="showComments">
+      <div class="form-comments" v-if="!isMine && showComments">
         <form class="form-comments__wrapper">
           <textarea
             placeholder="Comment"
@@ -277,7 +277,7 @@
         >
           <span class="btn-icon icn-tips icn-item" v-tooltip="'Tip'"></span>
         </button>
-        <span class="bottom-btn">
+        <span class="bottom-btn" v-if="!isMine">
           <span
             class="btn-icon comments icn-item icn-size_lg"
             v-tooltip="'Comments'"
@@ -423,6 +423,9 @@ export default {
     },
     chooseHighlightPage() {
       return this.$store.state.modal.chooseHighlight.show;
+    },
+    isMine() {
+      return this.isOwner(this.author.id);
     }
   },
   methods: {
@@ -768,7 +771,8 @@ export default {
       this.$store.dispatch("chat/sendMessage", {
         userId: this.author.id,
         data: {
-          text: "Story message: " + this.comment
+          text: "Story message: " + this.comment,
+          storyId: this.currentStory.id
         }
       });
 
