@@ -1210,8 +1210,6 @@ export default {
       };
     },
     processData(data, store) {
-      data.statistics = this.shiftTimeZone(data.statistics);
-
       this.showedStats[data.statistics.code] = data.statistics.time;
 
       const statData =
@@ -1222,6 +1220,7 @@ export default {
         if (r.periodType !== this.currentPeriodType) {
           return;
         }
+        data.statistics = this.shiftTimeZone(data.statistics);
         this.setCounter(
           "count_" + r.chartType + "_" + r.lineType,
           r.lineTitle,
