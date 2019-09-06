@@ -355,7 +355,7 @@
     .popup & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        flex: 0 0 44px;
+        flex: 0 0 100%;
       }
     }
 
