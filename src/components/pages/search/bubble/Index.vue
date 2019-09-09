@@ -14,7 +14,7 @@
       type="text"
       @focus="open"
       tabindex="1"
-      :class="{ 'shifted': canSearch }"
+      :class="{ shifted: canSearch }"
     />
     <span
       role="button"
