@@ -436,7 +436,7 @@ video {
   }
 
   input.sm {
-    padding-right: 40px;
+    padding-right: 60px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       height: 24px;
@@ -508,7 +508,7 @@ video {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       top: 10px;
-      right: 38px;
+      right: 53px;
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
