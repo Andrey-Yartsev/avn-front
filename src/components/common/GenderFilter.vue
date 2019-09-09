@@ -1,6 +1,6 @@
 <template>
   <div class="gender-wrapper" :class="{ opened: opened }">
-    <div class="selected-option" @click="open">
+    <div class="selected-option" @click="toggle">
       <button class="btn-gender b-search-form__btn_mob">
         <span class="icn-item icn-gender" :class="selectedOption.name" />
         <span v-if="$mq === 'desktop'">{{ selectedOption.title }}</span>
@@ -77,6 +77,9 @@ export default {
     }
   },
   methods: {
+    toggle() {
+      this.opened ? this.close() : this.open();
+    },
     open() {
       setTimeout(() => {
         this.opened = true;
