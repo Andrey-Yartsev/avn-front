@@ -40,7 +40,6 @@ const actions = {
 
   login({ commit, dispatch }, data) {
     commit("request");
-    console.log("!!!");
     UserApi.login(data)
       .then(user => {
         dispatch("setToken", user.accessToken);

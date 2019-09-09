@@ -231,6 +231,9 @@ export default {
       }
 
       return PostSmall;
+    },
+    category() {
+      return this.$store.state.auth.user.categoryView;
     }
   },
   methods: {
@@ -299,6 +302,9 @@ export default {
       this.postsStatFinishViewAction();
       this.getPageData();
       this.lastYOffset = 0;
+    },
+    category() {
+      this.getPageData();
     }
   }
 };

@@ -22,10 +22,11 @@ export default {
       }
     });
   },
-  getExplorePosts({ offset, limit, marker, source }) {
+  getExplorePosts({ offset, limit, marker, source, category }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",
       query: {
+        category,
         offset,
         limit,
         marker

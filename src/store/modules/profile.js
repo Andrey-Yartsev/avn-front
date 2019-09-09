@@ -38,37 +38,59 @@ const actions = {
     response = await response.json();
     dispatch("auth/setUser", response, { root: true });
   },
-  update({ commit, dispatch }, user) {
+  update({ dispatch }, user) {
+    dispatch("_update", {
+      user,
+      silent: false
+    });
+  },
+  updateSilent({ dispatch }, user) {
+    dispatch("_update", {
+      user,
+      silent: true,
+      extendBeforeUpdate: true
+    });
+  },
+  _update({ commit, dispatch }, { user, silent, extendBeforeUpdate }) {
     commit("setError", null);
     commit("setLoading", true);
+    if (extendBeforeUpdate) {
+      dispatch("auth/extendUser", user, { root: true });
+    }
     return new Promise((accept, reject) => {
       UserApi.update(user)
         .then(async response => {
           const r = await response.json();
           if (r.error) {
             commit("setError", r.error);
+            if (!silent) {
+              dispatch(
+                "global/flashToast",
+                {
+                  text: r.error.message,
+                  type: "error"
+                },
+                {
+                  root: true
+                }
+              );
+            }
+            commit("setLoading", false);
+            return;
+          }
+          if (!extendBeforeUpdate) {
+            dispatch("auth/extendUser", r, { root: true });
+          }
+          dispatch("profile/home/extend", r, { root: true });
+          if (!silent) {
             dispatch(
               "global/flashToast",
-              {
-                text: r.error.message,
-                type: "error"
-              },
+              { text: "Changes saved successfully" },
               {
                 root: true
               }
             );
-            commit("setLoading", false);
-            return;
           }
-          dispatch("auth/extendUser", r, { root: true });
-          dispatch("profile/home/extend", r, { root: true });
-          dispatch(
-            "global/flashToast",
-            { text: "Changes saved successfully" },
-            {
-              root: true
-            }
-          );
           commit("setLoading", false);
           accept(r);
         })

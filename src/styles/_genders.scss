@@ -1,0 +1,124 @@
+.icn-gender {
+
+  &:after {
+    z-index: 100;
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+    color: $gray;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      line-height: 30px;
+    }
+  }
+  &.trans:after {
+    content: "\e671";
+  }
+  &.gay:after {
+    content: "\e672";
+  }
+  &.hetero:after {
+    content: "\e673";
+  }
+  &.everyone:after {
+    content: "\e674";
+  }
+}
+
+.gender-bar {
+  position: absolute;
+  background: $white;
+  padding: 10px 0;
+  transition: transform 0.4s ease;
+  box-shadow: 0 6px 30px rgba(#000, 0.15);
+  top: 33px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    top: 35px;
+  }
+
+  right: 0;
+  color: $gray;
+  z-index: 100;
+
+  & > div {
+    padding: 7px 20px 7px 15px;
+    cursor: pointer;
+    display: flex;
+
+    &:hover {
+      .icn-item:after {
+        color: $secondary-color-darken;
+      }
+      color: $secondary-color-darken;
+      background: rgba(124, 139, 150, 0.18);
+    }
+
+    &.selected {
+      background: rgba(124, 139, 150, 0.18);
+    }
+
+    & > span {
+      line-height: 28px;
+      white-space: nowrap;
+    }
+  }
+
+  .triangle {
+    &:after {
+      content: "";
+      background-color: $white;
+      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+      width: 12px;
+      height: 12px;
+      transform: rotate(45deg);
+      position: absolute;
+      top: -6px;
+      right: 14px;
+    }
+  }
+}
+
+.gender-wrapper {
+  position: relative;
+
+  .selected-option {
+    display: flex;
+    cursor: pointer;
+
+    .btn-gender {
+      &:after {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+    }
+
+    span {
+      display: inline-block;
+      margin-left: 7px;
+      line-height: 24px;
+      color: $gray;
+    }
+
+    &:hover {
+      span {
+        color: $secondary-color-darken;
+      }
+      .btn-gender:after {
+        color: $secondary-color-darken;
+      }
+    }
+  }
+}
+
+.btn-gender {
+  background: none;
+  border: 0;
+  margin-left: 0;
+
+  &:after {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+  }
+}

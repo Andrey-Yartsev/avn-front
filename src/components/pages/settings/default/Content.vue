@@ -231,6 +231,30 @@
               </div>
             </label>
           </div>
+          <div class="form-group form-group_with-label gender-options">
+            <label class="form-group-inner">
+              <span class="label">My Preference</span>
+              <div class="row">
+                <div class="col-1-2">
+                  <div class="select-wrapper">
+                    <select
+                      name="gender"
+                      class="default-disabled"
+                      v-model="localUser.category"
+                    >
+                      <option
+                        v-for="gender in genderPreferenceList"
+                        :value="gender.id"
+                        :key="gender.id"
+                      >
+                        {{ gender.title }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
           <div class="form-group-btn hidden-mobile">
             <button
               type="submit"
@@ -287,6 +311,32 @@ export default {
     },
     genderList() {
       return this.$store.state.init.data.genders;
+    },
+    genderPreferenceList() {
+      const options = [
+        {
+          name: "everyone",
+          title: "Everyone",
+          id: 1
+        },
+        {
+          name: "hetero",
+          title: "Straight",
+          id: 2
+        },
+        {
+          name: "gay",
+          title: "Gay Guys",
+          id: 3
+        },
+        {
+          name: "trans",
+          title: "Trans",
+          id: 4
+        }
+      ];
+
+      return options;
     },
     subscribePrice() {
       if (!this.localUser) {

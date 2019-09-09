@@ -24,6 +24,8 @@
       @click="reset"
     />
 
+    <GenderFilter v-if="$mq === 'mobile'" />
+
     <button
       type="button"
       class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item"
@@ -68,6 +70,7 @@ import Users from "./types/Users";
 import Posts from "./types/Posts";
 import Suggestions from "./types/Suggestions";
 import { throttle } from "throttle-debounce";
+import GenderFilter from "@/components/common/GenderFilter";
 
 export default {
   name: "SearchBubble",
@@ -79,7 +82,8 @@ export default {
   components: {
     Users,
     Posts,
-    Suggestions
+    Suggestions,
+    GenderFilter
   },
 
   data() {

@@ -11,7 +11,8 @@ const initState = {
   offset: 0,
   marker: "",
   source: "media",
-  deletedPost: undefined
+  deletedPost: undefined,
+  category: null
 };
 
 const state = { ...initState };
@@ -24,11 +25,15 @@ const mutations = {
   },
   setSource(state, { source }) {
     state.source = source;
+  },
+  setCategory(state, category) {
+    console.log(category);
+    state.category = category;
   }
 };
 
 const actions = {
-  getPosts({ commit, state }) {
+  getPosts({ commit, state, rootState }) {
     const { limit, offset, marker } = state;
     let source = state.source;
     if (source === "feed") {
@@ -36,8 +41,10 @@ const actions = {
     }
     commit("postsRequest");
 
+    const category = rootState.auth.user.categoryView || 1;
+
     return new Promise(accept => {
-      PostApi.getExplorePosts({ limit, offset, marker, source })
+      PostApi.getExplorePosts({ limit, offset, marker, source, category })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(res) {
