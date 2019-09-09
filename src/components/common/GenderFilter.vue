@@ -3,7 +3,7 @@
     :class="['more-functions gender-wrapper', { open: opened }]"
     v-click-outside="hide"
   >
-    <div class="more-functions__overlay" @click="hide"></div>
+    <div class="more-functions__overlay" @click="hide" />
     <div class="more-functions__btn btn-gender" @click="open">
       <span class="icn-item icn-gender" :class="selectedOption.name" />
       <span v-if="$mq === 'desktop'" class="btn-gender__text">{{
@@ -91,11 +91,6 @@ export default {
   methods: {
     toggle() {
       this.opened ? this.close() : this.open();
-    },
-    open() {
-      setTimeout(() => {
-        this.opened = true;
-      }, 10);
     },
     close() {
       this.opened = false;
