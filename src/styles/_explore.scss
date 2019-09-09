@@ -238,6 +238,13 @@
       align-content: stretch;
       position: relative;
     }
+
+    &.userCollectionView {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        background: $white;
+      }
+    }
   }
 
   &-wrapper {
