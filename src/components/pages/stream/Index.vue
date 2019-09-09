@@ -208,7 +208,7 @@
         <div class="stream-online-label" v-if="isStarted && !startingStream">
           live
         </div>
-        <div class="form-comments">
+        <div class="form-comments" v-if="isStarted">
           <Comments
             v-if="asideType === 'comments'"
             :shownComments="comments"
