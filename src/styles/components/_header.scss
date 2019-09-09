@@ -762,6 +762,7 @@
     display: none;
     margin: 0 40px;
     padding: 10px 0;
+    position: static;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -788,7 +789,7 @@
   }
 
   .main-header_top & {
-    right: 64px;
+    right: 90px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       right: 32px;

@@ -1,12 +1,14 @@
 <template>
   <div class="gender-wrapper" :class="{ opened: opened }">
     <div class="selected-option" @click="open">
-      <button class="btn-gender b-search-form__btn_mob">
+      <button class="btn-gender b-search-form__btn_mob"
+        :class="{ selected: opened }"
+      >
         <span class="icn-item icn-gender" :class="selectedOption.name" />
         <span v-if="$mq === 'desktop'">{{ selectedOption.title }}</span>
       </button>
     </div>
-    <div class="gender-bar" v-if="opened" v-click-outside="close">
+    <div class="gender-bar" v-click-outside="close">
       <button
         v-for="v in options"
         :key="v.name"
