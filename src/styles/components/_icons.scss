@@ -268,4 +268,28 @@
       }
     }
   }
+
+
+  &-gender {
+
+    &:after {
+      z-index: 100;
+      display: block;
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    &.trans:after {
+      content: "\e671";
+    }
+    &.gay:after {
+      content: "\e672";
+    }
+    &.hetero:after {
+      content: "\e673";
+    }
+    &.everyone:after {
+      content: "\e674";
+    }
+  }
 }

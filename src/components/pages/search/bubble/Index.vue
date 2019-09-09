@@ -24,15 +24,15 @@
       @click="reset"
     />
 
-    <GenderFilter v-if="$mq === 'mobile'" />
-
     <button
       type="button"
       class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item"
       :class="{ 'icn-size_lg': $mq === 'mobile' }"
       @click="toToSearchPage"
       :disabled="!canSearch"
-    ></button>
+    />
+
+    <GenderFilter v-if="$mq === 'mobile'" />
 
     <div class="header-search-results">
       <div
