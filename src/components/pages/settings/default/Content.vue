@@ -240,7 +240,7 @@
                     <select
                       name="gender"
                       class="default-disabled"
-                      v-model="localUser.category"
+                      v-model="category"
                     >
                       <option
                         v-for="gender in genderPreferenceList"
@@ -346,6 +346,15 @@ export default {
     },
     tz() {
       return moment.tz.names();
+    },
+    category: {
+      set(category) {
+        this.localUser.category = category;
+        this.localUser.categoryView = category;
+      },
+      get() {
+        return this.localUser.category;
+      }
     }
   },
 
