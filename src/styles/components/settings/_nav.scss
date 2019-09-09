@@ -21,11 +21,11 @@
     position: relative;
   }
 
-  @include media-breakpoint-down($desktop-breakpoint) {
-    overflow: visible !important;
-  }
-
-  .ps {
+  &.ps {
+    
+    @include media-breakpoint-down($desktop-breakpoint) {
+      overflow: visible !important;
+    }
 
     &__rail-y {
       opacity: .6;
