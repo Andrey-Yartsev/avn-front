@@ -233,7 +233,11 @@ export default {
       return PostSmall;
     },
     category() {
-      return this.$store.state.auth.user.categoryView;
+      if (this.user) {
+        return this.$store.state.auth.user.categoryView;
+      } else {
+        return this.$store.state.explore.gender.category;
+      }
     }
   },
   methods: {

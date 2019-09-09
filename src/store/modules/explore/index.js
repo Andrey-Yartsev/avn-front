@@ -1,6 +1,7 @@
 "use strict";
 import PostApi from "@/api/post";
 import PostMixin from "@/store/mixins/posts";
+import gender from "./gender";
 
 const initState = {
   loading: false,
@@ -41,7 +42,14 @@ const actions = {
     }
     commit("postsRequest");
 
-    const category = rootState.auth.user.categoryView || 1;
+    let category = 1;
+    if (rootState.auth.user) {
+      if (rootState.auth.user.categoryView) {
+        category = rootState.auth.user.categoryView;
+      }
+    } else {
+      category = rootState.explore.gender.category;
+    }
 
     return new Promise(accept => {
       PostApi.getExplorePosts({ limit, offset, marker, source, category })
@@ -67,5 +75,8 @@ export default {
   namespaced: true,
   state,
   actions: { ...PostMixin.actions, ...actions },
-  mutations: { ...PostMixin.mutations, ...mutations }
+  mutations: { ...PostMixin.mutations, ...mutations },
+  modules: {
+    gender
+  }
 };

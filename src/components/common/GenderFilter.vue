@@ -27,6 +27,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import User from "@/mixins/user";
 
 const options = [
   {
@@ -56,6 +57,7 @@ export default {
   directives: {
     ClickOutside
   },
+  mixins: [User],
   data() {
     return {
       opened: false
@@ -63,7 +65,11 @@ export default {
   },
   computed: {
     selected() {
-      return this.$store.state.auth.user.categoryView;
+      if (this.user) {
+        return this.$store.state.auth.user.categoryView;
+      } else {
+        return this.$store.state.explore.gender.category;
+      }
     },
     options() {
       return options.map(v => {
@@ -87,9 +93,13 @@ export default {
       this.opened = false;
     },
     select(id) {
-      const user = { ...this.$store.state.auth.user };
-      user.categoryView = id;
-      this.$store.dispatch("profile/updateSilent", user);
+      if (this.user) {
+        const user = { ...this.$store.state.auth.user };
+        user.categoryView = id;
+        this.$store.dispatch("profile/updateSilent", user);
+      } else {
+        this.$store.commit("explore/gender/setCategory", id);
+      }
       this.close();
     }
   }
