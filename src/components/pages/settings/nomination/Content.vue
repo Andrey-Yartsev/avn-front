@@ -112,7 +112,10 @@
               <div class="form-group-inner form-group-title"></div>
             </div>
 
-            <div class="form-group form-group_with-label" v-if="$mq === 'desktop'">
+            <div
+              class="form-group form-group_with-label"
+              v-if="$mq === 'desktop'"
+            >
               <button
                 type="submit"
                 class="btn lg btn_fix-width saveChanges"
