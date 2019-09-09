@@ -1,7 +1,8 @@
 <template>
   <div class="gender-wrapper" :class="{ opened: opened }">
     <div class="selected-option" @click="open">
-      <button class="btn-gender b-search-form__btn_mob"
+      <button
+        class="btn-gender b-search-form__btn_mob"
         :class="{ selected: opened }"
       >
         <span class="icn-item icn-gender" :class="selectedOption.name" />
