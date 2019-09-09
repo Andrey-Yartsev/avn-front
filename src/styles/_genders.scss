@@ -20,8 +20,6 @@
   @include media-breakpoint-up($desktop-breakpoint) {
     top: 35px;
     min-width: 180px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     box-shadow: 0 0 0 1px rgba(124, 139, 150, 0.2),
     0 10px 30px rgba(0, 0, 0, 0.15);
     transform: translateY(20px);
@@ -55,6 +53,19 @@
 
     &.selected {
       background: rgba(124, 139, 150, 0.18);
+    }
+
+    &:not(:first-child) {
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 20px;
+        top: 0;
+        height: 1px;
+        background-color: rgba(124, 139, 150, 0.2);
+      }
     }
   }
 }
