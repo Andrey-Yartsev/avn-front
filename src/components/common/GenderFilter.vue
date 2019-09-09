@@ -1,26 +1,27 @@
 <template>
-  <div class="gender-wrapper">
+  <div class="gender-wrapper"
+    :class="{ 'opened': opened }"
+  >
     <div class="selected-option" @click="open">
       <button
-        class="btn-gender b-search-form__btn_mob icn-item icn-gender"
-        :class="selectedOption.name"
-      ></button>
-      <span v-if="$mq === 'desktop'">{{ selectedOption.title }}</span>
+        class="btn-gender b-search-form__btn_mob"
+      >
+        <span class="icn-item icn-gender" :class="selectedOption.name" />
+        <span v-if="$mq === 'desktop'">{{ selectedOption.title }}</span>
+      </button>
     </div>
     <div class="gender-bar" v-if="opened" v-click-outside="close">
-      <div
+      <button
         v-for="v in options"
         :key="v.name"
         :class="{ selected: v.selected }"
         @click="select(v.id)"
+        class="btn-gender"
       >
-        <button
-          class="btn-gender b-search-form__btn_mob icn-item icn-gender"
-          :class="v.cls"
-        ></button
-        ><span>{{ v.title }}</span>
-      </div>
-      <span class="triangle"></span>
+        <span class="icn-item icn-gender" :class="v.cls" />
+        <span class="btn-gender__text">{{ v.title }}</span>
+      </button>
+      <span class="triangle" v-if="$mq === 'desktop'" />
     </div>
   </div>
 </template>
