@@ -6,7 +6,7 @@
         :class="{ selected: opened }"
       >
         <span class="icn-item icn-gender" :class="selectedOption.name" />
-        <span v-if="$mq === 'desktop'">{{ selectedOption.title }}</span>
+        <span v-if="$mq === 'desktop'" class="btn-gender__text">{{ selectedOption.title }}</span>
       </button>
     </div>
     <div class="gender-bar" v-click-outside="close">
