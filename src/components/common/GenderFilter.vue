@@ -1,28 +1,35 @@
 <template>
-  <div class="gender-wrapper" :class="{ opened: opened }">
-    <div class="selected-option" @click="toggle">
-      <button
-        class="btn-gender b-search-form__btn_mob"
-        :class="{ selected: opened }"
-      >
-        <span class="icn-item icn-gender" :class="selectedOption.name" />
-        <span v-if="$mq === 'desktop'" class="btn-gender__text">{{
-          selectedOption.title
-        }}</span>
-      </button>
+  <div
+    :class="['more-functions gender-wrapper', { open: opened }]"
+    v-click-outside="hide"
+  >
+    <div class="more-functions__overlay" @click="hide"></div>
+    <div class="more-functions__btn btn-gender" @click="open">
+      <span class="icn-item icn-gender" :class="selectedOption.name" />
+      <span v-if="$mq === 'desktop'" class="btn-gender__text">{{
+        selectedOption.title
+      }}</span>
     </div>
-    <div class="gender-bar" v-click-outside="close">
-      <button
-        v-for="v in options"
-        :key="v.name"
-        :class="{ selected: v.selected }"
-        @click="select(v.id)"
-        class="btn-gender"
-      >
-        <span class="icn-item icn-gender" :class="v.cls" />
-        <span class="btn-gender__text">{{ v.title }}</span>
-      </button>
-      <span class="triangle" v-if="$mq === 'desktop'" />
+    <div class="more-functions__dropdown">
+      <div class="more-functions__dropdown-inside">
+        <ul class="more-functions__list">
+          <li
+            class="more-functions__item"
+            v-for="v in options"
+            :key="v.name"
+            :class="{ selected: v.selected }"
+          >
+            <button
+              type="button"
+              class="more-functions__link btn-gender"
+              @click="select(v.id)"
+            >
+              <span class="icn-item icn-gender" :class="v.cls" />
+              <span class="btn-gender__text">{{ v.title }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -92,6 +99,14 @@ export default {
     },
     close() {
       this.opened = false;
+    },
+    open() {
+      this.opened = true;
+      this.$emit("openDropdawn");
+    },
+    hide() {
+      this.opened = false;
+      this.$emit("hideDropdawn");
     },
     select(id) {
       if (this.user) {

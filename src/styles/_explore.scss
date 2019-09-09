@@ -45,11 +45,6 @@
 
 .content-nav {
   display: flex;
-  justify-content: space-between;
-  margin-top: -4px;
-  margin-bottom: 24px;
-  padding: 0 5px 8px;
-  border-bottom: 1px solid rgba($gray, 0.2);
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     line-height: 4em;
@@ -57,6 +52,10 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     font-size: 17px;
+    margin-top: -4px;
+    margin-bottom: 24px;
+    padding: 0 5px 8px;
+    border-bottom: 1px solid rgba($gray, 0.2);
     align-items: flex-end;
     align-content: flex-end;
     justify-content: flex-start;
