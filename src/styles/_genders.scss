@@ -22,6 +22,15 @@
         pointer-events: auto;
       }
     }
+
+    > .btn-gender {
+      color: $secondary-color-darken;
+
+      .icn-item,
+      .btn-gender__text {
+        opacity: 1;
+      }
+    }
   }
 }
 
