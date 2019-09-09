@@ -369,6 +369,8 @@ export default {
     window.addEventListener("message", postMessageHandler);
 
     this.initTrial();
+
+    this.$store.dispatch("explore/gender/initGuestCategory");
   },
 
   beforeDestroy() {

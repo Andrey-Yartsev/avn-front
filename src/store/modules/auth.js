@@ -32,6 +32,7 @@ const actions = {
 
   setUser({ commit }, user) {
     commit("setUser", user);
+    commit("explore/gender/setCategory", user.categoryView, { root: true });
   },
 
   extendUser({ state, dispatch }, user) {

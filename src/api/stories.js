@@ -2,13 +2,18 @@ import anyRequest from "@/utils/anyRequest";
 import tokenRequest from "@/utils/tokenRequest";
 
 export default {
-  getPosts({ offset, limit, marker, source }) {
+  getPosts({ offset, limit, marker, source, category }) {
+    if (!category) {
+      category = 1;
+    }
+
     return anyRequest(`stories/${source}`, {
       method: "GET",
       query: {
         offset,
         limit,
-        marker
+        marker,
+        category
       }
     });
   },

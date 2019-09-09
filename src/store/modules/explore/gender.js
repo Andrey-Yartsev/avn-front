@@ -15,11 +15,18 @@ const state = {
 const mutations = {
   setCategory(state, category) {
     state.category = category;
-    BrowserStore.set("genderCategory", category);
   }
 };
 
-const actions = {};
+const actions = {
+  initGuestCategory({ commit }) {
+    commit("setCategory", genderCategory);
+  },
+  setGuestCategory({ commit }) {
+    commit("setCategory", genderCategory);
+    BrowserStore.set("genderCategory", genderCategory);
+  }
+};
 
 export default {
   namespaced: true,

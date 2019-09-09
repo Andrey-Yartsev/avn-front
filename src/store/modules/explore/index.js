@@ -28,7 +28,6 @@ const mutations = {
     state.source = source;
   },
   setCategory(state, category) {
-    console.log(category);
     state.category = category;
   }
 };
@@ -42,14 +41,7 @@ const actions = {
     }
     commit("postsRequest");
 
-    let category = 1;
-    if (rootState.auth.user) {
-      if (rootState.auth.user.categoryView) {
-        category = rootState.auth.user.categoryView;
-      }
-    } else {
-      category = rootState.explore.gender.category;
-    }
+    const category = rootState.explore.gender.category;
 
     return new Promise(accept => {
       PostApi.getExplorePosts({ limit, offset, marker, source, category })

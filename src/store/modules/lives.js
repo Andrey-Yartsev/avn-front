@@ -145,11 +145,13 @@ const mutations = {
 };
 
 const actions = {
-  getPosts({ commit }) {
+  getPosts({ commit, rootState }) {
     const { limit, offset, marker, source } = state;
+    const category = rootState.explore.gender.category;
+
     commit("postsRequest");
 
-    return LivesApi.getPosts({ limit, offset, marker, source })
+    return LivesApi.getPosts({ limit, offset, marker, source, category })
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {

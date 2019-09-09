@@ -233,11 +233,7 @@ export default {
       return PostSmall;
     },
     category() {
-      if (this.user) {
-        return this.$store.state.auth.user.categoryView;
-      } else {
-        return this.$store.state.explore.gender.category;
-      }
+      return this.$store.state.explore.gender.category;
     }
   },
   methods: {
@@ -273,6 +269,8 @@ export default {
       }
     },
     getPageData() {
+      this.lastYOffset = 0;
+
       this.$store.dispatch("explore/resetPageState");
       this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("lives/resetPageState");
@@ -305,7 +303,6 @@ export default {
     page() {
       this.postsStatFinishViewAction();
       this.getPageData();
-      this.lastYOffset = 0;
     },
     category() {
       this.getPageData();

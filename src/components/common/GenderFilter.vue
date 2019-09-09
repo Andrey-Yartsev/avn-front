@@ -65,11 +65,7 @@ export default {
   },
   computed: {
     selected() {
-      if (this.user) {
-        return this.$store.state.auth.user.categoryView;
-      } else {
-        return this.$store.state.explore.gender.category;
-      }
+      return this.$store.state.explore.gender.category;
     },
     options() {
       return options.map(v => {
@@ -97,8 +93,9 @@ export default {
         const user = { ...this.$store.state.auth.user };
         user.categoryView = id;
         this.$store.dispatch("profile/updateSilent", user);
-      } else {
         this.$store.commit("explore/gender/setCategory", id);
+      } else {
+        this.$store.dispatch("explore/gender/setGuestCategory", id);
       }
       this.close();
     }
