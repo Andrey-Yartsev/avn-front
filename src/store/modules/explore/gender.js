@@ -22,7 +22,7 @@ const actions = {
   initGuestCategory({ commit }) {
     commit("setCategory", genderCategory);
   },
-  setGuestCategory({ commit }) {
+  setGuestCategory({ commit }, genderCategory) {
     commit("setCategory", genderCategory);
     BrowserStore.set("genderCategory", genderCategory);
   }
