@@ -14,6 +14,7 @@
       type="text"
       @focus="open"
       tabindex="1"
+      :class="{ 'shifted': canSearch }"
     />
     <span
       role="button"
@@ -27,7 +28,7 @@
     <button
       type="button"
       class="b-search-form__btn b-search-form__btn_mob header-search-submit icn-item"
-      :class="{ 'icn-size_lg': $mq === 'mobile' }"
+      :class="{ 'icn-size_md': $mq === 'mobile' }"
       @click="toToSearchPage"
       :disabled="!canSearch"
     />
