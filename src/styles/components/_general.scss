@@ -103,10 +103,20 @@ strong {
     }
   }
 
-  &_b-gap-sm {
+  &_b-gap {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding-bottom: 5px;
+    &-sm {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-bottom: 5px;
+      }
+    }
+
+    &-md {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-bottom: 15px;
+      }
     }
   }
 
@@ -146,6 +156,13 @@ strong {
   @include media-breakpoint-up($desktop-breakpoint) {
     border-top: 1px solid rgba($gray, 0.2);
     padding-top: 24px;
+  }
+
+  &_bgap {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-bottom: 24px;
+    }
   }
 
   &_reset-bt {

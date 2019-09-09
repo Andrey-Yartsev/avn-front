@@ -22,7 +22,7 @@
   }
 
   &.ps {
-    
+
     @include media-breakpoint-down($desktop-breakpoint) {
       overflow: visible !important;
     }

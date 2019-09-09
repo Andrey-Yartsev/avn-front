@@ -9,7 +9,7 @@
         class="form-nomination"
         :class="{
           'border-top': $mq === 'desktop',
-          'shadow-block shadow-block_b-gap-sm': $mq === 'mobile' && !url
+          'shadow-block': $mq === 'mobile' && !url
         }"
       >
         <div
@@ -37,7 +37,8 @@
 
         <template v-if="eventId">
           <div
-            class="border-top shadow-block loader-container"
+            class="border-top shadow-block_b-gap-md loader-container"
+            :class="{ 'border-top_bgap shadow-block': $mq === 'desktop' }"
             v-if="loadingCategories"
           >
             <Loader :fullscreen="false" :inline="true" text="" :small="true" />
@@ -110,19 +111,19 @@
             >
               <div class="form-group-inner form-group-title"></div>
             </div>
+
+            <div class="form-group form-group_with-label" v-if="$mq === 'desktop'">
+              <button
+                type="submit"
+                class="btn lg btn_fix-width saveChanges"
+                :class="{ 'btn_form-gap': $mq === 'desktop' }"
+                :disabled="!changed || loading"
+              >
+                Save changes
+              </button>
+            </div>
           </template>
         </template>
-
-        <div class="form-group form-group_with-label" v-if="$mq === 'desktop'">
-          <button
-            type="submit"
-            class="btn lg btn_fix-width saveChanges"
-            :class="{ 'btn_form-gap': $mq === 'desktop' }"
-            :disabled="!changed || loading"
-          >
-            Save changes
-          </button>
-        </div>
       </div>
       <div class="text-centered" v-if="$mq === 'mobile'">
         <button
