@@ -114,7 +114,7 @@ const actions = {
     }
     setTimeout(() => {
       const category = 3;
-      if (rootState.auth.user === category) {
+      if (rootState.auth.user.category === category) {
         return;
       }
       dispatch("updateSilent", {
