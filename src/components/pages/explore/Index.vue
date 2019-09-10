@@ -89,7 +89,7 @@
             <div class="loader-infinity" v-if="infinityScrollLoading">
               <Loader :fullscreen="false" :inline="true" />
             </div>
-            <div class="msg-no-content" v-if="shouldShowNoPosts">
+            <div class="msg-no-content show" v-if="shouldShowNoPosts">
               <div class="msg-no-content__text">
                 <template v-if="page !== 'lives'">
                   No {{ contentName }} here yet
