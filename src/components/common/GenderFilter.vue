@@ -63,7 +63,11 @@ export default {
       });
     },
     selectedOption() {
-      return this.options.find(v => v.id === this.selected);
+      const found = this.options.find(v => v.id === this.selected);
+      if (!found) {
+        return this.options[0];
+      }
+      return found;
     }
   },
   methods: {
