@@ -37,19 +37,19 @@ VTooltip.enabled = window.innerWidth > 990;
 // import Logger from "js-logger";
 // Logger.useDefaults();
 
-// if (process.env.NODE_ENV !== "development") {
-Sentry.init({
-  dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
-  integrations: [
-    new SentryIntegrations.Vue({
-      Vue,
-      attachProps: true
-    }),
-    new SentryIntegrations.RewriteFrames()
-  ],
-  environment: process.env.VUE_APP_LOG_MODE
-});
-// }
+if (process.env.NODE_ENV !== "development") {
+  Sentry.init({
+    dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
+    integrations: [
+      new SentryIntegrations.Vue({
+        Vue,
+        attachProps: true
+      }),
+      new SentryIntegrations.RewriteFrames()
+    ],
+    environment: process.env.VUE_APP_LOG_MODE
+  });
+}
 
 Vue.config.productionTip = false;
 

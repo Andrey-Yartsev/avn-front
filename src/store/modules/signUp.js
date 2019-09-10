@@ -30,6 +30,7 @@ const actions = {
       }).then(() => {
         dispatch("profile/fetch", null, { root: true }).then(() => {
           Router.push("/settings/profile?signup=true");
+          dispatch("profile/afterLogin", null, { root: true });
         });
       });
     });
@@ -46,6 +47,7 @@ const actions = {
         () => {
           dispatch("profile/fetch", null, { root: true }).then(() => {
             commit("modal/hideSafe", { name: "signup" }, { root: true });
+            dispatch("profile/afterLogin", null, { root: true });
           });
         }
       );

@@ -107,6 +107,24 @@ const actions = {
   },
   setFetchLoading({ commit }, flag) {
     commit("setFetchLoading", flag);
+  },
+  afterLogin({ dispatch, rootState }) {
+    if (window.location.hostname.replace(/([^.])\..*/, "$1") !== "gayvn") {
+      return;
+    }
+    setTimeout(() => {
+      const category = 3;
+      if (rootState.auth.user === category) {
+        return;
+      }
+      dispatch("updateSilent", {
+        ...rootState.auth.user,
+        ...{
+          category,
+          categoryView: category
+        }
+      });
+    }, 2000);
   }
 };
 

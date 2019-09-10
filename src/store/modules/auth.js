@@ -55,6 +55,7 @@ const actions = {
         commit("requestSuccess");
         Router.push("/", () => {
           commit("loginFinished");
+          dispatch("profile/afterLogin", null, { root: true });
         });
       })
       .catch(error => {
@@ -83,8 +84,9 @@ const actions = {
         commit("showCaptcha", false);
         commit("requestSuccess");
         commit("modal/hideSafe", { name: "login" }, { root: true });
-        dispatch("profile/home/reload", null, { root: true });
+        // dispatch("profile/home/reload", null, { root: true });
         commit("loginFinished");
+        dispatch("profile/afterLogin", null, { root: true });
       })
       .catch(error => {
         if (error.code === 101) {
