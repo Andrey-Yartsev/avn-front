@@ -124,7 +124,14 @@ const actions = {
           categoryView: category
         }
       });
-    }, 5000);
+      dispatch(
+        "global/flashToast",
+        {
+          text: "Your gender preference was switched to Gay"
+        },
+        { root: true }
+      );
+    }, 4000);
   }
 };
 
