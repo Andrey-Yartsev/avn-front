@@ -277,6 +277,7 @@ import TextareaAutosize from "@/components/common/TextareaAutosize";
 import moment from "moment-timezone";
 import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
+import genderPreferenceList from "@/components/common/genderPreferences";
 
 export default {
   name: "ProfileSettingsContent",
@@ -313,30 +314,7 @@ export default {
       return this.$store.state.init.data.genders;
     },
     genderPreferenceList() {
-      const options = [
-        {
-          name: "everyone",
-          title: "Everyone",
-          id: 1
-        },
-        {
-          name: "hetero",
-          title: "Straight",
-          id: 2
-        },
-        {
-          name: "gay",
-          title: "Gay Guys",
-          id: 3
-        },
-        {
-          name: "trans",
-          title: "Trans",
-          id: 4
-        }
-      ];
-
-      return options;
+      return genderPreferenceList;
     },
     subscribePrice() {
       if (!this.localUser) {

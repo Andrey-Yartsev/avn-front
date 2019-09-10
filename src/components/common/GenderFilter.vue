@@ -37,29 +37,7 @@
 <script>
 import ClickOutside from "vue-click-outside";
 import User from "@/mixins/user";
-
-const options = [
-  {
-    name: "everyone",
-    title: "Everyone",
-    id: 1
-  },
-  {
-    name: "hetero",
-    title: "Straight",
-    id: 2
-  },
-  {
-    name: "gay",
-    title: "Gay Guys",
-    id: 3
-  },
-  {
-    name: "trans",
-    title: "Trans",
-    id: 4
-  }
-];
+import options from "./genderPreferences";
 
 export default {
   name: "GenderFilter",

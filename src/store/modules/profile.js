@@ -124,7 +124,7 @@ const actions = {
           categoryView: category
         }
       });
-    }, 2000);
+    }, 5000);
   }
 };
 
