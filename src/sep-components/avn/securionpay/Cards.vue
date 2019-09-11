@@ -94,9 +94,6 @@ export default {
     showForm(show) {
       this.$emit("showForm", show);
     }
-  },
-  mounted() {
-    this.scpayInit();
   }
 };
 </script>
