@@ -233,17 +233,41 @@
           </div>
           <div class="form-group form-group_with-label gender-options">
             <label class="form-group-inner">
-              <span class="label">My Preference</span>
+              <span class="label">My Primary Content Audience</span>
               <div class="row">
                 <div class="col-1-2">
                   <div class="select-wrapper">
                     <select
                       name="gender"
                       class="default-disabled"
-                      v-model="category"
+                      v-model="localUser.category"
                     >
                       <option
                         v-for="gender in genderPreferenceList"
+                        :value="gender.id"
+                        :key="gender.id"
+                      >
+                        {{ gender.title }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div class="form-group form-group_with-label gender-options">
+            <label class="form-group-inner">
+              <span class="label">My Default Viewing Preference</span>
+              <div class="row">
+                <div class="col-1-2">
+                  <div class="select-wrapper">
+                    <select
+                      name="categoryView"
+                      class="default-disabled"
+                      v-model="localUser.categoryView"
+                    >
+                      <option
+                        v-for="gender in genderViewPreferenceList"
                         :value="gender.id"
                         :key="gender.id"
                       >
@@ -318,6 +342,12 @@ export default {
         return v;
       });
     },
+    genderViewPreferenceList() {
+      return this.$store.state.init.data.categoryView.map(v => {
+        v.title = v.name[0].toUpperCase() + v.name.slice(1);
+        return v;
+      });
+    },
     subscribePrice() {
       if (!this.localUser) {
         return null;
@@ -326,15 +356,6 @@ export default {
     },
     tz() {
       return moment.tz.names();
-    },
-    category: {
-      set(category) {
-        this.localUser.category = category;
-        this.localUser.categoryView = category;
-      },
-      get() {
-        return this.localUser.category;
-      }
     }
   },
 
