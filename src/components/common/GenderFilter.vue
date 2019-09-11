@@ -37,7 +37,6 @@
 <script>
 import ClickOutside from "vue-click-outside";
 import User from "@/mixins/user";
-import options from "./genderPreferences";
 
 export default {
   name: "GenderFilter",
@@ -54,8 +53,14 @@ export default {
     selected() {
       return this.$store.state.explore.gender.category;
     },
+    _options() {
+      return this.$store.state.init.data.categoryView.map(v => {
+        v.title = v.name[0].toUpperCase() + v.name.slice(1);
+        return v;
+      });
+    },
     options() {
-      return options.map(v => {
+      return this._options.map(v => {
         v.selected = this.selected === v.id;
         v.cls = {};
         v.cls[v.name] = true;
