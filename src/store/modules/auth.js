@@ -20,6 +20,45 @@ const defaultUser = {
   }
 };
 
+const loginAction = (commit, dispatch, data, fromModal) => {
+  commit("request");
+  UserApi.login(data)
+    .then(user => {
+      dispatch("setToken", user.accessToken);
+      if (user.isOtpNeeded) {
+        dispatch("setOtpAuth", true);
+        commit("loginFinished");
+        Router.push("/login");
+        return;
+      }
+
+      dispatch("profile/fetch", null, { root: true }).then(() => {
+        commit("showCaptcha", false);
+        commit("requestSuccess");
+
+        if (fromModal) {
+          commit("modal/hideSafe", { name: "login" }, { root: true });
+          commit("loginFinished");
+        } else {
+          Router.push("/explore", () => {
+            commit("loginFinished");
+          });
+        }
+
+        dispatch("profile/afterLogin", null, { root: true });
+      });
+    })
+    .catch(error => {
+      if (error.code === 101) {
+        commit("showCaptcha", true);
+        commit("loginFinished");
+      } else {
+        commit("requestFailure", error.message);
+        commit("loginFinished");
+      }
+    });
+};
+
 const actions = {
   setToken({ commit }, token) {
     BrowserStore.set("token", token);
@@ -40,64 +79,11 @@ const actions = {
   },
 
   login({ commit, dispatch }, data) {
-    commit("request");
-    UserApi.login(data)
-      .then(user => {
-        dispatch("setToken", user.accessToken);
-        if (user.isOtpNeeded) {
-          dispatch("setOtpAuth", true);
-          commit("loginFinished");
-          Router.push("/login");
-          return;
-        }
-        dispatch("profile/fetch", null, { root: true });
-        commit("showCaptcha", false);
-        commit("requestSuccess");
-        Router.push("/", () => {
-          commit("loginFinished");
-          dispatch("profile/afterLogin", null, { root: true });
-        });
-      })
-      .catch(error => {
-        if (error.code === 101) {
-          commit("showCaptcha", true);
-          commit("loginFinished");
-        } else {
-          commit("requestFailure", error.message);
-          commit("loginFinished");
-        }
-        Router.push("/login");
-      });
+    loginAction(commit, dispatch, data, false);
   },
 
   loginFromModal({ commit, dispatch }, data) {
-    commit("request");
-    UserApi.login(data)
-      .then(user => {
-        dispatch("setToken", user.accessToken);
-        if (user.isOtpNeeded) {
-          dispatch("setOtpAuth", true);
-          commit("loginFinished");
-          return;
-        }
-        dispatch("profile/fetch", null, { root: true });
-        commit("showCaptcha", false);
-        commit("requestSuccess");
-        commit("modal/hideSafe", { name: "login" }, { root: true });
-        // dispatch("profile/home/reload", null, { root: true });
-        commit("loginFinished");
-        dispatch("profile/afterLogin", null, { root: true });
-      })
-      .catch(error => {
-        if (error.code === 101) {
-          commit("showCaptcha", true);
-          commit("loginFinished");
-        } else {
-          commit("requestFailure", error.message);
-          commit("loginFinished");
-        }
-        // Router.push("/login");
-      });
+    loginAction(commit, dispatch, data, true);
   },
 
   logout({ commit, dispatch }) {
