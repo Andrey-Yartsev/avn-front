@@ -22,6 +22,14 @@
             Generate<span class="hidden-mobile" v-if="$mq === 'desktop'">
             </span>
           </button>
+          <button
+            v-if="showCopyButton"
+            type="button"
+            class="btn btn_fix-width-sm border alt btn-copy-url btn-copy-url btn-copy-url_reset-mt"
+            @click="copyCode"
+          >
+            Copy
+          </button>
         </div>
       </div>
 
@@ -40,6 +48,11 @@ export default {
   components: {
     UsersTable
   },
+  data() {
+    return {
+      showCopyButton: false
+    };
+  },
   computed: {
     link() {
       if (!this.$store.state.trial.code) {
@@ -53,11 +66,30 @@ export default {
   methods: {
     generateCode() {
       this.$store.dispatch("trial/getCode").then(() => {
-        this.$copyText(this.link);
-        this.$store.dispatch("global/flashToast", {
-          text: "Trial URL copied!"
-        });
+        this.$copyText(this.link)
+          .then(() => {
+            this.$store.dispatch("global/flashToast", {
+              text: "Trial URL copied!"
+            });
+          })
+          .catch(() => {
+            this.showCopyButton = true;
+          });
       });
+    },
+    copyCode() {
+      this.$copyText(this.link)
+        .then(() => {
+          this.$store.dispatch("global/flashToast", {
+            text: "Trial URL copied!"
+          });
+        })
+        .catch(() => {
+          this.$store.dispatch("global/flashToast", {
+            text: "There was a problem. Copy manual please",
+            error: true
+          });
+        });
     }
   }
 };
