@@ -229,7 +229,7 @@ export default {
     }
 
     if (action) {
-      if (action === "subscribe") {
+      if (action === "subscribe" && this.$refs.subscribeButton) {
         this.$refs.subscribeButton.subscription();
         return;
       }

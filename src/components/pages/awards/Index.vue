@@ -107,6 +107,9 @@ export default {
       if (!this.predefined) {
         return this.$store.state.awards.fetchCategoriesLoading;
       }
+      if (!this.modelUser) {
+        return true;
+      }
       return (
         this.$store.state.awards.fetchCategoriesLoading ||
         this.$store.state.awards.fetchUserLoading
