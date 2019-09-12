@@ -90,7 +90,7 @@
                 >Log in</a
               >
               <div
-                :class="['auth-header-block hidden-mobile', { show: opened }]"
+                :class="['auth-header-block hidden-mobile', { show: true }]"
                 v-click-outside="hide"
                 v-if="$mq === 'desktop'"
               >
@@ -101,7 +101,7 @@
                 >
                   Log in
                 </div>
-                <div class="auth-block-dropdown">
+                <div class="auth-block-dropdown" v-if="opened">
                   <div class="auth-block-dropdown__inside">
                     <SignupForm type="dropdown" v-if="showSignup" />
                     <LoginForm
