@@ -124,7 +124,9 @@ export default {
     },
     closeTipForm() {
       this.hideTipForm();
-      this.$refs.tip.reset();
+      if (this.$refs.tip) {
+        this.$refs.tip.reset();
+      }
     },
     openLoginModal() {
       this.$store.dispatch("modal/show", {
