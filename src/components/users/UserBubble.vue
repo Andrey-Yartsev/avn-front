@@ -4,7 +4,7 @@
       <div class="loader-container loader-container_center" v-if="loading">
         <Loader :fullscreen="false" text="" :small="true" :fulllight="true" />
       </div>
-      <template v-else>
+      <template v-else-if="profile">
         <div class="arrow" v-if="profile.header">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +59,14 @@
             </div>
           </div>
           <p class="profile-text" v-html="profile.about"></p>
+        </div>
+      </template>
+      <template v-else>
+        <div class="arrow"></div>
+        <div class="user-container not-found">
+          <div class="names-actions-wrapper">
+            User not found
+          </div>
         </div>
       </template>
     </div>

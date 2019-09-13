@@ -13,7 +13,7 @@ const actions = {
       return;
     }
     commit("open");
-    dispatch("fetch", username);
+    dispatch("fetch", username).catch(() => {});
   },
   hide({ commit }) {
     commit("hide");
