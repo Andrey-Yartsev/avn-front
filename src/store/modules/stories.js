@@ -3,6 +3,7 @@
 import StoriesApi from "@/api/stories";
 import HighlightsApi from "@/api/highlights";
 import PostMixin from "@/store/mixins/posts";
+import Router from "@/router";
 
 const initState = {
   loading: false,
@@ -60,6 +61,11 @@ const actions = {
 
     return StoriesApi.getPosts({ limit, offset, marker, source, category })
       .then(response => {
+        if (response.status === 401) {
+          Router.push("/login");
+          return;
+        }
+
         if (response.status === 200) {
           response.json().then(function(res) {
             commit("postsRequestSuccess", res);

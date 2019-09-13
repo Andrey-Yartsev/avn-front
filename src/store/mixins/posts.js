@@ -1,5 +1,4 @@
 import PostApi from "@/api/post";
-
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 const result = {
@@ -21,11 +20,9 @@ const result = {
           commit("postsRequestFail", err);
         });
     },
-
     resetPageState({ commit }) {
       commit("resetPageState");
     },
-
     getPostComments({ commit }, { postId, page, marker }) {
       commit("postCommentsRequest", { postId });
       return PostApi.getPostComments({ postId, page, marker })
@@ -45,7 +42,6 @@ const result = {
           commit("commentsRequestFail", err);
         });
     },
-
     sendPostComment({ commit }, { post, text, answerTo }) {
       const postId = post.id;
       return PostApi.sendPostComment({ postId, text, answerTo })
@@ -63,7 +59,6 @@ const result = {
           commit("sendPostCommentFail", err);
         });
     },
-
     likePost({ commit }, { post, addLike }) {
       const postId = post.id;
       return PostApi.likePost({ postId, addLike })
@@ -81,7 +76,6 @@ const result = {
         })
         .catch(() => {});
     },
-
     deletePost({ commit }, { postId }) {
       return PostApi.deletePost({ postId })
         .then(response => {
@@ -93,7 +87,6 @@ const result = {
         })
         .catch(() => {});
     },
-
     likeComment({ commit }, { postId, commentId, addLike }) {
       return PostApi.likeComment({ commentId, addLike })
         .then(response => {
@@ -110,7 +103,6 @@ const result = {
         })
         .catch(() => {});
     },
-
     removeComment({ commit }, { postId, commentId }) {
       return PostApi.removeComment({ commentId })
         .then(response => {
@@ -125,13 +117,11 @@ const result = {
         })
         .catch(() => {});
     },
-
     reloadPost({ dispatch, commit }, postId) {
       dispatch("fetchPost", postId).then(data => {
         commit("updatePost", data);
       });
     },
-
     updatePost(state, updatedPost) {
       const find = () => {
         state.posts.find(post => post.id === updatedPost.id);
@@ -181,7 +171,13 @@ const result = {
       state.loading = false;
       state.marker = state.marker ? state.marker : marker;
     },
-
+    postsRequestFail(state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+    postsRequest(state) {
+      state.loading = true;
+    },
     updateVisibility(state, items) {
       const posts = [...state.posts];
       items.forEach(item => {
@@ -189,16 +185,6 @@ const result = {
       });
       state.posts = posts;
     },
-
-    postsRequestFail(state, err) {
-      state.error = err;
-      state.loading = false;
-    },
-
-    postsRequest(state) {
-      state.loading = true;
-    },
-
     postCommentsRequest(state, { postId }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
@@ -211,7 +197,6 @@ const result = {
         return post;
       });
     },
-
     postSendCommentsRequestSuccess(state, data) {
       state.posts = state.posts.map(post => {
         if (data.postId !== post.id) {
@@ -226,11 +211,9 @@ const result = {
         };
       });
     },
-
     commentsRequestFail(/* state, err */) {
       // TODO;
     },
-
     postLikeSuccess(state, { postId, isFavorite, favoritesCount }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
@@ -244,7 +227,6 @@ const result = {
         return post;
       });
     },
-
     postCommentLikeSuccess(state, { postId, commentId, isLiked, likesCount }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
@@ -276,7 +258,6 @@ const result = {
         return post;
       });
     },
-
     postCommentRemoveSuccess(state, { postId, commentId }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
@@ -292,12 +273,10 @@ const result = {
         return post;
       });
     },
-
     deletePost(state, { postId }) {
       state.deletedPost = postId;
       state.posts = state.posts.filter(post => postId !== post.id);
     },
-
     resetComments(state, { postId }) {
       state.posts = state.posts.map(post => {
         if (postId === post.id) {
@@ -311,7 +290,6 @@ const result = {
         return post;
       });
     },
-
     postCommentsRequestSuccess(state, { postId, list, page, marker }) {
       state.posts = state.posts.map(post => {
         if (postId !== post.id) {
@@ -327,7 +305,6 @@ const result = {
         };
       });
     },
-
     updatePost(state, updatedPost) {
       state.posts = state.posts.map(post => {
         if (post.id === updatedPost.id) {
