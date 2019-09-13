@@ -193,33 +193,16 @@ export const getVideoPreview = (media, callback) => {
     const url = URL.createObjectURL(blob);
     const video = document.createElement("video");
 
-    const timeupdate = function() {
-      if (snapImage(video, media, callback)) {
-        video.removeEventListener("timeupdate", timeupdate);
-
-        if (playPromise && playPromise.then) {
-          playPromise.then(() => {
-            video.pause();
-          });
-        } else {
-          video.pause();
-        }
-      }
-    };
-
     video.addEventListener("loadeddata", function() {
-      if (snapImage(video, media, callback)) {
-        video.removeEventListener("timeupdate", timeupdate);
-      }
+      snapImage(video, media, callback);
     });
-
-    video.addEventListener("timeupdate", timeupdate);
 
     video.preload = "metadata";
     video.src = url;
     video.muted = true;
     video.playsInline = true;
-    const playPromise = video.play();
+
+    video.play().catch(() => {});
   };
   fileReader.readAsArrayBuffer(file);
 };
