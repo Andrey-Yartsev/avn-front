@@ -240,12 +240,14 @@ export default {
         case 0: // second part of media message replaced previous message
         case 1: // new message has arrived
           lastMessage = value[value.length - 1];
-          lastMessageIsMine = lastMessage.fromUser.id === this.user.id;
+          if (lastMessage) {
+            lastMessageIsMine = lastMessage.fromUser.id === this.user.id;
 
-          if (lastMessageIsMine) {
-            this.$nextTick(() => {
-              this.scrollToLast(true);
-            });
+            if (lastMessageIsMine) {
+              this.$nextTick(() => {
+                this.scrollToLast(true);
+              });
+            }
           }
 
           // if we at bottom of chat messages, do scrollToLast
