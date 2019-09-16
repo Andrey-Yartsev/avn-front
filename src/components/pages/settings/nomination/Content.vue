@@ -2,7 +2,7 @@
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
       <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
-        Nomination Settings
+        AVN Awards Pre-Nominations Link Generator
       </h1>
 
       <div
@@ -12,26 +12,40 @@
           'shadow-block': $mq === 'mobile' && !url
         }"
       >
-        <div
-          :class="{
-            'shadow-block': url
-          }"
-        >
-          <div class="container">
-            <div class="form-group form-group_with-label">
-              <div
-                class="form-group-inner"
-                :class="{ 'form-group-title': $mq === 'desktop' }"
-              >
-                <span class="label">Choose the event</span>
-                <div class="select-wrapper">
-                  <select v-model="eventId">
-                    <option value="91">AVN Awards</option>
-                    <option value="92">GayVN Awards</option>
-                  </select>
-                </div>
-              </div>
+        <!--
+<div
+ :class="{
+   'shadow-block': url
+ }"
+>
+ <div class="container">
+
+   <div class="form-group form-group_with-label">
+     <div
+       class="form-group-inner"
+       :class="{ 'form-group-title': $mq === 'desktop' }"
+     >
+       <span class="label">Choose the event</span>
+       <div class="select-wrapper">
+         <select v-model="eventId">
+           <option value="91">AVN Awards</option>
+           <option value="92">GayVN Awards</option>
+         </select>
+       </div>
+     </div>
+   </div>
+       </div>
+     </div>
+   -->
+
+        <div class="form-title text">
+          <div class="inner">
+            <div class="logo centered">
+              <img src="/static/img/avnawards.png" alt="" />
             </div>
+            Use this area to create a links to allow your fans to pre-nominate
+            you. Select the categories for which you would like them to
+            pre-nominate you below.
           </div>
         </div>
 

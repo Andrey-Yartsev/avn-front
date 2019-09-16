@@ -1349,4 +1349,20 @@ select {
   &:not(.shadow-block) {
     margin-bottom: 24px;
   }
+
+  .form-title.text {
+    padding-top: 0;
+
+    img {
+      width: 50%;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+  }
+
+  .centered {
+    text-align: center;
+  }
 }

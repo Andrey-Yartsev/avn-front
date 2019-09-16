@@ -201,40 +201,47 @@ export default {
         {
           name: "account",
           title: "Account"
-        },
-        {
-          name: "nomination",
-          title: "Nomination"
-        },
-        {
-          name: "story",
-          title: "Story Settings"
-        },
-        {
-          name: "privacy",
-          title: "Privacy"
-        },
-        {
-          name: "security",
-          title: "Security"
-        },
-        {
-          name: "premium-links",
-          title: "Premium Links"
-        },
-        {
-          name: "products",
-          title: "My purchases"
-        },
-        {
-          name: "payouts",
-          title: "Payouts"
-        },
-        {
-          name: "payments",
-          title: "Payments"
         }
       ];
+      if (this.user.nominatable && this.user.category === 2) {
+        items.push({
+          name: "nomination",
+          title: "AVN Awards Pre-Nominations"
+        });
+      }
+
+      items.push(
+        ...[
+          {
+            name: "story",
+            title: "Story Settings"
+          },
+          {
+            name: "privacy",
+            title: "Privacy"
+          },
+          {
+            name: "security",
+            title: "Security"
+          },
+          {
+            name: "premium-links",
+            title: "Premium Links"
+          },
+          {
+            name: "products",
+            title: "My purchases"
+          },
+          {
+            name: "payouts",
+            title: "Payouts"
+          },
+          {
+            name: "payments",
+            title: "Payments"
+          }
+        ]
+      );
       if (process.env.VUE_APP_NAME === "avn") {
         items.push({
           name: "credits",

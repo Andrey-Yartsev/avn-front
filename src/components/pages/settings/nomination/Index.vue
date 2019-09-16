@@ -1,5 +1,8 @@
 <template>
   <Layout>
+    <template slot="title"
+      >AVN Awards Pre-Nominations Link Generator</template
+    >
     <Content slot="content" />
   </Layout>
 </template>
