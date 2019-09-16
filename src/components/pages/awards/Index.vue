@@ -6,8 +6,9 @@
     <div class="awards-title text-centered">
       Pre-Nomination Form
     </div>
-    <div class="title-subtext semi-transparent text-centered">
-      these are instructions
+    <div class="title-subtext text-centered">
+      Pre-nominate your favorite star by entering their name under the category
+      below:
     </div>
     <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />
@@ -24,7 +25,7 @@
           class="underscore"
           :disabled="true"
         />
-        <h3>Choose by yourself</h3>
+        <h3>Additional Categories</h3>
       </template>
 
       <Columns :categories="categories[1]" @input="input" />

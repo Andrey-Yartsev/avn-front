@@ -48,6 +48,19 @@
       text-align: right;
     }
   }
+
+  .form-field {
+    display: block;
+    position: relative;
+
+    &.red {
+      input[disabled] {
+        opacity: 1;
+        background-color: rgba(255, 0, 0, 0.1);
+        font-size: 18px;
+      }
+    }
+  }
 }
 
 .title-subtext {
