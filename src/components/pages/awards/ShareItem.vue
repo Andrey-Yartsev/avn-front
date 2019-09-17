@@ -38,12 +38,9 @@ export default {
     }
   },
   mounted() {
-    window.twttr.widgets.createShareButton("", this.$refs.cont, {
+    window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
       text: this.text
     });
-    // console.log(this.$refs.tweetBtn, window.twttr);
-    // new window.twttr.createMentionButton("asd", this.$refs.cont.$el);
-    // tweetButton.render();
   }
 };
 </script>
