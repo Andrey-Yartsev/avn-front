@@ -109,29 +109,32 @@ const actions = {
     commit("setFetchLoading", flag);
   },
   afterLogin({ dispatch, rootState }) {
-    if (window.location.hostname.replace(/([^.])\..*/, "$1") !== "gayvn") {
+    if (!window.location.hostname.match(/gayvn/)) {
       return;
     }
-    setTimeout(() => {
-      const category = 3;
-      if (rootState.auth.user.category === category) {
-        return;
-      }
-      dispatch("updateSilent", {
-        ...rootState.auth.user,
-        ...{
-          category,
-          categoryView: category
-        }
-      });
-      dispatch(
-        "global/flashToast",
-        {
-          text: "Your gender preference was switched to Gay"
-        },
-        { root: true }
-      );
-    }, 4000);
+    const category = 3;
+    if (
+      rootState.auth.user.category !== category ||
+      rootState.auth.user.categoryView !== category
+    ) {
+      setTimeout(() => {
+        dispatch("updateSilent", {
+          ...rootState.auth.user,
+          ...{
+            category,
+            categoryView: category
+          }
+        });
+        dispatch(
+          "global/flashToast",
+          {
+            text:
+              "Your Default Viewing Preference & Primary Content Audience was switched to Gay"
+          },
+          { root: true }
+        );
+      }, 4000);
+    }
   }
 };
 

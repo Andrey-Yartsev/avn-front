@@ -138,6 +138,7 @@
       <perfect-scrollbar
         class="rounded-container settings-scroll-wrapper"
         :class="{ 'hidden-mobile': !isHome }"
+        ref="menu"
       >
         <div class="form-title hidden-desktop" v-if="$mq === 'mobile'">
           <div class="inner">
@@ -156,6 +157,7 @@
               v-for="v in navigation"
               v-bind:key="v.name"
               class="settings-nav__item settings-nav__item_arr"
+              :id="'menu-' + v.name"
             >
               <span>{{ v.title }}</span>
             </router-link>
@@ -201,40 +203,47 @@ export default {
         {
           name: "account",
           title: "Account"
-        },
-        {
-          name: "nomination",
-          title: "Nomination"
-        },
-        {
-          name: "story",
-          title: "Story Settings"
-        },
-        {
-          name: "privacy",
-          title: "Privacy"
-        },
-        {
-          name: "security",
-          title: "Security"
-        },
-        {
-          name: "premium-links",
-          title: "Premium Links"
-        },
-        {
-          name: "products",
-          title: "My purchases"
-        },
-        {
-          name: "payouts",
-          title: "Payouts"
-        },
-        {
-          name: "payments",
-          title: "Payments"
         }
       ];
+      if (this.user.nominatable && this.user.category === 2) {
+        items.push({
+          name: "nomination",
+          title: "AVN Awards Pre-Nominations"
+        });
+      }
+
+      items.push(
+        ...[
+          {
+            name: "story",
+            title: "Story Settings"
+          },
+          {
+            name: "privacy",
+            title: "Privacy"
+          },
+          {
+            name: "security",
+            title: "Security"
+          },
+          {
+            name: "premium-links",
+            title: "Premium Links"
+          },
+          {
+            name: "products",
+            title: "My purchases"
+          },
+          {
+            name: "payouts",
+            title: "Payouts"
+          },
+          {
+            name: "payments",
+            title: "Payments"
+          }
+        ]
+      );
       if (process.env.VUE_APP_NAME === "avn") {
         items.push({
           name: "credits",
@@ -323,6 +332,17 @@ export default {
           success: this.removeBg
         }
       });
+    }
+  },
+
+  mounted() {
+    const m = this.$route.path.match(new RegExp("/settings/([^/]+).*"));
+    if (m) {
+      const name = m[1];
+      const el = document.getElementById("menu-" + name);
+      if (el) {
+        this.$refs.menu.$el.scrollTop = el.offsetTop;
+      }
     }
   }
 };

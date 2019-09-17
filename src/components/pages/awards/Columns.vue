@@ -4,7 +4,7 @@
       <label class="form-group form-group_row-md" v-for="v in col" :key="v.id">
         <span class="label label_row">{{ v.title }}</span>
         <span class="form-group form-group_clear-gaps">
-          <span class="form-field">
+          <span class="form-field red">
             <input
               type="text"
               :placeholder="v.title"

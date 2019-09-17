@@ -133,7 +133,7 @@
               type="checkbox"
               id="is_paid_subscription"
               name="isWantEarn"
-              @change="changeWantEarn"
+              @change="save"
               v-model="localUser.isWantEarn"
             />
             <span class="toggle-element_switcher"></span>
@@ -192,7 +192,54 @@
           </div>
         </div>
       </template>
+
       <DeleteRestore v-else />
+
+      <div class="shadow-block form-title border-top">
+        <div class="inner form-group option-star">
+          <label class="toggle-label semi-transparent" for="im_star">
+            I am an AVN Star
+            <p class="subtext">
+              Enable this option if any of the following describes you:<br />Performer
+              / Model / Content Creator
+            </p>
+          </label>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              id="im_star"
+              name="isWantEarn"
+              @change="save"
+              v-model="localUser.nominatable"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+        <div class="form-group" :class="{ disabled: !localUser.nominatable }">
+          <label class="form-group-inner">
+            <span class="label">My Primary Content Audience</span>
+            <div class="row">
+              <div class="col-1-2">
+                <div class="select-wrapper">
+                  <select
+                    name="gender"
+                    class="default-disabled"
+                    v-model="localUser.category"
+                  >
+                    <option
+                      v-for="gender in genderPreferenceList"
+                      :value="gender.id"
+                      :key="gender.id"
+                    >
+                      {{ gender.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
 
       <div class="form-title border-top">
         <div class="inner">
@@ -204,6 +251,7 @@
           </span>
         </div>
       </div>
+
       <div class="shadow-block">
         <div class="container">
           <div class="form-group form-group_with-label gender-options">
@@ -224,30 +272,6 @@
                         :key="gender.id"
                       >
                         {{ gender.name }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </label>
-          </div>
-          <div class="form-group form-group_with-label gender-options">
-            <label class="form-group-inner">
-              <span class="label">My Primary Content Audience</span>
-              <div class="row">
-                <div class="col-1-2">
-                  <div class="select-wrapper">
-                    <select
-                      name="gender"
-                      class="default-disabled"
-                      v-model="localUser.category"
-                    >
-                      <option
-                        v-for="gender in genderPreferenceList"
-                        :value="gender.id"
-                        :key="gender.id"
-                      >
-                        {{ gender.title }}
                       </option>
                     </select>
                   </div>
@@ -319,9 +343,6 @@ export default {
         primaryColor: this.localUser.primaryColor,
         secondColor: this.localUser.secondColor
       });
-      this.$store.dispatch("profile/update", this.localUser);
-    },
-    changeWantEarn() {
       this.$store.dispatch("profile/update", this.localUser);
     }
   },
