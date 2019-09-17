@@ -11,7 +11,7 @@
         Pre-nominate your favorite star by entering their name under the
         category below:
       </div>
-      <div class="loader-container" v-if="loading">
+      <div class="loader-container" v-if="loading || scriptLoading">
         <Loader text="" :fullscreen="false" :small="true" />
       </div>
       <form action="#" class="awards-form" @submit.prevent="send" v-else>
@@ -66,7 +66,8 @@ export default {
   },
   data() {
     return {
-      data: {}
+      data: {},
+      scriptLoading: true
     };
   },
   computed: {
@@ -228,6 +229,14 @@ export default {
           });
       }
     });
+
+    let script = document.createElement("script");
+    script.onload = () => {
+      this.scriptLoading = false;
+    };
+    script.async = true;
+    script.src = "http://platform.twitter.com/widgets.js";
+    document.head.appendChild(script);
   }
 };
 </script>

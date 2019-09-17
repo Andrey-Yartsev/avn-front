@@ -1,4 +1,3 @@
-
 .awards {
   justify-content: space-between;
   margin-bottom: 10px;
@@ -82,11 +81,31 @@
 }
 
 .awards-share {
-  .form-field {
+  .form-field, .btns {
     display: flex;
   }
 
-  .btn-copy {
-    margin-left: 20px;
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .form-field {
+      display: block;
+    }
+    .btn-tweet {
+      margin-left: 0;
+    }
+    .btns {
+      margin-top: 15px;
+    }
+  }
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    .btn-tweet {
+      margin-left: 20px;
+    }
+  }
+
+  .tweet-text {
+    border: 1px solid $default-avatar-bg;
+    padding: 20px;
+    width: 100%;
   }
 }
