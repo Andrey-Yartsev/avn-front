@@ -235,7 +235,7 @@ export default {
       this.scriptLoading = false;
     };
     script.async = true;
-    script.src = "http://platform.twitter.com/widgets.js";
+    script.src = "https://platform.twitter.com/widgets.js";
     document.head.appendChild(script);
   }
 };
