@@ -195,9 +195,7 @@
 
       <DeleteRestore v-else />
 
-      <div class="form-title"
-        :class="{ 'border-top': $mq === 'desktop' }"
-      >
+      <div class="form-title" :class="{ 'border-top': $mq === 'desktop' }">
         <div class="inner form-group form-group_clear-gaps option-star">
           <label class="toggle-label semi-transparent" for="im_star">
             I am an AVN Star
@@ -220,7 +218,10 @@
       </div>
       <div class="shadow-block">
         <div class="container">
-          <div class="form-group form-group_with-label" :class="{ disabled: !localUser.nominatable }">
+          <div
+            class="form-group form-group_with-label"
+            :class="{ disabled: !localUser.nominatable }"
+          >
             <label class="form-group-inner">
               <span class="label">My Primary Content Audience</span>
               <div class="row">
