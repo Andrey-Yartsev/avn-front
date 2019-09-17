@@ -4,38 +4,45 @@
       <img src="/static/img/avnawards.png" alt="" />
     </div>
     <div class="awards-title text-centered">
-      Pre-Nomination Form
+      {{ sent ? "Thank you!" : "Pre-Nomination Form" }}
     </div>
-    <div class="title-subtext text-centered">
-      Pre-nominate your favorite star by entering their name under the category
-      below:
-    </div>
-    <div class="loader-container" v-if="loading">
-      <Loader text="" :fullscreen="false" :small="true" />
-    </div>
-    <div v-else-if="sent" class="input-status">
-      {{ successText }}
-    </div>
-    <form action="#" class="awards-form" @submit.prevent="send" v-else>
-      <template v-if="predefined">
-        <h3>Autofilled categories</h3>
-        <Columns
-          :categories="categories[0]"
-          :value="modelUser.name"
-          class="underscore"
-          :disabled="true"
-        />
-        <h3>Additional Categories</h3>
-      </template>
-
-      <Columns :categories="categories[1]" @input="input" />
-
-      <div class="awards__btn-row">
-        <button class="btn alt border lg" :disabled="sending || !canSend">
-          Submit
-        </button>
+    <template v-if="!sent">
+      <div class="title-subtext text-centered">
+        Pre-nominate your favorite star by entering their name under the
+        category below:
       </div>
-    </form>
+      <div class="loader-container" v-if="loading">
+        <Loader text="" :fullscreen="false" :small="true" />
+      </div>
+      <form action="#" class="awards-form" @submit.prevent="send" v-else>
+        <template v-if="predefined">
+          <h3>Autofilled categories</h3>
+          <Columns
+            :categories="categories[0]"
+            :value="modelUser.name"
+            class="underscore"
+            :disabled="true"
+          />
+          <h3>Additional Categories</h3>
+        </template>
+
+        <Columns :categories="categories[1]" @input="input" />
+
+        <div class="awards__btn-row">
+          <button class="btn alt border lg" :disabled="sending || !canSend">
+            Submit
+          </button>
+        </div>
+      </form>
+    </template>
+
+    <Share
+      v-else
+      :categories="_categories"
+      :data="data"
+      :modelUser="modelUser"
+      @reset="reset"
+    />
   </div>
 </template>
 
@@ -45,6 +52,7 @@ import Loader from "@/components/common/Loader";
 import UserSearchField from "./UserSearchField";
 import Columns from "./Columns";
 import User from "@/mixins/user";
+import Share from "./Share";
 
 export default {
   name: "AvnAwards",
@@ -53,7 +61,8 @@ export default {
     Footer,
     Loader,
     UserSearchField,
-    Columns
+    Columns,
+    Share
   },
   data() {
     return {
@@ -117,7 +126,7 @@ export default {
       );
     },
     canSend() {
-      return true;
+      return Object.values(this.data).length !== 0;
     },
     sending() {
       return this.$store.state.awards.nominateLoading;
@@ -158,11 +167,11 @@ export default {
         })
         .then(() => {
           if (this.predefined && this.sent) {
-            this.$router.push("/" + this.$route.params.username);
-            this.$store.dispatch("global/flashToast", {
-              text: this.successText
-            });
-            this.$store.dispatch("awards/nominateReset");
+            // this.$router.push("/" + this.$route.params.username);
+            // this.$store.dispatch("global/flashToast", {
+            //   text: this.successText
+            // });
+            // this.$store.dispatch("awards/nominateReset");
           }
         });
     },
@@ -184,9 +193,16 @@ export default {
       });
       autofilledCats.forEach(cat => {
         const o = {};
-        o[cat.id] = this.modelUser.name;
+        o[cat.id] = this.modelUser.id;
         this.data = { ...this.data, ...o };
       });
+    },
+    reset() {
+      this.data = {};
+      this.$store.dispatch("awards/nominateReset");
+      if (this.$route.path !== "/avn_awards/nominations") {
+        this.$router.push("/avn_awards/nominations");
+      }
     }
   },
   created() {
