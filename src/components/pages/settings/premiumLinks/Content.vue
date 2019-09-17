@@ -9,7 +9,7 @@
         <h1 class="form-title settings-title">
           Premium Links
         </h1>
-        <div class="form-title text border-top centered">
+        <div class="form-title form-title_default-text border-top centered">
           <div class="inner">
             You need to enable <b>Earn money</b> option in
             <router-link to="/settings/profile">Profile</router-link>
