@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <div class="awards-header">
-      <img src="/static/img/avnawards.png" alt="" />
+    <div class="awards-header" :class="{ gay: isGay }">
+      <img
+        :src="'/static/img/' + (isGay ? 'gayvnawards' : 'avnawards') + '.png'"
+        alt=""
+      />
     </div>
     <div class="awards-title text-centered">
       {{ sent ? "Thank you!" : "Pre-Nomination Form" }}
