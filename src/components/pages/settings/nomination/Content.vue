@@ -46,7 +46,7 @@
             <div class="logo text-centered">
               <img src="/static/img/avnawards.png" alt="" />
             </div>
-            Use this area to create a links to allow your fans to pre-nominate
+            Use this area to create a link to allow your fans to pre-nominate
             you. Select the categories for which you would like them to
             pre-nominate you below.
           </div>
