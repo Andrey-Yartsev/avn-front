@@ -742,6 +742,10 @@ label {
     + .inner {
       margin-top: 18px;
     }
+    
+    &_block {
+      display: block;
+    }
   }
   .subtext {
     font-size: 13px;
@@ -797,9 +801,16 @@ label {
     }
   }
 
-  &.text .inner {
-    display: block;
+  &_default-text {
     font-weight: 400;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+
+    img {
+      width: 50%;
+    }
   }
 }
 select {
@@ -1348,21 +1359,5 @@ select {
 
   &:not(.shadow-block) {
     margin-bottom: 24px;
-  }
-
-  .form-title.text {
-    padding-top: 0;
-
-    img {
-      width: 50%;
-    }
-
-    .logo {
-      margin-bottom: 20px;
-    }
-  }
-
-  .centered {
-    text-align: center;
   }
 }

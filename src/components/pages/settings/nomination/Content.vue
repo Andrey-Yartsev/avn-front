@@ -38,9 +38,12 @@
      </div>
    -->
 
-        <div class="form-title text">
-          <div class="inner">
-            <div class="logo centered">
+        <div
+          class="form-title form-title_default-text"
+          :class="{ 'shadow-block': url }"
+        >
+          <div class="inner inner_block">
+            <div class="logo text-centered">
               <img src="/static/img/avnawards.png" alt="" />
             </div>
             Use this area to create a links to allow your fans to pre-nominate
