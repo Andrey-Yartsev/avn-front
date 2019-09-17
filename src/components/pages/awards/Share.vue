@@ -3,7 +3,7 @@
     <ShareItem v-for="v in items" :key="v.id" :v="v" />
 
     <div class="awards__btn-row">
-      <button class="btn alt border lg" @click="$emit('reset')">
+      <button class="btn alt border lg" @click="$emit('complete')">
         Submit more nominations
       </button>
     </div>

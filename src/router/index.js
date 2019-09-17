@@ -283,7 +283,7 @@ const routes = [
     beforeEnter: Auth.requireAuth,
     path: "/settings/gayvn",
     component: SettingsNominationPage,
-    name: "SettingsNomination",
+    name: "SettingsNominationGay",
     meta: {
       cssName: "settings"
     }

@@ -41,7 +41,7 @@
       :categories="_categories"
       :data="data"
       :modelUser="modelUser"
-      @reset="reset"
+      @complete="complete"
     />
   </div>
 </template>
@@ -143,6 +143,9 @@ export default {
     },
     successText() {
       return "Your voting have been sent successfully";
+    },
+    page() {
+      return this.isGay ? "gayvn_awards" : "avn_awards";
     }
   },
   watch: {
@@ -201,8 +204,11 @@ export default {
     reset() {
       this.data = {};
       this.$store.dispatch("awards/nominateReset");
-      if (this.$route.path !== "/avn_awards/nominations") {
-        this.$router.push("/avn_awards/nominations");
+    },
+    complete() {
+      this.reset();
+      if (this.$route.path !== "/" + this.page + "/nominations") {
+        this.$router.push("/" + this.page + "/nominations");
       }
     }
   },
@@ -237,6 +243,9 @@ export default {
     script.async = true;
     script.src = "https://platform.twitter.com/widgets.js";
     document.head.appendChild(script);
+  },
+  beforeDestroy() {
+    this.reset();
   }
 };
 </script>

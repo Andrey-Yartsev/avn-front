@@ -17,7 +17,14 @@
         >
           <div class="inner inner_block">
             <div class="logo text-centered">
-              <img :src="'/static/img/' + (isGay ? 'gayvnawards' : 'avnawards') + '.png'" alt="" />
+              <img
+                :src="
+                  '/static/img/' +
+                    (isGay ? 'gayvnawards' : 'avnawards') +
+                    '.png'
+                "
+                alt=""
+              />
             </div>
             Use this area to create a link to allow your fans to pre-nominate
             you. Select the categories for which you would like them to
