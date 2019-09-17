@@ -239,18 +239,6 @@
   }
 }
 
-  .profile-wrapper {
-    .option-star {
-      @include media-breakpoint-down($desktop-breakpoint) {
-        padding-top: 20px;
-      }
-      @include media-breakpoint-up($desktop-breakpoint) {
-        padding-bottom: 20px;
-      }
-    }
-  }
-
-
 .empty-table-info {
   text-align: center;
   padding: 20px 0;

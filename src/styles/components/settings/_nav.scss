@@ -40,16 +40,6 @@
   }
 }
 
-.profile-wrapper {
-
-  .shadow-block {
-
-    @include media-breakpoint-down($desktop-breakpoint) {
-      padding-top: 7px;
-    }
-  }
-}
-
 .settings-nav {
 
   &__item {
