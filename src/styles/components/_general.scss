@@ -526,9 +526,11 @@ video {
     color: $main-color;
     position: absolute;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      top: 10px;
-      right: 53px;
+    .header-search & {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        top: 10px;
+        right: 53px;
+      }
     }
 
     @include media-breakpoint-up($desktop-breakpoint) {
