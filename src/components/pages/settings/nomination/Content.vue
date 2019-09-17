@@ -2,9 +2,8 @@
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
       <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
-        AVN Awards Pre-Nominations Link Generator
+        {{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link Generator
       </h1>
-
       <div
         class="form-nomination"
         :class="{
@@ -12,39 +11,13 @@
           'shadow-block': $mq === 'mobile' && !url
         }"
       >
-        <!--
-<div
- :class="{
-   'shadow-block': url
- }"
->
- <div class="container">
-
-   <div class="form-group form-group_with-label">
-     <div
-       class="form-group-inner"
-       :class="{ 'form-group-title': $mq === 'desktop' }"
-     >
-       <span class="label">Choose the event</span>
-       <div class="select-wrapper">
-         <select v-model="eventId">
-           <option value="91">AVN Awards</option>
-           <option value="92">GayVN Awards</option>
-         </select>
-       </div>
-     </div>
-   </div>
-       </div>
-     </div>
-   -->
-
         <div
           class="form-title form-title_default-text"
           :class="{ 'shadow-block': url }"
         >
           <div class="inner inner_block">
             <div class="logo text-centered">
-              <img src="/static/img/avnawards.png" alt="" />
+              <img :src="'/static/img/' + (isGay ? 'gayvnawards' : 'avnawards') + '.png'" alt="" />
             </div>
             Use this area to create a link to allow your fans to pre-nominate
             you. Select the categories for which you would like them to
@@ -170,7 +143,6 @@ export default {
   components: { Loader },
   data() {
     return {
-      eventId: 91,
       category: {},
       catN: 0
     };
@@ -181,7 +153,6 @@ export default {
       if (!values.length) {
         return null;
       }
-      // nominator/id468312/avn_awards/15,121
       let url = window.location.origin;
       url += "/nominator/";
       url += this.user.username + "/";
@@ -209,17 +180,25 @@ export default {
     },
     loadingCategories() {
       return this.$store.state.awards.fetchCategoriesLoading;
+    },
+    isGay() {
+      return !!this.$route.path.match(/gayvn/);
+    },
+    eventId() {
+      return this.isGay ? 92 : 91;
     }
   },
   watch: {
     eventId() {
       if (this.eventId) {
-        this.fetchCategories();
-        this.category = {};
+        this.init();
       }
     },
     category(category) {
-      this.localUser.nominationCategories = JSON.stringify(category);
+      const c = JSON.parse(this.localUser.nominationCategories);
+      console.log(category);
+      c[this.eventId] = category;
+      this.localUser.nominationCategories = JSON.stringify(c);
     }
   },
   methods: {
@@ -247,13 +226,22 @@ export default {
           text: "URL copied!"
         });
       });
+    },
+    init() {
+      this.fetchCategories();
+      if (this.localUser.nominationCategories) {
+        const category = JSON.parse(this.localUser.nominationCategories);
+        if (category) {
+          // console.log("!!!");
+          this.category = category[this.eventId] || {};
+        } else {
+          this.category = {};
+        }
+      }
     }
   },
   created() {
-    this.fetchCategories();
-    if (this.localUser.nominationCategories) {
-      this.category = JSON.parse(this.localUser.nominationCategories);
-    }
+    this.init();
   }
 };
 </script>

@@ -152,7 +152,7 @@
         <div class="shadow-block no-padding">
           <div class="settings-nav">
             <router-link
-              :to="'/settings/' + v.name"
+              :to="v.path || '/settings/' + v.name"
               :class="navClass(v.name)"
               v-for="v in navigation"
               v-bind:key="v.name"
@@ -205,11 +205,40 @@ export default {
           title: "Account"
         }
       ];
-      if (this.user.nominatable && this.user.category === 2) {
-        items.push({
-          name: "nomination",
+      if (this.user.nominatable) {
+        const a = {
+          name: "avn",
           title: "AVN Awards Pre-Nominations"
-        });
+        };
+        const b = {
+          name: "gayvn",
+          title: "GayVN Awards Pre-Nominations"
+        };
+        if (this.user.categoryView === 2) {
+          items.push(a);
+        } else if (this.user.categoryView === 3) {
+          items.push(b);
+        } else if (this.user.categoryView === 1) {
+          items.push(a);
+          items.push(b);
+        }
+      } else {
+        const a = {
+          path: "/avn_awards/nominations",
+          title: "AVN Awards Pre-Nominations"
+        };
+        const b = {
+          path: "/gayvn_awards/nominations",
+          title: "GayVN Awards Pre-Nominations"
+        };
+        if (this.user.categoryView === 2) {
+          items.push(a);
+        } else if (this.user.categoryView === 3) {
+          items.push(b);
+        } else if (this.user.categoryView === 1) {
+          items.push(a);
+          items.push(b);
+        }
       }
 
       items.push(

@@ -272,7 +272,16 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings/nomination",
+    path: "/settings/avn",
+    component: SettingsNominationPage,
+    name: "SettingsNomination",
+    meta: {
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/gayvn",
     component: SettingsNominationPage,
     name: "SettingsNomination",
     meta: {
