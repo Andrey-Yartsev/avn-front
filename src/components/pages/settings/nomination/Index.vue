@@ -1,7 +1,8 @@
 <template>
   <Layout>
     <template slot="title"
-      >{{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link Generator</template
+      >{{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link
+      Generator</template
     >
     <Content slot="content" />
   </Layout>
