@@ -21,7 +21,10 @@ form.support-search-form {
   }
 
   .header-search-submit {
-    color: $main-color;
+
+    .dark-theme & {
+      color: $main-color;
+    }
   }
 }
 
