@@ -2,7 +2,8 @@
   <label class="form-group form-group_row-md">
     <span class="label label_row">{{ v.title }}</span>
     <span class="form-group form-group_clear-gaps">
-      <span class="form-field">
+      <span class="form-field"
+        >{{ isGay }}
         <div v-html="html" class="tweet-text"></div>
         <div class="btns">
           <div ref="cont" class="btn-tweet"></div>
@@ -16,17 +17,28 @@
 export default {
   name: "NominationShareItem",
   props: {
-    v: Object
+    v: Object,
+    isGay: Boolean
   },
-  data() {
-    return {
-      html: `I just pre-nominated ${this.v.name} for <b>${
-        this.v.category.title
-      }</b> @AVNAwards on AVNStars.com`,
-      text: `I just pre-nominated ${this.v.name} for ${
-        this.v.category.title
-      } @AVNAwards on AVNStars.com`
-    };
+  computed: {
+    html() {
+      return (
+        `I just pre-nominated ${this.v.name} for <b>${
+          this.v.category.title
+        }</b> ` + this.ending
+      );
+    },
+    text() {
+      return (
+        `I just pre-nominated ${this.v.name} for ${this.v.category.title} ` +
+        this.ending
+      );
+    },
+    ending() {
+      return this.isGay
+        ? "#GayVNAwards @GayVN on GayVNStars.com"
+        : "@AVNAwards on AVNStars.com";
+    }
   },
   methods: {
     copyToClipboard() {

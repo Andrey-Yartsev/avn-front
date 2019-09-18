@@ -1,6 +1,6 @@
 <template>
   <div class="awards-share">
-    <ShareItem v-for="v in items" :key="v.id" :v="v" />
+    <ShareItem v-for="v in items" :key="v.id" :v="v" :isGay="isGay" />
 
     <div class="awards__btn-row">
       <button class="btn alt border lg" @click="$emit('complete')">
@@ -18,7 +18,8 @@ export default {
   props: {
     categories: Array,
     data: Object,
-    modelUser: Object
+    modelUser: Object,
+    isGay: Boolean
   },
   computed: {
     items() {

@@ -72,7 +72,7 @@
       </svg>
     </div>
     <div class="awards-title text-centered">
-      {{ sent ? "Thank you!" : "Pre-Nomination Form" }}
+      {{ sent ? "Thank you!" : "Pre-Nomination Form" }}{{ isGay }}
     </div>
     <template v-if="!sent">
       <div class="title-subtext text-centered">
@@ -109,6 +109,7 @@
       :categories="_categories"
       :data="data"
       :modelUser="modelUser"
+      :isGay="isGay"
       @complete="complete"
     />
   </div>
