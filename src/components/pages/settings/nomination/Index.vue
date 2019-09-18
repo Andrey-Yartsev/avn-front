@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <template slot="title"
-      >AVN Awards Pre-Nominations Link Generator</template
+      >{{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link Generator</template
     >
     <Content slot="content" />
   </Layout>
@@ -13,10 +13,14 @@ import Content from "./Content";
 
 export default {
   name: "NotificationSettings",
-
   components: {
     Layout,
     Content
+  },
+  computed: {
+    isGay() {
+      return !!this.$route.path.match(/gayvn/);
+    }
   }
 };
 </script>

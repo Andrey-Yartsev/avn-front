@@ -235,7 +235,7 @@ export default {
 
       let url;
       if (this.eventId == 91) {
-        url = window.location.origin;
+        url = window.location.origin + path;
       } else {
         url = gayDomain(path);
       }
