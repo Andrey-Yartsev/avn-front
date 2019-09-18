@@ -51,6 +51,13 @@ const actions = {
       extendBeforeUpdate: true
     });
   },
+  extendSilent({ dispatch, rootState }, data) {
+    dispatch("_update", {
+      user: { ...rootState.auth.user, ...data },
+      silent: true,
+      extendBeforeUpdate: true
+    });
+  },
   _update({ commit, dispatch }, { user, silent, extendBeforeUpdate }) {
     commit("setError", null);
     commit("setLoading", true);
