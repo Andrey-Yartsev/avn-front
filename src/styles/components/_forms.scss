@@ -808,8 +808,13 @@ label {
   .logo {
     margin-bottom: 20px;
 
-    img {
+    &-awards {
       width: 50%;
+      display: inline-block;
+    }
+
+    .cls-2 {
+      fill: $main-color;
     }
   }
 }
