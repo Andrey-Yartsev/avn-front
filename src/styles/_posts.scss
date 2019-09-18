@@ -308,6 +308,11 @@
     &:empty {
       display: none;
     }
+
+    a {
+      word-break: break-all;
+      display: inline-block;
+    }
   }
 
   .actions {
