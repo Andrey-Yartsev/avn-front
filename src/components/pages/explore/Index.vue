@@ -8,6 +8,12 @@
     />
     <div class="container">
       <div class="over-container">
+        <div class="explore-name" v-if="$mq === 'mobile' && !isAuth()">
+          <div class="explore-name__title">
+            Explore
+          </div>
+          <GenderFilter />
+        </div>
         <Navigate />
         <div
           class="stories-wrapper stories-all"
@@ -125,6 +131,7 @@ import Loader from "@/components/common/Loader";
 import PostsStat from "@/mixins/postsStat";
 import PostCollection from "@/components/common/postCollection/Index";
 import uniqBy from "lodash.uniqby";
+import GenderFilter from "@/components/common/GenderFilter";
 
 export default {
   name: "Explore",
@@ -140,7 +147,8 @@ export default {
     Users,
     Live,
     Loader,
-    PostCollection
+    PostCollection,
+    GenderFilter
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
   created() {
