@@ -25,6 +25,25 @@ const actions = {
   setGuestCategory({ commit }, genderCategory) {
     commit("setCategory", genderCategory);
     BrowserStore.set("genderCategory", genderCategory);
+  },
+  suggestGayContext({ dispatch }) {
+    if (window.location.hostname.match(/gayvn/)) {
+      return;
+    }
+    const doNotSuggestGeyContext = BrowserStore.get("doNotSuggestGeyContext");
+    if (doNotSuggestGeyContext) {
+      return;
+    }
+    dispatch(
+      "modal/show",
+      {
+        name: "gayContextConfirm"
+      },
+      { root: true }
+    );
+  },
+  doNotSuggest() {
+    BrowserStore.set("doNotSuggestGeyContext", true);
   }
 };
 

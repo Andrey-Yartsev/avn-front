@@ -48,6 +48,9 @@
       <Confirm v-if="this.$store.state.modal.confirm.show" />
       <ImageModal v-if="this.$store.state.modal.image.show" />
       <TrialConfirmModal v-if="this.$store.state.modal.trialConfirm.show" />
+      <GayContextConfirmModal
+        v-if="this.$store.state.modal.gayContextConfirm.show"
+      />
       <a
         v-if="adminReturnUrl"
         :href="adminReturnUrl"
@@ -102,6 +105,7 @@ import SignupModal from "@/components/auth/SignupModal";
 import Confirm from "@/components/pages/settings/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
+import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
 import UserBubble from "@/components/users/UserBubble.vue";
 
 import Cookie from "@/utils/cookie";
@@ -185,6 +189,7 @@ export default {
     Confirm,
     ImageModal,
     TrialConfirmModal,
+    GayContextConfirmModal,
     UserBubble
   },
   mixins: [ColorScheme, BackRouter],

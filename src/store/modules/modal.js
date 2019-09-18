@@ -103,6 +103,10 @@ const state = {
   postLikes: {
     show: false,
     data: {}
+  },
+  gayContextConfirm: {
+    show: false,
+    data: {}
   }
 };
 

@@ -490,11 +490,15 @@ export default {
     },
     storePrefix() {
       return "profile/home";
+    },
+    initGay() {
+      this.$store.dispatch("explore/gender/suggestGayContext");
     }
   },
   created() {
     this.initContent();
     if (this.profile) {
+      this.initGay();
       // strange sentry error
       setTimeout(() => {
         this.$root.ws.send({
