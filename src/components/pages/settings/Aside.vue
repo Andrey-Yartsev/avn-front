@@ -176,6 +176,7 @@ import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
 import Loader from "@/components/common/Loader";
+import nominationRoutes from "@/components/common/nominationSettingsRoutes";
 
 export default {
   name: "SettingsAside",
@@ -205,41 +206,8 @@ export default {
           title: "Account"
         }
       ];
-      if (this.user.nominatable) {
-        const a = {
-          name: "avn",
-          title: "AVN Awards Pre-Nominations"
-        };
-        const b = {
-          name: "gayvn",
-          title: "GayVN Awards Pre-Nominations"
-        };
-        if (this.user.categoryView === 2) {
-          items.push(a);
-        } else if (this.user.categoryView === 3) {
-          items.push(b);
-        } else if (this.user.categoryView === 1) {
-          items.push(a);
-          items.push(b);
-        }
-      } else {
-        const a = {
-          path: "/avn_awards/nominations",
-          title: "AVN Awards Pre-Nominations"
-        };
-        const b = {
-          path: "/gayvn_awards/nominations",
-          title: "GayVN Awards Pre-Nominations"
-        };
-        if (this.user.categoryView === 2) {
-          items.push(a);
-        } else if (this.user.categoryView === 3) {
-          items.push(b);
-        } else if (this.user.categoryView === 1) {
-          items.push(a);
-          items.push(b);
-        }
-      }
+
+      items.push(...nominationRoutes(this.user));
 
       items.push(
         ...[

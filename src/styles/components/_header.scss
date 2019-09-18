@@ -1515,6 +1515,11 @@
         content: "\E63F";
       }
     }
+    &__award {
+      &:after {
+        content: "\E675";
+      }
+    }
     &__statistics {
       &:after {
         content: "\E639";

@@ -60,6 +60,13 @@
                 >Profile</router-link
               >
               <router-link
+                v-for="(v, i) in nominationRoutes"
+                class="user-menu-item user-menu-item__award icn-item"
+                :to="v.path ? v.path : '/settings/' + v.name"
+                :key="'i' + i"
+                >{{ v.title }}</router-link
+              >
+              <router-link
                 class="user-menu-item user-menu-item__statistics icn-item"
                 to="/statistics"
                 >Statistics</router-link
@@ -121,15 +128,21 @@
 </template>
 
 <script>
+import nominationRoutes from "@/components/common/nominationSettingsRoutes";
+
 export default {
   name: "Sidebar",
-
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    nominationRoutes() {
+      if (!this.user) {
+        return [];
+      }
+      return nominationRoutes(this.user);
     }
   },
-
   methods: {
     hide() {
       this.$store.dispatch("global/hideUserMobileBar");
