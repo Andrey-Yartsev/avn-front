@@ -25,6 +25,7 @@
 
 <script>
 import Modal from "@/components/modal/Index";
+import gayDomain from "@/helpers/gayDomain";
 
 export default {
   name: "GayContextConfirmModal",
@@ -33,14 +34,7 @@ export default {
   },
   methods: {
     yes() {
-      let gayHost;
-      const l = window.location;
-      if (process.env.NODE_ENV === "development") {
-        gayHost = "gayvn.localhost:" + l.port;
-      } else {
-        gayHost = process.env.VUE_APP_GAY_HOST;
-      }
-      window.location = l.protocol + "//" + gayHost + l.pathname;
+      window.location = gayDomain();
       this.close();
     },
     no() {

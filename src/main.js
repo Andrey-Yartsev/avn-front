@@ -14,6 +14,7 @@ import router from "@/router";
 import store from "@/store";
 import VueMask from "v-mask";
 import VTooltip from "v-tooltip";
+import BrowserStore from "store";
 
 import "unfetch/polyfill";
 import "url-search-params-polyfill";
@@ -65,12 +66,23 @@ Vue.use(VueMq, {
   }
 });
 
-const MyApp = new Vue({
-  router,
-  template: "<App/>",
-  store,
-  components: { App }
-}).$mount("#app");
+const queryString = require("query-string");
+const queryParams = queryString.parse(window.location.search);
 
-MyApp.$root.showTips = true;
-MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";
+if (queryParams.auth_token) {
+  BrowserStore.set("token", queryParams.auth_token);
+  setTimeout(() => {
+    const l = window.location;
+    window.location = l.origin + l.pathname;
+  }, 100);
+} else {
+  const MyApp = new Vue({
+    router,
+    template: "<App/>",
+    store,
+    components: { App }
+  }).$mount("#app");
+
+  MyApp.$root.showTips = true;
+  MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";
+}

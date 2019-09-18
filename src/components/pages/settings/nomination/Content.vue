@@ -204,6 +204,7 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
+import gayDomain from "@/helpers/gayDomain";
 
 export default {
   name: "NominationSettingsContent",
@@ -221,15 +222,26 @@ export default {
       if (!values.length) {
         return null;
       }
-      let url = window.location.origin;
-      url += "/nominator/";
-      url += this.user.username + "/";
+
+      let path = "";
+      path += "/nominator/";
+      path += this.user.username + "/";
       if (this.eventId == 91) {
-        url += "avn_awards";
+        path += "avn_awards";
       } else {
-        url += "gayvn_awards";
+        path += "gayvn_awards";
       }
-      url += "/" + values.filter(v => v !== 0).join(",");
+      path += "/" + values.filter(v => v !== 0).join(",");
+
+      let url;
+      if (this.eventId == 91) {
+        url = window.location.origin;
+      } else {
+        url = gayDomain(path);
+      }
+
+      // console.log(gayDomain(), path);
+
       return url;
     },
     categories() {
