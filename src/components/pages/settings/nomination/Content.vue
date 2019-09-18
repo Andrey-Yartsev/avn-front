@@ -21,7 +21,7 @@
                 :src="'/static/img/avnawards.png'"
                 alt=""
                 class="logo-awards"
-                v-if="isGay"
+                v-if="!isGay"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
