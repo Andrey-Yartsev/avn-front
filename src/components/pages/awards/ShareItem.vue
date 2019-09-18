@@ -2,8 +2,7 @@
   <label class="form-group form-group_row-md">
     <span class="label label_row">{{ v.title }}</span>
     <span class="form-group form-group_clear-gaps">
-      <span class="form-field"
-        >{{ isGay }}
+      <span class="form-field">
         <div v-html="html" class="tweet-text"></div>
         <div class="btns">
           <div ref="cont" class="btn-tweet"></div>
