@@ -298,7 +298,7 @@
   .scroll-top:not(.open-search-popup) & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transform: translate3d(0, -44px, 0);
+      //transform: translate3d(0, -44px, 0);
     }
 
     .chat-page &,
@@ -306,7 +306,7 @@
     .support-page & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        transform: translate3d(0, 0, 0);
+        //transform: translate3d(0, 0, 0);
       }
     }
   }
@@ -314,7 +314,7 @@
   .scroll-bottom & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transform: translate3d(0, 0, 0);
+      //transform: translate3d(0, 0, 0);
       position: fixed;
       left: 0;
       right: 0;

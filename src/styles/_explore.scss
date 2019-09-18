@@ -84,7 +84,7 @@
     .scroll-bottom & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        transform: translate3d(0, 44px, 0);
+        //transform: translate3d(0, 44px, 0);
         position: fixed;
         left: 0;
         right: 0;
