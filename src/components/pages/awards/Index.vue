@@ -5,7 +5,7 @@
         :src="'/static/img/avnawards.png'"
         alt=""
         class="logo-awards"
-        v-if="isGay"
+        v-if="!isGay"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@
       </svg>
     </div>
     <div class="awards-title text-centered">
-      {{ sent ? "Thank you!" : "Pre-Nomination Form" }}{{ isGay }}
+      {{ sent ? "Thank you!" : "Pre-Nomination Form" }}
     </div>
     <template v-if="!sent">
       <div class="title-subtext text-centered">
