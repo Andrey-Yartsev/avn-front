@@ -384,7 +384,6 @@
 
   .login,
   .register {
-    position: relative;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 0;
