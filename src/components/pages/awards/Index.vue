@@ -5,7 +5,7 @@
         :src="'/static/img/avnawards.png'"
         alt=""
         class="logo-awards"
-        v-if="isGay"
+        v-if="!isGay"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@
     <template v-if="!sent">
       <div class="title-subtext text-centered">
         Pre-nominate your favorite star by entering their name under the
-        category below:
+        category below: {{ isGay }}
       </div>
       <div class="loader-container" v-if="loading || scriptLoading">
         <Loader text="" :fullscreen="false" :small="true" />
