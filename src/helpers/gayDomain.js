@@ -10,7 +10,7 @@ export default path => {
   }
   let token = "";
   if (Store.state.auth.token) {
-    token = "?auth_token=" + Store.state.auth.token;
+    // token = "?auth_token=" + Store.state.auth.token;
   }
   return (
     l.protocol +
