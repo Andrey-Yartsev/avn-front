@@ -20,3 +20,5 @@ yarn-error.log*
 *.sln
 *.sw*
 reserved-words.json
+
+public/static/version.txt
