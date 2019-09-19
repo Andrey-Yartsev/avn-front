@@ -10,7 +10,10 @@
               </span>
             </div>
           </div>
-          <h1 class="form-title hidden-mobile settings-title" v-if="$mq === 'desktop'">
+          <h1
+            class="form-title hidden-mobile settings-title"
+            v-if="$mq === 'desktop'"
+          >
             Your Cards
             <button
               @click="$router.push('/settings/credits')"
