@@ -492,7 +492,9 @@ export default {
       return "profile/home";
     },
     initGay() {
-      this.$store.dispatch("explore/gender/suggestGayContext");
+      if (this.profile.category === 3) {
+        this.$store.dispatch("explore/gender/suggestGayContext");
+      }
     }
   },
   created() {
