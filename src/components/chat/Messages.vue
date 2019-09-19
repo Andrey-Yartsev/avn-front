@@ -13,7 +13,9 @@
       ref="messagesContainer"
       @ps-scroll-y="psScrollHandle"
     >
-      <div class="chat-scrollbar" ref="messagesMobileContainer"
+      <div
+        class="chat-scrollbar"
+        ref="messagesMobileContainer"
         :class="{ 'chat-scrollbar_gap': allMessagesLoaded }"
       >
         <div
