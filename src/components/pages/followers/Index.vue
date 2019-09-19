@@ -144,6 +144,13 @@ export default {
       return this.user;
     },
     users() {
+      const isGay = !!window.location.hostname.match(/gayvn/);
+      if (isGay) {
+        const excepting = ["avnawards", "avnmagazine"];
+        return this.$store.state.followers.posts.filter(user => {
+          return excepting.indexOf(user.username) === -1;
+        });
+      }
       return this.$store.state.followers.posts;
     },
     store() {
