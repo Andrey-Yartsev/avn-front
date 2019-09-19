@@ -120,6 +120,7 @@ import wsp from "@/ws/wsp";
 
 import ModalRouter from "@/components/modal/Router";
 import BackRouter from "@/mixins/backRouter";
+import FrontUpdate from "@/mixins/frontUpdate";
 
 import { fromNow } from "@/helpers/datetime";
 
@@ -192,7 +193,7 @@ export default {
     GayContextConfirmModal,
     UserBubble
   },
-  mixins: [ColorScheme, BackRouter],
+  mixins: [ColorScheme, BackRouter, FrontUpdate],
   data() {
     return {
       showToast: false,
