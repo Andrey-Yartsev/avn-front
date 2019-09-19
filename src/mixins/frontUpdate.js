@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      lastUpdate: 0,
+      lastCheck: 0,
       currentVersion: ""
     };
   },
@@ -17,21 +17,21 @@ export default {
     },
     checkFrontUpdate() {
       const time = new Date().getTime();
-      if (time - this.lastUpdate > 5 * 1000) {
+      if (time - this.lastCheck > 5 * 1000) {
         console.log("check front update");
         this._checkFrontUpdate();
       }
     },
     async _checkFrontUpdate() {
       const version = await this.getVersion();
+      this.lastCheck = new Date().getTime();
       if (version !== this.currentVersion) {
-        console.log("updating front");
-        // window.location.reload(true);
+        window.location.reload(true);
       }
     }
   },
   async created() {
     this.currentVersion = await this.getVersion();
-    this.lastUpdate = new Date().getTime();
+    this.lastCheck = new Date().getTime();
   }
 };
