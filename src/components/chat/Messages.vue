@@ -13,8 +13,9 @@
       ref="messagesContainer"
       @ps-scroll-y="psScrollHandle"
     >
-      <div class="chat-scrollbar" ref="messagesMobileContainer">
-        <div v-if="allMessagesLoaded" class="startMessages"></div>
+      <div class="chat-scrollbar" ref="messagesMobileContainer"
+        :class="{ 'chat-scrollbar_gap': allMessagesLoaded }"
+      >
         <div
           class="chatFlatLoader past-messages semi-transparent"
           v-if="moreLoading"

@@ -154,10 +154,6 @@
       }
     }
   }
-
-  .startMessages {
-    height: 15px;
-  }
 }
 
 .chat-scrollbar {
@@ -180,6 +176,10 @@
     right: 20px;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  &_gap {
+    padding-top: 15px;
   }
 }
 
