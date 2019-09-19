@@ -604,6 +604,10 @@ label {
     margin-top: -2px;
   }
 
+  .form-title & {
+    margin-left: 16px;
+  }
+
   &_switcher {
     position: absolute;
     left: 0;
