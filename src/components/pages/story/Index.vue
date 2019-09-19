@@ -274,14 +274,19 @@
           v-if="!isOwner(author.id) && author.canEarn"
           type="button"
           class="btn-tip bottom-btn"
+          :class="{ selected: activeTip }"
         >
           <span class="btn-icon icn-tips icn-item" v-tooltip="'Tip'"></span>
         </button>
-        <span class="bottom-btn" v-if="!isMine">
+        <span
+          class="bottom-btn"
+          v-if="!isMine"
+          @click="openComments"
+          :class="{ selected: activeComments }"
+        >
           <span
             class="btn-icon comments icn-item icn-size_lg"
             v-tooltip="'Comments'"
-            @click="openComments"
           />
         </span>
       </div>
@@ -359,7 +364,9 @@ export default {
       videoDoesNotExists: false,
       showTip: false,
       showComments: true,
-      comment: ""
+      comment: "",
+      activeTips: false,
+      activeComments: true
     };
   },
   computed: {
@@ -433,6 +440,8 @@ export default {
       this.pause();
       this.showComments = false;
       this.showTip = true;
+      this.activeTip = true;
+      this.activeComments = false;
     },
     closeTip() {
       this.resume();
@@ -443,6 +452,8 @@ export default {
       this.pause();
       this.showComments = true;
       this.showTip = false;
+      this.activeTip = false;
+      this.activeComments = true;
     },
     next() {
       if (this.currIndex === this.length - 1) {
@@ -838,6 +849,15 @@ export default {
     },
     deletedPost() {
       this.init();
+    },
+    asideType() {
+      if (this.asideType === "comments") {
+        this.$nextTick(() => {
+          this.$refs.commentInput.focus();
+        });
+      } else {
+        this.newComment = "";
+      }
     }
   },
   beforeDestroy() {
