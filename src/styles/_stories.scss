@@ -657,6 +657,13 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       min-height: calc(100% - 173px);
     }
+
+    .not-authorized & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        min-height: calc(100% - 214px);
+      }
+    }
   }
 }
 
