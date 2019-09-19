@@ -17,7 +17,7 @@ export default {
     },
     checkFrontUpdate() {
       const time = new Date().getTime();
-      if (time - this.lastCheck > 5 * 1000) {
+      if (time - this.lastCheck > 30 * 1000) {
         console.log("check front update");
         this._checkFrontUpdate();
       }
