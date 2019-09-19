@@ -267,7 +267,7 @@
           </button>
           <button
             type="submit"
-            class="btn lg btn_fix-width-sm"
+            class="btn alt lg btn_fix-width-sm"
             :disabled="submitDisabled"
           >
             Next
