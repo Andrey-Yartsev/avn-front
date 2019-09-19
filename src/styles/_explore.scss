@@ -220,6 +220,13 @@
     box-shadow: 0 0 5px rgba(#000, 0.3);
   }
 
+  .not-authorized & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      min-height: calc(100% - 106px);
+    }
+  }
+
   > div {
 
     @include media-breakpoint-up($desktop-breakpoint) {
