@@ -77,7 +77,7 @@
     <template v-if="!sent">
       <div class="title-subtext text-centered">
         Pre-nominate your favorite star by entering their name under the
-        category below: {{ isGay }}
+        category below:
       </div>
       <div class="loader-container" v-if="loading || scriptLoading">
         <Loader text="" :fullscreen="false" :small="true" />
