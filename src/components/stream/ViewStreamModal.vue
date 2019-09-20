@@ -4,7 +4,7 @@
       <div id="stream" class="stream-block">
         <div class="mediasTop__header stream-header">
           <div id="stream-timer">{{ time }}</div>
-          <div class="stream-author">
+          <div class="stream-author" v-if="!isMyStream">
             <router-link
               :to="'/' + streamer.username"
               class="avatar avatar_md avatar_not-shadow"
@@ -20,7 +20,9 @@
               </router-link>
             </div>
           </div>
-          {{ "/" + streamer.username }}
+          <div class="stream-online-label" v-else>
+            live
+          </div>
           <span
             role="button"
             id="close-stream-window"
