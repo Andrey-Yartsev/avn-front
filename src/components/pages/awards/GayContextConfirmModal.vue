@@ -12,9 +12,9 @@
           Would you like to switch your viewing preference to a gay context?
         </div>
         <div class="popup-alert__footer">
-          <button class="btn" @click.prevent="yes">Yes</button>
-          <button class="btn alt" @click.prevent="no">No</button>
-          <button class="btn alt" @click.prevent="notAsk">
+          <button class="btn btn_decision-size" @click.prevent="yes">Yes</button>
+          <button class="btn alt btn_decision-size" @click.prevent="no">No</button>
+          <button class="btn border" @click.prevent="notAsk">
             Do not ask anymore
           </button>
         </div>
