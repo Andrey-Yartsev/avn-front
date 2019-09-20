@@ -1,9 +1,5 @@
 .feed {
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    padding-top: 0;
-  }
-
   .popup-content-scroll & {
     background-color: $white;
     border-bottom-left-radius: 6px;

@@ -25,7 +25,7 @@
   &-wrapper {
 
     .posts & {
-      padding: 0 0 12px;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba($gray, 0.2);
     }
   }
@@ -1096,7 +1096,7 @@
   }
 
   .name {
-    padding: 0 4px 0 0;
+    padding-right: 4px;
     display: inline;
     vertical-align: top;
     white-space: normal;
