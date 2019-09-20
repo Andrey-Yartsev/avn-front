@@ -4,11 +4,13 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 const result = {
   state: {},
   actions: {
-    getPosts({ commit, state }) {
+    getPosts({ commit, state, rootState }) {
       const { limit, offset, marker, source } = state;
       commit("postsRequest");
 
-      return PostApi.getPosts({ limit, offset, marker, source })
+      const category = rootState.explore.gender.category;
+
+      return PostApi.getPosts({ limit, offset, marker, source, category })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(res) {

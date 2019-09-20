@@ -131,6 +131,9 @@ export default {
     },
     subscriptionUpdate() {
       return this.$store.state.subscription.updated;
+    },
+    genderCategory() {
+      return this.$store.state.explore.gender.category;
     }
   },
   methods: {
@@ -171,6 +174,9 @@ export default {
       this.$store.dispatch("home/updatePost", this.updatedPost);
     },
     subscriptionUpdate() {
+      this.init();
+    },
+    genderCategory() {
       this.init();
     }
   }
