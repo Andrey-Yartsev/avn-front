@@ -7,7 +7,7 @@ export default {
   },
   watch: {
     $route() {
-      this.checkFrontUpdate();
+      // this.checkFrontUpdate();
     }
   },
   methods: {

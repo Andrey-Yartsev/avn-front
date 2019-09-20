@@ -38,7 +38,11 @@ export default {
   },
   methods: {
     yes() {
-      window.location = gayDomain();
+      let token = "";
+      if (this.$store.state.auth.token) {
+        token = "?auth_token=" + this.$store.state.auth.token;
+      }
+      window.location = gayDomain() + token;
       this.close();
     },
     no() {
