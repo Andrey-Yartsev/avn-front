@@ -1686,12 +1686,6 @@
     width: 64px;
     height: 64px;
     z-index: 5;
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      @media screen and (orientation: landscape) {
-        top: -14px;
-      }
-    }
   }
 }
 .header-return-btn {
