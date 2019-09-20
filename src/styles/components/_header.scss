@@ -1308,14 +1308,14 @@
   }
 
   &__scroller {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     transition: transform 0.4s ease;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 
     .sidebar-shown & {
       transform: translate(0, 0);
@@ -1681,12 +1681,24 @@
       }
     }
   }
+
   &-close {
-    padding: 17px 20px;
     color: $primary-color;
-    width: 64px;
-    height: 64px;
     z-index: 5;
+    width: 36px;
+    height: 36px;
+    border-radius: 1000px;
+    box-sizing: content-box;
+    background-color: $white;
+    top: 14px;
+    left: calc(100vw - 117px);
+    position: fixed;
+    transform: translateX(-100vw);
+    transition: transform 0.4s ease;
+
+    .sidebar-shown & {
+      transform: translate(0, 0);
+    }
   }
 }
 .header-return-btn {
