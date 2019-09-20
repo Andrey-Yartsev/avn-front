@@ -102,7 +102,7 @@ import IframeModal from "@/components/modal/Iframe";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
-import Confirm from "@/components/pages/settings/Confirm.vue";
+import Confirm from "@/components/modal/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
 import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";

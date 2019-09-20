@@ -437,7 +437,7 @@ export default {
           this.$store.commit("lives/resetCurrentLive");
 
           this.$store.dispatch("global/flashToast", {
-            text: "You were blocked by the broadcaster",
+            text: "You were kicked by the broadcaster",
             type: "error"
           });
           this.stopWatching();

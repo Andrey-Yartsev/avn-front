@@ -1,6 +1,7 @@
 "use strict";
 import LivesApi from "@/api/lives";
 import PostMixin from "@/store/mixins/posts";
+import { createRequestAction } from "../utils/storeRequest";
 
 const initState = {
   loading: false,
@@ -170,6 +171,23 @@ const actions = {
     commit("setLimit", { limit });
   }
 };
+
+createRequestAction({
+  prefix: "block",
+  apiPath: "streams/block",
+  requestType: "token",
+  defaultLoading: true,
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
 
 export default {
   namespaced: true,

@@ -25,6 +25,12 @@
               v-tooltip="'Block'"
               @click="() => block(item.user.id)"
             />
+            <span
+              v-if="type === 'view'"
+              class="btn-icon icn-item icn-size_lg icn-kick"
+              v-tooltip="'Kick'"
+              @click="() => kick(item.user.id)"
+            />
           </div>
         </div>
       </div>
@@ -43,6 +49,10 @@ export default {
       required: true
     },
     block: {
+      type: Function,
+      required: true
+    },
+    kick: {
       type: Function,
       required: true
     }

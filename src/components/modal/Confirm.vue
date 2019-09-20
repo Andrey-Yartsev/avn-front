@@ -9,7 +9,7 @@
           {{ title }}
         </div>
         <div class="popup-alert__body" v-if="!hideQuestion">
-          Are you sure?
+          {{ text || "Are you sure?" }}
         </div>
         <div class="popup-alert__footer">
           <button class="btn" @click.prevent="yes">Confirm</button>
@@ -28,10 +28,12 @@ export default {
   components: {
     Modal
   },
-
   computed: {
     title() {
       return this.$store.state.modal.confirm.data.title;
+    },
+    text() {
+      return this.$store.state.modal.confirm.data.text;
     },
     hideQuestion() {
       return this.$store.state.modal.confirm.data.hideQuestion;
@@ -43,7 +45,6 @@ export default {
       return this.$store.state.modal.confirm.data.abort;
     }
   },
-
   methods: {
     yes() {
       this.success();

@@ -239,7 +239,7 @@
     }
   }
 
-  &-block {;
+  &-block {
     color: red;
     height: 22px;
     line-height: 22px;
@@ -266,6 +266,24 @@
         width: 20px;
         height: 20px;
       }
+    }
+  }
+
+  &-kick{
+    height: 22px;
+    line-height: 22px;
+    transition: color .3s;
+
+    .btn-block & {
+      color: $main-color;
+      opacity: .3;
+    }
+
+    &:after {
+      content: "\E64B";
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
     }
   }
 

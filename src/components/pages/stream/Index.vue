@@ -218,6 +218,7 @@
             v-else
             :type="asideType"
             :block="showBlockUserConfirm"
+            :kick="showKickUserConfirm"
           />
           <form class="form-comments__wrapper" v-if="asideType === 'comments'">
             <textarea
@@ -667,7 +668,6 @@ export default {
     },
     blockUser(userId) {
       this.$store.dispatch("user/block", userId, { root: true }).then(() => {
-        // if (r.success) {
         try {
           Streams.sendCustomMessage({
             msgtype: "data.custom",
@@ -680,8 +680,37 @@ export default {
         } catch (error) {
           console.log("Error while sending  sendCustomMessage message ", {});
         }
-        // }
       });
+    },
+    showKickUserConfirm(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Kick user",
+          success: () => this.blockUser(userId)
+        }
+      });
+    },
+    kickUserForStream(userId) {
+      this.$store
+        .dispatch("lives/block", {
+          streamId: this.startedStreamId,
+          userId
+        })
+        .then(() => {
+          try {
+            Streams.sendCustomMessage({
+              msgtype: "data.custom",
+              to: ["viewer"],
+              data: {
+                type: "kick.user",
+                userId
+              }
+            });
+          } catch (error) {
+            console.log("Error while sending  sendCustomMessage message ", {});
+          }
+        });
     }
   },
   mounted() {
