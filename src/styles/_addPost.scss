@@ -524,7 +524,7 @@
     }
 
     .actions {
-      padding: 12px 15px 3px;
+      padding: 12px 15px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding: 15px 0 0;
@@ -533,7 +533,10 @@
       }
 
       .hasScheduledPosts & {
-        padding-bottom: 12px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          padding-bottom: 12px;
+        }
       }
     }
 
@@ -852,6 +855,10 @@
 .post-attachment {
   position: relative;
   padding: 12px 10px 0;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    overflow: hidden;
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 7px;
