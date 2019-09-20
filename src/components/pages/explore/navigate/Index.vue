@@ -34,7 +34,6 @@
     <router-link to="/explore" exact class="content-nav__item" data-type="top"
       >Feed</router-link
     >
-    <GenderFilter v-if="$mq === 'desktop'" />
   </nav>
 </template>
 

@@ -57,6 +57,7 @@
             v-if="!noAuthHeader && !authSection && !noAuthSectionForGuest"
           >
             <Search />
+            <GenderFilter />
             <User />
             <button
               class="btn make-post-btn make-post-btn_header hidden-mobile"
@@ -135,6 +136,7 @@ import LoginForm from "@/components/auth/LoginForm";
 import SignupForm from "@/components/auth/SignupForm";
 import ClickOutside from "vue-click-outside";
 import Footer from "@/components/footer/Index.vue";
+import GenderFilter from "@/components/common/GenderFilter";
 
 export default {
   name: "Header",
@@ -152,7 +154,8 @@ export default {
     DesktopHeader,
     LoginForm,
     SignupForm,
-    Footer
+    Footer,
+    GenderFilter
   },
   computed: {
     user() {

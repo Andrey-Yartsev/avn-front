@@ -1,16 +1,24 @@
 
 .gender-wrapper {
-  position: relative;
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     position: absolute;
-    right: 10px;
-    top: 12px;
+    right: 40px;
+    top: 2px;
     z-index: 18;
+    padding: 10px 5px 10px 10px;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin-left: auto;
+    margin-left: 15px;
+  }
+
+  .explore-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      right: 0;
+      padding-right: 10px;
+    }
   }
 
   &.open {
@@ -89,8 +97,6 @@
   &__btn {
 
     &.btn-gender {
-      padding-top: 0;
-      padding-bottom: 0;
       opacity: 1;
       font-size: 17px;
 

@@ -6,9 +6,6 @@
     <div class="more-functions__overlay" @click="hide" />
     <div class="more-functions__btn btn-gender" @click="open">
       <span class="icn-item icn-gender" :class="selectedOption.name" />
-      <span v-if="$mq === 'desktop'" class="btn-gender__text">{{
-        selectedOption.title
-      }}</span>
     </div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">

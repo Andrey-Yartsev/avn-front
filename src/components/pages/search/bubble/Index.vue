@@ -33,8 +33,6 @@
       :disabled="!canSearch"
     />
 
-    <GenderFilter v-if="$mq === 'mobile'" />
-
     <div class="header-search-results">
       <div
         class="SearchResultsPopupCollectionView"
