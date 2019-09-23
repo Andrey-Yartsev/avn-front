@@ -667,31 +667,6 @@ export default {
       });
     },
     blockUser(userId) {
-      this.$store.dispatch("user/block", userId, { root: true }).then(() => {
-        try {
-          Streams.sendCustomMessage({
-            msgtype: "data.custom",
-            to: ["viewer"],
-            data: {
-              type: "kick.user",
-              userId
-            }
-          });
-        } catch (error) {
-          console.log("Error while sending  sendCustomMessage message ", {});
-        }
-      });
-    },
-    showKickUserConfirm(userId) {
-      this.$store.dispatch("modal/show", {
-        name: "confirm",
-        data: {
-          title: "Kick user",
-          success: () => this.blockUser(userId)
-        }
-      });
-    },
-    kickUserForStream(userId) {
       this.$store
         .dispatch("lives/block", {
           streamId: this.startedStreamId,
@@ -711,6 +686,29 @@ export default {
             console.log("Error while sending  sendCustomMessage message ", {});
           }
         });
+    },
+    showKickUserConfirm(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Kick user",
+          success: () => this.kickUserForStream(userId)
+        }
+      });
+    },
+    kickUserForStream(userId) {
+      try {
+        Streams.sendCustomMessage({
+          msgtype: "data.custom",
+          to: ["viewer"],
+          data: {
+            type: "kick.user",
+            userId
+          }
+        });
+      } catch (error) {
+        console.log("Error while sending  sendCustomMessage message ", {});
+      }
     }
   },
   mounted() {
