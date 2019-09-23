@@ -302,15 +302,15 @@
           </div>
         </div>
       </div>
+      <div class="loader-container loader-container_center" v-if="isSaving">
+        <Loader
+          :fullscreen="false"
+          :small="true"
+          :semidark="true"
+          class="text-light"
+        />
+      </div>
     </form>
-    <div class="loader-container loader-container_center" v-if="isSaving">
-      <Loader
-        :fullscreen="false"
-        :small="true"
-        :semidark="true"
-        class="text-light"
-      />
-    </div>
   </div>
 </template>
 

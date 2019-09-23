@@ -920,6 +920,7 @@
 
     &.add-post-schedule {
       max-height: none;
+      padding-top: 0;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         max-height: calc(100vh - 352px);
