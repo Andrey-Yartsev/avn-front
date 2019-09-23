@@ -367,6 +367,7 @@ export default {
     document.body.classList.add("stream-viewer");
   },
   created() {
+    const o = this;
     Streams.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       getApiUrl: undefined,
@@ -411,7 +412,14 @@ export default {
       onSetupStreamingSession: function() {},
 
       onStreamError: function(error) {
-        this.$store.dispatch("global/setError", { message: error });
+        console.log(error);
+        if (error.match(/403/)) {
+          o.$store.dispatch("global/setError", {
+            message: "You have been blocked on this stream"
+          });
+        } else {
+          o.$store.dispatch("global/setError", { message: error });
+        }
       },
 
       // onRemoteVideoUnavailable: () => {

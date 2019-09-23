@@ -783,6 +783,7 @@ export default {
 
             this.startedStreamId = id;
             this.startingStream = false;
+            console.log("That place");
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
               token
