@@ -102,14 +102,14 @@ const mutations = {
     ];
   },
 
-  tip(state, tip) {
+  tip(state, { tip, who }) {
     state.currentLive.payers = [...state.currentLive.payers, tip];
     state.currentLive.comments = [
       ...state.currentLive.comments,
       {
         ...tip,
         type: "tip",
-        comment: `sent you $ ${tip.amount}`,
+        comment: `sent ${who} $${tip.amount}`,
         hideTime: Date.now() + 2 * 60 * 1000
       }
     ];
@@ -169,6 +169,18 @@ const actions = {
   },
   setLimit({ commit }, { limit }) {
     commit("setLimit", { limit });
+  },
+  tip({ commit, rootState }, tip) {
+    let who;
+
+    if (rootState.modal.stream.data.stream) {
+      const streamer = rootState.modal.stream.data.stream.user;
+      who = streamer.name;
+    } else {
+      who = "you";
+    }
+
+    commit("tip", { tip, who });
   }
 };
 

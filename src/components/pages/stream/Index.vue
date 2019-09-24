@@ -726,6 +726,9 @@ export default {
     const { onDevicesReadyCallback } = this;
     const token = this.$store.state.auth.token;
     window.Streams = Streams;
+
+    const that = this;
+
     Streams.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
@@ -737,7 +740,7 @@ export default {
       streamSource: "local",
       showErrorMessage(message) {
         // eslint-disable-next-line
-        this.$store.dispatch("global/setError", { message });
+        that.$store.dispatch("global/setError", { message });
         // eslint-disable-next-line
         console.trace(message);
       },
@@ -749,7 +752,7 @@ export default {
       onRemoteStreamInit() {},
       onStreamError(error) {
         // eslint-disable-next-line
-        this.$store.dispatch("global/setError", { message: error });
+        that.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
         console.trace(error);
         Streams.config.onStreamEnd();
@@ -783,7 +786,6 @@ export default {
 
             this.startedStreamId = id;
             this.startingStream = false;
-            console.log("That place");
             Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
               token
