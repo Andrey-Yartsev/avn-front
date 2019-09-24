@@ -344,6 +344,14 @@ label {
     }
   }
 
+  &_side-gap {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-left: 6px;
+      padding-right: 10px;
+    }
+  }
+
   &_help-fields {
     margin-top: -12px;
   }
