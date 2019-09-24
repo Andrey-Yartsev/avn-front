@@ -8,7 +8,7 @@
     />
     <div class="container">
       <div class="over-container">
-        <div class="explore-name" v-if="$mq === 'mobile' && !isAuth()">
+        <div class="explore-name" v-if="!isAuth()">
           <div class="explore-name__title">
             Explore
           </div>
