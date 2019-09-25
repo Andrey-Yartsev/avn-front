@@ -122,7 +122,7 @@ export default {
       return this.$store.state.emails.resendError.message;
     },
     emailToSend() {
-      return this.newEmail || this.user.email;
+      return this.newEmail || this.user.emailNew;
     },
     canSend() {
       if (this.newEmail) {
@@ -136,7 +136,7 @@ export default {
       if (!this.isFormValid) {
         return;
       }
-      this.$store.dispatch("emails/resend", this.newEmail).then(r => {
+      this.$store.dispatch("emails/resend", this.emailToSend).then(r => {
         if (!r.success) {
           this.$store.dispatch("global/flashToast", {
             text: "Error on sending"
