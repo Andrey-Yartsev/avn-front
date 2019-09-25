@@ -122,7 +122,7 @@ export default {
       return this.$store.state.emails.resendError.message;
     },
     emailToSend() {
-      return this.newEmail || this.user.emailNew;
+      return this.newEmail || this.user.emailNew || this.user.email;
     },
     canSend() {
       if (this.newEmail) {
@@ -143,9 +143,7 @@ export default {
           });
           return;
         }
-        this.$store.dispatch("auth/extendUser", {
-          emailNew: this.newEmail
-        });
+        this.$store.dispatch("profile/fetch");
         this.newEmail = "";
         this.$store.dispatch("global/flashToast", { text: "Email sent" });
       });

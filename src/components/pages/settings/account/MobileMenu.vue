@@ -15,7 +15,9 @@
           }"
         >
           <span>Email</span>
-          <span class="value user-email">{{ user.email }}</span>
+          <span class="value user-email">{{
+            user.emailNew || user.email
+          }}</span>
         </router-link>
         <router-link
           to="/settings/account/twitter"
