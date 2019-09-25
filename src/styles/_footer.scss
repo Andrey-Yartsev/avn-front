@@ -101,6 +101,7 @@
       height: 1px;
       position: absolute;
 
+      .chat-page &,
       .aside-col_with-footer & {
         display: none;
       }
