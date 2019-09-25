@@ -77,6 +77,7 @@
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
+              <GenderFilter />
               <a
                 href="/register"
                 @click.prevent="openSingupModal"

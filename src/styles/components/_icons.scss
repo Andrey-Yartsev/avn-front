@@ -291,10 +291,10 @@
   &-gender {
 
     &:after {
-      z-index: 100;
       display: block;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 18px;
+      line-height: 20px;
+      z-index: 0;
     }
 
     &.trans:after {

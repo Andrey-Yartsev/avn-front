@@ -1024,6 +1024,14 @@
       }
     }
 
+    .special-site-header & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background-color: white;
+        color: $main;
+      }
+    }
+
     .icn-post {
 
       @include media-breakpoint-up($desktop-breakpoint) {

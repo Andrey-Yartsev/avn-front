@@ -8,12 +8,6 @@
     />
     <div class="container">
       <div class="over-container">
-        <div class="explore-name" v-if="!isAuth()">
-          <div class="explore-name__title">
-            Explore
-          </div>
-          <GenderFilter />
-        </div>
         <Navigate />
         <div
           class="stories-wrapper stories-all"
