@@ -41,23 +41,24 @@
                   v-model="newEmail"
                   v-validate="'email'"
                   :disabled="sendingEmail"
-                  data-vv-validate-on="blur"
+                  ref="email"
                 />
               </span>
-              <div class="error-info" v-if="fieldError('email')">
-                {{ fieldError("email") }}
-              </div>
             </span>
           </label>
 
-          <div class="input-help" v-if="!user.emailChecked">
-            Registration email address <b>{{ user.email }}</b> is not confirmed
-            yet
+          <div class="input-help" v-if="newEmail && fieldError('email')">
+            {{ fieldError("email") }}
           </div>
-
-          <div class="input-help" v-if="user.emailNew">
-            New email address <b>{{ user.emailNew }}</b> is not confirmed yet
-          </div>
+          <template v-else>
+            <div class="input-help" v-if="user.emailNew">
+              New email address <b>{{ user.emailNew }}</b> is not confirmed yet
+            </div>
+            <div class="input-help" v-else-if="!user.emailChecked && !newEmail">
+              Registration email address <b>{{ user.email }}</b> is not
+              confirmed yet
+            </div>
+          </template>
 
           <div class="input-help error-info" v-if="sendingError">
             {{ sendingError }}
@@ -72,7 +73,7 @@
             type="button"
             class="btn border btn_fix-width-lg btn-confirm-email"
             @click="sendEmail"
-            :disabled="!newEmail || sendingEmail"
+            :disabled="!canSend"
           >
             {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
           </button>
@@ -89,7 +90,7 @@
         class="btn lg border btn_fix-width-lg btn-confirm-email"
         id="confirm-email-block-mobile"
         @click="sendEmail"
-        :disabled="!newEmail || sendingEmail"
+        :disabled="!canSend"
       >
         {{ user.emailChecked ? "Send" : "Re-send" }} confirmation email
       </button>
@@ -119,6 +120,15 @@ export default {
         return null;
       }
       return this.$store.state.emails.resendError.message;
+    },
+    emailToSend() {
+      return this.newEmail || this.user.email;
+    },
+    canSend() {
+      if (this.newEmail) {
+        return this.isFormValid;
+      }
+      return !this.sendingEmail;
     }
   },
   methods: {
@@ -141,7 +151,6 @@ export default {
       });
     }
   },
-
   created() {
     this.currentEmail = this.user.email;
   }
