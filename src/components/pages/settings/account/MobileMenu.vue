@@ -15,9 +15,7 @@
           }"
         >
           <span>Email</span>
-          <span class="value user-email">{{
-            user.emailNew || user.email
-          }}</span>
+          <span class="value user-email">{{ email }}</span>
         </router-link>
         <router-link
           to="/settings/account/twitter"
@@ -69,6 +67,12 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    email() {
+      if (this.user.emailChecked) {
+        return this.user.email;
+      }
+      return this.user.emailNew || this.user.email;
     }
   }
 };
