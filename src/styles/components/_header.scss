@@ -1024,6 +1024,14 @@
       }
     }
 
+    .special-site-header & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        background-color: white;
+        color: $main;
+      }
+    }
+
     .icn-post {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -1331,6 +1339,11 @@
       border-radius: 4px;
       width: auto;
       background: $white;
+    }
+
+    .ps__rail-y {
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
   }
 

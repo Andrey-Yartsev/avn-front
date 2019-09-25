@@ -6,7 +6,7 @@
       @click="hide"
       v-if="$mq === 'mobile'"
     />
-    <div class="sidebar__scroller">
+    <perfect-scrollbar class="sidebar__scroller">
       <router-link
         :to="'/' + user.username"
         class="avatar header-avatar"
@@ -123,7 +123,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </perfect-scrollbar>
   </div>
 </template>
 

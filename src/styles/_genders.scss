@@ -6,7 +6,7 @@
     right: 40px;
     top: 2px;
     z-index: 18;
-    padding: 10px 5px 10px 10px;
+    padding: 5px 10px;
   }
 
   @include media-breakpoint-up($desktop-breakpoint) {
@@ -17,7 +17,18 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       right: 0;
-      padding-right: 10px;
+      top: 0;
+    }
+  }
+
+  .not-authorized & {
+    position: relative;
+    padding: 0;
+    top: auto;
+    right: auto;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-right: 15px;
     }
   }
 
@@ -58,15 +69,27 @@
   }
 
   .icn-item {
-    margin: -2px 6px -2px 0;
+    margin-right: 10px;
     width: 24px;
-    height: 24px;
+    height: 20px;
   }
 
   .icn-item,
   &__text {
     opacity: .5;
     transition: opacity .3s, background-color .3s, color .3s;
+  }
+
+  &__text {
+    font-size: 15px;
+  }
+
+  .more-functions {
+
+    &__list {
+      padding-top: 4px;
+      padding-bottom: 6px;
+    }
   }
 }
 
@@ -79,16 +102,22 @@
       display: flex;
       align-content: center;
       align-items: center;
+      padding-top: 15px;
+      padding-bottom: 15px;
     }
 
     &.selected {
 
       .btn-gender {
-        color: $secondary-color-darken;
 
         .icn-item,
         .btn-gender__text {
           opacity: 1;
+          font-weight: 500;
+        }
+
+        .icn-item {
+          color: $secondary-color;
         }
       }
     }
@@ -99,9 +128,42 @@
     &.btn-gender {
       opacity: 1;
       font-size: 17px;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-bottom: 5px;
+        margin-top: 5px;
+      }
 
       &:before {
         display: none;
+      }
+
+      .icn-item {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: $secondary-color;
+        color: #fff;
+        margin: 0;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+
+        .special-site-header & {
+          color: $main;
+          background-color: white;
+          opacity: .7;
+        }
+
+        &:after {
+          height: auto;
+          line-height: normal;
+          font-size: 17px;
+        }
       }
     }
   }

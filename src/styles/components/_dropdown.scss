@@ -328,7 +328,7 @@
     .gender-wrapper & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        right: -25px;
+        right: -27px;
       }
     }
   }
@@ -414,7 +414,7 @@
     &:before {
       content: "";
       position: absolute;
-      left: 0;
+      left: 20px;
       right: 20px;
       top: 0;
       height: 1px;

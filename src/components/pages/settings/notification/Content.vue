@@ -42,7 +42,7 @@
       <div class="shadow-block">
         <div class="container">
           <div
-            class="form-group emailNotificationsTypes"
+            class="form-group form-group_side-gap emailNotificationsTypes"
             :class="{ disabled: !localUser.isEmailNotificationsEnabled }"
           >
             <label class="form-group-inner notification-checkbox-switcher">
