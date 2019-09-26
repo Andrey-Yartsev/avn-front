@@ -587,7 +587,7 @@ export default {
 
         this.$router.replace(`/stories/${userId}`);
       } else {
-        // this.close();
+        this.close();
       }
     },
 
