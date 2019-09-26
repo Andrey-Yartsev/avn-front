@@ -69,7 +69,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="notEhoughData"
+            :disabled="notEhoughData || saving"
             @click.prevent="clickHandler"
           >
             {{ isNew ? "Share" : "Save" }}
@@ -94,6 +94,7 @@
             maxlength="1000"
             @input="textInput"
             ref="textarea"
+            :disabled="isSaving"
           ></textarea>
         </vue-tribute>
         <div
@@ -248,7 +249,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="notEhoughData"
+          :disabled="isSaving || notEhoughData"
           @click.prevent="clickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -410,7 +411,10 @@ export default {
       return this.$store.state.post.newPost;
     },
     isSaving() {
-      return this.$store.state.post._savePostLoading;
+      if (this.$store.state.post.updatePostLoading) {
+        return true;
+      }
+      return this.$store.state.post._createPostLoading;
     },
     allMediaTypes() {
       const { photo, video, gif } = this.inputAcceptTypes;
@@ -475,9 +479,9 @@ export default {
       if (!postData || this.saving) return;
 
       if (this.isNew) {
-        this.$store.dispatch("post/savePost", postData);
+        this.$store.dispatch("post/createPost", postData);
       } else {
-        this.$store.dispatch("post/updatePostData", {
+        this.$store.dispatch("post/updatePost", {
           postId: this.post.id,
           data: postData
         });

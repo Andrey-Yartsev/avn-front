@@ -29,8 +29,8 @@ const mutations = {
 };
 
 const actions = {
-  async savePost({ dispatch, commit }, data) {
-    await dispatch("_savePost", data);
+  async createPost({ dispatch, commit }, data) {
+    await dispatch("_createPost", data);
     commit("modal/hide", { name: "addPost" }, { root: true });
   },
 
@@ -72,7 +72,7 @@ const actions = {
 };
 
 createRequestAction({
-  prefix: "_savePost",
+  prefix: "_createPost",
   apiPath: "posts",
   resultKey: "newPost",
   state,
@@ -88,7 +88,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "updatePostData",
+  prefix: "updatePost",
   apiPath: "posts/{id}",
   resultKey: "newPost",
   state,
