@@ -365,7 +365,7 @@ export default {
       showTip: false,
       showComments: true,
       comment: "",
-      activeTips: false,
+      activeTip: false,
       activeComments: true
     };
   },
@@ -587,7 +587,7 @@ export default {
 
         this.$router.replace(`/stories/${userId}`);
       } else {
-        this.close();
+        // this.close();
       }
     },
 
