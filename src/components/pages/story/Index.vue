@@ -366,7 +366,8 @@ export default {
       showComments: true,
       comment: "",
       activeTip: false,
-      activeComments: true
+      activeComments: true,
+      forceWaitingEvent: false
     };
   },
   computed: {
@@ -513,6 +514,8 @@ export default {
         .play()
         .then(function() {})
         .catch(() => {
+          this.forceWaitingEvent = true;
+          this.showLoader = false;
           this.showVideoPlay = true;
           this.$refs.videoPlayButton.addEventListener(
             "click",
@@ -671,6 +674,9 @@ export default {
     },
 
     videoEventWaiting() {
+      if (this.forceWaitingEvent) {
+        return;
+      }
       this.showLoader = true;
     },
 
