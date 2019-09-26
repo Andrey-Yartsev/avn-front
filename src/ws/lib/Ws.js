@@ -53,6 +53,12 @@ export default class Ws extends WsAbstract {
       this.actions.payoutsLegalResult(data);
       return;
     }
+    if (data.stories) {
+      data.stories.forEach(story => {
+        Store.commit("stories/extendPost", story);
+      });
+      return;
+    }
     this.emit("message", data);
     // console.log("ws:", data);
     const keys = Object.keys(data);

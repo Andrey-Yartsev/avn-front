@@ -49,6 +49,14 @@ const mutations = {
   },
   setLimit(state, { limit }) {
     state.limit = limit;
+  },
+  extendPost(state, data) {
+    state.posts = state.posts.map(v => {
+      if (v.id === data.id) {
+        v = { ...v, ...data };
+      }
+      return v;
+    });
   }
 };
 
