@@ -1,7 +1,7 @@
 <template>
   <div class="payouts-bank">
     <div class="PayoutsBankView" v-if="!loading">
-      <h1 class="form-title">
+      <h1 class="form-title settings-title">
         Add Bank
       </h1>
       <form class="payouts-bank-form" v-on:submit.stop.prevent="save">
