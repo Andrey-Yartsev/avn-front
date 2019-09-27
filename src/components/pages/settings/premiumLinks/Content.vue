@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="rounded-container"
-    id="payouts-container"
-  >
+  <div class="rounded-container" id="payouts-container">
     <div class="payouts payouts_height-reset">
       <Form v-if="user.isWantEarn && user.subscribePrice > 0" />
       <div class="PayoutsAccountView" v-else>

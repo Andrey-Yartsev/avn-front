@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="rounded-container pos-relative"
-    id="payouts-container"
-  >
+  <div class="rounded-container pos-relative" id="payouts-container">
     <div class="payouts">
       <div
         class="border-top shadow-block loader-container loader-container_center"
