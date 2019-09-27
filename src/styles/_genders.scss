@@ -165,6 +165,14 @@
           line-height: normal;
           font-size: 17px;
         }
+
+        &.everyone,
+        &.straight {
+
+          &:after {
+            margin-top: 2px;
+          }
+        }
       }
     }
   }
