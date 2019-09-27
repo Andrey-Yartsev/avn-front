@@ -23,7 +23,7 @@ const mutations = {
     state.postReportReasons = data;
   },
 
-  updatePostSuccess(state, data) {
+  reloadPostSuccess(state, data) {
     state.updatedPost = data;
   }
 };
@@ -39,7 +39,7 @@ const actions = {
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(post) {
-            commit("updatePostSuccess", post);
+            commit("reloadPostSuccess", post);
           });
         }
       })
