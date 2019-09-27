@@ -48,11 +48,6 @@
     position: relative;
     margin-bottom: 15px;
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      margin-top: 70px;
-      border-top: 1px solid rgba($gray, 0.2);
-    }
-
     &:before {
       content: "";
       top: 0;
@@ -657,6 +652,14 @@
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         flex: 0 0 auto;
+      }
+    }
+
+    .site-footer {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        margin-top: 70px;
+        border-top: 1px solid rgba($gray, 0.2);
       }
     }
   }
