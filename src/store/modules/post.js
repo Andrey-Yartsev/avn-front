@@ -34,7 +34,7 @@ const actions = {
     commit("modal/hide", { name: "addPost" }, { root: true });
   },
 
-  updatePost({ commit }, { postId }) {
+  reloadPost({ commit }, { postId }) {
     return PostApi.getPost({ postId })
       .then(response => {
         if (response.status === 200) {

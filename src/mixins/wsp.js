@@ -26,7 +26,7 @@ export default {
       wsp.send(ids);
     },
     reloadPost(postId) {
-      this.$store.dispatch("post/updatePost", { postId });
+      this.$store.dispatch("post/reloadPost", { postId });
     }
   },
   created() {
