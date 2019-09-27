@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-container rounded-container_fluid-height">
+  <div class="rounded-container">
     <div class="products">
       <Products />
     </div>

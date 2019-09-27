@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-container rounded-container_fluid-height"
+    class="rounded-container"
     id="payouts-container"
   >
     <div class="payouts payouts_height-reset">

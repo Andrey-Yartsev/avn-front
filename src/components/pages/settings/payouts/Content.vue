@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-container rounded-container_fluid-height"
+    class="rounded-container pos-relative"
     id="payouts-container"
   >
     <div class="payouts">

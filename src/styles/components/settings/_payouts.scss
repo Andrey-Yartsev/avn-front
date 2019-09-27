@@ -253,7 +253,6 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     min-height: 506px;
-    position: relative;
   }
 
   &_height-reset {

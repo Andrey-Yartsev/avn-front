@@ -28,7 +28,7 @@
     <div class="container">
       <div class="row">
         <div class="content-col" :class="{ 'hidden-mobile': isHome }">
-          <div class="rounded-container rounded-container_fluid-height">
+          <div class="rounded-container">
             <slot name="content" />
           </div>
         </div>

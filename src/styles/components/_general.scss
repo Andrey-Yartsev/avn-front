@@ -165,12 +165,22 @@ strong {
     }
   }
 
-  &_reset-bt {
+  &_reset {
 
-    &-desk {
+    &-pt {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        border-top: none;
+        padding-top: 0;
+      }
+    }
+
+    &-bt {
+
+      &-desk {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          border-top: none;
+        }
       }
     }
   }

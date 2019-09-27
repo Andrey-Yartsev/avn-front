@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="content-col" :class="{ 'hidden-mobile': isHome }">
-          <div class="rounded-container rounded-container_fluid-height">
+          <div class="rounded-container">
             <DefaultSection />
           </div>
           <div class="site-footer hidden-mobile" v-if="$mq === 'desktop'">

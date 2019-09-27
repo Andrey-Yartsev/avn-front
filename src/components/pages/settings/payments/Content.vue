@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-container rounded-container_fluid-height">
+  <div class="rounded-container">
     <div class="payments">
       <div class="payments-card" v-if="cardConnected">
         <div class="payment-card">
@@ -19,7 +19,10 @@
               <Loader :fullscreen="false" text="" :small="true" />
             </div>
 
-            <div class="shadow-block border-top no-padding" v-else-if="card">
+            <div
+              class="shadow-block border-top border-top_reset-pt"
+              v-else-if="card"
+            >
               <div class="container">
                 <div class="cards-list">
                   <div class="item visa" :class="getCardType(card)">

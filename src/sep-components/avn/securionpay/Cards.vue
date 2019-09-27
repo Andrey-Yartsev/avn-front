@@ -1,15 +1,20 @@
 <template>
-  <div class="shadow-block border-top no-padding cards">
+  <div
+    class="shadow-block border-top cards"
+    :class="{ 'border-top_reset-pt': cards.length }"
+  >
     <div class="container">
-      <div
-        :fullscreen="false"
-        class="loader-container loader-container_center"
-        v-if="loading"
-      >
-        <Loader text="" :small="true" :semilight="true" />
+      <div class="loader-infinity" v-if="loading">
+        <Loader
+          text=""
+          :small="true"
+          :semilight="true"
+          :inline="true"
+          :fullscreen="false"
+        />
       </div>
 
-      <div class="cards-list" v-else>
+      <div class="cards-list" v-else-if="cards.length">
         <div
           v-for="card in cards"
           :key="card.id"

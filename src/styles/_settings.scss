@@ -38,6 +38,10 @@
 
     .content-col {
       order: 2;
+
+      .rounded-container {
+        min-height: calc(100vh - 185px);
+      }
     }
   }
 
