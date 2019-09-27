@@ -86,6 +86,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/forgot",
+    name: "StaticPage",
     component: ForgotPasswordPage,
     meta: {
       cssName: "forgot"
@@ -488,6 +489,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/terms",
+    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "terms",
@@ -498,6 +500,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/privacy",
+    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "privacy",
@@ -508,6 +511,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/contact",
+    name: "StaticPage",
     component: ContactsPage,
     meta: {
       staticPage: true,
@@ -554,6 +558,7 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/usc2257",
+    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "usc2257",
