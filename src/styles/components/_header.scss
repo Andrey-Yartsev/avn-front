@@ -1035,7 +1035,8 @@
     .icn-post {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        margin: -2px 5px 0 -5px;
+        margin: 0 5px 0 -5px;
+        transform: translateY(-2px);
       }
     }
   }
