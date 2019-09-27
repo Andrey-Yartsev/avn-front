@@ -12,15 +12,13 @@
       </div>
       <template v-else>
         <div class="PayoutsAccountView" v-if="!user.isWantEarn">
-          <h1 class="form-title">
+          <h1 class="form-title settings-title">
             Payouts
           </h1>
           <div class="form-title form-title__default-text border-top centered">
-            <div class="inner">
-              You need to enable <b>Earn money</b> option in
-              <router-link to="/settings/profile">Profile</router-link>
-              settings
-            </div>
+            You need to enable <b>Earn money</b> option in
+            <router-link to="/settings/profile">Profile</router-link>
+            settings
           </div>
         </div>
 
