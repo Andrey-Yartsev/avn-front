@@ -360,9 +360,11 @@ export default {
     this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
+
     Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     Streams.config.remoteVideo = document.getElementById("remotevideo");
     Streams.viewStream();
+
     this.updateLikes();
     document.body.classList.add("stream-viewer");
   },
@@ -412,7 +414,6 @@ export default {
       onSetupStreamingSession: function() {},
 
       onStreamError: function(error) {
-        console.log(error);
         if (error.match(/403/)) {
           o.$store.dispatch("global/setError", {
             message: "You have been blocked on this stream"

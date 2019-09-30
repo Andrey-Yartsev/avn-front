@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import StreamApi from "@/api/stream";
+
 export default {
   name: "TopLives",
   data() {
@@ -65,6 +67,12 @@ export default {
   computed: {
     length() {
       return this.lives.length;
+    },
+    stream() {
+      return this.lives[this.current];
+    },
+    user() {
+      return this.stream.user;
     }
   },
   methods: {
@@ -82,12 +90,22 @@ export default {
       this.setData();
       this.run();
     },
-    openLive() {
+    async openLive() {
+      if (await StreamApi.needSubscribe(this.stream.id)) {
+        this.$store.dispatch("modal/show", {
+          name: "subscribe",
+          data: {
+            user: this.user
+          }
+        });
+        return;
+      }
+
       if (this.lives[this.current]) {
         this.$store.dispatch("modal/show", {
           name: "stream",
           data: {
-            stream: this.lives[this.current]
+            stream: this.stream
           }
         });
       }

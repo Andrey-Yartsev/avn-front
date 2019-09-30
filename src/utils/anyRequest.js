@@ -3,6 +3,10 @@ import Store from "@/store";
 import request from "./request";
 
 export default async (apiPath, options) => {
+  if (!options) {
+    options = {};
+  }
+
   const query = {
     ...options.query
   };

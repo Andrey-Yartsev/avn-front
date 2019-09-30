@@ -1,8 +1,18 @@
 import tokenRequest from "@/utils/tokenRequest";
+import Store from "@/store";
 
 export default {
   getStreamPath(token) {
     return `${process.env.VUE_APP_API_URL}/streams/url?access-token=${token}`;
+  },
+  async needSubscribe(id) {
+    const token = Store.state.auth.token;
+    const r = await fetch(this.getStreamClientPath(id, token));
+
+    if (r.status === 400) {
+      return true;
+    }
+    return false;
   },
   getStreamClientPath(id, token) {
     return `${

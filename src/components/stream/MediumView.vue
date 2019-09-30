@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import StreamApi from "@/api/stream";
+
 export default {
   name: "Live",
   props: {
@@ -84,7 +86,17 @@ export default {
     }
   },
   methods: {
-    run() {
+    async run() {
+      if (await StreamApi.needSubscribe(this.post.id)) {
+        this.$store.dispatch("modal/show", {
+          name: "subscribe",
+          data: {
+            user: this.user
+          }
+        });
+        return;
+      }
+
       this.$store.dispatch("modal/show", {
         name: "stream",
         data: {
