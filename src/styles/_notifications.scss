@@ -134,8 +134,13 @@
         background-color: $white;
         padding: 39px 0 40px;
         border-radius: 0 0 5px 5px;
-        min-height: 88px;
+        min-height: calc(100vh - 188px);
         margin-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
       }
     }
   }
@@ -184,7 +189,25 @@
   .notifications-popup & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      min-height: 88px;
+      min-height: calc(100vh - 188px);
+    }
+  }
+
+  &:before {
+
+    .notifications-popup & {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        min-height: calc(100vh - 188px);
+        background-color: $white;
+        border-radius: 0 0 5px 5px;
+        z-index: -1;
+      }
     }
   }
 }
