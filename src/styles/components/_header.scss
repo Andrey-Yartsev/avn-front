@@ -1532,18 +1532,30 @@
       }
     }
     &__award {
-      &:after {
-        content: "\E675";
+
+      &-avn {
+
+        &:after {
+          content: "\E675";
+        }
+      }
+
+      &-gayvn {
+
+        &:after {
+          content: "\E681";
+          left: 25px;
+        }
       }
     }
     &__statistics {
       &:after {
-        content: "\E639";
+        content: "\E679";
       }
     }
     &__payouts {
       &:after {
-        content: "\E63C";
+        content: "\E680";
       }
     }
     &__payments {

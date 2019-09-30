@@ -61,7 +61,8 @@
               >
               <router-link
                 v-for="(v, i) in nominationRoutes"
-                class="user-menu-item user-menu-item__award icn-item"
+                class="user-menu-item icn-item"
+                :class="'user-menu-item__award-' + v.name"
                 :to="v.path ? v.path : '/settings/' + v.name"
                 :key="'i' + i"
                 >{{ v.title }}</router-link
