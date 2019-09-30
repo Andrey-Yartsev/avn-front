@@ -29,6 +29,9 @@
   </div>
   <div v-else>
     <div :class="containerClass">
+      <div class="auth-block__title">
+        Login to AVN Stars
+      </div>
       <form
         v-on:submit.stop.prevent="login"
         :class="{ 'login-form': type === 'page' }"

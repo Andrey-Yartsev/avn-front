@@ -6,6 +6,7 @@
       slot="content"
     >
       <div class="content content_relative">
+        <component :is="logo" class="auth-logo header-logo_size" />
         <LoginForm type="modal" @openSignup="_close" />
       </div>
       <button
@@ -40,6 +41,9 @@ export default {
     },
     disableFooter() {
       return !!this.$store.state.modal.login.data.disableFooter;
+    },
+    logo() {
+      return "rl-logo";
     }
   },
   methods: {

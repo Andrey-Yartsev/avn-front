@@ -2,6 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-login" slot="content">
       <div class="content content_relative">
+        <component :is="logo" class="auth-logo header-logo_size" />
         <SignupForm type="modal" @openLogin="_close" />
       </div>
       <button
@@ -36,6 +37,9 @@ export default {
     },
     disableFooter() {
       return !!this.$store.state.modal.login.data.disableFooter;
+    },
+    logo() {
+      return "rl-logo";
     }
   },
   methods: {

@@ -494,14 +494,31 @@
   position: relative;
   text-indent: -999em;
 
-  @include media-breakpoint-up($desktop-breakpoint) {
-    height: 50px;
-  }
-
   .not-authorized & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-left: 0;
+    }
+  }
+
+  &_size {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: 50px;
+    }
+
+    svg {
+
+      .avn-style & {
+        width: 45px;
+        height: 34px;
+        fill: $main-color;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          width: 75px;
+          height: 35px;
+        }
+      }
     }
   }
 
@@ -519,17 +536,6 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       width: 125px;
       height: 30px;
-    }
-
-    .avn-style & {
-      width: 45px;
-      height: 34px;
-      fill: $main-color;
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: 75px;
-        height: 35px;
-      }
     }
   }
 }
