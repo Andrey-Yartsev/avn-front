@@ -3,9 +3,7 @@
     <div class="bg bg-color bg-gradient_light" v-if="$mq === 'desktop'">
       <img v-if="profile.header" :src="profile.header" />
     </div>
-    <div class="user-container"
-      :class="{ 'user-container_numbered': true }"
-    >
+    <div class="user-container" :class="{ 'user-container_numbered': top }">
       <div class="avatar avatar_md avatar_md-desk">
         <span
           class="avatar__img"
@@ -37,7 +35,7 @@
             }}</router-link>
           </span>
         </div>
-        <div class="user-actions" v-if="false">
+        <div class="user-actions" v-if="!top">
           <SubscribeButton
             :profile="profile"
             :actionPrefix="actionPrefix"
@@ -59,7 +57,9 @@
           />
         </div>
       </div>
-      <div class="user-num-list"><span class="user-num-list__text">13</span></div>
+      <div class="user-num-list" :class="{ 'red-num': num == 1 }" v-if="top">
+        <span class="user-num-list__text">{{ num }}</span>
+      </div>
       <p
         class="profile-text"
         v-if="profile.about"
@@ -105,6 +105,13 @@ export default {
     actionPrefix: {
       type: String,
       required: true
+    },
+    top: {
+      type: Boolean,
+      default: false
+    },
+    num: {
+      type: String
     }
   },
   computed: {
@@ -119,3 +126,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.red-num {
+  background: #ea1145;
+  color: #fff;
+}
+</style>

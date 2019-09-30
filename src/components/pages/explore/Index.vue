@@ -48,6 +48,7 @@
               v-if="page === 'topmodels'"
               :items="topModels"
               actionPrefix="topModels"
+              :top="true"
             />
             <div v-else-if="page === 'feed'" class="feed-wrapper">
               <PostCollection

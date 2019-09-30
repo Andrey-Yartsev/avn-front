@@ -1,11 +1,13 @@
 <template>
   <div class="explore-wrapper users">
     <User
-      v-for="item in items"
+      v-for="(item, i) in items"
       v-bind:key="item.id"
       :profile="item"
       :actionPrefix="actionPrefix"
       :ref="'user' + item.id"
+      :top="top"
+      :num="i + 1"
     />
   </div>
 </template>
@@ -26,6 +28,10 @@ export default {
     actionPrefix: {
       type: String,
       required: true
+    },
+    top: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
