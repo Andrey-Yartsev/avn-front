@@ -3,7 +3,9 @@
     <div class="bg bg-color bg-gradient_light" v-if="$mq === 'desktop'">
       <img v-if="profile.header" :src="profile.header" />
     </div>
-    <div class="user-container">
+    <div class="user-container"
+      :class="{ 'user-container_numbered': true }"
+    >
       <div class="avatar avatar_md avatar_md-desk">
         <span
           class="avatar__img"
@@ -35,7 +37,7 @@
             }}</router-link>
           </span>
         </div>
-        <div class="user-actions">
+        <div class="user-actions" v-if="false">
           <SubscribeButton
             :profile="profile"
             :actionPrefix="actionPrefix"
@@ -57,6 +59,7 @@
           />
         </div>
       </div>
+      <div class="user-num-list"><span class="user-num-list__text">13</span></div>
       <p
         class="profile-text"
         v-if="profile.about"

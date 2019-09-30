@@ -314,6 +314,10 @@
         padding-top: 20px;
       }
     }
+
+    &_numbered {
+      padding-right: 75px;
+    }
   }
 
   .names-actions-wrapper {
@@ -384,4 +388,22 @@
   margin-top: 8px;
   text-align: left;
   font-size: 13px;
+}
+
+.user-num-list {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: rgba($gray, 0.1);
+  font-size: 32px;
+  width: 60px;
+
+  &__text {
+    opacity: .6;
+  }
 }
