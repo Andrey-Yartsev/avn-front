@@ -129,7 +129,7 @@ export default {
 
 <style>
 .red-num {
-  background: #ea1145;
+  background: #ea1145 !important;
   color: #fff;
 }
 </style>
