@@ -1377,4 +1377,8 @@ select {
   &:not(.shadow-block) {
     margin-bottom: 24px;
   }
+
+  &.shadow-block {
+    padding-bottom: 5px;
+  }
 }
