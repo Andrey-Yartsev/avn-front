@@ -57,7 +57,11 @@
           />
         </div>
       </div>
-      <div class="user-num-list" :class="{ 'red-num': num == 1 }" v-if="top">
+      <div
+        class="user-num-list"
+        :class="{ 'user-num-list_first': num == 1 }"
+        v-if="top"
+      >
         <span class="user-num-list__text">{{ num }}</span>
       </div>
       <p
@@ -126,10 +130,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.red-num {
-  background: #ea1145;
-  color: #fff;
-}
-</style>
