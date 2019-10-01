@@ -204,7 +204,7 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
-import gayDomain from "@/helpers/gayDomain";
+import { gayDomain } from "@/helpers/domains";
 
 export default {
   name: "NominationSettingsContent",
@@ -239,8 +239,6 @@ export default {
       } else {
         url = gayDomain(path);
       }
-
-      // console.log(gayDomain(), path);
 
       return url;
     },

@@ -133,7 +133,7 @@ export default {
       return this.$store.state.subscription.updated;
     },
     genderCategory() {
-      return this.$store.state.explore.gender.category;
+      return this.$store.state.gender.category;
     }
   },
   methods: {

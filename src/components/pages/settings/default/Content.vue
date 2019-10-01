@@ -295,7 +295,8 @@
                     <select
                       name="categoryView"
                       class="default-disabled"
-                      v-model="localUser.categoryView"
+                      :value="user.categoryView"
+                      @change="categoryViewChanged"
                     >
                       <option
                         v-for="gender in genderViewPreferenceList"
@@ -351,6 +352,9 @@ export default {
         secondColor: this.localUser.secondColor
       });
       this.$store.dispatch("profile/update", this.localUser);
+    },
+    categoryViewChanged(e) {
+      this.$store.dispatch("gender/switchCategory", e.target.value);
     }
   },
 

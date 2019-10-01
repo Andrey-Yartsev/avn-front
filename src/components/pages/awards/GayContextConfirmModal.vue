@@ -29,7 +29,6 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import gayDomain from "@/helpers/gayDomain";
 
 export default {
   name: "GayContextConfirmModal",
@@ -38,18 +37,15 @@ export default {
   },
   methods: {
     yes() {
-      let token = "";
-      if (this.$store.state.auth.token) {
-        token = "?auth_token=" + this.$store.state.auth.token;
-      }
-      window.location = gayDomain() + token;
+      this.$store.dispatch("gender/switchCategory", 3);
       this.close();
     },
     no() {
+      this.$store.dispatch("gender/doNotSuggestSomeTime");
       this.close();
     },
     notAsk() {
-      this.$store.dispatch("explore/gender/doNotSuggest");
+      this.$store.dispatch("gender/doNotSuggest");
       this.close();
     },
     close() {

@@ -58,7 +58,10 @@ const actions = {
       extendBeforeUpdate: true
     });
   },
-  _update({ commit, dispatch }, { user, silent, extendBeforeUpdate }) {
+  _update(
+    { commit, dispatch, rootState },
+    { user, silent, extendBeforeUpdate }
+  ) {
     commit("setError", null);
     commit("setLoading", true);
     if (extendBeforeUpdate) {
@@ -88,7 +91,11 @@ const actions = {
           if (!extendBeforeUpdate) {
             dispatch("auth/extendUser", r, { root: true });
           }
-          dispatch("profile/home/extend", r, { root: true });
+          if (rootState.profile.home.profile) {
+            if (rootState.profile.home.profile.id === rootState.auth.user.id) {
+              dispatch("profile/home/extend", r, { root: true });
+            }
+          }
           if (!silent) {
             dispatch(
               "global/flashToast",

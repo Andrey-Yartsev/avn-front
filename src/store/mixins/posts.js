@@ -8,7 +8,7 @@ const result = {
       const { limit, offset, marker, source } = state;
       commit("postsRequest");
 
-      const category = rootState.explore.gender.category;
+      const category = rootState.gender.category;
 
       return PostApi.getPosts({ limit, offset, marker, source, category })
         .then(response => {

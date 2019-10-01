@@ -71,18 +71,18 @@ const queryParams = queryString.parse(window.location.search);
 
 if (queryParams.auth_token) {
   BrowserStore.set("token", queryParams.auth_token);
-  setTimeout(() => {
-    const l = window.location;
-    window.location = l.origin + l.pathname;
-  }, 100);
-} else {
-  const MyApp = new Vue({
-    router,
-    template: "<App/>",
-    store,
-    components: { App }
-  }).$mount("#app");
-
-  MyApp.$root.showTips = true;
-  MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";
+  window.history.pushState({}, document.title, window.location.pathname);
+} else if (queryParams.gender) {
+  BrowserStore.set("genderCategory", queryParams.gender);
+  window.history.pushState({}, document.title, window.location.pathname);
 }
+
+const MyApp = new Vue({
+  router,
+  template: "<App/>",
+  store,
+  components: { App }
+}).$mount("#app");
+
+MyApp.$root.showTips = true;
+MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";

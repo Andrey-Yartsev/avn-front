@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     selected() {
-      return this.$store.state.explore.gender.category;
+      return this.$store.state.gender.category;
     },
     _options() {
       return this.$store.state.init.data.categoryView.map(v => {
@@ -88,14 +88,7 @@ export default {
       this.$emit("hideDropdawn");
     },
     select(id) {
-      if (this.user) {
-        const user = { ...this.$store.state.auth.user };
-        user.categoryView = id;
-        this.$store.dispatch("profile/updateSilent", user);
-        this.$store.commit("explore/gender/setCategory", id);
-      } else {
-        this.$store.dispatch("explore/gender/setGuestCategory", id);
-      }
+      this.$store.dispatch("gender/switchCategory", id);
       this.close();
     }
   }

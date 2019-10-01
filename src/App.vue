@@ -307,7 +307,7 @@ export default {
     loading(loading) {
       if (!loading) {
         this.initWs();
-        this.initGayVn();
+        this.$store.dispatch("gender/init");
       }
     }
   },
@@ -360,32 +360,6 @@ export default {
           trialLogger.info("user does not exists");
         }
       }, 1000);
-    },
-    initGayVn() {
-      if (!window.location.hostname.match(/gayvn/)) {
-        return;
-      }
-
-      if (!this.user) {
-        if (!BrowserStore.get("genderCategory")) {
-          this.$store.dispatch("explore/gender/setGuestCategory", 3);
-        }
-      } else {
-        setTimeout(() => {
-          if (this.user.categoryView !== 3) {
-            this.$store.dispatch("profile/extendSilent", {
-              categoryView: 3
-            });
-            this.$store.dispatch(
-              "global/flashToast",
-              {
-                text: "Your Default Viewing Preference was switched to Gay"
-              },
-              { root: true }
-            );
-          }
-        }, 2000);
-      }
     }
   },
   created() {
@@ -402,8 +376,6 @@ export default {
     window.addEventListener("message", postMessageHandler);
 
     this.initTrial();
-
-    this.$store.dispatch("explore/gender/initGuestCategory");
   },
 
   beforeDestroy() {

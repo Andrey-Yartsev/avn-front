@@ -44,7 +44,7 @@ const mutations = {
 const actions = {
   getPosts({ dispatch, commit, state, rootState }) {
     const { limit, offset, marker } = state;
-    const category = rootState.explore.gender.category;
+    const category = rootState.gender.category;
 
     commit("postsRequest");
     dispatch("topModelsRequest", { limit, offset, marker, category }).then(

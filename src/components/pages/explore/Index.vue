@@ -236,7 +236,7 @@ export default {
       return PostSmall;
     },
     category() {
-      return this.$store.state.explore.gender.category;
+      return this.$store.state.gender.category;
     }
   },
   methods: {

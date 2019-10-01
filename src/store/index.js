@@ -54,6 +54,7 @@ import postLikes from "@/store/modules/postLikes";
 import awards from "@/store/modules/awards";
 import products from "@/store/modules/products";
 import comments from "@/store/modules/comments";
+import gender from "@/store/modules/gender";
 
 Vue.use(Vuex);
 
@@ -113,7 +114,8 @@ const store = new Vuex.Store({
     postLikes,
     awards,
     products,
-    comments
+    comments,
+    gender
   }
 });
 

@@ -63,7 +63,7 @@ const mutations = {
 const actions = {
   getPosts({ commit, rootState }) {
     const { limit, offset, marker, source } = state;
-    const category = rootState.explore.gender.category;
+    const category = rootState.gender.category;
 
     commit("postsRequest");
 
