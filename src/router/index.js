@@ -486,17 +486,17 @@ const routes = [
     }
   },
   // STATIC PAGES
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/terms",
-    name: "StaticPage",
-    component: StaticPage,
-    meta: {
-      apiPoint: "terms",
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
+  // {
+  //   beforeEnter: Auth.requireAny,
+  //   path: "/terms",
+  //   name: "StaticPage",
+  //   component: StaticPage,
+  //   meta: {
+  //     apiPoint: "terms",
+  //     staticPage: true,
+  //     cssName: "staticPage"
+  //   }
+  // },
   {
     beforeEnter: Auth.requireAny,
     path: "/privacy",

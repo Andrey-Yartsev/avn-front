@@ -270,7 +270,8 @@
                     <select
                       name="gender"
                       class="default-disabled"
-                      v-model="localUser.gender"
+                      :value="localUser.gender"
+                      @change="genderChanged"
                     >
                       <option value="0">Not specified</option>
                       <option
@@ -355,6 +356,14 @@ export default {
     },
     categoryViewChanged(e) {
       this.$store.dispatch("gender/switchCategory", e.target.value);
+    },
+    genderChanged(e) {
+      const gender = parseInt(e.target.value);
+      // 2 - female
+      if (gender === 2 && this.localUser.category === 3) {
+        this.localUser.category = 2;
+      }
+      this.localUser.gender = gender;
     }
   },
 
@@ -369,10 +378,14 @@ export default {
       return this.$store.state.init.data.genders;
     },
     genderPreferenceList() {
-      return this.$store.state.init.data.categoryUser.map(v => {
+      const list = this.$store.state.init.data.categoryUser.map(v => {
         v.title = v.name[0].toUpperCase() + v.name.slice(1);
         return v;
       });
+      if (this.localUser.gender === 2) {
+        return list.filter(v => v.id !== 3);
+      }
+      return list;
     },
     genderViewPreferenceList() {
       return this.$store.state.init.data.categoryView.map(v => {

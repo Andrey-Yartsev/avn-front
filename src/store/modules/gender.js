@@ -27,6 +27,9 @@ const actions = {
     } else {
       const user = rootState.auth.user;
 
+      if (!user) {
+        return;
+      }
       if (dispatch("switchDomain", user.categoryView)) {
         return;
       }
