@@ -170,9 +170,9 @@
 
     &__cell {
       &.date {
-        flex: 0 1 17%;
+        flex: 0 1 15%;
         padding-left: 4px;
-        max-width: 17%;
+        max-width: 15%;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 19%;
@@ -182,6 +182,7 @@
 
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           font-size: 13px;
+          white-space: nowrap;
         }
       }
 
@@ -207,9 +208,9 @@
         }
 
         &_purchases {
-          flex: 0 1 calc(63% - 50px);
+          flex: 0 1 calc(63% - 80px);
           padding-left: 15px;
-          max-width: calc(63% - 50px);
+          max-width: calc(63% - 80px);
 
           @include media-breakpoint-up($desktop-breakpoint) {
             flex: 0 1 calc(60.5% - 120px);
@@ -234,8 +235,8 @@
       &.product {
         justify-content: center;
         margin-right: 5px;
-        flex: 0 0 100px;
-        max-width: 100px;
+        flex: 0 0 84px;
+        max-width: 84px;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           margin-right: 20px;
@@ -633,7 +634,6 @@
     .empty-table-info {
       margin-left: -15px;
       margin-right: -15px;
-      margin-bottom: -14px;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         margin-left: -10px;
@@ -728,4 +728,30 @@
   padding: 0;
   color: $red;
   font-size: 18px;
+}
+
+.table-empty {
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-wrapper {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0;
+    }
+  }
+
+  .empty-table-info {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-container">
+  <div class="creditsView">
     <h1
       class="form-title hidden-mobile settings-title"
       v-if="$mq === 'desktop'"

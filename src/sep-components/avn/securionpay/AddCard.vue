@@ -25,15 +25,14 @@
           <Cards @showForm="onShowCardsForm" @replaceCard="replaceCard" />
         </div>
       </div>
-      <Transactions />
     </div>
     <div class="PayoutsBankView" v-else>
       <h1 class="form-title settings-title">
         {{ title }}
       </h1>
       <CardForm @cancel="onShowCardsForm(false)" :cardId="cardId" />
-      <Transactions />
     </div>
+    <Transactions />
   </div>
 </template>
 

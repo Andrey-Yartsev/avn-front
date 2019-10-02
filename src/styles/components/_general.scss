@@ -216,6 +216,14 @@ strong {
     flex: 1;
     min-height: 100%;
   }
+
+  .settings-page & {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
 .text-centered {

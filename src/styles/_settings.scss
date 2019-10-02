@@ -18,14 +18,43 @@
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     min-height: 100%;
+    max-width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .row {
+      flex: 1;
+    }
 
     .aside-col {
       order: 1;
       position: relative;
+      flex: 1;
     }
 
     .content-col {
       order: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rounded-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      > * {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
     }
   }
 

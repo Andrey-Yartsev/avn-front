@@ -1,8 +1,6 @@
 <template>
-  <div class="rounded-container">
-    <div class="products">
-      <Products />
-    </div>
+  <div class="products">
+    <Products />
   </div>
 </template>
 
