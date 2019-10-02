@@ -389,7 +389,11 @@ button.balance-info {
 
       &:after {
         left: auto;
-        right: 160px;
+        right: 154px;
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: 160px;
+        }
       }
     }
   }
