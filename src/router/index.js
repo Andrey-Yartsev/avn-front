@@ -486,17 +486,17 @@ const routes = [
     }
   },
   // STATIC PAGES
-  // {
-  //   beforeEnter: Auth.requireAny,
-  //   path: "/terms",
-  //   name: "StaticPage",
-  //   component: StaticPage,
-  //   meta: {
-  //     apiPoint: "terms",
-  //     staticPage: true,
-  //     cssName: "staticPage"
-  //   }
-  // },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/terms",
+    name: "StaticPage",
+    component: StaticPage,
+    meta: {
+      apiPoint: "terms",
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
   {
     beforeEnter: Auth.requireAny,
     path: "/privacy",
@@ -581,7 +581,8 @@ const routes = [
     meta: {
       noAuthSection: true,
       staticPage: true,
-      cssName: "staticPage"
+      cssName: "staticPage",
+      notShowGenderFilter: true
     }
   },
   {
@@ -592,18 +593,21 @@ const routes = [
       noAuthSection: true,
       staticPage: true,
       cssName: "staticPage",
-      isGay: true
+      isGay: true,
+      notShowGenderFilter: true
     }
   },
   {
     beforeEnter: Auth.requireAny,
     path: "/nominator/:username/:type/:categories?",
     component: AvnAwards,
+    name: "Nominator",
     meta: {
       noAuthSection: true,
       staticPage: true,
       cssName: "staticPage",
-      predefined: true
+      predefined: true,
+      notShowGenderFilter: true
     }
   }
 ];

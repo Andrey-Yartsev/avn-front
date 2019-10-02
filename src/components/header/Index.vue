@@ -57,7 +57,7 @@
             v-if="!noAuthHeader && !authSection && !noAuthSectionForGuest"
           >
             <Search />
-            <GenderFilter v-if="$route.name !== 'StaticPage'" />
+            <GenderFilter v-if="showGenderFilter" />
             <User />
             <button
               class="btn make-post-btn make-post-btn_header hidden-mobile"
@@ -77,7 +77,7 @@
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
-              <GenderFilter v-if="$route.name !== 'StaticPage'" />
+              <GenderFilter v-if="showGenderFilter" />
               <a
                 href="/register"
                 @click.prevent="openSingupModal"
@@ -200,6 +200,12 @@ export default {
     },
     disabledButton() {
       return this.$route.meta.disabledAddPostButton;
+    },
+    showGenderFilter() {
+      if (this.$route.meta && this.$route.meta.notShowGenderFilter) {
+        return false;
+      }
+      return this.$route.name !== "StaticPage";
     }
   },
   methods: {

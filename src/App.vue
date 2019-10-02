@@ -198,7 +198,8 @@ export default {
     return {
       showToast: false,
       wasLogout: false,
-      containerClassName: ""
+      containerClassName: "",
+      enterRouteName: ""
     };
   },
   computed: {
@@ -307,7 +308,9 @@ export default {
     loading(loading) {
       if (!loading) {
         this.initWs();
-        this.$store.dispatch("gender/init");
+        if (!window.location.pathname.match(/\/nominator\//)) {
+          this.$store.dispatch("gender/init");
+        }
       }
     }
   },
@@ -383,6 +386,7 @@ export default {
   },
 
   mounted() {
+    this.enterRouteName = this.$route.name;
     setTimeout(() => {
       this.$store.commit("global/setScrollBarInitWidth", getScrollbarWidth());
     }, 3000);
