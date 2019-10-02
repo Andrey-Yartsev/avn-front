@@ -1,6 +1,8 @@
 <template>
   <div :class="containerClass">
-    <div class="auth-block__title">
+    <div class="auth-block__title"
+      v-if="$route.name !== 'RegisterPage'"
+    >
       Sign up for AVN Stars
     </div>
     <form v-on:submit.stop.prevent="signUp">

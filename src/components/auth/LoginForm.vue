@@ -29,7 +29,9 @@
   </div>
   <div v-else>
     <div :class="containerClass">
-      <div class="auth-block__title">
+      <div class="auth-block__title"
+        v-if="$route.name !== 'LoginPage'"
+      >
         Login to AVN Stars
       </div>
       <form
