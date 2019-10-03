@@ -33,6 +33,23 @@
     }
   }
 
+  &-mobile {
+    pointer-events: none;
+    position: fixed;
+    z-index: 300;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.opened {
+      pointer-events: auto;
+    }
+
+    &:after {
+
+    }
+  }
+
   &.open {
 
     &:after {
