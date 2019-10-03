@@ -1,5 +1,6 @@
 <template>
-  <div class="more-functions gender-wrapper opened">
+  <div class="more-functions gender-wrapper-mobile open">
+    <div class="more-functions__overlay"></div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul class="more-functions__list">
