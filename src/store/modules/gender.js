@@ -175,7 +175,8 @@ const actions = {
         root: true
       }).then(() => {
         commit("setCategory", id);
-        swtch();
+
+        setTimeout(swtch, 1000);
       });
     } else {
       dispatch("setGuestCategory", id);
