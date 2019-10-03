@@ -183,6 +183,26 @@
       &:before {
         box-shadow: none;
       }
+
+      &.online {
+        position: relative;
+        &:after {
+          background: $secondary-color;
+          width: 6px;
+          height: 6px;
+          content: "";
+          position: absolute;
+          border-radius: 1000px;
+          left: 50%;
+          margin-left: 16px;
+          top: 7px;
+          @include media-breakpoint-up($desktop-breakpoint) {
+            margin-left: 13px;
+            top: 10px;
+          }
+        }
+      }
+
     }
   }
 

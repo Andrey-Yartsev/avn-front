@@ -19,6 +19,21 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
+  },
+  resultConvert: function(res) {
+    res.categoryUser = res.categoryUser.map(v => {
+      if (v.name === "gay") {
+        v.name = "Gay Guys";
+      }
+      return v;
+    });
+    res.categoryView = res.categoryView.map(v => {
+      if (v.name === "gay") {
+        v.name = "Gay Guys";
+      }
+      return v;
+    });
+    return res;
   }
 });
 
