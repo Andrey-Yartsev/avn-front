@@ -41,12 +41,8 @@
     right: 0;
     bottom: 0;
 
-    &.opened {
+    &.open {
       pointer-events: auto;
-    }
-
-    &:after {
-
     }
   }
 
