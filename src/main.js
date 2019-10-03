@@ -71,10 +71,10 @@ const queryParams = queryString.parse(window.location.search);
 
 if (queryParams.auth_token) {
   BrowserStore.set("token", queryParams.auth_token);
-  window.history.pushState({}, document.title, window.location.pathname);
+  //window.history.pushState({}, document.title, window.location.pathname);
 } else if (queryParams.gender) {
   BrowserStore.set("genderCategory", queryParams.gender);
-  window.history.pushState({}, document.title, window.location.pathname);
+  //window.history.pushState({}, document.title, window.location.pathname);
 }
 
 const MyApp = new Vue({
