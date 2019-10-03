@@ -33,6 +33,19 @@
     }
   }
 
+  &-mobile {
+    pointer-events: none;
+    position: fixed;
+    z-index: 300;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.open {
+      pointer-events: auto;
+    }
+  }
+
   &.open {
 
     &:after {
