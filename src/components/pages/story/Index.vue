@@ -118,15 +118,15 @@
         v-if="isOwner(author.id)"
         :class="[
           'more-functions more-functions_sticky more-functions_sticky-br more-functions_dir-inverse',
-          { open: showDropdawnMenu }
+          { open: showDropdownMenu }
         ]"
-        v-click-outside="hideDropdawn"
+        v-click-outside="hideDropdown"
       >
         <div
           class="more-functions__overlay"
-          @click.prevent="hideDropdawn"
+          @click.prevent="hideDropdown"
         ></div>
-        <div class="more-functions__btn" @click.prevent="openDropdawn"></div>
+        <div class="more-functions__btn" @click.prevent="openDropdown"></div>
         <div class="more-functions__dropdown">
           <div class="more-functions__dropdown-inside">
             <ul v-if="!isCollections" class="more-functions__list">
@@ -356,7 +356,7 @@ export default {
       timer: undefined,
       videos: [],
       videoProgress: {},
-      showDropdawnMenu: false,
+      showDropdownMenu: false,
       showLoader: false,
       showVideoPlay: false,
       copied: false,
@@ -633,7 +633,7 @@ export default {
     },
 
     deleteStory() {
-      this.hideDropdawn();
+      this.hideDropdown();
 
       this.$store.dispatch("story/deletePost", {
         postId: this.currentStory.id
@@ -692,14 +692,14 @@ export default {
       }
     },
 
-    openDropdawn() {
-      this.showDropdawnMenu = true;
+    openDropdown() {
+      this.showDropdownMenu = true;
       this.pause();
     },
 
-    hideDropdawn() {
-      if (this.showDropdawnMenu) {
-        this.showDropdawnMenu = false;
+    hideDropdown() {
+      if (this.showDropdownMenu) {
+        this.showDropdownMenu = false;
         this.resume();
       }
     },
@@ -738,7 +738,7 @@ export default {
       });
     },
     editHighlight() {
-      this.hideDropdawn();
+      this.hideDropdown();
       this.pause();
       this.$store.dispatch("modal/show", {
         name: "createHighlights",

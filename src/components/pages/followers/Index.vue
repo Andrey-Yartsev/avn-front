@@ -108,7 +108,7 @@ import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import FollowersCounter from "@/components/common/profile/followersCounter/Index";
-import UserDropdown from "@/components/common/userDropdawn/Index";
+import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/router/backRouter";

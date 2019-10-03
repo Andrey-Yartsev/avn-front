@@ -72,7 +72,8 @@
       />
     </template>
 
-    <PostLikesModal v-if="this.$store.state.modal.postLikes.show" />
+    <PostLikesModal v-if="$store.state.modal.postLikes.show" />
+    <GenderFilterMobile v-if="$store.state.gender.dropdownOpened" />
   </div>
 </template>
 
@@ -107,6 +108,7 @@ import ImageModal from "@/components/modal/Image.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
 import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
 import UserBubble from "@/components/users/UserBubble.vue";
+import GenderFilterMobile from "@/components/common/GenderFilterMobile";
 
 import Cookie from "@/utils/cookie";
 import BrowserStore from "store";
@@ -191,7 +193,8 @@ export default {
     ImageModal,
     TrialConfirmModal,
     GayContextConfirmModal,
-    UserBubble
+    UserBubble,
+    GenderFilterMobile
   },
   mixins: [ColorScheme, BackRouter, FrontUpdate],
   data() {
