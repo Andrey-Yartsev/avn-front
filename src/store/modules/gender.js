@@ -44,20 +44,22 @@ const actions = {
         newCat = 2;
         newCatText = "Straight";
       }
-      dispatch(
-        "profile/extendSilent",
-        {
-          categoryView: newCat
-        },
-        { root: true }
-      );
-      dispatch(
-        "global/flashToast",
-        {
-          text: "Your Default Viewing Preference was switched to " + newCatText
-        },
-        { root: true }
-      );
+      if (newCat) {
+        dispatch(
+          "profile/extendSilent",
+          {
+            categoryView: newCat
+          },
+          { root: true }
+        );
+        dispatch(
+          "global/flashToast",
+          {
+            text: "Your Default Viewing Preference was switched to " + newCatText
+          },
+          { root: true }
+        );
+      }
     }
   },
   initGuestCategory({ commit }) {
