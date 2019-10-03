@@ -32,11 +32,8 @@ const actions = {
       }
       const isGayFront = !!window.location.hostname.match(/gayvn/);
 
-      if (!isGayFront) {
-        return;
-      }
-
       let newCat, newCatText;
+
       if (isGayFront && user.categoryView !== 3) {
         newCat = 3;
         newCatText = "Gay";
@@ -55,7 +52,8 @@ const actions = {
         dispatch(
           "global/flashToast",
           {
-            text: "Your Default Viewing Preference was switched to " + newCatText
+            text:
+              "Your Default Viewing Preference was switched to " + newCatText
           },
           { root: true }
         );
