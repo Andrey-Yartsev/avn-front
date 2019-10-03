@@ -65,7 +65,7 @@
                 :to="'/' + activeUser.username"
                 class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
               >
-                <span class="avatar__img">123
+                <span class="avatar__img">
                   <img :src="activeUser.avatar" v-if="activeUser.avatar" />
                 </span>
               </router-link>
