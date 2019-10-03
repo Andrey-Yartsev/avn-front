@@ -36,7 +36,7 @@ const actions = {
 
       if (isGayFront && user.categoryView !== 3) {
         newCat = 3;
-        newCatText = "Gay";
+        newCatText = "Gay Guys";
       } else if (!isGayFront && user.categoryView === 3) {
         newCat = 2;
         newCatText = "Straight";

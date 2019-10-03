@@ -6,7 +6,7 @@
     >
       <div class="content">
         <div class="popup-alert__title">
-          Switch To Gay Context
+          Switch To Gay Guys Context
         </div>
         <div class="popup-alert__body">
           Would you like to switch your viewing preference to a gay context?

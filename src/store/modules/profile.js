@@ -143,7 +143,7 @@ const actions = {
           "global/flashToast",
           {
             text:
-              "Your Default Viewing Preference & Primary Content Audience was switched to Gay"
+              "Your Default Viewing Preference & Primary Content Audience was switched to Gay Guys"
           },
           { root: true }
         );
