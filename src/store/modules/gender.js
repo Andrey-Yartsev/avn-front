@@ -30,32 +30,34 @@ const actions = {
       if (!user) {
         return;
       }
-      if (dispatch("switchDomain", user.categoryView)) {
-        return;
-      }
-
       const isGayFront = !!window.location.hostname.match(/gayvn/);
 
       if (!isGayFront) {
         return;
       }
 
-      if (user.categoryView !== 3) {
-        dispatch(
-          "profile/extendSilent",
-          {
-            categoryView: 3
-          },
-          { root: true }
-        );
-        dispatch(
-          "global/flashToast",
-          {
-            text: "Your Default Viewing Preference was switched to Gay"
-          },
-          { root: true }
-        );
+      let newCat, newCatText;
+      if (isGayFront && user.categoryView !== 3) {
+        newCat = 3;
+        newCatText = "Gay";
+      } else if (!isGayFront && user.categoryView === 3) {
+        newCat = 2;
+        newCatText = "Straight";
       }
+      dispatch(
+        "profile/extendSilent",
+        {
+          categoryView: newCat
+        },
+        { root: true }
+      );
+      dispatch(
+        "global/flashToast",
+        {
+          text: "Your Default Viewing Preference was switched to " + newCatText
+        },
+        { root: true }
+      );
     }
   },
   initGuestCategory({ commit }) {
