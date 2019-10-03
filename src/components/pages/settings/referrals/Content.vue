@@ -32,7 +32,9 @@
         </button>
       </div>
     </div>
-    <div class="ReferralsBlockCollectionView PayoutsRequestsCollectionView">
+    <div
+      class="ReferralsBlockCollectionView PayoutsRequestsCollectionView settings-wrapper"
+    >
       <div
         class="form-title border-top table-header-title referrals-form-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
       >
@@ -71,7 +73,10 @@
           </div>
         </div>
       </div>
-      <div class="shadow-block no-padding">
+      <div
+        class="shadow-block no-padding"
+        :class="{ 'table-empty': items.length === 0 }"
+      >
         <div class="table-wrapper">
           <div class="table payouts-table">
             <div class="item" v-for="v in items" :key="v.id">

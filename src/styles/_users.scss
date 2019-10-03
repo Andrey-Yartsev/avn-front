@@ -403,6 +403,15 @@
   font-size: 32px;
   width: 60px;
 
+  &_first {
+    background: #ea1145;
+    color: #fff;
+
+    .user-num-list__text {
+      opacity: 1;
+    }
+  }
+
   &__text {
     opacity: .6;
   }

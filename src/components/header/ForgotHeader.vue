@@ -3,7 +3,7 @@
     <div class="header-wrapper">
       <div class="container header_container guest">
         <nav class="header-nav hidden-mobile"></nav>
-        <component :is="logo" class="header-logo" />
+        <component :is="logo" class="header-logo header-logo_size" />
         <router-link to="/register" class="btn border register"
           >Sign up</router-link
         >

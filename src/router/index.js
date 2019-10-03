@@ -50,6 +50,7 @@ const routes = [
   {
     beforeEnter: Auth.requireNonAuth,
     path: "/login",
+    name: "LoginPage",
     component: LoginPage,
     meta: {
       cssName: "login"
@@ -69,6 +70,7 @@ const routes = [
   {
     beforeEnter: Auth.requireNonAuth,
     path: "/register",
+    name: "RegisterPage",
     component: SignUpPage,
     meta: {
       cssName: "login"

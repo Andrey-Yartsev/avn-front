@@ -51,10 +51,10 @@
   padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     max-width: 960px;
-    width: 100%;
     padding-left: 10px;
     padding-right: 10px;
   }

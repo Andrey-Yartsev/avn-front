@@ -539,6 +539,13 @@
           padding-bottom: 12px;
         }
       }
+
+      + .post-attachment {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          padding-top: 2px;
+        }
+      }
     }
 
     .post-datetime {

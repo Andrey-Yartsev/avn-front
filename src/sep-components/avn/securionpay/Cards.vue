@@ -1,7 +1,7 @@
 <template>
   <div
     class="shadow-block border-top cards"
-    :class="{ 'border-top_reset-pt': cards.length }"
+    :class="{ 'shadow-block_reset-pt': cards.length }"
   >
     <div class="container">
       <div class="loader-infinity" v-if="loading">

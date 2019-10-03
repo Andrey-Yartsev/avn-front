@@ -14,7 +14,7 @@
     >
       <div :class="['container', 'header_container']">
         <DesktopHeader v-if="!notFound && $mq === 'desktop'" />
-        <component :is="logo" class="header-logo" />
+        <component :is="logo" class="header-logo header-logo_size" />
         <template v-if="notFound">
           <User />
           <button
@@ -105,6 +105,7 @@
                 </div>
                 <div class="auth-block-dropdown" v-if="opened">
                   <div class="auth-block-dropdown__inside">
+                    <component :is="logo" class="auth-logo header-logo_size" />
                     <SignupForm type="dropdown" v-if="showSignup" />
                     <LoginForm
                       v-else
