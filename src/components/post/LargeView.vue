@@ -37,8 +37,8 @@
           v-if="$mq === 'mobile'"
           :datetime="timePassed"
           :showCopy="!delayedPost"
-          @openDropdawn="dropdownOpened = true"
-          @hideDropdawn="dropdownOpened = false"
+          @openDropdown="dropdownOpened = true"
+          @hideDropdown="dropdownOpened = false"
         />
         <p
           class="text hidden-desktop"

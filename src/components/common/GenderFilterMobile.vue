@@ -1,12 +1,5 @@
 <template>
-  <div
-    :class="['more-functions gender-wrapper', { open: opened }]"
-    v-click-outside="hide"
-  >
-    <div class="more-functions__overlay" @click="hide" />
-    <div class="more-functions__btn btn-gender" @click="open">
-      <span class="icn-item icn-gender" :class="selectedOption.name" />
-    </div>
+  <div class="more-functions gender-wrapper opened">
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
         <ul class="more-functions__list">
@@ -80,20 +73,12 @@ export default {
       this.opened = false;
     },
     open() {
-      if (this.$mq === "mobile") {
-        this.$store.commit("gender/openDropdown");
-      } else {
-        this.opened = true;
-        this.$emit("openDropdown");
-      }
+      this.opened = true;
+      this.$emit("openDropdown");
     },
     hide() {
-      if (this.$mq === "mobile") {
-        this.$store.commit("gender/hideDropdown");
-      } else {
-        this.opened = false;
-        this.$emit("hideDropdown");
-      }
+      this.opened = false;
+      this.$emit("hideDropdown");
     },
     select(id) {
       this.$store.dispatch("gender/switchCategory", id);

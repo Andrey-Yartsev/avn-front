@@ -18,8 +18,8 @@
         <Header
           :post="post"
           :from="from"
-          @openDropdawn="showDropdown = true"
-          @hideDropdawn="showDropdown = false"
+          @openDropdown="showDropdown = true"
+          @hideDropdown="showDropdown = false"
           :showCopy="!delayedPost"
         />
         <p

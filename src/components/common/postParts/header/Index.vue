@@ -97,11 +97,11 @@ export default {
   methods: {
     open() {
       this.opened = true;
-      this.$emit("openDropdawn");
+      this.$emit("openDropdown");
     },
     hide() {
       this.opened = false;
-      this.$emit("hideDropdawn");
+      this.$emit("hideDropdown");
     },
     showBubble() {
       Bubble.open({

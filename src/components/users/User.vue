@@ -49,8 +49,8 @@
           />
           <UserDropdown
             :profile="profile"
-            @openDropdawn="showDropdown = true"
-            @hideDropdawn="showDropdown = false"
+            @openDropdown="showDropdown = true"
+            @hideDropdown="showDropdown = false"
             :actionPrefix="actionPrefix"
             class="hidden-mobile"
             v-if="$mq === 'desktop'"
@@ -84,7 +84,7 @@
 <script>
 import SubscribeButton from "./SubscribeButton";
 import FollowButton from "../pages/search/FollowButton";
-import UserDropdown from "@/components/common/userDropdawn/Index";
+import UserDropdown from "@/components/common/userDropdown/Index";
 import User from "@/mixins/user";
 import truncate from "truncate-html";
 

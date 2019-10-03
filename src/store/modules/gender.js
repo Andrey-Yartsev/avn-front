@@ -6,7 +6,8 @@ import { gayDomain, straightDomain } from "@/helpers/domains";
 
 const state = {
   category: 1,
-  notSuggestStartTime: 0
+  notSuggestStartTime: 0,
+  dropdownOpened: false
 };
 
 const notSuggestSomeTimeMinutes = 60 * 3;
@@ -17,6 +18,12 @@ const mutations = {
   },
   notSuggestStartTime(state, time) {
     state.notSuggestStartTime = time;
+  },
+  openDropdown(state) {
+    state.dropdownOpened = true;
+  },
+  hideDropdown(state) {
+    state.dropdownOpened = false;
   }
 };
 

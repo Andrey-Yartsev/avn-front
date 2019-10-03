@@ -114,7 +114,7 @@
 import UserMixin from "@/mixins/user";
 import Tip from "@/components/common/tip/User";
 import SubscribeButton from "@/components/subscription/Button";
-import UserDropdown from "@/components/common/userDropdawn/Index";
+import UserDropdown from "@/components/common/userDropdown/Index";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {
