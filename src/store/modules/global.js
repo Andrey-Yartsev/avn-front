@@ -25,6 +25,9 @@ const actions = {
   },
 
   setError({ commit }, error) {
+    if (error.message === "Canceled") {
+      return;
+    }
     commit("setError", error);
   },
 
