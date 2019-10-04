@@ -77,3 +77,16 @@
     line-height: 12px;
   }
 }
+
+@mixin onlineIndicator($width: 10px, $height: 10px, $right: auto, $bottom: auto) {
+  content: "";
+  display: inline-block;
+  border: 2px solid $white;
+  background-color: #18B84D;
+  border-radius: 50%;
+  width: $width;
+  height: $height;
+  right: $right;
+  bottom: $bottom;
+  z-index: 5;
+}
