@@ -14,7 +14,11 @@
       v-bind:key="v.id"
     >
       <div class="avatars-wrapper">
-        <router-link :to="'/' + v.user.username" class="avatar avatar_ex-sm">
+        <router-link
+          :to="'/' + v.user.username"
+          class="avatar avatar_ex-sm"
+          :class="{ 'online-state': isOnline(v.user.id) }"
+        >
           <span class="avatar__img">
             <img :src="v.user.avatar" v-if="v.user.avatar" />
           </span>
@@ -45,9 +49,11 @@
 import { fromNow } from "@/helpers/datetime";
 import Loader from "@/components/common/Loader";
 import NotifText from "./Text";
+import User from "@/mixins/user";
 
 export default {
   name: "NotificationSingleView",
+  mixins: [User],
   components: {
     Loader,
     NotifText

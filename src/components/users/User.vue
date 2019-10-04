@@ -4,7 +4,10 @@
       <img v-if="profile.header" :src="profile.header" />
     </div>
     <div class="user-container" :class="{ 'user-container_numbered': top }">
-      <div class="avatar avatar_md avatar_md-desk">
+      <div
+        class="avatar avatar_md avatar_md-desk"
+        :class="{ 'online-state': isOnline(profile.id) }"
+      >
         <span
           class="avatar__img"
           :class="{ 'with-story': profile.hasNotViewedStory }"

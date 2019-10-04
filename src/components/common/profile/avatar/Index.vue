@@ -3,7 +3,7 @@
     <router-link
       :to="`/stories/${profile.id}`"
       v-if="(profile.hasNotViewedStory || profile.hasStory) && !showLiveLabel"
-      class="avatar"
+      class="avatar online-state"
     >
       <span
         class="avatar__img"

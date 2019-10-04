@@ -19,6 +19,7 @@
             <router-link
               :to="'/' + v.items[0].user.username"
               class="avatar avatar_ex-sm"
+              :class="{ 'online-state': isOnline(v.items[0].user.id) }"
             >
               <span class="avatar__img">
                 <img
@@ -49,6 +50,7 @@
               class="avatar avatar_ex-sm"
               v-for="(item, k) in v.items"
               :key="k + v.id + item.user.username"
+              :class="{ 'online-state': isOnline(item.user.id) }"
             >
               <span class="avatar__img">
                 <img :src="item.user.avatar" v-if="item.user.avatar" />
@@ -104,9 +106,11 @@ import { fromNow } from "@/helpers/datetime";
 import { uniqId } from "@/utils/mediaFiles";
 import Loader from "@/components/common/Loader";
 import NotifText from "./Text";
+import User from "@/mixins/user";
 
 export default {
   name: "NotificationMergedView",
+  mixins: [User],
   components: {
     Loader,
     NotifText
