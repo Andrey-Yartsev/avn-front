@@ -4,6 +4,7 @@
     v-model="val"
     :style="computedStyles"
     @keypress.enter.prevent="enter"
+    @keypress="$emit('keypress')"
   ></textarea>
 </template>
 

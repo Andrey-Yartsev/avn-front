@@ -41,7 +41,10 @@
           </div>
           <div class="chatView__body">
             <p class="typing">
-              <template v-if="v.lastMessage">
+              <template v-if="isTyping(v.withUser.id)">
+                <span class="message semi-transparent">User is typing...</span>
+              </template>
+              <template v-else-if="v.lastMessage">
                 <span v-if="v.lastMessage.isTips" class="type-msg-icn">
                   <span class="icn-tips icn-item"></span>
                 </span>
@@ -156,6 +159,9 @@ export default {
     },
     mobileScrollHandler(e) {
       this._scrollHandler(e.target);
+    },
+    isTyping(id) {
+      return this.$store.state.chat.typing.indexOf(id) !== -1;
     }
   },
   mounted() {

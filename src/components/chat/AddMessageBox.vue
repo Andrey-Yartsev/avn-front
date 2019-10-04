@@ -48,6 +48,7 @@
           :minHeight="30"
           :maxHeight="100"
           @enter="sendMessage"
+          @keypress="keypress"
           :disabled="disable"
         ></TextareaAutosize>
 
@@ -280,6 +281,14 @@ export default {
       this.showPaid = false;
       this.closeTip();
       this.resetPrice();
+    },
+    keypress() {
+      this.$root.ws.send({
+        act: "typing",
+        typing_to: this.withUser.id,
+        typing_from_name: this.user.name,
+        typing_from_id: this.user.id
+      });
     }
   }
 };

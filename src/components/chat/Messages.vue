@@ -127,6 +127,11 @@
             </div>
           </div>
         </div>
+
+        <div class="typing semi-transparent">
+          <span v-if="typing">User is typing...</span>&nbsp;
+        </div>
+
         <div
           class="chatFlatLoader new-messages semi-transparent"
           v-if="sending"
@@ -212,6 +217,9 @@ export default {
     },
     fetchingOld() {
       return this.$store.state.chat.fetchingOld;
+    },
+    typing() {
+      return this.$store.state.chat.typing.indexOf(this.withUser.id) !== -1;
     }
   },
 

@@ -19,6 +19,7 @@ import tip from "./actions/tip";
 import message from "./actions/message";
 import new_feed_post from "./actions/new_feed_post";
 import online from "./actions/online";
+import typing from "./actions/typing";
 
 const actions = {
   chats,
@@ -38,7 +39,8 @@ const actions = {
   statistics,
   new_feed_post,
   stream_public,
-  online
+  online,
+  typing
 };
 
 export default class Ws extends WsAbstract {

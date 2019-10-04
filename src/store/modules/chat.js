@@ -18,7 +18,8 @@ const state = {
   offset: 0,
   chats: [],
   chatsLoading: false,
-  moreChatsLoading: false
+  moreChatsLoading: false,
+  typing: []
   //
 };
 
@@ -36,6 +37,8 @@ const markAsRead = (dispatch, params) => {
     _markAsRead(dispatch, params);
   }, 2000);
 };
+
+const typingTimeoutIds = {};
 
 const actions = {
   blockUser({ commit, dispatch }, userId) {
@@ -258,6 +261,21 @@ const actions = {
       messageId: unreadLastMessage.id
     });
     unreadLastMessage = null;
+  },
+  typing({ commit }, id) {
+    if (typingTimeoutIds[id]) {
+      clearTimeout(typingTimeoutIds[id]);
+    }
+    commit("setTyping", {
+      id,
+      isTyping: true
+    });
+    typingTimeoutIds[id] = setTimeout(() => {
+      commit("setTyping", {
+        id,
+        isTyping: false
+      });
+    }, 2000);
   }
 };
 
@@ -382,6 +400,16 @@ const mutations = {
       state.allDataReceived = true;
     } else {
       state.offset += chatsLimit;
+    }
+  },
+  setTyping(state, { id, isTyping }) {
+    if (isTyping) {
+      const exists = state.typing.find(v => id === v);
+      if (!exists) {
+        state.typing.push(id);
+      }
+    } else {
+      state.typing = state.typing.filter(v => v !== id);
     }
   }
 };
