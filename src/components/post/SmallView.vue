@@ -101,6 +101,7 @@
       :href="'/' + post.author.username"
       class="explore-media__name"
       v-if="!shouldBePoster && from !== 'profile/home'"
+      :class="{ 'online-state': isOnline(post.author.id) }"
     >
       <span class="name">{{ post.author.name }}</span>
     </a>

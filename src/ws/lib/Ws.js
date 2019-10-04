@@ -18,6 +18,7 @@ import subscription from "./actions/subscription";
 import tip from "./actions/tip";
 import message from "./actions/message";
 import new_feed_post from "./actions/new_feed_post";
+import online from "./actions/online";
 
 const actions = {
   chats,
@@ -36,7 +37,8 @@ const actions = {
   stream_comment,
   statistics,
   new_feed_post,
-  stream_public
+  stream_public,
+  online
 };
 
 export default class Ws extends WsAbstract {
@@ -45,10 +47,6 @@ export default class Ws extends WsAbstract {
     this.actions = actions;
   }
   onData(data) {
-    if (data.online) {
-      Store.commit("online/updateUsers", data.online);
-      return;
-    }
     if (data.reload) {
       this.emit("reloadPost", data.post_id);
       return;

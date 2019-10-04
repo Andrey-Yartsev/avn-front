@@ -3,7 +3,8 @@
     <router-link
       :to="`/stories/${profile.id}`"
       v-if="(profile.hasNotViewedStory || profile.hasStory) && !showLiveLabel"
-      class="avatar online-state"
+      class="avatar"
+      :class="{ 'online-state': isOnline(profile.id) }"
     >
       <span
         class="avatar__img"
@@ -12,7 +13,12 @@
         <img :src="profile.avatar" v-if="profile.avatar" />
       </span>
     </router-link>
-    <span v-else class="avatar" @click="click">
+    <span
+      v-else
+      class="avatar"
+      @click="click"
+      :class="{ 'online-state': isOnline(profile.id) }"
+    >
       <span class="avatar__img">
         <img :src="profile.avatar" v-if="profile.avatar" />
       </span>
