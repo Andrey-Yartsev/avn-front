@@ -5,6 +5,7 @@
         :href="`/stories/${post.user.id}`"
         class="avatar avatar_lg avatar_lg-desk"
         @click.prevent="go"
+        :class="{ 'online-state': isOnline(post.user.id) }"
       >
         <span
           class="avatar__img"

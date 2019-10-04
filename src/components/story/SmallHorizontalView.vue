@@ -3,7 +3,7 @@
     <div class="story">
       <a
         :href="`/stories/${post.user.id}`"
-        class="avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg"
+        class="avatar avatar_gap-r-md avatar_gap-r-md_reset-mob avatar_lg online-state"
         @click.prevent="() => watchAll(post.user.id)"
       >
         <span
