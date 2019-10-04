@@ -18,7 +18,7 @@ import subscription from "./actions/subscription";
 import tip from "./actions/tip";
 import message from "./actions/message";
 import new_feed_post from "./actions/new_feed_post";
-// import online from "./actions/online";
+import online from "./actions/online";
 import typing from "./actions/typing";
 
 const actions = {
@@ -39,7 +39,7 @@ const actions = {
   statistics,
   new_feed_post,
   stream_public,
-  // online,
+  online,
   typing
 };
 

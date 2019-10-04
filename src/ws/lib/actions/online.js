@@ -1,5 +1,5 @@
 import Store from "@/store";
 
 export default data => {
-  Store.commit("online/updateUsers", data.online);
+  Store.commit("online/updateUsers", data);
 };
