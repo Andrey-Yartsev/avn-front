@@ -17,7 +17,10 @@
           disabled: v.withUser.isMuted
         }"
       >
-        <div class="avatar avatar_md">
+        <div
+          class="avatar avatar_md"
+          :class="{ 'online-state': isOnline(v.withUser.id) }"
+        >
           <span class="avatar__img">
             <img :src="v.withUser.avatar" v-if="v.withUser.avatar" />
           </span>
@@ -81,11 +84,12 @@
 import { fromNow } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import InfinityScrollData from "@/mixins/infinityScrollData";
+import User from "@/mixins/user";
 
 export default {
   name: "ChatContactList",
 
-  mixins: [ModalRouterGoto, InfinityScrollData],
+  mixins: [User, ModalRouterGoto, InfinityScrollData],
 
   computed: {
     scrollableComponent() {

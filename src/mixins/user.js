@@ -14,6 +14,9 @@ export default {
     },
     isAuth: function() {
       return !!this.user;
+    },
+    isOnline(id) {
+      return this.$store.state.online.users.indexOf(id) !== -1;
     }
   }
 };

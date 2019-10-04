@@ -7,6 +7,7 @@
       v-if="comment.author && full"
       :to="'/' + comment.author.username"
       class="avatar avatar_gap-r-sm avatar_sm"
+      :class="{ 'online-state': isOnline(comment.author.id) }"
     >
       <span class="avatar__img">
         <img v-if="comment.author.avatar" :src="comment.author.avatar" />

@@ -3,6 +3,7 @@
     <router-link
       class="avatar avatar_gap-r-sm avatar_sm"
       :to="'/' + postUser.username"
+      :class="{ 'online-state': isOnline(postUser.id) }"
     >
       <span class="avatar__img">
         <img v-if="postUser.avatar" :src="postUser.avatar" />
@@ -57,11 +58,11 @@
 import Dropdown from "@/components/common/postParts/header/Dropdown";
 import ClickOutside from "vue-click-outside";
 import Bubble from "@/helpers/userBubble";
-import UserMixin from "@/mixins/user";
+import User from "@/mixins/user";
 
 export default {
   name: "Header",
-  mixins: [UserMixin],
+  mixins: [User],
   components: {
     Dropdown
   },
