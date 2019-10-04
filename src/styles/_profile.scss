@@ -211,17 +211,11 @@
 
     &.online-state {
 
-      .avatar__img {
-
-        &:after {
-          right: .16em;
-          bottom: .001em;
-          width: .1em;
-          height: .1em;
-          transform: translate(7px, -.05em);
-          min-width: 12px;
-          min-height: 12px;
-        }
+      &:after {;
+        transform: translate(7px, -.05em);
+        min-width: 12px;
+        min-height: 12px;
+        @include onlineIndicator(.1em, .1em, .16em, .001em);
       }
     }
 
