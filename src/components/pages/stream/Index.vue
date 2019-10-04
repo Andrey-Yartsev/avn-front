@@ -739,10 +739,11 @@ export default {
       token: (+new Date()).toString(36),
       streamSource: "local",
       showErrorMessage(message) {
-        // eslint-disable-next-line
         that.$store.dispatch("global/setError", { message });
-        // eslint-disable-next-line
         console.trace(message);
+        if (message.match(/Some features are not supported/)) {
+          that.close();
+        }
       },
       showInfoMessage(message) {
         // eslint-disable-next-line
