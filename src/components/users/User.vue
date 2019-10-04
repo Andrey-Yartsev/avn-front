@@ -118,7 +118,7 @@ export default {
       default: false
     },
     num: {
-      type: String
+      type: Number
     }
   },
   computed: {
