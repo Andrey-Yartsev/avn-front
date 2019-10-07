@@ -1287,6 +1287,27 @@
     }
   }
 
+  &__wrap-close {
+    width: calc(100vw - 55px);
+    max-width: 320px;
+    position: fixed;
+    left: 0;
+    top: 14px;
+    transform: translate(-100%, 0);
+    transition: transform 0.4s ease;
+    z-index: 5;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      @media screen and (orientation: landscape) {
+        max-width: 800px;
+      }
+    }
+
+    .sidebar-shown & {
+      transform: translate(0, 0);
+    }
+  }
+
   &__header {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -1712,21 +1733,14 @@
 
   &-close {
     color: $primary-color;
-    z-index: 5;
     width: 36px;
     height: 36px;
     border-radius: 1000px;
     box-sizing: content-box;
     background-color: $white;
-    top: 14px;
-    left: calc(100vw - 117px);
-    position: fixed;
-    transform: translateX(-100vw);
-    transition: transform 0.4s ease;
-
-    .sidebar-shown & {
-      transform: translate(0, 0);
-    }
+    position: absolute;
+    right: 12px;
+    top: 0;
   }
 }
 .header-return-btn {
