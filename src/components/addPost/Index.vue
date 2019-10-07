@@ -196,17 +196,17 @@
             </div>
           </div>
           <div class="btn-post" v-if="isNew && user.isPerformer">
-            <router-link
+            <a
               class="b-check-state b-check-state_live"
               :class="{
                 disabled: preloadedMedias.length || postMsg.length || datetime
               }"
-              to="/stream"
+              @click.prevent="openStream"
             >
               <span
                 class="b-check-state__icon icn-live icn-item icn-size_lg"
               ></span>
-              <span class="btn-post__text exception">Go live</span></router-link
+              <span class="btn-post__text exception">Go live</span></a
             >
           </div>
           <template v-if="isExtended">
@@ -563,6 +563,38 @@ export default {
       );
       text = text.replace(/<br \/>/g, "\n");
       return text.replace(/(<([^>]+)>)/gi, "");
+    },
+    openStream() {
+      // Detects if device is on iOS
+      const isIos = () => {
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        return /iphone|ipad|ipod/.test(userAgent);
+      };
+      // Detects if device is in standalone mode
+      const isInStandaloneMode = () =>
+        "standalone" in window.navigator && window.navigator.standalone;
+
+      // Checks if should display install popup notification:
+      if (isIos()) {
+        if (isInStandaloneMode()) {
+          this.openStreamNewWin();
+          return;
+        }
+      }
+
+      this.$router.push("/stream");
+    },
+    openStreamNewWin() {
+      const a = document.createElement("a");
+      a.setAttribute(
+        "href",
+        "/stream?auth_token=" + this.$store.state.auth.token
+      );
+      a.setAttribute("target", "_blank");
+
+      const dispatch = document.createEvent("HTMLEvents");
+      dispatch.initEvent("click", true, true);
+      a.dispatchEvent(dispatch);
     }
   },
   watch: {
