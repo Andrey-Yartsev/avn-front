@@ -26,7 +26,7 @@ export default {
       } else if (data.action === "resubscribe") {
         this.resubscribed(data.result);
       } else {
-        throw new Error("Wrong action");
+        // throw new Error("Wrong action");
       }
     },
     unsubscribed(result) {

@@ -3,7 +3,8 @@
 import { createRequestAction } from "../../utils/storeRequest";
 
 const state = {
-  afterAddCardRedirect: null
+  afterAddCardRedirect: null,
+  cards: []
 };
 
 const actions = {};

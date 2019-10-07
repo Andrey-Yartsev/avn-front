@@ -83,6 +83,18 @@ export default {
         result = minutes + " min";
       }
       return result;
+    },
+    subsUpdate() {
+      return this.$store.state.subscription.updated;
+    }
+  },
+  watch: {
+    subsUpdate(data) {
+      if (data.action === "subscribe") {
+        if (data.data.userId === this.user.id) {
+          this.openStream();
+        }
+      }
     }
   },
   methods: {
@@ -97,6 +109,9 @@ export default {
         return;
       }
 
+      this.openStream();
+    },
+    openStream() {
       this.$store.dispatch("modal/show", {
         name: "stream",
         data: {

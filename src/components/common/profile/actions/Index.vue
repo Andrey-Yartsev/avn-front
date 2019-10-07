@@ -174,7 +174,7 @@ export default {
       } else if (data.action === "resubscribe") {
         this.resubscribed();
       } else {
-        throw new Error("Wrong action");
+        // throw new Error("Wrong action");
       }
     },
     unsubscribed() {

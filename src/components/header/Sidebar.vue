@@ -1,12 +1,11 @@
 <template>
   <div class="sidebar" v-if="user">
-    <div class="sidebar__wrap-close" v-if="$mq === 'mobile'">
-      <span
-        role="button"
-        class="close icn-item user-menu-close hidden-desktop icn-size_lg"
-        @click="hide"
-      />
-    </div>
+    <span
+      role="button"
+      class="close icn-item user-menu-close hidden-desktop icn-size_lg"
+      @click="hide"
+      v-if="$mq === 'mobile'"
+    />
     <perfect-scrollbar class="sidebar__scroller">
       <router-link
         :to="'/' + user.username"

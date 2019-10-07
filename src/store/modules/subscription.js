@@ -113,6 +113,16 @@ const actions = {
         { root: true }
       );
     }
+
+    commit("statusUpdate", {
+      action: "subscribe",
+      result: {
+        success: true
+      },
+      data: {
+        userId: payment.user.id
+      }
+    });
   }
 };
 

@@ -55,7 +55,9 @@ export default {
   data() {
     return {
       current: 0,
-      nextItem: 0
+      nextItem: 0,
+      openingUserId: 0,
+      openingStream: null
     };
   },
   props: {
@@ -73,6 +75,9 @@ export default {
     },
     user() {
       return this.stream.user;
+    },
+    subsUpdate() {
+      return this.$store.state.subscription.updated;
     }
   },
   methods: {
@@ -91,21 +96,26 @@ export default {
       this.run();
     },
     async openLive() {
-      if (await StreamApi.needSubscribe(this.stream.id)) {
+      this.openingUser = { ...this.user };
+      this.openingStream = { ...this.stream };
+      if (await StreamApi.needSubscribe(this.openingStream.id)) {
         this.$store.dispatch("modal/show", {
           name: "subscribe",
           data: {
-            user: this.user
+            user: this.openingUser
           }
         });
         return;
       }
 
+      this.openStream();
+    },
+    openStream() {
       if (this.lives[this.current]) {
         this.$store.dispatch("modal/show", {
           name: "stream",
           data: {
-            stream: this.stream
+            stream: this.openingStream
           }
         });
       }
@@ -120,6 +130,17 @@ export default {
   watch: {
     lives() {
       this.init();
+    },
+    subsUpdate(data) {
+      if (!this.openingUser) {
+        // available only when click was on that component
+        return;
+      }
+      if (data.action === "subscribe") {
+        if (data.data.userId === this.openingUser.id) {
+          this.openStream();
+        }
+      }
     }
   }
 };
