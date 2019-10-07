@@ -225,9 +225,6 @@
             </div>
           </template>
         </div>
-        <div class="add-new-type add-new-type_underline-items line-top">
-          <AddNewNav active="post" />
-        </div>
         <div
           class="tweet-new-post"
           :class="{
@@ -320,7 +317,6 @@ import Loader from "@/components/common/Loader";
 import Draggable from "vuedraggable";
 import MediaPreview from "@/components/common/MediaPreview";
 import FileUpload from "@/mixins/fileUpload";
-import AddNewNav from "@/components/addNewNav/Index";
 import ClickOutside from "vue-click-outside";
 import { Datetime } from "vue-datetime";
 import moment from "moment";
@@ -353,7 +349,6 @@ export default {
   components: {
     Loader,
     MediaPreview,
-    AddNewNav,
     Datetime,
     Draggable,
     VueTribute
