@@ -140,6 +140,9 @@
         </div>
       </div>
     </component>
+    <div class="chat-message-viewer">
+      <slot name="col1"></slot>
+    </div>
   </div>
 </template>
 

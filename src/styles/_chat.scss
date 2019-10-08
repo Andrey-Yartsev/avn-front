@@ -511,6 +511,55 @@
   }
 }
 
+.chat-message-viewer {
+
+  .chatCollectionContentWrapper {
+    
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      top: auto;
+    }
+  }
+  
+  .chatViewContent {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: none;
+    }
+  }
+
+  .contactsListContent {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .chatView {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding: 0;
+      border: none;
+      margin-right: 20px;
+    }
+
+    &:last-child {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        margin-right: 0;
+      }
+    }
+
+    .avatar {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 .msg-no-chat {
   position: absolute;
   left: 50%;
