@@ -1,5 +1,8 @@
 "use strict";
 
+import balances from "./referrals/balances";
+import requests from "./referrals/requests";
+
 import { createRequestAction } from "../utils/storeRequest";
 
 const state = {};
@@ -14,6 +17,7 @@ createRequestAction({
   requestType: "token",
   resultKey: "items",
   defaultLoading: true,
+  defaultResultValue: [],
   state,
   mutations,
   actions,
@@ -26,5 +30,9 @@ export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    balances,
+    requests
+  }
 };

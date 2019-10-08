@@ -21,11 +21,11 @@
         <div class="payouts-bank-info">
           <div class="item">
             <span class="title">Available</span>
-            <span class="value">${{ balances.payoutAvailable }}</span>
+            <span class="value">${{ balances[prefix + "Available"] }}</span>
           </div>
           <div class="item">
             <span class="title">Pending</span>
-            <span class="value">${{ balances.payoutPending }}</span>
+            <span class="value">${{ balances[prefix + "Pending"] }}</span>
           </div>
         </div>
       </div>
@@ -37,29 +37,39 @@
 import Loader from "@/components/common/Loader";
 
 export default {
-  name: "PayoutSettingsSummeryBalances",
+  name: "SettingsMoneyBalances",
   components: {
     Loader
   },
+  props: {
+    storeKey: {
+      type: String,
+      required: true
+    },
+    prefix: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     loading() {
-      return this.$store.state.payouts.balances.fetchLoading;
+      return this.$store.state[this.storeKey].balances.fetchLoading;
     },
     withdrawRequesting() {
-      return this.$store.state.payouts.requests.withdrawLoading;
+      return this.$store.state[this.storeKey].requests.withdrawLoading;
     },
     balances() {
-      return this.$store.state.payouts.balances.fetchResult;
+      return this.$store.state[this.storeKey].balances.fetchResult;
     }
   },
   methods: {
     async withdrawRequest() {
-      await this.$store.dispatch("payouts/requests/withdraw");
-      this.$store.dispatch("payouts/requests/fetch");
+      await this.$store.dispatch(this.storeKey + "/requests/withdraw");
+      this.$store.dispatch(this.storeKey + "/requests/fetch");
     }
   },
   created() {
-    this.$store.dispatch("payouts/balances/fetch");
+    this.$store.dispatch(this.storeKey + "/balances/fetch");
   }
 };
 </script>

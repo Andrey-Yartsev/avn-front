@@ -8,7 +8,7 @@
         <div class="bg-gradient__shadow bg-gradient__shadow_mob">
           <div class="inner">
             <span class="semi-transparent">
-              Payouts Statements
+              {{ title }}
             </span>
           </div>
           <div class="table-header payouts-table-header" v-if="!loading">
@@ -63,30 +63,42 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import moment from "moment";
+import moment from "moment/moment";
 
 export default {
-  name: "PayoutSettingsSummeryRequests",
+  name: "SettingsMoneyRequests",
   components: {
     Loader
   },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    storeKey: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     loading() {
-      return this.$store.state.payouts.requests.fetchLoading;
+      return this.$store.state[this.storeKey].requests.fetchLoading;
     },
     items() {
-      if (!this.$store.state.payouts.requests.fetchResult) {
+      if (!this.$store.state[this.storeKey].requests.fetchResult) {
         return [];
       }
       let n = 1;
-      return this.$store.state.payouts.requests.fetchResult.list.map(v => {
-        n++;
-        v.id = n;
-        return v;
-      });
+      return this.$store.state[this.storeKey].requests.fetchResult.list.map(
+        v => {
+          n++;
+          v.id = n;
+          return v;
+        }
+      );
     },
     withdrawRequesting() {
-      return this.$store.state.payouts.requests.withdrawLoading;
+      return this.$store.state[this.storeKey].requests.withdrawLoading;
     }
   },
   methods: {
@@ -95,7 +107,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("payouts/requests/fetch");
+    console.log(this.storeKey + "/requests/fetch");
+    this.$store.dispatch(this.storeKey + "/requests/fetch");
   }
 };
 </script>
