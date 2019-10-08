@@ -34,6 +34,7 @@
             firstMessageInGroup: v.firstMessageInGroup,
             withTime: v.lastMessageInGroup
           }"
+          :style="{fontSize: fontSize + 'px'}"
         >
           <div class="chatMessageWrapper">
             <div
@@ -127,6 +128,7 @@
             </div>
           </div>
         </div>
+        <FontSizeControls :fontSize="fontSize" @increase="increaseFontSize" @decrease="decreaseFontSize"/>
 
         <div class="typing semi-transparent">
           <span v-if="typing">User is typing...</span>&nbsp;
@@ -149,6 +151,7 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
+import FontSizeControls from './FontSizeControls'
 import moment from "moment";
 
 const bottomThreshold = 100; // pixels left to bottom of container
@@ -159,7 +162,8 @@ export default {
   components: {
     Loader,
     MediaImage,
-    MediaVideo
+    MediaVideo,
+    FontSizeControls
   },
 
   mixins: [userMixin],
@@ -175,7 +179,8 @@ export default {
     return {
       scrollTimeoutId: 0,
       loaderHidden: false,
-      scrollPosition: 0
+      scrollPosition: 0,
+      fontSize: 14
     };
   },
 
@@ -556,6 +561,12 @@ export default {
     },
     fetchMoreMessages() {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
+    },
+    increaseFontSize() {
+      this.fontSize++;
+    },
+    decreaseFontSize() {
+      this.fontSize--;
     }
   },
   mounted() {
