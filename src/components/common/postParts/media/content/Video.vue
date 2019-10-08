@@ -5,6 +5,7 @@
       webkit-playsinline
       playsinline
       controls
+      controlslist="nodownload"
       autoplay
       :poster="media.preview.source"
       v-if="video"

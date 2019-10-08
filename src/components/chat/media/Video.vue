@@ -19,6 +19,7 @@
       autoplay
       playsinline
       controls
+      controlslist="nodownload"
       :poster="media.preview.source"
       @play="play"
       ref="video"
