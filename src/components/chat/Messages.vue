@@ -141,7 +141,10 @@
       </div>
     </component>
     <div class="chat-message-viewer">
-      <slot name="col1"></slot>
+      <ContactList
+        :chats="chats"
+        :class="{ 'border-contacts': $mq === 'desktop' }"
+      />
     </div>
   </div>
 </template>
@@ -152,6 +155,8 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
+import ContactList from "./ContactList";
+import Common from "./common";
 import moment from "moment";
 
 const bottomThreshold = 100; // pixels left to bottom of container
@@ -162,10 +167,11 @@ export default {
   components: {
     Loader,
     MediaImage,
-    MediaVideo
+    MediaVideo,
+    ContactList
   },
 
-  mixins: [userMixin],
+  mixins: [userMixin, Common],
 
   props: {
     withUser: {
