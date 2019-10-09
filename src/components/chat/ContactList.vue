@@ -71,6 +71,7 @@
               <span class="isTyping">tester is typing...</span>
             </p>
           </div>
+          <button class="chat-tooltip-close"></button>
         </div>
       </div>
       <div

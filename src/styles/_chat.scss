@@ -514,11 +514,6 @@
 
 .chat-message-viewer {
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    padding-left: 6px;
-    padding-right: 6px;
-  }
-
   .chatCollectionContentWrapper {
     
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -537,8 +532,8 @@
       color: white;
       background-color: $secondary-color;
       max-width: none;
-      border-radius: 6px;
-      padding: 12px 10px;
+      border-radius: 4px;
+      padding: 9px 70px 12px 10px;
     }
   }
 
@@ -548,13 +543,21 @@
       display: flex;
       flex-direction: row;
       overflow-x: auto;
+      padding: 6px 6px 0;
+    }
+
+    &.stopped {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        overflow-x: hidden;
+      }
     }
   }
 
   .chatView {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      padding: 10px;
+      padding: 12px 13px;
       border: none;
     }
 
@@ -568,7 +571,7 @@
         width: 14px;
         height: 14px;
         background-color: $secondary-color;
-        transform: rotate(45deg) translate(-7px, 3px);
+        transform: rotate(45deg) translate(-5px, 6px);
         display: none;
       }
     }
@@ -585,9 +588,20 @@
       .chatViewContent {
         display: block;
       }
+
+      .avatar {
+
+        &:before {
+          border-color: $secondary-color;
+        }
+      }
     }
 
     &__header {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 13px;
+      }
 
       .timestamp {
 
@@ -603,6 +617,20 @@
           @include media-breakpoint-down($desktop-breakpoint-dcrs) {
             color: white;
           }
+        }
+      }
+    }
+
+    &__body {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        font-size: 13px;
+      }
+
+      > p {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          height: 14px;
         }
       }
     }
@@ -623,12 +651,22 @@
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           content: "";
           position: absolute;
-          left: -4px;
-          right: -4px;
-          top: -4px;
-          bottom: -4px;
+          left: -3px;
+          right: -3px;
+          top: -3px;
+          bottom: -3px;
           border: 1px solid rgba($gray, 0.2);
           border-radius: 50%;
+        }
+      }
+
+      &__img {
+
+        &:before {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            box-shadow: 0 0 0 2px $white;
+          }
         }
       }
     }
@@ -636,6 +674,46 @@
 
   .verified-user {
     color: white;
+  }
+
+  .chat-tooltip-close {
+    display: flex;
+  }
+
+  .type-msg-icn {
+
+    .icn-item {
+
+      &:after {
+        font-size: 15px;
+        line-height: 15px;
+      }
+    }
+  }
+}
+
+.chat-tooltip-close {
+  position: absolute;
+  width: 29px;
+  height: 29px;
+  top: 12px;
+  right: 13px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: white;
+  opacity: .5;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  display: none;
+
+  &:after {
+    content: "\E605";
+    @include icon-font;
   }
 }
 
