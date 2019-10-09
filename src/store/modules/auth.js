@@ -20,7 +20,7 @@ const defaultUser = {
   }
 };
 
-const loginAction = (commit, dispatch, data, fromModal) => {
+const loginAction = (commit, dispatch, rootState, data, fromModal) => {
   commit("request");
   UserApi.login(data)
     .then(user => {
@@ -44,7 +44,7 @@ const loginAction = (commit, dispatch, data, fromModal) => {
             commit("loginFinished");
           });
         }
-
+        dispatch("awards/nominate", rootState.awards.savedData, { root: true });
         dispatch("profile/afterLogin", null, { root: true });
       });
     })
@@ -78,12 +78,12 @@ const actions = {
     dispatch("setUser", { ...state.user, ...user });
   },
 
-  login({ commit, dispatch }, data) {
-    loginAction(commit, dispatch, data, false);
+  login({ commit, dispatch, rootState }, data) {
+    loginAction(commit, dispatch, rootState, data, false);
   },
 
-  loginFromModal({ commit, dispatch }, data) {
-    loginAction(commit, dispatch, data, true);
+  loginFromModal({ commit, dispatch, rootState }, data) {
+    loginAction(commit, dispatch, rootState, data, true);
   },
 
   logout({ commit, dispatch }) {

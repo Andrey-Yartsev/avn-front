@@ -8,6 +8,12 @@ const actions = {};
 const mutations = {
   reset(state) {
     state.searchResult = [];
+  },
+  saveData(state, payload) {
+    state.savedData = payload;
+  },
+  clearSavedData() {
+    state.savedData = null;
   }
 };
 

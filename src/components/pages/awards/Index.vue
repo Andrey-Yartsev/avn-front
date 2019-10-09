@@ -232,7 +232,22 @@ export default {
       o[v.id] = v.value;
       this.data = { ...this.data, ...o };
     },
-    send() {
+    async send() {
+      if (!this.user) {
+        this.$store.commit("awards/saveData", {
+          eventId: this.eventId,
+          data: this.data
+        });
+
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            disableClose: true,
+            disableFooter: true
+          }
+        });
+      }
+
       this.$store
         .dispatch("awards/nominate", {
           eventId: this.eventId,
@@ -282,15 +297,15 @@ export default {
     }
   },
   created() {
-    if (!this.user) {
-      this.$store.dispatch("modal/show", {
-        name: "login",
-        data: {
-          disableClose: true,
-          disableFooter: true
-        }
-      });
-    }
+    // if (!this.user) {
+    //   this.$store.dispatch("modal/show", {
+    //     name: "login",
+    //     data: {
+    //       disableClose: true,
+    //       disableFooter: true
+    //     }
+    //   });
+    // }
 
     this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
       if (this.predefined) {

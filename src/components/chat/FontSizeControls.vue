@@ -14,12 +14,12 @@ export default {
     },
     dec() {
       this.$emit("decrease");
-    },
+    }
   }
 };
 </script>
 
-<style lang="scss"  scoped>
+<style lang="scss" scoped>
 .fontSizeControls {
   display: flex;
   align-items: center;

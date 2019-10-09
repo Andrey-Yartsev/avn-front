@@ -34,7 +34,7 @@
             firstMessageInGroup: v.firstMessageInGroup,
             withTime: v.lastMessageInGroup
           }"
-          :style="{fontSize: fontSize + 'px'}"
+          :style="{ fontSize: fontSize + 'px' }"
         >
           <div class="chatMessageWrapper">
             <div
@@ -128,7 +128,11 @@
             </div>
           </div>
         </div>
-        <FontSizeControls :fontSize="fontSize" @increase="increaseFontSize" @decrease="decreaseFontSize"/>
+        <FontSizeControls
+          :fontSize="fontSize"
+          @increase="increaseFontSize"
+          @decrease="decreaseFontSize"
+        />
 
         <div class="typing semi-transparent">
           <span v-if="typing">User is typing...</span>&nbsp;
@@ -151,7 +155,7 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
-import FontSizeControls from './FontSizeControls'
+import FontSizeControls from "./FontSizeControls";
 import moment from "moment";
 
 const bottomThreshold = 100; // pixels left to bottom of container
