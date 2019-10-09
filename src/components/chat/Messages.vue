@@ -140,11 +140,8 @@
         </div>
       </div>
     </component>
-    <div class="chat-message-viewer">
-      <ContactList
-        :chats="chats"
-        :class="{ 'border-contacts': $mq === 'desktop' }"
-      />
+    <div class="chat-message-viewer" v-if="$mq === 'mobile'">
+      <ContactList :chats="chats" />
     </div>
   </div>
 </template>
