@@ -107,7 +107,7 @@
     <Share
       v-else
       :categories="_categories"
-      :data="data"
+      :data="data || this.$store.state.awards.savedData.data"
       :modelUser="modelUser"
       :isGay="isGay"
       @complete="complete"
@@ -327,6 +327,14 @@ export default {
     script.async = true;
     script.src = "https://platform.twitter.com/widgets.js";
     document.head.appendChild(script);
+  },
+  mounted() {
+    const savedData =
+      this.$store.state.awards.savedData &&
+      this.$store.state.awards.savedData.data;
+    if (savedData) {
+      this.data = savedData;
+    }
   },
   beforeDestroy() {
     this.reset();
