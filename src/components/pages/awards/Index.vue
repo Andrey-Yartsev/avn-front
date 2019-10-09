@@ -246,22 +246,22 @@ export default {
             disableFooter: true
           }
         });
+      } else {
+        this.$store
+          .dispatch("awards/nominate", {
+            eventId: this.eventId,
+            data: this.data
+          })
+          .then(() => {
+            if (this.predefined && this.sent) {
+              // this.$router.push("/" + this.$route.params.username);
+              // this.$store.dispatch("global/flashToast", {
+              //   text: this.successText
+              // });
+              // this.$store.dispatch("awards/nominateReset");
+            }
+          });
       }
-
-      this.$store
-        .dispatch("awards/nominate", {
-          eventId: this.eventId,
-          data: this.data
-        })
-        .then(() => {
-          if (this.predefined && this.sent) {
-            // this.$router.push("/" + this.$route.params.username);
-            // this.$store.dispatch("global/flashToast", {
-            //   text: this.successText
-            // });
-            // this.$store.dispatch("awards/nominateReset");
-          }
-        });
     },
     rearrangeByCols(items) {
       const columns = [[], [], []];

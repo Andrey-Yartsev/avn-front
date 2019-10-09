@@ -44,8 +44,8 @@ const loginAction = (commit, dispatch, rootState, data, fromModal) => {
             commit("loginFinished");
           });
         }
-        dispatch("awards/nominate", rootState.awards.savedData, { root: true });
         dispatch("profile/afterLogin", null, { root: true });
+        dispatch("awards/nominate", rootState.awards.savedData, { root: true });
       });
     })
     .catch(error => {
