@@ -25,6 +25,13 @@
             <span class="value">{{ profile.videosCount }}</span>
             <span class="label">Videos</span>
           </router-link>
+          <router-link
+            class="btn-user-activity"
+            :to="`/${profile.username}/links`"
+          >
+            <span class="value">0</span>
+            <span class="label">Links</span>
+          </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link
