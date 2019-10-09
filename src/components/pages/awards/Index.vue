@@ -242,8 +242,8 @@ export default {
         this.$store.dispatch("modal/show", {
           name: "login",
           data: {
-            disableClose: true,
-            disableFooter: true
+            disableClose: false,
+            disableFooter: false
           }
         });
       } else {
