@@ -3,12 +3,15 @@
     <h1 class="form-title settings-title">
       OBS Settings
     </h1>
-    <div class="shadow-block border-top">
+    <div
+      class="shadow-block border-top"
+      :class="{ 'shadow-block_b-gap-md': $mq === 'mobile' }"
+    >
       <div class="container">
         <div class="form-group form-group_with-label pb-reset">
           <label class="form-group-inner">
             <span class="label">OBS server URL</span>
-            <span class="form-group form-group_clear-gaps">
+            <span class="form-group form-group_min-height">
               <span class="form-field">
                 {{ server }}
               </span>
@@ -18,8 +21,8 @@
         <div class="form-group form-group_with-label pb-reset">
           <label class="form-group-inner">
             <span class="label">OBS streaming key</span>
-            <span class="form-group form-group_clear-gaps">
-              <span class="form-field">
+            <span class="form-group form-group_min-height">
+              <span class="form-field form-field_break-all">
                 {{ key }}
               </span>
             </span>
@@ -28,14 +31,14 @@
         <div class="form-group form-group_with-label pb-reset">
           <label class="form-group-inner">
             <span class="label">Internal chat URL</span>
-            <span class="form-group form-group_clear-gaps">
-              <span class="form-field">
+            <span class="form-group form-group_min-height">
+              <span class="form-field form-field_break-all">
                 {{ url }}
               </span>
             </span>
             <button
               type="button"
-              class="btn btn_fix-width-sm border alt btn-copy-url"
+              class="btn btn_fix-width-sm border alt"
               @click="copyToClipboard"
             >
               Copy
