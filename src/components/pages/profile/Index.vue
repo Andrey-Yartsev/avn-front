@@ -131,13 +131,17 @@
                 :profile="profile"
               />
               <template v-else>
-                <p
+                <!-- <p
                   :class="['empty-feed']"
                   v-if="!posts.length && !infinityScrollLoading"
+                > -->
+                <p
+                  :class="['empty-feed']"
+                  v-if="!posts.length && infinityScrollLoading"
                 >
                   <span>Nothing here yet</span>
                   <button
-                    v-if="isOwner(this.profile.id)"
+                    v-if="isOwner(this.profile.id) && pageName !== 'links'"
                     @click="openAddPostModal"
                     type="button"
                     class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
@@ -168,6 +172,19 @@
                             from="profile/home"
                             @visibilityChanged="visibilityChanged"
                           />
+                          <div
+                            v-if="
+                              isOwner(this.profile.id) && pageName === 'links'
+                            "
+                            class="addLink__wrapper"
+                          >
+                            <button
+                              class="addLink__button make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
+                              @click="openAddLinkModal"
+                            >
+                              Add new link
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -209,6 +226,7 @@ import PrivateBlock from "@/components/common/profile/privateBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
+import LinkPost from "@/components/addLink/LinkPost";
 
 export default {
   name: "ProfileHome",
@@ -227,7 +245,8 @@ export default {
     PostSmall,
     PostMedium,
     PrivateBlock,
-    Highlights
+    Highlights,
+    LinkPost
   },
 
   data() {
@@ -302,6 +321,9 @@ export default {
     postComponent() {
       if (this.$mq === "mobile" && this.pageName === "videos") {
         return PostMedium;
+      }
+      if (this.pageName === "links") {
+        return LinkPost;
       }
 
       return PostSmall;
@@ -388,6 +410,14 @@ export default {
         name: "addPost"
       });
     },
+    openAddLinkModal() {
+      this.$store.dispatch("modal/show", {
+        name: "addLink"
+      });
+    },
+    // addLinkPost(post) {
+    //   this.$store.commit("profile/home/addPost", post)
+    // },
     infinityScrollGetDataMethod() {
       if (this.profile) {
         this.getPosts();

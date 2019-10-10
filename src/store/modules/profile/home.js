@@ -66,6 +66,9 @@ const mutations = {
   },
   resetOnLoginAction(state) {
     state.onLoginAction = null;
+  },
+  addPost(state, payload) {
+    state.posts.push(payload);
   }
 };
 
@@ -90,6 +93,9 @@ const actions = {
   },
   updatePost({ commit }, updatedPost) {
     commit("updatePost", updatedPost);
+  },
+  addPost({ commit }, newPost) {
+    commit("addPost", newPost);
   },
   setSource({ commit }, source) {
     commit("setSource", source);

@@ -33,6 +33,7 @@
       <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
+      <AddLinkModal v-if="this.$store.state.modal.addLink.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
       <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
@@ -102,6 +103,7 @@ import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
+import AddLinkModal from "@/components/addLink/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
@@ -184,6 +186,7 @@ export default {
     CreateStoryModal,
     StoryInput,
     AddPostModal,
+    AddLinkModal,
     IframeModal,
     StreamModal,
     SubscriptionConfirmModal,

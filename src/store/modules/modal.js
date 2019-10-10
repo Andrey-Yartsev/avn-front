@@ -36,6 +36,10 @@ const state = {
     show: false,
     data: {}
   },
+  addLink: {
+    show: false,
+    data: {}
+  },
   iframe: {
     show: false,
     data: {}
