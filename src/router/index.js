@@ -22,6 +22,7 @@ import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
 import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
 import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
 import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
+import SettingsObsPage from "@/components/pages/settings/obs/Index.vue";
 import W9 from "@/components/pages/settings/payouts/W9.vue";
 import PostPage from "@/components/pages/post/Index";
 import NotFoundPage from "@/components/pages/notFound/Index";
@@ -40,6 +41,7 @@ import StatPage from "@/components/statistics/Page";
 import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
 import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
 import AvnAwards from "@/components/pages/awards/Index";
+import StreamObsPage from "@/components/pages/stream/obs/Index";
 
 import Auth from "./auth";
 import Post from "./post";
@@ -340,6 +342,15 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/settings/obs",
+    component: SettingsObsPage,
+    meta: {
+      title: "OBS",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/stream",
     component: StreamPage,
     meta: {
@@ -610,6 +621,15 @@ const routes = [
       cssName: "staticPage",
       predefined: true,
       notShowGenderFilter: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/stream/obs",
+    component: StreamObsPage,
+    meta: {
+      cssName: "obs",
+      noLayout: true
     }
   }
 ];

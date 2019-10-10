@@ -261,6 +261,10 @@ export default {
           title: "Free Trials"
         });
       }
+      items.push({
+        name: "obs",
+        title: "OBS"
+      });
       return items;
     },
     showAvatarSave() {

@@ -1,5 +1,9 @@
 <template>
   <div v-if="!hasLayout">
+    <ErrorModal v-if="error" />
+    <Toast v-if="showToast" @hide="showToast = false" />
+    <LoginModal v-if="this.$store.state.modal.login.show" />
+    <SignupModal v-if="this.$store.state.modal.signup.show" />
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">

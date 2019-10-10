@@ -1,0 +1,24 @@
+.obs-page {
+  body {
+    background: #000;
+  }
+}
+
+.obs {
+  padding-top: 20px;
+  &.stream-block {
+    background: #000;
+  }
+  .logout {
+    top: 40px;
+    right: 40px;
+    position: absolute;
+  }
+  .form-comments {
+    bottom: 20px;
+  }
+}
+
+.obs-filter {
+  position: relative;
+}

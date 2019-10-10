@@ -1,4 +1,4 @@
-<template>
+ц<template>
   <div
     class="stream-container"
     :class="{ stream_enabled: isStarted, stream_stop: isStopped }"
