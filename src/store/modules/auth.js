@@ -45,7 +45,13 @@ const loginAction = (commit, dispatch, rootState, data, fromModal) => {
           });
         }
         dispatch("profile/afterLogin", null, { root: true });
-        dispatch("awards/nominate", rootState.awards.savedData, { root: true });
+        if (rootState.awards.savedData) {
+          dispatch("awards/nominate", rootState.awards.savedData, {
+            root: true
+          }).then(() => {
+            commit("awards/clearSavedData", null, { root: true });
+          });
+        }
       });
     })
     .catch(error => {
