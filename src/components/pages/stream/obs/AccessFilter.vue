@@ -1,28 +1,24 @@
 <template>
-  <div class="group-controls">
-    <div id="devices">
-      <div
-        class="btn-media-event has-dropdown stream-visibility subscribers"
-        :class="{ shown }"
+  <div
+    class="btn-media-event has-dropdown stream-visibility subscribers"
+    :class="{ shown }"
+  >
+    <button type="button" class="root-btn" @click="shown = !shown">
+      <span class="root-btn__inside">{{ selected.label }}</span>
+    </button>
+    <div class="menu-overlay"></div>
+    <div class="menu">
+      <button
+        type="button"
+        v-for="v in streamVisibilities"
+        v-bind:key="v.key"
+        class="item"
+        :class="{ active: v.selected }"
+        @click="() => setStreamVisibility(v.key)"
+        :disabled="v.disabled"
       >
-        <button type="button" class="root-btn" @click="shown = !shown">
-          <span class="root-btn__inside">{{ selected.label }}</span>
-        </button>
-        <div class="menu-overlay"></div>
-        <div class="menu">
-          <button
-            type="button"
-            v-for="v in streamVisibilities"
-            v-bind:key="v.key"
-            class="item"
-            :class="{ active: v.selected }"
-            @click="() => setStreamVisibility(v.key)"
-            :disabled="v.disabled"
-          >
-            <span class="value">{{ v.label }}</span>
-          </button>
-        </div>
-      </div>
+        <span class="value">{{ v.label }}</span>
+      </button>
     </div>
   </div>
 </template>

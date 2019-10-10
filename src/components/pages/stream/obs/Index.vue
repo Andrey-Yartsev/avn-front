@@ -3,18 +3,24 @@
     <template v-if="user">
       <Loader
         v-if="loading"
-        :fullscreen="false"
+        :fullscreen="true"
         :inline="true"
-        text=""
         :small="true"
+        class="text-light"
       />
       <template v-else>
-        <a href="" @click.prevent="logout" class="logout">Logout</a>
-        <div class="obs-filter" v-if="!filterOnesSelected">
-          <AccessFilter
-            :value="localStream.type"
-            @changed="visibilityChanged"
-          />
+        <div class="mediasTop">
+          <div class="mediasTop__header stream-header mediasTop__header-underlined">
+            <div class="group-controls" v-if="!filterOnesSelected">
+              <AccessFilter
+                :value="localStream.type"
+                @changed="visibilityChanged"
+              />
+            </div>
+            <a href="#" @click.prevent="logout" class="btn-logout icn-item icn-size_lg"
+              :class="{ 'icn-pos_center': $mq === 'desktop' }"
+            >Log out</a>
+          </div>
         </div>
         <div class="form-comments">
           <Comments :shownComments="comments" :count="comments.length" />
