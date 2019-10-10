@@ -84,6 +84,7 @@ export default {
       });
     },
     logout() {
+      this.filterOnesSelected = false;
       this.$store.dispatch("auth/logout");
     }
   },
