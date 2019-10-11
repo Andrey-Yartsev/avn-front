@@ -1,6 +1,6 @@
 <template>
   <div v-if="otpAuth">
-    <div class="auth-block auth-block_sm-size" :class="mainClass">
+    <div class="auth-block" :class="mainClass">
       <h3>Enter 2-Factor Authentication Code</h3>
       <form v-on:submit.stop.prevent="sendOtp">
         <input
