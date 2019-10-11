@@ -12,6 +12,19 @@
       <div v-else-if="needToStartStream" class="refresh-block">
         <div>Need to start stream</div>
         <button class="btn lg btn_fix-width" @click="refresh">Refresh</button>
+        <div class="mediasTop">
+          <div
+            class="mediasTop__header stream-header mediasTop__header-underlined"
+          >
+            <a
+              href="#"
+              @click.prevent="logout"
+              class="btn-logout icn-item icn-size_lg"
+              :class="{ 'icn-pos_center': $mq === 'desktop' }"
+            >Log out</a
+            >
+          </div>
+        </div>
       </div>
       <template v-else>
         <div class="mediasTop">
