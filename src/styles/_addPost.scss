@@ -282,14 +282,6 @@
     }
   }
 
-  > * {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      position: relative;
-      z-index: 2;
-    }
-  }
-
   .popup & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -363,6 +355,11 @@
         right: 15px;
         background: rgba($gray, 0.2);
       }
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+      z-index: 1;
     }
   }
 
@@ -579,6 +576,13 @@
   display: flex;
   align-content: stretch;
   align-items: stretch;
+
+  .add-new-form & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: relative;
+    }
+  }
 }
 
 .b-check-state {

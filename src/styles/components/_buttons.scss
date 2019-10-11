@@ -680,7 +680,6 @@ button {
 .likes,
 .comments,
 .looking,
-//.tips,
 .getPaid {
   cursor: pointer;
   background-color: transparent;
@@ -935,6 +934,10 @@ button {
     width: 48px;
     justify-content: center;
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      z-index: 2;
+    }
+
     .truncated & {
 
       @include media-breakpoint-up($desktop-breakpoint) {
@@ -1120,10 +1123,6 @@ button {
     &:hover {
       transform: scale(1.2);
 
-      //&:after {
-      //  opacity: 1;
-      //}
-
       .options-wrapper & {
         opacity: .5;
       }
@@ -1137,10 +1136,6 @@ button {
   &_light {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     color: #fff;
-
-    //&:after {
-    //  opacity: 1;
-    //}
   }
 
   &_default {
