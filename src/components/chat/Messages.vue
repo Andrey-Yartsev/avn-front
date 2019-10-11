@@ -140,9 +140,11 @@
         </div>
       </div>
     </component>
+    <!--
     <div class="chat-message-viewer" v-if="$mq === 'mobile'">
       <ContactList :chats="chats" />
     </div>
+    -->
   </div>
 </template>
 

@@ -8,7 +8,7 @@
     >
       <div
         @click="openChat(v.id)"
-        class="chatView active"
+        class="chatView"
         v-for="v in _chats"
         :key="v.id"
         :class="{
