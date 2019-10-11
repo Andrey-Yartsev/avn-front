@@ -36,7 +36,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       flex: 1;
-      max-width: calc(100% - 50px);
+      max-width: calc(100% - 60px);
     }
   }
 }
