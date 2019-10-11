@@ -94,26 +94,29 @@
               Confirm
             </button>
           </template>
-          <div v-if="!otpEnable && user.otpEnable" class="form-group full">
-            <label class="form-group-inner">
-              <span class="label">
-                Enter code from your Google Authenticator
-              </span>
-              <input type="text" name="otpCode" v-model="otpCode" />
-            </label>
-            <div class="input-help semi-transparent">
-              Turning off two factor verification will make your account less
-              secure
+          <template v-if="!otpEnable && user.otpEnable">
+            <div class="form-group form-group_with-label full">
+              <label class="form-group-inner">
+                <span class="label">
+                  Enter code from your Google Authenticator
+                </span>
+                <input type="text" name="otpCode" v-model="otpCode" />
+              </label>
+              <div class="input-help semi-transparent">
+                Turning off two factor verification will make your account less
+                secure
+              </div>
             </div>
-
-            <button
-              type="submit"
-              class="btn lg btn_fix-width hidden-mobile"
-              :disabled="!otpCode"
-            >
-              Confirm
-            </button>
-          </div>
+            <div class="form-group form-group_clear-gaps">
+              <button
+                type="submit"
+                class="btn lg btn_fix-width"
+                :disabled="!otpCode"
+              >
+                Confirm
+              </button>
+            </div>
+          </template>
         </div>
       </div>
 
