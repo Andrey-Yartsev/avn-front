@@ -261,9 +261,10 @@ export default {
           }
         });
         this.$store.commit("global/toastShowTrigger", {
-          text: "In order to prevent spam we need you to login to complete you ballot submission",
-          type: 'warning'
-        })
+          text:
+            "In order to prevent spam we need you to login to complete you ballot submission",
+          type: "warning"
+        });
       } else {
         this.$store
           .dispatch("awards/nominate", {
