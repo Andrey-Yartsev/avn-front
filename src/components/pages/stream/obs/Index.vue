@@ -21,7 +21,7 @@
               @click.prevent="logout"
               class="btn-logout icn-item icn-size_lg"
               :class="{ 'icn-pos_center': $mq === 'desktop' }"
-            >Log out</a
+              >Log out</a
             >
           </div>
         </div>
@@ -151,6 +151,7 @@ export default {
   },
   methods: {
     join() {
+      console.log(this.$root.ws.connected);
       const token = this.$store.state.auth.token;
       this.$root.ws.send({
         act: "stream_look",
@@ -188,9 +189,8 @@ export default {
   watch: {
     stream() {
       this.localStream = { ...this.stream };
-      setTimeout(() => {
-        this.join();
-      }, 1000);
+      this.$root.ws.removeListener("connect", this.join);
+      this.$root.ws.addListener("connect", this.join);
     },
     user: {
       immediate: true,
@@ -216,6 +216,7 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);
+    this.$root.ws.removeListener("connect", this.join);
   }
 };
 </script>
