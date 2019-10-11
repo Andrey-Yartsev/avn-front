@@ -43,7 +43,6 @@
             :id="like.date"
             :key="like.date"
             class="like"
-            :style="{ top: `400px`, left: `70px` }"
           >
             <div class="like-icon">
               <div class="like-icon__symbol icn-item" />

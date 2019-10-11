@@ -4,11 +4,6 @@
     background-color: #000;
     opacity: 1;
   }
-
-  .popup {
-    z-index: 1000;
-  }
-
 }
 
 .obs {
@@ -92,6 +87,17 @@
 
     button {
       margin-top: 20px;
+    }
+  }
+
+  .likesContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    .like {
+      bottom: -7px;
+      left: 73px;
     }
   }
 }
