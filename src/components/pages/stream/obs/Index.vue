@@ -35,10 +35,36 @@
             >
           </div>
         </div>
+
+        <div class="likesContainer">
+          <div
+            v-for="like in likes"
+            :id="like.date"
+            :key="like.date"
+            class="like"
+            :style="{ top: `400px`, left: `70px` }"
+          >
+            <div class="like-icon">
+              <div class="like-icon__symbol icn-item" />
+            </div>
+          </div>
+        </div>
+
+        <!--
+        <StreamViewers
+          :type="asideType"
+          :block="showBlockUserConfirm"
+          :kick="showKickUserConfirm"
+        />
+        -->
         <div class="form-comments">
           <Comments :shownComments="comments" :count="comments.length" />
           <AddComment :_stream="stream" />
         </div>
+        <StreamerControls
+          :asideType="asideType"
+          @changeType="type => (asideType = type)"
+        />
       </template>
     </template>
   </div>
@@ -49,6 +75,7 @@ import Loader from "@/components/common/Loader";
 import AccessFilter from "./AccessFilter";
 import Comments from "../../../common/streamComments/Index";
 import AddComment from "../../../common/streamComments/AddComment";
+import StreamerControls from "./StreamerControls";
 import User from "@/mixins/user";
 
 export default {
@@ -58,12 +85,14 @@ export default {
     Loader,
     AccessFilter,
     Comments,
-    AddComment
+    AddComment,
+    StreamerControls
   },
   data() {
     return {
       localStream: null,
-      filterOnesSelected: false
+      filterOnesSelected: false,
+      asideType: "comments"
     };
   },
   computed: {
@@ -84,6 +113,9 @@ export default {
         return false;
       }
       return this.$store.state.obs.fetchError.code === 106;
+    },
+    likes() {
+      return this.$store.state.obs.likes;
     }
   },
   methods: {

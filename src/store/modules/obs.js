@@ -2,9 +2,17 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const state = {};
+const state = {
+  likes: []
+};
+
 const actions = {};
-const mutations = {};
+
+const mutations = {
+  like(state, like) {
+    state.likes.push(like);
+  }
+};
 
 createRequestAction({
   prefix: "fetch",
