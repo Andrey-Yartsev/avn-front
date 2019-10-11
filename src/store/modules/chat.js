@@ -125,7 +125,7 @@ const actions = {
     });
 
     // if chat not found then add new chat
-    if (!chatFound) {
+    if (!chatFound && state.chats.length) {
       commit("addNewChat", {
         hasHistory: true,
         lastMessage: message,
