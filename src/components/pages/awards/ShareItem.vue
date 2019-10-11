@@ -36,7 +36,7 @@ export default {
     ending() {
       return this.isGay
         ? "#GayVNAwards @GayVN on GayVNStars.com"
-        : "@AVNAwards on AVNStars.com";
+        : "@AVNAwards on AVNStars.com #AVNAwards";
     }
   },
   methods: {
