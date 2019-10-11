@@ -224,6 +224,20 @@ export default {
           this.$router.push("/not-found");
         }
       }
+    },
+    user: {
+      handler(value, oldValue) {
+        if (value && !oldValue) {
+          this.$store
+            .dispatch("awards/nominate", this.$store.state.awards.savedData, {
+              root: true
+            })
+            .then(() => {
+              this.$store.commit("awards/clearSavedData", null, { root: true });
+            });
+        }
+      },
+      immediate: true
     }
   },
   methods: {
