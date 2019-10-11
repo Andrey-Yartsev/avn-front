@@ -8,12 +8,19 @@
         :small="true"
         class="text-light"
       />
+      <div v-else-if="needToStartStream" class="refresh-block">
+        <div>Need to start stream</div>
+        <button class="btn lg btn_fix-width" @click="refresh">Refresh</button>
+      </div>
       <template v-else>
         <div class="mediasTop">
           <div
             class="mediasTop__header stream-header mediasTop__header-underlined"
           >
-            <div class="group-controls" v-if="!filterOnesSelected">
+            <div
+              class="group-controls"
+              v-if="!stream.isTypeSelected && !filterOnesSelected"
+            >
               <AccessFilter
                 :value="localStream.type"
                 @changed="visibilityChanged"
@@ -71,6 +78,12 @@ export default {
     },
     stream() {
       return this.$store.state.obs.stream;
+    },
+    needToStartStream() {
+      if (!this.$store.state.obs.fetchError) {
+        return false;
+      }
+      return this.$store.state.obs.fetchError.code === 106;
     }
   },
   methods: {
@@ -104,6 +117,9 @@ export default {
     logout() {
       this.filterOnesSelected = false;
       this.$store.dispatch("auth/logout");
+    },
+    refresh() {
+      window.location.reload();
     }
   },
   watch: {

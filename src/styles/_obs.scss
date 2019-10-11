@@ -79,6 +79,25 @@
   .form-comments {
     bottom: 20px;
   }
+
+  .refresh-block {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+
+    div {
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+  }
 }
 
 .obs-filter {
