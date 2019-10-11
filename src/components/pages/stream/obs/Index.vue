@@ -175,7 +175,9 @@ export default {
   watch: {
     stream() {
       this.localStream = { ...this.stream };
-      this.join();
+      setTimeout(() => {
+        this.join();
+      }, 1000);
     },
     user: {
       immediate: true,
