@@ -64,7 +64,7 @@ export default class Ws extends WsAbstract {
       return;
     }
     this.emit("message", data);
-    console.log("ws:", data);
+    // console.log("ws:", data);
     const keys = Object.keys(data);
     for (let key of keys) {
       if (this.actions[key]) {

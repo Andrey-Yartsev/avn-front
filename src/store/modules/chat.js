@@ -19,8 +19,9 @@ const state = {
   chats: [],
   chatsLoading: false,
   moreChatsLoading: false,
-  typing: []
+  typing: [],
   //
+  blockNewMessagesHandling: false
 };
 
 let markAsReadId = 0;
@@ -111,6 +112,10 @@ const actions = {
     // });
   },
   newMessage({ state, commit, rootState, dispatch }, message) {
+    if (state.blockNewMessagesHandling) {
+      return;
+    }
+
     const isMine = message.fromUser.id === rootState.auth.user.id;
     // withUser - user to whom chatting
     const withUser = isMine ? message.withUser : message.fromUser;
@@ -411,6 +416,9 @@ const mutations = {
     } else {
       state.typing = state.typing.filter(v => v !== id);
     }
+  },
+  blockNewMessagesHandling(state, flag) {
+    state.blockNewMessagesHandling = flag;
   }
 };
 

@@ -1,9 +1,10 @@
 <template>
   <div class="bottom-btns">
+    <!--
     <span
       role="button"
       class="bottom-btn"
-      :class="{ selected: asideType === 'comments' }"
+      :class="{ selected: asideType === 'comments', disabled: true }"
       @click="changeType('comments')"
     >
       <span
@@ -11,11 +12,11 @@
         v-tooltip="'Comments'"
       />
     </span>
+    -->
     <span
       class="bottom-btn"
-      :class="{ selected: asideType === 'like', disabled: !likesCount }"
+      :class="{ selected: asideType === 'like', disabled: true }"
       ref="likeBtn"
-      @click="asideType = 'like'"
     >
       <span class="btn-icon likes icn-item icn-size_lg" v-tooltip="'Likes'" />
       {{ likesCount ? likesCount : "" }}
@@ -23,22 +24,20 @@
     <span
       v-if="$root.showTips"
       class="stream-btn bottom-btn"
-      @click="asideType = 'tip'"
-      :class="{ selected: asideType === 'tip', disabled: !amount }"
+      :class="{ selected: asideType === 'tip', disabled: true }"
     >
       <span class="btn-icon icn-tips icn-item icn-size_lg" v-tooltip="'Tips'" />
-      {{ amount }}
+      ${{ amount }}
     </span>
     <span
       class="stream-online-count bottom-btn"
-      @click="asideType = 'view'"
-      :class="{ selected: asideType === 'view', disabled: !looksCount }"
+      :class="{ selected: asideType === 'view', disabled: true }"
     >
       <span
         class="looking btn-icon icn-item icn-size_lg"
         v-tooltip="'Viewers'"
       />
-      {{ looksCount }}
+      {{ viewsCount }}
     </span>
   </div>
 </template>
@@ -56,13 +55,12 @@ export default {
       default: 0
     },
     likesCount: {
-      likesCount: Number,
+      type: Number,
       default: 0
-    }
-  },
-  computed: {
-    looksCount() {
-      return "X";
+    },
+    viewsCount: {
+      type: Number,
+      default: 0
     }
   },
   methods: {

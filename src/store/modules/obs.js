@@ -3,7 +3,9 @@
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {
-  likes: []
+  likes: [],
+  viewers: [],
+  tips: []
 };
 
 const actions = {};
@@ -11,6 +13,12 @@ const actions = {};
 const mutations = {
   like(state, like) {
     state.likes.push(like);
+  },
+  look(state, look) {
+    state.viewers.push(look);
+  },
+  tip(state, tip) {
+    state.tips.push(tip);
   }
 };
 

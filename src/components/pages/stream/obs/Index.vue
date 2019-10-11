@@ -7,6 +7,7 @@
         :inline="true"
         :small="true"
         class="text-light"
+        text="Loading stream"
       />
       <div v-else-if="needToStartStream" class="refresh-block">
         <div>Need to start stream</div>
@@ -64,7 +65,10 @@
         <StreamerControls
           :asideType="asideType"
           @changeType="type => (asideType = type)"
-        />
+          :likesCount="likesCount"
+          :viewsCount="viewsCount"
+          :amount="amount"
+        />{{ viewsCount }}
       </template>
     </template>
   </div>
@@ -116,6 +120,21 @@ export default {
     },
     likes() {
       return this.$store.state.obs.likes;
+    },
+    likesCount() {
+      return parseInt(this.stream.likesCount) + this.likes.length;
+    },
+    viewsCount() {
+      return (
+        parseInt(this.stream.viewsCount) + this.$store.state.obs.viewers.length
+      );
+    },
+    amount() {
+      let amount = 0;
+      this.$store.state.obs.tips.map(v => {
+        amount += v.amount;
+      });
+      return amount;
     }
   },
   methods: {
@@ -163,7 +182,9 @@ export default {
       immediate: true,
       handler(user) {
         if (user) {
-          this.$store.dispatch("obs/fetch");
+          if (!this.stream) {
+            this.$store.dispatch("obs/fetch");
+          }
         } else {
           this.$store.dispatch("modal/show", {
             name: "login",
@@ -175,6 +196,12 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.$store.commit("chat/blockNewMessagesHandling", true);
+  },
+  beforeDestroy() {
+    this.$store.commit("chat/blockNewMessagesHandling", false);
   }
 };
 </script>
