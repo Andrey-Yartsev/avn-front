@@ -70,6 +70,12 @@ export default {
         stream_user_id: this.stream.user.id,
         sess: token
       });
+      this.$root.ws.send({
+        act: "stream_start",
+        stream_id: this.stream.id,
+        stream_user_id: this.stream.user.id,
+        sess: token
+      });
     },
     update(data) {
       const stream = { ...this.stream, ...data };
