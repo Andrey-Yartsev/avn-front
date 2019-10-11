@@ -227,7 +227,7 @@ export default {
     },
     user: {
       handler(value, oldValue) {
-        if (value && !oldValue) {
+        if (value && !oldValue && this.$store.state.awards.savedData) {
           this.$store
             .dispatch("awards/nominate", this.$store.state.awards.savedData, {
               root: true
