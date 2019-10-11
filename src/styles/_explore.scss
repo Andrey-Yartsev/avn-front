@@ -875,6 +875,7 @@
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+  background-color: $default-avatar-bg;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     width: 100px;
