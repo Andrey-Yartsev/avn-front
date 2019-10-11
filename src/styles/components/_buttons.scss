@@ -1001,7 +1001,8 @@ button {
     padding-left: 15px;
     padding-right: 15px;
     z-index: 5;
-    height: 60px;
+    height: 52px;
+    margin-top: 8px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       padding: 21px 16px;
