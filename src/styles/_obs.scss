@@ -1,0 +1,107 @@
+.obs-page {
+
+  &:before {
+    background-color: #000;
+    opacity: 1;
+  }
+}
+
+.obs {
+
+  .btn-logout {
+    z-index: 3;
+    color: $secondary-color;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: 10px;
+      right: 4px;
+      position: absolute;
+      font-size: 0;
+    }
+
+    &:after {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .btn-media-event {
+    display: inline-block;
+
+    &:last-child {
+
+      .menu {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          right: auto;
+          left: 10px;
+        }
+      }
+    }
+  }
+
+  .root-btn {
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        left: 35px;
+      }
+    }
+  }
+
+  .mediasTop {
+
+    &__header {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .refresh-block {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+
+    div {
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+  }
+
+  .likesContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    .like {
+      bottom: -7px;
+      left: 73px;
+    }
+  }
+}
+
+.obs-filter {
+  position: relative;
+}

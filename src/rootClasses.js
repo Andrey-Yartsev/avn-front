@@ -51,5 +51,6 @@ export default {
     "reset-sticky-gap",
     "has-page-footer"
   ],
-  statistics: ["has-page-footer"]
+  statistics: ["has-page-footer"],
+  obs: ["obs-page"]
 };

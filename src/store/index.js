@@ -56,6 +56,7 @@ import products from "@/store/modules/products";
 import comments from "@/store/modules/comments";
 import gender from "@/store/modules/gender";
 import online from "@/store/modules/online";
+import obs from "@/store/modules/obs";
 
 Vue.use(Vuex);
 
@@ -117,7 +118,8 @@ const store = new Vuex.Store({
     products,
     comments,
     gender,
-    online
+    online,
+    obs
   }
 });
 

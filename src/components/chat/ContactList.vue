@@ -9,7 +9,7 @@
       <div
         @click="openChat(v.id)"
         class="chatView"
-        v-for="v in chats"
+        v-for="v in _chats"
         :key="v.id"
         :class="{
           active: v.active,
@@ -71,6 +71,7 @@
               <span class="isTyping">tester is typing...</span>
             </p>
           </div>
+          <button class="chat-tooltip-close"></button>
         </div>
       </div>
       <div
@@ -94,7 +95,24 @@ export default {
 
   mixins: [User, ModalRouterGoto, InfinityScrollData],
 
+  props: {
+    chats: {
+      type: Array,
+      required: true
+    },
+    onlyUnread: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   computed: {
+    _chats() {
+      if (!this.onlyUnread) {
+        return this.chats;
+      }
+      return this.chats.filter(v => !!v.unreadMessagesCount);
+    },
     scrollableComponent() {
       return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
     },
@@ -103,13 +121,6 @@ export default {
     },
     moreLoading() {
       return this.$store.state.chat.moreChatsLoading;
-    }
-  },
-
-  props: {
-    chats: {
-      type: Array,
-      required: true
     }
   },
 

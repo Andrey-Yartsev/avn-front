@@ -134,6 +134,10 @@ textarea,
 .form-field {
   display: block;
   position: relative;
+
+  &_break-all {
+    word-break: break-all;
+  }
 }
 
 .field-loading,
@@ -354,6 +358,11 @@ label {
 
   &_help-fields {
     margin-top: -12px;
+  }
+
+  &_min-height {
+    min-height: 30px;
+    padding-top: 6px;
   }
 
   &-inner {

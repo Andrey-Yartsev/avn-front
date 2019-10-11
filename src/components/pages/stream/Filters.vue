@@ -47,7 +47,7 @@
 import ClickOutside from "vue-click-outside";
 
 export default {
-  name: "Stream",
+  name: "StreamFilter",
   directives: {
     ClickOutside
   },

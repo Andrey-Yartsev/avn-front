@@ -68,25 +68,7 @@
         </div>
         <div class="form-comments">
           <Comments :shownComments="shownComments" :count="5" />
-          <form
-            class="form-comments__wrapper"
-            v-if="showCommentForm && !isMyStream"
-          >
-            <textarea
-              ref="commentInput"
-              placeholder="Comment"
-              class="form-comments__input rounded lg"
-              maxlength="200"
-              v-model="newComment"
-              @keypress.enter.prevent="sendComment"
-            />
-            <button
-              @click="sendComment"
-              type="button"
-              class="btn-send btn-send_inside-field icn-item icn-size_lg"
-              :disabled="!newComment.length"
-            ></button>
-          </form>
+          <AddComment v-if="showCommentForm && !isMyStream" ref="addComment" />
           <Tip
             v-if="$root.showTips && showTip"
             :user="streamer"
@@ -142,6 +124,7 @@ import StreamApi from "@/api/stream";
 import moment from "moment";
 import Tip from "@/components/common/tip/User";
 import Comments from "@/components/common/streamComments/Index";
+import AddComment from "@/components/common/streamComments/AddComment";
 import { getCookie } from "@/components/pages/stream/debug";
 
 export default {
@@ -150,7 +133,8 @@ export default {
     Modal,
     Loader,
     Tip,
-    Comments
+    Comments,
+    AddComment
   },
   mixins: [userMixin],
   data: () => ({
@@ -159,7 +143,6 @@ export default {
     shouldUpdateTimer: false,
     streamIsFinished: false,
     likes: [],
-    newComment: "",
     showCommentForm: false,
     showTip: false,
     connected: false,
@@ -324,25 +307,6 @@ export default {
         y: event.clientY
       });
     },
-    sendComment() {
-      if (!this.newComment.trim()) {
-        this.newComment = "";
-        return;
-      }
-
-      const token = this.$store.state.auth.token;
-      const id = this.$store.state.modal.stream.data.stream.id;
-      const userId = this.$store.state.modal.stream.data.stream.user.id;
-
-      this.$root.ws.send({
-        act: "stream_comment",
-        stream_user_id: userId,
-        stream_id: id,
-        comment: this.newComment,
-        sess: token
-      });
-      this.newComment = "";
-    },
     openCommentForm() {
       this.showCommentForm = !this.showCommentForm;
       this.showTip = false;
@@ -478,7 +442,7 @@ export default {
     showCommentForm() {
       if (this.showCommentForm) {
         this.$nextTick(() => {
-          this.$refs.commentInput.focus();
+          this.$refs.addComment.focus();
         });
       } else {
         this.newComment = "";

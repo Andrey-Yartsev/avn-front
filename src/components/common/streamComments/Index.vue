@@ -13,11 +13,11 @@
 <script>
 import Comment from "@/components/common/streamComments/Item";
 import takeRight from "lodash.takeright";
-import UserMixin from "@/mixins/user";
+import User from "@/mixins/user";
 
 export default {
   name: "StreamComments",
-  mixins: [UserMixin],
+  mixins: [User],
   components: {
     Comment
   },
