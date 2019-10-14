@@ -13,7 +13,6 @@ export default {
   data: () => ({
     opened: false
   }),
-  props: ["fontSize"],
   methods: {
     inc() {
       this.$store.commit("chat/changeFontSize", true);
