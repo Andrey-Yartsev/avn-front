@@ -63,17 +63,22 @@
           </div>
         </div>
 
-        <!--
-        <StreamViewers
-          :type="asideType"
-          :block="showBlockUserConfirm"
-          :kick="showKickUserConfirm"
-        />
-        -->
         <div class="form-comments">
-          <Comments :shownComments="comments" :count="comments.length" />
+          <Comments
+            v-if="asideType === 'comments'"
+            :shownComments="comments"
+            :count="comments.length"
+          />
+          <StreamViewers
+            v-else
+            :stateSrc="$store.state.obs"
+            :type="asideType"
+            :block="showBlockUserConfirm"
+            :kick="showKickUserConfirm"
+          />
           <AddComment :_stream="stream" />
         </div>
+
         <StreamerControls
           :asideType="asideType"
           @changeType="type => (asideType = type)"
@@ -92,6 +97,7 @@ import AccessFilter from "./AccessFilter";
 import Comments from "../../../common/streamComments/Index";
 import AddComment from "../../../common/streamComments/AddComment";
 import StreamerControls from "./StreamerControls";
+import StreamViewers from "../Viewers";
 import User from "@/mixins/user";
 
 export default {
@@ -102,7 +108,8 @@ export default {
     AccessFilter,
     Comments,
     AddComment,
-    StreamerControls
+    StreamerControls,
+    StreamViewers
   },
   data() {
     return {
@@ -151,7 +158,7 @@ export default {
   },
   methods: {
     join() {
-      console.log(this.$root.ws.connected);
+      console.log("OBS chat joined");
       const token = this.$store.state.auth.token;
       this.$root.ws.send({
         act: "stream_look",
@@ -165,6 +172,7 @@ export default {
         stream_user_id: this.stream.user.id,
         sess: token
       });
+      this.$store.commit("obs/joined", true);
     },
     update(data) {
       const stream = { ...this.stream, ...data };
@@ -184,13 +192,48 @@ export default {
     },
     refresh() {
       window.location.reload();
+    },
+    // block & kick
+    showBlockUserConfirm(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Block user",
+          success: () => this.blockUser(userId)
+        }
+      });
+    },
+    blockUser(userId) {
+      this.$store.dispatch("obs/block", {
+        streamId: this.stream.id,
+        userId
+      });
+    },
+    showKickUserConfirm(userId) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Kick user",
+          success: () => this.kickUserForStream(userId)
+        }
+      });
+    },
+    kickUserForStream(userId) {
+      this.$store.dispatch("obs/kick", {
+        streamId: this.stream.id,
+        userId
+      });
     }
   },
   watch: {
     stream() {
       this.localStream = { ...this.stream };
-      this.$root.ws.removeListener("connect", this.join);
-      this.$root.ws.addListener("connect", this.join);
+      if (this.$root.ws.connected) {
+        this.join();
+      } else {
+        this.$root.ws.removeListener("connect", this.join);
+        this.$root.ws.addListener("connect", this.join);
+      }
     },
     user: {
       immediate: true,
@@ -217,6 +260,7 @@ export default {
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);
     this.$root.ws.removeListener("connect", this.join);
+    this.$store.commit("obs/joined", false);
   }
 };
 </script>

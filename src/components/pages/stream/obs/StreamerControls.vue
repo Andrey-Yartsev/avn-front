@@ -1,10 +1,9 @@
 <template>
   <div class="bottom-btns">
-    <!--
     <span
       role="button"
       class="bottom-btn"
-      :class="{ selected: asideType === 'comments', disabled: true }"
+      :class="{ selected: asideType === 'comments' }"
       @click="changeType('comments')"
     >
       <span
@@ -12,7 +11,6 @@
         v-tooltip="'Comments'"
       />
     </span>
-    -->
     <span
       class="bottom-btn"
       :class="{ selected: asideType === 'like', disabled: true }"
@@ -30,8 +28,10 @@
       ${{ amount }}
     </span>
     <span
+      role="button"
       class="stream-online-count bottom-btn"
-      :class="{ selected: asideType === 'view', disabled: true }"
+      @click="changeType('view')"
+      :class="{ selected: asideType === 'view' }"
     >
       <span
         class="looking btn-icon icn-item icn-size_lg"
@@ -66,6 +66,7 @@ export default {
   methods: {
     changeType(type) {
       this.$emit("changeType", type);
+      console.log(type);
     }
   }
 };

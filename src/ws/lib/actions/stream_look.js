@@ -6,5 +6,6 @@ export default look => {
     (look.guest || Store.state.auth.user.id !== look.user.id)
   ) {
     Store.commit("lives/look", look);
+    Store.commit("obs/look", look);
   }
 };

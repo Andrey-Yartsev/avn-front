@@ -107,7 +107,6 @@ export default {
     }
   },
   created() {
-    console.log(this.storeKey + "/requests/fetch");
     this.$store.dispatch(this.storeKey + "/requests/fetch");
   }
 };

@@ -44,6 +44,10 @@ import uniqBy from "lodash.uniqby";
 export default {
   name: "StreamViewers",
   props: {
+    stateSrc: {
+      type: Object,
+      required: true
+    },
     type: {
       type: String,
       required: true

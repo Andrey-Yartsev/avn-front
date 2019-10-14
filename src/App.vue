@@ -1,6 +1,7 @@
 <template>
   <div v-if="!hasLayout">
     <ErrorModal v-if="error" />
+    <Confirm v-if="this.$store.state.modal.confirm.show" />
     <Toast v-if="showToast" @hide="showToast = false" />
     <LoginModal v-if="this.$store.state.modal.login.show" />
     <SignupModal v-if="this.$store.state.modal.signup.show" />
