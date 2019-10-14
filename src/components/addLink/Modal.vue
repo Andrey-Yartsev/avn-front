@@ -5,7 +5,7 @@
         <div class="content content_relative">
           <div>
             <div class="popup-addPost__header hidden-mobile">
-              Add new link
+              {{ isEditMode ? "Edit link" : "Add new link" }}
               <button
                 type="button"
                 class="close close_shift-t close_default icn-item icn-size_lg"
@@ -30,13 +30,21 @@ export default {
     Modal,
     Form
   },
+  computed: {
+    isEditMode() {
+      return !!this.$store.state.profile.links.editedLink;
+    }
+  },
   methods: {
     close(e) {
       e.preventDefault();
       this.$store.dispatch("modal/hide", { name: "addLink" });
+      this.$store.commit("profile/links/endEditLink");
     },
-    submit(data) {
-      this.$store.dispatch("profile/home/addPost", data, { root: true });
+    submit({ data, editMode }) {
+      editMode
+        ? this.$store.dispatch("profile/links/updateLink", data, { root: true })
+        : this.$store.dispatch("profile/links/addLink", data, { root: true });
     }
   }
 };

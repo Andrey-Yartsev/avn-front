@@ -29,7 +29,7 @@
             class="btn-user-activity"
             :to="`/${profile.username}/links`"
           >
-            <span class="value">0</span>
+            <span class="value">{{ profile.linksCount }}</span>
             <span class="label">Links</span>
           </router-link>
         </div>

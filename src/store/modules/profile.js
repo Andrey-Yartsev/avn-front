@@ -2,6 +2,7 @@
 
 import UserApi from "@/api/user";
 import home from "./profile/home.js";
+import links from "./profile/links.js";
 
 const state = {
   loading: false,
@@ -176,6 +177,7 @@ export default {
   actions,
   mutations,
   modules: {
-    home
+    home,
+    links
   }
 };

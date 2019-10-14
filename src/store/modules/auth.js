@@ -165,14 +165,10 @@ const mutations = {
     state.otpAuth = flag;
   },
   incrementFollowingCount() {
-    if (state.user) {
-      state.user.followingCount++;
-    }
+    state.user.linksCount += 1;
   },
   decrementFollowingCount() {
-    if (state.user) {
-      state.user.followingCount--;
-    }
+    state.user.linksCount -= 1;
   }
 };
 

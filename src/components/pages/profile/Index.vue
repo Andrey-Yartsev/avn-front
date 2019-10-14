@@ -130,15 +130,23 @@
                 v-if="!isOwner(profile.id) && profile.isPrivatePost"
                 :profile="profile"
               />
+              <LinksPage
+                v-if="pageName === 'links'"
+                :private="isOwner(this.profile.id)"
+              />
               <template v-else>
-                <!-- <p
-                  :class="['empty-feed']"
-                  v-if="!posts.length && !infinityScrollLoading"
-                > -->
                 <p
                   :class="['empty-feed']"
-                  v-if="!posts.length && infinityScrollLoading"
+                  v-if="
+                    !posts.length &&
+                      !infinityScrollLoading &&
+                      pageName !== 'links'
+                  "
                 >
+                  <!-- <p
+                  :class="['empty-feed']"
+                  v-if="!posts.length && infinityScrollLoading"
+                > -->
                   <span>Nothing here yet</span>
                   <button
                     v-if="isOwner(this.profile.id) && pageName !== 'links'"
@@ -172,24 +180,14 @@
                             from="profile/home"
                             @visibilityChanged="visibilityChanged"
                           />
-                          <div
-                            v-if="
-                              isOwner(this.profile.id) && pageName === 'links'
-                            "
-                            class="addLink__wrapper"
-                          >
-                            <button
-                              class="addLink__button make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
-                              @click="openAddLinkModal"
-                            >
-                              Add new link
-                            </button>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="loader-infinity" v-if="infinityScrollLoading">
+                  <div
+                    class="loader-infinity"
+                    v-if="infinityScrollLoading && pageName !== 'links'"
+                  >
                     <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </div>
@@ -227,6 +225,7 @@ import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
+import LinksPage from "@/components/common/profile/links/Index";
 
 export default {
   name: "ProfileHome",
@@ -246,7 +245,8 @@ export default {
     PostMedium,
     PrivateBlock,
     Highlights,
-    LinkPost
+    LinkPost,
+    LinksPage
   },
 
   data() {
@@ -322,9 +322,9 @@ export default {
       if (this.$mq === "mobile" && this.pageName === "videos") {
         return PostMedium;
       }
-      if (this.pageName === "links") {
-        return LinkPost;
-      }
+      // if (this.pageName === "links") {
+      //   return LinkPost;
+      // }
 
       return PostSmall;
     },
@@ -352,7 +352,9 @@ export default {
     pageName() {
       this.scrollToTop();
       this.footerScrollAction();
-      this.initPosts();
+      if (this.pageName !== "links") {
+        this.initPosts();
+      }
     },
     newPost() {
       this.initPosts();
@@ -410,14 +412,6 @@ export default {
         name: "addPost"
       });
     },
-    openAddLinkModal() {
-      this.$store.dispatch("modal/show", {
-        name: "addLink"
-      });
-    },
-    // addLinkPost(post) {
-    //   this.$store.commit("profile/home/addPost", post)
-    // },
     infinityScrollGetDataMethod() {
       if (this.profile) {
         this.getPosts();

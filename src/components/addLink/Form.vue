@@ -4,12 +4,7 @@
       <div class="body">
         <div class="field url">
           <span class="label">Link url</span>
-          <input
-            type="text"
-            placeholder="Link url..."
-            v-model.trim="url"
-            name="url"
-          />
+          <input type="text" v-model.trim="url" name="url" />
         </div>
         <div class="urlRoute">
           <span :class="{ selected: url && isWebLink }">Web URL</span>
@@ -18,24 +13,20 @@
         </div>
         <div class="field title">
           <span class="label">Link title</span>
-          <input
-            type="text"
-            placeholder="Link title..."
-            v-model.trim="title"
-            name="title"
-            required
-          />
+          <input type="text" v-model.trim="title" name="title" required />
         </div>
         <div class="field pin">
           <label>
-            <input type="checkbox" v-model="pinLink" />
+            <input type="checkbox" v-model="pinned" />
             Pin link
           </label>
         </div>
       </div>
       <div class="footer">
         <button @click="closeHandler">Cancel</button>
-        <button type="submit" :disabled="isDisabled">Add</button>
+        <button type="submit" :disabled="isDisabled">
+          {{ isEditMode ? "Update" : "Add" }}
+        </button>
       </div>
     </form>
   </div>
@@ -48,7 +39,7 @@ export default {
     return {
       url: "",
       title: "",
-      pinLink: false
+      pinned: false
     };
   },
   computed: {
@@ -57,6 +48,9 @@ export default {
     },
     isWebLink() {
       return this.isStringMatch(this.url);
+    },
+    isEditMode() {
+      return !!this.$store.state.profile.links.editedLink;
     }
   },
   methods: {
@@ -67,11 +61,13 @@ export default {
       const newLink = {
         url: this.url,
         title: this.title,
-        pinLink: this.pinLink,
-        id: Math.random() + Date.now()
+        pinned: this.pinned
       };
+      if (this.isEditMode) {
+        newLink.id = this.id;
+      }
+      this.$emit("submit", { data: newLink, editMode: this.isEditMode });
       this.closeHandler(e);
-      this.$emit("submit", newLink);
     },
     clear() {
       this.url = "";
@@ -80,6 +76,17 @@ export default {
     closeHandler(e) {
       this.clear();
       this.close(e);
+    },
+    seedForm() {
+      this.url = this.$store.state.profile.links.editedLink.url;
+      this.title = this.$store.state.profile.links.editedLink.title;
+      this.pinned = this.$store.state.profile.links.editedLink.pinned;
+      this.id = this.$store.state.profile.links.editedLink.id;
+    }
+  },
+  mounted() {
+    if (this.$store.state.profile.links.editedLink) {
+      this.seedForm();
     }
   }
 };
