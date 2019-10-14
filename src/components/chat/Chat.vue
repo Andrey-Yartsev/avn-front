@@ -101,7 +101,10 @@
           <div class="chatCollectionContentWrapper">
             <div class="chatMessagesCollectionView">
               <template v-if="activeUser">
-                <Messages :withUser="activeUser" :style="{ fontSize: fontSize + 'px' }" />
+                <Messages
+                  :withUser="activeUser"
+                  :style="{ fontSize: fontSize + 'px' }"
+                />
                 <AddMessage :withUser="activeUser" />
               </template>
             </div>
