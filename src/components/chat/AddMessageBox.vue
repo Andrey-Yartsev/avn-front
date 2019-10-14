@@ -1,132 +1,134 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
     <FontSizeControls />
-    <div class="addFileCollectionView" v-if="preloadedMedias.length">
-      <MediaPreview
-        v-for="media in preloadedMedias"
-        :media="media"
-        :key="media.id"
-        :isSaving="isSaving"
-        @removeMedia="removeMedia"
-      />
-    </div>
-    <div class="chatForm">
-      <label
-        class="add-media-input"
-        :class="{ disabled: showTip || showPaid }"
-        :disabled="disable"
-        v-if="!preloadedMedias.length"
-        v-tooltip="'Media'"
-      >
-        <input
-          @change="addMediaFiles"
-          type="file"
-          accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+    <div class="addChatMessage__inside-section">
+      <div class="addFileCollectionView" v-if="preloadedMedias.length">
+        <MediaPreview
+          v-for="media in preloadedMedias"
+          :media="media"
+          :key="media.id"
+          :isSaving="isSaving"
+          @removeMedia="removeMedia"
         />
-        <span class="icn-media icn-item icn-size_lg"></span>
-      </label>
-      <button
-        v-if="withUser && withUser.canEarn && $root.showTips"
-        class="tips btn-el"
-        @click.prevent="showTip = !showTip"
-        :class="{ active: showTip, disabled: showPaid }"
-        v-tooltip="'Tip'"
-      >
-        <span class="icn-tips icn-item icn-size_lg"></span>
-      </button>
-
-      <div
-        class="field-text-message"
-        :class="{ disabled: showTip || showPaid, 'has-price': priceIsSet }"
-      >
-        <TextareaAutosize
-          v-model="message"
-          class="text-media-container rounded lg"
-          rows="1"
-          cols="60"
-          placeholder="Message"
-          maxlength="500"
-          :minHeight="30"
-          :maxHeight="100"
-          @enter="sendMessage"
-          @keypress="keypress"
-          :disabled="disable"
-        ></TextareaAutosize>
-
-        <div class="price-message-wrapper" v-if="priceIsSet">
-          <span class="price-message">${{ price }}</span>
-          <button
-            type="button"
-            class="btn-clear-price btn-reset btn-reset_fix-sizes btn-reset_ml icn-item icn-pos_center"
-            @click="resetPrice"
-          ></button>
-        </div>
       </div>
-
-      <Tip
-        v-if="withUser && withUser.canEarn && $root.showTips"
-        :user="withUser"
-        ref="tip"
-        @cancel="closeTip"
-        :class="{ chatTip: true, hidden: !showTip }"
-      />
-
-      <div
-        class="tip-form tip-form_post getPaidForm"
-        v-if="showPaid"
-        key="paidPrice"
-      >
-        <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
-          Cancel
-        </button>
-        <input type="hidden" name="priceAmount" class="getPaidAmount" />
-        <div class="price-amount-field getPaidForm__field enabled-tooltip">
+      <div class="chatForm">
+        <label
+          class="add-media-input"
+          :class="{ disabled: showTip || showPaid }"
+          :disabled="disable"
+          v-if="!preloadedMedias.length"
+          v-tooltip="'Media'"
+        >
           <input
-            type="number"
-            name="paidPrice"
-            class="getPaidAmountPlaceholder"
-            placeholder="Enter price"
-            v-model="price"
-            :class="{ error: fieldError('paidPrice') }"
-            v-validate="'subscription-price'"
+            @change="addMediaFiles"
+            type="file"
+            accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
           />
-          <div
-            class="tooltip tooltip_error-field"
-            x-placement="top"
-            aria-hidden="true"
-            v-if="fieldError('paidPrice')"
-          >
-            <div class="tooltip-arrow"></div>
-            <div class="tooltip-inner">
-              {{ fieldError("paidPrice") }}
-            </div>
+          <span class="icn-media icn-item icn-size_lg"></span>
+        </label>
+        <button
+          v-if="withUser && withUser.canEarn && $root.showTips"
+          class="tips btn-el"
+          @click.prevent="showTip = !showTip"
+          :class="{ active: showTip, disabled: showPaid }"
+          v-tooltip="'Tip'"
+        >
+          <span class="icn-tips icn-item icn-size_lg"></span>
+        </button>
+
+        <div
+          class="field-text-message"
+          :class="{ disabled: showTip || showPaid, 'has-price': priceIsSet }"
+        >
+          <TextareaAutosize
+            v-model="message"
+            class="text-media-container rounded lg"
+            rows="1"
+            cols="60"
+            placeholder="Message"
+            maxlength="500"
+            :minHeight="30"
+            :maxHeight="100"
+            @enter="sendMessage"
+            @keypress="keypress"
+            :disabled="disable"
+          ></TextareaAutosize>
+
+          <div class="price-message-wrapper" v-if="priceIsSet">
+            <span class="price-message">${{ price }}</span>
+            <button
+              type="button"
+              class="btn-clear-price btn-reset btn-reset_fix-sizes btn-reset_ml icn-item icn-pos_center"
+              @click="resetPrice"
+            ></button>
           </div>
         </div>
-        <button
-          class="setPrice btn"
-          @click="setPrice"
-          :disabled="!isFormValid || !price"
+
+        <Tip
+          v-if="withUser && withUser.canEarn && $root.showTips"
+          :user="withUser"
+          ref="tip"
+          @cancel="closeTip"
+          :class="{ chatTip: true, hidden: !showTip }"
+        />
+
+        <div
+          class="tip-form tip-form_post getPaidForm"
+          v-if="showPaid"
+          key="paidPrice"
         >
-          Set Price
+          <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
+            Cancel
+          </button>
+          <input type="hidden" name="priceAmount" class="getPaidAmount" />
+          <div class="price-amount-field getPaidForm__field enabled-tooltip">
+            <input
+              type="number"
+              name="paidPrice"
+              class="getPaidAmountPlaceholder"
+              placeholder="Enter price"
+              v-model="price"
+              :class="{ error: fieldError('paidPrice') }"
+              v-validate="'subscription-price'"
+            />
+            <div
+              class="tooltip tooltip_error-field"
+              x-placement="top"
+              aria-hidden="true"
+              v-if="fieldError('paidPrice')"
+            >
+              <div class="tooltip-arrow"></div>
+              <div class="tooltip-inner">
+                {{ fieldError("paidPrice") }}
+              </div>
+            </div>
+          </div>
+          <button
+            class="setPrice btn"
+            @click="setPrice"
+            :disabled="!isFormValid || !price"
+          >
+            Set Price
+          </button>
+        </div>
+
+        <button
+          class="getPaid btn-el"
+          :class="{ active: showPaid, disabled: showTip }"
+          v-if="user.canEarn"
+          @click="showPaidForm"
+          v-tooltip="'Price'"
+        >
+          <span class="icn-item icn-price icn-size_lg"></span>
         </button>
+
+        <button
+          @click="sendMessage"
+          class="btn-send btn-send_default icn-item icn-size_lg"
+          :disabled="!canSend || disable"
+          v-tooltip="'Send'"
+        ></button>
       </div>
-
-      <button
-        class="getPaid btn-el"
-        :class="{ active: showPaid, disabled: showTip }"
-        v-if="user.canEarn"
-        @click="showPaidForm"
-        v-tooltip="'Price'"
-      >
-        <span class="icn-item icn-price icn-size_lg"></span>
-      </button>
-
-      <button
-        @click="sendMessage"
-        class="btn-send btn-send_default icn-item icn-size_lg"
-        :disabled="!canSend || disable"
-        v-tooltip="'Send'"
-      ></button>
     </div>
   </div>
 </template>

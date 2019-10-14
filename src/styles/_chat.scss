@@ -1290,13 +1290,14 @@
 }
 
 .switcher-font-options {
-  position: absolute;
-  left: 0;
-  bottom: 60px;
-  z-index: 0;
+  margin-left: 13px;
+  margin-bottom: 8px;
+  position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    bottom: 76px;
+    margin-left: 17px;
+    margin-bottom: 13px;
+    margin-top: 10px;
   }
 
   &__sizes {
