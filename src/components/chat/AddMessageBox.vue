@@ -1,10 +1,6 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
-    <FontSizeControls
-      :fontSize="fontSize"
-      @increase="increaseFontSize"
-      @decrease="decreaseFontSize"
-    />
+    <FontSizeControls />
     <div class="addFileCollectionView" v-if="preloadedMedias.length">
       <MediaPreview
         v-for="media in preloadedMedias"
@@ -173,8 +169,7 @@ export default {
       showTip: false,
       showPaid: false,
       price: "",
-      priceIsSet: false,
-      fontSize: 14
+      priceIsSet: false
     };
   },
 
@@ -297,12 +292,6 @@ export default {
         typing_from_name: this.user.name,
         typing_from_id: this.user.id
       });
-    },
-    increaseFontSize() {
-      this.fontSize++;
-    },
-    decreaseFontSize() {
-      this.fontSize--;
     }
   }
 };

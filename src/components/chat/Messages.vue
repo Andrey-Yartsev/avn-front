@@ -44,7 +44,7 @@
                 <img :src="v.fromUser.avatar" v-if="v.fromUser.avatar" />
               </span>
             </div>
-            <div class="messageContent">
+            <div class="messageContent" :style="{ fontSize: chatFontsize }">
               <div
                 class="messageWrapper"
                 :class="{
@@ -182,6 +182,9 @@ export default {
   computed: {
     scrollableComponent() {
       return this.$mq === "mobile" ? "div" : "perfect-scrollbar";
+    },
+    chatFontsize() {
+      return this.$store.state.chat.fontSize + "px";
     },
     container() {
       if (this.$mq === "mobile") {

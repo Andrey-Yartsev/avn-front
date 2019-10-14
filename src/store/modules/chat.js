@@ -19,7 +19,8 @@ const state = {
   chats: [],
   chatsLoading: false,
   moreChatsLoading: false,
-  typing: []
+  typing: [],
+  fontSize: 14
   //
 };
 
@@ -411,6 +412,10 @@ const mutations = {
     } else {
       state.typing = state.typing.filter(v => v !== id);
     }
+  },
+  changeFontSize(state, isBigger) {
+    // console.log(state)
+    isBigger ? state.fontSize++ : state.fontSize--;
   }
 };
 

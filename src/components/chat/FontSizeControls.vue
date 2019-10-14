@@ -16,10 +16,10 @@ export default {
   props: ["fontSize"],
   methods: {
     inc() {
-      this.$emit("increase");
+      this.$store.commit("chat/changeFontSize", true);
     },
     dec() {
-      this.$emit("decrease");
+      this.$store.commit("chat/changeFontSize", false);
     },
     open() {
       this.opened = !this.opened;
