@@ -76,7 +76,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 60px;
-        width: 72px;
+        width: 60px;
         padding: 0;
       }
     }
@@ -1258,8 +1258,8 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     flex-shrink: 1;
-    flex-basis: 76px;
-    width: 76px;
+    flex-basis: 60px;
+    width: 60px;
     padding-top: 12px;
   }
 
