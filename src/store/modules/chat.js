@@ -20,7 +20,7 @@ const state = {
   chatsLoading: false,
   moreChatsLoading: false,
   typing: [],
-  //
+  fontSize: 14,
   blockNewMessagesHandling: false
 };
 
@@ -417,8 +417,13 @@ const mutations = {
       state.typing = state.typing.filter(v => v !== id);
     }
   },
+
   blockNewMessagesHandling(state, flag) {
     state.blockNewMessagesHandling = flag;
+  },
+
+  changeFontSize(state, isBigger) {
+    isBigger ? state.fontSize++ : state.fontSize--;
   }
 };
 

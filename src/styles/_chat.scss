@@ -1494,3 +1494,108 @@
     }
   }
 }
+
+.switcher-font-options {
+  margin: 5px 0 8px 13px;
+  position: relative;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    margin: 10px 0 13px 17px;
+  }
+
+  &__sizes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    transition: width .3s, left .3s, opacity .2s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+
+    .opened & {
+      width: 84px;
+      left: 42px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .button-font {
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      .opened & {
+        opacity: 1;
+      }
+
+      &_increase {
+
+        .opened & {
+          left: 42px;
+        }
+      }
+    }
+  }
+}
+
+.button-font {
+  color: rgba($gray, 0.7);
+  margin-right: 6px;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  font-size: 0;
+  cursor: pointer;
+
+  &:after {
+    @include icon-font;
+    font-size: 30px;
+  }
+
+  &_switcher {
+    position: relative;
+    z-index: 1;
+    transition: color .2s;
+
+    &:after {
+      content: "\E680";
+    }
+
+    .opened & {
+      color: $secondary-color;
+    }
+  }
+
+  &_decrease {
+    opacity: 0;
+    transition: opacity .2s, color .2s;
+
+    &:after {
+      content: "\E682";
+    }
+  }
+
+  &_increase {
+    opacity: 0;
+    transition: left .3s, opacity .2s, color .2s;
+    transition-delay: .2s;
+
+    &:after {
+      content: "\E681";
+    }
+  }
+
+  &_decrease,
+  &_increase {
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
