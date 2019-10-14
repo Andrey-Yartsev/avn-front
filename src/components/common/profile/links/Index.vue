@@ -13,6 +13,13 @@
           @delete="deleteHandler(link)"
         />
       </div>
+      <template v-if="!loading && !links.length">
+        <p class="empty-feed">
+          <span>
+            Nothing here yet
+          </span>
+        </p>
+      </template>
       <button
         v-if="this.$props.private"
         class="addLink__button make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
