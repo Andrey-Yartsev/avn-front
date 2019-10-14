@@ -1290,14 +1290,11 @@
 }
 
 .switcher-font-options {
-  margin-left: 13px;
-  margin-bottom: 8px;
+  margin: 5px 0 8px 13px;
   position: relative;
 
   @include media-breakpoint-up($desktop-breakpoint) {
-    margin-left: 17px;
-    margin-bottom: 13px;
-    margin-top: 10px;
+    margin: 10px 0 13px 17px;
   }
 
   &__sizes {
