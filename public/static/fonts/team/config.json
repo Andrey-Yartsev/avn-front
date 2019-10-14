@@ -1517,6 +1517,48 @@
       "search": [
         "icon-gay-award-(1)"
       ]
+    },
+    {
+      "uid": "3327f464971c10c18e972343427aeba4",
+      "css": "icon-font-size-inactive",
+      "code": 59008,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M500 1000A500 500 0 1 1 1000 500 500.6 500.6 0 0 1 500 1000ZM707.5 604.1L725.2 655.4H796.6L697.4 391.6H621.1L578 504.7 617 604.1ZM369.8 586.3H500L523.6 655.4H620L486.3 300H383.3L250 655.4H346.4L369.8 586.3ZM691.9 557.1H626.9L658.5 462.8H660L692 557ZM478.6 522.8H391L433.8 395.7H435.5L478.6 522.7Z",
+        "width": 1000
+      },
+      "search": [
+        "icon-font-size-inactive"
+      ]
+    },
+    {
+      "uid": "1937f71cd8fdcc9aa3d010bdc2e6420a",
+      "css": "plus",
+      "code": 59009,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M500 1000A500 500 0 1 1 1000 500 500.6 500.6 0 0 1 500 1000ZM450 550V700H550V550H700V450H550V300H450V450H300V550Z",
+        "width": 1000
+      },
+      "search": [
+        "plus"
+      ]
+    },
+    {
+      "uid": "4ee043692eb088e9a20554f7b5da9ab8",
+      "css": "minus",
+      "code": 59010,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M500 1000A500 500 0 1 1 1000 500 500.5 500.5 0 0 1 500 1000ZM300 450V550H700V450Z",
+        "width": 1000
+      },
+      "search": [
+        "minus"
+      ]
     }
   ]
 }

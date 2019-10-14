@@ -1,5 +1,10 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
+    <FontSizeControls
+      :fontSize="fontSize"
+      @increase="increaseFontSize"
+      @decrease="decreaseFontSize"
+    />
     <div class="addFileCollectionView" v-if="preloadedMedias.length">
       <MediaPreview
         v-for="media in preloadedMedias"
@@ -137,6 +142,7 @@ import Tip from "@/components/common/tip/User";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
 import User from "@/mixins/user";
 import Form from "@/mixins/form";
+import FontSizeControls from "./FontSizeControls";
 
 export default {
   name: "ChatAddMesssageBox",
@@ -146,7 +152,8 @@ export default {
   components: {
     MediaPreview,
     Tip,
-    TextareaAutosize
+    TextareaAutosize,
+    FontSizeControls
   },
 
   props: {
@@ -166,7 +173,8 @@ export default {
       showTip: false,
       showPaid: false,
       price: "",
-      priceIsSet: false
+      priceIsSet: false,
+      fontSize: 14
     };
   },
 
@@ -289,6 +297,12 @@ export default {
         typing_from_name: this.user.name,
         typing_from_id: this.user.id
       });
+    },
+    increaseFontSize() {
+      this.fontSize++;
+    },
+    decreaseFontSize() {
+      this.fontSize--;
     }
   }
 };
