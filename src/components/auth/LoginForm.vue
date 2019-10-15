@@ -101,7 +101,7 @@
       <button
         class="btn block btn-twitter"
         :class="{ lg: largeControls }"
-        @click.prevent="twitter"
+        @click.prevent="handleTwitter"
       >
         <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with
         Twitter
@@ -190,6 +190,15 @@ export default {
   },
 
   methods: {
+    handleTwitter() {
+      if (this.$store.state.awards.savedData) {
+        localStorage.setItem(
+          "savedData",
+          JSON.stringify(this.$store.state.awards.savedData)
+        );
+      }
+      this.twitter();
+    },
     login() {
       this.$validator.validate().then(result => {
         if (result) {

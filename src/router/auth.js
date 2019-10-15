@@ -87,6 +87,7 @@ const Auth = {
   },
 
   requireAuthOrExplore(to, from, next) {
+    const savedData = localStorage.getItem("savedData");
     BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     const trialCodeExists = saveTrialCode();
 
@@ -97,6 +98,9 @@ const Auth = {
       return;
     }
     if (Auth.loggedIn) {
+      if (savedData) {
+        return next("/avn_awards/nominations");
+      }
       return next();
     }
     const token = BrowserStore.get("token");
@@ -108,6 +112,9 @@ const Auth = {
       .then(() => {
         if (trialCodeExists) {
           return next("/");
+        }
+        if (savedData) {
+          return next("/avn_awards/nominations");
         }
         next();
       })

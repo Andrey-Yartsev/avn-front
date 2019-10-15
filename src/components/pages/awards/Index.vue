@@ -103,15 +103,16 @@
         </div>
       </form>
     </template>
-
-    <Share
-      v-else
-      :categories="_categories"
-      :data="data || this.$store.state.awards.savedData.data"
-      :modelUser="modelUser"
-      :isGay="isGay"
-      @complete="complete"
-    />
+    <template v-else>
+      <Share
+        v-if="$store.state.awards.categories"
+        :categories="_categories"
+        :data="data || this.$store.state.awards.savedData.data"
+        :modelUser="modelUser"
+        :isGay="isGay"
+        @complete="complete"
+      />
+    </template>
   </div>
 </template>
 
@@ -348,6 +349,26 @@ export default {
     document.head.appendChild(script);
   },
   mounted() {
+    const savedDataFromStorage = localStorage.getItem("savedData");
+    if (savedDataFromStorage) {
+      const storageData = JSON.parse(savedDataFromStorage);
+      this.data = storageData.data;
+      localStorage.removeItem("savedData");
+      this.$store
+        .dispatch(
+          "awards/nominate",
+          {
+            eventId: storageData.eventId,
+            data: storageData.data
+          },
+          {
+            root: true
+          }
+        )
+        .then(() => {
+          this.$store.commit("awards/clearSavedData", null, { root: true });
+        });
+    }
     const savedData =
       this.$store.state.awards.savedData &&
       this.$store.state.awards.savedData.data;
