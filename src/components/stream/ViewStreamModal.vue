@@ -79,7 +79,8 @@
             :needLgClassName="true"
           />
         </div>
-        <div class="bottom-btns" v-if="connected && !isMyStream && isAuth()">
+
+        <div class="bottom-btns" v-if="connected && !isMyStream && isLogedUser">
           <span role="button" class="bottom-btn" @click="openCommentForm">
             <span
               class="btn-icon comments icn-item icn-size_lg"
@@ -107,6 +108,14 @@
             <span
               class="looking btn-icon icn-item icn-size_lg"
               v-tooltip="'Viewers'"
+            ></span>
+          </span>
+        </div>
+        <div v-else class="bottom-btns">
+          <span role="button" class="bottom-btn" @click="openCommentForm">
+            <span
+              class="btn-icon comments icn-item icn-size_lg"
+              v-tooltip="'Comments'"
             ></span>
           </span>
         </div>
@@ -308,6 +317,16 @@ export default {
       });
     },
     openCommentForm() {
+      if (!this.$store.state.auth.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login"
+        });
+        this.$store.commit("global/toastShowTrigger", {
+          text: "To send chat comments, you have to login",
+          type: "warning"
+        });
+        return;
+      }
       this.showCommentForm = !this.showCommentForm;
       this.showTip = false;
     },

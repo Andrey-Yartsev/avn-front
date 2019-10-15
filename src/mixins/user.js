@@ -2,6 +2,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    isLogedUser() {
+      return !!this.$store.state.auth.user;
     }
   },
   methods: {
