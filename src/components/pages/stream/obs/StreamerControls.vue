@@ -13,8 +13,9 @@
     </span>
     <span
       class="bottom-btn"
-      :class="{ selected: asideType === 'like', disabled: true }"
+      :class="{ selected: asideType === 'likes' }"
       ref="likeBtn"
+      @click="changeType('likes')"
     >
       <span class="btn-icon likes icn-item icn-size_lg" v-tooltip="'Likes'" />
       {{ likesCount ? likesCount : "" }}
@@ -30,8 +31,8 @@
     <span
       role="button"
       class="stream-online-count bottom-btn"
-      @click="changeType('view')"
-      :class="{ selected: asideType === 'view' }"
+      @click="changeType('viewers')"
+      :class="{ selected: asideType === 'viewers' }"
     >
       <span
         class="looking btn-icon icn-item icn-size_lg"
@@ -66,7 +67,6 @@ export default {
   methods: {
     changeType(type) {
       this.$emit("changeType", type);
-      console.log(type);
     }
   }
 };

@@ -216,7 +216,6 @@
           />
           <StreamViewers
             v-else
-            :stateSrc="$store.state.lives.currentLive"
             :type="asideType"
             :block="showBlockUserConfirm"
             :kick="showKickUserConfirm"

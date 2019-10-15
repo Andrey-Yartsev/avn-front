@@ -1,10 +1,10 @@
 <template>
   <div v-if="!hasLayout">
     <ErrorModal v-if="error" />
-    <Confirm v-if="this.$store.state.modal.confirm.show" />
+    <Confirm v-if="$store.state.modal.confirm.show" />
     <Toast v-if="showToast" @hide="showToast = false" />
-    <LoginModal v-if="this.$store.state.modal.login.show" />
-    <SignupModal v-if="this.$store.state.modal.signup.show" />
+    <LoginModal v-if="$store.state.modal.login.show" />
+    <SignupModal v-if="$store.state.modal.signup.show" />
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">

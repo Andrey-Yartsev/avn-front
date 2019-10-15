@@ -16,17 +16,17 @@
             <span class="name">{{ item.user.name || "Guest" }}</span>
             <span class="comment-text stream-message__values">
               <span class="icn-item icn-size_md" :class="className" />
-              {{ type === "like" ? getLikesCount(item.user.id) : "" }}
+              {{ type === "likes" ? getCount(item.user.id) : "" }}
               {{ type === "tip" ? item.amount.toFixed(2) : "" }}
             </span>
             <span
-              v-if="type === 'view'"
+              v-if="type === 'viewers'"
               class="btn-icon icn-item icn-size_lg icn-block"
               v-tooltip="'Block'"
               @click="() => block(item.user.id)"
             />
             <span
-              v-if="type === 'view'"
+              v-if="type === 'viewers'"
               class="btn-icon icn-item icn-size_lg icn-kick"
               v-tooltip="'Kick'"
               @click="() => kick(item.user.id)"
@@ -58,21 +58,23 @@ export default {
     }
   },
   methods: {
-    getLikesCount(id) {
-      return this.$store.state.obs.likes.filter(i => i.user.id === id).length;
+    getCount(id) {
+      return this.$store.state.lives.currentLive.likers.filter(
+        i => i.user.id === id
+      ).length;
     }
   },
   computed: {
     className() {
       if (this.type === "view") return "looking";
       if (this.type === "tip") return "icn-tips";
-      if (this.type === "like") return "likes";
+      if (this.type === "likes") return "likes";
     },
     items() {
-      if (this.type === "view")
+      if (this.type === "viewers")
         return uniqBy(this.$store.state.obs.viewers, "user.id");
       if (this.type === "tip") return this.$store.state.obs.tips;
-      if (this.type === "like")
+      if (this.type === "likes")
         return uniqBy(this.$store.state.obs.likes, "user.id");
     }
   }

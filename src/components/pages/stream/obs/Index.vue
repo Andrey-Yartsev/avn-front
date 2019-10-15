@@ -71,7 +71,6 @@
           />
           <StreamViewers
             v-else
-            :stateSrc="$store.state.obs"
             :type="asideType"
             :block="showBlockUserConfirm"
             :kick="showKickUserConfirm"
@@ -97,7 +96,7 @@ import AccessFilter from "./AccessFilter";
 import Comments from "../../../common/streamComments/Index";
 import AddComment from "../../../common/streamComments/AddComment";
 import StreamerControls from "./StreamerControls";
-import StreamViewers from "../Viewers";
+import StreamViewers from "./Viewers";
 import User from "@/mixins/user";
 
 export default {
