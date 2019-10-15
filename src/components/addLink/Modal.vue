@@ -42,6 +42,9 @@ export default {
       this.$store.commit("profile/links/endEditLink");
     },
     submit({ data, editMode }) {
+      if (data.url.indexOf("http") !== 0) {
+        data.url = "/" + data.url;
+      }
       editMode
         ? this.$store.dispatch("profile/links/updateLink", data, { root: true })
         : this.$store.dispatch("profile/links/addLink", data, { root: true });

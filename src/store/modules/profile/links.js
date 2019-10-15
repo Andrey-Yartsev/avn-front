@@ -55,7 +55,8 @@ const actions = {
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
-            commit("setLinks", res.list);
+            const links = res.list.sort(a => (a.pinned ? -1 : 1));
+            commit("setLinks", links);
             commit("endLoading");
           });
         } else {
@@ -68,26 +69,33 @@ const actions = {
       });
   },
   addLink({ commit }, data) {
-    return UserApi.postLink(data).then(response => {
-      console.log(response);
-      //change data to response
-      commit("addLink", data);
-      commit("auth/incrementFollowingCount", null, { root: true });
-    });
+    return UserApi.postLink(data)
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        commit("addLink", res);
+        commit("auth/incrementFollowingCount", null, { root: true });
+      });
   },
   updateLink({ commit }, data) {
-    return UserApi.updateLink(data).then(response => {
-      console.log(response);
-      commit("updateLink", data);
-    });
-    // commit("updateLink", data);
+    return UserApi.updateLink(data)
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        commit("updateLink", res);
+      });
   },
   deleteLink({ commit }, linkId) {
-    return UserApi.deleteLink(linkId).then(response => {
-      console.log(response);
-      commit("deleteLink", linkId);
-      commit("auth/decrementFollowingCount", null, { root: true });
-    });
+    return UserApi.deleteLink(linkId)
+      .then(response => {
+        return response.json();
+      })
+      .then(() => {
+        commit("deleteLink", linkId);
+        commit("auth/decrementFollowingCount", null, { root: true });
+      });
   },
   clearLinks({ commit }) {
     commit("clearLinks");
