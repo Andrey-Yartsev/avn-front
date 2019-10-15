@@ -123,6 +123,7 @@ import UserSearchField from "./UserSearchField";
 import Columns from "./Columns";
 import User from "@/mixins/user";
 import Share from "./Share";
+import BrowserStore from "store";
 
 export default {
   name: "AvnAwards",
@@ -349,11 +350,10 @@ export default {
     document.head.appendChild(script);
   },
   mounted() {
-    const savedDataFromStorage = localStorage.getItem("savedData");
-    if (savedDataFromStorage) {
-      const storageData = JSON.parse(savedDataFromStorage);
+    const storageData = BrowserStore.get("nomUserRegData");
+    if (storageData) {
       this.data = storageData.data;
-      localStorage.removeItem("savedData");
+      BrowserStore.remove("nomUserRegData");
       this.$store
         .dispatch(
           "awards/nominate",

@@ -87,7 +87,7 @@ const Auth = {
   },
 
   requireAuthOrExplore(to, from, next) {
-    const savedData = localStorage.getItem("savedData");
+    const savedData = BrowserStore.get("nomUserRegData");
     BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     const trialCodeExists = saveTrialCode();
 

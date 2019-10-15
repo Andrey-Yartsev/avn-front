@@ -136,6 +136,7 @@ import Recaptcha from "vue-recaptcha";
 import Common from "@/components/auth/common";
 import Login from "@/components/auth/login";
 import Form from "@/mixins/form";
+import BrowserStore from "store";
 
 export default {
   name: "LoginForm",
@@ -192,10 +193,7 @@ export default {
   methods: {
     handleTwitter() {
       if (this.$store.state.awards.savedData) {
-        localStorage.setItem(
-          "savedData",
-          JSON.stringify(this.$store.state.awards.savedData)
-        );
+        BrowserStore.set("nomUserRegData", this.$store.state.awards.savedData);
       }
       this.twitter();
     },
