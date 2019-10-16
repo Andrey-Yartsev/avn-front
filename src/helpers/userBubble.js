@@ -27,7 +27,7 @@ const _open = ({ a, username }) => {
   bubble.style.visibility = "hidden";
   bubble.style.left = r.left + "px";
   if (!username) {
-    username = a.innerText.replace(/@(.*)/, "$1");
+    username = a.dataset.login.replace(/@(.*)/, "$1");
   }
   Store.dispatch("userBubble/open", username);
   setTimeout(() => {
