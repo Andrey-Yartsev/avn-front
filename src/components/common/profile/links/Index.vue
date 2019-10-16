@@ -1,5 +1,6 @@
 <template>
-  <div class="linksPage links-content"
+  <div
+    class="linksPage links-content"
     :class="{ 'links-content_filled': !loading && links.length }"
   >
     <div v-if="loading" class="loader-infinity">
