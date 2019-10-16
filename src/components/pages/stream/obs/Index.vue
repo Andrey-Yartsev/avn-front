@@ -114,7 +114,8 @@ export default {
     return {
       localStream: null,
       filterOnesSelected: false,
-      asideType: "comments"
+      asideType: "comments",
+      joined: false
     };
   },
   computed: {
@@ -157,6 +158,9 @@ export default {
   },
   methods: {
     join() {
+      if (this.$store.state.obs.joined) {
+        return;
+      }
       const token = this.$store.state.auth.token;
       this.$root.ws.send({
         act: "stream_start",
@@ -173,9 +177,7 @@ export default {
     },
     visibilityChanged(type) {
       this.filterOnesSelected = true;
-      this.update({ type }).then(() => {
-        this.join();
-      });
+      this.update({ type });
       this.$store.dispatch("global/flashToast", {
         text: "Visibility changed"
       });
