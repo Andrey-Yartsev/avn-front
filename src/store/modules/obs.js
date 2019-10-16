@@ -43,9 +43,6 @@ const mutations = {
   started(state, started) {
     state.started = started;
   },
-  stop(state) {
-    state.started = false;
-  },
   like(state, like) {
     if (!state.joined) {
       return;
@@ -71,6 +68,11 @@ const mutations = {
       return;
     }
     state.tips.push(tip);
+  },
+  reset(state) {
+    state.likes = [];
+    state.viewers = [];
+    state.tips = [];
   }
 };
 
