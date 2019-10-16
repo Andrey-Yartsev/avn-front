@@ -139,6 +139,16 @@
     }
   }
 
+  &-pin {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-3px);
+
+    &:after {
+      content: "\E683";
+    }
+  }
+
   &-twitter {
 
     &:after {
@@ -165,6 +175,13 @@
 
     &:after {
       content: "\E611";
+    }
+  }
+
+  &-link {
+
+    &:after {
+      content: "\E684";
     }
   }
 
@@ -236,6 +253,27 @@
       &:after {
         @include position-center;
       }
+    }
+  }
+
+  &-web {
+
+    &:after {
+      content: "\E685";
+    }
+  }
+
+  &-snapchat {
+
+    &:after {
+      content: "\E686";
+    }
+  }
+
+  &-other {
+
+    &:after {
+      content: "\E687";
     }
   }
 

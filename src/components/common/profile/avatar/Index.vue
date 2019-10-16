@@ -74,7 +74,7 @@ export default {
       return !!this.profile.currentStream;
     },
     profileExtraClass() {
-      return ["posts", ""].indexOf(this.pageName) !== -1;
+      return ["posts", "links", ""].indexOf(this.pageName) !== -1;
     }
   },
   methods: {

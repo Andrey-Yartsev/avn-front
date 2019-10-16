@@ -22,7 +22,7 @@
         class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
         @click="openAddLinkModal"
       >
-        <span class="icn-item icn-post"></span>
+        <span class="icn-item icn-link"></span>
         Add new link
       </button>
     </div>

@@ -438,14 +438,11 @@
     .text-media-container {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        border-radius: 6px;
-        box-shadow: 0 0 0 2px $secondary-color-20;
         flex: 0 0 calc(100% - 45px); // 45px = 30px width of avatar + 15px right gap
 
         min-height: 160px;
         display: flex;
         flex-direction: column;
-        background-color: $white;
       }
     }
 

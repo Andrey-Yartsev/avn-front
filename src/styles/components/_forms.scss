@@ -33,6 +33,16 @@ form {
   }
 }
 
+.text-field-border {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px $secondary-color-20;
+  background-color: $white;
+
+  &:focus {
+    background-color: $white;
+  }
+}
+
 input,
 textarea,
 .textarea {

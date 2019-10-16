@@ -1,48 +1,79 @@
 <template>
-  <div class="form">
-    <form @submit.prevent="submitHandler">
-      <div class="body">
-        <div class="field url">
-          <span class="label">Link url</span>
-          <input type="text" v-model.trim="url" name="url" />
+  <div class="addPost truncated">
+    <form
+      @submit.prevent="submitHandler"
+      class="add-new-form expanded bg-gradient_light links-editor"
+    >
+      <div class="links-editor__body">
+        <div class="form-group form-group_row-md">
+          <label class="form-group-inner">
+            <span class="label">Link url</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <input
+                  type="text"
+                  v-model.trim="url"
+                  name="url"
+                  class="text-field-border"
+                />
+              </span>
+              <div class="url-route">
+                <span class="url-route__item" :class="{ selected: url && isWebLink }">
+                    <span class="icn-web icn-item" />
+                    Web URL
+                </span>
+                <span class="url-route__item" :class="{ selected: url && !isWebLink }">
+                    <span class="icn-snapchat icn-item" />
+                    Snapchat
+                </span>
+                <span class="url-route__item" :class="{ selected: url && !isWebLink }">
+                    <span class="icn-other icn-item" />
+                    Other
+                </span>
+              </div>
+            </span>
+          </label>
         </div>
-        <div class="urlRoute">
-          <span :class="{ selected: url && isWebLink }">Web URL</span>
-          <span :class="{ selected: url && !isWebLink }">Snapchat</span>
-          <span :class="{ selected: url && !isWebLink }">Other</span>
-        </div>
-        <div class="field title">
-          <span class="label">Link title</span>
-          <input type="text" v-model.trim="title" name="title" required />
-        </div>
-        <div class="field pin">
-          <label>
-            <input type="checkbox" v-model="pinned" />
-            Pin link
+        <div class="form-group form-group_row-md">
+          <label class="form-group-inner">
+            <span class="label">Link title</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <input
+                  type="text"
+                  v-model.trim="title"
+                  name="title"
+                  required
+                  class="text-field-border"
+                />
+              </span>
+            </span>
           </label>
         </div>
       </div>
-      <div class="footer">
-        <div class="controls">
-          <button class="button button-cancel" @click="closeHandler">
+      <div class="links-editor__footer">
+        <label for="pinLink" class="btn-pin">
+          <input type="checkbox" v-model="pinned" id="pinLink" />
+          <span class="icn-pin icn-item icn-size_md"></span>
+          Pin link
+        </label>
+
+        <div class="links-editor__controls">
+          <button class="btn" @click="closeHandler">
             Cancel
           </button>
           <button
-            class="button button-confirm"
-            type="submit"
-            :disabled="isDisabled"
+            v-if="isEditMode"
+            type="text"
+            class="btn"
+            @click.prevent="deleteHandler"
           >
+            Delete
+          </button>
+          <button class="btn" type="submit" :disabled="isDisabled">
             {{ isEditMode ? "Update" : "Add" }}
           </button>
         </div>
-        <button
-          v-if="isEditMode"
-          type="text"
-          class="button button-delete"
-          @click.prevent="deleteHandler"
-        >
-          Delete
-        </button>
       </div>
     </form>
   </div>
@@ -114,74 +145,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.form {
-  padding: 1rem;
-}
-.body {
-  padding: 1rem;
-  .field {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    .label {
-      margin-right: 1rem;
-      white-space: nowrap;
-    }
-    input {
-      flex-grow: 1;
-    }
-    &.pin {
-      label {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        input {
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-  .urlRoute {
-    padding: 10px;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    span {
-      color: rgba(124, 139, 150, 0.473);
-      &.selected {
-        color: #2196f3;
-      }
-    }
-  }
-}
-.footer {
-  padding: 1rem;
-  .controls {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-  }
-  .button {
-    padding: 0.5rem 1rem;
-    color: #2196f3;
-    border: none;
-    background-color: rgba(124, 139, 150, 0.1);
-    border-radius: 3px;
-    &.button-confirm {
-      margin-left: 1rem;
-    }
-    &.button-delete {
-      width: 100%;
-      color: gray;
-    }
-    &:hover {
-      background-color: rgba(124, 139, 150, 0.233);
-    }
-  }
-}
-</style>

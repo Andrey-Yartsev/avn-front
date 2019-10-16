@@ -313,7 +313,11 @@ export default {
       return this.$store.state.subscription.updated;
     },
     useMediumPostView() {
-      return this.pageName === undefined || this.pageName === "posts";
+      return (
+        this.pageName === undefined ||
+        this.pageName === "posts" ||
+        this.pageName === "links"
+      );
     },
     highlights() {
       return this.$store.state.highlights.posts;
