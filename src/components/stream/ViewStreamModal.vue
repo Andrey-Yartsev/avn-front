@@ -111,6 +111,7 @@
             ></span>
           </span>
         </div>
+        <!--
         <div v-else class="bottom-btns">
           <span role="button" class="bottom-btn" @click="openCommentForm">
             <span
@@ -119,6 +120,7 @@
             ></span>
           </span>
         </div>
+        -->
       </div>
     </template>
   </Modal>

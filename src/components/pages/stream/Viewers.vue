@@ -59,7 +59,9 @@ export default {
   },
   methods: {
     getLikesCount(id) {
-      return this.$store.state.lives.currentLive.likers.filter(i => i.user.id === id).length;
+      return this.$store.state.lives.currentLive.likers.filter(
+        i => i.user.id === id
+      ).length;
     }
   },
   computed: {
@@ -71,7 +73,8 @@ export default {
     items() {
       if (this.type === "view")
         return uniqBy(this.$store.state.lives.currentLive.viewers, "user.id");
-      if (this.type === "tip") return this.$store.state.lives.currentLive.payers;
+      if (this.type === "tip")
+        return this.$store.state.lives.currentLive.payers;
       if (this.type === "like")
         return uniqBy(this.$store.state.lives.currentLive.likers, "user.id");
     }
