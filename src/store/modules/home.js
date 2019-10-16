@@ -12,7 +12,8 @@ const initState = {
   marker: "",
   source: "feed",
   deletedPost: undefined,
-  newFeedPosts: 0
+  newFeedPosts: 0,
+  tag: ""
 };
 
 const state = { ...initState };
@@ -25,6 +26,9 @@ const mutations = {
   },
   newFeedPost(state) {
     state.newFeedPosts += 1;
+  },
+  setTag(state, tagName) {
+    state.tag = tagName;
   }
 };
 

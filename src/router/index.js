@@ -105,6 +105,14 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireAuthOrExplore,
+    path: "/hashtag/:tag",
+    component: HomePage,
+    meta: {
+      home: true
+    }
+  },
+  {
     beforeEnter: Auth.requireAuth,
     path: "/addPost",
     component: AddPostPage,

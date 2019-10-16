@@ -2,7 +2,7 @@ import tokenRequest from "@/utils/tokenRequest";
 import anyRequest from "@/utils/anyRequest";
 
 export default {
-  getPosts({ offset, limit, marker, source, category }) {
+  getPosts({ offset, limit, marker, source, category, tag }) {
     if (!category) {
       category = 1;
     }
@@ -13,7 +13,8 @@ export default {
         offset,
         limit,
         marker,
-        category
+        category,
+        tag
       }
     });
   },
