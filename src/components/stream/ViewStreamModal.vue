@@ -360,10 +360,10 @@ export default {
       getApiUrl: undefined,
       remoteVideo: document.getElementById("remotevideo"),
       showLikes: false,
-      showErrorMessage: function(message) {
+      showErrorMessage: message => {
         this.$store.dispatch("global/setError", { message });
       },
-      showInfoMessage: function(message) {
+      showInfoMessage: message => {
         this.$store.dispatch("global/setError", { message });
       },
       onStreamEnd: (isError, isClient) => {
