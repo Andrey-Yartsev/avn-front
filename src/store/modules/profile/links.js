@@ -1,4 +1,4 @@
-import UserApi from "@/api/user";
+import LinksApi from "@/api/links";
 
 const initState = {
   loading: false,
@@ -51,7 +51,7 @@ const actions = {
   getLinks({ commit }, userId) {
     commit("clearError");
     commit("startLoading");
-    return UserApi.getLinks(userId)
+    return LinksApi.getLinks(userId)
       .then(response => {
         if (response.status === 200) {
           response.json().then(function(res) {
@@ -69,7 +69,7 @@ const actions = {
       });
   },
   addLink({ commit }, data) {
-    return UserApi.postLink(data)
+    return LinksApi.postLink(data)
       .then(response => {
         return response.json();
       })
@@ -79,7 +79,7 @@ const actions = {
       });
   },
   updateLink({ commit }, data) {
-    return UserApi.updateLink(data)
+    return LinksApi.updateLink(data)
       .then(response => {
         return response.json();
       })
@@ -88,7 +88,7 @@ const actions = {
       });
   },
   deleteLink({ commit }, linkId) {
-    return UserApi.deleteLink(linkId)
+    return LinksApi.deleteLink(linkId)
       .then(response => {
         return response.json();
       })
