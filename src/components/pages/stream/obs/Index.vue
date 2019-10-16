@@ -281,12 +281,14 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit("obs/isRunning", true);
     this.$store.commit("chat/blockNewMessagesHandling", true);
   },
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);
     this.$root.ws.removeListener("connect", this.start);
     this.$store.commit("obs/started", false);
+    this.$store.commit("obs/isRunning", false);
   }
 };
 </script>

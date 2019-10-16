@@ -3,6 +3,7 @@
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {
+  isRunning: false,
   started: false,
   trigStart: 0,
   likes: [],
@@ -12,7 +13,10 @@ const state = {
 };
 
 const actions = {
-  tryStart({ commit, dispatch, rootState }, { user, isActive }) {
+  tryStart({ state, commit, dispatch, rootState }, { user, isActive }) {
+    if (!state.isRunning) {
+      return;
+    }
     if (!isActive) {
       return;
     }
@@ -46,6 +50,9 @@ const actions = {
 };
 
 const mutations = {
+  isRunning(state, isRunning) {
+    state.isRunning = isRunning;
+  },
   trigStart(state) {
     state.trigStart++;
   },
