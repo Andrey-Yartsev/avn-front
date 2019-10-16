@@ -38,7 +38,12 @@ export default {
   },
   watch: {
     count() {
+      if (!this.shownComments.length) {
+        return;
+      }
+
       const scroll = document.getElementById("scroll");
+
       const lastCommentIsMine = this.isOwner(
         this.shownComments[this.count - 1].user.id
       );

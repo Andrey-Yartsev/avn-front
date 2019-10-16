@@ -26,7 +26,7 @@ const actions = {
       commit("trigStart");
     });
   },
-  stopped({ state, commit }, stream) {
+  stopped({ state, commit, dispatch }, stream) {
     if (!state.started) {
       return;
     }
@@ -37,6 +37,11 @@ const actions = {
     commit("fetchError", {
       code: 106
     });
+    dispatch("reset");
+  },
+  reset({ commit }) {
+    commit("reset");
+    commit("lives/resetCurrentLive", null, { root: true });
   }
 };
 

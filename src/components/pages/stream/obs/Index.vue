@@ -11,6 +11,7 @@
       />
       <div v-else-if="needToStartStream" class="refresh-block">
         <div>Need to start stream</div>
+        <!--
         <div class="mediasTop">
           <div
             class="mediasTop__header stream-header mediasTop__header-underlined"
@@ -24,6 +25,7 @@
             >
           </div>
         </div>
+        -->
       </div>
       <template v-else>
         <div class="mediasTop">
@@ -40,8 +42,7 @@
               />
             </div>
             <button
-              href="#"
-              @click.prevent="stop"
+              @click="stop"
               class="btn lg btn_fix-width"
               :class="{ 'icn-pos_center': $mq === 'desktop' }"
               :disabled="stopDisabled"
@@ -173,6 +174,9 @@ export default {
     }
   },
   methods: {
+    reset() {
+      this.$store.dispatch("obs/reset");
+    },
     join() {
       if (this.$store.state.obs.started) {
         return;
@@ -184,7 +188,7 @@ export default {
         stream_user_id: this.stream.user.id,
         sess: token
       });
-      this.$store.commit("obs/started", true);
+      this.$store.commit("obs/started", this.stream);
     },
     stop() {
       this.$store.dispatch("obs/stop", this.stream.id);
