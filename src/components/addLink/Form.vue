@@ -64,7 +64,9 @@
         <label for="pinLink" class="btn-pin">
           <input type="checkbox" v-model="pinned" id="pinLink" />
           <span class="icn-pin icn-item icn-size_md"></span>
-          Pin link
+          <span class="btn-pin__text">
+            Pin link
+          </span>
         </label>
 
         <div class="links-editor__controls">

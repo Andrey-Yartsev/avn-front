@@ -1,10 +1,10 @@
 <template>
-  <div class="linksPage">
+  <div class="linksPage links-content">
     <div v-if="loading" class="loader-infinity">
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <div v-if="links.length" class="links">
+      <div v-if="links.length" class="links-wrapper">
         <LinkPost
           v-for="link in links"
           :link="link"

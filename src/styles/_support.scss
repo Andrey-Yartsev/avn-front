@@ -587,6 +587,20 @@ form.support-search-form {
       overflow: hidden;
     }
   }
+
+  &_all-height {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      display: flex;
+    }
+
+    .container {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        display: flex;
+      }
+    }
+  }
 }
 
 .article-vote {

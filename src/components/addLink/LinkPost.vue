@@ -1,14 +1,14 @@
 <template>
-  <div class="link">
-    <a :href="link.url" target="_blank">
+  <div class="link-row">
+    <a :href="link.url" target="_blank" class="link-row__info">
       <img v-if="faviconIco" :src="faviconIco" alt="" />
       <div class="description">
         <div class="description__title">{{ link.title }}</div>
         <div class="description__url" v-html="truncate(link.url)"></div>
       </div>
     </a>
-    <div v-if="isOwner(this.profile.id)" class="controls">
-      <button @click="$emit('edit')">Edit</button>
+    <div v-if="isOwner(this.profile.id)" class="link-row__controls">
+      <button @click="$emit('edit')" class="btn btn_fix-width-ex-sm">Edit</button>
     </div>
   </div>
 </template>
@@ -47,51 +47,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.link {
-  max-width: 500px;
-  margin: 1.5rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  a {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    img {
-      min-width: 40px;
-      min-height: 40px;
-      margin-right: 15px;
-      flex-basis: 40px;
-      object-fit: contain;
-    }
-    .description {
-      flex-grow: 1;
-      &__title {
-        color: #222b32;
-        font-weight: bold;
-      }
-      &__url {
-        color: #2196f3;
-      }
-    }
-  }
-  .controls {
-    margin-left: auto;
-    button {
-      margin: 0 1rem;
-      padding: 0.5rem 1rem;
-      color: #2196f3;
-      border: none;
-      background-color: rgba(124, 139, 150, 0.1);
-      border-radius: 3px;
-      &:hover {
-        background-color: rgba(124, 139, 150, 0.473);
-      }
-    }
-  }
-}
-</style>

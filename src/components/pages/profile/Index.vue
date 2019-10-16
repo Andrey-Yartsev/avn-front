@@ -118,7 +118,13 @@
           ref="actionsMobile"
         />
       </div>
-      <div class="content-wrapper content-wrapper_cut">
+      <div
+        class="content-wrapper content-wrapper_cut"
+        :class="{
+          'content-wrapper_all-height':
+            $mq === 'desktop' && pageName === 'links'
+        }"
+      >
         <Highlights
           :userId="profile.id"
           v-if="$mq === 'mobile' && isPostPage"

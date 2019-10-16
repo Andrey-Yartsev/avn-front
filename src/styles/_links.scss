@@ -25,7 +25,6 @@
 
 .btn-pin {
   position: relative;
-  opacity: .3;
   display: flex;
   align-content: center;
   align-items: center;
@@ -34,6 +33,25 @@
     position: absolute;
     left: -999em;
     top: 0;
+
+    &:checked {
+
+      + .icn-item {
+        color: $secondary-color;
+        opacity: 1;
+
+        + .btn-pin__text {
+          color: $secondary-color;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .icn-item,
+  &__text {
+    opacity: .3;
+    transition: color .3s, opacity .3s;
   }
 }
 
@@ -65,5 +83,41 @@
     &:after {
       font-size: 17px;
     }
+  }
+}
+
+.links-content {
+  background-color: $white;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .1);
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    min-height: 100%;
+  }
+}
+
+.link-row {
+  border-bottom: 1px solid rgba($gray, 0.2);
+  padding: 15px 16px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+
+  &__info {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+
+    img {
+      margin-right: 12px;
+    }
+  }
+
+  &__controls {
+    margin-right: 0;
+    margin-left: auto;
   }
 }
