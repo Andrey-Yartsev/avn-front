@@ -67,6 +67,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         padding-left: 0;
+        min-height: 60px;
       }
     }
   }
