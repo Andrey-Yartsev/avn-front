@@ -372,9 +372,9 @@ export default {
         this.time = undefined;
         this.connected = false;
 
-        if (!isClient) {
+        // if (!isClient) {
           this.streamIsFinished = true;
-        }
+        // }
 
         if (isError) {
           this.$store.dispatch("global/setError", {
