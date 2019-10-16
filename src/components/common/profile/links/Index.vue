@@ -22,9 +22,10 @@
       </template>
       <button
         v-if="this.$props.private"
-        class="addLink__button make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
+        class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
         @click="openAddLinkModal"
       >
+        <span class="icn-item icn-post"></span>
         Add new link
       </button>
     </div>
