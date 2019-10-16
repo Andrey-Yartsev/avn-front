@@ -48,6 +48,7 @@
             >
               Stop stream
             </button>
+            <!--
             <a
               href="#"
               @click.prevent="logout"
@@ -55,6 +56,7 @@
               :class="{ 'icn-pos_center': $mq === 'desktop' }"
               >Log out</a
             >
+            -->
           </div>
         </div>
 
@@ -83,7 +85,7 @@
             :block="showBlockUserConfirm"
             :kick="showKickUserConfirm"
           />
-          <AddComment :_stream="stream" />
+          <AddComment :_stream="stream" v-if="asideType === 'comments'" />
         </div>
 
         <StreamerControls

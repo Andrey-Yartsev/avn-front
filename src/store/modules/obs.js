@@ -49,19 +49,19 @@ const mutations = {
     state.currentStream = stream;
   },
   like(state, like) {
-    if (!state.joined) {
+    if (!state.started) {
       return;
     }
     state.likes.push(like);
   },
   look(state, look) {
-    if (!state.joined) {
+    if (!state.started) {
       return;
     }
     state.viewers.push(look);
   },
   unlook(state, look) {
-    if (!state.joined) {
+    if (!state.started) {
       return;
     }
     state.viewers = state.viewers.filter(
@@ -69,7 +69,7 @@ const mutations = {
     );
   },
   tip(state, tip) {
-    if (!state.joined) {
+    if (!state.started) {
       return;
     }
     state.tips.push(tip);
