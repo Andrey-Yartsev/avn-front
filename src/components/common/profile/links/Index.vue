@@ -10,14 +10,11 @@
           :link="link"
           :key="link.id"
           @edit="editHandler(link)"
-          @delete="deleteHandler(link)"
         />
       </div>
       <template v-if="!loading && !links.length">
         <p class="empty-feed">
-          <span>
-            Nothing here yet
-          </span>
+          <span>Nothing here yet</span>
         </p>
       </template>
       <button
@@ -47,13 +44,7 @@ export default {
       return this.$store.state.profile.links.links;
     },
     loading() {
-      return this.$store.state.profile.links.loading;
-    },
-    error() {
-      return this.$store.state.profile.links.error;
-    },
-    isEditMode() {
-      return this.$store.state.profile.links.editedLink;
+      return this.$store.state.profile.links.getLinksLoading;
     }
   },
   methods: {
@@ -73,13 +64,9 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addLink"
       });
-    },
-    deleteHandler(link) {
-      this.$store.dispatch("profile/links/deleteLink", link.id);
     }
   },
   mounted() {
-    this.$store.dispatch("profile/links/clearLinks");
     this.fetchLinks();
   }
 };
