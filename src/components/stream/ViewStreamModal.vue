@@ -356,6 +356,19 @@ export default {
   },
   created() {
     const o = this;
+
+    const onViewerKicked = () => {
+      this.$store.commit("lives/resetCurrentLive");
+
+      this.$store.dispatch("global/flashToast", {
+        text: "You were kicked by the broadcaster",
+        type: "error"
+      });
+      this.stopWatching();
+      this.$root.$emit("homePageReload");
+      this.$router.push("/");
+    };
+
     Streams.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       getApiUrl: undefined,
@@ -372,9 +385,9 @@ export default {
         this.time = undefined;
         this.connected = false;
 
-        // if (!isClient) {
+        if (!isClient) {
           this.streamIsFinished = true;
-        // }
+        }
 
         if (isError) {
           this.$store.dispatch("global/setError", {
@@ -383,7 +396,9 @@ export default {
           this.close();
         }
       },
-
+      onViewerKicked: () => {
+        onViewerKicked();
+      },
       onStreamInit: () => {
         const token = this.$store.state.auth.token;
         const id = this.$store.state.modal.stream.data.stream.id;
@@ -431,15 +446,7 @@ export default {
 
       onCustomDataGet: message => {
         if (message.type === "kick.user" && this.user.id === message.userId) {
-          this.$store.commit("lives/resetCurrentLive");
-
-          this.$store.dispatch("global/flashToast", {
-            text: "You were kicked by the broadcaster",
-            type: "error"
-          });
-          this.stopWatching();
-          this.$root.$emit("homePageReload");
-          this.$router.push("/");
+          onViewerKicked();
         }
 
         // if (message.type === "video") {
