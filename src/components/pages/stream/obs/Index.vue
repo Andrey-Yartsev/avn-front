@@ -155,12 +155,14 @@ export default {
       return this.$store.state.obs.likes;
     },
     likesCount() {
-      return parseInt(this.stream.likesCount) + this.likes.length;
+      return this.likes.length;
+      // return parseInt(this.stream.likesCount) + this.likes.length;
     },
     viewsCount() {
-      return (
-        parseInt(this.stream.viewsCount) + this.$store.state.obs.viewers.length
-      );
+      return this.$store.state.obs.viewers.length;
+      // return (
+      //   parseInt(this.stream.viewsCount) + this.$store.state.obs.viewers.length
+      // );
     },
     amount() {
       let amount = 0;
