@@ -157,14 +157,7 @@ export default {
   },
   methods: {
     join() {
-      console.log("OBS chat joined");
       const token = this.$store.state.auth.token;
-      this.$root.ws.send({
-        act: "stream_look",
-        stream_id: this.stream.id,
-        stream_user_id: this.stream.user.id,
-        sess: token
-      });
       this.$root.ws.send({
         act: "stream_start",
         stream_id: this.stream.id,
@@ -176,11 +169,13 @@ export default {
     update(data) {
       const stream = { ...this.stream, ...data };
       this.localStream = stream;
-      this.$store.dispatch("obs/update", stream);
+      return this.$store.dispatch("obs/update", stream);
     },
     visibilityChanged(type) {
       this.filterOnesSelected = true;
-      this.update({ type });
+      this.update({ type }).then(() => {
+        this.join();
+      });
       this.$store.dispatch("global/flashToast", {
         text: "Visibility changed"
       });
