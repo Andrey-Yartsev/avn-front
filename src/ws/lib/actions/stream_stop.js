@@ -6,4 +6,5 @@ export default data => {
     id: data.stream_user_id || data.user.id,
     currentStream: null
   });
+  Store.dispatch("obs/stopped");
 };

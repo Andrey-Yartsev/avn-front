@@ -3,17 +3,48 @@
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 const state = {
-  joined: false,
+  started: false,
+  trigStart: 0,
   likes: [],
   viewers: [],
   tips: []
 };
 
-const actions = {};
+const actions = {
+  tryStart({ commit, dispatch, rootState }, { user, isActive }) {
+    if (!isActive) {
+      return;
+    }
+    if (!rootState.auth.user) {
+      return;
+    }
+    if (rootState.auth.user.id !== user.id) {
+      return;
+    }
+    dispatch("fetch").then(() => {
+      commit("trigStart");
+    });
+  },
+  stopped({ state, commit }) {
+    if (!state.started) {
+      return;
+    }
+    commit("started", false);
+    commit("fetchError", {
+      code: 106
+    });
+  }
+};
 
 const mutations = {
-  joined(state, joined) {
-    state.joined = joined;
+  trigStart(state) {
+    state.trigStart++;
+  },
+  started(state, started) {
+    state.started = started;
+  },
+  stop(state) {
+    state.started = false;
   },
   like(state, like) {
     if (!state.joined) {
@@ -55,6 +86,21 @@ createRequestAction({
     method: "GET"
   },
   localError: true
+});
+
+createRequestAction({
+  prefix: "stop",
+  requestType: "token",
+  apiPath: "streams/{id}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params);
+  }
 });
 
 createRequestAction({

@@ -9,4 +9,5 @@ export default data => {
     id: data.user.id,
     currentStream: data
   });
+  Store.dispatch("obs/tryStart", data);
 };

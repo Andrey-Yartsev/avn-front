@@ -11,7 +11,6 @@
       />
       <div v-else-if="needToStartStream" class="refresh-block">
         <div>Need to start stream</div>
-        <button class="btn lg btn_fix-width" @click="refresh">Refresh</button>
         <div class="mediasTop">
           <div
             class="mediasTop__header stream-header mediasTop__header-underlined"
@@ -40,6 +39,15 @@
                 @changed="visibilityChanged"
               />
             </div>
+            <button
+              href="#"
+              @click.prevent="stop"
+              class="btn lg btn_fix-width"
+              :class="{ 'icn-pos_center': $mq === 'desktop' }"
+              :disabled="stopDisabled"
+            >
+              Stop stream
+            </button>
             <a
               href="#"
               @click.prevent="logout"
@@ -115,10 +123,14 @@ export default {
       localStream: null,
       filterOnesSelected: false,
       asideType: "comments",
-      joined: false
+      joined: false,
+      stopDisabled: false
     };
   },
   computed: {
+    trigStart() {
+      return this.$store.state.obs.trigStart;
+    },
     comments() {
       return this.$store.state.lives.currentLive.comments;
     },
@@ -158,7 +170,7 @@ export default {
   },
   methods: {
     join() {
-      if (this.$store.state.obs.joined) {
+      if (this.$store.state.obs.started) {
         return;
       }
       const token = this.$store.state.auth.token;
@@ -168,7 +180,14 @@ export default {
         stream_user_id: this.stream.user.id,
         sess: token
       });
-      this.$store.commit("obs/joined", true);
+      this.$store.commit("obs/started", true);
+    },
+    stop() {
+      this.$store.dispatch("obs/stop", this.stream.id);
+      this.stopDisabled = true;
+      setTimeout(() => {
+        this.stopDisabled = false;
+      }, 10000);
     },
     update(data) {
       const stream = { ...this.stream, ...data };
@@ -222,6 +241,9 @@ export default {
     }
   },
   watch: {
+    trigStart() {
+      this.join();
+    },
     stream() {
       this.localStream = { ...this.stream };
       if (this.$root.ws.connected) {
@@ -236,7 +258,7 @@ export default {
       handler(user) {
         if (user) {
           if (!this.stream) {
-            this.$store.dispatch("obs/fetch");
+            this.$store.dispatch("obs/fetch").catch(() => {});
           }
         } else {
           this.$store.dispatch("modal/show", {
@@ -255,8 +277,8 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("chat/blockNewMessagesHandling", false);
-    this.$root.ws.removeListener("connect", this.join);
-    this.$store.commit("obs/joined", false);
+    this.$root.ws.removeListener("connect", this.start);
+    this.$store.commit("obs/started", false);
   }
 };
 </script>
