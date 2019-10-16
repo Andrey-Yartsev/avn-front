@@ -18,17 +18,26 @@
                 />
               </span>
               <div class="url-route">
-                <span class="url-route__item" :class="{ selected: url && isWebLink }">
-                    <span class="icn-web icn-item" />
-                    Web URL
+                <span
+                  class="url-route__item"
+                  :class="{ selected: url && isWebLink }"
+                >
+                  <span class="icn-web icn-item" />
+                  Web URL
                 </span>
-                <span class="url-route__item" :class="{ selected: url && !isWebLink }">
-                    <span class="icn-snapchat icn-item" />
-                    Snapchat
+                <span
+                  class="url-route__item"
+                  :class="{ selected: url && !isWebLink }"
+                >
+                  <span class="icn-snapchat icn-item" />
+                  Snapchat
                 </span>
-                <span class="url-route__item" :class="{ selected: url && !isWebLink }">
-                    <span class="icn-other icn-item" />
-                    Other
+                <span
+                  class="url-route__item"
+                  :class="{ selected: url && !isWebLink }"
+                >
+                  <span class="icn-other icn-item" />
+                  Other
                 </span>
               </div>
             </span>
