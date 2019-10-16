@@ -246,7 +246,7 @@
 
   &.unread {
 
-    &:before {
+    &:after {
       opacity: 1;
       color: $primary-color;
     }

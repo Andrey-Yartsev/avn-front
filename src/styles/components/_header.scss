@@ -231,7 +231,7 @@
         }
       }
 
-      &.unread:before {
+      &.unread:after {
         background-color: #fff;
       }
 
@@ -1175,7 +1175,7 @@
     &.unread {
       position: relative;
 
-      &:before {
+      &:after {
         background: $secondary-color;
         width: 6px;
         height: 6px;
