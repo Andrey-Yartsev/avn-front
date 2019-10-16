@@ -1,6 +1,7 @@
 <template>
   <div class="link-row">
     <a :href="link.url" target="_blank" class="link-row__info">
+      <span v-if="link.pinned" class="icn-pin icn-item icn-size_md" />
       <img v-if="faviconIco" :src="faviconIco" alt="" />
       <div class="description">
         <div class="description__title">{{ link.title }}</div>
