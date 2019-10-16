@@ -25,7 +25,7 @@
         <p
           class="text"
           :class="{ 'trunc-text': truncateText && !showTruncatedText }"
-          v-html="post.text"
+          v-html="getPostText()"
           ref="text"
         />
         <div class="trunc-toggle-btn" v-if="truncateText">
@@ -194,12 +194,37 @@ export default {
     },
     truncateToggle() {
       this.showTruncatedText = !this.showTruncatedText;
+    },
+    getPostText() {
+      return this.$props.post.text;
+      // return `<router-link :to="/hashtag/two"><p>some text</p></router-link>`
+    },
+    addHandlersToTags() {
+      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag")];
+      tags.forEach(item => {
+        item.addEventListener("click", this.tagEventListener);
+      });
+    },
+    removeHandlersFromTags() {
+      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag")];
+      tags.forEach(item =>
+        item.removeEventListener("click", this.tagEventListener)
+      );
+    },
+    tagEventListener(e) {
+      e.preventDefault();
+      const linkUrl = e.target.getAttribute("href");
+      this.$router.push(linkUrl);
     }
   },
   mounted() {
     if (this.$refs.text.getBoundingClientRect().height > 18 * 5 + 2) {
       this.truncateText = true;
     }
+    this.addHandlersToTags();
+  },
+  beforeDestroy() {
+    this.removeHandlersFromTags();
   }
 };
 </script>

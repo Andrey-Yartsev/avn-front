@@ -145,7 +145,7 @@ export default {
     },
     init() {
       this.$store.dispatch("home/resetPageState");
-      const searchTag = this.$router.history.current.params.tag;
+      const searchTag = this.$route.params.tag;
       if (searchTag) {
         this.$store.commit("home/setTag", searchTag);
       }
@@ -170,6 +170,9 @@ export default {
     this.$root.$off("homePageReload", this.init);
   },
   watch: {
+    ["$route.params.tag"]() {
+      this.init();
+    },
     newPost() {
       this.$store.dispatch("modal/hide", { name: "addPost" });
       this.init();
