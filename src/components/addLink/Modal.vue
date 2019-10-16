@@ -42,7 +42,7 @@ export default {
       this.$store.commit("profile/links/endEditLink");
     },
     submit({ data, editMode }) {
-      if (data.url.indexOf("http") !== 0) {
+      if (data.url.indexOf("http") !== 0 && data.url.indexOf("/") !== 0) {
         data.url = "/" + data.url;
       }
       editMode

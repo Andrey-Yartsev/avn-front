@@ -94,6 +94,7 @@ const actions = {
       })
       .then(() => {
         commit("deleteLink", linkId);
+        commit("endEditLink");
         commit("auth/decrementFollowingCount", null, { root: true });
       });
   },

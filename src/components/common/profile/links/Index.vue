@@ -83,3 +83,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.addLink__button {
+  margin-top: 3rem;
+}
+</style>

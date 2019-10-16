@@ -9,7 +9,7 @@
         <div class="urlRoute">
           <span :class="{ selected: url && isWebLink }">Web URL</span>
           <span :class="{ selected: url && !isWebLink }">Snapchat</span>
-          <span :class="{ selected: url && !isWebLink }">Oter</span>
+          <span :class="{ selected: url && !isWebLink }">Other</span>
         </div>
         <div class="field title">
           <span class="label">Link title</span>
@@ -23,9 +23,25 @@
         </div>
       </div>
       <div class="footer">
-        <button @click="closeHandler">Cancel</button>
-        <button type="submit" :disabled="isDisabled">
-          {{ isEditMode ? "Update" : "Add" }}
+        <div class="controls">
+          <button class="button button-cancel" @click="closeHandler">
+            Cancel
+          </button>
+          <button
+            class="button button-confirm"
+            type="submit"
+            :disabled="isDisabled"
+          >
+            {{ isEditMode ? "Update" : "Add" }}
+          </button>
+        </div>
+        <button
+          v-if="isEditMode"
+          type="text"
+          class="button button-delete"
+          @click.prevent="deleteHandler"
+        >
+          Delete
         </button>
       </div>
     </form>
@@ -68,6 +84,13 @@ export default {
       }
       this.$emit("submit", { data: newLink, editMode: this.isEditMode });
       this.closeHandler(e);
+    },
+    deleteHandler() {
+      this.$store.dispatch("profile/links/deleteLink", this.id);
+      this.clear();
+      this.$store.dispatch("modal/hide", {
+        name: "addLink"
+      });
     },
     clear() {
       this.url = "";
@@ -136,19 +159,28 @@ export default {
 }
 .footer {
   padding: 1rem;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  button {
-    margin: 0 1rem;
+  .controls {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+  .button {
     padding: 0.5rem 1rem;
     color: #2196f3;
     border: none;
     background-color: rgba(124, 139, 150, 0.1);
     border-radius: 3px;
+    &.button-confirm {
+      margin-left: 1rem;
+    }
+    &.button-delete {
+      width: 100%;
+      color: gray;
+    }
     &:hover {
-      background-color: rgba(124, 139, 150, 0.473);
+      background-color: rgba(124, 139, 150, 0.233);
     }
   }
 }
