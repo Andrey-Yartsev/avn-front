@@ -2,10 +2,12 @@
   <div class="link-row">
     <a :href="link.url" target="_blank" class="link-row__info">
       <span v-if="link.pinned" class="icn-pin icn-item icn-size_md" />
-      <img v-if="faviconIco" :src="faviconIco" alt="" />
-      <div class="description">
-        <div class="description__title">{{ link.title }}</div>
-        <div class="description__url" v-html="truncate(link.url)"></div>
+      <span class="link-row__logo" v-if="faviconIco">
+        <img :src="faviconIco" alt="" />
+      </span>
+      <div class="link-row__content">
+        <div class="link-row__title">{{ link.title }}</div>
+        <div class="link-row__url" v-html="truncate(link.url)"></div>
       </div>
     </a>
     <div v-if="isOwner(this.profile.id)" class="link-row__controls">

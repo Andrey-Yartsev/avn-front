@@ -41,6 +41,15 @@
       }
     }
   }
+
+  &.delicate {
+    background: rgba($gray, .6);
+
+    &:hover {
+      background: rgba($gray, .8);
+    }
+  }
+
   &.sm {
     height: 24px;
     padding: 3px 16px;

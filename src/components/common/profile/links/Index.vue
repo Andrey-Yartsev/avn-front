@@ -1,5 +1,7 @@
 <template>
-  <div class="linksPage links-content">
+  <div class="linksPage links-content"
+    :class="{ 'links-content_filled': !loading && links.length }"
+  >
     <div v-if="loading" class="loader-infinity">
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
@@ -17,14 +19,15 @@
           <span>Nothing here yet</span>
         </p>
       </template>
-      <button
-        v-if="this.$props.private"
-        class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
-        @click="openAddLinkModal"
-      >
-        <span class="icn-item icn-link"></span>
-        Add new link
-      </button>
+      <div class="links-add-new" v-if="this.$props.private">
+        <button
+          class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
+          @click="openAddLinkModal"
+        >
+          <span class="icn-item icn-link"></span>
+          Add new link
+        </button>
+      </div>
     </div>
   </div>
 </template>
