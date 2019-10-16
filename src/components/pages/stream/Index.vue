@@ -725,7 +725,7 @@ export default {
 
     const { onDevicesReadyCallback } = this;
     const token = this.$store.state.auth.token;
-    window.Streams = Streams;
+    window.streamModule = Streams;
 
     const that = this;
 

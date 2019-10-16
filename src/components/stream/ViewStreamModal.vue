@@ -345,6 +345,7 @@ export default {
     this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
+    window.viewModule = Streams;
 
     Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     Streams.config.remoteVideo = document.getElementById("remotevideo");
