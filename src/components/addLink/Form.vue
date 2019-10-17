@@ -12,11 +12,12 @@
       class="add-new-form expanded links-editor"
       :class="{
         'bg-gradient_light': $mq === 'desktop',
-        'container': $mq === 'mobile'
+        container: $mq === 'mobile'
       }"
     >
       <div class="links-editor__body">
-        <div class="form-group"
+        <div
+          class="form-group"
           :class="{ 'form-group_row-md': $mq === 'desktop' }"
         >
           <label class="form-group-inner">
@@ -56,7 +57,8 @@
             </span>
           </label>
         </div>
-        <div class="form-group"
+        <div
+          class="form-group"
           :class="{ 'form-group_row-md': $mq === 'desktop' }"
         >
           <label class="form-group-inner">
