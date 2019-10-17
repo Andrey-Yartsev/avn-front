@@ -91,7 +91,11 @@
         </label>
 
         <div class="links-editor__controls">
-          <button class="btn delicate-light" @click="closeHandler">
+          <button
+            class="btn delicate-light"
+            @click="closeHandler"
+            v-if="$mq === 'desktop'"
+          >
             Cancel
           </button>
           <button

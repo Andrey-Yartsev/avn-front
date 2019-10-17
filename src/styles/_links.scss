@@ -17,10 +17,13 @@
 
   &__body {
     flex: 0 0 100%;
-    margin-bottom: 14px;
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding-top: 15px;
+    }
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 14px;
     }
   }
 
@@ -28,6 +31,7 @@
 
     .btn {
       margin-left: 15px;
+      min-width: 80px;
     }
   }
 
@@ -146,10 +150,7 @@
   }
 
   .empty-feed {
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 0;
-    }
+    padding-bottom: 0;
   }
 }
 
@@ -213,6 +214,7 @@
   }
 
   .make-post-btn_feed {
+    width: auto;
 
     .icn-item {
 
