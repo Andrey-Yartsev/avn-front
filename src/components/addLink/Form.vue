@@ -86,7 +86,7 @@
           <input type="checkbox" v-model="pinned" id="pinLink" />
           <span class="icn-pin icn-item icn-size_md"></span>
           <span class="btn-pin__text">
-            Pin link
+            {{ pinned ? "Unpin link" : "Pin link" }}
           </span>
         </label>
 
