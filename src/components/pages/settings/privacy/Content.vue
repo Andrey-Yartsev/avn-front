@@ -142,6 +142,21 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
+        <div class="inner">
+          <span class="semi-transparent">
+            Tweet my live streams
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isStreamsTweet"
+              value="false"
+              v-model="localUser.isStreamsTweets"
+              :disabled="!localUser.isTwitterConnected"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
       </div>
       <div
         class="go-twitter-block shadow-block no-padding hidden-desktop"
