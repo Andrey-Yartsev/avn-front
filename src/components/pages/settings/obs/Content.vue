@@ -103,28 +103,16 @@
             class="download-app"
           >
             <span class="download-app__logo logo-windows">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 512 512"
-              >
-                <polygon
-                  style="fill:#90C300;"
-                  points="242.526,40.421 512,0 512,239.832 242.526,239.832 "
-                />
-                <polygon
-                  style="fill:#F8672C;"
-                  points="0,75.453 206.596,44.912 206.596,242.526 0,242.526 "
-                />
-                <polygon
-                  style="fill:#FFC400;"
-                  points="242.526,471.579 512,512 512,278.456 242.526,278.456 "
-                />
-                <polygon
-                  style="fill:#00B4F2;"
-                  points="0,436.547 206.596,467.088 206.596,278.456 0,278.456 "
-                />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 475.082 475.082">
+<g>
+	<g>
+		<polygon points="0,409.705 194.716,436.541 194.716,250.677 0,250.677 		"/>
+		<polygon points="0,226.692 194.716,226.692 194.716,38.544 0,65.38 		"/>
+		<polygon points="216.129,439.398 475.082,475.082 475.082,250.677 475.082,250.674 216.129,250.674 		"/>
+		<polygon points="216.132,35.688 216.132,226.692 475.082,226.692 475.082,0 		"/>
+	</g>
+</g>
+</svg>
             </span>
             <span class="download-app__title">
               for Windows

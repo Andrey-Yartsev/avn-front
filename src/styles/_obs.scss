@@ -138,6 +138,9 @@
     img,
     svg {
       display: block;
+      opacity: .5;
+      fill: $main-color;
+      transition: fill .3s;
     }
   }
 
@@ -148,17 +151,13 @@
 
   &:hover {
 
+    svg {
+      fill: $primary-color;
+      opacity: 1;
+    }
+
     .download-app__title {
       opacity: 1;
     }
-  }
-}
-
-.logo-apple,
-.logo-obs {
-
-  svg {
-    opacity: .5;
-    fill: $main-color;
   }
 }
