@@ -105,11 +105,13 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuthOrExplore,
+    beforeEnter: Auth.requireAny,
     path: "/hashtag/:tag",
-    component: HomePage,
+    component: ExplorePage,
     meta: {
-      home: true
+      page: "feed",
+      type: "feed",
+      cssName: "explore"
     }
   },
   {
