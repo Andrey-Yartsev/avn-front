@@ -47,7 +47,10 @@ export default {
         {
           key: "subscribers",
           label: "Subscribers only",
-          disabled: !this.user.canEarn
+          disabled:
+            !this.canEarn ||
+            !this.user.isWantEarn ||
+            this.user.subscribePrice <= 0
         },
         {
           key: "followers",
