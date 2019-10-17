@@ -7,12 +7,13 @@ export default {
   },
   async needSubscribe(id) {
     const token = Store.state.auth.token;
-    const r = await fetch(this.getStreamClientPath(id, token));
+    const r = await fetch(
+      `${
+        process.env.VUE_APP_API_URL
+      }/streams/${id}/active?access-token=${token}`
+    );
 
-    if (r.status === 400) {
-      return true;
-    }
-    return false;
+    return r.status === 400;
   },
   getStreamClientPath(id, token) {
     return `${
