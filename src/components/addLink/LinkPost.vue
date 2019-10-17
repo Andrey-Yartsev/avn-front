@@ -2,8 +2,13 @@
   <div class="link-row">
     <a :href="link.url" target="_blank" class="link-row__info">
       <span v-if="link.pinned" class="icn-pin icn-item icn-size_md" />
-      <span class="link-row__logo" v-if="faviconIco">
-        <img :src="faviconIco" alt="" />
+      <span class="link-row__logo">
+        <span
+          v-if="iconImage"
+          class="icn-web icn-item icn-size_lg"
+          style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;"
+        />
+        <img v-if="iconUrl" :src="iconUrl" alt="" />
       </span>
       <div class="link-row__content">
         <div class="link-row__title">{{ link.title }}</div>
@@ -26,29 +31,57 @@ export default {
   name: "LinkPost",
   props: ["link"],
   mixins: [UserMixin],
+  data() {
+    return {
+      iconUrl: "",
+      iconImage: false
+    };
+  },
   computed: {
-    faviconIco() {
-      return this.getFaviconIco();
-    },
     profile() {
       return this.$store.state.profile.home.profile;
     }
   },
   methods: {
-    getFaviconIco() {
+    async getFaviconIco() {
       const fullPath = this.$props.link.url;
-      if (fullPath.indexOf("https://stars.avn.com") !== -1)
-        return "/static/img/avn/favicon.ico";
-      if (fullPath.indexOf("//") === -1) return "/static/img/avn/favicon.ico";
+      if (fullPath.indexOf("https://stars.avn.com") !== -1) {
+        this.iconUrl = "/static/img/avn/favicon.ico";
+        return;
+      }
+      if (fullPath.indexOf("//") === -1) {
+        this.iconUrl = "/static/img/avn/favicon.ico";
+        return;
+      }
       const fullPathArray = fullPath.split("//");
       const protocol = fullPathArray[0];
       const domen = fullPathArray[1].split("/")[0];
       const iconUrl = protocol + "//" + domen + "/favicon.ico";
-      return iconUrl;
+      const icon = await this.isFaviconExists(iconUrl);
+      if (icon) {
+        this.iconUrl = icon;
+      } else {
+        this.iconImage = true;
+      }
+    },
+    isFaviconExists(url) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = function() {
+          resolve(url);
+        };
+        img.onerror = function() {
+          resolve(null);
+        };
+        img.src = url;
+      });
     },
     truncate(v) {
       return truncate(v, 50);
     }
+  },
+  mounted() {
+    this.getFaviconIco();
   }
 };
 </script>
