@@ -31,7 +31,7 @@
           >
             <span class="value">{{
               isOwner(this.profile.id)
-                ? this.$store.state.profile.links.links.length
+                ? this.$store.state.auth.user.linksCount
                 : profile.linksCount
             }}</span>
             <span class="label">Links</span>

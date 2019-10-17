@@ -24,6 +24,11 @@ const actions = {
     await dispatch("_deleteLink", linkId);
     commit("deleteLink", linkId);
     commit("endEditLink");
+    commit("auth/decrementFollowingCount", null, { root: true });
+  },
+  async addLink({ dispatch, commit }, data) {
+    await dispatch("_addLink", data);
+    commit("auth/incrementFollowingCount", null, { root: true });
   }
 };
 
@@ -48,7 +53,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "addLink",
+  prefix: "_addLink",
   apiPath: "links",
   resultKey: "links",
   state,
