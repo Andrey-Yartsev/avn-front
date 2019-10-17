@@ -55,10 +55,11 @@
 <script>
 import User from "@/mixins/user";
 import HeaderScrolled from "@/mixins/headerScrolled";
+import Access from "@/components/stream/access";
 
 export default {
   name: "ProfileAvatar",
-  mixins: [User, HeaderScrolled],
+  mixins: [User, HeaderScrolled, Access],
   props: {
     pageName: {
       type: String,
@@ -80,11 +81,8 @@ export default {
   methods: {
     click() {
       if (this.profile.currentStream) {
-        this.$store.dispatch("modal/show", {
-          name: "stream",
-          data: {
-            stream: this.profile.currentStream
-          }
+        this.tryOpenStream(this.profile, this.profile.currentStream, stream => {
+          this.openStream(stream);
         });
       }
     }

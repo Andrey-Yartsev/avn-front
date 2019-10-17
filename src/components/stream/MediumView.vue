@@ -49,10 +49,11 @@
 </template>
 
 <script>
-import StreamApi from "@/api/stream";
+import Access from "./access";
 
 export default {
   name: "Live",
+  mixins: [Access],
   props: {
     post: {
       type: Object,
@@ -98,25 +99,9 @@ export default {
     }
   },
   methods: {
-    async run() {
-      if (await StreamApi.needSubscribe(this.post.id)) {
-        this.$store.dispatch("modal/show", {
-          name: "subscribe",
-          data: {
-            user: this.user
-          }
-        });
-        return;
-      }
-
-      this.openStream();
-    },
-    openStream() {
-      this.$store.dispatch("modal/show", {
-        name: "stream",
-        data: {
-          stream: this.post
-        }
+    run() {
+      this.tryOpenStream(this.post.user, this.post, stream => {
+        this.openStream(stream);
       });
     },
     updateMediaSrc() {

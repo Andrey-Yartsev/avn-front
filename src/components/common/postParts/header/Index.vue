@@ -31,6 +31,7 @@
       >
     </span>
     <span class="follow-link hidden">Follow</span>
+    <span class="follow-link hidden">Follow</span>
     <time class="timestamp" v-if="datetime">
       {{ datetime }}
     </time>

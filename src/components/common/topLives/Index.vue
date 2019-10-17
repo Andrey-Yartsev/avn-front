@@ -48,10 +48,11 @@
 </template>
 
 <script>
-import StreamApi from "@/api/stream";
+import Access from "@/components/stream/access";
 
 export default {
   name: "TopLives",
+  mixins: [Access],
   data() {
     return {
       current: 0,
@@ -95,29 +96,14 @@ export default {
       this.setData();
       this.run();
     },
-    async openLive() {
-      this.openingUser = { ...this.user };
-      this.openingStream = { ...this.stream };
-      if (await StreamApi.needSubscribe(this.openingStream.id)) {
-        this.$store.dispatch("modal/show", {
-          name: "subscribe",
-          data: {
-            user: this.openingUser
-          }
-        });
-        return;
-      }
-
-      this.openStream();
+    openLive() {
+      this.tryOpenStream({ ...this.user }, { ...this.stream }, stream => {
+        this._openStream(stream);
+      });
     },
-    openStream() {
+    _openStream(stream) {
       if (this.lives[this.current]) {
-        this.$store.dispatch("modal/show", {
-          name: "stream",
-          data: {
-            stream: this.openingStream
-          }
-        });
+        this.openStream(stream);
       }
     }
   },
