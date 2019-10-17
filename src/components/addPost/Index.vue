@@ -84,7 +84,9 @@
           <img v-if="user.avatar" :src="user.avatar" />
         </span>
       </span>
-      <div class="text-media-container text-field-border">
+      <div class="text-media-container"
+        :class="{ 'text-field-border': $mq === 'desktop' }"
+      >
         <vue-tribute :options="tributeOptions">
           <textarea
             @focus="() => (expanded = true)"
