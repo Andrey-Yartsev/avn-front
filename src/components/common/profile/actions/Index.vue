@@ -29,7 +29,7 @@
             class="btn-user-activity"
             :to="`/${profile.username}/links`"
           >
-            <span class="value">{{ profile.linksCount }}</span>
+            <span class="value">{{ isOwner(this.profile.id) ? this.$store.state.profile.links.links.length : profile.linksCount }}</span>
             <span class="label">Links</span>
           </router-link>
         </div>
