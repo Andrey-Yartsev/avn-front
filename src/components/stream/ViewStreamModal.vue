@@ -164,7 +164,9 @@ export default {
       return throttle(300, this.like);
     },
     comments() {
-      return this.$store.state.lives.currentLive.comments;
+      return this.$store.state.lives.currentLive.comments.filter(comment => {
+        return comment.stream_user_id === this.streamer.id;
+      });
     },
     streamer() {
       return this.$store.state.modal.stream.data.stream.user;
