@@ -1,8 +1,11 @@
 <template>
   <div class="addPost truncated">
     <div class="addPost-header" v-if="$mq === 'mobile'">
-      <button type="button" class="header-return-btn go-back go-back_times">
-        <span class="close__linkModal" @click="closeHandler" />
+      <button
+        @click="closeHandler"
+        type="button"
+        class="header-return-btn go-back go-back_times"
+      >
         <h1 class="category-name">
           {{ this.isNew ? "New Link" : "Edit Link" }}
         </h1>
