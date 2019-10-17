@@ -206,6 +206,7 @@ export default {
       });
     },
     removeHandlersFromTags() {
+      if (!this.$refs.text) return;
       const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag")];
       tags.forEach(item =>
         item.removeEventListener("click", this.tagEventListener)
