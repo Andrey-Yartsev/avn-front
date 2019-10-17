@@ -43,10 +43,21 @@
   }
 
   &.delicate {
-    background: rgba($gray, .6);
 
-    &:hover {
-      background: rgba($gray, .8);
+    &-light {
+      background: rgba($gray, .6);
+
+      &:hover {
+        background: rgba($gray, .8);
+      }
+    }
+
+    &-dark {
+      background: rgba($gray, 1);
+
+      &:hover {
+        background: rgba($gray, .9);
+      }
     }
   }
 

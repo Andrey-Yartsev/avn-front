@@ -91,20 +91,19 @@
         </label>
 
         <div class="links-editor__controls">
-          <button class="btn delicate" @click="closeHandler">
+          <button class="btn delicate-light" @click="closeHandler">
             Cancel
+          </button>
+          <button
+            type="text"
+            v-if="isEditMode"
+            class="btn delicate-dark"
+            @click.prevent="deleteHandler"
+          >
+            Delete link
           </button>
           <button class="btn" type="submit" :disabled="isDisabled">
             {{ isEditMode ? "Update" : "Add" }}
-          </button>
-        </div>
-        <div class="links-editor__delete" v-if="isEditMode">
-          <button
-            type="text"
-            class="btn lg btn_fix-width-md"
-            @click.prevent="deleteHandler"
-          >
-            Delete
           </button>
         </div>
       </div>

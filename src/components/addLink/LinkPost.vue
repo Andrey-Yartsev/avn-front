@@ -11,7 +11,7 @@
       </div>
     </a>
     <div v-if="isOwner(this.profile.id)" class="link-row__controls">
-      <button @click="$emit('edit')" class="btn btn_fix-width-ex-sm">
+      <button @click="$emit('edit')" class="btn">
         Edit
       </button>
     </div>
