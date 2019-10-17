@@ -68,12 +68,8 @@ const actions = {
     }
   },
   initGuestCategory({ commit }) {
-    let genderCategory = parseInt(BrowserStore.get("genderCategory"));
-
-    if (!genderCategory) {
-      return;
-    }
-
+    const isGayFront = !!window.location.hostname.match(/gayvn/);
+    const genderCategory = isGayFront ? 3 : 2;
     commit("setCategory", genderCategory);
   },
   setGuestCategory({ commit }, genderCategory) {
