@@ -98,7 +98,7 @@
       <div class="container">
         <div class="download-apps">
           <a
-            href="/static/img/Starting OBS Stream on Windows.pdf"
+            href="/static/doc/obs-win.pdf"
             target="_blank"
             class="download-app"
           >
@@ -131,7 +131,7 @@
             </span>
           </a>
           <a
-            href="/static/img/Starting OBS Stream on Mac.pdf"
+            href="/static/img/obs-mac.pdf"
             target="_blank"
             class="download-app"
           >
