@@ -131,7 +131,7 @@
             </span>
           </a>
           <a
-            href="/static/img/obs-mac.pdf"
+            href="/static/doc/obs-mac.pdf"
             target="_blank"
             class="download-app"
           >
