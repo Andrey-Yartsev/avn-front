@@ -45,6 +45,27 @@
             </button>
           </label>
         </div>
+        <div class="form-group form-group_with-label pb-reset">
+          <label class="form-group-inner">
+            <span class="label"></span>
+            <span class="form-group form-group_min-height">
+              <span class="form-field form-field_break-all">
+                <br /><br /><b>Instructions for starting & manage OBS stream</b
+                ><br /><br />
+                <a
+                  href="/static/doc/Starting OBS Stream on Windows.pdf"
+                  target="_blank"
+                  >for Windows</a
+                ><br />
+                <a
+                  href="/static/doc/Starting OBS Stream on Mac.pdf"
+                  target="_blank"
+                  >for Mac</a
+                >
+              </span>
+            </span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
