@@ -133,10 +133,19 @@ strong {
       padding-top: 0;
     }
   }
+
+  &_section {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      padding-bottom: 20px;
+    }
+  }
 }
+
 .no-padding {
   padding: 0;
 }
+
 .empty-feed {
   text-align: center;
   color: $main-color;

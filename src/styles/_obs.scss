@@ -115,3 +115,50 @@
 .obs-filter {
   position: relative;
 }
+
+.download-apps {
+  display: flex;
+  justify-content: center;
+}
+
+.download-app {
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: $main-color;
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 6px;
+    
+    img,
+    svg {
+      display: block;
+    }
+  }
+
+  &__title {
+    opacity: .5;
+    transition: opacity .3s;
+  }
+
+  &:hover {
+
+    .download-app__title {
+      opacity: 1;
+    }
+  }
+}
+
+.logo-apple,
+.logo-obs {
+
+  svg {
+    opacity: .5;
+    fill: $main-color;
+  }
+}
