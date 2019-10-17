@@ -28,14 +28,15 @@ export default {
       }
     });
   },
-  getExplorePosts({ offset, limit, marker, source, category }) {
+  getExplorePosts({ offset, limit, marker, source, category, tag }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",
       query: {
         category,
         offset,
         limit,
-        marker
+        marker,
+        tag
       }
     });
   },

@@ -12,7 +12,8 @@ const initState = {
   marker: "",
   source: "media",
   deletedPost: undefined,
-  category: null
+  category: null,
+  tag: ""
 };
 
 const state = { ...initState };
@@ -28,12 +29,15 @@ const mutations = {
   },
   setCategory(state, category) {
     state.category = category;
+  },
+  setTag(state, tagName) {
+    state.tag = tagName;
   }
 };
 
 const actions = {
   getPosts({ commit, state, rootState }) {
-    const { limit, offset, marker } = state;
+    const { limit, offset, marker, tag } = state;
     let source = state.source;
     if (source === "feed") {
       source = "media";
@@ -43,7 +47,7 @@ const actions = {
     const category = rootState.gender.category;
 
     return new Promise(accept => {
-      PostApi.getExplorePosts({ limit, offset, marker, source, category })
+      PostApi.getExplorePosts({ limit, offset, marker, source, category, tag })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(res) {

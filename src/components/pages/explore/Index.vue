@@ -147,7 +147,7 @@ export default {
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
   created() {
-    this.getPageData();
+    this.init();
   },
   computed: {
     firstVideoId() {
@@ -240,6 +240,9 @@ export default {
     }
   },
   methods: {
+    init() {
+      this.getPageData();
+    },
     scrollFunction(e) {
       if (!e) return;
 
@@ -279,6 +282,11 @@ export default {
       this.$store.dispatch("lives/resetPageState");
       this.$store.commit("topModels/reset");
 
+      const searchTag = this.$route.params.tag;
+      if (searchTag) {
+        this.$store.commit("explore/setTag", searchTag);
+      }
+
       if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
         this.$store.dispatch("explore/getPosts");
@@ -309,6 +317,9 @@ export default {
     },
     category() {
       this.getPageData();
+    },
+    ["$route.params.tag"]() {
+      this.init();
     }
   }
 };

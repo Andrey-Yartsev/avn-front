@@ -26,7 +26,7 @@
             </div>
             <div v-if="newUser" class="start-feed-page">
               <div class="start-feed-page__text">
-                <router-link to="/explore">Find</router-link>someone to follow
+                <router-link to="/explore">Find</router-link> someone to follow
                 <br />or
                 <router-link to="/addPost">Start sharing</router-link>right away
               </div>
