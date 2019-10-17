@@ -8,11 +8,20 @@
     align-items: center;
     align-content: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-bottom: 15px;
+    }
   }
 
   &__body {
     flex: 0 0 100%;
     margin-bottom: 14px;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-top: 15px;
+    }
   }
 
   &__controls {

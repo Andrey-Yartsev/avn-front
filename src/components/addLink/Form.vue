@@ -1,11 +1,24 @@
 <template>
   <div class="addPost truncated">
+    <div class="addPost-header" v-if="$mq === 'mobile'">
+      <button type="button" class="header-return-btn go-back go-back_times">
+        <h1 class="category-name">
+          {{ this.isNew ? "New Link" : "Edit Link" }}
+        </h1>
+      </button>
+    </div>
     <form
       @submit.prevent="submitHandler"
-      class="add-new-form expanded bg-gradient_light links-editor"
+      class="add-new-form expanded links-editor"
+      :class="{
+        'bg-gradient_light': $mq === 'desktop',
+        'container': $mq === 'mobile'
+      }"
     >
       <div class="links-editor__body">
-        <div class="form-group form-group_row-md">
+        <div class="form-group"
+          :class="{ 'form-group_row-md': $mq === 'desktop' }"
+        >
           <label class="form-group-inner">
             <span class="label">Link url</span>
             <span class="form-group form-group_clear-gaps">
@@ -14,7 +27,7 @@
                   type="text"
                   v-model.trim="url"
                   name="url"
-                  class="text-field-border"
+                  :class="{ 'text-field-border': $mq === 'desktop' }"
                 />
               </span>
               <div class="url-route">
@@ -43,7 +56,9 @@
             </span>
           </label>
         </div>
-        <div class="form-group form-group_row-md">
+        <div class="form-group"
+          :class="{ 'form-group_row-md': $mq === 'desktop' }"
+        >
           <label class="form-group-inner">
             <span class="label">Link title</span>
             <span class="form-group form-group_clear-gaps">
@@ -53,7 +68,7 @@
                   v-model.trim="title"
                   name="title"
                   required
-                  class="text-field-border"
+                  :class="{ 'text-field-border': $mq === 'desktop' }"
                 />
               </span>
             </span>
