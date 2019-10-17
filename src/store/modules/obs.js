@@ -8,8 +8,7 @@ const state = {
   trigStart: 0,
   likes: [],
   viewers: [],
-  tips: [],
-  currentStream: null
+  tips: []
 };
 
 const actions = {
@@ -37,7 +36,7 @@ const actions = {
     if (!state.started) {
       return;
     }
-    if (state.currentStream.id !== stream.id) {
+    if (state.stream.id !== stream.id) {
       return;
     }
     commit("started", false);
@@ -61,7 +60,7 @@ const mutations = {
   },
   started(state, stream) {
     state.started = !!stream;
-    state.currentStream = stream;
+    state.stream = stream;
   },
   like(state, like) {
     if (!state.started) {

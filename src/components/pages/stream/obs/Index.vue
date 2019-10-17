@@ -34,7 +34,7 @@
           >
             <div
               class="group-controls"
-              v-if="!stream.isTypeSelected && !filterOnesSelected"
+              v-if="!stream.isTypeSelected && !filterSelected"
             >
               <AccessFilter
                 :value="localStream.type"
@@ -124,7 +124,7 @@ export default {
   data() {
     return {
       localStream: null,
-      filterOnesSelected: false,
+      filterSelected: false,
       asideType: "comments",
       joined: false,
       stopDisabled: false
@@ -203,14 +203,14 @@ export default {
       return this.$store.dispatch("obs/update", stream);
     },
     visibilityChanged(type) {
-      this.filterOnesSelected = true;
+      this.filterSelected = true;
       this.update({ type });
       this.$store.dispatch("global/flashToast", {
         text: "Visibility changed"
       });
     },
     logout() {
-      this.filterOnesSelected = false;
+      this.filterSelected = false;
       this.$store.dispatch("auth/logout");
     },
     refresh() {
@@ -252,7 +252,11 @@ export default {
     trigStart() {
       this.join();
     },
-    stream() {
+    stream(stream) {
+      if (!stream) {
+        this.filterSelected = false;
+        return;
+      }
       this.localStream = { ...this.stream };
       if (this.$root.ws.connected) {
         this.join();
