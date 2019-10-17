@@ -26,6 +26,9 @@ const actions = {
     if (rootState.auth.user.id !== user.id) {
       return;
     }
+    if (state.started) {
+      return;
+    }
     dispatch("fetch").then(() => {
       commit("trigStart");
     });
