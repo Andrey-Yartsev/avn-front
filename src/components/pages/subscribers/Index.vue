@@ -60,7 +60,7 @@
                     :href="`/`"
                     @click.prevent="goBack"
                   />
-                  <h1 class="page-title">Following</h1>
+                  <h1 class="page-title">Subscribers</h1>
                 </div>
                 <div class="explore">
                   <div class="userCollectionView">
@@ -121,7 +121,7 @@ import Footer from "@/components/footer/Index";
 import BackRouter from "@/router/backRouter";
 
 export default {
-  name: "Followers",
+  name: "Subscribers",
   mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
