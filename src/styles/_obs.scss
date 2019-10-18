@@ -161,3 +161,19 @@
     }
   }
 }
+
+.SettingsObsView {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+
+    .form-group_with-label {
+      padding-right: 10px;
+    }
+
+    .btn_fix-width-sm {
+      max-width: 60px;
+      margin-left: 20px;
+      margin-bottom: 5px;
+    }
+  }
+}

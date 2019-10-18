@@ -53,6 +53,13 @@
                 {{ server }}
               </span>
             </span>
+            <button
+              type="button"
+              class="btn btn_fix-width-sm border alt"
+              @click="copyServerToClipboard"
+            >
+              Copy
+            </button>
           </label>
         </div>
         <div class="form-group form-group_with-label pb-reset">
@@ -63,24 +70,31 @@
                 {{ key }}
               </span>
             </span>
+            <button
+              type="button"
+              class="btn btn_fix-width-sm border alt"
+              @click="copyKeyToClipboard"
+            >
+              Copy
+            </button>
           </label>
         </div>
         <div class="form-group form-group_with-label pb-reset">
-          <label class="form-group-inner">
+          <div class="form-group-inner">
             <span class="label">Internal chat URL</span>
             <span class="form-group form-group_min-height">
               <span class="form-field form-field_break-all">
-                {{ url }}
+                <a :href="url" target="_blank">{{ url }}</a>
               </span>
             </span>
             <button
               type="button"
               class="btn btn_fix-width-sm border alt"
-              @click="copyToClipboard"
+              @click="copyUrlToClipboard"
             >
               Copy
             </button>
-          </label>
+          </div>
         </div>
       </div>
     </div>
@@ -188,7 +202,21 @@ export default {
     }
   },
   methods: {
-    copyToClipboard() {
+    copyServerToClipboard() {
+      this.$copyText(this.server).then(() => {
+        this.$store.dispatch("global/flashToast", {
+          text: "OBS Server URL copied!"
+        });
+      });
+    },
+    copyKeyToClipboard() {
+      this.$copyText(this.key).then(() => {
+        this.$store.dispatch("global/flashToast", {
+          text: "OBS key copied!"
+        });
+      });
+    },
+    copyUrlToClipboard() {
       this.$copyText(this.url).then(() => {
         this.$store.dispatch("global/flashToast", {
           text: "URL copied!"
