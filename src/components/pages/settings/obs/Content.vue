@@ -45,7 +45,10 @@
       :class="{ 'shadow-block_b-gap-md': $mq === 'mobile' }"
     >
       <div class="container">
-        <div class="form-group form-group_with-label pb-reset">
+        <div
+          class="form-group form-group_with-label"
+          :class="{ 'pb-reset': $mq === 'desktop' }"
+        >
           <label class="form-group-inner">
             <span class="label">OBS server URL</span>
             <span class="form-group form-group_min-height">
@@ -55,14 +58,17 @@
             </span>
             <button
               type="button"
-              class="btn btn_fix-width-sm border alt"
+              class="btn btn_fix-width-ex-sm border alt"
               @click="copyServerToClipboard"
             >
               Copy
             </button>
           </label>
         </div>
-        <div class="form-group form-group_with-label pb-reset">
+        <div
+          class="form-group form-group_with-label"
+          :class="{ 'pb-reset': $mq === 'desktop' }"
+        >
           <label class="form-group-inner">
             <span class="label">OBS streaming key</span>
             <span class="form-group form-group_min-height">
@@ -72,14 +78,17 @@
             </span>
             <button
               type="button"
-              class="btn btn_fix-width-sm border alt"
+              class="btn btn_fix-width-ex-sm border alt"
               @click="copyKeyToClipboard"
             >
               Copy
             </button>
           </label>
         </div>
-        <div class="form-group form-group_with-label pb-reset">
+        <div
+          class="form-group form-group_with-label"
+          :class="{ 'pb-reset': $mq === 'desktop' }"
+        >
           <div class="form-group-inner">
             <span class="label">Internal chat URL</span>
             <span class="form-group form-group_min-height">
@@ -89,7 +98,7 @@
             </span>
             <button
               type="button"
-              class="btn btn_fix-width-sm border alt"
+              class="btn btn_fix-width-ex-sm border alt"
               @click="copyUrlToClipboard"
             >
               Copy
