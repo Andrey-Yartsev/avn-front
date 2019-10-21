@@ -670,9 +670,8 @@
     z-index: 1;
     
     &.disabled {
-      cursor: default;
+      cursor: not-allowed;
       opacity: .5;
-      pointer-events: none;
     }
   }
 
@@ -749,8 +748,7 @@
     &.disabled {
       color: $main-color;
       opacity: .5;
-      pointer-events: none;
-      cursor: default;
+      cursor: not-allowed;
 
       .b-check-state__icon {
 
