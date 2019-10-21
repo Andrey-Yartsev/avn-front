@@ -80,7 +80,6 @@
         rel="nofollow"
         >twitter.com/{{ profile.twitterUsername }}</a
       >
-      <div>another info</div>
     </div>
   </div>
 </template>
