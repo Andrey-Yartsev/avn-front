@@ -155,23 +155,26 @@
               />
             </div>
           </div>
-          <div
-            class="b-check-state b-check-state_post"
-            v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
-          >
-            <label>
-              <input
-                class="is-free-post"
-                type="checkbox"
-                v-model="withoutWatermark"
-              />
-              <span class="b-check-state__icon icn-item icn-size_lg"></span>
-              <span class="b-check-state__text">Without watermark</span>
-            </label>
-          </div>
         </div>
       </div>
       <div class="actions">
+        <div
+          class="b-check-state b-check-state_post"
+          :class="{ mediaSelected: preloadedMedias.length > 0 }"
+          style="width: 100%"
+          v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
+        >
+          <label>
+            <input
+              class="is-free-post"
+              type="checkbox"
+              :disabled="preloadedMedias.length > 0"
+              v-model="withoutWatermark"
+            />
+            <span class="b-check-state__icon icn-item icn-size_lg"></span>
+            <span class="b-check-state__text">Without watermark</span>
+          </label>
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -526,7 +529,6 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        withoutWatermark: this.withoutWatermark,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 

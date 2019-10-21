@@ -149,7 +149,8 @@ export default {
 
         const uploadProcess = fileUpload(
           { id, file, width, mediaType },
-          this.setUploadProgress
+          this.setUploadProgress,
+          this.withoutWatermark
         );
 
         uploadProcess

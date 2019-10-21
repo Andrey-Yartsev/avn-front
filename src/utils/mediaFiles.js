@@ -207,7 +207,11 @@ export const getVideoPreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = ({ id, file, mediaType }, onProgress) => {
+export const fileUpload = (
+  { id, file, mediaType },
+  onProgress,
+  withoutWatermark
+) => {
   const xhr = new XMLHttpRequest();
   const pr = new Promise((resolve, reject) => {
     const formData = new FormData();
@@ -218,14 +222,16 @@ export const fileUpload = ({ id, file, mediaType }, onProgress) => {
       watermarkFile
     } = Store.state.auth.user;
 
-    if (
-      (mediaType === "video" && hasWatermarkVideo) ||
-      ((mediaType === "gif" || mediaType === "photo") && hasWatermarkPhoto)
-    ) {
-      if (watermarkFile) {
-        formData.append("watermark[imagePath]", watermarkFile);
-      } else {
-        formData.append("watermark[text]", watermarkText);
+    if (!withoutWatermark) {
+      if (
+        (mediaType === "video" && hasWatermarkVideo) ||
+        ((mediaType === "gif" || mediaType === "photo") && hasWatermarkPhoto)
+      ) {
+        if (watermarkFile) {
+          formData.append("watermark[imagePath]", watermarkFile);
+        } else {
+          formData.append("watermark[text]", watermarkText);
+        }
       }
     }
 
