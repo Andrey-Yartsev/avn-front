@@ -1,63 +1,57 @@
 <template>
   <div class="userView" :class="[{ 'open-dropdown-inside': showDropdown }]">
     <div class="bg bg-color bg-gradient_light" v-if="$mq === 'desktop'">
-      <img v-if="profile.header" :src="profile.header" />
+      <img v-if="profile.subscriber.header" :src="profile.subscriber.header" />
     </div>
     <div class="user-container" :class="{ 'user-container_numbered': top }">
       <div
         class="avatar avatar_md avatar_md-desk"
-        :class="{ 'online-state': isOnline(profile.id) }"
+        :class="{ 'online-state': isOnline(profile.subscriber.id) }"
       >
-        <span
-          class="avatar__img"
-          :class="{ 'with-story': profile.hasNotViewedStory }"
-          ><img v-if="profile.avatar" :src="profile.avatar"
+        <span class="avatar__img"
+          ><img
+            v-if="profile.subscriber.avatar"
+            :src="profile.subscriber.avatar"
         /></span>
         <div class="stream-online-label" v-if="showLiveLabel">live</div>
       </div>
       <div class="names-actions-wrapper">
         <div class="user-names">
           <div class="wrap-name">
-            <router-link :to="'/' + profile.username" class="name">{{
-              profile.name
+            <router-link :to="'/' + profile.subscriber.username" class="name">{{
+              profile.subscriber.name
             }}</router-link>
             <span
               class="verified-user icn-item"
-              v-if="profile.isVerified"
+              v-if="profile.subscriber.isVerified"
             ></span>
-            <div class="block-indicator" v-if="profile.isBlocked">
-              <span class="icn-block icn-item"></span>
-            </div>
-            <span class="followme" v-if="profile.subscribedOn"
-              ><span class="followme__txt">subscribed</span></span
-            >
           </div>
           <span class="user-login reset-ml">
-            <router-link :to="'/' + profile.username">{{
-              profile.username
+            <router-link :to="'/' + profile.subscriber.username">{{
+              profile.subscriber.username
             }}</router-link>
           </span>
         </div>
         <div class="user-actions" v-if="!top">
-          <SubscribeButton
-            :profile="profile"
+          <!-- <SubscribeButton
+            :profile="profile.subscriber"
             :actionPrefix="actionPrefix"
-            v-if="!isOwner(profile.id)"
+            v-if="!isOwner(profile.subscriber.id)"
             ref="subscribeButton"
-          />
-          <FollowButton
-            v-if="!isOwner(profile.id) && user"
-            :profile="profile"
+          /> -->
+          <!-- <FollowButton
+            v-if="!isOwner(profile.subscriber.id) && user"
+            :profile="profile.subscriber"
             :actionPrefix="actionPrefix"
           />
           <UserDropdown
-            :profile="profile"
+            :profile="profile.subscriber"
             @openDropdown="showDropdown = true"
             @hideDropdown="showDropdown = false"
             :actionPrefix="actionPrefix"
             class="hidden-mobile"
             v-if="$mq === 'desktop'"
-          />
+          /> -->
         </div>
       </div>
       <div
@@ -67,7 +61,7 @@
       >
         <span class="user-num-list__text">{{ num }}</span>
       </div>
-      <p
+      <!-- <p
         class="profile-text"
         v-if="profile.about"
         v-html="truncate(profile.about)"
@@ -79,8 +73,32 @@
         target="_blank"
         rel="nofollow"
         >twitter.com/{{ profile.twitterUsername }}</a
-      >
-      <div>another info</div>
+      > -->
+      <div class="subscribe__details">
+        <div class="details_item date">
+          <div class="date date_label">Date:</div>
+          <div class="date date_info">
+            Since {{ messageTime(profile.sinceDate) }}
+          </div>
+        </div>
+        <div class="details_item amount">
+          <div class="amount_item amount_label">Amount:</div>
+          <div class="amount_item amount_info">${{ profile.price }}</div>
+        </div>
+        <div class="details_item status">
+          <div class="status_item status_label">Status:</div>
+          <div class="status_item status_info">
+            <span v-if="profile.active"
+              ><span style="font-weight: bold">Active </span>until
+              {{ messageTime(profile.expireDate) }}</span
+            >
+            <span v-else
+              ><span style="font-weight: bold">Canceled</span>
+              {{ messageTime(profile.expireDate) }}</span
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -91,6 +109,7 @@ import FollowButton from "../pages/search/FollowButton";
 import UserDropdown from "@/components/common/userDropdown/Index";
 import User from "@/mixins/user";
 import truncate from "truncate-html";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "User",
@@ -130,7 +149,25 @@ export default {
   methods: {
     truncate(v) {
       return truncate(v, 150);
+    },
+    messageTime(message) {
+      return fromNow(message);
     }
+  },
+  mounted() {
+    console.log(this.$props.profile);
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.subscribe__details {
+  .details_item {
+    padding: 0.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+</style>

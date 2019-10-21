@@ -50,13 +50,13 @@
               >&nbsp;
               <span class="user-menu-counts-item-title">Followers</span>
             </router-link>
-            <router-link to="/subscribers" class="user-menu-counts-item">
-              <span
+            <router-link to="/subscribes" class="user-menu-counts-item">
+              <!-- <span
                 class="user-menu-counts-item-count"
                 id="sidebarSubscribers"
                 >{{ user.followersCount }}</span
-              >&nbsp;
-              <span class="user-menu-counts-item-title">Subscribers</span>
+              >&nbsp; -->
+              <span class="user-menu-counts-item-title">Subscribes</span>
             </router-link>
           </div>
         </div>

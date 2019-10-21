@@ -1,24 +1,39 @@
 <template>
   <div class="explore-wrapper users">
-    <User
-      v-for="(item, i) in items"
-      v-bind:key="item.id"
-      :profile="item"
-      :actionPrefix="actionPrefix"
-      :ref="'user' + item.id"
-      :top="top"
-      :num="i + 1"
-    />
+    <template v-if="actionPrefix === 'subscribes'">
+      <UserSubscriber
+        v-for="(item, i) in items"
+        v-bind:key="item.id"
+        :profile="item"
+        :actionPrefix="actionPrefix"
+        :ref="'user' + item.id"
+        :top="top"
+        :num="i + 1"
+      />
+    </template>
+    <template v-else>
+      <User
+        v-for="(item, i) in items"
+        v-bind:key="item.id"
+        :profile="item"
+        :actionPrefix="actionPrefix"
+        :ref="'user' + item.id"
+        :top="top"
+        :num="i + 1"
+      />
+    </template>
   </div>
 </template>
 
 <script>
 import User from "./User";
+import UserSubscriber from "./UserSubscriber";
 
 export default {
   name: "SearchUsers",
   components: {
-    User
+    User,
+    UserSubscriber
   },
   props: {
     items: {
@@ -38,6 +53,9 @@ export default {
     subscriptionUpdate() {
       return this.$store.state.subscription.updated;
     }
+  },
+  mounted() {
+    console.log(this.$props.items);
   },
   watch: {
     subscriptionUpdate(data) {

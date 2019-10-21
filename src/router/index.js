@@ -397,10 +397,10 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/subscribers",
+    path: "/subscribes",
     component: SubscribersPage,
     meta: {
-      title: "subscribers",
+      title: "subscribes",
       cssName: "following"
     }
   },

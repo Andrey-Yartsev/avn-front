@@ -41,11 +41,12 @@
               Likes {{ profile.favoritesCount }}
             </router-link>
             <router-link
-              to="/subscribers"
+              to="/subscribes"
               class="content-nav__item"
               v-if="isOwner(profile.id)"
             >
-              Subscribers {{ profile.favoritesCount }}
+              Subscribes
+              <!-- {{ profile.subscribesCount }} -->
             </router-link>
           </div>
           <div class="row">
@@ -65,13 +66,53 @@
                 <div class="explore">
                   <div class="userCollectionView">
                     <div class="block-bg">
+                      <div class="messages-controllers">
+                        <p class="title">Send group message for subscribers</p>
+                        <div class="group-messages-buttons">
+                          <div
+                            class="message-button active"
+                            @click="openGroupMessageModal('current')"
+                          >
+                            Current
+                          </div>
+                          <div
+                            class="message-button expired"
+                            @click="openGroupMessageModal('expired')"
+                          >
+                            Expired
+                          </div>
+                          <div
+                            class="message-button all"
+                            @click="openGroupMessageModal('all')"
+                          >
+                            All
+                          </div>
+                        </div>
+                      </div>
                       <Users
+                        :items="mockUsers"
+                        :loading="false"
+                        :query="page"
+                        actionPrefix="subscribes"
+                      />
+                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                        <Loader
+                          :fullscreen="false"
+                          :inline="true"
+                          :class="{ small: mockUsers.length }"
+                        />
+                      </div>
+                      <div
+                        class="msg-no-content show"
+                        v-if="!loading && !mockUsers.length"
+                      >
+                        <!-- <Users
                         :items="users"
                         :loading="false"
                         :query="page"
-                        actionPrefix="followers"
-                      />
-                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                        actionPrefix="subscribes"
+                      /> -->
+                        <!-- <div class="loader-infinity" v-if="infinityScrollLoading">
                         <Loader
                           :fullscreen="false"
                           :inline="true"
@@ -81,8 +122,8 @@
                       <div
                         class="msg-no-content show"
                         v-if="!loading && !users.length"
-                      >
-                        <div
+                      > -->
+                        <!-- <div
                           class="msg-no-content__text"
                           v-if="page === 'following'"
                         >
@@ -90,7 +131,7 @@
                         </div>
                         <div class="msg-no-content__text" v-else>
                           No one follows you yet
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -119,6 +160,7 @@ import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/router/backRouter";
+import mockUsers from "../../../mock/subscriberUser";
 
 export default {
   name: "Subscribers",
@@ -137,12 +179,13 @@ export default {
   },
 
   data: () => ({
-    loadingName: "followersRequestLoading",
-    showTip: false
+    loadingName: "subscribesRequestLoading",
+    showTip: false,
+    mockUsers
   }),
   computed: {
     loading() {
-      return this.$store.state.followers.followersRequestLoading;
+      return this.$store.state.subscribes.subscribesRequestLoading;
     },
     page() {
       return this.$route.meta.title;
@@ -154,14 +197,14 @@ export default {
       const isGay = !!window.location.hostname.match(/gayvn/);
       if (isGay) {
         const excepting = ["avnawards", "avnmagazine"];
-        return this.$store.state.followers.posts.filter(user => {
+        return this.$store.state.subscribes.posts.filter(user => {
           return excepting.indexOf(user.username) === -1;
         });
       }
-      return this.$store.state.followers.posts;
+      return this.$store.state.subscribes.posts;
     },
     store() {
-      return this.$store.state.followers;
+      return this.$store.state.subscribes;
     },
     allMediaTypes() {
       return [...this.inputAcceptTypes.photo];
@@ -179,7 +222,7 @@ export default {
   methods: {
     init() {
       this.resetInfinityScroll();
-      this.$store.commit("followers/reset");
+      this.$store.commit("subscribes/reset");
       this.getPosts();
     },
     follow() {
@@ -232,11 +275,15 @@ export default {
       });
     },
     getPosts() {
-      this.$store.dispatch("followers/getPosts", { type: this.page });
+      this.$store.dispatch("subscribes/getPosts", { type: this.page });
     },
-    openAddPostModal() {
+    openGroupMessageModal(type) {
+      console.log(type);
       this.$store.dispatch("modal/show", {
-        name: "addPost"
+        name: "groupMessage",
+        data: {
+          type
+        }
       });
     },
     goBack() {
@@ -253,3 +300,28 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.messages-controllers {
+  .title {
+    text-align: center;
+    font-weight: bold;
+  }
+  .group-messages-buttons {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem;
+    .message-button {
+      border: 1px solid rgba(128, 128, 128, 0.295);
+      padding: 0.5rem 2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.295);
+      }
+    }
+  }
+}
+</style>
