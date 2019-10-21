@@ -513,8 +513,14 @@ export default {
             }
           })
           .then(() => {
+            console.log(this.mysnapchat, this.snapchat.id);
             this.$store
-              .dispatch(`premiumLinks/activate`, { id: this.snapchat.id })
+              .dispatch(`premiumLinks/activate`, {
+                id: this.snapchat.id,
+                data: {
+                  name: this.mysnapchat
+                }
+              })
               .then(() => {
                 // console.log(r);
                 this.$router.push(`/chat/${this.profile.id}`);
