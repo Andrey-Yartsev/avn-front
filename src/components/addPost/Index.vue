@@ -159,12 +159,11 @@
       </div>
       <div class="actions">
         <div
-          class="b-check-state b-check-state_post"
-          :class="{ mediaSelected: preloadedMedias.length > 0 }"
-          style="width: 100%"
+          class="b-check-state b-check-state_full-width b-check-state_watermark"
+          :class="{mediaSelected: preloadedMedias.length > 0}"
           v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
         >
-          <label>
+          <label :class="{ disabled: preloadedMedias.length > 0 }">
             <input
               class="is-free-post"
               type="checkbox"

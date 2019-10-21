@@ -422,6 +422,7 @@
   .actions {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .submit {
@@ -587,6 +588,11 @@
 .b-check-state {
   font-size: 15px;
   line-height: 30px;
+  cursor: pointer;
+
+  &_full-width {
+    flex: 0 0 100%;
+  }
 
   input[type="checkbox"] {
     position: absolute;
@@ -636,6 +642,7 @@
       opacity: .5;
       color: $main-color;
 
+      .b-check-state_watermark &,
       .b-check-state_post & {
         content: "\E610";
       }
@@ -656,9 +663,27 @@
 
   label {
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     align-content: center;
+    position: relative;
+    z-index: 1;
+    
+    &.disabled {
+      cursor: default;
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+
+  &_watermark {
+
+    .b-check-state__icon {
+
+      &:after {
+        left: 0;
+      }
+    }
   }
 
   &_post {
@@ -666,8 +691,18 @@
     .b-check-state__icon {
 
       &:after {
-        top: 0;
         left: -3px;
+      }
+    }
+  }
+
+  &_watermark,
+  &_post {
+
+    .b-check-state__icon {
+
+      &:after {
+        top: 0;
         line-height: 18px;
       }
     }
@@ -715,6 +750,7 @@
       color: $main-color;
       opacity: .5;
       pointer-events: none;
+      cursor: default;
 
       .b-check-state__icon {
 
@@ -1211,7 +1247,6 @@
   align-items: center;
   flex-wrap: nowrap;
   margin-right: 14px;
-  cursor: pointer;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     margin-right: 16px;
