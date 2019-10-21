@@ -120,6 +120,12 @@
               </div>
               <div
                 class="timestamp timestamp_sm-size message-time"
+                v-if="isMyMessage(v) && v.readDate"
+              >
+                {{ time(v.readDate) }}
+              </div>
+              <div
+                class="timestamp timestamp_sm-size message-time"
                 v-if="v.lastMessageInGroup"
               >
                 <span class="timeValue">{{ time(v.createdAt) }}</span>
