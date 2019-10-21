@@ -160,7 +160,7 @@
       <div class="actions">
         <div
           class="b-check-state b-check-state_full-width b-check-state_watermark"
-          :class="{mediaSelected: preloadedMedias.length > 0}"
+          :class="{ mediaSelected: preloadedMedias.length > 0 }"
           v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
         >
           <label :class="{ disabled: preloadedMedias.length > 0 }">
