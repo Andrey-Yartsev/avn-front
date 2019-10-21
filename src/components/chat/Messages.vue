@@ -118,17 +118,17 @@
                   </a>
                 </template>
               </div>
-              <div
-                class="timestamp timestamp_sm-size message-time"
-                v-if="isMyMessage(v) && v.readDate"
-              >
-                {{ time(v.readDate) }}
-              </div>
-              <div
-                class="timestamp timestamp_sm-size message-time"
-                v-if="v.lastMessageInGroup"
-              >
-                <span class="timeValue">{{ time(v.createdAt) }}</span>
+              <div class="timestamp timestamp_sm-size message-time">
+                <div
+                  class="message-time__read"
+                  v-if="isMyMessage(v) && v.readDate"
+                >
+                  <span class="timeValue">Read {{ time(v.readDate) }}</span>
+                  <span class="icn-read icn-item" />
+                </div>
+                <div class="message-time__written" v-if="v.lastMessageInGroup">
+                  <span class="timeValue">Send {{ time(v.createdAt) }}</span>
+                </div>
               </div>
             </div>
           </div>

@@ -277,6 +277,13 @@
     }
   }
 
+  &-read {
+
+    &:after {
+      content: "\E603";
+    }
+  }
+
   &-block {
     color: red;
     height: 22px;
