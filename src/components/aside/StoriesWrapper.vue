@@ -5,7 +5,19 @@
     >
       <div class="storyCollectionView__header">
         <h4>Stories</h4>
-        <span class="add-story-link" @click="addStory">+ Add story</span>
+        <span v-if="$mq === 'desktop'" class="add-story-link" @click="addStory"
+          >+ Add story</span
+        >
+        <template v-else>
+          <div class="btn-post" v-if="user.isPerformer">
+            <router-link class="b-check-state b-check-state_live" to="/stream">
+              <span
+                class="b-check-state__icon icn-live icn-item icn-size_lg"
+              ></span>
+              <span class="btn-post__text exception">Go live</span></router-link
+            >
+          </div>
+        </template>
       </div>
       <div class="stories-group__outer">
         <div class="stories-group">
