@@ -50,14 +50,6 @@
               >&nbsp;
               <span class="user-menu-counts-item-title">Followers</span>
             </router-link>
-            <router-link to="/subscribes" class="user-menu-counts-item">
-              <!-- <span
-                class="user-menu-counts-item-count"
-                id="sidebarSubscribers"
-                >{{ user.followersCount }}</span
-              >&nbsp; -->
-              <span class="user-menu-counts-item-title">Subscribes</span>
-            </router-link>
           </div>
         </div>
         <div class="sidebar-menu">

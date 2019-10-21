@@ -40,14 +40,13 @@
             >
               Likes {{ profile.favoritesCount }}
             </router-link>
-            <router-link
+            <!-- <router-link
               to="/subscribes"
               class="content-nav__item"
               v-if="isOwner(profile.id)"
             >
               Subscribes
-              <!-- {{ profile.subscribesCount }} -->
-            </router-link>
+            </router-link> -->
           </div>
           <div class="row">
             <div class="content-col single-col">
