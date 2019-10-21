@@ -513,7 +513,6 @@ export default {
             }
           })
           .then(() => {
-            console.log(this.mysnapchat, this.snapchat.id);
             this.$store
               .dispatch(`premiumLinks/activate`, {
                 id: this.snapchat.id,

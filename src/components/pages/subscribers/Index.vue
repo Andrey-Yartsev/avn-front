@@ -66,53 +66,23 @@
                 <div class="explore">
                   <div class="userCollectionView">
                     <div class="block-bg">
-                      <div class="messages-controllers">
-                        <p class="title">Send group message for subscribers</p>
+                      <!-- <div class="messages-controllers">
                         <div class="group-messages-buttons">
                           <div
                             class="message-button active"
-                            @click="openGroupMessageModal('current')"
+                            @click="openGroupMessageModal"
                           >
-                            Current
-                          </div>
-                          <div
-                            class="message-button expired"
-                            @click="openGroupMessageModal('expired')"
-                          >
-                            Expired
-                          </div>
-                          <div
-                            class="message-button all"
-                            @click="openGroupMessageModal('all')"
-                          >
-                            All
+                            Send message to subscribers
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <Users
-                        :items="mockUsers"
+                        :items="users"
                         :loading="false"
                         :query="page"
                         actionPrefix="subscribes"
                       />
                       <div class="loader-infinity" v-if="infinityScrollLoading">
-                        <Loader
-                          :fullscreen="false"
-                          :inline="true"
-                          :class="{ small: mockUsers.length }"
-                        />
-                      </div>
-                      <div
-                        class="msg-no-content show"
-                        v-if="!loading && !mockUsers.length"
-                      >
-                        <!-- <Users
-                        :items="users"
-                        :loading="false"
-                        :query="page"
-                        actionPrefix="subscribes"
-                      /> -->
-                        <!-- <div class="loader-infinity" v-if="infinityScrollLoading">
                         <Loader
                           :fullscreen="false"
                           :inline="true"
@@ -122,17 +92,7 @@
                       <div
                         class="msg-no-content show"
                         v-if="!loading && !users.length"
-                      > -->
-                        <!-- <div
-                          class="msg-no-content__text"
-                          v-if="page === 'following'"
-                        >
-                          Start following people to see them here
-                        </div>
-                        <div class="msg-no-content__text" v-else>
-                          No one follows you yet
-                        </div> -->
-                      </div>
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -277,13 +237,9 @@ export default {
     getPosts() {
       this.$store.dispatch("subscribes/getPosts", { type: this.page });
     },
-    openGroupMessageModal(type) {
-      console.log(type);
+    openGroupMessageModal() {
       this.$store.dispatch("modal/show", {
-        name: "groupMessage",
-        data: {
-          type
-        }
+        name: "groupMessage"
       });
     },
     goBack() {
