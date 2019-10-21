@@ -6,9 +6,9 @@
       <p class="error404__text">
         The link you followed may be broken, or the page may have been removed.
       </p>
-      <a class="btn btn_fix-width-ex-lg lg alt" href="/">
-        Go back to stars.avn.com
-      </a>
+      <router-link class="btn btn_fix-width-ex-lg lg alt" to="/">
+        Go back to {{ host }}
+      </router-link>
     </div>
     <Footer class="site-footer_main" />
   </div>
@@ -19,6 +19,11 @@ import Footer from "@/components/footer/Index";
 export default {
   components: {
     Footer
+  },
+  computed: {
+    host() {
+      return window.location.hostname;
+    }
   }
 };
 </script>
