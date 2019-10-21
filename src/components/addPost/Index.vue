@@ -155,6 +155,20 @@
               />
             </div>
           </div>
+          <div
+            class="b-check-state b-check-state_post"
+            v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
+          >
+            <label>
+              <input
+                class="is-free-post"
+                type="checkbox"
+                v-model="withoutWatermark"
+              />
+              <span class="b-check-state__icon icn-item icn-size_lg"></span>
+              <span class="b-check-state__text">Without watermark</span>
+            </label>
+          </div>
         </div>
       </div>
       <div class="actions">
@@ -328,6 +342,7 @@ import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
+import Common from "../pages/settings/common";
 
 Settings.defaultLocale = "en";
 
@@ -337,12 +352,13 @@ const InitialState = {
   isFree: false,
   mediaType: "all",
   datetime: undefined,
-  saving: false
+  saving: false,
+  withoutWatermark: false
 };
 
 export default {
   name: "AddPost",
-  mixins: [FileUpload, UserMixin, UserSuggestions],
+  mixins: [FileUpload, UserMixin, UserSuggestions, Common],
   data() {
     return {
       ...InitialState,
@@ -510,6 +526,7 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
+        withoutWatermark: this.withoutWatermark,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
