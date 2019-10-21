@@ -24,8 +24,31 @@
     > .container {
       max-width: 290px;
     }
+  }
+}
+
+.EmailConfirmedView,
+.PasswordConfirmedView {
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     p {
       padding: 0;
     }
+  }
+}
+
+.error404 {
+
+  &__title {
+    margin-bottom: 23px;
+  }
+
+  &__img {
+    margin-bottom: 10px;
+    transform: translateX(-4px);
+  }
+
+  &__text {
+    padding-bottom: 18px;
   }
 }
