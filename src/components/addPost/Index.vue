@@ -581,6 +581,9 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     openStream() {
+      // console.log(preloadedMedias.length, postMsg.length, datetime)
+      if (this.preloadedMedias.length || this.postMsg.length || this.datetime)
+        return;
       // Detects if device is on iOS
       const isIos = () => {
         const userAgent = window.navigator.userAgent.toLowerCase();
