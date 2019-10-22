@@ -39,8 +39,12 @@ const actions = {
   getPosts({ commit, state, rootState }) {
     const { limit, offset, marker, tag } = state;
     let source = state.source;
-    if (source === "feed") {
-      source = "media";
+    if (tag) {
+      source = tag;
+    } else {
+      if (source === "feed") {
+        source = "media";
+      }
     }
     commit("postsRequest");
 
