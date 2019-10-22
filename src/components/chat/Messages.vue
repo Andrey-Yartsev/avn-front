@@ -127,7 +127,7 @@
                   <span class="icn-read icn-item" />
                 </div>
                 <div class="message-time__written" v-if="v.lastMessageInGroup">
-                  <span class="timeValue">Send {{ time(v.createdAt) }}</span>
+                  <span class="timeValue">Sent {{ time(v.createdAt) }}</span>
                 </div>
               </div>
             </div>
@@ -307,7 +307,7 @@ export default {
             "You have tipped " + this.withUser.name + " for " + message.text
           );
         } else {
-          return "You have been tipped for " + message.text;
+          return "You have been tipped " + message.text;
         }
       }
     },
