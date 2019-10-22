@@ -59,7 +59,10 @@
             />
             <h1 class="page-title">Subscribers</h1>
           </div>
-          <div class="subscribers-filters" :class="{ 'shadow-block': $mq === 'mobile' }">
+          <div
+            class="subscribers-filters"
+            :class="{ 'shadow-block': $mq === 'mobile' }"
+          >
             <div class="form-group checkbox-group item">
               <label
                 class="form-group-inner"
@@ -93,9 +96,7 @@
           <div class="row">
             <div class="content-col single-col">
               <div class="rounded-container">
-                <div
-                  class="SubscribersBlockCollectionView settings-wrapper"
-                >
+                <div class="SubscribersBlockCollectionView settings-wrapper">
                   <div
                     class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
                   >
