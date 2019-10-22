@@ -46,7 +46,6 @@ const actions = {
 
 createRequestAction({
   prefix: "subscribesRequest",
-  // apiPath: "subscriptions/following/",
   apiPath: "sales/{type}/",
   state,
   mutations,
@@ -62,6 +61,9 @@ createRequestAction({
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
+    options.query.active = params.active || "";
+    options.query.expired = params.expired || "";
+    options.query.desc = params.desc;
     return options;
   },
   paramsToPath: function(params, path) {

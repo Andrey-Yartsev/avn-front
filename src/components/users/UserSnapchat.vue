@@ -1,27 +1,19 @@
 <template>
   <div class="item">
     <div class="user table__cell">
-      <router-link
-        :to="'/' + profile.subscriber.username"
-        class="userview-block"
-      >
+      <router-link :to="'/' + profile.user.username" class="userview-block">
         <span class="avatar avatar_sm">
           <span class="avatar__img">
-            <img
-              :src="profile.subscriber.avatar"
-              v-if="profile.subscriber.avatar"
-            />
+            <img :src="profile.user.avatar" v-if="profile.user.avatar" />
           </span>
         </span>
-        <div class="name">{{ profile.subscriber.name }}</div>
-        <span class="user-login reset-ml">{{
-          profile.subscriber.username
-        }}</span>
+        <div class="name">{{ profile.user.name }}</div>
+        <span class="user-login reset-ml">{{ profile.user.username }}</span>
       </router-link>
     </div>
-    <!-- <div class="snapchatUsername table__cell">
-      {{ profile.subscriber.username}}
-    </div> -->
+    <div class="snapchatUsername table__cell">
+      {{ profile.userSnapName }}
+    </div>
     <div
       class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
     >

@@ -1,7 +1,20 @@
 <template>
-  <div class="explore-wrapper users">
+  <div
+    class="{actionPrefix === 'subscribes' ? 'table payouts-table' : 'explore-wrapper users'}"
+  >
     <template v-if="actionPrefix === 'subscribes'">
       <UserSubscriber
+        v-for="(item, i) in items"
+        v-bind:key="item.id"
+        :profile="item"
+        :actionPrefix="actionPrefix"
+        :ref="'user' + item.id"
+        :top="top"
+        :num="i + 1"
+      />
+    </template>
+    <template v-else-if="actionPrefix === 'snapchat'">
+      <UserSnapchat
         v-for="(item, i) in items"
         v-bind:key="item.id"
         :profile="item"
@@ -28,12 +41,14 @@
 <script>
 import User from "./User";
 import UserSubscriber from "./UserSubscriber";
+import UserSnapchat from "./UserSnapchat";
 
 export default {
   name: "SearchUsers",
   components: {
     User,
-    UserSubscriber
+    UserSubscriber,
+    UserSnapchat
   },
   props: {
     items: {

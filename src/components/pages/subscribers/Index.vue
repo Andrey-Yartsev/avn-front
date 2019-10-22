@@ -40,46 +40,117 @@
             >
               Likes {{ profile.favoritesCount }}
             </router-link>
-            <!-- <router-link
+            <router-link
               to="/subscribes"
               class="content-nav__item"
               v-if="isOwner(profile.id)"
             >
-              Subscribes
-            </router-link> -->
+              Subscribers
+            </router-link>
+          </div>
+          <div class="row">
+            <div
+              class="sticky-header-controls header-mobile"
+              v-if="$mq === 'mobile'"
+            >
+              <a
+                class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+                :href="`/`"
+                @click.prevent="goBack"
+              />
+              <h1 class="page-title">Subscribers</h1>
+            </div>
+            <div class="filters">
+              <div class="item">
+                <label>
+                  <input type="checkbox" v-model="isSnapchatOnly" />
+                  Snapchat
+                </label>
+              </div>
+              <div class="item">
+                <label>
+                  <input type="checkbox" v-model="isActiveOnly" />
+                  Active
+                </label>
+              </div>
+              <div class="item">
+                <label>
+                  <input type="checkbox" v-model="isExpiredOnly" />
+                  Expired
+                </label>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="content-col single-col">
-              <div class="posts-container">
+              <div
+                class="ReferralsBlockCollectionView PayoutsRequestsCollectionView settings-wrapper"
+              >
                 <div
-                  class="sticky-header-controls header-mobile"
-                  v-if="$mq === 'mobile'"
+                  class="form-title border-top table-header-title referrals-form-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
                 >
-                  <a
-                    class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                    :href="`/`"
-                    @click.prevent="goBack"
-                  />
-                  <h1 class="page-title">Subscribers</h1>
+                  <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+                    <div class="inner">
+                      <span class="semi-transparent referrals-text">
+                        Subscribers</span
+                      >
+                      <form class="referrals-search b-search-form">
+                        <input
+                          type="text"
+                          class="rounded sm"
+                          placeholder="Search"
+                          v-model="filter"
+                        />
+                        <button
+                          type="submit"
+                          disabled=""
+                          class="b-search-form__btn icn-item"
+                        ></button>
+                      </form>
+                    </div>
+                    <div class="table-header referrals-table-header">
+                      <div class="user table__cell">
+                        User
+                      </div>
+                      <div class="snapchatUsername table__cell">
+                        SnapchatUsername
+                      </div>
+                      <div
+                        class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
+                        :class="{ reverse: !this.desc }"
+                        @click="switchAmountOrder"
+                      >
+                        Amount
+                      </div>
+                      <div
+                        class="status table__cell table__cell_align table__cell_align-hor-c"
+                      >
+                        Status
+                      </div>
+                      <div
+                        class="joined table__cell table__cell_align table__cell_align-hor-c"
+                      >
+                        Joined
+                      </div>
+                      <div
+                        class="canceled table__cell table__cell_align table__cell_align-hor-c"
+                      >
+                        Canceled
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="explore">
-                  <div class="userCollectionView">
-                    <div class="block-bg">
-                      <!-- <div class="messages-controllers">
-                        <div class="group-messages-buttons">
-                          <div
-                            class="message-button active"
-                            @click="openGroupMessageModal"
-                          >
-                            Send message to subscribers
-                          </div>
-                        </div>
-                      </div> -->
+                <div
+                  class="shadow-block no-padding"
+                  :class="{ 'table-empty': items.length === 0 }"
+                >
+                  <div class="table-wrapper">
+                    <div class="table payouts-table">
                       <Users
-                        :items="users"
+                        :items="items"
                         :loading="false"
                         :query="page"
-                        actionPrefix="subscribes"
+                        :actionPrefix="actionPrefix"
                       />
                       <div class="loader-infinity" v-if="infinityScrollLoading">
                         <Loader
@@ -92,6 +163,9 @@
                         class="msg-no-content show"
                         v-if="!loading && !users.length"
                       ></div>
+                    </div>
+                    <div class="empty-table-info">
+                      <span>Empty here for now</span>
                     </div>
                   </div>
                 </div>
@@ -119,7 +193,6 @@ import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/router/backRouter";
-import mockUsers from "../../../mock/subscriberUser";
 
 export default {
   name: "Subscribers",
@@ -139,10 +212,31 @@ export default {
 
   data: () => ({
     loadingName: "subscribesRequestLoading",
-    showTip: false,
-    mockUsers
+    filter: "",
+    actionPrefix: "subscribes",
+    isSnapchatOnly: false,
+    isActiveOnly: false,
+    isExpiredOnly: false,
+    desc: true
   }),
   computed: {
+    items() {
+      const items = this.users;
+      if (this.filter) {
+        return items.filter(v => {
+          if (
+            v.subscriber.username.match(new RegExp(".*" + this.filter + ".*"))
+          ) {
+            return true;
+          }
+          if (v.subscriber.name.match(new RegExp(".*" + this.filter + ".*"))) {
+            return true;
+          }
+          return false;
+        });
+      }
+      return items;
+    },
     loading() {
       return this.$store.state.subscribes.subscribesRequestLoading;
     },
@@ -165,17 +259,11 @@ export default {
     store() {
       return this.$store.state.subscribes;
     },
-    allMediaTypes() {
-      return [...this.inputAcceptTypes.photo];
-    },
     scrollBarWidth() {
       if (!this.$store.state.global.modalOpened) {
         return 0;
       }
       return this.$store.state.global.scrollBarWidth;
-    },
-    scrollBarInitWidth() {
-      return this.$store.state.global.scrollBarInitWidth;
     }
   },
   methods: {
@@ -184,62 +272,29 @@ export default {
       this.$store.commit("subscribes/reset");
       this.getPosts();
     },
-    follow() {
-      if (this.user) {
-        this.$store.dispatch("profile/home/follow", this.profile.id);
-      } else {
-        this.$router.push("/login");
-      }
-    },
-    unfollow() {
-      this.$store.dispatch("profile/home/unfollow", this.profile.id);
-    },
-    sendMessage() {
-      this.$router.push("/chat/" + this.profile.id);
-    },
     infinityScrollGetDataMethod() {
       if (this.profile) {
         this.getPosts();
       }
     },
-    subsRequested(data) {
-      if (data.action === "unsubscribe") {
-        this.unsubscribed(data.result);
-      } else if (data.action === "resubscribe") {
-        this.resubscribed(data.result);
-      } else {
-        // throw new Error("Wrong action");
-      }
-    },
-    unsubscribed(result) {
-      if (!result.success) {
-        return;
-      }
-      this.$store.dispatch("profile/home/extend", {
-        subscribedByProgress: true
-      });
-      this.$store.dispatch("global/flashToast", {
-        text: "You have unsubscribed successfully"
-      });
-    },
-    resubscribed(result) {
-      if (!result.success) {
-        return;
-      }
-      this.$store.dispatch("profile/home/extend", {
-        subscribedByProgress: false
-      });
-      this.$store.dispatch("global/flashToast", {
-        text: "You have resubscribed successfully"
-      });
-    },
     getPosts() {
-      this.$store.dispatch("subscribes/getPosts", { type: this.page });
+      this.$store.dispatch("subscribes/getPosts", {
+        type: this.actionPrefix,
+        active: this.isActiveOnly,
+        expired: this.isExpiredOnly,
+        desc: this.desc
+      });
     },
     openGroupMessageModal() {
       this.$store.dispatch("modal/show", {
         name: "groupMessage"
       });
+    },
+    changeActionPreffix(value) {
+      this.actionPrefix = value;
+    },
+    switchAmountOrder() {
+      this.desc = !this.desc;
     },
     goBack() {
       BackRouter.back();
@@ -247,6 +302,27 @@ export default {
   },
   watch: {
     page() {
+      this.init();
+    },
+    isSnapchatOnly(newValue) {
+      console.log(newValue);
+      if (newValue) {
+        this.changeActionPreffix("snapchat");
+      } else {
+        this.changeActionPreffix("subscribes");
+      }
+      this.$nextTick(() => {
+        this.init();
+      });
+    },
+    isActiveOnly() {
+      this.init();
+    },
+    isExpiredOnly() {
+      this.init();
+    },
+    desc() {
+      console.log(this.desc);
       this.init();
     }
   },
