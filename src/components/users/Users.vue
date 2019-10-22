@@ -1,6 +1,9 @@
 <template>
   <div
-    class="{actionPrefix === 'subscribes' ? 'table payouts-table' : 'explore-wrapper users'}"
+    :class="{
+      'table payouts-table': actionPrefix === 'subscribes',
+      'explore-wrapper users': actionPrefix !== 'subscribes'
+    }"
   >
     <template v-if="actionPrefix === 'subscribes'">
       <UserSubscriber
