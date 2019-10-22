@@ -262,46 +262,58 @@
       margin-left: 0;
     }
   }
+
   .SubscribersBlockCollectionView & {
-      &__cell {
-        &.snapchatUsername {
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+    &__cell {
+
+      &.snapchatUsername {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           font-size: 12px;
           padding-right: 5px;
           word-break: break-all;
         }
-          br {
-            @include media-breakpoint-up($desktop-breakpoint) {
+
+        br {
+
+          @include media-breakpoint-up($desktop-breakpoint) {
             display: none;
           }
         }
       }
-        &.snapchatUsername,
+
+      &.snapchatUsername,
       &.user {
         flex: 0 1 20%;
         max-width: 20%;
-          @include media-breakpoint-up($desktop-breakpoint) {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 30%;
           max-width: 30%;
         }
       }
-        &.amount,
+
+      &.amount,
       &.status,
       &.joined,
       &.canceled {
         flex: 0 1 15%;
         max-width: 15%;
-          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           font-size: 12px;
         }
-          @include media-breakpoint-up($desktop-breakpoint) {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 10%;
           max-width: 10%;
         }
       }
     }
   }
-    .trialsSectionCollection & {
+
+  .trialsSectionCollection & {
 
     &__cell {
       flex: 1;
@@ -516,14 +528,19 @@
   .userview-block {
     margin-left: 0;
     margin-top: auto;
+
     .SubscribersBlockCollectionView & {
-       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         padding-left: 0;
       }
     }
-     .avatar {
-       .SubscribersBlockCollectionView & {
-         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+
+    .avatar {
+
+      .SubscribersBlockCollectionView & {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           display: none;
         }
       }

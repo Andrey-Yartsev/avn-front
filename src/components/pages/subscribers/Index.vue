@@ -102,10 +102,8 @@
                   >
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
-                        <span class="semi-transparent nowrap-text"
-                          >Subscribers</span
-                        >
-                        <!-- <form class="referrals-search b-search-form">
+                        <span class="semi-transparent nowrap-text">Subscribers</span>
+                        <form class="referrals-search b-search-form">
                           <input
                             type="text"
                             class="rounded sm"
