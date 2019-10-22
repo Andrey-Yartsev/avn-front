@@ -74,9 +74,6 @@ export default {
       return this.$store.state.subscription.updated;
     }
   },
-  mounted() {
-    console.log(this.$props.items);
-  },
   watch: {
     subscriptionUpdate(data) {
       this.$refs[

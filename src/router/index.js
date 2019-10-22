@@ -397,7 +397,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/subscribes",
+    path: "/subscribers",
     component: SubscribersPage,
     meta: {
       title: "subscribes",

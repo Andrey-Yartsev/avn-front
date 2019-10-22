@@ -1,6 +1,6 @@
 <template>
-  <div class="item">
-    <div class="user table__cell">
+  <div class="item" v-if="profile.subscriber">
+    <div class="user table__cell" >
       <router-link
         :to="'/' + profile.subscriber.username"
         class="userview-block"
@@ -19,9 +19,9 @@
         }}</span>
       </router-link>
     </div>
-    <!-- <div class="snapchatUsername table__cell">
+    <div class="snapchatUsername table__cell">
       {{ profile.subscriber.username}}
-    </div> -->
+    </div>
     <div
       class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
     >
@@ -85,9 +85,6 @@ export default {
     messageTime(message) {
       return fromNow(message);
     }
-  },
-  mounted() {
-    console.log(this.$props.profile);
   }
 };
 </script>

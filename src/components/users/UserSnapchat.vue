@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" v-if="profile.user">
     <div class="user table__cell">
       <router-link :to="'/' + profile.user.username" class="userview-block">
         <span class="avatar avatar_sm">
@@ -77,9 +77,6 @@ export default {
     messageTime(message) {
       return fromNow(message);
     }
-  },
-  mounted() {
-    console.log(this.$props.profile);
   }
 };
 </script>

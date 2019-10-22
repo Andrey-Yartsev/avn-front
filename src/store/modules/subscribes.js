@@ -61,9 +61,10 @@ createRequestAction({
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
-    options.query.active = params.active || "";
-    options.query.expired = params.expired || "";
-    options.query.desc = params.desc;
+    options.query.active = params.active;
+    // options.query.expired = params.expired || "";
+    // options.query.desc = params.desc;
+    // options.query.name = params.name || "";
     return options;
   },
   paramsToPath: function(params, path) {

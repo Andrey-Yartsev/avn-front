@@ -41,7 +41,7 @@
               Likes {{ profile.favoritesCount }}
             </router-link>
             <router-link
-              to="/subscribes"
+              to="/subscribers"
               class="content-nav__item"
               v-if="isOwner(profile.id)"
             >
@@ -95,15 +95,17 @@
           </div>
           <div class="row">
             <div class="content-col single-col">
-              <div class="rounded-container">
+               <div class="rounded-container">
                 <div class="SubscribersBlockCollectionView settings-wrapper">
                   <div
                     class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
                   >
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
-                        <span class="semi-transparent"> Subscribers</span>
-                        <form class="referrals-search b-search-form">
+                        <span class="semi-transparent nowrap-text"
+                          >Subscribers</span
+                        >
+                        <!-- <form class="referrals-search b-search-form">
                           <input
                             type="text"
                             class="rounded sm"
@@ -115,7 +117,7 @@
                             disabled=""
                             class="b-search-form__btn icn-item"
                           ></button>
-                        </form>
+                        </form> -->
                       </div>
                     </div>
                     <div class="table-header referrals-table-header">
@@ -123,12 +125,15 @@
                         User
                       </div>
                       <div class="snapchatUsername table__cell">
-                        SnapchatUsername
+                        Snapchat<br>Username
                       </div>
-                      <div
+                      <!-- <div
                         class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
                         :class="{ reverse: !this.desc }"
                         @click="switchAmountOrder"
+                      > -->
+                      <div
+                        class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
                       >
                         Amount
                       </div>
@@ -151,30 +156,26 @@
                   </div>
                   <div
                     class="shadow-block no-padding"
-                    :class="{ 'table-empty': items.length === 0 }"
+                    :class="{ 'table-empty': users.length === 0 }"
                   >
-                    <div class="table-wrapper">
-                      <div class="table payouts-table">
-                        <Users
-                          :items="items"
-                          :loading="false"
-                          :query="page"
-                          :actionPrefix="actionPrefix"
-                        />
-                        <div
-                          class="loader-infinity"
-                          v-if="infinityScrollLoading"
-                        >
-                          <Loader
-                            :fullscreen="false"
-                            :inline="true"
-                            :class="{ small: users.length }"
-                          />
-                        </div>
-                      </div>
-                      <div class="empty-table-info">
-                        <span>Empty here for now</span>
-                      </div>
+                   <div class="table-wrapper">
+                    <Users
+                      v-if="users.length"
+                      :items="users"
+                      :loading="false"
+                      :query="page"
+                      :actionPrefix="actionPrefix"
+                    />
+                    <div class="loader-infinity" v-if="infinityScrollLoading">
+                      <Loader
+                        :fullscreen="false"
+                        :inline="true"
+                        class="small"
+                      />
+                    </div>
+                    <div class="empty-table-info">
+                      <span>Empty here for now</span>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -225,27 +226,9 @@ export default {
     actionPrefix: "subscribes",
     isSnapchatOnly: false,
     isActiveOnly: false,
-    isExpiredOnly: false,
-    desc: true
+    isExpiredOnly: false
   }),
   computed: {
-    items() {
-      const items = this.users;
-      if (this.filter) {
-        return items.filter(v => {
-          if (
-            v.subscriber.username.match(new RegExp(".*" + this.filter + ".*"))
-          ) {
-            return true;
-          }
-          if (v.subscriber.name.match(new RegExp(".*" + this.filter + ".*"))) {
-            return true;
-          }
-          return false;
-        });
-      }
-      return items;
-    },
     loading() {
       return this.$store.state.subscribes.subscribesRequestLoading;
     },
@@ -289,10 +272,17 @@ export default {
     getPosts() {
       this.$store.dispatch("subscribes/getPosts", {
         type: this.actionPrefix,
-        active: this.isActiveOnly,
-        expired: this.isExpiredOnly,
-        desc: this.desc
+        active: this.isActiveUsers()
       });
+    },
+    isActiveUsers() {
+      if (
+        (this.isActiveOnly && this.isExpiredOnly) ||
+        (!this.isActiveOnly && !this.isExpiredOnly)
+      )
+        return "";
+      if (this.isActiveOnly) return true;
+      if (this.isExpiredOnly) return false;
     },
     openGroupMessageModal() {
       this.$store.dispatch("modal/show", {
@@ -300,10 +290,11 @@ export default {
       });
     },
     changeActionPreffix(value) {
+      // console.log(value)
       this.actionPrefix = value;
-    },
-    switchAmountOrder() {
-      this.desc = !this.desc;
+      this.$nextTick(() => {
+        this.init();
+      });
     },
     goBack() {
       BackRouter.back();
@@ -314,24 +305,16 @@ export default {
       this.init();
     },
     isSnapchatOnly(newValue) {
-      console.log(newValue);
       if (newValue) {
         this.changeActionPreffix("snapchat");
       } else {
         this.changeActionPreffix("subscribes");
       }
-      this.$nextTick(() => {
-        this.init();
-      });
     },
     isActiveOnly() {
       this.init();
     },
     isExpiredOnly() {
-      this.init();
-    },
-    desc() {
-      console.log(this.desc);
       this.init();
     }
   },

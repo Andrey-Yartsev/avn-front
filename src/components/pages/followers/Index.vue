@@ -41,7 +41,7 @@
               Likes {{ profile.favoritesCount }}
             </router-link>
             <!-- <router-link
-              to="/subscribes"
+              to="/subscribers"
               class="content-nav__item"
               v-if="isOwner(profile.id)"
             >
