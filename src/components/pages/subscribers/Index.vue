@@ -102,7 +102,9 @@
                   >
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
-                        <span class="semi-transparent nowrap-text">Subscribers</span>
+                        <span class="semi-transparent nowrap-text"
+                          >Subscribers</span
+                        >
                         <form class="referrals-search b-search-form">
                           <input
                             type="text"
@@ -123,7 +125,7 @@
                         User
                       </div>
                       <div class="snapchatUsername table__cell">
-                        Snapchat<br>Username
+                        Snapchat<br />Username
                       </div>
                       <!-- <div
                         class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
