@@ -48,65 +48,74 @@
               Subscribers
             </router-link>
           </div>
-          <div class="row">
-            <div
-              class="sticky-header-controls header-mobile"
-              v-if="$mq === 'mobile'"
-            >
-              <a
-                class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
-                :href="`/`"
-                @click.prevent="goBack"
-              />
-              <h1 class="page-title">Subscribers</h1>
-            </div>
-            <div class="filters">
-              <div class="item">
-                <label>
+          <div
+            class="sticky-header-controls header-mobile"
+            v-if="$mq === 'mobile'"
+          >
+            <a
+              class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
+              :href="`/`"
+              @click.prevent="goBack"
+            />
+            <h1 class="page-title">Subscribers</h1>
+          </div>
+          <div class="subscribers-filters" :class="{ 'shadow-block': $mq === 'mobile' }">
+            <div class="form-group checkbox-group item">
+              <label
+                class="form-group-inner"
+                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
+              >
+                <div class="checkbox-wrapper">
                   <input type="checkbox" v-model="isSnapchatOnly" />
-                  Snapchat
-                </label>
-              </div>
-              <div class="item">
-                <label>
+                  <span class="label icn-item">Snapchat</span>
+                </div>
+              </label>
+              <label
+                class="form-group-inner"
+                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
+              >
+                <div class="checkbox-wrapper">
                   <input type="checkbox" v-model="isActiveOnly" />
-                  Active
-                </label>
-              </div>
-              <div class="item">
-                <label>
+                  <span class="label icn-item">Active</span>
+                </div>
+              </label>
+              <label
+                class="form-group-inner"
+                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
+              >
+                <div class="checkbox-wrapper">
                   <input type="checkbox" v-model="isExpiredOnly" />
-                  Expired
-                </label>
-              </div>
+                  <span class="label icn-item">Expired</span>
+                </div>
+              </label>
             </div>
           </div>
           <div class="row">
             <div class="content-col single-col">
-              <div
-                class="ReferralsBlockCollectionView PayoutsRequestsCollectionView settings-wrapper"
-              >
+              <div class="rounded-container">
                 <div
-                  class="form-title border-top table-header-title referrals-form-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                  class="SubscribersBlockCollectionView settings-wrapper"
                 >
-                  <div class="bg-gradient__shadow bg-gradient__shadow_mob">
-                    <div class="inner">
-                      <span class="semi-transparent referrals-text">
-                        Subscribers</span
-                      >
-                      <form class="referrals-search b-search-form">
-                        <input
-                          type="text"
-                          class="rounded sm"
-                          placeholder="Search"
-                          v-model="filter"
-                        />
-                        <button
-                          type="submit"
-                          disabled=""
-                          class="b-search-form__btn icn-item"
-                        ></button>
-                      </form>
+                  <div
+                    class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                  >
+                    <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+                      <div class="inner">
+                        <span class="semi-transparent"> Subscribers</span>
+                        <form class="referrals-search b-search-form">
+                          <input
+                            type="text"
+                            class="rounded sm"
+                            placeholder="Search"
+                            v-model="filter"
+                          />
+                          <button
+                            type="submit"
+                            disabled=""
+                            class="b-search-form__btn icn-item"
+                          ></button>
+                        </form>
+                      </div>
                     </div>
                     <div class="table-header referrals-table-header">
                       <div class="user table__cell">
@@ -139,33 +148,32 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="shadow-block no-padding"
-                  :class="{ 'table-empty': items.length === 0 }"
-                >
-                  <div class="table-wrapper">
-                    <div class="table payouts-table">
-                      <Users
-                        :items="items"
-                        :loading="false"
-                        :query="page"
-                        :actionPrefix="actionPrefix"
-                      />
-                      <div class="loader-infinity" v-if="infinityScrollLoading">
-                        <Loader
-                          :fullscreen="false"
-                          :inline="true"
-                          :class="{ small: users.length }"
+                  <div
+                    class="shadow-block no-padding"
+                    :class="{ 'table-empty': items.length === 0 }"
+                  >
+                    <div class="table-wrapper">
+                      <div class="table payouts-table">
+                        <Users
+                          :items="items"
+                          :loading="false"
+                          :query="page"
+                          :actionPrefix="actionPrefix"
                         />
+                        <div
+                          class="loader-infinity"
+                          v-if="infinityScrollLoading"
+                        >
+                          <Loader
+                            :fullscreen="false"
+                            :inline="true"
+                            :class="{ small: users.length }"
+                          />
+                        </div>
                       </div>
-                      <div
-                        class="msg-no-content show"
-                        v-if="!loading && !users.length"
-                      ></div>
-                    </div>
-                    <div class="empty-table-info">
-                      <span>Empty here for now</span>
+                      <div class="empty-table-info">
+                        <span>Empty here for now</span>
+                      </div>
                     </div>
                   </div>
                 </div>

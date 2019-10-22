@@ -375,6 +375,10 @@ label {
     padding-top: 6px;
   }
 
+  &_clear-gaps {
+    padding: 0;
+  }
+
   &-inner {
     margin-bottom: 8px;
     display: block;
@@ -385,6 +389,18 @@ label {
       display: flex;
       align-items: flex-start;
       align-content: flex-start;
+    }
+
+    & > .label {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        flex: 0 0 19%;
+      }
+    }
+
+    &_inline {
+      display: inline-flex;
+      margin-right: 20px;
     }
 
     input + button {

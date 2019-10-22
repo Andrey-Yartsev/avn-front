@@ -24,23 +24,6 @@
   }
 }
 
-.form-group {
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-
-    &-inner {
-
-      & > .label {
-        flex: 0 0 19%;
-      }
-    }
-  }
-
-  &_clear-gaps {
-    padding: 0;
-  }
-}
-
 .staticPage {
   form {
     padding: 0 0 68px;
