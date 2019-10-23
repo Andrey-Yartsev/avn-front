@@ -95,7 +95,9 @@
         </template>
 
         <Columns :categories="categories[1]" @input="input" />
-
+        <div style="font-size: 12px; color: gray; margin-bottom: 1rem;">
+          * name should be at least 2 symbols long
+        </div>
         <div class="awards__btn-row">
           <button class="btn alt border lg" :disabled="sending || !canSend">
             Submit
@@ -198,7 +200,13 @@ export default {
       );
     },
     canSend() {
-      return Object.values(this.data).length !== 0;
+      const values = Object.values(this.data);
+      if (values.length === 0) return false;
+      const hasTooShort = values.some(item => {
+        return item.length > 0 && item.length < 2;
+      });
+      if (hasTooShort) return false;
+      return true;
     },
     sending() {
       return this.$store.state.awards.nominateLoading;
