@@ -952,6 +952,13 @@ video {
     outline: none;
   }
 }
+
 .nowrap-text {
   white-space: nowrap;
+}
+
+.hint-text-sm {
+  font-size: 12px;
+  opacity: .5;
+  margin-bottom: 1rem;
 }

@@ -95,7 +95,7 @@
         </template>
 
         <Columns :categories="categories[1]" @input="input" />
-        <div style="font-size: 12px; color: gray; margin-bottom: 1rem;">
+        <div class="hint-text-sm">
           * name should be at least 2 symbols long
         </div>
         <div class="awards__btn-row">
