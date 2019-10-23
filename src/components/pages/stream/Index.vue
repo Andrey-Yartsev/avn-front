@@ -319,6 +319,7 @@
       v-if="isStopped && isStoppedByButton"
       :canBeSaved="canBeSaved"
       :loading="finishing"
+      :saving="saving"
     />
   </div>
 </template>
@@ -360,6 +361,7 @@ export default {
       isStarted: false,
       isStopped: false,
       isStoppedByButton: false,
+      saving: false,
       startingStream: false,
       isMirror: false,
       time: undefined,
@@ -598,6 +600,7 @@ export default {
         this.stopStream();
       } else {
         if (haveToSave) {
+          this.saving = true;
           StreamApi.saveStream(this.startedStreamId, haveToSaveComments)
             .then(() => {
               this.$router.push("/");

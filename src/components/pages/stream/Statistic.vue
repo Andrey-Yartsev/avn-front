@@ -120,8 +120,9 @@
       >
         <button
           class="btn alt lg block change-devices btn-center btn_fix-width btn_not-bold btn_white btn_white-alfabg"
+          :disabled="saving"
         >
-          Done
+          {{ saving ? "Saving" : "Done" }}
         </button>
       </div>
     </div>
@@ -169,6 +170,10 @@ export default {
     loading: {
       type: Boolean,
       isRequired: true
+    },
+    saving: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
