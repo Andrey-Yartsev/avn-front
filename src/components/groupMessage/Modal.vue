@@ -5,15 +5,40 @@
         <div class="content content_relative">
           <div>
             <div class="popup-addPost__header hidden-mobile">
-              Send group message to
-              {{ this.$store.state.modal.groupMessage.data.type }} subscribers
+              <div class="header__title">
+                Send message to {{ subscriberType }} subscribers
+              </div>
+              <div class="form-group form-group_with-label gender-options">
+                <label class="form-group-inner">
+                  <span class="label">Choose group</span>
+                  <div class="row">
+                    <div class="col-1-2">
+                      <div class="select-wrapper">
+                        <select
+                          v-model="subscriberType"
+                          name="subscriberType"
+                          class="default-disabled"
+                        >
+                          <option value="all">All</option>
+                          <option value="active">Active</option>
+                          <option value="expired">Expired</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
               <button
                 type="button"
                 class="close close_shift-t close_default icn-item icn-size_lg"
                 @click="close"
               />
             </div>
-            <Form :close="close" @submit="submit" />
+            <AddMessageBox
+              @send="submit"
+              :withUser="user"
+              :withFontSizeController="false"
+            />
           </div>
         </div>
       </div>
@@ -23,17 +48,25 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import Form from "./Form";
+import AddMessageBox from "@/components/chat/AddMessageBox";
 
 export default {
   name: "groupMessageModal",
   components: {
     Modal,
-    Form
+    AddMessageBox
+  },
+  data() {
+    return {
+      subscriberType: "all"
+    };
   },
   computed: {
     title() {
       return !!this.$store.state.profile.links.editedLink;
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   methods: {
@@ -41,8 +74,14 @@ export default {
       e.preventDefault();
       this.$store.dispatch("modal/hide", { name: "groupMessage" });
       this.$store.commit("profile/links/endEditLink");
+    },
+    submit(data) {
+      const body = {
+        ...data,
+        type: this.subscriberType
+      };
+      console.log(body);
     }
-    // submit({ data, editMode }) {}
   }
 };
 </script>

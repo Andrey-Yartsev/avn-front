@@ -1,6 +1,8 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
-    <FontSizeControls />
+    <template v-if="withFontSizeController">
+      <FontSizeControls />
+    </template>
     <div class="addChatMessage__inside-section">
       <div class="addFileCollectionView" v-if="preloadedMedias.length">
         <MediaPreview
@@ -161,6 +163,10 @@ export default {
     disable: {
       type: Boolean,
       default: false
+    },
+    withFontSizeController: {
+      type: Boolean,
+      default: true
     }
   },
 
