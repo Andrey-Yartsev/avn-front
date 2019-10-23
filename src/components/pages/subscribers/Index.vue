@@ -98,7 +98,9 @@
                   <span class="label icn-item">Expired</span>
                 </div>
               </label>
-              <button @click="openGroupMessageModal">Send group message</button>
+              <button class="message-button" @click="openGroupMessageModal">
+                Send group message
+              </button>
             </div>
           </div>
           <div class="row">
@@ -321,26 +323,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.messages-controllers {
-  .title {
-    text-align: center;
-    font-weight: bold;
-  }
-  .group-messages-buttons {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1rem;
-    .message-button {
-      border: 1px solid rgba(128, 128, 128, 0.295);
-      padding: 0.5rem 2rem;
-      border-radius: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(128, 128, 128, 0.295);
-      }
-    }
+.message-button {
+  border: 1px solid rgba(128, 128, 128, 0.295);
+  padding: 0.3rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.295);
   }
 }
 </style>
