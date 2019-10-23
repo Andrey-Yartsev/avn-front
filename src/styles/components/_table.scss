@@ -196,6 +196,7 @@
       &.amount {
         flex: 0 1 20%;
         max-width: 20%;
+        margin-left: auto;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 20.5%;
