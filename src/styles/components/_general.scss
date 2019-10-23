@@ -958,7 +958,10 @@ video {
 }
 
 .hint-text-sm {
-  font-size: 12px;
+  font-size: 13px;
   opacity: .5;
-  margin-bottom: 1rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 }

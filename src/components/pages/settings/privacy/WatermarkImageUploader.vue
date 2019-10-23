@@ -31,7 +31,7 @@
           <img :src="picture" />
         </div>
       </div>
-      <div class="input-help">
+      <div class="input-help hint-text-sm">
         Required width from 100px to 300px
       </div>
     </div>
