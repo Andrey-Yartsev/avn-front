@@ -20,7 +20,7 @@
       </router-link>
     </div>
     <div class="snapchatUsername table__cell">
-      {{ profile.subscriber.username }}
+      <!-- {{ profile.subscriber.username }} -->
     </div>
     <div
       class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"

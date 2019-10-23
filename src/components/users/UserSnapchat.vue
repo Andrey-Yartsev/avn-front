@@ -23,10 +23,10 @@
       {{ profile.active ? "active" : "expired" }}
     </div>
     <div class="joined table__cell table__cell_align table__cell_align-hor-c">
-      {{ messageTime(profile.sinceDate) }}
+      {{ messageTime(profile.purchaseDate) }}
     </div>
     <div class="canceled table__cell table__cell_align table__cell_align-hor-c">
-      {{ messageTime(profile.expireDate) }}
+      <!-- {{ messageTime(profile.expireDate) }} -->
     </div>
   </div>
 </template>
