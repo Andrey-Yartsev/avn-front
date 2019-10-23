@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-// const Profile = () => import(/* webpackChunkName: "main" */ '@/components/Profile/Index.vue');
-
 const HomePage = () =>
   import(/* webpackChunkName: "HomePage" */ "@/components/pages/home/Index");
 const ExplorePage = () =>
