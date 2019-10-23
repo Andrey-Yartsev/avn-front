@@ -7,6 +7,6 @@ module.exports = {
     disableHostCheck: true
   },
   configureWebpack: {
-    plugins: [new BundleAnalyzerPlugin()]
+    plugins: [new BundleAnalyzerPlugin({ openAnalyzer: false })]
   }
 };
