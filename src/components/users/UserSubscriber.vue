@@ -1,6 +1,6 @@
 <template>
   <div class="item" v-if="profile.subscriber">
-    <div class="user table__cell" >
+    <div class="user table__cell">
       <router-link
         :to="'/' + profile.subscriber.username"
         class="userview-block"

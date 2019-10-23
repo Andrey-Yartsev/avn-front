@@ -95,7 +95,7 @@
           </div>
           <div class="row">
             <div class="content-col single-col">
-               <div class="rounded-container">
+              <div class="rounded-container">
                 <div class="SubscribersBlockCollectionView settings-wrapper">
                   <div
                     class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
@@ -105,7 +105,7 @@
                         <span class="semi-transparent nowrap-text"
                           >Subscribers</span
                         >
-                        <form class="referrals-search b-search-form">
+                        <!-- <form class="referrals-search b-search-form">
                           <input
                             type="text"
                             class="rounded sm"
@@ -158,24 +158,24 @@
                     class="shadow-block no-padding"
                     :class="{ 'table-empty': users.length === 0 }"
                   >
-                   <div class="table-wrapper">
-                    <Users
-                      v-if="users.length"
-                      :items="users"
-                      :loading="false"
-                      :query="page"
-                      :actionPrefix="actionPrefix"
-                    />
-                    <div class="loader-infinity" v-if="infinityScrollLoading">
-                      <Loader
-                        :fullscreen="false"
-                        :inline="true"
-                        class="small"
+                    <div class="table-wrapper">
+                      <Users
+                        v-if="users.length"
+                        :items="users"
+                        :loading="false"
+                        :query="page"
+                        :actionPrefix="actionPrefix"
                       />
-                    </div>
-                    <div class="empty-table-info">
-                      <span>Empty here for now</span>
-                    </div>
+                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                        <Loader
+                          :fullscreen="false"
+                          :inline="true"
+                          class="small"
+                        />
+                      </div>
+                      <div class="empty-table-info">
+                        <span>Empty here for now</span>
+                      </div>
                     </div>
                   </div>
                 </div>
