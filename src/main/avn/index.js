@@ -2,7 +2,9 @@ import "./components";
 import "@/main";
 import Auth from "@/router/auth";
 import router from "@/router";
-import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
+// import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
+const SettingsCreditsPage = () =>
+  import(/* webpackChunkName: "SettingsCreditsPage" */ "@/components/pages/settings/credits/Index");
 import profileRoute from "@/router/profileRoute";
 
 import VueAnalytics from "vue-analytics";

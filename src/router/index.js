@@ -1,48 +1,135 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import HomePage from "@/components/pages/home/Index";
-import ExplorePage from "@/components/pages/explore/Index";
-import NotificationsPage from "@/components/pages/notification/Index";
-import LoginPage from "@/components/pages/noAuth/Login";
-import LogoutPage from "@/components/pages/noAuth/Logout";
-import SignUpPage from "@/components/pages/noAuth/SignUp";
-import ForgotPasswordPage from "@/components/pages/noAuth/ForgotPassword";
-import SettingsDefaultPage from "@/components/pages/settings/default/Index";
-import SettingsSecurityPage from "@/components/pages/settings/security/Index";
-import SettingsNotificationPage from "@/components/pages/settings/notification/Index";
-import SettingsPayoutsPage from "@/components/pages/settings/payouts/Index";
-import SettingsPremiumLinksPage from "@/components/pages/settings/premiumLinks/Index";
-import SettingsProductsPage from "@/components/pages/settings/products/Index";
-import SettingsPaymentsPage from "@/components/pages/settings/payments/Index";
-import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
-import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
-import SettingsNominationPage from "@/components/pages/settings/nomination/Index.vue";
-import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
-import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
-import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
-import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
-import SettingsObsPage from "@/components/pages/settings/obs/Index.vue";
-import W9 from "@/components/pages/settings/payouts/W9.vue";
-import PostPage from "@/components/pages/post/Index";
-import NotFoundPage from "@/components/pages/notFound/Index";
-import Chat from "@/components/chat/Chat";
-import ChatNewMessage from "@/components/chat/NewMessage";
-import SearchPage from "@/components/pages/search/Index";
-import StoryPage from "@/components/pages/story/Index";
-import AddPostPage from "@/components/pages/addPost/Index";
-import EditPostPage from "@/components/pages/editPost/Index";
-import StreamPage from "@/components/pages/stream/Index";
-import FollowersPage from "@/components/pages/followers/Index";
-import LikesPage from "@/components/pages/likes/Index";
-import SubscribersPage from "@/components/pages/subscribers/Index";
-import StaticPage from "@/components/pages/static/Index";
-import ContactsPage from "@/components/pages/static/Contacts";
-import StatPage from "@/components/statistics/Page";
-import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
-import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
-import AvnAwards from "@/components/pages/awards/Index";
-import StreamObsPage from "@/components/pages/stream/obs/Index";
+// const Profile = () => import(/* webpackChunkName: "main" */ '@/components/Profile/Index.vue');
+
+const HomePage = () =>
+  import(/* webpackChunkName: "HomePage" */ "@/components/pages/home/Index");
+const ExplorePage = () =>
+  import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index");
+const NotificationsPage = () =>
+  import(/* webpackChunkName: "NotificationsPage" */ "@/components/pages/notification/Index");
+const LoginPage = () =>
+  import(/* webpackChunkName: "LoginPage" */ "@/components/pages/noAuth/Login");
+const LogoutPage = () =>
+  import(/* webpackChunkName: "LogoutPage" */ "@/components/pages/noAuth/Logout");
+const SignUpPage = () =>
+  import(/* webpackChunkName: "SignUpPage" */ "@/components/pages/noAuth/SignUp");
+const ForgotPasswordPage = () =>
+  import(/* webpackChunkName: "ForgotPasswordPage" */ "@/components/pages/noAuth/ForgotPassword");
+const SettingsDefaultPage = () =>
+  import(/* webpackChunkName: "SettingsDefaultPage" */ "@/components/pages/settings/default/Index");
+const SettingsSecurityPage = () =>
+  import(/* webpackChunkName: "SettingsSecurityPage" */ "@/components/pages/settings/security/Index");
+const SettingsNotificationPage = () =>
+  import(/* webpackChunkName: "SettingsNotificationPage" */ "@/components/pages/settings/notification/Index");
+const SettingsPayoutsPage = () =>
+  import(/* webpackChunkName: "SettingsPayoutsPage" */ "@/components/pages/settings/payouts/Index");
+const SettingsPremiumLinksPage = () =>
+  import(/* webpackChunkName: "SettingsPremiumLinksPage" */ "@/components/pages/settings/premiumLinks/Index");
+const SettingsProductsPage = () =>
+  import(/* webpackChunkName: "SettingsProductsPage" */ "@/components/pages/settings/products/Index");
+const SettingsPaymentsPage = () =>
+  import(/* webpackChunkName: "SettingsPaymentsPage" */ "@/components/pages/settings/payments/Index");
+const SettingsCreditsPage = () =>
+  import(/* webpackChunkName: "SettingsCreditsPage" */ "@/components/pages/settings/credits/Index");
+const SettingsAccountPage = () =>
+  import(/* webpackChunkName: "SettingsAccountPage" */ "@/components/pages/settings/account/Index.vue");
+const SettingsNominationPage = () =>
+  import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue");
+const SettingsStoryPage = () =>
+  import(/* webpackChunkName: "SettingsStoryPage" */ "@/components/pages/settings/story/Index.vue");
+const SettingsPrivacyPage = () =>
+  import(/* webpackChunkName: "SettingsPrivacyPage" */ "@/components/pages/settings/privacy/Index.vue");
+const SettingsReferralsPage = () =>
+  import(/* webpackChunkName: "SettingsReferralsPage" */ "@/components/pages/settings/referrals/Index.vue");
+const SettingsTrialsPage = () =>
+  import(/* webpackChunkName: "SettingsTrialsPage" */ "@/components/pages/settings/trials/Index.vue");
+const SettingsObsPage = () =>
+  import(/* webpackChunkName: "SettingsObsPage" */ "@/components/pages/settings/obs/Index.vue");
+const W9 = () =>
+  import(/* webpackChunkName: "W9" */ "@/components/pages/settings/payouts/W9.vue");
+const PostPage = () =>
+  import(/* webpackChunkName: "PostPage" */ "@/components/pages/post/Index");
+const NotFoundPage = () =>
+  import(/* webpackChunkName: "NotFoundPage" */ "@/components/pages/notFound/Index");
+const Chat = () =>
+  import(/* webpackChunkName: "Chat" */ "@/components/chat/Chat");
+const ChatNewMessage = () =>
+  import(/* webpackChunkName: "ChatNewMessage" */ "@/components/chat/NewMessage");
+const SearchPage = () =>
+  import(/* webpackChunkName: "SearchPage" */ "@/components/pages/search/Index");
+const StoryPage = () =>
+  import(/* webpackChunkName: "StoryPage" */ "@/components/pages/story/Index");
+const AddPostPage = () =>
+  import(/* webpackChunkName: "AddPostPage" */ "@/components/pages/addPost/Index");
+const EditPostPage = () =>
+  import(/* webpackChunkName: "EditPostPage" */ "@/components/pages/editPost/Index");
+const StreamPage = () =>
+  import(/* webpackChunkName: "StreamPage" */ "@/components/pages/stream/Index");
+const FollowersPage = () =>
+  import(/* webpackChunkName: "FollowersPage" */ "@/components/pages/followers/Index");
+const LikesPage = () =>
+  import(/* webpackChunkName: "LikesPage" */ "@/components/pages/likes/Index");
+const SubscribersPage = () =>
+  import(/* webpackChunkName: "SubscribersPage" */ "@/components/pages/subscribers/Index");
+const StaticPage = () =>
+  import(/* webpackChunkName: "StaticPage" */ "@/components/pages/static/Index");
+const ContactsPage = () =>
+  import(/* webpackChunkName: "ContactsPage" */ "@/components/pages/static/Contacts");
+const StatPage = () =>
+  import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Page");
+const HelpCenterArticlePage = () =>
+  import(/* webpackChunkName: "HelpCenterArticlePage" */ "@/components/pages/helpCenter/Articles");
+const HelpCenterSearchPage = () =>
+  import(/* webpackChunkName: "HelpCenterSearchPage" */ "@/components/pages/helpCenter/Search");
+const AvnAwards = () =>
+  import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index");
+const StreamObsPage = () =>
+  import(/* webpackChunkName: "StreamObsPage" */ "@/components/pages/stream/obs/Index");
+
+// import HomePage from "@/components/pages/home/Index";
+// import ExplorePage from "@/components/pages/explore/Index";
+// import NotificationsPage from "@/components/pages/notification/Index";
+// import LoginPage from "@/components/pages/noAuth/Login";
+// import LogoutPage from "@/components/pages/noAuth/Logout";
+// import SignUpPage from "@/components/pages/noAuth/SignUp";
+// import ForgotPasswordPage from "@/components/pages/noAuth/ForgotPassword";
+// import SettingsDefaultPage from "@/components/pages/settings/default/Index";
+// import SettingsSecurityPage from "@/components/pages/settings/security/Index";
+// import SettingsNotificationPage from "@/components/pages/settings/notification/Index";
+// import SettingsPayoutsPage from "@/components/pages/settings/payouts/Index";
+// import SettingsPremiumLinksPage from "@/components/pages/settings/premiumLinks/Index";
+// import SettingsProductsPage from "@/components/pages/settings/products/Index";
+// import SettingsPaymentsPage from "@/components/pages/settings/payments/Index";
+// import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
+// import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
+// import SettingsNominationPage from "@/components/pages/settings/nomination/Index.vue";
+// import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
+// import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
+// import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
+// import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
+// import SettingsObsPage from "@/components/pages/settings/obs/Index.vue";
+// import W9 from "@/components/pages/settings/payouts/W9.vue";
+// import PostPage from "@/components/pages/post/Index";
+// import NotFoundPage from "@/components/pages/notFound/Index";
+// import Chat from "@/components/chat/Chat";
+// import ChatNewMessage from "@/components/chat/NewMessage";
+// import SearchPage from "@/components/pages/search/Index";
+// import StoryPage from "@/components/pages/story/Index";
+// import AddPostPage from "@/components/pages/addPost/Index";
+// import EditPostPage from "@/components/pages/editPost/Index";
+// import StreamPage from "@/components/pages/stream/Index";
+// import FollowersPage from "@/components/pages/followers/Index";
+// import LikesPage from "@/components/pages/likes/Index";
+// import SubscribersPage from "@/components/pages/subscribers/Index";
+// import StaticPage from "@/components/pages/static/Index";
+// import ContactsPage from "@/components/pages/static/Contacts";
+// import StatPage from "@/components/statistics/Page";
+// import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
+// import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
+// import AvnAwards from "@/components/pages/awards/Index";
+// import StreamObsPage from "@/components/pages/stream/obs/Index";
 
 import Auth from "./auth";
 import Post from "./post";
