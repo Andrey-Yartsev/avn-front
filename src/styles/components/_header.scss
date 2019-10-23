@@ -522,6 +522,17 @@
     }
   }
 
+  &_center.header-logo {
+
+    .main-header & {
+
+      .static-page & {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
   &__text {
     pointer-events: none;
     position: absolute;

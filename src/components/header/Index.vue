@@ -14,7 +14,11 @@
     >
       <div :class="['container', 'header_container']">
         <DesktopHeader v-if="!notFound && $mq === 'desktop'" />
-        <component :is="logo" class="header-logo header-logo_size" />
+        <component
+          :is="logo"
+          class="header-logo header-logo_size"
+          :class="{ 'header-logo_center': !notFound }"
+        />
         <template v-if="notFound">
           <User />
           <button
