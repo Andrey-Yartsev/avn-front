@@ -1296,7 +1296,10 @@
 
   &__text {
     font-weight: 500;
-    line-height: 18px;
+
+    .stories-wrapper & {
+      line-height: 18px;
+    }
 
     &:not(.exception) {
 
