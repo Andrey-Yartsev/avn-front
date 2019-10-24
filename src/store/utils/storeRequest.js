@@ -95,6 +95,7 @@ const storeRequest = (
           console.error(error);
           error = { message: error.toString() };
         }
+        error.message += " " + apiPath;
         if (localError) {
           commit(prefix + "Error", error);
         } else {

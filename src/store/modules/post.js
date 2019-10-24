@@ -106,6 +106,22 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchStreamEvents",
+  apiPath: "streams/{streamId}/info",
+  state,
+  mutations,
+  actions,
+  requestType: "any",
+  defaultResultValue: [],
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{streamId}/, params);
+  }
+});
+
 export default {
   namespaced: true,
   state,

@@ -1,5 +1,12 @@
 <template>
   <div class="media" :style="mediaStyle">
+    <StreamEvents
+      v-if="hasStreamEvents && !streamEventsLoading"
+      class="stream-events"
+      :events="streamEvents"
+      ref="streamEvents"
+    />
+
     <div class="loader-container loader-container_center">
       <Loader
         :fullscreen="false"
@@ -34,9 +41,11 @@
           :is="getMediaViewType(medias[0])"
           :media="medias[0]"
           :postId="postId"
+          :post="post"
           :authorId="authorId"
           :openModal="openModal"
           :mediaSize="mediaSize"
+          ref="media"
         />
       </figure>
     </template>
@@ -71,6 +80,7 @@ import GifLinked from "./content/GifLinked";
 import Photo from "./content/Photo";
 import PhotoLinked from "./content/PhotoLinked";
 import Loader from "@/components/common/Loader";
+import StreamEvents from "./events/StreamEvents";
 
 export default {
   name: "Media",
@@ -84,7 +94,8 @@ export default {
     PhotoLinked,
     swiper,
     swiperSlide,
-    Loader
+    Loader,
+    StreamEvents
   },
   data() {
     const uniqId = Math.random()
@@ -116,19 +127,9 @@ export default {
             self.activeSlide = this.activeIndex;
           }
         }
-      }
+      },
+      streamEventsIntervalId: 0
     };
-  },
-  computed: {
-    mediaStyle() {
-      return this.medias.length && this.medias[this.activeSlide].background
-        ? {
-            "background-image": `url(data:image/jpeg;base64,${
-              this.medias[this.activeSlide].background
-            })`
-          }
-        : {};
-    }
   },
   props: {
     medias: {
@@ -139,8 +140,8 @@ export default {
       type: Boolean,
       required: true
     },
-    postId: {
-      type: Number,
+    post: {
+      type: Object,
       required: true
     },
     authorId: {
@@ -156,6 +157,32 @@ export default {
       required: true
     }
   },
+  computed: {
+    mediaStyle() {
+      return this.medias.length && this.medias[this.activeSlide].background
+        ? {
+            "background-image": `url(data:image/jpeg;base64,${
+              this.medias[this.activeSlide].background
+            })`
+          }
+        : {};
+    },
+    postId() {
+      return this.post.id;
+    },
+    hasStreamEvents() {
+      if (this.mediaSize !== "full") {
+        return;
+      }
+      return !!this.post.streamId;
+    },
+    streamEventsLoading() {
+      return this.$store.state.post.fetchStreamEventsLoading;
+    },
+    streamEvents() {
+      return this.$store.state.post.fetchStreamEventsResult;
+    }
+  },
   methods: {
     getMediaViewType({ canView, type }) {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
@@ -166,12 +193,37 @@ export default {
       if (type === "video") return `Video${LinkedPrefix}`;
 
       throw new Error("Invalid media format");
+    },
+    fetchStreamEvents() {
+      this.$store.dispatch("post/fetchStreamEvents", this.post.streamId);
     }
   },
   watch: {
     medias() {
       this.activeSlide = 0;
     }
+  },
+  mounted() {
+    if (this.hasStreamEvents) {
+      this.fetchStreamEvents();
+      this.$nextTick(() => {
+        this.streamEventsIntervalId = setInterval(() => {
+          if (!this.$refs.media) {
+            return;
+          }
+          if (!this.$refs.streamEvents) {
+            return;
+          }
+          const time = this.$refs.media.$refs.video.currentTime;
+          if (time !== this.$refs.streamEvents.currentTime) {
+            this.$refs.streamEvents.currentTime = time;
+          }
+        }, 1000);
+      });
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.streamEventsIntervalId);
   }
 };
 </script>
