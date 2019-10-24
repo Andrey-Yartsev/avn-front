@@ -112,6 +112,14 @@
   }
 }
 
+.text-obs-settings {
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .obs-filter {
   position: relative;
 }

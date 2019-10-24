@@ -8,7 +8,7 @@
       :class="{ 'shadow-block_b-gap-md': $mq === 'mobile' }"
     >
       <div class="container">
-        <p>
+        <p class="text-obs-settings">
           We support RTMP protocol for streaming. You can use free and
           open-source software suite OBS Studio for recording and live
           streaming.
