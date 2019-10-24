@@ -150,7 +150,10 @@
   }
 
   .empty-feed {
-    padding-bottom: 0;
+
+    + .links-add-new {
+      margin-top: -33px;
+    }
   }
 }
 
