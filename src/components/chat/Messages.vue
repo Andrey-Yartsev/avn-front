@@ -121,7 +121,7 @@
               <div class="timestamp timestamp_sm-size message-time">
                 <div
                   class="message-time__read"
-                  v-if="isMyMessage(v) && v.readDate"
+                  v-if="isMyMessage(v) && v.readDate && v.lastMessageInGroup"
                 >
                   <span class="timeValue">Read {{ time(v.readDate) }}</span>
                   <span class="icn-read icn-item" />
