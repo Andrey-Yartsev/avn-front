@@ -701,6 +701,10 @@ button {
     }
   }
 
+  .comment-content & {
+    top: 8px;
+  }
+
   &.active {
     opacity: 1;
     color: $primary-color;
