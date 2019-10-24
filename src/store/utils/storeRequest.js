@@ -3,9 +3,9 @@ import tokenRequest from "../../utils/tokenRequest";
 import request from "../../utils/request";
 import Router from "@/router";
 
-const isOffline = () => {
-  return global.navigator && global.navigator.onLine === false;
-};
+// const isOffline = () => {
+//   return global.navigator && global.navigator.onLine === false;
+// };
 
 const storeRequest = (
   requestType,
@@ -21,17 +21,17 @@ const storeRequest = (
     commit(prefix + "Request");
     commit(prefix + "Success", false);
 
-    if (isOffline()) {
-      dispatch(
-        "global/flashToast",
-        { text: "Internet connection problems" },
-        {
-          root: true
-        }
-      );
-      commit(prefix + "Requested");
-      return;
-    }
+    // if (isOffline()) {
+    //   dispatch(
+    //     "global/flashToast",
+    //     { text: "Internet connection problems " + apiPath },
+    //     {
+    //       root: true
+    //     }
+    //   );
+    //   commit(prefix + "Requested");
+    //   return;
+    // }
 
     const requests = {
       any: anyRequest,
