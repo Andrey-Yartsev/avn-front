@@ -961,7 +961,7 @@ video {
   font-size: 13px;
   opacity: .5;
 
-  &:not(:last-child) {
+  .awards-form & {
     margin-bottom: 1rem;
   }
 }

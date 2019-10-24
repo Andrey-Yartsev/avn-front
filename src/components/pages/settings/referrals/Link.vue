@@ -19,7 +19,7 @@
         <a :href="url" class="referrals-url__link">{{ url }}</a>
       </div>
       <div class="referral-desc">
-        <p class="subtext">
+        <p class="hint-text-sm subtext">
           Refer creators to stars.avn.com receive 5% of their earnings as a
           bonus!
         </p>
