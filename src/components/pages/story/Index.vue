@@ -28,6 +28,7 @@
             v-if="currentStory.mediaType === 'video'"
             class="story-video-element storyItem"
             autoplay
+            loop
             :playsinline="$mq === 'mobile'"
             :src="currentStory.src.source"
             ref="storyItem"

@@ -7,6 +7,7 @@
       controls
       controlslist="nodownload"
       autoplay
+      loop
       :poster="media.preview.source"
       v-if="video"
       @play="play"
