@@ -8,7 +8,10 @@
     />
     <div class="container">
       <div class="row">
-        <div class="content-col" :class="{ 'new-user': newUser }">
+        <div
+          class="content-col flex-basis-auto"
+          :class="{ 'new-user': newUser }"
+        >
           <div class="no-padding rounded-container shadow-block">
             <AddPost
               v-if="$mq === 'desktop'"
