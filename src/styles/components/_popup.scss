@@ -738,6 +738,13 @@
 
 .popup-addPost {
 
+  &.popup-container {
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      max-width: 100%;
+    }
+  }
+
   &__header {
     font-size: 17px;
     font-weight: 500;
