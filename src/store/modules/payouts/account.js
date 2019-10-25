@@ -14,7 +14,8 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
-  }
+  },
+  localError: true
 });
 
 createRequestAction({

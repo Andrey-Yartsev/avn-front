@@ -1,7 +1,9 @@
 <template>
   <div>
-    <Legal />
-    <Bank />
+    <template v-if="!user.hideBanking">
+      <Legal />
+      <Bank />
+    </template>
     <Balances storeKey="payouts" prefix="payout" />
     <Requests title="Payout Statements" storeKey="payouts" />
     <Transactions />

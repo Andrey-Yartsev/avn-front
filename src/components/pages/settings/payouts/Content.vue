@@ -71,7 +71,11 @@ export default {
     },
     innerComponent() {
       if (!this.accountExists) {
-        return Account;
+        if (this.user.canEarn) {
+          return Summery;
+        } else {
+          return Account;
+        }
       } else {
         if (!this.legalExists || this.legalExistsWithoutState) {
           return Legal;
@@ -149,15 +153,20 @@ export default {
 
   created() {
     this.$store.dispatch("payouts/reset");
-    this.$store.dispatch("payouts/account/fetch").then(() => {
-      this.$store.dispatch("payouts/legal/fetch").then(() => {
-        this.$store.dispatch("payouts/bank/fetch").then(() => {
-          this.$store.dispatch("payouts/countries/fetch").then(() => {
-            this.loading = false;
+    this.$store
+      .dispatch("payouts/account/fetch")
+      .then(() => {
+        this.$store.dispatch("payouts/legal/fetch").then(() => {
+          this.$store.dispatch("payouts/bank/fetch").then(() => {
+            this.$store.dispatch("payouts/countries/fetch").then(() => {
+              this.loading = false;
+            });
           });
         });
+      })
+      .catch(() => {
+        this.loading = false;
       });
-    });
   }
 };
 </script>
