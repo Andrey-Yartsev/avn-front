@@ -92,8 +92,12 @@ export default {
   }),
   computed: {
     href() {
-      const { protocol, hostname } = window.location;
-      return `${protocol}//${hostname}/post/${this.postId}`;
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/post/${this.postId}`
+      );
     },
     actionPrefix() {
       return this.from;

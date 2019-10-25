@@ -15,6 +15,7 @@
       :height="videoHeight"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
+      ref="video"
     >
       <source :src="video.source" type="video/mp4" />
     </video>
@@ -31,7 +32,7 @@ export default {
   name: "Video",
   mixins: [PostMediaPropsMixin],
   props: {
-    postId: Number,
+    post: Object,
     authorId: Number
   },
   data() {
@@ -75,13 +76,13 @@ export default {
       return;
     }
     logger.info(
-      `send video view duration for post ${this.postId} (${duration})`
+      `send video view duration for post ${this.post.id} (${duration})`
     );
     this.$root.ws.send({
       act: "collect",
       message: "view_video",
       data: {
-        post_id: this.postId,
+        post_id: this.post.id,
         owner: this.authorId,
         duration: duration,
         start_time: Math.round(this.playTimer / 1000)

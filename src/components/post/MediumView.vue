@@ -37,7 +37,7 @@
           v-if="medias.length"
           :medias="medias"
           :shouldHasLink="!delayedPost"
-          :postId="post.id"
+          :post="post"
           :authorId="post.author.id"
           :openModal="openModal"
           mediaSize="preview"

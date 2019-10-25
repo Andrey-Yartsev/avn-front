@@ -49,7 +49,7 @@
           v-if="post.media && post.media.length"
           :medias="post.media"
           :shouldHasLink="false"
-          :postId="post.id"
+          :post="post"
           :authorId="post.author.id"
           mediaSize="full"
         />
