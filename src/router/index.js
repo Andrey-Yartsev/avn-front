@@ -493,6 +493,7 @@ const routes = [
   {
     beforeEnter: Auth.dummy,
     path: "/not-found",
+    name: "NotFound",
     component: NotFoundPage,
     meta: {
       noAuthHeader: true,

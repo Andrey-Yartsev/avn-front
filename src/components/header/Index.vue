@@ -17,7 +17,7 @@
         <component
           :is="logo"
           class="header-logo header-logo_size"
-          :class="{ 'header-logo_center': !notFound }"
+          :class="{ 'header-logo_center': $route.name === 'NotFound' }"
         />
         <template v-if="notFound">
           <User />
