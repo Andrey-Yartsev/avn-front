@@ -981,7 +981,7 @@
 
     &-exlg {
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
         height: 62vw;
         top: calc(44px - 62vw);
       }
