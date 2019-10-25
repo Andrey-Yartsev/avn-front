@@ -553,6 +553,18 @@
         transform: translateY(-50%);
       }
     }
+
+
+    .loader-container {
+
+      &_center {
+
+        @include media-breakpoint-up($desktop-breakpoint) {
+          top: -60px;
+          height: calc(100% + 60px);
+        }
+      }
+    }
   }
 
   > .post-scheduled-time {
