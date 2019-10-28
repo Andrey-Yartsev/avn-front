@@ -94,10 +94,10 @@
                       </div>
                       <div
                         class="spend table__cell table__cell_align table__cell_align-hor-c"
-                        :class="{ reverse: this.sort === 'DESC' }"
                         @click="switchSpendOrder"
                       >
                         Spend lifetime
+                        <span class="arr-inverse icn-item" :class="{ 'arr-reverse': this.sort === 'DESC' }"></span>
                       </div>
                     </div>
                   </div>

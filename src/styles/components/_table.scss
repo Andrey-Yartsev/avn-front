@@ -868,4 +868,39 @@
   }
 }
 
+.arr-inverse,
+.arr-reverse {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 10px;
+  height: 6px;
+  margin-top: 4px;
+  margin-left: 4px;
+
+  &:after {
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+  }
+}
+
+.arr-inverse {
+
+  &:after {
+    content: "\E608";
+    color: red;
+  }
+}
+
+.arr-reverse {
+
+  &:after {
+    content: "\E60B";
+    color: green
+  }
+}
+
 
