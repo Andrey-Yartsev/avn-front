@@ -163,7 +163,6 @@
                   </div>
                   <div
                     class="shadow-block no-padding"
-                    :class="{ 'table-empty': users.length === 0 }"
                   >
                     <div class="table-wrapper">
                       <Users
@@ -180,7 +179,9 @@
                           class="small"
                         />
                       </div>
-                      <div class="empty-table-info">
+                      <div class="empty-table-info"
+                        :class="{ 'show': users.length === 0 && !infinityScrollLoading }"
+                      >
                         <span>Empty here for now</span>
                       </div>
                     </div>
