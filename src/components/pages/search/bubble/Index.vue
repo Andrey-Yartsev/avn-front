@@ -172,8 +172,14 @@ export default {
       if (!this.canSearch) {
         return;
       }
-      this.$router.push("/search/" + this.type + "/" + this.localQuery);
-      this.close();
+      if (this.isQueryTag()) {
+        this.$router.push(`/hashtag/${this.localQuery.slice(1)}`);
+        this.close();
+        return;
+      } else {
+        this.$router.push("/search/" + this.type + "/" + this.localQuery);
+        this.close();
+      }
     },
     searchSilent() {
       this._search();
