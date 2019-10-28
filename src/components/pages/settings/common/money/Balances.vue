@@ -25,7 +25,9 @@
             <span class="title">Available</span>
             <span class="value">${{ balances[prefix + "Available"] }}</span>
           </div>
-          <div class="form-group form-group_clear-gaps-bottom form-group_with-label item">
+          <div
+            class="form-group form-group_clear-gaps-bottom form-group_with-label item"
+          >
             <span class="title">Pending</span>
             <span class="value">${{ balances[prefix + "Pending"] }}</span>
           </div>
