@@ -69,7 +69,7 @@
           <div class="row">
             <div class="content-col single-col">
               <div class="rounded-container">
-                <div class="SubscribersBlockCollectionView settings-wrapper">
+                <div class="EarningsBlockCollectionView settings-wrapper">
                   <div
                     class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
                   >
@@ -80,7 +80,7 @@
                         >
                       </div>
                     </div>
-                    <div class="table-header referrals-table-header">
+                    <div class="table-header">
                       <div class="index table__cell">
                         №
                       </div>
