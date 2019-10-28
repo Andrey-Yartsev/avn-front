@@ -64,41 +64,7 @@
               :href="`/`"
               @click.prevent="goBack"
             />
-            <h1 class="page-title">Subscribers</h1>
-          </div>
-          <div
-            class="subscribers-filters"
-            :class="{ 'shadow-block': $mq === 'mobile' }"
-          >
-            <div class="form-group checkbox-group item">
-              <label
-                class="form-group-inner"
-                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
-              >
-                <div class="checkbox-wrapper">
-                  <input type="checkbox" v-model="isSnapchatOnly" />
-                  <span class="label icn-item">Snapchat</span>
-                </div>
-              </label>
-              <label
-                class="form-group-inner"
-                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
-              >
-                <div class="checkbox-wrapper">
-                  <input type="checkbox" v-model="isActiveOnly" />
-                  <span class="label icn-item">Active</span>
-                </div>
-              </label>
-              <label
-                class="form-group-inner"
-                :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
-              >
-                <div class="checkbox-wrapper">
-                  <input type="checkbox" v-model="isExpiredOnly" />
-                  <span class="label icn-item">Expired</span>
-                </div>
-              </label>
-            </div>
+            <h1 class="page-title">Earnings</h1>
           </div>
           <div class="row">
             <div class="content-col single-col">
@@ -110,54 +76,28 @@
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
                         <span class="semi-transparent nowrap-text"
-                          >Subscribers</span
+                          >Earnings</span
                         >
-                        <!-- <form class="referrals-search b-search-form">
-                          <input
-                            type="text"
-                            class="rounded sm"
-                            placeholder="Search"
-                            v-model="filter"
-                          />
-                          <button
-                            type="submit"
-                            disabled=""
-                            class="b-search-form__btn icn-item"
-                          ></button>
-                        </form> -->
                       </div>
                     </div>
                     <div class="table-header referrals-table-header">
+                      <div class="index table__cell">
+                        №
+                      </div>
                       <div class="user table__cell">
-                        User
-                      </div>
-                      <div class="snapchatUsername table__cell">
-                        Snapchat<br />Username
-                      </div>
-                      <!-- <div
-                        class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
-                        :class="{ reverse: !this.desc }"
-                        @click="switchAmountOrder"
-                      > -->
-                      <div
-                        class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
-                      >
-                        Amount
+                        Name
                       </div>
                       <div
-                        class="status table__cell table__cell_align table__cell_align-hor-c"
+                        class="signed table__cell table__cell_align table__cell_align-hor-c"
                       >
-                        Status
+                        Signup date
                       </div>
                       <div
-                        class="joined table__cell table__cell_align table__cell_align-hor-c"
+                        class="spend table__cell table__cell_align table__cell_align-hor-c"
+                        :class="{ reverse: this.sort === 'DESC' }"
+                        @click="switchSpendOrder"
                       >
-                        Joined
-                      </div>
-                      <div
-                        class="canceled table__cell table__cell_align table__cell_align-hor-c"
-                      >
-                        Canceled
+                        Spend lifetime
                       </div>
                     </div>
                   </div>
@@ -200,44 +140,34 @@
 import Loader from "@/components/common/Loader";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
-import SubscribeButton from "@/components/subscription/Button";
 import Users from "@/components/users/Users.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
-import HeaderControl from "@/components/common/profile/headerControl/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
-import FollowersCounter from "@/components/common/profile/followersCounter/Index";
-import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/router/backRouter";
 
 export default {
-  name: "Subscribers",
+  name: "Earnings",
   mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
     Users,
-    SubscribeButton,
     ProfileAvatar,
-    HeaderControl,
     ProfileBackground,
-    FollowersCounter,
-    UserDropdown,
     ProfileActions,
     Footer
   },
 
   data: () => ({
-    loadingName: "subscribesRequestLoading",
+    loadingName: "earningsRequestLoading",
     filter: "",
-    actionPrefix: "subscribes",
-    isSnapchatOnly: false,
-    isActiveOnly: false,
-    isExpiredOnly: false
+    actionPrefix: "earnings",
+    sort: "ASC"
   }),
   computed: {
     loading() {
-      return this.$store.state.subscribes.subscribesRequestLoading;
+      return this.$store.state.earnings.earningsRequestLoading;
     },
     page() {
       return this.$route.meta.title;
@@ -249,14 +179,14 @@ export default {
       const isGay = !!window.location.hostname.match(/gayvn/);
       if (isGay) {
         const excepting = ["avnawards", "avnmagazine"];
-        return this.$store.state.subscribes.posts.filter(user => {
+        return this.$store.state.earnings.posts.filter(user => {
           return excepting.indexOf(user.username) === -1;
         });
       }
-      return this.$store.state.subscribes.posts;
+      return this.$store.state.earnings.posts;
     },
     store() {
-      return this.$store.state.subscribes;
+      return this.$store.state.earnings;
     },
     scrollBarWidth() {
       if (!this.$store.state.global.modalOpened) {
@@ -268,7 +198,7 @@ export default {
   methods: {
     init() {
       this.resetInfinityScroll();
-      this.$store.commit("subscribes/reset");
+      this.$store.commit("earnings/reset");
       this.getPosts();
     },
     infinityScrollGetDataMethod() {
@@ -277,51 +207,23 @@ export default {
       }
     },
     getPosts() {
-      this.$store.dispatch("subscribes/getPosts", {
+      this.$store.dispatch("earnings/getPosts", {
         type: this.actionPrefix,
-        active: this.isActiveUsers()
-      });
-    },
-    isActiveUsers() {
-      if (
-        (this.isActiveOnly && this.isExpiredOnly) ||
-        (!this.isActiveOnly && !this.isExpiredOnly)
-      )
-        return "";
-      if (this.isActiveOnly) return true;
-      if (this.isExpiredOnly) return false;
-    },
-    openGroupMessageModal() {
-      this.$store.dispatch("modal/show", {
-        name: "groupMessage"
-      });
-    },
-    changeActionPreffix(value) {
-      // console.log(value)
-      this.actionPrefix = value;
-      this.$nextTick(() => {
-        this.init();
+        sort: this.sort
       });
     },
     goBack() {
       BackRouter.back();
+    },
+    switchSpendOrder() {
+      this.sort = this.sort === "ASC" ? "DESC" : "ASC";
     }
   },
   watch: {
     page() {
       this.init();
     },
-    isSnapchatOnly(newValue) {
-      if (newValue) {
-        this.changeActionPreffix("snapchat");
-      } else {
-        this.changeActionPreffix("subscribes");
-      }
-    },
-    isActiveOnly() {
-      this.init();
-    },
-    isExpiredOnly() {
+    sort() {
       this.init();
     }
   },
@@ -330,28 +232,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.messages-controllers {
-  .title {
-    text-align: center;
-    font-weight: bold;
-  }
-  .group-messages-buttons {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1rem;
-    .message-button {
-      border: 1px solid rgba(128, 128, 128, 0.295);
-      padding: 0.5rem 2rem;
-      border-radius: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(128, 128, 128, 0.295);
-      }
-    }
-  }
-}
-</style>

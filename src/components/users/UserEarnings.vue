@@ -1,40 +1,24 @@
 <template>
-  <div class="item" v-if="actionPrefix === 'subscribes'">
+  <div class="item" v-if="actionPrefix === 'earnings'">
+    <div class="index table__cell">
+      {{ num }}
+    </div>
     <div class="user table__cell">
-      <router-link
-        :to="'/' + profile.subscriber.username"
-        class="userview-block"
-      >
+      <router-link :to="'/' + profile.user.username" class="userview-block">
         <span class="avatar avatar_sm">
           <span class="avatar__img">
-            <img
-              :src="profile.subscriber.avatar"
-              v-if="profile.subscriber.avatar"
-            />
+            <img :src="profile.user.avatar" v-if="profile.user.avatar" />
           </span>
         </span>
-        <div class="name">{{ profile.subscriber.name }}</div>
-        <span class="user-login reset-ml">{{
-          profile.subscriber.username
-        }}</span>
+        <div class="name">{{ profile.user.name }}</div>
+        <span class="user-login reset-ml">{{ profile.user.username }}</span>
       </router-link>
     </div>
-    <div class="snapchatUsername table__cell">
-      <!-- {{ profile.subscriber.username }} -->
-    </div>
-    <div
-      class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
-    >
-      ${{ profile.price }}
-    </div>
-    <div class="status table__cell table__cell_align table__cell_align-hor-c">
-      {{ profile.active ? "active" : "expired" }}
-    </div>
-    <div class="joined table__cell table__cell_align table__cell_align-hor-c">
+    <div class="signed table__cell table__cell_align table__cell_align-hor-c">
       {{ messageTime(profile.sinceDate) }}
     </div>
-    <div class="canceled table__cell table__cell_align table__cell_align-hor-c">
-      {{ messageTime(profile.expireDate) }}
+    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+      ${{ profile.amount }}
     </div>
   </div>
 </template>

@@ -71,6 +71,8 @@ const LikesPage = () =>
   import(/* webpackChunkName: "LikesPage" */ "@/components/pages/likes/Index");
 const SubscribersPage = () =>
   import(/* webpackChunkName: "SubscribersPage" */ "@/components/pages/subscribers/Index");
+const EarningsPage = () =>
+  import(/* webpackChunkName: "EarningsPage" */ "@/components/pages/earnings/Index");
 const StaticPage = () =>
   import(/* webpackChunkName: "StaticPage" */ "@/components/pages/static/Index");
 const ContactsPage = () =>
@@ -486,6 +488,15 @@ const routes = [
     component: SubscribersPage,
     meta: {
       title: "subscribes",
+      cssName: "following"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/earnings",
+    component: EarningsPage,
+    meta: {
+      title: "earnings",
       cssName: "following"
     }
   },

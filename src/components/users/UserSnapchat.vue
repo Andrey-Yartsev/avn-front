@@ -1,5 +1,5 @@
 <template>
-  <div class="item" v-if="profile.user">
+  <div class="item" v-if="actionPrefix === 'snapchat'">
     <div class="user table__cell">
       <router-link :to="'/' + profile.user.username" class="userview-block">
         <span class="avatar avatar_sm">
