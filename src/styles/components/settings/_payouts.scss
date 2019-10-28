@@ -140,9 +140,6 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       border-bottom: 1px solid rgba($gray, 0.2);
     }
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding: 0 12% 0 0;
-    }
 
     &:last-child {
       border: none;
@@ -159,6 +156,7 @@
     @include media-breakpoint-up($desktop-breakpoint) {
       text-align: right;
       flex: 0 1 29%;
+      margin-right: 3%;
     }
   }
 
@@ -167,7 +165,7 @@
     padding: 9px 0 9px 5px;
     @include media-breakpoint-up($desktop-breakpoint) {
       text-align: left;
-      flex: 0 1 68%;
+      flex: 1;
       border-bottom: 1px solid rgba($gray, 0.2);
     }
   }

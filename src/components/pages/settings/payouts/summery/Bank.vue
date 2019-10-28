@@ -14,7 +14,11 @@
         <div class="shadow-block">
           <div class="container">
             <div class="payouts-bank-info">
-              <div class="item" v-for="v in bankFields" :key="v.code">
+              <div
+                class="form-group form-group_clear-gaps-bottom form-group_with-label item"
+                v-for="v in bankFields"
+                :key="v.code"
+              >
                 <span class="title">{{ v.label }}</span>
                 <span class="value">{{ bank[v.code] }}</span>
               </div>

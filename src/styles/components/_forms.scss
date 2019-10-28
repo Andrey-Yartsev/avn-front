@@ -377,6 +377,10 @@ label {
 
   &_clear-gaps {
     padding: 0;
+
+    &-bottom {
+      padding-bottom: 0;
+    }
   }
 
   &-inner {
