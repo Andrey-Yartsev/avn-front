@@ -7,14 +7,14 @@
       <figure
         class="explore-media"
         :class="{
-          'explore-media_avatar': this.post.user.avatar === null && !imageSrc
+          'explore-media_avatar': streamer.avatar === null && !imageSrc
         }"
       >
         <img
           :src="imageSrc"
           @contextmenu.prevent="() => false"
           @dragstart.prevent="() => false"
-          v-if="this.post.user.avatar !== null || imageSrc"
+          v-if="streamer.avatar !== null || imageSrc"
         />
         <div
           v-if="$mq === 'desktop'"
@@ -31,8 +31,8 @@
           </span>
 
           <div class="wrap-name wrap-name_center">
-            <span class="name">{{ user.name }} </span>
-            <span v-if="user.isVerified" class="verified-user icn-item" />
+            <span class="name">{{ streamer.name }} </span>
+            <span v-if="streamer.isVerified" class="verified-user icn-item" />
           </div>
         </div>
       </figure>
@@ -65,7 +65,7 @@ export default {
     imageSrc: undefined
   }),
   computed: {
-    user() {
+    streamer() {
       return this.post.user;
     },
     duraion() {
@@ -92,7 +92,7 @@ export default {
   watch: {
     subsUpdate(data) {
       if (data.action === "subscribe") {
-        if (data.data.userId === this.user.id) {
+        if (data.data.userId === this.streamer.id) {
           this.openStream();
         }
       }
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     run() {
-      this.tryOpenStream(this.post.user, this.post, stream => {
+      this.tryOpenStream(this.streamer, this.post, stream => {
         this.openStream(stream);
       });
     },
@@ -110,7 +110,7 @@ export default {
     }
   },
   mounted() {
-    this.imageSrc = this.post.user.avatar;
+    this.imageSrc = this.streamer.avatar;
     this.interval = setInterval(() => {
       this.updateMediaSrc();
     }, 5000);

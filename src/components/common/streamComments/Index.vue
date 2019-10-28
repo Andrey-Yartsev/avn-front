@@ -58,9 +58,6 @@ export default {
           scroll.scrollTop = scroll.scrollHeight;
         });
       }
-    },
-    comments(comments) {
-      console.log(comments);
     }
   }
 };

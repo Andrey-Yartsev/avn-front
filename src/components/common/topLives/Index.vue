@@ -74,7 +74,7 @@ export default {
     stream() {
       return this.lives[this.current];
     },
-    user() {
+    streamer() {
       return this.stream.user;
     },
     subsUpdate() {
@@ -97,7 +97,7 @@ export default {
       this.run();
     },
     openLive() {
-      this.tryOpenStream({ ...this.user }, { ...this.stream }, stream => {
+      this.tryOpenStream({ ...this.streamer }, { ...this.stream }, stream => {
         this._openStream(stream);
       });
     },
