@@ -90,7 +90,7 @@
                       <div
                         class="signed table__cell table__cell_align table__cell_align-hor-c"
                       >
-                        Signup date
+                        Payed since
                       </div>
                       <div
                         class="spend table__cell table__cell_align table__cell_align-hor-c"
