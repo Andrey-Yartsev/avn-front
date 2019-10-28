@@ -1136,13 +1136,13 @@ select {
       top: 50%;
       right: auto;
       position: absolute;
-      display: block;
       opacity: .3;
       font-size: 24px;
       border: none;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, calc(-50% - 3px));
       margin: 0;
       color: $main-color;
+      display: inline-block;
     }
   }
 
@@ -1154,15 +1154,16 @@ select {
     color: $main-color;
   }
 
-  &__input {
+  & &__input {
     height: 18px;
     min-height: 18px;
     line-height: 18px;
     font-size: 15px;
     position: absolute;
-    top: 7px;
+    top: 10px;
     left: 0;
     padding: 0 10px;
+    margin: 0;
     z-index: 0;
 
     &::-moz-placeholder,
@@ -1185,9 +1186,10 @@ select {
     }
   }
 
-  &__option {
+  & &__option {
     transition: background-color .3s;
     color: $main-color;
+    padding: 12px 8px;
 
     &--selected {
       font-weight: 400;
