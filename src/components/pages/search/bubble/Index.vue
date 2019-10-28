@@ -8,7 +8,6 @@
       v-model="localQuery"
       class="header-search-input rounded sm"
       name="query"
-      maxlength="13"
       autocomplete="off"
       placeholder="Search"
       type="text"
@@ -45,10 +44,11 @@
           <component :is="resultsComponent" :items="items" @away="reset" />
         </div>
         <div class="search-all-link">
-          <router-link
+          <router-link :to="getQueryString" class="searchAllLink">
+            <!-- <router-link
             :to="`/search/${type}/${localQuery}`"
             class="searchAllLink"
-          >
+          > -->
             Search all for&nbsp;
             <span class="searchAllTag">{{ localQuery }}</span>
           </router-link>
@@ -119,6 +119,9 @@ export default {
       return this.$route.params.query;
     },
     type() {
+      if (this.isQueryTag()) {
+        return "posts";
+      }
       return this.$route.params.type || "users";
     },
     resultsComponent() {
@@ -126,6 +129,13 @@ export default {
         return "Users";
       } else {
         return "Posts";
+      }
+    },
+    getQueryString() {
+      if (this.isQueryTag()) {
+        return `/hashtag/${this.localQuery.slice(1)}`;
+      } else {
+        return `/search/${this.type}/${this.localQuery}`;
       }
     }
   },
@@ -200,6 +210,11 @@ export default {
     selectSuggest(value) {
       this.localQuery = value;
       this._search();
+    },
+    isQueryTag() {
+      return this.localQuery && this.localQuery.indexOf("#") === 0
+        ? true
+        : false;
     }
   },
 
