@@ -129,48 +129,6 @@
   }
 }
 
-.payouts-bank-info {
-  overflow: hidden;
-  @include media-breakpoint-up($desktop-breakpoint) {
-    margin: -13px 0 17px;
-  }
-  .item {
-    display: flex;
-    justify-content: space-between;
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      border-bottom: 1px solid rgba($gray, 0.2);
-    }
-
-    &:last-child {
-      border: none;
-
-      .value {
-        border: none;
-      }
-    }
-  }
-
-  .title {
-    font-weight: 500;
-    padding: 9px 5px 9px 0;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      text-align: right;
-      flex: 0 1 29%;
-      margin-right: 3%;
-    }
-  }
-
-  .value {
-    text-align: right;
-    padding: 9px 0 9px 5px;
-    @include media-breakpoint-up($desktop-breakpoint) {
-      text-align: left;
-      flex: 1;
-      border-bottom: 1px solid rgba($gray, 0.2);
-    }
-  }
-}
-
 .PayoutsLegalView,
 .PayoutsBankView {
   .error {

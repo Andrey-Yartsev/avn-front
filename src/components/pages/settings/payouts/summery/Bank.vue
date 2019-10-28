@@ -13,7 +13,7 @@
         </div>
         <div class="shadow-block">
           <div class="container">
-            <div class="payouts-bank-info">
+            <div class="payouts-personal-info">
               <div
                 class="form-group form-group_clear-gaps-bottom form-group_with-label item"
                 v-for="v in bankFields"

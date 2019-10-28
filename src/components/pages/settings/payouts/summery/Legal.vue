@@ -17,7 +17,7 @@
       <div class="shadow-block border-top">
         <div class="container">
           <div class="payouts-personal-info">
-            <div class="item">
+            <div class="form-group form-group_clear-gaps-bottom form-group_with-label item">
               <span class="title">Name</span>
               <span class="value">
                 <span class="value__text">
@@ -25,7 +25,7 @@
                 </span>
               </span>
             </div>
-            <div class="item">
+            <div class="form-group form-group_clear-gaps-bottom form-group_with-label item">
               <span class="title">Date of Birth</span>
               <span class="value">
                 <span class="value__text">
@@ -33,7 +33,7 @@
                 </span>
               </span>
             </div>
-            <div class="item">
+            <div class="form-group form-group_clear-gaps-bottom form-group_with-label item">
               <span class="title">Legal Type</span>
               <span class="value">
                 <span class="value__text">
@@ -41,7 +41,7 @@
                 </span>
               </span>
             </div>
-            <div class="item" v-if="!edit">
+            <div class="form-group form-group_clear-gaps-bottom form-group_with-label item" v-if="!edit">
               <span class="title">Address</span>
               <span class="value value_editable-field">
                 <button @click="edit = true" class="btn-address-edit">
