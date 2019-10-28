@@ -97,7 +97,10 @@
                         @click="switchSpendOrder"
                       >
                         Spend lifetime
-                        <span class="arr-inverse icn-item" :class="{ 'arr-reverse': this.sort === 'DESC' }"></span>
+                        <span
+                          class="arr-inverse icn-item"
+                          :class="{ 'arr-reverse': this.sort === 'ASC' }"
+                        ></span>
                       </div>
                     </div>
                   </div>
@@ -163,7 +166,7 @@ export default {
     loadingName: "earningsRequestLoading",
     filter: "",
     actionPrefix: "earnings",
-    sort: "ASC"
+    sort: "DESC"
   }),
   computed: {
     loading() {
