@@ -18,7 +18,7 @@
       </div>
 
       <div class="container" v-else>
-        <div class="payouts-bank-info">
+        <div class="payouts-personal-info">
           <div
             class="form-group form-group_clear-gaps-bottom form-group_with-label item"
           >
