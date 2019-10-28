@@ -161,9 +161,7 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="shadow-block no-padding"
-                  >
+                  <div class="shadow-block no-padding">
                     <div class="table-wrapper">
                       <Users
                         v-if="users.length"
@@ -179,8 +177,11 @@
                           class="small"
                         />
                       </div>
-                      <div class="empty-table-info"
-                        :class="{ 'show': users.length === 0 && !infinityScrollLoading }"
+                      <div
+                        class="empty-table-info"
+                        :class="{
+                          show: users.length === 0 && !infinityScrollLoading
+                        }"
                       >
                         <span>Empty here for now</span>
                       </div>
