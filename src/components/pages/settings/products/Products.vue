@@ -1,7 +1,8 @@
 <template>
   <div class="paymentsStatementsView settings-wrapper">
+    <h1 class="form-title settings-title">My purchases</h1>
     <div
-      class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+      class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo border-top"
     >
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
         <div class="inner">
