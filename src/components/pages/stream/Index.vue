@@ -733,8 +733,6 @@ export default {
     const token = this.$store.state.auth.token;
     window.streamModule = Streams;
 
-    const that = this;
-
     Streams.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
@@ -744,22 +742,22 @@ export default {
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
       streamSource: "local",
-      showErrorMessage(message) {
-        that.$store.dispatch("global/setError", { message });
+      showErrorMessage: message => {
+        this.$store.dispatch("global/setError", { message });
         console.trace(message);
         if (message.match(/Some features are not supported/)) {
-          that.close();
+          this.close();
         }
       },
-      showInfoMessage(message) {
+      showInfoMessage: message => {
         // eslint-disable-next-line
         console.trace(message);
       },
-      onLocalStreamInit() {},
-      onRemoteStreamInit() {},
-      onStreamError(error) {
+      onLocalStreamInit: () => {},
+      onRemoteStreamInit: () => {},
+      onStreamError: error => {
         // eslint-disable-next-line
-        that.$store.dispatch("global/setError", { message: error });
+        this.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
         console.trace(error);
         Streams.config.onStreamEnd();
@@ -840,7 +838,7 @@ export default {
         this.isStopped = true;
         this.startingStream = false;
       },
-      onCleanUp() {},
+      onCleanUp: () => {},
       onViewersCountGet: looks => {
         this.looksCount = looks - 1;
       },

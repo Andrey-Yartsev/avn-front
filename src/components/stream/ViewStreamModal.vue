@@ -357,8 +357,6 @@ export default {
     document.body.classList.add("stream-viewer");
   },
   created() {
-    const o = this;
-
     const onViewerKicked = () => {
       this.$store.commit("lives/resetCurrentLive");
 
@@ -414,15 +412,15 @@ export default {
         });
       },
 
-      onSetupStreamingSession: function() {},
+      onSetupStreamingSession: () => {},
 
-      onStreamError: function(error) {
+      onStreamError: error => {
         if (error.match(/403/)) {
-          o.$store.dispatch("global/setError", {
+          this.$store.dispatch("global/setError", {
             message: "You have been blocked on this stream"
           });
         } else {
-          o.$store.dispatch("global/setError", { message: error });
+          this.$store.dispatch("global/setError", { message: error });
         }
       },
 
@@ -436,7 +434,7 @@ export default {
       //   });
       // },
 
-      onInit: function() {},
+      onInit: () => {},
 
       onVideoPlaying: () => {
         this.connected = true;
@@ -444,7 +442,7 @@ export default {
         this.updateTimer();
       },
 
-      onCleanUp: function() {},
+      onCleanUp: () => {},
 
       onCustomDataGet: message => {
         if (message.type === "kick.user" && this.user.id === message.userId) {
