@@ -1,11 +1,12 @@
 export default {
   data() {
     return {
-      lastScrollTop: 0
+      lastScrollTop: 0,
+      scrollTimeoutId: 0
     };
   },
   methods: {
-    onScroll(e) {
+    _onScroll(e) {
       const { scrollTop } = document.documentElement;
       const { pageYOffset } = window;
       const mainHeader = this.$refs.siteHeader;
@@ -29,6 +30,12 @@ export default {
 
       const st = pageYOffset || scrollTop || (e && e.target.scrollTop) || 0;
 
+      const diff = Math.abs(st - this.lastScrollTop);
+
+      if (diff < 20) {
+        return;
+      }
+
       if (st > this.lastScrollTop) {
         if (st > height) {
           document.body.classList.add("scroll-top");
@@ -45,6 +52,12 @@ export default {
         document.body.classList.remove("scroll-top");
       }
       this.lastScrollTop = st <= 0 ? 0 : st;
+    },
+    onScroll(e) {
+      clearTimeout(this.scrollTimeoutId);
+      this.scrollTimeoutId = setTimeout(() => {
+        this._onScroll(e);
+      }, 100);
     }
   },
   mounted() {
