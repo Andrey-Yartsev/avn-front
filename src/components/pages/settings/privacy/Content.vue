@@ -151,7 +151,7 @@ w<template>
               type="checkbox"
               name="isStreamsTweet"
               value="false"
-              v-model="localUser.isStreamsTweets"
+              v-model="localUser.isPostsTweetsOnGoLive"
               :disabled="!localUser.isTwitterConnected"
             />
             <span class="toggle-element_switcher"></span>
