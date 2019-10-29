@@ -1,6 +1,7 @@
 <template>
-  <div class="explore-wrapper users">
-    <User
+  <div class="table payouts-table">
+    <component
+      :is="component"
       v-for="(item, i) in items"
       v-bind:key="item.id"
       :profile="item"
@@ -8,17 +9,21 @@
       :ref="'user' + item.id"
       :top="top"
       :num="i + 1"
-    />
+    ></component>
   </div>
 </template>
 
 <script>
-import User from "./User";
+import UserSubscriber from "./UserSubscriber";
+import UserSnapchat from "./UserSnapchat";
+import UserEarnings from "./UserEarnings";
 
 export default {
-  name: "SearchUsers",
+  name: "SearchUsersTable",
   components: {
-    User
+    UserSubscriber,
+    UserSnapchat,
+    UserEarnings
   },
   props: {
     items: {
@@ -37,6 +42,18 @@ export default {
   computed: {
     subscriptionUpdate() {
       return this.$store.state.subscription.updated;
+    },
+    component() {
+      switch (this.actionPrefix) {
+        case "subscribes":
+          return "UserSubscriber";
+        case "snapchat":
+          return "UserSnapchat";
+        case "earnings":
+          return "UserEarnings";
+        default:
+          return null;
+      }
     }
   },
   watch: {
