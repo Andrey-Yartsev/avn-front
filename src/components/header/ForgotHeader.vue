@@ -3,7 +3,7 @@
     <div class="header-wrapper">
       <div class="container header_container guest">
         <nav class="header-nav hidden-mobile"></nav>
-        <component :is="logo" class="header-logo header-logo_size" />
+        <Logo class="header-logo header-logo_size" />
         <router-link to="/register" class="btn border register"
           >Sign up</router-link
         >
@@ -14,33 +14,14 @@
     </div>
   </header>
 </template>
-<template>
-  <div :class="mainClass">
-    <div class="login-wrapper">
-      <div class="login-caption-col">
-        <div class="login-caption">
-          <component :is="logo" />
-          <p class="promotion alt-font">
-            Coming together.
-          </p>
-        </div>
-        <Footer v-if="$mq === 'desktop'" />
-      </div>
-      <div class="login-form-col auth-block">
-        <slot name="content" />
-        <Footer v-if="$mq === 'mobile'" />
-      </div>
-    </div>
-  </div>
-</template>
 
 <script>
+import Logo from "@/components/common/Logo";
+
 export default {
   name: "ForgetHeader",
-  computed: {
-    logo() {
-      return "rl-logo";
-    }
+  components: {
+    Logo
   }
 };
 </script>

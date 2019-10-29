@@ -30,7 +30,7 @@
       <ChatVideoModal v-if="this.$store.state.modal.chatVideo.show" />
       <ChatModal v-if="this.$store.state.modal.messages.show" />
       <UserReportModal v-if="this.$store.state.modal.userReport.show" />
-      <rl-subscribe-modal v-if="this.$store.state.modal.subscribe.show" />
+      <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
       <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
@@ -65,11 +65,11 @@
       >
         Return to admin
       </a>
-      <avn-tip-pay-confirm v-if="this.$store.state.modal.tipPayConfirm.show" />
-      <avn-chat-message-pay-confirm
+      <TipPayConfirm v-if="this.$store.state.modal.tipPayConfirm.show" />
+      <ChatMessagePayConfirm
         v-if="this.$store.state.modal.chatMessagePayConfirm.show"
       />
-      <avn-buy-snapchat-pay-confirm
+      <BuySnapchatConfirm
         v-if="this.$store.state.modal.buySnapchatConfirm.show"
       />
       <UserBubble
@@ -95,6 +95,9 @@ import PostModal from "@/components/post/ModalView";
 import PostReportModal from "@/components/common/postParts/reportModal/Index";
 import ChatModal from "@/components/chat/Modal";
 import ChatVideoModal from "@/components/chat/media/VideoModal";
+import ChatMessagePayConfirm from "@/components/chat/ChatMessagePayConfirm";
+import BuySnapchatConfirm from "@/components/pages/profile/BuySnapchatConfirm";
+import TipPayConfirm from "@/components/common/tip/TipPayConfirm";
 import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewerModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
@@ -109,6 +112,7 @@ import GroupMessageModal from "@/components/groupMessage/Modal";
 import AddLinkModal from "@/components/addLink/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
+import SubscribeModal from "@/components/subscription/SubscribeModal";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
@@ -182,6 +186,9 @@ export default {
     PostModal,
     ChatModal,
     ChatVideoModal,
+    ChatMessagePayConfirm,
+    BuySnapchatConfirm,
+    TipPayConfirm,
     UserReportModal,
     ResubscribeModal,
     PaymentModal,
@@ -193,6 +200,7 @@ export default {
     GroupMessageModal,
     IframeModal,
     StreamModal,
+    SubscribeModal,
     SubscriptionConfirmModal,
     LoginModal,
     SignupModal,

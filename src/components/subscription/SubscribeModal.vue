@@ -8,7 +8,7 @@
 
 <script>
 import SubscribeModalInner from "@/components/subscription//SubscribeModalInner";
-import PayAction from "./payAction";
+import PayAction from "../pages/settings/payments/payAction";
 
 export default {
   name: "SecurionSubscribeModal",

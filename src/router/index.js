@@ -576,7 +576,6 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/terms",
-    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "terms",
@@ -587,7 +586,6 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/privacy",
-    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "privacy",
@@ -598,7 +596,6 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/contact",
-    name: "StaticPage",
     component: ContactsPage,
     meta: {
       staticPage: true,
@@ -645,7 +642,6 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/usc2257",
-    name: "StaticPage",
     component: StaticPage,
     meta: {
       apiPoint: "usc2257",
@@ -708,9 +704,11 @@ const routes = [
   }
 ];
 
-export default new Router({
+const rtr = new Router({
   mode: "history",
   base: __dirname,
   linkActiveClass: "active",
   routes
 });
+
+export default rtr;

@@ -6,7 +6,7 @@
       slot="content"
     >
       <div class="content content_relative">
-        <component :is="logo" class="auth-logo header-logo_size" />
+        <Logo class="auth-logo header-logo_size" />
         <LoginForm type="modal" @openSignup="_close" />
       </div>
       <button
@@ -27,13 +27,15 @@
 import Modal from "@/components/modal/Index";
 import LoginForm from "@/components/auth/LoginForm";
 import Footer from "@/components/footer/Index.vue";
+import Logo from "@/components/common/Logo";
 
 export default {
   name: "LoginModal",
   components: {
     Modal,
     LoginForm,
-    Footer
+    Footer,
+    Logo
   },
   computed: {
     disableClose() {
@@ -41,9 +43,6 @@ export default {
     },
     disableFooter() {
       return !!this.$store.state.modal.login.data.disableFooter;
-    },
-    logo() {
-      return "rl-logo";
     }
   },
   methods: {

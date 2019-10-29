@@ -5,7 +5,7 @@
       slot="content"
       @titleChanged="changeTitle"
     />
-    <avn-settings-add-card v-else slot="content" @titleChanged="changeTitle" />
+    <AddCard v-else slot="content" @titleChanged="changeTitle" />
     <template slot="title">
       <span class="page-title__category">{{ $route.meta.title }}</span>
       <button
@@ -23,13 +23,15 @@
 import Layout from "../Layout";
 import Content from "./Content";
 import User from "@/mixins/user";
+import AddCard from "./AddCard";
 
 export default {
   name: "PaymentsSettings",
   mixins: [User],
   components: {
     Layout,
-    Content
+    Content,
+    AddCard
   },
   computed: {
     appName() {

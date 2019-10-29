@@ -27,7 +27,7 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import PayAction from "./payAction";
+import PayAction from "../../pages/settings/payments/payAction";
 import Loader from "@/components/common/Loader";
 
 export default {
