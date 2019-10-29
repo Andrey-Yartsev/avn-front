@@ -6,7 +6,7 @@ import Auth from "./auth";
 const Profile = {
   init(to, from, next) {
     Auth.init(to, from, () => {
-      const username = to.params.username;
+      const username = to.params.username.toLowerCase();
       const page = to.params.page;
 
       if (page && ["photos", "videos", "posts", "links"].indexOf(page) === -1) {
