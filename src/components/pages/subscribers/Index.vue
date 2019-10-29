@@ -112,19 +112,6 @@
                         <span class="semi-transparent nowrap-text"
                           >Subscribers</span
                         >
-                        <!-- <form class="referrals-search b-search-form">
-                          <input
-                            type="text"
-                            class="rounded sm"
-                            placeholder="Search"
-                            v-model="filter"
-                          />
-                          <button
-                            type="submit"
-                            disabled=""
-                            class="b-search-form__btn icn-item"
-                          ></button>
-                        </form> -->
                       </div>
                     </div>
                     <div class="table-header referrals-table-header">
@@ -134,11 +121,6 @@
                       <div class="snapchatUsername table__cell">
                         Snapchat<br />Username
                       </div>
-                      <!-- <div
-                        class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
-                        :class="{ reverse: !this.desc }"
-                        @click="switchAmountOrder"
-                      > -->
                       <div
                         class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
                       >
@@ -163,7 +145,7 @@
                   </div>
                   <div class="shadow-block no-padding">
                     <div class="table-wrapper">
-                      <Users
+                      <UsersTable
                         v-if="users.length"
                         :items="users"
                         :loading="false"
@@ -203,7 +185,7 @@ import Loader from "@/components/common/Loader";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
-import Users from "@/components/users/Users.vue";
+import UsersTable from "@/components/users/UsersTable.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
@@ -218,7 +200,7 @@ export default {
   mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
-    Users,
+    UsersTable,
     SubscribeButton,
     ProfileAvatar,
     HeaderControl,

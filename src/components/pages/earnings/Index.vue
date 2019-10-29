@@ -109,7 +109,7 @@
                     :class="{ 'table-empty': users.length === 0 }"
                   >
                     <div class="table-wrapper">
-                      <Users
+                      <UsersTable
                         v-if="users.length"
                         :items="users"
                         :loading="false"
@@ -143,7 +143,7 @@
 import Loader from "@/components/common/Loader";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
-import Users from "@/components/users/Users.vue";
+import UsersTable from "@/components/users/UsersTable.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
@@ -155,7 +155,7 @@ export default {
   mixins: [InfinityScrollMixin, UserMixin],
   components: {
     Loader,
-    Users,
+    UsersTable,
     ProfileAvatar,
     ProfileBackground,
     ProfileActions,
