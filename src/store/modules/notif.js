@@ -68,7 +68,7 @@ createRequestAction({
     return options;
   },
   resultConvert: function(result, state) {
-    return [...state.posts, ...result];
+    return [...state.posts, ...result.list];
   }
 });
 
