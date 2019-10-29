@@ -774,7 +774,7 @@ label {
 
     form {
       @include media-breakpoint-up($desktop-breakpoint) {
-        margin: 6px 0 0;
+        margin-top: 6px;
       }
     }
     & > button {
