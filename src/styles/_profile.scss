@@ -1048,7 +1048,7 @@
     }
   }
 
-  &:not(.subscribe-popup__header) {
+  &:not(.subscribe-popup__header):not(.settings-page) {
 
     .header-scrolled & {
 
