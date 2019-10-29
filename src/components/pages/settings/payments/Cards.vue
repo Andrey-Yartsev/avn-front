@@ -19,7 +19,7 @@
           v-for="card in cards"
           :key="card.id"
           :class="[
-            'item',
+            'cards-list__item',
             card.paymentGateCardBrand
               ? card.paymentGateCardBrand.toLowerCase()
               : ''
