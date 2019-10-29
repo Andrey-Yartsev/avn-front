@@ -753,6 +753,7 @@
     border-top-right-radius: 6px;
     padding: 19px 20px 20px;
     position: relative;
+    z-index: 1;
 
     .popup-container_hfluid & {
       margin-left: 11px;

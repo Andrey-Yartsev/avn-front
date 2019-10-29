@@ -123,8 +123,7 @@
   &.loaderWrap {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      overflow: hidden;
-      position: static;
+      z-index: 1;
     }
 
     .popup-container_hfluid & {
