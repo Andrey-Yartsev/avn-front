@@ -1260,6 +1260,13 @@ select {
       }
     }
   }
+
+  &.multiselect--above {
+
+    .multiselect__content-wrapper {
+      border-top-color: rgba($gray, 0.1);
+    }
+  }
 }
 
 
