@@ -77,6 +77,15 @@
           </button>
         </li>
       </template>
+      <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
+        <button
+          class="edit more-functions__link"
+          type="button"
+          @click="markSpam"
+        >
+          <span class="more-functions__option">Mark as spam</span>
+        </button>
+      </li>
     </ul>
   </div>
 </template>
@@ -180,6 +189,20 @@ export default {
           postId: this.postId
         }
       });
+    },
+    markSpam() {
+      console.log(this.actionPrefix);
+      // this.$store.dispatch("profile/home/spamPost", {
+      //   postId: this.postId
+      // });
+
+      this.hide();
+
+      if (this.isOnPostPage) {
+        return this.$router.push("/");
+      }
+
+      window.location.hash = "";
     }
   }
 };
