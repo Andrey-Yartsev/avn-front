@@ -25,7 +25,7 @@
             >
               <div class="container">
                 <div class="cards-list">
-                  <div class="item visa" :class="getCardType(card)">
+                  <div class="cards-list__item visa" :class="getCardType(card)">
                     <span class="payment-system">
                       {{ ucFirst(getCardType(card)) }}
                     </span>
