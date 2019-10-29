@@ -11,7 +11,8 @@ const state = {
   offset: 0,
   allDataReceived: false,
   limit: 20,
-  posts: []
+  posts: [],
+  unreadCount: 0
 };
 
 const mutations = {
@@ -23,6 +24,7 @@ const mutations = {
     state.offset = 0;
     state.allDataReceived = false;
     state.limit = 20;
+    state.unreadCount = 0;
   },
   checkResult(state, items) {
     if (items.length < state.limit) {
@@ -31,17 +33,28 @@ const mutations = {
       state.offset = state.offset + state.limit;
     }
     // state.marker = marker;
+  },
+  setUnreadCount(state, count) {
+    state.unreadCount = count;
   }
 };
 
 const actions = {
   getPosts({ dispatch, commit, state }, params) {
-    params.type = params.type;
     params.offset = state.offset;
     params.marker = state.marker || "";
     params.limit = state.limit;
     dispatch("fetch", params).then(r => {
       commit("checkResult", r);
+      if (!r.unreadCount) {
+        dispatch(
+          "auth/extendUser",
+          { hasNotifications: false },
+          { root: true }
+        );
+      } else {
+        commit("setUnreadCount", r.unreadCount);
+      }
     });
   }
 };

@@ -46,6 +46,10 @@
           v-if="$mq === 'desktop'"
         />
       </div>
+      <div v-if="type === 'all'" class="unread-box">
+        <span>Unread (+99)</span>
+        <a href="#">Mark All as Read</a>
+      </div>
       <component
         :is="notificationView"
         :items="items"
@@ -226,7 +230,6 @@ export default {
   created() {
     this.$store.commit("notif/reset");
     this.$store.dispatch("notif/getPosts", { type: this.type }).then(() => {
-      this.$store.dispatch("auth/extendUser", { hasNotifications: false });
       this.initPostModals();
     });
   }

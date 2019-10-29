@@ -195,7 +195,7 @@ const actions = {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
-      if (r.list.length >= messagesLimit) {
+      if (r.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
     });
