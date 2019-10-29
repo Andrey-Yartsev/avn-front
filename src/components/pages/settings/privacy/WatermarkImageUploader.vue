@@ -10,7 +10,7 @@
         <div class="photo-label btn_fix-width">
           <label
             for="photo"
-            class="btn btn_fix-width btn_block border photo-btn"
+            class="btn btn_fix-width-sm btn_block border photo-btn"
           >
             {{ buttonTitle }}
             <input
