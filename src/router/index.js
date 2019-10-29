@@ -88,49 +88,6 @@ const AvnAwards = () =>
 const StreamObsPage = () =>
   import(/* webpackChunkName: "StreamObsPage" */ "@/components/pages/stream/obs/Index");
 
-// import HomePage from "@/components/pages/home/Index";
-// import ExplorePage from "@/components/pages/explore/Index";
-// import NotificationsPage from "@/components/pages/notification/Index";
-// import LoginPage from "@/components/pages/noAuth/Login";
-// import LogoutPage from "@/components/pages/noAuth/Logout";
-// import SignUpPage from "@/components/pages/noAuth/SignUp";
-// import ForgotPasswordPage from "@/components/pages/noAuth/ForgotPassword";
-// import SettingsDefaultPage from "@/components/pages/settings/default/Index";
-// import SettingsSecurityPage from "@/components/pages/settings/security/Index";
-// import SettingsNotificationPage from "@/components/pages/settings/notification/Index";
-// import SettingsPayoutsPage from "@/components/pages/settings/payouts/Index";
-// import SettingsPremiumLinksPage from "@/components/pages/settings/premiumLinks/Index";
-// import SettingsProductsPage from "@/components/pages/settings/products/Index";
-// import SettingsPaymentsPage from "@/components/pages/settings/payments/Index";
-// import SettingsCreditsPage from "@/components/pages/settings/credits/Index";
-// import SettingsAccountPage from "@/components/pages/settings/account/Index.vue";
-// import SettingsNominationPage from "@/components/pages/settings/nomination/Index.vue";
-// import SettingsStoryPage from "@/components/pages/settings/story/Index.vue";
-// import SettingsPrivacyPage from "@/components/pages/settings/privacy/Index.vue";
-// import SettingsReferralsPage from "@/components/pages/settings/referrals/Index.vue";
-// import SettingsTrialsPage from "@/components/pages/settings/trials/Index.vue";
-// import SettingsObsPage from "@/components/pages/settings/obs/Index.vue";
-// import W9 from "@/components/pages/settings/payouts/W9.vue";
-// import PostPage from "@/components/pages/post/Index";
-// import NotFoundPage from "@/components/pages/notFound/Index";
-// import Chat from "@/components/chat/Chat";
-// import ChatNewMessage from "@/components/chat/NewMessage";
-// import SearchPage from "@/components/pages/search/Index";
-// import StoryPage from "@/components/pages/story/Index";
-// import AddPostPage from "@/components/pages/addPost/Index";
-// import EditPostPage from "@/components/pages/editPost/Index";
-// import StreamPage from "@/components/pages/stream/Index";
-// import FollowersPage from "@/components/pages/followers/Index";
-// import LikesPage from "@/components/pages/likes/Index";
-// import SubscribersPage from "@/components/pages/subscribers/Index";
-// import StaticPage from "@/components/pages/static/Index";
-// import ContactsPage from "@/components/pages/static/Contacts";
-// import StatPage from "@/components/statistics/Page";
-// import HelpCenterArticlePage from "@/components/pages/helpCenter/Articles";
-// import HelpCenterSearchPage from "@/components/pages/helpCenter/Search";
-// import AvnAwards from "@/components/pages/awards/Index";
-// import StreamObsPage from "@/components/pages/stream/obs/Index";
-
 import Auth from "./auth";
 import Post from "./post";
 
