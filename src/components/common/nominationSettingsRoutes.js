@@ -22,10 +22,12 @@ export default user => {
     }
   } else {
     const a = {
+      name: "avn",
       path: "/avn_awards/nominations",
       title: "AVN Awards Pre-Nominations"
     };
     const b = {
+      name: "gayavn",
       path: "/gayvn_awards/nominations",
       title: "GayVN Awards Pre-Nominations"
     };
