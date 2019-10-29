@@ -100,6 +100,28 @@ w<template>
         </div>
       </div>
 
+      <div class="form-title tweet-posts-block border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Messaging
+          </span>
+        </div>
+        <div class="inner">
+          <span class="semi-transparent">
+            Allow chats from subscribers only
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="isStreamsTweet"
+              value="false"
+              v-model="localUser.isBlockMessagesFromNotSubscribers"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">
