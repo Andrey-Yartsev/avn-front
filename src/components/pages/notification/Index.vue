@@ -46,7 +46,10 @@
           v-if="$mq === 'desktop'"
         />
       </div>
-      <div v-if="type === 'all'" class="unread-box">
+      <div
+        v-if="type === 'all'"
+        class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
+      >
         <span>Unread (+99)</span>
         <a href="#">Mark All as Read</a>
       </div>

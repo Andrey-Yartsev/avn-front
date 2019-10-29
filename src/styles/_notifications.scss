@@ -170,20 +170,25 @@
   }
 
   .unread-box {
-    background: #fff;
-    border-radius: 20px;
-    border: 1px solid #CCC;
-    position: absolute;
-    bottom: 30px;
+    position: fixed;
     left: 0;
     right: 0;
-    width: 200px;
+    top: auto;
+    bottom: 0;
     z-index: 10;
-    padding: 10px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+    }
+
+    span, a {
+      display: inline-block;
+    }
 
     a {
-      display: inline-block;
-      margin-left: 5px;
+      margin-left: 20px;
     }
   }
 }

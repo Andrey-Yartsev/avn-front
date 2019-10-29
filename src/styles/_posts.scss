@@ -1249,10 +1249,13 @@
     }
   }
 
-  html:not(.profile-page) .scroll-top & {
+  &:not(.unread-box) {
+    
+    html:not(.profile-page) .scroll-top & {
 
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transform: translateY(-44px);
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        transform: translateY(-44px);
+      }
     }
   }
 
