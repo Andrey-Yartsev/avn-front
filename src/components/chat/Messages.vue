@@ -1,6 +1,8 @@
 <template>
   <div class="chat-section">
-    <div class="new-post-toast bg-gradient bg-gradient_standart show unread-box">
+    <div
+      class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
+    >
       <span>Unread (+99)</span><a href="#">Mark All as Read</a>
     </div>
     <div
