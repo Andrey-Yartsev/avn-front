@@ -5,7 +5,7 @@ import VueMq from "vue-mq";
 import PerfectScrollbar from "vue2-perfect-scrollbar";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueClipboard from "vue-clipboard2";
-import VeeValidate from "vee-validate";
+import VeeValidate, { Validator } from "vee-validate";
 import * as Sentry from "@sentry/browser";
 import * as SentryIntegrations from "@sentry/integrations";
 import VueObserveVisibility from "vue-observe-visibility";
@@ -15,12 +15,14 @@ import store from "@/store";
 import VueMask from "v-mask";
 import VTooltip from "v-tooltip";
 import BrowserStore from "store";
+import profileRoute from "@/router/profileRoute";
 
 import "unfetch/polyfill";
 import "url-search-params-polyfill";
 import "@/iconfont";
 
 import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
+import VueAnalytics from "vue-analytics";
 
 Vue.use(VueMask);
 
@@ -76,6 +78,24 @@ if (queryParams.auth_token) {
   BrowserStore.set("genderCategory", queryParams.gender);
   //window.history.pushState({}, document.title, window.location.pathname);
 }
+
+profileRoute(router);
+
+Vue.use(VueAnalytics, {
+  id: "UA-2521515-51",
+  router
+});
+
+Validator.extend("subscription-price", {
+  getMessage: () => "Required two numbers past the decimal",
+  validate: value => {
+    const m = value.toString().match(/^\d+\.(\d+)?$/);
+    if (!m) {
+      return true;
+    }
+    return m[1].length === 2;
+  }
+});
 
 const MyApp = new Vue({
   router,

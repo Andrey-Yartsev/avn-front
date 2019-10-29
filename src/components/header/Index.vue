@@ -14,8 +14,7 @@
     >
       <div :class="['container', 'header_container']">
         <DesktopHeader v-if="!notFound && $mq === 'desktop'" />
-        <component
-          :is="logo"
+        <Logo
           class="header-logo header-logo_size"
           :class="{ 'header-logo_center': $route.name === 'NotFound' }"
         />
@@ -109,7 +108,7 @@
                 </div>
                 <div class="auth-block-dropdown" v-if="opened">
                   <div class="auth-block-dropdown__inside">
-                    <component :is="logo" class="auth-logo header-logo_size" />
+                    <Logo class="auth-logo header-logo_size" />
                     <SignupForm type="dropdown" v-if="showSignup" />
                     <LoginForm
                       v-else
@@ -143,6 +142,7 @@ import SignupForm from "@/components/auth/SignupForm";
 import ClickOutside from "vue-click-outside";
 import Footer from "@/components/footer/Index.vue";
 import GenderFilter from "@/components/common/GenderFilter";
+import Logo from "@/components/common/Logo";
 
 export default {
   name: "Header",
@@ -161,7 +161,8 @@ export default {
     LoginForm,
     SignupForm,
     Footer,
-    GenderFilter
+    GenderFilter,
+    Logo
   },
   computed: {
     user() {
@@ -200,9 +201,6 @@ export default {
     showSignup() {
       return this.$store.state.common.headerSignup;
     },
-    logo() {
-      return "rl-logo";
-    },
     disabledButton() {
       return this.$route.meta.disabledAddPostButton;
     },
@@ -210,7 +208,10 @@ export default {
       if (this.$route.meta && this.$route.meta.notShowGenderFilter) {
         return false;
       }
-      return this.$route.name !== "StaticPage";
+      return (
+        this.$route.meta.cssName !== "staticPage" &&
+        this.$route.meta.cssName !== "support"
+      );
     }
   },
   methods: {

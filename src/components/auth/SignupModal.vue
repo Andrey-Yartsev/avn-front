@@ -2,7 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-login" slot="content">
       <div class="content content_relative">
-        <component :is="logo" class="auth-logo header-logo_size" />
+        <Logo class="auth-logo header-logo_size" />
         <SignupForm type="modal" @openLogin="_close" />
       </div>
       <button
@@ -23,13 +23,15 @@
 import Modal from "@/components/modal/Index";
 import SignupForm from "@/components/auth/SignupForm";
 import Footer from "@/components/footer/Index.vue";
+import Logo from "@/components/common/Logo";
 
 export default {
   name: "SignupModal",
   components: {
     Modal,
     SignupForm,
-    Footer
+    Footer,
+    Logo
   },
   computed: {
     disableClose() {
@@ -37,9 +39,6 @@ export default {
     },
     disableFooter() {
       return !!this.$store.state.modal.login.data.disableFooter;
-    },
-    logo() {
-      return "rl-logo";
     }
   },
   methods: {

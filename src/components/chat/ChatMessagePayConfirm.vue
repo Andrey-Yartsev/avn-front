@@ -13,7 +13,7 @@
             Pay to view
           </div>
           <div class="popup-alert__body">
-            You are opening snapchat for {{ data.price }}
+            You are opening message for {{ data.price }}
           </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
@@ -27,11 +27,11 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import PayAction from "./payAction";
+import PayAction from "../pages/settings/payments/payAction";
 import Loader from "@/components/common/Loader";
 
 export default {
-  name: "BuySnapchatConfirm",
+  name: "ChatMessagePayConfirm",
   mixins: [PayAction],
   components: {
     Modal,
@@ -39,21 +39,20 @@ export default {
   },
   computed: {
     data() {
-      return this.$store.state.modal.buySnapchatConfirm.data;
+      return this.$store.state.modal.chatMessagePayConfirm.data;
     }
   },
   methods: {
     yes() {
       const onSuccess = () => {
         this.close();
-        this.data.callback && this.data.callback();
       };
       const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
       this._pay(
         {
-          paymentType: this.data.paymentType,
+          paymentType: "message",
+          messageId: this.data.messageId,
           amount,
-          productId: this.data.productId,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
         onSuccess
@@ -64,7 +63,7 @@ export default {
     },
     close() {
       this.progress = false;
-      this.$store.commit("modal/hideSafe", { name: "buySnapchatConfirm" });
+      this.$store.commit("modal/hideSafe", { name: "chatMessagePayConfirm" });
     }
   }
 };

@@ -3,7 +3,7 @@
     <div class="login-wrapper promotion-models">
       <div class="login-caption-col">
         <div class="login-caption">
-          <component :is="logo" />
+          <Logo />
           <div class="promotion for-models alt-font" v-if="forModals">
             <p>80% Payouts Adult brand you can trust</p>
             <p>Offer free content or sell your content or both</p>
@@ -25,11 +25,13 @@
 
 <script>
 import Footer from "@/components/footer/Index";
+import Logo from "@/components/common/Logo";
 
 export default {
   name: "NoAuthLayout",
   components: {
-    Footer
+    Footer,
+    Logo
   },
   props: {
     mainClass: {
@@ -38,9 +40,6 @@ export default {
     }
   },
   computed: {
-    logo() {
-      return "rl-logo";
-    },
     forModals() {
       return !!this.$route.meta.forModels;
     }
