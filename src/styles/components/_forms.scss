@@ -1101,7 +1101,7 @@ select {
 .multiselect {
   min-height: 30px;
 
-  &__tags {
+  & &__tags {
     border: none;
     border-radius: 5px;
     background-color: rgba($gray, 0.1);
@@ -1127,7 +1127,7 @@ select {
     }
   }
 
-  &__select {
+  & &__select {
     width: 34px;
     height: 30px;
     top: auto;
@@ -1143,15 +1143,15 @@ select {
       opacity: .3;
       font-size: 24px;
       border: none;
-      transform: translate(-50%, calc(-50% - 3px));
+      transform: translate(-50%, -50%);
       margin: 0;
       color: $main-color;
       display: inline-block;
     }
   }
 
-  &__input,
-  &__single {
+  & &__input,
+  & &__single {
     background-color: transparent;
     padding: 0;
     margin: 0;
@@ -1164,7 +1164,7 @@ select {
     line-height: 18px;
     font-size: 15px;
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 0;
     padding: 0 10px;
     margin: 0;
@@ -1182,7 +1182,7 @@ select {
     }
   }
 
-  &__content {
+  & &__content {
 
     &-wrapper {
       border-color: rgba($gray, 0.1);
@@ -1231,11 +1231,11 @@ select {
     }
   }
 
-  &__placeholder {
+  & &__placeholder {
     padding-top: 0;
   }
 
-  &__tag {
+  & &__tag {
     background-color: $secondary-color;
     font-size: 14px;
     padding-top: 3px;
