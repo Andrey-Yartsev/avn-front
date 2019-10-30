@@ -1,0 +1,9 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "name": "AVN",
+  "short_name": "AVN",
+  "theme_color": "#ffffff",
+  "start_url": "https://stars.avn.com/",
+  "scope": "/"
+}
