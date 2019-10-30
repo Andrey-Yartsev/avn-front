@@ -115,7 +115,7 @@ w<template>
               type="checkbox"
               name="isStreamsTweet"
               value="false"
-              v-model="localUser.isBlockMessagesFromNotSubscribers"
+              v-model="localUser.isMsgFromSubscribersOnly"
             />
             <span class="toggle-element_switcher"></span>
           </label>
