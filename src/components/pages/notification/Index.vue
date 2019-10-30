@@ -47,10 +47,10 @@
         />
       </div>
       <div
-        v-if="type === 'all'"
+        v-if="type === 'all' && !!unreadCount"
         class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
       >
-        <span>Unread (+99)</span>
+        <span>Unread ({{ unreadCount > 100 ? "+99" : unreadCount }})</span>
         <a href="#">Mark All as Read</a>
       </div>
       <component
@@ -204,6 +204,9 @@ export default {
       return this.type === "all"
         ? NotificationMergedView
         : NotificationSingleView;
+    },
+    unreadCount() {
+      return this.$store.state.notif.unreadCount;
     }
   },
 

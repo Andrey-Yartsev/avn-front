@@ -52,9 +52,8 @@ const actions = {
           { hasNotifications: false },
           { root: true }
         );
-      } else {
-        commit("setUnreadCount", r.unreadCount);
       }
+      commit("setUnreadCount", r.unreadCount);
     });
   }
 };
