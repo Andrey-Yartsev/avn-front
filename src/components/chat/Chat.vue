@@ -205,6 +205,11 @@ export default {
         return;
       }
       this.$store.commit("chat/setActiveUserId", activeUserId);
+      this.$store.commit("chat/resetActiveUser");
+      this.$store.dispatch(
+        "chat/fetchFullActiveUser",
+        this.activeUser.username
+      );
       this.$store.commit("chat/resetMessages");
       this.fetchMessages();
     }
@@ -275,6 +280,11 @@ export default {
     this.$store.dispatch("chat/fetchChats", true).then(() => {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
+        this.$store.commit("chat/resetActiveUser");
+        this.$store.dispatch(
+          "chat/fetchFullActiveUser",
+          this.activeUser.username
+        );
         this.fetchMessages();
         if (!this.activeChat) {
           this.fetchLastMessage().then(() => {

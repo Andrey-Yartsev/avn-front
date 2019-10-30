@@ -157,7 +157,12 @@ const actions = {
   block({ commit, dispatch }, userId) {
     dispatch("user/block", userId, { root: true }).then(r => {
       if (r.success) {
-        commit("profile", { ...state.profile, isBlocked: true });
+        commit("profile", {
+          ...state.profile,
+          isBlocked: true,
+          followedOn: false,
+          subscribedOn: false
+        });
       }
     });
   },

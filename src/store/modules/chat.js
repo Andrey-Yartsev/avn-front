@@ -45,7 +45,12 @@ const actions = {
   blockUser({ commit, dispatch }, userId) {
     dispatch("user/block", userId, { root: true }).then(r => {
       if (r.success) {
-        commit("extendChatUser", { id: userId, isBlocked: true });
+        commit("extendChatUser", {
+          id: userId,
+          isBlocked: true,
+          followedOn: false,
+          subscribedOn: false
+        });
         commit(
           "search/page/extendUser",
           {
@@ -313,6 +318,14 @@ const mutations = {
       }
       return v;
     });
+    if (state.fetchFullActiveUserResult) {
+      if (state.fetchFullActiveUserResult.id === user.id) {
+        state.fetchFullActiveUserResult = {
+          ...state.fetchFullActiveUserResult,
+          ...user
+        };
+      }
+    }
   },
   removeChat(state, userId) {
     state.chats = state.chats.filter(chat => {
@@ -417,13 +430,14 @@ const mutations = {
       state.typing = state.typing.filter(v => v !== id);
     }
   },
-
   blockNewMessagesHandling(state, flag) {
     state.blockNewMessagesHandling = flag;
   },
-
   changeFontSize(state, isBigger) {
     isBigger ? state.fontSize++ : state.fontSize--;
+  },
+  resetActiveUser(state) {
+    state.fetchFullActiveUserResult = null;
   }
 };
 
@@ -685,6 +699,20 @@ createRequestAction({
     let p = path.replace(/{userId}/, params.userId);
     p = p.replace(/{messageId}/, params.messageId);
     return p;
+  }
+});
+
+createRequestAction({
+  prefix: "fetchFullActiveUser",
+  apiPath: "users/{username}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{username}/, params);
   }
 });
 

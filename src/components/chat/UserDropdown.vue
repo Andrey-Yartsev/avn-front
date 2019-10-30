@@ -26,14 +26,14 @@
           <li class="more-functions__item" v-if="userExists">
             <router-link
               class="profile-url more-functions__link"
-              :to="'/' + activeUser.username"
+              :to="'/' + _user.username"
               ><span class="more-functions__option"
                 >View profile</span
               ></router-link
             >
           </li>
           <template v-if="userExists">
-            <li class="more-functions__item" v-if="activeUser.isBlocked">
+            <li class="more-functions__item" v-if="_user.isBlocked">
               <a
                 class="menu-block more-functions__link"
                 @click="unblockActiveUser"
@@ -54,8 +54,8 @@
               </a>
             </li>
           </template>
-          <template v-if="userExists && _canMute(activeUser)">
-            <li class="more-functions__item" v-if="activeUser.isMuted">
+          <template v-if="userExists && _canMute(_user)">
+            <li class="more-functions__item" v-if="_user.isMuted">
               <a @click="unmuteActiveUser" class="more-functions__link">
                 <span class="more-functions__option">
                   Unmute user
@@ -133,6 +133,12 @@ export default {
   computed: {
     userExists() {
       return !!this.activeUser.id;
+    },
+    fullUser() {
+      return this.$store.state.chat.fetchFullActiveUserResult;
+    },
+    _user() {
+      return this.fullUser || this.activeUser;
     }
   },
   methods: {

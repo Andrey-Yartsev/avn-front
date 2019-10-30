@@ -101,7 +101,11 @@ actions.block = ({ commit, dispatch }, userId) => {
     if (r.success) {
       commit("extendUser", {
         userId,
-        data: { isBlocked: true }
+        data: {
+          isBlocked: true,
+          followedOn: false,
+          subscribedOn: false
+        }
       });
     }
   });
