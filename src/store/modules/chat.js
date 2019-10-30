@@ -640,6 +640,21 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "sendGroupMessage",
+  apiPath: "chats/recipients/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
   prefix: "sendMultiMessages",
   apiPath: "chats/bulk/messages",
   state,

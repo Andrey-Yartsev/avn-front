@@ -29,7 +29,7 @@
           <span class="icn-media icn-item icn-size_lg"></span>
         </label>
         <button
-          v-if="withUser && withUser.canEarn && $root.showTips"
+          v-if="withTips && withUser && withUser.canEarn && $root.showTips"
           class="tips btn-el"
           @click.prevent="showTip = !showTip"
           :class="{ active: showTip, disabled: showPaid }"
@@ -165,6 +165,10 @@ export default {
       default: false
     },
     withFontSizeController: {
+      type: Boolean,
+      default: true
+    },
+    withTips: {
       type: Boolean,
       default: true
     }

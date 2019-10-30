@@ -38,6 +38,7 @@
               @send="submit"
               :withUser="user"
               :withFontSizeController="false"
+              :withTips="false"
             />
           </div>
         </div>
@@ -75,12 +76,22 @@ export default {
       this.$store.dispatch("modal/hide", { name: "groupMessage" });
       this.$store.commit("profile/links/endEditLink");
     },
-    submit(data) {
+    async submit(data) {
       const body = {
         ...data,
-        type: this.subscriberType
+        recipients: this.subscriberType
       };
-      console.log(body);
+      try {
+        await this.$store.dispatch("chat/sendGroupMessage", body);
+        this.$store.commit("global/toastShowTrigger", {
+          text: "Group message has sent",
+          type: "success"
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.$store.dispatch("modal/hide", { name: "groupMessage" });
+      }
     }
   }
 };
