@@ -98,7 +98,10 @@
                   <span class="label icn-item">Expired</span>
                 </div>
               </label>
-              <button class="message-button" @click="openGroupMessageModal">
+              <button
+                class="btn btn_not-bold sm"
+                @click="openGroupMessageModal"
+              >
                 Send group message
               </button>
             </div>
