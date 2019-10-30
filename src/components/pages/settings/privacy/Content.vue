@@ -142,7 +142,7 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-        <div class="inner">
+        <!-- <div class="inner">
           <span class="semi-transparent">
             Tweet my live streams
           </span>
@@ -156,7 +156,7 @@ w<template>
             />
             <span class="toggle-element_switcher"></span>
           </label>
-        </div>
+        </div> -->
       </div>
       <div
         class="go-twitter-block shadow-block no-padding hidden-desktop"
