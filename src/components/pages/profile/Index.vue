@@ -368,7 +368,7 @@ export default {
     pageName() {
       this.scrollToTop();
       this.footerScrollAction();
-      if (this.pageName !== "links") {
+      if (this.pageName !== "links" && this.pageName !== "media") {
         this.initPosts();
       }
     },
