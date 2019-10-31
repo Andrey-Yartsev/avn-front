@@ -18,7 +18,9 @@
           class="add-media-input"
           :class="{ disabled: showTip || showPaid }"
           :disabled="disable"
-          v-if="multipleMedia ? true : !preloadedMedias.length ? true : false"
+          v-if="
+            multipleMedia ? canAddMedia : !preloadedMedias.length ? true : false
+          "
           v-tooltip="'Media'"
         >
           <input
@@ -39,6 +41,7 @@
         </button>
 
         <div
+          v-if="withInput"
           class="field-text-message"
           :class="{ disabled: showTip || showPaid, 'has-price': priceIsSet }"
         >
@@ -117,7 +120,7 @@
         <button
           class="getPaid btn-el"
           :class="{ active: showPaid, disabled: showTip }"
-          v-if="user.canEarn"
+          v-if="user.canEarn && withPrice"
           @click="showPaidForm"
           v-tooltip="'Price'"
         >
@@ -179,6 +182,18 @@ export default {
     multipleMedia: {
       type: Boolean,
       default: false
+    },
+    withInput: {
+      type: Boolean,
+      default: true
+    },
+    withPrice: {
+      type: Boolean,
+      default: true
+    },
+    maxMediaLength: {
+      type: Number,
+      default: null
     }
   },
 
@@ -194,6 +209,12 @@ export default {
   },
 
   computed: {
+    canAddMedia() {
+      return this.$props.maxMediaLength &&
+        this.preloadedMedias.length >= this.$props.maxMediaLength
+        ? false
+        : true;
+    },
     canSend() {
       if (this.showTip) {
         return false;

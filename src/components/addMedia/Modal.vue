@@ -13,12 +13,14 @@
               />
             </div>
             <AddMessageBox
-              @send="submitHandler"
+              @send="submit"
               :withUser="user"
               :withFontSizeController="false"
-              :textareaPlaceholder="textareaPlaceholder"
               :withTips="false"
+              :withPrice="false"
+              :withInput="false"
               :multipleMedia="true"
+              :maxMediaLength="3"
             />
           </div>
         </div>
@@ -37,14 +39,12 @@ export default {
     Modal,
     AddMessageBox
   },
-  data() {
-    return {
-      textareaPlaceholder: "Title"
-    };
-  },
   computed: {
     isEditMode() {
       return !!this.$store.state.profile.media.editedMedia;
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   methods: {
