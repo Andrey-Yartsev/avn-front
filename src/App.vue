@@ -36,6 +36,7 @@
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
       <GroupMessageModal v-if="this.$store.state.modal.groupMessage.show" />
       <AddLinkModal v-if="this.$store.state.modal.addLink.show" />
+      <AddMediaModal v-if="this.$store.state.modal.addMedia.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
       <StreamModal v-if="this.$store.state.modal.stream.show" />
       <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
@@ -110,6 +111,7 @@ import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/addPost/Modal";
 import GroupMessageModal from "@/components/groupMessage/Modal";
 import AddLinkModal from "@/components/addLink/Modal";
+import AddMediaModal from "@/components/addMedia/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
 import IframeModal from "@/components/modal/Iframe";
 import SubscribeModal from "@/components/subscription/SubscribeModal";
@@ -197,6 +199,7 @@ export default {
     StoryInput,
     AddPostModal,
     AddLinkModal,
+    AddMediaModal,
     GroupMessageModal,
     IframeModal,
     StreamModal,

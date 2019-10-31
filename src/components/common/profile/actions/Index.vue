@@ -36,6 +36,13 @@
             }}</span>
             <span class="label">Links</span>
           </router-link>
+          <router-link
+            class="btn-user-activity"
+            :to="`/${profile.username}/media`"
+          >
+            <span class="value">{{ 0 }}</span>
+            <span class="label">Media</span>
+          </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link

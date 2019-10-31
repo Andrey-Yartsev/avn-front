@@ -140,6 +140,10 @@
                 v-if="pageName === 'links'"
                 :private="isOwner(this.profile.id)"
               />
+              <MediaPage
+                v-else-if="pageName === 'media'"
+                :private="isOwner(this.profile.id)"
+              />
               <template v-else>
                 <p
                   :class="['empty-feed']"
@@ -232,6 +236,7 @@ import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
+import MediaPage from "@/components/common/profile/media/Index";
 
 export default {
   name: "ProfileHome",
@@ -252,7 +257,8 @@ export default {
     PrivateBlock,
     Highlights,
     LinkPost,
-    LinksPage
+    LinksPage,
+    MediaPage
   },
 
   data() {

@@ -40,6 +40,10 @@ const state = {
     show: false,
     data: {}
   },
+  addMedia: {
+    show: false,
+    data: {}
+  },
   groupMessage: {
     show: false,
     data: {}

@@ -3,6 +3,7 @@
 import UserApi from "@/api/user";
 import home from "./profile/home.js";
 import links from "./profile/links.js";
+import media from "./profile/media.js";
 
 const state = {
   loading: false,
@@ -178,6 +179,7 @@ export default {
   mutations,
   modules: {
     home,
-    links
+    links,
+    media
   }
 };

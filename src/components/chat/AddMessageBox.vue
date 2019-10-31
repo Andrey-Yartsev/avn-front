@@ -1,6 +1,8 @@
 <template>
   <div class="addChatMessage" :class="{ disabled: isMuted }">
-    <FontSizeControls />
+    <template v-if="withFontSizeController">
+      <FontSizeControls />
+    </template>
     <div class="addChatMessage__inside-section">
       <div class="addFileCollectionView" v-if="preloadedMedias.length">
         <MediaPreview
@@ -16,7 +18,7 @@
           class="add-media-input"
           :class="{ disabled: showTip || showPaid }"
           :disabled="disable"
-          v-if="!preloadedMedias.length"
+          v-if="multipleMedia ? true : !preloadedMedias.length ? true : false"
           v-tooltip="'Media'"
         >
           <input
@@ -27,7 +29,7 @@
           <span class="icn-media icn-item icn-size_lg"></span>
         </label>
         <button
-          v-if="withUser && withUser.canEarn && $root.showTips"
+          v-if="withTips && withUser && withUser.canEarn && $root.showTips"
           class="tips btn-el"
           @click.prevent="showTip = !showTip"
           :class="{ active: showTip, disabled: showPaid }"
@@ -45,7 +47,7 @@
             class="text-media-container rounded lg"
             rows="1"
             cols="60"
-            placeholder="Message"
+            :placeholder="textareaPlaceholder"
             maxlength="500"
             :minHeight="30"
             :maxHeight="100"
@@ -161,6 +163,22 @@ export default {
     disable: {
       type: Boolean,
       default: false
+    },
+    withFontSizeController: {
+      type: Boolean,
+      default: true
+    },
+    withTips: {
+      type: Boolean,
+      default: true
+    },
+    textareaPlaceholder: {
+      type: String,
+      default: "Message"
+    },
+    multipleMedia: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -182,6 +200,9 @@ export default {
       }
       if (this.uploadInProgress) {
         return false;
+      }
+      if (this.$props.multipleMedia) {
+        return this.preloadedMedias.length;
       }
       return this.message.trim() || this.preloadedMedias.length;
     },
@@ -237,7 +258,11 @@ export default {
         text: message
       };
       if (mediaFiles.length) {
-        opt.mediaFile = [{ id: mediaFiles[0].processId }];
+        if (this.$props.multipleMedia) {
+          opt.mediaFile = mediaFiles.map(item => ({ id: item.processId }));
+        } else {
+          opt.mediaFile = [{ id: mediaFiles[0].processId }];
+        }
       }
       this.price = "";
       this.priceIsSet = false;

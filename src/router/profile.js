@@ -9,7 +9,10 @@ const Profile = {
       const username = to.params.username.toLowerCase();
       const page = to.params.page;
 
-      if (page && ["photos", "videos", "posts", "links"].indexOf(page) === -1) {
+      if (
+        page &&
+        ["photos", "videos", "posts", "links", "media"].indexOf(page) === -1
+      ) {
         next("/not-found");
         return;
       }
