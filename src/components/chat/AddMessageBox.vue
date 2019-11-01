@@ -79,7 +79,7 @@
           v-if="showPaid"
           key="paidPrice"
         >
-          <button class="cancelPaid btn btn-cancel" @click="showPaid = false">
+          <button class="cancelPaid btn btn-cancel" @click="cancelPriceHandler">
             Cancel
           </button>
           <input type="hidden" name="priceAmount" class="getPaidAmount" />
@@ -303,6 +303,12 @@ export default {
         typing_to: this.withUser.id,
         typing_from_name: this.user.name,
         typing_from_id: this.user.id
+      });
+    },
+    cancelPriceHandler() {
+      this.showPaid = false;
+      this.$nextTick(() => {
+        this.resetPrice();
       });
     }
   }
