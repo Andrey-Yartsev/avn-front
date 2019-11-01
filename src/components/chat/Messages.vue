@@ -237,12 +237,13 @@ export default {
     typing() {
       return this.$store.state.chat.typing.indexOf(this.withUser.id) !== -1;
     },
+    currentChat() {
+      return this.$store.state.chat.chats.find(
+        v => v.withUser.id === this.withUser.id
+      );
+    },
     unreadMessagesCount() {
-      const n = this.$store.state.chat.unreadMessagesCount;
-      if (!n) {
-        return null;
-      }
-      return n < 100 ? n : "99+";
+      return this.currentChat.unreadMessagesCount;
     }
   },
 

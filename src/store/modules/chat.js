@@ -21,8 +21,7 @@ const state = {
   moreChatsLoading: false,
   typing: [],
   fontSize: 14,
-  blockNewMessagesHandling: false,
-  unreadMessagesCount: 0
+  blockNewMessagesHandling: false
 };
 
 let markAsReadId = 0;
@@ -195,8 +194,13 @@ const actions = {
   fetchMessages({ dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
-      dispatch("markChatAsViewed", activeUserId);
-      commit("setUnreadMessagesCount", r.unreadMessagesCount);
+      // dispatch("markChatAsViewed", activeUserId);
+      // console.log(r.unreadMessagesCount);
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId: activeUserId
+      });
+      // commit("setUnreadMessagesCount", r.unreadMessagesCount);
       if (r.list.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
@@ -210,7 +214,11 @@ const actions = {
   fetchMoreMessages({ dispatch, commit, state }, userId) {
     commit("fetchingOld", true);
     dispatch("_fetchMoreMessages", { userId }).then(r => {
-      commit("setUnreadMessagesCount", r.unreadMessagesCount);
+      // commit("setUnreadMessagesCount", r.unreadMessagesCount);
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId
+      });
       if (!state.moreMessages.length) {
         commit("allMessagesLoaded", true);
         return;
@@ -227,8 +235,8 @@ const actions = {
       commit("removeChat", userId);
     });
   },
-  markChatAsViewed({ commit, dispatch }, userId) {
-    commit("resetUnreadMessagesCount", userId);
+  markChatAsViewed({ dispatch }) {
+    // commit("resetUnreadMessagesCount", userId);
     dispatch("updateHasMessages");
   },
   updateHasMessages({ dispatch, state, rootState }) {
@@ -341,6 +349,14 @@ const mutations = {
       this._vm
     );
   },
+  updateUnreadMessagesCount(state, { unreadMessagesCount, userId }) {
+    state.chats = arrayUtils.modifyByCondition(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => (chat.unreadMessagesCount = unreadMessagesCount),
+      this._vm
+    );
+  },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
     //Search chat with User from message and update lastMessage
     state.chats = arrayUtils.updateByCondition(
@@ -425,9 +441,6 @@ const mutations = {
   },
   changeFontSize(state, isBigger) {
     isBigger ? state.fontSize++ : state.fontSize--;
-  },
-  setUnreadMessagesCount(state, unreadMessagesCount) {
-    state.unreadMessagesCount = unreadMessagesCount;
   }
 };
 

@@ -4,13 +4,15 @@ import { createRequestAction } from "../utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 import postModal from "./notif/postModal";
 
+const limit = 5;
+
 const state = {
   type: "",
   loading: false,
   marker: null,
   offset: 0,
   allDataReceived: false,
-  limit: 20,
+  limit,
   posts: [],
   unreadCount: 0
 };
@@ -23,7 +25,7 @@ const mutations = {
     state.marker = null;
     state.offset = 0;
     state.allDataReceived = false;
-    state.limit = 20;
+    state.limit = limit;
     state.unreadCount = 0;
   },
   checkResult(state, items) {
