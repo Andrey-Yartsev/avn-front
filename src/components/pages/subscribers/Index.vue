@@ -105,7 +105,11 @@
               <div class="rounded-container">
                 <div class="SubscribersBlockCollectionView settings-wrapper">
                   <div
-                    class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                    class="form-title"
+                    :class="{
+                      'table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo':
+                        $mq === 'desktop'
+                    }"
                   >
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
@@ -114,7 +118,7 @@
                         >
                       </div>
                     </div>
-                    <div class="table-header referrals-table-header">
+                    <div class="table-header">
                       <div class="user table__cell">
                         User
                       </div>
