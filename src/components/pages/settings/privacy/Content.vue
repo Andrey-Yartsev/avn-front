@@ -100,7 +100,7 @@ w<template>
         </div>
       </div>
 
-      <!-- <div class="form-title tweet-posts-block border-top">
+      <div class="form-title tweet-posts-block border-top">
         <div class="inner">
           <span class="semi-transparent">
             Messaging
@@ -120,7 +120,7 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-      </div> -->
+      </div>
 
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
@@ -164,7 +164,7 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-        <!-- <div class="inner">
+        <div class="inner">
           <span class="semi-transparent">
             Tweet my live streams
           </span>
@@ -178,7 +178,7 @@ w<template>
             />
             <span class="toggle-element_switcher"></span>
           </label>
-        </div> -->
+        </div>
       </div>
       <div
         class="go-twitter-block shadow-block no-padding hidden-desktop"
