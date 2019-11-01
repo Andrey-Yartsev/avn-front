@@ -492,9 +492,6 @@ createRequestAction({
       offset: params
     };
     return options;
-  },
-  resultConvert: function(res) {
-    return res.list || [];
   }
 });
 
@@ -515,9 +512,6 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.query = { query: params };
     return options;
-  },
-  resultConvert: function(res) {
-    return res.list || [];
   }
 });
 
