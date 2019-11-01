@@ -1241,15 +1241,15 @@
     top: 50px;
   }
 
-  .profile-page & {
-    top: 94px;
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      top: 140px;
-    }
-  }
-
   &:not(.unread-box) {
+
+    .profile-page & {
+      top: 94px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: 140px;
+      }
+    }
     
     html:not(.profile-page) .scroll-top & {
 
