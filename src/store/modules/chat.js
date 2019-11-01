@@ -478,6 +478,9 @@ createRequestAction({
       offset: params
     };
     return options;
+  },
+  resultConvert: function(res) {
+    return res.list;
   }
 });
 
