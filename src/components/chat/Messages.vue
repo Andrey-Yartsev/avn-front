@@ -1,9 +1,11 @@
 <template>
   <div class="chat-section">
     <div
+      v-if="unreadMessagesCount"
       class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
     >
-      <span>Unread (+99)</span><a href="#">Mark All as Read</a>
+      <span>Unread ({{ unreadMessagesCount }})</span
+      ><a href="#">Mark All as Read</a>
     </div>
     <div
       class="loader-container loader-container_center"
@@ -234,6 +236,13 @@ export default {
     },
     typing() {
       return this.$store.state.chat.typing.indexOf(this.withUser.id) !== -1;
+    },
+    unreadMessagesCount() {
+      const n = this.$store.state.chat.unreadMessagesCount;
+      if (!n) {
+        return null;
+      }
+      return n < 100 ? n : "99+";
     }
   },
 
@@ -570,6 +579,9 @@ export default {
     },
     fetchMoreMessages() {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
+    },
+    markAllAsRead() {
+      this.$store.dispatch("chat/markAllMessagesAsRead", this.withUser.id);
     }
   },
   mounted() {

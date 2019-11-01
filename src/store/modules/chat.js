@@ -3,7 +3,7 @@
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 
-const messagesLimit = 50;
+const messagesLimit = 3;
 const chatsLimit = 20;
 
 const state = {
@@ -21,7 +21,8 @@ const state = {
   moreChatsLoading: false,
   typing: [],
   fontSize: 14,
-  blockNewMessagesHandling: false
+  blockNewMessagesHandling: false,
+  unreadMessagesCount: 0
 };
 
 let markAsReadId = 0;
@@ -195,7 +196,8 @@ const actions = {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
       dispatch("markChatAsViewed", activeUserId);
-      if (r.length >= messagesLimit) {
+      commit("setUnreadMessagesCount", r.unreadMessagesCount);
+      if (r.list.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
     });
@@ -207,7 +209,8 @@ const actions = {
   },
   fetchMoreMessages({ dispatch, commit, state }, userId) {
     commit("fetchingOld", true);
-    dispatch("_fetchMoreMessages", { userId }).then(() => {
+    dispatch("_fetchMoreMessages", { userId }).then(r => {
+      commit("setUnreadMessagesCount", r.unreadMessagesCount);
       if (!state.moreMessages.length) {
         commit("allMessagesLoaded", true);
         return;
@@ -417,13 +420,14 @@ const mutations = {
       state.typing = state.typing.filter(v => v !== id);
     }
   },
-
   blockNewMessagesHandling(state, flag) {
     state.blockNewMessagesHandling = flag;
   },
-
   changeFontSize(state, isBigger) {
     isBigger ? state.fontSize++ : state.fontSize--;
+  },
+  setUnreadMessagesCount(state, unreadMessagesCount) {
+    state.unreadMessagesCount = unreadMessagesCount;
   }
 };
 
