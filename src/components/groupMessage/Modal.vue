@@ -91,7 +91,10 @@ export default {
           type: "success"
         });
       } catch (err) {
-        console.log(err);
+        this.$store.commit("global/toastShowTrigger", {
+          text: err.message,
+          type: "warning"
+        });
       } finally {
         this.$store.dispatch("modal/hide", { name: "groupMessage" });
       }
