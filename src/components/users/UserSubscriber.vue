@@ -23,17 +23,27 @@
       <!-- {{ profile.subscriber.username }} -->
     </div>
     <div
-      class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c" data-title="Amount"
+      class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
+      data-title="Amount"
     >
       ${{ profile.price }}
     </div>
-    <div class="status table__cell table__cell_align table__cell_align-hor-c" data-title="Status">
+    <div
+      class="status table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Status"
+    >
       {{ profile.active ? "Active" : "Expired" }}
     </div>
-    <div class="joined table__cell table__cell_align table__cell_align-hor-c" data-title="Joined">
+    <div
+      class="joined table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Joined"
+    >
       {{ messageTime(profile.sinceDate) }}
     </div>
-    <div class="canceled table__cell table__cell_align table__cell_align-hor-c" data-title="Canceled">
+    <div
+      class="canceled table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Canceled"
+    >
       {{ messageTime(profile.expireDate) }}
     </div>
   </div>
