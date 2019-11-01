@@ -281,10 +281,12 @@ export default {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.$store.commit("chat/resetActiveUser");
-        this.$store.dispatch(
-          "chat/fetchFullActiveUser",
-          this.activeUser.username
-        );
+        if (this.activeUser) {
+          this.$store.dispatch(
+            "chat/fetchFullActiveUser",
+            this.activeUser.username
+          );
+        }
         this.fetchMessages();
         if (!this.activeChat) {
           this.fetchLastMessage().then(() => {
