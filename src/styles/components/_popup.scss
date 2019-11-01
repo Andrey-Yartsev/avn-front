@@ -905,7 +905,7 @@
   .popup-container_hfluid & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-height: calc(100vh - 96px);
+      max-height: calc(100vh - 116px);
       height: auto;
     }
 
