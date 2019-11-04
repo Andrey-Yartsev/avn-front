@@ -45,6 +45,9 @@ export default {
       const validLength = validFiles.length;
 
       if (validLength < innerLength) {
+        if (!e.target.multiple) {
+          e.target.value = "";
+        }
         this.toast("Media of that type can not be added at this time");
       }
 
