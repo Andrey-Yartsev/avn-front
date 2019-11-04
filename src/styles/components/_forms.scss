@@ -1300,11 +1300,16 @@ select {
 .watermarks-settings  {
 
   .form-group_with-label {
-    padding-bottom: 4px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 0;
-      margin-bottom: 30px;
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-bottom: 4px;
+    }
+
+    &:not(:last-child) {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 30px;
+      }
     }
   }
 }
