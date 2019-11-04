@@ -14,7 +14,8 @@
                 <h1 class="popup__header">Choose reason</h1>
                 <div class="reasons__content bg-gradient_light">
                   <div class="form-group radio-group radio-group_no-gaps">
-                    <label class="form-group-inner"
+                    <label
+                      class="form-group-inner"
                       :class="{ 'no-border-line': $mq === 'mobile' }"
                     >
                       <div class="radio-wrapper icn-item">
@@ -29,7 +30,8 @@
                         >
                       </div>
                     </label>
-                    <label class="form-group-inner"
+                    <label
+                      class="form-group-inner"
                       :class="{ 'no-border-line': $mq === 'mobile' }"
                     >
                       <div class="radio-wrapper icn-item">
@@ -44,7 +46,8 @@
                         >
                       </div>
                     </label>
-                    <label class="form-group-inner"
+                    <label
+                      class="form-group-inner"
                       :class="{ 'no-border-line': $mq === 'mobile' }"
                     >
                       <div class="radio-wrapper icn-item">
