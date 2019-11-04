@@ -104,11 +104,9 @@ w<template>
         <div class="inner">
           <span class="semi-transparent">
             Messaging
-          </span>
-        </div>
-        <div class="inner">
-          <span class="semi-transparent">
-            Allow chats from subscribers only
+            <p class="subtext">
+              Allow chats from subscribers only
+            </p>
           </span>
           <label class="toggle-element">
             <input
