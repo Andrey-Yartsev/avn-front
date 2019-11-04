@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="popup-container popup-massmes">
         <div class="content content_relative">
-          <div class="popup__header">
+          <div class="popup__header m-underline-border">
             Send message to {{ subscriberType }} subscribers
           </div>
           <div class="popup__content">

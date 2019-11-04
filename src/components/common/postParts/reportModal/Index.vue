@@ -11,39 +11,36 @@
                 @click="this.close"
               />
               <form>
-                <h1 class="form-title">Choose reason</h1>
-                <div class="shadow-block">
-                  <div class="container">
-                    <div class="form-group form-group_with-label radio-group">
-                      <label
-                        class="form-group-inner"
-                        v-for="reason in reasons"
-                        :key="reason.id"
-                      >
-                        <div class="radio-wrapper icn-item">
-                          <input
-                            type="radio"
-                            name="reason"
-                            :value="reason.id"
-                            @click="reasonId = reason.id"
-                          />
-                          <span class="label">{{ reason.name }}</span>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="container">
-                  <div class="form-group form-group_with-label">
-                    <button
-                      type="submit"
-                      id="send-report"
-                      class="btn lg btn_fix-width saveChanges"
-                      @click="sendReport"
-                      :disabled="!reasonId"
+                <h1 class="popup__header">Choose reason</h1>
+                <div class="reasons__content bg-gradient_light">
+                  <div class="form-group radio-group radio-group_no-gaps">
+                    <label
+                      class="form-group-inner"
+                      v-for="reason in reasons"
+                      :key="reason.id"
+                      :class="{ 'no-border-line': $mq === 'mobile' }"
                     >
-                      Report
-                    </button>
+                      <div class="radio-wrapper icn-item">
+                        <input
+                          type="radio"
+                          name="reason"
+                          :value="reason.id"
+                          @click="reasonId = reason.id"
+                        />
+                        <span class="label">{{ reason.name }}</span>
+                      </div>
+                    </label>
+                    <div class="form-group">
+                      <button
+                        type="submit"
+                        id="send-report"
+                        class="btn btn_fix-width-all-w saveChanges"
+                        @click="sendReport"
+                        :disabled="!reasonId"
+                      >
+                        Report
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>

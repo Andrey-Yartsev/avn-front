@@ -11,58 +11,61 @@
                 @click="close"
               />
               <form v-on:submit.stop.prevent="report">
-                <h1 class="form-title">Choose reason</h1>
-                <div class="shadow-block">
-                  <div class="container">
-                    <div class="form-group form-group_with-label radio-group">
-                      <label class="form-group-inner">
-                        <div class="radio-wrapper icn-item">
-                          <input
-                            type="radio"
-                            name="reason"
-                            value="4"
-                            v-model="reason"
-                          />
-                          <span class="label"
-                            >This profile posts violent or offensive
-                            content</span
-                          >
-                        </div>
-                      </label>
-                      <label class="form-group-inner">
-                        <div class="radio-wrapper icn-item">
-                          <input
-                            type="radio"
-                            name="reason"
-                            value="5"
-                            v-model="reason"
-                          />
-                          <span class="label"
-                            >This profile uses my personal data</span
-                          >
-                        </div>
-                      </label>
-                      <label class="form-group-inner">
-                        <div class="radio-wrapper icn-item">
-                          <input
-                            type="radio"
-                            name="reason"
-                            value="6"
-                            v-model="reason"
-                          />
-                          <span class="label"
-                            >This profile uses personal data from someone I
-                            know</span
-                          >
-                        </div>
-                      </label>
-                    </div>
-                    <div class="form-group form-group_with-label">
+                <h1 class="popup__header">Choose reason</h1>
+                <div class="reasons__content bg-gradient_light">
+                  <div class="form-group radio-group radio-group_no-gaps">
+                    <label class="form-group-inner"
+                      :class="{ 'no-border-line': $mq === 'mobile' }"
+                    >
+                      <div class="radio-wrapper icn-item">
+                        <input
+                          type="radio"
+                          name="reason"
+                          value="4"
+                          v-model="reason"
+                        />
+                        <span class="label"
+                          >This profile posts violent or offensive content</span
+                        >
+                      </div>
+                    </label>
+                    <label class="form-group-inner"
+                      :class="{ 'no-border-line': $mq === 'mobile' }"
+                    >
+                      <div class="radio-wrapper icn-item">
+                        <input
+                          type="radio"
+                          name="reason"
+                          value="5"
+                          v-model="reason"
+                        />
+                        <span class="label"
+                          >This profile uses my personal data</span
+                        >
+                      </div>
+                    </label>
+                    <label class="form-group-inner"
+                      :class="{ 'no-border-line': $mq === 'mobile' }"
+                    >
+                      <div class="radio-wrapper icn-item">
+                        <input
+                          type="radio"
+                          name="reason"
+                          value="6"
+                          v-model="reason"
+                        />
+                        <span class="label"
+                          >This profile uses personal data from someone I
+                          know</span
+                        >
+                      </div>
+                    </label>
+                    <div class="form-group">
                       <button
                         :disabled="!reason"
                         type="submit"
                         id="send-report"
-                        class="btn btn_form-gap lg btn_fix-width saveChanges"
+                        class="btn btn_fix-width-all-w saveChanges"
                       >
                         Report
                       </button>

@@ -48,10 +48,14 @@
 
   &__header {
     padding: 20px 0;
-    margin: 0 20px 20px;
-    border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+    margin: 0 20px;
     font-weight: 500;
     font-size: 17px;
+
+    &.m-underline-border {
+      border-bottom: 1px solid rgba(124, 139, 150, 0.2);
+      margin-bottom: 20px;
+    }
   }
 
   &__content {
@@ -379,10 +383,9 @@
   }
 
   &.popup-reasons {
-    max-width: 300px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      max-width: 450px;
+      max-width: 429px;
     }
   }
 
