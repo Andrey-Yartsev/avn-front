@@ -203,7 +203,8 @@ export default {
       this.searchId = setTimeout(() => {
         this.$store.dispatch("search/bubble/search", {
           type: this.type,
-          query: this.localQuery
+          query: this.localQuery,
+          strip_tags: 1
         });
       }, 200);
     },
