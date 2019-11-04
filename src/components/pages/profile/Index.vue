@@ -8,7 +8,7 @@
       to="/addPost"
       v-if="isAuth() && $mq === 'mobile'"
     />
-    <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
+    <HeaderControl :profile="profile" v-if="$mq === 'mobile' && isAuth()" />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" />
       <div class="profile-images">
