@@ -170,6 +170,47 @@
   }
 }
 
+.unread-box {
+  z-index: 10;
+  left: 0;
+  right: 0;
+
+  .notifications-container & {
+    position: fixed;
+    top: auto;
+    bottom: -1px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 0;
+    }
+  }
+
+  .chat-section & {
+    position: absolute;
+    top: 0;
+  }
+
+  &.new-post-toast {
+    cursor: default;
+
+    span, a {
+      display: inline-block;
+    }
+  }
+
+  span {
+    color: $main-color;
+    opacity: .5;
+  }
+
+  a {
+    margin-left: 20px;
+  }
+}
+
 .notifications {
 
   .no-notifications & {

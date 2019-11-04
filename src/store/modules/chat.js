@@ -199,7 +199,10 @@ const actions = {
   fetchMessages({ dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
-      dispatch("markChatAsViewed", activeUserId);
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId: activeUserId
+      });
       if (r.list.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
@@ -212,7 +215,11 @@ const actions = {
   },
   fetchMoreMessages({ dispatch, commit, state }, userId) {
     commit("fetchingOld", true);
-    dispatch("_fetchMoreMessages", { userId }).then(() => {
+    dispatch("_fetchMoreMessages", { userId }).then(r => {
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId
+      });
       if (!state.moreMessages.length) {
         commit("allMessagesLoaded", true);
         return;
@@ -224,13 +231,20 @@ const actions = {
       commit("addOldMessages");
     });
   },
+  markAllMessagesAsRead({ dispatch, commit }, userId) {
+    dispatch("_markAllMessagesAsRead", userId).then(() => {
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: 0,
+        userId
+      });
+    });
+  },
   delete({ dispatch, commit }, userId) {
     dispatch("_delete", userId).then(() => {
       commit("removeChat", userId);
     });
   },
-  markChatAsViewed({ commit, dispatch }, userId) {
-    commit("resetUnreadMessagesCount", userId);
+  markChatAsViewed({ dispatch }) {
     dispatch("updateHasMessages");
   },
   updateHasMessages({ dispatch, state, rootState }) {
@@ -348,6 +362,14 @@ const mutations = {
       state.chats,
       chat => chat.withUser.id === userId,
       chat => (chat.unreadMessagesCount = 0),
+      this._vm
+    );
+  },
+  updateUnreadMessagesCount(state, { unreadMessagesCount, userId }) {
+    state.chats = arrayUtils.modifyByCondition(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => (chat.unreadMessagesCount = unreadMessagesCount),
       this._vm
     );
   },
@@ -736,6 +758,20 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{username}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "_markAllMessagesAsRead",
+  apiPath: "chats/{userId}/messages-read",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
   }
 });
 
