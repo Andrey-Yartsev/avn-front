@@ -219,34 +219,31 @@
     }
   }
 
-  .media {
+  .stream-events {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
 
-    .stream-events {
+
+    .comments-list-scrolling {
+      color: #fff;
+      text-shadow: 0 0 5px #000;
+      font-size: 14px;
+    }
+
+    .avatar {
+      z-index: 0;
+    }
+
+    .likesContainer {
       position: absolute;
-      bottom: 15px;
-      left: 15px;
+      top: 10px;
+      left: 0;
+      right: 0;
 
-
-      .comments-list-scrolling {
-        color: #fff;
-        text-shadow: 0 0 5px #000;
-        font-size: 14px;
-      }
-
-      .avatar {
-        z-index: 0;
-      }
-
-      .likesContainer {
-        position: absolute;
-        top: 10px;
-        left: 0;
-        right: 0;
-
-        .like {
-          bottom: -7px;
-          left: 73px;
-        }
+      .like {
+        bottom: -7px;
+        left: 73px;
       }
     }
   }
