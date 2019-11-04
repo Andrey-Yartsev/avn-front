@@ -4,7 +4,7 @@ import { createRequestAction } from "../utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 import postModal from "./notif/postModal";
 
-const limit = 5;
+const limit = 20;
 
 const state = {
   type: "",
@@ -57,6 +57,12 @@ const actions = {
       }
       commit("setUnreadCount", r.unreadCount);
     });
+  },
+  markAllAsRead({ dispatch, commit }) {
+    dispatch("_markAllAsRead").then(() => {
+      commit("setUnreadCount", 0);
+      dispatch("auth/extendUser", { hasNotifications: false }, { root: true });
+    });
   }
 };
 
@@ -83,6 +89,16 @@ createRequestAction({
   },
   resultConvert: function(result, state) {
     return [...state.posts, ...result.list];
+  }
+});
+createRequestAction({
+  prefix: "_markAllAsRead",
+  apiPath: "users/notifications-read",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
   }
 });
 

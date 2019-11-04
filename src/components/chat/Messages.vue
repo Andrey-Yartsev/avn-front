@@ -5,7 +5,7 @@
       class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
     >
       <span>Unread ({{ unreadMessagesCount }})</span
-      ><a href="#">Mark All as Read</a>
+      ><a href="#" @click.prevent="markAllAsRead">Mark All as Read</a>
     </div>
     <div
       class="loader-container loader-container_center"
@@ -243,6 +243,9 @@ export default {
       );
     },
     unreadMessagesCount() {
+      if (!this.currentChat) {
+        return null;
+      }
       return this.currentChat.unreadMessagesCount;
     }
   },

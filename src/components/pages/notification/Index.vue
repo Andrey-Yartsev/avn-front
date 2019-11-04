@@ -51,7 +51,7 @@
         class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
       >
         <span>Unread ({{ unreadCount > 100 ? "+99" : unreadCount }})</span>
-        <a href="#">Mark All as Read</a>
+        <a href="#" @click.prevent="markAllAsRead">Mark All as Read</a>
       </div>
       <component
         :is="notificationView"
@@ -222,7 +222,10 @@ export default {
         this.infinityScrollGetDataMethod();
       }
     },
-    initPostModals() {}
+    initPostModals() {},
+    markAllAsRead() {
+      this.$store.dispatch("notif/markAllAsRead");
+    }
   },
 
   watch: {

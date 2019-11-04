@@ -3,7 +3,7 @@
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 
-const messagesLimit = 3;
+const messagesLimit = 50;
 const chatsLimit = 20;
 
 const state = {
@@ -228,6 +228,14 @@ const actions = {
       }
       commit("incrementMessagesOffset", state.moreMessages.length);
       commit("addOldMessages");
+    });
+  },
+  markAllMessagesAsRead({ dispatch, commit }, userId) {
+    dispatch("_markAllMessagesAsRead", userId).then(() => {
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: 0,
+        userId
+      });
     });
   },
   delete({ dispatch, commit }, userId) {
@@ -705,6 +713,20 @@ createRequestAction({
     let p = path.replace(/{userId}/, params.userId);
     p = p.replace(/{messageId}/, params.messageId);
     return p;
+  }
+});
+
+createRequestAction({
+  prefix: "_markAllMessagesAsRead",
+  apiPath: "chats/{userId}/messages-read",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
   }
 });
 
