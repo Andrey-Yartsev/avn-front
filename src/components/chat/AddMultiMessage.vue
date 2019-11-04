@@ -1,5 +1,9 @@
 <template>
-  <AddMessageBox @send="sendMessage" :disable="disable" />
+  <AddMessageBox
+    @send="sendMessage"
+    :disable="disable"
+    :withFontSizeController="false"
+  />
 </template>
 
 <script>
