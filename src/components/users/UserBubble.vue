@@ -30,7 +30,10 @@
           <img v-if="profile.header" :src="profile.header" />
         </div>
         <div class="user-container">
-          <div class="avatar avatar_md avatar_md-desk">
+          <div
+            class="avatar avatar_md avatar_md-desk"
+            :class="{ 'online-state': isOnline(profile.id) }"
+          >
             <span
               class="avatar__img"
               :class="{ 'with-story': profile.hasNotViewedStory }"
@@ -76,9 +79,11 @@
 <script>
 import Loader from "@/components/common/Loader";
 import Bubble from "@/helpers/userBubble";
+import User from "@/mixins/user";
 
 export default {
   name: "UserBubble",
+  mixins: [User],
   components: {
     Loader
   },
