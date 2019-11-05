@@ -84,7 +84,9 @@
                       v-for="user in viewers"
                       :key="user.id"
                     >
-                      <span class="avatar avatar_gap-r-sm avatar_sm">
+                      <span class="avatar avatar_gap-r-sm avatar_sm"
+                        :class="{ 'online-state': isOnline(user.id) }"
+                      >
                         <span class="avatar__img">
                           <img v-if="user.avatar" :src="user.avatar" />
                         </span>
@@ -135,9 +137,11 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import Modal from "@/components/modal/Index";
+import User from "@/mixins/user";
 
 export default {
   name: "StoryViewers",
+  mixins: [User],
   components: {
     Modal
   },
