@@ -113,7 +113,7 @@ import {
 } from "@/utils/mediaFiles";
 
 export default {
-  name: "CreateModal",
+  name: "StoryCreateModal",
   mixins: [userMixin],
   data: () => ({
     showPreview: false,
@@ -137,6 +137,9 @@ export default {
   methods: {
     close(e) {
       e.preventDefault();
+      this._close();
+    },
+    _close() {
       this.$store.dispatch("modal/hide", { name: "createStory" });
     },
     chooseFileEvent: async function() {
@@ -176,20 +179,25 @@ export default {
     createNewStory: async function() {
       this.stopPreviewVideo();
       this.showLoader = true;
-      const { processId } = await fileUpload(
-        { id: "story", file: this.file },
-        () => {}
-      );
+      fileUpload({ id: "story", file: this.file }, () => {})
+        .then(({ processId }) => {
+          const newStoryData = {
+            fitTypes: [],
+            mediaFiles: [{ id: processId }]
+          };
 
-      const newStoryData = {
-        fitTypes: [],
-        mediaFiles: [{ id: processId }]
-      };
-
-      this.$store.dispatch("story/savePost", {
-        data: newStoryData,
-        userId: this.user.id
-      });
+          this.$store.dispatch("story/savePost", {
+            data: newStoryData,
+            userId: this.user.id
+          });
+        })
+        .catch(err => {
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+          this._close();
+        });
     },
 
     playPreviewVideo: function() {

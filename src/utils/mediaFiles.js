@@ -254,7 +254,16 @@ export const fileUpload = (
           thumbs
         });
       } else {
-        reject(true);
+        try {
+          const r = JSON.parse(xhr.response);
+          if (r.error) {
+            reject(r.error);
+          } else {
+            reject({ message: "Error on upload" });
+          }
+        } catch (e) {
+          reject({ message: "Error on upload" });
+        }
       }
     };
     xhr.onabort = () => {
