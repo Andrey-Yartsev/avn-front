@@ -150,8 +150,10 @@
               :to="'/' + selectedUser.username"
               :class="{ 'online-state': isOnline(selectedUser.id) }"
               ><span class="avatar__img">
-                <img v-if="selectedUser.avatar" :src="selectedUser.avatar" />
-            </span
+                <img
+                  v-if="selectedUser.avatar"
+                  :src="selectedUser.avatar"
+                /> </span
             ></router-link>
             <div class="username-group">
               <router-link class="name" :to="'/' + selectedUser.username">{{
