@@ -8,7 +8,8 @@
 
     <div class="subscribe-popup__info">
       <div class="subscribe-popup__info-avatar">
-        <span class="avatar avatar_mex-lg"
+        <span
+          class="avatar avatar_mex-lg"
           :class="{ 'online-state': isOnline(profile.id) }"
           ><span class="avatar__img"
             ><img v-if="profile.avatar" :src="profile.avatar"/></span
