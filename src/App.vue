@@ -20,7 +20,7 @@
         <router-view />
       </main>
       <Sidebar v-if="user" />
-      <Toast v-if="showToast" @hide="showToast = false" />
+      <ToastList v-if="toasts.length" :toasts="toasts" />
       <StoryInput />
 
       <modal-router />
@@ -88,7 +88,7 @@
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
 import Sidebar from "@/components/header/Sidebar";
-import Toast from "@/components/common/Toast";
+import ToastList from "@/components/common/ToastList";
 import ColorScheme from "@/mixins/colorScheme";
 import ErrorModal from "@/components/modal/Error";
 import PostModal from "@/components/post/ModalView";
@@ -180,7 +180,7 @@ export default {
     Loader,
     Header,
     Sidebar,
-    Toast,
+    ToastList,
     ErrorModal,
     PostReportModal,
     PostModal,
@@ -235,8 +235,8 @@ export default {
 
       return undefined;
     },
-    toastShowTrigger() {
-      return this.$store.state.global.toastShowTrigger;
+    toasts() {
+      return this.$store.state.global.toasts;
     },
     loading() {
       if (this.$store.state.modalRouter.loading) {
@@ -288,9 +288,6 @@ export default {
     }
   },
   watch: {
-    toastShowTrigger() {
-      this.showToast = true;
-    },
     $route() {
       this.$store.dispatch("modal/hideAll");
     },
