@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="jq-toast-root-wrapper">
     <Toast v-for="toast in toasts" :key="toast.id" :toast="toast" />
   </div>
 </template>
@@ -19,15 +19,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.wrapper {
-  display: block;
-  position: fixed;
-  width: 250px;
-  height: auto;
-  z-index: 9000 !important;
-  top: 20px;
-  left: 50%;
-}
-</style>

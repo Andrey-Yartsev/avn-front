@@ -1,6 +1,5 @@
 <template>
-  <!-- <div class="jq-toast-wrap"> -->
-  <div class="toast__item">
+  <div class="jq-toast-wrap">
     <div
       class="jq-toast-single jq-has-icon"
       :class="classes"
@@ -60,9 +59,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.toast__item {
-  position: relative;
-}
-</style>
