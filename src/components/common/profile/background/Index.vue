@@ -2,6 +2,7 @@
   <div
     class="bg-profile bg-profile_height bg-profile_height-lg bg-profile_sticky bg-profile_sticky-default bg-color bg-gradient_standart"
     :style="bgStyle"
+    ref="bg"
   >
     <div class="container" v-if="isOwner(profile.id) && !profile.header">
       <div class="controls-select-picture">
@@ -63,6 +64,12 @@ export default {
   },
   components: {
     Loader
+  },
+  data() {
+    return {
+      headerHeight: 320 + 85, // bg + menu
+      stopHeight: 250
+    };
   },
   computed: {
     bgStyle() {

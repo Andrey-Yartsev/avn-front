@@ -33,7 +33,11 @@
             <a>{{ profile.username }}</a>
           </span>
         </div>
-        <component :is="scrollableComponent" class="profile-desc">
+        <component
+          :is="scrollableComponent"
+          class="profile-desc"
+          ref="description"
+        >
           <p class="profile-text" v-if="profile.about">
             <span v-html="trunc(profile.about)"></span>
             <span
@@ -259,7 +263,8 @@ export default {
     return {
       collapseLimit: 250,
       collapsed: true,
-      mysnapchat: ""
+      mysnapchat: "",
+      descrInitHeight: 0
     };
   },
 
@@ -529,6 +534,14 @@ export default {
     },
     storePrefix() {
       return "profile/home";
+    },
+    scrollAction() {
+      if (window.pageYOffset < 250) {
+        this.$refs.description.$el.style.height =
+          this.descrInitHeight + window.pageYOffset + "px";
+      } else if (this.$refs.description.$el.style.height !== "") {
+        this.$refs.description.$el.style.height = "";
+      }
     }
   },
   created() {
@@ -552,12 +565,19 @@ export default {
   mounted() {
     this.scrollToTop();
     this.footerScrollAction();
-    window.addEventListener("scroll", this.scrollAction, true);
+    if (this.$mq === "desktop") {
+      window.addEventListener("scroll", this.scrollAction, true);
+      this.$nextTick(() => {
+        this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+      });
+    }
     document.title = this.profile.name + " | AVN Stars";
     window.snapchat = this.snapchat;
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.scrollAction, true);
+    if (this.$mq === "desktop") {
+      window.removeEventListener("scroll", this.scrollAction, true);
+    }
     document.title = "AVN Stars";
   }
 };
