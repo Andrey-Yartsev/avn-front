@@ -75,6 +75,10 @@
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
                     >{{ lockedText(v) }}</span
                   >
+                  <SubscribeButton
+                    v-if="v.registerLink"
+                    :profile="v.fromUser"
+                  />
                 </span>
                 <div class="media-chat" v-if="v.media.length">
                   <MediaVideo
@@ -162,6 +166,7 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
+import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
 
 const bottomThreshold = 100; // pixels left to bottom of container
@@ -172,7 +177,8 @@ export default {
   components: {
     Loader,
     MediaImage,
-    MediaVideo
+    MediaVideo,
+    SubscribeButton
   },
 
   mixins: [userMixin],
