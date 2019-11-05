@@ -94,11 +94,15 @@
                   />
                 </div>
                 <template v-if="v.story">
-                  <a class="userView userView_card rounded-corners nolink">
-                    <div class="bg bg-color bg-gradient_light">
-                      <img :src="v.story.preview" />
+                  <div class="media-chat">
+                    <div class="media media-item">
+                      <figure class="media-item active media-item_photo" data-index="0">
+                        <span class="postLink">
+                          <img :src="v.story.preview" class="media-content m-cover-size" />
+                        </span>
+                      </figure>
                     </div>
-                  </a>
+                  </div>
                 </template>
                 <template v-if="v.messageAttachment">
                   <a
