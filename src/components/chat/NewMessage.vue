@@ -149,7 +149,9 @@
               class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
               :to="'/' + selectedUser.username"
               :class="{ 'online-state': isOnline(selectedUser.id) }"
-              ><span class="avatar__img"></span
+              ><span class="avatar__img">
+                <img v-if="selectedUser.avatar" :src="selectedUser.avatar" />
+            </span
             ></router-link>
             <div class="username-group">
               <router-link class="name" :to="'/' + selectedUser.username">{{
