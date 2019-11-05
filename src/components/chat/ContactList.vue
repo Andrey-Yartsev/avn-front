@@ -29,6 +29,10 @@
           <div class="chatView__header">
             <span class="name">{{ v.withUser.name }}</span>
             <span
+              class="icn-item icn-tips"
+              v-if="v.withUser.isSubscribed"
+            ></span>
+            <span
               class="verified-user icn-item"
               v-if="v.withUser.isVerified"
             ></span>
