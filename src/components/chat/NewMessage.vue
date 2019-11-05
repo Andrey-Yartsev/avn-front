@@ -96,7 +96,10 @@
               @click="toggleSelect(v.withUser.id)"
               :class="{ active: isSelected(v.withUser.id) }"
             >
-              <span class="avatar avatar_gap-r-sm avatar_sm">
+              <span
+                class="avatar avatar_gap-r-sm avatar_sm"
+                :class="{ 'online-state': isOnline(v.withUser.id) }"
+              >
                 <span class="avatar__img">
                   <img v-if="v.withUser.avatar" :src="v.withUser.avatar" />
                 </span>
@@ -145,6 +148,7 @@
             <router-link
               class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
               :to="'/' + selectedUser.username"
+              :class="{ 'online-state': isOnline(selectedUser.id) }"
               ><span class="avatar__img"></span
             ></router-link>
             <div class="username-group">
