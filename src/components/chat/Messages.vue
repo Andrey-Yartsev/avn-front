@@ -96,9 +96,15 @@
                 <template v-if="v.story">
                   <div class="media-chat">
                     <div class="media media-item">
-                      <figure class="media-item active media-item_photo" data-index="0">
+                      <figure
+                        class="media-item active media-item_photo"
+                        data-index="0"
+                      >
                         <span class="postLink">
-                          <img :src="v.story.preview" class="media-content m-cover-size" />
+                          <img
+                            :src="v.story.preview"
+                            class="media-content m-cover-size"
+                          />
                         </span>
                       </figure>
                     </div>
