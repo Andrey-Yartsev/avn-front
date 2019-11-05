@@ -84,7 +84,8 @@
                       v-for="user in viewers"
                       :key="user.id"
                     >
-                      <span class="avatar avatar_gap-r-sm avatar_sm"
+                      <span
+                        class="avatar avatar_gap-r-sm avatar_sm"
                         :class="{ 'online-state': isOnline(user.id) }"
                       >
                         <span class="avatar__img">
