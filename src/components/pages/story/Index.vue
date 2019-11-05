@@ -793,6 +793,11 @@ export default {
         }
       });
 
+      this.$store.commit("global/toastShowTrigger", {
+        text: `Message has sent to ${this.author.username} chat`,
+        type: "success"
+      });
+
       this.comment = "";
     }
   },
