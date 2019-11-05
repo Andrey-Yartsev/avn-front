@@ -145,8 +145,8 @@
           </div>
         </div>
 
-        <div class="typing semi-transparent">
-          <span v-if="typing">User is typing...</span>&nbsp;
+        <div class="typing semi-transparent" v-if="typing">
+          <span>User is typing...</span>&nbsp;
         </div>
 
         <div
