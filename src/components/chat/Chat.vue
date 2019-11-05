@@ -64,6 +64,7 @@
               <router-link
                 :to="'/' + activeUser.username"
                 class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
+                :class="{ 'online-state': isOnline(activeUser.id) }"
               >
                 <span class="avatar__img">
                   <img :src="activeUser.avatar" v-if="activeUser.avatar" />
