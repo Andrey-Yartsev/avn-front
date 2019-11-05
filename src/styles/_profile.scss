@@ -142,13 +142,6 @@
     z-index: 2;
   }
 
-  //.user-login {
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    font-size: 17px;
-  //  }
-  //}
-
   .header-popup-menu-btn {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -414,7 +407,7 @@
     margin-top: 136px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 456px);
+    height: calc(100vh - 556px);
     position: relative;
     overflow-y: auto;
     padding-right: 10px;
@@ -646,6 +639,31 @@
       padding: 12px 0 3px;
       flex-shrink: 0;
       flex-basis: 76px;
+    }
+  }
+
+  .site-footer_sidebar {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .container {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        justify-content: flex-start;
+      }
+    }
+
+    .FooterNavCollectionView {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 12px;
+        width: 288px;
+      }
     }
   }
 }
