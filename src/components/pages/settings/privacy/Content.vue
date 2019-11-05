@@ -100,7 +100,10 @@ w<template>
         </div>
       </div>
 
-      <div class="form-title tweet-posts-block border-top">
+      <div
+        class="form-title tweet-posts-block border-top"
+        :class="{ disabled: !user.canEarn || price <= 0 }"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Messaging
@@ -266,6 +269,9 @@ export default {
     },
     viewClass() {
       return ucFirst(this.view) + "View";
+    },
+    price() {
+      return parseFloat(this.user.subscribePrice, 10);
     }
   },
 
