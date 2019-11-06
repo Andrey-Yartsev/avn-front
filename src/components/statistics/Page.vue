@@ -325,7 +325,9 @@
                         class="user-statistics"
                         :to="'/' + v.username"
                       >
-                        <span class="avatar avatar_gap-r-sm avatar_sm">
+                        <span class="avatar avatar_gap-r-sm avatar_sm"
+                          :class="{ 'online-state': isOnline(v.id) }"
+                        >
                           <span class="avatar__img">
                             <img :src="v.avatar" v-if="v.avatar" />
                           </span>
@@ -795,6 +797,7 @@ import ClickOutside from "vue-click-outside";
 
 import Footer from "@/components/footer/Index";
 import MoneyTable from "./MoneyTable";
+import User from "@/mixins/user";
 
 import {
   chartTypes,
@@ -927,7 +930,7 @@ const chartOptions = {
 
 export default {
   name: "statistics-page",
-  mixins: [CalcCount, BuildScale],
+  mixins: [CalcCount, BuildScale, User],
   directives: {
     ClickOutside
   },
