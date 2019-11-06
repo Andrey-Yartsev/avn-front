@@ -29,7 +29,7 @@ export default {
     },
     text: {
       type: String,
-      default: "Loading"
+      default: ""
     },
     fullscreen: {
       type: Boolean,
