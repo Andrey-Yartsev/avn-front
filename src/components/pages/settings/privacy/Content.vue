@@ -102,7 +102,7 @@ w<template>
 
       <div
         class="form-title tweet-posts-block border-top"
-        :class="{ disabled: !user.canEarn || price <= 0 }"
+        :class="{ disabled: !user.isWantEarn || price() <= 0 }"
       >
         <div class="inner">
           <span class="semi-transparent">
@@ -269,9 +269,6 @@ export default {
     },
     viewClass() {
       return ucFirst(this.view) + "View";
-    },
-    price() {
-      return parseFloat(this.user.subscribePrice, 10);
     }
   },
 
@@ -297,6 +294,9 @@ export default {
         return;
       }
       this.$store.dispatch("profile/update", this.localUser);
+    },
+    price() {
+      return parseFloat(this.user.subscribePrice, 10);
     }
   }
 };

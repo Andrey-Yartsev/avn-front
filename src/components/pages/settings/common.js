@@ -45,6 +45,7 @@ export default {
       if (!this.changed) {
         return;
       }
+      this.transformValueBeforeSave(this.localUser);
       this.$store.dispatch("profile/update", this.localUser);
     },
     _clone(o) {
@@ -64,6 +65,14 @@ export default {
       this.$store.dispatch("auth/extendUser", r);
       this.$store.dispatch("profile/home/extend", r);
       this.localUser = { ...this.localUser, ...r };
+    },
+    transformValueBeforeSave(user) {
+      if (!user.isWantEarn || this.price(user.subscribePrice) <= 0) {
+        this.localUser.isMsgFromSubscribersOnly = false;
+      }
+    },
+    price(price) {
+      return parseFloat(price, 10);
     }
   }
 };
