@@ -191,10 +191,7 @@ export default {
       });
     },
     markSpam() {
-      console.log(this.actionPrefix);
-      // this.$store.dispatch("profile/home/spamPost", {
-      //   postId: this.postId
-      // });
+      this.$store.dispatch("home/spamPost", this.$props.post.author.id);
 
       this.hide();
 
