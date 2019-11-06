@@ -54,7 +54,8 @@
                     target="_blank"
                     class="userview-block payment-user-wrapper"
                   >
-                    <span class="avatar avatar_sm"
+                    <span
+                      class="avatar avatar_sm"
                       :class="{ 'online-state': isOnline(v.userTo.id) }"
                     >
                       <span class="avatar__img">
