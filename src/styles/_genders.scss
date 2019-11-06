@@ -171,6 +171,10 @@
           color: $main;
           background-color: white;
           opacity: .7;
+
+          &:hover {
+            opacity: 1;
+          }
         }
 
         &:after {
