@@ -101,6 +101,7 @@ w<template>
       </div>
 
       <div
+        v-if="user.canEarn"
         class="form-title tweet-posts-block border-top"
         :class="{ disabled: !user.isWantEarn || price() <= 0 }"
       >
