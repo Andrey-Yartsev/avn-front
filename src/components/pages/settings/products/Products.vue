@@ -55,7 +55,9 @@
                     target="_blank"
                     class="userview-block payment-user-wrapper"
                   >
-                    <span class="avatar avatar_sm">
+                    <span class="avatar avatar_sm"
+                      :class="{ 'online-state': isOnline(v.productOwner.id) }"
+                    >
                       <span class="avatar__img">
                         <img
                           :src="v.productOwner.avatar"
@@ -101,10 +103,11 @@
 import Loader from "@/components/common/Loader";
 import moment from "moment";
 import InfinityScroll from "@/mixins/infinityScroll";
+import User from "@/mixins/user";
 
 export default {
   name: "ProductsSettingsProducts",
-  mixins: [InfinityScroll],
+  mixins: [InfinityScroll, User],
   components: {
     Loader
   },
