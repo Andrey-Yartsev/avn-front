@@ -50,7 +50,8 @@
             <div class="item" v-for="v in items" v-bind:key="v.id">
               <div class="table__cell">
                 <router-link :to="'/' + v.username" class="userview-block">
-                  <span class="avatar avatar_sm"
+                  <span
+                    class="avatar avatar_sm"
                     :class="{ 'online-state': isOnline(v.id) }"
                   >
                     <span class="avatar__img">
