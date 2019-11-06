@@ -325,7 +325,8 @@
                         class="user-statistics"
                         :to="'/' + v.username"
                       >
-                        <span class="avatar avatar_gap-r-sm avatar_sm"
+                        <span
+                          class="avatar avatar_gap-r-sm avatar_sm"
                           :class="{ 'online-state': isOnline(v.id) }"
                         >
                           <span class="avatar__img">
