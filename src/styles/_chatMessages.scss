@@ -17,6 +17,10 @@
       position: relative;
       overflow: hidden;
 
+      @include media-breakpoint-up($tablet-breakpoint) {
+        max-width: 380px;
+      }
+
       .postLink {
         display: flex;
         align-items: flex-start;
