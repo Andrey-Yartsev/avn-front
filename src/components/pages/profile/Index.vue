@@ -378,9 +378,20 @@ export default {
     updatedPost() {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
     },
-    deletedPost() {
-      // this.initPosts();
-      this.initProfile();
+    deletedPost(post) {
+      if (post.mediaType === "photo") {
+        this.$store.dispatch("profile/home/extend", {
+          photosCount: this.$store.state.profile.home.profile.photosCount - 1
+        });
+      }
+      if (post.mediaType === "video") {
+        this.$store.dispatch("profile/home/extend", {
+          videosCount: this.$store.state.profile.home.profile.videosCount - 1
+        });
+      }
+      this.$store.dispatch("profile/home/extend", {
+        postsCount: this.$store.state.profile.home.profile.postsCount - 1
+      });
     },
     postPinChanged() {
       this.initPosts();
