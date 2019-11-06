@@ -114,7 +114,10 @@
           />
         </div>
 
-        <Footer class="site-footer_sidebar" v-if="$mq === 'desktop' && useMediumPostView" />
+        <Footer
+          class="site-footer_sidebar"
+          v-if="$mq === 'desktop' && useMediumPostView"
+        />
       </div>
       <div class="profile-actions-mob" v-if="$mq === 'mobile'">
         <ProfileActions
