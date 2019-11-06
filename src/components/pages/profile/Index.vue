@@ -418,6 +418,13 @@ export default {
           this.posts[i].isVisible = true;
         }
       }
+    },
+    $route() {
+      this.$nextTick(() => {
+        if (this.$refs.description && !this.descrInitHeight) {
+          this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+        }
+      });
     }
   },
   methods: {
@@ -548,6 +555,9 @@ export default {
       return "profile/home";
     },
     scrollAction() {
+      if (!this.$refs.description) {
+        return;
+      }
       if (window.pageYOffset < 250) {
         this.$refs.description.$el.style.height =
           this.descrInitHeight + window.pageYOffset + "px";
@@ -580,7 +590,9 @@ export default {
     if (this.$mq === "desktop") {
       window.addEventListener("scroll", this.scrollAction, true);
       this.$nextTick(() => {
-        this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+        if (this.$refs.description) {
+          this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+        }
       });
     }
     document.title = this.profile.name + " | AVN Stars";
