@@ -417,7 +417,7 @@
   .header-scrolled & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: calc(100vh - 152px);
+      height: calc(100vh - 245px);
     }
   }
 
