@@ -31,6 +31,7 @@ import payouts from "@/store/modules/payouts";
 import twitter from "@/store/modules/twitter";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
+import blockedPosts from "@/store/modules/blockedPosts";
 import tip from "@/store/modules/tip";
 import followers from "@/store/modules/followers";
 import subscribes from "@/store/modules/subscribes";
@@ -94,6 +95,7 @@ const store = new Vuex.Store({
     twitter,
     emails,
     blocked,
+    blockedPosts,
     tip,
     followers,
     subscribes,

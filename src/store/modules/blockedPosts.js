@@ -4,19 +4,15 @@ const state = {};
 
 const actions = {
   unblock({ dispatch }, userId) {
-    return dispatch("user/unblock", userId, { root: true });
+    return dispatch("home/unspamPost", userId, { root: true });
   }
 };
 
-const mutations = {
-  remove(state, id) {
-    state.blocked = state.blocked.filter(v => v.id !== id);
-  }
-};
+const mutations = {};
 
 createRequestAction({
   prefix: "fetchBlocked",
-  apiPath: `users/blocked`,
+  apiPath: `users/blocked`, // need to change when EP ready
   state,
   mutations,
   actions,

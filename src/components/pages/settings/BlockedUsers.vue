@@ -6,7 +6,7 @@
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
         <div class="inner">
           <span class="semi-transparent">
-            Blocked users
+            {{ title }}
             <p class="subtext">
               {{ subtext }}
             </p>
@@ -132,6 +132,10 @@ export default {
   name: "BlockedUsers",
   mixins: [User],
   props: {
+    title: {
+      type: String,
+      default: "Blocked users"
+    },
     mobileBlockedRoute: {
       type: String,
       required: true
@@ -158,6 +162,8 @@ export default {
         return this.$store.state.blocked;
       } else if (this.source === "stories") {
         return this.$store.state.viewers;
+      } else if (this.source === "blockedPosts") {
+        return this.$store.state.blockedPosts;
       }
     },
     storePath() {
@@ -165,6 +171,8 @@ export default {
         return "blocked";
       } else if (this.source === "stories") {
         return "viewers";
+      } else if (this.source === "blockedPosts") {
+        return "blockedPosts";
       }
     },
     initItems() {

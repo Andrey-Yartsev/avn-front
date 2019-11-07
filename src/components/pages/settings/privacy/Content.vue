@@ -236,13 +236,15 @@ w<template>
         </div>
       </div>
     </form>
-    <!-- <BlockedUsers
+    <BlockedUsers
+      title="Blocked users"
       mobileBlockedRoute="/settings/privacy/blocked"
       subtext="These people can't see your posts, stories and live streams"
-    /> -->
-    <BlockedPostsUsers
+    />
+    <BlockedUsers
+      title="Blocked posts"
       mobileBlockedRoute="/settings/privacy/blockedPosts"
-      source="users"
+      source="blockedPosts"
       subtext="There are people, whose posts you don't want to see"
     />
   </div>
@@ -251,7 +253,6 @@ w<template>
 <script>
 import Common from "../common";
 import BlockedUsers from "../BlockedUsers";
-import BlockedPostsUsers from "../BlockedPostsUsers";
 import ConnectTwitter from "../ConnectTwitter";
 import User from "@/mixins/user";
 import ucFirst from "@/helpers/ucFirst";
@@ -265,7 +266,6 @@ export default {
 
   components: {
     BlockedUsers,
-    BlockedPostsUsers,
     ConnectTwitter,
     WatermarkImageUploader,
     Blocking

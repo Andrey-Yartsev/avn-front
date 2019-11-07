@@ -49,14 +49,12 @@ const actions = {
         console.log(err);
       });
   },
-  unspamPost(authorId) {
-    console.log({ authorId });
-    // dispatch("_unspamPost", authorId)
-    // .then(() => {
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // });
+  unspamPost({ dispatch }, authorId) {
+    dispatch("_unspamPost", authorId)
+      .then(() => {})
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
