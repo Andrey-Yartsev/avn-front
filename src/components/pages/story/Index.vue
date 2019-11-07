@@ -335,14 +335,15 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import userMixin from "@/mixins/user";
+import User from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
 import ClickOutside from "vue-click-outside";
 import Tip from "@/components/common/tip/User";
+import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "StoryPage",
-  mixins: [userMixin],
+  mixins: [User, ModalRouterParams],
   components: {
     Loader,
     Tip
@@ -372,22 +373,22 @@ export default {
   },
   computed: {
     collection() {
-      return this.$store.state.stories.collection || {};
+      return this.$store.state.stories.page.collection || {};
     },
     length() {
-      return this.$store.state.stories.posts.length;
+      return this.$store.state.stories.page.posts.length;
     },
     stories() {
-      return this.$store.state.stories.posts;
+      return this.$store.state.stories.page.posts;
     },
     error() {
-      return this.$store.state.stories.error;
+      return this.$store.state.stories.page.error;
     },
     author() {
-      return this.$store.state.stories.user;
+      return this.$store.state.stories.page.user;
     },
     loading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.page.loading;
     },
     loadingFinal() {
       if (this.videoDoesNotExists) {
@@ -402,9 +403,13 @@ export default {
       return this.currentStory.isReady;
     },
     userId() {
-      return this.$route.params.userId;
+      // console.log(this.$store.state.modalRouter);
+      return this.routeParams.userId;
     },
     currentStory() {
+      if (!this.stories) {
+        return;
+      }
       return this.stories[this.currIndex];
     },
     newPost() {
@@ -590,13 +595,18 @@ export default {
 
         this.$router.replace(`/stories/${userId}`);
       } else {
-        this.close();
+        this.closePage();
       }
     },
 
-    close() {
+    closePage() {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
+      if (this.mode === "modal") {
+        // closing modal-router
+        this.close();
+        return;
+      }
       if (global.storyFirstEnter) {
         this.$router.push("/");
       } else {
@@ -648,7 +658,7 @@ export default {
       );
 
       if (this.currIndex === this.length - 1) {
-        this.close();
+        this.closePage();
       }
     },
 
@@ -706,12 +716,13 @@ export default {
 
     init() {
       this.resetState();
+      this.$store.dispatch("stories/page/resetPageState");
       if (this.isCollections) {
-        this.$store.dispatch("stories/resetPageState");
-        this.$store.dispatch("stories/getCollection", { id: this.userId });
+        this.$store.dispatch("stories/page/getCollection", { id: this.userId });
       } else {
-        this.$store.dispatch("stories/resetPageState");
-        this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+        this.$store.dispatch("stories/page/getUserPosts", {
+          userId: this.userId
+        });
       }
     },
 

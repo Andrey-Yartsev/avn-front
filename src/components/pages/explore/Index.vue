@@ -158,7 +158,7 @@ export default {
       return this.$store.state.explore.posts;
     },
     stories() {
-      return this.$store.state.stories.posts;
+      return this.$store.state.stories.explore.posts;
     },
     lives() {
       return uniqBy(this.$store.state.lives.posts, "id");
@@ -179,7 +179,7 @@ export default {
       }
 
       if (this.type === "story") {
-        return this.$store.state.stories;
+        return this.$store.state.stories.explore;
       }
 
       if (this.type === "live") {
@@ -253,7 +253,7 @@ export default {
         !this.storiesLoading &&
         !this.storiesAllDataReceived
       ) {
-        this.$store.dispatch("stories/getPosts");
+        this.$store.dispatch("stories/explore/getPosts");
       }
     },
     infinityScrollGetDataMethod() {
@@ -263,7 +263,7 @@ export default {
       }
 
       if (this.type === "story") {
-        this.$store.dispatch("stories/getPosts");
+        this.$store.dispatch("stories/explore/getPosts");
       }
 
       if (this.type === "live") {
@@ -278,7 +278,6 @@ export default {
       this.lastYOffset = 0;
 
       this.$store.dispatch("explore/resetPageState");
-      this.$store.dispatch("stories/resetPageState");
       this.$store.dispatch("lives/resetPageState");
       this.$store.commit("topModels/reset");
 
@@ -292,11 +291,11 @@ export default {
         this.$store.dispatch("explore/getPosts");
       }
 
-      this.$store.dispatch("stories/setLimit", { limit: 20 });
       this.$store.dispatch("lives/getPosts");
 
-      this.$store.dispatch("stories/setSource", { source: "" });
-      this.$store.dispatch("stories/getPosts");
+      this.$store.dispatch("stories/explore/resetPageState");
+      this.$store.dispatch("stories/explore/setLimit", { limit: 20 });
+      this.$store.dispatch("stories/explore/getPosts");
 
       if (this.type === "top") {
         this.$store.dispatch("topModels/getPosts");

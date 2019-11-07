@@ -20,6 +20,7 @@ import message from "./actions/message";
 import new_feed_post from "./actions/new_feed_post";
 import online from "./actions/online";
 import typing from "./actions/typing";
+import stories from "./actions/typing";
 
 const actions = {
   chats,
@@ -40,7 +41,8 @@ const actions = {
   new_feed_post,
   stream_public,
   online,
-  typing
+  typing,
+  stories
 };
 
 export default class Ws extends WsAbstract {
@@ -55,12 +57,6 @@ export default class Ws extends WsAbstract {
     }
     if (data.payoutsApproved !== undefined) {
       this.actions.payoutsLegalResult(data);
-      return;
-    }
-    if (data.stories) {
-      data.stories.forEach(story => {
-        Store.commit("stories/extendPost", story);
-      });
       return;
     }
     this.emit("message", data);
