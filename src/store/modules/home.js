@@ -48,6 +48,15 @@ const actions = {
       .catch(err => {
         console.log(err);
       });
+  },
+  unspamPost(authorId) {
+    console.log({ authorId });
+    // dispatch("_unspamPost", authorId)
+    // .then(() => {
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
   }
 };
 
@@ -59,6 +68,21 @@ createRequestAction({
   actions,
   options: {
     method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{authorId}/, params);
+  },
+  localError: true
+});
+
+createRequestAction({
+  prefix: "_unspamPost",
+  apiPath: "users/{authorId}/posts/block",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
   },
   paramsToPath: function(params, path) {
     return path.replace(/{authorId}/, params);
