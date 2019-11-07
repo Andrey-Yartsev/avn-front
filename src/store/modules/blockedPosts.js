@@ -8,11 +8,15 @@ const actions = {
   }
 };
 
-const mutations = {};
+const mutations = {
+  filterPosts(state, userId) {
+    state.blocked = state.blocked.filter(item => item.id !== userId);
+  }
+};
 
 createRequestAction({
   prefix: "fetchBlocked",
-  apiPath: `users/blocked`, // need to change when EP ready
+  apiPath: `users/filtered`,
   state,
   mutations,
   actions,

@@ -49,9 +49,11 @@ const actions = {
         console.log(err);
       });
   },
-  unspamPost({ dispatch }, authorId) {
+  unspamPost({ commit, dispatch }, authorId) {
     dispatch("_unspamPost", authorId)
-      .then(() => {})
+      .then(() => {
+        commit("blockedPosts/filterPosts", authorId, { root: true });
+      })
       .catch(err => {
         console.log(err);
       });
