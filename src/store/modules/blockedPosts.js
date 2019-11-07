@@ -5,6 +5,9 @@ const state = {};
 const actions = {
   unblock({ dispatch }, userId) {
     return dispatch("home/unspamPost", userId, { root: true });
+  },
+  filterBlocked({ commit }, userId) {
+    commit("filterPosts", userId);
   }
 };
 

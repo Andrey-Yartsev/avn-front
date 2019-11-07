@@ -194,7 +194,11 @@ export default {
     },
     unblock(userId) {
       this.$store.dispatch(this.storePath + "/unblock", userId).then(() => {
-        this.$store.dispatch(this.storePath + "/fetchBlocked");
+        if (this.source === "users" || this.source === "blockedPosts") {
+          this.$store.dispatch(this.storePath + "/filterBlocked", userId);
+        } else {
+          this.$store.dispatch(this.storePath + "/fetchBlocked");
+        }
       });
     }
   },
