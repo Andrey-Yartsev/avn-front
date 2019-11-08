@@ -185,12 +185,10 @@ export default {
       if (this.$mq === "desktop") {
         return;
       }
-      console.log("OK");
-      // this.isVisible = isVisible;
-      // this.$emit("visibilityChanged", {
-      //   isVisible,
-      //   id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
-      // });
+      this.$emit("visibilityChanged", {
+        isVisible,
+        id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
+      });
       this.height = entry.boundingClientRect.height;
     },
     truncateToggle() {

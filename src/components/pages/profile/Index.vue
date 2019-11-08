@@ -597,7 +597,7 @@ export default {
     if (this.$mq === "desktop") {
       window.addEventListener("scroll", this.scrollAction, true);
       this.$nextTick(() => {
-        if (this.$refs.description) {
+        if (this.$refs.description && this.$refs.description.$el) {
           this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
         }
       });
