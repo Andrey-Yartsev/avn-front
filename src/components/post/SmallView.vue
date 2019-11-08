@@ -164,6 +164,9 @@ export default {
       return this.from;
     },
     media() {
+      if (!this.post.media || !this.post.media.length) {
+        return {};
+      }
       return this.post.media[0];
     },
     mediaDuration() {
