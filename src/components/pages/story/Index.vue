@@ -493,7 +493,6 @@ export default {
         this.$store.dispatch("story/watch", { postId: id });
       }
 
-      console.log(mediaType);
       if (mediaType === "video") {
         this.launchVideo();
       } else {
