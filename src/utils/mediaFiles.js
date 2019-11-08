@@ -16,9 +16,7 @@ const getOrientation = file => {
 
     reader.onload = resFileData => {
       const fileContent = resFileData.target.result;
-      console.log(fileContent);
       const view = new DataView(fileContent);
-      console.log(view);
       if (view.getUint16(0, false) != 0xffd8) {
         resolve(-2);
       }
@@ -44,7 +42,6 @@ const getOrientation = file => {
             resolve(-1);
           }
           let tags = view.getUint16(offset, little);
-          console.log("tags", tags);
           offset += 2;
           for (let i = 0; i < tags; i++) {
             if (view.getUint16(offset + i * 12, little) == 0x0112) {
