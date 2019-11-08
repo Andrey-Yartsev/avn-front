@@ -76,7 +76,7 @@
         <div
           class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer"
         >
-          <StoriesWrapper></StoriesWrapper>
+          <StoriesWrapper />
           <Footer v-if="$mq === 'desktop'"></Footer>
         </div>
       </div>
@@ -154,10 +154,9 @@ export default {
       }
       this.$store.dispatch("home/getPosts");
 
-      this.$store.dispatch("stories/resetPageState");
-      this.$store.dispatch("stories/setSource", { source: "feed" });
-      this.$store.dispatch("stories/setLimit", { limit: 100 });
-      this.$store.dispatch("stories/getPosts");
+      this.$store.dispatch("stories/feed/resetPageState");
+      this.$store.dispatch("stories/feed/setLimit", { limit: 100 });
+      this.$store.dispatch("stories/feed/getPosts");
 
       this.$store.dispatch("lives/resetPageState");
       this.$store.dispatch("lives/setSource", { source: "feed" });

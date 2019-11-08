@@ -2,6 +2,7 @@ import PostModal from "@/components/post/ModalView";
 import NotifModal from "@/components/pages/notification/Modal";
 import ChatModal from "@/components/chat/Modal";
 import ImageModal from "@/components/modal/Image";
+import StoryPage from "@/components/pages/story/Index";
 
 export default {
   "post/:postId/:from": {
@@ -12,12 +13,14 @@ export default {
   },
   notifications: NotifModal,
   "notifications/:type": NotifModal,
-
   chat: ChatModal,
   "chat/new": {
     component: ChatModal,
     _name: "ChatNew"
   },
   "chat/:userId": ChatModal,
-  "image/:src": ImageModal
+  "image/:src": ImageModal,
+  "stories/:userId": {
+    component: StoryPage
+  }
 };

@@ -85,7 +85,7 @@ export default {
       return this.$store.state.auth.user;
     },
     stories() {
-      return this.$store.state.stories.posts;
+      return this.$store.state.stories.feed.posts;
     },
     streams() {
       const filteredStreams = this.$store.state.lives.posts.filter(
@@ -100,7 +100,7 @@ export default {
       return false;
     },
     storiesLoading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.feed.loading;
     },
     streamsLoading() {
       return this.$store.state.lives.loading;

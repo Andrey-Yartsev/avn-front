@@ -1,5 +1,5 @@
 <template>
-  <component :is="routedComponent" />
+  <component :is="routedComponent" mode="modal" />
 </template>
 
 <script>
