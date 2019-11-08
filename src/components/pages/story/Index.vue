@@ -293,7 +293,7 @@
       <button
         type="button"
         class="close close_light icn-item icn-size_lg"
-        @click="close"
+        @click="closePage"
       />
       <div
         :class="['play-button-wrapper', { hidden: !showVideoPlay }]"
@@ -611,7 +611,7 @@ export default {
           storyList: userIds
         });
 
-        this.$router.replace(`/stories/${userId}`);
+        this.goTo(`/stories/${userId}`);
       } else {
         this.closePage();
       }
