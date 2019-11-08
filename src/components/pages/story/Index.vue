@@ -280,7 +280,7 @@
         </button>
         <span
           class="bottom-btn"
-          v-if="!isMine"
+          v-if="!isMine && isFollowedOrFollowing"
           @click="openComments"
           :class="{ selected: activeComments }"
         >
@@ -363,7 +363,7 @@ export default {
       isPaused: false,
       videoDoesNotExists: false,
       showTip: false,
-      showComments: true,
+      showComments: false,
       comment: "",
       activeTip: false,
       activeComments: true,
@@ -434,6 +434,9 @@ export default {
     },
     isMine() {
       return this.isOwner(this.author.id);
+    },
+    isFollowedOrFollowing() {
+      return this.author.followedBy || this.author.followedOn;
     }
   },
   methods: {
