@@ -280,7 +280,7 @@
         </button>
         <span
           class="bottom-btn"
-          v-if="!isMine && isFollowedOrFollowing"
+          v-if="!isMine"
           @click="openComments"
           :class="{ selected: activeComments }"
         >
@@ -453,6 +453,19 @@ export default {
       this.$refs.tip.reset();
     },
     openComments() {
+      if (!this.isFollowedOrFollowing) {
+        this.$store.dispatch(
+          "global/flashToast",
+          {
+            text: "You need to follow user to send a message",
+            type: "warning"
+          },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.pause();
       this.showComments = true;
       this.showTip = false;
