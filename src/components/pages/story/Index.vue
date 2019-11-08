@@ -363,7 +363,7 @@ export default {
       isPaused: false,
       videoDoesNotExists: false,
       showTip: false,
-      showComments: true,
+      showComments: false,
       comment: "",
       activeTip: false,
       activeComments: true,
@@ -434,6 +434,9 @@ export default {
     },
     isMine() {
       return this.isOwner(this.author.id);
+    },
+    isFollowedOrFollowing() {
+      return this.author.followedBy || this.author.followedOn;
     }
   },
   methods: {
@@ -450,6 +453,19 @@ export default {
       this.$refs.tip.reset();
     },
     openComments() {
+      if (!this.isFollowedOrFollowing) {
+        this.$store.dispatch(
+          "global/flashToast",
+          {
+            text: "You need to follow user to send a message",
+            type: "warning"
+          },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.pause();
       this.showComments = true;
       this.showTip = false;
