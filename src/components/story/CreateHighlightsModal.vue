@@ -59,6 +59,7 @@
                       maxlength="70"
                       placeholder="Highlights"
                       class="text-centered lg"
+                      :class="{ highlightsInput: !title.length }"
                       v-model="title"
                       ref="highlightsInput"
                     />
@@ -235,3 +236,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.highlightsInput:not(:focus) {
+  border: 1px solid red;
+}
+</style>
