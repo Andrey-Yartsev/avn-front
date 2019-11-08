@@ -493,6 +493,7 @@ export default {
         this.$store.dispatch("story/watch", { postId: id });
       }
 
+      console.log(mediaType);
       if (mediaType === "video") {
         this.launchVideo();
       } else {
@@ -538,10 +539,12 @@ export default {
           this.forceWaitingEvent = true;
           this.showLoader = false;
           this.showVideoPlay = true;
-          this.$refs.videoPlayButton.addEventListener(
-            "click",
-            this.launchVideo
-          );
+          if (this.$refs.videoPlayButton) {
+            this.$refs.videoPlayButton.addEventListener(
+              "click",
+              this.launchVideo
+            );
+          }
         });
     },
 
