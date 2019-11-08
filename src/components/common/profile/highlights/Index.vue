@@ -26,7 +26,7 @@
                 </div>
                 <div class="story-info">
                   <div class="story-header">
-                    <div class="name">
+                    <div class="name" @click.prevent="addNew">
                       Add new
                     </div>
                   </div>

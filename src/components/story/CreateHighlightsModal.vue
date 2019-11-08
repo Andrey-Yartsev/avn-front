@@ -60,6 +60,7 @@
                       placeholder="Highlights"
                       class="text-centered lg"
                       v-model="title"
+                      ref="highlightsInput"
                     />
                   </div>
                 </div>
@@ -224,6 +225,11 @@ export default {
     step() {
       if (this.step === 2) {
         this.choosenCover = this.checked[0];
+        this.$nextTick(() => {
+          if (this.$refs.highlightsInput) {
+            this.$refs.highlightsInput.focus();
+          }
+        });
       }
     }
   }
