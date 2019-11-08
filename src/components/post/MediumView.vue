@@ -185,11 +185,12 @@ export default {
       if (this.$mq === "desktop") {
         return;
       }
+      console.log("OK");
       // this.isVisible = isVisible;
-      this.$emit("visibilityChanged", {
-        isVisible,
-        id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
-      });
+      // this.$emit("visibilityChanged", {
+      //   isVisible,
+      //   id: parseInt(entry.target.id.replace(/p(\d+)/, "$1"))
+      // });
       this.height = entry.boundingClientRect.height;
     },
     truncateToggle() {
@@ -200,14 +201,19 @@ export default {
       // return `<router-link :to="/hashtag/two"><p>some text</p></router-link>`
     },
     addHandlersToTags() {
-      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag")];
+      if (!this.$refs.text) {
+        return;
+      }
+      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag']")];
       tags.forEach(item => {
         item.addEventListener("click", this.tagEventListener);
       });
     },
     removeHandlersFromTags() {
-      if (!this.$refs.text) return;
-      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag")];
+      if (!this.$refs.text) {
+        return;
+      }
+      const tags = [...this.$refs.text.querySelectorAll("[href^='/hashtag']")];
       tags.forEach(item =>
         item.removeEventListener("click", this.tagEventListener)
       );
@@ -219,6 +225,9 @@ export default {
     }
   },
   mounted() {
+    if (!this.$refs.text) {
+      return;
+    }
     if (this.$refs.text.getBoundingClientRect().height > 18 * 5 + 2) {
       this.truncateText = true;
     }
