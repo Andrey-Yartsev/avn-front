@@ -424,7 +424,11 @@ export default {
     },
     $route() {
       this.$nextTick(() => {
-        if (this.$refs.description && !this.descrInitHeight) {
+        if (
+          this.$refs.description &&
+          this.$refs.description.$el &&
+          !this.descrInitHeight
+        ) {
           this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
         }
       });
