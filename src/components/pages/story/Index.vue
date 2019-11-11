@@ -501,11 +501,11 @@ export default {
     },
 
     launchImage() {
-      this.showLoader = true;
+      // this.showLoader = true;
 
       this.$refs.storyItem.onload = () => {
         this.timer = new StoryTimer(() => this.next(), 4000);
-        this.showLoader = false;
+        // this.showLoader = false;
 
         setTimeout(() => {
           this.currActiveIndex = this.currIndex;
@@ -599,7 +599,7 @@ export default {
       this.deactivateVideoEvents();
       this.videos = {};
       this.showLoader = false;
-      this.currActiveIndex = -1;
+      // this.currActiveIndex = -1;
     },
 
     findNextUserStory() {
