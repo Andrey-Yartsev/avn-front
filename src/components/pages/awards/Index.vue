@@ -171,6 +171,9 @@ export default {
       return cat.data;
     },
     autofilledCatIds() {
+      if (!this.$route.params.categories) {
+        return [];
+      }
       return this.$route.params.categories.split(",").map(v => {
         return parseInt(v);
       });
