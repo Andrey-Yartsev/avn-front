@@ -1,4 +1,4 @@
-w<template>
+<template>
   <div :class="viewClass">
     <div class="hidden-desktop" v-if="view === 'twitter'">
       <div class="form-title">
@@ -237,11 +237,15 @@ w<template>
       </div>
     </form>
     <BlockedUsers
+      v-if="!this.$route.params.view || this.$route.params.view === 'blocked'"
       title="Blocked users"
       mobileBlockedRoute="/settings/privacy/blocked"
       subtext="These people can't see your posts, stories and live streams"
     />
     <BlockedUsers
+      v-if="
+        !this.$route.params.view || this.$route.params.view === 'blockedPosts'
+      "
       title="Blocked posts"
       mobileBlockedRoute="/settings/privacy/blockedPosts"
       source="blockedPosts"
