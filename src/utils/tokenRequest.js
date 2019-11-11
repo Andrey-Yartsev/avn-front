@@ -4,7 +4,7 @@ import request from "./request";
 
 export default async (apiPath, options) => {
   if (!Store.state.auth.token) {
-    throw new Error("Method is allowed only for authorized users");
+    throw new Error(`${apiPath}' path is allowed only for authorized users`);
   }
 
   const _options = { ...options };
