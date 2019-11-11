@@ -30,3 +30,7 @@ self.addEventListener("notificationclick", function(event) {
     return clients.openWindow(event.notification.data.url);
   }
 });
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(fetch(event.request));
+});
