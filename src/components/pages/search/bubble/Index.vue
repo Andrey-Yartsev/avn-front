@@ -173,11 +173,16 @@ export default {
         return;
       }
       if (this.isQueryTag()) {
-        this.$router.push(`/hashtag/${this.localQuery.slice(1)}`);
+        this.$router
+          .push(`/hashtag/${this.localQuery.slice(1)}`)
+          .catch(() => {});
         this.close();
         return;
       } else {
-        this.$router.push("/search/" + this.type + "/" + this.localQuery);
+        this.$router.push(
+          "/search/" + this.type + "/" + this.localQuery,
+          () => {}
+        );
         this.close();
       }
     },
