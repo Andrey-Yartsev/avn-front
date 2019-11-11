@@ -65,6 +65,7 @@ export default {
       "Twitter connection error",
       "User banned.",
       "This Twitter is already used by another account.",
+      "This Twitter is already used by another user account.",
       "This account already used Twitter.",
       "Email in twitter account is required."
     ];
