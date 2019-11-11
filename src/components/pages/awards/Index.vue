@@ -362,6 +362,10 @@ export default {
     if (storageData) {
       this.data = storageData.data;
       BrowserStore.remove("nomUserRegData");
+      if (!this.user) {
+        this.$store.commit("awards/clearSavedData", null, { root: true });
+        return;
+      }
       this.$store
         .dispatch(
           "awards/nominate",
