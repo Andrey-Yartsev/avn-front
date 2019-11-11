@@ -13,7 +13,7 @@
       class="name"
       :href="'/' + postUser.username"
       ref="name"
-      @click.prevent="$router.push('/' + postUser.username)"
+      @click.prevent="$router.push('/' + postUser.username).catch(() => {})"
       @mouseover="showBubble"
       @mouseout="hideBubble"
       >{{ postUser.name }}</a
