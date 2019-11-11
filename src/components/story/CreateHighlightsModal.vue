@@ -123,7 +123,7 @@
                     <Loader
                       :fullscreen="false"
                       :inline="true"
-                      :class="{ small: stories.length }"
+                      :small="true"
                     />
                   </div>
                 </perfect-scrollbar>
