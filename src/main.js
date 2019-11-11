@@ -23,6 +23,7 @@ import "@/iconfont";
 
 import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 import VueAnalytics from "vue-analytics";
+require("./utils/registerServiceWorker");
 
 Vue.use(VueMask);
 
