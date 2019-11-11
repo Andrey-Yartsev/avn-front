@@ -96,6 +96,10 @@
           <FollowersCounter :profile="profile" />
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
+          <Footer
+            class="site-footer_sidebar"
+            v-if="$mq === 'desktop'"
+          />
         </component>
       </div>
       <div
@@ -113,11 +117,6 @@
             ref="actionsDesktop"
           />
         </div>
-
-        <Footer
-          class="site-footer_sidebar"
-          v-if="$mq === 'desktop' && useMediumPostView"
-        />
       </div>
       <div class="profile-actions-mob" v-if="$mq === 'mobile'">
         <ProfileActions
