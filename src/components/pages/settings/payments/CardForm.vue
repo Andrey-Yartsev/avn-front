@@ -234,6 +234,10 @@
                   type="text"
                   @blur="trimUserInfo('name')"
                 />
+                <small
+                  >* Full Name MUST be entered exactly as it is printed on
+                  Card</small
+                >
               </span>
               <div class="error-info" v-if="fieldError('cardHolder')">
                 {{ fieldError("cardHolder") }}
