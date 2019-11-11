@@ -68,9 +68,20 @@ export default {
   },
   methods: {
     async withdrawRequest() {
-      await this.$store.dispatch(this.storeKey + "/requests/withdraw");
-      this.$store.dispatch(this.storeKey + "/requests/fetch");
-      this.$store.dispatch(this.storeKey + "/balances/fetch");
+      try {
+        await this.$store.dispatch(this.storeKey + "/requests/withdraw");
+        this.$store.dispatch(this.storeKey + "/requests/fetch");
+        this.$store.dispatch(this.storeKey + "/balances/fetch");
+        this.showToast(false, "Withdraw request completed successfuly");
+      } catch (error) {
+        this.showToast(true, error.message);
+      }
+    },
+    showToast(err, text) {
+      this.$store.commit("global/toastShowTrigger", {
+        text: text,
+        type: err ? "error" : "success"
+      });
     }
   },
   created() {

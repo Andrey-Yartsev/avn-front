@@ -25,7 +25,9 @@ createRequestAction({
   actions,
   options: {
     method: "POST"
-  }
+  },
+  localError: true,
+  throw400: true
 });
 
 export default {
