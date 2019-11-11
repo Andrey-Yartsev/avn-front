@@ -274,6 +274,13 @@
     margin-top: 10px;
   }
 
+  .storyCollectionView_col & {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin: 15px 0 0 14px;
+    }
+  }
+
   .lds-dual-ring {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
