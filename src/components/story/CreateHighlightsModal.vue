@@ -120,11 +120,7 @@
                     </div>
                   </div>
                   <div class="loader-infinity" v-if="loading">
-                    <Loader
-                      :fullscreen="false"
-                      :inline="true"
-                      :small="true"
-                    />
+                    <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </perfect-scrollbar>
               </div>
