@@ -49,9 +49,12 @@ export default {
     }
   },
   mounted() {
-    window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
-      text: this.text
-    });
+    if (window.twttr) {
+      // fix error from sentry. but can't reproduce
+      window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
+        text: this.text
+      });
+    }
   }
 };
 </script>
