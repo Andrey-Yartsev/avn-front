@@ -29,8 +29,8 @@ export default {
     },
     text() {
       return (
-        `I just pre-nominated ${this.v.name} for ${this.v.category.title} ` +
-        this.ending
+        `I just pre-nominated ${this.v.name} for ${this.v.category &&
+          this.v.category.title} ` + this.ending
       );
     },
     ending() {
