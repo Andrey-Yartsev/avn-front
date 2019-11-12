@@ -58,6 +58,9 @@ const actions = {
       })
       .catch(() => {});
   },
+  removePost({ commit }, { authorId }) {
+    commit("stories/explore/removePost", authorId, { root: true });
+  },
   watch(opt, { postId }) {
     return StoriesApi.watchStory({ postId });
   },

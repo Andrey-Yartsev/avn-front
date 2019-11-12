@@ -46,6 +46,9 @@ const mutations = {
       }
       return v;
     });
+  },
+  removePost(state, authorId) {
+    state.posts = state.posts.filter(item => item.user.id !== authorId);
   }
 };
 
