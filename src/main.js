@@ -41,7 +41,7 @@ VTooltip.enabled = window.innerWidth > 990;
 // import Logger from "js-logger";
 // Logger.useDefaults();
 
-if (process.env.NODE_ENV !== "development") {
+if (process.env.NODE_ENV !== "1development") {
   Sentry.init({
     dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
     integrations: [
@@ -55,6 +55,13 @@ if (process.env.NODE_ENV !== "development") {
     beforeSend(event, hint) {
       try {
         if (hint.originalException.message === "Failed to fetch") {
+          return null;
+        }
+        if (
+          hint.originalException.message.match(
+            /Non-Error promise rejection captured with/
+          )
+        ) {
           return null;
         }
       } catch (_) {
