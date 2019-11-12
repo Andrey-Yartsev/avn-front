@@ -51,7 +51,17 @@ if (process.env.NODE_ENV !== "development") {
       }),
       new SentryIntegrations.RewriteFrames()
     ],
-    environment: process.env.VUE_APP_LOG_MODE
+    environment: process.env.VUE_APP_LOG_MODE,
+    beforeSend(event, hint) {
+      try {
+        if (hint.originalException.message === "Failed to fetch") {
+          return null;
+        }
+      } catch (_) {
+        return event;
+      }
+      return event;
+    }
   });
 }
 
