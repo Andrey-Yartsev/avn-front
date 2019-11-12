@@ -17,7 +17,7 @@
         active: commentsBtnSelectable && showAddCommentForm
       }"
       @click="postShowCommentForm"
-      v-if="post.canComment"
+      v-if="post.canComment && !post.author.isBlocked"
     >
       <span
         class="btn-icon comments icn-item icn-size_lg"
