@@ -676,6 +676,11 @@ export default {
       );
 
       if (this.currIndex === this.length - 1) {
+        if (this.stories.length === 1) {
+          this.$store.dispatch("story/removePost", {
+            authorId: this.$store.state.auth.user.id
+          });
+        }
         this.closePage();
       }
     },
