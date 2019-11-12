@@ -41,7 +41,7 @@ VTooltip.enabled = window.innerWidth > 990;
 // import Logger from "js-logger";
 // Logger.useDefaults();
 
-if (process.env.NODE_ENV !== "1development") {
+if (process.env.NODE_ENV !== "development") {
   Sentry.init({
     dsn: "https://3309a55a4d2549f2b4aa2aa1c67589fc@bug.stars.avn.com/2",
     integrations: [
