@@ -3,11 +3,10 @@
 //   return is_safari;
 // }
 
-if ("serviceWorker" in navigator && "PushManager" in window) {
-  // navigator.serviceWorker.getRegistrations().then(function(registrations) {
-  //   for (let registration of registrations) {
-  //     registration.unregister();
-  //   }
-  // });
-  navigator.serviceWorker.register("/sw.push.js");
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  });
 }
