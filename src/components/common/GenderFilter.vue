@@ -51,10 +51,16 @@ export default {
       return this.$store.state.gender.category;
     },
     _options() {
-      return this.$store.state.init.data.categoryView.map(v => {
-        v.title = v.name[0].toUpperCase() + v.name.slice(1);
-        return v;
-      });
+      let options = [];
+      try {
+        options = this.$store.state.init.data.categoryView.map(v => {
+          v.title = v.name[0].toUpperCase() + v.name.slice(1);
+          return v;
+        });
+      } catch (_) {
+        options = [];
+      }
+      return options;
     },
     options() {
       return this._options.map(v => {
