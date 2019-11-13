@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 "use strict";
 
+const SW_VERSION = 1; 
+
 self.addEventListener("install", function() {
   self.skipWaiting();
 });
@@ -31,6 +33,6 @@ self.addEventListener("notificationclick", function(event) {
   }
 });
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(fetch(event.request));
-});
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(fetch(event.request));
+// });
