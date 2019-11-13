@@ -1,5 +1,11 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/serviceWorker.js").then(function() {
-    console.log("Service worker registered!");
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
   });
+
+  // navigator.serviceWorker.register("/serviceWorker.js").then(function() {
+  //   console.log("Service worker registered!");
+  // });
 }
