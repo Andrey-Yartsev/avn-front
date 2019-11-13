@@ -33,6 +33,11 @@ self.addEventListener("notificationclick", function(event) {
   }
 });
 
-// self.addEventListener('fetch', function(event) {
-//   event.respondWith(fetch(event.request));
-// });
+// add fetch handler only to android devices
+if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+  console.log('Add Service Worker fetch proxy to android');
+  self.addEventListener('fetch', function(event) {
+    event.respondWith(fetch(event.request));
+  });
+}
+
