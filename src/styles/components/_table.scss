@@ -733,6 +733,19 @@
     }
   }
 
+  .PayoutsTransactionsCollectionView.settings-wrapper & {
+
+    &__cell {
+
+      &.expected {
+        
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          justify-content: center;
+        }
+      }
+    }
+  }
+
 
   &_dotts-line {
     width: 100%;
