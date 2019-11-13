@@ -96,7 +96,7 @@
 
         <Columns :categories="categories[1]" @input="input" />
         <div class="hint-text-sm">
-          * name should be at least 2 symbols long
+          * the length of the name must be from 2 to 150 characters
         </div>
         <div class="awards__btn-row">
           <button class="btn alt border lg" :disabled="sending || !canSend">

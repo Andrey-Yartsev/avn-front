@@ -10,6 +10,7 @@
               :placeholder="v.title"
               :value="value"
               :disabled="disabled"
+              maxlength="150"
               @input="
                 e => {
                   input(e, v);
