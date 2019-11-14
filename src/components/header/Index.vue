@@ -72,11 +72,11 @@
               <span class="icn-item icn-post icn-size_lg"></span>
               Share
             </button>
-            <router-link
+            <!-- <router-link
               to="/addPost"
               class="make-post-btn make-post-btn_header hidden-desktop icn-item icn-post icn-size_lg"
               v-if="$mq === 'mobile'"
-            />
+            /> -->
           </template>
           <template v-if="authSection">
             <div class="btns-login-user">
