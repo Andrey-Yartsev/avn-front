@@ -104,7 +104,7 @@ export default {
   },
   mounted() {
     if ("serviceWorker" in navigator && "PushManager" in window) {
-      navigator.serviceWorker.register("/sw.push.js");
+      navigator.serviceWorker.register("/sw.pushManager.js");
       navigator.serviceWorker.ready
         .then(swReg => {
           this.swRegistration = swReg;
