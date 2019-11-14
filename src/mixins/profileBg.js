@@ -7,20 +7,22 @@ export default {
       bgPreview: null,
       bgUploading: false,
       bgRemoved: false,
-      gettingBgPreview: false
+      gettingBgPreview: false,
+      hideInput: false
     };
   },
   computed: {
     showBgSave() {
-      return this.bgPreview && !this.bgUploading;
+      return this.bgPreview && !this.bgUploading && !this.hideInput;
     },
-    showBgAdd() {
-      return !this.bgPreview && !this.bgUploading;
+    hideBgAdd() {
+      return this.bgPreview || this.bgUploading;
     }
   },
   methods: {
     setBgPreview(e) {
       this.bgRemoved = false;
+      this.hideInput = false;
       this.gettingBgPreview = true;
       getImagePreview({ file: e.target.files[0] }, ({ preview }) => {
         this.bgPreview = preview;
@@ -29,19 +31,20 @@ export default {
     },
     resetBgPreview() {
       this.bgPreview = null;
-      this.$refs.bg.value = "";
+      this.$refs.bgAside.value = "";
     },
-    saveBg(clear) {
+    saveBg({ isClear, refName }) {
       return new Promise(accept => {
         this.bgUploading = true;
-        upload(this.$refs.bg.files[0])
+        this.hideInput = true;
+        upload(this.$refs[refName].files[0])
           .then(fileName => {
             this.$store
               .dispatch("profile/extend", {
                 header: fileName
               })
               .then(() => {
-                if (clear === true) {
+                if (isClear === true) {
                   this.bgPreview = "";
                 }
                 this.bgUploading = false;
@@ -55,8 +58,9 @@ export default {
             });
 
             this.bgPreview = "";
+            this.hideInput = false;
             this.bgUploading = false;
-            this.$refs.bg.value = "";
+            this.$refs[refName].value = "";
           });
       });
     },

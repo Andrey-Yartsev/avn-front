@@ -9,7 +9,7 @@
         <label
           for="bg"
           class="select-user-image select-user-image_cover select-user-image_cover-lg"
-          :class="{ hide: profile.header || !showBgAdd }"
+          :class="{ hide: profile.header || hideBgAdd }"
           ><span class="select-user-image__text">Add background picture</span>
           <span
             class="icn-item icn-media"
@@ -22,7 +22,7 @@
         <input
           type="file"
           id="bg"
-          ref="bg"
+          ref="bgMain"
           accept=".jpg,.jpeg,.gif,.png"
           @change="setBgPreview"
         />
@@ -31,7 +31,12 @@
             class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
             @click="resetBgPreview"
           />
-          <button class="btn save-changes" @click="saveBg">Save changes</button>
+          <button
+            class="btn save-changes"
+            @click="saveBg({ isClear: false, refName: 'bgMain' })"
+          >
+            Save changes
+          </button>
         </div>
       </div>
     </div>
