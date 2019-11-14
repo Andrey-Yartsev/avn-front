@@ -9,6 +9,7 @@
           >+ Add story</span
         >
         <template v-else>
+          <span class="add-story-link" @click="addStory">+ Add story</span>
           <div class="btn-post" v-if="user.isPerformer">
             <router-link class="b-check-state b-check-state_live" to="/stream">
               <span
