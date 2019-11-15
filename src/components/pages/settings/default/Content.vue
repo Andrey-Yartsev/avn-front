@@ -165,6 +165,7 @@
                       class="field-gap_currency field-gap_timeunit"
                       type="number"
                       min="0"
+                      max="50"
                       step="0.01"
                       name="subscribePrice"
                       v-model="localUser.subscribePrice"
