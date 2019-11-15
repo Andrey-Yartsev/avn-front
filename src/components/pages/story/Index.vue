@@ -4,11 +4,7 @@
       <div class="stories-slideshow">
         <div class="StoryPageView active">
           <template v-if="currentStory.mediaType === 'photo'">
-            <img
-              class="storyItem_bg"
-              :src="currentStory.src.source || currentStory.preview.source"
-              alt
-            />
+            <img class="storyItem_bg" :src="imageSource(currentStory)" alt />
             <div
               class="story-image"
               @mousedown="pause"
@@ -18,7 +14,7 @@
             >
               <img
                 class="storyItem"
-                :src="currentStory.src.source || currentStory.preview.source"
+                :src="imageSource(currentStory)"
                 ref="storyItem"
                 alt
               />
@@ -485,7 +481,6 @@ export default {
 
       this.currIndex += 1;
     },
-
     runProgress() {
       const { isLook, mediaType, id } = this.currentStory;
 
@@ -499,7 +494,6 @@ export default {
         this.launchImage();
       }
     },
-
     launchImage() {
       // this.showLoader = true;
 
@@ -512,7 +506,6 @@ export default {
         }, 99);
       };
     },
-
     launchVideo() {
       const videoId = this.currentStory.id;
       const videoTag = this.$refs.storyItem;
@@ -546,7 +539,6 @@ export default {
           }
         });
     },
-
     activateVideoEvents() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
@@ -559,7 +551,6 @@ export default {
         videoTag.addEventListener("play", this.videoEventPlay);
       }
     },
-
     deactivateVideoEvents() {
       for (let videoId in this.videos) {
         if (this.videos.hasOwnProperty(videoId)) {
@@ -573,7 +564,6 @@ export default {
         }
       }
     },
-
     videoEventTimeupdate() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
@@ -584,12 +574,10 @@ export default {
         };
       }
     },
-
     videoEventEnded() {
       this.deactivateVideoEvents();
       this.next();
     },
-
     resetState() {
       if (this.timer) {
         this.timer.kill();
@@ -599,9 +587,7 @@ export default {
       this.deactivateVideoEvents();
       this.videos = {};
       this.showLoader = false;
-      // this.currActiveIndex = -1;
     },
-
     findNextUserStory() {
       const userIds = [...this.$store.state.common.storyList];
       const userId = userIds.shift();
@@ -611,12 +597,29 @@ export default {
           storyList: userIds
         });
 
+        this.currActiveIndex = -1;
         this.goTo(`/stories/${userId}`);
       } else {
         this.closePage();
       }
     },
-
+    preloadNextImages() {
+      const nextStory = this.findNextStory();
+      if (nextStory) {
+        const img = new Image();
+        img.src = this.imageSource(nextStory);
+      }
+    },
+    imageSource(story) {
+      return story.src.source || story.preview.source;
+    },
+    findNextStory() {
+      if (this.stories[this.currIndex + 1]) {
+        return this.stories[this.currIndex + 1];
+      } else {
+        return null;
+      }
+    },
     closePage() {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
@@ -631,7 +634,6 @@ export default {
         this.$router.go(-1);
       }
     },
-
     pause() {
       this.isPaused = true;
 
@@ -646,7 +648,6 @@ export default {
         videoTag.pause();
       }
     },
-
     resume() {
       this.isPaused = false;
 
@@ -659,7 +660,6 @@ export default {
         videoTag.play();
       }
     },
-
     deleteStory() {
       this.hideDropdown();
 
@@ -684,11 +684,9 @@ export default {
         this.closePage();
       }
     },
-
     storySettings() {
       this.$router.push("/settings/story");
     },
-
     saveToHighlights() {
       this.pause();
       this.$store.dispatch("modal/show", {
@@ -698,45 +696,38 @@ export default {
         }
       });
     },
-
     videoEventPlay() {
       if (this.currentStory.mediaType === "video") {
         const videoTag = this.videos[this.currentStory.id];
         videoTag.muted = false;
       }
     },
-
     videoEventWaiting() {
       if (this.forceWaitingEvent) {
         return;
       }
       this.showLoader = true;
     },
-
     videoEventPlaying() {
       this.showVideoPlay = false;
       this.showLoader = false;
     },
-
     addNewStory() {
       if (this.isOwner(this.author.id)) {
         this.pause();
         document.getElementById("storyFileSelect").click();
       }
     },
-
     openDropdown() {
       this.showDropdownMenu = true;
       this.pause();
     },
-
     hideDropdown() {
       if (this.showDropdownMenu) {
         this.showDropdownMenu = false;
         this.resume();
       }
     },
-
     init() {
       this.resetState();
       this.$store.dispatch("stories/page/resetPageState");
@@ -748,7 +739,6 @@ export default {
         });
       }
     },
-
     openViewersModal() {
       this.$store.dispatch("modal/show", {
         name: "storyViewers",
@@ -759,7 +749,6 @@ export default {
         }
       });
     },
-
     saveStat() {
       this.$root.ws.send({
         act: "collect",
@@ -885,6 +874,7 @@ export default {
       });
 
       this.saveStat();
+      this.preloadNextImages();
     },
     $route() {
       this.init();
