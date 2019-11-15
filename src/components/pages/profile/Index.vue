@@ -558,7 +558,7 @@ export default {
       return "profile/home";
     },
     scrollAction() {
-      if (!this.$refs.description) {
+      if (!this.$refs.description || !this.$refs.description.$el) {
         return;
       }
       if (window.pageYOffset < 250) {
