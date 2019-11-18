@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Comment from "@/components/common/postParts/comment/Index";
+import Comment from "@/components/post/parts/comment/Index";
 
 export default {
   name: "CommentsList",

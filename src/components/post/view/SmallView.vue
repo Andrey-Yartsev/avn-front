@@ -128,9 +128,9 @@
 <script>
 import { toHumanDuration } from "@/helpers/datetime";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
-import PostOpen from "@/mixins/postOpen";
+import PostOpen from "@/mixins/post/open";
 import userMixin from "@/mixins/user";
-import PostCommon from "@/mixins/postCommon";
+import PostCommon from "@/mixins/post/common";
 import Loader from "@/components/common/Loader";
 
 export default {

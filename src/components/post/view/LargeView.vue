@@ -214,15 +214,15 @@
 <script>
 import { fromNow } from "@/helpers/datetime";
 import User from "@/mixins/user";
-import Header from "@/components/common/postParts/header/Index";
-import Actions from "@/components/common/postParts/actions/Index";
-import Media from "@/components/common/postParts/media/Index";
-import CommentsList from "@/components/common/postParts/commentsListScrollable/Index";
-import AddComment from "@/components/common/postParts/addNewComment/Index";
+import Header from "@/components/post/parts/header/Index";
+import Actions from "@/components/post/parts/actions/Index";
+import Media from "@/components/post/parts/media/Index";
+import CommentsList from "@/components/post/parts/commentsListScrollable/Index";
+import AddComment from "@/components/post/parts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
-import PostStat from "@/mixins/postStat";
-import PostCommon from "@/mixins/postCommon";
-import postOpen from "@/mixins/postOpen";
+import PostStat from "@/mixins/post/stat";
+import PostCommon from "@/mixins/post/common";
+import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 

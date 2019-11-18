@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PostMediaPropsMixin from "@/mixins/postMedia";
+import PostMediaPropsMixin from "@/mixins/post/media";
 import Logger from "js-logger";
 
 const logger = Logger.get("stat");

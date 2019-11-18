@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import Dropdown from "@/components/common/postParts/header/Dropdown";
+import Dropdown from "@/components/post/parts/header/Dropdown";
 import ClickOutside from "vue-click-outside";
 import Bubble from "@/helpers/userBubble";
 import User from "@/mixins/user";

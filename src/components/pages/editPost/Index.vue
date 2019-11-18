@@ -15,7 +15,7 @@
 
 <script>
 import Footer from "@/components/footer/Index";
-import EditPost from "@/components/addPost/Index";
+import EditPost from "@/components/post/add/Index";
 
 export default {
   name: "EditPostPage",

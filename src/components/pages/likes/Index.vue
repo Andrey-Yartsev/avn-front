@@ -118,8 +118,8 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
-import PostCollection from "@/components/common/postCollection/Index";
-import PostVisibility from "@/mixins/postsVisibility";
+import PostCollection from "@/components/post/collection/Index";
+import PostVisibility from "@/mixins/post/visibility";
 import BackRouter from "@/router/backRouter";
 
 export default {

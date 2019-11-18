@@ -1,4 +1,4 @@
-import PostModal from "@/components/post/ModalView";
+import PostModal from "@/components/post/view/ModalView";
 import NotifModal from "@/components/pages/notification/Modal";
 import ChatModal from "@/components/chat/Modal";
 import ImageModal from "@/components/modal/Image";

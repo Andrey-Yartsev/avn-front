@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Dropdown from "@/components/common/postParts/header/Dropdown";
+import Dropdown from "@/components/post/parts/header/Dropdown";
 import ClickOutside from "vue-click-outside";
 import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";

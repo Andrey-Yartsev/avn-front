@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Comment from "@/components/common/postParts/comment/Index";
+import Comment from "@/components/post/parts/comment/Index";
 
 const findIndex = (arr, id) => {
   for (let i = 0; i < arr.length; i++) {

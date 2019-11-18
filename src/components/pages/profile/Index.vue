@@ -218,12 +218,12 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import PostCollection from "@/components/common/postCollection/Index";
-import PostSmall from "@/components/post/SmallView";
-import PostMedium from "@/components/post/MediumView";
+import PostCollection from "@/components/post/collection/Index";
+import PostSmall from "@/components/post/view/SmallView";
+import PostMedium from "@/components/post/view/MediumView";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import Visibility from "@/mixins/postsVisibility";
+import Visibility from "@/mixins/post/visibility";
 import UserMixin from "@/mixins/user";
 import FileUpload from "@/mixins/fileUpload";
 import HeaderControl from "@/components/common/profile/headerControl/Index";

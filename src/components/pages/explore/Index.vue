@@ -112,8 +112,8 @@
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
-import PostSmall from "@/components/post/SmallView";
-import PostMedium from "@/components/post/MediumView";
+import PostSmall from "@/components/post/view/SmallView";
+import PostMedium from "@/components/post/view/MediumView";
 import StoryMedium from "@/components/story/MediumView";
 import StorySmall from "@/components/story/SmallView";
 import Users from "@/components/users/Users";
@@ -121,10 +121,10 @@ import UserMixin from "@/mixins/user";
 import Live from "@/components/stream/MediumView";
 import Navigate from "./navigate/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import Visibility from "@/mixins/postsVisibility";
+import Visibility from "@/mixins/post/visibility";
 import Loader from "@/components/common/Loader";
-import PostsStat from "@/mixins/postsStat";
-import PostCollection from "@/components/common/postCollection/Index";
+import PostsStat from "@/mixins/post/statMany";
+import PostCollection from "@/components/post/collection/Index";
 import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
 

@@ -161,7 +161,7 @@
         <div
           class="b-check-state b-check-state_full-width b-check-state_watermark"
           :class="{ mediaSelected: preloadedMedias.length > 0 }"
-          v-if="localUser.hasWatermarkVideo || localUser.hasWatermarkPhoto"
+          v-if="user.hasWatermarkVideo || user.hasWatermarkPhoto"
         >
           <label :class="{ disabled: preloadedMedias.length > 0 }">
             <input
@@ -344,7 +344,6 @@ import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
-import Common from "../pages/settings/common";
 
 Settings.defaultLocale = "en";
 
@@ -360,7 +359,7 @@ const InitialState = {
 
 export default {
   name: "AddPost",
-  mixins: [FileUpload, UserMixin, UserSuggestions, Common],
+  mixins: [FileUpload, UserMixin, UserSuggestions],
   data() {
     return {
       ...InitialState,

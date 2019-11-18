@@ -34,8 +34,8 @@
 
 <script>
 import Footer from "@/components/footer/Index";
-import AddPost from "@/components/addPost/Index";
-import PostCollection from "@/components/common/postCollection/Index";
+import AddPost from "@/components/post/add/Index";
+import PostCollection from "@/components/post/collection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Loader from "@/components/common/Loader";
 

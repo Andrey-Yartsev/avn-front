@@ -37,7 +37,7 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import PostLargeView from "@/components/post/LargeView";
+import PostLargeView from "@/components/post/view/LargeView";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 
 export default {

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import PostMediaPropsMixin from "@/mixins/postMedia";
+import PostMediaPropsMixin from "@/mixins/post/media";
 
 export default {
   name: "LockedPicture",

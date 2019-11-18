@@ -62,7 +62,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import AddPost from "./Index";
-import PostCollection from "@/components/common/postCollection/Index";
+import PostCollection from "@/components/post/collection/Index";
 import Loader from "@/components/common/Loader";
 
 export default {

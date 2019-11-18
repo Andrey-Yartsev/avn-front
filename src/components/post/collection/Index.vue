@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Post from "@/components/post/MediumView";
-import PostsStat from "@/mixins/postsStat";
+import Post from "@/components/post/view/MediumView";
+import PostsStat from "@/mixins/post/statMany";
 import UserMixin from "@/mixins/user";
 
 export default {

@@ -93,16 +93,16 @@
 </template>
 
 <script>
-import AddComment from "@/components/common/postParts/addNewComment/Index";
-import CommentsList from "@/components/common/postParts/commentsList/Index";
-import Header from "@/components/common/postParts/header/Index";
-import Media from "@/components/common/postParts/media/Index";
-import Actions from "@/components/common/postParts/actions/Index";
+import AddComment from "@/components/post/parts/addNewComment/Index";
+import CommentsList from "@/components/post/parts/commentsList/Index";
+import Header from "@/components/post/parts/header/Index";
+import Media from "@/components/post/parts/media/Index";
+import Actions from "@/components/post/parts/actions/Index";
 import Tip from "@/components/common/tip/User";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import User from "@/mixins/user";
-import PostOpen from "@/mixins/postOpen";
-import PostCommon from "@/mixins/postCommon";
+import PostOpen from "@/mixins/post/open";
+import PostCommon from "@/mixins/post/common";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
 
