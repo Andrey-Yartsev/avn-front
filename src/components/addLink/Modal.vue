@@ -25,7 +25,7 @@ import Modal from "@/components/modal/Index";
 import Form from "./Form";
 
 export default {
-  name: "AddPostModal",
+  name: "AddLinkModal",
   components: {
     Modal,
     Form
