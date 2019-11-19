@@ -164,7 +164,7 @@ const Auth = {
       window.location = params.url;
       return;
     }
-    if (Auth.loggedIn.adminReturnUrl) {
+    if (Auth.loggedIn && Auth.loggedIn.adminReturnUrl) {
       return next();
     }
     const token = BrowserStore.get("token");
