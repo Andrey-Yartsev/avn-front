@@ -776,6 +776,21 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchReportReasons",
+  apiPath: "reports/reasons",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+  // paramsToOptions: function(params, options) {
+  //   options.data = params;
+  //   return options;
+  // }
+});
+
 export default {
   namespaced: true,
   state,
