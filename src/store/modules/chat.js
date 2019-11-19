@@ -535,7 +535,8 @@ createRequestAction({
   resultKey: "anyChats",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
-    options.query = { query: params };
+    params.limit = 20;
+    options.query = params;
     return options;
   },
   resultConvert: function(res) {
