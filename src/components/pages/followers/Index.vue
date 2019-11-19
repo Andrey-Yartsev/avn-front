@@ -125,7 +125,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
-import BackRouter from "@/router/backRouter";
+import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "Followers",

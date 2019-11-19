@@ -127,8 +127,8 @@ import Cookie from "@/utils/cookie";
 import BrowserStore from "store";
 import Logger from "js-logger";
 
-import rootClasses from "@/rootClasses";
-import postMessageHandler from "@/postMessage";
+import rootClasses from "@/utils/rootClasses";
+import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
