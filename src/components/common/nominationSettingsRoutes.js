@@ -1,5 +1,8 @@
 export default user => {
   const items = [];
+  if (!user.adminReturnUrl) {
+    return items;
+  }
   if (user.nominatable) {
     const a = {
       name: "avn",

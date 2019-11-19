@@ -139,7 +139,7 @@ export default {
       return this.$store.state.auth.user;
     },
     nominationRoutes() {
-      if (!this.user) {
+      if (!this.user || !this.user.adminReturnUrl) {
         return [];
       }
       return nominationRoutes(this.user);
