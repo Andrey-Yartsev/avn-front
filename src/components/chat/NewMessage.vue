@@ -173,7 +173,7 @@
               >
             </div>
           </template>
-          <span v-else-if="shasSelectedChats" class="mass-message"
+          <span v-else-if="hasSelectedChats" class="mass-message"
             >Mass message</span
           >
           <div
