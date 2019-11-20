@@ -178,7 +178,14 @@ export default {
       this.hide();
     },
     editPost() {
-      this.$router.push(`/post/edit/${this.postId}`);
+      this.hide();
+
+      this.$store.dispatch("modal/show", {
+        name: "editPost",
+        data: {
+          postId: this.postId
+        }
+      });
     },
     reportUser() {
       this.hide();

@@ -40,6 +40,7 @@
       <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
       <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
       <AddPostModal v-if="this.$store.state.modal.addPost.show" />
+      <EditPostModal v-if="this.$store.state.modal.editPost.show" />
       <GroupMessageModal v-if="this.$store.state.modal.groupMessage.show" />
       <AddLinkModal v-if="this.$store.state.modal.addLink.show" />
       <IframeModal v-if="this.$store.state.modal.iframe.show" />
@@ -108,6 +109,7 @@ import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
 import StoryInput from "@/components/story/Input";
 import AddPostModal from "@/components/post/add/Modal";
+import EditPostModal from "@/components/post/edit/Modal";
 import GroupMessageModal from "@/components/groupMessage/Modal";
 import AddLinkModal from "@/components/addLink/Modal";
 import StreamModal from "@/components/stream/ViewStreamModal";
@@ -196,6 +198,7 @@ export default {
     CreateStoryModal,
     StoryInput,
     AddPostModal,
+    EditPostModal,
     AddLinkModal,
     GroupMessageModal,
     IframeModal,

@@ -36,6 +36,10 @@ const state = {
     show: false,
     data: {}
   },
+  editPost: {
+    show: false,
+    data: {}
+  },
   addLink: {
     show: false,
     data: {}
