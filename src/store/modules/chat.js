@@ -783,7 +783,10 @@ createRequestAction({
   mutations,
   actions,
   options: {
-    method: "GET"
+    method: "GET",
+    query: {
+      type: "user"
+    }
   }
   // paramsToOptions: function(params, options) {
   //   options.data = params;
