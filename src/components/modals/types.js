@@ -143,6 +143,11 @@ const modalTypes = [
     componentName: "EditPostModal",
     storeName: "editPost",
     layoutOnlyModal: true
+  },
+  {
+    componentName: "AddMediaModal",
+    storeName: "addMedia",
+    layoutOnlyModal: true
   }
 ];
 
