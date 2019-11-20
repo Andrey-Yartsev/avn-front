@@ -72,7 +72,7 @@ export default {
         storyList: userIds.slice(index + 1, userIds.length)
       });
 
-      this.$router.push(`/stories/${id}`);
+      this.goToModalRoute(`/stories/${id}`);
     }
   }
 };

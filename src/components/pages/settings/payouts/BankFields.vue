@@ -45,7 +45,7 @@
       <div class="help-input" v-if="v.description" v-html="v.description"></div>
     </div>
     <div class="form-group form-group_help-fields form-group_with-label">
-      <div class="input-help" v-if="bankFields.length">
+      <div class="input-help hint-text-sm" v-if="bankFields.length">
         All fields is required
       </div>
     </div>

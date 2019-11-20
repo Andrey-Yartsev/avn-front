@@ -1,6 +1,13 @@
 <template>
   <div class="chat-section">
     <div
+      v-if="unreadMessagesCount"
+      class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
+    >
+      <span>Unread ({{ unreadMessagesCount }})</span
+      ><a href="#" @click.prevent="markAllAsRead">Mark All as Read</a>
+    </div>
+    <div
       class="loader-container loader-container_center"
       v-if="loading || !loaderHidden"
     >
@@ -68,6 +75,10 @@
                     v-if="v.textLength && isLocked(v) && !isMyMessage(v)"
                     >{{ lockedText(v) }}</span
                   >
+                  <SubscribeButton
+                    v-if="v.registerLink"
+                    :profile="v.fromUser"
+                  />
                 </span>
                 <div class="media-chat" v-if="v.media.length">
                   <MediaVideo
@@ -83,11 +94,21 @@
                   />
                 </div>
                 <template v-if="v.story">
-                  <a class="userView userView_card rounded-corners nolink">
-                    <div class="bg bg-color bg-gradient_light">
-                      <img :src="v.story.preview" />
+                  <div class="media-chat">
+                    <div class="media media-item">
+                      <figure
+                        class="media-item active media-item_photo"
+                        data-index="0"
+                      >
+                        <span class="postLink">
+                          <img
+                            :src="v.story.preview"
+                            class="media-content m-cover-size"
+                          />
+                        </span>
+                      </figure>
                     </div>
-                  </a>
+                  </div>
                 </template>
                 <template v-if="v.messageAttachment">
                   <a
@@ -134,8 +155,8 @@
           </div>
         </div>
 
-        <div class="typing semi-transparent">
-          <span v-if="typing">User is typing...</span>&nbsp;
+        <div class="typing semi-transparent" v-if="typing">
+          <span>User is typing...</span>&nbsp;
         </div>
 
         <div
@@ -155,6 +176,7 @@ import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
 import MediaVideo from "./media/VideoPreview";
+import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
 
 const bottomThreshold = 100; // pixels left to bottom of container
@@ -165,7 +187,8 @@ export default {
   components: {
     Loader,
     MediaImage,
-    MediaVideo
+    MediaVideo,
+    SubscribeButton
   },
 
   mixins: [userMixin],
@@ -229,6 +252,17 @@ export default {
     },
     typing() {
       return this.$store.state.chat.typing.indexOf(this.withUser.id) !== -1;
+    },
+    currentChat() {
+      return this.$store.state.chat.chats.find(
+        v => v.withUser.id === this.withUser.id
+      );
+    },
+    unreadMessagesCount() {
+      if (!this.currentChat) {
+        return null;
+      }
+      return this.currentChat.unreadMessagesCount;
     }
   },
 
@@ -565,6 +599,9 @@ export default {
     },
     fetchMoreMessages() {
       this.$store.dispatch("chat/fetchMoreMessages", this.withUser.id);
+    },
+    markAllAsRead() {
+      this.$store.dispatch("chat/markAllMessagesAsRead", this.withUser.id);
     }
   },
   mounted() {

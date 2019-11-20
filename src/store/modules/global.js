@@ -5,9 +5,7 @@ import BrowserStore from "store";
 const darkTheme = !!BrowserStore.get("darkTheme");
 
 const state = {
-  toastShowTrigger: false,
-  toastText: "",
-  toastType: null,
+  toasts: [],
   error: null,
   darkTheme,
   showUserMobileBar: false,
@@ -58,15 +56,16 @@ const actions = {
 
 const mutations = {
   toastShowTrigger(state, { text, type }) {
-    state.toastShowTrigger = !state.toastShowTrigger;
-    state.toastText = text;
-    if (!type) {
-      state.toastType = "success";
-    } else {
-      state.toastType = type;
-    }
+    const newToast = {
+      text,
+      type: type || "success",
+      id: Math.random() + Date.now()
+    };
+    state.toasts = [...state.toasts, newToast];
   },
-
+  hideToast(state, { id }) {
+    state.toasts = state.toasts.filter(item => item.id !== id);
+  },
   setError(state, error) {
     state.error = error;
   },

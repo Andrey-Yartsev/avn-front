@@ -4,14 +4,17 @@ import { createRequestAction } from "../utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 import postModal from "./notif/postModal";
 
+const limit = 20;
+
 const state = {
   type: "",
   loading: false,
   marker: null,
   offset: 0,
   allDataReceived: false,
-  limit: 20,
-  posts: []
+  limit,
+  posts: [],
+  unreadCount: 0
 };
 
 const mutations = {
@@ -22,7 +25,8 @@ const mutations = {
     state.marker = null;
     state.offset = 0;
     state.allDataReceived = false;
-    state.limit = 20;
+    state.limit = limit;
+    state.unreadCount = 0;
   },
   checkResult(state, items) {
     if (items.length < state.limit) {
@@ -31,17 +35,33 @@ const mutations = {
       state.offset = state.offset + state.limit;
     }
     // state.marker = marker;
+  },
+  setUnreadCount(state, count) {
+    state.unreadCount = count;
   }
 };
 
 const actions = {
   getPosts({ dispatch, commit, state }, params) {
-    params.type = params.type;
     params.offset = state.offset;
     params.marker = state.marker || "";
     params.limit = state.limit;
     dispatch("fetch", params).then(r => {
       commit("checkResult", r);
+      if (!r.unreadCount) {
+        dispatch(
+          "auth/extendUser",
+          { hasNotifications: false },
+          { root: true }
+        );
+      }
+      commit("setUnreadCount", r.unreadCount);
+    });
+  },
+  markAllAsRead({ dispatch, commit }) {
+    dispatch("_markAllAsRead").then(() => {
+      commit("setUnreadCount", 0);
+      dispatch("auth/extendUser", { hasNotifications: false }, { root: true });
     });
   }
 };
@@ -69,6 +89,16 @@ createRequestAction({
   },
   resultConvert: function(result, state) {
     return [...state.posts, ...result.list];
+  }
+});
+createRequestAction({
+  prefix: "_markAllAsRead",
+  apiPath: "users/notifications-read",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
   }
 });
 

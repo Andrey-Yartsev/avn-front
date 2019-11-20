@@ -142,13 +142,6 @@
     z-index: 2;
   }
 
-  //.user-login {
-  //
-  //  @include media-breakpoint-up($desktop-breakpoint) {
-  //    font-size: 17px;
-  //  }
-  //}
-
   .header-popup-menu-btn {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -424,7 +417,7 @@
   .header-scrolled & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
-      height: calc(100vh - 152px);
+      height: calc(100vh - 148px);
     }
   }
 
@@ -1614,5 +1607,6 @@
     margin-right: -15px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 15px;
   }
 }

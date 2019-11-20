@@ -1,4 +1,7 @@
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
+
 export default {
+  mixins: [ModalRouterGoto],
   computed: {
     userIds() {
       return this.stories.map(s => s.user.id);
@@ -25,7 +28,7 @@ export default {
         storyList: userIds.slice(index + 1, userIds.length)
       });
 
-      this.$router.push(`/stories/${id}`);
+      this.goToModalRoute(`/stories/${id}`);
     }
   }
 };

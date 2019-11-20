@@ -76,7 +76,7 @@
         <div
           class="aside-col aside-col_sticky aside-col_sticky-al-bottom aside-col_with-footer"
         >
-          <StoriesWrapper></StoriesWrapper>
+          <StoriesWrapper />
           <Footer v-if="$mq === 'desktop'"></Footer>
         </div>
       </div>
@@ -85,16 +85,16 @@
 </template>
 
 <script>
-import PostCollection from "@/components/common/postCollection/Index";
+import PostCollection from "@/components/post/collection/Index";
 import NewFeedPostToast from "@/components/common/newFeedPostToast/Index";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index";
-import AddPost from "@/components/addPost/Fake";
+import AddPost from "@/components/post/add/Fake";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Wsp from "@/mixins/wsp";
 import Loader from "@/components/common/Loader";
-import PostVisibility from "@/mixins/postsVisibility";
+import PostVisibility from "@/mixins/post/visibility";
 
 export default {
   name: "HomePage",
@@ -154,10 +154,9 @@ export default {
       }
       this.$store.dispatch("home/getPosts");
 
-      this.$store.dispatch("stories/resetPageState");
-      this.$store.dispatch("stories/setSource", { source: "feed" });
-      this.$store.dispatch("stories/setLimit", { limit: 100 });
-      this.$store.dispatch("stories/getPosts");
+      this.$store.dispatch("stories/feed/resetPageState");
+      this.$store.dispatch("stories/feed/setLimit", { limit: 100 });
+      this.$store.dispatch("stories/feed/getPosts");
 
       this.$store.dispatch("lives/resetPageState");
       this.$store.dispatch("lives/setSource", { source: "feed" });
@@ -178,6 +177,7 @@ export default {
     },
     newPost() {
       this.$store.dispatch("modal/hide", { name: "addPost" });
+      this.$store.dispatch("modal/hide", { name: "editPost" });
       this.init();
     },
     updatedPost() {

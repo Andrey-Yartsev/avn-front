@@ -161,10 +161,12 @@ export default {
       });
     },
     searchChange() {
-      this.$router.push(`/search/${this.type}/${this.localQuery}`);
+      this.$router
+        .push(`/search/${this.type}/${this.localQuery}`)
+        .catch(() => {});
     },
     changeType(type) {
-      this.$router.push(`/search/${type}/${this.query}`);
+      this.$router.push(`/search/${type}/${this.query}`).catch(() => {});
     },
     infinityScrollGetDataMethod() {
       this.searchNext();
@@ -185,7 +187,9 @@ export default {
       this.lastYOffset = 0;
       this.$store.commit("search/page/reset");
       this.$store.commit("search/summary/reset");
-      this.$router.push(`/search/${this.type}/${this.localQuery}`);
+      this.$router
+        .push(`/search/${this.type}/${this.localQuery}`)
+        .catch(() => {});
       this.getSummary();
       this.search();
     },
@@ -212,7 +216,7 @@ export default {
       }
 
       if (goTo) {
-        this.$router.push(`/search/${goTo}/${this.localQuery}`);
+        this.$router.push(`/search/${goTo}/${this.localQuery}`).catch(() => {});
       }
     }
   },

@@ -4,11 +4,7 @@
       <div class="stories-slideshow">
         <div class="StoryPageView active">
           <template v-if="currentStory.mediaType === 'photo'">
-            <img
-              class="storyItem_bg"
-              :src="currentStory.src.source || currentStory.preview.source"
-              alt
-            />
+            <img class="storyItem_bg" :src="imageSource(currentStory)" alt />
             <div
               class="story-image"
               @mousedown="pause"
@@ -18,7 +14,7 @@
             >
               <img
                 class="storyItem"
-                :src="currentStory.src.source || currentStory.preview.source"
+                :src="imageSource(currentStory)"
                 ref="storyItem"
                 alt
               />
@@ -28,7 +24,6 @@
             v-if="currentStory.mediaType === 'video'"
             class="story-video-element storyItem"
             autoplay
-            loop
             :playsinline="$mq === 'mobile'"
             :src="currentStory.src.source"
             ref="storyItem"
@@ -294,7 +289,7 @@
       <button
         type="button"
         class="close close_light icn-item icn-size_lg"
-        @click="close"
+        @click="closePage"
       />
       <div
         :class="['play-button-wrapper', { hidden: !showVideoPlay }]"
@@ -336,14 +331,15 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import userMixin from "@/mixins/user";
+import User from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
 import ClickOutside from "vue-click-outside";
 import Tip from "@/components/common/tip/User";
+import ModalRouterParams from "@/mixins/modalRouter/params";
 
 export default {
   name: "StoryPage",
-  mixins: [userMixin],
+  mixins: [User, ModalRouterParams],
   components: {
     Loader,
     Tip
@@ -364,7 +360,7 @@ export default {
       isPaused: false,
       videoDoesNotExists: false,
       showTip: false,
-      showComments: true,
+      showComments: false,
       comment: "",
       activeTip: false,
       activeComments: true,
@@ -373,22 +369,22 @@ export default {
   },
   computed: {
     collection() {
-      return this.$store.state.stories.collection || {};
+      return this.$store.state.stories.page.collection || {};
     },
     length() {
-      return this.$store.state.stories.posts.length;
+      return this.$store.state.stories.page.posts.length;
     },
     stories() {
-      return this.$store.state.stories.posts;
+      return this.$store.state.stories.page.posts;
     },
     error() {
-      return this.$store.state.stories.error;
+      return this.$store.state.stories.page.error;
     },
     author() {
-      return this.$store.state.stories.user;
+      return this.$store.state.stories.page.user;
     },
     loading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.page.loading;
     },
     loadingFinal() {
       if (this.videoDoesNotExists) {
@@ -403,9 +399,13 @@ export default {
       return this.currentStory.isReady;
     },
     userId() {
-      return this.$route.params.userId;
+      // console.log(this.$store.state.modalRouter);
+      return this.routeParams.userId;
     },
     currentStory() {
+      if (!this.stories) {
+        return;
+      }
       return this.stories[this.currIndex];
     },
     newPost() {
@@ -435,6 +435,9 @@ export default {
     },
     isMine() {
       return this.isOwner(this.author.id);
+    },
+    isFollowedOrFollowing() {
+      return this.author.followedBy || this.author.followedOn;
     }
   },
   methods: {
@@ -451,6 +454,19 @@ export default {
       this.$refs.tip.reset();
     },
     openComments() {
+      if (!this.isFollowedOrFollowing) {
+        this.$store.dispatch(
+          "global/flashToast",
+          {
+            text: "You need to follow user to send a message",
+            type: "warning"
+          },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.pause();
       this.showComments = true;
       this.showTip = false;
@@ -465,7 +481,6 @@ export default {
 
       this.currIndex += 1;
     },
-
     runProgress() {
       const { isLook, mediaType, id } = this.currentStory;
 
@@ -479,20 +494,18 @@ export default {
         this.launchImage();
       }
     },
-
     launchImage() {
-      this.showLoader = true;
+      // this.showLoader = true;
 
       this.$refs.storyItem.onload = () => {
         this.timer = new StoryTimer(() => this.next(), 4000);
-        this.showLoader = false;
+        // this.showLoader = false;
 
         setTimeout(() => {
           this.currActiveIndex = this.currIndex;
         }, 99);
       };
     },
-
     launchVideo() {
       const videoId = this.currentStory.id;
       const videoTag = this.$refs.storyItem;
@@ -518,13 +531,14 @@ export default {
           this.forceWaitingEvent = true;
           this.showLoader = false;
           this.showVideoPlay = true;
-          this.$refs.videoPlayButton.addEventListener(
-            "click",
-            this.launchVideo
-          );
+          if (this.$refs.videoPlayButton) {
+            this.$refs.videoPlayButton.addEventListener(
+              "click",
+              this.launchVideo
+            );
+          }
         });
     },
-
     activateVideoEvents() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
@@ -537,7 +551,6 @@ export default {
         videoTag.addEventListener("play", this.videoEventPlay);
       }
     },
-
     deactivateVideoEvents() {
       for (let videoId in this.videos) {
         if (this.videos.hasOwnProperty(videoId)) {
@@ -551,7 +564,6 @@ export default {
         }
       }
     },
-
     videoEventTimeupdate() {
       const videoId = this.currentStory.id;
       const videoTag = this.videos[videoId];
@@ -562,12 +574,10 @@ export default {
         };
       }
     },
-
     videoEventEnded() {
       this.deactivateVideoEvents();
       this.next();
     },
-
     resetState() {
       if (this.timer) {
         this.timer.kill();
@@ -577,9 +587,7 @@ export default {
       this.deactivateVideoEvents();
       this.videos = {};
       this.showLoader = false;
-      this.currActiveIndex = -1;
     },
-
     findNextUserStory() {
       const userIds = [...this.$store.state.common.storyList];
       const userId = userIds.shift();
@@ -589,22 +597,43 @@ export default {
           storyList: userIds
         });
 
-        this.$router.replace(`/stories/${userId}`);
+        this.currActiveIndex = -1;
+        this.goTo(`/stories/${userId}`);
       } else {
-        this.close();
+        this.closePage();
       }
     },
-
-    close() {
+    preloadNextImages() {
+      const nextStory = this.findNextStory();
+      if (nextStory) {
+        const img = new Image();
+        img.src = this.imageSource(nextStory);
+      }
+    },
+    imageSource(story) {
+      return story.src.source || story.preview.source;
+    },
+    findNextStory() {
+      if (this.stories[this.currIndex + 1]) {
+        return this.stories[this.currIndex + 1];
+      } else {
+        return null;
+      }
+    },
+    closePage() {
       this.resetState();
       this.$store.dispatch("common/resetStoryList");
+      if (this.mode === "modal") {
+        // closing modal-router
+        this.close();
+        return;
+      }
       if (global.storyFirstEnter) {
         this.$router.push("/");
       } else {
         this.$router.go(-1);
       }
     },
-
     pause() {
       this.isPaused = true;
 
@@ -619,7 +648,6 @@ export default {
         videoTag.pause();
       }
     },
-
     resume() {
       this.isPaused = false;
 
@@ -632,7 +660,6 @@ export default {
         videoTag.play();
       }
     },
-
     deleteStory() {
       this.hideDropdown();
 
@@ -649,14 +676,17 @@ export default {
       );
 
       if (this.currIndex === this.length - 1) {
-        this.close();
+        if (this.stories.length === 1) {
+          this.$store.dispatch("story/removePost", {
+            authorId: this.$store.state.auth.user.id
+          });
+        }
+        this.closePage();
       }
     },
-
     storySettings() {
       this.$router.push("/settings/story");
     },
-
     saveToHighlights() {
       this.pause();
       this.$store.dispatch("modal/show", {
@@ -666,56 +696,49 @@ export default {
         }
       });
     },
-
     videoEventPlay() {
       if (this.currentStory.mediaType === "video") {
         const videoTag = this.videos[this.currentStory.id];
         videoTag.muted = false;
       }
     },
-
     videoEventWaiting() {
       if (this.forceWaitingEvent) {
         return;
       }
       this.showLoader = true;
     },
-
     videoEventPlaying() {
       this.showVideoPlay = false;
       this.showLoader = false;
     },
-
     addNewStory() {
       if (this.isOwner(this.author.id)) {
         this.pause();
         document.getElementById("storyFileSelect").click();
       }
     },
-
     openDropdown() {
       this.showDropdownMenu = true;
       this.pause();
     },
-
     hideDropdown() {
       if (this.showDropdownMenu) {
         this.showDropdownMenu = false;
         this.resume();
       }
     },
-
     init() {
       this.resetState();
+      this.$store.dispatch("stories/page/resetPageState");
       if (this.isCollections) {
-        this.$store.dispatch("stories/resetPageState");
-        this.$store.dispatch("stories/getCollection", { id: this.userId });
+        this.$store.dispatch("stories/page/getCollection", { id: this.userId });
       } else {
-        this.$store.dispatch("stories/resetPageState");
-        this.$store.dispatch("stories/getUserPosts", { userId: this.userId });
+        this.$store.dispatch("stories/page/getUserPosts", {
+          userId: this.userId
+        });
       }
     },
-
     openViewersModal() {
       this.$store.dispatch("modal/show", {
         name: "storyViewers",
@@ -726,7 +749,6 @@ export default {
         }
       });
     },
-
     saveStat() {
       this.$root.ws.send({
         act: "collect",
@@ -794,6 +816,11 @@ export default {
         }
       });
 
+      this.$store.commit("global/toastShowTrigger", {
+        text: `Message has sent to ${this.author.username} chat`,
+        type: "success"
+      });
+
       this.comment = "";
     }
   },
@@ -847,6 +874,7 @@ export default {
       });
 
       this.saveStat();
+      this.preloadNextImages();
     },
     $route() {
       this.init();

@@ -1,6 +1,6 @@
 @import "components/imports";
 
-.story-page {
+.highlights-popup {
 
   .msg-no-content {
     background-color: $white;
@@ -509,10 +509,9 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     background: none;
-    margin-bottom: 10px;
     margin-left: -4px;
     overflow: visible;
-    min-height: 140px;
+    //min-height: 140px;
   }
 
   &:before {
@@ -1126,4 +1125,48 @@
   top: 0;
   bottom: 0;
   z-index: 1;
+}
+
+.b-toggled {
+
+  &__header {
+    position: relative;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      cursor: pointer;
+    }
+
+    &:after {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        content: "\E608";
+        @include icon-font;
+        font-size: 24px;
+        position: absolute;
+        right: 0;
+        top: 25px;
+        width: 22px;
+        height: 10px;
+        line-height: 10px;
+        transition: transform .3s;
+
+        .state-toggled & {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+  }
+
+  &__content {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s;
+
+      .state-toggled & {
+        max-height: 1000px;
+      }
+    }
+  }
 }

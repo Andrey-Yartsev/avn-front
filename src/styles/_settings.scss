@@ -210,6 +210,21 @@
         display: none;
       }
     }
+    .BlockedPostsView & {
+      .blocked-search,
+      .table,
+      .table-wrapper {
+        display: block;
+      }
+      .blocked-table-header {
+        display: flex;
+      }
+      .semi-transparent,
+      .settings-nav,
+      form {
+        display: none;
+      }
+    }
   }
 }
 

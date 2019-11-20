@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Video from "@/components/post/SmallView";
-import PostsStat from "@/mixins/postsStat";
+import Video from "@/components/post/view/SmallView";
+import PostsStat from "@/mixins/post/statMany";
 
 export default {
   name: "SearchPosts",

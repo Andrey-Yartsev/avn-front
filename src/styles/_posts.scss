@@ -1241,18 +1241,21 @@
     top: 50px;
   }
 
-  .profile-page & {
-    top: 94px;
+  &:not(.unread-box) {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      top: 140px;
+    .profile-page & {
+      top: 94px;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        top: 140px;
+      }
     }
-  }
+    
+    html:not(.profile-page) .scroll-top & {
 
-  html:not(.profile-page) .scroll-top & {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      transform: translateY(-44px);
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        transform: translateY(-44px);
+      }
     }
   }
 

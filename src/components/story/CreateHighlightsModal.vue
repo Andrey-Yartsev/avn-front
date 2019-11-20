@@ -59,7 +59,9 @@
                       maxlength="70"
                       placeholder="Highlights"
                       class="text-centered lg"
+                      :class="{ highlightsInput: !title.length }"
                       v-model="title"
+                      ref="highlightsInput"
                     />
                   </div>
                 </div>
@@ -118,11 +120,7 @@
                     </div>
                   </div>
                   <div class="loader-infinity" v-if="loading">
-                    <Loader
-                      :fullscreen="false"
-                      :inline="true"
-                      :class="{ small: stories.length }"
-                    />
+                    <Loader :fullscreen="false" :inline="true" :small="true" />
                   </div>
                 </perfect-scrollbar>
               </div>
@@ -224,8 +222,19 @@ export default {
     step() {
       if (this.step === 2) {
         this.choosenCover = this.checked[0];
+        this.$nextTick(() => {
+          if (this.$refs.highlightsInput) {
+            this.$refs.highlightsInput.focus();
+          }
+        });
       }
     }
   }
 };
 </script>
+
+<style lang="scss">
+.highlightsInput:not(:focus) {
+  border: 1px solid red;
+}
+</style>

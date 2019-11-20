@@ -6,7 +6,7 @@
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
         <div class="inner">
           <span class="semi-transparent">
-            Blocked users
+            {{ title }}
             <p class="subtext">
               {{ subtext }}
             </p>
@@ -50,7 +50,10 @@
             <div class="item" v-for="v in items" v-bind:key="v.id">
               <div class="table__cell">
                 <router-link :to="'/' + v.username" class="userview-block">
-                  <span class="avatar avatar_sm">
+                  <span
+                    class="avatar avatar_sm"
+                    :class="{ 'online-state': isOnline(v.id) }"
+                  >
                     <span class="avatar__img">
                       <img :src="v.avatar" v-if="v.avatar" />
                     </span>
@@ -123,11 +126,16 @@
 
 <script>
 import moment from "moment";
+import User from "@/mixins/user";
 
 export default {
   name: "BlockedUsers",
-
+  mixins: [User],
   props: {
+    title: {
+      type: String,
+      default: "Blocked users"
+    },
     mobileBlockedRoute: {
       type: String,
       required: true
@@ -154,6 +162,8 @@ export default {
         return this.$store.state.blocked;
       } else if (this.source === "stories") {
         return this.$store.state.viewers;
+      } else if (this.source === "blockedPosts") {
+        return this.$store.state.blockedPosts;
       }
     },
     storePath() {
@@ -161,6 +171,8 @@ export default {
         return "blocked";
       } else if (this.source === "stories") {
         return "viewers";
+      } else if (this.source === "blockedPosts") {
+        return "blockedPosts";
       }
     },
     initItems() {
@@ -182,7 +194,11 @@ export default {
     },
     unblock(userId) {
       this.$store.dispatch(this.storePath + "/unblock", userId).then(() => {
-        this.$store.dispatch(this.storePath + "/fetchBlocked");
+        if (this.source === "users" || this.source === "blockedPosts") {
+          this.$store.dispatch(this.storePath + "/filterBlocked", userId);
+        } else {
+          this.$store.dispatch(this.storePath + "/fetchBlocked");
+        }
       });
     }
   },

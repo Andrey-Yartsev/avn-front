@@ -91,6 +91,7 @@
           type="submit"
           class="btn alt block"
           :class="{ lg: largeControls }"
+          :disabled="isLoading"
         >
           Login
         </button>
@@ -102,6 +103,7 @@
         class="btn block btn-twitter"
         :class="{ lg: largeControls }"
         @click.prevent="handleTwitter"
+        :disabled="isLoading"
       >
         <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with
         Twitter
@@ -187,6 +189,9 @@ export default {
     },
     mainClass() {
       return this.otpAuth ? "otp" : "login";
+    },
+    isLoading() {
+      return this.$store.state.auth.loading;
     }
   },
 

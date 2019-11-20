@@ -276,7 +276,7 @@ const result = {
       });
     },
     deletePost(state, { postId }) {
-      state.deletedPost = postId;
+      state.deletedPost = state.posts.find(post => post.id === postId);
       state.posts = state.posts.filter(post => postId !== post.id);
     },
     resetComments(state, { postId }) {

@@ -199,7 +199,10 @@ const actions = {
   fetchMessages({ dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
-      dispatch("markChatAsViewed", activeUserId);
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId: activeUserId
+      });
       if (r.list.length >= messagesLimit) {
         commit("allMessagesLoaded", false);
       }
@@ -212,7 +215,11 @@ const actions = {
   },
   fetchMoreMessages({ dispatch, commit, state }, userId) {
     commit("fetchingOld", true);
-    dispatch("_fetchMoreMessages", { userId }).then(() => {
+    dispatch("_fetchMoreMessages", { userId }).then(r => {
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: r.unreadMessagesCount,
+        userId
+      });
       if (!state.moreMessages.length) {
         commit("allMessagesLoaded", true);
         return;
@@ -224,13 +231,20 @@ const actions = {
       commit("addOldMessages");
     });
   },
+  markAllMessagesAsRead({ dispatch, commit }, userId) {
+    dispatch("_markAllMessagesAsRead", userId).then(() => {
+      commit("updateUnreadMessagesCount", {
+        unreadMessagesCount: 0,
+        userId
+      });
+    });
+  },
   delete({ dispatch, commit }, userId) {
     dispatch("_delete", userId).then(() => {
       commit("removeChat", userId);
     });
   },
-  markChatAsViewed({ commit, dispatch }, userId) {
-    commit("resetUnreadMessagesCount", userId);
+  markChatAsViewed({ dispatch }) {
     dispatch("updateHasMessages");
   },
   updateHasMessages({ dispatch, state, rootState }) {
@@ -348,6 +362,14 @@ const mutations = {
       state.chats,
       chat => chat.withUser.id === userId,
       chat => (chat.unreadMessagesCount = 0),
+      this._vm
+    );
+  },
+  updateUnreadMessagesCount(state, { unreadMessagesCount, userId }) {
+    state.chats = arrayUtils.modifyByCondition(
+      state.chats,
+      chat => chat.withUser.id === userId,
+      chat => (chat.unreadMessagesCount = unreadMessagesCount),
       this._vm
     );
   },
@@ -492,6 +514,9 @@ createRequestAction({
       offset: params
     };
     return options;
+  },
+  resultConvert: function(res) {
+    return res.list;
   }
 });
 
@@ -510,8 +535,12 @@ createRequestAction({
   resultKey: "anyChats",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
-    options.query = { query: params };
+    params.limit = 20;
+    options.query = params;
     return options;
+  },
+  resultConvert: function(res) {
+    return res.list;
   }
 });
 
@@ -640,6 +669,23 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "sendGroupMessage",
+  apiPath: "chats/recipients/messages",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  localError: true,
+  throw400: true,
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
   prefix: "sendMultiMessages",
   apiPath: "chats/bulk/messages",
   state,
@@ -714,6 +760,38 @@ createRequestAction({
   paramsToPath: function(params, path) {
     return path.replace(/{username}/, params);
   }
+});
+
+createRequestAction({
+  prefix: "_markAllMessagesAsRead",
+  apiPath: "chats/{userId}/messages-read",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "fetchReportReasons",
+  apiPath: "reports/reasons",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {
+      type: "user"
+    }
+  }
+  // paramsToOptions: function(params, options) {
+  //   options.data = params;
+  //   return options;
+  // }
 });
 
 export default {

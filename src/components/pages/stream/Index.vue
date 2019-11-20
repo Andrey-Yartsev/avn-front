@@ -329,7 +329,7 @@ import Loader from "@/components/common/Loader";
 import StreamStatistic from "@/components/pages/stream/Statistic";
 import Filters from "@/components/pages/stream/Filters";
 import userMixin from "@/mixins/user";
-import Streams from "streaming-module/stream_module";
+import StreamModule from "streaming-module/stream_module";
 import StreamApi from "@/api/stream";
 import ClickOutside from "vue-click-outside";
 import logoBase64 from "./logo";
@@ -441,16 +441,18 @@ export default {
       this.shownStreamVideoMenu = false;
     },
     setStreamVideo(value) {
-      Streams.switchDevices(false, value.deviceId);
+      this.streamModule.switchDevices(false, value.deviceId);
       this.streamVideo = value;
       this.shownStreamVideoMenu = false;
       setTimeout(() => {
-        this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
+        this.isMirror =
+          this.streamModule.cameraFacingMode === "user" &&
+          this.streamModule.isMobile;
       }, 333);
     },
     toggleCamera() {
       const currentDevice = this.streamVideos.find(
-        device => device.deviceId === Streams.videoVars.device.id
+        device => device.deviceId === this.streamModule.videoVars.device.id
       );
 
       let camIndex = this.streamVideos.indexOf(currentDevice);
@@ -466,7 +468,7 @@ export default {
       this.shownStreamAudioMenu = false;
     },
     setStreamAudio(value) {
-      Streams.switchDevices(value.deviceId, false);
+      this.streamModule.switchDevices(value.deviceId, false);
       this.streamAudio = value;
       this.shownStreamAudioMenu = false;
     },
@@ -476,7 +478,7 @@ export default {
         /* defaultAudioDevice, */
         videoDevices,
         defaultVideoDevice
-      } = Streams.getDevices();
+      } = this.streamModule.getDevices();
 
       this.isReadyToStart = true;
 
@@ -486,7 +488,9 @@ export default {
       this.streamAudio = this.streamAudios[1];
 
       setTimeout(() => {
-        this.isMirror = Streams.cameraFacingMode === "user" && Streams.isMobile;
+        this.isMirror =
+          this.streamModule.cameraFacingMode === "user" &&
+          this.streamModule.isMobile;
       }, 333);
     },
     tick() {
@@ -545,7 +549,7 @@ export default {
             });
           } else {
             this.isStarted = true;
-            Streams.startStream();
+            this.streamModule.startStream();
           }
         });
     },
@@ -557,10 +561,10 @@ export default {
     stopStream() {
       this.isStoppedByButton = true;
       this.requestStreamStat();
-      Streams.stopStream();
+      this.streamModule.stopStream();
     },
     getLikePosition(data) {
-      const video = document.getElementById(Streams.config.videoElId);
+      const video = document.getElementById(this.streamModule.config.videoElId);
       let video_width = video.videoWidth;
       let video_height = video.videoHeight;
       let video_ratio = video_height / video_width;
@@ -661,7 +665,7 @@ export default {
       }
     },
     changeFilter(value) {
-      Streams.changeFilter(value);
+      this.streamModule.changeFilter(value);
     },
     showBlockUserConfirm(userId) {
       this.$store.dispatch("modal/show", {
@@ -680,7 +684,7 @@ export default {
         })
         .then(() => {
           try {
-            Streams.sendCustomMessage({
+            this.streamModule.sendCustomMessage({
               msgtype: "data.custom",
               to: ["viewer"],
               data: {
@@ -689,7 +693,7 @@ export default {
               }
             });
           } catch (error) {
-            console.log("Error while sending  sendCustomMessage message ", {});
+            console.log("Error while sending sendCustomMessage message ", {});
           }
         });
     },
@@ -704,7 +708,7 @@ export default {
     },
     kickUserForStream(userId) {
       try {
-        Streams.sendCustomMessage({
+        this.streamModule.sendCustomMessage({
           msgtype: "data.custom",
           to: ["viewer"],
           data: {
@@ -713,7 +717,7 @@ export default {
           }
         });
       } catch (error) {
-        console.log("Error while sending  sendCustomMessage message ", {});
+        console.log("Error while sending sendCustomMessage message ", {});
       }
     }
   },
@@ -731,9 +735,10 @@ export default {
 
     const { onDevicesReadyCallback } = this;
     const token = this.$store.state.auth.token;
-    window.streamModule = Streams;
+    this.streamModule = new StreamModule();
+    window.streamModule = this.streamModule;
 
-    Streams.init({
+    this.streamModule.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       thumbEnabled: true,
       videoSave: true,
@@ -760,7 +765,7 @@ export default {
         this.$store.dispatch("global/setError", { message: error });
         // eslint-disable-next-line
         console.trace(error);
-        Streams.config.onStreamEnd();
+        this.streamModule.config.onStreamEnd();
       },
       onStreamTick: start => {
         this.tick(start);
@@ -791,12 +796,12 @@ export default {
 
             this.startedStreamId = id;
             this.startingStream = false;
-            Streams.config.clientGetApiUrl = StreamApi.getStreamClientPath(
+            this.streamModule.config.clientGetApiUrl = StreamApi.getStreamClientPath(
               id,
               token
             );
-            Streams.getStreamAsClient();
-            Streams.sendCustomMessage({
+            this.streamModule.getStreamAsClient();
+            this.streamModule.sendCustomMessage({
               msgtype: "data.custom",
               to: ["transcoder"],
               data: {
@@ -870,7 +875,7 @@ export default {
     });
   },
   beforeDestroy() {
-    Streams.stopAllTracks(Streams.localStream);
+    this.streamModule.stopAllTracks(this.streamModule.localStream);
     window.clearInterval(this.likesInterval);
   },
   watch: {

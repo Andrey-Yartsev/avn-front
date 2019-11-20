@@ -165,6 +165,7 @@
                       class="field-gap_currency field-gap_timeunit"
                       type="number"
                       min="0"
+                      :max="setMaxPrice"
                       step="0.01"
                       name="subscribePrice"
                       v-model="localUser.subscribePrice"
@@ -401,6 +402,9 @@ export default {
     },
     tz() {
       return moment.tz.names();
+    },
+    setMaxPrice() {
+      return this.user.subscribePrice > 50 ? null : 50;
     }
   },
 

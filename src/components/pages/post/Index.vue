@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Post from "@/components/post/LargeView";
+import Post from "@/components/post/view/LargeView";
 import Footer from "@/components/footer/Index";
 
 export default {

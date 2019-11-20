@@ -2,13 +2,14 @@
   <div
     class="bg-profile bg-profile_height bg-profile_height-lg bg-profile_sticky bg-profile_sticky-default bg-color bg-gradient_standart"
     :style="bgStyle"
+    ref="bg"
   >
     <div class="container" v-if="isOwner(profile.id) && !profile.header">
       <div class="controls-select-picture">
         <label
           for="bg"
           class="select-user-image select-user-image_cover select-user-image_cover-lg"
-          :class="{ hide: profile.header || !showBgAdd }"
+          :class="{ hide: profile.header || hideBgAdd }"
           ><span class="select-user-image__text">Add background picture</span>
           <span
             class="icn-item icn-media"
@@ -21,7 +22,7 @@
         <input
           type="file"
           id="bg"
-          ref="bg"
+          ref="bgMain"
           accept=".jpg,.jpeg,.gif,.png"
           @change="setBgPreview"
         />
@@ -30,7 +31,12 @@
             class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
             @click="resetBgPreview"
           />
-          <button class="btn save-changes" @click="saveBg">Save changes</button>
+          <button
+            class="btn save-changes"
+            @click="saveBg({ isClear: false, refName: 'bgMain' })"
+          >
+            Save changes
+          </button>
         </div>
       </div>
     </div>
@@ -64,16 +70,23 @@ export default {
   components: {
     Loader
   },
+  data() {
+    return {
+      headerHeight: 320 + 85, // bg + menu
+      stopHeight: 250
+    };
+  },
   computed: {
     bgStyle() {
       const style = {
         "margin-right": `${-this.scrollBarWidth}px`,
         "padding-right": `${this.scrollBarWidth}px`
       };
-      return this.bgPreview || this.profile.header
+      return this.bgPreview || this.profile.headerFull
         ? {
             ...style,
-            "background-image": `url(${this.bgPreview || this.profile.header})`
+            "background-image": `url(${this.bgPreview ||
+              this.profile.headerFull})`
           }
         : style;
     },

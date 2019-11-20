@@ -18,7 +18,7 @@
               for="bg"
               class="select-user-image select-user-image_cover select-user-image_cover-sm"
               :class="{ 'single-btn': !user.header }"
-              v-show="showBgAdd"
+              v-show="!hideBgAdd"
             >
               <span class="select-user-image__text" v-if="!user.header">
                 Add background picture
@@ -33,7 +33,7 @@
             </label>
             <span
               v-if="!bgRemoved && user.header"
-              v-show="showBgAdd"
+              v-show="!hideBgAdd"
               class="reset-user-image reset-bg icn-item btn-reset icn-pos_center"
               :class="{ 'icn-size_lg': $mq === 'mobile' }"
               @click="showBgConfirm"
@@ -41,7 +41,7 @@
             <input
               type="file"
               id="bg"
-              ref="bg"
+              ref="bgAside"
               accept=".jpg,.jpeg,.gif,.png"
               @change="setBgPreview"
             />
@@ -301,8 +301,8 @@ export default {
       }
     },
     async save() {
-      if (this.$refs.bg.files.length) {
-        await this.saveBg(true);
+      if (this.$refs.bgAside.files.length) {
+        await this.saveBg({ isClear: true, refName: "bgAside" });
       }
       if (this.$refs.avatar.files.length) {
         await this.saveAvatar();

@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import Post from "@/components/post/MediumView";
-import PostsStat from "@/mixins/postsStat";
+import Post from "@/components/post/view/MediumView";
+import PostsStat from "@/mixins/post/statMany";
 
 export default {
   name: "SearchPosts",

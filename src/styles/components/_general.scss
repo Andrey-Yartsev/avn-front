@@ -380,6 +380,27 @@ video {
         margin-left: 0;
       }
     }
+
+    &.bottom-buttons {
+      display: flex;
+
+      & > * {
+        flex-grow: 1;
+      }
+
+      .btn {
+        padding: 0;
+
+        &.saveChanges {
+          margin-left: 20px;
+        }
+      }
+    }
+
+  }
+
+  &__content {
+    padding: 20px;
   }
 }
 

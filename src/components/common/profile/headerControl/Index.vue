@@ -32,7 +32,7 @@
 import UserDropdown from "@/components/common/userDropdown/Index";
 import UserMixin from "@/mixins/user";
 import ProfileBackground from "@/components/common/profile/background/Index";
-import BackRouter from "@/router/backRouter";
+import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "HeaderControl",

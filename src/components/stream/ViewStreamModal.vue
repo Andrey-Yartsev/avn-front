@@ -130,7 +130,7 @@ import { throttle } from "throttle-debounce";
 import Loader from "@/components/common/Loader";
 import Modal from "@/components/modal/Index";
 import userMixin from "@/mixins/user";
-import Streams from "streaming-module/view_module";
+import ViewModule from "streaming-module/view_module";
 import StreamApi from "@/api/stream";
 import moment from "moment";
 import Tip from "@/components/common/tip/User";
@@ -205,7 +205,7 @@ export default {
         sess: token
       });
 
-      Streams.stopStream(false, true);
+      this.viewModule.stopStream(false, true);
 
       this.close();
     },
@@ -246,7 +246,7 @@ export default {
       });
     },
     getLikePosition(event) {
-      const video = Streams.config.remoteVideo;
+      const video = this.viewModule.config.remoteVideo;
       let video_width = video.videoWidth;
       let video_height = video.videoHeight;
       const video_ratio = video_height / video_width;
@@ -295,7 +295,7 @@ export default {
       const userId = this.$store.state.modal.stream.data.stream.user.id;
 
       try {
-        Streams.sendCustomMessage({
+        this.viewModule.sendCustomMessage({
           msgtype: "data.custom",
           to: ["streamer"],
           data: {
@@ -304,7 +304,7 @@ export default {
           }
         });
       } catch (error) {
-        console.log("Error while sending  sendCustomMessage message ", {});
+        console.log("Error while sending sendCustomMessage message ", {});
       }
 
       this.$root.ws.send({
@@ -347,11 +347,10 @@ export default {
     this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
-    window.viewModule = Streams;
 
-    Streams.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
-    Streams.config.remoteVideo = document.getElementById("remotevideo");
-    Streams.viewStream();
+    this.viewModule.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
+    this.viewModule.config.remoteVideo = document.getElementById("remotevideo");
+    this.viewModule.viewStream();
 
     this.updateLikes();
     document.body.classList.add("stream-viewer");
@@ -369,7 +368,10 @@ export default {
       this.$router.push("/");
     };
 
-    Streams.init({
+    this.viewModule = new ViewModule();
+    window.viewModule = this.viewModule; // export viewModule var to global space
+
+    this.viewModule.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),
       getApiUrl: undefined,
       remoteVideo: document.getElementById("remotevideo"),

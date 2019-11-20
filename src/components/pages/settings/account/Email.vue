@@ -47,14 +47,20 @@
             </span>
           </label>
 
-          <div class="input-help" v-if="newEmail && fieldError('email')">
+          <div
+            class="input-help hint-text-sm"
+            v-if="newEmail && fieldError('email')"
+          >
             {{ fieldError("email") }}
           </div>
           <template v-else>
-            <div class="input-help" v-if="user.emailNew">
+            <div class="input-help hint-text-sm" v-if="user.emailNew">
               New email address <b>{{ user.emailNew }}</b> is not confirmed yet
             </div>
-            <div class="input-help" v-else-if="!user.emailChecked && !newEmail">
+            <div
+              class="input-help hint-text-sm"
+              v-else-if="!user.emailChecked && !newEmail"
+            >
               Registration email address <b>{{ user.email }}</b> is not
               confirmed yet
             </div>

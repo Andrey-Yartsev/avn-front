@@ -273,8 +273,10 @@ export default {
       }
     },
     category(category) {
-      const c = JSON.parse(this.localUser.nominationCategories);
-      console.log(category);
+      let c = {};
+      if (this.localUser.nominationCategories) {
+        c = JSON.parse(this.localUser.nominationCategories);
+      }
       c[this.eventId] = category;
       this.localUser.nominationCategories = JSON.stringify(c);
     }
@@ -310,7 +312,6 @@ export default {
       if (this.localUser.nominationCategories) {
         const category = JSON.parse(this.localUser.nominationCategories);
         if (category) {
-          // console.log("!!!");
           this.category = category[this.eventId] || {};
         } else {
           this.category = {};

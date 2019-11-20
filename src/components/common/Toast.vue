@@ -10,7 +10,8 @@
         :class="{ 'jq-toast-loaded': loaded }"
         style=""
       ></span>
-      <span class="close-jq-toast-single">×</span><span v-html="text"></span>
+      <span class="close-jq-toast-single" @click="removeHandler">×</span
+      ><span v-html="toast.text"></span>
     </div>
   </div>
 </template>
@@ -18,6 +19,12 @@
 <script>
 export default {
   name: "Toast",
+  props: {
+    toast: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       loaded: false,
@@ -25,18 +32,17 @@ export default {
     };
   },
   computed: {
-    text() {
-      return this.$store.state.global.toastText;
-    },
-    type() {
-      return this.$store.state.global.toastType;
-    },
     classes() {
       const r = {
         "jq-toast-hide": this.hide
       };
-      r["jq-icon-" + this.type] = true;
+      r["jq-icon-" + this.$props.toast.type] = true;
       return r;
+    }
+  },
+  methods: {
+    removeHandler() {
+      this.$store.commit("global/hideToast", { id: this.toast.id });
     }
   },
   mounted() {
@@ -48,7 +54,7 @@ export default {
       this.hide = true;
     }, 3000);
     setTimeout(() => {
-      this.$emit("hide");
+      this.$store.commit("global/hideToast", { id: this.toast.id });
     }, 3500);
   }
 };

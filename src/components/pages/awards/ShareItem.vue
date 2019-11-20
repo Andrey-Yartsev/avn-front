@@ -29,8 +29,8 @@ export default {
     },
     text() {
       return (
-        `I just pre-nominated ${this.v.name} for ${this.v.category.title} ` +
-        this.ending
+        `I just pre-nominated ${this.v.name} for ${this.v.category &&
+          this.v.category.title} ` + this.ending
       );
     },
     ending() {
@@ -49,9 +49,12 @@ export default {
     }
   },
   mounted() {
-    window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
-      text: this.text
-    });
+    if (window.twttr) {
+      // fix error from sentry. but can't reproduce
+      window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
+        text: this.text
+      });
+    }
   }
 };
 </script>

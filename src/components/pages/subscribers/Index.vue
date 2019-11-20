@@ -98,6 +98,12 @@
                   <span class="label icn-item">Expired</span>
                 </div>
               </label>
+              <button
+                class="btn btn_not-bold sm"
+                @click="openGroupMessageModal"
+              >
+                Send group message
+              </button>
             </div>
           </div>
           <div class="row">
@@ -105,7 +111,11 @@
               <div class="rounded-container">
                 <div class="SubscribersBlockCollectionView settings-wrapper">
                   <div
-                    class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                    class="form-title"
+                    :class="{
+                      'table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo':
+                        $mq === 'desktop'
+                    }"
                   >
                     <div class="bg-gradient__shadow bg-gradient__shadow_mob">
                       <div class="inner">
@@ -114,7 +124,7 @@
                         >
                       </div>
                     </div>
-                    <div class="table-header referrals-table-header">
+                    <div class="table-header">
                       <div class="user table__cell">
                         User
                       </div>
@@ -193,7 +203,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
-import BackRouter from "@/router/backRouter";
+import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "Subscribers",
@@ -316,26 +326,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.messages-controllers {
-  .title {
-    text-align: center;
-    font-weight: bold;
-  }
-  .group-messages-buttons {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 1rem;
-    .message-button {
-      border: 1px solid rgba(128, 128, 128, 0.295);
-      padding: 0.5rem 2rem;
-      border-radius: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(128, 128, 128, 0.295);
-      }
-    }
+.message-button {
+  border: 1px solid rgba(128, 128, 128, 0.295);
+  padding: 0.3rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.295);
   }
 }
 </style>

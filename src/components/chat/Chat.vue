@@ -64,6 +64,7 @@
               <router-link
                 :to="'/' + activeUser.username"
                 class="avatar avatar_gap-r-md avatar_sm hidden-mobile"
+                :class="{ 'online-state': isOnline(activeUser.id) }"
               >
                 <span class="avatar__img">
                   <img :src="activeUser.avatar" v-if="activeUser.avatar" />
@@ -281,10 +282,12 @@ export default {
       if (this.activeUserId) {
         this.$store.commit("chat/setActiveUserId", this.activeUserId);
         this.$store.commit("chat/resetActiveUser");
-        this.$store.dispatch(
-          "chat/fetchFullActiveUser",
-          this.activeUser.username
-        );
+        if (this.activeUser) {
+          this.$store.dispatch(
+            "chat/fetchFullActiveUser",
+            this.activeUser.username
+          );
+        }
         this.fetchMessages();
         if (!this.activeChat) {
           this.fetchLastMessage().then(() => {

@@ -114,6 +114,7 @@ createRequestAction({
   actions,
   requestType: "any",
   defaultResultValue: [],
+  localError: true,
   options: {
     method: "GET"
   },

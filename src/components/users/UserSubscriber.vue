@@ -19,21 +19,31 @@
         }}</span>
       </router-link>
     </div>
-    <div class="snapchatUsername table__cell">
+    <div class="snapchatUsername table__cell" data-title="Snapchat Username">
       <!-- {{ profile.subscriber.username }} -->
     </div>
     <div
       class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"
+      data-title="Amount"
     >
       ${{ profile.price }}
     </div>
-    <div class="status table__cell table__cell_align table__cell_align-hor-c">
-      {{ profile.active ? "active" : "expired" }}
+    <div
+      class="status table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Status"
+    >
+      {{ profile.active ? "Active" : "Expired" }}
     </div>
-    <div class="joined table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="joined table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Joined"
+    >
       {{ messageTime(profile.sinceDate) }}
     </div>
-    <div class="canceled table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="canceled table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Canceled"
+    >
       {{ messageTime(profile.expireDate) }}
     </div>
   </div>

@@ -566,6 +566,14 @@ label {
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 22px;
     }
+
+    &_no-gaps {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 0;
+      }
+    }
+
     .radio-wrapper {
       padding-bottom: 11px;
     }
@@ -574,6 +582,11 @@ label {
         border-bottom: 1px solid rgba($gray, 0.2);
         margin-bottom: 12px;
       }
+
+      &.no-border-line {
+        border-bottom: none;
+      }
+
       &:last-child {
         @include media-breakpoint-down($desktop-breakpoint-dcrs) {
           border-bottom: none;
@@ -1287,11 +1300,16 @@ select {
 .watermarks-settings  {
 
   .form-group_with-label {
-    padding-bottom: 4px;
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      padding-bottom: 0;
-      margin-bottom: 30px;
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-bottom: 4px;
+    }
+
+    &:not(:last-child) {
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-bottom: 30px;
+      }
     }
   }
 }

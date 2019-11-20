@@ -1,4 +1,4 @@
-w<template>
+<template>
   <div :class="viewClass">
     <div class="hidden-desktop" v-if="view === 'twitter'">
       <div class="form-title">
@@ -100,15 +100,17 @@ w<template>
         </div>
       </div>
 
-      <!-- <div class="form-title tweet-posts-block border-top">
+      <div
+        v-if="user.canEarn"
+        class="form-title tweet-posts-block border-top"
+        :class="{ disabled: !user.isWantEarn || price() <= 0 }"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Messaging
-          </span>
-        </div>
-        <div class="inner">
-          <span class="semi-transparent">
-            Allow chats from subscribers only
+            <p class="subtext">
+              Allow chats from subscribers only
+            </p>
           </span>
           <label class="toggle-element">
             <input
@@ -120,7 +122,7 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-      </div> -->
+      </div>
 
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
@@ -164,7 +166,7 @@ w<template>
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-        <!-- <div class="inner">
+        <div class="inner">
           <span class="semi-transparent">
             Tweet my live streams
           </span>
@@ -178,7 +180,7 @@ w<template>
             />
             <span class="toggle-element_switcher"></span>
           </label>
-        </div> -->
+        </div>
       </div>
       <div
         class="go-twitter-block shadow-block no-padding hidden-desktop"
@@ -235,8 +237,19 @@ w<template>
       </div>
     </form>
     <BlockedUsers
+      v-if="!this.$route.params.view || this.$route.params.view === 'blocked'"
+      title="Blocked users"
       mobileBlockedRoute="/settings/privacy/blocked"
       subtext="These people can't see your posts, stories and live streams"
+    />
+    <BlockedUsers
+      v-if="
+        !this.$route.params.view || this.$route.params.view === 'blockedPosts'
+      "
+      title="Blocked posts"
+      mobileBlockedRoute="/settings/privacy/blockedPosts"
+      source="blockedPosts"
+      subtext="There are people, whose posts you don't want to see"
     />
   </div>
 </template>
@@ -293,6 +306,9 @@ export default {
         return;
       }
       this.$store.dispatch("profile/update", this.localUser);
+    },
+    price() {
+      return parseFloat(this.user.subscribePrice, 10);
     }
   }
 };

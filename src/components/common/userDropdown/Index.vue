@@ -17,7 +17,7 @@
               </span>
             </a>
           </li>
-          <template v-if="!isOwner(profile.id) && user">
+          <template v-if="!isOwner(profile.id) && user && profile.followedOn">
             <li v-if="profile.isBlocked" class="more-functions__item">
               <a href="#" @click.prevent="unblock" class="more-functions__link">
                 <span class="more-functions__option">
@@ -123,7 +123,6 @@ export default {
       return this._canMute(this.profile);
     }
   },
-
   methods: {
     report() {
       this.$store.dispatch("modal/show", {

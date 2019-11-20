@@ -1,10 +1,8 @@
 <template>
   <div v-if="!hasLayout">
+    <Modals :hasLayout="false" />
     <ErrorModal v-if="error" />
-    <Confirm v-if="$store.state.modal.confirm.show" />
     <Toast v-if="showToast" @hide="showToast = false" />
-    <LoginModal v-if="$store.state.modal.login.show" />
-    <SignupModal v-if="$store.state.modal.signup.show" />
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">
@@ -20,45 +18,11 @@
         <router-view />
       </main>
       <Sidebar v-if="user" />
-      <Toast v-if="showToast" @hide="showToast = false" />
+      <ToastList v-if="toasts.length" :toasts="toasts" />
       <StoryInput />
-
       <modal-router />
-
-      <PostModal v-if="this.$store.state.modal.post.show" />
-      <PostReportModal v-if="this.$store.state.modal.postReport.show" />
-      <ChatVideoModal v-if="this.$store.state.modal.chatVideo.show" />
-      <ChatModal v-if="this.$store.state.modal.messages.show" />
-      <UserReportModal v-if="this.$store.state.modal.userReport.show" />
-      <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
-      <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
-      <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
-      <AddPostModal v-if="this.$store.state.modal.addPost.show" />
-      <GroupMessageModal v-if="this.$store.state.modal.groupMessage.show" />
-      <AddLinkModal v-if="this.$store.state.modal.addLink.show" />
-      <AddMediaModal v-if="this.$store.state.modal.addMedia.show" />
-      <IframeModal v-if="this.$store.state.modal.iframe.show" />
-      <StreamModal v-if="this.$store.state.modal.stream.show" />
-      <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
-      <ChooseHighlightModal
-        v-if="this.$store.state.modal.chooseHighlight.show"
-      />
-      <CreateHighlightsModal
-        v-if="this.$store.state.modal.createHighlights.show"
-      />
-      <SubscriptionConfirmModal
-        v-if="this.$store.state.modal.subscriptionConfirm.show"
-      />
-      <LoginModal v-if="this.$store.state.modal.login.show" />
-      <SignupModal v-if="this.$store.state.modal.signup.show" />
-      <PaymentModal v-if="this.$store.state.modal.payment.show" />
+      <Modals :hasLayout="true" />
       <ErrorModal v-if="error" />
-      <Confirm v-if="this.$store.state.modal.confirm.show" />
-      <ImageModal v-if="this.$store.state.modal.image.show" />
-      <TrialConfirmModal v-if="this.$store.state.modal.trialConfirm.show" />
-      <GayContextConfirmModal
-        v-if="this.$store.state.modal.gayContextConfirm.show"
-      />
       <a
         v-if="adminReturnUrl"
         :href="adminReturnUrl"
@@ -66,79 +30,38 @@
       >
         Return to admin
       </a>
-      <TipPayConfirm v-if="this.$store.state.modal.tipPayConfirm.show" />
-      <ChatMessagePayConfirm
-        v-if="this.$store.state.modal.chatMessagePayConfirm.show"
-      />
-      <BuySnapchatConfirm
-        v-if="this.$store.state.modal.buySnapchatConfirm.show"
-      />
       <UserBubble
         username="stompeg"
         v-show="this.$store.state.userBubble.show"
         id="user-bubble"
       />
     </template>
-
-    <PostLikesModal v-if="$store.state.modal.postLikes.show" />
     <GenderFilterMobile v-if="$store.state.gender.dropdownOpened" />
   </div>
 </template>
 
 <script>
+import BrowserStore from "store";
+import Logger from "js-logger";
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
 import Sidebar from "@/components/header/Sidebar";
-import Toast from "@/components/common/Toast";
-import ColorScheme from "@/mixins/colorScheme";
+import ToastList from "@/components/common/ToastList";
+import Modals from "@/components/modals/Index";
 import ErrorModal from "@/components/modal/Error";
-import PostModal from "@/components/post/ModalView";
-import PostReportModal from "@/components/common/postParts/reportModal/Index";
-import ChatModal from "@/components/chat/Modal";
-import ChatVideoModal from "@/components/chat/media/VideoModal";
-import ChatMessagePayConfirm from "@/components/chat/ChatMessagePayConfirm";
-import BuySnapchatConfirm from "@/components/pages/profile/BuySnapchatConfirm";
-import TipPayConfirm from "@/components/common/tip/TipPayConfirm";
-import CreateStoryModal from "@/components/story/CreateModalView";
-import StoryViewerModal from "@/components/story/ViewersModalView";
-import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
-import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
-import PostLikesModal from "@/components/common/postParts/likesModal/Index";
-import UserReportModal from "@/components/common/UserReportModal";
-import ResubscribeModal from "@/components/subscription/ResubscribeModal";
-import PaymentModal from "@/components/subscription/PaymentModal";
 import StoryInput from "@/components/story/Input";
-import AddPostModal from "@/components/addPost/Modal";
-import GroupMessageModal from "@/components/groupMessage/Modal";
-import AddLinkModal from "@/components/addLink/Modal";
-import AddMediaModal from "@/components/addMedia/Modal";
-import StreamModal from "@/components/stream/ViewStreamModal";
-import IframeModal from "@/components/modal/Iframe";
-import SubscribeModal from "@/components/subscription/SubscribeModal";
-import SubscriptionConfirmModal from "@/components/subscription/Confirm";
-import LoginModal from "@/components/auth/LoginModal";
-import SignupModal from "@/components/auth/SignupModal";
-import Confirm from "@/components/modal/Confirm.vue";
-import ImageModal from "@/components/modal/Image.vue";
-import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
-import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
 import UserBubble from "@/components/users/UserBubble.vue";
 import GenderFilterMobile from "@/components/common/GenderFilterMobile";
-
+import ModalRouter from "@/components/modal/Router";
 import Cookie from "@/utils/cookie";
-import BrowserStore from "store";
-import Logger from "js-logger";
-
-import rootClasses from "@/rootClasses";
-import postMessageHandler from "@/postMessage";
+import rootClasses from "@/utils/rootClasses";
+import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
-
-import ModalRouter from "@/components/modal/Router";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
-
+import ColorScheme from "@/mixins/colorScheme";
 import { fromNow } from "@/helpers/datetime";
 
 fromNow("2019-05-03T11:01:12+00:00");
@@ -179,42 +102,14 @@ const htmlElement = document.getElementsByTagName("html")[0];
 
 export default {
   components: {
+    Modals,
     Loader,
     Header,
     Sidebar,
-    Toast,
+    ToastList,
     ErrorModal,
-    PostReportModal,
-    PostModal,
-    ChatModal,
-    ChatVideoModal,
-    ChatMessagePayConfirm,
-    BuySnapchatConfirm,
-    TipPayConfirm,
-    UserReportModal,
-    ResubscribeModal,
-    PaymentModal,
     ModalRouter,
-    CreateStoryModal,
     StoryInput,
-    AddPostModal,
-    AddLinkModal,
-    AddMediaModal,
-    GroupMessageModal,
-    IframeModal,
-    StreamModal,
-    SubscribeModal,
-    SubscriptionConfirmModal,
-    LoginModal,
-    SignupModal,
-    StoryViewerModal,
-    CreateHighlightsModal,
-    ChooseHighlightModal,
-    PostLikesModal,
-    Confirm,
-    ImageModal,
-    TrialConfirmModal,
-    GayContextConfirmModal,
     UserBubble,
     GenderFilterMobile
   },
@@ -238,8 +133,8 @@ export default {
 
       return undefined;
     },
-    toastShowTrigger() {
-      return this.$store.state.global.toastShowTrigger;
+    toasts() {
+      return this.$store.state.global.toasts;
     },
     loading() {
       if (this.$store.state.modalRouter.loading) {
@@ -291,9 +186,6 @@ export default {
     }
   },
   watch: {
-    toastShowTrigger() {
-      this.showToast = true;
-    },
     $route() {
       this.$store.dispatch("modal/hideAll");
     },

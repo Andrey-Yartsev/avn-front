@@ -5,5 +5,22 @@
   "short_name": "AVN",
   "theme_color": "#ffffff",
   "start_url": "https://stars.avn.com/",
-  "scope": "/"
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/static/img/pwa-android-chrome-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/static/img/app-icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/img/app-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
 }

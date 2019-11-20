@@ -120,7 +120,8 @@
     }
   }
 }
-.BlockedView {
+.BlockedView,
+.BlockedPostsView {
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     .private-profile-block,
     .tweet-posts-block,

@@ -31,6 +31,7 @@
   position: relative;
   z-index: 1;
   color: $main-color;
+  cursor: pointer;
 
   &_link {
     padding-right: 13px;
@@ -57,21 +58,22 @@
       &:after {
         opacity: 1;
       }
+
+      .remove {
+        opacity: 1;
+      }
     }
   }
 
   .remove,
   .chatSelectedName {
-    display: inline-block;
     vertical-align: middle;
   }
 
   .remove {
-
-    &:not(:hover) {
-      opacity: 0.3;
-      color: $primary-color;
-    }
+    opacity: 0.3;
+    color: $primary-color;
+    transition: opacity 0.3s ease;
   }
 }
 

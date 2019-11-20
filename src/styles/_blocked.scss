@@ -7,7 +7,8 @@
   }
 }
 
-.BlockedView {
+.BlockedView,
+.BlockedPostsView {
   .BlockedUsersCollectionView {
     .table-header-title {
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {

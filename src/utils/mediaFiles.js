@@ -38,6 +38,9 @@ const getOrientation = file => {
 
           let little = view.getUint16((offset += 6), false) == 0x4949;
           offset += view.getUint32(offset + 4, little);
+          if (offset >= length) {
+            resolve(-1);
+          }
           let tags = view.getUint16(offset, little);
           offset += 2;
           for (let i = 0; i < tags; i++) {
@@ -254,7 +257,16 @@ export const fileUpload = (
           thumbs
         });
       } else {
-        reject(true);
+        try {
+          const r = JSON.parse(xhr.response);
+          if (r.error) {
+            reject(r.error);
+          } else {
+            reject({ message: "Error on upload" });
+          }
+        } catch (e) {
+          reject({ message: "Error on upload" });
+        }
       }
     };
     xhr.onabort = () => {

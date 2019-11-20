@@ -4,54 +4,60 @@
     v-if="posts.length || isOwner(userId)"
   >
     <div
-      class="storyCollectionView storyCollectionView_col storyCollectionView_tape"
+      class="storyCollectionView storyCollectionView_col storyCollectionView_tape b-toggled"
+      :class="{ 'state-toggled': toggled }"
     >
-      <div class="stories-collection__header">
+      <div
+        class="stories-collection__header b-toggled__header"
+        @click="toggledBlock"
+      >
         <h4>Highlights</h4>
       </div>
-      <div class="stories-group">
-        <perfect-scrollbar @ps-scroll-y="scrollFunction">
-          <div class="stories">
-            <a href="#" class="story btn-add-story" v-if="isOwner(userId)">
-              <div
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                @click.prevent="addNew"
-              >
-                <div class="round-add icn-item"></div>
-              </div>
-              <div class="story-info">
-                <div class="story-header">
-                  <div class="name">
-                    Add new
+      <div class="b-toggled__content">
+        <div class="stories-group">
+          <perfect-scrollbar @ps-scroll-y="scrollFunction">
+            <div class="stories">
+              <a href="#" class="story btn-add-story" v-if="isOwner(userId)">
+                <div
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  @click.prevent="addNew"
+                >
+                  <div class="round-add icn-item"></div>
+                </div>
+                <div class="story-info">
+                  <div class="story-header">
+                    <div class="name" @click.prevent="addNew">
+                      Add new
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-            <div class="story" v-for="post in posts" :key="post.id">
-              <a
-                :href="`collections/${post.id}`"
-                class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
-                @click.prevent="open(post)"
-              >
-                <span class="avatar__img">
-                  <img :src="post.cover" />
-                </span>
               </a>
-              <div class="story-info">
-                <div class="story-header">
-                  <a
-                    :href="`collections/${post.id}`"
-                    @click.prevent="open(post)"
-                    class="name"
-                  >
-                    {{ post.title }}
-                  </a>
+              <div class="story" v-for="post in posts" :key="post.id">
+                <a
+                  :href="`collections/${post.id}`"
+                  class="avatar avatar_lg-tab avatar_gap-r-md avatar_gap-r-md_reset-mob"
+                  @click.prevent="open(post)"
+                >
+                  <span class="avatar__img">
+                    <img :src="post.cover" />
+                  </span>
+                </a>
+                <div class="story-info">
+                  <div class="story-header">
+                    <a
+                      :href="`collections/${post.id}`"
+                      @click.prevent="open(post)"
+                      class="name"
+                    >
+                      {{ post.title }}
+                    </a>
+                  </div>
+                  <div class="amount-items">{{ post.storiesCount }} items</div>
                 </div>
-                <div class="amount-items">{{ post.storiesCount }} items</div>
               </div>
             </div>
-          </div>
-        </perfect-scrollbar>
+          </perfect-scrollbar>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +69,11 @@ import UserMixin from "@/mixins/user";
 export default {
   name: "Highlights",
   mixins: [UserMixin],
+  data() {
+    return {
+      toggled: false
+    };
+  },
   props: {
     userId: {
       type: Number,
@@ -100,6 +111,9 @@ export default {
         return;
       }
       this.$router.push(`collections/${post.id}`);
+    },
+    toggledBlock() {
+      this.toggled = !this.toggled;
     }
   },
   created() {

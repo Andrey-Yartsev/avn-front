@@ -46,6 +46,13 @@
           v-if="$mq === 'desktop'"
         />
       </div>
+      <div
+        v-if="type === 'all' && !!unreadCount"
+        class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
+      >
+        <span>Unread ({{ unreadCount > 100 ? "+99" : unreadCount }})</span>
+        <a href="#" @click.prevent="markAllAsRead">Mark All as Read</a>
+      </div>
       <component
         :is="notificationView"
         :items="items"
@@ -197,6 +204,9 @@ export default {
       return this.type === "all"
         ? NotificationMergedView
         : NotificationSingleView;
+    },
+    unreadCount() {
+      return this.$store.state.notif.unreadCount;
     }
   },
 
@@ -212,7 +222,10 @@ export default {
         this.infinityScrollGetDataMethod();
       }
     },
-    initPostModals() {}
+    initPostModals() {},
+    markAllAsRead() {
+      this.$store.dispatch("notif/markAllAsRead");
+    }
   },
 
   watch: {
@@ -226,7 +239,6 @@ export default {
   created() {
     this.$store.commit("notif/reset");
     this.$store.dispatch("notif/getPosts", { type: this.type }).then(() => {
-      this.$store.dispatch("auth/extendUser", { hasNotifications: false });
       this.initPostModals();
     });
   }

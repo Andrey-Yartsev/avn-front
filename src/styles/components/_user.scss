@@ -79,6 +79,13 @@
   z-index: 2;
   display: block;
 
+  &.online-state {
+
+    &:after {
+      box-sizing: border-box;
+    }
+  }
+
   &_ex-sm {
     font-size: 24px;
 

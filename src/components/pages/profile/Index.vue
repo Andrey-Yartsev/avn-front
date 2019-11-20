@@ -8,7 +8,7 @@
       to="/addPost"
       v-if="isAuth() && $mq === 'mobile'"
     />
-    <HeaderControl :profile="profile" v-if="$mq === 'mobile'" />
+    <HeaderControl :profile="profile" v-if="$mq === 'mobile' && isAuth()" />
     <div class="white-bg-block">
       <ProfileBackground :profile="profile" />
       <div class="profile-images">
@@ -33,7 +33,11 @@
             <a>{{ profile.username }}</a>
           </span>
         </div>
-        <component :is="scrollableComponent" class="profile-desc">
+        <component
+          :is="scrollableComponent"
+          class="profile-desc"
+          ref="description"
+        >
           <p class="profile-text" v-if="profile.about">
             <span v-html="trunc(profile.about)"></span>
             <span
@@ -218,12 +222,12 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import PostCollection from "@/components/common/postCollection/Index";
-import PostSmall from "@/components/post/SmallView";
-import PostMedium from "@/components/post/MediumView";
+import PostCollection from "@/components/post/collection/Index";
+import PostSmall from "@/components/post/view/SmallView";
+import PostMedium from "@/components/post/view/MediumView";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
-import Visibility from "@/mixins/postsVisibility";
+import Visibility from "@/mixins/post/visibility";
 import UserMixin from "@/mixins/user";
 import FileUpload from "@/mixins/fileUpload";
 import HeaderControl from "@/components/common/profile/headerControl/Index";
@@ -265,7 +269,8 @@ export default {
     return {
       collapseLimit: 250,
       collapsed: true,
-      mysnapchat: ""
+      mysnapchat: "",
+      descrInitHeight: 0
     };
   },
 
@@ -378,9 +383,20 @@ export default {
     updatedPost() {
       this.$store.dispatch("profile/home/updatePost", this.updatedPost);
     },
-    deletedPost() {
-      // this.initPosts();
-      this.initProfile();
+    deletedPost(post) {
+      if (post.mediaType === "photo") {
+        this.$store.dispatch("profile/home/extend", {
+          photosCount: this.$store.state.profile.home.profile.photosCount - 1
+        });
+      }
+      if (post.mediaType === "video") {
+        this.$store.dispatch("profile/home/extend", {
+          videosCount: this.$store.state.profile.home.profile.videosCount - 1
+        });
+      }
+      this.$store.dispatch("profile/home/extend", {
+        postsCount: this.$store.state.profile.home.profile.postsCount - 1
+      });
     },
     postPinChanged() {
       this.initPosts();
@@ -407,6 +423,17 @@ export default {
           this.posts[i].isVisible = true;
         }
       }
+    },
+    $route() {
+      this.$nextTick(() => {
+        if (
+          this.$refs.description &&
+          this.$refs.description.$el &&
+          !this.descrInitHeight
+        ) {
+          this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+        }
+      });
     }
   },
   methods: {
@@ -535,6 +562,17 @@ export default {
     },
     storePrefix() {
       return "profile/home";
+    },
+    scrollAction() {
+      if (!this.$refs.description || !this.$refs.description.$el) {
+        return;
+      }
+      if (window.pageYOffset < 250) {
+        this.$refs.description.$el.style.height =
+          this.descrInitHeight + window.pageYOffset + "px";
+      } else if (this.$refs.description.$el.style.height !== "") {
+        this.$refs.description.$el.style.height = "";
+      }
     }
   },
   created() {
@@ -558,12 +596,21 @@ export default {
   mounted() {
     this.scrollToTop();
     this.footerScrollAction();
-    window.addEventListener("scroll", this.scrollAction, true);
+    if (this.$mq === "desktop") {
+      window.addEventListener("scroll", this.scrollAction, true);
+      this.$nextTick(() => {
+        if (this.$refs.description && this.$refs.description.$el) {
+          this.descrInitHeight = this.$refs.description.$el.getBoundingClientRect().height;
+        }
+      });
+    }
     document.title = this.profile.name + " | AVN Stars";
     window.snapchat = this.snapchat;
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.scrollAction, true);
+    if (this.$mq === "desktop") {
+      window.removeEventListener("scroll", this.scrollAction, true);
+    }
     document.title = "AVN Stars";
   }
 };
