@@ -108,8 +108,6 @@ export default {
     Sidebar,
     ToastList,
     ErrorModal,
-    // LoginModal,
-    // SignupModal,
     ModalRouter,
     StoryInput,
     UserBubble,

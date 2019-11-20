@@ -3,7 +3,14 @@
     class="container addPostPage"
     :class="{ hasScheduledPosts: delayedPosts.length }"
   >
-    <div class="rounded-container">
+    <div class="rounded-container" v-if="created">
+      <div class="container addPostPage">
+        <div class="loader-infinity">
+          <Loader :fullscreen="false" :inline="true" :small="true" />
+        </div>
+      </div>
+    </div>
+    <div class="rounded-container" v-else>
       <AddPost
         :initialExpanded="true"
         :close="close"
@@ -38,6 +45,7 @@ import AddPost from "@/components/post/add/Index";
 import PostCollection from "@/components/post/collection/Index";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Loader from "@/components/common/Loader";
+import User from "@/mixins/user";
 
 export default {
   name: "AddPostPage",
@@ -47,7 +55,12 @@ export default {
     PostCollection,
     Loader
   },
-  mixins: [InfinityScrollMixin],
+  mixins: [InfinityScrollMixin, User],
+  data() {
+    return {
+      created: false
+    };
+  },
   computed: {
     delayedPosts() {
       return this.$store.state.postQueue.posts;
@@ -55,6 +68,9 @@ export default {
     store() {
       // uses into InfinityScrollMixin
       return this.$store.state.postQueue;
+    },
+    newPost() {
+      return this.$store.state.post.newPost;
     }
   },
   methods: {
@@ -63,6 +79,12 @@ export default {
     },
     close() {
       this.$router.push("/");
+    }
+  },
+  watch: {
+    newPost() {
+      this.created = true;
+      this.$router.push("/" + this.user.username);
     }
   },
   created() {

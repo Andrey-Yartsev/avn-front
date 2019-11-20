@@ -618,7 +618,6 @@ export default {
   watch: {
     newPost() {
       this.reset();
-      this.$router.push("/");
     },
     post() {
       if (this.post.id && !this.isNew) {

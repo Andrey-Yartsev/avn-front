@@ -41,6 +41,7 @@ import TipPayConfirm from "@/components/common/tip/TipPayConfirm";
 import PostLikesModal from "@/components/post/parts/likesModal/Index";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
+import EditPostModal from "@/components/post/edit/Modal";
 
 export default {
   components: {
@@ -71,7 +72,8 @@ export default {
     TipPayConfirm,
     PostLikesModal,
     LoginModal,
-    SignupModal
+    SignupModal,
+    EditPostModal
   },
   props: {
     hasLayout: {

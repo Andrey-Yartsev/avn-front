@@ -138,6 +138,11 @@ const modalTypes = [
     componentName: "PostLikesModal",
     storeName: "postLikes",
     layoutOnlyModal: true
+  },
+  {
+    componentName: "EditPostModal",
+    storeName: "editPost",
+    layoutOnlyModal: true
   }
 ];
 
