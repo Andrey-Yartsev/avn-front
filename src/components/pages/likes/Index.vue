@@ -120,7 +120,7 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import PostCollection from "@/components/post/collection/Index";
 import PostVisibility from "@/mixins/post/visibility";
-import BackRouter from "@/router/backRouter";
+import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "FavPosts",

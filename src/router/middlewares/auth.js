@@ -48,6 +48,11 @@ const Auth = {
       });
   },
 
+  firstEnter(to, from, next) {
+    global.storyFirstEnter = !from.matched.length;
+    return Auth.requireAny(to, from, next);
+  },
+
   requireAuth(to, from, next) {
     BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
     const trialCodeExists = saveTrialCode();

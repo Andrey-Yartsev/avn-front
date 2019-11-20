@@ -9,20 +9,18 @@ import VeeValidate, { Validator } from "vee-validate";
 import * as Sentry from "@sentry/browser";
 import * as SentryIntegrations from "@sentry/integrations";
 import VueObserveVisibility from "vue-observe-visibility";
-import App from "@/App.vue";
-import router from "@/router";
-import store from "@/store";
 import VueMask from "v-mask";
 import VTooltip from "v-tooltip";
 import BrowserStore from "store";
-import profileRoute from "@/router/profileRoute";
-
 import "unfetch/polyfill";
 import "url-search-params-polyfill";
-import "@/iconfont";
-
-import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 import VueAnalytics from "vue-analytics";
+
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
+import "@/utils/libs/iconfont";
+import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 require("./utils/registerServiceWorker");
 
 Vue.use(VueMask);
@@ -96,8 +94,6 @@ if (queryParams.auth_token) {
   BrowserStore.set("genderCategory", queryParams.gender);
   //window.history.pushState({}, document.title, window.location.pathname);
 }
-
-profileRoute(router);
 
 Vue.use(VueAnalytics, {
   id: "UA-2521515-51",
