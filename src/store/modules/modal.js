@@ -1,121 +1,25 @@
 "use strict";
 
-const state = {
-  postReport: {
-    show: false,
-    data: {}
-  },
-  post: {
-    show: false,
-    data: {}
-  },
-  messages: {
-    show: false
-  },
-  userReport: {
-    show: false,
-    data: {}
-  },
-  subscribe: {
-    show: false,
-    data: {}
-  },
-  resubscribe: {
-    show: false,
-    data: {}
-  },
-  payment: {
-    show: false,
-    data: {}
-  },
-  createStory: {
-    show: false,
-    data: {}
-  },
-  addPost: {
-    show: false,
-    data: {}
-  },
-  addLink: {
-    show: false,
-    data: {}
-  },
-  groupMessage: {
-    show: false,
-    data: {}
-  },
-  iframe: {
-    show: false,
-    data: {}
-  },
-  stream: {
-    show: false,
-    data: {}
-  },
-  subscriptionConfirm: {
-    show: false,
-    data: {}
-  },
-  login: {
-    show: false,
-    data: {}
-  },
-  signup: {
-    show: false,
-    data: {}
-  },
-  statPosts: {
-    show: false,
-    data: {}
-  },
-  storyViewers: {
-    show: false,
-    data: {}
-  },
-  createHighlights: {
-    show: false,
-    data: {}
-  },
-  chooseHighlight: {
-    show: false,
-    data: {}
-  },
-  chatMessagePayConfirm: {
-    show: false,
-    data: {}
-  },
-  chatVideo: {
-    show: false,
-    data: {}
-  },
-  buySnapchatConfirm: {
-    show: false,
-    data: {}
-  },
-  confirm: {
-    show: false,
-    data: {}
-  },
-  tipPayConfirm: {
-    show: false,
-    data: {}
-  },
-  trialConfirm: {
-    show: false,
-    data: {}
-  },
-  image: {
-    show: false,
-    data: {}
-  },
-  postLikes: {
-    show: false,
-    data: {}
-  },
-  gayContextConfirm: {
-    show: false,
-    data: {}
+import modalTypes from "@/components/modals/types";
+
+function initState(data) {
+  if (!data.length) {
+    return {};
   }
+  const state = {};
+  data.forEach(item => {
+    if (!state[item.storeName]) {
+      state[item.storeName] = {
+        show: false,
+        data: {}
+      };
+    }
+  });
+  return state;
+}
+
+const state = {
+  ...initState(modalTypes)
 };
 
 const mutations = {

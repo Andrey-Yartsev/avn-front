@@ -22,42 +22,9 @@
       <Sidebar v-if="user" />
       <ToastList v-if="toasts.length" :toasts="toasts" />
       <StoryInput />
-      <ChooseHighlightModal
-        v-if="this.$store.state.modal.chooseHighlight.show"
-      />
-      <CreateHighlightsModal
-        v-if="this.$store.state.modal.createHighlights.show"
-      />
-
       <modal-router />
-
-      <PostModal v-if="this.$store.state.modal.post.show" />
-      <PostReportModal v-if="this.$store.state.modal.postReport.show" />
-      <ChatVideoModal v-if="this.$store.state.modal.chatVideo.show" />
-      <ChatModal v-if="this.$store.state.modal.messages.show" />
-      <UserReportModal v-if="this.$store.state.modal.userReport.show" />
-      <SubscribeModal v-if="this.$store.state.modal.subscribe.show" />
-      <ResubscribeModal v-if="this.$store.state.modal.resubscribe.show" />
-      <CreateStoryModal v-if="this.$store.state.modal.createStory.show" />
-      <AddPostModal v-if="this.$store.state.modal.addPost.show" />
-      <GroupMessageModal v-if="this.$store.state.modal.groupMessage.show" />
-      <AddLinkModal v-if="this.$store.state.modal.addLink.show" />
-      <IframeModal v-if="this.$store.state.modal.iframe.show" />
-      <StreamModal v-if="this.$store.state.modal.stream.show" />
-      <StoryViewerModal v-if="this.$store.state.modal.storyViewers.show" />
-      <SubscriptionConfirmModal
-        v-if="this.$store.state.modal.subscriptionConfirm.show"
-      />
-      <LoginModal v-if="this.$store.state.modal.login.show" />
-      <SignupModal v-if="this.$store.state.modal.signup.show" />
-      <PaymentModal v-if="this.$store.state.modal.payment.show" />
+      <Modals />
       <ErrorModal v-if="error" />
-      <Confirm v-if="this.$store.state.modal.confirm.show" />
-      <ImageModal v-if="this.$store.state.modal.image.show" />
-      <TrialConfirmModal v-if="this.$store.state.modal.trialConfirm.show" />
-      <GayContextConfirmModal
-        v-if="this.$store.state.modal.gayContextConfirm.show"
-      />
       <a
         v-if="adminReturnUrl"
         :href="adminReturnUrl"
@@ -65,21 +32,12 @@
       >
         Return to admin
       </a>
-      <TipPayConfirm v-if="this.$store.state.modal.tipPayConfirm.show" />
-      <ChatMessagePayConfirm
-        v-if="this.$store.state.modal.chatMessagePayConfirm.show"
-      />
-      <BuySnapchatConfirm
-        v-if="this.$store.state.modal.buySnapchatConfirm.show"
-      />
       <UserBubble
         username="stompeg"
         v-show="this.$store.state.userBubble.show"
         id="user-bubble"
       />
     </template>
-
-    <PostLikesModal v-if="$store.state.modal.postLikes.show" />
     <GenderFilterMobile v-if="$store.state.gender.dropdownOpened" />
   </div>
 </template>
@@ -90,36 +48,14 @@ import Header from "@/components/header/Index";
 import Sidebar from "@/components/header/Sidebar";
 import ToastList from "@/components/common/ToastList";
 import ColorScheme from "@/mixins/colorScheme";
+import Modals from "@/components/modals/Index";
+
 import ErrorModal from "@/components/modal/Error";
-import PostModal from "@/components/post/view/ModalView";
-import PostReportModal from "@/components/post/parts/reportModal/Index";
-import ChatModal from "@/components/chat/Modal";
-import ChatVideoModal from "@/components/chat/media/VideoModal";
-import ChatMessagePayConfirm from "@/components/chat/ChatMessagePayConfirm";
-import BuySnapchatConfirm from "@/components/pages/profile/BuySnapchatConfirm";
-import TipPayConfirm from "@/components/common/tip/TipPayConfirm";
-import CreateStoryModal from "@/components/story/CreateModalView";
-import StoryViewerModal from "@/components/story/ViewersModalView";
-import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
-import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
-import PostLikesModal from "@/components/post/parts/likesModal/Index";
-import UserReportModal from "@/components/common/UserReportModal";
-import ResubscribeModal from "@/components/subscription/ResubscribeModal";
-import PaymentModal from "@/components/subscription/PaymentModal";
-import StoryInput from "@/components/story/Input";
-import AddPostModal from "@/components/post/add/Modal";
-import GroupMessageModal from "@/components/groupMessage/Modal";
-import AddLinkModal from "@/components/addLink/Modal";
-import StreamModal from "@/components/stream/ViewStreamModal";
-import IframeModal from "@/components/modal/Iframe";
-import SubscribeModal from "@/components/subscription/SubscribeModal";
-import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
-import Confirm from "@/components/modal/Confirm.vue";
-import ImageModal from "@/components/modal/Image.vue";
-import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
-import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
+
+import StoryInput from "@/components/story/Input";
+
 import UserBubble from "@/components/users/UserBubble.vue";
 import GenderFilterMobile from "@/components/common/GenderFilterMobile";
 
@@ -177,41 +113,16 @@ const htmlElement = document.getElementsByTagName("html")[0];
 
 export default {
   components: {
+    Modals,
     Loader,
     Header,
     Sidebar,
     ToastList,
     ErrorModal,
-    PostReportModal,
-    PostModal,
-    ChatModal,
-    ChatVideoModal,
-    ChatMessagePayConfirm,
-    BuySnapchatConfirm,
-    TipPayConfirm,
-    UserReportModal,
-    ResubscribeModal,
-    PaymentModal,
-    ModalRouter,
-    CreateStoryModal,
-    StoryInput,
-    AddPostModal,
-    AddLinkModal,
-    GroupMessageModal,
-    IframeModal,
-    StreamModal,
-    SubscribeModal,
-    SubscriptionConfirmModal,
     LoginModal,
     SignupModal,
-    StoryViewerModal,
-    CreateHighlightsModal,
-    ChooseHighlightModal,
-    PostLikesModal,
-    Confirm,
-    ImageModal,
-    TrialConfirmModal,
-    GayContextConfirmModal,
+    ModalRouter,
+    StoryInput,
     UserBubble,
     GenderFilterMobile
   },

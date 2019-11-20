@@ -17,7 +17,7 @@ import VueAnalytics from "vue-analytics";
 import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
-import initSentry from "@/utils/initSentry";
+import initSentry from "@/utils/sentry";
 import "@/utils/libs/iconfont";
 import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 require("./utils/registerServiceWorker");
