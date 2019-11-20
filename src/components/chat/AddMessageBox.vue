@@ -26,7 +26,8 @@
           <input
             @change="addMediaFiles"
             type="file"
-            accept=".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+            :multiple="multipleMedia"
+            :accept="getAcceptedFormats"
           />
           <span class="icn-media icn-item icn-size_lg"></span>
         </label>
@@ -194,6 +195,14 @@ export default {
     maxMediaLength: {
       type: Number,
       default: null
+    },
+    limits: {
+      type: Object,
+      default: null
+    },
+    videosOnly: {
+      type: Boolean,
+      default: false
     }
   },
 

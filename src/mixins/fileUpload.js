@@ -29,9 +29,17 @@ export default {
     return {
       preloadedMedias: [],
       inputAcceptTypes,
-      limits,
+      limits: this.$props.limits || limits,
       uploadInProgress: false
     };
+  },
+
+  computed: {
+    getAcceptedFormats() {
+      return this.$props.videosOnly
+        ? ".mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
+        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi";
+    }
   },
 
   methods: {

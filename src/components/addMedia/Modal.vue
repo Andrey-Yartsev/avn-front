@@ -21,6 +21,8 @@
               :withInput="false"
               :multipleMedia="true"
               :maxMediaLength="3"
+              :limits="limits"
+              :videosOnly="true"
             />
           </div>
         </div>
@@ -38,6 +40,15 @@ export default {
   components: {
     Modal,
     AddMessageBox
+  },
+  data() {
+    return {
+      limits: {
+        video: 3,
+        gif: 1,
+        photo: 5
+      }
+    };
   },
   computed: {
     isEditMode() {
