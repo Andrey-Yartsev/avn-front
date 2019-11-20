@@ -1,115 +1,143 @@
 const modalTypes = [
   {
     componentName: "PostReportModal",
-    storeName: "postReport"
+    storeName: "postReport",
+    layoutOnlyModal: true
   },
   {
     componentName: "PostModal",
-    storeName: "post"
+    storeName: "post",
+    layoutOnlyModal: true
   },
   {
     componentName: "ChooseHighlightModal",
-    storeName: "chooseHighlight"
+    storeName: "chooseHighlight",
+    layoutOnlyModal: true
   },
   {
     componentName: "CreateHighlightsModal",
-    storeName: "createHighlights"
+    storeName: "createHighlights",
+    layoutOnlyModal: true
   },
   {
     componentName: "ChatVideoModal",
-    storeName: "chatVideo"
+    storeName: "chatVideo",
+    layoutOnlyModal: true
   },
   {
     componentName: "ChatModal",
-    storeName: "messages"
+    storeName: "messages",
+    layoutOnlyModal: true
   },
   {
     componentName: "UserReportModal",
-    storeName: "userReport"
+    storeName: "userReport",
+    layoutOnlyModal: true
   },
   {
     componentName: "SubscribeModal",
-    storeName: "subscribe"
+    storeName: "subscribe",
+    layoutOnlyModal: true
   },
   {
     componentName: "ResubscribeModal",
-    storeName: "resubscribe"
+    storeName: "resubscribe",
+    layoutOnlyModal: true
   },
   {
     componentName: "CreateStoryModal",
-    storeName: "createStory"
+    storeName: "createStory",
+    layoutOnlyModal: true
   },
   {
     componentName: "AddPostModal",
-    storeName: "addPost"
+    storeName: "addPost",
+    layoutOnlyModal: true
   },
   {
     componentName: "GroupMessageModal",
-    storeName: "groupMessage"
+    storeName: "groupMessage",
+    layoutOnlyModal: true
   },
   {
     componentName: "AddLinkModal",
-    storeName: "addLink"
+    storeName: "addLink",
+    layoutOnlyModal: true
   },
   {
     componentName: "IframeModal",
-    storeName: "iframe"
+    storeName: "iframe",
+    layoutOnlyModal: true
   },
   {
     componentName: "StreamModal",
-    storeName: "stream"
+    storeName: "stream",
+    layoutOnlyModal: true
   },
   {
     componentName: "StoryViewerModal",
-    storeName: "storyViewers"
+    storeName: "storyViewers",
+    layoutOnlyModal: true
   },
   {
     componentName: "SubscriptionConfirmModal",
-    storeName: "subscriptionConfirm"
+    storeName: "subscriptionConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "LoginModal",
-    storeName: "login"
+    storeName: "login",
+    layoutOnlyModal: false
   },
   {
     componentName: "SignupModal",
-    storeName: "signup"
+    storeName: "signup",
+    layoutOnlyModal: false
   },
   {
     componentName: "PaymentModal",
-    storeName: "payment"
+    storeName: "payment",
+    layoutOnlyModal: true
   },
   {
     componentName: "Confirm",
-    storeName: "confirm"
+    storeName: "confirm",
+    layoutOnlyModal: false
   },
   {
     componentName: "ImageModal",
-    storeName: "image"
+    storeName: "image",
+    layoutOnlyModal: true
   },
   {
     componentName: "TrialConfirmModal",
-    storeName: "trialConfirm"
+    storeName: "trialConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "GayContextConfirmModal",
-    storeName: "gayContextConfirm"
+    storeName: "gayContextConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "TipPayConfirm",
-    storeName: "tipPayConfirm"
+    storeName: "tipPayConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "ChatMessagePayConfirm",
-    storeName: "chatMessagePayConfirm"
+    storeName: "chatMessagePayConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "BuySnapchatConfirm",
-    storeName: "buySnapchatConfirm"
+    storeName: "buySnapchatConfirm",
+    layoutOnlyModal: true
   },
   {
     componentName: "PostLikesModal",
-    storeName: "postLikes"
+    storeName: "postLikes",
+    layoutOnlyModal: true
   }
 ];
 

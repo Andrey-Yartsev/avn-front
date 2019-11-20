@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-for="type in modalTypes">
+    <template v-for="type in filteredModals">
       <component
         :key="type.storeName"
         :is="type.componentName"
@@ -39,6 +39,8 @@ import ChatMessagePayConfirm from "@/components/chat/ChatMessagePayConfirm";
 import BuySnapchatConfirm from "@/components/pages/profile/BuySnapchatConfirm";
 import TipPayConfirm from "@/components/common/tip/TipPayConfirm";
 import PostLikesModal from "@/components/post/parts/likesModal/Index";
+import LoginModal from "@/components/auth/LoginModal";
+import SignupModal from "@/components/auth/SignupModal";
 
 export default {
   components: {
@@ -67,12 +69,29 @@ export default {
     ChatMessagePayConfirm,
     BuySnapchatConfirm,
     TipPayConfirm,
-    PostLikesModal
+    PostLikesModal,
+    LoginModal,
+    SignupModal
+  },
+  props: {
+    hasLayout: {
+      type: Boolean,
+      defalut: true
+    }
   },
   data() {
     return {
       modalTypes: modalTypes
     };
+  },
+  computed: {
+    filteredModals() {
+      if (this.$props.hasLayout) {
+        return this.modalTypes;
+      } else {
+        return this.modalTypes.filter(item => !item.layoutOnlyModal);
+      }
+    }
   }
 };
 </script>

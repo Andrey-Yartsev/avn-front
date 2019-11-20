@@ -1,10 +1,8 @@
 <template>
   <div v-if="!hasLayout">
+    <Modals :hasLayout="false" />
     <ErrorModal v-if="error" />
-    <Confirm v-if="$store.state.modal.confirm.show" />
     <Toast v-if="showToast" @hide="showToast = false" />
-    <LoginModal v-if="$store.state.modal.login.show" />
-    <SignupModal v-if="$store.state.modal.signup.show" />
     <router-view />
   </div>
   <div v-else class="main-container" :class="containerClassName">
@@ -23,7 +21,7 @@
       <ToastList v-if="toasts.length" :toasts="toasts" />
       <StoryInput />
       <modal-router />
-      <Modals />
+      <Modals :hasLayout="true" />
       <ErrorModal v-if="error" />
       <a
         v-if="adminReturnUrl"
@@ -43,36 +41,27 @@
 </template>
 
 <script>
+import BrowserStore from "store";
+import Logger from "js-logger";
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
 import Sidebar from "@/components/header/Sidebar";
 import ToastList from "@/components/common/ToastList";
-import ColorScheme from "@/mixins/colorScheme";
 import Modals from "@/components/modals/Index";
-
 import ErrorModal from "@/components/modal/Error";
-import LoginModal from "@/components/auth/LoginModal";
-import SignupModal from "@/components/auth/SignupModal";
-
 import StoryInput from "@/components/story/Input";
-
 import UserBubble from "@/components/users/UserBubble.vue";
 import GenderFilterMobile from "@/components/common/GenderFilterMobile";
-
+import ModalRouter from "@/components/modal/Router";
 import Cookie from "@/utils/cookie";
-import BrowserStore from "store";
-import Logger from "js-logger";
-
 import rootClasses from "@/utils/rootClasses";
 import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
 import wsp from "@/ws/wsp";
-
-import ModalRouter from "@/components/modal/Router";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
-
+import ColorScheme from "@/mixins/colorScheme";
 import { fromNow } from "@/helpers/datetime";
 
 fromNow("2019-05-03T11:01:12+00:00");
@@ -119,8 +108,8 @@ export default {
     Sidebar,
     ToastList,
     ErrorModal,
-    LoginModal,
-    SignupModal,
+    // LoginModal,
+    // SignupModal,
     ModalRouter,
     StoryInput,
     UserBubble,
