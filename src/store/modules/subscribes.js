@@ -69,7 +69,8 @@ createRequestAction({
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 10;
     options.query.marker = params.marker || "";
-    options.query.active = params.active;
+    options.query.active =
+      params.active === true ? 1 : params.active === false ? 0 : undefined;
     return options;
   },
   resultConvert: function(result, state) {
