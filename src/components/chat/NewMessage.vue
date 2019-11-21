@@ -387,6 +387,9 @@ export default {
     },
     toggleSelectAll() {
       this.selectAll = !this.selectAll;
+      if (this.selectAll) {
+        this.selected = [];
+      }
     },
     search() {
       if (!this.searchQuery) {
