@@ -52,17 +52,13 @@
               <td>
                 <div class="btn-group">
                   <button
+                    :disabled="disableButtons"
                     class="btn btn-secondary btn-sm dropdown-toggle"
                     type="button"
                     @click.prevent="
                       removeFileHandler(file, preloadedMedias[index])
                     "
                   >
-                    <!-- <button
-                    class="btn btn-secondary btn-sm dropdown-toggle"
-                    type="button"
-                    @click.prevent="$refs.upload.remove(file)"
-                  > -->
                     Remove
                   </button>
                 </div>
@@ -82,21 +78,30 @@
           :add-index="addIndex"
           v-model="files"
           @input-file="inputFile"
-          @input-filter="() => {}"
+          @input-filter="inputFilter"
           ref="upload"
         />
         <div class="btn-group">
-          <label :for="name" type="button" class="btn btn-success"
-            >Add files</label
+          <button
+            :disabled="disableButtons"
+            type="button"
+            class="btn btn-success"
           >
-          <button class="btn btn-success" href="#" @click="onAddFolader">
+            <label :for="name">Add files</label>
+          </button>
+          <button
+            :disabled="disableButtons"
+            class="btn btn-success"
+            href="#"
+            @click="onAddFolader"
+          >
             Add folder
           </button>
           <button
+            :disabled="disableButtons"
             type="button"
             class="btn btn-success start-upload"
-            v-if="!$refs.upload || !$refs.upload.active"
-            @click.prevent="$refs.upload.active = true"
+            @click.prevent="sendHandler"
           >
             Start Upload
           </button>
@@ -142,7 +147,7 @@ export default {
       files: [],
       accept:
         "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
-      extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
+      extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,gif",
       multiple: true,
       directory: false,
       drop: true,
@@ -155,7 +160,8 @@ export default {
         name: "",
         type: "",
         content: ""
-      }
+      },
+      disableButtons: false
     };
   },
   watch: {
@@ -179,9 +185,17 @@ export default {
       this.$refs.upload.remove(file);
       this.removeMedia(media.id);
     },
-    inputFile(newFile) {
-      if (newFile) {
+    inputFile(newFile, oldFile, prevent) {
+      if (newFile && !oldFile) {
+        if (!this.isFormatCorrect(newFile.name)) {
+          return prevent();
+        }
         this.addMediaFiles({ target: { files: [newFile.file] } });
+      }
+    },
+    inputFilter(newFile, oldFile, prevent) {
+      if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
+        return prevent();
       }
     },
     onAddFolader() {
@@ -196,6 +210,29 @@ export default {
         input.directory = false;
         input.webkitdirectory = false;
       };
+    },
+    sendHandler() {
+      const mediaFiles = this.preloadedMedias;
+      const data = {};
+      if (mediaFiles.length) {
+        data.mediaFile = mediaFiles.map(item => ({ id: item.processId }));
+      }
+      console.log(data);
+      this.disableButtons = true;
+      setTimeout(() => {
+        this.preloadedMedias = [];
+        this.$refs.upload.clear();
+        this.disableButtons = false;
+      }, 1000);
+      // this.$store.dispatch("profile/media/addMedia", data, { root: true });
+    },
+    isFormatCorrect(fileName) {
+      if (
+        /\.(jpeg|jpe|jpg|gif|png|webp|mp4|mpeg|mpg|wmv|avi)$/i.test(fileName)
+      ) {
+        return true;
+      }
+      return false;
     }
   }
 };

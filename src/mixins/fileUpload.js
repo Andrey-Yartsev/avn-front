@@ -29,7 +29,7 @@ export default {
     return {
       preloadedMedias: [],
       inputAcceptTypes,
-      limits: this.$props.defaultLimits || limits,
+      limits: (this.$props && this.$props.defaultLimits) || limits,
       uploadInProgress: false
     };
   },
