@@ -58,9 +58,19 @@
 import Modal from "@/components/modal/Index";
 
 export default {
-  name: "UserReportModal",
+  name: "ReportModal",
   components: {
     Modal
+  },
+  props: {
+    type: {
+      type: String,
+      required: true
+    },
+    reportAction: {
+      type: Function,
+      required: true
+    }
   },
   data() {
     return {
@@ -70,11 +80,11 @@ export default {
     };
   },
   computed: {
-    userId() {
-      return this.$store.state.modal.userReport.data;
+    modalName() {
+      return this.type + "Report";
     },
     _reasons() {
-      return this.$store.state.chat.fetchReportReasonsResult;
+      return this.$store.state[this.type].fetchReportReasonsResult;
     },
     reasons() {
       const reasons = this._reasons;
@@ -112,21 +122,18 @@ export default {
       this.canBack = false;
     },
     report() {
-      this.$store.dispatch("user/report", {
-        userId: this.userId,
-        reasonId: this.reason.id
-      });
+      this.reportAction(this.reason.id);
       this.$store.dispatch("global/flashToast", {
         text: "Report has been sent"
       });
       this.close();
     },
     close() {
-      this.$store.dispatch("modal/hide", { name: "userReport" });
+      this.$store.dispatch("modal/hide", { name: this.modalName });
     }
   },
   created() {
-    this.$store.dispatch("chat/fetchReportReasons");
+    this.$store.dispatch(this.type + "/fetchReportReasons");
   }
 };
 </script>
