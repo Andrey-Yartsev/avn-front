@@ -38,13 +38,14 @@
         </li>
       </template>
       <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
-        <button
+        <a
           class="edit more-functions__link"
           type="button"
-          @click="editPost"
+          :href="'/post/edit/' + post.id"
+          @click.prevent="editPost"
         >
           <span class="more-functions__option">Edit post</span>
-        </button>
+        </a>
       </li>
       <template v-if="isOwner(userId)">
         <li
@@ -180,12 +181,16 @@ export default {
     editPost() {
       this.hide();
 
-      this.$store.dispatch("modal/show", {
-        name: "editPost",
-        data: {
-          postId: this.postId
-        }
-      });
+      if (this.isOnPostPage) {
+        this.$router.push("/post/edit/" + this.postId);
+      } else {
+        this.$store.dispatch("modal/show", {
+          name: "editPost",
+          data: {
+            postId: this.postId
+          }
+        });
+      }
     },
     reportUser() {
       this.hide();

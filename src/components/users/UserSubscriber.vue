@@ -1,5 +1,5 @@
 <template>
-  <div class="item" v-if="actionPrefix === 'subscribes'">
+  <div class="item" v-if="actionPrefix === 'subscribes' || 'snapchat'">
     <div class="user table__cell">
       <router-link
         :to="'/' + profile.subscriber.username"
@@ -20,7 +20,7 @@
       </router-link>
     </div>
     <div class="snapchatUsername table__cell" data-title="Snapchat Username">
-      <!-- {{ profile.subscriber.username }} -->
+      {{ profile.snap_name }}
     </div>
     <div
       class="amount table__cell table__cell_align table__cell_selected table__cell_align-hor-c"

@@ -271,10 +271,15 @@ export default {
       }
     },
     getPosts() {
-      this.$store.dispatch("subscribes/getPosts", {
-        type: this.actionPrefix,
-        active: this.isActiveUsers()
-      });
+      if (this.actionPrefix === "subscribes") {
+        this.$store.dispatch("subscribes/getPosts", {
+          active: this.isActiveUsers()
+        });
+      } else {
+        this.$store.dispatch("subscribes/getSnapchatPosts", {
+          active: this.isActiveUsers()
+        });
+      }
     },
     isActiveUsers() {
       if (

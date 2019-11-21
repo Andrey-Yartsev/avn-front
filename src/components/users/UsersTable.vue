@@ -15,14 +15,12 @@
 
 <script>
 import UserSubscriber from "./UserSubscriber";
-import UserSnapchat from "./UserSnapchat";
 import UserEarnings from "./UserEarnings";
 
 export default {
   name: "SearchUsersTable",
   components: {
     UserSubscriber,
-    UserSnapchat,
     UserEarnings
   },
   props: {
@@ -46,9 +44,8 @@ export default {
     component() {
       switch (this.actionPrefix) {
         case "subscribes":
-          return "UserSubscriber";
         case "snapchat":
-          return "UserSnapchat";
+          return "UserSubscriber";
         case "earnings":
           return "UserEarnings";
         default:

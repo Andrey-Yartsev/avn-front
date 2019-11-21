@@ -108,22 +108,5 @@ export default {
       method: "DELETE",
       mode: "cors"
     });
-  },
-  getPostReportReasons({ type }) {
-    return tokenRequest(`reports/reasons&type=${type}`, {
-      method: "GET"
-    });
-  },
-  sendPostReport({ postId, reasonId }) {
-    return tokenRequest(`posts/${postId}/report`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        reasonId
-      })
-    });
   }
 };

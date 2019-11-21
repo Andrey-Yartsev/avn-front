@@ -113,7 +113,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/avn_awards/nominations",
     name: "AvnAwards",
     component: () =>
@@ -126,7 +126,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/gayvn_awards/nominations",
     name: "AvnAwardsGay",
     component: () =>
@@ -140,7 +140,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/nominator/:username/:type/:categories?",
     name: "Nominator",
     component: () =>

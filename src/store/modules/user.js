@@ -173,6 +173,20 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchReportReasons",
+  apiPath: "reports/reasons",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {
+      type: "user"
+    }
+  }
+});
+
 export default {
   namespaced: true,
   state,

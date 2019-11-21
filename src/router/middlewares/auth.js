@@ -154,6 +154,44 @@ const Auth = {
     }
   },
 
+  requireAuthAdmin(to, from, next) {
+    BrowserStore.remove("onLoginSubsProfile"); // using only in twitter route
+    const trialCodeExists = saveTrialCode();
+
+    const params = queryString.parse(location.search);
+    if (params.token && params.url) {
+      Store.dispatch("auth/setToken", params.token);
+      window.location = params.url;
+      return;
+    }
+    if (Auth.loggedIn && Auth.loggedIn.adminReturnUrl) {
+      return next();
+    }
+    const token = BrowserStore.get("token");
+    if (!token) {
+      return next("/login");
+    }
+    Store.dispatch("auth/setToken", token);
+    Store.dispatch("profile/fetch")
+      .then(() => {
+        if (trialCodeExists || !Auth.loggedIn.adminReturnUrl) {
+          return next("/");
+        }
+        next();
+      })
+      .catch(error => {
+        if (error.code === 102) {
+          Store.dispatch("auth/resetUser").then(() => {
+            Store.dispatch("auth/setOtpAuth", true).then(() => next("/login"));
+          });
+        } else {
+          Store.dispatch("auth/logout").then(() => {
+            next("/login");
+          });
+        }
+      });
+  },
+
   requireAny(to, from, next) {
     BrowserStore.remove("onLoginSubsProfile");
     if (Auth.loggedIn) {

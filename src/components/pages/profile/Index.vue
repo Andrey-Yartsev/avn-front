@@ -378,6 +378,7 @@ export default {
       }
     },
     newPost() {
+      this.$store.dispatch("modal/hide", { name: "editPost" });
       this.initPosts();
     },
     updatedPost() {
