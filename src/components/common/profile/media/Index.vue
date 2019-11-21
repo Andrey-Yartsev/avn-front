@@ -15,7 +15,7 @@
           @edit="editHandler(item)"
         />
       </div>
-      <FileUploader />
+      <FileUploader :defaultLimits="limits" />
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
           <span>Nothing here yet</span>
@@ -46,6 +46,15 @@ export default {
     FileUploader
   },
   props: ["private"],
+  data() {
+    return {
+      limits: {
+        video: 3,
+        gif: 3,
+        photo: 3
+      }
+    };
+  },
   computed: {
     media() {
       return this.$store.state.profile.media.media;

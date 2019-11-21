@@ -24,13 +24,24 @@
             <tr v-for="(file, index) in files" :key="file.id">
               <td>{{ index + 1 }}</td>
               <td>
-                <img
+                <!-- <img
                   v-if="file.thumb"
                   :src="file.thumb"
                   width="60"
                   height="auto"
-                />
-                <span v-else>No Image</span>
+                /> -->
+                <!-- <span v-else>No Image</span> -->
+                <div
+                  class="addFileCollectionView"
+                  v-if="preloadedMedias.length"
+                >
+                  <MediaPreview
+                    :media="preloadedMedias[index]"
+                    :isSaving="false"
+                    @removeMedia="removeMedia"
+                    :deleteButton="false"
+                  />
+                </div>
               </td>
               <td>
                 <div class="filename">
@@ -43,8 +54,15 @@
                   <button
                     class="btn btn-secondary btn-sm dropdown-toggle"
                     type="button"
-                    @click.prevent="$refs.upload.remove(file)"
+                    @click.prevent="
+                      removeFileHandler(file, preloadedMedias[index])
+                    "
                   >
+                    <!-- <button
+                    class="btn btn-secondary btn-sm dropdown-toggle"
+                    type="button"
+                    @click.prevent="$refs.upload.remove(file)"
+                  > -->
                     Remove
                   </button>
                 </div>
@@ -59,14 +77,12 @@
           :accept="accept"
           :multiple="multiple"
           :directory="directory"
-          :size="size || 0"
-          :data="data"
           :drop="drop"
           :drop-directory="dropDirectory"
           :add-index="addIndex"
           v-model="files"
           @input-file="inputFile"
-          @input-filter="inputFilter"
+          @input-filter="() => {}"
           ref="upload"
         />
         <div class="btn-group">
@@ -89,6 +105,101 @@
     </div>
   </div>
 </template>
+
+<script>
+import Vue from "vue";
+import FileUpload from "vue-upload-component";
+import FileUploadMixin from "@/mixins/fileUpload";
+import MediaPreview from "@/components/common/MediaPreview";
+
+Vue.filter("formatSize", function(size) {
+  if (size > 1024 * 1024 * 1024 * 1024) {
+    return (size / 1024 / 1024 / 1024 / 1024).toFixed(2) + " TB";
+  } else if (size > 1024 * 1024 * 1024) {
+    return (size / 1024 / 1024 / 1024).toFixed(2) + " GB";
+  } else if (size > 1024 * 1024) {
+    return (size / 1024 / 1024).toFixed(2) + " MB";
+  } else if (size > 1024) {
+    return (size / 1024).toFixed(2) + " KB";
+  }
+  return size.toString() + " B";
+});
+
+export default {
+  components: {
+    FileUpload,
+    MediaPreview
+  },
+  mixins: [FileUploadMixin],
+  props: {
+    defaultLimits: {
+      type: Object,
+      default: null
+    }
+  },
+  data() {
+    return {
+      files: [],
+      accept:
+        "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
+      extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
+      multiple: true,
+      directory: false,
+      drop: true,
+      dropDirectory: true,
+      addIndex: false,
+      name: "file",
+      uploadAuto: false,
+      addData: {
+        show: false,
+        name: "",
+        type: "",
+        content: ""
+      }
+    };
+  },
+  watch: {
+    "addData.show"(show) {
+      if (show) {
+        this.addData.name = "";
+        this.addData.type = "";
+        this.addData.content = "";
+      }
+    }
+  },
+  computed: {
+    allMediaTypes() {
+      const { photo, video } = this.inputAcceptTypes;
+      return [...photo, ...video];
+    }
+  },
+  methods: {
+    removeFileHandler(file, media) {
+      console.log(media.id);
+      this.$refs.upload.remove(file);
+      this.removeMedia(media.id);
+    },
+    inputFile(newFile) {
+      if (newFile) {
+        this.addMediaFiles({ target: { files: [newFile.file] } });
+      }
+    },
+    onAddFolader() {
+      let input = this.$refs.upload.$el.querySelector("input");
+      input.directory = true;
+      input.webkitdirectory = true;
+      this.directory = true;
+      input.onclick = null;
+      input.click();
+      input.onclick = () => {
+        this.directory = false;
+        input.directory = false;
+        input.webkitdirectory = false;
+      };
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .drop-area {
@@ -128,85 +239,3 @@
   }
 }
 </style>
-
-<script>
-import FileUpload from "vue-upload-component";
-export default {
-  components: {
-    FileUpload
-  },
-  data() {
-    return {
-      files: [],
-      accept:
-        "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
-      extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
-      multiple: true,
-      directory: false,
-      drop: true,
-      dropDirectory: true,
-      addIndex: false,
-      name: "file",
-      uploadAuto: false,
-      addData: {
-        show: false,
-        name: "",
-        type: "",
-        content: ""
-      }
-    };
-  },
-  watch: {
-    "addData.show"(show) {
-      if (show) {
-        this.addData.name = "";
-        this.addData.type = "";
-        this.addData.content = "";
-      }
-    }
-  },
-  methods: {
-    inputFilter(newFile, oldFile, prevent) {
-      if (newFile && !oldFile) {
-        if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-          return prevent();
-        }
-        if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-          return prevent();
-        }
-      }
-      if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
-        // Create a blob field
-        newFile.blob = "";
-        let URL = window.URL || window.webkitURL;
-        if (URL && URL.createObjectURL) {
-          newFile.blob = URL.createObjectURL(newFile.file);
-        }
-        // Thumbnails
-        newFile.thumb = "";
-        if (newFile.blob && newFile.type.substr(0, 6) === "image/") {
-          newFile.thumb = newFile.blob;
-        }
-      }
-    },
-    // add, update, remove File Event
-    inputFile(newFile, oldFile) {
-      console.log("input event");
-      console.log(newFile, oldFile);
-    },
-    onAddFolader() {
-      let input = this.$refs.upload.$el.querySelector("input");
-      input.directory = true;
-      input.webkitdirectory = true;
-      this.directory = true;
-      input.onclick = null;
-      input.click();
-      input.onclick = () => {
-        this.directory = false;
-        input.directory = false;
-        input.webkitdirectory = false;
-      };
-    }
-  }
-};
-</script>

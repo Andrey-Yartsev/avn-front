@@ -15,7 +15,12 @@
     <div v-if="showLoader" class="progress">
       <div class="progress-loader" :style="{ width: `${media.loaded}%` }" />
     </div>
-    <span class="remove" @mousedown.prevent.stop="() => {}" @click="remove">
+    <span
+      v-if="deleteButton"
+      class="remove"
+      @mousedown.prevent.stop="() => {}"
+      @click="remove"
+    >
       <svg aria-hidden="true" class="icn icn-remove">
         <use xlink:href="#icon-remove"></use>
       </svg>
@@ -39,6 +44,10 @@ export default {
     isSaving: {
       type: Boolean,
       required: true
+    },
+    deleteButton: {
+      type: Boolean,
+      default: true
     }
   },
   components: {

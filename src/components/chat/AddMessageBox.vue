@@ -196,7 +196,7 @@ export default {
       type: Number,
       default: null
     },
-    limits: {
+    defaultLimits: {
       type: Object,
       default: null
     },
