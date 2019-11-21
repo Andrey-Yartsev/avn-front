@@ -15,12 +15,13 @@
           @edit="editHandler(item)"
         />
       </div>
+      <FileUploader />
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
           <span>Nothing here yet</span>
         </p>
       </template>
-      <div class="links-add-new" v-if="this.$props.private">
+      <!-- <div class="links-add-new" v-if="this.$props.private">
         <button
           class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
           @click="openAddMediaModal"
@@ -28,7 +29,7 @@
           <span class="icn-item icn-camera"></span>
           Add new video
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -36,11 +37,13 @@
 <script>
 import Loader from "@/components/common/Loader";
 import MediaPost from "@/components/addMedia/MediaPost";
+import FileUploader from "@/components/common/profile/media/FileUploader";
 export default {
   name: "MediaPage",
   components: {
     Loader,
-    MediaPost
+    MediaPost,
+    FileUploader
   },
   props: ["private"],
   computed: {
