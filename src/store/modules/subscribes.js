@@ -41,12 +41,20 @@ const actions = {
     dispatch("subscribesRequest", params).then(r => {
       commit("checkResult", r);
     });
+  },
+  getSnapchatPosts({ dispatch, commit, state }, params) {
+    params.offset = state.offset;
+    params.marker = state.marker || "";
+    params.limit = limit;
+    dispatch("subscribesSnapchatRequest", params).then(r => {
+      commit("checkResult", r);
+    });
   }
 };
 
 createRequestAction({
   prefix: "subscribesRequest",
-  apiPath: "sales/{type}/",
+  apiPath: "sales/subscribes",
   state,
   mutations,
   actions,
@@ -59,12 +67,35 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
     options.query.offset = params.offset || 0;
-    options.query.limit = params.limit || 5;
+    options.query.limit = params.limit || 10;
     options.query.marker = params.marker || "";
     options.query.active = params.active;
-    // options.query.expired = params.expired || "";
-    // options.query.desc = params.desc;
-    // options.query.name = params.name || "";
+    return options;
+  },
+  resultConvert: function(result, state) {
+    return [...state.posts, ...result.list];
+  }
+});
+
+createRequestAction({
+  prefix: "subscribesSnapchatRequest",
+  apiPath: "sales/subscribes/snapchat",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {}
+  },
+  resultKey: "posts",
+  defaultResultValue: [],
+  paramsToOptions: function(params, options) {
+    options.query.query = params.query;
+    options.query.offset = params.offset || 0;
+    options.query.limit = params.limit || 10;
+    options.query.marker = params.marker || "";
+    options.query.active =
+      params.active === true ? 1 : params.active === false ? 0 : undefined;
     return options;
   },
   paramsToPath: function(params, path) {
