@@ -11,28 +11,22 @@
     </div>
     <div class="upload">
       <div class="table-responsive">
-        <table class="table table-hover">
-          <thead v-if="files.length">
-            <tr>
-              <th>#</th>
-              <th>Thumb</th>
-              <th>Name</th>
-              <th>Size</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(file, index) in files" :key="file.id">
-              <td>{{ index + 1 }}</td>
-              <td>
-                <!-- <img
-                  v-if="file.thumb"
-                  :src="file.thumb"
-                  width="60"
-                  height="auto"
-                /> -->
-                <!-- <span v-else>No Image</span> -->
+        <div class="table table-hover">
+          <div class="table__header" v-if="files.length">
+            <div class="row">
+              <div class="col col-1">#</div>
+              <div class="col col-2">Thumb</div>
+              <div class="col col-4">Name</div>
+              <div class="col col-1">Size</div>
+              <div class="col col-2"></div>
+            </div>
+          </div>
+          <div class="table__body">
+            <div class="row" v-for="(file, index) in files" :key="file.id">
+              <div class="col col-1">{{ index + 1 }}</div>
+              <div class="col col-2">
                 <div
-                  class="addFileCollectionView"
+                  class="addFileCollectionView mediaPreview"
                   v-if="preloadedMedias.length"
                 >
                   <MediaPreview
@@ -42,32 +36,28 @@
                     :deleteButton="false"
                   />
                 </div>
-              </td>
-              <td>
-                <div class="filename">
-                  {{ file.name }}
-                </div>
-              </td>
-              <td>{{ file.size | formatSize }}</td>
-              <td>
-                <div class="btn-group">
-                  <button
-                    :disabled="disableButtons"
-                    class="btn btn-secondary btn-sm dropdown-toggle"
-                    type="button"
-                    @click.prevent="
-                      removeFileHandler(file, preloadedMedias[index])
-                    "
-                  >
-                    Remove
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+              <div class="col col-4">
+                {{ file.name }}
+              </div>
+              <div class="col col-1">{{ file.size | formatSize }}</div>
+              <div class="col col-2">
+                <button
+                  :disabled="disableButtons"
+                  class="btn btn-secondary btn-sm dropdown-toggle"
+                  type="button"
+                  @click.prevent="
+                    removeFileHandler(file, preloadedMedias[index])
+                  "
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="example-footer">
+      <div class="table__footer">
         <file-upload
           :extensions="extensions"
           :accept="accept"
@@ -258,6 +248,30 @@ export default {
   .table {
     margin: 0;
     width: 100%;
+    &__header,
+    &__body,
+    &__footer {
+      .row {
+        .col {
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &-1 {
+            width: 10%;
+          }
+          &-2 {
+            width: 20%;
+          }
+          &-3 {
+            width: 30%;
+          }
+          &-4 {
+            width: 40%;
+          }
+        }
+      }
+    }
   }
 }
 .example-footer {
@@ -273,6 +287,11 @@ export default {
   flex-flow: row wrap;
   .start-upload {
     margin-left: auto;
+  }
+}
+.mediaPreview {
+  & > div {
+    margin-right: 0;
   }
 }
 </style>

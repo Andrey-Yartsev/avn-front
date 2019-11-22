@@ -15,7 +15,7 @@
           @edit="editHandler(item)"
         />
       </div>
-      <FileUploader :defaultLimits="limits" />
+      <FileUploader :defaultLimits="limits" v-if="this.$props.private" />
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
           <span>Nothing here yet</span>
