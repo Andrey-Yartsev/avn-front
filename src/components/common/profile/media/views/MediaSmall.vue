@@ -118,7 +118,7 @@
       <span
         class="explore-media__counter explore-media__counter_comments"
         v-if="post.mediaType !== 'processing'"
-        ><span class="btn-icon comments icn-item icn-size_lg"></span
+        ><span class="btn-icon icn-price icn-item icn-size_lg"></span
         >{{ post.commentsCount }}</span
       >
     </template>
@@ -127,18 +127,19 @@
 
 <script>
 import { toHumanDuration } from "@/helpers/datetime";
-import ModalRouterGoto from "@/mixins/modalRouter/goto";
-import PostOpen from "@/mixins/post/open";
-import userMixin from "@/mixins/user";
-import PostCommon from "@/mixins/post/common";
+// import PostOpen from "@/mixins/post/open";
+// import userMixin from "@/mixins/user";
+// import PostCommon from "@/mixins/post/common";
 import Loader from "@/components/common/Loader";
+import ModalRouterGoto from "@/mixins/modalRouter/goto";
+import MediaOpen from "@/mixins/media/open";
 
 export default {
   name: "MediaSmall",
   components: {
     Loader
   },
-  mixins: [ModalRouterGoto, PostOpen, userMixin, PostCommon],
+  mixins: [ModalRouterGoto, MediaOpen],
   data() {
     return {
       isVisible: undefined,

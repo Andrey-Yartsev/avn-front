@@ -51,7 +51,7 @@
           :showTip="false"
           :openModal="openModal"
           @postShowCommentForm="() => {}"
-          @postLike="likePost"
+          @postLike="() => {}"
           @toggleTip="() => {}"
         />
       </div>
@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import Header from "@/components/post/parts/header/Index";
+import Header from "@/components/common/profile/media/header/Index";
 import Media from "@/components/post/parts/media/Index";
-import Actions from "@/components/post/parts/actions/Index";
+import Actions from "@//components/common/profile/media/footer/Actions";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import MediaOpen from "@/mixins/media/open";
 

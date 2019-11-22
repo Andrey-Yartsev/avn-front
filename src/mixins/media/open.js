@@ -31,12 +31,12 @@ export default {
 
       if (this.shouldBePoster) {
         this.$router.push(
-          `/explore/videos#m/post/${this.post.id}/${this.from}`
+          `/explore/videos#m/media/${this.post.id}/${this.from}`
         );
         return;
       }
 
-      this.goToModalRoute(`post/${this.post.id}/${this.from}`);
+      this.goToModalRoute(`media/${this.post.id}/${this.from}`);
     },
     showSubscribeModal(onSuccess) {
       window.onSubscriptionSuccess = () => {
