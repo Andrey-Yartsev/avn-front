@@ -537,7 +537,7 @@ createRequestAction({
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     params.limit = chatsLimit;
-    options.query = params;
+    options.query = { ...options.query, ...params };
     return options;
   },
   resultConvert: function(res) {
