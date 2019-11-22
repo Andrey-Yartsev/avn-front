@@ -10,9 +10,9 @@
       Drop files to upload
     </div>
     <div class="upload">
-      <div class="table-responsive">
+      <div class="table-responsive" v-if="files.length">
         <div class="table table-hover">
-          <div class="table__header" v-if="files.length">
+          <div class="table__header">
             <div class="row">
               <div class="col col-1">#</div>
               <div class="col col-2">Thumb</div>
@@ -71,8 +71,8 @@
           @input-filter="inputFilter"
           ref="upload"
         />
-        <div class="btn-group">
-          <button
+        <div class="btn-group row">
+          <!-- <button
             :disabled="disableButtons"
             type="button"
             class="btn btn-success"
@@ -86,11 +86,11 @@
             @click="onAddFolader"
           >
             Add folder
-          </button>
+          </button> -->
           <button
-            :disabled="disableButtons"
+            :disabled="!files.length || disableButtons"
             type="button"
-            class="btn btn-success start-upload"
+            class="btn btn-success start-upload col col-2"
             @click.prevent="sendHandler"
           >
             Start Upload
