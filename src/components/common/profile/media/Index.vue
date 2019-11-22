@@ -1,35 +1,32 @@
 <template>
-  <div
-    class="linksPage links-content"
-    :class="{ 'links-content_filled': !loading && media.length }"
-  >
+  <div>
     <div v-if="loading" class="loader-infinity">
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <div v-if="media.length" class="links-wrapper">
-        <MediaPost
-          v-for="item in media"
-          :media="item"
-          :key="item.id"
-          @edit="editHandler(item)"
-        />
-      </div>
       <FileUploader :defaultLimits="limits" v-if="this.$props.private" />
+      <div class="profile-content">
+        <div class="exploreAllCollectionView">
+          <div class="explore">
+            <div class="explore__inside">
+              <div class="explore-wrapper videos">
+                <component
+                  :is="postComponent"
+                  v-for="post in media"
+                  :post="post"
+                  :key="post.id"
+                  from="profile/home"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
           <span>Nothing here yet</span>
         </p>
       </template>
-      <!-- <div class="links-add-new" v-if="this.$props.private">
-        <button
-          class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
-          @click="openAddMediaModal"
-        >
-          <span class="icn-item icn-camera"></span>
-          Add new video
-        </button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -38,12 +35,17 @@
 import Loader from "@/components/common/Loader";
 import MediaPost from "@/components/addMedia/MediaPost";
 import FileUploader from "@/components/common/profile/media/FileUploader";
+import PostCollection from "@/components/post/collection/Index";
+import PostSmall from "@/components/post/view/SmallView";
+import PostMedium from "@/components/post/view/MediumView";
+
 export default {
   name: "MediaPage",
   components: {
     Loader,
     MediaPost,
-    FileUploader
+    FileUploader,
+    PostCollection
   },
   props: ["private"],
   data() {
@@ -61,6 +63,12 @@ export default {
     },
     loading() {
       return this.$store.state.profile.media.getMediaLoading;
+    },
+    postComponent() {
+      if (this.$mq === "mobile") {
+        return PostMedium;
+      }
+      return PostSmall;
     }
   },
   methods: {
@@ -83,7 +91,8 @@ export default {
     }
   },
   mounted() {
-    this.fetchMedia();
+    console.log(this.media);
+    // this.fetchMedia();
   }
 };
 </script>

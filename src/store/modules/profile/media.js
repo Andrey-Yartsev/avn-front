@@ -1,7 +1,8 @@
 import { createRequestAction } from "../../utils/storeRequest";
+import mockMediaResponse from "./mockMedia.json";
 
 const initState = {
-  media: [],
+  media: mockMediaResponse.list,
   editedMedia: null
 };
 

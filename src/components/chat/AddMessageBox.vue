@@ -131,7 +131,7 @@
         <button
           @click="sendMessage"
           class="btn-send btn-send_default icn-item icn-size_lg"
-          :disabled="!canSend || disable"
+          :disabled="!canSend"
           v-tooltip="'Send'"
         ></button>
       </div>

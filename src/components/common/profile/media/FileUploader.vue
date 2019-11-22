@@ -88,7 +88,7 @@
             Add folder
           </button> -->
           <button
-            :disabled="!files.length || disableButtons"
+            :disabled="!this.canSend"
             type="button"
             class="btn btn-success start-upload col col-2"
             @click.prevent="sendHandler"
@@ -167,6 +167,12 @@ export default {
     allMediaTypes() {
       const { photo, video } = this.inputAcceptTypes;
       return [...photo, ...video];
+    },
+    canSend() {
+      if (this.uploadInProgress || !this.files.length || this.disableButtons) {
+        return false;
+      }
+      return true;
     }
   },
   methods: {
@@ -256,6 +262,7 @@ export default {
   }
 }
 .upload {
+  padding: 10px 0;
   .table {
     margin: 0;
     width: 100%;

@@ -41,7 +41,11 @@
             class="btn-user-activity"
             :to="`/${profile.username}/media`"
           >
-            <span class="value">0</span>
+            <span class="value">{{
+              isOwner(this.profile.id)
+                ? this.$store.state.profile.media.media.length
+                : profile.linksCount
+            }}</span>
             <span class="label">Store</span>
           </router-link>
         </div>
