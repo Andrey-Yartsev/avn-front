@@ -171,7 +171,6 @@ export default {
   },
   methods: {
     removeFileHandler(file, media) {
-      console.log(media.id);
       this.$refs.upload.remove(file);
       this.removeMedia(media.id);
     },
@@ -180,8 +179,18 @@ export default {
         if (!this.isFormatCorrect(newFile.name)) {
           return prevent();
         }
+        if (!newFile.type) {
+          this.setFileTypeManually(newFile.file);
+        }
         this.addMediaFiles({ target: { files: [newFile.file] } });
       }
+    },
+    setFileTypeManually(file) {
+      Object.defineProperty(file, "type", {
+        writable: true
+      });
+      const format = file.name.split(".").pop();
+      file.type = `video/${format}`;
     },
     inputFilter(newFile, oldFile, prevent) {
       if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
@@ -218,7 +227,9 @@ export default {
     },
     isFormatCorrect(fileName) {
       if (
-        /\.(jpeg|jpe|jpg|gif|png|webp|mp4|mpeg|mpg|wmv|avi)$/i.test(fileName)
+        /\.(jpeg|jpe|jpg|gif|png|webp|mp4|mpeg|mpg|wmv|avi|mov)$/i.test(
+          fileName
+        )
       ) {
         return true;
       }

@@ -195,14 +195,11 @@ export default {
     },
 
     isValidMediaType(name) {
-      console.log(name);
       const fileExt = name
         .split(".")
         .pop()
         .toLowerCase();
 
-      console.log(this.allMediaTypes);
-      console.log(fileExt);
       return this.allMediaTypes.indexOf(fileExt) !== -1;
     },
 
