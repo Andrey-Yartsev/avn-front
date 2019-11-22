@@ -36,8 +36,8 @@ import Loader from "@/components/common/Loader";
 import MediaPost from "@/components/addMedia/MediaPost";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import PostCollection from "@/components/post/collection/Index";
-import PostSmall from "@/components/post/view/SmallView";
-import PostMedium from "@/components/post/view/MediumView";
+import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
+import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 
 export default {
   name: "MediaPage",
@@ -66,9 +66,9 @@ export default {
     },
     postComponent() {
       if (this.$mq === "mobile") {
-        return PostMedium;
+        return MediaMedium;
       }
-      return PostSmall;
+      return MediaSmall;
     }
   },
   methods: {
