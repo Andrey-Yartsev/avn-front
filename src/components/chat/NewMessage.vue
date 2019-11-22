@@ -80,8 +80,8 @@
           <div
             class="btn-selected-all icn-item"
             @click="toggleSelectAll"
-            v-if="chats.length"
-            :class="{ visible: chats.length, active: selectAll }"
+            v-if="foundUsers.length"
+            :class="{ visible: foundUsers.length, active: selectAll }"
           ></div>
         </div>
         <perfect-scrollbar
@@ -89,32 +89,32 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult" v-if="!selectAll && chats.length">
+          <div class="searchResult" v-if="!selectAll && foundUsers.length">
             <div
-              v-for="v in chats"
-              v-bind:key="v.withUser.id"
+              v-for="v in foundUsers"
+              v-bind:key="v.id"
               class="searchChatContactsView"
-              @click="toggleSelect(v.withUser.id)"
-              :class="{ active: isSelected(v.withUser.id) }"
+              @click="toggleSelect(v.id)"
+              :class="{ active: isSelected(v.id) }"
             >
               <span
                 class="avatar avatar_gap-r-sm avatar_sm"
-                :class="{ 'online-state': isOnline(v.withUser.id) }"
+                :class="{ 'online-state': isOnline(v.id) }"
               >
                 <span class="avatar__img">
-                  <img v-if="v.withUser.avatar" :src="v.withUser.avatar" />
+                  <img v-if="v.avatar" :src="v.avatar" />
                 </span>
               </span>
               <div class="username-group">
                 <div class="chatView__header">
-                  <span class="name">{{ v.withUser.name }}</span>
+                  <span class="name">{{ v.name }}</span>
                   <span
                     class="verified-user icn-item"
-                    v-if="v.withUser.isVerified"
+                    v-if="v.isVerified"
                   ></span>
                 </div>
                 <div class="user-login reset-ml">
-                  <span class="username">{{ v.withUser.username }}</span>
+                  <span class="username">{{ v.username }}</span>
                 </div>
               </div>
               <span class="check icn-item"></span>
@@ -123,7 +123,6 @@
 
           <div
             class="no-results-search"
-            :class="{ show: !chats.length }"
             v-if="!foundUsers || !foundUsers.length"
           >
             <div class="no-results-search__message">
@@ -326,29 +325,27 @@ export default {
       return false;
       // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
-    _chats() {
+    chats() {
       let chats = this.$store.state.chat.anyChats.map(v => {
         v.selected = this.selected.indexOf(v.withUser.id) !== -1;
         return v;
       });
       return chats;
     },
-    chats() {
-      let chats = this._chats;
-      if (this.foundUsers) {
-        const foundUserIds = this.foundUsers.map(v => v.id);
-        chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
-      }
-      return chats;
-    },
     selectedChats() {
-      return this._chats.filter(v => v.selected);
+      return this.chats.filter(v => v.selected);
     },
     hasSelectedChats() {
       return this.selectAll || !!this.selectedChats.length;
     },
-    foundUsers() {
+    _foundUsers() {
       return this.$store.state.chat.chatUsers;
+    },
+    foundUsers() {
+      if (this._foundUsers) {
+        return this._foundUsers;
+      }
+      return this.chats.map(v => v.withUser);
     },
     selectedUser() {
       if (this.selected.length !== 1) {
