@@ -152,8 +152,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$props.post.author.id);
-    console.log(this.$store.state.auth.user.id);
     if (!this.$refs.text) {
       return;
     }

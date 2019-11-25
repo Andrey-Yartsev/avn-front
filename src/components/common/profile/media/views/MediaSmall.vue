@@ -52,6 +52,10 @@
             @dragstart.prevent="() => false"
           />
           <span
+            v-if="post.isVerified"
+            class="isVerified icn-item verified-user"
+          />
+          <span
             v-if="post.media.length > 1"
             class="item-length item-length_photo"
           >
@@ -212,3 +216,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.isVerified {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+}
+</style>

@@ -39,6 +39,7 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
+    <span v-if="post.isVerified" class="isVerified icn-item verified-user" />
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open" v-if="isAuthor" />
@@ -121,7 +122,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$props);
     this.popupItem = this.$el.querySelector(".more-functions");
   },
   beforeDestroy() {
@@ -132,3 +132,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.isVerified {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+}
+</style>
