@@ -52,7 +52,7 @@
             contenteditable
             placeholder="Add media description"
             maxlength="1000"
-            @input="textInput"
+            v-model="media.text"
             ref="textarea"
             :disabled="isSaving"
           ></textarea>
@@ -71,8 +71,7 @@
                   name="paidPrice"
                   placeholder="Enter price"
                   class="getPaidAmountPlaceholder"
-                  aria-required="false"
-                  aria-invalid="false"
+                  v-model="media.price"
                 />
               </div>
               <div class="b-check-state b-check-state_post">
@@ -80,7 +79,7 @@
                   <input
                     class="is-free-post"
                     type="checkbox"
-                    v-model="isFree"
+                    v-model="media.isVerified"
                   />
                   <span class="b-check-state__icon icn-item icn-size_lg"></span>
                   <span class="b-check-state__text">Verified</span>
@@ -124,10 +123,11 @@ Settings.defaultLocale = "en";
 
 const InitialState = {
   expanded: false,
-  postMsg: "",
-  isFree: false,
-  mediaType: "all",
-  datetime: undefined,
+  media: {
+    isVerified: false,
+    text: "",
+    price: 0
+  },
   saving: false,
   withoutWatermark: false
 };
@@ -180,42 +180,10 @@ export default {
       return this.$store.state.post._createPostLoading;
     },
     isExtended() {
-      return (
-        this.expanded ||
-        this.initialExpanded ||
-        this.preloadedMedias.length ||
-        this.datetime
-      );
-    },
-    showSchedule() {
-      if (this.post && this.post.isActive) {
-        return false;
-      }
-      return this.user.isPerformer;
+      return this.expanded || this.initialExpanded;
     }
   },
   methods: {
-    clickHandler() {
-      // const postData = this.getPostData();
-      // if (!postData || this.saving) return;
-      // if (this.isNew) {
-      //   this.$store.dispatch("post/createPost", postData);
-      // } else {
-      //   this.$store.dispatch("post/updatePost", {
-      //     postId: this.post.id,
-      //     data: postData
-      //   });
-      // }
-      // this.saving = true;
-    },
-
-    // user suggestions API
-    textInput() {
-      this.postMsg = this.$refs.textarea.value;
-    },
-    getText() {
-      return this.postMsg;
-    },
     getConvertedText() {
       const pattern =
         '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
@@ -227,45 +195,27 @@ export default {
       );
       text = text.replace(/<br \/>/g, "\n");
       return text.replace(/(<([^>]+)>)/gi, "");
+    },
+    initData() {
+      const { text, commentsCount, isVerified } = this.$props.post;
+      this.media.text = text;
+      this.media.price = commentsCount;
+      this.media.isVerified = isVerified;
+    },
+    clearData() {
+      this.text = "";
+      this.price = 0;
+      this.isVerified = false;
     }
-  },
-  watch: {
-    // newPost() {
-    //   this.reset();
-    // },
-    // post() {
-    //   if (this.post.id && !this.isNew) {
-    //     if (!this.isOwner(this.post.author.id)) {
-    //       this.$router.push("/");
-    //       return;
-    //     }
-    //     this.datetime = this.post.scheduledDate;
-    //     this.postMsg = this.getConvertedText();
-    //     this.tweetSend = this.post.tweetSend;
-    //     this.isFree = this.post.isFree;
-    //     this.preloadedMedias = (this.post.media || []).map(media => ({
-    //       alreadySaved: true,
-    //       fileContent: media.thumb.source,
-    //       id: media.id,
-    //       processId: media.id,
-    //       mediaType: media.type,
-    //       preview: media.thumb.source,
-    //       thumbs: media.thumbs,
-    //       thumbId: media.thumbId
-    //     }));
-    //     this.mediaType = this.preloadedMedias.length
-    //       ? this.preloadedMedias[0].mediaType
-    //       : "all";
-    //     this.$refs.textarea.innerHTML = this.getText();
-    //   }
-    // }
   },
   mounted() {
     if (this.$refs.textarea) {
       this.$refs.textarea.focus();
     }
-
-    this.$refs.textarea.innerHTML = this.getText();
+    this.initData();
+  },
+  beforeDestroy() {
+    this.clearData();
   },
   directives: {
     ClickOutside

@@ -47,13 +47,13 @@ export default {
   },
   methods: {
     close() {
-      this.$store.dispatch("modal/hide", { name: "editMedia" });
+      this.$store.dispatch("modal/hide", {
+        name: "editMedia",
+        data: {
+          postId: null
+        }
+      });
     }
-  },
-  created() {
-    // this.$store.dispatch("postPage/resetPageState");
-    // const postId = this.$store.state.modal.editPost.data.postId;
-    // this.$store.dispatch("postPage/getPost", { postId });
   }
 };
 </script>

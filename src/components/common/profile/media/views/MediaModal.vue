@@ -65,9 +65,6 @@ export default {
     addExtraClassName(className) {
       this.extraClassName = className;
     }
-    // scroll() {
-    //   this.$scrollTo(`[data-id="${this.post.id}"]`);
-    // }
   }
 };
 </script>
