@@ -101,60 +101,32 @@ export default {
       });
     },
     deletePost() {
-      this.$store.dispatch(this.actionPrefix + "/deletePost", {
-        postId: this.postId
-      });
-
-      this.hide();
-
-      if (this.isOnPostPage) {
-        return this.$router.push("/");
-      }
-
-      window.location.hash = "";
-    },
-    pinAction() {
-      this.$store.dispatch("profile/home/pin", this.postId);
-      this.hide();
-    },
-    unpinAction() {
-      this.$store.dispatch("profile/home/unpin", this.postId);
-      this.hide();
+      // this.$store.dispatch(this.actionPrefix + "/deletePost", {
+      //   postId: this.postId
+      // });
+      // this.hide();
+      // if (this.isOnPostPage) {
+      //   return this.$router.push("/");
+      // }
+      // window.location.hash = "";
     },
     editPost() {
       this.hide();
 
+      this.$store.commit("profile/media/startEditMedia", this.$props.post.id, {
+        root: true
+      });
+
       if (this.isOnPostPage) {
-        this.$router.push("/post/edit/" + this.postId);
+        this.$router.push("/media/edit/" + this.postId);
       } else {
         this.$store.dispatch("modal/show", {
-          name: "editPost",
+          name: "editMedia",
           data: {
             postId: this.postId
           }
         });
       }
-    },
-    reportUser() {
-      this.hide();
-
-      this.$store.dispatch("modal/show", {
-        name: "postReport",
-        data: {
-          postId: this.postId
-        }
-      });
-    },
-    markSpam() {
-      this.$store.dispatch("home/spamPost", this.$props.post.author.id);
-
-      this.hide();
-
-      if (this.isOnPostPage) {
-        return this.$router.push("/");
-      }
-
-      window.location.hash = "";
     }
   }
 };

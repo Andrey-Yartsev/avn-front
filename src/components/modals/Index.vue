@@ -43,6 +43,7 @@ import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
 import AddMediaModal from "@/components/addMedia/Modal";
+import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 
 export default {
   components: {
@@ -75,7 +76,8 @@ export default {
     LoginModal,
     SignupModal,
     EditPostModal,
-    AddMediaModal
+    AddMediaModal,
+    EditMediaModal
   },
   props: {
     hasLayout: {
