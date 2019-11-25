@@ -343,6 +343,9 @@ export default {
       this.resetPrice();
     },
     keypress() {
+      if (!this.withUser) {
+        return;
+      }
       this.$root.ws.send({
         act: "typing",
         typing_to: this.withUser.id,

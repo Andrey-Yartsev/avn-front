@@ -20,7 +20,7 @@ import message from "./actions/message";
 import new_feed_post from "./actions/new_feed_post";
 import online from "./actions/online";
 import typing from "./actions/typing";
-import stories from "./actions/typing";
+import stories from "./actions/stories";
 
 const actions = {
   chats,

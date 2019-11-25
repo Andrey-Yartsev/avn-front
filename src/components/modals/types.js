@@ -122,6 +122,10 @@ const modalTypes = [
   {
     storeName: "editMedia",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "statPosts",
+    layoutOnlyModal: true
   }
 ];
 
