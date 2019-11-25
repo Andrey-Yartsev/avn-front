@@ -9,9 +9,9 @@ export default {
   },
   methods: {
     openModal() {
-      if (this.delayedPost) {
-        return;
-      }
+      // if (this.delayedPost) {
+      //   return;
+      // }
 
       if (!this.user) {
         this.$store.dispatch("modal/show", {

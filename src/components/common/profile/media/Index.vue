@@ -11,10 +11,10 @@
             <div class="explore__inside">
               <div class="explore-wrapper videos">
                 <component
-                  :is="postComponent"
-                  v-for="post in media"
-                  :post="post"
-                  :key="post.id"
+                  :is="mediaComponent"
+                  v-for="item in media"
+                  :post="item"
+                  :key="item.id"
                   from="profile/home"
                 />
               </div>
@@ -34,9 +34,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import MediaPost from "@/components/addMedia/MediaPost";
 import FileUploader from "@/components/common/profile/media/FileUploader";
-import PostCollection from "@/components/post/collection/Index";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 
@@ -44,9 +42,7 @@ export default {
   name: "MediaPage",
   components: {
     Loader,
-    MediaPost,
-    FileUploader,
-    PostCollection
+    FileUploader
   },
   props: ["private"],
   data() {
@@ -66,7 +62,7 @@ export default {
     loading() {
       return this.$store.state.profile.media.getMediaLoading;
     },
-    postComponent() {
+    mediaComponent() {
       if (this.$mq === "mobile") {
         return MediaMedium;
       }
@@ -74,22 +70,11 @@ export default {
     }
   },
   methods: {
-    openAddMediaModal() {
-      this.$store.dispatch("modal/show", {
-        name: "addMedia"
-      });
-    },
     fetchMedia() {
       this.$store.dispatch(
         "profile/media/getMedia",
         this.$store.state.profile.home.profile.id
       );
-    },
-    editHandler(item) {
-      this.$store.commit("profile/media/startEditMedia", item);
-      this.$store.dispatch("modal/show", {
-        name: "addMedia"
-      });
     },
     inintIntersectionObserver() {
       const callback = entries => {

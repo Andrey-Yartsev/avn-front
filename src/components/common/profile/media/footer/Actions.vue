@@ -1,12 +1,11 @@
 <template>
   <div class="actions">
-    <span :class="[{ active: post.isFavorite }, 'actions__btn']">
+    <span class="views" :class="[{ active: post.isFavorite }, 'actions__btn']">
       <span
-        @click="postLike"
         class="btn-icon looking icn-item icn-size_lg"
         v-tooltip="post.favoritesCount > 1 ? 'Views' : 'View'"
       />
-      <span class="likes__counter" @click="showLikesModal">
+      <span class="likes__counter">
         {{ post.favoritesCount ? post.favoritesCount : "" }}
       </span>
     </span>
@@ -16,14 +15,13 @@
         'clickable-state': showTip,
         active: commentsBtnSelectable && showAddCommentForm
       }"
-      @click="() => {}"
       v-if="post.canComment && !post.author.isBlocked"
     >
       <span
         class="btn-icon icn-tips icn-item icn-size_lg"
         v-tooltip="'Price'"
       ></span>
-      {{ post.commentsCount ? post.commentsCount : "" }}
+      {{ post.commentsCount ? post.commentsCount.toFixed(2) : "" }}
     </span>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
@@ -102,13 +100,6 @@ export default {
     }
   },
   methods: {
-    postLike() {
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "signup" });
-        return;
-      }
-      this.$emit("postLike");
-    },
     open() {
       this.opened = true;
       this.$emit("openDropdown");
@@ -116,14 +107,6 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdown");
-    },
-    showLikesModal() {
-      this.$store.dispatch("modal/show", {
-        name: "postLikes",
-        data: {
-          postId: this.post.id
-        }
-      });
     }
   },
   directives: {
@@ -131,3 +114,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.views {
+  pointer-events: none;
+}
+</style>

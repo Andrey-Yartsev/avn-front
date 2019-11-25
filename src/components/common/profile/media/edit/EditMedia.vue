@@ -61,7 +61,7 @@
       <div class="actions">
         <div class="actions-controls">
           <template v-if="isExtended">
-            <div class="btn-post" v-if="hasSubscribePrice && $mq === 'desktop'">
+            <div class="btn-post">
               <div>Price</div>
               <div
                 class="price-amount-field getPaidForm__field enabled-tooltip"

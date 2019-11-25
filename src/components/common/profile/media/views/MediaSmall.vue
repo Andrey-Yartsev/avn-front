@@ -79,15 +79,6 @@
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
-            class="video-placeholder icn-item"
-            v-if="page === 'all' && shouldBePoster"
-          >
-            <span class="video-recommendations-text">
-              Watch<br />videos you might like
-            </span>
-          </div>
-
-          <div
             class="loader-container loader-container_center"
             v-if="post.mediaType === 'processing'"
           >
@@ -114,16 +105,14 @@
         class="explore-media__counter explore-media__counter_likes"
         v-if="post.mediaType !== 'processing'"
       >
-        <span class="btn-icon looking icn-item icn-size_lg" @click="like" />
-        <span class="likes__counter" @click="showLikesModal">{{
-          post.favoritesCount
-        }}</span>
+        <span class="btn-icon looking icn-item icn-size_lg" />
+        <span class="likes__counter">{{ post.favoritesCount }}</span>
       </span>
       <span
         class="explore-media__counter explore-media__counter_comments"
         v-if="post.mediaType !== 'processing'"
         ><span class="btn-icon icn-tips icn-item icn-size_lg"></span
-        >{{ post.commentsCount }}</span
+        >{{ post.commentsCount.toFixed(2) }}</span
       >
     </template>
   </div>
@@ -131,9 +120,6 @@
 
 <script>
 import { toHumanDuration } from "@/helpers/datetime";
-// import PostOpen from "@/mixins/post/open";
-// import userMixin from "@/mixins/user";
-// import PostCommon from "@/mixins/post/common";
 import Loader from "@/components/common/Loader";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import MediaOpen from "@/mixins/media/open";
@@ -190,28 +176,6 @@ export default {
 
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
-    },
-    like() {
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
-      this.likePost();
-    },
-    showLikesModal() {
-      if (this.post.favoritesCount === 0) return;
-
-      if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
-
-      this.$store.dispatch("modal/show", {
-        name: "postLikes",
-        data: {
-          postId: this.post.id
-        }
-      });
     }
   }
 };
