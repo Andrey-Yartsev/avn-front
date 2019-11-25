@@ -32,7 +32,7 @@ export default {
   methods: {
     async sendMessage(message) {
       this.$emit("startSending");
-      const params = { message };
+      const params = { ...message };
       if (this.toAll) {
         params.toAll = this.toAll;
       } else {
