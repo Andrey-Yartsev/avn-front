@@ -156,6 +156,7 @@ export default {
 
       if (isLargeVideo) {
         this.preview = defaultPreview;
+        this.readyToUpload = true;
         this.showLoader = false;
         this.showPreview = true;
         return;
