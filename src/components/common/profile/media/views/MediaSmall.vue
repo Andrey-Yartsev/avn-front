@@ -110,7 +110,7 @@
         class="explore-media__counter explore-media__counter_likes"
         v-if="post.mediaType !== 'processing'"
       >
-        <span class="btn-icon likes icn-item icn-size_lg" @click="like" />
+        <span class="btn-icon looking icn-item icn-size_lg" @click="like" />
         <span class="likes__counter" @click="showLikesModal">{{
           post.favoritesCount
         }}</span>
@@ -118,7 +118,7 @@
       <span
         class="explore-media__counter explore-media__counter_comments"
         v-if="post.mediaType !== 'processing'"
-        ><span class="btn-icon icn-price icn-item icn-size_lg"></span
+        ><span class="btn-icon icn-tips icn-item icn-size_lg"></span
         >{{ post.commentsCount }}</span
       >
     </template>

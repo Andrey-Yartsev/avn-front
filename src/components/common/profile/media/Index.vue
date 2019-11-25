@@ -22,6 +22,7 @@
           </div>
         </div>
       </div>
+      <div v-if="media.length" ref="scrollObserver"></div>
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
           <span>Nothing here yet</span>
@@ -54,7 +55,8 @@ export default {
         video: 3,
         gif: 3,
         photo: 3
-      }
+      },
+      observer: null
     };
   },
   computed: {
@@ -88,11 +90,32 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "addMedia"
       });
+    },
+    inintIntersectionObserver() {
+      const callback = entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            console.log("load more");
+          }
+        });
+      };
+      this.observer = new IntersectionObserver(callback);
+      const target = this.$refs.scrollObserver;
+      if (target) {
+        this.observer.observe(target);
+      }
     }
   },
   mounted() {
     console.log(this.media);
     // this.fetchMedia();
+    this.inintIntersectionObserver();
+  },
+  beforeDestroy() {
+    const target = this.$refs.scrollObserver;
+    if (target) {
+      this.observer.unobserve(target);
+    }
   }
 };
 </script>

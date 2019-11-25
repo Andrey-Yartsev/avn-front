@@ -39,6 +39,7 @@
           :showCopy="!delayedPost"
           @openDropdown="dropdownOpened = true"
           @hideDropdown="dropdownOpened = false"
+          :isAuthor="isAuthor"
         />
         <p
           class="text hidden-desktop"
@@ -79,6 +80,7 @@
             :from="from"
             v-if="$mq === 'desktop'"
             :showCopy="!delayedPost"
+            :isAuthor="isAuthor"
           />
 
           <div
@@ -217,6 +219,9 @@ export default {
     },
     showSubscribeButton() {
       return !this.post.canViewMedia;
+    },
+    isAuthor() {
+      return this.$props.post.author.id === this.$store.state.auth.user.id;
     }
   },
   data: () => ({
@@ -306,3 +311,21 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.postPage-content__inside {
+  flex-flow: column nowrap !important;
+  & > div {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  & > div:last-child {
+    max-width: 100%;
+    .post-header {
+      max-width: 100%;
+      width: 100%;
+    }
+    width: 100%;
+  }
+}
+</style>

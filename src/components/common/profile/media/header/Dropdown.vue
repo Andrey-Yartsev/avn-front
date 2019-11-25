@@ -40,6 +40,24 @@ import userMixin from "@/mixins/user";
 export default {
   name: "MediaHeaderDropdown",
   mixins: [userMixin],
+  props: {
+    post: {
+      type: Object,
+      required: true
+    },
+    from: {
+      type: String,
+      required: true
+    },
+    hide: {
+      type: Function,
+      required: true
+    },
+    showCopy: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: () => ({
     copied: false
   }),
@@ -69,24 +87,6 @@ export default {
     },
     canPin() {
       return this.pinCount < 3;
-    }
-  },
-  props: {
-    post: {
-      type: Object,
-      required: true
-    },
-    from: {
-      type: String,
-      required: true
-    },
-    hide: {
-      type: Function,
-      required: true
-    },
-    showCopy: {
-      type: Boolean,
-      required: true
     }
   },
   methods: {

@@ -41,9 +41,10 @@
     />
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open" />
+      <div class="more-functions__btn" @click="open" v-if="isAuthor" />
       <div class="more-functions__dropdown">
         <Dropdown
+          v-if="isAuthor"
           :post="post"
           :from="from"
           :hide="hide"
@@ -86,6 +87,10 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
+    },
+    isAuthor: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
@@ -116,6 +121,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$props);
     this.popupItem = this.$el.querySelector(".more-functions");
   },
   beforeDestroy() {

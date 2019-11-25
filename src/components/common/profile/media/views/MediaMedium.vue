@@ -21,6 +21,7 @@
           @openDropdown="showDropdown = true"
           @hideDropdown="showDropdown = false"
           :showCopy="false"
+          :isAuthor="isAuthor"
         />
         <p
           class="text"
@@ -104,6 +105,9 @@ export default {
     },
     isVisible() {
       return this.post.isVisible;
+    },
+    isAuthor() {
+      return this.$props.post.author.id === this.$store.state.auth.user.id;
     }
   },
   methods: {
@@ -148,6 +152,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$props.post.author.id);
+    console.log(this.$store.state.auth.user.id);
     if (!this.$refs.text) {
       return;
     }

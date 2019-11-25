@@ -3,8 +3,8 @@
     <span :class="[{ active: post.isFavorite }, 'actions__btn']">
       <span
         @click="postLike"
-        class="btn-icon likes icn-item icn-size_lg"
-        v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"
+        class="btn-icon looking icn-item icn-size_lg"
+        v-tooltip="post.favoritesCount > 1 ? 'Views' : 'View'"
       />
       <span class="likes__counter" @click="showLikesModal">
         {{ post.favoritesCount ? post.favoritesCount : "" }}
@@ -20,7 +20,7 @@
       v-if="post.canComment && !post.author.isBlocked"
     >
       <span
-        class="btn-icon icn-price icn-item icn-size_lg"
+        class="btn-icon icn-tips icn-item icn-size_lg"
         v-tooltip="'Price'"
       ></span>
       {{ post.commentsCount ? post.commentsCount : "" }}
