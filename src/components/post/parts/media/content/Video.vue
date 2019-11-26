@@ -6,7 +6,7 @@
       playsinline
       controls
       controlslist="nodownload"
-      autoplay
+      :autoplay="autoplay"
       loop
       :poster="media.preview.source"
       v-if="video"
@@ -33,7 +33,8 @@ export default {
   mixins: [PostMediaPropsMixin],
   props: {
     post: Object,
-    authorId: Number
+    authorId: Number,
+    autoplay: Boolean
   },
   data() {
     return {
@@ -59,6 +60,7 @@ export default {
   methods: {
     play() {
       this.playTimer = new Date().getTime();
+      this.$emit("playCallback");
     },
     calcDuration() {
       const playDuration = new Date().getTime() - this.playTimer;

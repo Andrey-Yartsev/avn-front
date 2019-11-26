@@ -54,6 +54,8 @@
           :authorId="post.author.id"
           mediaSize="full"
           :openModal="mediaClickHandler"
+          :autoplay="false"
+          @playCallback="playHandler"
         />
         <div
           class="text text_posttime"
@@ -170,6 +172,32 @@ import ModalRouterParams from "@/mixins/modalRouter/params";
 export default {
   name: "PostLastView",
   mixins: [User, PostCommon, postOpen, PostStat, ModalRouterParams],
+  data: () => ({
+    commentPage: 0,
+    popupView: true,
+    dropdownOpened: false,
+    currentCommentReply: null,
+    showAddComment: true,
+    viewCounted: false
+  }),
+  props: {
+    post: {
+      type: Object,
+      required: true
+    },
+    from: {
+      type: String,
+      required: true
+    }
+  },
+  components: {
+    Header,
+    Media,
+    CommentsList,
+    Actions,
+    AddComment,
+    Tip
+  },
   computed: {
     postId() {
       return this.post.id;
@@ -218,31 +246,6 @@ export default {
       return this.$props.post.author.id === this.$store.state.auth.user.id;
     }
   },
-  data: () => ({
-    commentPage: 0,
-    popupView: true,
-    dropdownOpened: false,
-    currentCommentReply: null,
-    showAddComment: true
-  }),
-  props: {
-    post: {
-      type: Object,
-      required: true
-    },
-    from: {
-      type: String,
-      required: true
-    }
-  },
-  components: {
-    Header,
-    Media,
-    CommentsList,
-    Actions,
-    AddComment,
-    Tip
-  },
   methods: {
     mediaClickHandler() {
       if (this.$props.post.media[0].canView) {
@@ -274,6 +277,18 @@ export default {
         return;
       }
       this.$router.push("/");
+    },
+    playHandler() {
+      if (this.isAuthor || this.viewCounted) {
+        return;
+      }
+      console.log("update view counter");
+      this.$store.dispatch(
+        "profile/media/incrementViewCounter",
+        this.$props.post.id,
+        { root: true }
+      );
+      this.viewCounted = true;
     }
   }
 };

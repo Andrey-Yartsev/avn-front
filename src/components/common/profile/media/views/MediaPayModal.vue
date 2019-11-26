@@ -47,12 +47,12 @@ export default {
       const onSuccess = () => {
         this.close();
       };
-      const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
+      // const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
       this._pay(
         {
           paymentType: "message",
           messageId: this.data.messageId,
-          amount,
+          amount: this.data.price,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
         onSuccess

@@ -31,6 +31,8 @@
             :authorId="authorId"
             :openModal="openModal"
             :mediaSize="mediaSize"
+            :autoplay="autoplay"
+            @playCallback="$emit('playCallback')"
           />
         </swiperSlide>
       </swiper>
@@ -45,6 +47,8 @@
           :authorId="authorId"
           :openModal="openModal"
           :mediaSize="mediaSize"
+          :autoplay="autoplay"
+          @playCallback="$emit('playCallback')"
           ref="media"
         />
       </figure>
@@ -155,6 +159,10 @@ export default {
     mediaSize: {
       type: String,
       required: true
+    },
+    autoplay: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

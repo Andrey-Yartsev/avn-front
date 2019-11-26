@@ -25,6 +25,10 @@ const mutations = {
   },
   deleteMedia(state, id) {
     state.media = state.media.filter(item => item.id !== id);
+  },
+  incrementViewCounter(state, id) {
+    const viewedMedia = state.media.find(item => item.id === id);
+    viewedMedia.views++;
   }
 };
 
@@ -43,6 +47,10 @@ const actions = {
   updateMedia({ dispatch, commit }, data) {
     const res = dispatch("_updataMedia", data);
     commit("updateMedia", res);
+  },
+  async incrementViewCounter({ dispatch, commit }, mediaId) {
+    await dispatch("_incrementViewCounter", mediaId);
+    commit("incrementViewCounter", mediaId);
   }
 };
 
@@ -110,6 +118,25 @@ createRequestAction({
       item.id === newMedia.id ? newMedia : item
     );
     return arr;
+  }
+});
+
+createRequestAction({
+  prefix: "_incrementViewCounter",
+  apiPath: "media/views/{mediaId}",
+  // resultKey: "media",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(mediaId, path) {
+    return path.replace(/{mediaId}/, mediaId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 
