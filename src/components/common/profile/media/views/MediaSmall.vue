@@ -106,13 +106,13 @@
         v-if="post.mediaType !== 'processing'"
       >
         <span class="btn-icon looking icn-item icn-size_lg" />
-        <span class="likes__counter">{{ post.favoritesCount }}</span>
+        <span class="likes__counter">{{ post.views }}</span>
       </span>
       <span
         class="explore-media__counter explore-media__counter_comments"
         v-if="post.mediaType !== 'processing'"
         ><span class="btn-icon icn-tips icn-item icn-size_lg"></span
-        >{{ post.commentsCount.toFixed(2) }}</span
+        >{{ post.price.toFixed(2) }}</span
       >
     </template>
   </div>

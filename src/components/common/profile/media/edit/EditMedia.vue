@@ -72,6 +72,7 @@
                   placeholder="Enter price"
                   class="getPaidAmountPlaceholder"
                   v-model="media.price"
+                  step="0.01"
                 />
               </div>
               <div class="b-check-state b-check-state_post">
@@ -197,9 +198,9 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { text, commentsCount, isVerified } = this.$props.post;
+      const { text, price, isVerified } = this.$props.post;
       this.media.text = text;
-      this.media.price = commentsCount;
+      this.media.price = price;
       this.media.isVerified = isVerified;
     },
     clearData() {

@@ -39,8 +39,8 @@
           "canFavorite": true,
           "isCommented": false,
           "isReported": false,
-          "commentsCount": 3,
-          "favoritesCount": 2,
+          "price": 3.55,
+          "views": 2,
           "mediaCount": 1,
           "mediaType": "video",
           "isMediaReady": true,
@@ -49,128 +49,6 @@
           "streamHasConverted": false,
           "isPinned": false,
           "isActive": true,
-          "comments": [
-              {
-                  "id": 121323,
-                  "answerTo": 0,
-                  "likesCount": 0,
-                  "isLiked": false,
-                  "text": "new comment",
-                  "author": {
-                      "id": 468789,
-                      "name": "user777name",
-                      "username": "user777username",
-                      "avatar": null,
-                      "header": false,
-                      "headerFull": null,
-                      "canEarn": false,
-                      "deleteRequested": false,
-                      "hideBanking": false,
-                      "publicUrl": "https://avn2.retloko.com/user777username",
-                      "hasNotViewedStory": false,
-                      "hasStory": false,
-                      "isVerified": false,
-                      "isBlocked": false,
-                      "isMuted": false,
-                      "isSubscribed": false,
-                      "subscribePrice": "0.00",
-                      "canPayoutsRequest": false,
-                      "payments": {
-                          "tipsLimit": {
-                              "min": 2,
-                              "max": 500
-                          }
-                      },
-                      "nominatable": false,
-                      "category": 3,
-                      "categoryView": 1,
-                      "snapchat": []
-                  },
-                  "postedAt": "2019-11-18T08:27:56+00:00",
-                  "changedAt": "2019-11-18T08:27:56+00:00",
-                  "canDelete": true
-              },
-              {
-                  "id": 121314,
-                  "answerTo": 0,
-                  "likesCount": 0,
-                  "isLiked": false,
-                  "text": "tsest",
-                  "author": {
-                      "id": 468789,
-                      "name": "user777name",
-                      "username": "user777username",
-                      "avatar": null,
-                      "header": false,
-                      "headerFull": null,
-                      "canEarn": false,
-                      "deleteRequested": false,
-                      "hideBanking": false,
-                      "publicUrl": "https://avn2.retloko.com/user777username",
-                      "hasNotViewedStory": false,
-                      "hasStory": false,
-                      "isVerified": false,
-                      "isBlocked": false,
-                      "isMuted": false,
-                      "isSubscribed": false,
-                      "subscribePrice": "0.00",
-                      "canPayoutsRequest": false,
-                      "payments": {
-                          "tipsLimit": {
-                              "min": 2,
-                              "max": 500
-                          }
-                      },
-                      "nominatable": false,
-                      "category": 3,
-                      "categoryView": 1,
-                      "snapchat": []
-                  },
-                  "postedAt": "2019-11-15T15:31:52+00:00",
-                  "changedAt": "2019-11-15T15:31:52+00:00",
-                  "canDelete": true
-              },
-              {
-                  "id": 121310,
-                  "answerTo": 0,
-                  "likesCount": 0,
-                  "isLiked": false,
-                  "text": "nice post test push notiffication",
-                  "author": {
-                      "id": 468789,
-                      "name": "user777name",
-                      "username": "user777username",
-                      "avatar": null,
-                      "header": false,
-                      "headerFull": null,
-                      "canEarn": false,
-                      "deleteRequested": false,
-                      "hideBanking": false,
-                      "publicUrl": "https://avn2.retloko.com/user777username",
-                      "hasNotViewedStory": false,
-                      "hasStory": false,
-                      "isVerified": false,
-                      "isBlocked": false,
-                      "isMuted": false,
-                      "isSubscribed": false,
-                      "subscribePrice": "0.00",
-                      "canPayoutsRequest": false,
-                      "payments": {
-                          "tipsLimit": {
-                              "min": 2,
-                              "max": 500
-                          }
-                      },
-                      "nominatable": false,
-                      "category": 3,
-                      "categoryView": 1,
-                      "snapchat": []
-                  },
-                  "postedAt": "2019-11-15T15:18:09+00:00",
-                  "changedAt": "2019-11-15T15:18:09+00:00",
-                  "canDelete": true
-              }
-          ],
           "canViewMedia": true,
           "media": [
               {
@@ -263,8 +141,8 @@
           "canFavorite": true,
           "isCommented": false,
           "isReported": false,
-          "commentsCount": 5,
-          "favoritesCount": 3,
+          "price": 5.50,
+          "views": 15,
           "mediaCount": 1,
           "mediaType": "video",
           "isMediaReady": true,
@@ -278,7 +156,7 @@
               {
                   "id": 404202,
                   "type": "video",
-                  "canView": true,
+                  "canView": false,
                   "duration": 26,
                   "src": {
                       "source": "https://avnsocial-dev.s3.amazonaws.com/files/2019_10_31/5d/5db/5dba94b1e78b170dd2d4c.mp4",

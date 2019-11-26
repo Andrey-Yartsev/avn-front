@@ -33,7 +33,7 @@
           :class="'hidden-desktop'"
           :post="post"
           :from="from"
-          v-on:clickOnDetailsView="clickOnCommentForm"
+          v-on:clickOnDetailsView="() => {}"
           v-if="$mq === 'mobile'"
           :datetime="timePassed"
           :showCopy="!delayedPost"
@@ -53,6 +53,7 @@
           :post="post"
           :authorId="post.author.id"
           mediaSize="full"
+          :openModal="mediaClickHandler"
         />
         <div
           class="text text_posttime"
@@ -67,10 +68,10 @@
             :showCopy="!delayedPost"
             :showAddCommentForm="false"
             :showTip="false"
-            @clickOnDetailsView="clickOnCommentForm"
-            @postShowCommentForm="clickOnCommentForm"
-            @postLike="likePost"
-            @toggleTip="_toggleTipForm"
+            @clickOnDetailsView="() => {}"
+            @postShowCommentForm="mediaClickHandler"
+            @postLike="() => {}"
+            @toggleTip="() => {}"
           />
         </template>
         <div class="right-col">
@@ -120,14 +121,7 @@
               <Actions
                 :post="post"
                 :from="from"
-                :showCopy="!delayedPost"
-                :showTip="showTip"
-                :commentsBtnSelectable="true"
-                :showAddCommentForm="false"
-                @clickOnDetailsView="clickOnCommentForm"
-                @postShowCommentForm="clickOnCommentForm"
-                @postLike="likePost"
-                @toggleTip="_toggleTipForm"
+                @openBuyModal="mediaClickHandler"
               />
             </template>
           </div>
@@ -250,25 +244,29 @@ export default {
     Tip
   },
   methods: {
-    clickOnCommentForm() {
-      this.showAddCommentForm();
-      // this.showAddComment = !this.showAddComment;
-      // this.showTip = false;
-      if (this.popupView) {
-        const className = this.showAddComment ? "" : "lightbox-post";
-        this.$emit("addExtraClassName", className);
+    mediaClickHandler() {
+      if (this.$props.post.media[0].canView) {
+        return;
       }
-      this.popupView = false;
-    },
-    _toggleTipForm() {
-      this.toggleTipForm();
-      // this.showTip = !this.showTip;
-      // this.showAddComment = false;
-      if (this.popupView) {
-        const className = this.showTip ? "" : "lightbox-post";
-        this.$emit("addExtraClassName", className);
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "mediaPayConfirm",
+          data: {
+            price: this.$props.post.price,
+            paymentType: "message",
+            messageId: this.$props.post.id
+          }
+        });
       }
-      this.popupView = false;
     },
     back() {
       if (window.location.hash) {
@@ -276,37 +274,6 @@ export default {
         return;
       }
       this.$router.push("/");
-    },
-    getComments() {
-      if (!this.post.canComment || this.delayedPost) return;
-      this.commentPage += 1;
-      this.$store.dispatch(this.actionPrefix + "/getPostComments", {
-        postId: this.post.id,
-        page: this.commentPage,
-        marker: this.post.commentMarker
-      });
-    },
-    init() {
-      this.commentPage = 0;
-
-      this.$store.commit(this.actionPrefix + "/resetComments", {
-        postId: this.postId
-      });
-
-      this.getComments();
-    }
-  },
-  created() {
-    this.init();
-  },
-  beforeDestroy() {
-    this.$store.commit(this.actionPrefix + "/resetComments", {
-      postId: this.postId
-    });
-  },
-  watch: {
-    postId() {
-      this.init();
     }
   }
 };

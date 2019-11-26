@@ -126,6 +126,10 @@ const modalTypes = [
   {
     storeName: "statPosts",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "mediaPayConfirm",
+    layoutOnlyModal: true
   }
 ];
 

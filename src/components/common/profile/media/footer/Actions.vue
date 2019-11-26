@@ -3,28 +3,24 @@
     <span class="views" :class="[{ active: post.isFavorite }, 'actions__btn']">
       <span
         class="btn-icon looking icn-item icn-size_lg"
-        v-tooltip="post.favoritesCount > 1 ? 'Views' : 'View'"
+        v-tooltip="post.views > 1 ? 'Views' : 'View'"
       />
       <span class="likes__counter">
-        {{ post.favoritesCount ? post.favoritesCount : "" }}
+        {{ post.views ? post.views : "" }}
       </span>
     </span>
     <span
       class="actions__btn comments-btn"
-      :class="{
-        'clickable-state': showTip,
-        active: commentsBtnSelectable && showAddCommentForm
-      }"
-      v-if="post.canComment && !post.author.isBlocked"
+      @click.prevent="$emit('openBuyModal')"
     >
       <span
         class="btn-icon icn-tips icn-item icn-size_lg"
         v-tooltip="'Price'"
       ></span>
-      {{ post.commentsCount ? post.commentsCount.toFixed(2) : "" }}
+      {{ post.price ? post.price.toFixed(2) : "" }}
     </span>
     <time class="timestamp">
-      <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
+      <a class="postLink" :href="`/post/${post.id}`">
         {{ dateTime }}
       </a>
     </time>
@@ -40,7 +36,6 @@
           :post="post"
           :from="from"
           :hide="hide"
-          :showCopy="showCopy"
           v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
         />
       </div>
@@ -68,29 +63,8 @@ export default {
       type: Object,
       isRequired: true
     },
-    openModal: {
-      type: Function,
-      default: () => {}
-    },
-    showTip: {
-      type: Boolean,
-      default: false
-    },
-    showAddCommentForm: {
-      type: Boolean,
-      default: false
-    },
-    //Needs for MediumView and LargeView different behaviours
-    commentsBtnSelectable: {
-      type: Boolean,
-      default: false
-    },
     from: {
       type: String,
-      required: true
-    },
-    showCopy: {
-      type: Boolean,
       required: true
     }
   },
