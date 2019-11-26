@@ -165,3 +165,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.post-details {
+  .media {
+    img {
+      height: 240px !important;
+    }
+  }
+}
+</style>

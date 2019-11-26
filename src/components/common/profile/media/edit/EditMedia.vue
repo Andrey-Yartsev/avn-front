@@ -26,8 +26,8 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="saving"
-            @click.prevent="clickHandler"
+            :disabled="!isDataChanged"
+            @click.prevent="saveClickHandler"
           >
             Save
           </button>
@@ -73,6 +73,7 @@
                   class="getPaidAmountPlaceholder"
                   v-model="media.price"
                   step="0.01"
+                  min="0"
                 />
               </div>
               <div class="b-check-state b-check-state_post">
@@ -80,10 +81,10 @@
                   <input
                     class="is-free-post"
                     type="checkbox"
-                    v-model="media.isVerified"
+                    v-model="media.isActive"
                   />
                   <span class="b-check-state__icon icn-item icn-size_lg"></span>
-                  <span class="b-check-state__text">Verified</span>
+                  <span class="b-check-state__text">Active</span>
                 </label>
               </div>
             </div>
@@ -92,14 +93,14 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="isSaving"
-          @click.prevent="clickHandler"
+          :disabled="!isDataChanged"
+          @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
           Save
         </button>
       </div>
-      <div class="loader-container loader-container_center" v-if="isSaving">
+      <div class="loader-container loader-container_center" v-if="saving">
         <Loader
           :fullscreen="false"
           :small="true"
@@ -125,7 +126,7 @@ Settings.defaultLocale = "en";
 const InitialState = {
   expanded: false,
   media: {
-    isVerified: false,
+    isActive: false,
     text: "",
     price: 0
   },
@@ -182,6 +183,13 @@ export default {
     },
     isExtended() {
       return this.expanded || this.initialExpanded;
+    },
+    isDataChanged() {
+      return (
+        this.$props.post.text !== this.media.text ||
+        this.$props.post.isActive !== this.media.isActive ||
+        String(this.$props.post.price) !== String(this.media.price)
+      );
     }
   },
   methods: {
@@ -198,15 +206,25 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { text, price, isVerified } = this.$props.post;
+      const { text, price, isActive } = this.$props.post;
       this.media.text = text;
       this.media.price = price;
-      this.media.isVerified = isVerified;
+      this.media.isActive = isActive;
     },
     clearData() {
       this.text = "";
       this.price = 0;
-      this.isVerified = false;
+      this.isActive = false;
+    },
+    async saveClickHandler() {
+      this.saving = true;
+      this.$store
+        .dispatch("profile/media/updateMedia", this.media, { root: true })
+        .then(res => {
+          console.log("success", res);
+          this.saving = false;
+          this.close();
+        });
     }
   },
   mounted() {

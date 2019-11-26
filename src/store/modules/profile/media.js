@@ -15,6 +15,14 @@ const mutations = {
   endEditMedia(state) {
     state.editedMedia = null;
   },
+  addMedia(state, newMedia) {
+    state.media = [...state.media, newMedia];
+  },
+  updateMedia(state, updatedMedia) {
+    state.media = state.media.map(item =>
+      item.id === updatedMedia.id ? updatedMedia : item
+    );
+  },
   deleteMedia(state, id) {
     state.media = state.media.filter(item => item.id !== id);
   }
@@ -29,7 +37,12 @@ const actions = {
   },
   async addMedia({ dispatch, commit }, data) {
     await dispatch("_addMedia", data);
+    commit("addMedia", data);
     commit("auth/incrementFollowingCount", null, { root: true });
+  },
+  updateMedia({ dispatch, commit }, data) {
+    const res = dispatch("_updataMedia", data);
+    commit("updateMedia", res);
   }
 };
 
@@ -76,7 +89,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "updateMedia",
+  prefix: "_updateMedia",
   apiPath: "media/{mediaId}",
   resultKey: "media",
   state,

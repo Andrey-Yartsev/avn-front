@@ -52,10 +52,6 @@ export default {
     hide: {
       type: Function,
       required: true
-    },
-    showCopy: {
-      type: Boolean,
-      required: true
     }
   },
   data: () => ({
@@ -100,15 +96,13 @@ export default {
         setTimeout(() => (this.copied = false), 1000);
       });
     },
-    deletePost() {
-      // this.$store.dispatch(this.actionPrefix + "/deletePost", {
-      //   postId: this.postId
-      // });
-      // this.hide();
-      // if (this.isOnPostPage) {
-      //   return this.$router.push("/");
-      // }
-      // window.location.hash = "";
+    async deletePost() {
+      this.$store
+        .dispatch("profile/media/deleteMedia", this.postId, { root: true })
+        .then(res => {
+          console.log("success", res);
+          this.$router.push(`/${this.user.username}/media`);
+        });
     },
     editPost() {
       this.hide();
