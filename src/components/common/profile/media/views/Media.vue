@@ -1,5 +1,9 @@
 <template>
-  <div class="media" :style="mediaStyle">
+  <div
+    class="media"
+    :class="{ maxHeight: $mq === 'mobile' }"
+    :style="mediaStyle"
+  >
     <div class="loader-container loader-container_center">
       <Loader
         :fullscreen="false"
@@ -9,28 +13,7 @@
         :small="true"
       />
     </div>
-    <template v-if="medias.length > 1">
-      <swiper
-        ref="mySwiper"
-        class="media-slider"
-        :options="swiperOption"
-        :key="uniqId"
-      >
-        <swiperSlide :key="key" v-for="(media, key) in medias">
-          <component
-            :is="getMediaViewType(medias[key])"
-            :media="medias[key]"
-            :postId="postId"
-            :authorId="authorId"
-            :openModal="openModal"
-            :mediaSize="mediaSize"
-            :autoplay="autoplay"
-            @playCallback="$emit('playCallback')"
-          />
-        </swiperSlide>
-      </swiper>
-    </template>
-    <template v-else>
+    <template>
       <figure v-if="medias.length" class="media-item active">
         <component
           :is="getMediaViewType(medias[0])"
@@ -46,29 +29,10 @@
         />
       </figure>
     </template>
-    <template v-if="medias.length > 1">
-      <div :class="`media-slider-pagination pagination-${uniqId}`" />
-      <div
-        :class="`media-slider-navigation navigation-${uniqId}`"
-        v-if="$mq === 'desktop'"
-      >
-        <span
-          :class="
-            `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
-          "
-        />
-        <span
-          :class="
-            `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
-          "
-        />
-      </div>
-    </template>
   </div>
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Locked from "@/components/common/profile/media/content/Locked";
 import Video from "@/components/common/profile/media/content/Video";
 import Loader from "@/components/common/Loader";
@@ -80,43 +44,7 @@ export default {
     Locked,
     Video,
     VideoLinked,
-    swiper,
-    swiperSlide,
     Loader
-  },
-  data() {
-    const uniqId = Math.random()
-      .toString(36)
-      .substr(2, 9);
-
-    const self = this;
-    return {
-      uniqId,
-      activeSlide: 0,
-      swiperOption: {
-        autoHeight: true,
-        spaceBetween: 10,
-        preloadImages: true,
-        pagination: {
-          el: `.pagination-${uniqId}`,
-          clickable: true,
-          bulletClass: "item",
-          bulletActiveClass: "active"
-        },
-        navigation: {
-          nextEl: `.btn-next.btn-next-${uniqId}`,
-          prevEl: `.btn-prev.btn-prev-${uniqId}`,
-          hiddenClass: "hidden",
-          disabledClass: "hidden"
-        },
-        on: {
-          slideChange() {
-            self.activeSlide = this.activeIndex;
-          }
-        }
-      },
-      streamEventsIntervalId: 0
-    };
   },
   props: {
     medias: {
@@ -150,28 +78,16 @@ export default {
   },
   computed: {
     mediaStyle() {
-      return this.medias.length && this.medias[this.activeSlide].background
+      return this.medias.length && this.medias[0].background
         ? {
             "background-image": `url(data:image/jpeg;base64,${
-              this.medias[this.activeSlide].background
+              this.medias[0].background
             })`
           }
         : {};
     },
     postId() {
       return this.post.id;
-    },
-    hasStreamEvents() {
-      if (this.mediaSize !== "full") {
-        return;
-      }
-      return !!this.post.streamId;
-    },
-    streamEventsLoading() {
-      return this.$store.state.post.fetchStreamEventsLoading;
-    },
-    streamEvents() {
-      return this.$store.state.post.fetchStreamEventsResult;
     }
   },
   methods: {
@@ -184,43 +100,16 @@ export default {
       if (type === "video") return `Video${LinkedPrefix}`;
 
       throw new Error("Invalid media format");
-    },
-    fetchStreamEvents() {
-      this.$store.dispatch("post/fetchStreamEvents", this.post.streamId);
     }
-  },
-  watch: {
-    medias() {
-      this.activeSlide = 0;
-    }
-  },
-  mounted() {
-    if (this.hasStreamEvents) {
-      this.fetchStreamEvents();
-      this.$nextTick(() => {
-        this.streamEventsIntervalId = setInterval(() => {
-          if (!this.$refs.media) {
-            return;
-          }
-          if (!this.$refs.streamEvents) {
-            return;
-          }
-          const time = this.$refs.media.$refs.video.currentTime;
-          if (time !== this.$refs.streamEvents.currentTime) {
-            this.$refs.streamEvents.currentTime = time;
-          }
-        }, 1000);
-      });
-    }
-  },
-  beforeDestroy() {
-    clearInterval(this.streamEventsIntervalId);
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .media {
-  max-height: 400px;
+  flex-grow: 2;
+  &.maxHeight {
+    max-height: 350px;
+  }
 }
 </style>

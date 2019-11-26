@@ -19,11 +19,6 @@
       ></span>
       {{ post.price ? post.price.toFixed(2) : "" }}
     </span>
-    <time class="timestamp">
-      <a class="postLink" :href="`/post/${post.id}`">
-        {{ dateTime }}
-      </a>
-    </time>
     <div
       :class="['more-functions', { open: opened }]"
       v-click-outside="hide"
