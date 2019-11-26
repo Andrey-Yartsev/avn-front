@@ -40,7 +40,7 @@
         >
           <img
             class="locked"
-            :src="'data:image/jpeg;base64,' + media.locked"
+            :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />

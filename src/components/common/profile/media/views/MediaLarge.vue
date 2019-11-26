@@ -159,7 +159,7 @@ import { fromNow } from "@/helpers/datetime";
 import User from "@/mixins/user";
 import Header from "@/components/common/profile/media/header/Index";
 import Actions from "@//components/common/profile/media/footer/Actions";
-import Media from "@/components/post/parts/media/Index";
+import Media from "@/components/common/profile/media/views/Media";
 import CommentsList from "@/components/post/parts/commentsListScrollable/Index";
 import AddComment from "@/components/post/parts/addNewComment/Index";
 import Tip from "@/components/common/tip/User";
