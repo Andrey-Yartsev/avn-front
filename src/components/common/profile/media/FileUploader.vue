@@ -59,6 +59,7 @@
           :drop-directory="dropDirectory"
           :add-index="addIndex"
           v-model="files"
+          :maximum="defaultLimits.video"
           @input-file="inputFile"
           @input-filter="inputFilter"
           ref="upload"
@@ -196,6 +197,17 @@ export default {
       file.type = `video/${format}`;
     },
     inputFilter(newFile, oldFile, prevent) {
+      if (
+        newFile &&
+        !oldFile &&
+        this.files.length >= this.defaultLimits.video
+      ) {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: "Video limit is reached" },
+          { root: true }
+        );
+      }
       if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
         return prevent();
       }
@@ -252,6 +264,7 @@ export default {
   }
 }
 .dropArea {
+  padding-top: 30px;
   font-size: 16px;
   border-radius: 5px;
   min-height: 100px;

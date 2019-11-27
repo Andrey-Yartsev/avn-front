@@ -50,7 +50,7 @@
             @focus="() => (expanded = true)"
             class="sm content-editable textarea"
             contenteditable
-            placeholder="Add media description"
+            placeholder="Add video description"
             maxlength="1000"
             v-model="media.text"
             ref="textarea"
