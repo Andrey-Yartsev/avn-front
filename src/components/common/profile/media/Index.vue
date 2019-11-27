@@ -67,6 +67,9 @@ export default {
         return MediaMedium;
       }
       return MediaSmall;
+    },
+    allDataRecieved() {
+      return this.$store.state.profile.media.allDataReceived;
     }
   },
   methods: {
@@ -79,8 +82,13 @@ export default {
     inintIntersectionObserver() {
       const callback = entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
+          if (
+            entry.isIntersecting &&
+            !this.allDataRecieved &&
+            this.media.length > 10
+          ) {
             console.log("load more");
+            this.fetchMedia();
           }
         });
       };
@@ -93,12 +101,12 @@ export default {
   },
   mounted() {
     console.log(this.media);
-    // this.fetchMedia();
+    this.fetchMedia();
     this.inintIntersectionObserver();
   },
   beforeDestroy() {
     const target = this.$refs.scrollObserver;
-    if (target) {
+    if (target && this.observer) {
       this.observer.unobserve(target);
     }
   }

@@ -1,9 +1,15 @@
 import { createRequestAction } from "../../utils/storeRequest";
 import mockMediaResponse from "./mockMedia.json";
 
+const fetchLimit = 10;
+
 const initState = {
   media: mockMediaResponse.list,
-  editedMedia: null
+  editedMedia: null,
+  marker: null,
+  offset: 0,
+  limit: 10,
+  allDataReceived: false
 };
 
 const state = { ...initState };
@@ -29,10 +35,25 @@ const mutations = {
   incrementViewCounter(state, id) {
     const viewedMedia = state.media.find(item => item.id === id);
     viewedMedia.views++;
+  },
+  isAllDataRecieved(state, length) {
+    if (length < state.limit) {
+      state.isAllDataRecieved = true;
+    } else {
+      state.offset = state.offset + state.limit;
+    }
   }
 };
 
 const actions = {
+  getMedia({ dispatch, commit, state }, profileId) {
+    return dispatch("_getMedia", {
+      profileId,
+      offset: state.offset
+    }).then(res => {
+      commit("isAllDataRecieved", res.length);
+    });
+  },
   async deleteMedia({ dispatch, commit }, mediaId) {
     await dispatch("_deleteMedia", mediaId);
     commit("deleteMedia", mediaId);
@@ -56,21 +77,23 @@ const actions = {
 
 createRequestAction({
   requestType: "any",
-  prefix: "getMedia",
+  prefix: "_getMedia",
   apiPath: "media/{userId}",
   resultKey: "media",
   state,
   mutations,
   actions,
-  options: {
-    method: "GET"
+  paramsToOptions: function(params) {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.offset = params.offset || 0;
+    options.query.limit = fetchLimit;
+    return options;
   },
   paramsToPath: function(params, path) {
-    return path.replace(/{userId}/, params);
-  },
-  resultConvert: function(res) {
-    const media = res.list.sort(a => (a.pinned ? -1 : 1));
-    return media;
+    return path.replace(/{userId}/, params.profileId);
   }
 });
 
@@ -87,13 +110,13 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.data = params;
     return options;
-  },
-  resultConvert: function(newMedia, state) {
-    const arr = newMedia.pinned
-      ? [newMedia, ...state.media]
-      : [...state.media, newMedia];
-    return arr;
   }
+  // resultConvert: function(newMedia, state) {
+  //   const arr = newMedia.pinned
+  //     ? [newMedia, ...state.media]
+  //     : [...state.media, newMedia];
+  //   return arr;
+  // }
 });
 
 createRequestAction({
