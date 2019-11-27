@@ -27,7 +27,7 @@
               </div>
               <div class="col col-item fileInfo">
                 <div class="fileInfo__name">
-                  {{ file.name }}
+                  {{ $mq === "mobile" ? trimString(file.name, 20) : file.name }}
                 </div>
                 <div class="fileInfo__size">
                   {{ file.size | formatSize }}
@@ -249,6 +249,11 @@ export default {
         return true;
       }
       return false;
+    },
+    trimString(str, maxLength) {
+      const fileName = str.split("/").pop();
+      if (fileName.length <= maxLength) return fileName;
+      return fileName.slice(0, maxLength) + "...";
     }
   }
 };
