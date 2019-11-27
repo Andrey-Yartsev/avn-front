@@ -45,7 +45,7 @@ const actions = {
     commit("auth/incrementFollowingCount", null, { root: true });
   },
   updateMedia({ dispatch, commit }, data) {
-    const res = dispatch("_updataMedia", data);
+    const res = dispatch("_updateMedia", data);
     commit("updateMedia", res);
   },
   async incrementViewCounter({ dispatch, commit }, mediaId) {

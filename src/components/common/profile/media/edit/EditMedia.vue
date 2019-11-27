@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['addPost', { loaderWrap: isSaving, truncated: !user.isPerformer }]"
+    :class="['addPost', { loaderWrap: saving, truncated: !user.isPerformer }]"
     v-click-outside="() => (expanded = false)"
   >
     <form
@@ -54,7 +54,7 @@
             maxlength="1000"
             v-model="media.text"
             ref="textarea"
-            :disabled="isSaving"
+            :disabled="saving"
           ></textarea>
         </vue-tribute>
       </div>
@@ -174,12 +174,6 @@ export default {
     },
     hasSubscribePrice() {
       return this.$store.state.auth.user.subscribePrice > 0;
-    },
-    isSaving() {
-      if (this.$store.state.post.updatePostLoading) {
-        return true;
-      }
-      return this.$store.state.post._createPostLoading;
     },
     isExtended() {
       return this.expanded || this.initialExpanded;
