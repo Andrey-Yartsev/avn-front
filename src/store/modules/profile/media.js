@@ -21,8 +21,8 @@ const mutations = {
   endEditMedia(state) {
     state.editedMedia = null;
   },
-  addMedia(state, newMedia) {
-    state.media = [...state.media, newMedia];
+  addMedia(state, newMedias) {
+    state.media = [...state.media, ...newMedias];
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item =>
@@ -58,16 +58,16 @@ const actions = {
     await dispatch("_deleteMedia", mediaId);
     commit("deleteMedia", mediaId);
     commit("endEditMedia");
-    commit("auth/decrementFollowingCount", null, { root: true });
   },
-  async addMedia({ dispatch, commit }, data) {
-    await dispatch("_addMedia", data);
-    commit("addMedia", data);
-    commit("auth/incrementFollowingCount", null, { root: true });
+  addMedia({ dispatch, commit }, data) {
+    dispatch("_addMedia", data).then(res => {
+      commit("addMedia", res);
+    });
   },
   updateMedia({ dispatch, commit }, data) {
-    const res = dispatch("_updateMedia", data);
-    commit("updateMedia", res);
+    dispatch("_updateMedia", data).then(res => {
+      commit("updateMedia", res);
+    });
   },
   async incrementViewCounter({ dispatch, commit }, mediaId) {
     await dispatch("_incrementViewCounter", mediaId);
@@ -133,7 +133,7 @@ createRequestAction({
     return path.replace(/{mediaId}/, data.id);
   },
   paramsToOptions: function(params, options) {
-    options.data = params;
+    options.data = params.media;
     return options;
   },
   resultConvert: function(newMedia, state) {

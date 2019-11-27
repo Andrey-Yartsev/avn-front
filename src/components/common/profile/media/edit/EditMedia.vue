@@ -213,7 +213,11 @@ export default {
     async saveClickHandler() {
       this.saving = true;
       this.$store
-        .dispatch("profile/media/updateMedia", this.media, { root: true })
+        .dispatch(
+          "profile/media/updateMedia",
+          { media: this.media, id: this.$props.post.id },
+          { root: true }
+        )
         .then(res => {
           console.log("success", res);
           this.saving = false;

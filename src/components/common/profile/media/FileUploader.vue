@@ -238,7 +238,7 @@ export default {
         this.$refs.upload.clear();
         this.disableButtons = false;
       }, 1000);
-      // this.$store.dispatch("profile/media/addMedia", data, { root: true });
+      this.$store.dispatch("profile/media/addMedia", data, { root: true });
     },
     isFormatCorrect(fileName) {
       if (
