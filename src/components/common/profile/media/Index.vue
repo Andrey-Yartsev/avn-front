@@ -49,8 +49,8 @@ export default {
     return {
       limits: {
         video: 3,
-        gif: 3,
-        photo: 3
+        gif: 0,
+        photo: 0
       },
       observer: null
     };

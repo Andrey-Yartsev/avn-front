@@ -134,8 +134,11 @@ export default {
     return {
       files: [],
       accept:
-        "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
-      extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,gif",
+        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
+      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
+      // accept:
+      //   "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
+      // extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,gif",
       multiple: true,
       directory: false,
       drop: true,
@@ -209,6 +212,7 @@ export default {
         );
       }
       if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
+        console.log("wrong format");
         return prevent();
       }
     },
@@ -241,11 +245,7 @@ export default {
       this.$store.dispatch("profile/media/addMedia", data, { root: true });
     },
     isFormatCorrect(fileName) {
-      if (
-        /\.(jpeg|jpe|jpg|gif|png|webp|mp4|mpeg|mpg|wmv|avi|mov)$/i.test(
-          fileName
-        )
-      ) {
+      if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov)$/i.test(fileName)) {
         return true;
       }
       return false;
