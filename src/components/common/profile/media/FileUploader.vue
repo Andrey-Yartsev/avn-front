@@ -4,7 +4,7 @@
       class="dropArea"
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
-      <span class="icn-item icn-camera icn-size_lg"></span>
+      <img :src="'/static/img/ic-drop-files.svg'" alt="drop area folder" />
       Drop video file(s) here
     </div>
     <div class="upload">
@@ -277,7 +277,7 @@ export default {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  color: #bcb9b3;
+  color: #909598;
   &Active {
     background-color: #8080805c;
   }
@@ -349,11 +349,11 @@ export default {
   }
 }
 .btn-danger {
-  background-color: #be3678;
+  background-color: #e31b1d;
   padding: 0 40px;
   transition: all 0.3s ease;
   &:hover {
-    background-color: #9c2961;
+    background-color: #b51617;
   }
 }
 </style>
