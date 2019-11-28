@@ -14,7 +14,7 @@
       />
     </div>
     <template>
-      <figure v-if="medias.length" class="media-item active">
+      <figure class="media-item active">
         <component
           :is="getMediaViewType(medias[0])"
           :media="medias[0]"

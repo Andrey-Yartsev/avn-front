@@ -74,6 +74,8 @@
             @postShowCommentForm="mediaClickHandler"
             @postLike="() => {}"
             @toggleTip="() => {}"
+            :isAuthor="isAuthor"
+            @openBuyModal="mediaClickHandler"
           />
         </template>
         <div class="right-col">
@@ -124,6 +126,7 @@
                 :post="post"
                 :from="from"
                 @openBuyModal="mediaClickHandler"
+                :isAuthor="isAuthor"
               />
             </template>
           </div>

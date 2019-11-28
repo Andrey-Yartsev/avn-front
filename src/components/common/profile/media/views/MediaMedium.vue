@@ -54,6 +54,8 @@
           @postShowCommentForm="() => {}"
           @postLike="() => {}"
           @toggleTip="() => {}"
+          :isAuthor="isAuthor"
+          @openBuyModal="mediaClickHandler"
         />
       </div>
     </div>
@@ -149,6 +151,30 @@ export default {
       e.preventDefault();
       const linkUrl = e.target.getAttribute("href");
       this.$router.push(linkUrl);
+    },
+    mediaClickHandler() {
+      if (this.$props.post.media[0].canView) {
+        return;
+      }
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "mediaPayConfirm",
+          data: {
+            price: this.$props.post.price,
+            paymentType: "message",
+            messageId: this.$props.post.id
+          }
+        });
+      }
     }
   },
   mounted() {

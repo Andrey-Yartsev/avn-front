@@ -1,6 +1,9 @@
 <template>
   <div class="actions">
-    <span class="views" :class="[{ active: post.isFavorite }, 'actions__btn']">
+    <span
+      class="hidden-disabled"
+      :class="[{ active: post.isFavorite }, 'actions__btn']"
+    >
       <span
         class="btn-icon looking icn-item icn-size_lg"
         v-tooltip="post.views > 1 ? 'Views' : 'View'"
@@ -10,8 +13,8 @@
       </span>
     </span>
     <span
-      class="actions__btn comments-btn"
-      @click.prevent="$emit('openBuyModal')"
+      v-if="isAuthor || post.media[0].canView"
+      class="hidden-disabled actions__btn comments-btn"
     >
       <span
         class="btn-icon icn-tips icn-item icn-size_lg"
@@ -19,6 +22,15 @@
       ></span>
       {{ post.price ? post.price.toFixed(2) : "" }}
     </span>
+    <button
+      v-else
+      class="btn btn-buy"
+      v-tooltip="'Buy'"
+      @click.prevent="$emit('openBuyModal')"
+    >
+      <span class="btn-icon icn-tips icn-item icn-size_lg" />
+      {{ post.price ? post.price.toFixed(2) : "" }}
+    </button>
     <div
       :class="['more-functions', { open: opened }]"
       v-click-outside="hide"
@@ -61,6 +73,9 @@ export default {
     from: {
       type: String,
       required: true
+    },
+    isAuthor: {
+      type: Boolean
     }
   },
   computed: {
@@ -85,7 +100,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.views {
+.hidden-disabled {
   pointer-events: none;
+}
+.btn-buy {
+  & > span {
+    transform: translateY(-6px);
+  }
 }
 </style>
