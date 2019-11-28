@@ -92,6 +92,56 @@ createRequestAction({
   requestType: "no-token"
 });
 
+createRequestAction({
+  prefix: "fetchNominees",
+  apiPath: "ballot/nominees/{eventId}/{categoryId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    let r = path.replace(/{eventId}/, params.eventId);
+    return r.replace(/{categoryId}/, params.categoryId);
+  }
+});
+
+createRequestAction({
+  prefix: "vote",
+  apiPath: "ballot/vote/{eventId}/{categoryId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = { nominee: params.id };
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    let r = path.replace(/{eventId}/, params.eventId);
+    return r.replace(/{categoryId}/, params.categoryId);
+  }
+});
+
+createRequestAction({
+  prefix: "unvote",
+  apiPath: "ballot/vote/{eventId}/{categoryId}/{nomineeId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    let r = path.replace(/{eventId}/, params.eventId);
+    r = r.replace(/{nomineeId}/, params.id);
+    return r.replace(/{categoryId}/, params.categoryId);
+  }
+});
+
 export default {
   namespaced: true,
   state,

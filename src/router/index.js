@@ -155,6 +155,18 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
+    path: "/avn_awards/nominations2",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      notShowGenderFilter: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
     path: "/stream/obs",
     name: "StreamObsPage",
     component: () =>
