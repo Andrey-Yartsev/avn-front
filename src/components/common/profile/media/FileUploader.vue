@@ -1,5 +1,9 @@
 <template>
-  <div class="fileUploader" :class="{ withMargin: $mq === 'mobile' }">
+  <div
+    class="fileUploader"
+    @click="fileUploaderClickHandler"
+    :class="{ withMargin: $mq === 'mobile', withHoverEffect: !files.length }"
+  >
     <div
       class="dropArea"
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
@@ -38,7 +42,7 @@
                   :disabled="disableButtons"
                   class="btn btn-secondary btn-sm dropdown-toggle"
                   type="button"
-                  @click.prevent="
+                  @click.stop.prevent="
                     removeFileHandler(file, preloadedMedias[index])
                   "
                 >
@@ -65,12 +69,13 @@
           ref="upload"
         />
         <div class="btn-group buttonWrapper">
-          <div v-if="$mq === 'mobile'" class="modileButtons">
+          <!-- <div v-if="$mq === 'mobile'" class="mobileButtons">
             <button
               :disabled="disableButtons"
               type="button"
               class="btn"
               style="marginRight: 5px"
+              ref="addFileButton"
             >
               <label :for="name">Add files</label>
             </button>
@@ -83,13 +88,13 @@
             >
               Add folder
             </button>
-          </div>
+          </div> -->
           <button
             v-if="files.length"
             :disabled="!this.canSend"
             type="button"
             class="btn btn-danger start-upload"
-            @click.prevent="sendHandler"
+            @click.stop.prevent="sendHandler"
           >
             Upload
           </button>
@@ -254,6 +259,12 @@ export default {
       const fileName = str.split("/").pop();
       if (fileName.length <= maxLength) return fileName;
       return fileName.slice(0, maxLength) + "...";
+    },
+    fileUploaderClickHandler() {
+      const input = this.$refs.upload.$el.querySelector("input");
+      if (input) {
+        input.click();
+      }
     }
   }
 };
@@ -264,6 +275,13 @@ export default {
   margin: 10px 0;
   border-radius: 5px;
   box-shadow: 0 1px 4px 2px #80808054;
+  cursor: pointer;
+  &.withHoverEffect {
+    transition: box-shadow 0.3s ease;
+    &:hover {
+      box-shadow: 0 1px 2px 0px #80808054;
+    }
+  }
   &.withMargin {
     margin: 10px;
   }
@@ -278,6 +296,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: #909598;
+
   &Active {
     background-color: #8080805c;
   }
