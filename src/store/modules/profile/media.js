@@ -54,6 +54,13 @@ const actions = {
       commit("isAllDataRecieved", res.length);
     });
   },
+  getMediaItem({ dispatch, commit }, mediaId) {
+    dispatch("_getMediaItem", {
+      mediaId
+    }).then(res => {
+      commit("updateMedia", res);
+    });
+  },
   async deleteMedia({ dispatch, commit }, mediaId) {
     await dispatch("_deleteMedia", mediaId);
     commit("deleteMedia", mediaId);
@@ -96,6 +103,21 @@ createRequestAction({
     return path.replace(/{userId}/, params.profileId);
   }
 });
+createRequestAction({
+  requestType: "any",
+  prefix: "_getMediaItem",
+  apiPath: "media/{mediaId}",
+  resultKey: "media",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{mediaId}/, params.mediaId);
+  }
+});
 
 createRequestAction({
   prefix: "_addMedia",
@@ -135,13 +157,13 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.data = params.media;
     return options;
-  },
-  resultConvert: function(newMedia, state) {
-    const arr = state.media.map(item =>
-      item.id === newMedia.id ? newMedia : item
-    );
-    return arr;
   }
+  // resultConvert: function(newMedia, state) {
+  //   const arr = state.media.map(item =>
+  //     item.id === newMedia.id ? newMedia : item
+  //   );
+  //   return arr;
+  // }
 });
 
 createRequestAction({
