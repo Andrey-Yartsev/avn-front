@@ -85,6 +85,8 @@ const HelpCenterSearchPage = () =>
   import(/* webpackChunkName: "HelpCenterSearchPage" */ "@/components/pages/helpCenter/Search");
 const AvnAwards = () =>
   import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index");
+const AvnAwards2 = () =>
+  import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index");
 const StreamObsPage = () =>
   import(/* webpackChunkName: "StreamObsPage" */ "@/components/pages/stream/obs/Index");
 
@@ -661,6 +663,17 @@ const routes = [
     beforeEnter: Auth.requireAny,
     path: "/avn_awards/nominations",
     component: AvnAwards,
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      notShowGenderFilter: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/avn_awards/nominations2",
+    component: AvnAwards2,
     meta: {
       noAuthSection: true,
       staticPage: true,

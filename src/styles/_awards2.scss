@@ -1,0 +1,91 @@
+.awards {
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 0;
+  }
+
+
+  .select {
+    margin-bottom: 20px;
+  }
+
+  .title-block {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      font-size: 14px;
+    }
+  }
+
+  .models {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    figure {
+      width: calc(25% - 10px);
+
+      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+        width: calc(33% - 10px);
+      }
+      @include media-breakpoint-down($mobile-breakpoint-dcrs) {
+        width: calc(50% - 10px);
+      }
+
+
+      margin-bottom: 16px;
+      transition: transform .2s;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+
+      .image {
+        width: 100%;
+        border-radius: 5px;
+        height: 350px;
+        object-fit: cover;
+      }
+
+      &:hover:not(.disabled) {
+        transform: scale(1.01);
+      }
+
+      .lds-dual-ring {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      .button {
+        display: block;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        position: absolute;
+        z-index: 10;
+        background-image: url(#{$assetPath}/img/voting/vote.png);
+        width: 90px;
+        height: 90px;
+        background-size: cover;
+      }
+
+      &.voted {
+        .button {
+          background-image: url(#{$assetPath}/img/voting/thanks.png);
+        }
+      }
+      &.disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+  }
+}

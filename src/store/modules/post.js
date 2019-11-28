@@ -30,8 +30,9 @@ const mutations = {
 
 const actions = {
   async createPost({ dispatch, commit }, data) {
-    await dispatch("_createPost", data);
+    const result = await dispatch("_createPost", data);
     commit("modal/hide", { name: "addPost" }, { root: true });
+    return result;
   },
 
   reloadPost({ commit }, { postId }) {
