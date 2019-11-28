@@ -58,17 +58,6 @@ export default {
     copied: false
   }),
   computed: {
-    href() {
-      const { protocol, port, hostname } = window.location;
-      return (
-        `${protocol}//${hostname}` +
-        (port ? ":" + port : "") +
-        `/post/${this.postId}`
-      );
-    },
-    actionPrefix() {
-      return this.from;
-    },
     isOnPostPage() {
       return this.from === "postPage";
     },
@@ -77,31 +66,18 @@ export default {
     },
     userId() {
       return this.post.author.id;
-    },
-    pinCount() {
-      return this.$store.state.profile.home.postPinCount;
-    },
-    canPin() {
-      return this.pinCount < 3;
     }
   },
   methods: {
-    detailView() {
-      this.hide();
-      this.$emit("clickOnDetailsView");
-    },
-    copyHref() {
-      this.$copyText(this.href).then(() => {
-        this.copied = true;
-        setTimeout(() => (this.copied = false), 1000);
-      });
-    },
     async deletePost() {
       this.$store
         .dispatch("profile/media/deleteMedia", this.postId, { root: true })
         .then(res => {
           console.log("success", res);
           this.$router.push(`/${this.user.username}/media`);
+        })
+        .catch(res => {
+          console.log("failed", res);
         });
     },
     editPost() {
