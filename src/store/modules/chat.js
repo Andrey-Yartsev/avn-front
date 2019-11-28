@@ -413,6 +413,7 @@ const mutations = {
   },
   addNewChat(state, chat) {
     state.chats = [chat, ...state.chats];
+    state.chats = state.chats.slice(0, chatsLimit);
     state.offset++;
   },
   setActiveWindow(state, isActive) {
@@ -535,7 +536,8 @@ createRequestAction({
   resultKey: "anyChats",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
-    options.query = { query: params };
+    params.limit = chatsLimit;
+    options.query = { ...options.query, ...params };
     return options;
   },
   resultConvert: function(res) {

@@ -23,7 +23,7 @@
           </h3>
           <button
             class="nextStep btn sm hidden-desktop"
-            :disabled="!selected.length"
+            :disabled="!hasSelectedChats"
             @click="next"
             v-if="$mq === 'mobile'"
           >
@@ -38,7 +38,7 @@
         <div
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
-          v-if="selectedChats.length"
+          v-if="hasSelectedChats && !selectAll"
         >
           <component :is="scrollableComponent" class="all-contacts-found">
             <div class="selectedContacts">
@@ -63,8 +63,9 @@
             'search-text': chats.length && searchQuery.length
           }"
         >
-          <span class="sendTo">To</span>
+          <span class="sendTo">To{{ selectAll ? " All contacts" : "" }}</span>
           <input
+            v-if="!selectAll"
             @keyup="search"
             v-model="searchQuery"
             type="text"
@@ -79,8 +80,8 @@
           <div
             class="btn-selected-all icn-item"
             @click="toggleSelectAll"
-            v-if="chats.length"
-            :class="{ visible: chats.length, active: isAllSelected }"
+            v-if="foundUsers.length"
+            :class="{ visible: foundUsers.length, active: selectAll }"
           ></div>
         </div>
         <perfect-scrollbar
@@ -88,32 +89,32 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult" v-if="chats.length">
+          <div class="searchResult" v-if="!selectAll && foundUsers.length">
             <div
-              v-for="v in chats"
-              v-bind:key="v.withUser.id"
+              v-for="v in foundUsers"
+              v-bind:key="v.id"
               class="searchChatContactsView"
-              @click="toggleSelect(v.withUser.id)"
-              :class="{ active: isSelected(v.withUser.id) }"
+              @click="toggleSelect(v.id)"
+              :class="{ active: isSelected(v.id) }"
             >
               <span
                 class="avatar avatar_gap-r-sm avatar_sm"
-                :class="{ 'online-state': isOnline(v.withUser.id) }"
+                :class="{ 'online-state': isOnline(v.id) }"
               >
                 <span class="avatar__img">
-                  <img v-if="v.withUser.avatar" :src="v.withUser.avatar" />
+                  <img v-if="v.avatar" :src="v.avatar" />
                 </span>
               </span>
               <div class="username-group">
                 <div class="chatView__header">
-                  <span class="name">{{ v.withUser.name }}</span>
+                  <span class="name">{{ v.name }}</span>
                   <span
                     class="verified-user icn-item"
-                    v-if="v.withUser.isVerified"
+                    v-if="v.isVerified"
                   ></span>
                 </div>
                 <div class="user-login reset-ml">
-                  <span class="username">{{ v.withUser.username }}</span>
+                  <span class="username">{{ v.username }}</span>
                 </div>
               </div>
               <span class="check icn-item"></span>
@@ -122,7 +123,6 @@
 
           <div
             class="no-results-search"
-            :class="{ show: !chats.length }"
             v-if="!foundUsers || !foundUsers.length"
           >
             <div class="no-results-search__message">
@@ -172,7 +172,7 @@
               >
             </div>
           </template>
-          <span v-else-if="selected.length" class="mass-message"
+          <span v-else-if="hasSelectedChats" class="mass-message"
             >Mass message</span
           >
           <div
@@ -221,7 +221,7 @@
       <div class="chatCollectionContentWrapper">
         <div
           class="chatMessagesCollectionView"
-          :class="{ 'no-selected-conversation': !selected.length }"
+          :class="{ 'no-selected-conversation': !hasSelectedChats }"
         >
           <div
             class="chat-section loader-container loader-container_center"
@@ -236,6 +236,12 @@
           </div>
           <div class="chat-section" v-else>
             <div class="chatContent chatContent_new-chat">
+              <div
+                class="selectedContacts selectedContacts_recipients"
+                v-if="selectAll"
+              >
+                <b class="selectedContacts__title">Recipients: All contacts</b>
+              </div>
               <div
                 class="selectedContacts selectedContacts_recipients"
                 v-if="selectedUsers && selectedUsers.length"
@@ -266,6 +272,7 @@
           </div>
           <ChatAddMultiMessage
             :userIds="selected"
+            :toAll="selectAll"
             :disable="sending"
             @startSending="startSending"
             @sent="sent"
@@ -305,7 +312,8 @@ export default {
       searchQuery: "",
       chatOptionsOpened: false,
       contactsScrollTop: true,
-      sending: false
+      sending: false,
+      selectAll: false
     };
   },
 
@@ -317,29 +325,27 @@ export default {
       return false;
       // return this.$route.params[1] && this.$route.params[1] === "no-messages";
     },
-    _chats() {
+    chats() {
       let chats = this.$store.state.chat.anyChats.map(v => {
         v.selected = this.selected.indexOf(v.withUser.id) !== -1;
         return v;
       });
       return chats;
     },
-    chats() {
-      let chats = this._chats;
-      if (this.foundUsers) {
-        const foundUserIds = this.foundUsers.map(v => v.id);
-        chats = chats.filter(v => foundUserIds.indexOf(v.withUser.id) !== -1);
-      }
-      return chats;
-    },
     selectedChats() {
-      return this._chats.filter(v => v.selected);
+      return this.chats.filter(v => v.selected);
     },
-    isAllSelected() {
-      return this.chats.length === this.selected.length;
+    hasSelectedChats() {
+      return this.selectAll || !!this.selectedChats.length;
+    },
+    _foundUsers() {
+      return this.$store.state.chat.chatUsers;
     },
     foundUsers() {
-      return this.$store.state.chat.chatUsers;
+      if (this._foundUsers) {
+        return this._foundUsers;
+      }
+      return this.chats.map(v => v.withUser);
     },
     selectedUser() {
       if (this.selected.length !== 1) {
@@ -377,16 +383,9 @@ export default {
       return this.selected.indexOf(id) !== -1;
     },
     toggleSelectAll() {
-      if (this.selected.length !== this.chats.length) {
-        this.selected = this.chats.map(v => v.withUser.id);
-      } else {
+      this.selectAll = !this.selectAll;
+      if (this.selectAll) {
         this.selected = [];
-      }
-
-      if (!this.chats.length) {
-        this.searchQuery = "";
-        this.$store.commit("chat/resetSearchUsers");
-        this.selected = this.chats.map(v => v.withUser.id);
       }
     },
     search() {
@@ -445,7 +444,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("chat/fetchAnyChats");
+    this.$store.dispatch("chat/fetchAnyChats", {});
     this.search();
   },
 

@@ -18,8 +18,10 @@ export default {
 
   props: {
     userIds: {
-      type: Array,
-      required: true
+      type: Array
+    },
+    toAll: {
+      type: Boolean
     },
     disable: {
       type: Boolean,
@@ -30,10 +32,13 @@ export default {
   methods: {
     async sendMessage(message) {
       this.$emit("startSending");
-      await this.$store.dispatch("chat/sendMultiMessages", {
-        ...message,
-        ...{ ids: this.userIds }
-      });
+      const params = { message };
+      if (this.toAll) {
+        params.toAll = this.toAll;
+      } else {
+        params.ids = this.userIds;
+      }
+      await this.$store.dispatch("chat/sendMultiMessages", params);
       this.$store.dispatch("global/flashToast", {
         text: "Messages sent successfully"
       });

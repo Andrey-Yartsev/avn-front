@@ -31,7 +31,9 @@ export default {
     },
     resetBgPreview() {
       this.bgPreview = null;
-      this.$refs.bgAside.value = "";
+      if (this.$refs.bgAside) {
+        this.$refs.bgAside.value = "";
+      }
     },
     saveBg({ isClear, refName }) {
       return new Promise(accept => {

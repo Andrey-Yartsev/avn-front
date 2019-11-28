@@ -85,16 +85,16 @@
 </template>
 
 <script>
-import PostCollection from "@/components/common/postCollection/Index";
+import PostCollection from "@/components/post/collection/Index";
 import NewFeedPostToast from "@/components/common/newFeedPostToast/Index";
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index";
-import AddPost from "@/components/addPost/Fake";
+import AddPost from "@/components/post/add/Fake";
 import StoriesWrapper from "@/components/aside/StoriesWrapper";
 import InfinityScrollMixin from "@/mixins/infinityScroll";
 import Wsp from "@/mixins/wsp";
 import Loader from "@/components/common/Loader";
-import PostVisibility from "@/mixins/postsVisibility";
+import PostVisibility from "@/mixins/post/visibility";
 
 export default {
   name: "HomePage",
@@ -177,6 +177,7 @@ export default {
     },
     newPost() {
       this.$store.dispatch("modal/hide", { name: "addPost" });
+      this.$store.dispatch("modal/hide", { name: "editPost" });
       this.init();
     },
     updatedPost() {

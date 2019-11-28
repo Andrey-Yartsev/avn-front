@@ -11,16 +11,8 @@ const state = {
   updatedPost: undefined
 };
 const mutations = {
-  sendPostReportSuccess(state, { postId, reasonId }) {
-    state.reportedPost = { postId, reasonId };
-  },
-
   setCurrentPost(state, { postData }) {
     state.currentPost = postData;
-  },
-
-  getPostReportReasonsSuccess(state, data) {
-    state.postReportReasons = data;
   },
 
   reloadPostSuccess(state, data) {
@@ -47,28 +39,6 @@ const actions = {
       .catch(err => {
         commit("postsRequestFail", err);
       });
-  },
-
-  sendReport({ commit }, { postId, reasonId }) {
-    return PostApi.sendPostReport({ postId, reasonId })
-      .then(response => {
-        if (response.status === 200) {
-          commit("sendPostReportSuccess", { postId, reasonId });
-        }
-      })
-      .catch(() => {});
-  },
-
-  getPostReportReasons({ commit }, { type }) {
-    return PostApi.getPostReportReasons({ type })
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(function(res) {
-            commit("getPostReportReasonsSuccess", res);
-          });
-        }
-      })
-      .catch(() => {});
   }
 };
 
@@ -121,6 +91,40 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{streamId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "fetchReportReasons",
+  apiPath: "reports/reasons",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {
+      type: "post"
+    }
+  }
+});
+
+createRequestAction({
+  prefix: "report",
+  apiPath: "posts/{postId}/report",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      reasonId: params.reasonId
+    };
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{postId}/, params.postId);
   }
 });
 

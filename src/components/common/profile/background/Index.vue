@@ -82,10 +82,11 @@ export default {
         "margin-right": `${-this.scrollBarWidth}px`,
         "padding-right": `${this.scrollBarWidth}px`
       };
-      return this.bgPreview || this.profile.header
+      return this.bgPreview || this.profile.headerFull
         ? {
             ...style,
-            "background-image": `url(${this.bgPreview || this.profile.header})`
+            "background-image": `url(${this.bgPreview ||
+              this.profile.headerFull})`
           }
         : style;
     },

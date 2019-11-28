@@ -1,152 +1,25 @@
 import Vue from "vue";
 import Router from "vue-router";
-
-const HomePage = () =>
-  import(/* webpackChunkName: "HomePage" */ "@/components/pages/home/Index");
-const ExplorePage = () =>
-  import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index");
-const NotificationsPage = () =>
-  import(/* webpackChunkName: "NotificationsPage" */ "@/components/pages/notification/Index");
-const LoginPage = () =>
-  import(/* webpackChunkName: "LoginPage" */ "@/components/pages/noAuth/Login");
-const LogoutPage = () =>
-  import(/* webpackChunkName: "LogoutPage" */ "@/components/pages/noAuth/Logout");
-const SignUpPage = () =>
-  import(/* webpackChunkName: "SignUpPage" */ "@/components/pages/noAuth/SignUp");
-const ForgotPasswordPage = () =>
-  import(/* webpackChunkName: "ForgotPasswordPage" */ "@/components/pages/noAuth/ForgotPassword");
-const SettingsDefaultPage = () =>
-  import(/* webpackChunkName: "SettingsDefaultPage" */ "@/components/pages/settings/default/Index");
-const SettingsSecurityPage = () =>
-  import(/* webpackChunkName: "SettingsSecurityPage" */ "@/components/pages/settings/security/Index");
-const SettingsNotificationPage = () =>
-  import(/* webpackChunkName: "SettingsNotificationPage" */ "@/components/pages/settings/notification/Index");
-const SettingsPayoutsPage = () =>
-  import(/* webpackChunkName: "SettingsPayoutsPage" */ "@/components/pages/settings/payouts/Index");
-const SettingsPremiumLinksPage = () =>
-  import(/* webpackChunkName: "SettingsPremiumLinksPage" */ "@/components/pages/settings/premiumLinks/Index");
-const SettingsProductsPage = () =>
-  import(/* webpackChunkName: "SettingsProductsPage" */ "@/components/pages/settings/products/Index");
-const SettingsPaymentsPage = () =>
-  import(/* webpackChunkName: "SettingsPaymentsPage" */ "@/components/pages/settings/payments/Index");
-const SettingsCreditsPage = () =>
-  import(/* webpackChunkName: "SettingsCreditsPage" */ "@/components/pages/settings/credits/Index");
-const SettingsAccountPage = () =>
-  import(/* webpackChunkName: "SettingsAccountPage" */ "@/components/pages/settings/account/Index.vue");
-const SettingsNominationPage = () =>
-  import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue");
-const SettingsStoryPage = () =>
-  import(/* webpackChunkName: "SettingsStoryPage" */ "@/components/pages/settings/story/Index.vue");
-const SettingsPrivacyPage = () =>
-  import(/* webpackChunkName: "SettingsPrivacyPage" */ "@/components/pages/settings/privacy/Index.vue");
-const SettingsReferralsPage = () =>
-  import(/* webpackChunkName: "SettingsReferralsPage" */ "@/components/pages/settings/referrals/Index.vue");
-const SettingsTrialsPage = () =>
-  import(/* webpackChunkName: "SettingsTrialsPage" */ "@/components/pages/settings/trials/Index.vue");
-const SettingsObsPage = () =>
-  import(/* webpackChunkName: "SettingsObsPage" */ "@/components/pages/settings/obs/Index.vue");
-const W9 = () =>
-  import(/* webpackChunkName: "W9" */ "@/components/pages/settings/payouts/W9.vue");
-const PostPage = () =>
-  import(/* webpackChunkName: "PostPage" */ "@/components/pages/post/Index");
-const NotFoundPage = () =>
-  import(/* webpackChunkName: "NotFoundPage" */ "@/components/pages/notFound/Index");
-const Chat = () =>
-  import(/* webpackChunkName: "Chat" */ "@/components/chat/Chat");
-const ChatNewMessage = () =>
-  import(/* webpackChunkName: "ChatNewMessage" */ "@/components/chat/NewMessage");
-const SearchPage = () =>
-  import(/* webpackChunkName: "SearchPage" */ "@/components/pages/search/Index");
-const StoryPage = () =>
-  import(/* webpackChunkName: "StoryPage" */ "@/components/pages/story/Index");
-const AddPostPage = () =>
-  import(/* webpackChunkName: "AddPostPage" */ "@/components/pages/addPost/Index");
-const EditPostPage = () =>
-  import(/* webpackChunkName: "EditPostPage" */ "@/components/pages/editPost/Index");
-const StreamPage = () =>
-  import(/* webpackChunkName: "StreamPage" */ "@/components/pages/stream/Index");
-const FollowersPage = () =>
-  import(/* webpackChunkName: "FollowersPage" */ "@/components/pages/followers/Index");
-const LikesPage = () =>
-  import(/* webpackChunkName: "LikesPage" */ "@/components/pages/likes/Index");
-const SubscribersPage = () =>
-  import(/* webpackChunkName: "SubscribersPage" */ "@/components/pages/subscribers/Index");
-const EarningsPage = () =>
-  import(/* webpackChunkName: "EarningsPage" */ "@/components/pages/earnings/Index");
-const StaticPage = () =>
-  import(/* webpackChunkName: "StaticPage" */ "@/components/pages/static/Index");
-const ContactsPage = () =>
-  import(/* webpackChunkName: "ContactsPage" */ "@/components/pages/static/Contacts");
-const StatPage = () =>
-  import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Page");
-const HelpCenterArticlePage = () =>
-  import(/* webpackChunkName: "HelpCenterArticlePage" */ "@/components/pages/helpCenter/Articles");
-const HelpCenterSearchPage = () =>
-  import(/* webpackChunkName: "HelpCenterSearchPage" */ "@/components/pages/helpCenter/Search");
-const AvnAwards = () =>
-  import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index");
-const AvnAwards2 = () =>
-  import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index");
-const StreamObsPage = () =>
-  import(/* webpackChunkName: "StreamObsPage" */ "@/components/pages/stream/obs/Index");
-
-import Auth from "./auth";
-import Post from "./post";
+import Auth from "./middlewares/auth";
+import {
+  authRoutes,
+  profileRoutes,
+  chatRoutes,
+  postRoutes,
+  settingsRoutes,
+  exploreRoutes,
+  staticRoutes
+} from "./modules";
 
 Vue.use(Router);
 
 const routes = [
   {
-    beforeEnter: Auth.requireNonAuth,
-    path: "/login",
-    name: "LoginPage",
-    component: LoginPage,
-    meta: {
-      cssName: "login"
-    }
-  },
-  {
-    path: "/logout",
-    component: LogoutPage,
-    meta: {
-      noLayout: true
-    }
-  },
-  {
-    beforeEnter: Auth.twitterAuth,
-    path: "/twitter"
-  },
-  {
-    beforeEnter: Auth.requireNonAuth,
-    path: "/register",
-    name: "RegisterPage",
-    component: SignUpPage,
-    meta: {
-      cssName: "login"
-    }
-  },
-  {
-    beforeEnter: Auth.requireNonAuth,
-    path: "/register-model",
-    component: SignUpPage,
-    meta: {
-      cssName: "login",
-      forModels: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/forgot",
-    name: "StaticPage",
-    component: ForgotPasswordPage,
-    meta: {
-      cssName: "forgot"
-    }
-  },
-  {
     beforeEnter: Auth.requireAuthOrExplore,
     path: "/",
-    component: HomePage,
+    name: "HomePage",
+    component: () =>
+      import(/* webpackChunkName: "HomePage" */ "@/components/pages/home/Index"),
     meta: {
       home: true
     }
@@ -154,7 +27,9 @@ const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/hashtag/:tag",
-    component: ExplorePage,
+    name: "ExplorePage",
+    component: () =>
+      import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
     meta: {
       page: "feed",
       type: "feed",
@@ -163,64 +38,10 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/addPost",
-    component: AddPostPage,
-    meta: {
-      cssName: "addPost",
-      disabledAddPostButton: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/post/edit/:id",
-    component: EditPostPage,
-    meta: {
-      cssName: "addPost",
-      disabledAddPostButton: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/chat",
-    name: "ChatHome",
-    component: Chat,
-    meta: {
-      chat: true,
-      cssName: "chat"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/chat/no-messages",
-    component: Chat,
-    meta: {
-      chat: true,
-      cssName: "chat"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/chat/new",
-    name: "ChatNew",
-    component: ChatNewMessage,
-    meta: {
-      chat: true,
-      cssName: "newChat"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/chat/:userId",
-    component: Chat,
-    meta: {
-      chat: true,
-      cssName: "chat"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
     path: "/notifications/:type?",
-    component: NotificationsPage,
+    name: "NotificationsPage",
+    component: () =>
+      import(/* webpackChunkName: "NotificationsPage" */ "@/components/pages/notification/Index"),
     meta: {
       cssName: "notifications",
       notifications: true
@@ -229,242 +50,29 @@ const routes = [
   {
     beforeEnter: Auth.requireAuth,
     path: "/search/:type/:query",
-    component: SearchPage,
     name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "SearchPage" */ "@/components/pages/search/Index"),
     meta: {
       cssName: "search"
     }
   },
   {
     beforeEnter: Auth.requireAuth,
-    path: "/settings",
-    component: SettingsDefaultPage,
-    name: "Settings",
-    meta: {
-      title: "Settings",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/profile",
-    component: SettingsDefaultPage,
-    name: "SettingsProfile",
-    meta: {
-      title: "Edit Profile",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/security",
-    component: SettingsSecurityPage,
-    name: "SettingsSecurity",
-    meta: {
-      title: "Security",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/notifications",
-    component: SettingsNotificationPage,
-    name: "SettingsNotifications",
-    meta: {
-      title: "Notifications Settings",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/payments",
-    component: SettingsPaymentsPage,
-    meta: {
-      title: "Payments",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/credits",
-    component: SettingsCreditsPage,
-    meta: {
-      title: "Credits",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/payouts",
-    component: SettingsPayoutsPage,
-    name: "SettingsPayouts",
-    meta: {
-      title: "Payouts",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/premium-links",
-    component: SettingsPremiumLinksPage,
-    name: "SettingsPremiumLinks",
-    meta: {
-      title: "Premium Links",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/products",
-    component: SettingsProductsPage,
-    name: "SettingsProducts",
-    meta: {
-      title: "My purchases",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/account/:view?",
-    component: SettingsAccountPage,
-    name: "SettingsAccount",
-    meta: {
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/avn",
-    component: SettingsNominationPage,
-    name: "SettingsNomination",
-    meta: {
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/gayvn",
-    component: SettingsNominationPage,
-    name: "SettingsNominationGay",
-    meta: {
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/story/:view?",
-    component: SettingsStoryPage,
-    name: "SettingsStory",
-    meta: {
-      cssName: "settings",
-      title: "Story Settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/privacy/:view?",
-    component: SettingsPrivacyPage,
-    name: "SettingsPrivacy",
-    meta: {
-      title: "Privacy",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/referrals",
-    component: SettingsReferralsPage,
-    meta: {
-      title: "Referrals",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/trials",
-    component: SettingsTrialsPage,
-    meta: {
-      title: "Free Trials",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/w9",
-    component: W9,
-    meta: {
-      title: "W9",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/settings/obs",
-    component: SettingsObsPage,
-    meta: {
-      title: "OBS",
-      cssName: "settings"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
     path: "/stream",
-    component: StreamPage,
+    name: "StreamPage",
+    component: () =>
+      import(/* webpackChunkName: "StreamPage" */ "@/components/pages/stream/Index"),
     meta: {
       cssName: "stream"
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
-    path: "/followers",
-    component: FollowersPage,
-    meta: {
-      title: "followers",
-      cssName: "following"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/following",
-    component: FollowersPage,
-    meta: {
-      title: "following",
-      cssName: "following"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/likes",
-    component: LikesPage,
-    meta: {
-      title: "likes",
-      cssName: "likes"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/subscribers",
-    component: SubscribersPage,
-    meta: {
-      title: "subscribes",
-      cssName: "following"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/earnings",
-    component: EarningsPage,
-    meta: {
-      title: "earnings",
-      cssName: "following"
-    }
-  },
-  // PUBLIC ZONE
-  {
     beforeEnter: Auth.dummy,
     path: "/not-found",
     name: "NotFound",
-    component: NotFoundPage,
+    component: () =>
+      import(/* webpackChunkName: "NotFoundPage" */ "@/components/pages/notFound/Index"),
     meta: {
       noAuthHeader: true,
       cssName: "staticPage",
@@ -472,197 +80,44 @@ const routes = [
     }
   },
   {
-    beforeEnter: Post.page,
-    path: "/post/:postId",
-    component: PostPage,
-    meta: {
-      cssName: "post"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/all",
-    component: ExplorePage,
-    meta: {
-      page: "all",
-      type: "media",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/stories",
-    component: ExplorePage,
-    meta: {
-      page: "stories",
-      type: "story",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/photos",
-    component: ExplorePage,
-    meta: {
-      page: "photos",
-      type: "media",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/live",
-    component: ExplorePage,
-    meta: {
-      page: "lives",
-      type: "live",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/videos",
-    component: ExplorePage,
-    meta: {
-      page: "videos",
-      type: "media",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore/top",
-    component: ExplorePage,
-    meta: {
-      page: "topmodels",
-      type: "top",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/explore",
-    component: ExplorePage,
-    meta: {
-      page: "feed",
-      type: "feed",
-      cssName: "explore"
-    }
-  },
-  {
-    beforeEnter: (to, from, next) => {
-      global.storyFirstEnter = !from.matched.length;
-      return Auth.requireAny(to, from, next);
-    },
+    beforeEnter: Auth.firstEnter,
     path: "/stories/:userId",
-    component: StoryPage,
+    name: "StoryPage",
+    component: () =>
+      import(/* webpackChunkName: "StoryPage" */ "@/components/pages/story/Index"),
     meta: {
       staticPage: true,
       cssName: "storiesPage"
     }
   },
   {
-    beforeEnter: (to, from, next) => {
-      global.storyFirstEnter = !from.matched.length;
-      return Auth.requireAny(to, from, next);
-    },
+    beforeEnter: Auth.firstEnter,
     path: "/collections/:userId",
-    component: StoryPage,
+    name: "CollectionsPage",
+    component: () =>
+      import(/* webpackChunkName: "StoryPage" */ "@/components/pages/story/Index"),
     meta: {
       staticPage: true,
       cssName: "storiesPage",
       collections: true
     }
   },
-  // STATIC PAGES
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/terms",
-    component: StaticPage,
-    meta: {
-      apiPoint: "terms",
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/privacy",
-    component: StaticPage,
-    meta: {
-      apiPoint: "privacy",
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/contact",
-    component: ContactsPage,
-    meta: {
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/help",
-    component: HelpCenterArticlePage,
-    meta: {
-      staticPage: true,
-      cssName: "support"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/help/search/:text",
-    component: HelpCenterSearchPage,
-    meta: {
-      staticPage: true,
-      cssName: "support"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/help/article/:id",
-    component: HelpCenterArticlePage,
-    meta: {
-      staticPage: true,
-      cssName: "support"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/2257",
-    component: StaticPage,
-    meta: {
-      apiPoint: "2257",
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/usc2257",
-    component: StaticPage,
-    meta: {
-      apiPoint: "usc2257",
-      staticPage: true,
-      cssName: "staticPage"
-    }
-  },
   {
     beforeEnter: Auth.requireAuth,
     path: "/statistics",
-    component: StatPage,
+    name: "StatisticPage",
+    component: () =>
+      import(/* webpackChunkName: "StatPage" */ "@/components/statistics/Page"),
     meta: {
       cssName: "statistics"
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/avn_awards/nominations",
-    component: AvnAwards,
+    name: "AvnAwards",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -671,20 +126,11 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
-    path: "/avn_awards/nominations2",
-    component: AvnAwards2,
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      notShowGenderFilter: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/gayvn_awards/nominations",
-    component: AvnAwards,
+    name: "AvnAwardsGay",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -694,10 +140,11 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAny,
+    beforeEnter: Auth.requireAuthAdmin,
     path: "/nominator/:username/:type/:categories?",
-    component: AvnAwards,
     name: "Nominator",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -708,13 +155,34 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
+    path: "/avn_awards/nominations2",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      notShowGenderFilter: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
     path: "/stream/obs",
-    component: StreamObsPage,
+    name: "StreamObsPage",
+    component: () =>
+      import(/* webpackChunkName: "StreamObsPage" */ "@/components/pages/stream/obs/Index"),
     meta: {
       cssName: "obs",
       noLayout: true
     }
-  }
+  },
+  ...authRoutes,
+  ...chatRoutes,
+  ...settingsRoutes,
+  ...exploreRoutes,
+  ...staticRoutes,
+  ...postRoutes,
+  ...profileRoutes
 ];
 
 const rtr = new Router({

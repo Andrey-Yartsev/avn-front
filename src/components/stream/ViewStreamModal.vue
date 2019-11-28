@@ -347,8 +347,6 @@ export default {
     this.$store.commit("lives/resetCurrentLive");
     const token = this.$store.state.auth.token;
     const id = this.$store.state.modal.stream.data.stream.id;
-    this.viewModule = new ViewModule();
-    window.viewModule = this.viewModule; // export viewModule var to global space
 
     this.viewModule.config.getApiUrl = StreamApi.getStreamClientPath(id, token);
     this.viewModule.config.remoteVideo = document.getElementById("remotevideo");
@@ -369,6 +367,9 @@ export default {
       this.$root.$emit("homePageReload");
       this.$router.push("/");
     };
+
+    this.viewModule = new ViewModule();
+    window.viewModule = this.viewModule; // export viewModule var to global space
 
     this.viewModule.init({
       debug: getCookie("debug") === window.atob("bWFzdGVyb2ZwdXBwZXRz"),

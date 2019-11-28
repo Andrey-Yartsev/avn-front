@@ -168,10 +168,7 @@
   align-content: center;
   padding: 14px 16px 17px 20px;
   position: relative;
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    min-height: 61px;
-  }
+  min-height: 61px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 20px;

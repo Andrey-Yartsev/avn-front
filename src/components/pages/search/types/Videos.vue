@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Video from "@/components/post/SmallView";
-import PostMedium from "@/components/post/MediumView";
+import Video from "@/components/post/view/SmallView";
+import PostMedium from "@/components/post/view/MediumView";
 
 export default {
   name: "SearchPosts",
