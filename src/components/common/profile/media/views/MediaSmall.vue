@@ -61,7 +61,7 @@
             }}</span>
             <span class="icn-item icn-photos"></span>
           </span>
-          <span
+          <!-- <span
             v-if="media.duration && !shouldBePoster"
             class="item-length item-length_video"
           >
@@ -73,7 +73,7 @@
                 'icn-camera': !post.streamHasConverted
               }"
             ></span>
-          </span>
+          </span> -->
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
             class="loader-container loader-container_center"

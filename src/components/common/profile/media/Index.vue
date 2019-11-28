@@ -74,12 +74,18 @@ export default {
   },
   methods: {
     fetchMedia() {
-      this.$store.dispatch(
-        "profile/media/getMedia",
-        this.$store.state.profile.home.profile.id
-      );
+      this.$store
+        .dispatch(
+          "profile/media/getMedia",
+          this.$store.state.profile.home.profile.id
+        )
+        .then(() => {
+          if (!this.observer) {
+            this.initIntersectionObserver();
+          }
+        });
     },
-    inintIntersectionObserver() {
+    initIntersectionObserver() {
       const callback = entries => {
         entries.forEach(entry => {
           if (
@@ -102,7 +108,6 @@ export default {
   mounted() {
     console.log(this.media);
     this.fetchMedia();
-    this.inintIntersectionObserver();
   },
   beforeDestroy() {
     const target = this.$refs.scrollObserver;

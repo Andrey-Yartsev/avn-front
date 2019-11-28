@@ -38,6 +38,7 @@
             <span class="label">Links</span>
           </router-link>
           <router-link
+            v-if="isOwner(this.profile.id) || profile.linksCount > 0"
             class="btn-user-activity"
             :to="`/${profile.username}/media`"
           >
