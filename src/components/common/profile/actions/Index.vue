@@ -39,7 +39,7 @@
           </router-link>
           <router-link
             v-if="
-              (isOwner(this.profile.id) || profile.linksCount > 0) &&
+              (isOwner(this.profile.id) || profile.mediaCount > 0) &&
                 this.profile.storeEnabled
             "
             class="btn-user-activity"
@@ -47,8 +47,8 @@
           >
             <span class="value">{{
               isOwner(this.profile.id)
-                ? this.$store.state.profile.media.media.length
-                : profile.linksCount
+                ? this.$store.state.auth.user.mediaCount
+                : profile.mediaCount
             }}</span>
             <span class="label">Store</span>
           </router-link>
