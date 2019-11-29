@@ -4,7 +4,7 @@
     :class="{ maxHeight: $mq === 'mobile' }"
     :style="mediaStyle"
   >
-    <div class="loader-container loader-container_center">
+    <!-- <div class="loader-container loader-container_center">
       <Loader
         :fullscreen="false"
         text="Media is currently processing"
@@ -12,12 +12,12 @@
         class="processing-loader text-light"
         :small="true"
       />
-    </div>
+    </div> -->
     <template>
       <figure class="media-item active">
         <component
-          :is="getMediaViewType(medias[0])"
-          :media="medias[0]"
+          :is="getMediaViewType(medias)"
+          :media="medias"
           :postId="postId"
           :post="post"
           :authorId="authorId"
@@ -48,7 +48,7 @@ export default {
   },
   props: {
     medias: {
-      type: Array,
+      type: Object,
       required: true
     },
     shouldHasLink: {
@@ -78,10 +78,10 @@ export default {
   },
   computed: {
     mediaStyle() {
-      return this.medias.length && this.medias[0].background
+      return this.medias && this.medias.background
         ? {
             "background-image": `url(data:image/jpeg;base64,${
-              this.medias[0].background
+              this.medias.background
             })`
           }
         : {};

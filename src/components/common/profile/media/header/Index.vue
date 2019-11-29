@@ -39,7 +39,7 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <span v-if="post.isActive" class="isActive icn-item verified-user" />
+    <span v-if="post.active" class="isActive icn-item verified-user" />
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open" v-if="isAuthor" />

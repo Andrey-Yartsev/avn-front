@@ -35,7 +35,7 @@
           </button>
         </div>
         <Media
-          v-if="medias.length"
+          v-if="medias"
           :medias="medias"
           :shouldHasLink="!delayedPost"
           :post="post"
@@ -100,10 +100,7 @@ export default {
       return this.from;
     },
     medias() {
-      if (!this.post.media.length) {
-        return [];
-      }
-      return this.post.media;
+      return this.$props.post.media || {};
     },
     isVisible() {
       return this.post.isVisible;
@@ -175,6 +172,21 @@ export default {
           }
         });
       }
+    },
+    openModal() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "signup"
+        });
+        return;
+      }
+      if (this.shouldBePoster) {
+        this.$router.push(
+          `/explore/videos#m/media/${this.post.id}/${this.from}`
+        );
+        return;
+      }
+      this.goToModalRoute(`media/${this.post.id}/${this.from}`);
     }
   },
   mounted() {

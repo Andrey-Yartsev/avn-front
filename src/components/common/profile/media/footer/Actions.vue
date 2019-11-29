@@ -13,7 +13,7 @@
       </span>
     </span>
     <span
-      v-if="isAuthor || post.media[0].canView"
+      v-if="isAuthor || post.media.canView"
       class="hidden-disabled actions__btn comments-btn"
     >
       <span

@@ -11,7 +11,7 @@
     <div class="postPage-content">
       <div
         class="postPage-content__inside"
-        :class="{ 'has-media': post.media && post.media.length }"
+        :class="{ 'has-media': post.media }"
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
           <button
@@ -47,7 +47,7 @@
           v-if="$mq === 'mobile' && post.text.length !== 0"
         />
         <Media
-          v-if="post.media && post.media.length"
+          v-if="post.media"
           :medias="post.media"
           :shouldHasLink="false"
           :post="post"
@@ -88,14 +88,14 @@
             :isAuthor="isAuthor"
           />
 
-          <div
+          <!-- <div
             class="subscribe-view-post"
-            v-if="isAuth() && showSubscribeButton"
+            v-if="isAuth()"
           >
             <span role="button" class="btn lg" @click="subscribe"
               >Subscribe to view</span
             >
-          </div>
+          </div> -->
 
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
             <p v-if="post.text" v-html="post.text" />
@@ -121,14 +121,14 @@
                 </button>
               </div>
             </div>
-            <template v-if="showCommentPanel">
-              <Actions
-                :post="post"
-                :from="from"
-                @openBuyModal="mediaClickHandler"
-                :isAuthor="isAuthor"
-              />
-            </template>
+            <!-- <template v-if="showCommentPanel"> -->
+            <Actions
+              :post="post"
+              :from="from"
+              @openBuyModal="mediaClickHandler"
+              :isAuthor="isAuthor"
+            />
+            <!-- </template> -->
           </div>
         </div>
       </div>
@@ -251,7 +251,7 @@ export default {
   },
   methods: {
     mediaClickHandler() {
-      if (this.$props.post.media[0].canView) {
+      if (this.$props.post.media.canView) {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {

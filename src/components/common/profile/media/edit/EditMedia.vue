@@ -81,7 +81,7 @@
                   <input
                     class="is-free-post"
                     type="checkbox"
-                    v-model="media.isActive"
+                    v-model="media.active"
                   />
                   <span class="b-check-state__icon icn-item icn-size_lg"></span>
                   <span class="b-check-state__text">Active</span>
@@ -126,7 +126,7 @@ Settings.defaultLocale = "en";
 const InitialState = {
   expanded: false,
   media: {
-    isActive: false,
+    active: false,
     text: "",
     price: 0
   },
@@ -181,7 +181,7 @@ export default {
     isDataChanged() {
       return (
         this.$props.post.text !== this.media.text ||
-        this.$props.post.isActive !== this.media.isActive ||
+        this.$props.post.active !== this.media.active ||
         String(this.$props.post.price) !== String(this.media.price)
       );
     }
@@ -200,15 +200,15 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { text, price, isActive } = this.$props.post;
+      const { text, price, active } = this.$props.post;
       this.media.text = text;
       this.media.price = price;
-      this.media.isActive = isActive;
+      this.media.active = active;
     },
     clearData() {
       this.text = "";
       this.price = 0;
-      this.isActive = false;
+      this.active = false;
     },
     async saveClickHandler() {
       this.saving = true;

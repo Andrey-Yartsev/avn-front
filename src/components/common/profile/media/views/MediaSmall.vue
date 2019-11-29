@@ -51,8 +51,8 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <span v-if="post.isActive" class="isActive icn-item verified-user" />
-          <span
+          <span v-if="post.active" class="isActive icn-item verified-user" />
+          <!-- <span
             v-if="post.media.length > 1"
             class="item-length item-length_photo"
           >
@@ -60,7 +60,7 @@
               post.media.length
             }}</span>
             <span class="icn-item icn-photos"></span>
-          </span>
+          </span> -->
           <!-- <span
             v-if="media.duration && !shouldBePoster"
             class="item-length item-length_video"
@@ -152,10 +152,7 @@ export default {
       return this.from;
     },
     media() {
-      if (!this.post.media || !this.post.media.length) {
-        return {};
-      }
-      return this.post.media[0];
+      return this.$props.post.media;
     },
     mediaDuration() {
       return this.media.duration ? toHumanDuration(this.media.duration) : "";
@@ -173,6 +170,21 @@ export default {
 
       this.isVisible = isVisible;
       this.height = entry.boundingClientRect.height;
+    },
+    openModal() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "signup"
+        });
+        return;
+      }
+      if (this.shouldBePoster) {
+        this.$router.push(
+          `/explore/videos#m/media/${this.post.id}/${this.from}`
+        );
+        return;
+      }
+      this.goToModalRoute(`media/${this.post.id}/${this.from}`);
     }
   }
 };
