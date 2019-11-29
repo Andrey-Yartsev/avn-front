@@ -62,8 +62,8 @@ export default {
       console.log(this.data);
       this._pay(
         {
-          paymentType: "message",
-          messageId: this.data.messageId,
+          paymentType: "product",
+          productId: this.data.messageId,
           amount: this.data.price,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
