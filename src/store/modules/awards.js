@@ -2,8 +2,49 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const state = {};
-const actions = {};
+const limit = 10;
+
+const state = {
+  offset: 0,
+  allDataReceived: false
+};
+
+const actions = {
+  fetchNominees({ dispatch, state, commit }, params) {
+    params.query = {
+      offset: state.offset,
+      limit
+    };
+    return new Promise(accept => {
+      dispatch("_fetchNominees", params).then(list => {
+        commit("checkResult", { list });
+        accept(list);
+      });
+    });
+  },
+  vote({ dispatch, commit }, data) {
+    return new Promise(accept => {
+      dispatch("_vote", data).then(result => {
+        commit("setNomineeVoted", {
+          id: data.id,
+          isVoted: true
+        });
+        accept(result);
+      });
+    });
+  },
+  unvote({ dispatch, commit }, data) {
+    return new Promise(accept => {
+      dispatch("_unvote", data).then(result => {
+        commit("setNomineeVoted", {
+          id: data.id,
+          isVoted: false
+        });
+        accept(result);
+      });
+    });
+  }
+};
 
 const mutations = {
   reset(state) {
@@ -14,6 +55,22 @@ const mutations = {
   },
   clearSavedData() {
     state.savedData = null;
+  },
+  checkResult(state, { list }) {
+    if (list.length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + limit;
+    }
+    // state.marker = marker;
+  },
+  setNomineeVoted(state, { id, isVoted }) {
+    state.nominees = state.nominees.map(v => {
+      if (v.nomineeId === id) {
+        v.isVoted = isVoted;
+      }
+      return v;
+    });
   }
 };
 
@@ -93,7 +150,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "fetchNominees",
+  prefix: "_fetchNominees",
   apiPath: "ballot/nominees/{eventId}/{categoryId}",
   state,
   mutations,
@@ -101,14 +158,23 @@ createRequestAction({
   options: {
     method: "GET"
   },
+  defaultResultValue: [],
+  resultKey: "nominees",
+  paramsToOptions: function(params, options) {
+    options.query = params.query;
+    return options;
+  },
   paramsToPath: function(params, path) {
     let r = path.replace(/{eventId}/, params.eventId);
     return r.replace(/{categoryId}/, params.categoryId);
+  },
+  resultConvert: function(result, state) {
+    return [...state.nominees, ...result];
   }
 });
 
 createRequestAction({
-  prefix: "vote",
+  prefix: "_vote",
   apiPath: "ballot/vote/{eventId}/{categoryId}",
   state,
   mutations,
@@ -127,7 +193,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "unvote",
+  prefix: "_unvote",
   apiPath: "ballot/vote/{eventId}/{categoryId}/{nomineeId}",
   state,
   mutations,

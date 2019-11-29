@@ -15,12 +15,11 @@
       }}</option>
     </select>
 
-    <Loader v-if="modelsLoading" />
-    <template v-else>
-      <h2>Please choose your top 5</h2>
+    <template>
+      <h2>Please choose your top {{ maxVotes }}</h2>
       <div>
-        Voting end on Dec 1st 2019 12:00PM. You can cast 5 votes per day for
-        this category. You have 2 votes remaining
+        Voting end on Dec 1st 2019 12:00PM. You can cast {{ maxVotes }} votes
+        per day for this category. You have {{ remaining }} votes remaining
       </div>
       <div class="title-block">
         <h1>Privacy Policy</h1>
@@ -48,13 +47,16 @@
         </figure>
       </div>
     </template>
+    <Loader v-if="modelsLoading" />
   </div>
 </template>
 
 <script>
 import Loader from "@/components/common/Loader";
+import InfinityScroll from "@/mixins/infinityScroll";
 
 export default {
+  mixins: [InfinityScroll],
   components: {
     Loader
   },
@@ -81,15 +83,21 @@ export default {
       return this.$store.state.awards.categories.data || [];
     },
     nominees() {
-      return this.$store.state.awards.fetchNomineesResult;
+      return this.$store.state.awards.nominees;
     },
     modelsLoading() {
       if (this.$store.state.awards.fetchCategoriesLoading) {
         return true;
-      } else if (this.$store.state.awards.fetchNomineesLoading) {
+      } else if (this.$store.state.awards._fetchNomineesLoading) {
         return true;
       }
       return false;
+    },
+    store() {
+      return this.$store.state.awards;
+    },
+    remaining() {
+      return this.maxVotes - this.models.filter(v => v.isVoted).length;
     }
   },
   methods: {
@@ -108,12 +116,6 @@ export default {
             categoryId: this.categoryId
           })
           .then(() => {
-            this.models = this.models.map(model => {
-              if (model.nomineeId === id) {
-                model.isVoted = false;
-              }
-              return model;
-            });
             this.extendModels();
           });
       } else {
@@ -124,12 +126,6 @@ export default {
             categoryId: this.categoryId
           })
           .then(() => {
-            this.models = this.models.map(model => {
-              if (model.nomineeId === id) {
-                model.isVoted = true;
-              }
-              return model;
-            });
             this.extendModels();
           });
       }
@@ -195,6 +191,9 @@ export default {
           });
         }
       }
+    },
+    infinityScrollGetDataMethod() {
+      this.fetchNominees();
     }
   },
   watch: {
