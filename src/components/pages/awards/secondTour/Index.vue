@@ -42,7 +42,7 @@
             />
             <a class="button" />
             <img :src="v.nominationAvatar" class="image" />
-            <div>{{ v.nominationName }}</div>
+            <div class="name">{{ v.nominationName }}</div>
           </template>
         </figure>
       </div>
@@ -200,6 +200,7 @@ export default {
     categoryId() {
       this.$store.commit("awards/resetNominees");
       this.fetchNominees();
+      this.resetInfinityScroll();
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));

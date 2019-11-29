@@ -36,7 +36,7 @@
       }
 
 
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       transition: transform .2s;
       cursor: pointer;
       position: relative;
@@ -82,11 +82,17 @@
         background-size: cover;
       }
 
+      .name {
+        text-align: center;
+        margin-top: 5px;
+      }
+
       &.voted {
         .button {
           background-image: url(#{$assetPath}/img/voting/thanks.png);
         }
       }
+
       &.disabled {
         opacity: 0.5;
         cursor: default;
