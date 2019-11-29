@@ -1,10 +1,16 @@
 <template>
   <div
     class="media"
-    :class="{ maxHeight: $mq === 'mobile' }"
+    :class="{
+      maxHeight: $mq === 'mobile',
+      minHeight: medias.type === 'processing'
+    }"
     :style="mediaStyle"
   >
-    <!-- <div class="loader-container loader-container_center">
+    <div
+      class="loader-container loader-container_center"
+      v-if="medias.type === 'processing'"
+    >
       <Loader
         :fullscreen="false"
         text="Media is currently processing"
@@ -12,8 +18,8 @@
         class="processing-loader text-light"
         :small="true"
       />
-    </div> -->
-    <template>
+    </div>
+    <template v-else>
       <figure class="media-item active">
         <component
           :is="getMediaViewType(medias)"
@@ -99,7 +105,8 @@ export default {
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
 
-      throw new Error("Invalid media format");
+      // throw new Error("Invalid media format");
+      return null;
     }
   }
 };
@@ -110,6 +117,9 @@ export default {
   flex-grow: 2;
   &.maxHeight {
     max-height: 350px;
+  }
+  &.minHeight {
+    min-height: 300px;
   }
 }
 </style>
