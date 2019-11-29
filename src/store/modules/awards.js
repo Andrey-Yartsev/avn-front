@@ -176,7 +176,7 @@ createRequestAction({
     method: "GET"
   },
   defaultResultValue: [],
-  requestType: "no-token",
+  requestType: "any",
   paramsToOptions: function(params, options) {
     options.query = params.query;
     return options;
