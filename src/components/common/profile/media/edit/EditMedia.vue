@@ -210,7 +210,7 @@ export default {
       this.price = 0;
       this.active = false;
     },
-    async saveClickHandler() {
+    saveClickHandler() {
       this.saving = true;
       this.$store
         .dispatch(
@@ -218,8 +218,7 @@ export default {
           { media: this.media, productId: this.$props.post.productId },
           { root: true }
         )
-        .then(res => {
-          console.log("success", res);
+        .then(() => {
           this.saving = false;
           this.close();
         });

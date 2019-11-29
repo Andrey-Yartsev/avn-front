@@ -1,11 +1,11 @@
 import { createRequestAction } from "../../utils/storeRequest";
-import mockMediaResponse from "./mockMedia.json";
+// import mockMediaResponse from "./mockMedia.json";
 
 const fetchLimit = 10;
 
 const initState = {
-  media: mockMediaResponse.list,
-  // media: [],
+  // media: mockMediaResponse.list,
+  media: [],
   editedMedia: null,
   marker: null,
   offset: 0,
@@ -69,7 +69,7 @@ const actions = {
     });
   },
   addMedia({ dispatch, commit }, data) {
-    dispatch("_addMedia", data).then(res => {
+    return dispatch("_addMedia", data).then(res => {
       commit("addMedia", res);
     });
   },
@@ -110,7 +110,7 @@ createRequestAction({
   requestType: "any",
   prefix: "_getMediaItem",
   apiPath: "media/{productId}",
-  resultKey: "media",
+  // resultKey: "media",
   state,
   mutations,
   actions,
@@ -125,7 +125,7 @@ createRequestAction({
 createRequestAction({
   prefix: "_addMedia",
   apiPath: "media",
-  resultKey: "media",
+  // resultKey: "media",
   state,
   mutations,
   actions,
@@ -147,7 +147,7 @@ createRequestAction({
 createRequestAction({
   prefix: "_updateMedia",
   apiPath: "media/{productId}",
-  resultKey: "media",
+  // resultKey: "media",
   state,
   mutations,
   actions,
@@ -191,7 +191,7 @@ createRequestAction({
 createRequestAction({
   prefix: "_deleteMedia",
   apiPath: "media/{mediaId}",
-  resultKey: "media",
+  // resultKey: "media",
   state,
   mutations,
   actions,

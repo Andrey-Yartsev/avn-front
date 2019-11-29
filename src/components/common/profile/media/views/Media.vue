@@ -105,7 +105,6 @@ export default {
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
 
-      // throw new Error("Invalid media format");
       return null;
     }
   }

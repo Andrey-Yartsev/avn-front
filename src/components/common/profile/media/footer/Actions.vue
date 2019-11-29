@@ -9,7 +9,7 @@
         v-tooltip="post.views > 1 ? 'Views' : 'View'"
       />
       <span class="likes__counter">
-        {{ post.views ? post.views : "" }}
+        {{ post.views || 0 }}
       </span>
     </span>
     <span
@@ -20,7 +20,7 @@
         class="btn-icon icn-tips icn-item icn-size_lg"
         v-tooltip="'Price'"
       ></span>
-      {{ post.price ? post.price.toFixed(2) : "" }}
+      {{ post.price ? post.price.toFixed(2) : 0.0 }}
     </span>
     <button
       v-else

@@ -5,6 +5,17 @@
     :class="{ withMargin: $mq === 'mobile', withHoverEffect: !files.length }"
   >
     <div
+      class="loader-container loader-container_center clickPrevent"
+      v-if="loading"
+    >
+      <Loader
+        :fullscreen="false"
+        :small="true"
+        :semidark="true"
+        class="text-light"
+      />
+    </div>
+    <div
       class="dropArea"
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
@@ -107,6 +118,7 @@
 <script>
 import Vue from "vue";
 import FileUpload from "vue-upload-component";
+import Loader from "@/components/common/Loader";
 import FileUploadMixin from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 
@@ -126,7 +138,8 @@ Vue.filter("formatSize", function(size) {
 export default {
   components: {
     FileUpload,
-    MediaPreview
+    MediaPreview,
+    Loader
   },
   mixins: [FileUploadMixin],
   props: {
@@ -157,7 +170,8 @@ export default {
         type: "",
         content: ""
       },
-      disableButtons: false
+      disableButtons: false,
+      loading: false
     };
   },
   watch: {
@@ -235,19 +249,21 @@ export default {
       };
     },
     sendHandler() {
+      this.loading = true;
       const mediaFiles = this.preloadedMedias;
       const data = {};
       if (mediaFiles.length) {
         data.mediaFiles = mediaFiles.map(item => ({ id: item.processId }));
       }
-      console.log(data);
       this.disableButtons = true;
-      setTimeout(() => {
-        this.preloadedMedias = [];
-        this.$refs.upload.clear();
-        this.disableButtons = false;
-      }, 1000);
-      this.$store.dispatch("profile/media/addMedia", data, { root: true });
+      this.$store
+        .dispatch("profile/media/addMedia", data, { root: true })
+        .then(() => {
+          this.preloadedMedias = [];
+          this.$refs.upload.clear();
+          this.disableButtons = false;
+          this.loading = false;
+        });
     },
     isFormatCorrect(fileName) {
       if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov)$/i.test(fileName)) {
@@ -272,6 +288,7 @@ export default {
 
 <style lang="scss" scoped>
 .fileUploader {
+  position: relative;
   margin: 10px 0;
   border-radius: 5px;
   box-shadow: 0 1px 4px 2px #80808054;
@@ -374,5 +391,8 @@ export default {
   &:hover {
     background-color: #b51617;
   }
+}
+.clickPrevent {
+  pointer-events: none;
 }
 </style>

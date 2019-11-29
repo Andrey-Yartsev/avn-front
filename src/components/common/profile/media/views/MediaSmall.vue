@@ -25,7 +25,7 @@
         {
           'photo-post': post.mediaType === 'image',
           'video-post': post.mediaType === 'video',
-          'locked-wrapper': media.locked || post.mediaType === 'processing'
+          'locked-wrapper': post.locked || post.mediaType === 'processing'
         }
       ]"
       :href="`/post/${post.productId}`"
@@ -52,28 +52,6 @@
             @dragstart.prevent="() => false"
           />
           <span v-if="post.active" class="isActive icn-item verified-user" />
-          <!-- <span
-            v-if="post.media.length > 1"
-            class="item-length item-length_photo"
-          >
-            <span class="value" v-if="$mq === 'desktop'">{{
-              post.media.length
-            }}</span>
-            <span class="icn-item icn-photos"></span>
-          </span> -->
-          <!-- <span
-            v-if="media.duration && !shouldBePoster"
-            class="item-length item-length_video"
-          >
-            <span class="value">{{ mediaDuration }}</span>
-            <span
-              class="icn-item"
-              :class="{
-                'icn-live': post.streamHasConverted,
-                'icn-camera': !post.streamHasConverted
-              }"
-            ></span>
-          </span> -->
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
             class="loader-container loader-container_center"
@@ -103,7 +81,7 @@
         v-if="post.mediaType !== 'processing'"
       >
         <span class="btn-icon looking icn-item icn-size_lg" />
-        <span class="likes__counter">{{ post.views }}</span>
+        <span class="likes__counter">{{ post.views || 0 }}</span>
       </span>
       <span
         class="explore-media__counter explore-media__counter_comments"
