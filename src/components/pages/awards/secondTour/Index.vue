@@ -33,15 +33,18 @@
           :class="{ voted: v.isVoted, disabled: v.disabled }"
           @click="vote(v.nomineeId)"
         >
-          <Loader
-            v-if="voting(v.nomineeId)"
-            :fullscreen="false"
-            :inline="true"
-            :small="true"
-          />
-          <a class="button" />
-          <img :src="v.nominationAvatar" class="image" />
-          <div>{{ v.nominationName }}</div>
+          <div v-if="v.dummy" class="dummy"></div>
+          <template v-else>
+            <Loader
+              v-if="voting(v.nomineeId)"
+              :fullscreen="false"
+              :inline="true"
+              :small="true"
+            />
+            <a class="button" />
+            <img :src="v.nominationAvatar" class="image" />
+            <div>{{ v.nominationName }}</div>
+          </template>
         </figure>
       </div>
     </template>
@@ -57,7 +60,6 @@ export default {
   },
   data() {
     return {
-      eventId: 91,
       categoryId: 0,
       votes: [],
       maxVotes: 2,
@@ -66,6 +68,12 @@ export default {
     };
   },
   computed: {
+    isGay() {
+      return this.$route.meta.isGay;
+    },
+    eventId() {
+      return this.isGay ? 92 : 91;
+    },
     categories() {
       if (!this.$store.state.awards.categories) {
         return null;
@@ -106,7 +114,7 @@ export default {
               }
               return model;
             });
-            this.setDisabled();
+            this.extendModels();
           });
       } else {
         this.$store
@@ -122,7 +130,7 @@ export default {
               }
               return model;
             });
-            this.setDisabled();
+            this.extendModels();
           });
       }
     },
@@ -139,7 +147,7 @@ export default {
           categoryId: this.categoryId
         })
         .then(() => {
-          this.setDisabled();
+          this.extendModels();
         });
     },
     voting(id) {
@@ -152,6 +160,10 @@ export default {
         return true;
       }
       return false;
+    },
+    extendModels() {
+      this.setDisabled();
+      this.addDummies();
     },
     setDisabled() {
       let votedCount = 0;
@@ -172,6 +184,16 @@ export default {
           model.disabled = false;
           return model;
         });
+      }
+    },
+    addDummies() {
+      const dummiesCount = 4 - (this.models.length % 4);
+      if (dummiesCount) {
+        for (let i = 0; i < dummiesCount; i++) {
+          this.models.push({
+            dummy: true
+          });
+        }
       }
     }
   },

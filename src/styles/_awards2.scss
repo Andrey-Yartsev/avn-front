@@ -49,6 +49,11 @@
         object-fit: cover;
       }
 
+      .dummy {
+        width: 100%;
+        height: 350px;
+      }
+
       &:hover:not(.disabled) {
         transform: scale(1.01);
       }
