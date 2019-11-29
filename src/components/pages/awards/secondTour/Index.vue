@@ -153,9 +153,9 @@ export default {
       if (id !== this.lastVoteId) {
         return false;
       }
-      if (this.$store.state.awards.voteLoading) {
+      if (this.$store.state.awards._voteLoading) {
         return true;
-      } else if (this.$store.state.awards.unvoteLoading) {
+      } else if (this.$store.state.awards._unvoteLoading) {
         return true;
       }
       return false;
