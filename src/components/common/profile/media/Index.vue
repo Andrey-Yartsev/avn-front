@@ -78,6 +78,16 @@ export default {
       return this.$store.state.auth.user.storeEnabled;
     }
   },
+  watch: {
+    allDataRecieved(newValue) {
+      if (newValue) {
+        const target = this.$refs.scrollObserver;
+        if (target && this.observer) {
+          this.observer.unobserve(target);
+        }
+      }
+    }
+  },
   methods: {
     fetchMedia() {
       this.$store
@@ -94,10 +104,11 @@ export default {
     initIntersectionObserver() {
       const callback = entries => {
         entries.forEach(entry => {
+          // console.log(this.$store.state.profile.media)
           if (
             entry.isIntersecting &&
             !this.allDataRecieved &&
-            this.media.length > 10
+            this.media.length >= 9
           ) {
             console.log("load more");
             this.fetchMedia();

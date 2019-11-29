@@ -219,6 +219,9 @@ export default {
       file.type = `video/${format}`;
     },
     inputFilter(newFile, oldFile, prevent) {
+      if (newFile && !oldFile && this.loading) {
+        prevent();
+      }
       if (
         newFile &&
         !oldFile &&
@@ -278,7 +281,7 @@ export default {
     },
     fileUploaderClickHandler() {
       const input = this.$refs.upload.$el.querySelector("input");
-      if (input) {
+      if (input && !this.loading) {
         input.click();
       }
     }

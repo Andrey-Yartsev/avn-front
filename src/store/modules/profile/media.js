@@ -1,7 +1,7 @@
 import { createRequestAction } from "../../utils/storeRequest";
 // import mockMediaResponse from "./mockMedia.json";
 
-const fetchLimit = 10;
+const fetchLimit = 9;
 
 const initState = {
   // media: mockMediaResponse.list,
@@ -9,7 +9,7 @@ const initState = {
   editedMedia: null,
   marker: null,
   offset: 0,
-  limit: 10,
+  limit: fetchLimit,
   allDataReceived: false
 };
 
@@ -39,7 +39,7 @@ const mutations = {
   },
   isAllDataRecieved(state, length) {
     if (length < state.limit) {
-      state.isAllDataRecieved = true;
+      state.allDataReceived = true;
     } else {
       state.offset = state.offset + state.limit;
     }
@@ -52,6 +52,7 @@ const actions = {
       profileId,
       offset: state.offset
     }).then(res => {
+      commit("addMedia", res);
       commit("isAllDataRecieved", res.length);
     });
   },
@@ -89,7 +90,7 @@ createRequestAction({
   requestType: "any",
   prefix: "_getMedia",
   apiPath: "media/{userId}",
-  resultKey: "media",
+  // resultKey: "media",
   state,
   mutations,
   actions,
