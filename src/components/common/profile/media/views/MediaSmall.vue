@@ -52,6 +52,10 @@
             @dragstart.prevent="() => false"
           />
           <span v-if="post.active" class="isActive icn-item verified-user" />
+          <span class="item-length item-length_video">
+            <span class="value">{{ post.price.toFixed(2) }}</span>
+            <span class="icn-item  icn-tips"></span>
+          </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
             class="loader-container loader-container_center"
@@ -76,15 +80,15 @@
       <span class="name">{{ post.author.name }}</span>
     </a>
     <template v-if="$mq === 'desktop' && !shouldBePoster">
-      <span
+      <!-- <span
         class="explore-media__counter explore-media__counter_likes"
         v-if="post.mediaType !== 'processing'"
       >
         <span class="btn-icon looking icn-item icn-size_lg" />
         <span class="likes__counter">{{ post.views || 0 }}</span>
-      </span>
+      </span> -->
       <span
-        class="explore-media__counter explore-media__counter_comments"
+        class="explore-media__counter explore-media__counter posCenter"
         v-if="post.mediaType !== 'processing'"
         ><span class="btn-icon icn-tips icn-item icn-size_lg"></span
         >{{ post.price.toFixed(2) }}</span
@@ -173,5 +177,8 @@ export default {
   position: absolute;
   left: 10px;
   top: 15px;
+}
+.posCenter {
+  /* transform: translateX(-50%); */
 }
 </style>

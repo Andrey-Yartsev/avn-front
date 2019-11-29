@@ -1,6 +1,6 @@
 <template>
   <div class="actions">
-    <span
+    <!-- <span
       class="hidden-disabled"
       :class="[{ active: post.isFavorite }, 'actions__btn']"
     >
@@ -11,7 +11,7 @@
       <span class="likes__counter">
         {{ post.views || 0 }}
       </span>
-    </span>
+    </span> -->
     <span
       v-if="isAuthor || post.media.canView"
       class="hidden-disabled actions__btn comments-btn"

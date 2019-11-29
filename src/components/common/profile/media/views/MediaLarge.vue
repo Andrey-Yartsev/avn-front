@@ -282,16 +282,16 @@ export default {
       this.$router.push("/");
     },
     playHandler() {
-      if (this.isAuthor || this.viewCounted) {
-        return;
-      }
-      console.log("update view counter");
-      this.$store.dispatch(
-        "profile/media/incrementViewCounter",
-        this.$props.post.productId,
-        { root: true }
-      );
-      this.viewCounted = true;
+      // if (this.isAuthor || this.viewCounted) {
+      //   return;
+      // }
+      // console.log("update view counter");
+      // this.$store.dispatch(
+      //   "profile/media/incrementViewCounter",
+      //   this.$props.post.productId,
+      //   { root: true }
+      // );
+      // this.viewCounted = true;
     }
   }
 };
