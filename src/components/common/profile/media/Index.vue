@@ -4,7 +4,10 @@
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <FileUploader :defaultLimits="limits" v-if="this.$props.private" />
+      <FileUploader
+        :defaultLimits="limits"
+        v-if="this.$props.private && storeEnabled"
+      />
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -70,6 +73,9 @@ export default {
     },
     allDataRecieved() {
       return this.$store.state.profile.media.allDataReceived;
+    },
+    storeEnabled() {
+      return this.$store.state.auth.user.storeEnabled;
     }
   },
   methods: {
