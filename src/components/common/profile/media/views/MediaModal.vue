@@ -54,7 +54,7 @@ export default {
     },
     post() {
       return this.$store.state.profile.media.media.find(
-        item => item.id === this.postId
+        item => item.productId === this.postId
       );
     },
     path() {

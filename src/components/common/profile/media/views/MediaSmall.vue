@@ -9,8 +9,8 @@
         'explore-media_processing': post.mediaType === 'processing'
       }
     ]"
-    :data-id="post.id"
-    :id="'p' + post.id"
+    :data-id="post.productId"
+    :id="'p' + post.productId"
     v-observe-visibility="visibilityChanged"
   >
     <div
@@ -28,7 +28,7 @@
           'locked-wrapper': media.locked || post.mediaType === 'processing'
         }
       ]"
-      :href="`/post/${post.id}`"
+      :href="`/post/${post.productId}`"
       @click.prevent="openModal"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
@@ -180,11 +180,11 @@ export default {
       }
       if (this.shouldBePoster) {
         this.$router.push(
-          `/explore/videos#m/media/${this.post.id}/${this.from}`
+          `/explore/videos#m/media/${this.post.productId}/${this.from}`
         );
         return;
       }
-      this.goToModalRoute(`media/${this.post.id}/${this.from}`);
+      this.goToModalRoute(`media/${this.post.productId}/${this.from}`);
     }
   }
 };

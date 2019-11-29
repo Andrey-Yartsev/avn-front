@@ -46,7 +46,9 @@ export default {
     yes() {
       const onSuccess = () => {
         this.$store
-          .dispatch("profile/media/getMediaItem", { id: this.data.messageId })
+          .dispatch("profile/media/getMediaItem", {
+            productId: this.data.productId
+          })
           .then(res => {
             console.log(res);
             this.close();
@@ -57,6 +59,7 @@ export default {
           });
       };
       // const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
+      console.log(this.data);
       this._pay(
         {
           paymentType: "message",

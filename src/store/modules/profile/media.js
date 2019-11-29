@@ -5,6 +5,7 @@ const fetchLimit = 10;
 
 const initState = {
   media: mockMediaResponse.list,
+  // media: [],
   editedMedia: null,
   marker: null,
   offset: 0,
@@ -26,14 +27,14 @@ const mutations = {
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item =>
-      item.id === updatedMedia.id ? updatedMedia : item
+      item.productId === updatedMedia.productId ? updatedMedia : item
     );
   },
-  deleteMedia(state, id) {
-    state.media = state.media.filter(item => item.id !== id);
+  deleteMedia(state, productId) {
+    state.media = state.media.filter(item => item.productId !== productId);
   },
-  incrementViewCounter(state, id) {
-    const viewedMedia = state.media.find(item => item.id === id);
+  incrementViewCounter(state, productId) {
+    const viewedMedia = state.media.find(item => item.productId === productId);
     viewedMedia.views++;
   },
   isAllDataRecieved(state, length) {
@@ -54,9 +55,9 @@ const actions = {
       commit("isAllDataRecieved", res.length);
     });
   },
-  getMediaItem({ dispatch, commit }, mediaId) {
+  getMediaItem({ dispatch, commit }, productId) {
     dispatch("_getMediaItem", {
-      mediaId
+      productId
     }).then(res => {
       commit("updateMedia", res);
     });
@@ -77,9 +78,10 @@ const actions = {
       commit("updateMedia", res);
     });
   },
-  async incrementViewCounter({ dispatch, commit }, mediaId) {
-    await dispatch("_incrementViewCounter", mediaId);
-    commit("incrementViewCounter", mediaId);
+  incrementViewCounter({ dispatch, commit }, productId) {
+    dispatch("_incrementViewCounter", productId).then(() => {
+      commit("incrementViewCounter", productId);
+    });
   }
 };
 
@@ -107,7 +109,7 @@ createRequestAction({
 createRequestAction({
   requestType: "any",
   prefix: "_getMediaItem",
-  apiPath: "media/{mediaId}",
+  apiPath: "media/{productId}",
   resultKey: "media",
   state,
   mutations,
@@ -116,7 +118,7 @@ createRequestAction({
     method: "GET"
   },
   paramsToPath: function(params, path) {
-    return path.replace(/{mediaId}/, params.mediaId);
+    return path.replace(/{productId}/, params.productId);
   }
 });
 
@@ -144,7 +146,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_updateMedia",
-  apiPath: "media/{mediaId}",
+  apiPath: "media/{productId}",
   resultKey: "media",
   state,
   mutations,
@@ -153,7 +155,7 @@ createRequestAction({
     method: "PUT"
   },
   paramsToPath: function(data, path) {
-    return path.replace(/{mediaId}/, data.id);
+    return path.replace(/{productId}/, data.productId);
   },
   paramsToOptions: function(params, options) {
     options.data = params.media;

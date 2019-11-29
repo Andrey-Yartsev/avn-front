@@ -203,7 +203,7 @@ export default {
   },
   computed: {
     postId() {
-      return this.post.id;
+      return this.post.productId;
     },
     actionPrefix() {
       return this.from;
@@ -269,7 +269,7 @@ export default {
           data: {
             price: this.$props.post.price,
             paymentType: "message",
-            messageId: this.$props.post.id
+            messageId: this.$props.post.productId
           }
         });
       }
@@ -288,7 +288,7 @@ export default {
       console.log("update view counter");
       this.$store.dispatch(
         "profile/media/incrementViewCounter",
-        this.$props.post.id,
+        this.$props.post.productId,
         { root: true }
       );
       this.viewCounted = true;

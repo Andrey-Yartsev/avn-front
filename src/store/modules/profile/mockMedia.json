@@ -1,7 +1,7 @@
 {
   "list": [
       {
-          "id": 246761,
+          "productId": 246761,
           "text": "video #1",
           "price": 3.55,
           "views": 2,
@@ -86,7 +86,7 @@
             }
       },
       {
-          "id": 246766,
+          "productId": 246766,
           "text": "video #2",
           "price": 5.55,
           "views": 5,
@@ -171,7 +171,7 @@
             }
       },
       {
-          "id": 246726,
+          "productId": 246726,
           "author": {
               "id": 468788,
               "name": "имя",

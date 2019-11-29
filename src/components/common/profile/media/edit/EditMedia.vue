@@ -215,7 +215,7 @@ export default {
       this.$store
         .dispatch(
           "profile/media/updateMedia",
-          { media: this.media, id: this.$props.post.id },
+          { media: this.media, productId: this.$props.post.productId },
           { root: true }
         )
         .then(res => {

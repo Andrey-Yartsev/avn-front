@@ -41,7 +41,7 @@ export default {
     post() {
       const editedMediaId = this.$store.state.profile.media.editedMedia;
       return this.$store.state.profile.media.media.find(
-        item => item.id === editedMediaId
+        item => item.productId === editedMediaId
       );
     }
   },

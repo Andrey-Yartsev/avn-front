@@ -168,7 +168,7 @@ export default {
           data: {
             price: this.$props.post.price,
             paymentType: "message",
-            messageId: this.$props.post.id
+            messageId: this.$props.post.productId
           }
         });
       }
@@ -182,11 +182,11 @@ export default {
       }
       if (this.shouldBePoster) {
         this.$router.push(
-          `/explore/videos#m/media/${this.post.id}/${this.from}`
+          `/explore/videos#m/media/${this.post.productId}/${this.from}`
         );
         return;
       }
-      this.goToModalRoute(`media/${this.post.id}/${this.from}`);
+      this.goToModalRoute(`media/${this.post.productId}/${this.from}`);
     }
   },
   mounted() {

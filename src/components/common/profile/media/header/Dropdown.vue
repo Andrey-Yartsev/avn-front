@@ -62,7 +62,7 @@ export default {
       return this.from === "postPage";
     },
     postId() {
-      return this.post.id;
+      return this.post.productId;
     },
     userId() {
       return this.post.author.id;
@@ -83,7 +83,7 @@ export default {
     editPost() {
       this.hide();
 
-      this.$store.commit("profile/media/startEditMedia", this.$props.post.id, {
+      this.$store.commit("profile/media/startEditMedia", this.postId, {
         root: true
       });
 
