@@ -61,9 +61,10 @@
 import Loader from "@/components/common/Loader";
 import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
+import User from "@/mixins/user";
 
 export default {
-  mixins: [InfinityScroll],
+  mixins: [InfinityScroll, User],
   components: {
     Loader,
     GayLogo
@@ -113,6 +114,13 @@ export default {
   },
   methods: {
     vote(id) {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login"
+        });
+        return;
+      }
+
       this.lastVoteId = id;
       const model = this.models.find(v => v.nomineeId === id);
       if (model.disabled) {
