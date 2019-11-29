@@ -1,7 +1,13 @@
 <template>
   <div class="container awards">
-    <div class="awards-header">
-      <img :src="'/static/img/avnawards.png'" alt="" class="logo-awards" />
+    <div class="awards-header" :class="{ gay: isGay }">
+      <img
+        :src="'/static/img/avnawards.png'"
+        alt=""
+        class="logo-awards"
+        v-if="!isGay"
+      />
+      <GayLogo v-else />
     </div>
 
     <select
@@ -15,12 +21,11 @@
       }}</option>
     </select>
 
-    <Loader v-if="modelsLoading" />
-    <template v-else>
-      <h2>Please choose your top 5</h2>
+    <template>
+      <h2>Please choose your top {{ maxVotes }}</h2>
       <div>
-        Voting end on Dec 1st 2019 12:00PM. You can cast 5 votes per day for
-        this category. You have 2 votes remaining
+        Voting end on Dec 1st 2019 12:00PM. You can cast {{ maxVotes }} votes
+        per day for this category. You have {{ remaining }} votes remaining
       </div>
       <div class="title-block">
         <h1>Privacy Policy</h1>
@@ -33,39 +38,52 @@
           :class="{ voted: v.isVoted, disabled: v.disabled }"
           @click="vote(v.nomineeId)"
         >
-          <Loader
-            v-if="voting(v.nomineeId)"
-            :fullscreen="false"
-            :inline="true"
-            :small="true"
-          />
-          <a class="button" />
-          <img :src="v.nominationAvatar" class="image" />
-          <div>{{ v.nominationName }}</div>
+          <div v-if="v.dummy" class="dummy"></div>
+          <template v-else>
+            <Loader
+              v-if="voting(v.nomineeId)"
+              :fullscreen="false"
+              :inline="true"
+              :small="true"
+            />
+            <a class="button" />
+            <img :src="v.nominationAvatar" class="image" />
+            <div class="name">{{ v.nominationName }}</div>
+          </template>
         </figure>
       </div>
     </template>
+    <Loader v-if="modelsLoading" />
   </div>
 </template>
 
 <script>
 import Loader from "@/components/common/Loader";
+import InfinityScroll from "@/mixins/infinityScroll";
+import GayLogo from "../GayLogo";
 
 export default {
+  mixins: [InfinityScroll],
   components: {
-    Loader
+    Loader,
+    GayLogo
   },
   data() {
     return {
-      eventId: 91,
       categoryId: 0,
       votes: [],
-      maxVotes: 2,
+      maxVotes: 5,
       lastVoteId: 0,
       models: []
     };
   },
   computed: {
+    isGay() {
+      return this.$route.meta.isGay;
+    },
+    eventId() {
+      return this.isGay ? 92 : 91;
+    },
     categories() {
       if (!this.$store.state.awards.categories) {
         return null;
@@ -73,15 +91,24 @@ export default {
       return this.$store.state.awards.categories.data || [];
     },
     nominees() {
-      return this.$store.state.awards.fetchNomineesResult;
+      return this.$store.state.awards.nominees;
     },
     modelsLoading() {
       if (this.$store.state.awards.fetchCategoriesLoading) {
         return true;
-      } else if (this.$store.state.awards.fetchNomineesLoading) {
+      } else if (this.$store.state.awards._fetchNomineesLoading) {
         return true;
       }
       return false;
+    },
+    store() {
+      return this.$store.state.awards;
+    },
+    remaining() {
+      return this.maxVotes - this.votesCount;
+    },
+    votesCount() {
+      return this.$store.state.awards.votesCount;
     }
   },
   methods: {
@@ -100,13 +127,7 @@ export default {
             categoryId: this.categoryId
           })
           .then(() => {
-            this.models = this.models.map(model => {
-              if (model.nomineeId === id) {
-                model.isVoted = false;
-              }
-              return model;
-            });
-            this.setDisabled();
+            this.extendModels();
           });
       } else {
         this.$store
@@ -116,13 +137,7 @@ export default {
             categoryId: this.categoryId
           })
           .then(() => {
-            this.models = this.models.map(model => {
-              if (model.nomineeId === id) {
-                model.isVoted = true;
-              }
-              return model;
-            });
-            this.setDisabled();
+            this.extendModels();
           });
       }
     },
@@ -139,28 +154,26 @@ export default {
           categoryId: this.categoryId
         })
         .then(() => {
-          this.setDisabled();
+          this.extendModels();
         });
     },
     voting(id) {
       if (id !== this.lastVoteId) {
         return false;
       }
-      if (this.$store.state.awards.voteLoading) {
+      if (this.$store.state.awards._voteLoading) {
         return true;
-      } else if (this.$store.state.awards.unvoteLoading) {
+      } else if (this.$store.state.awards._unvoteLoading) {
         return true;
       }
       return false;
     },
+    extendModels() {
+      this.setDisabled();
+      this.addDummies();
+    },
     setDisabled() {
-      let votedCount = 0;
-      this.models.map(model => {
-        if (model.isVoted) {
-          votedCount++;
-        }
-      });
-      if (votedCount >= this.maxVotes) {
+      if (this.votesCount >= this.maxVotes) {
         this.models = this.models.map(model => {
           if (!model.isVoted) {
             model.disabled = true;
@@ -173,6 +186,19 @@ export default {
           return model;
         });
       }
+    },
+    addDummies() {
+      const dummiesCount = 4 - (this.models.length % 4);
+      if (dummiesCount) {
+        for (let i = 0; i < dummiesCount; i++) {
+          this.models.push({
+            dummy: true
+          });
+        }
+      }
+    },
+    infinityScrollGetDataMethod() {
+      this.fetchNominees();
     }
   },
   watch: {
@@ -180,7 +206,9 @@ export default {
       this.categoryId = categories[0].id;
     },
     categoryId() {
+      this.$store.commit("awards/resetNominees");
       this.fetchNominees();
+      this.resetInfinityScroll();
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));

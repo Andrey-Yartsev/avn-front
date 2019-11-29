@@ -8,7 +8,8 @@ import {
   postRoutes,
   settingsRoutes,
   exploreRoutes,
-  staticRoutes
+  staticRoutes,
+  awardsRoutes
 } from "./modules";
 
 Vue.use(Router);
@@ -113,59 +114,6 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuthAdmin,
-    path: "/avn_awards/nominations",
-    name: "AvnAwards",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      notShowGenderFilter: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuthAdmin,
-    path: "/gayvn_awards/nominations",
-    name: "AvnAwardsGay",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      isGay: true,
-      notShowGenderFilter: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuthAdmin,
-    path: "/nominator/:username/:type/:categories?",
-    name: "Nominator",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      predefined: true,
-      notShowGenderFilter: true
-    }
-  },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/avn_awards/nominations2",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      notShowGenderFilter: true
-    }
-  },
-  {
     beforeEnter: Auth.requireAny,
     path: "/stream/obs",
     name: "StreamObsPage",
@@ -182,6 +130,7 @@ const routes = [
   ...exploreRoutes,
   ...staticRoutes,
   ...postRoutes,
+  ...awardsRoutes,
   ...profileRoutes
 ];
 

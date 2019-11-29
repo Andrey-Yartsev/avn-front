@@ -2,8 +2,53 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const state = {};
-const actions = {};
+const limit = 10;
+
+const state = {
+  offset: 0,
+  allDataReceived: false,
+  votesCount: 0,
+  nominees: []
+};
+
+const actions = {
+  fetchNominees({ dispatch, state, commit }, params) {
+    params.query = {
+      offset: state.offset,
+      limit
+    };
+    return new Promise(accept => {
+      dispatch("_fetchNominees", params).then(result => {
+        commit("prepareNomineesResult", result);
+        accept(result);
+      });
+    });
+  },
+  vote({ dispatch, commit }, data) {
+    return new Promise(accept => {
+      dispatch("_vote", data).then(result => {
+        commit("setNomineeVoted", {
+          id: data.id,
+          isVoted: true
+        });
+        commit("incrementVotesCount");
+        accept(result);
+      });
+    });
+  },
+  unvote({ dispatch, commit }, data) {
+    return new Promise(accept => {
+      dispatch("_unvote", data).then(result => {
+        commit("setNomineeVoted", {
+          id: data.id,
+          isVoted: false
+        });
+        commit("decrementVotesCount");
+        accept(result);
+      });
+    });
+  }
+};
 
 const mutations = {
   reset(state) {
@@ -14,6 +59,35 @@ const mutations = {
   },
   clearSavedData() {
     state.savedData = null;
+  },
+  prepareNomineesResult(state, result) {
+    if (result.list.length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + limit;
+    }
+    state.nominees = [...state.nominees, ...result.list];
+    state.votesCount = result.votesCount;
+  },
+  setNomineeVoted(state, { id, isVoted }) {
+    state.nominees = state.nominees.map(v => {
+      if (v.nomineeId === id) {
+        v.isVoted = isVoted;
+      }
+      return v;
+    });
+  },
+  incrementVotesCount(state) {
+    state.votesCount++;
+  },
+  decrementVotesCount(state) {
+    state.votesCount--;
+  },
+  resetNominees(state) {
+    state.offset = 0;
+    state.allDataReceived = false;
+    state.votesCount = 0;
+    state.nominees = [];
   }
 };
 
@@ -93,13 +167,18 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "fetchNominees",
+  prefix: "_fetchNominees",
   apiPath: "ballot/nominees/{eventId}/{categoryId}",
   state,
   mutations,
   actions,
   options: {
     method: "GET"
+  },
+  defaultResultValue: [],
+  paramsToOptions: function(params, options) {
+    options.query = params.query;
+    return options;
   },
   paramsToPath: function(params, path) {
     let r = path.replace(/{eventId}/, params.eventId);
@@ -108,7 +187,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "vote",
+  prefix: "_vote",
   apiPath: "ballot/vote/{eventId}/{categoryId}",
   state,
   mutations,
@@ -127,7 +206,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "unvote",
+  prefix: "_unvote",
   apiPath: "ballot/vote/{eventId}/{categoryId}/{nomineeId}",
   state,
   mutations,
