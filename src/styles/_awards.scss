@@ -23,7 +23,7 @@
       margin-bottom: 20px;
 
       &-awards {
-        width: 70%;
+        width: 40%;
         display: inline-block;
 
         .cls-1 {
@@ -33,6 +33,17 @@
         .cls-2 {
           fill: #fff;
         }
+      }
+    }
+  }
+  &-header.gay {
+    padding: 20px 20px 10px 20px;
+
+    .logo-awards {
+      max-width: 30%;
+
+      @include media-breakpoint-down($mobile-breakpoint) {
+        max-width:  50%;
       }
     }
   }

@@ -1,7 +1,13 @@
 <template>
   <div class="container awards">
-    <div class="awards-header">
-      <img :src="'/static/img/avnawards.png'" alt="" class="logo-awards" />
+    <div class="awards-header" :class="{ gay: isGay }">
+      <img
+        :src="'/static/img/avnawards.png'"
+        alt=""
+        class="logo-awards"
+        v-if="!isGay"
+      />
+      <GayLogo v-else />
     </div>
 
     <select
@@ -54,11 +60,13 @@
 <script>
 import Loader from "@/components/common/Loader";
 import InfinityScroll from "@/mixins/infinityScroll";
+import GayLogo from "../GayLogo";
 
 export default {
   mixins: [InfinityScroll],
   components: {
-    Loader
+    Loader,
+    GayLogo
   },
   data() {
     return {
