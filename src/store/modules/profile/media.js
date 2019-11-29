@@ -61,10 +61,11 @@ const actions = {
       commit("updateMedia", res);
     });
   },
-  async deleteMedia({ dispatch, commit }, mediaId) {
-    await dispatch("_deleteMedia", mediaId);
-    commit("deleteMedia", mediaId);
-    commit("endEditMedia");
+  deleteMedia({ dispatch, commit }, mediaId) {
+    dispatch("_deleteMedia", mediaId).then(() => {
+      commit("deleteMedia", mediaId);
+      commit("endEditMedia");
+    });
   },
   addMedia({ dispatch, commit }, data) {
     dispatch("_addMedia", data).then(res => {

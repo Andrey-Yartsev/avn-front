@@ -113,7 +113,7 @@ export default {
   },
   mounted() {
     console.log(this.media);
-    // this.fetchMedia();
+    this.fetchMedia();
   },
   beforeDestroy() {
     const target = this.$refs.scrollObserver;

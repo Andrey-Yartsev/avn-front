@@ -238,7 +238,7 @@ export default {
       const mediaFiles = this.preloadedMedias;
       const data = {};
       if (mediaFiles.length) {
-        data.mediaFile = mediaFiles.map(item => ({ id: item.processId }));
+        data.mediaFiles = mediaFiles.map(item => ({ id: item.processId }));
       }
       console.log(data);
       this.disableButtons = true;
