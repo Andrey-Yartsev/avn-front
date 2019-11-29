@@ -45,9 +45,10 @@ export default {
   methods: {
     yes() {
       const onSuccess = () => {
+        console.log(this.data);
         this.$store
           .dispatch("profile/media/getMediaItem", {
-            productId: this.data.productId
+            productId: this.data.messageId
           })
           .then(res => {
             console.log(res);

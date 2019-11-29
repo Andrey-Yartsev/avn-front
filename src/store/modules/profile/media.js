@@ -56,10 +56,9 @@ const actions = {
       commit("isAllDataRecieved", res.length);
     });
   },
-  getMediaItem({ dispatch, commit }, productId) {
-    dispatch("_getMediaItem", {
-      productId
-    }).then(res => {
+  getMediaItem({ dispatch, commit }, data) {
+    console.log(data);
+    dispatch("_getMediaItem", data).then(res => {
       commit("updateMedia", res);
     });
   },
@@ -110,7 +109,7 @@ createRequestAction({
 createRequestAction({
   requestType: "any",
   prefix: "_getMediaItem",
-  apiPath: "media/{productId}",
+  apiPath: "media/view/{productId}",
   // resultKey: "media",
   state,
   mutations,
