@@ -198,6 +198,7 @@ export default {
       this.categoryId = categories[0].id;
     },
     categoryId() {
+      this.$store.commit("awards/resetNominees");
       this.fetchNominees();
     },
     nominees(nominees) {

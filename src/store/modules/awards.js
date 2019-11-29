@@ -82,6 +82,12 @@ const mutations = {
   },
   decrementVotesCount(state) {
     state.votesCount--;
+  },
+  resetNominees(state) {
+    state.offset = 0;
+    state.allDataReceived = false;
+    state.votesCount = 0;
+    state.nominees = [];
   }
 };
 
