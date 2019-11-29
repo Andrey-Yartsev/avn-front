@@ -6,7 +6,9 @@ const limit = 10;
 
 const state = {
   offset: 0,
-  allDataReceived: false
+  allDataReceived: false,
+  votesCount: 0,
+  nominees: []
 };
 
 const actions = {
@@ -16,9 +18,9 @@ const actions = {
       limit
     };
     return new Promise(accept => {
-      dispatch("_fetchNominees", params).then(list => {
-        commit("checkResult", { list });
-        accept(list);
+      dispatch("_fetchNominees", params).then(result => {
+        commit("prepareNomineesResult", result);
+        accept(result);
       });
     });
   },
@@ -29,6 +31,7 @@ const actions = {
           id: data.id,
           isVoted: true
         });
+        commit("incrementVotesCount");
         accept(result);
       });
     });
@@ -40,6 +43,7 @@ const actions = {
           id: data.id,
           isVoted: false
         });
+        commit("decrementVotesCount");
         accept(result);
       });
     });
@@ -56,13 +60,14 @@ const mutations = {
   clearSavedData() {
     state.savedData = null;
   },
-  checkResult(state, { list }) {
-    if (list.length < state.limit) {
+  prepareNomineesResult(state, result) {
+    if (result.list.length < state.limit) {
       state.allDataReceived = true;
     } else {
       state.offset = state.offset + limit;
     }
-    // state.marker = marker;
+    state.nominees = [...state.nominees, ...result.list];
+    state.votesCount = result.votesCount;
   },
   setNomineeVoted(state, { id, isVoted }) {
     state.nominees = state.nominees.map(v => {
@@ -71,6 +76,12 @@ const mutations = {
       }
       return v;
     });
+  },
+  incrementVotesCount(state) {
+    state.votesCount++;
+  },
+  decrementVotesCount(state) {
+    state.votesCount--;
   }
 };
 
@@ -159,7 +170,6 @@ createRequestAction({
     method: "GET"
   },
   defaultResultValue: [],
-  resultKey: "nominees",
   paramsToOptions: function(params, options) {
     options.query = params.query;
     return options;
@@ -167,9 +177,6 @@ createRequestAction({
   paramsToPath: function(params, path) {
     let r = path.replace(/{eventId}/, params.eventId);
     return r.replace(/{categoryId}/, params.categoryId);
-  },
-  resultConvert: function(result, state) {
-    return [...state.nominees, ...result];
   }
 });
 

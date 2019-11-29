@@ -64,7 +64,7 @@ export default {
     return {
       categoryId: 0,
       votes: [],
-      maxVotes: 2,
+      maxVotes: 5,
       lastVoteId: 0,
       models: []
     };
@@ -97,7 +97,10 @@ export default {
       return this.$store.state.awards;
     },
     remaining() {
-      return this.maxVotes - this.models.filter(v => v.isVoted).length;
+      return this.maxVotes - this.votesCount;
+    },
+    votesCount() {
+      return this.$store.state.awards.votesCount;
     }
   },
   methods: {
@@ -162,13 +165,7 @@ export default {
       this.addDummies();
     },
     setDisabled() {
-      let votedCount = 0;
-      this.models.map(model => {
-        if (model.isVoted) {
-          votedCount++;
-        }
-      });
-      if (votedCount >= this.maxVotes) {
+      if (this.votesCount >= this.maxVotes) {
         this.models = this.models.map(model => {
           if (!model.isVoted) {
             model.disabled = true;
