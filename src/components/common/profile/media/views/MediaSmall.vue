@@ -51,7 +51,16 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <span v-if="post.active" class="isActive icn-item verified-user" />
+          <template v-if="isPrivate">
+            <span v-if="post.active" class="mediaStatus isActive">
+              <span class="icn-item verified-user" />
+              Active
+            </span>
+            <span v-else class="mediaStatus notActive">
+              <span class="icn-item icn-block" />
+              Not active
+            </span>
+          </template>
           <span class="item-length item-length_video">
             <span class="value">{{ post.price.toFixed(2) }}</span>
             <span class="icn-item  icn-tips"></span>
@@ -127,7 +136,8 @@ export default {
     shouldBePoster: {
       type: Boolean,
       default: false
-    }
+    },
+    isPrivate: Boolean
   },
   computed: {
     actionPrefix() {
@@ -173,12 +183,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.isActive {
+.mediaStatus {
   position: absolute;
   left: 10px;
   top: 15px;
-}
-.posCenter {
-  /* transform: translateX(-50%); */
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  &.isActive {
+    color: #2196f3;
+  }
+  &.notActive {
+    color: #e31b1d;
+  }
 }
 </style>

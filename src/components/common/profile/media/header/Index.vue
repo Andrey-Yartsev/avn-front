@@ -39,7 +39,16 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <span v-if="post.active" class="isActive icn-item verified-user" />
+    <template v-if="isAuthor">
+      <span v-if="post.active" class="mediaStatus isActive">
+        <span class="icn-item verified-user" />
+        Active
+      </span>
+      <span v-else class="mediaStatus notActive">
+        <span class="icn-item icn-block" />
+        Not active
+      </span>
+    </template>
     <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open" v-if="isAuthor" />
@@ -134,9 +143,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.isActive {
+.mediaStatus {
   position: absolute;
   right: 40px;
   top: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  &.isActive {
+    color: #2196f3;
+  }
+  &.notActive {
+    color: #e31b1d;
+  }
 }
 </style>

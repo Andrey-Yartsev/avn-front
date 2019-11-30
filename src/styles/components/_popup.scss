@@ -37,6 +37,9 @@
 
   &.lightbox-post {
     overflow-y: hidden;
+    &.scroll-post {
+      overflow: auto;
+    }
 
     .explore-page & {
 

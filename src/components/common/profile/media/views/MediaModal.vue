@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       index: undefined,
-      extraClassName: "lightbox-post",
+      extraClassName: "lightbox-post scroll-post",
       backFrom: undefined,
       preloadedImageIndexes: {}
     };

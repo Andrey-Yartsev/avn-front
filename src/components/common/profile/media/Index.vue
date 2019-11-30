@@ -19,6 +19,7 @@
                   :post="item"
                   :key="item.id"
                   from="profile/home"
+                  :isPrivate="$props.private"
                 />
               </div>
             </div>
