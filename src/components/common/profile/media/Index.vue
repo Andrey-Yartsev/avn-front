@@ -6,8 +6,18 @@
     <div v-else class="content">
       <FileUploader
         :defaultLimits="limits"
-        v-if="this.$props.private && storeEnabled"
+        v-if="this.$props.private && storeEnabled && this.user.isPerformer"
       />
+      <div
+        v-else
+        class="form-title form-title__default-text border-top centered"
+        style="text-align: center"
+      >
+        You need to enable <b>Earn money</b> option and
+        <b>add a bank account</b> in
+        <router-link to="/settings/profile" class="">Profile</router-link>
+        settings
+      </div>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -41,6 +51,7 @@ import Loader from "@/components/common/Loader";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import User from "@/mixins/user";
 
 export default {
   name: "MediaPage",
@@ -49,6 +60,7 @@ export default {
     FileUploader
   },
   props: ["private"],
+  mixins: [User],
   data() {
     return {
       limits: {
