@@ -27,15 +27,22 @@ export default {
     },
     reloadPost(postId) {
       this.$store.dispatch("post/reloadPost", { postId });
+    },
+    reloadMedia(data) {
+      this.$store.dispatch("profile/media/updateMediaSrc", data);
     }
   },
   created() {
     wsp.on("reloadPost", this.reloadPost);
     ws.on("reloadPost", this.reloadPost);
+    wsp.on("reloadMedia", this.reloadMedia);
+    ws.on("reloadMedia", this.reloadMedia);
   },
   beforeDestroy() {
     wsp.removeListener("reloadPost", this.reloadPost);
     ws.removeListener("reloadPost", this.reloadPost);
+    wsp.removeListener("reloadMedia", this.reloadMedia);
+    ws.removeListener("reloadMedia", this.reloadMedia);
   },
   watch: {
     posts() {

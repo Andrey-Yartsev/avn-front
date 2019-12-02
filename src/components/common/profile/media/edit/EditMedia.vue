@@ -26,10 +26,10 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged"
+            :disabled="!isDataChanged || !isPriceSet"
             @click.prevent="saveClickHandler"
           >
-            Save
+            Save123
           </button>
         </div>
       </div>
@@ -62,7 +62,7 @@
         <div class="actions-controls">
           <template v-if="isExtended">
             <div class="btn-post">
-              <div>Price</div>
+              <div>Price <sup style="color: red">*</sup></div>
               <div
                 class="price-amount-field getPaidForm__field enabled-tooltip"
               >
@@ -184,6 +184,9 @@ export default {
         this.$props.post.active !== this.media.active ||
         String(this.$props.post.price) !== String(this.media.price)
       );
+    },
+    isPriceSet() {
+      return +this.price > 0;
     }
   },
   methods: {

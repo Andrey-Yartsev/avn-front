@@ -43,6 +43,24 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
+  },
+  updateMediaSrc(state, data) {
+    state.media = state.media.map(item => {
+      if (item.productId == data.id) {
+        return {
+          ...item,
+          media: {
+            ...item.media,
+            type: "video",
+            src: {
+              ...item.media.src,
+              source: data.url
+            }
+          }
+        };
+      }
+      return item;
+    });
   }
 };
 
@@ -57,7 +75,6 @@ const actions = {
     });
   },
   getMediaItem({ dispatch, commit }, data) {
-    console.log(data);
     dispatch("_getMediaItem", data).then(res => {
       commit("updateMedia", res);
     });
@@ -83,6 +100,9 @@ const actions = {
     dispatch("_incrementViewCounter", productId).then(() => {
       commit("incrementViewCounter", productId);
     });
+  },
+  updateMediaSrc({ commit }, data) {
+    commit("updateMediaSrc", data);
   }
 };
 
