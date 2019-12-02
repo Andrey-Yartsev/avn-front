@@ -11,7 +11,6 @@
     <div class="postPage-content" style="minHeight: auto">
       <div
         class="postPage-content__inside"
-        style="flex: 0 0 auto"
         :class="{ 'has-media': post.media }"
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
@@ -88,7 +87,11 @@
             :showCopy="!delayedPost"
             :isAuthor="isAuthor"
           />
-          <div class="text hidden-mobile" v-if="$mq === 'desktop'">
+          <div
+            class="text hidden-mobile"
+            v-if="$mq === 'desktop'"
+            style="minHeight: 50px; display: block"
+          >
             <p v-if="post.text" v-html="post.text" />
           </div>
           <div class="post-capability" v-if="$mq === 'desktop'">
@@ -287,6 +290,7 @@ export default {
 <style lang="scss" scoped>
 .postPage-content__inside {
   flex-flow: column nowrap !important;
+  flex-basis: auto;
   & > div {
     width: 100% !important;
     margin: 0 !important;

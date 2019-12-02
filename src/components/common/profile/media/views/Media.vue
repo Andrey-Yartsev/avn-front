@@ -3,7 +3,7 @@
     class="media"
     :class="{
       maxHeight: $mq === 'mobile',
-      minHeight: medias.type === 'processing'
+      minHeight: getMediaViewType(medias) === 'Locked'
     }"
     :style="mediaStyle"
   >

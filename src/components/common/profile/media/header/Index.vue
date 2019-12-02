@@ -145,7 +145,7 @@ export default {
 <style lang="scss" scoped>
 .mediaStatus {
   position: absolute;
-  right: 40px;
+  right: 50px;
   top: 20px;
   display: flex;
   flex-flow: row nowrap;

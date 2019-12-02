@@ -7,7 +7,7 @@
       class="locked"
       :src="media.thumb.source"
       :width="`${size.width}`"
-      :height="`${size.height}`"
+      height="350"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
     />
