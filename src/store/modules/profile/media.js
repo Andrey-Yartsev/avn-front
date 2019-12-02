@@ -92,6 +92,13 @@ const actions = {
   addMedia({ dispatch, commit }, data) {
     return dispatch("_addMedia", data).then(res => {
       commit("addMedia", res);
+      dispatch(
+        "global/flashToast",
+        { text: "New video successfully uploaded" },
+        {
+          root: true
+        }
+      );
       commit("auth/incrementStoreCount", res.length, { root: true });
     });
   },

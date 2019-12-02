@@ -2,6 +2,7 @@
   <div class="media-wrapper">
     <video
       class="video-content"
+      :class="{ halfHeight: $mq === 'desktop' }"
       disableremoteplayback
       webkit-playsinline
       playsinline
@@ -65,6 +66,9 @@ export default {
 <style lang="scss" scoped>
 .video-content {
   width: 100%;
-  height: 300px;
+  height: 360px;
+  &.halfHeight {
+    height: 50vh !important;
+  }
 }
 </style>

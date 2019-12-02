@@ -8,9 +8,10 @@
       }
     ]"
   >
-    <div class="postPage-content">
+    <div class="postPage-content" style="minHeight: auto">
       <div
         class="postPage-content__inside"
+        style="flex: 0 0 auto"
         :class="{ 'has-media': post.media }"
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
@@ -78,7 +79,7 @@
             @openBuyModal="mediaClickHandler"
           />
         </template>
-        <div class="right-col">
+        <div class="right-col" style="flexBasis: auto">
           <Header
             :class="'hidden-mobile'"
             :post="post"
@@ -87,23 +88,9 @@
             :showCopy="!delayedPost"
             :isAuthor="isAuthor"
           />
-
-          <!-- <div
-            class="subscribe-view-post"
-            v-if="isAuth()"
-          >
-            <span role="button" class="btn lg" @click="subscribe"
-              >Subscribe to view</span
-            >
-          </div> -->
-
           <div class="text hidden-mobile" v-if="$mq === 'desktop'">
             <p v-if="post.text" v-html="post.text" />
-            <div class="post-time" v-if="!delayedPost && !isAuth()">
-              <time class="timestamp">{{ timePassed }}</time>
-            </div>
           </div>
-
           <div class="post-capability" v-if="$mq === 'desktop'">
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
               <div class="guest-comments-form">
