@@ -150,7 +150,7 @@ export default {
       this.$router.push(linkUrl);
     },
     mediaClickHandler() {
-      if (this.$props.post.media[0].canView) {
+      if (this.$props.post.media.canView) {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
