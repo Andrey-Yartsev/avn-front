@@ -1,6 +1,7 @@
 <template>
   <div class="media-wrapper">
     <video
+      class="video-content"
       disableremoteplayback
       webkit-playsinline
       playsinline
@@ -11,7 +12,6 @@
       :poster="media.preview.source"
       v-if="video"
       @play="play"
-      :height="videoHeight"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
       ref="video"
@@ -61,3 +61,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.video-content {
+  width: 100%;
+  height: 300px;
+}
+</style>

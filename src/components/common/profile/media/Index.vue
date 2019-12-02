@@ -4,20 +4,19 @@
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <FileUploader
-        :defaultLimits="limits"
-        v-if="this.$props.private && storeEnabled && this.user.isPerformer"
-      />
-      <div
-        v-else
-        class="form-title form-title__default-text border-top centered"
-        style="text-align: center"
-      >
-        You need to enable <b>Earn money</b> option and
-        <b>add a bank account</b> in
-        <router-link to="/settings/profile" class="">Profile</router-link>
-        settings
-      </div>
+      <template v-if="this.$props.private && storeEnabled">
+        <FileUploader :defaultLimits="limits" v-if="this.user.isPerformer" />
+        <div
+          v-else
+          class="form-title form-title__default-text border-top centered"
+          style="text-align: center"
+        >
+          You need to enable <b>Earn money</b> option and
+          <b>add a bank account</b> in
+          <router-link to="/settings/profile" class="">Profile</router-link>
+          settings
+        </div>
+      </template>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
