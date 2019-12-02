@@ -169,6 +169,9 @@ const mutations = {
   },
   decrementFollowingCount() {
     state.user.linksCount -= 1;
+  },
+  incrementStoreCount(state, num) {
+    state.user.mediaCount = state.user.mediaCount + num;
   }
 };
 

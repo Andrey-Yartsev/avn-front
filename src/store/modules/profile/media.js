@@ -71,6 +71,7 @@ const actions = {
   addMedia({ dispatch, commit }, data) {
     return dispatch("_addMedia", data).then(res => {
       commit("addMedia", res);
+      commit("auth/incrementStoreCount", res.length, { root: true });
     });
   },
   updateMedia({ dispatch, commit }, data) {

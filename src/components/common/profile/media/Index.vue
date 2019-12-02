@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       limits: {
-        video: 3,
+        video: 10,
         gif: 0,
         photo: 0
       },
