@@ -26,12 +26,10 @@ const mutations = {
     state.editedMedia = null;
   },
   addMedia(state, newMedias) {
-    console.log("add media");
     state.media = [...state.media, ...newMedias];
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item => {
-      console.log({ updatedMedia, item });
       return item.productId === updatedMedia.productId ? updatedMedia : item;
     });
   },

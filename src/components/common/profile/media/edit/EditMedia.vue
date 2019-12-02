@@ -26,7 +26,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged || !isPriceSet"
+            :disabled="!isDataChanged || !isPriceSetLimit"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -74,6 +74,7 @@
                   v-model="media.price"
                   step="0.01"
                   min="0"
+                  :max="maxPrice"
                 />
               </div>
               <div class="b-check-state b-check-state_post">
@@ -93,7 +94,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged || !isPriceSet"
+          :disabled="!isDataChanged || !isPriceSetLimit"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -131,7 +132,8 @@ const InitialState = {
     price: 0
   },
   saving: false,
-  withoutWatermark: false
+  withoutWatermark: false,
+  maxPrice: 500
 };
 
 export default {
@@ -185,8 +187,8 @@ export default {
         String(this.$props.post.price) !== String(this.media.price)
       );
     },
-    isPriceSet() {
-      return +this.media.price > 0;
+    isPriceSetLimit() {
+      return +this.media.price > 0 && +this.media.price <= 500;
     }
   },
   methods: {
