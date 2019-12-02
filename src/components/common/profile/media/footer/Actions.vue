@@ -1,20 +1,8 @@
 <template>
   <div class="actions">
-    <!-- <span
-      class="hidden-disabled"
-      :class="[{ active: post.isFavorite }, 'actions__btn']"
-    >
-      <span
-        class="btn-icon looking icn-item icn-size_lg"
-        v-tooltip="post.views > 1 ? 'Views' : 'View'"
-      />
-      <span class="likes__counter">
-        {{ post.views || 0 }}
-      </span>
-    </span> -->
     <span
       v-if="isAuthor || post.media.canView"
-      class="hidden-disabled actions__btn comments-btn"
+      class=" actions__btn comments-btn"
     >
       <span
         class="btn-icon icn-tips icn-item icn-size_lg"
@@ -31,6 +19,13 @@
       <span class="btn-icon icn-tips icn-item icn-size_lg" />
       {{ post.price ? post.price.toFixed(2) : "" }}
     </button>
+    <span class="actions__btn comments-btn" v-if="isAuthor">
+      <span
+        class="btn-icon icn-profile icn-item icn-size_lg"
+        v-tooltip="'Buyers ammount'"
+      ></span>
+      {{ post.buyCount || 0 }}
+    </span>
     <div
       :class="['more-functions', { open: opened }]"
       v-click-outside="hide"
