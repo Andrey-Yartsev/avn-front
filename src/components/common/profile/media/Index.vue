@@ -135,6 +135,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
   },
   beforeDestroy() {

@@ -2,8 +2,9 @@
   <div
     class="media"
     :class="{
-      maxHeight: $mq === 'mobile',
-      minHeight: getMediaViewType(medias) === 'Locked'
+      maxHeight: $mq === 'mobile' || medias.type === 'processing',
+      minHeight:
+        getMediaViewType(medias) === 'Locked' || medias.type === 'processing'
     }"
     :style="mediaStyle"
   >

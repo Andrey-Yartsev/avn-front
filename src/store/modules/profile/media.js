@@ -18,6 +18,8 @@ const state = { ...initState };
 const mutations = {
   clearMedia(state) {
     state.media = [];
+    state.offset = 0;
+    state.allDataReceived = false;
   },
   startEditMedia(state, payload) {
     state.editedMedia = payload;
@@ -69,7 +71,7 @@ const mutations = {
 
 const actions = {
   getMedia({ dispatch, commit, state }, profileId) {
-    commit("clearMedia");
+    // commit("clearMedia");
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset
