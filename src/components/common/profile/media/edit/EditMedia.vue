@@ -29,7 +29,7 @@
             :disabled="!isDataChanged || !isPriceSet"
             @click.prevent="saveClickHandler"
           >
-            Save123
+            Save
           </button>
         </div>
       </div>
@@ -93,7 +93,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged"
+          :disabled="!isDataChanged || !isPriceSet"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -186,7 +186,7 @@ export default {
       );
     },
     isPriceSet() {
-      return +this.price > 0;
+      return +this.media.price > 0;
     }
   },
   methods: {

@@ -16,6 +16,9 @@ const initState = {
 const state = { ...initState };
 
 const mutations = {
+  clearMedia(state) {
+    state.media = [];
+  },
   startEditMedia(state, payload) {
     state.editedMedia = payload;
   },
@@ -23,12 +26,14 @@ const mutations = {
     state.editedMedia = null;
   },
   addMedia(state, newMedias) {
+    console.log("add media");
     state.media = [...state.media, ...newMedias];
   },
   updateMedia(state, updatedMedia) {
-    state.media = state.media.map(item =>
-      item.productId === updatedMedia.productId ? updatedMedia : item
-    );
+    state.media = state.media.map(item => {
+      console.log({ updatedMedia, item });
+      return item.productId === updatedMedia.productId ? updatedMedia : item;
+    });
   },
   deleteMedia(state, productId) {
     state.media = state.media.filter(item => item.productId !== productId);
@@ -66,6 +71,7 @@ const mutations = {
 
 const actions = {
   getMedia({ dispatch, commit, state }, profileId) {
+    commit("clearMedia");
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset
