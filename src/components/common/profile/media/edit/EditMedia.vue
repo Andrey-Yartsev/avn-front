@@ -50,7 +50,7 @@
             @focus="() => (expanded = true)"
             class="sm content-editable textarea"
             contenteditable
-            placeholder="Add video description"
+            placeholder="Enter description here"
             maxlength="1000"
             v-model="media.text"
             ref="textarea"
@@ -230,9 +230,9 @@ export default {
     }
   },
   mounted() {
-    if (this.$refs.textarea) {
-      this.$refs.textarea.focus();
-    }
+    // if (this.$refs.textarea) {
+    //   this.$refs.textarea.focus();
+    // }
     this.initData();
   },
   beforeDestroy() {

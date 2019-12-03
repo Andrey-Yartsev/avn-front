@@ -52,14 +52,14 @@
             @dragstart.prevent="() => false"
           />
           <div class="statusWrapper" v-if="isPrivate">
-            <span class=" mediaStatus byeCounter" v-tooltip="'Buyers ammount'">
+            <!-- <span class=" mediaStatus byeCounter" v-tooltip="'Buyers ammount'">
               <span class="btn-icon icn-item icn-profile icn-size_lg" />
               <span class="likes__counter">{{ post.buyCount || 0 }}</span>
             </span>
             <span class="mediaStatus priceCounter" v-tooltip="'Price'">
               <span class="btn-icon icn-item icn-tips icn-size_lg" />
               <span>{{ post.price.toFixed(2) }}</span>
-            </span>
+            </span> -->
             <span v-if="post.active" class="mediaStatus isActive">
               <span class="icn-item verified-user" />
               Active
@@ -92,7 +92,7 @@
     >
       <span class="name">{{ post.author.name }}</span>
     </a>
-    <!-- <template v-if="$mq === 'desktop' && isPrivate">
+    <template v-if="$mq === 'desktop' && isPrivate">
       <span
         class="explore-media__counter explore-media__counter_likes"
         v-tooltip="'Buyers ammount'"
@@ -106,7 +106,7 @@
         ><span class="btn-icon icn-item icn-tips icn-size_lg"></span
         >{{ post.price.toFixed(2) }}</span
       >
-    </template> -->
+    </template>
   </div>
 </template>
 
@@ -200,7 +200,7 @@ export default {
 }
 .statusWrapper {
   position: absolute;
-  background-color: #80808075;
+  background-color: rgba(128, 128, 128, 0.459);
   width: 100%;
   height: 50px;
   display: flex;

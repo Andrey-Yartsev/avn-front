@@ -8,7 +8,7 @@
       }
     ]"
   >
-    <div class="postPage-content" style="minHeight: auto">
+    <div class="postPage-content withMinHeight">
       <div
         class="postPage-content__inside"
         :class="{ 'has-media': post.media }"
@@ -303,5 +303,8 @@ export default {
     }
     width: 100%;
   }
+}
+.withMinHeight {
+  min-height: auto;
 }
 </style>
