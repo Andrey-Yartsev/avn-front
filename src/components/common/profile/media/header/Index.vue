@@ -49,7 +49,7 @@
         Not active
       </span>
     </template>
-    <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
+    <!-- <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
       <div class="more-functions__overlay" @click="hide"></div>
       <div class="more-functions__btn" @click="open" v-if="isAuthor" />
       <div class="more-functions__dropdown">
@@ -62,7 +62,8 @@
           v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
         />
       </div>
-    </div>
+    </div> -->
+    <span class="btn editButton" @click.prevent="editPost">Edit</span>
   </div>
 </template>
 
@@ -105,7 +106,7 @@ export default {
   },
   computed: {
     postId() {
-      return this.post.id;
+      return this.post.productId;
     },
     postUser() {
       return this.post.author;
@@ -128,6 +129,18 @@ export default {
     },
     hideBubble() {
       Bubble.hide();
+    },
+    editPost() {
+      this.$store.commit("profile/media/startEditMedia", this.postId, {
+        root: true
+      });
+
+      this.$store.dispatch("modal/show", {
+        name: "editMedia",
+        data: {
+          postId: this.postId
+        }
+      });
     }
   },
   mounted() {
@@ -145,7 +158,7 @@ export default {
 <style lang="scss" scoped>
 .mediaStatus {
   position: absolute;
-  right: 50px;
+  right: 80px;
   top: 20px;
   display: flex;
   flex-flow: row nowrap;
@@ -156,5 +169,12 @@ export default {
   &.notActive {
     color: #e31b1d;
   }
+}
+.editButton {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 </style>
