@@ -26,7 +26,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged || !isPriceSetLimit"
+            :disabled="!isDataChanged"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -59,10 +59,10 @@
         </vue-tribute>
       </div>
       <div class="actions">
-        <div class="actions-controls">
+        <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
             <div class="btn-post">
-              <div>Price <sup style="color: red">*</sup></div>
+              <div>Price</div>
               <div
                 class="price-amount-field getPaidForm__field enabled-tooltip"
               >
@@ -77,15 +77,30 @@
                   :max="maxPrice"
                 />
               </div>
-              <div class="b-check-state b-check-state_post">
+              <div class="b-check-state b-check-state_post alignFlexCenter">
                 <label>
                   <input
                     class="is-free-post"
                     type="checkbox"
                     v-model="media.active"
                   />
-                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span
+                    class="b-check-state__icon icn-item icn-size_lg ml-2"
+                  ></span>
                   <span class="b-check-state__text">Active</span>
+                </label>
+              </div>
+              <div class="b-check-state b-check-state_post alignFlexCenter">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="media.free"
+                  />
+                  <span
+                    class="b-check-state__icon icn-item icn-size_lg ml-2"
+                  ></span>
+                  <span class="b-check-state__text">Free</span>
                 </label>
               </div>
             </div>
@@ -94,7 +109,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged || !isPriceSetLimit"
+          :disabled="!isDataChanged"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -129,7 +144,8 @@ const InitialState = {
   media: {
     active: false,
     text: "",
-    price: 0
+    price: 0,
+    free: false
   },
   saving: false,
   withoutWatermark: false,
@@ -191,6 +207,22 @@ export default {
       return +this.media.price > 0 && +this.media.price <= 500;
     }
   },
+  watch: {
+    ["media.price"](value) {
+      console.log(value);
+      if (value == 0) {
+        this.media.free = true;
+      } else {
+        this.media.free = false;
+      }
+    },
+    ["media.free"](value) {
+      console.log(value);
+      if (value == true) {
+        this.media.price = 0;
+      }
+    }
+  },
   methods: {
     getConvertedText() {
       const pattern =
@@ -243,3 +275,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.alignFlexCenter {
+  display: flex;
+  align-items: center;
+}
+.ml-2 {
+  margin-left: 10px;
+}
+</style>
