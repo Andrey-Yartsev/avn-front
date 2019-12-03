@@ -17,6 +17,18 @@
           settings
         </div>
       </template>
+      <div v-if="this.$props.private" class="mediaFilter">
+        <span class="mediaFilter__label">Filter by: </span>
+        <select v-model="filterType" name="type" class="mediaFilter__select">
+          <option value="">All</option>
+          <option value="sale">
+            On Sale
+          </option>
+          <option value="draft">
+            Draft
+          </option>
+        </select>
+      </div>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -67,7 +79,8 @@ export default {
         gif: 0,
         photo: 0
       },
-      observer: null
+      observer: null,
+      filterType: ""
     };
   },
   computed: {
@@ -98,25 +111,30 @@ export default {
           this.observer.unobserve(target);
         }
       }
+    },
+    filterType() {
+      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.fetchMedia();
     }
   },
   methods: {
     fetchMedia() {
       this.$store
-        .dispatch(
-          "profile/media/getMedia",
-          this.$store.state.profile.home.profile.id
-        )
+        .dispatch("profile/media/getMedia", {
+          profileId: this.$store.state.profile.home.profile.id,
+          filter: this.filterType
+        })
         .then(() => {
-          if (!this.observer) {
-            this.initIntersectionObserver();
+          const target = this.$refs.scrollObserver;
+          if (target && this.observer) {
+            this.observer.unobserve(target);
           }
+          this.initIntersectionObserver();
         });
     },
     initIntersectionObserver() {
       const callback = entries => {
         entries.forEach(entry => {
-          // console.log(this.$store.state.profile.media)
           if (
             entry.isIntersecting &&
             !this.allDataRecieved &&
@@ -147,8 +165,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .addLink__button {
   margin-top: 3rem;
+}
+.mediaFilter {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 0;
+  &__label {
+    font-weight: bold;
+  }
+  &__select {
+    width: 30%;
+    margin-left: 10px;
+  }
 }
 </style>
