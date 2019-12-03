@@ -17,7 +17,10 @@
           settings
         </div>
       </template>
-      <div v-if="this.$props.private" class="mediaFilter">
+      <div
+        v-if="this.$props.private && this.user.isPerformer"
+        class="mediaFilter"
+      >
         <span class="mediaFilter__label">Filter by: </span>
         <select v-model="filterType" name="type" class="mediaFilter__select">
           <option value="">All</option>
