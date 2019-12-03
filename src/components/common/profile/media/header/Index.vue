@@ -63,7 +63,9 @@
         />
       </div>
     </div> -->
-    <span class="btn editButton" @click.prevent="editPost">Edit</span>
+    <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
+      >Edit</span
+    >
   </div>
 </template>
 

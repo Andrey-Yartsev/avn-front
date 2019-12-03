@@ -388,11 +388,11 @@ export default {
   }
 }
 .btn-danger {
-  background-color: #e31b1d;
+  background-color: #ff4081;
   padding: 0 40px;
   transition: all 0.3s ease;
   &:hover {
-    background-color: #b51617;
+    background-color: rgb(192, 51, 98);
   }
 }
 .clickPrevent {
