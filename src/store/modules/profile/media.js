@@ -95,6 +95,7 @@ const actions = {
           root: true
         }
       );
+      commit("auth/decrementStoreCount", null, { root: true });
       commit("endEditMedia");
     });
   },

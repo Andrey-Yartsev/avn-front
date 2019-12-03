@@ -172,6 +172,9 @@ const mutations = {
   },
   incrementStoreCount(state, num) {
     state.user.mediaCount = state.user.mediaCount + num;
+  },
+  decrementStoreCount(state) {
+    state.user.mediaCount = state.user.mediaCount - 1;
   }
 };
 
