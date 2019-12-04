@@ -227,7 +227,6 @@ export default {
   watch: {
     categories(categories) {
       if (categories.length) {
-        console.log(categories);
         this.categoryId = categories[0].id;
       }
     },
