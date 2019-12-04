@@ -1,5 +1,6 @@
 <template>
   <div class="container awards">
+    {{ { twitterScriptLoading } }}
     <div class="awards-header" :class="{ gay: isGay }">
       <img
         :src="'/static/img/avnawards.png'"
@@ -33,25 +34,14 @@
           <button @click="nextCategory" class="btn">Next Category</button>
         </div>
         <div class="models">
-          <figure
+          <Nominee
             v-for="v in models"
-            :key="v.nomineeId"
-            :class="{ voted: v.isVoted, disabled: v.disabled }"
-            @click="vote(v.nomineeId)"
-          >
-            <div v-if="v.dummy" class="dummy"></div>
-            <template v-else>
-              <Loader
-                v-if="voting(v.nomineeId)"
-                :fullscreen="false"
-                :inline="true"
-                :small="true"
-              />
-              <a class="button" />
-              <img :src="v.nominationAvatar" class="image" />
-              <div class="name">{{ v.nominationName }}</div>
-            </template>
-          </figure>
+            :key="v.id"
+            :nominee="v"
+            :voting="voting(v.nomineeId)"
+            :twitterScriptLoading="twitterScriptLoading"
+            @vote="vote"
+          />
         </div>
       </template>
       <Loader v-if="modelsLoading" />
@@ -65,13 +55,15 @@ import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
+import Nominee from "./Nominee";
 
 export default {
   mixins: [InfinityScroll, User],
   components: {
     Loader,
     GayLogo,
-    Banner
+    Banner,
+    Nominee
   },
   data() {
     return {
@@ -83,7 +75,8 @@ export default {
       banner: {
         title: "Voting Not Open Yet!",
         text: "Voting has not begun yet but will open soon."
-      }
+      },
+      twitterScriptLoading: true
     };
   },
   computed: {
@@ -222,6 +215,17 @@ export default {
     },
     infinityScrollGetDataMethod() {
       this.fetchNominees();
+    },
+    addTwitterLib() {
+      setTimeout(() => {
+        let script = document.createElement("script");
+        script.onload = () => {
+          this.twitterScriptLoading = false;
+        };
+        script.async = true;
+        script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
+        document.head.appendChild(script);
+      }, 3000);
     }
   },
   watch: {
@@ -238,6 +242,9 @@ export default {
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
     }
+  },
+  created() {
+    this.addTwitterLib();
   },
   mounted() {
     this.$store.dispatch("awards/fetchCategories", this.eventId);

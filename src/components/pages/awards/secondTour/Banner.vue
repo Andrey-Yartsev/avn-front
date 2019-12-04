@@ -20,16 +20,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.banner {
-  &__text {
-    margin-top: 20px;
-    background-color: #ccebf6;
-    padding: 20px;
-    border: 1px solid #a7cbe6;
-    border-radius: 5px;
-    color: #2073af;
-  }
-}
-</style>

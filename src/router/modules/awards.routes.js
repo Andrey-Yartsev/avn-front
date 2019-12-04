@@ -57,7 +57,7 @@ export const routes = [
   {
     beforeEnter: Auth.requireAny,
     path: "/gayvn_awards/voting",
-    name: "AvnAwardsGay",
+    name: "AvnAwards2Gay",
     component: () =>
       import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
