@@ -83,6 +83,12 @@
                 to="/settings/payments"
                 >Payments
               </router-link>
+              <router-link
+                v-if="user.canEarn"
+                class="user-menu-item user-menu-item__subscribers icn-item"
+                to="/subscribers"
+                >Subscribers
+              </router-link>
             </div>
             <div class="user-menu__col">
               <router-link

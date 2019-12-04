@@ -1591,6 +1591,11 @@
         content: "\E63D";
       }
     }
+    &__subscribers {
+      &:after {
+        content: "\E630"
+      }
+    }
   }
   hr {
     height: 1px;
