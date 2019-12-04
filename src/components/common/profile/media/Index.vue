@@ -18,19 +18,21 @@
         </div>
       </template>
       <div
-        v-if="this.$props.private && this.user.isPerformer"
-        class="mediaFilter"
+        :class="['buttonWrapper', 'more-functions', { open: opened }]"
+        v-click-outside="hide"
       >
-        <span class="mediaFilter__label">Filter by: </span>
-        <select v-model="filterType" name="type" class="mediaFilter__select">
-          <option value="">All</option>
-          <option value="sale">
-            On Sale
-          </option>
-          <option value="draft">
-            Draft
-          </option>
-        </select>
+        <div class="more-functions__overlay" @click="hide"></div>
+        <div class="openMenuButton" @click="open" style="color: red">
+          <img
+            v-if="filterType"
+            :src="'/static/img/ic-filter-red.svg'"
+            alt="filter"
+          />
+          <img v-else :src="'/static/img/ic-filter.svg'" alt="filter" />
+        </div>
+        <div class="more-functions__dropdown">
+          <FilterDropdown :type="filterType" @handleClick="handleClick" />
+        </div>
       </div>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
@@ -65,13 +67,19 @@ import Loader from "@/components/common/Loader";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdown";
 import User from "@/mixins/user";
+import ClickOutside from "vue-click-outside";
 
 export default {
   name: "MediaPage",
   components: {
     Loader,
-    FileUploader
+    FileUploader,
+    FilterDropdown
+  },
+  directives: {
+    ClickOutside
   },
   props: ["private"],
   mixins: [User],
@@ -83,7 +91,8 @@ export default {
         photo: 0
       },
       observer: null,
-      filterType: ""
+      filterType: "",
+      opened: false
     };
   },
   computed: {
@@ -121,6 +130,18 @@ export default {
     }
   },
   methods: {
+    open() {
+      this.opened = true;
+      this.$emit("openDropdown");
+    },
+    hide() {
+      this.opened = false;
+      this.$emit("hideDropdown");
+    },
+    handleClick(type) {
+      this.opened = false;
+      this.filterType = type;
+    },
     fetchMedia() {
       this.$store
         .dispatch("profile/media/getMedia", {
@@ -185,5 +206,24 @@ export default {
     width: 30%;
     margin-left: 10px;
   }
+  &__button {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: rgba(190, 186, 186, 0.377);
+    }
+  }
+}
+.buttonWrapper {
+  display: flex !important;
+  justify-content: flex-end;
+}
+.openMenuButton {
+  display: inline-block;
+  margin: 5px 0;
+  margin-right: 20px;
+  cursor: pointer;
 }
 </style>

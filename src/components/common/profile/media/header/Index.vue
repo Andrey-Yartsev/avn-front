@@ -49,20 +49,6 @@
         Not active
       </span>
     </template>
-    <!-- <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
-      <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open" v-if="isAuthor" />
-      <div class="more-functions__dropdown">
-        <Dropdown
-          v-if="isAuthor"
-          :post="post"
-          :from="from"
-          :hide="hide"
-          :showCopy="showCopy"
-          v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-        />
-      </div>
-    </div> -->
     <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
       >Edit</span
     >
