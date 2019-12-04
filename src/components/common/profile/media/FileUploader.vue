@@ -26,7 +26,12 @@
       <div class="table-responsive" v-if="files.length">
         <div class="table table-hover">
           <div class="table__body">
-            <div class="row" v-for="(file, index) in files" :key="file.id">
+            <div
+              class="row"
+              style="position: relative"
+              v-for="(file, index) in files"
+              :key="file.id"
+            >
               <div class="col col-item">
                 <div
                   class="addFileCollectionView mediaPreview"
@@ -50,6 +55,18 @@
               </div>
               <div class="col col-item col-item-last">
                 <button
+                  v-if="
+                    preloadedMedias.length &&
+                      isFileInProgress(preloadedMedias[index].processId)
+                  "
+                  class="btn btn-secondary btn-sm dropdown-toggle"
+                  disabled
+                >
+                  Loading...
+                </button>
+                <button
+                  :data-id="preloadedMedias[index].processId"
+                  v-else-if="preloadedMedias.length"
                   :disabled="disableButtons"
                   class="btn btn-secondary btn-sm dropdown-toggle"
                   type="button"
@@ -78,7 +95,7 @@
           @input-filter="inputFilter"
           ref="upload"
         />
-        <div class="btn-group buttonWrapper">
+        <!-- <div class="btn-group buttonWrapper">
           <button
             v-if="files.length"
             :disabled="!this.canSend"
@@ -88,7 +105,7 @@
           >
             Upload
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -148,7 +165,9 @@ export default {
       },
       disableButtons: false,
       loading: false,
-      fileBuffer: []
+      fileBuffer: [],
+      readyToUploadFile: null,
+      filesInProgress: []
     };
   },
   watch: {
@@ -158,6 +177,26 @@ export default {
         this.addData.type = "";
         this.addData.content = "";
       }
+    },
+    readyToUploadFile(newFile) {
+      console.log(newFile);
+      this.filesInProgress.push(newFile);
+      this.$store
+        .dispatch(
+          "profile/media/addMedia",
+          { mediaFiles: [{ id: newFile }] },
+          { root: true }
+        )
+        .then(() => {
+          this.disableButtons = false;
+          this.loading = false;
+          this.filesInProgress = this.filesInProgress.filter(
+            item => item !== newFile
+          );
+          this.$nextTick(() => {
+            this.triggerClickEvent(newFile);
+          });
+        });
     }
   },
   computed: {
@@ -170,9 +209,22 @@ export default {
         return false;
       }
       return true;
+    },
+    // eslint-disable-next-line no-unused-vars
+    isFileInProgress(id) {
+      return function(id) {
+        return this.filesInProgress.includes(id);
+      };
     }
   },
   methods: {
+    triggerClickEvent(newFile) {
+      const button = document.querySelector(`[data-id="${newFile}"]`);
+      button.click();
+      this.preloadedMedias = this.preloadedMedias.filter(
+        item => item.processId !== newFile
+      );
+    },
     removeFileHandler(file, media) {
       this.$refs.upload.remove(file);
       this.removeMedia(media.id);
@@ -224,36 +276,6 @@ export default {
         return prevent();
       }
     },
-    // onAddFolader() {
-    //   let input = this.$refs.upload.$el.querySelector("input");
-    //   input.directory = true;
-    //   input.webkitdirectory = true;
-    //   this.directory = true;
-    //   input.onclick = null;
-    //   input.click();
-    //   input.onclick = () => {
-    //     this.directory = false;
-    //     input.directory = false;
-    //     input.webkitdirectory = false;
-    //   };
-    // },
-    sendHandler() {
-      this.loading = true;
-      const mediaFiles = this.preloadedMedias;
-      const data = {};
-      if (mediaFiles.length) {
-        data.mediaFiles = mediaFiles.map(item => ({ id: item.processId }));
-      }
-      this.disableButtons = true;
-      this.$store
-        .dispatch("profile/media/addMedia", data, { root: true })
-        .then(() => {
-          this.preloadedMedias = [];
-          this.$refs.upload.clear();
-          this.disableButtons = false;
-          this.loading = false;
-        });
-    },
     isFormatCorrect(fileName) {
       if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov)$/i.test(fileName)) {
         return true;
@@ -270,6 +292,9 @@ export default {
       if (input && !this.loading) {
         input.click();
       }
+    },
+    setMediaIsReady(processId) {
+      this.readyToUploadFile = processId;
     }
   }
 };
@@ -383,5 +408,14 @@ export default {
 }
 .clickPrevent {
   pointer-events: none;
+}
+.spinner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  background-color: rgba(128, 128, 128, 0.473);
 }
 </style>

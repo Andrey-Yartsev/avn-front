@@ -8,7 +8,8 @@ const initState = {
   marker: null,
   offset: 0,
   limit: fetchLimit,
-  allDataReceived: false
+  allDataReceived: false,
+  preloadedMedias: []
 };
 
 const state = { ...initState };
