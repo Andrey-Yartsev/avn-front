@@ -147,7 +147,8 @@ export default {
         content: ""
       },
       disableButtons: false,
-      loading: false
+      loading: false,
+      fileBuffer: []
     };
   },
   watch: {
@@ -184,8 +185,17 @@ export default {
         if (!newFile.type) {
           this.setFileTypeManually(newFile.file);
         }
-        this.addMediaFiles({ target: { files: [newFile.file] } });
+        if (!this.fileBuffer.length) {
+          setTimeout(() => {
+            this.sendFilesFromBuffer();
+            this.fileBuffer = [];
+          }, 300);
+        }
+        this.fileBuffer.push(newFile.file);
       }
+    },
+    sendFilesFromBuffer() {
+      this.addMediaFiles({ target: { files: this.fileBuffer } });
     },
     setFileTypeManually(file) {
       Object.defineProperty(file, "type", {
