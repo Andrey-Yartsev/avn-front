@@ -35,7 +35,7 @@
               <div class="col col-item">
                 <div
                   class="addFileCollectionView mediaPreview"
-                  v-if="preloadedMedias.length"
+                  v-if="preloadedMedias.length == files.length"
                 >
                   <MediaPreview
                     :media="preloadedMedias[index]"
@@ -53,20 +53,34 @@
                   {{ file.size | formatSize }}
                 </div>
               </div>
-              <div class="col col-item col-item-last">
-                <button
+              <div
+                class="col col-item col-item-last"
+                style="position: relative"
+              >
+                <template
                   v-if="
-                    preloadedMedias.length &&
+                    preloadedMedias.length == files.length &&
                       isFileInProgress(preloadedMedias[index].processId)
                   "
-                  class="btn btn-secondary btn-sm dropdown-toggle"
-                  disabled
                 >
-                  Loading...
-                </button>
+                  <Loader
+                    :fullscreen="false"
+                    :small="true"
+                    :inline="true"
+                    :semilight="true"
+                    class="text-light"
+                  />
+                  <button
+                    class="btn btn-secondary btn-sm dropdown-toggle"
+                    disabled
+                    style="marginLeft: 10px"
+                  >
+                    Loading...
+                  </button>
+                </template>
                 <button
                   :data-id="preloadedMedias[index].processId"
-                  v-else-if="preloadedMedias.length"
+                  v-else-if="preloadedMedias.length == files.length"
                   :disabled="disableButtons"
                   class="btn btn-secondary btn-sm dropdown-toggle"
                   type="button"
@@ -95,17 +109,6 @@
           @input-filter="inputFilter"
           ref="upload"
         />
-        <!-- <div class="btn-group buttonWrapper">
-          <button
-            v-if="files.length"
-            :disabled="!this.canSend"
-            type="button"
-            class="btn btn-danger start-upload"
-            @click.stop.prevent="sendHandler"
-          >
-            Upload
-          </button>
-        </div> -->
       </div>
     </div>
   </div>
@@ -179,7 +182,6 @@ export default {
       }
     },
     readyToUploadFile(newFile) {
-      console.log(newFile);
       this.filesInProgress.push(newFile);
       this.$store
         .dispatch(
