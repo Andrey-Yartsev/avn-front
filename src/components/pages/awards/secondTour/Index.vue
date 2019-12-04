@@ -1,6 +1,5 @@
 <template>
   <div class="container awards">
-    {{ { twitterScriptLoading } }}
     <div class="awards-header" :class="{ gay: isGay }">
       <img
         :src="'/static/img/avnawards.png'"
@@ -30,7 +29,7 @@
           per day for this category. You have {{ remaining }} votes remaining
         </div>
         <div class="title-block">
-          <h1>Privacy Policy</h1>
+          <h1>{{ currentCategory ? currentCategory.title : '...' }}</h1>
           <button @click="nextCategory" class="btn">Next Category</button>
         </div>
         <div class="models">
@@ -91,6 +90,9 @@ export default {
         return null;
       }
       return this.$store.state.awards.categories.data || [];
+    },
+    currentCategory() {
+      return this.categories.find(v => v.id === this.categoryId);
     },
     nominees() {
       return this.$store.state.awards.nominees;
