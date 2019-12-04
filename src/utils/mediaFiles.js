@@ -273,12 +273,17 @@ export const fileUpload = (
       reject();
     };
 
-    xhr.open(
-      "POST",
-      `${Store.state.init.data.converter.url}/file/upload`,
-      true
-    );
-    xhr.send(formData);
+    if (Store.state.auth.user.id == 475036) {
+      xhr.open("POST", `https://cdn-media-ingest.avn.com`, true);
+      xhr.send(formData);
+    } else {
+      xhr.open(
+        "POST",
+        `${Store.state.init.data.converter.url}/file/upload`,
+        true
+      );
+      xhr.send(formData);
+    }
   });
 
   pr.xhr = xhr;
