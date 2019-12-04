@@ -1,10 +1,8 @@
 import { createRequestAction } from "../../utils/storeRequest";
-// import mockMediaResponse from "./mockMedia.json";
 
 const fetchLimit = 9;
 
 const initState = {
-  // media: mockMediaResponse.list,
   media: [],
   editedMedia: null,
   marker: null,
@@ -179,18 +177,11 @@ createRequestAction({
     options.data = params;
     return options;
   }
-  // resultConvert: function(newMedia, state) {
-  //   const arr = newMedia.pinned
-  //     ? [newMedia, ...state.media]
-  //     : [...state.media, newMedia];
-  //   return arr;
-  // }
 });
 
 createRequestAction({
   prefix: "_updateMedia",
   apiPath: "media/{productId}",
-  // resultKey: "media",
   state,
   mutations,
   actions,
@@ -204,18 +195,11 @@ createRequestAction({
     options.data = params.media;
     return options;
   }
-  // resultConvert: function(newMedia, state) {
-  //   const arr = state.media.map(item =>
-  //     item.id === newMedia.id ? newMedia : item
-  //   );
-  //   return arr;
-  // }
 });
 
 createRequestAction({
   prefix: "_incrementViewCounter",
   apiPath: "media/views/{mediaId}",
-  // resultKey: "media",
   state,
   mutations,
   actions,
@@ -243,9 +227,6 @@ createRequestAction({
   },
   paramsToPath: function(mediaId, path) {
     return path.replace(/{mediaId}/, mediaId);
-  },
-  resultConvert: function(res, state) {
-    return state.media;
   }
 });
 

@@ -74,32 +74,11 @@
           :drop-directory="dropDirectory"
           :add-index="addIndex"
           v-model="files"
-          :maximum="defaultLimits.video"
           @input-file="inputFile"
           @input-filter="inputFilter"
           ref="upload"
         />
         <div class="btn-group buttonWrapper">
-          <!-- <div v-if="$mq === 'mobile'" class="mobileButtons">
-            <button
-              :disabled="disableButtons"
-              type="button"
-              class="btn"
-              style="marginRight: 5px"
-              ref="addFileButton"
-            >
-              <label :for="name">Add files</label>
-            </button>
-            <button
-              :disabled="disableButtons"
-              class="btn"
-              href="#"
-              @click="onAddFolader"
-              style="marginRight: 5px"
-            >
-              Add folder
-            </button>
-          </div> -->
           <button
             v-if="files.length"
             :disabled="!this.canSend"
@@ -154,9 +133,6 @@ export default {
       accept:
         "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
       extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
-      // accept:
-      //   "image/png,image/gif,image/jpeg,image/webp,video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
-      // extensions: "jpg,jpeg,png,mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,gif",
       multiple: true,
       directory: false,
       drop: true,
@@ -238,19 +214,19 @@ export default {
         return prevent();
       }
     },
-    onAddFolader() {
-      let input = this.$refs.upload.$el.querySelector("input");
-      input.directory = true;
-      input.webkitdirectory = true;
-      this.directory = true;
-      input.onclick = null;
-      input.click();
-      input.onclick = () => {
-        this.directory = false;
-        input.directory = false;
-        input.webkitdirectory = false;
-      };
-    },
+    // onAddFolader() {
+    //   let input = this.$refs.upload.$el.querySelector("input");
+    //   input.directory = true;
+    //   input.webkitdirectory = true;
+    //   this.directory = true;
+    //   input.onclick = null;
+    //   input.click();
+    //   input.onclick = () => {
+    //     this.directory = false;
+    //     input.directory = false;
+    //     input.webkitdirectory = false;
+    //   };
+    // },
     sendHandler() {
       this.loading = true;
       const mediaFiles = this.preloadedMedias;
