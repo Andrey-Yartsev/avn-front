@@ -9,51 +9,53 @@
       />
       <GayLogo v-else />
     </div>
+    <Banner v-if="!isVotingEnabled" :title="banner.title" :text="banner.text" />
+    <template v-else>
+      <select
+        name="month"
+        required="required"
+        v-model="categoryId"
+        class="select"
+      >
+        <option :value="v.id" v-for="v in categories" :key="v.id">{{
+          v.title
+        }}</option>
+      </select>
 
-    <select
-      name="month"
-      required="required"
-      v-model="categoryId"
-      class="select"
-    >
-      <option :value="v.id" v-for="v in categories" :key="v.id">{{
-        v.title
-      }}</option>
-    </select>
-
-    <template>
-      <h2>Please choose your top {{ maxVotes }}</h2>
-      <div>
-        Voting end on Dec 1st 2019 12:00PM. You can cast {{ maxVotes }} votes
-        per day for this category. You have {{ remaining }} votes remaining
-      </div>
-      <div class="title-block">
-        <h1>Privacy Policy</h1>
-        <button @click="nextCategory" class="btn">Next Category</button>
-      </div>
-      <div class="models">
-        <figure
-          v-for="v in models"
-          :key="v.nomineeId"
-          :class="{ voted: v.isVoted, disabled: v.disabled }"
-          @click="vote(v.nomineeId)"
-        >
-          <div v-if="v.dummy" class="dummy"></div>
-          <template v-else>
-            <Loader
-              v-if="voting(v.nomineeId)"
-              :fullscreen="false"
-              :inline="true"
-              :small="true"
-            />
-            <a class="button" />
-            <img :src="v.nominationAvatar" class="image" />
-            <div class="name">{{ v.nominationName }}</div>
-          </template>
-        </figure>
-      </div>
+      <template>
+        <h2>Please choose your top {{ maxVotes }}</h2>
+        <div>
+          Voting end on Dec 1st 2019 12:00PM. You can cast {{ maxVotes }} votes
+          per day for this category. You have {{ remaining }} votes remaining
+        </div>
+        <div class="title-block">
+          <h1>Privacy Policy</h1>
+          <button @click="nextCategory" class="btn">Next Category</button>
+        </div>
+        <div class="models">
+          <figure
+            v-for="v in models"
+            :key="v.nomineeId"
+            :class="{ voted: v.isVoted, disabled: v.disabled }"
+            @click="vote(v.nomineeId)"
+          >
+            <div v-if="v.dummy" class="dummy"></div>
+            <template v-else>
+              <Loader
+                v-if="voting(v.nomineeId)"
+                :fullscreen="false"
+                :inline="true"
+                :small="true"
+              />
+              <a class="button" />
+              <img :src="v.nominationAvatar" class="image" />
+              <div class="name">{{ v.nominationName }}</div>
+            </template>
+          </figure>
+        </div>
+      </template>
+      <Loader v-if="modelsLoading" />
     </template>
-    <Loader v-if="modelsLoading" />
   </div>
 </template>
 
@@ -62,12 +64,14 @@ import Loader from "@/components/common/Loader";
 import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
+import Banner from "./Banner";
 
 export default {
   mixins: [InfinityScroll, User],
   components: {
     Loader,
-    GayLogo
+    GayLogo,
+    Banner
   },
   data() {
     return {
@@ -75,7 +79,11 @@ export default {
       votes: [],
       maxVotes: 5,
       lastVoteId: 0,
-      models: []
+      models: [],
+      banner: {
+        title: "Voting Not Open Yet!",
+        text: "Voting has not begun yet but will open soon."
+      }
     };
   },
   computed: {
@@ -110,6 +118,9 @@ export default {
     },
     votesCount() {
       return this.$store.state.awards.votesCount;
+    },
+    isVotingEnabled() {
+      return this.$store.state.init.data.enableVoting;
     }
   },
   methods: {
@@ -211,7 +222,10 @@ export default {
   },
   watch: {
     categories(categories) {
-      this.categoryId = categories[0].id;
+      if (categories.length) {
+        console.log(categories);
+        this.categoryId = categories[0].id;
+      }
     },
     categoryId() {
       this.$store.commit("awards/resetNominees");
@@ -224,6 +238,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("awards/fetchCategories", this.eventId);
+    console.log(this.$store);
   }
 };
 </script>
