@@ -120,7 +120,11 @@ export default {
       return this.$store.state.awards.votesCount;
     },
     isVotingEnabled() {
-      return this.$store.state.init.data.enableVoting;
+      return (
+        this.$store.state.init.data.enableVoting ||
+        (this.user && this.user.adminReturnUrl) ||
+        (this.user && this.user.showVote)
+      );
     }
   },
   methods: {
@@ -238,7 +242,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("awards/fetchCategories", this.eventId);
-    console.log(this.$store);
   }
 };
 </script>
