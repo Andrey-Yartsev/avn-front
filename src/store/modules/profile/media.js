@@ -28,7 +28,6 @@ const mutations = {
   },
   addMedia(state, newMedias) {
     state.media = [...state.media, ...newMedias];
-    // state.media = [...newMedias, ...state.media];
   },
   addMediaItem(state, newMedias) {
     state.media = [...newMedias, ...state.media];

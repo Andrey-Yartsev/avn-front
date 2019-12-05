@@ -259,7 +259,6 @@ export default {
       file.type = `video/${format}`;
     },
     inputFilter(newFile, oldFile, prevent) {
-      console.log(newFile);
       if (newFile && !oldFile && this.loading) {
         prevent();
       }
