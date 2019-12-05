@@ -2,7 +2,7 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const limit = 10;
+const limit = 50;
 
 const state = {
   offset: 0,
