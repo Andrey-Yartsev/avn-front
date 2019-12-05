@@ -10,11 +10,18 @@ export default {
   },
   computed: {
     text() {
-      return `I watched, I came, I voted for {twitter} for the #AVN @AVNAwards {fan voting link} on #AVNStars`;
+      return `I watched, I came, I voted for ${
+        this.nominee.twitter
+      } for the #AVN @AVNAwards http://avn.to/vote?${
+        this.twitterName
+      } on #AVNStars`;
+    },
+    twitterName() {
+      return this.nominee.twitter.replace(/@(.*)/, "$1");
     }
   },
   mounted() {
-    if (window.twttr && !this.nominee.dummy) {
+    if (window.twttr && !this.nominee.dummy && this.nominee.twitter) {
       window.twttr.widgets.createShareButton(" ", this.$refs.cont, {
         text: this.text
       });

@@ -257,15 +257,13 @@ export default {
       this.fetchNominees();
     },
     addTwitterLib() {
-      setTimeout(() => {
-        let script = document.createElement("script");
-        script.onload = () => {
-          this.twitterScriptLoading = false;
-        };
-        script.async = true;
-        script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
-        document.head.appendChild(script);
-      }, 3000);
+      let script = document.createElement("script");
+      script.onload = () => {
+        this.twitterScriptLoading = false;
+      };
+      script.async = true;
+      script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
+      document.head.appendChild(script);
     }
   },
   watch: {
