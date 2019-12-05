@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import nominationRoutes from "@/components/common/nominationSettingsRoutes";
+// import nominationRoutes from "@/components/common/nominationSettingsRoutes";
 
 export default {
   name: "Sidebar",
@@ -145,10 +145,11 @@ export default {
       return this.$store.state.auth.user;
     },
     nominationRoutes() {
-      if (!this.user || !this.user.adminReturnUrl) {
-        return [];
-      }
-      return nominationRoutes(this.user);
+      return [];
+      // if (!this.user || !this.user.adminReturnUrl) {
+      //   return [];
+      // }
+      // return nominationRoutes(this.user);
     }
   },
   methods: {
