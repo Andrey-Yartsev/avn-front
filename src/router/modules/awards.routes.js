@@ -44,7 +44,7 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/avn_awards/voting",
+    path: "/avn_awards/voting/:category?",
     component: () =>
       import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
@@ -56,7 +56,7 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/gayvn_awards/voting",
+    path: "/gayvn_awards/voting/:category?",
     name: "AvnAwards2Gay",
     component: () =>
       import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),

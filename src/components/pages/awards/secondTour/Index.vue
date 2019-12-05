@@ -290,9 +290,15 @@ export default {
         this.categoryId = categories[0].id;
       }
     },
-    categoryId() {
+    categoryId(id) {
       this.$store.commit("awards/resetNominees");
       this.fetchNominees(true);
+
+      const basePath = this.$route.path.replace(/(.*voting)(\/\d+)/, "$1");
+      if (this.$route.path !== basePath + "/" + id) {
+        this.$router.push(basePath + "/" + id);
+      }
+
       // this.resetInfinityScroll();
     },
     nominees(nominees) {
@@ -304,6 +310,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("awards/fetchCategories", this.eventId);
+    if (this.$route.params.category) {
+      this.categoryId = this.$route.params.category;
+    }
   }
 };
 </script>
