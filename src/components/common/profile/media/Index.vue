@@ -5,7 +5,26 @@
     </div>
     <div v-else class="content">
       <template v-if="this.$props.private && storeEnabled">
-        <FileUploader :defaultLimits="limits" v-if="this.user.isPerformer" />
+        <template v-if="this.user.isPerformer">
+          <FileUploader :defaultLimits="limits" />
+          <div
+            :class="['buttonWrapper', 'more-functions', { open: opened }]"
+            v-click-outside="hide"
+          >
+            <div class="more-functions__overlay" @click="hide"></div>
+            <div class="openMenuButton" @click="open" style="color: red">
+              <img
+                v-if="filterType"
+                :src="'/static/img/ic-filter-red.svg'"
+                alt="filter"
+              />
+              <img v-else :src="'/static/img/ic-filter.svg'" alt="filter" />
+            </div>
+            <div class="more-functions__dropdown">
+              <FilterDropdown :type="filterType" @handleClick="handleClick" />
+            </div>
+          </div>
+        </template>
         <div
           v-else
           class="form-title form-title__default-text border-top centered"
@@ -17,23 +36,6 @@
           settings
         </div>
       </template>
-      <div
-        :class="['buttonWrapper', 'more-functions', { open: opened }]"
-        v-click-outside="hide"
-      >
-        <div class="more-functions__overlay" @click="hide"></div>
-        <div class="openMenuButton" @click="open" style="color: red">
-          <img
-            v-if="filterType"
-            :src="'/static/img/ic-filter-red.svg'"
-            alt="filter"
-          />
-          <img v-else :src="'/static/img/ic-filter.svg'" alt="filter" />
-        </div>
-        <div class="more-functions__dropdown">
-          <FilterDropdown :type="filterType" @handleClick="handleClick" />
-        </div>
-      </div>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
