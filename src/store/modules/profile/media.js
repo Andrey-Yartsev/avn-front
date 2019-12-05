@@ -27,7 +27,8 @@ const mutations = {
     state.editedMedia = null;
   },
   addMedia(state, newMedias) {
-    state.media = [...state.media, ...newMedias];
+    // state.media = [...state.media, ...newMedias];
+    state.media = [...newMedias, ...state.media];
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item => {
