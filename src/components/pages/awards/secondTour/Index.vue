@@ -11,39 +11,41 @@
     </div>
     <Banner v-if="!isVotingEnabled" :title="banner.title" :text="banner.text" />
     <template v-else>
-      <select
-        name="month"
-        required="required"
-        v-model="categoryId"
-        class="select"
-      >
-        <option :value="v.id" v-for="v in categories" :key="v.id">{{
-          v.title
-        }}</option>
-      </select>
+      <template v-if="!categoriesLoading">
+        <div class="select-block">
+          <VueSelect
+            :options="catOptions"
+            v-model="currentCatOption"
+            :clearable="false"
+            :searchable="false"
+            class="voting-select"
+          />
+          <div class="subtitle">Click on image to Vote</div>
+        </div>
 
-      <template>
         <h2>Please choose your top {{ maxVotes }}</h2>
         <div>
-          Voting end on Dec 1st 2019 12:00PM. You can cast {{ maxVotes }} votes
-          per day for this category. You have {{ remaining }} votes remaining
+          Voting end on Dec 1st 2019 12:00PM. You can cast
+          {{ maxVotes }} votes per day for this category. You have
+          {{ remaining }} votes remaining
         </div>
         <div class="title-block">
-          <h1>{{ currentCategory ? currentCategory.title : '...' }}</h1>
+          <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
           <button @click="nextCategory" class="btn">Next Category</button>
         </div>
-        <div class="models">
-          <Nominee
-            v-for="v in models"
-            :key="v.id"
-            :nominee="v"
-            :voting="voting(v.nomineeId)"
-            :twitterScriptLoading="twitterScriptLoading"
-            @vote="vote"
-          />
-        </div>
       </template>
-      <Loader v-if="modelsLoading" />
+
+      <div class="models">
+        <Nominee
+          v-for="v in models"
+          :key="v.id"
+          :nominee="v"
+          :voting="voting(v.nomineeId)"
+          :twitterScriptLoading="twitterScriptLoading"
+          @vote="vote"
+        />
+      </div>
+      <Loader v-if="modelsLoading && !categoriesLoading" />
     </template>
   </div>
 </template>
@@ -55,6 +57,8 @@ import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
 import Nominee from "./Nominee";
+import VueSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 export default {
   mixins: [InfinityScroll, User],
@@ -62,7 +66,8 @@ export default {
     Loader,
     GayLogo,
     Banner,
-    Nominee
+    Nominee,
+    VueSelect
   },
   data() {
     return {
@@ -87,23 +92,37 @@ export default {
     },
     categories() {
       if (!this.$store.state.awards.categories) {
-        return null;
+        return [];
       }
       return this.$store.state.awards.categories.data || [];
+    },
+    catOptions() {
+      return this.categories.map(v => {
+        return {
+          label: v.title,
+          code: v.id
+        };
+      });
     },
     currentCategory() {
       return this.categories.find(v => v.id === this.categoryId);
     },
+    currentCatOption: {
+      get() {
+        return this.catOptions.find(v => v.code === this.categoryId);
+      },
+      set(option) {
+        this.categoryId = option.code;
+      }
+    },
     nominees() {
       return this.$store.state.awards.nominees;
     },
+    categoriesLoading() {
+      return this.$store.state.awards.fetchCategoriesLoading;
+    },
     modelsLoading() {
-      if (this.$store.state.awards.fetchCategoriesLoading) {
-        return true;
-      } else if (this.$store.state.awards._fetchNomineesLoading) {
-        return true;
-      }
-      return false;
+      return this.$store.state.awards._fetchNomineesLoading;
     },
     store() {
       return this.$store.state.awards;
