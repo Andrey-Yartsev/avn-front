@@ -169,7 +169,6 @@ export default {
             this.preloadedMedias = this.preloadedMedias.map(m =>
               m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
             );
-            console.log(this.setMediaIsReady);
             if (this.setMediaIsReady !== undefined) {
               this.setMediaIsReady(processId);
             }
