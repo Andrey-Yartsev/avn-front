@@ -36,14 +36,31 @@
       </template>
 
       <div class="models">
-        <Nominee
-          v-for="v in models"
-          :key="v.id"
-          :nominee="v"
-          :voting="voting(v.nomineeId)"
-          :twitterScriptLoading="twitterScriptLoading"
-          @vote="vote"
-        />
+        <figure
+          v-for="nominee in models"
+          :key="nominee.id"
+          :class="{ voted: nominee.isVoted, disabled: nominee.disabled }"
+        >
+          <div v-if="nominee.dummy" class="dummy"></div>
+          <template v-else>
+            <Loader
+              v-if="voting(nominee.id)"
+              :fullscreen="false"
+              :inline="true"
+              :small="true"
+            />
+            <a class="button" @click="vote(nominee.nomineeId)" />
+            <img
+              :src="nominee.nominationAvatar"
+              class="image"
+              @click="vote(nominee.nomineeId)"
+            />
+            <div class="name-block">
+              <div class="">{{ nominee.nominationName }}</div>
+              <TwitterShare v-if="!twitterScriptLoading" :nominee="nominee" />
+            </div>
+          </template>
+        </figure>
       </div>
       <Loader v-if="modelsLoading && !categoriesLoading" />
     </template>
@@ -56,7 +73,7 @@ import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
-import Nominee from "./Nominee";
+import TwitterShare from "./TwitterShare";
 import VueSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
@@ -66,14 +83,14 @@ export default {
     Loader,
     GayLogo,
     Banner,
-    Nominee,
+    TwitterShare,
     VueSelect
   },
   data() {
     return {
       categoryId: 0,
       votes: [],
-      maxVotes: 5,
+      maxVotes: 2,
       lastVoteId: 0,
       models: [],
       banner: {
@@ -213,10 +230,12 @@ export default {
       if (this.votesCount >= this.maxVotes) {
         this.models = this.models.map(model => {
           if (!model.isVoted) {
+            console.log("DDD");
             model.disabled = true;
           }
           return model;
         });
+        console.log(this.models);
       } else {
         this.models = this.models.map(model => {
           model.disabled = false;
