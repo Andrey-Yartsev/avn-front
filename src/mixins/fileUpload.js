@@ -169,7 +169,10 @@ export default {
             this.preloadedMedias = this.preloadedMedias.map(m =>
               m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
             );
-            // this.setMediaIsReady(processId);
+            console.log(this.setMediaIsReady);
+            if (this.setMediaIsReady !== undefined) {
+              this.setMediaIsReady(processId);
+            }
             this.uploadInProgress = false;
           })
           .catch(hasError => {
