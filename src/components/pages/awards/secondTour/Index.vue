@@ -183,17 +183,18 @@ export default {
       }
 
       this.lastVoteId = id;
-      const model = this.models.find(v => v.nomineeId === id);
-      if (model.disabled) {
+      const nominee = this.models.find(v => v.nomineeId === id);
+      if (nominee.disabled) {
         return;
       }
 
-      if (model.isVoted) {
+      if (nominee.isVoted) {
         this.$store
           .dispatch("awards/unvote", {
             id,
             eventId: this.eventId,
-            categoryId: this.categoryId
+            categoryId: this.categoryId,
+            voteId: nominee.voteId
           })
           .then(() => {
             this.extendModels();

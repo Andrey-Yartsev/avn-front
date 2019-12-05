@@ -208,7 +208,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_unvote",
-  apiPath: "ballot/vote/{eventId}/{categoryId}/{nomineeId}",
+  apiPath: "ballot/vote/{eventId}/{categoryId}/{nomineeId}/{voteId}",
   state,
   mutations,
   actions,
@@ -218,6 +218,7 @@ createRequestAction({
   paramsToPath: function(params, path) {
     let r = path.replace(/{eventId}/, params.eventId);
     r = r.replace(/{nomineeId}/, params.id);
+    r = r.replace(/{voteId}/, params.voteId);
     return r.replace(/{categoryId}/, params.categoryId);
   }
 });
