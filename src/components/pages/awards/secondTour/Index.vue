@@ -74,7 +74,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import InfinityScroll from "@/mixins/infinityScroll";
+// import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
@@ -83,7 +83,10 @@ import VueSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  mixins: [InfinityScroll, User],
+  mixins: [
+    // InfinityScroll,
+    User
+  ],
   components: {
     Loader,
     GayLogo,
@@ -217,11 +220,12 @@ export default {
         this.categoryId = this.categories[i + 1].id;
       }
     },
-    fetchNominees() {
+    fetchNominees(resetBeforeSet) {
       this.$store
         .dispatch("awards/fetchNominees", {
           eventId: this.eventId,
-          categoryId: this.categoryId
+          categoryId: this.categoryId,
+          resetBeforeSet
         })
         .then(() => {
           this.extendModels();
@@ -267,9 +271,9 @@ export default {
         }
       }
     },
-    infinityScrollGetDataMethod() {
-      this.fetchNominees();
-    },
+    // infinityScrollGetDataMethod() {
+    //   this.fetchNominees();
+    // },
     addTwitterLib() {
       let script = document.createElement("script");
       script.onload = () => {
@@ -288,8 +292,8 @@ export default {
     },
     categoryId() {
       this.$store.commit("awards/resetNominees");
-      this.fetchNominees();
-      this.resetInfinityScroll();
+      this.fetchNominees(true);
+      // this.resetInfinityScroll();
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));

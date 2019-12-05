@@ -19,6 +19,9 @@ const actions = {
     };
     return new Promise(accept => {
       dispatch("_fetchNominees", params).then(result => {
+        if (params.resetBeforeSet) {
+          commit("resetNominees");
+        }
         commit("prepareNomineesResult", result);
         accept(result);
       });
