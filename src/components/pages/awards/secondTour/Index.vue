@@ -44,7 +44,7 @@
           <div v-if="nominee.dummy" class="dummy"></div>
           <template v-else>
             <Loader
-              v-if="voting(nominee.id)"
+              v-if="voting(nominee.nomineeId)"
               :fullscreen="false"
               :inline="true"
               :small="true"
@@ -90,7 +90,7 @@ export default {
     return {
       categoryId: 0,
       votes: [],
-      maxVotes: 2,
+      maxVotes: 5,
       lastVoteId: 0,
       models: [],
       banner: {
