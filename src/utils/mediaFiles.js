@@ -273,7 +273,10 @@ export const fileUpload = (
       reject();
     };
 
-    if (Store.state.auth.user.id == 475036) {
+    if (
+      Store.state.auth.user.id == 475036 ||
+      Store.state.auth.user.id == 524167
+    ) {
       xhr.open("POST", `https://cdn-media-ingest.avn.com`, true);
       xhr.send(formData);
     } else {
