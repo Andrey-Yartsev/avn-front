@@ -27,7 +27,10 @@ const mutations = {
     state.editedMedia = null;
   },
   addMedia(state, newMedias) {
-    // state.media = [...state.media, ...newMedias];
+    state.media = [...state.media, ...newMedias];
+    // state.media = [...newMedias, ...state.media];
+  },
+  addMediaItem(state, newMedias) {
     state.media = [...newMedias, ...state.media];
   },
   updateMedia(state, updatedMedia) {
@@ -101,7 +104,7 @@ const actions = {
   },
   addMedia({ dispatch, commit }, data) {
     return dispatch("_addMedia", data).then(res => {
-      commit("addMedia", res);
+      commit("addMediaItem", res);
       dispatch(
         "global/flashToast",
         { text: "New video successfully uploaded" },
