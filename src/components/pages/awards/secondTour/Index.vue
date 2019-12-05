@@ -39,7 +39,10 @@
         <figure
           v-for="nominee in models"
           :key="nominee.id"
-          :class="{ voted: nominee.isVoted, disabled: nominee.disabled }"
+          :class="{
+            voted: nominee.isVoted,
+            disabled: nominee.disabled || votingInProgress
+          }"
         >
           <div v-if="nominee.dummy" class="dummy"></div>
           <template v-else>
@@ -49,15 +52,17 @@
               :inline="true"
               :small="true"
             />
-            <a class="button" @click="vote(nominee.nomineeId)" />
-            <img
-              :src="nominee.nominationAvatar"
-              class="image"
-              @click="vote(nominee.nomineeId)"
-            />
-            <div class="name-block">
-              <div class="">{{ nominee.nominationName }}</div>
-              <TwitterShare v-if="!twitterScriptLoading" :nominee="nominee" />
+            <div class="inner">
+              <a class="button" @click="vote(nominee.nomineeId)" />
+              <img
+                :src="nominee.nominationAvatar"
+                class="image"
+                @click="vote(nominee.nomineeId)"
+              />
+              <div class="name-block">
+                <div class="">{{ nominee.nominationName }}</div>
+                <TwitterShare v-if="!twitterScriptLoading" :nominee="nominee" />
+              </div>
             </div>
           </template>
         </figure>
@@ -156,6 +161,12 @@ export default {
         (this.user && this.user.adminReturnUrl) ||
         (this.user && this.user.showVote)
       );
+    },
+    votingInProgress() {
+      return (
+        this.$store.state.awards._voteLoading ||
+        this.$store.state.awards._unvoteLoading
+      );
     }
   },
   methods: {
@@ -164,6 +175,10 @@ export default {
         this.$store.dispatch("modal/show", {
           name: "login"
         });
+        return;
+      }
+
+      if (this.votingInProgress) {
         return;
       }
 
@@ -230,12 +245,10 @@ export default {
       if (this.votesCount >= this.maxVotes) {
         this.models = this.models.map(model => {
           if (!model.isVoted) {
-            console.log("DDD");
             model.disabled = true;
           }
           return model;
         });
-        console.log(this.models);
       } else {
         this.models = this.models.map(model => {
           model.disabled = false;

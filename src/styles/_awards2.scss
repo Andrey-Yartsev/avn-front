@@ -110,7 +110,9 @@
       }
 
       &.disabled {
-        opacity: 0.5;
+        .inner {
+          opacity: 0.5;
+        }
 
         .image, .button {
           cursor: default;
