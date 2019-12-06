@@ -5,10 +5,9 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 const limit = 50;
 
 const state = {
-  offset: 0,
-  allDataReceived: false,
   votesCount: 0,
-  nominees: []
+  nominees: [],
+  voting: false
 };
 
 const actions = {
@@ -22,7 +21,7 @@ const actions = {
         if (params.resetBeforeSet) {
           commit("resetNominees");
         }
-        commit("prepareNomineesResult", result);
+        commit("setNominees", result);
         accept(result);
       });
     });
@@ -35,6 +34,10 @@ const actions = {
           isVoted: true
         });
         commit("incrementVotesCount");
+        dispatch("fetchNominees", {
+          eventId: data.eventId,
+          categoryId: data.categoryId
+        });
         accept(result);
       });
     });
@@ -47,6 +50,11 @@ const actions = {
           isVoted: false
         });
         commit("decrementVotesCount");
+        dispatch("fetchNominees", {
+          eventId: data.eventId,
+          categoryId: data.categoryId
+          // resetBeforeSet: true
+        });
         accept(result);
       });
     });
@@ -63,13 +71,8 @@ const mutations = {
   clearSavedData() {
     state.savedData = null;
   },
-  prepareNomineesResult(state, result) {
-    if (result.list.length < state.limit) {
-      state.allDataReceived = true;
-    } else {
-      state.offset = state.offset + limit;
-    }
-    state.nominees = [...state.nominees, ...result.list];
+  setNominees(state, result) {
+    state.nominees = result.list;
     state.votesCount = result.votesCount;
   },
   setNomineeVoted(state, { id, isVoted }) {
@@ -200,7 +203,10 @@ createRequestAction({
     method: "POST"
   },
   paramsToOptions: function(params, options) {
-    options.data = { nominee: params.id };
+    options.data = {
+      nominee: params.id,
+      sentry: params.sentry
+    };
     return options;
   },
   paramsToPath: function(params, path) {
@@ -217,6 +223,10 @@ createRequestAction({
   actions,
   options: {
     method: "DELETE"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = { sentry: params.sentry };
+    return options;
   },
   paramsToPath: function(params, path) {
     let r = path.replace(/{eventId}/, params.eventId);

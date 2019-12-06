@@ -67,7 +67,6 @@
           </template>
         </figure>
       </div>
-      <Loader v-if="modelsLoading && !categoriesLoading" />
     </template>
   </div>
 </template>
@@ -105,7 +104,8 @@ export default {
         title: "Voting Not Open Yet!",
         text: "Voting has not begun yet but will open soon."
       },
-      twitterScriptLoading: true
+      twitterScriptLoading: true,
+      votingClickInProgress: false
     };
   },
   computed: {
@@ -197,20 +197,22 @@ export default {
             id,
             eventId: this.eventId,
             categoryId: this.categoryId,
-            voteId: nominee.voteId
+            voteId: nominee.voteId,
+            sentry: JSON.stringify(window.okev.all())
           })
           .then(() => {
-            this.extendModels();
+            this.extendNominees();
           });
       } else {
         this.$store
           .dispatch("awards/vote", {
             id,
             eventId: this.eventId,
-            categoryId: this.categoryId
+            categoryId: this.categoryId,
+            sentry: JSON.stringify(window.okev.all())
           })
           .then(() => {
-            this.extendModels();
+            this.extendNominees();
           });
       }
     },
@@ -220,15 +222,14 @@ export default {
         this.categoryId = this.categories[i + 1].id;
       }
     },
-    fetchNominees(resetBeforeSet) {
+    fetchNominees() {
       this.$store
         .dispatch("awards/fetchNominees", {
           eventId: this.eventId,
-          categoryId: this.categoryId,
-          resetBeforeSet
+          categoryId: this.categoryId
         })
         .then(() => {
-          this.extendModels();
+          this.extendNominees();
         });
     },
     voting(id) {
@@ -242,7 +243,7 @@ export default {
       }
       return false;
     },
-    extendModels() {
+    extendNominees() {
       this.setDisabled();
       this.addDummies();
     },
@@ -291,8 +292,7 @@ export default {
       }
     },
     categoryId(id) {
-      this.$store.commit("awards/resetNominees");
-      this.fetchNominees(true);
+      this.fetchNominees();
 
       const basePath = this.$route.path.replace(/(.*voting)(\/\d+)/, "$1");
       if (this.$route.path !== basePath + "/" + id) {
@@ -303,6 +303,7 @@ export default {
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
+      this.extendNominees();
     }
   },
   created() {
