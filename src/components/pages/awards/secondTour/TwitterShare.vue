@@ -12,7 +12,7 @@ export default {
     text() {
       return `I watched, I came, I voted for ${
         this.nominee.twitter
-      } for the #AVN @AVNAwards http://avn.to/vote?${
+      } for the #AVN @AVNAwards https://avn.to/vote?${
         this.twitterName
       } on #AVNStars`;
     },
