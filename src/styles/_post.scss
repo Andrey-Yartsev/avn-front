@@ -47,6 +47,13 @@
   &__inside {
     flex: 1;
 
+    &.has-media {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        position: static;
+        overflow-y: auto;
+      }
+    }
+
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: absolute;
       top: 0;

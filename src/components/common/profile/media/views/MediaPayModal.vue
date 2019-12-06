@@ -45,22 +45,18 @@ export default {
   methods: {
     yes() {
       const onSuccess = () => {
-        console.log(this.data);
         this.$store
           .dispatch("profile/media/getMediaItem", {
             productId: this.data.messageId
           })
-          .then(res => {
-            console.log(res);
+          .then(() => {
             this.close();
           })
-          .catch(err => {
-            console.log(err);
+          .catch(() => {
             this.close();
           });
       };
       // const amount = parseInt(this.data.price.replace(/\$/, "") * 100) / 100;
-      console.log(this.data);
       this._pay(
         {
           paymentType: "product",

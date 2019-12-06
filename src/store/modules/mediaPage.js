@@ -14,7 +14,9 @@ const mutations = {
     state.media = item;
   },
   updateMediaItem(state, item) {
-    state.media = item;
+    if (state.media) {
+      state.media = item;
+    }
   }
 };
 

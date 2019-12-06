@@ -192,10 +192,10 @@ export default {
   .icon-link {
     cursor: pointer;
     padding: 5px 7px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
     border-radius: 1000px;
     &:hover {
-      background-color: #dadada;
+      background-color: #e4e4e4;
     }
   }
 }
