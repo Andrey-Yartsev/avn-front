@@ -6,6 +6,7 @@ import {
   profileRoutes,
   chatRoutes,
   postRoutes,
+  mediaRoutes,
   settingsRoutes,
   exploreRoutes,
   staticRoutes,
@@ -130,6 +131,7 @@ const routes = [
   ...exploreRoutes,
   ...staticRoutes,
   ...postRoutes,
+  ...mediaRoutes,
   ...awardsRoutes,
   ...profileRoutes
 ];
