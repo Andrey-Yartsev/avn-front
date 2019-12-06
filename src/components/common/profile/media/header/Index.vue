@@ -49,7 +49,11 @@
           <span class="icn-item icn-block" />
           Not active
         </span>
-        <span v-tooltip="'Copy link'" class="icn-item icon-link"></span>
+        <span
+          v-tooltip="'Copy link'"
+          class="icn-item icon-link"
+          @click="copyHref"
+        ></span>
         <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
           >Edit</span
         >
@@ -101,6 +105,14 @@ export default {
     },
     postUser() {
       return this.post.author;
+    },
+    href() {
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/media/${this.postId}`
+      );
     }
   },
   methods: {
@@ -131,6 +143,17 @@ export default {
         data: {
           postId: this.postId
         }
+      });
+    },
+    copyHref() {
+      this.$copyText(this.href).then(() => {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: "Link copied!" },
+          {
+            root: true
+          }
+        );
       });
     }
   },
