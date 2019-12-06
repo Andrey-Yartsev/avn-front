@@ -25,7 +25,7 @@
 
         <h2>Please choose your top {{ maxVotes }}</h2>
         <div>
-          Voting end on Dec 1st 2019 12:00PM. You can cast
+          Voting ends on Jan 25th 2020 12:00PM. You can cast
           {{ maxVotes }} votes per day for this category. You have
           {{ remaining }} votes remaining
         </div>
