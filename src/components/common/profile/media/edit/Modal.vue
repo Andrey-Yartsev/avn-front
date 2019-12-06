@@ -40,9 +40,10 @@ export default {
   computed: {
     post() {
       const editedMediaId = this.$store.state.profile.media.editedMedia;
-      return this.$store.state.profile.media.media.find(
+      const mediaItem = this.$store.state.profile.media.media.find(
         item => item.productId === editedMediaId
       );
+      return mediaItem || this.$store.state.mediaPage.media || null;
     }
   },
   methods: {
