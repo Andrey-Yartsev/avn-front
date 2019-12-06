@@ -118,6 +118,13 @@
           cursor: default;
         }
       }
+
+      &.selected {
+        img {
+          border: 5px solid #03b500;
+          box-sizing: border-box;
+        }
+      }
     }
   }
 
@@ -128,7 +135,7 @@
       padding: 20px;
       border: 1px solid #a7cbe6;
       border-radius: 5px;
-      color: #2073af;
+      color: #408d4c;
     }
   }
 

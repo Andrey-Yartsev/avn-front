@@ -67,5 +67,19 @@ export const routes = [
       isGay: true,
       notShowGenderFilter: true
     }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/vote/:nomineeId/avn_awards/:category",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      isGay: false,
+      notShowGenderFilter: true,
+      directVoting: true
+    }
   }
 ];

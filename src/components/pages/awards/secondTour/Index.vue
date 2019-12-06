@@ -41,7 +41,8 @@
           :key="nominee.id"
           :class="{
             voted: nominee.isVoted,
-            disabled: nominee.disabled || votingInProgress
+            disabled: nominee.disabled || votingInProgress,
+            selected: nominee.selected
           }"
         >
           <div v-if="nominee.dummy" class="dummy"></div>
@@ -67,13 +68,13 @@
           </template>
         </figure>
       </div>
+      <Loader v-if="modelsLoading" />
     </template>
   </div>
 </template>
 
 <script>
 import Loader from "@/components/common/Loader";
-// import InfinityScroll from "@/mixins/infinityScroll";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
@@ -82,10 +83,7 @@ import VueSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 
 export default {
-  mixins: [
-    // InfinityScroll,
-    User
-  ],
+  mixins: [User],
   components: {
     Loader,
     GayLogo,
@@ -105,7 +103,10 @@ export default {
         text: "Voting has not begun yet but will open soon."
       },
       twitterScriptLoading: true,
-      votingClickInProgress: false
+      votingClickInProgress: false,
+      selectedNomineeId: 0,
+      initFetch: false,
+      fetchId: 0
     };
   },
   computed: {
@@ -170,10 +171,23 @@ export default {
         this.$store.state.awards._voteLoading ||
         this.$store.state.awards._unvoteLoading
       );
+    },
+    basePath() {
+      if (this.isGay) {
+        return "/gayvn_awards/voting";
+      } else {
+        return "/avn_awards/voting";
+      }
+    },
+    _selectedNomineeId() {
+      return parseInt(this.$route.params.nomineeId);
+    },
+    _categoryId() {
+      return parseInt(this.$route.params.category);
     }
   },
   methods: {
-    vote(id) {
+    vote(id, initVote) {
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login"
@@ -187,22 +201,27 @@ export default {
 
       this.lastVoteId = id;
       const nominee = this.models.find(v => v.nomineeId === id);
+      if (!nominee) {
+        return;
+      }
       if (nominee.disabled) {
         return;
       }
 
       if (nominee.isVoted) {
-        this.$store
-          .dispatch("awards/unvote", {
-            id,
-            eventId: this.eventId,
-            categoryId: this.categoryId,
-            voteId: nominee.voteId,
-            sentry: JSON.stringify(window.okev.all())
-          })
-          .then(() => {
-            this.extendNominees();
-          });
+        if (!initVote) {
+          this.$store
+            .dispatch("awards/unvote", {
+              id,
+              eventId: this.eventId,
+              categoryId: this.categoryId,
+              voteId: nominee.voteId,
+              sentry: JSON.stringify(window.okev.all())
+            })
+            .then(() => {
+              this.extendNominees();
+            });
+        }
       } else {
         this.$store
           .dispatch("awards/vote", {
@@ -213,6 +232,11 @@ export default {
           })
           .then(() => {
             this.extendNominees();
+            if (initVote) {
+              this.$store.dispatch("global/flashToast", {
+                text: "You have voted for " + nominee.nominationName
+              });
+            }
           });
       }
     },
@@ -223,6 +247,11 @@ export default {
       }
     },
     fetchNominees() {
+      clearTimeout(this.fetchId);
+      this.fetchId = setTimeout(this._fetchNominees, 500);
+    },
+    _fetchNominees() {
+      this.$store.commit("awards/resetNominees");
       this.$store
         .dispatch("awards/fetchNominees", {
           eventId: this.eventId,
@@ -245,6 +274,7 @@ export default {
     },
     extendNominees() {
       this.setDisabled();
+      this.setSelected();
       this.addDummies();
     },
     setDisabled() {
@@ -262,6 +292,17 @@ export default {
         });
       }
     },
+    setSelected() {
+      if (!this.selectedNomineeId) {
+        return;
+      }
+      this.models = this.models.map(model => {
+        if (model.nomineeId === this.selectedNomineeId) {
+          model.selected = true;
+        }
+        return model;
+      });
+    },
     addDummies() {
       const dummiesCount = 4 - (this.models.length % 4);
       if (dummiesCount) {
@@ -272,9 +313,6 @@ export default {
         }
       }
     },
-    // infinityScrollGetDataMethod() {
-    //   this.fetchNominees();
-    // },
     addTwitterLib() {
       let script = document.createElement("script");
       script.onload = () => {
@@ -283,36 +321,54 @@ export default {
       script.async = true;
       script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
       document.head.appendChild(script);
+    },
+    tryVoteSelected() {
+      if (!this.selectedNomineeId) {
+        return;
+      }
+      this.vote(this.selectedNomineeId, true);
     }
   },
   watch: {
     categories(categories) {
-      if (categories.length) {
+      if (categories.length && !this.categoryId) {
         this.categoryId = categories[0].id;
       }
+      this.fetchNominees();
     },
     categoryId(id) {
-      this.fetchNominees();
-
-      const basePath = this.$route.path.replace(/(.*voting)(\/\d+)/, "$1");
-      if (this.$route.path !== basePath + "/" + id) {
-        this.$router.push(basePath + "/" + id);
+      if (!this.initFetch) {
+        if (this.$route.path !== this.basePath + "/" + id) {
+          this.$router.push(this.basePath + "/" + id);
+        }
       }
-
-      // this.resetInfinityScroll();
+      this.fetchNominees();
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
       this.extendNominees();
+      if (this.initFetch) {
+        this.tryVoteSelected();
+        this.initFetch = false;
+      }
+    },
+    _categoryId(categoryId) {
+      this.categoryId = categoryId;
     }
   },
   created() {
     this.addTwitterLib();
   },
   mounted() {
+    this.initFetch = true;
     this.$store.dispatch("awards/fetchCategories", this.eventId);
+
     if (this.$route.params.category) {
-      this.categoryId = this.$route.params.category;
+      this.categoryId = parseInt(this.$route.params.category);
+    }
+
+    if (this._selectedNomineeId) {
+      this.selectedNomineeId = this._selectedNomineeId;
     }
   }
 };

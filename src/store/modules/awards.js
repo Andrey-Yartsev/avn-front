@@ -18,9 +18,6 @@ const actions = {
     };
     return new Promise(accept => {
       dispatch("_fetchNominees", params).then(result => {
-        if (params.resetBeforeSet) {
-          commit("resetNominees");
-        }
         commit("setNominees", result);
         accept(result);
       });
@@ -90,8 +87,6 @@ const mutations = {
     state.votesCount--;
   },
   resetNominees(state) {
-    state.offset = 0;
-    state.allDataReceived = false;
     state.votesCount = 0;
     state.nominees = [];
   }
@@ -99,6 +94,22 @@ const mutations = {
 
 createRequestAction({
   prefix: "fetchCategories",
+  requestType: "any",
+  apiPath: "ballot/categories/{eventId}",
+  state,
+  mutations,
+  actions,
+  resultKey: "categories",
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{eventId}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "_fetchCategories",
   requestType: "any",
   apiPath: "ballot/categories/{eventId}",
   state,
