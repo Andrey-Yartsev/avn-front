@@ -3,13 +3,13 @@ export default user => {
   // if (!user.adminReturnUrl) {
   //   return items;
   // }
-  let a;
+  // let a;
   if (user.nominatable) {
-    a = {
-      name: "avn",
-      title: "AVN Awards"
-    };
-    items.push(a);
+    // a = {
+    //   name: "avn",
+    //   title: "AVN Awards"
+    // };
+    // items.push(a);
   }
   // if (user.nominatable) {
   //   const a = {

@@ -83,11 +83,13 @@
                 to="/settings/payments"
                 >Payments
               </router-link>
+              <!--
               <router-link
                 class="user-menu-item user-menu-item__award-avn icn-item"
                 to="/settings/avn"
                 >AVN Awards Voting
               </router-link>
+              -->
               <router-link
                 v-if="user.canEarn"
                 class="user-menu-item user-menu-item__subscribers icn-item"
