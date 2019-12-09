@@ -106,7 +106,8 @@ export default {
       votingClickInProgress: false,
       selectedNomineeId: 0,
       initFetch: false,
-      fetchId: 0
+      fetchId: 0,
+      initVote: true
     };
   },
   computed: {
@@ -188,6 +189,7 @@ export default {
   },
   methods: {
     vote(id, initVote) {
+
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login"
@@ -200,7 +202,9 @@ export default {
       }
 
       this.lastVoteId = id;
-      const nominee = this.models.find(v => v.nomineeId === id);
+      const nominee = this.models.find(v => {
+        return v.nomineeId === id;
+      });
       if (!nominee) {
         return;
       }
@@ -223,6 +227,9 @@ export default {
             });
         }
       } else {
+        if (initVote && !this.initVote) {
+          return;
+        }
         this.$store
           .dispatch("awards/vote", {
             id,
@@ -346,11 +353,10 @@ export default {
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
-      this.extendNominees();
-      if (this.initFetch) {
+      if (nominees && nominees.length) {
         this.tryVoteSelected();
-        this.initFetch = false;
       }
+      this.extendNominees();
     },
     _categoryId(categoryId) {
       this.categoryId = categoryId;
@@ -366,6 +372,10 @@ export default {
     if (this.$route.params.category) {
       this.categoryId = parseInt(this.$route.params.category);
     }
+
+    setTimeout(() => {
+      this.initVote = false;
+    }, 5000);
 
     if (this._selectedNomineeId) {
       this.selectedNomineeId = this._selectedNomineeId;
