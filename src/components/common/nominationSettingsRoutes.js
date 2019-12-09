@@ -6,7 +6,7 @@ export default user => {
   let a;
   if (user.nominatable) {
     a = {
-      name: "ax1vn",
+      name: "avn",
       title: "AVN Awards"
     };
     items.push(a);

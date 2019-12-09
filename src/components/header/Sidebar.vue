@@ -85,7 +85,7 @@
               </router-link>
               <router-link
                 class="user-menu-item user-menu-item__award-avn icn-item"
-                to="/settings/voting"
+                to="/settings/avn"
                 >AVN Awards Voting
               </router-link>
               <router-link
