@@ -71,13 +71,38 @@
               <div class="rounded-container">
                 <div class="EarningsBlockCollectionView settings-wrapper">
                   <div
-                    class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                    class="form-title table-header-title table-header-title_sticky bg-gradient"
                   >
-                    <div class="bg-gradient__shadow bg-gradient__shadow_mob">
-                      <div class="inner">
+                    <!-- <div
+                    class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+                  > -->
+                    <!-- <div class="bg-gradient__shadow bg-gradient__shadow_mob"> -->
+                    <div class="">
+                      <div class="inner" v-if="$mq === 'desktop'">
                         <span class="semi-transparent nowrap-text"
                           >Earnings</span
                         >
+                      </div>
+                      <div v-if="$mq == 'mobile'" class="filtersSection">
+                        <label
+                          >Sort by spend period:
+                          <select v-model="selectedFilter">
+                            <option value="day">Today</option>
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                            <option value="lifetime">Lifetime</option>
+                          </select>
+                        </label>
+                        <label
+                          >Order by spend amount:
+                          <select
+                            :value="orderSelectValue"
+                            @change="orderChangeHandler"
+                          >
+                            <option value="ASC">High to low</option>
+                            <option value="DESC">Low to high</option>
+                          </select>
+                        </label>
                       </div>
                     </div>
                     <div class="table-header">
@@ -93,13 +118,45 @@
                         Payed since
                       </div>
                       <div
-                        class="spend table__cell table__cell_align table__cell_align-hor-c"
-                        @click="switchSpendOrder"
+                        class="spend table__cell table__cell_align table__cell_align-hor-c headerTitle"
+                        @click="switchSpendOrder('day')"
                       >
-                        Spend lifetime
+                        Spend<br />today
                         <span
                           class="arr-inverse icn-item"
-                          :class="{ 'arr-reverse': this.sort === 'ASC' }"
+                          :class="{ 'arr-reverse': this.sort.day === 'ASC' }"
+                        ></span>
+                      </div>
+                      <div
+                        class="spend table__cell table__cell_align table__cell_align-hor-c headerTitle"
+                        @click="switchSpendOrder('week')"
+                      >
+                        Spend by<br />week
+                        <span
+                          class="arr-inverse icn-item"
+                          :class="{ 'arr-reverse': this.sort.week === 'ASC' }"
+                        ></span>
+                      </div>
+                      <div
+                        class="spend table__cell table__cell_align table__cell_align-hor-c headerTitle"
+                        @click="switchSpendOrder('month')"
+                      >
+                        Spend by<br />month
+                        <span
+                          class="arr-inverse icn-item"
+                          :class="{ 'arr-reverse': this.sort.month === 'ASC' }"
+                        ></span>
+                      </div>
+                      <div
+                        class="spend table__cell table__cell_align table__cell_align-hor-c headerTitle"
+                        @click="switchSpendOrder('lifetime')"
+                      >
+                        Spend<br />lifetime
+                        <span
+                          class="arr-inverse icn-item"
+                          :class="{
+                            'arr-reverse': this.sort.lifetime === 'ASC'
+                          }"
                         ></span>
                       </div>
                     </div>
@@ -166,7 +223,13 @@ export default {
     loadingName: "earningsRequestLoading",
     filter: "",
     actionPrefix: "earnings",
-    sort: "DESC"
+    sort: {
+      day: "DESC",
+      week: "DESC",
+      month: "DESC",
+      lifetime: "DESC"
+    },
+    selectedFilter: "lifetime"
   }),
   computed: {
     loading() {
@@ -196,6 +259,9 @@ export default {
         return 0;
       }
       return this.$store.state.global.scrollBarWidth;
+    },
+    orderSelectValue() {
+      return this.sort[this.selectedFilter];
     }
   },
   methods: {
@@ -212,22 +278,41 @@ export default {
     getPosts() {
       this.$store.dispatch("earnings/getPosts", {
         type: this.actionPrefix,
-        sort: this.sort
+        sortOrder: this.sort[this.selectedFilter],
+        sortBy: this.selectedFilter
       });
     },
     goBack() {
       BackRouter.back();
     },
-    switchSpendOrder() {
-      this.sort = this.sort === "ASC" ? "DESC" : "ASC";
+    switchSpendOrder(type) {
+      this.setSelectedFilter(type);
+      this.sort[type] = this.sort[type] === "ASC" ? "DESC" : "ASC";
+    },
+    setSelectedFilter(type) {
+      this.selectedFilter = type;
+    },
+    orderChangeHandler(e) {
+      this.sort[this.selectedFilter] = e.target.value;
+    },
+    filterChangeHandler(e) {
+      this.selectedFilter = e.target.value;
     }
   },
   watch: {
     page() {
       this.init();
     },
-    sort() {
-      this.init();
+    sort: {
+      handler() {
+        this.init();
+      },
+      deep: true
+    },
+    selectedFilter() {
+      if (this.$mq === "mobile") {
+        this.init();
+      }
     }
   },
   created() {
@@ -235,3 +320,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.headerTitle {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: rgb(231, 231, 231);
+  }
+}
+</style>

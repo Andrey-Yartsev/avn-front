@@ -20,6 +20,15 @@
     <div class="spend table__cell table__cell_align table__cell_align-hor-c">
       ${{ profile.amount }}
     </div>
+    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+      ${{ profile.amount }}
+    </div>
+    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+      ${{ profile.amount }}
+    </div>
+    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+      ${{ profile.amount }}
+    </div>
   </div>
 </template>
 
