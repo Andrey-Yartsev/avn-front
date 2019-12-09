@@ -176,7 +176,7 @@ import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
 import Loader from "@/components/common/Loader";
-// import nominationRoutes from "@/components/common/nominationSettingsRoutes";
+import nominationRoutes from "@/components/common/nominationSettingsRoutes";
 
 export default {
   name: "SettingsAside",
@@ -207,7 +207,7 @@ export default {
         }
       ];
 
-      // items.push(...nominationRoutes(this.user));
+      items.push(...nominationRoutes(this.user));
 
       items.push(
         ...[

@@ -109,6 +109,21 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "fetchNominated",
+  requestType: "any",
+  apiPath: "ballot/nominated/{eventId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{eventId}/, params);
+  }
+});
+
+createRequestAction({
   prefix: "_fetchCategories",
   requestType: "any",
   apiPath: "ballot/categories/{eventId}",

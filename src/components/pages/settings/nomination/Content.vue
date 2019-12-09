@@ -87,9 +87,12 @@
                 </g>
               </svg>
             </div>
-            Use this area to create a link to allow your fans to pre-nominate
-            you. Select the categories for which you would like them to
-            pre-nominate you below.
+            Congratulations on your nominations! (Use plural if they have more
+            than 1 nomination and singular if they only have one)<br /><br />
+
+            Here are custom links you can share with your fans so they can vote
+            easily for you. Fans can vote for you once per day until voting
+            closes at 12 Noon Sat Jan 25, 2020.
           </div>
         </div>
 
@@ -103,13 +106,19 @@
           </div>
 
           <template v-else>
-            <div class="border-top referrals-link" v-if="url">
+            <div
+              class="border-top referrals-link"
+              v-for="v in categories"
+              :key="v.categoryId"
+            >
+              <b>{{ v.categoryName }}</b
+              ><br />
               <div class="referrals-url referrals-url_row">
-                <a :href="url" class="referrals-url__link">{{ url }}</a>
+                <a :href="url(v)" class="referrals-url__link">{{ url(v) }}</a>
                 <button
                   type="button"
                   class="btn btn_fix-width-sm border alt btn-copy-url"
-                  @click="copyToClipboard"
+                  @click="copyToClipboard(v)"
                 >
                   Copy<span class="hidden-mobile" v-if="$mq === 'desktop'">
                     link</span
@@ -117,72 +126,74 @@
                 </button>
               </div>
             </div>
+            <!--
+                       <div
+                         class="border-top gaps-around-selects"
+                         :class="{
+                           'shadow-block shadow-block_b-gap-sm': url,
+                           'shadow-block_reset-pt': !url
+                         }"
+                       >
+                         <div class="container">
+                           <div
+                             class="row row_separate-line"
+                             v-for="(selects, i) in selects"
+                             :key="i"
+                           >
+                             <div
+                               :class="{
+                                 'col-3-4': $mq === 'mobile',
+                                 'col-1-2': $mq === 'desktop'
+                               }"
+                             >
+                               <div class="select-wrapper">
+                                 <select v-model="category[i]" @change="changeTrig">
+                                   <option
+                                     v-for="v in categories"
+                                     :key="v.id"
+                                     :value="v.id"
+                                     >{{ v.title }}</option
+                                   >
+                                 </select>
+                               </div>
+                             </div>
+                             <button
+                               type="button"
+                               class="btn-unblock"
+                               data-original-title="null"
+                               v-if="hasRemoveButton(i)"
+                               @click="remove(i)"
+                             >
+                               <span class="icn-item icn-block"></span>
+                             </button>
+                           </div>
+                         </div>
+                       </div>
 
-            <div
-              class="border-top gaps-around-selects"
-              :class="{
-                'shadow-block shadow-block_b-gap-sm': url,
-                'shadow-block_reset-pt': !url
-              }"
-            >
-              <div class="container">
-                <div
-                  class="row row_separate-line"
-                  v-for="(selects, i) in selects"
-                  :key="i"
-                >
-                  <div
-                    :class="{
-                      'col-3-4': $mq === 'mobile',
-                      'col-1-2': $mq === 'desktop'
-                    }"
-                  >
-                    <div class="select-wrapper">
-                      <select v-model="category[i]" @change="changeTrig">
-                        <option
-                          v-for="v in categories"
-                          :key="v.id"
-                          :value="v.id"
-                          >{{ v.title }}</option
-                        >
-                      </select>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn-unblock"
-                    data-original-title="null"
-                    v-if="hasRemoveButton(i)"
-                    @click="remove(i)"
-                  >
-                    <span class="icn-item icn-block"></span>
-                  </button>
-                </div>
-              </div>
-            </div>
 
-            <div
-              class="form-group form-group_with-label"
-              v-if="selects.length"
-              v-for="(selects, i) in selects"
-              :key="i"
-            >
-              <div class="form-group-inner form-group-title"></div>
-            </div>
+                       <div
+                         class="form-group form-group_with-label"
+                         v-if="selects.length"
+                         v-for="(selects, i) in selects"
+                         :key="i"
+                       >
+                         <div class="form-group-inner form-group-title"></div>
+                       </div>
 
-            <div
-              class="form-group form-group_with-label"
-              v-if="$mq === 'desktop'"
-            >
-              <button
-                type="submit"
-                class="btn lg btn_fix-width saveChanges"
-                :class="{ 'btn_form-gap': $mq === 'desktop' }"
-                :disabled="!changed || loading"
-              >
-                Save changes
-              </button>
-            </div>
+                       <div
+                         class="form-group form-group_with-label"
+                         v-if="$mq === 'desktop'"
+                       >
+                         <button
+                           type="submit"
+                           class="btn lg btn_fix-width saveChanges"
+                           :class="{ 'btn_form-gap': $mq === 'desktop' }"
+                           :disabled="!changed || loading"
+                         >
+                           Save changes
+                         </button>
+                       </div>
+                       -->
           </template>
         </template>
       </div>
@@ -204,7 +215,7 @@
 import Common from "../common";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
-import { gayDomain } from "@/helpers/domains";
+// import { gayDomain } from "@/helpers/domains";
 
 export default {
   name: "NominationSettingsContent",
@@ -217,36 +228,36 @@ export default {
     };
   },
   computed: {
-    url() {
-      const values = Object.values(this.category);
-      if (!values.length) {
-        return null;
-      }
-
-      let path = "";
-      path += "/nominator/";
-      path += this.user.username + "/";
-      if (this.eventId == 91) {
-        path += "avn_awards";
-      } else {
-        path += "gayvn_awards";
-      }
-      path += "/" + values.filter(v => v !== 0).join(",");
-
-      let url;
-      if (this.eventId == 91) {
-        url = window.location.origin + path;
-      } else {
-        url = gayDomain(path);
-      }
-
-      return url;
-    },
+    // url() {
+    //   const values = Object.values(this.category);
+    //   if (!values.length) {
+    //     return null;
+    //   }
+    //
+    //   let path = "";
+    //   path += "/nominator/";
+    //   path += this.user.username + "/";
+    //   if (this.eventId == 91) {
+    //     path += "avn_awards";
+    //   } else {
+    //     path += "gayvn_awards";
+    //   }
+    //   path += "/" + values.filter(v => v !== 0).join(",");
+    //
+    //   let url;
+    //   if (this.eventId == 91) {
+    //     url = window.location.origin + path;
+    //   } else {
+    //     url = gayDomain(path);
+    //   }
+    //
+    //   return url;
+    // },
     categories() {
-      if (!this.$store.state.awards.categories) {
+      if (!this.$store.state.awards.fetchNominatedResult) {
         return [];
       }
-      return this.$store.state.awards.categories.data;
+      return this.$store.state.awards.fetchNominatedResult;
     },
     selects() {
       let r = Object.values(this.category);
@@ -257,7 +268,7 @@ export default {
       return r;
     },
     loadingCategories() {
-      return this.$store.state.awards.fetchCategoriesLoading;
+      return this.$store.state.awards.fetchNominatedLoading;
     },
     isGay() {
       return !!this.$route.path.match(/gayvn/);
@@ -286,7 +297,7 @@ export default {
       this.category = Object.assign({}, this.category);
     },
     fetchCategories() {
-      this.$store.dispatch("awards/fetchCategories", this.eventId);
+      this.$store.dispatch("awards/fetchNominated", this.eventId);
     },
     hasRemoveButton(n) {
       return this.selects.length !== n + 1;
@@ -300,8 +311,8 @@ export default {
       });
       this.category = r;
     },
-    copyToClipboard() {
-      this.$copyText(this.url).then(() => {
+    copyToClipboard(v) {
+      this.$copyText(this.url(v)).then(() => {
         this.$store.dispatch("global/flashToast", {
           text: "URL copied!"
         });
@@ -309,14 +320,23 @@ export default {
     },
     init() {
       this.fetchCategories();
-      if (this.localUser.nominationCategories) {
-        const category = JSON.parse(this.localUser.nominationCategories);
-        if (category) {
-          this.category = category[this.eventId] || {};
-        } else {
-          this.category = {};
-        }
-      }
+      // if (this.localUser.nominationCategories) {
+      //   const category = JSON.parse(this.localUser.nominationCategories);
+      //   if (category) {
+      //     this.category = category[this.eventId] || {};
+      //   } else {
+      //     this.category = {};
+      //   }
+      // }
+    },
+    url(v) {
+      return (
+        window.location.origin +
+        "/vote/" +
+        v.nomineeId +
+        "/avn_awards/" +
+        v.categoryId
+      );
     }
   },
   created() {
