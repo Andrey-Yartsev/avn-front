@@ -209,7 +209,6 @@ export default {
   },
   watch: {
     ["media.price"](value) {
-      console.log(value);
       if (value == 0) {
         this.media.free = true;
       } else {
@@ -217,7 +216,6 @@ export default {
       }
     },
     ["media.free"](value) {
-      console.log(value);
       if (value == true) {
         this.media.price = 0;
       }

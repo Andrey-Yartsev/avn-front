@@ -40,18 +40,25 @@
       class="icn-item icn-pinned icn-size_lg"
     />
     <template v-if="isAuthor">
-      <span v-if="post.active" class="mediaStatus isActive">
-        <span class="icn-item verified-user" />
-        Active
-      </span>
-      <span v-else class="mediaStatus notActive">
-        <span class="icn-item icn-block" />
-        Not active
+      <span class="actionsContainer">
+        <span v-if="post.active" class="mediaStatus isActive">
+          <span class="icn-item verified-user" />
+          Active
+        </span>
+        <span v-else class="mediaStatus notActive">
+          <span class="icn-item icn-block" />
+          Not active
+        </span>
+        <span
+          v-tooltip="'Copy link'"
+          class="icn-item icon-link"
+          @click="copyHref"
+        ></span>
+        <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
+          >Edit</span
+        >
       </span>
     </template>
-    <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
-      >Edit</span
-    >
   </div>
 </template>
 
@@ -98,6 +105,14 @@ export default {
     },
     postUser() {
       return this.post.author;
+    },
+    href() {
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/media/${this.postId}`
+      );
     }
   },
   methods: {
@@ -129,6 +144,17 @@ export default {
           postId: this.postId
         }
       });
+    },
+    copyHref() {
+      this.$copyText(this.href).then(() => {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: "Link copied!" },
+          {
+            root: true
+          }
+        );
+      });
     }
   },
   mounted() {
@@ -144,13 +170,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.post-header {
+  padding-right: 10px;
+}
 .mediaStatus {
-  position: absolute;
-  right: 80px;
-  top: 20px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
   &.isActive {
     color: #2196f3;
   }
@@ -158,11 +181,22 @@ export default {
     color: #e31b1d;
   }
 }
-.editButton {
-  position: absolute;
-  right: 10px;
+.actionsContainer {
+  margin-left: auto;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  & > span {
+    margin-left: 10px;
+  }
+  .icon-link {
+    cursor: pointer;
+    padding: 5px 7px;
+    transition: background-color 0.5s ease;
+    border-radius: 1000px;
+    &:hover {
+      background-color: #e4e4e4;
+    }
+  }
 }
 </style>

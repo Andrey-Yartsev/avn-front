@@ -47,6 +47,13 @@
   &__inside {
     flex: 1;
 
+    &.has-media {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        position: static;
+        overflow-y: auto;
+      }
+    }
+
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       position: absolute;
       top: 0;
@@ -178,6 +185,16 @@
         flex: 1;
         min-width: 360px;
         max-width: calc(100% - 360px);
+      }
+    }
+
+    &.mediaPage {
+      .media {
+        @include media-breakpoint-up($desktop-breakpoint) {
+          flex: 1;
+          min-width: 360px;
+          max-width: 100%;
+        }
       }
     }
   }

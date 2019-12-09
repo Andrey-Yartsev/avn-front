@@ -19,7 +19,7 @@
             class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
             @click="back"
           />
-          <h1 class="page-title">Media</h1>
+          <h1 class="page-title">Video</h1>
           <a
             href="/login"
             @click.prevent="openLoginModal"
