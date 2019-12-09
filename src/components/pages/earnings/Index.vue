@@ -71,7 +71,7 @@
               <div class="rounded-container">
                 <div class="EarningsBlockCollectionView settings-wrapper">
                   <div
-                    class="form-title table-header-title table-header-title_sticky bg-gradient"
+                    class="form-title table-header-title table-header-title_sticky bg-gradient tableHeader"
                   >
                     <!-- <div
                     class="form-title table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
@@ -105,7 +105,7 @@
                         </label>
                       </div>
                     </div>
-                    <div class="table-header">
+                    <div class="table-header" v-if="$mq === 'desktop'">
                       <div class="index table__cell">
                         №
                       </div>
@@ -328,5 +328,8 @@ export default {
   &:hover {
     background-color: rgb(231, 231, 231);
   }
+}
+.tableHeader {
+  padding-bottom: 19px;
 }
 </style>
