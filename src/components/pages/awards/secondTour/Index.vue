@@ -107,7 +107,8 @@ export default {
       selectedNomineeId: 0,
       initFetch: false,
       fetchId: 0,
-      initVote: true
+      initVote: true,
+      votingClicking: false
     };
   },
   computed: {
@@ -168,6 +169,9 @@ export default {
       );
     },
     votingInProgress() {
+      if (this.votingClicking) {
+        return true;
+      }
       return (
         this.$store.state.awards._voteLoading ||
         this.$store.state.awards._unvoteLoading
@@ -189,7 +193,6 @@ export default {
   },
   methods: {
     vote(id, initVote) {
-
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login"
@@ -212,40 +215,46 @@ export default {
         return;
       }
 
-      if (nominee.isVoted) {
-        if (!initVote) {
+      this.votingClicking = true;
+
+      setTimeout(() => {
+        if (nominee.isVoted) {
+          if (!initVote) {
+            this.$store
+              .dispatch("awards/unvote", {
+                id,
+                eventId: this.eventId,
+                categoryId: this.categoryId,
+                voteId: nominee.voteId,
+                sentry: JSON.stringify(window.okev.all())
+              })
+              .then(() => {
+                this.extendNominees();
+                this.votingClicking = false;
+              });
+          }
+        } else {
+          if (initVote && !this.initVote) {
+            return;
+          }
           this.$store
-            .dispatch("awards/unvote", {
+            .dispatch("awards/vote", {
               id,
               eventId: this.eventId,
               categoryId: this.categoryId,
-              voteId: nominee.voteId,
               sentry: JSON.stringify(window.okev.all())
             })
             .then(() => {
               this.extendNominees();
+              if (initVote) {
+                this.$store.dispatch("global/flashToast", {
+                  text: "You have voted for " + nominee.nominationName
+                });
+              }
+              this.votingClicking = false;
             });
         }
-      } else {
-        if (initVote && !this.initVote) {
-          return;
-        }
-        this.$store
-          .dispatch("awards/vote", {
-            id,
-            eventId: this.eventId,
-            categoryId: this.categoryId,
-            sentry: JSON.stringify(window.okev.all())
-          })
-          .then(() => {
-            this.extendNominees();
-            if (initVote) {
-              this.$store.dispatch("global/flashToast", {
-                text: "You have voted for " + nominee.nominationName
-              });
-            }
-          });
-      }
+      }, 100);
     },
     nextCategory() {
       const i = this.categories.findIndex(v => v.id === this.categoryId);
