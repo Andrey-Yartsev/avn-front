@@ -462,7 +462,12 @@ export default {
       }
     },
     getPosts() {
-      this.$store.dispatch("profile/home/getPosts");
+      if (
+        this.$route.params.page !== "links" &&
+        this.$route.params.page !== "media"
+      ) {
+        this.$store.dispatch("profile/home/getPosts");
+      }
     },
     footerScrollAction() {
       const profileDataText = document.querySelector(".mark-line");
