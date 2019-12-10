@@ -34,7 +34,6 @@
           <button @click="nextCategory" class="btn">Next Category</button>
         </div>
       </template>
-
       <div class="models">
         <figure
           v-for="nominee in models"
