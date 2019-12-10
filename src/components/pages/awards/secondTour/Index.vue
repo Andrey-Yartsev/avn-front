@@ -104,7 +104,7 @@ export default {
       twitterScriptLoading: true,
       votingClickInProgress: false,
       selectedNomineeId: 0,
-      initFetch: false,
+      initCategoriesFetch: false,
       fetchId: 0,
       initVote: true,
       votingClicking: false
@@ -355,7 +355,12 @@ export default {
       this.fetchNominees();
     },
     categoryId(id) {
-      if (!this.initFetch) {
+      console.log(
+        this.initCategoriesFetch,
+        this.$route.path,
+        this.basePath + "/" + id
+      );
+      if (!this.initCategoriesFetch) {
         if (this.$route.path !== this.basePath + "/" + id) {
           this.$router.push(this.basePath + "/" + id);
         }
@@ -377,8 +382,10 @@ export default {
     this.addTwitterLib();
   },
   mounted() {
-    this.initFetch = true;
-    this.$store.dispatch("awards/fetchCategories", this.eventId);
+    this.initCategoriesFetch = true;
+    this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
+      this.initCategoriesFetch = false;
+    });
 
     if (this.$route.params.category) {
       this.categoryId = parseInt(this.$route.params.category);
