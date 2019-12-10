@@ -87,8 +87,7 @@
                 </g>
               </svg>
             </div>
-            Congratulations on your nominations! (Use plural if they have more
-            than 1 nomination and singular if they only have one)<br /><br />
+            Congratulations on your nominations!<br /><br />
 
             Here are custom links you can share with your fans so they can vote
             easily for you. Fans can vote for you once per day until voting
