@@ -2,7 +2,7 @@
   <div class="SettingsNotificationsView">
     <form v-on:submit.stop.prevent="save">
       <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
-        {{ isGay ? "GayVN" : "AVN" }} Awards Pre-Nominations Link Generator
+        {{ isGay ? "GayVN" : "AVN" }} Awards Voting Links
       </h1>
       <div
         class="form-nomination"
