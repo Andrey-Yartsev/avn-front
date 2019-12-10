@@ -108,7 +108,6 @@ export default {
       selectedNomineeId: 0,
       initCategoriesFetch: false,
       fetchId: 0,
-      initVote: true,
       votingClicking: false
     };
   },
@@ -241,10 +240,6 @@ export default {
             this.votingClicking = false;
           }
         } else {
-          if (initVote && !this.initVote) {
-            this.votingClicking = false;
-            return;
-          }
           this.$store
             .dispatch("awards/vote", {
               id,
@@ -282,6 +277,7 @@ export default {
           categoryId: this.categoryId
         })
         .then(() => {
+          this.tryVoteSelectedNominee();
           this.extendNominees();
         });
     },
@@ -346,7 +342,7 @@ export default {
       script.src = "https://platform.twitter.com/widgets.js?" + Math.random();
       document.head.appendChild(script);
     },
-    tryVoteSelected() {
+    tryVoteSelectedNominee() {
       if (!this.selectedNomineeId) {
         return;
       }
@@ -370,9 +366,6 @@ export default {
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
-      if (nominees && nominees.length) {
-        this.tryVoteSelected();
-      }
       this.extendNominees();
     },
     _categoryId(categoryId) {
@@ -391,10 +384,6 @@ export default {
     if (this.$route.params.category) {
       this.categoryId = parseInt(this.$route.params.category);
     }
-
-    setTimeout(() => {
-      this.initVote = false;
-    }, 5000);
 
     if (this._selectedNomineeId) {
       this.selectedNomineeId = this._selectedNomineeId;
