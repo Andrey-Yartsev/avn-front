@@ -231,6 +231,8 @@ export default {
                 this.extendNominees();
                 this.votingClicking = false;
               });
+          } else {
+            this.votingClicking = false;
           }
         } else {
           if (initVote && !this.initVote) {
