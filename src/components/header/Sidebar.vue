@@ -88,7 +88,7 @@
                 v-if="user.nominee"
                 class="user-menu-item user-menu-item__award-avn icn-item"
                 to="/settings/avn"
-                >AVN Awards
+                >AVN Awards Promo Link
               </router-link>
 
               <router-link
