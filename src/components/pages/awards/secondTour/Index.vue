@@ -165,7 +165,8 @@ export default {
       return this.$store.state.awards;
     },
     remaining() {
-      return this.maxVotes - this.votesCount;
+      const n = this.maxVotes - this.votesCount;
+      return n === 0 ? "no" : n;
     },
     votesCount() {
       return this.$store.state.awards.votesCount;
