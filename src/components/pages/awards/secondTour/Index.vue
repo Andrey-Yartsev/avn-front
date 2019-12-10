@@ -236,6 +236,7 @@ export default {
           }
         } else {
           if (initVote && !this.initVote) {
+            this.votingClicking = false;
             return;
           }
           this.$store
