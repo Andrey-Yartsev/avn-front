@@ -62,7 +62,7 @@ createRequestAction({
     options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
     options.query.sortBy = params.sortBy || "";
-    options.query.sortOrder = params.sortOrder || "";
+    options.query.sort = params.sort || "";
     return options;
   },
   resultConvert: function(result, state) {

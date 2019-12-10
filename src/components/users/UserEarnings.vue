@@ -18,16 +18,16 @@
       {{ messageTime(profile.sinceDate) }}
     </div>
     <div class="spend table__cell table__cell_align table__cell_align-hor-c">
-      ${{ profile.amount }}
+      ${{ profile.amount.day }}
     </div>
     <div class="spend table__cell table__cell_align table__cell_align-hor-c">
-      ${{ profile.amount }}
+      ${{ profile.amount.week }}
     </div>
     <div class="spend table__cell table__cell_align table__cell_align-hor-c">
-      ${{ profile.amount }}
+      ${{ profile.amount.month }}
     </div>
     <div class="spend table__cell table__cell_align table__cell_align-hor-c">
-      ${{ profile.amount }}
+      ${{ profile.amount.lifetime }}
     </div>
   </div>
 </template>

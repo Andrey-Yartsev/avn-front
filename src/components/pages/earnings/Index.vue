@@ -99,8 +99,8 @@
                             :value="orderSelectValue"
                             @change="orderChangeHandler"
                           >
-                            <option value="ASC">High to low</option>
-                            <option value="DESC">Low to high</option>
+                            <option value="ASC">Low to high</option>
+                            <option value="DESC">High to low</option>
                           </select>
                         </label>
                       </div>
@@ -278,7 +278,7 @@ export default {
     getPosts() {
       this.$store.dispatch("earnings/getPosts", {
         type: this.actionPrefix,
-        sortOrder: this.sort[this.selectedFilter],
+        sort: this.sort[this.selectedFilter],
         sortBy: this.selectedFilter
       });
     },
