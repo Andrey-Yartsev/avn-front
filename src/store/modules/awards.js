@@ -31,9 +31,9 @@ const actions = {
           isVoted: true
         });
         commit("incrementVotesCount");
-        dispatch("fetchNominees", {
-          eventId: data.eventId,
-          categoryId: data.categoryId
+        commit("updateVoteId", {
+          id: data.id,
+          voteId: result.voteId
         });
         accept(result);
       });
@@ -47,10 +47,9 @@ const actions = {
           isVoted: false
         });
         commit("decrementVotesCount");
-        dispatch("fetchNominees", {
-          eventId: data.eventId,
-          categoryId: data.categoryId
-          // resetBeforeSet: true
+        commit("updateVoteId", {
+          id: data.id,
+          voteId: null
         });
         accept(result);
       });
@@ -89,6 +88,14 @@ const mutations = {
   resetNominees(state) {
     state.votesCount = 0;
     state.nominees = [];
+  },
+  updateVoteId(state, { id, voteId }) {
+    state.nominees = state.nominees.map(v => {
+      if (v.nomineeId === id) {
+        v.voteId = voteId;
+      }
+      return v;
+    });
   }
 };
 

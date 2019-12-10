@@ -360,6 +360,7 @@ export default {
       if (!this.initCategoriesFetch) {
         if (this.$route.path !== this.basePath + "/" + id) {
           this.$router.push(this.basePath + "/" + id);
+          this.selectedNomineeId = 0;
         }
       }
       this.fetchNominees();
