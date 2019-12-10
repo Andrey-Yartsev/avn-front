@@ -18,6 +18,12 @@
       font-size: 14px;
       background: #2196f3;
     }
+
+    @include media-breakpoint-down($mobile-breakpoint-dcrs) {
+      h1 {
+        font-size: 24px;
+      }
+    }
   }
 
   .main-loader {
