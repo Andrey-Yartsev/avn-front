@@ -291,12 +291,7 @@ export default {
       if (id !== this.lastVoteId) {
         return false;
       }
-      if (this.$store.state.awards._voteLoading) {
-        return true;
-      } else if (this.$store.state.awards._unvoteLoading) {
-        return true;
-      }
-      return false;
+      return this.votingInProgress;
     },
     extendNominees() {
       this.setDisabled();
