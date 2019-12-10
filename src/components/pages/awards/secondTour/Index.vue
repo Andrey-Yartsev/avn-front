@@ -22,7 +22,6 @@
           />
           <div class="subtitle">Click on image to Vote</div>
         </div>
-
         <h2>Please choose your top {{ maxVotes }}</h2>
         <div>
           Voting ends on Jan 25th 2020 12:00PM. You can cast
@@ -31,12 +30,18 @@
         </div>
         <div class="title-block">
           <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
-          <button @click="nextCategory" class="btn" v-if="!isLastCategory">
+          <button
+            @click="nextCategory"
+            class="btn"
+            v-if="!isLastCategory"
+            :disabled="categoryChangeInProgress"
+          >
             Next Category
           </button>
         </div>
       </template>
       <div class="models">
+        <Loader v-if="categoryChangeInProgress" class="main-loader" />
         <figure
           v-for="nominee in models"
           :key="nominee.id"
@@ -69,7 +74,6 @@
           </template>
         </figure>
       </div>
-      <Loader v-if="modelsLoading" />
     </template>
   </div>
 </template>
@@ -108,7 +112,8 @@ export default {
       selectedNomineeId: 0,
       initCategoriesFetch: false,
       fetchId: 0,
-      votingClicking: false
+      votingClicking: false,
+      categoryChangeInProgress: true
     };
   },
   computed: {
@@ -279,6 +284,7 @@ export default {
         .then(() => {
           this.tryVoteSelectedNominee();
           this.extendNominees();
+          this.categoryChangeInProgress = false;
         });
     },
     voting(id) {
@@ -358,6 +364,7 @@ export default {
     },
     categoryId(id) {
       this.models = [];
+      this.categoryChangeInProgress = true;
       if (!this.initCategoriesFetch) {
         if (this.$route.path !== this.basePath + "/" + id) {
           this.$router.push(this.basePath + "/" + id);

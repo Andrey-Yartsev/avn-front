@@ -20,6 +20,12 @@
     }
   }
 
+  .main-loader {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+  }
+
   .models {
     display: flex;
     justify-content: space-between;
