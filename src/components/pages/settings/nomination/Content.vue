@@ -89,9 +89,9 @@
             </div>
             Congratulations on your nomination{{ plural }}!<br /><br />
 
-            Here are custom link{{ plural }} you can share with your fans so
-            they can vote easily for you. Fans can vote for you once per day
-            until voting closes at 12 Noon Sat Jan 25, 2020.
+            Here {{ pluralVerb }} custom link{{ plural }} you can share with
+            your fans so they can vote easily for you. Fans can vote for you
+            once per day until voting closes at 12 Noon Sat Jan 25, 2020.
           </div>
         </div>
 
@@ -277,6 +277,9 @@ export default {
     },
     plural() {
       return this.categories > 1 ? "s" : "";
+    },
+    pluralVerb() {
+      return this.categories > 1 ? "are" : "is a";
     }
   },
   watch: {

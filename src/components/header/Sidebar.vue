@@ -88,6 +88,13 @@
                 v-if="user.nominee"
                 class="user-menu-item user-menu-item__award-avn icn-item"
                 to="/settings/avn"
+                >AVN Awards
+              </router-link>
+
+              <router-link
+                v-if="isVotingEnabled"
+                class="user-menu-item user-menu-item__award-avn icn-item"
+                to="/avn_awards/voting"
                 >AVN Awards Voting
               </router-link>
 
@@ -158,6 +165,9 @@ export default {
       //   return [];
       // }
       // return nominationRoutes(this.user);
+    },
+    isVotingEnabled() {
+      return this.$store.state.init.data.enableVoting;
     }
   },
   methods: {
