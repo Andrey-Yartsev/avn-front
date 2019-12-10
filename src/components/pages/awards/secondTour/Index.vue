@@ -357,6 +357,7 @@ export default {
       this.fetchNominees();
     },
     categoryId(id) {
+      this.models = [];
       if (!this.initCategoriesFetch) {
         if (this.$route.path !== this.basePath + "/" + id) {
           this.$router.push(this.basePath + "/" + id);
