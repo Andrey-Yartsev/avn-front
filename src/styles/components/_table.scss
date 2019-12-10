@@ -136,6 +136,7 @@
           background-color: $white;
         }
 
+        .EarningsBlockCollectionView &,
         .SubscribersBlockCollectionView & {
 
           @include media-breakpoint-up($desktop-breakpoint) {
@@ -271,6 +272,7 @@
     }
   }
 
+  .EarningsBlockCollectionView &,
   .SubscribersBlockCollectionView & {
 
     .item {
@@ -291,6 +293,9 @@
         }
       }
     }
+  }
+
+  .SubscribersBlockCollectionView & {
 
     &__cell {
 
@@ -412,8 +417,10 @@
     &__cell {
 
       &.index {
-        flex: 0 1 10%;
-        max-width: 10%;
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          display: none;
+        }
 
         @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 4%;
@@ -433,12 +440,47 @@
 
       &.signed,
       &.spend {
-        flex: 0 1 20%;
-        max-width: 20%;
+        flex: 0 1 25%;
+        max-width: 25%;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           flex: 0 1 14%;
           max-width: 14%;
+        }
+      }
+
+      &.signed,
+      &.spend {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          font-size: 12px;
+          flex-wrap: wrap;
+          text-align: right;
+          justify-content: flex-end;
+          align-items: flex-start;
+          align-content: flex-start;
+
+          &:before {
+            content: attr(data-title);
+            flex: 0 0 100%;
+            opacity: .5;
+            text-align: right;
+            font-weight: 400;
+          }
+        }
+      }
+
+      &.spend {
+
+        &.m-row-end {
+
+          @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+            border-top: 1px solid rgba($gray, 0.2);
+            margin-top: 13px;
+            padding-top: 9px;
+            flex: 0 1 33%;
+            max-width: 33%;
+          }
         }
       }
     }
@@ -828,6 +870,7 @@
       padding-bottom: 28px;
     }
 
+    .EarningsBlockCollectionView &,
     .SubscribersBlockCollectionView & {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {

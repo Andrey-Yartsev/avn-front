@@ -14,19 +14,34 @@
         <span class="user-login reset-ml">{{ profile.user.username }}</span>
       </router-link>
     </div>
-    <div class="signed table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="signed table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Payed since"
+    >
       {{ messageTime(profile.sinceDate) }}
     </div>
-    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="spend m-row-end_last table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Spend today"
+    >
       ${{ profile.amount.day }}
     </div>
-    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="spend m-row-end m-row-end_first table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Spend by week"
+    >
       ${{ profile.amount.week }}
     </div>
-    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="spend m-row-end table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Spend by month"
+    >
       ${{ profile.amount.month }}
     </div>
-    <div class="spend table__cell table__cell_align table__cell_align-hor-c">
+    <div
+      class="spend m-row-end m-row-end_last table__cell table__cell_align table__cell_align-hor-c"
+      data-title="Spend lifetime"
+    >
       ${{ profile.amount.lifetime }}
     </div>
   </div>

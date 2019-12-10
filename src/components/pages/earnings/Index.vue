@@ -84,25 +84,37 @@
                         >
                       </div>
                       <div v-if="$mq == 'mobile'" class="filtersSection">
-                        <label
-                          >Sort by spend period:
-                          <select v-model="selectedFilter">
-                            <option value="day">Today</option>
-                            <option value="week">Week</option>
-                            <option value="month">Month</option>
-                            <option value="lifetime">Lifetime</option>
-                          </select>
-                        </label>
-                        <label
-                          >Order by spend amount:
-                          <select
-                            :value="orderSelectValue"
-                            @change="orderChangeHandler"
-                          >
-                            <option value="ASC">Low to high</option>
-                            <option value="DESC">High to low</option>
-                          </select>
-                        </label>
+                        <div class="form-group form-group_with-label">
+                          <label class="form-group-inner">
+                            <span class="label">
+                              Sort by spend period:
+                            </span>
+                            <span class="select-wrapper">
+                              <select v-model="selectedFilter">
+                                <option value="day">Today</option>
+                                <option value="week">Week</option>
+                                <option value="month">Month</option>
+                                <option value="lifetime">Lifetime</option>
+                              </select>
+                            </span>
+                          </label>
+                        </div>
+                        <div class="form-group form-group_with-label">
+                          <label class="form-group-inner">
+                            <span class="label">
+                              Order by spend amount:
+                            </span>
+                            <span class="select-wrapper">
+                              <select
+                                :value="orderSelectValue"
+                                @change="orderChangeHandler"
+                              >
+                                <option value="ASC">Low to high</option>
+                                <option value="DESC">High to low</option>
+                              </select>
+                            </span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div class="table-header" v-if="$mq === 'desktop'">
