@@ -87,11 +87,11 @@
                 </g>
               </svg>
             </div>
-            Congratulations on your nominations!<br /><br />
+            Congratulations on your nomination{{ plural }}!<br /><br />
 
-            Here are custom links you can share with your fans so they can vote
-            easily for you. Fans can vote for you once per day until voting
-            closes at 12 Noon Sat Jan 25, 2020.
+            Here are custom link{{ plural }} you can share with your fans so
+            they can vote easily for you. Fans can vote for you once per day
+            until voting closes at 12 Noon Sat Jan 25, 2020.
           </div>
         </div>
 
@@ -274,6 +274,9 @@ export default {
     },
     eventId() {
       return this.isGay ? 92 : 91;
+    },
+    plural() {
+      return this.categories > 1 ? "s" : "";
     }
   },
   watch: {
