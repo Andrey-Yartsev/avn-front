@@ -31,7 +31,9 @@
         </div>
         <div class="title-block">
           <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
-          <button @click="nextCategory" class="btn">Next Category</button>
+          <button @click="nextCategory" class="btn" v-if="!isLastCategory">
+            Next Category
+          </button>
         </div>
       </template>
       <div class="models">
@@ -141,6 +143,10 @@ export default {
       set(option) {
         this.categoryId = option.code;
       }
+    },
+    isLastCategory() {
+      const index = this.categories.findIndex(v => v.id === this.categoryId);
+      return index && index === this.categories.length - 1;
     },
     nominees() {
       return this.$store.state.awards.nominees;
@@ -355,11 +361,6 @@ export default {
       this.fetchNominees();
     },
     categoryId(id) {
-      console.log(
-        this.initCategoriesFetch,
-        this.$route.path,
-        this.basePath + "/" + id
-      );
       if (!this.initCategoriesFetch) {
         if (this.$route.path !== this.basePath + "/" + id) {
           this.$router.push(this.basePath + "/" + id);
