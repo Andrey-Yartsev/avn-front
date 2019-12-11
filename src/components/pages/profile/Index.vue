@@ -278,7 +278,8 @@ export default {
       collapseLimit: 250,
       collapsed: true,
       mysnapchat: "",
-      descrInitHeight: 0
+      descrInitHeight: 0,
+      genderId: 91
     };
   },
 
@@ -370,7 +371,10 @@ export default {
       return this.snapchat && !this.isOwner(this.profile.id);
     },
     isUserNominatable() {
-      return this.profile.nominee;
+      return (
+        this.profile.nominee &&
+        this.filterNominationLinksByGender(this.genderId).length
+      );
     }
   },
   watch: {
@@ -592,10 +596,11 @@ export default {
       }
     },
     clickVoteHandler() {
-      if (!this.profile.nominatedList) {
+      const filteredList = this.filterNominationLinksByGender(this.genderId);
+      if (!this.profile.nominatedList || !filteredList.length) {
         return;
       }
-      if (this.profile.nominatedList.length === 1) {
+      if (filteredList.length === 1) {
         this.$router.push(this.url(this.profile.nominatedList[0]));
       } else {
         this.$store.dispatch("modal/show", {
@@ -606,6 +611,11 @@ export default {
     },
     url(v) {
       return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
+    },
+    filterNominationLinksByGender(genderId) {
+      return this.profile.nominatedList.filter(
+        item => item.eventId == genderId
+      );
     }
   },
   created() {

@@ -86,7 +86,8 @@ export default {
   data() {
     return {
       headerHeight: 320 + 85, // bg + menu
-      stopHeight: 250
+      stopHeight: 250,
+      genderId: 91
     };
   },
   computed: {
@@ -107,15 +108,19 @@ export default {
       return this.$store.state.global.scrollBarWidth;
     },
     isUserNominatable() {
-      return this.profile.nominee;
+      return (
+        this.profile.nominee &&
+        this.filterNominationLinksByGender(this.genderId).length
+      );
     }
   },
   methods: {
     clickVoteHandler() {
-      if (!this.profile.nominatedList) {
+      const filteredList = this.filterNominationLinksByGender(this.genderId);
+      if (!this.profile.nominatedList || !filteredList.length) {
         return;
       }
-      if (this.profile.nominatedList.length === 1) {
+      if (filteredList.length === 1) {
         this.$router.push(this.url(this.profile.nominatedList[0]));
       } else {
         this.$store.dispatch("modal/show", {
@@ -123,6 +128,11 @@ export default {
           data: { list: this.profile.nominatedList }
         });
       }
+    },
+    filterNominationLinksByGender(genderId) {
+      return this.profile.nominatedList.filter(
+        item => item.eventId == genderId
+      );
     },
     url(v) {
       return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
