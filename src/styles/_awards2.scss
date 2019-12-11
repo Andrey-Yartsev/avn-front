@@ -187,5 +187,8 @@
   .vs__open-indicator {
     fill: #fff;
   }
+  .vs__dropdown-option--selected:not(.vs__dropdown-option--highlight) {
+    background: #000;
+  }
 }
 
