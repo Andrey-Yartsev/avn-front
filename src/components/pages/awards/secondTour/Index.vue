@@ -50,8 +50,9 @@
             disabled: nominee.disabled || votingInProgress,
             selected: nominee.selected
           }"
-          :ref="'nom' + nominee.nomineeId"
         >
+          <div :ref="'nom' + nominee.nomineeId" class="scroll-offset"></div>
+
           <div v-if="nominee.dummy" class="dummy"></div>
           <template v-else>
             <Loader
