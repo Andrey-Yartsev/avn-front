@@ -44,12 +44,13 @@
         <Loader v-if="categoryChangeInProgress" class="main-loader" />
         <figure
           v-for="nominee in models"
-          :key="nominee.id"
+          :key="nominee.nomineeId"
           :class="{
             voted: nominee.isVoted,
             disabled: nominee.disabled || votingInProgress,
             selected: nominee.selected
           }"
+          :ref="'nom' + nominee.nomineeId"
         >
           <div v-if="nominee.dummy" class="dummy"></div>
           <template v-else>
@@ -85,6 +86,7 @@ import User from "@/mixins/user";
 import Banner from "./Banner";
 import TwitterShare from "./TwitterShare";
 import VueSelect from "vue-select";
+import SmoothScroll from "smooth-scroll";
 import "vue-select/dist/vue-select.css";
 
 export default {
@@ -349,6 +351,9 @@ export default {
         return;
       }
       this.vote(this.selectedNomineeId, true);
+
+      const scroll = new SmoothScroll();
+      scroll.animateScroll(this.$refs["nom" + this.selectedNomineeId][0]);
     }
   },
   watch: {
