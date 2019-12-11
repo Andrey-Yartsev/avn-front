@@ -1,31 +1,28 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container popup-addPost">
-        <div class="content content_relative">
-          <div
-            class="popup-addPost__header hidden-mobile"
-            v-if="$mq === 'desktop'"
-          >
-            Voting
-            <button
-              type="button"
-              class="close close_shift-t close_default icn-item icn-size_lg"
-              @click.prevent="close"
-            />
-          </div>
-          <div>
-            <h3>You can vote for me for next categories</h3>
-            <ul>
-              <li>
-                <a href="#">Category 1</a>
-              </li>
-              <li>
-                <a href="#">Category 2</a>
-              </li>
-            </ul>
-          </div>
+      <div class="popup-container popup-reasons">
+        <div class="popup__header m-underline-border">
+          Voting
         </div>
+        <h3 class="popup-alert__title">
+          You can vote for me for next categories
+        </h3>
+        <div class="popup__content">
+          <ul class="category-list">
+            <li class="category-list__item">
+              <a href="#" class="category-list__name">Category 1</a>
+            </li>
+            <li class="category-list__item">
+              <a href="#" class="category-list__name">Category 2</a>
+            </li>
+          </ul>
+        </div>
+        <button
+          type="button"
+          class="close close_shift-t close_default close_visible-mob icn-item icn-size_lg"
+          @click.prevent="close"
+        />
       </div>
     </template>
   </Modal>
