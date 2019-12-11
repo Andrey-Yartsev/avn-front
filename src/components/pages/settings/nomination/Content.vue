@@ -276,10 +276,10 @@ export default {
       return this.isGay ? 92 : 91;
     },
     plural() {
-      return this.categories > 1 ? "s" : "";
+      return this.categories.length > 1 ? "s" : "";
     },
     pluralVerb() {
-      return this.categories > 1 ? "are" : "is a";
+      return this.categories.length > 1 ? "are" : "is a";
     }
   },
   watch: {
