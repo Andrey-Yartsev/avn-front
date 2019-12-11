@@ -8,9 +8,10 @@
       <div class="profile-buttons">
         <button
           @click="clickVoteHandler"
-          class="btn alt"
+          class="btn vote-btn"
           v-if="isUserNominatable && $mq === 'desktop'"
         >
+          <span class="icn-award icn-item icn-size_lg" />
           Vote 4 Me!
         </button>
         <div
