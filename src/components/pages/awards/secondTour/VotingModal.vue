@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="popup-container popup-reasons">
         <div class="popup__header m-underline-border">
-          Vote 4 Me!
+          Vote for me for the AVN Awards!
         </div>
         <!-- <h3 class="popup-alert__title">
           You can vote for me for next categories
