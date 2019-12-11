@@ -84,19 +84,20 @@
                 >Payments
               </router-link>
 
-              <router-link
-                v-if="!userIsGay && user.nominee"
-                class="user-menu-item user-menu-item__award-avn icn-item"
-                to="/settings/avn"
-                >AVN Awards Promo Link
-              </router-link>
-
-              <router-link
-                v-if="!userViewIsGay && isVotingEnabled"
-                class="user-menu-item user-menu-item__award-avn icn-item"
-                to="/avn_awards/voting"
-                >AVN Awards Voting
-              </router-link>
+              <template v-if="!userIsGay && !userViewIsGay">
+                <router-link
+                  v-if="user.nominee"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/avn"
+                  >AVN Awards Promo Link
+                </router-link>
+                <router-link
+                  v-if="isVotingEnabled"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/avn_awards/voting"
+                  >AVN Awards Voting
+                </router-link>
+              </template>
 
               <router-link
                 v-if="user.canEarn"
