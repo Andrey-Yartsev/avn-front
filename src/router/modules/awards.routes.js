@@ -14,20 +14,20 @@ export const routes = [
       notShowGenderFilter: true
     }
   },
-  {
-    beforeEnter: Auth.requireAuthAdmin,
-    path: "/gayvn_awards/nominations",
-    name: "AvnAwardsGay",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      isGay: true,
-      notShowGenderFilter: true
-    }
-  },
+  // {
+  //   beforeEnter: Auth.requireAuthAdmin,
+  //   path: "/gayvn_awards/nominations",
+  //   name: "AvnAwardsGay",
+  //   component: () =>
+  //     import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
+  //   meta: {
+  //     noAuthSection: true,
+  //     staticPage: true,
+  //     cssName: "staticPage",
+  //     isGay: true,
+  //     notShowGenderFilter: true
+  //   }
+  // },
   {
     beforeEnter: Auth.requireAuthAdmin,
     path: "/nominator/:username/:type/:categories?",
@@ -54,20 +54,20 @@ export const routes = [
       notShowGenderFilter: true
     }
   },
-  {
-    beforeEnter: Auth.requireAny,
-    path: "/gayvn_awards/voting/:category?",
-    name: "AvnAwards2Gay",
-    component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
-    meta: {
-      noAuthSection: true,
-      staticPage: true,
-      cssName: "staticPage",
-      isGay: true,
-      notShowGenderFilter: true
-    }
-  },
+  // {
+  //   beforeEnter: Auth.requireAny,
+  //   path: "/gayvn_awards/voting/:category?",
+  //   name: "AvnAwards2Gay",
+  //   component: () =>
+  //     import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+  //   meta: {
+  //     noAuthSection: true,
+  //     staticPage: true,
+  //     cssName: "staticPage",
+  //     isGay: true,
+  //     notShowGenderFilter: true
+  //   }
+  // },
   {
     beforeEnter: Auth.requireAny,
     path: "/vote/:nomineeId/avn_awards/:category",
