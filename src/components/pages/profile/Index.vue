@@ -94,9 +94,12 @@
             </div>
           </div>
           <FollowersCounter :profile="profile" />
-          <div class="wrapper-vote-btn" v-if="$mq === 'mobile'">
+          <div
+            class="wrapper-vote-btn"
+            v-if="isUserNominatable && $mq === 'mobile'"
+          >
             <button @click="clickVoteHandler" class="btn alt">
-              Vote for me
+              Vote 4 Me!
             </button>
           </div>
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
@@ -365,6 +368,9 @@ export default {
     },
     showProfileOffer() {
       return this.snapchat && !this.isOwner(this.profile.id);
+    },
+    isUserNominatable() {
+      return this.profile.nominee;
     }
   },
   watch: {
@@ -586,7 +592,20 @@ export default {
       }
     },
     clickVoteHandler() {
-      this.$store.dispatch("modal/show", { name: "voting" });
+      if (!this.profile.nominatedList) {
+        return;
+      }
+      if (this.profile.nominatedList.length === 1) {
+        this.$router.push(this.url(this.profile.nominatedList[0]));
+      } else {
+        this.$store.dispatch("modal/show", {
+          name: "voting",
+          data: { list: this.profile.nominatedList }
+        });
+      }
+    },
+    url(v) {
+      return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
     }
   },
   created() {
