@@ -95,7 +95,9 @@
           </div>
           <FollowersCounter :profile="profile" />
           <div class="wrapper-vote-btn" v-if="$mq === 'mobile'">
-            <button class="btn alt">Vote for me</button>
+            <button @click="clickVoteHandler" class="btn alt">
+              Vote for me
+            </button>
           </div>
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
@@ -582,6 +584,9 @@ export default {
       } else if (this.$refs.description.$el.style.height !== "") {
         this.$refs.description.$el.style.height = "";
       }
+    },
+    clickVoteHandler() {
+      this.$store.dispatch("modal/show", { name: "voting" });
     }
   },
   created() {

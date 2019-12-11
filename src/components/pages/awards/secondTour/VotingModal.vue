@@ -1,20 +1,31 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container post post-popup">
-        <div
-          class="content"
-          :class="{ 'content_column-mob': $mq === 'mobile' }"
-        >
-          <div class="postPageWrapper postPageWrapper_in-popup">
-            <div class="votingContainer">Hello</div>
+      <div class="popup-container popup-addPost">
+        <div class="content content_relative">
+          <div
+            class="popup-addPost__header hidden-mobile"
+            v-if="$mq === 'desktop'"
+          >
+            Voting
+            <button
+              type="button"
+              class="close close_shift-t close_default icn-item icn-size_lg"
+              @click.prevent="close"
+            />
+          </div>
+          <div>
+            <h3>You can vote for me for next categories</h3>
+            <ul>
+              <li>
+                <a href="#">Category 1</a>
+              </li>
+              <li>
+                <a href="#">Category 2</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <button
-          type="button"
-          class="close close_default icn-item icn-size_lg"
-          @click="close"
-        />
       </div>
     </template>
   </Modal>
@@ -34,16 +45,8 @@ export default {
   computed: {},
   methods: {
     close() {
-      console.log("close");
+      this.$store.dispatch("modal/hide", { name: "voting" });
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.votingContainer {
-  width: 300px;
-  height: 200px;
-  background-color: pink;
-}
-</style>

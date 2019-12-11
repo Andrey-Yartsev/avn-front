@@ -6,7 +6,13 @@
   >
     <div class="container" v-if="isOwner(profile.id)">
       <div class="profile-buttons">
-        <button class="btn alt" v-if="$mq === 'desktop'">Vote for me</button>
+        <button
+          @click="clickVoteHandler"
+          class="btn alt"
+          v-if="$mq === 'desktop'"
+        >
+          Vote for me
+        </button>
         <div class="controls-select-picture" v-if="!profile.header">
           <label
             for="bg"
@@ -95,6 +101,11 @@ export default {
     },
     scrollBarWidth() {
       return this.$store.state.global.scrollBarWidth;
+    }
+  },
+  methods: {
+    clickVoteHandler() {
+      this.$store.dispatch("modal/show", { name: "voting" });
     }
   },
   mounted() {
