@@ -85,14 +85,14 @@
               </router-link>
 
               <router-link
-                v-if="user.nominee"
+                v-if="!userIsGay && user.nominee"
                 class="user-menu-item user-menu-item__award-avn icn-item"
                 to="/settings/avn"
                 >AVN Awards Promo Link
               </router-link>
 
               <router-link
-                v-if="isVotingEnabled"
+                v-if="!userViewIsGay && isVotingEnabled"
                 class="user-menu-item user-menu-item__award-avn icn-item"
                 to="/avn_awards/voting"
                 >AVN Awards Voting
@@ -168,6 +168,12 @@ export default {
     },
     isVotingEnabled() {
       return this.$store.state.init.data.enableVoting;
+    },
+    userIsGay() {
+      return this.user.category === 3;
+    },
+    userViewIsGay() {
+      return this.user.categoryView === 3;
     }
   },
   methods: {
