@@ -4,15 +4,11 @@
     :style="bgStyle"
     ref="bg"
   >
+    <button @click="clickVoteHandler" class="btn alt" v-if="$mq === 'desktop'">
+      Vote for me
+    </button>
     <div class="container" v-if="isOwner(profile.id)">
       <div class="profile-buttons">
-        <button
-          @click="clickVoteHandler"
-          class="btn alt"
-          v-if="$mq === 'desktop'"
-        >
-          Vote for me
-        </button>
         <div class="controls-select-picture" v-if="!profile.header">
           <label
             for="bg"
