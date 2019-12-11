@@ -3,18 +3,21 @@
     <template slot="content">
       <div class="popup-container popup-reasons">
         <div class="popup__header m-underline-border">
-          Voting
+          Vote 4 Me!
         </div>
-        <h3 class="popup-alert__title">
+        <!-- <h3 class="popup-alert__title">
           You can vote for me for next categories
-        </h3>
+        </h3> -->
         <div class="popup__content">
           <ul class="category-list">
-            <li class="category-list__item">
-              <a href="#" class="category-list__name">Category 1</a>
-            </li>
-            <li class="category-list__item">
-              <a href="#" class="category-list__name">Category 2</a>
+            <li
+              v-for="category in data"
+              :key="category.nomineeId"
+              class="category-list__item"
+            >
+              <a :href="url(category)" class="category-list__name">{{
+                category.categoryName
+              }}</a>
             </li>
           </ul>
         </div>
@@ -39,10 +42,23 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    data() {
+      return this.$store.state.modal.voting.data.list;
+    }
+  },
   methods: {
     close() {
       this.$store.dispatch("modal/hide", { name: "voting" });
+    },
+    url(v) {
+      return (
+        window.location.origin +
+        "/vote/" +
+        v.nomineeId +
+        "/avn_awards/" +
+        v.categoryId
+      );
     }
   }
 };

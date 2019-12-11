@@ -9,9 +9,9 @@
         <button
           @click="clickVoteHandler"
           class="btn alt"
-          v-if="$mq === 'desktop'"
+          v-if="isUserNominatable && $mq === 'desktop'"
         >
-          Vote for me
+          Vote 4 Me!
         </button>
         <div
           class="controls-select-picture"
@@ -104,11 +104,27 @@ export default {
     },
     scrollBarWidth() {
       return this.$store.state.global.scrollBarWidth;
+    },
+    isUserNominatable() {
+      return this.profile.nominee;
     }
   },
   methods: {
     clickVoteHandler() {
-      this.$store.dispatch("modal/show", { name: "voting" });
+      if (!this.profile.nominatedList) {
+        return;
+      }
+      if (this.profile.nominatedList.length === 1) {
+        this.$router.push(this.url(this.profile.nominatedList[0]));
+      } else {
+        this.$store.dispatch("modal/show", {
+          name: "voting",
+          data: { list: this.profile.nominatedList }
+        });
+      }
+    },
+    url(v) {
+      return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
     }
   },
   mounted() {
