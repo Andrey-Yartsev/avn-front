@@ -250,11 +250,19 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
+import VotingMixin from "@/mixins/voting";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp, Visibility],
+  mixins: [
+    InfinityScrollMixin,
+    UserMixin,
+    FileUpload,
+    Wsp,
+    Visibility,
+    VotingMixin
+  ],
 
   components: {
     Loader,
@@ -369,9 +377,6 @@ export default {
     },
     showProfileOffer() {
       return this.snapchat && !this.isOwner(this.profile.id);
-    },
-    isUserNominatable() {
-      return this.profile.nominee;
     }
   },
   watch: {
@@ -591,22 +596,6 @@ export default {
       } else if (this.$refs.description.$el.style.height !== "") {
         this.$refs.description.$el.style.height = "";
       }
-    },
-    clickVoteHandler() {
-      if (!this.profile.nominatedList) {
-        return;
-      }
-      if (this.profile.nominatedList.length === 1) {
-        this.$router.push(this.url(this.profile.nominatedList[0]));
-      } else {
-        this.$store.dispatch("modal/show", {
-          name: "voting",
-          data: { list: this.profile.nominatedList }
-        });
-      }
-    },
-    url(v) {
-      return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
     }
   },
   created() {

@@ -64,6 +64,7 @@
 
 <script>
 import UserMixin from "@/mixins/user";
+import VotingMixin from "@/mixins/voting";
 import ProfileBg from "@/mixins/profileBg";
 import Loader from "@/components/common/Loader";
 
@@ -73,7 +74,7 @@ const getScrollbarWidth = () => {
 
 export default {
   name: "ProfileBackground",
-  mixins: [UserMixin, ProfileBg],
+  mixins: [UserMixin, ProfileBg, VotingMixin],
   props: {
     profile: {
       type: Object,
@@ -105,27 +106,6 @@ export default {
     },
     scrollBarWidth() {
       return this.$store.state.global.scrollBarWidth;
-    },
-    isUserNominatable() {
-      return this.profile.nominee;
-    }
-  },
-  methods: {
-    clickVoteHandler() {
-      if (!this.profile.nominatedList) {
-        return;
-      }
-      if (this.profile.nominatedList.length === 1) {
-        this.$router.push(this.url(this.profile.nominatedList[0]));
-      } else {
-        this.$store.dispatch("modal/show", {
-          name: "voting",
-          data: { list: this.profile.nominatedList }
-        });
-      }
-    },
-    url(v) {
-      return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
     }
   },
   mounted() {
