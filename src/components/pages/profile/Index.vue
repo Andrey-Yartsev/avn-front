@@ -98,7 +98,8 @@
             class="wrapper-vote-btn"
             v-if="isUserNominatable && $mq === 'mobile'"
           >
-            <button @click="clickVoteHandler" class="btn alt">
+            <button @click="clickVoteHandler" class="btn vote-btn">
+              <span class="icn-award icn-item icn-size_lg" />
               Vote 4 Me!
             </button>
           </div>
