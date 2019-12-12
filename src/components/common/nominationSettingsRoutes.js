@@ -13,7 +13,7 @@ const userViewIsAll = user => {
 const userHasGayNominations = nominations => {
   return nominations.find(item => item.eventId == "92");
 };
-const useHasStraightNominations = nominations => {
+const userHasStraightNominations = nominations => {
   return nominations.find(item => item.eventId == "91");
 };
 
@@ -22,10 +22,6 @@ export default user => {
   // user is adimin on login from kitchen page
   if (user.adminReturnUrl || user.showVote) {
     items.push(
-      {
-        path: "/settings/avn",
-        title: "AVN Awards Promo Link"
-      },
       {
         path: "/avn_awards/voting",
         title: "AVN Awards Voting"
@@ -39,10 +35,22 @@ export default user => {
         title: "GayVN Awards Voting"
       }
     );
+    if (userHasStraightNominations(user.nominatedList)) {
+      items.push({
+        path: "/settings/avn",
+        title: "AVN Awards Promo Link"
+      });
+    }
+    if (userHasGayNominations(user.nominatedList)) {
+      items.push({
+        path: "/settings/gayvn",
+        title: "GayVN Awards Promo Link"
+      });
+    }
   } else {
     if (
       user.nominee &&
-      useHasStraightNominations(user.nominatedList) &&
+      userHasStraightNominations(user.nominatedList) &&
       Store.state.init.data.enableVoting
     ) {
       items.push({
