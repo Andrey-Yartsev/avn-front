@@ -37,8 +37,8 @@
           <span class="name">
             {{ profile.name }}
           </span>
-          <span class="verified-user icn-item"></span>
-          <div class="block-indicator">
+          <span class="verified-user icn-item" v-if="profile.isVerified"></span>
+          <div class="block-indicator" v-if="user && profile.isBlocked">
             <span class="icn-block icn-item"></span>
           </div>
           <button
