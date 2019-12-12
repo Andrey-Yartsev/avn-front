@@ -2,12 +2,9 @@
   <Modal :onClose="close">
     <template slot="content">
       <div class="popup-container popup-reasons">
-        <div class="popup__header m-underline-border">
+        <div class="popup__header m-underline-border smallFontSize">
           Vote for me for the AVN Awards!
         </div>
-        <!-- <h3 class="popup-alert__title">
-          You can vote for me for next categories
-        </h3> -->
         <div class="popup__content">
           <ul class="category-list">
             <li
@@ -52,11 +49,12 @@ export default {
       this.$store.dispatch("modal/hide", { name: "voting" });
     },
     url(v) {
+      const awardsType = v.eventId == 91 ? "/avn_awards/" : "/gayvn_awards/";
       return (
         window.location.origin +
         "/vote/" +
         v.nomineeId +
-        "/avn_awards/" +
+        awardsType +
         v.categoryId
       );
     }
