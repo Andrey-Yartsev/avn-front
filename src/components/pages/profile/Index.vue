@@ -28,6 +28,14 @@
             <div class="block-indicator" v-if="user && profile.isBlocked">
               <span class="icn-item icn-block"></span>
             </div>
+            <button
+              @click="clickVoteHandler"
+              class="btn vote-btn"
+              v-if="isUserNominatable"
+            >
+              <span class="icn-award icn-item icn-size_lg" />
+              Vote 4 Me!
+            </button>
           </div>
           <span class="user-login reset-ml">
             <a>{{ profile.username }}</a>
@@ -94,15 +102,6 @@
             </div>
           </div>
           <FollowersCounter :profile="profile" />
-          <div
-            class="wrapper-vote-btn"
-            v-if="isUserNominatable && $mq === 'mobile'"
-          >
-            <button @click="clickVoteHandler" class="btn vote-btn">
-              <span class="icn-award icn-item icn-size_lg" />
-              Vote 4 Me!
-            </button>
-          </div>
           <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
           <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />

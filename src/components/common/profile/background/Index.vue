@@ -5,51 +5,41 @@
     ref="bg"
   >
     <div class="container">
-      <div class="profile-buttons">
-        <button
-          @click="clickVoteHandler"
-          class="btn vote-btn"
-          v-if="isUserNominatable && $mq === 'desktop'"
-        >
-          <span class="icn-award icn-item icn-size_lg" />
-          Vote 4 Me!
-        </button>
-        <div
-          class="controls-select-picture"
-          v-if="isOwner(profile.id) && !profile.header"
-        >
-          <label
-            for="bg"
-            class="select-user-image select-user-image_cover select-user-image_cover-lg"
-            :class="{ hide: profile.header || hideBgAdd }"
-            ><span class="select-user-image__text">Add background picture</span>
-            <span
-              class="icn-item icn-media"
-              :class="{
-                'icn-size_lg': $mq === 'mobile',
-                'icn-size_extralg': $mq === 'desktop'
-              }"
-            />
-          </label>
-          <input
-            type="file"
-            id="bg"
-            ref="bgMain"
-            accept=".jpg,.jpeg,.gif,.png"
-            @change="setBgPreview"
+      <div
+        class="controls-select-picture"
+        v-if="isOwner(profile.id) && !profile.header"
+      >
+        <label
+          for="bg"
+          class="select-user-image select-user-image_cover select-user-image_cover-lg"
+          :class="{ hide: profile.header || hideBgAdd }"
+          ><span class="select-user-image__text">Add background picture</span>
+          <span
+            class="icn-item icn-media"
+            :class="{
+              'icn-size_lg': $mq === 'mobile',
+              'icn-size_extralg': $mq === 'desktop'
+            }"
           />
-          <div class="profile-picture-btns" :class="{ show: showBgSave }">
-            <button
-              class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
-              @click="resetBgPreview"
-            />
-            <button
-              class="btn save-changes"
-              @click="saveBg({ isClear: false, refName: 'bgMain' })"
-            >
-              Save changes
-            </button>
-          </div>
+        </label>
+        <input
+          type="file"
+          id="bg"
+          ref="bgMain"
+          accept=".jpg,.jpeg,.gif,.png"
+          @change="setBgPreview"
+        />
+        <div class="profile-picture-btns" :class="{ show: showBgSave }">
+          <button
+            class="btn-cancel-changes cancel-changes icn-item icn-size_lg"
+            @click="resetBgPreview"
+          />
+          <button
+            class="btn save-changes"
+            @click="saveBg({ isClear: false, refName: 'bgMain' })"
+          >
+            Save changes
+          </button>
         </div>
       </div>
     </div>

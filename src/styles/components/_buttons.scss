@@ -160,10 +160,16 @@
     display: inline-flex;
     align-items: center;
     align-content: center;
-    padding: 0;
+    padding: 0 0 0 30px;
+    font-size: 15px;
+    margin-left: 10px;
+    position: relative;
 
     .icn-item {
-      margin-right: 5px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
       color: #d4af37;
     }
   }
