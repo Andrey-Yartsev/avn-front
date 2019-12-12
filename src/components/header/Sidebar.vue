@@ -84,7 +84,7 @@
                 >Payments
               </router-link>
 
-              <template v-if="useIsAdmin">
+              <template v-if="userIsAdmin">
                 <router-link
                   v-if="user.nominee && userHasStraightNominations"
                   class="user-menu-item user-menu-item__award-avn icn-item"
@@ -244,6 +244,12 @@ export default {
     },
     userHasStraightNominations() {
       return this.user.nominatedList.find(item => item.eventId == "91");
+    },
+    userIsAdmin() {
+      return (
+        (this.user && this.user.adminReturnUrl) ||
+        (this.user && this.user.showVote)
+      );
     }
   },
   methods: {

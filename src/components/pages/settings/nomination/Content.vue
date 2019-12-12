@@ -335,11 +335,12 @@ export default {
       // }
     },
     url(v) {
+      const awardsType = this.isGay ? "/gayvn_awards/" : "/avn_awards/";
       return (
         window.location.origin +
         "/vote/" +
         v.nomineeId +
-        "/avn_awards/" +
+        awardsType +
         v.categoryId
       );
     }

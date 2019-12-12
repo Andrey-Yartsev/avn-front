@@ -120,16 +120,16 @@ export const routes = [
       cssName: "settings"
     }
   },
-  // {
-  //   beforeEnter: Auth.requireAuth,
-  //   path: "/settings/gayvn",
-  //   name: "SettingsNominationGay",
-  //   component: () =>
-  //     import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue"),
-  //   meta: {
-  //     cssName: "settings"
-  //   }
-  // },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/gayvn",
+    name: "SettingsNominationGay",
+    component: () =>
+      import(/* webpackChunkName: "SettingsNominationPage" */ "@/components/pages/settings/nomination/Index.vue"),
+    meta: {
+      cssName: "settings"
+    }
+  },
   {
     beforeEnter: Auth.requireAuth,
     path: "/settings/story/:view?",
