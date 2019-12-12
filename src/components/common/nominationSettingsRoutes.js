@@ -11,9 +11,11 @@ const userViewIsAll = user => {
 };
 
 const userHasGayNominations = nominations => {
+  if (!nominations) return false;
   return nominations.find(item => item.eventId == "92");
 };
 const userHasStraightNominations = nominations => {
+  if (!nominations) return false;
   return nominations.find(item => item.eventId == "91");
 };
 
