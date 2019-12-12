@@ -84,6 +84,60 @@
                 >Payments
               </router-link>
 
+              <template v-if="useIsAdmin">
+                <router-link
+                  v-if="user.nominee && userHasStraightNominations"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/avn"
+                  >AVN Awards Promo Link
+                </router-link>
+                <router-link
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/avn_awards/voting"
+                  >AVN Awards Voting
+                </router-link>
+                <router-link
+                  v-if="user.nominee && userHasGayNominations"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/gayvn"
+                  >GayVN Awards Promo Link
+                </router-link>
+                <router-link
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/avn_awards/voting"
+                  >GayVN Awards Voting
+                </router-link>
+              </template>
+              <template v-else>
+                <router-link
+                  v-if="user.nominee && userHasStraightNominations"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/avn"
+                  >AVN Awards Promo Link
+                </router-link>
+                <router-link
+                  v-if="
+                    (userViewIsAll || userViewIsStreight) && isVotingEnabled
+                  "
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/avn_awards/voting"
+                  >AVN Awards Voting
+                </router-link>
+                <router-link
+                  v-if="user.nominee && userHasGayNominations"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/settings/gayvn"
+                  >GayVN Awards Promo Link
+                </router-link>
+                <router-link
+                  v-if="(userViewIsAll || userViewIsGay) && isVotingGayEnabled"
+                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  to="/gayvn_awards/voting"
+                  >GayVN Awards Voting
+                </router-link>
+              </template>
+
+              <!-- 
               <template v-if="!userIsGay && !userViewIsGay">
                 <router-link
                   v-if="user.nominee"
@@ -97,7 +151,7 @@
                   to="/avn_awards/voting"
                   >AVN Awards Voting
                 </router-link>
-              </template>
+              </template> -->
 
               <router-link
                 v-if="user.canEarn"
@@ -170,11 +224,26 @@ export default {
     isVotingEnabled() {
       return this.$store.state.init.data.enableVoting;
     },
+    isVotingGayEnabled() {
+      return this.$store.state.init.data.enableGayVoting;
+    },
     userIsGay() {
       return this.user.category === 3;
     },
     userViewIsGay() {
       return this.user.categoryView === 3;
+    },
+    userViewIsAll() {
+      return this.user.categoryView === 1;
+    },
+    userViewIsStreight() {
+      return this.user.categoryView === 2;
+    },
+    userHasGayNominations() {
+      return this.user.nominatedList.find(item => item.eventId == "92");
+    },
+    userHasStraightNominations() {
+      return this.user.nominatedList.find(item => item.eventId == "91");
     }
   },
   methods: {
