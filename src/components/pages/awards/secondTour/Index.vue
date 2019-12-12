@@ -75,7 +75,7 @@
                 />
                 <div class="name-block">
                   <div class="">{{ nominee.nominationName }}</div>
-                  <TwitterShare
+                  <TwitterGayShare
                     v-if="!twitterScriptLoading"
                     :nominee="nominee"
                   />
@@ -172,6 +172,7 @@ import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
 import Banner from "./Banner";
 import TwitterShare from "./TwitterShare";
+import TwitterGayShare from "./TwitterGayShare";
 import VueSelect from "vue-select";
 import SmoothScroll from "smooth-scroll";
 import "vue-select/dist/vue-select.css";
@@ -183,7 +184,8 @@ export default {
     GayLogo,
     Banner,
     TwitterShare,
-    VueSelect
+    VueSelect,
+    TwitterGayShare
   },
   data() {
     return {
