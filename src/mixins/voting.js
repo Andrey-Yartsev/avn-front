@@ -1,42 +1,49 @@
 export default {
-  data() {
-    return {
-      genderId: 91
-    };
-  },
   computed: {
-    isUserNominatable() {
-      return (
-        this.profile.nominee &&
-        this.filterNominationLinksByGender(this.genderId).length
-      );
+    showVoteButton() {
+      if (!this.profile.nominee) {
+        return false;
+      }
+      if (this.enabledNominations().length) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
     clickVoteHandler() {
-      const filteredList = this.filterNominationLinksByGender(this.genderId);
-      if (!this.profile.nominatedList || !filteredList.length) {
+      const filteredList = this.enabledNominations();
+      if (!filteredList.length) {
         return;
       }
       if (filteredList.length === 1) {
-        this.$router.push(this.url(this.profile.nominatedList[0]));
+        this.$router.push(this.url(filteredList[0]));
       } else {
         this.$store.dispatch("modal/show", {
           name: "voting",
-          data: { list: this.profile.nominatedList }
+          data: { list: filteredList }
         });
       }
     },
-    filterNominationLinksByGender(genderId) {
-      return this.profile.nominatedList.filter(
-        item => item.eventId == genderId
-      );
-    },
     url(v) {
-      return "/vote/" + v.nomineeId + "/avn_awards/" + v.categoryId;
+      const awardsType = v.eventId == 91 ? "/avn_awards/" : "/gayvn_awards/";
+      return "/vote/" + v.nomineeId + awardsType + v.categoryId;
     },
-    setGenderId(id) {
-      this.genderId = id;
+    enabledNominations() {
+      let list = [];
+      if (this.$store.state.init.data.enableVoting) {
+        const straightNominationsList = this.profile.nominatedList.filter(
+          item => item.eventId == "91"
+        );
+        list = [...list, ...straightNominationsList];
+      }
+      if (this.$store.state.init.data.enableGayVoting) {
+        const gayNominationsList = this.profile.nominatedList.filter(
+          item => item.eventId == "92"
+        );
+        list = [...list, ...gayNominationsList];
+      }
+      return list;
     }
   }
 };

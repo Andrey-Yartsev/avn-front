@@ -44,7 +44,7 @@
           <button
             @click="clickVoteHandler"
             class="btn vote-btn"
-            v-if="isUserNominatable"
+            v-if="showVoteButton"
           >
             <span class="icn-award icn-item icn-size_lg" />
             Vote 4 Me!
