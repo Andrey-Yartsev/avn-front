@@ -9,73 +9,159 @@
       />
       <GayLogo v-else />
     </div>
-    <Banner v-if="!isVotingEnabled" :title="banner.title" :text="banner.text" />
-    <template v-else>
-      <template v-if="!categoriesLoading">
-        <div class="select-block">
-          <VueSelect
-            :options="catOptions"
-            v-model="currentCatOption"
-            :clearable="false"
-            :searchable="false"
-            class="voting-select"
-          />
-          <div class="subtitle">Click on image to Vote</div>
-        </div>
-        <h2>Please choose your top {{ maxVotes }}</h2>
-        <div>
-          Voting ends on Jan 25th 2020 12:00PM. You can cast
-          {{ maxVotes }} votes per day for this category. You have
-          {{ remaining }} votes remaining
-        </div>
-        <div class="title-block">
-          <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
-          <button
-            @click="nextCategory"
-            class="btn"
-            v-if="!isLastCategory"
-            :disabled="categoryChangeInProgress"
+    <template v-if="isGay">
+      <Banner
+        v-if="!isVotingGayEnabled"
+        :title="gayBanner.title"
+        :text="gayBanner.text"
+      />
+      <template v-else>
+        <template v-if="!categoriesLoading">
+          <div class="select-block">
+            <VueSelect
+              :options="catOptions"
+              v-model="currentCatOption"
+              :clearable="false"
+              :searchable="false"
+              class="voting-select"
+            />
+            <div class="subtitle">Click on image to Vote</div>
+          </div>
+          <h2>Please choose your top {{ maxVotes }}</h2>
+          <div>
+            Voting ends on Jan 20th 2020 12:00PM. You can cast
+            {{ maxVotes }} votes per day for this category. You have
+            {{ remaining }} votes remaining
+          </div>
+          <div class="title-block">
+            <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
+            <button
+              @click="nextCategory"
+              class="btn"
+              v-if="!isLastCategory"
+              :disabled="categoryChangeInProgress"
+            >
+              Next Category
+            </button>
+          </div>
+        </template>
+        <div class="models">
+          <Loader v-if="categoryChangeInProgress" class="main-loader" />
+          <figure
+            v-for="nominee in models"
+            :key="nominee.nomineeId"
+            :class="{
+              voted: nominee.isVoted,
+              disabled: nominee.disabled || votingInProgress,
+              selected: nominee.selected
+            }"
           >
-            Next Category
-          </button>
+            <div :ref="'nom' + nominee.nomineeId" class="scroll-offset"></div>
+
+            <div v-if="nominee.dummy" class="dummy"></div>
+            <template v-else>
+              <Loader
+                v-if="voting(nominee.nomineeId)"
+                :fullscreen="false"
+                :inline="true"
+                :small="true"
+              />
+              <div class="inner">
+                <a class="button" @click="vote(nominee.nomineeId)" />
+                <img
+                  :src="nominee.nominationAvatar"
+                  class="image"
+                  @click="vote(nominee.nomineeId)"
+                />
+                <div class="name-block">
+                  <div class="">{{ nominee.nominationName }}</div>
+                  <TwitterShare
+                    v-if="!twitterScriptLoading"
+                    :nominee="nominee"
+                  />
+                </div>
+              </div>
+            </template>
+          </figure>
         </div>
       </template>
-      <div class="models">
-        <Loader v-if="categoryChangeInProgress" class="main-loader" />
-        <figure
-          v-for="nominee in models"
-          :key="nominee.nomineeId"
-          :class="{
-            voted: nominee.isVoted,
-            disabled: nominee.disabled || votingInProgress,
-            selected: nominee.selected
-          }"
-        >
-          <div :ref="'nom' + nominee.nomineeId" class="scroll-offset"></div>
-
-          <div v-if="nominee.dummy" class="dummy"></div>
-          <template v-else>
-            <Loader
-              v-if="voting(nominee.nomineeId)"
-              :fullscreen="false"
-              :inline="true"
-              :small="true"
+    </template>
+    <template v-else>
+      <Banner
+        v-if="!isVotingEnabled"
+        :title="banner.title"
+        :text="banner.text"
+      />
+      <template v-else>
+        <template v-if="!categoriesLoading">
+          <div class="select-block">
+            <VueSelect
+              :options="catOptions"
+              v-model="currentCatOption"
+              :clearable="false"
+              :searchable="false"
+              class="voting-select"
             />
-            <div class="inner">
-              <a class="button" @click="vote(nominee.nomineeId)" />
-              <img
-                :src="nominee.nominationAvatar"
-                class="image"
-                @click="vote(nominee.nomineeId)"
+            <div class="subtitle">Click on image to Vote</div>
+          </div>
+          <h2>Please choose your top {{ maxVotes }}</h2>
+          <div>
+            Voting ends on Jan 25th 2020 12:00PM. You can cast
+            {{ maxVotes }} votes per day for this category. You have
+            {{ remaining }} votes remaining
+          </div>
+          <div class="title-block">
+            <h1>{{ currentCategory ? currentCategory.title : "..." }}</h1>
+            <button
+              @click="nextCategory"
+              class="btn"
+              v-if="!isLastCategory"
+              :disabled="categoryChangeInProgress"
+            >
+              Next Category
+            </button>
+          </div>
+        </template>
+        <div class="models">
+          <Loader v-if="categoryChangeInProgress" class="main-loader" />
+          <figure
+            v-for="nominee in models"
+            :key="nominee.nomineeId"
+            :class="{
+              voted: nominee.isVoted,
+              disabled: nominee.disabled || votingInProgress,
+              selected: nominee.selected
+            }"
+          >
+            <div :ref="'nom' + nominee.nomineeId" class="scroll-offset"></div>
+
+            <div v-if="nominee.dummy" class="dummy"></div>
+            <template v-else>
+              <Loader
+                v-if="voting(nominee.nomineeId)"
+                :fullscreen="false"
+                :inline="true"
+                :small="true"
               />
-              <div class="name-block">
-                <div class="">{{ nominee.nominationName }}</div>
-                <TwitterShare v-if="!twitterScriptLoading" :nominee="nominee" />
+              <div class="inner">
+                <a class="button" @click="vote(nominee.nomineeId)" />
+                <img
+                  :src="nominee.nominationAvatar"
+                  class="image"
+                  @click="vote(nominee.nomineeId)"
+                />
+                <div class="name-block">
+                  <div class="">{{ nominee.nominationName }}</div>
+                  <TwitterShare
+                    v-if="!twitterScriptLoading"
+                    :nominee="nominee"
+                  />
+                </div>
               </div>
-            </div>
-          </template>
-        </figure>
-      </div>
+            </template>
+          </figure>
+        </div>
+      </template>
     </template>
   </div>
 </template>
@@ -109,6 +195,11 @@ export default {
       banner: {
         title: "Voting Not Open Yet!",
         text: "Voting has not begun yet but will open soon."
+      },
+      gayBanner: {
+        title: "Voting Not Open Yet!",
+        text:
+          "We are feverishly working on the GayVN nominations and will have it ready by Friday Dec 13th at 12 noon."
       },
       twitterScriptLoading: true,
       votingClickInProgress: false,
@@ -177,6 +268,13 @@ export default {
     isVotingEnabled() {
       return (
         this.$store.state.init.data.enableVoting ||
+        (this.user && this.user.adminReturnUrl) ||
+        (this.user && this.user.showVote)
+      );
+    },
+    isVotingGayEnabled() {
+      return (
+        this.$store.state.init.data.enableGayVoting ||
         (this.user && this.user.adminReturnUrl) ||
         (this.user && this.user.showVote)
       );

@@ -54,20 +54,20 @@ export const routes = [
       notShowGenderFilter: true
     }
   },
-  // {
-  //   beforeEnter: Auth.requireAny,
-  //   path: "/gayvn_awards/voting/:category?",
-  //   name: "AvnAwards2Gay",
-  //   component: () =>
-  //     import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
-  //   meta: {
-  //     noAuthSection: true,
-  //     staticPage: true,
-  //     cssName: "staticPage",
-  //     isGay: true,
-  //     notShowGenderFilter: true
-  //   }
-  // },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/gayvn_awards/voting/:category?",
+    name: "AvnAwards2Gay",
+    component: () =>
+      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      isGay: true,
+      notShowGenderFilter: true
+    }
+  },
   {
     beforeEnter: Auth.requireAny,
     path: "/vote/:nomineeId/avn_awards/:category",
