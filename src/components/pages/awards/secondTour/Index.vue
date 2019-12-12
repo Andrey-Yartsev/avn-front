@@ -12,8 +12,8 @@
     <template v-if="isGay">
       <Banner
         v-if="!isVotingGayEnabled"
-        :title="gayBanner.title"
-        :text="gayBanner.text"
+        :title="banner.title"
+        :text="banner.text"
       />
       <template v-else>
         <template v-if="!categoriesLoading">
@@ -195,11 +195,6 @@ export default {
       banner: {
         title: "Voting Not Open Yet!",
         text: "Voting has not begun yet but will open soon."
-      },
-      gayBanner: {
-        title: "Voting Not Open Yet!",
-        text:
-          "We are feverishly working on the GayVN nominations and will have it ready by Friday Dec 13th at 12 noon."
       },
       twitterScriptLoading: true,
       votingClickInProgress: false,

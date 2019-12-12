@@ -27,10 +27,6 @@ export default user => {
         title: "AVN Awards Voting"
       },
       {
-        path: "/settings/gayvn",
-        title: "GayVN Awards Promo Link"
-      },
-      {
         path: "/gayvn_awards/voting",
         title: "GayVN Awards Voting"
       }
