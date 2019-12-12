@@ -12,9 +12,9 @@
               :key="category.nomineeId"
               class="category-list__item"
             >
-              <a :href="url(category)" class="category-list__name">{{
-                category.categoryName
-              }}</a>
+              <a :href="url(category)" class="category-list__name"
+                >{{ category.categoryName }} {{ categoryType(category) }}</a
+              >
             </li>
           </ul>
         </div>
@@ -57,6 +57,9 @@ export default {
         awardsType +
         v.categoryId
       );
+    },
+    categoryType(category) {
+      return category.eventId == 91 ? "(AVN Awards)" : "(GayVN Awards)";
     }
   }
 };
