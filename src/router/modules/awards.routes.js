@@ -81,5 +81,15 @@ export const routes = [
       notShowGenderFilter: true,
       directVoting: true
     }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/vote",
+    redirect: () => {
+      if (window.location.host.match(/gayvn/)) {
+        return "/gayvn_awards/voting";
+      }
+      return "/avn_awards/voting";
+    }
   }
 ];
