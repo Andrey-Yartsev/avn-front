@@ -110,7 +110,11 @@
               </template>
               <template v-else>
                 <router-link
-                  v-if="user.nominee && userHasStraightNominations"
+                  v-if="
+                    user.nominee &&
+                      userHasStraightNominations &&
+                      isVotingEnabled
+                  "
                   class="user-menu-item user-menu-item__award-avn icn-item"
                   to="/settings/avn"
                   >AVN Awards Promo Link
@@ -124,7 +128,9 @@
                   >AVN Awards Voting
                 </router-link>
                 <router-link
-                  v-if="user.nominee && userHasGayNominations"
+                  v-if="
+                    user.nominee && userHasGayNominations && isVotingGayEnabled
+                  "
                   class="user-menu-item user-menu-item__award-avn icn-item"
                   to="/settings/gayvn"
                   >GayVN Awards Promo Link
