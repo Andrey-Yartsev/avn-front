@@ -6,7 +6,7 @@ export const routes = [
     path: "/avn_awards/nominations",
     name: "AvnAwards",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
+      import(/* webpackChunkName: "AvnAwardsNominations" */ "@/components/pages/awards/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -33,7 +33,7 @@ export const routes = [
     path: "/nominator/:username/:type/:categories?",
     name: "Nominator",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/Index"),
+      import(/* webpackChunkName: "AvnAwardsNominator" */ "@/components/pages/awards/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -46,7 +46,7 @@ export const routes = [
     beforeEnter: Auth.requireAny,
     path: "/avn_awards/voting/:category?",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+      import(/* webpackChunkName: "AvnAwardsVotingCategory" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -59,7 +59,7 @@ export const routes = [
     path: "/gayvn_awards/voting/:category?",
     name: "AvnAwards2Gay",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+      import(/* webpackChunkName: "GayVNAwardsVotingCategory" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -72,12 +72,26 @@ export const routes = [
     beforeEnter: Auth.requireAny,
     path: "/vote/:nomineeId/avn_awards/:category",
     component: () =>
-      import(/* webpackChunkName: "AvnAwards" */ "@/components/pages/awards/secondTour/Index"),
+      import(/* webpackChunkName: "AvnAwardsVoteForPerson" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
       cssName: "staticPage",
       isGay: false,
+      notShowGenderFilter: true,
+      directVoting: true
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/vote/:nomineeId/gayvn_awards/:category",
+    component: () =>
+      import(/* webpackChunkName: "GayVNAwardsVoteForPerson" */ "@/components/pages/awards/secondTour/Index"),
+    meta: {
+      noAuthSection: true,
+      staticPage: true,
+      cssName: "staticPage",
+      isGay: true,
       notShowGenderFilter: true,
       directVoting: true
     }
