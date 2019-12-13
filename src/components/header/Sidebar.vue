@@ -104,7 +104,7 @@
                 </router-link>
                 <router-link
                   class="user-menu-item user-menu-item__award-avn icn-item"
-                  to="/avn_awards/voting"
+                  to="/gayvn_awards/voting"
                   >GayVN Awards Voting
                 </router-link>
               </template>
