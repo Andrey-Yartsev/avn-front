@@ -6,13 +6,14 @@
 export default {
   name: "TwitterShare",
   props: {
-    nominee: Object
+    nominee: Object,
+    textString: String
   },
   computed: {
     text() {
-      return `I watched, I came, I voted for ${
-        this.nominee.twitter
-      } for the #AVN @AVNAwards https://avn.to/vote on #AVNStars`;
+      return `I watched, I came, I voted for ${this.nominee.twitter} for the ${
+        this.$props.textString
+      }`;
     },
     twitterName() {
       return this.nominee.twitter.replace(/@(.*)/, "$1");
