@@ -59,7 +59,7 @@ export const routes = [
     path: "/gayvn_awards/voting/:category?",
     name: "AvnAwards2Gay",
     component: () =>
-      import(/* webpackChunkName: "GayVNAwardsVotingCategory" */ "@/components/pages/awards/secondTour/IndexGay"),
+      import(/* webpackChunkName: "AvnAwardsVotingCategory" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -72,7 +72,7 @@ export const routes = [
     beforeEnter: Auth.requireAny,
     path: "/vote/:nomineeId/avn_awards/:category",
     component: () =>
-      import(/* webpackChunkName: "AvnAwardsVoteForPerson" */ "@/components/pages/awards/secondTour/Index"),
+      import(/* webpackChunkName: "AvnAwardsVotingCategory" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,
@@ -86,7 +86,7 @@ export const routes = [
     beforeEnter: Auth.requireAny,
     path: "/vote/:nomineeId/gayvn_awards/:category",
     component: () =>
-      import(/* webpackChunkName: "GayVNAwardsVoteForPerson" */ "@/components/pages/awards/secondTour/IndexGay"),
+      import(/* webpackChunkName: "AvnAwardsVotingCategory" */ "@/components/pages/awards/secondTour/Index"),
     meta: {
       noAuthSection: true,
       staticPage: true,

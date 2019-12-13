@@ -348,6 +348,24 @@ export default {
 
       const scroll = new SmoothScroll();
       scroll.animateScroll(this.$refs["nom" + this.selectedNomineeId][0]);
+    },
+    initRequest() {
+      this.initCategoriesFetch = true;
+      this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
+        this.initCategoriesFetch = false;
+      });
+
+      if (this.$route.params.category) {
+        this.categoryId = parseInt(this.$route.params.category);
+      }
+
+      if (this._selectedNomineeId) {
+        this.selectedNomineeId = this._selectedNomineeId;
+      }
+
+      if (this.categoryChangeInProgress) {
+        this.categoryChangeInProgress = false;
+      }
     }
   },
   watch: {
@@ -359,14 +377,21 @@ export default {
     },
     categoryId(id) {
       this.models = [];
-      this.categoryChangeInProgress = true;
-      if (!this.initCategoriesFetch) {
-        if (this.$route.path !== this.basePath + "/" + id) {
-          this.$router.push(this.basePath + "/" + id);
+      if (!id) {
+        if (this.selectedNomineeId) {
           this.selectedNomineeId = 0;
         }
+        this.initRequest();
+      } else {
+        this.categoryChangeInProgress = true;
+        if (!this.initCategoriesFetch) {
+          if (this.$route.path !== this.basePath + "/" + id) {
+            this.$router.push(this.basePath + "/" + id);
+            this.selectedNomineeId = 0;
+          }
+        }
+        this.fetchNominees();
       }
-      this.fetchNominees();
     },
     nominees(nominees) {
       this.models = JSON.parse(JSON.stringify(nominees));
@@ -380,18 +405,7 @@ export default {
     this.addTwitterLib();
   },
   mounted() {
-    this.initCategoriesFetch = true;
-    this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
-      this.initCategoriesFetch = false;
-    });
-
-    if (this.$route.params.category) {
-      this.categoryId = parseInt(this.$route.params.category);
-    }
-
-    if (this._selectedNomineeId) {
-      this.selectedNomineeId = this._selectedNomineeId;
-    }
+    this.initRequest();
   }
 };
 </script>
