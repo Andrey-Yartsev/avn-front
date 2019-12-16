@@ -433,7 +433,7 @@
         max-width: 50%;
 
         @include media-breakpoint-up($desktop-breakpoint) {
-          flex: 0 1 68%;
+          flex: 0 1 40%;
           max-width: 68%;
         }
       }

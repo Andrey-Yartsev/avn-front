@@ -195,5 +195,27 @@ export const routes = [
       title: "OBS",
       cssName: "settings"
     }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/subscribers",
+    name: "SettingsSubscribersPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsSubscribersPage" */ "@/components/pages/settings/subscribers/Index.vue"),
+    meta: {
+      title: "Subscribers",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/earnings",
+    name: "SettingsEarningsPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsEarningsPage" */ "@/components/pages/settings/earnings/Index.vue"),
+    meta: {
+      title: "Earnings",
+      cssName: "settings"
+    }
   }
 ];

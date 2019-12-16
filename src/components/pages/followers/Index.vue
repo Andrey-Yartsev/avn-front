@@ -40,20 +40,6 @@
             >
               Likes {{ profile.favoritesCount }}
             </router-link>
-            <router-link
-              to="/subscribers"
-              class="content-nav__item"
-              v-if="isOwner(profile.id)"
-            >
-              Subscribers
-            </router-link>
-            <router-link
-              to="/earnings"
-              class="content-nav__item"
-              v-if="isOwner(profile.id) && profile.canEarn"
-            >
-              Earnings
-            </router-link>
           </div>
           <div class="row">
             <div class="content-col single-col">

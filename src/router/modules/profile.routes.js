@@ -36,28 +36,6 @@ export const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
-    path: "/subscribers",
-    name: "SubscribersPage",
-    component: () =>
-      import(/* webpackChunkName: "SubscribersPage" */ "@/components/pages/subscribers/Index"),
-    meta: {
-      title: "subscribes",
-      cssName: "following"
-    }
-  },
-  {
-    beforeEnter: Auth.requireAuth,
-    path: "/earnings",
-    name: "EarningsPage",
-    component: () =>
-      import(/* webpackChunkName: "EarningsPage" */ "@/components/pages/earnings/Index"),
-    meta: {
-      title: "earnings",
-      cssName: "following"
-    }
-  },
-  {
     beforeEnter: Profile.init,
     path: "/:username/:page?",
     name: "ProfilePage",

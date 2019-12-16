@@ -162,7 +162,7 @@
               <router-link
                 v-if="user.canEarn"
                 class="user-menu-item user-menu-item__subscribers icn-item"
-                to="/subscribers"
+                to="/settings/subscribers"
                 >Subscribers
               </router-link>
             </div>

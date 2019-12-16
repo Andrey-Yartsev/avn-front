@@ -230,17 +230,21 @@ export default {
           {
             name: "products",
             title: "My purchases"
-          },
-          {
-            name: "payouts",
-            title: "Payouts"
-          },
-          {
-            name: "payments",
-            title: "Payments"
           }
         ]
       );
+      if (this.user && this.user.canEarn) {
+        items.push(
+          {
+            name: "subscribers",
+            title: "Subscribers"
+          },
+          {
+            name: "earnings",
+            title: "Earnings"
+          }
+        );
+      }
       if (process.env.VUE_APP_NAME === "avn") {
         items.push({
           name: "credits",
