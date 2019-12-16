@@ -66,8 +66,8 @@ createRequestAction({
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
-    options.query.offset = params.offset || 0;
-    options.query.limit = params.limit || 10;
+    // options.query.offset = params.offset || 0;
+    // options.query.limit = params.limit || 10;
     options.query.marker = params.marker || "";
     options.query.active =
       params.active === true ? 1 : params.active === false ? 0 : undefined;

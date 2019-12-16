@@ -43,71 +43,67 @@
       </div>
       <div class="row">
         <div class="content-col single-col">
-          <div class="rounded-container">
-            <div class="SubscribersBlockCollectionView settings-wrapper">
-              <div
-                class="form-title"
-                :class="{
-                  'table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo':
-                    $mq === 'desktop'
-                }"
-              >
-                <div class="bg-gradient__shadow bg-gradient__shadow_mob">
-                  <div class="inner">
-                    <span class="semi-transparent nowrap-text"
-                      >Subscribers</span
-                    >
-                  </div>
-                </div>
-                <div class="table-header">
-                  <div class="user table__cell">
-                    User
-                  </div>
-                  <div class="snapchatUsername table__cell">
-                    Snapchat<br />Username
-                  </div>
-                  <div
-                    class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
-                  >
-                    Amount
-                  </div>
-                  <div
-                    class="status table__cell table__cell_align table__cell_align-hor-c"
-                  >
-                    Status
-                  </div>
-                  <div
-                    class="joined table__cell table__cell_align table__cell_align-hor-c"
-                  >
-                    Joined
-                  </div>
-                  <div
-                    class="canceled table__cell table__cell_align table__cell_align-hor-c"
-                  >
-                    Canceled
-                  </div>
+          <div class="SubscribersBlockCollectionView settings-wrapper">
+            <div
+              class="form-title"
+              :class="{
+                'table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo':
+                  $mq === 'desktop'
+              }"
+            >
+              <div class="bg-gradient__shadow bg-gradient__shadow_mob">
+                <div class="inner">
+                  <span class="semi-transparent nowrap-text">Subscribers</span>
                 </div>
               </div>
-              <div class="shadow-block no-padding">
-                <div class="table-wrapper">
-                  <UsersTable
-                    v-if="users.length"
-                    :items="users"
-                    :loading="false"
-                    :query="page"
-                    :actionPrefix="actionPrefix"
-                  />
-                  <div class="loader-infinity" v-if="infinityScrollLoading">
-                    <Loader :fullscreen="false" :inline="true" class="small" />
-                  </div>
-                  <div
-                    class="empty-table-info"
-                    :class="{
-                      show: users.length === 0 && !infinityScrollLoading
-                    }"
-                  >
-                    <span>Empty here for now</span>
-                  </div>
+              <div class="table-header">
+                <div class="user table__cell">
+                  User
+                </div>
+                <div class="snapchatUsername table__cell">
+                  Snapchat<br />Username
+                </div>
+                <div
+                  class="amount table__cell table__cell_align table__cell_align-hor-c table__cell_selected"
+                >
+                  Amount
+                </div>
+                <div
+                  class="status table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  Status
+                </div>
+                <div
+                  class="joined table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  Joined
+                </div>
+                <div
+                  class="canceled table__cell table__cell_align table__cell_align-hor-c"
+                >
+                  Canceled
+                </div>
+              </div>
+            </div>
+            <div class="shadow-block no-padding">
+              <div class="table-wrapper">
+                <UsersTable
+                  v-if="users.length"
+                  :items="users"
+                  :loading="false"
+                  :query="page"
+                  :actionPrefix="actionPrefix"
+                />
+                <div class="loader-infinity" v-if="infinityScrollLoading">
+                  <Loader :fullscreen="false" :inline="true" class="small" />
+                </div>
+                <div
+                  class="empty-table-info"
+                  :class="{
+                    show: users.length === 0 && !infinityScrollLoading
+                  }"
+                >
+                  <span>Empty here for now</span>
                 </div>
               </div>
             </div>

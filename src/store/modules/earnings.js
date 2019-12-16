@@ -58,8 +58,8 @@ createRequestAction({
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
-    options.query.offset = params.offset || 0;
-    options.query.limit = params.limit || 5;
+    // options.query.offset = params.offset || 0;
+    // options.query.limit = params.limit || 5;
     options.query.marker = params.marker || "";
     options.query.sortBy = params.sortBy || "";
     options.query.sort = params.sort || "";
