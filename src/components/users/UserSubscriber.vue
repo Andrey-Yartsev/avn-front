@@ -14,12 +14,19 @@
           </span>
         </span>
         <div class="name">{{ profile.subscriber.name }}</div>
-        <span class="user-login reset-ml">{{
+        <span class="user-login reset-ml" v-if="profile.subscriber.username">{{
           profile.subscriber.username
         }}</span>
+        <span v-if="$mq === 'desktop' && profile.snap_name">
+          {{ profile.snap_name }}
+        </span>
       </router-link>
     </div>
-    <div class="snapchatUsername table__cell" data-title="Snapchat Username">
+    <div
+      class="snapchatUsername table__cell"
+      data-title="Snapchat Username"
+      v-if="$mq === 'mobile'"
+    >
       {{ profile.snap_name }}
     </div>
     <div
