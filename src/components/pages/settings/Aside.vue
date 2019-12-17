@@ -230,6 +230,14 @@ export default {
           {
             name: "products",
             title: "My purchases"
+          },
+          {
+            name: "payouts",
+            title: "Payouts"
+          },
+          {
+            name: "payments",
+            title: "Payments"
           }
         ]
       );
