@@ -208,6 +208,10 @@
         <div class="stream-online-label" v-if="isStarted && !startingStream">
           live
         </div>
+        <div class="stream-tipsGoalTitle" v-if="activeTipsGoal">
+          TIP Countdown: ${{ activeTipsGoal.ammount }} for
+          {{ activeTipsGoal.description }}
+        </div>
         <div class="form-comments" v-if="isStarted">
           <Comments
             v-if="asideType === 'comments'"
@@ -236,6 +240,34 @@
               type="button"
               class="btn-send btn-send_inside-field icn-item icn-size_lg"
               :disabled="!newComment.length"
+            ></button>
+          </form>
+        </div>
+        <div v-if="isStarted" class="form-tipsGoal">
+          <form class="form-tipsGoal__wrapper" v-if="showTipsGoalForm">
+            <input
+              type="number"
+              ref="tipsGoalAmmount"
+              class="form-tipsGoal__input-ammount rounded lg"
+              min="0"
+              :minHeight="20"
+              :maxHeight="85"
+              v-model.trim="tipsGoal.ammount"
+            />
+            <textarea
+              ref="tipsGoalDescription"
+              placeholder="Description"
+              class="form-tipsGoal__input-description rounded lg"
+              maxlength="200"
+              :minHeight="20"
+              :maxHeight="85"
+              v-model.trim="tipsGoal.description"
+            />
+            <button
+              @click="sendTipGoal"
+              type="button"
+              class="btn-send btn-send_inside-field icn-item icn-size_lg"
+              :disabled="!tipsGoal.ammount || !tipsGoal.description"
             ></button>
           </form>
         </div>
@@ -285,6 +317,16 @@
               v-tooltip="'Viewers'"
             />
             {{ looksCount }}
+          </span>
+          <span
+            class="stream-online-count bottom-btn"
+            @click="toggleTipGoalForm"
+            :class="{ selected: true }"
+          >
+            <span
+              class="btn-icon icn-item icn-size_lg looking"
+              v-tooltip="'Tips goal'"
+            />
           </span>
         </div>
         <Filters
@@ -380,7 +422,13 @@ export default {
 
       finishing: false,
 
-      asideType: "comments"
+      asideType: "comments",
+
+      tipsGoal: {
+        ammount: "0",
+        description: ""
+      },
+      showTipsGoalForm: false
     };
   },
   components: {
@@ -421,6 +469,9 @@ export default {
           disabled: false
         }
       ];
+    },
+    activeTipsGoal() {
+      return this.$store.state.lives.currentLive.tipsGoal;
     }
   },
   methods: {
@@ -636,6 +687,21 @@ export default {
       );
       this.newComment = "";
     },
+    sendTipGoal() {
+      const data = JSON.stringify({
+        act: "stream_setGoal",
+        stream_user_id: this.user.id,
+        stream_id: this.startedStreamId,
+        description: this.tipsGoal.description,
+        ammount: this.tipsGoal.ammount,
+        sess: this.$store.state.auth.token
+      });
+      console.log(data);
+      // this.$root.ws.ws.send(data);
+      this.tipsGoal.ammount = 0;
+      this.tipsGoal.description = "";
+      this.showTipsGoalForm = false;
+    },
     requestStreamStat() {
       const token = this.$store.state.auth.token;
       const userId = this.$store.state.auth.user.id;
@@ -719,6 +785,9 @@ export default {
       } catch (error) {
         console.log("Error while sending sendCustomMessage message ", {});
       }
+    },
+    toggleTipGoalForm() {
+      this.showTipsGoalForm = !this.showTipsGoalForm;
     }
   },
   mounted() {

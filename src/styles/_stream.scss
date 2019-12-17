@@ -241,6 +241,35 @@
     }
   }
 }
+.stream-tipsGoalTitle {
+  position: absolute;
+  left: 15px;
+  top: 65px;
+  text-align: center;
+  line-height: 18px;
+  color: #fff;
+  z-index: 3;
+  border: 1px solid $primary-color;
+  border-radius: 1000px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 10px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    left: 20px;
+    top: 65px;
+    line-height: 20px;
+  }
+
+  .stream & {
+    display: none;
+
+    .stream_enabled & {
+      display: block;
+    }
+  }
+}
 
 .stream-comments-wrapper {
   margin-bottom: 12px;
@@ -337,6 +366,45 @@
     padding: 10px 45px 9px 17px;
     border: 1px solid rgba(255, 255, 255, .2);
     height: 40px;
+  }
+}
+.form-tipsGoal {
+  position: absolute;
+  left: 415px;
+  bottom: 40px;
+  z-index: 2;
+  right: 15px;
+
+  @include media-breakpoint-up($desktop-breakpoint) {
+    left: 415px;
+    bottom: 50px;
+    width: 370px;
+    right: auto;
+  }
+
+  &__wrapper {
+    margin-bottom: 14px;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      margin-bottom: 17px;
+    }
+  }
+
+  &__input {
+    background: rgba(#000, 0.2);
+    color: #fff;
+    padding: 10px 45px 9px 17px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    height: 40px;
+    &-ammount {
+
+    }
+    &-description {
+
+    }
   }
 }
 

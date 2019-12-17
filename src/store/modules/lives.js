@@ -37,6 +37,10 @@ const initState = {
       stream_look_search_all: {
         data: []
       }
+    },
+    tipsGoal: {
+      description: "Titties!",
+      ammount: 200
     }
   }
 };

@@ -23,6 +23,10 @@
           <div class="stream-online-label" v-else>
             live
           </div>
+          <div class="stream-tipsGoalTitle" v-if="activeTipsGoal">
+            TIP Countdown: ${{ activeTipsGoal.ammount }} for
+            {{ activeTipsGoal.description }}
+          </div>
           <span
             role="button"
             id="close-stream-window"
@@ -183,6 +187,9 @@ export default {
       }
       const { id } = this.$store.state.modal.stream.data.stream.user;
       return this.user.id === id;
+    },
+    activeTipsGoal() {
+      return this.$store.state.lives.currentLive.tipsGoal;
     }
   },
   methods: {
