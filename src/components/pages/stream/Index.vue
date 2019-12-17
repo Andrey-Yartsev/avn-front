@@ -208,7 +208,10 @@
         <div class="stream-online-label" v-if="isStarted && !startingStream">
           live
         </div>
-        <div class="stream-tipsGoalTitle" v-if="activeTipsGoal">
+        <div
+          class="stream-tipsGoalTitle"
+          v-if="activeTipsGoal.ammount && activeTipsGoal.description"
+        >
           TIP Countdown: ${{ activeTipsGoal.ammount }} for
           {{ activeTipsGoal.description }}
         </div>
@@ -245,19 +248,20 @@
         </div>
         <div v-if="isStarted" class="form-tipsGoal">
           <form class="form-tipsGoal__wrapper" v-if="showTipsGoalForm">
+            <p class="form-tipsGoal__title">Ammount:</p>
             <input
               type="number"
               ref="tipsGoalAmmount"
-              class="form-tipsGoal__input-ammount rounded lg"
+              class="form-tipsGoal__input rounded lg"
               min="0"
               :minHeight="20"
               :maxHeight="85"
               v-model.trim="tipsGoal.ammount"
             />
-            <textarea
+            <input
               ref="tipsGoalDescription"
               placeholder="Description"
-              class="form-tipsGoal__input-description rounded lg"
+              class="form-tipsGoal__input rounded lg"
               maxlength="200"
               :minHeight="20"
               :maxHeight="85"

@@ -9,6 +9,7 @@ import stream_like from "./actions/stream_like";
 import stream_unlook from "./actions/stream_unlook";
 import stream_tip from "./actions/stream_tip";
 import stream_comment from "./actions/stream_comment";
+import stream_goal from "./actions/stream_goal";
 import statistics from "./actions/statistics";
 import chats from "./actions/chats";
 import new_notification from "./actions/new_notification";
@@ -37,6 +38,7 @@ const actions = {
   stream_tip,
   message,
   stream_comment,
+  stream_goal,
   statistics,
   new_feed_post,
   stream_public,

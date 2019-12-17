@@ -106,6 +106,13 @@ const mutations = {
     ];
   },
 
+  goal(state, { description, ammount }) {
+    state.currentLive.tipsGoal = {
+      description,
+      ammount
+    };
+  },
+
   tip(state, { tip, who }) {
     state.currentLive.payers = [...state.currentLive.payers, tip];
     state.currentLive.comments = [
