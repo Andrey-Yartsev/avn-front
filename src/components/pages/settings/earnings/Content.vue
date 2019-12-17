@@ -5,44 +5,39 @@
         Earnings
       </h1>
       <div
-        class="form-title table-header-title table-header-title_sticky bg-gradient"
+        class="form-title table-header-title table-header-title_sticky bg-gradient border-top"
       >
-        <div class="">
-          <div v-if="$mq == 'mobile'" class="filtersSection">
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">
-                  Sort by spend period:
-                </span>
-                <span class="select-wrapper">
-                  <select v-model="selectedFilter">
-                    <option value="day">Today</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                    <option value="lifetime">Lifetime</option>
-                  </select>
-                </span>
-              </label>
-            </div>
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">
-                  Order by spend amount:
-                </span>
-                <span class="select-wrapper">
-                  <select
-                    :value="orderSelectValue"
-                    @change="orderChangeHandler"
-                  >
-                    <option value="ASC">Low to high</option>
-                    <option value="DESC">High to low</option>
-                  </select>
-                </span>
-              </label>
-            </div>
+        <div v-if="$mq == 'mobile'" class="filtersSection">
+          <div class="form-group form-group_with-label">
+            <label class="form-group-inner">
+              <span class="label">
+                Sort by spend period:
+              </span>
+              <span class="select-wrapper">
+                <select v-model="selectedFilter">
+                  <option value="day">Today</option>
+                  <option value="week">Week</option>
+                  <option value="month">Month</option>
+                  <option value="lifetime">Lifetime</option>
+                </select>
+              </span>
+            </label>
+          </div>
+          <div class="form-group form-group_with-label">
+            <label class="form-group-inner">
+              <span class="label">
+                Order by spend amount:
+              </span>
+              <span class="select-wrapper">
+                <select :value="orderSelectValue" @change="orderChangeHandler">
+                  <option value="ASC">Low to high</option>
+                  <option value="DESC">High to low</option>
+                </select>
+              </span>
+            </label>
           </div>
         </div>
-        <div class="table-header" v-if="$mq === 'desktop'">
+        <div class="table-header m-reset-tgap" v-if="$mq === 'desktop'">
           <div class="index table__cell">
             №
           </div>
