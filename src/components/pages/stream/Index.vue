@@ -227,7 +227,14 @@
             :block="showBlockUserConfirm"
             :kick="showKickUserConfirm"
           />
-          <form class="form-comments__wrapper" v-if="asideType === 'comments'">
+          <form
+            class="form-comments__wrapper"
+            :class="{
+              'form-comments__wrapper-moveUp':
+                $mq === 'mobile' && showTipsGoalForm
+            }"
+            v-if="asideType === 'comments'"
+          >
             <textarea
               ref="commentInput"
               placeholder="Comment"
@@ -246,7 +253,11 @@
             ></button>
           </form>
         </div>
-        <div v-if="isStarted" class="form-tipsGoal">
+        <div
+          v-if="isStarted"
+          class="form-tipsGoal"
+          :class="{ mobileView: $mq === 'mobile' }"
+        >
           <form class="form-tipsGoal__wrapper" v-if="showTipsGoalForm">
             <p class="form-tipsGoal__title">Ammount:</p>
             <input
@@ -257,6 +268,7 @@
               :minHeight="20"
               :maxHeight="85"
               v-model.trim="tipsGoal.ammount"
+              @keypress.enter.prevent="sendTipGoal"
             />
             <input
               ref="tipsGoalDescription"
@@ -266,6 +278,7 @@
               :minHeight="20"
               :maxHeight="85"
               v-model.trim="tipsGoal.description"
+              @keypress.enter.prevent="sendTipGoal"
             />
             <button
               @click="sendTipGoal"
@@ -323,13 +336,14 @@
             {{ looksCount }}
           </span>
           <span
+            v-if="!isTipsGoalExists"
             class="stream-online-count bottom-btn"
             @click="toggleTipGoalForm"
             :class="{ selected: true }"
           >
             <span
-              class="btn-icon icn-item icn-size_lg looking"
-              v-tooltip="'Tips goal'"
+              class="btn-icon icn-item icn-size_lg icn-price has-tooltip"
+              v-tooltip="'Set tips goal'"
             />
           </span>
         </div>
@@ -429,7 +443,7 @@ export default {
       asideType: "comments",
 
       tipsGoal: {
-        ammount: "0",
+        ammount: "",
         description: ""
       },
       showTipsGoalForm: false
@@ -476,6 +490,9 @@ export default {
     },
     activeTipsGoal() {
       return this.$store.state.lives.currentLive.tipsGoal;
+    },
+    isTipsGoalExists() {
+      return this.activeTipsGoal.description && this.activeTipsGoal.ammount;
     }
   },
   methods: {
@@ -692,8 +709,11 @@ export default {
       this.newComment = "";
     },
     sendTipGoal() {
+      if (!this.tipsGoal.ammount.trim() || !this.tipsGoal.description.trim()) {
+        return;
+      }
       const data = JSON.stringify({
-        act: "stream_setGoal",
+        act: "stream_goal",
         stream_user_id: this.user.id,
         stream_id: this.startedStreamId,
         description: this.tipsGoal.description,
@@ -701,7 +721,7 @@ export default {
         sess: this.$store.state.auth.token
       });
       console.log(data);
-      // this.$root.ws.ws.send(data);
+      this.$root.ws.ws.send(data);
       this.tipsGoal.ammount = 0;
       this.tipsGoal.description = "";
       this.showTipsGoalForm = false;

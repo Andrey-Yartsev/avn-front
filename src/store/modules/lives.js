@@ -39,8 +39,8 @@ const initState = {
       }
     },
     tipsGoal: {
-      description: "Titties!",
-      ammount: 200
+      description: "",
+      ammount: ""
     }
   }
 };
