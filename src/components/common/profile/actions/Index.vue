@@ -118,7 +118,7 @@
             </div>
           </div>
           <button
-            v-if="profile.followedBy"
+            v-if="profile.followedByprofile.followedBy || profile.isSubscribed"
             @click="sendMessage"
             type="button"
             class="profile-actions__btn btn-with-icon profile-message-btn"
