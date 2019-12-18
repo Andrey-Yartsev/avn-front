@@ -1,7 +1,7 @@
 <template>
   <div class="chat-section">
     <div
-      v-if="unreadMessagesCount"
+      v-if="!loading && unreadMessagesCount"
       class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
     >
       <span>Unread ({{ unreadMessagesCount }})</span
