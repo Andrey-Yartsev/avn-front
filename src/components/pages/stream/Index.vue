@@ -259,7 +259,7 @@
           :class="{ mobileView: $mq === 'mobile' }"
         >
           <form class="form-tipsGoal__wrapper" v-if="showTipsGoalForm">
-            <p class="form-tipsGoal__title">Ammount:</p>
+            <p class="form-tipsGoal__title">Amount:</p>
             <input
               type="number"
               ref="tipsGoalAmmount"
