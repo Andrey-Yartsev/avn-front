@@ -199,7 +199,7 @@ const actions = {
   fetchMessages({ dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
-      commit("updateUnreadMessagesCount", {
+      dispatch("updateUnreadMessagesCount", {
         unreadMessagesCount: r.unreadMessagesCount,
         userId: activeUserId
       });
@@ -210,13 +210,13 @@ const actions = {
   },
   fetchMessagesDefault({ dispatch, state }) {
     dispatch("_fetchMessages", state.activeUserId).then(() => {
-      dispatch("markChatAsViewed", state.activeUserId);
+      dispatch("updateHasMessages");
     });
   },
   fetchMoreMessages({ dispatch, commit, state }, userId) {
     commit("fetchingOld", true);
     dispatch("_fetchMoreMessages", { userId }).then(r => {
-      commit("updateUnreadMessagesCount", {
+      dispatch("updateUnreadMessagesCount", {
         unreadMessagesCount: r.unreadMessagesCount,
         userId
       });
@@ -231,9 +231,9 @@ const actions = {
       commit("addOldMessages");
     });
   },
-  markAllMessagesAsRead({ dispatch, commit }, userId) {
+  markAllMessagesAsRead({ dispatch }, userId) {
     dispatch("_markAllMessagesAsRead", userId).then(() => {
-      commit("updateUnreadMessagesCount", {
+      dispatch("updateUnreadMessagesCount", {
         unreadMessagesCount: 0,
         userId
       });
@@ -245,6 +245,10 @@ const actions = {
     });
   },
   markChatAsViewed({ dispatch }) {
+    dispatch("updateHasMessages");
+  },
+  updateUnreadMessagesCount({ dispatch, commit }, data) {
+    commit("updateUnreadMessagesCount", data);
     dispatch("updateHasMessages");
   },
   updateHasMessages({ dispatch, state, rootState }) {
