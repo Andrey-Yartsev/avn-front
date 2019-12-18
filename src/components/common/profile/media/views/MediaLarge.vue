@@ -41,6 +41,11 @@
           @hideDropdown="dropdownOpened = false"
           :isAuthor="isAuthor"
         />
+        <h2
+          v-html="post.title"
+          v-if="$mq === 'mobile' && post.title.length !== 0"
+          style="padding-left: 15px"
+        />
         <p
           class="text hidden-desktop"
           v-html="post.text"
@@ -92,6 +97,7 @@
             v-if="$mq === 'desktop'"
             style="minHeight: 50px; display: block"
           >
+            <h2 v-if="post.title" v-html="post.title" />
             <p v-if="post.text" v-html="post.text" />
           </div>
           <div class="post-capability" v-if="$mq === 'desktop'">

@@ -124,7 +124,7 @@ export default {
       this.showTruncatedText = !this.showTruncatedText;
     },
     getPostText() {
-      return this.$props.post.text;
+      return this.$props.post.title;
     },
     addHandlersToTags() {
       if (!this.$refs.text) {

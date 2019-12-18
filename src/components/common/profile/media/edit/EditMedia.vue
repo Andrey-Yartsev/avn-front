@@ -41,8 +41,18 @@
           <img v-if="user.avatar" :src="user.avatar" />
         </span>
       </span>
+      <textarea
+        contenteditable
+        class="textarea__title"
+        :class="{ 'text-clear-border': $mq === 'mobile' }"
+        placeholder="Enter title here"
+        maxlength="200"
+        v-model="media.title"
+        ref="textareaTitle"
+        :disabled="saving"
+      ></textarea>
       <div
-        class="text-media-container"
+        class="text-media-container ml-auto"
         :class="{ 'text-field-border': $mq === 'desktop' }"
       >
         <vue-tribute :options="tributeOptions">
@@ -143,6 +153,7 @@ const InitialState = {
   expanded: false,
   media: {
     active: false,
+    title: "",
     text: "",
     price: 0,
     free: false
@@ -198,6 +209,7 @@ export default {
     },
     isDataChanged() {
       return (
+        this.$props.post.title !== this.media.title ||
         this.$props.post.text !== this.media.text ||
         this.$props.post.active !== this.media.active ||
         String(this.$props.post.price) !== String(this.media.price)
@@ -235,12 +247,14 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { text, price, active } = this.$props.post;
+      const { title, text, price, active } = this.$props.post;
+      this.media.title = title;
       this.media.text = text;
       this.media.price = price;
       this.media.active = active;
     },
     clearData() {
+      this.title = "";
       this.text = "";
       this.price = 0;
       this.active = false;
@@ -281,5 +295,27 @@ export default {
 }
 .ml-2 {
   margin-left: 10px;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.textarea__title {
+  flex: 0 0 calc(100% - 45px);
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #2196f333;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+  padding-top: 13px;
+  padding-bottom: 0;
+
+  &.text-clear-border {
+    margin-top: 50px;
+    padding: 25px 15px;
+    padding-bottom: 0;
+    box-shadow: none;
+    font-size: 17px;
+    position: relative;
+  }
 }
 </style>
