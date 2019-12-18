@@ -215,78 +215,69 @@
           TIP Countdown: ${{ activeTipsGoal.amount }} for
           {{ activeTipsGoal.description }}
         </div>
-        <div class="form-comments" v-if="isStarted">
-          <Comments
-            v-if="asideType === 'comments'"
-            :shownComments="comments"
-            :count="comments.length"
-          />
-          <StreamViewers
-            v-else
-            :type="asideType"
-            :block="showBlockUserConfirm"
-            :kick="showKickUserConfirm"
-          />
-          <form
-            class="form-comments__wrapper"
-            :class="{
-              'form-comments__wrapper-moveUp':
-                $mq === 'mobile' && showTipsGoalForm
-            }"
-            v-if="asideType === 'comments'"
-          >
-            <textarea
-              ref="commentInput"
-              placeholder="Comment"
-              class="form-comments__input rounded lg"
-              maxlength="200"
-              :minHeight="20"
-              :maxHeight="85"
-              v-model="newComment"
-              @keypress.enter.prevent="sendComment"
+        <div class="stream-forms" v-if="isStarted">
+          <div class="form-comments">
+            <Comments
+              v-if="asideType === 'comments'"
+              :shownComments="comments"
+              :count="comments.length"
+              :class="{ 'm-with-amount-form': showTipsGoalForm }"
             />
-            <button
-              @click="sendComment"
-              type="button"
-              class="btn-send btn-send_inside-field icn-item icn-size_lg"
-              :disabled="!newComment.length"
-            ></button>
-          </form>
-        </div>
-        <div
-          v-if="isStarted"
-          class="form-tipsGoal"
-          :class="{ mobileView: $mq === 'mobile' }"
-        >
-          <form class="form-tipsGoal__wrapper" v-if="showTipsGoalForm">
-            <p class="form-tipsGoal__title">Amount:</p>
-            <input
-              type="number"
-              ref="tipsGoalAmmount"
-              class="form-tipsGoal__input rounded lg"
-              min="0"
-              :minHeight="20"
-              :maxHeight="85"
-              v-model.trim="tipsGoal.amount"
-              @keypress.enter.prevent="sendTipGoal"
+            <StreamViewers
+              v-else
+              :type="asideType"
+              :block="showBlockUserConfirm"
+              :kick="showKickUserConfirm"
             />
-            <input
-              ref="tipsGoalDescription"
-              placeholder="Description"
-              class="form-tipsGoal__input rounded lg"
-              maxlength="200"
-              :minHeight="20"
-              :maxHeight="85"
-              v-model.trim="tipsGoal.description"
-              @keypress.enter.prevent="sendTipGoal"
-            />
-            <button
-              @click="sendTipGoal"
-              type="button"
-              class="btn-send btn-send_inside-field icn-item icn-size_lg"
-              :disabled="!tipsGoal.amount || !tipsGoal.description"
-            ></button>
-          </form>
+            <form
+              class="form-comments__wrapper"
+              v-if="asideType === 'comments'"
+            >
+              <textarea
+                ref="commentInput"
+                placeholder="Comment"
+                class="form-comments__input rounded lg"
+                maxlength="200"
+                :minHeight="20"
+                :maxHeight="85"
+                v-model="newComment"
+                @keypress.enter.prevent="sendComment"
+              />
+              <button
+                @click="sendComment"
+                type="button"
+                class="btn-send btn-send_inside-field icn-item icn-size_lg"
+                :disabled="!newComment.length"
+              ></button>
+            </form>
+          </div>
+          <div class="form-tipsGoal" v-if="showTipsGoalForm">
+            <form class="form-tipsGoal__wrapper">
+              <p class="form-tipsGoal__title">Amount:</p>
+              <input
+                type="number"
+                ref="tipsGoalAmmount"
+                class="form-comments__input m-amount rounded lg"
+                min="0"
+                v-model.trim="tipsGoal.amount"
+                @keypress.enter.prevent="sendTipGoal"
+              />
+              <input
+                ref="tipsGoalDescription"
+                placeholder="Description"
+                class="form-comments__input m-description rounded lg"
+                maxlength="200"
+                v-model.trim="tipsGoal.description"
+                @keypress.enter.prevent="sendTipGoal"
+              />
+              <button
+                @click="sendTipGoal"
+                type="button"
+                class="btn-send btn-send_inside-field icn-item icn-size_lg"
+                :disabled="!tipsGoal.amount || !tipsGoal.description"
+              ></button>
+            </form>
+          </div>
         </div>
         <div class="bottom-btns">
           <span

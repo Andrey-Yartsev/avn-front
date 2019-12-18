@@ -295,6 +295,13 @@
     height: calc(100vh - 170px);
   }
 
+  &.m-with-amount-form {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      height: calc(100vh - 230px);
+    }
+  }
+
   .stream & {
     display: none;
 
@@ -337,30 +344,26 @@
   }
 }
 
-.form-comments {
+
+.stream-forms {
   position: absolute;
   left: 15px;
-  bottom: 40px;
+  bottom: 54px;
   z-index: 2;
   right: 15px;
 
   @include media-breakpoint-up($desktop-breakpoint) {
     left: 20px;
-    bottom: 50px;
+    bottom: 67px;
     width: 370px;
     right: auto;
   }
+}
+
+.form-comments {
 
   &__wrapper {
-    margin-bottom: 14px;
     position: relative;
-    &-moveUp {
-      margin-bottom: 70px;
-    }
-
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 17px;
-    }
   }
 
   &__input {
@@ -371,50 +374,33 @@
     height: 40px;
   }
 }
+
 .form-tipsGoal {
-  position: absolute;
-  left: 415px;
-  bottom: 40px;
-  z-index: 2;
-  right: 15px;
-
-  &.mobileView {
-    left: 17px;
-  }
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    left: 415px;
-    bottom: 50px;
-    width: 370px;
-    right: auto;
-  }
+  margin-top: 20px;
 
   &__wrapper {
-    margin-bottom: 14px;
     position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+  }
 
-   
+  .form-comments__input {
 
-    @include media-breakpoint-up($desktop-breakpoint) {
-      margin-bottom: 17px;
+    &.m-amount {
+      width: 80px;
+      margin-right: 10px;
     }
-  
 
-    .form-tipsGoal__input {
-      background: rgba(#000, 0.2);
-      color: #fff;
-      padding: 10px 45px 9px 17px;
-      border: 1px solid rgba(255, 255, 255, .2);
-      height: 40px;
+    &.m-description {
+      padding-right: 45px;
     }
-    .form-tipsGoal__title {
-      color: #7e7e7e;
-      padding: 0;
-      padding-right: 10px;
-    }
+  }
+
+  &__title {
+    color: #fff;
+    padding: 0;
+    padding-right: 10px;
   }
 }
 
