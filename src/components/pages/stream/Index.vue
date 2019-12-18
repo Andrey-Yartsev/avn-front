@@ -210,9 +210,9 @@
         </div>
         <div
           class="stream-tipsGoalTitle"
-          v-if="activeTipsGoal.ammount && activeTipsGoal.description"
+          v-if="activeTipsGoal.amount && activeTipsGoal.description"
         >
-          TIP Countdown: ${{ activeTipsGoal.ammount }} for
+          TIP Countdown: ${{ activeTipsGoal.amount }} for
           {{ activeTipsGoal.description }}
         </div>
         <div class="form-comments" v-if="isStarted">
@@ -267,7 +267,7 @@
               min="0"
               :minHeight="20"
               :maxHeight="85"
-              v-model.trim="tipsGoal.ammount"
+              v-model.trim="tipsGoal.amount"
               @keypress.enter.prevent="sendTipGoal"
             />
             <input
@@ -284,7 +284,7 @@
               @click="sendTipGoal"
               type="button"
               class="btn-send btn-send_inside-field icn-item icn-size_lg"
-              :disabled="!tipsGoal.ammount || !tipsGoal.description"
+              :disabled="!tipsGoal.amount || !tipsGoal.description"
             ></button>
           </form>
         </div>
@@ -443,7 +443,7 @@ export default {
       asideType: "comments",
 
       tipsGoal: {
-        ammount: "",
+        amount: "",
         description: ""
       },
       showTipsGoalForm: false
@@ -492,7 +492,7 @@ export default {
       return this.$store.state.lives.currentLive.tipsGoal;
     },
     isTipsGoalExists() {
-      return this.activeTipsGoal.description && this.activeTipsGoal.ammount;
+      return this.activeTipsGoal.description && this.activeTipsGoal.amount;
     }
   },
   methods: {
@@ -709,7 +709,7 @@ export default {
       this.newComment = "";
     },
     sendTipGoal() {
-      if (!this.tipsGoal.ammount.trim() || !this.tipsGoal.description.trim()) {
+      if (!this.tipsGoal.amount.trim() || !this.tipsGoal.description.trim()) {
         return;
       }
       const data = JSON.stringify({
@@ -717,12 +717,12 @@ export default {
         stream_user_id: this.user.id,
         stream_id: this.startedStreamId,
         description: this.tipsGoal.description,
-        ammount: this.tipsGoal.ammount,
+        amount: this.tipsGoal.amount,
         sess: this.$store.state.auth.token
       });
       console.log(data);
       this.$root.ws.ws.send(data);
-      this.tipsGoal.ammount = 0;
+      this.tipsGoal.amount = 0;
       this.tipsGoal.description = "";
       this.showTipsGoalForm = false;
     },

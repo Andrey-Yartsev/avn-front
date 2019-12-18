@@ -40,7 +40,7 @@ const initState = {
     },
     tipsGoal: {
       description: "",
-      ammount: ""
+      amount: ""
     }
   }
 };
@@ -106,10 +106,10 @@ const mutations = {
     ];
   },
 
-  goal(state, { description, ammount }) {
+  goal(state, { description, amount }) {
     state.currentLive.tipsGoal = {
       description,
-      ammount
+      amount
     };
   },
 

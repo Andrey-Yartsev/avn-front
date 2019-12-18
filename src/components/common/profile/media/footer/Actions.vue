@@ -25,7 +25,7 @@
     <span class="actions__btn comments-btn" v-if="isAuthor">
       <span
         class="btn-icon icn-profile icn-item icn-size_lg"
-        v-tooltip="'Buyers ammount'"
+        v-tooltip="'Buyers amount'"
       ></span>
       {{ post.buyCount || 0 }}
     </span>
