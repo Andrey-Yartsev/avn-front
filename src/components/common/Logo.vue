@@ -15,6 +15,7 @@
             xml:space="preserve"
             id="svg2"
             version="1.1"
+            class="gay-logo"
           >
             <metadata id="metadata8">
               <rdf:RDF
@@ -109,6 +110,7 @@
             xml:space="preserve"
             id="svg2"
             version="1.1"
+            class="gay-logo"
           >
             <metadata id="metadata8">
               <rdf:RDF
@@ -192,7 +194,11 @@
         </template>
       </template>
       <template v-else>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 51">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 54 51"
+          class="avn-logo"
+        >
           <g id="Layer_2" data-name="Layer 2">
             <g id="Layer_1-2" data-name="Layer 1">
               <path

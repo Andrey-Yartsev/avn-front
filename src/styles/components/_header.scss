@@ -477,12 +477,6 @@
   position: relative;
   text-indent: -999em;
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    svg {
-      width: 70px !important;
-    }
-  }
-
   .not-authorized & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
@@ -506,6 +500,13 @@
         @include media-breakpoint-up($desktop-breakpoint) {
           width: 75px;
           height: 35px;
+        }
+      }
+
+      &.gay-logo {
+
+        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+          width: 70px;
         }
       }
     }
