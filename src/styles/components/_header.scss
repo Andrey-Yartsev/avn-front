@@ -477,6 +477,12 @@
   position: relative;
   text-indent: -999em;
 
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    svg {
+      width: 70px !important;
+    }
+  }
+
   .not-authorized & {
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
