@@ -106,6 +106,7 @@
             @commentReply="commentReply"
             @likeComment="likeComment"
             @commentRemove="commentRemove"
+            :canComment="post.canComment"
           />
           <div v-if="delayedPost" class="actions">
             <div class="datetime-value">

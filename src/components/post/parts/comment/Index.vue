@@ -44,7 +44,7 @@
           class="post-option btn-reply"
           :class="{ active: isReplying }"
           @click="$emit('commentReply', comment)"
-          v-if="user"
+          v-if="user && canComment"
         >
           Reply
         </button>
@@ -98,6 +98,10 @@ export default {
     isReplying: {
       type: Boolean,
       default: false
+    },
+    canComment: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

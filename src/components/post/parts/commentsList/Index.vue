@@ -16,6 +16,7 @@
         @commentRemove="comment => $emit('commentRemove', comment)"
         @likeComment="data => $emit('likeComment', data)"
         :noPadding="true"
+        :canComment="canComment"
       />
     </div>
   </div>
@@ -45,6 +46,10 @@ export default {
     commentReplyId: {
       type: Number,
       required: true
+    },
+    canComment: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
