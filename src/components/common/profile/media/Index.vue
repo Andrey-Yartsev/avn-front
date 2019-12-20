@@ -7,23 +7,6 @@
       <template v-if="this.$props.private && storeEnabled">
         <template v-if="this.user.isPerformer">
           <FileUploader :defaultLimits="limits" />
-          <div
-            :class="['buttonWrapper', 'more-functions', { open: opened }]"
-            v-click-outside="hide"
-          >
-            <div class="more-functions__overlay" @click="hide"></div>
-            <div class="openMenuButton" @click="open" style="color: red">
-              <img
-                v-if="filterType"
-                :src="'/static/img/ic-filter-red.svg'"
-                alt="filter"
-              />
-              <img v-else :src="'/static/img/ic-filter.svg'" alt="filter" />
-            </div>
-            <div class="more-functions__dropdown">
-              <FilterDropdown :type="filterType" @handleClick="handleClick" />
-            </div>
-          </div>
         </template>
         <div
           v-else
@@ -36,6 +19,29 @@
           settings
         </div>
       </template>
+      <div
+        v-if="media.length"
+        :class="['buttonWrapper', 'more-functions', { open: opened }]"
+        v-click-outside="hide"
+      >
+        <div class="more-functions__overlay" @click="hide"></div>
+        <div class="sortLabel">Sort:</div>
+        <div class="openMenuButton" @click="open" style="color: red">
+          <img
+            v-if="filterType"
+            :src="'/static/img/ic-filter-red.svg'"
+            alt="filter"
+          />
+          <img v-else :src="'/static/img/ic-filter.svg'" alt="filter" />
+        </div>
+        <div class="more-functions__dropdown">
+          <FilterDropdown
+            :isAuthor="this.$props.private"
+            :type="filterType"
+            @handleClick="handleClick"
+          />
+        </div>
+      </div>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -115,6 +121,27 @@ export default {
     },
     storeEnabled() {
       return this.$store.state.auth.user.storeEnabled;
+    },
+    getSortOrder() {
+      switch (this.filterType) {
+        case "dateNew":
+        case "priceHight":
+          return "DESC";
+        case "dateOld":
+        case "priceLow":
+          return "ASC";
+        default:
+          return null;
+      }
+    },
+    getFilterType() {
+      if (this.filterType === "dateNew" || this.filterType === "dateOld") {
+        return "date";
+      }
+      if (this.filterType === "priceHight" || this.filterType === "priceLow") {
+        return "price";
+      }
+      return this.filterType;
     }
   },
   watch: {
@@ -148,7 +175,8 @@ export default {
       this.$store
         .dispatch("profile/media/getMedia", {
           profileId: this.$store.state.profile.home.profile.id,
-          filter: this.filterType
+          filter: this.getFilterType,
+          sort: this.getSortOrder
         })
         .then(() => {
           const target = this.$refs.scrollObserver;
@@ -221,11 +249,19 @@ export default {
 .buttonWrapper {
   display: flex !important;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
 .openMenuButton {
   display: inline-block;
   margin: 5px 0;
   margin-right: 20px;
   cursor: pointer;
+}
+.sortLabel {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #909598;
 }
 </style>
