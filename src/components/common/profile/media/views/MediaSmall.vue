@@ -26,7 +26,8 @@
           'photo-post': post.mediaType === 'image',
           'video-post': post.mediaType === 'video',
           'locked-wrapper': post.locked || post.mediaType === 'processing'
-        }
+        },
+        'postLinkMedia'
       ]"
       :href="`/post/${post.productId}`"
       @click.prevent="openModal"
@@ -58,7 +59,18 @@
             <span v-else class="mediaStatus notActive">
               Draft
             </span>
-            <span class="cameraIcon icn-item icn-camera"></span>
+            <span class="mediaStatus viewers">
+              <span class="btn-icon icn-item icn-profile icn-size_lg" />
+              <span class="likes__counter">{{ post.buyCount || 0 }}</span>
+            </span>
+            <span class="mediaStatus duration">
+              <span>{{ getVideoDuration(post.media.duration) }}</span>
+            </span>
+          </div>
+          <div v-else class="statusWrapper bottom">
+            <span class="mediaStatus duration">
+              <span>{{ getVideoDuration(post.media.duration) }}</span>
+            </span>
           </div>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
@@ -75,29 +87,24 @@
         </template>
       </figure>
     </a>
-    <a
-      :href="'/' + post.author.username"
-      class="explore-media__name"
-      v-if="!shouldBePoster && from !== 'profile/home'"
-      :class="{ 'online-state': isOnline(post.author.id) }"
-    >
-      <span class="name">{{ post.author.name }}</span>
-    </a>
-    <template v-if="$mq === 'desktop' && isPrivate">
-      <span
-        class="explore-media__counter explore-media__counter_likes"
-        v-tooltip="'Buyers ammount'"
+    <div class="infoContainer">
+      <div class="infoContainer__title">{{ trimmText(post.title, 50) }}</div>
+      <button
+        :disabled="!isPrivate && post.media.canView"
+        v-if="post.price"
+        class="btn btn-buy"
+        v-tooltip="isPrivate || post.media.canView ? 'Price' : 'Buy'"
+        @click.prevent="
+          isPrivate ? () => {} : !post.media.canView ? buyMedia(post) : () => {}
+        "
       >
-        <span class="btn-icon icn-item icn-profile icn-size_lg" />
-        <span class="likes__counter">{{ post.buyCount || 0 }}</span>
-      </span>
-      <span
-        class="explore-media__counter explore-media__counter_price"
-        v-tooltip="'Price'"
-        ><span class="btn-icon icn-item icn-tips icn-size_lg"></span
-        >{{ post.price.toFixed(2) }}</span
-      >
-    </template>
+        <span class="btn-icon icn-tips icn-item icn-size_lg" />
+        {{ post.price ? post.price.toFixed(2) : "" }}
+      </button>
+      <button v-else class="btn btn-buy">
+        Free
+      </button>
+    </div>
   </div>
 </template>
 
@@ -172,6 +179,44 @@ export default {
         return;
       }
       this.goToModalRoute(`media/${this.post.productId}/${this.from}`);
+    },
+    getVideoDuration(duration) {
+      const mins = Math.floor(+duration / 60);
+      const sec = +duration - mins * 60;
+      return `${mins} : ${sec}`;
+    },
+    trimmText(text, len) {
+      if (!text.length) {
+        return "";
+      }
+      if (text.length > len) {
+        return text.slice(0, 47) + "...";
+      }
+      return text;
+    },
+    buyMedia(post) {
+      if (post.media.canView) {
+        return;
+      }
+      if (process.env.VUE_APP_NAME === "avn") {
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "mediaPayConfirm",
+          data: {
+            price: post.price,
+            paymentType: "message",
+            messageId: post.productId
+          }
+        });
+      }
     }
   }
 };
@@ -189,6 +234,19 @@ export default {
     color: white;
     background-color: rgba(210, 210, 210, 0.281);
   }
+  &.viewers {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+  &.duration {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    &__bottom {
+      bottom: 0;
+    }
+  }
 }
 .statusWrapper {
   position: absolute;
@@ -200,8 +258,29 @@ export default {
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.644);
   padding: 0 10px;
+  &.bottom {
+    bottom: 0;
+  }
 }
 .cameraIcon {
   font-size: 22px;
+}
+.postLink.postLinkMedia {
+  height: 80%;
+}
+.infoContainer {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn.btn-buy > span {
+  transform: translateY(-6px);
 }
 </style>
