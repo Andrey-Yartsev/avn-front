@@ -240,6 +240,10 @@ export default {
     align-items: center;
   }
   &.duration {
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.637);
+    border-radius: 5px;
+
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
