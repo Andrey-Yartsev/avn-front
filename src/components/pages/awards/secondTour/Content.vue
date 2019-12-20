@@ -64,6 +64,16 @@
                 :nominee="nominee"
                 :textString="twitterText"
               />
+              <a
+                v-if="nominee.twitter"
+                :id="nominee.nomineeId"
+                ref="tweetLink"
+                target="_blank"
+                :href="getHrefString(nominee.twitter)"
+                class="twitter-share-button"
+                data-show-count="false"
+                style="position: absolute"
+              ></a>
             </div>
           </div>
         </template>
@@ -251,6 +261,10 @@ export default {
             })
             .then(() => {
               this.extendNominees();
+              const link = document.getElementById(`${id}`);
+              if (link) {
+                link.click();
+              }
               if (initVote) {
                 this.$store.dispatch("global/flashToast", {
                   text: "You have voted for " + nominee.nominationName
@@ -366,6 +380,14 @@ export default {
       if (this.categoryChangeInProgress) {
         this.categoryChangeInProgress = false;
       }
+    },
+    getHrefString(tweetname) {
+      const fullText = `I watched, I came, I voted for ${tweetname} for the ${
+        this.twitterText
+      }`;
+      let text = encodeURI(fullText) || "";
+      text = text.replace(/#/g, "%23");
+      return `https://twitter.com/intent/tweet?text=${text}`;
     }
   },
   watch: {
