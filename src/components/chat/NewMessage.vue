@@ -63,7 +63,9 @@
             'search-text': chats.length && searchQuery.length
           }"
         >
-          <span class="sendTo">To{{ selectAll ? " All contacts" : "" }}</span>
+          <span class="sendTo"
+            >To{{ selectAll ? ` All contacts${allUsersCount}` : "" }}</span
+          >
           <input
             v-if="!selectAll"
             @keyup="search"
@@ -240,7 +242,9 @@
                 class="selectedContacts selectedContacts_recipients"
                 v-if="selectAll"
               >
-                <b class="selectedContacts__title">Recipients: All contacts</b>
+                <b class="selectedContacts__title"
+                  >Recipients: All contacts{{ allUsersCount }}</b
+                >
               </div>
               <div
                 class="selectedContacts selectedContacts_recipients"
@@ -359,6 +363,14 @@ export default {
     },
     selectedUsers() {
       return this.selectedChats.map(v => v.withUser);
+    },
+    allUsersCount() {
+      if (this.$store.state.chat.fetchAllUsersCountResult) {
+        return (
+          " (" + this.$store.state.chat.fetchAllUsersCountResult.count + ")"
+        );
+      }
+      return null;
     }
   },
 
@@ -445,6 +457,7 @@ export default {
 
   created() {
     this.$store.dispatch("chat/fetchAnyChats", {});
+    this.$store.dispatch("chat/fetchAllUsersCount", {});
     this.search();
   },
 

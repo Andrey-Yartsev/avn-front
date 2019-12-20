@@ -781,6 +781,17 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchAllUsersCount",
+  apiPath: "chats/bulk-count-all",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
 export default {
   namespaced: true,
   state,
