@@ -183,14 +183,14 @@ export default {
     getVideoDuration(duration) {
       const mins = Math.floor(+duration / 60);
       const sec = +duration - mins * 60;
-      return `${mins} : ${sec}`;
+      return `${mins < 10 ? "0" : ""}${mins} : ${sec}`;
     },
     trimmText(text, len) {
       if (!text.length) {
         return "";
       }
       if (text.length > len) {
-        return text.slice(0, 47) + "...";
+        return text.slice(0, len - 3) + "...";
       }
       return text;
     },
@@ -279,6 +279,9 @@ export default {
   flex-flow: row;
   align-items: center;
   justify-content: space-between;
+  &__title {
+    font-weight: bold;
+  }
 }
 .btn.btn-buy > span {
   transform: translateY(-6px);
