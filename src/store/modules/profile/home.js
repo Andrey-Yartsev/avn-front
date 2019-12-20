@@ -147,6 +147,15 @@ const actions = {
     });
   },
   extend({ commit, state }, data) {
+    if (data.followedBy !== undefined) {
+      if (data.followedBy === false) {
+        if (!data.isSubscribed) {
+          data.canWrite = false;
+        }
+      } else {
+        data.canWrite = true;
+      }
+    }
     commit("profile", { ...state.profile, ...data });
   },
   reload({ dispatch, state }) {
