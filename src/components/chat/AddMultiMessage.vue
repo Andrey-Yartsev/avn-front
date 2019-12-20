@@ -3,6 +3,8 @@
     @send="sendMessage"
     :disable="disable"
     :withFontSizeController="false"
+    :allUsersCount="allUsersCount"
+    :confirmation="toAll"
   />
 </template>
 
@@ -26,6 +28,10 @@ export default {
     disable: {
       type: Boolean,
       default: false
+    },
+    allUsersCount: {
+      type: Number,
+      default: 0
     }
   },
 

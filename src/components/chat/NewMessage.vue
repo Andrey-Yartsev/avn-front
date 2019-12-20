@@ -64,7 +64,7 @@
           }"
         >
           <span class="sendTo"
-            >To{{ selectAll ? ` All contacts${allUsersCount}` : "" }}</span
+            >To{{ selectAll ? ` All contacts${allUsersCountText}` : "" }}</span
           >
           <input
             v-if="!selectAll"
@@ -243,7 +243,7 @@
                 v-if="selectAll"
               >
                 <b class="selectedContacts__title"
-                  >Recipients: All contacts{{ allUsersCount }}</b
+                  >Recipients: All contacts{{ allUsersCountText }}</b
                 >
               </div>
               <div
@@ -278,6 +278,7 @@
             :userIds="selected"
             :toAll="selectAll"
             :disable="sending"
+            :allUsersCount="allUsersCount"
             @startSending="startSending"
             @sent="sent"
           />
@@ -365,10 +366,14 @@ export default {
       return this.selectedChats.map(v => v.withUser);
     },
     allUsersCount() {
-      if (this.$store.state.chat.fetchAllUsersCountResult) {
-        return (
-          " (" + this.$store.state.chat.fetchAllUsersCountResult.count + ")"
-        );
+      if (!this.$store.state.chat.fetchAllUsersCountResult) {
+        return 0;
+      }
+      return this.$store.state.chat.fetchAllUsersCountResult.count;
+    },
+    allUsersCountText() {
+      if (this.allUsersCount) {
+        return " (" + this.allUsersCount + ")";
       }
       return null;
     }

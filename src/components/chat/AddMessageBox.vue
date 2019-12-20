@@ -203,6 +203,14 @@ export default {
     videosOnly: {
       type: Boolean,
       default: false
+    },
+    allUsersCount: {
+      type: Number,
+      default: 0
+    },
+    confirmation: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -279,10 +287,9 @@ export default {
         return;
       }
       const message = this.message;
-      this.message = "";
+
       this.isSaving = true;
       const mediaFiles = this.preloadedMedias;
-      this.preloadedMedias = [];
       const opt = {
         price: this.price ? this.price : 0,
         text: message
@@ -294,9 +301,25 @@ export default {
           opt.mediaFile = [{ id: mediaFiles[0].processId }];
         }
       }
-      this.price = "";
-      this.priceIsSet = false;
-      this.$emit("send", opt);
+
+      if (this.confirmation && this.allUsersCount) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title:
+              "You are going to send message to " +
+              this.allUsersCount +
+              " users",
+            success: () => {
+              this.$emit("send", opt);
+              this.reset();
+            }
+          }
+        });
+      } else {
+        this.$emit("send", opt);
+        this.reset();
+      }
     },
     closeTip() {
       if (!this.$refs.tip) {
@@ -338,6 +361,7 @@ export default {
     },
     reset() {
       this.message = "";
+      this.preloadedMedias = [];
       this.showPaid = false;
       this.closeTip();
       this.resetPrice();
