@@ -52,6 +52,12 @@
           />
           <div class="inner">
             <a class="button" @click="vote(nominee.nomineeId)" />
+            <a
+              class="btn"
+              v-if="showFinishBtn(nominee.nomineeId)"
+              @click="finishVote(nominee.nomineeId)"
+              >Finish the vote!</a
+            >
             <img
               :src="nominee.nominationAvatar"
               class="image"
@@ -66,7 +72,7 @@
               />
               <a
                 v-if="nominee.twitter"
-                :id="nominee.nomineeId"
+                :id="'nominee' + nominee.nomineeId"
                 ref="tweetLink"
                 target="_blank"
                 :href="getHrefString(nominee.twitter)"
@@ -118,7 +124,8 @@ export default {
       initCategoriesFetch: false,
       fetchId: 0,
       votingClicking: false,
-      categoryChangeInProgress: true
+      categoryChangeInProgress: true,
+      justVotedIds: []
     };
   },
   computed: {
@@ -233,13 +240,6 @@ export default {
 
       this.votingClicking = true;
 
-      if (!nominee.isVoted) {
-        const link = document.getElementById(`${id}`);
-        if (link) {
-          link.click();
-        }
-      }
-
       setTimeout(() => {
         if (nominee.isVoted) {
           if (!initVote) {
@@ -273,6 +273,7 @@ export default {
                   text: "You have voted for " + nominee.nominationName
                 });
               }
+              this.justVotedIds.push(nominee.nomineeId);
               this.votingClicking = false;
             });
         }
@@ -391,6 +392,16 @@ export default {
       let text = encodeURI(fullText) || "";
       text = text.replace(/#/g, "%23");
       return `https://twitter.com/intent/tweet?text=${text}`;
+    },
+    showFinishBtn(nomineeId) {
+      return this.justVotedIds.indexOf(nomineeId) !== -1;
+    },
+    finishVote(nomineeId) {
+      this.justVotedIds = this.justVotedIds.filter(id => id !== nomineeId);
+      const link = document.getElementById(`nominee${nomineeId}`);
+      if (link) {
+        link.click();
+      }
     }
   },
   watch: {

@@ -4,7 +4,6 @@
     margin-bottom: 0;
   }
 
-
   .select {
     margin-bottom: 20px;
   }
@@ -13,11 +12,6 @@
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-
-    .btn {
-      font-size: 14px;
-      background: #2196f3;
-    }
 
     @include media-breakpoint-down($mobile-breakpoint-dcrs) {
       h1 {
@@ -94,6 +88,20 @@
         height: 90px;
         background-size: cover;
         cursor: pointer;
+      }
+
+      .btn {
+        position: absolute;
+        z-index: 10;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 100px;
+        width: 150px;
+        font-size: 17px;
+        background: #2E8F44;
+        text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
       }
 
       .name-block {
