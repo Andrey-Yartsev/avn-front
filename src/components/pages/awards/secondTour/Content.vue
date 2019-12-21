@@ -233,6 +233,13 @@ export default {
 
       this.votingClicking = true;
 
+      if (!nominee.isVoted) {
+        const link = document.getElementById(`${id}`);
+        if (link) {
+          link.click();
+        }
+      }
+
       setTimeout(() => {
         if (nominee.isVoted) {
           if (!initVote) {
@@ -261,10 +268,6 @@ export default {
             })
             .then(() => {
               this.extendNominees();
-              const link = document.getElementById(`${id}`);
-              if (link) {
-                link.click();
-              }
               if (initVote) {
                 this.$store.dispatch("global/flashToast", {
                   text: "You have voted for " + nominee.nominationName
