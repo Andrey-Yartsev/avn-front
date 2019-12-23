@@ -71,7 +71,7 @@
                 :textString="twitterText"
               /> -->
               <a
-                v-if="nominee.twitter"
+                v-if="nominee.twitter && !twitterScriptLoading"
                 :id="'nominee' + nominee.nomineeId"
                 ref="tweetLink"
                 target="_blank"
