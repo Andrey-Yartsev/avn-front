@@ -65,21 +65,25 @@
             />
             <div class="name-block">
               <div class="">{{ nominee.nominationName }}</div>
-              <TwitterShare
+              <!-- <TwitterShare
                 v-if="!twitterScriptLoading"
                 :nominee="nominee"
                 :textString="twitterText"
-              />
+              /> -->
               <a
                 v-if="nominee.twitter"
                 :id="'nominee' + nominee.nomineeId"
                 ref="tweetLink"
                 target="_blank"
                 :href="getHrefString(nominee.twitter)"
-                class="twitter-share-button"
+                class="twitter-button"
                 data-show-count="false"
-                style="position: absolute"
-              ></a>
+              >
+                <span class="btn-block btn-twitter">
+                  <span class="icn-item icn-twitter icn-size_sm"></span>
+                  <span class="btn-twitter__label">Tweet</span>
+                </span>
+              </a>
             </div>
           </div>
         </template>
@@ -92,7 +96,7 @@
 import Loader from "@/components/common/Loader";
 import GayLogo from "../GayLogo";
 import User from "@/mixins/user";
-import TwitterShare from "./TwitterShare";
+// import TwitterShare from "./TwitterShare";
 import VueSelect from "vue-select";
 import SmoothScroll from "smooth-scroll";
 import "vue-select/dist/vue-select.css";
@@ -102,7 +106,7 @@ export default {
   components: {
     Loader,
     GayLogo,
-    TwitterShare,
+    // TwitterShare,
     VueSelect
   },
   props: {

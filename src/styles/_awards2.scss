@@ -111,6 +111,29 @@
         font-size: 16px;
         cursor: pointer;
 
+        .twitter-button {
+          .btn-twitter {
+            color: white;
+            background-color: #1b95e0;
+            padding: 3px 5px;
+            font-size: 12px;
+            border-radius: 3px;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            &:hover {
+              background-color: #0c7abf;
+              color: white;
+            }
+          }
+          .icn-twitter {
+            margin-top: 2px;
+          }
+          .btn-twitter__label {
+            margin-left: -5px;
+          }
+        }
+
         .twitter {
           a {
             color: #2196F3;
