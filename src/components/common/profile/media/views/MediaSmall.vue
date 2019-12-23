@@ -195,6 +195,12 @@ export default {
       return text;
     },
     buyMedia(post) {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "signup"
+        });
+        return;
+      }
       if (post.media.canView) {
         return;
       }

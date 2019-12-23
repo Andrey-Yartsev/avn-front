@@ -1,24 +1,27 @@
 <template>
   <div class="actions">
-    <span
-      v-if="isAuthor || post.media.canView"
-      class=" actions__btn comments-btn"
-    >
+    <span v-if="isAuthor" class=" actions__btn comments-btn">
       <span
         class="btn-icon icn-tips icn-item icn-size_lg"
         v-tooltip="'Price'"
       ></span>
       {{ post.price ? post.price.toFixed(2) : 0.0 }}
     </span>
-    <button
-      v-else
-      class="btn btn-buy"
-      v-tooltip="'Buy'"
-      @click.prevent="$emit('openBuyModal')"
-    >
-      <span class="btn-icon icn-tips icn-item icn-size_lg" />
-      {{ post.price ? post.price.toFixed(2) : "" }}
-    </button>
+    <template v-else>
+      <button
+        :disabled="post.media.canView"
+        v-if="post.price"
+        class="btn btn-buy"
+        v-tooltip="post.media.canView ? 'Price' : 'Buy'"
+        @click.prevent="buyMedia(post)"
+      >
+        <span class="btn-icon icn-tips icn-item icn-size_lg" />
+        {{ post.price ? post.price.toFixed(2) : "" }}
+      </button>
+      <button v-else class="btn btn-buy">
+        Free
+      </button>
+    </template>
     <span class="actions__btn comments-btn" v-if="isAuthor">
       <span
         class="btn-icon icn-profile icn-item icn-size_lg"
@@ -86,6 +89,18 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdown");
+    },
+    buyMedia(post) {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "signup"
+        });
+        return;
+      }
+      if (post.media.canView) {
+        return;
+      }
+      this.$emit("openBuyModal");
     }
   },
   directives: {

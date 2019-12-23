@@ -106,6 +106,9 @@ export default {
       return this.post.isVisible;
     },
     isAuthor() {
+      if (!this.$store.state.auth.user) {
+        return false;
+      }
       return this.$props.post.author.id === this.$store.state.auth.user.id;
     }
   },

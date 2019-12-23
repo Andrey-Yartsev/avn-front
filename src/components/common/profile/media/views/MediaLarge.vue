@@ -242,11 +242,20 @@ export default {
       return !this.post.canViewMedia;
     },
     isAuthor() {
+      if (!this.$store.state.auth.user) {
+        return false;
+      }
       return this.$props.post.author.id === this.$store.state.auth.user.id;
     }
   },
   methods: {
     mediaClickHandler() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "signup"
+        });
+        return;
+      }
       if (this.$props.post.media.canView) {
         return;
       }
