@@ -478,6 +478,7 @@ export default {
     });
   },
   beforeDestroy() {
+    this.$store.commit("lives/goal", {});
     this.connected = false;
     this.shouldUpdateTimer = false;
     window.clearInterval(this.likesInterval);
