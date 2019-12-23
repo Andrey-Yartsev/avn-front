@@ -73,20 +73,24 @@
             </div>
           </div>
         </div>
-        <div class="form-comments">
-          <Comments :shownComments="shownComments" :count="5" />
-          <AddComment v-if="showCommentForm && !isMyStream" ref="addComment" />
-          <Tip
-            v-if="$root.showTips && showTip"
-            :user="streamer"
-            ref="tip"
-            @cancel="closeTip"
-            :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
-            class="tip-form_viewer"
-            :needLgClassName="true"
-          />
+        <div class="stream-forms">
+          <div class="form-comments">
+            <Comments :shownComments="shownComments" :count="5" />
+            <AddComment
+              v-if="showCommentForm && !isMyStream"
+              ref="addComment"
+            />
+            <Tip
+              v-if="$root.showTips && showTip"
+              :user="streamer"
+              ref="tip"
+              @cancel="closeTip"
+              :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
+              class="tip-form_viewer"
+              :needLgClassName="true"
+            />
+          </div>
         </div>
-
         <div class="bottom-btns" v-if="connected && !isMyStream && isLogedUser">
           <span role="button" class="bottom-btn" @click="openCommentForm">
             <span
