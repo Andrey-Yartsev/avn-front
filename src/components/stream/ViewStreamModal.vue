@@ -23,7 +23,10 @@
           <div class="stream-online-label" v-else>
             live
           </div>
-          <div class="stream-tipsGoalTitle" v-if="activeTipsGoal">
+          <div
+            class="stream-tipsGoalTitle"
+            v-if="activeTipsGoal.amount && activeTipsGoal.description"
+          >
             TIP Countdown: ${{ activeTipsGoal.amount }} for
             {{ activeTipsGoal.description }}
           </div>

@@ -39,8 +39,8 @@ const initState = {
       }
     },
     tipsGoal: {
-      description: "",
-      amount: ""
+      description: null,
+      amount: null
     }
   }
 };
