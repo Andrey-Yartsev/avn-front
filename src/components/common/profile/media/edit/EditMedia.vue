@@ -68,7 +68,7 @@
           ></textarea>
         </vue-tribute>
         <div class="post-attachment">
-          <div class="block-thumbnails" v-if="true">
+          <div class="block-thumbnails" v-if="!preloadedMedias.length">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView">
               <div
@@ -86,6 +86,21 @@
               </div>
             </div>
           </div>
+          <Draggable v-model="preloadedMedias" v-else>
+            <transition-group
+              class="addFileCollectionView"
+              type="transition"
+              name="flip-list"
+            >
+              <MediaPreview
+                v-for="media in preloadedMedias"
+                :media="media"
+                :key="media.id"
+                @removeMedia="removeMedia"
+                :isSaving="false"
+              />
+            </transition-group>
+          </Draggable>
         </div>
       </div>
       <div class="actions">
@@ -134,6 +149,28 @@
                 </label>
               </div>
             </div>
+            <div
+              class="b-check-state b-check-state_post alignFlexCenter"
+              v-if="!preloadedMedias.length"
+            >
+              <label
+                :class="['add-media-input', { disabled: false }]"
+                class="btn-post"
+                for="addFile"
+              >
+                <input
+                  id="addFile"
+                  type="file"
+                  multiple
+                  :accept="inputAccepts"
+                  @change="addMediaFiles"
+                />
+                <span class="icn-media icn-item icn-size_lg"></span>
+                <span class="btn-post__text">
+                  Custom cover
+                </span>
+              </label>
+            </div>
           </template>
         </div>
         <button
@@ -166,6 +203,9 @@ import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
+import FileUpload from "@/mixins/fileUpload";
+import MediaPreview from "@/components/common/MediaPreview";
+import Draggable from "vuedraggable";
 
 Settings.defaultLocale = "en";
 
@@ -186,7 +226,7 @@ const InitialState = {
 
 export default {
   name: "EditMedia",
-  mixins: [UserMixin, UserSuggestions],
+  mixins: [UserMixin, UserSuggestions, FileUpload],
   data() {
     return {
       ...InitialState
@@ -194,7 +234,9 @@ export default {
   },
   components: {
     Loader,
-    VueTribute
+    VueTribute,
+    MediaPreview,
+    Draggable
   },
   props: {
     initialExpanded: {
@@ -239,6 +281,12 @@ export default {
     },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
+    },
+    inputAccepts() {
+      return ["jpg", "jpeg", "gif", "png"];
+    },
+    allMediaTypes() {
+      return this.inputAccepts;
     }
   },
   watch: {
@@ -269,37 +317,53 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { title, text, price, active, thumbId } = this.$props.post;
+      const {
+        title,
+        text,
+        price,
+        active,
+        media: { thumbs, thumbId }
+      } = this.$props.post;
       this.media.title = title;
       this.media.text = text;
       this.media.price = price;
       this.media.active = active;
       this.media.thumbId = thumbId;
+      this.media.thumbs = thumbs;
     },
     clearData() {
-      this.title = "";
-      this.text = "";
-      this.price = 0;
-      this.active = false;
+      this.media.title = "";
+      this.media.text = "";
+      this.media.price = 0;
+      this.media.active = false;
+      this.media.free = false;
+      this.media.thumbId = null;
+      this.media.thumbs = [];
     },
     saveClickHandler() {
       this.saving = true;
       this.$store
-        .dispatch(
-          "profile/media/updateMedia",
-          { media: this.media, productId: this.$props.post.productId },
-          { root: true }
-        )
+        .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
+          root: true
+        })
         .then(() => {
           this.saving = false;
           this.close();
         });
+    },
+    getMediaDataToUpdate() {
+      return {
+        media: {
+          ...this.media,
+          customThumb: this.preloadedMedias.length
+            ? { id: this.preloadedMedias[0].processId }
+            : undefined
+        },
+        productId: this.$props.post.productId
+      };
     }
   },
   mounted() {
-    // if (this.$refs.textarea) {
-    //   this.$refs.textarea.focus();
-    // }
     this.initData();
   },
   beforeDestroy() {
