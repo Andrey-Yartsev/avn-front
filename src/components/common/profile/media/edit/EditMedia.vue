@@ -67,6 +67,26 @@
             :disabled="saving"
           ></textarea>
         </vue-tribute>
+        <div class="post-attachment">
+          <div class="block-thumbnails" v-if="true">
+            <div class="block-thumbnails__title">Choose cover</div>
+            <div class="addFileCollectionView">
+              <div
+                v-for="thumb in media.thumbs"
+                :key="thumb.id"
+                class="addFileView addFileView_option icn-item"
+                :class="{
+                  current: media.thumbId === thumb.id
+                }"
+                @click="media.thumbId = thumb.id"
+              >
+                <div class="filename filename_sm">
+                  <img :src="thumb.url" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="actions-controls alignFlexCenter">
@@ -156,7 +176,8 @@ const InitialState = {
     title: "",
     text: "",
     price: 0,
-    free: false
+    free: false,
+    thumbId: null
   },
   saving: false,
   withoutWatermark: false,
@@ -212,7 +233,8 @@ export default {
         this.$props.post.title !== this.media.title ||
         this.$props.post.text !== this.media.text ||
         this.$props.post.active !== this.media.active ||
-        String(this.$props.post.price) !== String(this.media.price)
+        String(this.$props.post.price) !== String(this.media.price) ||
+        this.$props.post.thumbId !== this.media.thumbId
       );
     },
     isPriceSetLimit() {
@@ -247,11 +269,12 @@ export default {
       return text.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
-      const { title, text, price, active } = this.$props.post;
+      const { title, text, price, active, thumbId } = this.$props.post;
       this.media.title = title;
       this.media.text = text;
       this.media.price = price;
       this.media.active = active;
+      this.media.thumbId = thumbId;
     },
     clearData() {
       this.title = "";
