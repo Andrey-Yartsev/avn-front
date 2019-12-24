@@ -23,7 +23,7 @@
           </h3>
           <button
             class="nextStep btn sm hidden-desktop"
-            :disabled="!hasSelectedChats"
+            :disabled="!hasSelectedUsers"
             @click="next"
             v-if="$mq === 'mobile'"
           >
@@ -38,17 +38,17 @@
         <div
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
-          v-if="hasSelectedChats && !selectAll"
+          v-if="hasSelectedUsers && !selectAll"
         >
           <component :is="scrollableComponent" class="all-contacts-found">
             <div class="selectedContacts">
               <div
                 class="chatSelectedView"
-                v-for="v in selectedChats"
-                v-bind:key="v.withUser.id"
-                @click="toggleSelect(v.withUser.id)"
+                v-for="v in hasSelectedUsers"
+                v-bind:key="v.id"
+                @click="toggleSelect(v.id)"
               >
-                <span class="chatSelectedName">{{ v.withUser.name }}</span>
+                <span class="chatSelectedName">{{ v.name }}</span>
                 <span
                   class="remove icn-item btn-reset btn-reset_fix-sizes btn-reset_ml icn-pos_center"
                 ></span>
@@ -174,7 +174,7 @@
               >
             </div>
           </template>
-          <span v-else-if="hasSelectedChats" class="mass-message"
+          <span v-else-if="hasSelectedUsers" class="mass-message"
             >Mass message</span
           >
           <div
@@ -223,7 +223,7 @@
       <div class="chatCollectionContentWrapper">
         <div
           class="chatMessagesCollectionView"
-          :class="{ 'no-selected-conversation': !hasSelectedChats }"
+          :class="{ 'no-selected-conversation': !hasSelectedUsers }"
         >
           <div
             class="chat-section loader-container loader-container_center"
@@ -340,8 +340,8 @@ export default {
     selectedChats() {
       return this.chats.filter(v => v.selected);
     },
-    hasSelectedChats() {
-      return this.selectAll || !!this.selectedChats.length;
+    hasSelectedUsers() {
+      return this.selectAll || !!this.selectedUsers.length;
     },
     _foundUsers() {
       return this.$store.state.chat.chatUsers;
@@ -363,7 +363,9 @@ export default {
       return chat.withUser;
     },
     selectedUsers() {
-      return this.selectedChats.map(v => v.withUser);
+      return this.foundUsers.filter(v => {
+        return this.selected.indexOf(v.id) !== -1;
+      });
     },
     allUsersCount() {
       if (!this.$store.state.chat.fetchAllUsersCountResult) {
