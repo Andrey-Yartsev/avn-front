@@ -432,15 +432,29 @@ export default {
         });
     },
     getMediaDataToUpdate() {
-      return {
-        media: {
-          ...this.media,
-          customThumb: this.preloadedMedias.length
-            ? { id: this.preloadedMedias[0].processId }
-            : undefined
-        },
+      const customThumb = this.preloadedMedias.length
+        ? this.preloadedMedias.find(item => item.mediaType === "photo")
+        : undefined;
+      const preview = this.preloadedMedias.length
+        ? this.preloadedMedias.find(item => item.mediaType === "video")
+        : undefined;
+
+      const data = {
+        media: { ...this.media },
         productId: this.$props.post.productId
       };
+
+      if (customThumb) {
+        data.media.customThumb = {
+          id: customThumb.processId
+        };
+      }
+      if (preview) {
+        data.media.preview = {
+          id: preview.processId
+        };
+      }
+      return data;
     }
   },
   mounted() {
