@@ -350,6 +350,9 @@ export default {
       if (this._foundUsers) {
         return this._foundUsers;
       }
+      if (this.searchQuery) {
+        return [];
+      }
       return this.chats.map(v => v.withUser);
     },
     selectedUser() {
