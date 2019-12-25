@@ -1,24 +1,46 @@
 <template>
   <div class="media-wrapper">
-    <video
-      class="video-content"
-      :class="{ halfHeight: $mq === 'desktop' }"
-      disableremoteplayback
-      webkit-playsinline
-      playsinline
-      controls
-      controlslist="nodownload"
-      :autoplay="autoplay"
-      loop
-      :poster="media.thumb.source"
-      v-if="video"
-      @play="play"
-      @contextmenu.prevent="() => false"
-      @dragstart.prevent="() => false"
-      ref="video"
-    >
-      <source :src="video.source" type="video/mp4" />
-    </video>
+    <template v-if="showPreviewVideo">
+      <video
+        class="video-content"
+        :class="{ halfHeight: $mq === 'desktop' }"
+        disableremoteplayback
+        webkit-playsinline
+        playsinline
+        controls
+        controlslist="nodownload"
+        :autoplay="autoplay"
+        loop
+        v-if="video"
+        @play="play"
+        @contextmenu.prevent="() => false"
+        @dragstart.prevent="() => false"
+        ref="video"
+        :src="media.preview.source"
+        type="video/mp4"
+      />
+    </template>
+    <template v-else>
+      <video
+        class="video-content"
+        :class="{ halfHeight: $mq === 'desktop' }"
+        disableremoteplayback
+        webkit-playsinline
+        playsinline
+        controls
+        controlslist="nodownload"
+        :autoplay="autoplay"
+        loop
+        :poster="media.thumb.source"
+        v-if="video"
+        @play="play"
+        @contextmenu.prevent="() => false"
+        @dragstart.prevent="() => false"
+        ref="video"
+        :src="video.source"
+        type="video/mp4"
+      />
+    </template>
   </div>
 </template>
 
@@ -32,7 +54,9 @@ export default {
     post: Object,
     authorId: Number,
     autoplay: Boolean,
-    media: Object
+    media: Object,
+    showPreview: Boolean,
+    isAuthor: Boolean
   },
   data() {
     return {
@@ -45,6 +69,16 @@ export default {
     videoHeight() {
       const ratio = global.innerWidth / this.media.preview.width;
       return this.media.preview.height * ratio;
+    },
+    showPreviewVideo() {
+      if (
+        this.$props.isAuthor &&
+        this.$props.post.media.preview.source &&
+        this.$props.showPreview
+      ) {
+        return true;
+      }
+      return false;
     }
   },
   watch: {

@@ -33,6 +33,8 @@
           :autoplay="autoplay"
           @playCallback="$emit('playCallback')"
           ref="media"
+          :showPreview="showPreview"
+          :isAuthor="isAuthor"
         />
       </figure>
     </template>
@@ -81,7 +83,9 @@ export default {
     autoplay: {
       type: Boolean,
       default: true
-    }
+    },
+    showPreview: Boolean,
+    isAuthor: Boolean
   },
   computed: {
     mediaStyle() {
@@ -102,8 +106,6 @@ export default {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
 
       if (!canView) return "Locked";
-      // if (!canView && !preview.source) return "Locked";
-      // if (!canView && preview.source) return `Video${LinkedPrefix}`;
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;

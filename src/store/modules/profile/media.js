@@ -62,7 +62,8 @@ const initState = {
           height: 270
         },
         preview: {
-          source: null,
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/2019_12_05/5d/5de/5de8d37bbc3a97e9663cb.mp4",
           width: 480,
           height: 270
         },

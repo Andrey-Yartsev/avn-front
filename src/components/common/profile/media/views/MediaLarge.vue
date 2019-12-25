@@ -40,6 +40,8 @@
           @openDropdown="dropdownOpened = true"
           @hideDropdown="dropdownOpened = false"
           :isAuthor="isAuthor"
+          @switchToPreview="switchToPreview"
+          :showPreview="showPreview"
         />
         <h2
           v-html="post.title"
@@ -61,6 +63,8 @@
           :openModal="mediaClickHandler"
           :autoplay="false"
           @playCallback="playHandler"
+          :showPreview="showPreview"
+          :isAuthor="isAuthor"
         />
         <div
           class="text text_posttime"
@@ -91,6 +95,8 @@
             v-if="$mq === 'desktop'"
             :showCopy="!delayedPost"
             :isAuthor="isAuthor"
+            @switchToPreview="switchToPreview"
+            :showPreview="showPreview"
           />
           <div
             class="text hidden-mobile"
@@ -177,7 +183,8 @@ export default {
     dropdownOpened: false,
     currentCommentReply: null,
     showAddComment: true,
-    viewCounted: false
+    viewCounted: false,
+    showPreview: false
   }),
   props: {
     post: {
@@ -297,6 +304,9 @@ export default {
       //   { root: true }
       // );
       // this.viewCounted = true;
+    },
+    switchToPreview() {
+      this.showPreview = !this.showPreview;
     }
   }
 };

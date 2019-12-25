@@ -41,6 +41,22 @@
     />
     <template v-if="isAuthor">
       <span class="actionsContainer">
+        <span class="labelWrapper" v-if="post.media.preview.source">
+          <label class="labelWrapper__label" for="is_paid_subscription"
+            >Video</label
+          >
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              id="is_paid_subscription"
+              name="isWantEarn"
+              :value="showPreview"
+              @change="$emit('switchToPreview')"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+          <span class="labelWrapper__label">Preview</span>
+        </span>
         <span v-if="post.active" class="mediaStatus isActive">
           <span class="icn-item verified-user" />
           Active
@@ -97,6 +113,12 @@ export default {
     isAuthor: {
       type: Boolean,
       required: true
+    },
+    switchToPreview: {
+      type: Function
+    },
+    showPreview: {
+      type: Boolean
     }
   },
   computed: {
@@ -196,6 +218,24 @@ export default {
     border-radius: 1000px;
     &:hover {
       background-color: #e4e4e4;
+    }
+  }
+}
+.toggle-element {
+  &.label {
+    transform: translateY(-50px);
+  }
+}
+.labelWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  .labelWrapper__label {
+    &:first-child {
+      margin-right: 5px;
+    }
+    &:last-child {
+      margin-left: 5px;
     }
   }
 }
