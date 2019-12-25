@@ -77,23 +77,27 @@ export default {
 
       if (!addedFiles.length) return;
 
-      this.mediaType = addedFiles[0].mediaType;
+      if (this.allowMultipleFileTypes) {
+        this.preloadedMedias = [...addedFiles];
+      } else {
+        this.mediaType = addedFiles[0].mediaType;
 
-      const filtered = {
-        photo: addedFiles.filter(file => file.mediaType === "photo"),
-        video: addedFiles.filter(file => file.mediaType === "video"),
-        gif: addedFiles.filter(file => file.mediaType === "gif")
-      };
+        const filtered = {
+          photo: addedFiles.filter(file => file.mediaType === "photo"),
+          video: addedFiles.filter(file => file.mediaType === "video"),
+          gif: addedFiles.filter(file => file.mediaType === "gif")
+        };
 
-      e.target.value = "";
+        e.target.value = "";
 
-      if (filtered[this.mediaType].length > this.limits[this.mediaType]) {
-        this.toast(messages[this.mediaType]);
+        if (filtered[this.mediaType].length > this.limits[this.mediaType]) {
+          this.toast(messages[this.mediaType]);
+        }
+
+        this.preloadedMedias = [
+          ...filtered[this.mediaType].splice(0, this.limits[this.mediaType])
+        ];
       }
-
-      this.preloadedMedias = [
-        ...filtered[this.mediaType].splice(0, this.limits[this.mediaType])
-      ];
 
       for (let i = 0; i < this.preloadedMedias.length; i += 1) {
         const media = this.preloadedMedias[i];

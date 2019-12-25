@@ -68,7 +68,7 @@
           ></textarea>
         </vue-tribute>
         <div class="post-attachment">
-          <div class="block-thumbnails" v-if="!preloadedMedias.length">
+          <div class="block-thumbnails" v-if="!customThumbAdded">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView">
               <div
@@ -86,14 +86,31 @@
               </div>
             </div>
           </div>
-          <Draggable v-model="preloadedMedias" v-else>
+          <Draggable v-model="preloadedMedias" v-if="customThumbAdded">
+            <div class="block-thumbnails__title">Custom cover</div>
             <transition-group
               class="addFileCollectionView"
               type="transition"
               name="flip-list"
             >
               <MediaPreview
-                v-for="media in preloadedMedias"
+                v-for="media in preloadedPhotoMedias"
+                :media="media"
+                :key="media.id"
+                @removeMedia="removeMedia"
+                :isSaving="false"
+              />
+            </transition-group>
+          </Draggable>
+          <Draggable v-model="preloadedMedias" v-if="customPreviewAdded">
+            <div class="block-thumbnails__title">Custom video preview</div>
+            <transition-group
+              class="addFileCollectionView"
+              type="transition"
+              name="flip-list"
+            >
+              <MediaPreview
+                v-for="media in preloadedVideoMedias"
                 :media="media"
                 :key="media.id"
                 @removeMedia="removeMedia"
@@ -157,6 +174,13 @@
               :accept="inputAccepts"
               @change="addMediaFiles"
             />
+            <input
+              id="addFilePreview"
+              type="file"
+              multiple
+              :accept="inputAcceptsPreview"
+              @change="addMediaFiles"
+            />
 
             <div
               :class="['more-functions', { open: dropdownOpened }]"
@@ -167,7 +191,13 @@
                 Custom preview
               </div>
               <div class="more-functions__dropdown">
-                <ThumbDropdown :hide="hideDropdown" @addThumb="addThumb" />
+                <ThumbDropdown
+                  :hide="hideDropdown"
+                  @addThumb="addThumb"
+                  @addPreview="addPreview"
+                  :showThumbOption="!customThumbAdded"
+                  :showPreviewOption="!customPreviewAdded"
+                />
               </div>
             </div>
           </template>
@@ -222,7 +252,8 @@ const InitialState = {
   saving: false,
   withoutWatermark: false,
   maxPrice: 500,
-  dropdownOpened: false
+  dropdownOpened: false,
+  allowMultipleFileTypes: true
 };
 
 export default {
@@ -287,8 +318,35 @@ export default {
     inputAccepts() {
       return ["jpg", "jpeg", "gif", "png"];
     },
+    inputAcceptsPreview() {
+      return ["mp4", "avi", "moov"];
+    },
     allMediaTypes() {
-      return this.inputAccepts;
+      return [...this.inputAccepts, ...this.inputAcceptsPreview];
+    },
+    customThumbAdded() {
+      if (!this.preloadedMedias.length) {
+        return false;
+      }
+      return !!this.preloadedMedias.find(item => item.mediaType === "photo");
+    },
+    customPreviewAdded() {
+      if (!this.preloadedMedias.length) {
+        return false;
+      }
+      return !!this.preloadedMedias.find(item => item.mediaType === "video");
+    },
+    preloadedPhotoMedias() {
+      if (!this.preloadedMedias.length) {
+        return [];
+      }
+      return this.preloadedMedias.filter(item => item.mediaType === "photo");
+    },
+    preloadedVideoMedias() {
+      if (!this.preloadedMedias.length) {
+        return [];
+      }
+      return this.preloadedMedias.filter(item => item.mediaType === "video");
     }
   },
   watch: {
@@ -314,6 +372,13 @@ export default {
     },
     addThumb() {
       const input = document.getElementById("addFile");
+      if (!input) {
+        return;
+      }
+      input.click();
+    },
+    addPreview() {
+      const input = document.getElementById("addFilePreview");
       if (!input) {
         return;
       }

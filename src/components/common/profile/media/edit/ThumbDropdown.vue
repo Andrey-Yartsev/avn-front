@@ -2,16 +2,21 @@
   <div class="more-functions__dropdown-inside">
     <ul class="more-functions__list">
       <li class="more-functions__item">
-        <button class="more-functions__link" type="button" @click="addThumb">
-          <span class="more-functions__option">Add custom thumb</span>
+        <button
+          class="more-functions__link"
+          type="button"
+          @click="addThumb"
+          :disabled="!showThumbOption"
+        >
+          <span class="more-functions__option">Add custom cover</span>
         </button>
       </li>
       <li class="more-functions__item">
         <button
           class="more-functions__link"
           type="button"
-          disabled
           @click="addPreview"
+          :disabled="!showPreviewOption"
         >
           <span class="more-functions__option">Add video preview</span>
         </button>
@@ -27,7 +32,9 @@ export default {
   props: {
     hide: {
       type: Function
-    }
+    },
+    showThumbOption: Boolean,
+    showPreviewOption: Boolean
   },
   methods: {
     addThumb() {
@@ -36,6 +43,7 @@ export default {
     },
     addPreview() {
       this.$props.hide();
+      this.$emit("addPreview");
     }
   }
 };
