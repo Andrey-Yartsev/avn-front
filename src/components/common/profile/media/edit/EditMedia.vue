@@ -205,7 +205,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged"
+          :disabled="!isDataChanged || isMediaLoading"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -303,6 +303,12 @@ export default {
     isExtended() {
       return this.expanded || this.initialExpanded;
     },
+    isMediaLoading() {
+      if (!this.preloadedMedias.length) {
+        return false;
+      }
+      return this.preloadedMedias.some(item => !item.processId);
+    },
     isDataChanged() {
       return (
         this.$props.post.title !== this.media.title ||
@@ -316,10 +322,10 @@ export default {
       return +this.media.price > 0 && +this.media.price <= 500;
     },
     inputAccepts() {
-      return ["jpg", "jpeg", "gif", "png"];
+      return ["jpg", "jpeg", "png"];
     },
     inputAcceptsPreview() {
-      return ["mp4", "avi", "moov"];
+      return ["mp4", "avi", "moov", "mov", "m4v", "wmv"];
     },
     allMediaTypes() {
       return [...this.inputAccepts, ...this.inputAcceptsPreview];
