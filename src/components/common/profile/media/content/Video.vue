@@ -10,7 +10,7 @@
       controlslist="nodownload"
       :autoplay="autoplay"
       loop
-      :poster="media.preview.source"
+      :poster="media.thumb.source"
       v-if="video"
       @play="play"
       @contextmenu.prevent="() => false"
@@ -31,7 +31,8 @@ export default {
   props: {
     post: Object,
     authorId: Number,
-    autoplay: Boolean
+    autoplay: Boolean,
+    media: Object
   },
   data() {
     return {

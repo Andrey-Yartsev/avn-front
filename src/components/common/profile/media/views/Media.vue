@@ -43,7 +43,7 @@
 import Locked from "@/components/common/profile/media/content/Locked";
 import Video from "@/components/common/profile/media/content/Video";
 import Loader from "@/components/common/Loader";
-import VideoLinked from "@/components/post/parts/media/content/VideoLinked";
+import VideoLinked from "@/components/common/profile/media/content/VideoLinked";
 
 export default {
   name: "Media",
@@ -102,6 +102,8 @@ export default {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
 
       if (!canView) return "Locked";
+      // if (!canView && !preview.source) return "Locked";
+      // if (!canView && preview.source) return `Video${LinkedPrefix}`;
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
