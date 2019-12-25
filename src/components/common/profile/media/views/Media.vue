@@ -21,7 +21,7 @@
       />
     </div>
     <template v-else>
-      <figure class="media-item active">
+      <figure class="media-item active" style="width: 100%">
         <component
           :is="getMediaViewType(medias)"
           :media="medias"
@@ -122,6 +122,11 @@ export default {
   }
   &.minHeight {
     min-height: 300px;
+  }
+}
+.media-item {
+  .active {
+    width: 100%;
   }
 }
 </style>

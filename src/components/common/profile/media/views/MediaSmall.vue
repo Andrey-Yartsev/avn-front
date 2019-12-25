@@ -296,4 +296,9 @@ export default {
 .btn.btn-buy > span {
   transform: translateY(-6px);
 }
+.locked-picture {
+  .locked {
+    transform: scale(1);
+  }
+}
 </style>

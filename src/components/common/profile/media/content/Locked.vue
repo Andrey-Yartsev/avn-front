@@ -18,6 +18,7 @@
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
       ref="video"
+      style="margin: auto"
     >
       <source :src="media.preview.source" type="video/mp4" />
     </video>
@@ -29,6 +30,7 @@
       height="350"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
+      style="width: auto; height: 350px"
     />
   </div>
 </template>

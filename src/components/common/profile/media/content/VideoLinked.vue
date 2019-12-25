@@ -3,6 +3,7 @@
     <span class="video-placeholder icn-item">
       <img
         :src="src"
+        style="height: 350px"
         @contextmenu.prevent="() => false"
         @dragstart.prevent="() => false"
       />
