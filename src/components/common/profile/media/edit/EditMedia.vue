@@ -149,27 +149,26 @@
                 </label>
               </div>
             </div>
+
+            <input
+              id="addFile"
+              type="file"
+              multiple
+              :accept="inputAccepts"
+              @change="addMediaFiles"
+            />
+
             <div
-              class="b-check-state b-check-state_post alignFlexCenter"
-              v-if="!preloadedMedias.length"
+              :class="['more-functions', { open: dropdownOpened }]"
+              v-click-outside="hideDropdown"
             >
-              <label
-                :class="['add-media-input', { disabled: false }]"
-                class="btn-post"
-                for="addFile"
-              >
-                <input
-                  id="addFile"
-                  type="file"
-                  multiple
-                  :accept="inputAccepts"
-                  @change="addMediaFiles"
-                />
-                <span class="icn-media icn-item icn-size_lg"></span>
-                <span class="btn-post__text">
-                  Custom cover
-                </span>
-              </label>
+              <div class="more-functions__overlay" @click="hideDropdown"></div>
+              <div class="customPreview" @click="showDropdown">
+                Custom preview
+              </div>
+              <div class="more-functions__dropdown">
+                <ThumbDropdown :hide="hideDropdown" @addThumb="addThumb" />
+              </div>
             </div>
           </template>
         </div>
@@ -206,6 +205,7 @@ import UserSuggestions from "@/mixins/userSuggestions";
 import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
+import ThumbDropdown from "./ThumbDropdown.vue";
 
 Settings.defaultLocale = "en";
 
@@ -221,7 +221,8 @@ const InitialState = {
   },
   saving: false,
   withoutWatermark: false,
-  maxPrice: 500
+  maxPrice: 500,
+  dropdownOpened: false
 };
 
 export default {
@@ -236,7 +237,8 @@ export default {
     Loader,
     VueTribute,
     MediaPreview,
-    Draggable
+    Draggable,
+    ThumbDropdown
   },
   props: {
     initialExpanded: {
@@ -304,6 +306,19 @@ export default {
     }
   },
   methods: {
+    hideDropdown() {
+      this.dropdownOpened = false;
+    },
+    showDropdown() {
+      this.dropdownOpened = true;
+    },
+    addThumb() {
+      const input = document.getElementById("addFile");
+      if (!input) {
+        return;
+      }
+      input.click();
+    },
     getConvertedText() {
       const pattern =
         '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
@@ -404,5 +419,10 @@ export default {
     font-size: 17px;
     position: relative;
   }
+}
+.customPreview {
+  cursor: pointer;
+  color: #2196f3;
+  font-weight: bold;
 }
 </style>
