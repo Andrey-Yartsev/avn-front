@@ -22,6 +22,7 @@
           @hideDropdown="showDropdown = false"
           :showCopy="false"
           :isAuthor="isAuthor"
+          :view="'medium'"
         />
         <p
           class="text"

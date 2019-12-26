@@ -41,7 +41,10 @@
     />
     <template v-if="isAuthor">
       <span class="actionsContainer">
-        <span class="labelWrapper" v-if="post.media.preview.source">
+        <span
+          class="labelWrapper"
+          v-if="post.media.preview.source && view === 'large'"
+        >
           <label class="labelWrapper__label" for="is_paid_subscription"
             >Video</label
           >
@@ -119,6 +122,9 @@ export default {
     },
     showPreview: {
       type: Boolean
+    },
+    view: {
+      type: String
     }
   },
   computed: {

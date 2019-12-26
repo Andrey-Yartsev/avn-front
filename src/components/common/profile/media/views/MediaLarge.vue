@@ -42,6 +42,7 @@
           :isAuthor="isAuthor"
           @switchToPreview="switchToPreview"
           :showPreview="showPreview"
+          :view="'large'"
         />
         <h2
           v-html="post.title"
@@ -97,6 +98,7 @@
             :isAuthor="isAuthor"
             @switchToPreview="switchToPreview"
             :showPreview="showPreview"
+            :view="'large'"
           />
           <div
             class="text hidden-mobile"

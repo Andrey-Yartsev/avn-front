@@ -251,7 +251,7 @@ export default {
 .buttonWrapper {
   display: flex !important;
   justify-content: flex-end;
-  margin-bottom: 10px;
+  margin: 5px 0px;
 }
 .openMenuButton {
   display: inline-block;
