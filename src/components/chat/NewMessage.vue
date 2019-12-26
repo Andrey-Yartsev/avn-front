@@ -86,6 +86,7 @@
             :class="{ visible: foundUsers.length, active: selectAll }"
           ></div>
         </div>
+        <div class="chatFlatLoader semi-transparent" v-if="false" />
         <perfect-scrollbar
           class="searchChatContacts"
           @ps-scroll-y="contactsScrollChange"
