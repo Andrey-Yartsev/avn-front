@@ -36,7 +36,10 @@
         <div class="explore">
           <div v-if="!user" class="row-btn">
             <router-link :to="getVoteLinkHref" class="btn border block alt lg">
-              <span class="icn-item icn-gayvn icn-size_lg"></span>
+              <span
+                class="icn-item icn-size_lg"
+                :class="isGayPage ? 'icn-gayvn' : 'icn-avn'"
+              ></span>
               {{ getVoteLinkText }}
             </router-link>
           </div>
