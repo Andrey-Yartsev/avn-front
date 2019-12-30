@@ -1232,41 +1232,7 @@ button {
 }
 
 .row-btn {
-  border-bottom: 1px solid rgba($gray, 0.2);
-  background-color: $white;
-  padding: 20px 15px;
-
-  @include media-breakpoint-up($desktop-breakpoint) {
-    border-radius: 5px 5px 0 0;
-  }
-
-  + .postCollectionView {
-
-    .feed-wrapper & {
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-    }
-
-    .posts {
-
-      .post {
-
-        &:first-child {
-
-          .feed-wrapper & {
-
-            @include media-breakpoint-up($desktop-breakpoint) {
-              border-top-left-radius: 0;
-              border-top-right-radius: 0;
-            }
-          }
-        }
-      }
-    }
-  }
+  padding: 20px 10px;
 
   .icn-item {
     margin-top: -6px;
