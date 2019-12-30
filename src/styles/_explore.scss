@@ -246,6 +246,8 @@
       position: relative;
     }
 
+
+    &.row-btn,
     &.userCollectionView {
 
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
