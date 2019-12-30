@@ -43,6 +43,26 @@
               {{ getVoteLinkText }}
             </router-link>
           </div>
+          <template v-else>
+            <div class="row-btn" v-if="userViewIsAll || userViewIsStreight">
+              <router-link
+                to="/avn_awards/voting"
+                class="btn border block alt lg"
+              >
+                <span class="icn-item icn-avn icn-size_lg"></span>
+                AVN Awards Voting
+              </router-link>
+            </div>
+            <div class="row-btn" v-if="userViewIsAll || userViewIsGay">
+              <router-link
+                to="/gayvn_awards/voting"
+                class="btn border block alt lg"
+              >
+                <span class="icn-item icn-gayvn icn-size_lg"></span>
+                GayVN Awards Voting
+              </router-link>
+            </div>
+          </template>
           <div
             :class="{
               exploreAllCollectionView: page === 'all',
@@ -255,6 +275,15 @@ export default {
     },
     getVoteLinkText() {
       return this.isGayPage ? "GayVN Awards Voting" : "AVN Awards Voting";
+    },
+    userViewIsAll() {
+      return this.user.categoryView === 1;
+    },
+    userViewIsStreight() {
+      return this.user.categoryView === 2;
+    },
+    userViewIsGay() {
+      return this.user.categoryView === 3;
     }
   },
   methods: {
