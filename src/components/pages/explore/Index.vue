@@ -34,35 +34,37 @@
           </div>
         </div>
         <div class="explore">
-          <div v-if="!user" class="row-btn">
-            <router-link :to="getVoteLinkHref" class="btn border block alt lg">
+          <div class="row-btn">
+            <router-link
+              :to="getVoteLinkHref"
+              class="btn border block alt lg"
+              v-if="!user"
+            >
               <span
                 class="icn-item icn-size_lg"
                 :class="isGayPage ? 'icn-gayvn' : 'icn-avn'"
               ></span>
               {{ getVoteLinkText }}
             </router-link>
-          </div>
-          <template v-else>
-            <div class="row-btn" v-if="userViewIsAll || userViewIsStreight">
+            <template v-else>
               <router-link
                 to="/avn_awards/voting"
                 class="btn border block alt lg"
+                v-if="userViewIsAll || userViewIsStreight"
               >
                 <span class="icn-item icn-avn icn-size_lg"></span>
                 AVN Awards Voting
               </router-link>
-            </div>
-            <div class="row-btn" v-if="userViewIsAll || userViewIsGay">
               <router-link
                 to="/gayvn_awards/voting"
                 class="btn border block alt lg"
+                v-if="userViewIsAll || userViewIsGay"
               >
                 <span class="icn-item icn-gayvn icn-size_lg"></span>
                 GayVN Awards Voting
               </router-link>
-            </div>
-          </template>
+            </template>
+          </div>
           <div
             :class="{
               exploreAllCollectionView: page === 'all',
