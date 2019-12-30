@@ -1233,8 +1233,11 @@ button {
 
 .row-btn {
   padding: 0 10px 20px;
-  &.row-btn-mobile {
-    padding: 20px 10px;
+
+  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+    padding-top: 20px;
+    background-color: $white;
+    flex: 0 0 auto;
   }
 
   .icn-item {

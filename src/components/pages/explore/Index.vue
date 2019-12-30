@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="explore">
-          <div class="row-btn" :class="{ 'row-btn-mobile': $mq === 'mobile' }">
+          <div class="row-btn">
             <router-link
               :to="getVoteLinkHref"
               class="btn border block alt lg"
