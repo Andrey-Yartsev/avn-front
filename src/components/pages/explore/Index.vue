@@ -34,11 +34,11 @@
           </div>
         </div>
         <div class="explore">
-          <div class="row-btn">
-            <a href="#" class="btn border block alt lg">
+          <div v-if="!user" class="row-btn">
+            <router-link :to="getVoteLinkHref" class="btn border block alt lg">
               <span class="icn-item icn-gayvn icn-size_lg"></span>
-              GayVN Awards Voting
-            </a>
+              {{ getVoteLinkText }}
+            </router-link>
           </div>
           <div
             :class="{
@@ -243,6 +243,15 @@ export default {
     },
     category() {
       return this.$store.state.gender.category;
+    },
+    isGayPage() {
+      return window.location.hostname.match(/gayvn/);
+    },
+    getVoteLinkHref() {
+      return this.isGayPage ? "/gayvn_awards/voting" : "/avn_awards/voting";
+    },
+    getVoteLinkText() {
+      return this.isGayPage ? "GayVN Awards Voting" : "AVN Awards Voting";
     }
   },
   methods: {
