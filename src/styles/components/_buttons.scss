@@ -1233,6 +1233,9 @@ button {
 
 .row-btn {
   padding: 0 10px 20px;
+  &.row-btn-mobile {
+    padding: 20px 10px;
+  }
 
   .icn-item {
     margin-top: -6px;
