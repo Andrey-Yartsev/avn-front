@@ -35,6 +35,15 @@
         </div>
         <div class="explore">
           <div
+            class="row-btn"
+            style="backgroundColor: transparent; border: none"
+          >
+            <a href="#" class="btn border block alt lg">
+              <span class="icn-item icn-gayvn icn-size_lg"></span>
+              GayVN Awards Voting
+            </a>
+          </div>
+          <div
             :class="{
               exploreAllCollectionView: page === 'all',
               photoCollectionView: page === 'photos',

@@ -1,11 +1,11 @@
 <template>
   <div class="postCollectionView">
-    <div class="row-btn">
+    <!-- <div class="row-btn">
       <a href="#" class="btn border block alt lg">
         <span class="icn-item icn-gayvn icn-size_lg"></span>
         GayVN Awards Voting
       </a>
-    </div>
+    </div> -->
     <div class="posts">
       <Post
         v-for="post in posts"
