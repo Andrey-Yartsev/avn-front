@@ -247,6 +247,13 @@
     }
 
 
+    &.row-btn {
+      
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        flex: 0 0 auto;
+      }
+    }
+
     &.row-btn,
     &.userCollectionView {
 

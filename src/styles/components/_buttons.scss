@@ -1236,7 +1236,6 @@ button {
 
   @include media-breakpoint-down($desktop-breakpoint-dcrs) {
     padding-top: 20px;
-    flex: 0 0 auto;
   }
 
   .icn-item {
