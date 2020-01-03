@@ -176,6 +176,19 @@
   &__header {
     display: flex;
     justify-content: space-between;
+
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      flex-wrap: wrap;
+    }
+
+    h4 {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        order: 3;
+        flex: 0 0 100%;
+        margin-top: 10px;
+      }
+    }
   }
 
   .stories {
