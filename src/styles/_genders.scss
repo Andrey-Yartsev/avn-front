@@ -151,6 +151,10 @@
         padding-top: 0;
       }
 
+      .not-authorized & {
+        padding-top: 0;
+      }
+
       &:before {
         display: none;
       }
