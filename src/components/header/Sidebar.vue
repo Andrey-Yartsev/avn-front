@@ -98,12 +98,12 @@
                 </router-link>
                 <router-link
                   v-if="user.nominee && userHasGayNominations"
-                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  class="user-menu-item user-menu-item__award-gayvn icn-item"
                   to="/settings/gayvn"
                   >GayVN Awards Promo Link
                 </router-link>
                 <router-link
-                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  class="user-menu-item user-menu-item__award-gayvn icn-item"
                   to="/gayvn_awards/voting"
                   >GayVN Awards Voting
                 </router-link>
@@ -131,13 +131,13 @@
                   v-if="
                     user.nominee && userHasGayNominations && isVotingGayEnabled
                   "
-                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  class="user-menu-item user-menu-item__award-gayvn icn-item"
                   to="/settings/gayvn"
                   >GayVN Awards Promo Link
                 </router-link>
                 <router-link
                   v-if="(userViewIsAll || userViewIsGay) && isVotingGayEnabled"
-                  class="user-menu-item user-menu-item__award-avn icn-item"
+                  class="user-menu-item user-menu-item__award-gayvn icn-item"
                   to="/gayvn_awards/voting"
                   >GayVN Awards Voting
                 </router-link>
