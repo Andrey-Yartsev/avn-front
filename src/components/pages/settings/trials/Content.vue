@@ -16,7 +16,7 @@
           </p>
           <button
             type="button"
-            class="btn btn_fix-width-sm border alt btn-copy-url btn-copy-url_reset-mt"
+            class="btn btn_fix-width-sm border alt"
             @click="generateCode"
           >
             Generate<span class="hidden-mobile" v-if="$mq === 'desktop'">
