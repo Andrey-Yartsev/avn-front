@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="explore">
-          <div class="row-btn">
+          <div class="row-btn" v-if="!infinityScrollLoading">
             <router-link
               :to="getVoteLinkHref"
               class="btn border block alt lg"
