@@ -1,7 +1,7 @@
 <template>
   <div class="payouts-legal" v-if="!loading">
     <div class="PayoutsLegalView">
-      <h1 class="form-title">Personal Information</h1>
+      <h1 class="form-title settings-title">Personal Information</h1>
 
       <form class="payouts-legal-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
