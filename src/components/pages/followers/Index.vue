@@ -57,14 +57,18 @@
                 </div>
                 <div class="explore">
                   <div class="userCollectionView">
-                    <div class="block-bg">
+                    <div :class="{ 'block-bg': !loading && users.length }">
                       <Users
                         :items="users"
                         :loading="false"
                         :query="page"
                         actionPrefix="followers"
                       />
-                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                      <div
+                        class="loader-infinity"
+                        :class="{ 'loader-infinity_collapsed': !users.length }"
+                        v-if="infinityScrollLoading"
+                      >
                         <Loader
                           :fullscreen="false"
                           :inline="true"
