@@ -176,6 +176,13 @@
       }
     }
   }
+
+  .loader-container {
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      min-height: calc(100vh - 210px);
+    }
+  }
 }
 
 .label-counter {
