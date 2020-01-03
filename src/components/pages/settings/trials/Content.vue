@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="form-title" v-if="$mq === 'desktop'">
+    <h1 class="form-title settings-title" v-if="$mq === 'desktop'">
       Free Trials
     </h1>
     <div class="trialsSectionCollection">
