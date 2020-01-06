@@ -106,7 +106,7 @@
             :actionPrefix="actionPrefix"
           />
           <div v-if="users.length" ref="earningsScrollObserver"></div>
-          <div class="empty-table-info">
+          <div v-else class="empty-table-info show">
             <span>Empty here for now</span>
           </div>
         </div>

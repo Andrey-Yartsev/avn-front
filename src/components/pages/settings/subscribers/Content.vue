@@ -91,15 +91,8 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div class="loader-infinity" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" :inline="true" class="small" />
-          </div>
-          <div
-            class="empty-table-info"
-            :class="{
-              show: users.length === 0 && !infinityScrollLoading
-            }"
-          >
+          <div v-if="users.length" ref="subscribersScrollObserver"></div>
+          <div v-else class="empty-table-info show">
             <span>Empty here for now</span>
           </div>
         </div>
@@ -110,7 +103,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
 import UsersTable from "@/components/users/UsersTable.vue";
@@ -125,7 +117,7 @@ import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "Subscribers",
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [UserMixin],
   components: {
     Loader,
     UsersTable,
@@ -145,11 +137,15 @@ export default {
     actionPrefix: "subscribes",
     isSnapchatOnly: false,
     isActiveOnly: false,
-    isExpiredOnly: false
+    isExpiredOnly: false,
+    observer: null
   }),
   computed: {
     loading() {
       return this.$store.state.subscribes.subscribesRequestLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.subscribes.allDataReceived;
     },
     page() {
       return this.$route.meta.title;
@@ -179,24 +175,34 @@ export default {
   },
   methods: {
     init() {
-      this.resetInfinityScroll();
       this.$store.commit("subscribes/reset");
       this.getPosts();
     },
-    infinityScrollGetDataMethod() {
-      if (this.profile) {
-        this.getPosts();
-      }
-    },
     getPosts() {
       if (this.actionPrefix === "subscribes") {
-        this.$store.dispatch("subscribes/getPosts", {
-          active: this.isActiveUsers()
-        });
+        this.$store
+          .dispatch("subscribes/getPosts", {
+            active: this.isActiveUsers()
+          })
+          .then(() => {
+            const target = this.$refs.subscribersScrollObserver;
+            if (target && this.observer) {
+              this.observer.unobserve(target);
+            }
+            this.initIntersectionObserver();
+          });
       } else {
-        this.$store.dispatch("subscribes/getSnapchatPosts", {
-          active: this.isActiveUsers()
-        });
+        this.$store
+          .dispatch("subscribes/getSnapchatPosts", {
+            active: this.isActiveUsers()
+          })
+          .then(() => {
+            const target = this.$refs.subscribersScrollObserver;
+            if (target && this.observer) {
+              this.observer.unobserve(target);
+            }
+            this.initIntersectionObserver();
+          });
       }
     },
     isActiveUsers() {
@@ -214,7 +220,6 @@ export default {
       });
     },
     changeActionPreffix(value) {
-      // console.log(value)
       this.actionPrefix = value;
       this.$nextTick(() => {
         this.init();
@@ -222,6 +227,25 @@ export default {
     },
     goBack() {
       BackRouter.back();
+    },
+    initIntersectionObserver() {
+      const callback = entries => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting &&
+            !this.allDataRecieved &&
+            this.users.length >= 15
+          ) {
+            console.log("load more");
+            this.getPosts();
+          }
+        });
+      };
+      this.observer = new IntersectionObserver(callback);
+      const target = this.$refs.subscribersScrollObserver;
+      if (target) {
+        this.observer.observe(target);
+      }
     }
   },
   watch: {
@@ -240,10 +264,24 @@ export default {
     },
     isExpiredOnly() {
       this.init();
+    },
+    allDataRecieved(newValue) {
+      if (newValue) {
+        const target = this.$refs.subscribersScrollObserver;
+        if (target && this.observer) {
+          this.observer.unobserve(target);
+        }
+      }
     }
   },
-  created() {
+  mounted() {
     this.init();
+  },
+  beforeDestroy() {
+    const target = this.$refs.subscribersScrollObserver;
+    if (target && this.observer) {
+      this.observer.unobserve(target);
+    }
   }
 };
 </script>
