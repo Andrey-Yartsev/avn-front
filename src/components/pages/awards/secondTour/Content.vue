@@ -257,6 +257,9 @@ export default {
               .then(() => {
                 this.extendNominees();
                 this.votingClicking = false;
+                this.justVotedIds = this.justVotedIds.filter(
+                  id => id !== nominee.nomineeId
+                );
               });
           } else {
             this.votingClicking = false;
