@@ -86,7 +86,7 @@
             :class="{ visible: foundUsers.length, active: selectAll }"
           ></div>
         </div>
-        <div class="chatFlatLoader semi-transparent" v-if="false" />
+        <div class="chatFlatLoader semi-transparent" v-if="usersSearching" />
         <perfect-scrollbar
           class="searchChatContacts"
           @ps-scroll-y="contactsScrollChange"
@@ -382,6 +382,9 @@ export default {
         return " (" + this.allUsersCount + ")";
       }
       return null;
+    },
+    usersSearching() {
+      return this.$store.state.chat.searchUsersLoading;
     }
   },
 
@@ -418,10 +421,13 @@ export default {
       }
       if (this.searchId) {
         clearTimeout(this.searchId);
-      }
-      this.searchId = setTimeout(() => {
+        this.searchId = setTimeout(() => {
+          this.$store.dispatch("chat/searchUsers", this.searchQuery);
+          this.searchId = 0;
+        }, 300);
+      } else {
         this.$store.dispatch("chat/searchUsers", this.searchQuery);
-      }, 300);
+      }
     },
     back() {
       this.$store.commit("chat/setSecondScreen", false);
