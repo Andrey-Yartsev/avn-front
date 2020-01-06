@@ -105,9 +105,7 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div class="loader-infinity" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" :inline="true" class="small" />
-          </div>
+          <div v-if="users.length" ref="earningsScrollObserver"></div>
           <div class="empty-table-info">
             <span>Empty here for now</span>
           </div>
@@ -119,7 +117,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import UsersTable from "@/components/users/UsersTable.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
@@ -130,7 +127,7 @@ import BackRouter from "@/utils/backRouter";
 
 export default {
   name: "Earnings",
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [UserMixin],
   components: {
     Loader,
     UsersTable,
@@ -150,11 +147,15 @@ export default {
       month: "DESC",
       lifetime: "DESC"
     },
-    selectedFilter: "lifetime"
+    selectedFilter: "lifetime",
+    observer: null
   }),
   computed: {
     loading() {
       return this.$store.state.earnings.earningsRequestLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.earnings.allDataReceived;
     },
     page() {
       return this.$route.meta.title;
@@ -187,21 +188,23 @@ export default {
   },
   methods: {
     init() {
-      this.resetInfinityScroll();
       this.$store.commit("earnings/reset");
       this.getPosts();
     },
-    infinityScrollGetDataMethod() {
-      if (this.profile) {
-        this.getPosts();
-      }
-    },
     getPosts() {
-      this.$store.dispatch("earnings/getPosts", {
-        type: this.actionPrefix,
-        sort: this.sort[this.selectedFilter],
-        sortBy: this.selectedFilter
-      });
+      this.$store
+        .dispatch("earnings/getPosts", {
+          type: this.actionPrefix,
+          sort: this.sort[this.selectedFilter],
+          sortBy: this.selectedFilter
+        })
+        .then(() => {
+          const target = this.$refs.earningsScrollObserver;
+          if (target && this.observer) {
+            this.observer.unobserve(target);
+          }
+          this.initIntersectionObserver();
+        });
     },
     goBack() {
       BackRouter.back();
@@ -218,6 +221,25 @@ export default {
     },
     filterChangeHandler(e) {
       this.selectedFilter = e.target.value;
+    },
+    initIntersectionObserver() {
+      const callback = entries => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting &&
+            !this.allDataRecieved &&
+            this.users.length >= 15
+          ) {
+            console.log("load more");
+            this.getPosts();
+          }
+        });
+      };
+      this.observer = new IntersectionObserver(callback);
+      const target = this.$refs.earningsScrollObserver;
+      if (target) {
+        this.observer.observe(target);
+      }
     }
   },
   watch: {
@@ -234,10 +256,24 @@ export default {
       if (this.$mq === "mobile") {
         this.init();
       }
+    },
+    allDataRecieved(newValue) {
+      if (newValue) {
+        const target = this.$refs.earningsScrollObserver;
+        if (target && this.observer) {
+          this.observer.unobserve(target);
+        }
+      }
     }
   },
-  created() {
+  mounted() {
     this.init();
+  },
+  beforeDestroy() {
+    const target = this.$refs.earningsScrollObserver;
+    if (target && this.observer) {
+      this.observer.unobserve(target);
+    }
   }
 };
 </script>

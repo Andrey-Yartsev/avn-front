@@ -4,14 +4,15 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 import * as deepMerge from "deepmerge";
 
-const limit = 10;
+const limit = 15;
 
 const state = {
   loading: false,
   marker: null,
   offset: 0,
   allDataReceived: false,
-  limit
+  limit,
+  posts: []
 };
 
 const mutations = {
@@ -38,7 +39,7 @@ const actions = {
     params.offset = state.offset;
     params.marker = state.marker || "";
     params.limit = limit;
-    dispatch("earningsRequest", params).then(r => {
+    return dispatch("earningsRequest", params).then(r => {
       commit("checkResult", r);
     });
   }
@@ -58,8 +59,8 @@ createRequestAction({
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
-    // options.query.offset = params.offset || 0;
-    // options.query.limit = params.limit || 5;
+    options.query.offset = params.offset || 0;
+    options.query.limit = params.limit || 15;
     options.query.marker = params.marker || "";
     options.query.sortBy = params.sortBy || "";
     options.query.sort = params.sort || "";
