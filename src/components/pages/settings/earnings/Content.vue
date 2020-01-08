@@ -105,8 +105,14 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div v-if="users.length" ref="earningsScrollObserver"></div>
-          <div v-else class="empty-table-info show">
+          <div class="border-top loader-container" v-if="!allDataRecieved">
+            <Loader :fullscreen="false" text="" :small="true" />
+          </div>
+          <div v-if="users.length" ref="scrollObserver"></div>
+          <div
+            v-if="!users.length && allDataRecieved"
+            class="empty-table-info show"
+          >
             <span>Empty here for now</span>
           </div>
         </div>
@@ -124,10 +130,11 @@ import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Earnings",
-  mixins: [UserMixin],
+  mixins: [UserMixin, IntersectionObserver],
   components: {
     Loader,
     UsersTable,
@@ -148,7 +155,7 @@ export default {
       lifetime: "DESC"
     },
     selectedFilter: "lifetime",
-    observer: null
+    fetchLimit: 15
   }),
   computed: {
     loading() {
@@ -172,6 +179,9 @@ export default {
         });
       }
       return this.$store.state.earnings.posts;
+    },
+    listLength() {
+      return this.users.length;
     },
     store() {
       return this.$store.state.earnings;
@@ -199,11 +209,7 @@ export default {
           sortBy: this.selectedFilter
         })
         .then(() => {
-          const target = this.$refs.earningsScrollObserver;
-          if (target && this.observer) {
-            this.observer.unobserve(target);
-          }
-          this.initIntersectionObserver();
+          this.handleResponseWithIntersectionObserver(this.getPosts);
         });
     },
     goBack() {
@@ -221,25 +227,6 @@ export default {
     },
     filterChangeHandler(e) {
       this.selectedFilter = e.target.value;
-    },
-    initIntersectionObserver() {
-      const callback = entries => {
-        entries.forEach(entry => {
-          if (
-            entry.isIntersecting &&
-            !this.allDataRecieved &&
-            this.users.length >= 15
-          ) {
-            console.log("load more");
-            this.getPosts();
-          }
-        });
-      };
-      this.observer = new IntersectionObserver(callback);
-      const target = this.$refs.earningsScrollObserver;
-      if (target) {
-        this.observer.observe(target);
-      }
     }
   },
   watch: {
@@ -256,24 +243,10 @@ export default {
       if (this.$mq === "mobile") {
         this.init();
       }
-    },
-    allDataRecieved(newValue) {
-      if (newValue) {
-        const target = this.$refs.earningsScrollObserver;
-        if (target && this.observer) {
-          this.observer.unobserve(target);
-        }
-      }
     }
   },
   mounted() {
     this.init();
-  },
-  beforeDestroy() {
-    const target = this.$refs.earningsScrollObserver;
-    if (target && this.observer) {
-      this.observer.unobserve(target);
-    }
   }
 };
 </script>

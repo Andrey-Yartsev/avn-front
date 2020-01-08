@@ -91,8 +91,14 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div v-if="users.length" ref="subscribersScrollObserver"></div>
-          <div v-else class="empty-table-info show">
+          <div class="border-top loader-container" v-if="!allDataRecieved">
+            <Loader :fullscreen="false" text="" :small="true" />
+          </div>
+          <div v-if="users.length" ref="scrollObserver"></div>
+          <div
+            v-if="!users.length && allDataRecieved"
+            class="empty-table-info show"
+          >
             <span>Empty here for now</span>
           </div>
         </div>
@@ -114,10 +120,11 @@ import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Subscribers",
-  mixins: [UserMixin],
+  mixins: [UserMixin, IntersectionObserver],
   components: {
     Loader,
     UsersTable,
@@ -138,7 +145,7 @@ export default {
     isSnapchatOnly: false,
     isActiveOnly: false,
     isExpiredOnly: false,
-    observer: null
+    fetchLimit: 15
   }),
   computed: {
     loading() {
@@ -163,6 +170,9 @@ export default {
       }
       return this.$store.state.subscribes.posts;
     },
+    listLength() {
+      return this.users.length;
+    },
     store() {
       return this.$store.state.subscribes;
     },
@@ -185,11 +195,7 @@ export default {
             active: this.isActiveUsers()
           })
           .then(() => {
-            const target = this.$refs.subscribersScrollObserver;
-            if (target && this.observer) {
-              this.observer.unobserve(target);
-            }
-            this.initIntersectionObserver();
+            this.handleResponseWithIntersectionObserver(this.getPosts);
           });
       } else {
         this.$store
@@ -197,11 +203,7 @@ export default {
             active: this.isActiveUsers()
           })
           .then(() => {
-            const target = this.$refs.subscribersScrollObserver;
-            if (target && this.observer) {
-              this.observer.unobserve(target);
-            }
-            this.initIntersectionObserver();
+            this.handleResponseWithIntersectionObserver(this.getPosts);
           });
       }
     },
@@ -227,25 +229,6 @@ export default {
     },
     goBack() {
       BackRouter.back();
-    },
-    initIntersectionObserver() {
-      const callback = entries => {
-        entries.forEach(entry => {
-          if (
-            entry.isIntersecting &&
-            !this.allDataRecieved &&
-            this.users.length >= 15
-          ) {
-            console.log("load more");
-            this.getPosts();
-          }
-        });
-      };
-      this.observer = new IntersectionObserver(callback);
-      const target = this.$refs.subscribersScrollObserver;
-      if (target) {
-        this.observer.observe(target);
-      }
     }
   },
   watch: {
@@ -264,24 +247,10 @@ export default {
     },
     isExpiredOnly() {
       this.init();
-    },
-    allDataRecieved(newValue) {
-      if (newValue) {
-        const target = this.$refs.subscribersScrollObserver;
-        if (target && this.observer) {
-          this.observer.unobserve(target);
-        }
-      }
     }
   },
   mounted() {
     this.init();
-  },
-  beforeDestroy() {
-    const target = this.$refs.subscribersScrollObserver;
-    if (target && this.observer) {
-      this.observer.unobserve(target);
-    }
   }
 };
 </script>
