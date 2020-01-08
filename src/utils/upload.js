@@ -20,7 +20,13 @@ export default (file, type) => {
     xhr.onload = e => {
       const result = JSON.parse(e.currentTarget.responseText);
       if (!result || !result[0] || !result[0].fileName) {
-        return reject({ message: "Upload failed" });
+        const response = {
+          message:
+            result.error && result.error.message
+              ? result.error.message
+              : "Upload failed"
+        };
+        return reject(response);
       }
       if (result.error) {
         if (result.error.message === "getimagesize(): Read error!") {
