@@ -171,21 +171,20 @@ export default {
       this.opened = false;
       this.filterType = type;
     },
-    // Uncoment when BE will ready
     fetchMedia() {
-      // this.$store
-      //   .dispatch("profile/media/getMedia", {
-      //     profileId: this.$store.state.profile.home.profile.id,
-      //     filter: this.getFilterType,
-      //     sort: this.getSortOrder
-      //   })
-      //   .then(() => {
-      //     const target = this.$refs.scrollObserver;
-      //     if (target && this.observer) {
-      //       this.observer.unobserve(target);
-      //     }
-      //     this.initIntersectionObserver();
-      //   });
+      this.$store
+        .dispatch("profile/media/getMedia", {
+          profileId: this.$store.state.profile.home.profile.id,
+          filter: this.getFilterType,
+          sort: this.getSortOrder
+        })
+        .then(() => {
+          const target = this.$refs.scrollObserver;
+          if (target && this.observer) {
+            this.observer.unobserve(target);
+          }
+          this.initIntersectionObserver();
+        });
     },
     initIntersectionObserver() {
       const callback = entries => {
@@ -207,10 +206,9 @@ export default {
       }
     }
   },
-  // Uncoment when BE will ready
   mounted() {
-    // this.$store.commit("profile/media/clearMedia", null, { root: true });
-    // this.fetchMedia();
+    this.$store.commit("profile/media/clearMedia", null, { root: true });
+    this.fetchMedia();
   },
   beforeDestroy() {
     const target = this.$refs.scrollObserver;
