@@ -60,6 +60,9 @@
           </div>
         </div>
       </div>
+      <div class="border-top loader-container" v-if="!allDataRecieved">
+        <Loader :fullscreen="false" text="" :small="true" />
+      </div>
       <div v-if="media.length" ref="scrollObserver"></div>
       <template v-if="!loading && !media.length">
         <p class="empty-feed">
@@ -77,6 +80,7 @@ import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdown";
 import User from "@/mixins/user";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 import ClickOutside from "vue-click-outside";
 
 export default {
@@ -90,7 +94,7 @@ export default {
     ClickOutside
   },
   props: ["private"],
-  mixins: [User],
+  mixins: [User, IntersectionObserver],
   data() {
     return {
       limits: {
@@ -98,14 +102,17 @@ export default {
         gif: 0,
         photo: 0
       },
-      observer: null,
       filterType: "",
-      opened: false
+      opened: false,
+      fetchLimit: 9
     };
   },
   computed: {
     media() {
       return this.$store.state.profile.media.media;
+    },
+    listLength() {
+      return this.media.length;
     },
     loading() {
       return this.$store.state.profile.media.getMediaLoading;
@@ -145,14 +152,6 @@ export default {
     }
   },
   watch: {
-    allDataRecieved(newValue) {
-      if (newValue) {
-        const target = this.$refs.scrollObserver;
-        if (target && this.observer) {
-          this.observer.unobserve(target);
-        }
-      }
-    },
     filterType() {
       this.$store.commit("profile/media/clearMedia", null, { root: true });
       this.fetchMedia();
@@ -179,42 +178,13 @@ export default {
           sort: this.getSortOrder
         })
         .then(() => {
-          const target = this.$refs.scrollObserver;
-          if (target && this.observer) {
-            this.observer.unobserve(target);
-          }
-          this.initIntersectionObserver();
+          this.handleResponseWithIntersectionObserver(this.fetchMedia);
         });
-    },
-    initIntersectionObserver() {
-      const callback = entries => {
-        entries.forEach(entry => {
-          if (
-            entry.isIntersecting &&
-            !this.allDataRecieved &&
-            this.media.length >= 9
-          ) {
-            console.log("load more");
-            this.fetchMedia();
-          }
-        });
-      };
-      this.observer = new IntersectionObserver(callback);
-      const target = this.$refs.scrollObserver;
-      if (target) {
-        this.observer.observe(target);
-      }
     }
   },
   mounted() {
     this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
-  },
-  beforeDestroy() {
-    const target = this.$refs.scrollObserver;
-    if (target && this.observer) {
-      this.observer.unobserve(target);
-    }
   }
 };
 </script>

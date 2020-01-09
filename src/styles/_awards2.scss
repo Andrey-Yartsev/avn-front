@@ -1,5 +1,6 @@
 .awards {
 
+  h1,
   h2 {
     margin-bottom: 0;
   }
@@ -12,11 +13,17 @@
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    align-content: center;
+    align-items: center;
 
     @include media-breakpoint-down($mobile-breakpoint-dcrs) {
       h1 {
         font-size: 24px;
       }
+    }
+
+    .btn {
+      font-size: 15px;
     }
   }
 
@@ -24,157 +31,6 @@
     position: relative;
     width: 100%;
     margin-top: 50px;
-  }
-
-  .models {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    figure {
-      position: relative;
-      width: calc(25% - 10px);
-
-      @include media-breakpoint-down($tablet-breakpoint-dcrs) {
-        width: calc(33% - 10px);
-      }
-      @include media-breakpoint-down($mobile-breakpoint-dcrs) {
-        width: calc(50% - 10px);
-      }
-
-      margin-bottom: 20px;
-      transition: transform .2s;
-      position: relative;
-      user-select: none;
-
-      .image {
-        width: 100%;
-        border-radius: 5px;
-        height: 350px;
-        object-fit: cover;
-        cursor: pointer;
-      }
-
-      .dummy {
-        width: 100%;
-        height: 350px;
-      }
-
-      &:hover:not(.disabled) {
-        transform: scale(1.01);
-      }
-
-      .lds-dual-ring {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-      }
-
-      .button {
-        pointer-events: none;
-        display: block;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: auto;
-        margin-bottom: auto;
-        position: absolute;
-        z-index: 10;
-        background-image: url(#{$assetPath}/img/voting/vote.png);
-        width: 90px;
-        height: 90px;
-        background-size: cover;
-        cursor: pointer;
-      }
-
-      .btn {
-        position: absolute;
-        z-index: 10;
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
-        bottom: 100px;
-        width: 150px;
-        font-size: 17px;
-        background: #2E8F44;
-        text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
-      }
-
-      .name-block {
-        margin-top: 5px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 16px;
-        cursor: pointer;
-
-        .twitter-button {
-          .btn-twitter {
-            color: white;
-            background-color: #1b95e0;
-            padding: 3px 5px;
-            font-size: 12px;
-            border-radius: 3px;
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: center;
-            &:hover {
-              background-color: #0c7abf;
-              color: white;
-            }
-          }
-          .icn-twitter {
-            margin-top: 2px;
-          }
-          .btn-twitter__label {
-            margin-left: -5px;
-          }
-        }
-
-        .twitter {
-          a {
-            color: #2196F3;
-          }
-        }
-
-        &:hover {
-          a {
-            color: $main;
-          }
-        }
-      }
-
-      &.voted {
-        .button {
-          background-image: url(#{$assetPath}/img/voting/thanks.png);
-        }
-      }
-
-      &.disabled {
-        .inner {
-          opacity: 0.5;
-        }
-
-        .image, .button {
-          cursor: default;
-        }
-      }
-
-      &.selected {
-        img {
-          border: 5px solid #03b500;
-          box-sizing: border-box;
-        }
-      }
-
-      .scroll-offset {
-        position: absolute;
-        top: -100px;
-      }
-    }
   }
 
   .banner {
@@ -198,32 +54,184 @@
       margin-top: 10px;
     }
   }
+}
 
+.models {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.model-item {
+  margin-bottom: 20px;
+  position: relative;
+  user-select: none;
+  width: calc(25% - 10px);
+
+  @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+    width: calc(33% - 10px);
+  }
+
+  @include media-breakpoint-down($mobile-breakpoint-dcrs) {
+    width: calc(50% - 10px);
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 5px;
+    height: 350px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform .2s;
+  }
+
+  .dummy {
+    width: 100%;
+    height: 350px;
+  }
+
+  &:hover:not(.disabled) {
+
+    .model-item__image {
+      transform: scale(1.01);
+    }
+  }
+
+  .lds-dual-ring.small {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .btn {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: 100px;
+    width: 150px;
+    font-size: 17px;
+    background: #2E8F44;
+    text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
+    transform: translateX(-50%);
+  }
+
+  &__name {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+
+      a {
+        color: $main;
+      }
+    }
+
+    .name {
+      font-weight: 400;
+      margin-right: 10px;
+    }
+  }
+
+  .btn-twitter {
+    color: white;
+    background-color: #1b95e0;
+    padding: 3px 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &:hover {
+      background-color: #0c7abf;
+      color: white;
+    }
+
+    .icn-twitter {
+      margin-right: 5px;
+    }
+  }
+
+  &.voted {
+
+    .btn-vote {
+      background-image: url(#{$assetPath}/img/voting/thanks.png);
+    }
+  }
+
+  &.disabled {
+
+    .inner {
+      opacity: 0.5;
+    }
+
+    .model-item__image,
+    .btn-vote {
+      cursor: default;
+    }
+  }
+
+  &.selected {
+    img {
+      border: 5px solid #03b500;
+      box-sizing: border-box;
+    }
+  }
+
+  .scroll-offset {
+    position: absolute;
+    top: -100px;
+  }
+}
+
+.btn-vote {
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  background: url(#{$assetPath}/img/voting/vote.png) no-repeat 0 0 / cover;
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
 }
 
 .voting-select {
   width: 400px;
+
   @include media-breakpoint-down($mobile-breakpoint-dcrs) {
     width: 100%;
   }
-  .vs__dropdown-toggle, .vs__dropdown-menu {
+
+  .vs__dropdown-toggle,
+  .vs__dropdown-menu {
     background: #CB0120;
     border: none;
     color: #fff;
   }
-  .vs__selected, .vs__dropdown-option {
+
+  .vs__selected,
+  .vs__dropdown-option {
     color: #fff;
   }
+
   .vs__selected {
     font-size: 20px;
   }
+
   .vs__actions {
     margin-right: 5px;
   }
+
   .vs__clear,
   .vs__open-indicator {
     fill: #fff;
   }
+
   .vs__dropdown-option--selected:not(.vs__dropdown-option--highlight) {
     background: #000;
   }

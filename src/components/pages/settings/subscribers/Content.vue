@@ -91,14 +91,13 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div class="loader-infinity" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" :inline="true" class="small" />
+          <div class="border-top loader-container" v-if="!allDataRecieved">
+            <Loader :fullscreen="false" text="" :small="true" />
           </div>
+          <div v-if="users.length" ref="scrollObserver"></div>
           <div
-            class="empty-table-info"
-            :class="{
-              show: users.length === 0 && !infinityScrollLoading
-            }"
+            v-if="!users.length && allDataRecieved"
+            class="empty-table-info show"
           >
             <span>Empty here for now</span>
           </div>
@@ -110,7 +109,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import SubscribeButton from "@/components/subscription/Button";
 import UsersTable from "@/components/users/UsersTable.vue";
@@ -122,10 +120,11 @@ import UserDropdown from "@/components/common/userDropdown/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Subscribers",
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [UserMixin, IntersectionObserver],
   components: {
     Loader,
     UsersTable,
@@ -145,11 +144,15 @@ export default {
     actionPrefix: "subscribes",
     isSnapchatOnly: false,
     isActiveOnly: false,
-    isExpiredOnly: false
+    isExpiredOnly: false,
+    fetchLimit: 15
   }),
   computed: {
     loading() {
       return this.$store.state.subscribes.subscribesRequestLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.subscribes.allDataReceived;
     },
     page() {
       return this.$route.meta.title;
@@ -167,6 +170,9 @@ export default {
       }
       return this.$store.state.subscribes.posts;
     },
+    listLength() {
+      return this.users.length;
+    },
     store() {
       return this.$store.state.subscribes;
     },
@@ -179,24 +185,26 @@ export default {
   },
   methods: {
     init() {
-      this.resetInfinityScroll();
       this.$store.commit("subscribes/reset");
       this.getPosts();
     },
-    infinityScrollGetDataMethod() {
-      if (this.profile) {
-        this.getPosts();
-      }
-    },
     getPosts() {
       if (this.actionPrefix === "subscribes") {
-        this.$store.dispatch("subscribes/getPosts", {
-          active: this.isActiveUsers()
-        });
+        this.$store
+          .dispatch("subscribes/getPosts", {
+            active: this.isActiveUsers()
+          })
+          .then(() => {
+            this.handleResponseWithIntersectionObserver(this.getPosts);
+          });
       } else {
-        this.$store.dispatch("subscribes/getSnapchatPosts", {
-          active: this.isActiveUsers()
-        });
+        this.$store
+          .dispatch("subscribes/getSnapchatPosts", {
+            active: this.isActiveUsers()
+          })
+          .then(() => {
+            this.handleResponseWithIntersectionObserver(this.getPosts);
+          });
       }
     },
     isActiveUsers() {
@@ -214,7 +222,6 @@ export default {
       });
     },
     changeActionPreffix(value) {
-      // console.log(value)
       this.actionPrefix = value;
       this.$nextTick(() => {
         this.init();
@@ -242,7 +249,7 @@ export default {
       this.init();
     }
   },
-  created() {
+  mounted() {
     this.init();
   }
 };

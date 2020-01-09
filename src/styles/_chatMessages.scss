@@ -532,6 +532,10 @@
     }
   }
 
+  .chatCollectionContentWrapper & {
+    width: 100%;
+  }
+
   &.past-messages {
 
     .chat-section & {

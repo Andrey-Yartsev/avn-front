@@ -1,7 +1,7 @@
 <template>
   <div class="payouts-legal" v-if="!loading">
     <div class="PayoutsLegalView">
-      <h1 class="form-title">Personal Information</h1>
+      <h1 class="form-title settings-title">Personal Information</h1>
 
       <form class="payouts-legal-form" v-on:submit.stop.prevent="save">
         <div class="border-top shadow-block">
@@ -117,13 +117,11 @@
                 <span class="label">Photo ID</span>
 
                 <div class="photo-label-wrapper">
-                  <div class="photo-label btn_fix-width">
-                    <label
-                      for="photo"
-                      class="btn btn_fix-width btn_block border photo-btn"
-                      >Upload</label
-                    >
-                  </div>
+                  <label
+                    for="photo"
+                    class="btn btn_fix-width btn_block border photo-btn"
+                    >Upload</label
+                  >
                 </div>
 
                 <input

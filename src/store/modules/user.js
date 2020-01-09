@@ -133,6 +133,7 @@ createRequestAction({
   mutations,
   actions,
   localError: true,
+  throw400: true,
   options: {
     method: "POST"
   },

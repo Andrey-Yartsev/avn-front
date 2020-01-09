@@ -34,6 +34,37 @@
           </div>
         </div>
         <div class="explore">
+          <div class="row-btn" v-if="!infinityScrollLoading">
+            <router-link
+              :to="getVoteLinkHref"
+              class="btn border block alt lg"
+              v-if="!user"
+            >
+              <span
+                class="icn-item icn-size_lg"
+                :class="isGayPage ? 'icn-gayvn' : 'icn-avn'"
+              ></span>
+              {{ getVoteLinkText }}
+            </router-link>
+            <template v-else>
+              <router-link
+                to="/avn_awards/voting"
+                class="btn border block alt lg"
+                v-if="userViewIsAll || userViewIsStreight"
+              >
+                <span class="icn-item icn-avn icn-size_lg"></span>
+                AVN Awards Voting
+              </router-link>
+              <router-link
+                to="/gayvn_awards/voting"
+                class="btn border block alt lg"
+                v-if="userViewIsAll || userViewIsGay"
+              >
+                <span class="icn-item icn-gayvn icn-size_lg"></span>
+                GayVN Awards Voting
+              </router-link>
+            </template>
+          </div>
           <div
             :class="{
               exploreAllCollectionView: page === 'all',
@@ -237,6 +268,24 @@ export default {
     },
     category() {
       return this.$store.state.gender.category;
+    },
+    isGayPage() {
+      return window.location.hostname.match(/gayvn/);
+    },
+    getVoteLinkHref() {
+      return this.isGayPage ? "/gayvn_awards/voting" : "/avn_awards/voting";
+    },
+    getVoteLinkText() {
+      return this.isGayPage ? "GayVN Awards Voting" : "AVN Awards Voting";
+    },
+    userViewIsAll() {
+      return this.user.categoryView === 1;
+    },
+    userViewIsStreight() {
+      return this.user.categoryView === 2;
+    },
+    userViewIsGay() {
+      return this.user.categoryView === 3;
     }
   },
   methods: {

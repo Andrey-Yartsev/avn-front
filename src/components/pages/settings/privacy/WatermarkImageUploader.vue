@@ -7,21 +7,19 @@
       <span class="label">Watermark image</span>
 
       <div class="photo-label-wrapper">
-        <div class="photo-label btn_fix-width">
-          <label
-            for="photo"
-            class="btn btn_fix-width-sm btn_block border photo-btn"
-          >
-            {{ buttonTitle }}
-            <input
-              type="file"
-              id="photo"
-              accept=".jpg,.jpeg,.png"
-              ref="photo"
-              @change="change"
-            />
-          </label>
-        </div>
+        <label
+          for="photo"
+          class="btn btn_fix-width-sm btn_block border photo-btn"
+        >
+          {{ buttonTitle }}
+          <input
+            type="file"
+            id="photo"
+            accept=".jpg,.jpeg,.png"
+            ref="photo"
+            @change="change"
+          />
+        </label>
         <div class="watermark-picture" v-if="picture">
           <div class="watermark-picture__remove" @click="remove">
             <svg aria-hidden="true" class="icn icn-remove">

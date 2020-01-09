@@ -105,10 +105,14 @@
             :query="page"
             :actionPrefix="actionPrefix"
           />
-          <div class="loader-infinity" v-if="infinityScrollLoading">
-            <Loader :fullscreen="false" :inline="true" class="small" />
+          <div class="border-top loader-container" v-if="!allDataRecieved">
+            <Loader :fullscreen="false" text="" :small="true" />
           </div>
-          <div class="empty-table-info">
+          <div v-if="users.length" ref="scrollObserver"></div>
+          <div
+            v-if="!users.length && allDataRecieved"
+            class="empty-table-info show"
+          >
             <span>Empty here for now</span>
           </div>
         </div>
@@ -119,7 +123,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-import InfinityScrollMixin from "@/mixins/infinityScroll";
 import UserMixin from "@/mixins/user";
 import UsersTable from "@/components/users/UsersTable.vue";
 import ProfileAvatar from "@/components/common/profile/avatar/Index";
@@ -127,10 +130,11 @@ import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Earnings",
-  mixins: [InfinityScrollMixin, UserMixin],
+  mixins: [UserMixin, IntersectionObserver],
   components: {
     Loader,
     UsersTable,
@@ -150,11 +154,15 @@ export default {
       month: "DESC",
       lifetime: "DESC"
     },
-    selectedFilter: "lifetime"
+    selectedFilter: "lifetime",
+    fetchLimit: 15
   }),
   computed: {
     loading() {
       return this.$store.state.earnings.earningsRequestLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.earnings.allDataReceived;
     },
     page() {
       return this.$route.meta.title;
@@ -172,6 +180,9 @@ export default {
       }
       return this.$store.state.earnings.posts;
     },
+    listLength() {
+      return this.users.length;
+    },
     store() {
       return this.$store.state.earnings;
     },
@@ -187,21 +198,19 @@ export default {
   },
   methods: {
     init() {
-      this.resetInfinityScroll();
       this.$store.commit("earnings/reset");
       this.getPosts();
     },
-    infinityScrollGetDataMethod() {
-      if (this.profile) {
-        this.getPosts();
-      }
-    },
     getPosts() {
-      this.$store.dispatch("earnings/getPosts", {
-        type: this.actionPrefix,
-        sort: this.sort[this.selectedFilter],
-        sortBy: this.selectedFilter
-      });
+      this.$store
+        .dispatch("earnings/getPosts", {
+          type: this.actionPrefix,
+          sort: this.sort[this.selectedFilter],
+          sortBy: this.selectedFilter
+        })
+        .then(() => {
+          this.handleResponseWithIntersectionObserver(this.getPosts);
+        });
     },
     goBack() {
       BackRouter.back();
@@ -236,7 +245,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     this.init();
   }
 };

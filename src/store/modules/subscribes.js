@@ -4,7 +4,7 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 import * as deepMerge from "deepmerge";
 
-const limit = 10;
+const limit = 15;
 
 const state = {
   loading: false,
@@ -38,7 +38,7 @@ const actions = {
     params.offset = state.offset;
     params.marker = state.marker || "";
     params.limit = limit;
-    dispatch("subscribesRequest", params).then(r => {
+    return dispatch("subscribesRequest", params).then(r => {
       commit("checkResult", r);
     });
   },
@@ -46,7 +46,7 @@ const actions = {
     params.offset = state.offset;
     params.marker = state.marker || "";
     params.limit = limit;
-    dispatch("subscribesSnapchatRequest", params).then(r => {
+    return dispatch("subscribesSnapchatRequest", params).then(r => {
       commit("checkResult", r);
     });
   }
@@ -66,8 +66,8 @@ createRequestAction({
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
-    // options.query.offset = params.offset || 0;
-    // options.query.limit = params.limit || 10;
+    options.query.offset = params.offset || 0;
+    options.query.limit = params.limit || 15;
     options.query.marker = params.marker || "";
     options.query.active =
       params.active === true ? 1 : params.active === false ? 0 : undefined;
@@ -93,7 +93,7 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.query.query = params.query;
     options.query.offset = params.offset || 0;
-    options.query.limit = params.limit || 10;
+    options.query.limit = params.limit || 15;
     options.query.marker = params.marker || "";
     options.query.active =
       params.active === true ? 1 : params.active === false ? 0 : undefined;

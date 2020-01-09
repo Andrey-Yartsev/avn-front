@@ -39,6 +39,7 @@
           disabled: nominee.disabled || votingInProgress,
           selected: nominee.selected
         }"
+        class="model-item"
       >
         <div :ref="'nom' + nominee.nomineeId" class="scroll-offset"></div>
 
@@ -51,20 +52,20 @@
             :small="true"
           />
           <div class="inner">
-            <a class="button" @click="vote(nominee.nomineeId)" />
-            <a
+            <span class="btn-vote" @click="vote(nominee.nomineeId)" />
+            <span
               class="btn"
               v-if="showFinishBtn(nominee.nomineeId)"
               @click="finishVote(nominee.nomineeId)"
-              >Finish the vote!</a
+              >Finish the vote!</span
             >
             <img
               :src="nominee.nominationAvatar"
-              class="image"
+              class="model-item__image"
               @click="vote(nominee.nomineeId)"
             />
-            <div class="name-block">
-              <div class="">{{ nominee.nominationName }}</div>
+            <div class="model-item__name">
+              <div class="name">{{ nominee.nominationName }}</div>
               <!-- <TwitterShare
                 v-if="!twitterScriptLoading"
                 :nominee="nominee"
@@ -76,13 +77,11 @@
                 ref="tweetLink"
                 target="_blank"
                 :href="getHrefString(nominee.twitter)"
-                class="twitter-button"
+                class="btn-block btn-twitter"
                 data-show-count="false"
               >
-                <span class="btn-block btn-twitter">
-                  <span class="icn-item icn-twitter icn-size_sm"></span>
-                  <span class="btn-twitter__label">Tweet</span>
-                </span>
+                <span class="icn-item icn-twitter icn-size_sm"></span>
+                <span class="btn-twitter__label">Tweet</span>
               </a>
             </div>
           </div>
@@ -258,6 +257,9 @@ export default {
               .then(() => {
                 this.extendNominees();
                 this.votingClicking = false;
+                this.justVotedIds = this.justVotedIds.filter(
+                  id => id !== nominee.nomineeId
+                );
               });
           } else {
             this.votingClicking = false;

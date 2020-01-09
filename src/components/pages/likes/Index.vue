@@ -57,14 +57,18 @@
                 </div>
                 <div class="explore">
                   <div class="feed-wrapper">
-                    <div class="block-bg">
+                    <div :class="{ 'block-bg': !loading && posts.length }">
                       <PostCollection
                         :posts="posts"
                         from="favPosts"
                         @visibilityChanged="visibilityChanged"
                       />
 
-                      <div class="loader-infinity" v-if="infinityScrollLoading">
+                      <div
+                        class="loader-infinity"
+                        :class="{ 'loader-infinity_collapsed': !posts.length }"
+                        v-if="infinityScrollLoading"
+                      >
                         <Loader
                           :fullscreen="false"
                           :inline="true"
