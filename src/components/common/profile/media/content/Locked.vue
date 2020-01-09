@@ -4,7 +4,11 @@
     @click.prevent="openModal"
   >
     <video
-      v-if="media.preview.source && mediaSize !== 'preview'"
+      v-if="
+        media.videoPreview &&
+          media.videoPreview.source &&
+          mediaSize !== 'preview'
+      "
       class="video-content"
       :class="{ halfHeight: $mq === 'desktop' }"
       disableremoteplayback
@@ -20,7 +24,7 @@
       ref="video"
       style="margin: auto"
     >
-      <source :src="media.preview.source" type="video/mp4" />
+      <source :src="media.videoPreview.source" type="video/mp4" />
     </video>
     <img
       v-else

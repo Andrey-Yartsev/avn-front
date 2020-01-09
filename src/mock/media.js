@@ -57,9 +57,9 @@ export default [
       },
       preview: {
         source:
-          "https://avnsocial-dev.s3.amazonaws.com/files/2019_12_05/5d/5de/5de8d37bbc3a97e9663cb.mp4",
-        width: 480,
-        height: 270
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
       },
       thumb: {
         source:
@@ -153,6 +153,12 @@ export default [
         height: 270
       },
       preview: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
+      },
+      videoPreview: {
         source:
           "https://avnsocial-dev.s3.amazonaws.com/files/2019_12_18/5d/5df/5dfa2c081596a17fb65ff.mp4",
         width: 480,
@@ -250,9 +256,10 @@ export default [
         height: 270
       },
       preview: {
-        source: null,
-        width: 480,
-        height: 270
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
       },
       thumb: {
         source:
