@@ -11,7 +11,7 @@
           <span class="more-functions__option">Add custom cover</span>
         </button>
       </li>
-      <!-- <li class="more-functions__item">
+      <li class="more-functions__item">
         <button
           class="more-functions__link"
           type="button"
@@ -20,7 +20,7 @@
         >
           <span class="more-functions__option">Add video preview</span>
         </button>
-      </li> -->
+      </li>
     </ul>
   </div>
 </template>
