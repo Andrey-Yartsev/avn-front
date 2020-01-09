@@ -119,7 +119,7 @@ const actions = {
     });
   },
   updateMedia({ dispatch, commit }, data) {
-    dispatch("_updateMedia", data).then(res => {
+    return dispatch("_updateMedia", data).then(res => {
       commit("updateMedia", res);
       commit("mediaPage/updateMediaItem", res, { root: true });
     });

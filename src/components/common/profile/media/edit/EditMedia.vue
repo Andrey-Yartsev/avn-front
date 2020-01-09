@@ -70,7 +70,7 @@
         <div class="post-attachment">
           <div class="block-thumbnails" v-if="!customThumbAdded">
             <div class="block-thumbnails__title">Choose cover</div>
-            <div class="addFileCollectionView">
+            <div class="addFileCollectionView thumbList">
               <div
                 v-for="thumb in media.thumbs"
                 :key="thumb.id"
@@ -434,6 +434,7 @@ export default {
           root: true
         })
         .then(() => {
+          console.log("updated");
           this.saving = false;
           this.close();
         });
@@ -510,5 +511,8 @@ export default {
   cursor: pointer;
   color: #2196f3;
   font-weight: bold;
+}
+.thumbList {
+  flex-wrap: wrap;
 }
 </style>
