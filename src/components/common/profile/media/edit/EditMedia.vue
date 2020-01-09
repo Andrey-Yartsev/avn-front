@@ -26,7 +26,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="isMediaLoading"
+            :disabled="isDataChanged || isMediaLoading"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -205,7 +205,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="isMediaLoading"
+          :disabled="!isDataChanged || isMediaLoading"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -310,15 +310,17 @@ export default {
       }
       return this.preloadedMedias.some(item => !item.processId);
     },
-    // isDataChanged() {
-    //   return (
-    //     this.$props.post.title !== this.media.title ||
-    //     this.$props.post.text !== this.media.text ||
-    //     this.$props.post.active !== this.media.active ||
-    //     String(this.$props.post.price) !== String(this.media.price) ||
-    //     this.$props.post.thumbId !== this.media.thumbId
-    //   );
-    // },
+    isDataChanged() {
+      return (
+        this.$props.post.title !== this.media.title ||
+        this.$props.post.text !== this.media.text ||
+        this.$props.post.active !== this.media.active ||
+        String(this.$props.post.price) !== String(this.media.price) ||
+        this.$props.post.media.thumbId !== this.media.thumbId ||
+        this.preloadedPhotoMedias.length ||
+        this.preloadedVideoMedias.length
+      );
+    },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
     },
