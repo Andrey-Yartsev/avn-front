@@ -43,7 +43,11 @@
       <span class="actionsContainer">
         <span
           class="labelWrapper"
-          v-if="post.media.preview.source && view === 'large'"
+          v-if="
+            post.media.videoPreview &&
+              post.media.videoPreview.source &&
+              view === 'large'
+          "
         >
           <label class="labelWrapper__label" for="is_paid_subscription"
             >Video</label

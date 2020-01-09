@@ -26,7 +26,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged"
+            :disabled="isMediaLoading"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -205,7 +205,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged || isMediaLoading"
+          :disabled="isMediaLoading"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -247,7 +247,8 @@ const InitialState = {
     text: "",
     price: 0,
     free: false,
-    thumbId: null
+    thumbId: null,
+    thumbs: []
   },
   saving: false,
   withoutWatermark: false,
@@ -309,15 +310,15 @@ export default {
       }
       return this.preloadedMedias.some(item => !item.processId);
     },
-    isDataChanged() {
-      return (
-        this.$props.post.title !== this.media.title ||
-        this.$props.post.text !== this.media.text ||
-        this.$props.post.active !== this.media.active ||
-        String(this.$props.post.price) !== String(this.media.price) ||
-        this.$props.post.thumbId !== this.media.thumbId
-      );
-    },
+    // isDataChanged() {
+    //   return (
+    //     this.$props.post.title !== this.media.title ||
+    //     this.$props.post.text !== this.media.text ||
+    //     this.$props.post.active !== this.media.active ||
+    //     String(this.$props.post.price) !== String(this.media.price) ||
+    //     this.$props.post.thumbId !== this.media.thumbId
+    //   );
+    // },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
     },
