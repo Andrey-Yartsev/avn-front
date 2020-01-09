@@ -102,6 +102,7 @@ export default {
 .video-content {
   width: 100%;
   height: 360px;
+  margin: auto;
   &.halfHeight {
     height: 50vh !important;
   }

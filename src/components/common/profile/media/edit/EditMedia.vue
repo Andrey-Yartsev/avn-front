@@ -26,7 +26,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="isDataChanged || isMediaLoading"
+            :disabled="!isDataChanged || isMediaLoading"
             @click.prevent="saveClickHandler"
           >
             Save

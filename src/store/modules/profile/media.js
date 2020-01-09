@@ -61,6 +61,7 @@ const mutations = {
           media: {
             ...item.media,
             type: "video",
+            duration: data.duration,
             src: {
               ...item.media.src,
               source: data.url
