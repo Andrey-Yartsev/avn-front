@@ -323,13 +323,13 @@ export default {
       return +this.media.price > 0 && +this.media.price <= 500;
     },
     inputAccepts() {
-      return ["jpg", "jpeg", "png"];
+      return ".jpg, .jpeg, .png";
     },
     inputAcceptsPreview() {
-      return ["mp4", "avi", "moov", "mov", "m4v", "wmv"];
+      return ".mp4, .avi, .moov, .mov, .m4v, .wmv";
     },
     allMediaTypes() {
-      return [...this.inputAccepts, ...this.inputAcceptsPreview];
+      return ["jpg", "jpeg", "png", "mp4", "avi", "moov", "mov", "m4v", "wmv"];
     },
     customThumbAdded() {
       if (!this.preloadedMedias.length) {
