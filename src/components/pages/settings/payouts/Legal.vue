@@ -101,13 +101,62 @@
 
             <div
               class="form-group form-group_with-label"
-              v-if="type === 'company'"
+              v-if="type === 'company' && !showABNOptions"
             >
               <label class="form-group-inner">
                 <span class="label">EIN</span>
                 <input name="companyTaxId" v-model="companyTaxId" />
               </label>
             </div>
+
+            <template v-if="showABNOptions">
+              <div class="form-group form-group_with-label">
+                <label class="form-group-inner">
+                  <span class="label">Australian Bus No (ABN)</span>
+                  <input
+                    name="companyTaxId"
+                    v-model="abn"
+                    v-validate="'required'"
+                  />
+                </label>
+                <div class="abn__container">
+                  <span class="abn_link">
+                    <a href="#" download>Download ABN guide</a>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group form-group_with-label radio-group">
+                <label class="form-group-inner">
+                  <span class="label">I am registered for GST</span>
+                  <div class="radio-wrapper icn-item">
+                    <input
+                      type="radio"
+                      name="gstRegistered"
+                      value="yes"
+                      v-model="gstRegistered"
+                      v-validate="'required'"
+                    />
+                    <span class="label">
+                      Yes
+                    </span>
+                  </div>
+                </label>
+                <label class="form-group-inner">
+                  <div class="radio-wrapper icn-item">
+                    <input
+                      type="radio"
+                      name="gstRegistered"
+                      value="no"
+                      v-model="gstRegistered"
+                      v-validate="'required'"
+                    />
+                    <span class="label">
+                      No
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </template>
 
             <div class="form-group form-group_with-label photo-form-group">
               <div
@@ -309,7 +358,9 @@ export default {
       tos: false,
       uploadedPhoto: null,
       legalExisted: false,
-      imageUploading: false
+      imageUploading: false,
+      abn: "",
+      gstRegistered: null
     };
   },
   computed: {
@@ -350,6 +401,11 @@ export default {
     },
     legalExists() {
       return this.legal && this.legal.type;
+    },
+    showABNOptions() {
+      return (
+        this.account.countryName && this.account.countryName === "Australia"
+      );
     }
   },
   methods: {
