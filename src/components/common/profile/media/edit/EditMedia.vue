@@ -445,7 +445,7 @@ export default {
       const customThumb = this.preloadedMedias.length
         ? this.preloadedMedias.find(item => item.mediaType === "photo")
         : undefined;
-      const videPreview = this.preloadedMedias.length
+      const videoPreview = this.preloadedMedias.length
         ? this.preloadedMedias.find(item => item.mediaType === "video")
         : undefined;
 
@@ -459,9 +459,9 @@ export default {
           id: customThumb.processId
         };
       }
-      if (videPreview) {
-        data.media.videPreview = {
-          id: videPreview.processId
+      if (videoPreview) {
+        data.media.videoPreview = {
+          id: videoPreview.processId
         };
       }
       return data;
