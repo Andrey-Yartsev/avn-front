@@ -1,0 +1,51 @@
+.alignFlexCenter {
+  display: flex;
+  align-items: center;
+}
+
+.ml-2 {
+  margin-left: 10px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.textarea__title {
+  flex: 0 0 calc(100% - 45px);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 0 0 2px $secondary-color-20;
+  background-color: $white;
+  position: relative;
+  z-index: 1;
+  padding: 13px 12px 0;
+
+  + .text-media-container {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    .textarea {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  &.text-clear-border {
+    margin-top: 50px;
+    padding: 25px 15px;
+    padding-bottom: 0;
+    box-shadow: none;
+    font-size: 17px;
+    position: relative;
+  }
+}
+
+.customPreview {
+  cursor: pointer;
+  color: #2196f3;
+  font-weight: bold;
+}
+
+.thumbList {
+  flex-wrap: wrap;
+}
