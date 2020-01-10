@@ -16,7 +16,7 @@
         @contextmenu.prevent="() => false"
         @dragstart.prevent="() => false"
         ref="video"
-        :src="media.customPreview.source"
+        :src="media.videoPreview.source"
         type="video/mp4"
       />
     </template>
