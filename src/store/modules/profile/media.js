@@ -150,6 +150,9 @@ const actions = {
   },
   updateMediaSrc({ commit }, data) {
     commit("updateMediaSrc", data);
+  },
+  updateMediaPreviewSrc({ commit }, data) {
+    commit("updateMediaPreviewSrc", data);
   }
 };
 

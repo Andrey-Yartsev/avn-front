@@ -54,16 +54,17 @@ export default class Ws extends WsAbstract {
   }
   onData(data) {
     if (data.reload) {
-      if (data.type === "mediaPreview") {
-        this.emit("reloadMediaPreview", data);
-        return;
-      } else if (data.type === "media") {
+      if (data.type === "media") {
         this.emit("reloadMedia", data);
         return;
       } else {
         this.emit("reloadPost", data.post_id);
         return;
       }
+    }
+    if (data.type === "mediaVideoPreview") {
+      this.emit("reloadMediaPreview", data);
+      return;
     }
     if (data.payoutsApproved !== undefined) {
       this.actions.payoutsLegalResult(data);

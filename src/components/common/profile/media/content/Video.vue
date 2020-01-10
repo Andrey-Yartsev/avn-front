@@ -133,6 +133,6 @@ export default {
 }
 .previewLoader {
   height: 300px;
-  margin: auto;
+  margin: auto !important;
 }
 </style>
