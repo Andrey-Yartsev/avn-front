@@ -3,7 +3,6 @@
 import { createRequestAction } from "@/store/utils/storeRequest";
 
 import UserApi from "@/api/user";
-import SubscriptionsApi from "@/api/subscriptions";
 import PostMixin from "@/store/mixins/posts";
 
 const initState = {
@@ -101,29 +100,13 @@ const actions = {
     commit("setSource", source);
   },
   follow({ dispatch }, userId) {
-    return new Promise((accept, reject) => {
-      SubscriptionsApi.follow(userId).then(async response => {
-        if (response.status === 200) {
-          response = await response.json();
-          dispatch("extend", { followedBy: true });
-          accept(response);
-          return;
-        }
-        reject(await response.json());
-      });
+    dispatch("_follow", userId).then(() => {
+      dispatch("extend", { followedBy: true });
     });
   },
   unfollow({ dispatch }, userId) {
-    return new Promise((accept, reject) => {
-      SubscriptionsApi.unfollow(userId).then(async response => {
-        if (response.status === 200) {
-          response = await response.json();
-          dispatch("extend", { followedBy: false });
-          accept(response);
-          return;
-        }
-        reject(await response.json());
-      });
+    dispatch("_unfollow", userId).then(() => {
+      dispatch("extend", { followedBy: false });
     });
   },
   mute({ dispatch }, user) {
@@ -239,6 +222,40 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{id}/, params);
+  }
+});
+
+createRequestAction({
+  prefix: "_follow",
+  apiPath: "subscriptions/follow",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      userId: params
+    };
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_unfollow",
+  apiPath: "subscriptions/unfollow",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      userId: params
+    };
+    return options;
   }
 });
 

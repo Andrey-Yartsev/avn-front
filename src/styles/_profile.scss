@@ -589,6 +589,11 @@
       opacity: 1;
     }
   }
+
+  .btn-subscribe[disabled] {
+    opacity: 0.2;
+    color: $main-color;
+  }
 }
 
 .post-types-tabs {

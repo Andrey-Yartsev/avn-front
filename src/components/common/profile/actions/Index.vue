@@ -104,13 +104,19 @@
               v-if="profile.followedBy"
               @click="unfollow"
               class="btn-with-icon btn-subscribe disable-state"
+              :disabled="followInProgress"
             >
               <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Unfollow
               </div>
             </div>
-            <div v-else @click="follow" class="btn-with-icon btn-subscribe">
+            <div
+              v-else
+              @click="follow"
+              class="btn-with-icon btn-subscribe"
+              :disabled="followInProgress"
+            >
               <span class="icn-item icn-userp"></span>
               <div class="btn-subscribe__label">
                 Follow
@@ -170,6 +176,12 @@ export default {
   computed: {
     funded() {
       return this.$store.state.tip.funded;
+    },
+    followInProgress() {
+      return (
+        this.$store.state.profile.home._followLoading ||
+        this.$store.state.profile.home._unfollowLoading
+      );
     }
   },
   methods: {
@@ -179,6 +191,9 @@ export default {
       });
     },
     follow() {
+      if (this.followInProgress) {
+        return;
+      }
       if (!this.user) {
         this.$store.commit("profile/home/setOnPageAction", "follow");
         this.$store.dispatch("modal/show", { name: "login" });
@@ -187,6 +202,9 @@ export default {
       this.$store.dispatch("profile/home/follow", this.profile.id);
     },
     unfollow() {
+      if (this.followInProgress) {
+        return;
+      }
       this.$store.dispatch("profile/home/unfollow", this.profile.id);
     },
     sendMessage() {

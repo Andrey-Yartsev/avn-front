@@ -443,6 +443,10 @@ button {
     margin: 0 auto 4px;
   }
 
+  &[disabled] {
+    opacity: 0.5;
+  }
+
   &_lg {
 
     &.make-post-btn {
