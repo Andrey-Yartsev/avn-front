@@ -435,6 +435,9 @@ export default {
         "state",
         "country"
       ];
+      if (this.showABNOptions) {
+        fields.push("abn", "gstRegistered");
+      }
       const data = {};
       for (let f of fields) {
         if (this[f]) {
