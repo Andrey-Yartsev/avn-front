@@ -91,7 +91,7 @@
           type="submit"
           class="btn alt block"
           :class="{ lg: largeControls }"
-          :disabled="isLoading"
+          :disabled="loginInProgress"
         >
           Login
         </button>
@@ -103,7 +103,7 @@
         class="btn block btn-twitter"
         :class="{ lg: largeControls }"
         @click.prevent="handleTwitter"
-        :disabled="isLoading"
+        :disabled="loginInProgress"
       >
         <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with
         Twitter
@@ -156,6 +156,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      loginInProgress: false
+    };
+  },
+
   computed: {
     signUpText() {
       return "Sign up for AVN Stars";
@@ -189,9 +195,6 @@ export default {
     },
     mainClass() {
       return this.otpAuth ? "otp" : "login";
-    },
-    isLoading() {
-      return this.$store.state.auth.loading;
     }
   },
 
@@ -203,15 +206,24 @@ export default {
       this.twitter();
     },
     login() {
-      this.$validator.validate().then(result => {
-        if (result) {
-          this.$store.dispatch("auth/" + this.loginAction, {
-            email: this.email,
-            password: this.password,
-            captcha: this.captcha
-          });
-        }
-      });
+      this.loginInProgress = true;
+      setTimeout(() => {
+        this.$validator.validate().then(result => {
+          if (result) {
+            this.$store
+              .dispatch("auth/" + this.loginAction, {
+                email: this.email,
+                password: this.password,
+                captcha: this.captcha
+              })
+              .then(() => {
+                setTimeout(() => {
+                  this.loginInProgress = false;
+                }, 1000);
+              });
+          }
+        });
+      }, 100);
     },
     openSignup() {
       switch (this.type) {
