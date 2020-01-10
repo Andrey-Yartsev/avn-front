@@ -110,7 +110,9 @@
             </div>
 
             <template v-if="showABNOptions">
-              <div class="form-group form-group_with-label">
+              <div
+                class="form-group form-group_with-label form-group_clear-gaps-bottom"
+              >
                 <label class="form-group-inner">
                   <span class="label">Australian Bus No (ABN)</span>
                   <input
@@ -119,18 +121,20 @@
                     v-validate="'required'"
                   />
                 </label>
-                <div class="abn__container">
-                  <span class="abn_link">
+              </div>
+              <div class="form-group form-group_with-label">
+                <label class="form-group-inner">
+                  <span class="input-help">
                     <a href="/static/doc/abn_guide.pdf" target="_blank">
                       ABN guide
                     </a>
                   </span>
-                </div>
+                </label>
               </div>
               <div class="form-group form-group_with-label radio-group">
-                <label class="form-group-inner">
+                <div class="form-group-inner">
                   <span class="label">I am registered for GST</span>
-                  <div class="radio-wrapper icn-item">
+                  <label class="radio-wrapper icn-item m-inline">
                     <input
                       type="radio"
                       name="gstRegistered"
@@ -141,10 +145,8 @@
                     <span class="label">
                       Yes
                     </span>
-                  </div>
-                </label>
-                <label class="form-group-inner">
-                  <div class="radio-wrapper icn-item">
+                  </label>
+                  <label class="radio-wrapper icn-item m-inline">
                     <input
                       type="radio"
                       name="gstRegistered"
@@ -155,8 +157,8 @@
                     <span class="label">
                       No
                     </span>
-                  </div>
-                </label>
+                  </label>
+                </div>
               </div>
             </template>
 

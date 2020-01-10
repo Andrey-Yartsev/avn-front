@@ -903,6 +903,11 @@ select {
   padding: 1px 0 0;
   cursor: pointer;
 
+  &.m-inline {
+    display: inline-flex;
+    margin-right: 25px;
+  }
+
   input {
     display: none;
 
