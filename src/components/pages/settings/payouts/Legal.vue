@@ -121,7 +121,9 @@
                 </label>
                 <div class="abn__container">
                   <span class="abn_link">
-                    <a href="#" download>Download ABN guide</a>
+                    <a href="/static/doc/abn_guide.pdf" target="_blank">
+                      ABN guide
+                    </a>
                   </span>
                 </div>
               </div>
