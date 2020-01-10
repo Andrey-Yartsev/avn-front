@@ -30,6 +30,9 @@ export default {
     },
     reloadMedia(data) {
       this.$store.dispatch("profile/media/updateMediaSrc", data);
+    },
+    reloadMediaPreview(data) {
+      this.$store.dispatch("profile/media/updateMediaPreviewSrc", data);
     }
   },
   created() {
@@ -37,12 +40,16 @@ export default {
     ws.on("reloadPost", this.reloadPost);
     wsp.on("reloadMedia", this.reloadMedia);
     ws.on("reloadMedia", this.reloadMedia);
+    wsp.on("reloadMediaPreview", this.reloadMediaPreview);
+    ws.on("reloadMediaPreview", this.reloadMediaPreview);
   },
   beforeDestroy() {
     wsp.removeListener("reloadPost", this.reloadPost);
     ws.removeListener("reloadPost", this.reloadPost);
     wsp.removeListener("reloadMedia", this.reloadMedia);
     ws.removeListener("reloadMedia", this.reloadMedia);
+    wsp.removeListener("reloadMediaPreview", this.reloadMediaPreview);
+    ws.removeListener("reloadMediaPreview", this.reloadMediaPreview);
   },
   watch: {
     posts() {

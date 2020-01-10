@@ -1,24 +1,44 @@
 <template>
   <div class="media-wrapper">
     <template v-if="showPreviewVideo">
-      <video
-        class="video-content"
-        :class="{ halfHeight: $mq === 'desktop' }"
-        disableremoteplayback
-        webkit-playsinline
-        playsinline
-        controls
-        controlslist="nodownload"
-        :autoplay="autoplay"
-        loop
-        v-if="video"
-        @play="play"
-        @contextmenu.prevent="() => false"
-        @dragstart.prevent="() => false"
-        ref="video"
-        :src="media.videoPreview.source"
-        type="video/mp4"
-      />
+      <template
+        v-if="
+          media.videoPreview.status &&
+            media.videoPreview.status === 'processing'
+        "
+      >
+        <div class="media maxHeight minHeight previewLoader">
+          <div class="loader-container loader-container_center">
+            <Loader
+              :fullscreen="false"
+              text="Media is currently processing"
+              :semidark="true"
+              class="processing-loader text-light"
+              :small="true"
+            />
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <video
+          class="video-content"
+          :class="{ halfHeight: $mq === 'desktop' }"
+          disableremoteplayback
+          webkit-playsinline
+          playsinline
+          controls
+          controlslist="nodownload"
+          :autoplay="autoplay"
+          loop
+          v-if="video"
+          @play="play"
+          @contextmenu.prevent="() => false"
+          @dragstart.prevent="() => false"
+          ref="video"
+          :src="media.videoPreview.source"
+          type="video/mp4"
+        />
+      </template>
     </template>
     <template v-else>
       <video
@@ -46,6 +66,7 @@
 
 <script>
 import PostMediaPropsMixin from "@/mixins/post/media";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "Video",
@@ -57,6 +78,9 @@ export default {
     media: Object,
     showPreview: Boolean,
     isAuthor: Boolean
+  },
+  components: {
+    Loader
   },
   data() {
     return {
@@ -106,5 +130,9 @@ export default {
   &.halfHeight {
     height: 50vh !important;
   }
+}
+.previewLoader {
+  height: 300px;
+  margin: auto !important;
 }
 </style>

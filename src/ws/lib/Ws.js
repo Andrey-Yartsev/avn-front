@@ -62,6 +62,10 @@ export default class Ws extends WsAbstract {
         return;
       }
     }
+    if (data.type === "mediaVideoPreview") {
+      this.emit("reloadMediaPreview", data);
+      return;
+    }
     if (data.payoutsApproved !== undefined) {
       this.actions.payoutsLegalResult(data);
       return;

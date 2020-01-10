@@ -71,6 +71,24 @@ const mutations = {
       }
       return item;
     });
+  },
+  updateMediaPreviewSrc(state, data) {
+    state.media = state.media.map(item => {
+      if (item.productId == data.id) {
+        return {
+          ...item,
+          media: {
+            ...item.media,
+            videoPreview: {
+              ...item.media.videoPreview,
+              source: data.url,
+              status: data.status
+            }
+          }
+        };
+      }
+      return item;
+    });
   }
 };
 
@@ -132,6 +150,9 @@ const actions = {
   },
   updateMediaSrc({ commit }, data) {
     commit("updateMediaSrc", data);
+  },
+  updateMediaPreviewSrc({ commit }, data) {
+    commit("updateMediaPreviewSrc", data);
   }
 };
 
