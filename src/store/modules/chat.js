@@ -21,7 +21,9 @@ const state = {
   moreChatsLoading: false,
   typing: [],
   fontSize: 14,
-  blockNewMessagesHandling: false
+  blockNewMessagesHandling: false,
+  showMarkAsReedForContacts: false,
+  unreadChatsCount: 0
 };
 
 let markAsReadId = 0;
@@ -432,16 +434,21 @@ const mutations = {
   // if forceUpdate == true then do chat updating else add chats to existing
   fetchChatsComplete(state, forceUpdate) {
     if (forceUpdate) {
-      state.chats = [...state._fetchChatsResult];
+      state.chats = [...state._fetchChatsResult.list];
     } else {
       state.chats = arrayUtils.mergeByCondition(
         state.chats,
-        state._fetchChatsResult,
+        state._fetchChatsResult.list,
         (chat1, chat2) => chat1.id === chat2.id,
         this._vm
       );
     }
-    if (state._fetchChatsResult.length < chatsLimit) {
+    // if visible chats count less unread
+    state.showMarkAsReedForContacts =
+      state.chats.length < state._fetchChatsResult.unreadMessagesCount;
+    state.unreadChatsCount = state._fetchChatsResult.unreadMessagesCount;
+
+    if (state._fetchChatsResult.list.length < chatsLimit) {
       state.allDataReceived = true;
     } else {
       state.offset += chatsLimit;
@@ -519,9 +526,6 @@ createRequestAction({
       offset: params
     };
     return options;
-  },
-  resultConvert: function(res) {
-    return res.list;
   }
 });
 

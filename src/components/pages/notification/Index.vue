@@ -47,7 +47,6 @@
         />
       </div>
       <div
-        v-if="type === 'all' && !!unreadCount"
         class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
       >
         <span>Unread ({{ unreadCount > 100 ? "+99" : unreadCount }})</span>

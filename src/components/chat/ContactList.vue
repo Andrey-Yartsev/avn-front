@@ -84,6 +84,13 @@
       >
         Loading history...
       </div>
+      <div
+        v-if="true"
+        class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+      >
+        <span>Unread chats ({{ unreadCount }})</span
+        ><a href="#">Mark all as read</a>
+      </div>
     </component>
   </div>
 </template>
@@ -125,6 +132,12 @@ export default {
     },
     moreLoading() {
       return this.$store.state.chat.moreChatsLoading;
+    },
+    showMarkAsReed() {
+      return this.$store.state.chat.showMarkAsReedForContacts;
+    },
+    unreadCount() {
+      return this.$store.state.chat.unreadChatsCount;
     }
   },
 
