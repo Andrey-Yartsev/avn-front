@@ -54,7 +54,10 @@ export default class Ws extends WsAbstract {
   }
   onData(data) {
     if (data.reload) {
-      if (data.type === "media") {
+      if (data.type === "mediaPreview") {
+        this.emit("reloadMediaPreview", data);
+        return;
+      } else if (data.type === "media") {
         this.emit("reloadMedia", data);
         return;
       } else {
