@@ -195,6 +195,9 @@
                   :hide="hideDropdown"
                   @addThumb="addThumb"
                   @addPreview="addPreview"
+                  @removePreview="removePreview"
+                  :videoPreview="post.media.videoPreview"
+                  :removeVideoPreview="media.removeVideoPreview"
                   :showThumbOption="!customThumbAdded"
                   :showPreviewOption="!customPreviewAdded"
                 />
@@ -248,7 +251,8 @@ const InitialState = {
     price: 0,
     free: false,
     thumbId: null,
-    thumbs: []
+    thumbs: [],
+    removeVideoPreview: false
   },
   saving: false,
   withoutWatermark: false,
@@ -318,7 +322,8 @@ export default {
         String(this.$props.post.price) !== String(this.media.price) ||
         this.$props.post.media.thumbId !== this.media.thumbId ||
         this.preloadedPhotoMedias.length ||
-        this.preloadedVideoMedias.length
+        this.preloadedVideoMedias.length ||
+        this.media.removeVideoPreview
       );
     },
     isPriceSetLimit() {
@@ -393,6 +398,9 @@ export default {
       }
       input.click();
     },
+    removePreview() {
+      this.media.removeVideoPreview = !this.media.removeVideoPreview;
+    },
     getConvertedText() {
       const pattern =
         '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
@@ -428,6 +436,7 @@ export default {
       this.media.free = false;
       this.media.thumbId = null;
       this.media.thumbs = [];
+      this.media.removeVideoPreview = false;
     },
     saveClickHandler() {
       this.saving = true;
@@ -463,6 +472,7 @@ export default {
         data.media.videoPreview = {
           id: videoPreview.processId
         };
+        data.media.removeVideoPreview = false;
       }
       return data;
     }

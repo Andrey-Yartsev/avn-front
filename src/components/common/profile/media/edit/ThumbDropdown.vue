@@ -21,6 +21,18 @@
           <span class="more-functions__option">Add video preview</span>
         </button>
       </li>
+      <li
+        v-if="videoPreview && videoPreview.source && !removeVideoPreview"
+        class="more-functions__item"
+      >
+        <button
+          class="more-functions__link"
+          type="button"
+          @click="removePreview"
+        >
+          <span class="more-functions__option">Remove video preview</span>
+        </button>
+      </li>
     </ul>
   </div>
 </template>
@@ -33,6 +45,8 @@ export default {
     hide: {
       type: Function
     },
+    videoPreview: Object,
+    removeVideoPreview: Boolean,
     showThumbOption: Boolean,
     showPreviewOption: Boolean
   },
@@ -44,6 +58,10 @@ export default {
     addPreview() {
       this.$props.hide();
       this.$emit("addPreview");
+    },
+    removePreview() {
+      this.$props.hide();
+      this.$emit("removePreview");
     }
   }
 };
