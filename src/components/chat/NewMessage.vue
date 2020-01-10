@@ -32,7 +32,7 @@
         </div>
       </div>
       <div
-        class="chatCollectionContentWrapper"
+        class="chatCollectionContentWrapper bulk-message"
         :class="{ 'contacts-top': contactsScrollTop }"
       >
         <div

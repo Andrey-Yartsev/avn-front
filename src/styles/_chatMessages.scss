@@ -522,6 +522,10 @@
   animation-timing-function: linear;
   font-size: 0;
 
+  .bulk-message & {
+    margin-bottom: -6px;
+  }
+
   .chat-section & {
     margin-left: -16px;
     margin-right: -16px;
