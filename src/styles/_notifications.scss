@@ -188,13 +188,11 @@
     }
   }
 
-  .chat-section & {
-    position: absolute;
-    top: 0;
-  }
-
   &.new-post-toast {
     cursor: default;
+    top: auto;
+    bottom: 0;
+    width: 100%;
 
     span, a {
       display: inline-block;

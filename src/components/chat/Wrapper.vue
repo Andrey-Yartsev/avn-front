@@ -51,6 +51,13 @@
         <slot name="col1"></slot>
       </div>
     </div>
+    <div
+      v-if="true && $mq === 'mobile'"
+      class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+    >
+      <span>Unread chats ({{ unreadCount }})</span
+      ><a href="#">Mark all as read</a>
+    </div>
     <div class="chatCollectionContent__col chatCollectionContent__col_wide">
       <slot name="col2"></slot>
     </div>

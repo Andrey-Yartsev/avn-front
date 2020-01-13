@@ -84,14 +84,14 @@
       >
         Loading history...
       </div>
-      <div
-        v-if="true"
-        class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
-      >
-        <span>Unread chats ({{ unreadCount }})</span
-        ><a href="#">Mark all as read</a>
-      </div>
     </component>
+    <div
+      v-if="true && $mq === 'desktop'"
+      class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+    >
+      <span>Unread chats ({{ unreadCount }})</span
+      ><a href="#">Mark all as read</a>
+    </div>
   </div>
 </template>
 

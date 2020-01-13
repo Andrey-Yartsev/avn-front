@@ -1624,12 +1624,3 @@
     }
   }
 }
-
-.unread-box {
-  .chatCollectionContentWrapper & {
-    top: auto;
-    position: absolute;
-    bottom: 0;
-    z-index: 10000;
-  }
-}
