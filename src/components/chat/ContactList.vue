@@ -1,5 +1,12 @@
 <template>
   <div class="contactsList">
+    <div
+      v-if="true && $mq === 'desktop'"
+      class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+    >
+      <span>Unread chats ({{ unreadCount }})</span
+      ><a href="#">Mark all as read</a>
+    </div>
     <component
       :is="scrollableComponent"
       class="contactsListContent"
@@ -85,13 +92,6 @@
         Loading history...
       </div>
     </component>
-    <div
-      v-if="true && $mq === 'desktop'"
-      class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
-    >
-      <span>Unread chats ({{ unreadCount }})</span
-      ><a href="#">Mark all as read</a>
-    </div>
   </div>
 </template>
 

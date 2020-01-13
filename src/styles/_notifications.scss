@@ -194,6 +194,21 @@
     bottom: 0;
     width: 100%;
 
+    @include media-breakpoint-up($desktop-breakpoint) {
+      position: absolute;
+    }
+
+    + .contactsListContent.ps {
+
+      .popup .chatCollectionContentWrapper & {
+        
+        @include media-breakpoint-up($desktop-breakpoint) {
+          bottom: 30px;
+          height: auto;
+        }
+      }
+    }
+
     span, a {
       display: inline-block;
     }
