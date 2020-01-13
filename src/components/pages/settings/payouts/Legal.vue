@@ -131,7 +131,10 @@
                   </span>
                 </label>
               </div>
-              <div class="form-group form-group_with-label radio-group">
+              <div
+                class="form-group form-group_with-label radio-group"
+                style="marginLeft: 0px"
+              >
                 <div class="form-group-inner">
                   <span class="label">I am registered for GST</span>
                   <label class="radio-wrapper icn-item m-inline">

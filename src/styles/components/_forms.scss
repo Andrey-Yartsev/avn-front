@@ -566,6 +566,11 @@ label {
     @include media-breakpoint-up($desktop-breakpoint) {
       margin-left: 22px;
     }
+    &.withoutMargin {
+      @include media-breakpoint-up($desktop-breakpoint) {
+        margin-left: 0px;
+      }
+    }
 
     &_no-gaps {
 
