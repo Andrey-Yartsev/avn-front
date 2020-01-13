@@ -99,6 +99,11 @@
   }
 }
 
+.blocked-card {
+  position: absolute;
+  left: 3px;
+}
+
 
 .replace-card,
 .delete-card {
@@ -163,6 +168,12 @@
   &:before {
     content: "\b7\a0\b7\a0\b7\a0\b7\a0\b7\a0\b7\a0"; // 6 symbols &middot;
   }
+}
+
+.card-blocked {
+  color: $primary-color;
+  margin-right: 10px;
+  font-size: 12px;
 }
 
 .paymentsCollectionsView {

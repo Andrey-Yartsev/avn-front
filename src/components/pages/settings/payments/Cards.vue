@@ -25,19 +25,28 @@
               : ''
           ]"
         >
-          <span v-if="card.isDefault" class="status-card on icn-item"></span>
-          <span
-            v-else
-            class="status-card icn-item"
-            v-tooltip="'Set as default'"
-            @click="setDefault(card.id)"
-          ></span>
+          <template v-if="card.blocked">
+            <span class="blocked-card icn-block icn-item"></span>
+          </template>
+          <template v-else>
+            <span v-if="card.isDefault" class="status-card on icn-item"></span>
+            <span
+              v-else
+              class="status-card icn-item"
+              v-tooltip="'Set as default'"
+              @click="setDefault(card.id)"
+            ></span>
+          </template>
 
           <span class="payment-system">
             {{ card.cardBrand }}
           </span>
           <span class="card-number">
             {{ card.cardLast4 }}
+          </span>
+
+          <span v-if="card.blocked" class="card-blocked">
+            Card is blocked
           </span>
 
           <button
