@@ -17,6 +17,7 @@
       :is="scrollableComponent"
       v-show="!loading"
       class="chat-wrapper"
+      :class="{ 'm-with-unread': !loading && unreadMessagesCount }"
       ref="messagesContainer"
       @ps-scroll-y="psScrollHandle"
     >
