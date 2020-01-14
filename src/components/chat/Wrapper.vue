@@ -52,11 +52,12 @@
       </div>
     </div>
     <div
-      v-if="true && $mq === 'mobile'"
+      v-if="unreadCount && $mq === 'mobile'"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+      @click.prevent="markAsRead"
     >
       <span>Unread chats ({{ unreadCount }})</span
-      ><a href="#">Mark all as read</a>
+      ><a href="#" :disabled="markAsReadInProgress">Mark all as read</a>
     </div>
     <div class="chatCollectionContent__col chatCollectionContent__col_wide">
       <slot name="col2"></slot>
@@ -112,12 +113,21 @@ export default {
         return false;
       }
       return true;
+    },
+    unreadCount() {
+      return this.$store.state.chat.unreadChatsCount;
+    },
+    markAsReadInProgress() {
+      return this.$store.state.chat._markAllChatsAsReadLoading;
     }
   },
 
   methods: {
     openUserMobileBar() {
       this.$store.dispatch("global/openUserMobileBar");
+    },
+    markAsRead() {
+      this.$store.dispatch("chat/markAllChatsAsRead");
     }
   }
 };

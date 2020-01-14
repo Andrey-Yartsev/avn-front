@@ -306,6 +306,12 @@ const actions = {
         isTyping: false
       });
     }, 2000);
+  },
+  markAllChatsAsRead({ dispatch, commit }) {
+    dispatch("_markAllChatsAsRead").then(() => {
+      commit("unreadChats");
+      dispatch("auth/extendUser", { hasMessages: false }, { root: true });
+    });
   }
 };
 
@@ -472,6 +478,13 @@ const mutations = {
   },
   resetActiveUser(state) {
     state.fetchFullActiveUserResult = null;
+  },
+  unreadChats(state) {
+    state.unreadChatsCount = 0;
+    state.chats = state.chats.map(chat => {
+      chat.unreadMessagesCount = 0;
+      return chat;
+    });
   }
 };
 
@@ -788,6 +801,17 @@ createRequestAction({
 createRequestAction({
   prefix: "fetchAllUsersCount",
   apiPath: "chats/bulk-count-all",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
+createRequestAction({
+  prefix: "_markAllChatsAsRead",
+  apiPath: "chats/messages-read",
   state,
   mutations,
   actions,

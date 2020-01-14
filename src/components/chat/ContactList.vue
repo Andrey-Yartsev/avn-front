@@ -1,11 +1,12 @@
 <template>
   <div class="contactsList">
     <div
-      v-if="true && $mq === 'desktop'"
+      v-if="unreadCount && $mq === 'desktop'"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
+      @click.prevent="markAsRead"
     >
       <span>Unread chats ({{ unreadCount }})</span
-      ><a href="#">Mark all as read</a>
+      ><a href="#" :disabled="markAsReadInProgress">Mark all as read</a>
     </div>
     <component
       :is="scrollableComponent"
@@ -138,6 +139,9 @@ export default {
     },
     unreadCount() {
       return this.$store.state.chat.unreadChatsCount;
+    },
+    markAsReadInProgress() {
+      return this.$store.state.chat._markAllChatsAsReadLoading;
     }
   },
 
@@ -190,6 +194,9 @@ export default {
     },
     isTyping(id) {
       return this.$store.state.chat.typing.indexOf(id) !== -1;
+    },
+    markAsRead() {
+      this.$store.dispatch("chat/markAllChatsAsRead");
     }
   },
   mounted() {

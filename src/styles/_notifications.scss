@@ -221,6 +221,12 @@
 
   a {
     margin-left: 20px;
+
+    &[disabled] {
+      color: $main-color;
+      opacity: 0.3;
+      cursor: default;
+    }
   }
 }
 
