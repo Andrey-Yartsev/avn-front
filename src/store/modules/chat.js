@@ -198,9 +198,18 @@ const actions = {
     //   }
     // }
   },
-  fetchMessages({ dispatch, commit }, activeUserId) {
+  fetchMessages({ state, dispatch, commit }, activeUserId) {
     commit("fetchingOld", false);
     dispatch("_fetchMessages", activeUserId).then(r => {
+      const activeChat = state.chats.find(
+        chat => chat.withUser.id === activeUserId
+      );
+      if (activeChat) {
+        if (activeChat.unreadMessagesCount) {
+          commit("decrementUnreadChatsCount");
+        }
+      }
+
       dispatch("updateUnreadMessagesCount", {
         unreadMessagesCount: r.unreadMessagesCount,
         userId: activeUserId
@@ -386,13 +395,14 @@ const mutations = {
     );
   },
   updateChatLastMessage(state, { message, withUserId, isMine }) {
-    //Search chat with User from message and update lastMessage
+    const isMessageFromActiveChat = state.activeUserId === withUserId;
+    // Search chat with User from message and update lastMessage
     state.chats = arrayUtils.updateByCondition(
       state.chats,
       chat => chat.withUser.id === withUserId,
       chat => {
         chat.lastMessage = message;
-        if (!isMine) {
+        if (!isMine && !isMessageFromActiveChat) {
           chat.unreadMessagesCount++;
         }
         return chat;
@@ -485,6 +495,9 @@ const mutations = {
       chat.unreadMessagesCount = 0;
       return chat;
     });
+  },
+  decrementUnreadChatsCount(state) {
+    state.unreadChatsCount--;
   }
 };
 
