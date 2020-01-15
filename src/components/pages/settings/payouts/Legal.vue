@@ -77,7 +77,7 @@
                     v-model="type"
                     v-validate="'required'"
                   >
-                    <option value="">Select</option>
+                    <option value="" disabled>Select Type</option>
                     <option value="company">Company</option>
                     <option value="individual">Individual</option>
                   </select>
@@ -115,11 +115,7 @@
               >
                 <label class="form-group-inner">
                   <span class="label">Australian Bus No (ABN)</span>
-                  <input
-                    name="companyTaxId"
-                    v-model="abn"
-                    v-validate="'required'"
-                  />
+                  <input name="abn" v-model="abn" v-validate="'required'" />
                 </label>
               </div>
               <div class="form-group form-group_with-label">
@@ -270,7 +266,7 @@
                     v-model="state"
                     v-validate="'required'"
                   >
-                    <option :value="null">Select State</option>
+                    <option value="" disabled>Select State</option>
                     <option :value="v.title" v-for="v in states" :key="v.id">{{
                       v.title
                     }}</option>
