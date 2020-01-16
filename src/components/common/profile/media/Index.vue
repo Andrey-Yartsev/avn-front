@@ -6,7 +6,11 @@
     <div v-else class="content">
       <template v-if="this.$props.private && storeEnabled">
         <template v-if="this.user.isPerformer">
-          <FileUploader :defaultLimits="limits" />
+          <FileUploader
+            :defaultLimits="limits"
+            :disableWatermark="withoutWatermark"
+            @setFilesLength="setFilesLength"
+          />
         </template>
         <div
           v-else
@@ -24,6 +28,22 @@
         :class="['buttonWrapper', 'more-functions', { open: opened }]"
         v-click-outside="hide"
       >
+        <div
+          class="b-check-state  b-check-state_watermark watermarkContainer"
+          :class="{ mediaSelected: isFilesLoaded }"
+          v-if="user.hasWatermarkVideo"
+        >
+          <label :class="{ disabled: isFilesLoaded }">
+            <input
+              class="is-free-post"
+              type="checkbox"
+              :disabled="isFilesLoaded"
+              v-model="withoutWatermark"
+            />
+            <span class="b-check-state__icon icn-item icn-size_lg"></span>
+            <span class="b-check-state__text">Without watermark</span>
+          </label>
+        </div>
         <div class="more-functions__overlay" @click="hide"></div>
         <div class="sortLabel">Sort:</div>
         <div class="openMenuButton" @click="open" style="color: red">
@@ -42,6 +62,24 @@
           />
         </div>
       </div>
+      <template v-else>
+        <div
+          class="b-check-state  b-check-state_watermark watermarkContainer"
+          :class="{ mediaSelected: isFilesLoaded }"
+          v-if="user.hasWatermarkVideo"
+        >
+          <label :class="{ disabled: isFilesLoaded }">
+            <input
+              class="is-free-post"
+              type="checkbox"
+              :disabled="isFilesLoaded"
+              v-model="withoutWatermark"
+            />
+            <span class="b-check-state__icon icn-item icn-size_lg"></span>
+            <span class="b-check-state__text">Without watermark</span>
+          </label>
+        </div>
+      </template>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -104,7 +142,9 @@ export default {
       },
       filterType: "",
       opened: false,
-      fetchLimit: 9
+      fetchLimit: 9,
+      withoutWatermark: false,
+      filesLength: 0
     };
   },
   computed: {
@@ -149,6 +189,9 @@ export default {
         return "price";
       }
       return this.filterType;
+    },
+    isFilesLoaded() {
+      return this.filesLength > 0;
     }
   },
   watch: {
@@ -180,6 +223,9 @@ export default {
         .then(() => {
           this.handleResponseWithIntersectionObserver(this.fetchMedia);
         });
+    },
+    setFilesLength(value) {
+      this.filesLength = value;
     }
   },
   mounted() {
@@ -233,5 +279,12 @@ export default {
   margin-right: 10px;
   font-weight: bold;
   color: #909598;
+}
+.watermarkContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 10px;
 }
 </style>

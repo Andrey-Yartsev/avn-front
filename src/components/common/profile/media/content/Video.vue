@@ -51,7 +51,7 @@
         controlslist="nodownload"
         :autoplay="autoplay"
         loop
-        :poster="media.thumb.source"
+        :poster="media.preview.source"
         v-if="video"
         @play="play"
         @contextmenu.prevent="() => false"

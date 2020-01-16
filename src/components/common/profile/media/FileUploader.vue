@@ -145,7 +145,8 @@ export default {
     defaultLimits: {
       type: Object,
       default: null
-    }
+    },
+    disableWatermark: Boolean
   },
   data() {
     return {
@@ -180,6 +181,9 @@ export default {
         this.addData.type = "";
         this.addData.content = "";
       }
+    },
+    "files.length"(value) {
+      this.$emit("setFilesLength", value);
     },
     readyToUploadFile(newFile) {
       this.filesInProgress.push(newFile);
@@ -217,6 +221,9 @@ export default {
       return function(id) {
         return this.filesInProgress.includes(id);
       };
+    },
+    withoutWatermark() {
+      return this.$props.disableWatermark;
     }
   },
   methods: {
