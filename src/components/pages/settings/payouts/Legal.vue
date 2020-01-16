@@ -101,19 +101,15 @@
 
             <div
               class="form-group form-group_with-label"
-              v-if="type === 'company'"
-            >
-              <!-- <div
-              class="form-group form-group_with-label"
               v-if="type === 'company' && !showABNOptions"
-            > -->
+            >
               <label class="form-group-inner">
                 <span class="label">EIN</span>
                 <input name="companyTaxId" v-model="companyTaxId" />
               </label>
             </div>
 
-            <!-- <template v-if="showABNOptions">
+            <template v-if="showABNOptions">
               <div
                 class="form-group form-group_with-label form-group_clear-gaps-bottom"
               >
@@ -163,7 +159,7 @@
                   </label>
                 </div>
               </div>
-            </template> -->
+            </template>
 
             <div class="form-group form-group_with-label photo-form-group">
               <div
@@ -408,12 +404,12 @@ export default {
     },
     legalExists() {
       return this.legal && this.legal.type;
+    },
+    showABNOptions() {
+      return (
+        this.account.countryName && this.account.countryName === "Australia"
+      );
     }
-    // showABNOptions() {
-    //   return (
-    //     this.account.countryName && this.account.countryName === "Australia"
-    //   );
-    // }
   },
   methods: {
     async upload() {
@@ -440,9 +436,9 @@ export default {
         "state",
         "country"
       ];
-      // if (this.showABNOptions) {
-      //   fields.push("abn", "gstRegistered");
-      // }
+      if (this.showABNOptions) {
+        fields.push("abn", "gstRegistered");
+      }
       const data = {};
       for (let f of fields) {
         if (this[f]) {
