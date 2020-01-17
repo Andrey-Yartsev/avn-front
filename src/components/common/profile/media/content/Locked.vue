@@ -33,6 +33,7 @@
       :width="`${size.width}`"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
+      style="object-fit: contain; transform: scale(1)"
     />
   </div>
 </template>

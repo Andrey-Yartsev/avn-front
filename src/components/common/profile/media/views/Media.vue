@@ -1,5 +1,12 @@
 <template>
-  <div class="media">
+  <div
+    class="media"
+    :style="mediaStyle"
+    :class="{
+      maxHeight: medias.type === 'processing',
+      minHeight: medias.type === 'processing'
+    }"
+  >
     <!-- <div
     class="media"
     :class="{
