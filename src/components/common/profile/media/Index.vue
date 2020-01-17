@@ -31,7 +31,12 @@
         <div
           class="b-check-state  b-check-state_watermark watermarkContainer"
           :class="{ mediaSelected: isFilesLoaded }"
-          v-if="user.hasWatermarkVideo"
+          v-if="
+            this.$props.private &&
+              user &&
+              user.isPerformer &&
+              user.hasWatermarkVideo
+          "
         >
           <label :class="{ disabled: isFilesLoaded }">
             <input
@@ -66,7 +71,12 @@
         <div
           class="b-check-state  b-check-state_watermark watermarkContainer"
           :class="{ mediaSelected: isFilesLoaded }"
-          v-if="user.hasWatermarkVideo"
+          v-if="
+            this.$props.private &&
+              user &&
+              user.isPerformer &&
+              user.hasWatermarkVideo
+          "
         >
           <label :class="{ disabled: isFilesLoaded }">
             <input
