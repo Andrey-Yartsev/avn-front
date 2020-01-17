@@ -63,8 +63,9 @@ const mutations = {
             type: "video",
             duration: data.duration,
             src: {
-              ...item.media.src,
-              source: data.url
+              source: data.url,
+              width: data.width,
+              height: data.height
             }
           }
         };

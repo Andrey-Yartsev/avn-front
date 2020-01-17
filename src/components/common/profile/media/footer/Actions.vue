@@ -8,23 +8,22 @@
         ></span>
         {{ post.price ? post.price.toFixed(2) : 0.0 }}
       </span>
-      <span class=" actions__btn comments-btn">
-        <span
-          class="btn-icon icn-item icn-clock icn-size_md"
-          v-tooltip="'Duration'"
-        ></span>
-        {{ getVideoDuration }}
-      </span>
-      <span
-        v-if="post.media.type !== 'processing'"
-        class=" actions__btn comments-btn"
-      >
-        <span
-          class="btn-icon icn-item icn-settings icn-size_md"
-          v-tooltip="'Quality'"
-        ></span>
-        {{ getVideoResolution }}
-      </span>
+      <template v-if="post.media.type !== 'processing'">
+        <span class=" actions__btn comments-btn">
+          <span
+            class="btn-icon icn-item icn-clock icn-size_md"
+            v-tooltip="'Duration'"
+          ></span>
+          {{ getVideoDuration }}
+        </span>
+        <span class=" actions__btn comments-btn">
+          <span
+            class="btn-icon icn-item icn-settings icn-size_md"
+            v-tooltip="'Quality'"
+          ></span>
+          {{ getVideoResolution }}
+        </span>
+      </template>
     </template>
     <template v-else>
       <button
@@ -40,7 +39,7 @@
       <button v-else class="btn btn-buy">
         Free
       </button>
-      <span class="buttonsContainer">
+      <span class="buttonsContainer" v-if="post.media.type !== 'processing'">
         <span class="actions__btn comments-btn">
           <span
             class="btn-icon icn-item icn-clock icn-size_md"
@@ -48,10 +47,7 @@
           ></span>
           {{ getVideoDuration }}
         </span>
-        <span
-          v-if="post.media.type !== 'processing'"
-          class="actions__btn comments-btn"
-        >
+        <span class="actions__btn comments-btn">
           <span
             class="btn-icon icn-item icn-settings icn-size_md"
             v-tooltip="'Quality'"

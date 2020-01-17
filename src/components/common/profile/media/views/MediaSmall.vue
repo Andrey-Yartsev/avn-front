@@ -45,14 +45,14 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <div class="statusWrapper bottom">
+          <div
+            class="statusWrapper bottom"
+            v-if="post.media.type !== 'processing'"
+          >
             <span class="mediaStatus duration">
               <span>{{ getVideoDuration(post.media.duration) }}</span>
             </span>
-            <span
-              v-if="post.media.type !== 'processing'"
-              class="mediaStatus duration"
-            >
+            <span class="mediaStatus duration">
               <span>{{ getVideoResolution }}</span>
             </span>
           </div>
@@ -76,29 +76,31 @@
                 <span class="likes__counter">{{ post.buyCount || 0 }}</span>
               </span>
             </div>
-            <div class="statusWrapper bottom">
+            <div
+              class="statusWrapper bottom"
+              v-if="post.media.type !== 'processing'"
+            >
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span
-                v-if="post.media.type !== 'processing'"
-                class="mediaStatus duration"
-              >
+              <span class="mediaStatus duration">
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
           </template>
-          <div v-else class="statusWrapper bottom">
-            <span class="mediaStatus duration">
-              <span>{{ getVideoDuration(post.media.duration) }}</span>
-            </span>
-            <span
+          <template v-else>
+            <div
+              class="statusWrapper bottom"
               v-if="post.media.type !== 'processing'"
-              class="mediaStatus duration"
             >
-              <span>{{ getVideoResolution }}</span>
-            </span>
-          </div>
+              <span class="mediaStatus duration">
+                <span>{{ getVideoDuration(post.media.duration) }}</span>
+              </span>
+              <span class="mediaStatus duration">
+                <span>{{ getVideoResolution }}</span>
+              </span>
+            </div>
+          </template>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
             class="loader-container loader-container_center"
