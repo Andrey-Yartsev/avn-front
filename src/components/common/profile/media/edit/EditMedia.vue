@@ -120,7 +120,7 @@
           </Draggable>
         </div>
       </div>
-      <div class="actions">
+      <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
             <div class="btn-post">
@@ -165,6 +165,13 @@
                   <span class="b-check-state__text">Free</span>
                 </label>
               </div>
+              <label for="pinMeida" class="btn-pin" style="margin-left: 10px">
+                <input type="checkbox" v-model="media.pinned" id="pinMeida" />
+                <span class="icn-pin icn-item icn-size_md"></span>
+                <span class="btn-pin__text">
+                  {{ media.pinned ? "Unpin video" : "Pin video" }}
+                </span>
+              </label>
             </div>
 
             <input
@@ -252,7 +259,8 @@ const InitialState = {
     free: false,
     thumbId: null,
     thumbs: [],
-    removeVideoPreview: false
+    removeVideoPreview: false,
+    pinned: false
   },
   saving: false,
   withoutWatermark: false,
@@ -318,6 +326,7 @@ export default {
       return (
         this.$props.post.title !== this.media.title ||
         this.$props.post.text !== this.media.text ||
+        this.$props.post.pinned !== this.media.pinned ||
         this.$props.post.active !== this.media.active ||
         String(this.$props.post.price) !== String(this.media.price) ||
         this.$props.post.media.thumbId !== this.media.thumbId ||
@@ -419,6 +428,7 @@ export default {
         text,
         price,
         active,
+        pinned,
         media: { thumbs, thumbId }
       } = this.$props.post;
       this.media.title = title;
@@ -427,6 +437,7 @@ export default {
       this.media.active = active;
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
+      this.media.pinned = pinned || false;
     },
     clearData() {
       this.media.title = "";
@@ -437,6 +448,7 @@ export default {
       this.media.thumbId = null;
       this.media.thumbs = [];
       this.media.removeVideoPreview = false;
+      this.media.pinned = false;
     },
     saveClickHandler() {
       this.saving = true;
@@ -488,3 +500,18 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.actions {
+  &.editMediaActions {
+    flex-flow: column;
+    .actions-controls {
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .btn.submit {
+      align-self: flex-end;
+    }
+  }
+}
+</style>
