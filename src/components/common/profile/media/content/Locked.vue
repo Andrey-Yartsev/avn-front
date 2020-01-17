@@ -33,7 +33,6 @@
       :width="`${size.width}`"
       @contextmenu.prevent="() => false"
       @dragstart.prevent="() => false"
-      style="width: auto; height: 350px"
     />
   </div>
 </template>

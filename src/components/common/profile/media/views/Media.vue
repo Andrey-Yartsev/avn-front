@@ -1,13 +1,13 @@
 <template>
-  <div
+  <div class="media">
+    <!-- <div
     class="media"
     :class="{
       maxHeight: $mq === 'mobile' || medias.type === 'processing',
       minHeight:
         getMediaViewType(medias) === 'Locked' || medias.type === 'processing'
     }"
-    :style="mediaStyle"
-  >
+  > -->
     <div
       class="loader-container loader-container_center"
       v-if="medias.type === 'processing'"
@@ -21,7 +21,7 @@
       />
     </div>
     <template v-else>
-      <figure class="media-item active" style="width: 100%">
+      <figure class="media-item active">
         <component
           :is="getMediaViewType(medias)"
           :media="medias"
