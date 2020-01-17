@@ -1,12 +1,31 @@
 <template>
   <div class="actions">
-    <span v-if="isAuthor" class=" actions__btn comments-btn">
+    <template v-if="isAuthor">
+      <span class=" actions__btn comments-btn">
+        <span
+          class="btn-icon icn-tips icn-item icn-size_md"
+          v-tooltip="'Price'"
+        ></span>
+        {{ post.price ? post.price.toFixed(2) : 0.0 }}
+      </span>
+      <span class=" actions__btn comments-btn">
+        <span
+          class="btn-icon icn-item icn-clock icn-size_md"
+          v-tooltip="'Duration'"
+        ></span>
+        {{ getVideoDuration }}
+      </span>
       <span
-        class="btn-icon icn-tips icn-item icn-size_lg"
-        v-tooltip="'Price'"
-      ></span>
-      {{ post.price ? post.price.toFixed(2) : 0.0 }}
-    </span>
+        v-if="post.media.type !== 'processing'"
+        class=" actions__btn comments-btn"
+      >
+        <span
+          class="btn-icon icn-item icn-settings icn-size_md"
+          v-tooltip="'Quality'"
+        ></span>
+        {{ getVideoResolution }}
+      </span>
+    </template>
     <template v-else>
       <button
         :disabled="post.media.canView"
@@ -15,12 +34,31 @@
         v-tooltip="post.media.canView ? 'Price' : 'Buy'"
         @click.prevent="buyMedia(post)"
       >
-        <span class="btn-icon icn-tips icn-item icn-size_lg" />
+        <span class="btn-icon icn-tips icn-item icn-size_md" />
         {{ post.price ? post.price.toFixed(2) : "" }}
       </button>
       <button v-else class="btn btn-buy">
         Free
       </button>
+      <span class="buttonsContainer">
+        <span class="actions__btn comments-btn">
+          <span
+            class="btn-icon icn-item icn-clock icn-size_md"
+            v-tooltip="'Duration'"
+          ></span>
+          {{ getVideoDuration }}
+        </span>
+        <span
+          v-if="post.media.type !== 'processing'"
+          class="actions__btn comments-btn"
+        >
+          <span
+            class="btn-icon icn-item icn-settings icn-size_md"
+            v-tooltip="'Quality'"
+          ></span>
+          {{ getVideoResolution }}
+        </span>
+      </span>
     </template>
     <span class="actions__btn comments-btn" v-if="isAuthor">
       <span
@@ -79,6 +117,26 @@ export default {
   computed: {
     dateTime() {
       return fromNow(this.post.postedAt);
+    },
+    getVideoDuration() {
+      let duration = this.$props.post.media.duration;
+      const mins = Math.floor(+duration / 60);
+      const sec = +duration - mins * 60;
+      return `${mins < 10 ? "0" : ""}${mins} : ${sec < 10 ? "0" : ""}${sec}`;
+    },
+    getVideoResolution() {
+      if (
+        !this.$props.post.media.src.width ||
+        !this.$props.post.media.src.height
+      ) {
+        return "";
+      }
+      return (
+        Math.min(
+          this.$props.post.media.src.height,
+          this.$props.post.media.src.width
+        ) + "p"
+      );
     }
   },
   methods: {
@@ -116,6 +174,14 @@ export default {
 .btn-buy {
   & > span {
     transform: translateY(-6px);
+  }
+}
+.buttonsContainer {
+  margin-left: 25px;
+  display: flex;
+  flex-flow: row nowrap;
+  @media (max-width: 575px) {
+    margin-left: 10px;
   }
 }
 </style>

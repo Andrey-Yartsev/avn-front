@@ -100,6 +100,18 @@
       content: "\E622";
     }
   }
+  
+  &-settings {
+    &:after {
+      content: "\E62F";
+    }
+  }
+
+  &-clock {
+    &:after {
+      content: "\E620";
+    }
+  }
 
   &-camera {
 

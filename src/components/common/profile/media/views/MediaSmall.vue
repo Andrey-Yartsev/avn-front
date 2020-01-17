@@ -45,6 +45,17 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div class="statusWrapper bottom">
+            <span class="mediaStatus duration">
+              <span>{{ getVideoDuration(post.media.duration) }}</span>
+            </span>
+            <span
+              v-if="post.media.type !== 'processing'"
+              class="mediaStatus duration"
+            >
+              <span>{{ getVideoResolution }}</span>
+            </span>
+          </div>
         </div>
         <template v-else>
           <img
@@ -52,24 +63,40 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <div class="statusWrapper" v-if="isPrivate">
-            <span v-if="post.active" class="mediaStatus isActive">
-              On Sale
-            </span>
-            <span v-else class="mediaStatus notActive">
-              Draft
-            </span>
-            <span class="mediaStatus viewers">
-              <span class="btn-icon icn-item icn-profile icn-size_lg" />
-              <span class="likes__counter">{{ post.buyCount || 0 }}</span>
-            </span>
-            <span class="mediaStatus duration">
-              <span>{{ getVideoDuration(post.media.duration) }}</span>
-            </span>
-          </div>
+          <template v-if="isPrivate">
+            <div class="statusWrapper">
+              <span v-if="post.active" class="mediaStatus isActive">
+                On Sale
+              </span>
+              <span v-else class="mediaStatus notActive">
+                Draft
+              </span>
+              <span class="mediaStatus viewers">
+                <span class="btn-icon icn-item icn-profile icn-size_lg" />
+                <span class="likes__counter">{{ post.buyCount || 0 }}</span>
+              </span>
+            </div>
+            <div class="statusWrapper bottom">
+              <span class="mediaStatus duration">
+                <span>{{ getVideoDuration(post.media.duration) }}</span>
+              </span>
+              <span
+                v-if="post.media.type !== 'processing'"
+                class="mediaStatus duration"
+              >
+                <span>{{ getVideoResolution }}</span>
+              </span>
+            </div>
+          </template>
           <div v-else class="statusWrapper bottom">
             <span class="mediaStatus duration">
               <span>{{ getVideoDuration(post.media.duration) }}</span>
+            </span>
+            <span
+              v-if="post.media.type !== 'processing'"
+              class="mediaStatus duration"
+            >
+              <span>{{ getVideoResolution }}</span>
             </span>
           </div>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
@@ -153,6 +180,20 @@ export default {
     },
     page() {
       return this.$route.meta.page;
+    },
+    getVideoResolution() {
+      if (
+        !this.$props.post.media.src.width ||
+        !this.$props.post.media.src.height
+      ) {
+        return "";
+      }
+      return (
+        Math.min(
+          this.$props.post.media.src.height,
+          this.$props.post.media.src.width
+        ) + "p"
+      );
     }
   },
   methods: {
@@ -183,7 +224,7 @@ export default {
     getVideoDuration(duration) {
       const mins = Math.floor(+duration / 60);
       const sec = +duration - mins * 60;
-      return `${mins < 10 ? "0" : ""}${mins} : ${sec}`;
+      return `${mins < 10 ? "0" : ""}${mins} : ${sec < 10 ? "0" : ""}${sec}`;
     },
     trimmText(text, len) {
       if (!text.length) {
