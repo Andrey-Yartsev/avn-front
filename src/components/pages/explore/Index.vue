@@ -50,7 +50,7 @@
               <router-link
                 to="/avn_awards/voting"
                 class="btn border block alt lg"
-                v-if="userViewIsAll || userViewIsStreight"
+                v-if="isEnableVoting && (userViewIsAll || userViewIsStreight)"
               >
                 <span class="icn-item icn-avn icn-size_lg"></span>
                 AVN Awards Voting
@@ -58,7 +58,7 @@
               <router-link
                 to="/gayvn_awards/voting"
                 class="btn border block alt lg"
-                v-if="userViewIsAll || userViewIsGay"
+                v-if="isEnableGayVoting && (userViewIsAll || userViewIsGay)"
               >
                 <span class="icn-item icn-gayvn icn-size_lg"></span>
                 GayVN Awards Voting
@@ -286,6 +286,12 @@ export default {
     },
     userViewIsGay() {
       return this.user.categoryView === 3;
+    },
+    isEnableVoting() {
+      return this.$store.state.init.data.enableVoting;
+    },
+    isEnableGayVoting() {
+      return this.$store.state.init.data.enableGayVoting;
     }
   },
   methods: {
