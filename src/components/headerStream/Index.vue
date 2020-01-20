@@ -1,5 +1,5 @@
 <template>
-  <div class="streamWrapper" v-if="isHeaderStreamExists">
+  <div class="streamWrapper" v-if="isHeaderStreamExists && !isStreamRoute">
     <div id="headerStream" v-html="getIframe" />
   </div>
 </template>
@@ -20,6 +20,9 @@ export default {
         (this.$store.state.init.data.headerStream.mobile ||
           this.$store.state.init.data.headerStream.desktop)
       );
+    },
+    isStreamRoute() {
+      return this.$route.path === "/stream";
     }
   }
 };
