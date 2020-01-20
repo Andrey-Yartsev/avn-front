@@ -22,6 +22,7 @@ import new_feed_post from "./actions/new_feed_post";
 import online from "./actions/online";
 import typing from "./actions/typing";
 import stories from "./actions/stories";
+import header_stream from "./actions/header_stream";
 
 const actions = {
   chats,
@@ -44,7 +45,8 @@ const actions = {
   stream_public,
   online,
   typing,
-  stories
+  stories,
+  header_stream
 };
 
 export default class Ws extends WsAbstract {

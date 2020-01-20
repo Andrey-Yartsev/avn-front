@@ -4,7 +4,11 @@ import { createRequestAction } from "../utils/storeRequest";
 
 const state = {};
 
-const actions = {};
+const actions = {
+  updateHeaderStream(state, data) {
+    state.data.headerStream = data;
+  }
+};
 
 const mutations = {};
 
