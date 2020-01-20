@@ -1,5 +1,5 @@
 <template>
-  <div class="streamWrapper">
+  <div class="streamWrapper" v-if="isHeaderStreamExists">
     <div id="headerStream" v-html="getIframe" />
   </div>
 </template>
@@ -9,6 +9,14 @@ export default {
   computed: {
     getIframe() {
       return this.$store.state.init.data.headerStream.code;
+    },
+    isHeaderStreamExists() {
+      return (
+        this.$store.state.init &&
+        this.$store.state.init.data &&
+        this.$store.state.init.data.headerStream &&
+        this.$store.state.init.data.headerStream.code
+      );
     }
   }
 };

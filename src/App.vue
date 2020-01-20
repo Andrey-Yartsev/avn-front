@@ -14,7 +14,7 @@
         :semidark="true"
       />
       <Header />
-      <HeaderStream v-if="isHeaderStreamExists" />
+      <HeaderStream />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
       </main>
@@ -186,14 +186,6 @@ export default {
     },
     hasLayout() {
       return !this.$route.meta.noLayout;
-    },
-    isHeaderStreamExists() {
-      return (
-        this.$store.state.init &&
-        this.$store.state.init.data &&
-        this.$store.state.init.data.headerStream &&
-        this.$store.state.init.data.headerStream.code
-      );
     }
   },
   watch: {
