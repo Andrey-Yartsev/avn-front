@@ -4,13 +4,13 @@ import { createRequestAction } from "../utils/storeRequest";
 
 const state = {};
 
-const actions = {
+const actions = {};
+
+const mutations = {
   updateHeaderStream(state, data) {
     state.data.headerStream = data;
   }
 };
-
-const mutations = {};
 
 createRequestAction({
   prefix: "fetch",
