@@ -14,6 +14,7 @@
         :semidark="true"
       />
       <Header />
+      <HeaderStream v-if="isHeaderStreamExists" />
       <main id="content" :style="{ 'padding-right': `${scrollBarWidth}px` }">
         <router-view />
       </main>
@@ -45,6 +46,7 @@ import BrowserStore from "store";
 import Logger from "js-logger";
 import Loader from "@/components/common/Loader";
 import Header from "@/components/header/Index";
+import HeaderStream from "@/components/headerStream/Index";
 import Sidebar from "@/components/header/Sidebar";
 import ToastList from "@/components/common/ToastList";
 import Modals from "@/components/modals/Index";
@@ -105,6 +107,7 @@ export default {
     Modals,
     Loader,
     Header,
+    HeaderStream,
     Sidebar,
     ToastList,
     ErrorModal,
@@ -183,6 +186,14 @@ export default {
     },
     hasLayout() {
       return !this.$route.meta.noLayout;
+    },
+    isHeaderStreamExists() {
+      return (
+        this.$store.state.init &&
+        this.$store.state.init.data &&
+        this.$store.state.init.data.headerStream &&
+        this.$store.state.init.data.headerStream.code
+      );
     }
   },
   watch: {
