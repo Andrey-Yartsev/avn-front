@@ -8,14 +8,17 @@
 export default {
   computed: {
     getIframe() {
-      return this.$store.state.init.data.headerStream.code;
+      return this.$mq === "mobile"
+        ? this.$store.state.init.data.headerStream.mobile
+        : this.$store.state.init.data.headerStream.desktop;
     },
     isHeaderStreamExists() {
       return (
         this.$store.state.init &&
         this.$store.state.init.data &&
         this.$store.state.init.data.headerStream &&
-        this.$store.state.init.data.headerStream.code
+        (this.$store.state.init.data.headerStream.mobile ||
+          this.$store.state.init.data.headerStream.desktop)
       );
     }
   }
