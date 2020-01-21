@@ -317,7 +317,7 @@ export default {
       this.setContainerClass();
     });
 
-    console.log("iterate123");
+    console.log("iterate124");
   }
 };
 </script>
