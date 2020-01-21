@@ -143,4 +143,10 @@ const rtr = new Router({
   routes
 });
 
+rtr.onError(error => {
+  if (/loading chunk .* failed./i.test(error.message)) {
+    window.location.reload();
+  }
+});
+
 export default rtr;
