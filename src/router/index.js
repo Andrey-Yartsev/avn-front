@@ -144,8 +144,9 @@ const rtr = new Router({
 });
 
 rtr.onError(error => {
-  if (/loading chunk .* failed./i.test(error.message)) {
-    window.location.reload();
+  if (/Loading chunk .* failed./i.test(error.message)) {
+    console.log("catch chunk error");
+    // window.location.reload();
   }
 });
 
