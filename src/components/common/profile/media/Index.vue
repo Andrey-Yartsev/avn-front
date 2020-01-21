@@ -51,8 +51,10 @@
         </div>
         <div class="more-functions__overlay" @click="hide"></div>
         <div class="sortLabel">Sort:</div>
-        <div class="openMenuButton" @click="open" style="color: red">
-          <img :src="'/static/img/ic-filter-red.svg'" alt="filter" />
+        <div class="openMenuButton" @click="open">
+          <span class="status-card on icn-item checkmark styledCheckmark" />
+          <span class="filterLabel">{{ getFilterName }}</span>
+          <!-- <img :src="'/static/img/ic-filter-red.svg'" alt="filter" /> -->
         </div>
         <div class="more-functions__dropdown">
           <FilterDropdown
@@ -145,7 +147,7 @@ export default {
         gif: 0,
         photo: 0
       },
-      filterType: "",
+      filterType: "all",
       opened: false,
       fetchLimit: 9,
       withoutWatermark: false,
@@ -197,6 +199,26 @@ export default {
     },
     isFilesLoaded() {
       return this.filesLength > 0;
+    },
+    getFilterName() {
+      switch (this.filterType) {
+        case "all":
+          return "All";
+        case "sale":
+          return "On sale";
+        case "draft":
+          return "Draft";
+        case "dateNew":
+          return "Newest";
+        case "dateOld":
+          return "Oldest";
+        case "priceHight":
+          return "Price: Hight to Low";
+        case "priceLow":
+          return "Price: Low to High";
+        default:
+          return "all";
+      }
     }
   },
   watch: {
@@ -273,7 +295,8 @@ export default {
   margin: 5px 0px;
 }
 .openMenuButton {
-  display: inline-block;
+  display: block;
+  /* display: inline-block; */
   margin: 5px 0;
   margin-right: 20px;
   cursor: pointer;
@@ -291,5 +314,14 @@ export default {
   align-items: center;
   margin-right: auto;
   margin-left: 10px;
+}
+.styledCheckmark {
+  position: relative;
+  font-size: 23px;
+  line-height: 16px;
+}
+.filterLabel {
+  font-weight: bold;
+  color: #909598;
 }
 </style>
