@@ -77,9 +77,25 @@
           class="icn-item icon-link"
           @click="copyHref"
         ></span>
-        <span class="btn editButton" v-if="isAuthor" @click.prevent="editPost"
-          >Edit</span
+        <div
+          class="more-functions options"
+          :class="{ open: opened }"
+          v-click-outside="hide"
         >
+          <div class="more-functions__overlay" @click="hide"></div>
+          <div
+            class="more-functions__btn"
+            :class="{ 'more-functions__btn_with-text': $mq === 'desktop' }"
+            @click="toggle"
+          >
+            <div v-if="$mq === 'desktop'" class="more-functions__btn-text">
+              More
+            </div>
+          </div>
+          <div class="more-functions__dropdown">
+            <Dropdown :post="post" :from="from" :hide="hide" />
+          </div>
+        </div>
       </span>
     </template>
   </div>
@@ -156,6 +172,9 @@ export default {
       this.opened = false;
       this.$emit("hideDropdown");
     },
+    toggle() {
+      this.opened ? this.hide() : this.open();
+    },
     showBubble() {
       Bubble.open({
         a: this.$refs.name,
@@ -165,18 +184,18 @@ export default {
     hideBubble() {
       Bubble.hide();
     },
-    editPost() {
-      this.$store.commit("profile/media/startEditMedia", this.postId, {
-        root: true
-      });
+    // editPost() {
+    //   this.$store.commit("profile/media/startEditMedia", this.postId, {
+    //     root: true
+    //   });
 
-      this.$store.dispatch("modal/show", {
-        name: "editMedia",
-        data: {
-          postId: this.postId
-        }
-      });
-    },
+    //   this.$store.dispatch("modal/show", {
+    //     name: "editMedia",
+    //     data: {
+    //       postId: this.postId
+    //     }
+    //   });
+    // },
     copyHref() {
       this.$copyText(this.href).then(() => {
         this.$store.dispatch(
@@ -247,6 +266,13 @@ export default {
     &:last-child {
       margin-left: 5px;
     }
+  }
+}
+.more-functions {
+  &.options {
+    position: relative;
+    margin-left: 10px;
+    top: 0;
   }
 }
 </style>

@@ -70,11 +70,13 @@ export default {
   },
   methods: {
     async deletePost() {
+      this.hide();
       this.$store
         .dispatch("profile/media/deleteMedia", this.postId, { root: true })
-        .then(res => {
-          console.log("success", res);
-          this.$router.push(`/${this.user.username}/media`);
+        .then(() => {
+          if (this.$route.hash) {
+            this.$router.push(`/${this.user.username}/media`);
+          }
         })
         .catch(res => {
           console.log("failed", res);

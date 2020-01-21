@@ -18,11 +18,7 @@ export default {
     initIntersectionObserver(cb) {
       const callback = entries => {
         entries.forEach(entry => {
-          if (
-            entry.isIntersecting &&
-            !this.allDataRecieved &&
-            this.listLength >= this.fetchLimit
-          ) {
+          if (entry.isIntersecting && !this.allDataRecieved) {
             console.log("load more");
             cb();
           }

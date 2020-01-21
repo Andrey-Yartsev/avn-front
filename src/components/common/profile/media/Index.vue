@@ -52,11 +52,6 @@
         <div class="more-functions__overlay" @click="hide"></div>
         <div class="sortLabel">Sort:</div>
         <div class="openMenuButton" @click="open" style="color: red">
-          <!-- <img
-            v-if="filterType"
-            :src="'/static/img/ic-filter-red.svg'"
-            alt="filter"
-          /> -->
           <img :src="'/static/img/ic-filter-red.svg'" alt="filter" />
         </div>
         <div class="more-functions__dropdown">

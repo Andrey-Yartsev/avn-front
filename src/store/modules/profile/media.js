@@ -41,6 +41,7 @@ const mutations = {
   },
   deleteMedia(state, productId) {
     state.media = state.media.filter(item => item.productId !== productId);
+    state.offset--;
   },
   incrementViewCounter(state, productId) {
     const viewedMedia = state.media.find(item => item.productId === productId);
