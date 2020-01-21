@@ -7,7 +7,10 @@
             media.videoPreview.status === 'processing'
         "
       >
-        <div class="media maxHeight minHeight previewLoader">
+        <div
+          class="media maxHeight minHeight previewLoader"
+          :class="{ previewLoaderMobile: $mq === 'mobile' }"
+        >
           <div class="loader-container loader-container_center">
             <Loader
               :fullscreen="false"
@@ -51,7 +54,7 @@
         controlslist="nodownload"
         :autoplay="autoplay"
         loop
-        :poster="media.preview.source"
+        :poster="media.thumb.source"
         v-if="video"
         @play="play"
         @contextmenu.prevent="() => false"
@@ -133,6 +136,10 @@ export default {
 }
 .previewLoader {
   height: 300px;
+  width: 620px !important;
   margin: auto !important;
+}
+.previewLoaderMobile {
+  width: 100vw !important;
 }
 </style>
