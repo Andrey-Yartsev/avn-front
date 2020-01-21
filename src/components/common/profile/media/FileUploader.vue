@@ -67,10 +67,11 @@
                     :fullscreen="false"
                     :small="true"
                     :inline="true"
-                    :semilight="true"
                     class="text-light"
                   />
+                  <div v-if="$mq === 'mobile'" style="margin: 10px" />
                   <button
+                    v-else
                     class="btn btn-secondary btn-sm dropdown-toggle"
                     disabled
                     style="marginLeft: 10px"
