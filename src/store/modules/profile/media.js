@@ -33,6 +33,7 @@ const mutations = {
   },
   addMediaItem(state, newMedias) {
     state.media = [...newMedias, ...state.media];
+    state.offset++;
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item => {
