@@ -100,7 +100,8 @@ export default {
     showPreviewVideo() {
       if (
         this.$props.isAuthor &&
-        this.$props.post.media.preview.source &&
+        this.$props.post.media.videoPreview &&
+        this.$props.post.media.videoPreview.source &&
         this.$props.showPreview
       ) {
         return true;
