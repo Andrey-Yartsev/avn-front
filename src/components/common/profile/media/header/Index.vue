@@ -64,6 +64,7 @@
           </label>
           <span class="labelWrapper__label">Preview</span>
         </span>
+        <span v-if="post.pinned" class="icn-pin icn-item icn-size_md"></span>
         <span v-if="post.active" class="mediaStatus isActive">
           <span class="icn-item verified-user" />
           Active

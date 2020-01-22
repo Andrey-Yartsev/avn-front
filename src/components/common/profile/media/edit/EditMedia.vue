@@ -169,7 +169,7 @@
                 <input type="checkbox" v-model="media.pinned" id="pinMeida" />
                 <span class="icn-pin icn-item icn-size_md"></span>
                 <span class="btn-pin__text">
-                  {{ media.pinned ? "Unpin video" : "Pin video" }}
+                  {{ media.pinned ? "Pinned" : "Unpinned" }}
                 </span>
               </label>
             </div>
@@ -190,7 +190,10 @@
             />
 
             <div
-              :class="['more-functions', { open: dropdownOpened }]"
+              :class="[
+                'more-functions',
+                { open: dropdownOpened, previewDropdown: $mq === 'desktop' }
+              ]"
               v-click-outside="hideDropdown"
             >
               <div class="more-functions__overlay" @click="hideDropdown"></div>
@@ -513,5 +516,8 @@ export default {
       align-self: flex-end;
     }
   }
+}
+.previewDropdown {
+  margin-left: auto;
 }
 </style>
