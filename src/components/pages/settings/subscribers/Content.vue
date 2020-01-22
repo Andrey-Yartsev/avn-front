@@ -185,6 +185,8 @@ export default {
   },
   methods: {
     init() {
+      this.destroyObserver();
+      this.isInitFetch = true;
       this.$store.commit("subscribes/reset");
       this.getPosts();
     },
@@ -195,6 +197,7 @@ export default {
             active: this.isActiveUsers()
           })
           .then(() => {
+            this.isInitFetch = false;
             this.handleResponseWithIntersectionObserver(this.getPosts);
           });
       } else {
@@ -203,6 +206,7 @@ export default {
             active: this.isActiveUsers()
           })
           .then(() => {
+            this.isInitFetch = false;
             this.handleResponseWithIntersectionObserver(this.getPosts);
           });
       }

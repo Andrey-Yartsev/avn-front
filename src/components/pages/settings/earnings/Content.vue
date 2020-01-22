@@ -198,6 +198,8 @@ export default {
   },
   methods: {
     init() {
+      this.destroyObserver();
+      this.isInitFetch = true;
       this.$store.commit("earnings/reset");
       this.getPosts();
     },
@@ -209,6 +211,7 @@ export default {
           sortBy: this.selectedFilter
         })
         .then(() => {
+          this.isInitFetch = false;
           this.handleResponseWithIntersectionObserver(this.getPosts);
         });
     },
