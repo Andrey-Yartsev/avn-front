@@ -316,8 +316,6 @@ export default {
     this.$nextTick(() => {
       this.setContainerClass();
     });
-
-    console.log("iterate124");
   }
 };
 </script>
