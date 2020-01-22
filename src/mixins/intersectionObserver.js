@@ -1,7 +1,8 @@
 export default {
   data() {
     return {
-      observer: null
+      observer: null,
+      isInitFetch: true
     };
   },
   watch: {
@@ -18,7 +19,11 @@ export default {
     initIntersectionObserver(cb) {
       const callback = entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !this.allDataRecieved) {
+          if (
+            entry.isIntersecting &&
+            !this.allDataRecieved &&
+            !this.isInitFetch
+          ) {
             console.log("load more");
             cb();
           }
@@ -31,17 +36,17 @@ export default {
       }
     },
     handleResponseWithIntersectionObserver(cb) {
+      this.destroyObserver();
+      this.initIntersectionObserver(cb);
+    },
+    destroyObserver() {
       const target = this.$refs.scrollObserver;
       if (target && this.observer) {
         this.observer.unobserve(target);
       }
-      this.initIntersectionObserver(cb);
     }
   },
   beforeDestroy() {
-    const target = this.$refs.scrollObserver;
-    if (target && this.observer) {
-      this.observer.unobserve(target);
-    }
+    this.destroyObserver();
   }
 };

@@ -24,7 +24,6 @@
         </div>
       </template>
       <div
-        v-if="media.length"
         :class="['buttonWrapper', 'more-functions', { open: opened }]"
         v-click-outside="hide"
       >
@@ -54,7 +53,6 @@
         <div class="openMenuButton" @click="open">
           <span class="status-card on icn-item checkmark styledCheckmark" />
           <span class="filterLabel">{{ getFilterName }}</span>
-          <!-- <img :src="'/static/img/ic-filter-red.svg'" alt="filter" /> -->
         </div>
         <div class="more-functions__dropdown">
           <FilterDropdown
@@ -64,29 +62,6 @@
           />
         </div>
       </div>
-      <template v-else>
-        <div
-          class="b-check-state  b-check-state_watermark watermarkContainer"
-          :class="{ mediaSelected: isFilesLoaded }"
-          v-if="
-            this.$props.private &&
-              user &&
-              user.isPerformer &&
-              user.hasWatermarkVideo
-          "
-        >
-          <label :class="{ disabled: isFilesLoaded }">
-            <input
-              class="is-free-post"
-              type="checkbox"
-              :disabled="isFilesLoaded"
-              v-model="withoutWatermark"
-            />
-            <span class="b-check-state__icon icn-item icn-size_lg"></span>
-            <span class="b-check-state__text">Without watermark</span>
-          </label>
-        </div>
-      </template>
       <div class="profile-content">
         <div class="exploreAllCollectionView">
           <div class="explore">
@@ -223,6 +198,8 @@ export default {
   },
   watch: {
     filterType() {
+      this.destroyObserver();
+      this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });
       this.fetchMedia();
     }
@@ -248,6 +225,7 @@ export default {
           sort: this.getSortOrder
         })
         .then(() => {
+          this.isInitFetch = false;
           this.handleResponseWithIntersectionObserver(this.fetchMedia);
         });
     },
