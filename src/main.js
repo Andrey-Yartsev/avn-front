@@ -38,9 +38,9 @@ VTooltip.enabled = window.innerWidth > 990;
 // import Logger from "js-logger";
 // Logger.useDefaults();
 
-if (process.env.NODE_ENV !== "development") {
-  initSentry(Vue);
-}
+// if (process.env.NODE_ENV !== "development") {
+initSentry(Vue);
+// }
 
 Vue.config.productionTip = false;
 

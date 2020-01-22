@@ -64,6 +64,7 @@ import wsp from "@/ws/wsp";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
 import ColorScheme from "@/mixins/colorScheme";
+import SentryExtra from "@/mixins/sentryExtra";
 import { fromNow } from "@/helpers/datetime";
 
 fromNow("2019-05-03T11:01:12+00:00");
@@ -116,7 +117,7 @@ export default {
     UserBubble,
     GenderFilterMobile
   },
-  mixins: [ColorScheme, BackRouter, FrontUpdate],
+  mixins: [ColorScheme, BackRouter, FrontUpdate, SentryExtra],
   data() {
     return {
       showToast: false,
