@@ -45,6 +45,12 @@
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div class="statusWrapper contentCenter">
+            <span
+              v-if="post.pinned"
+              class="icn-pin icn-item icn-size_md"
+            ></span>
+          </div>
           <div
             class="statusWrapper bottom"
             v-if="post.media.type !== 'processing'"
@@ -71,6 +77,10 @@
               <span v-else class="mediaStatus notActive">
                 Draft
               </span>
+              <span
+                v-if="post.pinned"
+                class="icn-pin icn-item icn-size_md"
+              ></span>
               <span class="mediaStatus viewers">
                 <span class="btn-icon icn-item icn-profile icn-size_lg" />
                 <span class="likes__counter">{{ post.buyCount || 0 }}</span>
@@ -89,6 +99,12 @@
             </div>
           </template>
           <template v-else>
+            <div class="statusWrapper">
+              <span
+                v-if="post.pinned"
+                class="icn-pin icn-item icn-size_md"
+              ></span>
+            </div>
             <div
               class="statusWrapper bottom"
               v-if="post.media.type !== 'processing'"
@@ -343,5 +359,8 @@ export default {
   .locked {
     transform: scale(1);
   }
+}
+.contentCenter {
+  justify-content: center;
 }
 </style>
