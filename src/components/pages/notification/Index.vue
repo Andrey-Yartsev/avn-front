@@ -48,6 +48,7 @@
       </div>
       <div
         class="new-post-toast bg-gradient bg-gradient_standart show unread-box"
+        v-if="unreadCount"
       >
         <span>Unread ({{ unreadCount > 100 ? "+99" : unreadCount }})</span>
         <a href="#" @click.prevent="markAllAsRead">Mark All as Read</a>
