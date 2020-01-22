@@ -5,7 +5,7 @@
   >
     <div class="more-functions__overlay" @click="hide" />
     <div class="more-functions__btn btn-gender" @click="open">
-      <span class="icn-item icn-gender" :class="selectedOption.name" />
+      <span class="icn-item icn-gender" :class="getClassName" />
     </div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
@@ -76,6 +76,11 @@ export default {
         return this.options[0];
       }
       return found;
+    },
+    getClassName() {
+      return this.selectedOption && this.selectedOption.name
+        ? this.selectedOption.name
+        : "";
     }
   },
   methods: {
