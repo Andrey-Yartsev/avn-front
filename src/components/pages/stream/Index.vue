@@ -388,13 +388,14 @@ import Comments from "@/components/common/streamComments/Index";
 import StreamViewers from "@/components/pages/stream/Viewers";
 import { getCookie } from "@/components/pages/stream/debug";
 import moment from "moment";
+import LoadScripts from "@/components/statistics/loadScripts";
 
 export default {
   name: "Stream",
   directives: {
     ClickOutside
   },
-  mixins: [userMixin],
+  mixins: [userMixin, LoadScripts],
   data() {
     return {
       streamVisibility: {},
