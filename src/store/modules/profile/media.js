@@ -29,11 +29,21 @@ const mutations = {
     state.editedMedia = null;
   },
   addMedia(state, newMedias) {
-    state.media = [...state.media, ...newMedias];
+    if (state.media.length) {
+      const filteredMedia = newMedias.filter(item => {
+        const existedMedia = state.media.find(
+          media => media.productId === item.productId
+        );
+        return existedMedia ? false : true;
+      });
+      state.media = [...state.media, ...filteredMedia];
+    } else {
+      state.media = [...newMedias];
+    }
   },
   addMediaItem(state, newMedias) {
     state.media = [...newMedias, ...state.media];
-    state.offset++;
+    // state.offset++;
   },
   updateMedia(state, updatedMedia) {
     state.media = state.media.map(item => {
