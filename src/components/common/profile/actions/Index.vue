@@ -278,7 +278,7 @@ export default {
         this.$refs.subscribeButton.subscription();
         return;
       }
-      this[action]();
+      this[action] && this[action]();
     }
   }
 };
