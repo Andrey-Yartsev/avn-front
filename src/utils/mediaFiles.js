@@ -222,7 +222,8 @@ export const fileUpload = (
       hasWatermarkPhoto,
       hasWatermarkVideo,
       watermarkText,
-      watermarkFile
+      // watermarkFile,
+      watermarkFileUpload
     } = Store.state.auth.user;
 
     if (!withoutWatermark) {
@@ -230,8 +231,10 @@ export const fileUpload = (
         (mediaType === "video" && hasWatermarkVideo) ||
         ((mediaType === "gif" || mediaType === "photo") && hasWatermarkPhoto)
       ) {
-        if (watermarkFile) {
-          formData.append("watermark[imagePath]", watermarkFile);
+        // if (watermarkFile) {
+        //   formData.append("watermark[imagePath]", watermarkFile);
+        if (watermarkFileUpload) {
+          formData.append("watermark[imagePath]", watermarkFileUpload);
         } else {
           formData.append("watermark[text]", watermarkText);
         }
