@@ -321,7 +321,8 @@ export default {
     isDataChanged() {
       return (
         this.$props.post.title !== this.media.title ||
-        this.$props.post.text !== this.media.text ||
+        this.getConvertedText(this.$props.post.text) !==
+          this.getConvertedText(this.media.text) ||
         this.$props.post.pinned !== this.media.pinned ||
         this.$props.post.active !== this.media.active ||
         String(this.$props.post.price) !== String(this.media.price) ||
@@ -406,17 +407,17 @@ export default {
     removePreview() {
       this.media.removeVideoPreview = !this.media.removeVideoPreview;
     },
-    getConvertedText() {
+    getConvertedText(text) {
       const pattern =
         '<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji.+?" data-code="(.+?)"></span></span>';
-      let text = this.post.text.replace(
+      let convertedText = text.replace(
         new RegExp(pattern, "ug"),
         (m, unicode) => {
           return unicode;
         }
       );
-      text = text.replace(/<br \/>/g, "\n");
-      return text.replace(/(<([^>]+)>)/gi, "");
+      convertedText = convertedText.replace(/<br \/>/g, "\n");
+      return convertedText.replace(/(<([^>]+)>)/gi, "");
     },
     initData() {
       const {
@@ -428,7 +429,7 @@ export default {
         media: { thumbs, thumbId }
       } = this.$props.post;
       this.media.title = title;
-      this.media.text = text;
+      this.media.text = this.getConvertedText(text);
       this.media.price = price;
       this.media.active = active;
       this.media.thumbId = thumbId;
