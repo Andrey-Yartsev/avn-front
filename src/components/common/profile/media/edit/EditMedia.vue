@@ -165,13 +165,6 @@
                   <span class="b-check-state__text">Free</span>
                 </label>
               </div>
-              <label for="pinMeida" class="btn-pin" style="margin-left: 10px">
-                <input type="checkbox" v-model="media.pinned" id="pinMeida" />
-                <span class="icn-pin icn-item icn-size_md"></span>
-                <span class="btn-pin__text">
-                  {{ media.pinned ? "Pinned" : "Unpinned" }}
-                </span>
-              </label>
             </div>
 
             <input

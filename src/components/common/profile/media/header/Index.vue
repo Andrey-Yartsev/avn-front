@@ -73,12 +73,8 @@
           <span class="icn-item icn-block" />
           Not active
         </span>
-        <span
-          v-tooltip="'Copy link'"
-          class="icn-item icon-link"
-          @click="copyHref"
-        ></span>
         <div
+          v-if="isAuthor"
           class="more-functions options"
           :class="{ open: opened }"
           v-click-outside="hide"
@@ -154,14 +150,6 @@ export default {
     },
     postUser() {
       return this.post.author;
-    },
-    href() {
-      const { protocol, port, hostname } = window.location;
-      return (
-        `${protocol}//${hostname}` +
-        (port ? ":" + port : "") +
-        `/media/${this.postId}`
-      );
     }
   },
   methods: {
@@ -184,29 +172,6 @@ export default {
     },
     hideBubble() {
       Bubble.hide();
-    },
-    // editPost() {
-    //   this.$store.commit("profile/media/startEditMedia", this.postId, {
-    //     root: true
-    //   });
-
-    //   this.$store.dispatch("modal/show", {
-    //     name: "editMedia",
-    //     data: {
-    //       postId: this.postId
-    //     }
-    //   });
-    // },
-    copyHref() {
-      this.$copyText(this.href).then(() => {
-        this.$store.dispatch(
-          "global/flashToast",
-          { text: "Link copied!" },
-          {
-            root: true
-          }
-        );
-      });
     }
   },
   mounted() {

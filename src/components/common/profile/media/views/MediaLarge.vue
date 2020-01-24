@@ -333,5 +333,6 @@ export default {
 }
 .withMinHeight {
   min-height: auto;
+  overflow: inherit;
 }
 </style>

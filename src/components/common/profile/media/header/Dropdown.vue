@@ -9,27 +9,47 @@
           <span class="more-functions__option">Details</span>
         </button>
       </li>
-      <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
+      <li class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          :href="'/post/edit/' + post.id"
+          @click.prevent="copyLink"
+        >
+          <span class="more-functions__option">Copy link to video</span>
+        </a>
+      </li>
+      <li class="more-functions__item">
         <a
           class="edit more-functions__link"
           type="button"
           :href="'/post/edit/' + post.id"
           @click.prevent="editPost"
         >
-          <span class="more-functions__option">Edit</span>
+          <span class="more-functions__option">Edit video</span>
         </a>
       </li>
-      <template v-if="isOwner(userId)">
-        <li class="more-functions__item">
-          <button
-            class="deletePost more-functions__link"
-            type="button"
-            @click="deletePost"
-          >
-            <span class="more-functions__option">Delete</span>
-          </button>
-        </li>
-      </template>
+      <li class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          :href="'/post/edit/' + post.id"
+          @click.prevent="pinToggle"
+        >
+          <span class="more-functions__option">{{
+            post.pinned ? "Pinned. Unpin video" : "Pin video"
+          }}</span>
+        </a>
+      </li>
+      <li class="more-functions__item">
+        <button
+          class="deletePost more-functions__link"
+          type="button"
+          @click="deletePost"
+        >
+          <span class="more-functions__option">Delete video</span>
+        </button>
+      </li>
     </ul>
   </div>
 </template>
@@ -69,6 +89,62 @@ export default {
     }
   },
   methods: {
+    copyLink() {
+      this.hide();
+      this.$copyText(this.getVideoUrl()).then(() => {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: "Link copied!" },
+          {
+            root: true
+          }
+        );
+      });
+    },
+    getVideoUrl() {
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/media/${this.post.productId}`
+      );
+    },
+    pinToggle() {
+      this.hide();
+      this.$store
+        .dispatch("profile/media/updateMedia", this.getMediaData(), {
+          root: true
+        })
+        .then(() => {
+          console.log("updated");
+        });
+    },
+    getMediaData() {
+      const {
+        active,
+        title,
+        text,
+        price,
+        free,
+        thumbId,
+        removeVideoPreview,
+        pinned
+      } = this.$props.post;
+      const data = {
+        media: {
+          active,
+          title,
+          text,
+          price,
+          free,
+          thumbId,
+          removeVideoPreview,
+          pinned: !pinned
+        },
+        productId: this.$props.post.productId
+      };
+      return data;
+    },
     async deletePost() {
       this.hide();
       this.$store
