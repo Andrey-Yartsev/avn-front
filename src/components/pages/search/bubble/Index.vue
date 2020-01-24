@@ -95,7 +95,7 @@ export default {
 
   computed: {
     throttledSearch() {
-      return throttle(1500, this.search);
+      return throttle(500, false, this.search, false);
     },
     loading() {
       return this.$store.state.search.bubble.searchLoading;
