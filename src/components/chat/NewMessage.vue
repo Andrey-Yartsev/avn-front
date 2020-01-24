@@ -421,13 +421,11 @@ export default {
       }
       if (this.searchId) {
         clearTimeout(this.searchId);
-        this.searchId = setTimeout(() => {
-          this.$store.dispatch("chat/searchUsers", this.searchQuery);
-          this.searchId = 0;
-        }, 300);
-      } else {
-        this.$store.dispatch("chat/searchUsers", this.searchQuery);
       }
+      this.searchId = setTimeout(() => {
+        this.$store.dispatch("chat/searchUsers", this.searchQuery);
+        this.searchId = 0;
+      }, 300);
     },
     back() {
       this.$store.commit("chat/setSecondScreen", false);
@@ -477,7 +475,6 @@ export default {
     this.$store.dispatch("chat/fetchAllUsersCount", {});
     this.search();
   },
-
   beforeDestroy() {
     this.$store.commit("chat/setSecondScreen", false);
   }
