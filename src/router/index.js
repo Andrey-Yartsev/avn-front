@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Auth from "./middlewares/auth";
+import Store from "@/store";
 import {
   authRoutes,
   profileRoutes,
@@ -148,6 +149,18 @@ rtr.onError(error => {
     console.log("catch chunk error");
     window.location.reload();
   }
+});
+
+let routeLoadId = 0;
+
+rtr.beforeEach((to, from, next) => {
+  Store.commit("route/setLoadingName", to.name);
+  next();
+});
+
+rtr.afterEach(() => {
+  clearTimeout(routeLoadId);
+  Store.commit("route/setLoadingName", null);
 });
 
 export default rtr;

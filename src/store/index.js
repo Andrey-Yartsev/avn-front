@@ -62,6 +62,7 @@ import gender from "@/store/modules/gender";
 import online from "@/store/modules/online";
 import obs from "@/store/modules/obs";
 import version from "@/store/modules/version";
+import route from "@/store/modules/route";
 
 Vue.use(Vuex);
 
@@ -129,7 +130,8 @@ const store = new Vuex.Store({
     gender,
     online,
     obs,
-    version
+    version,
+    route
   }
 });
 

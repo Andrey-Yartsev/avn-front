@@ -9,27 +9,41 @@
     <router-link v-else class="menu-item-home header-nav__item" to="/" exact
       ><span>Home</span></router-link
     >
-    <router-link class="menu-item-explore header-nav__item" to="/explore"
+
+    <router-link
+      class="menu-item-explore header-nav__item"
+      :class="{
+        disabled: routeIsLoading('Explore')
+      }"
+      to="/explore"
       ><span>Explore</span></router-link
     >
 
     <router-link
       to="/notifications"
       class="menu-item-notifications header-nav__item hidden-desktop"
-      :class="{ unread: user && user.hasNotifications }"
+      :class="{
+        unread: user && user.hasNotifications
+      }"
       @click.prevent="goToModalRoute('/notifications')"
       ><span>Notifications</span></router-link
     >
     <router-link
       class="menu-item-messages header-nav__item showChat hidden-mobile"
       to="/chat"
-      :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
+      :class="{
+        unread: user.hasMessages,
+        active: !!$route.meta.chat
+      }"
       ><span>Messages</span></router-link
     >
     <router-link
       class="menu-item-messages header-nav__item hidden-desktop"
       to="/chat"
-      :class="{ unread: user.hasMessages, active: !!$route.meta.chat }"
+      :class="{
+        unread: user.hasMessages,
+        active: !!$route.meta.chat
+      }"
       v-if="$mq === 'mobile' && user"
     >
       <span>Messages</span>
@@ -66,6 +80,9 @@ export default {
         e.preventDefault();
         this.$root.$emit("homePageReload");
       }
+    },
+    routeIsLoading(name) {
+      return this.$store.state.route.loadingName === name;
     }
   }
 };

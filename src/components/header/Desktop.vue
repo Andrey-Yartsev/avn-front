@@ -23,7 +23,13 @@
           <span>Home</span>
         </router-link>
       </template>
-      <router-link class="menu-item-explore header-nav__item" to="/explore">
+      <router-link
+        class="menu-item-explore header-nav__item"
+        :class="{
+          disabled: routeIsLoading('Explore')
+        }"
+        to="/explore"
+      >
         <span>Explore</span>
       </router-link>
       <a
@@ -104,6 +110,9 @@ export default {
       } else {
         this.goToModalRoute("/notifications");
       }
+    },
+    routeIsLoading(name) {
+      return this.$store.state.route.loadingName === name;
     }
   },
   watch: {

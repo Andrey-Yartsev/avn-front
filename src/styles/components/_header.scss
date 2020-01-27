@@ -1908,3 +1908,36 @@
   align-items: center;
   align-content: center;
 }
+
+/* Disable menu item */
+.header-nav {
+  &__item {
+    position: relative;
+
+    &.disabled {
+      opacity: 0.5;
+    }
+
+    &:after {
+      border-bottom: 2px solid $secondary-color;
+      font-size: 1px;
+      content: " ";
+      height: 0;
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      transition: width 2s;
+    }
+
+    &.disabled {
+      &:after {
+        width: 100%;
+      }
+    }
+
+    &.changing {
+      border-color: #555;
+    }
+  }
+}
