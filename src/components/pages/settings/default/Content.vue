@@ -332,9 +332,9 @@
 import ColorSelect from "./ColorSelect";
 import Common from "../common";
 import TextareaAutosize from "@/components/common/TextareaAutosize";
-import moment from "moment-timezone";
 import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
+import timezones from "@/utils/timezones";
 
 export default {
   name: "ProfileSettingsContent",
@@ -401,7 +401,7 @@ export default {
       return this.localUser.subscribePrice;
     },
     tz() {
-      return moment.tz.names();
+      return timezones;
     },
     setMaxPrice() {
       return this.user.subscribePrice > 50 ? null : 50;

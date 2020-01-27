@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = {
   runtimeCompiler: true,
   devServer: {
@@ -10,7 +12,8 @@ module.exports = {
         output: {
           filename: "js/[name].[chunkhash:8].js",
           chunkFilename: "js/[name].[chunkhash:8].js"
-        }
+        },
+        plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
       };
     }
   }
