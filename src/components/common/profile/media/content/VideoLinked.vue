@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     src() {
-      return this.media.thumb.source;
+      return this.media.preview.source;
     }
   }
 };
