@@ -407,7 +407,7 @@ export default {
 
         if (isError) {
           this.$store.dispatch("global/setError", {
-            message: "An error was happened"
+            message: "An error occurred"
           });
           this.close();
         }
