@@ -75,8 +75,8 @@
     .more-functions__btn {
 
       @include media-breakpoint-up($desktop-breakpoint) {
-        flex: 0 0 60px;
-        width: 60px;
+        flex: 0 0 58px;
+        width: 58px;
         padding: 0;
       }
     }
@@ -1267,8 +1267,8 @@
 
   @include media-breakpoint-up($desktop-breakpoint) {
     flex-shrink: 1;
-    flex-basis: 60px;
-    width: 60px;
+    flex-basis: 58px;
+    width: 58px;
     padding-top: 12px;
   }
 
