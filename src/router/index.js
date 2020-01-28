@@ -10,8 +10,7 @@ import {
   mediaRoutes,
   settingsRoutes,
   exploreRoutes,
-  staticRoutes,
-  awardsRoutes
+  staticRoutes
 } from "./modules";
 
 Vue.use(Router);
@@ -133,7 +132,6 @@ const routes = [
   ...staticRoutes,
   ...postRoutes,
   ...mediaRoutes,
-  ...awardsRoutes,
   ...profileRoutes
 ];
 

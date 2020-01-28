@@ -28,14 +28,6 @@
             <div class="block-indicator" v-if="user && profile.isBlocked">
               <span class="icn-item icn-block"></span>
             </div>
-            <button
-              @click="clickVoteHandler"
-              class="btn vote-btn"
-              v-if="showVoteButton"
-            >
-              <span class="icn-award icn-item icn-size_lg" />
-              Vote 4 Me!
-            </button>
           </div>
           <span class="user-login reset-ml">
             <a>{{ profile.username }}</a>
@@ -249,19 +241,11 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
-import VotingMixin from "@/mixins/voting";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [
-    InfinityScrollMixin,
-    UserMixin,
-    FileUpload,
-    Wsp,
-    Visibility,
-    VotingMixin
-  ],
+  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp, Visibility],
 
   components: {
     Loader,

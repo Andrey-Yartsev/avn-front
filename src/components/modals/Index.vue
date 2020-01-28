@@ -45,7 +45,6 @@ import EditPostModal from "@/components/post/edit/Modal";
 import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
-import VotingModal from "@/components/pages/awards/secondTour/VotingModal";
 
 export default {
   components: {
@@ -80,8 +79,7 @@ export default {
     EditPostModal,
     AddMediaModal,
     EditMediaModal,
-    MediaPayConfirmModal,
-    VotingModal
+    MediaPayConfirmModal
   },
   props: {
     hasLayout: {

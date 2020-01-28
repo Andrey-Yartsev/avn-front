@@ -130,10 +130,6 @@ const modalTypes = [
   {
     storeName: "mediaPayConfirm",
     layoutOnlyModal: true
-  },
-  {
-    storeName: "voting",
-    layoutOnlyModal: true
   }
 ];
 
