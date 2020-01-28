@@ -10,7 +10,7 @@
       <div class="row">
         <div
           class="content-col flex-basis-auto"
-          :class="{ 'new-user': newUser }"
+          :class="{ 'new-user': newUser, destopView: $mq === 'desktop' }"
         >
           <div class="no-padding rounded-container shadow-block">
             <AddPost
@@ -66,11 +66,8 @@
               </div>
             </div>
           </div>
-          <div
-            class="loader-infinity"
-            v-if="infinityScrollLoading && posts.length"
-          >
-            <Loader :fullscreen="false" :inline="true" :small="true" />
+          <div class="loader-infinity" v-if="infinityScrollLoading">
+            <Loader :fullscreen="false" :inline="true" />
           </div>
         </div>
         <div
