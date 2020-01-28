@@ -54,7 +54,6 @@
 
 <script>
 import UserMixin from "@/mixins/user";
-import VotingMixin from "@/mixins/voting";
 import ProfileBg from "@/mixins/profileBg";
 import Loader from "@/components/common/Loader";
 
@@ -64,7 +63,7 @@ const getScrollbarWidth = () => {
 
 export default {
   name: "ProfileBackground",
-  mixins: [UserMixin, ProfileBg, VotingMixin],
+  mixins: [UserMixin, ProfileBg],
   props: {
     profile: {
       type: Object,
