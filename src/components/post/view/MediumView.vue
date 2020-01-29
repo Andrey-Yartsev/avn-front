@@ -34,7 +34,7 @@
           </button>
         </div>
         <Media
-          v-if="medias.length"
+          v-if="medias && medias.length"
           :medias="medias"
           :shouldHasLink="!delayedPost"
           :post="post"
@@ -142,7 +142,7 @@ export default {
       return this.from;
     },
     medias() {
-      if (!this.post.media.length) {
+      if (!this.post.media || !this.post.media.length) {
         return [];
       }
       return this.post.media;
