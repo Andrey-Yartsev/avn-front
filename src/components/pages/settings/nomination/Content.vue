@@ -18,7 +18,7 @@
           <div class="inner inner_block">
             <div class="logo text-centered">
               <img
-                :src="'/static/img/avnawards.png'"
+                :src="process.env.VUE_APP_CDN_PATH + 'static/img/avnawards.png'"
                 alt=""
                 class="logo-awards"
                 v-if="!isGay"

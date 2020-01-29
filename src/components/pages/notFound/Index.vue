@@ -1,7 +1,11 @@
 <template>
   <div class="error404View error404">
     <div class="container">
-      <img src="/static/img/404-image.svg" alt="" class="error404__img" />
+      <img
+        :src="process.env.VUE_APP_CDN_PATH + 'static/img/404-image.svg'"
+        alt=""
+        class="error404__img"
+      />
       <h3 class="error404__title">Page is not found</h3>
       <p class="error404__text">
         The link you followed may be broken, or the page may have been removed.
