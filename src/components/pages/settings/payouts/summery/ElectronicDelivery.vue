@@ -1,5 +1,5 @@
 <template>
-  <div class="payouts-legal-done">
+  <div v-if="href" class="payouts-legal-done">
     <div class="PayoutsLegalDoneView">
       <div class="form-title tweet-posts-block border-top">
         <div class="inner">
@@ -23,7 +23,6 @@
               <button
                 type="button"
                 class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter "
-                @click="() => {}"
               >
                 Download e-Deliver 1099 form
               </button>
@@ -53,6 +52,7 @@ export default {
         data[k] = this.localLegal[k];
       });
       data.eDelivery = value;
+      data.eDeliveryUrl = this.localLegal.eDeliveryUrl;
 
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (r.error) {
@@ -70,10 +70,10 @@ export default {
       return this.$store.state.payouts.legal.fetchResult;
     },
     href() {
-      return "#";
+      return this.$store.state.payouts.legal.fetchResult.eDeliveryUrl;
     },
     isDownloadEnabled() {
-      return true;
+      return this.eDelivery;
     }
   },
   methods: {
@@ -83,6 +83,7 @@ export default {
   },
   mounted() {
     this.localLegal = this._clone(this.legal);
+    this.eDelivery = this.legal.eDelivery || false;
   }
 };
 </script>
