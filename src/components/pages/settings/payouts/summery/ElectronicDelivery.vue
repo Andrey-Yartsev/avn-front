@@ -10,9 +10,10 @@
             <input
               type="checkbox"
               name="isStreamsTweet"
-              value="false"
+              :value="eDelivery"
               :disabled="saving"
               v-model="eDelivery"
+              @change="change"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -44,27 +45,6 @@ export default {
       localLegal: null
     };
   },
-  watch: {
-    eDelivery(value) {
-      this.saving = true;
-      const data = {};
-      ["address", "city", "postalCode", "state"].forEach(k => {
-        data[k] = this.localLegal[k];
-      });
-      data.eDelivery = value;
-      data.eDeliveryUrl = this.localLegal.eDeliveryUrl;
-
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
-        if (r.error) {
-          return;
-        }
-        this.$store.dispatch("global/flashToast", {
-          text: "Electronic delivery status updated successfully"
-        });
-        this.saving = false;
-      });
-    }
-  },
   computed: {
     legal() {
       return this.$store.state.payouts.legal.fetchResult;
@@ -79,11 +59,39 @@ export default {
   methods: {
     _clone(o) {
       return JSON.parse(JSON.stringify(o));
+    },
+    change(e) {
+      this.sendData(!this.str2bool(e.target.value));
+    },
+    str2bool(value) {
+      if (value && typeof value === "string") {
+        if (value.toLowerCase() === "true") return true;
+        if (value.toLowerCase() === "false") return false;
+      }
+      return value;
+    },
+    sendData(value) {
+      this.saving = true;
+      const data = {};
+      ["address", "city", "postalCode", "state"].forEach(k => {
+        data[k] = this.localLegal[k];
+      });
+      data.eDelivery = value;
+      data.eDeliveryUrl = this.localLegal.eDeliveryUrl;
+      this.$store.dispatch("payouts/legal/save", data).then(r => {
+        if (r.error) {
+          return;
+        }
+        this.$store.dispatch("global/flashToast", {
+          text: "Electronic delivery status updated successfully"
+        });
+        this.saving = false;
+      });
     }
   },
   mounted() {
     this.localLegal = this._clone(this.legal);
-    this.eDelivery = this.legal.eDelivery || false;
+    this.eDelivery = this.legal.eDelivery;
   }
 };
 </script>
