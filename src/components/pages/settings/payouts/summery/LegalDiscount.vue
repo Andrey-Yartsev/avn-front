@@ -88,6 +88,20 @@
               </label>
             </span>
           </form>
+          <div
+            v-if="isEnabled"
+            class="buttonWrapper"
+            :class="{ withMargin: this.$mq === 'desktop' }"
+          >
+            <button
+              type="button"
+              class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+              @click="informSubscribers"
+              :disabled="informed"
+            >
+              Inform expired subscribers
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +132,8 @@ export default {
         }
       },
       saving: false,
-      isEnabled: false
+      isEnabled: false,
+      informed: false
     };
   },
   computed: {
@@ -187,6 +202,7 @@ export default {
               to: ""
             }
           };
+          this.informed = false;
         }
         this.saving = false;
       });
@@ -209,6 +225,30 @@ export default {
     },
     closeDatepicker() {
       document.body.classList.remove("open-timepicker");
+    },
+    async informSubscribers() {
+      const body = {
+        price: 0,
+        text:
+          "Get exclusive subscription price for $" +
+          this.currentSubscribtionPrice +
+          " only till " +
+          this.getTime,
+        recipients: "expired"
+      };
+      try {
+        await this.$store.dispatch("chat/sendGroupMessage", body);
+        this.informed = true;
+        this.$store.commit("global/toastShowTrigger", {
+          text: "Group message has sent",
+          type: "success"
+        });
+      } catch (err) {
+        this.$store.commit("global/toastShowTrigger", {
+          text: err.message,
+          type: "warning"
+        });
+      }
     }
   },
   created() {
@@ -231,5 +271,14 @@ export default {
 }
 .border-top {
   padding-top: 0;
+}
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  &.withMargin {
+    margin-right: -11.5%;
+  }
 }
 </style>
