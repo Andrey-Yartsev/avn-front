@@ -27,27 +27,41 @@
                     min="0"
                     :max="100"
                     step="0.01"
+                    :disabled="isEnabled"
                     name="subscribeDiscount"
                     v-model="discount.amount"
                   />
                 </span>
               </span>
             </label>
-            <label class="form-group-inner subscription">
-              <span class="label">Expiration date</span>
-              <span class="subscription__field ">
-                <span class="form-field">
-                  <input
-                    class="field-gap_currency field-gap_timeunit"
-                    type="text"
-                    disabled
-                    name="subscribeExpiration"
-                    :value="getTime"
-                  />
-                </span>
-              </span>
+            <label
+              v-if="discount.amount"
+              class="form-group-inner subscription"
+              :class="{ 'mobile-view': this.$mq === 'mobile' }"
+            >
+              <span class="label">Computed price</span>
+              <span class="label_computedDiscount" v-if="isDiscountInputCorrect"
+                >$ {{ getComputedPrice }}</span
+              >
+              <span v-else class="label_computedDiscount-error"
+                >Please, enter the correct discount value</span
+              >
             </label>
-            <div class="post-datetime">
+            <label
+              class="form-group-inner subscription"
+              :class="{ 'mobile-view': this.$mq === 'mobile' }"
+            >
+              <span class="label">Expiration date</span>
+              <span v-if="discount.period.to" class="label_computedDiscount">
+                {{ getTime }}</span
+              >
+              <span class="" v-else>Date not selected</span>
+            </label>
+            <div
+              class="post-datetime"
+              :class="{ 'post-datetime-mobile': this.$mq === 'mobile' }"
+            >
+              <div v-if="isEnabled" class="blocker" />
               <Datetime
                 :inputId="`post-datetime__switcher_${'modal'}`"
                 class="post-datetime__switcher"
@@ -69,7 +83,7 @@
             </div>
             <span
               class="form-group-inner subscription"
-              style="align-items: center"
+              :class="{ 'mobile-view': this.$mq === 'mobile' }"
             >
               <span class="label">Discount enabled</span>
               <label class="toggle-element">
@@ -152,7 +166,23 @@ export default {
       return moment(this.discount.period.to).format("MMMM Do YYYY, h:mm:ss a");
     },
     isSwitcherDisabled() {
-      return !this.discount.amount || !this.discount.period.to;
+      return !this.isDiscountInputCorrect || !this.discount.period.to;
+    },
+    isDiscountInputCorrect() {
+      if (
+        !this.discount.amount ||
+        !parseFloat(this.discount.amount) ||
+        parseFloat(this.discount.amount) >= 100
+      ) {
+        return false;
+      }
+      return true;
+    },
+    getComputedPrice() {
+      return (
+        this.currentSubscribtionPrice -
+        (this.currentSubscribtionPrice / 100) * this.discount.amount
+      ).toFixed(2);
     }
   },
   methods: {
@@ -230,9 +260,9 @@ export default {
       const body = {
         price: 0,
         text:
-          "Get exclusive subscription price for $" +
-          this.currentSubscribtionPrice +
-          " only till " +
+          "Get exclusive subscription price for <b>$" +
+          this.getComputedPrice +
+          "</b> only till " +
           this.getTime,
         recipients: "expired"
       };
@@ -280,5 +310,39 @@ export default {
   &.withMargin {
     margin-right: -11.5%;
   }
+}
+.label_computedDiscount {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2196f3;
+}
+.label_computedDiscount-error {
+  color: red;
+}
+.subscription {
+  align-items: center;
+}
+.mobile-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .label {
+    padding: 0;
+  }
+}
+.post-datetime-mobile {
+  padding: 5px 0;
+  justify-content: center;
+}
+.blocker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 100;
 }
 </style>
