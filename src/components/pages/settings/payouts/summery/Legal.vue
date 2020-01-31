@@ -96,12 +96,6 @@
                   </div>
                 </span>
               </label>
-              <div v-if="!discount" class="form-group form-group_with-label">
-                <button @click="discount = true" class="btn-address-edit">
-                  Discount
-                </button>
-              </div>
-              <LegalDiscount v-else @cancel="discount = false" />
             </div>
             <div class="form-group-btn form-group-btn_reset-pb-mob">
               <button
@@ -127,13 +121,12 @@ import moment from "moment";
 import Common from "../../common";
 import PayoutsCommon from "../common";
 import LegalEdit from "./LegalEdit";
-import LegalDiscount from "./LegalDiscount";
 import Form from "@/mixins/form";
 
 export default {
   name: "PayoutSettingsSummeryLegal",
   mixins: [Common, PayoutsCommon, Form],
-  components: { LegalEdit, LegalDiscount },
+  components: { LegalEdit },
   data() {
     return {
       edit: false,

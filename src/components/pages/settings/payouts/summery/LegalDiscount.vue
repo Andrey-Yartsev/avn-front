@@ -1,89 +1,96 @@
 <template>
-  <div class="border-top border-top_reset-bt-desk">
-    <div class="form-title form-title_psides-reset">
-      <div class="inner">
-        <div class="semi-transparent">
-          Subscription Discount
+  <div class="payouts-bank-done">
+    <div id="is_paid_subscription__wrapper" class="shadow-block border-top">
+      <div class="container">
+        <div class="form-group form-group_with-label">
+          <div
+            class="form-title"
+            :class="{ 'form-title_psides-reset': this.$mq === 'mobile' }"
+          >
+            <div class="inner">
+              <div class="semi-transparent">
+                Subscription Discount
+              </div>
+            </div>
+          </div>
+          <form class="payouts-legal-form" @submit.stop.prevent="save">
+            <label class="form-group-inner subscription">
+              <span class="label">Discount</span>
+              <span class="subscription__field field-symbol-percentage">
+                <span class="form-field">
+                  <span class="subscription__per-month"
+                    >from ${{ currentSubscribtionPrice }}</span
+                  >
+                  <input
+                    class="field-gap_currency field-gap_timeunit"
+                    type="number"
+                    min="0"
+                    :max="100"
+                    step="0.01"
+                    name="subscribeDiscount"
+                    v-model="discount.amount"
+                  />
+                </span>
+              </span>
+            </label>
+            <label class="form-group-inner subscription">
+              <span class="label">Expiration date</span>
+              <span class="subscription__field ">
+                <span class="form-field">
+                  <input
+                    class="field-gap_currency field-gap_timeunit"
+                    type="text"
+                    disabled
+                    name="subscribeExpiration"
+                    :value="getTime"
+                  />
+                </span>
+              </span>
+            </label>
+            <div class="post-datetime">
+              <Datetime
+                :inputId="`post-datetime__switcher_${'modal'}`"
+                class="post-datetime__switcher"
+                type="datetime"
+                v-model="discount.period.to"
+                input-class="post-datetime__input"
+                use12-hour
+                :min-datetime="minDate"
+                @close="closeDatepicker"
+                :phrases="{ ok: 'Set', cancel: 'Cancel' }"
+              />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+                @click="openDatepicker"
+              ></span>
+              <span>
+                Set date
+              </span>
+            </div>
+            <span
+              class="form-group-inner subscription"
+              style="align-items: center"
+            >
+              <span class="label">Discount enabled</span>
+              <label class="toggle-element">
+                <input
+                  type="checkbox"
+                  name="isStreamsTweet"
+                  :disabled="isSwitcherDisabled"
+                  v-model="isEnabled"
+                  :value="isEnabled"
+                  @change="change"
+                />
+                <span
+                  class="toggle-element_switcher"
+                  :class="{ disabled: isSwitcherDisabled }"
+                />
+              </label>
+            </span>
+          </form>
         </div>
-        <button @click="$emit('cancel')">
-          Cancel
-        </button>
       </div>
     </div>
-    <form class="payouts-legal-form" @submit.stop.prevent="save">
-      <div class="form-group form-group_with-label">
-        <label class="form-group-inner subscription">
-          <span class="label">Discount</span>
-          <span class="subscription__field field-symbol-percentage">
-            <span class="form-field">
-              <span class="subscription__per-month"
-                >from ${{ currentSubscribtionPrice }}</span
-              >
-              <input
-                class="field-gap_currency field-gap_timeunit"
-                type="number"
-                min="0"
-                :max="100"
-                step="0.01"
-                name="subscribeDiscount"
-                v-model="discount.amount"
-              />
-            </span>
-          </span>
-        </label>
-      </div>
-      <div class="form-group form-group_with-label" style="padding-bottom: 0">
-        <label class="form-group-inner subscription">
-          <span class="label">Expiration date</span>
-          <span class="subscription__field ">
-            <span class="form-field">
-              <input
-                class="field-gap_currency field-gap_timeunit"
-                type="text"
-                disabled
-                name="subscribeExpiration"
-                :value="getTime"
-              />
-            </span>
-          </span>
-        </label>
-      </div>
-      <div class="post-datetime">
-        <Datetime
-          :inputId="`post-datetime__switcher_${'modal'}`"
-          class="post-datetime__switcher"
-          type="datetime"
-          v-model="discount.period.to"
-          input-class="post-datetime__input"
-          use12-hour
-          :min-datetime="minDate"
-          @close="closeDatepicker"
-          :phrases="{ ok: 'Set', cancel: 'Cancel' }"
-        />
-        <span
-          class="post-datetime__icn icn-item icn-calendar icn-size_lg"
-          @click="openDatepicker"
-        ></span>
-        <span>
-          Set date
-        </span>
-      </div>
-      <div class="form-group form-group_with-label">
-        <span class="form-group-inner subscription" style="align-items: center">
-          <span class="label">Enable discount</span>
-          <label class="toggle-element"
-            ><input
-              type="checkbox"
-              name="isStreamsTweet"
-              :disabled="isSwitcherDisabled"
-              v-model="isEnabled"/><span
-              class="toggle-element_switcher"
-              :class="{ disabled: isSwitcherDisabled }"
-            ></span
-          ></label>
-        </span>
-      </div>
-    </form>
   </div>
 </template>
 
@@ -103,7 +110,7 @@ export default {
     return {
       discount: {
         target: "subscription",
-        type: "fixed",
+        type: "percent",
         amount: "",
         period: {
           from: "",
@@ -134,23 +141,54 @@ export default {
     }
   },
   methods: {
-    save() {
+    str2bool(value) {
+      if (value && typeof value === "string") {
+        if (value.toLowerCase() === "true") return true;
+        if (value.toLowerCase() === "false") return false;
+      }
+      return value;
+    },
+    change(event) {
+      const value = this.str2bool(event.target.value);
+      this.$nextTick(() => {
+        this.save(value);
+      });
+    },
+    save(disable) {
       this.saving = true;
 
-      const data = {};
-      ["address", "city", "postalCode", "state"].forEach(k => {
-        data[k] = this.localLegal[k];
-      });
-
-      this.$store.dispatch("payouts/legal/save", data).then(r => {
-        if (r.error) {
-          return;
+      const data = { ...this.$store.state.auth.user };
+      if (disable) {
+        data.discount = {
+          ...this.discount,
+          amount: "",
+          period: {
+            from: "",
+            to: ""
+          }
+        };
+      } else {
+        data.discount = {
+          ...this.discount,
+          period: {
+            ...this.discount.period,
+            from: this.discount.period.from || new Date().toISOString()
+          }
+        };
+      }
+      this.$store.dispatch("profile/update", data).then(() => {
+        if (disable) {
+          this.discount = {
+            target: "subscription",
+            type: "percent",
+            amount: "",
+            period: {
+              from: "",
+              to: ""
+            }
+          };
         }
-        this.$store.dispatch("global/flashToast", {
-          text: "Personal info saved successfully"
-        });
         this.saving = false;
-        this.$emit("cancel");
       });
     },
     init() {
@@ -181,12 +219,17 @@ export default {
 
 <style lang="scss" scoped>
 .post-datetime {
-  padding-right: 11.5%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 .disabled {
   opacity: 0.5;
+}
+.form-title {
+  padding-right: 0;
+}
+.border-top {
+  padding-top: 0;
 }
 </style>

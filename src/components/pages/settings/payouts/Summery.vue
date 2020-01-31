@@ -2,6 +2,7 @@
   <div>
     <template v-if="!user.hideBanking">
       <Legal />
+      <LegalDiscount />
       <Bank />
     </template>
     <!-- <ElectroniDelivery /> -->
@@ -13,6 +14,7 @@
 
 <script>
 import Legal from "./summery/Legal";
+import LegalDiscount from "./summery/LegalDiscount";
 import Bank from "./summery/Bank";
 import Balances from "../common/money/Balances";
 import Requests from "../common/money/Requests";
@@ -30,8 +32,8 @@ export default {
     Bank,
     Balances,
     Requests,
-    Transactions
-    // ElectroniDelivery
+    Transactions,
+    LegalDiscount
   }
 };
 </script>
