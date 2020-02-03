@@ -166,7 +166,12 @@ export default {
       return moment(this.discount.period.to).format("MMMM Do YYYY, h:mm:ss a");
     },
     isSwitcherDisabled() {
-      return !this.isDiscountInputCorrect || !this.discount.period.to;
+      return (
+        !this.isDiscountInputCorrect ||
+        !this.discount.period.to ||
+        (moment(this.discount.period.to).valueOf() < Date.now() &&
+          !this.isEnabled)
+      );
     },
     isDiscountInputCorrect() {
       if (
@@ -204,7 +209,10 @@ export default {
 
       const data = { ...this.$store.state.auth.user };
       if (disable) {
-        data.discount.isActive = false;
+        data.discount = {
+          ...this.discount,
+          isActive: false
+        };
       } else {
         data.discount = {
           ...this.discount,
@@ -217,15 +225,6 @@ export default {
       }
       this.$store.dispatch("profile/update", data).then(() => {
         if (disable) {
-          //   this.discount = {
-          //     target: "subscription",
-          //     type: "percent",
-          //     amount: "",
-          //     period: {
-          //       from: "",
-          //       to: ""
-          //     }
-          //   };
           this.informed = false;
         }
         this.saving = false;
