@@ -204,17 +204,11 @@ export default {
 
       const data = { ...this.$store.state.auth.user };
       if (disable) {
-        data.discount = {
-          ...this.discount,
-          amount: "",
-          period: {
-            from: "",
-            to: ""
-          }
-        };
+        data.discount.isActive = false;
       } else {
         data.discount = {
           ...this.discount,
+          isActive: true,
           period: {
             ...this.discount.period,
             from: this.discount.period.from || new Date().toISOString()
@@ -223,15 +217,15 @@ export default {
       }
       this.$store.dispatch("profile/update", data).then(() => {
         if (disable) {
-          this.discount = {
-            target: "subscription",
-            type: "percent",
-            amount: "",
-            period: {
-              from: "",
-              to: ""
-            }
-          };
+          //   this.discount = {
+          //     target: "subscription",
+          //     type: "percent",
+          //     amount: "",
+          //     period: {
+          //       from: "",
+          //       to: ""
+          //     }
+          //   };
           this.informed = false;
         }
         this.saving = false;
@@ -243,8 +237,10 @@ export default {
       }
       const {
         amount,
-        period: { from, to }
+        period: { from, to },
+        isActive
       } = this.$store.state.auth.user.discount;
+      this.isEnabled = isActive;
       this.discount.amount = amount;
       this.discount.period.from = from;
       this.discount.period.to = to;
