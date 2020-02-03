@@ -19,10 +19,7 @@
       class="dropArea"
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
-      <img
-        :src="process.env.VUE_APP_CDN_PATH + 'static/img/ic-drop-files.svg'"
-        alt="drop area folder"
-      />
+      <img src="/static/img/ic-drop-files.svg" alt="drop area folder" />
       Drop video file(s) here
     </div>
     <div class="upload">
