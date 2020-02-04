@@ -20,14 +20,13 @@
         </div>
         <div v-if="isDownloadEnabled" class="container">
           <div class="form-group-inner form-group-title downloadFormContainer">
-            <a :href="href" download>
-              <button
-                type="button"
-                class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter "
-              >
-                Download e-Deliver 1099 form
-              </button>
-            </a>
+            <button
+              type="button"
+              class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter "
+              @click="getPdf"
+            >
+              Open e-Deliver 1099 form
+            </button>
           </div>
         </div>
       </div>
@@ -87,6 +86,12 @@ export default {
         });
         this.saving = false;
       });
+    },
+    getPdf() {
+      const token = this.$store.state.auth.token;
+      window.open(
+        `${process.env.VUE_APP_API_URL}/users/download?access-token=${token}`
+      );
     }
   },
   mounted() {
