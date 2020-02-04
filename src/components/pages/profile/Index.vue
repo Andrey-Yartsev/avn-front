@@ -585,19 +585,21 @@ export default {
     this.initContent();
     if (this.profile) {
       this.$store.dispatch("gender/initProfile", this.profile);
-      // strange sentry error
-      setTimeout(() => {
-        this.$root.ws.send({
-          act: "collect",
-          message: "view_profile",
-          data: {
-            profile_id: this.profile.id,
-            owner: this.profile.id,
-            duration: 1
-          }
-        });
-      }, 2000);
     }
+    setTimeout(() => {
+      if (!this.profile) {
+        return;
+      }
+      this.$root.ws.send({
+        act: "collect",
+        message: "view_profile",
+        data: {
+          profile_id: this.profile.id,
+          owner: this.profile.id,
+          duration: 1
+        }
+      });
+    }, 2000);
   },
   mounted() {
     this.scrollToTop();
