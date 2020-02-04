@@ -11,7 +11,9 @@ export default {
     infinityScrollLoading() {
       if (!this.store) {
         throw new Error(
-          "this.store is not defined in component using mixin inifinityScroll"
+          `this.store is not defined in component ${
+            this.$options.name
+          } using mixin inifinityScroll`
         );
       }
       const { loading } = this.store;
