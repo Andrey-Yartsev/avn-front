@@ -4,7 +4,7 @@
       <Legal />
       <Bank />
     </template>
-    <ElectroniDelivery />
+    <!-- <ElectroniDelivery /> -->
     <Balances storeKey="payouts" prefix="payout" />
     <Requests title="Payout Statements" storeKey="payouts" />
     <Transactions />
@@ -18,7 +18,7 @@ import Balances from "../common/money/Balances";
 import Requests from "../common/money/Requests";
 import Transactions from "./summery/Transactions";
 import User from "@/mixins/user";
-import ElectroniDelivery from "./summery/ElectronicDelivery";
+// import ElectroniDelivery from "./summery/ElectronicDelivery";
 
 export default {
   name: "PayoutSettingsSummery",
@@ -30,8 +30,8 @@ export default {
     Bank,
     Balances,
     Requests,
-    Transactions,
-    ElectroniDelivery
+    Transactions
+    // ElectroniDelivery
   }
 };
 </script>
