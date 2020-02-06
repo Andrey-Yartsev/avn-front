@@ -47,6 +47,25 @@
                 >Please, enter the correct discount value</span
               >
             </label>
+            <label class="form-group-inner subscription discountField">
+              <span class="label">Discount limit</span>
+              <span class="subscription__field ">
+                <span class="form-field">
+                  <input
+                    class="field-gap_currency field-gap_timeunit"
+                    type="number"
+                    min="0"
+                    step="1"
+                    :disabled="isEnabled"
+                    name="subscribeDiscount"
+                    v-model="discount.limit"
+                  />
+                  <sup>
+                    *Number of available subscriptions by discount price
+                  </sup>
+                </span>
+              </span>
+            </label>
             <label
               class="form-group-inner subscription"
               :class="{ 'mobile-view': this.$mq === 'mobile' }"
@@ -139,6 +158,7 @@ export default {
       discount: {
         target: "subscription",
         type: "percent",
+        limit: "",
         amount: "",
         period: {
           from: "",
@@ -217,12 +237,14 @@ export default {
         data.discount = {
           ...this.discount,
           isActive: true,
+          limit: parseInt(this.discount.limit),
           period: {
             ...this.discount.period,
             from: this.discount.period.from || new Date().toISOString()
           }
         };
       }
+      console.log(data.discount);
       this.$store.dispatch("profile/update", data).then(() => {
         if (disable) {
           this.informed = false;
@@ -237,9 +259,11 @@ export default {
       const {
         amount,
         period: { from, to },
-        isActive
+        isActive,
+        limit
       } = this.$store.state.auth.user.discount;
       this.isEnabled = isActive;
+      this.limit = limit;
       this.discount.amount = amount;
       this.discount.period.from = from;
       this.discount.period.to = to;
@@ -317,11 +341,15 @@ export default {
 }
 .subscription {
   align-items: center;
+  &.discountField {
+    align-items: flex-start;
+  }
 }
 .mobile-view {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 5px 6px;
   .label {
     padding: 0;
   }
