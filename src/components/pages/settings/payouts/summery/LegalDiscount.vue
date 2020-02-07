@@ -263,7 +263,7 @@ export default {
         limit
       } = this.$store.state.auth.user.discount;
       this.isEnabled = isActive;
-      this.limit = limit;
+      this.discount.limit = limit;
       this.discount.amount = amount;
       this.discount.period.from = from;
       this.discount.period.to = to;
