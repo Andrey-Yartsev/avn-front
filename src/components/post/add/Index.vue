@@ -24,7 +24,6 @@
           />
         </div>
       </div>
-      {{ preloadedMedias }}===============
       <div class="addPost-header" v-if="$mq === 'mobile'">
         <button
           type="button"
@@ -114,6 +113,7 @@
               type="transition"
               name="flip-list"
             >
+              222222
               <MediaPreview
                 v-for="media in preloadedMedias"
                 :media="media"
@@ -278,11 +278,6 @@
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
         <Draggable v-model="preloadedMedias">
-          <transition-group
-            class="addFileCollectionView"
-            type="transition"
-            name="flip-list"
-          >
             <MediaPreview
               v-for="media in preloadedMedias"
               :media="media"
@@ -290,7 +285,6 @@
               @removeMedia="removeMedia"
               :isSaving="isSaving"
             />
-          </transition-group>
         </Draggable>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
           <div class="block-thumbnails__title">Choose cover</div>

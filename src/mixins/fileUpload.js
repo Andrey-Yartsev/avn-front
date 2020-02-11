@@ -137,7 +137,7 @@ export default {
         : "all";
     },
 
-    setUploadProgress(id, loaded, total, xhr) {
+    setUploadProgress(id, loaded, total) {
       this.preloadedMedias = this.preloadedMedias.map(m =>
         m.id === id ? { ...m, res: xhr, loaded: (loaded / total) * 100 } : m
       );
@@ -197,34 +197,32 @@ export default {
         upload.on("httpUploadProgress", function(e) {
           // e.total
           // e.loaded
-          console.log(Math.round(e.loaded / (e.total * 0.01)) + "%");
+          // console.log(Math.round(e.loaded / (e.total * 0.01)) + "%");
         });
-        const t0 = new Date().getTime();
-        upload.send(function(err, data) {
+        // const t0 = new Date().getTime();
+        upload.send((err, data) => {
           if (err) {
             // err.code === 'RequestAbortedError'
-            console.log("Error: [" + err.code + "] " + err.message);
+            // console.log("Error: [" + err.code + "] " + err.message);
           } else {
-            console.log(data);
+            // console.log(data);
             // data.Bucket
             // data.ETag
             // data.Key
             // data.Location
-            const size = file.size / 1000000;
-            const time = (new Date().getTime() - t0) / 1000;
-            const speed = size / time;
-            console.log(
-              size.toFixed(2) +
-                "MB" +
-                ", " +
-                time.toFixed(2) +
-                "s, " +
-                " " +
-                speed.toFixed(2) +
-                "MB/s"
-            );
-
-            console.log("fetch POST ", Store.state.init.data.converter.url);
+            // const size = file.size / 1000000;
+            // const time = (new Date().getTime() - t0) / 1000;
+            // const speed = size / time;
+            // console.log(
+            //   size.toFixed(2) +
+            //     "MB" +
+            //     ", " +
+            //     time.toFixed(2) +
+            //     "s, " +
+            //     " " +
+            //     speed.toFixed(2) +
+            //     "MB/s"
+            // );
 
             const d = { file: data };
             d.preset = Store.state.init.data.converter.preset;
@@ -236,10 +234,16 @@ export default {
               method: "POST"
             })
               .then(res => {
-                console.log("============");
-                console.log(res);
-                this.uploadInProgress = false;
-                accept(res);
+                if (res.status === 200) {
+                  res.json().then(r => {
+                    const pm = this.preloadedMedias;
+                    pm[pm.length - 1].processId = r.processId;
+                    this.preloadedMedias = JSON.parse(JSON.stringify(pm));
+                    console.log(this.preloadedMedias);
+                    this.uploadInProgress = false;
+                    accept(r);
+                  });
+                }
               })
               .catch(err => {
                 console.error(err);
@@ -258,9 +262,10 @@ export default {
         }
         const { file } = media;
         this.s3Upload(file);
-        return { ...media };
-        // return { ...media };
 
+        return { ...media };
+
+        // return { ...media };
         // const { id, file, width, mediaType } = media;
         //
         // const uploadProcess = fileUpload(
@@ -290,7 +295,6 @@ export default {
         //       this.toast("Can't upload file");
         //     }
         //   });
-
         // return { ...media, req: uploadProcess.xhr };
       });
     },
