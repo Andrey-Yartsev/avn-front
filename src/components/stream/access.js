@@ -7,7 +7,7 @@ export default {
     async shouldBeUpdated(stream) {
       const r = await StreamApi.needSubscribeOrFollow(stream.id);
       if (r) {
-        if (r === 1) {
+        if (r === 1 || r === 2) {
           throw new Error();
         }
         return true;

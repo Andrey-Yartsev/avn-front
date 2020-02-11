@@ -35,6 +35,9 @@
             <span v-if="streamer.isVerified" class="verified-user icn-item" />
           </div>
         </div>
+        <div v-if="showLockIcon" class="lockIcon">
+          <div class="locked-picture icn-item icn-pos_center"></div>
+        </div>
       </figure>
     </div>
     <span class="explore-media__counter explore-media__counter_likes">
@@ -65,7 +68,8 @@ export default {
   },
   data: () => ({
     interval: undefined,
-    imageSrc: undefined
+    imageSrc: undefined,
+    showLockIcon: false
   }),
   computed: {
     streamer() {
@@ -119,6 +123,7 @@ export default {
         }, 5000);
       } catch (err) {
         console.log(err);
+        this.showLockIcon = true;
       }
     }
   },
@@ -134,3 +139,14 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.lockIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+</style>
