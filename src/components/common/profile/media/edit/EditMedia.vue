@@ -74,7 +74,7 @@
               <div
                 v-for="thumb in media.thumbs"
                 :key="thumb.id"
-                class="addFileView addFileView_option icn-item"
+                class="asd addFileView addFileView_option icn-item"
                 :class="{
                   current: media.thumbId === thumb.id
                 }"

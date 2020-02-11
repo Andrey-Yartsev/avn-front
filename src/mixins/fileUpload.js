@@ -6,6 +6,8 @@ import {
   uniqId
 } from "@/utils/mediaFiles";
 
+import Store from "@/store";
+
 const messages = {
   photo: "Photo limit is reached",
   video: "Video limit is reached",
@@ -152,6 +154,100 @@ export default {
       return await Promise.all(promises);
     },
 
+    s3Upload(file) {
+      return new Promise(accept => {
+        const {
+          bucketName,
+          uploadPath,
+          accessKeyId,
+          secretAccessKey
+        } = this.$store.state.init.data.upload;
+
+        const s3 = new global.AWS.S3({
+          apiVersion: "2006-03-01",
+          params: {
+            Bucket: bucketName
+          },
+          useAccelerateEndpoint: true,
+          accessKeyId,
+          secretAccessKey,
+          correctClockSkew: true,
+          httpOptions: {
+            timeout: 0
+          },
+          maxRetries: 1000000
+        });
+
+        const upload = new global.AWS.S3.ManagedUpload({
+          params: {
+            Bucket: bucketName,
+            Key:
+              uploadPath +
+              "/" +
+              new Date().getTime() +
+              "/" +
+              encodeURIComponent(file.name),
+            Body: file,
+            ContentType: file.type,
+            ContentDisposition: "inline"
+          },
+          service: s3,
+          queueSize: 8
+        });
+        upload.on("httpUploadProgress", function(e) {
+          // e.total
+          // e.loaded
+          console.log(Math.round(e.loaded / (e.total * 0.01)) + "%");
+        });
+        const t0 = new Date().getTime();
+        upload.send(function(err, data) {
+          if (err) {
+            // err.code === 'RequestAbortedError'
+            console.log("Error: [" + err.code + "] " + err.message);
+          } else {
+            console.log(data);
+            // data.Bucket
+            // data.ETag
+            // data.Key
+            // data.Location
+            const size = file.size / 1000000;
+            const time = (new Date().getTime() - t0) / 1000;
+            const speed = size / time;
+            console.log(
+              size.toFixed(2) +
+                "MB" +
+                ", " +
+                time.toFixed(2) +
+                "s, " +
+                " " +
+                speed.toFixed(2) +
+                "MB/s"
+            );
+
+            console.log("fetch POST ", Store.state.init.data.converter.url);
+
+            const d = { file: data };
+            d.preset = Store.state.init.data.converter.preset;
+
+            fetch(Store.state.init.data.converter.url, {
+              body: JSON.stringify(d),
+              headers: { "Content-Type": "application/json" },
+              method: "POST"
+            })
+              .then(res => {
+                console.log("============");
+                console.log(res);
+                this.uploadInProgress = false;
+                accept(res);
+              })
+              .catch(err => {
+                console.error(err);
+              });
+          }
+        });
+      });
+    },
+
     saveMediaFiles() {
       this.uploadInProgress = true;
 
@@ -159,38 +255,42 @@ export default {
         if (media.processId || media.loaded) {
           return { ...media };
         }
+        const { file } = media;
+        this.s3Upload(file);
+        return { ...media };
+        // return { ...media };
 
-        const { id, file, width, mediaType } = media;
+        // const { id, file, width, mediaType } = media;
+        //
+        // const uploadProcess = fileUpload(
+        //   { id, file, width, mediaType },
+        //   this.setUploadProgress,
+        //   this.withoutWatermark
+        // );
+        //
+        // uploadProcess
+        //   .then(({ processId, thumbs }) => {
+        //     this.preloadedMedias = this.preloadedMedias.map(m =>
+        //       m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
+        //     );
+        //     if (this.setMediaIsReady !== undefined) {
+        //       this.setMediaIsReady(processId);
+        //     }
+        //     this.uploadInProgress = false;
+        //   })
+        //   .catch(hasError => {
+        //     this.preloadedMedias = this.preloadedMedias.map(m =>
+        //       m.id === id ? { ...m, uploadError: true } : m
+        //     );
+        //
+        //     this.uploadInProgress = false;
+        //
+        //     if (hasError) {
+        //       this.toast("Can't upload file");
+        //     }
+        //   });
 
-        const uploadProcess = fileUpload(
-          { id, file, width, mediaType },
-          this.setUploadProgress,
-          this.withoutWatermark
-        );
-
-        uploadProcess
-          .then(({ processId, thumbs }) => {
-            this.preloadedMedias = this.preloadedMedias.map(m =>
-              m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
-            );
-            if (this.setMediaIsReady !== undefined) {
-              this.setMediaIsReady(processId);
-            }
-            this.uploadInProgress = false;
-          })
-          .catch(hasError => {
-            this.preloadedMedias = this.preloadedMedias.map(m =>
-              m.id === id ? { ...m, uploadError: true } : m
-            );
-
-            this.uploadInProgress = false;
-
-            if (hasError) {
-              this.toast("Can't upload file");
-            }
-          });
-
-        return { ...media, req: uploadProcess.xhr };
+        // return { ...media, req: uploadProcess.xhr };
       });
     },
 

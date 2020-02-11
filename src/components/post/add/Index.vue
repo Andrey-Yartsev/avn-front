@@ -24,6 +24,7 @@
           />
         </div>
       </div>
+      {{ preloadedMedias }}===============
       <div class="addPost-header" v-if="$mq === 'mobile'">
         <button
           type="button"
