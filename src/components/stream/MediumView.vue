@@ -58,6 +58,9 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    updatePageData: {
+      type: Function
     }
   },
   data: () => ({
@@ -107,13 +110,24 @@ export default {
     updateMediaSrc() {
       const random = Math.random().toFixed(3) * 1000;
       this.imageSrc = `${this.post.thumbUrl}?v=${random}`;
+    },
+    async checkPermission() {
+      try {
+        await this.shouldBeUpdated(this.post);
+        this.interval = setInterval(() => {
+          this.updateMediaSrc();
+        }, 5000);
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   mounted() {
     this.imageSrc = this.streamer.avatar;
-    this.interval = setInterval(() => {
-      this.updateMediaSrc();
-    }, 5000);
+    this.checkPermission();
+    // this.interval = setInterval(() => {
+    //   this.updateMediaSrc();
+    // }, 5000);
   },
   beforeDestroy() {
     clearInterval(this.interval);
