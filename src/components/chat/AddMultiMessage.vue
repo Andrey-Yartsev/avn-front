@@ -3,7 +3,7 @@
     @send="sendMessage"
     :disable="disable"
     :withFontSizeController="false"
-    :allUsersCount="allUsersCount"
+    :recipientsCount="recipientsCount"
     :confirmation="toAll"
   />
 </template>
@@ -29,22 +29,33 @@ export default {
       type: Boolean,
       default: false
     },
-    allUsersCount: {
+    recipientsCount: {
       type: Number,
       default: 0
+    },
+    excludeStars: {
+      type: Boolean,
+      default: true
     }
   },
 
   methods: {
+    // excludeStars
+
     async sendMessage(message) {
       this.$emit("startSending");
-      const params = { ...message };
+      const data = { ...message };
       if (this.toAll) {
-        params.toAll = this.toAll;
+        data.toAll = this.toAll;
       } else {
-        params.ids = this.userIds;
+        data.ids = this.userIds;
       }
-      await this.$store.dispatch("chat/sendMultiMessages", params);
+      await this.$store.dispatch("chat/sendMultiMessages", {
+        query: {
+          "with-stars": !this.excludeStars
+        },
+        data
+      });
       this.$store.dispatch("global/flashToast", {
         text: "Messages sent successfully"
       });

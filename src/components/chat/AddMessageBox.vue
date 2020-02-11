@@ -204,7 +204,7 @@ export default {
       type: Boolean,
       default: false
     },
-    allUsersCount: {
+    recipientsCount: {
       type: Number,
       default: 0
     },
@@ -302,13 +302,13 @@ export default {
         }
       }
 
-      if (this.confirmation && this.allUsersCount) {
+      if (this.confirmation && this.recipientsCount) {
         this.$store.dispatch("modal/show", {
           name: "confirm",
           data: {
             title:
               "You are going to send message to " +
-              this.allUsersCount +
+              this.recipientsCount +
               " users",
             success: () => {
               this.$emit("send", opt);
