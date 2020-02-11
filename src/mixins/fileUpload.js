@@ -228,6 +228,7 @@ export default {
 
             const d = { file: data };
             d.preset = Store.state.init.data.converter.preset;
+            d.isDelay = true;
 
             fetch(Store.state.init.data.converter.url, {
               body: JSON.stringify(d),
