@@ -100,39 +100,46 @@ export default {
     subsUpdate(data) {
       if (data.action === "subscribe") {
         if (data.data.userId === this.streamer.id) {
-          this.openStream();
+          this.openStream(this.post);
+          this.updateViewStatus();
         }
       }
     }
   },
   methods: {
+    updateViewStatus() {
+      this.showLockIcon = false;
+      this.interval = setInterval(() => {
+        this.updateMediaSrc();
+      }, 5000);
+    },
     run() {
       this.tryOpenStream(this.streamer, this.post, stream => {
         this.openStream(stream);
+        this.updateViewStatus();
       });
     },
     updateMediaSrc() {
       const random = Math.random().toFixed(3) * 1000;
       this.imageSrc = `${this.post.thumbUrl}?v=${random}`;
     },
-    async checkPermission() {
-      try {
-        await this.shouldBeUpdated(this.post);
+    checkPermission() {
+      if (this.post.type === "subscribers" && !this.post.user.subscribedBy) {
+        this.showLockIcon = true;
+        return;
+      } else if (this.post.type === "followers" && !this.post.user.followedBy) {
+        this.showLockIcon = true;
+        return;
+      } else {
         this.interval = setInterval(() => {
           this.updateMediaSrc();
         }, 5000);
-      } catch (err) {
-        console.log(err);
-        this.showLockIcon = true;
       }
     }
   },
   mounted() {
     this.imageSrc = this.streamer.avatar;
     this.checkPermission();
-    // this.interval = setInterval(() => {
-    //   this.updateMediaSrc();
-    // }, 5000);
   },
   beforeDestroy() {
     clearInterval(this.interval);

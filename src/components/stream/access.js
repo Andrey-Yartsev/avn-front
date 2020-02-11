@@ -4,16 +4,6 @@ import User from "@/mixins/user";
 export default {
   mixins: [User],
   methods: {
-    async shouldBeUpdated(stream) {
-      const r = await StreamApi.needSubscribeOrFollow(stream.id);
-      if (r) {
-        if (r === 1 || r === 2) {
-          throw new Error();
-        }
-        return true;
-      }
-      return true;
-    },
     async tryOpenStream(streamer, stream, onSuccess) {
       if (!this.user) {
         this.$store.dispatch("modal/show", { name: "login" });
