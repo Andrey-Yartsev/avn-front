@@ -35,6 +35,9 @@
             <span v-if="streamer.isVerified" class="verified-user icn-item" />
           </div>
         </div>
+        <div v-if="showLockIcon" class="lockIcon">
+          <div class="locked-picture icn-item icn-pos_center"></div>
+        </div>
       </figure>
     </div>
     <span class="explore-media__counter explore-media__counter_likes">
@@ -58,11 +61,15 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    updatePageData: {
+      type: Function
     }
   },
   data: () => ({
     interval: undefined,
-    imageSrc: undefined
+    imageSrc: undefined,
+    showLockIcon: false
   }),
   computed: {
     streamer() {
@@ -93,30 +100,60 @@ export default {
     subsUpdate(data) {
       if (data.action === "subscribe") {
         if (data.data.userId === this.streamer.id) {
-          this.openStream();
+          this.openStream(this.post);
+          this.updateViewStatus();
         }
       }
     }
   },
   methods: {
+    updateViewStatus() {
+      this.showLockIcon = false;
+      this.interval = setInterval(() => {
+        this.updateMediaSrc();
+      }, 5000);
+    },
     run() {
       this.tryOpenStream(this.streamer, this.post, stream => {
         this.openStream(stream);
+        this.updateViewStatus();
       });
     },
     updateMediaSrc() {
       const random = Math.random().toFixed(3) * 1000;
       this.imageSrc = `${this.post.thumbUrl}?v=${random}`;
+    },
+    checkPermission() {
+      if (this.post.type === "subscribers" && !this.post.user.subscribedBy) {
+        this.showLockIcon = true;
+        return;
+      } else if (this.post.type === "followers" && !this.post.user.followedBy) {
+        this.showLockIcon = true;
+        return;
+      } else {
+        this.interval = setInterval(() => {
+          this.updateMediaSrc();
+        }, 5000);
+      }
     }
   },
   mounted() {
     this.imageSrc = this.streamer.avatar;
-    this.interval = setInterval(() => {
-      this.updateMediaSrc();
-    }, 5000);
+    this.checkPermission();
   },
   beforeDestroy() {
     clearInterval(this.interval);
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.lockIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+</style>

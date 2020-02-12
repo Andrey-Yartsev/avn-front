@@ -11,19 +11,49 @@
   <link rel="icon" href="<%= VUE_APP_CDN_PATH %>static/img/<%= VUE_APP_NAME %>/favicon.ico">
   <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
   </script>
-  <!-- <script src="https://assets.avn.com/v/okev.js" async defer></script> -->
   <script src="https://resources.avn.com/v/okev.js" async defer></script>
-  <link rel="manifest" href="<%= VUE_APP_CDN_PATH %>manifest.json" crossorigin="use-credentials">
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="<%= VUE_APP_CDN_PATH %>static/img/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff">
   <script src="/static/js/aws-sdk-2.612.0.min.js" async defer></script>
+  <style>
+    #loadingSpinner {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+    }
+    #loadingSpinner__content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      background: url('/static/img/loading.svg') no-repeat 0 0/cover;
+      width: 66px;
+      height: 66px;
+      animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
 <noscript>
   <strong>We're sorry but AVN Stars doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
-<div id="app"></div>
+<div id="app">
+  <!-- Show animated spinner while main scripts loading -->
+  <div id="loadingSpinner">
+    <div id="loadingSpinner__content">
+  </div>
+</div>
 <!-- built files will be auto injected -->
 </body>
 </html>

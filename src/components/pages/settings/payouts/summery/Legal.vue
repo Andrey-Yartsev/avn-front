@@ -129,7 +129,8 @@ export default {
   components: { LegalEdit },
   data() {
     return {
-      edit: false
+      edit: false,
+      discount: false
     };
   },
   computed: {

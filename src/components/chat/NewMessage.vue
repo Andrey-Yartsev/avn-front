@@ -60,7 +60,8 @@
           class="searchWrapper"
           :class="{
             'no-results': !chats.length && searchQuery.length,
-            'search-text': chats.length && searchQuery.length
+            'search-text': chats.length && searchQuery.length,
+            'select-all': selectAll
           }"
         >
           <span class="sendTo"
@@ -79,12 +80,32 @@
             @click="reset"
             v-if="searchQuery.length"
           ></span>
-          <div
-            class="btn-selected-all icn-item"
-            @click="toggleSelectAll"
-            v-if="foundUsers.length"
-            :class="{ visible: foundUsers.length, active: selectAll }"
-          ></div>
+          <div class="select-all-block">
+            <div
+              class="btn-selected-all icn-item"
+              @click="toggleSelectAll"
+              v-if="foundUsers.length"
+              :class="{ visible: foundUsers.length, active: selectAll }"
+            >
+              <span>Select All Contacts</span>
+            </div>
+            <div
+              class="checkbox-block"
+              v-if="selectAll"
+              :class="{ enabled: excludeStars }"
+            >
+              <span class="caption">Exclude all AVN Stars</span>
+              <label class="toggle-element" for="exclude_stars">
+                <input
+                  class="tweetSend"
+                  type="checkbox"
+                  id="exclude_stars"
+                  v-model="excludeStars"
+                />
+                <span class="toggle-element_switcher"></span>
+              </label>
+            </div>
+          </div>
         </div>
         <div class="chatFlatLoader semi-transparent" v-if="usersSearching" />
         <perfect-scrollbar
@@ -244,7 +265,8 @@
                 v-if="selectAll"
               >
                 <b class="selectedContacts__title"
-                  >Recipients: All contacts{{ allUsersCountText }}</b
+                  >Recipients: All contacts{{ allUsersCountText
+                  }}{{ allUsersCountExtraText }}</b
                 >
               </div>
               <div
@@ -279,7 +301,8 @@
             :userIds="selected"
             :toAll="selectAll"
             :disable="sending"
-            :allUsersCount="allUsersCount"
+            :excludeStars="excludeStars"
+            :recipientsCount="recipientsCount"
             @startSending="startSending"
             @sent="sent"
           />
@@ -319,7 +342,8 @@ export default {
       chatOptionsOpened: false,
       contactsScrollTop: true,
       sending: false,
-      selectAll: false
+      selectAll: false,
+      excludeStars: true
     };
   },
 
@@ -377,9 +401,35 @@ export default {
       }
       return this.$store.state.chat.fetchAllUsersCountResult.count;
     },
+    allUsersCountExcludingStars() {
+      if (!this.$store.state.chat.fetchUsersCountWithoutStarsResult) {
+        return 0;
+      }
+      return this.$store.state.chat.fetchUsersCountWithoutStarsResult.count;
+    },
+    recipientsCount() {
+      return this.excludeStars
+        ? this.allUsersCountExcludingStars
+        : this.allUsersCount;
+    },
     allUsersCountText() {
-      if (this.allUsersCount) {
-        return " (" + this.allUsersCount + ")";
+      const n = this.excludeStars
+        ? this.allUsersCountExcludingStars
+        : this.allUsersCount;
+      if (n) {
+        return " (" + n + ")";
+      }
+      return null;
+    },
+    allUsersCountExtraText() {
+      const n = this.excludeStars
+        ? this.allUsersCountExcludingStars
+        : this.allUsersCount;
+      const text = this.excludeStars
+        ? "excluding AVN Stars"
+        : "including AVN Stars";
+      if (n) {
+        return " " + text;
       }
       return null;
     },
@@ -473,6 +523,7 @@ export default {
   created() {
     this.$store.dispatch("chat/fetchAnyChats", {});
     this.$store.dispatch("chat/fetchAllUsersCount", {});
+    this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
     this.search();
   },
   beforeDestroy() {

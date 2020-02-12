@@ -730,7 +730,7 @@ createRequestAction({
     method: "POST"
   },
   paramsToOptions: function(params, options) {
-    options.data = params;
+    options = { ...options, ...params };
     return options;
   }
 });
@@ -819,6 +819,29 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
+  },
+  paramsToOptions: function(params, options) {
+    options.query = {
+      "with-stars": true
+    };
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "fetchUsersCountWithoutStars",
+  apiPath: "chats/bulk-count-all",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToOptions: function(params, options) {
+    options.query = {
+      "with-stars": false
+    };
+    return options;
   }
 });
 

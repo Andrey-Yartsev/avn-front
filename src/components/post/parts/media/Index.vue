@@ -222,6 +222,9 @@ export default {
           if (!this.$refs.streamEvents) {
             return;
           }
+          if (!this.$refs.media.$refs.video) {
+            return;
+          }
           const time = this.$refs.media.$refs.video.currentTime;
           if (time !== this.$refs.streamEvents.currentTime) {
             this.$refs.streamEvents.currentTime = time;

@@ -1375,6 +1375,24 @@ select {
   }
 }
 
+.field-symbol-percentage {
+  flex: 1;
+  width: 100%;
+
+  .form-field {
+    position: relative;
+
+    &:before {
+      content: "%";
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: lighten($gray, 20%);
+    }
+  }
+}
+
 .field-birthday {
   flex: 1;
   height: 30px;

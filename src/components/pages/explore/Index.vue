@@ -84,6 +84,7 @@
                   :post="post"
                   :key="post.id"
                   from="explore"
+                  :updatePageData="getPageData"
                 />
               </template>
             </div>
