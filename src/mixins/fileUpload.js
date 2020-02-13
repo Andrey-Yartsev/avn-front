@@ -6,8 +6,6 @@ import {
   uniqId
 } from "@/utils/mediaFiles";
 
-import Store from "@/store";
-
 const messages = {
   photo: "Photo limit is reached",
   video: "Video limit is reached",
@@ -156,7 +154,7 @@ export default {
     },
 
     s3Upload(media) {
-      const { file } = media;
+      const { id, file, width, mediaType } = media;
 
       return new Promise(accept => {
         const {
@@ -200,61 +198,25 @@ export default {
         upload.on("httpUploadProgress", e => {
           this.setUploadProgress(media.id, e.loaded, e.total);
         });
-        // const t0 = new Date().getTime();
-        upload.send((err, data) => {
+        upload.send(err => {
           if (err) {
             // err.code === 'RequestAbortedError'
             // console.log("Error: [" + err.code + "] " + err.message);
           } else {
-            // console.log(data);
-            // data.Bucket
-            // data.ETag
-            // data.Key
-            // data.Location
-            // const size = file.size / 1000000;
-            // const time = (new Date().getTime() - t0) / 1000;
-            // const speed = size / time;
-            // console.log(
-            //   size.toFixed(2) +
-            //     "MB" +
-            //     ", " +
-            //     time.toFixed(2) +
-            //     "s, " +
-            //     " " +
-            //     speed.toFixed(2) +
-            //     "MB/s"
-            // );
-
-            const d = { file: data };
-            d.preset = Store.state.init.data.converter.preset;
-            d.isDelay = true;
-
-            fetch(Store.state.init.data.converter.url, {
-              body: JSON.stringify(d),
-              headers: { "Content-Type": "application/json" },
-              method: "POST"
-            })
-              .then(res => {
-                if (res.status === 200) {
-                  res.json().then(r => {
-                    const pm = this.preloadedMedias;
-                    pm[pm.length - 1].processId = r.processId;
-                    this.preloadedMedias = pm.map(v => {
-                      return { ...v };
-                    });
-                    this.uploadInProgress = false;
-
-                    if (this.setMediaIsReady !== undefined) {
-                      this.setMediaIsReady(r.processId);
-                    }
-
-                    accept(r);
-                  });
-                }
-              })
-              .catch(err => {
-                console.error(err);
-              });
+            fileUpload(
+              { id, file, width, mediaType },
+              this.setUploadProgress,
+              this.withoutWatermark
+            ).then(({ processId, thumbs }) => {
+              this.preloadedMedias = this.preloadedMedias.map(m =>
+                m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
+              );
+              this.uploadInProgress = false;
+              if (this.setMediaIsReady !== undefined) {
+                this.setMediaIsReady(processId);
+              }
+              accept();
+            });
           }
         });
       });
@@ -271,38 +233,6 @@ export default {
         this.s3Upload(media);
 
         return { ...media };
-
-        // return { ...media };
-        // const { id, file, width, mediaType } = media;
-        //
-        // const uploadProcess = fileUpload(
-        //   { id, file, width, mediaType },
-        //   this.setUploadProgress,
-        //   this.withoutWatermark
-        // );
-        //
-        // uploadProcess
-        //   .then(({ processId, thumbs }) => {
-        //     this.preloadedMedias = this.preloadedMedias.map(m =>
-        //       m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
-        //     );
-        //     if (this.setMediaIsReady !== undefined) {
-        //       this.setMediaIsReady(processId);
-        //     }
-        //     this.uploadInProgress = false;
-        //   })
-        //   .catch(hasError => {
-        //     this.preloadedMedias = this.preloadedMedias.map(m =>
-        //       m.id === id ? { ...m, uploadError: true } : m
-        //     );
-        //
-        //     this.uploadInProgress = false;
-        //
-        //     if (hasError) {
-        //       this.toast("Can't upload file");
-        //     }
-        //   });
-        // return { ...media, req: uploadProcess.xhr };
       });
     },
 
