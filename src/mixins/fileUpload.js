@@ -243,6 +243,11 @@ export default {
                       return { ...v };
                     });
                     this.uploadInProgress = false;
+
+                    if (this.setMediaIsReady !== undefined) {
+                      this.setMediaIsReady(r.processId);
+                    }
+
                     accept(r);
                   });
                 }
