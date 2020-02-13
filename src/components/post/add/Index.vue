@@ -278,13 +278,13 @@
         v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
       >
         <Draggable v-model="preloadedMedias">
-            <MediaPreview
-              v-for="media in preloadedMedias"
-              :media="media"
-              :key="media.id"
-              @removeMedia="removeMedia"
-              :isSaving="isSaving"
-            />
+          <MediaPreview
+            v-for="media in preloadedMedias"
+            :media="media"
+            :key="media.id"
+            @removeMedia="removeMedia"
+            :isSaving="isSaving"
+          />
         </Draggable>
         <div class="block-thumbnails" v-if="showChooseThumbBlock">
           <div class="block-thumbnails__title">Choose cover</div>

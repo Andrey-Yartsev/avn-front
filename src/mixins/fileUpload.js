@@ -138,9 +138,10 @@ export default {
 
     setUploadProgress(id, loaded, total) {
       this.preloadedMedias = this.preloadedMedias.map(m => {
-         return m.id === id ? { ...m, loaded: Math.round((loaded / total) * 100) } : m
-      }
-      );
+        return m.id === id
+          ? { ...m, loaded: Math.round((loaded / total) * 100) }
+          : m;
+      });
     },
 
     async getMediaFiles() {
