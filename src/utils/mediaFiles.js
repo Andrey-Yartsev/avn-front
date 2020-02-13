@@ -211,13 +211,12 @@ export const getVideoPreview = (media, callback) => {
 };
 
 export const fileUpload = (
-  { id, file, mediaType },
+  { id, mediaType, file },
   onProgress,
   withoutWatermark
 ) => {
   const xhr = new XMLHttpRequest();
   const pr = new Promise((resolve, reject) => {
-    const formData = new FormData();
     const {
       hasWatermarkPhoto,
       hasWatermarkVideo,
@@ -225,6 +224,8 @@ export const fileUpload = (
       // watermarkFile,
       watermarkFileUpload
     } = Store.state.auth.user;
+
+    const postData = {};
 
     if (!withoutWatermark) {
       if (
@@ -234,19 +235,23 @@ export const fileUpload = (
         // if (watermarkFile) {
         //   formData.append("watermark[imagePath]", watermarkFile);
         if (watermarkFileUpload) {
-          formData.append("watermark[imagePath]", watermarkFileUpload);
+          postData["watermark"] = {
+            imagePath: watermarkFileUpload
+          };
         } else {
-          formData.append("watermark[text]", watermarkText);
+          postData["watermark"] = {
+            text: watermarkText
+          };
         }
       }
     }
 
-    formData.append("file", file);
-    formData.append("preset", Store.state.init.data.converter.preset);
-    formData.append("isDelay", true);
+    postData["file"] = file;
+    postData["preset"] = Store.state.init.data.converter.preset;
+    postData["isDelay"] = true;
 
     if (mediaType === "video") {
-      formData.append("needThumbs", true);
+      postData["needThumbs"] = true;
     }
 
     xhr.upload.onprogress = ({ loaded, total }) => {
@@ -277,22 +282,8 @@ export const fileUpload = (
     };
 
     xhr.open("POST", `${Store.state.init.data.converter.url}`, true);
-    xhr.send(formData);
-
-    // if (
-    //   Store.state.auth.user.id == 475036 ||
-    //   Store.state.auth.user.id == 524167
-    // ) {
-    //   xhr.open("POST", `https://cdn-media-ingest.avn.com`, true);
-    //   xhr.send(formData);
-    // } else {
-    //   xhr.open(
-    //     "POST",
-    //     `${Store.state.init.data.converter.url}/file/upload`,
-    //     true
-    //   );
-    //   xhr.send(formData);
-    // }
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(postData));
   });
 
   pr.xhr = xhr;

@@ -195,16 +195,18 @@ export default {
           service: s3,
           queueSize: 8
         });
+
         upload.on("httpUploadProgress", e => {
           this.setUploadProgress(media.id, e.loaded, e.total);
         });
-        upload.send(err => {
+
+        upload.send((err, data) => {
           if (err) {
             // err.code === 'RequestAbortedError'
             // console.log("Error: [" + err.code + "] " + err.message);
           } else {
             fileUpload(
-              { id, file, width, mediaType },
+              { id, width, mediaType, file: data },
               this.setUploadProgress,
               this.withoutWatermark
             ).then(({ processId, thumbs }) => {
