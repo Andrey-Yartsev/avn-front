@@ -31,7 +31,8 @@ export default {
       inputAcceptTypes,
       limits: (this.$props && this.$props.defaultLimits) || limits,
       uploadInProgress: false,
-      uploadAbortedIds: []
+      uploadAbortedIds: [],
+      s3uploads: {}
     };
   },
 
@@ -120,6 +121,8 @@ export default {
 
     removeMedia(id) {
       if (this.uploadInProgress) {
+        this.s3uploads[id].abort();
+        delete this.s3uploads[id];
         this.uploadAbortedIds.push(id);
       }
       this.preloadedMedias = this.preloadedMedias.reduce((memo, media) => {
@@ -200,6 +203,8 @@ export default {
           queueSize: 8
         });
 
+        this.s3uploads[id] = upload;
+
         upload.on("httpUploadProgress", e => {
           this.setUploadProgress(media.id, e.loaded, e.total);
         });
@@ -208,6 +213,7 @@ export default {
           if (err) {
             // err.code === 'RequestAbortedError'
             // console.log("Error: [" + err.code + "] " + err.message);
+            delete this.s3uploads[id];
           } else {
             if (this.uploadAbortedIds.indexOf(id) !== -1) {
               this.uploadAbortedIds = this.uploadAbortedIds.filter(
@@ -227,6 +233,7 @@ export default {
               if (this.setMediaIsReady !== undefined) {
                 this.setMediaIsReady(processId);
               }
+              delete this.s3uploads[id];
               accept();
             });
           }

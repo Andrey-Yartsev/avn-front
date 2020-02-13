@@ -113,7 +113,6 @@
               type="transition"
               name="flip-list"
             >
-              222222
               <MediaPreview
                 v-for="media in preloadedMedias"
                 :media="media"
