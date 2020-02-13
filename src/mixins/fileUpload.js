@@ -30,7 +30,8 @@ export default {
       preloadedMedias: [],
       inputAcceptTypes,
       limits: (this.$props && this.$props.defaultLimits) || limits,
-      uploadInProgress: false
+      uploadInProgress: false,
+      uploadAbortedIds: []
     };
   },
 
@@ -118,6 +119,9 @@ export default {
     },
 
     removeMedia(id) {
+      if (this.uploadInProgress) {
+        this.uploadAbortedIds.push(id);
+      }
       this.preloadedMedias = this.preloadedMedias.reduce((memo, media) => {
         if (media.id !== id) {
           return [...memo, media];
@@ -205,6 +209,12 @@ export default {
             // err.code === 'RequestAbortedError'
             // console.log("Error: [" + err.code + "] " + err.message);
           } else {
+            if (this.uploadAbortedIds.indexOf(id) !== -1) {
+              this.uploadAbortedIds = this.uploadAbortedIds.filter(
+                _id => _id !== id
+              );
+              return;
+            }
             fileUpload(
               { id, width, mediaType, file: data },
               this.setUploadProgress,
