@@ -137,8 +137,9 @@ export default {
     },
 
     setUploadProgress(id, loaded, total) {
-      this.preloadedMedias = this.preloadedMedias.map(m =>
-        m.id === id ? { ...m, res: xhr, loaded: (loaded / total) * 100 } : m
+      this.preloadedMedias = this.preloadedMedias.map(m => {
+         return m.id === id ? { ...m, loaded: Math.round((loaded / total) * 100) } : m
+      }
       );
     },
 
@@ -153,7 +154,9 @@ export default {
       return await Promise.all(promises);
     },
 
-    s3Upload(file) {
+    s3Upload(media) {
+      const { file } = media;
+
       return new Promise(accept => {
         const {
           bucketName,
@@ -193,10 +196,8 @@ export default {
           service: s3,
           queueSize: 8
         });
-        upload.on("httpUploadProgress", function(e) {
-          // e.total
-          // e.loaded
-          // console.log(Math.round(e.loaded / (e.total * 0.01)) + "%");
+        upload.on("httpUploadProgress", e => {
+          this.setUploadProgress(media.id, e.loaded, e.total);
         });
         // const t0 = new Date().getTime();
         upload.send((err, data) => {
@@ -260,8 +261,8 @@ export default {
         if (media.processId || media.loaded) {
           return { ...media };
         }
-        const { file } = media;
-        this.s3Upload(file);
+
+        this.s3Upload(media);
 
         return { ...media };
 
