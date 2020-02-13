@@ -48,7 +48,6 @@ export default {
     addMediaFiles: async function(e) {
       const files = Array.from(e.target.files);
       const innerLength = files.length;
-
       if (!innerLength) return;
 
       const validFiles = this.validateFiles(files);
@@ -238,8 +237,9 @@ export default {
                   res.json().then(r => {
                     const pm = this.preloadedMedias;
                     pm[pm.length - 1].processId = r.processId;
-                    this.preloadedMedias = JSON.parse(JSON.stringify(pm));
-                    console.log(this.preloadedMedias);
+                    this.preloadedMedias = pm.map(v => {
+                      return { ...v };
+                    });
                     this.uploadInProgress = false;
                     accept(r);
                   });
