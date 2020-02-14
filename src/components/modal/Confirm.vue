@@ -1,5 +1,5 @@
 <template>
-  <Modal :onClose="close">
+  <Modal :onClose="close" extraClassName="confirm-modal">
     <div
       class="popup-container popup-container_block popup-alert"
       slot="content"

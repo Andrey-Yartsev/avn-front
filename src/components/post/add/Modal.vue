@@ -23,6 +23,7 @@
               :close="close"
               type="new"
               where="modal"
+              ref="addPost"
             />
             <div class="popup-container-scroll" v-if="delayedPosts.length">
               <perfect-scrollbar
@@ -74,8 +75,19 @@ export default {
     Loader
   },
   methods: {
-    close(e) {
-      e.preventDefault();
+    close() {
+      if (this.$refs.addPost.uploadInProgress) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Upload in progress",
+            success: () => {
+              this.$store.dispatch("modal/hide", { name: "addPost" });
+            }
+          }
+        });
+        return;
+      }
       this.$store.dispatch("modal/hide", { name: "addPost" });
     },
     infinityScrollGetDataMethod() {

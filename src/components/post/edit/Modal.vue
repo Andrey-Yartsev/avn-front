@@ -20,6 +20,7 @@
             :post="post"
             type="edit"
             where="modal"
+            ref="editPost"
           />
         </div>
       </div>
@@ -44,6 +45,18 @@ export default {
   },
   methods: {
     close() {
+      if (this.$refs.editPost.uploadInProgress) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Upload in progress",
+            success: () => {
+              this.$store.dispatch("modal/hide", { name: "editPost" });
+            }
+          }
+        });
+        return;
+      }
       this.$store.dispatch("modal/hide", { name: "editPost" });
     }
   },
