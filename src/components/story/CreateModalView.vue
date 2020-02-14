@@ -110,7 +110,7 @@ import {
   fileUpload,
   getImagePreview,
   readFileContent
-} from "@/utils/mediaFiles";
+} from "@/utils/mediaFiles2";
 
 export default {
   name: "StoryCreateModal",
