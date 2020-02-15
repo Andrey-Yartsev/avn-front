@@ -216,6 +216,8 @@ export const converterUpload = (
   withoutWatermark
 ) => {
   const xhr = new XMLHttpRequest();
+  const isBinary = !!file.lastModified;
+
   const pr = new Promise((resolve, reject) => {
     const {
       hasWatermarkPhoto,
@@ -225,7 +227,7 @@ export const converterUpload = (
       watermarkFileUpload
     } = Store.state.auth.user;
 
-    const postData = {};
+    const data = {};
 
     if (!withoutWatermark) {
       if (
@@ -235,23 +237,23 @@ export const converterUpload = (
         // if (watermarkFile) {
         //   formData.append("watermark[imagePath]", watermarkFile);
         if (watermarkFileUpload) {
-          postData["watermark"] = {
+          data["watermark"] = {
             imagePath: watermarkFileUpload
           };
         } else {
-          postData["watermark"] = {
+          data["watermark"] = {
             text: watermarkText
           };
         }
       }
     }
 
-    postData["file"] = file;
-    postData["preset"] = Store.state.init.data.converter.preset;
-    postData["isDelay"] = true;
+    data["file"] = file;
+    data["preset"] = Store.state.init.data.converter.preset;
+    data["isDelay"] = true;
 
     if (mediaType === "video") {
-      postData["needThumbs"] = true;
+      data["needThumbs"] = true;
     }
 
     xhr.upload.onprogress = ({ loaded, total }) => {
@@ -284,8 +286,17 @@ export const converterUpload = (
     };
 
     xhr.open("POST", `${Store.state.init.data.converter.url}`, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(postData));
+
+    if (isBinary) {
+      const formData = new FormData();
+      for (let [key, value] of Object.entries(data)) {
+        formData.append(key, value);
+      }
+      xhr.send(formData);
+    } else {
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify(data));
+    }
   });
 
   pr.xhr = xhr;

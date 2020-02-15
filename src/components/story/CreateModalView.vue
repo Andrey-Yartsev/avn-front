@@ -178,7 +178,7 @@ export default {
       });
     },
 
-    createNewStory2: async function() {
+    createNewStory: async function() {
       this.stopPreviewVideo();
       this.showLoader = true;
 
@@ -203,7 +203,7 @@ export default {
         });
     },
 
-    createNewStory: async function() {
+    createNewStory2: async function() {
       this.stopPreviewVideo();
       this.showLoader = true;
 
