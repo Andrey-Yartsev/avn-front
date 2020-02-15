@@ -210,7 +210,7 @@ export const getVideoPreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = (
+export const converterUpload = (
   { id, mediaType, file },
   onProgress,
   withoutWatermark
@@ -255,7 +255,9 @@ export const fileUpload = (
     }
 
     xhr.upload.onprogress = ({ loaded, total }) => {
-      onProgress(id, loaded, total, xhr);
+      if (onProgress) {
+        onProgress(id, loaded, total, xhr);
+      }
     };
     xhr.onload = xhr.onerror = () => {
       if (xhr.status == 200) {

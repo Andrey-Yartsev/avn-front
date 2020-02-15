@@ -2,7 +2,7 @@ import {
   getVideoPreview,
   getMediaFileMeta,
   getImagePreview,
-  fileUpload,
+  converterUpload,
   uniqId
 } from "@/utils/mediaFiles";
 
@@ -154,55 +154,61 @@ export default {
         ({ id, file, width, mediaType, alreadySaved }) =>
           alreadySaved
             ? id
-            : fileUpload({ id, file, width, mediaType }, this.setUploadProgress)
+            : converterUpload(
+                { id, file, width, mediaType },
+                this.setUploadProgress
+              )
       );
 
       return await Promise.all(promises);
     },
 
+    getS3Upload(file) {
+      const {
+        bucketName,
+        uploadPath,
+        accessKeyId,
+        secretAccessKey
+      } = this.$store.state.init.data.upload;
+
+      const s3 = new global.AWS.S3({
+        apiVersion: "2006-03-01",
+        params: {
+          Bucket: bucketName
+        },
+        useAccelerateEndpoint: true,
+        accessKeyId,
+        secretAccessKey,
+        correctClockSkew: true,
+        httpOptions: {
+          timeout: 0
+        },
+        maxRetries: 1000000
+      });
+
+      return new global.AWS.S3.ManagedUpload({
+        params: {
+          Bucket: bucketName,
+          Key:
+            uploadPath +
+            "/" +
+            new Date().getTime() +
+            "/" +
+            encodeURIComponent(file.name),
+          Body: file,
+          ContentType: file.type,
+          ContentDisposition: "inline"
+        },
+        service: s3,
+        queueSize: 8
+      });
+    },
+
     s3Upload(media) {
-      const { id, file, width, mediaType } = media;
+      const { id, mediaType, file } = media;
 
       return new Promise(accept => {
-        const {
-          bucketName,
-          uploadPath,
-          accessKeyId,
-          secretAccessKey
-        } = this.$store.state.init.data.upload;
-
-        const s3 = new global.AWS.S3({
-          apiVersion: "2006-03-01",
-          params: {
-            Bucket: bucketName
-          },
-          useAccelerateEndpoint: true,
-          accessKeyId,
-          secretAccessKey,
-          correctClockSkew: true,
-          httpOptions: {
-            timeout: 0
-          },
-          maxRetries: 1000000
-        });
-
-        const upload = new global.AWS.S3.ManagedUpload({
-          params: {
-            Bucket: bucketName,
-            Key:
-              uploadPath +
-              "/" +
-              new Date().getTime() +
-              "/" +
-              encodeURIComponent(file.name),
-            Body: file,
-            ContentType: file.type,
-            ContentDisposition: "inline"
-          },
-          service: s3,
-          queueSize: 8
-        });
-
+        const upload = this.getS3Upload(file);
         this.s3uploads[id] = upload;
 
         upload.on("httpUploadProgress", e => {
@@ -211,8 +217,10 @@ export default {
 
         upload.send((err, data) => {
           if (err) {
-            // err.code === 'RequestAbortedError'
-            // console.log("Error: [" + err.code + "] " + err.message);
+            this.$store.dispatch("global/flashToast", {
+              text: "Error while uploading",
+              type: "error"
+            });
             delete this.s3uploads[id];
           } else {
             if (this.uploadAbortedIds.indexOf(id) !== -1) {
@@ -221,8 +229,8 @@ export default {
               );
               return;
             }
-            fileUpload(
-              { id, width, mediaType, file: data },
+            converterUpload(
+              { id, mediaType, file: data },
               this.setUploadProgress,
               this.withoutWatermark
             ).then(({ processId, thumbs }) => {

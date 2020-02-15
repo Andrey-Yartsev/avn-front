@@ -210,7 +210,7 @@ export const getVideoPreview = (media, callback) => {
   fileReader.readAsArrayBuffer(file);
 };
 
-export const fileUpload = (
+export const converterUpload = (
   { id, file, mediaType },
   onProgress,
   withoutWatermark

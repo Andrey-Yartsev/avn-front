@@ -104,17 +104,18 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Loader from "@/components/common/Loader";
-import userMixin from "@/mixins/user";
+import User from "@/mixins/user";
+import FileUpload from "@/mixins/fileUpload";
 import {
   getMediaFileMeta,
-  fileUpload,
+  converterUpload,
   getImagePreview,
   readFileContent
-} from "@/utils/mediaFiles2";
+} from "@/utils/mediaFiles";
 
 export default {
   name: "StoryCreateModal",
-  mixins: [userMixin],
+  mixins: [User, FileUpload],
   data: () => ({
     showPreview: false,
     preview: {},
@@ -177,10 +178,11 @@ export default {
       });
     },
 
-    createNewStory: async function() {
+    createNewStory2: async function() {
       this.stopPreviewVideo();
       this.showLoader = true;
-      fileUpload({ id: "story", file: this.file }, () => {})
+
+      converterUpload({ id: "story", file: this.file }, () => {})
         .then(({ processId }) => {
           const newStoryData = {
             fitTypes: [],
@@ -199,6 +201,42 @@ export default {
           });
           this._close();
         });
+    },
+
+    createNewStory: async function() {
+      this.stopPreviewVideo();
+      this.showLoader = true;
+
+      const upload = this.getS3Upload(this.file);
+      upload.send((err, data) => {
+        if (err) {
+          this.$store.dispatch("global/flashToast", {
+            text: "Error while uploading",
+            type: "error"
+          });
+        } else {
+          console.log(data);
+          converterUpload({ id: "story", file: data })
+            .then(({ processId }) => {
+              const newStoryData = {
+                fitTypes: [],
+                mediaFiles: [{ id: processId }]
+              };
+
+              this.$store.dispatch("story/savePost", {
+                data: newStoryData,
+                userId: this.user.id
+              });
+            })
+            .catch(err => {
+              this.$store.dispatch("global/flashToast", {
+                text: err.message,
+                type: "error"
+              });
+              this._close();
+            });
+        }
+      });
     },
 
     playPreviewVideo: function() {
