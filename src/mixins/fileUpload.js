@@ -102,19 +102,23 @@ export default {
       }
 
       for (let i = 0; i < this.preloadedMedias.length; i += 1) {
-        const media = this.preloadedMedias[i];
-        const getPreviewMethod =
-          media.mediaType === "video" ? getVideoPreview : getImagePreview;
+        let media = this.preloadedMedias[i];
 
-        if (media.alreadySaved) {
-          continue;
+        if (media.size < 5000000) {
+          // prevent chrome freezing on large images
+          const getPreviewMethod =
+            media.mediaType === "video" ? getVideoPreview : getImagePreview;
+
+          if (media.alreadySaved) {
+            continue;
+          }
+
+          getPreviewMethod(media, newMedia => {
+            this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
+              oldMedia.id === newMedia.id ? newMedia : oldMedia
+            );
+          });
         }
-
-        getPreviewMethod(media, newMedia => {
-          this.preloadedMedias = this.preloadedMedias.map(oldMedia =>
-            oldMedia.id === newMedia.id ? newMedia : oldMedia
-          );
-        });
       }
 
       this.saveMediaFiles();
