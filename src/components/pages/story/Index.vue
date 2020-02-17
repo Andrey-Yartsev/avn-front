@@ -486,20 +486,16 @@ export default {
   },
   methods: {
     swipeHandler() {
+      this.saveRedirectLinkStat();
       window.open(this.currentStory.linkUrl);
     },
     handleRedirect() {
       if (this.$mq === "mobile") {
         return;
       }
+      this.saveRedirectLinkStat();
       window.open(this.currentStory.linkUrl);
     },
-    // handleAddRedirectLink(props) {
-    //   console.log(props);
-    //   this.newRedirectLink.linkTitle = props.title;
-    //   this.newRedirectLink.linkUrl = props.url;
-    //   this.resume();
-    // },
     addLinkModal() {
       this.pause();
       this.showDropdownMenu = false;
@@ -818,6 +814,17 @@ export default {
           stories: this.stories,
           currIndex: this.currIndex,
           fromCollection: this.isCollections
+        }
+      });
+    },
+    saveRedirectLinkStat() {
+      this.$root.ws.send({
+        act: "collect",
+        message: "story_link_redirect",
+        data: {
+          story_user_id: this.author.id,
+          story_id: this.currentStory.id,
+          link_url: this.currentStory.linkUrl
         }
       });
     },
