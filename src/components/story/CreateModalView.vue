@@ -178,32 +178,32 @@ export default {
       });
     },
 
+    // createNewStory2: async function() {
+    //   this.stopPreviewVideo();
+    //   this.showLoader = true;
+    //
+    //   converterUpload({ id: "story", file: this.file }, () => {})
+    //     .then(({ processId }) => {
+    //       const newStoryData = {
+    //         fitTypes: [],
+    //         mediaFiles: [{ id: processId }]
+    //       };
+    //
+    //       this.$store.dispatch("story/savePost", {
+    //         data: newStoryData,
+    //         userId: this.user.id
+    //       });
+    //     })
+    //     .catch(err => {
+    //       this.$store.dispatch("global/flashToast", {
+    //         text: err.message,
+    //         type: "error"
+    //       });
+    //       this._close();
+    //     });
+    // },
+
     createNewStory: async function() {
-      this.stopPreviewVideo();
-      this.showLoader = true;
-
-      converterUpload({ id: "story", file: this.file }, () => {})
-        .then(({ processId }) => {
-          const newStoryData = {
-            fitTypes: [],
-            mediaFiles: [{ id: processId }]
-          };
-
-          this.$store.dispatch("story/savePost", {
-            data: newStoryData,
-            userId: this.user.id
-          });
-        })
-        .catch(err => {
-          this.$store.dispatch("global/flashToast", {
-            text: err.message,
-            type: "error"
-          });
-          this._close();
-        });
-    },
-
-    createNewStory2: async function() {
       this.stopPreviewVideo();
       this.showLoader = true;
 
@@ -215,7 +215,6 @@ export default {
             type: "error"
           });
         } else {
-          console.log(data);
           converterUpload({ id: "story", file: data })
             .then(({ processId }) => {
               const newStoryData = {
@@ -223,10 +222,12 @@ export default {
                 mediaFiles: [{ id: processId }]
               };
 
-              this.$store.dispatch("story/savePost", {
-                data: newStoryData,
-                userId: this.user.id
-              });
+              setTimeout(() => {
+                this.$store.dispatch("story/savePost", {
+                  data: newStoryData,
+                  userId: this.user.id
+                });
+              }, 2000);
             })
             .catch(err => {
               this.$store.dispatch("global/flashToast", {
