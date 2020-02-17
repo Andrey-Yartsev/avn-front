@@ -130,6 +130,10 @@ const modalTypes = [
   {
     storeName: "mediaPayConfirm",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "addRedirectLink",
+    layoutOnlyModal: true
   }
 ];
 

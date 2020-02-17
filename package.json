@@ -47,6 +47,7 @@
     "vue-tribute": "^1.0.3",
     "vue-upload-component": "^2.8.20",
     "vue2-perfect-scrollbar": "^1.2.4",
+    "vue2-touch-events": "^2.2.1",
     "vuedraggable": "^2.23.0",
     "weekstart": "^1.0.0"
   },

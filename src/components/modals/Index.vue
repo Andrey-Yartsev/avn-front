@@ -21,6 +21,7 @@ import CreateStoryModal from "@/components/story/CreateModalView";
 import StoryViewersModal from "@/components/story/ViewersModalView";
 import CreateHighlightsModal from "@/components/story/CreateHighlightsModal";
 import ChooseHighlightModal from "@/components/story/ChooseHighlightModal";
+import AddRedirectLinkModal from "@/components/story/AddRedirectLinkModal";
 import UserReportModal from "@/components/users/UserReportModal";
 import ResubscribeModal from "@/components/subscription/ResubscribeModal";
 import PaymentModal from "@/components/subscription/PaymentModal";
@@ -79,7 +80,8 @@ export default {
     EditPostModal,
     AddMediaModal,
     EditMediaModal,
-    MediaPayConfirmModal
+    MediaPayConfirmModal,
+    AddRedirectLinkModal
   },
   props: {
     hasLayout: {

@@ -2,7 +2,7 @@
   <div class="StoryPageCollectionView">
     <template v-if="!loading && length && currentStory">
       <div class="stories-slideshow">
-        <div class="StoryPageView active">
+        <div class="StoryPageView active" v-touch:swipe.top="swipeHandler">
           <template v-if="currentStory.mediaType === 'photo'">
             <img class="storyItem_bg" :src="imageSource(currentStory)" alt />
             <div
@@ -145,6 +145,17 @@
                 >
                   <span class="more-functions__option">
                     Save
+                  </span>
+                </button>
+              </li>
+              <li class="more-functions__item">
+                <button
+                  class="saveFile more-functions__link"
+                  type="button"
+                  @click="addLinkModal"
+                >
+                  <span class="more-functions__option">
+                    Add redirect link
                   </span>
                 </button>
               </li>
@@ -332,12 +343,16 @@
 </template>
 
 <script>
+import Vue from "vue";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import StoryTimer from "@/helpers/StoryTimer";
 import ClickOutside from "vue-click-outside";
 import Tip from "@/components/common/tip/User";
 import ModalRouterParams from "@/mixins/modalRouter/params";
+import Vue2TouchEvents from "vue2-touch-events";
+
+Vue.use(Vue2TouchEvents);
 
 export default {
   name: "StoryPage",
@@ -443,6 +458,22 @@ export default {
     }
   },
   methods: {
+    swipeHandler(e) {
+      console.log(e);
+    },
+    addLinkModal() {
+      this.pause();
+      this.showDropdownMenu = false;
+      this.$store.dispatch("modal/show", {
+        name: "addRedirectLink",
+        data: {
+          storyId: this.currentStory.id,
+          linkUrl: this.currentStory.linkUrl,
+          linkTitle: this.currentStory.linkTitle,
+          cb: this.resume
+        }
+      });
+    },
     openTip() {
       this.pause();
       this.showComments = false;
