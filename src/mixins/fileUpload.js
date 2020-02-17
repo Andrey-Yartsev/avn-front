@@ -32,7 +32,8 @@ export default {
       limits: (this.$props && this.$props.defaultLimits) || limits,
       uploadInProgress: false,
       uploadAbortedIds: [],
-      s3uploads: {}
+      s3uploads: {},
+      enableS3: true
     };
   },
 
@@ -208,44 +209,61 @@ export default {
       const { id, mediaType, file } = media;
 
       return new Promise(accept => {
-        const upload = this.getS3Upload(file);
-        this.s3uploads[id] = upload;
+        if (this.enableS3) {
+          const upload = this.getS3Upload(file);
+          this.s3uploads[id] = upload;
 
-        upload.on("httpUploadProgress", e => {
-          this.setUploadProgress(media.id, e.loaded, e.total);
-        });
+          upload.on("httpUploadProgress", e => {
+            this.setUploadProgress(media.id, e.loaded, e.total);
+          });
 
-        upload.send((err, data) => {
-          if (err) {
-            this.$store.dispatch("global/flashToast", {
-              text: "Error while uploading",
-              type: "error"
-            });
-            delete this.s3uploads[id];
-          } else {
-            if (this.uploadAbortedIds.indexOf(id) !== -1) {
-              this.uploadAbortedIds = this.uploadAbortedIds.filter(
-                _id => _id !== id
-              );
-              return;
-            }
-            converterUpload(
-              { id, mediaType, file: data },
-              this.setUploadProgress,
-              this.withoutWatermark
-            ).then(({ processId, thumbs }) => {
-              this.preloadedMedias = this.preloadedMedias.map(m =>
-                m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
-              );
-              this.uploadInProgress = false;
-              if (this.setMediaIsReady !== undefined) {
-                this.setMediaIsReady(processId);
-              }
+          upload.send((err, data) => {
+            if (err) {
+              this.$store.dispatch("global/flashToast", {
+                text: "Error while uploading",
+                type: "error"
+              });
               delete this.s3uploads[id];
-              accept();
-            });
-          }
-        });
+            } else {
+              if (this.uploadAbortedIds.indexOf(id) !== -1) {
+                this.uploadAbortedIds = this.uploadAbortedIds.filter(
+                  _id => _id !== id
+                );
+                return;
+              }
+              converterUpload(
+                { id, mediaType, file: data },
+                this.setUploadProgress,
+                this.withoutWatermark
+              ).then(({ processId, thumbs }) => {
+                this.preloadedMedias = this.preloadedMedias.map(m =>
+                  m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
+                );
+                this.uploadInProgress = false;
+                if (this.setMediaIsReady !== undefined) {
+                  this.setMediaIsReady(processId);
+                }
+                delete this.s3uploads[id];
+                accept();
+              });
+            }
+          });
+        } else {
+          converterUpload(
+            { id, mediaType, file },
+            this.setUploadProgress,
+            this.withoutWatermark
+          ).then(({ processId, thumbs }) => {
+            this.preloadedMedias = this.preloadedMedias.map(m =>
+              m.id === id ? { ...m, processId, thumbs, thumbId: 1 } : m
+            );
+            this.uploadInProgress = false;
+            if (this.setMediaIsReady !== undefined) {
+              this.setMediaIsReady(processId);
+            }
+            accept();
+          });
+        }
       });
     },
 

@@ -185,7 +185,7 @@
               type="file"
               multiple
               :accept="inputAccepts"
-              @change="addMediaFiles"
+              @change="addMed3iaFiles"
             />
             <span class="icn-media icn-item icn-size_lg"></span>
             <span class="btn-post__text">
