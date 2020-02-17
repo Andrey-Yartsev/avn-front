@@ -16,7 +16,15 @@ const actions = {
     commit("stories/page/extendPost", post, { root: true });
   },
   async addRedirectLink({ dispatch }, data) {
-    return dispatch("_addRedirectLink", data);
+    return dispatch("_addRedirectLink", data).then(res => {
+      console.log(res);
+      dispatch("updateStory", res.data);
+    });
+  },
+  updateStory({ commit }, data) {
+    commit("stories/feed/updatePostLink", data, { root: true });
+    commit("stories/explore/updatePostLink", data, { root: true });
+    commit("stories/page/updatePostLink", data, { root: true });
   }
 };
 
@@ -30,7 +38,6 @@ createRequestAction({
     method: "PUT"
   },
   paramsToPath: function(params, path) {
-    console.log(params);
     return path.replace(/{linkId}/, params.storyId);
   },
   paramsToOptions: function(params, options) {

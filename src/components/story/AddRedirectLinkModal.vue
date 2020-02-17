@@ -137,6 +137,9 @@ export default {
     }
   },
   methods: {
+    cb() {
+      this.$store.state.modal.addRedirectLink.data.cb();
+    },
     submitHandler() {
       this.$store
         .dispatch(
@@ -157,6 +160,10 @@ export default {
             }
           );
           this.close();
+          this.cb();
+        })
+        .catch(err => {
+          console.log(err);
         });
     },
     deleteHandler() {
@@ -180,6 +187,10 @@ export default {
             }
           );
           this.close();
+          this.cb();
+        })
+        .catch(err => {
+          console.log(err);
         });
     },
     closeHandler() {

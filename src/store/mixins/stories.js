@@ -47,6 +47,11 @@ const mutations = {
       return v;
     });
   },
+  updatePostLink(state, data) {
+    state.post = state.posts.map(item => {
+      return item.id === data.id ? data : item;
+    });
+  },
   removePost(state, authorId) {
     state.posts = state.posts.filter(item => item.user.id !== authorId);
   }

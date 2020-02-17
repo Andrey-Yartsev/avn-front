@@ -258,7 +258,7 @@
       >
         <span class="btn-icon icn-item icn-size_lg btn-direction_prev-up" />
         <p @click="handleRedirect">
-          {{ currentStory.linkTitle }}
+          {{ getLinkTitle }}
         </p>
       </div>
       <div class="bottom-btns">
@@ -392,6 +392,10 @@ export default {
       activeTip: false,
       activeComments: true,
       forceWaitingEvent: false
+      // newRedirectLink: {
+      //   linkTitle: "",
+      //   linkUrl: ""
+      // }
     };
   },
   computed: {
@@ -468,6 +472,16 @@ export default {
     },
     hasRedirectUrl() {
       return !!(this.currentStory.linkTitle && this.currentStory.linkUrl);
+      // return !!(
+      //   (this.currentStory.linkTitle && this.currentStory.linkUrl) ||
+      //   (this.newRedirectLink.linkTitle && this.newRedirectLink.linkUrl)
+      // );
+    },
+    getLinkTitle() {
+      return this.currentStory.linkTitle;
+      // return (
+      //   this.currentStory.linkTitle || this.newRedirectLink.linkTitle || ""
+      // );
     }
   },
   methods: {
@@ -480,6 +494,12 @@ export default {
       }
       window.open(this.currentStory.linkUrl);
     },
+    // handleAddRedirectLink(props) {
+    //   console.log(props);
+    //   this.newRedirectLink.linkTitle = props.title;
+    //   this.newRedirectLink.linkUrl = props.url;
+    //   this.resume();
+    // },
     addLinkModal() {
       this.pause();
       this.showDropdownMenu = false;
