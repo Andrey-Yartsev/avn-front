@@ -251,6 +251,16 @@
           </form>
         </div>
       </div>
+      <div
+        v-if="hasRedirectUrl"
+        class="bottom-btn swipeLink"
+        :class="{ swipeLink_mobile: $mq === 'mobile' }"
+      >
+        <span class="btn-icon icn-item icn-size_lg btn-direction_prev-up" />
+        <p @click="handleRedirect">
+          {{ currentStory.linkTitle }}
+        </p>
+      </div>
       <div class="bottom-btns">
         <Tip
           ref="tip"
@@ -455,11 +465,20 @@ export default {
     },
     isFollowedOrFollowing() {
       return this.author.followedBy || this.author.followedOn;
+    },
+    hasRedirectUrl() {
+      return !!(this.currentStory.linkTitle && this.currentStory.linkUrl);
     }
   },
   methods: {
-    swipeHandler(e) {
-      console.log(e);
+    swipeHandler() {
+      window.open(this.currentStory.linkUrl);
+    },
+    handleRedirect() {
+      if (this.$mq === "mobile") {
+        return;
+      }
+      window.open(this.currentStory.linkUrl);
     },
     addLinkModal() {
       this.pause();
@@ -933,3 +952,24 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.swipeLink {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  & > p {
+    cursor: pointer;
+  }
+}
+.swipeLink_mobile {
+  bottom: 20px;
+  font-size: 12px;
+}
+</style>
