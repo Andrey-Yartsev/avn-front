@@ -36,8 +36,8 @@
                             <input
                               type="text"
                               v-model.trim="linkTitle"
+                              maxlength="50"
                               name="title"
-                              required
                               :class="{
                                 'text-field-border': $mq === 'desktop'
                               }"
@@ -159,8 +159,8 @@ export default {
               root: true
             }
           );
-          this.close();
           this.cb();
+          this.close();
         })
         .catch(err => {
           console.log(err);
@@ -186,8 +186,8 @@ export default {
               root: true
             }
           );
-          this.close();
           this.cb();
+          this.close();
         })
         .catch(err => {
           console.log(err);

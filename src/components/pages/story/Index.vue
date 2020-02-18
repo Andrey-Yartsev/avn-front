@@ -254,7 +254,10 @@
       <div
         v-if="hasRedirectUrl"
         class="bottom-btn swipeLink"
-        :class="{ swipeLink_mobile: $mq === 'mobile' }"
+        :class="{
+          swipeLink_mobile: $mq === 'mobile',
+          moveTop: this.showComments
+        }"
       >
         <span class="btn-icon icn-item icn-size_lg btn-direction_prev-up" />
         <p @click="handleRedirect">
@@ -392,10 +395,6 @@ export default {
       activeTip: false,
       activeComments: true,
       forceWaitingEvent: false
-      // newRedirectLink: {
-      //   linkTitle: "",
-      //   linkUrl: ""
-      // }
     };
   },
   computed: {
@@ -472,29 +471,26 @@ export default {
     },
     hasRedirectUrl() {
       return !!(this.currentStory.linkTitle && this.currentStory.linkUrl);
-      // return !!(
-      //   (this.currentStory.linkTitle && this.currentStory.linkUrl) ||
-      //   (this.newRedirectLink.linkTitle && this.newRedirectLink.linkUrl)
-      // );
     },
     getLinkTitle() {
       return this.currentStory.linkTitle;
-      // return (
-      //   this.currentStory.linkTitle || this.newRedirectLink.linkTitle || ""
-      // );
     }
   },
   methods: {
     swipeHandler() {
-      this.saveRedirectLinkStat();
-      window.open(this.currentStory.linkUrl);
+      if (this.hasRedirectUrl) {
+        this.saveRedirectLinkStat();
+        window.open(this.currentStory.linkUrl);
+      }
     },
     handleRedirect() {
       if (this.$mq === "mobile") {
         return;
       }
-      this.saveRedirectLinkStat();
-      window.open(this.currentStory.linkUrl);
+      if (this.hasRedirectUrl) {
+        this.saveRedirectLinkStat();
+        window.open(this.currentStory.linkUrl);
+      }
     },
     addLinkModal() {
       this.pause();
@@ -998,5 +994,8 @@ export default {
 .swipeLink_mobile {
   bottom: 20px;
   font-size: 12px;
+  &.moveTop {
+    bottom: 70px;
+  }
 }
 </style>

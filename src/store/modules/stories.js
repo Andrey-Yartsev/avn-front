@@ -17,8 +17,7 @@ const actions = {
   },
   async addRedirectLink({ dispatch }, data) {
     return dispatch("_addRedirectLink", data).then(res => {
-      console.log(res);
-      dispatch("updateStory", res.data);
+      return dispatch("updateStory", res);
     });
   },
   updateStory({ commit }, data) {
