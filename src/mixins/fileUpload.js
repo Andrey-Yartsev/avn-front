@@ -6,6 +6,8 @@ import {
   uniqId
 } from "@/utils/mediaFiles";
 
+import { logDebug } from "@/utils/logging";
+
 const messages = {
   photo: "Photo limit is reached",
   video: "Video limit is reached",
@@ -146,11 +148,22 @@ export default {
         : "all";
     },
 
-    setUploadProgress(id, loaded, total) {
+    setUploadProgress(id, loaded, total, file, logger) {
+      const progress = Math.round((loaded / total) * 100);
+
+      if (progress % 20 === 0) {
+        logDebug({
+          logger,
+          message: "Upload progress",
+          logData: {
+            name: file.name,
+            progress
+          }
+        });
+      }
+
       this.preloadedMedias = this.preloadedMedias.map(m => {
-        return m.id === id
-          ? { ...m, loaded: Math.round((loaded / total) * 100) }
-          : m;
+        return m.id === id ? { ...m, loaded: progress } : m;
       });
     },
 
@@ -218,23 +231,66 @@ export default {
           this.s3uploads[id] = upload;
 
           upload.on("httpUploadProgress", e => {
-            this.setUploadProgress(media.id, e.loaded, e.total);
+            this.setUploadProgress(
+              media.id,
+              e.loaded,
+              e.total,
+              file,
+              "S3Uploader"
+            );
           });
 
-          upload.send((err, data) => {
-            if (err) {
+          logDebug({
+            logger: "S3Uploader",
+            message: "Upload started",
+            logData: {
+              name: file.name,
+              type: file.type,
+              size: file.size
+            }
+          });
+
+          upload.send((error, data) => {
+            if (error) {
               this.$store.dispatch("global/flashToast", {
                 text: "Error while uploading",
                 type: "error"
               });
+              if (error.code === "RequestAbortedError") {
+                logDebug({
+                  logger: "S3Uploader",
+                  message: "Upload aborted",
+                  logData: {
+                    name: file.name,
+                    error
+                  }
+                });
+                return;
+              }
               delete this.s3uploads[id];
             } else {
               if (this.uploadAbortedIds.indexOf(id) !== -1) {
                 this.uploadAbortedIds = this.uploadAbortedIds.filter(
                   _id => _id !== id
                 );
+                logDebug({
+                  logger: "S3Uploader",
+                  message: "Upload canceled",
+                  logData: {
+                    name: file.name,
+                    error
+                  }
+                });
                 return;
               }
+              logDebug({
+                logger: "S3Uploader",
+                message: "Upload success",
+                logData: {
+                  name: file.name,
+                  ETag: data.ETag
+                }
+              });
               converterUpload(
                 { id, mediaType, file: data },
                 this.setUploadProgress,

@@ -2,6 +2,7 @@
 
 import PostApi from "@/api/post";
 import { createRequestAction } from "../utils/storeRequest";
+import { logDebug } from "@/utils/logging";
 
 const state = {
   currentPost: undefined,
@@ -22,7 +23,19 @@ const mutations = {
 
 const actions = {
   async createPost({ dispatch, commit }, data) {
+    logDebug({
+      logger: "Post",
+      message: "Create",
+      logData: data
+    });
     const result = await dispatch("_createPost", data);
+    logDebug({
+      logger: "Post",
+      message: "Created",
+      logData: {
+        result
+      }
+    });
     commit("modal/hide", { name: "addPost" }, { root: true });
     return result;
   },

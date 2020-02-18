@@ -1,4 +1,5 @@
 import Store from "@/store";
+import { logDebug } from "@/utils/logging";
 
 export const uniqId = () => {
   let ts = String(new Date().getTime()),
@@ -211,7 +212,7 @@ export const getVideoPreview = (media, callback) => {
 };
 
 export const converterUpload = (
-  { id, mediaType, file },
+  { /* id, */ mediaType, file },
   onProgress,
   withoutWatermark
 ) => {
@@ -226,6 +227,26 @@ export const converterUpload = (
       // watermarkFile,
       watermarkFileUpload
     } = Store.state.auth.user;
+
+    const getLogData = extra => {
+      const logData = {
+        mediaType
+      };
+      if (file.name) {
+        logData.name = file.name;
+      } else {
+        if (!file.Key) {
+          throw new Error("Wrong upload logic");
+        }
+        logData.Key = file.Key;
+        logData.ETag = file.ETag;
+      }
+      if (extra) {
+        for (let [key, value] of Object.entries(extra)) {
+          logData[key] = value;
+        }
+      }
+    };
 
     const data = {};
 
@@ -256,34 +277,61 @@ export const converterUpload = (
       data["needThumbs"] = true;
     }
 
-    xhr.upload.onprogress = ({ loaded, total }) => {
-      if (onProgress) {
-        onProgress(id, loaded, total, xhr);
-      }
-    };
+    // Uses only for non-s3 version
+    //
+    // xhr.upload.onprogress = ({ loaded, total }) => {
+    //   if (onProgress) {
+    //     onProgress(id, loaded, total, file, "Converter");
+    //   }
+    // };
+
     xhr.onload = xhr.onerror = () => {
       if (xhr.status == 200) {
         const { processId, thumbs } = JSON.parse(xhr.response);
+        const result = { processId, thumbs };
+        logDebug({
+          logger: "Converter",
+          message: "Upload success",
+          logData: getLogData({ result })
+        });
         resolve({
           processId,
           thumbs
         });
       } else {
+        let error = null;
         try {
           const r = JSON.parse(xhr.response);
           if (r.error) {
-            reject(r.error);
+            error = r.error;
           } else {
-            reject({ message: "Error on upload" });
+            error = { message: "Error on upload" };
           }
         } catch (e) {
-          reject({ message: "Error on upload" });
+          error = { message: "Error on upload" };
         }
+        logDebug({
+          logger: "Converter",
+          message: "Upload error",
+          logData: getLogData({ error })
+        });
+        reject(error);
       }
     };
     xhr.onabort = () => {
+      logDebug({
+        logger: "Converter",
+        message: "Upload aborted",
+        logData: getLogData()
+      });
       reject();
     };
+
+    logDebug({
+      message: "Send data to converter",
+      logger: "Converter",
+      logData: getLogData()
+    });
 
     xhr.open("POST", `${Store.state.init.data.converter.url}`, true);
 
