@@ -219,24 +219,26 @@
           </div>
         </div>
       </div>
-      <div class="form-comments" v-if="!isMine && showComments">
-        <form class="form-comments__wrapper">
-          <textarea
-            placeholder="Comment"
-            maxlength="200"
-            class="form-comments__input rounded lg"
-            @focus="pause"
-            @blur="resume"
-            v-model="comment"
-            @keypress.enter.prevent="sendComment"
-          />
-          <button
-            @click="sendComment"
-            type="button"
-            :disabled="!comment.length"
-            class="btn-send btn-send_inside-field icn-item icn-size_lg"
-          />
-        </form>
+      <div class="stream-forms" v-if="!isMine && showComments">
+        <div class="form-comments">
+          <form class="form-comments__wrapper">
+            <textarea
+              placeholder="Comment"
+              maxlength="200"
+              class="form-comments__input rounded lg"
+              @focus="pause"
+              @blur="resume"
+              v-model="comment"
+              @keypress.enter.prevent="sendComment"
+            />
+            <button
+              @click="sendComment"
+              type="button"
+              :disabled="!comment.length"
+              class="btn-send btn-send_inside-field icn-item icn-size_lg"
+            />
+          </form>
+        </div>
       </div>
       <div class="bottom-btns">
         <Tip
@@ -278,7 +280,7 @@
           class="bottom-btn"
           v-if="!isMine"
           @click="openComments"
-          :class="{ selected: activeComments }"
+          :class="{ selected: activeComments && showComments }"
         >
           <span
             class="btn-icon comments icn-item icn-size_lg"
