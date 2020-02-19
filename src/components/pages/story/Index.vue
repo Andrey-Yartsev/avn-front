@@ -2,7 +2,11 @@
   <div class="StoryPageCollectionView">
     <template v-if="!loading && length && currentStory">
       <div class="stories-slideshow">
-        <div class="StoryPageView active" v-touch:swipe.top="swipeHandler">
+        <div
+          class="StoryPageView active"
+          v-touch:swipe.top="topSwipeHandler"
+          v-touch:swipe.bottom="bottomSwipeHandler"
+        >
           <template v-if="currentStory.mediaType === 'photo'">
             <img class="storyItem_bg" :src="imageSource(currentStory)" alt />
             <div
@@ -256,12 +260,15 @@
         class="bottom-btn swipeLink"
         :class="{
           swipeLink_mobile: $mq === 'mobile',
-          moveTop: this.showComments
+          moveBottom: this.showComments && !isOwner(author.id)
         }"
       >
-        <span class="btn-icon icn-item icn-size_lg btn-direction_prev-up" />
+        <span
+          class="btn-icon icn-item icn-size_lg btn-direction_prev-up"
+          style="margin-right: 0"
+        />
         <p @click="handleRedirect">
-          {{ getLinkTitle }}
+          Swipe
         </p>
       </div>
       <div class="bottom-btns">
@@ -311,6 +318,13 @@
             v-tooltip="'Comments'"
           />
         </span>
+        <span
+          class="btn-send bottom-btn icn-item"
+          v-tooltip="'Redirects amount'"
+          v-if="isOwner(author.id) && hasRedirectUrl"
+        >
+          {{ getRedirectCounter }}
+        </span>
       </div>
       <button
         type="button"
@@ -322,6 +336,11 @@
         ref="videoPlayButton"
       >
         <div class="play-button"></div>
+      </div>
+      <div class="swipeFooter" :class="{ visible: showSwipeFooter }">
+        <span class="swipeFooter_content" @click="handleRedirect">
+          {{ getLinkTitle }}
+        </span>
       </div>
     </template>
     <div
@@ -394,7 +413,8 @@ export default {
       comment: "",
       activeTip: false,
       activeComments: true,
-      forceWaitingEvent: false
+      forceWaitingEvent: false,
+      showSwipeFooter: false
     };
   },
   computed: {
@@ -474,19 +494,23 @@ export default {
     },
     getLinkTitle() {
       return this.currentStory.linkTitle;
+    },
+    getRedirectCounter() {
+      return this.currentStory.redirectCounter || "0";
     }
   },
   methods: {
-    swipeHandler() {
+    bottomSwipeHandler() {
       if (this.hasRedirectUrl) {
-        this.saveRedirectLinkStat();
-        window.open(this.currentStory.linkUrl);
+        this.showSwipeFooter = false;
+      }
+    },
+    topSwipeHandler() {
+      if (this.hasRedirectUrl) {
+        this.showSwipeFooter = true;
       }
     },
     handleRedirect() {
-      if (this.$mq === "mobile") {
-        return;
-      }
       if (this.hasRedirectUrl) {
         this.saveRedirectLinkStat();
         window.open(this.currentStory.linkUrl);
@@ -940,6 +964,9 @@ export default {
         this.currIndex = 0;
       }
     },
+    currIndex() {
+      this.showSwipeFooter = false;
+    },
     currentStory() {
       if (!this.currentStory) return;
 
@@ -947,7 +974,7 @@ export default {
       this.$nextTick(() => {
         this.runProgress();
       });
-
+      this.showSwipeFooter = false;
       this.saveStat();
       this.preloadNextImages();
     },
@@ -987,6 +1014,7 @@ export default {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  padding-bottom: 0;
   & > p {
     cursor: pointer;
   }
@@ -994,8 +1022,31 @@ export default {
 .swipeLink_mobile {
   bottom: 20px;
   font-size: 12px;
-  &.moveTop {
-    bottom: 70px;
+  &.moveBottom {
+    bottom: 0;
+  }
+}
+.swipeFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100px;
+  height: 50px;
+  color: white;
+  transform: translateY(150px);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  &.visible {
+    transform: translateY(0px);
+  }
+  .swipeFooter_content {
+    background-color: rgba(95, 95, 95, 0.85);
+    padding: 10px 40px;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
 </style>
