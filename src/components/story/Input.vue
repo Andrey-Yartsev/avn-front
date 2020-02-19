@@ -9,11 +9,17 @@
   />
 </template>
 <script>
+import FileUpload from "@/mixins/fileUpload";
+
 export default {
   name: "StoryInput",
+  mixins: [FileUpload],
   methods: {
     chooseFileEvent: async function(e) {
       const file = e.target.files[0];
+      if (!this.isValidFileSize(file.size)) {
+        return;
+      }
       this.$store.dispatch("modal/show", {
         name: "createStory",
         data: {

@@ -35,7 +35,8 @@ export default {
       uploadInProgress: false,
       uploadAbortedIds: [],
       s3uploads: {},
-      enableS3: true
+      enableS3: true,
+      maxFileSizeLimit: 10000000000
     };
   },
 
@@ -60,7 +61,7 @@ export default {
         if (!e.target.multiple) {
           e.target.value = "";
         }
-        this.toast("Media of that type can not be added at this time");
+        this.toast("Media of that type or size can not be added at this time");
       }
 
       let addedFiles = [...this.preloadedMedias];
@@ -68,6 +69,9 @@ export default {
       for (let i = 0; i < validLength; i += 1) {
         const file = validFiles[i];
         const { mediaType, name, size } = getMediaFileMeta(file);
+        if (!this.isValidFileSize(size)) {
+          return;
+        }
 
         addedFiles.push({
           file,
@@ -343,8 +347,21 @@ export default {
 
     validateFiles(files) {
       return files.length
-        ? files.filter(file => this.isValidMediaType(file.name))
+        ? files.filter(
+            file =>
+              this.isValidMediaType(file.name) &&
+              file.size <= this.maxFileSizeLimit
+          )
         : [];
+    },
+
+    isValidFileSize(size) {
+      if (size > this.maxFileSizeLimit) {
+        this.toast(`That file size can't be uploaded for now`);
+        return false;
+      }
+      return true;
+      // return size <= maxFileSizeLimit;
     },
 
     isValidMediaType(name) {

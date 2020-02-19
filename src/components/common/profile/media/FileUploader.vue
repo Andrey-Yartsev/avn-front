@@ -285,6 +285,9 @@ export default {
         console.log("wrong format");
         return prevent();
       }
+      if (newFile && !oldFile && !this.isValidFileSize(newFile.size)) {
+        return prevent();
+      }
     },
     isFormatCorrect(fileName) {
       if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov)$/i.test(fileName)) {
