@@ -123,6 +123,24 @@
       <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
+            <div class="categories">
+              <div>Categories:</div>
+              <div class="categoriesContainer">
+                <template v-for="category in mediaCategories">
+                  <label class="form-group-inner" :key="category.name">
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        :id="category.name"
+                        :value="category.name"
+                        v-model="media.categories"
+                      />
+                      <span class="label icn-item">{{ category.name }}</span>
+                    </div>
+                  </label>
+                </template>
+              </div>
+            </div>
             <div class="btn-post">
               <div>Price</div>
               <div
@@ -242,6 +260,7 @@ import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
+import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
 
@@ -256,13 +275,15 @@ const InitialState = {
     thumbId: null,
     thumbs: [],
     removeVideoPreview: false,
-    pinned: false
+    pinned: false,
+    categories: []
   },
   saving: false,
   withoutWatermark: false,
   maxPrice: 500,
   dropdownOpened: false,
-  allowMultipleFileTypes: true
+  allowMultipleFileTypes: true,
+  mediaCategories: mediaCategories
 };
 
 export default {
@@ -328,6 +349,7 @@ export default {
         String(this.$props.post.price) !== String(this.media.price) ||
         this.$props.post.media.thumbId !== this.media.thumbId ||
         this.preloadedPhotoMedias.length ||
+        [].join(",") !== this.media.categories.join(",") ||
         this.preloadedVideoMedias.length ||
         this.media.removeVideoPreview
       );
@@ -426,7 +448,8 @@ export default {
         price,
         active,
         pinned,
-        media: { thumbs, thumbId }
+        media: { thumbs, thumbId },
+        categories
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -435,6 +458,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
+      this.media.categories = categories ? categories.split(",") : [];
     },
     clearData() {
       this.media.title = "";
@@ -446,6 +470,7 @@ export default {
       this.media.thumbs = [];
       this.media.removeVideoPreview = false;
       this.media.pinned = false;
+      this.media.categories = [];
     },
     saveClickHandler() {
       this.saving = true;
@@ -513,5 +538,24 @@ export default {
 }
 .previewDropdown {
   margin-left: auto;
+}
+.categories {
+  width: 100%;
+}
+.title {
+  margin-bottom: 10px;
+}
+.categoriesContainer {
+  display: flex;
+  flex-flow: row wrap;
+}
+.form-group-inner {
+  margin-top: 5px;
+  margin-right: 10px;
+  /* flex-grow: 1;
+  flex-basis: 33.33%; */
+}
+.withPadding {
+  padding: 0 10px;
 }
 </style>
