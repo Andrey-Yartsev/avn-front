@@ -23,6 +23,7 @@
           settings
         </div>
       </template>
+      <MediaCategories v-model="categories" />
       <div
         :class="['buttonWrapper', 'more-functions', { open: opened }]"
         v-click-outside="hide"
@@ -98,6 +99,7 @@ import Loader from "@/components/common/Loader";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import MediaCategories from "@/components/common/profile/media/views/MediaCategories";
 import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdown";
 import User from "@/mixins/user";
 import IntersectionObserver from "@/mixins/intersectionObserver";
@@ -108,7 +110,8 @@ export default {
   components: {
     Loader,
     FileUploader,
-    FilterDropdown
+    FilterDropdown,
+    MediaCategories
   },
   directives: {
     ClickOutside
@@ -126,7 +129,8 @@ export default {
       opened: false,
       fetchLimit: 9,
       withoutWatermark: false,
-      filesLength: 0
+      filesLength: 0,
+      categories: []
     };
   },
   computed: {
@@ -202,6 +206,13 @@ export default {
       this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });
       this.fetchMedia();
+    },
+    categories() {
+      console.log(this.categories);
+      this.destroyObserver();
+      this.isInitFetch = true;
+      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.fetchMedia();
     }
   },
   methods: {
@@ -220,6 +231,7 @@ export default {
     fetchMedia() {
       this.$store
         .dispatch("profile/media/getMedia", {
+          categories: this.categories.join(","),
           profileId: this.$store.state.profile.home.profile.id,
           filter: this.getFilterType,
           sort: this.getSortOrder
