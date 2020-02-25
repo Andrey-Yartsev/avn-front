@@ -838,6 +838,9 @@ export default {
       });
     },
     saveRedirectLinkStat() {
+      this.$store.dispatch("story/redirectByStoryLink", {
+        postId: this.currentStory.id
+      });
       this.$root.ws.send({
         act: "collect",
         message: "story_link_redirect",

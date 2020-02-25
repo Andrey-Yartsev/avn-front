@@ -66,6 +66,9 @@ const actions = {
   watch(opt, { postId }) {
     return StoriesApi.watchStory({ postId });
   },
+  redirectByStoryLink(opt, { postId }) {
+    return StoriesApi.redirectStory({ postId });
+  },
   saveCollection({ commit }, data) {
     return StoriesApi.saveCollection(data)
       .then(async response => {
