@@ -3,12 +3,12 @@
     <h3 class="title">Categories:</h3>
     <div class="categoriesContainer">
       <template v-for="category in categories">
-        <label class="form-group-inner" :key="category.name">
+        <label class="form-group-inner" :key="category.id">
           <div class="checkbox-wrapper">
             <input
               type="checkbox"
-              :id="category.name"
-              :value="category.name"
+              :id="category.id"
+              :value="category.id"
               v-model="selectedCategories"
             />
             <span class="label icn-item"
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import mediaCategories from "@/mock/mediaCategories";
 export default {
   name: "MediaCategories",
   props: ["value"],
@@ -34,12 +33,15 @@ export default {
       set(val) {
         this.$emit("input", val);
       }
+    },
+    categories() {
+      return (
+        this.$store.state.profile.home.profile.mediaCategories || [
+          { id: 1, name: "Male", amount: 8 },
+          { id: 2, name: "Female", amount: 6 }
+        ]
+      );
     }
-  },
-  data() {
-    return {
-      categories: mediaCategories
-    };
   }
 };
 </script>

@@ -127,12 +127,12 @@
               <div>Categories:</div>
               <div class="categoriesContainer">
                 <template v-for="category in mediaCategories">
-                  <label class="form-group-inner" :key="category.name">
+                  <label class="form-group-inner" :key="category.id">
                     <div class="checkbox-wrapper">
                       <input
                         type="checkbox"
-                        :id="category.name"
-                        :value="category.name"
+                        :id="category.id"
+                        :value="category.id"
                         v-model="media.categories"
                       />
                       <span class="label icn-item">{{ category.name }}</span>
@@ -260,7 +260,7 @@ import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
-import mediaCategories from "@/mock/mediaCategories";
+// import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
 
@@ -282,8 +282,7 @@ const InitialState = {
   withoutWatermark: false,
   maxPrice: 500,
   dropdownOpened: false,
-  allowMultipleFileTypes: true,
-  mediaCategories: mediaCategories
+  allowMultipleFileTypes: true
 };
 
 export default {
@@ -389,6 +388,9 @@ export default {
         return [];
       }
       return this.preloadedMedias.filter(item => item.mediaType === "video");
+    },
+    mediaCategories() {
+      return this.$store.state.profile.media.mediaCategories;
     }
   },
   watch: {

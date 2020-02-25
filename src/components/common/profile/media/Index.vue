@@ -246,6 +246,9 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch("profile/media/getMediaCategories", null, {
+      root: true
+    });
     this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
   }

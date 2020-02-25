@@ -11,7 +11,8 @@ const initState = {
   offset: 0,
   limit: fetchLimit,
   allDataReceived: false,
-  preloadedMedias: []
+  preloadedMedias: [],
+  mediaCategories: null
 };
 
 const state = { ...initState };
@@ -102,6 +103,9 @@ const mutations = {
       }
       return item;
     });
+  },
+  setMediaCategories(state, data) {
+    state.mediaCategories = data;
   }
 };
 
@@ -170,6 +174,20 @@ const actions = {
   },
   updateMediaPreviewSrc({ commit }, data) {
     commit("updateMediaPreviewSrc", data);
+  },
+  getMediaCategories({ dispatch, commit }) {
+    return dispatch("_getMediaCategories")
+      .then(res => {
+        console.log(res);
+        commit("setMediaCategories", res);
+      })
+      .catch(err => {
+        console.log(err);
+        commit("setMediaCategories", [
+          { id: 1, name: "Male" },
+          { id: 2, name: "Female" }
+        ]);
+      });
   }
 };
 
@@ -211,6 +229,17 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{productId}/, params.productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_getMediaCategories",
+  apiPath: "media/categories",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
   }
 });
 
