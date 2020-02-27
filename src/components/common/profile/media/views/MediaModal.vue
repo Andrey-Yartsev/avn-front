@@ -42,7 +42,8 @@ export default {
       index: undefined,
       extraClassName: "lightbox-post scroll-post",
       backFrom: undefined,
-      preloadedImageIndexes: {}
+      preloadedImageIndexes: {},
+      post: null
     };
   },
   computed: {
@@ -52,11 +53,6 @@ export default {
     postId() {
       return parseInt(this.$store.state.modalRouter.params.postId);
     },
-    post() {
-      return this.$store.state.profile.media.media.find(
-        item => item.productId === this.postId
-      );
-    },
     path() {
       return `media/${this.postId}`;
     }
@@ -64,7 +60,30 @@ export default {
   methods: {
     addExtraClassName(className) {
       this.extraClassName = className;
+    },
+    init() {
+      const existedPost = this.$store.state.profile.media.media.find(
+        item => item.productId === this.postId
+      );
+      if (existedPost) {
+        this.post = existedPost;
+      } else {
+        this.$store
+          .dispatch(
+            "profile/media/getMediaItemForModal",
+            {
+              productId: this.postId
+            },
+            { root: true }
+          )
+          .then(res => {
+            this.post = res;
+          });
+      }
     }
+  },
+  mounted() {
+    this.init();
   }
 };
 </script>

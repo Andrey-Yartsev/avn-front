@@ -102,15 +102,15 @@ export default {
       });
     },
     getVideoUrl() {
-      const { protocol, port, hostname } = window.location;
-      return (
-        `${protocol}//${hostname}` +
-        (port ? ":" + port : "") +
-        `/media/${this.post.productId}`
-      );
-      // const { href } = window.location;
-      // const basHref = href.split("#")[0];
-      // return `${basHref}#m/media/${this.post.productId}/profile/home`;
+      // const { protocol, port, hostname } = window.location;
+      // return (
+      //   `${protocol}//${hostname}` +
+      //   (port ? ":" + port : "") +
+      //   `/media/${this.post.productId}`
+      // );
+      const { href } = window.location;
+      const basHref = href.split("#")[0];
+      return `${basHref}#m/media/${this.post.productId}/profile/home`;
     },
     pinToggle() {
       this.hide();

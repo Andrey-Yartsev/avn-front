@@ -123,6 +123,9 @@ const actions = {
       commit("mediaPage/updateMediaItem", res, { root: true });
     });
   },
+  getMediaItemForModal({ dispatch }, data) {
+    return dispatch("_getMediaItem", data);
+  },
   deleteMedia({ dispatch, commit }, mediaId) {
     dispatch("_deleteMedia", mediaId).then(() => {
       commit("deleteMedia", mediaId);
