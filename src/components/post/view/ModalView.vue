@@ -87,6 +87,11 @@ export default {
     },
     posts() {
       return this.postsState.posts;
+    },
+    postNotFetchedYet() {
+      if (!this.posts.length) return true;
+      const existedPost = this.posts.find(item => item.id === this.postId);
+      return !existedPost;
     }
   },
   components: {
@@ -161,7 +166,7 @@ export default {
     }
   },
   created() {
-    if (!this.length) {
+    if (!this.length || this.postNotFetchedYet) {
       this.backFrom = "postPage";
       this.$store.commit("postPage/resetPageState");
 

@@ -7,10 +7,10 @@ import MediaModal from "@/components/common/profile/media/views/MediaModal";
 
 export default {
   "post/:postId/:from": {
-    component: PostModal,
-    enterRedirect: params => {
-      return "/post/" + params.postId;
-    }
+    component: PostModal
+    // enterRedirect: params => {
+    //   return "/post/" + params.postId;
+    // }
   },
   "media/:postId/:from": {
     component: MediaModal
