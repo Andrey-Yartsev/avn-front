@@ -13,10 +13,10 @@ export default {
     }
   },
   "media/:postId/:from": {
-    component: MediaModal,
-    enterRedirect: params => {
-      return "/media/" + params.postId;
-    }
+    component: MediaModal
+    // enterRedirect: params => {
+    //   return "/media/" + params.postId;
+    // }
   },
   notifications: NotifModal,
   "notifications/:type": NotifModal,
