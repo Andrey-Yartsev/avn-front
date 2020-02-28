@@ -3,16 +3,22 @@ import Auth from "./auth";
 
 const Post = {
   page(to, from, next) {
+    const { username, productId } = to.params;
+    if (username && productId) {
+      next(`/${username}/media#m/media/${productId}/profile/home`);
+    }
     Auth.requireAny(to, from, () => {
       Store.dispatch(
         "mediaPage/getMediaItem",
         {
-          productId: to.params.productId
+          productId: productId
         },
         { root: true }
       )
-        .then(() => {
-          next();
+        .then(res => {
+          next(
+            `/${res.author.username}/media#m/media/${productId}/profile/home`
+          );
         })
         .catch(() => {
           next("/not-found");

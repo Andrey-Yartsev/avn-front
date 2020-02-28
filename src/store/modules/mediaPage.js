@@ -23,8 +23,9 @@ const mutations = {
 const actions = {
   getMediaItem({ commit, dispatch }, { productId }) {
     commit("resetMediaState");
-    dispatch("_getMediaItem", { productId }).then(res => {
+    return dispatch("_getMediaItem", { productId }).then(res => {
       commit("setMedia", res);
+      return res;
     });
   }
 };
