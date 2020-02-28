@@ -102,17 +102,12 @@ export default {
   }),
   computed: {
     href() {
-      const { protocol, port, hostname, href } = window.location;
-      if (this.$route.hash) {
-        const basHref = href.split("#")[0];
-        return `${basHref}#m/post/${this.postId}/profile/home`;
-      } else {
-        return (
-          `${protocol}//${hostname}` +
-          (port ? ":" + port : "") +
-          `/post/${this.postId}`
-        );
-      }
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/post/${this.post.author.username}/${this.postId}`
+      );
     },
     actionPrefix() {
       return this.from;
