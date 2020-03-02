@@ -426,8 +426,8 @@ export default {
       return this.$store.state.post._createPostLoading;
     },
     allMediaTypes() {
-      const { photo, video, gif } = this.inputAcceptTypes;
-      return [...photo, ...video, ...gif];
+      const { photo, video, gif, audio } = this.inputAcceptTypes;
+      return [...photo, ...video, ...gif, ...audio];
     },
     inputAccepts() {
       const accepts =

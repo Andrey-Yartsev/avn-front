@@ -11,19 +11,22 @@ import { logDebug } from "@/utils/logging";
 const messages = {
   photo: "Photo limit is reached",
   video: "Video limit is reached",
-  gif: "Gif limit is reached"
+  gif: "Gif limit is reached",
+  audio: "Audio limit is reached"
 };
 
 const inputAcceptTypes = {
   gif: ["gif"],
   photo: ["jpg", "jpeg", "png"],
-  video: ["mp4", "mov", "moov", "m4v", "mpg", "mpeg", "wmv", "avi"]
+  video: ["mp4", "mov", "moov", "m4v", "mpg", "mpeg", "wmv", "avi"],
+  audio: ["mp3"]
 };
 
 const limits = {
   video: 1,
   gif: 1,
-  photo: 5
+  photo: 5,
+  audio: 1
 };
 
 export default {
@@ -93,7 +96,8 @@ export default {
         const filtered = {
           photo: addedFiles.filter(file => file.mediaType === "photo"),
           video: addedFiles.filter(file => file.mediaType === "video"),
-          gif: addedFiles.filter(file => file.mediaType === "gif")
+          gif: addedFiles.filter(file => file.mediaType === "gif"),
+          audio: addedFiles.filter(file => file.mediaType === "audio")
         };
 
         e.target.value = "";
