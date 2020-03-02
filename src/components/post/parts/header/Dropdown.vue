@@ -18,6 +18,11 @@
           <span class="more-functions__option icn-item">Report post</span>
         </button>
       </li>
+      <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
+        <button class="more-functions__link" type="button" @click="repost">
+          <span class="more-functions__option icn-item">Repost</span>
+        </button>
+      </li>
       <template v-if="showCopy">
         <li v-if="copied" class="more-functions__item">
           <button
@@ -201,6 +206,10 @@ export default {
           postId: this.postId
         }
       });
+    },
+    repost() {
+      this.hide();
+      this.$store.dispatch("profile/home/repost", this.postId);
     },
     markSpam() {
       this.$store.dispatch("home/spamPost", this.$props.post.author.id);

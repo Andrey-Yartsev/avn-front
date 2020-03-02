@@ -39,19 +39,21 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
-      <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open" />
-      <div class="more-functions__dropdown">
-        <Dropdown
-          :post="post"
-          :from="from"
-          :hide="hide"
-          :showCopy="showCopy"
-          v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-        />
+    <template v-if="!isReposted">
+      <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
+        <div class="more-functions__overlay" @click="hide"></div>
+        <div class="more-functions__btn" @click="open" />
+        <div class="more-functions__dropdown">
+          <Dropdown
+            :post="post"
+            :from="from"
+            :hide="hide"
+            :showCopy="showCopy"
+            v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
+          />
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -86,7 +88,8 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    }
+    },
+    isReposted: Boolean
   },
   computed: {
     postId() {
