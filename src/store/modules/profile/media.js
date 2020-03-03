@@ -131,6 +131,7 @@ const actions = {
     dispatch("_getMediaItem", data).then(res => {
       commit("updateMedia", res);
       commit("mediaPage/updateMediaItem", res, { root: true });
+      commit("explore/updateStorePost", res, { root: true });
     });
   },
   getMediaItemForModal({ dispatch, commit }, data) {

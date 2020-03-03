@@ -59,15 +59,26 @@
             </div>
             <div v-else :class="['explore-wrapper', page]">
               <template v-if="type === 'media'">
-                <component
-                  :is="postComponent"
-                  v-for="post in posts"
-                  :post="post"
-                  :key="post.id"
-                  from="explore"
-                  :shouldBePoster="page === 'all' && post.id === firstVideoId"
-                  @visibilityChanged="visibilityChanged"
-                />
+                <template v-if="page === 'store'">
+                  <component
+                    :is="mediaComponent"
+                    v-for="post in posts"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                  />
+                </template>
+                <template v-else>
+                  <component
+                    :is="postComponent"
+                    v-for="post in posts"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                    @visibilityChanged="visibilityChanged"
+                  />
+                </template>
               </template>
               <template v-if="page === 'stories'">
                 <StoryMedium
@@ -128,6 +139,8 @@ import PostsStat from "@/mixins/post/statMany";
 import PostCollection from "@/components/post/collection/Index";
 import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
+import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 
 export default {
   name: "Explore",
@@ -144,7 +157,9 @@ export default {
     Live,
     Loader,
     PostCollection,
-    GenderFilter
+    GenderFilter,
+    MediaMedium,
+    MediaSmall
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
   created() {
@@ -233,8 +248,10 @@ export default {
       if (this.$mq === "mobile" && this.page === "videos") {
         return PostMedium;
       }
-
       return PostSmall;
+    },
+    mediaComponent() {
+      return this.$mq === "mobile" ? MediaMedium : MediaSmall;
     },
     category() {
       return this.$store.state.gender.category;
