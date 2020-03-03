@@ -8,8 +8,8 @@
         >
           <div class="postPageWrapper postPageWrapper_in-popup">
             <MediaLarge
-              v-if="post"
-              :post="post"
+              v-if="getPost"
+              :post="getPost"
               :from="backFrom || from"
               v-on:addExtraClassName="addExtraClassName"
             />
@@ -53,6 +53,14 @@ export default {
     postId() {
       return parseInt(this.$store.state.modalRouter.params.postId);
     },
+    getPost() {
+      if (this.$store.state.profile.media.separateMedia) {
+        return this.$store.state.profile.media.separateMedia;
+      }
+      return this.$store.state.profile.media.media.find(
+        item => item.productId === this.postId
+      );
+    },
     path() {
       return `media/${this.postId}`;
     }
@@ -65,25 +73,22 @@ export default {
       const existedPost = this.$store.state.profile.media.media.find(
         item => item.productId === this.postId
       );
-      if (existedPost) {
-        this.post = existedPost;
-      } else {
-        this.$store
-          .dispatch(
-            "profile/media/getMediaItemForModal",
-            {
-              productId: this.postId
-            },
-            { root: true }
-          )
-          .then(res => {
-            this.post = res;
-          });
+      if (!existedPost) {
+        this.$store.dispatch(
+          "profile/media/getMediaItemForModal",
+          {
+            productId: this.postId
+          },
+          { root: true }
+        );
       }
     }
   },
   mounted() {
     this.init();
+  },
+  beforeDestroy() {
+    this.$store.commit("profile/media/removeSeparateMedia");
   }
 };
 </script>
