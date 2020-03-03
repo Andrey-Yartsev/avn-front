@@ -106,7 +106,12 @@
             style="minHeight: 50px; display: block"
           >
             <h2 v-if="post.title" v-html="post.title" />
-            <p v-if="post.text" v-html="post.text" />
+            <p
+              class="text"
+              :class="{ 'trunc-text': truncateText && !showTruncatedText }"
+              v-html="getPostText()"
+              ref="text"
+            />
           </div>
           <div class="post-capability" v-if="$mq === 'desktop'">
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
@@ -175,10 +180,18 @@ import PostCommon from "@/mixins/post/common";
 import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
+import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 
 export default {
   name: "PostLastView",
-  mixins: [User, PostCommon, postOpen, PostStat, ModalRouterParams],
+  mixins: [
+    User,
+    PostCommon,
+    postOpen,
+    PostStat,
+    ModalRouterParams,
+    UserSuggestionsInline
+  ],
   data: () => ({
     commentPage: 0,
     popupView: true,
@@ -186,7 +199,8 @@ export default {
     currentCommentReply: null,
     showAddComment: true,
     viewCounted: false,
-    showPreview: false
+    showPreview: false,
+    truncateText: false
   }),
   props: {
     post: {
@@ -287,6 +301,9 @@ export default {
           }
         });
       }
+    },
+    getPostText() {
+      return this.$props.post.text;
     },
     back() {
       if (window.location.hash) {
