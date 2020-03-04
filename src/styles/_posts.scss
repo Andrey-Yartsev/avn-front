@@ -59,6 +59,14 @@
 
   &_preparation.post {
 
+
+    .innerPost_wrapper {
+      .media {
+        .loader-container {
+          display: none;
+        }
+      }
+    }
     .media {
 
       &:after {
