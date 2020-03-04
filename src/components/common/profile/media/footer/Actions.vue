@@ -40,7 +40,7 @@
         Free
       </button>
       <span class="buttonsContainer" v-if="post.media.type !== 'processing'">
-        <span class="actions__btn comments-btn">
+        <span class="actions__btn comments-btn duration">
           <span
             class="btn-icon icn-item icn-clock icn-size_md"
             v-tooltip="'Duration'"
@@ -170,6 +170,9 @@ export default {
 .btn-buy {
   & > span {
     transform: translateY(-6px);
+    @media (max-width: 575px) {
+      transform: translateY(-3px);
+    }
   }
 }
 .buttonsContainer {
@@ -178,6 +181,9 @@ export default {
   flex-flow: row nowrap;
   @media (max-width: 575px) {
     margin-left: 10px;
+  }
+  & .duration {
+    min-width: 70px;
   }
 }
 </style>
