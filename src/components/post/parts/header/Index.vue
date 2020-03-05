@@ -50,7 +50,6 @@
             :hide="hide"
             :showCopy="showCopy"
             v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-            :isReposted="isReposted"
           />
         </div>
       </div>

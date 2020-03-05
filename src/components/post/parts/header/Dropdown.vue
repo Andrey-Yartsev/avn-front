@@ -1,27 +1,6 @@
 <template>
   <div class="more-functions__dropdown-inside">
-    <ul v-if="isReposted" class="more-functions__list">
-      <template v-if="showCopy">
-        <li v-if="copied" class="more-functions__item">
-          <button
-            class="btn-copy-link copied more-functions__link"
-            type="button"
-          >
-            <span class="more-functions__option">Copied!</span>
-          </button>
-        </li>
-        <li class="more-functions__item" v-else>
-          <button
-            class="btn-copy-link more-functions__link"
-            type="button"
-            @click="copyHref"
-          >
-            <span class="more-functions__option">Copy link to post</span>
-          </button>
-        </li>
-      </template>
-    </ul>
-    <ul v-else class="more-functions__list">
+    <ul class="more-functions__list">
       <li
         v-if="$mq === 'mobile'"
         class="more-functions__details more-functions__item"
@@ -47,7 +26,7 @@
           <span class="more-functions__option icn-item">Repost</span>
         </button>
       </li>
-      <template v-if="showCopy && !isRepost">
+      <template v-if="showCopy">
         <li v-if="copied" class="more-functions__item">
           <button
             class="btn-copy-link copied more-functions__link"
@@ -135,10 +114,16 @@ export default {
   computed: {
     href() {
       const { protocol, port, hostname } = window.location;
+      const postId = this.post.innerPost
+        ? this.post.innerPost.id
+        : this.post.id;
+      const author = this.post.innerPost
+        ? this.post.innerPost.author.username
+        : this.post.author.username;
       return (
         `${protocol}//${hostname}` +
         (port ? ":" + port : "") +
-        `/post/${this.post.author.username}/${this.postId}`
+        `/post/${author}/${postId}`
       );
     },
     actionPrefix() {
@@ -182,8 +167,7 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    },
-    isReposted: Boolean
+    }
   },
   methods: {
     detailView() {
