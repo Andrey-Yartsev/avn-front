@@ -39,22 +39,25 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <!-- <template v-if="!isReposted"> -->
-    <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
-      <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open" />
-      <div class="more-functions__dropdown">
-        <Dropdown
-          :post="post"
-          :from="from"
-          :hide="hide"
-          :showCopy="showCopy"
-          v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-          :isReposted="isReposted"
-        />
+    <template v-if="!isReposted">
+      <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
+        <div class="more-functions__overlay" @click="hide"></div>
+        <div class="more-functions__btn" @click="open" />
+        <div class="more-functions__dropdown">
+          <Dropdown
+            :post="post"
+            :from="from"
+            :hide="hide"
+            :showCopy="showCopy"
+            v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
+            :isReposted="isReposted"
+          />
+        </div>
       </div>
-    </div>
-    <!-- </template> -->
+    </template>
+    <span v-else @click="copyHref" class="copyLink">{{
+      copied ? "Copied" : "Copy link to post"
+    }}</span>
   </div>
 </template>
 
@@ -71,7 +74,8 @@ export default {
     Dropdown
   },
   data: () => ({
-    opened: false
+    opened: false,
+    copied: false
   }),
   props: {
     datetime: {
@@ -98,6 +102,14 @@ export default {
     },
     postUser() {
       return this.post.author;
+    },
+    href() {
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/post/${this.post.author.username}/${this.postId}`
+      );
     }
   },
   methods: {
@@ -117,6 +129,12 @@ export default {
     },
     hideBubble() {
       Bubble.hide();
+    },
+    copyHref() {
+      this.$copyText(this.href).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
     }
   },
   mounted() {
@@ -130,3 +148,18 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.copyLink {
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: -30px;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+</style>
