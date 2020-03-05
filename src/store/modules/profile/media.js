@@ -11,7 +11,8 @@ const initState = {
   offset: 0,
   limit: fetchLimit,
   allDataReceived: false,
-  preloadedMedias: []
+  preloadedMedias: [],
+  separateMedia: null
 };
 
 const state = { ...initState };
@@ -49,6 +50,9 @@ const mutations = {
     state.media = state.media.map(item => {
       return item.productId === updatedMedia.productId ? updatedMedia : item;
     });
+    if (state.separateMedia) {
+      state.separateMedia = updatedMedia;
+    }
   },
   deleteMedia(state, productId) {
     state.media = state.media.filter(item => item.productId !== productId);
@@ -102,6 +106,12 @@ const mutations = {
       }
       return item;
     });
+  },
+  setSeparateMedia(state, data) {
+    state.separateMedia = data;
+  },
+  removeSeparateMedia(state) {
+    state.separateMedia = null;
   }
 };
 
@@ -121,10 +131,13 @@ const actions = {
     dispatch("_getMediaItem", data).then(res => {
       commit("updateMedia", res);
       commit("mediaPage/updateMediaItem", res, { root: true });
+      commit("explore/updateStorePost", res, { root: true });
     });
   },
-  getMediaItemForModal({ dispatch }, data) {
-    return dispatch("_getMediaItem", data);
+  getMediaItemForModal({ dispatch, commit }, data) {
+    return dispatch("_getMediaItem", data).then(res => {
+      commit("setSeparateMedia", res);
+    });
   },
   deleteMedia({ dispatch, commit }, mediaId) {
     dispatch("_deleteMedia", mediaId).then(() => {

@@ -32,6 +32,13 @@ const mutations = {
   },
   setTag(state, tagName) {
     state.tag = tagName;
+  },
+  updateStorePost(state, post) {
+    if (state.source === "store" && state.posts.length) {
+      state.posts = state.posts.map(item => {
+        return item.productId === post.productId ? post : item;
+      });
+    }
   }
 };
 

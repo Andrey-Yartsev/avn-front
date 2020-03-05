@@ -1,6 +1,6 @@
 <template>
   <div class="more-functions__dropdown-inside">
-    <ul class="more-functions__list">
+    <ul v-if="isAuthor" class="more-functions__list">
       <li
         v-if="$mq === 'mobile'"
         class="more-functions__details more-functions__item"
@@ -51,6 +51,18 @@
         </button>
       </li>
     </ul>
+    <ul v-else class="more-functions__list">
+      <li class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          :href="'/post/edit/' + post.id"
+          @click.prevent="copyLink"
+        >
+          <span class="more-functions__option">Copy link to video</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -72,7 +84,8 @@ export default {
     hide: {
       type: Function,
       required: true
-    }
+    },
+    isAuthor: Boolean
   },
   data: () => ({
     copied: false

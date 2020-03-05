@@ -1,23 +1,6 @@
 <template>
   <div class="more-functions__dropdown-inside">
-    <ul class="more-functions__list">
-      <li
-        v-if="$mq === 'mobile'"
-        class="more-functions__details more-functions__item"
-      >
-        <button @click.prevent="detailView" class="more-functions__link">
-          <span class="more-functions__option">Details</span>
-        </button>
-      </li>
-      <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
-        <button
-          class="report more-functions__link"
-          type="button"
-          @click="reportUser"
-        >
-          <span class="more-functions__option icn-item">Report post</span>
-        </button>
-      </li>
+    <ul v-if="isReposted" class="more-functions__list">
       <template v-if="showCopy">
         <li v-if="copied" class="more-functions__item">
           <button
@@ -37,7 +20,56 @@
           </button>
         </li>
       </template>
-      <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
+    </ul>
+    <ul v-else class="more-functions__list">
+      <li
+        v-if="$mq === 'mobile'"
+        class="more-functions__details more-functions__item"
+      >
+        <button @click.prevent="detailView" class="more-functions__link">
+          <span class="more-functions__option">Details</span>
+        </button>
+      </li>
+      <li v-if="!isOwner(userId) && isAuth()" class="more-functions__item">
+        <button
+          class="report more-functions__link"
+          type="button"
+          @click="reportUser"
+        >
+          <span class="more-functions__option icn-item">Report post</span>
+        </button>
+      </li>
+      <li
+        v-if="!isOwner(userId) && isAuth() && !isRepost && !isContentHidden"
+        class="more-functions__item"
+      >
+        <button class="more-functions__link" type="button" @click="repost">
+          <span class="more-functions__option icn-item">Repost</span>
+        </button>
+      </li>
+      <template v-if="showCopy && !isRepost">
+        <li v-if="copied" class="more-functions__item">
+          <button
+            class="btn-copy-link copied more-functions__link"
+            type="button"
+          >
+            <span class="more-functions__option">Copied!</span>
+          </button>
+        </li>
+        <li class="more-functions__item" v-else>
+          <button
+            class="btn-copy-link more-functions__link"
+            type="button"
+            @click="copyHref"
+          >
+            <span class="more-functions__option">Copy link to post</span>
+          </button>
+        </li>
+      </template>
+      <li
+        v-if="isOwner(userId) && isAuth() && !isRepost"
+        class="more-functions__item"
+      >
         <a
           class="edit more-functions__link"
           type="button"
@@ -126,6 +158,12 @@ export default {
     },
     canPin() {
       return this.pinCount < 3;
+    },
+    isRepost() {
+      return !!this.$props.post.innerPost;
+    },
+    isContentHidden() {
+      return this.$props.post.media.length && !this.$props.post.canViewMedia;
     }
   },
   props: {
@@ -144,7 +182,8 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    }
+    },
+    isReposted: Boolean
   },
   methods: {
     detailView() {
@@ -201,6 +240,10 @@ export default {
           postId: this.postId
         }
       });
+    },
+    repost() {
+      this.hide();
+      this.$store.dispatch("profile/home/repost", this.postId);
     },
     markSpam() {
       this.$store.dispatch("home/spamPost", this.$props.post.author.id);

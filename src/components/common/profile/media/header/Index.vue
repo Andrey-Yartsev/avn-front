@@ -39,42 +39,43 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <template v-if="isAuthor">
+    <template>
       <span class="actionsContainer">
-        <span
-          class="labelWrapper"
-          v-if="
-            post.media.videoPreview &&
-              post.media.videoPreview.source &&
-              view === 'large'
-          "
-        >
-          <label class="labelWrapper__label" for="is_paid_subscription"
-            >Video</label
+        <template v-if="isAuthor">
+          <span
+            class="labelWrapper"
+            v-if="
+              post.media.videoPreview &&
+                post.media.videoPreview.source &&
+                view === 'large'
+            "
           >
-          <label class="toggle-element">
-            <input
-              type="checkbox"
-              id="is_paid_subscription"
-              name="isWantEarn"
-              :value="showPreview"
-              @change="$emit('switchToPreview')"
-            />
-            <span class="toggle-element_switcher"></span>
-          </label>
-          <span class="labelWrapper__label">Preview</span>
-        </span>
-        <span v-if="post.pinned" class="icn-pin icn-item icn-size_md"></span>
-        <span v-if="post.active" class="mediaStatus isActive">
-          <span class="icn-item verified-user" />
-          Active
-        </span>
-        <span v-else class="mediaStatus notActive">
-          <span class="icn-item icn-block" />
-          Not active
-        </span>
+            <label class="labelWrapper__label" for="is_paid_subscription"
+              >Video</label
+            >
+            <label class="toggle-element">
+              <input
+                type="checkbox"
+                id="is_paid_subscription"
+                name="isWantEarn"
+                :value="showPreview"
+                @change="$emit('switchToPreview')"
+              />
+              <span class="toggle-element_switcher"></span>
+            </label>
+            <span class="labelWrapper__label">Preview</span>
+          </span>
+          <span v-if="post.pinned" class="icn-pin icn-item icn-size_md"></span>
+          <span v-if="post.active" class="mediaStatus isActive">
+            <span class="icn-item verified-user" />
+            Active
+          </span>
+          <span v-else class="mediaStatus notActive">
+            <span class="icn-item icn-block" />
+            Not active
+          </span>
+        </template>
         <div
-          v-if="isAuthor"
           class="more-functions options"
           :class="{ open: opened }"
           v-click-outside="hide"
@@ -90,7 +91,12 @@
             </div>
           </div>
           <div class="more-functions__dropdown">
-            <Dropdown :post="post" :from="from" :hide="hide" />
+            <Dropdown
+              :post="post"
+              :from="from"
+              :hide="hide"
+              :isAuthor="isAuthor"
+            />
           </div>
         </div>
       </span>

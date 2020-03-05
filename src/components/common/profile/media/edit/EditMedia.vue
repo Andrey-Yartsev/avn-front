@@ -62,7 +62,7 @@
             contenteditable
             placeholder="Enter description here"
             maxlength="1000"
-            v-model="media.text"
+            @input="textInput"
             ref="textarea"
             :disabled="saving"
           ></textarea>
@@ -435,6 +435,8 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
+
+      this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
       this.media.title = "";
@@ -484,6 +486,9 @@ export default {
         data.media.removeVideoPreview = false;
       }
       return data;
+    },
+    textInput() {
+      this.media.text = this.$refs.textarea.value;
     }
   },
   mounted() {
