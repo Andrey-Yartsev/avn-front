@@ -18,6 +18,7 @@
         <Header
           :post="post"
           :from="from"
+          :isReposted="isReposted"
           @openDropdown="showDropdown = true"
           @hideDropdown="showDropdown = false"
           :showCopy="!delayedPost"
@@ -33,36 +34,41 @@
             {{ showTruncatedText ? "Collapse" : "More" }}
           </button>
         </div>
-        <Media
-          v-if="medias && medias.length"
-          :medias="medias"
-          :shouldHasLink="!delayedPost"
-          :post="post"
-          :authorId="post.author.id"
-          :openModal="openModal"
-          mediaSize="preview"
-        />
-        <Actions
-          v-if="!delayedPost"
-          :post="post"
-          :showCopy="!delayedPost"
-          :from="from"
-          :commentsBtnSelectable="true"
-          :showAddCommentForm="showAddComment"
-          :showTip="showTip"
-          :openModal="openModal"
-          @postShowCommentForm="toggleCommentForm"
-          @postLike="likePost"
-          @toggleTip="toggleTipForm"
-        />
-        <div v-else class="actions">
-          <div class="datetime-value">
-            <span
-              class="post-datetime__icn icn-item icn-calendar icn-size_lg"
-            />
-            <span class="post-datetime__value">{{ formattedDate }}</span>
+        <slot v-if="isInnerPost"></slot>
+        <template v-else>
+          <Media
+            v-if="medias && medias.length"
+            :medias="medias"
+            :shouldHasLink="!delayedPost"
+            :post="post"
+            :authorId="post.author.id"
+            :openModal="openModal"
+            mediaSize="preview"
+          />
+        </template>
+        <template v-if="!isReposted">
+          <Actions
+            v-if="!delayedPost"
+            :post="post"
+            :showCopy="!delayedPost"
+            :from="from"
+            :commentsBtnSelectable="true"
+            :showAddCommentForm="showAddComment"
+            :showTip="showTip"
+            :openModal="openModal"
+            @postShowCommentForm="toggleCommentForm"
+            @postLike="likePost"
+            @toggleTip="toggleTipForm"
+          />
+          <div v-else class="actions">
+            <div class="datetime-value">
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+              />
+              <span class="post-datetime__value">{{ formattedDate }}</span>
+            </div>
           </div>
-        </div>
+        </template>
       </div>
       <AddComment
         v-if="showAddComment"
@@ -135,7 +141,8 @@ export default {
     from: {
       type: String,
       required: true
-    }
+    },
+    isReposted: Boolean
   },
   computed: {
     actionPrefix() {
@@ -157,6 +164,9 @@ export default {
     },
     isVisible() {
       return this.post.isVisible;
+    },
+    isInnerPost() {
+      return this.$slots.default;
     }
   },
   watch: {

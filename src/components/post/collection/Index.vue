@@ -7,7 +7,18 @@
         :key="post.id"
         :from="from"
         @visibilityChanged="visibilityChanged"
-      ></Post>
+      >
+        <template v-if="post.innerPost">
+          <div class="innerPost_wrapper">
+            <Post
+              :post="post.innerPost"
+              :from="from"
+              :isReposted="true"
+              @visibilityChanged="visibilityChanged"
+            />
+          </div>
+        </template>
+      </Post>
     </div>
   </div>
 </template>
@@ -40,3 +51,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.innerPost_wrapper {
+  border: 1px solid rgba(124, 139, 150, 0.2);
+  margin: 20px;
+}
+</style>
