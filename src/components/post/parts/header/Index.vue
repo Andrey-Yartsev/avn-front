@@ -55,9 +55,10 @@
         </div>
       </div>
     </template>
-    <span v-else @click="copyHref" class="copyLink">{{
-      copied ? "Copied" : "Copy link"
-    }}</span>
+    <span v-else @click="copyHref" class="copyLink">
+      <p v-if="copied">Copied</p>
+      <img v-else width="16" height="16" src="/static/img/link.svg" />
+    </span>
   </div>
 </template>
 
