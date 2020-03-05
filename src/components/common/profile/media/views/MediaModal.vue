@@ -82,12 +82,28 @@ export default {
           { root: true }
         );
       }
+    },
+    removeExploreClass() {
+      const routeName = this.$route.name;
+      if (routeName === "ExploreStore") {
+        const html = document.getElementsByTagName("html")[0];
+        html.classList.remove("explore-page");
+      }
+    },
+    returnExploreClass() {
+      const routeName = this.$route.name;
+      if (routeName === "ExploreStore") {
+        const html = document.getElementsByTagName("html")[0];
+        html.classList.add("explore-page");
+      }
     }
   },
   mounted() {
     this.init();
+    this.removeExploreClass();
   },
   beforeDestroy() {
+    this.returnExploreClass();
     this.$store.commit("profile/media/removeSeparateMedia");
   }
 };
