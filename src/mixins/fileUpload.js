@@ -47,7 +47,7 @@ export default {
     getAcceptedFormats() {
       return this.$props.videosOnly
         ? ".mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi";
+        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi,.mp3";
     }
   },
 
