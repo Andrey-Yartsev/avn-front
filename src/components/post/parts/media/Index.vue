@@ -79,6 +79,8 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Locked from "./content/Locked";
 import Video from "./content/Video";
 import VideoLinked from "./content/VideoLinked";
+import Audio from "./content/Audio";
+import AudioLinked from "./content/AudioLinked";
 import Gif from "./content/GifLinked";
 import GifLinked from "./content/GifLinked";
 import Photo from "./content/Photo";
@@ -99,7 +101,9 @@ export default {
     swiper,
     swiperSlide,
     Loader,
-    StreamEvents
+    StreamEvents,
+    Audio,
+    AudioLinked
   },
   data() {
     const uniqId = Math.random()
@@ -199,6 +203,7 @@ export default {
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
+      if (type === "audio") return `Audio`;
 
       throw new Error("Invalid media format");
     },
