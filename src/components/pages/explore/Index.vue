@@ -16,7 +16,7 @@
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <TopLives :lives="lives" v-if="lives.length" />
+                <TopLives :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
@@ -152,8 +152,6 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 
-// import postsStreams from "@/mock/streams-posts";
-
 export default {
   name: "Explore",
   components: {
@@ -189,8 +187,10 @@ export default {
       return this.$store.state.stories.explore.posts;
     },
     lives() {
-      // return postsStreams;
       return uniqBy(this.$store.state.lives.posts, "id");
+    },
+    streamLives() {
+      return this.lives.filter(item => !!item.user);
     },
     topModels() {
       return this.$store.state.topModels.posts;
