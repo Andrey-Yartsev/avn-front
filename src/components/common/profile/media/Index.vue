@@ -120,7 +120,8 @@ export default {
       limits: {
         video: 10,
         gif: 0,
-        photo: 0
+        photo: 0,
+        audio: 10
       },
       filterType: "all",
       opened: false,
