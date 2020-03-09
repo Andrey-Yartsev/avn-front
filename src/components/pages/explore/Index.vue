@@ -90,13 +90,23 @@
                 />
               </template>
               <template v-if="page === 'lives'">
-                <Live
-                  v-for="post in lives"
-                  :post="post"
-                  :key="post.id"
-                  from="explore"
-                  :updatePageData="getPageData"
-                />
+                <template v-for="post in lives">
+                  <PostSmall
+                    v-if="post.media"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                    @visibilityChanged="visibilityChanged"
+                  />
+                  <Live
+                    v-else
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :updatePageData="getPageData"
+                  />
+                </template>
               </template>
             </div>
             <div class="loader-infinity" v-if="infinityScrollLoading">
@@ -142,6 +152,8 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 
+// import postsStreams from "@/mock/streams-posts";
+
 export default {
   name: "Explore",
   components: {
@@ -177,6 +189,7 @@ export default {
       return this.$store.state.stories.explore.posts;
     },
     lives() {
+      // return postsStreams;
       return uniqBy(this.$store.state.lives.posts, "id");
     },
     topModels() {
@@ -300,7 +313,7 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
       }
 
       if (this.type === "top") {
@@ -335,7 +348,8 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
+        // this.$store.dispatch("lives/getPosts");
       }
     },
     storePrefix() {

@@ -6,7 +6,8 @@
         'explore-item_col-3': !shouldBePoster,
         'explore-item_double': shouldBePoster,
         outofviewport: isVisible === false,
-        'explore-media_processing': post.mediaType === 'processing'
+        'explore-media_processing': post.mediaType === 'processing',
+        'explore-item_live': isExploreLivePage
       }
     ]"
     :data-id="post.id"
@@ -174,6 +175,9 @@ export default {
     },
     page() {
       return this.$route.meta.page;
+    },
+    isExploreLivePage() {
+      return this.$route.name === "ExploreLive";
     }
   },
   methods: {

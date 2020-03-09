@@ -175,6 +175,30 @@ const actions = {
         commit("postsRequestFail", err);
       });
   },
+  getPostsWithStreams({ commit, rootState }) {
+    const { limit, offset, marker, source } = state;
+    const category = rootState.gender.category;
+
+    commit("postsRequest");
+
+    return LivesApi.getPostsWithStreams({
+      limit,
+      offset,
+      marker,
+      source,
+      category
+    })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("postsRequestSuccess", res);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
+      });
+  },
   setSource({ commit }, { source }) {
     commit("setSource", { source });
   },
