@@ -60,6 +60,7 @@
           class="searchWrapper"
           :class="{
             'no-results': !chats.length && searchQuery.length,
+            'no-found-users': !foundUsers.length,
             'search-text': chats.length && searchQuery.length,
             'select-all': selectAll
           }"
