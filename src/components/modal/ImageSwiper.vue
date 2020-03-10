@@ -1,42 +1,39 @@
 <template>
   <Modal :onClose="close">
     <div class="popup-container popup-image" slot="content">
-      <div>
-        <swiper
-          ref="mySwiper"
-          class="media-slider"
-          :options="swiperOption"
-          :key="uniqId"
+      <swiper
+        ref="mySwiper"
+        class="media-slider"
+        :options="swiperOption"
+        :key="uniqId"
+      >
+        <swiperSlide
+          v-for="media in images"
+          :key="media.id"
+          class="chatImageSwiper"
         >
-          <swiperSlide
-            v-for="media in images"
-            :key="media.id"
-            class="chatImageSwiper"
-          >
-            <div class="postLink" @click="$emit('click')">
-              <div class="media-wrapper">
-                <img :src="media.src.source" />
-              </div>
+          <div class="postLink" @click="$emit('click')">
+            <div class="media-wrapper">
+              <img :src="media.src.source" />
             </div>
-          </swiperSlide>
-        </swiper>
-        <div :class="`media-slider-pagination pagination-${uniqId}`" />
-        <div
-          :class="`media-slider-navigation navigation-${uniqId}`"
-          v-if="$mq === 'desktop'"
-        >
-          <span
-            :class="
-              `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
-            "
-          />
-          <span
-            :class="
-              `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
-            "
-          />
-        </div>
-        <!-- <img :src="src" /> -->
+          </div>
+        </swiperSlide>
+      </swiper>
+      <div :class="`media-slider-pagination pagination-${uniqId}`" />
+      <div
+        :class="`media-slider-navigation navigation-${uniqId}`"
+        v-if="$mq === 'desktop'"
+      >
+        <span
+          :class="
+            `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
+          "
+        />
+        <span
+          :class="
+            `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
+          "
+        />
       </div>
       <button
         type="button"
@@ -65,7 +62,7 @@ export default {
       .toString(36)
       .substr(2, 9);
 
-    // const self = this;
+    const self = this;
     return {
       uniqId,
       activeSlide: 0,
@@ -102,6 +99,10 @@ export default {
     close() {
       this.$store.dispatch("modal/hide", { name: "imageSwiper", data: {} });
     }
+  },
+  mounted() {
+    const index = this.$store.state.modal.imageSwiper.data.index;
+    this.activeSlide = index;
   }
 };
 </script>
