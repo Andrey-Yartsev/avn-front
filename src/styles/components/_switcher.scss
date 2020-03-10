@@ -7,6 +7,12 @@
   /* Fix of Webkit flickering */
   z-index: 1;
 
+  &.video-swiper {
+    .swiper-wrapper {
+      height: auto !important;
+    }
+  }
+
   &-no-flexbox {
 
     .swiper-slide {

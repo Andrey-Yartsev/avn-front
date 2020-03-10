@@ -35,6 +35,7 @@ import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import ConfirmModal from "@/components/modal/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
 import ImageSwiperModal from "@/components/modal/ImageSwiper.vue";
+import VideoSwiperModal from "@/components/modal/VideoSwiper.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
 import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
 import ChatMessagePayConfirmModal from "@/components/chat/ChatMessagePayConfirm";
@@ -71,6 +72,7 @@ export default {
     ConfirmModal,
     ImageModal,
     ImageSwiperModal,
+    VideoSwiperModal,
     TrialConfirmModal,
     GayContextConfirmModal,
     ChatMessagePayConfirmModal,

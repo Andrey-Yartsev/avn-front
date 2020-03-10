@@ -92,6 +92,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "videoSwiper",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "trialConfirm",
     layoutOnlyModal: true
   },

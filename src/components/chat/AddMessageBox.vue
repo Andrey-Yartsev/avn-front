@@ -223,7 +223,7 @@ export default {
       price: "",
       priceIsSet: false,
       limits: {
-        video: 1,
+        video: 3,
         gif: 1,
         photo: 5
       }

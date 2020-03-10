@@ -1,22 +1,35 @@
 <template>
   <div>
-    <template v-if="images.length > 1">
+    <template v-if="videos.length > 1">
       <swiper
         ref="mySwiper"
         class="media-slider"
         :options="swiperOption"
         :key="uniqId"
       >
-        <swiperSlide v-for="(media, index) in images" :key="media.id">
+        <swiperSlide v-for="(media, index) in videos" :key="media.id">
           <div class="media media-item">
             <figure class="media-item active media-item_photo" data-index="0">
-              <template v-if="!media.locked">
+              <template v-if="isMyMessage || isFree || isUnlocked">
                 <a
-                  class="postLink"
+                  class="postLink video-placeholder icn-item rounded-corners"
+                  :class="{ processing }"
                   :href="media.src.source"
                   target="_blank"
-                  @click.prevent="openImageList(images, index)"
+                  @click.prevent="openVideosList(message, videos, index)"
                 >
+                  <span
+                    class="loader-container loader-container_center"
+                    v-if="processing"
+                  >
+                    <Loader
+                      :fullscreen="false"
+                      text="Media is currently processing"
+                      :semidark="true"
+                      class="processing-loader rounded-corners text-light"
+                      :small="true"
+                    />
+                  </span>
                   <img
                     :src="media.thumb.source"
                     :class="{ 'no-media-text': !message.textLength }"
@@ -27,16 +40,27 @@
                 </a>
               </template>
               <template v-else>
-                <div class="postLink">
+                <div
+                  class="postLink video-placeholder icn-item rounded-corners"
+                >
+                  <div
+                    class="loader-container loader-container_center"
+                    v-if="processing"
+                  >
+                    <Loader
+                      :fullscreen="false"
+                      text="Media is currently processing"
+                      class="processing-loader rounded-corners text-light"
+                      :small="true"
+                      :semidark="true"
+                    />
+                  </div>
                   <img
-                    :src="`data:image/jpeg;base64,${media.locked}`"
+                    :src="media.thumb.source"
+                    :class="{ 'no-media-text': !message.textLength }"
                     :width="media.thumb.width"
                     :height="media.thumb.height"
                     class="media-content"
-                    :style="{
-                      width: `${media.thumb.width}px`,
-                      height: `${media.thumb.height}px`
-                    }"
                   />
                 </div>
               </template>
@@ -46,9 +70,9 @@
       </swiper>
     </template>
     <template v-else>
-      <MediaImage :message="message" ref="img" />
+      <VideoPreview :message="message" :ref="'video' + message.id" />
     </template>
-    <template v-if="images.length > 1">
+    <template v-if="videos.length > 1">
       <div :class="`media-slider-pagination pagination-${uniqId}`" />
       <div
         :class="`media-slider-navigation navigation-${uniqId}`"
@@ -71,17 +95,23 @@
 
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import MediaImage from "./Image";
+import VideoPreview from "./VideoPreview";
+import User from "@/mixins/user";
+import Loader from "@/components/common/Loader";
+
 export default {
-  name: "MediaImagesList",
+  name: "MediaVideosList",
   components: {
-    MediaImage,
+    VideoPreview,
     swiper,
-    swiperSlide
+    swiperSlide,
+    Loader
   },
+  mixins: [User],
   props: {
-    images: Array,
-    message: Object
+    videos: Array,
+    message: Object,
+    play: Function
   },
   data() {
     const uniqId = Math.random()
@@ -114,12 +144,27 @@ export default {
       }
     };
   },
+  computed: {
+    processing() {
+      return !this.message.isMediaReady;
+    },
+    isFree() {
+      return this.message.isFree;
+    },
+    isUnlocked() {
+      return this.message.isOpened && !this.message.isFree;
+    },
+    isMyMessage() {
+      return this.message.fromUser.id === this.user.id;
+    }
+  },
   methods: {
-    openImageList(images, index) {
+    openVideosList(message, videos, index) {
       this.$store.dispatch("modal/show", {
-        name: "imageSwiper",
+        name: "videoSwiper",
         data: {
-          images,
+          message,
+          videos,
           index
         }
       });
