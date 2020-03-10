@@ -11,7 +11,7 @@
         <Navigate />
         <div
           class="stories-wrapper stories-all"
-          v-if="stories.length || lives.length"
+          v-if="stories.length || streamLives.length"
         >
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
