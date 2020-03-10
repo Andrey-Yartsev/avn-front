@@ -98,6 +98,7 @@
                     from="explore"
                     :shouldBePoster="page === 'all' && post.id === firstVideoId"
                     @visibilityChanged="visibilityChanged"
+                    :recordIcon="'true'"
                   />
                   <Live
                     v-else
