@@ -35,6 +35,7 @@
         class="chatCollectionContentWrapper bulk-message"
         :class="{ 'contacts-top': contactsScrollTop }"
       >
+        <!--
         <div
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
@@ -56,6 +57,7 @@
             </div>
           </component>
         </div>
+        -->
         <div
           class="searchWrapper"
           :class="{
