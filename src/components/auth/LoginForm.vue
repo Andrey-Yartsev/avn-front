@@ -20,7 +20,7 @@
           Send
         </button>
         <div class="signUp">
-          <router-link to="/logout" class="switch-link"
+          <router-link to="/logout?return_path=login" class="switch-link"
             >Switch user</router-link
           >
         </div>
