@@ -28,7 +28,9 @@ const loginAction = (commit, dispatch, rootState, data, fromModal) => {
       if (user.isOtpNeeded) {
         dispatch("setOtpAuth", true);
         commit("loginFinished");
-        Router.push("/login");
+        if (Router.currentRoute.path !== "/login") {
+          Router.push("/login");
+        }
         return;
       }
 
