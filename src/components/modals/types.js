@@ -88,6 +88,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "imageSwiper",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "trialConfirm",
     layoutOnlyModal: true
   },

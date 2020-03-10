@@ -221,7 +221,12 @@ export default {
       showTip: false,
       showPaid: false,
       price: "",
-      priceIsSet: false
+      priceIsSet: false,
+      limits: {
+        video: 1,
+        gif: 1,
+        photo: 5
+      }
     };
   },
 
