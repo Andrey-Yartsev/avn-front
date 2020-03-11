@@ -1,8 +1,9 @@
 <template>
   <div class="postLink" @click="$emit('click')">
-    <div class="media-wrapper">
+    <div class="media-wrapper audio-wrapper">
       <audio
         controls
+        controlsList="nodownload"
         src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
       ></audio>
       <!-- <audio
@@ -36,3 +37,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.audio-wrapper {
+  padding: 20px;
+  & > audio {
+    width: 100%;
+  }
+}
+</style>

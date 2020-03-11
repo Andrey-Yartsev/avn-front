@@ -27,6 +27,7 @@
 import Post from "@/components/post/view/MediumView";
 import PostsStat from "@/mixins/post/statMany";
 import UserMixin from "@/mixins/user";
+// import audio from "@/mock/audio";
 
 export default {
   name: "PostCollection",
@@ -34,6 +35,11 @@ export default {
   components: {
     Post: Post
   },
+  // data() {
+  //   return {
+  //     posts: audio
+  //   }
+  // },
   props: {
     posts: {
       type: Array,
