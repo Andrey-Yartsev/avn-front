@@ -1,6 +1,6 @@
 <template>
   <Modal :onClose="close">
-    <div class="popup-container popup-image" slot="content">
+    <div class="popup-container popup-image videSwiperContainer" slot="content">
       <swiper
         ref="mySwiper"
         class="media-slider video-swiper"
@@ -159,5 +159,9 @@ export default {
   &:after {
     display: none;
   }
+}
+.videSwiperContainer {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 </style>
