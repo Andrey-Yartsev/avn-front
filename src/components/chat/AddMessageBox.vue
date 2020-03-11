@@ -221,16 +221,28 @@ export default {
       showTip: false,
       showPaid: false,
       price: "",
-      priceIsSet: false
+      priceIsSet: false,
+      limits: {
+        video: 3,
+        gif: 1,
+        photo: 5
+      }
     };
   },
 
   computed: {
     canAddMedia() {
-      return this.$props.maxMediaLength &&
+      if (!this.preloadedMedias.length) {
+        return true;
+      }
+      if (
+        this.$props.maxMediaLength &&
         this.preloadedMedias.length >= this.$props.maxMediaLength
-        ? false
-        : true;
+      ) {
+        return false;
+      }
+      const loadedMediaType = this.preloadedMedias[0].mediaType;
+      return this.preloadedMedias.length < this.limits[loadedMediaType];
     },
     canSend() {
       if (this.showTip) {
@@ -259,6 +271,15 @@ export default {
     },
     activeUserId() {
       return this.$store.state.chat.activeUserId;
+    },
+    getAcceptedFormats() {
+      if (!this.preloadedMedias.length) {
+        return this.allMediaTypes.map(item => "." + item).join();
+      }
+      const loadedMediaType = this.preloadedMedias[0].mediaType;
+      return this.inputAcceptTypes[loadedMediaType]
+        .map(item => "." + item)
+        .join();
     }
   },
 

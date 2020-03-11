@@ -82,6 +82,18 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.dummy,
+    path: "/password-confirmed",
+    name: "PasswordConfirmed",
+    component: () =>
+      import(/* webpackChunkName: "PasswordConfirmedPage" */ "@/components/pages/passwordConfirmed/Index"),
+    meta: {
+      noAuthHeader: true,
+      cssName: "staticPage",
+      noAuthSection: true
+    }
+  },
+  {
     beforeEnter: Auth.firstEnter,
     path: "/stories/:userId",
     name: "StoryPage",

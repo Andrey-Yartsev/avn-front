@@ -802,10 +802,11 @@
   &_lg {
     width: 30px;
     height: 30px;
-    right: 52px;
+    right: 185px;
+    margin-top: -2px;
     font-size: 20px;
 
-    .no-results & {
+    .no-results &, .no-found-users & {
       right: 16px;
 
       @include media-breakpoint-up($desktop-breakpoint) {

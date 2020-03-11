@@ -11,12 +11,12 @@
         <Navigate />
         <div
           class="stories-wrapper stories-all"
-          v-if="stories.length || lives.length"
+          v-if="stories.length || streamLives.length"
         >
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <TopLives :lives="lives" v-if="lives.length" />
+                <TopLives :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
@@ -90,13 +90,24 @@
                 />
               </template>
               <template v-if="page === 'lives'">
-                <Live
-                  v-for="post in lives"
-                  :post="post"
-                  :key="post.id"
-                  from="explore"
-                  :updatePageData="getPageData"
-                />
+                <template v-for="post in lives">
+                  <PostSmall
+                    v-if="post.media"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                    @visibilityChanged="visibilityChanged"
+                    :recordIcon="'true'"
+                  />
+                  <Live
+                    v-else
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :updatePageData="getPageData"
+                  />
+                </template>
               </template>
             </div>
             <div class="loader-infinity" v-if="infinityScrollLoading">
@@ -178,6 +189,9 @@ export default {
     },
     lives() {
       return uniqBy(this.$store.state.lives.posts, "id");
+    },
+    streamLives() {
+      return this.lives.filter(item => !!item.user);
     },
     topModels() {
       return this.$store.state.topModels.posts;
@@ -300,7 +314,7 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
       }
 
       if (this.type === "top") {
@@ -335,7 +349,8 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
+        // this.$store.dispatch("lives/getPosts");
       }
     },
     storePrefix() {

@@ -35,6 +35,7 @@
         class="chatCollectionContentWrapper bulk-message"
         :class="{ 'contacts-top': contactsScrollTop }"
       >
+        <!--
         <div
           class="searchContact"
           :class="{ 'user-selected': !!selected.length }"
@@ -44,11 +45,11 @@
             <div class="selectedContacts">
               <div
                 class="chatSelectedView"
-                v-for="v in hasSelectedUsers"
+                v-for="v in selectedUsers"
                 v-bind:key="v.id"
                 @click="toggleSelect(v.id)"
               >
-                <span class="chatSelectedName">{{ v.name }}</span>
+                <span class="chatSelectedName">1{{ v.name }}</span>
                 <span
                   class="remove icn-item btn-reset btn-reset_fix-sizes btn-reset_ml icn-pos_center"
                 ></span>
@@ -56,10 +57,12 @@
             </div>
           </component>
         </div>
+        -->
         <div
           class="searchWrapper"
           :class="{
             'no-results': !chats.length && searchQuery.length,
+            'no-found-users': !foundUsers.length,
             'search-text': chats.length && searchQuery.length,
             'select-all': selectAll
           }"
@@ -343,7 +346,8 @@ export default {
       contactsScrollTop: true,
       sending: false,
       selectAll: false,
-      excludeStars: true
+      excludeStars: true,
+      allFoundSelected: false
     };
   },
 
@@ -459,9 +463,25 @@ export default {
       return this.selected.indexOf(id) !== -1;
     },
     toggleSelectAll() {
+      if (this.searchQuery) {
+        this.toggleSelectAllFoundUsers();
+      } else {
+        this._toggleSelectAll();
+      }
+    },
+    _toggleSelectAll() {
       this.selectAll = !this.selectAll;
       if (this.selectAll) {
         this.selected = [];
+      }
+    },
+    toggleSelectAllFoundUsers() {
+      if (this.allFoundSelected) {
+        this.allFoundSelected = false;
+        this.selected = [];
+      } else {
+        this.allFoundSelected = true;
+        this.selected = this.foundUsers.map(v => v.id);
       }
     },
     search() {

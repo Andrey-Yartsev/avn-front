@@ -23,6 +23,9 @@
           <span class="value">{{ duraion }}</span>
           <span class="icn-item icn-live"></span>
         </div>
+        <div class="stream-online-label" :class="{ small: $mq === 'mobile' }">
+          live
+        </div>
         <div class="overlay" />
         <div class="live-short-info">
           <span class="explore-media__counter">
@@ -155,5 +158,14 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 100;
+}
+.stream-online-label {
+  left: 16px;
+  top: 16px;
+  &.small {
+    left: 6px;
+    top: 6px;
+    font-size: 8px;
+  }
 }
 </style>

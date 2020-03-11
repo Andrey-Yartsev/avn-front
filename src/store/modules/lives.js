@@ -153,6 +153,9 @@ const mutations = {
   },
   setLimit(state, { limit }) {
     state.limit = limit;
+  },
+  resetAllDataReceived(state) {
+    state.allDataReceived = false;
   }
 };
 
@@ -168,6 +171,33 @@ const actions = {
         if (response.status === 200) {
           response.json().then(function(res) {
             commit("postsRequestSuccess", res);
+          });
+        }
+      })
+      .catch(err => {
+        commit("postsRequestFail", err);
+      });
+  },
+  getPostsWithStreams({ commit, rootState }) {
+    const { limit, offset, marker, source } = state;
+    const category = rootState.gender.category;
+
+    commit("postsRequest");
+
+    return LivesApi.getPostsWithStreams({
+      limit,
+      offset,
+      marker,
+      source,
+      category
+    })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(function(res) {
+            commit("postsRequestSuccess", res);
+            if (res.list.length === limit) {
+              commit("resetAllDataReceived");
+            }
           });
         }
       })

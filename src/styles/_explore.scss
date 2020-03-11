@@ -376,6 +376,7 @@
 
       @include media-breakpoint-up($desktop-breakpoint) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-auto-rows: minmax(350px, auto);
       }
     }
 
@@ -451,6 +452,10 @@
       .overlay {
         display: flex;
       }
+    }
+
+    &_live {
+      height: 100%;
     }
 
     &_double {
