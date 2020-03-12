@@ -22,8 +22,8 @@
       data-type="photos"
       >Photos</router-link
     >
-    <router-link to="/explore/store" class="content-nav__item" data-type="store"
-      >Store</router-link
+    <router-link to="/explore/clips" class="content-nav__item" data-type="clips"
+      >Clips</router-link
     >
     <router-link to="/explore/live" class="content-nav__item" data-type="live"
       >Live</router-link

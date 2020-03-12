@@ -39,16 +39,30 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/explore/store",
+    path: "/explore/clips",
     name: "ExploreStore",
     component: () =>
       import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
     meta: {
-      page: "store",
+      page: "clips",
+      freeOnly: false,
       type: "media",
       cssName: "explore"
     }
   },
+  // {
+  //   beforeEnter: Auth.requireAny,
+  //   path: "/explore/clips/free",
+  //   name: "ExploreStore",
+  //   component: () =>
+  //     import(/* webpackChunkName: "ExplorePage" */ "@/components/pages/explore/Index"),
+  //   meta: {
+  //     page: "clips",
+  //     freeOnly: true,
+  //     type: "media",
+  //     cssName: "explore"
+  //   }
+  // },
   {
     beforeEnter: Auth.requireAny,
     path: "/explore/live",

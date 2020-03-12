@@ -59,7 +59,7 @@
             </div>
             <div v-else :class="['explore-wrapper', page]">
               <template v-if="type === 'media'">
-                <template v-if="page === 'store'">
+                <template v-if="page === 'clips'">
                   <component
                     :is="mediaComponent"
                     v-for="post in posts"
