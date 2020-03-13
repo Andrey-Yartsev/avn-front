@@ -212,6 +212,12 @@ export default {
           this.$props.post.media.src.width
         ) + "p"
       );
+    },
+    isFreeClip() {
+      if (this.post.price === 0) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
@@ -225,7 +231,7 @@ export default {
       this.height = entry.boundingClientRect.height;
     },
     openModal() {
-      if (!this.user) {
+      if (!this.user && !this.isFreeClip) {
         this.$store.dispatch("modal/show", {
           name: "signup"
         });

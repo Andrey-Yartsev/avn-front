@@ -28,7 +28,7 @@ export default {
       }
     });
   },
-  getExplorePosts({ offset, limit, marker, source, category, tag }) {
+  getExplorePosts({ offset, limit, marker, source, category, tag, filter }) {
     return anyRequest(`posts/${source}`, {
       method: "GET",
       query: {
@@ -36,7 +36,8 @@ export default {
         offset,
         limit,
         marker,
-        tag
+        tag,
+        filter: filter || null
       }
     });
   },

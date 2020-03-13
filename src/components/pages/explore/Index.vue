@@ -10,6 +10,31 @@
       <div class="over-container">
         <Navigate />
         <div
+          v-if="page === 'clips'"
+          class="stories-wrapper stories-all clipCategories"
+        >
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/all">
+              All
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/free">
+              Free Only
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topView">
+              Top Viewed
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topSale">
+              Best Selling
+            </router-link>
+          </span>
+        </div>
+        <div
           class="stories-wrapper stories-all"
           v-if="stories.length || streamLives.length"
         >
@@ -306,7 +331,13 @@ export default {
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
       if (this.type === "media" || this.type === "feed") {
-        this.$store.dispatch("explore/getPosts");
+        if (this.page === "clips") {
+          this.$store.dispatch("explore/getPosts", {
+            filter: this.$route.params.category
+          });
+        } else {
+          this.$store.dispatch("explore/getPosts");
+        }
       }
 
       if (this.type === "story") {
@@ -335,7 +366,13 @@ export default {
 
       if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
-        this.$store.dispatch("explore/getPosts");
+        if (this.page === "clips") {
+          this.$store.dispatch("explore/getPosts", {
+            filter: this.$route.params.category
+          });
+        } else {
+          this.$store.dispatch("explore/getPosts");
+        }
       }
 
       this.$store.dispatch("lives/getPosts");
@@ -367,7 +404,42 @@ export default {
     },
     ["$route.params.tag"]() {
       this.init();
+    },
+    ["$route.params.category"](value) {
+      if (value !== undefined) {
+        this.init();
+      }
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.videoCategories,
+.clipCategories {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  &_item {
+    cursor: pointer;
+    color: #2196f3;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      color: #222b32;
+    }
+    &.selected {
+      font-weight: 500;
+      color: #222b32;
+    }
+    a {
+      color: inherit;
+      &.router-link-exact-active {
+        font-weight: 500;
+        color: #222b32;
+      }
+    }
+  }
+}
+</style>
