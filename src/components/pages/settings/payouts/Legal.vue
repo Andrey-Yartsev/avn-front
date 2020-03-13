@@ -164,9 +164,9 @@
             <div class="form-group form-group_with-label photo-form-group">
               <div
                 class="form-group-inner photo-form-group-inner"
-                :class="{ 'success icn-item': !!uploadedPhoto }"
+                :class="{ 'success icn-item': !!photoUploaded }"
               >
-                <span class="label">Photo ID</span>
+                <span class="label">Photo ID front</span>
 
                 <div class="photo-label-wrapper">
                   <label
@@ -181,6 +181,57 @@
                   id="photo"
                   accept=".jpg,.jpeg,.png"
                   ref="photo"
+                  name="photo"
+                  @change="upload"
+                />
+              </div>
+            </div>
+            <div class="form-group form-group_with-label photo-form-group">
+              <div
+                class="form-group-inner photo-form-group-inner"
+                :class="{ 'success icn-item': !!photoBackUploaded }"
+              >
+                <span class="label">Photo ID back</span>
+
+                <div class="photo-label-wrapper">
+                  <label
+                    for="photoBack"
+                    class="btn btn_fix-width btn_block border photo-btn"
+                    >Upload</label
+                  >
+                </div>
+
+                <input
+                  type="file"
+                  id="photoBack"
+                  accept=".jpg,.jpeg,.png"
+                  ref="photoBack"
+                  name="photoBack"
+                  @change="upload"
+                />
+              </div>
+            </div>
+            <div class="form-group form-group_with-label photo-form-group">
+              <div
+                class="form-group-inner photo-form-group-inner"
+                :class="{ 'success icn-item': !!photoSelfieUploaded }"
+              >
+                <span class="label">Photo ID selfie</span>
+
+                <div class="photo-label-wrapper">
+                  <label
+                    for="photoSelfie"
+                    class="btn btn_fix-width btn_block border photo-btn"
+                    >Upload</label
+                  >
+                </div>
+
+                <input
+                  type="file"
+                  id="photoSelfie"
+                  accept=".jpg,.jpeg,.png"
+                  ref="photoSelfie"
+                  name="photoSelfie"
                   @change="upload"
                 />
               </div>
@@ -316,7 +367,13 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave || saving || imageUploading"
+              :disabled="
+                !canSave ||
+                  saving ||
+                  photoUploading ||
+                  photoBackUploading ||
+                  photoSelfieUploading
+              "
             >
               Next
             </button>
@@ -359,9 +416,13 @@ export default {
       postalCode: "",
       city: "",
       tos: false,
-      uploadedPhoto: null,
+      photoUploaded: null,
+      photoBackUploaded: null,
+      photoSelfieUploaded: null,
       legalExisted: false,
-      imageUploading: false,
+      photoUploading: false,
+      photoBackUploading: false,
+      photoSelfieUploading: false,
       abn: "",
       gstRegistered: null
     };
@@ -383,7 +444,12 @@ export default {
       if (!this.isFormValid) {
         return false;
       }
-      if (!this.uploadedPhoto && !this.legalExists) {
+      if (
+        (!this.photoUploaded ||
+          !this.photoBackUploaded ||
+          !this.photoSelfieUploaded) &&
+        !this.legalExists
+      ) {
         return false;
       }
       return true;
@@ -418,13 +484,14 @@ export default {
     }
   },
   methods: {
-    async upload() {
-      this.imageUploading = true;
+    async upload(e) {
+      const refName = e.target.name;
+      this[`${refName}Uploading`] = true;
       try {
-        this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
-        this.imageUploading = false;
+        this[`${refName}Uploaded`] = await upload(this.$refs[refName].files[0]);
+        this[`${refName}Uploading`] = false;
       } catch (error) {
-        this.imageUploading = false;
+        this[`${refName}Uploading`] = false;
         this.$store.dispatch("global/setError", error);
       }
     },
@@ -452,7 +519,9 @@ export default {
             f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
-      data.personalIdImage = this.uploadedPhoto;
+      data.personalIdImage = this.photoUploaded;
+      data.personalIdImageBack = this.photoBackUploaded;
+      data.personaleIdImageSelfie = this.photoSelfieUploaded;
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
           return;
