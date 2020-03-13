@@ -326,6 +326,20 @@ export default {
     },
     switchToPreview() {
       this.showPreview = !this.showPreview;
+    },
+    isFreeMedia() {
+      return this.post.price === 0;
+    },
+    sendViewStatistics() {
+      this.$store.dispatch(
+        "profile/media/sendViewStatistics",
+        this.post.productId
+      );
+    }
+  },
+  mounted() {
+    if (this.isFreeMedia()) {
+      this.sendViewStatistics();
     }
   }
 };
