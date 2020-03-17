@@ -831,7 +831,6 @@ export default {
       clientGetApiUrl: null,
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
-      streamSource: "local",
       showErrorMessage: message => {
         this.$store.dispatch("global/setError", { message });
         console.trace(message);
