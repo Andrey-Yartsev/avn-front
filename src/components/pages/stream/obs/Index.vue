@@ -11,8 +11,7 @@
       />
       <div v-else-if="needToStartStream" class="refresh-block">
         <div>Need to start stream</div>
-        <!--
-        <div class="mediasTop">
+        <!-- <div class="mediasTop">
           <div
             class="mediasTop__header stream-header mediasTop__header-underlined"
           >
@@ -24,14 +23,11 @@
               >Log out</a
             >
           </div>
-        </div>
-        -->
+        </div> -->
       </div>
       <template v-else>
         <div class="mediasTop">
-          <div
-            class="mediasTop__header stream-header mediasTop__header-underlined"
-          >
+          <div class="mediasTop__header stream-header">
             <div
               class="group-controls"
               v-if="!stream.isTypeSelected && !filterSelected"
@@ -73,29 +69,44 @@
             </div>
           </div>
         </div>
-
-        <div class="form-comments">
-          <Comments
-            v-if="asideType === 'comments'"
-            :shownComments="comments"
-            :count="comments.length"
-          />
-          <StreamViewers
-            v-else
-            :type="asideType"
-            :block="showBlockUserConfirm"
-            :kick="showKickUserConfirm"
-          />
-          <AddComment :_stream="stream" v-if="asideType === 'comments'" />
+        <div
+          class="stream-tipsGoalTitle obs"
+          v-if="activeTipsGoal.amount && activeTipsGoal.description"
+        >
+          TIP Countdown: ${{ activeTipsGoal.amount }} for
+          {{ activeTipsGoal.description }}
         </div>
 
+        <div class="stream-forms">
+          <div class="form-comments">
+            <Comments
+              v-if="asideType === 'comments'"
+              :shownComments="comments"
+              :count="comments.length"
+            />
+            <StreamViewers
+              v-else
+              :type="asideType"
+              :block="showBlockUserConfirm"
+              :kick="showKickUserConfirm"
+            />
+            <AddComment :_stream="stream" v-if="asideType === 'comments'" />
+          </div>
+          <TipsGoalForm
+            v-if="showTipsGoalForm"
+            :tipsGoal="tipsGoal"
+            :sendTipGoal="sendTipGoal"
+          />
+        </div>
         <StreamerControls
           :asideType="asideType"
           @changeType="type => (asideType = type)"
           :likesCount="likesCount"
           :viewsCount="viewsCount"
           :amount="amount"
-        />{{ viewsCount }}
+          :isTipsGoalExists="isTipsGoalExists"
+          :toggleTipGoalForm="toggleTipGoalForm"
+        />
       </template>
     </template>
   </div>
@@ -107,19 +118,22 @@ import AccessFilter from "./AccessFilter";
 import Comments from "../../../common/streamComments/Index";
 import AddComment from "../../../common/streamComments/AddComment";
 import StreamerControls from "./StreamerControls";
+import TipsGoalForm from "./TipsGoalForm";
 import StreamViewers from "./Viewers";
 import User from "@/mixins/user";
+import TipsGoal from "@/mixins/tipsGoal";
 
 export default {
   name: "ObsChat",
-  mixins: [User],
+  mixins: [User, TipsGoal],
   components: {
     Loader,
     AccessFilter,
     Comments,
     AddComment,
     StreamerControls,
-    StreamViewers
+    StreamViewers,
+    TipsGoalForm
   },
   data() {
     return {
