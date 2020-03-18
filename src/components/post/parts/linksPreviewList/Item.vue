@@ -5,7 +5,7 @@
         <div class="image">
           <img :src="link.thumb" alt="link image" />
         </div>
-        <div class="details">
+        <div v-if="hasDetails" class="details">
           <h5 class="title">{{ link.title }}</h5>
           <p class="description">{{ trimmedText }}</p>
         </div>
@@ -44,6 +44,9 @@ export default {
       return this.link.text.length > this.maxTextLength
         ? this.link.text.slice(0, this.maxTextLength - 3) + "..."
         : this.link.text;
+    },
+    hasDetails() {
+      return this.link.title || this.link.text;
     }
   },
   methods: {
@@ -74,13 +77,14 @@ export default {
   width: 400px;
   height: auto;
   margin: 15px auto;
-  background-color: #cccccc63;
+  background-color: #e0d4d44d;
   border-radius: 5px;
   overflow: hidden;
   &.small {
     width: 350px;
     .image {
       img {
+        display: block;
         width: 350px;
         height: 250px;
       }
@@ -88,6 +92,7 @@ export default {
   }
   .image {
     img {
+      display: block;
       width: 400px;
       height: 350px;
       object-fit: cover;
