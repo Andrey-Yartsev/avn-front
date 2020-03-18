@@ -185,6 +185,9 @@ const actions = {
   },
   sendViewStatistics({ dispatch }, productId) {
     dispatch("_sendViewStatistics", productId);
+  },
+  getMediaForPreview({ dispatch }, productId) {
+    return dispatch("_getMediaItem", { productId });
   }
 };
 
