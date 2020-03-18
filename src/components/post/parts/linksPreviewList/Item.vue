@@ -5,9 +5,9 @@
         <div class="image">
           <img :src="link.thumb" alt="link image" />
         </div>
-        <div v-if="hasDetails" class="details">
+        <div v-if="link.title" class="details">
           <h5 class="title">{{ link.title }}</h5>
-          <p class="description">{{ trimmedText }}</p>
+          <!-- <p class="description">{{ trimmedText }}</p> -->
         </div>
       </router-link>
     </template>
@@ -99,13 +99,13 @@ export default {
     }
   }
   .details {
-    padding: 5px 10px;
+    padding: 10px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     .title {
       color: black;
-      font-size: 18px;
+      font-size: 16px;
     }
     .description {
       color: black;
