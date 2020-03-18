@@ -219,6 +219,7 @@ createRequestAction({
   prefix: "_getMediaItem",
   apiPath: "media/view/{productId}",
   // resultKey: "media",
+  localError: true,
   state,
   mutations,
   actions,
