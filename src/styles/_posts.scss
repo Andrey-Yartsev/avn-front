@@ -103,6 +103,9 @@
     display: flex;
     align-items: center;
     position: relative;
+    &.wrap {
+      flex-wrap: wrap;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 15px 38px 8px 15px;

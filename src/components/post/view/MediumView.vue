@@ -86,7 +86,7 @@
         class="tip-form_post"
       />
       <CommentsList
-        v-if="post.commentsCount"
+        v-if="post.commentsCount && !isReposted"
         :comments="comments"
         :commentsCount="post.commentsCount || 0"
         :commentReplyId="commentReplyId"
