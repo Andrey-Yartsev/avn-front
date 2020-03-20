@@ -16,7 +16,11 @@ const Post = {
           next(`/${res.author.username}/posts#m/post/${postId}/profile/home`);
         })
         .catch(() => {
-          next("/not-found");
+          if (username) {
+            next(`/${username}`);
+          } else {
+            next("/not-found");
+          }
         });
     });
   }
