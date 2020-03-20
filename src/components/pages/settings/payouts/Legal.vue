@@ -101,7 +101,7 @@
 
             <div
               class="form-group form-group_with-label"
-              v-if="type === 'company' && !showABNOptions"
+              v-if="type === 'company' && showEINOption"
             >
               <label class="form-group-inner">
                 <span class="label">EIN</span>
@@ -408,6 +408,12 @@ export default {
     showABNOptions() {
       return (
         this.account.countryName && this.account.countryName === "Australia"
+      );
+    },
+    showEINOption() {
+      return (
+        this.account.countryName &&
+        this.account.countryName === "United States of America"
       );
     }
   },
