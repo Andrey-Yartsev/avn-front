@@ -288,7 +288,7 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.data = {
-      comment: params.comment
+      text: params.text
     };
     return options;
   }

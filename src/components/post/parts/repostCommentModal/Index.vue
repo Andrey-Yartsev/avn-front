@@ -81,7 +81,7 @@ import UserSuggestions from "@/mixins/userSuggestions";
 
 const InitialState = {
   expanded: true,
-  comment: ""
+  text: ""
 };
 
 export default {
@@ -119,7 +119,7 @@ export default {
       return this.$store.state.auth.user;
     },
     notEhoughData() {
-      return !this.comment.trim().length;
+      return !this.text.trim().length;
     },
     isExtended() {
       return this.expanded;
@@ -135,21 +135,21 @@ export default {
       }
       this.$store.dispatch("profile/home/repost", {
         postId: this.postId,
-        comment: this.comment
+        text: this.text
       });
       this.close();
     },
     reset() {
       this.expanded = InitialState.expanded;
-      this.comment = InitialState.comment;
+      this.text = InitialState.text;
     },
 
     // user suggestions API
     textInput() {
-      this.comment = this.$refs.textarea.value;
+      this.text = this.$refs.textarea.value;
     },
     getText() {
-      return this.comment;
+      return this.text;
     }
   },
   mounted() {
