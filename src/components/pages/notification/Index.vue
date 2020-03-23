@@ -85,8 +85,8 @@ import InfinityScrollMixin from "@/mixins/infinityScroll";
 import NotificationSingleView from "./Items/Single";
 import NotificationMergedView from "./Items/Merged";
 import User from "@/components/header/User";
-import uniqBy from "lodash.uniqby";
-import { fromNow } from "@/helpers/datetime";
+// import uniqBy from "lodash.uniqby";
+// import { fromNow } from "@/helpers/datetime";
 
 const typeTitles = {
   all: "Notifications",
@@ -132,55 +132,55 @@ export default {
       return this.$store.state.notif.allDataReceived;
     },
     items() {
-      if (this.type === "all") {
-        const merged = this.posts.reduce((m, v, index) => {
-          const time = fromNow(v.createdAt);
+      // if (this.type === "all") {
+      //   const merged = this.posts.reduce((m, v, index) => {
+      //     const time = fromNow(v.createdAt);
 
-          //first item
-          if (index === 0) {
-            return [
-              {
-                id: index,
-                type: v.type,
-                items: [v],
-                mergedByName: false,
-                time
-              }
-            ];
-          }
+      //     //first item
+      //     if (index === 0) {
+      //       return [
+      //         {
+      //           id: index,
+      //           type: v.type,
+      //           items: [v],
+      //           mergedByName: false,
+      //           time
+      //         }
+      //       ];
+      //     }
 
-          const prevItem = m[m.length - 1];
-          if (
-            v.type === prevItem.type &&
-            v.type !== "tip" &&
-            v.type !== "mentioned" &&
-            v.type !== "subscribed" &&
-            prevItem.time === time
-          ) {
-            prevItem.mergedByName =
-              v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
-            prevItem.items.push(v);
-            return [...m];
-          }
+      //     const prevItem = m[m.length - 1];
+      //     if (
+      //       v.type === prevItem.type &&
+      //       v.type !== "tip" &&
+      //       v.type !== "mentioned" &&
+      //       v.type !== "subscribed" &&
+      //       prevItem.time === time
+      //     ) {
+      //       prevItem.mergedByName =
+      //         v.user.id === prevItem.items[prevItem.items.length - 1].user.id;
+      //       prevItem.items.push(v);
+      //       return [...m];
+      //     }
 
-          return [
-            ...m,
-            {
-              mergedByName: false,
-              type: v.type,
-              items: [v],
-              id: index,
-              time
-            }
-          ];
-        }, []);
+      //     return [
+      //       ...m,
+      //       {
+      //         mergedByName: false,
+      //         type: v.type,
+      //         items: [v],
+      //         id: index,
+      //         time
+      //       }
+      //     ];
+      //   }, []);
 
-        return merged.map(i =>
-          i.mergedByName
-            ? i
-            : { ...i, items: uniqBy(i.items, item => item.user.id) }
-        );
-      }
+      //   return merged.map(i =>
+      //     i.mergedByName
+      //       ? i
+      //       : { ...i, items: uniqBy(i.items, item => item.user.id) }
+      //   );
+      // }
 
       return this.posts.map((v, index) => ({
         ...v,
@@ -201,9 +201,10 @@ export default {
         : menuTitles.filter(a => a.name !== "tip");
     },
     notificationView() {
-      return this.type === "all"
-        ? NotificationMergedView
-        : NotificationSingleView;
+      return NotificationSingleView;
+      // return this.type === "all"
+      //   ? NotificationMergedView
+      //   : NotificationSingleView;
     },
     unreadCount() {
       return this.$store.state.notif.unreadCount;
