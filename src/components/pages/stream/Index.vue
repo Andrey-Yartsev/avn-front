@@ -828,10 +828,8 @@ export default {
       thumbEnabled: true,
       videoSave: true,
       getApiUrl: StreamApi.getStreamPath(token),
-      clientGetApiUrl: null,
       videoElId: "myvideo",
       token: (+new Date()).toString(36),
-      streamSource: "local",
       showErrorMessage: message => {
         this.$store.dispatch("global/setError", { message });
         console.trace(message);
@@ -881,11 +879,6 @@ export default {
 
             this.startedStreamId = id;
             this.startingStream = false;
-            this.streamModule.config.clientGetApiUrl = StreamApi.getStreamClientPath(
-              id,
-              token
-            );
-            this.streamModule.getStreamAsClient();
             this.streamModule.sendCustomMessage({
               msgtype: "data.custom",
               to: ["transcoder"],

@@ -34,6 +34,7 @@
             {{ showTruncatedText ? "Collapse" : "More" }}
           </button>
         </div>
+        <LinksPreviewList :text="post.text" />
         <slot v-if="isInnerPost"></slot>
         <template v-else>
           <Media
@@ -85,7 +86,7 @@
         class="tip-form_post"
       />
       <CommentsList
-        v-if="post.commentsCount"
+        v-if="post.commentsCount && !isReposted"
         :comments="comments"
         :commentsCount="post.commentsCount || 0"
         :commentReplyId="commentReplyId"
@@ -112,6 +113,7 @@ import PostOpen from "@/mixins/post/open";
 import PostCommon from "@/mixins/post/common";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
+import LinksPreviewList from "@/components/post/parts/linksPreviewList/Index";
 
 export default {
   name: "PostMedium",
@@ -131,7 +133,8 @@ export default {
     Actions,
     Header,
     Media,
-    Tip
+    Tip,
+    LinksPreviewList
   },
   props: {
     post: {

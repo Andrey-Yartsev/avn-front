@@ -15,6 +15,7 @@ import modalTypes from "@/components/modals/types";
 
 import PostModal from "@/components/post/view/ModalView";
 import PostReportModal from "@/components/post/parts/reportModal/Index";
+import PostRepostCommentModal from "@/components/post/parts/repostCommentModal/Modal";
 import MessagesModal from "@/components/chat/Modal";
 import ChatVideoModal from "@/components/chat/media/VideoModal";
 import CreateStoryModal from "@/components/story/CreateModalView";
@@ -52,6 +53,7 @@ import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaP
 export default {
   components: {
     PostReportModal,
+    PostRepostCommentModal,
     PostModal,
     MessagesModal,
     ChatVideoModal,

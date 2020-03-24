@@ -182,6 +182,12 @@ const actions = {
   },
   updateMediaPreviewSrc({ commit }, data) {
     commit("updateMediaPreviewSrc", data);
+  },
+  sendViewStatistics({ dispatch }, productId) {
+    dispatch("_sendViewStatistics", productId);
+  },
+  getMediaForPreview({ dispatch }, productId) {
+    return dispatch("_getMediaItem", { productId });
   }
 };
 
@@ -213,6 +219,7 @@ createRequestAction({
   prefix: "_getMediaItem",
   apiPath: "media/view/{productId}",
   // resultKey: "media",
+  localError: true,
   state,
   mutations,
   actions,
@@ -288,6 +295,21 @@ createRequestAction({
   },
   paramsToPath: function(mediaId, path) {
     return path.replace(/{mediaId}/, mediaId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_sendViewStatistics",
+  apiPath: "media/{productId}/watched",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
   }
 });
 

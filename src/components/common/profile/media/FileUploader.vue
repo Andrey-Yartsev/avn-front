@@ -294,7 +294,7 @@ export default {
       }
     },
     isFormatCorrect(fileName) {
-      if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov|mp3)$/i.test(fileName)) {
+      if (/\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov)$/i.test(fileName)) {
         return true;
       }
       return false;

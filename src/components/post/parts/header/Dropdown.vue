@@ -26,6 +26,20 @@
           <span class="more-functions__option icn-item">Repost</span>
         </button>
       </li>
+      <li
+        v-if="!isOwner(userId) && isAuth() && !isRepost && !isContentHidden"
+        class="more-functions__item"
+      >
+        <button
+          class="more-functions__link"
+          type="button"
+          @click="reposWithComment"
+        >
+          <span class="more-functions__option icn-item"
+            >Repost with comment</span
+          >
+        </button>
+      </li>
       <template v-if="showCopy">
         <li v-if="copied" class="more-functions__item">
           <button
@@ -227,7 +241,16 @@ export default {
     },
     repost() {
       this.hide();
-      this.$store.dispatch("profile/home/repost", this.postId);
+      this.$store.dispatch("profile/home/repost", { postId: this.postId });
+    },
+    reposWithComment() {
+      this.hide();
+      this.$store.dispatch("modal/show", {
+        name: "postRepostComment",
+        data: {
+          postId: this.postId
+        }
+      });
     },
     markSpam() {
       this.$store.dispatch("home/spamPost", this.$props.post.author.id);

@@ -178,8 +178,8 @@ const actions = {
       commit("postPinChanged", -1);
     });
   },
-  repost({ dispatch }, postId) {
-    return dispatch("_repost", postId)
+  repost({ dispatch }, data) {
+    return dispatch("_repost", data)
       .then(() => {
         dispatch(
           "global/flashToast",
@@ -284,7 +284,13 @@ createRequestAction({
     method: "POST"
   },
   paramsToPath: function(params, path) {
-    return path.replace(/{id}/, params);
+    return path.replace(/{id}/, params.postId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      text: params.text
+    };
+    return options;
   }
 });
 

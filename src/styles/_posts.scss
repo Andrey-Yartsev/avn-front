@@ -28,6 +28,10 @@
       padding-bottom: 12px;
       border-bottom: 1px solid rgba($gray, 0.2);
     }
+    .clipLinks {
+      // display: flex;
+  
+    }
   }
 
   .posts & {
@@ -99,6 +103,9 @@
     display: flex;
     align-items: center;
     position: relative;
+    &.wrap {
+      flex-wrap: wrap;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 15px 38px 8px 15px;

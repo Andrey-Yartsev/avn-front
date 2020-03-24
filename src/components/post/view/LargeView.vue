@@ -97,7 +97,7 @@
             </div>
           </div>
           <CommentsList
-            v-if="!delayedPost && post.canComment"
+            v-if="!delayedPost"
             :comments="post.fullComments"
             :totalComments="post.commentsCount"
             :loading="commentsLoading"
@@ -329,7 +329,7 @@ export default {
       this.$router.push("/");
     },
     getComments() {
-      if (!this.post.canComment || this.delayedPost) return;
+      if (this.delayedPost) return;
       this.commentPage += 1;
       this.$store.dispatch(this.actionPrefix + "/getPostComments", {
         postId: this.post.id,

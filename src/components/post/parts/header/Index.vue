@@ -1,5 +1,14 @@
 <template>
-  <div class="post-header">
+  <div class="post-header" :class="{ wrap: isReposted }">
+    <div v-if="isReposted" class="retweetMark">
+      <img
+        class="retweetMark__icon"
+        width="16"
+        height="16"
+        src="/static/img/retweet.svg"
+      />
+      Reposted
+    </div>
     <router-link
       class="avatar avatar_gap-r-sm avatar_sm"
       :to="'/' + postUser.username"
@@ -56,7 +65,7 @@
     </template>
     <span v-else @click="copyHref" class="copyLink">
       <p v-if="copied">Copied</p>
-      <img v-else width="16" height="16" src="/static/img/link.svg" />
+      <span v-else class="icn-item icon-link icn-size_lg" />
     </span>
   </div>
 </template>
@@ -160,6 +169,18 @@ export default {
   transition: opacity 0.3s ease;
   &:hover {
     opacity: 1;
+  }
+}
+.retweetMark {
+  width: 100%;
+  color: inherit;
+  padding: 0 10px 5px 8px;
+  opacity: 0.5;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  .retweetMark__icon {
+    margin-right: 5px;
   }
 }
 </style>

@@ -15,11 +15,10 @@
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
           <button
-            v-if="isAuth()"
             class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
             @click="back"
           />
-          <h1 class="page-title">Store</h1>
+          <h1 class="page-title">Clips</h1>
           <a
             href="/login"
             @click.prevent="openLoginModal"
@@ -326,6 +325,20 @@ export default {
     },
     switchToPreview() {
       this.showPreview = !this.showPreview;
+    },
+    isFreeMedia() {
+      return this.post.price === 0;
+    },
+    sendViewStatistics() {
+      this.$store.dispatch(
+        "profile/media/sendViewStatistics",
+        this.post.productId
+      );
+    }
+  },
+  mounted() {
+    if (this.isFreeMedia()) {
+      this.sendViewStatistics();
     }
   }
 };
@@ -351,5 +364,14 @@ export default {
 .withMinHeight {
   min-height: auto;
   overflow: inherit;
+}
+.page-title {
+  padding-left: 56px !important;
+}
+.header-mobile {
+  padding: 0 !important;
+}
+.login {
+  margin-right: 15px !important;
 }
 </style>

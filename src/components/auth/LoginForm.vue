@@ -127,6 +127,11 @@
               >Forgot your password?</a
             >
           </p>
+          <p class="agree">
+            By loging up to AVN Stars I affirm that I am at least 18 years of
+            age or older and I agree to the following
+            <a href="/terms">terms.</a>
+          </p>
         </div>
       </div>
     </div>

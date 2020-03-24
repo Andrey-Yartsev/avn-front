@@ -111,6 +111,12 @@ export default {
         return false;
       }
       return this.$props.post.author.id === this.$store.state.auth.user.id;
+    },
+    isFreeClip() {
+      if (this.post.price === 0) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
@@ -178,7 +184,7 @@ export default {
       }
     },
     openModal() {
-      if (!this.user) {
+      if (!this.user && !this.isFreeClip) {
         this.$store.dispatch("modal/show", {
           name: "signup"
         });

@@ -100,6 +100,7 @@
             :disabled="isSaving"
           ></textarea>
         </vue-tribute>
+        <LinksPreview :text="postMsg" />
         <div
           class="post-attachment"
           v-if="
@@ -338,6 +339,7 @@ import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
+import LinksPreview from "./linksPreview";
 
 Settings.defaultLocale = "en";
 
@@ -365,7 +367,8 @@ export default {
     MediaPreview,
     Datetime,
     Draggable,
-    VueTribute
+    VueTribute,
+    LinksPreview
   },
   props: {
     initialExpanded: {

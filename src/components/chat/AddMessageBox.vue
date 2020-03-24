@@ -252,9 +252,9 @@ export default {
       if (this.uploadInProgress) {
         return false;
       }
-      if (this.$props.multipleMedia) {
-        return this.preloadedMedias.length;
-      }
+      // if (this.$props.multipleMedia) {
+      //   return this.preloadedMedias.length;
+      // }
       return this.message.trim() || this.preloadedMedias.length;
     },
     funded() {

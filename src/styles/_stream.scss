@@ -255,6 +255,12 @@
   font-size: 11px;
   font-weight: 500;
   padding: 10px;
+  &.obs {
+    top: 120px;
+    @include media-breakpoint-up($desktop-breakpoint) {
+      top: 65px;
+    }
+  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     left: 20px;

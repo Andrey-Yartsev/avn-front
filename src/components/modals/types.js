@@ -4,6 +4,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "postRepostComment",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "post",
     layoutOnlyModal: true
   },
