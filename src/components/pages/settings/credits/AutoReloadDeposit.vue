@@ -13,9 +13,8 @@
             type="checkbox"
             id="im_star"
             name="isWantEarn"
-            @change="save"
             :disabled="dataEmpty"
-            v-model="on"
+            v-model="enabled"
           />
           <span class="toggle-element_switcher"></span>
         </label>
@@ -31,12 +30,12 @@
                 <span class="form-field">
                   <div class="select-wrapper">
                     <select
-                      name="reloadAmount"
+                      name="amount"
                       class="default-disabled"
-                      v-model="reloadAmount"
+                      v-model="amount"
                     >
                       <option
-                        v-for="value in reloadOptions"
+                        v-for="value in amountOptions"
                         :value="value"
                         :key="value"
                       >
@@ -51,34 +50,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="shadow-block">
-      <div class="container">
-        <div class="form-group form-group_with-label">
-          <label class="form-group-inner">
-            <span class="label">Minimal credit balance</span>
-            <div class="row">
-              <div class="col-1-2">
-                <div class="select-wrapper">
-                  <select
-                    name="minAmount"
-                    class="default-disabled"
-                    v-model="minAmount"
-                  >
-                    <option
-                      v-for="value in minOptions"
-                      :value="value"
-                      :key="value"
-                    >
-                      {{ value }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </label>
-        </div>
-      </div>
-    </div> -->
     <div class="shadow-block">
       <div class="container">
         <div class="form-group form-group_with-label">
@@ -89,12 +60,12 @@
                 <span class="form-field">
                   <div class="select-wrapper">
                     <select
-                      name="minAmount"
+                      name="minLimit"
                       class="default-disabled"
-                      v-model="minAmount"
+                      v-model="minLimit"
                     >
                       <option
-                        v-for="value in minOptions"
+                        v-for="value in minLimitOptions"
                         :value="value"
                         :key="value"
                       >
@@ -106,6 +77,15 @@
               </span>
             </span>
           </label>
+        </div>
+        <div class="form-group-btn">
+          <button
+            @click.prevent="save"
+            :disabled="!isChanged"
+            class="btn lg btn_fix-width"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
@@ -117,8 +97,6 @@ import Loader from "@/components/common/Loader";
 import PayAction from "./payAction";
 import userMixin from "@/mixins/user";
 
-// import PayAction from "../../../../sep-components/avn/securionpay/payAction";
-
 export default {
   name: "AutoReloadDeposit",
   mixins: [PayAction, userMixin],
@@ -127,37 +105,64 @@ export default {
   },
   data() {
     return {
-      on: false,
-      reloadAmount: 0,
-      reloadOptions: [40, 50, 60],
-      minAmount: 20,
-      minOptions: [20, 30, 40, 50]
+      enabled: false,
+      amount: 0,
+      amountOptions: [20, 50, 100, 200],
+      minLimit: 0,
+      minLimitOptions: [40, 60, 80, 100],
+      initSnapshot: null
     };
   },
   computed: {
     dataEmpty() {
-      return !this.reloadAmount || !this.minAmount;
+      return !this.amount || !this.minLimit;
+    },
+    isChanged() {
+      if (this.dataEmpty || !this.initSnapshot) {
+        return false;
+      }
+      if (
+        this.enabled !== this.initSnapshot.enabled ||
+        this.amount !== this.initSnapshot.amount ||
+        this.minLimit !== this.initSnapshot.minLimit
+      ) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
-    save() {},
-    deposit() {
-      const { paymentGateCustomerCardToken } = this.user;
-      this._pay(
-        {
-          paymentType: "credit",
-          amount: parseFloat(this.amount),
-          paymentGateCustomerCardToken
-        },
-        () => {
-          this.amount = "";
-          this.$store.dispatch("credits/transactions/fetch");
-          this.$store.dispatch("profile/fetchSilent");
-          this.$store.dispatch("global/flashToast", {
-            text: "Deposit is made successfully"
-          });
-        }
-      );
+    save() {
+      this.$store.dispatch("profile/update", this.updatedUser()).then(() => {
+        this.initSnapshot = {
+          enabled: this.enabled,
+          amount: this.amount,
+          minLimit: this.minLimit
+        };
+      });
+    },
+    updatedUser() {
+      const user = this.user;
+      user.creditReload = {
+        enabled: this.enabled,
+        amount: this.amount,
+        minLimit: this.minLimit
+      };
+      return user;
+    },
+    init() {
+      const { enabled, amount, minLimit } = this.user.creditReload;
+      this.enabled = enabled;
+      this.amount = amount;
+      this.minLimit = minLimit;
+      this.initSnapshot = { enabled, amount, minLimit };
+    }
+  },
+  mounted() {
+    if (this.user.creditReload) {
+      this.init();
+    } else {
+      this.initSnapshot = { enabled: false, amount: 20, minLimit: 40 };
     }
   }
 };
