@@ -30,6 +30,11 @@ export default {
       return "";
     }
   }
+  // watch: {
+  //   src() {
+  //     this.loaded = false;
+  //   }
+  // }
 };
 </script>
 

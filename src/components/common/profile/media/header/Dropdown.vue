@@ -16,7 +16,9 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="copyLink"
         >
-          <span class="more-functions__option">Copy link to video</span>
+          <span class="more-functions__option"
+            >Copy link to {{ mediaType }}</span
+          >
         </a>
       </li>
       <li class="more-functions__item">
@@ -26,7 +28,7 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="editPost"
         >
-          <span class="more-functions__option">Edit video</span>
+          <span class="more-functions__option">Edit {{ mediaType }}</span>
         </a>
       </li>
       <li class="more-functions__item">
@@ -37,7 +39,7 @@
           @click.prevent="pinToggle"
         >
           <span class="more-functions__option">{{
-            post.pinned ? "Pinned. Unpin video" : "Pin video"
+            post.pinned ? `Pinned. Unpin ${mediaType}` : `Pin ${mediaType}`
           }}</span>
         </a>
       </li>
@@ -47,7 +49,7 @@
           type="button"
           @click="deletePost"
         >
-          <span class="more-functions__option">Delete video</span>
+          <span class="more-functions__option">Delete {{ mediaType }}</span>
         </button>
       </li>
     </ul>
@@ -59,7 +61,9 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="copyLink"
         >
-          <span class="more-functions__option">Copy link to video</span>
+          <span class="more-functions__option"
+            >Copy link to {{ mediaType }}</span
+          >
         </a>
       </li>
     </ul>
@@ -99,6 +103,9 @@ export default {
     },
     userId() {
       return this.post.author.id;
+    },
+    mediaType() {
+      return this.post.media.type;
     }
   },
   methods: {

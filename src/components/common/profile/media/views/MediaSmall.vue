@@ -40,11 +40,15 @@
           class="locked-picture icn-item icn-pos_center"
         >
           <img
+            v-if="media.type === 'video'"
             class="locked"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <div class="statusWrapper contentCenter">
             <span
               v-if="post.pinned"
@@ -58,17 +62,24 @@
             <span class="mediaStatus duration">
               <span>{{ getVideoDuration(post.media.duration) }}</span>
             </span>
-            <span class="mediaStatus duration">
+            <span
+              v-if="post.media.type === 'video'"
+              class="mediaStatus duration"
+            >
               <span>{{ getVideoResolution }}</span>
             </span>
           </div>
         </div>
         <template v-else>
           <img
+            v-if="media.type === 'video'"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <template v-if="isPrivate">
             <div class="statusWrapper">
               <span v-if="post.active" class="mediaStatus isActive">
@@ -93,7 +104,10 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
@@ -112,7 +126,10 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
@@ -368,5 +385,9 @@ export default {
 }
 .contentCenter {
   justify-content: center;
+}
+.audioPreview {
+  position: absolute;
+  top: 90px;
 }
 </style>

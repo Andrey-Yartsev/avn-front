@@ -67,7 +67,7 @@
             :disabled="saving"
           ></textarea>
         </vue-tribute>
-        <div class="post-attachment">
+        <div class="post-attachment" v-if="post.media.type === 'video'">
           <div class="block-thumbnails" v-if="!customThumbAdded">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView thumbList">
@@ -183,6 +183,7 @@
             />
 
             <div
+              v-if="post.media.type === 'video'"
               :class="[
                 'more-functions',
                 { open: dropdownOpened, previewDropdown: $mq === 'desktop' }

@@ -7,7 +7,7 @@
             class="popup-addPost__header hidden-mobile"
             v-if="$mq === 'desktop'"
           >
-            Edit video
+            Edit {{ mediaType }}
             <button
               type="button"
               class="close close_shift-t close_default icn-item icn-size_lg"
@@ -44,6 +44,9 @@ export default {
         item => item.productId === editedMediaId
       );
       return mediaItem || this.$store.state.mediaPage.media || null;
+    },
+    mediaType() {
+      return this.post.media.type;
     }
   },
   methods: {

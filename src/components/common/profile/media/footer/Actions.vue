@@ -16,7 +16,10 @@
           ></span>
           {{ getVideoDuration }}
         </span>
-        <span class=" actions__btn comments-btn">
+        <span
+          v-if="post.media.type !== 'audio'"
+          class=" actions__btn comments-btn"
+        >
           <span
             class="btn-icon icn-item icn-settings icn-size_md"
             v-tooltip="'Quality'"
@@ -47,7 +50,10 @@
           ></span>
           {{ getVideoDuration }}
         </span>
-        <span class="actions__btn comments-btn">
+        <span
+          v-if="post.media.type !== 'audio'"
+          class="actions__btn comments-btn"
+        >
           <span
             class="btn-icon icn-item icn-settings icn-size_md"
             v-tooltip="'Quality'"
