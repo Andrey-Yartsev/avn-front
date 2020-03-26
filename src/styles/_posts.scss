@@ -371,6 +371,27 @@
         opacity: 1;
         color: $primary-color;
       }
+
+      &.retweet_btn {
+
+        &.more-functions {
+          position: relative;
+          right: 0;
+          top: 0;
+          display: block;
+
+          img {
+            display: block;
+          }
+        }
+
+        .more-functions {
+
+          &__dropdown {
+            right: 6px;
+          }
+        }
+      }
     }
 
     .more-functions {

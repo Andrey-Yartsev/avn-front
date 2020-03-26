@@ -1,17 +1,19 @@
 <template>
   <span
-    class="actions__btn comments_btn"
+    class="actions__btn retweet_btn"
     :class="['more-functions', { open: opened }]"
     v-click-outside="hide"
   >
     <div class="more-functions__overlay" @click="hide"></div>
-    <img
-      class="retweetMark__icon"
-      width="20"
-      height="20"
-      src="/static/img/retweet.svg"
-      @click="open"
-    />
+    <span class="btn-icon icn-item icn-size_lg">
+      <img
+        class="retweetMark__icon"
+        width="20"
+        height="20"
+        src="/static/img/retweet.svg"
+        @click="open"
+      />
+    </span>
     <div class="more-functions__dropdown">
       <Dropdown
         :post="post"
@@ -63,15 +65,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.actions__btn.comments_btn.more-functions {
-  position: relative;
-  right: 0;
-  top: 0;
-  display: block;
-  img {
-    display: block;
-  }
-}
-</style>
