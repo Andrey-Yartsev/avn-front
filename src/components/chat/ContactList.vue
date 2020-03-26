@@ -1,5 +1,5 @@
 <template>
-  <div class="contactsList">
+  <div class="contactsList" :class="{ 'has-unread': !!unreadCount }">
     <div
       v-if="unreadCount && $mq === 'desktop'"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
@@ -7,6 +7,20 @@
     >
       <span>Unread chats ({{ unreadCount }})</span
       ><a href="#" :disabled="markAsReadInProgress">Mark all as read</a>
+    </div>
+    <div class="filter-tab" v-if="unreadCount">
+      <a
+        href="#"
+        :class="{ selected: filter === 'all' }"
+        @click.prevent="setFilter('all')"
+        >All</a
+      >
+      <a
+        href="#"
+        :class="{ selected: filter === 'unread' }"
+        @click.prevent="setFilter('unread')"
+        >Unread</a
+      >
     </div>
     <component
       :is="scrollableComponent"
@@ -104,9 +118,7 @@ import User from "@/mixins/user";
 
 export default {
   name: "ChatContactList",
-
   mixins: [User, ModalRouterGoto, InfinityScrollData],
-
   props: {
     chats: {
       type: Array,
@@ -117,7 +129,6 @@ export default {
       default: false
     }
   },
-
   computed: {
     _chats() {
       if (!this.onlyUnread) {
@@ -142,14 +153,15 @@ export default {
     },
     markAsReadInProgress() {
       return this.$store.state.chat._markAllChatsAsReadLoading;
+    },
+    filter() {
+      return this.$store.state.chat.chatsFilter;
     }
   },
-
   data: () => ({
     loadingName: "_fetchChatsLoading",
     mobileContainer: null
   }),
-
   methods: {
     openChat(id) {
       this.goTo("/chat/" + id);
@@ -197,6 +209,16 @@ export default {
     },
     markAsRead() {
       this.$store.dispatch("chat/markAllChatsAsRead");
+    },
+    setFilter(filter) {
+      this.$store.commit("chat/setChatsFilter", filter);
+    }
+  },
+  watch: {
+    filter() {
+      this.goTo("chat");
+      this.$store.commit("chat/fetchChatsReset");
+      this.$store.dispatch("chat/fetchChats", true);
     }
   },
   mounted() {
