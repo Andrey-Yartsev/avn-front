@@ -77,6 +77,7 @@
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Locked from "./content/Locked";
+import LockedAudio from "./content/LockedAudio";
 import Video from "./content/Video";
 import VideoLinked from "./content/VideoLinked";
 import Audio from "./content/Audio";
@@ -92,6 +93,7 @@ export default {
   name: "Media",
   components: {
     Locked,
+    LockedAudio,
     Video,
     VideoLinked,
     Gif,
@@ -199,6 +201,7 @@ export default {
     getMediaViewType({ canView, type }) {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
 
+      if (!canView && type === "audio") return "LockedAudio";
       if (!canView) return "Locked";
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;

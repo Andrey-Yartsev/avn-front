@@ -1,13 +1,10 @@
 <template>
   <div class="postLink" @click="$emit('click')">
-    <div class="media-wrapper audio-wrapper">
+    <div
+      class="media-wrapper audio-wrapper"
+      :class="{ 'full-width': mediaSize === 'full' && $mq === 'desktop' }"
+    >
       <audio controls controlsList="nodownload" :src="media.src.source"></audio>
-      <!-- <audio
-        controls
-        :src="src"
-        :style="style"
-        @load="() => (loaded = true)"
-      ></audio> -->
     </div>
   </div>
 </template>
@@ -18,6 +15,9 @@ import PostMediaPropsMixin from "@/mixins/post/media";
 export default {
   name: "Audio",
   mixins: [PostMediaPropsMixin],
+  props: {
+    mediaSize: String
+  },
   data: () => ({
     loaded: false
   }),
@@ -37,6 +37,9 @@ export default {
 <style lang="scss" scoped>
 .audio-wrapper {
   padding: 20px;
+  &.full-width {
+    width: 500px;
+  }
   & > audio {
     width: 100%;
   }
