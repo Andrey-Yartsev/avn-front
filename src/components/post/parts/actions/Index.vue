@@ -25,6 +25,7 @@
       ></span>
       {{ post.commentsCount ? post.commentsCount : "" }}
     </span>
+    <RepostDropdown v-if="!isOwner(post.author.id)" :post="post" :from="from" />
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
@@ -62,6 +63,7 @@
 
 <script>
 import Dropdown from "@/components/post/parts/header/Dropdown";
+import RepostDropdown from "@/components/post/parts/repostDropdown/Index";
 import ClickOutside from "vue-click-outside";
 import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";
@@ -70,7 +72,8 @@ export default {
   name: "Actions",
   mixins: [userMixin],
   components: {
-    Dropdown
+    Dropdown,
+    RepostDropdown
   },
   data: () => ({
     opened: false
@@ -134,6 +137,7 @@ export default {
       this.$emit("toggleTip");
     },
     open() {
+      console.log("click");
       this.opened = true;
       this.$emit("openDropdown");
     },
