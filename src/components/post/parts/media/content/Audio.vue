@@ -1,11 +1,7 @@
 <template>
   <div class="postLink" @click="$emit('click')">
     <div class="media-wrapper audio-wrapper">
-      <audio
-        controls
-        controlsList="nodownload"
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-      ></audio>
+      <audio controls controlsList="nodownload" :src="media.src.source"></audio>
       <!-- <audio
         controls
         :src="src"

@@ -35,6 +35,7 @@ import SubscribeModal from "@/components/subscription/SubscribeModal";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import ConfirmModal from "@/components/modal/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
+import AudioModal from "@/components/modal/Audio.vue";
 import ImageSwiperModal from "@/components/modal/ImageSwiper.vue";
 import VideoSwiperModal from "@/components/modal/VideoSwiper.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
@@ -73,6 +74,7 @@ export default {
     ChooseHighlightModal,
     ConfirmModal,
     ImageModal,
+    AudioModal,
     ImageSwiperModal,
     VideoSwiperModal,
     TrialConfirmModal,

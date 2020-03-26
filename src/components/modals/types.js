@@ -92,6 +92,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "audio",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "imageSwiper",
     layoutOnlyModal: true
   },
