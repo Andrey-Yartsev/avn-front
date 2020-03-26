@@ -1177,12 +1177,19 @@
           }
         }
       }
+    }
 
-      &.has-unread {
+    &.has-unread {
+      .contactsListContent {
         &.ps {
           .popup & {
-            top: 40px;
+            @include media-breakpoint-up($desktop-breakpoint) {
+              top: 40px;
+            }
           }
+        }
+        @include media-breakpoint-down($desktop-breakpoint) {
+          top: 40px;
         }
       }
     }
