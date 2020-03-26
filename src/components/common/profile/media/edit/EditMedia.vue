@@ -259,8 +259,8 @@ const InitialState = {
     pinned: false
   },
   saving: false,
+  defaultPriceLimit: 500,
   withoutWatermark: false,
-  maxPrice: 500,
   dropdownOpened: false,
   allowMultipleFileTypes: true
 };
@@ -367,6 +367,16 @@ export default {
         return [];
       }
       return this.preloadedMedias.filter(item => item.mediaType === "video");
+    },
+    maxPrice() {
+      if (
+        this.user.payments &&
+        this.user.payments.tipsLimit &&
+        this.user.payments.tipsLimit.max
+      ) {
+        return this.user.payments.tipsLimit.max;
+      }
+      return this.defaultPriceLimit;
     }
   },
   watch: {
@@ -450,6 +460,16 @@ export default {
       this.media.pinned = false;
     },
     saveClickHandler() {
+      if (this.overMaxPrice()) {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: `Max price limit is $${this.maxPrice}`, type: "error" },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.saving = true;
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
@@ -489,6 +509,9 @@ export default {
     },
     textInput() {
       this.media.text = this.$refs.textarea.value;
+    },
+    overMaxPrice() {
+      return this.media.price > this.maxPrice;
     }
   },
   mounted() {
