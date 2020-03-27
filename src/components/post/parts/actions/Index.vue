@@ -26,7 +26,7 @@
       {{ post.commentsCount ? post.commentsCount : "" }}
     </span>
     <RepostDropdown
-      v-if="!isOwner(post.author.id)"
+      v-if="!isOwner(post.author.id) && !isContentHidden"
       :post="post"
       :from="from"
       @openFooter="openFooter"
@@ -120,6 +120,9 @@ export default {
   computed: {
     dateTime() {
       return fromNow(this.post.postedAt);
+    },
+    isContentHidden() {
+      return this.$props.post.media.length && !this.$props.post.canViewMedia;
     }
   },
   methods: {
