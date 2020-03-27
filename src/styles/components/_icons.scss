@@ -388,4 +388,11 @@
       content: "\E679";
     }
   }
+
+  &-retweet {
+
+    &:after {
+      content: "\E801";
+    }
+  }
 }

@@ -342,7 +342,6 @@
     }
 
     &__btn {
-      opacity: 0.3;
       display: flex;
       align-items: center;
       margin-right: 25px;
@@ -358,18 +357,26 @@
         min-width: 58px;
 
         &:hover {
-          opacity: 1;
           color: $primary-color;
+
+          .btn-icon {
+            opacity: 1;
+          }
         }
       }
 
       .btn-icon {
         transition: none;
+        opacity: 0.3;
       }
 
+      &.open,
       &.active {
-        opacity: 1;
         color: $primary-color;
+
+        .btn-icon {
+          opacity: 1;
+        }
       }
 
       &.retweet_btn {

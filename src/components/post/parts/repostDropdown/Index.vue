@@ -5,15 +5,7 @@
     v-click-outside="hide"
   >
     <div class="more-functions__overlay" @click="hide"></div>
-    <span class="btn-icon icn-item icn-size_lg">
-      <img
-        class="retweetMark__icon"
-        width="20"
-        height="20"
-        src="/static/img/retweet.svg"
-        @click="open"
-      />
-    </span>
+    <span class="btn-icon icn-item icn-size_md icn-retweet" @click="open" />
     <div class="more-functions__dropdown">
       <Dropdown
         :post="post"
