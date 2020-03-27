@@ -105,7 +105,8 @@
           class="post-attachment"
           v-if="
             ((datetime && where !== 'modal') || preloadedMedias.length) &&
-              $mq === 'desktop'
+              $mq === 'desktop' &&
+              (isNew || (!isNew && mediaType !== 'audio'))
           "
         >
           <Draggable v-model="preloadedMedias" v-bind="dragOptions">
@@ -275,7 +276,11 @@
       </div>
       <div
         class="post-attachment"
-        v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
+        v-if="
+          (datetime || preloadedMedias.length) &&
+            $mq === 'mobile' &&
+            (isNew || (!isNew && mediaType !== 'audio'))
+        "
       >
         <Draggable v-model="preloadedMedias">
           <MediaPreview
@@ -629,11 +634,11 @@ export default {
         this.isFree = this.post.isFree;
         this.preloadedMedias = (this.post.media || []).map(media => ({
           alreadySaved: true,
-          fileContent: media.thumb.source,
+          fileContent: media.thumb && media.thumb.source,
           id: media.id,
           processId: media.id,
           mediaType: media.type,
-          preview: media.thumb.source,
+          preview: media.thumb && media.thumb.source,
           thumbs: media.thumbs,
           thumbId: media.thumbId
         }));
