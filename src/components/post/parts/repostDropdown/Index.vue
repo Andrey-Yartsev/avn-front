@@ -9,11 +9,15 @@
     v-click-outside="hideFooter"
   >
     <div class="more-functions__overlay" @click="hideFooter"></div>
-    <span
-      class="btn-icon icn-item icn-size_md icn-retweet"
-      @click="openFooter"
-      v-tooltip="'Repost'"
-    />
+    <span class="btn-icon icn-item icn-size_md" v-tooltip="'Repost'">
+      <img
+        class="retweetMark__icon"
+        width="20"
+        height="20"
+        src="/static/img/retweet.svg"
+        @click="openFooter"
+      />
+    </span>
     <div class="more-functions__dropdown">
       <Dropdown :post="post" :from="from" :hide="hideFooter" />
     </div>
