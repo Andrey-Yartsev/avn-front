@@ -342,7 +342,6 @@
     }
 
     &__btn {
-      opacity: 0.3;
       display: flex;
       align-items: center;
       margin-right: 25px;
@@ -358,8 +357,12 @@
         min-width: 58px;
 
         &:hover {
-          opacity: 1;
           color: $primary-color;
+
+          .likes__counter,
+          .btn-icon {
+            opacity: 1;
+          }
         }
       }
 
@@ -367,9 +370,40 @@
         transition: none;
       }
 
+      .likes__counter,
+      .btn-icon {
+        opacity: 0.3;
+      }
+
+      &.open,
       &.active {
-        opacity: 1;
         color: $primary-color;
+
+        .likes__counter,
+        .btn-icon {
+          opacity: 1;
+        }
+      }
+
+      &.retweet_btn {
+
+        &.more-functions {
+          position: relative;
+          right: 0;
+          top: 0;
+          display: block;
+
+          img {
+            display: block;
+          }
+        }
+
+        .more-functions {
+
+          &__dropdown {
+            right: 6px;
+          }
+        }
       }
     }
 

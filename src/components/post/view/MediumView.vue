@@ -3,7 +3,7 @@
     :class="[
       'post',
       {
-        'open-dropdown-inside': showDropdown,
+        'open-dropdown-inside': showDropdown || showFooterDropdown,
         post_preparation: !post.isMediaReady,
         outofviewport: isVisible === false
       }
@@ -60,6 +60,8 @@
             @postShowCommentForm="toggleCommentForm"
             @postLike="likePost"
             @toggleTip="toggleTipForm"
+            @openFooterDropdown="openFooterDropdown"
+            @hideFooterDropdown="hideFooterDropdown"
           />
           <div v-else class="actions">
             <div class="datetime-value">
@@ -121,6 +123,7 @@ export default {
   data() {
     return {
       showDropdown: false,
+      showFooterDropdown: false,
       // isVisible: undefined,
       height: undefined,
       truncateText: false,
@@ -234,6 +237,12 @@ export default {
       e.preventDefault();
       const linkUrl = e.target.getAttribute("href");
       this.$router.push(linkUrl);
+    },
+    openFooterDropdown() {
+      this.showFooterDropdown = true;
+    },
+    hideFooterDropdown() {
+      this.showFooterDropdown = false;
     }
   },
   mounted() {

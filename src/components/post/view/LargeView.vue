@@ -70,6 +70,7 @@
             @postShowCommentForm="clickOnCommentForm"
             @postLike="likePost"
             @toggleTip="_toggleTipForm"
+            :postView="'large'"
           />
         </template>
         <div class="right-col">
@@ -164,6 +165,7 @@
                 @postShowCommentForm="clickOnCommentForm"
                 @postLike="likePost"
                 @toggleTip="_toggleTipForm"
+                :postView="'large'"
               />
             </template>
           </div>
