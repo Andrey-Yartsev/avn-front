@@ -6,21 +6,16 @@
       { open: opened },
       { 'more-functions_dir-inverse': postView === 'large' }
     ]"
-    v-click-outside="hide"
+    v-click-outside="hideFooter"
   >
-    <div class="more-functions__overlay" @click="hide"></div>
+    <div class="more-functions__overlay" @click="hideFooter"></div>
     <span
       class="btn-icon icn-item icn-size_md icn-retweet"
-      @click="open"
+      @click="openFooter"
       v-tooltip="'Retweet'"
     />
     <div class="more-functions__dropdown">
-      <Dropdown
-        :post="post"
-        :from="from"
-        :hide="hide"
-        v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-      />
+      <Dropdown :post="post" :from="from" :hide="hideFooter" />
     </div>
   </span>
 </template>
@@ -52,13 +47,17 @@ export default {
     postView: String
   },
   methods: {
-    open() {
-      this.opened = true;
-      this.$emit("footerDropdownToggle");
+    openFooter() {
+      if (!this.opened) {
+        this.opened = true;
+        this.$emit("openFooter");
+      }
     },
-    hide() {
-      this.opened = false;
-      this.$emit("footerDropdownToggle");
+    hideFooter() {
+      if (this.opened) {
+        this.opened = false;
+        this.$emit("hideFooter");
+      }
     }
   },
   directives: {

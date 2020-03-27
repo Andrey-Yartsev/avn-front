@@ -29,7 +29,8 @@
       v-if="!isOwner(post.author.id)"
       :post="post"
       :from="from"
-      @footerDropdownToggle="$emit('footerDropdownToggle')"
+      @openFooter="openFooter"
+      @hideFooter="hideFooter"
       :postView="postView"
     />
     <template
@@ -151,6 +152,12 @@ export default {
     hide() {
       this.opened = false;
       this.$emit("hideDropdown");
+    },
+    openFooter() {
+      this.$emit("openFooterDropdown");
+    },
+    hideFooter() {
+      this.$emit("hideFooterDropdown");
     },
     showLikesModal() {
       this.$store.dispatch("modal/show", {

@@ -60,7 +60,8 @@
             @postShowCommentForm="toggleCommentForm"
             @postLike="likePost"
             @toggleTip="toggleTipForm"
-            @footerDropdownToggle="footerDropdownToggle"
+            @openFooterDropdown="openFooterDropdown"
+            @hideFooterDropdown="hideFooterDropdown"
           />
           <div v-else class="actions">
             <div class="datetime-value">
@@ -237,8 +238,11 @@ export default {
       const linkUrl = e.target.getAttribute("href");
       this.$router.push(linkUrl);
     },
-    footerDropdownToggle() {
-      this.showFooterDropdown = !this.showFooterDropdown;
+    openFooterDropdown() {
+      this.showFooterDropdown = true;
+    },
+    hideFooterDropdown() {
+      this.showFooterDropdown = false;
     }
   },
   mounted() {
