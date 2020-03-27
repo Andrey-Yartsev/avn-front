@@ -1,7 +1,11 @@
 <template>
   <span
     class="actions__btn retweet_btn"
-    :class="['more-functions', { open: opened }]"
+    :class="[
+      'more-functions',
+      { open: opened },
+      { 'more-functions_dir-inverse': postView === 'large' }
+    ]"
     v-click-outside="hide"
   >
     <div class="more-functions__overlay" @click="hide"></div>
@@ -23,7 +27,7 @@ import ClickOutside from "vue-click-outside";
 import userMixin from "@/mixins/user";
 
 export default {
-  name: "Actions",
+  name: "RepostDropdown",
   mixins: [userMixin],
   components: {
     Dropdown
@@ -40,7 +44,8 @@ export default {
     from: {
       type: String,
       required: true
-    }
+    },
+    postView: String
   },
   methods: {
     open() {

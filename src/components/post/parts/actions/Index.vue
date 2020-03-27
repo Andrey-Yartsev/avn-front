@@ -30,6 +30,7 @@
       :post="post"
       :from="from"
       @footerDropdownToggle="$emit('footerDropdownToggle')"
+      :postView="postView"
     />
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
@@ -112,7 +113,8 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    }
+    },
+    postView: String
   },
   computed: {
     dateTime() {

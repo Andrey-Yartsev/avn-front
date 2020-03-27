@@ -164,6 +164,7 @@
                 @postShowCommentForm="clickOnCommentForm"
                 @postLike="likePost"
                 @toggleTip="_toggleTipForm"
+                :postView="'large'"
               />
             </template>
           </div>

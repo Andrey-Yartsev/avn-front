@@ -25,7 +25,7 @@
 import userMixin from "@/mixins/user";
 
 export default {
-  name: "PostDropdown",
+  name: "DropdownItem",
   mixins: [userMixin],
   computed: {
     actionPrefix() {
