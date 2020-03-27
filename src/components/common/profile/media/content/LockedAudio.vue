@@ -23,11 +23,18 @@ export default {
   name: "LockedAudio",
   mixins: [PostMediaPropsMixin],
   props: {
-    media: Object
+    mediaSize: String,
+    media: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
-    src() {
-      return this.media.src.source;
+    source() {
+      if (this.media && this.media.src && this.media.src.source) {
+        return this.media.src.source;
+      }
+      return "";
     }
   }
 };
