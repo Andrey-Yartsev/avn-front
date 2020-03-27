@@ -25,7 +25,12 @@
       ></span>
       {{ post.commentsCount ? post.commentsCount : "" }}
     </span>
-    <RepostDropdown v-if="!isOwner(post.author.id)" :post="post" :from="from" />
+    <RepostDropdown
+      v-if="!isOwner(post.author.id)"
+      :post="post"
+      :from="from"
+      @footerDropdownToggle="$emit('footerDropdownToggle')"
+    />
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >

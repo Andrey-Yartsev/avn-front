@@ -53,11 +53,11 @@ export default {
   methods: {
     open() {
       this.opened = true;
-      this.$emit("openDropdown");
+      this.$emit("footerDropdownToggle");
     },
     hide() {
       this.opened = false;
-      this.$emit("hideDropdown");
+      this.$emit("footerDropdownToggle");
     }
   },
   directives: {
