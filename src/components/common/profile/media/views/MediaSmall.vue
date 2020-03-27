@@ -47,6 +47,7 @@
             @dragstart.prevent="() => false"
           />
           <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
             <audio controls controlsList="nodownload" :src="media.src.source" />
           </div>
           <div class="statusWrapper contentCenter">
@@ -78,10 +79,11 @@
             @dragstart.prevent="() => false"
           />
           <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
             <audio controls controlsList="nodownload" :src="media.src.source" />
           </div>
           <template v-if="isPrivate">
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span v-if="post.active" class="mediaStatus isActive">
                 On Sale
               </span>
@@ -113,7 +115,7 @@
             </div>
           </template>
           <template v-else>
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span
                 v-if="post.pinned"
                 class="icn-pin icn-item icn-size_md"
@@ -350,6 +352,9 @@ export default {
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.644);
   padding: 0 10px;
+  &.top {
+    top: 0;
+  }
   &.bottom {
     bottom: 0;
   }
@@ -387,7 +392,20 @@ export default {
   justify-content: center;
 }
 .audioPreview {
-  position: absolute;
-  top: 90px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  audio {
+    width: 100%;
+  }
 }
 </style>

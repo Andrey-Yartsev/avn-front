@@ -7,7 +7,6 @@
         </div>
         <div v-if="link.title" class="details">
           <h5 class="title">{{ link.title }}</h5>
-          <!-- <p class="description">{{ trimmedText }}</p> -->
         </div>
       </router-link>
     </template>
@@ -32,7 +31,7 @@ export default {
   },
   computed: {
     isLinkExists() {
-      return !this.fetching && !!this.link;
+      return !this.fetching && !!this.link && !!this.link.thumb;
     },
     productId() {
       return this.linkUrl.split("/").pop();
@@ -56,7 +55,7 @@ export default {
         .dispatch("profile/media/getMediaForPreview", this.productId)
         .then(res => {
           const { title, text } = res;
-          const thumb = res.media.thumb.source;
+          const thumb = res.media.thumb && res.media.thumb.source;
           this.link = { title, text, thumb };
           this.fetching = false;
         })

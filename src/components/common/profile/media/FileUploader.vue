@@ -20,7 +20,7 @@
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
       <img src="/static/img/ic-drop-files.svg" alt="drop area folder" />
-      Drop video file(s) here
+      Drop audio/video file(s) here
     </div>
     <div class="upload">
       <div class="table-responsive" v-if="files.length">

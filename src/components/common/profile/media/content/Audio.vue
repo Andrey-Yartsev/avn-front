@@ -4,17 +4,15 @@
       class="media-wrapper audio-wrapper"
       :class="{ 'full-width': mediaSize === 'full' && $mq === 'desktop' }"
     >
+      <img src="/static/img/volume.svg" />
       <audio controls controlsList="nodownload" :src="source"></audio>
     </div>
   </div>
 </template>
 
 <script>
-// import PostMediaPropsMixin from "@/mixins/post/media";
-
 export default {
   name: "Audio",
-  // mixins: [PostMediaPropsMixin],
   props: {
     mediaSize: String,
     media: {
@@ -30,21 +28,22 @@ export default {
       return "";
     }
   }
-  // watch: {
-  //   src() {
-  //     this.loaded = false;
-  //   }
-  // }
 };
 </script>
 
 <style lang="scss" scoped>
 .audio-wrapper {
   padding: 20px;
+  background-color: white;
   &.full-width {
     width: 500px;
   }
-  & > audio {
+  img {
+    display: block;
+    width: 100px !important;
+    position: relative;
+  }
+  audio {
     width: 100%;
   }
 }

@@ -132,6 +132,9 @@ export default {
 <style lang="scss" scoped>
 .media {
   flex-grow: 2 !important;
+  &:after {
+    display: none !important;
+  }
   &.maxHeight {
     max-height: 350px;
   }
