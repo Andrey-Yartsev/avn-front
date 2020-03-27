@@ -19,7 +19,7 @@ const inputAcceptTypes = {
   gif: ["gif"],
   photo: ["jpg", "jpeg", "png"],
   video: ["mp4", "mov", "moov", "m4v", "mpg", "mpeg", "wmv", "avi"],
-  audio: ["mp3"]
+  audio: ["mp3", "ogg", "wav"]
 };
 
 const limits = {
@@ -47,7 +47,7 @@ export default {
     getAcceptedFormats() {
       return this.$props.videosOnly
         ? ".mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi,.mp3";
+        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi,.mp3,.ogg,.wav";
     }
   },
 

@@ -157,8 +157,8 @@ export default {
     return {
       files: [],
       accept:
-        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv,audio/mp3",
-      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,mp3",
+        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv,audio/mp3,audio/ogg,audio/wav",
+      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,mp3,ogg,wav",
       multiple: true,
       directory: false,
       drop: true,
@@ -294,7 +294,9 @@ export default {
       }
     },
     isFormatCorrect(fileName) {
-      if (/\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov|mp3)$/i.test(fileName)) {
+      if (
+        /\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov|mp3|ogg|wav)$/i.test(fileName)
+      ) {
         return true;
       }
       return false;
