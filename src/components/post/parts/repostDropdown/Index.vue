@@ -12,7 +12,7 @@
     <span
       class="btn-icon icn-item icn-size_md icn-retweet"
       @click="openFooter"
-      v-tooltip="'Retweet'"
+      v-tooltip="'Repost'"
     />
     <div class="more-functions__dropdown">
       <Dropdown :post="post" :from="from" :hide="hideFooter" />
