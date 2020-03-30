@@ -161,81 +161,113 @@
               </div>
             </template>
 
-            <div class="form-group form-group_with-label photo-form-group">
-              <div
-                class="form-group-inner photo-form-group-inner"
-                :class="{ 'success icn-item': !!photoUploaded }"
-              >
-                <span class="label">Photo ID front</span>
-
-                <div class="photo-label-wrapper">
-                  <label
-                    for="photo"
-                    class="btn btn_fix-width btn_block border photo-btn"
-                    >Upload</label
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
+              <label class="form-group-inner">
+                <span class="label">Document Type</span>
+                <span class="select-wrapper">
+                  <select
+                    :disabled="legalExists"
+                    name="type"
+                    id="legal-type"
+                    required
+                    v-model="backsideDocRequired"
+                    v-validate="'required'"
                   >
-                </div>
-
-                <input
-                  type="file"
-                  id="photo"
-                  accept=".jpg,.jpeg,.png"
-                  ref="photo"
-                  name="photo"
-                  @change="upload"
-                />
-              </div>
+                    <option value="" disabled>Select ID Document Type</option>
+                    <option
+                      v-for="doc of getAllowedDocsOptions"
+                      :key="doc.type"
+                      :value="doc.backsideRequired"
+                      >{{ doc.name }}</option
+                    >
+                  </select>
+                </span>
+              </label>
             </div>
-            <div class="form-group form-group_with-label photo-form-group">
+
+            <template v-if="backsideDocRequired !== ''">
+              <div class="form-group form-group_with-label photo-form-group">
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!personalIdImage }"
+                >
+                  <span class="label">Photo ID (front side)</span>
+
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="personalIdImage"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="personalIdImage"
+                    accept=".jpg,.jpeg,.png"
+                    ref="personalIdImage"
+                    name="personalIdImage"
+                    @change="upload"
+                  />
+                </div>
+              </div>
               <div
-                class="form-group-inner photo-form-group-inner"
-                :class="{ 'success icn-item': !!photoBackUploaded }"
+                v-if="backsideDocRequired === true"
+                class="form-group form-group_with-label photo-form-group"
               >
-                <span class="label">Photo ID back</span>
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!personalIdImageBackside }"
+                >
+                  <span class="label">Photo ID (back side)</span>
 
-                <div class="photo-label-wrapper">
-                  <label
-                    for="photoBack"
-                    class="btn btn_fix-width btn_block border photo-btn"
-                    >Upload</label
-                  >
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="personalIdImageBackside"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="personalIdImageBackside"
+                    accept=".jpg,.jpeg,.png"
+                    ref="personalIdImageBackside"
+                    name="personalIdImageBackside"
+                    @change="upload"
+                  />
                 </div>
-
-                <input
-                  type="file"
-                  id="photoBack"
-                  accept=".jpg,.jpeg,.png"
-                  ref="photoBack"
-                  name="photoBack"
-                  @change="upload"
-                />
               </div>
-            </div>
-            <div class="form-group form-group_with-label photo-form-group">
-              <div
-                class="form-group-inner photo-form-group-inner"
-                :class="{ 'success icn-item': !!photoSelfieUploaded }"
-              >
-                <span class="label">Photo ID selfie</span>
+              <div class="form-group form-group_with-label photo-form-group">
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!selfieImage }"
+                >
+                  <span class="label">Photo ID selfie</span>
 
-                <div class="photo-label-wrapper">
-                  <label
-                    for="photoSelfie"
-                    class="btn btn_fix-width btn_block border photo-btn"
-                    >Upload</label
-                  >
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="selfieImage"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="selfieImage"
+                    accept=".jpg,.jpeg,.png"
+                    ref="selfieImage"
+                    name="selfieImage"
+                    @change="upload"
+                  />
                 </div>
-
-                <input
-                  type="file"
-                  id="photoSelfie"
-                  accept=".jpg,.jpeg,.png"
-                  ref="photoSelfie"
-                  name="photoSelfie"
-                  @change="upload"
-                />
               </div>
-            </div>
+            </template>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
@@ -370,9 +402,9 @@
               :disabled="
                 !canSave ||
                   saving ||
-                  photoUploading ||
-                  photoBackUploading ||
-                  photoSelfieUploading
+                  personalIdImageUploading ||
+                  personalIdImageBacksideUploading ||
+                  selfieImageUploading
               "
             >
               Next
@@ -416,15 +448,16 @@ export default {
       postalCode: "",
       city: "",
       tos: false,
-      photoUploaded: null,
-      photoBackUploaded: null,
-      photoSelfieUploaded: null,
+      personalIdImage: null,
+      personalIdImageBackside: null,
+      selfieImage: null,
       legalExisted: false,
-      photoUploading: false,
-      photoBackUploading: false,
-      photoSelfieUploading: false,
+      personalIdImageUploading: false,
+      personalIdImageBacksideUploading: false,
+      selfieImageUploading: false,
       abn: "",
-      gstRegistered: null
+      gstRegistered: null,
+      backsideDocRequired: ""
     };
   },
   computed: {
@@ -440,16 +473,26 @@ export default {
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
     },
+    isRequiredImagesUploaded() {
+      if (this.backsideDocRequired === "") {
+        return false;
+      }
+      if (this.backsideDocRequired) {
+        return (
+          this.personalIdImage &&
+          this.personalIdImageBackside &&
+          this.selfieImage
+        );
+      }
+      if (!this.backsideDocRequired) {
+        return this.personalIdImage && this.selfieImage;
+      }
+    },
     canSave() {
       if (!this.isFormValid) {
         return false;
       }
-      if (
-        (!this.photoUploaded ||
-          !this.photoBackUploaded ||
-          !this.photoSelfieUploaded) &&
-        !this.legalExists
-      ) {
+      if (!this.isRequiredImagesUploaded && !this.legalExisted) {
         return false;
       }
       return true;
@@ -481,6 +524,26 @@ export default {
         this.account.countryName &&
         this.account.countryName === "United States of America"
       );
+    },
+    getAllowedDocsOptions() {
+      return this.account.countryAllowedDocTypes.map(item => {
+        let name = "";
+        switch (item.type) {
+          case "idCard":
+            name = "ID Card";
+            break;
+          case "passport":
+            name = "Passport";
+            break;
+          case "driverLicense":
+            name = "Driver License";
+            break;
+          default:
+            break;
+        }
+        item.name = name;
+        return item;
+      });
     }
   },
   methods: {
@@ -488,7 +551,7 @@ export default {
       const refName = e.target.name;
       this[`${refName}Uploading`] = true;
       try {
-        this[`${refName}Uploaded`] = await upload(this.$refs[refName].files[0]);
+        this[refName] = await upload(this.$refs[refName].files[0]);
         this[`${refName}Uploading`] = false;
       } catch (error) {
         this[`${refName}Uploading`] = false;
@@ -519,9 +582,11 @@ export default {
             f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
-      data.personalIdImage = this.photoUploaded;
-      data.personalIdImageBack = this.photoBackUploaded;
-      data.personaleIdImageSelfie = this.photoSelfieUploaded;
+      if (!this.legalExisted) {
+        data.personalIdImage = this.personalIdImage;
+        data.personalIdImageBack = this.personalIdImageBackside;
+        data.selfieImage = this.selfieImage;
+      }
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
           return;
