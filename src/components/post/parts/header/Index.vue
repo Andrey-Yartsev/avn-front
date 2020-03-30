@@ -1,12 +1,7 @@
 <template>
   <div class="post-header" :class="{ wrap: isReposted }">
     <div v-if="isReposted" class="retweetMark">
-      <img
-        class="retweetMark__icon"
-        width="16"
-        height="16"
-        src="/static/img/retweet.svg"
-      />
+      <span class="btn-icon icn-item icn-size_md icn-retweet" />
       Reposted
     </div>
     <router-link
