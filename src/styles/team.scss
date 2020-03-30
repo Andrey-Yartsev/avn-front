@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'team';
-  src: url('#{$assetPath}/fonts/team/team.eot?86907545');
-  src: url('#{$assetPath}/fonts/team/team.eot?86907545#iefix') format('embedded-opentype'),
-       url('#{$assetPath}/fonts/team/team.woff2?86907545') format('woff2'),
-       url('#{$assetPath}/fonts/team/team.woff?86907545') format('woff'),
-       url('#{$assetPath}/fonts/team/team.ttf?86907545') format('truetype'),
-       url('#{$assetPath}/fonts/team/team.svg?86907545#team') format('svg');
+  src: url('#{$assetPath}/fonts/team/team.eot?30693760');
+  src: url('#{$assetPath}/fonts/team/team.eot?30693760#iefix') format('embedded-opentype'),
+       url('#{$assetPath}/fonts/team/team.woff2?30693760') format('woff2'),
+       url('#{$assetPath}/fonts/team/team.woff?30693760') format('woff'),
+       url('#{$assetPath}/fonts/team/team.ttf?30693760') format('truetype'),
+       url('#{$assetPath}/fonts/team/team.svg?30693760#team') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -17,7 +17,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'team';
-    src: url('../font/team.svg?86907545#team') format('svg');
+    src: url('../font/team.svg?30693760#team') format('svg');
   }
 }
 */
