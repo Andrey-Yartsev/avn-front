@@ -282,7 +282,7 @@
             (isNew || (!isNew && mediaType !== 'audio'))
         "
       >
-        <Draggable v-model="preloadedMedias">
+        <Draggable v-model="preloadedMedias" class="addFileCollectionView">
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
