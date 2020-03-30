@@ -359,7 +359,6 @@
         &:hover {
           color: $primary-color;
 
-          .likes__counter,
           .btn-icon {
             opacity: 1;
           }
@@ -368,10 +367,6 @@
 
       .btn-icon {
         transition: none;
-      }
-
-      .likes__counter,
-      .btn-icon {
         opacity: 0.3;
       }
 
@@ -379,7 +374,6 @@
       &.active {
         color: $primary-color;
 
-        .likes__counter,
         .btn-icon {
           opacity: 1;
         }
