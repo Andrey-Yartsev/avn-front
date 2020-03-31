@@ -81,6 +81,12 @@
                 to="/settings/subscribers"
                 >Subscribers
               </router-link>
+              <router-link
+                v-if="user.isPerformer && user.storeEnabled"
+                class="user-menu-item user-menu-item__clipStore icn-item"
+                :to="'/' + user.username + '/media'"
+                >Clip Store
+              </router-link>
             </div>
             <div class="user-menu__col">
               <router-link

@@ -121,9 +121,10 @@ export default {
   data() {
     return {
       limits: {
-        video: 10,
+        video: 100,
         gif: 0,
-        photo: 0
+        photo: 0,
+        audio: 10
       },
       filterType: "all",
       opened: false,

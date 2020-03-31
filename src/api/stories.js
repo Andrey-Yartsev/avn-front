@@ -27,6 +27,11 @@ export default {
       method: "PUT"
     });
   },
+  redirectStory({ postId }) {
+    return tokenRequest(`stories/${postId}/link/visited`, {
+      method: "PUT"
+    });
+  },
   savePost(data) {
     return tokenRequest(`stories`, {
       method: "POST",

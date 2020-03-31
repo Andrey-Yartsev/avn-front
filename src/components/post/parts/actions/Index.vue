@@ -25,6 +25,14 @@
       ></span>
       {{ post.commentsCount ? post.commentsCount : "" }}
     </span>
+    <RepostDropdown
+      v-if="!isOwner(post.author.id) && !isContentHidden"
+      :post="post"
+      :from="from"
+      @openFooter="openFooter"
+      @hideFooter="hideFooter"
+      :postView="postView"
+    />
     <template
       v-if="!isOwner(post.author.id) && post.author.canEarn && $root.showTips"
     >
@@ -62,6 +70,7 @@
 
 <script>
 import Dropdown from "@/components/post/parts/header/Dropdown";
+import RepostDropdown from "@/components/post/parts/repostDropdown/Index";
 import ClickOutside from "vue-click-outside";
 import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";
@@ -70,7 +79,8 @@ export default {
   name: "Actions",
   mixins: [userMixin],
   components: {
-    Dropdown
+    Dropdown,
+    RepostDropdown
   },
   data: () => ({
     opened: false
@@ -104,11 +114,15 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    }
+    },
+    postView: String
   },
   computed: {
     dateTime() {
       return fromNow(this.post.postedAt);
+    },
+    isContentHidden() {
+      return this.$props.post.media.length && !this.$props.post.canViewMedia;
     }
   },
   methods: {
@@ -134,12 +148,19 @@ export default {
       this.$emit("toggleTip");
     },
     open() {
+      console.log("click");
       this.opened = true;
       this.$emit("openDropdown");
     },
     hide() {
       this.opened = false;
       this.$emit("hideDropdown");
+    },
+    openFooter() {
+      this.$emit("openFooterDropdown");
+    },
+    hideFooter() {
+      this.$emit("hideFooterDropdown");
     },
     showLikesModal() {
       this.$store.dispatch("modal/show", {

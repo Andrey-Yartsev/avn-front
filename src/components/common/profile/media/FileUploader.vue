@@ -20,7 +20,7 @@
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
       <img src="/static/img/ic-drop-files.svg" alt="drop area folder" />
-      Drop video file(s) here
+      Drop audio/video file(s) here
     </div>
     <div class="upload">
       <div class="table-responsive" v-if="files.length">
@@ -32,9 +32,13 @@
               v-for="(file, index) in files"
               :key="file.id"
             >
-              <div class="col col-item">
+              <div
+                class="col col-item"
+                :class="{ fullWidthCol: $mq === 'mobile' }"
+              >
                 <div
                   class="addFileCollectionView mediaPreview"
+                  :class="{ mobileMediaPreview: $mq === 'mobile' }"
                   v-if="preloadedMedias.length == files.length"
                 >
                   <MediaPreview
@@ -153,8 +157,8 @@ export default {
     return {
       files: [],
       accept:
-        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
-      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
+        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv,audio/mp3,audio/ogg,audio/wav",
+      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,mp3,ogg,wav",
       multiple: true,
       directory: false,
       drop: true,
@@ -208,8 +212,8 @@ export default {
   },
   computed: {
     allMediaTypes() {
-      const { photo, video } = this.inputAcceptTypes;
-      return [...photo, ...video];
+      const { photo, video, audio } = this.inputAcceptTypes;
+      return [...photo, ...video, ...audio];
     },
     canSend() {
       if (this.uploadInProgress || !this.files.length || this.disableButtons) {
@@ -290,7 +294,9 @@ export default {
       }
     },
     isFormatCorrect(fileName) {
-      if (/\.(webp|mp4|mpeg|mpg|wmv|avi|mov|moov)$/i.test(fileName)) {
+      if (
+        /\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov|mp3|ogg|wav)$/i.test(fileName)
+      ) {
         return true;
       }
       return false;
@@ -411,6 +417,9 @@ export default {
     margin-bottom: 0;
   }
 }
+.mobileMediaPreview {
+  margin: auto;
+}
 .btn-danger {
   background-color: #ff4081;
   padding: 0 40px;
@@ -430,5 +439,8 @@ export default {
   left: 0;
   z-index: 200;
   background-color: rgba(128, 128, 128, 0.473);
+}
+.fullWidthCol {
+  width: 100%;
 }
 </style>

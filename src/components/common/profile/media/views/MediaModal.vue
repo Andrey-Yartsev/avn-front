@@ -8,8 +8,8 @@
         >
           <div class="postPageWrapper postPageWrapper_in-popup">
             <MediaLarge
-              v-if="post"
-              :post="post"
+              v-if="getPost"
+              :post="getPost"
               :from="backFrom || from"
               v-on:addExtraClassName="addExtraClassName"
             />
@@ -42,7 +42,8 @@ export default {
       index: undefined,
       extraClassName: "lightbox-post scroll-post",
       backFrom: undefined,
-      preloadedImageIndexes: {}
+      preloadedImageIndexes: {},
+      post: null
     };
   },
   computed: {
@@ -52,7 +53,10 @@ export default {
     postId() {
       return parseInt(this.$store.state.modalRouter.params.postId);
     },
-    post() {
+    getPost() {
+      if (this.$store.state.profile.media.separateMedia) {
+        return this.$store.state.profile.media.separateMedia;
+      }
       return this.$store.state.profile.media.media.find(
         item => item.productId === this.postId
       );
@@ -64,7 +68,43 @@ export default {
   methods: {
     addExtraClassName(className) {
       this.extraClassName = className;
+    },
+    init() {
+      const existedPost = this.$store.state.profile.media.media.find(
+        item => item.productId === this.postId
+      );
+      if (!existedPost) {
+        this.$store.dispatch(
+          "profile/media/getMediaItemForModal",
+          {
+            productId: this.postId
+          },
+          { root: true }
+        );
+      }
+    },
+    removeExploreClass() {
+      const routeName = this.$route.name;
+      if (routeName === "ExploreStore") {
+        const html = document.getElementsByTagName("html")[0];
+        html.classList.remove("explore-page");
+      }
+    },
+    returnExploreClass() {
+      const routeName = this.$route.name;
+      if (routeName === "ExploreStore") {
+        const html = document.getElementsByTagName("html")[0];
+        html.classList.add("explore-page");
+      }
     }
+  },
+  mounted() {
+    this.init();
+    this.removeExploreClass();
+  },
+  beforeDestroy() {
+    this.returnExploreClass();
+    this.$store.commit("profile/media/removeSeparateMedia");
   }
 };
 </script>

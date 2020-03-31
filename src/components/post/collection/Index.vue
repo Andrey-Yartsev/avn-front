@@ -7,7 +7,18 @@
         :key="post.id"
         :from="from"
         @visibilityChanged="visibilityChanged"
-      ></Post>
+      >
+        <template v-if="post.innerPost">
+          <div class="innerPost_wrapper">
+            <Post
+              :post="post.innerPost"
+              :from="from"
+              :isReposted="true"
+              @visibilityChanged="visibilityChanged"
+            />
+          </div>
+        </template>
+      </Post>
     </div>
   </div>
 </template>
@@ -16,6 +27,7 @@
 import Post from "@/components/post/view/MediumView";
 import PostsStat from "@/mixins/post/statMany";
 import UserMixin from "@/mixins/user";
+// import audio from "@/mock/audio";
 
 export default {
   name: "PostCollection",
@@ -23,6 +35,11 @@ export default {
   components: {
     Post: Post
   },
+  // data() {
+  //   return {
+  //     posts: audio
+  //   }
+  // },
   props: {
     posts: {
       type: Array,
@@ -40,3 +57,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.innerPost_wrapper {
+  border: 1px solid rgba(124, 139, 150, 0.2);
+  margin: 20px;
+}
+</style>

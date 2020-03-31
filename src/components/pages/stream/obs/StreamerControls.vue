@@ -40,6 +40,17 @@
       />
       {{ viewsCount }}
     </span>
+    <span
+      v-if="!isTipsGoalExists"
+      class="stream-online-count bottom-btn"
+      @click="toggleTipGoalForm"
+      :class="{ selected: true }"
+    >
+      <span
+        class="btn-icon icn-item icn-size_lg icn-price has-tooltip"
+        v-tooltip="'Set tips goal'"
+      />
+    </span>
   </div>
 </template>
 
@@ -62,6 +73,12 @@ export default {
     viewsCount: {
       type: Number,
       default: 0
+    },
+    isTipsGoalExists: {
+      type: Boolean
+    },
+    toggleTipGoalForm: {
+      type: Function
     }
   },
   methods: {

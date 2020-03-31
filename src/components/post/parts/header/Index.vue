@@ -1,5 +1,9 @@
 <template>
-  <div class="post-header">
+  <div class="post-header" :class="{ wrap: isReposted }">
+    <div v-if="isReposted" class="retweetMark">
+      <span class="btn-icon icn-item icn-size_md icn-retweet" />
+      Reposted
+    </div>
     <router-link
       class="avatar avatar_gap-r-sm avatar_sm"
       :to="'/' + postUser.username"
@@ -39,19 +43,25 @@
       v-if="post.isPinned && isAuth()"
       class="icn-item icn-pinned icn-size_lg"
     />
-    <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
-      <div class="more-functions__overlay" @click="hide"></div>
-      <div class="more-functions__btn" @click="open" />
-      <div class="more-functions__dropdown">
-        <Dropdown
-          :post="post"
-          :from="from"
-          :hide="hide"
-          :showCopy="showCopy"
-          v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
-        />
+    <template v-if="!isReposted">
+      <div :class="['more-functions', { open: opened }]" v-click-outside="hide">
+        <div class="more-functions__overlay" @click="hide"></div>
+        <div class="more-functions__btn" @click="open" />
+        <div class="more-functions__dropdown">
+          <Dropdown
+            :post="post"
+            :from="from"
+            :hide="hide"
+            :showCopy="showCopy"
+            v-on:clickOnDetailsView="$emit('clickOnDetailsView')"
+          />
+        </div>
       </div>
-    </div>
+    </template>
+    <span v-else @click="copyHref" class="copyLink">
+      <p v-if="copied">Copied</p>
+      <span v-else class="icn-item icon-link icn-size_lg" />
+    </span>
   </div>
 </template>
 
@@ -68,7 +78,8 @@ export default {
     Dropdown
   },
   data: () => ({
-    opened: false
+    opened: false,
+    copied: false
   }),
   props: {
     datetime: {
@@ -86,7 +97,8 @@ export default {
     showCopy: {
       type: Boolean,
       required: true
-    }
+    },
+    isReposted: Boolean
   },
   computed: {
     postId() {
@@ -94,6 +106,14 @@ export default {
     },
     postUser() {
       return this.post.author;
+    },
+    href() {
+      const { protocol, port, hostname } = window.location;
+      return (
+        `${protocol}//${hostname}` +
+        (port ? ":" + port : "") +
+        `/post/${this.post.author.username}/${this.postId}`
+      );
     }
   },
   methods: {
@@ -113,6 +133,12 @@ export default {
     },
     hideBubble() {
       Bubble.hide();
+    },
+    copyHref() {
+      this.$copyText(this.href).then(() => {
+        this.copied = true;
+        setTimeout(() => (this.copied = false), 1000);
+      });
     }
   },
   mounted() {
@@ -126,3 +152,30 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.copyLink {
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: -30px;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+.retweetMark {
+  width: 100%;
+  color: inherit;
+  padding: 0 10px 5px 8px;
+  opacity: 0.5;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  .retweetMark__icon {
+    margin-right: 5px;
+  }
+}
+</style>

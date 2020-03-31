@@ -10,13 +10,38 @@
       <div class="over-container">
         <Navigate />
         <div
+          v-if="page === 'clips'"
+          class="stories-wrapper stories-all clipCategories"
+        >
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/all">
+              All
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/free">
+              Free Only
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topView">
+              Top Viewed
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topSale">
+              Best Selling
+            </router-link>
+          </span>
+        </div>
+        <div
           class="stories-wrapper stories-all"
-          v-if="stories.length || lives.length"
+          v-if="stories.length || streamLives.length"
         >
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <TopLives :lives="lives" v-if="lives.length" />
+                <TopLives :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
@@ -59,15 +84,26 @@
             </div>
             <div v-else :class="['explore-wrapper', page]">
               <template v-if="type === 'media'">
-                <component
-                  :is="postComponent"
-                  v-for="post in posts"
-                  :post="post"
-                  :key="post.id"
-                  from="explore"
-                  :shouldBePoster="page === 'all' && post.id === firstVideoId"
-                  @visibilityChanged="visibilityChanged"
-                />
+                <template v-if="page === 'clips'">
+                  <component
+                    :is="mediaComponent"
+                    v-for="post in posts"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                  />
+                </template>
+                <template v-else>
+                  <component
+                    :is="postComponent"
+                    v-for="post in posts"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                    @visibilityChanged="visibilityChanged"
+                  />
+                </template>
               </template>
               <template v-if="page === 'stories'">
                 <StoryMedium
@@ -79,13 +115,24 @@
                 />
               </template>
               <template v-if="page === 'lives'">
-                <Live
-                  v-for="post in lives"
-                  :post="post"
-                  :key="post.id"
-                  from="explore"
-                  :updatePageData="getPageData"
-                />
+                <template v-for="post in lives">
+                  <PostSmall
+                    v-if="post.media"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :shouldBePoster="page === 'all' && post.id === firstVideoId"
+                    @visibilityChanged="visibilityChanged"
+                    :recordIcon="true"
+                  />
+                  <Live
+                    v-else
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :updatePageData="getPageData"
+                  />
+                </template>
               </template>
             </div>
             <div class="loader-infinity" v-if="infinityScrollLoading">
@@ -128,6 +175,8 @@ import PostsStat from "@/mixins/post/statMany";
 import PostCollection from "@/components/post/collection/Index";
 import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
+import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
+import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 
 export default {
   name: "Explore",
@@ -144,7 +193,9 @@ export default {
     Live,
     Loader,
     PostCollection,
-    GenderFilter
+    GenderFilter,
+    MediaMedium,
+    MediaSmall
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
   created() {
@@ -163,6 +214,9 @@ export default {
     },
     lives() {
       return uniqBy(this.$store.state.lives.posts, "id");
+    },
+    streamLives() {
+      return this.lives.filter(item => !!item.user);
     },
     topModels() {
       return this.$store.state.topModels.posts;
@@ -233,8 +287,10 @@ export default {
       if (this.$mq === "mobile" && this.page === "videos") {
         return PostMedium;
       }
-
       return PostSmall;
+    },
+    mediaComponent() {
+      return this.$mq === "mobile" ? MediaMedium : MediaSmall;
     },
     category() {
       return this.$store.state.gender.category;
@@ -275,7 +331,13 @@ export default {
     infinityScrollGetDataMethod() {
       // uses into InfinityScrollMixin
       if (this.type === "media" || this.type === "feed") {
-        this.$store.dispatch("explore/getPosts");
+        if (this.page === "clips") {
+          this.$store.dispatch("explore/getPosts", {
+            filter: this.$route.params.category
+          });
+        } else {
+          this.$store.dispatch("explore/getPosts");
+        }
       }
 
       if (this.type === "story") {
@@ -283,7 +345,7 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
       }
 
       if (this.type === "top") {
@@ -304,7 +366,13 @@ export default {
 
       if (this.type === "media" || this.type === "feed") {
         this.$store.dispatch("explore/setSource", { source: this.source });
-        this.$store.dispatch("explore/getPosts");
+        if (this.page === "clips") {
+          this.$store.dispatch("explore/getPosts", {
+            filter: this.$route.params.category
+          });
+        } else {
+          this.$store.dispatch("explore/getPosts");
+        }
       }
 
       this.$store.dispatch("lives/getPosts");
@@ -318,7 +386,8 @@ export default {
       }
 
       if (this.type === "live") {
-        this.$store.dispatch("lives/getPosts");
+        this.$store.dispatch("lives/getPostsWithStreams");
+        // this.$store.dispatch("lives/getPosts");
       }
     },
     storePrefix() {
@@ -335,7 +404,42 @@ export default {
     },
     ["$route.params.tag"]() {
       this.init();
+    },
+    ["$route.params.category"](value) {
+      if (value !== undefined) {
+        this.init();
+      }
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.videoCategories,
+.clipCategories {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  &_item {
+    cursor: pointer;
+    color: #2196f3;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      color: #222b32;
+    }
+    &.selected {
+      font-weight: 500;
+      color: #222b32;
+    }
+    a {
+      color: inherit;
+      &.router-link-exact-active {
+        font-weight: 500;
+        color: #222b32;
+      }
+    }
+  }
+}
+</style>

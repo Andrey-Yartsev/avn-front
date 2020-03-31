@@ -26,6 +26,16 @@ export const routes = [
   },
   {
     beforeEnter: Post.page,
+    path: "/post/:username/:postId",
+    name: "PostItem",
+    component: () =>
+      import(/* webpackChunkName: "PostPage" */ "@/components/pages/post/Index"),
+    meta: {
+      cssName: "post"
+    }
+  },
+  {
+    beforeEnter: Post.page,
     path: "/post/:postId",
     name: "PostItem",
     component: () =>

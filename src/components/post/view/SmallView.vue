@@ -6,7 +6,8 @@
         'explore-item_col-3': !shouldBePoster,
         'explore-item_double': shouldBePoster,
         outofviewport: isVisible === false,
-        'explore-media_processing': post.mediaType === 'processing'
+        'explore-media_processing': post.mediaType === 'processing',
+        'explore-item_live': isExploreLivePage
       }
     ]"
     :data-id="post.id"
@@ -72,6 +73,13 @@
                 'icn-camera': !post.streamHasConverted
               }"
             ></span>
+          </span>
+          <span
+            v-if="recordIcon"
+            class="recordIcon"
+            :class="{ small: $mq === 'mobile' }"
+          >
+            <img width="16" height="16" src="/static/img/tape.svg" />
           </span>
           <span class="overlay" v-if="$mq === 'desktop' && !shouldBePoster" />
           <div
@@ -157,6 +165,10 @@ export default {
     shouldBePoster: {
       type: Boolean,
       default: false
+    },
+    recordIcon: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -174,6 +186,9 @@ export default {
     },
     page() {
       return this.$route.meta.page;
+    },
+    isExploreLivePage() {
+      return this.$route.name === "ExploreLive";
     }
   },
   methods: {
@@ -211,3 +226,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.recordIcon {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 23px;
+  height: 23px;
+  &.small {
+    left: 5px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+  }
+}
+</style>

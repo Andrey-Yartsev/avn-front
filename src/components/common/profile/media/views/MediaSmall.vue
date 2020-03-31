@@ -40,11 +40,16 @@
           class="locked-picture icn-item icn-pos_center"
         >
           <img
+            v-if="media.type === 'video'"
             class="locked"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <div class="statusWrapper contentCenter">
             <span
               v-if="post.pinned"
@@ -58,19 +63,27 @@
             <span class="mediaStatus duration">
               <span>{{ getVideoDuration(post.media.duration) }}</span>
             </span>
-            <span class="mediaStatus duration">
+            <span
+              v-if="post.media.type === 'video'"
+              class="mediaStatus duration"
+            >
               <span>{{ getVideoResolution }}</span>
             </span>
           </div>
         </div>
         <template v-else>
           <img
+            v-if="media.type === 'video'"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
+          <div v-else-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <template v-if="isPrivate">
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span v-if="post.active" class="mediaStatus isActive">
                 On Sale
               </span>
@@ -93,13 +106,16 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
           </template>
           <template v-else>
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span
                 v-if="post.pinned"
                 class="icn-pin icn-item icn-size_md"
@@ -112,7 +128,10 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
@@ -212,6 +231,12 @@ export default {
           this.$props.post.media.src.width
         ) + "p"
       );
+    },
+    isFreeClip() {
+      if (this.post.price === 0) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
@@ -225,7 +250,7 @@ export default {
       this.height = entry.boundingClientRect.height;
     },
     openModal() {
-      if (!this.user) {
+      if (!this.user && !this.isFreeClip) {
         this.$store.dispatch("modal/show", {
           name: "signup"
         });
@@ -327,6 +352,9 @@ export default {
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.644);
   padding: 0 10px;
+  &.top {
+    top: 0;
+  }
   &.bottom {
     bottom: 0;
   }
@@ -362,5 +390,22 @@ export default {
 }
 .contentCenter {
   justify-content: center;
+}
+.audioPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  audio {
+    width: 100%;
+  }
 }
 </style>

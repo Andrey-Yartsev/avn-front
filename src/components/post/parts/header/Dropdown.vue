@@ -18,6 +18,28 @@
           <span class="more-functions__option icn-item">Report post</span>
         </button>
       </li>
+      <li
+        v-if="!isOwner(userId) && isAuth() && !isRepost && !isContentHidden"
+        class="more-functions__item"
+      >
+        <button class="more-functions__link" type="button" @click="repost">
+          <span class="more-functions__option icn-item">Repost</span>
+        </button>
+      </li>
+      <li
+        v-if="!isOwner(userId) && isAuth() && !isRepost && !isContentHidden"
+        class="more-functions__item"
+      >
+        <button
+          class="more-functions__link"
+          type="button"
+          @click="reposWithComment"
+        >
+          <span class="more-functions__option icn-item"
+            >Repost with comment</span
+          >
+        </button>
+      </li>
       <template v-if="showCopy">
         <li v-if="copied" class="more-functions__item">
           <button
@@ -37,7 +59,10 @@
           </button>
         </li>
       </template>
-      <li v-if="isOwner(userId) && isAuth()" class="more-functions__item">
+      <li
+        v-if="isOwner(userId) && isAuth() && !isRepost"
+        class="more-functions__item"
+      >
         <a
           class="edit more-functions__link"
           type="button"
@@ -103,10 +128,16 @@ export default {
   computed: {
     href() {
       const { protocol, port, hostname } = window.location;
+      const postId = this.post.innerPost
+        ? this.post.innerPost.id
+        : this.post.id;
+      const author = this.post.innerPost
+        ? this.post.innerPost.author.username
+        : this.post.author.username;
       return (
         `${protocol}//${hostname}` +
         (port ? ":" + port : "") +
-        `/post/${this.postId}`
+        `/post/${author}/${postId}`
       );
     },
     actionPrefix() {
@@ -126,6 +157,12 @@ export default {
     },
     canPin() {
       return this.pinCount < 3;
+    },
+    isRepost() {
+      return !!this.$props.post.innerPost;
+    },
+    isContentHidden() {
+      return this.$props.post.media.length && !this.$props.post.canViewMedia;
     }
   },
   props: {
@@ -197,6 +234,19 @@ export default {
 
       this.$store.dispatch("modal/show", {
         name: "postReport",
+        data: {
+          postId: this.postId
+        }
+      });
+    },
+    repost() {
+      this.hide();
+      this.$store.dispatch("profile/home/repost", { postId: this.postId });
+    },
+    reposWithComment() {
+      this.hide();
+      this.$store.dispatch("modal/show", {
+        name: "postRepostComment",
         data: {
           postId: this.postId
         }

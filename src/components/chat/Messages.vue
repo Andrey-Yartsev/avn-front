@@ -82,17 +82,31 @@
                   />
                 </span>
                 <div class="media-chat" v-if="v.media.length">
-                  <MediaVideo
+                  <!-- <MediaVideo
                     v-if="v.media.length && v.media[0].type === 'video'"
                     :message="v"
                     :ref="'video' + v.id"
                     @play="stopOtherVideo(v.id)"
+                  /> -->
+                  <MediaAudio
+                    v-if="v.media.length && v.media[0].type === 'audio'"
+                    :message="v"
                   />
-                  <MediaImage
+                  <MediaVideosList
+                    v-if="v.media.length && v.media[0].type === 'video'"
+                    :message="v"
+                    :videos="v.media"
+                  />
+                  <MediaImagesList
+                    v-else-if="v.media.length && v.media[0].type === 'photo'"
+                    :message="v"
+                    :images="v.media"
+                  />
+                  <!-- <MediaImage
                     v-else-if="v.media.length && v.media[0].type === 'photo'"
                     :message="v"
                     ref="img"
-                  />
+                  /> -->
                 </div>
                 <template v-if="v.story">
                   <div class="media-chat">
@@ -176,6 +190,9 @@ import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
+import MediaAudio from "./media/Audio";
+import MediaImagesList from "./media/ImagesList";
+import MediaVideosList from "./media/VideosList";
 import MediaVideo from "./media/VideoPreview";
 import SubscribeButton from "@/components/subscription/Button";
 import moment from "moment";
@@ -189,7 +206,10 @@ export default {
     Loader,
     MediaImage,
     MediaVideo,
-    SubscribeButton
+    SubscribeButton,
+    MediaImagesList,
+    MediaVideosList,
+    MediaAudio
   },
 
   mixins: [userMixin],

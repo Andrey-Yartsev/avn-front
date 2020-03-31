@@ -221,16 +221,29 @@ export default {
       showTip: false,
       showPaid: false,
       price: "",
-      priceIsSet: false
+      priceIsSet: false,
+      limits: {
+        video: 3,
+        gif: 1,
+        photo: 5,
+        audio: 1
+      }
     };
   },
 
   computed: {
     canAddMedia() {
-      return this.$props.maxMediaLength &&
+      if (!this.preloadedMedias.length) {
+        return true;
+      }
+      if (
+        this.$props.maxMediaLength &&
         this.preloadedMedias.length >= this.$props.maxMediaLength
-        ? false
-        : true;
+      ) {
+        return false;
+      }
+      const loadedMediaType = this.preloadedMedias[0].mediaType;
+      return this.preloadedMedias.length < this.limits[loadedMediaType];
     },
     canSend() {
       if (this.showTip) {
@@ -239,17 +252,17 @@ export default {
       if (this.uploadInProgress) {
         return false;
       }
-      if (this.$props.multipleMedia) {
-        return this.preloadedMedias.length;
-      }
+      // if (this.$props.multipleMedia) {
+      //   return this.preloadedMedias.length;
+      // }
       return this.message.trim() || this.preloadedMedias.length;
     },
     funded() {
       return this.$store.state.tip.funded;
     },
     allMediaTypes() {
-      const { photo, video } = this.inputAcceptTypes;
-      return [...photo, ...video];
+      const { photo, video, audio } = this.inputAcceptTypes;
+      return [...photo, ...video, ...audio];
     },
     isMuted() {
       if (!this.withUser) {
@@ -259,6 +272,15 @@ export default {
     },
     activeUserId() {
       return this.$store.state.chat.activeUserId;
+    },
+    getAcceptedFormats() {
+      if (!this.preloadedMedias.length) {
+        return this.allMediaTypes.map(item => "." + item).join();
+      }
+      const loadedMediaType = this.preloadedMedias[0].mediaType;
+      return this.inputAcceptTypes[loadedMediaType]
+        .map(item => "." + item)
+        .join();
     }
   },
 

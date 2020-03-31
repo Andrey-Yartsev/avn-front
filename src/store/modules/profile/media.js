@@ -12,7 +12,8 @@ const initState = {
   limit: fetchLimit,
   allDataReceived: false,
   preloadedMedias: [],
-  mediaCategories: null
+  mediaCategories: null,
+  separateMedia: null
 };
 
 const state = { ...initState };
@@ -50,6 +51,9 @@ const mutations = {
     state.media = state.media.map(item => {
       return item.productId === updatedMedia.productId ? updatedMedia : item;
     });
+    if (state.separateMedia) {
+      state.separateMedia = updatedMedia;
+    }
   },
   deleteMedia(state, productId) {
     state.media = state.media.filter(item => item.productId !== productId);
@@ -106,6 +110,12 @@ const mutations = {
   },
   setMediaCategories(state, data) {
     state.mediaCategories = data;
+  },
+  setSeparateMedia(state, data) {
+    state.separateMedia = data;
+  },
+  removeSeparateMedia(state) {
+    state.separateMedia = null;
   }
 };
 
@@ -129,6 +139,12 @@ const actions = {
     dispatch("_getMediaItem", data).then(res => {
       commit("updateMedia", res);
       commit("mediaPage/updateMediaItem", res, { root: true });
+      commit("explore/updateStorePost", res, { root: true });
+    });
+  },
+  getMediaItemForModal({ dispatch, commit }, data) {
+    return dispatch("_getMediaItem", data).then(res => {
+      commit("setSeparateMedia", res);
     });
   },
   deleteMedia({ dispatch, commit }, mediaId) {
@@ -188,6 +204,12 @@ const actions = {
           { id: 2, name: "Female" }
         ]);
       });
+  },
+  sendViewStatistics({ dispatch }, productId) {
+    dispatch("_sendViewStatistics", productId);
+  },
+  getMediaForPreview({ dispatch }, productId) {
+    return dispatch("_getMediaItem", { productId });
   }
 };
 
@@ -221,6 +243,7 @@ createRequestAction({
   prefix: "_getMediaItem",
   apiPath: "media/view/{productId}",
   // resultKey: "media",
+  localError: true,
   state,
   mutations,
   actions,
@@ -307,6 +330,21 @@ createRequestAction({
   },
   paramsToPath: function(mediaId, path) {
     return path.replace(/{mediaId}/, mediaId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_sendViewStatistics",
+  apiPath: "media/{productId}/watched",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
   }
 });
 

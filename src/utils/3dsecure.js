@@ -39,7 +39,13 @@ export const askFor3dSecure = options => {
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
       Store.dispatch("payment/pay/pay", { ...options, token })
-        .then(() => {
+        .then(res => {
+          if (res.success && res.message) {
+            Store.dispatch("global/flashToast", {
+              text: res.message,
+              type: "warning"
+            });
+          }
           if (options.onSuccess) {
             options.onSuccess(options);
           }

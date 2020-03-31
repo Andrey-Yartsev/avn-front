@@ -15,6 +15,7 @@ import modalTypes from "@/components/modals/types";
 
 import PostModal from "@/components/post/view/ModalView";
 import PostReportModal from "@/components/post/parts/reportModal/Index";
+import PostRepostCommentModal from "@/components/post/parts/repostCommentModal/Modal";
 import MessagesModal from "@/components/chat/Modal";
 import ChatVideoModal from "@/components/chat/media/VideoModal";
 import CreateStoryModal from "@/components/story/CreateModalView";
@@ -34,6 +35,9 @@ import SubscribeModal from "@/components/subscription/SubscribeModal";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import ConfirmModal from "@/components/modal/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
+import AudioModal from "@/components/modal/Audio.vue";
+import ImageSwiperModal from "@/components/modal/ImageSwiper.vue";
+import VideoSwiperModal from "@/components/modal/VideoSwiper.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
 import GayContextConfirmModal from "@/components/pages/awards/GayContextConfirmModal.vue";
 import ChatMessagePayConfirmModal from "@/components/chat/ChatMessagePayConfirm";
@@ -50,6 +54,7 @@ import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaP
 export default {
   components: {
     PostReportModal,
+    PostRepostCommentModal,
     PostModal,
     MessagesModal,
     ChatVideoModal,
@@ -69,6 +74,9 @@ export default {
     ChooseHighlightModal,
     ConfirmModal,
     ImageModal,
+    AudioModal,
+    ImageSwiperModal,
+    VideoSwiperModal,
     TrialConfirmModal,
     GayContextConfirmModal,
     ChatMessagePayConfirmModal,

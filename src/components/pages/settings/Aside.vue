@@ -274,6 +274,13 @@ export default {
         name: "obs",
         title: "OBS"
       });
+      if (this.user.storeEnabled && this.user.isPerformer) {
+        items.push({
+          name: "clipStore",
+          title: "Clip Store",
+          path: `${this.user.username}/media`
+        });
+      }
       return items;
     },
     showAvatarSave() {

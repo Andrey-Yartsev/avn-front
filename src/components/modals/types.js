@@ -4,6 +4,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "postRepostComment",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "post",
     layoutOnlyModal: true
   },
@@ -85,6 +89,18 @@ const modalTypes = [
   },
   {
     storeName: "image",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "audio",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "imageSwiper",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "videoSwiper",
     layoutOnlyModal: true
   },
   {

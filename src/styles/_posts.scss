@@ -28,6 +28,10 @@
       padding-bottom: 12px;
       border-bottom: 1px solid rgba($gray, 0.2);
     }
+    .clipLinks {
+      // display: flex;
+  
+    }
   }
 
   .posts & {
@@ -59,6 +63,14 @@
 
   &_preparation.post {
 
+
+    .innerPost_wrapper {
+      .media {
+        .loader-container {
+          display: none;
+        }
+      }
+    }
     .media {
 
       &:after {
@@ -91,6 +103,9 @@
     display: flex;
     align-items: center;
     position: relative;
+    &.wrap {
+      flex-wrap: wrap;
+    }
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       padding: 15px 38px 8px 15px;
@@ -327,7 +342,6 @@
     }
 
     &__btn {
-      opacity: 0.3;
       display: flex;
       align-items: center;
       margin-right: 25px;
@@ -343,18 +357,47 @@
         min-width: 58px;
 
         &:hover {
-          opacity: 1;
           color: $primary-color;
+
+          .btn-icon {
+            opacity: 1;
+          }
         }
       }
 
       .btn-icon {
         transition: none;
+        opacity: 0.3;
       }
 
+      &.open,
       &.active {
-        opacity: 1;
         color: $primary-color;
+
+        .btn-icon {
+          opacity: 1;
+        }
+      }
+
+      &.retweet_btn {
+
+        &.more-functions {
+          position: relative;
+          right: 0;
+          top: 0;
+          display: block;
+
+          img {
+            display: block;
+          }
+        }
+
+        .more-functions {
+
+          &__dropdown {
+            right: 6px;
+          }
+        }
       }
     }
 
@@ -1455,3 +1498,7 @@
 .media-slider-pagination {
   z-index: 20;
 }
+
+// .chatImageSwiper {
+//   width: auto !important;
+// }

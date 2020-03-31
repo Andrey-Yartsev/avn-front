@@ -6,7 +6,9 @@ import Store from "@/store";
 export default {
   signUp(data) {
     data.userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    data.sentry = JSON.stringify(window.okev.all());
+    if (window.okev) {
+      data.sentry = JSON.stringify(window.okev.all());
+    }
     return request("users/register", {
       method: "POST",
       data
@@ -19,7 +21,9 @@ export default {
   },
   login(data) {
     data.userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    data.sentry = JSON.stringify(window.okev.all());
+    if (window.okev) {
+      data.sentry = JSON.stringify(window.okev.all());
+    }
     return new Promise(async (resolve, reject) => {
       let response = await request("users/login", {
         method: "POST",

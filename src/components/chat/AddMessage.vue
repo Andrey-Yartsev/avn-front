@@ -3,6 +3,7 @@
     @send="sendMessage"
     :withUser="withUser"
     :withFontSizeController="true"
+    :multipleMedia="true"
   />
 </template>
 

@@ -32,7 +32,15 @@ export default {
       };
       this.$store
         .dispatch("payment/pay/pay", payload)
-        .then(onSuccess)
+        .then(res => {
+          if (res.success && res.message) {
+            this.$store.dispatch("global/flashToast", {
+              text: res.message,
+              type: "warning"
+            });
+          }
+          onSuccess();
+        })
         .catch(r => {
           if (r.code === 201) {
             askFor3dSecure({

@@ -32,11 +32,19 @@ const mutations = {
   },
   setTag(state, tagName) {
     state.tag = tagName;
+  },
+  updateStorePost(state, post) {
+    if (state.source === "store" && state.posts.length) {
+      state.posts = state.posts.map(item => {
+        return item.productId === post.productId ? post : item;
+      });
+    }
   }
 };
 
 const actions = {
-  getPosts({ commit, state, rootState }) {
+  getPosts({ commit, state, rootState }, data) {
+    const filter = (data && data.filter) || undefined;
     const { limit, offset, marker, tag } = state;
     let source = state.source;
     if (tag) {
@@ -51,7 +59,15 @@ const actions = {
     const category = rootState.gender.category;
 
     return new Promise(accept => {
-      PostApi.getExplorePosts({ limit, offset, marker, source, category, tag })
+      PostApi.getExplorePosts({
+        limit,
+        offset,
+        marker,
+        source,
+        category,
+        tag,
+        filter
+      })
         .then(response => {
           if (response.status === 200) {
             response.json().then(function(res) {

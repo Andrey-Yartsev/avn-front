@@ -50,7 +50,7 @@
                 ? this.$store.state.auth.user.mediaCount
                 : profile.mediaCount
             }}</span>
-            <span class="label">Store</span>
+            <span class="label">Clips</span>
           </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">

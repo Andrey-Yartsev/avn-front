@@ -15,11 +15,10 @@
       >
         <div class="header-mobile" v-if="$mq === 'mobile'">
           <button
-            v-if="isAuth()"
             class="header-return-btn go-back go-back_arrow header-return-btn_icn-abs"
             @click="back"
           />
-          <h1 class="page-title">Video</h1>
+          <h1 class="page-title">Clips</h1>
           <a
             href="/login"
             @click.prevent="openLoginModal"
@@ -106,7 +105,12 @@
             style="minHeight: 50px; display: block"
           >
             <h2 v-if="post.title" v-html="post.title" />
-            <p v-if="post.text" v-html="post.text" />
+            <p
+              class="text"
+              :class="{ 'trunc-text': truncateText && !showTruncatedText }"
+              v-html="getPostText()"
+              ref="text"
+            />
           </div>
           <div class="post-capability" v-if="$mq === 'desktop'">
             <div class="comment-form-wrapper" v-if="!delayedPost && !isAuth()">
@@ -175,10 +179,18 @@ import PostCommon from "@/mixins/post/common";
 import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
+import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 
 export default {
   name: "PostLastView",
-  mixins: [User, PostCommon, postOpen, PostStat, ModalRouterParams],
+  mixins: [
+    User,
+    PostCommon,
+    postOpen,
+    PostStat,
+    ModalRouterParams,
+    UserSuggestionsInline
+  ],
   data: () => ({
     commentPage: 0,
     popupView: true,
@@ -186,7 +198,8 @@ export default {
     currentCommentReply: null,
     showAddComment: true,
     viewCounted: false,
-    showPreview: false
+    showPreview: false,
+    truncateText: false
   }),
   props: {
     post: {
@@ -288,6 +301,9 @@ export default {
         });
       }
     },
+    getPostText() {
+      return this.$props.post.text;
+    },
     back() {
       if (window.location.hash) {
         window.location.hash = "";
@@ -309,6 +325,20 @@ export default {
     },
     switchToPreview() {
       this.showPreview = !this.showPreview;
+    },
+    isFreeMedia() {
+      return this.post.price === 0;
+    },
+    sendViewStatistics() {
+      this.$store.dispatch(
+        "profile/media/sendViewStatistics",
+        this.post.productId
+      );
+    }
+  },
+  mounted() {
+    if (this.isFreeMedia()) {
+      this.sendViewStatistics();
     }
   }
 };
@@ -334,5 +364,14 @@ export default {
 .withMinHeight {
   min-height: auto;
   overflow: inherit;
+}
+.page-title {
+  padding-left: 56px !important;
+}
+.header-mobile {
+  padding: 0 !important;
+}
+.login {
+  margin-right: 15px !important;
 }
 </style>

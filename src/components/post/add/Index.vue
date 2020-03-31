@@ -100,11 +100,13 @@
             :disabled="isSaving"
           ></textarea>
         </vue-tribute>
+        <LinksPreview :text="postMsg" />
         <div
           class="post-attachment"
           v-if="
             ((datetime && where !== 'modal') || preloadedMedias.length) &&
-              $mq === 'desktop'
+              $mq === 'desktop' &&
+              (isNew || (!isNew && mediaType !== 'audio'))
           "
         >
           <Draggable v-model="preloadedMedias" v-bind="dragOptions">
@@ -274,9 +276,13 @@
       </div>
       <div
         class="post-attachment"
-        v-if="(datetime || preloadedMedias.length) && $mq === 'mobile'"
+        v-if="
+          (datetime || preloadedMedias.length) &&
+            $mq === 'mobile' &&
+            (isNew || (!isNew && mediaType !== 'audio'))
+        "
       >
-        <Draggable v-model="preloadedMedias">
+        <Draggable v-model="preloadedMedias" class="addFileCollectionView">
           <MediaPreview
             v-for="media in preloadedMedias"
             :media="media"
@@ -338,6 +344,7 @@ import UserMixin from "@/mixins/user";
 import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
+import LinksPreview from "./linksPreview";
 
 Settings.defaultLocale = "en";
 
@@ -365,7 +372,8 @@ export default {
     MediaPreview,
     Datetime,
     Draggable,
-    VueTribute
+    VueTribute,
+    LinksPreview
   },
   props: {
     initialExpanded: {
@@ -426,8 +434,8 @@ export default {
       return this.$store.state.post._createPostLoading;
     },
     allMediaTypes() {
-      const { photo, video, gif } = this.inputAcceptTypes;
-      return [...photo, ...video, ...gif];
+      const { photo, video, gif, audio } = this.inputAcceptTypes;
+      return [...photo, ...video, ...gif, ...audio];
     },
     inputAccepts() {
       const accepts =
@@ -626,11 +634,11 @@ export default {
         this.isFree = this.post.isFree;
         this.preloadedMedias = (this.post.media || []).map(media => ({
           alreadySaved: true,
-          fileContent: media.thumb.source,
+          fileContent: media.thumb && media.thumb.source,
           id: media.id,
           processId: media.id,
           mediaType: media.type,
-          preview: media.thumb.source,
+          preview: media.thumb && media.thumb.source,
           thumbs: media.thumbs,
           thumbId: media.thumbId
         }));

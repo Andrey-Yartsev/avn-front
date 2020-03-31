@@ -177,6 +177,21 @@ const actions = {
     dispatch("_unpin", postId).then(() => {
       commit("postPinChanged", -1);
     });
+  },
+  repost({ dispatch }, data) {
+    return dispatch("_repost", data)
+      .then(() => {
+        dispatch(
+          "global/flashToast",
+          { text: "Reposted successfully" },
+          {
+            root: true
+          }
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
@@ -254,6 +269,26 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.data = {
       userId: params
+    };
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_repost",
+  apiPath: "posts/{id}/repost",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{id}/, params.postId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {
+      text: params.text
     };
     return options;
   }

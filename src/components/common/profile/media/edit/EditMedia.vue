@@ -62,12 +62,12 @@
             contenteditable
             placeholder="Enter description here"
             maxlength="1000"
-            v-model="media.text"
+            @input="textInput"
             ref="textarea"
             :disabled="saving"
           ></textarea>
         </vue-tribute>
-        <div class="post-attachment">
+        <div class="post-attachment" v-if="post.media.type === 'video'">
           <div class="block-thumbnails" v-if="!customThumbAdded">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView thumbList">
@@ -201,6 +201,7 @@
             />
 
             <div
+              v-if="post.media.type === 'video'"
               :class="[
                 'more-functions',
                 { open: dropdownOpened, previewDropdown: $mq === 'desktop' }
@@ -279,8 +280,8 @@ const InitialState = {
     categories: []
   },
   saving: false,
+  defaultPriceLimit: 500,
   withoutWatermark: false,
-  maxPrice: 500,
   dropdownOpened: false,
   allowMultipleFileTypes: true
 };
@@ -391,6 +392,16 @@ export default {
     },
     mediaCategories() {
       return this.$store.state.profile.media.mediaCategories;
+    },
+    maxPrice() {
+      if (
+        this.user.payments &&
+        this.user.payments.tipsLimit &&
+        this.user.payments.tipsLimit.max
+      ) {
+        return this.user.payments.tipsLimit.max;
+      }
+      return this.defaultPriceLimit;
     }
   },
   watch: {
@@ -461,6 +472,7 @@ export default {
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
       this.media.categories = categories ? categories.split(",") : [];
+      this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
       this.media.title = "";
@@ -475,6 +487,16 @@ export default {
       this.media.categories = [];
     },
     saveClickHandler() {
+      if (this.overMaxPrice()) {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: `Max price limit is $${this.maxPrice}`, type: "error" },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.saving = true;
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
@@ -511,6 +533,12 @@ export default {
         data.media.removeVideoPreview = false;
       }
       return data;
+    },
+    textInput() {
+      this.media.text = this.$refs.textarea.value;
+    },
+    overMaxPrice() {
+      return this.media.price > this.maxPrice;
     }
   },
   mounted() {
