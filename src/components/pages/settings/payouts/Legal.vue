@@ -586,6 +586,7 @@ export default {
         data.personalIdImage = this.personalIdImage;
         data.personalIdImageBack = this.personalIdImageBackside;
         data.selfieImage = this.selfieImage;
+        data.backsideRequired = this.backsideDocRequired;
       }
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
