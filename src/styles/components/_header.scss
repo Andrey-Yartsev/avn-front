@@ -1605,6 +1605,11 @@
         content: "\E630"
       }
     }
+    &__clipStore {
+      &:after {
+        content: "\E627"
+      }
+    }
   }
   hr {
     height: 1px;
