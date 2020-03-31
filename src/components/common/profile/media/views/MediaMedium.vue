@@ -24,6 +24,7 @@
           :isAuthor="isAuthor"
           :view="'medium'"
         />
+        <ClipCategories :categories="post.categories" />
         <p
           class="text"
           :class="{ 'trunc-text': truncateText && !showTruncatedText }"
@@ -69,6 +70,7 @@ import Media from "@/components/common/profile/media/views/Media";
 import Actions from "@//components/common/profile/media/footer/Actions";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import MediaOpen from "@/mixins/media/open";
+import ClipCategories from "@/components/common/profile/media/parts/categories/Index";
 
 export default {
   name: "MediaMedium",
@@ -84,7 +86,8 @@ export default {
   components: {
     Actions,
     Header,
-    Media
+    Media,
+    ClipCategories
   },
   props: {
     post: {

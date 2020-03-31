@@ -99,6 +99,7 @@
             :showPreview="showPreview"
             :view="'large'"
           />
+          <ClipCategories :categories="post.categories" />
           <div
             class="text hidden-mobile"
             v-if="$mq === 'desktop'"
@@ -180,6 +181,7 @@ import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
+import ClipCategories from "@/components/common/profile/media/parts/categories/Index";
 
 export default {
   name: "PostLastView",
@@ -217,7 +219,8 @@ export default {
     CommentsList,
     Actions,
     AddComment,
-    Tip
+    Tip,
+    ClipCategories
   },
   computed: {
     postId() {
