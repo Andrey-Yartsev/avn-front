@@ -70,13 +70,14 @@ const mutations = {
     }
   },
   updateMediaSrc(state, data) {
+    const isAudio = !data.width && !data.height;
     state.media = state.media.map(item => {
       if (item.productId == data.id) {
         return {
           ...item,
           media: {
             ...item.media,
-            type: "video",
+            type: isAudio ? "audio" : "video",
             duration: data.duration,
             src: {
               source: data.url,
