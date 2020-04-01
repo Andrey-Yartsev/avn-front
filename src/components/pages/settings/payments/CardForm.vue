@@ -478,7 +478,9 @@ export default {
           ccbillResponse: ccbres,
           userinfo: this.userinfo,
           cardLast4: this.cardNumber.substr(this.cardNumber.length - 4),
-          cardBrand: types[0].type
+          cardBrand: types[0].type,
+          expMonth: this.expMonth,
+          expYear: this.expYear
         })
         .then(r => {
           if (r.success) {
