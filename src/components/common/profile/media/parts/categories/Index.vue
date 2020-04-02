@@ -1,6 +1,10 @@
 <template>
   <div class="categories">
-    <span v-for="category in categories" :key="category.id" class="category">
+    <span
+      v-for="category in selectedCategories"
+      :key="category.id"
+      class="category"
+    >
       {{ category.name }}
     </span>
   </div>
@@ -9,16 +13,23 @@
 <script>
 export default {
   name: "ClipCategories",
-  // data() {
-  //   return {
-  //     categories: [
-  //       { id: 1, name: "Male" },
-  //       { id: 2, name: "Female" }
-  //     ]
-  //   };
-  // }
   props: {
-    categiries: Array
+    categories: Array
+  },
+  computed: {
+    selectedCategories() {
+      if (!this.$store.state.profile.media.mediaCategories) {
+        return [];
+      }
+      const list = [];
+      this.categories.forEach(item => {
+        const matchedCategory = this.$store.state.profile.media.mediaCategories.find(
+          category => category.id == item
+        );
+        matchedCategory && list.push(matchedCategory);
+      });
+      return list;
+    }
   }
 };
 </script>

@@ -194,15 +194,10 @@ const actions = {
   getMediaCategories({ dispatch, commit }) {
     return dispatch("_getMediaCategories")
       .then(res => {
-        console.log(res);
         commit("setMediaCategories", res);
       })
       .catch(err => {
         console.log(err);
-        commit("setMediaCategories", [
-          { id: 1, name: "Male" },
-          { id: 2, name: "Female" }
-        ]);
       });
   },
   sendViewStatistics({ dispatch }, productId) {
@@ -222,7 +217,6 @@ createRequestAction({
   mutations,
   actions,
   paramsToOptions: function(params) {
-    console.log(params.categories);
     const options = {
       method: "GET",
       query: {}
@@ -256,6 +250,7 @@ createRequestAction({
 });
 
 createRequestAction({
+  requestType: "any",
   prefix: "_getMediaCategories",
   apiPath: "media/categories",
   state,

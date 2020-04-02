@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ withPadding: $mq === 'mobile' }">
+  <div v-if="categories.length" :class="{ withPadding: $mq === 'mobile' }">
     <h3 class="title">Categories:</h3>
     <div class="categoriesContainer">
       <template v-for="category in categories">
@@ -35,12 +35,7 @@ export default {
       }
     },
     categories() {
-      return (
-        this.$store.state.profile.home.profile.mediaCategories || [
-          { id: 1, name: "Male", amount: 8 },
-          { id: 2, name: "Female", amount: 6 }
-        ]
-      );
+      return this.$store.state.profile.home.profile.mediaCategories || [];
     }
   }
 };

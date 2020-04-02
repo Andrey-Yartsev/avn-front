@@ -123,7 +123,7 @@
       <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
-            <div class="categories">
+            <div class="categories" v-if="mediaCategories.length">
               <div>Categories:</div>
               <div class="categoriesContainer">
                 <template v-for="category in mediaCategories">
@@ -133,6 +133,10 @@
                         type="checkbox"
                         :id="category.id"
                         :value="category.id"
+                        :disabled="
+                          isMaxCategoriesLimitSelected &&
+                            media.categories.indexOf(Number(category.id)) === -1
+                        "
                         v-model="media.categories"
                       />
                       <span class="label icn-item">{{ category.name }}</span>
@@ -351,8 +355,12 @@ export default {
         this.preloadedPhotoMedias.length ||
         [].join(",") !== this.media.categories.join(",") ||
         this.preloadedVideoMedias.length ||
-        this.media.removeVideoPreview
+        this.media.removeVideoPreview ||
+        this.$props.post.categories.length !== this.media.categories.length
       );
+    },
+    isMaxCategoriesLimitSelected() {
+      return this.media.categories.length === 2;
     },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
@@ -471,7 +479,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
-      this.media.categories = categories ? categories.split(",") : [];
+      this.media.categories = categories || [];
       this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
@@ -503,7 +511,6 @@ export default {
           root: true
         })
         .then(() => {
-          console.log("updated");
           this.saving = false;
           this.close();
         });
@@ -517,7 +524,10 @@ export default {
         : undefined;
 
       const data = {
-        media: { ...this.media },
+        media: {
+          ...this.media,
+          categories: this.media.categories.map(item => +item)
+        },
         productId: this.$props.post.productId
       };
 
