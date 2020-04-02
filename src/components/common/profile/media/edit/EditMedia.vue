@@ -123,6 +123,28 @@
       <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
+            <div class="categories" v-if="mediaCategories.length">
+              <div>Categories:</div>
+              <div class="categoriesContainer">
+                <template v-for="category in mediaCategories">
+                  <label class="form-group-inner" :key="category.id">
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        :id="category.id"
+                        :value="category.id"
+                        :disabled="
+                          isMaxCategoriesLimitSelected &&
+                            media.categories.indexOf(Number(category.id)) === -1
+                        "
+                        v-model="media.categories"
+                      />
+                      <span class="label icn-item">{{ category.name }}</span>
+                    </div>
+                  </label>
+                </template>
+              </div>
+            </div>
             <div class="btn-post">
               <div>Price</div>
               <div
@@ -243,6 +265,7 @@ import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
+// import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
 
@@ -257,7 +280,8 @@ const InitialState = {
     thumbId: null,
     thumbs: [],
     removeVideoPreview: false,
-    pinned: false
+    pinned: false,
+    categories: []
   },
   saving: false,
   defaultPriceLimit: 500,
@@ -329,9 +353,14 @@ export default {
         String(this.$props.post.price) !== String(this.media.price) ||
         this.$props.post.media.thumbId !== this.media.thumbId ||
         this.preloadedPhotoMedias.length ||
+        [].join(",") !== this.media.categories.join(",") ||
         this.preloadedVideoMedias.length ||
-        this.media.removeVideoPreview
+        this.media.removeVideoPreview ||
+        this.$props.post.categories.length !== this.media.categories.length
       );
+    },
+    isMaxCategoriesLimitSelected() {
+      return this.media.categories.length === 2;
     },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
@@ -368,6 +397,9 @@ export default {
         return [];
       }
       return this.preloadedMedias.filter(item => item.mediaType === "video");
+    },
+    mediaCategories() {
+      return this.$store.state.profile.media.mediaCategories;
     },
     maxPrice() {
       if (
@@ -437,7 +469,8 @@ export default {
         price,
         active,
         pinned,
-        media: { thumbs, thumbId }
+        media: { thumbs, thumbId },
+        categories
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -446,7 +479,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
-
+      this.media.categories = categories || [];
       this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
@@ -459,6 +492,7 @@ export default {
       this.media.thumbs = [];
       this.media.removeVideoPreview = false;
       this.media.pinned = false;
+      this.media.categories = [];
     },
     saveClickHandler() {
       if (this.overMaxPrice()) {
@@ -477,7 +511,6 @@ export default {
           root: true
         })
         .then(() => {
-          console.log("updated");
           this.saving = false;
           this.close();
         });
@@ -491,7 +524,10 @@ export default {
         : undefined;
 
       const data = {
-        media: { ...this.media },
+        media: {
+          ...this.media,
+          categories: this.media.categories.map(item => +item)
+        },
         productId: this.$props.post.productId
       };
 
@@ -542,5 +578,24 @@ export default {
 }
 .previewDropdown {
   margin-left: auto;
+}
+.categories {
+  width: 100%;
+}
+.title {
+  margin-bottom: 10px;
+}
+.categoriesContainer {
+  display: flex;
+  flex-flow: row wrap;
+}
+.form-group-inner {
+  margin-top: 5px;
+  margin-right: 10px;
+  /* flex-grow: 1;
+  flex-basis: 33.33%; */
+}
+.withPadding {
+  padding: 0 10px;
 }
 </style>

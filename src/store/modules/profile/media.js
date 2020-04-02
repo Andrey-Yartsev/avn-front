@@ -12,6 +12,7 @@ const initState = {
   limit: fetchLimit,
   allDataReceived: false,
   preloadedMedias: [],
+  mediaCategories: null,
   separateMedia: null
 };
 
@@ -108,6 +109,9 @@ const mutations = {
       return item;
     });
   },
+  setMediaCategories(state, data) {
+    state.mediaCategories = data;
+  },
   setSeparateMedia(state, data) {
     state.separateMedia = data;
   },
@@ -117,12 +121,16 @@ const mutations = {
 };
 
 const actions = {
-  getMedia({ dispatch, commit, state }, { profileId, filter, sort }) {
+  getMedia(
+    { dispatch, commit, state },
+    { profileId, filter, sort, categories }
+  ) {
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset,
       filter,
-      sort
+      sort,
+      categories
     }).then(res => {
       commit("addMedia", res);
       commit("isAllDataRecieved", res.length);
@@ -184,6 +192,15 @@ const actions = {
   updateMediaPreviewSrc({ commit }, data) {
     commit("updateMediaPreviewSrc", data);
   },
+  getMediaCategories({ dispatch, commit }) {
+    return dispatch("_getMediaCategories")
+      .then(res => {
+        commit("setMediaCategories", res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   sendViewStatistics({ dispatch }, productId) {
     dispatch("_sendViewStatistics", productId);
   },
@@ -209,6 +226,7 @@ createRequestAction({
     options.query.limit = fetchLimit;
     options.query.filter = params.filter;
     options.query.sort = params.sort;
+    options.query.categories = params.categories;
     return options;
   },
   paramsToPath: function(params, path) {
@@ -229,6 +247,18 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{productId}/, params.productId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getMediaCategories",
+  apiPath: "media/categories",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
   }
 });
 
