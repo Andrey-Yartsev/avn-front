@@ -247,7 +247,7 @@
                   class="form-group-inner photo-form-group-inner"
                   :class="{ 'success icn-item': !!selfieImage }"
                 >
-                  <span class="label">Photo ID selfie</span>
+                  <span class="label">Selfie</span>
 
                   <div class="photo-label-wrapper">
                     <label
@@ -584,7 +584,7 @@ export default {
       }
       if (!this.legalExisted) {
         data.personalIdImage = this.personalIdImage;
-        data.personalIdImageBack = this.personalIdImageBackside;
+        data.personalIdImageBackside = this.personalIdImageBackside;
         data.selfieImage = this.selfieImage;
         data.backsideRequired = this.backsideDocRequired;
       }
