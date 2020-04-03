@@ -42,6 +42,7 @@
                 label="title"
                 track-by="name"
                 :taggable="false"
+                :openDirection="$mq === 'desktop' ? 'bottom' : ''"
               >
               </multiselect>
             </span>
