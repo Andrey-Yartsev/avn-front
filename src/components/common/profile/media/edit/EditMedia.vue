@@ -124,7 +124,32 @@
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
             <div class="categories" v-if="mediaCategories.length">
-              <div>Categories:</div>
+              <div class="form-group-inner">
+                <span
+                  class="categories__label"
+                  :class="{ mobile: $mq === 'mobile' }"
+                  >Categories:</span
+                >
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field">
+                    <multiselect
+                      v-model="media.categories"
+                      :options="mediaCategories"
+                      :max="2"
+                      :multiple="true"
+                      :close-on-select="true"
+                      :clear-on-select="false"
+                      :preserve-search="true"
+                      placeholder="Add category"
+                      label="name"
+                      track-by="name"
+                      :taggable="true"
+                    >
+                    </multiselect>
+                  </span>
+                </span>
+              </div>
+              <!-- <div>Categories:</div>
               <div class="categoriesContainer">
                 <template v-for="category in mediaCategories">
                   <label class="form-group-inner" :key="category.id">
@@ -143,7 +168,7 @@
                     </div>
                   </label>
                 </template>
-              </div>
+              </div> -->
             </div>
             <div class="btn-post">
               <div>Price</div>
@@ -265,6 +290,7 @@ import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
+import Multiselect from "vue-multiselect";
 // import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
@@ -303,7 +329,8 @@ export default {
     VueTribute,
     MediaPreview,
     Draggable,
-    ThumbDropdown
+    ThumbDropdown,
+    Multiselect
   },
   props: {
     initialExpanded: {
@@ -479,7 +506,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
-      this.media.categories = categories || [];
+      this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
@@ -526,7 +553,7 @@ export default {
       const data = {
         media: {
           ...this.media,
-          categories: this.media.categories.map(item => +item)
+          categories: this.media.categories.map(item => +item.id)
         },
         productId: this.$props.post.productId
       };
@@ -549,6 +576,23 @@ export default {
     },
     overMaxPrice() {
       return this.media.price > this.maxPrice;
+    },
+    getObjectsFromArray(list) {
+      if (
+        !list ||
+        !list.length ||
+        !this.$store.state.profile.media.mediaCategories
+      ) {
+        return [];
+      }
+      const categoriesObjects = [];
+      list.forEach(item => {
+        const matchedCategory = this.$store.state.profile.media.mediaCategories.find(
+          category => category.id == item
+        );
+        matchedCategory && categoriesObjects.push(matchedCategory);
+      });
+      return categoriesObjects;
     }
   },
   mounted() {
@@ -563,6 +607,7 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .actions {
   &.editMediaActions {
@@ -581,6 +626,17 @@ export default {
 }
 .categories {
   width: 100%;
+  .form-group-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  &__label {
+    margin-right: 5px;
+    .mobile {
+      width: 100%;
+    }
+  }
 }
 .title {
   margin-bottom: 10px;
