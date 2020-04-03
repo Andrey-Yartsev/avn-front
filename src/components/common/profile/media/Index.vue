@@ -23,7 +23,31 @@
           settings
         </div>
       </template>
-      <MediaCategories v-model="categories" />
+      <div
+        class="form-group form-group_with-label categories"
+        :class="{ mobile: $mq === 'mobile' }"
+      >
+        <div class="form-group-inner">
+          <span class="label">Categories:</span>
+          <span class="form-group form-group_clear-gaps">
+            <span class="form-field">
+              <multiselect
+                v-model="selectedCategory"
+                :options="categoriesList"
+                :multiple="false"
+                :close-on-select="true"
+                :clear-on-select="false"
+                :preserve-search="true"
+                placeholder="Select category"
+                label="title"
+                track-by="name"
+                :taggable="false"
+              >
+              </multiselect>
+            </span>
+          </span>
+        </div>
+      </div>
       <div
         :class="['buttonWrapper', 'more-functions', { open: opened }]"
         v-click-outside="hide"
@@ -99,11 +123,13 @@ import Loader from "@/components/common/Loader";
 import FileUploader from "@/components/common/profile/media/FileUploader";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
-import MediaCategories from "@/components/common/profile/media/views/MediaCategories";
 import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdown";
 import User from "@/mixins/user";
 import IntersectionObserver from "@/mixins/intersectionObserver";
 import ClickOutside from "vue-click-outside";
+import Multiselect from "vue-multiselect";
+
+const defaultSelectedCategory = { id: "0", name: "All", title: "All" };
 
 export default {
   name: "MediaPage",
@@ -111,7 +137,7 @@ export default {
     Loader,
     FileUploader,
     FilterDropdown,
-    MediaCategories
+    Multiselect
   },
   directives: {
     ClickOutside
@@ -131,7 +157,7 @@ export default {
       fetchLimit: 9,
       withoutWatermark: false,
       filesLength: 0,
-      categories: []
+      selectedCategory: defaultSelectedCategory
     };
   },
   computed: {
@@ -199,6 +225,21 @@ export default {
         default:
           return "all";
       }
+    },
+    categoriesList() {
+      if (!this.$store.state.profile.home.profile.mediaCategories) {
+        return [];
+      }
+      let list = this.$store.state.profile.home.profile.mediaCategories.map(
+        item => ({
+          id: item.id,
+          name: item.name,
+          amount: item.amount,
+          title: `${item.name} (${item.amount})`
+        })
+      );
+      list.unshift({ id: "0", name: "All", title: "All" });
+      return list;
     }
   },
   watch: {
@@ -208,8 +249,11 @@ export default {
       this.$store.commit("profile/media/clearMedia", null, { root: true });
       this.fetchMedia();
     },
-    categories() {
-      console.log(this.categories);
+    selectedCategory(newValue) {
+      if (!newValue) {
+        this.selectedCategory = defaultSelectedCategory;
+        return;
+      }
       this.destroyObserver();
       this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });
@@ -232,7 +276,7 @@ export default {
     fetchMedia() {
       this.$store
         .dispatch("profile/media/getMedia", {
-          categories: this.categories.join(","),
+          categories: this.selectedCategory.id,
           profileId: this.$store.state.profile.home.profile.id,
           filter: this.getFilterType,
           sort: this.getSortOrder
@@ -256,6 +300,7 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .addLink__button {
   margin-top: 3rem;
@@ -317,5 +362,12 @@ export default {
 .filterLabel {
   font-weight: bold;
   color: #909598;
+}
+.categories {
+  width: 50%;
+  &.mobile {
+    padding: 0 20px;
+    width: 100%;
+  }
 }
 </style>
