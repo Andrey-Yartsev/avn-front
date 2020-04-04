@@ -110,6 +110,11 @@ const mutations = {
     });
   },
   setMediaCategories(state, data) {
+    if (data.length) {
+      data.sort((a, b) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+      });
+    }
     state.mediaCategories = data;
   },
   setSeparateMedia(state, data) {

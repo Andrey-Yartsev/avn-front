@@ -239,6 +239,9 @@ export default {
           title: `${item.name} (${item.amount})`
         })
       );
+      list.sort((a, b) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+      });
       list.unshift({ id: "0", name: "All", title: "All" });
       return list;
     }
