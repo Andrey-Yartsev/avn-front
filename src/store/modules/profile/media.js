@@ -115,7 +115,11 @@ const mutations = {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
       });
     }
-    state.mediaCategories = data;
+    const formatedData = data.map(item => ({
+      ...item,
+      name: item.name.replace(/&amp;/g, "&")
+    }));
+    state.mediaCategories = formatedData;
   },
   setSeparateMedia(state, data) {
     state.separateMedia = data;

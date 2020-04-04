@@ -232,12 +232,15 @@ export default {
         return [];
       }
       let list = this.$store.state.profile.home.profile.mediaCategories.map(
-        item => ({
-          id: item.id,
-          name: item.name,
-          amount: item.amount,
-          title: `${item.name} (${item.amount})`
-        })
+        item => {
+          const transformedName = item.name.replace(/&amp;/g, "&");
+          return {
+            id: item.id,
+            name: transformedName,
+            amount: item.amount,
+            title: `${transformedName} (${item.amount})`
+          };
+        }
       );
       list.sort((a, b) => {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
