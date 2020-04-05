@@ -55,7 +55,9 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.data = params;
-    options.data.sentry = JSON.stringify(window.okev.all());
+    if (window.okev) {
+      options.data.sentry = JSON.stringify(window.okev.all());
+    }
     return options;
   },
   throw400: true
