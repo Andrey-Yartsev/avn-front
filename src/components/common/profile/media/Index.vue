@@ -24,68 +24,70 @@
         </div>
       </template>
       <div
-        class="form-group form-group_with-label categories"
-        :class="{ mobile: $mq === 'mobile' }"
+        class="b-check-state  b-check-state_watermark watermarkContainer"
+        :class="{ mediaSelected: isFilesLoaded, mobile: $mq === 'mobile' }"
+        v-if="
+          this.$props.private &&
+            user &&
+            user.isPerformer &&
+            user.hasWatermarkVideo
+        "
       >
-        <div class="form-group-inner">
-          <span class="label">Categories:</span>
-          <span class="form-group form-group_clear-gaps">
-            <span class="form-field">
-              <multiselect
-                v-model="selectedCategory"
-                :options="categoriesList"
-                :multiple="false"
-                :close-on-select="true"
-                :clear-on-select="false"
-                :preserve-search="true"
-                placeholder="Select category"
-                label="title"
-                track-by="name"
-                :taggable="false"
-                :openDirection="$mq === 'desktop' ? 'bottom' : ''"
-              >
-              </multiselect>
-            </span>
-          </span>
-        </div>
-      </div>
-      <div
-        :class="['buttonWrapper', 'more-functions', { open: opened }]"
-        v-click-outside="hide"
-      >
-        <div
-          class="b-check-state  b-check-state_watermark watermarkContainer"
-          :class="{ mediaSelected: isFilesLoaded }"
-          v-if="
-            this.$props.private &&
-              user &&
-              user.isPerformer &&
-              user.hasWatermarkVideo
-          "
-        >
-          <label :class="{ disabled: isFilesLoaded }">
-            <input
-              class="is-free-post"
-              type="checkbox"
-              :disabled="isFilesLoaded"
-              v-model="withoutWatermark"
-            />
-            <span class="b-check-state__icon icn-item icn-size_lg"></span>
-            <span class="b-check-state__text">Without watermark</span>
-          </label>
-        </div>
-        <div class="more-functions__overlay" @click="hide"></div>
-        <div class="sortLabel">Sort:</div>
-        <div class="openMenuButton" @click="open">
-          <span class="status-card on icn-item checkmark styledCheckmark" />
-          <span class="filterLabel">{{ getFilterName }}</span>
-        </div>
-        <div class="more-functions__dropdown">
-          <FilterDropdown
-            :isAuthor="this.$props.private"
-            :type="filterType"
-            @handleClick="handleClick"
+        <label :class="{ disabled: isFilesLoaded }">
+          <input
+            class="is-free-post"
+            type="checkbox"
+            :disabled="isFilesLoaded"
+            v-model="withoutWatermark"
           />
+          <span class="b-check-state__icon icn-item icn-size_lg"></span>
+          <span class="b-check-state__text">Without watermark</span>
+        </label>
+      </div>
+      <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
+        <div
+          class="form-group categories"
+          :class="{ mobile: $mq === 'mobile' }"
+        >
+          <div class="form-group-inner">
+            <span class="label">Categories:</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <multiselect
+                  v-model="selectedCategory"
+                  :options="categoriesList"
+                  :multiple="false"
+                  :close-on-select="true"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="Select category"
+                  label="title"
+                  track-by="name"
+                  :taggable="false"
+                  :openDirection="$mq === 'desktop' ? 'bottom' : ''"
+                >
+                </multiselect>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div
+          :class="['buttonWrapper', 'more-functions', { open: opened }]"
+          v-click-outside="hide"
+        >
+          <div class="more-functions__overlay" @click="hide"></div>
+          <div class="sortLabel">Sort:</div>
+          <div class="openMenuButton" @click="open">
+            <span class="status-card on icn-item checkmark styledCheckmark" />
+            <span class="filterLabel">{{ getFilterName }}</span>
+          </div>
+          <div class="more-functions__dropdown">
+            <FilterDropdown
+              :isAuthor="this.$props.private"
+              :type="filterType"
+              @handleClick="handleClick"
+            />
+          </div>
         </div>
       </div>
       <div class="profile-content">
@@ -338,28 +340,31 @@ export default {
 .buttonWrapper {
   display: flex !important;
   justify-content: flex-end;
-  margin: 5px 0px;
+  margin-bottom: 8px;
+  margin-left: 5px;
 }
 .openMenuButton {
   display: block;
   /* display: inline-block; */
   margin: 5px 0;
-  margin-right: 20px;
+  margin-right: 7px;
   cursor: pointer;
 }
 .sortLabel {
   display: flex;
   align-items: center;
   margin-right: 10px;
-  font-weight: bold;
+  font-weight: 500;
   color: #909598;
 }
 .watermarkContainer {
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  margin-right: auto;
-  margin-left: 10px;
+  align-items: flex-start;
+  margin: 5px;
+  &.mobile {
+    margin-left: 10px;
+  }
 }
 .styledCheckmark {
   position: relative;
@@ -371,10 +376,41 @@ export default {
   color: #909598;
 }
 .categories {
-  width: 50%;
+  flex-grow: 1;
+  max-width: 350px;
   &.mobile {
-    padding: 0 20px;
-    width: 100%;
+    padding: 0;
+    margin-bottom: 7px;
+    max-width: 300px;
+    .form-group-inner {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      margin-bottom: 0;
+      .label {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.viewSettings {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  &.mobile {
+    margin: 10px 8px 0 8px;
+    flex-flow: column nowrap;
+    align-items: normal;
+    .buttonWrapper {
+      justify-content: flex-start;
+    }
+  }
+  .form-group-inner {
+    .label {
+      color: #909598;
+      font-size: 15px;
+    }
   }
 }
 </style>

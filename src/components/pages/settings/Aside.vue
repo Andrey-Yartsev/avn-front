@@ -278,7 +278,7 @@ export default {
         items.push({
           name: "clipStore",
           title: "Clip Store",
-          path: `${this.user.username}/media`
+          path: `/${this.user.username}/media`
         });
       }
       return items;
