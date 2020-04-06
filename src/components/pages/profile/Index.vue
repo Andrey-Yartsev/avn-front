@@ -142,11 +142,14 @@
               />
               <LinksPage
                 v-if="pageName === 'links'"
-                :private="isOwner(this.profile.id)"
+                :private="isOwner(profile.id)"
               />
               <MediaPage
                 v-else-if="pageName === 'media'"
-                :private="isOwner(this.profile.id)"
+                :private="isOwner(profile.id)"
+              />
+              <MagazinePage
+                v-else-if="isOwner(profile.id) && pageName === 'magazine'"
               />
               <template v-else>
                 <p
@@ -163,7 +166,7 @@
                 > -->
                   <span>Nothing here yet</span>
                   <button
-                    v-if="isOwner(this.profile.id) && pageName !== 'links'"
+                    v-if="isOwner(profile.id) && pageName !== 'links'"
                     @click="openAddPostModal"
                     type="button"
                     class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
@@ -241,6 +244,7 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
+import MagazinePage from "@/components/common/profile/magazine/Index";
 
 export default {
   name: "ProfileHome",
@@ -262,7 +266,8 @@ export default {
     Highlights,
     LinkPost,
     LinksPage,
-    MediaPage
+    MediaPage,
+    MagazinePage
   },
 
   data() {
@@ -333,7 +338,8 @@ export default {
       return (
         this.pageName === undefined ||
         this.pageName === "posts" ||
-        this.pageName === "links"
+        this.pageName === "links" ||
+        this.pageName === "magazine"
       );
     },
     highlights() {
@@ -464,7 +470,8 @@ export default {
     getPosts() {
       if (
         this.$route.params.page !== "links" &&
-        this.$route.params.page !== "media"
+        this.$route.params.page !== "media" &&
+        this.$route.params.page !== "magazine"
       ) {
         this.$store.dispatch("profile/home/getPosts");
       }
@@ -582,8 +589,10 @@ export default {
     }
   },
   created() {
+    console.log("CREATED");
     this.initContent();
     if (this.profile) {
+      console.log("initProfile");
       this.$store.dispatch("gender/initProfile", this.profile);
     }
     setTimeout(() => {

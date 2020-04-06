@@ -65,6 +65,7 @@ export default {
   },
   watch: {
     "userinfo.country": function() {
+      console.log("XXX");
       this.fetchStates();
     }
   },
