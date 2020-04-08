@@ -1,7 +1,7 @@
-import UserMixin from "@/mixins/user";
+import User from "@/mixins/user";
 
 export default {
-  mixins: [UserMixin],
+  mixins: [User],
   data() {
     return {
       statesLoading: true
@@ -11,12 +11,15 @@ export default {
     defaultCountryCode() {
       return this.user.country;
     },
+    defaultCountryId() {
+      return this.getCountryIdByCode(this.defaultCountryCode);
+    },
     countries() {
-      return this.$store.state.payment.countries.fetchResult;
+      return this.$store.state.countries.items;
     },
     hasStates() {
-      if (this.countries && this.countries.length && this.userinfo.country) {
-        return this.countries.find(v => this.userinfo.country === v.code)
+      if (this.countries && this.countries.length && this.userInfo.countryId) {
+        return this.countries.find(v => this.userInfo.countryId === v.id)
           .hasStates;
       }
       return false;
@@ -30,19 +33,20 @@ export default {
       return this.countries.find(v => code === v.code).id;
     },
     fetchCountries() {
-      this.$store.commit("payment/countries/reset");
-      this.$store.dispatch("payment/countries/fetch").then(() => {
+      this.$store.dispatch("countries/fetch").then(() => {
         if (this.defaultCountryCode) {
           const country = this.countries.find(
-            v => this.defaultCountryCode === v.code
+            v => this.defaultCountryCode === v.id
           );
           if (country) {
-            this.userinfo.country = this.defaultCountryCode;
+            this.userInfo.countryId = this.getCountryIdByCode(
+              this.defaultCountryCode
+            );
           } else {
-            this.userinfo.country = this.countries[0].code;
+            this.userInfo.countryId = this.countries[0].id;
           }
         } else {
-          this.userinfo.country = this.countries[0].code;
+          this.userInfo.countryId = this.countries[0].id;
         }
       });
     },
@@ -51,10 +55,7 @@ export default {
       if (this.hasStates) {
         this.statesLoading = true;
         this.$store
-          .dispatch(
-            "states/fetch",
-            this.getCountryIdByCode(this.userinfo.country)
-          )
+          .dispatch("states/fetch", this.userInfo.countryId)
           .then(() => {
             this.statesLoading = false;
           });
@@ -64,7 +65,7 @@ export default {
     }
   },
   watch: {
-    "userinfo.country": function() {
+    "userInfo.countryId": function() {
       this.fetchStates();
     }
   },
