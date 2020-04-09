@@ -88,6 +88,20 @@
     }
   }
 
+  .approved {
+
+    &:after {
+      content: "\E603";
+    }
+  }
+
+  .rejected {
+
+    &:after {
+      content: "\E649";
+    }
+  }
+
   .mentioned {
 
     &:after {
