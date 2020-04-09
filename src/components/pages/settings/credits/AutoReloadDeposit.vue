@@ -142,7 +142,7 @@ export default {
       });
     },
     updatedUser() {
-      const user = this.user;
+      const user = Object.assign({}, this.user);
       user.creditReload = {
         enabled: this.enabled,
         amount: this.amount,

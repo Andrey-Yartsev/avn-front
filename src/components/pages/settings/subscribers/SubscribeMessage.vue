@@ -95,7 +95,7 @@ export default {
       });
     },
     updatedUser() {
-      const user = this.user;
+      const user = Object.assign({}, this.user);
       user.welcomeMessage = {
         enabled: this.enabled,
         text: this.text
