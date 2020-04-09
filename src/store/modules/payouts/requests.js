@@ -27,7 +27,14 @@ createRequestAction({
     method: "POST"
   },
   localError: true,
-  throw400: true
+  throw400: true,
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    if (window.okev) {
+      options.data.sentry = JSON.stringify(window.okev.all());
+    }
+    return options;
+  }
 });
 
 export default {
