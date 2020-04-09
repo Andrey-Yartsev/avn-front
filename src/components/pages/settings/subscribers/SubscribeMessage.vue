@@ -30,8 +30,8 @@
                 <input
                   type="text"
                   class="checkPass"
-                  name="message"
-                  v-model="message"
+                  name="text"
+                  v-model="text"
                 />
               </span>
             </span>
@@ -53,7 +53,6 @@
 
 <script>
 import Loader from "@/components/common/Loader";
-// import PayAction from "./payAction";
 import userMixin from "@/mixins/user";
 
 export default {
@@ -65,13 +64,13 @@ export default {
   data() {
     return {
       enabled: false,
-      message: "",
+      text: "",
       initSnapshot: null
     };
   },
   computed: {
     dataEmpty() {
-      return !this.message;
+      return !this.text;
     },
     isChanged() {
       if (this.dataEmpty || !this.initSnapshot) {
@@ -79,7 +78,7 @@ export default {
       }
       if (
         this.enabled !== this.initSnapshot.enabled ||
-        this.message !== this.initSnapshot.message
+        this.text !== this.initSnapshot.text
       ) {
         return true;
       }
@@ -88,26 +87,34 @@ export default {
   },
   methods: {
     save() {
-      console.log("save");
-      // this.$store.dispatch("profile/update", this.updatedUser()).then(() => {
-      //   this.initSnapshot = {
-      //     enabled: this.enabled,
-      //     amount: this.amount,
-      //     minLimit: this.minLimit
-      //   };
-      // });
+      this.$store.dispatch("profile/update", this.updatedUser()).then(() => {
+        this.initSnapshot = {
+          enabled: this.enabled,
+          text: this.text
+        };
+      });
+    },
+    updatedUser() {
+      const user = this.user;
+      user.welcomeMessage = {
+        enabled: this.enabled,
+        text: this.text
+      };
+      return user;
     },
     init() {
-      console.log("get message settings");
-      // const { enabled, amount, minLimit } = this.user.creditReload;
-      // this.enabled = enabled;
-      // this.amount = amount;
-      // this.minLimit = minLimit;
-      // this.initSnapshot = { enabled, amount, minLimit };
+      const { enabled, text } = this.user.welcomeMessage;
+      this.enabled = enabled;
+      this.text = text;
+      this.initSnapshot = { enabled, text };
     }
   },
   mounted() {
-    this.init();
+    if (this.user.welcomeMessage) {
+      this.init();
+    } else {
+      this.initSnapshot = { enabled: false, text: "" };
+    }
   }
 };
 </script>
