@@ -69,7 +69,7 @@ export default {
   methods: {
     async withdrawRequest() {
       try {
-        await this.$store.dispatch(this.storeKey + "/requests/withdraw");
+        await this.$store.dispatch(this.storeKey + "/requests/withdraw", {});
         this.$store.dispatch(this.storeKey + "/requests/fetch");
         this.$store.dispatch(this.storeKey + "/balances/fetch");
         this.showToast(false, "Withdraw request completed successfuly");
