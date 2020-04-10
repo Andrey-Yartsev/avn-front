@@ -264,6 +264,16 @@ export default {
                 text: "Error while uploading",
                 type: "error"
               });
+              logDebug({
+                logger: "S3Uploader",
+                message: "Upload error",
+                logData: {
+                  name: file.name,
+                  type: file.type,
+                  size: file.size,
+                  error
+                }
+              });
               if (error.code === "RequestAbortedError") {
                 logDebug({
                   logger: "S3Uploader",
