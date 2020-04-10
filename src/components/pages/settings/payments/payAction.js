@@ -1,6 +1,6 @@
 import { askFor3dSecure } from "@/utils/3dsecure";
 import User from "@/mixins/user";
-import Router from "@/router";
+// import Router from "@/router";
 
 export default {
   mixins: [User],
@@ -11,18 +11,18 @@ export default {
   },
   methods: {
     _pay(payload, _onSuccess) {
-      if (!this.user.isPaymentCardConnected) {
-        this.$store.dispatch("global/flashToast", {
-          text: "You should add card in payment settings",
-          type: "warning"
-        });
-        this.$store.commit(
-          "payment/card/setAfterAddCardRedirect",
-          this.$route.path
-        );
-        Router.push("/settings/payments");
-        return;
-      }
+      // if (!this.user.isPaymentCardConnected) {
+      //   this.$store.dispatch("global/flashToast", {
+      //     text: "You should add card in payment settings",
+      //     type: "warning"
+      //   });
+      //   this.$store.commit(
+      //     "payment/card/setAfterAddCardRedirect",
+      //     this.$route.path
+      //   );
+      //   Router.push("/settings/payments");
+      //   return;
+      // }
       this.$store.commit("profile/home/resetOnPageAction");
       this.progress = true;
       const onSuccess = () => {
