@@ -1,58 +1,108 @@
 <template>
-  <form class="tip-form" @submit.stop.prevent="send">
-    <span
-      role="button"
-      class="btn btn-cancel"
-      :class="{
-        lg: $mq === 'desktop' && needLgClassName,
-        'btn_white btn_white-alfabg': needLgClassName
-      }"
-      @click="$emit('cancel')"
-      >Cancel</span
-    >
-    <div class="tip-amount-field form-group form-group_clear-gaps">
-      <div class="form-field enabled-tooltip">
-        <input
-          name="amount"
-          class="tip-amount-input rounded"
-          type="text"
-          :placeholder="'$' + limits.min + '—' + limits.max"
-          v-model="amount"
-          autocomplete="off"
-          :class="{
-            error: fieldError('amount'),
-            lg: $mq === 'desktop' && needLgClassName
-          }"
-          v-validate="'tip-sum|tip-amount'"
-        />
-        <div
-          class="tooltip tooltip_error-field"
-          x-placement="top"
-          aria-hidden="true"
-          v-if="fieldError('amount')"
-        >
-          <div class="tooltip-arrow"></div>
-          <div class="tooltip-inner">{{ fieldError("amount") }}</div>
+  <div>
+    <form class="tip-form" @submit.stop.prevent="send">
+      <span
+        role="button"
+        class="btn btn-cancel"
+        :class="{
+          lg: $mq === 'desktop' && needLgClassName,
+          'btn_white btn_white-alfabg': needLgClassName
+        }"
+        @click="$emit('cancel')"
+        >Cancel</span
+      >
+      <div class="tip-amount-field form-group form-group_clear-gaps">
+        <div class="form-field enabled-tooltip">
+          <input
+            name="amount"
+            class="tip-amount-input rounded"
+            type="text"
+            :placeholder="'$' + limits.min + '—' + limits.max"
+            v-model="amount"
+            autocomplete="off"
+            :class="{
+              error: fieldError('amount'),
+              lg: $mq === 'desktop' && needLgClassName
+            }"
+            v-validate="'tip-sum|tip-amount'"
+          />
+          <div
+            class="tooltip tooltip_error-field"
+            x-placement="top"
+            aria-hidden="true"
+            v-if="fieldError('amount')"
+          >
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner">{{ fieldError("amount") }}</div>
+          </div>
         </div>
       </div>
+      <button
+        type="button"
+        @click="send"
+        class="btn btn-submit"
+        :disabled="!isFormValid || !canSend"
+        :class="{
+          lg: $mq === 'desktop' && needLgClassName,
+          'btn_white btn_white-alfabg': needLgClassName
+        }"
+      >
+        Send tips
+      </button>
+    </form>
+    <div v-if="depositOption && me.isPaymentCardConnected" class="deposit">
+      <div class="deposit__balance" :class="{ mobile: $mq === 'mobile' }">
+        Credits balance
+      </div>
+      <form class="tip-form" @submit.stop.prevent="deposit">
+        <button
+          role="button"
+          class="btn btn-cancel btn-submit"
+          disabled="true"
+          :class="{
+            lg: $mq === 'desktop' && needLgClassName,
+            'btn_white btn_white-alfabg': needLgClassName
+          }"
+        >
+          $ {{ me.creditBalance }}
+        </button>
+        <div class="tip-amount-field form-group form-group_clear-gaps">
+          <div class="form-field">
+            <input
+              name="deposit"
+              class="tip-amount-input rounded"
+              type="number"
+              :disabled="depositInProgress"
+              :placeholder="'$' + limits.min + '—' + limits.max"
+              v-model="depositAmount"
+              autocomplete="off"
+              :class="{
+                lg: $mq === 'desktop' && needLgClassName
+              }"
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-submit"
+          :disabled="!depositAmount || depositInProgress"
+          :class="{
+            lg: $mq === 'desktop' && needLgClassName,
+            'btn_white btn_white-alfabg': needLgClassName,
+            minWidthButton: true
+          }"
+        >
+          Deposit
+        </button>
+      </form>
     </div>
-    <button
-      type="button"
-      @click="send"
-      class="btn btn-submit"
-      :disabled="!isFormValid || !canSend"
-      :class="{
-        lg: $mq === 'desktop' && needLgClassName,
-        'btn_white btn_white-alfabg': needLgClassName
-      }"
-    >
-      Send tips
-    </button>
-  </form>
+  </div>
 </template>
 
 <script>
 import Form from "@/mixins/form";
+import { askFor3dSecure } from "@/utils/3dsecure";
+import Router from "@/router";
 
 export default {
   name: "UserTip",
@@ -69,11 +119,21 @@ export default {
     needLgClassName: {
       type: Boolean,
       default: false
+    },
+    depositOption: {
+      type: Boolean,
+      default: false
+    },
+    streamer: {
+      type: Object,
+      required: false
     }
   },
   data() {
     return {
-      amount: ""
+      amount: "",
+      depositAmount: "",
+      depositInProgress: false
     };
   },
   computed: {
@@ -140,7 +200,77 @@ export default {
         return true;
       }
       return number % 1 != 0;
+    },
+    _pay(payload, _onSuccess) {
+      if (!this.me.isPaymentCardConnected) {
+        this.$store.dispatch("global/flashToast", {
+          text: "You should add card in payment settings",
+          type: "success"
+        });
+        Router.push("/settings/payments");
+        return;
+      }
+      const onSuccess = () => {
+        this.depositInProgress = false;
+        this.$store.dispatch("payment/pay/complete", payload.paymentType);
+        _onSuccess();
+      };
+      this.$store
+        .dispatch("payment/pay/pay", payload)
+        .then(onSuccess)
+        .catch(r => {
+          if (r.code === 201) {
+            askFor3dSecure({
+              ...payload,
+              onSuccess,
+              onFailure: error => {
+                this._error(error);
+              }
+            });
+          } else {
+            this._error(r);
+          }
+        });
+    },
+    _error(error) {
+      this.depositInProgress = false;
+      this.depositAmount = "";
+      this.$store.dispatch("global/flashToast", {
+        text: error.message,
+        type: "error"
+      });
+    },
+    deposit() {
+      this.depositInProgress = true;
+      const { paymentGateCustomerCardToken } = this.me;
+      this._pay(
+        {
+          paymentType: "credit",
+          amount: parseFloat(this.depositAmount),
+          paymentGateCustomerCardToken
+        },
+        () => {
+          this.depositAmount = "";
+          this.$store.dispatch("global/flashToast", {
+            text: "Deposit is made successfully"
+          });
+        }
+      );
     }
+  },
+  mounted() {
+    const src = "https://securionpay.com/js/securionpay.js";
+    const existedScript = document.head.querySelector(`script[src="${src}"`);
+    if (existedScript) {
+      return;
+    }
+    let script = document.createElement("script");
+    script.onload = () => {
+      this.loading = false;
+    };
+    script.async = true;
+    script.src = src;
+    document.head.appendChild(script);
   },
   created() {
     this.validator.extend("tip-sum", {
@@ -172,3 +302,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.deposit {
+  &__balance {
+    color: white;
+    padding: 10px 0 0 20px;
+    opacity: 0.8;
+    &.mobile {
+      padding-left: 0;
+    }
+  }
+}
+.minWidthButton {
+  min-width: 80px;
+}
+</style>
