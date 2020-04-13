@@ -23,6 +23,7 @@ import online from "./actions/online";
 import typing from "./actions/typing";
 import stories from "./actions/stories";
 import header_stream from "./actions/header_stream";
+import updatedCreditBalance from "./actions/updatedCreditBalance";
 
 const actions = {
   chats,
@@ -46,7 +47,8 @@ const actions = {
   online,
   typing,
   stories,
-  header_stream
+  header_stream,
+  updatedCreditBalance
 };
 
 export default class Ws extends WsAbstract {

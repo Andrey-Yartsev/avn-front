@@ -89,7 +89,6 @@ export default {
         () => {
           this.amount = "";
           this.$store.dispatch("credits/transactions/fetch");
-          this.$store.dispatch("profile/fetchSilent");
           this.$store.dispatch("global/flashToast", {
             text: "Deposit is made successfully"
           });
