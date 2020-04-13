@@ -54,8 +54,8 @@ export default {
       this.$store
         .dispatch("profile/media/getMediaForPreview", this.productId)
         .then(res => {
-          const { title, text } = res;
-          const thumb = res.media.thumb && res.media.thumb.source;
+          const { title, text, thumb } = res;
+          // const thumb = res.media.thumb && res.media.thumb.source;
           this.link = { title, text, thumb };
           this.fetching = false;
         })

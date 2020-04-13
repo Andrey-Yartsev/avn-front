@@ -214,7 +214,7 @@ const actions = {
     dispatch("_sendViewStatistics", productId);
   },
   getMediaForPreview({ dispatch }, productId) {
-    return dispatch("_getMediaItem", { productId });
+    return dispatch("_getMediaItemThumbs", { productId });
   }
 };
 
@@ -247,6 +247,21 @@ createRequestAction({
   prefix: "_getMediaItem",
   apiPath: "media/view/{productId}",
   // resultKey: "media",
+  localError: true,
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{productId}/, params.productId);
+  }
+});
+createRequestAction({
+  requestType: "any",
+  prefix: "_getMediaItemThumbs",
+  apiPath: "media/thumb/{productId}",
   localError: true,
   state,
   mutations,
