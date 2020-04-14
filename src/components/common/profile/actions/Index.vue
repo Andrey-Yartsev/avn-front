@@ -276,6 +276,7 @@ export default {
     if (action) {
       if (action === "subscribe" && this.$refs.subscribeButton) {
         this.$refs.subscribeButton.subscription();
+        this.$store.commit("profile/home/resetOnPageAction");
         return;
       }
       this[action] && this[action]();

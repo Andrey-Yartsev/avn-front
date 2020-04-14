@@ -181,6 +181,9 @@ const mutations = {
   updateCreditBalance(state, data) {
     state.user.creditBalance = data.creditBalance;
     state.user.payments.tipsLimit.max = data.tipsLimitMax;
+  },
+  reconnectPaymentCard(state) {
+    state.user.isPaymentCardConnected = false;
   }
 };
 

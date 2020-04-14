@@ -1,6 +1,7 @@
 "use strict";
 
 import { createRequestAction } from "../../utils/storeRequest";
+import Store from "@/store";
 
 const state = {
   afterAddCardRedirect: null,
@@ -98,9 +99,13 @@ mutations.setDefault = (state, id) => {
 };
 
 mutations.remove = (state, id) => {
-  state.cards = state.cards.filter(v => {
+  const filteredCards = state.cards.filter(v => {
     return v.id !== id;
   });
+  if (!filteredCards.length) {
+    Store.commit("auth/reconnectPaymentCard", null, { root: true });
+  }
+  state.cards = filteredCards;
 };
 
 export default {
