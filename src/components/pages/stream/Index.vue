@@ -923,7 +923,7 @@ export default {
       },
       onCleanUp: () => {},
       onViewersCountGet: looks => {
-        this.looksCount = looks - 1;
+        this.looksCount = looks;
       },
       onCustomDataGet: message => {
         if (message.type === "click.position") {
