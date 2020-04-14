@@ -178,8 +178,9 @@ const mutations = {
   decrementStoreCount(state) {
     state.user.mediaCount = state.user.mediaCount - 1;
   },
-  updateCreditBalance(state, amount) {
-    state.user.creditBalance = amount;
+  updateCreditBalance(state, data) {
+    state.user.creditBalance = data.creditBalance;
+    state.user.payments.tipsLimit.max = data.tipsLimitMax;
   }
 };
 

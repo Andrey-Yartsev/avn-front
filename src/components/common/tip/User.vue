@@ -73,7 +73,6 @@
               class="tip-amount-input rounded"
               type="number"
               :disabled="depositInProgress"
-              :placeholder="'$' + limits.min + '—' + limits.max"
               v-model="depositAmount"
               autocomplete="off"
               :class="{
@@ -89,7 +88,8 @@
           :class="{
             lg: $mq === 'desktop' && needLgClassName,
             'btn_white btn_white-alfabg': needLgClassName,
-            minWidthButton: true
+            minWidthButton: $mq === 'mobile',
+            minWidthButtonDesktop: $mq === 'desktop'
           }"
         >
           Deposit
@@ -316,5 +316,8 @@ export default {
 }
 .minWidthButton {
   min-width: 80px;
+}
+.minWidthButtonDesktop {
+  min-width: 96px;
 }
 </style>
