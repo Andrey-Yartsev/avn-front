@@ -241,11 +241,19 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
+import TipAuto from "@/mixins/tipAuto";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp, Visibility],
+  mixins: [
+    InfinityScrollMixin,
+    UserMixin,
+    FileUpload,
+    Wsp,
+    Visibility,
+    TipAuto
+  ],
 
   components: {
     Loader,
