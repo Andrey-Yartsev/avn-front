@@ -14,6 +14,9 @@ export default {
     autoTipsRoute() {
       return this.tipRouteParam || this.onTipRouteAction;
     },
+    showTips() {
+      return this.profile.canEarn && this.$root.showTips;
+    },
     clearOnTipRouteAction() {
       this.$store.commit("profile/home/resetOnTipRouteAction");
     },
@@ -43,7 +46,7 @@ export default {
       this.$store.dispatch("modal/show", { name: "login" });
       return;
     }
-    if (this.autoTipsRoute()) {
+    if (this.autoTipsRoute() && this.showTips()) {
       this.openTipModal();
     }
   }
