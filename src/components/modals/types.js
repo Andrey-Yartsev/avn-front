@@ -150,6 +150,10 @@ const modalTypes = [
   {
     storeName: "addRedirectLink",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "mediaAccessLink",
+    layoutOnlyModal: true
   }
 ];
 

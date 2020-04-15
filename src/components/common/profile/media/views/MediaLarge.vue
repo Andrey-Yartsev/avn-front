@@ -337,11 +337,39 @@ export default {
         "profile/media/sendViewStatistics",
         this.post.productId
       );
+    },
+    withFeeAccessToken() {
+      return !!this.$route.hash && !!this.$route.hash.split("?accessToken=")[1];
+    },
+    getFreeAccess() {
+      const accessToken = this.$route.hash.split("?accessToken=")[1];
+      const productId = this.post.productId;
+      this.$store
+        .dispatch(
+          "profile/media/getFreeAccess",
+          { accessToken, productId },
+          { root: true }
+        )
+        .then(() => {
+          this.$store.dispatch("profile/media/getMediaItem", {
+            productId
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     }
   },
   mounted() {
     if (this.isFreeMedia()) {
       this.sendViewStatistics();
+    }
+    if (this.withFeeAccessToken() && !this.isAuthor) {
+      this.getFreeAccess();
     }
   }
 };

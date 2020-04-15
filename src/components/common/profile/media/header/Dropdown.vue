@@ -21,6 +21,15 @@
           >
         </a>
       </li>
+      <li v-if="post.active" class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          @click.prevent="generateAccessLink"
+        >
+          <span class="more-functions__option">Create access link</span>
+        </a>
+      </li>
       <li class="more-functions__item">
         <a
           class="edit more-functions__link"
@@ -120,6 +129,31 @@ export default {
           }
         );
       });
+    },
+    generateAccessLink() {
+      this.hide();
+      this.$store
+        .dispatch("profile/media/generateAccessLink", this.post.productId, {
+          root: true
+        })
+        .then(res => {
+          const urlString = `${window.location.origin}/media/${
+            this.$store.state.auth.user.username
+          }/${this.post.productId}/${res}`;
+          this.$store.dispatch("modal/show", {
+            name: "mediaAccessLink",
+            data: {
+              linkUrl: urlString
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     },
     getVideoUrl() {
       const { protocol, port, hostname } = window.location;

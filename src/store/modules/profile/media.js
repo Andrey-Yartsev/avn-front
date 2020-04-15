@@ -215,6 +215,12 @@ const actions = {
   },
   getMediaForPreview({ dispatch }, productId) {
     return dispatch("_getMediaItemThumbs", { productId });
+  },
+  generateAccessLink({ dispatch }, productId) {
+    return dispatch("_generateAccessLink", productId);
+  },
+  getFreeAccess({ dispatch }, data) {
+    return dispatch("_getFreeAccess", data);
   }
 };
 
@@ -365,6 +371,38 @@ createRequestAction({
   },
   paramsToPath: function(productId, path) {
     return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_generateAccessLink",
+  apiPath: "media/{productId}/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+createRequestAction({
+  requestType: "any",
+  prefix: "_getFreeAccess",
+  apiPath: "media/{productId}/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{productId}/, params.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 

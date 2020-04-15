@@ -49,6 +49,7 @@ import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
 import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
+import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 
 export default {
@@ -89,7 +90,8 @@ export default {
     AddMediaModal,
     EditMediaModal,
     MediaPayConfirmModal,
-    AddRedirectLinkModal
+    AddRedirectLinkModal,
+    MediaAccessLinkModal
   },
   props: {
     hasLayout: {
