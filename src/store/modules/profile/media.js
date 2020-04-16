@@ -401,6 +401,7 @@ createRequestAction({
   state,
   mutations,
   actions,
+  throw400: true,
   options: {
     method: "POST"
   },
