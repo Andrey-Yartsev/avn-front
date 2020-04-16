@@ -6,7 +6,7 @@
         <div class="form-title border-top">
           <div class="inner">
             <div class="semi-transparent">
-              Subscription Discount
+              Snapchat price
             </div>
           </div>
         </div>
