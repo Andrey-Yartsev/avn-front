@@ -59,6 +59,18 @@
               </div>
             </label>
 
+            <label class="form-group-inner notification-checkbox-switcher">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isEmailNotificationClipSaleEnabled"
+                  type="checkbox"
+                  name="isEmailNotificationClipSaleEnabled"
+                  value="true"
+                />
+                <span class="label icn-item">Clip sales</span>
+              </div>
+            </label>
+
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label label_cursor-default">
@@ -164,7 +176,7 @@
                   name="isTweetNotificationAutoprolongEnabled"
                   value="true"
                 />
-                <span class="label icn-item">Auto prolongation</span>
+                <span class="label icn-item">Subscription renewals</span>
               </div>
             </label>
             <label class="form-group-inner">
@@ -176,6 +188,17 @@
                   value="true"
                 />
                 <span class="label icn-item">Post tweets</span>
+              </div>
+            </label>
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isTweetNotificationClipSaleEnabled"
+                  type="checkbox"
+                  name="isTweetNotificationClipSaleEnabled"
+                  value="true"
+                />
+                <span class="label icn-item">Clip sales</span>
               </div>
             </label>
           </div>
