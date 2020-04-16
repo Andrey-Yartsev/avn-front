@@ -59,7 +59,7 @@
               </div>
             </label>
 
-            <label class="form-group-inner notification-checkbox-switcher">
+            <!-- <label class="form-group-inner notification-checkbox-switcher">
               <div class="checkbox-wrapper">
                 <input
                   v-model="localUser.isEmailNotificationClipSaleEnabled"
@@ -69,7 +69,7 @@
                 />
                 <span class="label icn-item">Clip sales</span>
               </div>
-            </label>
+            </label> -->
 
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
@@ -116,6 +116,24 @@
                   <select
                     name="emailNotificationPostPeriod"
                     v-model="localUser.emailNotificationPostPeriod"
+                  >
+                    <option v-for="(v, k) in notifOptions" :key="k" :value="k"
+                      >{{ v }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-group notification-setting-row">
+              <label class="form-group-inner">
+                <span class="label label_cursor-default">
+                  Clip sales notification frequency
+                </span>
+                <span class="select-wrapper select-wrapper_short">
+                  <select
+                    name="emailNotificationClipPeriod"
+                    v-model="localUser.emailNotificationClipPeriod"
                   >
                     <option v-for="(v, k) in notifOptions" :key="k" :value="k"
                       >{{ v }}
