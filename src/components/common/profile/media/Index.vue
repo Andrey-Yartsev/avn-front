@@ -26,14 +26,12 @@
       <div
         class="b-check-state  b-check-state_watermark watermarkContainer"
         :class="{ mediaSelected: isFilesLoaded, mobile: $mq === 'mobile' }"
-        v-if="
-          this.$props.private &&
-            user &&
-            user.isPerformer &&
-            user.hasWatermarkVideo
-        "
+        v-if="this.$props.private && user && user.isPerformer"
       >
-        <label :class="{ disabled: isFilesLoaded }">
+        <label
+          v-if="user.hasWatermarkVideo"
+          :class="{ disabled: isFilesLoaded }"
+        >
           <input
             class="is-free-post"
             type="checkbox"
@@ -43,6 +41,13 @@
           <span class="b-check-state__icon icn-item icn-size_lg"></span>
           <span class="b-check-state__text">Without watermark</span>
         </label>
+        <button
+          @click="generateAccessLink"
+          type="button"
+          class="btn btn_reset-mgap alt border "
+        >
+          Free access link
+        </button>
       </div>
       <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
         <div
@@ -297,6 +302,32 @@ export default {
     },
     setFilesLength(value) {
       this.filesLength = value;
+    },
+    generateAccessLink() {
+      this.$store
+        .dispatch("profile/media/generateFullAccessLink", null, {
+          root: true
+        })
+        .then(res => {
+          const urlString = `${window.location.origin}/${
+            this.$store.state.auth.user.username
+          }/media/${res}`;
+          this.$store.dispatch("modal/show", {
+            name: "mediaAccessLink",
+            data: {
+              text:
+                "Share this one-off link to give free access to all your curently available clips",
+              linkUrl: urlString
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     }
   },
   mounted() {
@@ -360,10 +391,18 @@ export default {
 .watermarkContainer {
   display: flex;
   flex-flow: row nowrap;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   margin: 5px;
+  button {
+    margin-left: auto;
+    line-height: 15px;
+  }
   &.mobile {
     margin-left: 10px;
+    button {
+      margin-right: 10px;
+    }
   }
 }
 .styledCheckmark {

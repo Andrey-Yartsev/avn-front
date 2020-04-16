@@ -50,6 +50,17 @@ export const routes = [
     }
   },
   {
+    beforeEnter: Profile.media,
+    path: "/:username/:page/:accessToken",
+    name: "ProfilePage",
+    component: () =>
+      import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
+    meta: {
+      cssName: "userProfile",
+      profile: true
+    }
+  },
+  {
     beforeEnter: Profile.init,
     path: "/:username/:page?",
     name: "ProfilePage",

@@ -10,7 +10,7 @@
             Free access link
           </div>
           <div class="popup-alert__body">
-            Share this one-off link to get free access to your media item
+            {{ data.text }}
             <div class="popup-alert__link">
               {{ data.linkUrl }}
             </div>

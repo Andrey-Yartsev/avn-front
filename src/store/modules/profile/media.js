@@ -221,6 +221,12 @@ const actions = {
   },
   getFreeAccess({ dispatch }, data) {
     return dispatch("_getFreeAccess", data);
+  },
+  generateFullAccessLink({ dispatch }) {
+    return dispatch("_generateFullAccessLink");
+  },
+  getFullFreeAccess({ dispatch }, data) {
+    return dispatch("_getFullFreeAccess", data);
   }
 };
 
@@ -387,6 +393,7 @@ createRequestAction({
     return path.replace(/{productId}/, productId);
   }
 });
+
 createRequestAction({
   requestType: "any",
   prefix: "_getFreeAccess",
@@ -399,6 +406,33 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{productId}/, params.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_generateFullAccessLink",
+  apiPath: "media/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getFullFreeAccess",
+  apiPath: "media/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
   },
   paramsToOptions: function(params, options) {
     options.data = params;

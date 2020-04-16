@@ -143,6 +143,7 @@ export default {
           this.$store.dispatch("modal/show", {
             name: "mediaAccessLink",
             data: {
+              text: "Share this one-off link to give free access to the clip",
               linkUrl: urlString
             }
           });
