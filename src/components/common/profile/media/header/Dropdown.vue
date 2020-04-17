@@ -183,7 +183,8 @@ export default {
         free,
         thumbId,
         removeVideoPreview,
-        pinned
+        pinned,
+        categories
       } = this.$props.post;
       const data = {
         media: {
@@ -194,6 +195,7 @@ export default {
           free,
           thumbId,
           removeVideoPreview,
+          categories,
           pinned: !pinned
         },
         productId: this.$props.post.productId
