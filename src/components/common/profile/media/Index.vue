@@ -41,13 +41,13 @@
           <span class="b-check-state__icon icn-item icn-size_lg"></span>
           <span class="b-check-state__text">Without watermark</span>
         </label>
-        <!-- <button
+        <button
           @click="generateAccessLink"
           type="button"
           class="btn btn_reset-mgap alt border "
         >
           Free access link
-        </button> -->
+        </button>
       </div>
       <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
         <div
@@ -311,7 +311,7 @@ export default {
         .then(res => {
           const urlString = `${window.location.origin}/${
             this.$store.state.auth.user.username
-          }/media/${res}`;
+          }/media/${res.accessToken}`;
           this.$store.dispatch("modal/show", {
             name: "mediaAccessLink",
             data: {

@@ -46,15 +46,23 @@ const Profile = {
         Store.dispatch("profile/home/fetchProfile", username)
           .then(() => {
             Store.dispatch("profile/setFetchLoading", false);
-            next();
+            next(`/${username}/${page}`);
           })
           .catch(() => {
             Store.dispatch("profile/setFetchLoading", false);
-            next();
+            next(`/${username}/${page}`);
           });
       };
 
-      if (accessToken) {
+      const isLoggedIn = () => {
+        return !!Store.state.auth.user;
+      };
+
+      const isAuthor = () => {
+        return Store.state.auth.user.username === username;
+      };
+
+      if (isLoggedIn() && !isAuthor()) {
         Store.dispatch("profile/media/getFullFreeAccess", { accessToken })
           .then(() => {
             Store.dispatch("global/flashToast", {
