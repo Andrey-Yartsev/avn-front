@@ -92,7 +92,7 @@
             <div class="form-group notification-setting-row">
               <label class="form-group-inner">
                 <span class="label label_cursor-default">
-                  Tip notification frequency
+                  Tips notification frequency
                 </span>
                 <span class="select-wrapper select-wrapper_short">
                   <select
@@ -152,7 +152,7 @@
       >
         <div class="inner">
           <span class="semi-transparent">
-            Receive Twitter Notifications
+            Send Twitter Notifications
           </span>
           <label class="toggle-element">
             <input
@@ -217,6 +217,17 @@
                   value="true"
                 />
                 <span class="label icn-item">Clip sales</span>
+              </div>
+            </label>
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isTweetNotificationTipEnabled"
+                  type="checkbox"
+                  name="isTweetNotificationTipEnabled"
+                  value="true"
+                />
+                <span class="label icn-item">Tips</span>
               </div>
             </label>
           </div>
