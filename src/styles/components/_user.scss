@@ -2,11 +2,14 @@
   margin-left: 5px;
   display: inline-block;
   vertical-align: middle;
-  color: $secondary-color;
+  color: $gray;
   width: 18px;
   height: 18px;
   line-height: 18px;
   font-size: 18px;
+  &.fullyMonetized {
+    color: $secondary-color;
+  }
   &:after {
     content: "\E61E";
   }

@@ -23,8 +23,17 @@
             {{ post.user.name }}
           </a>
           <span
-            v-if="post.user && post.user.isVerified && $mq === 'desktop'"
             class="verified-user icn-item"
+            :class="{
+              fullyMonetized:
+                post.user && post.user.canEarn && post.user.canPayoutsRequest
+            }"
+            v-if="
+              post.user &&
+                (post.user.isVerified ||
+                  (post.user.canEarn && post.user.canPayoutsRequest)) &&
+                $mq === 'desktop'
+            "
           ></span>
           <div class="timestamp hidden-mobile" v-if="$mq === 'desktop'">
             {{ dateTime }}

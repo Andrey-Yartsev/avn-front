@@ -35,7 +35,16 @@
 
           <div class="wrap-name wrap-name_center">
             <span class="name">{{ streamer.name }} </span>
-            <span v-if="streamer.isVerified" class="verified-user icn-item" />
+            <span
+              class="verified-user icn-item"
+              :class="{
+                fullyMonetized: streamer.canEarn && streamer.canPayoutsRequest
+              }"
+              v-if="
+                streamer.isVerified ||
+                  (streamer.canEarn && streamer.canPayoutsRequest)
+              "
+            ></span>
           </div>
         </div>
         <div v-if="showLockIcon" class="lockIcon">
