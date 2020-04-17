@@ -26,6 +26,9 @@ export default {
         amount: this.tipRouteParam
       });
     },
+    isAuthor() {
+      return this.user.id === this.profile.id;
+    },
     openTipModal() {
       const amount = this.tipRouteParam || this.onTipRouteAction.amount;
 
@@ -46,7 +49,7 @@ export default {
       this.$store.dispatch("modal/show", { name: "login" });
       return;
     }
-    if (this.autoTipsRoute() && this.showTips()) {
+    if (!this.isAuthor() && this.autoTipsRoute() && this.showTips()) {
       this.openTipModal();
     }
   }
