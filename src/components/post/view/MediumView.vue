@@ -45,6 +45,7 @@
             :authorId="post.author.id"
             :openModal="openModal"
             mediaSize="preview"
+            :autoplay="from === 'postQueue' && false"
           />
         </template>
         <template v-if="!isReposted">
