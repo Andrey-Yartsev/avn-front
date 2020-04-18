@@ -32,25 +32,16 @@ const Profile = {
     Auth.init(to, from, () => {
       const username = to.params.username.toLowerCase();
       const accessToken = to.params.accessToken;
-      const page = to.params.page;
-
-      if (
-        page &&
-        ["photos", "videos", "posts", "links", "media"].indexOf(page) === -1
-      ) {
-        next("/not-found");
-        return;
-      }
 
       const fetchProfile = () => {
         Store.dispatch("profile/home/fetchProfile", username)
           .then(() => {
             Store.dispatch("profile/setFetchLoading", false);
-            next(`/${username}/${page}`);
+            next(`/${username}/media`);
           })
           .catch(() => {
             Store.dispatch("profile/setFetchLoading", false);
-            next(`/${username}/${page}`);
+            next(`/${username}/media`);
           });
       };
 
