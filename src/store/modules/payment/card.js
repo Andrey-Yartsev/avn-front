@@ -88,6 +88,7 @@ actions.setDefault = ({ dispatch, commit }, id) => {
 actions.remove = ({ dispatch, commit }, id) => {
   dispatch("_remove", id).then(() => {
     commit("remove", id);
+    dispatch("fetch");
   });
 };
 

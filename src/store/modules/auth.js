@@ -184,6 +184,9 @@ const mutations = {
   },
   reconnectPaymentCard(state) {
     state.user.isPaymentCardConnected = false;
+  },
+  newCardToken(state, data) {
+    state.user.paymentGateCustomerCardToken = data;
   }
 };
 
