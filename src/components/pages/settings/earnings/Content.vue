@@ -5,7 +5,7 @@
         Earnings
       </h1>
       <div
-        class="form-title table-header-title table-header-title_sticky bg-gradient border-top"
+        class="form-title table-header-title table-header-title_sticky bg-gradient border-bottom"
       >
         <div v-if="$mq == 'mobile'" class="filtersSection">
           <div class="form-group form-group_with-label">

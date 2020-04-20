@@ -20,11 +20,24 @@
         </span>
       </span>
     </div>
+    <div
+      class="form-group form-group_clear-gaps-bottom form-group_with-label item"
+    >
+      <span class="title">Magazines</span>
+      <span class="value value_editable-field">
+        <span class="value__text">
+          {{ magazines }}
+        </span>
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import Kinds from "./kinds";
+
 export default {
+  mixins: [Kinds],
   props: {
     info: Object
   },
@@ -33,13 +46,20 @@ export default {
       return (
         this.info.address +
         ", " +
-        // this.info.city +
-        // ", " +
+        this.info.city +
+        ", " +
         this.info.zip +
         (this.info.state ? ", " + this.info.state.name : "") +
         ", " +
         this.info.country.name
       );
+    },
+    magazines() {
+      return this.info.magazines
+        .map(name => {
+          return this.kindOptions.find(kind => kind.name === name).title;
+        })
+        .join(", ");
     }
   }
 };

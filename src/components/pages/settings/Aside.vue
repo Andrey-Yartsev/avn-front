@@ -274,6 +274,12 @@ export default {
         name: "obs",
         title: "OBS"
       });
+      if (this.user && this.user.isMakePayment) {
+        items.push({
+          name: "magazine",
+          title: "AVN Magazine"
+        });
+      }
       return items;
     },
     showAvatarSave() {

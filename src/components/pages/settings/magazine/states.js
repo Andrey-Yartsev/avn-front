@@ -4,7 +4,8 @@ export default {
   mixins: [User],
   data() {
     return {
-      statesLoading: true
+      statesLoading: true,
+      statesLoadId: 0
     };
   },
   computed: {
@@ -26,6 +27,9 @@ export default {
     },
     states() {
       return this.$store.state.states.fetchResult;
+    },
+    countriesLoading() {
+      return this.$store.state.countries.fetchLoading;
     }
   },
   methods: {
@@ -51,12 +55,26 @@ export default {
       });
     },
     fetchStates() {
-      this.$store.commit("states/reset");
+      if (this.statesLoadId) {
+        clearTimeout(this.statesLoadId);
+      }
       if (this.hasStates) {
         this.statesLoading = true;
+      }
+      this.statesLoadId = setTimeout(() => {
+        this._fetchStates();
+      }, 100);
+    },
+    _fetchStates() {
+      this.$store.commit("states/reset");
+      if (this.hasStates) {
         this.$store
           .dispatch("states/fetch", this.userInfo.countryId)
           .then(() => {
+            if (!this.userInfo.stateId) {
+              this.userInfo.stateId = this.states[0].id;
+            }
+
             this.statesLoading = false;
           });
       } else {

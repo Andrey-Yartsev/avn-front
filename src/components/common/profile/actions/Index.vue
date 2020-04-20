@@ -52,14 +52,6 @@
             }}</span>
             <span class="label">Clips</span>
           </router-link>
-          <router-link
-            v-if="isOwner(this.profile.id)"
-            class="btn-user-activity"
-            :to="`/${profile.username}/magazine`"
-          >
-            <span class="value">&nbsp;</span>
-            <span class="label">Magazine</span>
-          </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link

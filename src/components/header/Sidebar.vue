@@ -81,6 +81,12 @@
                 to="/settings/subscribers"
                 >Subscribers
               </router-link>
+              <router-link
+                v-if="user.canEarn"
+                class="user-menu-item user-menu-item__magazine icn-item"
+                to="/settings/magazine"
+                >Magazine
+              </router-link>
             </div>
             <div class="user-menu__col">
               <router-link

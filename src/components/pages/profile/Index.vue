@@ -148,9 +148,6 @@
                 v-else-if="pageName === 'media'"
                 :private="isOwner(profile.id)"
               />
-              <MagazinePage
-                v-else-if="isOwner(profile.id) && pageName === 'magazine'"
-              />
               <template v-else>
                 <p
                   :class="['empty-feed']"
@@ -244,7 +241,6 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
-import MagazinePage from "@/components/common/profile/magazine/Index";
 
 export default {
   name: "ProfileHome",
@@ -266,8 +262,7 @@ export default {
     Highlights,
     LinkPost,
     LinksPage,
-    MediaPage,
-    MagazinePage
+    MediaPage
   },
 
   data() {
@@ -338,8 +333,7 @@ export default {
       return (
         this.pageName === undefined ||
         this.pageName === "posts" ||
-        this.pageName === "links" ||
-        this.pageName === "magazine"
+        this.pageName === "links"
       );
     },
     highlights() {
@@ -470,8 +464,7 @@ export default {
     getPosts() {
       if (
         this.$route.params.page !== "links" &&
-        this.$route.params.page !== "media" &&
-        this.$route.params.page !== "magazine"
+        this.$route.params.page !== "media"
       ) {
         this.$store.dispatch("profile/home/getPosts");
       }

@@ -6,20 +6,42 @@ const state = {};
 
 const actions = {
   subscribe({ dispatch, commit }, data) {
-    dispatch("_subscribe", data).then(r => {
+    delete data.country;
+    delete data.state;
+    data.hasOfflineSubscription = true;
+    data.magazines = data.kinds.map(v => v.name);
+    delete data.kinds;
+
+    dispatch("update", data).then(r => {
       commit("setFetchStatus", r);
+      commit("subscribe");
     });
   },
-  unsubscribe({ dispatch, commit }) {
-    dispatch("_unsubscribe").then(r => {
+  reset({ dispatch, commit }) {
+    dispatch("remove").then(r => {
       if (r.success) {
         commit("unsubscribe");
       }
+    });
+  },
+  unsubscribe({ dispatch, commit, state }) {
+    const current = state.fetchStatusResult.shipping;
+    const data = { ...current };
+    data.hasOfflineSubscription = false;
+    data.countryId = current.country.id;
+    data.stateId = current.state.id;
+    delete data.country;
+    delete data.state;
+    dispatch("update", data).then(() => {
+      commit("unsubscribe");
     });
   }
 };
 
 const mutations = {
+  subscribe(state) {
+    state.fetchStatusResult.shipping.hasOfflineSubscription = true;
+  },
   unsubscribe(state) {
     state.fetchStatusResult.shipping.hasOfflineSubscription = false;
   },
@@ -29,7 +51,7 @@ const mutations = {
 };
 
 createRequestAction({
-  prefix: "_subscribe",
+  prefix: "update",
   requestType: "token",
   apiPath: "users/offline/shipping",
   state,
@@ -45,7 +67,7 @@ createRequestAction({
 });
 
 createRequestAction({
-  prefix: "_unsubscribe",
+  prefix: "remove",
   requestType: "token",
   apiPath: "users/offline/shipping",
   state,
