@@ -167,18 +167,16 @@ export default {
         this.userInfo = Object.assign(this.userInfo, r);
         this.userInfo.countryId = this.defaultCountryId;
         this.userInfo.zip = r.postalCode;
+        this.userInfo.kinds = [this.kindOptions[0]];
       } else {
         this.userInfo = Object.assign(this.userInfo, this.curData);
         this.userInfo.countryId = this.curData.country.id;
         this.userInfo.stateId = this.curData.state.id;
-
-        console.log(this.userInfo.magazines);
         this.userInfo.kinds = this.userInfo.magazines
           .map(name => {
             return this.kindOptions.find(kind => kind.name === name);
           })
           .filter(v => !!v);
-
         if (this.userInfo.kinds.length === 0) {
           this.userInfo.kinds = [this.kindOptions[0]];
         }

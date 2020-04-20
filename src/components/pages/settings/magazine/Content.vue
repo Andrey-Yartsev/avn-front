@@ -33,8 +33,6 @@
 
       <div class="shadow-block  border-top">
         <div class="container">
-          <!--<div class="subtitle">You have subscription for this address:</div>-->
-
           <ShippingInfo
             :info="status.shipping"
             v-if="hasSubscription"
@@ -45,16 +43,6 @@
             ref="form"
             @disabledChange="disabledChange"
           />
-
-          <!--
-                <button
-                  class="btn lg btn_fix-width"
-                  @click="unsubscribe"
-                  :disabled="unsubscribeDisabled"
-                >
-                  Unsubscribe
-                </button>
-                -->
         </div>
       </div>
     </div>
