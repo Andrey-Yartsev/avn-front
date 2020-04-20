@@ -125,6 +125,7 @@ import FileUpload from "vue-upload-component";
 import Loader from "@/components/common/Loader";
 import FileUploadMixin from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
+import { logDebug } from "@/utils/logging";
 
 Vue.filter("formatSize", function(size) {
   if (size > 1024 * 1024 * 1024 * 1024) {
@@ -199,6 +200,13 @@ export default {
           { root: true }
         )
         .then(() => {
+          logDebug({
+            logger: "ClipStore",
+            message: "Create clip success",
+            logData: {
+              processId: newFile
+            }
+          });
           this.disableButtons = false;
           this.loading = false;
           this.filesInProgress = this.filesInProgress.filter(
@@ -251,6 +259,15 @@ export default {
         if (!newFile.type) {
           this.setFileTypeManually(newFile.file);
         }
+        logDebug({
+          logger: "ClipStore",
+          message: "Drop file",
+          logData: {
+            name: newFile.file.name,
+            type: newFile.file.type,
+            size: newFile.file.size
+          }
+        });
         if (!this.fileBuffer.length) {
           setTimeout(() => {
             this.sendFilesFromBuffer();
@@ -285,6 +302,23 @@ export default {
           { root: true }
         );
       }
+      if (
+        newFile &&
+        !oldFile &&
+        this.files.length &&
+        this.files.find(
+          item => item.name === newFile.name && item.size === newFile.size
+        )
+      ) {
+        console.log("same file uploading already");
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: "The same file is already uploading", type: "warning" },
+          { root: true }
+        );
+        return prevent();
+      }
+      console.log(newFile, this.files);
       if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
         console.log("wrong format");
         return prevent();
