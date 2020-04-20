@@ -113,7 +113,7 @@ export default {
         actionPrefix: this.actionPrefix,
         postId: this.post.id,
         commentId: comment.id,
-        confirmBlockUser: true,
+        confirmBlockUser: this.user.id !== comment.author.id,
         author: comment.author
       });
     },
