@@ -56,7 +56,14 @@
             ></span>
             <span
               class="verified-user icn-item"
-              v-if="v.withUser.isVerified"
+              :class="{
+                fullyMonetized:
+                  v.withUser.canEarn && v.withUser.canPayoutsRequest
+              }"
+              v-if="
+                v.withUser.isVerified ||
+                  (v.withUser.canEarn && v.withUser.canPayoutsRequest)
+              "
             ></span>
             <span class="user-login">
               <span class="username">{{ v.withUser.username }}</span>

@@ -22,9 +22,15 @@
       @mouseout="hideBubble"
       >{{ postUser.name }}</a
     >
-    <template v-if="postUser.isVerified">
-      <span class="verified-user icn-item"></span>
-    </template>
+    <span
+      class="verified-user icn-item"
+      :class="{
+        fullyMonetized: postUser.canEarn && postUser.canPayoutsRequest
+      }"
+      v-if="
+        postUser.isVerified || (postUser.canEarn && postUser.canPayoutsRequest)
+      "
+    ></span>
     <span class="user-login">
       <a
         :href="'/' + postUser.username"

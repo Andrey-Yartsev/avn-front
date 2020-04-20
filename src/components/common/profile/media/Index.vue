@@ -24,42 +24,75 @@
         </div>
       </template>
       <div
-        :class="['buttonWrapper', 'more-functions', { open: opened }]"
-        v-click-outside="hide"
+        class="b-check-state  b-check-state_watermark watermarkContainer"
+        :class="{ mediaSelected: isFilesLoaded, mobile: $mq === 'mobile' }"
+        v-if="this.$props.private && user && user.isPerformer"
       >
-        <div
-          class="b-check-state  b-check-state_watermark watermarkContainer"
-          :class="{ mediaSelected: isFilesLoaded }"
-          v-if="
-            this.$props.private &&
-              user &&
-              user.isPerformer &&
-              user.hasWatermarkVideo
-          "
+        <label
+          v-if="user.hasWatermarkVideo"
+          :class="{ disabled: isFilesLoaded }"
         >
-          <label :class="{ disabled: isFilesLoaded }">
-            <input
-              class="is-free-post"
-              type="checkbox"
-              :disabled="isFilesLoaded"
-              v-model="withoutWatermark"
-            />
-            <span class="b-check-state__icon icn-item icn-size_lg"></span>
-            <span class="b-check-state__text">Without watermark</span>
-          </label>
-        </div>
-        <div class="more-functions__overlay" @click="hide"></div>
-        <div class="sortLabel">Sort:</div>
-        <div class="openMenuButton" @click="open">
-          <span class="status-card on icn-item checkmark styledCheckmark" />
-          <span class="filterLabel">{{ getFilterName }}</span>
-        </div>
-        <div class="more-functions__dropdown">
-          <FilterDropdown
-            :isAuthor="this.$props.private"
-            :type="filterType"
-            @handleClick="handleClick"
+          <input
+            class="is-free-post"
+            type="checkbox"
+            :disabled="isFilesLoaded"
+            v-model="withoutWatermark"
           />
+          <span class="b-check-state__icon icn-item icn-size_lg"></span>
+          <span class="b-check-state__text">Without watermark</span>
+        </label>
+        <button
+          @click="generateAccessLink"
+          type="button"
+          class="btn btn_reset-mgap alt border "
+        >
+          Free access link
+        </button>
+      </div>
+      <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
+        <div
+          class="form-group categories"
+          :class="{ mobile: $mq === 'mobile' }"
+        >
+          <div class="form-group-inner">
+            <span class="label">Categories:</span>
+            <span class="form-group form-group_clear-gaps">
+              <span class="form-field">
+                <multiselect
+                  v-model="selectedCategory"
+                  :options="categoriesList"
+                  :multiple="false"
+                  :close-on-select="true"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="Select category"
+                  label="title"
+                  track-by="name"
+                  :taggable="false"
+                  :openDirection="$mq === 'desktop' ? 'bottom' : ''"
+                >
+                </multiselect>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div
+          :class="['buttonWrapper', 'more-functions', { open: opened }]"
+          v-click-outside="hide"
+        >
+          <div class="more-functions__overlay" @click="hide"></div>
+          <div class="sortLabel">Sort:</div>
+          <div class="openMenuButton" @click="open">
+            <span class="status-card on icn-item checkmark styledCheckmark" />
+            <span class="filterLabel">{{ getFilterName }}</span>
+          </div>
+          <div class="more-functions__dropdown">
+            <FilterDropdown
+              :isAuthor="this.$props.private"
+              :type="filterType"
+              @handleClick="handleClick"
+            />
+          </div>
         </div>
       </div>
       <div class="profile-content">
@@ -102,13 +135,17 @@ import FilterDropdown from "@/components/common/profile/media/edit/FilterDropdow
 import User from "@/mixins/user";
 import IntersectionObserver from "@/mixins/intersectionObserver";
 import ClickOutside from "vue-click-outside";
+import Multiselect from "vue-multiselect";
+
+const defaultSelectedCategory = { id: "0", name: "All", title: "All" };
 
 export default {
   name: "MediaPage",
   components: {
     Loader,
     FileUploader,
-    FilterDropdown
+    FilterDropdown,
+    Multiselect
   },
   directives: {
     ClickOutside
@@ -127,7 +164,8 @@ export default {
       opened: false,
       fetchLimit: 9,
       withoutWatermark: false,
-      filesLength: 0
+      filesLength: 0,
+      selectedCategory: defaultSelectedCategory
     };
   },
   computed: {
@@ -195,10 +233,41 @@ export default {
         default:
           return "all";
       }
+    },
+    categoriesList() {
+      if (!this.$store.state.profile.home.profile.mediaCategories) {
+        return [];
+      }
+      let list = this.$store.state.profile.home.profile.mediaCategories.map(
+        item => {
+          const transformedName = item.name.replace(/&amp;/g, "&");
+          return {
+            id: item.id,
+            name: transformedName,
+            amount: item.amount,
+            title: `${transformedName} (${item.amount})`
+          };
+        }
+      );
+      list.sort((a, b) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+      });
+      list.unshift({ id: "0", name: "All", title: "All" });
+      return list;
     }
   },
   watch: {
     filterType() {
+      this.destroyObserver();
+      this.isInitFetch = true;
+      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.fetchMedia();
+    },
+    selectedCategory(newValue) {
+      if (!newValue) {
+        this.selectedCategory = defaultSelectedCategory;
+        return;
+      }
       this.destroyObserver();
       this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });
@@ -221,6 +290,7 @@ export default {
     fetchMedia() {
       this.$store
         .dispatch("profile/media/getMedia", {
+          categories: this.selectedCategory.id,
           profileId: this.$store.state.profile.home.profile.id,
           filter: this.getFilterType,
           sort: this.getSortOrder
@@ -232,15 +302,45 @@ export default {
     },
     setFilesLength(value) {
       this.filesLength = value;
+    },
+    generateAccessLink() {
+      this.$store
+        .dispatch("profile/media/generateFullAccessLink", null, {
+          root: true
+        })
+        .then(res => {
+          const urlString = `${window.location.origin}/${
+            this.$store.state.auth.user.username
+          }/media/${res.accessToken}`;
+          this.$store.dispatch("modal/show", {
+            name: "mediaAccessLink",
+            data: {
+              text:
+                "Share this one-off link to give free access to all your curently available clips",
+              linkUrl: urlString
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     }
   },
   mounted() {
+    this.$store.dispatch("profile/media/getMediaCategories", null, {
+      root: true
+    });
     this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
   }
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .addLink__button {
   margin-top: 3rem;
@@ -271,28 +371,39 @@ export default {
 .buttonWrapper {
   display: flex !important;
   justify-content: flex-end;
-  margin: 5px 0px;
+  margin-bottom: 8px;
+  margin-left: 5px;
 }
 .openMenuButton {
   display: block;
   /* display: inline-block; */
   margin: 5px 0;
-  margin-right: 20px;
+  margin-right: 7px;
   cursor: pointer;
 }
 .sortLabel {
   display: flex;
   align-items: center;
   margin-right: 10px;
-  font-weight: bold;
+  font-weight: 500;
   color: #909598;
 }
 .watermarkContainer {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin-right: auto;
-  margin-left: 10px;
+  justify-content: space-between;
+  margin: 5px;
+  button {
+    margin-left: auto;
+    line-height: 15px;
+  }
+  &.mobile {
+    margin-left: 10px;
+    button {
+      margin-right: 10px;
+    }
+  }
 }
 .styledCheckmark {
   position: relative;
@@ -302,5 +413,43 @@ export default {
 .filterLabel {
   font-weight: bold;
   color: #909598;
+}
+.categories {
+  flex-grow: 1;
+  max-width: 350px;
+  &.mobile {
+    padding: 0;
+    margin-bottom: 7px;
+    max-width: 300px;
+    .form-group-inner {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      margin-bottom: 0;
+      .label {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.viewSettings {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  &.mobile {
+    margin: 10px 8px 0 8px;
+    flex-flow: column nowrap;
+    align-items: normal;
+    .buttonWrapper {
+      justify-content: flex-start;
+    }
+  }
+  .form-group-inner {
+    .label {
+      color: #909598;
+      font-size: 15px;
+    }
+  }
 }
 </style>

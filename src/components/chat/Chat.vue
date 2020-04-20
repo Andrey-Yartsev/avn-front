@@ -76,7 +76,14 @@
                 </router-link>
                 <span
                   class="verified-user icn-item"
-                  v-if="activeUser.isVerified"
+                  :class="{
+                    fullyMonetized:
+                      activeUser.canEarn && activeUser.canPayoutsRequest
+                  }"
+                  v-if="
+                    activeUser.isVerified ||
+                      (activeUser.canEarn && activeUser.canPayoutsRequest)
+                  "
                 ></span>
                 <span class="user-login">
                   <router-link

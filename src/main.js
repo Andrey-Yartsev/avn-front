@@ -89,6 +89,7 @@ const MyApp = new Vue({
   store,
   components: { App }
 }).$mount("#app");
+window.MyApp = MyApp;
 
 MyApp.$root.showTips = true;
 MyApp.$root.isAvnApp = process.env.VUE_APP_NAME === "avn";

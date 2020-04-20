@@ -1,25 +1,3 @@
-const insertTextAtCursor = text => {
-  let sel, range;
-  if (window.getSelection) {
-    sel = window.getSelection();
-    if (sel.getRangeAt && sel.rangeCount) {
-      range = sel.getRangeAt(0);
-      range.deleteContents();
-      range.insertNode(document.createTextNode(text));
-    }
-  } else if (document.selection && document.selection.createRange) {
-    document.selection.createRange().text = text;
-  }
-};
-
-const htmlEntities = str => {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-};
-
 export default {
   data() {
     return {
@@ -102,17 +80,6 @@ export default {
     }
   },
   mounted() {
-    this.$refs.textarea.addEventListener("paste", function(e) {
-      e.preventDefault();
-      if (e.clipboardData && e.clipboardData.getData) {
-        let text = e.clipboardData.getData("text/plain");
-        document.execCommand("insertHTML", false, htmlEntities(text));
-      } else if (window.clipboardData && window.clipboardData.getData) {
-        let text = window.clipboardData.getData("Text");
-        insertTextAtCursor(text);
-      }
-    });
-
     this.$refs.textarea.addEventListener("keyup", this.checkLength);
     this.$refs.textarea.addEventListener("keydown", this.checkLength);
   },

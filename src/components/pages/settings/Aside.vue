@@ -111,7 +111,12 @@
               <span class="name">{{ user.name }}</span>
               <span
                 class="verified-user icn-item"
-                v-if="user.isVerified"
+                :class="{
+                  fullyMonetized: user.canEarn && user.canPayoutsRequest
+                }"
+                v-if="
+                  user.isVerified || (user.canEarn && user.canPayoutsRequest)
+                "
               ></span>
             </div>
             <span class="user-login reset-ml"
@@ -278,7 +283,7 @@ export default {
         items.push({
           name: "clipStore",
           title: "Clip Store",
-          path: `${this.user.username}/media`
+          path: `/${this.user.username}/media`
         });
       }
       return items;

@@ -21,7 +21,16 @@
           <router-link :to="'/' + profile.username" class="name">{{
             profile.name
           }}</router-link>
-          <span v-if="profile.isVerified" class="verified-user icn-item"></span>
+          <span
+            class="verified-user icn-item"
+            :class="{
+              fullyMonetized: profile.canEarn && profile.canPayoutsRequest
+            }"
+            v-if="
+              profile.isVerified ||
+                (profile.canEarn && profile.canPayoutsRequest)
+            "
+          ></span>
         </div>
         <div class="user-login reset-ml">
           <router-link :to="'/' + profile.username">{{

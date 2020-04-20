@@ -99,6 +99,7 @@
             :showPreview="showPreview"
             :view="'large'"
           />
+          <ClipCategories :categories="post.categories" />
           <div
             class="text hidden-mobile"
             v-if="$mq === 'desktop'"
@@ -180,6 +181,7 @@ import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
+import ClipCategories from "@/components/common/profile/media/parts/categories/Index";
 
 export default {
   name: "PostLastView",
@@ -217,7 +219,8 @@ export default {
     CommentsList,
     Actions,
     AddComment,
-    Tip
+    Tip,
+    ClipCategories
   },
   computed: {
     postId() {
@@ -282,14 +285,14 @@ export default {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch("global/flashToast", {
-            text: "You should add card in payment settings",
-            type: "warning"
-          });
-          this.$router.push("/settings/payments");
-          return;
-        }
+        // if (!this.user.isPaymentCardConnected) {
+        //   this.$store.dispatch("global/flashToast", {
+        //     text: "You should add card in payment settings",
+        //     type: "warning"
+        //   });
+        //   this.$router.push("/settings/payments");
+        //   return;
+        // }
 
         this.$store.dispatch("modal/show", {
           name: "mediaPayConfirm",
@@ -334,11 +337,39 @@ export default {
         "profile/media/sendViewStatistics",
         this.post.productId
       );
+    },
+    withFeeAccessToken() {
+      return !!this.$route.hash && !!this.$route.hash.split("?accessToken=")[1];
+    },
+    getFreeAccess() {
+      const accessToken = this.$route.hash.split("?accessToken=")[1];
+      const productId = this.post.productId;
+      this.$store
+        .dispatch(
+          "profile/media/getFreeAccess",
+          { accessToken, productId },
+          { root: true }
+        )
+        .then(() => {
+          this.$store.dispatch("profile/media/getMediaItem", {
+            productId
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     }
   },
   mounted() {
     if (this.isFreeMedia()) {
       this.sendViewStatistics();
+    }
+    if (this.withFeeAccessToken() && !this.isAuthor) {
+      this.getFreeAccess();
     }
   }
 };

@@ -161,30 +161,115 @@
               </div>
             </template>
 
-            <div class="form-group form-group_with-label photo-form-group">
-              <div
-                class="form-group-inner photo-form-group-inner"
-                :class="{ 'success icn-item': !!uploadedPhoto }"
-              >
-                <span class="label">Photo ID</span>
-
-                <div class="photo-label-wrapper">
-                  <label
-                    for="photo"
-                    class="btn btn_fix-width btn_block border photo-btn"
-                    >Upload</label
+            <div
+              class="form-group form-group_with-label"
+              :class="{ disabled: legalExists }"
+            >
+              <label class="form-group-inner">
+                <span class="label">Document Type</span>
+                <span class="select-wrapper">
+                  <select
+                    :disabled="legalExists"
+                    name="type"
+                    id="legal-type"
+                    required
+                    v-model="backsideDocRequired"
+                    v-validate="'required'"
+                    @change="handleChangeDocIdType"
                   >
-                </div>
-
-                <input
-                  type="file"
-                  id="photo"
-                  accept=".jpg,.jpeg,.png"
-                  ref="photo"
-                  @change="upload"
-                />
-              </div>
+                    <option value="" disabled>Select ID Document Type</option>
+                    <option
+                      v-for="doc of getAllowedDocsOptions"
+                      :key="doc.type"
+                      :data-name="doc.type"
+                      :value="doc.backsideRequired"
+                      >{{ doc.name }}</option
+                    >
+                  </select>
+                </span>
+              </label>
             </div>
+
+            <template v-if="backsideDocRequired !== ''">
+              <div class="form-group form-group_with-label photo-form-group">
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!personalIdImage }"
+                >
+                  <span class="label">Photo ID (front side)</span>
+
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="personalIdImage"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="personalIdImage"
+                    accept=".jpg,.jpeg,.png"
+                    ref="personalIdImage"
+                    name="personalIdImage"
+                    @change="upload"
+                  />
+                </div>
+              </div>
+              <div
+                v-if="backsideDocRequired === true"
+                class="form-group form-group_with-label photo-form-group"
+              >
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!personalIdImageBackside }"
+                >
+                  <span class="label">Photo ID (back side)</span>
+
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="personalIdImageBackside"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="personalIdImageBackside"
+                    accept=".jpg,.jpeg,.png"
+                    ref="personalIdImageBackside"
+                    name="personalIdImageBackside"
+                    @change="upload"
+                  />
+                </div>
+              </div>
+              <div class="form-group form-group_with-label photo-form-group">
+                <div
+                  class="form-group-inner photo-form-group-inner"
+                  :class="{ 'success icn-item': !!selfieImage }"
+                >
+                  <span class="label">Selfie</span>
+
+                  <div class="photo-label-wrapper">
+                    <label
+                      for="selfieImage"
+                      class="btn btn_fix-width btn_block border photo-btn"
+                      >Upload</label
+                    >
+                  </div>
+
+                  <input
+                    type="file"
+                    id="selfieImage"
+                    accept=".jpg,.jpeg,.png"
+                    ref="selfieImage"
+                    name="selfieImage"
+                    @change="upload"
+                  />
+                </div>
+              </div>
+            </template>
 
             <div class="form-group form-group_with-label">
               <label class="form-group-inner">
@@ -316,7 +401,13 @@
             <button
               type="submit"
               class="btn lg btn_fix-width saveChanges"
-              :disabled="!canSave || saving || imageUploading"
+              :disabled="
+                !canSave ||
+                  saving ||
+                  personalIdImageUploading ||
+                  personalIdImageBacksideUploading ||
+                  selfieImageUploading
+              "
             >
               Next
             </button>
@@ -359,11 +450,17 @@ export default {
       postalCode: "",
       city: "",
       tos: false,
-      uploadedPhoto: null,
+      personalIdImage: null,
+      personalIdImageBackside: null,
+      selfieImage: null,
       legalExisted: false,
-      imageUploading: false,
+      personalIdImageUploading: false,
+      personalIdImageBacksideUploading: false,
+      selfieImageUploading: false,
       abn: "",
-      gstRegistered: null
+      gstRegistered: null,
+      backsideDocRequired: "",
+      docIdType: ""
     };
   },
   computed: {
@@ -379,11 +476,26 @@ export default {
     allMediaTypes() {
       return this.inputAcceptTypes.photo;
     },
+    isRequiredImagesUploaded() {
+      if (this.backsideDocRequired === "") {
+        return false;
+      }
+      if (this.backsideDocRequired) {
+        return (
+          this.personalIdImage &&
+          this.personalIdImageBackside &&
+          this.selfieImage
+        );
+      }
+      if (!this.backsideDocRequired) {
+        return this.personalIdImage && this.selfieImage;
+      }
+    },
     canSave() {
       if (!this.isFormValid) {
         return false;
       }
-      if (!this.uploadedPhoto && !this.legalExists) {
+      if (!this.isRequiredImagesUploaded && !this.legalExisted) {
         return false;
       }
       return true;
@@ -415,16 +527,37 @@ export default {
         this.account.countryName &&
         this.account.countryName === "United States of America"
       );
+    },
+    getAllowedDocsOptions() {
+      return this.account.countryAllowedDocTypes.map(item => {
+        let name = "";
+        switch (item.type) {
+          case "idCard":
+            name = "ID Card";
+            break;
+          case "passport":
+            name = "Passport";
+            break;
+          case "driverLicense":
+            name = "Driver License";
+            break;
+          default:
+            break;
+        }
+        item.name = name;
+        return item;
+      });
     }
   },
   methods: {
-    async upload() {
-      this.imageUploading = true;
+    async upload(e) {
+      const refName = e.target.name;
+      this[`${refName}Uploading`] = true;
       try {
-        this.uploadedPhoto = await upload(this.$refs.photo.files[0]);
-        this.imageUploading = false;
+        this[refName] = await upload(this.$refs[refName].files[0]);
+        this[`${refName}Uploading`] = false;
       } catch (error) {
-        this.imageUploading = false;
+        this[`${refName}Uploading`] = false;
         this.$store.dispatch("global/setError", error);
       }
     },
@@ -452,7 +585,13 @@ export default {
             f === "birthDate" ? moment(this[f]).format("YYYY-MM-DD") : this[f];
         }
       }
-      data.personalIdImage = this.uploadedPhoto;
+      if (!this.legalExisted) {
+        data.personalIdImage = this.personalIdImage;
+        data.personalIdImageBackside = this.personalIdImageBackside;
+        data.selfieImage = this.selfieImage;
+        data.backsideRequired = this.backsideDocRequired;
+        data.docIdType = this.docIdType;
+      }
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
           return;
@@ -467,6 +606,9 @@ export default {
           });
         }
       });
+    },
+    handleChangeDocIdType(e) {
+      this.docIdType = e.target.selectedOptions[0].dataset.name;
     }
   },
   mounted() {

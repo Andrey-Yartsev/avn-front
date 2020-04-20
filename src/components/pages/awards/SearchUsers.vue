@@ -16,7 +16,13 @@
       <div class="username-group">
         <div class="user__name">
           <div class="name">{{ v.name }}</div>
-          <span v-if="v.isVerified" class="verified-user icn-item"></span>
+          <span
+            class="verified-user icn-item"
+            :class="{
+              fullyMonetized: v.canEarn && v.canPayoutsRequest
+            }"
+            v-if="v.isVerified || (v.canEarn && v.canPayoutsRequest)"
+          ></span>
         </div>
         <span class="user-login reset-ml">{{ v.username }}</span>
       </div>

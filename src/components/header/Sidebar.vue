@@ -26,7 +26,12 @@
               }}</router-link>
               <span
                 class="verified-user icn-item"
-                v-if="user.isVerified"
+                :class="{
+                  fullyMonetized: user.canEarn && user.canPayoutsRequest
+                }"
+                v-if="
+                  user.isVerified || (user.canEarn && user.canPayoutsRequest)
+                "
               ></span>
             </div>
             <div class="user-menu-login user-login reset-ml">

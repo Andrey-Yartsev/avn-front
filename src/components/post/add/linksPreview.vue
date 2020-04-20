@@ -1,10 +1,6 @@
 <template>
   <div v-if="previews.length" class="linksPreview">
-    <div
-      v-for="(preview, index) in previews"
-      :key="index + preview.id"
-      class="preview"
-    >
+    <div v-for="preview in previews" :key="preview.thumb" class="preview">
       <div class="image">
         <img :src="preview.thumb" alt="link image" />
       </div>
@@ -58,9 +54,8 @@ export default {
         this.$store
           .dispatch("profile/media/getMediaForPreview", productId)
           .then(res => {
-            const { title } = res;
-            const thumb = res.media.thumb.source;
-            this.previews.push({ title, thumb, id: productId });
+            const { title, thumb } = res;
+            this.previews.push({ title, thumb });
           })
           .catch(err => {
             console.log(err);

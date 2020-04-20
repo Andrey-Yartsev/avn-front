@@ -39,17 +39,17 @@
           v-if="!media.canView"
           class="locked-picture icn-item icn-pos_center"
         >
+          <div v-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <img
-            v-if="media.type === 'video'"
+            v-else
             class="locked"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <div v-else-if="media.type === 'audio'" class="audioPreview">
-            <img src="/static/img/volume.svg" />
-            <audio controls controlsList="nodownload" :src="media.src.source" />
-          </div>
           <div class="statusWrapper contentCenter">
             <span
               v-if="post.pinned"
@@ -72,16 +72,16 @@
           </div>
         </div>
         <template v-else>
+          <div v-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <img
-            v-if="media.type === 'video'"
+            v-else
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
-          <div v-else-if="media.type === 'audio'" class="audioPreview">
-            <img src="/static/img/volume.svg" />
-            <audio controls controlsList="nodownload" :src="media.src.source" />
-          </div>
           <template v-if="isPrivate">
             <div class="statusWrapper top">
               <span v-if="post.active" class="mediaStatus isActive">
@@ -289,14 +289,14 @@ export default {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch("global/flashToast", {
-            text: "You should add card in payment settings",
-            type: "warning"
-          });
-          this.$router.push("/settings/payments");
-          return;
-        }
+        // if (!this.user.isPaymentCardConnected) {
+        //   this.$store.dispatch("global/flashToast", {
+        //     text: "You should add card in payment settings",
+        //     type: "warning"
+        //   });
+        //   this.$router.push("/settings/payments");
+        //   return;
+        // }
 
         this.$store.dispatch("modal/show", {
           name: "mediaPayConfirm",

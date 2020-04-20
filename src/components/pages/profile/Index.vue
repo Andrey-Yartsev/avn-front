@@ -23,7 +23,13 @@
             <span class="name">{{ profile.name }}</span>
             <span
               class="verified-user icn-item"
-              v-if="profile.isVerified"
+              :class="{
+                fullyMonetized: profile.canEarn && profile.canPayoutsRequest
+              }"
+              v-if="
+                profile.isVerified ||
+                  (profile.canEarn && profile.canPayoutsRequest)
+              "
             ></span>
             <div class="block-indicator" v-if="user && profile.isBlocked">
               <span class="icn-item icn-block"></span>
@@ -241,11 +247,19 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
+import TipAuto from "@/mixins/tipAuto";
 
 export default {
   name: "ProfileHome",
 
-  mixins: [InfinityScrollMixin, UserMixin, FileUpload, Wsp, Visibility],
+  mixins: [
+    InfinityScrollMixin,
+    UserMixin,
+    FileUpload,
+    Wsp,
+    Visibility,
+    TipAuto
+  ],
 
   components: {
     Loader,
@@ -514,14 +528,14 @@ export default {
           return;
         }
 
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch("global/flashToast", {
-            text: "You should add card in payment settings",
-            type: "warning"
-          });
-          this.$router.push("/settings/payments");
-          return;
-        }
+        // if (!this.user.isPaymentCardConnected) {
+        //   this.$store.dispatch("global/flashToast", {
+        //     text: "You should add card in payment settings",
+        //     type: "warning"
+        //   });
+        //   this.$router.push("/settings/payments");
+        //   return;
+        // }
 
         this.$store.dispatch("modal/show", {
           name: "buySnapchatConfirm",

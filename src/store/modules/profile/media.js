@@ -12,6 +12,7 @@ const initState = {
   limit: fetchLimit,
   allDataReceived: false,
   preloadedMedias: [],
+  mediaCategories: null,
   separateMedia: null
 };
 
@@ -70,13 +71,14 @@ const mutations = {
     }
   },
   updateMediaSrc(state, data) {
+    const isAudio = !data.width && !data.height;
     state.media = state.media.map(item => {
       if (item.productId == data.id) {
         return {
           ...item,
           media: {
             ...item.media,
-            type: "video",
+            type: isAudio ? "audio" : "video",
             duration: data.duration,
             src: {
               source: data.url,
@@ -107,6 +109,18 @@ const mutations = {
       return item;
     });
   },
+  setMediaCategories(state, data) {
+    if (data.length) {
+      data.sort((a, b) => {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+      });
+    }
+    const formatedData = data.map(item => ({
+      ...item,
+      name: item.name.replace(/&amp;/g, "&")
+    }));
+    state.mediaCategories = formatedData;
+  },
   setSeparateMedia(state, data) {
     state.separateMedia = data;
   },
@@ -116,12 +130,16 @@ const mutations = {
 };
 
 const actions = {
-  getMedia({ dispatch, commit, state }, { profileId, filter, sort }) {
+  getMedia(
+    { dispatch, commit, state },
+    { profileId, filter, sort, categories }
+  ) {
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset,
       filter,
-      sort
+      sort,
+      categories
     }).then(res => {
       commit("addMedia", res);
       commit("isAllDataRecieved", res.length);
@@ -183,11 +201,32 @@ const actions = {
   updateMediaPreviewSrc({ commit }, data) {
     commit("updateMediaPreviewSrc", data);
   },
+  getMediaCategories({ dispatch, commit }) {
+    return dispatch("_getMediaCategories")
+      .then(res => {
+        commit("setMediaCategories", res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   sendViewStatistics({ dispatch }, productId) {
     dispatch("_sendViewStatistics", productId);
   },
   getMediaForPreview({ dispatch }, productId) {
-    return dispatch("_getMediaItem", { productId });
+    return dispatch("_getMediaItemThumbs", { productId });
+  },
+  generateAccessLink({ dispatch }, productId) {
+    return dispatch("_generateAccessLink", productId);
+  },
+  getFreeAccess({ dispatch }, data) {
+    return dispatch("_getFreeAccess", data);
+  },
+  generateFullAccessLink({ dispatch }) {
+    return dispatch("_generateFullAccessLink");
+  },
+  getFullFreeAccess({ dispatch }, data) {
+    return dispatch("_getFullFreeAccess", data);
   }
 };
 
@@ -208,6 +247,7 @@ createRequestAction({
     options.query.limit = fetchLimit;
     options.query.filter = params.filter;
     options.query.sort = params.sort;
+    options.query.categories = params.categories;
     return options;
   },
   paramsToPath: function(params, path) {
@@ -228,6 +268,33 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{productId}/, params.productId);
+  }
+});
+createRequestAction({
+  requestType: "any",
+  prefix: "_getMediaItemThumbs",
+  apiPath: "media/thumb/{productId}",
+  localError: true,
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{productId}/, params.productId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getMediaCategories",
+  apiPath: "media/categories",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
   }
 });
 
@@ -310,6 +377,68 @@ createRequestAction({
   },
   paramsToPath: function(productId, path) {
     return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_generateAccessLink",
+  apiPath: "media/{productId}/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getFreeAccess",
+  apiPath: "media/{productId}/accessLink",
+  state,
+  mutations,
+  actions,
+  throw400: true,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{productId}/, params.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_generateFullAccessLink",
+  apiPath: "media/accessLink",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getFullFreeAccess",
+  apiPath: "media/accessLink",
+  state,
+  mutations,
+  actions,
+  throw400: true,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 

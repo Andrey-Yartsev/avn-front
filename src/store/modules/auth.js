@@ -177,6 +177,16 @@ const mutations = {
   },
   decrementStoreCount(state) {
     state.user.mediaCount = state.user.mediaCount - 1;
+  },
+  updateCreditBalance(state, data) {
+    state.user.creditBalance = data.creditBalance;
+    state.user.payments.tipsLimit.max = data.tipsLimitMax;
+  },
+  reconnectPaymentCard(state) {
+    state.user.isPaymentCardConnected = false;
+  },
+  newCardToken(state, data) {
+    state.user.paymentGateCustomerCardToken = data;
   }
 };
 
