@@ -175,11 +175,13 @@
                     required
                     v-model="backsideDocRequired"
                     v-validate="'required'"
+                    @change="handleChangeDocIdType"
                   >
                     <option value="" disabled>Select ID Document Type</option>
                     <option
                       v-for="doc of getAllowedDocsOptions"
                       :key="doc.type"
+                      :data-name="doc.type"
                       :value="doc.backsideRequired"
                       >{{ doc.name }}</option
                     >
@@ -457,7 +459,8 @@ export default {
       selfieImageUploading: false,
       abn: "",
       gstRegistered: null,
-      backsideDocRequired: ""
+      backsideDocRequired: "",
+      docIdType: ""
     };
   },
   computed: {
@@ -587,6 +590,7 @@ export default {
         data.personalIdImageBackside = this.personalIdImageBackside;
         data.selfieImage = this.selfieImage;
         data.backsideRequired = this.backsideDocRequired;
+        data.docIdType = this.docIdType;
       }
       this.$store.dispatch("payouts/legal/save", data).then(r => {
         if (!r.type) {
@@ -602,6 +606,9 @@ export default {
           });
         }
       });
+    },
+    handleChangeDocIdType(e) {
+      this.docIdType = e.target.selectedOptions[0].dataset.name;
     }
   },
   mounted() {
