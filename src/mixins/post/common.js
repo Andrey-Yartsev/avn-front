@@ -112,7 +112,9 @@ export default {
       this.$store.dispatch("comments/commentRemove", {
         actionPrefix: this.actionPrefix,
         postId: this.post.id,
-        commentId: comment.id
+        commentId: comment.id,
+        confirmBlockUser: true,
+        author: comment.author
       });
     },
     toggleTipForm() {
