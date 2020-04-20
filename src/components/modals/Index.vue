@@ -52,6 +52,7 @@ import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
+import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
 
 export default {
   components: {
@@ -93,7 +94,8 @@ export default {
     MediaPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
-    ChatAttachmentsModal
+    ChatAttachmentsModal,
+    FreeAccessMediaListModal
   },
   props: {
     hasLayout: {

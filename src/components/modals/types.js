@@ -158,6 +158,10 @@ const modalTypes = [
   {
     storeName: "mediaAccessLink",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "freeAccessMediaList",
+    layoutOnlyModal: true
   }
 ];
 

@@ -30,6 +30,15 @@
           <span class="more-functions__option">Create access link</span>
         </a>
       </li>
+      <li v-if="post.active" class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          @click.prevent="openFreeAccessListModal"
+        >
+          <span class="more-functions__option">Free access list</span>
+        </a>
+      </li>
       <li class="more-functions__item">
         <a
           class="edit more-functions__link"
@@ -40,7 +49,7 @@
           <span class="more-functions__option">Edit {{ mediaType }}</span>
         </a>
       </li>
-      <li class="more-functions__item">
+      <!-- <li class="more-functions__item">
         <a
           class="edit more-functions__link"
           type="button"
@@ -51,7 +60,7 @@
             post.pinned ? `Pinned. Unpin ${mediaType}` : `Pin ${mediaType}`
           }}</span>
         </a>
-      </li>
+      </li> -->
       <li class="more-functions__item">
         <button
           class="deletePost more-functions__link"
@@ -164,44 +173,44 @@ export default {
         `/media/${this.post.author.username}/${this.post.productId}`
       );
     },
-    pinToggle() {
-      this.hide();
-      this.$store
-        .dispatch("profile/media/updateMedia", this.getMediaData(), {
-          root: true
-        })
-        .then(() => {
-          console.log("updated");
-        });
-    },
-    getMediaData() {
-      const {
-        active,
-        title,
-        text,
-        price,
-        free,
-        thumbId,
-        removeVideoPreview,
-        pinned,
-        categories
-      } = this.$props.post;
-      const data = {
-        media: {
-          active,
-          title,
-          text,
-          price,
-          free,
-          thumbId,
-          removeVideoPreview,
-          categories,
-          pinned: !pinned
-        },
-        productId: this.$props.post.productId
-      };
-      return data;
-    },
+    // pinToggle() {
+    //   this.hide();
+    //   this.$store
+    //     .dispatch("profile/media/updateMedia", this.getMediaData(), {
+    //       root: true
+    //     })
+    //     .then(() => {
+    //       console.log("updated");
+    //     });
+    // },
+    // getMediaData() {
+    //   const {
+    //     active,
+    //     title,
+    //     text,
+    //     price,
+    //     free,
+    //     thumbId,
+    //     removeVideoPreview,
+    //     pinned,
+    //     categories
+    //   } = this.$props.post;
+    //   const data = {
+    //     media: {
+    //       active,
+    //       title,
+    //       text,
+    //       price,
+    //       free,
+    //       thumbId,
+    //       removeVideoPreview,
+    //       categories,
+    //       pinned: !pinned
+    //     },
+    //     productId: this.$props.post.productId
+    //   };
+    //   return data;
+    // },
     async deletePost() {
       this.hide();
       this.$store
@@ -232,6 +241,15 @@ export default {
           }
         });
       }
+    },
+    openFreeAccessListModal() {
+      this.hide();
+      this.$store.dispatch("modal/show", {
+        name: "freeAccessMediaList",
+        data: {
+          post: this.post
+        }
+      });
     }
   }
 };
