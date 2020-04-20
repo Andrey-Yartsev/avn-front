@@ -2,6 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
+import Store from "@/store";
 
 const messagesLimit = 50;
 const chatsLimit = 20;
@@ -23,7 +24,8 @@ const state = {
   fontSize: 14,
   blockNewMessagesHandling: false,
   showMarkAsReedForContacts: false,
-  unreadChatsCount: 0
+  unreadChatsCount: 0,
+  chatsFilter: "all"
 };
 
 let markAsReadId = 0;
@@ -498,6 +500,9 @@ const mutations = {
   },
   decrementUnreadChatsCount(state) {
     state.unreadChatsCount--;
+  },
+  setChatsFilter(state, filter) {
+    state.chatsFilter = filter;
   }
 };
 
@@ -547,9 +552,11 @@ createRequestAction({
     method: "GET"
   },
   paramsToOptions: function(params, options) {
+    const filter = Store.state.chat.chatsFilter;
     options.query = {
       limit: chatsLimit,
-      offset: params
+      offset: params,
+      filter
     };
     return options;
   }

@@ -88,6 +88,7 @@
               :tipId="`s${this.$store.state.modal.stream.data.stream.id}`"
               class="tip-form_viewer"
               :needLgClassName="true"
+              :depositOption="true"
             />
           </div>
         </div>

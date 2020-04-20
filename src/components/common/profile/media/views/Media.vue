@@ -51,6 +51,8 @@
 <script>
 import Locked from "@/components/common/profile/media/content/Locked";
 import Video from "@/components/common/profile/media/content/Video";
+import Audio from "@/components/common/profile/media/content/Audio";
+import LockedAudio from "@/components/common/profile/media/content/LockedAudio";
 import Loader from "@/components/common/Loader";
 import VideoLinked from "@/components/common/profile/media/content/VideoLinked";
 
@@ -60,7 +62,9 @@ export default {
     Locked,
     Video,
     VideoLinked,
-    Loader
+    Loader,
+    Audio,
+    LockedAudio
   },
   props: {
     medias: {
@@ -112,10 +116,12 @@ export default {
     getMediaViewType({ canView, type }) {
       const LinkedPrefix = this.shouldHasLink ? "Linked" : "";
 
+      if (!canView && type === "audio") return "LockedAudio";
       if (!canView) return "Locked";
       if (type === "gif") return `Gif${LinkedPrefix}`;
       if (type === "photo") return `Photo${LinkedPrefix}`;
       if (type === "video") return `Video${LinkedPrefix}`;
+      if (type === "audio") return `Audio`;
 
       return null;
     }
@@ -126,6 +132,9 @@ export default {
 <style lang="scss" scoped>
 .media {
   flex-grow: 2 !important;
+  &:after {
+    display: none !important;
+  }
   &.maxHeight {
     max-height: 350px;
   }

@@ -11,19 +11,19 @@ export default {
   },
   methods: {
     _pay(payload, _onSuccess) {
-      if (!this.user.isPaymentCardConnected) {
-        this.$store.dispatch("global/flashToast", {
-          text: "You should add card in payment settings",
-          type: "warning"
-        });
-        this.$store.commit(
-          "payment/card/setAfterAddCardRedirect",
-          this.$route.path
-        );
-        Router.push("/settings/payments");
-        return;
-      }
-      this.$store.commit("profile/home/resetOnPageAction");
+      // if (!this.user.isPaymentCardConnected) {
+      //   this.$store.dispatch("global/flashToast", {
+      //     text: "You should add card in payment settings",
+      //     type: "warning"
+      //   });
+      //   this.$store.commit(
+      //     "payment/card/setAfterAddCardRedirect",
+      //     this.$route.path
+      //   );
+      //   Router.push("/settings/payments");
+      //   return;
+      // }
+      // this.$store.commit("profile/home/resetOnPageAction");
       this.progress = true;
       const onSuccess = () => {
         this.progress = false;
@@ -56,6 +56,18 @@ export default {
         });
     },
     _error(error) {
+      if (!this.user.isPaymentCardConnected) {
+        this.$store.dispatch("global/flashToast", {
+          text: "You should add card in payment settings",
+          type: "warning"
+        });
+        this.$store.commit(
+          "payment/card/setAfterAddCardRedirect",
+          this.$route.path
+        );
+        Router.push("/settings/payments");
+        return;
+      }
       this.progress = false;
       this.$store.dispatch("global/flashToast", {
         text: error.message,

@@ -137,6 +137,17 @@
       padding-left: 15px;
     }
   }
+  // .tipLinkExample {
+  //   text-align: center;
+  //   padding-bottom: 17px;
+  //   color: $secondary-color;
+  // }
+  .linkUrlContainer {
+    align-items: center;
+    .linkUrl {
+      color: $secondary-color;
+    }
+  }
 }
 
 .photo {

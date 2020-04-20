@@ -1,6 +1,11 @@
 <template>
-  <div :class="['addFileView', { uploading: isSaving }]">
-    <span class="filename" :class="{ 'error-upload': media.uploadError }">
+  <div :class="['addFileView', { uploading: isSaving }, { audio: isAudio }]">
+    <AudioPreview v-if="isAudio" :media="media" />
+    <span
+      v-else
+      class="filename"
+      :class="{ 'error-upload': media.uploadError }"
+    >
       <img v-if="hasPreview" :src="preview" :title="media.userFileName" />
       <span v-else>{{ media.userFileName }}</span>
       <span
@@ -33,6 +38,7 @@
 
 <script>
 import Loader from "@/components/common/Loader";
+import AudioPreview from "./AudioPreview";
 
 export default {
   name: "MediaPreview",
@@ -51,7 +57,8 @@ export default {
     }
   },
   components: {
-    Loader
+    Loader,
+    AudioPreview
   },
   computed: {
     preview() {
@@ -70,6 +77,9 @@ export default {
     },
     showLoader() {
       return !this.media.uploadError && !this.media.processId;
+    },
+    isAudio() {
+      return this.media.mediaType === "audio";
     }
   },
   methods: {
@@ -79,3 +89,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.audio {
+  width: 100%;
+  overflow: initial;
+}
+</style>

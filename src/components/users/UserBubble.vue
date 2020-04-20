@@ -52,7 +52,13 @@
                 }}</a>
                 <span
                   class="verified-user icn-item"
-                  v-if="profile.isVerified"
+                  :class="{
+                    fullyMonetized: profile.canEarn && profile.canPayoutsRequest
+                  }"
+                  v-if="
+                    profile.isVerified ||
+                      (profile.canEarn && profile.canPayoutsRequest)
+                  "
                 ></span>
                 <!-- <span class="follow-link">Follow</span> -->
               </div>

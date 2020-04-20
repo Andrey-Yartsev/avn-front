@@ -39,7 +39,12 @@
           v-if="!media.canView"
           class="locked-picture icn-item icn-pos_center"
         >
+          <div v-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <img
+            v-else
             class="locked"
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
@@ -58,19 +63,27 @@
             <span class="mediaStatus duration">
               <span>{{ getVideoDuration(post.media.duration) }}</span>
             </span>
-            <span class="mediaStatus duration">
+            <span
+              v-if="post.media.type === 'video'"
+              class="mediaStatus duration"
+            >
               <span>{{ getVideoResolution }}</span>
             </span>
           </div>
         </div>
         <template v-else>
+          <div v-if="media.type === 'audio'" class="audioPreview">
+            <img src="/static/img/volume.svg" />
+            <audio controls controlsList="nodownload" :src="media.src.source" />
+          </div>
           <img
+            v-else
             :src="media.thumb.source"
             @contextmenu.prevent="() => false"
             @dragstart.prevent="() => false"
           />
           <template v-if="isPrivate">
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span v-if="post.active" class="mediaStatus isActive">
                 On Sale
               </span>
@@ -93,13 +106,16 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
           </template>
           <template v-else>
-            <div class="statusWrapper">
+            <div class="statusWrapper top">
               <span
                 v-if="post.pinned"
                 class="icn-pin icn-item icn-size_md"
@@ -112,7 +128,10 @@
               <span class="mediaStatus duration">
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoResolution }}</span>
               </span>
             </div>
@@ -270,14 +289,14 @@ export default {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch("global/flashToast", {
-            text: "You should add card in payment settings",
-            type: "warning"
-          });
-          this.$router.push("/settings/payments");
-          return;
-        }
+        // if (!this.user.isPaymentCardConnected) {
+        //   this.$store.dispatch("global/flashToast", {
+        //     text: "You should add card in payment settings",
+        //     type: "warning"
+        //   });
+        //   this.$router.push("/settings/payments");
+        //   return;
+        // }
 
         this.$store.dispatch("modal/show", {
           name: "mediaPayConfirm",
@@ -333,6 +352,9 @@ export default {
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.644);
   padding: 0 10px;
+  &.top {
+    top: 0;
+  }
   &.bottom {
     bottom: 0;
   }
@@ -368,5 +390,22 @@ export default {
 }
 .contentCenter {
   justify-content: center;
+}
+.audioPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  audio {
+    width: 100%;
+  }
 }
 </style>

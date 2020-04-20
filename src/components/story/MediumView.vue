@@ -29,8 +29,16 @@
         <div class="wrap-name">
           <div class="name">{{ post.user.name }}</div>
           <span
-            v-if="post.user && post.user.isVerified"
             class="verified-user icn-item"
+            :class="{
+              fullyMonetized:
+                post.user && post.user.canEarn && post.user.canPayoutsRequest
+            }"
+            v-if="
+              post.user &&
+                (post.user.isVerified ||
+                  (post.user.canEarn && post.user.canPayoutsRequest))
+            "
           ></span>
         </div>
         <div class="user-login reset-ml">{{ post.user.username }}</div>

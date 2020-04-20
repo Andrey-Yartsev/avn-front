@@ -22,6 +22,11 @@ export default {
       return this.$store.state.mediaPage.media;
     }
   },
+  mounted() {
+    this.$store.dispatch("profile/media/getMediaCategories", null, {
+      root: true
+    });
+  },
   components: {
     MediaLarge
   }

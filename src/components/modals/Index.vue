@@ -35,6 +35,7 @@ import SubscribeModal from "@/components/subscription/SubscribeModal";
 import SubscriptionConfirmModal from "@/components/subscription/Confirm";
 import ConfirmModal from "@/components/modal/Confirm.vue";
 import ImageModal from "@/components/modal/Image.vue";
+import AudioModal from "@/components/modal/Audio.vue";
 import ImageSwiperModal from "@/components/modal/ImageSwiper.vue";
 import VideoSwiperModal from "@/components/modal/VideoSwiper.vue";
 import TrialConfirmModal from "@/components/pages/settings/trials/TrialConfirmModal.vue";
@@ -48,6 +49,7 @@ import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
 import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
+import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 
 export default {
@@ -73,6 +75,7 @@ export default {
     ChooseHighlightModal,
     ConfirmModal,
     ImageModal,
+    AudioModal,
     ImageSwiperModal,
     VideoSwiperModal,
     TrialConfirmModal,
@@ -87,7 +90,8 @@ export default {
     AddMediaModal,
     EditMediaModal,
     MediaPayConfirmModal,
-    AddRedirectLinkModal
+    AddRedirectLinkModal,
+    MediaAccessLinkModal
   },
   props: {
     hasLayout: {

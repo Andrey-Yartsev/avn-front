@@ -16,7 +16,18 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="copyLink"
         >
-          <span class="more-functions__option">Copy link to video</span>
+          <span class="more-functions__option"
+            >Copy link to {{ mediaType }}</span
+          >
+        </a>
+      </li>
+      <li v-if="post.active" class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          @click.prevent="generateAccessLink"
+        >
+          <span class="more-functions__option">Create access link</span>
         </a>
       </li>
       <li class="more-functions__item">
@@ -26,7 +37,7 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="editPost"
         >
-          <span class="more-functions__option">Edit video</span>
+          <span class="more-functions__option">Edit {{ mediaType }}</span>
         </a>
       </li>
       <li class="more-functions__item">
@@ -37,7 +48,7 @@
           @click.prevent="pinToggle"
         >
           <span class="more-functions__option">{{
-            post.pinned ? "Pinned. Unpin video" : "Pin video"
+            post.pinned ? `Pinned. Unpin ${mediaType}` : `Pin ${mediaType}`
           }}</span>
         </a>
       </li>
@@ -47,7 +58,7 @@
           type="button"
           @click="deletePost"
         >
-          <span class="more-functions__option">Delete video</span>
+          <span class="more-functions__option">Delete {{ mediaType }}</span>
         </button>
       </li>
     </ul>
@@ -59,7 +70,9 @@
           :href="'/post/edit/' + post.id"
           @click.prevent="copyLink"
         >
-          <span class="more-functions__option">Copy link to video</span>
+          <span class="more-functions__option"
+            >Copy link to {{ mediaType }}</span
+          >
         </a>
       </li>
     </ul>
@@ -99,6 +112,9 @@ export default {
     },
     userId() {
       return this.post.author.id;
+    },
+    mediaType() {
+      return this.post.media.type;
     }
   },
   methods: {
@@ -113,6 +129,32 @@ export default {
           }
         );
       });
+    },
+    generateAccessLink() {
+      this.hide();
+      this.$store
+        .dispatch("profile/media/generateAccessLink", this.post.productId, {
+          root: true
+        })
+        .then(res => {
+          const urlString = `${window.location.origin}/media/${
+            this.$store.state.auth.user.username
+          }/${this.post.productId}/${res.accessToken}`;
+          this.$store.dispatch("modal/show", {
+            name: "mediaAccessLink",
+            data: {
+              text: "Share this one-off link to give free access to the clip",
+              linkUrl: urlString
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     },
     getVideoUrl() {
       const { protocol, port, hostname } = window.location;
@@ -141,7 +183,8 @@ export default {
         free,
         thumbId,
         removeVideoPreview,
-        pinned
+        pinned,
+        categories
       } = this.$props.post;
       const data = {
         media: {
@@ -152,6 +195,7 @@ export default {
           free,
           thumbId,
           removeVideoPreview,
+          categories,
           pinned: !pinned
         },
         productId: this.$props.post.productId

@@ -50,7 +50,7 @@
         </div>
       </div>
     </form>
-
+    <AutoReloadDeposit />
     <Transactions />
   </div>
 </template>
@@ -58,6 +58,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import Transactions from "./Transactions";
+import AutoReloadDeposit from "./AutoReloadDeposit";
 import PayAction from "./payAction";
 import userMixin from "@/mixins/user";
 
@@ -68,7 +69,8 @@ export default {
   mixins: [PayAction, userMixin],
   components: {
     Loader,
-    Transactions
+    Transactions,
+    AutoReloadDeposit
   },
   data() {
     return {
@@ -87,7 +89,6 @@ export default {
         () => {
           this.amount = "";
           this.$store.dispatch("credits/transactions/fetch");
-          this.$store.dispatch("profile/fetchSilent");
           this.$store.dispatch("global/flashToast", {
             text: "Deposit is made successfully"
           });

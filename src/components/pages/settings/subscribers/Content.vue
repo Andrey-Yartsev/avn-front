@@ -3,6 +3,7 @@
     <h1 class="form-title settings-title">
       Subscribers
     </h1>
+    <SubscribeMessage />
     <div
       class="subscribers-filters"
       :class="{ 'shadow-block': $mq === 'mobile' }"
@@ -121,6 +122,7 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
 import IntersectionObserver from "@/mixins/intersectionObserver";
+import SubscribeMessage from "./SubscribeMessage";
 
 export default {
   name: "Subscribers",
@@ -135,7 +137,8 @@ export default {
     FollowersCounter,
     UserDropdown,
     ProfileActions,
-    Footer
+    Footer,
+    SubscribeMessage
   },
 
   data: () => ({

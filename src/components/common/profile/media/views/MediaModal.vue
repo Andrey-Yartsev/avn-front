@@ -73,6 +73,11 @@ export default {
       const existedPost = this.$store.state.profile.media.media.find(
         item => item.productId === this.postId
       );
+      if (!this.$store.state.profile.media.mediaCategories) {
+        this.$store.dispatch("profile/media/getMediaCategories", null, {
+          root: true
+        });
+      }
       if (!existedPost) {
         this.$store.dispatch(
           "profile/media/getMediaItemForModal",

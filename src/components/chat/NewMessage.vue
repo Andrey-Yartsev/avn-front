@@ -137,7 +137,10 @@
                   <span class="name">{{ v.name }}</span>
                   <span
                     class="verified-user icn-item"
-                    v-if="v.isVerified"
+                    :class="{
+                      fullyMonetized: v.canEarn && v.canPayoutsRequest
+                    }"
+                    v-if="v.isVerified || (v.canEarn && v.canPayoutsRequest)"
                   ></span>
                 </div>
                 <div class="user-login reset-ml">
@@ -188,7 +191,14 @@
               }}</router-link>
               <span
                 class="verified-user icn-item"
-                v-if="selectedUser.isVerified"
+                :class="{
+                  fullyMonetized:
+                    selectedUser.canEarn && selectedUser.canPayoutsRequest
+                }"
+                v-if="
+                  selectedUser.isVerified ||
+                    (selectedUser.canEarn && selectedUser.canPayoutsRequest)
+                "
               ></span>
               <span class="user-login">
                 <router-link

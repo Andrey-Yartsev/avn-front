@@ -37,6 +37,31 @@ export const routes = [
   },
   {
     beforeEnter: Profile.init,
+    path: "/:username/one-click/tip/:tipAmount",
+    redirect: {
+      name: "ProfilePage",
+      component: () =>
+        import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
+      meta: route => ({
+        cssName: "userProfile",
+        profile: true,
+        tipAmount: route.params.tipAmount
+      })
+    }
+  },
+  {
+    beforeEnter: Profile.media,
+    path: "/:username/media/:accessToken",
+    name: "ProfilePageAccessToken",
+    component: () =>
+      import(/* webpackChunkName: "ProfilePage" */ "@/components/pages/profile/NotFoundWrapper"),
+    meta: {
+      cssName: "userProfile",
+      profile: true
+    }
+  },
+  {
+    beforeEnter: Profile.init,
     path: "/:username/:page?",
     name: "ProfilePage",
     component: () =>

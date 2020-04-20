@@ -1179,8 +1179,43 @@
       }
     }
 
+    &.has-unread {
+      .contactsListContent {
+        &.ps {
+          .popup & {
+            @include media-breakpoint-up($desktop-breakpoint) {
+              top: 40px;
+            }
+          }
+        }
+        @include media-breakpoint-down($desktop-breakpoint) {
+          top: 40px;
+        }
+      }
+    }
+
     .no-chats & {
       display: none;
+    }
+
+    .filter-tab {
+      border-bottom: 1px solid rgba($gray, 0.3);
+      text-align: center;
+      position: absolute;
+      width: 100%;
+
+      a {
+        color: $primary-color;
+        padding: 10px 10px 5px 10px;
+        display: inline-block;
+        box-sizing: border-box;
+        border-bottom: 3px solid transparent;
+
+        &.selected {
+          border-color: $primary-color-darken;
+          color: $primary-color-darken;
+        }
+      }
     }
   }
 }

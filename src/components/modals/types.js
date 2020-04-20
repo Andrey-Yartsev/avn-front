@@ -92,6 +92,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "audio",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "imageSwiper",
     layoutOnlyModal: true
   },
@@ -145,6 +149,10 @@ const modalTypes = [
   },
   {
     storeName: "addRedirectLink",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "mediaAccessLink",
     layoutOnlyModal: true
   }
 ];

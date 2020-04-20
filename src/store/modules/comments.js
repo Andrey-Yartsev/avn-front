@@ -5,19 +5,41 @@ const state = {};
 const mutations = {};
 
 const actions = {
-  commentRemove({ dispatch }, { actionPrefix, postId, commentId }) {
+  commentRemove(
+    { dispatch },
+    { actionPrefix, postId, commentId, confirmBlockUser, author }
+  ) {
     dispatch(
       "modal/show",
       {
         name: "confirm",
         data: {
           title: "Remove comment",
-          success: () =>
+          success: () => {
             dispatch("commentRemoving", {
               actionPrefix,
               postId,
               commentId
-            })
+            });
+            if (confirmBlockUser && author && !author.isBlocked) {
+              setTimeout(() => {
+                dispatch(
+                  "modal/show",
+                  {
+                    name: "confirm",
+                    data: {
+                      title: "Block user",
+                      text: "Do you want to block this user?",
+                      success: () => {
+                        dispatch("user/block", author.id, { root: true });
+                      }
+                    }
+                  },
+                  { root: true }
+                );
+              }, 500);
+            }
+          }
         }
       },
       { root: true }

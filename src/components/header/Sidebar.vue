@@ -26,7 +26,12 @@
               }}</router-link>
               <span
                 class="verified-user icn-item"
-                v-if="user.isVerified"
+                :class="{
+                  fullyMonetized: user.canEarn && user.canPayoutsRequest
+                }"
+                v-if="
+                  user.isVerified || (user.canEarn && user.canPayoutsRequest)
+                "
               ></span>
             </div>
             <div class="user-menu-login user-login reset-ml">
@@ -80,6 +85,12 @@
                 class="user-menu-item user-menu-item__subscribers icn-item"
                 to="/settings/subscribers"
                 >Subscribers
+              </router-link>
+              <router-link
+                v-if="user.isPerformer && user.storeEnabled"
+                class="user-menu-item user-menu-item__clipStore icn-item"
+                :to="'/' + user.username + '/media'"
+                >Clip Store
               </router-link>
               <router-link
                 v-if="user.canEarn"

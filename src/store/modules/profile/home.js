@@ -20,7 +20,8 @@ const initState = {
   postPinCount: 0,
   onPageAction: null,
   onLoginAction: null,
-  beforeLoginProfileUsername: null
+  beforeLoginProfileUsername: null,
+  onTipRouteAction: null
 };
 
 const state = { ...initState };
@@ -68,6 +69,12 @@ const mutations = {
   },
   addPost(state, payload) {
     state.posts.push(payload);
+  },
+  setOnTipRouteAction(state, data) {
+    state.onTipRouteAction = { ...data };
+  },
+  resetOnTipRouteAction(state) {
+    state.onTipRouteAction = null;
   }
 };
 

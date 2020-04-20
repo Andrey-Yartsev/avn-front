@@ -37,7 +37,16 @@
           <span class="name">
             {{ profile.name }}
           </span>
-          <span class="verified-user icn-item" v-if="profile.isVerified"></span>
+          <span
+            class="verified-user icn-item"
+            :class="{
+              fullyMonetized: profile.canEarn && profile.canPayoutsRequest
+            }"
+            v-if="
+              profile.isVerified ||
+                (profile.canEarn && profile.canPayoutsRequest)
+            "
+          ></span>
           <div class="block-indicator" v-if="user && profile.isBlocked">
             <span class="icn-block icn-item"></span>
           </div>

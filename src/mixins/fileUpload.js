@@ -11,19 +11,22 @@ import { logDebug } from "@/utils/logging";
 const messages = {
   photo: "Photo limit is reached",
   video: "Video limit is reached",
-  gif: "Gif limit is reached"
+  gif: "Gif limit is reached",
+  audio: "Audio limit is reached"
 };
 
 const inputAcceptTypes = {
   gif: ["gif"],
   photo: ["jpg", "jpeg", "png"],
-  video: ["mp4", "mov", "moov", "m4v", "mpg", "mpeg", "wmv", "avi"]
+  video: ["mp4", "mov", "moov", "m4v", "mpg", "mpeg", "wmv", "avi"],
+  audio: ["mp3", "ogg", "wav"]
 };
 
 const limits = {
   video: 1,
   gif: 1,
-  photo: 5
+  photo: 5,
+  audio: 1
 };
 
 export default {
@@ -44,7 +47,7 @@ export default {
     getAcceptedFormats() {
       return this.$props.videosOnly
         ? ".mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi"
-        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi";
+        : ".jpg,.jpeg,.gif,.png,.mp4,.mov,.moov,.m4v,.mpg,.mpeg,.wmv,.avi,.mp3,.ogg,.wav";
     }
   },
 
@@ -93,7 +96,8 @@ export default {
         const filtered = {
           photo: addedFiles.filter(file => file.mediaType === "photo"),
           video: addedFiles.filter(file => file.mediaType === "video"),
-          gif: addedFiles.filter(file => file.mediaType === "gif")
+          gif: addedFiles.filter(file => file.mediaType === "gif"),
+          audio: addedFiles.filter(file => file.mediaType === "audio")
         };
 
         e.target.value = "";
@@ -259,6 +263,16 @@ export default {
               this.$store.dispatch("global/flashToast", {
                 text: "Error while uploading",
                 type: "error"
+              });
+              logDebug({
+                logger: "S3Uploader",
+                message: "Upload error",
+                logData: {
+                  name: file.name,
+                  type: file.type,
+                  size: file.size,
+                  error
+                }
               });
               if (error.code === "RequestAbortedError") {
                 logDebug({

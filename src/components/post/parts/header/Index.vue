@@ -1,12 +1,7 @@
 <template>
   <div class="post-header" :class="{ wrap: isReposted }">
     <div v-if="isReposted" class="retweetMark">
-      <img
-        class="retweetMark__icon"
-        width="16"
-        height="16"
-        src="/static/img/retweet.svg"
-      />
+      <span class="btn-icon icn-item icn-size_md icn-retweet" />
       Reposted
     </div>
     <router-link
@@ -27,9 +22,15 @@
       @mouseout="hideBubble"
       >{{ postUser.name }}</a
     >
-    <template v-if="postUser.isVerified">
-      <span class="verified-user icn-item"></span>
-    </template>
+    <span
+      class="verified-user icn-item"
+      :class="{
+        fullyMonetized: postUser.canEarn && postUser.canPayoutsRequest
+      }"
+      v-if="
+        postUser.isVerified || (postUser.canEarn && postUser.canPayoutsRequest)
+      "
+    ></span>
     <span class="user-login">
       <a
         :href="'/' + postUser.username"

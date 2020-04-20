@@ -66,6 +66,7 @@ export const getMediaFileMeta = file => {
   const isVideo = file.type.startsWith("video");
   const isGif = file.type.startsWith("image/gif");
   const isImage = file.type.startsWith("image");
+  const isAudio = file.type.startsWith("audio");
 
   let mediaType;
 
@@ -78,6 +79,9 @@ export const getMediaFileMeta = file => {
       break;
     case isImage:
       mediaType = "photo";
+      break;
+    case isAudio:
+      mediaType = "audio";
       break;
   }
 

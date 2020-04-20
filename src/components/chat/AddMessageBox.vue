@@ -225,7 +225,8 @@ export default {
       limits: {
         video: 3,
         gif: 1,
-        photo: 5
+        photo: 5,
+        audio: 1
       }
     };
   },
@@ -260,8 +261,8 @@ export default {
       return this.$store.state.tip.funded;
     },
     allMediaTypes() {
-      const { photo, video } = this.inputAcceptTypes;
-      return [...photo, ...video];
+      const { photo, video, audio } = this.inputAcceptTypes;
+      return [...photo, ...video, ...audio];
     },
     isMuted() {
       if (!this.withUser) {

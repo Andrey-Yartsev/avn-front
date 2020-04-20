@@ -111,7 +111,12 @@
               <span class="name">{{ user.name }}</span>
               <span
                 class="verified-user icn-item"
-                v-if="user.isVerified"
+                :class="{
+                  fullyMonetized: user.canEarn && user.canPayoutsRequest
+                }"
+                v-if="
+                  user.isVerified || (user.canEarn && user.canPayoutsRequest)
+                "
               ></span>
             </div>
             <span class="user-login reset-ml"
@@ -274,6 +279,13 @@ export default {
         name: "obs",
         title: "OBS"
       });
+      if (this.user.storeEnabled && this.user.isPerformer) {
+        items.push({
+          name: "clipStore",
+          title: "Clip Store",
+          path: `/${this.user.username}/media`
+        });
+      }
       if (this.user && this.user.isMakePayment) {
         items.push({
           name: "magazine",

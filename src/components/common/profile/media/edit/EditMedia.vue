@@ -67,7 +67,7 @@
             :disabled="saving"
           ></textarea>
         </vue-tribute>
-        <div class="post-attachment">
+        <div class="post-attachment" v-if="post.media.type === 'video'">
           <div class="block-thumbnails" v-if="!customThumbAdded">
             <div class="block-thumbnails__title">Choose cover</div>
             <div class="addFileCollectionView thumbList">
@@ -123,6 +123,53 @@
       <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
+            <div class="categories" v-if="mediaCategories.length">
+              <div class="form-group-inner">
+                <span
+                  class="categories__label"
+                  :class="{ mobile: $mq === 'mobile' }"
+                  >Categories:</span
+                >
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field">
+                    <multiselect
+                      v-model="media.categories"
+                      :options="mediaCategories"
+                      :max="2"
+                      :multiple="true"
+                      :close-on-select="true"
+                      :clear-on-select="false"
+                      :preserve-search="true"
+                      placeholder="Add category"
+                      label="name"
+                      track-by="name"
+                      :taggable="true"
+                    >
+                    </multiselect>
+                  </span>
+                </span>
+              </div>
+              <!-- <div>Categories:</div>
+              <div class="categoriesContainer">
+                <template v-for="category in mediaCategories">
+                  <label class="form-group-inner" :key="category.id">
+                    <div class="checkbox-wrapper">
+                      <input
+                        type="checkbox"
+                        :id="category.id"
+                        :value="category.id"
+                        :disabled="
+                          isMaxCategoriesLimitSelected &&
+                            media.categories.indexOf(Number(category.id)) === -1
+                        "
+                        v-model="media.categories"
+                      />
+                      <span class="label icn-item">{{ category.name }}</span>
+                    </div>
+                  </label>
+                </template>
+              </div> -->
+            </div>
             <div class="btn-post">
               <div>Price</div>
               <div
@@ -183,6 +230,7 @@
             />
 
             <div
+              v-if="post.media.type === 'video'"
               :class="[
                 'more-functions',
                 { open: dropdownOpened, previewDropdown: $mq === 'desktop' }
@@ -242,6 +290,8 @@ import FileUpload from "@/mixins/fileUpload";
 import MediaPreview from "@/components/common/MediaPreview";
 import Draggable from "vuedraggable";
 import ThumbDropdown from "./ThumbDropdown.vue";
+import Multiselect from "vue-multiselect";
+// import mediaCategories from "@/mock/mediaCategories";
 
 Settings.defaultLocale = "en";
 
@@ -256,11 +306,12 @@ const InitialState = {
     thumbId: null,
     thumbs: [],
     removeVideoPreview: false,
-    pinned: false
+    pinned: false,
+    categories: []
   },
   saving: false,
+  defaultPriceLimit: 500,
   withoutWatermark: false,
-  maxPrice: 500,
   dropdownOpened: false,
   allowMultipleFileTypes: true
 };
@@ -278,7 +329,8 @@ export default {
     VueTribute,
     MediaPreview,
     Draggable,
-    ThumbDropdown
+    ThumbDropdown,
+    Multiselect
   },
   props: {
     initialExpanded: {
@@ -328,9 +380,14 @@ export default {
         String(this.$props.post.price) !== String(this.media.price) ||
         this.$props.post.media.thumbId !== this.media.thumbId ||
         this.preloadedPhotoMedias.length ||
+        [].join(",") !== this.media.categories.join(",") ||
         this.preloadedVideoMedias.length ||
-        this.media.removeVideoPreview
+        this.media.removeVideoPreview ||
+        this.$props.post.categories.length !== this.media.categories.length
       );
+    },
+    isMaxCategoriesLimitSelected() {
+      return this.media.categories.length === 2;
     },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
@@ -367,6 +424,19 @@ export default {
         return [];
       }
       return this.preloadedMedias.filter(item => item.mediaType === "video");
+    },
+    mediaCategories() {
+      return this.$store.state.profile.media.mediaCategories;
+    },
+    maxPrice() {
+      if (
+        this.user.payments &&
+        this.user.payments.tipsLimit &&
+        this.user.payments.tipsLimit.max
+      ) {
+        return this.user.payments.tipsLimit.max;
+      }
+      return this.defaultPriceLimit;
     }
   },
   watch: {
@@ -426,7 +496,8 @@ export default {
         price,
         active,
         pinned,
-        media: { thumbs, thumbId }
+        media: { thumbs, thumbId },
+        categories
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -435,7 +506,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
-
+      this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
     },
     clearData() {
@@ -448,15 +519,25 @@ export default {
       this.media.thumbs = [];
       this.media.removeVideoPreview = false;
       this.media.pinned = false;
+      this.media.categories = [];
     },
     saveClickHandler() {
+      if (this.overMaxPrice()) {
+        this.$store.dispatch(
+          "global/flashToast",
+          { text: `Max price limit is $${this.maxPrice}`, type: "error" },
+          {
+            root: true
+          }
+        );
+        return;
+      }
       this.saving = true;
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
           root: true
         })
         .then(() => {
-          console.log("updated");
           this.saving = false;
           this.close();
         });
@@ -470,7 +551,10 @@ export default {
         : undefined;
 
       const data = {
-        media: { ...this.media },
+        media: {
+          ...this.media,
+          categories: this.media.categories.map(item => +item.id)
+        },
         productId: this.$props.post.productId
       };
 
@@ -489,6 +573,26 @@ export default {
     },
     textInput() {
       this.media.text = this.$refs.textarea.value;
+    },
+    overMaxPrice() {
+      return this.media.price > this.maxPrice;
+    },
+    getObjectsFromArray(list) {
+      if (
+        !list ||
+        !list.length ||
+        !this.$store.state.profile.media.mediaCategories
+      ) {
+        return [];
+      }
+      const categoriesObjects = [];
+      list.forEach(item => {
+        const matchedCategory = this.$store.state.profile.media.mediaCategories.find(
+          category => category.id == item
+        );
+        matchedCategory && categoriesObjects.push(matchedCategory);
+      });
+      return categoriesObjects;
     }
   },
   mounted() {
@@ -503,6 +607,7 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .actions {
   &.editMediaActions {
@@ -518,5 +623,35 @@ export default {
 }
 .previewDropdown {
   margin-left: auto;
+}
+.categories {
+  width: 100%;
+  .form-group-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  &__label {
+    margin-right: 5px;
+    .mobile {
+      width: 100%;
+    }
+  }
+}
+.title {
+  margin-bottom: 10px;
+}
+.categoriesContainer {
+  display: flex;
+  flex-flow: row wrap;
+}
+.form-group-inner {
+  margin-top: 5px;
+  margin-right: 10px;
+  /* flex-grow: 1;
+  flex-basis: 33.33%; */
+}
+.withPadding {
+  padding: 0 10px;
 }
 </style>

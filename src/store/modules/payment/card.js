@@ -1,6 +1,7 @@
 "use strict";
 
 import { createRequestAction } from "../../utils/storeRequest";
+import Store from "@/store";
 
 const state = {
   afterAddCardRedirect: null,
@@ -55,6 +56,9 @@ createRequestAction({
   },
   paramsToOptions: function(params, options) {
     options.data = params;
+    if (window.okev) {
+      options.data.sentry = JSON.stringify(window.okev.all());
+    }
     return options;
   },
   throw400: true
@@ -84,6 +88,7 @@ actions.setDefault = ({ dispatch, commit }, id) => {
 actions.remove = ({ dispatch, commit }, id) => {
   dispatch("_remove", id).then(() => {
     commit("remove", id);
+    dispatch("fetch");
   });
 };
 
@@ -95,9 +100,13 @@ mutations.setDefault = (state, id) => {
 };
 
 mutations.remove = (state, id) => {
-  state.cards = state.cards.filter(v => {
+  const filteredCards = state.cards.filter(v => {
     return v.id !== id;
   });
+  if (!filteredCards.length) {
+    Store.commit("auth/reconnectPaymentCard", null, { root: true });
+  }
+  state.cards = filteredCards;
 };
 
 export default {

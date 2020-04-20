@@ -88,6 +88,10 @@
                     :ref="'video' + v.id"
                     @play="stopOtherVideo(v.id)"
                   /> -->
+                  <MediaAudio
+                    v-if="v.media.length && v.media[0].type === 'audio'"
+                    :message="v"
+                  />
                   <MediaVideosList
                     v-if="v.media.length && v.media[0].type === 'video'"
                     :message="v"
@@ -186,6 +190,7 @@ import userMixin from "@/mixins/user";
 import Loader from "@/components/common/Loader";
 import { fromNow } from "@/helpers/datetime";
 import MediaImage from "./media/Image";
+import MediaAudio from "./media/Audio";
 import MediaImagesList from "./media/ImagesList";
 import MediaVideosList from "./media/VideosList";
 import MediaVideo from "./media/VideoPreview";
@@ -203,7 +208,8 @@ export default {
     MediaVideo,
     SubscribeButton,
     MediaImagesList,
-    MediaVideosList
+    MediaVideosList,
+    MediaAudio
   },
 
   mixins: [userMixin],
@@ -541,14 +547,14 @@ export default {
         return;
       }
       if (process.env.VUE_APP_NAME === "avn") {
-        if (!this.user.isPaymentCardConnected) {
-          this.$store.dispatch("global/flashToast", {
-            text: "You should add card in payment settings",
-            type: "warning"
-          });
-          this.$router.push("/settings/payments");
-          return;
-        }
+        // if (!this.user.isPaymentCardConnected) {
+        //   this.$store.dispatch("global/flashToast", {
+        //     text: "You should add card in payment settings",
+        //     type: "warning"
+        //   });
+        //   this.$router.push("/settings/payments");
+        //   return;
+        // }
 
         this.$store.dispatch("modal/show", {
           name: "chatMessagePayConfirm",
