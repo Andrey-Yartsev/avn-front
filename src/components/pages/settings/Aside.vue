@@ -290,6 +290,12 @@ export default {
           path: `/${this.user.username}/media`
         });
       }
+      if (this.user && this.user.canEarn) {
+        items.push({
+          name: "welcomeMessages",
+          title: "Welcome Messages"
+        });
+      }
       return items;
     },
     showAvatarSave() {

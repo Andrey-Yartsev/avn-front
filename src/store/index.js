@@ -66,6 +66,7 @@ import version from "@/store/modules/version";
 import route from "@/store/modules/route";
 import contest from "@/store/modules/contest";
 import magazine from "@/store/modules/magazine";
+import welcomeMessages from "@/store/modules/welcomeMessages";
 
 Vue.use(Vuex);
 
@@ -137,7 +138,8 @@ const store = new Vuex.Store({
     version,
     route,
     contest,
-    magazine
+    magazine,
+    welcomeMessages
   }
 });
 
