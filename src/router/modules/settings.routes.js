@@ -217,5 +217,16 @@ export const routes = [
       title: "Earnings",
       cssName: "settings"
     }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/studioAccess",
+    name: "SettingsStudioAccessPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsEarningsPage" */ "@/components/pages/settings/studioAccess/Index.vue"),
+    meta: {
+      title: "Studio Access",
+      cssName: "settings"
+    }
   }
 ];

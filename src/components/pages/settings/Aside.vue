@@ -286,6 +286,12 @@ export default {
           path: `/${this.user.username}/media`
         });
       }
+      if (!this.user.studioAccess) {
+        items.push({
+          name: "studioAccess",
+          title: "Studio Access"
+        });
+      }
       return items;
     },
     showAvatarSave() {
