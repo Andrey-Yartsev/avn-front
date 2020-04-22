@@ -154,6 +154,10 @@ const modalTypes = [
   {
     storeName: "mediaAccessLink",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "contestVoting",
+    layoutOnlyModal: true
   }
 ];
 
