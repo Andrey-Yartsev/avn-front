@@ -48,7 +48,9 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("common/getPages");
+    if (!this.$store.state.common.pages.length) {
+      this.$store.dispatch("common/getPages");
+    }
   },
   watch: {
     $route() {
