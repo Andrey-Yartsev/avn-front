@@ -49,7 +49,7 @@ export default {
       this.$store.dispatch("modal/show", { name: "login" });
       return;
     }
-    if (!this.isAuthor() && this.autoTipsRoute() && this.showTips()) {
+    if (this.autoTipsRoute() && !this.isAuthor() && this.showTips()) {
       this.openTipModal();
     }
   }
