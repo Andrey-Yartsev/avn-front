@@ -2,20 +2,7 @@
   <div class="media media-item">
     <figure class="media-item active media-item_photo" data-index="0">
       <template v-if="!media.locked">
-        <a
-          class="postLink"
-          :href="media.src.source"
-          target="_blank"
-          @click.prevent="openImage(media.src.source)"
-        >
-          <img
-            :src="media.thumb.source"
-            :class="{ 'no-media-text': !message.textLength }"
-            :width="media.thumb.width"
-            :height="media.thumb.height"
-            class="media-content"
-          />
-        </a>
+        <ImageInner :media="media" :noText="!message.textLength" />
       </template>
       <template v-else>
         <div class="postLink">
@@ -36,23 +23,18 @@
 </template>
 
 <script>
+import ImageInner from "./ImageInner";
+
 export default {
+  components: {
+    ImageInner
+  },
   props: {
     message: Object
   },
   computed: {
     media() {
       return this.message.media[0];
-    }
-  },
-  methods: {
-    openImage(src) {
-      this.$store.dispatch("modal/show", {
-        name: "image",
-        data: {
-          src
-        }
-      });
     }
   }
 };

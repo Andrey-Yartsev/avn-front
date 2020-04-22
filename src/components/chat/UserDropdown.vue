@@ -32,6 +32,11 @@
               ></router-link
             >
           </li>
+          <li class="more-functions__item">
+            <a class="more-functions__link" @click="showAttachments"
+              ><span class="more-functions__option">Show attachments</span></a
+            >
+          </li>
           <template v-if="userExists">
             <li class="more-functions__item" v-if="_user.isBlocked">
               <a
@@ -180,6 +185,13 @@ export default {
             this.$emit("deleteConversation");
           }
         }
+      });
+      this.chatOptionsOpened = false;
+    },
+    showAttachments() {
+      this.$store.dispatch("modal/show", {
+        name: "chatAttachments",
+        data: this.activeUser.id
       });
       this.chatOptionsOpened = false;
     }

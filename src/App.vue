@@ -318,8 +318,8 @@ export default {
       this.setContainerClass();
     });
   }
-};
-</script>
+};</script
+>q:
 
 <style lang="scss" src="@/styles/main.scss"></style>
 <style lang="scss" src="@/styles/colorScheme.scss"></style>
