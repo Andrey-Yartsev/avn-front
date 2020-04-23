@@ -2,56 +2,14 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-//contests
-//contests/1/nominees
-//contests/1/prizes
-//contests/1/ranks
-//nominees/1/cancel?id=1
-//contests/2/categories
-//contests/2/categories/1/nominees
-//contests/2/categories/1/prizes
-
-import categories from "@/mock/contest/nominees";
-import nominees from "@/mock/contest/nominees";
-import prizes from "@/mock/contest/nominees";
-
 const state = {
   categories: [],
   nominees: [],
   prizes: []
 };
 
-const actions = {
-  fetchCategories({ commit }) {
-    return new Promise(accept => {
-      commit("setMockCategories");
-      accept();
-    });
-  },
-  fetchNominees({ commit }) {
-    return new Promise(accept => {
-      commit("setMockNominees");
-      accept();
-    });
-  },
-  fetchPrizes({ commit }) {
-    return new Promise(accept => {
-      commit("setMockPrizes");
-      accept();
-    });
-  }
-};
-const mutations = {
-  setMockCategories(state) {
-    state.categories = categories;
-  },
-  setMockNominees() {
-    state.nominees = nominees;
-  },
-  setMockPrizes() {
-    state.prizes = prizes;
-  }
-};
+const actions = {};
+const mutations = {};
 
 createRequestAction({
   prefix: "fetchContests",
