@@ -67,6 +67,23 @@
       transform: translateY(100%);
     }
   }
+  .notes {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    transition: all 0.4s ease;
+    padding: 10px 20px;
+    opacity: 0;
+    &.visible {
+      transform: translateY(200px);
+      opacity: 1;
+    }
+    textarea {
+      background-color: $white;
+    }
+  }
 }
 
 .chat-section {

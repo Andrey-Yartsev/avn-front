@@ -979,6 +979,20 @@
     }
   }
 
+  .notesIcon {
+    padding: 10px;
+    opacity: 0.5;
+    font-size: 22px;
+    cursor: pointer;
+    transition: opacity .3s;
+    &:hover {
+      opacity: 1;
+    }
+    &.with-content {
+      color: $primary-color;
+    }
+  }
+
   .user-login {
     font-size: inherit;
   }

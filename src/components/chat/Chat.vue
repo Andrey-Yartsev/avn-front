@@ -97,7 +97,14 @@
                   <span class="icn-block icn-item"></span>
                 </div>
               </div>
-
+              <div
+                @click="togleNotes"
+                class="notesIcon"
+                :class="{ 'with-content': notes.text }"
+                v-tooltip="'Notes'"
+              >
+                <span class="icn-item icn-edit" />
+              </div>
               <UserDropdown
                 :activeUser="activeUser"
                 :hasMessages="!!messages.length"
@@ -116,6 +123,16 @@
               <template v-if="activeUser">
                 <Messages :withUser="activeUser" />
                 <AddMessage :withUser="activeUser" ref="addMessageSection" />
+                <div
+                  class="notes bg-gradient_light"
+                  :class="{ visible: notes.show }"
+                >
+                  <textarea
+                    placeholder="Enter notes here"
+                    rows="7"
+                    v-model="notes.text"
+                  />
+                </div>
               </template>
             </div>
           </div>
@@ -164,7 +181,11 @@ export default {
       isTyping: false,
       deleteInProgress: false,
       virtualChat: null,
-      dropedFiles: null
+      dropedFiles: null,
+      notes: {
+        show: false,
+        text: ""
+      }
     };
   },
 
@@ -226,6 +247,8 @@ export default {
       );
       this.$store.commit("chat/resetMessages");
       this.fetchMessages();
+      this.resetNotes();
+      this.fetchNotes();
     }
   },
 
@@ -298,6 +321,27 @@ export default {
       e.stopPropagation();
       let files = [...e.dataTransfer.files];
       this.$refs.addMessageSection.$children[0].handleDroppedFiles(files);
+    },
+    togleNotes() {
+      if (this.notes.show) {
+        this.saveNotes();
+      }
+      this.notes.show = !this.notes.show;
+    },
+    resetNotes() {
+      this.notes.show = false;
+      this.notes.text = "";
+    },
+    saveNotes() {
+      this.$store.dispatch("chat/updateNotes", {
+        text: this.notes.text.trim(),
+        userId: this.activeUserId
+      });
+    },
+    fetchNotes() {
+      this.$store.dispatch("chat/fetchNotes", this.activeUserId).then(res => {
+        this.notes.text = res;
+      });
     }
   },
   created() {
@@ -314,6 +358,7 @@ export default {
           );
         }
         this.fetchMessages();
+        this.fetchNotes();
         if (!this.activeChat) {
           this.fetchLastMessage().then(() => {
             this.initVirtualChat();
@@ -331,6 +376,7 @@ export default {
     this.$store.commit("chat/fetchChatsReset");
     window.removeEventListener("focus", this.windowFocus);
     window.removeEventListener("blur", this.windowBlur);
+    this.resetNotes();
   }
 };
 </script>
