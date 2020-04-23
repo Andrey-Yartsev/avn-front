@@ -198,6 +198,12 @@ export default {
     MediaSmall
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
+  data() {
+    return {
+      storiesFetched: false,
+      livesFetched: false
+    };
+  },
   created() {
     this.init();
   },
@@ -356,7 +362,6 @@ export default {
       this.lastYOffset = 0;
 
       this.$store.dispatch("explore/resetPageState");
-      this.$store.dispatch("lives/resetPageState");
       this.$store.commit("topModels/reset");
 
       const searchTag = this.$route.params.tag;
@@ -375,19 +380,24 @@ export default {
         }
       }
 
-      this.$store.dispatch("lives/getPosts");
-
-      this.$store.dispatch("stories/explore/resetPageState");
-      this.$store.dispatch("stories/explore/setLimit", { limit: 20 });
-      this.$store.dispatch("stories/explore/getPosts");
+      if (this.type === "story" || !this.storiesFetched) {
+        this.$store.dispatch("stories/explore/resetPageState");
+        this.$store.dispatch("stories/explore/setLimit", { limit: 20 });
+        this.$store.dispatch("stories/explore/getPosts");
+        this.storiesFetched = true;
+      }
 
       if (this.type === "top") {
         this.$store.dispatch("topModels/getPosts");
       }
 
+      if (!this.livesFetched) {
+        this.$store.dispatch("lives/resetPageState");
+        this.$store.dispatch("lives/getPosts");
+        this.livesFetched = true;
+      }
       if (this.type === "live") {
         this.$store.dispatch("lives/getPostsWithStreams");
-        // this.$store.dispatch("lives/getPosts");
       }
     },
     storePrefix() {
@@ -405,8 +415,8 @@ export default {
     ["$route.params.tag"]() {
       this.init();
     },
-    ["$route.params.category"](value) {
-      if (value !== undefined) {
+    ["$route.params.category"](newValue, oldValue) {
+      if (newValue !== undefined && oldValue !== undefined) {
         this.init();
       }
     }

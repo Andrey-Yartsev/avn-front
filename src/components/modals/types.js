@@ -28,6 +28,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "chatAttachments",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "userReport",
     layoutOnlyModal: true
   },

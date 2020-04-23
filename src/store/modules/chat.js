@@ -3,6 +3,7 @@
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 import Store from "@/store";
+import attachments from "./chat/attachments";
 
 const messagesLimit = 50;
 const chatsLimit = 20;
@@ -867,5 +868,8 @@ export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    attachments
+  }
 };
