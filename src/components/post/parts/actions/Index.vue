@@ -163,6 +163,9 @@ export default {
       this.$emit("hideFooterDropdown");
     },
     showLikesModal() {
+      if (!this.user || !this.post.canViewFavorite) {
+        return;
+      }
       this.$store.dispatch("modal/show", {
         name: "postLikes",
         data: {

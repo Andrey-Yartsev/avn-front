@@ -99,6 +99,62 @@
           </div>
         </div>
       </div>
+      <div class="watermarks-settings">
+        <div class="form-title border-top border-top-mobile">
+          <div class="inner">
+            <span class="semi-transparent">
+              Post likes details
+              <p class="subtext">
+                Allow the following users to see who has liked your posts
+              </p>
+            </span>
+          </div>
+        </div>
+        <div class="shadow-block">
+          <div class="container">
+            <div class="form-group form-group_with-label radio-group">
+              <div class="form-group-inner">
+                <label class="radio-wrapper icn-item m-inline">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="all"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    All
+                  </span>
+                </label>
+                <label class="radio-wrapper icn-item m-inline">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="subscribers"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    Subscribers
+                  </span>
+                </label>
+                <label class="radio-wrapper icn-item m-inline">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="non-subscribers"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    Non-Subscribers
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div
         v-if="user.canEarn"
