@@ -199,7 +199,7 @@
                   <span class="b-check-state__text">Active</span>
                 </label>
               </div>
-              <!-- <div class="b-check-state b-check-state_post alignFlexCenter">
+              <div class="b-check-state b-check-state_post alignFlexCenter">
                 <label>
                   <input
                     class="is-free-post"
@@ -210,19 +210,6 @@
                     class="b-check-state__icon icn-item icn-size_lg ml-2"
                   ></span>
                   <span class="b-check-state__text">Free</span>
-                </label>
-              </div> -->
-              <div class="b-check-state b-check-state_post alignFlexCenter">
-                <label>
-                  <input
-                    class="is-free-post"
-                    type="checkbox"
-                    v-model="media.subscribersFree"
-                  />
-                  <span
-                    class="b-check-state__icon icn-item icn-size_lg ml-2"
-                  ></span>
-                  <span class="b-check-state__text">Free to subscribers</span>
                 </label>
               </div>
             </div>
@@ -316,7 +303,6 @@ const InitialState = {
     text: "",
     price: 0,
     free: false,
-    subscribersFree: false,
     thumbId: null,
     thumbs: [],
     removeVideoPreview: false,
@@ -397,8 +383,7 @@ export default {
         [].join(",") !== this.media.categories.join(",") ||
         this.preloadedVideoMedias.length ||
         this.media.removeVideoPreview ||
-        this.$props.post.categories.length !== this.media.categories.length ||
-        this.$props.post.subscribersFree != this.media.subscribersFree
+        this.$props.post.categories.length !== this.media.categories.length
       );
     },
     isMaxCategoriesLimitSelected() {
@@ -511,7 +496,6 @@ export default {
         price,
         active,
         pinned,
-        subscribersFree,
         media: { thumbs, thumbId },
         categories
       } = this.$props.post;
@@ -519,7 +503,6 @@ export default {
       this.media.text = this.getConvertedText(text);
       this.media.price = price;
       this.media.active = active;
-      this.media.subscribersFree = subscribersFree;
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
@@ -532,7 +515,6 @@ export default {
       this.media.price = 0;
       this.media.active = false;
       this.media.free = false;
-      this.media.subscribersFree = false;
       this.media.thumbId = null;
       this.media.thumbs = [];
       this.media.removeVideoPreview = false;
