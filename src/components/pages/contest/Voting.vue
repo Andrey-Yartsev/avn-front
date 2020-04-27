@@ -37,7 +37,8 @@ import User from "@/mixins/user";
 export default {
   mixins: [User],
   props: {
-    contestId: Number
+    contestId: Number,
+    list: Object
   },
   data() {
     return {
@@ -46,16 +47,26 @@ export default {
   },
   computed: {
     prizeOptions() {
-      return this.prizes.map(v => {
+      console.log(Object.entries(this.votesList));
+      return Object.entries(this.votesList).map(v => {
         return {
-          id: v.id,
-          title: `$${v.amount} - ${v.name}`
+          id: v[0],
+          title: v[1]
           // title: `$${v.rank} = ${v.amount} Vote` + (v.rank > 1 ? "s" : "")
         };
       });
     },
     prizes() {
       return this.$store.state.contest.fetchPrizesResult;
+    },
+    contests() {
+      return this.$store.state.contest.fetchContestsResult;
+    },
+    contest() {
+      return this.contests.find(v => v.id === this.contestId);
+    },
+    votesList() {
+      return this.contest.votesList;
     }
   },
   methods: {

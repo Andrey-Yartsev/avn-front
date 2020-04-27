@@ -42,7 +42,8 @@
 export default {
   props: {
     props: Object,
-    contestId: Number
+    contestId: Number,
+    votesList: Object
   },
   methods: {
     vote() {
@@ -50,7 +51,8 @@ export default {
         name: "contestVoting",
         data: {
           name: this.props.name,
-          contestId: this.contestId
+          contestId: this.contestId,
+          votesList: this.votesList
         }
       });
     }

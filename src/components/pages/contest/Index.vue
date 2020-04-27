@@ -107,10 +107,10 @@ export default {
       });
     },
     periodText() {
-      const d1 = this.contest.starts_at.date.replace(/(.*)-\d+:\d+/, "$1");
-      const m1 = moment(d1, this.contest.starts_at.timezone);
-      const d2 = this.contest.ends_at.date.replace(/(.*)-\d+:\d+/, "$1");
-      const m2 = moment(d2, this.contest.ends_at.timezone);
+      const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
+      const m1 = moment(d1, this.contest.timezone);
+      const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
+      const m2 = moment(d2, this.contest.timezone);
       const r1 = m1.local().format("MMM Do h:mm a");
       const r2 = m2.local().format("MMM Do h:mm a");
       return `${r1} PDT to ${r2} PDT`;

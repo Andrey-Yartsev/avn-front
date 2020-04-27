@@ -37,9 +37,9 @@
     <router-link to="/explore" exact class="content-nav__item" data-type="top"
       >Feed</router-link
     >
-    <router-link to="/contest" exact class="content-nav__item" data-type="top"
-      >Contest</router-link
-    >
+    <!--    <router-link to="/contest" exact class="content-nav__item" data-type="top"-->
+    <!--      >Contest</router-link-->
+    <!--    >-->
   </nav>
 </template>
 
