@@ -1,5 +1,5 @@
 <template>
-  <div class="payouts-personal-info">
+  <div class="payouts-personal-info magazine">
     <div
       class="form-group form-group_clear-gaps-bottom form-group_with-label item"
     >
@@ -8,6 +8,7 @@
         <span class="value__text">
           {{ info.firstName }} {{ info.lastName }}
         </span>
+        <button class="btn" @click="edit">Edit</button>
       </span>
     </div>
     <div
@@ -28,6 +29,7 @@
         <span class="value__text">
           {{ magazines }}
         </span>
+        <button class="btn" @click="reset">Remove subscription</button>
       </span>
     </div>
   </div>
@@ -60,6 +62,22 @@ export default {
           return this.kindOptions.find(kind => kind.name === name).title;
         })
         .join(", ");
+    }
+  },
+  methods: {
+    edit() {
+      this.$store.dispatch("modal/show", { name: "magShipping" });
+    },
+    reset() {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Are you sure?",
+          success: () => {
+            this.$store.dispatch("magazine/resetOffline");
+          }
+        }
+      });
     }
   }
 };

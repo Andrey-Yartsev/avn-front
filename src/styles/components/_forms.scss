@@ -321,7 +321,7 @@ label {
     display: block;
     margin-bottom: 5px;
   }
-  
+
   &_cursor-default {
     cursor: default;
   }
@@ -811,7 +811,7 @@ label {
     + .inner {
       margin-top: 18px;
     }
-    
+
     &_block {
       display: block;
     }
@@ -941,6 +941,12 @@ select {
       content: "";
       position: absolute;
       opacity: .3;
+    }
+  }
+
+  &.disabled {
+    .label  {
+      opacity: .5;
     }
   }
 

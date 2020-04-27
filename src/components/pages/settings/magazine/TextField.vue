@@ -1,6 +1,8 @@
 <template>
   <label class="form-group-inner">
-    <span class="label">{{ label }}</span>
+    <span class="label"
+      >{{ label }}<span class="red" v-if="required">*</span></span
+    >
     <span class="form-group form-group_clear-gaps">
       <span class="form-field">
         <input

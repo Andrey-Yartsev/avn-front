@@ -31,8 +31,6 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
 }
 
 export const askFor3dSecure = options => {
-  // console.log(options);
-  // throw new Error("STOP");
   const { amount, paymentGateCustomerCardToken } = options;
   global.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
   securion3DSecure(
@@ -40,7 +38,7 @@ export const askFor3dSecure = options => {
     Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
-      Store.dispatch("payment/pay/pay", { ...options, token })
+      Store.dispatch("magazine/pay", { ...options, token })
         .then(res => {
           if (res.success && res.message) {
             Store.dispatch("global/flashToast", {

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="subscribe">
+  <form @submit.prevent="subscribe" class="reasons">
     <div class="form-group form-group_with-label">
       <TextField
         id="firstName"
@@ -17,8 +17,10 @@
       <TextField id="city" label="City" v-model="userInfo.city" />
       <TextField id="zip" label="ZIP" v-model="userInfo.zip" />
 
-      <label class="form-group-inner">
-        <span class="label country-select__label">Country</span>
+      <label class="form-group-inner disabled">
+        <span class="label country-select__label"
+          >Country<span class="red">*</span></span
+        >
         <span class="select-wrapper">
           <select
             name="country"
@@ -34,7 +36,9 @@
       </label>
 
       <label class="form-group-inner" v-if="hasStates">
-        <span class="label country-select__label">State</span>
+        <span class="label country-select__label"
+          >State/Region<span class="red">*</span></span
+        >
         <span class="select-wrapper">
           <select
             name="state"
@@ -48,29 +52,34 @@
         </span>
       </label>
 
-      <div
-        class="form-group-inner kinds"
-        :class="{ disabled: kindOptions.length < 2 }"
-      >
+      <div class="form-group-inner kinds">
         <span class="label country-select__label">Magazines</span>
         <label
           class="form-group-inner"
           v-for="kind in kindOptions"
           :key="kind.name"
         >
-          <div class="checkbox-wrapper">
+          <div class="checkbox-wrapper" :class="{ disabled: kindsDisabled }">
             <input
               type="checkbox"
               name="magazines"
               v-model="userInfo.kinds"
               :value="kind"
+              :disabled="kindsDisabled"
             />
             <span class="label icn-item">{{ kind.title }}</span>
           </div>
         </label>
       </div>
-      <div class="input-help hint-text-sm subtitle" v-if="!valid">
-        Fill in all fields to enable AVN Magazine subscription
+      <div class="input-help hint-text-sm subtitle" v-if="false && !valid">
+        Fill in all required fields to enable AVN Magazine subscription
+      </div>
+      <div class="form-group bottom-buttons">
+        <div></div>
+        <div></div>
+        <button class="btn" :disabled="disabled">
+          {{ submitTitle }}
+        </button>
       </div>
     </div>
   </form>
@@ -82,7 +91,7 @@ import States from "./states";
 import Kinds from "./kinds";
 
 export default {
-  name: "MagSubsForm",
+  name: "MagShippingForm",
   mixins: [States, Kinds],
   components: {
     TextField
@@ -136,15 +145,22 @@ export default {
       return false;
     },
     curData() {
-      return this.$store.state.magazine.fetchStatusResult.shipping;
+      return this.$store.state.magazine.fetchShippingResult;
+    },
+    hasShipping() {
+      return this.curData && this.curData.id;
     },
     subscribed() {
-      return (
-        this.curData && this.curData.id && this.curData.hasOfflineSubscription
-      );
+      return this.hasShipping && this.curData.hasOfflineSubscription;
     },
     inProgress() {
       return this.$store.state.magazine.updateLoading;
+    },
+    kindsDisabled() {
+      return this.kindOptions.length < 2;
+    },
+    submitTitle() {
+      return this.hasShipping ? "Update" : "Activete";
     }
   },
   watch: {
@@ -154,7 +170,12 @@ export default {
   },
   methods: {
     subscribe() {
-      this.$store.dispatch("magazine/subscribe", this.userInfo);
+      if (this.hasShipping) {
+        this.$store.dispatch("magazine/updateOfflineForm", this.userInfo);
+      } else {
+        this.$store.dispatch("magazine/subscribeOfflineForm", this.userInfo);
+      }
+      this.$emit("close");
     },
     resetStateId() {
       this.userInfo.stateId = 0;

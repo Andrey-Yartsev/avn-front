@@ -1,110 +1,211 @@
 <template>
-  <div class="magazine settings-wrapper rounded-container pos-relative">
-    <div
-      class="border-top shadow-block loader-container loader-container_center"
-      v-if="loading"
-    >
-      <Loader :fullscreen="false" :inline="true" text="" :small="true" />
-    </div>
-
-    <div v-else>
+  <div class="magazine settings-wrapper roun ded-container pos-relative">
+    <template v-if="loading">
       <h1 class="form-title settings-title">
-        AVN Magazine subscription
+        AVN Magazine
       </h1>
       <div
-        class="toggle-wrapper form-title"
-        :class="{ disabled: subscriptionDisabled }"
+        class="border-top shadow-block loader-container loader-container_center"
       >
-        <div class="inner">
-          <label for="subscribed" class="toggle-label semi-transparent">
-            I want to subscribe for AVN Magazine
-          </label>
-          <label class="toggle-element">
-            <input
-              type="checkbox"
-              id="subscribed"
-              :checked="hasSubscription"
-              @change="toggle"
-            />
-            <span class="toggle-element_switcher"></span>
-          </label>
+        <Loader :fullscreen="false" :inline="true" text="" :small="true" />
+      </div>
+    </template>
+    <template v-else>
+      <h1 class="form-title settings-title">
+        AVN Magazine
+      </h1>
+      <div class="shadow-block">
+        <div class="toggle-wrapper border-top first">
+          <!--          :class="{ disabled: subscriptionDisabled }"-->
+          <div class="inner">
+            <label for="subscribedOffline" class="toggle-label">
+              <div class="title">AVN Magazine Print Subscription</div>
+              <div class="subtitle semi-transparent">
+                Receive a printed copy every month
+              </div>
+              <div class="subtitle2">
+                <template v-if="free">
+                  <s>12 months (12 issues) $240.00 $80.00</s>
+                  <span class="red"
+                    >Lucky you! As an active member you receive a FREE
+                    subscription to AVN</span
+                  >
+                </template>
+                <template v-else>
+                  <span>12 months (12 issues) $49.00</span>
+                </template>
+                <div class="semi-transparent">
+                  Includes a subscription to AVN Digital Edition
+                </div>
+              </div>
+            </label>
+            <label class="toggle-element">
+              <input
+                type="checkbox"
+                id="subscribedOffline"
+                :checked="hasOfflineSubscription"
+                @click.prevent="toggleOffline"
+              />
+              <span class="toggle-element_switcher"></span>
+            </label>
+          </div>
+        </div>
+        <div class="container" v-if="shippingExists">
+          <ShippingInfo :info="shipping" class="shipping-info" />
         </div>
       </div>
-
-      <div class="shadow-block  border-top">
-        <div class="container">
-          <ShippingInfo
-            :info="status.shipping"
-            v-if="hasSubscription"
-            class="existing-subscription"
-          />
-          <SubscriptionForm
-            v-else
-            ref="form"
-            @disabledChange="disabledChange"
-          />
+      {{ shipping }}
+      <div class="shadow-block">
+        <div class="toggle-wrapper border-top">
+          <div class="inner">
+            <label for="subscribedDigitalMagazine" class="toggle-label">
+              <div class="title">Digital Edition</div>
+              <div class="subtitle semi-transparent">
+                Receive a printed copy of AVN Magazine
+              </div>
+              <div class="subtitle2">
+                <template v-if="free">
+                  <s>12 months (12 issues) $240.00 $80.00</s>
+                </template>
+                <template v-else>
+                  <span>12 months (12 issues) $49.00</span>
+                </template>
+              </div>
+            </label>
+            <label class="toggle-element">
+              <input
+                type="checkbox"
+                id="subscribedDigitalMagazine"
+                :checked="hasDigitalMagazineSubscription"
+                @click.prevent="toggleDigitalMagazine"
+              />
+              <span class="toggle-element_switcher"></span>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
-import SubscriptionForm from "./SubscriptionForm";
 import Loader from "@/components/common/Loader";
 import ShippingInfo from "./ShippingInfo";
+import PayAction from "./payAction";
 
 export default {
   name: "ProfileMagazinePage",
+  mixins: [PayAction],
   components: {
-    SubscriptionForm,
     Loader,
     ShippingInfo
   },
-  data() {
-    return {
-      subscriptionDisabled: false
-    };
-  },
+  // data() {
+  //   return {
+  //     subscriptionDisabled: false
+  //   };
+  // },
   computed: {
     loading() {
-      return this.$store.state.magazine.fetchStatusLoading;
+      return this.$store.state.magazine.fetchShippingLoading;
     },
-    status() {
-      return this.$store.state.magazine.fetchStatusResult;
+    shippingExists() {
+      return !!this.shipping.id;
     },
-    hasSubscription() {
-      if (!this.status) {
+    shipping() {
+      return this.$store.state.magazine.fetchShippingResult;
+    },
+    hasOfflineSubscription() {
+      if (!this.shipping) {
         return false;
       }
-      return this.status.shipping.hasOfflineSubscription;
+      return this.shipping.hasOfflineSubscription;
     },
-    unsubscribeDisabled() {
-      return this.$store.state.magazine.updateLoading;
+    hasDigitalMagazineSubscription() {
+      if (!this.shipping) {
+        return false;
+      }
+      return this.shipping.hasDigitalMagazineSubscription;
     },
     disabled() {
-      if (this.hasSubscription) {
+      if (this.hasOfflineSubscription) {
         return false;
       }
-      return this.subscriptionDisabled;
+      return true;
+    },
+    free() {
+      return this.user.isMakePayment;
     }
   },
   methods: {
-    unsubscribe() {
-      this.$store.dispatch("magazine/unsubscribe");
+    subscribeOffline() {
+      if (!this.free) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Subscription confirm",
+            text: "You are subscribing for $49.00",
+            success: () => {
+              this._pay({}, () => {
+                this._subscribeOffline();
+              });
+            }
+          }
+        });
+      } else {
+        this._subscribeOffline();
+      }
     },
-    subscribe() {
-      this.$refs.form.subscribe();
+    unsubscribeOffline() {
+      this.$store.dispatch("magazine/unsubscribeOffline");
     },
-    toggle() {
-      this.hasSubscription ? this.unsubscribe() : this.subscribe();
+    subscribeDigitalMagazine() {
+      if (!this.free) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Subscription confirm",
+            text: "You are subscribing for $49.00",
+            success: () => {
+              this._pay({}, () => {
+                this._subscribeDigitalMagazine();
+              });
+            }
+          }
+        });
+      } else {
+        this._subscribeDigitalMagazine();
+      }
     },
-    disabledChange(disabled) {
-      this.subscriptionDisabled = disabled;
+    unsubscribeDigitalMagazine() {
+      this.$store.dispatch("magazine/unsubscribeDigitalMagazine");
+    },
+    _subscribeDigitalMagazine() {
+      this.$store.dispatch("magazine/subscribeDigitalMagazine");
+    },
+    _subscribeOffline() {
+      if (!this.free) {
+        throw new Error("Wrong logic");
+      }
+      if (this.shippingExists) {
+        this.$store.dispatch("magazine/subscribeOffline");
+        return;
+      }
+      this.$store.dispatch("modal/show", { name: "magShipping" });
+    },
+    toggleOffline() {
+      this.hasOfflineSubscription
+        ? this.unsubscribeOffline()
+        : this.subscribeOffline();
+    },
+    toggleDigitalMagazine() {
+      this.hasDigitalMagazineSubscription
+        ? this.unsubscribeDigitalMagazine()
+        : this.subscribeDigitalMagazine();
     }
   },
   created() {
-    this.$store.dispatch("magazine/fetchStatus");
+    this.$store.dispatch("magazine/fetchShipping");
   }
 };
 </script>
