@@ -355,7 +355,13 @@ const InitialState = {
   mediaType: "all",
   datetime: undefined,
   saving: false,
-  withoutWatermark: false
+  withoutWatermark: false,
+  limits: {
+    video: 1,
+    gif: 1,
+    photo: 50,
+    audio: 1
+  }
 };
 
 export default {

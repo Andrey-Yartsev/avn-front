@@ -52,6 +52,7 @@ import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
+import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
 import ContestVotingModal from "@/components/pages/contest/VotingModal";
 
 export default {
@@ -94,8 +95,9 @@ export default {
     MediaPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
+    ContestVotingModal,
     ChatAttachmentsModal,
-    ContestVotingModal
+    FreeAccessMediaListModal
   },
   props: {
     hasLayout: {

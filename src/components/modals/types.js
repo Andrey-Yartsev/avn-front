@@ -162,6 +162,10 @@ const modalTypes = [
   {
     storeName: "contestVoting",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "freeAccessMediaList",
+    layoutOnlyModal: true
   }
 ];
 
