@@ -8,7 +8,7 @@
           class="close close_shift-t close_default icn-item icn-size_lg"
           @click="close"
         />
-        <Voting @close="close" :contestId="contestId" />
+        <Voting @close="close" :props="props" />
       </div>
     </div>
   </Modal>

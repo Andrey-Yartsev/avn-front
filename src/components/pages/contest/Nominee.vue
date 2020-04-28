@@ -52,7 +52,9 @@ export default {
         data: {
           name: this.props.name,
           contestId: this.contestId,
-          votesList: this.votesList
+          votesList: this.votesList,
+          nominee: this.props.id,
+          userId: this.props.star_id
         }
       });
     }

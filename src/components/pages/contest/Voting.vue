@@ -2,7 +2,7 @@
   <div class="reasons reasons__content bg-gradient_light">
     <div class="form-group radio-group radio-group_no-gaps">
       <label
-        v-for="v in prizeOptions"
+        v-for="v in votesOptions"
         class="form-group-inner"
         :class="{ 'no-border-line': $mq === 'mobile' }"
         :key="v.id"
@@ -13,7 +13,7 @@
             name="vote"
             :value="v.id"
             @click="select(v)"
-            v-model="prize"
+            v-model="votes"
           />
           <span class="label">{{ v.title }}</span>
         </div>
@@ -37,41 +37,35 @@ import User from "@/mixins/user";
 export default {
   mixins: [User],
   props: {
-    contestId: Number,
-    list: Object
+    props: Object
   },
   data() {
     return {
-      prize: null
+      votes: null
     };
   },
   computed: {
-    prizeOptions() {
-      console.log(Object.entries(this.votesList));
+    votesOptions() {
       return Object.entries(this.votesList).map(v => {
         return {
           id: v[0],
           title: v[1]
-          // title: `$${v.rank} = ${v.amount} Vote` + (v.rank > 1 ? "s" : "")
         };
       });
-    },
-    prizes() {
-      return this.$store.state.contest.fetchPrizesResult;
     },
     contests() {
       return this.$store.state.contest.fetchContestsResult;
     },
     contest() {
-      return this.contests.find(v => v.id === this.contestId);
+      return this.contests.find(v => v.id === this.props.contestId);
     },
     votesList() {
       return this.contest.votesList;
     }
   },
   methods: {
-    select(prize) {
-      this.prize = prize;
+    select(votes) {
+      this.votes = votes;
     },
     vote() {
       if (!this.user.isPaymentCardConnected) {
@@ -86,22 +80,25 @@ export default {
         this.$router.push("/settings/payments");
         return;
       }
-      this.$store
-        .dispatch("contest/vote", {
-          contestId: this.contestId
-        })
-        .then(r => {
-          if (r.success) {
-            this.$store.dispatch("global/flashToast", {
-              text: "You have beed successfully voted"
-            });
-            this.$emit("close");
-          }
-        });
+      const params = {
+        contestId: this.props.contestId,
+        votes: this.votes,
+        nominee: this.props.nominee,
+        userId: parseInt(this.props.userId)
+      };
+
+      this.$store.dispatch("contest/vote", params).then(r => {
+        if (r.success) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You have been successfully voted"
+          });
+          this.$emit("close");
+        }
+      });
     }
   },
   created() {
-    this.prize = this.prizeOptions[0].id;
+    this.votes = this.votesOptions[0].id;
   }
 };
 </script>

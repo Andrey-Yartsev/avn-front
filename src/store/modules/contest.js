@@ -64,6 +64,17 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{contestId}/, params.contestId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {};
+    options.data.nominee = params.nominee;
+    options.data.userId = params.userId;
+    options.data.paymentType = "vote";
+    options.data.votes = params.votes;
+    if (window.okev) {
+      options.data.sentry = JSON.stringify(window.okev.all());
+    }
+    return options;
   }
 });
 
