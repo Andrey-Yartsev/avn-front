@@ -1,7 +1,7 @@
 <template>
   <SubscribeModalInner
     @subscribe="subscribe"
-    :loading="loading"
+    :loading="scriptLoading"
     :progress="progress"
   />
 </template>

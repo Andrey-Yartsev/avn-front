@@ -54,7 +54,6 @@
           <ShippingInfo :info="shipping" class="shipping-info" />
         </div>
       </div>
-      {{ shipping }}
       <div class="shadow-block">
         <div class="toggle-wrapper border-top">
           <div class="inner">
@@ -91,20 +90,16 @@
 <script>
 import Loader from "@/components/common/Loader";
 import ShippingInfo from "./ShippingInfo";
-import PayAction from "./payAction";
+import PayAction from "../payments/payAction";
+import User from "@/mixins/user";
 
 export default {
   name: "ProfileMagazinePage",
-  mixins: [PayAction],
+  mixins: [PayAction, User],
   components: {
     Loader,
     ShippingInfo
   },
-  // data() {
-  //   return {
-  //     subscriptionDisabled: false
-  //   };
-  // },
   computed: {
     loading() {
       return this.$store.state.magazine.fetchShippingLoading;
@@ -135,22 +130,19 @@ export default {
     },
     free() {
       return this.user.isMakePayment;
+    },
+    payPayload() {
+      return {
+        amount: 49,
+        paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
+      };
     }
   },
   methods: {
     subscribeOffline() {
       if (!this.free) {
-        this.$store.dispatch("modal/show", {
-          name: "confirm",
-          data: {
-            title: "Subscription confirm",
-            text: "You are subscribing for $49.00",
-            success: () => {
-              this._pay({}, () => {
-                this._subscribeOffline();
-              });
-            }
-          }
+        this.pay(() => {
+          this._subscribeOffline();
         });
       } else {
         this._subscribeOffline();
@@ -161,21 +153,35 @@ export default {
     },
     subscribeDigitalMagazine() {
       if (!this.free) {
-        this.$store.dispatch("modal/show", {
-          name: "confirm",
-          data: {
-            title: "Subscription confirm",
-            text: "You are subscribing for $49.00",
-            success: () => {
-              this._pay({}, () => {
-                this._subscribeDigitalMagazine();
-              });
-            }
-          }
+        this.pay(() => {
+          this._subscribeDigitalMagazine();
         });
       } else {
         this._subscribeDigitalMagazine();
       }
+    },
+    pay(onComplete) {
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: "Subscription confirm",
+          text: "You are subscribing for $49.00",
+          success: () => {
+            this._pay(
+              this.payPayload,
+              () => {
+                this.$store.dispatch("auth/extendUser", {
+                  isMakePayment: true
+                });
+                onComplete();
+              },
+              {
+                dispatchAction: "magazine/pay"
+              }
+            );
+          }
+        }
+      });
     },
     unsubscribeDigitalMagazine() {
       this.$store.dispatch("magazine/unsubscribeDigitalMagazine");

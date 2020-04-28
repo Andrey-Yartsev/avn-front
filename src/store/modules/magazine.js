@@ -14,7 +14,6 @@ const actions = {
     dispatch("update", data).then(r => {
       console.log(r.shipping);
       commit("extendShipping", r.shipping);
-      commit("subscribe");
     });
   },
   updateOfflineForm({ dispatch, commit }, data) {
@@ -24,7 +23,6 @@ const actions = {
     delete data.kinds;
     dispatch("update", data).then(r => {
       commit("extendShipping", r.shipping);
-      commit("subscribe");
     });
   },
   subscribeOffline({ dispatch }) {
@@ -64,11 +62,7 @@ const actions = {
     const data = { ...state.fetchShippingResult };
     data.id = 0;
     commit("extendShipping", data);
-    dispatch("remove").then(r => {
-      if (r.success) {
-        commit("unsubscribe");
-      }
-    });
+    dispatch("remove");
   }
 };
 

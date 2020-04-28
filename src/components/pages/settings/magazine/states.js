@@ -34,6 +34,9 @@ export default {
   },
   methods: {
     getCountryIdByCode(code) {
+      if (!this.countries) {
+        return null;
+      }
       return this.countries.find(v => code === v.code).id;
     },
     fetchCountries() {

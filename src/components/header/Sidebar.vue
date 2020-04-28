@@ -92,11 +92,11 @@
                 :to="'/' + user.username + '/media'"
                 >Clip Store
               </router-link>
-              <router-link
-                class="user-menu-item user-menu-item__magazine icn-item"
-                to="/settings/magazine"
-                >Magazine
-              </router-link>
+              <!--              <router-link-->
+              <!--                class="user-menu-item user-menu-item__magazine icn-item"-->
+              <!--                to="/settings/magazine"-->
+              <!--                >Magazine-->
+              <!--              </router-link>-->
             </div>
             <div class="user-menu__col">
               <router-link

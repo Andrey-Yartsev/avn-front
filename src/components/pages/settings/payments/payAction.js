@@ -6,32 +6,28 @@ export default {
   mixins: [User],
   data() {
     return {
-      progress: false
+      progress: false,
+      scriptLoading: false
     };
   },
   methods: {
-    _pay(payload, _onSuccess) {
-      // if (!this.user.isPaymentCardConnected) {
-      //   this.$store.dispatch("global/flashToast", {
-      //     text: "You should add card in payment settings",
-      //     type: "warning"
-      //   });
-      //   this.$store.commit(
-      //     "payment/card/setAfterAddCardRedirect",
-      //     this.$route.path
-      //   );
-      //   Router.push("/settings/payments");
-      //   return;
-      // }
-      // this.$store.commit("profile/home/resetOnPageAction");
+    _pay(payload, _onSuccess, options) {
+      let dispatchAction = "payment/pay/pay";
+      if (options) {
+        if (options.dispatchAction) {
+          dispatchAction = options.dispatchAction;
+        }
+      }
       this.progress = true;
       const onSuccess = () => {
         this.progress = false;
-        this.$store.dispatch("payment/pay/complete", payload.paymentType);
+        if (!options.dispatchAction) {
+          this.$store.dispatch("payment/pay/complete", payload.paymentType);
+        }
         _onSuccess();
       };
       this.$store
-        .dispatch("payment/pay/pay", payload)
+        .dispatch(dispatchAction, payload)
         .then(res => {
           if (res.success && res.message) {
             this.$store.dispatch("global/flashToast", {
@@ -45,6 +41,7 @@ export default {
           if (r.code === 201) {
             askFor3dSecure({
               ...payload,
+              ...options,
               onSuccess,
               onFailure: error => {
                 this._error(error);
@@ -81,7 +78,7 @@ export default {
   mounted() {
     let script = document.createElement("script");
     script.onload = () => {
-      this.loading = false;
+      this.scriptLoading = false;
     };
     script.async = true;
     script.src = "https://securionpay.com/js/securionpay.js";
