@@ -126,6 +126,16 @@ const mutations = {
   },
   removeSeparateMedia(state) {
     state.separateMedia = null;
+  },
+  updateFollowStatus(state) {
+    state.media = state.media.map(item => {
+      const newItem = item;
+      newItem.author.followedBy = true;
+      return newItem;
+    });
+    if (state.separateMedia) {
+      state.separateMedia.author.followedBy = true;
+    }
   }
 };
 
