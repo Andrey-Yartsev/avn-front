@@ -286,12 +286,12 @@ export default {
           path: `/${this.user.username}/media`
         });
       }
-      if (this.user && this.user.isMakePayment) {
-        items.push({
-          name: "magazine",
-          title: "AVN Magazine"
-        });
-      }
+      // if (this.user && this.user.isMakePayment) {
+      //   items.push({
+      //     name: "magazine",
+      //     title: "AVN Magazine"
+      //   });
+      // }
       return items;
     },
     showAvatarSave() {
