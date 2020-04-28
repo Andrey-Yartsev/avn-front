@@ -339,7 +339,7 @@ export default {
     //   });
     // }
 
-    this.$store.dispatch("awards/fetchCategories", this.eventId).then(() => {
+    this.$store.dispatch("contest/fetchCategories", this.eventId).then(() => {
       if (this.predefined) {
         this.$store
           .dispatch("awards/fetchUser", this.modelUsername)

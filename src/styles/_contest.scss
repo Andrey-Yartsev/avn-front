@@ -1,0 +1,14 @@
+@include media-breakpoint-up($desktop-breakpoint) {
+  .popup-container.popup-contest-voting {
+    max-width: 429px;
+  }
+}
+
+.popup-contest-voting {
+  .ok-btn {
+    margin-right: 15px;
+  }
+  .bottom-buttons {
+    margin-top: 15px;
+  }
+}

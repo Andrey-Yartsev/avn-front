@@ -53,6 +53,7 @@ import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
 import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
+import ContestVotingModal from "@/components/pages/contest/VotingModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 
 export default {
@@ -95,6 +96,7 @@ export default {
     MediaPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
+    ContestVotingModal,
     ChatAttachmentsModal,
     FreeAccessMediaListModal,
     MagShippingModal

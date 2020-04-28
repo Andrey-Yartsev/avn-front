@@ -137,6 +137,13 @@ const routes = [
       noLayout: true
     }
   },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/contest",
+    name: "ContestPage",
+    component: () =>
+      import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index")
+  },
   ...authRoutes,
   ...chatRoutes,
   ...settingsRoutes,

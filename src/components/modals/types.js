@@ -160,6 +160,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "contestVoting",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "freeAccessMediaList",
     layoutOnlyModal: true
   },

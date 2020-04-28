@@ -63,6 +63,7 @@ import online from "@/store/modules/online";
 import obs from "@/store/modules/obs";
 import version from "@/store/modules/version";
 import route from "@/store/modules/route";
+import contest from "@/store/modules/contest";
 import magazine from "@/store/modules/magazine";
 
 Vue.use(Vuex);
@@ -133,6 +134,7 @@ const store = new Vuex.Store({
     obs,
     version,
     route,
+    contest,
     magazine
   }
 });
