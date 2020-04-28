@@ -21,7 +21,7 @@ export default {
       this.progress = true;
       const onSuccess = () => {
         this.progress = false;
-        if (!options.dispatchAction) {
+        if (options && !options.dispatchAction) {
           this.$store.dispatch("payment/pay/complete", payload.paymentType);
         }
         _onSuccess();
