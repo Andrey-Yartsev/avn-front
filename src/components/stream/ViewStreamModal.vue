@@ -75,7 +75,7 @@
         </div>
         <div class="stream-forms">
           <div class="form-comments">
-            <Comments :shownComments="shownComments" :count="5" />
+            <Comments :shownComments="shownComments" :count="comentsCount" />
             <AddComment
               v-if="showCommentForm && !isMyStream"
               ref="addComment"
@@ -198,6 +198,9 @@ export default {
     },
     activeTipsGoal() {
       return this.$store.state.lives.currentLive.tipsGoal;
+    },
+    comentsCount() {
+      return window.screen.availWidth > 1920 ? 10 : 5;
     }
   },
   methods: {

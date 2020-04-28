@@ -160,6 +160,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "freeAccessMediaList",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "magShipping",
     layoutOnlyModal: true
   }

@@ -225,7 +225,7 @@ export default {
       limits: {
         video: 3,
         gif: 1,
-        photo: 5,
+        photo: 50,
         audio: 1
       }
     };

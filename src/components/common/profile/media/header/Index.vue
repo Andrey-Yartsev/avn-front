@@ -71,9 +71,14 @@
             </label>
             <span class="labelWrapper__label">Preview</span>
           </span>
-          <span v-if="post.pinned" class="icn-pin icn-item icn-size_md"></span>
+          <span
+            @click="pinToggle"
+            class="icn-pin icn-item icn-size_md"
+            :class="{ pinned: post.pinned }"
+            v-tooltip="post.pinned ? `Unpin video` : `Pin video`"
+          ></span>
           <span v-if="post.active" class="mediaStatus isActive">
-            <span class="icn-item verified-user" />
+            <span class="icn-item verified-user fullyMonetized" />
             Active
           </span>
           <span v-else class="mediaStatus notActive">
@@ -184,6 +189,24 @@ export default {
     },
     hideBubble() {
       Bubble.hide();
+    },
+    pinToggle() {
+      this.$store.dispatch("profile/media/updateMedia", this.getMediaData(), {
+        root: true
+      });
+    },
+    getMediaData() {
+      const data = {
+        media: {
+          ...this.post,
+          pinned: !this.post.pinned
+        },
+        productId: this.post.productId
+      };
+      if (data.media.freeAccessUsers) {
+        delete data.media.freeAccessUsers;
+      }
+      return data;
     }
   },
   mounted() {
@@ -251,6 +274,16 @@ export default {
     position: relative;
     margin-left: 10px;
     top: 0;
+  }
+}
+.icn-pin {
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+  &.pinned {
+    opacity: 1;
   }
 }
 </style>

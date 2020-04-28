@@ -52,6 +52,7 @@ import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
+import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 
 export default {
@@ -95,6 +96,7 @@ export default {
     AddRedirectLinkModal,
     MediaAccessLinkModal,
     ChatAttachmentsModal,
+    FreeAccessMediaListModal,
     MagShippingModal
   },
   props: {
