@@ -16,7 +16,7 @@
             :class="{ lg: largeControls }"
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Display Name (public)"
             autocomplete="name"
             data-vv-validate-on="blur"
           />
