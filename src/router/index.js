@@ -139,7 +139,7 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/contest",
+    path: "/contests",
     name: "ContestPage",
     component: () =>
       import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index")
