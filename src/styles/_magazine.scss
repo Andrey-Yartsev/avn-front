@@ -29,6 +29,9 @@
   .shipping-info {
     margin: 10px 0;
     font-size: 14px;
+    h2 {
+      text-align: center;
+    }
     .title {
       font-size: 14px;
     }
@@ -51,8 +54,14 @@
         height: auto;
         margin-left: 10px;
       }
+      .reset {
+        .btn {
+          margin-left: 0;
+        }
+      }
     }
   }
+
   .red {
     color: rgba(255, 0, 0, 1);
   }

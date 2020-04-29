@@ -1,5 +1,6 @@
 <template>
-  <div class="payouts-personal-info magazine">
+  <div class="payouts-personal-info">
+    <h2>Shipping Info</h2>
     <div
       class="form-group form-group_clear-gaps-bottom form-group_with-label item"
     >
@@ -29,7 +30,16 @@
         <span class="value__text">
           {{ magazines }}
         </span>
-        <button class="btn" @click="reset">Remove subscription</button>
+      </span>
+    </div>
+    <div
+      class="form-group form-group_clear-gaps-bottom form-group_with-label item"
+    >
+      <span class="title"></span>
+      <span class="value reset">
+        <button class="btn" @click="reset">
+          Remove shipping info & unsubscribe
+        </button>
       </span>
     </div>
   </div>
@@ -72,7 +82,7 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "confirm",
         data: {
-          title: "Are you sure?",
+          title: "Reset shipping",
           success: () => {
             this.$store.dispatch("magazine/resetOffline");
           }

@@ -12,7 +12,7 @@ const actions = {
     data.magazines = data.kinds.map(v => v.name);
     delete data.kinds;
     dispatch("update", data).then(r => {
-      console.log(r.shipping);
+      r.shipping.id = 1; // hack
       commit("extendShipping", r.shipping);
     });
   },
@@ -54,13 +54,16 @@ const actions = {
       delete data.country;
       delete data.state;
     }
-    dispatch("update", data).then(() => {
+    dispatch("update", data).then(result => {
+      console.log({ result, extend });
       commit("extendShipping", extend);
     });
   },
   resetOffline({ dispatch, commit, state }) {
     const data = { ...state.fetchShippingResult };
     data.id = 0;
+    data.hasOfflineSubscription = false;
+    data.hasDigitalMagazineSubscription = false;
     commit("extendShipping", data);
     dispatch("remove");
   }
