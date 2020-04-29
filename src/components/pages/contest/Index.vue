@@ -141,9 +141,9 @@ export default {
     this.$store.dispatch("contest/fetchNominees", {
       contestId: this.contestId
     });
-    this.$store.dispatch("contest/fetchPrizes", {
-      contestId: this.contestId
-    });
+    // this.$store.dispatch("contest/fetchPrizes", {
+    //   contestId: this.contestId
+    // });
   }
 };
 </script>
