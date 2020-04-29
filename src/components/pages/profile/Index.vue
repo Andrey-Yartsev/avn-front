@@ -596,10 +596,8 @@ export default {
     }
   },
   created() {
-    console.log("CREATED");
     this.initContent();
     if (this.profile) {
-      console.log("initProfile");
       this.$store.dispatch("gender/initProfile", this.profile);
     }
     setTimeout(() => {
