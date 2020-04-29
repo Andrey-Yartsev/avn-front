@@ -71,11 +71,16 @@ createRequestAction({
     options.data.userId = params.userId;
     options.data.paymentType = "vote";
     options.data.votes = params.votes;
+    if (params.token) {
+      options.data.token = params.token;
+    }
     if (window.okev) {
       options.data.sentry = JSON.stringify(window.okev.all());
     }
     return options;
-  }
+  },
+  localError: true,
+  throw400: true
 });
 
 export default {

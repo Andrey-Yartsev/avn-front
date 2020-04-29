@@ -20,7 +20,7 @@
       </label>
       <div class="form-group bottom-buttons">
         <div></div>
-        <button class="btn ok-btn" @click="vote">
+        <button class="btn ok-btn" @click="vote" :disabled="votingInProgress">
           Vote
         </button>
         <button class="btn border" @click="$emit('close')">
@@ -33,15 +33,17 @@
 
 <script>
 import User from "@/mixins/user";
+import PayAction from "../settings/payments/payAction";
 
 export default {
-  mixins: [User],
+  mixins: [User, PayAction],
   props: {
     props: Object
   },
   data() {
     return {
-      votes: null
+      votes: null,
+      votingInProgress: false
     };
   },
   computed: {
@@ -49,7 +51,7 @@ export default {
       return Object.entries(this.votesList).map(v => {
         return {
           id: v[0],
-          title: v[1]
+          title: v[1] + (v[0] > 1 ? " - " + "$" + v[0] : " - Free")
         };
       });
     },
@@ -61,6 +63,25 @@ export default {
     },
     votesList() {
       return this.contest.votesList;
+    },
+    payPayload() {
+      return {
+        paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken,
+        contestId: this.props.contestId,
+        votes: this.votes,
+        amount: this.votes,
+        nominee: this.props.nominee,
+        userId: parseInt(this.props.userId)
+      };
+    },
+    voteError() {
+      return this.$store.state.contest.voteError;
+    }
+  },
+  watch: {
+    voteError() {
+      this.$emit("close");
+      this.votingInProgress = false;
     }
   },
   methods: {
@@ -68,33 +89,55 @@ export default {
       this.votes = votes;
     },
     vote() {
-      if (!this.user.isPaymentCardConnected) {
-        this.$store.dispatch("global/flashToast", {
-          text: "You should add card in payment settings",
-          type: "warning"
-        });
-        this.$store.commit(
-          "payment/card/setAfterAddCardRedirect",
-          this.$route.path
-        );
-        this.$router.push("/settings/payments");
-        return;
-      }
-      const params = {
-        contestId: this.props.contestId,
-        votes: this.votes,
-        nominee: this.props.nominee,
-        userId: parseInt(this.props.userId)
-      };
+      this.votingInProgress = true;
 
-      this.$store.dispatch("contest/vote", params).then(r => {
-        if (r.success) {
+      setTimeout(() => {
+        if (this.votes == 1) {
+          this._vote();
+          return;
+        }
+
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$store.commit(
+            "payment/card/setAfterAddCardRedirect",
+            this.$route.path
+          );
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Voting confirm",
+            text: `You are going to vote for ${this.props.name} for $${
+              this.votes
+            }`,
+            success: () => {
+              this._vote();
+            }
+          }
+        });
+      }, 1);
+    },
+    _vote() {
+      this._pay(
+        this.payPayload,
+        () => {
           this.$store.dispatch("global/flashToast", {
             text: "You have been successfully voted"
           });
           this.$emit("close");
+          this.votingInProgress = false;
+        },
+        {
+          dispatchAction: "contest/vote"
         }
-      });
+      );
     }
   },
   created() {

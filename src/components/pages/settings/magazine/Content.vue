@@ -172,7 +172,7 @@ export default {
                 onComplete();
               },
               {
-                dispatchAction: "magazine/pay"
+                dispatchAction: "contests/vote"
               }
             );
           }
