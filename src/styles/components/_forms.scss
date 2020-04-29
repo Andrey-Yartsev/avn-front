@@ -728,6 +728,15 @@ label {
     font-size: 17px;
   }
 }
+
+
+.disabled {
+  .inner {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
 .form-title {
   position: relative;
   overflow: hidden;
@@ -735,13 +744,6 @@ label {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 26px 20px 23px;
-  }
-
-  &.disabled {
-    .inner {
-      pointer-events: none;
-      opacity: 0.5;
-    }
   }
 
   &_psides-reset {

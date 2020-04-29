@@ -14,9 +14,8 @@
       <h1 class="form-title settings-title">
         AVN Magazine
       </h1>
-      <div class="shadow-block">
+      <div class="shadow-block" :class="{ disabled: formsDisabled }">
         <div class="toggle-wrapper border-top first">
-          <!--          :class="{ disabled: subscriptionDisabled }"-->
           <div class="inner">
             <label for="subscribedOffline" class="toggle-label">
               <div class="title">AVN Magazine Print Subscription</div>
@@ -50,11 +49,11 @@
             </label>
           </div>
         </div>
-        <div class="container" v-if="shippingExists">
+        <div class="container inner" v-if="shippingExists">
           <ShippingInfo :info="shipping" class="shipping-info" />
         </div>
       </div>
-      <div class="shadow-block">
+      <div class="shadow-block" :class="{ disabled: formsDisabled }">
         <div class="toggle-wrapper border-top">
           <div class="inner">
             <label for="subscribedDigitalMagazine" class="toggle-label">
@@ -122,11 +121,8 @@ export default {
       }
       return this.shipping.hasDigitalMagazineSubscription;
     },
-    disabled() {
-      if (this.hasOfflineSubscription) {
-        return false;
-      }
-      return true;
+    formsDisabled() {
+      return this.$store.state.magazine.updateLoading;
     },
     free() {
       return this.user.isMakePayment;
