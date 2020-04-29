@@ -4,13 +4,16 @@
       'post',
       {
         'open-dropdown-inside': showDropdown || showFooterDropdown,
-        post_preparation: !post.isMediaReady
+        post_preparation: !post.isMediaReady,
+        outofviewport: isVisible === false
       }
     ]"
     :data-id="post.id"
     :id="'p' + post.id"
+    v-observe-visibility="visibilityChanged"
   >
-    <div class="post-wrapper">
+    <div v-if="isVisible === false" :style="{ height: `${height}px` }" />
+    <div class="post-wrapper" v-else>
       <div class="post-details">
         <Header
           :post="post"
@@ -197,8 +200,7 @@ export default {
       // this.showTip = false;
     },
     visibilityChanged(isVisible, entry) {
-      // return;
-      if (this.$mq === "desktop") {
+      if (this.$mq === "desktop" || this.isReposted) {
         return;
       }
       this.$emit("visibilityChanged", {
