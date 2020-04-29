@@ -25,6 +25,7 @@
               <div class="subtitle2">
                 <template v-if="free">
                   <s>12 months (12 issues) $240.00 $80.00</s>
+                  &nbsp;
                   <span class="red"
                     >Lucky you! As an active member you receive a FREE
                     subscription to AVN</span
@@ -59,7 +60,7 @@
             <label for="subscribedDigitalMagazine" class="toggle-label">
               <div class="title">Digital Edition</div>
               <div class="subtitle semi-transparent">
-                Receive a printed copy of AVN Magazine
+                Get access to the digital edition
               </div>
               <div class="subtitle2">
                 <template v-if="free">
@@ -81,6 +82,11 @@
             </label>
           </div>
         </div>
+        <div class="shadow-block" v-if="hasDigitalMagazineSubscription">
+          <div class="toggle-wrapper border-top">
+            <DigitalPreviews :locked="false" />
+          </div>
+        </div>
       </div>
     </template>
   </div>
@@ -89,6 +95,7 @@
 <script>
 import Loader from "@/components/common/Loader";
 import ShippingInfo from "./ShippingInfo";
+import DigitalPreviews from "./DigitalPreviews";
 import PayAction from "../payments/payAction";
 import User from "@/mixins/user";
 
@@ -97,7 +104,8 @@ export default {
   mixins: [PayAction, User],
   components: {
     Loader,
-    ShippingInfo
+    ShippingInfo,
+    DigitalPreviews
   },
   computed: {
     loading() {
@@ -172,7 +180,7 @@ export default {
                 onComplete();
               },
               {
-                dispatchAction: "contests/vote"
+                dispatchAction: "magazine/pay"
               }
             );
           }

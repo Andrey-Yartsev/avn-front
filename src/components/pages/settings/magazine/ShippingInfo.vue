@@ -38,7 +38,7 @@
       <span class="title"></span>
       <span class="value reset">
         <button class="btn" @click="reset">
-          Remove shipping info & unsubscribe
+          Delete shipping info & cancel print unsubscription
         </button>
       </span>
     </div>

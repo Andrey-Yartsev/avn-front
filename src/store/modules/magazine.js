@@ -12,7 +12,6 @@ const actions = {
     data.magazines = data.kinds.map(v => v.name);
     delete data.kinds;
     dispatch("update", data).then(r => {
-      r.shipping.id = 1; // hack
       commit("extendShipping", r.shipping);
     });
   },
@@ -35,14 +34,22 @@ const actions = {
       hasOfflineSubscription: false
     });
   },
-  subscribeDigitalMagazine({ dispatch }) {
-    return dispatch("_update", {
+  subscribeDigitalMagazine({ dispatch, commit }) {
+    return dispatch("updateDigital", {
       hasDigitalMagazineSubscription: true
+    }).then(() => {
+      commit("extendShipping", {
+        hasDigitalMagazineSubscription: true
+      });
     });
   },
-  unsubscribeDigitalMagazine({ dispatch }) {
-    return dispatch("_update", {
+  unsubscribeDigitalMagazine({ dispatch, commit }) {
+    dispatch("updateDigital", {
       hasDigitalMagazineSubscription: false
+    }).then(() => {
+      commit("extendShipping", {
+        hasDigitalMagazineSubscription: false
+      });
     });
   },
   _update({ dispatch, commit, state }, extend) {
@@ -63,7 +70,6 @@ const actions = {
     const data = { ...state.fetchShippingResult };
     data.id = 0;
     data.hasOfflineSubscription = false;
-    data.hasDigitalMagazineSubscription = false;
     commit("extendShipping", data);
     dispatch("remove");
   }
@@ -136,6 +142,31 @@ createRequestAction({
   },
   localError: true,
   throw400: true
+});
+
+createRequestAction({
+  prefix: "fetchMagazines",
+  requestType: "token",
+  apiPath: "magazines",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  defaultResultValue: []
+});
+
+createRequestAction({
+  prefix: "updateDigital",
+  requestType: "token",
+  apiPath: "users/magazine/digital",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  }
 });
 
 export default {

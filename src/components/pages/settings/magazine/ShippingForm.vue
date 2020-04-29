@@ -160,7 +160,7 @@ export default {
       return this.kindOptions.length < 2;
     },
     submitTitle() {
-      return this.hasShipping ? "Update" : "Activete";
+      return this.hasShipping ? "Update" : "Activate";
     }
   },
   watch: {

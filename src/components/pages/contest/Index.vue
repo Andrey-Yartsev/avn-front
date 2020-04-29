@@ -122,19 +122,7 @@ export default {
       o[v.id] = v.value;
       this.data = { ...this.data, ...o };
     },
-    async send() {},
-    rearrangeByCols(items) {
-      const columns = [[], [], []];
-      let col = 0;
-      for (let i = 0; i < items.length; i++) {
-        columns[col].push(items[i]);
-        col++;
-        if (col % 3 === 0) {
-          col = 0;
-        }
-      }
-      return columns;
-    }
+    async send() {}
   },
   created() {
     this.$store.dispatch("contest/fetchContests");
