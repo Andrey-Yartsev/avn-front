@@ -178,7 +178,11 @@ export default {
     registerOrFollow() {
       if (!this.user) {
         this.$store.dispatch("modal/show", {
-          name: "signup"
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(`/${this.post.author.username}/media`)
+          }
         });
       } else if (!this.post.author.followedBy) {
         this.$store.dispatch("modal/show", {

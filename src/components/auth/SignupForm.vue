@@ -185,6 +185,9 @@ export default {
         return null;
       }
       return { "auth-block auth-block_sm-size": true };
+    },
+    callback() {
+      return this.$store.state.modal.signup.data.callback;
     }
   },
 
@@ -195,7 +198,12 @@ export default {
           this.$router.push("/login");
           break;
         case "modal":
-          this.$store.dispatch("modal/show", { name: "login" });
+          this.$store.dispatch("modal/show", {
+            name: "login",
+            data: {
+              callback: this.callback
+            }
+          });
           this.$emit("openLogin");
           break;
         case "dropdown":
@@ -217,6 +225,7 @@ export default {
               captcha: this.captcha
             })
             .then(() => {
+              this.callback && this.callback();
               this.isSaving = false;
             })
             .catch(() => {
