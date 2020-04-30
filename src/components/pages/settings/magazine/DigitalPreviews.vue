@@ -6,7 +6,15 @@
     <div class="items" v-else>
       <div class="item" v-for="v in items" :key="v.id">
         <a
+          v-if="!locked"
           :href="v.pdfLink"
+          target="_blank"
+          :class="{ 'locked-picture icn-pos_center icn-item': locked }"
+        >
+          <img :src="v.imageUrl" v-if="v.imageUrl" />
+        </a>
+        <a
+          v-else
           target="_blank"
           :class="{ 'locked-picture icn-pos_center icn-item': locked }"
           @click="click"
