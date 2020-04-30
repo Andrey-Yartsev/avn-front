@@ -178,14 +178,16 @@ export default {
     subscribe() {
       if (this.hasShipping) {
         this.$store
-          .dispatch("magazine/updateOfflineForm", this.userInfo)
+          .dispatch("magazine/updateShippingForm", this.userInfo)
           .then(() => {
+            this.$store.commit("magazine/trigOfflineSubscription");
             this.$emit("close");
           });
       } else {
         this.$store
-          .dispatch("magazine/subscribeOfflineForm", this.userInfo)
+          .dispatch("magazine/updateShippingForm", this.userInfo)
           .then(() => {
+            this.$store.commit("magazine/trigOfflineSubscription");
             this.$emit("close");
           });
       }

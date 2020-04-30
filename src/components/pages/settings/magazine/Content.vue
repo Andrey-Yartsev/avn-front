@@ -136,7 +136,7 @@ export default {
       return this.shipping.hasDigitalMagazineSubscription;
     },
     formsDisabled() {
-      return this.$store.state.magazine.updateLoading;
+      return this.$store.state.magazine.updateOfflineLoading;
     },
     digitalDisabled() {
       return this.$store.state.magazine.updateDigitalLoading;
@@ -149,10 +149,18 @@ export default {
         amount: 49,
         paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
       };
+    },
+    trigOfflineSubscription() {
+      return this.$store.state.magazine.trigOfflineSubscription;
     }
   },
   methods: {
     subscribeOffline() {
+      if (!this.shippingExists) {
+        this.$store.dispatch("modal/show", { name: "magShipping" });
+        return;
+      }
+
       if (!this.free) {
         this.pay(() => {
           this._subscribeOffline();
@@ -206,11 +214,7 @@ export default {
       if (!this.free) {
         throw new Error("Wrong logic");
       }
-      if (this.shippingExists) {
-        this.$store.dispatch("magazine/subscribeOffline");
-        return;
-      }
-      this.$store.dispatch("modal/show", { name: "magShipping" });
+      this.$store.dispatch("magazine/subscribeOffline");
     },
     toggleOffline() {
       this.hasOfflineSubscription
@@ -221,6 +225,11 @@ export default {
       this.hasDigitalMagazineSubscription
         ? this.unsubscribeDigitalMagazine()
         : this.subscribeDigitalMagazine();
+    }
+  },
+  watch: {
+    trigOfflineSubscription() {
+      this.subscribeOffline();
     }
   },
   created() {

@@ -2,45 +2,54 @@
 
 import { createRequestAction } from "@/store/utils/storeRequest";
 
-const state = {};
+const state = {
+  trigOfflineSubscription: 0
+};
 
 const actions = {
-  subscribeOfflineForm({ dispatch, commit }, _data) {
-    const data = JSON.parse(JSON.stringify(_data));
-    delete data.country;
-    delete data.state;
-    data.hasOfflineSubscription = true;
-    data.magazines = data.kinds.map(v => v.name);
-    delete data.kinds;
-    dispatch("update", data).then(r => {
-      commit("extendShipping", r.shipping);
-    });
-  },
-  updateOfflineForm({ dispatch, commit }, _data) {
+  // createShipping({ dispatch, commit }, _data) {
+  //   const data = JSON.parse(JSON.stringify(_data));
+  //   delete data.country;
+  //   delete data.state;
+  //   data.magazines = data.kinds.map(v => v.name);
+  //   delete data.kinds;
+  //   dispatch("update", data).then(r => {
+  //     commit("extend", r.shipping);
+  //   });
+  // },
+  updateShippingForm({ dispatch, commit }, _data) {
     const data = JSON.parse(JSON.stringify(_data));
     delete data.country;
     delete data.state;
     data.magazines = data.kinds.map(v => v.name);
     delete data.kinds;
     return dispatch("update", data).then(r => {
-      commit("extendShipping", r.shipping);
+      commit("extend", r.shipping);
     });
   },
-  subscribeOffline({ dispatch }) {
-    return dispatch("_update", {
+  subscribeOffline({ dispatch, commit }) {
+    return dispatch("updateOffline", {
       hasOfflineSubscription: true
+    }).then(() => {
+      commit("extend", {
+        hasOfflineSubscription: true
+      });
     });
   },
-  unsubscribeOffline({ dispatch }) {
-    return dispatch("_update", {
+  unsubscribeOffline({ dispatch, commit }) {
+    return dispatch("updateOffline", {
       hasOfflineSubscription: false
+    }).then(() => {
+      commit("extend", {
+        hasOfflineSubscription: false
+      });
     });
   },
   subscribeDigitalMagazine({ dispatch, commit }) {
     return dispatch("updateDigital", {
       hasDigitalMagazineSubscription: true
     }).then(() => {
-      commit("extendShipping", {
+      commit("extend", {
         hasDigitalMagazineSubscription: true
       });
     });
@@ -49,7 +58,7 @@ const actions = {
     dispatch("updateDigital", {
       hasDigitalMagazineSubscription: false
     }).then(() => {
-      commit("extendShipping", {
+      commit("extend", {
         hasDigitalMagazineSubscription: false
       });
     });
@@ -65,21 +74,24 @@ const actions = {
     }
     dispatch("update", data).then(result => {
       console.log({ result, extend });
-      commit("extendShipping", extend);
+      commit("extend", extend);
     });
   },
   resetOffline({ dispatch, commit, state }) {
     const data = { ...state.fetchShippingResult };
     data.id = 0;
     data.hasOfflineSubscription = false;
-    commit("extendShipping", data);
+    commit("extend", data);
     dispatch("remove");
   }
 };
 
 const mutations = {
-  extendShipping(state, data) {
+  extend(state, data) {
     state.fetchShippingResult = { ...state.fetchShippingResult, ...data };
+  },
+  trigOfflineSubscription(state) {
+    state.trigOfflineSubscription++;
   }
 };
 
@@ -168,6 +180,26 @@ createRequestAction({
   actions,
   options: {
     method: "PUT"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "updateOffline",
+  requestType: "token",
+  apiPath: "users/magazine/offline",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
   }
 });
 
