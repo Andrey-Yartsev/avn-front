@@ -5,7 +5,8 @@ import { createRequestAction } from "@/store/utils/storeRequest";
 const state = {};
 
 const actions = {
-  subscribeOfflineForm({ dispatch, commit }, data) {
+  subscribeOfflineForm({ dispatch, commit }, _data) {
+    const data = JSON.parse(JSON.stringify(_data));
     delete data.country;
     delete data.state;
     data.hasOfflineSubscription = true;
@@ -15,12 +16,13 @@ const actions = {
       commit("extendShipping", r.shipping);
     });
   },
-  updateOfflineForm({ dispatch, commit }, data) {
+  updateOfflineForm({ dispatch, commit }, _data) {
+    const data = JSON.parse(JSON.stringify(_data));
     delete data.country;
     delete data.state;
     data.magazines = data.kinds.map(v => v.name);
     delete data.kinds;
-    dispatch("update", data).then(r => {
+    return dispatch("update", data).then(r => {
       commit("extendShipping", r.shipping);
     });
   },

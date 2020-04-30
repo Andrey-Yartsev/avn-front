@@ -177,11 +177,18 @@ export default {
   methods: {
     subscribe() {
       if (this.hasShipping) {
-        this.$store.dispatch("magazine/updateOfflineForm", this.userInfo);
+        this.$store
+          .dispatch("magazine/updateOfflineForm", this.userInfo)
+          .then(() => {
+            this.$emit("close");
+          });
       } else {
-        this.$store.dispatch("magazine/subscribeOfflineForm", this.userInfo);
+        this.$store
+          .dispatch("magazine/subscribeOfflineForm", this.userInfo)
+          .then(() => {
+            this.$emit("close");
+          });
       }
-      this.$emit("close");
     },
     resetStateId() {
       this.userInfo.stateId = 0;
@@ -191,9 +198,7 @@ export default {
     this.$emit("disabledChange", true);
     setTimeout(() => {
       this.$store.dispatch("payouts/legal/fetch").then(r => {
-        console.log(this.defaultCountryCode, r);
         if (!this.curData.id) {
-          console.log("DATA DOES NOT EXISTS");
           this.userInfo = Object.assign(this.userInfo, r);
           this.userInfo.countryId = this.defaultCountryId;
           this.userInfo.zip = r.postalCode;

@@ -54,7 +54,10 @@
           <ShippingInfo :info="shipping" class="shipping-info" />
         </div>
       </div>
-      <div class="shadow-block" :class="{ disabled: formsDisabled }">
+      <div
+        class="shadow-block"
+        :class="{ disabled: formsDisabled || digitalDisabled }"
+      >
         <div class="toggle-wrapper border-top">
           <div class="inner">
             <label for="subscribedDigitalMagazine" class="toggle-label">
@@ -82,9 +85,12 @@
             </label>
           </div>
         </div>
-        <div class="shadow-block" v-if="hasDigitalMagazineSubscription">
+        <div class="shadow-block">
           <div class="toggle-wrapper border-top">
-            <DigitalPreviews :locked="false" />
+            <DigitalPreviews
+              :locked="!hasDigitalMagazineSubscription"
+              @subscribe="subscribeDigitalMagazine"
+            />
           </div>
         </div>
       </div>
@@ -131,6 +137,9 @@ export default {
     },
     formsDisabled() {
       return this.$store.state.magazine.updateLoading;
+    },
+    digitalDisabled() {
+      return this.$store.state.magazine.updateDigitalLoading;
     },
     free() {
       return this.user.isMakePayment;
