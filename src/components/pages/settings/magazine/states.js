@@ -26,7 +26,10 @@ export default {
       return false;
     },
     states() {
-      return this.$store.state.states.fetchResult;
+      if (!this.$store.state.states.fetchResult) {
+        return [];
+      }
+      return [{ id: "", name: "—" }, ...this.$store.state.states.fetchResult];
     },
     countriesLoading() {
       return this.$store.state.countries.fetchLoading;
@@ -77,7 +80,6 @@ export default {
             if (!this.userInfo.stateId) {
               this.userInfo.stateId = this.states[0].id;
             }
-
             this.statesLoading = false;
           });
       } else {

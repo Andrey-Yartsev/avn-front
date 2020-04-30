@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="subscribe" class="reasons">
+  <div class="loader-infinity" v-if="userInfoLoading">
+    <Loader :fullscreen="false" :inline="true" text="" :small="true" />
+  </div>
+  <form @submit.prevent="subscribe" class="reasons" v-else>
     <div class="form-group form-group_with-label">
       <TextField
         id="firstName"
@@ -17,7 +20,7 @@
       <TextField id="city" label="City" v-model="userInfo.city" />
       <TextField id="zip" label="ZIP" v-model="userInfo.zip" />
 
-      <label class="form-group-inner disabled">
+      <label class="form-group-inner">
         <span class="label country-select__label"
           >Country<span class="red">*</span></span
         >
@@ -89,15 +92,18 @@
 import TextField from "./TextField";
 import States from "./states";
 import Kinds from "./kinds";
+import Loader from "@/components/common/Loader";
 
 export default {
   name: "MagShippingForm",
   mixins: [States, Kinds],
   components: {
-    TextField
+    TextField,
+    Loader
   },
   data() {
     return {
+      userInfoLoading: true,
       userInfo: {
         firstName: "",
         lastName: "",
@@ -183,26 +189,31 @@ export default {
   },
   mounted() {
     this.$emit("disabledChange", true);
-    this.$store.dispatch("payouts/legal/fetch").then(r => {
-      if (!this.curData.id) {
-        this.userInfo = Object.assign(this.userInfo, r);
-        this.userInfo.countryId = this.defaultCountryId;
-        this.userInfo.zip = r.postalCode;
-        this.userInfo.kinds = [this.kindOptions[0]];
-      } else {
-        this.userInfo = Object.assign(this.userInfo, this.curData);
-        this.userInfo.countryId = this.curData.country.id;
-        this.userInfo.stateId = this.curData.state.id;
-        this.userInfo.kinds = this.userInfo.magazines
-          .map(name => {
-            return this.kindOptions.find(kind => kind.name === name);
-          })
-          .filter(v => !!v);
-        if (this.userInfo.kinds.length === 0) {
+    setTimeout(() => {
+      this.$store.dispatch("payouts/legal/fetch").then(r => {
+        console.log(this.defaultCountryCode, r);
+        if (!this.curData.id) {
+          console.log("DATA DOES NOT EXISTS");
+          this.userInfo = Object.assign(this.userInfo, r);
+          this.userInfo.countryId = this.defaultCountryId;
+          this.userInfo.zip = r.postalCode;
           this.userInfo.kinds = [this.kindOptions[0]];
+        } else {
+          this.userInfo = Object.assign(this.userInfo, this.curData);
+          this.userInfo.countryId = this.curData.country.id;
+          this.userInfo.stateId = this.curData.state.id;
+          this.userInfo.kinds = this.userInfo.magazines
+            .map(name => {
+              return this.kindOptions.find(kind => kind.name === name);
+            })
+            .filter(v => !!v);
+          if (this.userInfo.kinds.length === 0) {
+            this.userInfo.kinds = [this.kindOptions[0]];
+          }
         }
-      }
-    });
+        this.userInfoLoading = false;
+      });
+    }, 1000);
   }
 };
 </script>
