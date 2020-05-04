@@ -404,6 +404,21 @@ export default {
       this.$nextTick(() => {
         this.resetPrice();
       });
+    },
+    handleDroppedFiles(files) {
+      files.forEach(file => {
+        const fileType = file.type.split("/")[1];
+        if (!this.preloadedMedias.length) {
+          if (this.allMediaTypes.includes(fileType)) {
+            this.addMediaFiles({ target: { files: [file] } });
+          }
+        } else {
+          const acceptedTypes = this.getAcceptedFormats.split(",");
+          if (acceptedTypes.includes(`.${fileType}`)) {
+            this.addMediaFiles({ target: { files: [file] } });
+          }
+        }
+      });
     }
   }
 };

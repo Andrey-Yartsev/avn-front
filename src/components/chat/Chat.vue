@@ -107,10 +107,15 @@
             </div>
           </div>
           <div class="chatCollectionContentWrapper">
-            <div class="chatMessagesCollectionView">
+            <div
+              class="chatMessagesCollectionView"
+              @dragover="dragOverHandler"
+              @dragender="dragEnderHandler"
+              @drop="dropHandler"
+            >
               <template v-if="activeUser">
                 <Messages :withUser="activeUser" />
-                <AddMessage :withUser="activeUser" />
+                <AddMessage :withUser="activeUser" ref="addMessageSection" />
               </template>
             </div>
           </div>
@@ -158,7 +163,8 @@ export default {
     return {
       isTyping: false,
       deleteInProgress: false,
-      virtualChat: null
+      virtualChat: null,
+      dropedFiles: null
     };
   },
 
@@ -280,6 +286,18 @@ export default {
       this.$store.commit("chat/setActiveWindow", false);
       clearInterval(focusIntervalId);
       focusIntervalId = 0;
+    },
+    dragOverHandler(e) {
+      e.preventDefault();
+    },
+    dragEnderHandler(e) {
+      e.preventDefault();
+    },
+    dropHandler(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      let files = [...e.dataTransfer.files];
+      this.$refs.addMessageSection.$children[0].handleDroppedFiles(files);
     }
   },
   created() {
