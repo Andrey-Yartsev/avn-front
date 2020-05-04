@@ -41,7 +41,8 @@ export default {
       return this.$store.state.magazine.fetchMagazinesLoading;
     },
     items() {
-      const items = [...this.$store.state.magazine.fetchMagazinesResult];
+      let items = [...this.$store.state.magazine.fetchMagazinesResult];
+      items = items.filter(v => v.type !== "intimate");
       const n = items.length % 4;
       for (let i = 0; i < n; i++) {
         items.push({ id: "dummy" + i });
