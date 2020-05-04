@@ -16,7 +16,11 @@ export default {
       return this.getCountryIdByCode(this.defaultCountryCode);
     },
     countries() {
-      return this.$store.state.countries.items;
+      const items = this.$store.state.countries.items;
+      if (!items || !items.length) {
+        return [];
+      }
+      return [{ id: "", name: "—" }, ...items];
     },
     hasStates() {
       if (this.countries && this.countries.length && this.userInfo.countryId) {
@@ -42,6 +46,9 @@ export default {
       }
       return this.countries.find(v => code === v.code).id;
     },
+    getStateByName(name) {
+      return this.states.find(v => v.name === name);
+    },
     fetchCountries() {
       this.$store.dispatch("countries/fetch").then(() => {
         if (this.defaultCountryCode) {
@@ -52,11 +59,7 @@ export default {
             this.userInfo.countryId = this.getCountryIdByCode(
               this.defaultCountryCode
             );
-          } else {
-            this.userInfo.countryId = this.countries[0].id;
           }
-        } else {
-          this.userInfo.countryId = this.countries[0].id;
         }
       });
     },

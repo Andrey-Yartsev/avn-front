@@ -72,8 +72,7 @@ const actions = {
       delete data.country;
       delete data.state;
     }
-    dispatch("update", data).then(result => {
-      console.log({ result, extend });
+    dispatch("update", data).then(() => {
       commit("extend", extend);
     });
   },

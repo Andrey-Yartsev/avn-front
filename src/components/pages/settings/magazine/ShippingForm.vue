@@ -27,7 +27,6 @@
         <span class="select-wrapper">
           <select
             name="country"
-            v-validate="'required'"
             v-model="userInfo.countryId"
             @change="resetStateId"
           >
@@ -43,11 +42,7 @@
           >State/Region<span class="red">*</span></span
         >
         <span class="select-wrapper">
-          <select
-            name="state"
-            v-validate="'required'"
-            v-model="userInfo.stateId"
-          >
+          <select name="state" v-model="userInfo.stateId">
             <option v-for="v in states" :key="v.id" :value="v.id">{{
               v.name
             }}</option>
@@ -199,26 +194,38 @@ export default {
   mounted() {
     this.$emit("disabledChange", true);
     setTimeout(() => {
-      this.$store.dispatch("payouts/legal/fetch").then(r => {
-        if (!this.curData.id) {
-          this.userInfo = Object.assign(this.userInfo, r);
-          this.userInfo.countryId = this.defaultCountryId;
-          this.userInfo.zip = r.postalCode;
-          this.userInfo.kinds = [this.kindOptions[0]];
-        } else {
-          this.userInfo = Object.assign(this.userInfo, this.curData);
-          this.userInfo.countryId = this.curData.country.id;
-          this.userInfo.stateId = this.curData.state.id;
-          this.userInfo.kinds = this.userInfo.magazines
-            .map(name => {
-              return this.kindOptions.find(kind => kind.name === name);
-            })
-            .filter(v => !!v);
-          if (this.userInfo.kinds.length === 0) {
+      this.$store.dispatch("payouts/legal/fetch").then(legal => {
+        this.$store.dispatch("payouts/account/fetch").then(account => {
+          if (!this.curData.id) {
+            this.userInfo = Object.assign(this.userInfo, legal);
+            if (account.countryId) {
+              this.userInfo.countryId = account.countryId;
+            } else {
+              this.userInfo.countryId = this.defaultCountryId;
+            }
+            if (legal.state) {
+              const _state = this.getStateByName(legal.state);
+              if (_state) {
+                this.userInfo.stateId = _state.id;
+              }
+            }
+            this.userInfo.zip = legal.postalCode;
             this.userInfo.kinds = [this.kindOptions[0]];
+          } else {
+            this.userInfo = Object.assign(this.userInfo, this.curData);
+            this.userInfo.countryId = this.curData.country.id;
+            this.userInfo.stateId = this.curData.state.id;
+            this.userInfo.kinds = this.userInfo.magazines
+              .map(name => {
+                return this.kindOptions.find(kind => kind.name === name);
+              })
+              .filter(v => !!v);
+            if (this.userInfo.kinds.length === 0) {
+              this.userInfo.kinds = [this.kindOptions[0]];
+            }
           }
-        }
-        this.userInfoLoading = false;
+          this.userInfoLoading = false;
+        });
       });
     }, 1000);
   }
