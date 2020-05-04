@@ -226,6 +226,10 @@ export default {
             title: "Security"
           },
           {
+            name: "magazine",
+            title: "AVN Magazine"
+          },
+          {
             name: "premium-links",
             title: "Premium Links"
           },
@@ -286,12 +290,6 @@ export default {
           path: `/${this.user.username}/media`
         });
       }
-      // if (this.user && this.user.isMakePayment) {
-      //   items.push({
-      //     name: "magazine",
-      //     title: "AVN Magazine"
-      //   });
-      // }
       return items;
     },
     showAvatarSave() {
