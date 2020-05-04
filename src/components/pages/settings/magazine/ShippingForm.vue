@@ -85,32 +85,16 @@
 
 <script>
 import TextField from "./TextField";
-import States from "./states";
+import UserInfo from "./userInfo";
 import Kinds from "./kinds";
 import Loader from "@/components/common/Loader";
 
 export default {
   name: "MagShippingForm",
-  mixins: [States, Kinds],
+  mixins: [UserInfo, Kinds],
   components: {
     TextField,
     Loader
-  },
-  data() {
-    return {
-      userInfoLoading: true,
-      userInfo: {
-        firstName: "",
-        lastName: "",
-        address: "",
-        address2: "",
-        city: "",
-        zip: "",
-        countryId: "",
-        stateId: "",
-        kinds: []
-      }
-    };
   },
   computed: {
     valid() {
@@ -193,41 +177,6 @@ export default {
   },
   mounted() {
     this.$emit("disabledChange", true);
-    setTimeout(() => {
-      this.$store.dispatch("payouts/legal/fetch").then(legal => {
-        this.$store.dispatch("payouts/account/fetch").then(account => {
-          if (!this.curData.id) {
-            this.userInfo = Object.assign(this.userInfo, legal);
-            if (account.countryId) {
-              this.userInfo.countryId = account.countryId;
-            } else {
-              this.userInfo.countryId = this.defaultCountryId;
-            }
-            if (legal.state) {
-              const _state = this.getStateByName(legal.state);
-              if (_state) {
-                this.userInfo.stateId = _state.id;
-              }
-            }
-            this.userInfo.zip = legal.postalCode;
-            this.userInfo.kinds = [this.kindOptions[0]];
-          } else {
-            this.userInfo = Object.assign(this.userInfo, this.curData);
-            this.userInfo.countryId = this.curData.country.id;
-            this.userInfo.stateId = this.curData.state.id;
-            this.userInfo.kinds = this.userInfo.magazines
-              .map(name => {
-                return this.kindOptions.find(kind => kind.name === name);
-              })
-              .filter(v => !!v);
-            if (this.userInfo.kinds.length === 0) {
-              this.userInfo.kinds = [this.kindOptions[0]];
-            }
-          }
-          this.userInfoLoading = false;
-        });
-      });
-    }, 1000);
   }
 };
 </script>
