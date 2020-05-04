@@ -142,7 +142,7 @@ export default {
       return this.$store.state.magazine.updateDigitalLoading;
     },
     free() {
-      return this.user.isMakePayment;
+      return this.user.isPaymentReceived || this.user.isMakePayment;
     },
     payPayload() {
       return {
