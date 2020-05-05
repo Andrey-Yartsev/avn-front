@@ -135,6 +135,7 @@
         position: sticky;
         top: 0;
         z-index: 1;
+        overflow: visible;
 
         @include media-breakpoint-up($desktop-breakpoint) {
           background-color: $white;
@@ -144,6 +145,20 @@
 
           @include media-breakpoint-up($desktop-breakpoint) {
             top: 30px;
+          }
+        }
+
+        .bg-gradient__shadow {
+
+          .semi-transparent {
+            flex: 0 0 auto;
+            max-width: 50%;
+          }
+
+          .blocked-search {
+            width: auto;
+            flex: 1;
+            margin-left: 20px;
           }
         }
       }
@@ -645,8 +660,8 @@
     }
 
     &__cell {
-      flex: 0 0 58%;
-      max-width: 58%;
+      flex: 0 0 30%;
+      max-width: 30%;
 
       @include media-breakpoint-up($desktop-breakpoint) {
         flex: 0 0 40%;

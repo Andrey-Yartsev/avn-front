@@ -787,6 +787,29 @@ label {
     flex: 1;
     z-index: 3;
 
+    &.m-wrap-elements {
+      flex-wrap: wrap;
+    }
+
+    &.m-separate-rows-mob {
+
+      .semi-transparent {
+
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+          flex: 0 0 100%;
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+
+      .blocked-search {
+
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+          margin-left: 0;
+        }
+      }
+    }
+
     .semi-transparent {
       display: block;
       word-break: break-word;
