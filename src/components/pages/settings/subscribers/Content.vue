@@ -36,6 +36,15 @@
             <span class="label icn-item">Expired</span>
           </div>
         </label>
+        <label
+          class="form-group-inner"
+          :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
+        >
+          <div class="checkbox-wrapper">
+            <input type="checkbox" v-model="isPaidOnly" />
+            <span class="label icn-item">Paid</span>
+          </div>
+        </label>
         <button class="btn btn_not-bold sm" @click="openGroupMessageModal">
           Send group message
         </button>
@@ -148,6 +157,7 @@ export default {
     isSnapchatOnly: false,
     isActiveOnly: false,
     isExpiredOnly: false,
+    isPaidOnly: false,
     fetchLimit: 15
   }),
   computed: {
@@ -197,7 +207,8 @@ export default {
       if (this.actionPrefix === "subscribes") {
         this.$store
           .dispatch("subscribes/getPosts", {
-            active: this.isActiveUsers()
+            active: this.isActiveUsers(),
+            paid: this.isPaidOnly
           })
           .then(() => {
             this.isInitFetch = false;
@@ -253,6 +264,9 @@ export default {
       this.init();
     },
     isExpiredOnly() {
+      this.init();
+    },
+    isPaidOnly() {
       this.init();
     }
   },

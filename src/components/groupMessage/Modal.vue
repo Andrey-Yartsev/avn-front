@@ -26,6 +26,7 @@
                         <option value="all">All</option>
                         <option value="active">Active</option>
                         <option value="expired">Expired</option>
+                        <option value="paid">Paid</option>
                       </select>
                     </div>
                   </div>
