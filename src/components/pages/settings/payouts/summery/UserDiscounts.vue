@@ -1,5 +1,8 @@
 <template>
-  <div class="DiscountUsersCollectionView">
+  <div
+    class="DiscountUsersCollectionView"
+    :class="{ 'table-header-title': showSearchResult }"
+  >
     <div
       class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
     >
@@ -12,7 +15,10 @@
             </p>
           </span>
           <form class="blocked-search b-search-form">
-            <SearchBubble @addUser="addUser" />
+            <SearchBubble
+              @addUser="addUser"
+              @togleSearchResult="togleSearchResult"
+            />
           </form>
         </div>
         <div class="table-header blocked-table-header ">
@@ -174,7 +180,8 @@ export default {
 
   data() {
     return {
-      query: ""
+      query: "",
+      showSearchResult: false
     };
   },
 
@@ -212,6 +219,9 @@ export default {
         return;
       }
       this.add(user);
+    },
+    togleSearchResult(value) {
+      this.showSearchResult = value;
     }
   },
 
