@@ -121,6 +121,9 @@ export default {
     },
     $route() {
       this.opened2 = false;
+    },
+    opened2(value) {
+      this.$emit("togleSearchResult", value);
     }
   },
 
