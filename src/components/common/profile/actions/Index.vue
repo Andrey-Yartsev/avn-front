@@ -52,6 +52,18 @@
             }}</span>
             <span class="label">Clips</span>
           </router-link>
+          <router-link
+            v-if="isOwner(this.profile.id) || profile.groupsCount > 0"
+            class="btn-user-activity"
+            :to="`/${profile.username}/groups`"
+          >
+            <span class="value">{{
+              isOwner(this.profile.id)
+                ? this.$store.state.auth.user.groupsCount
+                : profile.groupsCount
+            }}</span>
+            <span class="label">Groups</span>
+          </router-link>
         </div>
         <div class="profile-actions" v-if="isOwner(this.profile.id)">
           <router-link

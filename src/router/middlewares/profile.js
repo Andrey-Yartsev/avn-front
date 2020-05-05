@@ -11,7 +11,9 @@ const Profile = {
 
       if (
         page &&
-        ["photos", "videos", "posts", "links", "media"].indexOf(page) === -1
+        ["photos", "videos", "posts", "links", "media", "groups"].indexOf(
+          page
+        ) === -1
       ) {
         next("/not-found");
         return;

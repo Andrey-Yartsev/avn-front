@@ -154,6 +154,10 @@
                 v-else-if="pageName === 'media'"
                 :private="isOwner(profile.id)"
               />
+              <GroupsPage
+                v-else-if="pageName === 'groups'"
+                :isPrivate="isOwner(profile.id)"
+              />
               <template v-else>
                 <p
                   :class="['empty-feed']"
@@ -247,6 +251,7 @@ import Footer from "@/components/footer/Index.vue";
 import LinkPost from "@/components/addLink/LinkPost";
 import LinksPage from "@/components/common/profile/links/Index";
 import MediaPage from "@/components/common/profile/media/Index";
+import GroupsPage from "@/components/common/profile/groups/Index";
 import TipAuto from "@/mixins/tipAuto";
 
 export default {
@@ -276,7 +281,8 @@ export default {
     Highlights,
     LinkPost,
     LinksPage,
-    MediaPage
+    MediaPage,
+    GroupsPage
   },
 
   data() {
@@ -478,7 +484,8 @@ export default {
     getPosts() {
       if (
         this.$route.params.page !== "links" &&
-        this.$route.params.page !== "media"
+        this.$route.params.page !== "media" &&
+        this.$route.params.page !== "groups"
       ) {
         this.$store.dispatch("profile/home/getPosts");
       }

@@ -1,0 +1,180 @@
+import { createRequestAction } from "../../utils/storeRequest";
+import mockedGroups from "../../../mock/groups";
+
+const fetchLimit = 9;
+
+const initState = {
+  groups: mockedGroups,
+  // groups: [],
+  marker: null,
+  offset: 0,
+  limit: fetchLimit,
+  allDataReceived: false
+};
+
+const state = { ...initState };
+
+const mutations = {
+  addGroups(state, newGroups) {
+    if (state.groups.length) {
+      const filteredGroups = newGroups.filter(item => {
+        const existedItem = state.groups.find(
+          groups => groups.productId === item.productId
+        );
+        return existedItem ? false : true;
+      });
+      state.groups = [...state.groups, ...filteredGroups];
+    } else {
+      state.groups = [...newGroups];
+    }
+  },
+  clearGroups(state) {
+    state.groups = [];
+    state.offset = 0;
+    state.allDataReceived = false;
+  },
+  addGroup(state, newListItem) {
+    state.groups = [...newListItem, ...state.groups];
+    // state.offset++;
+  },
+  updateGroup(state, updatedListItem) {
+    state.groups = state.groups.map(item => {
+      return item.productId === updatedListItem.productId
+        ? updatedListItem
+        : item;
+    });
+  },
+  deleteGroup(state, productId) {
+    state.groups = state.groups.filter(item => item.productId !== productId);
+    state.offset--;
+  },
+  isAllDataRecieved(state, length) {
+    if (length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + state.limit;
+    }
+  }
+};
+
+const actions = {
+  getGroups({ dispatch, commit, state }, { filter, profileId }) {
+    return dispatch("_getGroups", {
+      profileId,
+      filter,
+      offset: state.offset
+    }).then(res => {
+      commit("addGroups", res);
+      commit("isAllDataRecieved", res.length);
+      return res;
+    });
+  },
+  addGroup({ dispatch, commit }, data) {
+    return dispatch("_addGroup", data).then(res => {
+      commit("addGroup", res);
+      dispatch(
+        "global/flashToast",
+        { text: "New group successfully added" },
+        {
+          root: true
+        }
+      );
+      commit("auth/incrementListsCount", res.length, { root: true });
+    });
+  },
+  updateGroup({ dispatch, commit }, data) {
+    return dispatch("_updateGroup", data).then(res => {
+      commit("updateGroup", res);
+      // commit("mediaPage/updateMediaItem", res, { root: true });
+    });
+  },
+  deleteGroup({ dispatch, commit }, productId) {
+    dispatch("_deleteGroup", productId).then(() => {
+      commit("deleteGroup", productId);
+      dispatch(
+        "global/flashToast",
+        { text: "Group deleted successfully" },
+        {
+          root: true
+        }
+      );
+      // commit("auth/decrementStoreCount", null, { root: true });
+    });
+  }
+};
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getGroups",
+  apiPath: "groups/{userId}",
+  state,
+  mutations,
+  actions,
+  paramsToOptions: function(params) {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.offset = params.offset || 0;
+    options.query.limit = fetchLimit;
+    options.query.filter = params.filter;
+    return options;
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.profileId);
+  }
+});
+
+createRequestAction({
+  prefix: "_addGroup",
+  apiPath: "groups",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_updateGroup",
+  apiPath: "groups/{productId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(data, path) {
+    return path.replace(/{productId}/, data.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params.media;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_deleteGroup",
+  apiPath: "groups/{productId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+
+export default {
+  namespaced: true,
+  state,
+  actions,
+  mutations
+};
