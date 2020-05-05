@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="DiscountUsersCollectionView"
-    :class="{ 'table-header-title': showSearchResult }"
-  >
+  <div class="DiscountUsersCollectionView">
     <div
       class="form-title border-top table-header-title table-header-title_sticky bg-gradient bg-gradient_pseudo"
+      :class="{ 'm-search-results': showSearchResult }"
     >
       <div class="bg-gradient__shadow bg-gradient__shadow_mob">
         <div class="inner m-wrap-elements m-separate-rows-mob">
