@@ -49,8 +49,10 @@ const actions = {
     return dispatch("updateDigital", {
       hasDigitalMagazineSubscription: true
     }).then(() => {
-      commit("extend", {
-        hasDigitalMagazineSubscription: true
+      dispatch("fetchMagazines", {}).then(() => {
+        commit("extend", {
+          hasDigitalMagazineSubscription: true
+        });
       });
     });
   },
@@ -167,7 +169,13 @@ createRequestAction({
   options: {
     method: "GET"
   },
-  defaultResultValue: []
+  defaultResultValue: [],
+  paramsToOptions: function(params, options) {
+    options.query = {
+      limit: 400
+    };
+    return options;
+  }
 });
 
 createRequestAction({
