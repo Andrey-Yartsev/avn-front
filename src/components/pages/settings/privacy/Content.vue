@@ -28,7 +28,7 @@
               type="checkbox"
               name="isPrivate"
               value="true"
-              v-model="localUser.isPrivate"
+              v-model="localUser.privacy.isPrivate"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -52,7 +52,7 @@
               type="checkbox"
               name="forFollowersOnly"
               value="true"
-              v-model="localUser.forFollowersOnly"
+              v-model="localUser.privacy.forFollowersOnly"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -72,9 +72,9 @@
           <label class="toggle-element">
             <input
               type="checkbox"
-              name="showRank"
+              name="showRankCount"
               value="true"
-              v-model="localUser.showRank"
+              v-model="localUser.privacy.showRankCount"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -96,7 +96,7 @@
               type="checkbox"
               name="showSubscribersCount"
               value="true"
-              v-model="localUser.showSubscribersCount"
+              v-model="localUser.privacy.showSubscribersCount"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -117,9 +117,9 @@
           <label class="toggle-element">
             <input
               type="checkbox"
-              name="marketingPreferences"
+              name="allowMarketingPreferences"
               value="true"
-              v-model="localUser.marketingPreferences"
+              v-model="localUser.privacy.allowMarketingPreferences"
             />
             <span class="toggle-element_switcher"></span>
           </label>
@@ -133,7 +133,7 @@
                     type="checkbox"
                     name="avnCom"
                     value="true"
-                    v-model="localUser.preferencesAvnCom"
+                    v-model="localUser.privacy.marketingPreferences.avn"
                   />
                   <span class="label icn-item"
                     >AVN.com / AVN Email Communications</span
@@ -146,7 +146,7 @@
                     type="checkbox"
                     name="avnMagazine"
                     value="true"
-                    v-model="localUser.preferencesAvnMagazine"
+                    v-model="localUser.privacy.marketingPreferences.avnMagazine"
                   />
                   <span class="label icn-item">AVN Magazine</span>
                 </div>
@@ -157,7 +157,7 @@
                     type="checkbox"
                     name="thirdParty"
                     value="true"
-                    v-model="localUser.preferencesThirdParty"
+                    v-model="localUser.privacy.marketingPreferences.thirdParty"
                   />
                   <span class="label icn-item">Third Party</span>
                 </div>

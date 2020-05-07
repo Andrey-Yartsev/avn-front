@@ -51,10 +51,20 @@
             <span class="icn-block icn-item"></span>
           </div>
         </div>
-        <span class="user-login reset-ml">
+        <span class="user-login reset-ml user-login-container">
           <router-link :to="'/' + profile.username">{{
             profile.username
           }}</router-link>
+          <span v-if="showProfileRank" class="user-login user-login-rating">
+            # {{ profile.privacy.rankCount }}
+            <span
+              v-if="isProfileOwner"
+              class="icn-item icn-locked icn-size_sm"
+              :class="{
+                locked: !profile.privacy.showRankCount
+              }"
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -85,6 +95,15 @@ export default {
     },
     profileExtraClass() {
       return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
+    },
+    showProfileRank() {
+      return (
+        this.isProfileOwner ||
+        (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
+    },
+    isProfileOwner() {
+      return this.user && this.profile.id === this.user.id;
     }
   },
   methods: {

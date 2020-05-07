@@ -317,6 +317,26 @@
     max-width: 100%;
     display: block;
     margin-top: -4px;
+    &-container {
+     position: relative;
+     overflow: initial;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+    }
+    &-rating {
+      opacity: .8;
+      font-size: 22px;
+      line-height: 22px;
+      .icn-size_sm {
+        font-size: 16px;
+        vertical-align: center;
+        &.locked {
+          color: red;
+        }
+      }
+    }
+
 
     a {
 
@@ -491,6 +511,7 @@
 
 .profile-data {
   display: flex;
+  flex-wrap: wrap;
   padding-top: 12px;
   padding-bottom: 12px;
 
@@ -500,11 +521,19 @@
 
   .item {
     padding-right: 20px;
+    padding-bottom: 10px;
   }
 
   a {
     color: inherit;
     transition: color .3s ease;
+
+    .icn-locked {
+      opacity: .5;
+      &.locked {
+        color: red;
+      }
+    }
 
     @include media-breakpoint-up($desktop-breakpoint) {
 
