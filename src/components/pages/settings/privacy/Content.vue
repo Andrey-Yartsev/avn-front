@@ -126,7 +126,12 @@
         </div>
         <div class="shadow-block negative-margin-15">
           <div class="container">
-            <div class="form-group checkbox-group">
+            <div
+              class="form-group checkbox-group"
+              :class="{
+                disabled: !localUser.privacy.allowMarketingPreferences
+              }"
+            >
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
