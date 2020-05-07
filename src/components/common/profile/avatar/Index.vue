@@ -97,6 +97,9 @@ export default {
       return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
     },
     showProfileRank() {
+      if (!this.profile.privacy.rankCount) {
+        return false;
+      }
       return (
         this.isProfileOwner ||
         (this.profile.privacy && this.profile.privacy.showRankCount)

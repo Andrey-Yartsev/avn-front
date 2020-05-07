@@ -394,6 +394,9 @@ export default {
       return this.snapchat && !this.isOwner(this.profile.id);
     },
     showProfileRank() {
+      if (!this.profile.privacy.rankCount) {
+        return false;
+      }
       return (
         this.isOwner(this.profile.id) ||
         (this.profile.privacy && this.profile.privacy.showRankCount)
