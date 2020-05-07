@@ -167,33 +167,6 @@
                   <span class="label icn-item">Third Party</span>
                 </div>
               </label>
-
-              <div
-                class="form-group form-group_with-label pb-reset"
-                v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
-                "
-              >
-                <label class="form-group-inner">
-                  <span class="label">Watermark text</span>
-                  <span class="form-group form-group_clear-gaps">
-                    <span class="form-field">
-                      <input
-                        type="text"
-                        name="watermarkText"
-                        v-model="localUser.watermarkText"
-                    /></span>
-                  </span>
-                </label>
-              </div>
-              <WatermarkImageUploader
-                v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
-                "
-                @change="watermarkImageChange"
-                @remove="watermarkImageRemove"
-                :localUser="localUser"
-              />
             </div>
           </div>
         </div>
