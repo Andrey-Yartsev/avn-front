@@ -291,6 +291,18 @@
                     Non-Subscribers
                   </span>
                 </label>
+                <label class="radio-wrapper icn-item m-inline">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="none"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    None
+                  </span>
+                </label>
               </div>
             </div>
           </div>
