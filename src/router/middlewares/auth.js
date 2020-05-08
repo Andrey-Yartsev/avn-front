@@ -68,6 +68,9 @@ const Auth = {
     }
     const token = BrowserStore.get("token");
     if (!token) {
+      if (to.path === "/settings/magazine") {
+        BrowserStore.set("magazineRedirect", true);
+      }
       return next("/login");
     }
     Store.dispatch("auth/setToken", token);
@@ -81,10 +84,18 @@ const Auth = {
       .catch(error => {
         if (error.code === 102) {
           Store.dispatch("auth/resetUser").then(() => {
-            Store.dispatch("auth/setOtpAuth", true).then(() => next("/login"));
+            Store.dispatch("auth/setOtpAuth", true).then(() => {
+              if (to.path === "/settings/magazine") {
+                BrowserStore.set("magazineRedirect", true);
+              }
+              next("/login");
+            });
           });
         } else {
           Store.dispatch("auth/logout").then(() => {
+            if (to.path === "/settings/magazine") {
+              BrowserStore.set("magazineRedirect", true);
+            }
             next("/login");
           });
         }

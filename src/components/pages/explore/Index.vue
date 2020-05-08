@@ -177,6 +177,7 @@ import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
+import BrowserStore from "store";
 
 export default {
   name: "Explore",
@@ -419,6 +420,12 @@ export default {
       if (newValue !== undefined && oldValue !== undefined) {
         this.init();
       }
+    }
+  },
+  mounted() {
+    const magazineRedirect = BrowserStore.get("magazineRedirect");
+    if (magazineRedirect && this.user) {
+      this.$router.push("/settings/magazine");
     }
   }
 };
