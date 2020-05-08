@@ -79,7 +79,7 @@
           <div
             class="canceled table__cell table__cell_align table__cell_align-hor-c"
           >
-            Canceled
+            Expires
           </div>
         </div>
       </div>
