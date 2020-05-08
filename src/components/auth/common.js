@@ -1,4 +1,5 @@
 import Twitter from "@/utils/twitter";
+import BrowserStore from "store";
 
 export default {
   data() {
@@ -15,6 +16,10 @@ export default {
 
   methods: {
     twitter() {
+      const storedOkevData = BrowserStore.get("okevData");
+      if (window.okev && !storedOkevData) {
+        BrowserStore.set("okevData", JSON.stringify(window.okev.all()));
+      }
       window.location.href = Twitter.getLoginUrl();
     },
     onCaptchaVerified(recaptchaToken) {

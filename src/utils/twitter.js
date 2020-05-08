@@ -1,10 +1,13 @@
 import request from "@/utils/request";
+import BrowserStore from "store";
 
 export default {
   getAuthToken: async (token, secret) => {
     const data = { token, secret };
-    if (window.okev) {
-      data.sentry = JSON.stringify(window.okev.all());
+    const storedOkevData = BrowserStore.get("okevData");
+    if (storedOkevData) {
+      data.sentry = storedOkevData;
+      BrowserStore.remove("okevData");
     }
     const response = await request("auth/social/twitter", {
       method: "POST",
