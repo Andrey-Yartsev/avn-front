@@ -38,6 +38,7 @@
             :withUser="user"
             :withFontSizeController="false"
             :withTips="false"
+            :multipleMedia="true"
           />
           <button
             type="button"
