@@ -60,7 +60,7 @@
                     :href="`/`"
                     @click.prevent="goBack"
                   />
-                  <h1 class="page-title">Following</h1>
+                  <h1 class="page-title first-letter-uppercase">{{ page }}</h1>
                 </div>
                 <div class="explore">
                   <div class="userCollectionView">
