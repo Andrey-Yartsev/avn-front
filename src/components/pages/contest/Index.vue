@@ -5,7 +5,7 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
-      <div class="contest-header">
+      <div class="contest-header" v-if="contest.image_url">
         <img :src="contest.image_url" />
       </div>
       <div class="awards-title text-centered">
