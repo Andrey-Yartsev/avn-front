@@ -22,13 +22,6 @@
             }}</router-link>
           </span>
         </div>
-        <button
-          type="button"
-          class="btn alt border btn_fix-width-sm"
-          @click="vote"
-        >
-          Vote
-        </button>
       </div>
       <div
         class="user-num-list"
@@ -37,6 +30,15 @@
         <span class="user-num-list__text">{{ props.n }}</span>
       </div>
       <p class="profile-text">{{ props.description }}</p>
+      <div class="text-centered">
+        <button
+          type="button"
+          class="btn alt border btn_fix-width-sm"
+          @click="vote"
+        >
+          Vote
+        </button>
+      </div>
     </div>
   </div>
 </template>
