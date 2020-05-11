@@ -1,9 +1,12 @@
 <template>
   <div class="userView">
-    <div class="bg bg-color bg-gradient_light"></div>
+    <div
+      class="bg bg-color bg-gradient_light"
+      :style="'background-image: url(' + props.image_url + ')'"
+    ></div>
     <div class="user-container user-container_numbered">
       <div class="avatar avatar_md avatar_md-desk">
-        <span class="avatar__img"><img :src="props.image_url"/></span>
+        <span class="avatar__img"><img :src="props.avatar"/></span>
       </div>
       <div class="names-actions-wrapper">
         <div class="user-names">

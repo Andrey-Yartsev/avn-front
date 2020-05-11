@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container contest">
     <Navigate />
     <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />

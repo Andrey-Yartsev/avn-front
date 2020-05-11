@@ -12,3 +12,13 @@
     margin-top: 15px;
   }
 }
+
+.contest {
+  .userView {
+    .bg {
+      background-size: cover;
+      background-position: center;
+      background-color: rgba($gray, 0.1);
+    }
+  }
+}
