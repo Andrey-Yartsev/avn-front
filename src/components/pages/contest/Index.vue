@@ -5,8 +5,8 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
-      <div class="awards-header">
-        HEADER
+      <div class="contest-header">
+        <img :src="contest.image_url" />
       </div>
       <div class="awards-title text-centered">
         {{ contest.name }}
