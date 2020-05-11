@@ -20,20 +20,11 @@
           <Nominee
             v-for="v in nominees"
             :key="v.id"
-            :props="v"
+            :nominee="v"
             :contestId="contestId"
+            :active="activeNomineeId === v.id"
           />
         </div>
-      </template>
-      <template v-else>
-        <Share
-          v-if="$store.state.awards.categories"
-          :categories="_categories"
-          :data="data || this.$store.state.awards.savedData.data"
-          :modelUser="modelUser"
-          :isGay="isGay"
-          @complete="complete"
-        />
       </template>
     </template>
   </div>
@@ -45,7 +36,6 @@ import Footer from "@/components/footer/Index.vue";
 import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import Nominee from "./Nominee";
-import Share from "./Share";
 import moment from "moment-timezone";
 
 export default {
@@ -55,13 +45,13 @@ export default {
     Navigate,
     Footer,
     Loader,
-    Nominee,
-    Share
+    Nominee
   },
   data() {
     return {
       data: {},
-      scriptLoading: true
+      scriptLoading: true,
+      activeNomineeId: 0
     };
   },
   computed: {
@@ -122,13 +112,26 @@ export default {
       o[v.id] = v.value;
       this.data = { ...this.data, ...o };
     },
-    async send() {}
+    async send() {},
+    scrollToShared() {
+      if (window.location.hash) {
+        const m = window.location.hash.match(/#nominee(\d+)/);
+        if (m) {
+          this.$scrollTo(`[data-id="${m[1]}"]`);
+          this.activeNomineeId = parseInt(m[1]);
+        }
+      }
+    }
   },
   created() {
     this.$store.dispatch("contest/fetchContests");
-    this.$store.dispatch("contest/fetchNominees", {
-      contestId: this.contestId
-    });
+    this.$store
+      .dispatch("contest/fetchNominees", {
+        contestId: this.contestId
+      })
+      .then(() => {
+        this.scrollToShared();
+      });
     // this.$store.dispatch("contest/fetchPrizes", {
     //   contestId: this.contestId
     // });
