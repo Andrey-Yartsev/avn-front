@@ -69,6 +69,16 @@
       ></span>
       {{ post.buyCount || 0 }}
     </span>
+    <span :class="[{ active: post.isFavorite }, 'actions__btn']">
+      <span
+        @click="clipLike"
+        class="btn-icon likes icn-item icn-size_lg"
+        v-tooltip="post.favoritesCount > 1 ? 'Likes' : 'Like'"
+      />
+      <span class="likes__counter" @click="showLikesModal">
+        {{ post.favoritesCount ? post.favoritesCount : "" }}
+      </span>
+    </span>
     <div
       :class="['more-functions', { open: opened }]"
       v-click-outside="hide"
@@ -161,6 +171,25 @@ export default {
         return;
       }
       this.$emit("openBuyModal");
+    },
+    clipLike() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", { name: "signup" });
+        return;
+      }
+      const action = this.post.isFavorite ? "unlike" : "like";
+      this.$store.dispatch("profile/media/likeMedia", {
+        productId: this.post.productId,
+        action
+      });
+    },
+    showLikesModal() {
+      this.$store.dispatch("modal/show", {
+        name: "clipLikes",
+        data: {
+          postId: this.post.productId
+        }
+      });
     }
   },
   directives: {
