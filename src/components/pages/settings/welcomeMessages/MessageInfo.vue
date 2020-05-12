@@ -95,7 +95,7 @@
           <label
             :for="`image-${type}`"
             class="btn btn_fix-width btn_block border photo-btn"
-            >Upload</label
+            >{{ uploading ? "Uploading" : "Upload" }}</label
           >
         </div>
 
@@ -105,6 +105,7 @@
           accept=".jpg,.jpeg,.png"
           :ref="`image-${type}`"
           :name="`image-${type}`"
+          :disabled="uploading"
           @change="upload"
         />
       </span>
@@ -116,7 +117,7 @@
       <span class="title"></span>
       <span class="value save-button-container">
         <button
-          :disabled="!dataChanged"
+          :disabled="!dataChanged || uploading"
           type="button"
           class="btn btn_fix-width"
           @click="$emit('save')"
@@ -129,13 +130,15 @@
 </template>
 
 <script>
-import upload from "@/utils/upload";
+import FileUpload from "@/mixins/fileUpload";
 
 export default {
   name: "MessageInfo",
+  mixins: [FileUpload],
   data() {
     return {
-      file: null
+      file: null,
+      uploading: false
     };
   },
   props: {
@@ -153,14 +156,29 @@ export default {
     },
     imagePreview() {
       return this.settings.imagePreview;
+    },
+    allMediaTypes() {
+      const { photo } = this.inputAcceptTypes;
+      return [...photo];
+    }
+  },
+  watch: {
+    preloadedMedias(value) {
+      if (value && value[0] && value[0].processId) {
+        this.uploading = false;
+        const filePath = value[0].processId;
+        this.getImagePreview();
+        this.$emit("setImagePath", filePath);
+        this.preloadedMedias = [];
+      }
     }
   },
   methods: {
     async upload() {
       try {
-        const filePath = await upload(this.$refs[this.refName].files[0]);
-        this.getImagePreview();
-        this.$emit("setImagePath", filePath);
+        const file = this.$refs[this.refName].files[0];
+        this.uploading = true;
+        this.addMediaFiles({ target: { files: [file] } });
       } catch (err) {
         console.log(err);
       }
