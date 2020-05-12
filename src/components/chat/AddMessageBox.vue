@@ -52,7 +52,7 @@
             rows="1"
             cols="60"
             :placeholder="textareaPlaceholder"
-            maxlength="500"
+            maxlength="10000"
             :minHeight="30"
             :maxHeight="100"
             @enter="sendMessage"
