@@ -1,11 +1,14 @@
 <template>
   <div class="payouts-bank-done">
-    <div id="is_paid_subscription__wrapper" class="shadow-block border-top">
-      <div class="container">
+    <div id="is_paid_subscription__wrapper" class="border-top">
+      <!-- <div :class="{container: $mq === 'mobile'}"> -->
+      <div>
         <div class="form-group form-group_with-label">
           <div
             class="form-title"
-            :class="{ 'form-title_psides-reset': this.$mq === 'mobile' }"
+            :class="{
+              'form-title_psides-reset toggle-wrapper': this.$mq === 'mobile'
+            }"
           >
             <div class="inner">
               <div class="semi-transparent">
@@ -13,127 +16,131 @@
               </div>
             </div>
           </div>
-          <form class="payouts-legal-form" @submit.stop.prevent="save">
-            <label class="form-group-inner subscription">
-              <span class="label">Discount</span>
-              <span class="subscription__field field-symbol-percentage">
-                <span class="form-field">
-                  <span class="subscription__per-month"
-                    >from ${{ currentSubscribtionPrice }}</span
-                  >
-                  <input
-                    class="field-gap_currency field-gap_timeunit"
-                    type="number"
-                    min="0"
-                    :max="100"
-                    step="0.01"
-                    :disabled="isEnabled"
-                    name="subscribeDiscount"
-                    v-model="discount.amount"
-                  />
+          <div :class="{ 'container shadow-block': $mq === 'mobile' }">
+            <form class="payouts-legal-form" @submit.stop.prevent="save">
+              <label class="form-group-inner subscription">
+                <span class="label">Discount</span>
+                <span class="subscription__field field-symbol-percentage">
+                  <span class="form-field">
+                    <span class="subscription__per-month"
+                      >from ${{ currentSubscribtionPrice }}</span
+                    >
+                    <input
+                      class="field-gap_currency field-gap_timeunit"
+                      type="number"
+                      min="0"
+                      :max="100"
+                      step="0.01"
+                      :disabled="isEnabled"
+                      name="subscribeDiscount"
+                      v-model="discount.amount"
+                    />
+                  </span>
                 </span>
-              </span>
-            </label>
-            <label
-              v-if="discount.amount"
-              class="form-group-inner subscription"
-              :class="{ 'mobile-view': this.$mq === 'mobile' }"
-            >
-              <span class="label">Computed price</span>
-              <span class="label_computedDiscount" v-if="isDiscountInputCorrect"
-                >$ {{ getComputedPrice }}</span
+              </label>
+              <label
+                v-if="discount.amount"
+                class="form-group-inner subscription"
+                :class="{ 'mobile-view': this.$mq === 'mobile' }"
               >
-              <span v-else class="label_computedDiscount-error"
-                >Please, enter the correct discount value</span
-              >
-            </label>
-            <label class="form-group-inner subscription discountField">
-              <span class="label">Discount limit</span>
-              <span class="subscription__field ">
-                <span class="form-field">
-                  <input
-                    class="field-gap_currency field-gap_timeunit"
-                    type="number"
-                    min="0"
-                    step="1"
-                    :disabled="isEnabled"
-                    name="subscribeDiscount"
-                    v-model="discount.limit"
-                  />
-                  <sup>
-                    *Number of available subscriptions by discount price
-                  </sup>
+                <span class="label">Computed price</span>
+                <span
+                  class="label_computedDiscount"
+                  v-if="isDiscountInputCorrect"
+                  >$ {{ getComputedPrice }}</span
+                >
+                <span v-else class="label_computedDiscount-error"
+                  >Please, enter the correct discount value</span
+                >
+              </label>
+              <label class="form-group-inner subscription discountField">
+                <span class="label">Discount limit</span>
+                <span class="subscription__field ">
+                  <span class="form-field">
+                    <input
+                      class="field-gap_currency field-gap_timeunit"
+                      type="number"
+                      min="0"
+                      step="1"
+                      :disabled="isEnabled"
+                      name="subscribeDiscount"
+                      v-model="discount.limit"
+                    />
+                    <sup>
+                      *Number of available subscriptions by discount price
+                    </sup>
+                  </span>
                 </span>
-              </span>
-            </label>
-            <label
-              class="form-group-inner subscription"
-              :class="{ 'mobile-view': this.$mq === 'mobile' }"
-            >
-              <span class="label">Expiration date</span>
-              <span v-if="discount.period.to" class="label_computedDiscount">
-                {{ getTime }}</span
+              </label>
+              <label
+                class="form-group-inner subscription"
+                :class="{ 'mobile-view': this.$mq === 'mobile' }"
               >
-              <span class="" v-else>Date not selected</span>
-            </label>
-            <div
-              class="post-datetime"
-              :class="{ 'post-datetime-mobile': this.$mq === 'mobile' }"
-            >
-              <div v-if="isEnabled" class="blocker" />
-              <Datetime
-                :inputId="`post-datetime__switcher_${'modal'}`"
-                class="post-datetime__switcher"
-                type="datetime"
-                v-model="discount.period.to"
-                input-class="post-datetime__input"
-                use12-hour
-                :min-datetime="minDate"
-                @close="closeDatepicker"
-                :phrases="{ ok: 'Set', cancel: 'Cancel' }"
-              />
-              <span
-                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
-                @click="openDatepicker"
-              ></span>
-              <span>
-                Set date
-              </span>
-            </div>
-            <span
-              class="form-group-inner subscription"
-              :class="{ 'mobile-view': this.$mq === 'mobile' }"
-            >
-              <span class="label">Discount enabled</span>
-              <label class="toggle-element">
-                <input
-                  type="checkbox"
-                  name="isStreamsTweet"
-                  :disabled="isSwitcherDisabled"
-                  v-model="isEnabled"
-                  :value="isEnabled"
-                  @change="change"
+                <span class="label">Expiration date</span>
+                <span v-if="discount.period.to" class="label_computedDiscount">
+                  {{ getTime }}</span
+                >
+                <span class="" v-else>Date not selected</span>
+              </label>
+              <div
+                class="post-datetime"
+                :class="{ 'post-datetime-mobile': this.$mq === 'mobile' }"
+              >
+                <div v-if="isEnabled" class="blocker" />
+                <Datetime
+                  :inputId="`post-datetime__switcher_${'modal'}`"
+                  class="post-datetime__switcher"
+                  type="datetime"
+                  v-model="discount.period.to"
+                  input-class="post-datetime__input"
+                  use12-hour
+                  :min-datetime="minDate"
+                  @close="closeDatepicker"
+                  :phrases="{ ok: 'Set', cancel: 'Cancel' }"
                 />
                 <span
-                  class="toggle-element_switcher"
-                  :class="{ disabled: isSwitcherDisabled }"
-                />
-              </label>
-            </span>
-          </form>
-          <div
-            v-if="isEnabled"
-            class="buttonWrapper"
-            :class="{ withMargin: this.$mq === 'desktop' }"
-          >
-            <button
-              type="button"
-              class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
-              @click="informSubscribers"
-              :disabled="informed"
+                  class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+                  @click="openDatepicker"
+                ></span>
+                <span>
+                  Set date
+                </span>
+              </div>
+              <span
+                class="form-group-inner subscription"
+                :class="{ 'mobile-view': this.$mq === 'mobile' }"
+              >
+                <span class="label">Discount enabled</span>
+                <label class="toggle-element">
+                  <input
+                    type="checkbox"
+                    name="isStreamsTweet"
+                    :disabled="isSwitcherDisabled"
+                    v-model="isEnabled"
+                    :value="isEnabled"
+                    @change="change"
+                  />
+                  <span
+                    class="toggle-element_switcher"
+                    :class="{ disabled: isSwitcherDisabled }"
+                  />
+                </label>
+              </span>
+            </form>
+            <div
+              v-if="isEnabled"
+              class="buttonWrapper"
+              :class="{ withMargin: this.$mq === 'desktop' }"
             >
-              Inform expired subscribers
-            </button>
+              <button
+                type="button"
+                class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+                @click="informSubscribers"
+                :disabled="informed"
+              >
+                Inform expired subscribers
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -145,12 +152,12 @@
 import { Datetime } from "vue-datetime";
 import { DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
-import States from "../states";
+import States from "../payouts/states";
 import Form from "@/mixins/form";
 import PayoutsCommon from "../common";
 
 export default {
-  name: "LegalDiscount",
+  name: "Discount",
   mixins: [States, PayoutsCommon, Form],
   components: { Datetime },
   data() {
@@ -237,14 +244,14 @@ export default {
         data.discount = {
           ...this.discount,
           isActive: true,
-          limit: parseInt(this.discount.limit),
+          limit: this.discount.limit ? parseInt(this.discount.limit) : 0,
           period: {
             ...this.discount.period,
             from: this.discount.period.from || new Date().toISOString()
           }
         };
       }
-      console.log(data.discount);
+      // console.log(data.discount);
       this.$store.dispatch("profile/update", data).then(() => {
         if (disable) {
           this.informed = false;
@@ -326,6 +333,7 @@ export default {
   align-items: center;
   justify-content: center;
   padding-top: 10px;
+  padding-bottom: 10px;
   &.withMargin {
     margin-right: -11.5%;
   }
@@ -367,5 +375,8 @@ export default {
   background-color: white;
   opacity: 0.5;
   z-index: 100;
+}
+.toggle-wrapper {
+  border-bottom: none;
 }
 </style>

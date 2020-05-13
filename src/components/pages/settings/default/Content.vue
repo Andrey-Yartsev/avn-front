@@ -192,6 +192,7 @@
             </div>
           </div>
         </div>
+        <Discount />
       </template>
 
       <DeleteRestore v-else />
@@ -335,6 +336,7 @@ import TextareaAutosize from "@/components/common/TextareaAutosize";
 import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
 import timezones from "@/utils/timezones";
+import Discount from "./Discount";
 
 export default {
   name: "ProfileSettingsContent",
@@ -344,7 +346,8 @@ export default {
   components: {
     ColorSelect,
     TextareaAutosize,
-    DeleteRestore
+    DeleteRestore,
+    Discount
   },
 
   methods: {
