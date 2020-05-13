@@ -51,6 +51,7 @@ import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
+import GroupPayConfirmModal from "@/components/common/profile/groups/modals/GroupPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
 import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
 import ContestVotingModal from "@/components/pages/contest/VotingModal";
@@ -94,6 +95,7 @@ export default {
     AddMediaModal,
     EditMediaModal,
     MediaPayConfirmModal,
+    GroupPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
     ContestVotingModal,

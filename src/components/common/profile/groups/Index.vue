@@ -1,21 +1,28 @@
 <template>
-  <div>
+  <div class="usersGroups">
     <div v-if="loading" class="loader-infinity">
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <template v-if="isPrivate">
-        Owner
-      </template>
-      <div class="viewSettings" :class="{ mobile: $mq === 'mobile' }">
+      <div
+        v-if="isPrivate"
+        class="viewSettings"
+        :class="{ mobile: $mq === 'mobile' }"
+      >
+        <button
+          type="button"
+          @click="newGroupHandler"
+          class="btn btn_reset-mgap alt border btn_fix-width-md connect-twitter"
+        >
+          + New group
+        </button>
         <div
           :class="['buttonWrapper', 'more-functions', { open: opened }]"
           v-click-outside="hide"
         >
           <div class="more-functions__overlay" @click="hide"></div>
-          <div class="sortLabel">Sort:</div>
+          <div class="sortLabel">Filter:</div>
           <div class="openMenuButton" @click="open">
-            <span class="status-card on icn-item checkmark styledCheckmark" />
             <span class="filterLabel">{{ getFilterName }}</span>
           </div>
           <div class="more-functions__dropdown">
@@ -35,7 +42,7 @@
                 <component
                   :is="groupComponent"
                   v-for="item in groups"
-                  :post="item"
+                  :group="item"
                   :key="item.id"
                   from="profile/home"
                   :isPrivate="isPrivate"
@@ -127,11 +134,14 @@ export default {
           this.isInitFetch = false;
           this.handleResponseWithIntersectionObserver(this.fetchData);
         });
+    },
+    newGroupHandler() {
+      console.log("open modal");
     }
   },
   mounted() {
     // this.$store.commit("profile/groups/clearGroups", null, { root: true });
-    this.fetchData();
+    // this.fetchData();
   }
 };
 </script>

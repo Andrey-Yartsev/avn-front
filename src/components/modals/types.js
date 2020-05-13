@@ -152,6 +152,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "groupPayConfirm",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "addRedirectLink",
     layoutOnlyModal: true
   },

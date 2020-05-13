@@ -54,6 +54,28 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
+  },
+  joinGroup(state, productId) {
+    state.groups = state.groups.map(item => {
+      if (item.productId === productId) {
+        return {
+          ...item,
+          isMember: true
+        };
+      }
+      return item;
+    });
+  },
+  leaveGroup(state, productId) {
+    state.groups = state.groups.map(item => {
+      if (item.productId === productId) {
+        return {
+          ...item,
+          isMember: false
+        };
+      }
+      return item;
+    });
   }
 };
 
@@ -99,6 +121,22 @@ const actions = {
         }
       );
       // commit("auth/decrementStoreCount", null, { root: true });
+    });
+  },
+  addMember({ dispatch }, userId) {
+    return dispatch("_addMember", userId);
+  },
+  removeMember({ dispatch }, userId) {
+    return dispatch("_removeMember", userId);
+  },
+  joinGroup({ dispatch, commit }, productId) {
+    dispatch("_joinGroup", productId).then(() => {
+      commit("joinGroup", productId);
+    });
+  },
+  leaveGroup({ dispatch, commit }, productId) {
+    dispatch("_leaveGroup", productId).then(() => {
+      commit("leaveGroup", productId);
     });
   }
 };
@@ -161,6 +199,73 @@ createRequestAction({
 createRequestAction({
   prefix: "_deleteGroup",
   apiPath: "groups/{productId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_addMember",
+  apiPath: "groups/{productId}/members",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{productId}/, params.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.userId = params.userId;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_removeMember",
+  apiPath: "groups/{productId}/members/{userId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(params, path) {
+    let newPath;
+    newPath = path.replace(/{productId}/, params.productId);
+    newPath = path.replace(/{userId}/, params.userId);
+    return newPath;
+  },
+  paramsToOptions: function(params, options) {
+    options.userId = params.userId;
+    return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_joinGroup",
+  apiPath: "groups/{productId}/join",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_leaveGroup",
+  apiPath: "groups/{productId}/join",
   state,
   mutations,
   actions,
