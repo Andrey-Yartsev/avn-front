@@ -136,7 +136,9 @@ export default {
         });
     },
     newGroupHandler() {
-      console.log("open modal");
+      this.$store.dispatch("modal/show", {
+        name: "addGroup"
+      });
     }
   },
   mounted() {

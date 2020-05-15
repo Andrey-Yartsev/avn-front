@@ -1,7 +1,11 @@
 <template>
   <div class="groupItem">
     <div class="groupItem-header">
-      <img :src="group.image" :alt="group.title" class="header-image" />
+      <img
+        :src="group.media[0].src.source"
+        :alt="group.title"
+        class="header-image"
+      />
       <div class="header-content bg-gradient bg-gradient_light">
         <h3 v-html="group.title" />
         <div class="header-content-description" v-html="group.description" />

@@ -101,12 +101,14 @@ const actions = {
           root: true
         }
       );
-      commit("auth/incrementListsCount", res.length, { root: true });
+      // commit("auth/incrementListsCount", res.length, { root: true });
+      return res;
     });
   },
   updateGroup({ dispatch, commit }, data) {
     return dispatch("_updateGroup", data).then(res => {
       commit("updateGroup", res);
+      return res;
       // commit("mediaPage/updateMediaItem", res, { root: true });
     });
   },
@@ -165,7 +167,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_addGroup",
-  apiPath: "groups",
+  apiPath: "groups/",
   state,
   mutations,
   actions,

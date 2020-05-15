@@ -144,6 +144,14 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "addGroup",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "editGroup",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "statPosts",
     layoutOnlyModal: true
   },
