@@ -9,7 +9,9 @@
       <div class="header-content bg-gradient bg-gradient_light">
         <h3 v-html="group.title" />
         <div class="header-content-description" v-html="group.description" />
-        <div v-if="isAuthor" class="header-content-settings"></div>
+        <div v-if="isAuthor" class="header-content-settings">
+          <Footer :group="group" />
+        </div>
         <div v-else class="header-content-joinGroupContainer">
           <button
             v-if="group.isMember"
@@ -35,10 +37,14 @@
 
 <script>
 import User from "@/mixins/user";
+import Footer from "../parts/Footer";
 
 export default {
   name: "GroupItem",
   mixins: [User],
+  components: {
+    Footer
+  },
   props: {
     group: {
       type: Object,
@@ -57,8 +63,8 @@ export default {
       return this.$store.state.profile.home.profile;
     },
     isAuthor() {
-      return false;
-      // return this.user.id === this.profile.id;
+      // return false;
+      return this.user.id === this.profile.id;
     }
   },
   methods: {

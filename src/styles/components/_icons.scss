@@ -258,6 +258,29 @@
     }
   }
 
+  &-unlocked {
+
+    &:after {
+      content: "\E61C";
+    }
+  }
+
+  &-radio {
+
+    &-checked {
+      &:after {
+        content: "\E60D";
+      }
+    }
+
+    &-unchecked {
+      &:after {
+        content: "\E60E";
+      }
+    }
+
+  }
+
   &-pos {
 
     &_center {

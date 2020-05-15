@@ -34,8 +34,8 @@ export default [
       }
     ],
     price: "2.00",
-    isActive: true,
-    isPublic: true,
+    isActive: false,
+    isPublic: false,
     isMember: false,
     membersCount: 4
   },
