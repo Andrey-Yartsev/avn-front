@@ -143,7 +143,7 @@ import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
 import { DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
-import scheduledMessages from "@/mock/scheduleMessages";
+// import scheduledMessages from "@/mock/scheduleMessages";
 
 export default {
   name: "groupMessageModal",
@@ -156,7 +156,7 @@ export default {
     return {
       subscriberType: "all",
       scheduledDate: undefined,
-      scheduledMessages: scheduledMessages
+      scheduledMessages: []
     };
   },
   computed: {
