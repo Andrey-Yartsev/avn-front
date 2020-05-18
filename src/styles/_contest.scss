@@ -19,7 +19,7 @@
       border: 2px solid rgba($default-secondary-color, 0.5);
     }
     .bg {
-      height: 200px;
+      height: 278px;
       background-size: cover;
       background-position: center;
       background-color: rgba($gray, 0.1);
@@ -33,6 +33,11 @@
       left: 0;
       right: 0;
     }
+    .user-container {
+      flex: auto;
+      height: 222px;
+    }
+    margin-bottom: 20px;
   }
 }
 .contest-header {
