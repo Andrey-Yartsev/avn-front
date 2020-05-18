@@ -91,6 +91,7 @@
                     :post="post"
                     :key="post.id"
                     from="explore"
+                    :showPin="false"
                   />
                 </template>
                 <template v-else>
