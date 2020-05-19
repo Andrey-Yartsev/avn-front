@@ -823,6 +823,13 @@
   padding-left: 36px;
   color: $primary-color;
 
+  &.expired-value {
+    .btn-reset_prim-color {
+      margin-left: 5px;
+      width: 17px;
+    }
+  }
+
   @include media-breakpoint-up($desktop-breakpoint) {
     padding-left: 0;
     padding-right: 36px;

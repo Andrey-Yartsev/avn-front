@@ -160,6 +160,19 @@
         </div>
       </div>
       <div class="actions">
+        <div
+          class="post-expired-time"
+          v-if="datetimeExpired && $mq === 'desktop' && where === 'modal'"
+        >
+          <div class="datetime-value expired-value">
+            <span class="icn-item icn-calendar icn-size_lg" />
+            <span class="post-datetime__value">{{ formattedDateExpired }}</span>
+            <span
+              @click="resetDatetimeExpired"
+              class="icn-item btn-reset btn-reset_prim-color icn-pos_center"
+            />
+          </div>
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -197,6 +210,28 @@
               ></span>
               <span class="btn-post__text">
                 Schedule
+              </span>
+            </div>
+          </div>
+          <div class="btn-post btn-post_datetime" v-if="showExpired">
+            <div class="post-datetime" :class="{ disabled: datetimeExpired }">
+              <Datetime
+                :inputId="`post-datetimeExpired__switcher_${where}`"
+                class="post-datetime__switcher"
+                type="datetime"
+                v-model="datetimeExpired"
+                input-class="post-datetime__input"
+                use12-hour
+                :min-datetime="minDate"
+                @close="closeDatepickerExpired"
+                :phrases="{ ok: 'Expired', cancel: 'Cancel' }"
+              />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+                @click="openDatepickerExpired"
+              ></span>
+              <span class="btn-post__text">
+                Expired
               </span>
             </div>
           </div>
@@ -277,7 +312,7 @@
       <div
         class="post-attachment"
         v-if="
-          (datetime || preloadedMedias.length) &&
+          (datetime || datetimeExpired || preloadedMedias.length) &&
             $mq === 'mobile' &&
             (isNew || (!isNew && mediaType !== 'audio'))
         "
@@ -318,6 +353,18 @@
             />
           </div>
         </div>
+        <div
+          class="post-scheduled-time"
+          v-if="datetimeExpired && $mq === 'mobile'"
+        >
+          <div class="datetime-value">
+            <span class="post-datetime__value">{{ formattedDateExpired }}</span>
+            <span
+              @click="resetDatetimeExpired"
+              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
+            />
+          </div>
+        </div>
       </div>
       <div class="loader-container loader-container_center" v-if="isSaving">
         <Loader
@@ -354,6 +401,7 @@ const InitialState = {
   isFree: false,
   mediaType: "all",
   datetime: undefined,
+  datetimeExpired: undefined,
   saving: false,
   withoutWatermark: false,
   limits: {
@@ -466,6 +514,17 @@ export default {
       }
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     },
+    formattedDateExpired() {
+      if (this.$mq === "mobile") {
+        return (
+          "Post will be expired at " +
+          moment(this.datetimeExpired).format("MMM D, hh:mm a")
+        );
+      }
+      return (
+        "Expired at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
+      );
+    },
     minDate() {
       return LuxonDateTime.local()
         .plus({ minutes: 1 })
@@ -494,6 +553,10 @@ export default {
         return false;
       }
       return this.user.isPerformer;
+    },
+    showExpired() {
+      return true;
+      // return this.showSchedule;
     }
   },
   methods: {
@@ -514,6 +577,9 @@ export default {
     resetDatetime() {
       this.datetime = InitialState.datetime;
     },
+    resetDatetimeExpired() {
+      this.datetimeExpired = InitialState.datetimeExpired;
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
@@ -522,6 +588,7 @@ export default {
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
       this.datetime = InitialState.datetime;
+      this.datetimeExpired = InitialState.datetimeExpired;
       this.saving = false;
     },
     getPostData() {
@@ -531,10 +598,15 @@ export default {
         .utc()
         .format("Y-MM-DD HH:mm:ss");
 
+      const expiredDate = moment(this.datetimeExpired)
+        .utc()
+        .format("Y-MM-DD HH:mm:ss");
+
       const postData = {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
+        withExpiredDate: !!this.datetimeExpired,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
@@ -553,6 +625,10 @@ export default {
         postData.scheduledDate = scheduledDate;
       }
 
+      if (postData.withExpiredDate) {
+        postData.expiredDate = expiredDate;
+      }
+
       if (this.hasSubscribePrice) {
         postData.isFree = this.isFree;
       }
@@ -564,7 +640,17 @@ export default {
       document.body.classList.add("open-timepicker");
       document.getElementById(`post-datetime__switcher_${this.where}`).click();
     },
+    openDatepickerExpired() {
+      if (this.datetimeExpired) return;
+      document.body.classList.add("open-timepicker");
+      document
+        .getElementById(`post-datetimeExpired__switcher_${this.where}`)
+        .click();
+    },
     closeDatepicker() {
+      document.body.classList.remove("open-timepicker");
+    },
+    closeDatepickerExpired() {
       document.body.classList.remove("open-timepicker");
     },
 
@@ -635,6 +721,7 @@ export default {
         }
 
         this.datetime = this.post.scheduledDate;
+        this.datetimeExpired = this.post.expiredDate;
         this.postMsg = this.getConvertedText();
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
