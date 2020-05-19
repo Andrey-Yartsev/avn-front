@@ -174,7 +174,20 @@ export default {
     },
     clipLike() {
       if (!this.user) {
-        this.$store.dispatch("modal/show", { name: "signup" });
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(`/${this.post.author.username}/media`)
+          }
+        });
+        return;
+      }
+      if (!this.post.canFavorite) {
+        this.$store.dispatch("global/flashToast", {
+          text: "You can't mark this clip as a favorite",
+          type: "error"
+        });
         return;
       }
       const action = this.post.isFavorite ? "unlike" : "like";
@@ -184,6 +197,9 @@ export default {
       });
     },
     showLikesModal() {
+      if (!this.post.canViewFavorite) {
+        return;
+      }
       this.$store.dispatch("modal/show", {
         name: "clipLikes",
         data: {

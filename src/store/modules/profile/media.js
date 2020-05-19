@@ -139,7 +139,7 @@ const mutations = {
   },
   likeMediaSuccess(state, { productId, isFavorite, favoritesCount }) {
     state.media = state.media.map(item => {
-      if (productId === item.id) {
+      if (productId === item.productId) {
         return {
           ...item,
           isFavorite,
@@ -149,7 +149,7 @@ const mutations = {
 
       return item;
     });
-    if (state.separateMedia && state.separateMedia.id === productId) {
+    if (state.separateMedia && state.separateMedia.productId === productId) {
       state.separateMedia = {
         ...state.separateMedia,
         isFavorite,
