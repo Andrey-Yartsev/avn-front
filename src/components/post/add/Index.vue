@@ -160,22 +160,6 @@
         </div>
       </div>
       <div class="actions">
-        <div
-          class="b-check-state b-check-state_full-width b-check-state_watermark"
-          :class="{ mediaSelected: preloadedMedias.length > 0 }"
-          v-if="user.hasWatermarkVideo || user.hasWatermarkPhoto"
-        >
-          <label :class="{ disabled: preloadedMedias.length > 0 }">
-            <input
-              class="is-free-post"
-              type="checkbox"
-              :disabled="preloadedMedias.length > 0"
-              v-model="withoutWatermark"
-            />
-            <span class="b-check-state__icon icn-item icn-size_lg"></span>
-            <span class="b-check-state__text">Without watermark</span>
-          </label>
-        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -245,6 +229,22 @@
               </div>
             </div>
           </template>
+          <div
+            v-if="user.hasWatermarkVideo || user.hasWatermarkPhoto"
+            class="b-check-state btn-post b-check-state_watermark"
+            :class="{ mediaSelected: preloadedMedias.length > 0 }"
+          >
+            <label :class="{ disabled: preloadedMedias.length > 0 }">
+              <input
+                class="is-free-post"
+                type="checkbox"
+                :disabled="preloadedMedias.length > 0"
+                v-model="withoutWatermark"
+              />
+              <span class="b-check-state__icon icn-item icn-size_lg"></span>
+              <span class="b-check-state__text">Without watermark</span>
+            </label>
+          </div>
         </div>
         <div
           class="tweet-new-post"
