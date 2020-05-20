@@ -17,7 +17,10 @@
             </div>
           </div>
           <div :class="{ 'container shadow-block': $mq === 'mobile' }">
-            <form class="payouts-legal-form" @submit.stop.prevent="save">
+            <form
+              class="payouts-legal-form"
+              @submit.stop.prevent="saveDiscount"
+            >
               <label class="form-group-inner subscription">
                 <span class="label">Discount</span>
                 <span class="subscription__field field-symbol-percentage">
@@ -228,10 +231,10 @@ export default {
     change(event) {
       const value = this.str2bool(event.target.value);
       this.$nextTick(() => {
-        this.save(value);
+        this.saveDiscount(value);
       });
     },
-    save(disable) {
+    saveDiscount(disable) {
       this.saving = true;
 
       const data = { ...this.$store.state.auth.user };
@@ -251,7 +254,6 @@ export default {
           }
         };
       }
-      // console.log(data.discount);
       this.$store.dispatch("profile/update", data).then(() => {
         if (disable) {
           this.informed = false;
