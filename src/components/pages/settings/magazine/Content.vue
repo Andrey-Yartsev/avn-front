@@ -104,6 +104,7 @@ import ShippingInfo from "./ShippingInfo";
 import DigitalPreviews from "./DigitalPreviews";
 import PayAction from "../payments/payAction";
 import User from "@/mixins/user";
+import BrowserStore from "store";
 
 export default {
   name: "ProfileMagazinePage",
@@ -142,7 +143,7 @@ export default {
       return this.$store.state.magazine.updateDigitalLoading;
     },
     free() {
-      return this.user.isMakePayment;
+      return this.user.isPaymentReceived || this.user.isMakePayment;
     },
     payPayload() {
       return {
@@ -234,6 +235,10 @@ export default {
   },
   created() {
     this.$store.dispatch("magazine/fetchShipping");
+    const magazineRedirect = BrowserStore.get("magazineRedirect");
+    if (magazineRedirect && this.user) {
+      BrowserStore.remove("magazineRedirect");
+    }
   }
 };
 </script>

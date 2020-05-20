@@ -80,7 +80,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "getCode",
-  apiPath: "users/trial",
+  apiPath: "users/trial/months",
   state,
   mutations,
   actions,
@@ -90,6 +90,10 @@ createRequestAction({
   resultKey: "code",
   resultConvert: r => {
     return r.trialCode;
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params || {};
+    return options;
   }
 });
 

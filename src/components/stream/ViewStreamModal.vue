@@ -27,7 +27,7 @@
             class="stream-tipsGoalTitle"
             v-if="activeTipsGoal.amount && activeTipsGoal.description"
           >
-            TIP Countdown: ${{ activeTipsGoal.amount }} for
+            TIP Countdown: ${{ activeTipsGoal.amount.toFixed(2) }} for
             {{ activeTipsGoal.description }}
           </div>
           <span

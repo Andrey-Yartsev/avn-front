@@ -212,7 +212,7 @@
           class="stream-tipsGoalTitle"
           v-if="activeTipsGoal.amount && activeTipsGoal.description"
         >
-          TIP Countdown: ${{ activeTipsGoal.amount }} for
+          TIP Countdown: ${{ activeTipsGoal.amount.toFixed(2) }} for
           {{ activeTipsGoal.description }}
         </div>
         <div class="stream-forms" v-if="isStarted">
@@ -327,7 +327,6 @@
             {{ looksCount }}
           </span>
           <span
-            v-if="!isTipsGoalExists"
             class="stream-online-count bottom-btn"
             @click="toggleTipGoalForm"
             :class="{ selected: true }"
@@ -712,7 +711,6 @@ export default {
         amount: this.tipsGoal.amount,
         sess: this.$store.state.auth.token
       });
-      console.log(data);
       this.$root.ws.ws.send(data);
       this.tipsGoal.amount = 0;
       this.tipsGoal.description = "";
@@ -803,6 +801,10 @@ export default {
       }
     },
     toggleTipGoalForm() {
+      if (!this.showTipsGoalForm && this.isTipsGoalExists) {
+        this.tipsGoal.amount = this.activeTipsGoal.amount + "";
+        this.tipsGoal.description = this.activeTipsGoal.description;
+      }
       this.showTipsGoalForm = !this.showTipsGoalForm;
     }
   },

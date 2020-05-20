@@ -15,6 +15,18 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
+    path: "/dmca",
+    name: "StaticDmca",
+    component: () =>
+      import(/* webpackChunkName: "StaticPage" */ "@/components/pages/static/Index"),
+    meta: {
+      apiPoint: "dmca",
+      staticPage: true,
+      cssName: "staticPage"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
     path: "/privacy",
     name: "StaticPrivacy",
     component: () =>

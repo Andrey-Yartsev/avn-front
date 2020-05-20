@@ -55,6 +55,7 @@ import favPosts from "@/store/modules/favPosts";
 import stats from "@/store/modules/stats";
 import backRouter from "@/store/modules/backRouter";
 import postLikes from "@/store/modules/postLikes";
+import clipLikes from "@/store/modules/clipLikes";
 import awards from "@/store/modules/awards";
 import products from "@/store/modules/products";
 import comments from "@/store/modules/comments";
@@ -126,6 +127,7 @@ const store = new Vuex.Store({
     premiumLinks,
     backRouter,
     postLikes,
+    clipLikes,
     awards,
     products,
     comments,

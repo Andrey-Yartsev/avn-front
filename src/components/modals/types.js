@@ -132,6 +132,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "clipLikes",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "editPost",
     layoutOnlyModal: true
   },

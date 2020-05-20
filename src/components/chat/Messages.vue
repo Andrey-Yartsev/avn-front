@@ -81,7 +81,20 @@
                     :profile="v.fromUser"
                   />
                 </span>
+                <span
+                  v-if="
+                    v.textLength && v.price && isLocked(v) && !isMyMessage(v)
+                  "
+                  class="message-locked__price"
+                >
+                  {{ v.price }}
+                </span>
                 <div class="media-chat" v-if="v.media.length">
+                  <span
+                    v-if="v.price && isLocked(v) && !isMyMessage(v)"
+                    class="media-chat__price"
+                    >Price: {{ v.price }}</span
+                  >
                   <!-- <MediaVideo
                     v-if="v.media.length && v.media[0].type === 'video'"
                     :message="v"

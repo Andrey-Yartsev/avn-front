@@ -138,6 +138,12 @@ const routes = [
     }
   },
   {
+    beforeEnter: Auth.requireAuth,
+    path: "/magazine",
+    name: "MagazinePage",
+    redirect: "/settings/magazine"
+  },
+  {
     beforeEnter: Auth.requireAny,
     path: "/contests",
     name: "ContestPage",

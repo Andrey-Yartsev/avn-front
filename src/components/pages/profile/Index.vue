@@ -35,8 +35,16 @@
               <span class="icn-item icn-block"></span>
             </div>
           </div>
-          <span class="user-login reset-ml">
+          <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
+            <span v-if="showProfileRank" class="user-login user-login-rating">
+              # {{ profile.privacy.rankCount }}
+              <span
+                v-if="isOwner(profile.id)"
+                class="icn-item icn-locked icn-size_sm"
+                :class="{ locked: !profile.privacy.showRankCount }"
+              />
+            </span>
           </span>
         </div>
         <component
@@ -146,12 +154,20 @@
                 v-if="!isOwner(profile.id) && profile.isPrivatePost"
                 :profile="profile"
               />
+              <FollowersOnlyBlock
+                v-else-if="
+                  !isOwner(profile.id) &&
+                    !profile.isPrivatePost &&
+                    (profile.privacy.forFollowersOnly && !profile.followedBy)
+                "
+                :profile="profile"
+              />
               <LinksPage
-                v-if="pageName === 'links'"
+                v-else-if="pageName === 'links' && !profile.isPrivatePost"
                 :private="isOwner(profile.id)"
               />
               <MediaPage
-                v-else-if="pageName === 'media'"
+                v-else-if="pageName === 'media' && !profile.isPrivatePost"
                 :private="isOwner(profile.id)"
               />
               <template v-else>
@@ -241,6 +257,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import PrivateBlock from "@/components/common/profile/privateBlock/Index";
+import FollowersOnlyBlock from "@/components/common/profile/followersOnlyBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
@@ -273,6 +290,7 @@ export default {
     PostSmall,
     PostMedium,
     PrivateBlock,
+    FollowersOnlyBlock,
     Highlights,
     LinkPost,
     LinksPage,
@@ -374,6 +392,15 @@ export default {
     },
     showProfileOffer() {
       return this.snapchat && !this.isOwner(this.profile.id);
+    },
+    showProfileRank() {
+      if (!this.profile.privacy.rankCount) {
+        return false;
+      }
+      return (
+        this.isOwner(this.profile.id) ||
+        (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
     }
   },
   watch: {

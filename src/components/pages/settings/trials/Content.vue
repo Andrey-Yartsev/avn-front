@@ -4,15 +4,71 @@
       Free Trials
     </h1>
     <div class="trialsSectionCollection">
-      <div class="border-top shadow-block referrals-link">
-        <div class="referrals-url" v-if="link">
-          <span class="referrals-url__link">{{ link }}</span>
+      <div class="form-title border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Unique Link
+            <p class="subtext">
+              The link will be unique and will be available for only one person
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input type="checkbox" name="isUnique" v-model="isUnique" />
+            <span class="toggle-element_switcher" />
+          </label>
         </div>
+      </div>
+
+      <div class="container" v-if="!isUnique">
+        <div class="form-group form-group_with-label">
+          <label class="form-group-inner">
+            <span class="label">Max # of Users</span>
+            <div class="row">
+              <div class="col-1-2">
+                <input
+                  name="amount"
+                  class="default-disabled"
+                  v-model="limit"
+                  type="number"
+                  step="1"
+                />
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="form-group form-group_with-label">
+          <label class="form-group-inner">
+            <span class="label"># of Free Trial Months</span>
+            <div class="row">
+              <div class="col-1-2">
+                <div class="select-wrapper">
+                  <select
+                    name="months"
+                    class="default-disabled"
+                    v-model="months"
+                  >
+                    <option v-for="item in 12" :value="item" :key="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="shadow-block referrals-link">
         <div class="referral-desc">
           <p class="subtext">
-            Copy this link to send to the person you want to provide a trial
-            subscription for 30 days.
-            <b>One unique link for each person!</b>
+            Copy this link to send to
+            {{ this.getPersonsAmountText }}
+            you want to provide a trial subscription for {{ months }}
+            {{ months > 1 ? "months" : "month" }}.
+            <b v-if="isUnique">One unique link for each person!</b>
           </p>
           <button
             type="button"
@@ -30,6 +86,9 @@
           >
             Copy
           </button>
+        </div>
+        <div class="referrals-url" v-if="link">
+          <span class="referrals-url__link">{{ link }}</span>
         </div>
       </div>
 
@@ -50,7 +109,10 @@ export default {
   },
   data() {
     return {
-      showCopyButton: false
+      showCopyButton: false,
+      isUnique: true,
+      months: 1,
+      limit: 1
     };
   },
   computed: {
@@ -61,21 +123,31 @@ export default {
       return (
         window.location.origin + "/?trialCode=" + this.$store.state.trial.code
       );
+    },
+    getPersons() {
+      return Number.parseInt(this.limit);
+    },
+    getPersonsAmountText() {
+      return this.isUnique || this.limit <= 1
+        ? "the person"
+        : `${this.limit} persons`;
     }
   },
   methods: {
     generateCode() {
-      this.$store.dispatch("trial/getCode").then(() => {
-        this.$copyText(this.link)
-          .then(() => {
-            this.$store.dispatch("global/flashToast", {
-              text: "Trial URL copied!"
+      this.$store
+        .dispatch("trial/getCode", this.getData(), { root: true })
+        .then(() => {
+          this.$copyText(this.link)
+            .then(() => {
+              this.$store.dispatch("global/flashToast", {
+                text: "Trial URL copied!"
+              });
+            })
+            .catch(() => {
+              this.showCopyButton = true;
             });
-          })
-          .catch(() => {
-            this.showCopyButton = true;
-          });
-      });
+        });
     },
     copyCode() {
       this.$copyText(this.link)
@@ -90,6 +162,16 @@ export default {
             error: true
           });
         });
+    },
+    getData() {
+      const data = {
+        months: this.months,
+        limit: Number.parseInt(this.limit)
+      };
+      if (this.isUnique) {
+        data.limit = 1;
+      }
+      return data;
     }
   }
 };

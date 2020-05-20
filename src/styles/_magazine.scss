@@ -79,6 +79,7 @@
 
   .previews {
     padding: 0;
+    text-align: center;
     .items {
       width: 100%;
       display: flex;
@@ -106,6 +107,10 @@
           }
         }
       }
+    }
+    .more {
+      margin: 10px 0;
+      display: inline-block;
     }
   }
 }

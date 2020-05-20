@@ -230,6 +230,17 @@
                 <span class="label icn-item">Tips</span>
               </div>
             </label>
+            <label class="form-group-inner">
+              <div class="checkbox-wrapper">
+                <input
+                  v-model="localUser.isPostsTweetsOnGoLive"
+                  type="checkbox"
+                  name="isPostsTweetsOnGoLive"
+                  value="true"
+                />
+                <span class="label icn-item">Going Live</span>
+              </div>
+            </label>
           </div>
         </div>
       </div>

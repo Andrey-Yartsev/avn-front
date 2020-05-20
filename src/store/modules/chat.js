@@ -864,6 +864,38 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchNotes",
+  apiPath: "chats/{userId}/notes",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+createRequestAction({
+  prefix: "updateNotes",
+  apiPath: "chats/{userId}/notes",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {};
+    options.data.text = params.text;
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,

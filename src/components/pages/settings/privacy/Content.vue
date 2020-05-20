@@ -17,22 +17,163 @@
         <div class="inner">
           <span class="semi-transparent">
             Private Profile
-            <p class="subtext">Only subscribers will see your posts</p>
+            <p class="subtext">
+              Prohibit non-subscribers from seeing any content whatsoever.
+              Including free/public posts. Please note this is not recommended
+              for content creators.
+            </p>
           </span>
           <label class="toggle-element">
             <input
               type="checkbox"
               name="isPrivate"
               value="true"
-              v-model="localUser.isPrivate"
+              v-model="localUser.privacy.isPrivate"
             />
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
 
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Followers-Only Private Profile
+            <p class="subtext">
+              Prohibit non-followers from seeing any content whatsoever.
+              Including free/public posts. This will require anyone wanting to
+              see your public/free posts on your timeline to be following you.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="forFollowersOnly"
+              value="true"
+              v-model="localUser.privacy.forFollowersOnly"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Profile Rank
+            <p class="subtext">
+              Display current profile rank on public profile.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="showRankCount"
+              value="true"
+              v-model="localUser.privacy.showRankCount"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Subscribers
+            <p class="subtext">
+              Display active subscribers count on public profile.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="showSubscribersCount"
+              value="true"
+              v-model="localUser.privacy.showSubscribersCount"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner padding-bottom">
+          <span class="semi-transparent">
+            Marketing Preferences
+            <p class="subtext">
+              Allow my avatar & public content to be used for marketing purposes
+              outside the AVN Stars Platform
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="allowMarketingPreferences"
+              value="true"
+              v-model="localUser.privacy.allowMarketingPreferences"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+        <div class="shadow-block negative-margin-15">
+          <div class="container">
+            <div
+              class="form-group checkbox-group"
+              :class="{
+                disabled: !localUser.privacy.allowMarketingPreferences
+              }"
+            >
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="avnCom"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.avn"
+                  />
+                  <span class="label icn-item"
+                    >AVN.com / AVN Email Communications</span
+                  >
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="avnMagazine"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.avnMagazine"
+                  />
+                  <span class="label icn-item">AVN Magazine</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="thirdParty"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.thirdParty"
+                  />
+                  <span class="label icn-item">Third Party</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="watermarks-settings">
-        <div class="form-title border-top border-top-mobile">
+        <div class="form-title border-top">
           <div class="inner">
             <span class="semi-transparent">
               Watermarks media
@@ -148,6 +289,18 @@
                   />
                   <span class="label">
                     Non-Subscribers
+                  </span>
+                </label>
+                <label class="radio-wrapper icn-item m-inline">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="none"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    None
                   </span>
                 </label>
               </div>

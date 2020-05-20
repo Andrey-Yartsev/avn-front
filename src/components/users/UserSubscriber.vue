@@ -100,7 +100,11 @@ export default {
       return truncate(v, 150);
     },
     messageTime(message) {
-      return fromNow(message);
+      const expiredDate = fromNow(message);
+      if (expiredDate === "in a month") {
+        return "n/a";
+      }
+      return expiredDate;
     }
   }
 };
