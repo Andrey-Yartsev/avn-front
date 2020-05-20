@@ -7,7 +7,8 @@ export default [
     username: "user_5",
     isActive: true,
     amount: 20,
-    months: 1
+    months: 1,
+    expiredDate: ""
   },
   {
     avatar: null,
@@ -17,6 +18,7 @@ export default [
     username: "user_6",
     isActive: false,
     amount: 3,
-    months: 3
+    months: 3,
+    expiredDate: ""
   }
 ];
