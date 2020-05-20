@@ -201,6 +201,7 @@
                 input-class="post-datetime__input"
                 use12-hour
                 :min-datetime="minDate"
+                :max-datetime="maxDate"
                 @close="closeDatepicker"
                 :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
               />
@@ -222,7 +223,7 @@
                 v-model="datetimeExpired"
                 input-class="post-datetime__input"
                 use12-hour
-                :min-datetime="minDate"
+                :min-datetime="minDateExpired"
                 @close="closeDatepickerExpired"
                 :phrases="{ ok: 'Expired', cancel: 'Cancel' }"
               />
@@ -527,6 +528,22 @@ export default {
     },
     minDate() {
       return LuxonDateTime.local()
+        .plus({ minutes: 1 })
+        .toISO();
+    },
+    maxDate() {
+      if (!this.datetimeExpired) {
+        return null;
+      }
+      return LuxonDateTime.fromISO(this.datetimeExpired)
+        .minus({ minutes: 1 })
+        .toISO();
+    },
+    minDateExpired() {
+      if (!this.datetime) {
+        return this.minDate;
+      }
+      return LuxonDateTime.fromISO(this.datetime)
         .plus({ minutes: 1 })
         .toISO();
     },
