@@ -209,6 +209,19 @@
                   >
                 </div>
               </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasWatermarkStream"
+                    value="true"
+                    v-model="localUser.hasWatermarkStream"
+                  />
+                  <span class="label icn-item"
+                    >Enable watermarks for stream</span
+                  >
+                </div>
+              </label>
 
               <div
                 class="form-group form-group_with-label pb-reset"
