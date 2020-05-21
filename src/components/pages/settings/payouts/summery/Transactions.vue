@@ -39,7 +39,7 @@
               v-for="(v, i) in items"
               :key="i"
               class="PayoutsTransactionsView"
-              :class="{ refunded: v.isRefunded }"
+              :class="{ excluded: v.isExcluded }"
             >
               <div class="item">
                 <div class="date table__cell">

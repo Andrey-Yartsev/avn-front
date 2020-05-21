@@ -735,7 +735,7 @@
     }
 
     .PayoutsTransactionsView {
-      &.refunded {
+      &.excluded {
         color: #ff0000ab;
       }
     }
