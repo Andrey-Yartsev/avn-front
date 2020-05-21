@@ -6,6 +6,7 @@
     </template>
     <!-- <ElectroniDelivery /> -->
     <Balances storeKey="payouts" prefix="payout" />
+    <AutoRequests />
     <Requests title="Payout Statements" storeKey="payouts" />
     <Transactions />
   </div>
@@ -14,6 +15,7 @@
 <script>
 import Legal from "./summery/Legal";
 import Bank from "./summery/Bank";
+import AutoRequests from "./summery/AutoRequests";
 import Balances from "../common/money/Balances";
 import Requests from "../common/money/Requests";
 import Transactions from "./summery/Transactions";
@@ -30,7 +32,8 @@ export default {
     Bank,
     Balances,
     Requests,
-    Transactions
+    Transactions,
+    AutoRequests
   }
 };
 </script>
