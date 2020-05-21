@@ -26,6 +26,7 @@ const mutations = {
 const actions = {};
 
 createRequestAction({
+  requestType: "any",
   prefix: "search",
   apiPath: "search/{type}",
   state,

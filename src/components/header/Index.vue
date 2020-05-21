@@ -79,6 +79,7 @@
             /> -->
           </template>
           <template v-if="authSection">
+            <Search />
             <div class="btns-login-user">
               <GenderFilter v-if="showGenderFilter" />
               <a
