@@ -1,5 +1,5 @@
 <template>
-  <div class="magazine settings-wrapper rounded-container pos-relative">
+  <div class="settings-wrapper rounded-container pos-relative">
     <div
       class="border-top shadow-block loader-container loader-container_center"
       v-if="loading"
