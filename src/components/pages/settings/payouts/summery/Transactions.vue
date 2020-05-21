@@ -36,9 +36,10 @@
         <div class="table-wrapper">
           <div class="table transactions-table" v-if="items.length">
             <div
-              class="PayoutsTransactionsView"
               v-for="(v, i) in items"
               :key="i"
+              class="PayoutsTransactionsView"
+              :class="{ refunded: v.isRefunded }"
             >
               <div class="item">
                 <div class="date table__cell">

@@ -734,6 +734,12 @@
       justify-content: space-between;
     }
 
+    .PayoutsTransactionsView {
+      &.refunded {
+        color: #ff0000ab;
+      }
+    }
+
     &__cell {
       &.date {
         flex: 0 1 calc((100% - 118px) / 2);
