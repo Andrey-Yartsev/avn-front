@@ -117,7 +117,12 @@
       <span class="title"></span>
       <span class="value save-button-container">
         <button
-          :disabled="!dataChanged || uploading || settings.isSaving"
+          :disabled="
+            !dataChanged ||
+              uploading ||
+              settings.isSaving ||
+              !info.text.trim().length
+          "
           type="button"
           class="btn btn_fix-width"
           @click="$emit('save')"

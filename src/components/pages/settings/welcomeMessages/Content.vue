@@ -13,7 +13,11 @@
       </h1>
       <div
         class="toggle-wrapper form-title border-top"
-        :class="{ disabled: settings.subscribers.isEditMode }"
+        :class="{
+          disabled:
+            settings.subscribers.isEditMode ||
+            !data.subscribers.text.trim().length
+        }"
       >
         <div class="inner">
           <label for="subscribed" class="toggle-label semi-transparent">
@@ -53,7 +57,10 @@
 
       <div
         class="toggle-wrapper form-title border-top"
-        :class="{ disabled: settings.followers.isEditMode }"
+        :class="{
+          disabled:
+            settings.followers.isEditMode || !data.followers.text.trim().length
+        }"
       >
         <div class="inner">
           <label for="subscribed" class="toggle-label semi-transparent">
