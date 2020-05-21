@@ -44,7 +44,7 @@
               <div class="item">
                 <div class="date table__cell">
                   {{ dt(v.createdAt) }}
-                  <div class="user-login" v-if="v.isPending">pending</div>
+                  <!-- <div class="user-login" v-if="v.isPending">pending</div> -->
                   <div class="user-login" v-if="v.isExcluded">refunded</div>
                 </div>
                 <div
