@@ -95,7 +95,7 @@
 <script>
 import MessageInfo from "./MessageInfo";
 import Loader from "@/components/common/Loader";
-import mockData from "@/mock/welcomeMessages";
+// import mockData from "@/mock/welcomeMessages";
 
 export default {
   name: "WelcomeMessageSettingsContent",
@@ -158,21 +158,12 @@ export default {
   },
   methods: {
     init() {
-      this.data = mockData;
-      this.dataSnapshot = {
-        subscribers: {
-          ...mockData.subscribers
-        },
-        followers: {
-          ...mockData.followers
-        }
-      };
-      // this.loading = true;
-      // this.$store.dispatch("welcomeMessages/fetch").then(res => {
-      //   this.data = res;
-      //   this.dataSnapshot = res;
-      //   this.loading = false;
-      // });
+      this.loading = true;
+      this.$store.dispatch("welcomeMessages/fetch").then(res => {
+        this.data = JSON.parse(JSON.stringify(res));
+        this.dataSnapshot = JSON.parse(JSON.stringify(res));
+        this.loading = false;
+      });
     },
     _save(data, fieldName) {
       this.$store
@@ -180,23 +171,22 @@ export default {
           root: true
         })
         .then(res => {
-          console.log(res);
-          this.data = res;
-          this.dataSnapshot = res;
-          this.settings[fieldName].isEditMode = false;
+          this.data = JSON.parse(JSON.stringify(res));
+          this.dataSnapshot = JSON.parse(JSON.stringify(res));
+          this.settings[fieldName] = {
+            isEditMode: false,
+            imagePreview: "",
+            imagePath: "",
+            isSaving: false
+          };
           this.$store.dispatch(
             "global/flashToast",
-            { text: "Welcome message settings updated" },
+            { text: "Welcome messages settings updated" },
             { root: true }
           );
         })
         .catch(err => {
           console.log(err);
-          this.$store.dispatch(
-            "global/flashToast",
-            { text: "Welcome message settings updated" },
-            { root: true }
-          );
         })
         .finally(() => {
           this.settings[fieldName].isSaving = false;
@@ -209,6 +199,9 @@ export default {
       };
       if (this.settings[fieldName].imagePath) {
         data[fieldName].newImage = this.settings[fieldName].imagePath;
+      }
+      if (!this.data[fieldName].image && !this.settings[fieldName].imagePath) {
+        data[fieldName].image = "";
       }
       this.settings[fieldName].isSaving = true;
       this._save(data, fieldName);
