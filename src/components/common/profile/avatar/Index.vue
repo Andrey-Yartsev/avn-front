@@ -97,12 +97,21 @@ export default {
       return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
     },
     showProfileRank() {
+      if (!this.isAdmin) {
+        return false;
+      }
       if (!this.profile.privacy.categoryRankCount) {
         return false;
       }
       return (
         this.isProfileOwner ||
         (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
+    },
+    isAdmin() {
+      return (
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.privacy.isAdmin
       );
     },
     isProfileOwner() {
