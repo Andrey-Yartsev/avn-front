@@ -623,7 +623,10 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        withExpiredDate: !!this.datetimeExpired,
+        withExpiredDate:
+          (!!this.datetimeExpired ||
+            (!this.datetimeExpired && this.post.expiredDate)) &&
+          this.datetimeExpired !== this.post.expiredDate,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
@@ -642,7 +645,7 @@ export default {
         postData.scheduledDate = scheduledDate;
       }
 
-      if (postData.withExpiredDate) {
+      if (this.datetimeExpired) {
         postData.expiredDate = expiredDate;
       }
 
