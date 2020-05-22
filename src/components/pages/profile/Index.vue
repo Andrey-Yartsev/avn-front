@@ -38,7 +38,8 @@
           <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
             <span v-if="showProfileRank" class="user-login user-login-rating">
-              # {{ profile.privacy.rankCount }}
+              # {{ getModelRank }}
+              <!-- # {{ profile.privacy.categoryRankCount }} -->
               <span
                 v-if="isOwner(profile.id)"
                 class="icn-item icn-locked icn-size_sm"
@@ -394,13 +395,22 @@ export default {
       return this.snapchat && !this.isOwner(this.profile.id);
     },
     showProfileRank() {
-      if (!this.profile.privacy.rankCount) {
+      if (!this.profile.privacy.categoryRankCount) {
         return false;
       }
       return (
         this.isOwner(this.profile.id) ||
         (this.profile.privacy && this.profile.privacy.showRankCount)
       );
+    },
+    getModelRank() {
+      if (
+        !this.$store.state.auth.user ||
+        this.$store.state.auth.user.categoryView === 1
+      ) {
+        return this.profile.privacy.globalRankCount;
+      }
+      return this.profile.privacy.categoryRankCount;
     }
   },
   watch: {
