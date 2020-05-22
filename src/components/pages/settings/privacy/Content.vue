@@ -346,6 +346,26 @@
         </div>
       </div>
 
+      <div v-if="user.canEarn" class="form-title tweet-posts-block border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Blur messages
+            <p class="subtext">
+              Blur incoming media content in chat messages
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="blurIncomingMessages"
+              value="false"
+              v-model="localUser.blurIncomingMessages"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
       <!--
       <div class="add-options-blur shadow-block isPrivateHidePosts" v-if="localUser.isPrivate">
         <div class="container">

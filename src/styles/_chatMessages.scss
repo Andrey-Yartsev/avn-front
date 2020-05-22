@@ -247,6 +247,14 @@
       background-color: rgba(124, 139, 150, 0.2);
     }
 
+    .media-chat {
+      .blurred {
+        img {
+          filter: blur(10px)
+        }
+      }
+    }
+
     &.firstMessageInGroup {
 
       .message {

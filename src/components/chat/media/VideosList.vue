@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="media-imagesList" :class="{ blurred: showBlurCover }">
+    <div v-if="showBlurCover" class="blurImageCover" @click="hideBlurCover" />
     <template v-if="videos.length > 1">
       <swiper
         ref="mySwiper"
@@ -141,7 +142,8 @@ export default {
             self.activeSlide = this.activeIndex;
           }
         }
-      }
+      },
+      blurImage: true
     };
   },
   computed: {
@@ -156,6 +158,13 @@ export default {
     },
     isMyMessage() {
       return this.message.fromUser.id === this.user.id;
+    },
+    showBlurCover() {
+      return (
+        this.$store.state.auth.user.blurIncomingMessages &&
+        !this.isMyMessage &&
+        this.blurImage
+      );
     }
   },
   methods: {
@@ -168,12 +177,27 @@ export default {
           index
         }
       });
+    },
+    hideBlurCover() {
+      this.blurImage = false;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.media-imagesList {
+  position: relative;
+  .blurImageCover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 3;
+  }
+}
 .media-slider {
   & > div {
     width: 100% !important;
