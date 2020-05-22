@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <!-- <div
+      <div
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
@@ -79,7 +79,7 @@
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
-      </div> -->
+      </div>
 
       <div
         class="form-title private-switcher-block private-profile-block border-top"

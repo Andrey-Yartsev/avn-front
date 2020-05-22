@@ -37,14 +37,14 @@
           </div>
           <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
-            <!-- <span v-if="showProfileRank" class="user-login user-login-rating">
+            <span v-if="showProfileRank" class="user-login user-login-rating">
               # {{ profile.privacy.rankCount }}
               <span
                 v-if="isOwner(profile.id)"
                 class="icn-item icn-locked icn-size_sm"
                 :class="{ locked: !profile.privacy.showRankCount }"
               />
-            </span> -->
+            </span>
           </span>
         </div>
         <component

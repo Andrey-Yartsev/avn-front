@@ -55,7 +55,7 @@
           <router-link :to="'/' + profile.username">{{
             profile.username
           }}</router-link>
-          <!-- <span v-if="showProfileRank" class="user-login user-login-rating">
+          <span v-if="showProfileRank" class="user-login user-login-rating">
             # {{ profile.privacy.rankCount }}
             <span
               v-if="isProfileOwner"
@@ -64,7 +64,7 @@
                 locked: !profile.privacy.showRankCount
               }"
             />
-          </span> -->
+          </span>
         </span>
       </div>
     </div>
