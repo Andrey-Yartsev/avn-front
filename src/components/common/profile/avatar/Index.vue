@@ -97,9 +97,9 @@ export default {
       return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
     },
     showProfileRank() {
-      if (!this.isAdmin) {
-        return false;
-      }
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
       if (!this.profile.privacy.categoryRankCount) {
         return false;
       }

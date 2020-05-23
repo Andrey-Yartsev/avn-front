@@ -395,9 +395,9 @@ export default {
       return this.snapchat && !this.isOwner(this.profile.id);
     },
     showProfileRank() {
-      if (!this.isAdmin) {
-        return false;
-      }
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
       if (!this.profile.privacy.categoryRankCount) {
         return false;
       }
