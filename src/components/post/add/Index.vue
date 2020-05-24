@@ -232,7 +232,7 @@
                 @click="openDatepickerExpired"
               ></span>
               <span class="btn-post__text">
-                Expired
+                Expire
               </span>
             </div>
           </div>
