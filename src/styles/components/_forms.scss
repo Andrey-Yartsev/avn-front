@@ -913,6 +913,13 @@ select {
   &.m-inline {
     display: inline-flex;
     margin-right: 25px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      &.m-top {
+        &-10 {
+          margin-top: 10px;
+        }
+      }
+    }
   }
 
   input {

@@ -268,7 +268,7 @@
           <div class="container">
             <div class="form-group form-group_with-label radio-group">
               <div class="form-group-inner">
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -280,7 +280,7 @@
                     All
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -292,7 +292,7 @@
                     Subscribers
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -304,7 +304,7 @@
                     Non-Subscribers
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
