@@ -97,7 +97,7 @@
                 Message for <span>{{ message.recipients }}</span> subscribers
               </div>
               <div class="time">
-                {{ scheduledFormattedDate(message.scheduleDate) }}
+                {{ scheduledFormattedDate(message.scheduledDate) }}
               </div>
               <span
                 @click="deleteScheduleMessage(message.id)"

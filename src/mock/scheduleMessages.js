@@ -11,7 +11,7 @@ export default [
     isOpened: false,
     isSnapchat: false,
     isTips: false,
-    scheduleDate: "2020-04-28T11:22:00+00:00",
+    scheduledDate: "2020-04-28T11:22:00+00:00",
     media: [
       {
         background:
@@ -89,7 +89,7 @@ export default [
     isOpened: false,
     isSnapchat: false,
     isTips: false,
-    scheduleDate: "2020-04-28T11:22:00+00:00",
+    scheduledDate: "2020-04-28T11:22:00+00:00",
     media: [],
     mediaCount: 1,
     messageAttachment: null,
@@ -110,7 +110,7 @@ export default [
     isOpened: false,
     isSnapchat: false,
     isTips: false,
-    scheduleDate: "2020-04-28T11:22:00+00:00",
+    scheduledDate: "2020-04-28T11:22:00+00:00",
     media: [
       {
         background:
@@ -188,7 +188,7 @@ export default [
     isOpened: false,
     isSnapchat: false,
     isTips: false,
-    scheduleDate: "2020-04-28T11:22:00+00:00",
+    scheduledDate: "2020-04-28T11:22:00+00:00",
     media: [
       {
         background:
