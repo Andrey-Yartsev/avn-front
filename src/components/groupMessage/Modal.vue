@@ -179,7 +179,9 @@ export default {
         .toISO();
     },
     formattedDate() {
-      return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
+      return (
+        "Scheduled for " + moment(this.scheduledDate).format("MMM D, hh:mm a")
+      );
     }
   },
   methods: {
@@ -212,7 +214,7 @@ export default {
       }
     },
     openDatepicker() {
-      if (this.datetime) return;
+      if (this.scheduledDate) return;
       document.body.classList.add("open-timepicker");
       document.getElementById(`post-datetime__switcher_mass-messages`).click();
     },
