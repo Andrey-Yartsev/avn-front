@@ -6,6 +6,9 @@
           <div class="popup__header">
             Send message to {{ subscriberType }} subscribers
           </div>
+          <div class="loader-container loader-container_center" v-if="loading">
+            <Loader :fullscreen="false" :small="true" :semilight="true" />
+          </div>
           <div class="border-top bg-gradient_light">
             <div class="popup__content">
               <div class="form-group form-group_clear-gaps">
@@ -115,9 +118,9 @@
                 />
               </div>
               <div v-if="message.text" class="text-container">
-                {{ message.text }}
+                Text: {{ message.text }}
               </div>
-              <div v-if="message.price">Price: {{ message.price }}</div>
+              <div v-if="message.price">Price: ${{ message.price }}</div>
             </div>
           </div>
           <AddMessageBox
@@ -144,6 +147,7 @@ import AddMessageBox from "@/components/chat/AddMessageBox";
 import { Datetime } from "vue-datetime";
 import { DateTime as LuxonDateTime } from "luxon";
 import moment from "moment";
+import Loader from "@/components/common/Loader";
 // import scheduledMessages from "@/mock/scheduleMessages";
 
 export default {
@@ -151,13 +155,15 @@ export default {
   components: {
     Modal,
     AddMessageBox,
-    Datetime
+    Datetime,
+    Loader
   },
   data() {
     return {
       subscriberType: "all",
       scheduledDate: undefined,
-      scheduledMessages: []
+      scheduledMessages: [],
+      loading: false
     };
   },
   computed: {
@@ -189,6 +195,7 @@ export default {
         scheduledDate: this.scheduledDate
       };
       try {
+        this.loading = true;
         await this.$store.dispatch("chat/sendGroupMessage", body);
         this.$store.commit("global/toastShowTrigger", {
           text: "Group message has sent",
@@ -200,6 +207,7 @@ export default {
           type: "warning"
         });
       } finally {
+        this.loading = false;
         this.$store.dispatch("modal/hide", { name: "groupMessage" });
       }
     },
