@@ -226,7 +226,9 @@
               <div
                 class="form-group form-group_with-label pb-reset"
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
               >
                 <label class="form-group-inner">
@@ -243,7 +245,9 @@
               </div>
               <WatermarkImageUploader
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
                 @change="watermarkImageChange"
                 @remove="watermarkImageRemove"
