@@ -218,7 +218,7 @@ export default {
       this.$store
         .dispatch("chat/getScheduledGroupMessages", null, { root: true })
         .then(res => {
-          this.scheduledMessages = res;
+          this.scheduledMessages = res.list;
         });
     },
     deleteScheduleMessage(messageId) {
