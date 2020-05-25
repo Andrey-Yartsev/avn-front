@@ -172,6 +172,26 @@
               class="icn-item btn-reset btn-reset_prim-color icn-pos_center"
             />
           </div>
+          <div class="expired-action">
+            <label class="form-group-inner">
+              <span class="label">Action</span>
+              <div class="select-wrapper">
+                <select
+                  v-model="expiredAction"
+                  name="subscriberType"
+                  class="default-disabled"
+                >
+                  <option
+                    v-for="option in expiredActionList"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+            </label>
+          </div>
         </div>
         <div class="actions-controls">
           <label
@@ -225,7 +245,7 @@
                 use12-hour
                 :min-datetime="minDateExpired"
                 @close="closeDatepickerExpired"
-                :phrases="{ ok: 'Expired', cancel: 'Cancel' }"
+                :phrases="{ ok: 'Expire', cancel: 'Cancel' }"
               />
               <span
                 class="post-datetime__icn icn-item icn-calendar icn-size_lg"
@@ -355,7 +375,7 @@
           </div>
         </div>
         <div
-          class="post-scheduled-time"
+          class="post-scheduled-time post-expired-time"
           v-if="datetimeExpired && $mq === 'mobile'"
         >
           <div class="datetime-value">
@@ -364,6 +384,26 @@
               @click="resetDatetimeExpired"
               class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
             />
+          </div>
+          <div class="expired-action">
+            <label class="form-group-inner">
+              <span class="label">Action</span>
+              <div class="select-wrapper">
+                <select
+                  v-model="expiredAction"
+                  name="subscriberType"
+                  class="default-disabled"
+                >
+                  <option
+                    v-for="option in expiredActionList"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -403,6 +443,7 @@ const InitialState = {
   mediaType: "all",
   datetime: undefined,
   datetimeExpired: undefined,
+  expiredAction: "delete",
   saving: false,
   withoutWatermark: false,
   limits: {
@@ -574,6 +615,19 @@ export default {
     showExpired() {
       return true;
       // return this.showSchedule;
+    },
+    expiredActionList() {
+      const list = [
+        { name: "Delete", value: "delete" },
+        { name: "Hide", value: "hide" }
+      ];
+      if (this.isFree) {
+        list.push({
+          name: "For subscribers only",
+          value: "makeSubscribersOnly"
+        });
+      }
+      return list;
     }
   },
   methods: {
@@ -596,6 +650,7 @@ export default {
     },
     resetDatetimeExpired() {
       this.datetimeExpired = InitialState.datetimeExpired;
+      this.expiredAction = InitialState.expiredAction;
     },
     reset() {
       this.expanded = InitialState.expanded;
@@ -606,6 +661,7 @@ export default {
       this.preloadedMedias = [];
       this.datetime = InitialState.datetime;
       this.datetimeExpired = InitialState.datetimeExpired;
+      this.expiredAction = InitialState.expiredAction;
       this.saving = false;
     },
     getPostData() {
@@ -627,6 +683,7 @@ export default {
           (!!this.datetimeExpired ||
             (!this.datetimeExpired && this.post.expiredDate)) &&
           this.datetimeExpired !== this.post.expiredDate,
+        expiredAction: this.expiredAction,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
@@ -742,6 +799,7 @@ export default {
 
         this.datetime = this.post.scheduledDate;
         this.datetimeExpired = this.post.expiredDate;
+        this.expiredAction = this.post.expiredAction;
         this.postMsg = this.getConvertedText();
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
@@ -760,6 +818,11 @@ export default {
           : "all";
 
         this.$refs.textarea.innerHTML = this.getText();
+      }
+    },
+    isFree(value, oldValue) {
+      if (!value && oldValue && this.expiredAction === "makeSubscribersOnly") {
+        this.expiredAction = "delete";
       }
     }
   },

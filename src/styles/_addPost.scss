@@ -813,6 +813,30 @@
   }
 }
 
+.post-expired-time {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .expired-action {
+    .form-group-inner {
+      margin-bottom: 0;
+      select {
+        width: auto;
+      }
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        .label {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
 .datetime-value {
   font-size: 15px;
   display: inline-flex;
