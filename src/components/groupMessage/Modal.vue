@@ -123,7 +123,7 @@
               <div v-if="message.price">Price: ${{ message.price }}</div>
             </div>
           </div>
-          <AddMessageBox
+          <!-- <AddMessageBox
             @send="submit"
             :withUser="user"
             :withFontSizeController="false"
@@ -134,7 +134,7 @@
             type="button"
             class="close close_shift-t close_default icn-item icn-size_lg close_visible-mob"
             @click="close"
-          />
+          /> -->
         </div>
       </div>
     </template>
