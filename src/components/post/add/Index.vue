@@ -679,11 +679,6 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
-        withExpiredDate:
-          (!!this.datetimeExpired ||
-            (!this.datetimeExpired && this.post.expiredDate)) &&
-          this.datetimeExpired !== this.post.expiredDate,
-        expiredAction: this.expiredAction,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
@@ -704,6 +699,9 @@ export default {
 
       if (this.datetimeExpired) {
         postData.expiredDate = expiredDate;
+        postData.expiredAction = this.expiredAction;
+      } else if (!this.datetimeExpired && this.post.expiredDate) {
+        postData.expiredDate = "";
       }
 
       if (this.hasSubscribePrice) {
@@ -799,7 +797,8 @@ export default {
 
         this.datetime = this.post.scheduledDate;
         this.datetimeExpired = this.post.expiredDate;
-        this.expiredAction = this.post.expiredAction;
+        this.expiredAction =
+          this.post.expiredAction || InitialState.expiredAction;
         this.postMsg = this.getConvertedText();
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
