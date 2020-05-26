@@ -470,6 +470,9 @@ label {
   .row {
     margin-left: -7.5px;
     margin-right: -7.5px;
+    &.margin-0 {
+      margin: 0;
+    }
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1 1 100%;
     }

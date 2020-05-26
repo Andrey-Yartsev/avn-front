@@ -14,10 +14,10 @@
               <div class="form-group form-group_clear-gaps">
                 <label class="form-group-inner">
                   <span class="label">Choose group</span>
-                  <div class="row">
+                  <div class="row margin-0">
                     <div
                       :class="{
-                        'col-3-4': $mq === 'mobile',
+                        'content-col': $mq === 'mobile',
                         'col-1-2': $mq === 'desktop'
                       }"
                     >
@@ -123,18 +123,6 @@
               <div v-if="message.price">Price: ${{ message.price }}</div>
             </div>
           </div>
-          <!-- <AddMessageBox
-            @send="submit"
-            :withUser="user"
-            :withFontSizeController="false"
-            :withTips="false"
-            :multipleMedia="true"
-          />
-          <button
-            type="button"
-            class="close close_shift-t close_default icn-item icn-size_lg close_visible-mob"
-            @click="close"
-          /> -->
         </div>
       </div>
     </template>
