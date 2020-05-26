@@ -798,6 +798,8 @@
     }
   }
 
+  
+
   .text-media-container & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -810,6 +812,35 @@
         display: none;
       }
     }
+  }
+}
+
+.post-tipsGoal {
+  width: 100%;
+  padding-bottom: 10px;
+  .multiselect__tags-wrap {
+    display: none;
+  }
+  &-form {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+  .form-group_with-label {
+    padding-right: 0;
+    padding-bottom: 0;
+    .form-group-inner {
+      margin: 0;
+    }
+  }
+  .amount {
+    width: 30%;
+  }
+  .sources {
+    width: 60%;
+  }
+  .close-tipsGoal {
+    width: 10%;
   }
 }
 

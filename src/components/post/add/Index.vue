@@ -173,6 +173,66 @@
             />
           </div>
         </div>
+        <div
+          class="post-tipsGoal"
+          v-if="tipsGoal.isEnabled && $mq === 'desktop' && where === 'modal'"
+        >
+          <div class="post-tipsGoal-form">
+            <div class="form-group form-group_with-label amount">
+              <label class="form-group-inner">
+                <span class="label">Amount:</span>
+                <span
+                  class="form-group form-group_clear-gaps field-symbol-currency"
+                >
+                  <span class="form-field">
+                    <input
+                      class="field-gap_currency"
+                      type="number"
+                      name="amount"
+                      v-model="tipsGoal.total"
+                    />
+                  </span>
+                </span>
+              </label>
+            </div>
+            <div class="form-group form-group_with-label sources">
+              <div class="form-group-inner">
+                <span class="label" :class="{ mobile: $mq === 'mobile' }"
+                  >Sources:</span
+                >
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field">
+                    <multiselect
+                      v-model="tipsGoal.sources"
+                      :options="tipsGoalSourceTypes"
+                      :multiple="true"
+                      :close-on-select="true"
+                      :clear-on-select="false"
+                      :preserve-search="true"
+                      placeholder="Add source"
+                      label="title"
+                      track-by="value"
+                    >
+                      <template
+                        slot="selection"
+                        slot-scope="{ values, search, isOpen }"
+                        ><span
+                          class="multiselect__single"
+                          v-if="tipsGoal.sources.length &amp;&amp; !isOpen"
+                          >{{ tipsGoal.sources.length }} sources selected</span
+                        ></template
+                      >
+                    </multiselect>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <span
+              @click="() => (tipsGoal.isEnabled = false)"
+              class="icn-item btn-reset btn-reset_prim-color icn-pos_center close-tipsGoal"
+            />
+          </div>
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -233,6 +293,20 @@
               ></span>
               <span class="btn-post__text">
                 Expire
+              </span>
+            </div>
+          </div>
+          <div class="btn-post btn-post_datetime">
+            <div
+              class="post-datetime"
+              :class="{ disabled: tipsGoal.isEnabled }"
+            >
+              <span
+                class="post-datetime__icn icn-item icn-price icn-size_lg"
+                @click="() => (tipsGoal.isEnabled = true)"
+              ></span>
+              <span class="btn-post__text">
+                Tips goal
               </span>
             </div>
           </div>
@@ -366,6 +440,19 @@
             />
           </div>
         </div>
+        <div
+          class="post-scheduled-time"
+          v-if="tipsGoal.isEnabled && $mq === 'mobile'"
+        >
+          <div class="datetime-value">
+            show
+            <!-- <span class="post-datetime__value">{{ formattedDateExpired }}</span>
+            <span
+              @click="resetDatetimeExpired"
+              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
+            /> -->
+          </div>
+        </div>
       </div>
       <div class="loader-container loader-container_center" v-if="isSaving">
         <Loader
@@ -393,8 +480,17 @@ import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
 import LinksPreview from "./linksPreview";
+import Multiselect from "vue-multiselect";
 
 Settings.defaultLocale = "en";
+
+const tipsGoalSourceTypes = [
+  { title: "Post tips", value: "localTips" },
+  { title: "All tips", value: "globalTips" },
+  { title: "Clips", value: "clips" },
+  { title: "Messages", value: "messages" },
+  { title: "Subscriptions", value: "subscriptions" }
+];
 
 const InitialState = {
   expanded: false,
@@ -410,7 +506,14 @@ const InitialState = {
     gif: 1,
     photo: 50,
     audio: 1
-  }
+  },
+  tipsGoal: {
+    isEnabled: false,
+    total: 0,
+    achieved: 0,
+    sources: []
+  },
+  tipsGoalSourceTypes: tipsGoalSourceTypes
 };
 
 export default {
@@ -428,7 +531,8 @@ export default {
     Datetime,
     Draggable,
     VueTribute,
-    LinksPreview
+    LinksPreview,
+    Multiselect
   },
   props: {
     initialExpanded: {
