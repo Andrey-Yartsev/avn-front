@@ -235,7 +235,10 @@
             </div>
           </div>
           <div class="btn-post btn-post_datetime" v-if="showExpired">
-            <div class="post-datetime" :class="{ disabled: datetimeExpired }">
+            <div
+              class="post-datetime post-datetime-expire"
+              :class="{ disabled: datetimeExpired }"
+            >
               <Datetime
                 :inputId="`post-datetimeExpired__switcher_${where}`"
                 class="post-datetime__switcher"
@@ -557,14 +560,8 @@ export default {
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     },
     formattedDateExpired() {
-      if (this.$mq === "mobile") {
-        return (
-          "Post will be expired at " +
-          moment(this.datetimeExpired).format("MMM D, hh:mm a")
-        );
-      }
       return (
-        "Expired at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
+        "Expires at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
       );
     },
     minDate() {

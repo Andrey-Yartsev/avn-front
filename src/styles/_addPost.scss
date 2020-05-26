@@ -1041,12 +1041,22 @@
       padding: 20px 20px 3px;
     }
   }
+  &-expire {
+    .vdatetime-popup {
+
+      &:before {
+        content: "Set post expiration";
+        font-weight: 500;
+        display: block;
+        padding: 20px 20px 3px;
+      }
+    }
+  }
 
   .btn-post__text {
     margin-left: 29px;
   }
 }
-
 
 .vdatetime-popup {
   border-radius: 6px;
