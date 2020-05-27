@@ -575,3 +575,38 @@
   align-items: center;
   align-content: center;
 }
+
+.postTipsGoal {
+  padding: 10px 15px;
+  position: relative;
+  .title {
+    display: flex;
+    justify-content: center;
+  }
+  &__progress {
+    padding-top: 15px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: auto;
+
+    .progress-line {
+      border: 1px solid $secondary-color;
+      margin: 0 5px;
+      flex-grow: 1;
+      height: 8px;
+      border-radius: 4px;
+      position: relative;
+      &__bar {
+        height: 6px;
+        background-color: $secondary-color;
+        border-radius: 3px;
+      }
+      &__status {
+        position: absolute;
+        top: -20px;
+        transform: translateX(-50%)
+      }
+    }
+  }
+}

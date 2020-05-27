@@ -97,6 +97,8 @@
               <time class="timestamp">{{ timePassed }}</time>
             </div>
           </div>
+          <!-- <PostTipsGoal v-if="post.tipsGoal" :data="post.tipsGoal" /> -->
+          <PostTipsGoal v-if="true" :data="post.tipsGoal" />
           <CommentsList
             v-if="!delayedPost"
             :comments="post.fullComments"
@@ -228,6 +230,7 @@ import PostCommon from "@/mixins/post/common";
 import postOpen from "@/mixins/post/open";
 import moment from "moment";
 import ModalRouterParams from "@/mixins/modalRouter/params";
+import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
 
 export default {
   name: "PostLastView",
@@ -300,7 +303,8 @@ export default {
     CommentsList,
     Actions,
     AddComment,
-    Tip
+    Tip,
+    PostTipsGoal
   },
   methods: {
     clickOnCommentForm() {
