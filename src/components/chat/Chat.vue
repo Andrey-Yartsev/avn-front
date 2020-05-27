@@ -98,6 +98,7 @@
                 </div>
               </div>
               <div
+                v-if="allowNotes"
                 @click="togleNotes"
                 class="notesIcon"
                 :class="{ 'with-content': notes.text }"
@@ -228,6 +229,9 @@ export default {
     },
     activeUserLoading() {
       return this.$store.state.chat.fetchActiveUserLoading;
+    },
+    allowNotes() {
+      return this.user && this.user.canEarn && this.user.canPayoutsRequest;
     }
   },
 
@@ -339,6 +343,9 @@ export default {
       });
     },
     fetchNotes() {
+      if (!this.allowNotes) {
+        return;
+      }
       this.$store.dispatch("chat/fetchNotes", this.activeUserId).then(res => {
         this.notes.text = res;
       });
