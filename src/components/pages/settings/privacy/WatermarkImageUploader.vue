@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="input-help hint-text-sm">
-        Required width and height from 100px to 300px
+        Required both width and height from 100px to 300px
       </div>
     </div>
   </div>
@@ -92,7 +92,7 @@ export default {
               this.save();
             } else {
               this.$store.dispatch("global/flashToast", {
-                text: "Required width and height from 100px to 300px",
+                text: "Required both width and height from 100px to 300px",
                 type: "error"
               });
             }
