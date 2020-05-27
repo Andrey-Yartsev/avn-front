@@ -185,7 +185,7 @@ export default {
       });
     },
     getExpiredDate(date) {
-      return "Expired at " + moment(date).format("MMM D, hh:mm a");
+      return "Expires at " + moment(date).format("MMM D, hh:mm a");
     }
   },
   directives: {

@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="input-help hint-text-sm">
-        Required width from 100px to 300px
+        Required both width and height from 100px to 300px
       </div>
     </div>
   </div>
@@ -81,13 +81,18 @@ export default {
       if (e.target.files && e.target.files.length) {
         getImagePreview(
           { file: e.target.files[0] },
-          ({ preview, params: { width } }) => {
-            if (width >= 100 && width <= 300) {
+          ({ preview, params: { width, height } }) => {
+            if (
+              width >= 100 &&
+              width <= 300 &&
+              height >= 100 &&
+              height <= 300
+            ) {
               this.preview = preview;
               this.save();
             } else {
               this.$store.dispatch("global/flashToast", {
-                text: "Required width from 100px to 300px",
+                text: "Required both width and height from 100px to 300px",
                 type: "error"
               });
             }

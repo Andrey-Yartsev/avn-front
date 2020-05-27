@@ -402,4 +402,12 @@
       content: "\E623";
     }
   }
+  
+  &-close {
+
+    &:after {
+      content: "\E605";
+    }
+  }
+
 }

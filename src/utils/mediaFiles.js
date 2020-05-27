@@ -160,7 +160,8 @@ export const getImagePreview = (media, callback) => {
           ...media,
           preview: base64,
           params: {
-            width: temp.width
+            width: temp.width,
+            height: temp.height
           }
         });
       };
