@@ -97,8 +97,8 @@
               <time class="timestamp">{{ timePassed }}</time>
             </div>
           </div>
-          <!-- <PostTipsGoal v-if="post.tipsGoal" :data="post.tipsGoal" /> -->
-          <PostTipsGoal v-if="true" :data="post.tipsGoal" />
+          <PostTipsGoal v-if="post.tipsGoal" :data="post.tipsGoal" />
+          <!-- <PostTipsGoal v-if="true" :data="post.tipsGoal" /> -->
           <CommentsList
             v-if="!delayedPost"
             :comments="post.fullComments"

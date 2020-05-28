@@ -198,6 +198,21 @@
           v-if="tipsGoal.isEnabled && $mq === 'desktop' && where === 'modal'"
         >
           <div class="post-tipsGoal-form">
+            <div class="form-group form-group_with-label text">
+              <label class="form-group-inner">
+                <span class="label">Text:</span>
+                <span class="form-group form-group_clear-gaps">
+                  <span class="form-field">
+                    <input
+                      class="field-gap_currency"
+                      type="text"
+                      name="text"
+                      v-model="tipsGoal.text"
+                    />
+                  </span>
+                </span>
+              </label>
+            </div>
             <div class="form-group form-group_with-label amount">
               <label class="form-group-inner">
                 <span class="label">Amount:</span>
@@ -553,6 +568,7 @@ const InitialState = {
   },
   tipsGoal: {
     isEnabled: false,
+    text: "",
     total: 0,
     achieved: 0,
     sources: []
@@ -566,6 +582,7 @@ export default {
   data() {
     return {
       ...InitialState,
+      tipsGoal: { ...InitialState.tipsGoal },
       tweetSend: !!this.$store.state.auth.user.isPostsTweets
     };
   },
@@ -729,6 +746,14 @@ export default {
         });
       }
       return list;
+    },
+    validTipsData() {
+      return (
+        this.tipsGoal.isEnabled &&
+        this.tipsGoal.text.trim().length &&
+        parseFloat(this.tipsGoal.total) > 0 &&
+        this.tipsGoal.sources.length
+      );
     }
   },
   methods: {
@@ -764,7 +789,7 @@ export default {
       this.datetimeExpired = InitialState.datetimeExpired;
       this.expiredAction = InitialState.expiredAction;
       this.saving = false;
-      this.tipsGoal = InitialState.tipsGoal;
+      this.tipsGoal = { ...InitialState.tipsGoal };
     },
     getPostData() {
       if (this.notEhoughData) return;
@@ -806,8 +831,12 @@ export default {
         postData.expiredDate = "";
       }
 
-      if (this.tipsGoal.isEnabled) {
-        postData.tipsGoal = this.tipsGoal;
+      if (this.validTipsData) {
+        postData.tipsGoal = {
+          ...this.tipsGoal,
+          total: parseFloat(this.tipsGoal.total),
+          sources: this.tipsGoal.sources.map(item => item.value)
+        };
       }
 
       return postData;
@@ -917,6 +946,10 @@ export default {
         this.mediaType = this.preloadedMedias.length
           ? this.preloadedMedias[0].mediaType
           : "all";
+        this.tipsGoal =
+          this.post.tipsGoal && this.post.tipsGoal.isEnabled
+            ? this.post.tipsGoal
+            : Object.assign({}, InitialState.tipsGoal);
 
         this.$refs.textarea.innerHTML = this.getText();
       }
@@ -934,6 +967,9 @@ export default {
 
     this.popupItem = this.$el;
     this.$refs.textarea.innerHTML = this.getText();
+  },
+  beforeDestroy() {
+    this.tipsGoal = { ...InitialState.tipsGoal };
   },
   directives: {
     ClickOutside
