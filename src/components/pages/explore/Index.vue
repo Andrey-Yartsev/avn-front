@@ -230,7 +230,7 @@ export default {
       return this.$store.state.topModels.posts;
     },
     storiesLoading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.explore.loading;
     },
     storiesAllDataReceived() {
       return this.$store.state.stories.allDataReceived;
