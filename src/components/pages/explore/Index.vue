@@ -41,12 +41,14 @@
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <!-- <TopLives :lives="streamLives" v-if="streamLives.length" /> -->
-                <TopLivesList :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
                 >
+                  <TopLivesList
+                    :lives="streamLives"
+                    v-if="streamLives.length"
+                  />
                   <StorySmall
                     v-for="post in stories"
                     :post="post"
@@ -181,6 +183,7 @@ import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
 import BrowserStore from "store";
+// import mockStories from "@/mock/stories";
 
 export default {
   name: "Explore",
@@ -221,6 +224,7 @@ export default {
       return this.$store.state.explore.posts;
     },
     stories() {
+      // return mockStories;
       return this.$store.state.stories.explore.posts;
     },
     lives() {
