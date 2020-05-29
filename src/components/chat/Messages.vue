@@ -167,6 +167,16 @@
                   </a>
                 </template>
               </div>
+              <div
+                v-if="isMyMessage(v) && !v.isFree && v.isOpened && v.payedAt"
+                class="timestamp timestamp_sm-size message-time test"
+              >
+                <div class="message-time__written">
+                  <span class="timeValue"
+                    >Payed {{ v.price }} {{ time(v.payedAt) }}</span
+                  >
+                </div>
+              </div>
               <div class="timestamp timestamp_sm-size message-time">
                 <div
                   class="message-time__read"
