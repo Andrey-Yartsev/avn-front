@@ -255,26 +255,6 @@
       }
     }
 
-    &.storyView_top-live__list.live-list-wrapper {
-      display: flex;
-      flex-flow: row nowrap;
-      width: auto;
-      .story {
-        margin-right: 24px;
-        margin-left: 10px;
-        @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-          margin: 0 12px;
-        }
-      }
-
-      @include media-breakpoint-up($desktop-breakpoint) {
-        width: auto;
-        min-width: 82px;
-        margin-right: 0px;
-        margin-top: 5px;
-      }
-    }
-
     .stories-all & {
 
       @include media-breakpoint-up($desktop-breakpoint) {

@@ -41,8 +41,7 @@
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <!-- <TopLives :lives="streamLives" v-if="streamLives.length" /> -->
-                <TopLivesList :lives="streamLives" v-if="streamLives.length" />
+                <TopLives :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
@@ -162,7 +161,6 @@
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
-import TopLivesList from "@/components/common/topLives/livesList";
 import PostSmall from "@/components/post/view/SmallView";
 import PostMedium from "@/components/post/view/MediumView";
 import StoryMedium from "@/components/story/MediumView";
@@ -188,7 +186,6 @@ export default {
     MobileHeader,
     Footer,
     TopLives,
-    TopLivesList,
     Navigate,
     PostSmall,
     PostMedium,
