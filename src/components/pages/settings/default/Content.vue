@@ -193,6 +193,7 @@
           </div>
         </div>
         <Discount />
+        <MultiMonthDiscount />
       </template>
 
       <DeleteRestore v-else />
@@ -337,6 +338,7 @@ import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
 import timezones from "@/utils/timezones";
 import Discount from "./Discount";
+import MultiMonthDiscount from "./MultiMonthDiscount";
 
 export default {
   name: "ProfileSettingsContent",
@@ -347,7 +349,8 @@ export default {
     ColorSelect,
     TextareaAutosize,
     DeleteRestore,
-    Discount
+    Discount,
+    MultiMonthDiscount
   },
 
   methods: {

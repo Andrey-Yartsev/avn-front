@@ -28,7 +28,8 @@ export default {
     };
   },
   methods: {
-    subscribe() {
+    subscribe({ months, price }) {
+      console.log(months, price);
       const onSuccess = () => {
         this.$store.dispatch("subscription/success");
         if (window.onSubscriptionSuccess) {
