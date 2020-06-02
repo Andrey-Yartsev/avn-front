@@ -209,11 +209,26 @@
                   >
                 </div>
               </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasWatermarkStream"
+                    value="true"
+                    v-model="localUser.hasWatermarkStream"
+                  />
+                  <span class="label icn-item"
+                    >Enable watermarks for stream</span
+                  >
+                </div>
+              </label>
 
               <div
                 class="form-group form-group_with-label pb-reset"
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
               >
                 <label class="form-group-inner">
@@ -230,7 +245,9 @@
               </div>
               <WatermarkImageUploader
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
                 @change="watermarkImageChange"
                 @remove="watermarkImageRemove"
@@ -255,7 +272,7 @@
           <div class="container">
             <div class="form-group form-group_with-label radio-group">
               <div class="form-group-inner">
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -267,7 +284,7 @@
                     All
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -279,7 +296,7 @@
                     Subscribers
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -291,7 +308,7 @@
                     Non-Subscribers
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -327,6 +344,26 @@
               name="isStreamsTweet"
               value="false"
               v-model="localUser.isMsgFromSubscribersOnly"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div v-if="user.canEarn" class="form-title tweet-posts-block border-top">
+        <div class="inner">
+          <span class="semi-transparent">
+            Blur messages
+            <p class="subtext">
+              Blur incoming media content in chat messages
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="blurIncomingMessages"
+              value="false"
+              v-model="localUser.blurIncomingMessages"
             />
             <span class="toggle-element_switcher"></span>
           </label>

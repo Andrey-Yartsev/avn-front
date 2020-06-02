@@ -729,6 +729,35 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "getScheduledGroupMessages",
+  apiPath: "chats/recipients/messages/queue",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  localError: true,
+  throw400: true
+});
+
+createRequestAction({
+  prefix: "deleteScheduleMessage",
+  apiPath: "chats/recipients/messages/queue/{messageId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  localError: true,
+  throw400: true,
+  paramsToPath: function(params, path) {
+    return path.replace(/{messageId}/, params);
+  }
+});
+
+createRequestAction({
   prefix: "sendMultiMessages",
   apiPath: "chats/bulk/messages",
   state,

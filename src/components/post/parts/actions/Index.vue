@@ -43,6 +43,16 @@
         ></span
       ></span>
     </template>
+    <div
+      v-if="
+        postView === 'medium' && isOwner(post.author.id) && post.expiredDate
+      "
+      class="datetime-value"
+    >
+      <span class="post-datetime__value">{{
+        getExpiredDate(post.expiredDate)
+      }}</span>
+    </div>
     <time class="timestamp">
       <a class="postLink" :href="`/post/${post.id}`" @click.prevent="openModal">
         {{ dateTime }}
@@ -74,6 +84,7 @@ import RepostDropdown from "@/components/post/parts/repostDropdown/Index";
 import ClickOutside from "vue-click-outside";
 import { fromNow } from "@/helpers/datetime";
 import userMixin from "@/mixins/user";
+import moment from "moment";
 
 export default {
   name: "Actions",
@@ -172,6 +183,9 @@ export default {
           postId: this.post.id
         }
       });
+    },
+    getExpiredDate(date) {
+      return "Expires at " + moment(date).format("MMM D, hh:mm a");
     }
   },
   directives: {

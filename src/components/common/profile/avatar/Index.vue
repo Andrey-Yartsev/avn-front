@@ -56,7 +56,7 @@
             profile.username
           }}</router-link>
           <span v-if="showProfileRank" class="user-login user-login-rating">
-            # {{ profile.privacy.rankCount }}
+            # {{ getModelRank }}
             <span
               v-if="isProfileOwner"
               class="icn-item icn-locked icn-size_sm"
@@ -97,7 +97,10 @@ export default {
       return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
     },
     showProfileRank() {
-      if (!this.profile.privacy.rankCount) {
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
+      if (!this.profile.privacy.categoryRankCount) {
         return false;
       }
       return (
@@ -105,8 +108,23 @@ export default {
         (this.profile.privacy && this.profile.privacy.showRankCount)
       );
     },
+    isAdmin() {
+      return (
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.privacy.isAdmin
+      );
+    },
     isProfileOwner() {
       return this.user && this.profile.id === this.user.id;
+    },
+    getModelRank() {
+      if (
+        !this.$store.state.auth.user ||
+        this.$store.state.auth.user.categoryView === 1
+      ) {
+        return this.profile.privacy.globalRankCount;
+      }
+      return this.profile.privacy.categoryRankCount;
     }
   },
   methods: {

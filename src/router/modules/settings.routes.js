@@ -228,5 +228,16 @@ export const routes = [
       title: "Magazine",
       cssName: "settings"
     }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/welcomeMessages",
+    name: "SettingsWelcomeMessagesPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsWelcomeMessagesPage" */ "@/components/pages/settings/welcomeMessages/Index.vue"),
+    meta: {
+      title: "Welcome Messages",
+      cssName: "settings"
+    }
   }
 ];

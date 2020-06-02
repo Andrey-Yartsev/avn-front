@@ -470,6 +470,9 @@ label {
   .row {
     margin-left: -7.5px;
     margin-right: -7.5px;
+    &.margin-0 {
+      margin: 0;
+    }
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1 1 100%;
     }
@@ -936,6 +939,13 @@ select {
   &.m-inline {
     display: inline-flex;
     margin-right: 25px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      &.m-top {
+        &-10 {
+          margin-top: 10px;
+        }
+      }
+    }
   }
 
   input {

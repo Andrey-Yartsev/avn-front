@@ -388,6 +388,7 @@ import StreamViewers from "@/components/pages/stream/Viewers";
 import { getCookie } from "@/components/pages/stream/debug";
 import moment from "moment";
 import LoadScripts from "@/components/statistics/loadScripts";
+import { convertImgToBase64URL } from "@/utils/mediaFiles";
 
 export default {
   name: "Stream",
@@ -437,7 +438,8 @@ export default {
         amount: "",
         description: ""
       },
-      showTipsGoalForm: false
+      showTipsGoalForm: false,
+      base64watermark: null
     };
   },
   components: {
@@ -806,6 +808,20 @@ export default {
         this.tipsGoal.description = this.activeTipsGoal.description;
       }
       this.showTipsGoalForm = !this.showTipsGoalForm;
+    },
+    getWatermarkData() {
+      const watermarkData = {
+        type: "watermark",
+        data: this.user.publicUrl,
+        logo: logoBase64
+      };
+      if (this.user.watermarkText) {
+        watermarkData.data = this.user.watermarkText;
+      }
+      if (this.user.watermarkFileUpload) {
+        watermarkData.logo = this.base64watermark;
+      }
+      return watermarkData;
     }
   },
   mounted() {
@@ -814,6 +830,12 @@ export default {
       return;
     }
     this.$store.commit("lives/resetCurrentLive");
+
+    if (this.user.hasWatermarkStream && this.user.watermarkFileUpload) {
+      convertImgToBase64URL(this.user.watermarkFileUpload, base64Img => {
+        this.base64watermark = base64Img;
+      });
+    }
 
     this.streamVisibility =
       this.user.subscribePrice > 0
@@ -884,11 +906,7 @@ export default {
             this.streamModule.sendCustomMessage({
               msgtype: "data.custom",
               to: ["transcoder"],
-              data: {
-                type: "watermark",
-                data: this.user.publicUrl,
-                logo: logoBase64
-              }
+              data: this.user.hasWatermarkStream ? this.getWatermarkData() : {}
             });
             this.streamStartTime = new Date().getTime() / 1000;
           });

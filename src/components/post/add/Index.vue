@@ -161,20 +161,37 @@
       </div>
       <div class="actions">
         <div
-          class="b-check-state b-check-state_full-width b-check-state_watermark"
-          :class="{ mediaSelected: preloadedMedias.length > 0 }"
-          v-if="user.hasWatermarkVideo || user.hasWatermarkPhoto"
+          class="post-expired-time"
+          v-if="datetimeExpired && $mq === 'desktop' && where === 'modal'"
         >
-          <label :class="{ disabled: preloadedMedias.length > 0 }">
-            <input
-              class="is-free-post"
-              type="checkbox"
-              :disabled="preloadedMedias.length > 0"
-              v-model="withoutWatermark"
+          <div class="datetime-value expired-value">
+            <span class="icn-item icn-calendar icn-size_lg" />
+            <span class="post-datetime__value">{{ formattedDateExpired }}</span>
+            <span
+              @click="resetDatetimeExpired"
+              class="icn-item btn-reset btn-reset_prim-color icn-pos_center"
             />
-            <span class="b-check-state__icon icn-item icn-size_lg"></span>
-            <span class="b-check-state__text">Without watermark</span>
-          </label>
+          </div>
+          <div class="expired-action">
+            <label class="form-group-inner">
+              <span class="label">Action</span>
+              <div class="select-wrapper">
+                <select
+                  v-model="expiredAction"
+                  name="subscriberType"
+                  class="default-disabled"
+                >
+                  <option
+                    v-for="option in expiredActionList"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+            </label>
+          </div>
         </div>
         <div class="actions-controls">
           <label
@@ -204,6 +221,7 @@
                 input-class="post-datetime__input"
                 use12-hour
                 :min-datetime="minDate"
+                :max-datetime="maxDate"
                 @close="closeDatepicker"
                 :phrases="{ ok: 'Schedule', cancel: 'Cancel' }"
               />
@@ -213,6 +231,31 @@
               ></span>
               <span class="btn-post__text">
                 Schedule
+              </span>
+            </div>
+          </div>
+          <div class="btn-post btn-post_datetime" v-if="showExpired">
+            <div
+              class="post-datetime post-datetime-expire"
+              :class="{ disabled: datetimeExpired }"
+            >
+              <Datetime
+                :inputId="`post-datetimeExpired__switcher_${where}`"
+                class="post-datetime__switcher"
+                type="datetime"
+                v-model="datetimeExpired"
+                input-class="post-datetime__input"
+                use12-hour
+                :min-datetime="minDateExpired"
+                @close="closeDatepickerExpired"
+                :phrases="{ ok: 'Expire', cancel: 'Cancel' }"
+              />
+              <span
+                class="post-datetime__icn icn-item icn-calendar icn-size_lg"
+                @click="openDatepickerExpired"
+              ></span>
+              <span class="btn-post__text">
+                Expire
               </span>
             </div>
           </div>
@@ -245,6 +288,22 @@
               </div>
             </div>
           </template>
+          <div
+            v-if="user.hasWatermarkVideo || user.hasWatermarkPhoto"
+            class="b-check-state btn-post b-check-state_watermark"
+            :class="{ mediaSelected: preloadedMedias.length > 0 }"
+          >
+            <label :class="{ disabled: preloadedMedias.length > 0 }">
+              <input
+                class="is-free-post"
+                type="checkbox"
+                :disabled="preloadedMedias.length > 0"
+                v-model="withoutWatermark"
+              />
+              <span class="b-check-state__icon icn-item icn-size_lg"></span>
+              <span class="b-check-state__text">Without watermark</span>
+            </label>
+          </div>
         </div>
         <div
           class="tweet-new-post"
@@ -277,7 +336,7 @@
       <div
         class="post-attachment"
         v-if="
-          (datetime || preloadedMedias.length) &&
+          (datetime || datetimeExpired || preloadedMedias.length) &&
             $mq === 'mobile' &&
             (isNew || (!isNew && mediaType !== 'audio'))
         "
@@ -318,6 +377,38 @@
             />
           </div>
         </div>
+        <div
+          class="post-scheduled-time post-expired-time"
+          v-if="datetimeExpired && $mq === 'mobile'"
+        >
+          <div class="datetime-value">
+            <span class="post-datetime__value">{{ formattedDateExpired }}</span>
+            <span
+              @click="resetDatetimeExpired"
+              class="datetime-value__reset icn-item btn-reset btn-reset_prim-color icn-pos_center"
+            />
+          </div>
+          <div class="expired-action">
+            <label class="form-group-inner">
+              <span class="label">Action</span>
+              <div class="select-wrapper">
+                <select
+                  v-model="expiredAction"
+                  name="subscriberType"
+                  class="default-disabled"
+                >
+                  <option
+                    v-for="option in expiredActionList"
+                    :key="option.value"
+                    :value="option.value"
+                  >
+                    {{ option.name }}
+                  </option>
+                </select>
+              </div>
+            </label>
+          </div>
+        </div>
       </div>
       <div class="loader-container loader-container_center" v-if="isSaving">
         <Loader
@@ -354,6 +445,8 @@ const InitialState = {
   isFree: false,
   mediaType: "all",
   datetime: undefined,
+  datetimeExpired: undefined,
+  expiredAction: "delete",
   saving: false,
   withoutWatermark: false,
   limits: {
@@ -466,8 +559,29 @@ export default {
       }
       return "Scheduled for " + moment(this.datetime).format("MMM D, hh:mm a");
     },
+    formattedDateExpired() {
+      return (
+        "Expires at " + moment(this.datetimeExpired).format("MMM D, hh:mm a")
+      );
+    },
     minDate() {
       return LuxonDateTime.local()
+        .plus({ minutes: 1 })
+        .toISO();
+    },
+    maxDate() {
+      if (!this.datetimeExpired) {
+        return null;
+      }
+      return LuxonDateTime.fromISO(this.datetimeExpired)
+        .minus({ minutes: 1 })
+        .toISO();
+    },
+    minDateExpired() {
+      if (!this.datetime) {
+        return this.minDate;
+      }
+      return LuxonDateTime.fromISO(this.datetime)
         .plus({ minutes: 1 })
         .toISO();
     },
@@ -494,6 +608,23 @@ export default {
         return false;
       }
       return this.user.isPerformer;
+    },
+    showExpired() {
+      return true;
+      // return this.showSchedule;
+    },
+    expiredActionList() {
+      const list = [
+        { name: "Delete", value: "delete" },
+        { name: "Hide", value: "hide" }
+      ];
+      if (this.isFree) {
+        list.push({
+          name: "For subscribers only",
+          value: "makeSubscribersOnly"
+        });
+      }
+      return list;
     }
   },
   methods: {
@@ -514,6 +645,10 @@ export default {
     resetDatetime() {
       this.datetime = InitialState.datetime;
     },
+    resetDatetimeExpired() {
+      this.datetimeExpired = InitialState.datetimeExpired;
+      this.expiredAction = InitialState.expiredAction;
+    },
     reset() {
       this.expanded = InitialState.expanded;
       this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
@@ -522,12 +657,18 @@ export default {
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
       this.datetime = InitialState.datetime;
+      this.datetimeExpired = InitialState.datetimeExpired;
+      this.expiredAction = InitialState.expiredAction;
       this.saving = false;
     },
     getPostData() {
       if (this.notEhoughData) return;
 
       const scheduledDate = moment(this.datetime)
+        .utc()
+        .format("Y-MM-DD HH:mm:ss");
+
+      const expiredDate = moment(this.datetimeExpired)
         .utc()
         .format("Y-MM-DD HH:mm:ss");
 
@@ -553,6 +694,13 @@ export default {
         postData.scheduledDate = scheduledDate;
       }
 
+      if (this.datetimeExpired) {
+        postData.expiredDate = expiredDate;
+        postData.expiredAction = this.expiredAction;
+      } else if (!this.datetimeExpired && this.post.expiredDate) {
+        postData.expiredDate = "";
+      }
+
       if (this.hasSubscribePrice) {
         postData.isFree = this.isFree;
       }
@@ -564,7 +712,17 @@ export default {
       document.body.classList.add("open-timepicker");
       document.getElementById(`post-datetime__switcher_${this.where}`).click();
     },
+    openDatepickerExpired() {
+      if (this.datetimeExpired) return;
+      document.body.classList.add("open-timepicker");
+      document
+        .getElementById(`post-datetimeExpired__switcher_${this.where}`)
+        .click();
+    },
     closeDatepicker() {
+      document.body.classList.remove("open-timepicker");
+    },
+    closeDatepickerExpired() {
       document.body.classList.remove("open-timepicker");
     },
 
@@ -635,6 +793,9 @@ export default {
         }
 
         this.datetime = this.post.scheduledDate;
+        this.datetimeExpired = this.post.expiredDate;
+        this.expiredAction =
+          this.post.expiredAction || InitialState.expiredAction;
         this.postMsg = this.getConvertedText();
         this.tweetSend = this.post.tweetSend;
         this.isFree = this.post.isFree;
@@ -653,6 +814,11 @@ export default {
           : "all";
 
         this.$refs.textarea.innerHTML = this.getText();
+      }
+    },
+    isFree(value, oldValue) {
+      if (!value && oldValue && this.expiredAction === "makeSubscribersOnly") {
+        this.expiredAction = "delete";
       }
     }
   },

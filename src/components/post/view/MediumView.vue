@@ -58,6 +58,7 @@
             :showAddCommentForm="showAddComment"
             :showTip="showTip"
             :openModal="openModal"
+            :postView="'medium'"
             @postShowCommentForm="toggleCommentForm"
             @postLike="likePost"
             @toggleTip="toggleTipForm"
