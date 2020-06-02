@@ -695,6 +695,10 @@
         flex: 0 1 13%;
         margin-left: 5%;
         max-width: 13%;
+        .expireTime {
+          font-size: 12px;
+          color: $primary-color
+        }
       }
     }
 

@@ -6,7 +6,7 @@
       class="header-search-input rounded sm"
       name="query"
       autocomplete="off"
-      placeholder="Search"
+      :placeholder="placeholder"
       type="text"
       @focus="open"
       tabindex="1"
@@ -80,6 +80,13 @@ export default {
       localQuery: "",
       cursorInField: false
     };
+  },
+
+  props: {
+    placeholder: {
+      type: String,
+      default: "Search"
+    }
   },
 
   computed: {

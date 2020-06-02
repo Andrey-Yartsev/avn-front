@@ -1,8 +1,9 @@
 import { createRequestAction } from "../../utils/storeRequest";
-import mockUsers from "@/mock/discountUsers";
+// import mockUsers from "@/mock/discountUsers";
 
 const state = {
-  users: mockUsers
+  // users: mockUsers
+  users: []
 };
 
 const mutations = {
@@ -69,7 +70,7 @@ const actions = {
 
 createRequestAction({
   prefix: "_fetchDiscounts",
-  apiPath: `users/discounts`,
+  apiPath: `discounts/users`,
   state,
   mutations,
   actions,
@@ -80,12 +81,12 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_add",
-  apiPath: `users/discounts`,
+  apiPath: `discounts/users`,
   state,
   mutations,
   actions,
   options: {
-    method: "PUT"
+    method: "POST"
   },
   paramsToOptions: function(params, options) {
     options.data = params;
@@ -95,7 +96,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_remove",
-  apiPath: `users/discounts/{userId}`,
+  apiPath: `discounts/users/{userId}`,
   state,
   mutations,
   actions,
@@ -109,7 +110,7 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_togle",
-  apiPath: `users/discounts/{userId}`,
+  apiPath: `discounts/users/{userId}`,
   state,
   mutations,
   actions,

@@ -16,6 +16,7 @@
             <SearchBubble
               @addUser="addUser"
               @togleSearchResult="togleSearchResult"
+              :placeholder="'Search to add user'"
             />
           </form>
         </div>
@@ -98,6 +99,7 @@
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
             >
               <button
+                v-if="!user.isActive"
                 type="button"
                 class="btn-unblock"
                 @click="remove(user.id)"
@@ -105,6 +107,9 @@
               >
                 <span class="icn-item icn-remove"></span>
               </button>
+              <span v-else-if="user.expiredDate">
+                Expire {{ time(user.expiredDate) }}
+              </span>
             </div>
           </div>
         </div>
@@ -113,43 +118,13 @@
         </div>
       </div>
     </div>
-    <div
-      class="go-blocked shadow-block no-padding hidden-desktop settings-nav__wrapper"
-    >
-      <div class="settings-nav">
-        <div
-          class="settings-nav__item settings-nav__item_arr empty"
-          v-if="!users.length"
-        >
-          <span class="not-lspacing">
-            Blocked
-          </span>
-          <span class="value">
-            <span class="count">0</span>
-            people
-          </span>
-        </div>
-        <!-- <router-link
-          :to="mobileBlockedRoute"
-          v-else
-          class="settings-nav__item settings-nav__item_arr"
-        >
-          <span class="not-lspacing">
-            Blocked
-          </span>
-          <span class="value">
-            <span class="count">{{ items.length }}</span>
-            people
-          </span>
-        </router-link> -->
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import User from "@/mixins/user";
 import SearchBubble from "@/components/common/profile/media/parts/searchUsers/Index";
+import { fromNow } from "@/helpers/datetime";
 
 export default {
   name: "UserDiscounts",
@@ -160,7 +135,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Users' discounts"
+      default: "Personal discounts"
     },
     // mobileBlockedRoute: {
     //   type: String,
@@ -172,7 +147,7 @@ export default {
     },
     subtext: {
       type: String,
-      default: "Personal subscription discounts"
+      default: "Personalized subscription discounts"
     }
   },
 
@@ -206,8 +181,8 @@ export default {
         .value;
       this.$store.dispatch(`subscription/discounts/toggle`, {
         userId: user.id,
-        amount,
-        months,
+        amount: parseInt(amount),
+        months: parseInt(months),
         isActive: !user.isActive
       });
     },
@@ -220,11 +195,14 @@ export default {
     },
     togleSearchResult(value) {
       this.showSearchResult = value;
+    },
+    time(date) {
+      return fromNow(date);
     }
   },
 
   created() {
-    // this.init();
+    this.init();
   }
 };
 </script>
