@@ -849,8 +849,25 @@
   }
   .close-tipsGoal {
     width: 10%;
+    margin-bottom: 10px;
+  }
+
+  &.mobile-view {
+    .post-tipsGoal-form {
+      flex-direction: row-reverse;
+      .close-tipsGoal {
+        transform: translateY(7px);
+        margin-bottom: 0;
+      }
+      .amount {
+        margin-right: auto;
+        margin-left: 10%;
+        width: 20%
+      }
+    }
   }
 }
+
 
 .post-expired-time {
   padding-right: 20px;
