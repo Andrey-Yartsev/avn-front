@@ -685,6 +685,9 @@ label {
     border-radius: 1000px;
     background-color: transparent;
     transition: background-color 0.3s ease;
+    &.disabled {
+      opacity: 0.5;
+    }
 
     &:before {
       position: absolute;

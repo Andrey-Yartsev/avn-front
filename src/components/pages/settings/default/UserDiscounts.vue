@@ -44,79 +44,13 @@
     <div class="shadow-block no-padding">
       <div class="table-wrapper">
         <div class="table blocked-table" v-if="users.length">
-          <div class="item" v-for="item in users" :key="item.user.id">
-            <div class="table__cell">
-              <router-link
-                :to="'/' + item.user.username"
-                class="userview-block"
-              >
-                <span
-                  class="avatar avatar_sm"
-                  :class="{ 'online-state': isOnline(item.user.id) }"
-                >
-                  <span class="avatar__img">
-                    <img :src="item.user.avatar" v-if="item.user.avatar" />
-                  </span>
-                </span>
-                <div class="name">{{ item.user.name }}</div>
-                <span class="user-login reset-ml">{{
-                  item.user.username
-                }}</span>
-              </router-link>
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-            >
-              <input
-                type="number"
-                :value="item.amount"
-                :disabled="item.isActive"
-                :id="`discount_user_amount-${item.user.id}`"
-              />
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-            >
-              <select
-                :disabled="item.isActive"
-                :id="`discount_user_months-${item.user.id}`"
-              >
-                <option value="1">1</option>
-                <option value="3">3</option>
-                <option value="6">6</option>
-                <option value="12">12</option>
-              </select>
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-            >
-              <label class="toggle-element">
-                <input
-                  type="checkbox"
-                  name="toggleDiscount"
-                  :checked="item.isActive"
-                  @change="togle(item)"
-                />
-                <span class="toggle-element_switcher" />
-              </label>
-            </div>
-            <div
-              class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
-            >
-              <button
-                v-if="!item.isActive"
-                type="button"
-                class="btn-unblock"
-                @click="remove(item.user.id)"
-                v-tooltip="'Remove'"
-              >
-                <span class="icn-item icn-remove"></span>
-              </button>
-              <span class="expireTime" v-else-if="item.expiredDate">
-                Expire {{ time(item.expiredDate) }}
-              </span>
-            </div>
-          </div>
+          <UserDiscountItem
+            v-for="item in users"
+            :key="item.user.id"
+            :item="item"
+            @togle="togle"
+            @remove="remove"
+          />
         </div>
         <div class="empty-table-info show shadow-block" v-else>
           <span>No one get discount yet</span>
@@ -129,23 +63,20 @@
 <script>
 import User from "@/mixins/user";
 import SearchBubble from "@/components/common/profile/media/parts/searchUsers/Index";
-import { fromNow } from "@/helpers/datetime";
+import UserDiscountItem from "./UserDiscountItem";
 
 export default {
   name: "UserDiscounts",
   mixins: [User],
   components: {
-    SearchBubble
+    SearchBubble,
+    UserDiscountItem
   },
   props: {
     title: {
       type: String,
       default: "Personal discounts"
     },
-    // mobileBlockedRoute: {
-    //   type: String,
-    //   default: true
-    // },
     source: {
       type: String,
       default: "users"
@@ -202,9 +133,6 @@ export default {
     },
     togleSearchResult(value) {
       this.showSearchResult = value;
-    },
-    time(date) {
-      return fromNow(date);
     }
   },
 
