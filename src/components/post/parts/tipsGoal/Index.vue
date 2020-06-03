@@ -1,6 +1,6 @@
 <template>
   <div class="postTipsGoal">
-    <div class="title">Post Tips Goal</div>
+    <div class="title">{{ data.text }}</div>
     <div class="postTipsGoal__progress">
       <div class="progress-start">$0</div>
       <div class="progress-line">

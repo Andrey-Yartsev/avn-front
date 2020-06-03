@@ -837,6 +837,10 @@ export default {
           total: parseFloat(this.tipsGoal.total),
           sources: this.tipsGoal.sources.map(item => item.value)
         };
+      } else if (this.post.tipsGoal && !this.post.tipsGoal.isEnabled) {
+        postData.tipsGoal = {
+          ...InitialState.tipsGoal
+        };
       }
 
       return postData;
@@ -948,7 +952,12 @@ export default {
           : "all";
         this.tipsGoal =
           this.post.tipsGoal && this.post.tipsGoal.isEnabled
-            ? this.post.tipsGoal
+            ? {
+                ...this.post.tipsGoal,
+                sources: tipsGoalSourceTypes.filter(item =>
+                  this.post.tipsGoal.sources.includes(item.value)
+                )
+              }
             : Object.assign({}, InitialState.tipsGoal);
 
         this.$refs.textarea.innerHTML = this.getText();
