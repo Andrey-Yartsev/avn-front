@@ -35,8 +35,8 @@
           </button>
         </div>
         <LinksPreviewList :text="post.text" />
-        <PostTipsGoal v-if="post.tipsGoal" :data="post.tipsGoal" />
-        <!-- <PostTipsGoal v-if="true" :data="post.tipsGoal" /> -->
+        <!-- <PostTipsGoal v-if="post.tipsGoal" :data="post.tipsGoal" /> -->
+        <PostTipsGoal v-if="true" :data="post.tipsGoal" />
         <slot v-if="isInnerPost"></slot>
         <template v-else>
           <Media
