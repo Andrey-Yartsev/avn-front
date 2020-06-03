@@ -44,19 +44,24 @@
     <div class="shadow-block no-padding">
       <div class="table-wrapper">
         <div class="table blocked-table" v-if="users.length">
-          <div class="item" v-for="user in users" :key="user.id">
+          <div class="item" v-for="item in users" :key="item.user.id">
             <div class="table__cell">
-              <router-link :to="'/' + user.username" class="userview-block">
+              <router-link
+                :to="'/' + item.user.username"
+                class="userview-block"
+              >
                 <span
                   class="avatar avatar_sm"
-                  :class="{ 'online-state': isOnline(user.id) }"
+                  :class="{ 'online-state': isOnline(item.user.id) }"
                 >
                   <span class="avatar__img">
-                    <img :src="user.avatar" v-if="user.avatar" />
+                    <img :src="item.user.avatar" v-if="item.user.avatar" />
                   </span>
                 </span>
-                <div class="name">{{ user.name }}</div>
-                <span class="user-login reset-ml">{{ user.username }}</span>
+                <div class="name">{{ item.user.name }}</div>
+                <span class="user-login reset-ml">{{
+                  item.user.username
+                }}</span>
               </router-link>
             </div>
             <div
@@ -64,17 +69,17 @@
             >
               <input
                 type="number"
-                :value="user.amount"
-                :disabled="user.isActive"
-                :id="`discount_user_amount-${user.id}`"
+                :value="item.amount"
+                :disabled="item.isActive"
+                :id="`discount_user_amount-${item.user.id}`"
               />
             </div>
             <div
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
             >
               <select
-                :disabled="user.isActive"
-                :id="`discount_user_months-${user.id}`"
+                :disabled="item.isActive"
+                :id="`discount_user_months-${item.user.id}`"
               >
                 <option value="1">1</option>
                 <option value="3">3</option>
@@ -89,8 +94,8 @@
                 <input
                   type="checkbox"
                   name="toggleDiscount"
-                  :checked="user.isActive"
-                  @change="togle(user)"
+                  :checked="item.isActive"
+                  @change="togle(item)"
                 />
                 <span class="toggle-element_switcher" />
               </label>
@@ -99,16 +104,16 @@
               class="table__cell table__cell_align table__cell_align-vert-c table__cell_align-hor-c actions"
             >
               <button
-                v-if="!user.isActive"
+                v-if="!item.isActive"
                 type="button"
                 class="btn-unblock"
-                @click="remove(user.id)"
+                @click="remove(item.user.id)"
                 v-tooltip="'Remove'"
               >
                 <span class="icn-item icn-remove"></span>
               </button>
-              <span v-else-if="user.expiredDate">
-                Expire {{ time(user.expiredDate) }}
+              <span class="expireTime" v-else-if="item.expiredDate">
+                Expire {{ time(item.expiredDate) }}
               </span>
             </div>
           </div>
@@ -174,20 +179,22 @@ export default {
     remove(userId) {
       this.$store.dispatch("subscription/discounts/remove", userId);
     },
-    togle(user) {
-      const amount = document.getElementById(`discount_user_amount-${user.id}`)
-        .value;
-      const months = document.getElementById(`discount_user_months-${user.id}`)
-        .value;
+    togle(item) {
+      const amount = document.getElementById(
+        `discount_user_amount-${item.user.id}`
+      ).value;
+      const months = document.getElementById(
+        `discount_user_months-${item.user.id}`
+      ).value;
       this.$store.dispatch(`subscription/discounts/toggle`, {
-        userId: user.id,
+        ...item,
         amount: parseInt(amount),
         months: parseInt(months),
-        isActive: !user.isActive
+        isActive: !item.isActive
       });
     },
     addUser(user) {
-      const isAlreadyInList = this.users.find(item => item.id === user.id);
+      const isAlreadyInList = this.users.find(item => item.user.id === user.id);
       if (isAlreadyInList || user.id === this.user.id) {
         return;
       }

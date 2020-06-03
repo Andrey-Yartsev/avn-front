@@ -1,8 +1,6 @@
 import { createRequestAction } from "../../utils/storeRequest";
-// import mockUsers from "@/mock/discountUsers";
 
 const state = {
-  // users: mockUsers
   users: []
 };
 
@@ -14,15 +12,17 @@ const mutations = {
     state.users.push(user);
   },
   remove(state, userId) {
-    state.users = state.users.filter(item => item.id !== userId);
+    state.users = state.users.filter(item => item.user.id !== userId);
   },
   activate(state, data) {
     state.users = state.users.map(item => {
-      if (item.id === data.userId) {
+      if (item.user.id === data.user.id) {
         return {
-          ...item,
+          user: { ...item.user },
           isActive: true,
-          amount: data.amount
+          amount: data.amount,
+          months: data.months,
+          expiredDate: data.expiredDate
         };
       }
       return item;
@@ -30,10 +30,12 @@ const mutations = {
   },
   disactivate(state, userId) {
     state.users = state.users.map(item => {
-      if (item.id === userId) {
+      if (item.user.id === userId) {
         return {
           ...item,
-          isActive: false
+          user: { ...item.user },
+          isActive: false,
+          expiredDate: null
         };
       }
       return item;
@@ -48,8 +50,8 @@ const actions = {
     });
   },
   add({ dispatch, commit }, user) {
-    dispatch("_add", { userId: user.id }).then(() => {
-      commit("add", user);
+    dispatch("_add", { userId: user.id }).then(res => {
+      commit("add", res.data);
     });
   },
   remove({ dispatch, commit }, userId) {
@@ -58,11 +60,11 @@ const actions = {
     });
   },
   toggle({ dispatch, commit }, data) {
-    dispatch("_togle", data).then(() => {
+    dispatch("_togle", data).then(res => {
       if (data.isActive) {
-        commit("activate", data);
+        commit("activate", res.data);
       } else {
-        commit("disactivate", data.userId);
+        commit("disactivate", res.data.user.id);
       }
     });
   }
@@ -118,7 +120,7 @@ createRequestAction({
     method: "PUT"
   },
   paramsToPath: function(data, path) {
-    return path.replace(/{userId}/, data.userId);
+    return path.replace(/{userId}/, data.user.id);
   },
   paramsToOptions: function(params, options) {
     options.data = params;
