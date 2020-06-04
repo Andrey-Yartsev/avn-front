@@ -268,7 +268,10 @@
               </span>
             </div>
           </div>
-          <div class="btn-post btn-post_datetime">
+          <div
+            v-if="user.canEarn && user.canPayoutsRequest"
+            class="btn-post btn-post_datetime"
+          >
             <div
               class="post-datetime"
               :class="{ disabled: tipsGoal.isEnabled }"
@@ -278,7 +281,7 @@
                 @click="() => (tipsGoal.isEnabled = true)"
               ></span>
               <span class="btn-post__text">
-                Tips goal
+                Tip goal
               </span>
             </div>
           </div>
