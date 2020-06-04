@@ -769,7 +769,11 @@ export default {
           total: parseFloat(this.tipsGoal.total),
           sources: this.tipsGoal.sources.map(item => item.value)
         };
-      } else if (this.post.tipsGoal && !this.post.tipsGoal.isEnabled) {
+      } else if (
+        this.post.tipsGoal &&
+        this.post.tipsGoal.isEnabled &&
+        !this.tipsGoal.isEnabled
+      ) {
         postData.tipsGoal = {
           ...InitialState.tipsGoal
         };
