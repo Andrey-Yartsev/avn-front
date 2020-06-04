@@ -1011,10 +1011,6 @@
   position: relative;
   padding: 12px 10px 0;
 
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    overflow: hidden;
-  }
-
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 7px;
   }
