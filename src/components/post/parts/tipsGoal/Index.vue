@@ -20,21 +20,21 @@
 </template>
 
 <script>
-import mockData from "@/mock/postTipsGoal";
+// import mockData from "@/mock/postTipsGoal";
 
 export default {
   name: "PostTipsGoal",
-  // props: {
-  //   data: {
-  //     type: Object,
-  //     required: true
-  //   }
-  // },
-  data() {
-    return {
-      data: mockData
-    };
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
   },
+  // data() {
+  //   return {
+  //     data: mockData
+  //   };
+  // },
   computed: {
     achievedPercentage() {
       return (this.data.achieved / (this.data.total / 100)).toFixed(0);
