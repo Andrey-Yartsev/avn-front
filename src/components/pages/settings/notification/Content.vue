@@ -211,6 +211,7 @@
             <TwitterCusomPreviews
               v-if="settings.options.newSubscriber.customImages.isEnabled"
               :media="settings.options.newSubscriber.customImages.media"
+              :name="'newSubscriber'"
             />
 
             <label class="form-group-inner">
@@ -250,6 +251,7 @@
             <TwitterCusomPreviews
               v-if="settings.options.autoprolong.customImages.isEnabled"
               :media="settings.options.autoprolong.customImages.media"
+              :name="'autoprolong'"
             />
 
             <label class="form-group-inner">
@@ -286,6 +288,7 @@
             <TwitterCusomPreviews
               v-if="settings.options.tip.customImages.isEnabled"
               :media="settings.options.tip.customImages.media"
+              :name="'tip'"
             />
 
             <label class="form-group-inner">
