@@ -591,7 +591,8 @@
     height: auto;
 
     .progress-line {
-      box-shadow: 0 0 0 1px  $secondary-color inset;
+      background-color: rgba(0,0,0,.1);
+      // box-shadow: 0 0 0 1px  $secondary-color inset;
       margin: 0 5px;
       flex-grow: 1;
       height: 8px;
