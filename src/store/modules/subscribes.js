@@ -71,6 +71,7 @@ createRequestAction({
     options.query.marker = params.marker || "";
     options.query.active =
       params.active === true ? 1 : params.active === false ? 0 : undefined;
+    options.query.paid = params.paid ? 1 : 0;
     return options;
   },
   resultConvert: function(result, state) {

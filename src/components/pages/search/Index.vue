@@ -59,6 +59,7 @@ import Users from "@/components/users/Users";
 import Posts from "./types/Posts";
 import Videos from "./types/Videos";
 import Photos from "./types/Photos";
+import Clips from "./types/Clips";
 import InfinityScroll from "@/mixins/infinityScroll";
 import NoResults from "./NoResults";
 import Footer from "@/components/footer/Index";
@@ -68,14 +69,16 @@ const types = {
   users: "People",
   posts: "Posts",
   videos: "Videos",
-  photos: "Photos"
+  photos: "Photos",
+  clips: "Clips"
 };
 
 const wrapperClasses = {
   posts: "postCollectionView",
   users: "userCollectionView",
   video: "videoCollectionView",
-  photo: "photoCollectionView"
+  photo: "photoCollectionView",
+  clip: "clipCollectionView"
 };
 
 export default {
@@ -88,6 +91,7 @@ export default {
     Posts,
     Videos,
     Photos,
+    Clips,
     NoResults,
     Footer,
     Loader
@@ -209,6 +213,9 @@ export default {
             break;
           case this.summary.usersCount > 0:
             goTo = "users";
+            break;
+          case this.summary.clipsCount > 0:
+            goTo = "clips";
             break;
           default:
             break;

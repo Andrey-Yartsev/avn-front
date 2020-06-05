@@ -87,6 +87,11 @@
                 >Subscribers
               </router-link>
               <router-link
+                class="user-menu-item user-menu-item__magazine icn-item"
+                to="/settings/magazine"
+                >AVN Magazine
+              </router-link>
+              <router-link
                 v-if="user.isPerformer && user.storeEnabled"
                 class="user-menu-item user-menu-item__clipStore icn-item"
                 :to="'/' + user.username + '/media'"

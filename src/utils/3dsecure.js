@@ -8,7 +8,6 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
       card
     },
     function(result) {
-      console.log(result);
       if (typeof result === "undefined") {
         onFailure({ message: "Unknown error" });
       } else {
@@ -31,6 +30,12 @@ function securion3DSecure(card, amount, onSuccess, onFailure) {
 }
 
 export const askFor3dSecure = options => {
+  let dispatchAction = "payment/pay/pay";
+  if (options) {
+    if (options.dispatchAction) {
+      dispatchAction = options.dispatchAction;
+    }
+  }
   const { amount, paymentGateCustomerCardToken } = options;
   global.Securionpay.setPublicKey(process.env.VUE_APP_SECURION_PK);
   securion3DSecure(
@@ -38,7 +43,7 @@ export const askFor3dSecure = options => {
     Math.round(amount * 100), // WARNING!!! PRICE IN CENTS
     token => {
       Store.commit("modal/hideSafe", { name: "subscribe" });
-      Store.dispatch("payment/pay/pay", { ...options, token })
+      Store.dispatch(dispatchAction, { ...options, token })
         .then(res => {
           if (res.success && res.message) {
             Store.dispatch("global/flashToast", {

@@ -58,6 +58,7 @@
             :showAddCommentForm="showAddComment"
             :showTip="showTip"
             :openModal="openModal"
+            :postView="'medium'"
             @postShowCommentForm="toggleCommentForm"
             @postLike="likePost"
             @toggleTip="toggleTipForm"
@@ -200,7 +201,7 @@ export default {
       // this.showTip = false;
     },
     visibilityChanged(isVisible, entry) {
-      if (this.$mq === "desktop") {
+      if (this.$mq === "desktop" || this.isReposted) {
         return;
       }
       this.$emit("visibilityChanged", {

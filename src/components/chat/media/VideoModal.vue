@@ -1,5 +1,5 @@
 <template>
-  <Modal>
+  <Modal class="popup-video">
     <div class="popup-container popup-image" slot="content">
       <div class="content content_relative">
         <Video :message="message" />

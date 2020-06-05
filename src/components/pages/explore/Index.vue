@@ -41,11 +41,14 @@
           <div class="storyCollectionView storyCollectionView_tape">
             <div class="stories-group__outer">
               <div class="stories-group">
-                <TopLives :lives="streamLives" v-if="streamLives.length" />
                 <perfect-scrollbar
                   class="stories-group__inner"
                   @ps-scroll-x="scrollFunction"
                 >
+                  <TopLivesList
+                    :lives="streamLives"
+                    v-if="streamLives.length"
+                  />
                   <StorySmall
                     v-for="post in stories"
                     :post="post"
@@ -91,6 +94,7 @@
                     :post="post"
                     :key="post.id"
                     from="explore"
+                    :showPin="false"
                   />
                 </template>
                 <template v-else>
@@ -160,6 +164,7 @@
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
+import TopLivesList from "@/components/common/topLives/livesList";
 import PostSmall from "@/components/post/view/SmallView";
 import PostMedium from "@/components/post/view/MediumView";
 import StoryMedium from "@/components/story/MediumView";
@@ -177,6 +182,8 @@ import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
+import BrowserStore from "store";
+// import mockStories from "@/mock/stories";
 
 export default {
   name: "Explore",
@@ -184,6 +191,7 @@ export default {
     MobileHeader,
     Footer,
     TopLives,
+    TopLivesList,
     Navigate,
     PostSmall,
     PostMedium,
@@ -198,6 +206,12 @@ export default {
     MediaSmall
   },
   mixins: [UserMixin, InfinityScrollMixin, PostsStat, Visibility],
+  data() {
+    return {
+      storiesFetched: false,
+      livesFetched: false
+    };
+  },
   created() {
     this.init();
   },
@@ -210,6 +224,7 @@ export default {
       return this.$store.state.explore.posts;
     },
     stories() {
+      // return mockStories;
       return this.$store.state.stories.explore.posts;
     },
     lives() {
@@ -222,7 +237,7 @@ export default {
       return this.$store.state.topModels.posts;
     },
     storiesLoading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.explore.loading;
     },
     storiesAllDataReceived() {
       return this.$store.state.stories.allDataReceived;
@@ -356,7 +371,6 @@ export default {
       this.lastYOffset = 0;
 
       this.$store.dispatch("explore/resetPageState");
-      this.$store.dispatch("lives/resetPageState");
       this.$store.commit("topModels/reset");
 
       const searchTag = this.$route.params.tag;
@@ -375,19 +389,24 @@ export default {
         }
       }
 
-      this.$store.dispatch("lives/getPosts");
-
-      this.$store.dispatch("stories/explore/resetPageState");
-      this.$store.dispatch("stories/explore/setLimit", { limit: 20 });
-      this.$store.dispatch("stories/explore/getPosts");
+      if (this.type === "story" || !this.storiesFetched) {
+        this.$store.dispatch("stories/explore/resetPageState");
+        this.$store.dispatch("stories/explore/setLimit", { limit: 20 });
+        this.$store.dispatch("stories/explore/getPosts");
+        this.storiesFetched = true;
+      }
 
       if (this.type === "top") {
         this.$store.dispatch("topModels/getPosts");
       }
 
+      if (!this.livesFetched) {
+        this.$store.dispatch("lives/resetPageState");
+        this.$store.dispatch("lives/getPosts");
+        this.livesFetched = true;
+      }
       if (this.type === "live") {
         this.$store.dispatch("lives/getPostsWithStreams");
-        // this.$store.dispatch("lives/getPosts");
       }
     },
     storePrefix() {
@@ -405,10 +424,16 @@ export default {
     ["$route.params.tag"]() {
       this.init();
     },
-    ["$route.params.category"](value) {
-      if (value !== undefined) {
+    ["$route.params.category"](newValue, oldValue) {
+      if (newValue !== undefined && oldValue !== undefined) {
         this.init();
       }
+    }
+  },
+  mounted() {
+    const magazineRedirect = BrowserStore.get("magazineRedirect");
+    if (magazineRedirect && this.user) {
+      this.$router.push("/settings/magazine");
     }
   }
 };

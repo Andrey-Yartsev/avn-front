@@ -44,6 +44,7 @@ import ChatMessagePayConfirmModal from "@/components/chat/ChatMessagePayConfirm"
 import BuySnapchatConfirmModal from "@/components/pages/profile/BuySnapchatConfirm";
 import TipPayConfirmModal from "@/components/common/tip/TipPayConfirm";
 import PostLikesModal from "@/components/post/parts/likesModal/Index";
+import ClipLikesModal from "@/components/common/profile/media/parts/modals/clipLikesModal/Index";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
@@ -51,6 +52,10 @@ import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
+import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
+import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
+import ContestVotingModal from "@/components/pages/contest/VotingModal";
+import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 
 export default {
   components: {
@@ -84,6 +89,7 @@ export default {
     BuySnapchatConfirmModal,
     TipPayConfirmModal,
     PostLikesModal,
+    ClipLikesModal,
     LoginModal,
     SignupModal,
     EditPostModal,
@@ -91,7 +97,11 @@ export default {
     EditMediaModal,
     MediaPayConfirmModal,
     AddRedirectLinkModal,
-    MediaAccessLinkModal
+    MediaAccessLinkModal,
+    ContestVotingModal,
+    ChatAttachmentsModal,
+    FreeAccessMediaListModal,
+    MagShippingModal
   },
   props: {
     hasLayout: {

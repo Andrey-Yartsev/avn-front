@@ -2,6 +2,7 @@
 
 import { createRequestAction } from "../utils/storeRequest";
 import confirm from "./subscription/confirm";
+import discounts from "./subscription/discounts";
 import subsAction from "@/helpers/subsAction";
 
 const state = {
@@ -203,6 +204,7 @@ export default {
   actions,
   mutations,
   modules: {
-    confirm
+    confirm,
+    discounts
   }
 };

@@ -395,4 +395,19 @@
       content: "\E801";
     }
   }
+
+  &-edit {
+
+    &:after {
+      content: "\E623";
+    }
+  }
+  
+  &-close {
+
+    &:after {
+      content: "\E605";
+    }
+  }
+
 }

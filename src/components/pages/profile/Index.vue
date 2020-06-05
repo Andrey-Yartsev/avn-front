@@ -35,8 +35,17 @@
               <span class="icn-item icn-block"></span>
             </div>
           </div>
-          <span class="user-login reset-ml">
+          <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
+            <span v-if="showProfileRank" class="user-login user-login-rating">
+              # {{ getModelRank }}
+              <!-- # {{ profile.privacy.categoryRankCount }} -->
+              <span
+                v-if="isOwner(profile.id)"
+                class="icn-item icn-locked icn-size_sm"
+                :class="{ locked: !profile.privacy.showRankCount }"
+              />
+            </span>
           </span>
         </div>
         <component
@@ -146,13 +155,21 @@
                 v-if="!isOwner(profile.id) && profile.isPrivatePost"
                 :profile="profile"
               />
+              <FollowersOnlyBlock
+                v-else-if="
+                  !isOwner(profile.id) &&
+                    !profile.isPrivatePost &&
+                    (profile.privacy.forFollowersOnly && !profile.followedBy)
+                "
+                :profile="profile"
+              />
               <LinksPage
-                v-if="pageName === 'links'"
-                :private="isOwner(this.profile.id)"
+                v-else-if="pageName === 'links' && !profile.isPrivatePost"
+                :private="isOwner(profile.id)"
               />
               <MediaPage
-                v-else-if="pageName === 'media'"
-                :private="isOwner(this.profile.id)"
+                v-else-if="pageName === 'media' && !profile.isPrivatePost"
+                :private="isOwner(profile.id)"
               />
               <template v-else>
                 <p
@@ -169,7 +186,7 @@
                 > -->
                   <span>Nothing here yet</span>
                   <button
-                    v-if="isOwner(this.profile.id) && pageName !== 'links'"
+                    v-if="isOwner(profile.id) && pageName !== 'links'"
                     @click="openAddPostModal"
                     type="button"
                     class="make-post-btn make-post-btn_feed make-post-btn_color-sec btn-with-icon btn-with-icon_lg"
@@ -241,6 +258,7 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import PrivateBlock from "@/components/common/profile/privateBlock/Index";
+import FollowersOnlyBlock from "@/components/common/profile/followersOnlyBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
@@ -273,6 +291,7 @@ export default {
     PostSmall,
     PostMedium,
     PrivateBlock,
+    FollowersOnlyBlock,
     Highlights,
     LinkPost,
     LinksPage,
@@ -374,6 +393,33 @@ export default {
     },
     showProfileOffer() {
       return this.snapchat && !this.isOwner(this.profile.id);
+    },
+    showProfileRank() {
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
+      if (!this.profile.privacy.categoryRankCount) {
+        return false;
+      }
+      return (
+        this.isOwner(this.profile.id) ||
+        (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
+    },
+    isAdmin() {
+      return (
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.privacy.isAdmin
+      );
+    },
+    getModelRank() {
+      if (
+        !this.$store.state.auth.user ||
+        this.$store.state.auth.user.categoryView === 1
+      ) {
+        return this.profile.privacy.globalRankCount;
+      }
+      return this.profile.privacy.categoryRankCount;
     }
   },
   watch: {

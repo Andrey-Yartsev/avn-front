@@ -1,0 +1,147 @@
+<template>
+  <div class="reasons reasons__content bg-gradient_light">
+    <div class="form-group radio-group radio-group_no-gaps">
+      <label
+        v-for="v in votesOptions"
+        class="form-group-inner"
+        :class="{ 'no-border-line': $mq === 'mobile' }"
+        :key="v.id"
+      >
+        <div class="radio-wrapper icn-item">
+          <input
+            type="radio"
+            name="vote"
+            :value="v.id"
+            @click="select(v)"
+            v-model="votes"
+          />
+          <span class="label">{{ v.title }}</span>
+        </div>
+      </label>
+      <div class="form-group bottom-buttons">
+        <div></div>
+        <button class="btn ok-btn" @click="vote" :disabled="votingInProgress">
+          Vote
+        </button>
+        <button class="btn border" @click="$emit('close')">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import User from "@/mixins/user";
+import PayAction from "../settings/payments/payAction";
+
+export default {
+  mixins: [User, PayAction],
+  props: {
+    props: Object
+  },
+  data() {
+    return {
+      votes: null,
+      votingInProgress: false
+    };
+  },
+  computed: {
+    votesOptions() {
+      return Object.entries(this.votesList).map(v => {
+        return {
+          id: v[0],
+          title: v[1] + (v[0] > 1 ? " - " + "$" + v[0] : " - Free")
+        };
+      });
+    },
+    contests() {
+      return this.$store.state.contest.fetchContestsResult;
+    },
+    contest() {
+      return this.contests.find(v => v.id === this.props.contestId);
+    },
+    votesList() {
+      return this.contest.votesList;
+    },
+    payPayload() {
+      return {
+        paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken,
+        contestId: this.props.contestId,
+        votes: this.votes,
+        amount: this.votes,
+        nominee: this.props.nominee,
+        userId: parseInt(this.props.userId)
+      };
+    },
+    voteError() {
+      return this.$store.state.contest.voteError;
+    }
+  },
+  watch: {
+    voteError() {
+      this.$emit("close");
+      this.votingInProgress = false;
+    }
+  },
+  methods: {
+    select(votes) {
+      this.votes = votes;
+    },
+    vote() {
+      this.votingInProgress = true;
+
+      setTimeout(() => {
+        if (this.votes == 1) {
+          this._vote();
+          return;
+        }
+
+        if (!this.user.isPaymentCardConnected) {
+          this.$store.dispatch("global/flashToast", {
+            text: "You should add card in payment settings",
+            type: "warning"
+          });
+          this.$store.commit(
+            "payment/card/setAfterAddCardRedirect",
+            this.$route.path
+          );
+          this.$router.push("/settings/payments");
+          return;
+        }
+
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            title: "Voting confirm",
+            text: `You are going to vote for ${this.props.name} for $${
+              this.votes
+            }`,
+            success: () => {
+              this._vote();
+            }
+          }
+        });
+      }, 1);
+    },
+    _vote() {
+      this._pay(
+        this.payPayload,
+        () => {
+          this.$store.dispatch("global/flashToast", {
+            text: "You have been successfully voted"
+          });
+          this.$emit("close");
+          this.votingInProgress = false;
+        },
+        {
+          dispatchAction: "contest/vote"
+        }
+      );
+    }
+  },
+  created() {
+    this.votes = this.votesOptions[0].id;
+  }
+};
+</script>

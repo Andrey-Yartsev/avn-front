@@ -12,8 +12,12 @@
           {{ text || "Are you sure?" }}
         </div>
         <div class="popup-alert__footer">
-          <button class="btn" @click.prevent="yes">Confirm</button>
-          <button class="btn alt" @click.prevent="no">Cancel</button>
+          <button class="btn" @click.prevent="yes" :disabled="disabled">
+            Confirm
+          </button>
+          <button class="btn alt" @click.prevent="no" :disabled="disabled">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
@@ -25,6 +29,11 @@ import Modal from "@/components/modal/Index";
 
 export default {
   name: "Confirm",
+  data() {
+    return {
+      disabled: false
+    };
+  },
   components: {
     Modal
   },
@@ -47,10 +56,14 @@ export default {
   },
   methods: {
     yes() {
-      this.success();
-      this.close();
+      this.disabled = true;
+      setTimeout(() => {
+        this.success();
+        this.close();
+      }, 1);
     },
     no() {
+      this.disabled = true;
       if (typeof this.abort === "function") {
         this.abort();
       }

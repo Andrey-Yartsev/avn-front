@@ -1,0 +1,48 @@
+@include media-breakpoint-up($desktop-breakpoint) {
+  .popup-container.popup-contest-voting {
+    max-width: 429px;
+  }
+}
+
+.popup-contest-voting {
+  .ok-btn {
+    margin-right: 15px;
+  }
+  .bottom-buttons {
+    margin-top: 15px;
+  }
+}
+
+.contest {
+  .userView {
+    &.active {
+      border: 2px solid rgba($default-secondary-color, 0.5);
+    }
+    .bg {
+      height: 278px;
+      background-size: cover;
+      background-position: center;
+      background-color: rgba($gray, 0.1);
+    }
+    .profile-text {
+      margin-bottom: 15px;
+    }
+    .more-functions {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .user-container {
+      flex: auto;
+      height: 222px;
+    }
+    margin-bottom: 20px;
+  }
+}
+.contest-header {
+  margin: 0 0 20px;
+  img {
+    width: 100%;
+  }
+}

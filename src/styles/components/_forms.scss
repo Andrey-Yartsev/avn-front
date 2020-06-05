@@ -321,7 +321,7 @@ label {
     display: block;
     margin-bottom: 5px;
   }
-  
+
   &_cursor-default {
     cursor: default;
   }
@@ -470,6 +470,9 @@ label {
   .row {
     margin-left: -7.5px;
     margin-right: -7.5px;
+    &.margin-0 {
+      margin: 0;
+    }
     @include media-breakpoint-up($desktop-breakpoint) {
       flex: 1 1 100%;
     }
@@ -682,6 +685,9 @@ label {
     border-radius: 1000px;
     background-color: transparent;
     transition: background-color 0.3s ease;
+    &.disabled {
+      opacity: 0.5;
+    }
 
     &:before {
       position: absolute;
@@ -728,6 +734,15 @@ label {
     font-size: 17px;
   }
 }
+
+
+.disabled {
+  .inner {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
 .form-title {
   position: relative;
   overflow: hidden;
@@ -735,13 +750,6 @@ label {
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 26px 20px 23px;
-  }
-
-  &.disabled {
-    .inner {
-      pointer-events: none;
-      opacity: 0.5;
-    }
   }
 
   &_psides-reset {
@@ -785,6 +793,29 @@ label {
     flex: 1;
     z-index: 3;
 
+    &.m-wrap-elements {
+      flex-wrap: wrap;
+    }
+
+    &.m-separate-rows-mob {
+
+      .semi-transparent {
+
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+          flex: 0 0 100%;
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+
+      .blocked-search {
+
+        @include media-breakpoint-down($tablet-breakpoint-dcrs) {
+          margin-left: 0;
+        }
+      }
+    }
+
     .semi-transparent {
       display: block;
       word-break: break-word;
@@ -811,7 +842,7 @@ label {
     + .inner {
       margin-top: 18px;
     }
-    
+
     &_block {
       display: block;
     }
@@ -911,6 +942,13 @@ select {
   &.m-inline {
     display: inline-flex;
     margin-right: 25px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      &.m-top {
+        &-10 {
+          margin-top: 10px;
+        }
+      }
+    }
   }
 
   input {
@@ -941,6 +979,12 @@ select {
       content: "";
       position: absolute;
       opacity: .3;
+    }
+  }
+
+  &.disabled {
+    .label  {
+      opacity: .5;
     }
   }
 

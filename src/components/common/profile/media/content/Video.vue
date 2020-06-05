@@ -43,6 +43,30 @@
         />
       </template>
     </template>
+    <template v-else-if="followersOnly">
+      <div class="locked-picture icn-item icn-pos_center">
+        <video
+          class="video-content"
+          :class="{ halfHeight: $mq === 'desktop' }"
+          disableremoteplayback
+          webkit-playsinline
+          playsinline
+          :controls="false"
+          controlslist="nodownload"
+          :autoplay="true"
+          loop
+          @click="registerOrFollow"
+          :poster="media.preview.source"
+          v-if="video"
+          @play="play"
+          @contextmenu.prevent="() => false"
+          @dragstart.prevent="() => false"
+          ref="video"
+          :src="media.videoPreview.source"
+          type="video/mp4"
+        />
+      </div>
+    </template>
     <template v-else>
       <video
         class="video-content"
@@ -50,10 +74,11 @@
         disableremoteplayback
         webkit-playsinline
         playsinline
-        controls
+        :controls="canPlay"
         controlslist="nodownload"
         :autoplay="autoplay"
         loop
+        @click="checkAccess"
         :poster="media.preview.source"
         v-if="video"
         @play="play"
@@ -80,7 +105,8 @@ export default {
     autoplay: Boolean,
     media: Object,
     showPreview: Boolean,
-    isAuthor: Boolean
+    isAuthor: Boolean,
+    openModal: Function
   },
   components: {
     Loader
@@ -93,20 +119,40 @@ export default {
     };
   },
   computed: {
+    user() {
+      return this.$store.state.auth.user;
+    },
     videoHeight() {
       const ratio = global.innerWidth / this.media.preview.width;
       return this.media.preview.height * ratio;
     },
+    followersOnly() {
+      return (
+        !this.canPlay &&
+        this.post.media.videoPreview &&
+        this.post.media.videoPreview.source
+      );
+    },
     showPreviewVideo() {
       if (
-        this.$props.isAuthor &&
-        this.$props.post.media.videoPreview &&
-        this.$props.post.media.videoPreview.source &&
-        this.$props.showPreview
+        this.isAuthor &&
+        this.post.media.videoPreview &&
+        this.post.media.videoPreview.source &&
+        this.showPreview
       ) {
         return true;
       }
       return false;
+    },
+    canPlay() {
+      if (
+        !this.isAuthor &&
+        this.post.followRequired &&
+        (!this.user || !this.post.author.followedBy)
+      ) {
+        return false;
+      }
+      return true;
     }
   },
   watch: {
@@ -121,6 +167,41 @@ export default {
     play() {
       this.playTimer = new Date().getTime();
       this.$emit("playCallback");
+    },
+    checkAccess(e) {
+      if (!this.canPlay) {
+        e.preventDefault();
+        this.registerOrFollow();
+        return;
+      }
+    },
+    registerOrFollow() {
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(`/${this.post.author.username}/media`)
+          }
+        });
+      } else if (!this.post.author.followedBy) {
+        this.$store.dispatch("modal/show", {
+          name: "confirm",
+          data: {
+            text:
+              "You need to follow this model to watch the media content. Do you want to follow?",
+            success: () => {
+              this.$store
+                .dispatch(`profile/home/follow`, this.post.author.id)
+                .then(() => {
+                  this.$store.commit("profile/media/updateFollowStatus", null, {
+                    root: true
+                  });
+                });
+            }
+          }
+        });
+      }
     }
   }
 };

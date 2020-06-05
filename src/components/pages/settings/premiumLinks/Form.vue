@@ -96,7 +96,6 @@
                     required
                     name="tipAmount"
                     v-model="tipAmount"
-                    v-validate="'required|subscription-price'"
                   />
                 </span>
               </span>

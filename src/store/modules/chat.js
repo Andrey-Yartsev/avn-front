@@ -3,6 +3,7 @@
 import { createRequestAction } from "../utils/storeRequest";
 import arrayUtils from "../../utils/arrayUtils";
 import Store from "@/store";
+import attachments from "./chat/attachments";
 
 const messagesLimit = 50;
 const chatsLimit = 20;
@@ -728,6 +729,35 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "getScheduledGroupMessages",
+  apiPath: "chats/recipients/messages/queue",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  localError: true,
+  throw400: true
+});
+
+createRequestAction({
+  prefix: "deleteScheduleMessage",
+  apiPath: "chats/recipients/messages/queue/{messageId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  localError: true,
+  throw400: true,
+  paramsToPath: function(params, path) {
+    return path.replace(/{messageId}/, params);
+  }
+});
+
+createRequestAction({
   prefix: "sendMultiMessages",
   apiPath: "chats/bulk/messages",
   state,
@@ -863,9 +893,44 @@ createRequestAction({
   }
 });
 
+createRequestAction({
+  prefix: "fetchNotes",
+  apiPath: "chats/{userId}/notes",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params);
+  }
+});
+createRequestAction({
+  prefix: "updateNotes",
+  apiPath: "chats/{userId}/notes",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "PUT"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{userId}/, params.userId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = {};
+    options.data.text = params.text;
+    return options;
+  }
+});
+
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    attachments
+  }
 };

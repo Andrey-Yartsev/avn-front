@@ -51,10 +51,20 @@
             <span class="icn-block icn-item"></span>
           </div>
         </div>
-        <span class="user-login reset-ml">
+        <span class="user-login reset-ml user-login-container">
           <router-link :to="'/' + profile.username">{{
             profile.username
           }}</router-link>
+          <span v-if="showProfileRank" class="user-login user-login-rating">
+            # {{ getModelRank }}
+            <span
+              v-if="isProfileOwner"
+              class="icn-item icn-locked icn-size_sm"
+              :class="{
+                locked: !profile.privacy.showRankCount
+              }"
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -84,7 +94,37 @@ export default {
       return !!this.profile.currentStream;
     },
     profileExtraClass() {
-      return ["posts", "links", ""].indexOf(this.pageName) !== -1;
+      return ["posts", "links", "", "magazine"].indexOf(this.pageName) !== -1;
+    },
+    showProfileRank() {
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
+      if (!this.profile.privacy.categoryRankCount) {
+        return false;
+      }
+      return (
+        this.isProfileOwner ||
+        (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
+    },
+    isAdmin() {
+      return (
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.privacy.isAdmin
+      );
+    },
+    isProfileOwner() {
+      return this.user && this.profile.id === this.user.id;
+    },
+    getModelRank() {
+      if (
+        !this.$store.state.auth.user ||
+        this.$store.state.auth.user.categoryView === 1
+      ) {
+        return this.profile.privacy.globalRankCount;
+      }
+      return this.profile.privacy.categoryRankCount;
     }
   },
   methods: {

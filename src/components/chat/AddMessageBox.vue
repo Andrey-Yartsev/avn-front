@@ -52,7 +52,7 @@
             rows="1"
             cols="60"
             :placeholder="textareaPlaceholder"
-            maxlength="500"
+            maxlength="10000"
             :minHeight="30"
             :maxHeight="100"
             @enter="sendMessage"
@@ -225,7 +225,7 @@ export default {
       limits: {
         video: 3,
         gif: 1,
-        photo: 5,
+        photo: 50,
         audio: 1
       }
     };
@@ -403,6 +403,21 @@ export default {
       this.showPaid = false;
       this.$nextTick(() => {
         this.resetPrice();
+      });
+    },
+    handleDroppedFiles(files) {
+      files.forEach(file => {
+        const fileType = file.type.split("/")[1];
+        if (!this.preloadedMedias.length) {
+          if (this.allMediaTypes.includes(fileType)) {
+            this.addMediaFiles({ target: { files: [file] } });
+          }
+        } else {
+          const acceptedTypes = this.getAcceptedFormats.split(",");
+          if (acceptedTypes.includes(`.${fileType}`)) {
+            this.addMediaFiles({ target: { files: [file] } });
+          }
+        }
       });
     }
   }

@@ -3,7 +3,7 @@
     <h1 class="form-title settings-title">
       Subscribers
     </h1>
-    <SubscribeMessage />
+    <!-- <SubscribeMessage /> -->
     <div
       class="subscribers-filters"
       :class="{ 'shadow-block': $mq === 'mobile' }"
@@ -34,6 +34,15 @@
           <div class="checkbox-wrapper">
             <input type="checkbox" v-model="isExpiredOnly" />
             <span class="label icn-item">Expired</span>
+          </div>
+        </label>
+        <label
+          class="form-group-inner"
+          :class="{ 'form-group-inner_inline': $mq === 'desktop' }"
+        >
+          <div class="checkbox-wrapper">
+            <input type="checkbox" v-model="isPaidOnly" />
+            <span class="label icn-item">Paid</span>
           </div>
         </label>
         <button class="btn btn_not-bold sm" @click="openGroupMessageModal">
@@ -79,7 +88,7 @@
           <div
             class="canceled table__cell table__cell_align table__cell_align-hor-c"
           >
-            Canceled
+            Expires
           </div>
         </div>
       </div>
@@ -122,7 +131,7 @@ import ProfileActions from "@/components/common/profile/actions/Index";
 import Footer from "@/components/footer/Index";
 import BackRouter from "@/utils/backRouter";
 import IntersectionObserver from "@/mixins/intersectionObserver";
-import SubscribeMessage from "./SubscribeMessage";
+// import SubscribeMessage from "./SubscribeMessage";
 
 export default {
   name: "Subscribers",
@@ -137,8 +146,8 @@ export default {
     FollowersCounter,
     UserDropdown,
     ProfileActions,
-    Footer,
-    SubscribeMessage
+    Footer
+    // SubscribeMessage
   },
 
   data: () => ({
@@ -148,6 +157,7 @@ export default {
     isSnapchatOnly: false,
     isActiveOnly: false,
     isExpiredOnly: false,
+    isPaidOnly: false,
     fetchLimit: 15
   }),
   computed: {
@@ -197,7 +207,8 @@ export default {
       if (this.actionPrefix === "subscribes") {
         this.$store
           .dispatch("subscribes/getPosts", {
-            active: this.isActiveUsers()
+            active: this.isActiveUsers(),
+            paid: this.isPaidOnly
           })
           .then(() => {
             this.isInitFetch = false;
@@ -253,6 +264,9 @@ export default {
       this.init();
     },
     isExpiredOnly() {
+      this.init();
+    },
+    isPaidOnly() {
       this.init();
     }
   },

@@ -226,6 +226,10 @@ export default {
             title: "Security"
           },
           {
+            name: "magazine",
+            title: "AVN Magazine"
+          },
+          {
             name: "premium-links",
             title: "Premium Links"
           },
@@ -290,6 +294,12 @@ export default {
         items.push({
           name: "studioAccess",
           title: "Studio Access"
+        });
+      }
+      if (this.user && this.user.canEarn) {
+        items.push({
+          name: "welcomeMessages",
+          title: "Welcome Messages"
         });
       }
       return items;

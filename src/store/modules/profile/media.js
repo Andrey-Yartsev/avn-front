@@ -126,6 +126,36 @@ const mutations = {
   },
   removeSeparateMedia(state) {
     state.separateMedia = null;
+  },
+  updateFollowStatus(state) {
+    state.media = state.media.map(item => {
+      const newItem = item;
+      newItem.author.followedBy = true;
+      return newItem;
+    });
+    if (state.separateMedia) {
+      state.separateMedia.author.followedBy = true;
+    }
+  },
+  likeMediaSuccess(state, { productId, isFavorite, favoritesCount }) {
+    state.media = state.media.map(item => {
+      if (productId === item.productId) {
+        return {
+          ...item,
+          isFavorite,
+          favoritesCount
+        };
+      }
+
+      return item;
+    });
+    if (state.separateMedia && state.separateMedia.productId === productId) {
+      state.separateMedia = {
+        ...state.separateMedia,
+        isFavorite,
+        favoritesCount
+      };
+    }
   }
 };
 
@@ -227,6 +257,12 @@ const actions = {
   },
   getFullFreeAccess({ dispatch }, data) {
     return dispatch("_getFullFreeAccess", data);
+  },
+  likeMedia({ dispatch, commit }, { productId, action }) {
+    return dispatch(`_${action}Media`, productId).then(res => {
+      const { isFavorite, favoritesCount } = res;
+      commit("likeMediaSuccess", { productId, isFavorite, favoritesCount });
+    });
   }
 };
 
@@ -439,6 +475,34 @@ createRequestAction({
   paramsToOptions: function(params, options) {
     options.data = params;
     return options;
+  }
+});
+
+createRequestAction({
+  prefix: "_likeMedia",
+  apiPath: "media/{productId}/favorites",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+
+createRequestAction({
+  prefix: "_unlikeMedia",
+  apiPath: "media/{productId}/favorites",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
   }
 });
 

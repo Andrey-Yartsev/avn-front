@@ -212,7 +212,7 @@
           class="stream-tipsGoalTitle"
           v-if="activeTipsGoal.amount && activeTipsGoal.description"
         >
-          TIP Countdown: ${{ activeTipsGoal.amount }} for
+          TIP Countdown: ${{ activeTipsGoal.amount.toFixed(2) }} for
           {{ activeTipsGoal.description }}
         </div>
         <div class="stream-forms" v-if="isStarted">
@@ -327,7 +327,6 @@
             {{ looksCount }}
           </span>
           <span
-            v-if="!isTipsGoalExists"
             class="stream-online-count bottom-btn"
             @click="toggleTipGoalForm"
             :class="{ selected: true }"
@@ -389,6 +388,7 @@ import StreamViewers from "@/components/pages/stream/Viewers";
 import { getCookie } from "@/components/pages/stream/debug";
 import moment from "moment";
 import LoadScripts from "@/components/statistics/loadScripts";
+import { convertImgToBase64URL } from "@/utils/mediaFiles";
 
 export default {
   name: "Stream",
@@ -438,7 +438,8 @@ export default {
         amount: "",
         description: ""
       },
-      showTipsGoalForm: false
+      showTipsGoalForm: false,
+      base64watermark: null
     };
   },
   components: {
@@ -712,7 +713,6 @@ export default {
         amount: this.tipsGoal.amount,
         sess: this.$store.state.auth.token
       });
-      console.log(data);
       this.$root.ws.ws.send(data);
       this.tipsGoal.amount = 0;
       this.tipsGoal.description = "";
@@ -803,7 +803,25 @@ export default {
       }
     },
     toggleTipGoalForm() {
+      if (!this.showTipsGoalForm && this.isTipsGoalExists) {
+        this.tipsGoal.amount = this.activeTipsGoal.amount + "";
+        this.tipsGoal.description = this.activeTipsGoal.description;
+      }
       this.showTipsGoalForm = !this.showTipsGoalForm;
+    },
+    getWatermarkData() {
+      const watermarkData = {
+        type: "watermark",
+        data: this.user.publicUrl,
+        logo: logoBase64
+      };
+      if (this.user.watermarkText) {
+        watermarkData.data = this.user.watermarkText;
+      }
+      if (this.user.watermarkFileUpload) {
+        watermarkData.logo = this.base64watermark;
+      }
+      return watermarkData;
     }
   },
   mounted() {
@@ -812,6 +830,12 @@ export default {
       return;
     }
     this.$store.commit("lives/resetCurrentLive");
+
+    if (this.user.hasWatermarkStream && this.user.watermarkFileUpload) {
+      convertImgToBase64URL(this.user.watermarkFileUpload, base64Img => {
+        this.base64watermark = base64Img;
+      });
+    }
 
     this.streamVisibility =
       this.user.subscribePrice > 0
@@ -882,11 +906,7 @@ export default {
             this.streamModule.sendCustomMessage({
               msgtype: "data.custom",
               to: ["transcoder"],
-              data: {
-                type: "watermark",
-                data: this.user.publicUrl,
-                logo: logoBase64
-              }
+              data: this.user.hasWatermarkStream ? this.getWatermarkData() : {}
             });
             this.streamStartTime = new Date().getTime() / 1000;
           });

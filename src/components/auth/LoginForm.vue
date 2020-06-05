@@ -128,8 +128,8 @@
             >
           </p>
           <p class="agree">
-            By loging up to AVN Stars I affirm that I am at least 18 years of
-            age or older and I agree to the following
+            By signing up and logging in to AVN Stars I affirm that I am at
+            least 18 years of age or older and I agree to the following
             <a href="/terms">terms.</a>
           </p>
         </div>
@@ -200,6 +200,9 @@ export default {
     },
     mainClass() {
       return this.otpAuth ? "otp" : "login";
+    },
+    callback() {
+      return this.$store.state.modal.login.data.callback;
     }
   },
 
@@ -222,6 +225,7 @@ export default {
                 captcha: this.captcha
               })
               .then(() => {
+                this.callback && this.callback();
                 setTimeout(() => {
                   this.loginInProgress = false;
                 }, 1000);
@@ -236,7 +240,12 @@ export default {
           this.$router.push("/register");
           break;
         case "modal":
-          this.$store.dispatch("modal/show", { name: "signup" });
+          this.$store.dispatch("modal/show", {
+            name: "signup",
+            data: {
+              callback: this.callback
+            }
+          });
           this.$emit("openSignup");
           break;
         case "dropdown":

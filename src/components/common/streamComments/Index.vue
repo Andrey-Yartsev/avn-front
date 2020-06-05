@@ -53,7 +53,7 @@ export default {
       const isBottom =
         scroll.scrollHeight - scroll.scrollTop === scroll.clientHeight;
 
-      if (lastCommentIsMine || (isBottom && !lastCommentIsMine)) {
+      if (lastCommentIsMine || (!isBottom && !lastCommentIsMine)) {
         this.$nextTick(() => {
           scroll.scrollTop = scroll.scrollHeight;
         });

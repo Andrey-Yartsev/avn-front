@@ -97,7 +97,7 @@ const actions = {
 
 createRequestAction({
   prefix: "topModelsRequest",
-  apiPath: "users/performers/top",
+  apiPath: "users/performers/instant/top",
   requestType: "any",
   state,
   mutations,

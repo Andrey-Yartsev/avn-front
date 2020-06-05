@@ -8,7 +8,7 @@
           :progress="progress"
         >
           <template slot="button-text">
-            Resubscribe for ${{ profile.subscribePrice }} / month
+            {{ daysLeft }} days left - Resubscribe ${{ profile.subscribePrice }}
           </template>
           <template slot="footer-text">
             You will not be charged until next billing period
@@ -27,6 +27,7 @@
 <script>
 import Modal from "@/components/modal/Index";
 import Content from "./SubscribeModalContent";
+import moment from "moment";
 
 export default {
   name: "SubscribeModal",
@@ -45,6 +46,11 @@ export default {
   computed: {
     profile() {
       return this.$store.state.modal.resubscribe.data;
+    },
+    daysLeft() {
+      const today = moment(Date.now());
+      const lastDay = moment(this.profile.subscribedByExpireDate);
+      return lastDay.diff(today, "days");
     }
   },
 

@@ -81,7 +81,20 @@
                     :profile="v.fromUser"
                   />
                 </span>
+                <span
+                  v-if="
+                    v.textLength && v.price && isLocked(v) && !isMyMessage(v)
+                  "
+                  class="message-locked__price"
+                >
+                  {{ v.price }}
+                </span>
                 <div class="media-chat" v-if="v.media.length">
+                  <span
+                    v-if="v.price && isLocked(v) && !isMyMessage(v)"
+                    class="media-chat__price"
+                    >Price: {{ v.price }}</span
+                  >
                   <!-- <MediaVideo
                     v-if="v.media.length && v.media[0].type === 'video'"
                     :message="v"
@@ -153,6 +166,16 @@
                     </div>
                   </a>
                 </template>
+              </div>
+              <div
+                v-if="isMyMessage(v) && !v.isFree && v.isOpened && v.payedAt"
+                class="timestamp timestamp_sm-size message-time test"
+              >
+                <div class="message-time__written">
+                  <span class="timeValue"
+                    >Payed {{ v.price }} {{ time(v.payedAt) }}</span
+                  >
+                </div>
               </div>
               <div class="timestamp timestamp_sm-size message-time">
                 <div

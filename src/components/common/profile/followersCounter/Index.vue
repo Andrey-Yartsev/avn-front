@@ -38,6 +38,26 @@
         }}</span>
       </router-link>
     </div>
+    <div class="item" v-if="showSubscribers">
+      <router-link
+        to="/subscribers"
+        v-if="isOwner(profile.id)"
+        class="profile-data__link"
+      >
+        <span class="data-value">{{ profile.privacy.subscribersCount }}</span>
+        <span class="data-label">Subscribers</span>
+        <span
+          class="icn-item icn-locked icn-size_sm"
+          :class="{ locked: !profile.privacy.showSubscribersCount }"
+        />
+      </router-link>
+      <template v-else-if="profile.privacy.showSubscribersCount">
+        <span class="data-value">{{ profile.privacy.subscribersCount }}</span>
+        <span class="data-label">{{
+          profile.privacy.subscribersCount > 1 ? "Subscribers" : "Subscriber"
+        }}</span>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -66,6 +86,28 @@ export default {
         this.user &&
         this.isOwner(this.profile.id) &&
         this.profile.favoritesCount
+      );
+    },
+    hasSubscribers() {
+      return (
+        this.profile &&
+        this.profile.privacy &&
+        this.profile.privacy.subscribersCount
+      );
+    },
+    allowViewSubscribers() {
+      return (
+        this.profile &&
+        this.profile.privacy &&
+        this.profile.privacy.showSubscribersCount
+      );
+    },
+    showSubscribers() {
+      return (
+        (this.isOwner(this.profile.id) && this.hasSubscribers) ||
+        (!this.isOwner(this.profile.id) &&
+          this.hasSubscribers &&
+          this.allowViewSubscribers)
       );
     }
   }

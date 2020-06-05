@@ -160,7 +160,8 @@ export const getImagePreview = (media, callback) => {
           ...media,
           preview: base64,
           params: {
-            width: temp.width
+            width: temp.width,
+            height: temp.height
           }
         });
       };
@@ -354,4 +355,21 @@ export const converterUpload = (
   pr.xhr = xhr;
 
   return pr;
+};
+
+export const convertImgToBase64URL = (url, callback) => {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function() {
+    let canvas = document.createElement("CANVAS");
+    const ctx = canvas.getContext("2d");
+    let dataURL;
+    canvas.height = img.height;
+    canvas.width = img.width;
+    ctx.drawImage(img, 0, 0);
+    dataURL = canvas.toDataURL("image/png");
+    callback(dataURL);
+    canvas = null;
+  };
+  img.src = url;
 };

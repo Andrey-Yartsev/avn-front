@@ -28,6 +28,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "chatAttachments",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "userReport",
     layoutOnlyModal: true
   },
@@ -128,6 +132,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "clipLikes",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "editPost",
     layoutOnlyModal: true
   },
@@ -153,6 +161,18 @@ const modalTypes = [
   },
   {
     storeName: "mediaAccessLink",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "contestVoting",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "freeAccessMediaList",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "magShipping",
     layoutOnlyModal: true
   }
 ];

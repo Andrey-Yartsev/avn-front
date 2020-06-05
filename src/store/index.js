@@ -55,6 +55,7 @@ import favPosts from "@/store/modules/favPosts";
 import stats from "@/store/modules/stats";
 import backRouter from "@/store/modules/backRouter";
 import postLikes from "@/store/modules/postLikes";
+import clipLikes from "@/store/modules/clipLikes";
 import awards from "@/store/modules/awards";
 import products from "@/store/modules/products";
 import comments from "@/store/modules/comments";
@@ -63,6 +64,9 @@ import online from "@/store/modules/online";
 import obs from "@/store/modules/obs";
 import version from "@/store/modules/version";
 import route from "@/store/modules/route";
+import contest from "@/store/modules/contest";
+import magazine from "@/store/modules/magazine";
+import welcomeMessages from "@/store/modules/welcomeMessages";
 
 Vue.use(Vuex);
 
@@ -124,6 +128,7 @@ const store = new Vuex.Store({
     premiumLinks,
     backRouter,
     postLikes,
+    clipLikes,
     awards,
     products,
     comments,
@@ -131,7 +136,10 @@ const store = new Vuex.Store({
     online,
     obs,
     version,
-    route
+    route,
+    contest,
+    magazine,
+    welcomeMessages
   }
 });
 

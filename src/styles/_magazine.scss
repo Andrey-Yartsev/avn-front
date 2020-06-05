@@ -1,0 +1,116 @@
+.magazine {
+  min-height: 200px;
+  .title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .subtitle2 {
+    font-size: 13px;
+  }
+  .kinds {
+    .checkbox-wrapper {
+      margin-top: 5px;
+      margin-bottom: 0px;
+      margin-right: 15px;
+    }
+  }
+  .shipping-form {
+    padding-top: 30px;
+    padding-bottom: 15px;
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    min-height: 140px;
+  }
+  .shipping-info {
+    margin: 10px 0;
+    font-size: 14px;
+    h2 {
+      text-align: center;
+    }
+    .title {
+      font-size: 14px;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      .value {
+        &__text {
+          opacity: 0.5;
+          @include media-breakpoint-up($desktop-breakpoint) {
+            line-height: 19px;
+          }
+        }
+      }
+      .btn {
+        border: none;
+        background: none;
+        color: var(--secondary-color);
+        padding: 0;
+        height: auto;
+        margin-left: 10px;
+      }
+      .reset {
+        .btn {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .red {
+    color: rgba(255, 0, 0, 1);
+  }
+  .toggle-wrapper {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      padding-top: 0;
+    }
+    .inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .previews {
+    padding: 0;
+    text-align: center;
+    .items {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .item {
+        width: calc(25% - 5px);
+        @include media-breakpoint-down($mobile-breakpoint) {
+          width: calc(50% - 5px);
+        }
+        margin-bottom: 7px;
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+      }
+      .locked-picture {
+        cursor: pointer;
+        img {
+          opacity: 0.4;
+        }
+        &:hover {
+          img {
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+    .more {
+      margin: 10px 0;
+      display: inline-block;
+    }
+  }
+}

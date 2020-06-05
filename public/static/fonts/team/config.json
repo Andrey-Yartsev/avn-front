@@ -1641,6 +1641,12 @@
       "css": "retweet",
       "code": 59393,
       "src": "fontawesome"
+    },
+    {
+      "uid": "8fc56819afcd07e2786e34f18d39b71b",
+      "css": "book-open",
+      "code": 59394,
+      "src": "iconic"
     }
   ]
 }

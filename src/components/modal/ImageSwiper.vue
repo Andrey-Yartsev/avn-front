@@ -2,6 +2,7 @@
   <Modal :onClose="close">
     <div class="popup-container popup-image" slot="content">
       <swiper
+        v-if="renderSwiper"
         ref="mySwiper"
         class="media-slider"
         :options="swiperOption"
@@ -66,7 +67,9 @@ export default {
     return {
       uniqId,
       activeSlide: 0,
+      renderSwiper: false,
       swiperOption: {
+        initialSlide: 0,
         autoHeight: true,
         spaceBetween: 10,
         preloadImages: true,
@@ -100,9 +103,13 @@ export default {
       this.$store.dispatch("modal/hide", { name: "imageSwiper", data: {} });
     }
   },
-  mounted() {
+  created() {
     const index = this.$store.state.modal.imageSwiper.data.index;
     this.activeSlide = index;
+    this.swiperOption.initialSlide = index;
+    this.$nextTick(() => {
+      this.renderSwiper = true;
+    });
   }
 };
 </script>

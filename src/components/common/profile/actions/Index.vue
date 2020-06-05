@@ -98,7 +98,13 @@
           />
           <div
             class="subscribeView profile-actions__btn"
-            v-if="!profile.subscribedBy"
+            v-if="
+              !profile.subscribedBy ||
+                (profile.subscribedBy && profile.subscribedByProgress) ||
+                (profile.subscribedBy &&
+                  !profile.subscribedByProgress &&
+                  !profile.followedBy)
+            "
           >
             <div
               v-if="profile.followedBy"

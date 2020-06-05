@@ -589,6 +589,9 @@
   margin: 0 auto 0 0;
   @include ellipsis;
   font-size: 15px;
+  &.first-letter-uppercase {
+    text-transform: capitalize;
+  }
 
   &_reset-gl {
 
@@ -1568,6 +1571,11 @@
           content: "\E679";
           left: 23px;
         }
+      }
+    }
+    &__magazine {
+      &:after {
+        content: "\E802";
       }
     }
     &__statistics {
