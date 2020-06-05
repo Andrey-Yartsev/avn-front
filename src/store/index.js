@@ -67,6 +67,7 @@ import route from "@/store/modules/route";
 import contest from "@/store/modules/contest";
 import magazine from "@/store/modules/magazine";
 import welcomeMessages from "@/store/modules/welcomeMessages";
+import studioAccess from "@/store/modules/studioAccess";
 
 Vue.use(Vuex);
 
@@ -139,7 +140,8 @@ const store = new Vuex.Store({
     route,
     contest,
     magazine,
-    welcomeMessages
+    welcomeMessages,
+    studioAccess
   }
 });
 
