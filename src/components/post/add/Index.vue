@@ -741,6 +741,7 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
+        isFree: this.isFree,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
