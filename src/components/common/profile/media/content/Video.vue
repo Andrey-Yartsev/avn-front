@@ -30,7 +30,7 @@
           webkit-playsinline
           playsinline
           controls
-          controlslist="nodownload"
+          :controlslist="!canDownload ? 'nodownload' : ''"
           :autoplay="autoplay"
           loop
           v-if="video"
@@ -52,7 +52,7 @@
           webkit-playsinline
           playsinline
           :controls="false"
-          controlslist="nodownload"
+          :controlslist="!canDownload ? 'nodownload' : ''"
           :autoplay="true"
           loop
           @click="registerOrFollow"
@@ -75,7 +75,7 @@
         webkit-playsinline
         playsinline
         :controls="canPlay"
-        controlslist="nodownload"
+        :controlslist="!canDownload ? 'nodownload' : ''"
         :autoplay="autoplay"
         loop
         @click="checkAccess"
@@ -153,6 +153,9 @@ export default {
         return false;
       }
       return true;
+    },
+    canDownload() {
+      return this.post.canDownload;
     }
   },
   watch: {
