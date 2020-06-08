@@ -156,7 +156,7 @@ export default {
       return this.$store.state.profile.home.postPinCount;
     },
     canPin() {
-      return this.pinCount < 3;
+      return this.pinCount < 5;
     },
     isRepost() {
       return !!this.$props.post.innerPost;
