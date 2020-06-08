@@ -3,7 +3,7 @@
     <div class="form-title" :class="{ 'border-top': $mq === 'desktop' }">
       <div
         class="inner form-group form-group_clear-gaps option-star"
-        :class="{ disabled: !localUser.autoPayoutsFrequency }"
+        :class="{ disabled: !localUser.autoPayoutsFrequency || isDisabled }"
       >
         <label class="toggle-label semi-transparent" for="im_star">
           Auto Requests
@@ -13,6 +13,7 @@
             type="checkbox"
             id="im_star"
             name="isWantEarn"
+            :disabled="isDisabled"
             @change="save"
             v-model="localUser.autoPayoutsEnabled"
           />
@@ -31,17 +32,19 @@
                   <select
                     name="gender"
                     class="default-disabled"
+                    :disabled="localUser.autoPayoutsEnabled"
                     v-model="localUser.autoPayoutsFrequency"
                   >
-                    <option :value="undefined" disabled
+                    <option :value="'manually'" disabled
                       >Select frequency</option
                     >
                     <option
+                      class=""
                       v-for="period in periods"
                       :value="period"
                       :key="period"
                     >
-                      {{ period }}
+                      {{ getUpperCaseText(period) }}
                     </option>
                   </select>
                 </div>
@@ -66,6 +69,16 @@ export default {
     return {
       periods: requestsPeriods
     };
+  },
+  computed: {
+    isDisabled() {
+      return !this.periods.includes(this.localUser.autoPayoutsFrequency);
+    }
+  },
+  methods: {
+    getUpperCaseText(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
   }
 };
 </script>
