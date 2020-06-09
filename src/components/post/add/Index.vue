@@ -666,8 +666,7 @@ export default {
       return this.user.isPerformer;
     },
     showExpired() {
-      return true;
-      // return this.showSchedule;
+      return this.isMonetizedUser;
     },
     expiredActionList() {
       const list = [

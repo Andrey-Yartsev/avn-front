@@ -71,7 +71,10 @@
               </div>
             </label> -->
 
-            <div class="form-group notification-setting-row">
+            <div
+              v-if="isFullyMonetizedUser"
+              class="form-group notification-setting-row"
+            >
               <label class="form-group-inner">
                 <span class="label label_cursor-default">
                   Subscription notification frequency
@@ -89,7 +92,10 @@
               </label>
             </div>
 
-            <div class="form-group notification-setting-row">
+            <div
+              v-if="isMonetizedUser"
+              class="form-group notification-setting-row"
+            >
               <label class="form-group-inner">
                 <span class="label label_cursor-default">
                   Tips notification frequency
@@ -125,7 +131,10 @@
               </label>
             </div>
 
-            <div class="form-group notification-setting-row">
+            <div
+              v-if="isMonetizedUser"
+              class="form-group notification-setting-row"
+            >
               <label class="form-group-inner">
                 <span class="label label_cursor-default">
                   Clip sales notification frequency
@@ -262,10 +271,11 @@
 <script>
 import Common from "../common";
 import webPushNotifications from "@/mixins/webPushNotifications";
+import User from "@/mixins/user";
 
 export default {
   name: "NotificationSettingsContent",
-  mixins: [Common, webPushNotifications],
+  mixins: [Common, webPushNotifications, User],
   computed: {
     notifOptions() {
       return {

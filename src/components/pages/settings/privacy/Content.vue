@@ -12,6 +12,7 @@
         Privacy Settings
       </h1>
       <div
+        v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
@@ -36,6 +37,7 @@
       </div>
 
       <div
+        v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
@@ -60,6 +62,7 @@
       </div>
 
       <div
+        v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
@@ -82,6 +85,7 @@
       </div>
 
       <div
+        v-if="isFullyMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
@@ -257,7 +261,7 @@
           </div>
         </div>
       </div>
-      <div class="watermarks-settings">
+      <div v-if="isMonetizedUser" class="watermarks-settings">
         <div class="form-title border-top border-top-mobile">
           <div class="inner">
             <span class="semi-transparent">
@@ -350,7 +354,10 @@
         </div>
       </div>
 
-      <div v-if="user.canEarn" class="form-title tweet-posts-block border-top">
+      <div
+        v-if="isMonetizedUser"
+        class="form-title tweet-posts-block border-top"
+      >
         <div class="inner">
           <span class="semi-transparent">
             Blur messages
