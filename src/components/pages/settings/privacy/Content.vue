@@ -85,7 +85,7 @@
       </div>
 
       <div
-        v-if="isFullyMonetizedUser"
+        v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">

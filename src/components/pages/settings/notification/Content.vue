@@ -72,7 +72,7 @@
             </label> -->
 
             <div
-              v-if="isFullyMonetizedUser"
+              v-if="isMonetizedUser"
               class="form-group notification-setting-row"
             >
               <label class="form-group-inner">

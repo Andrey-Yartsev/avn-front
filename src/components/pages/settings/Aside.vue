@@ -266,7 +266,7 @@ export default {
           title: "Credits"
         });
       }
-      if (this.isFullyMonetizedUser) {
+      if (this.isMonetizedUser) {
         items.push({
           name: "referrals",
           title: "Referrals"
@@ -282,10 +282,12 @@ export default {
           title: "Free Trials"
         });
       }
-      items.push({
-        name: "obs",
-        title: "OBS"
-      });
+      if (this.isMonetizedUser) {
+        items.push({
+          name: "obs",
+          title: "OBS"
+        });
+      }
       if (this.user.storeEnabled && this.user.isPerformer) {
         items.push({
           name: "clipStore",
