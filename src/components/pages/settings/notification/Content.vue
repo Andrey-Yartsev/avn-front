@@ -155,104 +155,107 @@
         </div>
       </div>
 
-      <div
-        class="form-title border-top"
-        :class="{ disabled: !user.twitterUsername }"
-      >
-        <div class="inner">
-          <span class="semi-transparent">
-            Send Twitter Notifications
-          </span>
-          <label class="toggle-element">
-            <input
-              type="checkbox"
-              name="isTweetNotificationsEnabled"
-              value="true"
-              v-model="localUser.isTweetNotificationsEnabled"
-              :disabled="!user.twitterUsername"
-            />
-            <span class="toggle-element_switcher"></span>
-          </label>
-        </div>
-      </div>
-      <div class="shadow-block">
-        <div class="container">
-          <div
-            class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
-            :class="{
-              disabled:
-                !user.twitterUsername || !localUser.isTweetNotificationsEnabled
-            }"
-          >
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isTweetNotificationNewSubscriberEnabled"
-                  type="checkbox"
-                  name="isEmailNotificationNewSubscriptionEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">New subscriber</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isTweetNotificationAutoprolongEnabled"
-                  type="checkbox"
-                  name="isTweetNotificationAutoprolongEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">Subscription renewals</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isPostsTweets"
-                  type="checkbox"
-                  name="isEmailNotificationNewTipsEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">Post tweets</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isTweetNotificationClipSaleEnabled"
-                  type="checkbox"
-                  name="isTweetNotificationClipSaleEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">Clip sales</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isTweetNotificationTipEnabled"
-                  type="checkbox"
-                  name="isTweetNotificationTipEnabled"
-                  value="true"
-                />
-                <span class="label icn-item">Tips</span>
-              </div>
-            </label>
-            <label class="form-group-inner">
-              <div class="checkbox-wrapper">
-                <input
-                  v-model="localUser.isPostsTweetsOnGoLive"
-                  type="checkbox"
-                  name="isPostsTweetsOnGoLive"
-                  value="true"
-                />
-                <span class="label icn-item">Going Live</span>
-              </div>
+      <template v-if="isMonetizedUser">
+        <div
+          class="form-title border-top"
+          :class="{ disabled: !user.twitterUsername }"
+        >
+          <div class="inner">
+            <span class="semi-transparent">
+              Send Twitter Notifications
+            </span>
+            <label class="toggle-element">
+              <input
+                type="checkbox"
+                name="isTweetNotificationsEnabled"
+                value="true"
+                v-model="localUser.isTweetNotificationsEnabled"
+                :disabled="!user.twitterUsername"
+              />
+              <span class="toggle-element_switcher"></span>
             </label>
           </div>
         </div>
-      </div>
+        <div class="shadow-block">
+          <div class="container">
+            <div
+              class="form-group form-group_with-label checkbox-group emailNotificationsTypes"
+              :class="{
+                disabled:
+                  !user.twitterUsername ||
+                  !localUser.isTweetNotificationsEnabled
+              }"
+            >
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isTweetNotificationNewSubscriberEnabled"
+                    type="checkbox"
+                    name="isEmailNotificationNewSubscriptionEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">New subscriber</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isTweetNotificationAutoprolongEnabled"
+                    type="checkbox"
+                    name="isTweetNotificationAutoprolongEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">Subscription renewals</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isPostsTweets"
+                    type="checkbox"
+                    name="isEmailNotificationNewTipsEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">Post tweets</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isTweetNotificationClipSaleEnabled"
+                    type="checkbox"
+                    name="isTweetNotificationClipSaleEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">Clip sales</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isTweetNotificationTipEnabled"
+                    type="checkbox"
+                    name="isTweetNotificationTipEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">Tips</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="localUser.isPostsTweetsOnGoLive"
+                    type="checkbox"
+                    name="isPostsTweetsOnGoLive"
+                    value="true"
+                  />
+                  <span class="label icn-item">Going Live</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </template>
       <div class="container hidden-mobile" v-if="$mq === 'desktop'">
         <div class="form-group form-group_with-label">
           <button

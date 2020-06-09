@@ -176,7 +176,7 @@
         </div>
       </div>
 
-      <div class="watermarks-settings">
+      <div v-if="isMonetizedUser" class="watermarks-settings">
         <div class="form-title border-top">
           <div class="inner">
             <span class="semi-transparent">
