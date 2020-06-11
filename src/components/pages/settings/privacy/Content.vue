@@ -108,6 +108,26 @@
       </div>
 
       <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Allow Media Downloads in Chat Messages
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="allowDownloadChatContent"
+              value="true"
+              v-model="localUser.privacy.allowDownloadChatContent"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner padding-bottom">
