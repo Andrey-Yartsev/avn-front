@@ -80,18 +80,6 @@ export default {
     isDisabled() {
       return !this.periods.includes(this.localUser.autoPayoutsFrequency);
     }
-  },
-  methods: {
-    // getUpperCaseText(str) {
-    //   return str.charAt(0).toUpperCase() + str.slice(1);
-    // },
-    // getPeriodName(period) {
-    //   switch (period) {
-    //     case "weekly":
-    //       return "Weekly";
-    //     case "bi-weekly"
-    //   }
-    // }
   }
 };
 </script>
