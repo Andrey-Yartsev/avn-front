@@ -44,7 +44,7 @@
                       :value="period"
                       :key="period"
                     >
-                      {{ getUpperCaseText(period) }}
+                      {{ periodNames[period] }}
                     </option>
                   </select>
                 </div>
@@ -60,14 +60,20 @@
 <script>
 import Common from "../../common";
 
-const requestsPeriods = ["weekly", "bi weekly", "monthly"];
+const requestsPeriods = ["weekly", "bi-weekly", "monthly"];
+const periodNames = {
+  weekly: "Weekly",
+  "bi-weekly": "Bi weekly",
+  monthly: "Montly"
+};
 
 export default {
   name: "AutoRequests",
   mixins: [Common],
   data() {
     return {
-      periods: requestsPeriods
+      periods: requestsPeriods,
+      periodNames: periodNames
     };
   },
   computed: {
@@ -76,9 +82,16 @@ export default {
     }
   },
   methods: {
-    getUpperCaseText(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+    // getUpperCaseText(str) {
+    //   return str.charAt(0).toUpperCase() + str.slice(1);
+    // },
+    // getPeriodName(period) {
+    //   switch (period) {
+    //     case "weekly":
+    //       return "Weekly";
+    //     case "bi-weekly"
+    //   }
+    // }
   }
 };
 </script>
