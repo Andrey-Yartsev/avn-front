@@ -31,6 +31,13 @@
       >
         Return to admin
       </a>
+      <a
+        v-if="isLoggedFromStudioProfile"
+        @click.prevent="returnToStudioProfile"
+        class="btn alt btn-back-kitchen"
+      >
+        Return to studio profile
+      </a>
       <UserBubble
         username="stompeg"
         v-show="this.$store.state.userBubble.show"
@@ -187,6 +194,11 @@ export default {
     },
     hasLayout() {
       return !this.$route.meta.noLayout;
+    },
+    isLoggedFromStudioProfile() {
+      return (
+        this.user.studioAccess && this.user.studioAccess.isLoggedFromStudio
+      );
     }
   },
   watch: {
@@ -284,6 +296,19 @@ export default {
           trialLogger.info("user does not exists");
         }
       }, 1000);
+    },
+    returnToStudioProfile() {
+      this.$store
+        .dispatch(
+          "studioAccess/getToken",
+          this.user.studioAccess.studioProfileId
+        )
+        .then(() => {
+          this.$router.push("/settings");
+          setTimeout(() => {
+            document.location.reload();
+          }, 100);
+        });
     }
   },
   created() {

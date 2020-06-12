@@ -110,7 +110,12 @@ export default {
       BackRouter.back();
     },
     login(userId) {
-      this.$store.dispatch("studioAccess/getToken", userId);
+      this.$store.dispatch("studioAccess/getToken", userId).then(() => {
+        this.$router.push("/settings");
+        setTimeout(() => {
+          document.location.reload();
+        }, 100);
+      });
     }
   },
   mounted() {

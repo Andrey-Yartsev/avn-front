@@ -11,7 +11,8 @@ const state = {
   marker: null,
   offset: 0,
   allDataReceived: false,
-  limit
+  limit,
+  posts: []
 };
 
 const mutations = {
@@ -94,7 +95,6 @@ createRequestAction({
     method: "GET",
     query: {}
   },
-  resultKey: "posts",
   defaultResultValue: [],
   paramsToPath: function(userId, path) {
     return path.replace(/{userId}/, userId);
