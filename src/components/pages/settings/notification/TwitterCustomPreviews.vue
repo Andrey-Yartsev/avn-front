@@ -1,9 +1,6 @@
 <template>
-  <div class="twitterCusomPreviews">
-    <div class="modeSwitcher" @click="switchMode">
-      {{ isEdit ? "View" : "Edit" }}
-    </div>
-    <div v-if="isEdit" class="editMode">
+  <div class="twitterCustomPreviews">
+    <div class="previewWrapper">
       <div class="previews">
         <MediaPreview
           v-for="media in preloadedMedias"
@@ -36,20 +33,9 @@
           @click="saveNewPreviewList"
           :disabled="!isDataChanges"
         >
-          Save changes
+          Save images
         </button>
       </div>
-    </div>
-    <div v-else class="viewMode">
-      <Media
-        v-if="media && media.length"
-        :medias="media"
-        :shouldHasLink="false"
-        :post="{}"
-        :authorId="123"
-        mediaSize="preview"
-        :autoplay="false"
-      />
     </div>
   </div>
 </template>
@@ -78,7 +64,6 @@ export default {
   },
   data() {
     return {
-      isEdit: false,
       preloadedMedias: [],
       inputAcceptTypes: ["jpg", "jpeg", "png"],
       mediaType: "photo",
@@ -87,22 +72,6 @@ export default {
         photo: 20
       }
     };
-  },
-  watch: {
-    isEdit(value) {
-      if (!value || !this.media || !this.media.length) {
-        return;
-      }
-      this.preloadedMedias = (this.media || []).map(media => ({
-        alreadySaved: true,
-        fileContent: media.thumb && media.thumb.source,
-        id: media.id,
-        processId: media.id,
-        mediaType: media.type,
-        preview: media.thumb && media.thumb.source,
-        thumbs: media.thumbs
-      }));
-    }
   },
   computed: {
     cantAddMoreMedia() {
@@ -132,9 +101,6 @@ export default {
     }
   },
   methods: {
-    switchMode() {
-      this.isEdit = !this.isEdit;
-    },
     saveNewPreviewList() {
       const data = this.getData();
       // if (!data || this.saving) return;
@@ -151,11 +117,22 @@ export default {
       const data = this.localUser;
       data.twitterNotificationsSettings.options[name].mediaFiles = mediaFiles;
       return data;
+    },
+    initMedia() {
+      this.preloadedMedias = (this.media || []).map(media => ({
+        alreadySaved: true,
+        fileContent: media.thumb && media.thumb.source,
+        id: media.id,
+        processId: media.id,
+        mediaType: media.type,
+        preview: media.thumb && media.thumb.source,
+        thumbs: media.thumbs
+      }));
     }
   },
   mounted() {
-    if (!this.media.length) {
-      this.isEdit = true;
+    if (this.media.length) {
+      this.initMedia();
     }
   }
 };

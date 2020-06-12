@@ -208,7 +208,7 @@
                 </label>
               </div>
             </label>
-            <TwitterCusomPreviews
+            <TwitterCustomPreviews
               v-if="settings.options.newSubscriber.customImages.isEnabled"
               :media="settings.options.newSubscriber.customImages.media"
               :name="'newSubscriber'"
@@ -248,7 +248,7 @@
                 </label>
               </div>
             </label>
-            <TwitterCusomPreviews
+            <TwitterCustomPreviews
               v-if="settings.options.autoprolong.customImages.isEnabled"
               :media="settings.options.autoprolong.customImages.media"
               :name="'autoprolong'"
@@ -285,7 +285,7 @@
                 </label>
               </div>
             </label>
-            <TwitterCusomPreviews
+            <TwitterCustomPreviews
               v-if="settings.options.tip.customImages.isEnabled"
               :media="settings.options.tip.customImages.media"
               :name="'tip'"
@@ -348,13 +348,13 @@
 import Common from "../common";
 import webPushNotifications from "@/mixins/webPushNotifications";
 import { twitterNotificationsSettings } from "@/mock/twitterNotificationsSettings";
-import TwitterCusomPreviews from "./TwitterCusomPreviews";
+import TwitterCustomPreviews from "./TwitterCustomPreviews";
 
 export default {
   name: "NotificationSettingsContent",
   mixins: [Common, webPushNotifications],
   components: {
-    TwitterCusomPreviews
+    TwitterCustomPreviews
   },
   data() {
     return {

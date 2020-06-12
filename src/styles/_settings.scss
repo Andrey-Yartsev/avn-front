@@ -415,6 +415,13 @@ button.balance-info {
 }
 .emailNotificationsTypes {
   .form-group-inner {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      margin-top: 10px;
+    }
+
+
     .inner {
       display: flex;
       flex-flow: row nowrap;
@@ -430,9 +437,8 @@ button.balance-info {
   }
 }
 
-.twitterCusomPreviews {
+.twitterCustomPreviews {
   width: 100%;
-  // height: 250px;
   height: auto;
   position: relative;
   margin-bottom: 30px;
@@ -443,32 +449,11 @@ button.balance-info {
     right: 0;
     color: $secondary-color;
   }
-  .editMode {
+  .previewWrapper {
     padding-top: 20px;
     .previews {
       display: flex;
       flex-flow: row wrap;
-    }
-  }
-  .viewMode {
-    width: 250px;
-    height: 250px;
-    margin: 0 auto;
-    .media {
-      width: 250px;
-      height: 250px;
-      .swiper-container {
-        .media-wrapper {
-          img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-    .loader-container {
-      display: none;
     }
   }
   .upload {
