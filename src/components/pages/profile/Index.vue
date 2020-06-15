@@ -53,63 +53,65 @@
           class="profile-desc"
           ref="description"
         >
-          <p class="profile-text" v-if="profile.about">
-            <span v-html="trunc(profile.about)"></span>
-            <span
-              class="collapse-text"
-              v-if="profile.about.length > collapseLimit"
-            >
-              <a href="#" @click.prevent="collapsed = !collapsed">{{
-                collapsed ? "Read more" : "Collapse"
-              }}</a>
-            </span>
-          </p>
-          <a
-            v-if="profile.twitterUsername && !profile.isPrivateTwitter"
-            :href="'https://twitter.com/' + profile.twitterUsername"
-            class="profile-twitter-link"
-            target="_blank"
-            rel="nofollow"
-            >twitter.com/{{ profile.twitterUsername }}</a
-          >
-          <div class="profile-offer" v-if="showProfileOffer">
-            <button
-              class="btn border alt btn_fix-width-lg"
-              @click="buySnapchat"
-              v-if="snapchat && snapchat.isPaid === false"
-            >
-              Premium Snapchat ${{ snapchat.price }}
-            </button>
-            <div
-              class="profile-offer__chat"
-              v-if="snapchat && snapchat.isPaid === true"
-            >
-              <div class="user-login reset-ml">
-                Snapchat:
-                <span class="name">{{ snapchat.content }}</span>
-              </div>
-              <div
-                class="profile-offer__form"
-                v-if="snapchat && snapchat.isCompleted === false"
+          <template v-if="!isBlockedOn">
+            <p class="profile-text" v-if="profile.about">
+              <span v-html="trunc(profile.about)"></span>
+              <span
+                class="collapse-text"
+                v-if="profile.about.length > collapseLimit"
               >
-                <input
-                  type="text"
-                  v-model="mysnapchat"
-                  class="rounded"
-                  placeholder="Enter your snapchat"
-                />
-                <button
-                  class="btn"
-                  @click="sendMySnapchat"
-                  :disabled="!mysnapchat.trim()"
+                <a href="#" @click.prevent="collapsed = !collapsed">{{
+                  collapsed ? "Read more" : "Collapse"
+                }}</a>
+              </span>
+            </p>
+            <a
+              v-if="profile.twitterUsername && !profile.isPrivateTwitter"
+              :href="'https://twitter.com/' + profile.twitterUsername"
+              class="profile-twitter-link"
+              target="_blank"
+              rel="nofollow"
+              >twitter.com/{{ profile.twitterUsername }}</a
+            >
+            <div class="profile-offer" v-if="showProfileOffer">
+              <button
+                class="btn border alt btn_fix-width-lg"
+                @click="buySnapchat"
+                v-if="snapchat && snapchat.isPaid === false"
+              >
+                Premium Snapchat ${{ snapchat.price }}
+              </button>
+              <div
+                class="profile-offer__chat"
+                v-if="snapchat && snapchat.isPaid === true"
+              >
+                <div class="user-login reset-ml">
+                  Snapchat:
+                  <span class="name">{{ snapchat.content }}</span>
+                </div>
+                <div
+                  class="profile-offer__form"
+                  v-if="snapchat && snapchat.isCompleted === false"
                 >
-                  Send
-                </button>
+                  <input
+                    type="text"
+                    v-model="mysnapchat"
+                    class="rounded"
+                    placeholder="Enter your snapchat"
+                  />
+                  <button
+                    class="btn"
+                    @click="sendMySnapchat"
+                    :disabled="!mysnapchat.trim()"
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <FollowersCounter :profile="profile" />
-          <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+            <FollowersCounter :profile="profile" />
+            <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+          </template>
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
           <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
         </component>
@@ -151,8 +153,10 @@
         <div class="container">
           <div class="row">
             <div :class="['content-col', { 'single-col': !useMediumPostView }]">
+              <!-- <BlockedBlock v-if="true" :profile="profile" /> -->
+              <BlockedBlock v-if="isBlockedOn" :profile="profile" />
               <PrivateBlock
-                v-if="!isOwner(profile.id) && profile.isPrivatePost"
+                v-else-if="!isOwner(profile.id) && profile.isPrivatePost"
                 :profile="profile"
               />
               <FollowersOnlyBlock
@@ -259,6 +263,7 @@ import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import PrivateBlock from "@/components/common/profile/privateBlock/Index";
 import FollowersOnlyBlock from "@/components/common/profile/followersOnlyBlock/Index";
+import BlockedBlock from "@/components/common/profile/blockedBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
@@ -292,6 +297,7 @@ export default {
     PostMedium,
     PrivateBlock,
     FollowersOnlyBlock,
+    BlockedBlock,
     Highlights,
     LinkPost,
     LinksPage,
@@ -420,6 +426,10 @@ export default {
         return this.profile.privacy.globalRankCount;
       }
       return this.profile.privacy.categoryRankCount;
+    },
+    isBlockedOn() {
+      return !this.isOwner(this.profile.id) && this.profile.isBlockedOn;
+      // return !this.isOwner(this.profile.id) && true;
     }
   },
   watch: {

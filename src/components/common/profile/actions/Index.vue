@@ -2,7 +2,7 @@
   <div class="row">
     <div class="content-col">
       <div class="profile-btns-group">
-        <div class="btns-user-activity">
+        <div class="btns-user-activity" v-if="!isBlockedOn">
           <router-link
             class="btn-user-activity"
             :class="!page ? 'active' : ''"
@@ -70,74 +70,76 @@
           </button>
         </div>
         <div class="profile-actions" v-else>
-          <div
-            v-if="$root.showTips"
-            class="profile-actions-tip-form"
-            :class="{ show: showTip }"
-          >
-            <Tip
-              :user="profile"
-              ref="tip"
-              @cancel="closeTip"
-              class="tip-form_profile"
+          <template v-if="!isBlockedOn">
+            <div
+              v-if="$root.showTips"
+              class="profile-actions-tip-form"
+              :class="{ show: showTip }"
+            >
+              <Tip
+                :user="profile"
+                ref="tip"
+                @cancel="closeTip"
+                class="tip-form_profile"
+              />
+            </div>
+            <button
+              v-if="profile.canEarn && $root.showTips"
+              type="button"
+              class="profile-actions__btn btn-with-icon profile-tip-btn"
+              @click="openTip"
+            >
+              <span class="icn-item icn-tips icn-size_lg"></span>
+              Tip
+            </button>
+            <SubscribeButton
+              :profile="profile"
+              @requested="subsRequested"
+              ref="subscribeButton"
             />
-          </div>
-          <button
-            v-if="profile.canEarn && $root.showTips"
-            type="button"
-            class="profile-actions__btn btn-with-icon profile-tip-btn"
-            @click="openTip"
-          >
-            <span class="icn-item icn-tips icn-size_lg"></span>
-            Tip
-          </button>
-          <SubscribeButton
-            :profile="profile"
-            @requested="subsRequested"
-            ref="subscribeButton"
-          />
-          <div
-            class="subscribeView profile-actions__btn"
-            v-if="
-              !profile.subscribedBy ||
-                (profile.subscribedBy && profile.subscribedByProgress) ||
-                (profile.subscribedBy &&
-                  !profile.subscribedByProgress &&
-                  !profile.followedBy)
-            "
-          >
             <div
-              v-if="profile.followedBy"
-              @click="unfollow"
-              class="btn-with-icon btn-subscribe disable-state"
-              :disabled="followInProgress"
+              class="subscribeView profile-actions__btn"
+              v-if="
+                !profile.subscribedBy ||
+                  (profile.subscribedBy && profile.subscribedByProgress) ||
+                  (profile.subscribedBy &&
+                    !profile.subscribedByProgress &&
+                    !profile.followedBy)
+              "
             >
-              <span class="icn-item icn-userp"></span>
-              <div class="btn-subscribe__label">
-                Unfollow
+              <div
+                v-if="profile.followedBy"
+                @click="unfollow"
+                class="btn-with-icon btn-subscribe disable-state"
+                :disabled="followInProgress"
+              >
+                <span class="icn-item icn-userp"></span>
+                <div class="btn-subscribe__label">
+                  Unfollow
+                </div>
+              </div>
+              <div
+                v-else
+                @click="follow"
+                class="btn-with-icon btn-subscribe"
+                :disabled="followInProgress"
+              >
+                <span class="icn-item icn-userp"></span>
+                <div class="btn-subscribe__label">
+                  Follow
+                </div>
               </div>
             </div>
-            <div
-              v-else
-              @click="follow"
-              class="btn-with-icon btn-subscribe"
-              :disabled="followInProgress"
+            <button
+              v-if="profile.canWrite"
+              @click="sendMessage"
+              type="button"
+              class="profile-actions__btn btn-with-icon profile-message-btn"
             >
-              <span class="icn-item icn-userp"></span>
-              <div class="btn-subscribe__label">
-                Follow
-              </div>
-            </div>
-          </div>
-          <button
-            v-if="profile.canWrite"
-            @click="sendMessage"
-            type="button"
-            class="profile-actions__btn btn-with-icon profile-message-btn"
-          >
-            <span class="icn-msg icn-item icn-size_lg"></span>
-            Message
-          </button>
+              <span class="icn-msg icn-item icn-size_lg"></span>
+              Message
+            </button>
+          </template>
           <UserDropdown
             v-if="user && $mq === 'desktop'"
             class="profile-actions__btn profile-more-functions more-functions_with-text hidden-mobile"
@@ -188,6 +190,10 @@ export default {
         this.$store.state.profile.home._followLoading ||
         this.$store.state.profile.home._unfollowLoading
       );
+    },
+    isBlockedOn() {
+      return !this.isOwner(this.profile.id) && this.profile.isBlockedOn;
+      // return !this.isOwner(this.profile.id) && true;
     }
   },
   methods: {
