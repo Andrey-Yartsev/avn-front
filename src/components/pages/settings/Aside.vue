@@ -181,11 +181,12 @@ import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
 import Loader from "@/components/common/Loader";
+import User from "@/mixins/user";
 
 export default {
   name: "SettingsAside",
 
-  mixins: [Mobile, ProfileBg, Avatar],
+  mixins: [Mobile, ProfileBg, Avatar, User],
 
   components: {
     Footer,
@@ -265,10 +266,12 @@ export default {
           title: "Credits"
         });
       }
-      items.push({
-        name: "referrals",
-        title: "Referrals"
-      });
+      if (this.isMonetizedUser) {
+        items.push({
+          name: "referrals",
+          title: "Referrals"
+        });
+      }
       items.push({
         name: "notifications",
         title: "Notifications"
@@ -279,10 +282,12 @@ export default {
           title: "Free Trials"
         });
       }
-      items.push({
-        name: "obs",
-        title: "OBS"
-      });
+      if (this.isMonetizedUser) {
+        items.push({
+          name: "obs",
+          title: "OBS"
+        });
+      }
       if (this.user.storeEnabled && this.user.isPerformer) {
         items.push({
           name: "clipStore",

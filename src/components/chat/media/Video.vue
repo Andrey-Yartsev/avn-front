@@ -20,7 +20,7 @@
       playsinline
       controls
       loop
-      controlslist="nodownload"
+      :controlslist="!isDownloadAllowed ? 'nodownload' : ''"
       :poster="media.preview.source"
       @play="play"
       ref="video"
@@ -53,6 +53,10 @@ export default {
     },
     processing() {
       return !this.message.isMediaReady;
+    },
+    isDownloadAllowed() {
+      return this.$store.state.chat.fetchFullActiveUserResult.privacy
+        .allowDownloadChatContent;
     }
   },
   methods: {

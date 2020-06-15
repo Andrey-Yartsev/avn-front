@@ -229,5 +229,9 @@
 
   .SearchResultsPopupCollectionView & {
     max-width: calc(100% - 40px);
+
+    .DiscountUsersCollectionView & {
+      font-size: 14px;
+    }
   }
 }

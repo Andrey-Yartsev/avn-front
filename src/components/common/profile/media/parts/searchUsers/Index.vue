@@ -6,7 +6,7 @@
       class="header-search-input rounded sm"
       name="query"
       autocomplete="off"
-      placeholder="Search"
+      :placeholder="placeholder"
       type="text"
       @focus="open"
       tabindex="1"
@@ -82,6 +82,13 @@ export default {
     };
   },
 
+  props: {
+    placeholder: {
+      type: String,
+      default: "Search"
+    }
+  },
+
   computed: {
     throttledSearch() {
       return throttle(300, false, this.search, false);
@@ -121,6 +128,9 @@ export default {
     },
     $route() {
       this.opened2 = false;
+    },
+    opened2(value) {
+      this.$emit("togleSearchResult", value);
     }
   },
 

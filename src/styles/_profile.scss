@@ -1232,7 +1232,9 @@
       }
 
       .verified-user {
-        color: $secondary-color;
+        &.fullyMonetized {
+          color: $secondary-color;
+        }
       }
 
       .icn-block {
