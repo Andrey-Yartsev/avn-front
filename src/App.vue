@@ -303,7 +303,9 @@ export default {
       this.$store
         .dispatch("studioAccess/logout", this.user.studioAccess.studioProfileId)
         .then(() => {
-          this.$router.push("/settings");
+          if (this.$route.path !== "/settings") {
+            this.$router.push("/settings");
+          }
           setTimeout(() => {
             document.location.reload();
           }, 100);

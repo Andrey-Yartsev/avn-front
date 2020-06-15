@@ -111,7 +111,9 @@ export default {
     },
     login(userId) {
       this.$store.dispatch("studioAccess/login", userId).then(() => {
-        this.$router.push("/settings");
+        if (this.$route.path !== "/settings") {
+          this.$router.push("/settings");
+        }
         setTimeout(() => {
           document.location.reload();
         }, 100);
