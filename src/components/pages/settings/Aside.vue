@@ -295,7 +295,11 @@ export default {
           path: `/${this.user.username}/media`
         });
       }
-      if (this.user.studioAccess.isAllowStudioAccess) {
+      if (
+        this.user &&
+        this.user.studioAccess &&
+        this.user.studioAccess.isAllowStudioAccess
+      ) {
         items.push({
           name: "studioAccess",
           title: "Studio Access"
