@@ -10,31 +10,6 @@
       <div class="over-container">
         <Navigate />
         <div
-          v-if="page === 'clips'"
-          class="stories-wrapper stories-all clipCategories"
-        >
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/all">
-              All
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/free">
-              Free Only
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/topView">
-              Top Viewed
-            </router-link>
-          </span>
-          <span class="clipCategories_item">
-            <router-link to="/explore/clips/topSale">
-              Best Selling
-            </router-link>
-          </span>
-        </div>
-        <div
           class="stories-wrapper stories-all"
           v-if="stories.length || streamLives.length"
         >
@@ -60,6 +35,31 @@
               </div>
             </div>
           </div>
+        </div>
+        <div
+          v-if="page === 'clips'"
+          class="stories-wrapper stories-all clipCategories"
+        >
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/all">
+              All
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/free">
+              Free Only
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topView">
+              Top Viewed
+            </router-link>
+          </span>
+          <span class="clipCategories_item">
+            <router-link to="/explore/clips/topSale">
+              Best Selling
+            </router-link>
+          </span>
         </div>
         <div class="explore">
           <div

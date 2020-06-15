@@ -798,6 +798,8 @@
     }
   }
 
+  
+
   .text-media-container & {
 
     @include media-breakpoint-up($desktop-breakpoint) {
@@ -812,6 +814,65 @@
     }
   }
 }
+
+.post-tipsGoal {
+  width: 100%;
+  padding-bottom: 10px;
+  .multiselect__tags-wrap {
+    display: none;
+  }
+  &-form {
+    display: flex;
+    flex-flow: row wrap;
+    // align-items: center;
+  }
+  .form-group_with-label {
+    padding-right: 0;
+    padding-bottom: 0;
+    .form-group-inner {
+      margin: 0;
+    }
+  }
+  .text {
+    order: 1;
+    width: 90%;
+    margin-bottom: 10px;
+    .label {
+      flex: 0 0 14.5%;
+      margin-right: 5px;
+    }
+  }
+  .amount {
+    width: 30%;
+    order: 3
+  }
+  .sources {
+    width: 60%;
+    order: 4
+  }
+  .close-tipsGoal {
+    order: 2;
+    width: 10%;
+    margin-bottom: 10px;
+  }
+
+  &.mobile-view {
+    .post-tipsGoal-form {
+      flex-direction: row-reverse;
+      .close-tipsGoal {
+        transform: translateY(7px);
+        margin-bottom: 0;
+        order: 0;
+      }
+      .amount {
+        margin-right: auto;
+        margin-left: 10%;
+        width: 20%
+      }
+    }
+  }
+}
+
 
 .post-expired-time {
   padding-right: 20px;
@@ -949,10 +1010,6 @@
 .post-attachment {
   position: relative;
   padding: 12px 10px 0;
-
-  @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-    overflow: hidden;
-  }
 
   @include media-breakpoint-up($desktop-breakpoint) {
     padding: 0 7px;
