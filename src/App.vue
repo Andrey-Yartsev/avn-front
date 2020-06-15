@@ -197,7 +197,9 @@ export default {
     },
     isLoggedFromStudioProfile() {
       return (
-        this.user.studioAccess && this.user.studioAccess.isLoggedFromStudio
+        this.user &&
+        this.user.studioAccess &&
+        this.user.studioAccess.isLoggedFromStudio
       );
     }
   },
@@ -299,10 +301,7 @@ export default {
     },
     returnToStudioProfile() {
       this.$store
-        .dispatch(
-          "studioAccess/getToken",
-          this.user.studioAccess.studioProfileId
-        )
+        .dispatch("studioAccess/logout", this.user.studioAccess.studioProfileId)
         .then(() => {
           this.$router.push("/settings");
           setTimeout(() => {

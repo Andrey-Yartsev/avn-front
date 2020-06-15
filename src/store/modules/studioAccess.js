@@ -49,11 +49,18 @@ const actions = {
         commit("checkResult", mockData);
       });
   },
-  getToken({ dispatch }, userId) {
-    return dispatch("_getToken", userId)
+  login({ dispatch }, userId) {
+    return dispatch("_login", userId)
       .then(res => {
-        // const {token} = res;
-        console.log(res);
+        return res;
+      })
+      .catch(() => {
+        console.log("err");
+      });
+  },
+  logout({ dispatch }, userId) {
+    return dispatch("_logout", userId)
+      .then(res => {
         return res;
       })
       .catch(() => {
@@ -86,8 +93,24 @@ createRequestAction({
   }
 });
 createRequestAction({
-  prefix: "_getToken",
-  apiPath: "studioAccess/{userId}",
+  prefix: "_login",
+  apiPath: "studioAccess/login/{userId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET",
+    query: {}
+  },
+  defaultResultValue: [],
+  paramsToPath: function(userId, path) {
+    return path.replace(/{userId}/, userId);
+  }
+});
+
+createRequestAction({
+  prefix: "_logout",
+  apiPath: "studioAccess/logout/{userId}",
   state,
   mutations,
   actions,
