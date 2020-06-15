@@ -428,7 +428,7 @@ export default {
       return this.profile.privacy.categoryRankCount;
     },
     isBlockedOn() {
-      return !this.isOwner(this.profile.id) && this.profile.isBlockedOn;
+      return !this.isOwner(this.profile.id) && this.profile.privacy.isBlockedOn;
       // return !this.isOwner(this.profile.id) && true;
     }
   },
