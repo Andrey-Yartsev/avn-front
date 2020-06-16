@@ -5,6 +5,7 @@
     :params="params"
     :onSuccess="onSuccess"
     :onFailure="onFailure"
+    :disabled="isSaving"
   >
     <span class="icn-item icn-google icn-size_lg"></span>Sign in with Google
   </GoogleLogin>
@@ -20,6 +21,10 @@ export default {
   },
   props: {
     largeControls: {
+      type: Boolean,
+      default: false
+    },
+    isSaving: {
       type: Boolean,
       default: false
     }

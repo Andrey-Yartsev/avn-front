@@ -111,7 +111,10 @@
       <div class="login-or">
         <span>or</span>
       </div>
-      <GoogleLoginButton :largeControls="largeControls" />
+      <GoogleLoginButton
+        :largeControls="largeControls"
+        :isSaving="loginInProgress"
+      />
       <div class="signUp">
         <div class="signUp__body">
           <h3>
