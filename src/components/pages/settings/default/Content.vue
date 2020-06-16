@@ -193,6 +193,10 @@
           </div>
         </div>
         <Discount v-if="isFullyMonetizedUser" />
+        <MultiMonthDiscount
+          v-if="isFullyMonetizedUser"
+          :localUser="localUser"
+        />
         <UserDiscounts v-if="isFullyMonetizedUser" />
       </template>
 
@@ -338,6 +342,7 @@ import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
 import timezones from "@/utils/timezones";
 import Discount from "./Discount";
+import MultiMonthDiscount from "./MultiMonthDiscount";
 import UserDiscounts from "./UserDiscounts";
 import User from "@/mixins/user";
 
@@ -351,6 +356,7 @@ export default {
     TextareaAutosize,
     DeleteRestore,
     Discount,
+    MultiMonthDiscount,
     UserDiscounts
   },
 

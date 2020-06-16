@@ -410,4 +410,10 @@
     }
   }
 
+  &-google {
+    &:after {
+      content: "\F0d5";
+    }
+  }
+
 }

@@ -14,6 +14,15 @@
           <template slot="button-text">
             Subscribe for ${{ profile.subscribePrice }} / month
           </template>
+          <template slot="button-text-3">
+            Subscribe for ${{ getSubscriptionPrice(3) }} / 3 month
+          </template>
+          <template slot="button-text-6">
+            Subscribe for ${{ getSubscriptionPrice(6) }} / 6 month
+          </template>
+          <template slot="button-text-12">
+            Subscribe for ${{ getSubscriptionPrice(12) }} / 12 month
+          </template>
           <template slot="footer-text">
             You will be charged
             <span class="selected-text"
@@ -61,6 +70,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.modal.subscribe.data.user;
+    },
+    basePrice() {
+      return parseFloat(this.profile.basePrice);
     }
   },
   methods: {
@@ -68,8 +80,21 @@ export default {
       this.$store.commit("profile/home/resetOnPageAction");
       this.$store.commit("modal/hideSafe", { name: "subscribe" });
     },
-    subscribe() {
-      this.$emit("subscribe");
+    subscribe(data) {
+      this.$emit("subscribe", data);
+    },
+    getSubscriptionPrice(months) {
+      const discount =
+        parseFloat(this.profile.multiMonthSubscription[months].discount) ||
+        null;
+      let totalPrice = (this.basePrice * months).toFixed(2);
+      if (discount) {
+        totalPrice = (
+          (this.basePrice - (this.basePrice / 100) * discount) *
+          months
+        ).toFixed(2);
+      }
+      return totalPrice;
     }
   }
 };

@@ -108,6 +108,13 @@
         <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with
         Twitter
       </button>
+      <div class="login-or">
+        <span>or</span>
+      </div>
+      <GoogleLoginButton
+        :largeControls="largeControls"
+        :isSaving="loginInProgress"
+      />
       <div class="signUp">
         <div class="signUp__body">
           <h3>
@@ -144,6 +151,7 @@ import Common from "@/components/auth/common";
 import Login from "@/components/auth/login";
 import Form from "@/mixins/form";
 import BrowserStore from "store";
+import GoogleLoginButton from "./GoogleLogin";
 
 export default {
   name: "LoginForm",
@@ -151,7 +159,8 @@ export default {
   mixins: [Common, Login, Form],
 
   components: {
-    Recaptcha
+    Recaptcha,
+    GoogleLoginButton
   },
 
   props: {

@@ -115,6 +115,8 @@
     >
       <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with Twitter
     </button>
+    <div class="login-or"><span>or</span></div>
+    <GoogleLoginButton :largeControls="largeControls" :isSaving="isSaving" />
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">
@@ -135,6 +137,7 @@ import Recaptcha from "vue-recaptcha";
 import Common from "@/components/auth/common";
 import Signup from "@/components/auth/signup";
 import Form from "@/mixins/form";
+import GoogleLoginButton from "./GoogleLogin";
 
 export default {
   name: "SignUp",
@@ -148,7 +151,8 @@ export default {
   },
 
   components: {
-    Recaptcha
+    Recaptcha,
+    GoogleLoginButton
   },
 
   props: {

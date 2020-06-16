@@ -328,6 +328,34 @@
     }
   }
 
+  &-google {
+    background: #dd4b39;
+
+    &:hover {
+      background: darken(#dd4b39, 10%);
+    }
+
+    .icn-google {
+      position: relative;
+      top: -1px;
+      line-height: 0;
+      height: 0;
+      vertical-align: middle;
+      margin-right: 10px;
+
+      .auth-block_sm-size & {
+        margin-right: 5px;
+      }
+
+      &:after {
+
+        .auth-block_sm-size & {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
   &-reset {
     font-size: 17px;
     border: none;
