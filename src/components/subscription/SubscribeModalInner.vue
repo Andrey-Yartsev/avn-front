@@ -70,6 +70,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.modal.subscribe.data.user;
+    },
+    basePrice() {
+      return parseFloat(this.profile.basePrice);
     }
   },
   methods: {
@@ -81,13 +84,16 @@ export default {
       this.$emit("subscribe", data);
     },
     getSubscriptionPrice(months) {
-      const discount = parseFloat(
-        this.profile.multiMonthSubscription[months].discount || 1
-      );
-      const totalPrice = (
-        (this.profile.basePrice - (this.profile.basePrice / 100) * discount) *
-        months
-      ).toFixed(2);
+      const discount =
+        parseFloat(this.profile.multiMonthSubscription[months].discount) ||
+        null;
+      let totalPrice = (this.basePrice * months).toFixed(2);
+      if (discount) {
+        totalPrice = (
+          (this.basePrice - (this.basePrice / 100) * discount) *
+          months
+        ).toFixed(2);
+      }
       return totalPrice;
     }
   }
