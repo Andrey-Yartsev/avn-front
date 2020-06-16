@@ -111,7 +111,7 @@
       <div class="login-or">
         <span>or</span>
       </div>
-      <GoogleLoginButton />
+      <GoogleLoginButton :largeControls="largeControls" />
       <div class="signUp">
         <div class="signUp__body">
           <h3>

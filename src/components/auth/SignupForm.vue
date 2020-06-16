@@ -116,7 +116,7 @@
       <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with Twitter
     </button>
     <div class="login-or"><span>or</span></div>
-    <GoogleLoginButton />
+    <GoogleLoginButton :largeControls="largeControls" />
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">

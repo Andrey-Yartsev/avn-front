@@ -1,6 +1,7 @@
 <template>
   <GoogleLogin
     class="btn block btn-google"
+    :class="{ lg: largeControls }"
     :params="params"
     :onSuccess="onSuccess"
     :onFailure="onFailure"
@@ -16,6 +17,12 @@ export default {
   name: "GoogleLoginButton",
   components: {
     GoogleLogin
+  },
+  props: {
+    largeControls: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
