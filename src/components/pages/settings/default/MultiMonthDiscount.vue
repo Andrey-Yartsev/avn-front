@@ -18,7 +18,7 @@
           <div :class="{ 'container shadow-block': $mq === 'mobile' }">
             <form class="payouts-legal-form">
               <span
-                v-for="(month, i) in multiMonthSubscription"
+                v-for="(month, i) in localUser.multiMonthSubscription"
                 :key="i"
                 class="form-group-inner subscription"
                 :class="{ 'mobile-view': $mq === 'mobile' }"
@@ -32,7 +32,7 @@
                     <input
                       type="checkbox"
                       name="isStreamsTweet"
-                      v-model="multiMonthSubscription[i].isEnabled"
+                      v-model="localUser.multiMonthSubscription[i].isEnabled"
                     />
                     <span class="toggle-element_switcher" />
                   </label>
@@ -51,7 +51,7 @@
                         :max="100"
                         step="0.01"
                         name="subscribeDiscount"
-                        v-model="multiMonthSubscription[i].discount"
+                        v-model="localUser.multiMonthSubscription[i].discount"
                       />
                     </span>
                   </span>
@@ -68,24 +68,13 @@
 <script>
 export default {
   name: "MultiMonthDiscount",
-  data() {
-    return {
-      multiMonthSubscription: {
-        3: {
-          isEnabled: false,
-          discount: null
-        },
-        6: {
-          isEnabled: false,
-          discount: null
-        },
-        12: {
-          isEnabled: false,
-          discount: null
-        }
-      }
-    };
+  props: {
+    localUser: {
+      type: Object,
+      required: true
+    }
   },
+
   computed: {
     currentSubscribtionPrice() {
       return this.$store.state.auth.user.subscribePrice;
@@ -96,20 +85,7 @@ export default {
       return (
         parseInt(months) * parseFloat(this.currentSubscribtionPrice)
       ).toFixed(2);
-    },
-    init() {
-      if (!this.$store.state.auth.user.multiMonthSubscription) {
-        return;
-      }
-      this.multiMonthSubscription = {
-        3: { ...this.$store.state.auth.user.multiMonthSubscription["3"] },
-        6: { ...this.$store.state.auth.user.multiMonthSubscription["6"] },
-        12: { ...this.$store.state.auth.user.multiMonthSubscription["12"] }
-      };
     }
-  },
-  created() {
-    this.init();
   }
 };
 </script>

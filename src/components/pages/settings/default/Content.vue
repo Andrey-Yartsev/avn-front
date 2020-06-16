@@ -193,7 +193,10 @@
           </div>
         </div>
         <Discount v-if="isFullyMonetizedUser" />
-        <MultiMonthDiscount v-if="isFullyMonetizedUser" />
+        <MultiMonthDiscount
+          v-if="isFullyMonetizedUser"
+          :localUser="localUser"
+        />
         <UserDiscounts v-if="isFullyMonetizedUser" />
       </template>
 

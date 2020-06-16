@@ -111,29 +111,32 @@ export default {
       return this.$store.state.init.data.messages.subscriptionBenefits;
     },
     profileHasMultimonthSubscription() {
-      return true;
-      // return this.profile.multiMonthSubscription;
+      return this.profile.multiMonthSubscription;
     },
-    subscribePrice() {
-      return parseFloat(this.profile.subscribePrice);
+    basePrice() {
+      return parseFloat(this.profile.basePrice);
     }
   },
   methods: {
     multiMonthsSubscriptionEnabled(months) {
-      console.log(months);
-      return true;
-      // return this.profileHasMultimonthSubscription[months].isEnabled;
+      return this.profileHasMultimonthSubscription[months].isEnabled;
     },
     getSubscriptionPrice(months) {
-      let totalPrice = (this.subscribePrice * months).toFixed(2);
+      if (months === 1) {
+        return this.profile.subscribePrice;
+      }
+      let totalPrice = (this.basePrice * months).toFixed(2);
 
       if (
         this.profileHasMultimonthSubscription &&
         this.profile.multiMonthSubscription[months].discount
       ) {
         totalPrice = (
-          (this.subscribePrice -
-            (this.subscribePrice / 100) * this.discount.amount) *
+          (this.basePrice -
+            (this.basePrice / 100) *
+              parseFloat(
+                this.profile.multiMonthSubscription[months].discount
+              )) *
           months
         ).toFixed(2);
       }

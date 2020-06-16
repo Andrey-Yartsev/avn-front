@@ -15,13 +15,13 @@
             Subscribe for ${{ profile.subscribePrice }} / month
           </template>
           <template slot="button-text-3">
-            Subscribe for ${{ profile.subscribePrice * 3 }} / 3 month
+            Subscribe for ${{ getSubscriptionPrice(3) }} / 3 month
           </template>
           <template slot="button-text-6">
-            Subscribe for ${{ profile.subscribePrice * 6 }} / 6 month
+            Subscribe for ${{ getSubscriptionPrice(6) }} / 6 month
           </template>
           <template slot="button-text-12">
-            Subscribe for ${{ profile.subscribePrice * 12 }} / 12 month
+            Subscribe for ${{ getSubscriptionPrice(12) }} / 12 month
           </template>
           <template slot="footer-text">
             You will be charged
@@ -79,6 +79,16 @@ export default {
     },
     subscribe(data) {
       this.$emit("subscribe", data);
+    },
+    getSubscriptionPrice(months) {
+      const discount = parseFloat(
+        this.profile.multiMonthSubscription[months].discount || 1
+      );
+      const totalPrice = (
+        (this.profile.basePrice - (this.profile.basePrice / 100) * discount) *
+        months
+      ).toFixed(2);
+      return totalPrice;
     }
   }
 };
