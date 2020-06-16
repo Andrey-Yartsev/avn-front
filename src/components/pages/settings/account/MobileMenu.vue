@@ -24,6 +24,13 @@
           <span>Twitter</span>
           <span class="value">Connect</span>
         </router-link>
+        <router-link
+          to="/settings/account/google"
+          class="settings-nav__item settings-nav__item_arr"
+        >
+          <span>Google</span>
+          <span class="value">Connect</span>
+        </router-link>
       </div>
     </div>
     <div class="form-title">

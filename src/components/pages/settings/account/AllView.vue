@@ -13,6 +13,10 @@
       <ConnectTwitter @connected="twitterConnected" />
     </div>
 
+    <div class="border-top google-block">
+      <ConnectGoogle />
+    </div>
+
     <form
       class="settings-form password-form"
       v-on:submit.stop.prevent="changePassword"
@@ -106,6 +110,7 @@
 
 <script>
 import ConnectTwitter from "../ConnectTwitter";
+import ConnectGoogle from "../ConnectGoogle";
 import Common from "../common";
 import DeleteRestore from "../DeleteRestore";
 import Email from "./Email";
@@ -127,7 +132,8 @@ export default {
   components: {
     ConnectTwitter,
     DeleteRestore,
-    Email
+    Email,
+    ConnectGoogle
   },
 
   computed: {

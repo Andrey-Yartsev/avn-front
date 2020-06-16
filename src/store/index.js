@@ -30,6 +30,7 @@ import payment from "@/store/modules/payment";
 import premiumLinks from "@/store/modules/premiumLinks";
 import payouts from "@/store/modules/payouts";
 import twitter from "@/store/modules/twitter";
+import google from "@/store/modules/google";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
 import blockedPosts from "@/store/modules/blockedPosts";
@@ -102,6 +103,7 @@ const store = new Vuex.Store({
     payment,
     payouts,
     twitter,
+    google,
     emails,
     blocked,
     blockedPosts,

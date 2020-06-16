@@ -115,6 +115,23 @@
     .email-block,
     .password-form,
     .delete-account-block,
+    .google-block,
+    .geoblocking {
+      display: none;
+    }
+  }
+}
+.GoogleView {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    .BlockedUsersCollectionView,
+    .private-profile-block,
+    .tweet-posts-block,
+    .go-twitter-block,
+    .watermarks-settings,
+    .email-block,
+    .password-form,
+    .delete-account-block,
+    .twitter-block,
     .geoblocking {
       display: none;
     }
