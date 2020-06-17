@@ -7,7 +7,7 @@
             <span class="label">Your Google</span>
 
             <GoogleLogin
-              v-if="!user.isGoogleConnected"
+              v-if="!user.social.isGoogleConnected"
               class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter hidden-mobile"
               :params="params"
               :onSuccess="onSuccess"
@@ -18,21 +18,16 @@
 
             <template v-else>
               <span
-                class="value twitter-value hidden-desktop"
+                class="value google-value hidden-desktop"
                 v-if="$mq === 'mobile'"
               >
-                <a
-                  :href="'https://twitter.com/' + user.googleUsername"
-                  target="_blank"
-                  rel="nofollow"
-                  >{{ user.googleUsername }}</a
-                >
+                <span>{{ user.social.googleConnectedProfile }}</span>
               </span>
               <input
                 class="rounded twitter-input hidden-mobile"
                 type="text"
                 readonly=""
-                :value="'@' + user.googleUsername"
+                :value="user.social.googleConnectedProfile"
                 v-if="$mq === 'desktop'"
               />
               <button
@@ -50,7 +45,7 @@
     </div>
     <div class="hidden-desktop text-centered" v-if="$mq === 'mobile'">
       <GoogleLogin
-        v-if="!user.isGoogleConnected"
+        v-if="!user.social.isGoogleConnected"
         class="btn btn_reset-mgap lg border btn_fix-width-lg connect-twitter"
         :params="params"
         :onSuccess="onSuccess"
@@ -89,24 +84,6 @@ export default {
     };
   },
 
-  // computed: {
-  //   twitterError() {
-  //     return this.$store.state.twitter.connectError;
-  //   }
-  // },
-
-  // watch: {
-  //   twitterError(error) {
-  //     if (!error) {
-  //       return;
-  //     }
-  //     this.$store.dispatch("global/flashToast", {
-  //       text: error.message,
-  //       type: "error"
-  //     });
-  //   }
-  // },
-
   methods: {
     onSuccess(googleUser) {
       const token = googleUser.getAuthResponse().id_token;
@@ -116,28 +93,56 @@ export default {
       console.log(err);
     },
     googleConnect(token) {
-      this.$store.dispatch("google/connect", { token }).then(res => {
-        this.$store.dispatch(
-          "auth/extendUser",
-          {
-            isGoogleConnected: true,
-            googleUsername: res.googleUsername
-          },
-          { root: true }
-        );
-      });
+      this.$store
+        .dispatch("google/connect", { token })
+        .then(res => {
+          this.$store.dispatch(
+            "auth/extendUser",
+            {
+              social: {
+                isGoogleConnected: true,
+                googleConnectedProfile: res.social.googleConnectedProfile
+              }
+            },
+            { root: true }
+          );
+          this.$store.dispatch("global/flashToast", {
+            text: "Google profile has been connected",
+            type: "success"
+          });
+        })
+        .catch(err => {
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     },
-    googleDisconect() {
-      this.$store.dispatch("google/disconnect").then(() => {
-        this.$store.dispatch(
-          "auth/extendUser",
-          {
-            isGoogleConnected: false,
-            googleUsername: ""
-          },
-          { root: true }
-        );
-      });
+    googleDisconnect() {
+      this.$store
+        .dispatch("google/disconnect")
+        .then(() => {
+          this.$store.dispatch(
+            "auth/extendUser",
+            {
+              social: {
+                isGoogleConnected: false,
+                googleConnectedProfile: ""
+              }
+            },
+            { root: true }
+          );
+          this.$store.dispatch("global/flashToast", {
+            text: "Google profile has been disconnected",
+            type: "warning"
+          });
+        })
+        .catch(err => {
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     }
   },
   mounted() {
