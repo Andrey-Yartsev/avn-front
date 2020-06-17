@@ -39,7 +39,22 @@ export default {
   methods: {
     onSuccess(googleUser) {
       const token = googleUser.getAuthResponse().id_token;
-      this.$store.dispatch("auth/googleLogin", token);
+      this.$emit("loginStart");
+      this.$store
+        .dispatch("auth/googleLogin", token)
+        .then(() => {
+          this.$emit("loginEnd");
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
+        })
+        .catch(err => {
+          this.$emit("loginEnd");
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
+        });
     },
     onFailure(err) {
       console.log(err);

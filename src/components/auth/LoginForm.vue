@@ -114,6 +114,16 @@
       <GoogleLoginButton
         :largeControls="largeControls"
         :isSaving="loginInProgress"
+        @loginStart="
+          () => {
+            loginInProgress = true;
+          }
+        "
+        @loginEnd="
+          () => {
+            loginInProgress = false;
+          }
+        "
       />
       <div class="signUp">
         <div class="signUp__body">

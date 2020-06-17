@@ -112,11 +112,25 @@
       class="btn block btn-twitter"
       @click.prevent="twitter"
       :class="{ lg: largeControls }"
+      :disabled="isSaving"
     >
       <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with Twitter
     </button>
     <div class="login-or"><span>or</span></div>
-    <GoogleLoginButton :largeControls="largeControls" :isSaving="isSaving" />
+    <GoogleLoginButton
+      :largeControls="largeControls"
+      :isSaving="isSaving"
+      @loginStart="
+        () => {
+          isSaving = true;
+        }
+      "
+      @loginEnd="
+        () => {
+          isSaving = false;
+        }
+      "
+    />
     <div class="signUp">
       <h3>Already have an account?</h3>
       <p class="register">

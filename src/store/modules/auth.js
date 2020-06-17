@@ -117,16 +117,9 @@ const actions = {
   },
 
   googleLogin({ dispatch }, token) {
-    Google.getAuthToken(token)
-      .then(r => {
-        dispatch("setToken", r.accessToken);
-        setTimeout(() => {
-          window.location.reload();
-        }, 200);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    return Google.getAuthToken(token).then(r => {
+      dispatch("setToken", r.accessToken);
+    });
   }
 };
 
