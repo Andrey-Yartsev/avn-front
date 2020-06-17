@@ -119,7 +119,11 @@ export default {
   },
   methods: {
     multiMonthsSubscriptionEnabled(months) {
-      return this.profileHasMultimonthSubscription[months].isEnabled;
+      return (
+        this.profileHasMultimonthSubscription &&
+        this.profileHasMultimonthSubscription[months] &&
+        this.profileHasMultimonthSubscription[months].isEnabled
+      );
     },
     getSubscriptionPrice(months) {
       if (months === 1) {
@@ -129,6 +133,7 @@ export default {
 
       if (
         this.profileHasMultimonthSubscription &&
+        this.profile.multiMonthSubscription[months] &&
         this.profile.multiMonthSubscription[months].discount
       ) {
         totalPrice = (

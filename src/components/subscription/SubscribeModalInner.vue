@@ -84,9 +84,16 @@ export default {
       this.$emit("subscribe", data);
     },
     getSubscriptionPrice(months) {
-      const discount =
-        parseFloat(this.profile.multiMonthSubscription[months].discount) ||
-        null;
+      let discount = null;
+      if (
+        this.profile.multiMonthSubscription &&
+        this.profile.multiMonthSubscription[months] &&
+        this.profile.multiMonthSubscription[months].discount
+      ) {
+        discount = parseFloat(
+          this.profile.multiMonthSubscription[months].discount
+        );
+      }
       let totalPrice = (this.basePrice * months).toFixed(2);
       if (discount) {
         totalPrice = (
