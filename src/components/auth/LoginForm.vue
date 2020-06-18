@@ -9,6 +9,7 @@
           type="text"
           placeholder="Code"
           v-model="otpCode"
+          ref="otpCode"
         />
         <div class="hidden error">Email or password incorrect</div>
         <button
@@ -275,6 +276,11 @@ export default {
     forgot() {
       this.$router.push("/forgot");
       this.$emit("goToForgot");
+    }
+  },
+  mounted() {
+    if (this.otpAuth && this.$refs.otpCode) {
+      this.$refs.otpCode.focus();
     }
   }
 };

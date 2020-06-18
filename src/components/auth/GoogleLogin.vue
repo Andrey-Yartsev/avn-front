@@ -45,7 +45,7 @@ export default {
         .then(() => {
           this.$emit("loginEnd");
           setTimeout(() => {
-            window.location.reload();
+            window.location.href = "/login";
           }, 100);
         })
         .catch(err => {
