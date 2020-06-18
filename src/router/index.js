@@ -50,7 +50,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAny,
     path: "/search/:type/:query",
     name: "Search",
     component: () =>

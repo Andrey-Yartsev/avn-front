@@ -363,6 +363,13 @@
       align-items: center;
       align-content: center;
     }
+
+    &.non-login-view {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        padding-right: 8px;
+        margin-left: 0;
+      }
+    }
   }
 
   .login,
@@ -795,7 +802,14 @@
   }
 
   .main-header_top & {
-    right: 90px;
+    right: 70px;
+
+    @include media-breakpoint-up($desktop-breakpoint) {
+      right: 32px;
+    }
+  }
+  .main-header_top.guest & {
+    right: 40px;
 
     @include media-breakpoint-up($desktop-breakpoint) {
       right: 32px;

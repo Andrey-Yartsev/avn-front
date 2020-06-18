@@ -578,7 +578,13 @@ video {
     .header-search & {
       @include media-breakpoint-down($desktop-breakpoint-dcrs) {
         top: 10px;
-        right: 53px;
+        right: 33px;
+      }
+    }
+    .header-search.non-login-view & {
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        top: 10px;
+        right: 5px;
       }
     }
 

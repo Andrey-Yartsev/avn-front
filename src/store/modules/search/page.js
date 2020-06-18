@@ -52,6 +52,7 @@ const actions = {
 };
 
 createRequestAction({
+  requestType: "any",
   prefix: "searchRequest",
   apiPath: "search/{type}",
   state,
@@ -64,6 +65,7 @@ createRequestAction({
   resultKey: "posts",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
+    options.query = options.query || {};
     options.query.query = params.query;
     options.query.offset = params.offset || 0;
     options.query.limit = params.limit || 5;

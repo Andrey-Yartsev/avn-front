@@ -39,6 +39,7 @@
 
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       display: flex;
+      position: relative;
     }
   }
 }

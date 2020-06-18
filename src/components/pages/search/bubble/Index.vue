@@ -1,6 +1,7 @@
 <template>
   <div
     class="b-search-form b-search-form_flex-align header-search"
+    :class="{ 'non-login-view': !isLogedIn }"
     v-click-outside="close"
   >
     <input
@@ -137,6 +138,9 @@ export default {
       } else {
         return `/search/${this.type}/${this.localQuery}`;
       }
+    },
+    isLogedIn() {
+      return this.$store.state.auth.user;
     }
   },
 
