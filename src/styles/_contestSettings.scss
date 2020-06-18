@@ -1,0 +1,46 @@
+.contest-settings {
+  .info {
+    width: 100%;
+    td, th {
+      padding: 3px;
+    }
+    th {
+      text-align: left;
+    }
+    .toggler {
+      text-align: right;
+      label {
+        display: inline-block;
+      }
+    }
+  }
+  .supporters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    table {
+      background-color: $primary-color-20;
+      td, th {
+        padding: 5px 10px;
+      }
+    }
+  }
+  .edit {
+    .form-group_with-label {
+      padding-bottom: 5px;
+    }
+    border-bottom: 1px solid rgba($gray, 0.2);
+  }
+  .shadow-block {
+    .table-wrapper {
+      padding-bottom: 10px;
+    }
+  }
+  .promote {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    .label {
+      min-width: 150px;
+    }
+  }
+}
