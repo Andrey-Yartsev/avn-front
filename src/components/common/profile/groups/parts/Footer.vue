@@ -88,22 +88,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.actions {
-  display: flex;
-  align-items: center;
-
-  &__btn {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-}
-.delete-card {
-  margin-left: auto;
-}
-.members {
-  cursor: pointer;
-}
-</style>

@@ -4,11 +4,7 @@
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
     <div v-else class="content">
-      <div
-        v-if="isPrivate"
-        class="viewSettings"
-        :class="{ mobile: $mq === 'mobile' }"
-      >
+      <div v-if="isPrivate" class="viewSettings">
         <button
           type="button"
           @click="newGroupHandler"
@@ -35,19 +31,17 @@
         </div>
       </div>
       <div class="profile-content">
-        <div class="exploreAllCollectionView">
-          <div class="explore">
-            <div class="explore__inside">
-              <div class="explore-wrapper groups">
-                <component
-                  :is="groupComponent"
-                  v-for="item in groups"
-                  :group="item"
-                  :key="item.id"
-                  from="profile/home"
-                  :isPrivate="isPrivate"
-                />
-              </div>
+        <div class="explore">
+          <div class="explore__inside">
+            <div class="explore-wrapper groups">
+              <component
+                :is="groupComponent"
+                v-for="item in groups"
+                :group="item"
+                :key="item.id"
+                from="profile/home"
+                :isPrivate="isPrivate"
+              />
             </div>
           </div>
         </div>

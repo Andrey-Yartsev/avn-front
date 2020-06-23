@@ -6,6 +6,10 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      // margin-top: 15px;
+      margin: 15px 10px 0 10px;
+    }
   }
   .buttonWrapper {
     display: flex !important;
@@ -24,6 +28,19 @@
     font-weight: 500;
     color: #909598;
   }
+  .explore {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      background-color: transparent;
+      box-shadow: none;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .groups {
+      @include media-breakpoint-down($desktop-breakpoint) {
+       grid-gap: 50px;
+      }
+    }
+  }
 }
 
 .groupItem {
@@ -31,14 +48,26 @@
   background-color: $white;
   overflow: hidden;
   border-radius: 10px;
+  
 
   &-header {
     width: 100%;
+    height: 250px;
     display: flex;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-flow: column nowrap;
+      height: auto;
+     }
+    
 
     .header-image {
       width: 30%;
       height: auto;
+      object-fit: cover;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 100%;
+        height: 250px;
+       }
     }
     .header-content {
       width: 70%;
@@ -46,16 +75,55 @@
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        width: 100%;
+        height: auto;
+        padding: 20px 5px
+       }
       &-settings {
         margin-top: auto;
         width: 100%;
-        // margin: auto -20px -20px -20px;
-        // padding: 20px;
-        // margin-bottom: -20px;
-        // background-color: $white;
+
+        .actions {
+          display: flex;
+          align-items: center;
+          @include media-breakpoint-down($desktop-breakpoint) {
+            justify-content: space-between;
+          }
+        
+          &__btn {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+          }
+        }
+        .delete-card {
+          margin-left: auto;
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-left: 0;
+            position: absolute;
+            left: 5px;
+            top: 18px;
+          }
+
+        }
+        .members {
+          cursor: pointer;
+        }
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: 20px;
+        }
+        .actions__btn {
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-left: 10px;
+          }
+        }
       }
       &-joinGroupContainer {
         margin-top: auto;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: 20px;
+        }
       }
       &-editButton {
         position: absolute;
