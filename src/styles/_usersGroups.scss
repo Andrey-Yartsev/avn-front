@@ -117,6 +117,12 @@
           @include media-breakpoint-down($desktop-breakpoint) {
             margin-left: 10px;
           }
+          cursor: pointer;
+          &.hover-highlight {
+            &:hover {
+              color: $primary-color;
+            }
+          }
         }
       }
       &-joinGroupContainer {

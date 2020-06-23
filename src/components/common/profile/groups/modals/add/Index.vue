@@ -24,34 +24,10 @@
         </button>
 
         <div class="addPost-header__controls">
-          <div class="btn-post" v-if="$mq === 'mobile'">
-            <div class="b-check-state b-check-state_post">
-              <label>
-                <input
-                  class="is-free-post"
-                  type="checkbox"
-                  v-model="isPublic"
-                />
-                <span class="b-check-state__icon icn-item icn-size_lg"></span>
-                <span class="b-check-state__text">Public</span>
-              </label>
-            </div>
-            <div class="b-check-state b-check-state_post">
-              <label>
-                <input
-                  class="is-free-post"
-                  type="checkbox"
-                  v-model="isActive"
-                />
-                <span class="b-check-state__icon icn-item icn-size_lg"></span>
-                <span class="b-check-state__text">Active</span>
-              </label>
-            </div>
-          </div>
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="notEhoughData || saving"
+            :disabled="isSaving || notEhoughData"
             @click.prevent="clickHandler"
           >
             {{ isNew ? "Create" : "Save" }}
@@ -153,7 +129,7 @@
             </span>
           </label>
           <template v-if="isExtended">
-            <div class="btn-post" v-if="$mq === 'desktop'">
+            <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
                   <input
@@ -166,7 +142,7 @@
                 </label>
               </div>
             </div>
-            <div class="btn-post" v-if="$mq === 'desktop'">
+            <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
                   <input

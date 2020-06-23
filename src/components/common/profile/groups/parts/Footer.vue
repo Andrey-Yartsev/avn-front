@@ -1,6 +1,6 @@
 <template>
   <div class="actions">
-    <span class=" actions__btn">
+    <span class="actions__btn">
       <span
         class="btn-icon icn-tips icn-item icn-size_md"
         v-tooltip="'Price'"
@@ -29,18 +29,25 @@
       ></span>
       {{ group.isActive ? "Active" : "Draft" }}
     </span>
-    <span class="actions__btn members" @click="showMembersModal">
+    <span
+      class="actions__btn hover-highlight members"
+      @click="showMembersModal"
+    >
       <span
         class="btn-icon icn-profile icn-item icn-size_md"
         v-tooltip="'Members'"
       ></span>
       {{ group.membersCount || 0 }}
     </span>
-    <span class="actions__btn members" @click="showMessageModal">
+    <span
+      class="actions__btn  hover-highlight message"
+      @click="showMessageModal"
+    >
       <span
-        class="btn-icon icn-message icn-item icn-size_md"
+        class="btn-icon  icn-item icn-size_md icn-message"
         v-tooltip="'Group message'"
       ></span>
+      Message
     </span>
     <button class="delete-card icn-item" @click="deleteGroup">
       <span class="actions__btn">

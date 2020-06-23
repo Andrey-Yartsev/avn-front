@@ -18,13 +18,13 @@
           class="header-return-btn go-back go-back_times"
           @click="close"
         >
-          <h1 class="category-name">{{ type }} group</h1>
+          <h1 class="category-name">Edit group</h1>
         </button>
         <div class="addPost-header__controls">
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged || isMediaLoading || notEhoughData"
+            :disabled="isMediaLoading || notEhoughData"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -121,7 +121,7 @@
             </span>
           </label>
           <template v-if="isExtended">
-            <div class="btn-post" v-if="$mq === 'desktop'">
+            <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
                   <input
@@ -134,7 +134,7 @@
                 </label>
               </div>
             </div>
-            <div class="btn-post" v-if="$mq === 'desktop'">
+            <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
                   <input
@@ -159,89 +159,6 @@
           Save
         </button>
       </div>
-
-      <!-- <div class="actions editMediaActions">
-        <div class="actions-controls alignFlexCenter">
-          <label
-            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
-            class="btn-post"
-            for="addFile"
-          >
-            <input
-              id="addFile"
-              type="file"
-              multiple
-              :accept="inputAccepts"
-              @change="addMediaFiles"
-            />
-            <span class="icn-media icn-item icn-size_lg"></span>
-            <span class="btn-post__text">
-              Add media
-            </span>
-          </label>
-          <template v-if="isExtended">
-            <div class="btn-post">
-              <div>Price</div>
-              <div
-                class="price-amount-field getPaidForm__field enabled-tooltip"
-              >
-                <input
-                  type="number"
-                  name="paidPrice"
-                  placeholder="Enter price"
-                  class="getPaidAmountPlaceholder"
-                  v-model="group.price"
-                  step="0.01"
-                  min="0"
-                />
-              </div>
-              <div class="b-check-state b-check-state_post alignFlexCenter">
-                <label>
-                  <input
-                    class="is-free-post"
-                    type="checkbox"
-                    v-model="group.isActive"
-                  />
-                  <span
-                    class="b-check-state__icon icn-item icn-size_lg ml-2"
-                  ></span>
-                  <span class="b-check-state__text">Active</span>
-                </label>
-              </div>
-              <div class="b-check-state b-check-state_post alignFlexCenter">
-                <label>
-                  <input
-                    class="is-free-post"
-                    type="checkbox"
-                    v-model="group.isPublic"
-                  />
-                  <span
-                    class="b-check-state__icon icn-item icn-size_lg ml-2"
-                  ></span>
-                  <span class="b-check-state__text">Public</span>
-                </label>
-              </div>
-            </div>
-
-            <input
-              id="addFile"
-              type="file"
-              multiple
-              :accept="inputAccepts"
-              @change="addMediaFiles"
-            />
-          </template>
-        </div>
-        <button
-          type="submit"
-          class="btn submit hidden-mobile"
-          :disabled="!isDataChanged || isMediaLoading"
-          @click.prevent="saveClickHandler"
-          v-if="$mq === 'desktop'"
-        >
-          Save
-        </button>
-      </div> -->
 
       <div class="loader-container loader-container_center" v-if="saving">
         <Loader
