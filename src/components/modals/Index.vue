@@ -60,6 +60,7 @@ import FreeAccessMediaListModal from "@/components/common/profile/media/parts/mo
 import ContestVotingModal from "@/components/pages/contest/VotingModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 import GroupMembersModal from "@/components/common/profile/groups/modals/GroupMembersModal";
+import GroupMembersMessageModal from "@/components/common/profile/groups/modals/GroupMembersMessageModal";
 
 export default {
   components: {
@@ -109,7 +110,8 @@ export default {
     ChatAttachmentsModal,
     FreeAccessMediaListModal,
     MagShippingModal,
-    GroupMembersModal
+    GroupMembersModal,
+    GroupMembersMessageModal
   },
   props: {
     hasLayout: {

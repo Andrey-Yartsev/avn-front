@@ -36,6 +36,12 @@
       ></span>
       {{ group.membersCount || 0 }}
     </span>
+    <span class="actions__btn members" @click="showMessageModal">
+      <span
+        class="btn-icon icn-message icn-item icn-size_md"
+        v-tooltip="'Group message'"
+      ></span>
+    </span>
     <button class="delete-card icn-item" @click="deleteGroup">
       <span class="actions__btn">
         <span class="icn-remove icn-item" v-tooltip="'Delete'" />
@@ -66,6 +72,14 @@ export default {
     showMembersModal() {
       this.$store.dispatch("modal/show", {
         name: "groupMembers",
+        data: {
+          group: this.group
+        }
+      });
+    },
+    showMessageModal() {
+      this.$store.dispatch("modal/show", {
+        name: "groupMembersMessage",
         data: {
           group: this.group
         }

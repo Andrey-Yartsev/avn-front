@@ -439,4 +439,10 @@
     }
   }
 
+  &-message {
+    &:after {
+      content: "\E615"
+    }
+  }
+
 }

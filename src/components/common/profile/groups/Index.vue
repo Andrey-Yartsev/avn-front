@@ -110,7 +110,14 @@ export default {
       return GroupItem;
     }
   },
-  watch: {},
+  watch: {
+    filterType() {
+      this.destroyObserver();
+      this.isInitFetch = true;
+      this.$store.commit("profile/groups/clearGroups", null, { root: true });
+      this.fetchData();
+    }
+  },
   methods: {
     open() {
       this.opened = true;

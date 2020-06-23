@@ -190,6 +190,10 @@ const modalTypes = [
   {
     storeName: "groupMembers",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "groupMembersMessage",
+    layoutOnlyModal: true
   }
 ];
 

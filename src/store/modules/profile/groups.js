@@ -140,6 +140,15 @@ const actions = {
     dispatch("_leaveGroup", productId).then(() => {
       commit("leaveGroup", productId);
     });
+  },
+  sendMessage({ dispatch }, data) {
+    return dispatch("_sendMessage", data);
+  },
+  getScheduleMessages({ dispatch }, groupId) {
+    return dispatch("_getScheduleMessages", groupId);
+  },
+  deleteScheduleMessage({ dispatch }, data) {
+    return dispatch("_deleteScheduleMessage", data);
   }
 };
 
@@ -199,6 +208,52 @@ createRequestAction({
 });
 
 createRequestAction({
+  prefix: "_sendMessage",
+  apiPath: "groups/{productId}/message",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(data, path) {
+    return path.replace(/{productId}/, data.productId);
+  },
+  paramsToOptions: function(params, options) {
+    options.data = params;
+    return options;
+  }
+});
+createRequestAction({
+  prefix: "_getScheduleMessages",
+  apiPath: "groups/{productId}/scheduleMessage",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
+  }
+});
+createRequestAction({
+  prefix: "_deleteScheduleMessages",
+  apiPath: "groups/{productId}/scheduleMessage/{messageId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  paramsToPath: function(data, path) {
+    let newPath = path.replace(/{productId}/, data.productId);
+    newPath = newPath.replace(/{messageId}/, data.messageId);
+    return newPath;
+  }
+});
+
+createRequestAction({
   prefix: "_deleteGroup",
   apiPath: "groups/{productId}",
   state,
@@ -212,44 +267,44 @@ createRequestAction({
   }
 });
 
-createRequestAction({
-  prefix: "_addMember",
-  apiPath: "groups/{productId}/members",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "PUT"
-  },
-  paramsToPath: function(params, path) {
-    return path.replace(/{productId}/, params.productId);
-  },
-  paramsToOptions: function(params, options) {
-    options.userId = params.userId;
-    return options;
-  }
-});
+// createRequestAction({
+//   prefix: "_addMember",
+//   apiPath: "groups/{productId}/members",
+//   state,
+//   mutations,
+//   actions,
+//   options: {
+//     method: "PUT"
+//   },
+//   paramsToPath: function(params, path) {
+//     return path.replace(/{productId}/, params.productId);
+//   },
+//   paramsToOptions: function(params, options) {
+//     options.userId = params.userId;
+//     return options;
+//   }
+// });
 
-createRequestAction({
-  prefix: "_removeMember",
-  apiPath: "groups/{productId}/members/{userId}",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "DELETE"
-  },
-  paramsToPath: function(params, path) {
-    let newPath;
-    newPath = path.replace(/{productId}/, params.productId);
-    newPath = path.replace(/{userId}/, params.userId);
-    return newPath;
-  },
-  paramsToOptions: function(params, options) {
-    options.userId = params.userId;
-    return options;
-  }
-});
+// createRequestAction({
+//   prefix: "_removeMember",
+//   apiPath: "groups/{productId}/members/{userId}",
+//   state,
+//   mutations,
+//   actions,
+//   options: {
+//     method: "DELETE"
+//   },
+//   paramsToPath: function(params, path) {
+//     let newPath;
+//     newPath = path.replace(/{productId}/, params.productId);
+//     newPath = path.replace(/{userId}/, params.userId);
+//     return newPath;
+//   },
+//   paramsToOptions: function(params, options) {
+//     options.userId = params.userId;
+//     return options;
+//   }
+// });
 
 createRequestAction({
   prefix: "_joinGroup",
