@@ -11,6 +11,9 @@
         <div class="header-content-description" v-html="group.description" />
         <div v-if="isAuthor" class="header-content-settings">
           <Footer :group="group" />
+          <div class="header-content-editButton" @click="openEditModal">
+            Edit
+          </div>
         </div>
         <div v-else class="header-content-joinGroupContainer">
           <button
@@ -88,6 +91,14 @@ export default {
               this.group.productId
             );
           }
+        }
+      });
+    },
+    openEditModal() {
+      this.$store.dispatch("modal/show", {
+        name: "editGroup",
+        data: {
+          group: this.group
         }
       });
     }

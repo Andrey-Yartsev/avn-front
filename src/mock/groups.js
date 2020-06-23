@@ -2,8 +2,7 @@ export default [
   {
     productId: 1316,
     title: "123 sodfsdf ",
-    description:
-      "fgdfgdfgfdg sfsdfs sdfksjadfls sfsdfsdf sdflksdfs sdfsdf sdfsdfsfs",
+    description: "123",
     media: [
       {
         id: 188,

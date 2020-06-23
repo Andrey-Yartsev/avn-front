@@ -17,7 +17,7 @@
           <EditGroup
             :initialExpanded="true"
             :close="close"
-            :post="post"
+            :data="group"
             type="edit"
             where="modal"
             ref="editGroup"
@@ -30,7 +30,17 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import EditGroup from "../add/Index";
+import EditGroup from "../edit/Index";
+
+// const InitData = {
+//   productId: null,
+//   title: "",
+//   description: "",
+//   media: [],
+//   price: "",
+//   isActive: false,
+//   isPublic: false
+// };
 
 export default {
   name: "EditGroupModal",
@@ -38,12 +48,21 @@ export default {
     Modal,
     EditGroup
   },
+  // data() {
+  //   return {
+  //     group: { ...InitData }
+  //   };
+  // },
   computed: {
-    post() {
+    group() {
       return this.$store.state.modal.editGroup.data.group;
     }
   },
   methods: {
+    // init() {},
+    // clear() {
+    //   this.group = { ...InitData };
+    // },
     close() {
       if (this.$refs.editGroup.uploadInProgress) {
         this.$store.dispatch("modal/show", {
@@ -60,5 +79,13 @@ export default {
       this.$store.dispatch("modal/hide", { name: "editGroup" });
     }
   }
+  // mounted() {
+  //   this.init();
+  //   console.log("mounted");
+  // },
+  // beforeDestroy() {
+  //   this.clear();
+  //   console.log("before destroy");
+  // }
 };
 </script>

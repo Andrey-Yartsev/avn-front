@@ -24,7 +24,7 @@
           <button
             type="submit"
             class="btn submit sm"
-            :disabled="!isDataChanged || isMediaLoading"
+            :disabled="!isDataChanged || isMediaLoading || notEhoughData"
             @click.prevent="saveClickHandler"
           >
             Save
@@ -84,8 +84,101 @@
           </Draggable>
         </div>
       </div>
-      <div class="actions editMediaActions">
+
+      <div class="actions">
+        <div class=" b-check-state_full-width b-check-state_price">
+          <div class="btn-post">
+            <div>Price</div>
+            <div class="price-amount-field getPaidForm__field enabled-tooltip">
+              <input
+                type="number"
+                name="paidPrice"
+                placeholder="Enter price"
+                class="getPaidAmountPlaceholder"
+                v-model="group.price"
+                step="0.01"
+                min="0"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="actions-controls">
+          <label
+            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
+            class="btn-post"
+            for="addFile"
+          >
+            <input
+              id="addFile"
+              type="file"
+              multiple
+              :accept="inputAccepts"
+              @change="addMediaFiles"
+            />
+            <span class="icn-media icn-item icn-size_lg"></span>
+            <span class="btn-post__text">
+              Add media
+            </span>
+          </label>
+          <template v-if="isExtended">
+            <div class="btn-post" v-if="$mq === 'desktop'">
+              <div class="b-check-state b-check-state_post">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="group.isPublic"
+                  />
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span class="b-check-state__text">Public</span>
+                </label>
+              </div>
+            </div>
+            <div class="btn-post" v-if="$mq === 'desktop'">
+              <div class="b-check-state b-check-state_post">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="group.isActive"
+                  />
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span class="b-check-state__text">Active</span>
+                </label>
+              </div>
+            </div>
+          </template>
+        </div>
+        <button
+          type="submit"
+          class="btn submit hidden-mobile"
+          :disabled="isMediaLoading || notEhoughData"
+          @click.prevent="saveClickHandler"
+          v-if="$mq === 'desktop'"
+        >
+          Save
+        </button>
+      </div>
+
+      <!-- <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
+          <label
+            :class="['add-media-input', { disabled: cantAddMoreMedia }]"
+            class="btn-post"
+            for="addFile"
+          >
+            <input
+              id="addFile"
+              type="file"
+              multiple
+              :accept="inputAccepts"
+              @change="addMediaFiles"
+            />
+            <span class="icn-media icn-item icn-size_lg"></span>
+            <span class="btn-post__text">
+              Add media
+            </span>
+          </label>
           <template v-if="isExtended">
             <div class="btn-post">
               <div>Price</div>
@@ -107,7 +200,7 @@
                   <input
                     class="is-free-post"
                     type="checkbox"
-                    v-model="group.active"
+                    v-model="group.isActive"
                   />
                   <span
                     class="b-check-state__icon icn-item icn-size_lg ml-2"
@@ -120,12 +213,12 @@
                   <input
                     class="is-free-post"
                     type="checkbox"
-                    v-model="group.private"
+                    v-model="group.isPublic"
                   />
                   <span
                     class="b-check-state__icon icn-item icn-size_lg ml-2"
                   ></span>
-                  <span class="b-check-state__text">Private</span>
+                  <span class="b-check-state__text">Public</span>
                 </label>
               </div>
             </div>
@@ -148,7 +241,8 @@
         >
           Save
         </button>
-      </div>
+      </div> -->
+
       <div class="loader-container loader-container_center" v-if="saving">
         <Loader
           :fullscreen="false"
@@ -182,8 +276,8 @@ const InitialState = {
     description: "",
     image: "",
     price: "",
-    active: false,
-    private: false
+    isActive: false,
+    isPublic: false
   },
   groupSnapshot: null,
   saving: false,
@@ -244,12 +338,6 @@ export default {
       }
       return this.preloadedMedias.some(item => !item.processId);
     },
-    isDataChanged() {
-      if (this.type === "create") {
-        return this.isRequiredFieldsFilled;
-      }
-      return JSON.stringify(this.group) !== JSON.stringify(this.group);
-    },
     isPriceSetLimit() {
       return +this.media.price > 0 && +this.media.price <= 500;
     },
@@ -263,9 +351,23 @@ export default {
       return !!(
         this.group.title.trim().length && this.group.description.trim().length
       );
+    },
+    cantAddMoreMedia() {
+      return this.preloadedMedias.length >= 1;
+    },
+    notEhoughData() {
+      if (this.preloadedMedias.filter(i => !i.processId).length) {
+        return true;
+      } else if (
+        !this.preloadedMedias.length ||
+        (!this.group.description.trim() || !this.group.title.trim())
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
-  watch: {},
   methods: {
     getConvertedText(text) {
       const pattern =
@@ -283,6 +385,16 @@ export default {
       const { description, ...rest } = this.data;
       this.group = rest;
       this.group.description = this.getConvertedText(description);
+      this.preloadedMedias = (this.group.media || []).map(media => ({
+        alreadySaved: true,
+        fileContent: media.thumb && media.thumb.source,
+        id: media.id,
+        processId: media.id,
+        mediaType: media.type,
+        preview: media.thumb && media.thumb.source,
+        thumbs: media.thumbs,
+        thumbId: media.thumbId
+      }));
       this.$refs.textarea.value = this.getConvertedText(description);
     },
     clearData() {
@@ -302,10 +414,12 @@ export default {
     },
     getGroupData() {
       const data = {
-        group: {
-          ...this.group
-        }
+        ...this.group,
+        mediaFiles: (this.preloadedMedias || []).map(item => ({
+          id: item.processId
+        }))
       };
+      delete data.media;
 
       return data;
     },

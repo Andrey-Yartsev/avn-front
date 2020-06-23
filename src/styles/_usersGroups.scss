@@ -57,6 +57,13 @@
       &-joinGroupContainer {
         margin-top: auto;
       }
+      &-editButton {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        color: $secondary-color;
+        cursor: pointer;
+      }
     }
   }
 

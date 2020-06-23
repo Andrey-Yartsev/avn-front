@@ -29,13 +29,18 @@
       ></span>
       {{ group.isActive ? "Active" : "Draft" }}
     </span>
-    <span class="actions__btn">
+    <span class="actions__btn members">
       <span
         class="btn-icon icn-profile icn-item icn-size_md"
         v-tooltip="'Members'"
       ></span>
       {{ group.membersCount || 0 }}
     </span>
+    <button class="delete-card icn-item" @click="deleteGroup">
+      <span class="actions__btn">
+        <span class="icn-remove icn-item" v-tooltip="'Delete'" />
+      </span>
+    </button>
   </div>
 </template>
 
@@ -53,6 +58,11 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    deleteGroup() {
+      this.$store.dispatch("profile/groups/deleteGroup", this.group.productId);
+    }
   }
 };
 </script>
@@ -67,5 +77,11 @@ export default {
     align-items: center;
     margin-left: 20px;
   }
+}
+.delete-card {
+  margin-left: auto;
+}
+.members {
+  cursor: pointer;
 }
 </style>

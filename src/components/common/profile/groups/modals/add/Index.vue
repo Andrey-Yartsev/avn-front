@@ -162,7 +162,7 @@
                     v-model="isPublic"
                   />
                   <span class="b-check-state__icon icn-item icn-size_lg"></span>
-                  <span class="b-check-state__text">Public group</span>
+                  <span class="b-check-state__text">Public</span>
                 </label>
               </div>
             </div>
