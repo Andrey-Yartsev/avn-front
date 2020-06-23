@@ -267,6 +267,21 @@
                 />
               </div>
             </div>
+            <div>
+              <div class="b-check-state b-check-state_post alignFlexCenter">
+                <label>
+                  <input
+                    class="is-free-post"
+                    type="checkbox"
+                    v-model="media.canDownload"
+                  />
+                  <span class="b-check-state__icon icn-item icn-size_lg"></span>
+                  <span class="b-check-state__text"
+                    >Allow to be downloaded</span
+                  >
+                </label>
+              </div>
+            </div>
           </template>
         </div>
         <button
@@ -321,7 +336,8 @@ const InitialState = {
     thumbs: [],
     removeVideoPreview: false,
     pinned: false,
-    categories: []
+    categories: [],
+    canDownload: false
   },
   saving: false,
   defaultPriceLimit: 500,
@@ -398,7 +414,8 @@ export default {
         this.preloadedVideoMedias.length ||
         this.media.removeVideoPreview ||
         this.$props.post.categories.length !== this.media.categories.length ||
-        this.$props.post.subscribersFree != this.media.subscribersFree
+        this.$props.post.subscribersFree != this.media.subscribersFree ||
+        this.$props.post.canDownload !== this.media.canDownload
       );
     },
     isMaxCategoriesLimitSelected() {
@@ -513,7 +530,8 @@ export default {
         pinned,
         subscribersFree,
         media: { thumbs, thumbId },
-        categories
+        categories,
+        canDownload
       } = this.$props.post;
       this.media.title = title;
       this.media.text = this.getConvertedText(text);
@@ -523,6 +541,7 @@ export default {
       this.media.thumbId = thumbId;
       this.media.thumbs = thumbs;
       this.media.pinned = pinned || false;
+      this.media.canDownload = canDownload;
       this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
     },
@@ -538,6 +557,7 @@ export default {
       this.media.removeVideoPreview = false;
       this.media.pinned = false;
       this.media.categories = [];
+      this.media.canDownload = false;
     },
     saveClickHandler() {
       if (this.overMaxPrice()) {

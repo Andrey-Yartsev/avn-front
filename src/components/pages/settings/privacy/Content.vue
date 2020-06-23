@@ -12,27 +12,192 @@
         Privacy Settings
       </h1>
       <div
+        v-if="isMonetizedUser"
         class="form-title private-switcher-block private-profile-block border-top"
       >
         <div class="inner">
           <span class="semi-transparent">
             Private Profile
-            <p class="subtext">Only subscribers will see your posts</p>
+            <p class="subtext">
+              Prohibit non-subscribers from seeing any content whatsoever.
+              Including free/public posts. Please note this is not recommended
+              for content creators.
+            </p>
           </span>
           <label class="toggle-element">
             <input
               type="checkbox"
               name="isPrivate"
               value="true"
-              v-model="localUser.isPrivate"
+              v-model="localUser.privacy.isPrivate"
             />
             <span class="toggle-element_switcher"></span>
           </label>
         </div>
       </div>
 
-      <div class="watermarks-settings">
-        <div class="form-title border-top border-top-mobile">
+      <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Followers-Only Private Profile
+            <p class="subtext">
+              Prohibit non-followers from seeing any content whatsoever.
+              Including free/public posts. This will require anyone wanting to
+              see your public/free posts on your timeline to be following you.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="forFollowersOnly"
+              value="true"
+              v-model="localUser.privacy.forFollowersOnly"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Profile Rank
+            <p class="subtext">
+              Display current profile rank on public profile.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="showRankCount"
+              value="true"
+              v-model="localUser.privacy.showRankCount"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Subscribers
+            <p class="subtext">
+              Display active subscribers count on public profile.
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="showSubscribersCount"
+              value="true"
+              v-model="localUser.privacy.showSubscribersCount"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        v-if="isMonetizedUser"
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Allow Media Downloads in Chat Messages
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="allowDownloadChatContent"
+              value="true"
+              v-model="localUser.privacy.allowDownloadChatContent"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="form-title private-switcher-block private-profile-block border-top"
+      >
+        <div class="inner padding-bottom">
+          <span class="semi-transparent">
+            Marketing Preferences
+            <p class="subtext">
+              Allow my avatar & public content to be used for marketing purposes
+              outside the AVN Stars Platform
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="allowMarketingPreferences"
+              value="true"
+              v-model="localUser.privacy.allowMarketingPreferences"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+        <div class="shadow-block negative-margin-15">
+          <div class="container">
+            <div
+              class="form-group checkbox-group"
+              :class="{
+                disabled: !localUser.privacy.allowMarketingPreferences
+              }"
+            >
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="avnCom"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.avn"
+                  />
+                  <span class="label icn-item"
+                    >AVN.com / AVN Email Communications</span
+                  >
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="avnMagazine"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.avnMagazine"
+                  />
+                  <span class="label icn-item">AVN Magazine</span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="thirdParty"
+                    value="true"
+                    v-model="localUser.privacy.marketingPreferences.thirdParty"
+                  />
+                  <span class="label icn-item">Third Party</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="isMonetizedUser" class="watermarks-settings">
+        <div class="form-title border-top">
           <div class="inner">
             <span class="semi-transparent">
               Watermarks media
@@ -68,11 +233,26 @@
                   >
                 </div>
               </label>
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasWatermarkStream"
+                    value="true"
+                    v-model="localUser.hasWatermarkStream"
+                  />
+                  <span class="label icn-item"
+                    >Enable watermarks for stream</span
+                  >
+                </div>
+              </label>
 
               <div
                 class="form-group form-group_with-label pb-reset"
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
               >
                 <label class="form-group-inner">
@@ -89,7 +269,9 @@
               </div>
               <WatermarkImageUploader
                 v-if="
-                  localUser.hasWatermarkPhoto || localUser.hasWatermarkVideo
+                  localUser.hasWatermarkPhoto ||
+                    localUser.hasWatermarkVideo ||
+                    localUser.hasWatermarkStream
                 "
                 @change="watermarkImageChange"
                 @remove="watermarkImageRemove"
@@ -99,7 +281,7 @@
           </div>
         </div>
       </div>
-      <div class="watermarks-settings">
+      <div v-if="isMonetizedUser" class="watermarks-settings">
         <div class="form-title border-top border-top-mobile">
           <div class="inner">
             <span class="semi-transparent">
@@ -114,7 +296,7 @@
           <div class="container">
             <div class="form-group form-group_with-label radio-group">
               <div class="form-group-inner">
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -126,7 +308,7 @@
                     All
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -138,7 +320,7 @@
                     Subscribers
                   </span>
                 </label>
-                <label class="radio-wrapper icn-item m-inline">
+                <label class="radio-wrapper icn-item m-inline m-top-10">
                   <input
                     type="radio"
                     name="viewFavoriteAccess"
@@ -148,6 +330,18 @@
                   />
                   <span class="label">
                     Non-Subscribers
+                  </span>
+                </label>
+                <label class="radio-wrapper icn-item m-inline m-top-10">
+                  <input
+                    type="radio"
+                    name="viewFavoriteAccess"
+                    value="none"
+                    v-model="localUser.viewFavoriteAccess"
+                    v-validate="'required'"
+                  />
+                  <span class="label">
+                    None
                   </span>
                 </label>
               </div>
@@ -174,6 +368,29 @@
               name="isStreamsTweet"
               value="false"
               v-model="localUser.isMsgFromSubscribersOnly"
+            />
+            <span class="toggle-element_switcher"></span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        v-if="isMonetizedUser"
+        class="form-title tweet-posts-block border-top"
+      >
+        <div class="inner">
+          <span class="semi-transparent">
+            Blur messages
+            <p class="subtext">
+              Blur incoming media content in chat messages
+            </p>
+          </span>
+          <label class="toggle-element">
+            <input
+              type="checkbox"
+              name="blurIncomingMessages"
+              value="false"
+              v-model="localUser.blurIncomingMessages"
             />
             <span class="toggle-element_switcher"></span>
           </label>

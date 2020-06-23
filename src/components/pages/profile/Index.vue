@@ -35,8 +35,17 @@
               <span class="icn-item icn-block"></span>
             </div>
           </div>
-          <span class="user-login reset-ml">
+          <span class="user-login reset-ml user-login-container">
             <a>{{ profile.username }}</a>
+            <span v-if="showProfileRank" class="user-login user-login-rating">
+              # {{ getModelRank }}
+              <!-- # {{ profile.privacy.categoryRankCount }} -->
+              <span
+                v-if="isOwner(profile.id)"
+                class="icn-item icn-locked icn-size_sm"
+                :class="{ locked: !profile.privacy.showRankCount }"
+              />
+            </span>
           </span>
         </div>
         <component
@@ -44,63 +53,65 @@
           class="profile-desc"
           ref="description"
         >
-          <p class="profile-text" v-if="profile.about">
-            <span v-html="trunc(profile.about)"></span>
-            <span
-              class="collapse-text"
-              v-if="profile.about.length > collapseLimit"
-            >
-              <a href="#" @click.prevent="collapsed = !collapsed">{{
-                collapsed ? "Read more" : "Collapse"
-              }}</a>
-            </span>
-          </p>
-          <a
-            v-if="profile.twitterUsername && !profile.isPrivateTwitter"
-            :href="'https://twitter.com/' + profile.twitterUsername"
-            class="profile-twitter-link"
-            target="_blank"
-            rel="nofollow"
-            >twitter.com/{{ profile.twitterUsername }}</a
-          >
-          <div class="profile-offer" v-if="showProfileOffer">
-            <button
-              class="btn border alt btn_fix-width-lg"
-              @click="buySnapchat"
-              v-if="snapchat && snapchat.isPaid === false"
-            >
-              Premium Snapchat ${{ snapchat.price }}
-            </button>
-            <div
-              class="profile-offer__chat"
-              v-if="snapchat && snapchat.isPaid === true"
-            >
-              <div class="user-login reset-ml">
-                Snapchat:
-                <span class="name">{{ snapchat.content }}</span>
-              </div>
-              <div
-                class="profile-offer__form"
-                v-if="snapchat && snapchat.isCompleted === false"
+          <template v-if="!isBlockedOn">
+            <p class="profile-text" v-if="profile.about">
+              <span v-html="trunc(profile.about)"></span>
+              <span
+                class="collapse-text"
+                v-if="profile.about.length > collapseLimit"
               >
-                <input
-                  type="text"
-                  v-model="mysnapchat"
-                  class="rounded"
-                  placeholder="Enter your snapchat"
-                />
-                <button
-                  class="btn"
-                  @click="sendMySnapchat"
-                  :disabled="!mysnapchat.trim()"
+                <a href="#" @click.prevent="collapsed = !collapsed">{{
+                  collapsed ? "Read more" : "Collapse"
+                }}</a>
+              </span>
+            </p>
+            <a
+              v-if="profile.twitterUsername && !profile.isPrivateTwitter"
+              :href="'https://twitter.com/' + profile.twitterUsername"
+              class="profile-twitter-link"
+              target="_blank"
+              rel="nofollow"
+              >twitter.com/{{ profile.twitterUsername }}</a
+            >
+            <div class="profile-offer" v-if="showProfileOffer">
+              <button
+                class="btn border alt btn_fix-width-lg"
+                @click="buySnapchat"
+                v-if="snapchat && snapchat.isPaid === false"
+              >
+                Premium Snapchat ${{ snapchat.price }}
+              </button>
+              <div
+                class="profile-offer__chat"
+                v-if="snapchat && snapchat.isPaid === true"
+              >
+                <div class="user-login reset-ml">
+                  Snapchat:
+                  <span class="name">{{ snapchat.content }}</span>
+                </div>
+                <div
+                  class="profile-offer__form"
+                  v-if="snapchat && snapchat.isCompleted === false"
                 >
-                  Send
-                </button>
+                  <input
+                    type="text"
+                    v-model="mysnapchat"
+                    class="rounded"
+                    placeholder="Enter your snapchat"
+                  />
+                  <button
+                    class="btn"
+                    @click="sendMySnapchat"
+                    :disabled="!mysnapchat.trim()"
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <FollowersCounter :profile="profile" />
-          <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+            <FollowersCounter :profile="profile" />
+            <Highlights :userId="profile.id" v-if="$mq === 'desktop'" />
+          </template>
           <div class="mark-line" v-if="$mq === 'desktop'"></div>
           <Footer class="site-footer_sidebar" v-if="$mq === 'desktop'" />
         </component>
@@ -142,16 +153,26 @@
         <div class="container">
           <div class="row">
             <div :class="['content-col', { 'single-col': !useMediumPostView }]">
+              <!-- <BlockedBlock v-if="true" :profile="profile" /> -->
+              <BlockedBlock v-if="isBlockedOn" :profile="profile" />
               <PrivateBlock
-                v-if="!isOwner(profile.id) && profile.isPrivatePost"
+                v-else-if="!isOwner(profile.id) && profile.isPrivatePost"
+                :profile="profile"
+              />
+              <FollowersOnlyBlock
+                v-else-if="
+                  !isOwner(profile.id) &&
+                    !profile.isPrivatePost &&
+                    (profile.privacy.forFollowersOnly && !profile.followedBy)
+                "
                 :profile="profile"
               />
               <LinksPage
-                v-if="pageName === 'links'"
+                v-else-if="pageName === 'links' && !profile.isPrivatePost"
                 :private="isOwner(profile.id)"
               />
               <MediaPage
-                v-else-if="pageName === 'media'"
+                v-else-if="pageName === 'media' && !profile.isPrivatePost"
                 :private="isOwner(profile.id)"
               />
               <GroupsPage
@@ -245,6 +266,8 @@ import FollowersCounter from "@/components/common/profile/followersCounter/Index
 import ProfileBackground from "@/components/common/profile/background/Index";
 import ProfileActions from "@/components/common/profile/actions/Index";
 import PrivateBlock from "@/components/common/profile/privateBlock/Index";
+import FollowersOnlyBlock from "@/components/common/profile/followersOnlyBlock/Index";
+import BlockedBlock from "@/components/common/profile/blockedBlock/Index";
 import Highlights from "@/components/common/profile/highlights/Index";
 import Wsp from "@/mixins/wsp";
 import Footer from "@/components/footer/Index.vue";
@@ -278,6 +301,8 @@ export default {
     PostSmall,
     PostMedium,
     PrivateBlock,
+    FollowersOnlyBlock,
+    BlockedBlock,
     Highlights,
     LinkPost,
     LinksPage,
@@ -380,6 +405,37 @@ export default {
     },
     showProfileOffer() {
       return this.snapchat && !this.isOwner(this.profile.id);
+    },
+    showProfileRank() {
+      // if (!this.isAdmin) {
+      //   return false;
+      // }
+      if (!this.profile.privacy.categoryRankCount) {
+        return false;
+      }
+      return (
+        this.isOwner(this.profile.id) ||
+        (this.profile.privacy && this.profile.privacy.showRankCount)
+      );
+    },
+    isAdmin() {
+      return (
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.privacy.isAdmin
+      );
+    },
+    getModelRank() {
+      if (
+        !this.$store.state.auth.user ||
+        this.$store.state.auth.user.categoryView === 1
+      ) {
+        return this.profile.privacy.globalRankCount;
+      }
+      return this.profile.privacy.categoryRankCount;
+    },
+    isBlockedOn() {
+      return !this.isOwner(this.profile.id) && this.profile.privacy.isBlockedOn;
+      // return !this.isOwner(this.profile.id) && true;
     }
   },
   watch: {

@@ -192,6 +192,12 @@
             </div>
           </div>
         </div>
+        <Discount v-if="isFullyMonetizedUser" />
+        <MultiMonthDiscount
+          v-if="isFullyMonetizedUser"
+          :localUser="localUser"
+        />
+        <UserDiscounts v-if="isFullyMonetizedUser" />
       </template>
 
       <DeleteRestore v-else />
@@ -335,16 +341,23 @@ import TextareaAutosize from "@/components/common/TextareaAutosize";
 import Form from "@/mixins/form";
 import DeleteRestore from "../DeleteRestore";
 import timezones from "@/utils/timezones";
+import Discount from "./Discount";
+import MultiMonthDiscount from "./MultiMonthDiscount";
+import UserDiscounts from "./UserDiscounts";
+import User from "@/mixins/user";
 
 export default {
   name: "ProfileSettingsContent",
 
-  mixins: [Common, Form],
+  mixins: [Common, Form, User],
 
   components: {
     ColorSelect,
     TextareaAutosize,
-    DeleteRestore
+    DeleteRestore,
+    Discount,
+    MultiMonthDiscount,
+    UserDiscounts
   },
 
   methods: {

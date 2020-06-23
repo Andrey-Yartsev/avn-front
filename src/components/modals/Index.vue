@@ -44,6 +44,7 @@ import ChatMessagePayConfirmModal from "@/components/chat/ChatMessagePayConfirm"
 import BuySnapchatConfirmModal from "@/components/pages/profile/BuySnapchatConfirm";
 import TipPayConfirmModal from "@/components/common/tip/TipPayConfirm";
 import PostLikesModal from "@/components/post/parts/likesModal/Index";
+import ClipLikesModal from "@/components/common/profile/media/parts/modals/clipLikesModal/Index";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
@@ -91,6 +92,7 @@ export default {
     BuySnapchatConfirmModal,
     TipPayConfirmModal,
     PostLikesModal,
+    ClipLikesModal,
     LoginModal,
     SignupModal,
     EditPostModal,

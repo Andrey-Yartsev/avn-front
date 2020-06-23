@@ -5,6 +5,7 @@
     :withFontSizeController="false"
     :recipientsCount="recipientsCount"
     :confirmation="toAll"
+    :multipleMedia="true"
   />
 </template>
 

@@ -3,6 +3,7 @@
 import BrowserStore from "store";
 import UserApi from "@/api/user";
 import Router from "@/router";
+import Google from "@/utils/google";
 
 const state = {
   loading: false,
@@ -113,6 +114,12 @@ const actions = {
 
   setOtpAuth({ commit }, flag) {
     commit("setOtpAuth", flag);
+  },
+
+  googleLogin({ dispatch }, token) {
+    return Google.getAuthToken(token).then(r => {
+      dispatch("setToken", r.accessToken);
+    });
   }
 };
 

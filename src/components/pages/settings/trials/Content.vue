@@ -22,7 +22,7 @@
       <div class="container" v-if="!isUnique">
         <div class="form-group form-group_with-label">
           <label class="form-group-inner">
-            <span class="label">Person amount</span>
+            <span class="label">Max # of Users</span>
             <div class="row">
               <div class="col-1-2">
                 <input
@@ -41,7 +41,7 @@
       <div class="container">
         <div class="form-group form-group_with-label">
           <label class="form-group-inner">
-            <span class="label">Free trail months amount</span>
+            <span class="label"># of Free Trial Months</span>
             <div class="row">
               <div class="col-1-2">
                 <div class="select-wrapper">

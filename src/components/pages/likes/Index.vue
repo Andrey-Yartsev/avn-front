@@ -34,6 +34,13 @@
               >Followers {{ profile.followersCount }}</router-link
             >
             <router-link
+              to="/subscribers"
+              class="content-nav__item"
+              v-if="isOwner(profile.id)"
+            >
+              Subscribers {{ profile.privacy.subscribersCount }}
+            </router-link>
+            <router-link
               to="/likes"
               class="content-nav__item"
               v-if="isOwner(profile.id)"

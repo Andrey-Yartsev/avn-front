@@ -542,7 +542,11 @@ export default {
     },
     sent() {
       this.sending = false;
-      this.goTo("/chat");
+      if (this.selected.length === 1) {
+        this.goTo("/chat/" + this.selected[0]);
+      } else {
+        this.goTo("/chat");
+      }
     },
     reset() {
       this.searchQuery = "";

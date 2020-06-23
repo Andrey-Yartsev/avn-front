@@ -52,7 +52,7 @@
           />
           <div class="statusWrapper contentCenter">
             <span
-              v-if="post.pinned"
+              v-if="showPin && post.pinned"
               class="icn-pin icn-item icn-size_md"
             ></span>
           </div>
@@ -203,7 +203,11 @@ export default {
       type: Boolean,
       default: false
     },
-    isPrivate: Boolean
+    isPrivate: Boolean,
+    showPin: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     actionPrefix() {

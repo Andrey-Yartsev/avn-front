@@ -220,12 +220,34 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/settings/studioAccess",
+    name: "SettingsStudioAccessPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsStudioAccessPage" */ "@/components/pages/settings/studioAccess/Index.vue"),
+    meta: {
+      title: "Studio Access",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/settings/magazine",
     name: "SettingsMagazinePage",
     component: () =>
       import(/* webpackChunkName: "SettingsMagazinePage" */ "@/components/pages/settings/magazine/Index.vue"),
     meta: {
       title: "Magazine",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/welcomeMessages",
+    name: "SettingsWelcomeMessagesPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsWelcomeMessagesPage" */ "@/components/pages/settings/welcomeMessages/Index.vue"),
+    meta: {
+      title: "Welcome Messages",
       cssName: "settings"
     }
   }

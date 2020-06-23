@@ -10,6 +10,33 @@
       <div class="over-container">
         <Navigate />
         <div
+          class="stories-wrapper stories-all"
+          v-if="stories.length || streamLives.length"
+        >
+          <div class="storyCollectionView storyCollectionView_tape">
+            <div class="stories-group__outer">
+              <div class="stories-group">
+                <perfect-scrollbar
+                  class="stories-group__inner"
+                  @ps-scroll-x="scrollFunction"
+                >
+                  <TopLivesList
+                    :lives="streamLives"
+                    v-if="streamLives.length"
+                  />
+                  <StorySmall
+                    v-for="post in stories"
+                    :post="post"
+                    :key="post.id"
+                    from="explore"
+                    :stories="stories"
+                  />
+                </perfect-scrollbar>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
           v-if="page === 'clips'"
           class="stories-wrapper stories-all clipCategories"
         >
@@ -33,30 +60,6 @@
               Best Selling
             </router-link>
           </span>
-        </div>
-        <div
-          class="stories-wrapper stories-all"
-          v-if="stories.length || streamLives.length"
-        >
-          <div class="storyCollectionView storyCollectionView_tape">
-            <div class="stories-group__outer">
-              <div class="stories-group">
-                <TopLives :lives="streamLives" v-if="streamLives.length" />
-                <perfect-scrollbar
-                  class="stories-group__inner"
-                  @ps-scroll-x="scrollFunction"
-                >
-                  <StorySmall
-                    v-for="post in stories"
-                    :post="post"
-                    :key="post.id"
-                    from="explore"
-                    :stories="stories"
-                  />
-                </perfect-scrollbar>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="explore">
           <div
@@ -91,6 +94,7 @@
                     :post="post"
                     :key="post.id"
                     from="explore"
+                    :showPin="false"
                   />
                 </template>
                 <template v-else>
@@ -160,6 +164,7 @@
 import MobileHeader from "@/components/header/Mobile";
 import Footer from "@/components/footer/Index.vue";
 import TopLives from "@/components/common/topLives/Index";
+import TopLivesList from "@/components/common/topLives/livesList";
 import PostSmall from "@/components/post/view/SmallView";
 import PostMedium from "@/components/post/view/MediumView";
 import StoryMedium from "@/components/story/MediumView";
@@ -177,6 +182,8 @@ import uniqBy from "lodash.uniqby";
 import GenderFilter from "@/components/common/GenderFilter";
 import MediaMedium from "@/components/common/profile/media/views/MediaMedium";
 import MediaSmall from "@/components/common/profile/media/views/MediaSmall";
+import BrowserStore from "store";
+// import mockStories from "@/mock/stories";
 
 export default {
   name: "Explore",
@@ -184,6 +191,7 @@ export default {
     MobileHeader,
     Footer,
     TopLives,
+    TopLivesList,
     Navigate,
     PostSmall,
     PostMedium,
@@ -216,6 +224,7 @@ export default {
       return this.$store.state.explore.posts;
     },
     stories() {
+      // return mockStories;
       return this.$store.state.stories.explore.posts;
     },
     lives() {
@@ -228,7 +237,7 @@ export default {
       return this.$store.state.topModels.posts;
     },
     storiesLoading() {
-      return this.$store.state.stories.loading;
+      return this.$store.state.stories.explore.loading;
     },
     storiesAllDataReceived() {
       return this.$store.state.stories.allDataReceived;
@@ -419,6 +428,12 @@ export default {
       if (newValue !== undefined && oldValue !== undefined) {
         this.init();
       }
+    }
+  },
+  mounted() {
+    const magazineRedirect = BrowserStore.get("magazineRedirect");
+    if (magazineRedirect && this.user) {
+      this.$router.push("/settings/magazine");
     }
   }
 };

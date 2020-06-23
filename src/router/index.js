@@ -50,7 +50,7 @@ const routes = [
     }
   },
   {
-    beforeEnter: Auth.requireAuth,
+    beforeEnter: Auth.requireAny,
     path: "/search/:type/:query",
     name: "Search",
     component: () =>
@@ -136,6 +136,12 @@ const routes = [
       cssName: "obs",
       noLayout: true
     }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/magazine",
+    name: "MagazinePage",
+    redirect: "/settings/magazine"
   },
   {
     beforeEnter: Auth.requireAny,

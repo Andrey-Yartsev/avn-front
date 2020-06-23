@@ -1,0 +1,99 @@
+@import "components/imports";
+
+.SubscribersGroupMessages {
+  .form-group.form-group_clear-gaps {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-flow: column nowrap;
+      align-items: start;
+      padding-top: 20px;
+    }
+  }
+  .form-group-inner {
+    flex-grow: 1;
+    width: 100%;
+    .label {
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+  }
+  .btn-post_datetime {
+    margin-bottom: 8px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-top: 5px;
+    }
+    .datetime-value {
+      .post-datetime__value {
+        white-space: nowrap;
+      }
+    }
+  }
+  .scheduled-container {
+    width: 100%;
+    padding: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+    .scheduled-title {
+      font-weight: 500;
+      font-size: 17px;
+      padding-bottom: 20px;
+    }
+    .scheduled-message {
+      padding: 20px;
+      border-top: 1px solid rgba(124, 139, 150, 0.2);
+      @include media-breakpoint-down($desktop-breakpoint) {
+        padding: 10px 5px;
+      }
+      &__header {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          flex-flow: column nowrap;
+          align-items: start;
+        }
+        > * {
+          margin: 0 5px;
+        }
+        .title {
+          span {
+            color: $secondary-color;
+          }
+        }
+        .time {
+          margin-left: auto;
+          color: $primary-color;
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin-left: 5px;
+          }
+        }
+        .icn-close {
+          @include media-breakpoint-down($desktop-breakpoint) {
+            order: -1;
+            align-self: flex-end;
+          }
+          cursor: pointer;
+          font-size: 18px;
+          line-height: 18px;
+        }
+      }
+      &__content {
+        padding: 5px;
+        .images-container {
+          .image-item {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 10px;
+          }
+        }
+        .text-container {
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+}

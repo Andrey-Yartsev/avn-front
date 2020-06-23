@@ -148,6 +148,13 @@
       }
     }
 
+    .GoogleView & {
+
+      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+        display: none;
+      }
+    }
+
     .btn-logout {
 
       &:after {

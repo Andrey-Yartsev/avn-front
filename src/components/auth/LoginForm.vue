@@ -9,6 +9,7 @@
           type="text"
           placeholder="Code"
           v-model="otpCode"
+          ref="otpCode"
         />
         <div class="hidden error">Email or password incorrect</div>
         <button
@@ -108,6 +109,23 @@
         <span class="icn-item icn-twitter icn-size_lg"></span>Sign in with
         Twitter
       </button>
+      <div class="login-or">
+        <span>or</span>
+      </div>
+      <GoogleLoginButton
+        :largeControls="largeControls"
+        :isSaving="loginInProgress"
+        @loginStart="
+          () => {
+            loginInProgress = true;
+          }
+        "
+        @loginEnd="
+          () => {
+            loginInProgress = false;
+          }
+        "
+      />
       <div class="signUp">
         <div class="signUp__body">
           <h3>
@@ -144,6 +162,7 @@ import Common from "@/components/auth/common";
 import Login from "@/components/auth/login";
 import Form from "@/mixins/form";
 import BrowserStore from "store";
+import GoogleLoginButton from "./GoogleLogin";
 
 export default {
   name: "LoginForm",
@@ -151,7 +170,8 @@ export default {
   mixins: [Common, Login, Form],
 
   components: {
-    Recaptcha
+    Recaptcha,
+    GoogleLoginButton
   },
 
   props: {
@@ -256,6 +276,11 @@ export default {
     forgot() {
       this.$router.push("/forgot");
       this.$emit("goToForgot");
+    }
+  },
+  mounted() {
+    if (this.otpAuth && this.$refs.otpCode) {
+      this.$refs.otpCode.focus();
     }
   }
 };

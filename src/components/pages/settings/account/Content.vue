@@ -1,6 +1,9 @@
 <template>
   <div :class="viewClass">
-    <div class="hidden-desktop" v-if="view === 'email' || view === 'twitter'">
+    <div
+      class="hidden-desktop"
+      v-if="view === 'email' || view === 'twitter' || view === 'google'"
+    >
       <div class="form-title">
         <div class="inner">
           <span class="semi-transparent">{{ user.name }}</span>

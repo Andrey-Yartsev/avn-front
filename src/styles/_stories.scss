@@ -240,18 +240,22 @@
   }
 
   .storyView {
-
-    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-      display: inline-flex;
-      margin-top: 0;
-    }
+    margin-top: 0;
 
     &_top-live {
+        .story {
+        margin: 0 16px;
+      }
+    }
 
-      @include media-breakpoint-down($desktop-breakpoint-dcrs) {
-        padding: 9px 0 6px;
-        margin-left: -10px;
-        margin-right: 12px;
+    &.storyView_top-live__list.live-list-wrapper {
+      display: inline-flex;
+
+      @include media-breakpoint-up($desktop-breakpoint) {
+        width: auto;
+        min-width: auto;
+        margin-right: 10px;
+        margin-top: 5px;
       }
     }
 
@@ -296,6 +300,8 @@
     flex-direction: column;
     color: $main-color;
 
+    // margin: 0 12px;
+    padding: 0;
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin: 0 12px;
       padding: 0;

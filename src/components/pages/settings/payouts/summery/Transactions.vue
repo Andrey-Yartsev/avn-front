@@ -36,14 +36,16 @@
         <div class="table-wrapper">
           <div class="table transactions-table" v-if="items.length">
             <div
-              class="PayoutsTransactionsView"
               v-for="(v, i) in items"
               :key="i"
+              class="PayoutsTransactionsView"
+              :class="{ excluded: v.isExcluded }"
             >
               <div class="item">
                 <div class="date table__cell">
                   {{ dt(v.createdAt) }}
-                  <div class="user-login" v-if="v.is_pending">pending</div>
+                  <!-- <div class="user-login" v-if="v.isPending">pending</div> -->
+                  <div class="user-login" v-if="v.isExcluded">refunded</div>
                 </div>
                 <div
                   class="amount table__cell table__cell_selected table__cell_align table__cell_align-hor-c"
