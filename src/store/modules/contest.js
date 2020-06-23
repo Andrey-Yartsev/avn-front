@@ -1,6 +1,7 @@
 "use strict";
 
 import { createRequestAction } from "@/store/utils/storeRequest";
+import settings from "./contest/settings";
 
 const state = {
   categories: [],
@@ -83,9 +84,32 @@ createRequestAction({
   throw400: true
 });
 
+createRequestAction({
+  prefix: "update",
+  apiPath: "contests/{contestId}/add",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "POST"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{contestId}/, params.contestId);
+  },
+  paramsToOptions: function(params, options) {
+    options.body = params.body;
+    return options;
+  },
+  localError: true,
+  throw400: true
+});
+
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    settings
+  }
 };

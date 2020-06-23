@@ -25,6 +25,17 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/settings/contests",
+    component: () =>
+      import(/* webpackChunkName: "SettingsContestsPage" */ "@/components/pages/settings/contests/Index"),
+    name: "ContestsSecurity",
+    meta: {
+      title: "Contests",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: () =>
       import(/* webpackChunkName: "SettingsSecurityPage" */ "@/components/pages/settings/security/Index"),

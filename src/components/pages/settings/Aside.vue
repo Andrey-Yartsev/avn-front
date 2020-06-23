@@ -225,7 +225,21 @@ export default {
           {
             name: "security",
             title: "Security"
-          },
+          }
+        ]
+      );
+      if (
+        this.user &&
+        this.user.canEarn &&
+        this.$store.state.init.data.enableContests
+      ) {
+        items.push({
+          name: "contests",
+          title: "Contests"
+        });
+      }
+      items.push(
+        ...[
           {
             name: "magazine",
             title: "AVN Magazine"
