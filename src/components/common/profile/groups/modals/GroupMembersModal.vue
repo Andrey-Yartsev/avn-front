@@ -7,22 +7,18 @@
       <div class="content">
         <template>
           <div class="popup-alert__title">
-            Users with free access to the video
+            Group members
           </div>
           <div class="popup-alert__body">
             <div class="searchHeader">
               <SearchBubble @addUser="addUser" />
             </div>
             <div class="list">
-              <h2 v-if="!freeAccessUsers.length" class="title__empty">
-                Have no users with free access
+              <h2 v-if="!members.length" class="title__empty">
+                Have no group members for now
               </h2>
               <template v-else>
-                <div
-                  class="item"
-                  v-for="(user, i) in freeAccessUsers"
-                  :key="user.id"
-                >
+                <div class="item" v-for="(user, i) in members" :key="user.id">
                   <div class="index table__cell">
                     {{ i + 1 }}
                   </div>
@@ -77,7 +73,7 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import SearchBubble from "../searchUsers/Index";
+import SearchBubble from "@/components/common/profile/media/parts/searchUsers/Index";
 
 export default {
   name: "GroupMembersModal",
@@ -87,29 +83,7 @@ export default {
   },
   data() {
     return {
-      freeAccessUsers: [
-        // {
-        //   id: 468790,
-        //   name: "some_name",
-        //   username: "user888",
-        //   avatar:
-        //     "https://cdn2-dev-media.avn.com/files/u/ur/urn/urnzuu17af7nsr1pms5d7n2evojkh6lp1587364787/l800.jpg?Expires=1618938002&Signature=b28~EXxEAYkn4414bNwUF2~VP~BrC3HPlET6sm4uMgZSE14RqCu9zNkJMY214Uj2RBKb23TKYl6h2yn~5ItGr7w0O~unxM1cIxd70A6gMSyzxdpSFCj0DTi6iSJQwl3MjlQ3EqseORRu4Ulbp~rx3E3j-uFUgZbCAeJiiroUP0f1-bFlddajJufnd3RPePAiP5l-UYEakB-W4sFDaXElvcCTKvXGuZLFIOyokQwyT3WCazwk8QF-qHitxSNo4NqPGKityV1jeEBhhATmLfx-eKDutpsrulZAneGivpW6qEySm0YlJ-vkdK9IPyGG1F4ayRh9b0dtTVkAVWRQ2QnuZg__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
-        // },
-        // {
-        //   id: 468755,
-        //   name: "itest4 968ᗰ🦊",
-        //   username: "itest4",
-        //   avatar:
-        //     "https://cdn2-dev-media.avn.com/files/a/a1/a1t/a1ti42xzczpsxc8qn57rxf1dlblmxdty1579700339/avatar.jpg?Expires=1618938002&Signature=DUczNiLQNMvFU45XTJpeR7BJp~FG13Z7lBAXByUhvdODNfWvf5U4tDi81Lr3BaI6nCZPeDVgcL5zzoxr3QGhMDorDxnu8PWSEsHWX8R~CdiN38UjeEzQTapVkc38QkuMKZ43DqrGBFbe61mVqGySXiblHUBINGlTykyLTQoVOjuXra5-oiM4t7CjxhiWcuyYu66NyhKR0Rmk9nYBFy7oKC-KUZmiwke5bIqe5Mo8007kG02B7FDchIRSM11AMjJtwjSRi9HOfMSuICVG8cdcwcggHwF06ZTb-DrMb677Z8Sp7-z-3FDF-5Ne~vSjSk3wgkEbouqLGXZN7Tv66huroQ__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
-        // },
-        // {
-        //   id: 468732,
-        //   name: "itest2 413 🐼",
-        //   username: "itest2",
-        //   avatar:
-        //     "https://cdn2-dev-media.avn.com/files/q/qc/qch/qchbe2farz3e2odsdntf1auinzx6qiuk1563788844/avatar.jpg?Expires=1618938002&Signature=e-RSel~PUa2JgYSmA0Vuz~dQFr0xXw5fgO1-W2Rqko9meaK0zz-Ct3AdtVusdDDp7UytxE3KQoi~uKu5jenHGjrGcXgwBJaY7ezbVgPGehnqdUqCkJDkjjG-Wfj5~RLHR7qXypBk562DBYFI-3hXRKcyENT4WJ43y0pY3S1msOqXJU5luqEwVmQLuMYbXibtXEJTPEEa49NCe~OHON6l515g6A4~ei~suX7gOoppLHavTxA-tZL~E5FtZCAYzWynhQ2cv2LuCb52idYK5slnmReBcQv39r9rxn97hrrare0kjzLmf0ja252rZVopwbHS7aNYN51TUwvW-snQO5xQJA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
-        // },
-      ],
+      members: [],
       initSnapshot: [],
       isDataChanged: false,
       saving: false
@@ -117,33 +91,37 @@ export default {
   },
   computed: {
     data() {
-      return this.$store.state.modal.freeAccessMediaList.data;
+      return this.$store.state.modal.groupMembers.data;
     },
     users() {
-      return this.data.post.freeAccessUsers;
+      return this.data.group.members;
+    },
+    author() {
+      return this.$store.state.auth.user;
     }
   },
   methods: {
     init() {
       if (this.users && this.users.length) {
-        this.freeAccessUsers = [...this.users];
+        this.members = [...this.users];
         this.initSnapshot = this.users.map(item => item.id);
       }
     },
     close({ reset }) {
       if (reset) {
-        this.freeAccessUsers = this.users || [];
+        this.members = this.users || [];
       }
-      this.$store.commit("modal/hideSafe", { name: "freeAccessMediaList" });
+      this.$store.commit("modal/hideSafe", { name: "groupMembers" });
     },
     save() {
       this.saving = true;
+      console.log(this.getMediaData());
       this.$store
-        .dispatch("profile/media/updateMedia", this.getMediaData(), {
+        .dispatch("profile/groups/updateGroup", this.getMediaData(), {
           root: true
         })
         .then(() => {
-          this.initSnapshot = this.freeAccessUsers.map(item => item.id);
+          this.initSnapshot = this.members.map(item => item.id);
           this.close({ reset: false });
         })
         .finally(() => {
@@ -151,38 +129,37 @@ export default {
         });
     },
     getMediaData() {
-      return {
-        media: {
-          ...this.data.post,
-          freeAccessUsers: this.freeAccessUsers.map(item => item.id)
-        },
-        productId: this.data.post.productId
+      const data = {
+        ...this.data.group,
+        mediaFiles: (this.data.group.media || []).map(item => ({
+          id: item.id
+        })),
+        members: this.members.map(item => item.id)
       };
+      delete data.media;
+      delete data.membersCount;
+      return data;
     },
     removeUser(userId) {
-      this.freeAccessUsers = this.freeAccessUsers.filter(
-        item => item.id !== userId
-      );
+      this.members = this.members.filter(item => item.id !== userId);
       this.isListChangesCheck();
     },
     addUser(user) {
-      const isAlreadyInList = this.freeAccessUsers.find(
-        item => item.id === user.id
-      );
-      if (isAlreadyInList || user.id === this.data.post.author.id) {
+      const isAlreadyInList = this.members.find(item => item.id === user.id);
+      if (isAlreadyInList || user.id === this.author.id) {
         return;
       }
-      this.freeAccessUsers.push(user);
+      this.members.push(user);
       this.isListChangesCheck();
     },
     isListChangesCheck() {
       let isChanged = false;
-      if (this.freeAccessUsers.length !== this.initSnapshot.length) {
+      if (this.members.length !== this.initSnapshot.length) {
         this.isDataChanged = true;
         return;
       }
-      for (let i = 0; i < this.freeAccessUsers.length; i++) {
-        if (this.freeAccessUsers[i].id !== this.initSnapshot[i]) {
+      for (let i = 0; i < this.members.length; i++) {
+        if (this.members[i].id !== this.initSnapshot[i]) {
           isChanged = true;
           break;
         }

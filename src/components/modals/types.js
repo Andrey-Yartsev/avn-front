@@ -186,6 +186,10 @@ const modalTypes = [
   {
     storeName: "magShipping",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "groupMembers",
+    layoutOnlyModal: true
   }
 ];
 

@@ -29,7 +29,7 @@
       ></span>
       {{ group.isActive ? "Active" : "Draft" }}
     </span>
-    <span class="actions__btn members">
+    <span class="actions__btn members" @click="showMembersModal">
       <span
         class="btn-icon icn-profile icn-item icn-size_md"
         v-tooltip="'Members'"
@@ -62,6 +62,14 @@ export default {
   methods: {
     deleteGroup() {
       this.$store.dispatch("profile/groups/deleteGroup", this.group.productId);
+    },
+    showMembersModal() {
+      this.$store.dispatch("modal/show", {
+        name: "groupMembers",
+        data: {
+          group: this.group
+        }
+      });
     }
   }
 };

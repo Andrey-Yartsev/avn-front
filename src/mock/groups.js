@@ -36,7 +36,16 @@ export default [
     isActive: false,
     isPublic: false,
     isMember: false,
-    membersCount: 4
+    membersCount: 4,
+    members: [
+      {
+        avatar:
+          "https://cdn2-dev-media.avn.com/files/m/m9/m9j/m9jjds8slt7rutrjb3lrkhscmrz3dfcz1578474669/avatar.jpg?Expires=1624446987&Signature=ZjLR2kjLbwhGpaw47R4ZKsLT6VGnilmeP7sf9zw~gHah~olNYuumtH3C7vfPQ3EGUz07Yb3O-C8~ehml6BkIip1uTaOHJrMVdg8vLHfy6aEeXFtEEnYh6TVt0Q~vCC5K2tVyn9Z7FC1rY33Sc2SUMIrFwFqPAa72Isu6N6WTP5WciF3NTyzTedU2afgf41jO0IHKOgmyFH8e9Dra1PiRG1pDvUhi6EW-ZdsJIkmFdiLyp1yREFH1ysMZSrNO4RQyVZNnocYZ8ZYwAZvS5d843-ZShBnRovVVfNieTF0VK~lWhGbd~0eeN94VGRR8MqZ5T2qoGg22lvyO1lo8vQcphw__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ",
+        id: 468788,
+        name: "имя123",
+        username: "user666"
+      }
+    ]
   },
   {
     productId: 1317,

@@ -193,7 +193,7 @@ createRequestAction({
     return path.replace(/{productId}/, data.productId);
   },
   paramsToOptions: function(params, options) {
-    options.data = params.media;
+    options.data = params;
     return options;
   }
 });
