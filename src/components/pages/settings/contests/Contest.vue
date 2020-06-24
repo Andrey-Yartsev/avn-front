@@ -115,20 +115,22 @@
             </div>
           </form>
 
-          <!--
-          <div class="form-group form-group_with-label promote">
+          <div
+            class="form-group form-group_with-label promote"
+            v-if="showPromoteLink"
+          >
             <div class="form-group-inner form-group-title">
               <span class="label">Promote Contest</span>
-              <div class="input">http://asd</div>
+              <div class="input">{{ promoteContestLink() }}</div>
               <button
                 type="button"
                 class="btn border disconnect-twitter semi-transparent"
+                @click="copyContestLink"
               >
                 Copy
               </button>
             </div>
           </div>
-          -->
 
           <div class="supporters" v-if="data.topSupporters.length">
             <div>
@@ -186,6 +188,13 @@ export default {
         return this.currentData.modelData?.image_url;
       }
       return this.imagePreview;
+    },
+    showPromoteLink() {
+      return (
+        this.data.is_voting_active &&
+        !this.data.hasFinished &&
+        this.currentData.modelData?.nominee_id
+      );
     }
   },
   watch: {
@@ -299,6 +308,25 @@ export default {
     },
     twitterConnect() {
       window.location.href = Twitter.getConnectUrl("/settings/account");
+    },
+    promoteContestLink() {
+      return `${window.location.origin}/contests/${this.data.id}/${
+        this.currentData.modelData.nominee_id
+      }`;
+    },
+    copyContestLink() {
+      this.$copyText(this.promoteContestLink())
+        .then(() => {
+          this.$store.dispatch("global/flashToast", {
+            text: "Contest link copied"
+          });
+        })
+        .catch(() => {
+          this.$store.dispatch("global/flashToast", {
+            text: "There was a problem. Copy manual please",
+            error: true
+          });
+        });
     }
   },
   mounted() {

@@ -138,8 +138,26 @@ export default {
         if (m) {
           this.$scrollTo(`[data-id="${m[1]}"]`);
           this.activeNomineeId = parseInt(m[1]);
+          this.openVoteModal();
         }
       }
+    },
+    openVoteModal() {
+      const currentNominee = this.nominees.find(
+        item => item.id === this.activeNomineeId
+      );
+      if (!currentNominee) {
+        return;
+      }
+      this.$store.dispatch("modal/show", {
+        name: "contestVoting",
+        data: {
+          name: currentNominee.name,
+          contestId: this.contestId,
+          nominee: currentNominee.id,
+          userId: currentNominee.star_id
+        }
+      });
     }
   },
   watch: {
@@ -154,7 +172,12 @@ export default {
       this.contestId = contestId;
     },
     contestId(contestId) {
-      this.$router.push(`/contests/${contestId}`);
+      const nomineeId = this.$route.params.nomineeId;
+      if (nomineeId) {
+        this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
+      } else {
+        this.$router.push(`/contests/${contestId}`);
+      }
       this.init();
     }
   },
