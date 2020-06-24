@@ -61,14 +61,11 @@
               </label>
             </div>
 
-            <div
-              class="form-group form-group_with-label"
-              v-if="isTwitterConnected"
-            >
+            <div class="form-group form-group_with-label">
               <div class="form-group-inner form-group-title twitterConnect">
                 <span class="label">Connect Twitter</span>
 
-                <template>
+                <template v-if="isTwitterConnected">
                   <span
                     class="value twitter-value hidden-desktop"
                     v-if="$mq === 'mobile'"
@@ -96,6 +93,14 @@
                     <span class="toggle-element_switcher"></span>
                   </label>
                 </template>
+                <button
+                  v-else
+                  type="button"
+                  class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+                  @click="twitterConnect"
+                >
+                  Connect Twitter account
+                </button>
               </div>
             </div>
 
@@ -147,6 +152,7 @@
 
 <script>
 import moment from "moment";
+import Twitter from "@/utils/twitter";
 
 export default {
   props: ["data"],
@@ -290,6 +296,9 @@ export default {
         .finally(() => {
           this.isSending = false;
         });
+    },
+    twitterConnect() {
+      window.location.href = Twitter.getConnectUrl("/settings/account");
     }
   },
   mounted() {
