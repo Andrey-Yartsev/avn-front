@@ -4,9 +4,9 @@
       class="form-title hidden-mobile settings-title"
       v-if="$mq === 'desktop'"
     >
-      Desktop Contests
+      Contests
     </h1>
-    <div class="container shadow-block border-top cards shadow-block_reset-pt">
+    <div class="container shadow-block border-top cards">
       <table class="info">
         <tr>
           <th>Contest</th>

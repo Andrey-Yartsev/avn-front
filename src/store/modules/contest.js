@@ -11,16 +11,19 @@ const state = {
 };
 
 const actions = {
-  // eslint-disable-next-line no-unused-vars
   update({ state }, data) {
+    console.log(state);
     const {
       contestId,
-      body: { image, description }
+      body: { image, description, twitter }
     } = data;
     return new Promise((accept, reject) => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("description", description);
+      if (twitter) {
+        formData.append("twitter", twitter);
+      }
       const xhr = new XMLHttpRequest();
       xhr.open(
         "POST",
@@ -34,22 +37,10 @@ const actions = {
       );
       xhr.onload = e => {
         const result = JSON.parse(e.currentTarget.responseText);
-        if (!result || !result[0] || !result[0].fileName) {
-          const response = {
-            message:
-              result.error && result.error.message
-                ? result.error.message
-                : "Upload failed"
-          };
-          return reject(response);
-        }
         if (result.error) {
-          if (result.error.message === "getimagesize(): Read error!") {
-            return reject({ message: "Uploaded file is not valid image" });
-          }
           return reject(result.error);
         }
-        accept(result[0].fileName);
+        accept(result);
       };
       xhr.send(formData);
     });
@@ -81,6 +72,23 @@ createRequestAction({
   defaultResultValue: [],
   paramsToPath: function(params, path) {
     return path.replace(/{contestId}/, params.contestId);
+  }
+});
+
+createRequestAction({
+  prefix: "remove",
+  apiPath: "contests/{contestId}/remove/{nomineeId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "DELETE"
+  },
+  defaultResultValue: [],
+  paramsToPath: function(params, path) {
+    let newPath = path.replace(/{contestId}/, params.contestId);
+    newPath = newPath.replace(/{nomineeId}/, params.nomineeId);
+    return newPath;
   }
 });
 
