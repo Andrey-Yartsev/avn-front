@@ -219,7 +219,6 @@ export default {
       return moment(date).format("MMM D, hh:mm a");
     },
     handleImageChoose(event) {
-      console.log(event);
       const files = event.target.files;
       if (!files.length) {
         this.formData.delete("image");
@@ -260,6 +259,7 @@ export default {
             rank_display: false,
             twitter_handle: ""
           };
+          this.image = null;
         });
     },
     update() {
@@ -277,7 +277,8 @@ export default {
           contestId: this.data.id,
           body: data
         })
-        .then(() => {
+        .then(res => {
+          this.currentData.modelData.nominee_id = res.id;
           this.$store.dispatch("global/flashToast", {
             text: "Contest data has been updated!",
             type: "success"

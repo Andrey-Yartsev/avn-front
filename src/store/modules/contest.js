@@ -11,8 +11,7 @@ const state = {
 };
 
 const actions = {
-  update({ state }, data) {
-    console.log(state);
+  update(context, data) {
     const {
       contestId,
       body: { image, description, twitter }
