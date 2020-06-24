@@ -9,7 +9,11 @@
         <img :src="contest.image_url" />
       </div>
       <div class="awards-title text-centered">
-        {{ contest.name }}
+        <select name="contest" v-model="contestId">
+          <option v-for="(v, k) in contests" :key="k" :value="v.id"
+            >{{ v.name }}
+          </option>
+        </select>
       </div>
       <template v-if="!sent">
         <div class="title-subtext text-centered">
@@ -51,7 +55,8 @@ export default {
     return {
       data: {},
       scriptLoading: true,
-      activeNomineeId: 0
+      activeNomineeId: 0,
+      contestId: 0
     };
   },
   computed: {
@@ -78,9 +83,6 @@ export default {
     successText() {
       return "Your voting have been sent successfully";
     },
-    contestId() {
-      return 1;
-    },
     contests() {
       return this.$store.state.contest.fetchContestsResult;
     },
@@ -97,16 +99,33 @@ export default {
       });
     },
     periodText() {
+      console.log("periodText", this.contest.starts_at);
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
       const m1 = moment(d1, this.contest.timezone);
-      const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
-      const m2 = moment(d2, this.contest.timezone);
+      let r2 = null;
+      if (this.contest.ends_at) {
+        const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
+        const m2 = moment(d2, this.contest.timezone);
+        r2 = m2.local().format("MMM Do h:mm a");
+      }
       const r1 = m1.local().format("MMM Do h:mm a");
-      const r2 = m2.local().format("MMM Do h:mm a");
-      return `${r1} PDT to ${r2} PDT`;
+      let s = `${r1} PDT`;
+      if (r2) {
+        s += ` to ${r2} PDT`;
+      }
+      return s;
     }
   },
   methods: {
+    init() {
+      this.$store
+        .dispatch("contest/fetchNominees", {
+          contestId: this.contestId
+        })
+        .then(() => {
+          this.scrollToShared();
+        });
+    },
     input(v) {
       const o = {};
       o[v.id] = v.value;
@@ -123,18 +142,25 @@ export default {
       }
     }
   },
+  watch: {
+    contests(contests) {
+      let contestId = contests[0].id;
+      if (this.$route.params.contestId) {
+        let _contestId = parseInt(this.$route.params.contestId);
+        if (contests.find(v => v.id == this.$route.params.contestId)) {
+          contestId = _contestId;
+        }
+      }
+      this.contestId = contestId;
+    },
+    contestId(contestId) {
+      this.$router.push(`/contests/${contestId}`);
+      this.init();
+    }
+  },
   created() {
     this.$store.dispatch("contest/fetchContests");
-    this.$store
-      .dispatch("contest/fetchNominees", {
-        contestId: this.contestId
-      })
-      .then(() => {
-        this.scrollToShared();
-      });
-    // this.$store.dispatch("contest/fetchPrizes", {
-    //   contestId: this.contestId
-    // });
+    this.init();
   }
 };
 </script>

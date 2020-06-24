@@ -145,10 +145,13 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/contests",
+    path: "/contests/:contestId?",
     name: "ContestPage",
     component: () =>
-      import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index")
+      import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index"),
+    meta: {
+      cssName: "contests"
+    }
   },
   ...authRoutes,
   ...chatRoutes,

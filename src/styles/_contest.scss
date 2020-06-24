@@ -39,6 +39,12 @@
     }
     margin-bottom: 20px;
   }
+  .awards-title {
+    select {
+      width: auto;
+      display: inline-block;
+    }
+  }
 }
 .contest-header {
   margin: 0 0 20px;
