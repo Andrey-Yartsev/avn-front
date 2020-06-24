@@ -1,5 +1,6 @@
 "use strict";
 
+import Store from "@/store";
 import { createRequestAction } from "@/store/utils/storeRequest";
 import settings from "./contest/settings";
 
@@ -9,7 +10,51 @@ const state = {
   prizes: []
 };
 
-const actions = {};
+const actions = {
+  // eslint-disable-next-line no-unused-vars
+  update({ state }, data) {
+    const {
+      contestId,
+      body: { image, description }
+    } = data;
+    return new Promise((accept, reject) => {
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("description", description);
+      const xhr = new XMLHttpRequest();
+      xhr.open(
+        "POST",
+        process.env.VUE_APP_API_URL +
+          "/contests/" +
+          contestId +
+          "/add" +
+          "?access-token=" +
+          Store.state.auth.token,
+        true
+      );
+      xhr.onload = e => {
+        const result = JSON.parse(e.currentTarget.responseText);
+        if (!result || !result[0] || !result[0].fileName) {
+          const response = {
+            message:
+              result.error && result.error.message
+                ? result.error.message
+                : "Upload failed"
+          };
+          return reject(response);
+        }
+        if (result.error) {
+          if (result.error.message === "getimagesize(): Read error!") {
+            return reject({ message: "Uploaded file is not valid image" });
+          }
+          return reject(result.error);
+        }
+        accept(result[0].fileName);
+      };
+      xhr.send(formData);
+    });
+  }
+};
 const mutations = {};
 
 createRequestAction({
@@ -84,25 +129,28 @@ createRequestAction({
   throw400: true
 });
 
-createRequestAction({
-  prefix: "update",
-  apiPath: "contests/{contestId}/add",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "POST"
-  },
-  paramsToPath: function(params, path) {
-    return path.replace(/{contestId}/, params.contestId);
-  },
-  paramsToOptions: function(params, options) {
-    options.body = params.body;
-    return options;
-  },
-  localError: true,
-  throw400: true
-});
+// createRequestAction({
+//   prefix: "update",
+//   apiPath: "contests/{contestId}/add",
+//   state,
+//   mutations,
+//   actions,
+//   options: {
+//     method: "POST"
+//   },
+//   paramsToPath: function(params, path) {
+//     return path.replace(/{contestId}/, params.contestId);
+//   },
+//   paramsToOptions: function(params, options) {
+//     options.body = params.body;
+//     options.headers = {
+//       "Content-Type": 'application/x-www-form-urlencoded; charset=UTF-8"'
+//     };
+//     return options;
+//   },
+//   localError: true,
+//   throw400: true
+// });
 
 export default {
   namespaced: true,

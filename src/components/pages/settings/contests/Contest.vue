@@ -22,14 +22,14 @@
               <span class="label">Upload Image</span>
               <div class="photo-label-wrapper">
                 <label
-                  for="personalIdImage"
+                  :for="`personalIdImage-${data.id}`"
                   class="btn btn_fix-width btn_block border photo-btn"
                   >Choose</label
                 >
               </div>
               <input
                 type="file"
-                id="personalIdImage"
+                :id="`personalIdImage-${data.id}`"
                 accept=".jpg,.jpeg,.png"
                 ref="image"
                 name="image"
@@ -108,7 +108,8 @@ export default {
       opened: false,
       currentData: {},
       formData: null,
-      imageSelected: false
+      imageSelected: false,
+      image: null
     };
   },
   computed: {
@@ -122,17 +123,22 @@ export default {
       const files = event.target.files;
       if (!files.length) {
         this.formData.delete("image");
+        this.image = null;
         this.imageSelected = false;
         return;
       }
       this.formData.append("image", files[0]);
+      this.image = files[0];
       this.imageSelected = true;
     },
     update() {
       this.formData.append("description", this.currentData.description);
       this.$store.dispatch("contest/update", {
         contestId: this.data.id,
-        body: this.formData
+        body: {
+          description: this.currentData.description,
+          image: this.image
+        }
       });
     }
   },
