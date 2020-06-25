@@ -121,7 +121,7 @@ export default {
           this.$store.state.init?.data?.enableContests
         );
       } else {
-        this.$store.state.init?.data?.enableContests;
+        return this.$store.state.init?.data?.enableContests;
       }
     }
   },
