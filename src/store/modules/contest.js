@@ -48,6 +48,7 @@ const actions = {
 const mutations = {};
 
 createRequestAction({
+  requestType: "any",
   prefix: "fetchContests",
   apiPath: "contests/list",
   state,
@@ -60,6 +61,7 @@ createRequestAction({
 });
 
 createRequestAction({
+  requestType: "any",
   prefix: "fetchNominees",
   apiPath: "contests/nominees/{contestId}",
   state,

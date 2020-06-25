@@ -59,6 +59,10 @@ export default {
   },
   methods: {
     vote() {
+      if (!this.$store.state.auth.user) {
+        this.$store.dispatch("modal/show", { name: "login" });
+        return;
+      }
       this.$store.dispatch("modal/show", {
         name: "contestVoting",
         data: {
