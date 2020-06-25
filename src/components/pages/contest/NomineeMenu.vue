@@ -47,7 +47,11 @@ import ClickOutside from "vue-click-outside";
 export default {
   name: "NomineeMenu",
   props: {
-    nominee: Object
+    nominee: Object,
+    contestId: {
+      type: Number,
+      required: true
+    }
   },
   directives: {
     ClickOutside
@@ -59,7 +63,9 @@ export default {
   },
   computed: {
     shareLink() {
-      return window.location.origin + "/contests#nominee" + this.nominee.id;
+      return `${window.location.origin}/contests/${this.contestId}/${
+        this.nominee.id
+      }`;
     }
   },
   methods: {

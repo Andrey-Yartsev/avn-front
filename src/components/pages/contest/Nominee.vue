@@ -27,7 +27,7 @@
         class="user-num-list"
         :class="{ 'user-num-list_first': nominee.n === 1 }"
       >
-        <NomineeMenu :nominee="nominee" />
+        <NomineeMenu :nominee="nominee" :contestId="contestId" />
         <span class="user-num-list__text">{{ nominee.n }}</span>
       </div>
       <p class="profile-text">{{ nominee.description }}</p>
