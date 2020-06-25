@@ -4,7 +4,7 @@
     <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
-    <template v-else>
+    <template v-else-if="contest">
       <div class="contest-header" v-if="contest.image_url">
         <img :src="contest.image_url" />
       </div>
@@ -99,7 +99,6 @@ export default {
       });
     },
     periodText() {
-      console.log("periodText", this.contest.starts_at);
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
       const m1 = moment(d1, this.contest.timezone);
       let r2 = null;
@@ -123,6 +122,9 @@ export default {
   },
   methods: {
     init() {
+      if (!this.contestId) {
+        return;
+      }
       this.$store
         .dispatch("contest/fetchNominees", {
           contestId: this.contestId
@@ -167,6 +169,9 @@ export default {
   },
   watch: {
     contests(contests) {
+      if (!contests.length) {
+        return;
+      }
       let contestId = contests[0].id;
       if (this.$route.params.contestId) {
         let _contestId = parseInt(this.$route.params.contestId);
