@@ -117,6 +117,7 @@ export default {
     allowContestsView() {
       if (this.user) {
         return (
+          this.user.showVote || // showVote is admin user, renamed for secure reason
           this.user.adminReturnUrl ||
           this.$store.state.init?.data?.enableContests
         );

@@ -229,6 +229,7 @@ export default {
         ]
       );
       if (
+        this.user.showVote || // showVote is admin user, renamed for secure reason
         this.user.adminReturnUrl ||
         (this.user &&
           this.user.canEarn &&
