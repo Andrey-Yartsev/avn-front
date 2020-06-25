@@ -114,6 +114,11 @@ export default {
         s += ` to ${r2} PDT`;
       }
       return s;
+    },
+    allowContestsView() {
+      return (
+        this.user.adminReturnUrl || this.$store.state.init?.data?.enableContests
+      );
     }
   },
   methods: {
@@ -182,6 +187,10 @@ export default {
     }
   },
   created() {
+    if (!this.allowContestsView) {
+      this.$router.push("/");
+      return;
+    }
     this.$store.dispatch("contest/fetchContests");
     this.init();
   }

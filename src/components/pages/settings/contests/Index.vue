@@ -18,6 +18,23 @@ export default {
   components: {
     Layout,
     Content
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
+    },
+    allowContestsView() {
+      return (
+        this.user.adminReturnUrl ||
+        (this.user?.canEarn && this.$store.state.init?.data?.enableContests)
+      );
+    }
+  },
+  mounted() {
+    if (!this.allowContestsView) {
+      this.$router.push("/settings");
+      return;
+    }
   }
 };
 </script>
