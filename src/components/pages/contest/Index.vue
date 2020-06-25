@@ -4,30 +4,39 @@
     <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
-    <template v-else-if="contest">
-      <div class="contest-header" v-if="contest.image_url">
-        <img :src="contest.image_url" />
-      </div>
-      <div class="awards-title text-centered">
-        <select name="contest" v-model="contestId">
-          <option v-for="(v, k) in contests" :key="k" :value="v.id"
-            >{{ v.name }}
-          </option>
-        </select>
-      </div>
-      <template v-if="!sent">
-        <div class="title-subtext text-centered">
-          {{ contest.description }}<br />
-          {{ periodText }}
+    <template v-else>
+      <template v-if="contest">
+        <div class="contest-header" v-if="contest.image_url">
+          <img :src="contest.image_url" />
         </div>
-        <div class="explore-wrapper users">
-          <Nominee
-            v-for="v in nominees"
-            :key="v.id"
-            :nominee="v"
-            :contestId="contestId"
-            :active="activeNomineeId === v.id"
-          />
+        <div class="awards-title text-centered">
+          <select name="contest" v-model="contestId">
+            <option v-for="(v, k) in contests" :key="k" :value="v.id"
+              >{{ v.name }}
+            </option>
+          </select>
+        </div>
+        <template v-if="!sent">
+          <div class="title-subtext text-centered">
+            {{ contest.description }}<br />
+            {{ periodText }}
+          </div>
+          <div class="explore-wrapper users">
+            <Nominee
+              v-for="v in nominees"
+              :key="v.id"
+              :nominee="v"
+              :contestId="contestId"
+              :active="activeNomineeId === v.id"
+            />
+          </div>
+        </template>
+      </template>
+      <template v-else>
+        <div class="inner">
+          <div class="semi-transparent" :style="{ 'text-align': 'center' }">
+            There is no available contests for now
+          </div>
         </div>
       </template>
     </template>
