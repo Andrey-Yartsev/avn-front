@@ -229,9 +229,10 @@ export default {
         ]
       );
       if (
-        this.user &&
-        this.user.canEarn &&
-        this.$store.state.init.data.enableContests
+        this.user.adminReturnUrl ||
+        (this.user &&
+          this.user.canEarn &&
+          this.$store.state.init.data.enableContests)
       ) {
         items.push({
           name: "contests",
