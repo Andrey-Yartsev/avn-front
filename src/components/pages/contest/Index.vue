@@ -115,9 +115,14 @@ export default {
       return s;
     },
     allowContestsView() {
-      return (
-        this.user.adminReturnUrl || this.$store.state.init?.data?.enableContests
-      );
+      if (this.user) {
+        return (
+          this.user.adminReturnUrl ||
+          this.$store.state.init?.data?.enableContests
+        );
+      } else {
+        this.$store.state.init?.data?.enableContests;
+      }
     }
   },
   methods: {
