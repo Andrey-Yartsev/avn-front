@@ -1,13 +1,21 @@
 <template>
   <tbody>
     <tr>
-      <td>{{ data.name }}</td>
-      <td>{{ data.modelData.rank }}</td>
+      <td>{{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}</td>
+      <td>{{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}</td>
       <td>{{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}</td>
       <td class="toggler">
         <label class="toggle-element">
-          <input type="checkbox" id="subscribedOffline" v-model="opened" />
-          <span class="toggle-element_switcher"></span>
+          <input
+            type="checkbox"
+            id="subscribedOffline"
+            v-model="opened"
+            :disabled="data.hasFinished"
+          />
+          <span
+            class="toggle-element_switcher"
+            :class="{ disabled: data.hasFinished }"
+          ></span>
         </label>
       </td>
     </tr>
