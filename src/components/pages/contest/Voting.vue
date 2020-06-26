@@ -119,6 +119,9 @@ export default {
             }`,
             success: () => {
               this._vote();
+            },
+            finally: () => {
+              this.votingInProgress = false;
             }
           }
         });
