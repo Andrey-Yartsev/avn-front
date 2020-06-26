@@ -1,11 +1,18 @@
 .contest-settings {
   .info {
     width: 100%;
+    border-collapse: collapse;
     td, th {
       padding: 3px;
     }
+    td {
+      white-space: pre-line;
+    }
     th {
       text-align: left;
+      &.rank {
+        text-align: center;
+      }
     }
     .toggler {
       text-align: right;

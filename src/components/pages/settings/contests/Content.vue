@@ -21,8 +21,7 @@
         <table v-else class="info">
           <tr>
             <th>Contest</th>
-            <th>Rank</th>
-            <th>Date Range</th>
+            <th class="rank">Rank</th>
             <th class="toggler"></th>
           </tr>
           <template v-if="items && items.length">

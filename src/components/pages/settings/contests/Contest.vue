@@ -1,9 +1,14 @@
 <template>
-  <tbody>
+  <tbody class="border-top">
     <tr>
-      <td>{{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}</td>
-      <td>{{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}</td>
-      <td>{{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}</td>
+      <td>
+        {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}
+        {{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}
+      </td>
+      <td align="center">
+        {{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}
+      </td>
+      <td></td>
       <td class="toggler">
         <label class="toggle-element">
           <input
@@ -60,7 +65,7 @@
                       rows="3"
                       name="description"
                       maxlength="100"
-                      style="resize: none; overflow: hidden; height: 50px;"
+                      style="resize: none; overflow: auto; height: auto;"
                       v-model="currentData.modelData.description"
                     >
                     </textarea>
