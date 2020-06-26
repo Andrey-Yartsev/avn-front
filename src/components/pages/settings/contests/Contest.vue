@@ -5,7 +5,7 @@
         {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}
         {{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}
       </td>
-      <td align="center">
+      <td align="center" style="vertical-align: baseline">
         {{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}
       </td>
       <td></td>
