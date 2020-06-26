@@ -40,6 +40,7 @@
     margin-bottom: 10px;
   }
   .userView {
+    margin-bottom: 20px;
     &.active {
       border: 2px solid rgba($default-secondary-color, 0.5);
     }
@@ -60,9 +61,11 @@
     }
     .user-container {
       flex: auto;
-      height: 222px;
+      // height: 222px;
     }
-    margin-bottom: 20px;
+    .top-votes-container {
+      height: 75px;
+    }
   }
   .awards-title {
     select {

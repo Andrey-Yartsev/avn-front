@@ -40,6 +40,7 @@
           Vote
         </button>
       </div>
+      <div class="top-votes-container"></div>
     </div>
   </div>
 </template>
