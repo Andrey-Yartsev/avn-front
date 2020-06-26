@@ -58,11 +58,7 @@ export default {
     active: Boolean
   },
   methods: {
-    vote() {
-      if (!this.$store.state.auth.user) {
-        this.$store.dispatch("modal/show", { name: "login" });
-        return;
-      }
+    openVoteModal() {
       this.$store.dispatch("modal/show", {
         name: "contestVoting",
         data: {
@@ -73,6 +69,21 @@ export default {
           userId: this.nominee.star_id
         }
       });
+    },
+    vote() {
+      if (!this.$store.state.auth.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(
+                `/contests/${this.contestId}/${this.nominee.id}`
+              )
+          }
+        });
+        return;
+      }
+      this.openVoteModal();
     }
   }
 };

@@ -186,15 +186,27 @@ export default {
       if (!currentNominee) {
         return;
       }
-      this.$store.dispatch("modal/show", {
-        name: "contestVoting",
-        data: {
-          name: currentNominee.name,
-          contestId: this.contestId,
-          nominee: currentNominee.id,
-          userId: currentNominee.star_id
-        }
-      });
+      if (!this.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(
+                `/contests/${this.contestId}/${currentNominee.id}`
+              )
+          }
+        });
+      } else {
+        this.$store.dispatch("modal/show", {
+          name: "contestVoting",
+          data: {
+            name: currentNominee.name,
+            contestId: this.contestId,
+            nominee: currentNominee.id,
+            userId: currentNominee.star_id
+          }
+        });
+      }
     },
     selectContest(value) {
       this.contestId = value;
