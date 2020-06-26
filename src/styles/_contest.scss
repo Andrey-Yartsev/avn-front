@@ -14,6 +14,31 @@
 }
 
 .contest {
+  &-links {
+    display: flex;
+    flex-flow: row wrap;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-flow: column nowrap;
+    }
+    a {
+      margin: 3px 20px;
+      &.selected {
+        opacity: 0.5;
+      }
+    }
+    span {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+      opacity: 0.5;
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+  &-title {
+    margin-bottom: 10px;
+  }
   .userView {
     &.active {
       border: 2px solid rgba($default-secondary-color, 0.5);

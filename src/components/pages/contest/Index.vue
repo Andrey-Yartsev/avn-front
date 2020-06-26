@@ -6,20 +6,35 @@
     </div>
     <template v-else>
       <template v-if="contest">
-        <div class="contest-header" v-if="contest.image_url">
-          <img :src="contest.image_url" />
+        <div class="contest-links title-subtext">
+          <template v-for="value in contests">
+            <a
+              :href="`/contests/${value.id}`"
+              :key="value.id"
+              @click.prevent="selectContest(value.id)"
+              :class="{ selected: value.id === contestId }"
+            >
+              {{ value.name }}
+            </a>
+            <span :key="`span-${value.id}`"> || </span>
+          </template>
         </div>
-        <div class="awards-title text-centered">
+        <!-- <div class="awards-title text-centered">
           <select name="contest" v-model="contestId">
             <option v-for="(v, k) in contests" :key="k" :value="v.id"
               >{{ v.name }}
             </option>
           </select>
-        </div>
+        </div> -->
         <template v-if="!sent">
-          <div class="title-subtext text-centered">
-            {{ contest.description }}<br />
-            {{ periodText }}
+          <div class="contest-header" v-if="contest.image_url">
+            <img :src="contest.image_url" />
+          </div>
+          <div class="title-subtext text-centered ">
+            <h3 class="contest-title">{{ contest.description }}</h3>
+            <span class="contest-period semi-transparent">{{
+              periodText
+            }}</span>
           </div>
           <div class="explore-wrapper users">
             <Nominee
@@ -180,6 +195,9 @@ export default {
           userId: currentNominee.star_id
         }
       });
+    },
+    selectContest(value) {
+      this.contestId = value;
     }
   },
   watch: {
