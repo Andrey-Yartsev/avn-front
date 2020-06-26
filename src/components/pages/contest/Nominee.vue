@@ -66,7 +66,8 @@ export default {
           contestId: this.contestId,
           votesList: this.votesList,
           nominee: this.nominee.id,
-          userId: this.nominee.star_id
+          userId: this.nominee.star_id,
+          freeVoteUsed: this.nominee.freeVoteUsed || false
         }
       });
     },

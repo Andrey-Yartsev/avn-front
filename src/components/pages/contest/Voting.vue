@@ -92,7 +92,7 @@ export default {
       this.votingInProgress = true;
 
       setTimeout(() => {
-        if (this.votes == 1) {
+        if (this.votes == 1 && !this.props.freeVoteUsed) {
           this._vote();
           return;
         }
@@ -135,7 +135,7 @@ export default {
           this.votingInProgress = false;
         },
         {
-          dispatchAction: "contest/vote"
+          dispatchAction: "contest/_vote"
         }
       );
     }

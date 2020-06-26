@@ -43,9 +43,31 @@ const actions = {
       };
       xhr.send(formData);
     });
+  },
+  _vote({ dispatch, commit }, data) {
+    return dispatch("vote", data).then(res => {
+      if (data.amount === "1") {
+        commit("updateFreeVoteValue", data);
+      }
+      return res;
+    });
   }
 };
-const mutations = {};
+const mutations = {
+  updateFreeVoteValue(state, data) {
+    if (state.fetchNomineesResult.length) {
+      state.fetchNomineesResult = state.fetchNomineesResult.map(item => {
+        if (item.id === data.nominee) {
+          return {
+            ...item,
+            freeVoteUsed: true
+          };
+        }
+        return item;
+      });
+    }
+  }
+};
 
 createRequestAction({
   requestType: "any",
