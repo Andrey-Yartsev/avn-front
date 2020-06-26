@@ -2,6 +2,9 @@
   .info {
     width: 100%;
     border-collapse: collapse;
+    tbody {
+      border-bottom: 1px solid rgba($gray, 0.2);
+    }
     td, th {
       padding: 3px;
     }
@@ -36,7 +39,7 @@
     .form-group_with-label {
       padding-bottom: 5px;
     }
-    border-bottom: 1px solid rgba($gray, 0.2);
+    // border-bottom: 1px solid rgba($gray, 0.2);
   }
   .shadow-block {
     .table-wrapper {
