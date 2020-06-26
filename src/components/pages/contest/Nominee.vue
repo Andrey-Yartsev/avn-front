@@ -28,7 +28,7 @@
         :class="{ 'user-num-list_first': nominee.n === 1 }"
       >
         <NomineeMenu :nominee="nominee" :contestId="contestId" />
-        <span class="user-num-list__text">{{ nominee.n }}</span>
+        <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
       </div>
       <p class="profile-text">{{ nominee.description }}</p>
       <div class="text-centered mt-auto">
@@ -56,6 +56,11 @@ export default {
     contestId: Number,
     votesList: Object,
     active: Boolean
+  },
+  computed: {
+    showRank() {
+      return this.nominee.rank && this.nominee.rank_display;
+    }
   },
   methods: {
     openVoteModal() {
