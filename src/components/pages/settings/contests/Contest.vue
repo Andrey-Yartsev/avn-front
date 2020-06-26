@@ -59,7 +59,7 @@
                     <textarea
                       rows="3"
                       name="description"
-                      maxlength="500"
+                      maxlength="100"
                       style="resize: none; overflow: hidden; height: 50px;"
                       v-model="currentData.modelData.description"
                     >
@@ -173,7 +173,7 @@ export default {
       formData: null,
       imageSelected: false,
       image: null,
-      showTwitter: false,
+      showTwitter: true,
       imagePreview: null,
       isSending: false
     };
@@ -348,7 +348,7 @@ export default {
   padding-right: 11.5%;
   img {
     width: 67.5%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     display: block;
     margin: 10px 0 10px auto;
