@@ -1,15 +1,14 @@
 <template>
-  <tbody class="border-top">
-    <tr>
-      <td>
-        {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}
+  <div class="contest-table-body border-top">
+    <div class="contest-table-row">
+      <div class="contest-row-name">
+        {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }} <br />
         {{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}
-      </td>
-      <td align="center" style="vertical-align: baseline">
+      </div>
+      <div class="contest-row-rank">
         {{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}
-      </td>
-      <td></td>
-      <td class="toggler">
+      </div>
+      <div class="contest-row-toggler">
         <label class="toggle-element">
           <input
             type="checkbox"
@@ -22,147 +21,131 @@
             :class="{ disabled: data.hasFinished }"
           ></span>
         </label>
-      </td>
-    </tr>
-    <tr v-if="opened">
-      <td colspan="4">
-        <div class="edit">
-          <form @submit.prevent="update">
-            <div
-              class="contestImagePreview"
-              :class="{ 'full-width': $mq === 'mobile' }"
-              v-if="hasImagePreview"
-            >
-              <img :src="getImagePreview" alt="preview" />
-            </div>
-            <div
-              class="form-group-inner form-group_with-label"
-              :class="{ 'success icn-item': imageSelected }"
-            >
-              <span class="label">Upload Image</span>
-              <div class="photo-label-wrapper">
-                <label
-                  :for="`personalIdImage-${data.id}`"
-                  class="btn btn_fix-width btn_block border photo-btn"
-                  >Choose</label
-                >
-              </div>
-              <input
-                type="file"
-                :id="`personalIdImage-${data.id}`"
-                accept=".jpg,.jpeg,.png"
-                ref="image"
-                name="image"
-                @change="handleImageChoose"
-              />
-            </div>
-            <div class="form-group form-group_with-label">
-              <label class="form-group-inner">
-                <span class="label">Description</span>
-                <span class="form-group form-group_clear-gaps">
-                  <span class="form-field">
-                    <textarea
-                      rows="3"
-                      name="description"
-                      maxlength="100"
-                      style="resize: none; overflow: auto; height: auto;"
-                      v-model="currentData.modelData.description"
-                    >
-                    </textarea>
-                  </span>
-                </span>
-              </label>
-            </div>
-
-            <div class="form-group form-group_with-label">
-              <div class="form-group-inner form-group-title twitterConnect">
-                <span class="label">Connect Twitter</span>
-
-                <template v-if="isTwitterConnected">
-                  <span
-                    class="value twitter-value hidden-desktop"
-                    v-if="$mq === 'mobile'"
-                  >
-                    <a
-                      :href="'https://twitter.com/' + isTwitterConnected"
-                      target="_blank"
-                      rel="nofollow"
-                      >{{ isTwitterConnected }}</a
-                    >
-                  </span>
-                  <input
-                    class="rounded twitter-input hidden-mobile"
-                    type="text"
-                    readonly=""
-                    :value="'@' + isTwitterConnected"
-                    v-if="$mq === 'desktop'"
-                  />
-                  <label class="toggle-element">
-                    <input
-                      type="checkbox"
-                      id="subscribedOffline"
-                      v-model="showTwitter"
-                    />
-                    <span class="toggle-element_switcher"></span>
-                  </label>
-                </template>
-                <button
-                  v-else
-                  type="button"
-                  class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
-                  @click="twitterConnect"
-                >
-                  Connect Twitter account
-                </button>
-              </div>
-            </div>
-
-            <div class="form-group-btn">
-              <button
-                type="submit"
-                class="btn lg btn_fix-width-sm"
-                :disabled="!valid || isSending"
-              >
-                Save
-              </button>
-            </div>
-          </form>
-
+      </div>
+    </div>
+    <div class="contest-table-details" v-if="opened">
+      <div class="edit">
+        <form @submit.prevent="update">
+          <div class="contestImagePreview" v-if="hasImagePreview">
+            <img :src="getImagePreview" alt="preview" />
+          </div>
           <div
-            class="form-group form-group_with-label promote"
-            v-if="showPromoteLink"
+            class="form-group-inner form-group_with-label"
+            :class="{ 'success icn-item': imageSelected }"
           >
-            <div class="form-group-inner form-group-title">
-              <span class="label">Promote Contest</span>
-              <div class="input">{{ promoteContestLink() }}</div>
-              <button
-                type="button"
-                class="btn border disconnect-twitter semi-transparent"
-                @click="copyContestLink"
+            <span class="label">Upload Image</span>
+            <div class="photo-label-wrapper">
+              <label
+                :for="`personalIdImage-${data.id}`"
+                class="btn btn_fix-width btn_block border photo-btn"
+                >Choose</label
               >
-                Copy
+            </div>
+            <input
+              type="file"
+              :id="`personalIdImage-${data.id}`"
+              accept=".jpg,.jpeg,.png"
+              ref="image"
+              name="image"
+              @change="handleImageChoose"
+            />
+          </div>
+          <div class="form-group form-group_with-label">
+            <label class="form-group-inner">
+              <span class="label">Description</span>
+              <span class="form-group form-group_clear-gaps">
+                <span class="form-field">
+                  <textarea
+                    rows="3"
+                    name="description"
+                    maxlength="100"
+                    style="resize: none; overflow: auto; height: auto;"
+                    v-model="currentData.modelData.description"
+                  >
+                  </textarea>
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="form-group form-group_with-label">
+            <div class="form-group-inner form-group-title twitterConnect">
+              <span class="label">{{
+                isTwitterConnected ? "Twitter" : "Connect Twitter"
+              }}</span>
+
+              <template v-if="isTwitterConnected">
+                <input
+                  class="rounded twitter-input"
+                  type="text"
+                  readonly=""
+                  :value="'@' + isTwitterConnected"
+                />
+                <label class="toggle-element">
+                  <input
+                    type="checkbox"
+                    id="subscribedOffline"
+                    v-model="showTwitter"
+                  />
+                  <span class="toggle-element_switcher"></span>
+                </label>
+              </template>
+              <button
+                v-else
+                type="button"
+                class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+                @click="twitterConnect"
+              >
+                Connect Twitter account
               </button>
             </div>
           </div>
 
-          <div class="supporters" v-if="data.topSupporters.length">
-            <div>
-              <table>
-                <tr>
-                  <th>Top Supporters</th>
-                  <th>Amount</th>
-                </tr>
-                <tr v-for="v in data.topSupporters" :key="v.username">
-                  <td>{{ v.name }}</td>
-                  <td>${{ v.amount }}</td>
-                </tr>
-              </table>
-            </div>
+          <div class="form-group-btn">
+            <button
+              type="submit"
+              class="btn lg btn_fix-width-sm"
+              :disabled="!valid || isSending"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="form-group form-group_with-label promote"
+          v-if="showPromoteLink"
+        >
+          <div class="form-group-inner">
+            <span class="label">Promote Contest</span>
+            <span class="input">{{ promoteContestLink() }}</span>
+            <button
+              type="button"
+              class="btn border semi-transparent copy-link"
+              @click="copyContestLink"
+            >
+              Copy
+            </button>
           </div>
         </div>
-      </td>
-    </tr>
-  </tbody>
+
+        <div class="supporters" v-if="data.topSupporters.length">
+          <div>
+            <table>
+              <tr>
+                <th>Top Supporters</th>
+                <th>Amount</th>
+              </tr>
+              <tr v-for="v in data.topSupporters" :key="v.username">
+                <td>{{ v.name }}</td>
+                <td>${{ v.amount }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -347,28 +330,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.contestImagePreview {
-  padding-right: 11.5%;
-  img {
-    width: 67.5%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    margin: 10px 0 10px auto;
-  }
-  &.full-width {
-    padding-right: 0;
-    img {
-      width: 100%;
-    }
-  }
-}
-.twitter-input {
-  margin-right: 20px;
-}
-.twitterConnect {
-  align-items: center;
-}
-</style>

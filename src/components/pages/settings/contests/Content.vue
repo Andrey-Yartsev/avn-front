@@ -18,19 +18,19 @@
             </div>
           </div>
         </div>
-        <table v-else class="info">
-          <tr>
-            <th>Contest</th>
-            <th class="rank">Rank</th>
-            <th class="toggler"></th>
-          </tr>
+        <div v-else class="contest-table info">
+          <div class="contest-table-head contest-table-row">
+            <div class="contest-row-name">Contest</div>
+            <div class="contest-row-rank">Rank</div>
+            <div class="contest-row-toggler"></div>
+          </div>
           <template v-if="items && items.length">
             <Contest :data="v" v-for="v in items" :key="v.id" />
           </template>
-          <tr v-else>
-            <td colspan="4">Empty here for now</td>
-          </tr>
-        </table>
+          <div class="contest-table-empty" v-else>
+            <span>Empty here for now</span>
+          </div>
+        </div>
       </template>
     </div>
   </div>
