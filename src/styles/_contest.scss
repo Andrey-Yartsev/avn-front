@@ -41,6 +41,11 @@
   }
   .userView {
     margin-bottom: 20px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: 286px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     &.active {
       border: 2px solid rgba($default-secondary-color, 0.5);
     }
