@@ -1,10 +1,13 @@
 <template>
   <div class="contest-table-body border-top">
     <div class="contest-table-row">
-      <div class="contest-row-name">
-        {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }} <br />
-        {{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}
-      </div>
+      <router-link :to="`/contests/${data.id}`" class="contest-row-name">
+        {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}
+        <br />
+        <span class="contest-row-date semi-transparent"
+          >{{ getDate(data.starts_at) }} - {{ getDate(data.ends_at) }}</span
+        >
+      </router-link>
       <div class="contest-row-rank">
         {{ data.modelData.rank ? `#${data.modelData.rank}` : "" }}
       </div>

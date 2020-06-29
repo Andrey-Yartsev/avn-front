@@ -29,6 +29,9 @@
       .contest-row-toggler {
         width: 20%;
       }
+      .contest-row-date {
+        color: black;
+      }
     }
     td,
     th {
@@ -93,6 +96,8 @@
   }
 
   .contestImagePreview {
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding-right: 11.5%;
     @include media-breakpoint-down($desktop-breakpoint) {
       padding-right: 0;
@@ -128,5 +133,8 @@
     @include media-breakpoint-down($desktop-breakpoint-dcrs) {
       margin-top: 0;
     }
+  }
+  .cards {
+    padding-bottom: 24px;
   }
 }

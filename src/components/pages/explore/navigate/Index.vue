@@ -37,9 +37,13 @@
     <router-link to="/explore" exact class="content-nav__item" data-type="top"
       >Feed</router-link
     >
-    <!--    <router-link to="/contest" exact class="content-nav__item" data-type="top"-->
-    <!--      >Contest</router-link-->
-    <!--    >-->
+    <router-link
+      v-if="contestsEnabled"
+      to="/contests"
+      class="content-nav__item"
+      data-type="top"
+      >Contests</router-link
+    >
   </nav>
 </template>
 
@@ -51,6 +55,18 @@ export default {
 
   components: {
     GenderFilter
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
+    },
+    contestsEnabled() {
+      return (
+        this.user?.showVote || // showVote is admin user, renamed for secure reason
+        this.user?.adminReturnUrl ||
+        this.$store.state.init.data.enableContests
+      );
+    }
   }
 };
 </script>
