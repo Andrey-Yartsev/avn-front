@@ -1,32 +1,37 @@
 <template>
   <div class="reasons reasons__content bg-gradient_light">
     <div class="form-group radio-group radio-group_no-gaps">
-      <label
-        v-for="v in votesOptions"
-        class="form-group-inner"
-        :class="{ 'no-border-line': $mq === 'mobile' }"
-        :key="v.id"
-      >
-        <div class="radio-wrapper icn-item">
-          <input
-            type="radio"
-            name="vote"
-            :value="v.id"
-            @click="select(v)"
-            v-model="votes"
-          />
-          <span class="label">{{ v.title }}</span>
-        </div>
-      </label>
-      <div class="form-group bottom-buttons">
-        <div></div>
-        <button class="btn ok-btn" @click="vote" :disabled="votingInProgress">
-          Vote
-        </button>
-        <button class="btn border" @click="$emit('close')">
-          Cancel
-        </button>
+      <div v-if="isAuthor && freeVoteUsed" style="text-align: center">
+        Sorry, but you've already used a free vote for yourself
       </div>
+      <template v-else>
+        <label
+          v-for="v in votesOptions"
+          class="form-group-inner"
+          :class="{ 'no-border-line': $mq === 'mobile' }"
+          :key="v.id"
+        >
+          <div class="radio-wrapper icn-item">
+            <input
+              type="radio"
+              name="vote"
+              :value="v.id"
+              @click="select(v)"
+              v-model="votes"
+            />
+            <span class="label">{{ v.title }}</span>
+          </div>
+        </label>
+        <div class="form-group bottom-buttons">
+          <div></div>
+          <button class="btn ok-btn" @click="vote" :disabled="votingInProgress">
+            Vote
+          </button>
+          <button class="btn border" @click="$emit('close')">
+            Cancel
+          </button>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -62,6 +67,11 @@ export default {
       return this.contests.find(v => v.id === this.props.contestId);
     },
     votesList() {
+      if (this.isAuthor) {
+        return {
+          1: this.contest.votesList["1"]
+        };
+      }
       return this.contest.votesList;
     },
     payPayload() {
@@ -76,6 +86,12 @@ export default {
     },
     voteError() {
       return this.$store.state.contest.voteError;
+    },
+    freeVoteUsed() {
+      return this.props.freeVoteUsed;
+    },
+    isAuthor() {
+      return this.user && this.user.id == this.props.userId;
     }
   },
   watch: {
