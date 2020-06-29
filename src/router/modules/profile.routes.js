@@ -72,6 +72,16 @@ export const routes = [
     }
   },
   {
+    beforeEnter: Profile.contests,
+    path: "/:username/c/:contestId?/:nomineeId?",
+    name: "ContestPage",
+    component: () =>
+      import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index"),
+    meta: {
+      cssName: "contests"
+    }
+  },
+  {
     beforeEnter: Profile.init,
     path: "/:username/:page?",
     name: "ProfilePage",

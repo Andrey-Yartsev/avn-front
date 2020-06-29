@@ -74,6 +74,20 @@ const Profile = {
         fetchProfile();
       }
     });
+  },
+  contests(to, from, next) {
+    const { contestId, nomineeId, username } = to.params;
+    Store.dispatch("contest/isExist", { contestId })
+      .then(res => {
+        if (res.length) {
+          next(`/contests/${contestId}/${nomineeId}`);
+        } else {
+          next(`/${username}`);
+        }
+      })
+      .catch(() => {
+        next(`/${username}`);
+      });
   }
 };
 

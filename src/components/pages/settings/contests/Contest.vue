@@ -191,6 +191,9 @@ export default {
         !this.data.hasFinished &&
         this.currentData.modelData?.nominee_id
       );
+    },
+    user() {
+      return this.$store.state.auth.user;
     }
   },
   watch: {
@@ -306,9 +309,9 @@ export default {
       window.location.href = Twitter.getConnectUrl("/settings/account");
     },
     promoteContestLink() {
-      return `${window.location.origin}/contests/${this.data.id}/${
-        this.currentData.modelData.nominee_id
-      }`;
+      return `${window.location.origin}/${this.user.username}/c/${
+        this.data.id
+      }/${this.currentData.modelData.nominee_id}`;
     },
     copyContestLink() {
       this.$copyText(this.promoteContestLink())

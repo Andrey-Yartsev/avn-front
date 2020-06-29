@@ -63,9 +63,9 @@ export default {
   },
   computed: {
     shareLink() {
-      return `${window.location.origin}/contests/${this.contestId}/${
-        this.nominee.id
-      }`;
+      return `${window.location.origin}/${this.nominee.username}/c/${
+        this.contestId
+      }/${this.nominee.id}`;
     }
   },
   methods: {
