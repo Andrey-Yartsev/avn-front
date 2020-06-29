@@ -99,22 +99,6 @@ createRequestAction({
 });
 
 createRequestAction({
-  requestType: "any",
-  prefix: "isExist",
-  apiPath: "contests/nominees/{contestId}",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "GET"
-  },
-  defaultResultValue: [],
-  paramsToPath: function(params, path) {
-    return path.replace(/{contestId}/, params.contestId);
-  }
-});
-
-createRequestAction({
   prefix: "remove",
   apiPath: "contests/{contestId}/remove/{nomineeId}",
   state,

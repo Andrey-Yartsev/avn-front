@@ -77,9 +77,12 @@ const Profile = {
   },
   contests(to, from, next) {
     const { contestId, nomineeId, username } = to.params;
-    Store.dispatch("contest/isExist", { contestId })
+    Store.dispatch("contest/fetchContests")
       .then(res => {
-        if (res.length) {
+        const isContestExists = res.find(
+          item => item.id == contestId && item.is_voting_active
+        );
+        if (isContestExists) {
           next(`/contests/${contestId}/${nomineeId}`);
         } else {
           next(`/${username}`);
