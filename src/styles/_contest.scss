@@ -63,6 +63,26 @@
       top: 0;
       left: 0;
       right: 0;
+      &__btn {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          white-space: nowrap;
+          padding-top: 10px;
+          padding-bottom: 8px;
+          margin: 0;
+        }
+        &:before {
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin: 11px auto;
+            position: relative;
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+      }
     }
     .user-container {
       flex: auto;
@@ -87,5 +107,4 @@
 }
 
 .ContestsCollectionView {
-
 }

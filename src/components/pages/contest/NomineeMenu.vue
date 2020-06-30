@@ -9,14 +9,15 @@
       }
     "
   >
-    <div
+    <div class="more-functions__overlay"></div>
+    <!-- <div
       class="more-functions__overlay"
       @click="
         () => {
           opened = false;
         }
       "
-    ></div>
+    ></div> -->
     <div class="more-functions__btn"></div>
     <div class="more-functions__dropdown">
       <div class="more-functions__dropdown-inside">
