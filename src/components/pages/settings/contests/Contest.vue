@@ -1,7 +1,11 @@
 <template>
   <div class="contest-table-body border-top">
     <div class="contest-table-row">
-      <router-link :to="`/contests/${data.id}`" class="contest-row-name">
+      <router-link
+        :to="`/contests/${data.id}`"
+        class="contest-row-name"
+        :event="!data.hasFinished ? 'click' : ''"
+      >
         {{ data.name }}{{ data.hasFinished ? " (finished)" : "" }}
         <br />
         <span class="contest-row-date semi-transparent"
@@ -222,7 +226,7 @@ export default {
         }
       };
       this.formData = new FormData();
-      if (this.data.modelData?.contest_id) {
+      if (this.data.modelData?.contest_id && !this.data.hasFinished) {
         this.opened = true;
       }
       if (this.data.modelData?.twitter_handle) {
