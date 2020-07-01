@@ -126,17 +126,17 @@ export default {
     },
     periodText() {
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-      const m1 = moment(d1, this.contest.timezone);
+      const m1 = moment(d1);
       let r2 = null;
       if (this.contest.ends_at) {
         const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
-        const m2 = moment(d2, this.contest.timezone);
+        const m2 = moment(d2);
         r2 = m2.local().format("MMM Do h:mm a");
       }
       const r1 = m1.local().format("MMM Do h:mm a");
-      let s = `${r1} PDT`;
+      let s = `${r1}`;
       if (r2) {
-        s += ` to ${r2} PDT`;
+        s += ` to ${r2}`;
       }
       return s;
     },
