@@ -59,10 +59,10 @@
               <span class="form-group form-group_clear-gaps">
                 <span class="form-field">
                   <textarea
-                    rows="3"
+                    rows="5"
                     name="description"
                     maxlength="100"
-                    style="resize: none; overflow: auto; height: auto;"
+                    style="resize: none; overflow: auto; height: auto; font-size: 12px"
                     v-model="currentData.modelData.description"
                   >
                   </textarea>
