@@ -156,7 +156,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from "moment-timezone";
 import Twitter from "@/utils/twitter";
 
 export default {
@@ -237,7 +237,10 @@ export default {
       if (!date) {
         return "";
       }
-      return moment(date).format("MMM D, hh:mm a");
+      const str = moment(date)
+        .tz(this.data.timezone)
+        .format("MMM D, hh:mm a");
+      return str + " PDT";
     },
     handleImageChoose(event) {
       const files = event.target.files;
