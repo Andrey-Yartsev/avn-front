@@ -42,6 +42,7 @@
               :key="v.id"
               :nominee="v"
               :contestId="contestId"
+              :contestName="contest.name"
               :active="activeNomineeId === v.id"
             />
           </div>

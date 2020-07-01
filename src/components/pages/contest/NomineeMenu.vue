@@ -31,6 +31,18 @@
               <span class="more-functions__option">Copy share link</span>
             </a>
           </li>
+          <li v-if="showTwitterShareLink" class="more-functions__item">
+            <a
+              :id="'nominee' + nominee.id"
+              ref="tweetLink"
+              target="_blank"
+              :href="getHrefString"
+              class="menu-cancel more-functions__link"
+              data-show-count="false"
+            >
+              <span class="more-functions__option">Tweet</span>
+            </a>
+          </li>
           <li class="more-functions__item">
             <a class="menu-cancel more-functions__link">
               <span class="more-functions__option">Cancel</span>
@@ -52,7 +64,8 @@ export default {
     contestId: {
       type: Number,
       required: true
-    }
+    },
+    contestName: String
   },
   directives: {
     ClickOutside
@@ -67,6 +80,22 @@ export default {
       return `${window.location.origin}/${this.nominee.username}/c/${
         this.contestId
       }/${this.nominee.id}`;
+    },
+    showTwitterShareLink() {
+      return this.nominee.twitter_handle;
+    },
+    getTextString() {
+      return `#AVNStars ${window.location.origin}/${this.nominee.username}/c/${
+        this.contestId
+      }/${this.nominee.id}`;
+    },
+    getHrefString() {
+      const fullText = `I voted for @${this.nominee.twitter_handle} for ${
+        this.contestName
+      } at ${this.getTextString}`;
+      let text = encodeURI(fullText) || "";
+      text = text.replace(/#/g, "%23");
+      return `https://twitter.com/intent/tweet?text=${text}`;
     }
   },
   methods: {

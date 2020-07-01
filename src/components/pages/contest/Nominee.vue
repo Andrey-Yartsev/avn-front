@@ -27,7 +27,11 @@
         class="user-num-list"
         :class="{ 'user-num-list_first': nominee.n === 1 && showRank }"
       >
-        <NomineeMenu :nominee="nominee" :contestId="contestId" />
+        <NomineeMenu
+          :nominee="nominee"
+          :contestId="contestId"
+          :contestName="contestName"
+        />
         <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
       </div>
       <p class="profile-text" v-html="nominee.description"></p>
@@ -56,7 +60,8 @@ export default {
     nominee: Object,
     contestId: Number,
     votesList: Object,
-    active: Boolean
+    active: Boolean,
+    contestName: String
   },
   computed: {
     showRank() {
