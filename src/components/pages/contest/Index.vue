@@ -31,7 +31,7 @@
             <img :src="contest.image_url" />
           </div>
           <div class="title-subtext text-centered ">
-            <h3 class="contest-title">{{ contest.description }}</h3>
+            <h3 v-html="contest.description" class="contest-title" />
             <span class="contest-period semi-transparent">{{
               periodText
             }}</span>

@@ -34,7 +34,7 @@
         />
         <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
       </div>
-      <p class="profile-text" v-html="nominee.description"></p>
+      <p class="profile-text">{{ nominee.description }}</p>
       <div class="text-centered mt-auto">
         <button
           type="button"
