@@ -1,7 +1,7 @@
 <template>
   <div class="container contest">
     <Navigate />
-    <div class="loader-container" v-if="loading">
+    <div class="loader-container" v-if="loading && isFirstInit">
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
@@ -47,6 +47,7 @@
               :isVotingActive="contest.is_voting_active"
             />
           </div>
+          <div v-if="nominees.length" ref="scrollObserver"></div>
         </template>
       </template>
       <template v-else>
@@ -67,10 +68,11 @@ import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import Nominee from "./Nominee";
 import moment from "moment-timezone";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Contest",
-  mixins: [User],
+  mixins: [User, IntersectionObserver],
   components: {
     Navigate,
     Footer,
@@ -82,7 +84,8 @@ export default {
       data: {},
       scriptLoading: true,
       activeNomineeId: 0,
-      contestId: 0
+      contestId: 0,
+      isFirstInit: true
     };
   },
   computed: {
@@ -116,7 +119,7 @@ export default {
       return this.contests.find(v => v.id === this.contestId);
     },
     _nominees() {
-      return this.$store.state.contest.fetchNomineesResult;
+      return this.$store.state.contest.nominees;
     },
     nominees() {
       return this._nominees.map((v, i) => {
@@ -150,6 +153,9 @@ export default {
       } else {
         return this.$store.state.init?.data?.enableContests;
       }
+    },
+    allDataRecieved() {
+      return this.$store.state.contest.allDataReceived;
     }
   },
   methods: {
@@ -158,11 +164,16 @@ export default {
         return;
       }
       this.$store
-        .dispatch("contest/fetchNominees", {
+        .dispatch("contest/_fetchNominees", {
           contestId: this.contestId
         })
         .then(() => {
-          this.scrollToShared();
+          if (this.isFirstInit) {
+            this.scrollToShared();
+            this.isFirstInit = false;
+          }
+          this.isInitFetch = false;
+          this.handleResponseWithIntersectionObserver(this.init);
         });
     },
     input(v) {

@@ -4,10 +4,15 @@ import Store from "@/store";
 import { createRequestAction } from "@/store/utils/storeRequest";
 import settings from "./contest/settings";
 
+const fetchLimit = 12;
+
 const state = {
   categories: [],
   nominees: [],
-  prizes: []
+  prizes: [],
+  offset: 0,
+  limit: fetchLimit,
+  allDataReceived: false
 };
 
 const actions = {
@@ -51,12 +56,21 @@ const actions = {
       }
       return res;
     });
+  },
+  _fetchNominees({ dispatch, commit, state }, { contestId }) {
+    return dispatch("fetchNominees", {
+      offset: state.offset,
+      contestId
+    }).then(res => {
+      commit("addNominees", res);
+      commit("isAllNomineesReceived", res.length);
+    });
   }
 };
 const mutations = {
   updateFreeVoteValue(state, data) {
-    if (state.fetchNomineesResult.length) {
-      state.fetchNomineesResult = state.fetchNomineesResult.map(item => {
+    if (state.nominees.length) {
+      state.nominees = state.nominees.map(item => {
         if (item.id === data.nominee) {
           return {
             ...item,
@@ -65,6 +79,16 @@ const mutations = {
         }
         return item;
       });
+    }
+  },
+  addNominees(state, nominees) {
+    state.nominees = [...state.nominees, ...nominees];
+  },
+  isAllNomineesReceived(state, length) {
+    if (length < state.limit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset = state.offset + state.limit;
     }
   }
 };
@@ -93,6 +117,15 @@ createRequestAction({
     method: "GET"
   },
   defaultResultValue: [],
+  paramsToOptions: function(params) {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.offset = params.offset || 0;
+    options.query.limit = fetchLimit;
+    return options;
+  },
   paramsToPath: function(params, path) {
     return path.replace(/{contestId}/, params.contestId);
   }
