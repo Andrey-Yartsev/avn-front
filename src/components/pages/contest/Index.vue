@@ -44,6 +44,7 @@
               :contestId="contestId"
               :contestName="contest.name"
               :active="activeNomineeId === v.id"
+              :isVotingActive="contest.is_voting_active"
             />
           </div>
         </template>

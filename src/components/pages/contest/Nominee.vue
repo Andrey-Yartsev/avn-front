@@ -28,6 +28,7 @@
         :class="{ 'user-num-list_first': nominee.n === 1 && showRank }"
       >
         <NomineeMenu
+          v-if="isVotingActive"
           :nominee="nominee"
           :contestId="contestId"
           :contestName="contestName"
@@ -35,7 +36,7 @@
         <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
       </div>
       <p class="profile-text">{{ nominee.description }}</p>
-      <div class="text-centered mt-auto">
+      <div v-if="isVotingActive" class="text-centered mt-auto">
         <button
           type="button"
           class="btn alt border btn_fix-width-sm"
@@ -61,7 +62,8 @@ export default {
     contestId: Number,
     votesList: Object,
     active: Boolean,
-    contestName: String
+    contestName: String,
+    isVotingActive: Boolean
   },
   computed: {
     showRank() {

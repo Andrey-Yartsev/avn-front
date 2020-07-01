@@ -171,8 +171,8 @@ export default {
   },
   computed: {
     valid() {
-      return (
-        this.currentData.description &&
+      return !!(
+        this.currentData.modelData.description &&
         (this.imageSelected || this.currentData.modelData?.image_url)
       );
     },
