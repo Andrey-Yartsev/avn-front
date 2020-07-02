@@ -249,7 +249,7 @@ export default {
       const nomineeId = this.$route.params.nomineeId;
       if (nomineeId) {
         this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
-      } else {
+      } else if (contestId != this.$route.params.contestId) {
         this.$router.push(`/contests/${contestId}`);
       }
       this.destroyObserver();

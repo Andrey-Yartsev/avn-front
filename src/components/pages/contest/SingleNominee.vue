@@ -179,14 +179,13 @@ export default {
     },
     async send() {},
     openVoteModal() {
+      const nomineeId = this.$route.params.nomineeId;
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login",
           data: {
             callback: () =>
-              this.$router.push(
-                `/contests/${this.contestId}/${this.$route.params.nomineeId}`
-              )
+              this.$router.push(`/contests/${this.contestId}/${nomineeId}`)
           }
         });
       } else {
@@ -196,7 +195,7 @@ export default {
             name: this.nominee.name,
             contestId: this.contestId,
             nominee: this.nominee.nominee_id,
-            userId: this.$route.params.nomineeId
+            userId: nomineeId
           }
         });
       }
