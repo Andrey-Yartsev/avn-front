@@ -28,13 +28,23 @@
           >
             <div class="radio-wrapper icn-item">
               <input
+                :disabled="
+                  v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
+                "
                 type="radio"
                 name="vote"
                 :value="v.id"
                 @click="select(v)"
                 v-model="votes"
               />
-              <span class="label">{{ v.title }}</span>
+              <span
+                class="label"
+                :class="{
+                  disabled:
+                    v.id == 1 && (props.freeVoteUsed || isSingleFreeVoteUsed)
+                }"
+                >{{ v.title }}</span
+              >
             </div>
           </label>
         </template>
@@ -89,6 +99,12 @@ export default {
           1: this.contest.votesList["1"]
         };
       }
+      // if (this.props.freeVoteUsed) {
+      //   const votesOption = {...this.contests.votesList}
+      //   delete votesOption["1"]
+      //   return
+      //   return {...this.contests.votesList}
+      // }
       return this.contest.votesList;
     },
     payPayload() {
@@ -122,6 +138,12 @@ export default {
       let text = encodeURI(fullText) || "";
       text = text.replace(/#/g, "%23");
       return `https://twitter.com/intent/tweet?text=${text}`;
+    },
+    isSingleFreeVoteUsed() {
+      return (
+        this.$store.state.contest.singleNominee &&
+        this.$store.state.contest.singleFreeVoteUsed
+      );
     }
   },
   watch: {
@@ -203,7 +225,11 @@ export default {
     }
   },
   created() {
-    this.votes = this.votesOptions[0].id;
+    if (this.props.freeVoteUsed || this.isSingleFreeVoteUsed) {
+      this.votes = this.votesOptions[1].id;
+    } else {
+      this.votes = this.votesOptions[0].id;
+    }
   }
 };
 </script>
@@ -229,5 +255,8 @@ export default {
   .icn-twitter {
     margin-right: 5px;
   }
+}
+.label.disabled {
+  opacity: 0.5;
 }
 </style>

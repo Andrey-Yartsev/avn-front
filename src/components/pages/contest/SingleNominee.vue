@@ -162,11 +162,18 @@ export default {
           nomineeId: this.$route.params.nomineeId
         })
         .then(res => {
-          this.nominee = res;
+          this.nominee = {
+            ...res,
+            star_id: this.$route.params.nomineeId
+          };
           this.$nextTick(() => {
             this.openVoteModal();
           });
           this.isLoading = false;
+          this.$store.commit("contest/setSingleNominee", res.nominee_id);
+          if (res.freeVoteUsed) {
+            this.$store.commit("contest/setSingleFreeVoteUsed");
+          }
         })
         .catch(() => {
           this.isLoading = false;
@@ -195,7 +202,11 @@ export default {
             name: this.nominee.name,
             contestId: this.contestId,
             nominee: this.nominee.nominee_id,
-            userId: nomineeId
+            userId: this.$route.params.nomineeId,
+            contestName: this.contest.name,
+            votesList: this.contest.votesList,
+            freeVoteUsed: this.nominee.freeVoteUsed || false,
+            nomineeTwitter: this.nominee.twitter_handle
           }
         });
       }
@@ -234,8 +245,13 @@ export default {
       this.$router.push("/");
       return;
     }
-    this.$store.dispatch("contest/fetchContests");
-    this.init();
+    this.$store.dispatch("contest/fetchContests").then(() => {
+      this.init();
+    });
+  },
+  beforeDestroy() {
+    this.$store.commit("contest/removeSingleNominee");
+    this.$store.commit("contest/clearSingleFreeVoteUsed");
   }
 };
 </script>

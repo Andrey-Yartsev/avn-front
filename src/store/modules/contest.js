@@ -12,7 +12,9 @@ const state = {
   prizes: [],
   offset: 0,
   limit: fetchLimit,
-  allDataReceived: false
+  allDataReceived: false,
+  singleNominee: null,
+  singleFreeVoteUsed: false
 };
 
 const actions = {
@@ -49,10 +51,13 @@ const actions = {
       xhr.send(formData);
     });
   },
-  _vote({ dispatch, commit }, data) {
+  _vote({ dispatch, commit, state }, data) {
     return dispatch("vote", data).then(res => {
       if (data.amount === "1") {
         commit("updateFreeVoteValue", data);
+        if (state.singleNominee && !state.singleFreeVoteUsed) {
+          commit("setSingleFreeVoteUsed");
+        }
       }
       return res;
     });
@@ -98,6 +103,18 @@ const mutations = {
     state.nominees = [];
     state.offset = 0;
     state.allDataReceived = false;
+  },
+  setSingleNominee(state, id) {
+    state.singleNominee = id;
+  },
+  removeSingleNominee(state) {
+    state.singleNominee = null;
+  },
+  setSingleFreeVoteUsed(state) {
+    state.singleFreeVoteUsed = true;
+  },
+  clearSingleFreeVoteUsed(state) {
+    state.singleFreeVoteUsed = true;
   }
 };
 

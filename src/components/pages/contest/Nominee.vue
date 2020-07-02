@@ -79,7 +79,7 @@ export default {
           contestId: this.contestId,
           contestName: this.contestName,
           votesList: this.votesList,
-          nominee: this.nominee.id,
+          nominee: this.nominee.id || this.nominee.nominee_id,
           userId: this.nominee.star_id,
           freeVoteUsed: this.nominee.freeVoteUsed || false,
           nomineeTwitter: this.nominee.twitter_handle
