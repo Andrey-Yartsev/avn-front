@@ -79,7 +79,7 @@ export default {
     shareLink() {
       return `${window.location.origin}/${this.nominee.username}/c/${
         this.contestId
-      }/${this.nominee.id}`;
+      }/${this.nominee.star_id}`;
     },
     showTwitterShareLink() {
       return this.nominee.twitter_handle;
@@ -87,7 +87,7 @@ export default {
     getTextString() {
       return `#AVNStars ${window.location.origin}/${this.nominee.username}/c/${
         this.contestId
-      }/${this.nominee.id}`;
+      }/${this.nominee.star_id}`;
     },
     getHrefString() {
       const fullText = `I voted for @${this.nominee.twitter_handle} for ${

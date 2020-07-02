@@ -74,9 +74,9 @@ export const routes = [
   {
     beforeEnter: Profile.contests,
     path: "/:username/c/:contestId?/:nomineeId?",
-    name: "ContestPage",
+    name: "SingleNomineePage",
     component: () =>
-      import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index"),
+      import(/* webpackChunkName: "SingleNomineePage" */ "@/components/pages/contest/Index"),
     meta: {
       cssName: "contests"
     }

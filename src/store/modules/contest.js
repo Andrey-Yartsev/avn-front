@@ -65,6 +65,9 @@ const actions = {
       commit("addNominees", res);
       commit("isAllNomineesReceived", res.length);
     });
+  },
+  _fetchNomineeItem({ dispatch }, { contestId, nomineeId }) {
+    return dispatch("fetchNomineeItem", { contestId, nomineeId });
   }
 };
 const mutations = {
@@ -90,6 +93,11 @@ const mutations = {
     } else {
       state.offset = state.offset + state.limit;
     }
+  },
+  resetNominees(state) {
+    state.nominees = [];
+    state.offset = 0;
+    state.allDataReceived = false;
   }
 };
 
@@ -128,6 +136,24 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{contestId}/, params.contestId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "fetchNomineeItem",
+  apiPath: "contests/me/{contestId}/{nomineeId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  defaultResultValue: [],
+  paramsToPath: function(params, path) {
+    let str = path.replace(/{contestId}/, params.contestId);
+    str = str.replace(/{nomineeId}/, params.nomineeId);
+    return str;
   }
 });
 

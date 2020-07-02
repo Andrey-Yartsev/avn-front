@@ -321,7 +321,7 @@ export default {
     promoteContestLink() {
       return `${window.location.origin}/${this.user.username}/c/${
         this.data.id
-      }/${this.currentData.modelData.nominee_id}`;
+      }/${this.user.id}`;
     },
     copyContestLink() {
       this.$copyText(this.promoteContestLink())

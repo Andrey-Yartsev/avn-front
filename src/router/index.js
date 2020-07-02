@@ -145,7 +145,17 @@ const routes = [
   },
   {
     beforeEnter: Auth.requireAny,
-    path: "/contests/:contestId?/:nomineeId?",
+    path: "/contests/:contestId/:nomineeId",
+    name: "SingleNomineePage",
+    component: () =>
+      import(/* webpackChunkName: "SingleNomineePage" */ "@/components/pages/contest/SingleNominee"),
+    meta: {
+      cssName: "contests"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAny,
+    path: "/contests/:contestId?",
     name: "ContestPage",
     component: () =>
       import(/* webpackChunkName: "ContestPage" */ "@/components/pages/contest/Index"),
