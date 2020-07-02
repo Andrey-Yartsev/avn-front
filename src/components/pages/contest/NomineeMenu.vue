@@ -35,8 +35,9 @@
             <a
               :id="'nominee' + nominee.id"
               ref="tweetLink"
-              target="_blank"
+              target="popup"
               :href="getHrefString"
+              @click.prevent="clickTweetLink"
               class="menu-cancel more-functions__link"
               data-show-count="false"
             >
@@ -105,6 +106,13 @@ export default {
           text: "Link copied!"
         });
       });
+    },
+    clickTweetLink() {
+      window.open(
+        this.getHrefString,
+        "popup",
+        "menubar=1,resizable=1,width=500,height=400"
+      );
     }
   }
 };

@@ -77,10 +77,12 @@ export default {
         data: {
           name: this.nominee.name,
           contestId: this.contestId,
+          contestName: this.contestName,
           votesList: this.votesList,
           nominee: this.nominee.id,
           userId: this.nominee.star_id,
-          freeVoteUsed: this.nominee.freeVoteUsed || false
+          freeVoteUsed: this.nominee.freeVoteUsed || false,
+          nomineeTwitter: this.nominee.twitter_handle
         }
       });
     },
