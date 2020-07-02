@@ -47,6 +47,12 @@
               :isVotingActive="contest.is_voting_active"
             />
           </div>
+          <div
+            v-if="nominees.length && !allDataRecieved"
+            class="loader-container"
+          >
+            <Loader text="" :fullscreen="false" :small="true" />
+          </div>
           <div v-if="nominees.length" ref="scrollObserver"></div>
         </template>
       </template>
