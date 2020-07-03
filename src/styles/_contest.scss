@@ -5,6 +5,10 @@
 }
 
 .popup-contest-voting {
+  .content {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
   .ok-btn {
     margin-right: 15px;
   }
