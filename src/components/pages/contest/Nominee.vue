@@ -93,7 +93,7 @@ export default {
           data: {
             callback: () =>
               this.$router.push(
-                `/contests/${this.contestId}/${this.nominee.id}`
+                `/contests/${this.contestId}/${this.nominee.star_id}`
               )
           }
         });
