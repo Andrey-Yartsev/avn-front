@@ -38,7 +38,6 @@
               class="image"
               :style="`background-image: url(${getImagePreview})`"
             />
-            <!-- <img :src="getImagePreview" alt="preview" /> -->
           </div>
           <div
             class="form-group-inner form-group_with-label"
@@ -313,7 +312,10 @@ export default {
           });
         })
         .catch(err => {
-          console.log(err);
+          this.$store.dispatch("global/flashToast", {
+            text: err.message,
+            type: "error"
+          });
         })
         .finally(() => {
           this.isSending = false;
