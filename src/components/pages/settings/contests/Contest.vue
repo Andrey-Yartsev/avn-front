@@ -34,7 +34,11 @@
       <div class="edit">
         <form @submit.prevent="update">
           <div class="contestImagePreview" v-if="hasImagePreview">
-            <img :src="getImagePreview" alt="preview" />
+            <div
+              class="image"
+              :style="`background-image: url(${getImagePreview})`"
+            />
+            <!-- <img :src="getImagePreview" alt="preview" /> -->
           </div>
           <div
             class="form-group-inner form-group_with-label"
