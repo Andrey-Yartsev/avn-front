@@ -75,7 +75,7 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "contestVoting",
         data: {
-          name: this.nominee.name,
+          name: this.nominee.username,
           contestId: this.contestId,
           contestName: this.contestName,
           votesList: this.votesList,

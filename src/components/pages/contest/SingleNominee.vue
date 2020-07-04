@@ -199,7 +199,7 @@ export default {
         this.$store.dispatch("modal/show", {
           name: "contestVoting",
           data: {
-            name: this.nominee.name,
+            name: this.nominee.username,
             contestId: this.contestId,
             nominee: this.nominee.nominee_id,
             userId: this.$route.params.nomineeId,
