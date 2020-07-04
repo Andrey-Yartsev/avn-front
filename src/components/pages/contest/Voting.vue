@@ -127,7 +127,7 @@ export default {
       return this.user && this.user.id == this.props.userId;
     },
     getTextString() {
-      return `#AVNStars ${window.location.origin}/${this.props.name}/c/${
+      return `#AVNStars ${window.location.origin}/${this.props.username}/c/${
         this.props.contestId
       }/${this.props.userId}`;
     },
