@@ -17,6 +17,7 @@ export default {
   ],
   settings: ["settings-page", "no-site-header_mob", "reset-sticky-gap"],
   explore: ["explore-page", "has-page-footer"],
+  contests: ["explore-page", "has-page-footer"],
   post: ["post-page", "no-site-header_mob", "reset-sticky-gap"],
   chat: ["chat-page", "has-page-footer"],
   userProfile: [

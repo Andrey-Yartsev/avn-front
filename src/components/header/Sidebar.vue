@@ -97,6 +97,12 @@
                 :to="'/' + user.username + '/media'"
                 >Clip Store
               </router-link>
+              <router-link
+                v-if="contestsEnabled"
+                class="user-menu-item icn-item user-menu-item__award-avn"
+                :to="'/settings/contests'"
+                >Contests
+              </router-link>
             </div>
             <div class="user-menu__col">
               <router-link
@@ -149,6 +155,13 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    contestsEnabled() {
+      return (
+        this.user?.showVote || // showVote is admin user, renamed for secure reason
+        this.user?.adminReturnUrl ||
+        (this.user?.canEarn && this.$store.state.init.data.enableContests)
+      );
     }
   },
   methods: {

@@ -96,7 +96,7 @@ export default {
 
   computed: {
     throttledSearch() {
-      return throttle(300, false, this.search, false);
+      return throttle(700, false, this.search, false);
     },
     loading() {
       return this.$store.state.search.bubble.searchLoading;
@@ -213,7 +213,8 @@ export default {
         this.$store.dispatch("search/bubble/search", {
           type: this.type,
           query: this.localQuery,
-          strip_tags: 1
+          strip_tags: 1,
+          preview: this.type === "users" ? true : false
         });
       }, 200);
     },

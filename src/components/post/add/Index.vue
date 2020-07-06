@@ -478,10 +478,11 @@ Settings.defaultLocale = "en";
 
 const tipsGoalSourceTypes = [
   { title: "Post tips", value: "localTips" },
-  { title: "All tips", value: "globalTips" },
+  { title: "All other tips", value: "globalTips" },
   { title: "Clips", value: "clips" },
   { title: "Messages", value: "messages" },
-  { title: "Subscriptions", value: "subscriptions" }
+  { title: "Subscriptions", value: "subscriptions" },
+  { title: "Votes", value: "votes" }
 ];
 
 const InitialState = {

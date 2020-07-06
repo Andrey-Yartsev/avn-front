@@ -24,7 +24,7 @@ export default {
             !this.allDataRecieved &&
             !this.isInitFetch
           ) {
-            console.log("load more");
+            // console.log("load more");
             cb();
           }
         });

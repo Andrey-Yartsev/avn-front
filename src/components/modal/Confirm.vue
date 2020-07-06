@@ -52,6 +52,9 @@ export default {
     },
     abort() {
       return this.$store.state.modal.confirm.data.abort;
+    },
+    finally() {
+      return this.$store.state.modal.confirm.data.finally;
     }
   },
   methods: {
@@ -70,6 +73,9 @@ export default {
       this.close();
     },
     close() {
+      if (typeof this.finally === "function") {
+        this.finally();
+      }
       this.$store.dispatch("modal/hide", {
         name: "confirm"
       });

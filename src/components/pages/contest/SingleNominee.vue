@@ -1,12 +1,12 @@
 <template>
   <div class="container contest">
     <Navigate />
-    <div class="loader-container" v-if="loading && isFirstInit">
+    <div class="loader-container" v-if="loading">
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
       <template v-if="contest">
-        <div class="contest-links title-subtext">
+        <!-- <div class="contest-links title-subtext">
           <template v-for="value in contests">
             <a
               :href="`/contests/${value.id}`"
@@ -18,13 +18,6 @@
             </a>
             <span :key="`span-${value.id}`"> || </span>
           </template>
-        </div>
-        <!-- <div class="awards-title text-centered">
-          <select name="contest" v-model="contestId">
-            <option v-for="(v, k) in contests" :key="k" :value="v.id"
-              >{{ v.name }}
-            </option>
-          </select>
         </div> -->
         <template v-if="!sent">
           <div class="contest-header" v-if="contest.image_url">
@@ -36,33 +29,32 @@
               periodText
             }}</span>
           </div>
-          <div class="explore-wrapper users">
+          <div v-if="nominee" class="explore-wrapper users">
+            <div />
             <Nominee
-              v-for="v in nominees"
-              :key="v.id"
-              :nominee="v"
+              :nominee="nominee"
               :contestId="contestId"
               :contestName="contest.name"
-              :active="activeNomineeId === v.id"
+              :active="true"
               :isVotingActive="contest.is_voting_active"
             />
           </div>
-          <div
-            v-if="nominees.length && !allDataRecieved"
-            class="loader-container"
+          <router-link
+            class="btn btn_fix-width-ex-lg lg alt"
+            style="display: block; margin: auto;"
+            :to="`/contests/${contestId}`"
           >
-            <Loader text="" :fullscreen="false" :small="true" />
-          </div>
-          <div v-if="nominees.length" ref="scrollObserver"></div>
+            See all nominees
+          </router-link>
         </template>
       </template>
-      <template v-else>
+      <!-- <template v-else>
         <div class="inner">
           <div class="semi-transparent" :style="{ 'text-align': 'center' }">
             There is no available contests for now
           </div>
         </div>
-      </template>
+      </template> -->
     </template>
   </div>
 </template>
@@ -74,11 +66,10 @@ import Loader from "@/components/common/Loader";
 import User from "@/mixins/user";
 import Nominee from "./Nominee";
 import moment from "moment-timezone";
-import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
-  name: "Contest",
-  mixins: [User, IntersectionObserver],
+  name: "SingleNominee",
+  mixins: [User],
   components: {
     Navigate,
     Footer,
@@ -89,9 +80,10 @@ export default {
     return {
       data: {},
       scriptLoading: true,
-      activeNomineeId: 0,
       contestId: 0,
-      isFirstInit: true
+      activeNomineeId: 0,
+      nominee: null,
+      isLoading: true
     };
   },
   computed: {
@@ -99,9 +91,7 @@ export default {
       return [];
     },
     loading() {
-      if (this.$store.state.contest.fetchContestsLoading) {
-        return true;
-      } else if (this.$store.state.contest.fetchNomineesLoading) {
+      if (this.$store.state.contest.fetchContestsLoading || this.isLoading) {
         return true;
       }
       return false;
@@ -124,15 +114,15 @@ export default {
     contest() {
       return this.contests.find(v => v.id === this.contestId);
     },
-    _nominees() {
-      return this.$store.state.contest.nominees;
-    },
-    nominees() {
-      return this._nominees.map((v, i) => {
-        v.n = i + 1;
-        return v;
-      });
-    },
+    // _nominees() {
+    //   return this.$store.state.contest.nominees;
+    // },
+    // nominees() {
+    //   return this._nominees.map((v, i) => {
+    //     v.n = i + 1;
+    //     return v;
+    //   });
+    // },
     periodText() {
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
       const m1 = moment(d1).tz(this.contest.timezone);
@@ -159,27 +149,34 @@ export default {
       } else {
         return this.$store.state.init?.data?.enableContests;
       }
-    },
-    allDataRecieved() {
-      return this.$store.state.contest.allDataReceived;
     }
   },
   methods: {
     init() {
-      if (!this.contestId) {
-        return;
-      }
+      // if (!this.contestId) {
+      //   return;
+      // }
       this.$store
-        .dispatch("contest/_fetchNominees", {
-          contestId: this.contestId
+        .dispatch("contest/_fetchNomineeItem", {
+          contestId: this.$route.params.contestId,
+          nomineeId: this.$route.params.nomineeId
         })
-        .then(() => {
-          if (this.isFirstInit) {
-            this.scrollToShared();
-            this.isFirstInit = false;
+        .then(res => {
+          this.nominee = {
+            ...res,
+            star_id: this.$route.params.nomineeId
+          };
+          this.$nextTick(() => {
+            this.openVoteModal();
+          });
+          this.isLoading = false;
+          this.$store.commit("contest/setSingleNominee", res.nominee_id);
+          if (res.freeVoteUsed) {
+            this.$store.commit("contest/setSingleFreeVoteUsed");
           }
-          this.isInitFetch = false;
-          this.handleResponseWithIntersectionObserver(this.init);
+        })
+        .catch(() => {
+          this.isLoading = false;
         });
     },
     input(v) {
@@ -188,41 +185,29 @@ export default {
       this.data = { ...this.data, ...o };
     },
     async send() {},
-    scrollToShared() {
-      if (window.location.hash) {
-        const m = window.location.hash.match(/#nominee(\d+)/);
-        if (m) {
-          this.$scrollTo(`[data-id="${m[1]}"]`);
-          this.activeNomineeId = parseInt(m[1]);
-          this.openVoteModal();
-        }
-      }
-    },
     openVoteModal() {
-      const currentNominee = this.nominees.find(
-        item => item.id === this.activeNomineeId
-      );
-      if (!currentNominee) {
-        return;
-      }
+      const nomineeId = this.$route.params.nomineeId;
       if (!this.user) {
         this.$store.dispatch("modal/show", {
           name: "login",
           data: {
             callback: () =>
-              this.$router.push(
-                `/contests/${this.contestId}/${currentNominee.id}`
-              )
+              this.$router.push(`/contests/${this.contestId}/${nomineeId}`)
           }
         });
       } else {
         this.$store.dispatch("modal/show", {
           name: "contestVoting",
           data: {
-            name: currentNominee.name,
+            name: this.nominee.name,
+            username: this.nominee.username,
             contestId: this.contestId,
-            nominee: currentNominee.id,
-            userId: currentNominee.star_id
+            nominee: this.nominee.nominee_id,
+            userId: this.$route.params.nomineeId,
+            contestName: this.contest.name,
+            votesList: this.contest.votesList,
+            freeVoteUsed: this.nominee.freeVoteUsed || false,
+            nomineeTwitter: this.nominee.twitter_handle
           }
         });
       }
@@ -244,27 +229,30 @@ export default {
         }
       }
       this.contestId = contestId;
-    },
-    contestId(contestId) {
-      const nomineeId = this.$route.params.nomineeId;
-      if (nomineeId) {
-        this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
-      } else if (contestId != this.$route.params.contestId) {
-        this.$router.push(`/contests/${contestId}`);
-      }
-      this.destroyObserver();
-      this.isInitFetch = true;
-      this.$store.commit("contest/resetNominees");
-      this.init();
     }
+    // contestId(contestId) {
+    //   const nomineeId = this.$route.params.nomineeId;
+    //   console.log(nomineeId, contestId)
+    //   if (nomineeId) {
+    //     this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
+    //   } else {
+    //     this.$router.push(`/contests/${contestId}`);
+    //   }
+    //   this.init();
+    // }
   },
-  created() {
+  mounted() {
     if (!this.allowContestsView) {
       this.$router.push("/");
       return;
     }
-    this.$store.dispatch("contest/fetchContests");
-    this.init();
+    this.$store.dispatch("contest/fetchContests").then(() => {
+      this.init();
+    });
+  },
+  beforeDestroy() {
+    this.$store.commit("contest/removeSingleNominee");
+    this.$store.commit("contest/clearSingleFreeVoteUsed");
   }
 };
 </script>

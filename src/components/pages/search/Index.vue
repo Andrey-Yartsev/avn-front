@@ -190,11 +190,9 @@ export default {
     type() {
       this.lastYOffset = 0;
       this.$store.commit("search/page/reset");
-      this.$store.commit("search/summary/reset");
       this.$router
         .push(`/search/${this.type}/${this.localQuery}`)
         .catch(() => {});
-      this.getSummary();
       this.search();
     },
     summary() {

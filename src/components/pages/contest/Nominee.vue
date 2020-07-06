@@ -25,13 +25,18 @@
       </div>
       <div
         class="user-num-list"
-        :class="{ 'user-num-list_first': nominee.n === 1 }"
+        :class="{ 'user-num-list_first': nominee.n === 1 && showRank }"
       >
-        <NomineeMenu :nominee="nominee" />
-        <span class="user-num-list__text">{{ nominee.n }}</span>
+        <NomineeMenu
+          v-if="isVotingActive"
+          :nominee="nominee"
+          :contestId="contestId"
+          :contestName="contestName"
+        />
+        <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
       </div>
       <p class="profile-text">{{ nominee.description }}</p>
-      <div class="text-centered">
+      <div v-if="isVotingActive" class="text-centered mt-auto">
         <button
           type="button"
           class="btn alt border btn_fix-width-sm"
@@ -40,6 +45,7 @@
           Vote
         </button>
       </div>
+      <div class="top-votes-container"></div>
     </div>
   </div>
 </template>
@@ -55,20 +61,46 @@ export default {
     nominee: Object,
     contestId: Number,
     votesList: Object,
-    active: Boolean
+    active: Boolean,
+    contestName: String,
+    isVotingActive: Boolean
+  },
+  computed: {
+    showRank() {
+      return this.nominee.rank && this.nominee.rank_display;
+    }
   },
   methods: {
-    vote() {
+    openVoteModal() {
       this.$store.dispatch("modal/show", {
         name: "contestVoting",
         data: {
           name: this.nominee.name,
+          username: this.nominee.username,
           contestId: this.contestId,
+          contestName: this.contestName,
           votesList: this.votesList,
-          nominee: this.nominee.id,
-          userId: this.nominee.star_id
+          nominee: this.nominee.id || this.nominee.nominee_id,
+          userId: this.nominee.star_id,
+          freeVoteUsed: this.nominee.freeVoteUsed || false,
+          nomineeTwitter: this.nominee.twitter_handle
         }
       });
+    },
+    vote() {
+      if (!this.$store.state.auth.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () =>
+              this.$router.push(
+                `/contests/${this.contestId}/${this.nominee.star_id}`
+              )
+          }
+        });
+        return;
+      }
+      this.openVoteModal();
     }
   }
 };

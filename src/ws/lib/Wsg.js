@@ -8,6 +8,7 @@ import stream_unlook from "./actions/stream_unlook";
 import stream_comment from "./actions/stream_comment";
 import stream_goal from "./actions/stream_goal";
 import header_stream from "./actions/header_stream";
+import contests from "./actions/contests";
 
 import Logger from "js-logger";
 
@@ -21,7 +22,8 @@ const actions = {
   stream_look,
   stream_unlook,
   stream_goal,
-  header_stream
+  header_stream,
+  contests
 };
 
 export default class Ws extends WsAbstract {
