@@ -213,7 +213,8 @@ export default {
         this.$store.dispatch("search/bubble/search", {
           type: this.type,
           query: this.localQuery,
-          strip_tags: 1
+          strip_tags: 1,
+          preview: this.type === "users" ? true : false
         });
       }, 200);
     },
