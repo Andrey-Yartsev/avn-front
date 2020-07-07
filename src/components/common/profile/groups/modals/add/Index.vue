@@ -47,7 +47,7 @@
         class="textarea__title"
         :class="{ 'text-clear-border': $mq === 'mobile' }"
         placeholder="Enter title here"
-        maxlength="200"
+        maxlength="50"
         v-model="title"
         ref="textareaTitle"
         :disabled="isSaving"
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="actions">
-        <div class=" b-check-state_full-width b-check-state_price">
+        <!-- <div class=" b-check-state_full-width b-check-state_price">
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">
@@ -109,7 +109,7 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -128,7 +128,7 @@
               Add media
             </span>
           </label>
-          <template v-if="isExtended">
+          <!-- <template v-if="isExtended">
             <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
@@ -155,7 +155,7 @@
                 </label>
               </div>
             </div>
-          </template>
+          </template> -->
         </div>
         <button
           type="submit"
@@ -215,7 +215,7 @@ const InitialState = {
   isPublic: false,
   isActive: false,
   mediaType: "photo",
-  saving: false,
+  isSaving: false,
   limits: {
     video: 1,
     gif: 1,
@@ -290,12 +290,12 @@ export default {
     newPost() {
       return this.$store.state.post.newPost;
     },
-    isSaving() {
-      if (this.$store.state.post.updatePostLoading) {
-        return true;
-      }
-      return this.$store.state.post._createPostLoading;
-    },
+    // isSaving() {
+    //   if (this.$store.state.post.updatePostLoading) {
+    //     return true;
+    //   }
+    //   return this.$store.state.post._createPostLoading;
+    // },
     allMediaTypes() {
       const { photo, video, gif, audio } = this.inputAcceptTypes;
       return [...photo, ...video, ...gif, ...audio];
@@ -323,17 +323,18 @@ export default {
   methods: {
     clickHandler() {
       const postData = this.getPostData();
-      if (!postData || this.saving) return;
+      if (!postData || this.isSaving) return;
 
-      if (this.isNew) {
-        this.$store.dispatch("profile/groups/addGroup", postData);
-      } else {
-        this.$store.dispatch("profile/groups/updateGroup", {
-          postId: this.post.id,
-          data: postData
+      this.isSaving = true;
+      this.$store
+        .dispatch("profile/groups/addGroup", postData)
+        .then(() => {
+          this.close();
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.isSaving = false;
         });
-      }
-      this.saving = true;
     },
     reset() {
       this.expanded = InitialState.expanded;
@@ -343,7 +344,7 @@ export default {
       this.isActive = InitialState.isActive;
       this.mediaType = InitialState.mediaType;
       this.preloadedMedias = [];
-      this.saving = false;
+      this.isSaving = false;
     },
     getPostData() {
       if (this.notEhoughData) return;
@@ -351,9 +352,11 @@ export default {
       const postData = {
         title: this.title,
         description: this.description,
-        price: this.price,
-        isActive: this.isActive,
-        isPublic: this.isPublic,
+        // price: this.price,
+        // isActive: this.isActive,
+        // isPublic: this.isPublic,
+        isActive: true,
+        isPublic: false,
         mediaFiles: this.preloadedMedias.map(media => {
           return {
             id: media.processId

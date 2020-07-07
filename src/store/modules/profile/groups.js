@@ -1,11 +1,11 @@
 import { createRequestAction } from "../../utils/storeRequest";
-import mockedGroups from "../../../mock/groups";
+// import mockedGroups from "../../../mock/groups";
 
 const fetchLimit = 9;
 
 const initState = {
-  groups: mockedGroups,
-  // groups: [],
+  // groups: mockedGroups,
+  groups: [],
   marker: null,
   offset: 0,
   limit: fetchLimit,
@@ -34,8 +34,8 @@ const mutations = {
     state.allDataReceived = false;
   },
   addGroup(state, newListItem) {
-    state.groups = [...newListItem, ...state.groups];
-    // state.offset++;
+    state.groups = [newListItem, ...state.groups];
+    state.offset++;
   },
   updateGroup(state, updatedListItem) {
     state.groups = state.groups.map(item => {
@@ -101,15 +101,30 @@ const actions = {
           root: true
         }
       );
-      // commit("auth/incrementListsCount", res.length, { root: true });
+      commit(
+        "auth/incrementGroupsCount",
+        { label: res.title, key: res.productId },
+        { root: true }
+      );
       return res;
     });
   },
   updateGroup({ dispatch, commit }, data) {
     return dispatch("_updateGroup", data).then(res => {
       commit("updateGroup", res);
+      dispatch(
+        "global/flashToast",
+        {
+          text: "Group successfully updated"
+        },
+        { root: true }
+      );
+      commit(
+        "auth/updateGroupsCount",
+        { label: res.title, key: res.productId },
+        { root: true }
+      );
       return res;
-      // commit("mediaPage/updateMediaItem", res, { root: true });
     });
   },
   deleteGroup({ dispatch, commit }, productId) {
@@ -122,14 +137,24 @@ const actions = {
           root: true
         }
       );
-      // commit("auth/decrementStoreCount", null, { root: true });
+      commit("auth/decrementGroupsCount", productId, { root: true });
     });
   },
   addMember({ dispatch }, userId) {
-    return dispatch("_addMember", userId);
+    return dispatch("_addMember", userId).then(res => {
+      dispatch("global/flashToast", {
+        text: "Members list updated"
+      });
+      return res;
+    });
   },
   removeMember({ dispatch }, userId) {
-    return dispatch("_removeMember", userId);
+    return dispatch("_removeMember", userId).then(res => {
+      dispatch("global/flashToast", {
+        text: "Members list updated"
+      });
+      return res;
+    });
   },
   joinGroup({ dispatch, commit }, productId) {
     dispatch("_joinGroup", productId).then(() => {

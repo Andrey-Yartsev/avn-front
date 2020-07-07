@@ -12,7 +12,7 @@
         >
           + New group
         </button>
-        <div
+        <!-- <div
           :class="['buttonWrapper', 'more-functions', { open: opened }]"
           v-click-outside="hide"
         >
@@ -28,7 +28,7 @@
               @handleClick="handleClick"
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="profile-content">
         <div class="explore">
@@ -102,6 +102,9 @@ export default {
     },
     groupComponent() {
       return GroupItem;
+    },
+    profile() {
+      return this.$store.state.profile.home.profile;
     }
   },
   watch: {
@@ -143,8 +146,11 @@ export default {
     }
   },
   mounted() {
-    // this.$store.commit("profile/groups/clearGroups", null, { root: true });
-    // this.fetchData();
+    if (!this.isPrivate) {
+      this.$router.push(`/${this.profile.username}`);
+    }
+    this.$store.commit("profile/groups/clearGroups", null, { root: true });
+    this.fetchData();
   }
 };
 </script>

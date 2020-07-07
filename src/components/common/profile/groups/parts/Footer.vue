@@ -1,12 +1,12 @@
 <template>
   <div class="actions">
-    <span class="actions__btn">
+    <!-- <span class="actions__btn">
       <span
         class="btn-icon icn-tips icn-item icn-size_md"
         v-tooltip="'Price'"
       ></span>
       {{ group.price }}
-    </span>
+    </span> -->
     <span class="actions__btn">
       <span
         :class="{
@@ -18,7 +18,7 @@
       ></span>
       {{ group.isPublic ? "Public" : "Private" }}
     </span>
-    <span class="actions__btn">
+    <!-- <span class="actions__btn">
       <span
         :class="{
           'icn-radio-checked': group.isActive,
@@ -28,7 +28,7 @@
         v-tooltip="'Status'"
       ></span>
       {{ group.isActive ? "Active" : "Draft" }}
-    </span>
+    </span> -->
     <span
       class="actions__btn hover-highlight members"
       @click="showMembersModal"
@@ -39,7 +39,7 @@
       ></span>
       {{ group.membersCount || 0 }}
     </span>
-    <span
+    <!-- <span
       class="actions__btn  hover-highlight message"
       @click="showMessageModal"
     >
@@ -48,7 +48,7 @@
         v-tooltip="'Group message'"
       ></span>
       Message
-    </span>
+    </span> -->
     <button class="delete-card icn-item" @click="deleteGroup">
       <span class="actions__btn">
         <span class="icn-remove icn-item" v-tooltip="'Delete'" />
@@ -74,7 +74,18 @@ export default {
   },
   methods: {
     deleteGroup() {
-      this.$store.dispatch("profile/groups/deleteGroup", this.group.productId);
+      this.$store.dispatch("modal/show", {
+        name: "confirm",
+        data: {
+          title: `Delete group ${this.group.title}`,
+          success: () => {
+            this.$store.dispatch(
+              "profile/groups/deleteGroup",
+              this.group.productId
+            );
+          }
+        }
+      });
     },
     showMembersModal() {
       this.$store.dispatch("modal/show", {

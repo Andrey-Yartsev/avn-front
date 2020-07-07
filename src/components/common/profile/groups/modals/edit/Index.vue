@@ -44,7 +44,7 @@
         class="textarea__title"
         :class="{ 'text-clear-border': $mq === 'mobile' }"
         placeholder="Enter title here"
-        maxlength="200"
+        maxlength="50"
         v-model="group.title"
         ref="textareaTitle"
         :disabled="saving"
@@ -86,7 +86,7 @@
       </div>
 
       <div class="actions">
-        <div class=" b-check-state_full-width b-check-state_price">
+        <!-- <div class=" b-check-state_full-width b-check-state_price">
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">
@@ -101,7 +101,7 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -120,7 +120,7 @@
               Add media
             </span>
           </label>
-          <template v-if="isExtended">
+          <!-- <template v-if="isExtended">
             <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
@@ -147,7 +147,7 @@
                 </label>
               </div>
             </div>
-          </template>
+          </template> -->
         </div>
         <button
           type="submit"
@@ -334,9 +334,12 @@ export default {
         ...this.group,
         mediaFiles: (this.preloadedMedias || []).map(item => ({
           id: item.processId
-        }))
+        })),
+        members: this.group.members.map(item => item.id)
       };
       delete data.media;
+      delete data.isMember;
+      delete data.membersCount;
 
       return data;
     },

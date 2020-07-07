@@ -112,11 +112,9 @@
         }
         @include media-breakpoint-down($desktop-breakpoint) {
           margin-top: 20px;
+          margin-right: 10px;
         }
         .actions__btn {
-          @include media-breakpoint-down($desktop-breakpoint) {
-            margin-left: 10px;
-          }
           cursor: pointer;
           &.hover-highlight {
             &:hover {

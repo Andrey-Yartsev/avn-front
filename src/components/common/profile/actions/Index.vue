@@ -52,8 +52,13 @@
             }}</span>
             <span class="label">Clips</span>
           </router-link>
-          <router-link
+          <!-- <router-link
             v-if="isOwner(this.profile.id) || profile.groupsCount > 0"
+            class="btn-user-activity"
+            :to="`/${profile.username}/groups`"
+          > -->
+          <router-link
+            v-if="isOwner(this.profile.id)"
             class="btn-user-activity"
             :to="`/${profile.username}/groups`"
           >

@@ -889,11 +889,16 @@ export default {
       },
       onStreamStart: room => {
         this.updateLikes();
-        const type = this.streamVisibility.key;
+        let type = this.streamVisibility.key;
+        const defaultStreamTypes = ["subscribers", "followers", "public"];
+        if (!defaultStreamTypes.includes(type)) {
+          type = "list";
+        }
 
         StreamApi.runStream({
           room,
-          type
+          type,
+          entityId: type === "list" ? this.streamVisibility.key : undefined
         })
           .then(res => {
             return res.json();
