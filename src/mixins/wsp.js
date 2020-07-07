@@ -24,7 +24,6 @@ export default {
       if (!ids.length) return;
       this.alreadySent = !this.alreadySent ? ids : `${this.alreadySent},${ids}`;
       // wsp.send(ids);
-      ws.send(ids);
     },
     reloadPost(postId) {
       this.$store.dispatch("post/reloadPost", { postId });
