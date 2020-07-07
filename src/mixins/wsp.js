@@ -2,9 +2,9 @@
 import ws from "@/ws";
 
 export default {
-  data: () => ({
-    alreadySent: ""
-  }),
+  // data: () => ({
+  //   alreadySent: ""
+  // }),
   methods: {
     // checkNonReadyPosts() {
     //   this.posts.map(post => {
@@ -13,18 +13,18 @@ export default {
     //     }
     //   });
     // },
-    getObservedIds() {
-      const allIds = this.posts.map(p => p.id);
-      const sent = this.alreadySent.split(",");
-      const shouldBePosted = allIds.filter(id => sent.indexOf(`${id}`) === -1);
-      return shouldBePosted.join(",");
-    },
-    sendObservedIds() {
-      const ids = this.getObservedIds();
-      if (!ids.length) return;
-      this.alreadySent = !this.alreadySent ? ids : `${this.alreadySent},${ids}`;
-      // wsp.send(ids);
-    },
+    // getObservedIds() {
+    //   const allIds = this.posts.map(p => p.id);
+    //   const sent = this.alreadySent.split(",");
+    //   const shouldBePosted = allIds.filter(id => sent.indexOf(`${id}`) === -1);
+    //   return shouldBePosted.join(",");
+    // },
+    // sendObservedIds() {
+    //   const ids = this.getObservedIds();
+    //   if (!ids.length) return;
+    //   this.alreadySent = !this.alreadySent ? ids : `${this.alreadySent},${ids}`;
+    //   // wsp.send(ids);
+    // },
     reloadPost(postId) {
       this.$store.dispatch("post/reloadPost", { postId });
     },
@@ -52,8 +52,8 @@ export default {
     ws.removeListener("reloadMediaPreview", this.reloadMediaPreview);
   },
   watch: {
-    posts() {
-      this.sendObservedIds();
-    }
+    // posts() {
+    //   this.sendObservedIds();
+    // }
   }
 };
