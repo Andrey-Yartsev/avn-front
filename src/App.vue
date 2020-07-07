@@ -67,7 +67,7 @@ import rootClasses from "@/utils/rootClasses";
 import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
-import wsp from "@/ws/wsp";
+// import wsp from "@/ws/wsp";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
 import ColorScheme from "@/mixins/colorScheme";
@@ -268,12 +268,12 @@ export default {
       }
       if (this.loggedIn) {
         this.webSocket = ws;
-        wsp.connect();
+        // wsp.connect();
       } else {
         this.webSocket = wsg;
-        if (wsp.connected) {
-          wsp.close();
-        }
+        // if (wsp.connected) {
+        //   wsp.close();
+        // }
       }
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
