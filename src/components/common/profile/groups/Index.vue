@@ -146,9 +146,9 @@ export default {
     }
   },
   mounted() {
-    if (!this.isPrivate) {
-      this.$router.push(`/${this.profile.username}`);
-    }
+    // if (!this.isPrivate) {
+    //   this.$router.push(`/${this.profile.username}`);
+    // }
     this.$store.commit("profile/groups/clearGroups", null, { root: true });
     this.fetchData();
   }

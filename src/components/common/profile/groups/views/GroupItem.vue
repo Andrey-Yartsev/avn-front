@@ -18,19 +18,19 @@
         <div v-else class="header-content-joinGroupContainer">
           <button
             v-if="group.isMember"
-            @click="joinGroup"
-            type="button"
-            class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
-          >
-            Join for ${{ group.price }}
-          </button>
-          <button
-            v-else
             @click="leaveGroup"
             type="button"
             class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
           >
             Leave the group
+          </button>
+          <button
+            v-else
+            @click="joinGroup"
+            type="button"
+            class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+          >
+            Join for ${{ group.price }}
           </button>
         </div>
       </div>

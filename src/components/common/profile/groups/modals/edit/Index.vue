@@ -86,7 +86,7 @@
       </div>
 
       <div class="actions">
-        <!-- <div class=" b-check-state_full-width b-check-state_price">
+        <div class=" b-check-state_full-width b-check-state_price">
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">
@@ -101,7 +101,56 @@
               />
             </div>
           </div>
-        </div> -->
+        </div>
+        <div
+          v-if="group.isPublic"
+          class="b-check-state_full-width b-check-state-membersView"
+        >
+          <div class="btn-post">
+            <div>Show members</div>
+            <div class="form-group form-group_with-label radio-group">
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="all"
+                    v-model="group.membersView"
+                  />
+                  <span class="label">
+                    All
+                  </span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="top"
+                    v-model="group.membersView"
+                  />
+                  <span class="label">
+                    Top 3
+                  </span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="none"
+                    v-model="group.membersView"
+                  />
+                  <span class="label">
+                    None
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -120,7 +169,7 @@
               Add media
             </span>
           </label>
-          <!-- <template v-if="isExtended">
+          <template v-if="isExtended">
             <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
@@ -147,7 +196,7 @@
                 </label>
               </div>
             </div>
-          </template> -->
+          </template>
         </div>
         <button
           type="submit"
@@ -194,7 +243,8 @@ const InitialState = {
     image: "",
     price: "",
     isActive: false,
-    isPublic: false
+    isPublic: false,
+    membersView: "none"
   },
   groupSnapshot: null,
   saving: false,
@@ -405,5 +455,23 @@ export default {
 }
 .withPadding {
   padding: 0 10px;
+}
+.b-check-state-membersView {
+  margin: 10px 0 15px 0;
+  .radio-group {
+    display: flex;
+    align-items: center;
+    padding-right: 0;
+    padding-bottom: 0;
+    margin-left: 0;
+    .form-group-inner {
+      margin-left: 22px;
+      margin-bottom: 0;
+      border-bottom: none;
+      .radio-wrapper.icn-item {
+        padding-bottom: 0;
+      }
+    }
+  }
 }
 </style>

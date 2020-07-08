@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="actions">
-        <!-- <div class=" b-check-state_full-width b-check-state_price">
+        <div class=" b-check-state_full-width b-check-state_price">
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">
@@ -109,7 +109,56 @@
               />
             </div>
           </div>
-        </div> -->
+        </div>
+        <div
+          v-if="isPublic"
+          class="b-check-state_full-width b-check-state-membersView"
+        >
+          <div class="btn-post">
+            <div>Show members</div>
+            <div class="form-group form-group_with-label radio-group">
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="all"
+                    v-model="membersView"
+                  />
+                  <span class="label">
+                    All
+                  </span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="top"
+                    v-model="membersView"
+                  />
+                  <span class="label">
+                    Top 3
+                  </span>
+                </div>
+              </label>
+              <label class="form-group-inner">
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="storyAnswerType"
+                    value="none"
+                    v-model="membersView"
+                  />
+                  <span class="label">
+                    None
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -128,7 +177,7 @@
               Add media
             </span>
           </label>
-          <!-- <template v-if="isExtended">
+          <template v-if="isExtended">
             <div class="btn-post">
               <div class="b-check-state b-check-state_post">
                 <label>
@@ -155,7 +204,7 @@
                 </label>
               </div>
             </div>
-          </template> -->
+          </template>
         </div>
         <button
           type="submit"
@@ -214,6 +263,7 @@ const InitialState = {
   price: "",
   isPublic: false,
   isActive: false,
+  membersView: "none",
   mediaType: "photo",
   isSaving: false,
   limits: {
@@ -343,6 +393,7 @@ export default {
       this.isPublic = InitialState.isPublic;
       this.isActive = InitialState.isActive;
       this.mediaType = InitialState.mediaType;
+      this.membersView = InitialState.membersView;
       this.preloadedMedias = [];
       this.isSaving = false;
     },
@@ -352,11 +403,10 @@ export default {
       const postData = {
         title: this.title,
         description: this.description,
-        // price: this.price,
-        // isActive: this.isActive,
-        // isPublic: this.isPublic,
-        isActive: true,
-        isPublic: false,
+        price: this.price,
+        isActive: this.isActive,
+        isPublic: this.isPublic,
+        membersView: this.membersView,
         mediaFiles: this.preloadedMedias.map(media => {
           return {
             id: media.processId
@@ -405,6 +455,7 @@ export default {
         this.price = this.post.price;
         this.isActive = this.post.isActive;
         this.isPublic = this.post.isPublic;
+        this.membersView = this.post.membersView;
         this.preloadedMedias = (this.post.media || []).map(media => ({
           alreadySaved: true,
           fileContent: media.thumb && media.thumb.source,
@@ -452,5 +503,23 @@ export default {
 }
 .b-check-state_price {
   margin-bottom: 5px;
+}
+.b-check-state-membersView {
+  margin: 10px 0 15px 0;
+  .radio-group {
+    display: flex;
+    align-items: center;
+    padding-right: 0;
+    padding-bottom: 0;
+    margin-left: 0;
+    .form-group-inner {
+      margin-left: 22px;
+      margin-bottom: 0;
+      border-bottom: none;
+      .radio-wrapper.icn-item {
+        padding-bottom: 0;
+      }
+    }
+  }
 }
 </style>
