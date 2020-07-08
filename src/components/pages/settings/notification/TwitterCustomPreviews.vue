@@ -31,7 +31,7 @@
         <button
           class="btn save-changes"
           @click.prevent="saveNewPreviewList"
-          :disabled="!isDataChanges || !preloadedMedias.length || saving"
+          :disabled="!canSave"
         >
           Save images
         </button>
@@ -98,6 +98,14 @@ export default {
       const newData = this.preloadedMedias.map(item => item.id);
       const oldData = this.media.map(item => item.id);
       return JSON.stringify(newData) !== JSON.stringify(oldData);
+    },
+    canSave() {
+      return (
+        this.isDataChanges &&
+        !this.saving &&
+        this.preloadedMedias.length &&
+        !this.preloadedMedias.filter(i => !i.processId).length
+      );
     }
   },
   methods: {
