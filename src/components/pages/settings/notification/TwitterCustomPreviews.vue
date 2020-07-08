@@ -30,8 +30,8 @@
         </label>
         <button
           class="btn save-changes"
-          @click="saveNewPreviewList"
-          :disabled="!isDataChanges"
+          @click.prevent="saveNewPreviewList"
+          :disabled="!isDataChanges || !preloadedMedias.length || saving"
         >
           Save images
         </button>
@@ -103,10 +103,11 @@ export default {
   methods: {
     saveNewPreviewList() {
       const data = this.getData();
-      // if (!data || this.saving) return;
-      // this.saving = true;
-      console.log(data);
-      // this.$store.dispatch("profile/update", data);
+      if (!data || this.saving) return;
+      this.saving = true;
+      this.$store.dispatch("profile/update", data).then(() => {
+        this.saving = false;
+      });
     },
     getData() {
       const mediaFiles = this.preloadedMedias.map(media => {
@@ -115,7 +116,12 @@ export default {
         };
       });
       const data = this.localUser;
-      data.twitterNotificationsSettings.options[name].mediaFiles = mediaFiles;
+      data.twitterNotificationsSettings.options[
+        this.name
+      ].customImages.images = mediaFiles;
+      data.twitterNotificationsSettings.options[
+        this.name
+      ].customImages.isEnabled = true;
       return data;
     },
     initMedia() {

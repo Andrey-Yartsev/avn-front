@@ -42,7 +42,7 @@ const actions = {
     dispatch("auth/setUser", response, { root: true });
   },
   update({ dispatch }, user) {
-    dispatch("_update", {
+    return dispatch("_update", {
       user,
       silent: false
     });
