@@ -1,17 +1,17 @@
-import WsAbstract from "./WsAbstract";
+// import WsAbstract from "./WsAbstract";
 
-export default class Wsp extends WsAbstract {
-  constructor() {
-    super("wsp");
-  }
+// export default class Wsp extends WsAbstract {
+//   constructor() {
+//     super("wsp");
+//   }
 
-  onData(data) {
-    if (data.reload) {
-      this.emit("reloadPost", data.post_id);
-    }
-  }
+//   onData(data) {
+//     if (data.reload) {
+//       this.emit("reloadPost", data.post_id);
+//     }
+//   }
 
-  _send(data) {
-    this.ws.send(data);
-  }
-}
+//   _send(data) {
+//     this.ws.send(data);
+//   }
+// }

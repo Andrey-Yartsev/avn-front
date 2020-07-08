@@ -230,6 +230,8 @@ export default {
           return "Price: Hight to Low";
         case "priceLow":
           return "Price: Low to High";
+        case "purchases":
+          return "My Purchases Only";
         default:
           return "all";
       }

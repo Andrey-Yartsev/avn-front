@@ -5,6 +5,16 @@ export default {
     },
     isLogedUser() {
       return !!this.$store.state.auth.user;
+    },
+    isMonetizedUser() {
+      return this.user.canEarn && this.user.canPayoutsRequest;
+    },
+    isFullyMonetizedUser() {
+      return (
+        this.user.canEarn &&
+        this.user.canPayoutsRequest &&
+        (this.user.subscribePrice && parseFloat(this.user.subscribePrice) > 0)
+      );
     }
   },
   methods: {

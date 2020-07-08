@@ -11,7 +11,9 @@ const Profile = {
 
       if (
         page &&
-        ["photos", "videos", "posts", "links", "media"].indexOf(page) === -1
+        ["photos", "videos", "posts", "links", "media", "groups"].indexOf(
+          page
+        ) === -1
       ) {
         next("/not-found");
         return;
@@ -74,6 +76,24 @@ const Profile = {
         fetchProfile();
       }
     });
+  },
+  contests(to, from, next) {
+    const { contestId, nomineeId, username } = to.params;
+    Store.dispatch("contest/fetchContests")
+      .then(res => {
+        const isContestExists = res.find(
+          item => item.id == contestId && item.is_voting_active
+          // item => item.id == contestId
+        );
+        if (isContestExists) {
+          next(`/contests/${contestId}/${nomineeId}`);
+        } else {
+          next(`/${username}`);
+        }
+      })
+      .catch(() => {
+        next(`/${username}`);
+      });
   }
 };
 

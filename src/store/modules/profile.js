@@ -4,6 +4,7 @@ import UserApi from "@/api/user";
 import home from "./profile/home.js";
 import links from "./profile/links.js";
 import media from "./profile/media.js";
+import groups from "./profile/groups.js";
 
 const state = {
   loading: false,
@@ -180,6 +181,7 @@ export default {
   modules: {
     home,
     links,
-    media
+    media,
+    groups
   }
 };

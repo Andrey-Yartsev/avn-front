@@ -50,12 +50,17 @@ import SignupModal from "@/components/auth/SignupModal";
 import EditPostModal from "@/components/post/edit/Modal";
 import AddMediaModal from "@/components/addMedia/Modal";
 import EditMediaModal from "@/components/common/profile/media/edit/Modal";
+import AddGroupModal from "@/components/common/profile/groups/modals/add/Modal";
+import EditGroupModal from "@/components/common/profile/groups/modals/edit/Modal";
 import MediaAccessLinkModal from "@/components/common/profile/media/parts/modals/AccessLinkModal";
 import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaPayModal";
+import GroupPayConfirmModal from "@/components/common/profile/groups/modals/GroupPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
 import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
 import ContestVotingModal from "@/components/pages/contest/VotingModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
+import GroupMembersModal from "@/components/common/profile/groups/modals/GroupMembersModal";
+import GroupMembersMessageModal from "@/components/common/profile/groups/modals/GroupMembersMessageModal";
 
 export default {
   components: {
@@ -95,13 +100,18 @@ export default {
     EditPostModal,
     AddMediaModal,
     EditMediaModal,
+    AddGroupModal,
+    EditGroupModal,
     MediaPayConfirmModal,
+    GroupPayConfirmModal,
     AddRedirectLinkModal,
     MediaAccessLinkModal,
     ContestVotingModal,
     ChatAttachmentsModal,
     FreeAccessMediaListModal,
-    MagShippingModal
+    MagShippingModal,
+    GroupMembersModal,
+    GroupMembersMessageModal
   },
   props: {
     hasLayout: {

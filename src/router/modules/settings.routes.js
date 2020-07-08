@@ -25,6 +25,17 @@ export const routes = [
   },
   {
     beforeEnter: Auth.requireAuth,
+    path: "/settings/contests",
+    component: () =>
+      import(/* webpackChunkName: "SettingsContestsPage" */ "@/components/pages/settings/contests/Index"),
+    name: "ContestsSecurity",
+    meta: {
+      title: "Contests",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
     path: "/settings/security",
     component: () =>
       import(/* webpackChunkName: "SettingsSecurityPage" */ "@/components/pages/settings/security/Index"),
@@ -215,6 +226,17 @@ export const routes = [
       import(/* webpackChunkName: "SettingsEarningsPage" */ "@/components/pages/settings/earnings/Index.vue"),
     meta: {
       title: "Earnings",
+      cssName: "settings"
+    }
+  },
+  {
+    beforeEnter: Auth.requireAuth,
+    path: "/settings/studioAccess",
+    name: "SettingsStudioAccessPage",
+    component: () =>
+      import(/* webpackChunkName: "SettingsStudioAccessPage" */ "@/components/pages/settings/studioAccess/Index.vue"),
+    meta: {
+      title: "Studio Access",
       cssName: "settings"
     }
   },

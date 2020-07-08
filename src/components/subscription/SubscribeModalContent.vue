@@ -49,7 +49,9 @@
 
     <div class="subscribe-popup__footer">
       <button
-        @click="$emit('subscribe')"
+        @click="
+          $emit('subscribe', { months: 1, price: getSubscriptionPrice(1) })
+        "
         type="submit"
         class="btn lg block"
         id="subscribe-proceed"
@@ -57,6 +59,26 @@
       >
         <slot name="button-text" />
       </button>
+      <template v-if="profileHasMultimonthSubscription">
+        <template v-for="key in [3, 6, 12]">
+          <button
+            :key="key"
+            v-if="multiMonthsSubscriptionEnabled(key)"
+            @click="
+              $emit('subscribe', {
+                months: key,
+                price: getSubscriptionPrice(key)
+              })
+            "
+            type="submit"
+            class="btn lg block mt-10"
+            id="subscribe-proceed"
+            :disabled="progress"
+          >
+            <slot :name="`button-text-${key}`" />
+          </button>
+        </template>
+      </template>
       <p class="subscribe-popup__footer-text">
         <slot name="footer-text" />
       </p>
@@ -87,7 +109,44 @@ export default {
         return null;
       }
       return this.$store.state.init.data.messages.subscriptionBenefits;
+    },
+    profileHasMultimonthSubscription() {
+      return this.profile.multiMonthSubscription;
+    },
+    basePrice() {
+      return parseFloat(this.profile.basePrice);
+    }
+  },
+  methods: {
+    multiMonthsSubscriptionEnabled(months) {
+      return this.profileHasMultimonthSubscription?.[months]?.isEnabled;
+    },
+    getSubscriptionPrice(months) {
+      if (months === 1) {
+        return this.profile.subscribePrice;
+      }
+      let totalPrice = (this.basePrice * months).toFixed(2);
+
+      if (this.profile.multiMonthSubscription?.[months]?.discount) {
+        totalPrice = (
+          (this.basePrice -
+            (this.basePrice / 100) *
+              parseFloat(
+                this.profile.multiMonthSubscription[months].discount
+              )) *
+          months
+        ).toFixed(2);
+      }
+      return totalPrice;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.mt {
+  &-10 {
+    margin-top: 10px;
+  }
+}
+</style>

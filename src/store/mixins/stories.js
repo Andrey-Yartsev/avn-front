@@ -53,7 +53,9 @@ const mutations = {
     });
   },
   removePost(state, authorId) {
-    state.posts = state.posts.filter(item => item.user.id !== authorId);
+    state.posts = state.posts.filter(
+      item => item.user && item.user.id !== authorId
+    );
   }
 };
 

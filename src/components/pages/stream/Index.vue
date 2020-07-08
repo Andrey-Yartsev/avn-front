@@ -460,7 +460,7 @@ export default {
       return this.$store.state.lives.currentLive.comments;
     },
     streamVisibilities() {
-      return [
+      const list = [
         {
           key: "subscribers",
           label: "Subscribers only",
@@ -480,6 +480,16 @@ export default {
           disabled: false
         }
       ];
+      if (this.user.streamGroups?.length) {
+        this.user.streamGroups.forEach(item => {
+          list.push({
+            key: item.key,
+            label: item.label,
+            disabled: false
+          });
+        });
+      }
+      return list;
     },
     activeTipsGoal() {
       return this.$store.state.lives.currentLive.tipsGoal;
@@ -879,11 +889,16 @@ export default {
       },
       onStreamStart: room => {
         this.updateLikes();
-        const type = this.streamVisibility.key;
+        let type = this.streamVisibility.key;
+        const defaultStreamTypes = ["subscribers", "followers", "public"];
+        if (!defaultStreamTypes.includes(type)) {
+          type = "list";
+        }
 
         StreamApi.runStream({
           room,
-          type
+          type,
+          entityId: type === "list" ? this.streamVisibility.key : undefined
         })
           .then(res => {
             return res.json();

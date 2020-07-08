@@ -5,6 +5,10 @@
 }
 
 .popup-contest-voting {
+  .content {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
   .ok-btn {
     margin-right: 15px;
   }
@@ -14,7 +18,39 @@
 }
 
 .contest {
+  &-links {
+    display: flex;
+    flex-flow: row wrap;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-flow: column nowrap;
+    }
+    a {
+      margin: 3px 20px;
+      &.selected {
+        opacity: 0.5;
+      }
+    }
+    span {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        display: none;
+      }
+      opacity: 0.5;
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+  &-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
   .userView {
+    margin-bottom: 20px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      width: 286px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     &.active {
       border: 2px solid rgba($default-secondary-color, 0.5);
     }
@@ -23,21 +59,53 @@
       background-size: cover;
       background-position: center;
       background-color: rgba($gray, 0.1);
+      background-repeat: no-repeat;
     }
     .profile-text {
       margin-bottom: 15px;
+      margin-top: 10px;
+      font-size: 12px;
     }
     .more-functions {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
+      &__btn {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          white-space: nowrap;
+          padding-top: 10px;
+          padding-bottom: 8px;
+          margin: 0;
+        }
+        &:before {
+          @include media-breakpoint-down($desktop-breakpoint) {
+            margin: 11px auto;
+            position: relative;
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+          }
+        }
+      }
     }
     .user-container {
       flex: auto;
-      height: 222px;
+      z-index: auto;
+      // height: 222px;
     }
-    margin-bottom: 20px;
+    .top-votes-container {
+      height: 75px;
+    }
+  }
+  .awards-title {
+    select {
+      width: auto;
+      display: inline-block;
+    }
   }
 }
 .contest-header {
@@ -45,4 +113,7 @@
   img {
     width: 100%;
   }
+}
+
+.ContestsCollectionView {
 }

@@ -3,6 +3,7 @@
 import BrowserStore from "store";
 import UserApi from "@/api/user";
 import Router from "@/router";
+import Google from "@/utils/google";
 
 const state = {
   loading: false,
@@ -113,6 +114,12 @@ const actions = {
 
   setOtpAuth({ commit }, flag) {
     commit("setOtpAuth", flag);
+  },
+
+  googleLogin({ dispatch }, token) {
+    return Google.getAuthToken(token).then(r => {
+      dispatch("setToken", r.accessToken);
+    });
   }
 };
 
@@ -174,6 +181,21 @@ const mutations = {
   },
   incrementStoreCount(state, num) {
     state.user.mediaCount = state.user.mediaCount + num;
+  },
+  incrementGroupsCount(state, group) {
+    state.user.groupsCount += 1;
+    state.user.streamGroups = [...state.user.streamGroups, group];
+  },
+  updateGroupsCount(state, group) {
+    state.user.streamGroups = state.user.streamGroups.map(item => {
+      return item.key === group.key ? group : item;
+    });
+  },
+  decrementGroupsCount(state, groupId) {
+    state.user.groupsCount -= 1;
+    state.user.streamGroups = state.user.streamGroups.filter(
+      item => item.key !== groupId
+    );
   },
   decrementStoreCount(state) {
     state.user.mediaCount = state.user.mediaCount - 1;

@@ -35,6 +35,10 @@
           </button>
         </div>
         <LinksPreviewList :text="post.text" />
+        <PostTipsGoal
+          v-if="post.tipsGoal && post.tipsGoal.isEnabled"
+          :data="post.tipsGoal"
+        />
         <slot v-if="isInnerPost"></slot>
         <template v-else>
           <Media
@@ -118,6 +122,7 @@ import PostCommon from "@/mixins/post/common";
 import UserSuggestionsInline from "@/mixins/userSuggestionsInline";
 import moment from "moment";
 import LinksPreviewList from "@/components/post/parts/linksPreviewList/Index";
+import PostTipsGoal from "@/components/post/parts/tipsGoal/Index";
 
 export default {
   name: "PostMedium",
@@ -139,7 +144,8 @@ export default {
     Header,
     Media,
     Tip,
-    LinksPreviewList
+    LinksPreviewList,
+    PostTipsGoal
   },
   props: {
     post: {

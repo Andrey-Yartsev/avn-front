@@ -54,6 +54,25 @@
           </span>
         </li>
       </template>
+      <template v-if="!isAuthor && user">
+        <li class="more-functions__item ">
+          <span
+            class="edit more-functions__link menuItemWrapper"
+            type="button"
+            @click.prevent="handleClick('purchases')"
+          >
+            <span
+              v-if="type === 'purchases'"
+              class="status-card on icn-item checkmark"
+            />
+            <span
+              class="more-functions__option menuItem"
+              :class="{ selected: type === 'purchases' }"
+              >My Purchases Only</span
+            >
+          </span>
+        </li>
+      </template>
       <li class="more-functions__item ">
         <span
           class="edit more-functions__link menuItemWrapper"
@@ -142,6 +161,11 @@ export default {
   methods: {
     handleClick(type) {
       this.$emit("handleClick", type);
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
     }
   }
 };

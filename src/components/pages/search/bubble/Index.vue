@@ -1,6 +1,7 @@
 <template>
   <div
     class="b-search-form b-search-form_flex-align header-search"
+    :class="{ 'non-login-view': !isLogedIn }"
     v-click-outside="close"
   >
     <input
@@ -95,7 +96,7 @@ export default {
 
   computed: {
     throttledSearch() {
-      return throttle(300, false, this.search, false);
+      return throttle(700, false, this.search, false);
     },
     loading() {
       return this.$store.state.search.bubble.searchLoading;
@@ -137,6 +138,9 @@ export default {
       } else {
         return `/search/${this.type}/${this.localQuery}`;
       }
+    },
+    isLogedIn() {
+      return this.$store.state.auth.user;
     }
   },
 
@@ -209,7 +213,8 @@ export default {
         this.$store.dispatch("search/bubble/search", {
           type: this.type,
           query: this.localQuery,
-          strip_tags: 1
+          strip_tags: 1,
+          preview: this.type === "users" ? true : false
         });
       }, 200);
     },

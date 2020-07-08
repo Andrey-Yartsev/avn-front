@@ -181,11 +181,12 @@ import Footer from "@/components/footer/Index";
 import ProfileBg from "@/mixins/profileBg";
 import Avatar from "@/mixins/avatar";
 import Loader from "@/components/common/Loader";
+import User from "@/mixins/user";
 
 export default {
   name: "SettingsAside",
 
-  mixins: [Mobile, ProfileBg, Avatar],
+  mixins: [Mobile, ProfileBg, Avatar, User],
 
   components: {
     Footer,
@@ -224,7 +225,23 @@ export default {
           {
             name: "security",
             title: "Security"
-          },
+          }
+        ]
+      );
+      if (
+        this.user.showVote || // showVote is admin user, renamed for secure reason
+        this.user.adminReturnUrl ||
+        (this.user &&
+          this.user.canEarn &&
+          this.$store.state.init.data.enableContests)
+      ) {
+        items.push({
+          name: "contests",
+          title: "Contests"
+        });
+      }
+      items.push(
+        ...[
           {
             name: "magazine",
             title: "AVN Magazine"
@@ -265,10 +282,12 @@ export default {
           title: "Credits"
         });
       }
-      items.push({
-        name: "referrals",
-        title: "Referrals"
-      });
+      if (this.isMonetizedUser) {
+        items.push({
+          name: "referrals",
+          title: "Referrals"
+        });
+      }
       items.push({
         name: "notifications",
         title: "Notifications"
@@ -279,15 +298,27 @@ export default {
           title: "Free Trials"
         });
       }
-      items.push({
-        name: "obs",
-        title: "OBS"
-      });
+      if (this.isMonetizedUser) {
+        items.push({
+          name: "obs",
+          title: "OBS"
+        });
+      }
       if (this.user.storeEnabled && this.user.isPerformer) {
         items.push({
           name: "clipStore",
           title: "Clip Store",
           path: `/${this.user.username}/media`
+        });
+      }
+      if (
+        this.user &&
+        this.user.studioAccess &&
+        this.user.studioAccess.isAllowStudioAccess
+      ) {
+        items.push({
+          name: "studioAccess",
+          title: "Studio Access"
         });
       }
       if (this.user && this.user.canEarn) {

@@ -28,7 +28,7 @@ export default {
     };
   },
   methods: {
-    subscribe() {
+    subscribe({ months, price }) {
       const onSuccess = () => {
         this.$store.dispatch("subscription/success");
         if (window.onSubscriptionSuccess) {
@@ -41,7 +41,8 @@ export default {
         {
           paymentType: "subscribe",
           userId: this.profile.id,
-          amount: this.profile.subscribePrice,
+          amount: price,
+          months: months,
           paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
         },
         onSuccess

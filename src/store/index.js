@@ -30,6 +30,7 @@ import payment from "@/store/modules/payment";
 import premiumLinks from "@/store/modules/premiumLinks";
 import payouts from "@/store/modules/payouts";
 import twitter from "@/store/modules/twitter";
+import google from "@/store/modules/google";
 import emails from "@/store/modules/emails";
 import blocked from "@/store/modules/blocked";
 import blockedPosts from "@/store/modules/blockedPosts";
@@ -67,6 +68,7 @@ import route from "@/store/modules/route";
 import contest from "@/store/modules/contest";
 import magazine from "@/store/modules/magazine";
 import welcomeMessages from "@/store/modules/welcomeMessages";
+import studioAccess from "@/store/modules/studioAccess";
 
 Vue.use(Vuex);
 
@@ -101,6 +103,7 @@ const store = new Vuex.Store({
     payment,
     payouts,
     twitter,
+    google,
     emails,
     blocked,
     blockedPosts,
@@ -139,7 +142,8 @@ const store = new Vuex.Store({
     route,
     contest,
     magazine,
-    welcomeMessages
+    welcomeMessages,
+    studioAccess
   }
 });
 

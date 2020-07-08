@@ -9,6 +9,9 @@ const actions = {};
 const mutations = {
   updateHeaderStream(state, data) {
     state.data.headerStream = data;
+  },
+  updateContestsStatus(state, data) {
+    state.data.enableContests = data.enableContests;
   }
 };
 

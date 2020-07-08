@@ -1,0 +1,142 @@
+.contest-settings {
+  .contest-table {
+    width: 100%;
+
+    &-head {
+      div {
+        font-weight: bold;
+      }
+    }
+    &-body {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        &.border-top {
+          border-top: 1px solid rgba(124, 139, 150, 0.2);
+          padding-top: 24px;
+        }
+      }
+    }
+    &-row {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      .contest-row-name {
+        width: 70%;
+      }
+      .contest-row-rank {
+        width: 10%;
+      }
+      .contest-row-toggler {
+        width: 20%;
+      }
+      .contest-row-date {
+        color: black;
+      }
+    }
+    td,
+    th {
+      padding: 3px;
+    }
+    td {
+      white-space: pre-line;
+    }
+    th {
+      text-align: left;
+      &.rank {
+        text-align: center;
+      }
+    }
+    .toggler {
+      text-align: right;
+      label {
+        display: inline-block;
+      }
+    }
+  }
+  .supporters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    table {
+      background-color: $primary-color-06;
+      td,
+      th {
+        padding: 5px 10px;
+      }
+    }
+  }
+  .edit {
+    .form-group_with-label {
+      padding-bottom: 5px;
+    }
+    // border-bottom: 1px solid rgba($gray, 0.2);
+  }
+  .shadow-block {
+    .table-wrapper {
+      padding-bottom: 10px;
+    }
+  }
+  .promote {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    .label {
+      min-width: 150px;
+      display: inline;
+      line-height: 30px;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        word-break: break-all;
+        line-height: 30px;
+      }
+    }
+    .copy-link {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        // width: 100%;
+      }
+    }
+  }
+
+  .contestImagePreview {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 11.5%;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      padding-right: 0;
+    }
+    .image {
+      width: 287px;
+      height: 278px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      margin: 10px 0 10px auto;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin: auto
+      }
+    }
+    &.full-width {
+      padding-right: 0;
+      .image {
+        width: 100%;
+      }
+    }
+  }
+  .twitter-input {
+    margin-right: 20px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      margin-left: 20px;
+    }
+  }
+  .twitterConnect {
+    align-items: center;
+  }
+
+  .toggle-element {
+    @include media-breakpoint-down($desktop-breakpoint-dcrs) {
+      margin-top: 0;
+    }
+  }
+  .cards {
+    padding-bottom: 24px;
+  }
+}

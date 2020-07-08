@@ -148,11 +148,23 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "addGroup",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "editGroup",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "statPosts",
     layoutOnlyModal: true
   },
   {
     storeName: "mediaPayConfirm",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "groupPayConfirm",
     layoutOnlyModal: true
   },
   {
@@ -173,6 +185,14 @@ const modalTypes = [
   },
   {
     storeName: "magShipping",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "groupMembers",
+    layoutOnlyModal: true
+  },
+  {
+    storeName: "groupMembersMessage",
     layoutOnlyModal: true
   }
 ];

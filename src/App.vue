@@ -31,6 +31,13 @@
       >
         Return to admin
       </a>
+      <a
+        v-if="isLoggedFromStudioProfile"
+        @click.prevent="returnToStudioProfile"
+        class="btn alt btn-back-kitchen"
+      >
+        Return to studio profile
+      </a>
       <UserBubble
         username="stompeg"
         v-show="this.$store.state.userBubble.show"
@@ -60,7 +67,7 @@ import rootClasses from "@/utils/rootClasses";
 import postMessageHandler from "@/utils/postMessage";
 import ws from "@/ws";
 import wsg from "@/ws/wsg";
-import wsp from "@/ws/wsp";
+// import wsp from "@/ws/wsp";
 import BackRouter from "@/mixins/backRouter";
 import FrontUpdate from "@/mixins/frontUpdate";
 import ColorScheme from "@/mixins/colorScheme";
@@ -187,6 +194,13 @@ export default {
     },
     hasLayout() {
       return !this.$route.meta.noLayout;
+    },
+    isLoggedFromStudioProfile() {
+      return (
+        this.user &&
+        this.user.studioAccess &&
+        this.user.studioAccess.isLoggedFromStudio
+      );
     }
   },
   watch: {
@@ -254,12 +268,12 @@ export default {
       }
       if (this.loggedIn) {
         this.webSocket = ws;
-        wsp.connect();
+        // wsp.connect();
       } else {
         this.webSocket = wsg;
-        if (wsp.connected) {
-          wsp.close();
-        }
+        // if (wsp.connected) {
+        //   wsp.close();
+        // }
       }
       this.webSocket.connect();
       this.$root.ws = this.webSocket;
@@ -284,6 +298,18 @@ export default {
           trialLogger.info("user does not exists");
         }
       }, 1000);
+    },
+    returnToStudioProfile() {
+      this.$store
+        .dispatch("studioAccess/logout", this.user.studioAccess.studioProfileId)
+        .then(() => {
+          if (this.$route.path !== "/settings") {
+            this.$router.push("/settings");
+          }
+          setTimeout(() => {
+            document.location.reload();
+          }, 100);
+        });
     }
   },
   created() {

@@ -193,6 +193,15 @@
             </label>
           </div>
         </div>
+        <div
+          class="post-tipsGoal"
+          v-if="tipsGoal.isEnabled && $mq === 'desktop' && where === 'modal'"
+        >
+          <TipsGoalForm
+            :tipsGoal="tipsGoal"
+            :tipsGoalSourceTypes="tipsGoalSourceTypes"
+          />
+        </div>
         <div class="actions-controls">
           <label
             :class="['add-media-input', { disabled: cantAddMoreMedia }]"
@@ -256,6 +265,23 @@
               ></span>
               <span class="btn-post__text">
                 Expire
+              </span>
+            </div>
+          </div>
+          <div
+            v-if="user.canEarn && user.canPayoutsRequest"
+            class="btn-post btn-post_datetime"
+          >
+            <div
+              class="post-datetime"
+              :class="{ disabled: tipsGoal.isEnabled }"
+            >
+              <span
+                class="post-datetime__icn icn-item icn-price icn-size_lg"
+                @click="() => (tipsGoal.isEnabled = true)"
+              ></span>
+              <span class="btn-post__text">
+                Tip goal
               </span>
             </div>
           </div>
@@ -410,6 +436,15 @@
           </div>
         </div>
       </div>
+      <div
+        class="post-attachment"
+        v-if="tipsGoal.isEnabled && $mq === 'mobile'"
+      >
+        <TipsGoalForm
+          :tipsGoal="tipsGoal"
+          :tipsGoalSourceTypes="tipsGoalSourceTypes"
+        />
+      </div>
       <div class="loader-container loader-container_center" v-if="isSaving">
         <Loader
           :fullscreen="false"
@@ -436,8 +471,19 @@ import "vue-datetime/dist/vue-datetime.css";
 import VueTribute from "vue-tribute";
 import UserSuggestions from "@/mixins/userSuggestions";
 import LinksPreview from "./linksPreview";
+import Multiselect from "vue-multiselect";
+import TipsGoalForm from "@/components/post/parts/tipsGoal/TipsGoalForm";
 
 Settings.defaultLocale = "en";
+
+const tipsGoalSourceTypes = [
+  { title: "Post tips", value: "localTips" },
+  { title: "All other tips", value: "globalTips" },
+  { title: "Clips", value: "clips" },
+  { title: "Messages", value: "messages" },
+  { title: "Subscriptions", value: "subscriptions" },
+  { title: "Votes", value: "votes" }
+];
 
 const InitialState = {
   expanded: false,
@@ -454,7 +500,15 @@ const InitialState = {
     gif: 1,
     photo: 50,
     audio: 1
-  }
+  },
+  tipsGoal: {
+    isEnabled: false,
+    text: "",
+    total: 0,
+    achieved: 0,
+    sources: []
+  },
+  tipsGoalSourceTypes: tipsGoalSourceTypes
 };
 
 export default {
@@ -463,6 +517,7 @@ export default {
   data() {
     return {
       ...InitialState,
+      tipsGoal: { ...InitialState.tipsGoal },
       tweetSend: !!this.$store.state.auth.user.isPostsTweets
     };
   },
@@ -472,7 +527,9 @@ export default {
     Datetime,
     Draggable,
     VueTribute,
-    LinksPreview
+    LinksPreview,
+    Multiselect,
+    TipsGoalForm
   },
   props: {
     initialExpanded: {
@@ -610,8 +667,7 @@ export default {
       return this.user.isPerformer;
     },
     showExpired() {
-      return true;
-      // return this.showSchedule;
+      return this.isMonetizedUser;
     },
     expiredActionList() {
       const list = [
@@ -625,6 +681,14 @@ export default {
         });
       }
       return list;
+    },
+    validTipsData() {
+      return (
+        this.tipsGoal.isEnabled &&
+        this.tipsGoal.text.trim().length &&
+        parseFloat(this.tipsGoal.total) > 0 &&
+        this.tipsGoal.sources.length
+      );
     }
   },
   methods: {
@@ -660,6 +724,7 @@ export default {
       this.datetimeExpired = InitialState.datetimeExpired;
       this.expiredAction = InitialState.expiredAction;
       this.saving = false;
+      this.tipsGoal = { ...InitialState.tipsGoal };
     },
     getPostData() {
       if (this.notEhoughData) return;
@@ -676,6 +741,7 @@ export default {
         text: this.postMsg,
         tweetSend: this.tweetSend,
         isScheduled: !!this.datetime,
+        isFree: this.isFree,
         mediaFiles: this.preloadedMedias.map(media => {
           const data = {};
 
@@ -701,8 +767,20 @@ export default {
         postData.expiredDate = "";
       }
 
-      if (this.hasSubscribePrice) {
-        postData.isFree = this.isFree;
+      if (this.validTipsData) {
+        postData.tipsGoal = {
+          ...this.tipsGoal,
+          total: parseFloat(this.tipsGoal.total),
+          sources: this.tipsGoal.sources.map(item => item.value)
+        };
+      } else if (
+        this.post.tipsGoal &&
+        this.post.tipsGoal.isEnabled &&
+        !this.tipsGoal.isEnabled
+      ) {
+        postData.tipsGoal = {
+          ...InitialState.tipsGoal
+        };
       }
 
       return postData;
@@ -812,6 +890,15 @@ export default {
         this.mediaType = this.preloadedMedias.length
           ? this.preloadedMedias[0].mediaType
           : "all";
+        this.tipsGoal =
+          this.post.tipsGoal && this.post.tipsGoal.isEnabled
+            ? {
+                ...this.post.tipsGoal,
+                sources: tipsGoalSourceTypes.filter(item =>
+                  this.post.tipsGoal.sources.includes(item.value)
+                )
+              }
+            : Object.assign({}, InitialState.tipsGoal);
 
         this.$refs.textarea.innerHTML = this.getText();
       }
@@ -829,6 +916,9 @@ export default {
 
     this.popupItem = this.$el;
     this.$refs.textarea.innerHTML = this.getText();
+  },
+  beforeDestroy() {
+    this.tipsGoal = { ...InitialState.tipsGoal };
   },
   directives: {
     ClickOutside

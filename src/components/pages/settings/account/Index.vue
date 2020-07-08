@@ -37,7 +37,8 @@ export default {
         email: "Email",
         twitter: "Twitter",
         password: "Password",
-        manage: "Manage Account"
+        manage: "Manage Account",
+        google: "Google"
       };
       return map[view];
     }
