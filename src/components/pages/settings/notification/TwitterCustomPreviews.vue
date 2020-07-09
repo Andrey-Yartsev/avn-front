@@ -103,7 +103,7 @@ export default {
       return (
         this.isDataChanges &&
         !this.saving &&
-        this.preloadedMedias.length &&
+        // this.preloadedMedias.length &&
         !this.preloadedMedias.filter(i => !i.processId).length
       );
     }

@@ -230,7 +230,9 @@
               <TwitterCustomPreviews
                 v-if="
                   localUser.twitterNotificationsSettings.options.newSubscriber
-                    .customImages.isEnabled
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.newSubscriber
+                      .customImages.isEnabled
                 "
                 :media="
                   localUser.twitterNotificationsSettings.options.newSubscriber
@@ -284,7 +286,9 @@
               <TwitterCustomPreviews
                 v-if="
                   localUser.twitterNotificationsSettings.options.autoprolong
-                    .customImages.isEnabled
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.autoprolong
+                      .customImages.isEnabled
                 "
                 :media="
                   localUser.twitterNotificationsSettings.options.autoprolong
@@ -338,7 +342,9 @@
               <TwitterCustomPreviews
                 v-if="
                   localUser.twitterNotificationsSettings.options.tip
-                    .customImages.isEnabled
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.tip
+                      .customImages.isEnabled
                 "
                 :media="
                   localUser.twitterNotificationsSettings.options.tip
