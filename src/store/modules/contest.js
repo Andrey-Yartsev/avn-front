@@ -9,7 +9,7 @@ const fetchLimit = 12;
 const state = {
   categories: [],
   nominees: [],
-  prizes: [],
+  prizes: null,
   offset: 0,
   limit: fetchLimit,
   allDataReceived: false,
@@ -73,6 +73,13 @@ const actions = {
   },
   _fetchNomineeItem({ dispatch }, { contestId, nomineeId }) {
     return dispatch("fetchNomineeItem", { contestId, nomineeId });
+  },
+  fetchPrizes({ dispatch, commit }, contestId) {
+    commit("resetPrizes");
+    return dispatch("_fetchPrizes", contestId).then(res => {
+      commit("setPrizes", res);
+      return res;
+    });
   }
 };
 const mutations = {
@@ -115,6 +122,12 @@ const mutations = {
   },
   clearSingleFreeVoteUsed(state) {
     state.singleFreeVoteUsed = true;
+  },
+  setPrizes(state, prizes) {
+    state.prizes = prizes;
+  },
+  resetPrizes(state) {
+    state.prizes = null;
   }
 };
 
@@ -129,6 +142,20 @@ createRequestAction({
     method: "GET"
   },
   defaultResultValue: []
+});
+createRequestAction({
+  requestType: "any",
+  prefix: "_fetchPrizes",
+  apiPath: "contests/prizes/{contestId}",
+  state,
+  mutations,
+  actions,
+  options: {
+    method: "GET"
+  },
+  paramsToPath: function(params, path) {
+    return path.replace(/{contestId}/, params.contestId);
+  }
 });
 
 createRequestAction({
@@ -191,20 +218,20 @@ createRequestAction({
   }
 });
 
-createRequestAction({
-  prefix: "fetchPrizes",
-  apiPath: "contests/prizes/{contestId}",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "GET"
-  },
-  defaultResultValue: [],
-  paramsToPath: function(params, path) {
-    return path.replace(/{contestId}/, params.contestId);
-  }
-});
+// createRequestAction({
+//   prefix: "fetchPrizes",
+//   apiPath: "contests/prizes/{contestId}",
+//   state,
+//   mutations,
+//   actions,
+//   options: {
+//     method: "GET"
+//   },
+//   defaultResultValue: [],
+//   paramsToPath: function(params, path) {
+//     return path.replace(/{contestId}/, params.contestId);
+//   }
+// });
 
 createRequestAction({
   prefix: "vote",
