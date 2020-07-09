@@ -252,6 +252,9 @@ export default {
       } else if (contestId != this.$route.params.contestId) {
         this.$router.push(`/contests/${contestId}`);
       }
+      this.$store.dispatch("contest/fetchPrizes", {
+        contestId
+      });
       this.destroyObserver();
       this.isInitFetch = true;
       this.$store.commit("contest/resetNominees");

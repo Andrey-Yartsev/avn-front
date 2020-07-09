@@ -33,7 +33,10 @@
           :contestId="contestId"
           :contestName="contestName"
         />
-        <span v-if="showRank" class="user-num-list__text">{{ nominee.n }}</span>
+        <span v-if="showRank" class="user-num-list__text">
+          <span class="rank">{{ nominee.n }}</span>
+          <span v-if="showPrize" class="prize">{{ prize }}</span>
+        </span>
       </div>
       <p class="profile-text">{{ nominee.description }}</p>
       <div v-if="isVotingActive" class="text-centered mt-auto">
@@ -68,6 +71,20 @@ export default {
   computed: {
     showRank() {
       return this.nominee.rank && this.nominee.rank_display;
+    },
+    showPrize() {
+      return this.nominee.n && this.nominee.n <= 10;
+    },
+    prize() {
+      if (!this.$store.state.contest.prizes) {
+        return null;
+      }
+      const currentPrize = this.$store.state.contest.prizes.find(
+        item => item.rank == this.nominee.rank
+      );
+      if (currentPrize) {
+        return `$${currentPrize.amount}`;
+      }
     }
   },
   methods: {
