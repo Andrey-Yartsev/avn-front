@@ -435,11 +435,7 @@ export default {
       }
       let n = this.allUsersCount.count;
       if (this.excludeStars && this.excludeSubscribers) {
-        n =
-          n -
-          this.allUsersCount.stars -
-          this.allUsersCount.subscribers +
-          this.allUsersCount.starsSubscribers * 2;
+        n -= this.allUsersCount.starsSubscribers;
       } else if (this.excludeStars && !this.excludeSubscribers) {
         n -= this.allUsersCount.stars;
       } else if (!this.excludeStars && this.excludeSubscribers) {
