@@ -108,6 +108,22 @@
                 <span class="toggle-element_switcher"></span>
               </label>
             </div>
+            <div
+              class="checkbox-block"
+              v-if="selectAll"
+              :class="{ enabled: excludeSubscribers }"
+            >
+              <span class="caption">Exclude all subscribers</span>
+              <label class="toggle-element" for="exclude_subscribers">
+                <input
+                  class="tweetSend"
+                  type="checkbox"
+                  id="exclude_subscribers"
+                  v-model="excludeSubscribers"
+                />
+                <span class="toggle-element_switcher"></span>
+              </label>
+            </div>
           </div>
         </div>
         <div class="chatFlatLoader semi-transparent" v-if="usersSearching" />
@@ -277,10 +293,9 @@
                 class="selectedContacts selectedContacts_recipients"
                 v-if="selectAll"
               >
-                <b class="selectedContacts__title"
-                  >Recipients: All contacts{{ allUsersCountText
-                  }}{{ allUsersCountExtraText }}</b
-                >
+                <b class="selectedContacts__title">
+                  Recipients: All contacts{{ allUsersCountText }}
+                </b>
               </div>
               <div
                 class="selectedContacts selectedContacts_recipients"
@@ -315,6 +330,7 @@
             :toAll="selectAll"
             :disable="sending"
             :excludeStars="excludeStars"
+            :excludeSubscribers="excludeSubscribers"
             :recipientsCount="recipientsCount"
             @startSending="startSending"
             @sent="sent"
@@ -357,6 +373,7 @@ export default {
       sending: false,
       selectAll: false,
       excludeStars: true,
+      excludeSubscribers: true,
       allFoundSelected: false
     };
   },
@@ -410,43 +427,41 @@ export default {
       });
     },
     allUsersCount() {
-      if (!this.$store.state.chat.fetchAllUsersCountResult) {
-        return 0;
-      }
-      return this.$store.state.chat.fetchAllUsersCountResult.count;
-    },
-    allUsersCountExcludingStars() {
-      if (!this.$store.state.chat.fetchUsersCountWithoutStarsResult) {
-        return 0;
-      }
-      return this.$store.state.chat.fetchUsersCountWithoutStarsResult.count;
+      return this.$store.state.chat.fetchAllUsersCountResult;
     },
     recipientsCount() {
-      return this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
+      if (!this.allUsersCount) {
+        return null;
+      }
+      let n = this.allUsersCount.count;
+      if (this.excludeStars && this.excludeSubscribers) {
+        n =
+          n -
+          this.allUsersCount.stars -
+          this.allUsersCount.subscribers +
+          this.allUsersCount.starsSubscribers * 2;
+      } else if (this.excludeStars && !this.excludeSubscribers) {
+        n -= this.allUsersCount.stars;
+      } else if (!this.excludeStars && this.excludeSubscribers) {
+        n -= this.allUsersCount.subscribers;
+      }
+      return n;
     },
     allUsersCountText() {
-      const n = this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
-      if (n) {
-        return " (" + n + ")";
-      }
-      return null;
+      return " (" + this.recipientsCount + ")";
     },
-    allUsersCountExtraText() {
-      const n = this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
-      const text = this.excludeStars
-        ? "excluding AVN Stars"
-        : "including AVN Stars";
-      if (n) {
-        return " " + text;
-      }
-      return null;
-    },
+    // allUsersCountExtraText() {
+    //   const n = this.excludeStars
+    //     ? this.allUsersCountExcludingStars
+    //     : this.allUsersCount;
+    //   const text = this.excludeStars
+    //     ? "excluding AVN Stars"
+    //     : "including AVN Stars";
+    //   if (n) {
+    //     return " " + text;
+    //   }
+    //   return null;
+    // },
     usersSearching() {
       return this.$store.state.chat.searchUsersLoading;
     }
@@ -557,7 +572,7 @@ export default {
   created() {
     this.$store.dispatch("chat/fetchAnyChats", {});
     this.$store.dispatch("chat/fetchAllUsersCount", {});
-    this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
+    // this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
     this.search();
   },
   beforeDestroy() {

@@ -37,6 +37,10 @@ export default {
     excludeStars: {
       type: Boolean,
       default: true
+    },
+    excludeSubscribers: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -48,13 +52,12 @@ export default {
       const data = { ...message };
       if (this.toAll) {
         data.toAll = this.toAll;
+        data.withStars = !this.excludeStars;
+        data.withSubscribers = !this.excludeSubscribers;
       } else {
         data.ids = this.userIds;
       }
       await this.$store.dispatch("chat/sendMultiMessages", {
-        query: {
-          "with-stars": !this.excludeStars
-        },
         data
       });
       this.$store.dispatch("global/flashToast", {

@@ -856,31 +856,31 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
-  },
-  paramsToOptions: function(params, options) {
-    options.query = {
-      "with-stars": true
-    };
-    return options;
   }
+  // paramsToOptions: function(params, options) {
+  //   options.query = {
+  //     "with-stars": true
+  //   };
+  //   return options;
+  // }
 });
 
-createRequestAction({
-  prefix: "fetchUsersCountWithoutStars",
-  apiPath: "chats/bulk-count-all",
-  state,
-  mutations,
-  actions,
-  options: {
-    method: "GET"
-  },
-  paramsToOptions: function(params, options) {
-    options.query = {
-      "with-stars": false
-    };
-    return options;
-  }
-});
+// createRequestAction({
+//   prefix: "fetchUsersCountWithoutStars",
+//   apiPath: "chats/bulk-count-all",
+//   state,
+//   mutations,
+//   actions,
+//   options: {
+//     method: "GET"
+//   },
+//   paramsToOptions: function(params, options) {
+//     options.query = {
+//       "with-stars": false
+//     };
+//     return options;
+//   }
+// });
 
 createRequestAction({
   prefix: "_markAllChatsAsRead",
