@@ -144,16 +144,24 @@
 
         <div class="supporters" v-if="data.topSupporters.length">
           <div>
-            <table>
-              <tr>
-                <th>Top Supporters</th>
-                <th>Amount</th>
-              </tr>
-              <tr v-for="v in data.topSupporters" :key="v.username">
-                <td>{{ v.name }}</td>
-                <td>${{ v.amount }}</td>
-              </tr>
-            </table>
+            <div class="supporters-table">
+              <div class="supporters-table-row supporters-table-head">
+                <div class="supporter">Top Supporters</div>
+                <div class="amount">Amount</div>
+              </div>
+              <div
+                class="supporters-table-row supporters-table-body"
+                v-for="v in data.topSupporters"
+                :key="v.username"
+              >
+                <div class="supporter">{{ v.name }}</div>
+                <div class="amount">${{ v.amount }}</div>
+              </div>
+            </div>
+            <!-- <div v-if="data.topSupporters.length @click="showAllSupporters"> 10" class="supporters__show-all">Show All</div> -->
+            <div class="supporters__show-all" @click="showAllSupporters">
+              Show All
+            </div>
           </div>
         </div>
       </div>
@@ -345,6 +353,14 @@ export default {
             error: true
           });
         });
+    },
+    showAllSupporters() {
+      this.$store.dispatch("modal/show", {
+        name: "contestSupporters",
+        data: {
+          contestId: this.data.id
+        }
+      });
     }
   },
   mounted() {

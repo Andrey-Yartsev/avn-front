@@ -6,7 +6,7 @@
     >
       Contests
     </h1>
-    <div class="container shadow-block border-top cards">
+    <div class="container shadow-block cards">
       <div class="loader-container" v-if="loading">
         <Loader :fullscreen="false" text="" :small="true" />
       </div>
@@ -18,19 +18,40 @@
             </div>
           </div>
         </div>
-        <div v-else class="contest-table info">
-          <div class="contest-table-head contest-table-row">
-            <div class="contest-row-name">Contest</div>
-            <div class="contest-row-rank">Rank</div>
-            <div class="contest-row-toggler"></div>
+        <template v-else>
+          <div class="contest-table info ">
+            <h2 class="form-title contests-header border-top">
+              Available Contests
+            </h2>
+            <template v-if="activeContests && activeContests.length">
+              <div class="contest-table-head contest-table-row">
+                <div class="contest-row-name">Contest</div>
+                <div class="contest-row-rank">Rank</div>
+                <div class="contest-row-toggler"></div>
+              </div>
+              <Contest :data="v" v-for="v in activeContests" :key="v.id" />
+            </template>
+            <div v-else class="contest-table-empty">
+              <span>There is no available contests for now</span>
+            </div>
           </div>
-          <template v-if="items && items.length">
-            <Contest :data="v" v-for="v in items" :key="v.id" />
-          </template>
-          <div class="contest-table-empty" v-else>
-            <span>Empty here for now</span>
+          <div class="contest-table info ">
+            <h2 class="form-title contests-header border-top">
+              Past Contests
+            </h2>
+            <template v-if="finishedContests && finishedContests.length">
+              <div class="contest-table-head contest-table-row">
+                <div class="contest-row-name">Contest</div>
+                <div class="contest-row-rank">Rank</div>
+                <div class="contest-row-toggler"></div>
+              </div>
+              <Contest :data="v" v-for="v in finishedContests" :key="v.id" />
+            </template>
+            <div v-else class="contest-table-empty">
+              <span>There is no available contests for now</span>
+            </div>
           </div>
-        </div>
+        </template>
       </template>
     </div>
   </div>
@@ -54,6 +75,12 @@ export default {
   computed: {
     items() {
       return this.$store.state.contest.settings.fetchResult;
+    },
+    activeContests() {
+      return this.items.filter(item => !item.hasFinished);
+    },
+    finishedContests() {
+      return this.items.filter(item => item.hasFinished);
     }
   },
   mounted() {
