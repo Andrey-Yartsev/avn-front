@@ -31,6 +31,9 @@
       </div>
     </div>
     <div class="contest-table-details" v-if="opened">
+      <p class="finished-title" v-if="data.hasFinished">
+        Contest has finished already
+      </p>
       <div class="edit">
         <form @submit.prevent="update">
           <div class="contestImagePreview" v-if="hasImagePreview">
@@ -115,7 +118,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width-sm"
-              :disabled="!valid || isSending"
+              :disabled="!valid || isSending || data.hasFinished"
             >
               Save
             </button>
@@ -229,7 +232,7 @@ export default {
         }
       };
       this.formData = new FormData();
-      if (this.data.modelData?.contest_id && !this.data.hasFinished) {
+      if (this.data.modelData?.contest_id) {
         this.opened = true;
       }
       if (this.data.modelData?.twitter_handle) {

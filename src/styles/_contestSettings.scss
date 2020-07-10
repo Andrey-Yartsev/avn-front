@@ -33,6 +33,13 @@
         color: black;
       }
     }
+    &-details {
+      .finished-title {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 18px;
+      }
+    }
     td,
     th {
       padding: 3px;
