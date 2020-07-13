@@ -91,7 +91,8 @@ export default {
       this.$store.dispatch("modal/show", {
         name: "groupMembers",
         data: {
-          group: this.group
+          group: this.group,
+          isOwnerView: true
         }
       });
     },

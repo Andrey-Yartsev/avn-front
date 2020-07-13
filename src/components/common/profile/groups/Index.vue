@@ -12,7 +12,7 @@
         >
           + New group
         </button>
-        <!-- <div
+        <div
           :class="['buttonWrapper', 'more-functions', { open: opened }]"
           v-click-outside="hide"
         >
@@ -28,14 +28,13 @@
               @handleClick="handleClick"
             />
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="profile-content">
         <div class="explore">
           <div class="explore__inside">
             <div class="explore-wrapper groups">
-              <component
-                :is="groupComponent"
+              <GroupItem
                 v-for="item in groups"
                 :group="item"
                 :key="item.id"
@@ -100,9 +99,6 @@ export default {
       const str = this.filterType;
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
-    groupComponent() {
-      return GroupItem;
-    },
     profile() {
       return this.$store.state.profile.home.profile;
     }
@@ -116,6 +112,10 @@ export default {
     }
   },
   methods: {
+    init() {
+      this.$store.commit("profile/groups/clearGroups", null, { root: true });
+      this.fetchData();
+    },
     open() {
       this.opened = true;
       this.$emit("openDropdown");
@@ -146,11 +146,7 @@ export default {
     }
   },
   mounted() {
-    // if (!this.isPrivate) {
-    //   this.$router.push(`/${this.profile.username}`);
-    // }
-    this.$store.commit("profile/groups/clearGroups", null, { root: true });
-    this.fetchData();
+    // this.init();
   }
 };
 </script>

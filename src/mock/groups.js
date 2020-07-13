@@ -1,7 +1,7 @@
 export default [
   {
     productId: 1316,
-    title: "123 sodfsdf ",
+    title: "group 1",
     description: "123",
     media: [
       {
@@ -36,6 +36,7 @@ export default [
     isActive: false,
     isPublic: false,
     isMember: false,
+    canRenew: false,
     membersCount: 4,
     members: [
       {
@@ -43,13 +44,14 @@ export default [
           "https://cdn2-dev-media.avn.com/files/m/m9/m9j/m9jjds8slt7rutrjb3lrkhscmrz3dfcz1578474669/avatar.jpg?Expires=1624446987&Signature=ZjLR2kjLbwhGpaw47R4ZKsLT6VGnilmeP7sf9zw~gHah~olNYuumtH3C7vfPQ3EGUz07Yb3O-C8~ehml6BkIip1uTaOHJrMVdg8vLHfy6aEeXFtEEnYh6TVt0Q~vCC5K2tVyn9Z7FC1rY33Sc2SUMIrFwFqPAa72Isu6N6WTP5WciF3NTyzTedU2afgf41jO0IHKOgmyFH8e9Dra1PiRG1pDvUhi6EW-ZdsJIkmFdiLyp1yREFH1ysMZSrNO4RQyVZNnocYZ8ZYwAZvS5d843-ZShBnRovVVfNieTF0VK~lWhGbd~0eeN94VGRR8MqZ5T2qoGg22lvyO1lo8vQcphw__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ",
         id: 468788,
         name: "имя123",
-        username: "user666"
+        username: "user666",
+        spent: "30.50"
       }
     ]
   },
   {
     productId: 1317,
-    title: "123 sodfsdf ",
+    title: "group 2",
     description:
       "fgdfgdfgfdg sfsdfs sdfksjadfls sfsdfsdf sdflksdfs sdfsdf sdfsdfsfs",
     media: [
@@ -81,16 +83,26 @@ export default [
         }
       }
     ],
-
     price: "2.00",
     isActive: true,
     isPublic: true,
-    isMember: true,
-    membersCount: null
+    isMember: false,
+    canRenew: true,
+    membersCount: 4,
+    members: [
+      {
+        avatar:
+          "https://cdn2-dev-media.avn.com/files/m/m9/m9j/m9jjds8slt7rutrjb3lrkhscmrz3dfcz1578474669/avatar.jpg?Expires=1624446987&Signature=ZjLR2kjLbwhGpaw47R4ZKsLT6VGnilmeP7sf9zw~gHah~olNYuumtH3C7vfPQ3EGUz07Yb3O-C8~ehml6BkIip1uTaOHJrMVdg8vLHfy6aEeXFtEEnYh6TVt0Q~vCC5K2tVyn9Z7FC1rY33Sc2SUMIrFwFqPAa72Isu6N6WTP5WciF3NTyzTedU2afgf41jO0IHKOgmyFH8e9Dra1PiRG1pDvUhi6EW-ZdsJIkmFdiLyp1yREFH1ysMZSrNO4RQyVZNnocYZ8ZYwAZvS5d843-ZShBnRovVVfNieTF0VK~lWhGbd~0eeN94VGRR8MqZ5T2qoGg22lvyO1lo8vQcphw__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ",
+        id: 468788,
+        name: "имя123",
+        username: "user666",
+        spent: "30.50"
+      }
+    ]
   },
   {
     productId: 1318,
-    title: "123 sodfsdf ",
+    title: "group 3",
     description:
       "fgdfgdfgfdg sfsdfs sdfksjadfls sfsdfsdf sdflksdfs sdfsdf sdfsdfsfs",
     media: [
@@ -127,6 +139,17 @@ export default [
     isActive: true,
     isPublic: true,
     isMember: true,
-    membersCount: 2
+    canRenew: false,
+    membersCount: 2,
+    members: [
+      {
+        avatar:
+          "https://cdn2-dev-media.avn.com/files/m/m9/m9j/m9jjds8slt7rutrjb3lrkhscmrz3dfcz1578474669/avatar.jpg?Expires=1624446987&Signature=ZjLR2kjLbwhGpaw47R4ZKsLT6VGnilmeP7sf9zw~gHah~olNYuumtH3C7vfPQ3EGUz07Yb3O-C8~ehml6BkIip1uTaOHJrMVdg8vLHfy6aEeXFtEEnYh6TVt0Q~vCC5K2tVyn9Z7FC1rY33Sc2SUMIrFwFqPAa72Isu6N6WTP5WciF3NTyzTedU2afgf41jO0IHKOgmyFH8e9Dra1PiRG1pDvUhi6EW-ZdsJIkmFdiLyp1yREFH1ysMZSrNO4RQyVZNnocYZ8ZYwAZvS5d843-ZShBnRovVVfNieTF0VK~lWhGbd~0eeN94VGRR8MqZ5T2qoGg22lvyO1lo8vQcphw__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ",
+        id: 468788,
+        name: "имя123",
+        username: "user666",
+        spent: "30.50"
+      }
+    ]
   }
 ];

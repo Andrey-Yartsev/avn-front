@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <div
-      class="popup-container popup-container_block popup-alert"
+      class="popup-container popup-container_block popup-alert groupMembersModal"
       slot="content"
     >
       <div class="content">
@@ -10,7 +10,7 @@
             Group members
           </div>
           <div class="popup-alert__body">
-            <div class="searchHeader">
+            <div v-if="isOwnerView" class="searchHeader">
               <SearchBubble @addUser="addUser" />
             </div>
             <div class="list">
@@ -19,10 +19,10 @@
               </h2>
               <template v-else>
                 <div class="item" v-for="(user, i) in members" :key="user.id">
-                  <div class="index table__cell">
+                  <div class="table__cell index">
                     {{ i + 1 }}
                   </div>
-                  <div class="user table__cell">
+                  <div class="table__cell user">
                     <router-link
                       :to="'/' + user.username"
                       class="userview-block"
@@ -38,7 +38,10 @@
                       }}</span>
                     </router-link>
                   </div>
-                  <div class="user table__cell delete">
+                  <div class="table__cell spent">
+                    ${{ user.spent || "0.00" }}
+                  </div>
+                  <div v-if="isOwnerView" class="table__cell delete">
                     <button
                       @click="removeUser(user.id)"
                       type="button"
@@ -51,6 +54,7 @@
           </div>
           <div class="popup-alert__footer">
             <button
+              v-if="isOwnerView"
               class="btn alt"
               @click.prevent="save"
               :disabled="!isDataChanged || saving"
@@ -98,6 +102,9 @@ export default {
     },
     author() {
       return this.$store.state.auth.user;
+    },
+    isOwnerView() {
+      return this.data.isOwnerView;
     }
   },
   methods: {
@@ -172,42 +179,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.popup-alert__link {
-  margin: 10px 0;
-  color: #2196f3;
-}
-.searchHeader {
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* & > div {
-    display: flex !important;
-    position: relative;
-  } */
-}
-.title__empty {
-  margin-top: 30px;
-  opacity: 0.5;
-}
-.popup-alert__body {
-  .list {
-    height: 350px;
-    overflow: auto;
-    padding: 0 10px;
-  }
-  .item {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    margin: 15px 0;
-  }
-}
-.user.table__cell {
-  &.delete {
-    margin-left: auto;
-  }
-}
-</style>

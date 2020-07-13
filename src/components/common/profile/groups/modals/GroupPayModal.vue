@@ -10,10 +10,10 @@
         </div>
         <template v-else>
           <div class="popup-alert__title">
-            Pay to join
+            {{ getTextTitle }}
           </div>
           <div class="popup-alert__body">
-            You are joining to the group for ${{ data.price }}
+            {{ getTextDescription }}
           </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
@@ -40,13 +40,34 @@ export default {
   computed: {
     data() {
       return this.$store.state.modal.groupPayConfirm.data;
+    },
+    getTextTitle() {
+      if (this.data.join) {
+        return this.data.renew ? "Renew the membership" : "Pay to join";
+      }
+      return "Send fee";
+    },
+    getTextDescription() {
+      let str;
+      if (this.data.join) {
+        str = this.data.renew
+          ? `renew the membership for free`
+          : `joining to the group for $${this.data.price}`;
+      } else {
+        str = `sending the fee $${this.data.price}`;
+      }
+      return `You are ${str}`;
     }
   },
   methods: {
     yes() {
       const onSuccess = () => {
+        if (!this.data.join) {
+          this.close();
+          return;
+        }
         this.$store
-          .dispatch("profile/group/joinGroup", {
+          .dispatch("profile/groups/joinGroup", {
             productId: this.data.productId
           })
           .then(() => {
@@ -56,15 +77,19 @@ export default {
             this.close();
           });
       };
-      this._pay(
-        {
-          paymentType: "product",
-          productId: this.data.productId,
-          amount: this.data.price,
-          paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
-        },
-        onSuccess
-      );
+      if (this.data.join && !this.data.renew) {
+        this._pay(
+          {
+            paymentType: "product",
+            productId: this.data.productId,
+            amount: this.data.price,
+            paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
+          },
+          onSuccess
+        );
+      } else {
+        onSuccess();
+      }
     },
     no() {
       this.close();

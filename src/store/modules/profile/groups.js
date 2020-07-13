@@ -1,11 +1,11 @@
 import { createRequestAction } from "../../utils/storeRequest";
-// import mockedGroups from "../../../mock/groups";
+import mockedGroups from "../../../mock/groups";
 
 const fetchLimit = 9;
 
 const initState = {
-  // groups: mockedGroups,
-  groups: [],
+  groups: mockedGroups,
+  // groups: [],
   marker: null,
   offset: 0,
   limit: fetchLimit,
@@ -156,7 +156,7 @@ const actions = {
       return res;
     });
   },
-  joinGroup({ dispatch, commit }, productId) {
+  joinGroup({ dispatch, commit }, { productId }) {
     dispatch("_joinGroup", productId).then(() => {
       commit("joinGroup", productId);
     });

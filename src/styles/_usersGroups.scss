@@ -129,6 +129,20 @@
           margin-top: 20px;
         }
       }
+      &-groupMemberContainer {
+        margin-top: auto;
+        .btn {
+          margin: 0 10px;
+        }
+        @include media-breakpoint-down($desktop-breakpoint) {
+          margin-top: 20px;
+          display: flex;
+          flex-flow: column nowrap;
+          .btn {
+            margin: 5px 0;
+          }
+        }
+      }
       &-editButton {
         position: absolute;
         top: 25px;
@@ -140,4 +154,47 @@
   }
 
 
+}
+
+.groupMembersModal {
+  .searchHeader {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title__empty {
+    margin-top: 30px;
+    opacity: 0.5;
+  }
+  .popup-alert__body {
+    .list {
+      height: 350px;
+      overflow: auto;
+      padding: 0 10px;
+    }
+    .item {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      margin: 15px 0;
+    }
+  }
+  .table__cell {
+    &.index {
+      flex-basis: 30px;
+    }
+    &.user {
+      flex-grow: 1;
+    }
+    &.spent {
+      flex-basis: 100px;
+    }
+    &.delete {
+      margin-left: auto;
+    }
+  }
+  &.popup-alert {
+    max-width: 620px;
+  }
 }

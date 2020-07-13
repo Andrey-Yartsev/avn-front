@@ -9,30 +9,51 @@
       <div class="header-content bg-gradient bg-gradient_light">
         <h3 v-html="group.title" />
         <div class="header-content-description" v-html="group.description" />
-        <div v-if="isAuthor" class="header-content-settings">
+        <div v-if="isOwner(profile.id)" class="header-content-settings">
           <Footer :group="group" />
           <div class="header-content-editButton" @click="openEditModal">
             Edit
           </div>
         </div>
-        <div v-else class="header-content-joinGroupContainer">
-          <button
+        <template v-else>
+          <div
             v-if="group.isMember"
-            @click="leaveGroup"
-            type="button"
-            class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
+            class="header-content-groupMemberContainer"
           >
-            Leave the group
-          </button>
-          <button
-            v-else
-            @click="joinGroup"
-            type="button"
-            class="btn btn_reset-mgap alt border btn_fix-width-lg connect-twitter"
-          >
-            Join for ${{ group.price }}
-          </button>
-        </div>
+            <button @click="sendFee" type="button" class="btn alt border">
+              Fee ${{ group.price }}
+            </button>
+            <button @click="showMembers" type="button" class="btn alt border">
+              Members
+            </button>
+            <button
+              v-if="group.isMember"
+              @click="leaveGroup"
+              type="button"
+              class="btn alt border"
+            >
+              Leave the group
+            </button>
+          </div>
+          <div v-else class="header-content-joinGroupContainer">
+            <button
+              v-if="group.canRenew"
+              @click="joinGroup({ renew: true })"
+              type="button"
+              class="btn"
+            >
+              Renew for free
+            </button>
+            <button
+              v-else
+              @click="joinGroup({ renew: false })"
+              type="button"
+              class="btn"
+            >
+              Join for ${{ group.price }}
+            </button>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -64,19 +85,29 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile.home.profile;
-    },
-    isAuthor() {
-      // return false;
-      return this.user.id === this.profile.id;
     }
   },
   methods: {
-    joinGroup() {
+    joinGroup({ renew }) {
+      if (!this.$store.state.auth.user) {
+        this.$store.dispatch("modal/show", {
+          name: "login",
+          data: {
+            callback: () => {}
+          }
+        });
+        return;
+      }
+      this.openJoinGroupModal(renew);
+    },
+    openJoinGroupModal(renew) {
       this.$store.dispatch("modal/show", {
         name: "groupPayConfirm",
         data: {
           price: this.group.price,
-          productId: this.group.productId
+          productId: this.group.productId,
+          join: true,
+          renew
         }
       });
     },
@@ -91,6 +122,25 @@ export default {
               this.group.productId
             );
           }
+        }
+      });
+    },
+    sendFee() {
+      this.$store.dispatch("modal/show", {
+        name: "groupPayConfirm",
+        data: {
+          price: this.group.price,
+          productId: this.group.productId,
+          join: false
+        }
+      });
+    },
+    showMembers() {
+      this.$store.dispatch("modal/show", {
+        name: "groupMembers",
+        data: {
+          group: this.group,
+          isOwnerView: false
         }
       });
     },

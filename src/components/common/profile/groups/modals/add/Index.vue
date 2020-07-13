@@ -94,7 +94,10 @@
         </div>
       </div>
       <div class="actions">
-        <div class=" b-check-state_full-width b-check-state_price">
+        <div
+          v-if="isPublic"
+          class="b-check-state_full-width b-check-state_price"
+        >
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">
@@ -112,7 +115,7 @@
         </div>
         <div
           v-if="isPublic"
-          class="b-check-state_full-width b-check-state-membersView"
+          class="b-check-state_full-width b-check-state-membersViewAmount"
         >
           <div class="btn-post">
             <div>Show members</div>
@@ -123,7 +126,7 @@
                     type="radio"
                     name="storyAnswerType"
                     value="all"
-                    v-model="membersView"
+                    v-model="membersViewAmount"
                   />
                   <span class="label">
                     All
@@ -135,11 +138,11 @@
                   <input
                     type="radio"
                     name="storyAnswerType"
-                    value="top"
-                    v-model="membersView"
+                    value="5"
+                    v-model="membersViewAmount"
                   />
                   <span class="label">
-                    Top 3
+                    Top 5
                   </span>
                 </div>
               </label>
@@ -149,7 +152,7 @@
                     type="radio"
                     name="storyAnswerType"
                     value="none"
-                    v-model="membersView"
+                    v-model="membersViewAmount"
                   />
                   <span class="label">
                     None
@@ -263,7 +266,7 @@ const InitialState = {
   price: "",
   isPublic: false,
   isActive: false,
-  membersView: "none",
+  membersViewAmount: "none", // "none" || "all" || "{number}"
   mediaType: "photo",
   isSaving: false,
   limits: {
@@ -393,7 +396,7 @@ export default {
       this.isPublic = InitialState.isPublic;
       this.isActive = InitialState.isActive;
       this.mediaType = InitialState.mediaType;
-      this.membersView = InitialState.membersView;
+      this.membersViewAmount = InitialState.membersViewAmount;
       this.preloadedMedias = [];
       this.isSaving = false;
     },
@@ -406,7 +409,7 @@ export default {
         price: this.price,
         isActive: this.isActive,
         isPublic: this.isPublic,
-        membersView: this.membersView,
+        membersViewAmount: this.membersViewAmount,
         mediaFiles: this.preloadedMedias.map(media => {
           return {
             id: media.processId
@@ -455,7 +458,7 @@ export default {
         this.price = this.post.price;
         this.isActive = this.post.isActive;
         this.isPublic = this.post.isPublic;
-        this.membersView = this.post.membersView;
+        this.membersViewAmount = this.post.membersViewAmount;
         this.preloadedMedias = (this.post.media || []).map(media => ({
           alreadySaved: true,
           fileContent: media.thumb && media.thumb.source,
@@ -504,7 +507,7 @@ export default {
 .b-check-state_price {
   margin-bottom: 5px;
 }
-.b-check-state-membersView {
+.b-check-state-membersViewAmount {
   margin: 10px 0 15px 0;
   .radio-group {
     display: flex;
