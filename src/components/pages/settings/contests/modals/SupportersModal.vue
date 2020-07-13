@@ -46,13 +46,13 @@
                 </div>
               </template>
 
+              <div v-if="supporters.length" ref="scrollObserver"></div>
               <div
                 v-if="supporters.length && !allDataRecieved"
                 class="loader-container"
               >
                 <Loader text="" :fullscreen="false" :small="true" />
               </div>
-              <div v-if="supporters.length" ref="scrollObserver"></div>
             </div>
           </div>
           <div class="popup-alert__footer">
