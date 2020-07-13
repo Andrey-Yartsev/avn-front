@@ -159,7 +159,7 @@
               </div>
             </div>
             <div
-              v-if="data.topSupporters.length > 10"
+              v-if="data.topSupporters.length >= 10"
               @click="showAllSupporters"
               class="supporters__show-all"
             >
