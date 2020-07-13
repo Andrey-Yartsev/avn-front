@@ -149,6 +149,7 @@ export default {
 .user.table__cell {
   &.delete {
     margin-left: auto;
+    white-space: nowrap;
   }
 }
 .loader-container {
