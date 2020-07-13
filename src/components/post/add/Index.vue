@@ -518,7 +518,8 @@ export default {
     return {
       ...InitialState,
       tipsGoal: { ...InitialState.tipsGoal },
-      tweetSend: !!this.$store.state.auth.user.isPostsTweets
+      tweetSend: !!this.$store.state.auth.user.twitterNotificationsSettings
+        .options.post.isEnabled
     };
   },
   components: {
@@ -715,7 +716,8 @@ export default {
     },
     reset() {
       this.expanded = InitialState.expanded;
-      this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
+      this.tweetSend = !!this.$store.state.auth.user
+        .twitterNotificationsSettings.options.post.isEnabled;
       this.postMsg = InitialState.postMsg;
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;
