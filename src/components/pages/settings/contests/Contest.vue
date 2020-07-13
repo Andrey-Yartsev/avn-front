@@ -158,10 +158,16 @@
                 <div class="amount">${{ v.amount }}</div>
               </div>
             </div>
-            <!-- <div v-if="data.topSupporters.length @click="showAllSupporters"> 10" class="supporters__show-all">Show All</div> -->
-            <div class="supporters__show-all" @click="showAllSupporters">
+            <div
+              v-if="data.topSupporters.length > 10"
+              @click="showAllSupporters"
+              class="supporters__show-all"
+            >
               Show All
             </div>
+            <!-- <div class="supporters__show-all" @click="showAllSupporters">
+              Show All
+            </div> -->
           </div>
         </div>
       </div>
