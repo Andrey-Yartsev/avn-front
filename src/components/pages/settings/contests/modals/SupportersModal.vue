@@ -46,7 +46,11 @@
                 </div>
               </template>
 
-              <div v-if="supporters.length" ref="scrollObserver"></div>
+              <div
+                style="width: 100%; height: 1px"
+                v-if="supporters.length"
+                ref="scrollObserver"
+              ></div>
               <div
                 v-if="supporters.length && !allDataRecieved"
                 class="loader-container"
