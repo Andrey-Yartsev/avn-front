@@ -13,7 +13,7 @@
           </option>
         </select>
       </div> -->
-      <div class="contest-select-wrapper">
+      <div v-if="groups.size" class="contest-select-wrapper">
         <div
           class="form-group form-group_with-label gender-options contest-select contest-select-group"
         >
