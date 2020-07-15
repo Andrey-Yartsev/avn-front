@@ -13,7 +13,32 @@
             {{ getTextTitle }}
           </div>
           <div class="popup-alert__body">
-            {{ getTextDescription }}
+            <span v-if="dataModal.renew">
+              You are renew the membership for free
+            </span>
+            <template v-else>
+              <label
+                v-for="v in payOptions"
+                class="form-group-inner"
+                :class="{ 'no-border-line': $mq === 'mobile' }"
+                :key="v.points"
+              >
+                <div class="radio-wrapper icn-item">
+                  <input
+                    type="radio"
+                    name="fee"
+                    :value="v.points"
+                    v-model="points"
+                  />
+                  <span class="label"
+                    >${{ v.totalPrice }}
+                    <span v-if="v.points == 1 && dataModal.join"
+                      >(Minimum membersip fee)</span
+                    ></span
+                  >
+                </div>
+              </label>
+            </template>
           </div>
           <div class="popup-alert__footer">
             <button class="btn" @click.prevent="yes">Confirm</button>
@@ -37,38 +62,54 @@ export default {
     Modal,
     Loader
   },
+  data() {
+    return {
+      points: 1
+    };
+  },
   computed: {
-    data() {
+    dataModal() {
       return this.$store.state.modal.groupPayConfirm.data;
     },
     getTextTitle() {
-      if (this.data.join) {
-        return this.data.renew ? "Renew the membership" : "Pay to join";
+      if (this.dataModal.join) {
+        return this.dataModal.renew ? "Renew the membership" : "Pay to join";
       }
       return "Send fee";
     },
-    getTextDescription() {
-      let str;
-      if (this.data.join) {
-        str = this.data.renew
-          ? `renew the membership for free`
-          : `joining to the group for $${this.data.price}`;
-      } else {
-        str = `sending the fee $${this.data.price}`;
-      }
-      return `You are ${str}`;
+    // getTextDescription() {
+    //   let str;
+    //   if (this.dataModal.join) {
+    //     str = this.dataModal.renew
+    //       ? `renew the membership for free`
+    //       : `joining to the group for $${this.dataModal.price}`;
+    //   } else {
+    //     str = `sending the fee $${this.dataModal.price}`;
+    //   }
+    //   return `You are ${str}`;
+    // },
+    payOptions() {
+      return [1, 2, 3, 4].map(item => {
+        return {
+          points: item,
+          totalPrice: (item * parseFloat(this.dataModal.price)).toFixed(2)
+        };
+      });
+    },
+    totalPrice() {
+      return (parseFloat(this.dataModal.price) * this.points).toFixed(2);
     }
   },
   methods: {
     yes() {
       const onSuccess = () => {
-        if (!this.data.join) {
+        if (!this.dataModal.join) {
           this.close();
           return;
         }
         this.$store
           .dispatch("profile/groups/joinGroup", {
-            productId: this.data.productId
+            productId: this.dataModal.productId
           })
           .then(() => {
             this.close();
@@ -77,12 +118,12 @@ export default {
             this.close();
           });
       };
-      if (this.data.join && !this.data.renew) {
+      if (!this.dataModal.renew) {
         this._pay(
           {
             paymentType: "product",
-            productId: this.data.productId,
-            amount: this.data.price,
+            productId: this.dataModal.productId,
+            points: this.points,
             paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
           },
           onSuccess

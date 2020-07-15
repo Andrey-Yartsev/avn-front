@@ -135,7 +135,7 @@ export default [
       }
     ],
 
-    price: "4.00",
+    price: "2.13",
     isActive: true,
     isPublic: true,
     isMember: true,

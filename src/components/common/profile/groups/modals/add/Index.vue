@@ -120,7 +120,7 @@
           <div class="btn-post">
             <div>Show members</div>
             <div class="form-group form-group_with-label radio-group">
-              <label class="form-group-inner">
+              <!-- <label class="form-group-inner">
                 <div class="radio-wrapper icn-item">
                   <input
                     type="radio"
@@ -132,17 +132,17 @@
                     All
                   </span>
                 </div>
-              </label>
+              </label> -->
               <label class="form-group-inner">
                 <div class="radio-wrapper icn-item">
                   <input
                     type="radio"
                     name="storyAnswerType"
-                    value="5"
+                    value="10"
                     v-model="membersViewAmount"
                   />
                   <span class="label">
-                    Top 5
+                    Top 10
                   </span>
                 </div>
               </label>

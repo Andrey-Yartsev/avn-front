@@ -21,7 +21,7 @@
             class="header-content-groupMemberContainer"
           >
             <button @click="sendFee" type="button" class="btn alt border">
-              Fee ${{ group.price }}
+              Send fee
             </button>
             <button @click="showMembers" type="button" class="btn alt border">
               Members
@@ -50,7 +50,7 @@
               type="button"
               class="btn"
             >
-              Join for ${{ group.price }}
+              Join the group
             </button>
           </div>
         </template>
