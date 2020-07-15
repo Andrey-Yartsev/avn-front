@@ -165,8 +165,8 @@ export default {
         return [];
       }
       return this.contests.map(item => {
-        const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-        const m1 = moment(d1).tz(this.contest.timezone);
+        const d1 = item.starts_at.replace(/(.*)-\d+:\d+/, "$1");
+        const m1 = moment(d1).tz(item.timezone);
         const r1 = m1.format("MMM Do h:mm a");
         let s = `${r1} PDT`;
         const title = item.name + " - " + s;
