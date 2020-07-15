@@ -199,11 +199,20 @@ export default {
     successText() {
       return "Your voting have been sent successfully";
     },
+    sortedContests() {
+      const notFinished = this.$store.state.contest.fetchContestsResult
+        .filter(item => !item.hasFinished)
+        .sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
+      const finished = this.$store.state.contest.fetchContestsResult.filter(
+        item => item.hasFinished
+      );
+      return [...notFinished, ...finished];
+    },
     contests() {
       if (!this.contestGroup) {
-        return this.$store.state.contest.fetchContestsResult;
+        return this.sortedContests;
       } else {
-        return this.$store.state.contest.fetchContestsResult.filter(item =>
+        return this.sortedContests.filter(item =>
           item.groups.includes(this.contestGroup)
         );
       }
