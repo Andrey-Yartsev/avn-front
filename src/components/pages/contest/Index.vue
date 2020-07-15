@@ -5,6 +5,67 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
+      <!-- <div class="awards-title text-centered">
+        <select name="contest" v-model="contestGroup">
+          <option value="All">All</option>
+          <option v-for="item in groups" :key="item" :value="item"
+            >{{ item }}
+          </option>
+        </select>
+      </div> -->
+      <div class="contest-select-wrapper">
+        <div
+          class="form-group form-group_with-label gender-options contest-select contest-select-group"
+        >
+          <label class="form-group-inner">
+            <span class="label">Contest group</span>
+            <div class="row">
+              <div class="col-1-2 row-select">
+                <div class="select-wrapper">
+                  <select
+                    name="gender"
+                    class="default-disabled"
+                    v-model="contestGroup"
+                  >
+                    <option value="">All</option>
+                    <option v-for="item in groups" :key="item" :value="item"
+                      >{{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div
+          v-if="contestGroup && contests.length"
+          class="form-group form-group_with-label gender-options contest-select contest-select-groupItem"
+        >
+          <label class="form-group-inner">
+            <span class="label">Contest</span>
+            <div class="row">
+              <div class="col-1-1 row-select">
+                <div class="select-wrapper">
+                  <select
+                    name="gender"
+                    class="default-disabled"
+                    v-model="contestGroupItem"
+                    :disabled="!contestGroup"
+                  >
+                    <option value="">All</option>
+                    <option
+                      v-for="item in groupItems"
+                      :key="item.id"
+                      :value="item.id"
+                      >{{ item.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
       <template v-if="contest">
         <div class="contest-links title-subtext">
           <template v-for="value in contests">
@@ -19,13 +80,6 @@
             <span :key="`span-${value.id}`"> || </span>
           </template>
         </div>
-        <!-- <div class="awards-title text-centered">
-          <select name="contest" v-model="contestId">
-            <option v-for="(v, k) in contests" :key="k" :value="v.id"
-              >{{ v.name }}
-            </option>
-          </select>
-        </div> -->
         <template v-if="!sent">
           <div class="contest-header" v-if="contest.image_url">
             <img :src="contest.image_url" />
@@ -91,10 +145,37 @@ export default {
       scriptLoading: true,
       activeNomineeId: 0,
       contestId: 0,
-      isFirstInit: true
+      isFirstInit: true,
+      contestGroup: "",
+      contestGroupItem: ""
     };
   },
   computed: {
+    groups() {
+      const set = new Set();
+      for (let contest of this.contests) {
+        contest.groups.forEach(item => {
+          set.add(item);
+        });
+      }
+      return set;
+    },
+    groupItems() {
+      if (!this.contestGroup || !this.contests.length) {
+        return [];
+      }
+      return this.contests.map(item => {
+        const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
+        const m1 = moment(d1).tz(this.contest.timezone);
+        const r1 = m1.format("MMM Do h:mm a");
+        let s = `${r1} PDT`;
+        const title = item.name + " - " + s;
+        return {
+          id: item.id,
+          title
+        };
+      });
+    },
     categories() {
       return [];
     },
@@ -119,7 +200,13 @@ export default {
       return "Your voting have been sent successfully";
     },
     contests() {
-      return this.$store.state.contest.fetchContestsResult;
+      if (!this.contestGroup) {
+        return this.$store.state.contest.fetchContestsResult;
+      } else {
+        return this.$store.state.contest.fetchContestsResult.filter(item =>
+          item.groups.includes(this.contestGroup)
+        );
+      }
     },
     contest() {
       return this.contests.find(v => v.id === this.contestId);
@@ -259,6 +346,15 @@ export default {
       this.isInitFetch = true;
       this.$store.commit("contest/resetNominees");
       this.init();
+    },
+    contestGroupItem(value) {
+      if (!value) {
+        return;
+      }
+      this.contestId = value;
+    },
+    contestGroup() {
+      this.contestGroupItem = "";
     }
   },
   created() {
