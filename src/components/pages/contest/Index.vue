@@ -14,7 +14,7 @@
         </select>
       </div> -->
       <div v-if="groups.size" class="contest-select-wrapper">
-        <div
+        <!-- <div
           class="form-group form-group_with-label gender-options contest-select contest-select-group"
         >
           <label class="form-group-inner">
@@ -36,13 +36,38 @@
               </div>
             </div>
           </label>
+        </div> -->
+        <div class="contest-group">
+          <span
+            @click.prevent="selectGroup('')"
+            class="contest-group-name"
+            :class="{ selected: contestGroup === '' }"
+          >
+            All
+          </span>
+          <span class="contest-group-divider">
+            ||
+          </span>
+          <template v-for="item in groups">
+            <span
+              :key="item"
+              @click.prevent="selectGroup(item)"
+              class="contest-group-name"
+              :class="{ selected: item === contestGroup }"
+            >
+              {{ item }}
+            </span>
+            <span class="contest-group-divider" :key="`span-${item}`">
+              ||
+            </span>
+          </template>
         </div>
         <div
           v-if="contestGroup && contests.length"
           class="form-group form-group_with-label gender-options contest-select contest-select-groupItem"
         >
           <label class="form-group-inner">
-            <span class="label">Contest</span>
+            <!-- <span class="label">Contest</span> -->
             <div class="row">
               <div class="col-1-1 row-select">
                 <div class="select-wrapper">
@@ -52,7 +77,7 @@
                     v-model="contestGroupItem"
                     :disabled="!contestGroup"
                   >
-                    <option value="">All</option>
+                    <!-- <option value="">All</option> -->
                     <option
                       v-for="item in groupItems"
                       :key="item.id"
@@ -325,6 +350,9 @@ export default {
     },
     selectContest(value) {
       this.contestId = value;
+    },
+    selectGroup(value) {
+      this.contestGroup = value;
     }
   },
   watch: {
@@ -346,6 +374,7 @@ export default {
       if (nomineeId) {
         this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
       } else if (contestId != this.$route.params.contestId) {
+        this.contestGroupItem = contestId;
         this.$router.push(`/contests/${contestId}`);
       }
       this.$store.dispatch("contest/fetchPrizes", {
@@ -362,8 +391,12 @@ export default {
       }
       this.contestId = value;
     },
-    contestGroup() {
-      this.contestGroupItem = "";
+    contestGroup(value) {
+      if (!value) {
+        this.contestGroupItem = "";
+        return;
+      }
+      this.contestGroupItem = this.groupItems[0].id;
     }
   },
   created() {
