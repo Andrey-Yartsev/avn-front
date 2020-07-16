@@ -738,7 +738,15 @@ createRequestAction({
     method: "GET"
   },
   localError: true,
-  throw400: true
+  throw400: true,
+  paramsToOptions: function() {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.type = "subscribers";
+    return options;
+  }
 });
 
 createRequestAction({

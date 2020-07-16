@@ -170,7 +170,7 @@ const actions = {
     return dispatch("_sendMessage", data);
   },
   getScheduleMessages({ dispatch }, groupId) {
-    return dispatch("_getScheduleMessages", groupId);
+    return dispatch("_getScheduleMessages", { groupId });
   },
   deleteScheduleMessage({ dispatch }, data) {
     return dispatch("_deleteScheduleMessage", data);
@@ -234,37 +234,42 @@ createRequestAction({
 
 createRequestAction({
   prefix: "_sendMessage",
-  apiPath: "groups/{productId}/message",
+  apiPath: "chats/recipients/messages",
   state,
   mutations,
   actions,
   options: {
     method: "POST"
   },
-  paramsToPath: function(data, path) {
-    return path.replace(/{productId}/, data.productId);
-  },
   paramsToOptions: function(params, options) {
     options.data = params;
     return options;
   }
 });
+
 createRequestAction({
   prefix: "_getScheduleMessages",
-  apiPath: "groups/{productId}/scheduleMessage",
+  apiPath: "chats/recipients/messages/queue",
   state,
   mutations,
   actions,
   options: {
     method: "GET"
   },
-  paramsToPath: function(productId, path) {
-    return path.replace(/{productId}/, productId);
+  paramsToOptions: function(params) {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.type = "groups";
+    options.query.id = params.groupId;
+    return options;
   }
 });
+
 createRequestAction({
-  prefix: "_deleteScheduleMessages",
-  apiPath: "groups/{productId}/scheduleMessage/{messageId}",
+  prefix: "_deleteScheduleMessage",
+  apiPath: "chats/recipients/messages/queue/{messageId}",
   state,
   mutations,
   actions,
@@ -272,9 +277,7 @@ createRequestAction({
     method: "DELETE"
   },
   paramsToPath: function(data, path) {
-    let newPath = path.replace(/{productId}/, data.productId);
-    newPath = newPath.replace(/{messageId}/, data.messageId);
-    return newPath;
+    return path.replace(/{messageId}/, data.messageId);
   }
 });
 

@@ -153,11 +153,11 @@ export default {
       this.$store.dispatch("modal/hide", { name: "groupMembersMessage" });
     },
     async submit(data) {
-      console.log(data);
       const body = {
         ...data,
         scheduledDate: this.scheduledDate,
-        productId: this.group.productId
+        recipients: "list",
+        listId: this.group.productId
       };
       try {
         this.loading = true;
