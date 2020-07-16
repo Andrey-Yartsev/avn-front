@@ -23,6 +23,9 @@ export default {
     userIds: {
       type: Array
     },
+    excludedUserIds: {
+      type: Array
+    },
     toAll: {
       type: Boolean
     },
@@ -52,6 +55,7 @@ export default {
       const data = { ...message };
       if (this.toAll) {
         data.toAll = this.toAll;
+        data.excluded = this.excludedUserIds;
         data.withStars = !this.excludeStars;
         data.withSubscribers = !this.excludeSubscribers;
       } else {

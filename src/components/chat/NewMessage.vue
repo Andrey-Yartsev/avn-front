@@ -132,13 +132,16 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult" v-if="!selectAll && foundUsers.length">
+          <!-- <div class="searchResult" v-if="!selectAll && foundUsers.length"> -->
+          <div class="searchResult" v-if="foundUsers.length">
             <div
               v-for="v in foundUsers"
               v-bind:key="v.id"
               class="searchChatContactsView"
-              @click="toggleSelect(v.id)"
-              :class="{ active: isSelected(v.id) }"
+              @click="selectAll ? toggleDeselect(v.id) : toggleSelect(v.id)"
+              :class="{
+                active: isSelected(v.id) || (selectAll && !isDeselected(v.id))
+              }"
             >
               <span
                 class="avatar avatar_gap-r-sm avatar_sm"
@@ -327,6 +330,7 @@
           </div>
           <ChatAddMultiMessage
             :userIds="selected"
+            :excludedUserIds="deselected"
             :toAll="selectAll"
             :disable="sending"
             :excludeStars="excludeStars"
@@ -367,6 +371,7 @@ export default {
   data() {
     return {
       selected: [],
+      deselected: [],
       searchQuery: "",
       chatOptionsOpened: false,
       contactsScrollTop: true,
@@ -441,7 +446,7 @@ export default {
       } else if (!this.excludeStars && this.excludeSubscribers) {
         n -= this.allUsersCount.subscribers;
       }
-      return n;
+      return n - this.deselected.length;
     },
     allUsersCountText() {
       return " (" + this.recipientsCount + ")";
@@ -480,8 +485,18 @@ export default {
         this.selected.push(id);
       }
     },
+    toggleDeselect(id) {
+      if (this.deselected.indexOf(id) !== -1) {
+        this.deselected = this.deselected.filter(_id => _id !== id);
+      } else {
+        this.deselected.push(id);
+      }
+    },
     isSelected(id) {
       return this.selected.indexOf(id) !== -1;
+    },
+    isDeselected(id) {
+      return this.deselected.indexOf(id) !== -1;
     },
     toggleSelectAll() {
       if (this.searchQuery) {
@@ -494,6 +509,8 @@ export default {
       this.selectAll = !this.selectAll;
       if (this.selectAll) {
         this.selected = [];
+      } else {
+        this.deselected = [];
       }
     },
     toggleSelectAllFoundUsers() {
