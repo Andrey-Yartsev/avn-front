@@ -168,6 +168,17 @@
               </div>
               <span class="check icn-item"></span>
             </div>
+            <div
+              class="scrollObserver"
+              v-if="foundUsers.length"
+              ref="scrollObserver"
+            ></div>
+          </div>
+          <div
+            class="chatFlatLoader past-messages semi-transparent"
+            v-if="foundUsers.length && !allDataRecieved"
+          >
+            Loading history...
           </div>
 
           <div
@@ -352,11 +363,12 @@ import ChatAddMultiMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import Loader from "@/components/common/Loader";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
   name: "Chat",
 
-  mixins: [User, ModalRouterGoto],
+  mixins: [User, ModalRouterGoto, IntersectionObserver],
 
   directives: {
     ClickOutside
@@ -408,7 +420,8 @@ export default {
       return this.$store.state.chat.chatUsers;
     },
     foundUsers() {
-      if (this._foundUsers) {
+      // if (this._foundUsers) {
+      if (this._foundUsers && !this.selectAll) {
         return this._foundUsers;
       }
       if (this.searchQuery) {
@@ -465,6 +478,9 @@ export default {
     // },
     usersSearching() {
       return this.$store.state.chat.searchUsersLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.chat.allDataReceived;
     }
   },
 
@@ -579,16 +595,50 @@ export default {
     reset() {
       this.searchQuery = "";
       this.$store.commit("chat/resetSearchUsers");
+    },
+    newFetchAnyChats() {
+      const data = {
+        excludeStars: this.excludeStars,
+        excludeSubscribers: this.excludeSubscribers,
+        selectAll: this.selectAll
+      };
+      this.$store.dispatch("chat/getFetchAnyChats", data).then(() => {
+        this.isInitFetch = false;
+        this.handleResponseWithIntersectionObserver(this.newFetchAnyChats);
+      });
+    },
+    resetFetchData() {
+      this.$store.commit("chat/fetchChatsReset");
+      this.destroyObserver();
+      this.isInitFetch = true;
+    }
+  },
+
+  watch: {
+    selectAll() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
+    },
+    excludeStars() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
+    },
+    excludeSubscribers() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
     }
   },
 
   created() {
-    this.$store.dispatch("chat/fetchAnyChats", {});
+    this.$store.commit("chat/fetchChatsReset");
+    this.newFetchAnyChats();
+    // this.$store.dispatch("chat/getFetchAnyChats", {});
     this.$store.dispatch("chat/fetchAllUsersCount", {});
     // this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
     this.search();
   },
   beforeDestroy() {
+    this.resetFetchData();
     this.$store.commit("chat/setSecondScreen", false);
   }
 };

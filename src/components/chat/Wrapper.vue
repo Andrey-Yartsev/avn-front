@@ -89,10 +89,7 @@ export default {
 
   computed: {
     loading() {
-      return (
-        this.$store.state.chat.chatsLoading ||
-        this.$store.state.chat.fetchAnyChatsLoading
-      );
+      return this.$store.state.chat.chatsLoading;
     },
     isSecondScreen() {
       if (this.$store.state.chat.isSecondScreen) {

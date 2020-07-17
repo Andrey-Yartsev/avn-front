@@ -6,7 +6,7 @@ import Store from "@/store";
 import attachments from "./chat/attachments";
 
 const messagesLimit = 50;
-const chatsLimit = 20;
+const chatsLimit = 15;
 
 const state = {
   isSecondScreen: false,
@@ -19,6 +19,7 @@ const state = {
   allDataReceived: false,
   offset: 0,
   chats: [],
+  anyChats: [],
   chatsLoading: false,
   moreChatsLoading: false,
   typing: [],
@@ -324,6 +325,14 @@ const actions = {
       commit("unreadChats");
       dispatch("auth/extendUser", { hasMessages: false }, { root: true });
     });
+  },
+  getFetchAnyChats({ dispatch, commit, state }, data) {
+    return dispatch("fetchAnyChats", { ...data, offset: state.offset }).then(
+      res => {
+        commit("getFetchAnyChatsSuccess", res);
+        return res;
+      }
+    );
   }
 };
 
@@ -504,13 +513,22 @@ const mutations = {
   },
   setChatsFilter(state, filter) {
     state.chatsFilter = filter;
+  },
+  getFetchAnyChatsSuccess(state, { list }) {
+    state.anyChats = [...state.anyChats, ...list];
+    if (list.length < chatsLimit) {
+      state.allDataReceived = true;
+    } else {
+      state.offset += chatsLimit;
+    }
   }
 };
 
 const fetchChatsInitState = {
   allDataReceived: false,
   offset: 0,
-  chats: []
+  chats: [],
+  anyChats: []
 };
 
 mutations.fetchChatsReset = state => {
@@ -575,11 +593,17 @@ createRequestAction({
       withoutHistory: true
     }
   },
-  resultKey: "anyChats",
-  defaultResultValue: [],
+  // resultKey: "anyChats",
+  // defaultResultValue: [],
   paramsToOptions: function(params, options) {
     params.limit = chatsLimit;
+    params.offset = params.offset;
     options.query = { ...options.query, ...params };
+    delete options.query.selectAll;
+    if (!params.selectAll) {
+      delete options.query.excludeStars;
+      delete options.query.excludeSubscribers;
+    }
     return options;
   },
   resultConvert: function(res) {
