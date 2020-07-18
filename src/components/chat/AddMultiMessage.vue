@@ -57,12 +57,19 @@ export default {
       } else {
         data.ids = this.userIds;
       }
-      await this.$store.dispatch("chat/sendMultiMessages", {
-        data
-      });
-      this.$store.dispatch("global/flashToast", {
-        text: "Messages sent successfully"
-      });
+      try {
+        await this.$store.dispatch("chat/sendMultiMessages", {
+          data
+        });
+        this.$store.dispatch("global/flashToast", {
+          text: "Messages sent successfully"
+        });
+      } catch (err) {
+        this.$store.dispatch("global/flashToast", {
+          text: err.message,
+          type: "error"
+        });
+      }
       this.$emit("sent");
     }
   }

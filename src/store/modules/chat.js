@@ -766,6 +766,8 @@ createRequestAction({
   options: {
     method: "POST"
   },
+  localError: true,
+  throw400: true,
   paramsToOptions: function(params, options) {
     options = { ...options, ...params };
     return options;
