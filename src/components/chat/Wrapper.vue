@@ -52,7 +52,7 @@
       </div>
     </div>
     <div
-      v-if="unreadCount && $mq === 'mobile'"
+      v-if="unreadCount && $mq === 'mobile' && !isNew"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
       @click.prevent="markAsRead"
     >
@@ -98,7 +98,10 @@ export default {
       return !!parseInt(this.routeParams.userId);
     },
     isNew() {
-      return this.routePath === "chat/new";
+      return (
+        this.routePath === "chat/new" ||
+        (this.$mq === "mobile" && this.$route.path === "/chat/new")
+      );
     },
     routePath() {
       return this.$store.state.modalRouter.path;
