@@ -266,7 +266,11 @@ export default {
       const r1 = m1.format("MMM Do h:mm a");
       let s = `${r1} PDT`;
       if (r2) {
-        s += ` to ${r2} PDT`;
+        if (this.contest.id == 4) {
+          s += " to Jul 19th 11:59 pm PDT";
+        } else {
+          s += ` to ${r2} PDT`;
+        }
       }
       return s;
     },
