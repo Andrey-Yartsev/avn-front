@@ -218,7 +218,15 @@ export default {
     },
     visibilityChanged(type) {
       this.filterSelected = true;
-      this.update({ type });
+      const data = {
+        type
+      };
+      const defaultStreamTypes = ["subscribers", "followers", "public"];
+      if (!defaultStreamTypes.includes(type)) {
+        data.type = "list";
+        data.entityId = type;
+      }
+      this.update(data);
       this.$store.dispatch("global/flashToast", {
         text: "Visibility changed"
       });
