@@ -52,7 +52,7 @@
       </div>
     </div>
     <div
-      v-if="unreadCount && $mq === 'mobile' && !isNew"
+      v-if="unreadCount && $mq === 'mobile' && !isNew && !isSecondScreen"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
       @click.prevent="markAsRead"
     >
