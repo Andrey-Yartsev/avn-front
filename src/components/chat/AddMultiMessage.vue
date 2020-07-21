@@ -23,6 +23,9 @@ export default {
     userIds: {
       type: Array
     },
+    excludedUserIds: {
+      type: Array
+    },
     toAll: {
       type: Boolean
     },
@@ -37,6 +40,10 @@ export default {
     excludeStars: {
       type: Boolean,
       default: true
+    },
+    excludeSubscribers: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -48,18 +55,25 @@ export default {
       const data = { ...message };
       if (this.toAll) {
         data.toAll = this.toAll;
+        data.excluded = this.excludedUserIds;
+        data.withStars = !this.excludeStars;
+        data.withSubscribers = !this.excludeSubscribers;
       } else {
         data.ids = this.userIds;
       }
-      await this.$store.dispatch("chat/sendMultiMessages", {
-        query: {
-          "with-stars": !this.excludeStars
-        },
-        data
-      });
-      this.$store.dispatch("global/flashToast", {
-        text: "Messages sent successfully"
-      });
+      try {
+        await this.$store.dispatch("chat/sendMultiMessages", {
+          data
+        });
+        this.$store.dispatch("global/flashToast", {
+          text: "Messages sent successfully"
+        });
+      } catch (err) {
+        this.$store.dispatch("global/flashToast", {
+          text: err.message,
+          type: "error"
+        });
+      }
       this.$emit("sent");
     }
   }

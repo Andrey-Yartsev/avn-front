@@ -194,6 +194,10 @@ const modalTypes = [
   {
     storeName: "groupMembersMessage",
     layoutOnlyModal: true
+  },
+  {
+    storeName: "contestSupporters",
+    layoutOnlyModal: true
   }
 ];
 

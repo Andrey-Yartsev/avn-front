@@ -52,7 +52,7 @@
       </div>
     </div>
     <div
-      v-if="unreadCount && $mq === 'mobile'"
+      v-if="unreadCount && $mq === 'mobile' && !isNew && !isSecondScreen"
       class="new-post-toast show bg-gradient bg-gradient_standart unread-box"
       @click.prevent="markAsRead"
     >
@@ -89,10 +89,7 @@ export default {
 
   computed: {
     loading() {
-      return (
-        this.$store.state.chat.chatsLoading ||
-        this.$store.state.chat.fetchAnyChatsLoading
-      );
+      return this.$store.state.chat.chatsLoading;
     },
     isSecondScreen() {
       if (this.$store.state.chat.isSecondScreen) {
@@ -101,7 +98,10 @@ export default {
       return !!parseInt(this.routeParams.userId);
     },
     isNew() {
-      return this.routePath === "chat/new";
+      return (
+        this.routePath === "chat/new" ||
+        (this.$mq === "mobile" && this.$route.path === "/chat/new")
+      );
     },
     routePath() {
       return this.$store.state.modalRouter.path;

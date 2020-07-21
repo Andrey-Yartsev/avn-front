@@ -420,3 +420,53 @@ button.balance-info {
     }
   }
 }
+.emailNotificationsTypes {
+  .form-group-inner {
+
+    @include media-breakpoint-down($desktop-breakpoint) {
+      display: flex;
+      margin-top: 10px;
+    }
+
+
+    .inner {
+      display: flex;
+      flex-flow: row nowrap;
+      margin-left: auto;
+      &.disabled {
+        opacity: 0.5;
+      }
+      .label {
+        line-height: 24px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.twitterCustomPreviews {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-bottom: 30px;
+  cursor: pointer;
+  .modeSwitcher {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $secondary-color;
+  }
+  .previewWrapper {
+    padding-top: 20px;
+    .previews {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+  .upload {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

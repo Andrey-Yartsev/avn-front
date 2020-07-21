@@ -31,6 +31,9 @@
       </div>
     </div>
     <div class="contest-table-details" v-if="opened">
+      <p class="finished-title" v-if="data.hasFinished">
+        Contest has finished already
+      </p>
       <div class="edit">
         <form @submit.prevent="update">
           <div class="contestImagePreview" v-if="hasImagePreview">
@@ -115,7 +118,7 @@
             <button
               type="submit"
               class="btn lg btn_fix-width-sm"
-              :disabled="!valid || isSending"
+              :disabled="!valid || isSending || data.hasFinished"
             >
               Save
             </button>
@@ -141,16 +144,30 @@
 
         <div class="supporters" v-if="data.topSupporters.length">
           <div>
-            <table>
-              <tr>
-                <th>Top Supporters</th>
-                <th>Amount</th>
-              </tr>
-              <tr v-for="v in data.topSupporters" :key="v.username">
-                <td>{{ v.name }}</td>
-                <td>${{ v.amount }}</td>
-              </tr>
-            </table>
+            <div class="supporters-table">
+              <div class="supporters-table-row supporters-table-head">
+                <div class="supporter">Top Supporters</div>
+                <div class="amount">Amount</div>
+              </div>
+              <div
+                class="supporters-table-row supporters-table-body"
+                v-for="v in data.topSupporters"
+                :key="v.username"
+              >
+                <div class="supporter">{{ v.name }}</div>
+                <div class="amount">${{ v.amount }}</div>
+              </div>
+            </div>
+            <div
+              v-if="data.topSupporters.length >= 10"
+              @click="showAllSupporters"
+              class="supporters__show-all"
+            >
+              Show All
+            </div>
+            <!-- <div class="supporters__show-all" @click="showAllSupporters">
+              Show All
+            </div> -->
           </div>
         </div>
       </div>
@@ -229,7 +246,7 @@ export default {
         }
       };
       this.formData = new FormData();
-      if (this.data.modelData?.contest_id && !this.data.hasFinished) {
+      if (this.data.modelData?.contest_id) {
         this.opened = true;
       }
       if (this.data.modelData?.twitter_handle) {
@@ -342,6 +359,14 @@ export default {
             error: true
           });
         });
+    },
+    showAllSupporters() {
+      this.$store.dispatch("modal/show", {
+        name: "contestSupporters",
+        data: {
+          contestId: this.data.id
+        }
+      });
     }
   },
   mounted() {

@@ -353,6 +353,7 @@ export default {
   },
   created() {
     this.$store.commit("chat/resetChats");
+    this.$store.commit("chat/fetchChatsReset");
     this.$store.commit("chat/messages", []);
     this.$store.dispatch("chat/fetchChats", true).then(() => {
       if (this.activeUserId) {

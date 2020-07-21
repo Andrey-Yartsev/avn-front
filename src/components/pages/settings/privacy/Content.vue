@@ -433,7 +433,9 @@
               type="checkbox"
               name="isPostsTweets"
               value="true"
-              v-model="localUser.isPostsTweets"
+              v-model="
+                localUser.twitterNotificationsSettings.options.post.isEnabled
+              "
               :disabled="!localUser.isTwitterConnected"
             />
             <span class="toggle-element_switcher"></span>
@@ -448,7 +450,10 @@
               type="checkbox"
               name="isStreamsTweet"
               value="false"
-              v-model="localUser.isPostsTweetsOnGoLive"
+              v-model="
+                localUser.twitterNotificationsSettings.options.onGoLive
+                  .isEnabled
+              "
               :disabled="!localUser.isTwitterConnected"
             />
             <span class="toggle-element_switcher"></span>

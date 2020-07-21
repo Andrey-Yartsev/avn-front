@@ -1,6 +1,7 @@
 .contest-settings {
   .contest-table {
     width: 100%;
+    margin-bottom: 26px;
 
     &-head {
       div {
@@ -13,6 +14,14 @@
           border-top: 1px solid rgba(124, 139, 150, 0.2);
           padding-top: 24px;
         }
+      }
+    }
+    &-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span {
+        text-align: center;
       }
     }
     &-row {
@@ -31,6 +40,13 @@
       }
       .contest-row-date {
         color: black;
+      }
+    }
+    &-details {
+      .finished-title {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 18px;
       }
     }
     td,
@@ -52,17 +68,40 @@
         display: inline-block;
       }
     }
+    .contests-header {
+      padding-left: 0;
+      margin-bottom: 0;
+    }
   }
   .supporters {
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
-    table {
+    &-table {
       background-color: $primary-color-06;
-      td,
-      th {
-        padding: 5px 10px;
+      min-width: 300px;
+      &-head {
+        font-weight: bold;
       }
+      &-row {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        .supporter {
+          text-align: center;
+        }
+        .amount {
+          text-align: center;
+          width: 20%;
+        }
+      }
+    }
+    &__show-all {
+      color: $primary-color;
+      text-align: end;
+      cursor: pointer;
     }
   }
   .edit {

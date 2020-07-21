@@ -224,7 +224,7 @@ export default {
       );
     }
   },
-  created() {
+  mounted() {
     if (this.props.freeVoteUsed || this.isSingleFreeVoteUsed) {
       this.votes = this.votesOptions[1].id;
     } else {

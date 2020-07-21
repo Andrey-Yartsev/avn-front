@@ -23,6 +23,8 @@
           <th><span>Tipping</span></th>
           <th><span>Messages</span></th>
           <th><span>Referrals</span></th>
+          <th><span>Clips</span></th>
+          <th><span>Votes</span></th>
           <th><span>Total</span></th>
         </thead>
 
@@ -50,6 +52,8 @@
             <td class="line-4">${{ v.values.earnTips || 0 }}</td>
             <td class="line-3">${{ v.values.earnChatMessages || 0 }}</td>
             <td class="line-2">${{ v.values.earnReferral || 0 }}</td>
+            <td class="line-0">${{ v.values.earnClips || 0 }}</td>
+            <td class="line-0">${{ v.values.earnVotes || 0 }}</td>
             <td>${{ v.total }}</td>
           </tr>
         </tbody>
@@ -66,7 +70,9 @@ const dataTypes = [
   "earnSubscribes",
   "earnTips",
   "earnChatMessages",
-  "earnReferral"
+  "earnReferral",
+  "earnClips",
+  "earnVotes"
 ];
 
 const isFloat = n => {

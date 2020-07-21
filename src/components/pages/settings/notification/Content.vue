@@ -154,7 +154,6 @@
           </div>
         </div>
       </div>
-
       <template v-if="isMonetizedUser">
         <div
           class="form-title border-top"
@@ -169,7 +168,7 @@
                 type="checkbox"
                 name="isTweetNotificationsEnabled"
                 value="true"
-                v-model="localUser.isTweetNotificationsEnabled"
+                v-model="localUser.twitterNotificationsSettings.isEnabled"
                 :disabled="!user.twitterUsername"
               />
               <span class="toggle-element_switcher"></span>
@@ -183,35 +182,184 @@
               :class="{
                 disabled:
                   !user.twitterUsername ||
-                  !localUser.isTweetNotificationsEnabled
+                  !localUser.twitterNotificationsSettings.isEnabled
               }"
             >
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
-                    v-model="localUser.isTweetNotificationNewSubscriberEnabled"
+                    v-model="
+                      localUser.twitterNotificationsSettings.options
+                        .newSubscriber.isEnabled
+                    "
                     type="checkbox"
                     name="isEmailNotificationNewSubscriptionEnabled"
                     value="true"
                   />
                   <span class="label icn-item">New subscriber</span>
                 </div>
+                <div
+                  class="inner customPreview_switcher"
+                  :class="{
+                    disabled: !localUser.twitterNotificationsSettings.options
+                      .newSubscriber.isEnabled
+                  }"
+                >
+                  <span class="semi-transparent label">
+                    Custom previews
+                  </span>
+                  <label class="toggle-element">
+                    <input
+                      type="checkbox"
+                      name="isTweetNotificationsEnabled"
+                      value="true"
+                      v-model="
+                        localUser.twitterNotificationsSettings.options
+                          .newSubscriber.customImages.isEnabled
+                      "
+                      :disabled="
+                        !user.twitterUsername ||
+                          !localUser.twitterNotificationsSettings.options
+                            .newSubscriber.isEnabled
+                      "
+                    />
+                    <span class="toggle-element_switcher"></span>
+                  </label>
+                </div>
               </label>
+              <TwitterCustomPreviews
+                v-if="
+                  localUser.twitterNotificationsSettings.options.newSubscriber
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.newSubscriber
+                      .customImages.isEnabled
+                "
+                :media="
+                  localUser.twitterNotificationsSettings.options.newSubscriber
+                    .customImages.images
+                "
+                :name="'newSubscriber'"
+              />
+
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
-                    v-model="localUser.isTweetNotificationAutoprolongEnabled"
+                    v-model="
+                      localUser.twitterNotificationsSettings.options.autoprolong
+                        .isEnabled
+                    "
                     type="checkbox"
                     name="isTweetNotificationAutoprolongEnabled"
                     value="true"
                   />
                   <span class="label icn-item">Subscription renewals</span>
                 </div>
+                <div
+                  class="inner customPreview_switcher"
+                  :class="{
+                    disabled: !localUser.twitterNotificationsSettings.options
+                      .autoprolong.isEnabled
+                  }"
+                >
+                  <span class="semi-transparent label">
+                    Custom previews
+                  </span>
+                  <label class="toggle-element">
+                    <input
+                      type="checkbox"
+                      name="isTweetNotificationsEnabled"
+                      value="true"
+                      v-model="
+                        localUser.twitterNotificationsSettings.options
+                          .autoprolong.customImages.isEnabled
+                      "
+                      :disabled="
+                        !user.twitterUsername ||
+                          !localUser.twitterNotificationsSettings.options
+                            .autoprolong.isEnabled
+                      "
+                    />
+                    <span class="toggle-element_switcher"></span>
+                  </label>
+                </div>
               </label>
+              <TwitterCustomPreviews
+                v-if="
+                  localUser.twitterNotificationsSettings.options.autoprolong
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.autoprolong
+                      .customImages.isEnabled
+                "
+                :media="
+                  localUser.twitterNotificationsSettings.options.autoprolong
+                    .customImages.images
+                "
+                :name="'autoprolong'"
+              />
+
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
-                    v-model="localUser.isPostsTweets"
+                    v-model="
+                      localUser.twitterNotificationsSettings.options.tip
+                        .isEnabled
+                    "
+                    type="checkbox"
+                    name="isTweetNotificationTipEnabled"
+                    value="true"
+                  />
+                  <span class="label icn-item">Tips</span>
+                </div>
+                <div
+                  class="inner customPreview_switcher"
+                  :class="{
+                    disabled: !localUser.twitterNotificationsSettings.options
+                      .tip.isEnabled
+                  }"
+                >
+                  <span class="semi-transparent label">
+                    Custom previews
+                  </span>
+                  <label class="toggle-element">
+                    <input
+                      type="checkbox"
+                      name="isTweetNotificationsEnabled"
+                      value="true"
+                      v-model="
+                        localUser.twitterNotificationsSettings.options.tip
+                          .customImages.isEnabled
+                      "
+                      :disabled="
+                        !user.twitterUsername ||
+                          !localUser.twitterNotificationsSettings.options.tip
+                            .isEnabled
+                      "
+                    />
+                    <span class="toggle-element_switcher"></span>
+                  </label>
+                </div>
+              </label>
+              <TwitterCustomPreviews
+                v-if="
+                  localUser.twitterNotificationsSettings.options.tip
+                    .isEnabled &&
+                    localUser.twitterNotificationsSettings.options.tip
+                      .customImages.isEnabled
+                "
+                :media="
+                  localUser.twitterNotificationsSettings.options.tip
+                    .customImages.images
+                "
+                :name="'tip'"
+              />
+
+              <label class="form-group-inner">
+                <div class="checkbox-wrapper">
+                  <input
+                    v-model="
+                      localUser.twitterNotificationsSettings.options.post
+                        .isEnabled
+                    "
                     type="checkbox"
                     name="isEmailNotificationNewTipsEnabled"
                     value="true"
@@ -219,10 +367,14 @@
                   <span class="label icn-item">Post tweets</span>
                 </div>
               </label>
+
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
-                    v-model="localUser.isTweetNotificationClipSaleEnabled"
+                    v-model="
+                      localUser.twitterNotificationsSettings.options.clipSale
+                        .isEnabled
+                    "
                     type="checkbox"
                     name="isTweetNotificationClipSaleEnabled"
                     value="true"
@@ -230,21 +382,14 @@
                   <span class="label icn-item">Clip sales</span>
                 </div>
               </label>
+
               <label class="form-group-inner">
                 <div class="checkbox-wrapper">
                   <input
-                    v-model="localUser.isTweetNotificationTipEnabled"
-                    type="checkbox"
-                    name="isTweetNotificationTipEnabled"
-                    value="true"
-                  />
-                  <span class="label icn-item">Tips</span>
-                </div>
-              </label>
-              <label class="form-group-inner">
-                <div class="checkbox-wrapper">
-                  <input
-                    v-model="localUser.isPostsTweetsOnGoLive"
+                    v-model="
+                      localUser.twitterNotificationsSettings.options.onGoLive
+                        .isEnabled
+                    "
                     type="checkbox"
                     name="isPostsTweetsOnGoLive"
                     value="true"
@@ -274,11 +419,21 @@
 <script>
 import Common from "../common";
 import webPushNotifications from "@/mixins/webPushNotifications";
+// import { twitterNotificationsSettings.options } from "@/mock/twitterNotificationsSettings.options";
+import TwitterCustomPreviews from "./TwitterCustomPreviews";
 import User from "@/mixins/user";
 
 export default {
   name: "NotificationSettingsContent",
   mixins: [Common, webPushNotifications, User],
+  components: {
+    TwitterCustomPreviews
+  },
+  // data() {
+  //   return {
+  //     twitterNotificationsSettings.options: twitterNotificationsSettings.options
+  //   };
+  // },
   computed: {
     notifOptions() {
       return {
@@ -288,6 +443,9 @@ export default {
         week: "Weekly"
       };
     }
+    // settings() {
+    //   return this.twitterNotificationsSettings.options;
+    // }
   }
 };
 </script>

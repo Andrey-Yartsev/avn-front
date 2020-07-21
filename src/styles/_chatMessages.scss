@@ -245,6 +245,14 @@
 
     .message {
       background-color: rgba(124, 139, 150, 0.2);
+
+      &__text {
+        a {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
 
     .media-chat {
@@ -298,7 +306,13 @@
       }
 
       &__text {
-        color: white;
+        color: $white;
+        a {
+          color: $white;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       + .media {

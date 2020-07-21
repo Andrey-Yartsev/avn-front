@@ -5,6 +5,92 @@
       <Loader text="" :fullscreen="false" :small="true" />
     </div>
     <template v-else>
+      <!-- <div class="awards-title text-centered">
+        <select name="contest" v-model="contestGroup">
+          <option value="All">All</option>
+          <option v-for="item in groups" :key="item" :value="item"
+            >{{ item }}
+          </option>
+        </select>
+      </div> -->
+      <div v-if="groups.size" class="contest-select-wrapper">
+        <!-- <div
+          class="form-group form-group_with-label gender-options contest-select contest-select-group"
+        >
+          <label class="form-group-inner">
+            <span class="label">Contest group</span>
+            <div class="row">
+              <div class="col-1-2 row-select">
+                <div class="select-wrapper">
+                  <select
+                    name="gender"
+                    class="default-disabled"
+                    v-model="contestGroup"
+                  >
+                    <option value="">All</option>
+                    <option v-for="item in groups" :key="item" :value="item"
+                      >{{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div> -->
+        <div class="contest-group">
+          <span
+            @click.prevent="selectGroup('')"
+            class="contest-group-name"
+            :class="{ selected: contestGroup === '' }"
+          >
+            All
+          </span>
+          <span class="contest-group-divider">
+            ||
+          </span>
+          <template v-for="item in groups">
+            <span
+              :key="item"
+              @click.prevent="selectGroup(item)"
+              class="contest-group-name"
+              :class="{ selected: item === contestGroup }"
+            >
+              {{ item }}
+            </span>
+            <span class="contest-group-divider" :key="`span-${item}`">
+              ||
+            </span>
+          </template>
+        </div>
+        <div
+          v-if="contestGroup && contests.length"
+          class="form-group form-group_with-label gender-options contest-select contest-select-groupItem"
+        >
+          <label class="form-group-inner">
+            <!-- <span class="label">Contest</span> -->
+            <div class="row">
+              <div class="col-1-1 row-select">
+                <div class="select-wrapper">
+                  <select
+                    name="gender"
+                    class="default-disabled"
+                    v-model="contestGroupItem"
+                    :disabled="!contestGroup"
+                  >
+                    <!-- <option value="">All</option> -->
+                    <option
+                      v-for="item in groupItems"
+                      :key="item.id"
+                      :value="item.id"
+                      >{{ item.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
       <template v-if="contest">
         <div class="contest-links title-subtext">
           <template v-for="value in contests">
@@ -19,13 +105,6 @@
             <span :key="`span-${value.id}`"> || </span>
           </template>
         </div>
-        <!-- <div class="awards-title text-centered">
-          <select name="contest" v-model="contestId">
-            <option v-for="(v, k) in contests" :key="k" :value="v.id"
-              >{{ v.name }}
-            </option>
-          </select>
-        </div> -->
         <template v-if="!sent">
           <div class="contest-header" v-if="contest.image_url">
             <img :src="contest.image_url" />
@@ -91,10 +170,37 @@ export default {
       scriptLoading: true,
       activeNomineeId: 0,
       contestId: 0,
-      isFirstInit: true
+      isFirstInit: true,
+      contestGroup: "",
+      contestGroupItem: ""
     };
   },
   computed: {
+    groups() {
+      const set = new Set();
+      for (let contest of this.contests) {
+        contest.groups.forEach(item => {
+          set.add(item);
+        });
+      }
+      return set;
+    },
+    groupItems() {
+      if (!this.contestGroup || !this.contests.length) {
+        return [];
+      }
+      return this.contests.map(item => {
+        const d1 = item.starts_at.replace(/(.*)-\d+:\d+/, "$1");
+        const m1 = moment(d1).tz(item.timezone);
+        const r1 = m1.format("MMM Do h:mm a");
+        let s = `${r1} PDT`;
+        const title = item.name + " - " + s;
+        return {
+          id: item.id,
+          title
+        };
+      });
+    },
     categories() {
       return [];
     },
@@ -118,8 +224,23 @@ export default {
     successText() {
       return "Your voting have been sent successfully";
     },
+    sortedContests() {
+      const notFinished = this.$store.state.contest.fetchContestsResult
+        .filter(item => !item.hasFinished)
+        .sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
+      const finished = this.$store.state.contest.fetchContestsResult.filter(
+        item => item.hasFinished
+      );
+      return [...notFinished, ...finished];
+    },
     contests() {
-      return this.$store.state.contest.fetchContestsResult;
+      if (!this.contestGroup) {
+        return this.sortedContests;
+      } else {
+        return this.sortedContests.filter(item =>
+          item.groups.includes(this.contestGroup)
+        );
+      }
     },
     contest() {
       return this.contests.find(v => v.id === this.contestId);
@@ -229,6 +350,9 @@ export default {
     },
     selectContest(value) {
       this.contestId = value;
+    },
+    selectGroup(value) {
+      this.contestGroup = value;
     }
   },
   watch: {
@@ -250,12 +374,29 @@ export default {
       if (nomineeId) {
         this.$router.push(`/contests/${contestId}#nominee${nomineeId}`);
       } else if (contestId != this.$route.params.contestId) {
+        this.contestGroupItem = contestId;
         this.$router.push(`/contests/${contestId}`);
       }
+      this.$store.dispatch("contest/fetchPrizes", {
+        contestId
+      });
       this.destroyObserver();
       this.isInitFetch = true;
       this.$store.commit("contest/resetNominees");
       this.init();
+    },
+    contestGroupItem(value) {
+      if (!value) {
+        return;
+      }
+      this.contestId = value;
+    },
+    contestGroup(value) {
+      if (!value) {
+        this.contestGroupItem = "";
+        return;
+      }
+      this.contestGroupItem = this.groupItems[0].id;
     }
   },
   created() {

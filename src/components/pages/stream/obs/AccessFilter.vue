@@ -63,6 +63,15 @@ export default {
           disabled: false
         }
       ];
+      if (this.user.streamGroups?.length) {
+        this.user.streamGroups.forEach(item => {
+          r.push({
+            key: item.key,
+            label: item.label,
+            disabled: false
+          });
+        });
+      }
       return r.map(v => {
         if (this.value === v.key) {
           v.selected = true;

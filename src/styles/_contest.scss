@@ -1,3 +1,5 @@
+@import "components/imports";
+
 @include media-breakpoint-up($desktop-breakpoint) {
   .popup-container.popup-contest-voting {
     max-width: 429px;
@@ -26,8 +28,9 @@
     }
     a {
       margin: 3px 20px;
+      opacity: 0.5;
       &.selected {
-        opacity: 0.5;
+        opacity: 1;
       }
     }
     span {
@@ -107,13 +110,88 @@
       display: inline-block;
     }
   }
+  .form-group_with-label {
+    &.contest-select {
+      padding: 0;
+      .form-group-inner {
+        margin-bottom: 0;
+        .label {
+          flex: 1 1 50%;
+          margin-right: 10px;
+        }
+        .row {
+          flex: 0 0 100%;
+          margin-left: 10px;
+          @include media-breakpoint-down($desktop-breakpoint) {
+            flex: 1 1 100%;
+          }
+          .row-select {
+            @include media-breakpoint-down($desktop-breakpoint) {
+              flex: 1 1 100%;
+            }
+          }
+        }
+      }
+      &-group {
+        flex: 0 0 50%;
+        margin-right: auto;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          flex: 1 1 100%;
+        }
+        label {
+          white-space: nowrap;
+        }
+      }
+      &-groupItem {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          flex: 1 1 100%;
+        }
+      }
+    }
+  }
+  .contest-select-wrapper {
+    margin: 10px 0 15px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 30px;
+    @include media-breakpoint-down($desktop-breakpoint) {
+      flex-flow: row wrap;
+    }
+
+    .contest-group {
+      display: flex;
+      align-items: center;
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-bottom: 15px;
+      }
+      &-name {
+        font-size: 18px; 
+        margin: 0 20px;
+        cursor: pointer;
+        color: $secondary-color;
+        opacity: 0.5;
+        @include media-breakpoint-down($desktop-breakpoint) {
+          font-size: 15px;
+        }
+        &.selected {
+          opacity: 1;
+        }
+
+      }
+      &-divider {
+        opacity: 0.5;
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+  }
 }
 .contest-header {
   margin: 0 0 20px;
   img {
     width: 100%;
   }
-}
-
-.ContestsCollectionView {
 }

@@ -36,7 +36,7 @@
         </button>
 
         <div class="addPost-header__controls">
-          <div
+          <!-- <div
             class="btn-post"
             v-if="hasSubscribePrice && $mq === 'mobile' && isNew"
           >
@@ -47,7 +47,7 @@
                 <span class="b-check-state__text">Free</span>
               </label>
             </div>
-          </div>
+          </div> -->
           <div
             class="tweet-new-post"
             :class="{
@@ -300,7 +300,7 @@
             >
           </div>
           <template v-if="isExtended">
-            <div class="btn-post" v-if="hasSubscribePrice && $mq === 'desktop'">
+            <div class="btn-post" v-if="hasSubscribePrice">
               <div class="b-check-state b-check-state_post">
                 <label>
                   <input
@@ -518,7 +518,8 @@ export default {
     return {
       ...InitialState,
       tipsGoal: { ...InitialState.tipsGoal },
-      tweetSend: !!this.$store.state.auth.user.isPostsTweets
+      tweetSend: !!this.$store.state.auth.user.twitterNotificationsSettings
+        .options.post.isEnabled
     };
   },
   components: {
@@ -715,7 +716,8 @@ export default {
     },
     reset() {
       this.expanded = InitialState.expanded;
-      this.tweetSend = !!this.$store.state.auth.user.isPostsTweets;
+      this.tweetSend = !!this.$store.state.auth.user
+        .twitterNotificationsSettings.options.post.isEnabled;
       this.postMsg = InitialState.postMsg;
       this.isFree = InitialState.isFree;
       this.mediaType = InitialState.mediaType;

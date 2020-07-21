@@ -192,7 +192,7 @@ const actions = {
       commit("deleteMedia", mediaId);
       dispatch(
         "global/flashToast",
-        { text: "Vide deleted successfully" },
+        { text: "Video deleted successfully" },
         {
           root: true
         }

@@ -1200,11 +1200,13 @@
           .popup & {
             @include media-breakpoint-up($desktop-breakpoint) {
               top: 37px;
+              height: calc(100% - 37px - 30px);
             }
           }
         }
         @include media-breakpoint-down($desktop-breakpoint) {
-          top: 40px;
+          top: 37px;
+          padding-bottom: 37px;
         }
       }
     }

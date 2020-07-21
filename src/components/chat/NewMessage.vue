@@ -108,6 +108,22 @@
                 <span class="toggle-element_switcher"></span>
               </label>
             </div>
+            <div
+              class="checkbox-block"
+              v-if="selectAll"
+              :class="{ enabled: excludeSubscribers }"
+            >
+              <span class="caption">Exclude all subscribers</span>
+              <label class="toggle-element" for="exclude_subscribers">
+                <input
+                  class="tweetSend"
+                  type="checkbox"
+                  id="exclude_subscribers"
+                  v-model="excludeSubscribers"
+                />
+                <span class="toggle-element_switcher"></span>
+              </label>
+            </div>
           </div>
         </div>
         <div class="chatFlatLoader semi-transparent" v-if="usersSearching" />
@@ -116,13 +132,16 @@
           @ps-scroll-y="contactsScrollChange"
           ref="contacts"
         >
-          <div class="searchResult" v-if="!selectAll && foundUsers.length">
+          <!-- <div class="searchResult" v-if="!selectAll && foundUsers.length"> -->
+          <div class="searchResult" v-if="foundUsers.length">
             <div
               v-for="v in foundUsers"
               v-bind:key="v.id"
               class="searchChatContactsView"
-              @click="toggleSelect(v.id)"
-              :class="{ active: isSelected(v.id) }"
+              @click="selectAll ? toggleDeselect(v) : toggleSelect(v)"
+              :class="{
+                active: isSelected(v.id) || (selectAll && !isDeselected(v.id))
+              }"
             >
               <span
                 class="avatar avatar_gap-r-sm avatar_sm"
@@ -149,6 +168,17 @@
               </div>
               <span class="check icn-item"></span>
             </div>
+            <div
+              class="scrollObserver"
+              v-if="foundUsers.length"
+              ref="scrollObserver"
+            ></div>
+          </div>
+          <div
+            class="chatFlatLoader past-messages semi-transparent"
+            v-if="foundUsers.length && !allDataRecieved"
+          >
+            Loading history...
           </div>
 
           <div
@@ -277,18 +307,17 @@
                 class="selectedContacts selectedContacts_recipients"
                 v-if="selectAll"
               >
-                <b class="selectedContacts__title"
-                  >Recipients: All contacts{{ allUsersCountText
-                  }}{{ allUsersCountExtraText }}</b
-                >
+                <b class="selectedContacts__title">
+                  Recipients: All contacts{{ allUsersCountText }}
+                </b>
               </div>
               <div
                 class="selectedContacts selectedContacts_recipients"
-                v-if="selectedUsers && selectedUsers.length"
+                v-if="selectedFullUsers && selectedFullUsers.length"
               >
                 <b class="selectedContacts__title">Recipients:</b>
                 <span
-                  v-for="v in selectedUsers"
+                  v-for="v in selectedFullUsers"
                   :key="v.id"
                   class="selectedContacts__item"
                 >
@@ -301,7 +330,7 @@
                 </span>
               </div>
             </div>
-            <div class="msg-no-chat" v-if="!selectedUsers.length">
+            <div class="msg-no-chat" v-if="!selectedFullUsers.length">
               <div class="msg-no-chat__msg">
                 Select people to send them a message
               </div>
@@ -312,9 +341,11 @@
           </div>
           <ChatAddMultiMessage
             :userIds="selected"
+            :excludedUserIds="deselected"
             :toAll="selectAll"
             :disable="sending"
             :excludeStars="excludeStars"
+            :excludeSubscribers="excludeSubscribers"
             :recipientsCount="recipientsCount"
             @startSending="startSending"
             @sent="sent"
@@ -332,11 +363,12 @@ import ChatAddMultiMessage from "./AddMultiMessage";
 import ClickOutside from "vue-click-outside";
 import ModalRouterGoto from "@/mixins/modalRouter/goto";
 import Loader from "@/components/common/Loader";
+import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
-  name: "Chat",
+  name: "NewMessageChat",
 
-  mixins: [User, ModalRouterGoto],
+  mixins: [User, ModalRouterGoto, IntersectionObserver],
 
   directives: {
     ClickOutside
@@ -351,12 +383,15 @@ export default {
   data() {
     return {
       selected: [],
+      selectedFullUsers: [],
+      deselected: [],
       searchQuery: "",
       chatOptionsOpened: false,
       contactsScrollTop: true,
       sending: false,
       selectAll: false,
       excludeStars: true,
+      excludeSubscribers: true,
       allFoundSelected: false
     };
   },
@@ -380,13 +415,14 @@ export default {
       return this.chats.filter(v => v.selected);
     },
     hasSelectedUsers() {
-      return this.selectAll || !!this.selectedUsers.length;
+      return this.selectAll || !!this.selectedFullUsers.length;
     },
     _foundUsers() {
       return this.$store.state.chat.chatUsers;
     },
     foundUsers() {
-      if (this._foundUsers) {
+      // if (this._foundUsers) {
+      if (this._foundUsers && !this.selectAll) {
         return this._foundUsers;
       }
       if (this.searchQuery) {
@@ -410,45 +446,42 @@ export default {
       });
     },
     allUsersCount() {
-      if (!this.$store.state.chat.fetchAllUsersCountResult) {
-        return 0;
-      }
-      return this.$store.state.chat.fetchAllUsersCountResult.count;
-    },
-    allUsersCountExcludingStars() {
-      if (!this.$store.state.chat.fetchUsersCountWithoutStarsResult) {
-        return 0;
-      }
-      return this.$store.state.chat.fetchUsersCountWithoutStarsResult.count;
+      return this.$store.state.chat.fetchAllUsersCountResult;
     },
     recipientsCount() {
-      return this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
+      if (!this.allUsersCount) {
+        return null;
+      }
+      let n = this.allUsersCount.count;
+      if (this.excludeStars && this.excludeSubscribers) {
+        n -= this.allUsersCount.starsSubscribers;
+      } else if (this.excludeStars && !this.excludeSubscribers) {
+        n -= this.allUsersCount.stars;
+      } else if (!this.excludeStars && this.excludeSubscribers) {
+        n -= this.allUsersCount.subscribers;
+      }
+      return n - this.deselected.length;
     },
     allUsersCountText() {
-      const n = this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
-      if (n) {
-        return " (" + n + ")";
-      }
-      return null;
+      return " (" + this.recipientsCount + ")";
     },
-    allUsersCountExtraText() {
-      const n = this.excludeStars
-        ? this.allUsersCountExcludingStars
-        : this.allUsersCount;
-      const text = this.excludeStars
-        ? "excluding AVN Stars"
-        : "including AVN Stars";
-      if (n) {
-        return " " + text;
-      }
-      return null;
-    },
+    // allUsersCountExtraText() {
+    //   const n = this.excludeStars
+    //     ? this.allUsersCountExcludingStars
+    //     : this.allUsersCount;
+    //   const text = this.excludeStars
+    //     ? "excluding AVN Stars"
+    //     : "including AVN Stars";
+    //   if (n) {
+    //     return " " + text;
+    //   }
+    //   return null;
+    // },
     usersSearching() {
       return this.$store.state.chat.searchUsersLoading;
+    },
+    allDataRecieved() {
+      return this.$store.state.chat.allDataReceived;
     }
   },
 
@@ -462,15 +495,33 @@ export default {
       }
       return v.substring(0, 30) + "…";
     },
-    toggleSelect(id) {
-      if (this.selected.indexOf(id) !== -1) {
-        this.selected = this.selected.filter(_id => _id !== id);
+    toggleSelect(user) {
+      if (this.selected.indexOf(user.id) !== -1) {
+        this.selected = this.selected.filter(_id => _id !== user.id);
+        this.selectedFullUsers = this.selectedFullUsers.filter(
+          _user => _user.id !== user.id
+        );
       } else {
-        this.selected.push(id);
+        this.selected.push(user.id);
+        this.selectedFullUsers.push({
+          id: user.id,
+          name: user.name,
+          username: user.username
+        });
+      }
+    },
+    toggleDeselect(user) {
+      if (this.deselected.indexOf(user.id) !== -1) {
+        this.deselected = this.deselected.filter(_id => _id !== user.id);
+      } else {
+        this.deselected.push(user.id);
       }
     },
     isSelected(id) {
       return this.selected.indexOf(id) !== -1;
+    },
+    isDeselected(id) {
+      return this.deselected.indexOf(id) !== -1;
     },
     toggleSelectAll() {
       if (this.searchQuery) {
@@ -483,15 +534,20 @@ export default {
       this.selectAll = !this.selectAll;
       if (this.selectAll) {
         this.selected = [];
+        this.selectedFullUsers = [];
+      } else {
+        this.deselected = [];
       }
     },
     toggleSelectAllFoundUsers() {
       if (this.allFoundSelected) {
         this.allFoundSelected = false;
         this.selected = [];
+        this.selectedFullUsers = [];
       } else {
         this.allFoundSelected = true;
         this.selected = this.foundUsers.map(v => v.id);
+        this.selectedFullUsers = [...this.foundUsers];
       }
     },
     search() {
@@ -551,16 +607,50 @@ export default {
     reset() {
       this.searchQuery = "";
       this.$store.commit("chat/resetSearchUsers");
+    },
+    newFetchAnyChats() {
+      const data = {
+        excludeStars: this.excludeStars,
+        excludeSubscribers: this.excludeSubscribers,
+        selectAll: this.selectAll
+      };
+      this.$store.dispatch("chat/getFetchAnyChats", data).then(() => {
+        this.isInitFetch = false;
+        this.handleResponseWithIntersectionObserver(this.newFetchAnyChats);
+      });
+    },
+    resetFetchData() {
+      this.$store.commit("chat/fetchChatsReset");
+      this.destroyObserver();
+      this.isInitFetch = true;
+    }
+  },
+
+  watch: {
+    selectAll() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
+    },
+    excludeStars() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
+    },
+    excludeSubscribers() {
+      this.resetFetchData();
+      this.newFetchAnyChats();
     }
   },
 
   created() {
-    this.$store.dispatch("chat/fetchAnyChats", {});
+    this.$store.commit("chat/fetchChatsReset");
+    this.newFetchAnyChats();
+    // this.$store.dispatch("chat/getFetchAnyChats", {});
     this.$store.dispatch("chat/fetchAllUsersCount", {});
-    this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
+    // this.$store.dispatch("chat/fetchUsersCountWithoutStars", {});
     this.search();
   },
   beforeDestroy() {
+    this.resetFetchData();
     this.$store.commit("chat/setSecondScreen", false);
   }
 };
