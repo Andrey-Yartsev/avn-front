@@ -1,14 +1,17 @@
 @import "components/imports";
 .usersGroups {
+  @include media-breakpoint-down($desktop-breakpoint) {
+    padding-top: 25px;
+  }
   .viewSettings {
-    padding-bottom: 20px;
+    padding-bottom: 25px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
     @include media-breakpoint-down($desktop-breakpoint) {
       // margin-top: 15px;
-      margin: 15px 10px 0 10px;
+      margin: 0 10px;
     }
   }
   .buttonWrapper {

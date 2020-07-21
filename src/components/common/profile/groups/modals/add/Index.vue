@@ -333,7 +333,8 @@ export default {
         return true;
       } else if (
         !this.preloadedMedias.length ||
-        (!this.description.trim() || !this.title.trim())
+        (!this.description.trim() || !this.title.trim()) ||
+        (this.isPublic && !this.price.trim())
       ) {
         return true;
       } else {

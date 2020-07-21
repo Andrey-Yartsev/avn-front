@@ -161,7 +161,6 @@ export default {
       };
       try {
         this.loading = true;
-        console.log(body);
         await this.$store.dispatch("profile/groups/sendMessage", body);
         this.$store.commit("global/toastShowTrigger", {
           text: "Group message has sent",
@@ -205,7 +204,7 @@ export default {
         messageId
       };
       this.$store
-        .dispatch("profile/groups/deleteScheduleMessages", data, { root: true })
+        .dispatch("profile/groups/deleteScheduleMessage", data, { root: true })
         .then(() => {
           this.scheduledMessages = this.scheduledMessages.filter(
             item => item.id !== messageId

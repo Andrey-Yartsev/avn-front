@@ -1,11 +1,11 @@
 import { createRequestAction } from "../../utils/storeRequest";
-import mockedGroups from "../../../mock/groups";
+// import mockedGroups from "../../../mock/groups";
 
 const fetchLimit = 9;
 
 const initState = {
-  groups: mockedGroups,
-  // groups: [],
+  // groups: mockedGroups,
+  groups: [],
   marker: null,
   offset: 0,
   limit: fetchLimit,
@@ -57,7 +57,7 @@ const mutations = {
   },
   joinGroup(state, productId) {
     state.groups = state.groups.map(item => {
-      if (item.productId === productId) {
+      if (item.productId == productId) {
         return {
           ...item,
           isMember: true
@@ -72,6 +72,26 @@ const mutations = {
         return {
           ...item,
           isMember: false
+        };
+      }
+      return item;
+    });
+  },
+  sendFee(state, data) {
+    const { productId, amount, memberId } = data;
+    state.groups = state.groups.map(item => {
+      if (item.productId == productId) {
+        return {
+          ...item,
+          members: item.members.map(elem => {
+            if (elem.id == memberId) {
+              return {
+                ...elem,
+                spent: (parseFloat(elem.spent) + parseFloat(amount)).toFixed(2)
+              };
+            }
+            return elem;
+          })
         };
       }
       return item;
@@ -103,7 +123,10 @@ const actions = {
       );
       commit(
         "auth/incrementGroupsCount",
-        { label: res.title, key: res.productId },
+        {
+          group: { label: res.title, key: res.productId.toString() },
+          isActive: res.isActive
+        },
         { root: true }
       );
       return res;
@@ -121,7 +144,10 @@ const actions = {
       );
       commit(
         "auth/updateGroupsCount",
-        { label: res.title, key: res.productId },
+        {
+          group: { label: res.title, key: res.productId.toString() },
+          isActive: res.isActive
+        },
         { root: true }
       );
       return res;
@@ -156,9 +182,15 @@ const actions = {
       return res;
     });
   },
-  joinGroup({ dispatch, commit }, { productId }) {
-    dispatch("_joinGroup", productId).then(() => {
-      commit("joinGroup", productId);
+  joinGroup({ dispatch, commit }, { productId, showMembers }) {
+    return dispatch("_joinGroup", productId).then(() => {
+      if (!showMembers) {
+        commit("joinGroup", productId);
+      } else {
+        dispatch("_getSingleGroup", productId).then(res => {
+          commit("updateGroup", res);
+        });
+      }
     });
   },
   leaveGroup({ dispatch, commit }, productId) {
@@ -196,6 +228,24 @@ createRequestAction({
   },
   paramsToPath: function(params, path) {
     return path.replace(/{userId}/, params.profileId);
+  }
+});
+
+createRequestAction({
+  requestType: "any",
+  prefix: "_getSingleGroup",
+  apiPath: "groups/item/{productId}",
+  state,
+  mutations,
+  actions,
+  paramsToOptions: function() {
+    const options = {
+      method: "GET"
+    };
+    return options;
+  },
+  paramsToPath: function(productId, path) {
+    return path.replace(/{productId}/, productId);
   }
 });
 
@@ -261,7 +311,7 @@ createRequestAction({
       method: "GET",
       query: {}
     };
-    options.query.type = "groups";
+    options.query.type = "list";
     options.query.id = params.groupId;
     return options;
   }

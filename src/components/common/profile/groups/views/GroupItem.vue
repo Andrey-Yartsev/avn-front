@@ -23,7 +23,12 @@
             <button @click="sendFee" type="button" class="btn alt border">
               Send fee
             </button>
-            <button @click="showMembers" type="button" class="btn alt border">
+            <button
+              v-if="group.membersViewAmount !== 'none'"
+              @click="showMembers"
+              type="button"
+              class="btn alt border"
+            >
               Members
             </button>
             <button
@@ -107,7 +112,8 @@ export default {
           price: this.group.price,
           productId: this.group.productId,
           join: true,
-          renew
+          renew,
+          showMembers: this.group.membersViewAmount !== "none"
         }
       });
     },
@@ -117,10 +123,13 @@ export default {
         data: {
           title: "Leave the current group",
           success: () => {
-            this.$store.dispatch(
-              "profile/groups/leaveGroup",
-              this.group.productId
-            );
+            this.$store
+              .dispatch("profile/groups/leaveGroup", this.group.productId)
+              .then(() => {
+                this.$store.dispatch("global/flashToast", {
+                  text: "You have left the group"
+                });
+              });
           }
         }
       });
@@ -131,7 +140,8 @@ export default {
         data: {
           price: this.group.price,
           productId: this.group.productId,
-          join: false
+          join: false,
+          showMembers: this.group.membersViewAmount !== "none"
         }
       });
     },

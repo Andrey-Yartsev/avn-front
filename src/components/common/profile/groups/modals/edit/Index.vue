@@ -131,7 +131,7 @@
                     type="radio"
                     name="storyAnswerType"
                     value="10"
-                    v-model="group.membersView"
+                    v-model="group.membersViewAmount"
                   />
                   <span class="label">
                     Top 10
@@ -144,7 +144,7 @@
                     type="radio"
                     name="storyAnswerType"
                     value="none"
-                    v-model="group.membersView"
+                    v-model="group.membersViewAmount"
                   />
                   <span class="label">
                     None
@@ -247,7 +247,7 @@ const InitialState = {
     price: "",
     isActive: false,
     isPublic: false,
-    membersView: "none"
+    membersViewAmount: "none"
   },
   groupSnapshot: null,
   saving: false,
@@ -330,7 +330,8 @@ export default {
         return true;
       } else if (
         !this.preloadedMedias.length ||
-        (!this.group.description.trim() || !this.group.title.trim())
+        (!this.group.description.trim() || !this.group.title.trim()) ||
+        (this.isPublic && !this.price.trim())
       ) {
         return true;
       } else {

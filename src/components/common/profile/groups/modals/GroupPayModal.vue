@@ -99,19 +99,44 @@ export default {
     totalPrice() {
       return (parseFloat(this.dataModal.price) * this.points).toFixed(2);
     }
+    // user() {
+    //   this.$store.state.auth.user;
+    // }
   },
   methods: {
     yes() {
       const onSuccess = () => {
         if (!this.dataModal.join) {
+          if (this.dataModal.renew) {
+            this.$store.dispatch("global/flashToast", {
+              text: "You have renewed a membership"
+            });
+          } else {
+            if (this.dataModal.showMembers) {
+              this.$store.commit("profile/groups/sendFee", {
+                productId: this.dataModal.productId,
+                amount: (
+                  parseFloat(this.dataModal.price) * this.points
+                ).toFixed(2),
+                memberId: this.user.id
+              });
+            }
+            this.$store.dispatch("global/flashToast", {
+              text: "Fee has sent"
+            });
+          }
           this.close();
           return;
         }
         this.$store
           .dispatch("profile/groups/joinGroup", {
-            productId: this.dataModal.productId
+            productId: this.dataModal.productId,
+            showMembers: this.dataModal.showMembers
           })
           .then(() => {
+            this.$store.dispatch("global/flashToast", {
+              text: "You have joined the group"
+            });
             this.close();
           })
           .catch(() => {
@@ -121,8 +146,9 @@ export default {
       if (!this.dataModal.renew) {
         this._pay(
           {
-            paymentType: "product",
+            paymentType: "list",
             productId: this.dataModal.productId,
+            amount: parseFloat(this.dataModal.price),
             points: this.points,
             paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
           },

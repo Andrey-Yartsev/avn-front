@@ -182,19 +182,34 @@ const mutations = {
   incrementStoreCount(state, num) {
     state.user.mediaCount = state.user.mediaCount + num;
   },
-  incrementGroupsCount(state, group) {
+  incrementGroupsCount(state, { group, isActive }) {
     state.user.groupsCount += 1;
-    state.user.streamGroups = [...state.user.streamGroups, group];
+    if (isActive) {
+      state.user.streamGroups = [...state.user.streamGroups, group];
+    }
   },
-  updateGroupsCount(state, group) {
-    state.user.streamGroups = state.user.streamGroups.map(item => {
-      return item.key === group.key ? group : item;
-    });
+  updateGroupsCount(state, { group, isActive }) {
+    if (isActive) {
+      const existedGroup = state.user.streamGroups.find(
+        item => item.key === group.key
+      );
+      if (existedGroup) {
+        state.user.streamGroups = state.user.streamGroups.map(item => {
+          return item.key === group.key ? group : item;
+        });
+      } else {
+        state.user.streamGroups.push(group);
+      }
+    } else {
+      state.user.streamGroups = state.user.streamGroups.filter(
+        item => item.key !== group.key
+      );
+    }
   },
   decrementGroupsCount(state, groupId) {
     state.user.groupsCount -= 1;
     state.user.streamGroups = state.user.streamGroups.filter(
-      item => item.key !== groupId
+      item => item.key != groupId
     );
   },
   decrementStoreCount(state) {

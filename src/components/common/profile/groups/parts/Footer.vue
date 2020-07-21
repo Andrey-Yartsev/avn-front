@@ -2,13 +2,6 @@
   <div class="actions">
     <span class="actions__btn">
       <span
-        class="btn-icon icn-tips icn-item icn-size_md"
-        v-tooltip="'Price'"
-      ></span>
-      {{ group.price }}
-    </span>
-    <span class="actions__btn">
-      <span
         :class="{
           'icn-unlocked': group.isPublic,
           'icn-locked': !group.isPublic
@@ -17,6 +10,13 @@
         v-tooltip="'Privacy'"
       ></span>
       {{ group.isPublic ? "Public" : "Private" }}
+    </span>
+    <span v-if="group.isPublic" class="actions__btn">
+      <span
+        class="btn-icon icn-tips icn-item icn-size_md"
+        v-tooltip="'Price'"
+      ></span>
+      {{ group.price }}
     </span>
     <span class="actions__btn">
       <span
@@ -40,6 +40,7 @@
       {{ group.membersCount || 0 }}
     </span>
     <span
+      v-if="group.membersCount > 0"
       class="actions__btn  hover-highlight message"
       @click="showMessageModal"
     >
