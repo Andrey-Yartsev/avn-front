@@ -138,7 +138,7 @@
               v-for="v in foundUsers"
               v-bind:key="v.id"
               class="searchChatContactsView"
-              @click="selectAll ? toggleDeselect(v.id) : toggleSelect(v.id)"
+              @click="selectAll ? toggleDeselect(v) : toggleSelect(v)"
               :class="{
                 active: isSelected(v.id) || (selectAll && !isDeselected(v.id))
               }"
@@ -313,11 +313,11 @@
               </div>
               <div
                 class="selectedContacts selectedContacts_recipients"
-                v-if="selectedUsers && selectedUsers.length"
+                v-if="selectedFullUsers && selectedFullUsers.length"
               >
                 <b class="selectedContacts__title">Recipients:</b>
                 <span
-                  v-for="v in selectedUsers"
+                  v-for="v in selectedFullUsers"
                   :key="v.id"
                   class="selectedContacts__item"
                 >
@@ -330,7 +330,7 @@
                 </span>
               </div>
             </div>
-            <div class="msg-no-chat" v-if="!selectedUsers.length">
+            <div class="msg-no-chat" v-if="!selectedFullUsers.length">
               <div class="msg-no-chat__msg">
                 Select people to send them a message
               </div>
@@ -366,7 +366,7 @@ import Loader from "@/components/common/Loader";
 import IntersectionObserver from "@/mixins/intersectionObserver";
 
 export default {
-  name: "Chat",
+  name: "NewMessageChat",
 
   mixins: [User, ModalRouterGoto, IntersectionObserver],
 
@@ -383,6 +383,7 @@ export default {
   data() {
     return {
       selected: [],
+      selectedFullUsers: [],
       deselected: [],
       searchQuery: "",
       chatOptionsOpened: false,
@@ -414,7 +415,7 @@ export default {
       return this.chats.filter(v => v.selected);
     },
     hasSelectedUsers() {
-      return this.selectAll || !!this.selectedUsers.length;
+      return this.selectAll || !!this.selectedFullUsers.length;
     },
     _foundUsers() {
       return this.$store.state.chat.chatUsers;
@@ -494,18 +495,26 @@ export default {
       }
       return v.substring(0, 30) + "…";
     },
-    toggleSelect(id) {
-      if (this.selected.indexOf(id) !== -1) {
-        this.selected = this.selected.filter(_id => _id !== id);
+    toggleSelect(user) {
+      if (this.selected.indexOf(user.id) !== -1) {
+        this.selected = this.selected.filter(_id => _id !== user.id);
+        this.selectedFullUsers = this.selectedFullUsers.filter(
+          _user => _user.id !== user.id
+        );
       } else {
-        this.selected.push(id);
+        this.selected.push(user.id);
+        this.selectedFullUsers.push({
+          id: user.id,
+          name: user.name,
+          username: user.username
+        });
       }
     },
-    toggleDeselect(id) {
-      if (this.deselected.indexOf(id) !== -1) {
-        this.deselected = this.deselected.filter(_id => _id !== id);
+    toggleDeselect(user) {
+      if (this.deselected.indexOf(user.id) !== -1) {
+        this.deselected = this.deselected.filter(_id => _id !== user.id);
       } else {
-        this.deselected.push(id);
+        this.deselected.push(user.id);
       }
     },
     isSelected(id) {
@@ -525,6 +534,7 @@ export default {
       this.selectAll = !this.selectAll;
       if (this.selectAll) {
         this.selected = [];
+        this.selectedFullUsers = [];
       } else {
         this.deselected = [];
       }
@@ -533,9 +543,11 @@ export default {
       if (this.allFoundSelected) {
         this.allFoundSelected = false;
         this.selected = [];
+        this.selectedFullUsers = [];
       } else {
         this.allFoundSelected = true;
         this.selected = this.foundUsers.map(v => v.id);
+        this.selectedFullUsers = [...this.foundUsers];
       }
     },
     search() {
