@@ -13,6 +13,7 @@
           + New group
         </button>
         <div
+          v-if="groups.length"
           :class="['buttonWrapper', 'more-functions', { open: opened }]"
           v-click-outside="hide"
         >
