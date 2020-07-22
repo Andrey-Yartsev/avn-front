@@ -36,7 +36,6 @@ export default {
             }
           });
         } else if (r === 3) {
-          console.log(stream);
           if (stream.listOptions?.listType === "private") {
             this.$store.dispatch("global/flashToast", {
               text: "This is a private live stream",
