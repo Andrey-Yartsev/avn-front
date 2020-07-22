@@ -148,7 +148,7 @@ export default {
           {
             paymentType: "list",
             productId: this.dataModal.productId,
-            amount: parseFloat(this.dataModal.price),
+            amount: parseFloat(this.dataModal.price) * this.points,
             points: this.points,
             paymentGateCustomerCardToken: this.user.paymentGateCustomerCardToken
           },
