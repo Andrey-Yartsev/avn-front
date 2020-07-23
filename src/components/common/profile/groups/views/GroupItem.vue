@@ -21,7 +21,7 @@
             class="header-content-groupMemberContainer"
           >
             <button @click="sendFee" type="button" class="btn alt border">
-              Send fee
+              Tip $ to Upgrade Level
             </button>
             <button
               v-if="group.membersViewAmount !== 'none'"

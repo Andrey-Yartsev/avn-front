@@ -32,8 +32,9 @@
                   />
                   <span class="label"
                     >${{ v.totalPrice }}
+                    <span>(x{{ v.points }})</span>
                     <span v-if="v.points == 1 && dataModal.join"
-                      >(Minimum membersip fee)</span
+                      >(minimum entry level)</span
                     ></span
                   >
                 </div>
@@ -73,9 +74,11 @@ export default {
     },
     getTextTitle() {
       if (this.dataModal.join) {
-        return this.dataModal.renew ? "Renew the membership" : "Pay to join";
+        return this.dataModal.renew
+          ? "Renew the membership"
+          : "Select Entry Level";
       }
-      return "Send fee";
+      return "Upgrade Entry Level";
     },
     // getTextDescription() {
     //   let str;
@@ -89,7 +92,7 @@ export default {
     //   return `You are ${str}`;
     // },
     payOptions() {
-      return [1, 2, 3, 4].map(item => {
+      return [1, 2, 3, 4, 5, 10].map(item => {
         return {
           points: item,
           totalPrice: (item * parseFloat(this.dataModal.price)).toFixed(2)
