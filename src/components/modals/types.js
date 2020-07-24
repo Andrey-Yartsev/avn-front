@@ -184,6 +184,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "freeAccessMediaGroups",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "magShipping",
     layoutOnlyModal: true
   },

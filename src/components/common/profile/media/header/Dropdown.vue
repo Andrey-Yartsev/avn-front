@@ -39,6 +39,15 @@
           <span class="more-functions__option">Free access list</span>
         </a>
       </li>
+      <li v-if="post.active" class="more-functions__item">
+        <a
+          class="edit more-functions__link"
+          type="button"
+          @click.prevent="openFreeAccessGroupsModal"
+        >
+          <span class="more-functions__option">Free group access</span>
+        </a>
+      </li>
       <li class="more-functions__item">
         <a
           class="edit more-functions__link"
@@ -246,6 +255,15 @@ export default {
       this.hide();
       this.$store.dispatch("modal/show", {
         name: "freeAccessMediaList",
+        data: {
+          post: this.post
+        }
+      });
+    },
+    openFreeAccessGroupsModal() {
+      this.hide();
+      this.$store.dispatch("modal/show", {
+        name: "freeAccessMediaGroups",
         data: {
           post: this.post
         }

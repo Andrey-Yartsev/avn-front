@@ -57,6 +57,7 @@ import MediaPayConfirmModal from "@/components/common/profile/media/views/MediaP
 import GroupPayConfirmModal from "@/components/common/profile/groups/modals/GroupPayModal";
 import ChatAttachmentsModal from "@/components/chat/AttachmentsModal";
 import FreeAccessMediaListModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaListModal";
+import FreeAccessMediaGroupsModal from "@/components/common/profile/media/parts/modals/FreeAccessMediaGroupsModal";
 import ContestVotingModal from "@/components/pages/contest/VotingModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 import GroupMembersModal from "@/components/common/profile/groups/modals/GroupMembersModal";
@@ -110,6 +111,7 @@ export default {
     ContestVotingModal,
     ChatAttachmentsModal,
     FreeAccessMediaListModal,
+    FreeAccessMediaGroupsModal,
     MagShippingModal,
     GroupMembersModal,
     GroupMembersMessageModal,
