@@ -29,7 +29,7 @@
               type="button"
               class="btn alt border"
             >
-              Members
+              Leaderboard
             </button>
             <button
               v-if="group.isMember"

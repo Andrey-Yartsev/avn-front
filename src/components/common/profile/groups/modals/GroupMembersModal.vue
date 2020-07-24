@@ -7,7 +7,7 @@
       <div class="content">
         <template>
           <div class="popup-alert__title">
-            Group members
+            Group {{ isOwnerView ? "members" : "leaderboard" }}
           </div>
           <div class="popup-alert__body">
             <div v-if="isOwnerView" class="searchHeader">
@@ -38,8 +38,11 @@
                       }}</span>
                     </router-link>
                   </div>
-                  <div class="table__cell spent">
+                  <div v-if="isOwnerView" class="table__cell spent">
                     ${{ user.spent || "0.00" }}
+                  </div>
+                  <div v-else class="table__cell spent">
+                    x {{ convertSpentToPoints(user.spent) }}
                   </div>
                   <div v-if="isOwnerView" class="table__cell delete">
                     <button
@@ -172,6 +175,9 @@ export default {
         }
       }
       this.isDataChanged = isChanged;
+    },
+    convertSpentToPoints(sum) {
+      return Math.round(parseFloat(sum) / parseFloat(this.data.group.price));
     }
   },
   mounted() {
