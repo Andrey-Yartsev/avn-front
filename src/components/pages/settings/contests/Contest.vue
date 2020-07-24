@@ -258,7 +258,8 @@ export default {
         return "";
       }
       const str = moment(date)
-        .tz(this.data.timezone)
+        // .tz(this.data.timezone)
+        .tz("America/Los_Angeles")
         .format("MMM D, hh:mm a");
       return str + " PDT";
     },
