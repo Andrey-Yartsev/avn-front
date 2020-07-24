@@ -40,7 +40,7 @@
               Leave the group
             </button>
           </div>
-          <div v-else class="header-content-joinGroupContainer">
+          <div v-else class="header-content-groupMemberContainer">
             <button
               v-if="group.canRenew"
               @click="joinGroup({ renew: true })"
@@ -56,6 +56,14 @@
               class="btn"
             >
               Join the group
+            </button>
+            <button
+              v-if="group.membersViewAmount !== 'none'"
+              @click="showMembers"
+              type="button"
+              class="btn alt border"
+            >
+              Leaderboard
             </button>
           </div>
         </template>
