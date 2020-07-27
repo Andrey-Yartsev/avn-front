@@ -83,15 +83,19 @@ const mutations = {
       if (item.productId == productId) {
         return {
           ...item,
-          members: item.members.map(elem => {
-            if (elem.id == memberId) {
-              return {
-                ...elem,
-                spent: (parseFloat(elem.spent) + parseFloat(amount)).toFixed(2)
-              };
-            }
-            return elem;
-          })
+          members: item.members
+            .map(elem => {
+              if (elem.id == memberId) {
+                return {
+                  ...elem,
+                  spent: (parseFloat(elem.spent) + parseFloat(amount)).toFixed(
+                    2
+                  )
+                };
+              }
+              return elem;
+            })
+            .sort((a, b) => parseFloat(b.spent) - parseFloat(a.spent))
         };
       }
       return item;
