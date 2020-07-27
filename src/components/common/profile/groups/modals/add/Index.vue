@@ -94,10 +94,7 @@
         </div>
       </div>
       <div class="actions">
-        <div
-          v-if="isPublic"
-          class="b-check-state_full-width b-check-state_price"
-        >
+        <div class="b-check-state_full-width b-check-state_price">
           <div class="btn-post">
             <div>Price</div>
             <div class="price-amount-field getPaidForm__field enabled-tooltip">

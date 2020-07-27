@@ -11,7 +11,7 @@
       ></span>
       {{ group.isPublic ? "Public" : "Private" }}
     </span>
-    <span v-if="group.isPublic" class="actions__btn">
+    <span v-if="showPrice" class="actions__btn">
       <span
         class="btn-icon icn-tips icn-item icn-size_md"
         v-tooltip="'Price'"
@@ -71,6 +71,11 @@ export default {
     group: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    showPrice() {
+      return parseFloat(this.group.price) > 0;
     }
   },
   methods: {
