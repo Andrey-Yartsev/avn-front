@@ -20,7 +20,12 @@
             v-if="group.isMember"
             class="header-content-groupMemberContainer"
           >
-            <button @click="sendFee" type="button" class="btn alt border">
+            <button
+              v-if="showUpgradeButton"
+              @click="sendFee"
+              type="button"
+              class="btn alt border"
+            >
               Tip $ to Upgrade Level
             </button>
             <button
@@ -98,6 +103,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile.home.profile;
+    },
+    showUpgradeButton() {
+      return parseFloat(this.group.price) > 0;
     }
   },
   methods: {
