@@ -207,6 +207,14 @@
         @include media-breakpoint-down($desktop-breakpoint) {
           padding-top: 20px;
         }
+        .datetime-value {
+          .post-datetime__value {
+            line-height: 20px;
+          }
+          .datetime-value__reset {
+            top: -2px;
+          }
+        }
       }
     }
   }
