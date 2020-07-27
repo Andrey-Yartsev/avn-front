@@ -872,6 +872,9 @@ export default {
         }
       },
       showInfoMessage: message => {
+        this.$store.dispatch("global/flashToast", {
+          text: message
+        });
         // eslint-disable-next-line
         console.trace(message);
       },
