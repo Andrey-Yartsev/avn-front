@@ -11,7 +11,7 @@
           </div>
           <div class="popup-alert__body">
             <div class="searchHeader">
-              <SearchBubble @addUser="addUser" />
+              <SearchBubble @addGroup="addGroup" />
             </div>
             <div class="list">
               <h2 v-if="!freeAccessGroups.length" class="title__empty">
@@ -30,10 +30,7 @@
                     <span class="userview-block">
                       <span class="avatar avatar_sm">
                         <span class="avatar__img">
-                          <img
-                            :src="group.media[0].src.source"
-                            v-if="group.media[0].src.source"
-                          />
+                          <img :src="group.image" v-if="group.image" />
                         </span>
                       </span>
                       <div class="name">{{ group.title }}</div>
@@ -41,7 +38,7 @@
                   </div>
                   <div class="user table__cell delete">
                     <button
-                      @click="removeItem(group.productId)"
+                      @click="removeItem(group.id)"
                       type="button"
                       class="btn-reset icn-item icn-size_lg"
                     />
@@ -74,7 +71,7 @@
 
 <script>
 import Modal from "@/components/modal/Index";
-import SearchBubble from "../searchUsers/Index";
+import SearchBubble from "../searchGroups/Index";
 
 export default {
   name: "FreeAccessMediaGroupsModal",
@@ -85,30 +82,21 @@ export default {
   data() {
     return {
       freeAccessGroups: [
-        {
-          productId: 468790,
-          title: "title 1",
-          media: [
-            {
-              src: {
-                source:
-                  "https://cdn2-dev-media.avn.com/files/6/61/61f06a142625fe884d885ae4d9b747c3/cube-arch-logo.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6XC9cL2NkbjItZGV2LW1lZGlhLmF2bi5jb21cL2ZpbGVzXC82XC82MVwvNjFmMDZhMTQyNjI1ZmU4ODRkODg1YWU0ZDliNzQ3YzNcL2N1YmUtYXJjaC1sb2dvLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU5NTY4MjM2NH0sIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIxMDkuODcuMjUzLjIyM1wvMzIifX19XX0_&Signature=QNhuVGYff63uiy-7xwH8Wxn2GdeEBwXKm40r1Sb8ik6qpVxSTByfcemelE5dIBRkauavzQZN6lj1b~nU1FZ6DswhhStZHUCMMaFCYu4dmsPNAQPXpkE5PZ2Y4fTPkGcQT4je-16H05AbA8J6bb9AixcvtVoYiNNHxjtT7GSpo2bmkiDqzGDoCEl~h754awMn2ok-e1BxdNtnspOOROtL3Qtm-ikprQJcmvtjDfn0eVgsh3OP1dL9z0K90A6xuBp5vncNW2n6Q3ciSmd0BAm~3SdgHewMOE0316PrTDjNVB0iGS6ktBzgSVES28aumokDxJLC0n4deD9riglwUwOonA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
-              }
-            }
-          ]
-        },
-        {
-          productId: 468791,
-          title: "title 2",
-          media: [
-            {
-              src: {
-                source:
-                  "https://cdn2-dev-media.avn.com/files/6/61/61f06a142625fe884d885ae4d9b747c3/cube-arch-logo.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6XC9cL2NkbjItZGV2LW1lZGlhLmF2bi5jb21cL2ZpbGVzXC82XC82MVwvNjFmMDZhMTQyNjI1ZmU4ODRkODg1YWU0ZDliNzQ3YzNcL2N1YmUtYXJjaC1sb2dvLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU5NTY4MjM2NH0sIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIxMDkuODcuMjUzLjIyM1wvMzIifX19XX0_&Signature=QNhuVGYff63uiy-7xwH8Wxn2GdeEBwXKm40r1Sb8ik6qpVxSTByfcemelE5dIBRkauavzQZN6lj1b~nU1FZ6DswhhStZHUCMMaFCYu4dmsPNAQPXpkE5PZ2Y4fTPkGcQT4je-16H05AbA8J6bb9AixcvtVoYiNNHxjtT7GSpo2bmkiDqzGDoCEl~h754awMn2ok-e1BxdNtnspOOROtL3Qtm-ikprQJcmvtjDfn0eVgsh3OP1dL9z0K90A6xuBp5vncNW2n6Q3ciSmd0BAm~3SdgHewMOE0316PrTDjNVB0iGS6ktBzgSVES28aumokDxJLC0n4deD9riglwUwOonA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
-              }
-            }
-          ]
-        }
+        // {
+        //   id: 468790,
+        //   title: "title 1",
+        //   image: "https://cdn2-dev-media.avn.com/files/6/61/61f06a142625fe884d885ae4d9b747c3/cube-arch-logo.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6XC9cL2NkbjItZGV2LW1lZGlhLmF2bi5jb21cL2ZpbGVzXC82XC82MVwvNjFmMDZhMTQyNjI1ZmU4ODRkODg1YWU0ZDliNzQ3YzNcL2N1YmUtYXJjaC1sb2dvLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU5NTY4MjM2NH0sIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIxMDkuODcuMjUzLjIyM1wvMzIifX19XX0_&Signature=QNhuVGYff63uiy-7xwH8Wxn2GdeEBwXKm40r1Sb8ik6qpVxSTByfcemelE5dIBRkauavzQZN6lj1b~nU1FZ6DswhhStZHUCMMaFCYu4dmsPNAQPXpkE5PZ2Y4fTPkGcQT4je-16H05AbA8J6bb9AixcvtVoYiNNHxjtT7GSpo2bmkiDqzGDoCEl~h754awMn2ok-e1BxdNtnspOOROtL3Qtm-ikprQJcmvtjDfn0eVgsh3OP1dL9z0K90A6xuBp5vncNW2n6Q3ciSmd0BAm~3SdgHewMOE0316PrTDjNVB0iGS6ktBzgSVES28aumokDxJLC0n4deD9riglwUwOonA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
+        // },
+        // {
+        //   id: 468791,
+        //   title: "title 2",
+        //   image: "https://cdn2-dev-media.avn.com/files/6/61/61f06a142625fe884d885ae4d9b747c3/cube-arch-logo.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6XC9cL2NkbjItZGV2LW1lZGlhLmF2bi5jb21cL2ZpbGVzXC82XC82MVwvNjFmMDZhMTQyNjI1ZmU4ODRkODg1YWU0ZDliNzQ3YzNcL2N1YmUtYXJjaC1sb2dvLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU5NTY4MjM2NH0sIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIxMDkuODcuMjUzLjIyM1wvMzIifX19XX0_&Signature=QNhuVGYff63uiy-7xwH8Wxn2GdeEBwXKm40r1Sb8ik6qpVxSTByfcemelE5dIBRkauavzQZN6lj1b~nU1FZ6DswhhStZHUCMMaFCYu4dmsPNAQPXpkE5PZ2Y4fTPkGcQT4je-16H05AbA8J6bb9AixcvtVoYiNNHxjtT7GSpo2bmkiDqzGDoCEl~h754awMn2ok-e1BxdNtnspOOROtL3Qtm-ikprQJcmvtjDfn0eVgsh3OP1dL9z0K90A6xuBp5vncNW2n6Q3ciSmd0BAm~3SdgHewMOE0316PrTDjNVB0iGS6ktBzgSVES28aumokDxJLC0n4deD9riglwUwOonA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
+        // },
+        // {
+        //   id: 468792,
+        //   title: "title 3",
+        //   image: "https://cdn2-dev-media.avn.com/files/6/61/61f06a142625fe884d885ae4d9b747c3/cube-arch-logo.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6XC9cL2NkbjItZGV2LW1lZGlhLmF2bi5jb21cL2ZpbGVzXC82XC82MVwvNjFmMDZhMTQyNjI1ZmU4ODRkODg1YWU0ZDliNzQ3YzNcL2N1YmUtYXJjaC1sb2dvLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU5NTY4MjM2NH0sIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIxMDkuODcuMjUzLjIyM1wvMzIifX19XX0_&Signature=QNhuVGYff63uiy-7xwH8Wxn2GdeEBwXKm40r1Sb8ik6qpVxSTByfcemelE5dIBRkauavzQZN6lj1b~nU1FZ6DswhhStZHUCMMaFCYu4dmsPNAQPXpkE5PZ2Y4fTPkGcQT4je-16H05AbA8J6bb9AixcvtVoYiNNHxjtT7GSpo2bmkiDqzGDoCEl~h754awMn2ok-e1BxdNtnspOOROtL3Qtm-ikprQJcmvtjDfn0eVgsh3OP1dL9z0K90A6xuBp5vncNW2n6Q3ciSmd0BAm~3SdgHewMOE0316PrTDjNVB0iGS6ktBzgSVES28aumokDxJLC0n4deD9riglwUwOonA__&Key-Pair-Id=APKAIZQN3TWWCTQ5Z6ZQ"
+        // },
       ],
       initSnapshot: [],
       isDataChanged: false,
@@ -127,7 +115,7 @@ export default {
     init() {
       if (this.items && this.items.length) {
         this.freeAccessGroups = [...this.items];
-        this.initSnapshot = this.items.map(item => item.productId);
+        this.initSnapshot = this.items.map(item => item.id);
       }
     },
     close({ reset }) {
@@ -143,7 +131,7 @@ export default {
           root: true
         })
         .then(() => {
-          this.initSnapshot = this.freeAccessGroups.map(item => item.productId);
+          this.initSnapshot = this.freeAccessGroups.map(item => item.id);
           this.close({ reset: false });
         })
         .finally(() => {
@@ -155,25 +143,25 @@ export default {
         media: {
           ...this.data.post,
           freeAccessUsers: this.data.post.freeAccessUsers.map(item => item.id),
-          freeAccessGroups: this.freeAccessGroups.map(item => item.productId)
+          freeAccessGroups: this.freeAccessGroups.map(item => item.id)
         },
         productId: this.data.post.productId
       };
     },
-    removeItem(userId) {
+    removeItem(groupId) {
       this.freeAccessGroups = this.freeAccessGroups.filter(
-        item => item.id !== userId
+        item => item.id !== groupId
       );
       this.isListChangesCheck();
     },
-    addUser(user) {
+    addGroup(group) {
       const isAlreadyInList = this.freeAccessGroups.find(
-        item => item.id === user.id
+        item => item.id === group.id
       );
-      if (isAlreadyInList || user.id === this.data.post.author.id) {
+      if (isAlreadyInList || group.id === this.data.post.author.id) {
         return;
       }
-      this.freeAccessGroups.push(user);
+      this.freeAccessGroups.push(group);
       this.isListChangesCheck();
     },
     isListChangesCheck() {
