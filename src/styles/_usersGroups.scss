@@ -40,7 +40,7 @@
     }
     .groups {
       @include media-breakpoint-down($desktop-breakpoint) {
-       grid-gap: 50px;
+        grid-gap: 50px;
       }
     }
   }
@@ -51,7 +51,6 @@
   background-color: $white;
   overflow: hidden;
   border-radius: 10px;
-  
 
   &-header {
     width: 100%;
@@ -60,8 +59,7 @@
     @include media-breakpoint-down($desktop-breakpoint) {
       flex-flow: column nowrap;
       height: auto;
-     }
-    
+    }
 
     .header-image {
       width: 30%;
@@ -70,7 +68,7 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         width: 100%;
         height: 250px;
-       }
+      }
     }
     .header-content {
       width: 70%;
@@ -81,8 +79,8 @@
       @include media-breakpoint-down($desktop-breakpoint) {
         width: 100%;
         height: auto;
-        padding: 20px 5px
-       }
+        padding: 20px 5px;
+      }
       &-settings {
         margin-top: auto;
         width: 100%;
@@ -93,7 +91,7 @@
           @include media-breakpoint-down($desktop-breakpoint) {
             justify-content: space-between;
           }
-        
+
           &__btn {
             display: flex;
             align-items: center;
@@ -108,7 +106,6 @@
             left: 5px;
             top: 18px;
           }
-
         }
         .members {
           cursor: pointer;
@@ -155,8 +152,6 @@
       }
     }
   }
-
-
 }
 
 .groupMembersModal {
@@ -199,5 +194,20 @@
   }
   &.popup-alert {
     max-width: 620px;
+  }
+}
+.GroupsGroupMessages {
+  &.popup {
+    &-container {
+      @include media-breakpoint-down($desktop-breakpoint) {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .popup__content {
+        @include media-breakpoint-down($desktop-breakpoint) {
+          padding-top: 20px;
+        }
+      }
+    }
   }
 }

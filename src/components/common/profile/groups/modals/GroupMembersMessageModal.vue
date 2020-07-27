@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container popup-massmes SubscribersGroupMessages">
+      <div class="popup-container GroupsGroupMessages">
         <div class="content content_relative">
           <div class="popup__header">
             Send message to the group
