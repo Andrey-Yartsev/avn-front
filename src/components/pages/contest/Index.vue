@@ -191,7 +191,8 @@ export default {
       }
       return this.contests.map(item => {
         const d1 = item.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-        const m1 = moment(d1).tz(item.timezone);
+        // const m1 = moment(d1).tz(item.timezone);
+        const m1 = moment(d1).tz("America/Los_Angeles");
         const r1 = m1.format("MMM Do h:mm a");
         let s = `${r1} PDT`;
         const title = item.name + " - " + s;
@@ -256,11 +257,13 @@ export default {
     },
     periodText() {
       const d1 = this.contest.starts_at.replace(/(.*)-\d+:\d+/, "$1");
-      const m1 = moment(d1).tz(this.contest.timezone);
+      // const m1 = moment(d1).tz(this.contest.timezone);
+      const m1 = moment(d1).tz("America/Los_Angeles");
       let r2 = null;
       if (this.contest.ends_at) {
         const d2 = this.contest.ends_at.replace(/(.*)-\d+:\d+/, "$1");
-        const m2 = moment(d2).tz(this.contest.timezone);
+        // const m2 = moment(d2).tz(this.contest.timezone);
+        const m2 = moment(d2).tz("America/Los_Angeles");
         r2 = m2.format("MMM Do h:mm a");
       }
       const r1 = m1.format("MMM Do h:mm a");
