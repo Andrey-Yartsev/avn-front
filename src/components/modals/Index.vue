@@ -62,6 +62,7 @@ import ContestVotingModal from "@/components/pages/contest/VotingModal";
 import MagShippingModal from "@/components/pages/settings/magazine/ShippingModal";
 import GroupMembersModal from "@/components/common/profile/groups/modals/GroupMembersModal";
 import GroupMembersMessageModal from "@/components/common/profile/groups/modals/GroupMembersMessageModal";
+import GroupWelcomeMessageModal from "@/components/common/profile/groups/modals/GroupWelcomeMessageModal";
 import ContestSupportersModal from "@/components/pages/settings/contests/modals/SupportersModal";
 
 export default {
@@ -115,6 +116,7 @@ export default {
     MagShippingModal,
     GroupMembersModal,
     GroupMembersMessageModal,
+    GroupWelcomeMessageModal,
     ContestSupportersModal
   },
   props: {

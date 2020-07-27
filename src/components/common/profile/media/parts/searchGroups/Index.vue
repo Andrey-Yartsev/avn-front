@@ -91,10 +91,7 @@ export default {
       return this.opened2 && this.localQuery;
     },
     items() {
-      return this.$store.state.search.groups.results.list;
-    },
-    suggestions() {
-      return this.$store.state.search.groups.results.suggestions;
+      return this.$store.state.search.groups.searchResult || [];
     },
     canSearch() {
       if (!this.localQuery) {
@@ -173,9 +170,9 @@ export default {
       this.$router.push(path);
       this.reset();
     },
-    select(groiup) {
+    select(group) {
       this.close();
-      const { id, title, image } = groiup;
+      const { id, title, image } = group;
       this.$emit("addGroup", { id, title, image });
     }
   },

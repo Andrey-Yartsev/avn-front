@@ -42,13 +42,23 @@
     <span
       v-if="group.membersCount > 0"
       class="actions__btn  hover-highlight message"
-      @click="showMessageModal"
+      @click="showMassMessageModal"
     >
       <span
-        class="btn-icon  icn-item icn-size_md icn-message"
+        class="btn-icon  icn-item icn-size_md icn-coments"
         v-tooltip="'Group message'"
       ></span>
       Message
+    </span>
+    <span
+      class="actions__btn  hover-highlight welcome"
+      @click="showWelcomeMessageModal"
+    >
+      <span
+        class="btn-icon icn-item icn-size_md icn-message"
+        v-tooltip="'Welcome message'"
+      ></span>
+      Welcome message
     </span>
     <button class="delete-card icn-item" @click="deleteGroup">
       <span class="actions__btn">
@@ -102,9 +112,17 @@ export default {
         }
       });
     },
-    showMessageModal() {
+    showMassMessageModal() {
       this.$store.dispatch("modal/show", {
         name: "groupMembersMessage",
+        data: {
+          group: this.group
+        }
+      });
+    },
+    showWelcomeMessageModal() {
+      this.$store.dispatch("modal/show", {
+        name: "groupWelcomeMessage",
         data: {
           group: this.group
         }

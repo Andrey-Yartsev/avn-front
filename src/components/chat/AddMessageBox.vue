@@ -222,6 +222,9 @@ export default {
     confirmation: {
       type: Boolean,
       default: false
+    },
+    initData: {
+      type: Object
     }
   },
 
@@ -442,6 +445,24 @@ export default {
           }
         }
       });
+    },
+    init() {
+      this.message = this.initData.text || "";
+      this.price = this.initData.price || "";
+      this.priceIsSet = !!this.initData.price;
+      this.preloadedMedias = (this.initData.mediaFiles || []).map(media => ({
+        alreadySaved: true,
+        fileContent: media.thumb?.source,
+        id: media.id,
+        processId: media.id,
+        mediaType: media.type,
+        preview: media.thumb?.source
+      }));
+    }
+  },
+  mounted() {
+    if (this.initData) {
+      this.init();
     }
   }
 };

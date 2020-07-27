@@ -35,7 +35,6 @@ createRequestAction({
   options: {
     method: "GET"
   },
-  resultKey: "results",
   defaultResultValue: [],
   paramsToOptions: function(params, options) {
     if (!params.offset) {

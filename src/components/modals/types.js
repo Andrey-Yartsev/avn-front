@@ -200,6 +200,10 @@ const modalTypes = [
     layoutOnlyModal: true
   },
   {
+    storeName: "groupWelcomeMessage",
+    layoutOnlyModal: true
+  },
+  {
     storeName: "contestSupporters",
     layoutOnlyModal: true
   }
