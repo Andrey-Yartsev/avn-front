@@ -219,3 +219,11 @@
     }
   }
 }
+.SubscribersGroupMessages,
+.GroupsGroupMessages {
+  &.popup-container.popup-massmes {
+    @include media-breakpoint-down($desktop-breakpoint) {
+      overflow: visible;
+    }
+  }
+}

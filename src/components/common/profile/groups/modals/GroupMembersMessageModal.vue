@@ -217,15 +217,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.GroupsGroupMessages {
-  &.popup-container {
-    max-width: 100%;
-    transform: none;
-    position: relative;
-    top: 0px;
-    left: 0px;
-  }
-}
-</style>
