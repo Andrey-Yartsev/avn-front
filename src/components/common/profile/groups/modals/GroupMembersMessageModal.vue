@@ -1,7 +1,7 @@
 <template>
   <Modal :onClose="close">
     <template slot="content">
-      <div class="popup-container GroupsGroupMessages">
+      <div class="popup-container popup-massmes GroupsGroupMessages">
         <div class="content content_relative">
           <div class="popup__header">
             Send message to the group
@@ -217,3 +217,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.GroupsGroupMessages {
+  &.popup-container {
+    max-width: 100%;
+    transform: none;
+    position: relative;
+    top: 0px;
+    left: 0px;
+  }
+}
+</style>
