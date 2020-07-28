@@ -162,14 +162,15 @@ const mutations = {
 const actions = {
   getMedia(
     { dispatch, commit, state },
-    { profileId, filter, sort, categories }
+    { profileId, filter, sort, categories, type }
   ) {
     return dispatch("_getMedia", {
       profileId,
       offset: state.offset,
       filter,
       sort,
-      categories
+      categories,
+      type
     }).then(res => {
       commit("addMedia", res);
       commit("isAllDataRecieved", res.length);
@@ -231,8 +232,8 @@ const actions = {
   updateMediaPreviewSrc({ commit }, data) {
     commit("updateMediaPreviewSrc", data);
   },
-  getMediaCategories({ dispatch, commit }) {
-    return dispatch("_getMediaCategories")
+  getMediaCategories({ dispatch, commit }, data) {
+    return dispatch("_getMediaCategories", data)
       .then(res => {
         commit("setMediaCategories", res);
       })
@@ -284,6 +285,7 @@ createRequestAction({
     options.query.filter = params.filter;
     options.query.sort = params.sort;
     options.query.categories = params.categories;
+    options.query.type = params.type;
     return options;
   },
   paramsToPath: function(params, path) {
@@ -331,6 +333,14 @@ createRequestAction({
   actions,
   options: {
     method: "GET"
+  },
+  paramsToOptions: function(params) {
+    const options = {
+      method: "GET",
+      query: {}
+    };
+    options.query.type = params.type || "audio";
+    return options;
   }
 });
 

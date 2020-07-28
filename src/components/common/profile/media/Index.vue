@@ -3,13 +3,41 @@
     <div v-if="loading" class="loader-infinity">
       <Loader :fullscreen="false" :inline="true" :small="true" />
     </div>
+
     <div v-else class="content">
+      <div class="content-types">
+        <a
+          class="btn-user-activity"
+          :class="{ active: type === 'video' }"
+          @click.prevent="changeType('video')"
+          :href="`/${user.username}/media/video`"
+        >
+          <span class="label"> Video </span>
+        </a>
+        <a
+          class="btn-user-activity"
+          :class="{ active: type === 'photo' }"
+          @click.prevent="changeType('photo')"
+          :href="`/${user.username}/media/photo`"
+        >
+          <span class="label"> Photo </span>
+        </a>
+        <a
+          class="btn-user-activity"
+          :class="{ active: type === 'audio' }"
+          @click.prevent="changeType('audio')"
+          :href="`/${user.username}/media/audio`"
+        >
+          <span class="label"> Audio </span>
+        </a>
+      </div>
       <template v-if="this.$props.private && storeEnabled">
         <template v-if="this.user.isPerformer">
           <FileUploader
             :defaultLimits="limits"
             :disableWatermark="withoutWatermark"
             @setFilesLength="setFilesLength"
+            :type="type"
           />
         </template>
         <div
@@ -29,7 +57,7 @@
         v-if="this.$props.private && user && user.isPerformer"
       >
         <label
-          v-if="user.hasWatermarkVideo"
+          v-if="user.hasWatermarkVideo && this.type !== 'audio'"
           :class="{ disabled: isFilesLoaded }"
         >
           <input
@@ -157,7 +185,7 @@ export default {
       limits: {
         video: 100,
         gif: 0,
-        photo: 0,
+        photo: 50,
         audio: 10
       },
       filterType: "all",
@@ -165,7 +193,8 @@ export default {
       fetchLimit: 9,
       withoutWatermark: false,
       filesLength: 0,
-      selectedCategory: defaultSelectedCategory
+      selectedCategory: defaultSelectedCategory,
+      type: "video"
     };
   },
   computed: {
@@ -274,6 +303,19 @@ export default {
       this.isInitFetch = true;
       this.$store.commit("profile/media/clearMedia", null, { root: true });
       this.fetchMedia();
+    },
+    type(value) {
+      this.destroyObserver();
+      this.isInitFetch = true;
+      this.$store.commit("profile/media/clearMedia", null, { root: true });
+      this.$store.dispatch(
+        "profile/media/getMediaCategories",
+        { type: value },
+        {
+          root: true
+        }
+      );
+      this.fetchMedia();
     }
   },
   methods: {
@@ -295,7 +337,8 @@ export default {
           categories: this.selectedCategory.id,
           profileId: this.$store.state.profile.home.profile.id,
           filter: this.getFilterType,
-          sort: this.getSortOrder
+          sort: this.getSortOrder,
+          type: this.type
         })
         .then(() => {
           this.isInitFetch = false;
@@ -330,12 +373,19 @@ export default {
             type: "error"
           });
         });
+    },
+    changeType(value) {
+      this.type = value;
     }
   },
   mounted() {
-    this.$store.dispatch("profile/media/getMediaCategories", null, {
-      root: true
-    });
+    this.$store.dispatch(
+      "profile/media/getMediaCategories",
+      { type: this.type },
+      {
+        root: true
+      }
+    );
     this.$store.commit("profile/media/clearMedia", null, { root: true });
     this.fetchMedia();
   }
@@ -452,6 +502,18 @@ export default {
       color: #909598;
       font-size: 15px;
     }
+  }
+}
+.content-types {
+  margin: 0px 0 20px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.btn-user-activity {
+  .label {
+    font-weight: 400;
   }
 }
 </style>

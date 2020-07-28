@@ -20,7 +20,7 @@
       :class="{ dropAreaAtive: $refs.upload && $refs.upload.dropActive }"
     >
       <img src="/static/img/ic-drop-files.svg" alt="drop area folder" />
-      Drop audio/video file(s) here
+      Drop {{ type }} file(s) here
     </div>
     <div class="upload">
       <div class="table-responsive" v-if="files.length">
@@ -102,8 +102,8 @@
       </div>
       <div class="table__footer">
         <file-upload
-          :extensions="extensions"
-          :accept="accept"
+          :extensions="extensions[type]"
+          :accept="accept[type]"
           :multiple="multiple"
           :directory="directory"
           :drop="drop"
@@ -114,6 +114,13 @@
           @input-filter="inputFilter"
           ref="upload"
         />
+        <button
+          v-if="type === 'photo' && this.files.length"
+          class="btn btn-secondary btn-lg upload-button"
+          @click.stop.prevent="uploadPhotoset"
+        >
+          Upload Photoset
+        </button>
       </div>
     </div>
   </div>
@@ -152,14 +159,26 @@ export default {
       type: Object,
       default: null
     },
-    disableWatermark: Boolean
+    disableWatermark: Boolean,
+    type: {
+      type: String,
+      default: "video"
+    }
   },
   data() {
     return {
       files: [],
-      accept:
-        "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv,audio/mp3,audio/ogg,audio/wav",
-      extensions: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi,mp3,ogg,wav",
+      accept: {
+        video:
+          "video/avi,video/mp4,video/mov,video/moov,video/m4v,video/mpg,video/mpeg,video/wmv",
+        audio: "audio/mp3,audio/ogg,audio/wav",
+        photo: "photo/jpg,photo/jpeg,photo/png"
+      },
+      extensions: {
+        video: "mp4,mov,moov,m4v,mpg,mpeg,wmv,avi",
+        audio: "mp3,ogg,wav",
+        photo: "jpg,jpeg,png"
+      },
       multiple: true,
       directory: false,
       drop: true,
@@ -192,11 +211,14 @@ export default {
       this.$emit("setFilesLength", value);
     },
     readyToUploadFile(newFile) {
+      if (this.type === "photo") {
+        return;
+      }
       this.filesInProgress.push(newFile);
       this.$store
         .dispatch(
           "profile/media/addMedia",
-          { mediaFiles: [{ id: newFile }] },
+          { mediaFiles: [{ id: newFile }], type: this.type },
           { root: true }
         )
         .then(() => {
@@ -294,11 +316,13 @@ export default {
       if (
         newFile &&
         !oldFile &&
-        this.files.length >= this.defaultLimits.video
+        this.files.length >= this.defaultLimits[this.type]
       ) {
         this.$store.dispatch(
           "global/flashToast",
-          { text: "Video limit is reached" },
+          {
+            text: `Limit of ${this.defaultLimits[this.type]} files is reached`
+          },
           { root: true }
         );
       }
@@ -318,7 +342,6 @@ export default {
         );
         return prevent();
       }
-      console.log(newFile, this.files);
       if (newFile && !oldFile && !this.isFormatCorrect(newFile.name)) {
         console.log("wrong format");
         return prevent();
@@ -329,7 +352,9 @@ export default {
     },
     isFormatCorrect(fileName) {
       if (
-        /\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov|mp3|ogg|wav)$/i.test(fileName)
+        /\.(mp4|mpeg|mpg|m4v|wmv|avi|mov|moov|mp3|ogg|wav|jpg|jpeg|png)$/i.test(
+          fileName
+        )
       ) {
         return true;
       }
@@ -348,6 +373,34 @@ export default {
     },
     setMediaIsReady(processId) {
       this.readyToUploadFile = processId;
+    },
+    uploadPhotoset() {
+      this.loading = true;
+      this.$store
+        .dispatch(
+          "profile/media/addMedia",
+          {
+            mediaFiles: this.preloadedMedias.map(item => ({
+              id: item.processId
+            })),
+            type: this.type
+          },
+          { root: true }
+        )
+        .then(() => {
+          // logDebug({
+          //   logger: "ClipStore",
+          //   message: "Create photoset success",
+          //   logData: {
+          //     processId: res.productId
+          //   }
+          // });
+          this.disableButtons = false;
+          this.loading = false;
+          this.filesInProgress = [];
+          this.files = [];
+          this.preloadedMedias = [];
+        });
     }
   }
 };
@@ -476,5 +529,9 @@ export default {
 }
 .fullWidthCol {
   width: 100%;
+}
+.upload-button {
+  margin: 0 auto 10px auto;
+  display: block;
 }
 </style>
