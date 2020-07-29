@@ -222,6 +222,13 @@
       }
     }
   }
+
+  .popup & {
+
+    .content {
+      overflow: visible;
+    }
+  }
 }
 .SubscribersGroupMessages,
 .GroupsGroupMessages {
