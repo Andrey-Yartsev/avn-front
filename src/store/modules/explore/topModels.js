@@ -3,7 +3,7 @@
 import { createRequestAction } from "../../utils/storeRequest";
 import PostMixin from "@/store/mixins/posts";
 
-const limit = 12;
+const limit = 15;
 
 const state = {
   loading: false,
