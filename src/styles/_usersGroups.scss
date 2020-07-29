@@ -222,16 +222,16 @@
       }
     }
   }
+}
 
+.SubscribersGroupMessages,
+.GroupsGroupMessages {
   .popup & {
 
     .content {
       overflow: visible;
     }
   }
-}
-.SubscribersGroupMessages,
-.GroupsGroupMessages {
   &.popup-container.popup-massmes {
     @include media-breakpoint-down($desktop-breakpoint) {
       overflow: visible;
