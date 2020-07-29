@@ -10,7 +10,7 @@
             <Loader :fullscreen="false" :small="true" :semilight="true" />
           </div>
           <div class="border-top bg-gradient_light">
-            <!-- <div class="popup__content">
+            <div class="popup__content">
               <div class="form-group form-group_clear-gaps">
                 <div class="btn-post btn-post_datetime" v-if="!scheduledDate">
                   <div class="post-datetime">
@@ -46,7 +46,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
             <AddMessageBox
               @send="submit"
               :withUser="user"
