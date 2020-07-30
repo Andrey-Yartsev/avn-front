@@ -9,22 +9,34 @@
         {{ post.price ? post.price.toFixed(2) : 0.0 }}
       </span>
       <template v-if="post.media.type !== 'processing'">
-        <span class=" actions__btn comments-btn">
+        <template v-if="post.media.type === 'video'">
+          <span class=" actions__btn comments-btn">
+            <span
+              class="btn-icon icn-item icn-clock icn-size_md"
+              v-tooltip="'Duration'"
+            ></span>
+            {{ getVideoDuration }}
+          </span>
           <span
-            class="btn-icon icn-item icn-clock icn-size_md"
-            v-tooltip="'Duration'"
-          ></span>
-          {{ getVideoDuration }}
-        </span>
+            v-if="post.media.type == 'video'"
+            class=" actions__btn comments-btn"
+          >
+            <span
+              class="btn-icon icn-item icn-settings icn-size_md"
+              v-tooltip="'Quality'"
+            ></span>
+            {{ getVideoResolution }}
+          </span>
+        </template>
         <span
-          v-if="post.media.type !== 'audio'"
-          class=" actions__btn comments-btn"
+          v-if="post.media.type === 'photo'"
+          class="actions__btn comments-btn duration"
         >
           <span
-            class="btn-icon icn-item icn-settings icn-size_md"
-            v-tooltip="'Quality'"
+            class="btn-icon icn-item icn-photos icn-size_md"
+            v-tooltip="'Photoset length'"
           ></span>
-          {{ getVideoResolution }}
+          {{ post.mediaSetLength }}
         </span>
       </template>
     </template>
@@ -43,22 +55,34 @@
         Free
       </button>
       <span class="buttonsContainer" v-if="post.media.type !== 'processing'">
-        <span class="actions__btn comments-btn duration">
+        <template v-if="post.media.type === 'video'">
+          <span class="actions__btn comments-btn duration">
+            <span
+              class="btn-icon icn-item icn-clock icn-size_md"
+              v-tooltip="'Duration'"
+            ></span>
+            {{ getVideoDuration }}
+          </span>
           <span
-            class="btn-icon icn-item icn-clock icn-size_md"
-            v-tooltip="'Duration'"
-          ></span>
-          {{ getVideoDuration }}
-        </span>
+            v-if="post.media.type !== 'audio'"
+            class="actions__btn comments-btn"
+          >
+            <span
+              class="btn-icon icn-item icn-settings icn-size_md"
+              v-tooltip="'Quality'"
+            ></span>
+            {{ getVideoResolution }}
+          </span>
+        </template>
         <span
-          v-if="post.media.type !== 'audio'"
-          class="actions__btn comments-btn"
+          v-if="post.media.type === 'photo'"
+          class="actions__btn comments-btn duration"
         >
           <span
-            class="btn-icon icn-item icn-settings icn-size_md"
-            v-tooltip="'Quality'"
+            class="btn-icon icn-item icn-photos icn-size_md"
+            v-tooltip="'Photoset length'"
           ></span>
-          {{ getVideoResolution }}
+          {{ post.mediaSetLength }}
         </span>
       </span>
     </template>

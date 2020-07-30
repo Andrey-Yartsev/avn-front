@@ -1,12 +1,9 @@
 <template>
   <div
     :class="[
-      'explore-item explore-item_col bg-gradient bg-gradient_light',
+      'explore-item explore-item_col bg-gradient bg-gradient_light explore-item_col-3',
       {
-        'explore-item_col-3': !shouldBePoster,
-        'explore-item_double': shouldBePoster,
-        outofviewport: isVisible === false,
-        'explore-media_processing': post.mediaType === 'processing'
+        outofviewport: isVisible === false
       }
     ]"
     :data-id="post.productId"
@@ -20,15 +17,7 @@
     />
     <a
       v-else
-      :class="[
-        'postLink',
-        {
-          'photo-post': post.mediaType === 'image',
-          'video-post': post.mediaType === 'video',
-          'locked-wrapper': post.locked || post.mediaType === 'processing'
-        },
-        'postLinkMedia'
-      ]"
+      class="postLink postLinkMedia"
       :href="`/post/${post.productId}`"
       @click.prevent="openModal"
       @contextmenu.prevent="() => false"
@@ -60,7 +49,10 @@
             class="statusWrapper bottom"
             v-if="post.media.type !== 'processing'"
           >
-            <span class="mediaStatus duration">
+            <span
+              v-if="post.media.type === 'video'"
+              class="mediaStatus duration"
+            >
               <span>{{ getVideoDuration(post.media.duration) }}</span>
             </span>
             <span
@@ -68,6 +60,12 @@
               class="mediaStatus duration"
             >
               <span>{{ getVideoResolution }}</span>
+            </span>
+            <span
+              v-if="post.media.type === 'photo'"
+              class="icn-photos icn-item icn-size_md"
+            >
+              <span>{{ post.mediaSetLength }}</span>
             </span>
           </div>
         </div>
@@ -103,7 +101,10 @@
               class="statusWrapper bottom"
               v-if="post.media.type !== 'processing'"
             >
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
               <span
@@ -111,6 +112,12 @@
                 class="mediaStatus duration"
               >
                 <span>{{ getVideoResolution }}</span>
+              </span>
+              <span
+                v-if="post.media.type === 'photo'"
+                class="icn-photos icn-item icn-size_md"
+              >
+                <span>{{ post.mediaSetLength }}</span>
               </span>
             </div>
           </template>
@@ -125,7 +132,10 @@
               class="statusWrapper bottom"
               v-if="post.media.type !== 'processing'"
             >
-              <span class="mediaStatus duration">
+              <span
+                v-if="post.media.type === 'video'"
+                class="mediaStatus duration"
+              >
                 <span>{{ getVideoDuration(post.media.duration) }}</span>
               </span>
               <span
@@ -133,6 +143,12 @@
                 class="mediaStatus duration"
               >
                 <span>{{ getVideoResolution }}</span>
+              </span>
+              <span
+                v-if="post.media.type === 'photo'"
+                class="icn-photos icn-item icn-size_md"
+              >
+                <span>{{ post.mediaSetLength }}</span>
               </span>
             </div>
           </template>

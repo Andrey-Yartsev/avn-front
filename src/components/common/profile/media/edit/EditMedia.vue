@@ -119,10 +119,60 @@
             </transition-group>
           </Draggable>
         </div>
+        <div class="post-attachment" v-if="post.media.type === 'photo'">
+          <div class="block-thumbnails">
+            <div class="block-thumbnails__title">
+              Edit photoset and choose cover
+            </div>
+            <div class="addFileCollectionView thumbList">
+              <div
+                v-for="item in preloadedMedias"
+                :key="item.id"
+                class="asd addFileView icn-item"
+                :class="{
+                  current: photosetCover == item.processId,
+                  addFileView_option: item.processId
+                }"
+                @click="photosetCover = item.processId"
+              >
+                <div class="filename filename_sm">
+                  <img :src="(item.src && item.src.source) || item.preview" />
+                  <span
+                    class="remove"
+                    @mousedown.prevent.stop="() => {}"
+                    @click="_removeMedia($event, item.id, item.processId)"
+                  >
+                    <svg aria-hidden="true" class="icn icn-remove">
+                      <use xlink:href="#icon-remove"></use>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="actions editMediaActions">
         <div class="actions-controls alignFlexCenter">
           <template v-if="isExtended">
+            <label
+              v-if="post.media.type === 'photo'"
+              :class="['add-media-input', { disabled: cantAddMoreMedia }]"
+              class="btn-post"
+              for="addMedia"
+            >
+              <input
+                id="addMedia"
+                type="file"
+                multiple
+                :accept="inputAccepts"
+                @change="addMediaFiles"
+              />
+              <span class="icn-media icn-item icn-size_lg"></span>
+              <span class="btn-post__text">
+                Add media
+              </span>
+            </label>
             <div class="categories" v-if="mediaCategories.length">
               <div class="form-group-inner">
                 <span
@@ -149,26 +199,6 @@
                   </span>
                 </span>
               </div>
-              <!-- <div>Categories:</div>
-              <div class="categoriesContainer">
-                <template v-for="category in mediaCategories">
-                  <label class="form-group-inner" :key="category.id">
-                    <div class="checkbox-wrapper">
-                      <input
-                        type="checkbox"
-                        :id="category.id"
-                        :value="category.id"
-                        :disabled="
-                          isMaxCategoriesLimitSelected &&
-                            media.categories.indexOf(Number(category.id)) === -1
-                        "
-                        v-model="media.categories"
-                      />
-                      <span class="label icn-item">{{ category.name }}</span>
-                    </div>
-                  </label>
-                </template>
-              </div> -->
             </div>
             <div class="btn-post">
               <div>Price</div>
@@ -199,19 +229,6 @@
                   <span class="b-check-state__text">Active</span>
                 </label>
               </div>
-              <!-- <div class="b-check-state b-check-state_post alignFlexCenter">
-                <label>
-                  <input
-                    class="is-free-post"
-                    type="checkbox"
-                    v-model="media.free"
-                  />
-                  <span
-                    class="b-check-state__icon icn-item icn-size_lg ml-2"
-                  ></span>
-                  <span class="b-check-state__text">Free</span>
-                </label>
-              </div> -->
               <div class="b-check-state b-check-state_post alignFlexCenter">
                 <label>
                   <input
@@ -267,7 +284,7 @@
                 />
               </div>
             </div>
-            <div>
+            <div v-if="post.media.type !== 'photo'">
               <div class="b-check-state b-check-state_post alignFlexCenter">
                 <label>
                   <input
@@ -287,7 +304,7 @@
         <button
           type="submit"
           class="btn submit hidden-mobile"
-          :disabled="!isDataChanged || isMediaLoading"
+          :disabled="isMediaLoading"
           @click.prevent="saveClickHandler"
           v-if="$mq === 'desktop'"
         >
@@ -343,7 +360,14 @@ const InitialState = {
   defaultPriceLimit: 500,
   withoutWatermark: false,
   dropdownOpened: false,
-  allowMultipleFileTypes: true
+  allowMultipleFileTypes: true,
+  photosetCover: null,
+  limits: {
+    video: 1,
+    gif: 1,
+    photo: 50,
+    audio: 1
+  }
 };
 
 export default {
@@ -415,7 +439,8 @@ export default {
         this.media.removeVideoPreview ||
         this.$props.post.categories.length !== this.media.categories.length ||
         this.$props.post.subscribersFree != this.media.subscribersFree ||
-        this.$props.post.canDownload !== this.media.canDownload
+        this.$props.post.canDownload !== this.media.canDownload ||
+        this.post.mediaSet
       );
     },
     isMaxCategoriesLimitSelected() {
@@ -469,6 +494,12 @@ export default {
         return this.user.payments.tipsLimit.max;
       }
       return this.defaultPriceLimit;
+    },
+    cantAddMoreMedia() {
+      return (
+        this.post.media.type &&
+        this.preloadedMedias.length >= this.limits[this.post.media.type]
+      );
     }
   },
   watch: {
@@ -486,6 +517,15 @@ export default {
     }
   },
   methods: {
+    _removeMedia(e, id, processId) {
+      e.stopPropagation();
+      this.removeMedia(id);
+      if (processId == this.photosetCover && this.preloadedMedias.length) {
+        setTimeout(() => {
+          this.photosetCover = this.preloadedMedias[0].processId;
+        }, 200);
+      }
+    },
     hideDropdown() {
       this.dropdownOpened = false;
     },
@@ -544,6 +584,14 @@ export default {
       this.media.canDownload = canDownload;
       this.media.categories = this.getObjectsFromArray(categories);
       this.$refs.textarea.value = this.getConvertedText(text);
+      if (this.post.media.type === "photo") {
+        this.preloadedMedias = this.post.mediaSet.map(item => ({
+          ...item,
+          mediType: "photo",
+          processId: item.id
+        }));
+        this.photosetCover = this.post.media.id;
+      }
     },
     clearData() {
       this.media.title = "";
@@ -558,6 +606,8 @@ export default {
       this.media.pinned = false;
       this.media.categories = [];
       this.media.canDownload = false;
+      this.preloadedMedias = [];
+      this.photosetCover = null;
     },
     saveClickHandler() {
       if (this.overMaxPrice()) {
@@ -571,6 +621,7 @@ export default {
         return;
       }
       this.saving = true;
+      console.log(this.getMediaDataToUpdate());
       this.$store
         .dispatch("profile/media/updateMedia", this.getMediaDataToUpdate(), {
           root: true
@@ -581,19 +632,28 @@ export default {
         });
     },
     getMediaDataToUpdate() {
-      const customThumb = this.preloadedMedias.length
-        ? this.preloadedMedias.find(item => item.mediaType === "photo")
-        : undefined;
-      const videoPreview = this.preloadedMedias.length
-        ? this.preloadedMedias.find(item => item.mediaType === "video")
-        : undefined;
+      let customThumb, videoPreview, mediaCover, mediaSet;
+
+      if (this.post.media.type === "video") {
+        customThumb = this.preloadedMedias.length
+          ? this.preloadedMedias.find(item => item.mediaType === "photo")
+          : undefined;
+        videoPreview = this.preloadedMedias.length
+          ? this.preloadedMedias.find(item => item.mediaType === "video")
+          : undefined;
+      }
+      if (this.post.media.type === "photo") {
+        mediaCover = { id: this.photosetCover };
+        mediaSet = this.preloadedMedias.map(item => ({ id: item.processId }));
+      }
 
       const data = {
         media: {
           ...this.media,
           categories: this.media.categories.map(item => +item.id)
         },
-        productId: this.$props.post.productId
+        productId: this.$props.post.productId,
+        type: this.post.media.type
       };
 
       if (customThumb) {
@@ -607,6 +667,13 @@ export default {
         };
         data.media.removeVideoPreview = false;
       }
+      if (mediaCover) {
+        data.media.mediaCover = mediaCover;
+      }
+      if (mediaSet) {
+        data.media.mediaSet = mediaSet;
+      }
+
       return data;
     },
     textInput() {
@@ -691,5 +758,12 @@ export default {
 }
 .withPadding {
   padding: 0 10px;
+}
+.addFileView {
+  .remove {
+    top: 0.21em;
+    left: 0.21em;
+    right: auto;
+  }
 }
 </style>

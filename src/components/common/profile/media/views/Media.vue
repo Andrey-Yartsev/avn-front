@@ -28,7 +28,48 @@
       />
     </div>
     <template v-else>
-      <figure class="media-item active">
+      <template v-if="post.mediaSet && post.mediaSet.length > 1">
+        <swiper
+          ref="mySwiper"
+          class="media-slider"
+          :options="swiperOption"
+          :key="uniqId"
+        >
+          <swiperSlide :key="media.id" v-for="media in post.mediaSet">
+            <component
+              :is="getMediaViewType(medias)"
+              :media="media"
+              :postId="postId"
+              :post="post"
+              :authorId="authorId"
+              :openModal="openModal"
+              :mediaSize="mediaSize"
+              :autoplay="autoplay"
+              @playCallback="$emit('playCallback')"
+              ref="media"
+              :showPreview="showPreview"
+              :isAuthor="isAuthor"
+            />
+          </swiperSlide>
+        </swiper>
+        <div :class="`media-slider-pagination pagination-${uniqId}`" />
+        <div
+          :class="`media-slider-navigation navigation-${uniqId}`"
+          v-if="$mq === 'desktop'"
+        >
+          <span
+            :class="
+              `btn-direction btn-direction_lr-sides btn-direction_prev btn-direction_prev-left btn-prev btn-prev-${uniqId} icn-item icn-item icn-pos_center`
+            "
+          />
+          <span
+            :class="
+              `btn-direction btn-direction_lr-sides btn-direction_next btn-direction_next-right btn-next btn-next-${uniqId} icn-item icn-item icn-pos_center`
+            "
+          />
+        </div>
+      </template>
+      <figure v-else class="media-item active">
         <component
           :is="getMediaViewType(medias)"
           :media="medias"
@@ -49,8 +90,11 @@
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Locked from "@/components/common/profile/media/content/Locked";
 import Video from "@/components/common/profile/media/content/Video";
+import Photo from "@/components/common/profile/media/content/Photo";
+import PhotoLinked from "@/components/common/profile/media/content/PhotoLinked";
 import Audio from "@/components/common/profile/media/content/Audio";
 import LockedAudio from "@/components/common/profile/media/content/LockedAudio";
 import Loader from "@/components/common/Loader";
@@ -64,7 +108,44 @@ export default {
     VideoLinked,
     Loader,
     Audio,
-    LockedAudio
+    LockedAudio,
+    Photo,
+    PhotoLinked,
+    swiper,
+    swiperSlide
+  },
+  data() {
+    const uniqId = Math.random()
+      .toString(36)
+      .substr(2, 9);
+
+    const self = this;
+    return {
+      uniqId,
+      activeSlide: 0,
+      swiperOption: {
+        autoHeight: true,
+        spaceBetween: 10,
+        preloadImages: true,
+        pagination: {
+          el: `.pagination-${uniqId}`,
+          clickable: true,
+          bulletClass: "item",
+          bulletActiveClass: "active"
+        },
+        navigation: {
+          nextEl: `.btn-next.btn-next-${uniqId}`,
+          prevEl: `.btn-prev.btn-prev-${uniqId}`,
+          hiddenClass: "hidden",
+          disabledClass: "hidden"
+        },
+        on: {
+          slideChange() {
+            self.activeSlide = this.activeIndex;
+          }
+        }
+      }
+    };
   },
   props: {
     medias: {

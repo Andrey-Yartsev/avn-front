@@ -1,5 +1,208 @@
 export default [
   {
+    productId: 1318,
+    price: 10,
+    active: true,
+    title: "photoset",
+    text: "photoset text",
+    maxPrice: "500",
+    buyCount: 0,
+    author: {
+      id: 468788,
+      name: "имя",
+      username: "user666",
+      avatar:
+        "https://avnsocial-dev.s3.amazonaws.com/files/i/if/ifz/ifzfcvs2l2uymmy6da7928egvdhnxh4f1575995191/avatar.jpg",
+      header:
+        "https://avnsocial-dev.s3.amazonaws.com/files/a/aw/awv/awvidf0aytegt7hse0iz8gybr5xhjslv1575995230/w500.jpg",
+      headerFull:
+        "https://avnsocial-dev.s3.amazonaws.com/files/b/b0/b02/b02ovsj95uucdwr7b0x6efcioajkdfw21575995228/header.jpg",
+      canEarn: true,
+      deleteRequested: false,
+      hideBanking: false,
+      publicUrl: "https://avn2.retloko.com/user666",
+      hasNotViewedStory: false,
+      hasStory: false,
+      isVerified: false,
+      storeEnabled: true,
+      isBlocked: false,
+      isMuted: false,
+      isSubscribed: true,
+      subscribePrice: "10.00",
+      canPayoutsRequest: true,
+      nominatable: true,
+      category: 3,
+      categoryView: 1,
+      payments: {
+        tipsLimit: {
+          min: 2,
+          max: 500
+        }
+      }
+    },
+    categories: [],
+    media: {
+      id: 186,
+      canView: true,
+      type: "photo",
+      duration: 0,
+      video: null,
+      background:
+        "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAAdADIDASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAgMEAAEI/8QAGBABAQEBAQAAAAAAAAAAAAAAAAIBERL/xAAXAQEBAQEAAAAAAAAAAAAAAAACAAED/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDwLOHTAIxTGHIIPAKlVwq8PFqWsL06yac7Gh4zrCtPjVEUknTpopUp9FXrnreF1p6zAXpWjrS9C1rdYLCsf//Z",
+      locked: null,
+      src: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 480,
+        height: 270
+      },
+      preview: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
+      },
+      thumb: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
+      }
+    },
+    mediaSetLength: 2,
+    mediaSet: [
+      {
+        id: 186,
+        canView: true,
+        type: "photo",
+        duration: 0,
+        video: null,
+        background:
+          "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAAdADIDASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAgMEAAEI/8QAGBABAQEBAQAAAAAAAAAAAAAAAAIBERL/xAAXAQEBAQEAAAAAAAAAAAAAAAACAAED/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDwLOHTAIxTGHIIPAKlVwq8PFqWsL06yac7Gh4zrCtPjVEUknTpopUp9FXrnreF1p6zAXpWjrS9C1rdYLCsf//Z",
+        locked: null,
+        src: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 480,
+          height: 270
+        },
+        preview: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 440,
+          height: 440
+        },
+        thumb: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 440,
+          height: 440
+        }
+      },
+      {
+        id: 182,
+        canView: true,
+        type: "photo",
+        duration: 0,
+        video: null,
+        background:
+          "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAAdADIDASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAgMEAAEI/8QAGBABAQEBAQAAAAAAAAAAAAAAAAIBERL/xAAXAQEBAQEAAAAAAAAAAAAAAAACAAED/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDwLOHTAIxTGHIIPAKlVwq8PFqWsL06yac7Gh4zrCtPjVEUknTpopUp9FXrnreF1p6zAXpWjrS9C1rdYLCsf//Z",
+        locked: null,
+        src: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 480,
+          height: 270
+        },
+        preview: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 440,
+          height: 440
+        },
+        thumb: {
+          source:
+            "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+          width: 440,
+          height: 440
+        }
+      }
+    ]
+  },
+  {
+    productId: 1317,
+    price: 5,
+    active: true,
+    title: "photoset 2",
+    text: "photoset text 2",
+    maxPrice: "500",
+    buyCount: 0,
+    author: {
+      id: 468788,
+      name: "имя",
+      username: "user666",
+      avatar:
+        "https://avnsocial-dev.s3.amazonaws.com/files/i/if/ifz/ifzfcvs2l2uymmy6da7928egvdhnxh4f1575995191/avatar.jpg",
+      header:
+        "https://avnsocial-dev.s3.amazonaws.com/files/a/aw/awv/awvidf0aytegt7hse0iz8gybr5xhjslv1575995230/w500.jpg",
+      headerFull:
+        "https://avnsocial-dev.s3.amazonaws.com/files/b/b0/b02/b02ovsj95uucdwr7b0x6efcioajkdfw21575995228/header.jpg",
+      canEarn: true,
+      deleteRequested: false,
+      hideBanking: false,
+      publicUrl: "https://avn2.retloko.com/user666",
+      hasNotViewedStory: false,
+      hasStory: false,
+      isVerified: false,
+      storeEnabled: true,
+      isBlocked: false,
+      isMuted: false,
+      isSubscribed: true,
+      subscribePrice: "10.00",
+      canPayoutsRequest: true,
+      nominatable: true,
+      category: 3,
+      categoryView: 1,
+      payments: {
+        tipsLimit: {
+          min: 2,
+          max: 500
+        }
+      }
+    },
+    categories: [],
+    media: {
+      id: 186,
+      canView: false,
+      type: "photo",
+      duration: 0,
+      video: null,
+      background:
+        "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAAdADIDASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAgMEAAEI/8QAGBABAQEBAQAAAAAAAAAAAAAAAAIBERL/xAAXAQEBAQEAAAAAAAAAAAAAAAACAAED/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDwLOHTAIxTGHIIPAKlVwq8PFqWsL06yac7Gh4zrCtPjVEUknTpopUp9FXrnreF1p6zAXpWjrS9C1rdYLCsf//Z",
+      locked: null,
+      src: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 480,
+        height: 270
+      },
+      preview: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
+      },
+      thumb: {
+        source:
+          "https://avnsocial-dev.s3.amazonaws.com/files/1/1e/1e27b0eb09f36fb2d57a570257fc5410/440x440_6490cbc43582eb029d34add601e520bd39801924_preview.jpg",
+        width: 440,
+        height: 440
+      }
+    },
+    mediaSetLength: 6,
+    mediaSet: []
+  },
+  {
     productId: 1319,
     price: 12.3,
     active: true,
@@ -40,6 +243,7 @@ export default [
         }
       }
     },
+    categories: [],
     media: {
       id: 187,
       canView: true,
@@ -138,6 +342,7 @@ export default [
         }
       }
     },
+    categories: [],
     media: {
       id: 188,
       canView: false,
@@ -241,6 +446,7 @@ export default [
         }
       }
     },
+    categories: [],
     media: {
       id: 189,
       canView: false,
