@@ -554,11 +554,18 @@
   }
 
   .media,
-  .message,
   .video-placeholder {
 
     &:before {
       content: "\E61B";
+    }
+  }
+
+  .message {
+    &.message-locked {
+      &:before {
+        content: "\E61B";
+      }
     }
   }
 

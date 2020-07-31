@@ -13,6 +13,17 @@
           @removeMedia="removeMedia"
         />
       </div>
+      <span v-if="showFreeTextSwitcher" class="freeText-switcher">
+        <span class="label">Unlock text</span>
+        <label class="toggle-element">
+          <input
+            type="checkbox"
+            name="isStreamsTweet"
+            v-model="showPaidMessageText"
+          />
+          <span class="toggle-element_switcher" />
+        </label>
+      </span>
       <div class="chatForm">
         <label
           class="add-media-input"
@@ -222,6 +233,7 @@ export default {
       showPaid: false,
       price: "",
       priceIsSet: false,
+      showPaidMessageText: false,
       limits: {
         video: 3,
         gif: 1,
@@ -281,6 +293,13 @@ export default {
       return this.inputAcceptTypes[loadedMediaType]
         .map(item => "." + item)
         .join();
+    },
+    showFreeTextSwitcher() {
+      return (
+        this.preloadedMedias.length &&
+        this.message.trim().length &&
+        this.priceIsSet
+      );
     }
   },
 
@@ -316,6 +335,9 @@ export default {
         price: this.price ? this.price : 0,
         text: message
       };
+      if (this.showFreeTextSwitcher) {
+        opt.showPaidMessageText = this.showPaidMessageText;
+      }
       if (mediaFiles.length) {
         if (this.$props.multipleMedia) {
           opt.mediaFile = mediaFiles.map(item => ({ id: item.processId }));
@@ -387,6 +409,7 @@ export default {
       this.showPaid = false;
       this.closeTip();
       this.resetPrice();
+      this.showPaidMessageText = false;
     },
     keypress() {
       if (!this.withUser) {

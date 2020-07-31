@@ -67,7 +67,10 @@
               >
                 <span
                   class="message rounded-corners"
-                  :class="{ 'message-locked': v.textLength && isLocked(v) }"
+                  :class="{
+                    'message-locked':
+                      v.textLength && isLocked(v) && !v.showPaidMessageText
+                  }"
                   v-if="v.textLength"
                 >
                   <span class="message__text" v-html="text(v)" />
@@ -83,7 +86,11 @@
                 </span>
                 <span
                   v-if="
-                    v.textLength && v.price && isLocked(v) && !isMyMessage(v)
+                    v.textLength &&
+                      v.price &&
+                      !v.showPaidMessageText &&
+                      isLocked(v) &&
+                      !isMyMessage(v)
                   "
                   class="message-locked__price"
                 >
