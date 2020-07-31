@@ -151,6 +151,27 @@
                 </span>
               </label>
             </div>
+
+            <div
+              v-if="isMonetizedUser"
+              class="form-group notification-setting-row"
+            >
+              <label class="form-group-inner">
+                <span class="label label_cursor-default">
+                  Contest paid votes notification frequency
+                </span>
+                <span class="select-wrapper select-wrapper_short">
+                  <select
+                    name="emailNotificationClipPeriod"
+                    v-model="localUser.emailNotificationContestVotesPeriod"
+                  >
+                    <option v-for="(v, k) in notifOptions" :key="k" :value="k"
+                      >{{ v }}
+                    </option>
+                  </select>
+                </span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
