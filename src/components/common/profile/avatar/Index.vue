@@ -104,7 +104,7 @@ export default {
         return false;
       }
       return (
-        this.isProfileOwner ||
+        (this.isProfileOwner && this.isMonetizedUser) ||
         (this.profile.privacy && this.profile.privacy.showRankCount)
       );
     },

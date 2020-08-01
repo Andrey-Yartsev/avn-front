@@ -7,7 +7,7 @@ export default {
       return !!this.$store.state.auth.user;
     },
     isMonetizedUser() {
-      return this.user.canEarn && this.user.canPayoutsRequest;
+      return this.user?.canEarn && this.user?.canPayoutsRequest;
     },
     isFullyMonetizedUser() {
       return (

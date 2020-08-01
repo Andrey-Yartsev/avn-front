@@ -414,7 +414,7 @@ export default {
         return false;
       }
       return (
-        this.isOwner(this.profile.id) ||
+        (this.isOwner(this.profile.id) && this.isMonetizedUser) ||
         (this.profile.privacy && this.profile.privacy.showRankCount)
       );
     },
